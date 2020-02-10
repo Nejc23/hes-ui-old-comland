@@ -1,0 +1,202 @@
+/**************************
+  bootstrap table theme
+**************************/
+
+.ngx-datatable {
+  box-shadow: none;
+  //border: $border-width solid $border-color;
+  background-color: $white;
+
+  .datatable-header {    
+    height: unset !important;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-sm;
+    color: $gray-700;
+    border: $border-width solid $border-color;
+    border-bottom: $border-width-lg solid $border-color;
+    background-color: $white;
+
+    .datatable-header-cell {      
+      vertical-align: bottom;
+      padding: $spacer*0.5 $spacer*0.5;
+      color: $gray-600;
+      border-right: none; //$border-width solid $border-color;
+
+      .form-group {
+        margin-bottom: 0;
+        display: inline-block;
+      }
+
+      .sort-btn {
+        margin-left: 10px;
+        color: $primary;
+        font-size: $font-size-base;
+      }
+
+      &.sort-active {
+        color: $gray-900;
+      } 
+      
+      .datatable-header-cell-label {
+        line-height: 24px;
+      }
+    }
+    .datatable-header-cell-right { 
+      text-align: right;  
+    }
+    .datatable-header-cell-center { 
+      text-align: center;  
+    }
+  }
+  .datatable-body {
+    .datatable-body-row {
+      position: relative;
+      vertical-align: top;
+      font-size: $font-size-base;
+      border-width: 0 $border-width $border-width $border-width;
+    //  border-style: solid;
+      border-color: $border-color;
+      border-right: $border-width solid $border-color;
+      border-bottom: $border-width solid $border-color;
+      //font-weight: $font-weight-bold;
+      -webkit-box-shadow: $border-width 0px 0px 0px  $border-color inset;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+      -moz-box-shadow:    $border-width 0px 0px 0px  $border-color inset;  /* Firefox 3.5 - 3.6 */
+      box-shadow:         $border-width 0px 0px 0px  $border-color inset;  /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+    
+
+  
+      &.datatable-row-even {
+        background-color: $gray-100;
+      }
+
+      &.active {
+        background-color: $primary;
+        color: $white;
+        font-weight: $font-weight-bold;
+      }
+
+      .datatable-body-cell {
+        padding: $spacer*.75 $spacer*.5;
+        line-height: $line-height-base;
+        text-align: left;
+        vertical-align: top;
+        border-right: none; //$border-width solid $border-color;
+        
+        .form-group {
+          margin-bottom: 0;
+          display: inline-block;
+        }
+
+        .datatable-body-cell-label {
+          text-overflow: ellipsis;
+          white-space: nowrap;  
+          overflow: hidden !important;
+        }      
+        .checkbox {
+          margin-top: 0px; 
+        }
+      }
+      .datatable-body-cell-right{
+        text-align: right;
+      }
+      .datatable-body-cell-center{
+        text-align: center;
+      }
+    }
+    
+    .datatable-body-row:hover {
+      background-color: rgba(0, 80, 160, 0.1) !important; /* rgba($primary, .1); */
+      cursor: pointer;
+      font-weight: 500;
+    }
+    
+    .datatable-body-row:hover::before {
+      content: ' ';
+      width: .25rem;
+      height: 100%;
+      background-color: #0050a0;
+      position: absolute;
+    }
+
+    .empty-row {
+      $alert-padding-y: 0.75rem !default;
+      $alert-padding-x: 1.25rem !default;
+      position: relative;
+      padding: $alert-padding-y $alert-padding-x;
+      margin-bottom: 0;
+    }    
+  }
+
+  .datatable-footer {
+    margin-top: -1px;
+    font-weight: $font-weight-normal;
+    font-size: $font-size-sm;
+    color: $gray-600;
+    
+    .page-count {
+      //line-height: 50px;
+      //height: 50px;
+      padding: 0 1.2rem 0 0;
+    }
+
+    .datatable-pager {
+      margin: 0 10px;
+      vertical-align: top;
+      ul {
+        li {
+          margin: 10px 0px;
+          &:not(.disabled) {
+            &.active,
+            &:hover {
+              a {
+                background-color: $primary;
+                color: $white;
+                font-weight: $font-weight-normal;
+              }
+            }
+          }
+
+          a i {
+            font-size: $font-size-base;
+            line-height: 24px;
+          }
+        }
+      }
+      a {
+        height: 24px;
+        min-width: 24px;
+        line-height: 24px;
+        padding: 0;
+        border-radius: $border-radius-sm;
+        margin: 0 $spacer*.25;
+        text-align: center;
+        vertical-align: top;
+        text-decoration: none;
+        vertical-align: bottom;
+        color: $gray-600;
+      }
+      .datatable-icon-left,
+      .datatable-icon-skip,
+      .datatable-icon-right,
+      .datatable-icon-prev {
+        font-size: $font-size-lg;
+        //line-height: 27px;
+        padding: 0 $spacer*.25;
+      }
+    }
+  }
+  // Summary row styles
+  .datatable-summary-row {
+    .datatable-body-row {
+      .datatable-body-cell {
+	      font-weight: bold;
+      }
+    }
+  }
+
+  // Bugfix for ngx datable. Otherwise scroller width is set larger than container
+  // and renders annoying scroller even if there is enough space.
+  datatable-scroller {
+    width: 100% !important;
+  }
+}

@@ -1,0 +1,81 @@
+<body id="page-top" [ngClass]="{'sidebar-toggled': app.layout.isMenuCollapsed}">
+  <app-action-preventer>
+  </app-action-preventer>
+
+
+  <!-- Page Wrapper -->
+  <div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"
+      [ngClass]="{'toggled': app.layout.isMenuCollapsed}">
+
+      <!-- Sidebar - Brand -->
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" [routerLink]="['/dashboard']">
+        <div class="sidebar-brand-icon">
+          <img src="assets/images/logo/logo-icon.png">
+        </div>
+        <div class="sidebar-brand-text mx-3">Template</div>
+      </a>
+
+      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>
+
+      <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"
+          (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed"></button>
+      </div>
+    </ul>
+
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+
+        <!-- Topbar -->
+        <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow">
+          <!-- Sidebar Toggle (Topbar) -->
+          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
+            (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
+            <i class="fa fa-bars"></i>
+          </button>
+          <app-header-title></app-header-title>
+          <div class="navbar-collapse" [class.collapse]="collapsed" id="navbarContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item dropdown no-arrow" ngbDropdown display="dynamic" placement="bottom-center">
+                <a class="nav-link px-4" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown3" role="button">
+                  <i class="fas fa-language mr-2"></i>
+                  {{language}}
+                </a>
+                <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+                  <div *ngFor="let obj of languages$">
+                    <a ngbDropdownItem href="javascript:void(0);" (click)="selectLang(obj.id)">{{obj.value}}</a>
+                  </div>
+                </div>
+              </li>
+              <app-user-logged-info></app-user-logged-info>
+            </ul>
+          </div>
+          
+          
+        </nav>
+        <!-- End of Topbar -->
+
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+
+          <!-- Page -->
+          <router-outlet></router-outlet>
+
+        </div>
+        <!-- /.container-fluid -->
+
+      </div>
+      <!-- End of Main Content -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+  </div>
+  <!-- End of Page Wrapper -->
+</body>

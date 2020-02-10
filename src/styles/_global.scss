@@ -1,0 +1,124 @@
+// Global component styles
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  height: 100%;
+}
+
+a, button {
+  &:focus {
+    outline: none;
+  }
+}
+
+.btn { 
+  i + span {
+    margin-left: $spacer * 0.5;
+  }
+}
+
+.breadcrumb {
+  margin-top: -5px;
+}
+
+// Main page wrapper
+#wrapper {
+  display: flex;
+  height: 100%;
+
+  #content-wrapper {
+    background-color: $gray-100;
+    width: 100%;
+    overflow-x: hidden;
+    margin-top: $topbar-base-height;
+    padding-top: $spacer;
+
+    #content {
+      height: 98%;
+    }
+  }
+}
+
+// Set container padding to match gutter width instead of default 15px
+.container,
+.container-fluid {
+  height: 100%;
+}
+
+.line-height-1 {
+  line-height: $font-size-base * .8;
+}
+
+i.text-secondary {
+  color: $gray-500 !important;
+}
+
+label:not(.control-label) {
+  font-size: $font-size-base * .9;
+  color: $gray-600;
+  text-transform: uppercase;
+  font-weight: $font-weight-bold;
+
+  &.small {
+    font-size: $font-size-base * .75;
+  }
+}
+
+.bg-edit {
+  background-color: $gray-300;
+  width: calc(100% - 20px) !important;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: calc(100% - #{$sidebar-base-width});
+}
+
+.sidebar-toggled .sticky {
+  width: calc(100% - #{$sidebar-collapsed-width});
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar-toggled .sticky {
+    width: calc(100%);
+  }
+
+  .sticky {
+    width: calc(100% - 106px);
+  }
+}
+
+.input-select {
+  min-width: 175px;
+}
+
+.input-daterange {
+  min-width: 270px;
+}
+
+.ytitle,
+.y2title,
+.y3title,
+.y4title,
+.y5title,
+.y6title,
+.y7title,
+.y8title {
+  font-size: 12px !important;
+}
+
+.ytick,
+.y2tick,
+.y3tick,
+.y4tick,
+.y5tick,
+.y6tick,
+.y7tick,
+.y8tick {
+  transform: translateX(-10px);
+}

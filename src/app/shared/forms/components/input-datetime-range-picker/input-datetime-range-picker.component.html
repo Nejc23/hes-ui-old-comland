@@ -1,0 +1,23 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+
+  <label [attr.for]="property" *ngIf="label">
+    {{label}}
+    <span *ngIf="required"> *</span>
+  </label>
+
+  <div class="form-group"
+    [ngClass]="{'datetime-range-picker-input-24h': options.timePicker24Hour, 'datetime-range-picker-input-12h': !options.timePicker24Hour}">
+    <input type="text" class="form-control" placeholder="Select date range..." [formControl]="formControl"
+      ngxDaterangepickerMd [timePicker]="true" [timePickerSeconds]="false" [timePicker24Hour]="options.timePicker24Hour"
+      [showClearButton]="options.showClearButton" [locale]="locale" [ranges]="ranges"
+      [keepCalendarOpeningWithRange]="options.keepCalendarOpeningWithRange"
+      [showCustomRangeLabel]="options.showCustomRangeLabel" [alwaysShowCalendars]="options.alwaysShowCalendars"
+      (ngModelChange)="ngModelChange($event)" [(ngModel)]="selected" i18n>
+
+    <!--Loop through errors-->
+    <div class="help-block" *ngIf="selected !== undefined && selected.error !== null" class="error">
+      <app-form-error [error]="selected.error"></app-form-error>
+    </div>
+  </div>
+
+</div>

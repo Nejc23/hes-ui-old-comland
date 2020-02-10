@@ -1,0 +1,48 @@
+import { Component, OnInit, Input } from '@angular/core';
+import * as _ from 'lodash';
+import { FormGroup, AbstractControl } from '@angular/forms';
+import { RadioOption } from '../../interfaces/radio-option.interface';
+import { FormsUtilsService } from '../../services/forms-utils.service';
+@Component({
+  selector: 'app-input-radio',
+  templateUrl: './input-radio.component.html'
+})
+export class InputRadioComponent implements OnInit {
+  @Input() property: string;
+  @Input() form: FormGroup;
+  @Input() options: RadioOption[];
+  @Input() inline = false;
+  @Input() label: string;
+
+  constructor(private formUtils: FormsUtilsService) {}
+
+  ngOnInit() {
+    if (!this.form) {
+      throw Error('InputRadioComponent - form input missing.');
+    }
+    if (!this.property) {
+      throw Error('InputRadioComponent - property input missing.');
+    }
+    this.addUids();
+  }
+
+  get formControl(): AbstractControl {
+    return this.form.get(this.property);
+  }
+
+  isOptionChecked(option: RadioOption) {
+    return this.formControl.value === option.value ? true : null;
+  }
+
+  get required(): boolean {
+    return this.formUtils.hasFormControlRequiredField(this.formControl);
+  }
+
+  showErrors(): boolean {
+    return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  addUids() {
+    _.each(this.options, x => (x.uid = _.uniqueId('input-radio-')));
+  }
+}

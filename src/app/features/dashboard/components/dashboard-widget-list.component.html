@@ -1,0 +1,17 @@
+
+  <h2 class="text-uppercase mt-3 mb-5" i18n>Add widget</h2>
+  <div style="position: relative;" class="mx-1 my-3 flex-row" *ngFor="let widget of getWidgets(state)">
+    <div [class.disabled]="widget.disabled" i18n-ngbPopover ngbPopover="Click to add widget to grid"
+      triggers="mouseenter:mouseleave" (click)="!widget.disabled ? onClick(widget): void(0);">
+      <div class="d-inline-block text-center border mr-2" style="height: 3.5rem; width: 3.5rem;">
+        <i [class.disabled]="widget.disabled" class="fas text-secondary display-2" [ngClass]="[widget.iconClass]"
+          style="line-height: 58px;"></i>
+      </div>
+      <div class="d-inline-block h-100 align-self-center" style="max-width: calc(100% - 4rem);">
+        <h3 class="mb-0 text-uppercase d-block text-truncate">{{widget.name}}</h3>
+        <small class="text-muted" style="line-height: 0.75rem;">{{widget.description}}</small>
+      </div>
+    </div>
+    <div class="ribbon ribbon-top-left" *ngIf="widget.disabled"><span>{{widget.licenseName}}</span></div>
+  </div>
+

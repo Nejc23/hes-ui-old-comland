@@ -1,0 +1,6 @@
+<div class="form-group" [formGroup]="form">
+  <div class="toggle-checkbox toggle-sm">
+    <input type="checkbox" [formControlName]="property" [id]="controlId" [name]="controlId">
+    <label [attr.for]="controlId" title="{{toggleTitle}}"></label>
+  </div>
+</div>

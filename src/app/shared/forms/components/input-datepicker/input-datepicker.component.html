@@ -1,0 +1,22 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+
+  <label [attr.for]="property" *ngIf="label">
+    {{label}}
+    <span *ngIf="required"> *</span>
+  </label>
+
+  <div class="timepicker-input form-group">
+    <input type="text" class="form-control" placeholder="Select date..." [formControl]="formControl" ngbDatepicker
+      #d="ngbDatepicker" (click)="d.toggle()" [dayTemplate]="t" (dateSelect)="onDateSelect($event)" i18n>
+
+    <!--Loop through errors-->
+    <div class="help-block" *ngIf="showErrors()" class="error">
+      <app-form-error [error]="formControl!.errors "></app-form-error>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #t let-date="date">
+  {{ date.day }}
+</ng-template>

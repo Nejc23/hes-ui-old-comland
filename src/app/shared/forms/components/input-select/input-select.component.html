@@ -1,0 +1,31 @@
+<div class="form-group" [ngClass]="{'has-error': showErrors()}">
+
+  <label class="control-label" *ngIf="label">
+    {{label}}
+    <sup *ngIf="required"> *</sup>
+  </label>
+
+  <div ngbDropdown>
+    <div ngbDropdown placement="bottom-left" class="d-block w-100" [container]="'body'">
+      <button [disabled]="!enabled" class="btn w-100" title="{{currentValue()}}"
+        ngbDropdownToggle>{{currentValue()}}</button>
+      <div ngbDropdownMenu aria-labelledby="dashboard">
+        <button ngbDropdownItem *ngIf="addNullValue" (click)="selectedValue(options)" title=""><span i18n>Not
+            selected...</span></button>
+        <button ngbDropdownItem *ngFor="let option of options" (click)="selectedValue(option)"
+          title="{{option.value}}">{{option.value}}</button>
+        <div *ngIf="config.showAddButton">
+          <div class="dropdown-divider d-none d-sm-block"></div>
+          <button (click)="addNewClick()" ngbDropdownItem><span class="text-primary d-none d-sm-block"><i
+                class="fas fa-plus mr-1"></i>
+              <span i18n>Add new dashboard</span></span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>

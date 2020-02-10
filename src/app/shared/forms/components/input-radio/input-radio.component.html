@@ -1,0 +1,21 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+  <div>
+    <label [attr.for]="property" class="control-label" *ngIf="label">
+      {{label}}
+      <sup *ngIf="required"> *</sup>
+    </label>
+  </div>
+
+
+  <div class="form-check" [ngClass]="{'form-check-inline': inline}" *ngFor="let option of options">
+    <input type="radio" [id]="option.uid" [checked]="isOptionChecked(option)" [formControlName]="property"
+      value="{{option.value}}" class="form-check-input">
+    <label for="{{option.uid}}" class="form-check-label">{{option.label}}</label>
+  </div>
+
+
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>

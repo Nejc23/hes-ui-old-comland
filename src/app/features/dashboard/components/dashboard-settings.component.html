@@ -1,0 +1,25 @@
+<app-modal-template (dismiss)="onDismiss()" *ngIf="state$ | async as state">
+  <div modal-header i18n>Dashboard settings</div>
+
+  <div modal-body>
+    <ng-container *ngIf="isFormSet(state)">
+      <div class="form-row">
+        <div class="col">
+          <app-input-text [form]="getForm(state)" [property]="dashboardNameProperty" i18n-label label="Dashboard name">
+          </app-input-text>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <app-input-checkbox [form]="getForm(state)" [property]="refreshProperty"
+            i18n-label label="Automatically refresh the dashboard every minute">
+          </app-input-checkbox>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div modal-footer>
+    <button type=" button" class="btn btn-outline-primary" (click)="save()" i18n>Save</button>
+  </div>
+</app-modal-template>

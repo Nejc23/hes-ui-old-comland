@@ -1,0 +1,19 @@
+<!-- Nav Item - Dashboard -->
+<li class="nav-item" *ngFor="let item of items">
+  <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" routerLinkActive="active"
+    *ngIf="!item.hasChildren && hasAccess(item)">
+    <i [class]="item.icon"></i>
+    <span>{{ item.title }}</span>
+  </a>
+</li>
+<div class="sidebar-version text-center">
+  <div class="sidebar-brand-icon d-none d-md-block">
+    <img [src]="getBigLogoUrl()" *ngIf="!isMenuCollapsed" style="max-width:80%">
+    <img [src]="getSmallLogoUrl()" *ngIf="isMenuCollapsed">
+  </div>
+  <div class="sidebar-brand-icon d-block d-md-none">
+    <img [src]="getSmallLogoUrl()">
+  </div>
+
+  <small>{{version}}</small>
+</div>

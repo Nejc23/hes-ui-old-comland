@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template" target-language="sl">
+    <body>
+      <trans-unit id="6765b4c916060f6bc42d9bb69e80377dbcb5e4e9" datatype="html">
+        <source>Login</source><target state="new">Login</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit><trans-unit id="cc6f14b1eb59b74298e9f4b3711a9efc0841b37d" datatype="html">
+        <source>Please enter your user name and password to login.</source><target state="new">Please enter your user name and password to login.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit><trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
+        <source>Username</source><target state="new">Username</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">33</context>
+        </context-group>
+      </trans-unit><trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
+        <source>Password</source><target state="new">Password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+      </trans-unit><trans-unit id="3a8e04b34236be1cb450987973bcb7b33d483e35" datatype="html">
+        <source>Forgot password?</source><target state="new">Forgot password?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+      </trans-unit><trans-unit id="efaff19a9a2c7f3af986ad67bf14a970340521d1" datatype="html">
+        <source>Reset your password</source><target state="new">Reset your password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">69</context>
+        </context-group>
+      </trans-unit><trans-unit id="4aa062e5b854749b38dfa16ae0cc405eed484b76" datatype="html">
+        <source>Please enter your email to reset account password.</source><target state="new">Please enter your email to reset account password.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit><trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
+        <source>Email</source><target state="new">Email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit><trans-unit id="06c663bf1474713f57551123a46b34318543b67d" datatype="html">
+        <source>Reset</source><target state="new">Reset</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">60</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">82</context>
+        </context-group>
+      </trans-unit><trans-unit id="dbf077af2a96d5c6f7576e6d9e69f3a62a74ba3b" datatype="html">
+        <source>Back to login</source><target state="new">Back to login</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">63</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">85</context>
+        </context-group>
+      </trans-unit><trans-unit id="49525831e7cb6916c1dac1492387875fa820b1de" datatype="html">
+        <source>Please enter new password.</source><target state="new">Please enter new password.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">70</context>
+        </context-group>
+      </trans-unit><trans-unit id="e70e209561583f360b1e9cefd2cbb1fe434b6229" datatype="html">
+        <source>New password</source><target state="new">New password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">72</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit><trans-unit id="7f3bdcce4b2e8c37cd7f0f6c92ef8cff34b039b8" datatype="html">
+        <source>Confirm password</source><target state="new">Confirm password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
+          <context context-type="linenumber">77</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.alert.close" datatype="html">
+        <source>Close</source><target state="new">Close</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.carousel.previous" datatype="html">
+        <source>Previous</source><target state="new">Previous</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.carousel.next" datatype="html">
+        <source>Next</source><target state="new">Next</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/carousel/carousel.d.ts</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source><target state="new">Previous month</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source><target state="new">Next month</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation.d.ts</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source><target state="new">Select month</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source><target state="new">Select year</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/datepicker/datepicker-navigation-select.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.first" datatype="html">
+        <source>««</source><target state="new">««</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.previous" datatype="html">
+        <source>«</source><target state="new">«</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.next" datatype="html">
+        <source>»</source><target state="new">»</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.last" datatype="html">
+        <source>»»</source><target state="new">»»</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.first-aria" datatype="html">
+        <source>First</source><target state="new">First</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.previous-aria" datatype="html">
+        <source>Previous</source><target state="new">Previous</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.next-aria" datatype="html">
+        <source>Next</source><target state="new">Next</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">44</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.pagination.last-aria" datatype="html">
+        <source>Last</source><target state="new">Last</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/pagination/pagination.d.ts</context>
+          <context context-type="linenumber">53</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.progressbar.value" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{getPercentValue()}}"/>%</source><target state="new"><x id="INTERPOLATION" equiv-text="{{getPercentValue()}}"/>%</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/progressbar/progressbar.d.ts</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source><target state="new">Increment hours</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source><target state="new">HH</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source><target state="new">Hours</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source><target state="new">Decrement hours</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source><target state="new">Increment minutes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source><target state="new">MM</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source><target state="new">Minutes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source><target state="new">Decrement minutes</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source><target state="new">Increment seconds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">54</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source><target state="new">SS</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">57</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source><target state="new">Seconds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">59</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source><target state="new">Decrement seconds</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">67</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ i18n.getAfternoonPeriod() }}"/></source><target state="new"><x id="INTERPOLATION" equiv-text="{{ i18n.getAfternoonPeriod() }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{ i18n.getMorningPeriod() }}"/></source><target state="new"><x id="INTERPOLATION" equiv-text="{{ i18n.getMorningPeriod() }}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/timepicker/timepicker.d.ts</context>
+          <context context-type="linenumber">76</context>
+        </context-group>
+      </trans-unit><trans-unit id="ngb.toast.close-aria" datatype="html">
+        <source>Close</source><target state="new">Close</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/toast/toast.d.ts</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit><trans-unit id="364ea4b54e24b486c97f723ac7487fe6a8067875" datatype="html">
+        <source>Select an option
+    </source><target state="new">Select an option
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/forms/components/select-input/select-input.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit><trans-unit id="50cad3551cc6c9dc140fd494f8445f114498b487" datatype="html">
+        <source>Not
+            selected...</source><target state="new">Not
+            selected...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/forms/components/input-select/input-select.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="a087766866015bdf8c50645cd32aa8e553e54a7e" datatype="html">
+        <source>Add new dashboard</source><target state="new">Add new dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/forms/components/input-select/input-select.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit><trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
+        <source>Cancel</source><target state="new">Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
+        <source>Confirm</source><target state="new">Confirm</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="356912f7a617c02e61c58aed762551352f8fd858" datatype="html">
+        <source>Widget settings</source><target state="new">Widget settings</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-widget-setting.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit><trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
+        <source>
+      Save
+    </source><target state="new">
+      Save
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-widget-setting.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit><trans-unit id="70e458b2d86d53bd9aca459d45328321e776af15" datatype="html">
+        <source>Powerline</source><target state="new">Powerline</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit><trans-unit id="99ee4faa69cd2ea8e3678c1f557c0ff1f05aae46" datatype="html">
+        <source>Clear</source><target state="new">Clear</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit><trans-unit id="dd11d47b3121bfef1cc17fdded280a318547ffd8" datatype="html">
+        <source>
+        If you want to display cumulated data on powerline leave device empty
+      </source><target state="new">
+        If you want to display cumulated data on powerline leave device empty
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+      </trans-unit><trans-unit id="ea64d4177bd648e1a20c92669e6857762b811d8c" datatype="html">
+        <source>Device</source><target state="new">Device</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="f56efaea7b87c377f6c4af231332cfff588bd6ca" datatype="html">
+        <source>
+        This will increase widget size to 3x2
+      </source><target state="new">
+        This will increase widget size to 3x2
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit><trans-unit id="2f13c82d3e8abf69741907e72cb85377564f7d5f" datatype="html">
+        <source>Display history graph</source><target state="new">Display history graph</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit><trans-unit id="739516c2ca75843d5aec9cf0e6b3e4335c4227b9" datatype="html">
+        <source>Change password</source><target state="new">Change password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/base-template/components/user-logged-info.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit><trans-unit id="0eb15f32b2b92d7f3103ef3ff032621888a8dc32" datatype="html">
+        <source>Old password</source><target state="new">Old password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit><trans-unit id="d78d6fc5e90c093605d4e4f166bf074cdef1acc8" datatype="html">
+        <source>Repeat password</source><target state="new">Repeat password</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit><trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
+        <source>Save</source><target state="new">Save</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit><trans-unit id="1c53b0584606e14586c622941651289e8db27cf6" datatype="html">
+        <source>
+    <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div>"/>
+      Your password must have:
+      <x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>a minimum 8 character<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>upper and lower letters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>a number<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>yout password cannot match your email address<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+        <x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul>"/>
+    <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div>"/>
+    </source><target state="new">
+    <x id="START_TAG_DIV" ctype="x-div" equiv-text="&lt;div>"/>
+      Your password must have:
+      <x id="START_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;ul>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>a minimum 8 character<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>upper and lower letters<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>a number<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+          <x id="START_LIST_ITEM" ctype="x-li" equiv-text="&lt;li>"/>yout password cannot match your email address<x id="CLOSE_LIST_ITEM" ctype="x-li" equiv-text="&lt;/li>"/>
+        <x id="CLOSE_UNORDERED_LIST" ctype="x-ul" equiv-text="&lt;/ul>"/>
+    <x id="CLOSE_TAG_DIV" ctype="x-div" equiv-text="&lt;/div>"/>
+    </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit><trans-unit id="9a66b767726c6345b0593a6c9b54b07ea1ab677f" datatype="html">
+        <source>Data dispalyed is <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/>"/>measured on </source><target state="new">Data dispalyed is <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/>"/>measured on </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/widgets/components/grid-widget-current/grid-widget-current.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit><trans-unit id="ce26a52338fb77eae16df4b717c0322dd4efcec4" datatype="html">
+        <source>Dashboard settings</source><target state="new">Dashboard settings</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit><trans-unit id="4886a91e16648682f3386b7078a85d56e5c1a18f" datatype="html">
+        <source>Dashboard name</source><target state="new">Dashboard name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit><trans-unit id="c9246fb3c7364200f947d1fa05473d4803276c3c" datatype="html">
+        <source>Automatically refresh the dashboard every minute</source><target state="new">Automatically refresh the dashboard every minute</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit><trans-unit id="ca88c0e163e8d32ae5f311af4a20a89afec88aac" datatype="html">
+        <source>It looks you do not have any dasboard created!</source><target state="new">It looks you do not have any dasboard created!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit><trans-unit id="b971c0d64d643d065eb79773f7e011c8514f7043" datatype="html">
+        <source>Add first dashboard</source><target state="new">Add first dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="121cc5391cd2a5115bc2b3160379ee5b36cd7716" datatype="html">
+        <source>Settings</source><target state="new">Settings</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit><trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
+        <source>Edit</source><target state="new">Edit</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+      </trans-unit><trans-unit id="c8d1785038d461ec66b5799db21864182b35900a" datatype="html">
+        <source>Refresh</source><target state="new">Refresh</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit><trans-unit id="4532fc09a07277e1937391a45a514cbba73eff8c" datatype="html">
+        <source>Add, edit, move or resize your widgets</source><target state="new">Add, edit, move or resize your widgets</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit><trans-unit id="838b4be5c1ed2998ad32d2ab5adc8c082111effa" datatype="html">
+        <source>Done editing</source><target state="new">Done editing</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit><trans-unit id="7f549b265193447cc77ad8b4f1b069cd8ba08797" datatype="html">
+        <source>Add widget</source><target state="new">Add widget</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-widget-list.component.html</context>
+          <context context-type="linenumber">2</context>
+        </context-group>
+      </trans-unit><trans-unit id="4c5bb19402c754c05603e7cde8603d3d5ca5d4df" datatype="html">
+        <source>Click to add widget to grid</source><target state="new">Click to add widget to grid</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/dashboard/components/dashboard-widget-list.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit><trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
+        <source>Logout</source><target state="new">Logout</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/base-template/components/user-logged-info.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit><trans-unit id="4d13a9cd5ed3dcee0eab22cb25198d43886942be" datatype="html">
+        <source>Users</source><target state="new">Users</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit><trans-unit id="ffe89de105359b03ed76c2f9b9e2e4e50fb47734" datatype="html">
+        <source>
+          Sample with client side actions: sort, search, paging
+        </source><target state="new">
+          Sample with client side actions: sort, search, paging
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit><trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
+        <source>Add</source><target state="new">Add</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit><trans-unit id="43fa378212aaa5951d78ecdf7583e3c95bc341d8" datatype="html">
+        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/></source><target state="new"><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit><trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
+        <source>Name</source><target state="new">Name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit><trans-unit id="6ce3dadf53dda1a1ab0c3167a8ed8dced471b0dc" datatype="html">
+        <source>Last name</source><target state="new">Last name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit><trans-unit id="024886ca34a6f309e3e51c2ed849320592c3faaa" datatype="html">
+        <source>User name</source><target state="new">User name</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit><trans-unit id="d6fecaa6aef7885ab4b170a0406cb965fdcc8ae8" datatype="html">
+        <source>Access type</source><target state="new">Access type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit><trans-unit id="c8897b3cbad295b307ead327d62ac7f894e3a831" datatype="html">
+        <source>Gsm number</source><target state="new">Gsm number</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+      </trans-unit><trans-unit id="d680134cb602b37429a90d76ec10a85fbdee0984" datatype="html">
+        <source>Office number</source><target state="new">Office number</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="0cf7a464f915d23b587f8cc1431ac3eba11f0412" datatype="html">
+        <source>Not valid request</source><target state="new">Not valid request</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/error-handler/services/error-handler.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="02c301f01f796f53b1c57e6b683aef4be1cb3064" datatype="html">
+        <source>Authentication error</source><target state="new">Authentication error</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/error-handler/services/error-handler.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ac995bc1dd5ee578cabe3d48adf48a321a65f3e9" datatype="html">
+        <source>Action not exists</source><target state="new">Action not exists</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/error-handler/services/error-handler.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b0c63e3c398d5d20ae7b05e1ba6dbea59c54cdb9" datatype="html">
+        <source>Unknown error</source><target state="new">Unknown error</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/core/error-handler/services/error-handler.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be37a41139d137a21483439caa3709cdcea48185" datatype="html">
+        <source>Dashboards</source><target state="new">Dashboards</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/components/dashboard.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/base-template/components/header-title.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="07c3a288012dd06e94fec130970a1bba329b59f9" datatype="html">
+        <source>Dashboard created</source><target state="new">Dashboard created</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/services/dashboard-settings.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cab8b8f5af8a1d2edc4dc2b634e51e66aeb19a46" datatype="html">
+        <source>Dashboard updated</source><target state="new">Dashboard updated</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/dashboard/services/dashboard-settings.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="85b79c9064aed1ead31ace985f31aa1363f6bdaf" datatype="html">
+        <source>Help</source><target state="new">Help</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/help/components/help.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/base-template/services/sidebar.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4afc3a68cc14304e3d86e058f9fe9a4c44a7813d" datatype="html">
+        <source>User saved</source><target state="new">User saved</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/user-edit/user-edit.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="632e8b20c98e8eec4059a605a4b011bb476137af" datatype="html">
+        <source>Edit user</source><target state="new">Edit user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/user-edit/user-edit.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="34a99ddfd42f243b1c50c2753e83e866f40b4597" datatype="html">
+        <source>New user</source><target state="new">New user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/user-edit/user-edit.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="5d1e500cd4ff2ebcf566f820fb3633e3c7c8ca24" datatype="html">
+        <source>NAME</source><target state="new">NAME</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="b120db0746bf1bafdafd03fecc65f20adfa43b32" datatype="html">
+        <source>LAST NAME</source><target state="new">LAST NAME</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cbad27d17dd79e7d37fed5242b448d87c4b04a06" datatype="html">
+        <source>USER NAME</source><target state="new">USER NAME</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="d5e31741c591719630b5bba1ba38f8c1a04c10e3" datatype="html">
+        <source>EMAIL</source><target state="new">EMAIL</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="6406385490cd039997ea3865b9194703a20215a8" datatype="html">
+        <source>ACCESS TYPE</source><target state="new">ACCESS TYPE</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="4b4b2cb048d9577a99e7cd96d7fd3aee683986c9" datatype="html">
+        <source>LAST CHANGE</source><target state="new">LAST CHANGE</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="95b95a9c79e4fd9ed41f6855e37b3b06af25bcab" datatype="html">
+        <source>Delete user</source><target state="new">Delete user</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="1ceb8fc4e7382ab68771f2dcf38c9376249def22" datatype="html">
+        <source>Selected item deleted</source><target state="new">Selected item deleted</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e08a77594f3d89311cdf6da5090044270909c194" datatype="html">
+        <source>User</source><target state="new">User</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/users/modules/user-routing.module.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bd5a3b1c5a3c185c7bbb0e09a061d4cdc88ce5ad" datatype="html">
+        <source>Current</source><target state="new">Current</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/widgets/consts/widgets-list.const.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/widgets/models/current-list-widget.model.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/widgets/models/current-list-widget.model.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cd0a18a14eb9d43a88afb3e2592014f3c1dbc942" datatype="html">
+        <source>Description current</source><target state="new">Description current</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/widgets/models/current-list-widget.model.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f65253954b66e929a8b4d5ecaf61f9129f8cec64" datatype="html">
+        <source>Dashboard</source><target state="new">Dashboard</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/base-template/services/sidebar.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="2a4672ce4de0db6307915fa5d5f8aef5cfe49b58" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{label}}"/></source><target state="new"><x id="INTERPOLATION" equiv-text="{{label}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/breadcrumbs/components/breadcrumb.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="9bd96fcf50863e685c74d0490392f46689ffbdb6" datatype="html">
+        <source>Required field</source><target state="new">Required field</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fb993f28d250b61e56706bdcae935cd4dbd4b5fa" datatype="html">
+        <source>Entry is not a valid email</source><target state="new">Entry is not a valid email</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="c7fdcb7646a581aff92c57c96f3ad47997b0f1dd" datatype="html">
+        <source>Entry exceeds maximum amount of characters</source><target state="new">Entry exceeds maximum amount of characters</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ad45e9c3bb75d28a516b3dc25509611f9b25f26f" datatype="html">
+        <source>Entry does not meet minimum required amount of characters</source><target state="new">Entry does not meet minimum required amount of characters</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="a90eaec5c5d9b248bcc5a9765c21d80a5d210765" datatype="html">
+        <source>Wrong format</source><target state="new">Wrong format</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="bb7fb711815860853f27bd9eaacdfd5f752c0e24" datatype="html">
+        <source>Password not match</source><target state="new">Password not match</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
+        <source>Ok</source><target state="new">Ok</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/components/input-datetime-range-picker/input-datetime-range-picker.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="e21980efa0a3fe5a373bb0df1e45509d6279f8a7" datatype="html">
+        <source>invalid form</source><target state="new">invalid form</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/services/forms-utils.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/services/forms-utils.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/modals/components/widget-settings/default-widget-setting.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="f074ff9f7752fef9f47f3aedc310236d64a74d07" datatype="html">
+        <source>Form not valid</source><target state="new">Form not valid</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/forms/services/forms-utils.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="00b4ce5e9c7682eec4d6ab037af0c27cc6784c4b" datatype="html">
+        <source>Change password successful</source><target state="new">Change password successful</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/modals/components/modal-change-password.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="32d144c486c121fe58693bfe7d8aba13bae8d85e" datatype="html">
+        <source>No table records</source><target state="new">No table records</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/tables/services/table.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="48b317fe8360e05dbcf939a7cc3d539e6870eeb7" datatype="html">
+        <source>all table records</source><target state="new">all table records</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/tables/services/table.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="13c1568937ac5446196dc60e7077d768fea1e878" datatype="html">
+        <source>selected table records</source><target state="new">selected table records</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/tables/services/table.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

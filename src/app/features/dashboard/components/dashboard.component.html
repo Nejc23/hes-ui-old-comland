@@ -1,0 +1,23 @@
+<ng-container *ngIf="state$ | async as state">
+
+  <div class="row h-98">
+    <div [ngClass]="{'col': !isEditMode(), 'col-9': isEditMode()}">
+      <app-dashboard-controls [form]="getControlsForm(state)" [powerlineOptions]="getPowerlineOptions(state)"
+        [dashboardOptions]="getDashboardOptions(state)" [gridState]="getGridState(state)">
+      </app-dashboard-controls>
+      <app-grid [gridState]="getGridState(state)" [isEditMode]="isEditMode()">
+      </app-grid>
+      <div class="row align-items-center" *ngIf="isEmpty">
+        <div class="col text-center">
+          <h2 class="mt-5 mb-5" i18n>It looks you do not have any dasboard created!</h2>
+          <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-outline-primary"
+            (click)="addFirstDashboard()"><span i18n>Add first dashboard</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="fixed-right-widget-list col-3 bg-white shadow h-100 p-3 widget-list" *ngIf="isEditMode()">
+      <app-dashboard-widget-list [state]="state">
+      </app-dashboard-widget-list>
+    </div>
+  </div>
+</ng-container>

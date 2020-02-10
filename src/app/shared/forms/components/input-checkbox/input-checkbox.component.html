@@ -1,0 +1,13 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+  <div class="checkbox">
+    <input type="checkbox" class="form-control" [formControlName]="property" [id]="property" [name]="property">
+    <label [attr.for]="property" class="control-label">
+      {{label}}
+    </label>
+
+    <div>
+      <ng-content select="small">
+      </ng-content>
+    </div>
+  </div>
+</div>

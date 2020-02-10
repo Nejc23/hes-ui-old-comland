@@ -1,0 +1,15 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+
+  <label [attr.for]="property">
+    {{label}}
+    <span *ngIf="required"> *</span>
+  </label>
+
+  <textarea rows="4" class="form-control" [formControlName]="property" [placeholder]="placeholder"></textarea>
+
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()" class="error">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+
+</div>

@@ -1,0 +1,18 @@
+<!--<ul class="navbar-nav">-->
+  <li class="nav-item dropdown no-arrow mr-4" ngbDropdown>
+    <a class="nav-link dropdown-toggle px-4" id="userDropdown" ngbDropdownToggle display="dynamic" placement="bottom-center">
+      <i class="fas fa-user mr-2"></i>
+      <span class="mr-2 d-none d-lg-inline">{{userFullName}}</span>
+    </a>
+    <div class="dropdown-menu animated--grow-in" aria-labelledby="userDropdown" ngbDropdownMenu>        
+      <a class="dropdown-item" href="javascript:void(0);" (click)="changePassword($event)">
+        <i class="mr-1"></i>
+        <span i18n>Change password</span>
+      </a>
+      <a class="dropdown-item" href="javascript:void(0);" (click)="logout($event)">
+        <i class="fas fa-power-off mr-2"></i>
+        <span i18n>Logout</span>
+      </a>
+    </div>
+  </li>
+<!--</ul>-->

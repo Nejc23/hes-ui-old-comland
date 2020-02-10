@@ -1,0 +1,31 @@
+$fa-font-path: "assets/fonts/font-awesome";
+@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
+$fa-font-path: "assets/fonts/font-awesome";
+@import "@fortawesome/fontawesome-free/scss/solid.scss";
+
+$FontPathOpenSans: "assets/fonts/open-sans";
+
+@import '../../node_modules/npm-font-open-sans/open-sans';
+
+/* import Bootstrap files */
+@import "../../node_modules/bootstrap/scss/functions";
+@import "variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "bootstrap";
+
+// Import SB Admin 2
+@import "global";
+@import "utilities";
+@import "navs";
+
+// Custom STYLES
+@import 'custom-style/form'; 
+@import 'custom-style/dropdown-button';
+@import 'custom-style/ribbon';
+@import 'custom-style/ngx-datatable';
+@import 'custom-style/helper';
+@import 'custom-style/datetime-range-picker';
+ 
+// Custom dashboard: gridster + widget
+@import 'custom-style/widget-grid'; 
+@import 'custom-style/widget';

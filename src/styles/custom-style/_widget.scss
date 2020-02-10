@@ -1,0 +1,39 @@
+/**************************
+  widget
+**************************/
+
+.widget-border-status {
+  position: absolute;
+  top: 0;
+  left: 0px;
+  bottom: 0;
+  width: 5px;
+  z-index: 100;
+
+  &.widget-border-green {
+    background-color: none;
+  }
+
+  &.widget-border-yellow {
+    background-color: $warning;
+  }
+
+  &.widget-border-red {
+    background-color: $danger;
+  }
+}
+
+.picture-widget-img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+}
+
+.picture-widget-div {
+  height: 100%;
+}
+
+.device-name {
+  background-color: #ffffff66;
+  height: .8rem;
+}

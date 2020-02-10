@@ -1,0 +1,20 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../out-tsc/spec",
+    "types": [
+      "jasmine",
+      "node"
+    ]
+  },
+  "files": [
+    "test-pact.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "../pact/**/*.ts",
+    "../pact/**/*.pact-spec.ts",
+    "**/*.d.ts",
+    "../node_modules/@swimlane/ngx-datatable/lib/types/*.ts"
+  ]
+}

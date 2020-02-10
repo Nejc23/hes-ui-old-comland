@@ -1,0 +1,7 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+  <ngb-timepicker [formControl]="formControl" [id]="property"></ngb-timepicker>
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()" class="error">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>
