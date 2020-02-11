@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, Inject, LOCALE_ID } from '@angular/core';
 import { TableQueryResponse } from 'src/app/shared/tables/interfaces/table-response.interface';
 import { TableColumn, SortPropDir, SortDirection } from '@swimlane/ngx-datatable';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,6 +12,8 @@ import { UsersSearchFilter } from '../interfaces/user-list.interface';
 import { UsersRepositoryService } from 'src/app/core/repository/services/users/users-repository.service';
 import { UsersService } from '../services/users.service';
 import { UserRoutes } from '../consts/user-route.const';
+import { DateDefaultPipe } from 'src/app/shared/pipes/pipes/date-default.pipe';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users',
@@ -39,6 +41,7 @@ export class UsersComponent implements OnInit {
     private modalService: ModalService,
     private formUtils: FormsUtilsService,
     private service: UsersService,
+    @Inject(LOCALE_ID) public locale: string
   ) {
     this.sidebarService.headerTitle = $localize`Users`;
   }
@@ -59,7 +62,7 @@ export class UsersComponent implements OnInit {
       { prop: 'userName', name: $localize`USER NAME` },
       { prop: 'email', name: $localize`EMAIL` },
       { prop: 'accessTypeName', name: $localize`ACCESS TYPE` },
-      { prop: 'lastChange', name: $localize`LAST CHANGE` },
+      { prop: 'lastChange', name: $localize`LAST CHANGE`, pipe: new DateDefaultPipe(this.locale, environment.dateTimeFormat) },
       { cellTemplate: this.actionsColumnTmpl, width: 50, minWidth: 50 }
     ];
   }
@@ -91,9 +94,7 @@ export class UsersComponent implements OnInit {
 
   delete(id: number) {
     const request = this.usersRepository.deleteUser(id);
-    this.formUtils.deleteForm(request, this.msgDeleteSucceeded).subscribe(
-      () => {}
-    );
+    this.formUtils.deleteForm(request, this.msgDeleteSucceeded).subscribe(() => {});
   }
 
   private getData() {
@@ -109,6 +110,6 @@ export class UsersComponent implements OnInit {
   }
 
   onSearch(formValue: UsersSearchFilter) {
-    this.data.results = this.service.search(formValue, this.tempRows); 
+    this.data.results = this.service.search(formValue, this.tempRows);
   }
 }

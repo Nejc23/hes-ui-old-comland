@@ -7,5 +7,6 @@ export const environment = {
   smallLogoUrl: 'assets/images/logo/cml-sm.png',
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
-  dateTimeFormat: 'DD.MM.YYYY HH:mm'
+  dateTimeFormat: 'dd.MM.yyyy HH:mm',
+  dateFormat: 'dd.MM.yyyy'
 };

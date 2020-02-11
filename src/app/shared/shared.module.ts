@@ -32,6 +32,7 @@ import { HideIfUnauthorizedDirective } from './directives/permissions/hide-if-un
 import { NumberOnlyDirective } from './directives/number-only.directive';
 import { TableService } from './tables/services/table.service';
 import { ModalConfirmComponent } from './modals/components/modal-confirm.component';
+import { PipesModule } from './pipes/pipes.module';
 
 @NgModule({
   exports: [
@@ -60,7 +61,8 @@ import { ModalConfirmComponent } from './modals/components/modal-confirm.compone
     DisableIfUnauthorizedDirective,
     HideIfAuthorizedReadonlyDirective,
     HideIfUnauthorizedDirective,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    PipesModule
   ],
   imports: [
     CommonModule,
