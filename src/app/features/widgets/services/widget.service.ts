@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { WidgetFactory } from '../helpers/widget-factory.helper';
-import { ModalService } from 'src/app/shared/modals/services/modal.service';
 import { WidgetType } from '../enums/widget-type.enum';
 import { WidgetSettingsInput } from 'src/app/shared/modals/interfaces/widget-settings-input.interface';
-import { DashboardGridItemResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-grid-response.interface';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Injectable({
   providedIn: 'root'

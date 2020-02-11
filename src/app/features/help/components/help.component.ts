@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { SidebarService } from 'src/app/shared/base-template/services/sidebar.service';
+import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 
 @Component({
   selector: 'app-help',

@@ -1,9 +1,9 @@
 import { Observable, of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { WidgetType } from '../enums/widget-type.enum';
-import { DashboardListWidgetsResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-list-widgets-response.interface';
 import { WidgetIcon } from '../enums/widget-icon.enum';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { DashboardListWidgetsResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-list-widgets-response.interface';
 
 export class WidgetsList {
   constructor(private i18n: I18n) {}

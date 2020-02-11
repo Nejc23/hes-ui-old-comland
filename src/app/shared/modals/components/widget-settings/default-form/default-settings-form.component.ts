@@ -3,13 +3,12 @@ import { FormGroup, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DefaultWidgetSettingsForm } from '../../../interfaces/default-widget-settings.interface';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
 import { Observable, of } from 'rxjs';
-import { ModalWidgetService } from '../../../services/modal-widget.service';
 import { WidgetSettings } from 'src/app/features/widgets/interfaces/widget-settings.interface';
 import { DashboardStoreService } from 'src/app/features/dashboard/services/dashboard-store.service';
 import * as _ from 'lodash';
-import { CodelistPowerline, CodelistDevice } from 'src/app/shared/forms/interfaces/codelist-powerline.interface';
+import { ModalWidgetService } from 'src/app/core/modals/services/modal-widget.service';
+import { CodelistPowerline, CodelistDevice } from 'src/app/core/repository/interfaces/codelists/codelist-powerline.interface';
 
 @Component({
   selector: 'app-default-settings-form',

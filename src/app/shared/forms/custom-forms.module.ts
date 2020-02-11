@@ -1,6 +1,5 @@
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsUtilsService } from './services/forms-utils.service';
 import { InputTextComponent } from './components/input-text/input-text.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormErrorComponent } from './components/form-error/form-error.component';

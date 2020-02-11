@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
-import { SidebarService } from 'src/app/shared/base-template/services/sidebar.service';
+import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormsUtilsService } from 'src/app/shared/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/shared/toast-notification/services/toast-notification.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { UserForm } from '../../models/user-form.model';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
-import { UserRepository } from 'src/app/core/repository/interfaces/user-repository.interface';
-import { CodelistRepositoryService } from 'src/app/shared/repository/services/codelist-repository.service';
+import { UserRepository } from 'src/app/core/repository/interfaces/users/user-repository.interface';
 import { UsersRepositoryService } from 'src/app/core/repository/services/users/users-repository.service';
 import { UsersService } from '../../services/users.service';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-user-edit',

@@ -1,12 +1,12 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { UsersRepositoryService } from 'src/app/shared/repository/services/users-repository.service';
-import { ChangePasswordRequest } from 'src/app/shared/repository/interfaces/responses/authentication.interface';
+import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
+import { ChangePasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: UsersRepositoryService;
+  let service: AuthenticationRepositoryService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(UsersRepositoryService);
+    service = TestBed.inject(AuthenticationRepositoryService);
   });
 
   const requestBody: ChangePasswordRequest = {

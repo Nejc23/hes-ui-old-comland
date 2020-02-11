@@ -1,12 +1,12 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { UsersService } from 'src/app/features/users/services/users.service';
-import { User } from 'src/app/features/users/interfaces/user.interface';
+import { UsersRepositoryService } from 'src/app/core/repository/services/users/users-repository.service';
+import { UserRepository } from 'src/app/core/repository/interfaces/users/user-repository.interface';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: UsersService;
+  let service: UsersRepositoryService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -22,10 +22,10 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(UsersService);
+    service = TestBed.inject(UsersRepositoryService);
   });
 
-  const requestBody: User = {
+  const requestBody: UserRepository = {
     id: null,
     firstName: 'John',
     lastName: 'Smith',
@@ -36,7 +36,7 @@ describe('Pact consumer test', () => {
     officeNumber: '323233'
   };
 
-  const responseBody: User = {
+  const responseBody: UserRepository = {
     id: 1,
     firstName: 'John',
     lastName: 'Smith',
@@ -79,7 +79,7 @@ describe('Pact consumer test', () => {
 
     it('should make request for creating user', done => {
       service.createUser(requestBody).subscribe(
-        (res: User) => {
+        (res: UserRepository) => {
           expect(res.id).toEqual(responseBody.id);
           expect(res.id).toBeGreaterThan(0);
           expect(res.firstName).toEqual(responseBody.firstName);

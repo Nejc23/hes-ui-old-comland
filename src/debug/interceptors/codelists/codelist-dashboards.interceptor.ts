@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Injectable()
 export class CodelistDashboardsInterceptor {

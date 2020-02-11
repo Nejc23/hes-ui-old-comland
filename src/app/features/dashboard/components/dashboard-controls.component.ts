@@ -1,12 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
 import { FormGroup } from '@angular/forms';
 import { DashboardControlsForm } from '../interfaces/dashboard-controls-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DashboardService } from '../services/dashboard.service';
 import { DashboardGridService } from '../services/dashboard-grid.service';
-import { ModalService } from 'src/app/shared/modals/services/modal.service';
 import { DashboardSettingsComponent } from './dashboard-settings.component';
 import { DashboardRefreshService } from '../services/dashboard-refresh.service';
 import { DashboardGridState } from '../interfaces/dashboard-grid-state.interface';
@@ -14,6 +12,8 @@ import { SelectConfig } from 'src/app/shared/forms/interfaces/select-config.inte
 import { DashboardStoreService } from '../services/dashboard-store.service';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { PermissionsService } from 'src/app/core/permissions/services/permissions.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-dashboard-controls',

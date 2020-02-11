@@ -2,18 +2,18 @@ import { Component, OnInit, ViewChild, TemplateRef, Inject, LOCALE_ID } from '@a
 import { TableQueryResponse } from 'src/app/shared/tables/interfaces/table-response.interface';
 import { TableColumn, SortPropDir, SortDirection } from '@swimlane/ngx-datatable';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SidebarService } from 'src/app/shared/base-template/services/sidebar.service';
+import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
-import { ModalService } from 'src/app/shared/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { FormsUtilsService } from 'src/app/shared/forms/services/forms-utils.service';
-import { UsersListRepository } from 'src/app/core/repository/interfaces/user-list-repository.interface';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { UsersListRepository } from 'src/app/core/repository/interfaces/users/user-list-repository.interface';
 import { UsersSearchFilter } from '../interfaces/user-list.interface';
 import { UsersRepositoryService } from 'src/app/core/repository/services/users/users-repository.service';
 import { UsersService } from '../services/users.service';
 import { UserRoutes } from '../consts/user-route.const';
 import { DateDefaultPipe } from 'src/app/shared/pipes/pipes/date-default.pipe';
 import { environment } from 'src/environments/environment';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Component({
   selector: 'app-users',

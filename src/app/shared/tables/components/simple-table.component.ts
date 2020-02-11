@@ -3,7 +3,7 @@ import { TableColumn } from '@swimlane/ngx-datatable/lib/types/table-column.type
 import * as _ from 'lodash';
 import { ColumnMode, ClickType, DatatableComponent } from '@swimlane/ngx-datatable';
 import { TableMessage } from '../helpers/table-message.helper';
-import { TableService } from '../services/table.service';
+import { TableService } from 'src/app/core/tables/services/table.service';
 
 @Component({
   selector: 'app-simple-table',

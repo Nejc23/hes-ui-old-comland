@@ -4,7 +4,7 @@ import { TableState } from '../models/table-state.model';
 import { SortPropDir, SortDirection, DatatableComponent } from '@swimlane/ngx-datatable';
 import { TableQueryResponse } from '../interfaces/table-response.interface';
 import * as _ from 'lodash';
-import { TableService } from '../services/table.service';
+import { TableService } from 'src/app/core/tables/services/table.service';
 
 @Component({
   selector: 'app-table-client',

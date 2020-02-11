@@ -4,13 +4,13 @@ import { DashboardStoreService } from '../services/dashboard-store.service';
 import { DashboardState } from '../interfaces/dashboard-state.interface';
 import { Observable, pipe, of } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { DashboardModel } from '../interfaces/dashboard-model.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { tap, map } from 'rxjs/operators';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DashboardControlsForm } from '../interfaces/dashboard-controls-form.interface';
 import { DashboardService } from '../services/dashboard.service';
+import { DashboardModel } from 'src/app/core/repository/interfaces/dashboards/dashboard.interface';
 
 @Component({
   selector: 'app-dashboard-settings',

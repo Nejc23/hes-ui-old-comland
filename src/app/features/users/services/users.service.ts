@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { UserRepository } from 'src/app/core/repository/interfaces/user-repository.interface';
+import { UserRepository } from 'src/app/core/repository/interfaces/users/user-repository.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersSearchFilter } from '../interfaces/user-list.interface';
-import { UsersListRepository } from 'src/app/core/repository/interfaces/user-list-repository.interface';
+import { UsersListRepository } from 'src/app/core/repository/interfaces/users/user-list-repository.interface';
 
 @Injectable({
   providedIn: 'root'

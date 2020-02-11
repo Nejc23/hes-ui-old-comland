@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { Codelist } from '../../forms/interfaces/codelist.interface';
 import { Observable } from 'rxjs';
-import { CodelistPowerline } from '../../forms/interfaces/codelist-powerline.interface';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
+import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class CodelistRepositoryService {
   constructor(private repository: RepositoryService) {}
 

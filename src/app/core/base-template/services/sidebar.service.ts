@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/functionality-enumerator.model';
+import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
 
 @Injectable({
   providedIn: 'root'

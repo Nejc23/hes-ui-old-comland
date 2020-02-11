@@ -4,13 +4,13 @@ import { DashboardState } from '../interfaces/dashboard-state.interface';
 import { FormGroup } from '@angular/forms';
 import { DashboardGridState } from '../interfaces/dashboard-grid-state.interface';
 import { DashboardGridMode } from '../enums/dashboard-grid-mode.enum';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
 import { DashboardControlsForm } from '../interfaces/dashboard-controls-form.interface';
 import { GridsterConfig } from 'angular-gridster2';
 import { DashboardGridItem } from '../interfaces/dashboard-grid-item.interface';
 import { DashboardListWidget } from '../interfaces/dashboard-list-widget.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { Subject } from 'rxjs';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Injectable({
   providedIn: 'root'

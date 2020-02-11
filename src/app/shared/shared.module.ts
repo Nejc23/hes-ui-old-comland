@@ -30,7 +30,6 @@ import { DisableIfUnauthorizedDirective } from './directives/permissions/disable
 import { HideIfAuthorizedReadonlyDirective } from './directives/permissions/hide-if-authorized-readonly.directive';
 import { HideIfUnauthorizedDirective } from './directives/permissions/hide-if-unauthorized.directive';
 import { NumberOnlyDirective } from './directives/number-only.directive';
-import { TableService } from './tables/services/table.service';
 import { ModalConfirmComponent } from './modals/components/modal-confirm.component';
 import { PipesModule } from './pipes/pipes.module';
 
@@ -102,11 +101,4 @@ import { PipesModule } from './pipes/pipes.module';
   ],
   entryComponents: [DefaultWidgetSettingComponent, DefaultSettingsFormComponent, ModalChangePasswordComponent, ModalConfirmComponent]
 })
-export class SharedModule {
-  static forRoot(): ModuleWithProviders<SharedModule> {
-    return {
-      ngModule: SharedModule,
-      providers: [TableService]
-    };
-  }
-}
+export class SharedModule {}

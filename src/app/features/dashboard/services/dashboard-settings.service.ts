@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { DashboardModel } from '../interfaces/dashboard-model.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DashboardRepositoryService } from 'src/app/shared/repository/services/dashboard-repository.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DashboardStoreService } from './dashboard-store.service';
-import { FormsUtilsService } from 'src/app/shared/forms/services/forms-utils.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { DashboardRepositoryService } from 'src/app/core/repository/services/dashboards/dashboard-repository.service';
+import { DashboardModel } from 'src/app/core/repository/interfaces/dashboards/dashboard.interface';
 
 @Injectable({
   providedIn: 'root'

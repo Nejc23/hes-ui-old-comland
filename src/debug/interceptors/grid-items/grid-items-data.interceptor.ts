@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
-import { DashboardItemDataResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-item-data-response.interface';
 import { GridItemsCurrentDataService } from './services/graph-current.service';
+import { DashboardItemDataResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-item-data-response.interface';
 
 @Injectable()
 export class GridItemsDataInterceptor {

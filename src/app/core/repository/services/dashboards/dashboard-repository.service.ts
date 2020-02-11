@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpRequest } from '@angular/common/http';
-import { DashboardModel } from 'src/app/features/dashboard/interfaces/dashboard-model.interface';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
+import { DashboardModel } from '../../interfaces/dashboards/dashboard.interface';
 
 @Injectable({
   providedIn: 'root'

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angu
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { NgbTimepickerConfig } from '@ng-bootstrap/ng-bootstrap';
-import { FormsUtilsService } from '../../services/forms-utils.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
   selector: 'app-timepicker',

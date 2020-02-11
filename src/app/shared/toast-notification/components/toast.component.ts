@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastNotificationService } from '../services/toast-notification.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 
 @Component({
   selector: 'app-toast',

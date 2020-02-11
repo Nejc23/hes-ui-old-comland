@@ -4,10 +4,10 @@ import { WidgetSettingsFormDirective } from '../../directives/widget-settings-fo
 import { FormBuilder, FormGroup, AbstractControl } from '@angular/forms';
 import { WidgetSettingsInput } from '../../interfaces/widget-settings-input.interface';
 import { WidgetSettings } from 'src/app/features/widgets/interfaces/widget-settings.interface';
-import { ModaDefaultWidgetService } from '../../services/modal-default-widget.service';
-import { ToastNotificationService } from 'src/app/shared/toast-notification/services/toast-notification.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { ModaDefaultWidgetService } from 'src/app/core/modals/services/modal-default-widget.service';
 
 @Component({
   selector: 'app-default-widget-setting',

@@ -6,17 +6,13 @@ import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-us
 import { LoginCredentials } from 'src/app/core/auth/interfaces/login-credentials.interface';
 import { RefreshTokenRequest } from 'src/app/core/auth/interfaces/refresh-token.interface';
 import {
-  ResetPasswordRequest,
-  ChangePasswordRequest,
-  NewPasswordRequest
-} from 'src/app/shared/repository/interfaces/responses/authentication.interface';
-import {
   authenticateUserEndpointUrl,
   authenticateRefreshTokenEndpointUrl,
   requestPasswordResetEndpointUrl,
   changePasswordEndpointUrl,
   newPasswordEndpointUrl
 } from '../../consts/authentication-endpoint-url.const';
+import { ResetPasswordRequest, ChangePasswordRequest, NewPasswordRequest } from '../../interfaces/auth/authentication.interface';
 
 @Injectable({
   providedIn: 'root'

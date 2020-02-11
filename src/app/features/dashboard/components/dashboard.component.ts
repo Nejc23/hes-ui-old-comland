@@ -5,17 +5,17 @@ import { Observable, ReplaySubject } from 'rxjs';
 import { DashboardStoreService } from '../services/dashboard-store.service';
 import { FormGroup } from '@angular/forms';
 import { DashboardGridState } from '../interfaces/dashboard-grid-state.interface';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { DashboardRefreshService } from '../services/dashboard-refresh.service';
 import { DashboardEventsService } from '../services/dashboard-events.service';
 import { DashboardGridService } from '../services/dashboard-grid.service';
-import { SidebarService } from 'src/app/shared/base-template/services/sidebar.service';
+import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { DashboardSettingsComponent } from './dashboard-settings.component';
-import { ModalService } from 'src/app/shared/modals/services/modal.service';
 import * as _ from 'lodash';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-dashboard',

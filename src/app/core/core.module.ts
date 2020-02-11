@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -18,6 +18,8 @@ import { PermissionsStoreService } from './permissions/services/permissions-stor
 import { ErrorHandlerService } from './error-handler/services/error-handler.service';
 import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.interceptor';
 import { RepositoryService } from './repository/services/repository.service';
+import { TableService } from './tables/services/table.service';
+import { CodelistRepositoryService } from './repository/services/codelists/codelist-repository.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -32,6 +34,7 @@ import { RepositoryService } from './repository/services/repository.service';
     PermissionsStoreService,
     ErrorHandlerService,
     RepositoryService,
+    CodelistRepositoryService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,
@@ -52,7 +55,7 @@ import { RepositoryService } from './repository/services/repository.service';
       useClass: ApiUrlInterceptor,
       multi: true
     },
-
+    // fakeBaceknd
     fakeBackendProvider
   ]
 })
@@ -61,5 +64,12 @@ export class CoreModule extends EnsureModuleLoadedOnceGuard {
   // Looks for the module in the parent injector to see if it's already been loaded (only want it loaded once)
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     super(parentModule);
+  }
+
+  static forRoot(): ModuleWithProviders<CoreModule> {
+    return {
+      ngModule: CoreModule,
+      providers: [TableService]
+    };
   }
 }

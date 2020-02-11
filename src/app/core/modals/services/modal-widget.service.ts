@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { nameOf } from '../../utils/helpers/name-of-factory.helper';
-import { DefaultWidgetSettingsForm } from '../interfaces/default-widget-settings.interface';
-import { Codelist } from '../../forms/interfaces/codelist.interface';
 import { Observable } from 'rxjs';
-import { CodelistRepositoryService } from '../../repository/services/codelist-repository.service';
-import { CodelistPowerline } from '../../forms/interfaces/codelist-powerline.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { DefaultWidgetSettingsForm } from 'src/app/shared/modals/interfaces/default-widget-settings.interface';
+import { CodelistRepositoryService } from '../../repository/services/codelists/codelist-repository.service';
+import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
 
 @Injectable({
   providedIn: 'root'

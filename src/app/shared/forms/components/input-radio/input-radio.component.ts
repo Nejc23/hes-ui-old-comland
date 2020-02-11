@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import * as _ from 'lodash';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { RadioOption } from '../../interfaces/radio-option.interface';
-import { FormsUtilsService } from '../../services/forms-utils.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 @Component({
   selector: 'app-input-radio',
   templateUrl: './input-radio.component.html'

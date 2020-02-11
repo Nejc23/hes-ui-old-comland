@@ -1,14 +1,13 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
-import { defaultResponseHeader, defaultRequestHeader, defaultHeader } from 'pact/helpers/default-header.helper';
-import { UsersRepositoryService } from 'src/app/shared/repository/services/users-repository.service';
+import { TestBed, getTestBed } from '@angular/core/testing';
+import { defaultResponseHeader, defaultHeader } from 'pact/helpers/default-header.helper';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
 import { LoginCredentials } from 'src/app/core/auth/interfaces/login-credentials.interface';
-import { lang } from 'moment';
+import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: UsersRepositoryService;
+  let service: AuthenticationRepositoryService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -24,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(UsersRepositoryService);
+    service = getTestBed().get(AuthenticationRepositoryService);
   });
 
   const requestBody: LoginCredentials = {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { UsersListRepository } from 'src/app/core/repository/interfaces/user-list-repository.interface';
+import { UsersListRepository } from 'src/app/core/repository/interfaces/users/user-list-repository.interface';
 
 @Injectable()
 export class UsersListInterceptor {

@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import * as _ from 'lodash';
-import { DashboardModel } from 'src/app/features/dashboard/interfaces/dashboard-model.interface';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
-import { ResponseError } from 'src/app/core/error-handler/models/error-handler.model';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { DashboardModel } from 'src/app/core/repository/interfaces/dashboards/dashboard.interface';
+
 @Injectable()
 export class DashboardInterceptor {
   constructor() {}

@@ -7,18 +7,18 @@ import { VERSION } from 'src/environments/version';
 import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { FormsUtilsService } from 'src/app/shared/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/shared/toast-notification/services/toast-notification.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
-import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/shared/repository/interfaces/responses/authentication.interface';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
-import { languages, selectedLocale } from 'src/environments/locale';
+import { languages } from 'src/environments/locale';
 import { UserLoginCredentials } from './models/user-login-form.model';
 import { matchPasswordsValidator } from './consts/login-validators';
-import { LanguageService } from 'src/app/shared/base-template/services/language.service';
+import { LanguageService } from 'src/app/core/base-template/services/language.service';
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
+import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/core/repository/interfaces/auth/authentication.interface';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-user-login',

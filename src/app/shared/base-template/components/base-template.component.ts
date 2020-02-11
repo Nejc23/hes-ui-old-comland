@@ -1,6 +1,5 @@
 import { Component, OnInit, HostListener, Inject, LOCALE_ID } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
-import { SidebarService } from '../services/sidebar.service';
 import { VERSION } from 'src/environments/version';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
@@ -8,9 +7,10 @@ import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
 import { languages } from 'src/environments/locale';
-import { Codelist } from '../../forms/interfaces/codelist.interface';
-import { LanguageService } from '../services/language.service';
 import { environment } from 'src/environments/environment';
+import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
+import { LanguageService } from 'src/app/core/base-template/services/language.service';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-base-template',

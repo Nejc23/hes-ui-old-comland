@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { GridItemContent } from 'src/app/features/dashboard/interfaces/grid-item-content.interface';
 import { GridWidgetAccess } from '../../interfaces/grid-widget-access.interface';
-import { DashboardItemDataResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-item-data-response.interface';
 import { DashboardStoreService } from 'src/app/features/dashboard/services/dashboard-store.service';
 import { Subscription } from 'rxjs';
 import { WidgetStatus } from '../../enums/widget-status.enum';
@@ -12,6 +11,7 @@ import { DashboardGridItem } from 'src/app/features/dashboard/interfaces/dashboa
 import { WidgetSettingsService } from '../../services/widget-settings';
 import { DefaultWidgetSettingComponent } from 'src/app/shared/modals/components/widget-settings/default-widget-setting.component';
 import { DefaultSettingsFormComponent } from 'src/app/shared/modals/components/widget-settings/default-form/default-settings-form.component';
+import { DashboardItemDataResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-item-data-response.interface';
 
 @Component({
   selector: 'app-grid-widget-current',

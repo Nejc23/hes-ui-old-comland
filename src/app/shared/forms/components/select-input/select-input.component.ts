@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
-import { Codelist } from '../../interfaces/codelist.interface';
 import { FormGroup, AbstractControl } from '@angular/forms';
-import { FormsUtilsService } from '../../services/forms-utils.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-select-input',

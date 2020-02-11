@@ -31,7 +31,7 @@ declare const require;
     },
     I18n
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, NgxChartsModule, UserModule, CoreModule, SharedModule.forRoot()],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, NgxChartsModule, UserModule, CoreModule.forRoot(), SharedModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

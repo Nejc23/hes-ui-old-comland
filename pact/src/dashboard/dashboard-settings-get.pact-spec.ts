@@ -1,8 +1,8 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { DashboardRepositoryService } from 'src/app/shared/repository/services/dashboard-repository.service';
-import { DashboardModel } from 'src/app/features/dashboard/interfaces/dashboard-model.interface';
+import { DashboardRepositoryService } from 'src/app/core/repository/services/dashboards/dashboard-repository.service';
+import { DashboardModel } from 'src/app/core/repository/interfaces/dashboards/dashboard.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(DashboardRepositoryService);
+    service = TestBed.inject(DashboardRepositoryService);
   });
 
   describe('Dashboard settings get request', () => {

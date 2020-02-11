@@ -5,15 +5,15 @@ import * as _ from 'lodash/fp';
 import { DashboardStoreService } from './dashboard-store.service';
 import { DashboardGridState } from '../interfaces/dashboard-grid-state.interface';
 import { Observable, of } from 'rxjs';
-import { GridRepositoryService } from 'src/app/shared/repository/services/grid-repository.service';
 import { map } from 'rxjs/operators';
 import { DashboardGridMode } from '../enums/dashboard-grid-mode.enum';
 import { WidgetService } from '../../widgets/services/widget.service';
 import { WidgetType } from '../../widgets/enums/widget-type.enum';
+import { GridRepositoryService } from 'src/app/core/repository/services/dashboards/grid-repository.service';
 import {
   DashboardGridResponse,
   DashboardGridItemResponse
-} from 'src/app/shared/repository/interfaces/responses/dashboard-grid-response.interface';
+} from 'src/app/core/repository/interfaces/dashboards/dashboard-grid-response.interface';
 
 @Injectable({
   providedIn: 'root'

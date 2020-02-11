@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 import * as _ from 'lodash';
-import { ToastNotificationService } from '../../../shared/toast-notification/services/toast-notification.service';
 import { Router } from '@angular/router';
 import { ResponseError } from '../models/error-handler.model';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { ToastNotificationService } from '../../toast-notification/services/toast-notification.service';
 
 @Injectable()
 export class ErrorHandlerService {

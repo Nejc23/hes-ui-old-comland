@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpRequest } from '@angular/common/http';
 import { RepositoryService } from '../../services/repository.service';
-import { UsersListRepository } from '../../interfaces/user-list-repository.interface';
-import { UserRepository } from '../../interfaces/user-repository.interface';
+import { UsersListRepository } from '../../interfaces/users/user-list-repository.interface';
+import { UserRepository } from '../../interfaces/users/user-repository.interface';
 import { usersEndpointUrl } from '../../consts/users-endpoint-url.const';
 
 @Injectable({

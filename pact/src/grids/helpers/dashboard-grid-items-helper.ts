@@ -1,8 +1,8 @@
-import {
-  DashboardGridResponse,
-  DashboardGridItemPropertyResponse
-} from 'src/app/shared/repository/interfaces/responses/dashboard-grid-response.interface';
 import { WidgetType } from 'src/app/features/widgets/enums/widget-type.enum';
+import {
+  DashboardGridItemPropertyResponse,
+  DashboardGridResponse
+} from 'src/app/core/repository/interfaces/dashboards/dashboard-grid-response.interface';
 
 const propertiesDefaultGraphFalse: DashboardGridItemPropertyResponse = {
   powerline: 1,

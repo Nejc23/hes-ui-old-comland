@@ -1,5 +1,5 @@
-import { DashboardItemDataResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-item-data-response.interface';
 import * as moment from 'moment';
+import { DashboardItemDataResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-item-data-response.interface';
 
 export const responseDashboardData: DashboardItemDataResponse[] = [
   // current without graph

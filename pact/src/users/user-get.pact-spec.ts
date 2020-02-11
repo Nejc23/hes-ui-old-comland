@@ -1,12 +1,12 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { UsersService } from 'src/app/features/users/services/users.service';
-import { User } from 'src/app/features/users/interfaces/user.interface';
+import { UsersRepositoryService } from 'src/app/core/repository/services/users/users-repository.service';
+import { UserRepository } from 'src/app/core/repository/interfaces/users/user-repository.interface';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: UsersService;
+  let service: UsersRepositoryService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -22,12 +22,12 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(UsersService);
+    service = TestBed.inject(UsersRepositoryService);
   });
 
   const id = 1;
   describe('User get request', () => {
-    const responseBody: User = {
+    const responseBody: UserRepository = {
       id: 1,
       firstName: 'John',
       lastName: 'Smith',

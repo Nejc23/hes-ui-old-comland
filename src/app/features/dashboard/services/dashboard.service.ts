@@ -4,7 +4,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { DashboardControlsForm } from '../interfaces/dashboard-controls-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DashboardGridMode } from '../enums/dashboard-grid-mode.enum';
-import { CodelistRepositoryService } from 'src/app/shared/repository/services/codelist-repository.service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DashboardGridService } from './dashboard-grid.service';
@@ -12,8 +11,9 @@ import { DashboardListWidget } from '../interfaces/dashboard-list-widget.interfa
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { WidgetFactory } from '../../widgets/helpers/widget-factory.helper';
-import { DashboardListWidgetsResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-list-widgets-response.interface';
 import { WidgetsList } from '../../widgets/consts/widgets-list.const';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { DashboardListWidgetsResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-list-widgets-response.interface';
 
 @Injectable({
   providedIn: 'root'

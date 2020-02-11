@@ -1,9 +1,8 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
-import { CodelistRepositoryService } from 'src/app/shared/repository/services/codelist-repository.service';
-import { CodelistPowerline } from 'src/app/shared/forms/interfaces/codelist-powerline.interface';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -23,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(CodelistRepositoryService);
+    service = TestBed.inject(CodelistRepositoryService);
   });
 
   describe('Codelist - powerlines', () => {

@@ -1,4 +1,4 @@
-import { UserRepository } from 'src/app/core/repository/interfaces/user-repository.interface';
+import { UserRepository } from 'src/app/core/repository/interfaces/users/user-repository.interface';
 
 export class UserForm implements UserRepository {
   id = null;

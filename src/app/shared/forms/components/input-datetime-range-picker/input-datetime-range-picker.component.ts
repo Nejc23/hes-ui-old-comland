@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
-import { FormsUtilsService } from '../../services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { DateTimeRange } from '../../interfaces/date-time-range.interface';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
   selector: 'app-input-datetime-range-picker',

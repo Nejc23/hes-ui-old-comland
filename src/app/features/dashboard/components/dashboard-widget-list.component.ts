@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { DashboardListWidget } from '../interfaces/dashboard-list-widget.interface';
 import { DashboardStoreService } from '../services/dashboard-store.service';
 import { DashboardState } from '../interfaces/dashboard-state.interface';
-import { Guid } from 'src/app/shared/utils/services/guid.service';
+import { Guid } from 'src/app/core/utils/services/guid.service';
 
 @Component({
   selector: 'app-dashboard-widget-list',

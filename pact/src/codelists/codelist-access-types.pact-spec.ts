@@ -1,10 +1,9 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
+import { TestBed, getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
-import { CodelistRepositoryService } from 'src/app/shared/repository/services/codelist-repository.service';
 import * as _ from 'lodash';
-import { WidgetType } from 'src/app/features/widgets/enums/widget-type.enum';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -24,7 +23,8 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(CodelistRepositoryService);
+    TestBed.configureTestingModule({ providers: [CodelistRepositoryService] });
+    service = TestBed.inject(CodelistRepositoryService);
   });
 
   describe('Codelist - access types', () => {
@@ -64,7 +64,7 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for fetching access types codelists', done => {
+    fit('should make request for fetching access types codelists', done => {
       service.accesssTypeCodelist().subscribe(res => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);

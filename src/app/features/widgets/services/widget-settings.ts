@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ModalService } from 'src/app/shared/modals/services/modal.service';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { WidgetSettingsInput } from 'src/app/shared/modals/interfaces/widget-settings-input.interface';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Injectable({
   providedIn: 'root'

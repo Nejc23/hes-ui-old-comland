@@ -3,8 +3,8 @@ import { HttpRequest, HttpEvent, HttpResponse, HttpXhrBackend, HttpClient } from
 import { Observable, of } from 'rxjs';
 import * as moment from 'moment';
 import { WidgetType } from 'src/app/features/widgets/enums/widget-type.enum';
-import { DashboardGridResponse } from 'src/app/shared/repository/interfaces/responses/dashboard-grid-response.interface';
 import { PictureWidgetContent } from 'src/app/features/widgets/interfaces/widget-content/picture-widget-content';
+import { DashboardGridResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-grid-response.interface';
 
 @Injectable()
 export class GridInterceptor {

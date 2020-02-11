@@ -1,11 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
-import { FormsUtilsService } from '../../services/forms-utils.service';
 import { SelectConfig } from '../../interfaces/select-config.interface';
 import { DefaultSelectConfig } from '../../models/default-select-config.models';
 import { HttpParams } from '@angular/common/http';
 import * as _ from 'lodash';
-import { Codelist } from '../../interfaces/codelist.interface';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-input-select',

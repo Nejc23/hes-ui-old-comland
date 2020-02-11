@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
-import { FormsUtilsService } from '../../services/forms-utils.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
   selector: 'app-default-form-element',

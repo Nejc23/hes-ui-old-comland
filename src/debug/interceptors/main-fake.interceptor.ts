@@ -6,7 +6,6 @@ import { CodelistInterceptor } from './codelist.interceptor';
 import { GridInterceptor } from './grid-items/grid.interceptor';
 import { DashboardInterceptor } from './dashboard/dashboard.interceptor';
 import { CodelistDashboardsInterceptor } from './codelists/codelist-dashboards.interceptor';
-import { Codelist } from 'src/app/shared/forms/interfaces/codelist.interface';
 import { GridItemsDataInterceptor } from './grid-items/grid-items-data.interceptor';
 import { UsersListInterceptor } from './users/users.list.interceptor';
 import { UserInterceptor } from './users/user.interceptor';
@@ -14,6 +13,7 @@ import { AuthenticateInterceptor } from './authentication/authenticate.intercept
 import { UserRequestResetPasswordInterceptor } from './authentication/user-request-reset-password.interceptor';
 import { UserChangePasswordInterceptor } from './authentication/user-change-password.interceptor';
 import { UserNewPasswordInterceptor } from './authentication/user-new-password.interceptor';
+import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {

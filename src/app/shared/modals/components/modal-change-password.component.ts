@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { nameOfFactory } from '../../utils/consts/nameOfFactory.const';
-import { ChangePasswordRequest } from '../../repository/interfaces/responses/authentication.interface';
-import { FormsUtilsService } from '../../forms/services/forms-utils.service';
-import { ToastNotificationService } from '../../toast-notification/services/toast-notification.service';
 import { tap } from 'rxjs/operators';
 import { matchPasswordsValidator } from './consts/password-validators';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { ChangePasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
 
 @Component({
   selector: 'app-modal-change-password',
@@ -23,7 +22,6 @@ export class ModalChangePasswordComponent implements OnInit {
     private service: AuthenticationRepositoryService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private toast: ToastNotificationService,
     public i18n: I18n,
     private modal: NgbActiveModal
   ) {

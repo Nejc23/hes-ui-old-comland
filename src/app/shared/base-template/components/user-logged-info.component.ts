@@ -4,7 +4,7 @@ import { AppStoreService } from '../../../core/stores/services/app-store.service
 import { AppState } from '../../../core/stores/interfaces/app-state.interface';
 import { Observable } from 'rxjs';
 import { ModalChangePasswordComponent } from '../../modals/components/modal-change-password.component';
-import { ModalService } from '../../modals/services/modal.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Component({
   selector: 'app-user-logged-info',

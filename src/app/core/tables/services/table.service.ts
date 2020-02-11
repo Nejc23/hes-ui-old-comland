@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { TableRequest } from '../interfaces/table-request.interface';
-import { TableQueryResponse } from '../interfaces/table-response.interface';
-import { TableState } from '../models/table-state.model';
 import * as _ from 'lodash';
-import { TablePage } from '../interfaces/table-page.interface';
-import { TableSort } from '../interfaces/table-sort.interface';
-import { TableSortEvent } from '../interfaces/table-sort-event.interface';
-import { TableMessage } from '../helpers/table-message.helper';
-import { TableFilter } from '../interfaces/table-filter.interface';
 import { SortPropDir } from '@swimlane/ngx-datatable/lib/types/sort-prop-dir.type';
 import { SortDirection } from '@swimlane/ngx-datatable';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { TableFilter } from 'src/app/shared/tables/interfaces/table-filter.interface';
+import { TableMessage } from 'src/app/shared/tables/helpers/table-message.helper';
+import { TableSortEvent } from 'src/app/shared/tables/interfaces/table-sort-event.interface';
+import { TableSort } from 'src/app/shared/tables/interfaces/table-sort.interface';
+import { TableState } from 'src/app/shared/tables/models/table-state.model';
+import { TablePage } from 'src/app/shared/tables/interfaces/table-page.interface';
+import { TableQueryResponse } from 'src/app/shared/tables/interfaces/table-response.interface';
+import { TableRequest } from 'src/app/shared/tables/interfaces/table-request.interface';
 
 @Injectable()
 export class TableService {

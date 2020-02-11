@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DashboardGridResponse } from '../interfaces/responses/dashboard-grid-response.interface';
-import { DashboardItemDataResponse } from '../interfaces/responses/dashboard-item-data-response.interface';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
+import { DashboardGridResponse } from '../../interfaces/dashboards/dashboard-grid-response.interface';
+import { DashboardItemDataResponse } from '../../interfaces/dashboards/dashboard-item-data-response.interface';
 
 @Injectable({
   providedIn: 'root'
