@@ -9,8 +9,8 @@ import { UsersListRepository } from 'src/app/core/repository/interfaces/user-lis
   providedIn: 'root'
 })
 export class UsersService {
-  constructor(private formBuilder: FormBuilder,) {}
-  
+  constructor(private formBuilder: FormBuilder) {}
+
   createForm(data: UserRepository): FormGroup {
     return this.formBuilder.group({
       [nameOf<UserRepository>(x => x.id)]: [data.id],
@@ -24,8 +24,7 @@ export class UsersService {
     });
   }
 
-
-  search(formValue: UsersSearchFilter,  rows: UsersListRepository[]) {
+  search(formValue: UsersSearchFilter, rows: UsersListRepository[]) {
     const selectedOption = rows.filter(item => {
       if (
         (item.firstName && item.firstName.toLowerCase().indexOf(formValue.content.toLowerCase()) >= 0) ||

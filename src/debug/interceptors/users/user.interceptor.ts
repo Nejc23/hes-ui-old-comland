@@ -3,7 +3,6 @@ import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { UserRepository } from 'src/app/core/repository/interfaces/user-repository.interface';
 
-
 @Injectable()
 export class UserInterceptor {
   constructor() {}

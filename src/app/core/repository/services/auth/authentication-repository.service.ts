@@ -5,13 +5,18 @@ import { RepositoryService } from '../repository.service';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
 import { LoginCredentials } from 'src/app/core/auth/interfaces/login-credentials.interface';
 import { RefreshTokenRequest } from 'src/app/core/auth/interfaces/refresh-token.interface';
-import { ResetPasswordRequest, ChangePasswordRequest, NewPasswordRequest } from 'src/app/shared/repository/interfaces/responses/authentication.interface';
+import {
+  ResetPasswordRequest,
+  ChangePasswordRequest,
+  NewPasswordRequest
+} from 'src/app/shared/repository/interfaces/responses/authentication.interface';
 import {
   authenticateUserEndpointUrl,
   authenticateRefreshTokenEndpointUrl,
-  requestPasswordResetEndpointUrl, 
+  requestPasswordResetEndpointUrl,
   changePasswordEndpointUrl,
-  newPasswordEndpointUrl} from '../../consts/authentication-endpoint-url.const';
+  newPasswordEndpointUrl
+} from '../../consts/authentication-endpoint-url.const';
 
 @Injectable({
   providedIn: 'root'

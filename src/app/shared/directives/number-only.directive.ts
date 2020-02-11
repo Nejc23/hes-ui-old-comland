@@ -3,11 +3,13 @@ import { NG_VALUE_ACCESSOR, FormGroup } from '@angular/forms';
 
 @Directive({
   selector: '[appNumberOnly]',
-  providers: [{
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => NumberOnlyDirective),
-    multi: true
-  }]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => NumberOnlyDirective),
+      multi: true
+    }
+  ]
 })
 export class NumberOnlyDirective {
   @Input() form: FormGroup;

@@ -1,6 +1,6 @@
 import { NgbDateParserFormatter, NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class NgbCustomDateParserFormatter extends NgbDateParserFormatter {

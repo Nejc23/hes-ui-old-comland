@@ -105,7 +105,7 @@ export class UserLoginComponent implements OnInit {
 
   reset() {
     const request = this.authRepositoryService.requestPasswordReset(this.formReset.value);
-    const successMessage =  $localize`Reset password request successful`;
+    const successMessage = $localize`Reset password request successful`;
     this.formUtils.saveForm(this.formReset, request, successMessage).subscribe(
       response => {
         this.forgotPassword = false;

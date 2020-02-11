@@ -35,7 +35,7 @@ export class UserEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formUtils: FormsUtilsService,
-    public toastService: ToastNotificationService,
+    public toastService: ToastNotificationService
   ) {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.userId !== 0) {

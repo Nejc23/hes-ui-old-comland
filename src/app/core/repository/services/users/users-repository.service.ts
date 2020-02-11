@@ -45,5 +45,5 @@ export class UsersRepositoryService {
   }
   deleteUserRequest(id: number): HttpRequest<any> {
     return new HttpRequest('DELETE', `${usersEndpointUrl}/${id}`);
-  }  
+  }
 }

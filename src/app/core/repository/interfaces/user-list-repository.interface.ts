@@ -7,4 +7,3 @@ export interface UsersListRepository {
   accessTypeName: string;
   lastChange: string;
 }
-

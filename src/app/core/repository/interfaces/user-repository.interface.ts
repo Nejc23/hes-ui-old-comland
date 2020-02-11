@@ -8,4 +8,3 @@ export interface UserRepository {
   gsmNumber: string;
   officeNumber: string;
 }
-
