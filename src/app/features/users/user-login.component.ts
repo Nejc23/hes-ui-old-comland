@@ -18,7 +18,7 @@ import { LanguageService } from 'src/app/core/base-template/services/language.se
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
 import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/core/repository/interfaces/auth/authentication.interface';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-user-login',

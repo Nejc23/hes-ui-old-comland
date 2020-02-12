@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { CodelistPowerline } from 'src/app/core/repository/interfaces/codelists/codelist-powerline.interface';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Injectable()
 export class CodelistInterceptor {

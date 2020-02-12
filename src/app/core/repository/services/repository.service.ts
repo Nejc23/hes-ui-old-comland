@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class RepositoryService {
   constructor(private http: HttpClient) {}
   makeRequest<T>(request: HttpRequest<any>): Observable<T> {

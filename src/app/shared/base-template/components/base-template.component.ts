@@ -10,7 +10,7 @@ import { languages } from 'src/environments/locale';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-base-template',

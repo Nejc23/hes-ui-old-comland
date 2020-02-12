@@ -2,7 +2,7 @@ import { FormGroup } from '@angular/forms';
 import { DashboardGridState } from './dashboard-grid-state.interface';
 import { DashboardGridMode } from '../enums/dashboard-grid-mode.enum';
 import { DashboardListWidget } from './dashboard-list-widget.interface';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 export interface DashboardState {
   controlsForm: FormGroup;

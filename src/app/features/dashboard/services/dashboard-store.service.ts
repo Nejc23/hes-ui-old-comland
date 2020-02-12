@@ -10,7 +10,7 @@ import { DashboardGridItem } from '../interfaces/dashboard-grid-item.interface';
 import { DashboardListWidget } from '../interfaces/dashboard-list-widget.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { Subject } from 'rxjs';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Injectable({
   providedIn: 'root'

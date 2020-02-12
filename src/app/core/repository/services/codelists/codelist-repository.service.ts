@@ -5,7 +5,9 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CodelistRepositoryService {
   constructor(private repository: RepositoryService) {}
 

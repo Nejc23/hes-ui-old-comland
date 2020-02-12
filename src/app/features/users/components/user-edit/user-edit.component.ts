@@ -12,7 +12,7 @@ import { UserRepository } from 'src/app/core/repository/interfaces/users/user-re
 import { UsersRepositoryService } from 'src/app/core/repository/services/users/users-repository.service';
 import { UsersService } from '../../services/users.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-user-edit',

@@ -13,7 +13,7 @@ import { AuthenticateInterceptor } from './authentication/authenticate.intercept
 import { UserRequestResetPasswordInterceptor } from './authentication/user-request-reset-password.interceptor';
 import { UserChangePasswordInterceptor } from './authentication/user-change-password.interceptor';
 import { UserNewPasswordInterceptor } from './authentication/user-new-password.interceptor';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {

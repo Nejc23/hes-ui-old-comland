@@ -15,7 +15,7 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { DashboardSettingsComponent } from './dashboard-settings.component';
 import * as _ from 'lodash';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-dashboard',

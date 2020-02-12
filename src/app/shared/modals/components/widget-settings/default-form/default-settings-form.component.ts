@@ -8,7 +8,7 @@ import { WidgetSettings } from 'src/app/features/widgets/interfaces/widget-setti
 import { DashboardStoreService } from 'src/app/features/dashboard/services/dashboard-store.service';
 import * as _ from 'lodash';
 import { ModalWidgetService } from 'src/app/core/modals/services/modal-widget.service';
-import { CodelistPowerline, CodelistDevice } from 'src/app/core/repository/interfaces/codelists/codelist-powerline.interface';
+import { CodelistPowerline, CodelistDevice } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
 
 @Component({
   selector: 'app-default-settings-form',

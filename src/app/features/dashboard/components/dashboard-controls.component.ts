@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DashboardControlsForm } from '../interfaces/dashboard-controls-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DashboardService } from '../services/dashboard.service';
 import { DashboardGridService } from '../services/dashboard-grid.service';
 import { DashboardSettingsComponent } from './dashboard-settings.component';
@@ -13,7 +12,7 @@ import { DashboardStoreService } from '../services/dashboard-store.service';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { PermissionsService } from 'src/app/core/permissions/services/permissions.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-dashboard-controls',
@@ -33,7 +32,6 @@ export class DashboardControlsComponent implements OnInit {
   }
 
   constructor(
-    private i18n: I18n,
     private dashboardService: DashboardService,
     private gridService: DashboardGridService,
     private modalService: ModalService,

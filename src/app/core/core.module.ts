@@ -17,9 +17,7 @@ import { PermissionsService } from './permissions/services/permissions.service';
 import { PermissionsStoreService } from './permissions/services/permissions-store.service';
 import { ErrorHandlerService } from './error-handler/services/error-handler.service';
 import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.interceptor';
-import { RepositoryService } from './repository/services/repository.service';
 import { TableService } from './tables/services/table.service';
-import { CodelistRepositoryService } from './repository/services/codelists/codelist-repository.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -33,8 +31,7 @@ import { CodelistRepositoryService } from './repository/services/codelists/codel
     PermissionsService,
     PermissionsStoreService,
     ErrorHandlerService,
-    RepositoryService,
-    CodelistRepositoryService,
+    TableService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,
@@ -68,8 +65,7 @@ export class CoreModule extends EnsureModuleLoadedOnceGuard {
 
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
-      ngModule: CoreModule,
-      providers: [TableService]
+      ngModule: CoreModule
     };
   }
 }

@@ -14,9 +14,7 @@ import { PermissionsStoreService } from '../../permissions/services/permissions-
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthService {
   refreshTokenInterval$: Subscription = null;
 

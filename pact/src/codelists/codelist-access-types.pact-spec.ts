@@ -64,7 +64,7 @@ describe('Pact consumer test', () => {
         );
     });
 
-    fit('should make request for fetching access types codelists', done => {
+    it('should make request for fetching access types codelists', done => {
       service.accesssTypeCodelist().subscribe(res => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);

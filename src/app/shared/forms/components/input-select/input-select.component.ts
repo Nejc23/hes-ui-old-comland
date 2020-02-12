@@ -5,7 +5,7 @@ import { DefaultSelectConfig } from '../../models/default-select-config.models';
 import { HttpParams } from '@angular/common/http';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { Codelist } from 'src/app/core/repository/interfaces/codelists/codelist.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-input-select',
