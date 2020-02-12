@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { nameOfFactory } from '../../utils/consts/nameOfFactory.const';
@@ -22,7 +21,6 @@ export class ModalChangePasswordComponent implements OnInit {
     private service: AuthenticationRepositoryService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private modal: NgbActiveModal
   ) {
     this.form = this.createForm();
@@ -48,7 +46,7 @@ export class ModalChangePasswordComponent implements OnInit {
 
   save() {
     const request = this.service.changePassword(this.form.value);
-    const successMessage = this.i18n('Change password successful');
+    const successMessage = $localize`Change password successful`;
     this.formUtils
       .saveForm(this.form, request, successMessage)
       .pipe(tap(() => this.modal.close()))

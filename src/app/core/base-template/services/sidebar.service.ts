@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/functionality-enumerator.model';
 import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
 
@@ -10,10 +9,10 @@ export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
   public headerTitle = '';
 
-  constructor(private i18n: I18n) {
+  constructor() {
     this.sidebarItems = [
       {
-        title: this.i18n('Dashboard'),
+        title: $localize`Dashboard`,
         routeLink: '/dashboard',
         icon: 'fas fa-grip-horizontal',
         hasChildren: false,
@@ -21,7 +20,7 @@ export class SidebarService {
         children: []
       },
       {
-        title: this.i18n('Users'),
+        title: $localize`Users`,
         routeLink: '/users',
         icon: 'fas fa-users',
         hasChildren: false,
@@ -29,7 +28,7 @@ export class SidebarService {
         children: []
       },
       {
-        title: this.i18n('Help'),
+        title: $localize`Help`,
         routeLink: '/help',
         icon: 'fas fa-question',
         hasChildren: false,

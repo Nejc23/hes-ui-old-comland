@@ -10,8 +10,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
  * EXAMPLE:
  * const modalRef = this.modalService.open(ModalConfirmComponent);
  *   const component: ModalConfirmComponent = modalRef.componentInstance;
- *   component.modalTitle = this.i18n('No connection points in solving cycle');
- *   component.modalBody = this.i18n('To continue please add connection points to solving cycle.');
+ *   component.modalTitle = 'No connection points in solving cycle';
+ *   component.modalBody = 'To continue please add connection points to solving cycle.';
  *
  *   modalRef.result.then((data) => {
  *     // on close (CONFIRM)

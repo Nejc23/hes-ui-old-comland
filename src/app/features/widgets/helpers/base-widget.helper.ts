@@ -1,4 +1,3 @@
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { WidgetAccess } from '../interfaces/widget-access.interface';
 import { DashboardListWidget } from 'src/app/features/dashboard/interfaces/dashboard-list-widget.interface';
 import { GridItemContent } from 'src/app/features/dashboard/interfaces/grid-item-content.interface';
@@ -7,7 +6,6 @@ import { DashboardItemDataResponse } from 'src/app/core/repository/interfaces/da
 export abstract class BaseWidget implements WidgetAccess {
   constructor(
     protected listWidget: DashboardListWidget,
-    protected i18n: I18n,
     protected settingsFormComponent: any, // component
     protected gridWidgetComponent: any,
     protected gridItemContent: GridItemContent,

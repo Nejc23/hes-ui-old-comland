@@ -1,4 +1,3 @@
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { WidgetType } from '../enums/widget-type.enum';
 import { WidgetAccess } from '../interfaces/widget-access.interface';
@@ -11,10 +10,9 @@ import { WidgetIcon } from '../enums/widget-icon.enum';
 
 export class WidgetFactory {
   readonly widgets = {
-    [WidgetType.current]: (i18n: I18n) =>
+    [WidgetType.current]: () =>
       new CurrentWidget(
-        new CurrentListWidget(i18n),
-        i18n,
+        new CurrentListWidget(),
         DefaultSettingsFormComponent,
         GridWidgetCurrentComponent,
         this.getGridItemContent(WidgetType.current),
@@ -22,14 +20,14 @@ export class WidgetFactory {
       )
   };
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   getWidget(widgetType: WidgetType): WidgetAccess {
-    return this.widgets[widgetType](this.i18n);
+    return this.widgets[widgetType]();
   }
 
   getListWidgets(): DashboardListWidget[] {
-    return _.map(this.widgets, x => x(this.i18n).getListWidget());
+    return _.map(this.widgets, x => x().getListWidget());
   }
 
   protected getGridItemContent(widgetType: WidgetType) {
@@ -38,7 +36,7 @@ export class WidgetFactory {
     };
     const result = content[widgetType];
     if (!result) {
-      throw new Error(`Content for widget type ${widgetType} not supported. Please implement it`);
+      throw new Error($localize`Content for widget type ${widgetType} not supported. Please implement it`);
     }
     return result;
   }

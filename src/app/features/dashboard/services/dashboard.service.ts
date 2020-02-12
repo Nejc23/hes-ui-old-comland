@@ -8,7 +8,6 @@ import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { DashboardGridService } from './dashboard-grid.service';
 import { DashboardListWidget } from '../interfaces/dashboard-list-widget.interface';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { WidgetFactory } from '../../widgets/helpers/widget-factory.helper';
 import { WidgetsList } from '../../widgets/consts/widgets-list.const';
@@ -19,14 +18,13 @@ import { DashboardListWidgetsResponse } from 'src/app/core/repository/interfaces
   providedIn: 'root'
 })
 export class DashboardService {
-  widgetsList: WidgetsList = new WidgetsList(this.i18n);
+  widgetsList: WidgetsList = new WidgetsList();
 
   constructor(
     private formBuilder: FormBuilder,
     private dashboardStore: DashboardStoreService,
     private codelistService: CodelistRepositoryService,
-    private gridService: DashboardGridService,
-    private i18n: I18n
+    private gridService: DashboardGridService
   ) {}
 
   createControlsForm(): void {
@@ -80,7 +78,7 @@ export class DashboardService {
   }
 
   getListWidgets(): DashboardListWidget[] {
-    const factory = new WidgetFactory(this.i18n);
+    const factory = new WidgetFactory();
     return factory.getListWidgets();
   }
 

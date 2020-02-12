@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import * as _ from 'lodash';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-form-error',
@@ -10,14 +9,14 @@ export class FormErrorComponent {
   public errors: Array<string> = []; // public because of translation error
   private translations = {};
 
-  constructor(private i18n: I18n) {
+  constructor() {
     this.translations = {
-      required: this.i18n('Required field'),
-      email: this.i18n('Entry is not a valid email'),
-      maxlength: this.i18n('Entry exceeds maximum amount of characters'),
-      minlength: this.i18n('Entry does not meet minimum required amount of characters'),
-      pattern: this.i18n('Wrong format'),
-      notMatchPassword: this.i18n('Password not match')
+      required: $localize`Required field`,
+      email: $localize`Entry is not a valid email`,
+      maxlength: $localize`Entry exceeds maximum amount of characters`,
+      minlength: $localize`Entry does not meet minimum required amount of characters`,
+      pattern: $localize`Wrong format`,
+      notMatchPassword: $localize`Password not match`
     };
   }
 

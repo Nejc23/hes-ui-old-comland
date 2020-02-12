@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { DateTimeRange } from '../../interfaces/date-time-range.interface';
@@ -42,8 +41,8 @@ export class InputDateTimeRangePickerComponent implements OnInit {
     format: environment.dateTimeFormat,
     displayFormat: environment.dateTimeFormat,
     separator: ' - ',
-    cancelLabel: this.i18n('Cancel'),
-    applyLabel: this.i18n('Ok')
+    cancelLabel: $localize`Cancel`,
+    applyLabel: $localize`Ok`
   };
   opens: string;
   drops: string;
@@ -71,7 +70,7 @@ export class InputDateTimeRangePickerComponent implements OnInit {
   selected: DateTimeRange = { startDate: moment().startOf('day'), endDate: moment().endOf('day'), error: null };
   // daterange picker END
 
-  constructor(private formUtils: FormsUtilsService, private i18n: I18n) {
+  constructor(private formUtils: FormsUtilsService) {
     // daterange picker START
     this.timePicker = false;
     this.opens = 'right';
@@ -82,10 +81,10 @@ export class InputDateTimeRangePickerComponent implements OnInit {
 
   ngOnInit() {
     if (!this.form) {
-      throw Error('InputDateTimeRangePickerComponent - form input missing.');
+      throw Error($localize`InputDateTimeRangePickerComponent - form input missing.`);
     }
     if (!this.property) {
-      throw Error('InputDateTimeRangePickerComponent - property input missing.');
+      throw Error($localize`InputDateTimeRangePickerComponent - property input missing.`);
     }
   }
 

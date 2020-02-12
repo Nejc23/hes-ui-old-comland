@@ -10,7 +10,6 @@ import { DashboardRefreshService } from '../services/dashboard-refresh.service';
 import { DashboardEventsService } from '../services/dashboard-events.service';
 import { DashboardGridService } from '../services/dashboard-grid.service';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { DashboardSettingsComponent } from './dashboard-settings.component';
 import * as _ from 'lodash';
@@ -36,10 +35,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private dashboardGrid: DashboardGridService,
     private sidebatService: SidebarService,
     private gridService: DashboardGridService,
-    private modalService: ModalService,
-    private i18n: I18n
+    private modalService: ModalService
   ) {
-    this.sidebatService.headerTitle = this.i18n('Dashboards');
+    this.sidebatService.headerTitle = $localize`Dashboards`;
   }
 
   get formFunctionality() {

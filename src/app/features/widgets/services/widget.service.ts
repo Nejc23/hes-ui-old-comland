@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { WidgetFactory } from '../helpers/widget-factory.helper';
 import { WidgetType } from '../enums/widget-type.enum';
@@ -10,10 +9,10 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
   providedIn: 'root'
 })
 export class WidgetService {
-  constructor(private i18n: I18n, private modalService: ModalService) {}
+  constructor(private modalService: ModalService) {}
 
   getWidget(widgetType: WidgetType) {
-    const factory = new WidgetFactory(this.i18n);
+    const factory = new WidgetFactory();
     return factory.getWidget(widgetType);
   }
 

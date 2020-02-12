@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { SortPropDir } from '@swimlane/ngx-datatable/lib/types/sort-prop-dir.type';
 import { SortDirection } from '@swimlane/ngx-datatable';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { TableFilter } from 'src/app/shared/tables/interfaces/table-filter.interface';
 import { TableMessage } from 'src/app/shared/tables/helpers/table-message.helper';
 import { TableSortEvent } from 'src/app/shared/tables/interfaces/table-sort-event.interface';
@@ -14,7 +13,7 @@ import { TableRequest } from 'src/app/shared/tables/interfaces/table-request.int
 
 @Injectable()
 export class TableService {
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   createStateFromResponse(state: TableState, response: TableQueryResponse<any>): TableState {
     const clone: TableState = _.clone(state);
@@ -108,6 +107,6 @@ export class TableService {
   }
 
   translateTableMessages() {
-    return new TableMessage(this.i18n('No table records'), this.i18n('all table records'), this.i18n('selected table records'));
+    return new TableMessage($localize`No table records`, $localize`all table records`, $localize`selected table records`);
   }
 }
