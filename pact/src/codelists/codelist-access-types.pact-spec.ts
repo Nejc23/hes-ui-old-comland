@@ -1,5 +1,5 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { TestBed, getTestBed } from '@angular/core/testing';
+import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import * as _ from 'lodash';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
@@ -23,8 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    TestBed.configureTestingModule({ providers: [CodelistRepositoryService] });
-    service = TestBed.inject(CodelistRepositoryService);
+    service = getTestBed().get(CodelistRepositoryService);
   });
 
   describe('Codelist - access types', () => {

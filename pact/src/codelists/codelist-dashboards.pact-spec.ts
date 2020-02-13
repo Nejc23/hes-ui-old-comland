@@ -1,5 +1,5 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { TestBed } from '@angular/core/testing';
+import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = TestBed.inject(CodelistRepositoryService);
+    service = getTestBed().get(CodelistRepositoryService);
   });
 
   describe('Codelist - dashboards', () => {

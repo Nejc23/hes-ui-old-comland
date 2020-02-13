@@ -1,5 +1,5 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { TestBed } from '@angular/core/testing';
+import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { dashboardGridResponse } from './helpers/dashboard-grid-items-helper';
 import { GridRepositoryService } from 'src/app/core/repository/services/dashboards/grid-repository.service';
@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = TestBed.inject(GridRepositoryService);
+    service = getTestBed().get(GridRepositoryService);
   });
 
   describe('Grid widgets settings get request', () => {

@@ -1,5 +1,5 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { TestBed } from '@angular/core/testing';
+import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
@@ -23,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = TestBed.inject(AuthenticationRepositoryService);
+    service = getTestBed().get(AuthenticationRepositoryService);
   });
 
   const requestBody: NewPasswordRequest = {

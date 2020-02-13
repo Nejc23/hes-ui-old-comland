@@ -1,5 +1,5 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { TestBed } from '@angular/core/testing';
+import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
 import { ChangePasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = TestBed.inject(AuthenticationRepositoryService);
+    service = getTestBed().get(AuthenticationRepositoryService);
   });
 
   const requestBody: ChangePasswordRequest = {
