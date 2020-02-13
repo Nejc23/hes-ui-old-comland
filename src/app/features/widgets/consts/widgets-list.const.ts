@@ -3,9 +3,10 @@ import { flatMap } from 'rxjs/operators';
 import { WidgetType } from '../enums/widget-type.enum';
 import { WidgetIcon } from '../enums/widget-icon.enum';
 import { DashboardListWidgetsResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-list-widgets-response.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 export class WidgetsList {
-  constructor() {}
+  constructor(private i18n: I18n) {}
   widgetsData: DashboardListWidgetsResponse = {
     widgets: [
       {
@@ -26,7 +27,7 @@ export class WidgetsList {
         areaColorRGBA: 'rgba(254,183,70, 0.2)',
         plotBgColor: 'rgb(247, 247, 247)',
         yAxisdTick: 50,
-        title: $localize`Current`
+        title: this.i18n(`Current`)
       }
     ]
   };

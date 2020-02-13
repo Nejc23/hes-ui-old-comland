@@ -14,6 +14,7 @@ import { UserRoutes } from '../consts/user-route.const';
 import { DateDefaultPipe } from 'src/app/shared/pipes/pipes/date-default.pipe';
 import { environment } from 'src/environments/environment';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-users',
@@ -29,9 +30,9 @@ export class UsersComponent implements OnInit {
   @ViewChild('actionsColumnTmpl', { static: true }) actionsColumnTmpl: TemplateRef<any>;
 
   // translated messages
-  msgConfirmDeleteModalTitle = $localize`Delete user`;
-  msgConfirmDeleteModalBody = $localize`Do you want to delete:`;
-  msgDeleteSucceeded = $localize`Selected item deleted`;
+  msgConfirmDeleteModalTitle = this.i18n(`Delete user`);
+  msgConfirmDeleteModalBody = this.i18n(`Do you want to delete:`);
+  msgDeleteSucceeded = this.i18n(`Selected item deleted`);
 
   constructor(
     private router: Router,
@@ -41,9 +42,10 @@ export class UsersComponent implements OnInit {
     private modalService: ModalService,
     private formUtils: FormsUtilsService,
     private service: UsersService,
+    private i18n: I18n,
     @Inject(LOCALE_ID) public locale: string
   ) {
-    this.sidebarService.headerTitle = $localize`Users`;
+    this.sidebarService.headerTitle = this.i18n(`Users`);
   }
 
   get formFunctionality() {
@@ -57,12 +59,12 @@ export class UsersComponent implements OnInit {
 
   private setColumns() {
     this.columns = [
-      { prop: 'firstName', name: $localize`NAME` },
-      { prop: 'lastName', name: $localize`LAST NAME` },
-      { prop: 'userName', name: $localize`USER NAME` },
-      { prop: 'email', name: $localize`EMAIL` },
-      { prop: 'accessTypeName', name: $localize`ACCESS TYPE` },
-      { prop: 'lastChange', name: $localize`LAST CHANGE`, pipe: new DateDefaultPipe(this.locale, environment.dateTimeFormat) },
+      { prop: 'firstName', name: this.i18n(`NAME`) },
+      { prop: 'lastName', name: this.i18n(`LAST NAME`) },
+      { prop: 'userName', name: this.i18n(`USER NAME`) },
+      { prop: 'email', name: this.i18n(`EMAIL`) },
+      { prop: 'accessTypeName', name: this.i18n(`ACCESS TYPE`) },
+      { prop: 'lastChange', name: this.i18n(`LAST CHANGE`), pipe: new DateDefaultPipe(this.locale, environment.dateTimeFormat) },
       { cellTemplate: this.actionsColumnTmpl, width: 50, minWidth: 50 }
     ];
   }

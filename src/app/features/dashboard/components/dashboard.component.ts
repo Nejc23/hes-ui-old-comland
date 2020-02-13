@@ -15,6 +15,7 @@ import { DashboardSettingsComponent } from './dashboard-settings.component';
 import * as _ from 'lodash';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,9 +36,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private dashboardGrid: DashboardGridService,
     private sidebatService: SidebarService,
     private gridService: DashboardGridService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private i18n: I18n
   ) {
-    this.sidebatService.headerTitle = $localize`Dashboards`;
+    this.sidebatService.headerTitle = this.i18n(`Dashboards`);
   }
 
   get formFunctionality() {

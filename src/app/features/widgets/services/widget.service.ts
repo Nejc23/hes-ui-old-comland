@@ -4,15 +4,16 @@ import { WidgetFactory } from '../helpers/widget-factory.helper';
 import { WidgetType } from '../enums/widget-type.enum';
 import { WidgetSettingsInput } from 'src/app/shared/modals/interfaces/widget-settings-input.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WidgetService {
-  constructor(private modalService: ModalService) {}
+  constructor(private modalService: ModalService, private i18n: I18n) {}
 
   getWidget(widgetType: WidgetType) {
-    const factory = new WidgetFactory();
+    const factory = new WidgetFactory(this.i18n);
     return factory.getWidget(widgetType);
   }
 

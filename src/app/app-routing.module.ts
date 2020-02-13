@@ -15,15 +15,15 @@ const appRoutes: Routes = [
       { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       {
         path: 'dashboard',
-        loadChildren: () => import('src/app/features/dashboard/modules/dashboard.module').then(m => m.DashboardModule)
+        loadChildren: 'src/app/features/dashboard/modules/dashboard.module#DashboardModule'
       },
       {
         path: 'users',
-        loadChildren: () => import('src/app/features/users/modules/user.module').then(m => m.UserModule)
+        loadChildren: 'src/app/features/users/modules/user.module#UserModule'
       },
       {
         path: 'help',
-        loadChildren: () => import('src/app/features/help/modules/help.module').then(m => m.HelpModule)
+        loadChildren: 'src/app/features/help/modules/help.module#HelpModule'
       }
     ]
   }

@@ -7,12 +7,13 @@ import { CurrentWidget } from './current-widget.helper';
 import { CurrentListWidget } from '../models/current-list-widget.model';
 import { GridWidgetCurrentComponent } from '../components/grid-widget-current/grid-widget-current.component';
 import { WidgetIcon } from '../enums/widget-icon.enum';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 export class WidgetFactory {
   readonly widgets = {
-    [WidgetType.current]: () =>
+    [WidgetType.current]: (i18n: I18n) =>
       new CurrentWidget(
-        new CurrentListWidget(),
+        new CurrentListWidget(i18n),
         DefaultSettingsFormComponent,
         GridWidgetCurrentComponent,
         this.getGridItemContent(WidgetType.current),
@@ -20,14 +21,14 @@ export class WidgetFactory {
       )
   };
 
-  constructor() {}
+  constructor(private i18n: I18n) {}
 
   getWidget(widgetType: WidgetType): WidgetAccess {
-    return this.widgets[widgetType]();
+    return this.widgets[widgetType](this.i18n);
   }
 
   getListWidgets(): DashboardListWidget[] {
-    return _.map(this.widgets, x => x().getListWidget());
+    return _.map(this.widgets, x => x(this.i18n).getListWidget());
   }
 
   protected getGridItemContent(widgetType: WidgetType) {
@@ -36,7 +37,7 @@ export class WidgetFactory {
     };
     const result = content[widgetType];
     if (!result) {
-      throw new Error($localize`Content for widget type ${widgetType} not supported. Please implement it`);
+      throw new Error(this.i18n(`Content for widget type ${widgetType} not supported. Please implement it`));
     }
     return result;
   }

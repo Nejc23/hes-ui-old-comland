@@ -3,6 +3,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-header-title',
@@ -12,8 +13,8 @@ export class HeaderTitleComponent implements OnInit, OnDestroy {
   headerTitle: string;
   subscription: Subscription;
 
-  constructor(private sidebarService: SidebarService, private router: Router) {
-    this.headerTitle = $localize`Dashboards`;
+  constructor(private sidebarService: SidebarService, private router: Router, private i18n: I18n) {
+    this.headerTitle = this.i18n(`Dashboards`);
 
     this.subscription = router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {

@@ -4,12 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "angular-template": {
-      "i18n": {
-        "locales": {
-          "en": "src/assets/i18n/messages.en.xlf",
-          "sl": "src/assets/i18n/messages.sl.xlf"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -23,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "aot": true,
             "outputPath": "dist/angular-template",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -31,46 +24,40 @@
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "",
+                "output": ""
+              }
             ],
             "styles": [
-              "src/styles.scss"            
+              "src/styles.scss"          
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.js"
+              "node_modules/jquery/dist/jquery.js"              
             ],
             "es5BrowserSupport": true
           },
           "configurations": {
             "develop": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ]},
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en"
+            },
             "develop-sl": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
               "fileReplacements": [
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
                 }
               ]
-            ,            "localize": [
-              "sl"
-            ]
-},
+            },
             "production": {
-            "localize": [
-              "en"
-            ],
-              "outputPath": "dist/angular-template",
+              "outputPath": "dist/angular-template/en",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -91,17 +78,15 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "13mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
                 }
-              ]},
+              ],
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            },
             "production-sl": {
-            "localize": [
-              "sl"
-            ],
-              "outputPath": "dist/angular-template",
+              "outputPath": "dist/angular-template/sl",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -126,17 +111,15 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "13mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
                 }
-              ]},
+              ],
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
+              "baseHref": "/sl/"
+            },
             "production-dev": {
-            "localize": [
-              "en"
-            ],
-              "outputPath": "c:/inetpub/wwwroot",
+              "outputPath": "c:/inetpub/wwwroot/en",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -157,12 +140,13 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "13mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
                 }
-              ]}
+              ],
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            }
           }
         },
         "serve": {
@@ -194,8 +178,7 @@
             "karmaConfig": "src/karma.conf.js",
             "styles": [
               "src/styles.scss"
-            ],
-            "scripts": [],
+            ],                        
             "assets": [
               "src/favicon.ico",
               "src/assets"

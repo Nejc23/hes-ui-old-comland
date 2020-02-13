@@ -13,6 +13,7 @@ import { UsersRepositoryService } from 'src/app/core/repository/services/users/u
 import { UsersService } from '../../services/users.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-user-edit',
@@ -25,7 +26,7 @@ export class UserEditComponent implements OnInit {
 
   accessTypes$: Observable<Codelist<number>[]>;
 
-  successMessageSave = $localize`User saved`;
+  successMessageSave = this.i18n(`User saved`);
 
   constructor(
     private sidebarService: SidebarService,
@@ -35,13 +36,14 @@ export class UserEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formUtils: FormsUtilsService,
-    public toastService: ToastNotificationService
+    public toastService: ToastNotificationService,
+    private i18n: I18n
   ) {
     this.userId = Number(this.route.snapshot.paramMap.get('id'));
     if (this.userId !== 0) {
-      this.sidebarService.headerTitle = $localize`Edit user`;
+      this.sidebarService.headerTitle = this.i18n(`Edit user`);
     } else {
-      this.sidebarService.headerTitle = $localize`New user`;
+      this.sidebarService.headerTitle = this.i18n(`New user`);
     }
     this.form = this.service.createForm(this.data);
   }

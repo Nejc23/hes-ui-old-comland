@@ -2,6 +2,7 @@ import { DashboardListWidget } from '../../../features/dashboard/interfaces/dash
 import { WidgetType } from '../enums/widget-type.enum';
 import { DashboardGridItem } from '../../../features/dashboard/interfaces/dashboard-grid-item.interface';
 import { WidgetIcon } from '../enums/widget-icon.enum';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 export class CurrentListWidget implements DashboardListWidget {
   description: string;
@@ -20,17 +21,17 @@ export class CurrentListWidget implements DashboardListWidget {
     id: '',
     content: {
       iconClass: WidgetIcon.current,
-      itemTitle: $localize`Current`
+      itemTitle: this.i18n(`Current`)
     },
     readings: null,
     properties: null
   };
 
-  constructor() {
-    this.description = $localize`Description current`;
+  constructor(private i18n: I18n) {
+    this.description = this.i18n(`Description current`);
     this.iconClass = WidgetIcon.current;
     this.widgetType = WidgetType.current;
-    this.name = $localize`Current`;
+    this.name = this.i18n(`Current`);
     this.disabled = false;
     this.licenseName = '';
   }

@@ -4,12 +4,13 @@ import * as _ from 'lodash';
 import { ToastNotificationService } from '../../toast-notification/services/toast-notification.service';
 import { Observable, throwError, of } from 'rxjs';
 import { map, catchError, switchMap, first, tap, take } from 'rxjs/operators';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormsUtilsService {
-  constructor(private toast: ToastNotificationService) {}
+  constructor(private toast: ToastNotificationService, private i18n: I18n) {}
 
   hasFormControlRequiredField = (abstractControl: AbstractControl): boolean => {
     if (abstractControl.validator) {
@@ -24,7 +25,7 @@ export class FormsUtilsService {
   saveForm<T>(form: FormGroup, request: Observable<T>, successMessage: string): Observable<T> {
     const throwErrorOrMakeRequest = (formValid: boolean) => {
       if (!formValid) {
-        return throwError(new Error($localize`invalid form`));
+        return throwError(new Error(this.i18n(`invalid form`)));
       }
       return request;
     };
@@ -78,8 +79,8 @@ export class FormsUtilsService {
 
   throwErrorWithToastIfInvalid(form: FormGroup) {
     if (!form.valid) {
-      this.toast.warningToast($localize`Form not valid`);
-      throw new Error($localize`invalid form`);
+      this.toast.warningToast(this.i18n(`Form not valid`));
+      throw new Error(this.i18n(`invalid form`));
     }
   }
 

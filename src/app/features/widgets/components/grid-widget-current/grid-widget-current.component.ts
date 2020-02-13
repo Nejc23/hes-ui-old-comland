@@ -11,6 +11,7 @@ import { WidgetSettingsService } from '../../services/widget-settings';
 import { DefaultWidgetSettingComponent } from 'src/app/shared/modals/components/widget-settings/default-widget-setting.component';
 import { DefaultSettingsFormComponent } from 'src/app/shared/modals/components/widget-settings/default-form/default-settings-form.component';
 import { DashboardItemDataResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-item-data-response.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-grid-widget-current',
@@ -23,12 +24,12 @@ export class GridWidgetCurrentComponent implements OnInit, OnDestroy, GridWidget
   graphData = [];
   dipslayGraph = false;
 
-  widgetDefault = new WidgetsList().widgetsData.widgets.find(x => x.widgetType === WidgetType.current);
+  widgetDefault = new WidgetsList(this.i18n).widgetsData.widgets.find(x => x.widgetType === WidgetType.current);
 
   subscription: Subscription;
   item: DashboardGridItem;
 
-  constructor(private dashboardStore: DashboardStoreService, private widgetSettingsService: WidgetSettingsService) {
+  constructor(private dashboardStore: DashboardStoreService, private widgetSettingsService: WidgetSettingsService, private i18n: I18n) {
     this.subscription = this.dashboardStore.customObservable.subscribe(() => {
       this.item = this.dashboardStore.getGridDashboard().find(x => x.id === this.id);
       this.readings = this.item.readings;

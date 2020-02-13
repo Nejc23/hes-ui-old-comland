@@ -7,6 +7,7 @@ import { DashboardStoreService } from './dashboard-store.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DashboardRepositoryService } from 'src/app/core/repository/services/dashboards/dashboard-repository.service';
 import { DashboardModel } from 'src/app/core/repository/interfaces/dashboards/dashboard.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,11 @@ export class DashboardSettingsService {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private dashboardStore: DashboardStoreService,
-    private dashboardRepository: DashboardRepositoryService
+    private dashboardRepository: DashboardRepositoryService,
+    private i18n: I18n
   ) {
-    this.successMessageCreate = $localize`Dashboard created`;
-    this.successMessageUpdate = $localize`Dashboard updated`;
+    this.successMessageCreate = this.i18n(`Dashboard created`);
+    this.successMessageUpdate = this.i18n(`Dashboard updated`);
   }
 
   createForm(formState: DashboardModel): FormGroup {

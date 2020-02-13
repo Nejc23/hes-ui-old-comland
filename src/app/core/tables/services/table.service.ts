@@ -10,10 +10,11 @@ import { TableState } from 'src/app/shared/tables/models/table-state.model';
 import { TablePage } from 'src/app/shared/tables/interfaces/table-page.interface';
 import { TableQueryResponse } from 'src/app/shared/tables/interfaces/table-response.interface';
 import { TableRequest } from 'src/app/shared/tables/interfaces/table-request.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable()
 export class TableService {
-  constructor() {}
+  constructor(private i18n: I18n) {}
 
   createStateFromResponse(state: TableState, response: TableQueryResponse<any>): TableState {
     const clone: TableState = _.clone(state);
@@ -107,6 +108,6 @@ export class TableService {
   }
 
   translateTableMessages() {
-    return new TableMessage($localize`No table records`, $localize`all table records`, $localize`selected table records`);
+    return new TableMessage(this.i18n(`No table records`), this.i18n(`all table records`), this.i18n(`selected table records`));
   }
 }

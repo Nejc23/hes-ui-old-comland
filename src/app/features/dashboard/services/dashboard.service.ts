@@ -13,18 +13,20 @@ import { WidgetFactory } from '../../widgets/helpers/widget-factory.helper';
 import { WidgetsList } from '../../widgets/consts/widgets-list.const';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DashboardListWidgetsResponse } from 'src/app/core/repository/interfaces/dashboards/dashboard-list-widgets-response.interface';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
-  widgetsList: WidgetsList = new WidgetsList();
+  widgetsList: WidgetsList = new WidgetsList(this.i18n);
 
   constructor(
     private formBuilder: FormBuilder,
     private dashboardStore: DashboardStoreService,
     private codelistService: CodelistRepositoryService,
-    private gridService: DashboardGridService
+    private gridService: DashboardGridService,
+    private i18n: I18n
   ) {}
 
   createControlsForm(): void {
@@ -78,7 +80,7 @@ export class DashboardService {
   }
 
   getListWidgets(): DashboardListWidget[] {
-    const factory = new WidgetFactory();
+    const factory = new WidgetFactory(this.i18n);
     return factory.getListWidgets();
   }
 

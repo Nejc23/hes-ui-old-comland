@@ -7,6 +7,7 @@ import { WidgetSettings } from 'src/app/features/widgets/interfaces/widget-setti
 import * as _ from 'lodash';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModaDefaultWidgetService } from 'src/app/core/modals/services/modal-default-widget.service';
+import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-default-widget-setting',
@@ -25,7 +26,8 @@ export class DefaultWidgetSettingComponent implements OnInit, WidgetSettingsInpu
     private componentFactoryResolver: ComponentFactoryResolver,
     private formBuilder: FormBuilder,
     private service: ModaDefaultWidgetService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private i18n: I18n
   ) {}
 
   ngOnInit() {
@@ -52,7 +54,7 @@ export class DefaultWidgetSettingComponent implements OnInit, WidgetSettingsInpu
   save() {
     if (!this.canSubmit()) {
       this.touchAllFormElements(this.form);
-      this.toast.warningToast($localize`invalid form`);
+      this.toast.warningToast(this.i18n(`invalid form`));
       return;
     }
     this.service.setDashboardSettings(this.form, this.id);

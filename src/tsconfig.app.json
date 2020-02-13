@@ -4,17 +4,13 @@
     "outDir": "../out-tsc/app",
     "types": []
   },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts",
     "debug/"
   ],
   "include": [
-    "./**/*.d.ts",
+    "./**/*.ts",
     "../node_modules/@swimlane/ngx-datatable/lib/types/*.ts"
   ]
 }
