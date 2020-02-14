@@ -18,10 +18,7 @@ const appRoutes: Routes = [
         path: 'dataConcentratorUnits',
         loadChildren: 'src/app/features/data-concentrator-units/modules/data-concentrator-units.module#DataConcentratorUnitsModule'
       },
-      {
-        path: 'meterUnit',
-        loadChildren: 'src/app/features/meter-units/modules/meter-units.module#MeterUnitsModule'
-      },
+
       {
         path: 'dashboard',
         loadChildren: 'src/app/features/dashboard/modules/dashboard.module#DashboardModule'

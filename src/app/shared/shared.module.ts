@@ -63,7 +63,8 @@ import { Page404Component } from './404/page-404.component';
     HideIfAuthorizedReadonlyDirective,
     HideIfUnauthorizedDirective,
     NumberOnlyDirective,
-    PipesModule
+    PipesModule,
+    BreadcrumbsModule
   ],
   imports: [
     CommonModule,
