@@ -4,10 +4,10 @@
 
 
   <!-- Page Wrapper -->
-  <div id="wrapper">
+  <div id="wrapper">    
     <app-side-fixed-nav></app-side-fixed-nav>
-    <div>
-    <!-- Sidebar -->
+    
+    <!-- Sidebar -->    
     <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"    
       [ngClass]="{'toggled': app.layout.isMenuCollapsed}">      
       <!-- Sidebar Toggler (Sidebar) -->
@@ -15,9 +15,10 @@
         <button class="rounded-circle border-0" id="sidebarToggle"
           (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed"></button>
       </div>
+      
       <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>      
     </ul>
-    </div>
+  
 
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -25,20 +26,23 @@
       <div id="content">
 
         <!-- Topbar -->
-        <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow">
+       <!-- <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow"> -->
           <!-- Sidebar Toggle (Topbar) -->
         <!--  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
             (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
             <i class="fa fa-bars"></i>
           </button>-->
-          <app-header-title></app-header-title>
-          
-          
-        </nav>
+          <!-- <app-header-title></app-header-title> -->
+         <!--<div class="navbar-collapse mr-5" id="navbarContent">
+            <ul class="navbar-nav ml-auto">
+          <app-breadcrumb class="d-none d-md-block"></app-breadcrumb>
+        </ul>
+      </div>
+        </nav> -->
         <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
-        <div class="container-fluid">
+        <div class="container-fluid" [ngClass]="{'container-fluid-collapsed': app.layout.isMenuCollapsed}">
 
           <!-- Page -->
           <router-outlet></router-outlet>

@@ -9,4 +9,5 @@ export interface SidebarItem {
   opened?: string;
   permission?: FunctionalityEnumerator;
   openInNewTab?: boolean;
+  isBorder?: boolean;
 }

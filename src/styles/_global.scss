@@ -21,7 +21,8 @@ a, button {
 }
 
 .breadcrumb {
-  margin-top: -5px;
+  margin-top: 20px;
+  padding-right: $spacer;
 }
 
 // Main page wrapper
@@ -32,8 +33,7 @@ a, button {
   #content-wrapper {
     background-color: $gray-100;
     width: 100%;
-    overflow-x: hidden;
-    margin-top: $topbar-base-height;
+    overflow-x: hidden;    
     padding-top: $spacer;
 
     #content {
@@ -46,6 +46,11 @@ a, button {
 .container,
 .container-fluid {
   height: 100%;
+  margin-left: $sidebar-base-width  + 4rem ;
+}
+.container-fluid-collapsed {
+  height: 100%;
+  margin-left: $sidebar-collapsed-width  + 4rem ;
 }
 
 .line-height-1 {

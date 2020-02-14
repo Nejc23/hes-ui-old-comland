@@ -4,8 +4,11 @@
 
 .sidebar {
   width: $sidebar-collapsed-width;
-  min-height: 100vh;
-
+  height: 100%;
+  z-index: 2000;
+  position: fixed;
+  overflow: visible;
+  margin-left: $sidebar-fixed-width;
   .nav-item {
     position: relative;
 
