@@ -15,7 +15,6 @@ export class SidebarService {
       {
         title: this.i18n(`Dashboard`),
         routeLink: '/dashboard',
-        icon: 'fas fa-grip-horizontal',
         hasChildren: false,
         permission: FunctionalityEnumerator.dashboard,
         children: []
@@ -23,7 +22,6 @@ export class SidebarService {
       {
         title: this.i18n(`Users`),
         routeLink: '/users',
-        icon: 'fas fa-users',
         hasChildren: false,
         permission: FunctionalityEnumerator.users,
         children: []
@@ -31,7 +29,6 @@ export class SidebarService {
       {
         title: this.i18n(`Help`),
         routeLink: '/help',
-        icon: 'fas fa-question',
         hasChildren: false,
         children: []
       }

@@ -8,15 +8,14 @@
     <app-side-fixed-nav></app-side-fixed-nav>
     <div>
     <!-- Sidebar -->
-    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"
+    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"    
       [ngClass]="{'toggled': app.layout.isMenuCollapsed}">      
-      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>
-
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-center d-none d-md-inline">
+      <div class="text-right d-none mt-3 d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"
           (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed"></button>
       </div>
+      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>      
     </ul>
     </div>
 
@@ -28,10 +27,10 @@
         <!-- Topbar -->
         <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow">
           <!-- Sidebar Toggle (Topbar) -->
-          <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
+        <!--  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
             (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
             <i class="fa fa-bars"></i>
-          </button>
+          </button>-->
           <app-header-title></app-header-title>
           
           
