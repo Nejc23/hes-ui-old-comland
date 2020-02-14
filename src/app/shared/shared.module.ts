@@ -32,6 +32,7 @@ import { HideIfUnauthorizedDirective } from './directives/permissions/hide-if-un
 import { NumberOnlyDirective } from './directives/number-only.directive';
 import { ModalConfirmComponent } from './modals/components/modal-confirm.component';
 import { PipesModule } from './pipes/pipes.module';
+import { SideFixedNavComponent } from './base-template/components/side-fixed-nav.component';
 
 @NgModule({
   exports: [
@@ -97,7 +98,8 @@ import { PipesModule } from './pipes/pipes.module';
     DisableIfUnauthorizedDirective,
     HideIfAuthorizedReadonlyDirective,
     HideIfUnauthorizedDirective,
-    NumberOnlyDirective
+    NumberOnlyDirective,
+    SideFixedNavComponent
   ],
   entryComponents: [DefaultWidgetSettingComponent, DefaultSettingsFormComponent, ModalChangePasswordComponent, ModalConfirmComponent]
 })

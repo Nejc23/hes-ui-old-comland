@@ -9,7 +9,6 @@ import { config } from 'src/environments/config';
 import { languages } from 'src/environments/locale';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { LanguageService } from 'src/app/core/base-template/services/language.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
 
 @Component({
@@ -29,7 +28,6 @@ export class BaseTemplateComponent implements OnInit {
   public sidebarItems: Array<SidebarItem> = [];
 
   languages$: Codelist<string>[];
-  language = 'English';
   collapsed = true;
 
   screenHeight: number;
@@ -38,7 +36,6 @@ export class BaseTemplateComponent implements OnInit {
   constructor(
     private sidebarService: SidebarService,
     private cookieService: CookieService,
-    private languageService: LanguageService,
     @Inject(LOCALE_ID) private locale: string,
     public i18n: I18n
   ) {
@@ -69,8 +66,6 @@ export class BaseTemplateComponent implements OnInit {
   ngOnInit() {
     this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
-
-    this.language = this.languages$.find(x => x.id === this.locale).value;
   }
 
   @HostListener('click', ['$event.target'])
@@ -83,9 +78,5 @@ export class BaseTemplateComponent implements OnInit {
       null,
       environment.cookiePath
     );
-  }
-
-  selectLang(id: string) {
-    this.languageService.selectLang(id);
   }
 }
