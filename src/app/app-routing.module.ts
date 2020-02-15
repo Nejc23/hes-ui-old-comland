@@ -30,16 +30,8 @@ const appRoutes: Routes = [
       {
         path: 'help',
         loadChildren: 'src/app/features/help/modules/help.module#HelpModule'
-      },
-      {
-        path: 'page404',
-        component: Page404Component
       }
     ]
-  },
-  {
-    path: '**',
-    redirectTo: 'page404'
   }
 ];
 

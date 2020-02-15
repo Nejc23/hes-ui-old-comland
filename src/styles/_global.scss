@@ -52,6 +52,10 @@ a, button {
   height: 100%;
   margin-left: $sidebar-collapsed-width  + 4rem ;
 }
+.container-fluid-login {
+  height: 100%;
+  width: 98%;
+}
 
 .line-height-1 {
   line-height: $font-size-base * .8;
