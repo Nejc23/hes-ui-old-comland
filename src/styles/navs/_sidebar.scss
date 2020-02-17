@@ -5,10 +5,11 @@
 .sidebar {
   width: $sidebar-collapsed-width;
   height: 100%;
-  z-index: 2000;
+  z-index: 2;
   position: fixed;
   overflow: visible;
   margin-left: $sidebar-fixed-width;
+
   .nav-item {
     position: relative;
 
@@ -103,13 +104,13 @@
     width: 1.85rem;
     height: 1.85rem;
     text-align: center;
-    margin-bottom: 1rem;
+    // margin-bottom: 1rem;
+    margin-right: 1rem;
     cursor: pointer;
+    color: $white;
 
     &::after {
       font-weight: 900;
-      content: '\f104';
-      font-family: 'Font Awesome 5 Free';
       margin-right: 0.1rem;
     }
 
@@ -127,8 +128,6 @@
     overflow: hidden;
 
     #sidebarToggle::after {
-      content: '\f105';
-      font-family: 'Font Awesome 5 Free';
       margin-left: 0.25rem;
     }
   }
@@ -143,7 +142,6 @@
     text-align: center;
     letter-spacing: 0.3rem;
     z-index: 2;
-    font-family: 'Font Awesome 5 Free';
     color: $body-color;
     font-size: 1.5rem;
 
@@ -207,7 +205,6 @@
         width: 100%;
         text-align: left;
         padding: 1rem;
-        width: $sidebar-base-width;
 
         i {
           font-size: $font-size-base * 1.35;
@@ -383,14 +380,14 @@
 
   // Color the sidebar toggler
   #sidebarToggle {
-    background-color: $gray-200;
+    background-color: $gray-400;
 
     &::after {
       color: $gray-500;
     }
 
     &:hover {
-      background-color: $gray-300;
+      background-color: $gray-400;
     }
   }
 }
@@ -418,16 +415,19 @@
         color: $gray-400;
       }
 
-      &.active,
+      &.active {
+        color: $primary;
+      }
+
       &:focus,
       &:hover {
-        color: $white;
+        color: $gray-500;
+        font-size: medium;
 
         i {
           color: $white;
         }
 
-        border-left: $border-width-lg solid $primary;
       }
 
       // Accordion
@@ -449,20 +449,27 @@
 
   // Color the sidebar toggler
   #sidebarToggle {
-    background-color: fade-out($white, 0.8);
+    background-color: $gray-700;
+    position: relative;
+    left: 2rem;
+
 
     &::after {
-      color: fade-out($white, 0.5);
+      color: $gray-900;
     }
 
     &:hover {
-      background-color: fade-out($white, 0.75);
+      background-color: $gray-900;
+    }
+
+    &.toggled {
+      left: 0.7rem !important;
     }
   }
 
   &.toggled {
     #sidebarToggle::after {
-      color: fade-out($white, 0.5);
+      color: $gray-700;
     }
   }
 }
@@ -470,7 +477,7 @@
 .sidebar-version {
   position: absolute;
   bottom: 10px;
-  margin-left: 22px;
+  width: 100%;
   color: fade-out($white, 0.5);
 }
 

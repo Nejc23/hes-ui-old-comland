@@ -1,41 +1,76 @@
 .navbar-fixed-left {
-  width: $sidebar-fixed-width;   
+  width: $sidebar-fixed-width;
   position: fixed;
   border-radius: 0;
   min-height: 100vh;
-  background: rgb(255,255,255);
-  background: linear-gradient(180deg, rgba(255,255,255,1) 0%, rgba(9,121,61,1) 0%, rgba(0,254,255,1) 100%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(180deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
 }
-.nav-fixed {        
-  
- .text-rotate {          
-    position: relative;  
+
+.nav-fixed {
+
+  .text-rotate {
+    position: relative;
     bottom: 10vh;
-    color: white;  
+    padding-top: 1rem;
+    color: white;
     -webkit-transform-origin: left;
-    -webkit-transform:rotate(-90deg) translateX(-100%);
+    transform-origin: left;
+    -webkit-transform: rotate(-90deg) translateX(-100%);
+    transform: rotate(-90deg) translateX(-100%);
   }
 }
 
 .sidebar-bottom-icons {
-  position: absolute;  
-  bottom: 10px;
-  margin-left: 0px;  
+  position: absolute;
+  bottom: 1rem;
+  left: 0.3rem;
 
   .i-circle {
     background-color: white;
     border-radius: 50%;
     border: 1x solid grey;
-    padding:10px;
+    padding: 10px;
   }
 }
 
 .sidebar-icons {
-  color: white;  
+  color: white;
   color: fade-out($white, 0.1);
 }
-.sidebar-icons-top  {  
-  position: absolute;  
-  top: 40px;
-  margin-left: 0px;      
+
+.sidebar-icons-top {
+  position: absolute;
+  top: 0rem;
+  left: 0.3rem;
+}
+
+.uil {
+  font-size: 2rem;
+
+  &.icon-small {
+    position: relative;
+    left: -8px;
+    top: -5px;
+    font-size: 1.5rem;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+.sidebar-icons-user {
+  color: white;
+  color: fade-out($white, 0.1);
+  margin-left: 0.2rem;
+  font-size: 2.5rem;
+}
+
+.user-label {
+  padding-top: 0.5rem;
+  padding-left: 0.1rem;
+}
+
+.nav-fixed-title-font {
+  font-family: 'Roboto Slab';
+  font-weight: bold;
 }

@@ -743,8 +743,8 @@ $navbar-light-brand-hover-color: $navbar-light-active-color !default;
 $navbar-dark-brand-color: $navbar-dark-active-color !default;
 $navbar-dark-brand-hover-color: $navbar-dark-active-color !default;
 
-$navbar-border-light: #55E59B;
-$navbar-border-dark: #00BDBE;
+$navbar-fixed-background-light: #55E59B;
+$navbar-fixed-background-dark: #00BDBE;
 
 // Dropdowns
 //
@@ -1155,7 +1155,7 @@ $print-body-min-width: map-get($grid-breakpoints, "lg") !default;
 // Change below variable if the height of the navbar changes
 $topbar-base-height: 3.8rem;
 // Change below variable to change the width of the sidenav
-$sidebar-base-width: 14rem;
+$sidebar-base-width: 15rem;
 // Change below variable to change the width of the sidenav when collapsed
 $sidebar-collapsed-width: 1.5rem;
 $border-width-lg: 3px !default;

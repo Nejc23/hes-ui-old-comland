@@ -4,21 +4,25 @@
 
 
   <!-- Page Wrapper -->
-  <div id="wrapper">    
+  <div id="wrapper">
     <app-side-fixed-nav></app-side-fixed-nav>
-    
-    <!-- Sidebar -->    
-    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"    
-      [ngClass]="{'toggled': app.layout.isMenuCollapsed}">      
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"
+      [ngClass]="{'toggled': app.layout.isMenuCollapsed}">
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-right d-none mt-3 d-md-inline">
-        <button class="rounded-circle border-0" id="sidebarToggle"
-          (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed"></button>
+        <button class="rounded-circle border-0" [ngClass]="{'toggled': app.layout.isMenuCollapsed}" id="sidebarToggle"
+          (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
+          <!-- <i class='uil uil-arrows-h-alt icon-small'></i> -->
+          <i class='uil icon-small'
+            [ngClass]="{'uil-shrink': !app.layout.isMenuCollapsed, 'uil-arrows-h-alt': app.layout.isMenuCollapsed}"></i>
+        </button>
       </div>
-      
-      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>      
+
+      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>
     </ul>
-  
+
 
     <div id="content-wrapper" class="d-flex flex-column">
 
@@ -26,14 +30,14 @@
       <div id="content">
 
         <!-- Topbar -->
-       <!-- <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow"> -->
-          <!-- Sidebar Toggle (Topbar) -->
+        <!-- <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow"> -->
+        <!-- Sidebar Toggle (Topbar) -->
         <!--  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
             (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
             <i class="fa fa-bars"></i>
           </button>-->
-          <!-- <app-header-title></app-header-title> -->
-         <!--<div class="navbar-collapse mr-5" id="navbarContent">
+        <!-- <app-header-title></app-header-title> -->
+        <!--<div class="navbar-collapse mr-5" id="navbarContent">
             <ul class="navbar-nav ml-auto">
           <app-breadcrumb class="d-none d-md-block"></app-breadcrumb>
         </ul>
