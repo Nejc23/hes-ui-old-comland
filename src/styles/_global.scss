@@ -2,20 +2,22 @@
 html {
   position: relative;
   min-height: 100%;
+  font-size: 14px;
 }
 
 body {
   height: 100%;
 }
 
-a, button {
+a,
+button {
   &:focus {
     outline: none;
   }
 }
 
-.btn { 
-  i + span {
+.btn {
+  i+span {
     margin-left: $spacer * 0.5;
   }
 }
