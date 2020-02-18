@@ -5,7 +5,7 @@
 .sidebar {
   width: $sidebar-collapsed-width;
   height: 100%;
-  z-index: 2;
+  z-index: 2000;
   position: fixed;
   overflow: visible;
   margin-left: $sidebar-fixed-width;
