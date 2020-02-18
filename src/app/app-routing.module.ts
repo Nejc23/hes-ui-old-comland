@@ -3,9 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseTemplateComponent } from './shared/base-template/components/base-template.component';
 import { AuthGuard } from './core/guards/auth.guard';
 import { PermissionsGuard } from './core/guards/permissions.guard';
+import { UserLoginComponent } from './features/users/user-login.component';
 import { Page404Component } from './shared/404/page-404.component';
 
 const appRoutes: Routes = [
+  {
+    path: '',
+    redirectTo: '/dashboard',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: UserLoginComponent,
+    runGuardsAndResolvers: 'always'
+  },
   {
     path: '',
     component: BaseTemplateComponent,
@@ -32,7 +43,9 @@ const appRoutes: Routes = [
         loadChildren: 'src/app/features/help/modules/help.module#HelpModule'
       }
     ]
-  }
+  },
+  { path: '404', component: Page404Component },
+  { path: '**', redirectTo: '404' }
 ];
 
 @NgModule({

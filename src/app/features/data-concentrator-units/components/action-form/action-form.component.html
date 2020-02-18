@@ -1,0 +1,19 @@
+<div class="form-row">
+  <div class="col-auto">
+    <app-input-text label=""  [inputType]="'search'" [form]="form" [property]="searchProperty" class="d-inline-block" [placeholder]="'search...'" > </app-input-text>          
+    <button type="button" class="btn btn-outline-secondary d-inline-block mb-1" (click)="onSearch()"
+      style="margin-left: -1px;"><i class="fa fa-search"><span i18n></span></i></button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onFilter()"
+      style="margin-left: -1px;"><i class="fa fa-filter"><span i18n></span></i></button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onColumns()"
+      style="margin-left: -1px;"><i class="fa fa-columns"><span i18n></span></i></button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onRefresh()"
+      style="margin-left: -1px;"><i class="fa fa-redo"><span i18n></span></i></button>
+  </div>
+</div>

@@ -16,6 +16,7 @@ export class InputTextComponent implements OnInit {
   @Input() inputType: string;
   @Input() numberOnly = false; // input text receives only Numbers!
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)
+  @Input() placeholder = '';
 
   constructor(private formUtils: FormsUtilsService) {}
 

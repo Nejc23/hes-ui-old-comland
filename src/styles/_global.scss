@@ -23,8 +23,8 @@ button {
 }
 
 .breadcrumb {
-  margin-top: 20px;
-  padding-right: $spacer;
+  margin-top: -15px;
+ 
 }
 
 // Main page wrapper
@@ -49,10 +49,12 @@ button {
 .container-fluid {
   height: 100%;
   margin-left: $sidebar-base-width  + 4rem ;
+  width: auto;
 }
 .container-fluid-collapsed {
   height: 100%;
   margin-left: $sidebar-collapsed-width  + 4rem ;
+  width: auto;
 }
 .container-fluid-login {
   height: 100%;

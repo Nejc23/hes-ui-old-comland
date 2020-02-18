@@ -5,7 +5,7 @@
     <span *ngIf="required"> *</span>
   </label>
 
-  <input [name]="property" [type]="inputType" class="form-control" [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
+  <input [name]="property" [placeholder]="placeholder"  [type]="inputType" class="form-control" [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()" class="error">

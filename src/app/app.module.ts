@@ -12,6 +12,7 @@ import localeSlExtra from '@angular/common/locales/extra/sl';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserModule } from './features/users/modules/user.module';
 import { CoreModule } from './core/core.module';
+import { GridModule } from '@progress/kendo-angular-grid';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 
@@ -31,7 +32,16 @@ declare const require;
     },
     I18n
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, NgxChartsModule, UserModule, CoreModule.forRoot(), SharedModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    NgxChartsModule,
+    UserModule,
+    CoreModule.forRoot(),
+    SharedModule,
+    GridModule
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
