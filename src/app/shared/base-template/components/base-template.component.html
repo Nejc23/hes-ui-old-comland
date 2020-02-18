@@ -9,10 +9,12 @@
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-dark sidebar sidebar-dark accordion" id="accordionSidebar"
-      [ngClass]="{'toggled': app.layout.isMenuCollapsed}">
+      [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
+      (mouseleave)="mouseLeavesNav()">
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="text-right d-none mt-3 d-md-inline">
-        <button class="rounded-circle border-0" [ngClass]="{'toggled': app.layout.isMenuCollapsed}" id="sidebarToggle"
+        <button class="rounded-circle border-0"
+          [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
           (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
           <!-- <i class='uil uil-arrows-h-alt icon-small'></i> -->
           <i class='uil icon-small'
@@ -20,11 +22,12 @@
         </button>
       </div>
 
-      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed"></app-sidebar>
+      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed && !isMouseOverNav">
+      </app-sidebar>
     </ul>
 
 
-    <div id="content-wrapper" class="d-flex flex-column">
+    <div id=" content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
       <div id="content">

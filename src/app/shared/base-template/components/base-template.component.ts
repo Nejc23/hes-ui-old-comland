@@ -26,9 +26,9 @@ export class BaseTemplateComponent implements OnInit {
   public sidenavSelected = 'sidenav-default';
   public version = '';
   public sidebarItems: Array<SidebarItem> = [];
+  public isMouseOverNav = false;
 
   languages$: Codelist<string>[];
-  collapsed = true;
 
   screenHeight: number;
   screenWidth: number;
@@ -78,5 +78,13 @@ export class BaseTemplateComponent implements OnInit {
       null,
       environment.cookiePath
     );
+  }
+
+  mouseOverNav() {
+    this.isMouseOverNav = this.app.layout.isMenuCollapsed;
+  }
+
+  mouseLeavesNav() {
+    this.isMouseOverNav = false;
   }
 }

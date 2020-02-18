@@ -419,10 +419,9 @@
         color: $primary;
       }
 
-      &:focus,
       &:hover {
-        color: $gray-500;
-        font-size: medium;
+        color: $gray-100;
+        background-color: $gray-600;
 
         i {
           color: $white;
@@ -464,6 +463,10 @@
 
     &.toggled {
       left: 0.7rem !important;
+
+      &.mouseover {
+        left: 2rem !important;
+      }
     }
   }
 
