@@ -12,14 +12,21 @@
       [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
       (mouseleave)="mouseLeavesNav()">
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="text-right d-none mt-3 d-md-inline">
-        <button class="rounded-circle border-0"
-          [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
-          (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
-          <!-- <i class='uil uil-arrows-h-alt icon-small'></i> -->
-          <i class='uil icon-small'
-            [ngClass]="{'uil-shrink': !app.layout.isMenuCollapsed, 'uil-arrows-h-alt': app.layout.isMenuCollapsed}"></i>
-        </button>
+      <div class="row mt-4">
+        <div class="col-9">
+          <i *ngIf=" !app.layout.isMenuCollapsed || isMouseOverNav"
+            class='uil uil-building sidebar-icons sidebar-title'></i>
+          <span class="sidebar-icons sidebar-title" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">Eles</span>
+        </div>
+        <div class="col-1 text-right d-none d-md-inline">
+          <button class="rounded-circle border-0"
+            [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
+            (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
+            <!-- <i class='uil uil-arrows-h-alt icon-small'></i> -->
+            <i class='uil icon-small'
+              [ngClass]="{'uil-shrink': !app.layout.isMenuCollapsed, 'uil-arrows-h-alt': app.layout.isMenuCollapsed}"></i>
+          </button>
+        </div>
       </div>
 
       <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed && !isMouseOverNav">

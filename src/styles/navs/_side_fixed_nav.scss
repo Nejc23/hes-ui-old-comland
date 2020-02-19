@@ -35,13 +35,12 @@
 }
 
 .sidebar-icons {
-  color: white;
   color: fade-out($white, 0.1);
 }
 
 .sidebar-icons-top {
   position: absolute;
-  top: 0rem;
+  top: 1rem;
   left: 0.3rem;
 }
 
@@ -50,11 +49,9 @@
 
   &.icon-small {
     position: relative;
-    left: -8px;
+    left: -7px;
     top: -5px;
-    font-size: 1.5rem;
-    height: 1.5rem;
-    width: 1.5rem;
+    font-size: 1.7rem;
   }
 }
 
