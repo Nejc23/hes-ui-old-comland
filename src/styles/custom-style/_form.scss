@@ -64,6 +64,16 @@
       color: $dark !important;
       padding-right: 5px;
     }
+
+    +i.uil {
+      float: right;
+      margin-top: -34px;
+      margin-right: -10px;
+      pointer-events: none;
+      background-color: transparent;
+      padding-right: 5px;
+      font-size: 1.5rem;
+    }
   }
 }
 

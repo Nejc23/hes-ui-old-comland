@@ -10,6 +10,8 @@ import { languages } from 'src/environments/locale';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
+import { Observable, of } from 'rxjs';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-base-template',
@@ -29,15 +31,20 @@ export class BaseTemplateComponent implements OnInit {
   public isMouseOverNav = false;
 
   languages$: Codelist<string>[];
+  companies$: Observable<Codelist<number>[]>;
+  companies: Codelist<number>[] = [];
 
   screenHeight: number;
   screenWidth: number;
+
+  form: FormGroup;
 
   constructor(
     private sidebarService: SidebarService,
     private cookieService: CookieService,
     @Inject(LOCALE_ID) private locale: string,
-    public i18n: I18n
+    public i18n: I18n,
+    private formBuilder: FormBuilder
   ) {
     this.app = {
       layout: {
@@ -49,6 +56,7 @@ export class BaseTemplateComponent implements OnInit {
       }
     };
     this.getScreenSize();
+    this.form = this.createForm();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -66,6 +74,19 @@ export class BaseTemplateComponent implements OnInit {
   ngOnInit() {
     this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
+    this.companies.push(
+      { id: 1, value: 'Eles' },
+      { id: 2, value: 'Company 2' },
+      { id: 3, value: 'Company 3' },
+      { id: 4, value: 'Company 4' }
+    );
+    this.companies$ = of(this.companies);
+  }
+
+  createForm(): FormGroup {
+    return this.formBuilder.group({
+      ['companyId']: [1]
+    });
   }
 
   @HostListener('click', ['$event.target'])
@@ -86,5 +107,9 @@ export class BaseTemplateComponent implements OnInit {
 
   mouseLeavesNav() {
     this.isMouseOverNav = false;
+  }
+
+  get companyIdProperty() {
+    return 'companyId';
   }
 }

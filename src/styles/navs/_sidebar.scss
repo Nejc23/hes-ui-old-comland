@@ -17,9 +17,9 @@
       margin-bottom: $spacer;
     }
 
-    &:first-child {
-      margin-top: $spacer;
-    }
+    // &:first-child {
+    //   margin-top: $spacer;
+    // }
 
     .nav-link {
       text-align: center;
@@ -450,7 +450,7 @@
   #sidebarToggle {
     background-color: $gray-700;
     position: relative;
-    left: 1.3rem;
+    left: -1.1rem;
 
 
     &::after {
@@ -465,7 +465,7 @@
       left: 0.7rem !important;
 
       &.mouseover {
-        left: 1.3rem !important;
+        left: -1.1rem !important;
       }
     }
   }
@@ -531,4 +531,34 @@
   font-size: large !important;
   font-weight: 600;
   padding-left: 0.6rem;
+}
+
+#selectCompany {
+  .form-group {
+    i.fa {
+      margin-right: 3px !important;
+      color: $white !important;
+    }
+  }
+}
+
+#companyId {
+  border: 0px !important;
+  background-color: $gray-800 !important;
+  color: $white !important;
+  font-weight: 600;
+  font-size: large;
+  margin-left: -2px;
+
+  &:focus {
+    box-shadow: 0 0 0 0 !important;
+  }
+
+}
+
+.col-8-ext {
+  flex: 0 0 70.666667%;
+  max-width: 70.666667%;
+  padding-right: 10px;
+  margin-top: -0.5rem;
 }

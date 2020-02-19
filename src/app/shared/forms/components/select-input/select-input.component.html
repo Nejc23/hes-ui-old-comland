@@ -7,21 +7,19 @@
   <select class="form-control" [formControlName]="property" [id]="property">
     <option disabled [attr.selected]="getEmptySelectedValue()" [value]="null" i18n>Select an option
     </option>
-    <option *ngFor="let option of selectOptions"
-            (keydown.enter)="onSelect(option.id)"
-            (click)="onSelect(option.id)"
-            [attr.selected]="getSelectedValue(option.id)"
-            value="{{option.id}}">
+    <option *ngFor="let option of selectOptions" (keydown.enter)="onSelect(option.id)" (click)="onSelect(option.id)"
+      [attr.selected]="getSelectedValue(option.id)" value="{{option.id}}">
       {{option.value}}
     </option>
   </select>
-  <i class="fa fa-sort-down"></i>
+  <!-- <i class="fa fa-sort-down"></i> -->
+  <i class='uil uil-angle-down'></i>
   <div>
     <ng-content select="small">
     </ng-content>
   </div>
-   <!--Loop through errors-->
-   <div class="help-block" *ngIf="showErrors()">
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>
   </div>
 </div>

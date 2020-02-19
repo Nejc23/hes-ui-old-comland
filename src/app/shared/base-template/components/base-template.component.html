@@ -13,11 +13,15 @@
       (mouseleave)="mouseLeavesNav()">
       <!-- Sidebar Toggler (Sidebar) -->
       <div class="row mt-4">
-        <div class="col-9">
+        <div class="col-2">
           <i *ngIf=" !app.layout.isMenuCollapsed || isMouseOverNav"
             class='uil uil-building sidebar-icons sidebar-title'></i>
-          <span class="sidebar-icons sidebar-title" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">Eles</span>
+          <!-- <span class="sidebar-icons sidebar-title" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">Eles</span> -->
         </div>
+        <app-select-input class="col-8-ext sidebar-icons sidebar-title" id="selectCompany"
+          *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" [form]="form" [property]="companyIdProperty"
+          [selectOptions]="companies$ | async">
+        </app-select-input>
         <div class="col-1 text-right d-none d-md-inline">
           <button class="rounded-circle border-0"
             [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
