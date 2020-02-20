@@ -28,7 +28,7 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DdataConcentrratorUnitsRoutingModule {
+export class DataConcentratorUnitsRoutingModule {
   constructor(private i18n: I18n) {
     routes.forEach(x => (x.data.breadcrumb = i18n(x.data.breadcrumb)));
   }

@@ -1,141 +1,84 @@
-import { Component, OnInit, TemplateRef, ViewChild, ContentChild, AfterViewInit, NgZone } from '@angular/core';
-import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
-import { headerTitleDCU } from '../consts/static-text.const';
-import { Observable } from 'rxjs';
-import { GridDataResult, DataStateChangeEvent, ColumnComponent, CellTemplateDirective, GridComponent } from '@progress/kendo-angular-grid';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { DataSourceRequestState, DataResult } from '@progress/kendo-data-query';
-import { take } from 'rxjs/operators';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { DxDataGridComponent } from 'devextreme-angular';
+import { UsersSample } from 'src/app/core/repository/interfaces/samples/users-sample.interface';
+import { UsersSampleService } from 'src/app/core/repository/services/samples/users-sample-repository.service';
+import CustomStore from 'devextreme/data/custom_store';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-data-concentrator-units',
   templateUrl: './data-concentrator-units.component.html'
 })
-export class DataConcentratorUnitsComponent implements OnInit, AfterViewInit {
-  searchResult = 323;
+export class DataConcentratorUnitsComponent implements OnInit {
+  @ViewChild('template2', { static: true }) colTemplate: TemplateRef<any>;
+
+  @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
+
+  // sample data
+  customers: UsersSample[];
+
+  // grid
+  columns = [];
+  dataSource: any = {};
+  totalCount = 0;
   filters = 'no filter';
 
-  public pageSize = 10;
-  public skip = 0;
-
-  @ContentChild('colTemplate', { static: true })
-  public colTemplate: TemplateRef<any>;
-
-  @ContentChild('headerTemplate', { static: true })
-  public headerTemplate: TemplateRef<any>;
-
-  public state: DataSourceRequestState = {
-    skip: 0,
-    take: 5
-  };
-
-  @ViewChild('tmp', { static: true }) kendoGridCellTemplate22: TemplateRef<any>;
-  columns = [];
-
-  public gridData: DataResult = {
-    data: [
-      {
-        name: 1,
-        iconColor: 'green',
-        date: '2019-02-02',
-        amount: 43,
-        currency: 43,
-        selIIT: false,
-        valuePercent: '93.3 %'
-      },
-      {
-        name: 3,
-        iconColor: 'red',
-        date: '2019-02-02',
-        amount: 434,
-        currency: 43,
-        selIIT: false,
-        valuePercent: '2.3 %'
-      },
-      {
-        name: 33,
-        iconColor: 'yellow',
-        date: '2019-02-02',
-        amount: 3,
-        currency: 43,
-        selIIT: true,
-        valuePercent: '45.12 %'
-      },
-      {
-        name: 133,
-        iconColor: 'yellow',
-        date: '2019-01-02',
-        amount: 23,
-        currency: 13,
-        selIIT: true,
-        valuePercent: '4.12 %'
-      },
-      {
-        name: 53,
-        iconColor: 'yellow',
-        date: '2019-01-02',
-        amount: 123,
-        currency: 213,
-        selIIT: false,
-        valuePercent: '4.12 %'
-      },
-      {
-        name: 542,
-        iconColor: 'red',
-        date: '2019-01-02',
-        amount: 22,
-        currency: 3444,
-        selIIT: true,
-        valuePercent: '14.22 %'
-      }
-    ],
-    total: 102
-  };
-
-  @ViewChild(GridComponent, { static: true })
-  public grid: GridComponent;
-
-  constructor(private sidebatService: SidebarService, private i18n: I18n, public fb: FormBuilder, private ngZone: NgZone) {
-    this.sidebatService.headerTitle = this.i18n(headerTitleDCU);
-  }
-
-  public edit = (dataItem, rowIndex): void => {
-    console.log(dataItem, rowIndex);
-  };
+  constructor(public usersSampleService: UsersSampleService) {}
 
   ngOnInit() {
-    console.log(this.state);
     this.columns = [
-      { title: 'Name', field: 'name', type: 'text', isButton: false, locked: true },
-      { title: 'Read status', isIcon: true, icon: 'fas fa-circle', width: 120, locked: true },
-      { filter: true, title: 'Date', field: 'date', type: 'date', format: '{0:MM/dd/yyyy}', sortable: true, isButton: false },
-      { filter: true, title: 'Amount', field: 'amount', type: 'numeric', sortable: true, isButton: false },
-      { filter: true, title: 'Currency', field: 'currency', isButton: false },
-      { isButton: true, buttonLabel: 'Edit', icon: 'edit', callbackFunc: this.edit }
+      { dataField: 'id', caption: 'ID', fixed: true, width: 100 },
+      { dataField: 'first_name', caption: 'First name', fixed: true },
+      { dataField: 'last_name', caption: 'Last name' },
+      { dataField: 'email', caption: 'E mail' },
+      { dataField: 'gender', caption: 'Gender', fixed: true, fixedPosition: 'right', width: 100 }
     ];
+
+    this.loadData();
   }
 
-  public onPageChange(state: any): void {
-    this.pageSize = state.take;
-  }
-
-  public dataStateChange(state: DataStateChangeEvent): void {
-    this.fitColumns();
-    this.state = state;
-    console.log(this.state);
-  }
-
-  public ngAfterViewInit(): void {
-    this.fitColumns();
-  }
-
-  private fitColumns(): void {
-    this.ngZone.onStable
-      .asObservable()
-      .pipe(take(1))
-      .subscribe(() => {
-        this.grid.autoFitColumns();
-      });
+  loadData() {
+    function isNotEmpty(value: any): boolean {
+      return value !== undefined && value !== null && value !== '';
+    }
+    this.dataSource = new CustomStore({
+      key: 'id',
+      load: (loadOptions: any) => {
+        let params: HttpParams = new HttpParams();
+        [
+          'skip',
+          'take',
+          'requireTotalCount',
+          'requireGroupCount',
+          'sort',
+          // "filter", // filter is set outside grid
+          'totalSummary',
+          'group',
+          'groupSummary'
+        ].forEach(i => {
+          if (i in loadOptions && isNotEmpty(loadOptions[i])) {
+            params = params.set(i, JSON.stringify(loadOptions[i]));
+          }
+        });
+        console.log('prepare params');
+        params = params.append('filter', '[{tip1: sss, oper:eql, value:0393}]'); // added custom parameters
+        console.log(params);
+        return this.usersSampleService
+          .usersSample(params)
+          .toPromise()
+          .then((data: any) => {
+            this.totalCount = data.totalCount;
+            return {
+              data: data.data,
+              totalCount: data.totalCount,
+              summary: data.summary,
+              groupCount: data.groupCount
+            };
+          })
+          .catch(error => {
+            throw 'Data Loading Error';
+          });
+      }
+    });
   }
 }
