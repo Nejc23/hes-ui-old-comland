@@ -26,4 +26,12 @@ export class ActionFormComponent implements OnInit {
   nameOf(arg0: string) {
     throw new Error('Method not implemented.');
   }
+
+  onSearch() {}
+
+  onFilter() {}
+
+  onColumns() {}
+
+  onRefresh() {}
 }

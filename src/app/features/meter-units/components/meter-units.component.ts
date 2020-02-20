@@ -21,13 +21,13 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
   @ContentChild('colTemplate', { static: true })
   public colTemplate: TemplateRef<any>;
 
-  private gridOptions: Partial<GridOptions>;
+  public gridOptions: Partial<GridOptions>;
   private gridApi;
   private gridColumnApi;
-  private columnDefs2;
-  private cacheOverflowSize;
-  private maxConcurrentDatasourceRequests;
-  private infiniteInitialRowCount;
+  public columnDefs2;
+  public cacheOverflowSize;
+  public maxConcurrentDatasourceRequests;
+  public infiniteInitialRowCount;
 
   searchResult = 323;
   filters = 'no filter';
@@ -127,6 +127,7 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
 
   public ngAfterViewInit(): void {}
 
+  saveState() {}
   /*
 onGridReady(params) {
     this.gridApi = params.api;
