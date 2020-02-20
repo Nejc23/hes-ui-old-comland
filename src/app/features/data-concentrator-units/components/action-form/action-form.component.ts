@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
@@ -8,6 +8,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ActionFormComponent implements OnInit {
   form: FormGroup;
+
+  @Output() refresh: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private i18n: I18n, public fb: FormBuilder) {}
 
@@ -33,5 +35,7 @@ export class ActionFormComponent implements OnInit {
 
   onColumns() {}
 
-  onRefresh() {}
+  onRefresh() {
+    this.refresh.emit();
+  }
 }

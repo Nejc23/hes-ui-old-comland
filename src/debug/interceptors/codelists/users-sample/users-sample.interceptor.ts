@@ -85,7 +85,14 @@ export class SortObj {
 }
 
 const data = [
-  { id: 1, first_name: 'Lawton', last_name: 'Dowgill', email: 'ldowgill0@delicious.com', gender: 'Male', ip_address: '209.87.135.170' },
+  {
+    id: 1,
+    first_name: 'Lawton very very very very long name, out of the column width',
+    last_name: 'Dowgill',
+    email: 'ldowgill0@delicious.com',
+    gender: 'Male',
+    ip_address: '209.87.135.170'
+  },
   { id: 2, first_name: 'Reinaldo', last_name: 'Bartak', email: 'rbartak1@wp.com', gender: 'Male', ip_address: '84.0.228.75' },
   { id: 3, first_name: 'April', last_name: 'Pybus', email: 'apybus2@narod.ru', gender: 'Female', ip_address: '68.238.207.154' },
   { id: 4, first_name: 'Rani', last_name: 'Dugue', email: 'rdugue3@cam.ac.uk', gender: 'Female', ip_address: '80.76.7.24' },

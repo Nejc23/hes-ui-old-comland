@@ -15,30 +15,51 @@
     <span class="align-text-bottom">{{totalCount}} items - {{filters}}</span>    
   </div>
   <div class="ml-auto pr-2">
-    <app-action-form></app-action-form>     
+    <app-action-form (refresh)="refreshGrid()"></app-action-form>     
   </div>
 </div>
 
 <!-- grid -->
 <div class=" mt-0 bg-white">
-  <dx-data-grid
+  <dx-data-grid #grid
     id="gridContainer"
     [dataSource]="dataSource"
     [columns]="columns"    
     [allowColumnResizing]="true"
-    [allowColumnReordering]="true"
+    [allowColumnReordering]="true"    
+    [(selectedRowKeys)]="selectedRows"
     [showRowLines]="true"
     [showBorders]="true"
     [columnAutoWidth]="true"
     [remoteOperations]="true"
     [focusStateEnabled]="true">
+    
+    <div *dxTemplate="let cell of 'cellTemplate'">
+        <div class="text-primary">{{cell.data.last_name}}</div>
+    </div>
+    <div *dxTemplate="let cell of 'cellTemplateIcon'">
+      <i class='uils uil-clock text-secondary'></i>
+      <!--<span *ngIf="cell.data.gender === 'Male'" class="iconify uils uil-clock text-secondary" title="{{cell.data.gender}}"></span>-->
+  </div>
+  <dxo-selection
+    [selectAllMode]="allMode"
+    [showCheckBoxesMode]="checkBoxesMode"
+    mode="multiple"
+  ></dxo-selection>
     <dxo-column-fixing [enabled]="true"></dxo-column-fixing> 
-  <dxo-pager
-    alignment="left"
-    [showPageSizeSelector]="true"
-    [allowedPageSizes]="[20, 100, 150]"
-    [showNavigationButtons]="true">
-  </dxo-pager> 
+    <dxo-paging [pageSize]="20"></dxo-paging>
+    <dxo-pager
+      alignment="left"
+      [showPageSizeSelector]="true"
+      [allowedPageSizes]="[20, 50, 100, 150]"
+      [showNavigationButtons]="true">
+    </dxo-pager>  
   </dx-data-grid>
 </div>
 
+<div class="selected-data">
+  <span class="caption">Selected Records:</span>
+  <span>
+      {{grid.selectedRowKeys ? (grid.instance.getSelectedRowsData() | stringifyEmplyees) : 'Nobody has been selected'}}
+  </span>
+</div>

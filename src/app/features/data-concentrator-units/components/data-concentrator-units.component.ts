@@ -1,9 +1,12 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, PipeTransform, Pipe } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
-import { UsersSample } from 'src/app/core/repository/interfaces/samples/users-sample.interface';
+import { UsersSample, Data } from 'src/app/core/repository/interfaces/samples/users-sample.interface';
 import { UsersSampleService } from 'src/app/core/repository/services/samples/users-sample-repository.service';
 import CustomStore from 'devextreme/data/custom_store';
 import { HttpParams } from '@angular/common/http';
+import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
+import { I18n } from '@ngx-translate/i18n-polyfill';
+import { headerTitleDCU } from '../consts/static-text.const';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -22,15 +25,23 @@ export class DataConcentratorUnitsComponent implements OnInit {
   dataSource: any = {};
   totalCount = 0;
   filters = 'no filter';
-
-  constructor(public usersSampleService: UsersSampleService) {}
+  allMode = '';
+  checkBoxesMode = '';
+  constructor(public usersSampleService: UsersSampleService, private sidebarService: SidebarService, private i18n: I18n) {
+    this.sidebarService.headerTitle = this.i18n(headerTitleDCU);
+  }
 
   ngOnInit() {
+    this.allMode = 'page';
+    this.checkBoxesMode = 'always';
+
     this.columns = [
       { dataField: 'id', caption: 'ID', fixed: true, width: 100 },
-      { dataField: 'first_name', caption: 'First name', fixed: true },
+      { dataField: 'first_name', caption: 'First name', fixed: true, width: 170 },
+      { dataField: 'gender', caption: 'Sample', fixed: true, width: 50, cellTemplate: 'cellTemplateIcon' },
       { dataField: 'last_name', caption: 'Last name' },
       { dataField: 'email', caption: 'E mail' },
+      { dataField: 'ip_address', caption: 'IP', cellTemplate: 'cellTemplate' },
       { dataField: 'gender', caption: 'Gender', fixed: true, fixedPosition: 'right', width: 100 }
     ];
 
@@ -80,5 +91,16 @@ export class DataConcentratorUnitsComponent implements OnInit {
           });
       }
     });
+  }
+
+  refreshGrid() {
+    this.grid.instance.refresh();
+  }
+}
+
+@Pipe({ name: 'stringifyEmplyees' })
+export class StringifyEmployeesPipe implements PipeTransform {
+  transform(employees: Data[]) {
+    return employees.map(employee => employee.first_name + ' ' + employee.last_name).join(', ');
   }
 }
