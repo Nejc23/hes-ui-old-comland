@@ -28,6 +28,16 @@ export class GridItemsDataInterceptor {
         powerlineName: 'PW27',
         lastUpdateTimestamp: moment().format(),
         unit: 'A'
+      },
+      {
+        // current graph
+        id: 'g3',
+        value: this.generateRandomInteger(0, 500),
+        deviceName: 'Device #53',
+        powerlineName: 'PW27',
+        lastUpdateTimestamp: moment().format(),
+        unit: 'A',
+        graphValues: ['1212121']
       }
     ];
     return of(

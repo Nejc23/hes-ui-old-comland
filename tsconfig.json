@@ -19,7 +19,10 @@
       "es2018",
       "dom"
     ],
-    "paths": {   
+    "paths": {
+      "jszip": [
+        "node_modules/jszip/dist/jszip.min.js"
+      ]
     }
   }
 }

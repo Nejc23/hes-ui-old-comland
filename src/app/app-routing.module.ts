@@ -29,7 +29,10 @@ const appRoutes: Routes = [
         path: 'dataConcentratorUnits',
         loadChildren: 'src/app/features/data-concentrator-units/modules/data-concentrator-units.module#DataConcentratorUnitsModule'
       },
-
+      {
+        path: 'meterUnits',
+        loadChildren: 'src/app/features/meter-units/modules/meter-units.module#MeterUnitsModule'
+      },
       {
         path: 'dashboard',
         loadChildren: 'src/app/features/dashboard/modules/dashboard.module#DashboardModule'
@@ -41,6 +44,10 @@ const appRoutes: Routes = [
       {
         path: 'help',
         loadChildren: 'src/app/features/help/modules/help.module#HelpModule'
+      },
+      {
+        path: 'devextreme',
+        loadChildren: 'src/app/features/samples/devextreme/modules/devextreme.module#DevextremeModule'
       }
     ]
   },

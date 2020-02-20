@@ -30,3 +30,6 @@ $FontPathOpenSans: "assets/fonts/open-sans";
 // Custom dashboard: gridster + widget
 @import 'custom-style/widget-grid';
 @import 'custom-style/widget';
+
+@import "~ag-grid-community/dist/styles/ag-grid.css";
+@import "~ag-grid-community/dist/styles/ag-theme-balham.css";

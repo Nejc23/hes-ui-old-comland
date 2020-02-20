@@ -14,6 +14,8 @@ import { UserRequestResetPasswordInterceptor } from './authentication/user-reque
 import { UserChangePasswordInterceptor } from './authentication/user-change-password.interceptor';
 import { UserNewPasswordInterceptor } from './authentication/user-new-password.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { SampleInterceptor } from './codelists/sample/sample.interceptor';
+import { UsersSampleInterceptor } from './codelists/users-sample/users-sample.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -30,6 +32,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       of(null)
         .pipe(
           mergeMap(() => {
+            if (SampleInterceptor.canInterceptSample(request)) {
+              return SampleInterceptor.interceptSample();
+            }
+            if (UsersSampleInterceptor.canInterceptUsersSample(request)) {
+              return UsersSampleInterceptor.interceptUsersSample(request);
+            }
+
             //#region  dashboards
             /* TODO DK: to se ne rabi vrži ven
             if (DashboardInterceptor.canInterceptDashboards(request)) {

@@ -52,6 +52,15 @@ export class GridInterceptor {
             y: 0,
             id: '00101506-60a3-4973-b833-89a9b1fcaac7',
             properties: null
+          },
+          {
+            cols: 2,
+            rows: 2,
+            widgetType: WidgetType.current,
+            x: 0,
+            y: 0,
+            id: 'g3',
+            properties: null
           }
         ],
         refreshIntervalActive: true
@@ -113,6 +122,15 @@ export class GridInterceptor {
             x: 2,
             y: 0,
             id: '00101506-60a3-4973-b833-89a9b1fcaac7',
+            properties: null
+          },
+          {
+            cols: 2,
+            rows: 2,
+            widgetType: WidgetType.current,
+            x: 0,
+            y: 0,
+            id: 'g3',
             properties: null
           }
         ],

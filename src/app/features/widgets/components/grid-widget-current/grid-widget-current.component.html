@@ -37,7 +37,20 @@
     <div class="d-block text-center mt-2 mb-2 display-4">
       {{currentValueWithUnit}}
     </div>    
-
+    <div *ngIf="graphData">
+        <dx-chart        
+        id="chart"        
+        [dataSource]="population">
+        <dxo-legend [visible]="false"></dxo-legend>
+        <dxi-series type="bar" color="#37D7A8"></dxi-series>
+        <dxo-argument-axis [tickInterval]="10">
+            <dxo-label>
+                <dxo-format type="decimal"></dxo-format>
+            </dxo-label>
+        </dxo-argument-axis>
+      </dx-chart
+      >
+    </div>
   </div>
 
 </ng-container>

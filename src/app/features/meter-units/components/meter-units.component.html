@@ -1,0 +1,44 @@
+<div>  
+ 
+      <ag-grid-angular
+              style="height: calc(100% - 25px);"
+              #agGrid
+              domLayout='autoHeight'
+              suppressSizeToFit=true
+              class="ag-theme-balham"
+              [rowData]="rowData"
+              [icons]="icons"
+              [pagination]="true"
+              [paginationPageSize]="5"
+              [multiSortKey]="'ctrl'"
+              [enableServerSideSorting]="true"
+              
+              [rowModelType] = "'infinite'"
+              [columnDefs]="columnDefs">
+      </ag-grid-angular>
+  </div>
+<button (click)="saveState()">Save State</button>
+<ng-template #colTemplate let-rowIndex="rowIndex" let-row="row" >
+  Template {{ row.name }}
+</ng-template>
+<div>  
+ 
+  <ag-grid-angular
+          style="height: calc(100% - 25px);"
+          #agGridServer
+          domLayout='autoHeight'
+          suppressSizeToFit=true
+          class="ag-theme-balham"
+          [rowData]="rowData"      
+          [columnDefs]="columnDefs2"
+          [gridOptions]="gridOptions"
+          [pagination]="true" 
+          [cacheOverflowSize]="cacheOverflowSize"
+          [maxConcurrentDatasourceRequests]="maxConcurrentDatasourceRequests"
+          [infiniteInitialRowCount]="infiniteInitialRowCount"          
+          (gridReady)="onGridReady($event)"
+          (paginationChanged)="onPaginationChanged($event)"
+        
+         >
+  </ag-grid-angular>
+</div>

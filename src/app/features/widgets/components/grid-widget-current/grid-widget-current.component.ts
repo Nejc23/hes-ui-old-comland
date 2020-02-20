@@ -15,7 +15,8 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-grid-widget-current',
-  templateUrl: './grid-widget-current.component.html'
+  templateUrl: './grid-widget-current.component.html',
+  styleUrls: ['./grid-widget-current.component.css']
 })
 export class GridWidgetCurrentComponent implements OnInit, OnDestroy, GridWidgetAccess {
   @Input() content: GridItemContent;
@@ -28,6 +29,37 @@ export class GridWidgetCurrentComponent implements OnInit, OnDestroy, GridWidget
 
   subscription: Subscription;
   item: DashboardGridItem;
+
+  population: any[] = [
+    {
+      arg: 1950,
+      val: 2525778669
+    },
+    {
+      arg: 1960,
+      val: 3026002942
+    },
+    {
+      arg: 1970,
+      val: 3691172616
+    },
+    {
+      arg: 1980,
+      val: 4449048798
+    },
+    {
+      arg: 1990,
+      val: 5320816667
+    },
+    {
+      arg: 2000,
+      val: 6127700428
+    },
+    {
+      arg: 2010,
+      val: 6916183482
+    }
+  ];
 
   constructor(private dashboardStore: DashboardStoreService, private widgetSettingsService: WidgetSettingsService, private i18n: I18n) {
     this.subscription = this.dashboardStore.customObservable.subscribe(() => {

@@ -11,7 +11,7 @@ import { GridItemControlsComponent } from '../components/grid/grid-item-controls
 import { GridItemContentComponent } from '../components/grid/grid-item-content.component';
 import { GridWidgetCurrentComponent } from '../../widgets/components/grid-widget-current/grid-widget-current.component';
 import { WidgetGridItemDirective } from '../../widgets/directives/widget-grid-item.directive';
-
+import { DxChartModule } from 'devextreme-angular';
 @NgModule({
   entryComponents: [DashboardSettingsComponent, GridWidgetCurrentComponent],
   declarations: [
@@ -25,6 +25,6 @@ import { WidgetGridItemDirective } from '../../widgets/directives/widget-grid-it
     WidgetGridItemDirective,
     GridWidgetCurrentComponent
   ],
-  imports: [SharedModule, DashboardRoutingModule, GridsterModule]
+  imports: [SharedModule, DashboardRoutingModule, GridsterModule, DxChartModule]
 })
 export class DashboardModule {}

@@ -42,15 +42,21 @@ export class SidebarService {
         routeLink: '/dcuReadingConfiguration',
         hasChildren: false,
         children: []
-      }
-      /* {
+      },
+      {
+        title: this.i18n(`Sample Devextreme`),
+        routeLink: '/devextreme',
+        hasChildren: false,
+        children: []
+      },
+      {
         title: this.i18n(`Dashboard`),
         routeLink: '/dashboard',
         hasChildren: false,
         permission: FunctionalityEnumerator.dashboard,
         children: []
-      },
-      {
+      } /*
+,      {
         title: this.i18n(`Users`),
         routeLink: '/users',
         hasChildren: false,

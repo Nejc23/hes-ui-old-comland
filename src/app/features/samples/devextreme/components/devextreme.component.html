@@ -1,0 +1,30 @@
+<div class="form-row mt-0 h2 text-primary">Devextreme sample</div>
+<div class="form-row mt-0 bg-white"><button (click)="onRefresh()">Refresh grid</button></div>
+<div class="bg-white">
+<dx-data-grid
+    id="gridContainer"
+    [dataSource]="dataSource"
+    [columns]="columns"    
+    [allowColumnResizing]="true"
+    [allowColumnReordering]="true"
+    [showRowLines]="true"
+    [showBorders]="true"
+    [columnAutoWidth]="true"
+    [remoteOperations]="true"
+    [focusStateEnabled]="true">
+    <dxo-column-fixing [enabled]="true"></dxo-column-fixing> 
+  <dxo-pager
+    alignment="left"
+    [showPageSizeSelector]="true"
+    [allowedPageSizes]="[10, 20, 50]"
+    [showNavigationButtons]="true">
+  </dxo-pager>
+  <div *dxTemplate="let item of 'item'">     
+    <ng-template [ngTemplateOutlet]="template || defaultTemplate" [ngTemplateOutletContext]="{item: item}"></ng-template>  
+  </div>  
+</dx-data-grid>
+</div>
+<ng-template  #template let-item="item">
+  custom - {{item.value}}
+</ng-template>
+
