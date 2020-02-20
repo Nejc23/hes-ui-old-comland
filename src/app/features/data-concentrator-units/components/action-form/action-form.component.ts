@@ -10,6 +10,7 @@ export class ActionFormComponent implements OnInit {
   form: FormGroup;
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
+  @Output() columnsChange: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private i18n: I18n, public fb: FormBuilder) {}
 
@@ -33,7 +34,9 @@ export class ActionFormComponent implements OnInit {
 
   onFilter() {}
 
-  onColumns() {}
+  onColumns() {
+    this.columnsChange.emit();
+  }
 
   onRefresh() {
     this.refresh.emit();

@@ -15,7 +15,7 @@
     <span class="align-text-bottom">{{totalCount}} items - {{filters}}</span>    
   </div>
   <div class="ml-auto pr-2">
-    <app-action-form (refresh)="refreshGrid()"></app-action-form>     
+    <app-action-form (refresh)="refreshGrid()" (columnsChange)="setColumns()"></app-action-form>     
   </div>
 </div>
 

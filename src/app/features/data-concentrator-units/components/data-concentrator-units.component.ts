@@ -27,6 +27,8 @@ export class DataConcentratorUnitsComponent implements OnInit {
   filters = 'no filter';
   allMode = '';
   checkBoxesMode = '';
+  selectedRows;
+
   constructor(public usersSampleService: UsersSampleService, private sidebarService: SidebarService, private i18n: I18n) {
     this.sidebarService.headerTitle = this.i18n(headerTitleDCU);
   }
@@ -38,7 +40,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
     this.columns = [
       { dataField: 'id', caption: 'ID', fixed: true, width: 100 },
       { dataField: 'first_name', caption: 'First name', fixed: true, width: 170 },
-      { dataField: 'gender', caption: 'Sample', fixed: true, width: 50, cellTemplate: 'cellTemplateIcon' },
+      { dataField: 'gender', caption: '', fixed: true, width: 50, cellTemplate: 'cellTemplateIcon' },
       { dataField: 'last_name', caption: 'Last name' },
       { dataField: 'email', caption: 'E mail' },
       { dataField: 'ip_address', caption: 'IP', cellTemplate: 'cellTemplate' },
@@ -95,6 +97,18 @@ export class DataConcentratorUnitsComponent implements OnInit {
 
   refreshGrid() {
     this.grid.instance.refresh();
+  }
+
+  setColumns() {
+    this.columns = [
+      { dataField: 'id', caption: 'ID', fixed: true, width: 100, visible: false },
+      { dataField: 'first_name', caption: 'First name', fixed: true, width: 170 },
+      { dataField: 'gender', caption: '', fixed: true, width: 50, cellTemplate: 'cellTemplateIcon' },
+      { dataField: 'last_name', caption: 'Last name' },
+      { dataField: 'email', caption: 'E mail' },
+      { dataField: 'ip_address', caption: 'IP', cellTemplate: 'cellTemplate' },
+      { dataField: 'gender', caption: 'Gender', fixed: true, fixedPosition: 'right', width: 100 }
+    ];
   }
 }
 
