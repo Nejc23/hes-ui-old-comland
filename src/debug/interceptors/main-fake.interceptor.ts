@@ -16,6 +16,7 @@ import { UserNewPasswordInterceptor } from './authentication/user-new-password.i
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { SampleInterceptor } from './codelists/sample/sample.interceptor';
 import { UsersSampleInterceptor } from './codelists/users-sample/users-sample.interceptor';
+import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -32,6 +33,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
       of(null)
         .pipe(
           mergeMap(() => {
+            // DCU
+            if (DataConcentratorUnitsListInterceptor.canInterceptDataConcentratorUnitsList(request)) {
+              return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList(request);
+            }
+
             if (SampleInterceptor.canInterceptSample(request)) {
               return SampleInterceptor.interceptSample();
             }

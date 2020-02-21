@@ -15,7 +15,7 @@
     <span class="align-text-bottom">{{totalCount}} items - {{filters}}</span>    
   </div>
   <div class="ml-auto pr-2">
-    <app-action-form (refresh)="refreshGrid()" (columnsChange)="setColumns()"></app-action-form>     
+    <app-action-form (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>     
   </div>
 </div>
 
@@ -33,14 +33,6 @@
     [columnAutoWidth]="true"
     [remoteOperations]="true"
     [focusStateEnabled]="true">
-    
-    <div *dxTemplate="let cell of 'cellTemplate'">
-        <div class="text-primary">{{cell.data.last_name}}</div>
-    </div>
-    <div *dxTemplate="let cell of 'cellTemplateIcon'">
-      <i class='uils uil-clock text-secondary'></i>
-      <!--<span *ngIf="cell.data.gender === 'Male'" class="iconify uils uil-clock text-secondary" title="{{cell.data.gender}}"></span>-->
-  </div>
   <dxo-selection
     [selectAllMode]="allMode"
     [showCheckBoxesMode]="checkBoxesMode"
@@ -54,12 +46,48 @@
       [allowedPageSizes]="[20, 50, 100, 150]"
       [showNavigationButtons]="true">
     </dxo-pager>  
+
+    <!-- templates -->
+    <div *dxTemplate="let cell of 'cellTemplateName'">
+      <div class="text-primary txt-overflow" title="{{ cell.text }}">{{ cell.text }}</div>
+    </div>
+
+    <div *dxTemplate="let cell of 'cellTemplateNextReadIcon'">
+      <div *ngIf="cell.data.nextRead" class="inline-block pt-0 pb-0 txt-overflow">
+        <i class='uil uil-clock text-secondary' title="{{cell.data.nextRead}}"></i>
+      </div>
+    </div>
+   
+    <div *dxTemplate="let cell of 'cellTemplateMeters'">
+      <div *ngIf="cell.data.metersValue" class="text-left row">
+        <div class="col-1 text-left text-primary mr-0">{{cell.data.metersValue}}</div>
+        <div *ngIf="cell.data.metersUp" class="col-2 text-success align-right">
+          <i class='uil uil-arrow-up text-left'></i><span class="small">{{cell.data.metersPercent}} %</span>
+        </div>
+        <div *ngIf="!cell.data.metersUp" class="col-2 text-danger align-right">
+          <i class='uil uil-arrow-down text-left small'></i><span class="small">{{cell.data.metersPercent}} %</span>
+        </div>
+      </div>
+      <div *ngIf="!cell.data.metersValue" class="text-left text-secondary">
+        N/A
+      </div>
+    </div>
+
+    <div *dxTemplate="let cell of 'cellTemplateReadStatus'" class="text-left row">
+      <div>
+        <i *ngIf="cell.data.readStatusPercent <= 80" class='fa fa-circle text-danger  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
+        <i *ngIf="cell.data.readStatusPercent > 80 && cell.data.readStatusPercent <= 90" class='fa fa-circle text-warning  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
+        <i *ngIf="cell.data.readStatusPercent > 90" class='fa fa-circle text-success text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>         
+      </div>
+      <div class="col-1 text-primary align-right"><span> {{cell.data.readStatusPercent}} %</span></div>
+    </div>
+
   </dx-data-grid>
 </div>
 
 <div class="selected-data">
   <span class="caption">Selected Records:</span>
   <span>
-      {{grid.selectedRowKeys ? (grid.instance.getSelectedRowsData() | stringifyEmplyees) : 'Nobody has been selected'}}
+      {{grid.selectedRowKeys ? (grid.instance.getSelectedRowsData() | stringifyData) : 'Nothing has been selected'}}
   </span>
 </div>
