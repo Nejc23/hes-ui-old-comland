@@ -1,6 +1,6 @@
-<div class="form-row mt-0">
+<div class="form-row mt-3">
   <div class="pl-2 pr-2">
-      <app-header-title></app-header-title>       
+      <app-header-title></app-header-title>
     </div>
     <div class="col-1 float-left">
       <i class="fas fa-plus-circle fa-2x text-primary"></i>
@@ -12,10 +12,10 @@
 
 <div class="form-row mt-0 bg-white">
   <div class="pl-2 align-bottom pt-3">
-    <span class="align-text-bottom">{{totalCount}} items - {{filters}}</span>    
+    <span class="align-text-bottom">{{totalCount}} items &middot; {{filters}}</span>
   </div>
-  <div class="ml-auto pr-2">
-    <app-action-form (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>     
+  <div class="ml-auto mt-2 mb-2 mr-2">
+    <app-action-form (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>
   </div>
 </div>
 
@@ -24,9 +24,9 @@
   <dx-data-grid #grid
     id="gridContainer"
     [dataSource]="dataSource"
-    [columns]="columns"    
+    [columns]="columns"
     [allowColumnResizing]="true"
-    [allowColumnReordering]="true"    
+    [allowColumnReordering]="true"
     [(selectedRowKeys)]="selectedRows"
     [showRowLines]="true"
     [showBorders]="true"
@@ -38,7 +38,7 @@
     [showCheckBoxesMode]="checkBoxesMode"
     mode="multiple"
   ></dxo-selection>
-    <dxo-column-fixing [enabled]="true"></dxo-column-fixing> 
+    <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
     <dxo-paging [pageSize]="20"></dxo-paging>
     <dxo-pager
       alignment="left"

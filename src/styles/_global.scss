@@ -7,6 +7,7 @@ html {
 
 body {
   height: 100%;
+  background-color: $gray-200;
 }
 
 a,
@@ -24,7 +25,6 @@ button {
 
 .breadcrumb {
   margin-top: -15px;
- 
 }
 
 // Main page wrapper
@@ -36,7 +36,7 @@ button {
     background-color: $gray-100;
     width: 100%;
     height: 100vh;
-    overflow-x: hidden;    
+    overflow-x: hidden;
     padding-top: $spacer;
 
     #content {
@@ -81,6 +81,12 @@ label:not(.control-label) {
   }
 }
 
+small, .small {
+  font-size: $font-size-base * .75;
+  color: $gray-700;
+  font-weight: 500;
+}
+
 .bg-edit {
   background-color: $gray-300;
   width: calc(100% - 20px) !important;
@@ -115,24 +121,6 @@ label:not(.control-label) {
   min-width: 270px;
 }
 
-.ytitle,
-.y2title,
-.y3title,
-.y4title,
-.y5title,
-.y6title,
-.y7title,
-.y8title {
-  font-size: 12px !important;
-}
-
-.ytick,
-.y2tick,
-.y3tick,
-.y4tick,
-.y5tick,
-.y6tick,
-.y7tick,
-.y8tick {
-  transform: translateX(-10px);
+h2 {
+  color: $gray-700;
 }

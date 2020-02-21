@@ -115,3 +115,38 @@
   width: 100%;
   text-align: right;
 }
+
+.form-row {
+
+  > .col, .form-row > [class*="col-"] {
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-bottom: -4px;
+  }
+
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.form-group {
+  margin-bottom: 0px;
+}
+
+.btn.btn-secondary.d-inline-block.mb-1 {
+  margin-left: -2px;
+}
+
+#btnRedo {
+  margin-right: -4px;
+}
+
+#searchInput {
+  .form-control.ng-pristine.ng-valid {
+    border-right: 0px !important;
+  }
+}
+
+#searchButton {
+  border-left: 0px;
+  margin-left: -1px;
+}

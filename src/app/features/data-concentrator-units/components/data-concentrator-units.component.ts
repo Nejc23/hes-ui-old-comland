@@ -21,7 +21,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
   columns = [];
   dataSource: any = {};
   totalCount = 0;
-  filters = 'no filter';
+  filters = '';
   allMode = '';
   checkBoxesMode = '';
   selectedRows;
@@ -34,6 +34,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
     private i18n: I18n
   ) {
     this.sidebarService.headerTitle = this.i18n(headerTitleDCU);
+    this.filters = this.i18n('No filter applied');
   }
 
   ngOnInit() {
@@ -110,7 +111,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
             };
           })
           .catch(error => {
-            throw 'Data Loading Error';
+            throw new Error('Data Loading Error');
           });
       }
     });
