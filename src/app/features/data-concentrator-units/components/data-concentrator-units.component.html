@@ -65,7 +65,7 @@
           <i class='uil uil-arrow-up text-left'></i><span class="small">{{cell.data.metersPercent}} %</span>
         </div>
         <div *ngIf="!cell.data.metersUp" class="col-2 text-danger align-right">
-          <i class='uil uil-arrow-down text-left small'></i><span class="small">{{cell.data.metersPercent}} %</span>
+          <i class='uil uil-arrow-down text-left small text-danger'></i><span class="small text-danger">{{cell.data.metersPercent}} %</span>
         </div>
       </div>
       <div *ngIf="!cell.data.metersValue" class="text-left text-secondary">
