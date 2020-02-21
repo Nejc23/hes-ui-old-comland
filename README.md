@@ -21,7 +21,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Docker Build
 
 Run command  `docker build -t <image_name> -f .ops/Dockerfile . ` where <image_name> is name of image you want 
-Curently used image name is eu.gcr.io/round-runner-126807/angular-template:unstable
+Curently used image name is eu.gcr.io/round-runner-126807/advance-hes:unstable
 
 ## Running docker image
 

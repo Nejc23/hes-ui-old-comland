@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "angular-template": {
+    "advance-hes": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-template",
+            "outputPath": "dist/advance-hes",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -57,7 +57,7 @@
               ]
             },
             "production": {
-              "outputPath": "dist/angular-template/en",
+              "outputPath": "dist/advance-hes/en",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -86,7 +86,7 @@
               "baseHref": "/en/"
             },
             "production-sl": {
-              "outputPath": "dist/angular-template/sl",
+              "outputPath": "dist/advance-hes/sl",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -152,21 +152,21 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-template:build:develop"
+            "browserTarget": "advance-hes:build:develop"
           },
           "configurations": {
             "production": {
-              "browserTarget": "angular-template:build:production"
+              "browserTarget": "advance-hes:build:production"
             },
             "develop-sl": {
-              "browserTarget": "angular-template:build:develop-sl"
+              "browserTarget": "advance-hes:build:develop-sl"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "angular-template:build"
+            "browserTarget": "advance-hes:build"
           }
         },
         "test": {
@@ -239,7 +239,7 @@
         }
       }
     },
-    "angular-template-e2e": {
+    "advance-hes-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -248,11 +248,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "angular-template:serve"
+            "devServerTarget": "advance-hes:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "angular-template:serve:production"
+              "devServerTarget": "advance-hes:serve:production"
             }
           }
         },
@@ -268,7 +268,7 @@
       }
     }
   },
-  "defaultProject": "angular-template",
+  "defaultProject": "advance-hes",
   "schematics": {
     "@schematics/angular:component": {
       "styleext": "scss"
