@@ -3,13 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
-import { breadcrumbNameDCU } from '../consts/static-text.const';
-
 const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: breadcrumbNameDCU,
+      breadcrumb: 'Overview - Data Concentrator Units',
       permission: FunctionalityEnumerator.dashboard
     },
     children: [

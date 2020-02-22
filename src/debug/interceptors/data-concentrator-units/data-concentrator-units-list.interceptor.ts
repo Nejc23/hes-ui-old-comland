@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
-import { DashboardModel } from 'src/app/core/repository/interfaces/dashboards/dashboard.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
@@ -13,16 +11,14 @@ export class DataConcentratorUnitsListInterceptor {
   constructor() {}
 
   static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    console.log(request.body);
-
     let skip = 0;
     let take = 0;
     let sortColId = '';
-    let sort = '';
     let sortedUsers = data;
 
     if (request.body) {
       const params = request.body as GridRequestParams;
+
       skip = params.skip;
       take = params.take;
 
@@ -37,34 +33,6 @@ export class DataConcentratorUnitsListInterceptor {
         });
       }
     }
-
-    /*let strIntoObj: SortObj[];
-    let sortColId = '';
-    let sort = '';
-    let sortedUsers = data;
-    request.body.updates.forEach(element => {
-      if (element.param === 'skip') {
-        skip = element.value;
-      }
-      if (element.param === 'take') {
-        take = element.value;
-      }
-
-      if (element.param === 'sort') {
-        strIntoObj = JSON.parse(element.value);
-        if (strIntoObj && strIntoObj.length > 0) {
-          strIntoObj.forEach(elementS => {
-            sortColId = elementS.selector;
-            sort = elementS.desc === true ? 'desc' : 'asc';
-          });
-          if (sort === 'asc') {
-            sortedUsers = _.sortBy(data, sortColId);
-          } else {
-            sortedUsers = _.sortBy(data, sortColId).reverse();
-          }
-        }
-      }
-    });*/
 
     const body: GridResponse<DataConcentratorUnitsList> = {
       data: sortedUsers.slice(skip, Number(skip) + Number(take)), // sortedUsers.slice(request.body.startRow, request.body.endRow),
@@ -82,7 +50,7 @@ export class DataConcentratorUnitsListInterceptor {
   }
 
   static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
-    return new RegExp(`/api/dcu/[0-9]+$`).test(request.url);
+    return new RegExp(`/api/data-concentrator-units`).test(request.url);
   }
 }
 
@@ -100,8 +68,8 @@ const data: DataConcentratorUnitsList[] = [
     vendor: 'Landis+Gy',
     idNumber: '771929394001',
     ip: '234.88.127.4',
-    lastCommunication: '2019-12-03T07:03:02',
-    tags: ['tag31', 'tag32']
+    lastCommunication: '2020-02-21T07:03:02',
+    tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572']
   },
   {
     id: 49454,
@@ -116,7 +84,7 @@ const data: DataConcentratorUnitsList[] = [
     vendor: 'Iskra',
     idNumber: '210808585671',
     ip: null,
-    lastCommunication: null,
+    lastCommunication: '2020-02-19T07:03:02',
     tags: null
   },
   {

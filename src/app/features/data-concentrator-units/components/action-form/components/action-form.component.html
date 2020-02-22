@@ -1,0 +1,23 @@
+<div class="form-row">
+  <div class="col-auto">
+    <app-input-text id="searchInput" label=""  [inputType]="'search'" [form]="form" [property]="searchProperty" class="d-inline-block" [placeholder]="staticTextService.placeholderSearch"> </app-input-text>
+    <button id="searchButton" type="button" class="btn btn-outline-secondary d-inline-block mb-1" (click)="onSearch()" [ngbTooltip]="tipContentSearch"
+    ><i class="fa fa-search"><span i18n></span></i></button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onFilter()"
+    [ngbTooltip]="tipContentFilter"><i class="fa fa-filter"><span i18n></span></i></button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onColumns()"
+    [ngbTooltip]="tipContentColumns"><i class="fa fa-columns"><span i18n></span></i></button>
+  </div>
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onRefresh()" id="btnRedo"
+    [ngbTooltip]="tipContentRefresh"><i class="fa fa-redo"><span i18n></span></i></button>
+  </div>
+</div>
+<ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
+<ng-template #tipContentFilter><span i18n>Filter results</span></ng-template>
+<ng-template #tipContentColumns><span i18n>Manage columns</span></ng-template>
+<ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
