@@ -4,7 +4,7 @@
     <app-header-title></app-header-title>
   </div>
   <div class="col-1 float-left">
-    <i class="fas fa-plus-circle fa-2x text-primary" [ngbTooltip]="tipContentAdd"></i>
+    <i class="fas fa-plus-circle fa-2x text-primary" id="tipContentAdd"></i>
   </div>
   <div class="ml-auto pl-2 pr-2 pb-1">
     <app-breadcrumb></app-breadcrumb>
@@ -12,13 +12,27 @@
 </div>
 
 <!-- row total items, selected filter name --> 
-<div class="form-row mt-0 bg-white">
+<div class="form-row mt-0 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
   <div class="pl-2 align-bottom pt-3">
     <span class="align-text-bottom" i18n>{{totalCount}} items &middot; {{filters}}</span>
   </div>
   <div class="ml-auto mt-2 mb-2 mr-2">
     <app-action-form (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>
   </div>
+</div>
+
+<div class="form-row mt-0 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
+  <div class="pl-2 col-1 align-bottom pt-3 text-white">
+    <span class="align-text-bottom" i18n>{{grid.selectedRowKeys.length}} items selected</span>
+  </div>
+    <div class="col-auto pt-1">
+      <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUploadConfiguration()"
+      ><span i18n>Upload Configuration</span></button>
+    </div>
+    <div class="col-auto pt-1">
+      <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUpgrade()"
+      ><span i18n>Upgrade</span></button>
+    </div>
 </div>
 
 <!-- grid -->
@@ -34,7 +48,8 @@
     [showBorders]="gridSettings.showBorders"
     [columnAutoWidth]="gridSettings.columnAutoWidth"
     [remoteOperations]="gridSettings.remoteOperations"
-    [focusStateEnabled]="gridSettings.focusStateEnabled">
+    [focusStateEnabled]="gridSettings.focusStateEnabled"
+    (onCellHoverChanged) = "onCellHoverChanged($event)">
     <dxo-selection
       [selectAllMode]="gridSettings.allMode"
       [showCheckBoxesMode]="gridSettings.checkBoxesMode"
@@ -53,7 +68,7 @@
 
     <!-- template for column name -->
     <div *dxTemplate="let cell of 'cellTemplateName'">
-      <div class="text-primary txt-overflow" title="{{cell.text}}">{{ cell.text }}</div>
+      <div class="text-primary txt-overflow" [ngbTooltip]="cell.text">{{ cell.text }}</div>
     </div>
     <!-- template for column next read icon -->
     <div *dxTemplate="let cell of 'cellTemplateNextReadIcon'">
@@ -102,14 +117,30 @@
   </dx-data-grid>
 </div>
 
+<ng-template #tipContentAdd><span i18n>Add or import DCU</span></ng-template>
 
+
+<!-- TODO check best tooltips consider using them inside grid for all columns when text not fit to cell-->
+<dx-tooltip  [target]="TooltipTarget" showEvent="dxhoverstart"
+hideEvent="dxhoverend">
+  <div *dxTemplate="let data of 'content'">
+    {{ ToolTipText }}
+  </div>
+</dx-tooltip>
+
+
+<dx-tooltip
+    target="#tipContentAddDx"
+    showEvent="dxhoverstart"
+    hideEvent="dxhoverend">
+      <span i18n>Add or import DCU</span>
+</dx-tooltip>
 
 <!-- TODO remove only for sample selected items -->
-<div class="selected-data">
+<!-- <div class="selected-data">
   <span class="caption">Selected Records:</span>
   <span>
       {{grid.selectedRowKeys ? (grid.instance.getSelectedRowsData() | stringifyData) : 'Nothing has been selected'}}
   </span>
-</div>
+</div>--->
 
-<ng-template #tipContentAdd><span i18n>Add or import DCU</span></ng-template>

@@ -23,7 +23,7 @@ export class DataConcentratorUnitsGridService {
   public setGridDefaultColumns() {
     this.columns = [
       { dataField: 'id', caption: 'ID', fixed: true, width: 20, visible: false },
-      { dataField: 'status', caption: this.i18n('Status'), fixed: true, width: 100 },
+      { id: 'status', dataField: 'status', caption: this.i18n('Status'), fixed: true, width: 100, title: 'status' },
       { dataField: 'nextRead', caption: '', fixed: true, width: 60, cellTemplate: 'cellTemplateNextReadIcon' },
       { dataField: 'name', caption: this.i18n('Name'), fixed: true, width: 180, cellTemplate: 'cellTemplateName' },
       { dataField: 'metersValue', caption: this.i18n('Meters'), fixed: true, width: 120, cellTemplate: 'cellTemplateMeters' },

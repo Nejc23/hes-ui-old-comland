@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, PipeTransform, Pipe, OnDestroy, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -35,7 +34,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // TODO get company id from meni
   companyId = 0;
-
+  TooltipTarget: any;
+  ToolTipText: string = '';
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private sidebarService: SidebarService,
@@ -87,17 +87,58 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.grid.instance.refresh();
   }
 
+  // checking if at least one row on the grid is selected
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.grid && this.grid.selectedRowKeys && this.grid.selectedRowKeys.length > 0) {
+      return true;
+    }
+    return false;
+  }
+
+  // TODO
+  // button click upload configuration
+  onUploadConfiguration() {
+    let str = '';
+    this.grid.selectedRowKeys.forEach(element => {
+      str = str + element + ', ';
+    });
+    alert('selected items for upload config: ' + str);
+  }
+
+  // TODO
+  // button click upgrade
+  onUpgrade() {
+    let str = '';
+    this.grid.selectedRowKeys.forEach(element => {
+      str = str + element + ', ';
+    });
+    alert('selected items for upgrade: ' + str);
+  }
+
   // TODO
   // button click for set visible grid columns
   setVisibilityGridColumns() {
     this.columns = this.dataConcentratorUnitsGridService.setCustomVisibilityGridColumns();
   }
+
+  // for tooltips demo
+  onCellHoverChanged(event: any) {
+    /*
+  if (event.rowType === "data") {
+    this.TooltipTarget = event.cellElement;
+    if (event.eventType === 'mouseover') {
+      console.log(event.value);
+      console.log(event.cellElement);
+      this.ToolTipText = event.value;
+    }
+  }*/
+  }
 }
 
 // TODO only for sample - remove !!!
-@Pipe({ name: 'stringifyData' })
+/*@Pipe({ name: 'stringifyData' })
 export class StringifyDataPipe implements PipeTransform {
   transform(data: DataConcentratorUnitsList[]) {
     return data.map(data => data.idNumber).join(', ');
   }
-}
+}*/
