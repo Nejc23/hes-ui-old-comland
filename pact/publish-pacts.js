@@ -16,9 +16,9 @@ const opts = {
       "./output/ui-api.json"
     ),
   ],
-  pactBroker: 'https://otlm-pactbroker.comland.si:8443/', // set pact broker !!!
-  pactBrokerUsername: "pact",
-  pactBrokerPassword: "Jw0NE#9ihby2#",
+  pactBroker: 'https://advance-hes.comland.si:9443/', // set pact broker !!!
+  pactBrokerUsername: "pactahes",
+  pactBrokerPassword: "ahesJw0NE#9ihby2#",
   consumerVersion: '1'
 }
 

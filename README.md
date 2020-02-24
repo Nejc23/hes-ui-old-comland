@@ -33,11 +33,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Pact infractructure
 
-U: ?????
-P: ??????
+U: pactahes
+P: ahesJw0NE#9ihby2#
 
 Pact broker infrastructure is stored in resources folder.
-Access url https://???-pactbroker.comland.si:8443/ if it is not running run jenkins job https://????/
+Access url  https://advance-hes.comland.si:9443/ 
 
 ## Pact commands
 `npm run pact` - runs pact tests.
