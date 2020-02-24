@@ -126,15 +126,24 @@
 
   margin-left: 0px;
   margin-right: 0px;
+
+  .btn.btn-secondary.d-inline-block.mb-1 {
+      margin-left: -2px;
+      padding: .1rem;
+
+      .uil {
+        background-color: transparent;
+        font-size: 1.4rem;
+        color: $gray-700;
+      }
+  }
+
 }
 
 .form-group {
   margin-bottom: 0px;
 }
 
-.btn.btn-secondary.d-inline-block.mb-1 {
-  margin-left: -2px;
-}
 
 #btnRedo {
   margin-right: -4px;
