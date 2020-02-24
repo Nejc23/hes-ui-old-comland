@@ -11,7 +11,7 @@
   </div>
 </div>
 
-<!-- row total items, selected filter name --> 
+<!-- row total items, selected filter name -->
 <div class="form-row mt-0 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
   <div class="pl-2 align-bottom pt-3">
     <span class="align-text-bottom" i18n>{{totalCount}} items &middot; {{filters}}</span>
@@ -64,11 +64,11 @@
       [showPageSizeSelector]="gridSettings.pager.showPageSizeSelector"
       [allowedPageSizes]="gridSettings.pager.allowedPageSizes"
       [showNavigationButtons]="gridSettings.pager.showNavigationButtons">
-    </dxo-pager>  
+    </dxo-pager>
 
     <!-- template for column name -->
     <div *dxTemplate="let cell of 'cellTemplateName'">
-      <div class="text-primary txt-overflow" [ngbTooltip]="cell.text">{{ cell.text }}</div>
+      <div class="text-primary txt-overflow" placement="right left" [ngbTooltip]="cell.text">{{ cell.text }}</div>
     </div>
     <!-- template for column next read icon -->
     <div *dxTemplate="let cell of 'cellTemplateNextReadIcon'">
@@ -89,7 +89,7 @@
       </div>
       <div *ngIf="!cell.data.metersValue" class="text-left text-secondary">{{notAvailableText}}</div>
     </div>
-    <!-- template for column read status --> 
+    <!-- template for column read status -->
     <div *dxTemplate="let cell of 'cellTemplateReadStatus'" class="text-left row">
       <div>
         <i *ngIf="cell.data.readStatusPercent <= tresholds.alarmTrashold" class='fa fa-circle text-danger  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
@@ -99,17 +99,17 @@
       <div class="col-1 text-primary align-right"><span> {{cell.data.readStatusPercent}} %</span></div>
     </div>
     <!-- template for column IP -->
-    <div *dxTemplate="let cell of 'cellTemplateIp'">     
+    <div *dxTemplate="let cell of 'cellTemplateIp'">
       <div *ngIf="cell.text" class="txt-overflow" title="{{cell.text}}">{{cell.text}}</div>
       <div *ngIf="!cell.text" class="txt-overflow text-secondary">{{notAvailableText}}</div>
     </div>
     <!-- template for column last communication -->
-    <div *dxTemplate="let cell of 'cellTemplateLastCommunication'">     
+    <div *dxTemplate="let cell of 'cellTemplateLastCommunication'">
       <div *ngIf="cell.text" class="txt-overflow" title="{{setMomentLastCommunicationTime(cell.text)}}">{{setMomentLastCommunicationTime(cell.text)}}</div>
       <div *ngIf="!cell.text" class="txt-overflow text-secondary">{{notAvailableText}}</div>
     </div>
     <!-- template for column tags -->
-    <div *dxTemplate="let cell of 'cellTemplateTags'" class="text-left row col-md txt-overflow col-12 col-md">     
+    <div *dxTemplate="let cell of 'cellTemplateTags'" class="text-left row col-md txt-overflow col-12 col-md">
         <div *ngFor="let item of cell.data.tags; let i = index" class=" bg-secondary mr-1 rcorners3 mt-1">
           <div class="ml-1 mr-1">{{item}}</div>
         </div>
