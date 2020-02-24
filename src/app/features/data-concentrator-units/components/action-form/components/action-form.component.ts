@@ -12,11 +12,16 @@ export class ActionFormComponent implements OnInit {
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() columnsChange: EventEmitter<boolean> = new EventEmitter();
+  @Output() search = new EventEmitter<string>();
 
   constructor(private i18n: I18n, public fb: FormBuilder, public staticTextService: ActionFormStaticTextService) {}
 
   ngOnInit() {
     this.form = this.createForm();
+  }
+
+  insertedValue($event: string) {
+    this.search.emit($event);
   }
 
   get searchProperty() {
@@ -30,8 +35,6 @@ export class ActionFormComponent implements OnInit {
   nameOf(arg0: string) {
     throw new Error('Method not implemented.');
   }
-
-  onSearch() {}
 
   onFilter() {}
 

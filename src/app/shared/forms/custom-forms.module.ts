@@ -16,6 +16,7 @@ import { TimepickerComponent } from './components/timepicker/timepicker.componen
 import { InputSelectComponent } from './components/input-select/input-select.component';
 import { InputDateTimeRangePickerComponent } from './components/input-datetime-range-picker/input-datetime-range-picker.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -32,7 +33,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     DefaultFormElementComponent,
     SelectInputComponent,
     TimepickerComponent,
-    InputSelectComponent
+    InputSelectComponent,
+    InputSearcherComponent
   ],
   declarations: [
     InputTextComponent,
@@ -47,7 +49,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     DefaultFormElementComponent,
     SelectInputComponent,
     TimepickerComponent,
-    InputSelectComponent
+    InputSelectComponent,
+    InputSearcherComponent
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, NgxDaterangepickerMd.forRoot()]
 })

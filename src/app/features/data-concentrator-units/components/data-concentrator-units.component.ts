@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 // consts
 import { configGrid } from 'src/environments/config';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
+import { readStatusTrashold } from '../consts/data-concentrator-units.consts';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -32,6 +33,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // subscribe to get data from service
   subscribeTotalItems: Subscription;
 
+  tresholds = readStatusTrashold;
+
   // TODO get company id from meni
   companyId = 0;
   TooltipTarget: any;
@@ -53,7 +56,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     // set grid columns
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns();
-    this.loadData();
+    this.loadData('');
 
     // subscribe to get count of all items on the grid
     this.subscribeTotalItems = this.dataConcentratorUnitsGridService.totalItems.subscribe((total: number) => {
@@ -78,8 +81,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   // load data from BE (default filter is selected company id)
-  loadData() {
-    this.dataSource = this.dataConcentratorUnitsGridService.loadData(this.companyId);
+  loadData(search: string) {
+    this.dataSource = this.dataConcentratorUnitsGridService.loadData(this.companyId, search);
   }
 
   // button click refresh grid
@@ -93,6 +96,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       return true;
     }
     return false;
+  }
+
+  // search string
+  searchData($event: string) {
+    this.dataSource = this.dataConcentratorUnitsGridService.loadData(this.companyId, $event);
   }
 
   // TODO

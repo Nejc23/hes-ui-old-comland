@@ -15,9 +15,13 @@ export class DataConcentratorUnitsListInterceptor {
     let take = 0;
     let sortColId = '';
     let sortedUsers = data;
-
+    let searched = [];
     if (request.body) {
       const params = request.body as GridRequestParams;
+
+      if (params.search && params.search.length > 0) {
+        searched = searchBooks(data, params.search[0].value);
+      }
 
       skip = params.skip;
       take = params.take;
@@ -26,9 +30,9 @@ export class DataConcentratorUnitsListInterceptor {
         params.sort.forEach(element => {
           sortColId = element.selector;
           if (element.desc) {
-            sortedUsers = _.sortBy(data, sortColId).reverse();
+            sortedUsers = _.sortBy(searched, sortColId).reverse();
           } else {
-            sortedUsers = _.sortBy(data, sortColId);
+            sortedUsers = _.sortBy(searched, sortColId);
           }
         });
       }
@@ -36,7 +40,7 @@ export class DataConcentratorUnitsListInterceptor {
 
     const body: GridResponse<DataConcentratorUnitsList> = {
       data: sortedUsers.slice(skip, Number(skip) + Number(take)), // sortedUsers.slice(request.body.startRow, request.body.endRow),
-      totalCount: data.length,
+      totalCount: searched.length,
       summary: '',
       groupCount: 0
     };
@@ -52,6 +56,24 @@ export class DataConcentratorUnitsListInterceptor {
   static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
     return new RegExp(`/api/data-concentrator-units`).test(request.url);
   }
+}
+
+function searchBooks(companies, filter) {
+  var result;
+  if (typeof filter === 'undefined' || filter.length == 0) {
+    result = companies;
+  } else {
+    result = _.filter(companies, function(c) {
+      var cProperties = _.keys(c);
+      _.pull(cProperties, 'id');
+      return _.find(cProperties, function(property) {
+        if (c[property]) {
+          return _.includes(_.lowerCase(c[property]), _.lowerCase(filter));
+        }
+      });
+    });
+  }
+  return result;
 }
 
 const data: DataConcentratorUnitsList[] = [

@@ -54,7 +54,7 @@ export class DataConcentratorUnitsGridService {
   /**
    * Load data to grid
    */
-  public loadData(companyId: number): CustomStore {
+  public loadData(companyId: number, search: string): CustomStore {
     this.paramsDCU.sort = [];
 
     function isNotEmpty(value: any): boolean {
@@ -93,6 +93,9 @@ export class DataConcentratorUnitsGridService {
         // add external filters
         this.setFilters(companyId);
 
+        // add external search
+        this.setSearch(search);
+
         return this.dataConcentratorUnitsService
           .getGridDCU(this.paramsDCU)
           .toPromise()
@@ -120,6 +123,14 @@ export class DataConcentratorUnitsGridService {
       selector: 'companyId',
       operation: enumSearchFilterOperators.equal,
       value: companyId.toString()
+    });
+  }
+
+  setSearch(search: string) {
+    this.paramsDCU.search = [];
+    this.paramsDCU.search.push({
+      selector: 'all',
+      value: search
     });
   }
 
