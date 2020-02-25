@@ -9,10 +9,11 @@ import { ActionFormStaticTextService } from '../services/action-form-static-text
 })
 export class ActionFormComponent implements OnInit {
   form: FormGroup;
+  searchTextEmpty = true;
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() columnsChange: EventEmitter<boolean> = new EventEmitter();
-  @Output() search = new EventEmitter<string>();
+  @Output() searchChange = new EventEmitter<string>();
 
   constructor(private i18n: I18n, public fb: FormBuilder, public staticTextService: ActionFormStaticTextService) {}
 
@@ -21,7 +22,14 @@ export class ActionFormComponent implements OnInit {
   }
 
   insertedValue($event: string) {
-    this.search.emit($event);
+    if ($event !== undefined) {
+      this.searchTextEmpty = $event.length === 0;
+    } else {
+      this.searchTextEmpty = true;
+    }
+    setTimeout(() => {
+      this.searchChange.emit($event);
+    }, 600);
   }
 
   get searchProperty() {

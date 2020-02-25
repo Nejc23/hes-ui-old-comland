@@ -17,7 +17,7 @@
     <span class="align-text-bottom" i18n>{{totalCount}} items &middot; {{filters}}</span>
   </div>
   <div class="ml-auto mt-2 mb-2 mr-2">
-    <app-action-form (search)=searchData($event) (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>
+    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>
   </div>
 </div>
 
@@ -94,7 +94,7 @@
       <div>
         <i *ngIf="cell.data.readStatusPercent <= tresholds.alarmTrashold" class='fa fa-circle text-danger  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
         <i *ngIf="cell.data.readStatusPercent > tresholds.alarmTrashold && cell.data.readStatusPercent <= tresholds.warningTrashold" class='fa fa-circle text-warning  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
-        <i *ngIf="cell.data.readStatusPercent > tresholds.warningTrashold" class='fa fa-circle text-success text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>         
+        <i *ngIf="cell.data.readStatusPercent > tresholds.warningTrashold" class='fa fa-circle text-success text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
       </div>
       <div class="col-1 text-primary align-right"><span> {{cell.data.readStatusPercent}} %</span></div>
     </div>

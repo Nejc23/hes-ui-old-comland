@@ -149,13 +149,15 @@
   margin-right: -4px;
 }
 
-#searchInput {
-  .form-control.ng-pristine.ng-valid {
-    border-right: 0px !important;
-  }
+#searchInput
+{
+  width: 320px;
 }
 
-#searchButton {
-  border-left: 0px;
-  margin-left: -1px;
+#emptySearchIcon {
+  margin-left: -2.5rem;
+  color: $gray-500;
+  position: absolute;
+  z-index: 1;
+  font-size: 1.7rem;
 }

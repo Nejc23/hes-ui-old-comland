@@ -26,6 +26,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   filters = '';
   selectedRows;
   gridSettings = configGrid;
+  searchString = '';
 
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;
@@ -38,7 +39,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // TODO get company id from meni
   companyId = 0;
   TooltipTarget: any;
-  ToolTipText: string = '';
+  ToolTipText = '';
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private sidebarService: SidebarService,
@@ -87,6 +88,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // button click refresh grid
   refreshGrid() {
+    console.log('refreshGrid');
     this.grid.instance.refresh();
   }
 
@@ -100,6 +102,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // search string
   searchData($event: string) {
+    this.searchString = $event;
     this.dataSource = this.dataConcentratorUnitsGridService.loadData(this.companyId, $event);
   }
 
