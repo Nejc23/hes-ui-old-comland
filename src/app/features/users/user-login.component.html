@@ -4,8 +4,8 @@
       <div class="bg full-height" style="background-image: url('assets/images/others/login.jpg')">
       </div>
     </div>
-    
-    <div class="col-md-6 col-lg-4 align-self-center p-5">      
+
+    <div class="col-md-6 col-lg-4 align-self-center p-5">
     <!--<nav class="navbar navbar-expand navbar-light sticky-top topbar bg-white mb-4 justify-content-between">
         <div class="navbar-collapse" id="navbarContent">
           <ul class="navbar-nav ml-auto">
@@ -26,7 +26,7 @@
 
       <!-- LOGIN FORM -->
       <form [formGroup]="form" *ngIf="!forgotPassword && !resetPassword" class="px-4">
-        <h2 class="text-uppercase" i18n>Login</h2>        
+        <h2 class="text-uppercase" i18n>Login</h2>
 
         <p i18n>Please enter your user name and password to login.</p>
         <div class="form-group">
@@ -40,7 +40,7 @@
           </app-input-text>
         </div>
         <div class="form-group">
-          <button type="submit" (click)="login()" class="btn btn-outline-primary btn-block" i18n>Login</button>
+          <button type="submit" (click)="login()" class="btn btn-primary btn-block" i18n>Login</button>
         </div>
         <div class="form-group">
           <a href="javascript:void(0);" (click)="setForgotPassword()" i18n>Forgot password?</a>
@@ -57,7 +57,7 @@
           </app-input-text>
         </div>
         <div class="form-group">
-          <button type="submit" (click)="reset()" class="btn btn-outline-primary btn-block" i18n>Reset</button>
+          <button type="submit" (click)="reset()" class="btn btn-primary btn-block" i18n>Reset</button>
         </div>
         <div class="form-group">
           <a href="javascript:void(0);" (click)="setLogin()" i18n>Back to login</a>
@@ -79,14 +79,14 @@
           </app-input-text>
         </div>
         <div class="form-group">
-          <button type="submit" (click)="newPassword()" class="btn btn-outline-primary btn-block" i18n>Reset</button>
+          <button type="submit" (click)="newPassword()" class="btn btn-primary btn-block" i18n>Reset</button>
         </div>
         <div class="form-group">
           <a href="javascript:void(0);" (click)="setLogin()" i18n>Back to login</a>
         </div>
       </form>
-    
-    
+
+
 
     </div>
   </div>
