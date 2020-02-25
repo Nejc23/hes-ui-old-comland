@@ -48,6 +48,10 @@ const appRoutes: Routes = [
       {
         path: 'devextreme',
         loadChildren: 'src/app/features/samples/devextreme/modules/devextreme.module#DevextremeModule'
+      },
+      {
+        path: 'kendo',
+        loadChildren: 'src/app/features/samples/kendo-ui/modules/kendo-ui.module#KendoUIModule'
       }
     ]
   },

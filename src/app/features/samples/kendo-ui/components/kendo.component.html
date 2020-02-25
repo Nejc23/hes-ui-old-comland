@@ -17,7 +17,7 @@
 </div>
 
 <!-- grid -->
-<div class="form-row mt-0 bg-white">
+<div>
   <kendo-grid #grid [data]="gridData" class="no-scrollbar"
   [filterable]="true"  
   [pageSize]="state.take"  
@@ -27,7 +27,7 @@
   [pageable]="true"  
   [sortable]="true"
   [reorderable]="true"
-  [resizable]="true"
+  [resizable]="true"  
   (dataStateChange)="dataStateChange($event)">
 <kendo-grid-column *ngFor="let col of columns"
            [field]="col.field"
@@ -35,11 +35,11 @@
            [filterable]="col.filter"
            [filter]="col.type"
            [format]="col.format"
-           [width]="100"      
-           
+           [locked]="col.locked"
+           [width]="col.width"
            [sortable]="col.sortable">
 
-           <ng-template *ngIf="col.isButton" kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+    <!--       <ng-template *ngIf="col.isButton" kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
             <button kendoButton (click)="col.callbackFunc(dataItem,rowIndex)" >{{ col.buttonLabel }}</button>
         </ng-template>
         <ng-template *ngIf="col.isIcon" kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
@@ -57,7 +57,7 @@
               <i [ngClass]="col.icon" class="text-warning font-size-sm right-align"> {{ dataItem.valuePercent }}</i>
             </div>
           </span>
-      </ng-template>
+      </ng-template>-->
     <!--  <ng-template kendoGridCellTemplate let-dataItem>
         <ng-container [ngTemplateOutlet]="colTemplate" [ngTemplateOutletContext]="{ $implicit: dataItem, column: col }">
         </ng-container>
@@ -78,3 +78,10 @@
   <ng-template #colTemplate let-dataItem let-column="column">
     Template {{ dataItem[column.field] }}
   </ng-template>
+
+<div class="row"> &nbsp;</div>
+<div>
+  <p>Restrictions when using pinned cols:</p>
+  <p>- pre-defined column width for all columns on the grid</p>
+  <p>- only left side pinning possible</p>
+</div>

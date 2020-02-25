@@ -50,6 +50,12 @@ export class SidebarService {
         children: []
       },
       {
+        title: this.i18n(`Sample KendoUI`),
+        routeLink: '/kendo',
+        hasChildren: false,
+        children: []
+      },
+      {
         title: this.i18n(`Dashboard`),
         routeLink: '/dashboard',
         hasChildren: false,

@@ -104,14 +104,23 @@ export class KendoComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit() {
-    console.log(this.state);
     this.columns = [
-      { title: 'Name', field: 'name', type: 'text', isButton: false, locked: true },
-      { title: 'Read status', isIcon: true, icon: 'fas fa-circle', width: 120, locked: true },
-      { filter: true, title: 'Date', field: 'date', type: 'date', format: '{0:MM/dd/yyyy}', sortable: true, isButton: false },
-      { filter: true, title: 'Amount', field: 'amount', type: 'numeric', sortable: true, isButton: false },
-      { filter: true, title: 'Currency', field: 'currency', isButton: false },
-      { isButton: true, buttonLabel: 'Edit', icon: 'edit', callbackFunc: this.edit }
+      { title: 'Name', field: 'name', type: 'text', isButton: false, locked: true, width: 200 },
+      { title: 'Read status', isIcon: true, icon: 'fas fa-circle', width: 220, locked: true },
+      {
+        filter: true,
+        title: 'Date',
+        field: 'date',
+        type: 'date',
+        format: '{0:MM/dd/yyyy}',
+        sortable: true,
+        isButton: false,
+        width: 220,
+        locked: false
+      },
+      { filter: true, title: 'Amount', field: 'amount', type: 'numeric', sortable: true, isButton: false, width: 220, locked: false },
+      { filter: true, title: 'Currency', field: 'currency', isButton: false, width: 120 },
+      { isButton: true, buttonLabel: 'Edit', icon: 'edit', callbackFunc: this.edit, width: 120 }
     ];
   }
 
@@ -120,21 +129,21 @@ export class KendoComponent implements OnInit, AfterViewInit {
   }
 
   public dataStateChange(state: DataStateChangeEvent): void {
-    this.fitColumns();
+    //   this.fitColumns();
     this.state = state;
     console.log(this.state);
   }
 
   public ngAfterViewInit(): void {
-    this.fitColumns();
+    //   this.fitColumns();
   }
 
-  private fitColumns(): void {
+  /* private fitColumns(): void {
     this.ngZone.onStable
       .asObservable()
       .pipe(take(1))
       .subscribe(() => {
         this.grid.autoFitColumns();
       });
-  }
+  }*/
 }
