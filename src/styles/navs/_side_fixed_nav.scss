@@ -36,6 +36,7 @@
 
 .sidebar-icons {
   color: fade-out($white, 0.1);
+  font-size: 2rem;
 }
 
 .sidebar-icons-top {
@@ -45,8 +46,6 @@
 }
 
 .uil {
-  font-size: 2rem;
-
   &.icon-small {
     position: relative;
     left: -7px;

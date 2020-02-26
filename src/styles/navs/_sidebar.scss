@@ -9,6 +9,7 @@
   position: fixed;
   overflow: visible;
   margin-left: $sidebar-fixed-width;
+  transition: 0.3s;
 
   .nav-item {
     position: relative;
@@ -54,7 +55,6 @@
 
     .collapsing {
       display: none;
-      transition: none;
     }
 
     .collapse,
@@ -452,7 +452,6 @@
     position: relative;
     left: -1.1rem;
 
-
     &::after {
       color: $gray-900;
     }
@@ -561,4 +560,8 @@
   max-width: 70.666667%;
   padding-right: 10px;
   margin-top: -0.5rem;
+}
+
+.nav-button-hidden {
+  display: none !important;
 }

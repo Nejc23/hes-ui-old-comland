@@ -29,16 +29,12 @@
         <h2 class="text-uppercase" i18n>Login</h2>
 
         <p i18n>Please enter your user name and password to login.</p>
-        <div class="form-group">
           <app-input-text (keyup.enter)="login()" [form]="form" [property]="usernameProperty" i18n-label label="Username"
             [inputType]="'text'">
           </app-input-text>
-        </div>
-        <div class="form-group">
           <app-input-text (keyup.enter)="login()" [form]="form" [property]="passwordProperty" i18n-label label="Password"
             [inputType]="'password'">
           </app-input-text>
-        </div>
         <div class="form-group">
           <button type="submit" (click)="login()" class="btn btn-primary btn-block" i18n>Login</button>
         </div>

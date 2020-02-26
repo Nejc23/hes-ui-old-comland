@@ -22,7 +22,7 @@
           *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" [form]="form" [property]="companyIdProperty"
           [selectOptions]="companies$ | async">
         </app-select-input>
-        <div class="col-1 text-right d-none d-md-inline">
+        <div class="col-1 text-right d-none d-md-inline" [ngClass]="{'nav-button-hidden': app.layout.isMenuCollapsed && !isMouseOverNav}">
           <button class="rounded-circle border-0"
             [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
             (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">

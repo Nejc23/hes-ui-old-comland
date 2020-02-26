@@ -116,32 +116,6 @@
   text-align: right;
 }
 
-.form-row {
-
-  > .col, .form-row > [class*="col-"] {
-    padding-right: 5px;
-    padding-left: 5px;
-    margin-bottom: -4px;
-  }
-
-  margin-left: 0px;
-  margin-right: 0px;
-
-  .btn.btn-secondary.d-inline-block.mb-1 {
-      .uil {
-        background-color: transparent;
-        font-size: 1rem;
-        color: $gray-700;
-      }
-  }
-
-}
-
-.form-group {
- // margin-bottom: 0px;
-}
-
-
 #btnRedo {
   margin-right: -4px;
 }
