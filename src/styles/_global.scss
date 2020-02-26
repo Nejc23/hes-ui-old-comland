@@ -73,7 +73,7 @@ i.text-secondary {
 label:not(.control-label) {
   font-size: $font-size-base * .9;
   color: $gray-600;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   font-weight: $font-weight-bold;
 
   &.small {

@@ -1,54 +1,46 @@
-
 <!-- Modal -->
-<div #modalFilter class="modal right fade" data-keyboard="false" data-backdrop="static" id="filterModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2">
+<div #modalFilter class="modal right fade" data-keyboard="false" data-backdrop="static" id="filterModal" tabindex="-1"
+  role="dialog" aria-labelledby="myModalLabel2">
   <div class="modal-dialog" role="document">
 
     <div class="modal-content">
 
       <div class="modal-header">
         <h4 class="modal-title text-left" id="myModalLabel2" i18n>Filters Results</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>        
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+            aria-hidden="true">&times;</span></button>
       </div>
 
       <div class="modal-body">
-        
-        <div class="form-group">          
-            <app-input-tag label="Status" [property]="searchProperty"  [form]="form" [autocompleteItemsAsObjects]="autocompleteItemsAsObjects"  >
-            </app-input-tag>           
-          </div>
-        
-         <!-- <div class="row col-12">
-            <label class="text-secondary h6">Type</label>
-          </div>
-          <div class="row col-12">
-            <div class="float-left col-12">
-                <dx-tag-box
-                    [dataSource]="dataSource"
-                    displayExpr="Name"
-                    valueExpr="Id">
-                </dx-tag-box>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <app-input-tag label="Status" [property]="searchProperty" [form]="form"
+                [autocompleteItemsAsObjects]="autocompleteItemsAsObjects">
+              </app-input-tag>
             </div>
           </div>
-        -->
-        
-        
 
-        <div class="form-group">          
-            <app-input-tag label="Tags" [property]="tagProperty"  [form]="form" [autocompleteItemsAsObjects]="tags"  >
-            </app-input-tag>                     
-        </div>
-      
-        <div class="col-auto btn-group float-right mt-1" role="group">       
-          <div class="pr-2 btn-md"><button class="btn btn-secondary" data-dismiss="modal">Close</button></div>
-          <div class="pr-2 btn-md"><button class="btn btn-secondary d-inline-block">Clear</button></div>
-          <div class="pr-2 btn-md"><button class="btn btn-primary d-inline-block" (click)="save()">Save Selected</button></div>
-          <div class="pr-2 btn-md"><button class="btn btn-primary d-inline-block">Apply</button></div>          
-        </div>      
-      <div class="col-12 mt-1">
-          <hr />
-        </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <app-input-tag label="Tags" [property]="tagProperty" [form]="form" [autocompleteItemsAsObjects]="tags">
+              </app-input-tag>
+            </div>
+          </div>
+          <div class="form-row float-right">
+            <div class="form-group">
+              <button class="btn btn-secondary mr-2" data-dismiss="modal">Close</button>
+              <button class="btn btn-secondary mr-2">Clear</button>
+              <button class="btn btn-primary mr-2" (click)="save()">Save Selected</button>
+              <button class="btn btn-primary mr-2">Apply</button>
+            </div>
+          </div>
 
-      </div>      
+        </form>
+        <br>
+        <br>
+        <hr>
+      </div>
 
     </div><!-- modal-content -->
 
