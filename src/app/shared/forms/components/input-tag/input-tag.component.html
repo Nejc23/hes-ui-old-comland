@@ -1,0 +1,20 @@
+
+  <div #container class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+    <label [attr.for]="property" *ngIf="label">
+      {{label}}
+      <span *ngIf="required"> *</span>
+    </label>       
+    <tag-input #statusTag [formControlName]="'content'"  class="form-group"
+      [name]="property"            
+      [onlyFromAutocomplete]="true">
+      <tag-input-dropdown [showDropdownIfEmpty]="true" [zIndex]="1055"
+                        [focusFirstElement]="true"
+                        [displayBy]="'value'"
+                        [identifyBy]="'id'"
+                        [autocompleteItems]="autocompleteItemsAsObjects">
+        <ng-template let-item="item" let-index="index">
+            {{ item.value }}
+        </ng-template>
+      </tag-input-dropdown>
+      </tag-input>
+    </div>

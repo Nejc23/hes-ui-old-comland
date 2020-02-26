@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
@@ -7,13 +7,15 @@ import { ActionFormStaticTextService } from '../services/action-form-static-text
   selector: 'app-action-form',
   templateUrl: './action-form.component.html'
 })
-export class ActionFormComponent implements OnInit {
+export class ActionFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   searchTextEmpty = true;
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() columnsChange: EventEmitter<boolean> = new EventEmitter();
   @Output() searchChange = new EventEmitter<string>();
+
+  @ViewChild('modalFilter', { static: true }) input;
 
   constructor(private i18n: I18n, public fb: FormBuilder, public staticTextService: ActionFormStaticTextService) {}
 
@@ -52,5 +54,10 @@ export class ActionFormComponent implements OnInit {
 
   onRefresh() {
     this.refresh.emit();
+  }
+
+  ngOnDestroy() {
+    $(document.body).removeClass('modal-open');
+    $('.modal-backdrop').remove();
   }
 }

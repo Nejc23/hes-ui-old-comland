@@ -17,6 +17,8 @@ import { InputSelectComponent } from './components/input-select/input-select.com
 import { InputDateTimeRangePickerComponent } from './components/input-datetime-range-picker/input-datetime-range-picker.component';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
+import { InputTagComponent } from './components/input-tag/input-tag.component';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -34,7 +36,8 @@ import { InputSearcherComponent } from './components/input-searcher/input-search
     SelectInputComponent,
     TimepickerComponent,
     InputSelectComponent,
-    InputSearcherComponent
+    InputSearcherComponent,
+    InputTagComponent
   ],
   declarations: [
     InputTextComponent,
@@ -50,9 +53,10 @@ import { InputSearcherComponent } from './components/input-searcher/input-search
     SelectInputComponent,
     TimepickerComponent,
     InputSelectComponent,
-    InputSearcherComponent
+    InputSearcherComponent,
+    InputTagComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, NgxDaterangepickerMd.forRoot()]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, TagInputModule, NgxDaterangepickerMd.forRoot()]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {

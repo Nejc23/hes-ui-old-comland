@@ -3,8 +3,8 @@
     <app-input-searcher class="searchInput" [ngClass]="{'search-not-empty': !searchTextEmpty}" [debounceTimeOut]="0" (insertedValue)="insertedValue($event)" id="searchInput" label=""  [inputType]="'search'" [form]="form" [property]="searchProperty" class="d-inline-block" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
     <i class='uil uil-search' id="emptySearchIcon" *ngIf="searchTextEmpty"></i>
   </div>
-  <div class="col-auto">
-    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onFilter()"
+  <div class="col-auto">    
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" data-toggle="modal" data-target="#filterModal" 
     [ngbTooltip]="tipContentFilter"><i class='uil uil-filter'></i></button>
   </div>
   <div class="col-auto">
@@ -20,3 +20,5 @@
 <ng-template #tipContentFilter><span i18n>Filter results</span></ng-template>
 <ng-template #tipContentColumns><span i18n>Manage columns</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
+
+<app-filter-form></app-filter-form>
