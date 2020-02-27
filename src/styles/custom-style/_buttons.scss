@@ -1,9 +1,29 @@
-.btn-primary {
-  color: $white;
-  font-weight: 500;
+.justify-content-end {
+  .btn + .btn {
+    margin-left: $spacer;
+  }
 }
 
-.btn-secondary {
-  color: $gray-700;
-  font-weight: 500;
+.btn {
+  &.btn-round {
+    border-radius: 100%;
+    height: $input-height;
+    width: $input-height;
+    padding: 0;
+    line-height: $input-height;
+  }
+
+  &.btn-primary {
+    color: $white;
+  }
+  
+  &.btn-secondary {
+    color: $gray-700;
+  }
+
+  i {
+    font-size: $font-size-lg;
+  }
 }
+
+

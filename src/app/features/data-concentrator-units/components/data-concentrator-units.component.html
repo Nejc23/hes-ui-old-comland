@@ -1,14 +1,10 @@
 <!-- header -->
-<div class="form-row mt-3">
-  <div class="pl-2 pr-2">
-    <app-header-title></app-header-title>
-  </div>
-  <div class="col-1 float-left">
-    <i class="fas fa-plus-circle fa-2x text-primary" id="tipContentAdd"></i>
-  </div>
-  <div class="ml-auto pl-2 pr-2 pb-1">
-    <app-breadcrumb></app-breadcrumb>
-  </div>
+<div class="d-flex align-items-center">
+  <app-header-title></app-header-title>
+  <button class="btn btn-primary btn-round">
+    <i class="uil uil-plus" id="tipContentAdd"></i>
+  </button>
+  <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div>
 
 <!-- row total items, selected filter name -->
@@ -17,7 +13,8 @@
     <span class="align-text-bottom" i18n>{{totalCount}} items &middot; {{filters}}</span>
   </div>
   <div class="ml-auto mt-2 mb-2 mr-2">
-    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()"></app-action-form>
+    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()"
+      (columnsChange)="setVisibilityGridColumns()"></app-action-form>
   </div>
 </div>
 
@@ -25,43 +22,32 @@
   <div class="pl-2 col-1 align-bottom pt-3 text-white">
     <span class="align-text-bottom" i18n>{{grid.selectedRowKeys.length}} items selected</span>
   </div>
-    <div class="col-auto pt-1">
-      <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUploadConfiguration()"
-      ><span i18n>Upload Configuration</span></button>
-    </div>
-    <div class="col-auto pt-1">
-      <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUpgrade()"
-      ><span i18n>Upgrade</span></button>
-    </div>
+  <div class="col-auto pt-1">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUploadConfiguration()"><span
+        i18n>Upload Configuration</span></button>
+  </div>
+  <div class="col-auto pt-1">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUpgrade()"><span
+        i18n>Upgrade</span></button>
+  </div>
 </div>
 
 <!-- grid -->
 <div class=" mt-0 bg-white">
-  <dx-data-grid #grid
-    id="gridContainer"
-    [dataSource]="dataSource"
-    [columns]="columns"
-    [(selectedRowKeys)]="selectedRows"
-    [allowColumnResizing]="gridSettings.allowColumnResizing"
-    [allowColumnReordering]="gridSettings.allowColumnReordering"
-    [showRowLines]="gridSettings.showRowLines"
-    [showBorders]="gridSettings.showBorders"
-    [columnAutoWidth]="gridSettings.columnAutoWidth"
-    [remoteOperations]="gridSettings.remoteOperations"
-    [focusStateEnabled]="gridSettings.focusStateEnabled"
-    (onCellHoverChanged) = "onCellHoverChanged($event)">
-    <dxo-selection
-      [selectAllMode]="gridSettings.allMode"
-      [showCheckBoxesMode]="gridSettings.checkBoxesMode"
+  <dx-data-grid #grid id="gridContainer" [dataSource]="dataSource" [columns]="columns"
+    [(selectedRowKeys)]="selectedRows" [allowColumnResizing]="gridSettings.allowColumnResizing"
+    [allowColumnReordering]="gridSettings.allowColumnReordering" [showRowLines]="gridSettings.showRowLines"
+    [showBorders]="gridSettings.showBorders" [columnAutoWidth]="gridSettings.columnAutoWidth"
+    [remoteOperations]="gridSettings.remoteOperations" [focusStateEnabled]="gridSettings.focusStateEnabled"
+    (onCellHoverChanged)="onCellHoverChanged($event)">
+    <dxo-selection [selectAllMode]="gridSettings.allMode" [showCheckBoxesMode]="gridSettings.checkBoxesMode"
       [mode]="gridSettings.selectionMode">
     </dxo-selection>
-    <dxo-sorting
-      [mode]="gridSettings.sortingMode">
+    <dxo-sorting [mode]="gridSettings.sortingMode">
     </dxo-sorting>
     <dxo-column-fixing [enabled]="gridSettings.pinning"></dxo-column-fixing>
     <dxo-paging [pageSize]="gridSettings.pager.defaultPageSize"></dxo-paging>
-    <dxo-pager
-      [showPageSizeSelector]="gridSettings.pager.showPageSizeSelector"
+    <dxo-pager [showPageSizeSelector]="gridSettings.pager.showPageSizeSelector"
       [allowedPageSizes]="gridSettings.pager.allowedPageSizes"
       [showNavigationButtons]="gridSettings.pager.showNavigationButtons">
     </dxo-pager>
@@ -73,18 +59,21 @@
     <!-- template for column next read icon -->
     <div *dxTemplate="let cell of 'cellTemplateNextReadIcon'">
       <div *ngIf="cell.data.nextRead" class="inline-block pt-0 pb-0 txt-overflow">
-        <i class='uil uil-clock text-secondary' placement="bottom" [ngbTooltip]="setMomentNextPlannedReadTime(cell.data.nextRead)"></i>
+        <i class='uil uil-clock text-secondary' placement="bottom"
+          [ngbTooltip]="setMomentNextPlannedReadTime(cell.data.nextRead)"></i>
       </div>
     </div>
-   <!-- template for column meters -->
+    <!-- template for column meters -->
     <div *dxTemplate="let cell of 'cellTemplateMeters'">
       <div *ngIf="cell.data.metersValue" class="text-left row">
         <div class="col-1 text-left text-primary mr-0">{{cell.data.metersValue}}</div>
         <div *ngIf="cell.data.metersUp" class="col-2 text-success align-right">
-          <i class='uil uil-arrow-up text-left'></i><span class="small text-success">{{cell.data.metersPercent}} %</span>
+          <i class='uil uil-arrow-up text-left'></i><span class="small text-success">{{cell.data.metersPercent}}
+            %</span>
         </div>
         <div *ngIf="!cell.data.metersUp" class="col-2 text-danger align-right">
-          <i class='uil uil-arrow-down text-left small text-danger'></i><span class="small text-danger">{{cell.data.metersPercent}} %</span>
+          <i class='uil uil-arrow-down text-left small text-danger'></i><span
+            class="small text-danger">{{cell.data.metersPercent}} %</span>
         </div>
       </div>
       <div *ngIf="!cell.data.metersValue" class="text-left text-secondary">{{notAvailableText}}</div>
@@ -92,9 +81,12 @@
     <!-- template for column read status -->
     <div *dxTemplate="let cell of 'cellTemplateReadStatus'" class="text-left row">
       <div>
-        <i *ngIf="cell.data.readStatusPercent <= tresholds.alarmTrashold" class='fa fa-circle text-danger  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
-        <i *ngIf="cell.data.readStatusPercent > tresholds.alarmTrashold && cell.data.readStatusPercent <= tresholds.warningTrashold" class='fa fa-circle text-warning  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
-        <i *ngIf="cell.data.readStatusPercent > tresholds.warningTrashold" class='fa fa-circle text-success text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
+        <i *ngIf="cell.data.readStatusPercent <= tresholds.alarmTrashold"
+          class='fa fa-circle text-danger  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
+        <i *ngIf="cell.data.readStatusPercent > tresholds.alarmTrashold && cell.data.readStatusPercent <= tresholds.warningTrashold"
+          class='fa fa-circle text-warning  text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
+        <i *ngIf="cell.data.readStatusPercent > tresholds.warningTrashold"
+          class='fa fa-circle text-success text-left ml-2' title="{{cell.data.readStatusPercent}}"></i>
       </div>
       <div class="col-1 text-primary align-right"><span> {{cell.data.readStatusPercent}} %</span></div>
     </div>
@@ -105,14 +97,15 @@
     </div>
     <!-- template for column last communication -->
     <div *dxTemplate="let cell of 'cellTemplateLastCommunication'">
-      <div *ngIf="cell.text" class="txt-overflow" title="{{setMomentLastCommunicationTime(cell.text)}}">{{setMomentLastCommunicationTime(cell.text)}}</div>
+      <div *ngIf="cell.text" class="txt-overflow" title="{{setMomentLastCommunicationTime(cell.text)}}">
+        {{setMomentLastCommunicationTime(cell.text)}}</div>
       <div *ngIf="!cell.text" class="txt-overflow text-secondary">{{notAvailableText}}</div>
     </div>
     <!-- template for column tags -->
     <div *dxTemplate="let cell of 'cellTemplateTags'" class="text-left row col-md txt-overflow col-12 col-md">
-        <div *ngFor="let item of cell.data.tags; let i = index" class=" bg-secondary mr-1 rcorners3 mt-1">
-          <div class="ml-1 mr-1">{{item}}</div>
-        </div>
+      <div *ngFor="let item of cell.data.tags; let i = index" class=" bg-secondary mr-1 rcorners3 mt-1">
+        <div class="ml-1 mr-1">{{item}}</div>
+      </div>
     </div>
   </dx-data-grid>
 </div>
@@ -121,19 +114,15 @@
 
 
 <!-- TODO check best tooltips consider using them inside grid for all columns when text not fit to cell-->
-<dx-tooltip  [target]="TooltipTarget" showEvent="dxhoverstart"
-hideEvent="dxhoverend">
+<dx-tooltip [target]="TooltipTarget" showEvent="dxhoverstart" hideEvent="dxhoverend">
   <div *dxTemplate="let data of 'content'">
     {{ ToolTipText }}
   </div>
 </dx-tooltip>
 
 
-<dx-tooltip
-    target="#tipContentAddDx"
-    showEvent="dxhoverstart"
-    hideEvent="dxhoverend">
-      <span i18n>Add or import DCU</span>
+<dx-tooltip target="#tipContentAddDx" showEvent="dxhoverstart" hideEvent="dxhoverend">
+  <span i18n>Add or import DCU</span>
 </dx-tooltip>
 
 <!-- TODO remove only for sample selected items -->
@@ -143,4 +132,3 @@ hideEvent="dxhoverend">
       {{grid.selectedRowKeys ? (grid.instance.getSelectedRowsData() | stringifyData) : 'Nothing has been selected'}}
   </span>
 </div>--->
-

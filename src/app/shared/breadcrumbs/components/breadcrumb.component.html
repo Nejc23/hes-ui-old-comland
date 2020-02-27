@@ -1,15 +1,11 @@
 <nav aria-label="breadcrumb">
-<ol class="breadcrumb">
-  <!--<li *ngIf="breadcrumbs">
-    <a [routerLink]="'/dashboard'" role="button">
-      <small i18n>Home</small>
-    </a>
-  </li>-->
-  <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last" [ngClass]="{'active': last}">
-    <a [routerLink]="[breadcrumb.url]" role="button" *ngIf="!last">
-      <small>{{ breadcrumb.label }}</small>
-    </a>
-    <small *ngIf="last">{{ breadcrumb.label }}</small>
-  </li>
-</ol>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last"
+      [ngClass]="{'active': last}">
+      <a [routerLink]="[breadcrumb.url]" role="button" *ngIf="!last">
+        <span>{{ breadcrumb.label }}</span>
+      </a>
+      <span *ngIf="last">{{ breadcrumb.label }}</span>
+    </li>
+  </ol>
 </nav>
