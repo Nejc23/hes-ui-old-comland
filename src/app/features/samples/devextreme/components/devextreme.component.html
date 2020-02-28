@@ -25,6 +25,12 @@
   [allowedPageSizes]="[10, 20, 50]"
   [showNavigationButtons]="true">
 </dxo-pager>
+<dxo-state-storing 
+        [enabled]="true" 
+        type="custom" 
+        [customLoad]="loadState"
+        [customSave]="saveState">
+    </dxo-state-storing>
 <div *dxTemplate="let item of 'item'">
   <ng-template [ngTemplateOutlet]="template || defaultTemplate" [ngTemplateOutletContext]="{item: item}"></ng-template>
 </div>

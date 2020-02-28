@@ -8,6 +8,7 @@ import CustomStore from 'devextreme/data/custom_store';
 import { HttpParams } from '@angular/common/http';
 import { DxoGridComponent } from 'devextreme-angular/ui/nested';
 import { DxDataGridComponent } from 'devextreme-angular';
+import { GridSettingsCoockieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 
 @Component({
   selector: 'app-devextreme',
@@ -23,7 +24,7 @@ export class DevextremeComponent implements OnInit {
   columns = [];
   dataSource: any = {};
 
-  constructor(public usersSampleService: UsersSampleService) {}
+  constructor(public usersSampleService: UsersSampleService, private gridSettingsCoockieStoreService: GridSettingsCoockieStoreService) {}
 
   ngOnInit() {
     this.columns = [
@@ -97,4 +98,13 @@ export class DevextremeComponent implements OnInit {
     this.grid.instance.refresh();
     //  this.loadData();
   }
+
+  saveState = state => {
+    this.gridSettingsCoockieStoreService.setGridColumnsSettings('Sample', JSON.stringify(state));
+    console.log(state);
+  };
+
+  loadState = () => {
+    return this.gridSettingsCoockieStoreService.getGridColumnsSettings('Sample');
+  };
 }

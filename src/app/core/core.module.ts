@@ -18,6 +18,7 @@ import { PermissionsStoreService } from './permissions/services/permissions-stor
 import { ErrorHandlerService } from './error-handler/services/error-handler.service';
 import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.interceptor';
 import { TableService } from './tables/services/table.service';
+import { GridSettingsCoockieStoreService } from './utils/services/grid-settings-cookie-store.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -32,6 +33,7 @@ import { TableService } from './tables/services/table.service';
     PermissionsStoreService,
     ErrorHandlerService,
     TableService,
+    GridSettingsCoockieStoreService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,
