@@ -12,23 +12,37 @@
       </div>
 
       <div class="modal-body">
-        <form>
+        <form [formGroup]="form">
           <app-input-tag label="Status" [property]="searchProperty" [form]="form"
-            [autocompleteItemsAsObjects]="autocompleteItemsAsObjects">
+            [autocompleteItemsAsObjects]="statuses">
           </app-input-tag>
+
+          <div class="form-group">
+            <label for="dcuTypesCheck" i18n>Type</label>
+            <div class="row" name="dcuTypesCheck">
+              <div class="checkbox" *ngFor="let oneType of getControls(); let i = index">
+                <input type="checkbox" class="form-control" (change)="onCheckChanged($event)" [checked]="dcuTypes[i].isChecked" [formControlName]="i" [id]="i" [name]="i">
+                <label [attr.for]="i" class="control-label">
+                  {{dcuTypes[i].value}}
+                </label>
+                <div>
+                  <ng-content select="small">
+                  </ng-content>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <app-input-tag label="Tags" [property]="tagProperty" [form]="form" [autocompleteItemsAsObjects]="tags">
           </app-input-tag>
 
-          <div class="d-flex align-items-right">
+          <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-secondary">Clear</button>
             <button type="button" class="btn btn-primary" (click)="save()">Save Selected</button>
             <button type="submit" class="btn btn-primary">Apply</button>
           </div>
         </form>
-        <br>
-        <br>
         <hr>
       </div>
 
