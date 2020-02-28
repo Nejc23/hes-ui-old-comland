@@ -40,7 +40,8 @@ export enum enumGridOperations {
   filter = 'filter',
   totalSummary = 'totalSummary',
   group = 'group',
-  groupSummary = 'groupSummary'
+  groupSummary = 'groupSummary',
+  search = 'search'
 }
 
 // operators for filtering and search

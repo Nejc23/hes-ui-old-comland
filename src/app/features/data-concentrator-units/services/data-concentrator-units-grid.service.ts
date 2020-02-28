@@ -54,7 +54,7 @@ export class DataConcentratorUnitsGridService {
   /**
    * Load data to grid
    */
-  public loadData(companyId: number, search: string): CustomStore {
+  public loadData(search: string): CustomStore {
     this.paramsDCU.sort = [];
 
     function isNotEmpty(value: any): boolean {
@@ -87,11 +87,12 @@ export class DataConcentratorUnitsGridService {
                     desc: element.desc
                   });
                 });
+                break;
             }
           }
         });
         // add external filters
-        this.setFilters(companyId);
+        //    this.setFilters();
 
         // add external search
         this.setSearch(search);
@@ -106,7 +107,8 @@ export class DataConcentratorUnitsGridService {
               data: data.data,
               totalCount: data.totalCount,
               summary: data.summary,
-              groupCount: data.groupCount
+              groupCount: data.groupCount,
+              searchText: search
             };
           })
           .catch(error => {
@@ -117,14 +119,14 @@ export class DataConcentratorUnitsGridService {
   }
 
   // set external filters
-  setFilters(companyId: number) {
+  /* setFilters(companyId: number) {
     this.paramsDCU.filter = [];
     this.paramsDCU.filter.push({
       selector: 'companyId',
       operation: enumSearchFilterOperators.equal,
       value: companyId.toString()
     });
-  }
+  }*/
 
   setSearch(search: string) {
     this.paramsDCU.search = [];

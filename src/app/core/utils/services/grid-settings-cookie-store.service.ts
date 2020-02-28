@@ -4,48 +4,19 @@ import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class GridSettingsCoockieStoreService {
-  gridSettings = 'gridSettings';
-
+export class GridSettingsCookieStoreService {
   constructor(private cookieService: CookieService) {}
 
   setGridColumnsSettings(gridId: string, state) {
-    // this.cookieService.delete('columnSettings')
-    if (this.cookieService.check(this.gridSettings)) {
-      const data = JSON.parse(this.cookieService.get(this.gridSettings));
-      if (data) {
-        const value = _.find(data, x => x.id === gridId);
-        if (value) {
-          value.value = state;
-          this.cookieService.set(this.gridSettings, JSON.stringify(data), null, environment.cookiePath);
-        } else {
-          data.push({
-            id: gridId,
-            value: state
-          });
-          this.cookieService.set(this.gridSettings, JSON.stringify(data), null, environment.cookiePath);
-        }
-      }
-    } else {
-      const data = [
-        {
-          id: gridId,
-          value: state
-        }
-      ];
-      this.cookieService.set(this.gridSettings, JSON.stringify(data), null, environment.cookiePath);
-    }
+    // this.cookieService.delete('gridSettings')
+    this.cookieService.set(gridId, JSON.stringify(state), null, environment.cookiePath);
+    console.log(this.cookieService.get(gridId));
   }
 
   getGridColumnsSettings(gridId: string) {
-    if (this.cookieService.check(this.gridSettings)) {
-      const data = JSON.parse(this.cookieService.get(this.gridSettings));
-      if (data) {
-        const value = _.find(data, x => x.id === gridId);
-        if (value) {
-          return JSON.parse(value.value);
-        }
-      }
+    // this.cookieService.delete(this.gridSettings);
+    if (this.cookieService.check(gridId)) {
+      return JSON.parse(this.cookieService.get(gridId));
     }
     return '';
   }

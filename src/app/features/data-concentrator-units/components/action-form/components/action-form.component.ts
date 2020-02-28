@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy } from '@
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 
 @Component({
   selector: 'app-action-form',
@@ -10,6 +11,7 @@ import { ActionFormStaticTextService } from '../services/action-form-static-text
 export class ActionFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   searchTextEmpty = true;
+  sessionNameForGridState = 'grdStateDCU';
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() columnsChange: EventEmitter<boolean> = new EventEmitter();
@@ -17,10 +19,17 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalFilter', { static: true }) input;
 
-  constructor(private i18n: I18n, public fb: FormBuilder, public staticTextService: ActionFormStaticTextService) {}
+  constructor(
+    private i18n: I18n,
+    public fb: FormBuilder,
+    public staticTextService: ActionFormStaticTextService,
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+  ) {}
 
   ngOnInit() {
-    this.form = this.createForm();
+    const search = this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState);
+    this.form = this.createForm(search);
+    this.insertedValue(search);
   }
 
   insertedValue($event: string) {
@@ -37,9 +46,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   get searchProperty() {
     return 'content';
   }
-  createForm(): FormGroup {
+  createForm(search: string): FormGroup {
     return this.fb.group({
-      ['content']: ''
+      ['content']: search
     });
   }
   nameOf(arg0: string) {

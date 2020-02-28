@@ -52,6 +52,13 @@
       [showNavigationButtons]="gridSettings.pager.showNavigationButtons">
     </dxo-pager>
 
+    <dxo-state-storing 
+      [enabled]="true" 
+      type="custom" 
+      [customLoad]="loadState"
+      [customSave]="saveState">
+    </dxo-state-storing>
+
     <!-- template for column name -->
     <div *dxTemplate="let cell of 'cellTemplateName'">
       <div class="text-primary txt-overflow" placement="right left" [ngbTooltip]="cell.text">{{ cell.text }}</div>

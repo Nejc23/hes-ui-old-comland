@@ -10,12 +10,17 @@ import { Subscription } from 'rxjs';
 import { configGrid } from 'src/environments/config';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
 import { readStatusTrashold } from '../consts/data-concentrator-units.consts';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
   templateUrl: './data-concentrator-units.component.html'
 })
 export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
+  cookieNameForGridSettings = 'grdColDCU';
+  sessionNameForGridState = 'grdStateDCU';
+
   // grid instance
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
 
@@ -36,28 +41,23 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   tresholds = readStatusTrashold;
 
-  // TODO get company id from meni
-  companyId = 0;
   TooltipTarget: any;
   ToolTipText = '';
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private sidebarService: SidebarService,
     private staticextService: DataConcentratorUnitsStaticTextService,
-    private i18n: I18n
+    private i18n: I18n,
+    private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
   ) {
     this.sidebarService.headerTitle = staticextService.headerTitleDCU;
     this.filters = staticextService.noFilterAppliedTekst;
   }
 
   ngOnInit() {
-    // TODO get selected company id from meni !!!!
-    this.companyId = 1;
-    // --------
-
     // set grid columns
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns();
-    this.loadData('');
 
     // subscribe to get count of all items on the grid
     this.subscribeTotalItems = this.dataConcentratorUnitsGridService.totalItems.subscribe((total: number) => {
@@ -83,14 +83,29 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // load data from BE (default filter is selected company id)
   loadData(search: string) {
-    this.dataSource = this.dataConcentratorUnitsGridService.loadData(this.companyId, search);
+    this.dataSource = this.dataConcentratorUnitsGridService.loadData(search);
   }
 
   // button click refresh grid
   refreshGrid() {
-    console.log('refreshGrid');
     this.grid.instance.refresh();
   }
+
+  saveState = state => {
+    console.log(state);
+    this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, state);
+    this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, state.pageIndex);
+  };
+
+  loadState = () => {
+    const dataFromCookie = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
+    const sessionPageIndex = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
+
+    if (dataFromCookie) {
+      dataFromCookie.pageIndex = sessionPageIndex ? sessionPageIndex : 0;
+    }
+    return dataFromCookie;
+  };
 
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
@@ -102,8 +117,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // search string
   searchData($event: string) {
+    this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
     this.searchString = $event;
-    this.dataSource = this.dataConcentratorUnitsGridService.loadData(this.companyId, $event);
+    this.dataSource = this.dataConcentratorUnitsGridService.loadData($event);
   }
 
   // TODO

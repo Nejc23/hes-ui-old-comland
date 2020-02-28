@@ -8,13 +8,17 @@ import CustomStore from 'devextreme/data/custom_store';
 import { HttpParams } from '@angular/common/http';
 import { DxoGridComponent } from 'devextreme-angular/ui/nested';
 import { DxDataGridComponent } from 'devextreme-angular';
-import { GridSettingsCoockieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 
 @Component({
   selector: 'app-devextreme',
   templateUrl: './devextreme.component.html'
 })
 export class DevextremeComponent implements OnInit {
+  cookieNameForGridSettings = 'grdColSampleDX';
+  sessionNameForGridState = 'grdStateSampleDX';
+
   @ViewChild('template2', { static: true }) colTemplate: TemplateRef<any>;
 
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
@@ -24,7 +28,11 @@ export class DevextremeComponent implements OnInit {
   columns = [];
   dataSource: any = {};
 
-  constructor(public usersSampleService: UsersSampleService, private gridSettingsCoockieStoreService: GridSettingsCoockieStoreService) {}
+  constructor(
+    public usersSampleService: UsersSampleService,
+    private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+  ) {}
 
   ngOnInit() {
     this.columns = [
@@ -100,11 +108,17 @@ export class DevextremeComponent implements OnInit {
   }
 
   saveState = state => {
-    this.gridSettingsCoockieStoreService.setGridColumnsSettings('Sample', JSON.stringify(state));
-    console.log(state);
+    this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, state);
+    this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, state.pageIndex);
   };
 
   loadState = () => {
-    return this.gridSettingsCoockieStoreService.getGridColumnsSettings('Sample');
+    const data = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
+    const sessionPageIndex = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
+
+    if (data) {
+      data.pageIndex = sessionPageIndex ? sessionPageIndex : 0;
+    }
+    return data;
   };
 }
