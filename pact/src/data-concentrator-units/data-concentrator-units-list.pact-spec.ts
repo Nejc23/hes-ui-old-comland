@@ -35,7 +35,7 @@ describe('Pact consumer test', () => {
       take: 50,
       search: [
         {
-          selector: 'name',
+          selector: 'all',
           value: 'search text'
         }
       ],
@@ -47,24 +47,29 @@ describe('Pact consumer test', () => {
       ],
       filter: [
         {
-          selector: 'companyId',
-          operation: enumSearchFilterOperators.equal,
-          value: '1092'
-        },
-        {
-          selector: 'dataType',
+          selector: 'type',
           operation: enumSearchFilterOperators.notEqual,
-          value: 'sample'
+          value: '32'
         },
         {
           selector: 'status',
           operation: enumSearchFilterOperators.equal,
-          value: 'active'
+          value: '4'
         },
         {
-          selector: 'meters',
-          operation: enumSearchFilterOperators.lessOrEqualThan,
-          value: '456'
+          selector: 'tag',
+          operation: enumSearchFilterOperators.equal,
+          value: '2'
+        },
+        {
+          selector: 'tag',
+          operation: enumSearchFilterOperators.equal,
+          value: '3'
+        },
+        {
+          selector: 'vendor',
+          operation: enumSearchFilterOperators.equal,
+          value: '323'
         }
       ]
     };

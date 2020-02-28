@@ -1,5 +1,5 @@
 // TODO: [8364] [8615]
-import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
+/*import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { DashboardRepositoryService } from 'src/app/core/repository/services/dashboards/dashboard-repository.service';
@@ -84,3 +84,4 @@ describe('Pact consumer test', () => {
     });
   });
 });
+*/

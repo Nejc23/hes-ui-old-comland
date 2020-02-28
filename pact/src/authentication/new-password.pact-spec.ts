@@ -1,4 +1,4 @@
-import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
+/*import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
@@ -103,3 +103,4 @@ describe('Pact consumer test', () => {
     });
   });
 });
+*/
