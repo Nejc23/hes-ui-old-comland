@@ -47,27 +47,27 @@ describe('Pact consumer test', () => {
       ],
       filter: [
         {
-          selector: 'type',
+          selector: 'typeId',
           operation: enumSearchFilterOperators.notEqual,
           value: '32'
         },
         {
-          selector: 'status',
+          selector: 'statusId',
           operation: enumSearchFilterOperators.equal,
           value: '4'
         },
         {
-          selector: 'tag',
+          selector: 'tagId',
           operation: enumSearchFilterOperators.equal,
           value: '2'
         },
         {
-          selector: 'tag',
+          selector: 'tagId',
           operation: enumSearchFilterOperators.equal,
           value: '3'
         },
         {
-          selector: 'vendor',
+          selector: 'vendorId',
           operation: enumSearchFilterOperators.equal,
           value: '323'
         }
