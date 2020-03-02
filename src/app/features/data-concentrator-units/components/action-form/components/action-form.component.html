@@ -3,24 +3,24 @@
     <app-input-searcher class="searchInput" [ngClass]="{'search-not-empty': !searchTextEmpty}" [debounceTimeOut]="0" (insertedValue)="insertedValue($event)" id="searchInput" label=""  [inputType]="'search'" [form]="form" [property]="searchProperty" class="d-inline-block" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
     <i class='uil uil-search' id="emptySearchIcon" *ngIf="searchTextEmpty"></i>
   </div>
-  <div class="col-auto">    
-    <button type="button" class="btn btn-secondary d-inline-block mb-1" data-toggle="modal" data-target="#filterModal" 
+  <div class="col-auto">
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" data-toggle="modal" data-target="#filterModal"
     [ngbTooltip]="tipContentFilter"><i class='uil uil-filter'></i></button>
   </div>
   <div class="col-auto">
     <div class="btn-group keep-inside-clicks-open">
-      <button type="button" class="btn btn-secondary d-inline-block mb-1" 
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" 
+      <button type="button" class="btn btn-secondary d-inline-block mb-1"
+        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         [ngbTooltip]="tipContentColumns"><i class='uil uil-columns'></i></button>
       <div  class="dropdown-menu dropdown-menu-right" >
-    
-          <app-input-multiselect [form]="form" [property]="columnsProperty"
+
+          <app-input-multiselect [form]="form" [property]="columnsProperty" name="multSelectColumns"
             [options]="columns$" [isReadOnly]="false" (onChange)="change()">
           </app-input-multiselect>
 
         <hr />
 
-        <button class="dropdown-item" type="button">Select all</button>      
+        <button class="dropdown-item" type="button">Select all</button>
       </div >
     </div>
   </div>

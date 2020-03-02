@@ -1,11 +1,11 @@
 <div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
 
-    <label class="control-label" *ngIf="label">
+    <label [attr.for]="name" *ngIf="label">
         {{label}}
         <sup *ngIf="required"> *</sup>
     </label>
 
-    <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly}">
+    <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly, 'row': inOneRow}" [id]="name">
         <div *ngFor="let option of options; let i = index;">
             <div class="checkbox">
                 <input type="checkbox" class="form-control" id="input-checkbox-{{i}}"

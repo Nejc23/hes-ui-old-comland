@@ -15,7 +15,8 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 export class InputMultiselectComponent implements OnInit {
   // required
   @Input() form: FormGroup;
-  @Input() property: string;
+  @Input() property: [];
+  @Input() name: string;
 
   // optional
   @Input() label: string;
@@ -25,8 +26,9 @@ export class InputMultiselectComponent implements OnInit {
   @Input() options: Codelist<number>[] = [];
   @Input() enabled = true;
   @Input() defaultValueString = '';
-  @Input() addNullValue: boolean = false;
-  @Input() isReadOnly: boolean = false;
+  @Input() addNullValue = false;
+  @Input() isReadOnly = false;
+  @Input() inOneRow = false;
 
   @Output() onChange = new EventEmitter<any>();
 
@@ -63,7 +65,7 @@ export class InputMultiselectComponent implements OnInit {
     this.selectedValuesArray = [];
 
     if (_.size(this.formControl.value)) {
-      for (let value of this.formControl.value) {
+      for (const value of this.formControl.value) {
         if (checked) {
           if (value !== selected.id) {
             this.selectedValuesArray.push(value); // uncheck element
@@ -104,7 +106,7 @@ export class InputMultiselectComponent implements OnInit {
   isOptionChecked(option: Codelist<number>) {
     let isChecked = false;
     if (this.formControl.value) {
-      for (let checkedId of this.formControl.value) {
+      for (const checkedId of this.formControl.value) {
         if (checkedId === option.id) {
           isChecked = true;
         }

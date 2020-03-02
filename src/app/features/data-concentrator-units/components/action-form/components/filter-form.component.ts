@@ -16,7 +16,7 @@ export class FilterFormComponent implements OnInit {
 
   statuses: Status[] = [];
 
-  dcuTypes: DcuType[] = [];
+  dcuTypes$: DcuType[] = [];
 
   tags = [
     { id: 1, value: 'tag5' },
@@ -34,8 +34,7 @@ export class FilterFormComponent implements OnInit {
   ngOnInit() {
     //this.form = this.createForm();
     this.statuses = this.service.getStatus();
-    this.dcuTypes = this.service.getDcuTypes();
-    this.addCheckboxes();
+    this.dcuTypes$ = this.service.getDcuTypes();
   }
 
   createForm(): FormGroup {
@@ -43,18 +42,7 @@ export class FilterFormComponent implements OnInit {
       ['content']: [[]], // {value: 'Item1', id: 0, extra: 0}
       ['tag']: [[]],
       ['type']: [[]],
-      ['types']: new FormArray([], minSelectedCheckboxes(1))
-    });
-  }
-
-  getControls() {
-    return (this.form.get('types') as FormArray).controls;
-  }
-
-  private addCheckboxes() {
-    this.dcuTypes.forEach((o, i) => {
-      const control = new FormControl(i === 0); // if first item set to true, else false
-      (this.form.get('types') as FormArray).push(control);
+      ['types']: [[]]
     });
   }
 
@@ -74,18 +62,7 @@ export class FilterFormComponent implements OnInit {
     console.log(this.form.value);
   }
 
-  onCheckChanged($event: any) {
-    console.log($event);
-    //
+  change() {
+    console.log(this.form.get('types').value);
   }
-}
-
-function minSelectedCheckboxes(min = 1) {
-  const validator: ValidatorFn = (formArray: FormArray) => {
-    const totalSelected = formArray.controls.map(control => control.value).reduce((prev, next) => (next ? prev + next : prev), 0);
-
-    return totalSelected >= min ? null : { required: true };
-  };
-
-  return validator;
 }

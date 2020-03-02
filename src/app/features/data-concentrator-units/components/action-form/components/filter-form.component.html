@@ -17,21 +17,9 @@
             [autocompleteItemsAsObjects]="statuses">
           </app-input-tag>
 
-          <div class="form-group">
-            <label for="dcuTypesCheck" i18n>Type</label>
-            <div class="row" name="dcuTypesCheck">
-              <div class="checkbox" *ngFor="let oneType of getControls(); let i = index">
-                <input type="checkbox" class="form-control" (change)="onCheckChanged($event)" [checked]="dcuTypes[i].isChecked" [formControlName]="i" [id]="i" [name]="i">
-                <label [attr.for]="i" class="control-label">
-                  {{dcuTypes[i].value}}
-                </label>
-                <div>
-                  <ng-content select="small">
-                  </ng-content>
-                </div>
-              </div>
-            </div>
-          </div>
+          <app-input-multiselect label="Types" [form]="form" [property]="typesProperty" name="multSelectTypes"
+          [options]="dcuTypes$" [isReadOnly]="false" [inOneRow]="true" (onChange)="change()">
+        </app-input-multiselect>
 
           <app-input-tag label="Tags" [property]="tagProperty" [form]="form" [autocompleteItemsAsObjects]="tags">
           </app-input-tag>

@@ -19,7 +19,6 @@ export class Status {
 export class DcuType {
   id: number;
   value: string;
-  isChecked: boolean;
 }
 
 let products: Product[] = [
@@ -224,9 +223,9 @@ export class FilterFormService {
 
   getDcuTypes(): DcuType[] {
     return [
-      { id: 1, value: 'G2-PLX', isChecked: false },
-      { id: 2, value: 'G3-PLC', isChecked: false },
-      { id: 3, value: 'G4-PLC', isChecked: true }
+      { id: 1, value: 'G2-PLX' },
+      { id: 2, value: 'G3-PLC' },
+      { id: 3, value: 'G4-PLC' }
     ];
   }
 }
