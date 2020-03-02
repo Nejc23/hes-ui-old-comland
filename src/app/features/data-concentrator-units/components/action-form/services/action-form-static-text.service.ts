@@ -10,4 +10,16 @@ export class ActionFormStaticTextService {
   get placeholderSearch() {
     return this.i18n('Search');
   }
+
+  preventCloseDropDownWhenClickInsideMenu() {
+    $('.dropdown-menu').on('click.bs.dropdown', e => {
+      e.stopPropagation();
+      e.preventDefault();
+    });
+  }
+
+  removePopupBackdropIfClickOnMenu() {
+    $(document.body).removeClass('modal-open');
+    $('.modal-backdrop').remove();
+  }
 }

@@ -92,7 +92,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   saveState = state => {
-    console.log(state);
     this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, state);
     this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, state.pageIndex);
   };

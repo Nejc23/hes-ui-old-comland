@@ -10,7 +10,6 @@ export class GridSettingsCookieStoreService {
   setGridColumnsSettings(gridId: string, state) {
     // this.cookieService.delete('gridSettings')
     this.cookieService.set(gridId, JSON.stringify(state), null, environment.cookiePath);
-    console.log(this.cookieService.get(gridId));
   }
 
   getGridColumnsSettings(gridId: string) {

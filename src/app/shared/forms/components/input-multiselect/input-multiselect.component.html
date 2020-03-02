@@ -1,0 +1,24 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+
+    <label class="control-label" *ngIf="label">
+        {{label}}
+        <sup *ngIf="required"> *</sup>
+    </label>
+
+    <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly}">
+        <div *ngFor="let option of options; let i = index;">
+            <div class="checkbox">
+                <input type="checkbox" class="form-control" id="input-checkbox-{{i}}"
+                    [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly">
+
+                <label for="{{option.id}}"
+                    (click)="selectedValue(option, isOptionChecked(option))">{{option.value}}</label>
+            </div>
+        </div>
+    </div>
+
+    <!--Loop through errors-->
+    <div class="help-block" *ngIf="showErrors()">
+        <app-form-error [error]="formControl!.errors "></app-form-error>
+    </div>
+</div>

@@ -19,6 +19,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 import { InputTagComponent } from './components/input-tag/input-tag.component';
 import { TagInputModule } from 'ngx-chips';
+import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -37,7 +38,8 @@ import { TagInputModule } from 'ngx-chips';
     TimepickerComponent,
     InputSelectComponent,
     InputSearcherComponent,
-    InputTagComponent
+    InputTagComponent,
+    InputMultiselectComponent
   ],
   declarations: [
     InputTextComponent,
@@ -54,7 +56,8 @@ import { TagInputModule } from 'ngx-chips';
     TimepickerComponent,
     InputSelectComponent,
     InputSearcherComponent,
-    InputTagComponent
+    InputTagComponent,
+    InputMultiselectComponent
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, TagInputModule, NgxDaterangepickerMd.forRoot()]
 })
