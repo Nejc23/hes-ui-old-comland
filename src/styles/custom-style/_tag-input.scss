@@ -2,3 +2,7 @@
   border: 1px solid $gray-400;
   border-radius: 2px;
 }
+
+.ng2-tag-input--focused {
+  border: 1px solid $primary !important;
+}

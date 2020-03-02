@@ -6,7 +6,7 @@
     <div class="modal-content">
 
       <div class="modal-header">
-        <h4 class="modal-title text-left" id="myModalLabel2" i18n>Filters Results</h4>
+        <h3 class="modal-title text-left" id="myModalLabel2" i18n>Filters Results</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
       </div>
@@ -30,8 +30,14 @@
             <button type="button" class="btn btn-primary" (click)="save()">Save Selected</button>
             <button type="submit" class="btn btn-primary">Apply</button>
           </div>
+          <hr>
+          <h4 class="modal-title text-left mb-3" id="myModalLabel3" i18n>Saved Filters</h4>
+          <div class="saved-filters form-group mb-0" *ngFor="let filter of dcuFilters$; let i = index">
+            <div class="form-row ml-1">
+              <span id="saved-filters-{{i}}">{{filter.value}}</span>
+            </div>
+          </div>
         </form>
-        <hr>
       </div>
 
     </div><!-- modal-content -->

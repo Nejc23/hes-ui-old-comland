@@ -21,6 +21,11 @@ export class DcuType {
   value: string;
 }
 
+export class DcuFilter {
+  id: number;
+  value: string;
+}
+
 let products: Product[] = [
   {
     Id: 1,
@@ -226,6 +231,18 @@ export class FilterFormService {
       { id: 1, value: 'G2-PLX' },
       { id: 2, value: 'G3-PLC' },
       { id: 3, value: 'G4-PLC' }
+    ];
+  }
+
+  getDcuFilters(userId: number): DcuFilter[] {
+    return [
+      { id: 1, value: 'My saved filter 1' },
+      { id: 2, value: 'My saved filter 2' },
+      { id: 3, value: 'My saved filter 3' },
+      {
+        id: 4,
+        value: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+      }
     ];
   }
 }

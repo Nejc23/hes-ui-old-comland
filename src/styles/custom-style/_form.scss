@@ -136,3 +136,16 @@
   z-index: 1;
   font-size: 1.7rem;
 }
+
+.saved-filters {
+  border-bottom: 1px solid $gray-200 !important;
+  &:hover {
+    background-color: rgba($primary,.1) !important;
+  }
+}
+
+span[id*="filters"] {
+  padding-top: 0.5 * $spacer;
+  padding-bottom: 0.5 * $spacer;
+  color: $primary
+}
