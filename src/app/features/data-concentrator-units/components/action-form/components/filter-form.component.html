@@ -13,16 +13,11 @@
 
       <div class="modal-body">
         <form [formGroup]="form">
+
           <div class="form-row">
-            <!-- <app-input-tag class="col-12" label="Status" [property]="statusesProperty" controlName="statuses" [form]="form"
-              [autocompleteItemsAsObjects]="dcuStatuses$">
-            </app-input-tag> -->
-            <kendo-multiselect class="form-group" name="statuses"
-              formControlName="statuses"
-              [data]="dcuStatuses"
-              [textField]="'value'"
-              [valueField]="'id'"
-          ></kendo-multiselect>
+            <app-input-tag class="col-12" label="Status" [property]="statusesProperty" [form]="form"
+              [autocompleteItemsAsObjects]="dcuStatuses">
+            </app-input-tag>
           </div>
 
           <div class="form-row">
@@ -37,14 +32,8 @@
           </div>
 
           <div class="form-row">
-            <!-- <app-input-tag class="col-12" label="Tag" [property]="tagsProperty" controlName="tags" [form]="form" [autocompleteItemsAsObjects]="dcuTags$">
-            </app-input-tag> -->
-            <kendo-multiselect class="form-group" name="tags"
-              formControlName="tags"
-              [data]="dcuTags"
-              [textField]="'value'"
-              [valueField]="'id'"
-            ></kendo-multiselect>
+            <app-input-tag class="col-12" label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags">
+            </app-input-tag>
           </div>
 
           <div class="d-flex justify-content-end">
