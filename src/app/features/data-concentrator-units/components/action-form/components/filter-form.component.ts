@@ -23,7 +23,6 @@ export class FilterFormComponent implements OnInit {
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
   dcuFilters$: Observable<DcuFilter[]>;
-  //data: DcuFilter[];
   dcuTags$: Observable<Codelist<number>[]>;
   dcuTags: Codelist<number>[];
 
@@ -46,7 +45,7 @@ export class FilterFormComponent implements OnInit {
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuFilters$ = this.dcuService.getDcuFilter();
     this.dcuFilters$.subscribe(x => {
-      //this.data = x;
+      // TODO: read selected filter from local storage
       this.form.get('filters').setValue(x);
       this.form.get(this.statusesProperty).setValue(x[1].statuses);
       this.form.get(this.typesProperty).setValue(x[1].types);

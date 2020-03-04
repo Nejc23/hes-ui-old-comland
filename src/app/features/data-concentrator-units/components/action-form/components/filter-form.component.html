@@ -16,7 +16,7 @@
 
           <div class="form-row">
             <app-input-tag class="col-12" label="Status" [property]="statusesProperty" [form]="form"
-              [autocompleteItemsAsObjects]="dcuStatuses">
+              [autocompleteItemsAsObjects]="dcuStatuses$ | async">
             </app-input-tag>
           </div>
 
@@ -32,7 +32,7 @@
           </div>
 
           <div class="form-row">
-            <app-input-tag class="col-12" label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags">
+            <app-input-tag class="col-12" label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async">
             </app-input-tag>
           </div>
 

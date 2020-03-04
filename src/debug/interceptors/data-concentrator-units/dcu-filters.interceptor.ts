@@ -14,9 +14,16 @@ export class DcuFiltersInterceptor {
         id: 1,
         name: 'My saved filter 1',
         vendor: null,
-        statuses: [],
+        statuses: [
+          { id: 1, value: 'Active' },
+          { id: 3, value: 'Mouted' }
+        ],
         types: [1],
-        tags: []
+        tags: [
+          { id: 3, value: 'tag 3' },
+          { id: 2, value: 'tag 2' },
+          { id: 1, value: 'tag 1' }
+        ]
       },
       {
         id: 2,
@@ -36,7 +43,7 @@ export class DcuFiltersInterceptor {
         id: 3,
         name: 'My saved filter 3',
         vendor: 2,
-        statuses: [],
+        statuses: [{ id: 2, value: 'Inactive' }],
         types: [1, 2],
         tags: []
       },
