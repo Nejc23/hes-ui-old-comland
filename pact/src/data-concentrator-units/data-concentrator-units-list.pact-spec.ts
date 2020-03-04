@@ -122,8 +122,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_GET_DATA_CONCENTRATOR_UNITS',
           uponReceiving: 'a request for getting data concentrator units',
           withRequest: {
-            method: service.getGridDCURequest(requestBody).method,
-            path: service.getGridDCURequest(requestBody).url,
+            method: service.getGridDcuRequest(requestBody).method,
+            path: service.getGridDcuRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -146,7 +146,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for fetching data concentrator units', done => {
-      service.getGridDCU(requestBody).subscribe(res => {
+      service.getGridDcu(requestBody).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });

@@ -20,6 +20,7 @@ import { InputSearcherComponent } from './components/input-searcher/input-search
 import { InputTagComponent } from './components/input-tag/input-tag.component';
 import { TagInputModule } from 'ngx-chips';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
+import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -39,7 +40,8 @@ import { InputMultiselectComponent } from './components/input-multiselect/input-
     InputSelectComponent,
     InputSearcherComponent,
     InputTagComponent,
-    InputMultiselectComponent
+    InputMultiselectComponent,
+    DropDownsModule
   ],
   declarations: [
     InputTextComponent,
@@ -59,7 +61,7 @@ import { InputMultiselectComponent } from './components/input-multiselect/input-
     InputTagComponent,
     InputMultiselectComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, TagInputModule, NgxDaterangepickerMd.forRoot()]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, TagInputModule, DropDownsModule, NgxDaterangepickerMd.forRoot()]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {

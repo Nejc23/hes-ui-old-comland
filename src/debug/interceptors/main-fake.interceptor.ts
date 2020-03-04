@@ -17,6 +17,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { SampleInterceptor } from './codelists/sample/sample.interceptor';
 import { UsersSampleInterceptor } from './codelists/users-sample/users-sample.interceptor';
 import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
+import { DcuFiltersInterceptor } from './data-concentrator-units/dcu-filters.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -38,6 +39,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList(request);
             }
 
+            if (DcuFiltersInterceptor.canInterceptDcuFilters(request)) {
+              return DcuFiltersInterceptor.interceptDcuFilters();
+            }
+
             if (SampleInterceptor.canInterceptSample(request)) {
               return SampleInterceptor.interceptSample();
             }
@@ -45,11 +50,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return UsersSampleInterceptor.interceptUsersSample(request);
             }
 
-            //#region  dashboards
-            /* TODO DK: to se ne rabi vrži ven
-            if (DashboardInterceptor.canInterceptDashboards(request)) {
-              return DashboardInterceptor.interceptDashboards();
-            }*/
             if (DashboardInterceptor.canInterceptDashboardGetOne(request)) {
               return DashboardInterceptor.interceptDashboardGetOne();
             }
@@ -59,7 +59,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (DashboardInterceptor.canInterceptDashboardPut(request)) {
               return DashboardInterceptor.interceptDashboardPut(request, this.listDashboards);
             }
-            //#endregion
 
             // grid random data
             if (GridInterceptor.canInterceptGrid(request)) {
@@ -74,21 +73,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return GridInterceptor.interceptGridPut(request);
             }
 
-            /*
-            // grid India fake data
-            if (GridIndiaInterceptor.canInterceptGridIndia(request)) {
-              return GridIndiaInterceptor.interceptGridIndia(request);
-            }
-
-            if (GridItemsIndiaDataInterceptor.canInterceptGridItemsIndia(request)) {
-              return GridItemsIndiaDataInterceptor.interceptGridItemsIndia(request);
-            }
-            */
-
-            /* for settings widgets list in BE
-            if (GridInterceptor.canInterceptGridListItems(request)) {
-              return GridInterceptor.interceptGridListItems();
-            }*/
             // codelists
             if (CodelistInterceptor.canInterceptPowerlines(request)) {
               return CodelistInterceptor.interceptPowerlines();
@@ -110,6 +94,18 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             if (CodelistInterceptor.canInterceptAccessType(request)) {
               return CodelistInterceptor.interceptAccessType();
+            }
+            if (CodelistInterceptor.canInterceptDcuStatus(request)) {
+              return CodelistInterceptor.interceptDcuStatus();
+            }
+            if (CodelistInterceptor.canInterceptDcuTag(request)) {
+              return CodelistInterceptor.interceptDcuTag();
+            }
+            if (CodelistInterceptor.canInterceptDcuType(request)) {
+              return CodelistInterceptor.interceptDcuType();
+            }
+            if (CodelistInterceptor.canInterceptDcuVendor(request)) {
+              return CodelistInterceptor.interceptDcuVendor();
             }
 
             // users

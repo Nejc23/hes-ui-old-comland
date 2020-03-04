@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { TagInputComponent } from 'ngx-chips';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-input-tag',
@@ -14,22 +15,20 @@ export class InputTagComponent implements OnInit {
 
   // optional
   @Input() label: string;
-  @Input() autocompleteItemsAsObjects: any = [];
-
-  @ViewChild('container', { static: true }) container;
-  @ViewChild('statusTag', { static: true }) tagInput: TagInputComponent;
+  @Input() autocompleteItemsAsObjects: Observable<any>;
 
   controlId: string;
   constructor(private formUtils: FormsUtilsService) {
-    document.addEventListener('click', this.offClickHandler.bind(this));
+    //document.addEventListener('click', this.offClickHandler.bind(this));
   }
 
-  offClickHandler(event: any) {
-    if (!this.container.nativeElement.contains(event.target)) {
-      // check click origin
-      this.tagInput.dropdown.hide();
-    }
-  }
+  // offClickHandler(event: any) {
+  //   // if (!this.container.nativeElement.contains(event.target)) {
+  //   //   // check click origin
+  //   //   this.tagInput.dropdown.hide();
+  //   // }
+  // }
+
   ngOnInit() {
     if (!this.form) {
       throw Error('InputTextComponent - form input missing.');

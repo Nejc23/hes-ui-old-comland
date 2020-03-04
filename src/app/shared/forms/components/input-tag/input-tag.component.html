@@ -3,7 +3,7 @@
     {{label}}
     <span *ngIf="required"> *</span>
   </label>
-  <tag-input #statusTag [formControlName]="'content'" class="form-group" [name]="property"
+  <!-- <tag-input #statusTag [formControlName]="property" class="form-group" [name]="property"
     [onlyFromAutocomplete]="true">
     <tag-input-dropdown [showDropdownIfEmpty]="true" [zIndex]="1055" [focusFirstElement]="true" [displayBy]="'value'"
       [identifyBy]="'id'" [autocompleteItems]="autocompleteItemsAsObjects">
@@ -11,5 +11,14 @@
         {{ item.value }}
       </ng-template>
     </tag-input-dropdown>
-  </tag-input>
+  </tag-input> -->
+
+  <!-- (ngModel)="'value'" -->
+
+  <kendo-multiselect class="form-group" [name]="property"
+        [data]="autocompleteItemsAsObjects"
+        [formControlName]="property"
+        [textField]="'value'"
+        [valueField]="'id'"
+      ></kendo-multiselect>
 </div>

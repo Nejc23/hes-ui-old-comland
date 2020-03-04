@@ -1,4 +1,14 @@
 .form-group {
+  .ng2-tag-input {
+    border: 1px solid $gray-400;
+    border-radius: 2px;
+    padding: 0em !important;
+  }
+
+  .ng2-tag-input--focused {
+    border: 1px solid $primary !important;
+  }
+
   label:not(.control-label) {
     font-size: $font-size-sm;
   }
@@ -35,6 +45,14 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     -o-appearance: none;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    height: 2.5rem !important;
+
+    &:focus {
+      border: 1px solid $primary !important;
+      box-shadow: none;
+    }
 
     &::-ms-expand {
       display: none;

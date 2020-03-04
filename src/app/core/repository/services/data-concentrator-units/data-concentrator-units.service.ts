@@ -5,7 +5,8 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits } from '../../consts/data-concentrator-units.const';
+import { dataConcentratorUnits, dcuFilters } from '../../consts/data-concentrator-units.const';
+import { DcuFilter } from 'src/app/features/data-concentrator-units/interfaces/dcu-filter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,19 @@ import { dataConcentratorUnits } from '../../consts/data-concentrator-units.cons
 export class DataConcentratorUnitsService {
   constructor(private repository: RepositoryService) {}
 
-  getGridDCU(param: GridRequestParams): Observable<GridResponse<DataConcentratorUnitsList>> {
-    return this.repository.makeRequest(this.getGridDCURequest(param));
+  getGridDcu(param: GridRequestParams): Observable<GridResponse<DataConcentratorUnitsList>> {
+    return this.repository.makeRequest(this.getGridDcuRequest(param));
   }
 
-  getGridDCURequest(param: GridRequestParams): HttpRequest<any> {
+  getGridDcuRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', dataConcentratorUnits, param);
+  }
+
+  getDcuFilter(): Observable<DcuFilter[]> {
+    return this.repository.makeRequest(this.getDcuFilterRequest());
+  }
+
+  getDcuFilterRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', dcuFilters);
   }
 }

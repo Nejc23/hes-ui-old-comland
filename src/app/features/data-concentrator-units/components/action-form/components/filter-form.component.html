@@ -13,16 +13,39 @@
 
       <div class="modal-body">
         <form [formGroup]="form">
-          <app-input-tag label="Status" [property]="searchProperty" [form]="form"
-            [autocompleteItemsAsObjects]="statuses">
-          </app-input-tag>
+          <div class="form-row">
+            <!-- <app-input-tag class="col-12" label="Status" [property]="statusesProperty" controlName="statuses" [form]="form"
+              [autocompleteItemsAsObjects]="dcuStatuses$">
+            </app-input-tag> -->
+            <kendo-multiselect class="form-group" name="statuses"
+              formControlName="statuses"
+              [data]="dcuStatuses"
+              [textField]="'value'"
+              [valueField]="'id'"
+          ></kendo-multiselect>
+          </div>
 
-          <app-input-multiselect label="Types" [form]="form" [property]="typesProperty" name="multSelectTypes"
-          [options]="dcuTypes$" [isReadOnly]="false" [inOneRow]="true" (onChange)="change()">
-        </app-input-multiselect>
+          <div class="form-row">
+            <app-input-multiselect class="col-12" label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes"
+              [options]="dcuTypes$ | async" [isReadOnly]="false" [inOneRow]="true" (onChange)="change()">
+            </app-input-multiselect>
+          </div>
 
-          <app-input-tag label="Tags" [property]="tagProperty" [form]="form" [autocompleteItemsAsObjects]="tags">
-          </app-input-tag>
+          <div class="form-row">
+            <app-select-input class="col-6" label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async">
+            </app-select-input>
+          </div>
+
+          <div class="form-row">
+            <!-- <app-input-tag class="col-12" label="Tag" [property]="tagsProperty" controlName="tags" [form]="form" [autocompleteItemsAsObjects]="dcuTags$">
+            </app-input-tag> -->
+            <kendo-multiselect class="form-group" name="tags"
+              formControlName="tags"
+              [data]="dcuTags"
+              [textField]="'value'"
+              [valueField]="'id'"
+            ></kendo-multiselect>
+          </div>
 
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -32,9 +55,9 @@
           </div>
           <hr>
           <h4 class="modal-title text-left mb-3" id="myModalLabel3" i18n>Saved Filters</h4>
-          <div class="saved-filters form-group mb-0" *ngFor="let filter of dcuFilters$; let i = index">
+          <div class="saved-filters form-group mb-0" *ngFor="let filter of (dcuFilters$ | async ); let i = index">
             <div class="form-row ml-1">
-              <span id="saved-filters-{{i}}">{{filter.value}}</span>
+              <span id="saved-filters-{{i}}">{{filter.name}}</span>
             </div>
           </div>
         </form>

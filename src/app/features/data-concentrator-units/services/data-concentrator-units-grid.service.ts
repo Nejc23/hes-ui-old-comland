@@ -98,7 +98,7 @@ export class DataConcentratorUnitsGridService {
         this.setSearch(search);
 
         return this.dataConcentratorUnitsService
-          .getGridDCU(this.paramsDCU)
+          .getGridDcu(this.paramsDCU)
           .toPromise()
           .then((data: any) => {
             // set observable value
