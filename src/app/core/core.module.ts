@@ -20,6 +20,7 @@ import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.intercepto
 import { TableService } from './tables/services/table.service';
 import { GridSettingsCookieStoreService } from './utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
+import { GridFilterSessionStoreService } from './utils/services/grid-filter-session-store.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -36,6 +37,7 @@ import { GridSettingsSessionStoreService } from './utils/services/grid-settings-
     TableService,
     GridSettingsCookieStoreService,
     GridSettingsSessionStoreService,
+    GridFilterSessionStoreService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,

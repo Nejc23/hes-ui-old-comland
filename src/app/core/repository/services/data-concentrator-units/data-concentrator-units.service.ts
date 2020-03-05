@@ -6,7 +6,7 @@ import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { dataConcentratorUnits, dcuFilters } from '../../consts/data-concentrator-units.const';
-import { DcuFilter } from 'src/app/features/data-concentrator-units/interfaces/dcu-filter.interface';
+import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +28,29 @@ export class DataConcentratorUnitsService {
 
   getDcuFilterRequest(): HttpRequest<any> {
     return new HttpRequest('GET', dcuFilters);
+  }
+
+  saveDcuFilter(id: number, payload: DcuFilter): Observable<DcuFilter> {
+    return this.repository.makeRequest(this.saveDcuFilterRequest(id, payload));
+  }
+
+  saveDcuFilterRequest(id: number, payload: DcuFilter): HttpRequest<DcuFilter> {
+    return new HttpRequest('PUT', `${dcuFilters}/${id}`, payload as any);
+  }
+
+  deleteDcuFilter(id: number): Observable<DcuFilter> {
+    return this.repository.makeRequest(this.deleteDcuFilterRequest(id));
+  }
+
+  deleteDcuFilterRequest(id: number): HttpRequest<DcuFilter> {
+    return new HttpRequest('DELETE', `${dcuFilters}/${id}`);
+  }
+
+  createDcuFilter(payload: DcuFilter): Observable<DcuFilter> {
+    return this.repository.makeRequest(this.createDcuFilterRequest(payload));
+  }
+
+  createDcuFilterRequest(payload: DcuFilter): HttpRequest<DcuFilter> {
+    return new HttpRequest('POST', dcuFilters, payload as any);
   }
 }

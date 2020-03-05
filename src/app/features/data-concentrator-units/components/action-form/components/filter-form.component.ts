@@ -1,22 +1,21 @@
-import { OnInit, Component } from '@angular/core';
-
-import ArrayStore from 'devextreme/data/array_store';
-import { FilterFormService, DcuType, Status } from '../services/filter-form.service';
-import { FormGroup, FormBuilder, FormArray, ValidatorFn, FormControl } from '@angular/forms';
+import { OnInit, Component, OnDestroy } from '@angular/core';
+import { FilterFormService } from '../services/filter-form.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { Observable, of } from 'rxjs';
-import { DcuFilter } from '../../../interfaces/dcu-filter.interface';
+import { Observable } from 'rxjs';
+import { DcuFilter } from '../../../../../core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { data } from 'jquery';
+import { GridFilterSessionStoreService } from 'src/app/core/utils/services/grid-filter-session-store.service';
+import { DcuFiltersInterceptor } from 'src/debug/interceptors/data-concentrator-units/dcu-filters.interceptor';
 
 @Component({
   selector: 'app-filter-form',
   templateUrl: './filter-form.component.html'
 })
-export class FilterFormComponent implements OnInit {
+export class FilterFormComponent implements OnInit, OnDestroy {
+  sessionNameForGridFilter = 'grdFilterDCU';
   form: FormGroup;
-  items = ['Javascript', 'Typescript'];
 
   dcuStatuses$: Observable<Codelist<number>[]>;
   dcuStatuses: Codelist<number>[] = [];
@@ -34,10 +33,10 @@ export class FilterFormComponent implements OnInit {
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
-    private tmpFilterService: FilterFormService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private gridFilterSessionStoreService: GridFilterSessionStoreService
   ) {
-    this.form = this.createForm();
+    this.form = this.createForm(null, 0);
   }
 
   ngOnInit() {
@@ -46,12 +45,19 @@ export class FilterFormComponent implements OnInit {
     this.dcuFilters$ = this.dcuService.getDcuFilter();
     this.dcuFilters$.subscribe(x => {
       // TODO: read selected filter from local storage
-      this.form.get('filters').setValue(x);
-      this.form.get(this.statusesProperty).setValue(x[1].statuses);
-      this.form.get(this.typesProperty).setValue(x[1].types);
-      this.form.get(this.tagsProperty).setValue(x[1].tags);
-      this.form.get(this.vendorProperty).setValue(x[1].vendor);
+      const sessionFilter = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter);
+      if (sessionFilter) {
+        x.push(sessionFilter);
+        const count = x.length;
+        console.log(`sessionFilter GET = ${JSON.stringify(sessionFilter)}`);
+        this.form = this.createForm(x, count - 1);
+      }
     });
+
+    // this.dcuFilters$.toPromise().then((x: any) => {
+    //   console.log(`sessionFilter SET = ${JSON.stringify(x)}`)
+    //     this.gridFilterSessionStoreService.setGridFilter(this.sessionNameForGridFilter, x);
+    // });
 
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuStatuses$.subscribe(y => (this.dcuStatuses = y));
@@ -60,14 +66,28 @@ export class FilterFormComponent implements OnInit {
     this.dcuTags$.subscribe(y => (this.dcuTags = y));
   }
 
-  createForm(): FormGroup {
+  ngOnDestroy(): void {
+    const currentFilter: DcuFilter = {
+      id: null,
+      name: null,
+      statuses: this.form.get(this.statusesProperty).value,
+      types: this.form.get(this.typesProperty).value,
+      tags: this.form.get(this.tagsProperty).value,
+      vendor: this.form.get(this.vendorProperty).value
+    };
+    console.log(`currentFilter SET = ${JSON.stringify(currentFilter)}`);
+    this.gridFilterSessionStoreService.setGridFilter(this.sessionNameForGridFilter, currentFilter);
+  }
+
+  createForm(filters: DcuFilter[], selected: number): FormGroup {
     console.log('createForm()');
+    const values = filters && filters[selected];
     return this.fb.group({
-      ['statuses']: [[]],
-      ['tags']: [[]],
-      ['types']: [[]],
-      ['filters']: [[]], //[this.data],
-      ['vendor']: [null]
+      ['statuses']: [values ? filters[selected].statuses : []],
+      ['tags']: [values ? filters[selected].tags : []],
+      ['types']: [values ? filters[selected].types : []],
+      ['filters']: [filters ? filters : []],
+      ['vendor']: [values ? filters[selected].vendor : null]
     });
   }
 

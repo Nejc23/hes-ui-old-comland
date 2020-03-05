@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { DcuFilter } from 'src/app/features/data-concentrator-units/interfaces/dcu-filter.interface';
+import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { dcuFilters } from 'src/app/core/repository/consts/data-concentrator-units.const';
 

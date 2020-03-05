@@ -128,7 +128,7 @@ describe('Pact consumer test', () => {
             headers: defaultRequestHeader
           },
           willRespondWith: {
-            status: 201,
+            status: 200,
             headers: {
               ...defaultResponseHeader
             },

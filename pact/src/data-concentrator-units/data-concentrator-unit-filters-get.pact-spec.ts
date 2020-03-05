@@ -2,7 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { DcuFilter } from 'src/app/features/data-concentrator-units/interfaces/dcu-filter.interface';
+import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -87,7 +87,7 @@ describe('Pact consumer test', () => {
             headers: defaultRequestHeader
           },
           willRespondWith: {
-            status: 201,
+            status: 200,
             headers: {
               ...defaultResponseHeader
             },
