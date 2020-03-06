@@ -2,7 +2,15 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "types": []
+    "types": [],
+    "paths": {      
+      "@ag-grid-community/core": [
+        "../node_modules/@ag-grid-community/core"
+      ],
+      "@ag-grid-community/core/*": [
+        "../node_modules/@ag-grid-community/core/*"
+      ]
+    }
   },
   "exclude": [
     "test.ts",

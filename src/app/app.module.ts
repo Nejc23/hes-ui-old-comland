@@ -13,7 +13,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserModule } from './features/users/modules/user.module';
 import { CoreModule } from './core/core.module';
 import { GridModule } from '@progress/kendo-angular-grid';
-import { AgGridModule } from 'ag-grid-angular';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 
@@ -41,8 +40,7 @@ declare const require;
     UserModule,
     CoreModule.forRoot(),
     SharedModule,
-    GridModule,
-    AgGridModule.withComponents([])
+    GridModule
   ],
   bootstrap: [AppComponent]
 })

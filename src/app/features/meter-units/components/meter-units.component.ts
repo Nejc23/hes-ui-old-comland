@@ -9,17 +9,22 @@ import { take } from 'rxjs/operators';
 import { headerTitleMU } from '../consts/static-text.const';
 import { SampleService } from 'src/app/core/repository/services/samples/samples-repository.service';
 import { Sample } from 'src/app/core/repository/interfaces/samples/samples-interface';
-import { AgGridAngular } from 'ag-grid-angular';
-import { GridOptions, IDatasource, IGetRowsParams } from 'ag-grid-community';
 import { UsersSampleService } from 'src/app/core/repository/services/samples/users-sample-repository.service';
+import { Module, AllModules } from '@ag-grid-enterprise/all-modules';
+import { ColumnApi, GridApi } from '@ag-grid-enterprise/all-modules';
 
 @Component({
   selector: 'app-meter-units',
   templateUrl: './meter-units.component.html'
 })
 export class MeterUnitsComponent implements OnInit, AfterViewInit {
-  @ContentChild('colTemplate', { static: true })
-  public colTemplate: TemplateRef<any>;
+  public modules: Module[] = AllModules;
+  public api: GridApi;
+  public columnApi: ColumnApi;
+
+  columnDefs = [{ headerName: 'Status', field: 'name', pinned: 'left', resizable: true, sortable: true }];
+  // @ContentChild('colTemplate', { static: true })
+  /*public colTemplate: TemplateRef<any>;
 
   public gridOptions: Partial<GridOptions>;
   private gridApi;
@@ -65,7 +70,8 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
   @ViewChild('agGridServer', { static: true }) grid2: AgGridAngular;
   userSubscriber: Subscription;
   rowData: any[];
-
+*/
+  rowData: any[] = [];
   constructor(
     private sidebatService: SidebarService,
     private sampleService: SampleService,
@@ -74,6 +80,7 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
     public fb: FormBuilder,
     private ngZone: NgZone
   ) {
+    /*
     this.sidebatService.headerTitle = this.i18n(headerTitleMU);
 
     this.columnDefs2 = [
@@ -95,9 +102,9 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
       cacheBlockSize: 90,
       paginationPageSize: 90,
       rowModelType: 'infinite'
-    };
+    };*/
   }
-
+  /*
   public edit = (dataItem, rowIndex): void => {
     console.log(dataItem, rowIndex);
   };
@@ -120,8 +127,10 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
   }
 
   onPaginationChanged(params) {}
-
-  ngOnInit() {}
+*/
+  ngOnInit() {
+    this.rowData = [{ name: '3232323' }];
+  }
 
   public onPageChange(state: any): void {}
 

@@ -60,8 +60,8 @@
     "@swimlane/ngx-datatable": "^16.0.2",
     "@types/jquery": "^3.3.33",
     "@types/lodash": "^4.14.138",
-    "ag-grid-angular": "^22.1.1",
-    "ag-grid-community": "^22.1.1",
+    "@ag-grid-enterprise/all-modules": "~22.1.2",
+    "@ag-grid-community/angular": "~22.1.2",
     "angular-gauge-chart": "^0.7.2",
     "angular-gridster2": "^8.2.0",
     "bootstrap": "^4.3.1",
@@ -89,6 +89,7 @@
     "zone.js": "~0.9.1"
   },
   "devDependencies": {
+    "@ag-grid-community/core": "~22.1.1",
     "@pact-foundation/karma-pact": "^2.2.0",
     "@pact-foundation/pact": "^8.2.6",
     "@pact-foundation/pact-node": "^8.6.2",

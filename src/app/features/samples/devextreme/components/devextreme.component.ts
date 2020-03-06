@@ -1,7 +1,6 @@
 import { Component, OnInit, NgZone, ContentChild, TemplateRef, ViewChild } from '@angular/core';
 import { UsersSample } from 'src/app/core/repository/interfaces/samples/users-sample.interface';
 import { UsersSampleService } from 'src/app/core/repository/services/samples/users-sample-repository.service';
-import { IGetRowsParams } from 'ag-grid-community';
 import Widget from 'devextreme/ui/widget/ui.widget';
 import { dxTemplate } from 'devextreme/core/templates/template';
 import CustomStore from 'devextreme/data/custom_store';
