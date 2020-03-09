@@ -31,7 +31,7 @@ describe('Pact consumer test', () => {
     statuses: [{ id: 1, value: 'Active' }],
     tags: [{ id: 1, value: 'tag 1' }],
     types: [1],
-    vendor: 1
+    vendor: { id: 1, value: 'Vendor 1' }
   };
 
   const responseBody: DcuFilter = {
@@ -40,7 +40,7 @@ describe('Pact consumer test', () => {
     statuses: [{ id: 1, value: 'Active' }],
     tags: [{ id: 1, value: 'tag 1' }],
     types: [1],
-    vendor: 1
+    vendor: { id: 1, value: 'Vendor 1' }
   };
 
   describe('Data concentrator unit filter create', () => {

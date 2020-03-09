@@ -8,7 +8,7 @@ import { dcuFilters } from 'src/app/core/repository/consts/data-concentrator-uni
 export class DcuFiltersInterceptor {
   constructor() {}
 
-  static interceptDcuFilters(): Observable<HttpEvent<any>> {
+  static interceptDcuFiltersGet(): Observable<HttpEvent<any>> {
     const data: DcuFilter[] = [
       {
         id: 1,
@@ -28,7 +28,7 @@ export class DcuFiltersInterceptor {
       {
         id: 2,
         name: 'My saved filter 2',
-        vendor: 1,
+        vendor: { id: 1, value: 'Vendor 1' },
         statuses: [
           { id: 1, value: 'Active' },
           { id: 2, value: 'Inactive' }
@@ -42,7 +42,7 @@ export class DcuFiltersInterceptor {
       {
         id: 3,
         name: 'My saved filter 3',
-        vendor: 2,
+        vendor: { id: 2, value: 'Vendor 2' },
         statuses: [{ id: 2, value: 'Inactive' }],
         types: [1, 2],
         tags: []
@@ -50,7 +50,7 @@ export class DcuFiltersInterceptor {
       {
         id: 4,
         name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        vendor: 2,
+        vendor: { id: 2, value: 'Vendor 2' },
         statuses: [],
         types: [2],
         tags: []
@@ -65,7 +65,62 @@ export class DcuFiltersInterceptor {
     );
   }
 
-  static canInterceptDcuFilters(request: HttpRequest<any>): boolean {
-    return new RegExp(dcuFilters).test(request.url);
+  static canInterceptDcuFiltersGet(request: HttpRequest<any>): boolean {
+    return new RegExp(dcuFilters).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static canInterceptDcuFiltersPost(request: HttpRequest<any>): boolean {
+    return new RegExp(dcuFilters).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptDcuFiltersPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const data: DcuFilter = {
+      id: 5,
+      name: 'My saved filter NEW',
+      vendor: null,
+      statuses: [{ id: 3, value: 'Mouted' }],
+      types: [3],
+      tags: [
+        { id: 3, value: 'tag 3' },
+        { id: 1, value: 'tag 1' }
+      ]
+    };
+
+    return of(
+      new HttpResponse({
+        status: 201,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptDcuFiltersPut(request: HttpRequest<any>): boolean {
+    return new RegExp(`${dcuFilters}/[0-9]+$`).test(request.url) && request.method.endsWith('PUT');
+  }
+
+  static interceptDcuFiltersPut(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null; // Report = request.body;
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body
+      })
+    );
+  }
+
+  static canInterceptDcuFiltersDelete(request: HttpRequest<any>): boolean {
+    return new RegExp(`${dcuFilters}/[0-9]+$`).test(request.url) && request.method.endsWith('DELETE');
+  }
+
+  static interceptDcuFiltersDelete(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null; // Report = request.body;
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body
+      })
+    );
   }
 }

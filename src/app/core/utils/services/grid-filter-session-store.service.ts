@@ -3,26 +3,26 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class GridFilterSessionStoreService {
-  gridFilter = 'gridFilter';
+  gridFilterName = 'gridFilter';
 
   constructor() {}
   // filter
-  setGridFilter(gridId: string, gridFilter: any) {
-    if (sessionStorage.getItem(this.gridFilter)) {
-      const data = JSON.parse(sessionStorage.getItem(this.gridFilter));
+  setGridFilter(gridId: string, filterNew: any) {
+    if (sessionStorage.getItem(this.gridFilterName)) {
+      const data = JSON.parse(sessionStorage.getItem(this.gridFilterName));
       if (data) {
         const value = _.find(data, x => x.id === gridId);
         if (value) {
-          value.value.gridFilter = gridFilter;
-          sessionStorage.setItem(this.gridFilter, JSON.stringify(data));
+          value.value.filter = filterNew;
+          sessionStorage.setItem(this.gridFilterName, JSON.stringify(data));
         } else {
           data.push({
             id: gridId,
             value: {
-              filter: gridFilter
+              filter: filterNew
             }
           });
-          sessionStorage.setItem(this.gridFilter, JSON.stringify(data));
+          sessionStorage.setItem(this.gridFilterName, JSON.stringify(data));
         }
       }
     } else {
@@ -30,17 +30,17 @@ export class GridFilterSessionStoreService {
         {
           id: gridId,
           value: {
-            filter: gridFilter
+            filter: filterNew
           }
         }
       ];
-      sessionStorage.setItem(this.gridFilter, JSON.stringify(data));
+      sessionStorage.setItem(this.gridFilterName, JSON.stringify(data));
     }
   }
 
   getGridFilter(gridId: string) {
-    if (sessionStorage.getItem(this.gridFilter)) {
-      const data = JSON.parse(sessionStorage.getItem(this.gridFilter));
+    if (sessionStorage.getItem(this.gridFilterName)) {
+      const data = JSON.parse(sessionStorage.getItem(this.gridFilterName));
       if (data) {
         const value = _.find(data, x => x.id === gridId);
         if (value) {

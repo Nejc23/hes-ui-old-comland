@@ -16,9 +16,9 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() label;
   @Input() selectOptions: Codelist<number | string>[] = [];
 
-  @Output() selectItem = new EventEmitter<number | string>();
-
   active = new Subject<void>();
+
+  selection: Codelist<number | string> = { id: null, value: 'Select item...' };
 
   constructor(private i18n: I18n, private formUtils: FormsUtilsService) {}
 
@@ -33,7 +33,7 @@ export class SelectInputComponent implements OnInit, OnDestroy {
       .get(this.property)
       .valueChanges.pipe(takeUntil(this.active))
       .subscribe(x => {
-        this.onSelect(x);
+        this.selectionChange(x);
       });
   }
 
@@ -41,12 +41,12 @@ export class SelectInputComponent implements OnInit, OnDestroy {
     this.active.next();
   }
 
-  onSelect(id: number | string): void {
-    this.selectItem.emit(id);
+  public valueChange(value: any): void {
+    console.log('valueChange', value);
   }
 
-  getSelectedValue(id: number | string): string {
-    return this.formControlValue === id ? 'selected' : null;
+  public selectionChange(value: any): void {
+    console.log('selectionChange', value);
   }
 
   get formControlValue(): number | string {

@@ -1,10 +1,13 @@
 .justify-content-end {
   .btn + .btn {
     margin-left: $spacer;
+    padding-left: 2 * $spacer;
+    padding-right: 2 * $spacer;
   }
 }
 
 .btn {
+  font-weight: 400;
   &.btn-round {
     border-radius: 100%;
     height: $input-height;
@@ -16,14 +19,23 @@
   &.btn-primary {
     color: $white;
   }
-  
+
   &.btn-secondary {
     color: $gray-700;
   }
 
-  i {
-    font-size: $font-size-lg;
+  &.btn-filters {
+    padding: 0rem !important;
   }
+
+  i {
+    font-size: $h3-font-size;
+  }
+}
+
+#firstBtn {
+  padding-left: 2 * $spacer;
+  padding-right: 2 * $spacer;
 }
 
 

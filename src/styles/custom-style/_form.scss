@@ -165,5 +165,34 @@
 span[id*="filters"] {
   padding-top: 0.5 * $spacer;
   padding-bottom: 0.5 * $spacer;
-  color: $primary
+  color: $primary;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.k-list .k-item.k-state-selected, .k-list-optionlabel.k-state-selected, .k-list-container .k-button:active, .k-list-container .k-button.k-state-active,
+.k-columnmenu-item.k-state-selected, .k-column-menu .k-menu:not(.k-context-menu) .k-item.k-state-selected,
+.k-spreadsheet-popup .k-button:active, .k-spreadsheet-popup .k-button.k-state-active, .k-spreadsheet-popup .k-button.k-state-selected {
+  background-color: $primary !important;
+  color: $white !important;
+}
+
+.k-dropdown-wrap .k-icon:before {
+  content: "\e015";
+}
+
+input[type="checkbox"]:checked + label:before,
+.results {
+  color: $white !important;
+  background: $primary !important;
+}
+
+#filter-header,
+.results {
+  padding: .5*$spacer $spacer;
+}
+
+#filter-results {
+  margin-left: 0rem;
+  width: 100%;
 }

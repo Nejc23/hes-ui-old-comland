@@ -9,7 +9,7 @@
         <div *ngFor="let option of options; let i = index;">
             <div class="checkbox">
                 <input type="checkbox" class="form-control" id="input-checkbox-{{i}}"
-                    [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly">
+                    [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox>
 
                 <label for="{{option.id}}"
                     (click)="selectedValue(option, isOptionChecked(option))">{{option.value}}</label>

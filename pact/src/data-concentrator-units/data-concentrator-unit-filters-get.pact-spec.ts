@@ -45,7 +45,7 @@ describe('Pact consumer test', () => {
       {
         id: 2,
         name: 'My saved filter 2',
-        vendor: 1,
+        vendor: { id: 1, value: 'Vendor 1' },
         statuses: [
           { id: 1, value: 'Active' },
           { id: 2, value: 'Inactive' }
@@ -59,7 +59,7 @@ describe('Pact consumer test', () => {
       {
         id: 3,
         name: 'My saved filter 3',
-        vendor: 2,
+        vendor: { id: 2, value: 'Vendor 2' },
         statuses: [{ id: 2, value: 'Inactive' }],
         types: [1, 2],
         tags: []
@@ -67,7 +67,7 @@ describe('Pact consumer test', () => {
       {
         id: 4,
         name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        vendor: 2,
+        vendor: { id: 2, value: 'Vendor 2' },
         statuses: [],
         types: [2],
         tags: []

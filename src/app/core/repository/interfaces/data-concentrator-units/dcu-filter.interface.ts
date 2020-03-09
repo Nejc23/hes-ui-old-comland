@@ -3,7 +3,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 export interface DcuFilter {
   id: number;
   name: string;
-  vendor: number;
+  vendor: Codelist<number>;
   statuses: Codelist<number>[];
   types: number[];
   tags: Codelist<number>[];
