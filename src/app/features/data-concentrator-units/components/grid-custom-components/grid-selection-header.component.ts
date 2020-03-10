@@ -1,5 +1,6 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { IHeaderAngularComp } from '@ag-grid-community/angular';
+import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 
 @Component({
   selector: 'app-grid-selection-header',
@@ -7,30 +8,15 @@ import { IHeaderAngularComp } from '@ag-grid-community/angular';
 })
 export class GridSelectionHeaderComponent implements IHeaderAngularComp {
   public params: any;
-  private ascSort: string;
-  private descSort: string;
-  private noSort: string;
-  private elementRef: ElementRef;
+  public isChecked: false;
 
-  constructor(elementRef: ElementRef) {
-    this.elementRef = elementRef;
-  }
+  constructor(private service: DataConcentratorUnitsGridEventEmitterService) {}
 
   agInit(params): void {
     this.params = params;
-
-    params.column.addEventListener('sortChanged', this.onSortChanged.bind(this));
-    this.onSortChanged();
   }
 
-  onSortChanged() {
-    this.ascSort = this.descSort = this.noSort = 'inactive';
-    if (this.params.column.isSortAscending()) {
-      this.ascSort = 'active';
-    } else if (this.params.column.isSortDescending()) {
-      this.descSort = 'active';
-    } else {
-      this.noSort = 'active';
-    }
+  checkValue(event: any) {
+    this.service.checkChanged(event);
   }
 }

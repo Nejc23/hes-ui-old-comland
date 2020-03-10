@@ -15,6 +15,7 @@ import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/gri
 import { AllModules, Module, GridOptions, IGetRowsParams } from '@ag-grid-enterprise/all-modules';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnitsGridRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-grid-request.interface';
+import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -23,6 +24,8 @@ import { DataConcentratorUnitsGridRequest } from 'src/app/core/repository/interf
 export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   cookieNameForGridSettings = 'grdColDCU';
   sessionNameForGridState = 'grdStateDCU';
+
+  private serviceSubscription: Subscription;
 
   // grid instance
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
@@ -82,8 +85,21 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private i18n: I18n,
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private dataConcentratorUnitsService: DataConcentratorUnitsService
+    private dataConcentratorUnitsService: DataConcentratorUnitsService,
+    private eventService: DataConcentratorUnitsGridEventEmitterService
   ) {
+    this.serviceSubscription = this.eventService.eventEmitter.subscribe({
+      next: (event: string) => {
+        console.log(this.gridApi.getFirstDisplayedRow());
+        console.log(this.gridApi.getLastDisplayedRow());
+        console.log(`Received message #${event}`);
+
+        this.gridApi.forEachNode(function(node) {
+          node.setSelected(event);
+        });
+      }
+    });
+
     this.sidebarService.headerTitle = staticextService.headerTitleDCU;
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -97,14 +113,17 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     // --------------------
 
     // subscribe to get count of all items on the grid
-    this.subscribeTotalItems = this.dataConcentratorUnitsGridService.totalItems.subscribe((total: number) => {
+    /*  this.subscribeTotalItems = this.dataConcentratorUnitsGridService.totalItems.subscribe((total: number) => {
       this.totalCount = total;
-    });
+    });*/
   }
 
   ngOnDestroy(): void {
     if (this.subscribeTotalItems) {
       this.subscribeTotalItems.unsubscribe();
+    }
+    if (this.serviceSubscription) {
+      this.serviceSubscription.unsubscribe();
     }
   }
 
@@ -144,10 +163,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     return dataFromCookie;
   };
 */
+  // ag-grid
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
-    if (this.grid && this.grid.selectedRowKeys && this.grid.selectedRowKeys.length > 0) {
-      return true;
+    if (this.gridApi) {
+      const selectedRows = this.gridApi.getSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
+        return true;
+      }
+      return false;
     }
     return false;
   }
@@ -155,10 +179,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string
   searchData($event: string) {
-    this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
-    this.requestModel.searchModel = [{ colId: 'all', type: 'like', value: $event }];
-    console.log(this.requestModel);
-    this.gridApi.onFilterChanged();
+    if ($event != this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState)) {
+      this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
+      this.requestModel.searchModel = [{ colId: 'all', type: 'like', value: $event }];
+
+      this.gridApi.onFilterChanged();
+    }
   }
 
   // TODO
@@ -223,6 +249,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.endRow = paramsRow.request.endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.dataConcentratorUnitsService.getGridDcu2(that.requestModel).subscribe(data => {
+          that.totalCount = data.totalCount;
           paramsRow.successCallback(data.data, data.totalCount);
           // params.failCallback();
         });
@@ -232,6 +259,25 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.gridApi.setServerSideDatasource(datasource);
   }
 
+  onSelectionChanged() {
+    var selectedRows = this.gridApi.getSelectedRows();
+    var selectedRowsString = '';
+    var maxToShow = 5;
+    selectedRows.forEach(function(selectedRow, index) {
+      if (index >= maxToShow) {
+        return;
+      }
+      if (index > 0) {
+        selectedRowsString += ', ';
+      }
+      selectedRowsString += selectedRow.id;
+    });
+    if (selectedRows.length > maxToShow) {
+      var othersCount = selectedRows.length - maxToShow;
+      selectedRowsString += ' and ' + othersCount + ' other' + (othersCount !== 1 ? 's' : '');
+    }
+    console.log(selectedRowsString);
+  }
   /*
 onQuickFilterChanged($event)
 {

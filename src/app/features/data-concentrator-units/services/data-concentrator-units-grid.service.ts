@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import CustomStore from 'devextreme/data/custom_store';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { enumGridOperations, configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
@@ -13,6 +12,7 @@ import { GridCellNameComponent } from '../components/grid-custom-components/grid
 import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { DataConcentratorUnitsGridEventEmitterService } from './data-concentrator-units-grid-event-emitter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,12 +22,13 @@ export class DataConcentratorUnitsGridService {
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
-  private countItems = new BehaviorSubject<number>(0);
+
+  // private countItems = new BehaviorSubject<number>(0);
 
   constructor(
     private i18n: I18n,
-    private dataConcentratorUnitsService: DataConcentratorUnitsService,
-    private gridSettingsCookieStoreService: GridSettingsCookieStoreService
+    private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
+    private dataConcentratorUnitsGridEventEmitorService: DataConcentratorUnitsGridEventEmitterService
   ) {}
 
   /**
@@ -169,7 +170,7 @@ export class DataConcentratorUnitsGridService {
   /**
    * Load data to grid
    */
-  public loadData(search: string): CustomStore {
+  /*public loadData(search: string): CustomStore {
     this.paramsDCU.sort = [];
 
     function isNotEmpty(value: any): boolean {
@@ -232,7 +233,7 @@ export class DataConcentratorUnitsGridService {
       }
     });
   }
-
+*/
   // set external filters
   /* setFilters(companyId: number) {
     this.paramsDCU.filter = [];
@@ -252,10 +253,10 @@ export class DataConcentratorUnitsGridService {
   }
 
   // return value to all subscribed
-  get totalItems() {
+  /* get totalItems() {
     return this.countItems.asObservable();
   }
-
+*/
   /// TODO ! set and save to BE
   /**
    * Set visible columns
