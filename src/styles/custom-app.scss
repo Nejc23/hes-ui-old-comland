@@ -11,6 +11,9 @@ $FontPathOpenSans: "assets/fonts/open-sans";
 @import "../../node_modules/bootstrap/scss/functions";
 @import "variables";
 @import "../../node_modules/bootstrap/scss/mixins";
+
+@import "../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
+
 @import "bootstrap";
 
 // Import SB Admin 2
@@ -19,7 +22,7 @@ $FontPathOpenSans: "assets/fonts/open-sans";
 @import "navs";
 
 // Custom STYLES
-@import 'custom-style/form';
+//@import 'custom-style/form';
 @import 'custom-style/buttons';
 //@import 'custom-style/dropdown-button';
 //@import 'custom-style/ribbon';
