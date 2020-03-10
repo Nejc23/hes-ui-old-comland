@@ -52,9 +52,9 @@
             <div class="form-row ml-1">
               <span id="saved-filters-{{i}}" class="col-8" (mouseout)="showButtons(-1)">{{filter.name}}</span>
               <div class="col-4">
-                <button class="btn btn-secondary btn-filters m-1" *ngIf="isButtonVisible(i)" (click)="selectSavedFilterClicked(i)"><i class="uil uil-check"></i></button>
-                <button class="btn btn-secondary btn-filters m-1" *ngIf="isButtonVisible(i)"><i class="uil uil-pen"></i></button>
-                <button class="btn btn-danger btn-filters m-1" *ngIf="isButtonVisible(i)" (click)="deleteSavedFilterClicked(i)"><i class="uil uil-trash"></i></button>
+                <button class="btn-sm btn-secondary btn-filters m-1" *ngIf="isButtonVisible(i)" (click)="selectSavedFilterClicked(i)"><i class="uil uil-check"></i></button>
+                <button class="btn-sm btn-secondary btn-filters m-1" *ngIf="isButtonVisible(i)"><i class="uil uil-pen"></i></button>
+                <button class="btn-sm btn-danger btn-filters m-1" *ngIf="isButtonVisible(i)" (click)="deleteSavedFilterClicked(i)"><i class="uil uil-trash"></i></button>
               </div>
             </div>
           </div>
