@@ -6,7 +6,7 @@
     <div class="modal-content">
 
       <div class="modal-header" id="filter-header">
-        <h3 class="modal-title text-left" id="myModalLabel2" i18n>Filters Results</h3>
+        <h3 class="modal-title" id="myModalLabel2" i18n>Filters Results</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
       </div>
@@ -41,24 +41,22 @@
           </div>
 
           <div class="d-flex justify-content-end">
-            <button type="button" id="firstBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-secondary" (click)="clearButtonClicked()">Clear</button>
             <button type="button" class="btn btn-primary" (click)="saveButtonClicked()">Save Selected</button>
             <button type="submit" class="btn btn-primary" (click)="applyButtonClicked()">Apply</button>
           </div>
-          <hr>
-          <h4 class="modal-title text-left mb-3" id="myModalLabel3" i18n>Saved Filters</h4>
-          <div class="saved-filters form-group mb-0" *ngFor="let filter of (dcuFilters$ | async ); let i = index" (click)="savedFilterClicked(i)" (mouseover)="showButtons(i)">
-            <div class="form-row ml-1">
-              <span id="saved-filters-{{i}}" class="col-8" (mouseout)="showButtons(-1)">{{filter.name}}</span>
-              <div class="col-4">
-                <button class="btn-sm btn-secondary btn-filters m-1" *ngIf="isButtonVisible(i)" (click)="selectSavedFilterClicked(i)"><i class="uil uil-check"></i></button>
-                <button class="btn-sm btn-secondary btn-filters m-1" *ngIf="isButtonVisible(i)"><i class="uil uil-pen"></i></button>
-                <button class="btn-sm btn-danger btn-filters m-1" *ngIf="isButtonVisible(i)" (click)="deleteSavedFilterClicked(i)"><i class="uil uil-trash"></i></button>
-              </div>
-            </div>
-          </div>
         </form>
+        <hr>
+        <h4 i18n>Saved Filters</h4>
+        <div class="d-flex" *ngFor="let filter of (dcuFilters$ | async ); let i = index" (click)="savedFilterClicked(i)" (mouseover)="showButtons(i)">
+          <span id="saved-filters-{{i}}" class="flex-shrink-1" (mouseout)="showButtons(-1)">{{filter.name}}</span>
+          <div class="ml-2 justify-content-end">
+            <button type="button" class="btn btn-sm btn-secondary" *ngIf="isButtonVisible(i)" (click)="selectSavedFilterClicked(i)"><i class="uil uil-check"></i></button>
+            <button type="button" class="btn btn-sm btn-secondary" *ngIf="isButtonVisible(i)"><i class="uil uil-pen"></i></button>
+            <button type="button" class="btn btn-sm btn-danger" *ngIf="isButtonVisible(i)" (click)="deleteSavedFilterClicked(i)"><i class="uil uil-trash"></i></button>
+          </div>
+        </div>
       </div>
 
     </div><!-- modal-content -->

@@ -15,7 +15,9 @@
 
   <!-- (ngModel)="'value'" -->
 
-  <kendo-multiselect [name]="property"
+  <kendo-multiselect 
+        class="form-control"
+        [name]="property"
         [data]="autocompleteItemsAsObjects"
         [formControlName]="property"
         [textField]="'value'"

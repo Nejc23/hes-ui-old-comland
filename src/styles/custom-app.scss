@@ -12,9 +12,10 @@ $FontPathOpenSans: "assets/fonts/open-sans";
 @import "variables";
 @import "../../node_modules/bootstrap/scss/mixins";
 
+@import "bootstrap";
 @import "../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
 
-@import "bootstrap";
+
 
 // Import SB Admin 2
 @import "global";

@@ -2,6 +2,10 @@
   .btn + .btn {
     margin-left: $spacer;
   }
+
+  .btn.btn-sm + .btn.btn-sm {
+    margin-left: $spacer/2;
+  }
 }
 
 .btn {
@@ -22,8 +26,16 @@
   }
 
   i {
-    font-size: $h3-font-size;
+    font-size: $icon-size;
+    line-height: 21px;
   }
+
+  &.btn-sm i {
+    font-size: $icon-size-sm;
+    line-height: 18.375px;
+  }
+
+
 }
 
 
