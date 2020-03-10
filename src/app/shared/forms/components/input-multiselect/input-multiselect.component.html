@@ -8,7 +8,7 @@
     <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inOneRow}" [id]="name">
         <div *ngFor="let option of options; let i = index;">
             <div>
-                <input class="mr-1" type="checkbox" id="input-checkbox-{{i}}"
+                <input class="form-control mr-1" type="checkbox" id="input-checkbox-{{i}}"
                     [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox>
 
                 <label for="{{option.id}}" class="mr-3"
