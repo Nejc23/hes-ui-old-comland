@@ -5,9 +5,8 @@
   </label>
 
 
-  <kendo-dropdownlist 
+  <kendo-combobox [name]="property"
     class="form-control"
-    [name]="property"
     isRequired="false"
     [formControlName]="property"
     [data]="selectOptions"
@@ -17,7 +16,7 @@
     (valueChange)="valueChange($event)"
     (selectionChange)="selectionChange($event)"
   >
-  </kendo-dropdownlist>
+  </kendo-combobox>
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
