@@ -13,7 +13,8 @@ export const environment = {
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',
-  dateFormat: 'dd.MM.yyyy'
+  dateFormat: 'dd.MM.yyyy',
+  isDebug: true
 };
 
 /*

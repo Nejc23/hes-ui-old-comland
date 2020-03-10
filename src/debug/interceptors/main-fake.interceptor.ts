@@ -38,6 +38,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (DataConcentratorUnitsListInterceptor.canInterceptDataConcentratorUnitsList(request)) {
               return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList(request);
             }
+            if (DataConcentratorUnitsListInterceptor.canInterceptDataConcentratorUnitsList2(request)) {
+              return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList2(request);
+            }
 
             if (DcuFiltersInterceptor.canInterceptDcuFiltersGet(request)) {
               return DcuFiltersInterceptor.interceptDcuFiltersGet();

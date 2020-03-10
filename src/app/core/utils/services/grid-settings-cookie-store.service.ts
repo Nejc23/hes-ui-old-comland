@@ -17,6 +17,6 @@ export class GridSettingsCookieStoreService {
     if (this.cookieService.check(gridId)) {
       return JSON.parse(this.cookieService.get(gridId));
     }
-    return '';
+    return null;
   }
 }

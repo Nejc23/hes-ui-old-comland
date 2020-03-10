@@ -1,0 +1,7 @@
+<div class="row">
+  <div *ngIf="params.value" class="col-12 txt-overflow" container="body" placement="bottom" [openDelay]="1000" 
+        [ngbTooltip]="setMomentLastCommunicationTime(params.value)">{{setMomentLastCommunicationTime(params.value)}}
+  </div>
+  
+  <div *ngIf="!params.value"class="text-secondary col-12"><span i18n>{{notAvailableText}}</span></div>
+</div>

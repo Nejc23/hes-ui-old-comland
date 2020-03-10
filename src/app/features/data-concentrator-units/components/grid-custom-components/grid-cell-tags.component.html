@@ -1,0 +1,9 @@
+<div class="txt-overflow" container="body" placement="bottom" [openDelay]="1000" [ngbTooltip]="tipContent2">
+<div class="text-left d-flex txt-overflow col-md">
+  <div *ngFor="let item of params.value; let i = index" class=" bg-secondary rcorners3 mr-1 mt-1">
+    <div class="ml-1 mr-1">{{item}}</div>
+  </div>
+</div>
+</div>
+
+<ng-template #tipContent2 id="tipContent2">{{params.value}}</ng-template>

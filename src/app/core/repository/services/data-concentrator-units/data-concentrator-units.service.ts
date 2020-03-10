@@ -22,6 +22,14 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', dataConcentratorUnits, param);
   }
 
+  getGridDcu2(param: any): Observable<any> {
+    return this.repository.makeRequest(this.getGridDcuRequest2(param));
+  }
+
+  getGridDcuRequest2(param: any): HttpRequest<any> {
+    return new HttpRequest('POST', '/api/2', param);
+  }
+
   getDcuFilter(): Observable<DcuFilter[]> {
     return this.repository.makeRequest(this.getDcuFilterRequest());
   }

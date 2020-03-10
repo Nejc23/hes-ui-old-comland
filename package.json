@@ -22,6 +22,8 @@
   },
   "private": true,
   "dependencies": {
+    "@ag-grid-community/angular": "~22.1.2",
+    "@ag-grid-enterprise/all-modules": "~22.1.2",
     "@angular-devkit/build-angular": "0.803.5",
     "@angular/animations": "~8.2.6",
     "@angular/cli": "~8.3.4",
@@ -60,8 +62,6 @@
     "@swimlane/ngx-datatable": "^16.0.2",
     "@types/jquery": "^3.3.33",
     "@types/lodash": "^4.14.138",
-    "@ag-grid-enterprise/all-modules": "~22.1.2",
-    "@ag-grid-community/angular": "~22.1.2",
     "angular-gauge-chart": "^0.7.2",
     "angular-gridster2": "^8.2.0",
     "bootstrap": "^4.3.1",
@@ -85,6 +85,7 @@
     "ngx-i18nsupport": "^0.17.1",
     "npm-font-open-sans": "^1.1.0",
     "rxjs": "~6.5.3",
+    "stream": "0.0.2",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },

@@ -1,0 +1,17 @@
+<div class="row" *ngIf="params.value">
+  <div class="col-3">
+    <i *ngIf="params.data.readStatusPercent <= tresholds.alarmTrashold"
+      class='fa fa-circle text-danger  text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
+    <i *ngIf="params.data.readStatusPercent > tresholds.alarmTrashold && params.data.readStatusPercent <= tresholds.warningTrashold"
+      class='fa fa-circle text-warning  text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
+    <i *ngIf="params.data.readStatusPercent > tresholds.warningTrashold"
+      class='fa fa-circle text-success text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
+  </div>
+  <div class="col-1 text-primary align-right"><span> {{params.data.readStatusPercent}} %</span></div>
+</div>
+
+<div class="row" *ngIf="!params.value">
+  <div class="text-secondary col-3"><span i18n>N/A</span></div>
+</div>
+
+<ng-template #tipContent id="tipContent"><span i18n>Next planned read</span> {{setMomentNextPlannedReadTime(params.data.nextRead)}}</ng-template>

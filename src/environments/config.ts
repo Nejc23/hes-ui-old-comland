@@ -1,3 +1,5 @@
+import { environment } from 'src/environments/environment';
+
 export const config = {
   // AUTH SETTINGS
   authCookie: 'authcookie', // name of the cookie
@@ -55,3 +57,26 @@ export enum enumSearchFilterOperators {
   isNull = 'is null',
   isNotNull = 'is not null'
 }
+
+// Ag grid settings
+export const configAgGrid = {
+  debug: environment.isDebug,
+  animateRows: true,
+  rowModelType: 'serverSide',
+  suppressSizeToFit: true,
+  paginationPageSize: 20,
+  pagination: true,
+  suppressRowClickSelection: true,
+  rowSelection: 'multiple',
+  multiSortKey: 'ctrl',
+  domLayout: 'autoHeight'
+};
+
+// Ag grid default columns settings
+export const configAgGridDefCol = {
+  sortable: true,
+  resizable: true,
+  suppressFiltersToolPanel: true,
+  suppressColumnsToolPanel: true,
+  floatingFilterComponentParams: { suppressFilterButton: true, suppressFiltersToolPanel: true, suppressColumnsToolPanel: true }
+};

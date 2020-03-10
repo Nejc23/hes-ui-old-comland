@@ -56,6 +56,55 @@ export class DataConcentratorUnitsListInterceptor {
   static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
     return new RegExp(`/api/data-concentrator-units`).test(request.url);
   }
+
+  static interceptDataConcentratorUnitsList2(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    console.log(request.body);
+    let skip = 0;
+    let take = 0;
+    let sortColId = '';
+    let sortedUsers = data;
+    let searched = [];
+    if (request.body) {
+      const params = request.body as GridRequestParams;
+
+      if (params.search && params.search.length > 0) {
+        searched = searchBooks(data, params.search[0].value);
+      }
+
+      skip = params.skip;
+      take = params.take;
+
+      if (params.sort) {
+        params.sort.forEach(element => {
+          sortColId = element.selector;
+          if (element.desc) {
+            sortedUsers = _.sortBy(searched, sortColId).reverse();
+          } else {
+            sortedUsers = _.sortBy(searched, sortColId);
+          }
+        });
+      }
+    }
+
+    console.log(request.body.startRow);
+    const body: GridResponse<DataConcentratorUnitsList> = {
+      data: data.slice(request.body.startRow, request.body.endRow), //sortedUsers.slice(skip, Number(skip) + Number(take)), // sortedUsers.slice(request.body.startRow, request.body.endRow),
+      totalCount: data.length, //searched.length,
+      summary: '',
+      groupCount: 0
+    };
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body
+      })
+    );
+  }
+
+  static canInterceptDataConcentratorUnitsList2(request: HttpRequest<any>): boolean {
+    return new RegExp(`/api/2`).test(request.url);
+  }
 }
 
 function searchBooks(companies, filter) {

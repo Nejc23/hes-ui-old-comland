@@ -39,10 +39,10 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.dataConcentratorUnitsGridService.setGridDefaultColumns().forEach(element => {
-      this.columns$.push({
+      /*   this.columns$.push({
         id: element.dataField,
         value: element.caption
-      });
+      });*/
     });
 
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
