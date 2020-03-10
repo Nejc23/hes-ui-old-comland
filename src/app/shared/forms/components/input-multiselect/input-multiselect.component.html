@@ -5,13 +5,13 @@
         <sup *ngIf="required"> *</sup>
     </label>
 
-    <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly, 'row': inOneRow}" [id]="name">
+    <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inOneRow}" [id]="name">
         <div *ngFor="let option of options; let i = index;">
-            <div class="checkbox">
-                <input type="checkbox" class="form-control" id="input-checkbox-{{i}}"
+            <div>
+                <input class="mr-1" type="checkbox" id="input-checkbox-{{i}}"
                     [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox>
 
-                <label for="{{option.id}}"
+                <label for="{{option.id}}" class="mr-3"
                     (click)="selectedValue(option, isOptionChecked(option))">{{option.value}}</label>
             </div>
         </div>
