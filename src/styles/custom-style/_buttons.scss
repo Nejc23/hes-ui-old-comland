@@ -1,10 +1,10 @@
 .justify-content-end {
   .btn + .btn {
-    margin-left: $spacer;
+    margin-left: $spacer/2;
   }
 
   .btn.btn-sm + .btn.btn-sm {
-    margin-left: $spacer/2;
+    margin-left: $spacer/4;
   }
 }
 

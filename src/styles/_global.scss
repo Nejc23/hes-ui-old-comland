@@ -38,6 +38,19 @@ label:not(.control-label) {
   }
 }
 
+.div-height {
+  min-height: $input-height;
+}
+
+.div-height-sm {
+  min-height: $input-height-sm;
+}
+
+.div-height-lg {
+  min-height: $input-height-lg;
+}
+
+
 /********** LAYOUT ********/
 
 // Main page wrapper

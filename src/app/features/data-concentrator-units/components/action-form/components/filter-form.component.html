@@ -1,12 +1,10 @@
 <!-- Modal -->
-<div #modalFilter class="modal right fade" data-keyboard="false" data-backdrop="static" id="filterModal" tabindex="-1"
-  role="dialog" aria-labelledby="myModalLabel2">
-  <div class="modal-dialog" role="document">
-
+<div #modalFilter class="modal right fade" data-keyboard="true" data-backdrop="static" id="filterModal" tabindex="-1">
+  <div class="modal-dialog">
     <div class="modal-content">
 
-      <div class="modal-header" id="filter-header">
-        <h3 class="modal-title" id="myModalLabel2" i18n>Filters Results</h3>
+      <div class="modal-header">
+        <h3 class="modal-title" i18n>Filters Results</h3>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
             aria-hidden="true">&times;</span></button>
       </div>
@@ -14,52 +12,44 @@
       <div class="modal-body">
         <form [formGroup]="form">
 
-          <div class="form-row results p-2 mb-2" id="filter-results" *ngIf="sessionFilter">
-            <span class="col-12">{{sessionFilter.name}} is selected</span>
-          </div>
+          <div *ngIf="sessionFilter" class="alert alert-primary"><strong>{{sessionFilter.name}}</strong> <span i18n>is selected</span></div>
 
-          <div class="form-row">
-            <app-input-tag class="col-12" label="Status" [property]="statusesProperty" [form]="form"
-              [autocompleteItemsAsObjects]="dcuStatuses$ | async">
-            </app-input-tag>
-          </div>
+          <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
+            [autocompleteItemsAsObjects]="dcuStatuses$ | async">
+          </app-input-tag>
 
-          <div class="form-row">
-            <app-input-multiselect class="col-12" label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes"
-              [options]="dcuTypes$ | async" [isReadOnly]="false" [inOneRow]="true" (onChange)="change()">
-            </app-input-multiselect>
-          </div>
+          <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes"
+            [options]="dcuTypes$ | async" [isReadOnly]="false" [inOneRow]="true" (onChange)="change()">
+          </app-input-multiselect>
+
 
           <div class="form-row">
             <app-select-input class="col-6" label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async">
             </app-select-input>
           </div>
 
-          <div class="form-row">
-            <app-input-tag class="col-12" label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async">
-            </app-input-tag>
-          </div>
+          <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"></app-input-tag>
 
           <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-secondary" (click)="clearButtonClicked()">Clear</button>
-            <button type="button" class="btn btn-primary" (click)="saveButtonClicked()">Save Selected</button>
-            <button type="submit" class="btn btn-primary" (click)="applyButtonClicked()">Apply</button>
+            <button type="button" class="btn btn-secondary" (click)="clearButtonClicked()" i18n>Clear</button>
+            <button type="button" class="btn btn-primary" (click)="saveButtonClicked()" i18n>Save Selected</button>
+            <button type="submit" class="btn btn-primary" (click)="applyButtonClicked()" i18n>Apply</button>
           </div>
         </form>
         <hr>
         <h4 i18n>Saved Filters</h4>
-        <div class="d-flex" *ngFor="let filter of (dcuFilters$ | async ); let i = index" (click)="savedFilterClicked(i)" (mouseover)="showButtons(i)">
-          <span id="saved-filters-{{i}}" class="flex-shrink-1" (mouseout)="showButtons(-1)">{{filter.name}}</span>
-          <div class="ml-2 justify-content-end">
-            <button type="button" class="btn btn-sm btn-secondary" *ngIf="isButtonVisible(i)" (click)="selectSavedFilterClicked(i)"><i class="uil uil-check"></i></button>
-            <button type="button" class="btn btn-sm btn-secondary" *ngIf="isButtonVisible(i)"><i class="uil uil-pen"></i></button>
-            <button type="button" class="btn btn-sm btn-danger" *ngIf="isButtonVisible(i)" (click)="deleteSavedFilterClicked(i)"><i class="uil uil-trash"></i></button>
+        <div class="py-1 border-bottom" *ngFor="let filter of (dcuFilters$ | async ); let i = index" (mouseover)="showButtons(i)" >
+          <div class="d-flex align-items-center div-height-sm">
+            <a id="saved-filters-{{i}}" class="flex-shrink-1" (click)="savedFilterClicked(i)" href="javascript:void(0)">{{filter.name}}</a>
+            <div class="flex-shrink-0 ml-auto" *ngIf="isButtonVisible(i)">
+              <button type="button" class="btn btn-sm btn-secondary mr-1 ml-2" (click)="selectSavedFilterClicked(i)" ngbTooltip="Select and apply"><i class="uil uil-check"></i></button>
+              <button type="button" class="btn btn-sm btn-secondary mr-1" (click)="savedFilterClicked(i)" ngbTooltip="Select"><i class="uil uil-pen"></i></button>
+              <button type="button" class="btn btn-sm btn-danger" (click)="deleteSavedFilterClicked(i)" ngbTooltip="Delete"><i class="uil uil-trash"></i></button>
+            </div>
           </div>
         </div>
       </div>
-
     </div><!-- modal-content -->
-
   </div><!-- modal-dialog -->
 </div><!-- modal -->
