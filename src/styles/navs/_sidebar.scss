@@ -327,6 +327,28 @@
   }
 }
 
+// sticky
+.sticky {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: calc(100% - #{$sidebar-base-width});
+}
+
+.sidebar-toggled .sticky {
+  width: calc(100% - #{$sidebar-collapsed-width});
+}
+
+@media only screen and (max-width: 768px) {
+  .sidebar-toggled .sticky {
+    width: calc(100%);
+  }
+
+  .sticky {
+    width: calc(100% - 106px);
+  }
+}
+
 // Sidebar Color Variants
 
 // Sidebar Light
@@ -565,3 +587,4 @@
 .nav-button-hidden {
   display: none !important;
 }
+
