@@ -71,30 +71,18 @@ label:not(.control-label) {
   }
 }
 
+.margin-container-fluid-collapsed {
+  margin-left: $sidebar-collapsed-width  + 4rem !important;
+}
+
 // Set container padding to match gutter width instead of default 15px
-// change to ID
-.container,
-.container-fluid {
+#container-fluid {
   height: 100%;
   margin-left: $sidebar-base-width  + 4rem ;
   width: auto;
 }
-.container-fluid-collapsed {
-  height: 100%;
-  margin-left: $sidebar-collapsed-width  + 4rem ;
-  width: auto;
-}
-.container-fluid-login {
+
+#container-fluid-login {
   height: 100%;
   width: 98%;
-}
-
-
-
-
-// check for veriables
-small, .small {
-  font-size: $font-size-base * .75;
-  color: $gray-700;
-  font-weight: 500;
 }
