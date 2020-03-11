@@ -18,10 +18,14 @@
             class='uil uil-building sidebar-icons sidebar-title'></i>
           <!-- <span class="sidebar-icons sidebar-title" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">Eles</span> -->
         </div>
-        <app-select-input class="col-8-ext sidebar-icons sidebar-title" id="selectCompany"
-          *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" [form]="form" [property]="companyIdProperty"
-          [selectOptions]="companies$ | async">
-        </app-select-input>
+
+        <li class="nav-item dropdown" *ngIf=" !app.layout.isMenuCollapsed || isMouseOverNav">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i18n>{{selectedCompany.value}}</a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" *ngFor="let company of companies$ | async" href="#company/{{company.id}}">{{company.value}}</a>
+          </div>
+        </li>
+
         <div class="col-1 text-right d-none d-md-inline" [ngClass]="{'nav-button-hidden': app.layout.isMenuCollapsed && !isMouseOverNav}">
           <button class="rounded-circle border-0"
             [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
@@ -42,22 +46,6 @@
 
       <!-- Main Content -->
       <div id="content">
-
-        <!-- Topbar -->
-        <!-- <nav class="navbar navbar-expand navbar-light sticky topbar bg-white mb-4 shadow"> -->
-        <!-- Sidebar Toggle (Topbar) -->
-        <!--  <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3"
-            (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
-            <i class="fa fa-bars"></i>
-          </button>-->
-        <!-- <app-header-title></app-header-title> -->
-        <!--<div class="navbar-collapse mr-5" id="navbarContent">
-            <ul class="navbar-nav ml-auto">
-          <app-breadcrumb class="d-none d-md-block"></app-breadcrumb>
-        </ul>
-      </div>
-        </nav> -->
-        <!-- End of Topbar -->
 
         <!-- Begin Page Content -->
         <div id="container-fluid" [ngClass]="{'margin-container-fluid-collapsed': app.layout.isMenuCollapsed}">

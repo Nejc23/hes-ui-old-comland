@@ -171,6 +171,10 @@
 }
 
 @include media-breakpoint-up(md) {
+  .dropdown-item {
+    padding: 0.25 * $spacer 0.5 * $spacer;
+  }
+
   .sidebar {
     width: $sidebar-base-width !important;
 
@@ -197,14 +201,15 @@
 
       .collapse,
       .collapsing {
-        margin: 0 1rem;
+        margin: 0 1 * $spacer;
       }
 
       .nav-link {
         display: block;
-        width: 100%;
+        width: 11.5 * $spacer;
         text-align: left;
-        padding: 1rem;
+        padding: 0.2 * $spacer 0.5 * $spacer;
+        margin-left: 0.5 * $spacer;
 
         i {
           font-size: $font-size-base * 1.35;
@@ -324,28 +329,6 @@
         text-align: center;
       }
     }
-  }
-}
-
-// sticky
-.sticky {
-  position: fixed;
-  top: 0;
-  z-index: 1;
-  width: calc(100% - #{$sidebar-base-width});
-}
-
-.sidebar-toggled .sticky {
-  width: calc(100% - #{$sidebar-collapsed-width});
-}
-
-@media only screen and (max-width: 768px) {
-  .sidebar-toggled .sticky {
-    width: calc(100%);
-  }
-
-  .sticky {
-    width: calc(100% - 106px);
   }
 }
 
@@ -505,83 +488,10 @@
   color: fade-out($white, 0.5);
 }
 
-#sidebarRight1 {
-  width: 1.85rem;
-  height: 1.85rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  font-weight: 900;
-  content: '\f104';
-  font-family: 'Font Awesome 5 Free';
-  margin-right: 0.1rem;
-
-  &::after {
-    content: '\f105';
-  }
-
-}
-
-#sidebarRight2 {
-  width: 1.85rem;
-  height: 1.85rem;
-  text-align: center;
-  margin-bottom: 1rem;
-  cursor: pointer;
-  font-weight: 900;
-  content: '\f105';
-  font-family: 'Font Awesome 5 Free';
-  margin-right: 0.1rem;
-
-  &::after {
-    content: '\f104';
-  }
-
-}
-
-.col-1-panel-right {
-  max-width: 4.33333%;
-}
-
-.col-11-panel-right {
-  flex: 0 0 94.666667%;
-  max-width: 94.666667%;
-}
-
 .sidebar-title {
   font-size: large !important;
   font-weight: 600;
   padding-left: 0.6rem;
-}
-
-#selectCompany {
-  .form-group {
-    i.fa {
-      margin-right: 3px !important;
-      color: $white !important;
-    }
-  }
-}
-
-#companyId {
-  border: 0px !important;
-  background-color: $gray-800 !important;
-  color: $white !important;
-  font-weight: 600;
-  font-size: large;
-  margin-left: -2px;
-
-  &:focus {
-    box-shadow: 0 0 0 0 !important;
-  }
-
-}
-
-.col-8-ext {
-  flex: 0 0 70.666667%;
-  max-width: 70.666667%;
-  padding-right: 10px;
-  margin-top: -0.5rem;
 }
 
 .nav-button-hidden {

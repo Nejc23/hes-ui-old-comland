@@ -38,6 +38,7 @@ export class BaseTemplateComponent implements OnInit {
   screenWidth: number;
 
   form: FormGroup;
+  selectedCompany: Codelist<number>;
 
   constructor(
     private sidebarService: SidebarService,
@@ -80,6 +81,7 @@ export class BaseTemplateComponent implements OnInit {
       { id: 3, value: 'Company 3' },
       { id: 4, value: 'Company 4' }
     );
+    this.selectedCompany = this.companies[0];
     this.companies$ = of(this.companies);
   }
 
