@@ -1,40 +1,31 @@
 <!-- header -->
-<div class="d-flex align-items-center">
+<div class="d-flex align-items-center mb-3">
   <app-header-title></app-header-title>
   <button class="btn btn-primary btn-round">
-    <i class="uil uil-plus" id="tipContentAdd"></i>
+    <i class="uil uil-plus"></i>
   </button>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div>
 
 <!-- row total items, selected filter name -->
-<div class="form-row mt-0 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
-  <div class="pl-2 align-bottom pt-3">
-    <span class="align-text-bottom" i18n>{{totalCount}} items &middot; {{filters}}</span>
-  </div>
-  <div class="ml-auto mt-2 mb-2 mr-2">
-    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()"
-      (columnsChange)="setVisibilityGridColumns()"></app-action-form>
-  </div>
+<div class="d-flex align-items-center px-2 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
+  <div>{{totalCount}} <span i18n>items</span> &middot; {{filters}}</div>
+  <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()" class="ml-auto"></app-action-form>
 </div>
 
-<div class="form-row mt-0 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
-  <div class="pl-2 col-4 align-bottom pt-3 text-white">
-    <span class="align-text-bottom" i18n>{{gridApi.getSelectedRows().length}} items selected</span> - 
+<div class="d-flex align-items-center px-2 py-3 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
+  <div class="mr-1">
+    <span class="align-text-bottom" i18n>{{gridApi.getSelectedRows().length}} items selected</span> &middot; 
     <a class="align-text-bottom text-white" href="void();" ><span i18n>Select all</span> ({{totalCount}}) <span i18n>items</span></a>
   </div>
-  <div class="col-auto pt-1">
-    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUploadConfiguration()"><span
+  <button type="button" class="btn btn-light mr-1" (click)="onUploadConfiguration()"><span
         i18n>Upload Configuration</span></button>
-  </div>
-  <div class="col-auto pt-1">
-    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUpgrade()"><span
+  <button type="button" class="btn btn-light" (click)="onUpgrade()"><span
         i18n>Upgrade</span></button>
-  </div>
 </div>
 
 <!-- ag-grid -->
-<div class="form-row mt-0 bg-white">
+<div class="bg-white">
   <ag-grid-angular
     class="ag-theme-balham"            
     style="width: 100%; height: calc(100% - 25px);"

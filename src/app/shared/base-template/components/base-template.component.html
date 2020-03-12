@@ -5,6 +5,8 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
+    
+    <!-- Fixed sidebar -->
     <app-side-fixed-nav></app-side-fixed-nav>
 
     <!-- Sidebar -->
@@ -41,15 +43,12 @@
       </app-sidebar>
     </ul>
 
-
-    <div id=" content-wrapper" class="d-flex flex-column">
-
+    <div id="content-wrapper" [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
       <!-- Main Content -->
       <div id="content">
 
         <!-- Begin Page Content -->
-        <div id="container-fluid" [ngClass]="{'margin-container-fluid-collapsed': app.layout.isMenuCollapsed}">
-
+        <div class="container-fluid" >
           <!-- Page -->
           <router-outlet></router-outlet>
 
@@ -61,7 +60,7 @@
 
     </div>
     <!-- End of Content Wrapper -->
-
+    
   </div>
   <!-- End of Page Wrapper -->
 </body>

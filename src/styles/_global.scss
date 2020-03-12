@@ -7,8 +7,20 @@ html {
 
 body {
   height: 100%;
-  background-color: $gray-200;
 }
+
+#content-wrapper {
+  height: 100%;
+  margin-left: $sidebar-base-width  + 3.5rem ;
+  width: auto;
+  padding: $spacer;
+
+  &.menu-collapsed {
+    margin-left: $sidebar-collapsed-width  + 3.5rem !important;
+  }
+}
+
+/****************************************/
 
 a,
 button {
@@ -48,41 +60,4 @@ label:not(.control-label) {
 
 .div-height-lg {
   min-height: $input-height-lg;
-}
-
-
-/********** LAYOUT ********/
-
-// Main page wrapper
-#wrapper {
-  //display: flex;
-  height: 100%;
-
-  #content-wrapper {
-    background-color: $gray-100;
-    width: 100%;
-    height: 100vh;
-    overflow-x: hidden;
-    padding-top: $spacer;
-
-    #content {
-      height: 98%;
-    }
-  }
-}
-
-.margin-container-fluid-collapsed {
-  margin-left: $sidebar-collapsed-width  + 4rem !important;
-}
-
-// Set container padding to match gutter width instead of default 15px
-#container-fluid {
-  height: 100%;
-  margin-left: $sidebar-base-width  + 4rem ;
-  width: auto;
-}
-
-#container-fluid-login {
-  height: 100%;
-  width: 98%;
 }

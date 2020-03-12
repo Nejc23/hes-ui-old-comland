@@ -147,7 +147,7 @@ $sizes: map-merge((25: 25%,
 //
 // Settings for the `<body>` element.
 
-$body-bg: $white !default;
+$body-bg: $gray-100 !default;
 $body-color: $gray-900 !default;
 
 
@@ -201,7 +201,7 @@ $container-max-widths: (sm: 540px,
 // Set the number of columns and specify the width of the gutters.
 
 $grid-columns: 12 !default;
-$grid-gutter-width: 30px !default;
+$grid-gutter-width: $spacer*2 !default;
 $grid-row-columns: 6 !default;
 
 
@@ -213,7 +213,7 @@ $line-height-lg: 1.5 !default;
 $line-height-sm: 1.5 !default;
 
 $border-width: 1px !default;
-$border-color: $gray-300 !default;
+$border-color: $gray-400 !default;
 
 $border-radius: .145rem !default;
 $border-radius-lg: .3rem !default;
@@ -312,7 +312,7 @@ $display-line-height: $headings-line-height !default;
 $lead-font-size: $font-size-base * 1.25 !default;
 $lead-font-weight: 300 !default;
 
-$small-font-size: 80% !default;
+$small-font-size: 0.85rem !default;
 
 $text-muted: $gray-600 !default;
 
@@ -320,7 +320,7 @@ $blockquote-small-color: $gray-600 !default;
 $blockquote-small-font-size: $small-font-size !default;
 $blockquote-font-size: $font-size-base * 1.25 !default;
 
-$hr-border-color: rgba($black, .1) !default;
+$hr-border-color: $border-color !default;
 $hr-border-width: $border-width !default;
 
 $mark-padding: .2em !default;
@@ -820,7 +820,7 @@ $jumbotron-bg: $gray-200 !default;
 // Cards
 
 $card-spacer-y: .75rem !default;
-$card-spacer-x: 1.25rem !default;
+$card-spacer-x: $spacer $spacer/2; //1.25rem !default;
 $card-border-width: $border-width !default;
 $card-border-radius: $border-radius !default;
 $card-border-color: rgba($black, .125) !default;

@@ -1,4 +1,4 @@
-<div class="form-row">
+<div class="form-row mt-3">
   <div class="col-auto">
     <app-input-searcher class="searchInput" [ngClass]="{'search-not-empty': !searchTextEmpty}" [debounceTimeOut]="0" (insertedValue)="insertedValue($event)" id="searchInput" label=""  [inputType]="'search'" [form]="form" [property]="searchProperty" class="d-inline-block" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
     <i class='uil uil-search' id="emptySearchIcon" *ngIf="searchTextEmpty"></i>
