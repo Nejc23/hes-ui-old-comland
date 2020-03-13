@@ -5,7 +5,7 @@
 
   <!-- Page Wrapper -->
   <div id="wrapper">
-    
+
     <!-- Fixed sidebar -->
     <app-side-fixed-nav></app-side-fixed-nav>
 
@@ -14,32 +14,28 @@
       [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
       (mouseleave)="mouseLeavesNav()">
       <!-- Sidebar Toggler (Sidebar) -->
-      <div class="row mt-4">
-        <div class="col-2">
-          <i *ngIf=" !app.layout.isMenuCollapsed || isMouseOverNav"
-            class='uil uil-building sidebar-icons sidebar-title'></i>
-          <!-- <span class="sidebar-icons sidebar-title" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">Eles</span> -->
+      
+      <button id="sidebarToggle" class="rounded-circle border-0 position-absolute" 
+      [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}"
+       (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
+        <i class='uil icon-small'
+          [ngClass]="{'uil-shrink': !app.layout.isMenuCollapsed, 'uil-arrows-h-alt': app.layout.isMenuCollapsed}"></i>
+      </button>
+
+      <li class="nav-item dropdown" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+        <a class="nav-link dropdown-toggle pr-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="uil uil-building mr-2"></i>
+          <span>{{selectedCompany.value}}</span>
+        </a>
+        <div class="dropdown-menu ml-3" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" *ngFor="let company of companies$ | async"
+            href="#company/{{company.id}}">{{company.value}}</a>
         </div>
+      </li>
 
-        <li class="nav-item dropdown" *ngIf=" !app.layout.isMenuCollapsed || isMouseOverNav">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" i18n>{{selectedCompany.value}}</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" *ngFor="let company of companies$ | async" href="#company/{{company.id}}">{{company.value}}</a>
-          </div>
-        </li>
-
-        <div class="col-1 text-right d-none d-md-inline" [ngClass]="{'nav-button-hidden': app.layout.isMenuCollapsed && !isMouseOverNav}">
-          <button class="rounded-circle border-0"
-            [ngClass]="{'toggled': app.layout.isMenuCollapsed, 'mouseover': isMouseOverNav}" id="sidebarToggle"
-            (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
-            <!-- <i class='uil uil-arrows-h-alt icon-small'></i> -->
-            <i class='uil icon-small'
-              [ngClass]="{'uil-shrink': !app.layout.isMenuCollapsed, 'uil-arrows-h-alt': app.layout.isMenuCollapsed}"></i>
-          </button>
-        </div>
-      </div>
-
-      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed && !isMouseOverNav">
+      <app-sidebar [items]="sidebarItems" [isMenuCollapsed]="app.layout.isMenuCollapsed && !isMouseOverNav"
+        class="mt-3">
       </app-sidebar>
     </ul>
 
@@ -48,7 +44,7 @@
       <div id="content">
 
         <!-- Begin Page Content -->
-        <div class="container-fluid" >
+        <div class="container-fluid">
           <!-- Page -->
           <router-outlet></router-outlet>
 
@@ -60,7 +56,7 @@
 
     </div>
     <!-- End of Content Wrapper -->
-    
+
   </div>
   <!-- End of Page Wrapper -->
 </body>

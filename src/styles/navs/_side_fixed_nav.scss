@@ -1,19 +1,18 @@
 .navbar-fixed-left {
   width: $sidebar-fixed-width;
   position: fixed;
-  border-radius: 0;
-  min-height: 100vh;
-  background: rgb(255, 255, 255);
+  min-height: 100%;
+  z-index: 100;
+  background: $primary;
   background: linear-gradient(180deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
 }
 
 .nav-fixed {
-
   .text-rotate {
     position: relative;
     bottom: 10vh;
     padding-top: 1rem;
-    color: white;
+    color: $white;
     -webkit-transform-origin: left;
     transform-origin: left;
     -webkit-transform: rotate(-90deg) translateX(-100%);

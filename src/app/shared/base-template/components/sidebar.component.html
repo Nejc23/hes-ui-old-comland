@@ -1,13 +1,13 @@
 <!-- Nav Item - Dashboard -->
-<li class="nav-item" *ngFor="let item of items">
-  <div class="ml-1 mr-1">
-    <hr class="border-top" *ngIf="item.isBorder && !isMenuCollapsed">
-  </div>
-  <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" routerLinkActive="active"
-    *ngIf="!item.hasChildren && hasAccess(item) && !item.isBorder">
-    <span>{{ item.title }}</span>
-  </a>
-</li>
+<div *ngFor="let item of items">
+  <hr class="sidebar-divider" *ngIf="item.isBorder && !isMenuCollapsed">
+  <li class="nav-item" >
+    <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" routerLinkActive="active"
+      *ngIf="!item.hasChildren && hasAccess(item) && !item.isBorder">
+      <span>{{ item.title }}</span>
+    </a>
+  </li>
+</div>
 <div class="sidebar-version text-center">
   <small *ngIf="!isMenuCollapsed">{{version}}</small>
 </div>
