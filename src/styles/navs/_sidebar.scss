@@ -5,11 +5,11 @@
 .sidebar {
   width: $sidebar-collapsed-width;
   height: 100%;
-  z-index: 2000;
+  z-index: 200;
   position: fixed;
   overflow: visible;
   margin-left: $sidebar-fixed-width;
-  transition: 0.3s;
+  padding-top: $spacer;
 
   .nav-item {
     position: relative;
@@ -17,11 +17,6 @@
     &:last-child {
       margin-bottom: $spacer;
     }
-
-    // &:first-child {
-    //   margin-top: $spacer;
-    // }
-
     .nav-link {
       text-align: center;
       padding: 0.75rem 1rem;
@@ -55,6 +50,7 @@
 
     .collapsing {
       display: none;
+      transition: none;
     }
 
     .collapse,
@@ -101,21 +97,21 @@
   }
 
   #sidebarToggle {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: $input-height;
+    height: $input-height;
     text-align: center;
-    // margin-bottom: 1rem;
-    margin-right: 1rem;
     cursor: pointer;
     color: $white;
+    left: calc(#{$sidebar-base-width} - (#{$input-height}/2));
+    z-index: 201;
+    display: block;
+    
+    &.toggled {
+      display: none;
 
-    &::after {
-      font-weight: 900;
-      margin-right: 0.1rem;
-    }
-
-    &:hover {
-      text-decoration: none;
+      &.mouseover {
+        display: block;
+      }
     }
 
     &:focus {
@@ -126,34 +122,22 @@
   &.toggled {
     width: 0 !important;
     overflow: hidden;
-
-    #sidebarToggle::after {
-      margin-left: 0.25rem;
-    }
   }
 
 
   .sidebar-brand {
     height: $topbar-base-height;
     text-decoration: none;
-    font-size: 1rem;
-    font-weight: $font-weight-bolder;
+    font-size: $h3-font-size;
+    font-weight: $font-weight-normal;
     padding: 1.5rem 1rem;
     text-align: center;
-    letter-spacing: 0.3rem;
-    z-index: 2;
-    color: $body-color;
-    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05rem;
+    z-index: 1;
 
-    //.sidebar-brand-icon i {
-    //  font-size: 2rem;
-    //}
-    .sidebar-brand-icon img {
-      height: 2rem;
-    }
-
-    .sidebar-brand-text {
-      display: none;
+    .sidebar-brand-icon i {
+      font-size: 2rem;
     }
   }
 
@@ -171,10 +155,6 @@
 }
 
 @include media-breakpoint-up(md) {
-  .dropdown-item {
-    padding: 0.25 * $spacer 0.5 * $spacer;
-  }
-
   .sidebar {
     width: $sidebar-base-width !important;
 
@@ -201,26 +181,29 @@
 
       .collapse,
       .collapsing {
-        margin: 0 1 * $spacer;
+        margin: 0 $spacer;
       }
-
       .nav-link {
         display: block;
-        width: 11.5 * $spacer;
+        width: 100%;
         text-align: left;
-        padding: 0.2 * $spacer 0.5 * $spacer;
-        margin-left: 0.5 * $spacer;
-
-        i {
-          font-size: $font-size-base * 1.35;
-          margin-right: $spacer;
-          width: 25px;
-          text-align: center;
-        }
+        padding: 0.5 * $spacer $spacer;
+        width: $sidebar-base-width;
 
         span {
           font-size: $font-size-base;
           display: inline;
+        }
+
+        &.dropdown-toggle {
+          i {
+            font-size: $icon-size;
+          }
+
+          span {
+            font-size: $h4-font-size;
+            display: inline;
+          }
         }
 
         // Accordion Arrow Icon
@@ -272,8 +255,7 @@
           // Grow In Animation for Toggled State
           animation-name: growIn;
           animation-duration: 200ms;
-          animation-timing-function: transform cubic-bezier(.18, 1.25, .4, 1), opacity cubic-bezier(0, 1, .4, 1);
-
+          animation-timing-function: transform cubic-bezier(.18,1.25,.4,1), opacity cubic-bezier(0,1,.4,1);
           .collapse-inner {
             box-shadow: $box-shadow;
             border-radius: $border-radius;
@@ -301,7 +283,6 @@
 
           span {
             //font-size: 0.65rem;
-            //display: block;
             display: none;
           }
 
@@ -387,10 +368,6 @@
   #sidebarToggle {
     background-color: $gray-400;
 
-    &::after {
-      color: $gray-500;
-    }
-
     &:hover {
       background-color: $gray-400;
     }
@@ -400,8 +377,7 @@
 // Sidebar Dark
 .sidebar-dark {
   .sidebar-brand {
-    color: $gray-900;
-    background-color: $white;
+    color: $white;
   }
 
   hr.sidebar-divider {
@@ -419,19 +395,22 @@
       i {
         color: $gray-400;
       }
-
+      
       &.active {
         color: $primary;
+
+        i {
+          color: $primary;
+        }
       }
 
       &:hover {
         color: $gray-100;
-        background-color: $gray-600;
+        background-color: lighten($color: $gray-800, $amount: 5%);
 
         i {
-          color: $white;
+          color: $gray-100;
         }
-
       }
 
       // Accordion
@@ -454,30 +433,6 @@
   // Color the sidebar toggler
   #sidebarToggle {
     background-color: $gray-700;
-    position: relative;
-    left: -1.1rem;
-
-    &::after {
-      color: $gray-900;
-    }
-
-    &:hover {
-      background-color: $gray-900;
-    }
-
-    &.toggled {
-      left: 0.7rem !important;
-
-      &.mouseover {
-        left: -1.1rem !important;
-      }
-    }
-  }
-
-  &.toggled {
-    #sidebarToggle::after {
-      color: $gray-700;
-    }
   }
 }
 
