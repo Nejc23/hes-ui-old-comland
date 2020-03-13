@@ -34,6 +34,7 @@ import { ModalConfirmComponent } from './modals/components/modal-confirm.compone
 import { PipesModule } from './pipes/pipes.module';
 import { SideFixedNavComponent } from './base-template/components/side-fixed-nav.component';
 import { Page404Component } from './404/page-404.component';
+import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 
 @NgModule({
   exports: [
@@ -57,6 +58,7 @@ import { Page404Component } from './404/page-404.component';
     NgxChartsModule,
     DefaultWidgetSettingComponent,
     DefaultSettingsFormComponent,
+    SaveViewFormComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
     DisableIfUnauthorizedDirective,
@@ -88,6 +90,7 @@ import { Page404Component } from './404/page-404.component';
     ActionPreventerComponent,
     LocaleDatePipe,
     HeaderTitleComponent,
+    SaveViewFormComponent,
     ToastComponent,
     CardComponent,
     ModalTemplateComponent,
@@ -104,6 +107,12 @@ import { Page404Component } from './404/page-404.component';
     SideFixedNavComponent,
     Page404Component
   ],
-  entryComponents: [DefaultWidgetSettingComponent, DefaultSettingsFormComponent, ModalChangePasswordComponent, ModalConfirmComponent]
+  entryComponents: [
+    DefaultWidgetSettingComponent,
+    DefaultSettingsFormComponent,
+    ModalChangePasswordComponent,
+    ModalConfirmComponent,
+    SaveViewFormComponent
+  ]
 })
 export class SharedModule {}

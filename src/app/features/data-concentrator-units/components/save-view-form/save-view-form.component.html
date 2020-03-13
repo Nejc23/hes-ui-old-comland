@@ -1,0 +1,20 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Save view</div>
+
+  <div modal-body>
+    <ng-container>
+      <div class="form-row">
+        <div class="col">
+          <app-input-text [form]="form" [property]="namePropety" i18n-label label="Name">
+          </app-input-text>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div modal-footer>
+    <button type=" button" class="btn btn-outline-primary" (click)="save()" i18n>Save</button>
+  </div>
+</app-modal-template>
+

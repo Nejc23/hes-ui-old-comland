@@ -4,7 +4,7 @@
     <i class='uil uil-search' id="emptySearchIcon" *ngIf="searchTextEmpty"></i>
   </div>
   <div class="col-auto">
-    <button type="button" class="btn btn-secondary d-inline-block mb-1" data-toggle="modal" data-target="#filterModal"
+    <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="openSaveLayoutModal($event)"
     [ngbTooltip]="tipContentFilter"><i class='uil uil-filter'></i></button>
   </div>
   <div class="col-auto">

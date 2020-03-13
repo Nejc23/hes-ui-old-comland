@@ -1,10 +1,8 @@
 <div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
-
     <label [attr.for]="name" *ngIf="label">
         {{label}}
         <sup *ngIf="required"> *</sup>
     </label>
-
     <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inOneRow}" [id]="name">
         <div *ngFor="let option of options; let i = index;">
             <div>
@@ -16,7 +14,6 @@
             </div>
         </div>
     </div>
-
     <!--Loop through errors-->
     <div class="help-block" *ngIf="showErrors()">
         <app-form-error [error]="formControl!.errors "></app-form-error>

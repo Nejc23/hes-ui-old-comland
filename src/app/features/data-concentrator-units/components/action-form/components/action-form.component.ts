@@ -3,12 +3,13 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder, FormArray, FormControl, ValidatorFn } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
-import { FilterFormService } from '../services/filter-form.service';
 import { Observable } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
 import { Columns } from '../interfaces/columns.interfaces';
 import { DataConcentratorUnitsGridService } from '../../../services/data-concentrator-units-grid.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { SaveViewFormComponent } from '../../save-view-form/save-view-form.component';
 
 @Component({
   selector: 'app-action-form',
@@ -34,7 +35,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
-    private service: FilterFormService
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -89,5 +90,10 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   change() {
     console.log(this.form.get('columns').value);
+  }
+
+  openSaveLayoutModal($event: any) {
+    const modalRef = this.modalService.open(SaveViewFormComponent);
+    modalRef.result.then().catch(() => {});
   }
 }

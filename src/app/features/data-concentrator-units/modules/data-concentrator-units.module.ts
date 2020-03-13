@@ -5,7 +5,7 @@ import { DataConcentratorUnitsComponent } from '../components/data-concentrator-
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
 import { DxDataGridModule, DxBulletModule, DxTemplateModule, DxTooltipModule, DxTagBoxModule } from 'devextreme-angular';
-import { FilterFormComponent } from '../components/action-form/components/filter-form.component';
+import { FilterFormComponent } from '../components/filter-form/components/filter-form.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
@@ -47,6 +47,7 @@ import { GridCellTagsComponent } from '../components/grid-custom-components/grid
       GridCellLastCommunicationComponent,
       GridCellTagsComponent
     ])
-  ]
+  ],
+  exports: []
 })
 export class DataConcentratorUnitsModule {}
