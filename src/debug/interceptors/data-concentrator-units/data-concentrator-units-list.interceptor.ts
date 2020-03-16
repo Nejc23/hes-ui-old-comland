@@ -67,7 +67,7 @@ export class DataConcentratorUnitsListInterceptor {
     if (request.body) {
       const params = request.body as GridRequestParams;
       if (params.searchModel && params.searchModel.length > 0) {
-        searched = searchBooks(data, params.searchModel[0].value);
+        searched = searchById(data, params.searchModel[0].value);
       }
 
       skip = params.startRow;
@@ -85,7 +85,7 @@ export class DataConcentratorUnitsListInterceptor {
         });
       }
     }
-    console.log(sortedUsers.slice(skip, take));
+
     const body: GridResponse<DataConcentratorUnitsList> = {
       data: sortedUsers.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
       totalCount: searched.length,
@@ -106,15 +106,15 @@ export class DataConcentratorUnitsListInterceptor {
   }
 }
 
-function searchBooks(companies, filter) {
-  var result;
+function searchById(companies, filter) {
+  let result;
   if (typeof filter === 'undefined' || filter.length == 0) {
     result = companies;
   } else {
-    result = _.filter(companies, function(c) {
-      var cProperties = _.keys(c);
+    result = _.filter(companies, c => {
+      const cProperties = _.keys(c);
       _.pull(cProperties, 'id');
-      return _.find(cProperties, function(property) {
+      return _.find(cProperties, property => {
         if (c[property]) {
           return _.includes(_.lowerCase(c[property]), _.lowerCase(filter));
         }

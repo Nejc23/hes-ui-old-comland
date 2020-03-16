@@ -173,6 +173,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
         that.requestModel.startRow = paramsRow.request.startRow;
         that.requestModel.endRow = paramsRow.request.endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
+        that.requestModel.filterModel = that.setFilter();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
           that.totalCount = data.totalCount;
           paramsRow.successCallback(data.data, data.totalCount);
@@ -204,8 +205,34 @@ export class DataConcentratorUnitsComponent implements OnInit {
       ) {
         this.requestModel.filterModel = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
         this.gridApi.onFilterChanged();
+        this.setFilterInfo();
       }
     }
+  }
+
+  setFilter() {
+    if (
+      JSON.stringify(this.requestModel.filterModel) !==
+      JSON.stringify(this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter))
+    ) {
+      this.setFilterInfo();
+      return this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+    } else {
+      this.setFilterInfo();
+    }
+  }
+
+  // text in header about selected filters
+  setFilterInfo() {
+    const filter = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+
+    this.filters = this.staticextService.setfilterHeaderText(
+      filter.name,
+      filter.statuses && filter.statuses.length > 0,
+      filter.types && filter.types.length > 0,
+      filter.vendor ? true : false,
+      filter.tags && filter.tags.length > 0
+    );
   }
 
   // on change page in the grid
