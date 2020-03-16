@@ -14,6 +14,7 @@ import { GridCellMetersComponent } from '../components/grid-custom-components/gr
 import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
+import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 
 @NgModule({
   entryComponents: [],
@@ -27,7 +28,8 @@ import { GridCellTagsComponent } from '../components/grid-custom-components/grid
     GridCellMetersComponent,
     GridCellNameComponent,
     GridCellLastCommunicationComponent,
-    GridCellTagsComponent
+    GridCellTagsComponent,
+    GridCustomFilterComponent
   ], // StringifyDataPipe
   imports: [
     SharedModule,
@@ -45,7 +47,8 @@ import { GridCellTagsComponent } from '../components/grid-custom-components/grid
       GridCellMetersComponent,
       GridCellNameComponent,
       GridCellLastCommunicationComponent,
-      GridCellTagsComponent
+      GridCellTagsComponent,
+      GridCustomFilterComponent
     ])
   ],
   exports: []

@@ -7,6 +7,7 @@
         <div *ngFor="let option of options; let i = index;">
             <div>
                 <input class="form-control mr-1" type="checkbox" id="input-checkbox-{{i}}"
+                    (change)="selectedValue(option, isOptionChecked(option))"
                     [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox>
 
                 <label for="{{option.id}}" class="mr-3"

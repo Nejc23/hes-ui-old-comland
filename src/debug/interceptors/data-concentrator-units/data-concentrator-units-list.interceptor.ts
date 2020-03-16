@@ -10,7 +10,7 @@ import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/da
 export class DataConcentratorUnitsListInterceptor {
   constructor() {}
 
-  static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+  /* static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     let skip = 0;
     let take = 0;
     let sortColId = '';
@@ -18,15 +18,15 @@ export class DataConcentratorUnitsListInterceptor {
     let searched = [];
     if (request.body) {
       const params = request.body as GridRequestParams;
-
-      if (params.search && params.search.length > 0) {
+*/
+  /* if (params.search && params.search.length > 0) {
         searched = searchBooks(data, params.search[0].value);
-      }
+      }*/
 
-      skip = params.skip;
-      take = params.take;
-
-      if (params.sort) {
+  /*      skip = params.startRow;
+      take = params.endRow;
+*/
+  /*if (params.sort) {
         params.sort.forEach(element => {
           sortColId = element.selector;
           if (element.desc) {
@@ -35,11 +35,11 @@ export class DataConcentratorUnitsListInterceptor {
             sortedUsers = _.sortBy(searched, sortColId);
           }
         });
-      }
-    }
+      }*/
+  /*  }
 
     const body: GridResponse<DataConcentratorUnitsList> = {
-      data: sortedUsers.slice(skip, Number(skip) + Number(take)), // sortedUsers.slice(request.body.startRow, request.body.endRow),
+      data: sortedUsers.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
       totalCount: searched.length,
       summary: '',
       groupCount: 0
@@ -55,29 +55,29 @@ export class DataConcentratorUnitsListInterceptor {
 
   static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
     return new RegExp(`/api/data-concentrator-units`).test(request.url);
-  }
+  }*/
 
-  static interceptDataConcentratorUnitsList2(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+  static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     console.log(request.body);
     let skip = 0;
     let take = 0;
     let sortColId = '';
-    let sortedUsers = data;
-    let searched = [];
+    let sortedUsers = []; // data;
+    let searched = data;
     if (request.body) {
       const params = request.body as GridRequestParams;
-
-      if (params.search && params.search.length > 0) {
-        searched = searchBooks(data, params.search[0].value);
+      if (params.searchModel && params.searchModel.length > 0) {
+        searched = searchBooks(data, params.searchModel[0].value);
       }
 
-      skip = params.skip;
-      take = params.take;
+      skip = params.startRow;
+      take = params.endRow;
 
-      if (params.sort) {
-        params.sort.forEach(element => {
-          sortColId = element.selector;
-          if (element.desc) {
+      if (params.sortModel) {
+        params.sortModel.forEach(element => {
+          sortColId = element.colId;
+
+          if (element.sort === 'desc') {
             sortedUsers = _.sortBy(searched, sortColId).reverse();
           } else {
             sortedUsers = _.sortBy(searched, sortColId);
@@ -85,11 +85,10 @@ export class DataConcentratorUnitsListInterceptor {
         });
       }
     }
-
-    console.log(request.body.startRow);
+    console.log(sortedUsers.slice(skip, take));
     const body: GridResponse<DataConcentratorUnitsList> = {
-      data: data.slice(request.body.startRow, request.body.endRow), //sortedUsers.slice(skip, Number(skip) + Number(take)), // sortedUsers.slice(request.body.startRow, request.body.endRow),
-      totalCount: data.length, //searched.length,
+      data: sortedUsers.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
+      totalCount: searched.length,
       summary: '',
       groupCount: 0
     };
@@ -102,8 +101,8 @@ export class DataConcentratorUnitsListInterceptor {
     );
   }
 
-  static canInterceptDataConcentratorUnitsList2(request: HttpRequest<any>): boolean {
-    return new RegExp(`/api/2`).test(request.url);
+  static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
+    return new RegExp(`/api/data-concentrator-units`).test(request.url);
   }
 }
 

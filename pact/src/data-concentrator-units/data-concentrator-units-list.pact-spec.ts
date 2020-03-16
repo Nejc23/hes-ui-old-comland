@@ -30,22 +30,21 @@ describe('Pact consumer test', () => {
 
   describe('Data concentrator units list get request', () => {
     const requestBody: GridRequestParams = {
-      requireTotalCount: true,
-      skip: 0,
-      take: 50,
-      search: [
+      startRow: 0,
+      endRow: 19,
+      searchModel: [
         {
           selector: 'all',
           value: 'search text'
         }
       ],
-      sort: [
+      sortModel: [
         {
           selector: 'name',
           desc: false
         }
       ],
-      filter: [
+      filterModel: [
         {
           selector: 'typeId',
           operation: enumSearchFilterOperators.notEqual,

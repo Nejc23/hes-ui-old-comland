@@ -6,24 +6,7 @@
   <div class="col-auto">
     <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="openSaveLayoutModal($event)"
     [ngbTooltip]="tipContentFilter"><i class='uil uil-filter'></i></button>
-  </div>
-  <div class="col-auto">
-    <div class="btn-group keep-inside-clicks-open">
-      <button type="button" class="btn btn-secondary d-inline-block mb-1"
-        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-        [ngbTooltip]="tipContentColumns"><i class='uil uil-columns'></i></button>
-      <div  class="dropdown-menu dropdown-menu-right" >
-
-          <app-input-multiselect [form]="form" [property]="columnsProperty" name="multSelectColumns"
-            [options]="columns$" [isReadOnly]="false" (onChange)="change()">
-          </app-input-multiselect>
-
-        <hr />
-
-        <button class="dropdown-item" type="button">Select all</button>
-      </div >
-    </div>
-  </div>
+  </div> 
   <div class="col-auto">
     <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onRefresh()" id="btnRedo"
     [ngbTooltip]="tipContentRefresh"><i class='uil uil-redo'></i></button>
@@ -31,7 +14,6 @@
 </div>
 <ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
 <ng-template #tipContentFilter><span i18n>Filter results</span></ng-template>
-<ng-template #tipContentColumns><span i18n>Manage columns</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
 
 <app-filter-form></app-filter-form>

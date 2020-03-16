@@ -1,67 +1,81 @@
 <!-- header -->
-<div class="d-flex align-items-center mb-3">
-  <app-header-title></app-header-title>
-  <button class="btn btn-primary btn-round">
-    <i class="uil uil-plus"></i>
-  </button>
-  <app-breadcrumb class="ml-auto"></app-breadcrumb>
-</div>
+<div class="container-fluid">
 
-<!-- row total items, selected filter name -->
-<div class="d-flex align-items-center px-2 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
-  <div>{{totalCount}} <span i18n>items</span> &middot; {{filters}}</div>
-  <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()" class="ml-auto"></app-action-form>
-</div>
-
-<div class="d-flex align-items-center px-2 py-3 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
-  <div class="mr-1">
-    <span class="align-text-bottom" i18n>{{gridApi.getSelectedRows().length}} items selected</span> &middot; 
-    <a class="align-text-bottom text-white" href="void();" ><span i18n>Select all</span> ({{totalCount}}) <span i18n>items</span></a>
+  <div class="d-flex align-items-center">
+    <app-header-title></app-header-title>
+    <button class="btn btn-primary btn-round">
+      <i class="uil uil-plus" id="tipContentAdd"></i>
+    </button>
+    <app-breadcrumb class="ml-auto"></app-breadcrumb>
   </div>
-  <button type="button" class="btn btn-light mr-1" (click)="onUploadConfiguration()"><span
-        i18n>Upload Configuration</span></button>
-  <button type="button" class="btn btn-light" (click)="onUpgrade()"><span
-        i18n>Upgrade</span></button>
+
+  <!-- row total items, selected filter name -->
+  <div class="form-row mt-0 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
+    <div class="pl-2 align-bottom pt-3">
+      <span class="align-text-bottom" i18n>{{totalCount}} items &middot; {{filters}}</span>
+    </div>
+    <div class="ml-auto mt-2 mb-2 mr-2">
+      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()"></app-action-form>
+    </div>    
+  </div>
 </div>
 
-<!-- ag-grid -->
-<div class="bg-white">
-  <ag-grid-angular
-    class="ag-theme-balham"            
-    style="width: 100%; height: calc(100% - 25px);"
-    #agGrid
+  <div class="form-row mt-0 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
+    <div class="pl-2 col-4 align-bottom pt-3 text-white" *ngIf="!selectedAll()">
+      <span class="align-text-bottom" i18n>{{gridApi.getSelectedRows().length}} items selected</span> - 
+      <a class="align-text-bottom text-white" href="javascript:void(0);" (click)="selectAll()" ><span i18n>Select all</span> ({{totalCount}}) <span i18n>items</span></a>
+    </div>
+    <div class="pl-2 col-4 align-bottom pt-3 text-white" *ngIf="selectedAll()">
+      <span class="align-text-bottom" i18n>All ({{totalCount}}) items selected</span> - 
+      <a class="align-text-bottom text-white" href="javascript:void(0);" (click)="deselectAll()" ><span i18n>Deselect all</span></a>
+    </div>
+    <div class="col-auto pt-1">
+      <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUploadConfiguration()"><span
+          i18n>Upload Configuration</span></button>
+    </div>
+    <div class="col-auto pt-1">
+      <button type="button" class="btn btn-secondary d-inline-block mb-1" (click)="onUpgrade()"><span
+          i18n>Upgrade</span></button>
+    </div>
+  </div>
 
-    [domLayout]=agGridSettings.domLayout
-    suppressSizeToFit=agGridSettings.suppressSizeToFit
-         
-    [rowData]="rowData"
-    [modules]="modules"
-    [icons]="icons"
-    [pagination]=agGridSettings.pagination
-   
-    [paginationPageSize]= agGridSettings.paginationPageSize
-    [multiSortKey]=agGridSettings.multiSortKey
-    [cacheOverflowSize]="cacheOverflowSize"
-    [maxConcurrentDatasourceRequests]="maxConcurrentDatasourceRequests"
-    [frameworkComponents]="frameworkComponents"
+  <!-- ag-grid -->
+  <div class="form-row mt-0 bg-white">
+    <ag-grid-angular
+      class="ag-theme-balham"            
+      style="width: 100%; height: calc(100% - 25px);"
+      #agGrid
 
-    [gridOptions]="gridOptions"    
-    [columnDefs]="columns"
+      [domLayout]=agGridSettings.domLayout
+      suppressSizeToFit=agGridSettings.suppressSizeToFit
+          
+      [modules]="modules"
+      [icons]="icons"
+      [pagination]=agGridSettings.pagination
+    
+      [paginationPageSize]=agGridSettings.paginationPageSize
+      [multiSortKey]=agGridSettings.multiSortKey
+      [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+      [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+      [frameworkComponents]="frameworkComponents"
+      [cacheBlockSize]=agGridSettings.paginationPageSize
+      [maxBlocksInCache]="2"
 
-    [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
-    [rowSelection]=agGridSettings.rowSelection
+      [gridOptions]="gridOptions"    
+      [columnDefs]="columns"
 
-    (selectionChanged)="onSelectionChanged()"
-    (gridReady)="onGridReady($event)"
-    >
-  </ag-grid-angular>
-  <div class="test-header">
-    Page Size:
-    <select #select (change)="onPageSizeChanged()" id="page-size">
-      <option value="10" selected="">10</option>
-      <option value="100">100</option>
-      <option value="500">500</option>
-      <option value="1000">1000</option>
-    </select>
+      [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+      [rowSelection]=agGridSettings.rowSelection
+      [sideBar]="sideBar"
+
+      (selectionChanged)="onSelectionChanged()"
+      (gridReady)="onGridReady($event)"
+      (columnVisible)="onColumnVisible($event)"
+      (toolPanelVisibleChanged)="toolPanelChanged($event)"
+      (paginationChanged)="onPaginationChange($event)"
+      (rowSelected)="onRowSelect($event)"
+      >
+    </ag-grid-angular>
+    
   </div>
 </div>

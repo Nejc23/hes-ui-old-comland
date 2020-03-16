@@ -1,53 +1,45 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
+import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
+import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { DataConcentratorUnitsGridRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-grid-request.interface';
+import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
+import { GridFilterSessionStoreService } from 'src/app/core/utils/services/grid-filter-session-store.service';
+import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
+
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
 // consts
-import { configGrid, configAgGrid, configAgGridDefCol } from 'src/environments/config';
-import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
+import { configGrid, configAgGrid } from 'src/environments/config';
 import { readStatusTrashold } from '../consts/data-concentrator-units.consts';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
-import { AllModules, Module, GridOptions, IGetRowsParams } from '@ag-grid-enterprise/all-modules';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { DataConcentratorUnitsGridRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-grid-request.interface';
-import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
   templateUrl: './data-concentrator-units.component.html'
 })
-export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
+export class DataConcentratorUnitsComponent implements OnInit {
   cookieNameForGridSettings = 'grdColDCU';
   sessionNameForGridState = 'grdStateDCU';
-
-  private serviceSubscription: Subscription;
+  sessionNameForGridFilter = 'grdFilterDCU';
 
   // grid instance
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
 
   // grid variables
   columns = [];
-  //dataSource: any = {};
   totalCount = 0;
   filters = '';
-  selectedRows;
   gridSettings = configGrid;
 
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;
-
-  // subscribe to get data from service
-  subscribeTotalItems: Subscription;
-
-  tresholds = readStatusTrashold;
-
-  TooltipTarget: any;
-  ToolTipText = '';
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -55,11 +47,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public gridOptions: Partial<GridOptions>;
   private gridApi;
   private gridColumnApi;
-  private rowSelection;
-  private isRowSelectable;
-  private autoGroupColumnDef;
   public icons;
   public frameworkComponents;
+  public sideBar;
 
   requestModel: DataConcentratorUnitsGridRequest = {
     startRow: 0,
@@ -73,10 +63,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     groupKeys: [],
     pivotMode: false
   };
-  rowData: any[] = [];
-
-  cacheOverflowSize = 2;
-  maxConcurrentDatasourceRequests = 2;
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
@@ -86,20 +72,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
-    private eventService: DataConcentratorUnitsGridEventEmitterService
+    private eventService: DataConcentratorUnitsGridEventEmitterService,
+    private gridFilterSessionStoreService: GridFilterSessionStoreService
   ) {
-    this.serviceSubscription = this.eventService.eventEmitter.subscribe({
-      next: (event: string) => {
-        console.log(this.gridApi.getFirstDisplayedRow());
-        console.log(this.gridApi.getLastDisplayedRow());
-        console.log(`Received message #${event}`);
-
-        this.gridApi.forEachNode(function(node) {
-          node.setSelected(event);
-        });
-      }
-    });
-
     this.sidebarService.headerTitle = staticextService.headerTitleDCU;
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -107,24 +82,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    // ---- ag-grid -------
     // set grid columns
-    this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns();
-    // --------------------
-
-    // subscribe to get count of all items on the grid
-    /*  this.subscribeTotalItems = this.dataConcentratorUnitsGridService.totalItems.subscribe((total: number) => {
-      this.totalCount = total;
-    });*/
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscribeTotalItems) {
-      this.subscribeTotalItems.unsubscribe();
-    }
-    if (this.serviceSubscription) {
-      this.serviceSubscription.unsubscribe();
-    }
+    this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
+    // set right sidebar on the grid
+    this.sideBar = this.dataConcentratorUnitsGridService.setSideBar();
   }
 
   // set momemnt text (next planned read) out of date and time
@@ -147,22 +108,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   refreshGrid() {
     this.gridApi.purgeServerSideCache([]);
   }
-  /*
-  saveState = state => {
-    this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, state);
-    this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, state.pageIndex);
-  };
 
-  loadState = () => {
-    const dataFromCookie = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
-    const sessionPageIndex = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
-
-    if (dataFromCookie) {
-      dataFromCookie.pageIndex = sessionPageIndex ? sessionPageIndex : 0;
-    }
-    return dataFromCookie;
-  };
-*/
   // ag-grid
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
@@ -177,7 +123,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   // ag-grid
-  // search string
+  // search string changed call get data
   searchData($event: string) {
     if ($event != this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState)) {
       this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
@@ -207,33 +153,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     alert('selected items for upgrade: ' + str);
   }
 
-  // TODO
-  // button click for set visible grid columns
-  setVisibilityGridColumns() {
-    this.columns = this.dataConcentratorUnitsGridService.setCustomVisibilityGridColumns();
-  }
-
-  // for tooltips demo
-  onCellHoverChanged(event: any) {
-    /*
-  if (event.rowType === "data") {
-    this.TooltipTarget = event.cellElement;
-    if (event.eventType === 'mouseover') {
-      console.log(event.value);
-      console.log(event.cellElement);
-      this.ToolTipText = event.value;
-    }
-  }*/
-  }
-
-  // ----------------------- ag-grid ------------------------------
+  // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.gridColumnApi;
     this.gridApi.sizeColumnsToFit();
     this.icons = {
-      filter: '',
-      column: ''
+      filter: ''
     };
 
     const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
@@ -241,14 +167,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       params.columnApi.setColumnState(dataFromCookie);
     }
 
-    // const request = this.dataConcentratorUnitsService.getGridDcu2(params.dataSource.getRows());
     const that = this;
     const datasource = {
       getRows(paramsRow) {
         that.requestModel.startRow = paramsRow.request.startRow;
         that.requestModel.endRow = paramsRow.request.endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
-        that.dataConcentratorUnitsService.getGridDcu2(that.requestModel).subscribe(data => {
+        that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
           that.totalCount = data.totalCount;
           paramsRow.successCallback(data.data, data.totalCount);
           // params.failCallback();
@@ -258,72 +183,59 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     this.gridApi.setServerSideDatasource(datasource);
   }
+  // ----------------------- ag-grid set DATASOURCE end --------------------------
 
+  // ag-grid change visibillity of columns
+  onColumnVisible(params) {
+    this.dataConcentratorUnitsGridService.onColumnVisibility(params);
+  }
+
+  // click on check-box in the grid
   onSelectionChanged() {
-    var selectedRows = this.gridApi.getSelectedRows();
-    var selectedRowsString = '';
-    var maxToShow = 5;
-    selectedRows.forEach(function(selectedRow, index) {
-      if (index >= maxToShow) {
-        return;
+    this.eventService.checkChange(true);
+  }
+
+  // on close tool panel reload filter model
+  toolPanelChanged(params) {
+    if (params.source === undefined) {
+      if (
+        JSON.stringify(this.requestModel.filterModel) !==
+        JSON.stringify(this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter))
+      ) {
+        this.requestModel.filterModel = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+        this.gridApi.onFilterChanged();
       }
-      if (index > 0) {
-        selectedRowsString += ', ';
-      }
-      selectedRowsString += selectedRow.id;
-    });
-    if (selectedRows.length > maxToShow) {
-      var othersCount = selectedRows.length - maxToShow;
-      selectedRowsString += ' and ' + othersCount + ' other' + (othersCount !== 1 ? 's' : '');
     }
-    console.log(selectedRowsString);
-  }
-  /*
-onQuickFilterChanged($event)
-{
-  */
-  /*
-  var filterInstance = this.gridApi.getFilterInstance('name');
-
-// Set the model for the filter
-filterInstance.setModel({
-    type: 'endsWith',
-    filter: 'g'
-});
-*/
-  // Get grid to run filter operation again
-
-  //this.requestModel.filterModel= [{colId: 'all', filter: 'neki'}]
-  //this.gridApi.onFilterChanged();
-  /*
-  this.gridApi.setFilterModel(
-    {colId:"sample", filter: 'ej ej ej'});*/
-  // this.gridApi.onFilterChanged();
-
-  //instance.selectValue("John Joe Nevin");
-  //instance.applyModel();
-  //this.gridApi.onFilterChanged();
-
-  //}
-
-  clicked() {
-    this.gridApi.paginationSetPageSize(Number(50));
   }
 
-  onPageSizeChanged() {
-    console.log();
-    var value = document.getElementById('page-size');
-    console.log(value);
-    this.gridApi.paginationSetPageSize(Number(50));
+  // on change page in the grid
+  onPaginationChange(params) {
+    if (this.gridApi) {
+      this.eventService.pageChange(this.gridApi.paginationGetCurrentPage());
+    }
   }
-  // --------------------------------------------------------------
+
+  // check if "select all" was clicked
+  selectedAll() {
+    return localStorage.getItem('lockCheckBox') === 'true' ? true : false;
+  }
+
+  // if selected-all clicked, than disable deselection of the rows
+  onRowSelect(params) {
+    if (localStorage.getItem('lockCheckBox') === 'true') {
+      params.node.setSelected(true);
+    }
+  }
+
+  // click on the link "select all"
+  selectAll() {
+    localStorage.setItem('lockCheckBox', 'true');
+    this.eventService.pageChange(this.gridApi.paginationGetCurrentPage());
+  }
+
+  // click on the link "deselect all"
+  deselectAll() {
+    localStorage.setItem('lockCheckBox', 'false');
+    this.eventService.pageChange(-1); // -1 = deselect all
+  }
 }
-
-// TODO only for sample - remove !!!
-/*@Pipe({ name: 'stringifyData' })
-export class StringifyDataPipe implements PipeTransform {
-  transform(data: DataConcentratorUnitsList[]) {
-    return data.map(data => data.idNumber).join(', ');
-  }
-
-}*/

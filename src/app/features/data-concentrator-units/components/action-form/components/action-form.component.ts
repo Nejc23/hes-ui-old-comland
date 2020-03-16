@@ -24,7 +24,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   columns$: Codelist<string>[] = [];
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
-  @Output() columnsChange: EventEmitter<boolean> = new EventEmitter();
   @Output() searchChange = new EventEmitter<string>();
 
   @ViewChild('modalFilter', { static: true }) input;
@@ -39,13 +38,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.dataConcentratorUnitsGridService.setGridDefaultColumns().forEach(element => {
-      /*   this.columns$.push({
-        id: element.dataField,
-        value: element.caption
-      });*/
-    });
-
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
 
     const search = this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState);
@@ -69,8 +61,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   }
   createForm(search: string): FormGroup {
     return this.fb.group({
-      ['content']: search,
-      ['columns']: [[]]
+      ['content']: search
     });
   }
 
@@ -82,14 +73,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.staticTextService.removePopupBackdropIfClickOnMenu();
-  }
-
-  get columnsProperty() {
-    return this.nameOf('columns');
-  }
-
-  change() {
-    console.log(this.form.get('columns').value);
   }
 
   openSaveLayoutModal($event: any) {

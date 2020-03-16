@@ -22,6 +22,7 @@ import { TagInputModule } from 'ngx-chips';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import { InputCheckboxGridComponent } from './components/input-checkbox/input-checkbox-grid.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -29,6 +30,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
     InputTextComponent,
     FormErrorComponent,
     InputCheckboxComponent,
+    InputCheckboxGridComponent,
     InputDatepickerComponent,
     InputDateTimeRangePickerComponent,
     InputToggleComponent,
@@ -49,6 +51,7 @@ import { InputsModule } from '@progress/kendo-angular-inputs';
     InputTextComponent,
     FormErrorComponent,
     InputCheckboxComponent,
+    InputCheckboxGridComponent,
     InputDatepickerComponent,
     InputDateTimeRangePickerComponent,
     InputToggleComponent,

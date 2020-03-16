@@ -69,7 +69,9 @@ export const configAgGrid = {
   suppressRowClickSelection: true,
   rowSelection: 'multiple',
   multiSortKey: 'ctrl',
-  domLayout: 'autoHeight'
+  domLayout: 'autoHeight',
+  cacheOverflowSize: 2,
+  maxConcurrentDatasourceRequests: 2
 };
 
 // Ag grid default columns settings

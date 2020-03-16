@@ -1,3 +1,4 @@
 <div>
-  <input type="checkbox" value="" id="allRows"  [(ngModel)]="isChecked" (change)="checkValue(isChecked?true:false)">
+  <!--<app-input-checkbox type="checkbox" value="" id="allRows"  [(ngModel)]="isChecked" (change)="checkValue(isChecked?true:false)">-->
+  <app-input-checkbox-grid [form]="form" [property]="selectProperty" [indeterminate]="setIntermediate" (change)="checkHeaderChangedValue()"></app-input-checkbox-grid>
 </div>

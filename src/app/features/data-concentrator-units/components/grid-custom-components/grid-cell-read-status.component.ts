@@ -1,9 +1,8 @@
-import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
 import { readStatusTrashold } from '../../consts/data-concentrator-units.consts';
 
 @Component({
@@ -11,7 +10,7 @@ import { readStatusTrashold } from '../../consts/data-concentrator-units.consts'
   templateUrl: './grid-cell-read-status.component.html'
 })
 export class GridCellReadStatusComponent implements ICellRendererAngularComp {
-  tresholds = readStatusTrashold;
+  trasholds = readStatusTrashold;
 
   public params: any;
 

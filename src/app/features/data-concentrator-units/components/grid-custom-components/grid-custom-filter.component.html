@@ -1,0 +1,23 @@
+<form [formGroup]="form">
+  <div class="container-fluid">
+    
+    <h3><span i18n>Filter Results</span></h3>
+    
+    <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
+      [autocompleteItemsAsObjects]="dcuStatuses$ | async">
+    </app-input-tag>
+
+    <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes"
+      [options]="dcuTypes$ | async" [isReadOnly]="false" [inOneRow]="true">
+    </app-input-multiselect>
+
+    <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"></app-select-input>   
+
+    <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"></app-input-tag>
+
+    <div class="d-flex justify-content-end">      
+      <button type="button" class="btn btn-secondary" (click)="clearButtonClicked()" i18n>Clear</button>      
+      <button type="submit" class="btn btn-primary" (click)="applyButtonClicked()" i18n>Apply</button>
+    </div>
+  </div>
+</form>

@@ -4,16 +4,21 @@ import { Injectable, EventEmitter } from '@angular/core';
   providedIn: 'root'
 })
 export class DataConcentratorUnitsGridEventEmitterService {
-  cookieNameForGridSettings = 'grdColDCU';
-
   public eventEmitter: EventEmitter<boolean>;
+  public eventEmitterPageChange: EventEmitter<number>;
 
   constructor() {
     this.eventEmitter = new EventEmitter<boolean>();
+    this.eventEmitterPageChange = new EventEmitter<number>();
   }
 
-  public checkChanged(checked: boolean) {
-    // do something, then...
-    this.eventEmitter.emit(checked);
+  // for check-box in header
+  public checkChange(value: boolean) {
+    this.eventEmitter.emit(value);
+  }
+
+  // for check-box in header
+  public pageChange(value: number) {
+    this.eventEmitterPageChange.emit(value);
   }
 }

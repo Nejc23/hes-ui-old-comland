@@ -1,0 +1,8 @@
+.ag-tool-panel-wrapper {
+  display: flex;
+  overflow-y: auto;
+  cursor: default;
+  user-select: none;
+  background-color: $white;
+  width: 370px;
+}

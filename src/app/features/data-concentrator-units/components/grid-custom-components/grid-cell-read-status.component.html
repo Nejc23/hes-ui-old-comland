@@ -1,10 +1,10 @@
 <div class="row" *ngIf="params.value">
   <div class="col-3">
-    <i *ngIf="params.data.readStatusPercent <= tresholds.alarmTrashold"
+    <i *ngIf="params.data.readStatusPercent <= trasholds.alarmTrashold"
       class='fa fa-circle text-danger  text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
-    <i *ngIf="params.data.readStatusPercent > tresholds.alarmTrashold && params.data.readStatusPercent <= tresholds.warningTrashold"
+    <i *ngIf="params.data.readStatusPercent > trasholds.alarmTrashold && params.data.readStatusPercent <= trasholds.warningTrashold"
       class='fa fa-circle text-warning  text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
-    <i *ngIf="params.data.readStatusPercent > tresholds.warningTrashold"
+    <i *ngIf="params.data.readStatusPercent > trasholds.warningTrashold"
       class='fa fa-circle text-success text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
   </div>
   <div class="col-1 text-primary align-right"><span> {{params.data.readStatusPercent}} %</span></div>
