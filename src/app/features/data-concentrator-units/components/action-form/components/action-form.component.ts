@@ -1,13 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { FormGroup, FormBuilder, FormArray, FormControl, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
-import { Observable } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
 import { Columns } from '../interfaces/columns.interfaces';
-import { DataConcentratorUnitsGridService } from '../../../services/data-concentrator-units-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SaveViewFormComponent } from '../../save-view-form/save-view-form.component';
 
@@ -33,7 +31,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private modalService: ModalService
   ) {}
 
