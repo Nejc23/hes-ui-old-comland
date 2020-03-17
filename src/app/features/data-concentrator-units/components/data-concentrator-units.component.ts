@@ -8,7 +8,6 @@ import { DataConcentratorUnitsStaticTextService } from '../services/data-concent
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { DataConcentratorUnitsGridRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-grid-request.interface';
 import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
@@ -19,8 +18,7 @@ import { Subscription } from 'rxjs';
 // consts
 import { configGrid, configAgGrid } from 'src/environments/config';
 import { enumSearchFilterOperators } from 'src/environments/config';
-import { readStatusTrashold } from '../consts/data-concentrator-units.consts';
-import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -53,7 +51,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
   public frameworkComponents;
   public sideBar;
 
-  requestModel: DataConcentratorUnitsGridRequest = {
+  requestModel: GridRequestParams = {
     startRow: 0,
     endRow: 0,
     sortModel: [],
@@ -203,15 +201,15 @@ export class DataConcentratorUnitsComponent implements OnInit {
     if (params.source === undefined) {
       if (
         !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
-          this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter),
+          this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
           this.requestModel.filterModel
         )
       ) {
-        const filterDCU = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
-        this.requestModel.filterModel.statuses = filterDCU.statuses;
-        this.requestModel.filterModel.vendor = filterDCU.vendor;
-        this.requestModel.filterModel.types = filterDCU.types;
-        this.requestModel.filterModel.tags = filterDCU.tags;
+        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+        this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+        this.requestModel.filterModel.types = filterDCU.typesFilter;
+        this.requestModel.filterModel.tags = filterDCU.tagsFilter;
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -222,16 +220,16 @@ export class DataConcentratorUnitsComponent implements OnInit {
   setFilter() {
     if (
       !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
-        this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter),
+        this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
         this.requestModel.filterModel
       )
     ) {
       this.setFilterInfo();
-      const filterDCU = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
-      this.requestModel.filterModel.statuses = filterDCU.statuses;
-      this.requestModel.filterModel.vendor = filterDCU.vendor;
-      this.requestModel.filterModel.types = filterDCU.types;
-      this.requestModel.filterModel.tags = filterDCU.tags;
+      const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+      this.requestModel.filterModel.types = filterDCU.typesFilter;
+      this.requestModel.filterModel.tags = filterDCU.tagsFilter;
     } else {
       this.setFilterInfo();
     }

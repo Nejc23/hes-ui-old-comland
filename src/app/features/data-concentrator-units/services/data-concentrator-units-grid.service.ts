@@ -11,7 +11,7 @@ import { GridCellLastCommunicationComponent } from '../components/grid-custom-co
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
-import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
+import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -171,12 +171,12 @@ export class DataConcentratorUnitsGridService {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
   }
 
-  public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuFilter, requestModel: GridFilterParams) {
+  public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
     if (
-      JSON.stringify(sessionFilter.statuses) === JSON.stringify(requestModel.statuses) &&
-      JSON.stringify(sessionFilter.tags) === JSON.stringify(requestModel.tags) &&
-      JSON.stringify(sessionFilter.types) === JSON.stringify(requestModel.types) &&
-      JSON.stringify(sessionFilter.vendor) === JSON.stringify(requestModel.vendor)
+      JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
+      JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
+      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor)
     ) {
       return true;
     }
