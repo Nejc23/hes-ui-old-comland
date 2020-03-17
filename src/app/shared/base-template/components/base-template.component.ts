@@ -12,11 +12,13 @@ import { SidebarService } from 'src/app/core/base-template/services/sidebar.serv
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
 import { Observable, of } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
+import { transition, trigger, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-base-template',
   templateUrl: './base-template.component.html',
-  providers: []
+  providers: [],
+  animations: [trigger('navItemsTrigger', [transition(':enter', [style({ opacity: 0 }), animate('300ms 200ms', style({ opacity: 1 }))])])]
 })
 export class BaseTemplateComponent implements OnInit {
   public app: any;

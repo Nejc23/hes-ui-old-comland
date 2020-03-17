@@ -1,6 +1,6 @@
 <!-- Nav Item - Dashboard -->
 <div *ngFor="let item of items">
-  <hr class="sidebar-divider" *ngIf="item.isBorder && !isMenuCollapsed">
+  <hr class="sidebar-divider" *ngIf="item.isBorder">
   <li class="nav-item" >
     <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" routerLinkActive="active"
       *ngIf="!item.hasChildren && hasAccess(item) && !item.isBorder">
@@ -9,5 +9,5 @@
   </li>
 </div>
 <div class="sidebar-version text-center">
-  <small *ngIf="!isMenuCollapsed">{{version}}</small>
+  <small>{{version}}</small>
 </div>

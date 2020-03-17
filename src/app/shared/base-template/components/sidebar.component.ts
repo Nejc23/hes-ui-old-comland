@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
 })
 export class SidebarComponent implements OnInit {
   @Input() items: Array<SidebarItem> = [];
-  @Input() isMenuCollapsed = false;
   public version = '';
 
   constructor(private router: Router, public permissionsService: PermissionsService) {}

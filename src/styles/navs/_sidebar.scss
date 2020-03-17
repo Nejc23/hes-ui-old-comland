@@ -3,7 +3,7 @@
 ******************************************************************/
 
 .sidebar {
-  width: $sidebar-collapsed-width;
+  width: $sidebar-base-width;
   height: 100%;
   z-index: 200;
   position: fixed;
@@ -17,83 +17,29 @@
     &:last-child {
       margin-bottom: $spacer;
     }
-    .nav-link {
-      text-align: center;
-      padding: 0.75rem 1rem;
-      width: $sidebar-collapsed-width;
 
-      span {
-        display: block;
-      }
+    .nav-link {
+      text-align: left;
+      padding: 0.5 * $spacer $spacer;
+      width: $sidebar-base-width;
     }
 
     &.active {
       .nav-link {
-        font-weight: 700;
+        font-weight: $font-weight-bold;
       }
     }
+  }
 
-    // Accordion
-    .collapse {
-      position: absolute;
-      left: calc(#{$sidebar-collapsed-width} + #{$grid-gutter-width} / 2);
-      z-index: 1;
-      top: 2px;
-      // Grow In Animation
-      @extend .animated--grow-in;
+  hr.sidebar-divider {
+    margin: 0 1rem 1rem;
+  }
 
-      .collapse-inner {
-        border-radius: $border-radius;
-        box-shadow: $box-shadow;
-      }
-    }
-
-    .collapsing {
-      display: none;
-      transition: none;
-    }
-
-    .collapse,
-    .collapsing {
-      .collapse-inner {
-        padding: .5rem 0;
-        min-width: 10rem;
-        font-size: $dropdown-font-size;
-        margin: 0 0 1rem 0;
-
-        .collapse-header {
-          margin: 0;
-          white-space: nowrap;
-          padding: .5rem 1.5rem;
-          text-transform: uppercase;
-          font-weight: 800;
-          color: $gray-500;
-        }
-
-        .collapse-item {
-          padding: 0.5rem 1rem;
-          margin: 0 0.5rem;
-          display: block;
-          color: $gray-900;
-          text-decoration: none;
-          border-radius: $border-radius;
-          white-space: nowrap;
-
-          &:hover {
-            background-color: $gray-200;
-          }
-
-          &:active {
-            background-color: $gray-300;
-          }
-
-          &.active {
-            color: $primary;
-            font-weight: 700;
-          }
-        }
-      }
-    }
+  .sidebar-version {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    color: fade-out($white, 0.5);
   }
 
   #sidebarToggle {
@@ -106,350 +52,95 @@
     z-index: 201;
     display: block;
     
-    &.toggled {
-      display: none;
+    /*&.toggled {
+      visibility: hidden;
+      transition: visibility 0.8s ease-out;
 
       &.mouseover {
-        display: block;
+        visibility: visible;
       }
-    }
+    }*/
 
     &:focus {
       outline: none;
     }
   }
 
+  /************ Sidebar Toggled ****************/
+
   &.toggled {
-    width: 0 !important;
     overflow: hidden;
-  }
-
-
-  .sidebar-brand {
-    height: $topbar-base-height;
-    text-decoration: none;
-    font-size: $h3-font-size;
-    font-weight: $font-weight-normal;
-    padding: 1.5rem 1rem;
-    text-align: center;
-    text-transform: uppercase;
-    letter-spacing: 0.05rem;
-    z-index: 1;
-
-    .sidebar-brand-icon i {
-      font-size: 2rem;
-    }
-  }
-
-  hr.sidebar-divider {
-    margin: 0 1rem 1rem;
-  }
-
-  .sidebar-heading {
-    text-align: center;
-    padding: 0 1rem;
-    font-weight: 800;
-    //font-size: 0.65rem;
-    @extend .text-uppercase;
-  }
-}
-
-@include media-breakpoint-up(md) {
-  .sidebar {
-    width: $sidebar-base-width !important;
+    width: $sidebar-collapsed-width !important;
 
     .nav-item {
 
-      // Accordion
-      .collapse {
-        position: relative;
-        left: 0;
-        z-index: 1;
-        top: 0;
-        animation: none;
-
-        .collapse-inner {
-          border-radius: 0;
-          box-shadow: none;
-        }
-      }
-
-      .collapsing {
-        display: block;
-        transition: $transition-collapse;
-      }
-
-      .collapse,
-      .collapsing {
-        margin: 0 $spacer;
-      }
       .nav-link {
-        display: block;
-        width: 100%;
-        text-align: left;
-        padding: 0.5 * $spacer $spacer;
-        width: $sidebar-base-width;
 
-        span {
-          font-size: $font-size-base;
-          display: inline;
-        }
-
-        &.dropdown-toggle {
-          i {
-            font-size: $icon-size;
-          }
-
-          span {
-            font-size: $h4-font-size;
-            display: inline;
-          }
-        }
-
-        // Accordion Arrow Icon
-        &[data-toggle="collapse"] {
-          &::after {
-            width: 1rem;
-            text-align: center;
-            float: right;
-            vertical-align: 0;
-            border: 0;
-            font-weight: 900;
-            content: '\f107';
-            font-family: 'Font Awesome 5 Free';
-          }
-
-          &.collapsed::after {
-            content: '\f105';
-          }
-        }
-      }
-    }
-
-    .sidebar-brand {
-      .sidebar-brand-icon i {
-        font-size: 2rem;
-      }
-
-      .sidebar-brand-text {
-        display: inline;
-      }
-    }
-
-    .sidebar-heading {
-      text-align: left;
-    }
-
-    &.toggled {
-      overflow: visible;
-      width: $sidebar-collapsed-width !important;
-
-      .nav-item {
-
-        // Accordion
-        .collapse {
-          position: absolute;
-          left: calc(#{$sidebar-collapsed-width} + #{$grid-gutter-width} / 2);
-          z-index: 1;
-          top: 2px;
-          // Grow In Animation for Toggled State
-          animation-name: growIn;
-          animation-duration: 200ms;
-          animation-timing-function: transform cubic-bezier(.18,1.25,.4,1), opacity cubic-bezier(0,1,.4,1);
-          .collapse-inner {
-            box-shadow: $box-shadow;
-            border-radius: $border-radius;
-          }
-        }
-
-        .collapsing {
-          display: none;
-          transition: none;
-        }
-
-        .collapse,
-        .collapsing {
-          margin: 0;
-        }
-
-        &:last-child {
-          margin-bottom: 1rem;
-        }
-
-        .nav-link {
-          text-align: center;
-          padding: 0.75rem 1rem;
-          width: $sidebar-collapsed-width;
-
-          span {
-            //font-size: 0.65rem;
-            display: none;
-          }
-
-          i {
-            margin-right: 0;
-          }
-
-          &[data-toggle="collapse"]::after {
-            display: none;
-          }
-        }
-      }
-
-      .sidebar-brand {
-        .sidebar-brand-icon i {
-          font-size: 2rem;
-        }
-
-        .sidebar-brand-text {
-          display: none;
-        }
-      }
-
-      .sidebar-heading {
-        text-align: center;
       }
     }
   }
-}
 
-// Sidebar Color Variants
 
-// Sidebar Light
-.sidebar-light {
-  .sidebar-brand {
-    color: $gray-700;
-  }
+  /************ Sidebar Color Variants ****************/
 
-  hr.sidebar-divider {
-    border-top: 1px solid $gray-200;
-  }
+  // Sidebar Dark
+  &.sidebar-dark {
 
-  .sidebar-heading {
-    color: $gray-500;
-  }
-
-  .nav-item {
-    .nav-link {
-      color: $gray-600;
-
-      i {
-        color: $gray-400;
-      }
-
-      &:active,
-      &:focus,
-      &:hover {
-        color: $gray-700;
-
-        i {
-          color: $gray-700;
-        }
-      }
-
-      // Accordion
-      &[data-toggle="collapse"]::after {
-        color: $gray-500;
-      }
+    hr.sidebar-divider {
+      border-top: 1px solid fade-out($white, 0.85);
     }
 
-    &.active {
+    .nav-item {
       .nav-link {
-        color: $gray-700;
-
-        i {
-          color: $gray-700;
-        }
-      }
-    }
-  }
-
-  // Color the sidebar toggler
-  #sidebarToggle {
-    background-color: $gray-400;
-
-    &:hover {
-      background-color: $gray-400;
-    }
-  }
-}
-
-// Sidebar Dark
-.sidebar-dark {
-  .sidebar-brand {
-    color: $white;
-  }
-
-  hr.sidebar-divider {
-    border-top: 1px solid fade-out($white, 0.85);
-  }
-
-  .sidebar-heading {
-    color: $gray-500;
-  }
-
-  .nav-item {
-    .nav-link {
-      color: $gray-400;
-
-      i {
         color: $gray-400;
-      }
-      
-      &.active {
-        color: $primary;
 
-        i {
+        &.active {
           color: $primary;
         }
-      }
 
-      &:hover {
-        color: $gray-100;
-        background-color: lighten($color: $gray-800, $amount: 5%);
-
-        i {
+        &:hover {
           color: $gray-100;
+          background-color: lighten($color: $gray-800, $amount: 5%);
         }
+
       }
 
-      // Accordion
-      &[data-toggle="collapse"]::after {
-        color: $gray-400;
-      }
-    }
-
-    &.active {
-      .nav-link {
-        color: $white;
-
-        i {
+      &.active {
+        .nav-link {
           color: $white;
         }
       }
     }
+
+    // Color the sidebar toggler
+    #sidebarToggle {
+      background-color: $gray-700;
+    }
+  }
+}
+
+/************* ANTIMATIONS *************/
+.sidebar {
+  transition: width .35s ease;
+
+  .nav-items.ng-enter {
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition-delay: 5s;
   }
 
-  // Color the sidebar toggler
-  #sidebarToggle {
-    background-color: $gray-700;
+  .nav-items.ng-leave {
+    transition: all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.5s;
+    transition-delay: 5s;
   }
-}
-
-.sidebar-version {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-  color: fade-out($white, 0.5);
-}
-
-.sidebar-title {
-  font-size: large !important;
-  font-weight: 600;
-  padding-left: 0.6rem;
-}
-
-.nav-button-hidden {
-  display: none !important;
+  
+  .nav-items.ng-enter,
+  .nav-items.ng-leave.ng-leave-active {
+    opacity: 0;
+  }
+  
+  .nav-items.ng-leave,
+  .nav-items.ng-enter.ng-enter-active {
+    opacity: 1;
+  }
 }
 
