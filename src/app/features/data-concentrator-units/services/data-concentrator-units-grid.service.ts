@@ -44,8 +44,8 @@ export class DataConcentratorUnitsGridService {
         pinned: true,
         width: 55,
         sortable: false,
-        cellRenderer: 'gridCellStatusComponent',
-        filter: 'agTextColumnFilter'
+        filter: false,
+        cellRenderer: 'gridCellStatusComponent'
       },
       {
         field: 'name',
