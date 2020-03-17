@@ -11,6 +11,7 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { filter } from 'rxjs/operators';
+import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 
 @Component({
   selector: 'app-save-view-form',
@@ -35,7 +36,8 @@ export class SaveViewFormComponent implements OnInit {
     private toast: ToastNotificationService,
     public i18n: I18n,
     private modal: NgbActiveModal,
-    private gridSettingsCookieStoreService: GridSettingsCookieStoreService
+    private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
+    private eventService: DataConcentratorUnitsGridEventEmitterService
   ) {
     this.form = this.createForm(null, null);
   }
@@ -46,7 +48,7 @@ export class SaveViewFormComponent implements OnInit {
       this.data = x;
       this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as DcuLayout;
       this.cookieSettings = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
-      console.log(`sessionLayout GET = ${JSON.stringify(this.sessionLayout)}`);
+      //console.log(`sessionLayout GET = ${JSON.stringify(this.sessionLayout)}`);
       if (this.sessionLayout) {
         this.sessionLayout.gridLayout = this.cookieSettings;
         if (this.sessionLayout.id) {
@@ -54,7 +56,7 @@ export class SaveViewFormComponent implements OnInit {
         } else {
           const currentLayout: DcuLayout = {
             id: -1,
-            name: 'Unknown',
+            name: this.i18n('Unknown'),
             statusesFilter: this.sessionLayout.statusesFilter,
             typesFilter: this.sessionLayout.typesFilter,
             tagsFilter: this.sessionLayout.tagsFilter,
@@ -89,27 +91,16 @@ export class SaveViewFormComponent implements OnInit {
         .toPromise()
         .then(x => {
           this.sessionLayout.id = x ? x.id : -1;
-          this.sessionLayout.name = this.i18n('NEW FILTER');
+          this.sessionLayout.name = this.i18n('New filter');
         });
     }
+    this.eventService.layoutChange(this.sessionLayout);
     this.modal.close();
   }
 
   get namePropety() {
     return 'name';
   }
-
-  /*
-  savedLayoutClicked(filterIdx: number) {
-    if (!this.dontSelectFilter) {
-      this.form = this.createForm(this.data, this.data[filterIdx]);
-      this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, this.data[filterIdx].gridLayout);
-      // this.gridFilterSessionStoreService.setGridFilter(this.sessionNameForGridFilter, this.data[filterIdx]);
-      // console.log(`selectSavedFilter id = ${this.data[filterIdx].id}, JSON = ${JSON.stringify(this.data[filterIdx])}`);
-    }
-    this.dontSelectFilter = false;
-  }
-  */
 
   showButtons(filterIdx: number) {
     this.selectedRow = filterIdx;
@@ -122,7 +113,11 @@ export class SaveViewFormComponent implements OnInit {
   selectSavedLayoutClicked(filterIdx: number) {
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridLayout, this.data[filterIdx]);
     this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout);
+    if (this.sessionLayout) {
+      this.sessionLayout.gridLayout = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
+    }
     this.form.get(this.namePropety).setValue(this.sessionLayout.name);
+    this.eventService.layoutChange(this.sessionLayout);
   }
 
   deleteSavedLayoutClicked(filterIdx: number) {

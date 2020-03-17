@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { DxDataGridComponent } from 'devextreme-angular';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -24,7 +24,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
   selector: 'app-data-concentrator-units',
   templateUrl: './data-concentrator-units.component.html'
 })
-export class DataConcentratorUnitsComponent implements OnInit {
+export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   cookieNameForGridSettings = 'grdColDCU';
   sessionNameForGridState = 'grdStateDCU';
   sessionNameForGridFilter = 'grdLayoutDCU';
@@ -37,6 +37,8 @@ export class DataConcentratorUnitsComponent implements OnInit {
   totalCount = 0;
   filters = '';
   gridSettings = configGrid;
+
+  private layoutChangeSubscription: Subscription;
 
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;
@@ -79,6 +81,17 @@ export class DataConcentratorUnitsComponent implements OnInit {
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
     this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions();
+    this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
+      next: (event: DcuLayout) => {
+        this.requestModel.filterModel.statuses = event.statusesFilter;
+        this.requestModel.filterModel.vendor = event.vendorFilter;
+        this.requestModel.filterModel.types = event.typesFilter;
+        this.requestModel.filterModel.tags = event.tagsFilter;
+        this.gridColumnApi.setColumnState(event.gridLayout);
+        this.gridApi.onFilterChanged();
+        this.setFilterInfo();
+      }
+    });
   }
 
   ngOnInit() {
@@ -86,6 +99,12 @@ export class DataConcentratorUnitsComponent implements OnInit {
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
     this.sideBar = this.dataConcentratorUnitsGridService.setSideBar();
+  }
+
+  ngOnDestroy(): void {
+    if (this.layoutChangeSubscription) {
+      this.layoutChangeSubscription.unsubscribe();
+    }
   }
 
   // set momemnt text (next planned read) out of date and time
@@ -156,7 +175,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridColumnApi = params.gridColumnApi;
+    this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
     this.icons = {
       filter: ''
