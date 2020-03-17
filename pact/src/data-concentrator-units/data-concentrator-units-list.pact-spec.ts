@@ -34,43 +34,26 @@ describe('Pact consumer test', () => {
       endRow: 19,
       searchModel: [
         {
-          selector: 'all',
+          colId: 'all',
+          type: enumSearchFilterOperators.like,
           value: 'search text'
         }
       ],
       sortModel: [
         {
-          selector: 'name',
-          desc: false
+          colId: 'name',
+          sort: 'desc'
         }
       ],
-      filterModel: [
-        {
-          selector: 'typeId',
-          operation: enumSearchFilterOperators.notEqual,
-          value: '32'
-        },
-        {
-          selector: 'statusId',
-          operation: enumSearchFilterOperators.equal,
-          value: '4'
-        },
-        {
-          selector: 'tagId',
-          operation: enumSearchFilterOperators.equal,
-          value: '2'
-        },
-        {
-          selector: 'tagId',
-          operation: enumSearchFilterOperators.equal,
-          value: '3'
-        },
-        {
-          selector: 'vendorId',
-          operation: enumSearchFilterOperators.equal,
-          value: '323'
-        }
-      ]
+      filterModel: {
+        statuses: [{ id: 1, value: 'active' }],
+        types: [1, 2],
+        vendor: { id: 2, value: 'Vendor 2' },
+        tags: [
+          { id: 1, value: 'tag1' },
+          { id: 2, value: 'tag2' }
+        ]
+      }
     };
 
     const data: DataConcentratorUnitsList[] = [

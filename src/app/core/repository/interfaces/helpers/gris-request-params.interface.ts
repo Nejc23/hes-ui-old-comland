@@ -1,16 +1,11 @@
-/*export interface GridRequestParams {  
-  skip: number;
-  take: number;
-  search: GridSearchParams[];
-  sort: GridSortParams[];
-  filter: GridFilterParams[];
-}*/
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+
 export interface GridRequestParams {
   startRow: number;
   endRow: number;
-  sortModel?: any[];
+  sortModel?: GridSortParams[];
   searchModel?: GridSearchParams[];
-  filterModel?: any[];
+  filterModel?: GridFilterParams;
   rowGroupCols?: any[];
   valueCols?: any[];
   pivotCols?: any[];
@@ -19,17 +14,19 @@ export interface GridRequestParams {
 }
 
 export interface GridFilterParams {
-  selector: string;
-  operation: string;
-  value: string;
+  statuses: Codelist<number>[];
+  types: number[];
+  tags: Codelist<number>[];
+  vendor: Codelist<number>;
 }
 
 export interface GridSortParams {
-  selector: string;
-  desc: boolean;
+  colId: string;
+  sort: string;
 }
 
 export interface GridSearchParams {
-  selector: string;
+  colId: string;
+  type: string;
   value: string;
 }

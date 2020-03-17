@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
@@ -11,6 +11,7 @@ import { GridCellLastCommunicationComponent } from '../components/grid-custom-co
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
+import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -168,6 +169,18 @@ export class DataConcentratorUnitsGridService {
 
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
+  }
+
+  public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuFilter, requestModel: GridFilterParams) {
+    if (
+      JSON.stringify(sessionFilter.statuses) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.tags) === JSON.stringify(requestModel.tags) &&
+      JSON.stringify(sessionFilter.types) === JSON.stringify(requestModel.types) &&
+      JSON.stringify(sessionFilter.vendor) === JSON.stringify(requestModel.vendor)
+    ) {
+      return true;
+    }
+    return false;
   }
 }
 

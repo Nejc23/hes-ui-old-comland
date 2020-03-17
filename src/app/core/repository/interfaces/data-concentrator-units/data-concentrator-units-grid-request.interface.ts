@@ -1,4 +1,4 @@
-export interface DataConcentratorUnitsGridRequest {
+/*export interface DataConcentratorUnitsGridRequest {
   startRow: number;
   endRow: number;
   sortModel: any[];
@@ -10,3 +10,4 @@ export interface DataConcentratorUnitsGridRequest {
   pivotMode: boolean;
   groupKeys: any[];
 }
+*/

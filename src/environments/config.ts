@@ -55,7 +55,8 @@ export enum enumSearchFilterOperators {
   greaterOrEqualThan = 'gte',
   notEqual = 'neq',
   isNull = 'is null',
-  isNotNull = 'is not null'
+  isNotNull = 'is not null',
+  like = 'like'
 }
 
 // Ag grid settings

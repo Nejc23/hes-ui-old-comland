@@ -18,7 +18,9 @@ import { Subscription } from 'rxjs';
 
 // consts
 import { configGrid, configAgGrid } from 'src/environments/config';
+import { enumSearchFilterOperators } from 'src/environments/config';
 import { readStatusTrashold } from '../consts/data-concentrator-units.consts';
+import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -56,12 +58,12 @@ export class DataConcentratorUnitsComponent implements OnInit {
     endRow: 0,
     sortModel: [],
     searchModel: [],
-    filterModel: [],
-    pivotCols: [],
-    rowGroupCols: [],
-    valueCols: [],
-    groupKeys: [],
-    pivotMode: false
+    filterModel: {
+      statuses: [{ id: 0, value: '' }],
+      types: [0],
+      tags: [{ id: 0, value: '' }],
+      vendor: { id: 0, value: '' }
+    }
   };
 
   constructor(
@@ -127,7 +129,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
   searchData($event: string) {
     if ($event !== this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState)) {
       this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
-      this.requestModel.searchModel = [{ colId: 'all', type: 'like', value: $event }];
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
       this.gridApi.onFilterChanged();
     }
@@ -200,29 +202,43 @@ export class DataConcentratorUnitsComponent implements OnInit {
   toolPanelChanged(params) {
     if (params.source === undefined) {
       if (
-        JSON.stringify(this.requestModel.filterModel) !==
-        JSON.stringify(this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter))
+        !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
+          this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter),
+          this.requestModel.filterModel
+        )
       ) {
-        this.requestModel.filterModel = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+        const filterDCU = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+        this.requestModel.filterModel.statuses = filterDCU.statuses;
+        this.requestModel.filterModel.vendor = filterDCU.vendor;
+        this.requestModel.filterModel.types = filterDCU.types;
+        this.requestModel.filterModel.tags = filterDCU.tags;
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
     }
   }
 
+  // set filter in request model
   setFilter() {
     if (
-      JSON.stringify(this.requestModel.filterModel) !==
-      JSON.stringify(this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter))
+      !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
+        this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter),
+        this.requestModel.filterModel
+      )
     ) {
       this.setFilterInfo();
-      return this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+      const filterDCU = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+      this.requestModel.filterModel.statuses = filterDCU.statuses;
+      this.requestModel.filterModel.vendor = filterDCU.vendor;
+      this.requestModel.filterModel.types = filterDCU.types;
+      this.requestModel.filterModel.tags = filterDCU.tags;
     } else {
       this.setFilterInfo();
     }
+    return this.requestModel.filterModel;
   }
 
-  // text in header about selected filters
+  // fill text in header - about selected filters
   setFilterInfo() {
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
 
