@@ -1,31 +1,14 @@
-import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
-import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
+import { dcuLayout } from 'src/app/core/repository/consts/data-concentrator-units.const';
 
-describe('Pact consumer test', () => {
-  let provider;
-  let service: DataConcentratorUnitsService;
+@Injectable()
+export class DcuGridLayoutInterceptor {
+  constructor() {}
 
-  beforeAll(done => {
-    provider = setupPactProvider(done);
-  });
-
-  afterAll(done => {
-    pactFinalize(provider, done);
-  });
-
-  afterEach(done => {
-    pactVerify(provider, done);
-  });
-
-  beforeAll(() => {
-    pactSetAngular();
-    service = getTestBed().get(DataConcentratorUnitsService);
-  });
-
-  describe('Data concentrator units filters get request', () => {
+  static interceptDcuLayoutGet(): Observable<HttpEvent<any>> {
     const data: DcuLayout[] = [
       {
         id: 1,
@@ -82,41 +65,72 @@ describe('Pact consumer test', () => {
       }
     ];
 
-    const responseBody: DcuLayout[] = data;
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
 
-    beforeAll(done => {
-      provider
-        .addInteraction({
-          state: 'A_REQUEST_FOR_GET_DATA_CONCENTRATOR_UNITS_FILTERS',
-          uponReceiving: 'a request for getting data concentrator units filters',
-          withRequest: {
-            method: service.getDcuLayoutRequest().method,
-            path: service.getDcuLayoutRequest().url,
-            headers: defaultRequestHeader
-          },
-          willRespondWith: {
-            status: 200,
-            headers: {
-              ...defaultResponseHeader
-            },
-            body: responseBody
-          }
-        })
-        .then(
-          () => {
-            done();
-          },
-          err => {
-            done.fail(err);
-          }
-        );
-    });
+  static canInterceptDcuLayoutGet(request: HttpRequest<any>): boolean {
+    return new RegExp(dcuLayout).test(request.url) && request.method.endsWith('GET');
+  }
 
-    it('should make request for fetching data concentrator units filters', done => {
-      service.getDcuLayout().subscribe(res => {
-        expect(res).toEqual(responseBody);
-        done();
-      });
-    });
-  });
-});
+  static canInterceptDcuLayoutPost(request: HttpRequest<any>): boolean {
+    return new RegExp(dcuLayout).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptDcuLayoutPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const data: DcuLayout = {
+      id: 5,
+      name: 'My saved filter NEW',
+      vendorFilter: null,
+      statusesFilter: [{ id: 3, value: 'Mouted' }],
+      typesFilter: [3],
+      tagsFilter: [
+        { id: 3, value: 'tag 3' },
+        { id: 1, value: 'tag 1' }
+      ],
+      gridLayout:
+        '%5B%7B%22colId%22%3A%220%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A27%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3A%22left%22%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22id%22%2C%22hide%22%3Atrue%2C%22aggFunc%22%3Anull%2C%22width%22%3A20%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3A%22left%22%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22status%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A130%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3A%22left%22%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22name%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A93%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3A%22left%22%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22metersValue%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A80%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3A%22left%22%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22readStatusPercent%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A80%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3A%22left%22%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22type%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A53%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3Anull%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22vendor%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A66%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3Anull%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22idNumber%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A66%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3Anull%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22ip%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A66%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3Anull%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22lastCommunication%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A93%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3Anull%2C%22rowGroupIndex%22%3Anull%7D%2C%7B%22colId%22%3A%22tags%22%2C%22hide%22%3Afalse%2C%22aggFunc%22%3Anull%2C%22width%22%3A266%2C%22pivotIndex%22%3Anull%2C%22pinned%22%3Anull%2C%22rowGroupIndex%22%3Anull%7D%5D'
+    };
+
+    return of(
+      new HttpResponse({
+        status: 201,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptDcuLayoutPut(request: HttpRequest<any>): boolean {
+    return new RegExp(`${dcuLayout}/[0-9]+$`).test(request.url) && request.method.endsWith('PUT');
+  }
+
+  static interceptDcuLayoutPut(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null; // Report = request.body;
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body
+      })
+    );
+  }
+
+  static canInterceptDcuLayoutDelete(request: HttpRequest<any>): boolean {
+    return new RegExp(`${dcuLayout}/[0-9]+$`).test(request.url) && request.method.endsWith('DELETE');
+  }
+
+  static interceptDcuLayoutDelete(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null; // Report = request.body;
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body
+      })
+    );
+  }
+}

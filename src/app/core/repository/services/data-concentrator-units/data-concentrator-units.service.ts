@@ -5,8 +5,8 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuFilters } from '../../consts/data-concentrator-units.const';
-import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
+import { dataConcentratorUnits, dcuLayout } from '../../consts/data-concentrator-units.const';
+import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,35 +22,43 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', dataConcentratorUnits, param);
   }
 
-  getDcuFilter(): Observable<DcuFilter[]> {
-    return this.repository.makeRequest(this.getDcuFilterRequest());
+  getGridDcu2(param: any): Observable<any> {
+    return this.repository.makeRequest(this.getGridDcuRequest2(param));
   }
 
-  getDcuFilterRequest(): HttpRequest<any> {
-    return new HttpRequest('GET', dcuFilters);
+  getGridDcuRequest2(param: any): HttpRequest<any> {
+    return new HttpRequest('POST', '/api/2', param);
   }
 
-  saveDcuFilter(id: number, payload: DcuFilter): Observable<DcuFilter> {
+  getDcuLayout(): Observable<DcuLayout[]> {
+    return this.repository.makeRequest(this.getDcuLayoutRequest());
+  }
+
+  getDcuLayoutRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', dcuLayout);
+  }
+
+  saveDcuLayout(id: number, payload: DcuLayout): Observable<DcuLayout> {
     return this.repository.makeRequest(this.saveDcuFilterRequest(id, payload));
   }
 
-  saveDcuFilterRequest(id: number, payload: DcuFilter): HttpRequest<DcuFilter> {
-    return new HttpRequest('PUT', `${dcuFilters}/${id}`, payload as any);
+  saveDcuFilterRequest(id: number, payload: DcuLayout): HttpRequest<DcuLayout> {
+    return new HttpRequest('PUT', `${dcuLayout}/${id}`, payload as any);
   }
 
-  deleteDcuFilter(id: number): Observable<DcuFilter> {
-    return this.repository.makeRequest(this.deleteDcuFilterRequest(id));
+  deleteDcuLayout(id: number): Observable<DcuLayout> {
+    return this.repository.makeRequest(this.deleteDcuLayoutRequest(id));
   }
 
-  deleteDcuFilterRequest(id: number): HttpRequest<DcuFilter> {
-    return new HttpRequest('DELETE', `${dcuFilters}/${id}`);
+  deleteDcuLayoutRequest(id: number): HttpRequest<DcuLayout> {
+    return new HttpRequest('DELETE', `${dcuLayout}/${id}`);
   }
 
-  createDcuFilter(payload: DcuFilter): Observable<DcuFilter> {
-    return this.repository.makeRequest(this.createDcuFilterRequest(payload));
+  createDcuLayout(payload: DcuLayout): Observable<DcuLayout> {
+    return this.repository.makeRequest(this.createDcuLayoutRequest(payload));
   }
 
-  createDcuFilterRequest(payload: DcuFilter): HttpRequest<DcuFilter> {
-    return new HttpRequest('POST', dcuFilters, payload as any);
+  createDcuLayoutRequest(payload: DcuLayout): HttpRequest<DcuLayout> {
+    return new HttpRequest('POST', dcuLayout, payload as any);
   }
 }

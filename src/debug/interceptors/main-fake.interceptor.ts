@@ -17,7 +17,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { SampleInterceptor } from './codelists/sample/sample.interceptor';
 import { UsersSampleInterceptor } from './codelists/users-sample/users-sample.interceptor';
 import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
-import { DcuFiltersInterceptor } from './data-concentrator-units/dcu-filters.interceptor';
+import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -39,20 +39,20 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList(request);
             }
 
-            if (DcuFiltersInterceptor.canInterceptDcuFiltersGet(request)) {
-              return DcuFiltersInterceptor.interceptDcuFiltersGet();
+            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutGet(request)) {
+              return DcuGridLayoutInterceptor.interceptDcuLayoutGet();
             }
 
-            if (DcuFiltersInterceptor.canInterceptDcuFiltersPost(request)) {
-              return DcuFiltersInterceptor.interceptDcuFiltersPost(request);
+            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPost(request)) {
+              return DcuGridLayoutInterceptor.interceptDcuLayoutPost(request);
             }
 
-            if (DcuFiltersInterceptor.canInterceptDcuFiltersPut(request)) {
-              return DcuFiltersInterceptor.interceptDcuFiltersPut(request);
+            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPut(request)) {
+              return DcuGridLayoutInterceptor.interceptDcuLayoutPut(request);
             }
 
-            if (DcuFiltersInterceptor.canInterceptDcuFiltersDelete(request)) {
-              return DcuFiltersInterceptor.interceptDcuFiltersDelete(request);
+            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
+              return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
             }
 
             if (SampleInterceptor.canInterceptSample(request)) {

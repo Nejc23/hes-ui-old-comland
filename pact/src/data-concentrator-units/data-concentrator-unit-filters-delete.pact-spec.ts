@@ -33,8 +33,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_DELETE_DATA_CONCENTRATOR_UNIT_FILTER',
           uponReceiving: 'a request to delete data concentrator unit filter',
           withRequest: {
-            method: service.deleteDcuFilterRequest(id).method,
-            path: service.deleteDcuFilterRequest(id).url,
+            method: service.deleteDcuLayoutRequest(id).method,
+            path: service.deleteDcuLayoutRequest(id).url,
             headers: {
               ...defaultRequestHeader
             }
@@ -58,7 +58,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request to delete data concentrator unit filter', done => {
-      service.deleteDcuFilter(id).subscribe(
+      service.deleteDcuLayout(id).subscribe(
         res => {
           expect(res).toEqual(null);
           done();

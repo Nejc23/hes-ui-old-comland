@@ -1,5 +1,5 @@
 export const dataConcentratorUnits = '/api/data-concentrator-units';
-export const dcuFilters = '/api/dcu-filters';
+export const dcuLayout = '/api/dcu-layout';
 
 // codelist
 export const dcuStatuses = `/api/codelists/dcu-statuses`;

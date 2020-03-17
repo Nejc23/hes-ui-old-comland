@@ -10,11 +10,27 @@
           </app-input-text>
         </div>
       </div>
+      <div class="form-row">
+        <div class="col">
+          <button type=" button" class="btn btn-primary" (click)="save()" i18n>Save</button>
+        </div>
+      </div>
     </ng-container>
   </div>
 
   <div modal-footer>
-    <button type=" button" class="btn btn-outline-primary" (click)="save()" i18n>Save</button>
+    <hr>
+        <h4 i18n>Saved Filters</h4>
+        <div class="py-1 border-bottom" *ngFor="let layoutItem of (dcuLayouts$ | async ); let i = index" (mouseover)="showButtons(i)" >
+          <div class="d-flex align-items-center div-height-sm">
+            <a id="saved-filters-{{i}}" class="flex-shrink-1" (click)="savedLayoutClicked(i)" href="javascript:void(0)">{{layoutItem.name}}</a>
+            <div class="flex-shrink-0 ml-auto" *ngIf="isButtonVisible(i)">
+              <button type="button" class="btn btn-sm btn-secondary mr-1 ml-2" (click)="selectSavedLayoutClicked(i)" ngbTooltip="Select and apply"><i class="uil uil-check"></i></button>
+              <!-- <button type="button" class="btn btn-sm btn-secondary mr-1" (click)="savedLayoutClicked(i)" ngbTooltip="Select"><i class="uil uil-pen"></i></button> -->
+              <button type="button" class="btn btn-sm btn-danger" (click)="deleteSavedLayoutClicked(i)" ngbTooltip="Delete"><i class="uil uil-trash"></i></button>
+            </div>
+          </div>
+        </div>
   </div>
 </app-modal-template>
 
