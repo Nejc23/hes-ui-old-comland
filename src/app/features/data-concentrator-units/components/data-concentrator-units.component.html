@@ -11,16 +11,16 @@
   <!-- row total items, selected filter name -->
   <div class="d-flex align-items-center px-2 bg-white" *ngIf="!selectedAtLeastOneRowOnGrid">
     <div>{{totalCount}} <span i18n>items</span> &middot; {{filters}}</div>
-    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" (columnsChange)="setVisibilityGridColumns()" class="ml-auto"></app-action-form>
+    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto"></app-action-form>
   </div>
 
   <div class="d-flex align-items-center px-2 py-3 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
     <div class="mr-1" *ngIf="!selectedAll()">
-      <span class="align-text-bottom" i18n>{{gridApi.getSelectedRows().length}} items selected</span>  &middot; 
+      <span class="align-text-bottom" i18n>{{gridApi.getSelectedRows().length}} items selected</span>  &middot;
       <a class="align-text-bottom text-white" href="javascript:void(0);" (click)="selectAll()" ><span i18n>Select all</span> ({{totalCount}}) <span i18n>items</span></a>
     </div>
     <div class="mr-1" *ngIf="selectedAll()">
-      <span class="align-text-bottom" i18n>All ({{totalCount}}) items selected</span> &middot; 
+      <span class="align-text-bottom" i18n>All ({{totalCount}}) items selected</span> &middot;
       <a class="align-text-bottom text-white" href="javascript:void(0);" (click)="deselectAll()" ><span i18n>Deselect all</span></a>
     </div>
     <button type="button" class="btn btn-light mr-1" (click)="onUploadConfiguration()"><span i18n>Upload Configuration</span></button>
@@ -30,17 +30,17 @@
   <!-- ag-grid -->
   <div class="bg-white">
     <ag-grid-angular
-      class="ag-theme-balham"            
+      class="ag-theme-balham"
       style="width: 100%; height: calc(100% - 25px);"
       #agGrid
 
       [domLayout]=agGridSettings.domLayout
       suppressSizeToFit=agGridSettings.suppressSizeToFit
-          
+
       [modules]="modules"
       [icons]="icons"
       [pagination]=agGridSettings.pagination
-    
+
       [paginationPageSize]=agGridSettings.paginationPageSize
       [multiSortKey]=agGridSettings.multiSortKey
       [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
@@ -49,7 +49,7 @@
       [cacheBlockSize]=agGridSettings.paginationPageSize
       [maxBlocksInCache]="2"
 
-      [gridOptions]="gridOptions"    
+      [gridOptions]="gridOptions"
       [columnDefs]="columns"
 
       [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
@@ -64,5 +64,5 @@
       (rowSelected)="onRowSelect($event)"
       >
     </ag-grid-angular>
-    
+
   </div>

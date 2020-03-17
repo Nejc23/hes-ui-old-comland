@@ -10,8 +10,8 @@ import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/gri
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnitsGridRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-grid-request.interface';
 import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
-import { GridFilterSessionStoreService } from 'src/app/core/utils/services/grid-filter-session-store.service';
-import { DcuFilter } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-filter.interface';
+import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
+import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -27,7 +27,7 @@ import { readStatusTrashold } from '../consts/data-concentrator-units.consts';
 export class DataConcentratorUnitsComponent implements OnInit {
   cookieNameForGridSettings = 'grdColDCU';
   sessionNameForGridState = 'grdStateDCU';
-  sessionNameForGridFilter = 'grdFilterDCU';
+  sessionNameForGridFilter = 'grdLayoutDCU';
 
   // grid instance
   @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
@@ -45,7 +45,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
   agGridSettings = configAgGrid;
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
-  private gridApi;
+  public gridApi;
   private gridColumnApi;
   public icons;
   public frameworkComponents;
@@ -73,7 +73,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
-    private gridFilterSessionStoreService: GridFilterSessionStoreService
+    private gridFilterSessionStoreService: GridLayoutSessionStoreService
   ) {
     this.sidebarService.headerTitle = staticextService.headerTitleDCU;
     this.filters = staticextService.noFilterAppliedTekst;
@@ -125,7 +125,7 @@ export class DataConcentratorUnitsComponent implements OnInit {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    if ($event != this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState)) {
+    if ($event !== this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState)) {
       this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
       this.requestModel.searchModel = [{ colId: 'all', type: 'like', value: $event }];
 
@@ -201,9 +201,9 @@ export class DataConcentratorUnitsComponent implements OnInit {
     if (params.source === undefined) {
       if (
         JSON.stringify(this.requestModel.filterModel) !==
-        JSON.stringify(this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter))
+        JSON.stringify(this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter))
       ) {
-        this.requestModel.filterModel = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+        this.requestModel.filterModel = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -213,10 +213,10 @@ export class DataConcentratorUnitsComponent implements OnInit {
   setFilter() {
     if (
       JSON.stringify(this.requestModel.filterModel) !==
-      JSON.stringify(this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter))
+      JSON.stringify(this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter))
     ) {
       this.setFilterInfo();
-      return this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+      return this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
     } else {
       this.setFilterInfo();
     }
@@ -224,14 +224,14 @@ export class DataConcentratorUnitsComponent implements OnInit {
 
   // text in header about selected filters
   setFilterInfo() {
-    const filter = this.gridFilterSessionStoreService.getGridFilter(this.sessionNameForGridFilter) as DcuFilter;
+    const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
 
     this.filters = this.staticextService.setfilterHeaderText(
       filter.name,
-      filter.statuses && filter.statuses.length > 0,
-      filter.types && filter.types.length > 0,
-      filter.vendor ? true : false,
-      filter.tags && filter.tags.length > 0
+      filter.statusesFilter && filter.statusesFilter.length > 0,
+      filter.typesFilter && filter.typesFilter.length > 0,
+      filter.vendorFilter ? true : false,
+      filter.tagsFilter && filter.tagsFilter.length > 0
     );
   }
 
