@@ -279,8 +279,8 @@ $font-size-sm: $font-size-base * .875 !default;
 $font-weight-lighter: lighter !default;
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
-$font-weight-bold: 700 !default;
-$font-weight-bolder: bolder !default;
+$font-weight-bold: 500 !default;
+$font-weight-bolder: 700 !default;
 
 $font-weight-base: $font-weight-normal !default;
 $line-height-base: 1.5 !default;
@@ -447,7 +447,7 @@ box-shadow .15s ease-in-out !default;
 
 // Forms
 
-$label-margin-bottom: .5rem !default;
+$label-margin-bottom: .5rem !important;
 
 $input-padding-y: $input-btn-padding-y !default;
 $input-padding-x: $input-btn-padding-x !default;

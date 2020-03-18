@@ -1,16 +1,5 @@
-<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
-
-  <label [attr.for]="property" *ngIf="label">
-    {{label}}
-    <span *ngIf="required"> *</span>
-  </label>
-
+<div class="form-group position-relative" [formGroup]="form">
   <input (ngModelChange)="this.userQuestionUpdate.next($event)"
-  [name]="property" [placeholder]="placeholder"  [type]="inputType" class="form-control" [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
-
-  <!--Loop through errors-->
-  <div class="help-block" *ngIf="showErrors()" class="error">
-    <app-form-error [error]="formControl!.errors "></app-form-error>
-  </div>
-
+  [name]="property" [placeholder]="placeholder" type="search" class="form-control" [formControlName]="property" [readonly]="isReadOnly">
+  <i class='uil uil-search'></i>
 </div>

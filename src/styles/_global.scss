@@ -36,18 +36,27 @@ button {
   }
 }
 
+.text-secondary {
+  color: $gray-600 !important;
+}
+
+small.text-secondary {
+  font-weight: $font-weight-bold;
+}
+
 i.text-secondary {
   color: $gray-500 !important;
 }
 
-label:not(.control-label) {
-  font-size: $font-size-base * .9 !important;
-  color: $gray-600;
-  // text-transform: uppercase;
-  font-weight: 500;
+label {
+  &:not(.control-label) {
+    font-size: $font-size-sm !important;
+    color: $gray-600;
+    font-weight: $font-weight-bold;
+  }
 
-  &.small {
-    font-size: $font-size-base * .75;
+  &.control-label {
+    margin-bottom: 0 !important;
   }
 }
 
@@ -61,4 +70,16 @@ label:not(.control-label) {
 
 .div-height-lg {
   min-height: $input-height-lg;
+}
+
+.bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+.grid-actions {
+  .form-group {
+    margin-bottom: 0rem;
+  }
 }

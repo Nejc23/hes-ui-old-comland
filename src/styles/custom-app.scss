@@ -1,12 +1,3 @@
-$fa-font-path: "assets/fonts/font-awesome";
-@import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
-$fa-font-path: "assets/fonts/font-awesome";
-@import "@fortawesome/fontawesome-free/scss/solid.scss";
-
-$FontPathOpenSans: "assets/fonts/open-sans";
-
-@import '../../node_modules/npm-font-open-sans/open-sans';
-
 /* import Bootstrap files */
 @import "../../node_modules/bootstrap/scss/functions";
 @import "variables";
@@ -15,28 +6,20 @@ $FontPathOpenSans: "assets/fonts/open-sans";
 @import "bootstrap";
 @import "../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
 
-
-
-// Import SB Admin 2
+// Import Layout
 @import "global";
 @import "utilities";
 @import "navs";
 
 // Custom STYLES
-//@import 'custom-style/form';
 @import 'custom-style/buttons';
-@import 'custom-style/helper';
-//@import 'custom-style/kendoUI/kendo-grid';
-@import 'custom-style/right-modal';
 
 // Custom dashboard: gridster + widget
 @import 'custom-style/widget-grid';
 @import 'custom-style/widget';
 
-//@import "~ag-grid-community/dist/styles/ag-grid.css";
-//@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
-@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-grid.css";
-@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-theme-balham.css";
-@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-theme-bootstrap.css";
-@import "custom-style/ag-grid/ag-grid-custom.scss";
-//@import "custom-style/devextreme/dx.light";
+// Custom Kendo
+@import "custom-style/kendoUI/kendo-forms";
+
+// Custom AG-GRID
+@import "custom-style/ag-grid/ag-grid";
