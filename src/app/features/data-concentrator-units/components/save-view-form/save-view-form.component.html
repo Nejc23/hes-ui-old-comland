@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Save view</div>
+  <div modal-header i18n>View</div>
 
   <div modal-body>
     <ng-container>
@@ -12,7 +12,8 @@
       </div>
       <div class="form-row">
         <div class="col">
-          <button type=" button" class="btn btn-primary" (click)="save()" i18n>Save</button>
+          <button type=" button" class="btn btn-primary mr-3" (click)="save(false)" i18n>Save</button>
+          <button type=" button" class="btn btn-primary" (click)="save(true)" i18n>Save as new</button>
         </div>
       </div>
     </ng-container>

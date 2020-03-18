@@ -48,7 +48,7 @@ export class SaveViewFormComponent implements OnInit {
       this.data = x;
       this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as DcuLayout;
       this.cookieSettings = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
-      //console.log(`sessionLayout GET = ${JSON.stringify(this.sessionLayout)}`);
+      // console.log(`sessionLayout GET = ${JSON.stringify(this.sessionLayout)}`);
       if (this.sessionLayout) {
         this.sessionLayout.gridLayout = this.cookieSettings;
         if (this.sessionLayout.id) {
@@ -80,10 +80,11 @@ export class SaveViewFormComponent implements OnInit {
     this.modal.dismiss();
   }
 
-  save() {
+  save(asNew: boolean) {
+    this.sessionLayout.id = asNew ? -1 : this.sessionLayout.id;
     this.sessionLayout.name = this.form.get(this.namePropety).value;
     this.sessionLayout.gridLayout = this.cookieSettings;
-    if (this.sessionLayout.id) {
+    if (this.sessionLayout.id && this.sessionLayout.id > 0) {
       this.dcuService.saveDcuLayout(this.sessionLayout.id, this.sessionLayout);
     } else {
       this.dcuService
@@ -91,7 +92,6 @@ export class SaveViewFormComponent implements OnInit {
         .toPromise()
         .then(x => {
           this.sessionLayout.id = x ? x.id : -1;
-          this.sessionLayout.name = this.i18n('New filter');
         });
     }
     this.eventService.layoutChange(this.sessionLayout);
@@ -118,6 +118,7 @@ export class SaveViewFormComponent implements OnInit {
     }
     this.form.get(this.namePropety).setValue(this.sessionLayout.name);
     this.eventService.layoutChange(this.sessionLayout);
+    this.modal.close();
   }
 
   deleteSavedLayoutClicked(filterIdx: number) {
