@@ -82,7 +82,7 @@
       //
       // BORDERS
       //
-      
+
       // Draw borders around most UI elements
       borders: true,
 
@@ -130,7 +130,7 @@
       checkbox-checked-color: $primary,
       checkbox-unchecked-color: $border-color,
       checkbox-indeterminate-color: $border-color,
-/*
+      /*
       toggle-button-off-border-color: ag-derived(checkbox-unchecked-color),
       toggle-button-off-background-color: ag-derived(checkbox-unchecked-color),
       toggle-button-on-border-color: ag-derived(checkbox-checked-color),
@@ -175,52 +175,96 @@
       */
 
       // override the shadow for popups - cards that contain complex UI, like menus and charts
-      popup-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3) 
-    ));
+      popup-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3)));
 
-    .ag-row {
-      font-size: $font-size-base;
-    }
+  .ag-row {
+    font-size: $font-size-base;
+  }
 
-    .ag-header-row {
-      font-size: $font-size-sm;
-    }
+  .ag-header-row {
+    font-size: $font-size-sm;
+  }
 
-    .ag-root-wrapper {
-      border: none;
-      border-radius: 0;
-    }
+  .ag-root-wrapper {
+    border: none;
+    border-radius: 0;
+  }
 
-    .ag-side-bar {
-      background-color: $secondary;
+  .ag-paging-panel {
+    border-top: none;
+    font-size: $font-size-sm;
+  }
 
-      .ag-side-button {
+  .ag-side-bar {
+    background-color: $secondary;
 
+    .ag-side-button {
+
+      .ag-side-button-button {
+        color: $gray-700;
+
+        &:hover {
+          color: $gray-700 !important;
+          background-color: darken($color: $secondary, $amount: 5%) !important;
+        }
+      }
+
+      &.ag-selected {
         .ag-side-button-button {
-          color: $gray-700;
-
-          &:hover {
-            color: $gray-700 !important;
-            background-color: darken($color: $secondary, $amount: 5%) !important;
-          }
-        }
-        
-        &.ag-selected {
-          .ag-side-button-button {
-            background-color: $white !important;
-          }
-        }
-      }
-
-      .ag-tool-panel-wrapper {
-        width: 400px;
-        border-right: none !important;
-    
-        >*:not(.ag-tool-panel-horizontal-resize) {
-          width: 100%;
+          background-color: $white !important;
         }
       }
     }
+
+    .ag-tool-panel-wrapper {
+      width: 400px;
+      border-right: none !important;
+
+      >*:not(.ag-tool-panel-horizontal-resize) {
+        width: 100%;
+      }
+    }
+  }
+ 
+  .ag-checkbox-input-wrapper {
+    border-color: $border-color;
+    color: transparent;
+    background-color: $white;
+    @include border-radius($checkbox-radius);
+    width: $checkbox-size;
+    height: $checkbox-size;
+    line-height: initial;
+    border-width: $checkbox-border-width;
+    border-style: solid;
+    outline: 0;
+    box-sizing: border-box;
+    display: inline-block;
+    vertical-align: middle;
+    position: relative;
+    -webkit-appearance: none;
+    cursor: pointer;
+
+    // Checkmark
+    &::after {
+      content: "";
+    }
+
+    &.ag-checked {
+      border-color: $primary;
+      background-color: $primary;
+
+      &::after {
+        color: $white;
+        content: "\e118";
+        width: $checkbox-size;
+        height: $checkbox-size;
+        line-height: $checkbox-size;
+        font-size: $checkbox-icon-size;
+        font-family: "WebComponentsIcons", monospace;
+        overflow: hidden;
+        position: absolute;
+        left: 2px;
+      }
+    }
+  }
 }
-
-
