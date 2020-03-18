@@ -40,13 +40,13 @@
     [icons]="icons"
     [pagination]=agGridSettings.pagination
 
-    [paginationPageSize]=agGridSettings.paginationPageSize
-    [multiSortKey]=agGridSettings.multiSortKey
-    [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-    [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-    [frameworkComponents]="frameworkComponents"
-    [cacheBlockSize]=agGridSettings.paginationPageSize
-    [maxBlocksInCache]="2"
+      [paginationPageSize]=agGridSettings.paginationPageSize
+      [multiSortKey]=agGridSettings.multiSortKey
+      [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+      [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+      [frameworkComponents]="frameworkComponents"
+      [cacheBlockSize]=agGridSettings.paginationPageSize
+      [maxBlocksInCache]="1"
 
     [gridOptions]="gridOptions"
     [columnDefs]="columns"
@@ -55,12 +55,13 @@
     [rowSelection]=agGridSettings.rowSelection
     [sideBar]="sideBar"
 
-    (selectionChanged)="onSelectionChanged()"
-    (gridReady)="onGridReady($event)"
-    (columnVisible)="onColumnVisible($event)"
-    (toolPanelVisibleChanged)="toolPanelChanged($event)"
-    (paginationChanged)="onPaginationChange($event)"
-    (rowSelected)="onRowSelect($event)"
-    >
-  </ag-grid-angular>
+      (selectionChanged)="onSelectionChanged()"
+      (gridReady)="onGridReady($event)"
+      (columnVisible)="onColumnVisible($event)"
+      (toolPanelVisibleChanged)="toolPanelChanged($event)"
+      (paginationChanged)="onPaginationChange($event)"
+      (rowSelected)="onRowSelect($event)"    
+      (firstDataRendered)="onFirstDataRendered($event)"
+      >
+    </ag-grid-angular>
 

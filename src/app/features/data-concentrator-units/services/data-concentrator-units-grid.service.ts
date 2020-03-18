@@ -12,17 +12,25 @@ import { GridCellTagsComponent } from '../components/grid-custom-components/grid
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { GridPagination } from '../interfaces/grid-pagination.interface';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataConcentratorUnitsGridService {
   cookieNameForGridSettings = 'grdColDCU';
+  cookieNameForGridSort = 'grdColDCUSort';
+  sessionNameForGridState = 'grdStateDCU';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
 
-  constructor(private i18n: I18n, private gridSettingsCookieStoreService: GridSettingsCookieStoreService) {}
+  constructor(
+    private i18n: I18n,
+    private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+  ) {}
 
   /**
    *  grid columns settings
@@ -32,17 +40,16 @@ export class DataConcentratorUnitsGridService {
       {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
-        width: 20,
+        minWidth: 100,
+        width: 100,
         suppressColumnsToolPanel: true,
-        checkboxSelection: true,
-        cellStyle: localStorage.getItem('lockCheckBox') === 'true' ? { 'pointer-events': 'none' } : ''
+        checkboxSelection: true
       },
-      { field: 'id', headerName: 'ID', pinned: true, width: 20, sortable: true, hide: true, suppressColumnsToolPanel: true },
+      { field: 'id', headerName: 'ID', pinned: true, sortable: true, hide: true, suppressColumnsToolPanel: true },
       {
         field: 'status',
         headerName: this.i18n('Status'),
         pinned: true,
-        width: 55,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent'
@@ -51,17 +58,14 @@ export class DataConcentratorUnitsGridService {
         field: 'name',
         headerName: this.i18n('Name'),
         pinned: true,
-        width: 70,
         sortable: true,
         filter: false,
-        search: false,
         cellRenderer: 'gridCellNameComponent'
       },
       {
         field: 'metersValue',
         headerName: this.i18n('Meters'),
         pinned: true,
-        width: 60,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellMetersComponent'
@@ -70,21 +74,19 @@ export class DataConcentratorUnitsGridService {
         field: 'readStatusPercent',
         headerName: this.i18n('Read status'),
         pinned: true,
-        width: 60,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent'
       },
-      { field: 'type', headerName: this.i18n('Type'), pinned: false, width: 40, sortable: true, filter: false },
-      { field: 'vendor', headerName: this.i18n('Vendor'), pinned: false, width: 50, sortable: true, filter: false },
-      { field: 'idNumber', headerName: this.i18n('ID'), pinned: false, width: 50, sortable: true, filter: false },
-      { field: 'ip', headerName: this.i18n('IP'), pinned: false, width: 50, sortable: true, filter: false },
+      { field: 'type', headerName: this.i18n('Type'), pinned: false, sortable: true, filter: false },
+      { field: 'vendor', headerName: this.i18n('Vendor'), pinned: false, sortable: true, filter: false },
+      { field: 'idNumber', headerName: this.i18n('ID'), pinned: false, sortable: true, filter: false },
+      { field: 'ip', headerName: this.i18n('IP'), pinned: false, sortable: true, filter: false },
       {
         field: 'lastCommunication',
         headerName: this.i18n('Last communication'),
         pinned: false,
-        width: 70,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellLastCommunicationComponent'
@@ -121,7 +123,8 @@ export class DataConcentratorUnitsGridService {
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
-      onColumnPinned: this.onColumnMoved
+      onColumnPinned: this.onColumnMoved,
+      onSortChanged: this.onSortChanged
     };
   }
 
@@ -167,8 +170,16 @@ export class DataConcentratorUnitsGridService {
     this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   };
 
+  private onSortChanged = params => {
+    console.log(params.api.getSortModel());
+    this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
+
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
+  }
+  public getCookieDataSortModel() {
+    return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }
 
   public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
@@ -181,6 +192,23 @@ export class DataConcentratorUnitsGridService {
       return true;
     }
     return false;
+  }
+
+  public getCurrentRowIndex(): GridPagination {
+    const index = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
+    const result: GridPagination = {
+      currentPage: 0,
+      startRow: 0,
+      endRow: configAgGrid.paginationPageSize
+    };
+
+    if (index !== undefined && index !== null) {
+      result.currentPage = index;
+      result.startRow = index * configAgGrid.paginationPageSize;
+      result.endRow = index * configAgGrid.paginationPageSize + configAgGrid.paginationPageSize;
+    }
+
+    return result;
   }
 }
 

@@ -16,7 +16,7 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 
 // consts
-import { configGrid, configAgGrid } from 'src/environments/config';
+import { configAgGrid } from 'src/environments/config';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 
@@ -36,7 +36,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   columns = [];
   totalCount = 0;
   filters = '';
-  gridSettings = configGrid;
 
   private layoutChangeSubscription: Subscription;
 
@@ -52,6 +51,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public icons;
   public frameworkComponents;
   public sideBar;
+  loadGrid = true;
 
   requestModel: GridRequestParams = {
     startRow: 0,
@@ -180,19 +180,24 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.icons = {
       filter: ''
     };
-
     const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
     if (dataFromCookie) {
       params.columnApi.setColumnState(dataFromCookie);
     }
 
+    const cookieSort = this.dataConcentratorUnitsGridService.getCookieDataSortModel();
+    if (cookieSort !== undefined && cookieSort !== null) {
+      this.gridApi.setSortModel(cookieSort);
+    }
+
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.startRow = paramsRow.request.startRow;
-        that.requestModel.endRow = paramsRow.request.endRow;
+        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().startRow; // paramsRow.request.startRow;
+        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().endRow; //paramsRow.request.endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
+        that.requestModel.searchModel = that.setSearch();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
           that.totalCount = data.totalCount;
           paramsRow.successCallback(data.data, data.totalCount);
@@ -200,10 +205,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         });
       }
     };
-
     this.gridApi.setServerSideDatasource(datasource);
   }
   // ----------------------- ag-grid set DATASOURCE end --------------------------
+
+  onFirstDataRendered(params) {
+    // console.log(params);
+    // this.autoSizeAll(params);
+    params.api.sizeColumnsToFit();
+  }
 
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
@@ -233,6 +243,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     }
+  }
+
+  setSearch() {
+    const search = this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState);
+    if (search && search !== '') {
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+    }
+    return [];
   }
 
   // set filter in request model
@@ -270,8 +288,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // on change page in the grid
   onPaginationChange(params) {
-    if (this.gridApi) {
-      this.eventService.pageChange(this.gridApi.paginationGetCurrentPage());
+    if (params.newPage && !this.loadGrid) {
+      this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, params.api.paginationGetCurrentPage());
+      this.eventService.pageChange(params.api.paginationGetCurrentPage());
+    } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
+      this.loadGrid = false;
+      params.api.paginationGoToPage(this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState));
     }
   }
 

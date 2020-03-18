@@ -4,8 +4,6 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
-import { Columns } from '../interfaces/columns.interfaces';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SaveViewFormComponent } from '../../save-view-form/save-view-form.component';
 
@@ -14,7 +12,6 @@ import { SaveViewFormComponent } from '../../save-view-form/save-view-form.compo
   templateUrl: './action-form.component.html'
 })
 export class ActionFormComponent implements OnInit, OnDestroy {
-  nameOf = nameOfFactory<Columns>();
   form: FormGroup;
   searchTextEmpty = true;
   sessionNameForGridState = 'grdStateDCU';

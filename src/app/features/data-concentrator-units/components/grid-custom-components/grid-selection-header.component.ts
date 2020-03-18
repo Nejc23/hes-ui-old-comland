@@ -17,8 +17,9 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
   private serviceSubscription: Subscription;
   private serviceSubscription2: Subscription;
-  private selected = 0;
 
+  private selected = 0;
+  isDisabled = false;
   constructor(public fb: FormBuilder, private service: DataConcentratorUnitsGridEventEmitterService) {
     this.form = this.createForm();
 
@@ -40,7 +41,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
         if (this.selected === 0) {
           this.setIntermediate = false;
           this.form.get('checkBox').setValue(false);
-        } else if (this.selected > 0 && this.selected < 20) {
+        } else if (this.selected > 0 && this.selected < endRow - startRow + 1) {
           this.setIntermediate = true;
         } else {
           this.setIntermediate = false;
@@ -54,6 +55,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
       next: (event: number) => {
         const startRow = this.params.api.getFirstDisplayedRow();
         const endRow = this.params.api.getLastDisplayedRow();
+
         const selectedAll = localStorage.getItem('lockCheckBox') === 'true' ? true : false;
         if (selectedAll) {
           // if selected all rows
@@ -84,13 +86,15 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
           if (this.selected === 0) {
             this.setIntermediate = false;
             this.form.get('checkBox').setValue(false);
-          } else if (this.selected > 0 && this.selected < 20) {
+          } else if (this.selected > 0 && this.selected < endRow - startRow + 1) {
             this.setIntermediate = true;
           } else {
             this.setIntermediate = false;
             this.form.get('checkBox').setValue(true);
           }
         }
+
+        this.isDisabled = localStorage.getItem('lockCheckBox') === 'true' ? true : false;
       }
     });
   }
@@ -112,6 +116,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
   agInit(params): void {
     this.params = params;
+    this.isDisabled = localStorage.getItem('lockCheckBox') === 'true' ? true : false;
   }
 
   ngOnDestroy() {
