@@ -1,4 +1,4 @@
-<div *ngIf="params.value" class="text-truncate" container="body" placement="bottom" [openDelay]="1000"
+<div *ngIf="params.value" class="text-truncate" container="body" placement="bottom" [openDelay]="500"
   [ngbTooltip]="setMomentLastCommunicationTime(params.value)">{{setMomentLastCommunicationTime(params.value)}}
 </div>
 <span *ngIf="!params.value" class="text-muted" i18n>{{notAvailableText}}</span>
