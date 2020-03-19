@@ -1,10 +1,16 @@
 <div class="d-flex">
-  <app-input-searcher class="mr-2" [debounceTimeOut]="400" (insertedValue)="insertedValue($event)" [form]="form" [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
+  <app-input-searcher class="mr-2" [debounceTimeOut]="400" (insertedValue)="insertedValue($event)" [form]="form"
+    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
   <button type="button" class="btn btn-secondary" (click)="openSaveLayoutModal($event)"
-  [ngbTooltip]="tipContentFilter"><i class='uil uil-filter'></i></button>
-  <button type="button" class="btn btn-secondary" (click)="onRefresh()" id="btnRedo"
-  [ngbTooltip]="tipContentRefresh"><i class='uil uil-redo'></i></button>
+    [ngbTooltip]="tipContentFilter"><i class="uil uil-bookmark"></i></button>
+  <button type="button" class="btn btn-secondary" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
+      class="uil uil-redo"></i></button>
+  <button type="button" class="btn btn-secondary" [ngbTooltip]="tipContentExport"><i class="uil uil-export"></i></button>
 </div>
 <ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
-<ng-template #tipContentFilter><span i18n>Filter results</span></ng-template>
+<ng-template #tipContentFilter><span i18n>Apply saved state or save new</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
+<ng-template #tipContentExport><span i18n>Export in excel</span></ng-template>
+
+<app-filter-form></app-filter-form>
+

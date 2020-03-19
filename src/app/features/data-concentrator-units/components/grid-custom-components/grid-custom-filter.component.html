@@ -1,4 +1,4 @@
-<div class="container-fluid pt-3">
+<div class="container-fluid pt-3 h-100 border-top border-bottom">
   <form [formGroup]="form">
     <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
       [autocompleteItemsAsObjects]="dcuStatuses$ | async">
@@ -15,8 +15,8 @@
     </app-input-tag>
 
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-secondary" (click)="clearButtonClicked()" i18n>Clear</button>
-      <button type="submit" class="btn btn-primary" (click)="applyButtonClicked()" i18n>Apply</button>
+      <button type="button" class="btn btn-secondary bg-secondary" (click)="clearButtonClicked()" i18n>Clear</button>
+      <button type="submit" class="btn btn-primary bg-primary" (click)="applyButtonClicked()" i18n>Apply</button>
     </div>
   </form>
 </div>

@@ -1,12 +1,13 @@
-<div *ngIf="params.data && params.data.metersValue" class="text-left row">
-  <div class="col-1 text-left text-primary mr-0">{{params.data.metersValue}}</div>
-  <div *ngIf="params.data && params.data.metersUp" class="col-2 text-success align-right">
-    <i class='uil uil-arrow-up text-left'></i><span class="small text-success">{{params.data.metersPercent}} %</span>
+<div *ngIf="params.data && params.data.metersValue" class="d-flex">
+  <a>{{params.data.metersValue}}</a>
+  <div *ngIf="params.data && params.data.metersUp" class="ml-auto text-success">
+    <i class="uil uil-arrow-up"></i>
+    <small>{{params.data.metersPercent}} %</small>
   </div>
-  <div *ngIf="params.data &&  !params.data.metersUp" class="col-2 text-danger align-right">
-    <i class='uil uil-arrow-down text-left text-danger'></i>
-    <span class="small text-danger">{{params.data.metersPercent}} %</span>
+  <div *ngIf="params.data && !params.data.metersUp" class="ml-auto text-danger">
+    <i class="uil uil-arrow-down"></i>
+    <small>{{params.data.metersPercent}} %</small>
   </div>
 </div>
 
-<div *ngIf="params.data &&  !params.data.metersValue" class="text-left text-secondary"><span i18n>{{notAvailableText}}</span></div>
+<div *ngIf="params.data && !params.data.metersValue" class="text-muted"><span i18n>{{notAvailableText}}</span></div>

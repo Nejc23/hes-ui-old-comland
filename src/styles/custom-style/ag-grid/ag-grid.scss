@@ -130,17 +130,6 @@
       checkbox-checked-color: $primary,
       checkbox-unchecked-color: $border-color,
       checkbox-indeterminate-color: $border-color,
-      /*
-      toggle-button-off-border-color: ag-derived(checkbox-unchecked-color),
-      toggle-button-off-background-color: ag-derived(checkbox-unchecked-color),
-      toggle-button-on-border-color: ag-derived(checkbox-checked-color),
-      toggle-button-on-background-color: ag-derived(checkbox-checked-color),
-      toggle-button-switch-background-color: ag-derived(background-color),
-      toggle-button-switch-border-color: ag-derived(toggle-button-off-border-color),
-      toggle-button-border-width: 1px,
-      toggle-button-height: ag-derived(icon-size),
-      toggle-button-width: ag-derived(toggle-button-height, $times: 2),
-      */
 
       input-focus-box-shadow: null,
       input-focus-border-color: null,
@@ -195,6 +184,20 @@
     font-size: $font-size-sm;
   }
 
+  button {
+    font-family: $btn-font-family;
+    font-weight: $btn-font-weight;
+    text-align: center;
+    white-space: $btn-white-space;
+    padding: $btn-padding-y, $btn-padding-x;
+    font-style: $btn-font-size;
+    line-height: $btn-line-height;
+  }
+
+  .ag-cell-value {
+    width: 100%;
+  }
+
   .ag-side-bar {
     background-color: $secondary;
 
@@ -224,6 +227,14 @@
         width: 100%;
       }
     }
+  }
+
+  .ag-column-select-list {
+    padding: $spacer;
+  }
+
+  .ag-column-select-header {
+    padding: 0 $spacer;
   }
  
   .ag-checkbox-input-wrapper {

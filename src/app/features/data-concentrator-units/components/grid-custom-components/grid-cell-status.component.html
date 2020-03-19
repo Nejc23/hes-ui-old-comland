@@ -1,7 +1,7 @@
-<div class="d-flex justify-content-end">
-  <div class="p-2">{{params.value}}</div>
-  <div class="ml-auto p-2" *ngIf="params.data && params.data.nextRead">
-    <i class='uil uil-clock text-secondary text-right' container="body" placement="bottom" [ngbTooltip]="tipContent"></i>
+<div class="d-flex">
+  <div class="mr-1">{{params.value}}</div>
+  <div class="ml-auto" *ngIf="params.data && params.data.nextRead">
+    <i class="uil uil-clock text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContent"></i>
   </div>
 </div>
 
