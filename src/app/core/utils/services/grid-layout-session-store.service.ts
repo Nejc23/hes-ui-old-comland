@@ -38,6 +38,10 @@ export class GridLayoutSessionStoreService {
     }
   }
 
+  clearGridLayout() {
+    sessionStorage.removeItem(this.gridLayoutName);
+  }
+
   getGridLayout(gridId: string) {
     if (sessionStorage.getItem(this.gridLayoutName)) {
       const data = JSON.parse(sessionStorage.getItem(this.gridLayoutName));

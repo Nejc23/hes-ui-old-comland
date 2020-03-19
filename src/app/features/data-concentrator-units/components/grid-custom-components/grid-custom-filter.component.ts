@@ -133,7 +133,8 @@ export class GridCustomFilterComponent implements IToolPanel {
       vendorFilter: null,
       gridLayout: ''
     };
-    this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
+    this.sessionFilter = currentFilter;
+    this.gridFilterSessionStoreService.clearGridLayout();
     this.form = this.createForm(null, null);
   }
 

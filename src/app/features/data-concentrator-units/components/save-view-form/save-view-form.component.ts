@@ -94,6 +94,7 @@ export class SaveViewFormComponent implements OnInit {
           this.sessionLayout.id = x ? x.id : -1;
         });
     }
+    this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridLayout, this.sessionLayout);
     this.eventService.layoutChange(this.sessionLayout);
     this.modal.close();
   }

@@ -9,8 +9,11 @@
       <app-input-text [form]="form" [property]="namePropety" i18n-label label=""></app-input-text>
 
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary" (click)="save(true)" i18n>Save as New</button>
-        <button type="button" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
+        <button type="button" class="btn btn-primary" (click)="save(true)">
+          <span *ngIf="sessionLayout && sessionLayout.id > 0">Save as New</span>
+          <span *ngIf="!sessionLayout || sessionLayout.id < 1">Save</span>
+        </button>
+        <button type="button" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary" (click)="save(false)" i18n>Update</button>
       </div>
       <h4 class="mt-5" i18n>Saved States</h4>
       <div class="py-1 border-bottom" *ngFor="let layoutItem of (dcuLayouts$ | async ); let i = index"
