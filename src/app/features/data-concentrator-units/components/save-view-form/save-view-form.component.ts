@@ -56,7 +56,7 @@ export class SaveViewFormComponent implements OnInit {
         } else {
           const currentLayout: DcuLayout = {
             id: -1,
-            name: this.i18n('Unknown'),
+            name: '',
             statusesFilter: this.sessionLayout.statusesFilter,
             typesFilter: this.sessionLayout.typesFilter,
             tagsFilter: this.sessionLayout.tagsFilter,

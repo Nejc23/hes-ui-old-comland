@@ -4,7 +4,6 @@ import { DataConcentratorUnitsRoutingModule } from './data-concentrator-units-ro
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
-import { FilterFormComponent } from '../components/filter-form/components/filter-form.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
@@ -20,7 +19,6 @@ import { GridCustomFilterComponent } from '../components/grid-custom-components/
   declarations: [
     DataConcentratorUnitsComponent,
     ActionFormComponent,
-    FilterFormComponent,
     GridSelectionHeaderComponent,
     GridCellStatusComponent,
     GridCellReadStatusComponent,

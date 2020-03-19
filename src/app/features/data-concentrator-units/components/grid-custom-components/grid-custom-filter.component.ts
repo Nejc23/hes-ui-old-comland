@@ -64,7 +64,7 @@ export class GridCustomFilterComponent implements IToolPanel {
         } else {
           const currentFilter: DcuLayout = {
             id: -1,
-            name: 'Unknown',
+            name: '',
             statusesFilter: this.sessionFilter.statusesFilter,
             typesFilter: this.sessionFilter.typesFilter,
             tagsFilter: this.sessionFilter.tagsFilter,
