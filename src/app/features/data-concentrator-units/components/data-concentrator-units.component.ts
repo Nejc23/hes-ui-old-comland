@@ -84,6 +84,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.types = event.typesFilter;
         this.requestModel.filterModel.tags = event.tagsFilter;
         this.gridColumnApi.setColumnState(event.gridLayout);
+        this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, 0);
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -144,6 +145,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
+      this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, 0);
       this.gridApi.onFilterChanged();
     }
   }
@@ -188,6 +190,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.searchModel = that.setSearch();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
           that.totalCount = data.totalCount;
+          that.gridApi.paginationGoToPage(that.gridSettingsSessionStoreService.getGridPageIndex(that.sessionNameForGridState));
           paramsRow.successCallback(data.data, data.totalCount);
           // params.failCallback();
         });
@@ -227,6 +230,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+        this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, 0);
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
