@@ -43,7 +43,9 @@ export class DataConcentratorUnitsGridService {
         minWidth: 100,
         width: 100,
         suppressColumnsToolPanel: true,
-        checkboxSelection: true
+        checkboxSelection: true,
+        suppressMovable: true,
+        lockPosition: true
       },
       { field: 'id', headerName: 'ID', pinned: true, sortable: true, hide: true, suppressColumnsToolPanel: true },
       {
