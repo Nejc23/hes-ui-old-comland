@@ -14,7 +14,6 @@
   "include": [
     "../pact/**/*.ts",
     "../pact/**/*.pact-spec.ts",
-    "**/*.d.ts",
-    "../node_modules/@swimlane/ngx-datatable/lib/types/*.ts"
+    "**/*.d.ts"
   ]
 }

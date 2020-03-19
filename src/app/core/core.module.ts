@@ -17,7 +17,6 @@ import { PermissionsService } from './permissions/services/permissions.service';
 import { PermissionsStoreService } from './permissions/services/permissions-store.service';
 import { ErrorHandlerService } from './error-handler/services/error-handler.service';
 import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.interceptor';
-import { TableService } from './tables/services/table.service';
 import { GridSettingsCookieStoreService } from './utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
 import { GridLayoutSessionStoreService } from './utils/services/grid-layout-session-store.service';
@@ -34,7 +33,6 @@ import { GridLayoutSessionStoreService } from './utils/services/grid-layout-sess
     PermissionsService,
     PermissionsStoreService,
     ErrorHandlerService,
-    TableService,
     GridSettingsCookieStoreService,
     GridSettingsSessionStoreService,
     GridLayoutSessionStoreService,

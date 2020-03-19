@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../out-tsc/app",
     "types": [],
-    "paths": {      
+    "paths": {
       "@ag-grid-community/core": [
         "../node_modules/@ag-grid-community/core"
       ],
@@ -18,7 +18,6 @@
     "debug/"
   ],
   "include": [
-    "./**/*.ts",
-    "../node_modules/@swimlane/ngx-datatable/lib/types/*.ts"
+    "./**/*.ts"
   ]
 }

@@ -19,10 +19,6 @@ import { ToastComponent } from './toast-notification/components/toast.component'
 import { CardComponent } from './card/components/card.component';
 import { ModalTemplateComponent } from './modals/components/modal-template.component';
 import { GridsterModule } from 'angular-gridster2';
-import { TableModule } from './tables/table.module';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { DefaultWidgetSettingComponent } from './modals/components/widget-settings/default-widget-setting.component';
-import { DefaultSettingsFormComponent } from './modals/components/widget-settings/default-form/default-settings-form.component';
 import { WidgetSettingsFormDirective } from './modals/directives/widget-settings-form.directive';
 import { ModalChangePasswordComponent } from './modals/components/modal-change-password.component';
 import { DisableIfAuthorizedReadonlyDirective } from './directives/permissions/disable-if-authorized-readonly.directive';
@@ -54,10 +50,6 @@ import { SaveViewFormComponent } from '../features/data-concentrator-units/compo
     ModalTemplateComponent,
     ModalConfirmComponent,
     NgbModule,
-    TableModule,
-    NgxChartsModule,
-    DefaultWidgetSettingComponent,
-    DefaultSettingsFormComponent,
     SaveViewFormComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
@@ -78,9 +70,7 @@ import { SaveViewFormComponent } from '../features/data-concentrator-units/compo
     TranslateModule,
     CustomFormsModule,
     BreadcrumbsModule,
-    GridsterModule,
-    TableModule,
-    NgxChartsModule
+    GridsterModule
   ],
   declarations: [
     BaseTemplateComponent,
@@ -95,8 +85,6 @@ import { SaveViewFormComponent } from '../features/data-concentrator-units/compo
     CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
-    DefaultWidgetSettingComponent,
-    DefaultSettingsFormComponent,
     WidgetSettingsFormDirective,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
@@ -107,12 +95,6 @@ import { SaveViewFormComponent } from '../features/data-concentrator-units/compo
     SideFixedNavComponent,
     Page404Component
   ],
-  entryComponents: [
-    DefaultWidgetSettingComponent,
-    DefaultSettingsFormComponent,
-    ModalChangePasswordComponent,
-    ModalConfirmComponent,
-    SaveViewFormComponent
-  ]
+  entryComponents: [ModalChangePasswordComponent, ModalConfirmComponent, SaveViewFormComponent]
 })
 export class SharedModule {}

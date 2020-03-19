@@ -176,7 +176,7 @@ export class UserLoginComponent implements OnInit {
 
   private goToStartPageForAuthorizedUser() {
     // if (this.permissionService.hasAccess(UserPermission.monitoringModule)) {
-    this.router.navigate(['/dashboard']); // Supervisor, Admin
+    this.router.navigate(['/dataConcentratorUnits']); // Supervisor, Admin
     // }// else {
     // this.router.navigate(['/lead-solver']); // Lead solver
     // }

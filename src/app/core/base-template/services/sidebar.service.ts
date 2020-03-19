@@ -42,39 +42,7 @@ export class SidebarService {
         routeLink: '/dcuReadingConfiguration',
         hasChildren: false,
         children: []
-      },
-      {
-        title: this.i18n(`Sample Devextreme`),
-        routeLink: '/devextreme',
-        hasChildren: false,
-        children: []
-      },
-      {
-        title: this.i18n(`Sample KendoUI`),
-        routeLink: '/kendo',
-        hasChildren: false,
-        children: []
-      },
-      {
-        title: this.i18n(`Dashboard`),
-        routeLink: '/dashboard',
-        hasChildren: false,
-        permission: FunctionalityEnumerator.dashboard,
-        children: []
-      } /*
-,      {
-        title: this.i18n(`Users`),
-        routeLink: '/users',
-        hasChildren: false,
-        permission: FunctionalityEnumerator.users,
-        children: []
-      },
-      {
-        title: this.i18n(`Help`),
-        routeLink: '/help',
-        hasChildren: false,
-        children: []
-      }     */
+      }
     ];
   }
 
@@ -83,6 +51,6 @@ export class SidebarService {
   }
 
   getSidebarItemsMobile() {
-    return [...this.sidebarItems.filter(x => x.routeLink === '/dashboard' || x.routeLink === '/help')];
+    return [...this.sidebarItems.filter(x => x.routeLink === '/dcuReadingConfiguration' || x.routeLink === '/help')];
   }
 }

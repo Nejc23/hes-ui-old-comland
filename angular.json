@@ -27,8 +27,6 @@
               "src/assets"
             ],
             "styles": [
-              "node_modules/devextreme/dist/css/dx.common.css",
-              "node_modules/devextreme/dist/css/dx.material.teal.light.css",
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },

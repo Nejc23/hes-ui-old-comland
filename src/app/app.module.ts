@@ -9,10 +9,8 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { registerLocaleData } from '@angular/common';
 import localeSl from '@angular/common/locales/sl';
 import localeSlExtra from '@angular/common/locales/extra/sl';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UserModule } from './features/users/modules/user.module';
 import { CoreModule } from './core/core.module';
-import { GridModule } from '@progress/kendo-angular-grid';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 
@@ -32,16 +30,7 @@ declare const require;
     },
     I18n
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    AppRoutingModule,
-    NgxChartsModule,
-    UserModule,
-    CoreModule.forRoot(),
-    SharedModule,
-    GridModule
-  ],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

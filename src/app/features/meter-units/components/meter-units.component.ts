@@ -2,14 +2,10 @@ import { Component, OnInit, TemplateRef, ViewChild, ContentChild, AfterViewInit,
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable, Subscription } from 'rxjs';
-import { GridDataResult, DataStateChangeEvent, ColumnComponent, CellTemplateDirective, GridComponent } from '@progress/kendo-angular-grid';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { DataSourceRequestState, DataResult } from '@progress/kendo-data-query';
 import { take } from 'rxjs/operators';
 import { headerTitleMU } from '../consts/static-text.const';
-import { SampleService } from 'src/app/core/repository/services/samples/samples-repository.service';
-import { Sample } from 'src/app/core/repository/interfaces/samples/samples-interface';
-import { UsersSampleService } from 'src/app/core/repository/services/samples/users-sample-repository.service';
 import { Module, AllModules } from '@ag-grid-enterprise/all-modules';
 import { ColumnApi, GridApi } from '@ag-grid-enterprise/all-modules';
 
@@ -72,14 +68,7 @@ export class MeterUnitsComponent implements OnInit, AfterViewInit {
   rowData: any[];
 */
   rowData: any[] = [];
-  constructor(
-    private sidebatService: SidebarService,
-    private sampleService: SampleService,
-    private usersSampleService: UsersSampleService,
-    private i18n: I18n,
-    public fb: FormBuilder,
-    private ngZone: NgZone
-  ) {
+  constructor(private sidebatService: SidebarService, private i18n: I18n, public fb: FormBuilder, private ngZone: NgZone) {
     /*
     this.sidebatService.headerTitle = this.i18n(headerTitleMU);
 

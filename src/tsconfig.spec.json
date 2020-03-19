@@ -13,7 +13,6 @@
   ],
   "include": [
     "**/*.spec.ts",
-    "**/*.d.ts",
-    "../node_modules/@swimlane/ngx-datatable/lib/types/*.ts"
+    "**/*.d.ts"
   ]
 }

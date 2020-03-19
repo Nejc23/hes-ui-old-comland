@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { DxDataGridComponent } from 'devextreme-angular';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
@@ -28,9 +27,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   cookieNameForGridSettings = 'grdColDCU';
   sessionNameForGridState = 'grdStateDCU';
   sessionNameForGridFilter = 'grdLayoutDCU';
-
-  // grid instance
-  @ViewChild(DxDataGridComponent, { static: false }) grid: DxDataGridComponent;
 
   // grid variables
   columns = [];
@@ -155,22 +151,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // TODO
   // button click upload configuration
   onUploadConfiguration() {
-    console.log(this.gridApi.getSelectedRows());
-    /*  let str = '';
-    this.gridApi.selectedRowKeys.forEach(element => {
-      str = str + element + ', ';
-    });
-    alert('selected items for upload config: ' + str);*/
+    //
   }
 
   // TODO
   // button click upgrade
   onUpgrade() {
-    let str = '';
-    this.gridApi.selectedRowKeys.forEach(element => {
-      str = str + element + ', ';
-    });
-    alert('selected items for upgrade: ' + str);
+    //
   }
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------

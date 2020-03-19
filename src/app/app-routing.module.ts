@@ -9,7 +9,7 @@ import { Page404Component } from './shared/404/page-404.component';
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/dashboard',
+    redirectTo: '/dataConcentratorUnits',
     pathMatch: 'full'
   },
   {
@@ -24,7 +24,6 @@ const appRoutes: Routes = [
     canActivateChild: [PermissionsGuard],
     runGuardsAndResolvers: 'always',
     children: [
-      { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       {
         path: 'dataConcentratorUnits',
         loadChildren: 'src/app/features/data-concentrator-units/modules/data-concentrator-units.module#DataConcentratorUnitsModule'
@@ -34,24 +33,8 @@ const appRoutes: Routes = [
         loadChildren: 'src/app/features/meter-units/modules/meter-units.module#MeterUnitsModule'
       },
       {
-        path: 'dashboard',
-        loadChildren: 'src/app/features/dashboard/modules/dashboard.module#DashboardModule'
-      },
-      {
-        path: 'users',
-        loadChildren: 'src/app/features/users/modules/user.module#UserModule'
-      },
-      {
         path: 'help',
         loadChildren: 'src/app/features/help/modules/help.module#HelpModule'
-      },
-      {
-        path: 'devextreme',
-        loadChildren: 'src/app/features/samples/devextreme/modules/devextreme.module#DevextremeModule'
-      },
-      {
-        path: 'kendo',
-        loadChildren: 'src/app/features/samples/kendo-ui/modules/kendo-ui.module#KendoUIModule'
       }
     ]
   },

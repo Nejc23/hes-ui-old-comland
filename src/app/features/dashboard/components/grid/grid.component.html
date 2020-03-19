@@ -1,8 +1,0 @@
-<ng-container *ngIf="gridState">
-  <gridster [options]="options" class="p-0" [ngClass]="{'bg-edit': isEditMode, 'bg-transparent': !isEditMode}">
-    <gridster-item [item]="item" *ngFor="let item of dashboard" class="shadow">
-      <app-grid-item-content [item]="item"></app-grid-item-content>
-      <app-grid-item-controls [item]="item" *ngIf="isEditMode"></app-grid-item-controls>
-    </gridster-item>
-  </gridster>
-</ng-container>

@@ -12,27 +12,6 @@ import { dcuStatuses, dcuTags, dcuTypes, dcuVendors } from '../../consts/data-co
 export class CodelistRepositoryService {
   constructor(private repository: RepositoryService) {}
 
-  powerlineCodelist(): Observable<CodelistPowerline[]> {
-    return this.repository.makeRequest(this.powerlineCodelistRequest());
-  }
-  powerlineCodelistRequest(): HttpRequest<CodelistPowerline[]> {
-    return new HttpRequest('GET', `/api/codelists/powerlines`);
-  }
-
-  dashboardCodelist(): Observable<Codelist<number>[]> {
-    return this.repository.makeRequest(this.dashboardCodelistRequest());
-  }
-  dashboardCodelistRequest(): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `/api/dashboards`);
-  }
-
-  accesssTypeCodelist(): Observable<Codelist<number>[]> {
-    return this.repository.makeRequest(this.accesssTypeCodelistRequest());
-  }
-  accesssTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `/api/codelists/access-types`);
-  }
-
   dcuStatusCodelist(): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.dcuStatusCodelistRequest());
   }

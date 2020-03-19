@@ -3,27 +3,15 @@ import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS
 import { Observable, of } from 'rxjs';
 import { delay, materialize, dematerialize, mergeMap } from 'rxjs/operators';
 import { CodelistInterceptor } from './codelist.interceptor';
-import { GridInterceptor } from './grid-items/grid.interceptor';
-import { DashboardInterceptor } from './dashboard/dashboard.interceptor';
-import { CodelistDashboardsInterceptor } from './codelists/codelist-dashboards.interceptor';
-import { GridItemsDataInterceptor } from './grid-items/grid-items-data.interceptor';
-import { UsersListInterceptor } from './users/users.list.interceptor';
-import { UserInterceptor } from './users/user.interceptor';
 import { AuthenticateInterceptor } from './authentication/authenticate.interceptor';
 import { UserRequestResetPasswordInterceptor } from './authentication/user-request-reset-password.interceptor';
 import { UserChangePasswordInterceptor } from './authentication/user-change-password.interceptor';
 import { UserNewPasswordInterceptor } from './authentication/user-new-password.interceptor';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { SampleInterceptor } from './codelists/sample/sample.interceptor';
-import { UsersSampleInterceptor } from './codelists/users-sample/users-sample.interceptor';
 import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
 import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
-  listDashboards: Codelist<number>[];
-  graphValues: any[];
-  currentDate: Date = new Date();
   constructor() {
     this.setVariables();
   }
@@ -55,58 +43,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
             }
 
-            if (SampleInterceptor.canInterceptSample(request)) {
-              return SampleInterceptor.interceptSample();
-            }
-            if (UsersSampleInterceptor.canInterceptUsersSample(request)) {
-              return UsersSampleInterceptor.interceptUsersSample(request);
-            }
-
-            if (DashboardInterceptor.canInterceptDashboardGetOne(request)) {
-              return DashboardInterceptor.interceptDashboardGetOne();
-            }
-            if (DashboardInterceptor.canInterceptDashboardPost(request)) {
-              return DashboardInterceptor.interceptDashboardPost(request, this.listDashboards);
-            }
-            if (DashboardInterceptor.canInterceptDashboardPut(request)) {
-              return DashboardInterceptor.interceptDashboardPut(request, this.listDashboards);
-            }
-
-            // grid random data
-            if (GridInterceptor.canInterceptGrid(request)) {
-              return GridInterceptor.interceptGrid(request);
-            }
-
-            if (GridItemsDataInterceptor.canInterceptGridItems(request)) {
-              return GridItemsDataInterceptor.interceptGridItems(request);
-            }
-
-            if (GridInterceptor.canInterceptGridPut(request)) {
-              return GridInterceptor.interceptGridPut(request);
-            }
-
             // codelists
-            if (CodelistInterceptor.canInterceptPowerlines(request)) {
-              return CodelistInterceptor.interceptPowerlines();
-            }
-            if (CodelistInterceptor.canInterceptDevicesWithPhotos(request)) {
-              return CodelistInterceptor.interceptDevicesWithPhotos();
-            }
-            if (CodelistDashboardsInterceptor.canInterceptDashboards(request)) {
-              return CodelistDashboardsInterceptor.interceptDashboards(this.listDashboards);
-            }
-            if (CodelistInterceptor.canInterceptVoltageLevel(request)) {
-              return CodelistInterceptor.interceptVoltageLevel();
-            }
-            if (CodelistInterceptor.canInterceptWireType(request)) {
-              return CodelistInterceptor.interceptWireType();
-            }
-            if (CodelistInterceptor.canInterceptReportType(request)) {
-              return CodelistInterceptor.interceptReportType();
-            }
-            if (CodelistInterceptor.canInterceptAccessType(request)) {
-              return CodelistInterceptor.interceptAccessType();
-            }
             if (CodelistInterceptor.canInterceptDcuStatus(request)) {
               return CodelistInterceptor.interceptDcuStatus();
             }
@@ -118,27 +55,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             if (CodelistInterceptor.canInterceptDcuVendor(request)) {
               return CodelistInterceptor.interceptDcuVendor();
-            }
-
-            // users
-            if (UsersListInterceptor.canInterceptUsersList(request)) {
-              return UsersListInterceptor.interceptUsersList();
-            }
-
-            if (UserInterceptor.canInterceptUserGetOne(request)) {
-              return UserInterceptor.interceptUserGetOne();
-            }
-
-            if (UserInterceptor.canInterceptUserPost(request)) {
-              return UserInterceptor.interceptUserPost(request);
-            }
-
-            if (UserInterceptor.canInterceptUserPut(request)) {
-              return UserInterceptor.interceptUserPut(request);
-            }
-
-            if (UserInterceptor.canInterceptUserDelete(request)) {
-              return UserInterceptor.interceptUserDelete(request);
             }
 
             // authenticate
@@ -172,11 +88,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   setVariables() {
-    this.listDashboards = [
-      { id: 1, value: 'Dashboard 1' },
-      { id: 2, value: 'Dashboard my 2' }
-    ];
-    // this.listDashboards = [];
+    //
   }
 }
 

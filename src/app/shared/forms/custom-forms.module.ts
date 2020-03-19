@@ -4,7 +4,6 @@ import { InputTextComponent } from './components/input-text/input-text.component
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormErrorComponent } from './components/form-error/form-error.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
-import { InputDatepickerComponent } from './components/input-datepicker/input-datepicker.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { InputToggleComponent } from './components/input-toggle/input-toggle.component';
 import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
@@ -14,8 +13,6 @@ import { DefaultFormElementComponent } from './components/default-form-element/d
 import { SelectInputComponent } from './components/select-input/select-input.component';
 import { TimepickerComponent } from './components/timepicker/timepicker.component';
 import { InputSelectComponent } from './components/input-select/input-select.component';
-import { InputDateTimeRangePickerComponent } from './components/input-datetime-range-picker/input-datetime-range-picker.component';
-import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 import { InputTagComponent } from './components/input-tag/input-tag.component';
 import { TagInputModule } from 'ngx-chips';
@@ -31,8 +28,6 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
     FormErrorComponent,
     InputCheckboxComponent,
     InputCheckboxGridComponent,
-    InputDatepickerComponent,
-    InputDateTimeRangePickerComponent,
     InputToggleComponent,
     InputTextareaComponent,
     InputRadioComponent,
@@ -52,8 +47,6 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
     FormErrorComponent,
     InputCheckboxComponent,
     InputCheckboxGridComponent,
-    InputDatepickerComponent,
-    InputDateTimeRangePickerComponent,
     InputToggleComponent,
     InputTextareaComponent,
     InputRadioComponent,
@@ -66,16 +59,7 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
     InputTagComponent,
     InputMultiselectComponent
   ],
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    FormsModule,
-    NgbModule,
-    TagInputModule,
-    DropDownsModule,
-    InputsModule,
-    NgxDaterangepickerMd.forRoot()
-  ]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, TagInputModule, DropDownsModule, InputsModule]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {
