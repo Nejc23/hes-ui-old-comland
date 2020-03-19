@@ -1,5 +1,5 @@
 <div class="form-group position-relative" [formGroup]="form">
-  <input kendoTextBox (ngModelChange)="this.userQuestionUpdate.next($event)"
+  <input #searcher id="search" kendoTextBox (ngModelChange)="this.userQuestionUpdate.next($event)"
   [name]="property" [placeholder]="placeholder" type="search" class="form-control" [formControlName]="property" [readonly]="isReadOnly">
   <i class='uil uil-search'></i>
 </div>

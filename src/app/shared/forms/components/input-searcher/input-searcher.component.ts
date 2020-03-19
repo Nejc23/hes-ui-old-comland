@@ -16,11 +16,9 @@ export class InputSearcherComponent implements OnInit {
   // optional
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)
   @Input() placeholder = '';
-  @Input() debounceTimeOut = 400;
+  @Input() debounceTimeOut = 700;
 
   @Output() insertedValue = new EventEmitter<string>();
-
-  userQuestionUpdate = new Subject<string>();
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -34,9 +32,8 @@ export class InputSearcherComponent implements OnInit {
     if (!this.isReadOnly) {
       this.isReadOnly = false;
     }
-    this.userQuestionUpdate.pipe(debounceTime(this.debounceTimeOut), distinctUntilChanged()).subscribe(value => {
-      this.insertedValue.emit(value);
-    });
+
+    this.form.valueChanges.pipe(debounceTime(this.debounceTimeOut)).subscribe(data => this.insertedValue.emit(data[this.property]));
   }
 
   get formControl(): AbstractControl {

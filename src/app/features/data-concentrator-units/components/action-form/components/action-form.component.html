@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <app-input-searcher class="mr-2" [debounceTimeOut]="400" (insertedValue)="insertedValue($event)" [form]="form"
+  <app-input-searcher class="mr-2" [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
   <button type="button" class="btn btn-secondary" (click)="openSaveLayoutModal($event)"
     [ngbTooltip]="tipContentFilter"><i class="uil uil-bookmark"></i></button>

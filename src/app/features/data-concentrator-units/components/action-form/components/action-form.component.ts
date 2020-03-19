@@ -45,9 +45,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     } else {
       this.searchTextEmpty = true;
     }
-    setTimeout(() => {
-      this.searchChange.emit($event);
-    }, 600);
+    this.searchChange.emit($event);
   }
 
   get searchProperty() {
