@@ -90,8 +90,6 @@
     "@types/jasminewd2": "~2.0.6",
     "@types/node": "~8.9.4",
     "codelyzer": "^5.0.1",
-    "devextreme-cli": "latest",
-    "devextreme-themebuilder": "latest",
     "husky": "^3.0.8",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
