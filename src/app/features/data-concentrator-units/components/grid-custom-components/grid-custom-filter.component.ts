@@ -124,14 +124,23 @@ export class GridCustomFilterComponent implements IToolPanel {
   refresh() {}
 
   clearButtonClicked() {
-    this.sessionFilter = null;
+    const currentFilter: DcuLayout = {
+      id: 0,
+      name: '',
+      statusesFilter: [],
+      typesFilter: [],
+      tagsFilter: [],
+      vendorFilter: null,
+      gridLayout: ''
+    };
+    this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
     this.form = this.createForm(null, null);
   }
 
   applyButtonClicked() {
     const currentFilter: DcuLayout = {
-      id: this.sessionFilter.id,
-      name: this.sessionFilter.name,
+      id: this.sessionFilter.id ? this.sessionFilter.id : 0,
+      name: this.sessionFilter.name ? this.sessionFilter.name : '',
       statusesFilter: this.form.get(this.statusesProperty).value,
       typesFilter: this.form.get(this.typesProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,

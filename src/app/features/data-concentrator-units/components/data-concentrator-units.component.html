@@ -23,6 +23,8 @@
       <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot; 
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Deselect all</span></a></u></strong></small>
     </div>
+    <button type="button" class="btn btn-light" (click)="onTag()"><span i18n><i class="uil uil-tag-alt"></i></span></button>
+    <button type="button" class="btn btn-light" (click)="onDelete()"><span i18n><i class="uil uil-trash text-danger"></i></span></button>
     <button type="button" class="btn btn-light" (click)="onUploadConfiguration()"><span i18n>Upload Configuration</span></button>
     <button type="button" class="btn btn-light" (click)="onUpgrade()"><span i18n>Upgrade</span></button>
   </div>

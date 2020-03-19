@@ -21,7 +21,8 @@ export class GridSettingsSessionStoreService {
             id: gridId,
             value: {
               searchText,
-              pageIndex: 0
+              pageIndex: 0,
+              selectedRows: []
             }
           });
           sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
@@ -33,7 +34,8 @@ export class GridSettingsSessionStoreService {
           id: gridId,
           value: {
             searchText,
-            pageIndex: 0
+            pageIndex: 0,
+            selectedRows: []
           }
         }
       ];
@@ -67,7 +69,8 @@ export class GridSettingsSessionStoreService {
             id: gridId,
             value: {
               pageIndex,
-              searchText: ''
+              searchText: '',
+              selectedRows: []
             }
           });
           sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
@@ -79,7 +82,8 @@ export class GridSettingsSessionStoreService {
           id: gridId,
           value: {
             pageIndex,
-            searchText: ''
+            searchText: '',
+            selectedRows: []
           }
         }
       ];
@@ -94,6 +98,53 @@ export class GridSettingsSessionStoreService {
         const value = _.find(data, x => x.id === gridId);
         if (value) {
           return value.value.pageIndex;
+        }
+      }
+    }
+    return 0;
+  }
+
+  setSelectedRows(gridId: string, selectedRows: any) {
+    if (sessionStorage.getItem(this.gridSettings)) {
+      const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
+      if (data) {
+        const value = _.find(data, x => x.id === gridId);
+        if (value) {
+          value.value.selectedRows = selectedRows;
+          sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+        } else {
+          data.push({
+            id: gridId,
+            value: {
+              pageIndex: 0,
+              searchText: ''
+            }
+          });
+          sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+        }
+      }
+    } else {
+      const data = [
+        {
+          id: gridId,
+          value: {
+            pageIndex: 0,
+            searchText: '',
+            selectedRows: []
+          }
+        }
+      ];
+      sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+    }
+  }
+
+  getSelectedRows(gridId: string) {
+    if (sessionStorage.getItem(this.gridSettings)) {
+      const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
+      if (data) {
+        const value = _.find(data, x => x.id === gridId);
+        if (value) {
+          return value.value.selectedRows;
         }
       }
     }
