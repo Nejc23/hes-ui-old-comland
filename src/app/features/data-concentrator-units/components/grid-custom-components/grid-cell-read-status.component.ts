@@ -26,8 +26,8 @@ export class GridCellReadStatusComponent implements ICellRendererAngularComp {
     return true;
   }
 
-  // set momemnt text (next planned read) out of date and time
-  setMomentNextPlannedReadTime(time: string) {
-    return this.staticextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
+  // set tooltip text
+  setToolTip(value: string) {
+    return value + ' %';
   }
 }

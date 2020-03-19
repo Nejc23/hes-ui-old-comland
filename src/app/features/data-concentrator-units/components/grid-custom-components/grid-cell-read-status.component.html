@@ -1,11 +1,10 @@
-<div class="row" *ngIf="params.value">
-  <div class="col-3">
-    <i *ngIf="params.data.readStatusPercent <= trasholds.alarmTrashold"
-      class='fa fa-circle text-danger  text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
-    <i *ngIf="params.data.readStatusPercent > trasholds.alarmTrashold && params.data.readStatusPercent <= trasholds.warningTrashold"
-      class='fa fa-circle text-warning  text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
-    <i *ngIf="params.data.readStatusPercent > trasholds.warningTrashold"
-      class='fa fa-circle text-success text-left ml-2' title="{{params.data.readStatusPercent}}"></i>
+<div class="row" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom" [ngbTooltip]="setToolTip(params.value)">
+  <div class="col-2 align-items-center pt-2">
+    <div class="full-circle" [ngClass]="{
+        'full-circle-danger': params.data.readStatusPercent <= trasholds.alarmTrashold, 
+        'full-circle-warning': params.data.readStatusPercent > trasholds.alarmTrashold && params.data.readStatusPercent <= trasholds.warningTrashold,
+        'full-circle-success': params.data.readStatusPercent > trasholds.warningTrashold }">
+    </div>
   </div>
   <div class="col-1 text-primary align-right"><span> {{params.data.readStatusPercent}} %</span></div>
 </div>
@@ -13,5 +12,3 @@
 <div class="row" *ngIf="!params.value">
   <div class="text-secondary col-3"><span i18n>N/A</span></div>
 </div>
-
-<ng-template #tipContent id="tipContent"><span i18n>Next planned read</span> {{setMomentNextPlannedReadTime(params.data.nextRead)}}</ng-template>

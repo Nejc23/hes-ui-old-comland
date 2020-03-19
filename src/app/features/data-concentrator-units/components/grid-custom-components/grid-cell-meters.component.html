@@ -1,4 +1,4 @@
-<div *ngIf="params.data && params.data.metersValue" class="d-flex">
+<div *ngIf="params.data && params.data.metersValue" class="d-flex" container="body" [openDelay]="1000" placement="bottom" [ngbTooltip]="setToolTip(params.data)">
   <span class="text-truncate flex-shrink-0">{{params.data.metersValue}}</span>
   <div *ngIf="params.data && params.data.metersUp" class="ml-auto text-success text-truncate flex-shrink-1">
     <i class="uil uil-arrow-up"></i>

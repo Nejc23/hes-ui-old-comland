@@ -22,4 +22,10 @@ export class GridCellMetersComponent implements ICellRendererAngularComp {
     this.params = params;
     return true;
   }
+
+  // set tooltip text
+  setToolTip(data: any) {
+    const arrow = data.metersUp ? '\u2191' : '\u2193';
+    return data.metersValue + ' m   ' + arrow + ' ' + data.metersPercent + ' %';
+  }
 }
