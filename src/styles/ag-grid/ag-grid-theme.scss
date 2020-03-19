@@ -1,9 +1,3 @@
-/*@import "~ag-grid-community/src/styles/ag-grid.scss";
-@import "~ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin.scss";*/
-
-@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-grid.scss";
-@import "~@ag-grid-enterprise/all-modules/dist/styles/ag-theme-alpine/sass/_ag-theme-alpine-mixin.scss";
-
 .ag-theme-epoint {
   @include ag-theme-alpine(( // Colour of text and icons in primary UI elements like menus
       foreground-color: $body-color,
@@ -196,6 +190,10 @@
 
   .ag-cell-value {
     width: 100%;
+  }
+
+  .ag-column-select-column-drag-handle {
+    display: none;
   }
 
   .ag-side-bar {

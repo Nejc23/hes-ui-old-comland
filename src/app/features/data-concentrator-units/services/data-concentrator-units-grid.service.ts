@@ -40,9 +40,9 @@ export class DataConcentratorUnitsGridService {
       {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
-        minWidth: 50,
-        maxWidth: 50,
-        width: 50,
+        minWidth: 45,
+        maxWidth: 45,
+        width: 45,
         suppressColumnsToolPanel: true,
         checkboxSelection: true,
         suppressMovable: true,

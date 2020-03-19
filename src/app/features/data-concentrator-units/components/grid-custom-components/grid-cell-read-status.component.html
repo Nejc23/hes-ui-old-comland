@@ -1,14 +1,11 @@
-<div class="row" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom" [ngbTooltip]="setToolTip(params.value)">
-  <div class="col-2 align-items-center pt-2">
-    <div class="full-circle" [ngClass]="{
-        'full-circle-danger': params.data.readStatusPercent <= trasholds.alarmTrashold, 
-        'full-circle-warning': params.data.readStatusPercent > trasholds.alarmTrashold && params.data.readStatusPercent <= trasholds.warningTrashold,
-        'full-circle-success': params.data.readStatusPercent > trasholds.warningTrashold }">
-    </div>
-  </div>
-  <div class="col-1 text-primary align-right"><span> {{params.data.readStatusPercent}} %</span></div>
+<div class="d-flex align-items-center" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom"
+  [ngbTooltip]="setToolTip(params.value)">
+  <span class="full-circle mr-2 flex-shrink-0" [ngClass]="{
+        'bg-danger': params.data.readStatusPercent <= trasholds.alarmTrashold, 
+        'bg-warning': params.data.readStatusPercent > trasholds.alarmTrashold && params.data.readStatusPercent <= trasholds.warningTrashold,
+        'bg-success': params.data.readStatusPercent > trasholds.warningTrashold }">
+  </span>
+  <span class="text-truncate flex-shrink-1 ">{{params.data.readStatusPercent}} %</span>
 </div>
 
-<div class="row" *ngIf="!params.value">
-  <div class="text-secondary col-3"><span i18n>N/A</span></div>
-</div>
+<span class="text-muted" *ngIf="!params.value" i18n>{{notAvailableText}}</span>

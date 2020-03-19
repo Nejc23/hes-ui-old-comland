@@ -1,0 +1,46 @@
+.navbar {
+  width: $sidebar-fixed-width;
+  height: 100%;
+  z-index: 100;
+  background: linear-gradient(180deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
+  padding: $spacer 0;
+  text-align: center;
+
+  i {
+    font-size: $icon-size-xl;
+    color: $white !important;
+  }
+
+  .user {
+    height: $icon-size-xl;
+    width: $icon-size-xl;
+    line-height: $icon-size-xl;
+    display: inline-block;
+    text-align: center;
+  }
+
+  .navbar-title {
+    line-height: $sidebar-fixed-width;
+    color: $white;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+  }
+
+  .rotate {
+    transform: rotate(-90deg);
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+
+    > * {
+      transform: translate(-50%, 0);
+    }
+  }
+}
+
+@media only screen and (max-height: 450px) {
+  .navbar-title {
+    display: none;
+  }
+}

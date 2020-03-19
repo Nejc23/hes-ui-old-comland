@@ -15,7 +15,7 @@
     "pact:publish": "node ./pact/publish-pacts.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "node ./version.js && node ./copy-font.js",
+    "postinstall": "node ./version.js",
     "format:check": "prettier --list-different \"src/app/**/*.ts\"",
     "format:write": "prettier --write \"src/app/**/*.ts\" && prettier --write \"src/debug/**/*.ts\" && prettier --write \"pact/**/*.ts\"",
     "tslint-check": "tslint-config-prettier-check ./tslint.json"
@@ -36,7 +36,6 @@
     "@angular/platform-browser": "~8.2.6",
     "@angular/platform-browser-dynamic": "~8.2.6",
     "@angular/router": "~8.2.6",
-    "@fortawesome/fontawesome-free": "^5.10.2",
     "@ng-bootstrap/ng-bootstrap": "^5.1.1",
     "@ngx-i18nsupport/tooling": "^8.0.3",
     "@ngx-loading-bar/core": "^4.2.0",

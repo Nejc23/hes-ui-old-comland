@@ -1,13 +1,13 @@
 <div *ngIf="params.data && params.data.metersValue" class="d-flex" container="body" [openDelay]="1000" placement="bottom" [ngbTooltip]="setToolTip(params.data)">
   <span class="text-truncate flex-shrink-0">{{params.data.metersValue}}</span>
-  <div *ngIf="params.data && params.data.metersUp" class="ml-auto text-success text-truncate flex-shrink-1">
+  <div *ngIf="params.data && params.data.metersUp" class="ml-auto text-success text-truncate flex-shrink-2">
     <i class="uil uil-arrow-up"></i>
     <small>{{params.data.metersPercent}} %</small>
   </div>
-  <div *ngIf="params.data && !params.data.metersUp" class="ml-auto text-danger text-truncate flex-shrink-1">
+  <div *ngIf="params.data && !params.data.metersUp" class="ml-auto text-danger text-truncate flex-shrink-2">
     <i class="uil uil-arrow-down"></i>
     <small>{{params.data.metersPercent}} %</small>
   </div>
 </div>
 
-<div *ngIf="params.data && !params.data.metersValue" class="text-muted"><span i18n>{{notAvailableText}}</span></div>
+<span *ngIf="params.data && !params.data.metersValue" class="text-muted" i18n>{{notAvailableText}}</span>

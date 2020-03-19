@@ -1,2 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
-@import 'styles/custom-app.scss';
+/* import Bootstrap files */
+@import "styles/../../node_modules/bootstrap/scss/functions";
+@import "styles/variables";
+@import "styles/../../node_modules/bootstrap/scss/mixins";
+
+@import "styles/bootstrap";
+@import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
+
+@import "styles/global";
+@import "styles/navs";
+
+@import "styles/custom-style";
+
+@import "styles/kendoUI";
+@import "styles/ag-grid";
+
