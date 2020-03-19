@@ -155,18 +155,19 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // TODO
   // button click upload configuration
   onUploadConfiguration() {
-    let str = '';
-    this.grid.selectedRowKeys.forEach(element => {
+    console.log(this.gridApi.getSelectedRows());
+    /*  let str = '';
+    this.gridApi.selectedRowKeys.forEach(element => {
       str = str + element + ', ';
     });
-    alert('selected items for upload config: ' + str);
+    alert('selected items for upload config: ' + str);*/
   }
 
   // TODO
   // button click upgrade
   onUpgrade() {
     let str = '';
-    this.grid.selectedRowKeys.forEach(element => {
+    this.gridApi.selectedRowKeys.forEach(element => {
       str = str + element + ', ';
     });
     alert('selected items for upgrade: ' + str);

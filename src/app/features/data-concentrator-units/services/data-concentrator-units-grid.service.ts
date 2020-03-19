@@ -41,13 +41,14 @@ export class DataConcentratorUnitsGridService {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
         minWidth: 100,
+        maxWidth: 100,
         width: 100,
         suppressColumnsToolPanel: true,
         checkboxSelection: true,
         suppressMovable: true,
-        lockPosition: true
+        lockPosition: true,
+        colId: 'id'
       },
-      { field: 'id', headerName: 'ID', pinned: true, sortable: true, hide: true, suppressColumnsToolPanel: true },
       {
         field: 'status',
         headerName: this.i18n('Status'),
