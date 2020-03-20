@@ -19,6 +19,9 @@ import { configAgGrid } from 'src/environments/config';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import * as _ from 'lodash';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -70,7 +73,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
-    private gridFilterSessionStoreService: GridLayoutSessionStoreService
+    private gridFilterSessionStoreService: GridLayoutSessionStoreService,
+    private modalService: ModalService,
+    private formUtils: FormsUtilsService
   ) {
     this.sidebarService.headerTitle = staticextService.headerTitleDCU;
     this.filters = staticextService.noFilterAppliedTekst;
@@ -342,7 +347,38 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // TODO
   // delete button click
   onDelete() {
-    //
+    let selectedText = 'all';
+    if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
+      const selectedRows = this.gridApi.getSelectedRows();
+      selectedText = selectedRows ? selectedRows.length : 0;
+    }
+
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    component.confirmDelete = true;
+    component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        const request = this.dataConcentratorUnitsService.deleteDcu({ id: null, filter: null });
+        this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
+          (response: any) => {
+            this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+            this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
+            this.gridApi.forEachNode(node => {
+              node.setSelected(false);
+            });
+
+            this.gridApi.onFilterChanged();
+          },
+          () => {}
+        );
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   // TODO

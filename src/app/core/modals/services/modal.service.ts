@@ -8,6 +8,7 @@ export class ModalService {
   constructor(config: NgbModalConfig, private modalService: NgbModal) {
     // customize default values of modals used by this component tree
     config.backdrop = 'static';
+    config.centered = true;
   }
 
   open(content, options?: NgbModalOptions): NgbModalRef {

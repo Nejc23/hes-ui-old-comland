@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
+import { dataConcentratorUnits } from 'src/app/core/repository/consts/data-concentrator-units.const';
 
 @Injectable()
 export class DataConcentratorUnitsListInterceptor {
@@ -101,7 +102,7 @@ export class DataConcentratorUnitsListInterceptor {
   }
 
   static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
-    return new RegExp(`/api/dcu`).test(request.url);
+    return new RegExp(dataConcentratorUnits).test(request.url) && request.method.endsWith('POST');
   }
 }
 

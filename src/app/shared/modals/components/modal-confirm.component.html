@@ -1,4 +1,5 @@
-<div class="modal-header">
+
+<div class="modal-header" *ngIf="modalTitle">
   <h3 class="modal-title">{{modalTitle}}</h3>
   <button type="button" class="close" aria-label="Close" (click)="dismiss()">
     <span aria-hidden="true">&times;</span>
@@ -6,14 +7,6 @@
 </div>
 <div class="modal-body">{{modalBody}}</div>
 <div class="modal-footer">
-  <div class="row justify-content-center">
-    <div class="col align-self-center">
-      <hr>
-    </div>
-    <button type="button" class="btn btn-outline-secondary" (click)="dismiss()" i18n>Cancel</button>
-    <button type="button" class="btn btn-outline-primary" (click)="confirm()" i18n>Confirm</button>
-    <div class="col align-self-center">
-      <hr>
-    </div>
-  </div>
+  <button type="button" class="btn btn-secondary" (click)="dismiss()" i18n>Cancel</button>
+  <button type="button" class="btn" [ngClass]="{ 'btn-danger': confirmDelete, 'btn-primary': !confirmDelete }" (click)="confirm()" i18n>{{btnConfirmText}}</button>
 </div>
