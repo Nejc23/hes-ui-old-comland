@@ -15,6 +15,7 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() property: string;
   @Input() label;
   @Input() selectOptions: Codelist<number | string>[] = [];
+  @Input() disabled = false;
 
   active = new Subject<void>();
 

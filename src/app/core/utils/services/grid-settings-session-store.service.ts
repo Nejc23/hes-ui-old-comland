@@ -1,5 +1,7 @@
 import * as _ from 'lodash';
 import { Injectable } from '@angular/core';
+import { GridSettingsSessionStore } from '../interfaces/grid-settings-session-store.interface';
+import { GridSettingsSessionStoreTypeEnum } from '../enums/grid-settings-session-store.enum';
 
 @Injectable()
 export class GridSettingsSessionStoreService {
@@ -8,7 +10,7 @@ export class GridSettingsSessionStoreService {
   constructor() {}
   // searchText
   // pageIndex
-  setGridSearchText(gridId: string, searchText: string) {
+  /* setGridSearchText(gridId: string, searchText: string) {
     if (sessionStorage.getItem(this.gridSettings)) {
       const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
       if (data) {
@@ -149,5 +151,71 @@ export class GridSettingsSessionStoreService {
       }
     }
     return 0;
+  }
+*/
+
+  /**************************************** */
+
+  setGridSettings(gridId: string, type: GridSettingsSessionStoreTypeEnum, object: GridSettingsSessionStore) {
+    if (sessionStorage.getItem(this.gridSettings)) {
+      const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
+      if (data) {
+        const value = _.find(data, x => x.id === gridId);
+        if (value) {
+          switch (type) {
+            case GridSettingsSessionStoreTypeEnum.searchString:
+              value.value.searchText = object.searchText;
+              break;
+            case GridSettingsSessionStoreTypeEnum.pageIndex:
+              value.value.pageIndex = object.pageIndex;
+              break;
+            case GridSettingsSessionStoreTypeEnum.selectedRows:
+              value.value.selectedRows = object.selectedRows;
+              break;
+            case GridSettingsSessionStoreTypeEnum.isSelectedAll:
+              value.value.isSelectedAll = object.isSelectedAll;
+              break;
+          }
+          sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+        } else {
+          data.push({
+            id: gridId,
+            value: object as GridSettingsSessionStore
+          });
+          sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+        }
+      }
+    } else {
+      const data = [
+        {
+          id: gridId,
+          value: {
+            searchText: '',
+            pageIndex: 0,
+            selectedRows: [],
+            isSelectedAll: false
+          } as GridSettingsSessionStore
+        }
+      ];
+      sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+    }
+  }
+
+  getGridSettings(gridId: string): GridSettingsSessionStore {
+    if (sessionStorage.getItem(this.gridSettings)) {
+      const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
+      if (data) {
+        const value = _.find(data, x => x.id === gridId);
+        if (value) {
+          return value.value;
+        }
+      }
+    }
+    return {
+      searchText: '',
+      pageIndex: 0,
+      selectedRows: [],
+      isSelectedAll: false
+    };
   }
 }

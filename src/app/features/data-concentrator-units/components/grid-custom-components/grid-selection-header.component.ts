@@ -4,6 +4,7 @@ import { DataConcentratorUnitsGridEventEmitterService } from '../../services/dat
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 
 @Component({
   selector: 'app-grid-selection-header',
@@ -20,7 +21,13 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
   private selected = 0;
   isDisabled = false;
-  constructor(public fb: FormBuilder, private service: DataConcentratorUnitsGridEventEmitterService) {
+  sessionNameForGridState = 'grdStateDCU';
+
+  constructor(
+    public fb: FormBuilder,
+    private service: DataConcentratorUnitsGridEventEmitterService,
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+  ) {
     this.form = this.createForm();
 
     // subscribe on event change check-box in grid-row value
@@ -56,7 +63,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
         const startRow = this.params.api.getFirstDisplayedRow();
         const endRow = this.params.api.getLastDisplayedRow();
 
-        const selectedAll = localStorage.getItem('lockCheckBox') === 'true' ? true : false;
+        const selectedAll = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll;
         if (selectedAll) {
           // if selected all rows
           for (let i = startRow; i <= endRow; i++) {
@@ -94,7 +101,8 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
           }
         }
 
-        this.isDisabled = localStorage.getItem('lockCheckBox') === 'true' ? true : false;
+        const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+        this.isDisabled = settings != null && settings.isSelectedAll ? settings.isSelectedAll : false;
       }
     });
   }
@@ -116,7 +124,8 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
   agInit(params): void {
     this.params = params;
-    this.isDisabled = localStorage.getItem('lockCheckBox') === 'true' ? true : false;
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    this.isDisabled = settings != null && settings.isSelectedAll ? settings.isSelectedAll : false;
   }
 
   ngOnDestroy() {

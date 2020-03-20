@@ -3,7 +3,8 @@
     {{label}}
     <span *ngIf="required"> *</span>
   </label>
-  <kendo-multiselect
+  <kendo-multiselect        
+        [disabled]="disabled"
         class="form-control"
         [name]="property"
         [data]="autocompleteItemsAsObjects"

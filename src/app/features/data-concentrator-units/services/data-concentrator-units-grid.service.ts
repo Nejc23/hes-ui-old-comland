@@ -14,6 +14,7 @@ import { GridCustomFilterComponent } from '../components/grid-custom-components/
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
+import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -198,7 +199,8 @@ export class DataConcentratorUnitsGridService {
   }
 
   public getCurrentRowIndex(): GridPagination {
-    const index = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
+    //DDconst index = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
+    const index = 0;
     const result: GridPagination = {
       currentPage: 0,
       startRow: 0,
@@ -212,6 +214,76 @@ export class DataConcentratorUnitsGridService {
     }
 
     return result;
+  }
+
+  // get stored grid settings from session configuration
+  // ---------------------------------------------------------
+  // is selected all
+  public getSessionSettingsSelectedAll() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.isSelectedAll;
+  }
+
+  // set is selected all
+  public setSessionSettingsSelectedAll(selectAll: boolean) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.isSelectedAll = selectAll;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.isSelectedAll,
+      settings
+    );
+  }
+
+  // selected rows
+  public getSessionSettingsSelectedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.selectedRows;
+  }
+
+  // set selected rows
+  public setSessionSettingsSelectedRows(selectedRows: any) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.selectedRows = selectedRows;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.selectedRows,
+      settings
+    );
+  }
+
+  // searched text
+  public getSessionSettingsSearchedText() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.searchText;
+  }
+
+  // set searched text
+  public setSessionSettingsSearchedText(text: string) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.searchText = text;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.searchString,
+      settings
+    );
+  }
+
+  // page index
+  public getSessionSettingsPageIndex() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.pageIndex;
+  }
+
+  // set page index
+  public setSessionSettingsPageIndex(index: number) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.pageIndex = index;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.pageIndex,
+      settings
+    );
   }
 }
 

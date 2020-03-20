@@ -8,6 +8,7 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -17,6 +18,7 @@ export class GridCustomFilterComponent implements IToolPanel {
   private params: IToolPanelParams;
 
   sessionNameForGridFilter = 'grdLayoutDCU';
+  sessionNameForGridState = 'grdStateDCU';
   form: FormGroup;
 
   dcuStatuses$: Observable<Codelist<number>[]>;
@@ -42,6 +44,7 @@ export class GridCustomFilterComponent implements IToolPanel {
     private dcuService: DataConcentratorUnitsService,
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
+    public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private i18n: I18n
   ) {
     this.form = this.createForm(null, null);
@@ -57,7 +60,7 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.dcuFilters$.subscribe(x => {
       this.data = x;
       this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-      // console.log(`sessionFilter GET = ${JSON.stringify(this.sessionFilter)}`);
+
       if (this.sessionFilter) {
         if (this.sessionFilter.id) {
           this.form = this.createForm(x, this.sessionFilter);

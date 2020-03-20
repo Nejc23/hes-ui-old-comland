@@ -25,7 +25,6 @@ import * as _ from 'lodash';
   templateUrl: './data-concentrator-units.component.html'
 })
 export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
-  cookieNameForGridSettings = 'grdColDCU';
   sessionNameForGridState = 'grdStateDCU';
   sessionNameForGridFilter = 'grdLayoutDCU';
 
@@ -69,7 +68,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private staticextService: DataConcentratorUnitsStaticTextService,
     private i18n: I18n,
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService
@@ -85,8 +83,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.types = event.typesFilter;
         this.requestModel.filterModel.tags = event.tagsFilter;
         this.gridColumnApi.setColumnState(event.gridLayout);
-        this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, 0);
-        this.gridSettingsSessionStoreService.setSelectedRows(this.sessionNameForGridState, []);
+        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -143,26 +141,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    if ($event !== this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState)) {
-      this.gridSettingsSessionStoreService.setGridSearchText(this.sessionNameForGridState, $event);
+    if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
+      this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
-      this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, 0);
-      this.gridSettingsSessionStoreService.setSelectedRows(this.sessionNameForGridState, []);
+      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
       this.gridApi.onFilterChanged();
     }
-  }
-
-  // TODO
-  // button click upload configuration
-  onUploadConfiguration() {
-    //
-  }
-
-  // TODO
-  // button click upgrade
-  onUpgrade() {
-    //
   }
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------
@@ -186,14 +172,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().startRow; // paramsRow.request.startRow;
-        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().endRow; //paramsRow.request.endRow;
+        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
           that.totalCount = data.totalCount;
-          that.gridApi.paginationGoToPage(that.gridSettingsSessionStoreService.getGridPageIndex(that.sessionNameForGridState));
+          that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
           paramsRow.successCallback(data.data, data.totalCount);
           that.selectRows(that.gridApi);
           // params.failCallback();
@@ -234,8 +220,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, 0);
-        this.gridSettingsSessionStoreService.setSelectedRows(this.sessionNameForGridState, []);
+        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -243,7 +229,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   setSearch() {
-    const search = this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState);
+    const search = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
     if (search && search !== '') {
       return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
     }
@@ -286,23 +272,23 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // on change page in the grid
   onPaginationChange(params) {
     if (params.newPage && !this.loadGrid) {
-      this.gridSettingsSessionStoreService.setGridPageIndex(this.sessionNameForGridState, params.api.paginationGetCurrentPage());
+      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
       this.eventService.pageChange(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
-      params.api.paginationGoToPage(this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState));
+      params.api.paginationGoToPage(this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
     }
   }
 
   // check if "select all" was clicked
-  selectedAll() {
-    return localStorage.getItem('lockCheckBox') === 'true' ? true : false;
+  checkSelectedAll() {
+    return this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll();
   }
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.gridSettingsSessionStoreService.setSelectedRows(this.sessionNameForGridState, params.api.getSelectedRows());
-    if (localStorage.getItem('lockCheckBox') === 'true') {
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.api.getSelectedRows());
+    if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
       params.node.setSelected(true);
     }
   }
@@ -310,14 +296,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // select rows on load grid from session
   selectRows(api: any) {
     api.forEachNode(node => {
-      const selectedRows = this.gridSettingsSessionStoreService.getSelectedRows(this.sessionNameForGridState);
-
-      if (localStorage.getItem('lockCheckBox') === 'true') {
+      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
+      if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
-        api.forEachNode(node => {
-          if (node.rowIndex >= startRow && node.rowIndex <= endRow) {
-            node.setSelected(true);
+        api.forEachNode(node2 => {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow) {
+            node2.setSelected(true);
           }
         });
       } else if (
@@ -325,7 +310,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         node.data.id > 0 &&
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
-        localStorage.getItem('lockCheckBox') !== 'true' &&
+        !this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll() &&
         _.find(selectedRows, x => x.id === node.data.id && !node.selected) !== undefined
       ) {
         node.setSelected(true);
@@ -333,16 +318,42 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     });
   }
 
+  // form actions
+
   // click on the link "select all"
   selectAll() {
-    localStorage.setItem('lockCheckBox', 'true');
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
     this.eventService.pageChange(this.gridApi.paginationGetCurrentPage());
   }
 
   // click on the link "deselect all"
   deselectAll() {
-    this.gridSettingsSessionStoreService.setSelectedRows(this.sessionNameForGridState, []);
-    localStorage.setItem('lockCheckBox', 'false');
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
     this.eventService.pageChange(-1); // -1 = deselect all
+  }
+
+  // TODO
+  // tsg button click
+  onTag() {
+    //
+  }
+
+  // TODO
+  // delete button click
+  onDelete() {
+    //
+  }
+
+  // TODO
+  // upload configuration button click
+  onUploadConfiguration() {
+    //
+  }
+
+  // TODO
+  // upgrade button click
+  onUpgrade() {
+    //
   }
 }

@@ -15,11 +15,11 @@
   </div>
 
   <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
-    <div class="mr-2" *ngIf="!selectedAll()">
+    <div class="mr-2" *ngIf="!checkSelectedAll()">
       <small class="text-white">{{gridApi.getSelectedRows().length}} <span i18n>items selected</span>  &middot;
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span> ({{totalCount}}) <span i18n>items</span></a></u></strong></small>
     </div>
-    <div class="mr-2" *ngIf="selectedAll()">
+    <div class="mr-2" *ngIf="checkSelectedAll()">
       <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot; 
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Deselect all</span></a></u></strong></small>
     </div>
@@ -42,14 +42,13 @@
     [icons]="icons"
     [pagination]=agGridSettings.pagination
 
-      [paginationPageSize]=agGridSettings.paginationPageSize
-      [multiSortKey]=agGridSettings.multiSortKey
-      [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-      [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-      [frameworkComponents]="frameworkComponents"
-      [cacheBlockSize]=agGridSettings.paginationPageSize
-      [maxBlocksInCache]="1"
-
+    [paginationPageSize]=agGridSettings.paginationPageSize
+    [multiSortKey]=agGridSettings.multiSortKey
+    [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+    [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+    [frameworkComponents]="frameworkComponents"
+    [cacheBlockSize]=agGridSettings.paginationPageSize
+    [maxBlocksInCache]="1"
     [gridOptions]="gridOptions"
     [columnDefs]="columns"
 
@@ -57,13 +56,13 @@
     [rowSelection]=agGridSettings.rowSelection
     [sideBar]="sideBar"
 
-      (selectionChanged)="onSelectionChanged()"
-      (gridReady)="onGridReady($event)"
-      (columnVisible)="onColumnVisible($event)"
-      (toolPanelVisibleChanged)="toolPanelChanged($event)"
-      (paginationChanged)="onPaginationChange($event)"
-      (rowSelected)="onRowSelect($event)"    
-      (firstDataRendered)="onFirstDataRendered($event)"
-      >
+    (selectionChanged)="onSelectionChanged()"
+    (gridReady)="onGridReady($event)"
+    (columnVisible)="onColumnVisible($event)"
+    (toolPanelVisibleChanged)="toolPanelChanged($event)"
+    (paginationChanged)="onPaginationChange($event)"
+    (rowSelected)="onRowSelect($event)"    
+    (firstDataRendered)="onFirstDataRendered($event)"
+    >
     </ag-grid-angular>
 

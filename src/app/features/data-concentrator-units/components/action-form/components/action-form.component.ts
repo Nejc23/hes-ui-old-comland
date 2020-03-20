@@ -34,9 +34,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
 
-    const search = this.gridSettingsSessionStoreService.getGridSearchText(this.sessionNameForGridState);
-    this.form = this.createForm(search);
-    this.insertedValue(search);
+    const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    this.form = this.createForm(search.searchText);
+    this.insertedValue(search.searchText);
   }
 
   insertedValue($event: string) {

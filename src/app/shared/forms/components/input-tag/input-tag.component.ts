@@ -16,6 +16,7 @@ export class InputTagComponent implements OnInit {
   // optional
   @Input() label: string;
   @Input() autocompleteItemsAsObjects: any;
+  @Input() disabled = false;
 
   controlId: string;
   constructor(private formUtils: FormsUtilsService) {

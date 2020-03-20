@@ -4,6 +4,7 @@
     <span *ngIf="required"> *</span>
   </label>
   <kendo-combobox [name]="property"
+    [disabled]="disabled"
     class="form-control"
     isRequired="false"
     [formControlName]="property"
