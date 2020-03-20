@@ -22,6 +22,7 @@ import * as _ from 'lodash';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -348,9 +349,25 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // delete button click
   onDelete() {
     let selectedText = 'all';
+    const object: GridBulkActionRequestParams = {
+      id: [],
+      filter: {
+        statuses: [],
+        types: [],
+        vendor: { id: 0, value: '' },
+        tags: []
+      }
+    };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
       const selectedRows = this.gridApi.getSelectedRows();
+      selectedRows.forEach(element => {
+        object.id.push(element.id);
+      });
+      object.filter = null;
       selectedText = selectedRows ? selectedRows.length : 0;
+    } else {
+      object.filter = this.requestModel.filterModel;
+      object.id = null;
     }
 
     const modalRef = this.modalService.open(ModalConfirmComponent);
@@ -361,11 +378,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
-        const request = this.dataConcentratorUnitsService.deleteDcu({ id: null, filter: null });
+        const request = this.dataConcentratorUnitsService.deleteDcu(object);
         this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
+            this.eventService.pageChange(-1);
             this.gridApi.forEachNode(node => {
               node.setSelected(false);
             });
