@@ -221,8 +221,7 @@ export class DataConcentratorUnitsGridService {
   }
 
   public getCurrentRowIndex(): GridPagination {
-    //DDconst index = this.gridSettingsSessionStoreService.getGridPageIndex(this.sessionNameForGridState);
-    const index = 0;
+    const index = this.getSessionSettingsPageIndex();
     const result: GridPagination = {
       currentPage: 0,
       startRow: 0,
