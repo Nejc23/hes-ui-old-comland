@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuLayout } from '../../consts/data-concentrator-units.const';
+import { dataConcentratorUnits, dcuLayout, bulkDelete } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -20,14 +21,6 @@ export class DataConcentratorUnitsService {
 
   getGridDcuRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', dataConcentratorUnits, param);
-  }
-
-  getGridDcu2(param: any): Observable<any> {
-    return this.repository.makeRequest(this.getGridDcuRequest2(param));
-  }
-
-  getGridDcuRequest2(param: any): HttpRequest<any> {
-    return new HttpRequest('POST', '/api/2', param);
   }
 
   getDcuLayout(): Observable<DcuLayout[]> {
@@ -60,5 +53,13 @@ export class DataConcentratorUnitsService {
 
   createDcuLayoutRequest(payload: DcuLayout): HttpRequest<DcuLayout> {
     return new HttpRequest('POST', dcuLayout, payload as any);
+  }
+
+  deleteDcu(object: GridBulkActionRequestParams): Observable<any> {
+    return this.repository.makeRequest(this.deleteDcuRequest(object));
+  }
+
+  deleteDcuRequest(object: GridBulkActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${bulkDelete}`, object);
   }
 }

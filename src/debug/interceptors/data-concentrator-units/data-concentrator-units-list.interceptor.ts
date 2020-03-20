@@ -58,7 +58,6 @@ export class DataConcentratorUnitsListInterceptor {
   }*/
 
   static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    console.log(request.body);
     let skip = 0;
     let take = 0;
     let sortColId = '';
@@ -102,7 +101,7 @@ export class DataConcentratorUnitsListInterceptor {
   }
 
   static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
-    return new RegExp(`/api/data-concentrator-units`).test(request.url);
+    return new RegExp(`/api/dcu`).test(request.url);
   }
 }
 
