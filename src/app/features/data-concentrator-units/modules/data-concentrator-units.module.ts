@@ -13,6 +13,10 @@ import { GridCellNameComponent } from '../components/grid-custom-components/grid
 import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
+import { GridCellIpComponent } from '../components/grid-custom-components/grid-cell-ip.component';
+import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
+import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
+import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
 
 @NgModule({
   entryComponents: [],
@@ -26,7 +30,11 @@ import { GridCustomFilterComponent } from '../components/grid-custom-components/
     GridCellNameComponent,
     GridCellLastCommunicationComponent,
     GridCellTagsComponent,
-    GridCustomFilterComponent
+    GridCustomFilterComponent,
+    GridCellIpComponent,
+    GridCellVendorComponent,
+    GridCellTypeComponent,
+    GridCellIdNumberComponent
   ], // StringifyDataPipe
   imports: [
     SharedModule,
@@ -40,7 +48,11 @@ import { GridCustomFilterComponent } from '../components/grid-custom-components/
       GridCellNameComponent,
       GridCellLastCommunicationComponent,
       GridCellTagsComponent,
-      GridCustomFilterComponent
+      GridCustomFilterComponent,
+      GridCellIpComponent,
+      GridCellVendorComponent,
+      GridCellTypeComponent,
+      GridCellIdNumberComponent
     ])
   ],
   exports: []

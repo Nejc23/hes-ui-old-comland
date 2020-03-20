@@ -15,6 +15,10 @@ import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
+import { GridCellIpComponent } from '../components/grid-custom-components/grid-cell-ip.component';
+import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
+import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
+import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
 
 @Injectable({
   providedIn: 'root'
@@ -83,10 +87,24 @@ export class DataConcentratorUnitsGridService {
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent'
       },
-      { field: 'type', headerName: this.i18n('Type'), pinned: false, sortable: true, filter: false },
-      { field: 'vendor', headerName: this.i18n('Vendor'), pinned: false, sortable: true, filter: false },
-      { field: 'idNumber', headerName: this.i18n('ID'), pinned: false, sortable: true, filter: false },
-      { field: 'ip', headerName: this.i18n('IP'), pinned: false, sortable: true, filter: false },
+      { field: 'type', headerName: this.i18n('Type'), pinned: false, sortable: true, filter: false, cellRenderer: 'gridCellTypeComponent' },
+      {
+        field: 'vendor',
+        headerName: this.i18n('Vendor'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellVendorComponent'
+      },
+      {
+        field: 'idNumber',
+        headerName: this.i18n('ID'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent'
+      },
+      { field: 'ip', headerName: this.i18n('IP'), pinned: false, sortable: true, filter: false, cellRenderer: 'gridCellIpComponent' },
       {
         field: 'lastCommunication',
         headerName: this.i18n('Last communication'),
@@ -108,7 +126,11 @@ export class DataConcentratorUnitsGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellLastCommunicationComponent: GridCellLastCommunicationComponent,
       gridCellTagsComponent: GridCellTagsComponent,
-      gridCustomFilterComponent: GridCustomFilterComponent
+      gridCustomFilterComponent: GridCustomFilterComponent,
+      gridCellIpComponent: GridCellIpComponent,
+      gridCellVendorComponent: GridCellVendorComponent,
+      gridCellTypeComponent: GridCellTypeComponent,
+      gridCellIdNumberComponent: GridCellIdNumberComponent
     };
   }
 
