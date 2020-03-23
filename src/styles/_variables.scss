@@ -273,7 +273,7 @@ $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
 $font-size-base: 1rem !default; // Assumes the html font-size is 14px ; check html in _global.scss
-$font-size-lg: $font-size-base * 1.25 !default;
+$font-size-lg: $font-size-base * 1.15 !default;
 $font-size-sm: $font-size-base * .875 !default;
 
 $font-weight-lighter: lighter !default;

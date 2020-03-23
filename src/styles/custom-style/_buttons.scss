@@ -35,7 +35,25 @@
     line-height: 18.375px;
   }
 
+  &.btn-link {
+    color: $gray-700;
+    font-weight: $font-weight-bold;
+  
+    &:hover {
+      color: $primary;
+    }
+  }
+}
 
+.bg-primary {
+  .btn.btn-link {
+    color: $white;
+    font-weight: $font-weight-bold;
+
+    &:hover {
+      color: $gray-700;
+    }
+  }
 }
 
 
