@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { TagInputComponent } from 'ngx-chips';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-input-tag',
