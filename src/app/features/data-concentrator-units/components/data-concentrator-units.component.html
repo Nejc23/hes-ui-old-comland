@@ -2,7 +2,7 @@
 
   <div class="d-flex align-items-center mb-3">
     <app-header-title></app-header-title>
-    <button class="btn btn-primary btn-round">
+    <button class="btn btn-primary btn-round" (click)="addDcu()">
       <i class="uil uil-plus"></i>
     </button>
     <app-breadcrumb class="ml-auto"></app-breadcrumb>
@@ -20,7 +20,7 @@
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span> ({{totalCount}})</a></u></strong></small>
     </div>
     <div class="mr-3" *ngIf="checkSelectedAll()">
-      <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot; 
+      <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear selected</span></a></u></strong></small>
     </div>
     <!--<button type="button" class="btn btn-light" (click)="onTag()"><span i18n><i class="uil uil-tag-alt"></i></span></button>
@@ -65,7 +65,7 @@
     (columnVisible)="onColumnVisible($event)"
     (toolPanelVisibleChanged)="toolPanelChanged($event)"
     (paginationChanged)="onPaginationChange($event)"
-    (rowSelected)="onRowSelect($event)"    
+    (rowSelected)="onRowSelect($event)"
     (firstDataRendered)="onFirstDataRendered($event)"
     >
     </ag-grid-angular>
