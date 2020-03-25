@@ -31,13 +31,15 @@ export class DataConcentratorUnitsStaticTextService {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
 
-    if ((filterName !== '' && filterName !== undefined) || status || type || vendor || tag) {
-      result = this.i18n('Filtered by: ');
+    if (filterName !== '' && filterName !== undefined) {
+      additionalString = status || type || vendor || tag ? ' · ' : '';
+      result = filterName + additionalString;
+    } else if (status || type || vendor || tag) {
+      result = '';
     }
 
-    if (filterName !== '' && filterName !== undefined) {
-      additionalString = status || type || vendor || tag ? ', ' : '';
-      result = result + filterName + additionalString;
+    if ((filterName !== '' && filterName !== undefined) || status || type || vendor || tag) {
+      result = result + this.i18n('Filtered by: ');
     }
 
     if (status) {
