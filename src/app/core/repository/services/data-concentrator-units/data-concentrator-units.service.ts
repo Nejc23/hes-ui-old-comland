@@ -5,9 +5,10 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuLayout, bulkDelete } from '../../consts/data-concentrator-units.const';
+import { dataConcentratorUnits, dcuLayout, bulkDelete, dcuCreate } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
+import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -61,5 +62,13 @@ export class DataConcentratorUnitsService {
 
   deleteDcuRequest(object: GridBulkActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${bulkDelete}`, object);
+  }
+
+  createDcu(payload: DcuForm): Observable<DcuForm> {
+    return this.repository.makeRequest(this.createDcuRequest(payload));
+  }
+
+  createDcuRequest(payload: DcuForm): HttpRequest<DcuForm> {
+    return new HttpRequest('POST', dcuCreate, payload as any);
   }
 }

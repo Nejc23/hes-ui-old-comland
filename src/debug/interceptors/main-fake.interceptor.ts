@@ -9,6 +9,7 @@ import { UserChangePasswordInterceptor } from './authentication/user-change-pass
 import { UserNewPasswordInterceptor } from './authentication/user-new-password.interceptor';
 import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
 import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
+import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -33,6 +34,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPost(request)) {
               return DcuGridLayoutInterceptor.interceptDcuLayoutPost(request);
+            }
+
+            if (DataConcentratorUnitInterceptor.canInterceptDcuCreatePost(request)) {
+              return DataConcentratorUnitInterceptor.interceptDcuCreatePost(request);
             }
 
             if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPut(request)) {
