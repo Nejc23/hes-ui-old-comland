@@ -41,7 +41,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;
   overlayNoRowsTemplate = this.staticextService.noRecordsFound;
-
+  overlayLoadingTemplate = this.staticextService.loadingData;
   noData = false;
 
   // ---------------------- ag-grid ------------------
@@ -167,6 +167,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.icons = {
       filter: ''
     };
+
     const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
     if (dataFromCookie) {
       params.columnApi.setColumnState(dataFromCookie);
@@ -186,6 +187,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
+          that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
             that.noData = true;
@@ -234,6 +236,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     // console.log(params);
     // this.autoSizeAll(params);
     params.api.sizeColumnsToFit();
+    params.api.showLoadingOverlay();
   }
 
   // ag-grid change visibillity of columns

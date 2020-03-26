@@ -23,6 +23,10 @@ export class DataConcentratorUnitsStaticTextService {
     return this.i18n('No records found. You need to adjust your search or filter parameters.');
   }
 
+  get loadingData() {
+    return this.i18n('Loading data...');
+  }
+
   get noFilterAppliedTekst() {
     return this.i18n('No filter applied');
   }
