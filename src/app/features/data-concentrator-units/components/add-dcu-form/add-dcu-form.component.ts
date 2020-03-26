@@ -9,6 +9,7 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { Observable } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 
 @Component({
   selector: 'app-add-dcu-form',
@@ -23,6 +24,7 @@ export class AddDcuFormComponent implements OnInit {
 
   constructor(
     private codelistService: CodelistRepositoryService,
+    private dcuService: DataConcentratorUnitsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     public i18n: I18n,
@@ -49,9 +51,29 @@ export class AddDcuFormComponent implements OnInit {
     });
   }
 
-  save() {
+  fillData(): DcuForm {
+    const formData: DcuForm = {
+      id: null,
+      name: this.form.get(this.nameProperty).value,
+      idNumber: this.form.get(this.idNumberProperty).value,
+      ip: this.form.get(this.ipProperty).value,
+      tags: this.form.get(this.tagsProperty).value,
+      type: this.form.get(this.typeProperty).value,
+      vendor: this.form.get(this.vendorProperty).value
+    };
+    return formData;
+  }
+
+  save(addNew: boolean) {
     console.log('Save clicked!');
-    // TODO
+    this.formUtils.touchElementsAndValidate(this.form).subscribe(result => {
+      if (result) {
+        this.dcuService.createDcu(this.fillData());
+        if (addNew) {
+          this.form.reset();
+        }
+      }
+    });
   }
 
   cancel() {

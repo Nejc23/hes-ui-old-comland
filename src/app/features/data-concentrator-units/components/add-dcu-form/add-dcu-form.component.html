@@ -8,9 +8,8 @@
       <app-input-text [form]="form" [property]="idNumberProperty" i18n-label label="Id(serial number)"></app-input-text>
       <app-input-text [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
 
-      <app-input-multiselect label="Type" [form]="form" [property]="typeProperty" name="multSelectTypes" [isReadOnly]="false"
-        [options]="dcuTypes$ | async" [inOneRow]="true">
-      </app-input-multiselect>
+      <app-select-input label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async" [disabled]="false">
+      </app-select-input>
 
       <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="false">
       </app-select-input>
@@ -20,7 +19,8 @@
 
       <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-secondary" (click)="cancel()" i18n>Cancel</button>
-        <button type="button" class="btn btn-primary" (click)="save()" i18n>Save</button>
+        <button type="button" class="btn btn-primary" (click)="save(true)" i18n>Save and new</button>
+        <button type="button" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
       </div>
 
     </ng-container>
