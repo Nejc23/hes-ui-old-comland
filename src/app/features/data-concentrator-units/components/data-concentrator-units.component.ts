@@ -23,6 +23,7 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
+import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -434,6 +435,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  addDcu() {
+    const modalRef = this.modalService.open(AddDcuFormComponent);
+    modalRef.result.then().catch(() => {});
   }
 
   // TODO

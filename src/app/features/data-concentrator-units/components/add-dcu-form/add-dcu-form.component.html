@@ -1,0 +1,28 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Add data concentrator unit</div>
+
+  <div modal-body>
+    <ng-container>
+      <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
+      <app-input-text [form]="form" [property]="idNumberProperty" i18n-label label="Id(serial number)"></app-input-text>
+      <app-input-text [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+
+      <app-select-input label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async" [disabled]="false">
+      </app-select-input>
+
+      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="false">
+      </app-select-input>
+
+      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="false">
+      </app-input-tag>
+
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-secondary" (click)="cancel()" i18n>Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="save(true)" i18n>Save and new</button>
+        <button type="button" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
+      </div>
+
+    </ng-container>
+  </div>
+</app-modal-template>
