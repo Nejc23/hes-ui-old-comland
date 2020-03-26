@@ -139,6 +139,9 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.sessionFilter = currentFilter;
     this.gridFilterSessionStoreService.clearGridLayout();
     this.form = this.createForm(null, null);
+
+    // close tool-panel
+    this.params.api.closeToolPanel();
   }
 
   applyButtonClicked() {

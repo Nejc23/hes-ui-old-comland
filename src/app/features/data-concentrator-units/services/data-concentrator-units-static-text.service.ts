@@ -19,6 +19,14 @@ export class DataConcentratorUnitsStaticTextService {
     return this.i18n('N/A');
   }
 
+  get noRecordsFound() {
+    return this.i18n('No records found. You need to adjust your search or filter parameters.');
+  }
+
+  get loadingData() {
+    return this.i18n('Loading data...');
+  }
+
   get noFilterAppliedTekst() {
     return this.i18n('No filter applied');
   }
@@ -31,13 +39,15 @@ export class DataConcentratorUnitsStaticTextService {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
 
-    if ((filterName !== '' && filterName !== undefined) || status || type || vendor || tag) {
-      result = this.i18n('Filtered by: ');
+    if (filterName !== '' && filterName !== undefined) {
+      additionalString = status || type || vendor || tag ? ' · ' : '';
+      result = filterName + additionalString;
+    } else if (status || type || vendor || tag) {
+      result = '';
     }
 
-    if (filterName !== '' && filterName !== undefined) {
-      additionalString = status || type || vendor || tag ? ', ' : '';
-      result = result + filterName + additionalString;
+    if ((filterName !== '' && filterName !== undefined) || status || type || vendor || tag) {
+      result = result + this.i18n('Filtered by: ');
     }
 
     if (status) {

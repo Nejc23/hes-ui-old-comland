@@ -15,7 +15,6 @@ import { TimepickerComponent } from './components/timepicker/timepicker.componen
 import { InputSelectComponent } from './components/input-select/input-select.component';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 import { InputTagComponent } from './components/input-tag/input-tag.component';
-import { TagInputModule } from 'ngx-chips';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { InputsModule } from '@progress/kendo-angular-inputs';
@@ -59,7 +58,7 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
     InputTagComponent,
     InputMultiselectComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, TagInputModule, DropDownsModule, InputsModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {

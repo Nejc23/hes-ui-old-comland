@@ -124,6 +124,8 @@ function searchById(companies, filter) {
   return result;
 }
 
+//const data: DataConcentratorUnitsList[] = [];
+
 const data: DataConcentratorUnitsList[] = [
   {
     id: 30887,

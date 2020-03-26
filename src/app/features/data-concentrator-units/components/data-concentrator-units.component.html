@@ -9,6 +9,7 @@
   </div>
 
   <!-- row total items, selected filter name -->
+  <div *ngIf="!noData">
   <div class="d-flex align-items-center p-2 bg-white grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid">
     <small class="text-secondary">{{totalCount}} <span i18n>items</span> &middot; {{filters}}</small>
     <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
@@ -60,6 +61,9 @@
     [rowSelection]=agGridSettings.rowSelection
     [sideBar]="sideBar"
 
+    [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+    [overlayLoadingTemplate]="overlayLoadingTemplate"
+    
     (selectionChanged)="onSelectionChanged()"
     (gridReady)="onGridReady($event)"
     (columnVisible)="onColumnVisible($event)"
@@ -69,4 +73,9 @@
     (firstDataRendered)="onFirstDataRendered($event)"
     >
     </ag-grid-angular>
-
+  </div>
+  <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height:80vh;">
+      <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
+      <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
+      <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus"><span i18n> Add New</span></i></button></div>
+</div>

@@ -37,11 +37,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   columns = [];
   totalCount = 0;
   filters = '';
-
   private layoutChangeSubscription: Subscription;
 
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;
+  overlayNoRowsTemplate = this.staticextService.noRecordsFound;
+  overlayLoadingTemplate = this.staticextService.loadingData;
+  noData = false;
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -166,6 +168,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.icons = {
       filter: ''
     };
+
     const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
     if (dataFromCookie) {
       params.columnApi.setColumnState(dataFromCookie);
@@ -185,7 +188,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
+          that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
+          if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+            that.noData = true;
+          } else if (data.totalCount === 0) {
+            that.gridApi.showNoRowsOverlay();
+          }
+
           that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
           paramsRow.successCallback(data.data, data.totalCount);
           that.selectRows(that.gridApi);
@@ -197,10 +207,37 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
   // ----------------------- ag-grid set DATASOURCE end --------------------------
 
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private noFilters() {
+    console.log(this.requestModel.filterModel);
+    if (
+      this.requestModel.filterModel == null ||
+      ((this.requestModel.filterModel.statuses === undefined ||
+        this.requestModel.filterModel.statuses.length === 0 ||
+        this.requestModel.filterModel.statuses[0].id === 0) &&
+        (this.requestModel.filterModel.tags === undefined ||
+          this.requestModel.filterModel.tags.length === 0 ||
+          this.requestModel.filterModel.tags[0].id === 0) &&
+        (this.requestModel.filterModel.types === undefined ||
+          this.requestModel.filterModel.types.length === 0 ||
+          this.requestModel.filterModel.types[0] === 0) &&
+        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0))
+    ) {
+      return true;
+    }
+    return false;
+  }
   onFirstDataRendered(params) {
     // console.log(params);
     // this.autoSizeAll(params);
     params.api.sizeColumnsToFit();
+    params.api.showLoadingOverlay();
   }
 
   // ag-grid change visibillity of columns
