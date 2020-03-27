@@ -1,0 +1,35 @@
+.k-icon {
+  font-size: $icon-size;
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 400;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  margin: 0 0.2em;
+  text-align: center;
+
+  &.k-i-arrow-60-down::before,
+  &.k-i-expand-s::before,
+  &.k-i-collapse::before,
+  &.k-i-sarrow-s::before,
+  &.k-i-arrow-s::before {
+    content: "\f107";
+  }
+
+  &.k-i-close::before,
+  &.k-i-x::before {
+    content: "\f00d";
+  }
+
+  &.k-i-calendar::before {
+    content: "\f783";
+  }
+
+  &.k-i-clock::before {
+    content: "\f017";
+  }
+}

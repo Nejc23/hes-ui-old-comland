@@ -3,7 +3,7 @@
   <div class="d-flex align-items-center mb-3">
     <app-header-title></app-header-title>
     <button class="btn btn-primary btn-round" (click)="addDcu()">
-      <i class="uil uil-plus"></i>
+      <i class="far fa-plus"></i>
     </button>
     <app-breadcrumb class="ml-auto"></app-breadcrumb>
   </div>
@@ -24,14 +24,10 @@
       <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear selected</span></a></u></strong></small>
     </div>
-    <!--<button type="button" class="btn btn-light" (click)="onTag()"><span i18n><i class="uil uil-tag-alt"></i></span></button>
-    <button type="button" class="btn btn-light" (click)="onDelete()"><span i18n><i class="uil uil-trash text-danger"></i></span></button>
-    <button type="button" class="btn btn-light" (click)="onUploadConfiguration()"><span i18n>Upload Configuration</span></button>
-    <button type="button" class="btn btn-light" (click)="onUpgrade()"><span i18n>Upgrade</span></button>-->
-    <button type="button" class="btn btn-link" (click)="onDelete()"><i class="fal fa-trash"></i></button>
-    <button type="button" class="btn btn-link" (click)="onTag()"><i class="fal fa-tags"></i></button>
-    <button type="button" class="btn btn-link" (click)="onUpgrade()"><i class="fal fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
-    <button type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="fal fa-cogs"></i><span i18n>Configuration</span></button>
+    <button type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
+    <button type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
+    <button type="button" class="btn btn-link" (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
+    <button type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="far fa-cogs"></i><span i18n>Configuration</span></button>
   </div>
 
   <!-- ag-grid -->

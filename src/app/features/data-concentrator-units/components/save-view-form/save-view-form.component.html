@@ -10,10 +10,11 @@
 
       <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary" (click)="save(true)">
-          <span *ngIf="sessionLayout && sessionLayout.id > 0">Save as New</span>
-          <span *ngIf="!sessionLayout || sessionLayout.id < 1">Save</span>
+          <i class="far fa-save"></i>
+          <span *ngIf="sessionLayout && sessionLayout.id > 0" i18n>Save As New</span>
+          <span *ngIf="!sessionLayout || sessionLayout.id < 1" i18n>Save</span>
         </button>
-        <button type="button" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary" (click)="save(false)" i18n>Update</button>
+        <button type="button" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary" (click)="save(false)"><i class="far fa-sync"></i><span i18n>Update</span></button>
       </div>
       <h4 class="mt-5" i18n>Saved States</h4>
       <div class="py-1 border-bottom" *ngFor="let layoutItem of (dcuLayouts$ | async ); let i = index"
@@ -21,11 +22,10 @@
         <div class="d-flex align-items-center div-height-sm">
           <a id="saved-filters-{{i}}" class="flex-shrink-1" (click)="selectSavedLayoutClicked(i)">{{layoutItem.name}}</a>
           <div class="flex-shrink-0 ml-auto" *ngIf="isButtonVisible(i)">
-            <button type="button" class="btn btn-sm btn-secondary mr-1 ml-2" (click)="selectSavedLayoutClicked(i)"
-              ngbTooltip="Select and apply"><i class="uil uil-check"></i></button>
-            <!-- <button type="button" class="btn btn-sm btn-secondary mr-1" (click)="savedLayoutClicked(i)" ngbTooltip="Select"><i class="uil uil-pen"></i></button> -->
-            <button type="button" class="btn btn-sm btn-danger" (click)="deleteSavedLayoutClicked(i)"
-              ngbTooltip="Delete"><i class="uil uil-trash"></i></button>
+            <button type="button" class="btn btn-sm btn-link mr-1 ml-2" (click)="selectSavedLayoutClicked(i)"
+              ngbTooltip="Apply"><i class="far fa-check"></i></button>
+            <button type="button" class="btn btn-sm btn-link" (click)="deleteSavedLayoutClicked(i)"
+              ngbTooltip="Delete"><i class="far fa-trash text-danger"></i></button>
           </div>
         </div>
       </div>

@@ -1,0 +1,21 @@
+// Customize Dropdown Arrows for Navbar
+.dropdown {
+  .dropdown-toggle {
+    &::after {
+       width: 1rem;
+      text-align: center;
+      float: right;
+      vertical-align: 0;
+      border: 0;
+      font-weight: 400;
+      font-family: "Font Awesome 5 Pro";
+      content: '\f107';
+    }
+  }
+
+  &.show {
+    .dropdown-toggle::after {
+      content: '\f107';
+    }
+  }
+}

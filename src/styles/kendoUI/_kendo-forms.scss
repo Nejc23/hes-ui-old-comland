@@ -1,4 +1,4 @@
-input[type=search] + .uil.uil-search {
+input[type=search]+.far.fa-search {
   position: absolute;
   right: .5rem;
   top: 0;
@@ -6,7 +6,29 @@ input[type=search] + .uil.uil-search {
   line-height: $input-height;
 }
 
-input[type=search]:focus + .uil.uil-search,
-input[type=search]:hover + .uil.uil-search {
+input[type=search]:focus+.far.fa-search,
+input[type=search]:hover+.far.fa-search {
   display: none;
+}
+
+.k-combobox {
+  .k-select {
+    background: none;
+
+    &:hover {
+      background: none;
+      color: $primary;
+    }
+  }
+
+  > :hover .k-select, .k-state-hover .k-select {
+    background: none;
+  }
+}
+
+.k-multiselect-wrap {
+  .k-button {
+    background-image: none;
+    background-color: $gray-100;
+  }
 }

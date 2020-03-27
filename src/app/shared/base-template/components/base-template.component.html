@@ -18,14 +18,14 @@
       <button @navItemsTrigger id="sidebarToggle" class="btn btn-round position-absolute"
         *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
         (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
-        <i class='uil' [ngClass]="{'uil-shrink': !app.layout.isMenuCollapsed, 'uil-arrows-h-alt': app.layout.isMenuCollapsed}"></i>
+        <i class='far' [ngClass]="{'fa-compress-alt': !app.layout.isMenuCollapsed, 'fa-expand-alt': app.layout.isMenuCollapsed}"></i>
       </button>
 
       <div @navItemsTrigger class="nav-items" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle pr-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
-            <i class="uil uil-building mr-2"></i>
+            <i class="far fa-building mr-2"></i>
             <span>{{selectedCompany.value}}</span>
           </a>
           <div class="dropdown-menu ml-3" aria-labelledby="navbarDropdown">
