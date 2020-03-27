@@ -1,3 +1,5 @@
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+
 export interface DcuForm {
   id: number;
   name: string;
@@ -5,5 +7,5 @@ export interface DcuForm {
   ip: string;
   type: number;
   vendor: number;
-  tags: number[];
+  tags: Codelist<number>[];
 }

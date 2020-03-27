@@ -68,6 +68,7 @@ export class AddDcuFormComponent implements OnInit {
     console.log('Save clicked!');
     this.formUtils.touchElementsAndValidate(this.form).subscribe(result => {
       if (result) {
+        // console.log(JSON.stringify(this.form.get(this.tagsProperty).value));
         this.dcuService.createDcu(this.fillData());
         if (addNew) {
           this.form.reset();

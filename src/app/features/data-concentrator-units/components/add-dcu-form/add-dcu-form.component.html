@@ -14,11 +14,11 @@
       <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="false">
       </app-select-input>
 
-      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="false">
+      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="false" [allowCustomValues]="true">
       </app-input-tag>
 
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-secondary" (click)="cancel()" i18n>Cancel</button>
+        <button type="button" class="btn btn-link" (click)="cancel()" i18n>Cancel</button>
         <button type="button" class="btn btn-primary" (click)="save(true)" i18n>Save and new</button>
         <button type="button" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
       </div>

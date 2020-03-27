@@ -18,7 +18,11 @@ export class DataConcentratorUnitInterceptor {
       name: 'My saved filter NEW',
       idNumber: '12345',
       ip: '127.0.0.1',
-      tags: [1, 3, 4, 5],
+      tags: [
+        { id: 1, value: 'tag 1' },
+        { id: 2, value: 'tag 2' },
+        { id: 1, value: 'tag 3' }
+      ],
       type: 3,
       vendor: 1
     };
