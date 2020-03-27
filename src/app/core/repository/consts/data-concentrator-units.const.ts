@@ -1,4 +1,5 @@
 export const dataConcentratorUnits = '/api/dcu';
+export const meterUnits = '/api/meter-units';
 export const dcuLayout = '/api/dcu-layout';
 export const dcuCreate = '/api/dcu-create';
 export const bulkDelete = '/api/dcu-bulk-delete';
