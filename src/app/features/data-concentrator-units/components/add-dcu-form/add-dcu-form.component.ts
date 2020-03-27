@@ -77,6 +77,7 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   cancel() {
+    this.eventService.layoutChange(null);
     this.modal.close();
   }
 

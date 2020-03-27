@@ -87,13 +87,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions();
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: DcuLayout) => {
-        this.requestModel.filterModel.statuses = event.statusesFilter;
-        this.requestModel.filterModel.vendor = event.vendorFilter;
-        this.requestModel.filterModel.types = event.typesFilter;
-        this.requestModel.filterModel.tags = event.tagsFilter;
-        this.gridColumnApi.setColumnState(event.gridLayout);
-        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+        if (event !== null) {
+          this.requestModel.filterModel.statuses = event.statusesFilter;
+          this.requestModel.filterModel.vendor = event.vendorFilter;
+          this.requestModel.filterModel.types = event.typesFilter;
+          this.requestModel.filterModel.tags = event.tagsFilter;
+          this.gridColumnApi.setColumnState(event.gridLayout);
+          this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+          this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+        }
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
