@@ -28,7 +28,10 @@ describe('Pact consumer test', () => {
   const requestBody: DcuForm = {
     id: null,
     name: 'Test DCU 1',
-    tags: [1, 2],
+    tags: [
+      { id: 1, value: 'tag 1' },
+      { id: 2, value: 'tag 2' }
+    ],
     type: 1,
     vendor: 1,
     idNumber: '123456',
@@ -38,7 +41,10 @@ describe('Pact consumer test', () => {
   const responseBody: DcuForm = {
     id: 1,
     name: 'Test DCU 1',
-    tags: [1, 2],
+    tags: [
+      { id: 1, value: 'tag 1' },
+      { id: 2, value: 'tag 2' }
+    ],
     type: 1,
     vendor: 1,
     idNumber: '123456',
