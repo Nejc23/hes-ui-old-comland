@@ -9,11 +9,11 @@ import { PermissionsService } from '../../../core/permissions/services/permissio
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-sidebar',
-  templateUrl: './sidebar.component.html',
+  selector: 'app-sidebar-meter',
+  templateUrl: './sidebar-meter.component.html',
   encapsulation: ViewEncapsulation.None
 })
-export class SidebarComponent implements OnInit {
+export class SidebarMeterComponent implements OnInit {
   @Input() items: Array<SidebarItem> = [];
   public version = '';
 

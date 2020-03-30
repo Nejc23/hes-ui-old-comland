@@ -61,6 +61,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (CodelistInterceptor.canInterceptDcuVendor(request)) {
               return CodelistInterceptor.interceptDcuVendor();
             }
+            if (CodelistInterceptor.canInterceptMeterType(request)) {
+              return CodelistInterceptor.interceptMeterType();
+            }
 
             // authenticate
             if (AuthenticateInterceptor.canInterceptAuthenticateUser(request)) {

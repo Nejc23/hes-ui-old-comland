@@ -13,6 +13,9 @@ import { Codelist } from '../../repository/interfaces/codelists/codelist.interfa
 import { Observable, of } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
+import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { MeterTypeCode, MeterTypeRoute } from '../enums/meter-type.enum';
 
 @Component({
   selector: 'app-base-template',
@@ -30,7 +33,9 @@ export class BaseTemplateComponent implements OnInit {
   public sidenavSelected = 'sidenav-default';
   public version = '';
   public sidebarItems: Array<SidebarItem> = [];
+  public sidebarMeterUnitsItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
+  public submenu = false;
 
   languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
@@ -47,7 +52,9 @@ export class BaseTemplateComponent implements OnInit {
     private cookieService: CookieService,
     @Inject(LOCALE_ID) private locale: string,
     public i18n: I18n,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private codeList: CodelistRepositoryService
   ) {
     this.app = {
       layout: {
@@ -60,6 +67,17 @@ export class BaseTemplateComponent implements OnInit {
     };
     this.getScreenSize();
     this.form = this.createForm();
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        const currentUrl = event.urlAfterRedirects;
+        if (currentUrl.includes('/meterUnits')) {
+          this.submenu = true;
+        } else {
+          this.submenu = false;
+        }
+      }
+    });
   }
 
   @HostListener('window:resize', ['$event'])
@@ -72,6 +90,34 @@ export class BaseTemplateComponent implements OnInit {
     } else {
       this.sidebarItems = this.sidebarService.getSidebarItems();
     }
+
+    // fill submenu for meter units
+    this.sidebarMeterUnitsItems = this.sidebarService.getSidebarMeterUnitsItems();
+    this.fillMeterUnits();
+  }
+
+  fillMeterUnits() {
+    this.codeList.meterTypeCodelist().subscribe(list => {
+      if (list && list.length > 0) {
+        list.forEach(element => {
+          const newElement = {
+            title: this.i18n(element.value),
+            routeLink: '',
+            hasChildren: false,
+            children: []
+          };
+          if (element.value.toLowerCase() === MeterTypeCode.plcg3.toLowerCase()) {
+            newElement.title = this.i18n(element.value);
+            newElement.routeLink = `/${MeterTypeRoute.plcg3}`;
+          } else {
+            newElement.title = this.i18n(element.value);
+            newElement.routeLink = `/${MeterTypeRoute.mbus}`;
+          }
+
+          this.sidebarMeterUnitsItems.push(newElement);
+        });
+      }
+    });
   }
 
   ngOnInit() {

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/functionality-enumerator.model';
 import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { CodelistRepositoryService } from '../../repository/services/codelists/codelist-repository.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
+  private sidebarMeterUnitsItems: Array<SidebarItem> = [];
   public headerTitle = '';
 
   constructor(private i18n: I18n) {
@@ -44,10 +46,37 @@ export class SidebarService {
         children: []
       }
     ];
+
+    this.sidebarMeterUnitsItems = [
+      {
+        title: this.i18n(`Back to main menu`),
+        icon: 'fas fa-arrow-alt-circle-left',
+        routeLink: '/',
+        hasChildren: false,
+        children: []
+      },
+      {
+        title: ``,
+        routeLink: '',
+        hasChildren: false,
+        children: [],
+        isBorder: true
+      },
+      {
+        title: this.i18n(`Overview`),
+        routeLink: '/meterUnits',
+        hasChildren: false,
+        children: []
+      }
+    ];
   }
 
   getSidebarItems() {
     return [...this.sidebarItems];
+  }
+
+  getSidebarMeterUnitsItems() {
+    return [...this.sidebarMeterUnitsItems];
   }
 
   getSidebarItemsMobile() {

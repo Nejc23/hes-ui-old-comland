@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BaseTemplateComponent } from './base-template/components/base-template.component';
 import { SidebarComponent } from './base-template/components/sidebar.component';
+import { SidebarMeterComponent } from './base-template/components/sidebar-meter.component';
 import { SidebarDropdownDirective } from './base-template/directives/sidebar-dropdown.directive';
 import { UserLoggedInfoComponent } from './base-template/components/user-logged-info.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -77,6 +78,7 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
   declarations: [
     BaseTemplateComponent,
     SidebarComponent,
+    SidebarMeterComponent,
     SidebarDropdownDirective,
     UserLoggedInfoComponent,
     ActionPreventerComponent,

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { dcuStatuses, dcuTags, dcuTypes, dcuVendors } from '../../consts/data-concentrator-units.const';
+import { dcuStatuses, dcuTags, dcuTypes, dcuVendors, meterTypes } from '../../consts/data-concentrator-units.const';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +38,12 @@ export class CodelistRepositoryService {
   }
   dcuVendorCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', dcuVendors);
+  }
+
+  meterTypeCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterTypeCodelistRequest());
+  }
+  meterTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', meterTypes);
   }
 }
