@@ -69,15 +69,19 @@ export class AddDcuFormComponent implements OnInit {
 
   save(addNew: boolean) {
     console.log('Save clicked!');
-    this.formUtils.touchElementsAndValidate(this.form).subscribe(result => {
-      if (result) {
-        // console.log(JSON.stringify(this.form.get(this.tagsProperty).value));
-        this.dcuService.createDcu(this.fillData());
-        if (addNew) {
-          this.form.reset();
+
+    const request = this.dcuService.createDcu(this.fillData());
+    const successMessage = this.i18n(`Data Concentration Unit was added successfully`);
+    this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+      result => {
+        if (result) {
+          if (addNew) {
+            this.form.reset();
+          }
         }
-      }
-    });
+      },
+      () => {} // error
+    );
   }
 
   cancel() {
