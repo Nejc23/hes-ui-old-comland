@@ -79,7 +79,7 @@ export class FormsUtilsService {
 
   throwErrorWithToastIfInvalid(form: FormGroup) {
     if (!form.valid) {
-      this.toast.warningToast(this.i18n(`Form not valid`));
+      // this.toast.warningToast(this.i18n(`Form not valid`));
       throw new Error(this.i18n(`invalid form`));
     }
   }

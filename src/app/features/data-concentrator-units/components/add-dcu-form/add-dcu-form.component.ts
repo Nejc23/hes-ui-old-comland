@@ -41,14 +41,17 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   createForm(): FormGroup {
-    return this.formBuilder.group({
-      [this.nameProperty]: ['', Validators.required],
-      [this.idNumberProperty]: ['', Validators.required],
-      [this.ipProperty]: ['', Validators.required],
-      [this.typeProperty]: [null, Validators.required],
-      [this.vendorProperty]: [null, Validators.required],
-      [this.tagsProperty]: [null]
-    });
+    return this.formBuilder.group(
+      {
+        [this.nameProperty]: ['', Validators.required],
+        [this.idNumberProperty]: ['', Validators.required],
+        [this.ipProperty]: ['', Validators.required],
+        [this.typeProperty]: [null, Validators.required],
+        [this.vendorProperty]: [null, Validators.required],
+        [this.tagsProperty]: [null]
+      },
+      { updateOn: 'blur' }
+    );
   }
 
   fillData(): DcuForm {
