@@ -3,6 +3,7 @@ import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/f
 import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { CodelistRepositoryService } from '../../repository/services/codelists/codelist-repository.service';
+import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class SidebarService {
       },
       {
         title: this.i18n(`Meter Units`),
-        routeLink: '/meterUnits',
+        routeLink: '/meterUnits/overview',
         hasChildren: false,
         children: []
       },
@@ -64,7 +65,7 @@ export class SidebarService {
       },
       {
         title: this.i18n(`Overview`),
-        routeLink: '/meterUnits',
+        routeLink: `/${MeterTypeRoute.meterUnits}/overview`,
         hasChildren: false,
         children: []
       }

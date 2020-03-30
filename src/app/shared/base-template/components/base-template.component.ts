@@ -15,7 +15,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
 import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { MeterTypeCode, MeterTypeRoute } from '../enums/meter-type.enum';
+import { MeterTypeRoute } from '../enums/meter-type.enum';
 
 @Component({
   selector: 'app-base-template',
@@ -102,18 +102,10 @@ export class BaseTemplateComponent implements OnInit {
         list.forEach(element => {
           const newElement = {
             title: this.i18n(element.value),
-            routeLink: '',
+            routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
             hasChildren: false,
             children: []
           };
-          if (element.value.toLowerCase() === MeterTypeCode.plcg3.toLowerCase()) {
-            newElement.title = this.i18n(element.value);
-            newElement.routeLink = `/${MeterTypeRoute.plcg3}`;
-          } else {
-            newElement.title = this.i18n(element.value);
-            newElement.routeLink = `/${MeterTypeRoute.mbus}`;
-          }
-
           this.sidebarMeterUnitsItems.push(newElement);
         });
       }

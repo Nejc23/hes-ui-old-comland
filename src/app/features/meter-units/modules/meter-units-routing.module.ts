@@ -2,23 +2,47 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { MeterUnitsComponent } from '../components/meter-units.component';
-import { breadcrumbNameMU } from '../consts/static-text.const';
+import { breadcrumbNameMU, breadcrumbNameMUOverview } from '../consts/static-text.const';
+import { MeterUnitsOverviewComponent } from '../overview/components/meter-units-overview.component';
+import { MeterUnitsTypeComponent } from '../types/components/meter-units-type.component';
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: breadcrumbNameMU,
+      breadcrumb: '',
       permission: FunctionalityEnumerator.dashboard
     },
     children: [
       {
-        path: '',
+        path: 'overview',
+        data: {
+          breadcrumb: breadcrumbNameMU + ' - ' + breadcrumbNameMUOverview
+        },
+        children: [
+          {
+            path: '',
+            data: {
+              breadcrumb: null
+            },
+            component: MeterUnitsOverviewComponent
+          }
+        ]
+      },
+      {
+        path: ':id',
         data: {
           breadcrumb: null
         },
-        component: MeterUnitsComponent
+        children: [
+          {
+            path: '',
+            data: {
+              breadcrumb: null
+            },
+            component: MeterUnitsTypeComponent
+          }
+        ]
       }
     ]
   }
