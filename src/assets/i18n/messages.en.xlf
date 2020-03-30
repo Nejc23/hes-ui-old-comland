@@ -4,15 +4,9 @@
     <body>
       <trans-unit id="6765b4c916060f6bc42d9bb69e80377dbcb5e4e9" datatype="html">
         <source>Login</source><target state="final">Login</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-      </trans-unit><trans-unit id="cc6f14b1eb59b74298e9f4b3711a9efc0841b37d" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">39</context></context-group></trans-unit><trans-unit id="cc6f14b1eb59b74298e9f4b3711a9efc0841b37d" datatype="html">
         <source>Please enter your user name and password to login.</source><target state="final">Please enter your user name and password to login.</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/users/user-login.component.html</context>
@@ -20,91 +14,43 @@
         </context-group>
       </trans-unit><trans-unit id="08c74dc9762957593b91f6eb5d65efdfc975bf48" datatype="html">
         <source>Username</source><target state="final">Username</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-      </trans-unit><trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">32</context></context-group></trans-unit><trans-unit id="c32ef07f8803a223a83ed17024b38e8d82292407" datatype="html">
         <source>Password</source><target state="final">Password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit><trans-unit id="3a8e04b34236be1cb450987973bcb7b33d483e35" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">35</context></context-group></trans-unit><trans-unit id="3a8e04b34236be1cb450987973bcb7b33d483e35" datatype="html">
         <source>Forgot password?</source><target state="final">Forgot password?</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-      </trans-unit><trans-unit id="efaff19a9a2c7f3af986ad67bf14a970340521d1" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">42</context></context-group></trans-unit><trans-unit id="efaff19a9a2c7f3af986ad67bf14a970340521d1" datatype="html">
         <source>Reset your password</source><target state="final">Reset your password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">69</context>
-        </context-group>
-      </trans-unit><trans-unit id="4aa062e5b854749b38dfa16ae0cc405eed484b76" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">48</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">65</context></context-group></trans-unit><trans-unit id="4aa062e5b854749b38dfa16ae0cc405eed484b76" datatype="html">
         <source>Please enter your email to reset account password.</source><target state="final">Please enter your email to reset account password.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit><trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">49</context></context-group></trans-unit><trans-unit id="244aae9346da82b0922506c2d2581373a15641cc" datatype="html">
         <source>Email</source><target state="final">Email</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit><trans-unit id="06c663bf1474713f57551123a46b34318543b67d" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">51</context></context-group></trans-unit><trans-unit id="06c663bf1474713f57551123a46b34318543b67d" datatype="html">
         <source>Reset</source><target state="final">Reset</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">60</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">82</context>
-        </context-group>
-      </trans-unit><trans-unit id="dbf077af2a96d5c6f7576e6d9e69f3a62a74ba3b" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">56</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">78</context></context-group></trans-unit><trans-unit id="dbf077af2a96d5c6f7576e6d9e69f3a62a74ba3b" datatype="html">
         <source>Back to login</source><target state="final">Back to login</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">85</context>
-        </context-group>
-      </trans-unit><trans-unit id="49525831e7cb6916c1dac1492387875fa820b1de" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">59</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">81</context></context-group></trans-unit><trans-unit id="49525831e7cb6916c1dac1492387875fa820b1de" datatype="html">
         <source>Please enter new password.</source><target state="final">Please enter new password.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
-      </trans-unit><trans-unit id="e70e209561583f360b1e9cefd2cbb1fe434b6229" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">66</context></context-group></trans-unit><trans-unit id="e70e209561583f360b1e9cefd2cbb1fe434b6229" datatype="html">
         <source>New password</source><target state="final">New password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">72</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit><trans-unit id="7f3bdcce4b2e8c37cd7f0f6c92ef8cff34b039b8" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context><context context-type="linenumber">15</context></context-group></trans-unit><trans-unit id="7f3bdcce4b2e8c37cd7f0f6c92ef8cff34b039b8" datatype="html">
         <source>Confirm password</source><target state="final">Confirm password</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/user-login.component.html</context>
-          <context context-type="linenumber">77</context>
-        </context-group>
-      </trans-unit><trans-unit id="ngb.alert.close" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/users/user-login.component.html</context><context context-type="linenumber">73</context></context-group></trans-unit><trans-unit id="ngb.alert.close" datatype="html">
         <source>Close</source><target state="final">Close</target>
         <context-group purpose="location">
           <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/alert/alert.d.ts</context>
@@ -306,14 +252,6 @@
           <context context-type="sourcefile">../node_modules/@ng-bootstrap/ng-bootstrap/toast/toast.d.ts</context>
           <context context-type="linenumber">8</context>
         </context-group>
-      </trans-unit><trans-unit id="364ea4b54e24b486c97f723ac7487fe6a8067875" datatype="html">
-        <source>Select an option
-    </source><target state="final">Select an option
-    </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/forms/components/select-input/select-input.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
       </trans-unit><trans-unit id="50cad3551cc6c9dc140fd494f8445f114498b487" datatype="html">
         <source>Not
             selected...</source><target state="final">Not
@@ -330,75 +268,108 @@
         </context-group>
       </trans-unit><trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source><target state="final">Cancel</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">42</context></context-group></trans-unit><trans-unit id="d229c742a0f872e20ae0ed39f0c69eb5fe10db93" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{btnConfirmText}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{btnConfirmText}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit><trans-unit id="873b72903b1858a9cd6c8967521030b4d7d1435b" datatype="html">
+        <source>State</source><target state="final">State</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit><trans-unit id="d1be98abd51d1e90017bac27f3d95e140b75f886" datatype="html">
+        <source>Do you like the current view?</source><target state="final">Do you like the current view?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit><trans-unit id="a3fe1cdcc5c862f6ced8613981b6dbd95e34e647" datatype="html">
+        <source>Save set filters, column order/size, and use it later.</source><target state="final">Save set filters, column order/size, and use it later.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context>
+          <context context-type="linenumber">8</context>
+        </context-group>
+      </trans-unit><trans-unit id="13e9ceffc23df2b698c07e605c14c786578f2bfa" datatype="html">
+        <source>Save As New</source><target state="final">Save As New</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context>
+          <context context-type="linenumber">14</context>
         </context-group>
       </trans-unit><trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
         <source>Confirm</source><target state="final">Confirm</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/modals/components/modal-confirm.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
+        <source>Delete</source><target state="final">Delete</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit><trans-unit id="356912f7a617c02e61c58aed762551352f8fd858" datatype="html">
-        <source>Widget settings</source><target state="final">Widget settings</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-widget-setting.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-      </trans-unit><trans-unit id="2a62a59d9424e9e869061ebf3e8f8b8f95411571" datatype="html">
-        <source>
-      Save
-    </source><target state="final">
-      Save
-    </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-widget-setting.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit><trans-unit id="70e458b2d86d53bd9aca459d45328321e776af15" datatype="html">
-        <source>Powerline</source><target state="final">Powerline</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
-          <context context-type="linenumber">3</context>
+          <context context-type="sourcefile">src/app/shared/modals/components/modal-confirm.component.ts</context>
+          <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit><trans-unit id="99ee4faa69cd2ea8e3678c1f557c0ff1f05aae46" datatype="html">
         <source>Clear</source><target state="final">Clear</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">19</context></context-group></trans-unit><trans-unit id="c2d0ac9f528bbd5f53fd34269fde8b59e029621b" datatype="html">
+        <source>Apply</source><target state="final">Apply</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-custom-filter.component.html</context>
+          <context context-type="linenumber">20</context>
         </context-group>
-      </trans-unit><trans-unit id="dd11d47b3121bfef1cc17fdded280a318547ffd8" datatype="html">
-        <source>
-        If you want to display cumulated data on powerline leave device empty
-      </source><target state="final">
-        If you want to display cumulated data on powerline leave device empty
-      </target>
+      </trans-unit><trans-unit id="064ce5140698af55532d5c8c6355e4605d2bcc1b" datatype="html">
+        <source>items</source><target state="final">items</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-      </trans-unit><trans-unit id="ea64d4177bd648e1a20c92669e6857762b811d8c" datatype="html">
-        <source>Device</source><target state="final">Device</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-      </trans-unit><trans-unit id="f56efaea7b87c377f6c4af231332cfff588bd6ca" datatype="html">
-        <source>
-        This will increase widget size to 3x2
-      </source><target state="final">
-        This will increase widget size to 3x2
-      </target>
+      </trans-unit><trans-unit id="74eb7e648efecb139162dcb0d33129e16760918d" datatype="html">
+        <source>items selected</source><target state="final">items selected</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">20</context>
         </context-group>
-      </trans-unit><trans-unit id="2f13c82d3e8abf69741907e72cb85377564f7d5f" datatype="html">
-        <source>Display history graph</source><target state="final">Display history graph</target>
+      </trans-unit><trans-unit id="b463541a7e303aa4d0b1102eaff8afbaf34e7a74" datatype="html">
+        <source>Select all</source><target state="final">Select all</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/widget-settings/default-form/default-settings-form.component.html</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit><trans-unit id="40d3b2127388b0eb08226557eb03c4458c6b9da5" datatype="html">
+        <source>All (<x id="INTERPOLATION" equiv-text="{{totalCount}}"/>) items selected</source><target state="final">All (<x id="INTERPOLATION" equiv-text="{{totalCount}}"/>) items selected</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit><trans-unit id="190222269c0ab56f6f5520310ea6ca6ffa9bc26c" datatype="html">
+        <source>Clear selected</source><target state="final">Clear selected</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
           <context context-type="linenumber">25</context>
+        </context-group>
+      </trans-unit><trans-unit id="f147d0f7f965cccee2e77294cba8e1b88021fa08" datatype="html">
+        <source>Upgrade</source><target state="final">Upgrade</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit><trans-unit id="4a41f824a35ba01d5bd7be61aa06b3e8145209d0" datatype="html">
+        <source>Configuration</source><target state="final">Configuration</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+      </trans-unit><trans-unit id="1256ac2bfeda1377d5305f537bd2d657fa68f939" datatype="html">
+        <source>You have no Data Concentrator Units yet!</source><target state="final">You have no Data Concentrator Units yet!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">75</context>
+        </context-group>
+      </trans-unit><trans-unit id="3be618bc468e32e58ca455c0769f5df7736673d4" datatype="html">
+        <source> Add New</source><target state="final"> Add New</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
+          <context context-type="linenumber">76</context>
         </context-group>
       </trans-unit><trans-unit id="739516c2ca75843d5aec9cf0e6b3e4335c4227b9" datatype="html">
         <source>Change password</source><target state="final">Change password</target>
@@ -424,17 +395,26 @@
         </context-group>
       </trans-unit><trans-unit id="52c9a103b812f258bcddc3d90a6e3f46871d25fe" datatype="html">
         <source>Save</source><target state="final">Save</target>
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context><context context-type="linenumber">32</context></context-group></trans-unit><trans-unit id="047f50bc5b5d17b5bec0196355953e1a5c590ddb" datatype="html">
+        <source>Update</source><target state="final">Update</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context>
-          <context context-type="linenumber">32</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context>
+          <context context-type="linenumber">17</context>
         </context-group>
+      </trans-unit><trans-unit id="8b170bdac5e706352989bba974eaff60109a617b" datatype="html">
+        <source>Saved States</source><target state="final">Saved States</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context>
+          <context context-type="linenumber">19</context>
         </context-group>
+      </trans-unit><trans-unit id="deb3e9e92c061d8b6cfab1a88ef49072c4813e6a" datatype="html">
+        <source>Add Data Concentrator Unit</source><target state="final">Add Data Concentrator Unit</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">50</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context>
+          <context context-type="linenumber">3</context>
         </context-group>
       </trans-unit><trans-unit id="1c53b0584606e14586c622941651289e8db27cf6" datatype="html">
         <source>
@@ -570,755 +550,29 @@
         </context-group>
         <note priority="1" from="description">The title for the **Decrement** button in the NumericTextBox</note>
         <note priority="1" from="meaning">kendo.numerictextbox.decrement</note>
-      </trans-unit><trans-unit id="2df64767cd895a8fabe3e18b94b5b6b6f9e2e3f0" datatype="html">
-        <source>TODAY</source><target state="final">TODAY</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/calendar/calendar.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.calendar.today</note>
-      </trans-unit><trans-unit id="a55944f9de69e7cc86b91200fe96f980a947d704" datatype="html">
-        <source>Increase value</source><target state="final">Increase value</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/dateinput/dateinput.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The label for the **Increment** button in the DateInput</note>
-        <note priority="1" from="meaning">kendo.dateinput.increment</note>
-      </trans-unit><trans-unit id="0eded761107e6dad120997006a7f915bade9b15c" datatype="html">
-        <source>Decrease value</source><target state="final">Decrease value</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/dateinput/dateinput.component.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">The label for the **Decrement** button in the DateInput</note>
-        <note priority="1" from="meaning">kendo.dateinput.decrement</note>
-      </trans-unit><trans-unit id="91a84f2d4871dbe7e90d84865d4a4d83c8ae041e" datatype="html">
-        <source>TODAY</source><target state="final">TODAY</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datepicker/datepicker.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.datepicker.today</note>
-      </trans-unit><trans-unit id="f6c28c2d80dbe993c4b33f4dc4010364f41cc2ae" datatype="html">
-        <source>Toggle calendar</source><target state="final">Toggle calendar</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datepicker/datepicker.component.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">The label for the toggle button in the datepicker component</note>
-        <note priority="1" from="meaning">kendo.datepicker.toggle</note>
-      </trans-unit><trans-unit id="4c3bf42192220c7611c09ece1c5de14855139dd0" datatype="html">
-        <source>Set</source><target state="final">Set</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The Accept button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.accept</note>
-      </trans-unit><trans-unit id="93c2a9c3aa49f56e452c0aecbaabe3bb33fa4222" datatype="html">
-        <source>Set time</source><target state="final">Set time</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Accept button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.acceptLabel</note>
-      </trans-unit><trans-unit id="132eefca16bd41d489b4647724b91e93793603aa" datatype="html">
-        <source>Cancel</source><target state="final">Cancel</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <note priority="1" from="description">The Cancel button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancel</note>
-      </trans-unit><trans-unit id="2cf6f4ca4470810944b4016c9b6f87943d3390ab" datatype="html">
-        <source>Cancel changes</source><target state="final">Cancel changes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Cancel button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancelLabel</note>
-      </trans-unit><trans-unit id="bbc99bb74ae75a503bd813aad0c7253d3553e923" datatype="html">
-        <source>Now</source><target state="final">Now</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <note priority="1" from="description">The Now button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.now</note>
-      </trans-unit><trans-unit id="df1a696f318275aa934e27850920889d494c2740" datatype="html">
-        <source>Select now</source><target state="final">Select now</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Now button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.nowLabel</note>
-      </trans-unit><trans-unit id="f2c196786ed2d3ecb2369750c36aac9a4053fb30" datatype="html">
-        <source>Toggle time list</source><target state="final">Toggle time list</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timepicker.component.d.ts</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-        <note priority="1" from="description">The label for the toggle button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.toggle</note>
-      </trans-unit><trans-unit id="5bb17f81ae8dbc109499ce3792afffa6b7cef855" datatype="html">
-        <source>Date</source><target state="final">Date</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">6</context>
-        </context-group>
-        <note priority="1" from="description">The Date tab text in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.dateTab</note>
-      </trans-unit><trans-unit id="2a400c9e364a4c6d83ac39b5513c962805db54b2" datatype="html">
-        <source>Date tab</source><target state="final">Date tab</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Date tab in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.dateTabLabel</note>
-      </trans-unit><trans-unit id="e9b2b760a6916040e7520a9a2926d65de175944d" datatype="html">
-        <source>Time</source><target state="final">Time</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-        <note priority="1" from="description">The Time tab text in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.timeTab</note>
-      </trans-unit><trans-unit id="13bf7e3a1036140119732c6d5952f7a20c22999e" datatype="html">
-        <source>Time tab</source><target state="final">Time tab</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Time tab in the datetimepicker popup header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.timeTabLabel</note>
-      </trans-unit><trans-unit id="60296a83f0d3e3d07aaba87c4f8e91b0aca3c22a" datatype="html">
-        <source>Toggle popup</source><target state="final">Toggle popup</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-        <note priority="1" from="description">The label for the toggle button in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.toggle</note>
-      </trans-unit><trans-unit id="4359b59db7ded88e106ada877e744c71b188f8f9" datatype="html">
-        <source>Set</source><target state="final">Set</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-        <note priority="1" from="description">The Accept button text in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.accept</note>
-      </trans-unit><trans-unit id="cbea4571cca81ad9767a6b29f0287d1f3f6372dc" datatype="html">
-        <source>Set</source><target state="final">Set</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Accept button in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.acceptLabel</note>
-      </trans-unit><trans-unit id="17ab795d6f7527dd962a309759ca58cb4edd7e52" datatype="html">
-        <source>Cancel</source><target state="final">Cancel</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">27</context>
-        </context-group>
-        <note priority="1" from="description">The Cancel button text in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.cancel</note>
-      </trans-unit><trans-unit id="ba26795ab9f4c21d66b17549ba854a96fcdac1f9" datatype="html">
-        <source>Cancel</source><target state="final">Cancel</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Cancel button in the datetimepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.cancelLabel</note>
-      </trans-unit><trans-unit id="7172e7e9a1741f6b63439ec89e498c995cb23b0d" datatype="html">
-        <source>NOW</source><target state="final">NOW</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">33</context>
-        </context-group>
-        <note priority="1" from="description">The Now button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.now</note>
-      </trans-unit><trans-unit id="52d90641b26b1ce4c011cadf0437ce36c1dac1d5" datatype="html">
-        <source>Select now</source><target state="final">Select now</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">36</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Now button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.nowLabel</note>
-      </trans-unit><trans-unit id="7ee30b9ae5918cc544fbd87a4135694397aeefaf" datatype="html">
-        <source>TODAY</source><target state="final">TODAY</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/datetimepicker/datetimepicker.component.d.ts</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.datetimepicker.today</note>
-      </trans-unit><trans-unit id="063d99483243b27bc8282abfb5f2c76877e1112e" datatype="html">
-        <source>TODAY</source><target state="final">TODAY</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/calendar/multiview-calendar.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.today</note>
-      </trans-unit><trans-unit id="e783e2af4828224b846fa92148ea1cc52b21bb13" datatype="html">
-        <source>Navigate to previous view</source><target state="final">Navigate to previous view</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/calendar/multiview-calendar.component.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">The label for the previous button in the Multiview calendar</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.prevButtonTitle</note>
-      </trans-unit><trans-unit id="3e3a529a242f39d22f841c3bd8045ec75b696b7a" datatype="html">
-        <source>Navigate to next view</source><target state="final">Navigate to next view</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/calendar/multiview-calendar.component.d.ts</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
-      </trans-unit><trans-unit id="801811aa1609e3f173c86baa82cee037f75a215f" datatype="html">
-        <source>Set</source><target state="final">Set</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timeselector.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The Accept button text in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.accept</note>
-      </trans-unit><trans-unit id="b4b1e5ac55f0330f6c4e32b866ae4339ad969978" datatype="html">
-        <source>Set time</source><target state="final">Set time</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timeselector.component.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Accept button in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.acceptLabel</note>
-      </trans-unit><trans-unit id="3004d7704ffa6202a3b3925fcea490e486203a3e" datatype="html">
-        <source>Cancel</source><target state="final">Cancel</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timeselector.component.d.ts</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <note priority="1" from="description">The Cancel button text in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.cancel</note>
-      </trans-unit><trans-unit id="08dfbdfffd662371a6ff4c0b6ed82b9faa48143b" datatype="html">
-        <source>Cancel changes</source><target state="final">Cancel changes</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timeselector.component.d.ts</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Cancel button in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.cancelLabel</note>
-      </trans-unit><trans-unit id="98cba1ae36a7bbe15e1bac1837e07922ec109e7d" datatype="html">
-        <source>Now</source><target state="final">Now</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timeselector.component.d.ts</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <note priority="1" from="description">The Now button text in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.now</note>
-      </trans-unit><trans-unit id="08e6a8a51d970609e138950fdd89c5cf201869f3" datatype="html">
-        <source>Select now</source><target state="final">Select now</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-dateinputs/dist/es2015/timepicker/timeselector.component.d.ts</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-        <note priority="1" from="description">The label for the Now button in the timeselector component</note>
-        <note priority="1" from="meaning">kendo.timeselector.nowLabel</note>
-      </trans-unit><trans-unit id="30bcb3a2fbc22fcab6ca805e74b90adb8ba1ae96" datatype="html">
-        <source>Drag a column header and drop it here to group by that column</source><target state="final">Drag a column header and drop it here to group by that column</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
-        <note priority="1" from="description">The label visible in the Grid group panel when it is empty</note>
-        <note priority="1" from="meaning">kendo.grid.groupPanelEmpty</note>
-      </trans-unit><trans-unit id="ff9cfd4bf3e40305db251f2b6961796c0550b4b0" datatype="html">
-        <source>No records available.</source><target state="final">No records available.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-        <note priority="1" from="description">The label visible in the Grid when there are no records</note>
-        <note priority="1" from="meaning">kendo.grid.noRecords</note>
-      </trans-unit><trans-unit id="b405dfc5ee42415daa08d54847d3010de1821111" datatype="html">
-        <source>Go to the first page</source><target state="final">Go to the first page</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">10</context>
-        </context-group>
-        <note priority="1" from="description">The label for the first page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerFirstPage</note>
-      </trans-unit><trans-unit id="47aa4fe05f5a2577d3336971d7c44ce48802b860" datatype="html">
-        <source>Go to the previous page</source><target state="final">Go to the previous page</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-        <note priority="1" from="description">The label for the previous page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerPreviousPage</note>
-      </trans-unit><trans-unit id="90031133fca899b4e491d9fc51128c1a184afb30" datatype="html">
-        <source>Go to the next page</source><target state="final">Go to the next page</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">16</context>
-        </context-group>
-        <note priority="1" from="description">The label for the next page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerNextPage</note>
-      </trans-unit><trans-unit id="fe84f2ea868286ce03e50b6e55558c16d675c753" datatype="html">
-        <source>Go to the last page</source><target state="final">Go to the last page</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">19</context>
-        </context-group>
-        <note priority="1" from="description">The label for the last page button in Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerLastPage</note>
-      </trans-unit><trans-unit id="89c1f616c25bb610824cd8a26473a03921df48bd" datatype="html">
-        <source>Page</source><target state="final">Page</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-        <note priority="1" from="description">The label before the current page number in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerPage</note>
-      </trans-unit><trans-unit id="0c9abe48f5d4bd2cb51846712e41864fc64aad6a" datatype="html">
-        <source>of</source><target state="final">of</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">25</context>
-        </context-group>
-        <note priority="1" from="description">The label before the total pages number in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerOf</note>
-      </trans-unit><trans-unit id="7c1704d11bfb77340485acd891439c2b6c6616ca" datatype="html">
-        <source>items</source><target state="final">items</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">28</context>
-        </context-group>
-        <note priority="1" from="description">The label after the total pages number in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerItems</note>
-      </trans-unit><trans-unit id="3331fe7ec45f299afaa4c1e08ea25c493eda9144" datatype="html">
-        <source>items per page</source><target state="final">items per page</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-        <note priority="1" from="description">The label for the page size chooser in the Grid pager</note>
-        <note priority="1" from="meaning">kendo.grid.pagerItemsPerPage</note>
-      </trans-unit><trans-unit id="21a04b7b090dac60e0449cb6e435b7e879173c75" datatype="html">
-        <source>Filter</source><target state="final">Filter</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">34</context>
-        </context-group>
-        <note priority="1" from="description">The label of the filter cell or icon</note>
-        <note priority="1" from="meaning">kendo.grid.filter</note>
-      </trans-unit><trans-unit id="8b31e1604d10a2f8709dcb1ed5c237e33cffc135" datatype="html">
-        <source>Is equal to</source><target state="final">Is equal to</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-        <note priority="1" from="description">The text of the equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterEqOperator</note>
-      </trans-unit><trans-unit id="d46e14d35d89d2fadf5c852abf5557643510a013" datatype="html">
-        <source>Is not equal to</source><target state="final">Is not equal to</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-        <note priority="1" from="description">The text of the not equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterNotEqOperator</note>
-      </trans-unit><trans-unit id="078c50eb1fe8b2b43fcc40c5e7f4493152310c2f" datatype="html">
-        <source>Is null</source><target state="final">Is null</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-        <note priority="1" from="description">The text of the is null filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsNullOperator</note>
-      </trans-unit><trans-unit id="70b39eeaf2674907b2e59b414baf17e032b464dc" datatype="html">
-        <source>Is not null</source><target state="final">Is not null</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <note priority="1" from="description">The text of the is not null filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsNotNullOperator</note>
-      </trans-unit><trans-unit id="a4e77e444b4e9b63851ac818e20136212b06c750" datatype="html">
-        <source>Is empty</source><target state="final">Is empty</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">49</context>
-        </context-group>
-        <note priority="1" from="description">The text of the is empty filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsEmptyOperator</note>
-      </trans-unit><trans-unit id="dee7553c341248e90aef4a8e7438c52e667e68be" datatype="html">
-        <source>Is not empty</source><target state="final">Is not empty</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">52</context>
-        </context-group>
-        <note priority="1" from="description">The text of the is not empty filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsNotEmptyOperator</note>
-      </trans-unit><trans-unit id="da43b363b636156e3ccdbb64a0788bdeab51e992" datatype="html">
-        <source>Starts with</source><target state="final">Starts with</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-        <note priority="1" from="description">The text of the starts with filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterStartsWithOperator</note>
-      </trans-unit><trans-unit id="5b568a46d2e34ebde7dd53a7e599cbbb7dc6bae1" datatype="html">
-        <source>Contains</source><target state="final">Contains</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">58</context>
-        </context-group>
-        <note priority="1" from="description">The text of the contains filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterContainsOperator</note>
-      </trans-unit><trans-unit id="be06aa4fde7fa722c9de5a45f241ff595071d718" datatype="html">
-        <source>Does not contain</source><target state="final">Does not contain</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">61</context>
-        </context-group>
-        <note priority="1" from="description">The text of the does not contain filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterNotContainsOperator</note>
-      </trans-unit><trans-unit id="a54b2ecffb41f0603ceedc7ea5a40b7d130e2fa1" datatype="html">
-        <source>Ends with</source><target state="final">Ends with</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">64</context>
-        </context-group>
-        <note priority="1" from="description">The text of the ends with filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterEndsWithOperator</note>
-      </trans-unit><trans-unit id="68471603db771d0304d02fe086da9701c16911c3" datatype="html">
-        <source>Is greater than or equal to</source><target state="final">Is greater than or equal to</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">67</context>
-        </context-group>
-        <note priority="1" from="description">The text of the greater than or equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterGteOperator</note>
-      </trans-unit><trans-unit id="ae68acc0e18252a348bdfb32112996d81e5305de" datatype="html">
-        <source>Is greater than</source><target state="final">Is greater than</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">70</context>
-        </context-group>
-        <note priority="1" from="description">The text of the greater than filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterGtOperator</note>
-      </trans-unit><trans-unit id="e48d50a6422c616a00b95025adc5283aff4fa8cb" datatype="html">
-        <source>Is less than or equal to</source><target state="final">Is less than or equal to</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">73</context>
-        </context-group>
-        <note priority="1" from="description">The text of the less than or equal filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterLteOperator</note>
-      </trans-unit><trans-unit id="c4d58f0e509cb7e37014715dd91546a724210d70" datatype="html">
-        <source>Is less than</source><target state="final">Is less than</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">76</context>
-        </context-group>
-        <note priority="1" from="description">The text of the less than filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterLtOperator</note>
-      </trans-unit><trans-unit id="d5f1e9028bc60c30e8f8e0f9cfeb872512446cea" datatype="html">
-        <source>Is True</source><target state="final">Is True</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">79</context>
-        </context-group>
-        <note priority="1" from="description">The text of the IsTrue boolean filter option</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsTrue</note>
-      </trans-unit><trans-unit id="6d34731320e2536fd78f4a9e08f0b8dcd01edf3d" datatype="html">
-        <source>Is False</source><target state="final">Is False</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">82</context>
-        </context-group>
-        <note priority="1" from="description">The text of the IsFalse boolean filter option</note>
-        <note priority="1" from="meaning">kendo.grid.filterIsFalse</note>
-      </trans-unit><trans-unit id="4da1456a62bafe2614ed2bc05a2c790a64a4dd0b" datatype="html">
-        <source>(All)</source><target state="final">(All)</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">85</context>
-        </context-group>
-        <note priority="1" from="description">The text of the (All) boolean filter option</note>
-        <note priority="1" from="meaning">kendo.grid.filterBooleanAll</note>
-      </trans-unit><trans-unit id="d7dac1bbc2372d578a9d2bca099de766043aed7e" datatype="html">
-        <source>Is after or equal to</source><target state="final">Is after or equal to</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">88</context>
-        </context-group>
-        <note priority="1" from="description">The text of the after or equal date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterAfterOrEqualOperator</note>
-      </trans-unit><trans-unit id="bff777df0d0831cc02679227422fab4ef2763fa9" datatype="html">
-        <source>Is after</source><target state="final">Is after</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">91</context>
-        </context-group>
-        <note priority="1" from="description">The text of the after date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterAfterOperator</note>
-      </trans-unit><trans-unit id="35ef5cf367670f15432c9f8761bc85fbdb2b1830" datatype="html">
-        <source>Is before</source><target state="final">Is before</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">94</context>
-        </context-group>
-        <note priority="1" from="description">The text of the before date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterBeforeOperator</note>
-      </trans-unit><trans-unit id="27a6b29ffbc1eb498de8d7af20051461a2e842ec" datatype="html">
-        <source>Is before or equal to</source><target state="final">Is before or equal to</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">97</context>
-        </context-group>
-        <note priority="1" from="description">The text of the before or equal date filter operator</note>
-        <note priority="1" from="meaning">kendo.grid.filterBeforeOrEqualOperator</note>
-      </trans-unit><trans-unit id="4f1c08d0b056646cdb668da669e2e15825adfe4d" datatype="html">
-        <source>Filter</source><target state="final">Filter</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">100</context>
-        </context-group>
-        <note priority="1" from="description">The text of the filter button</note>
-        <note priority="1" from="meaning">kendo.grid.filterFilterButton</note>
-      </trans-unit><trans-unit id="06e4e4dadede6f91f261cdbb7fb174246a135238" datatype="html">
-        <source>Clear</source><target state="final">Clear</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">103</context>
-        </context-group>
-        <note priority="1" from="description">The text of the clear filter button</note>
-        <note priority="1" from="meaning">kendo.grid.filterClearButton</note>
-      </trans-unit><trans-unit id="f73fbcc2f813d469e4a34491950ca01ea1ac8f60" datatype="html">
-        <source>And</source><target state="final">And</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">106</context>
-        </context-group>
-        <note priority="1" from="description">The text of the And filter logic</note>
-        <note priority="1" from="meaning">kendo.grid.filterAndLogic</note>
-      </trans-unit><trans-unit id="04e64780de0fc1c3a9986997e0808ec53a5f2a63" datatype="html">
-        <source>Or</source><target state="final">Or</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">109</context>
-        </context-group>
-        <note priority="1" from="description">The text of the Or filter logic</note>
-        <note priority="1" from="meaning">kendo.grid.filterOrLogic</note>
-      </trans-unit><trans-unit id="781c049cc69efc30bc8053af9ace3cb4b04bd438" datatype="html">
-        <source>Loading</source><target state="final">Loading</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">112</context>
-        </context-group>
-        <note priority="1" from="description">The loading text</note>
-        <note priority="1" from="meaning">kendo.grid.loading</note>
-      </trans-unit><trans-unit id="3596c6b21d39223adc5c352daec9938474a8cc0d" datatype="html">
-        <source>Column Menu</source><target state="final">Column Menu</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
-        <note priority="1" from="description">The title of the column menu icon</note>
-        <note priority="1" from="meaning">kendo.grid.columnMenu</note>
-      </trans-unit><trans-unit id="9b841399fbb3d81f2401f98b4f4763834b72a1e5" datatype="html">
-        <source>Columns</source><target state="final">Columns</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">118</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu for the columns item</note>
-        <note priority="1" from="meaning">kendo.grid.columns</note>
-      </trans-unit><trans-unit id="f356cae509dec3dc1b7156326b9a0328a79c62a8" datatype="html">
-        <source>Lock</source><target state="final">Lock</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">121</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu for the lock item</note>
-        <note priority="1" from="meaning">kendo.grid.lock</note>
-      </trans-unit><trans-unit id="f33355540003068372e39ba7f3def794869ea9f8" datatype="html">
-        <source>Unlock</source><target state="final">Unlock</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">124</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu for the unlock item</note>
-        <note priority="1" from="meaning">kendo.grid.unlock</note>
-      </trans-unit><trans-unit id="a692ba271be066ce379f942ff67094e1ea989f4c" datatype="html">
-        <source>Sortable</source><target state="final">Sortable</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">127</context>
-        </context-group>
-        <note priority="1" from="description">The label of the sort icon</note>
-        <note priority="1" from="meaning">kendo.grid.sortable</note>
-      </trans-unit><trans-unit id="96beffd8446c5455f3bbdc313c946db32df7dcc2" datatype="html">
-        <source>Sort Ascending</source><target state="final">Sort Ascending</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">130</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu for the sort ascending item</note>
-        <note priority="1" from="meaning">kendo.grid.sortAscending</note>
-      </trans-unit><trans-unit id="208d0538d4c2537a1cbf456941e34a2884053d52" datatype="html">
-        <source>Sort Descending</source><target state="final">Sort Descending</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">133</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu for the sort descending item</note>
-        <note priority="1" from="meaning">kendo.grid.sortDescending</note>
-      </trans-unit><trans-unit id="947c64329461efd9f8a9aa2c51acbbd099170aa5" datatype="html">
-        <source>Sorted Ascending</source><target state="final">Sorted Ascending</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">136</context>
-        </context-group>
-        <note priority="1" from="description">The status announcement when a column is sorted ascending</note>
-        <note priority="1" from="meaning">kendo.grid.sortedAscending</note>
-      </trans-unit><trans-unit id="092a688d1b2b6d873bdc29beaaf43c3f45336581" datatype="html">
-        <source>Sorted Descending</source><target state="final">Sorted Descending</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">139</context>
-        </context-group>
-        <note priority="1" from="description">The status announcement when a column is sorted descending</note>
-        <note priority="1" from="meaning">kendo.grid.sortedDescending</note>
-      </trans-unit><trans-unit id="66e99ea340974022c07c52a6f668f5573e7edab0" datatype="html">
-        <source>Not Sorted</source><target state="final">Not Sorted</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">142</context>
-        </context-group>
-        <note priority="1" from="description">The status announcement when a column is no longer sorted</note>
-        <note priority="1" from="meaning">kendo.grid.sortedDefault</note>
-      </trans-unit><trans-unit id="04600bd6e362cf9da9f7f9c4666eab2c88eb6a90" datatype="html">
-        <source>Apply</source><target state="final">Apply</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">145</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu or column chooser for the columns apply button</note>
-        <note priority="1" from="meaning">kendo.grid.columnsApply</note>
-      </trans-unit><trans-unit id="94d3b472d99994a5cca9930afd4cf0ac2774c382" datatype="html">
-        <source>Reset</source><target state="final">Reset</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">148</context>
-        </context-group>
-        <note priority="1" from="description">The text shown in the column menu or column chooser for the columns reset button</note>
-        <note priority="1" from="meaning">kendo.grid.columnsReset</note>
-      </trans-unit><trans-unit id="ad6629bb6e79235623cfce486ef48087dbe96fb5" datatype="html">
-        <source>Expand Details</source><target state="final">Expand Details</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">151</context>
-        </context-group>
-        <note priority="1" from="description">The title of the expand icon of detail rows.</note>
-        <note priority="1" from="meaning">kendo.grid.detailExpand</note>
-      </trans-unit><trans-unit id="ace0c0a58fbb211e8678efb3bd6ac9bb587144c3" datatype="html">
-        <source>Collapse Details</source><target state="final">Collapse Details</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-grid/dist/es2015/grid.component.d.ts</context>
-          <context context-type="linenumber">154</context>
-        </context-group>
-        <note priority="1" from="description">The title of the collapse icon of detail rows.</note>
-        <note priority="1" from="meaning">kendo.grid.detailCollapse</note>
       </trans-unit><trans-unit id="0616512d3406432c33b4300a8a0060baf0a1c1d3" datatype="html">
         <source>404 - page not exists</source><target state="final">404 - page not exists</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/404/page-404.component.html</context>
           <context context-type="linenumber">1</context>
         </context-group>
-      </trans-unit><trans-unit id="9a66b767726c6345b0593a6c9b54b07ea1ab677f" datatype="html">
-        <source>Data dispalyed is <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/>"/>measured on </source><target state="final">Data dispalyed is <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br/>"/>measured on </target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/widgets/components/grid-widget-current/grid-widget-current.component.html</context>
-          <context context-type="linenumber">35</context>
-        </context-group>
-      </trans-unit><trans-unit id="ce26a52338fb77eae16df4b717c0322dd4efcec4" datatype="html">
-        <source>Dashboard settings</source><target state="final">Dashboard settings</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-      </trans-unit><trans-unit id="4886a91e16648682f3386b7078a85d56e5c1a18f" datatype="html">
-        <source>Dashboard name</source><target state="final">Dashboard name</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
-          <context context-type="linenumber">8</context>
-        </context-group>
-      </trans-unit><trans-unit id="c9246fb3c7364200f947d1fa05473d4803276c3c" datatype="html">
-        <source>Automatically refresh the dashboard every minute</source><target state="final">Automatically refresh the dashboard every minute</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-settings.component.html</context>
-          <context context-type="linenumber">15</context>
-        </context-group>
-      </trans-unit><trans-unit id="ca88c0e163e8d32ae5f311af4a20a89afec88aac" datatype="html">
-        <source>It looks you do not have any dasboard created!</source><target state="final">It looks you do not have any dasboard created!</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard.component.html</context>
-          <context context-type="linenumber">12</context>
-        </context-group>
-      </trans-unit><trans-unit id="b971c0d64d643d065eb79773f7e011c8514f7043" datatype="html">
-        <source>Add first dashboard</source><target state="final">Add first dashboard</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard.component.html</context>
-          <context context-type="linenumber">14</context>
-        </context-group>
-      </trans-unit><trans-unit id="b39120cb951943dd56990e76cbc750493b3bdfad" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="{{totalCount}}"/> items · <x id="INTERPOLATION_1" equiv-text="{{filters}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{totalCount}}"/> items · <x id="INTERPOLATION_1" equiv-text="{{filters}}"/></target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit><trans-unit id="421038d95aac5a01d1f6707d1eb7cfe06f706f4d" datatype="html">
-        <source>Add or import DCU</source><target state="final">Add or import DCU</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
-          <context context-type="linenumber">115</context>
-        </context-group>
       </trans-unit><trans-unit id="1f069e83a7b9a3d05d1836777172eb986775c430" datatype="html">
         <source>Search data</source><target state="final">Search data</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">10</context></context-group></trans-unit><trans-unit id="6bf889110c9f0d9a27f05544ef0f2466a5abd889" datatype="html">
+        <source>Apply saved state or save new</source><target state="final">Apply saved state or save new</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context>
-          <context context-type="linenumber">20</context>
-        </context-group>
-      </trans-unit><trans-unit id="cdcc2fb9c903c66da8871772fcea46419ceba196" datatype="html">
-        <source>Filter results</source><target state="final">Filter results</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context>
-          <context context-type="linenumber">21</context>
-        </context-group>
-      </trans-unit><trans-unit id="d6d24982e41519a413d21548e7e21db469b6c5b6" datatype="html">
-        <source>Manage columns</source><target state="final">Manage columns</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context>
-          <context context-type="linenumber">22</context>
+          <context context-type="linenumber">11</context>
         </context-group>
       </trans-unit><trans-unit id="6e54bd4595104df4acfc48e99d818bf93fd0aa2a" datatype="html">
         <source>Refresh grid</source><target state="final">Refresh grid</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">12</context></context-group></trans-unit><trans-unit id="73866f7a960486a75966b19d63f68d11f240ac0e" datatype="html">
+        <source>Export in excel</source><target state="final">Export in excel</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context>
-          <context context-type="linenumber">23</context>
+          <context context-type="linenumber">13</context>
         </context-group>
       </trans-unit><trans-unit id="f058f4543f99ef3df799dbf3b579b67d2287317d" datatype="html">
         <source>Data Concentrator Units</source><target state="final">Data Concentrator Units</target>
@@ -1341,123 +595,50 @@
           <context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
-      </trans-unit><trans-unit id="0b23ff6504f99d6913b55a749daa4914b495b1ea" datatype="html">
-        <source>Sample Devextreme</source><target state="final">Sample Devextreme</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="121cc5391cd2a5115bc2b3160379ee5b36cd7716" datatype="html">
-        <source>Settings</source><target state="final">Settings</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit><trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
-        <source>Edit</source><target state="final">Edit</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
-          <context context-type="linenumber">13</context>
-        </context-group>
-      </trans-unit><trans-unit id="c8d1785038d461ec66b5799db21864182b35900a" datatype="html">
-        <source>Refresh</source><target state="final">Refresh</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
-          <context context-type="linenumber">17</context>
-        </context-group>
-      </trans-unit><trans-unit id="4532fc09a07277e1937391a45a514cbba73eff8c" datatype="html">
-        <source>Add, edit, move or resize your widgets</source><target state="final">Add, edit, move or resize your widgets</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
-          <context context-type="linenumber">24</context>
-        </context-group>
-      </trans-unit><trans-unit id="838b4be5c1ed2998ad32d2ab5adc8c082111effa" datatype="html">
-        <source>Done editing</source><target state="final">Done editing</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-controls.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit><trans-unit id="7f549b265193447cc77ad8b4f1b069cd8ba08797" datatype="html">
-        <source>Add widget</source><target state="final">Add widget</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-widget-list.component.html</context>
-          <context context-type="linenumber">2</context>
-        </context-group>
-      </trans-unit><trans-unit id="4c5bb19402c754c05603e7cde8603d3d5ca5d4df" datatype="html">
-        <source>Click to add widget to grid</source><target state="final">Click to add widget to grid</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/dashboard/components/dashboard-widget-list.component.html</context>
-          <context context-type="linenumber">4</context>
-        </context-group>
       </trans-unit><trans-unit id="bb694b49d408265c91c62799c2b3a7e3151c824d" datatype="html">
         <source>Logout</source><target state="final">Logout</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/base-template/components/user-logged-info.component.html</context>
           <context context-type="linenumber">14</context>
         </context-group>
-      </trans-unit><trans-unit id="4d13a9cd5ed3dcee0eab22cb25198d43886942be" datatype="html">
-        <source>Users</source><target state="final">Users</target>
+      </trans-unit><trans-unit id="712ec411f9adf594c3c1a418ca4f833ef5d743a0" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{notAvailableText}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{notAvailableText}}"/></target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-read-status.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-meters.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-last-communication.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-ip.component.html</context>
           <context context-type="linenumber">5</context>
         </context-group>
-      </trans-unit><trans-unit id="ffe89de105359b03ed76c2f9b9e2e4e50fb47734" datatype="html">
-        <source>
-          Sample with client side actions: sort, search, paging
-        </source><target state="final">
-          Sample with client side actions: sort, search, paging
-        </target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
-          <context context-type="linenumber">6</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-vendor.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
-      </trans-unit><trans-unit id="f6755cff4957d5c3c89bafce5651f1b6fa2b1fd9" datatype="html">
-        <source>Add</source><target state="final">Add</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-type.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
-      </trans-unit><trans-unit id="43fa378212aaa5951d78ecdf7583e3c95bc341d8" datatype="html">
-        <source><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/></source><target state="final"><x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/></target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/users.component.html</context>
-          <context context-type="linenumber">27</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-cell-id-number.component.html</context>
+          <context context-type="linenumber">5</context>
         </context-group>
       </trans-unit><trans-unit id="cff1428d10d59d14e45edec3c735a27b5482db59" datatype="html">
         <source>Name</source><target state="final">Name</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">7</context></context-group></trans-unit><trans-unit id="f866b863b1968a13bc38d8d26eff1ecb83f27809" datatype="html">
+        <source>Id (serial number)</source><target state="final">Id (serial number)</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">7</context>
-        </context-group>
-      </trans-unit><trans-unit id="6ce3dadf53dda1a1ab0c3167a8ed8dced471b0dc" datatype="html">
-        <source>Last name</source><target state="final">Last name</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context>
           <context context-type="linenumber">11</context>
-        </context-group>
-      </trans-unit><trans-unit id="024886ca34a6f309e3e51c2ed849320592c3faaa" datatype="html">
-        <source>User name</source><target state="final">User name</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit><trans-unit id="d6fecaa6aef7885ab4b170a0406cb965fdcc8ae8" datatype="html">
-        <source>Access type</source><target state="final">Access type</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">29</context>
-        </context-group>
-      </trans-unit><trans-unit id="c8897b3cbad295b307ead327d62ac7f894e3a831" datatype="html">
-        <source>Gsm number</source><target state="final">Gsm number</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">37</context>
-        </context-group>
-      </trans-unit><trans-unit id="d680134cb602b37429a90d76ec10a85fbdee0984" datatype="html">
-        <source>Office number</source><target state="final">Office number</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/users/components/user-edit/user-edit.component.html</context>
-          <context context-type="linenumber">41</context>
         </context-group>
       </trans-unit>
       <trans-unit id="0cf7a464f915d23b587f8cc1431ac3eba11f0412" datatype="html">
@@ -1490,32 +671,20 @@
       </trans-unit>
       <trans-unit id="be37a41139d137a21483439caa3709cdcea48185" datatype="html">
         <source>Dashboards</source><target state="final">Dashboards</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/components/dashboard.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/base-template/components/header-title.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="07c3a288012dd06e94fec130970a1bba329b59f9" datatype="html">
-        <source>Dashboard created</source><target state="final">Dashboard created</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/services/dashboard-settings.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="cab8b8f5af8a1d2edc4dc2b634e51e66aeb19a46" datatype="html">
-        <source>Dashboard updated</source><target state="final">Dashboard updated</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/dashboard/services/dashboard-settings.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/shared/base-template/components/header-title.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
+      
+      <trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
         <source>Search</source><target state="final">Search</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="3f8313b67ab41503ad4389b36a2f9e0087cc8e3a" datatype="html">
+        <source>Selected items deleted</source><target state="final">Selected items deleted</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit><trans-unit id="81b97b8ea996ad1e4f9fca8415021850214884b1" datatype="html">
@@ -1538,15 +707,15 @@
         </context-group>
       </trans-unit><trans-unit id="f61c6867295f3b53d23557021f2f4e0aa1d0b8fc" datatype="html">
         <source>Type</source><target state="final">Type</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="396974120fc614fc930a27c8d15a094d82a3a9e4" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">24</context></context-group></trans-unit><trans-unit id="396974120fc614fc930a27c8d15a094d82a3a9e4" datatype="html">
         <source>Vendor</source><target state="final">Vendor</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit><trans-unit id="337ca2e5eeea28eaca91e8511eb5eaafdb385ce6" datatype="html">
+        <source>Tag</source><target state="final">Tag</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context>
+          <context context-type="linenumber">34</context>
         </context-group>
       </trans-unit><trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
         <source>ID</source><target state="final">ID</target>
@@ -1556,9 +725,18 @@
         </context-group>
       </trans-unit><trans-unit id="84738b1bbb866302445901b1bca1e9cb5bf8d006" datatype="html">
         <source>IP</source><target state="final">IP</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">18</context></context-group></trans-unit><trans-unit id="0c1ac46617f7aca7f7ecf94242b96356098e6c5c" datatype="html">
+        <source>Save and Add another</source><target state="final">Save and Add another</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context>
-          <context context-type="linenumber">1</context>
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context>
+          <context context-type="linenumber">50</context>
+        </context-group>
+      </trans-unit><trans-unit id="5835eb84a0959185fdbaee172e33ef9af39ad934" datatype="html">
+        <source>More Save options</source><target state="final">More Save options</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context>
+          <context context-type="linenumber">57</context>
         </context-group>
       </trans-unit><trans-unit id="3f91b0deb9a257f943070755dee8675ca7ed0a7f" datatype="html">
         <source>Last communication</source><target state="final">Last communication</target>
@@ -1578,6 +756,18 @@
           <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
+      </trans-unit><trans-unit id="1e5a00f4a78b5f0a7bb000e6bf52607ad237c469" datatype="html">
+        <source>No records found. You need to adjust your search or filter parameters.</source><target state="final">No records found. You need to adjust your search or filter parameters.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="fb421f3f9b2c232498e459cfcf9ac4cd706a30e5" datatype="html">
+        <source>Loading data...</source><target state="final">Loading data...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
       </trans-unit><trans-unit id="3976bbe85c35a428b7a95ce713c64ddaea966628" datatype="html">
         <source>No filter applied</source><target state="final">No filter applied</target>
         <context-group purpose="location">
@@ -1590,102 +780,54 @@
           <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
+      </trans-unit><trans-unit id="17468b5ae4e932bc609930197afcc04856ed6124" datatype="html">
+        <source>Filtered by: </source><target state="final">Filtered by: </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="74ac724decc8ee58e90042e703408a8642cf5405" datatype="html">
+        <source>status</source><target state="final">status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="240c9c1e96dc38814922a83ad041dc815b084f32" datatype="html">
+        <source>type</source><target state="final">type</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="5ee60dcaec91dfefd39f440ae7703959663174f1" datatype="html">
+        <source>vendor</source><target state="final">vendor</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="f5d8fe8f9301c53cf03b47124eeb83357455ec8c" datatype="html">
+        <source>tag</source><target state="final">tag</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
       </trans-unit>
       <trans-unit id="85b79c9064aed1ead31ace985f31aa1363f6bdaf" datatype="html">
         <source>Help</source><target state="final">Help</target>
         
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/features/help/components/help.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
-      <trans-unit id="4afc3a68cc14304e3d86e058f9fe9a4c44a7813d" datatype="html">
-        <source>User saved</source><target state="final">User saved</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/user-edit/user-edit.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="632e8b20c98e8eec4059a605a4b011bb476137af" datatype="html">
-        <source>Edit user</source><target state="final">Edit user</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/user-edit/user-edit.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="34a99ddfd42f243b1c50c2753e83e866f40b4597" datatype="html">
-        <source>New user</source><target state="final">New user</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/user-edit/user-edit.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="5d1e500cd4ff2ebcf566f820fb3633e3c7c8ca24" datatype="html">
-        <source>NAME</source><target state="final">NAME</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="b120db0746bf1bafdafd03fecc65f20adfa43b32" datatype="html">
-        <source>LAST NAME</source><target state="final">LAST NAME</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="cbad27d17dd79e7d37fed5242b448d87c4b04a06" datatype="html">
-        <source>USER NAME</source><target state="final">USER NAME</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="d5e31741c591719630b5bba1ba38f8c1a04c10e3" datatype="html">
-        <source>EMAIL</source><target state="final">EMAIL</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="6406385490cd039997ea3865b9194703a20215a8" datatype="html">
-        <source>ACCESS TYPE</source><target state="final">ACCESS TYPE</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="4b4b2cb048d9577a99e7cd96d7fd3aee683986c9" datatype="html">
-        <source>LAST CHANGE</source><target state="final">LAST CHANGE</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="95b95a9c79e4fd9ed41f6855e37b3b06af25bcab" datatype="html">
-        <source>Delete user</source><target state="final">Delete user</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="650cfe0daad50310dd27cabf17efdce3d1144410" datatype="html">
-        <source>Do you want to delete:</source><target state="final">Do you want to delete:</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="1ceb8fc4e7382ab68771f2dcf38c9376249def22" datatype="html">
-        <source>Selected item deleted</source><target state="final">Selected item deleted</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/components/users.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="e08a77594f3d89311cdf6da5090044270909c194" datatype="html">
-        <source>User</source><target state="final">User</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/users/modules/user-routing.module.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="f3892a17946a109db3f669b39e01ee9a0a594c47" datatype="html">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <trans-unit id="f3892a17946a109db3f669b39e01ee9a0a594c47" datatype="html">
         <source>Reset password request successful</source><target state="final">Reset password request successful</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/users/user-login.component.ts</context>
@@ -1710,32 +852,9 @@
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="bd5a3b1c5a3c185c7bbb0e09a061d4cdc88ce5ad" datatype="html">
-        <source>Current</source><target state="final">Current</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/widgets/consts/widgets-list.const.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/widgets/models/current-list-widget.model.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/widgets/models/current-list-widget.model.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="cd0a18a14eb9d43a88afb3e2592014f3c1dbc942" datatype="html">
-        <source>Description current</source><target state="final">Description current</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/widgets/models/current-list-widget.model.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
-      <trans-unit id="f65253954b66e929a8b4d5ecaf61f9129f8cec64" datatype="html">
-        <source>Dashboard</source><target state="final">Dashboard</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
+      
+      
+      
       <trans-unit id="2a4672ce4de0db6307915fa5d5f8aef5cfe49b58" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{label}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{label}}"/></target>
         <context-group purpose="location">
@@ -1785,31 +904,13 @@
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="be5c752b58791dd799bc5d5482d4351e06f18673" datatype="html">
-        <source>Ok</source><target state="final">Ok</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/forms/components/input-datetime-range-picker/input-datetime-range-picker.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="9363202db5fbf349e5c7ebebab368a1f653d4d16" datatype="html">
-        <source>InputDateTimeRangePickerComponent - form input missing.</source><target state="final">InputDateTimeRangePickerComponent - form input missing.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/forms/components/input-datetime-range-picker/input-datetime-range-picker.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="d39ce8748ed0e73a0a9df75fedcc91bcc380f5fe" datatype="html">
-        <source>InputDateTimeRangePickerComponent - property input missing.</source><target state="final">InputDateTimeRangePickerComponent - property input missing.</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/shared/forms/components/input-datetime-range-picker/input-datetime-range-picker.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit>
+      
       <trans-unit id="e21980efa0a3fe5a373bb0df1e45509d6279f8a7" datatype="html">
         <source>invalid form</source><target state="final">invalid form</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/forms/services/forms-utils.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/core/forms/services/forms-utils.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/modals/components/widget-settings/default-widget-setting.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/core/forms/services/forms-utils.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/core/forms/services/forms-utils.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
       <trans-unit id="f074ff9f7752fef9f47f3aedc310236d64a74d07" datatype="html">
         <source>Form not valid</source><target state="final">Form not valid</target>
         
@@ -1821,18 +922,9 @@
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
-      <trans-unit id="32d144c486c121fe58693bfe7d8aba13bae8d85e" datatype="html">
-        <source>No table records</source><target state="final">No table records</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/tables/services/table.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
-      <trans-unit id="48b317fe8360e05dbcf939a7cc3d539e6870eeb7" datatype="html">
-        <source>all table records</source><target state="final">all table records</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/tables/services/table.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
-      <trans-unit id="13c1568937ac5446196dc60e7077d768fea1e878" datatype="html">
-        <source>selected table records</source><target state="final">selected table records</target>
-        
-      <context-group purpose="location"><context context-type="sourcefile">src/app/core/tables/services/table.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
+      
+      
+      
     </body>
   </file>
 </xliff>

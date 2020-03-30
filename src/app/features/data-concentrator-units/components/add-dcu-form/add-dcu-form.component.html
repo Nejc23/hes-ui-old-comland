@@ -21,17 +21,17 @@
 
       <div class="form-row">
         <div class="col-4">
-          <app-select-input label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async"
+          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async"
             [disabled]="false">
           </app-select-input>
         </div>
       </div>
 
-      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
+      <app-select-input i18n-label label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
         [disabled]="false">
       </app-select-input>
 
-      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
+      <app-input-tag i18n-label label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
         [disabled]="false" [allowCustomValues]="true">
       </app-input-tag>
     </ng-container>
