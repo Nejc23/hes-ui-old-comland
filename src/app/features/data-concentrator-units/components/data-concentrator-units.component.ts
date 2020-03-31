@@ -333,7 +333,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.api.getSelectedRows());
+    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
     if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
       params.node.setSelected(true);
     }
@@ -385,7 +385,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     //
   }
 
-  // TODO
   // delete button click
   onDelete() {
     let selectedText = 'all';

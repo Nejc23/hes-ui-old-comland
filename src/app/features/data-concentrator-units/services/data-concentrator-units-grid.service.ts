@@ -19,6 +19,7 @@ import { GridCellIpComponent } from '../components/grid-custom-components/grid-c
 import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
 import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -263,9 +264,16 @@ export class DataConcentratorUnitsGridService {
   }
 
   // set selected rows
-  public setSessionSettingsSelectedRows(selectedRows: any) {
+  public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    settings.selectedRows = selectedRows;
+    if (selectedRow.selected) {
+      if (!_.find(settings.selectedRows, x => x.id === selectedRow.data.id)) {
+        settings.selectedRows.push(selectedRow.data);
+      }
+    } else if (!selectedRow.selected) {
+      settings.selectedRows = settings.selectedRows.filter(obj => obj.id !== selectedRow.data.id);
+    }
+
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.selectedRows,
