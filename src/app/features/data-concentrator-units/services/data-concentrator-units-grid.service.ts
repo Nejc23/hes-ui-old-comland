@@ -266,12 +266,14 @@ export class DataConcentratorUnitsGridService {
   // set selected rows
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    if (selectedRow.selected) {
+    if (selectedRow.selected !== undefined && selectedRow.selected) {
       if (!_.find(settings.selectedRows, x => x.id === selectedRow.data.id)) {
         settings.selectedRows.push(selectedRow.data);
       }
-    } else if (!selectedRow.selected) {
+    } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
       settings.selectedRows = settings.selectedRows.filter(obj => obj.id !== selectedRow.data.id);
+    } else if (selectedRow.length === 0) {
+      settings.selectedRows = [];
     }
 
     this.gridSettingsSessionStoreService.setGridSettings(
