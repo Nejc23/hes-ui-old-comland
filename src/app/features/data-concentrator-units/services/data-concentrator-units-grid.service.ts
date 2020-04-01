@@ -53,7 +53,8 @@ export class DataConcentratorUnitsGridService {
         checkboxSelection: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'id'
+        colId: 'id',
+        headerTooltip: this.i18n('Select/deselect all')
       },
       {
         field: 'status',
@@ -61,7 +62,8 @@ export class DataConcentratorUnitsGridService {
         pinned: true,
         sortable: false,
         filter: false,
-        cellRenderer: 'gridCellStatusComponent'
+        cellRenderer: 'gridCellStatusComponent',
+        headerTooltip: this.i18n('Status')
       },
       {
         field: 'name',
@@ -69,7 +71,8 @@ export class DataConcentratorUnitsGridService {
         pinned: true,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellNameComponent'
+        cellRenderer: 'gridCellNameComponent',
+        headerTooltip: this.i18n('Name')
       },
       {
         field: 'metersValue',
@@ -77,7 +80,8 @@ export class DataConcentratorUnitsGridService {
         pinned: true,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellMetersComponent'
+        cellRenderer: 'gridCellMetersComponent',
+        headerTooltip: this.i18n('Meters')
       },
       {
         field: 'readStatusPercent',
@@ -86,16 +90,26 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         sort: 'desc',
-        cellRenderer: 'gridCellReadStatusComponent'
+        cellRenderer: 'gridCellReadStatusComponent',
+        headerTooltip: this.i18n('Read status')
       },
-      { field: 'type', headerName: this.i18n('Type'), pinned: false, sortable: true, filter: false, cellRenderer: 'gridCellTypeComponent' },
+      {
+        field: 'type',
+        headerName: this.i18n('Type'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellTypeComponent',
+        headerTooltip: this.i18n('Type')
+      },
       {
         field: 'vendor',
         headerName: this.i18n('Vendor'),
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellVendorComponent'
+        cellRenderer: 'gridCellVendorComponent',
+        headerTooltip: this.i18n('Vendor')
       },
       {
         field: 'idNumber',
@@ -103,18 +117,36 @@ export class DataConcentratorUnitsGridService {
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellIdNumberComponent'
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID')
       },
-      { field: 'ip', headerName: this.i18n('IP'), pinned: false, sortable: true, filter: false, cellRenderer: 'gridCellIpComponent' },
+      {
+        field: 'ip',
+        headerName: this.i18n('IP'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIpComponent',
+        headerTooltip: this.i18n('IP')
+      },
       {
         field: 'lastCommunication',
         headerName: this.i18n('Last communication'),
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellLastCommunicationComponent'
+        cellRenderer: 'gridCellLastCommunicationComponent',
+        headerTooltip: this.i18n('Last communication')
       },
-      { field: 'tags', headerName: this.i18n('Tags'), pinned: false, sortable: true, filter: false, cellRenderer: 'gridCellTagsComponent' }
+      {
+        field: 'tags',
+        headerName: this.i18n('Tags'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellTagsComponent',
+        headerTooltip: this.i18n('Tags')
+      }
     ];
   }
 
