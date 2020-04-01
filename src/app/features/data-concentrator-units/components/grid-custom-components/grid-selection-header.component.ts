@@ -36,6 +36,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
         const endRow = this.params.api.getLastDisplayedRow();
 
         const selectedAll = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll;
+        this.isDisabled = selectedAll != null && selectedAll ? selectedAll : false;
         if (selectedAll) {
           // if selected all rows
           for (let i = startRow; i <= endRow; i++) {
