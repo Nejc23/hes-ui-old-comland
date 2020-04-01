@@ -33,6 +33,7 @@ import { SideFixedNavComponent } from './base-template/components/side-fixed-nav
 import { Page404Component } from './404/page-404.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
+import { PlcMeterScheduleReadComponent } from '../features/meter-units/components/plc-meter-schedule-read/plc-meter-schedule-read.component';
 
 @NgModule({
   exports: [
@@ -54,6 +55,7 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
     NgbModule,
     SaveViewFormComponent,
     AddDcuFormComponent,
+    PlcMeterScheduleReadComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
     DisableIfUnauthorizedDirective,
@@ -86,6 +88,7 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
     HeaderTitleComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
+    PlcMeterScheduleReadComponent,
     ToastComponent,
     CardComponent,
     ModalTemplateComponent,
@@ -100,6 +103,12 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
     SideFixedNavComponent,
     Page404Component
   ],
-  entryComponents: [ModalChangePasswordComponent, ModalConfirmComponent, SaveViewFormComponent, AddDcuFormComponent]
+  entryComponents: [
+    ModalChangePasswordComponent,
+    ModalConfirmComponent,
+    SaveViewFormComponent,
+    AddDcuFormComponent,
+    PlcMeterScheduleReadComponent
+  ]
 })
 export class SharedModule {}
