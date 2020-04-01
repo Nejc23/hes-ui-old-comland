@@ -15,6 +15,7 @@ export class GridCellStatusComponent implements ICellRendererAngularComp {
   // called on init
   agInit(params: any): void {
     this.params = params;
+    console.log(this.params.data);
   }
 
   // called when the cell is refreshed
