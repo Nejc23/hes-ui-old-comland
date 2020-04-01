@@ -15,11 +15,10 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
   public isChecked: false;
   public setIntermediate = false;
   public form: FormGroup;
-
+  private cptSelected = 0;
   private serviceSubscription: Subscription;
   private serviceSubscription2: Subscription;
 
-  private selected = 0;
   isDisabled = false;
   sessionNameForGridState = 'grdStateDCU';
 
@@ -30,35 +29,8 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
   ) {
     this.form = this.createForm();
 
-    // subscribe on event change check-box in grid-row value
-    this.serviceSubscription = this.service.eventEmitter.subscribe({
-      next: (event: boolean) => {
-        const startRow = this.params.api.getFirstDisplayedRow();
-        const endRow = this.params.api.getLastDisplayedRow();
-        this.selected = 0;
-        this.params.api.forEachNode(node => {
-          if (node.rowIndex >= startRow && node.rowIndex <= endRow && node.selected) {
-            this.selected++;
-          }
-        });
-
-        if (this.form.get('checkBox').value) {
-          this.setIntermediate = false;
-        }
-        if (this.selected === 0) {
-          this.setIntermediate = false;
-          this.form.get('checkBox').setValue(false);
-        } else if (this.selected > 0 && this.selected < endRow - startRow + 1) {
-          this.setIntermediate = true;
-        } else {
-          this.setIntermediate = false;
-          this.form.get('checkBox').setValue(true);
-        }
-      }
-    });
-
-    // event page changed & deselect all
-    this.serviceSubscription2 = this.service.eventEmitterPageChange.subscribe({
+    // event select all or clear selection
+    this.serviceSubscription2 = this.service.eventEmitterSelectDeselectAll.subscribe({
       next: (event: number) => {
         const startRow = this.params.api.getFirstDisplayedRow();
         const endRow = this.params.api.getLastDisplayedRow();
@@ -76,33 +48,8 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
           // deselect all
           this.params.api.deselectAll();
           this.form.get('checkBox').setValue(false);
-          this.selected = 0;
-        } else {
-          // reload check boxes on current page
-          this.selected = 0;
-          this.params.api.forEachNode((node, i) => {
-            if (node.rowIndex >= startRow && node.rowIndex <= endRow && node.selected) {
-              this.selected++;
-            }
-          });
-
-          if (this.form.get('checkBox').value) {
-            this.setIntermediate = false;
-          }
-
-          if (this.selected === 0) {
-            this.setIntermediate = false;
-            this.form.get('checkBox').setValue(false);
-          } else if (this.selected > 0 && this.selected < endRow - startRow + 1) {
-            this.setIntermediate = true;
-          } else {
-            this.setIntermediate = false;
-            this.form.get('checkBox').setValue(true);
-          }
+          this.cptSelected = 0;
         }
-
-        const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-        this.isDisabled = settings != null && settings.isSelectedAll ? settings.isSelectedAll : false;
       }
     });
   }
@@ -124,6 +71,43 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
   agInit(params): void {
     this.params = params;
+
+    const rowCount = this.params.api.getDisplayedRowCount();
+    const lastGridIndex = rowCount - 1;
+    const currentPage = this.params.api.paginationGetCurrentPage();
+    const pageSize = this.params.api.paginationGetPageSize();
+    const startPageIndex = currentPage * pageSize;
+    let endPageIndex = (currentPage + 1) * pageSize - 1;
+
+    if (endPageIndex > lastGridIndex) {
+      endPageIndex = lastGridIndex;
+    }
+
+    // Count selected rows
+    this.cptSelected = 0;
+    for (let i = startPageIndex; i <= endPageIndex; i++) {
+      const rowNode = this.params.api.getDisplayedRowAtIndex(i);
+      if (rowNode) {
+        this.cptSelected += rowNode.selected ? 1 : 0;
+      }
+    }
+
+    // Check the checkbox if all the rows are selected
+    const cptRows = endPageIndex + 1 - startPageIndex;
+
+    if (this.form.get('checkBox').value) {
+      this.setIntermediate = false;
+    }
+    if (this.cptSelected === 0) {
+      this.setIntermediate = false;
+      this.form.get('checkBox').setValue(false);
+    } else if (this.cptSelected && cptRows > this.cptSelected) {
+      this.setIntermediate = true;
+    } else {
+      this.setIntermediate = false;
+      this.form.get('checkBox').setValue(true);
+    }
+
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     this.isDisabled = settings != null && settings.isSelectedAll ? settings.isSelectedAll : false;
   }

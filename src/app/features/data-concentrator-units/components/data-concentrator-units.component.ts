@@ -217,7 +217,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   private noFilters() {
-    console.log(this.requestModel.filterModel);
     if (
       this.requestModel.filterModel == null ||
       ((this.requestModel.filterModel.statuses === undefined ||
@@ -249,7 +248,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // click on check-box in the grid
   onSelectionChanged() {
-    this.eventService.checkChange(true);
+    if (this.gridApi) {
+      this.gridApi.refreshHeader();
+    }
+    //this.eventService.checkChange(true);
   }
 
   // on close tool panel reload filter model
@@ -317,9 +319,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // on change page in the grid
   onPaginationChange(params) {
+    if (this.gridApi) {
+      this.gridApi.refreshHeader();
+    }
+
     if (params.newPage && !this.loadGrid) {
       this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
-      this.eventService.pageChange(params.api.paginationGetCurrentPage());
+      //  this.eventService.pageChange(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
@@ -369,14 +375,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // click on the link "select all"
   selectAll() {
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
-    this.eventService.pageChange(this.gridApi.paginationGetCurrentPage());
+    this.eventService.selectDeselectAll(this.gridApi.paginationGetCurrentPage());
   }
 
   // click on the link "deselect all"
   deselectAll() {
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
-    this.eventService.pageChange(-1); // -1 = deselect all
+    this.eventService.selectDeselectAll(-1); // -1 = deselect all
   }
 
   // TODO
@@ -422,7 +428,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
-            this.eventService.pageChange(-1);
+            this.eventService.selectDeselectAll(-1);
             this.gridApi.forEachNode(node => {
               node.setSelected(false);
             });

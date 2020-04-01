@@ -5,24 +5,17 @@ import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-
   providedIn: 'root'
 })
 export class DataConcentratorUnitsGridEventEmitterService {
-  public eventEmitter: EventEmitter<boolean>;
-  public eventEmitterPageChange: EventEmitter<number>;
+  public eventEmitterSelectDeselectAll: EventEmitter<number>;
   public eventEmitterLayoutChange: EventEmitter<DcuLayout>;
 
   constructor() {
-    this.eventEmitter = new EventEmitter<boolean>();
-    this.eventEmitterPageChange = new EventEmitter<number>();
+    this.eventEmitterSelectDeselectAll = new EventEmitter<number>();
     this.eventEmitterLayoutChange = new EventEmitter<DcuLayout>();
   }
 
   // for check-box in header
-  public checkChange(value: boolean) {
-    this.eventEmitter.emit(value);
-  }
-
-  // for check-box in header
-  public pageChange(value: number) {
-    this.eventEmitterPageChange.emit(value);
+  public selectDeselectAll(value: number) {
+    this.eventEmitterSelectDeselectAll.emit(value);
   }
 
   // for selecting new grid layout and filter
