@@ -1,1 +1,39 @@
-<p>plc-meter-schedule-read works!</p>
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>PLC Meter Units Read Scheduler</div>
+
+  <div modal-body>
+    <ng-container>
+      <app-input-text [form]="form" [property]="test1Property" i18n-label label="Test 1"></app-input-text>
+
+      <div class="form-row">
+        <div class="col-6">
+          <app-input-text [form]="form" [property]="test2Property" i18n-label label="Test 2">
+          </app-input-text>
+        </div>
+      </div>
+
+      <app-registers-select></app-registers-select>
+
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
+          i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="save(false)"><i class="far fa-save"></i><span
+            i18n>Save</span></button>
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+
+<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>
+

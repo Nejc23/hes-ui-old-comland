@@ -34,6 +34,7 @@ import { Page404Component } from './404/page-404.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
 import { PlcMeterScheduleReadComponent } from '../features/meter-units/components/plc-meter-schedule-read/plc-meter-schedule-read.component';
+import { RegistersSelectComponent } from '../features/meter-units/components/registers-select/registers-select.component';
 
 @NgModule({
   exports: [
@@ -56,6 +57,7 @@ import { PlcMeterScheduleReadComponent } from '../features/meter-units/component
     SaveViewFormComponent,
     AddDcuFormComponent,
     PlcMeterScheduleReadComponent,
+    RegistersSelectComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
     DisableIfUnauthorizedDirective,
@@ -89,6 +91,7 @@ import { PlcMeterScheduleReadComponent } from '../features/meter-units/component
     SaveViewFormComponent,
     AddDcuFormComponent,
     PlcMeterScheduleReadComponent,
+    RegistersSelectComponent,
     ToastComponent,
     CardComponent,
     ModalTemplateComponent,
@@ -108,7 +111,8 @@ import { PlcMeterScheduleReadComponent } from '../features/meter-units/component
     ModalConfirmComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
-    PlcMeterScheduleReadComponent
+    PlcMeterScheduleReadComponent,
+    RegistersSelectComponent
   ]
 })
 export class SharedModule {}

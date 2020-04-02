@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -24,6 +24,8 @@ export class PlcMeterScheduleReadComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
+      [this.test1Property]: ['', Validators.required],
+      [this.test2Property]: ['', Validators.required]
       /*
         [this.nMinutesProperty]: [0],
         [this.nHoursProperty]: [0],
@@ -31,9 +33,43 @@ export class PlcMeterScheduleReadComponent implements OnInit {
         [this.daysOfTheWeekProperty]: [null],
         [this.daysOfTheMonthProperty]: [null],
         [this.registerListProperty]: [null]
-        */
+      */
     });
   }
 
   ngOnInit() {}
+
+  save(addNew: boolean) {
+    console.log('Save clicked!');
+    /*
+    const request = this.dcuService.createDcu(this.fillData());
+    const successMessage = this.i18n(`Data Concentration Unit was added successfully`);
+    this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+      result => {
+        if (result) {
+          if (addNew) {
+            this.form.reset();
+          }
+        }
+      },
+      () => {} // error
+    );
+*/
+  }
+
+  cancel() {
+    this.modal.close();
+  }
+
+  get test1Property() {
+    return 'test1';
+  }
+
+  get test2Property() {
+    return 'test2';
+  }
+
+  onDismiss() {
+    this.modal.dismiss();
+  }
 }
