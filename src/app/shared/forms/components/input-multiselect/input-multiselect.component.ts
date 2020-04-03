@@ -28,7 +28,7 @@ export class InputMultiselectComponent implements OnInit {
   @Input() defaultValueString = '';
   @Input() addNullValue = false;
   @Input() isReadOnly = false;
-  @Input() inOneRow = false;
+  @Input() inline = false;
 
   @Output() onChange = new EventEmitter<any>();
 

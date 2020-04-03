@@ -6,7 +6,7 @@
       </app-input-tag>
 
       <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-        [options]="dcuTypes$ | async" [inOneRow]="true">
+        [options]="dcuTypes$ | async" [inline]="true">
       </app-input-multiselect>
 
       <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">

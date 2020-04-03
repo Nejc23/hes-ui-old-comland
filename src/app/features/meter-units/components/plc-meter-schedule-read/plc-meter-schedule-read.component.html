@@ -4,12 +4,33 @@
 
   <div modal-body>
     <ng-container>
-      <app-input-text [form]="form" [property]="test1Property" i18n-label label="Test 1"></app-input-text>
 
-      <div class="form-row">
-        <div class="col-6">
-          <app-input-text [form]="form" [property]="test2Property" i18n-label label="Test 2">
+      <app-input-radio i18n-label label="Trigger" [form]="form" [property]="readOptionsProperty" name="readOptionsRadio"
+        [options]="readOptions" [inline]="false" (change)="changeReadOptionId()">
+      </app-input-radio>
+
+      <div class="form-row" *ngIf="selectedId == 1">
+        <div class="col-3">
+          <app-input-text [form]="form" [property]="minutesProperty" i18n-label label="Minutes">
           </app-input-text>
+        </div>
+      </div>
+
+      <div class="form-row" *ngIf="selectedId == 2">
+        <div class="col-3">
+          <app-input-text [form]="form" [property]="hoursProperty" i18n-label label="Hours">
+          </app-input-text>
+        </div>
+      </div>
+
+      <app-input-multiselect *ngIf="selectedId == 4" i18n-label label="Week days" [form]="form" [property]="weekDaysProperty" name="weekDaysMultiselect"
+         [options]="weekDays" [inline]="true">
+      </app-input-multiselect>
+
+      <div class="form-row" *ngIf="selectedId > 2">
+        <div class="col-3">
+          <app-timepicker [form]="form" [property]="timeProperty" i18n-label label="Time" name="timeInDay">
+          </app-timepicker>
         </div>
       </div>
 
