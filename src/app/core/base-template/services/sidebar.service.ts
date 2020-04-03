@@ -68,6 +68,13 @@ export class SidebarService {
         routeLink: `/${MeterTypeRoute.meterUnits}/overview`,
         hasChildren: false,
         children: []
+      },
+      {
+        title: ``,
+        routeLink: '',
+        hasChildren: false,
+        children: [],
+        isBorder: true
       }
     ];
   }
