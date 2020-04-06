@@ -19,6 +19,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   private params: IToolPanelParams;
 
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
+  sessionNameForGridState = 'grdStateMUT-typeId-';
 
   form: FormGroup;
 
@@ -55,6 +56,10 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
         : 'grdLayoutMUT-typeId-' + params.id;
+
+      this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT-typeId-' + params.id)
+        ? this.sessionNameForGridState
+        : 'grdStateMUT-typeId-' + params.id;
 
       // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
       this.dcuFilters$ = this.dcuService.getDcuLayout();
