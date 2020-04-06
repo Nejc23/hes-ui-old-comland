@@ -10,6 +10,8 @@ import { UserNewPasswordInterceptor } from './authentication/user-new-password.i
 import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
 import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
 import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
+import { MeterUnitsListInterceptor } from './meter-units/meter-units-list.interceptor';
+import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-type-grid-layout.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -80,6 +82,27 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             }
             if (UserNewPasswordInterceptor.canInterceptUserNewPassword(request)) {
               return UserNewPasswordInterceptor.interceptUserNewPassword();
+            }
+
+            // meter Units
+            if (MeterUnitsListInterceptor.canInterceptMeterUnitsList(request)) {
+              return MeterUnitsListInterceptor.interceptMeterUnitsList(request);
+            }
+
+            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutGet(request)) {
+              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutGet();
+            }
+
+            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutPost(request)) {
+              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutPost(request);
+            }
+
+            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutPut(request)) {
+              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutPut(request);
+            }
+
+            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutDelete(request)) {
+              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutDelete(request);
             }
 
             // pass through any requests not handled above

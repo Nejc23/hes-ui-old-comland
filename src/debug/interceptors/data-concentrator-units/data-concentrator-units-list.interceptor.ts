@@ -124,7 +124,7 @@ function searchById(companies, filter) {
   return result;
 }
 
-//const data: DataConcentratorUnitsList[] = [];
+// const data: DataConcentratorUnitsList[] = [];
 
 const data: DataConcentratorUnitsList[] = [
   {

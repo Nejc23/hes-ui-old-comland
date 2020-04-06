@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
+import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 
 @Component({
   selector: 'app-grid-cell-status',
@@ -11,7 +11,7 @@ import * as moment from 'moment';
 export class GridCellStatusComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private staticextService: DataConcentratorUnitsStaticTextService, private i18n: I18n) {}
+  constructor(private staticextService: MeterUnitsTypeStaticTextService, private i18n: I18n) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

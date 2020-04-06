@@ -52,7 +52,7 @@ export class SidebarService {
       {
         title: this.i18n(`Back to main menu`),
         icon: 'fas fa-arrow-alt-circle-left',
-        routeLink: '/',
+        routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         children: []
       },

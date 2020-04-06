@@ -33,6 +33,7 @@ import { SideFixedNavComponent } from './base-template/components/side-fixed-nav
 import { Page404Component } from './404/page-404.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
+import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 
 @NgModule({
   exports: [
@@ -53,6 +54,7 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
     ModalConfirmComponent,
     NgbModule,
     SaveViewFormComponent,
+    SaveViewFormMUTComponent,
     AddDcuFormComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
@@ -85,6 +87,7 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
     LocaleDatePipe,
     HeaderTitleComponent,
     SaveViewFormComponent,
+    SaveViewFormMUTComponent,
     AddDcuFormComponent,
     ToastComponent,
     CardComponent,
@@ -100,6 +103,12 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
     SideFixedNavComponent,
     Page404Component
   ],
-  entryComponents: [ModalChangePasswordComponent, ModalConfirmComponent, SaveViewFormComponent, AddDcuFormComponent]
+  entryComponents: [
+    ModalChangePasswordComponent,
+    ModalConfirmComponent,
+    SaveViewFormComponent,
+    SaveViewFormMUTComponent,
+    AddDcuFormComponent
+  ]
 })
 export class SharedModule {}

@@ -11,6 +11,7 @@ export interface GridRequestParams {
   pivotCols?: any[];
   pivotMode?: boolean;
   groupKeys?: any[];
+  typeId?: number;
 }
 
 export interface GridFilterParams {

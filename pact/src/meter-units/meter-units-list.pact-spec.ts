@@ -1,11 +1,9 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
-import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
 
@@ -32,6 +30,7 @@ describe('Pact consumer test', () => {
 
   describe('Meter units list get request', () => {
     const requestBody: GridRequestParams = {
+      typeId: 1,
       startRow: 0,
       endRow: 19,
       searchModel: [
@@ -67,7 +66,7 @@ describe('Pact consumer test', () => {
         readStatusPercent: 93.5,
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-        breakerState: true,
+        breakerState: 'on',
         childInfo: 12345,
         firmware: 'FM-123',
         id5: 'ID-12345',
@@ -84,7 +83,7 @@ describe('Pact consumer test', () => {
         readStatusPercent: 13.5,
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-        breakerState: true,
+        breakerState: 'off',
         childInfo: 12345,
         firmware: 'FM-223',
         id5: 'ID-12345',

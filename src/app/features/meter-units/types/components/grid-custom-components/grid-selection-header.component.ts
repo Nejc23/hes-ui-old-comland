@@ -1,10 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IHeaderAngularComp } from '@ag-grid-community/angular';
-import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
-import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
+import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
 
 @Component({
   selector: 'app-grid-selection-header',
@@ -16,28 +15,24 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
   public setIntermediate = false;
   public form: FormGroup;
   private cptSelected = 0;
-  private serviceSubscription: Subscription;
   private serviceSubscription2: Subscription;
+  public isDisabled = false;
+  sub: Subscription;
 
-  isDisabled = false;
-  sessionNameForGridState = 'grdStateDCU';
-
-  constructor(
-    public fb: FormBuilder,
-    private service: DataConcentratorUnitsGridEventEmitterService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
-  ) {
+  constructor(public fb: FormBuilder, private service: MeterUnitsTypeGridEventEmitterService) {
     this.form = this.createForm();
+
+    this.sub = this.service.getIsSelectedAll().subscribe(value => {
+      this.isDisabled = value;
+    });
 
     // event select all or clear selection
     this.serviceSubscription2 = this.service.eventEmitterSelectDeselectAll.subscribe({
-      next: (event: number) => {
+      next: (event: boolean) => {
         const startRow = this.params.api.getFirstDisplayedRow();
         const endRow = this.params.api.getLastDisplayedRow();
 
-        const selectedAll = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll;
-        this.isDisabled = selectedAll != null && selectedAll ? selectedAll : false;
-        if (selectedAll) {
+        if (event) {
           // if selected all rows
           for (let i = startRow; i <= endRow; i++) {
             this.params.api.forEachNode((node, i) => {
@@ -45,7 +40,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
             });
           }
           this.form.get('checkBox').setValue(true);
-        } else if (event === -1) {
+        } else {
           // deselect all
           this.params.api.deselectAll();
           this.form.get('checkBox').setValue(false);
@@ -71,7 +66,6 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
   }
 
   agInit(params): void {
-    console.log('header');
     this.params = params;
 
     const rowCount = this.params.api.getDisplayedRowCount();
@@ -109,17 +103,14 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
       this.setIntermediate = false;
       this.form.get('checkBox').setValue(true);
     }
-
-    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    this.isDisabled = settings != null && settings.isSelectedAll ? settings.isSelectedAll : false;
   }
 
   ngOnDestroy() {
-    if (this.serviceSubscription) {
-      this.serviceSubscription.unsubscribe();
-    }
     if (this.serviceSubscription2) {
       this.serviceSubscription2.unsubscribe();
+    }
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 
