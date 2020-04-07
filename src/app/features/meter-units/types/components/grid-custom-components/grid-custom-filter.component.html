@@ -1,16 +1,16 @@
 <div class="container-fluid pt-3 h-100 border-bottom">
   <form [formGroup]="form">
-    
+
     <div class="d-flex">
-     
+
         <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-        </app-select-input>      
-     
+        </app-select-input>
+
         <app-input-text label=" 4" [form]="form" [property]="value1Property"></app-input-text>
         <i class='far fa-search'></i>
-     
+
         <app-input-text label=" 24" [form]="form" [property]="value2Property"></app-input-text>
-    
+
   </div>
 
     <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
@@ -18,9 +18,9 @@
         [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
       </app-input-tag>
 
-    
+
       <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-        [options]="dcuTypes$ | async" [inOneRow]="true">
+        [options]="dcuTypes$ | async" [inline]="true">
       </app-input-multiselect>
 
       <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
@@ -30,9 +30,9 @@
 
       <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
       </app-input-tag>
-   
+
       <app-input-switch label="Show deleteted Meter Units" [form]="form" [property]="showDeletedMeterUnitsProperty"></app-input-switch>
-     
+
     </fieldset>
     <div class="d-flex justify-content-end" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
       <button type="button" class="btn btn-link" (click)="clearButtonClicked()"><i class="far fa-times"></i><span i18n>Clear</span></button>
