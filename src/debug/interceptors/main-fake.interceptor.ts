@@ -12,6 +12,7 @@ import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-lay
 import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
 import { MeterUnitsListInterceptor } from './meter-units/meter-units-list.interceptor';
 import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-type-grid-layout.interceptor';
+import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -48,6 +49,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
               return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
+            }
+
+            // registers
+            if (RegistersSelectInterceptor.canInterceptMeterUnitRegisters(request)) {
+              return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
             }
 
             // codelists

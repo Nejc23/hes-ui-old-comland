@@ -11,6 +11,7 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 export class TimepickerComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
   @Input() property: string;
+  @Input() label;
   @Output() valueChange = new EventEmitter();
 
   subscription: Subscription;
@@ -42,5 +43,9 @@ export class TimepickerComponent implements OnInit, OnDestroy {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  get required(): boolean {
+    return this.formUtils.hasFormControlRequiredField(this.form.get(this.property));
   }
 }
