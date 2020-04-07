@@ -8,10 +8,10 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 
 @Component({
-  selector: 'app-plc-meter-schedule-read',
-  templateUrl: './plc-meter-schedule-read.component.html'
+  selector: 'app-plc-meter-read-schedule',
+  templateUrl: './plc-meter-read-schedule.component.html'
 })
-export class PlcMeterScheduleReadComponent implements OnInit {
+export class PlcMeterReadScheduleComponent implements OnInit {
   form: FormGroup;
   readOptions: RadioOption[] = [
     { value: 1, label: this.i18n('Every N minute(s)') },

@@ -33,8 +33,8 @@ import { SideFixedNavComponent } from './base-template/components/side-fixed-nav
 import { Page404Component } from './404/page-404.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
-import { PlcMeterScheduleReadComponent } from '../features/meter-units/components/plc-meter-schedule-read/plc-meter-schedule-read.component';
-import { RegistersSelectComponent } from '../features/meter-units/components/registers-select/registers-select.component';
+import { RegistersSelectComponent } from '../features/registers-select/component/registers-select.component';
+import { PlcMeterReadScheduleComponent } from '../features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 
 @NgModule({
   exports: [
@@ -56,7 +56,7 @@ import { RegistersSelectComponent } from '../features/meter-units/components/reg
     NgbModule,
     SaveViewFormComponent,
     AddDcuFormComponent,
-    PlcMeterScheduleReadComponent,
+    PlcMeterReadScheduleComponent,
     RegistersSelectComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
@@ -90,7 +90,7 @@ import { RegistersSelectComponent } from '../features/meter-units/components/reg
     HeaderTitleComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
-    PlcMeterScheduleReadComponent,
+    PlcMeterReadScheduleComponent,
     RegistersSelectComponent,
     ToastComponent,
     CardComponent,
@@ -111,7 +111,7 @@ import { RegistersSelectComponent } from '../features/meter-units/components/reg
     ModalConfirmComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
-    PlcMeterScheduleReadComponent,
+    PlcMeterReadScheduleComponent,
     RegistersSelectComponent
   ]
 })

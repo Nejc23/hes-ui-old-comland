@@ -3,8 +3,8 @@ import { SidebarService } from 'src/app/core/base-template/services/sidebar.serv
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormBuilder } from '@angular/forms';
 import { headerTitleMU } from '../../consts/static-text.const';
-import { PlcMeterScheduleReadComponent } from '../../components/plc-meter-schedule-read/plc-meter-schedule-read.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { PlcMeterReadScheduleComponent } from '../../components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 
 @Component({
   selector: 'app-meter-units-overview',
@@ -19,7 +19,7 @@ export class MeterUnitsOverviewComponent implements OnInit {
 
   scheduleRead() {
     console.log('Scheduling read!');
-    const modalRef = this.modalService.open(PlcMeterScheduleReadComponent);
+    const modalRef = this.modalService.open(PlcMeterReadScheduleComponent);
     modalRef.result.then().catch(() => {});
   }
 }

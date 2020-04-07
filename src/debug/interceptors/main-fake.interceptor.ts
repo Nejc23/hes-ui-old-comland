@@ -10,6 +10,7 @@ import { UserNewPasswordInterceptor } from './authentication/user-new-password.i
 import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
 import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
 import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
+import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -46,6 +47,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
               return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
+            }
+
+            // registers
+            if (RegistersSelectInterceptor.canInterceptMeterUnitRegisters(request)) {
+              return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
             }
 
             // codelists
