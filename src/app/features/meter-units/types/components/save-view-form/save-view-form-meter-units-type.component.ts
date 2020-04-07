@@ -10,7 +10,7 @@ import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { filter } from 'rxjs/operators';
 import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
-import { MeterUnitsTypeLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-type-layout.interface';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 
 @Component({
@@ -23,11 +23,11 @@ export class SaveViewFormMUTComponent implements OnInit {
   sessionNameForGridLayout = 'grdLayoutMUT-typeId-';
   cookieNameForGridSettings = 'grdColMUT-typeId-';
   form: FormGroup;
-  mutLayouts$: Observable<MeterUnitsTypeLayout[]>;
-  data: MeterUnitsTypeLayout[];
+  mutLayouts$: Observable<MeterUnitsLayout[]>;
+  data: MeterUnitsLayout[];
   selectedRow = -1;
   dontSelectFilter = false;
-  sessionLayout: MeterUnitsTypeLayout;
+  sessionLayout: MeterUnitsLayout;
   cookieSettings: any;
 
   constructor(
@@ -51,10 +51,10 @@ export class SaveViewFormMUTComponent implements OnInit {
     this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT-typeId-' + this.meterUnitsTypeId)
       ? this.cookieNameForGridSettings
       : 'grdLayoutMUT-typeId-' + this.meterUnitsTypeId;
-    this.mutLayouts$ = this.mutService.getMeterUnitsTypeLayout(this.meterUnitsTypeId);
+    this.mutLayouts$ = this.mutService.getMeterUnitsLayout(this.meterUnitsTypeId);
     this.mutLayouts$.subscribe(x => {
       this.data = x;
-      this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as MeterUnitsTypeLayout;
+      this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as MeterUnitsLayout;
       this.cookieSettings = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
       // console.log(`sessionLayout GET = ${JSON.stringify(this.sessionLayout)}`);
       if (this.sessionLayout) {
@@ -62,16 +62,19 @@ export class SaveViewFormMUTComponent implements OnInit {
         if (this.sessionLayout.id) {
           this.form = this.createForm(x, this.sessionLayout);
         } else {
-          const currentLayout: MeterUnitsTypeLayout = {
+          const currentLayout: MeterUnitsLayout = {
             id: -1,
             name: '',
             statusesFilter: this.sessionLayout.statusesFilter,
             typesFilter: this.sessionLayout.typesFilter,
             tagsFilter: this.sessionLayout.tagsFilter,
             vendorFilter: this.sessionLayout.vendorFilter,
+            firmwareFilter: this.sessionLayout.firmwareFilter,
+            breakerStateFilter: this.sessionLayout.breakerStateFilter,
             gridLayout: this.sessionLayout.gridLayout,
-            firmwareFilter: [],
-            breakerStateFilter: []
+            showDeletedMeterUnitsFilter: this.sessionLayout.showDeletedMeterUnitsFilter,
+            showOnlyMeterUnitsWithMBusInfoFilter: this.sessionLayout.showOnlyMeterUnitsWithMBusInfoFilter,
+            readStatusFilter: this.sessionLayout.readStatusFilter
           };
           x.push(currentLayout);
           this.form = this.createForm(x, currentLayout);
@@ -80,7 +83,7 @@ export class SaveViewFormMUTComponent implements OnInit {
     });
   }
 
-  createForm(layouts: MeterUnitsTypeLayout[], selected: MeterUnitsTypeLayout): FormGroup {
+  createForm(layouts: MeterUnitsLayout[], selected: MeterUnitsLayout): FormGroup {
     return this.formBuilder.group({
       ['name']: [selected !== null ? selected.name : '']
     });
@@ -95,10 +98,10 @@ export class SaveViewFormMUTComponent implements OnInit {
     this.sessionLayout.name = this.form.get(this.namePropety).value;
     this.sessionLayout.gridLayout = this.cookieSettings;
     if (this.sessionLayout.id && this.sessionLayout.id > 0) {
-      this.mutService.saveMeterUnitsTypeLayout(this.meterUnitsTypeId, this.sessionLayout.id, this.sessionLayout);
+      this.mutService.saveMeterUnitsLayout(this.meterUnitsTypeId, this.sessionLayout.id, this.sessionLayout);
     } else {
       this.mutService
-        .createMeterUnitsTypeLayout(this.meterUnitsTypeId, this.sessionLayout)
+        .createMeterUnitsLayout(this.meterUnitsTypeId, this.sessionLayout)
         .toPromise()
         .then(x => {
           this.sessionLayout.id = x ? x.id : -1;
@@ -134,7 +137,7 @@ export class SaveViewFormMUTComponent implements OnInit {
 
   deleteSavedLayoutClicked(filterIdx: number) {
     this.dontSelectFilter = true;
-    this.mutService.deleteMeterUnitsTypeLayout(this.meterUnitsTypeId, this.data[filterIdx].id);
+    this.mutService.deleteMeterUnitsLayout(this.meterUnitsTypeId, this.data[filterIdx].id);
     this.data.splice(filterIdx, 1);
     this.mutLayouts$ = of(this.data);
     console.log('Delete clicked!');

@@ -16,7 +16,7 @@ import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
-import { MeterUnitsTypeLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-type-layout.interface';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -108,7 +108,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.frameworkComponents = meterUnitsTypeGridService.setFrameworkComponents();
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions();
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
-      next: (event: MeterUnitsTypeLayout) => {
+      next: (event: MeterUnitsLayout) => {
         if (event !== null) {
           this.requestModel.filterModel.statuses = event.statusesFilter;
           this.requestModel.filterModel.vendor = event.vendorFilter;
@@ -274,7 +274,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel
         )
       ) {
-        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsTypeLayout;
+        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
         this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
@@ -307,7 +307,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       )
     ) {
       this.setFilterInfo();
-      const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsTypeLayout;
+      const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
       this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
       this.requestModel.filterModel.types = filterDCU.typesFilter;
@@ -320,7 +320,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // fill text in header - about selected filters
   setFilterInfo() {
-    const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsTypeLayout;
+    const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
 
     this.filters = this.staticTextService.setfilterHeaderText(
       filter.name,

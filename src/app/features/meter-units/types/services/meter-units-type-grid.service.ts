@@ -22,7 +22,7 @@ import { GridCellFirmwareComponent } from '../components/grid-custom-components/
 import { GridCellTimeOfUseIdComponent } from '../components/grid-custom-components/grid-cell-time-of-use-id.component';
 import { GridCellBreakerStateComponent } from '../components/grid-custom-components/grid-cell-breaker-state.component';
 import { GridCellInfoOfChildComponent } from '../components/grid-custom-components/grid-cell-info-of-child.component';
-import { MeterUnitsTypeLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-type-layout.interface';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -287,7 +287,7 @@ export class MeterUnitsTypeGridService {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }
 
-  public checkIfFilterModelAndCookieAreSame(sessionFilter: MeterUnitsTypeLayout, requestModel: GridFilterParams) {
+  public checkIfFilterModelAndCookieAreSame(sessionFilter: MeterUnitsLayout, requestModel: GridFilterParams) {
     if (
       JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&

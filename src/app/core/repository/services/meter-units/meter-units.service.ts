@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { meterUnits, meterUnitsTypeLayout } from '../../consts/data-concentrator-units.const';
+import { meterUnits, meterUnitsLayout } from '../../consts/data-concentrator-units.const';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
-import { MeterUnitsTypeLayout } from '../../interfaces/meter-units/meter-units-type-layout.interface';
+import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -22,35 +22,35 @@ export class MeterUnitsService {
     return new HttpRequest('POST', meterUnits, param);
   }
 
-  getMeterUnitsTypeLayout(typeId: number): Observable<MeterUnitsTypeLayout[]> {
-    return this.repository.makeRequest(this.getMeterUnitsTypeLayoutRequest(typeId));
+  getMeterUnitsLayout(typeId: number): Observable<MeterUnitsLayout[]> {
+    return this.repository.makeRequest(this.getMeterUnitsLayoutRequest(typeId));
   }
 
-  getMeterUnitsTypeLayoutRequest(typeId: number): HttpRequest<any> {
-    return new HttpRequest('GET', `${meterUnits}/${typeId}/${meterUnitsTypeLayout}`);
+  getMeterUnitsLayoutRequest(typeId: number): HttpRequest<any> {
+    return new HttpRequest('GET', `${meterUnits}/${typeId}/${meterUnitsLayout}`);
   }
 
-  saveMeterUnitsTypeLayout(typeId: number, id: number, payload: MeterUnitsTypeLayout): Observable<MeterUnitsTypeLayout> {
-    return this.repository.makeRequest(this.saveMeterUnitsTypeFilterRequest(typeId, id, payload));
+  saveMeterUnitsLayout(typeId: number, id: number, payload: MeterUnitsLayout): Observable<MeterUnitsLayout> {
+    return this.repository.makeRequest(this.saveMeterUnitsFilterRequest(typeId, id, payload));
   }
 
-  saveMeterUnitsTypeFilterRequest(typeId: number, id: number, payload: MeterUnitsTypeLayout): HttpRequest<MeterUnitsTypeLayout> {
-    return new HttpRequest('PUT', `${meterUnits}/${typeId}/${meterUnitsTypeLayout}/${id}`, payload as any);
+  saveMeterUnitsFilterRequest(typeId: number, id: number, payload: MeterUnitsLayout): HttpRequest<MeterUnitsLayout> {
+    return new HttpRequest('PUT', `${meterUnits}/${typeId}/${meterUnitsLayout}/${id}`, payload as any);
   }
 
-  deleteMeterUnitsTypeLayout(typeId: number, id: number): Observable<MeterUnitsTypeLayout> {
-    return this.repository.makeRequest(this.deleteMeterUnitsTypeLayoutRequest(typeId, id));
+  deleteMeterUnitsLayout(typeId: number, id: number): Observable<MeterUnitsLayout> {
+    return this.repository.makeRequest(this.deleteMeterUnitsLayoutRequest(typeId, id));
   }
 
-  deleteMeterUnitsTypeLayoutRequest(typeId: number, id: number): HttpRequest<MeterUnitsTypeLayout> {
-    return new HttpRequest('DELETE', `${meterUnits}/${typeId}/${meterUnitsTypeLayout}/${id}`);
+  deleteMeterUnitsLayoutRequest(typeId: number, id: number): HttpRequest<MeterUnitsLayout> {
+    return new HttpRequest('DELETE', `${meterUnits}/${typeId}/${meterUnitsLayout}/${id}`);
   }
 
-  createMeterUnitsTypeLayout(typeId: number, payload: MeterUnitsTypeLayout): Observable<MeterUnitsTypeLayout> {
-    return this.repository.makeRequest(this.createMeterUnitsTypeLayoutRequest(typeId, payload));
+  createMeterUnitsLayout(typeId: number, payload: MeterUnitsLayout): Observable<MeterUnitsLayout> {
+    return this.repository.makeRequest(this.createMeterUnitsLayoutRequest(typeId, payload));
   }
 
-  createMeterUnitsTypeLayoutRequest(typeId: number, payload: MeterUnitsTypeLayout): HttpRequest<MeterUnitsTypeLayout> {
-    return new HttpRequest('POST', `${meterUnits}/${typeId}/${meterUnitsTypeLayout}`, payload as any);
+  createMeterUnitsLayoutRequest(typeId: number, payload: MeterUnitsLayout): HttpRequest<MeterUnitsLayout> {
+    return new HttpRequest('POST', `${meterUnits}/${typeId}/${meterUnitsLayout}`, payload as any);
   }
 }

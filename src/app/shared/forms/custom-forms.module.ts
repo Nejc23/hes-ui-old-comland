@@ -19,6 +19,7 @@ import { InputMultiselectComponent } from './components/input-multiselect/input-
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { InputsModule } from '@progress/kendo-angular-inputs';
 import { InputCheckboxGridComponent } from './components/input-checkbox/input-checkbox-grid.component';
+import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -38,6 +39,7 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
     InputSearcherComponent,
     InputTagComponent,
     InputMultiselectComponent,
+    InputSwitchComponent,
     DropDownsModule,
     InputsModule
   ],
@@ -56,6 +58,7 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
     InputSelectComponent,
     InputSearcherComponent,
     InputTagComponent,
+    InputSwitchComponent,
     InputMultiselectComponent
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule]

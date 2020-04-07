@@ -4,12 +4,13 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { ActivatedRoute } from '@angular/router';
+import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -27,8 +28,8 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   dcuStatuses: Codelist<number>[] = [];
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
-  dcuFilters$: Observable<DcuLayout[]>;
-  data: DcuLayout[];
+  mutFilters$: Observable<MeterUnitsLayout[]>;
+  data: MeterUnitsLayout[];
   dcuTags$: Observable<Codelist<number>[]>;
   dcuTags: Codelist<number>[];
 
@@ -39,12 +40,12 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   selectedRow = -1;
   dontSelectFilter = false;
 
-  sessionFilter: DcuLayout;
+  sessionFilter: MeterUnitsLayout;
   paramsSub: Subscription;
   id = 0;
   constructor(
     private codelistService: CodelistRepositoryService,
-    private dcuService: DataConcentratorUnitsService,
+    private mutService: MeterUnitsService,
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
@@ -62,22 +63,27 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
         : 'grdStateMUT-typeId-' + params.id;
 
       // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
-      this.dcuFilters$ = this.dcuService.getDcuLayout();
-      this.dcuFilters$.subscribe(x => {
+      this.mutFilters$ = this.mutService.getMeterUnitsLayout(params.id);
+      this.mutFilters$.subscribe(x => {
         this.data = x;
-        this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+        this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
 
         if (this.sessionFilter) {
           if (this.sessionFilter.id) {
             this.form = this.createForm(x, this.sessionFilter);
           } else {
-            const currentFilter: DcuLayout = {
+            const currentFilter: MeterUnitsLayout = {
               id: -1,
               name: '',
               statusesFilter: this.sessionFilter.statusesFilter,
+              readStatusFilter: this.sessionFilter.readStatusFilter,
               typesFilter: this.sessionFilter.typesFilter,
               tagsFilter: this.sessionFilter.tagsFilter,
               vendorFilter: this.sessionFilter.vendorFilter,
+              firmwareFilter: this.sessionFilter.firmwareFilter,
+              breakerStateFilter: this.sessionFilter.breakerStateFilter,
+              showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
+              showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
               gridLayout: ''
             };
             x.push(currentFilter);
@@ -115,13 +121,20 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     console.log('model changed');
   }
 
-  createForm(filters: DcuLayout[], selected: DcuLayout): FormGroup {
+  createForm(filters: MeterUnitsLayout[], selected: MeterUnitsLayout): FormGroup {
     return this.fb.group({
       ['statuses']: [filters && selected ? selected.statusesFilter : []],
       ['tags']: [filters && selected ? selected.tagsFilter : []],
       ['types']: [filters && selected ? selected.typesFilter : []],
       ['filters']: [filters ? filters : []],
-      ['vendor']: [filters && selected ? selected.vendorFilter : null]
+      ['vendor']: [filters && selected ? selected.vendorFilter : null],
+      ['firmware']: [filters && selected ? selected.firmwareFilter : []],
+      ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
+      ['operation']: [filters && selected.readStatusFilter ? selected.readStatusFilter.operation : ''],
+      ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
+      ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : null],
+      ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
+      ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false]
     });
   }
 
@@ -145,16 +158,53 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     return 'vendor';
   }
 
+  get operationProperty() {
+    return 'operation';
+  }
+
+  get value1Property() {
+    return 'value1';
+  }
+
+  get value2Property() {
+    return 'value2';
+  }
+
+  get firmwareProperty() {
+    return 'firmware';
+  }
+
+  get breakerStateProperty() {
+    return 'breakerState';
+  }
+
+  get showDeletedMeterUnitsProperty() {
+    return 'showDeletedMeterUnits';
+  }
+
+  get showOnlyMeterUnitsWithMBusInfoProperty() {
+    return 'showOnlyMeterUnitsWithMBusInfo';
+  }
+
   refresh() {}
 
   clearButtonClicked() {
-    const currentFilter: DcuLayout = {
+    const currentFilter: MeterUnitsLayout = {
       id: 0,
       name: '',
       statusesFilter: [],
+      readStatusFilter: {
+        operation: '',
+        value1: 0,
+        value2: null
+      },
       typesFilter: [],
       tagsFilter: [],
       vendorFilter: null,
+      firmwareFilter: [],
+      breakerStateFilter: [],
+      showDeletedMeterUnitsFilter: false,
+      showOnlyMeterUnitsWithMBusInfoFilter: false,
       gridLayout: ''
     };
     this.sessionFilter = currentFilter;
@@ -166,13 +216,22 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   }
 
   applyButtonClicked() {
-    const currentFilter: DcuLayout = {
+    const currentFilter: MeterUnitsLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
       statusesFilter: this.form.get(this.statusesProperty).value,
+      readStatusFilter: {
+        operation: this.form.get(this.operationProperty).value,
+        value1: this.form.get(this.value1Property).value,
+        value2: this.form.get(this.value2Property).value
+      },
       typesFilter: this.form.get(this.typesProperty).value,
+      firmwareFilter: this.form.get(this.firmwareProperty).value,
+      breakerStateFilter: this.form.get(this.breakerStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
+      showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
+      showDeletedMeterUnitsFilter: this.form.get(this.showDeletedMeterUnitsProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);

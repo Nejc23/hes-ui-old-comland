@@ -1,0 +1,12 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+
+
+    <label *ngIf="label" [attr.for]="controlId">
+    <kendo-switch formControlName="switch" [name]="property" [id]="controlId" [formControlName]="property"></kendo-switch>
+  {{label}}</label>
+
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>
