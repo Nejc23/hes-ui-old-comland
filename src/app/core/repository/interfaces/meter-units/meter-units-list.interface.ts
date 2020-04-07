@@ -14,6 +14,6 @@ export interface MeterUnitsList {
   timeOfUseId: string;
   id5: string;
   childInfo: number;
-  breakerState: boolean;
+  breakerState: string;
   tags: string[];
 }

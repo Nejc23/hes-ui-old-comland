@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -45,7 +45,7 @@ export class AddDcuFormComponent implements OnInit {
       {
         [this.nameProperty]: ['', Validators.required],
         [this.idNumberProperty]: ['', Validators.required],
-        [this.ipProperty]: ['', Validators.required],
+        [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
         [this.typeProperty]: [null, Validators.required],
         [this.vendorProperty]: [null, Validators.required],
         [this.tagsProperty]: [null]

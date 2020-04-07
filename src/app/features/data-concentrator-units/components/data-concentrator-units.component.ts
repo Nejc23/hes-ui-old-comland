@@ -120,16 +120,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     return this.staticextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
   }
 
-  // set momemnt text (last communication) out of date and time
-  setMomentLastCommunicationTime(time: string) {
-    return this.i18n(moment(time).fromNow());
-  }
-
-  // load data from BE (default filter is selected company id)
-  loadData(search: string) {
-    // this.dataSource = this.dataConcentratorUnitsGridService.loadData(search);
-  }
-
   // ag-grid
   // button click refresh grid
   refreshGrid() {

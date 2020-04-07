@@ -35,6 +35,7 @@ import { SaveViewFormComponent } from '../features/data-concentrator-units/compo
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
 import { RegistersSelectComponent } from '../features/registers-select/component/registers-select.component';
 import { PlcMeterReadScheduleComponent } from '../features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component';
+import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 
 @NgModule({
   exports: [
@@ -55,6 +56,7 @@ import { PlcMeterReadScheduleComponent } from '../features/meter-units/component
     ModalConfirmComponent,
     NgbModule,
     SaveViewFormComponent,
+    SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
     RegistersSelectComponent,
@@ -89,6 +91,7 @@ import { PlcMeterReadScheduleComponent } from '../features/meter-units/component
     LocaleDatePipe,
     HeaderTitleComponent,
     SaveViewFormComponent,
+    SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
     RegistersSelectComponent,
@@ -110,6 +113,7 @@ import { PlcMeterReadScheduleComponent } from '../features/meter-units/component
     ModalChangePasswordComponent,
     ModalConfirmComponent,
     SaveViewFormComponent,
+    SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
     RegistersSelectComponent

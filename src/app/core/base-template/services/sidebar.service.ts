@@ -52,7 +52,7 @@ export class SidebarService {
       {
         title: this.i18n(`Back to main menu`),
         icon: 'fas fa-arrow-alt-circle-left',
-        routeLink: '/',
+        routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         children: []
       },
@@ -68,6 +68,13 @@ export class SidebarService {
         routeLink: `/${MeterTypeRoute.meterUnits}/overview`,
         hasChildren: false,
         children: []
+      },
+      {
+        title: ``,
+        routeLink: '',
+        hasChildren: false,
+        children: [],
+        isBorder: true
       }
     ];
   }
