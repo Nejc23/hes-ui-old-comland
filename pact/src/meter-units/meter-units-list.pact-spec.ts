@@ -48,12 +48,23 @@ describe('Pact consumer test', () => {
       ],
       filterModel: {
         statuses: [{ id: 1, value: 'active' }],
-        types: [1, 2],
+        readStatus: {
+          operation: { id: 'Greater Than', value: 'Greater Than' },
+          value1: 12,
+          value2: null
+        },
         vendor: { id: 2, value: 'Vendor 2' },
         tags: [
           { id: 1, value: 'tag1' },
           { id: 2, value: 'tag2' }
-        ]
+        ],
+        firmware: [{ id: 1, value: '12.3.1' }],
+        breakerState: [
+          { id: 1, value: 'breaker 1' },
+          { id: 5, value: 'breaker 5' }
+        ],
+        showChildInfoMBus: true,
+        showDeleted: true
       }
     };
 

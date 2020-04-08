@@ -5,7 +5,6 @@ import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
@@ -63,9 +62,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     searchModel: [],
     filterModel: {
       statuses: [{ id: 0, value: '' }],
+      readStatus: {
+        operation: { id: '', value: '' },
+        value1: 0,
+        value2: null
+      },
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' }
+      vendor: { id: 0, value: '' },
+      showDeleted: false
     }
   };
 
@@ -89,9 +94,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       next: (event: DcuLayout) => {
         if (event !== null) {
           this.requestModel.filterModel.statuses = event.statusesFilter;
+          this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
+          this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
+          this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
           this.requestModel.filterModel.vendor = event.vendorFilter;
           this.requestModel.filterModel.types = event.typesFilter;
           this.requestModel.filterModel.tags = event.tagsFilter;
+          this.requestModel.filterModel.showDeleted = event.showDeletedFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
           this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
@@ -212,13 +221,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       ((this.requestModel.filterModel.statuses === undefined ||
         this.requestModel.filterModel.statuses.length === 0 ||
         this.requestModel.filterModel.statuses[0].id === 0) &&
+        (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
         (this.requestModel.filterModel.tags === undefined ||
           this.requestModel.filterModel.tags.length === 0 ||
           this.requestModel.filterModel.tags[0].id === 0) &&
         (this.requestModel.filterModel.types === undefined ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0))
+        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0) &&
+        !this.requestModel.filterModel.showDeleted)
     ) {
       return true;
     }
@@ -255,9 +266,21 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       ) {
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
         this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+        if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
+          this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
+          this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
+          this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+        } else {
+          this.requestModel.filterModel.readStatus = {
+            operation: { id: '', value: '' },
+            value1: 0,
+            value2: 0
+          };
+        }
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedFilter;
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
         this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
         this.gridApi.onFilterChanged();
@@ -285,9 +308,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.readStatus = {
+        operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
+        value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
+        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
+      };
       this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
       this.requestModel.filterModel.types = filterDCU.typesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedFilter;
     } else {
       this.setFilterInfo();
     }
@@ -301,9 +330,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.filters = this.staticextService.setfilterHeaderText(
       filter.name,
       filter.statusesFilter && filter.statusesFilter.length > 0,
+      filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorFilter ? true : false,
-      filter.tagsFilter && filter.tagsFilter.length > 0
+      filter.tagsFilter && filter.tagsFilter.length > 0,
+      filter.showDeletedFilter
     );
   }
 
@@ -388,9 +419,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       id: [],
       filter: {
         statuses: [],
+        readStatus: {
+          operation: { id: '', value: '' },
+          value1: 0,
+          value2: 0
+        },
         types: [],
         vendor: { id: 0, value: '' },
-        tags: []
+        tags: [],
+        showDeleted: false
       }
     };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {

@@ -40,7 +40,6 @@ describe('Pact consumer test', () => {
           value1: 12,
           value2: null
         },
-        typesFilter: [1],
         tagsFilter: [
           { id: 3, value: 'tag 3' },
           { id: 2, value: 'tag 2' },
@@ -66,7 +65,6 @@ describe('Pact consumer test', () => {
           value1: 20.5,
           value2: 50.3
         },
-        typesFilter: [2, 3],
         tagsFilter: [
           { id: 3, value: 'tag 3' },
           { id: 1, value: 'tag 1' }
@@ -88,7 +86,6 @@ describe('Pact consumer test', () => {
           value1: 0,
           value2: null
         },
-        typesFilter: [1, 2],
         tagsFilter: [],
         firmwareFilter: [{ id: 2, value: 'frmware 2' }],
         breakerStateFilter: [{ id: 2, value: 'breaker state 2' }],
@@ -107,7 +104,6 @@ describe('Pact consumer test', () => {
           value1: 0,
           value2: null
         },
-        typesFilter: [2],
         tagsFilter: [],
         firmwareFilter: [{ id: 2, value: 'frmware 2' }],
         breakerStateFilter: [{ id: 2, value: 'breaker state 2' }],

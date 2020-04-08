@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -10,6 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -30,13 +31,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   meterUnitTags$: Observable<Codelist<number>[]>;
   breakerState$: Observable<Codelist<number>[]>;
   firmware$: Observable<Codelist<number>[]>;
-  operatorsList$: Codelist<string>[] = [
-    { id: 'Equals', value: this.i18n('Equals') },
-    { id: 'Not Equals', value: this.i18n('Not Equals') },
-    { id: 'Less than', value: this.i18n('Less than') },
-    { id: 'Greater than', value: this.i18n('Greater than') },
-    { id: 'In Range', value: this.i18n('In Range') }
-  ];
+  operatorsList$ = this.codelistHelperService.operationsList();
 
   currentStatuses: Codelist<number>[];
   currentTypes: Codelist<number>[];
@@ -55,7 +50,8 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private i18n: I18n,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private codelistHelperService: CodelistHelperService
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe(params => {
@@ -83,7 +79,6 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
               name: '',
               statusesFilter: this.sessionFilter.statusesFilter,
               readStatusFilter: this.sessionFilter.readStatusFilter,
-              typesFilter: this.sessionFilter.typesFilter,
               tagsFilter: this.sessionFilter.tagsFilter,
               vendorFilter: this.sessionFilter.vendorFilter,
               firmwareFilter: this.sessionFilter.firmwareFilter,
@@ -126,7 +121,6 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     return this.fb.group({
       ['statuses']: [filters && selected ? selected.statusesFilter : []],
       ['tags']: [filters && selected ? selected.tagsFilter : []],
-      ['types']: [filters && selected ? selected.typesFilter : []],
       ['filters']: [filters ? filters : []],
       ['vendor']: [filters && selected ? selected.vendorFilter : null],
       ['firmware']: [filters && selected ? selected.firmwareFilter : []],
@@ -137,7 +131,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
           : { id: '', value: '' }
       ],
       ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-      ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : null],
+      ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
       ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
       ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false]
     });
@@ -149,10 +143,6 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
 
   get tagsProperty() {
     return 'tags';
-  }
-
-  get typesProperty() {
-    return 'types';
   }
 
   get filtersProperty() {
@@ -201,9 +191,8 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       readStatusFilter: {
         operation: { id: '', value: '' },
         value1: 0,
-        value2: null
+        value2: 0
       },
-      typesFilter: [],
       tagsFilter: [],
       vendorFilter: null,
       firmwareFilter: [],
@@ -230,14 +219,13 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
           ? {
               operation: this.form.get(this.operationProperty).value,
               value1: this.form.get(this.value1Property).value,
-              value2: this.form.get(this.operationProperty).value.id === 'In Range' ? this.form.get(this.value2Property).value : null
+              value2: this.form.get(this.operationProperty).value.id === 'In Range' ? this.form.get(this.value2Property).value : 0
             }
           : {
               operation: { id: '', value: '' },
               value1: 0,
-              value2: null
+              value2: 0
             },
-      typesFilter: this.form.get(this.typesProperty).value,
       firmwareFilter: this.form.get(this.firmwareProperty).value,
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,

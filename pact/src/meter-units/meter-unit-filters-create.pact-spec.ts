@@ -36,7 +36,6 @@ describe('Pact consumer test', () => {
       value2: null
     },
     tagsFilter: [{ id: 1, value: 'tag 1' }],
-    typesFilter: [1],
     vendorFilter: { id: 1, value: 'Vendor 1' },
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
@@ -56,7 +55,6 @@ describe('Pact consumer test', () => {
       value2: null
     },
     tagsFilter: [{ id: 1, value: 'tag 1' }],
-    typesFilter: [1],
     vendorFilter: { id: 1, value: 'Vendor 1' },
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
@@ -104,7 +102,6 @@ describe('Pact consumer test', () => {
           expect(res.name).toEqual(responseBody.name);
           expect(res.statusesFilter).toEqual(responseBody.statusesFilter);
           expect(res.tagsFilter).toEqual(responseBody.tagsFilter);
-          expect(res.typesFilter).toEqual(responseBody.typesFilter);
           expect(res.vendorFilter).toEqual(responseBody.vendorFilter);
           expect(res.readStatusFilter.operation).toEqual(responseBody.readStatusFilter.operation);
           expect(res.readStatusFilter.value1).toEqual(responseBody.readStatusFilter.value1);

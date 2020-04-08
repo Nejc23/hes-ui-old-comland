@@ -9,6 +9,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
+import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -29,6 +30,7 @@ export class GridCustomFilterComponent implements IToolPanel {
   data: DcuLayout[];
   dcuTags$: Observable<Codelist<number>[]>;
   dcuTags: Codelist<number>[];
+  operatorsList$ = this.codelistHelperService.operationsList();
 
   currentStatuses: Codelist<number>[];
   currentTypes: Codelist<number>[];
@@ -45,7 +47,8 @@ export class GridCustomFilterComponent implements IToolPanel {
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private i18n: I18n
+    private i18n: I18n,
+    private codelistHelperService: CodelistHelperService
   ) {
     this.form = this.createForm(null, null);
   }
@@ -58,6 +61,7 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuFilters$ = this.dcuService.getDcuLayout();
     this.dcuFilters$.subscribe(x => {
+      console.log(x);
       this.data = x;
       this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
 
@@ -69,9 +73,11 @@ export class GridCustomFilterComponent implements IToolPanel {
             id: -1,
             name: '',
             statusesFilter: this.sessionFilter.statusesFilter,
+            readStatusFilter: this.sessionFilter.readStatusFilter,
             typesFilter: this.sessionFilter.typesFilter,
             tagsFilter: this.sessionFilter.tagsFilter,
             vendorFilter: this.sessionFilter.vendorFilter,
+            showDeletedFilter: this.sessionFilter.showDeletedFilter,
             gridLayout: ''
           };
           x.push(currentFilter);
@@ -100,7 +106,15 @@ export class GridCustomFilterComponent implements IToolPanel {
       ['tags']: [filters && selected ? selected.tagsFilter : []],
       ['types']: [filters && selected ? selected.typesFilter : []],
       ['filters']: [filters ? filters : []],
-      ['vendor']: [filters && selected ? selected.vendorFilter : null]
+      ['vendor']: [filters && selected ? selected.vendorFilter : null],
+      ['operation']: [
+        filters && selected.readStatusFilter && selected.readStatusFilter.operation
+          ? selected.readStatusFilter.operation
+          : { id: '', value: '' }
+      ],
+      ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
+      ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
+      ['showDeleted']: [filters && selected ? selected.showDeletedFilter : false]
     });
   }
 
@@ -124,6 +138,22 @@ export class GridCustomFilterComponent implements IToolPanel {
     return 'vendor';
   }
 
+  get operationProperty() {
+    return 'operation';
+  }
+
+  get value1Property() {
+    return 'value1';
+  }
+
+  get value2Property() {
+    return 'value2';
+  }
+
+  get showDeletedProperty() {
+    return 'showDeleted';
+  }
+
   refresh() {}
 
   clearButtonClicked() {
@@ -131,9 +161,15 @@ export class GridCustomFilterComponent implements IToolPanel {
       id: 0,
       name: '',
       statusesFilter: [],
+      readStatusFilter: {
+        operation: { id: '', value: '' },
+        value1: 0,
+        value2: 0
+      },
       typesFilter: [],
       tagsFilter: [],
       vendorFilter: null,
+      showDeletedFilter: false,
       gridLayout: ''
     };
     this.sessionFilter = currentFilter;
@@ -149,9 +185,22 @@ export class GridCustomFilterComponent implements IToolPanel {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
       statusesFilter: this.form.get(this.statusesProperty).value,
+      readStatusFilter:
+        this.form.get(this.operationProperty).value !== undefined && this.form.get(this.operationProperty).value != null
+          ? {
+              operation: this.form.get(this.operationProperty).value,
+              value1: this.form.get(this.value1Property).value,
+              value2: this.form.get(this.operationProperty).value.id === 'In Range' ? this.form.get(this.value2Property).value : 0
+            }
+          : {
+              operation: { id: '', value: '' },
+              value1: 0,
+              value2: 0
+            },
       typesFilter: this.form.get(this.typesProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
+      showDeletedFilter: this.form.get(this.showDeletedProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);

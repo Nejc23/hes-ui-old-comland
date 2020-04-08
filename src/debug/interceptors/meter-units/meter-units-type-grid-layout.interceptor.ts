@@ -23,7 +23,6 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           value1: 10,
           value2: 30
         },
-        typesFilter: [1],
         tagsFilter: [
           { id: 3, value: 'tag 3' },
           { id: 2, value: 'tag 2' },
@@ -49,7 +48,6 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           value1: 0,
           value2: null
         },
-        typesFilter: [2, 3],
         tagsFilter: [
           { id: 3, value: 'tag 3' },
           { id: 1, value: 'tag 1' }
@@ -71,7 +69,6 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           value1: 30,
           value2: null
         },
-        typesFilter: [1, 2],
         tagsFilter: [],
         firmwareFilter: [{ id: 1, value: 'frmware 1' }],
         breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
@@ -90,7 +87,6 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           value1: 43,
           value2: null
         },
-        typesFilter: [2],
         tagsFilter: [],
         firmwareFilter: [{ id: 1, value: 'frmware 1' }],
         breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
@@ -129,7 +125,6 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         value1: 43,
         value2: null
       },
-      typesFilter: [3],
       tagsFilter: [
         { id: 3, value: 'tag 3' },
         { id: 1, value: 'tag 1' }

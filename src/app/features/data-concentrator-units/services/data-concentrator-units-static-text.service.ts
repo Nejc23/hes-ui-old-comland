@@ -35,38 +35,56 @@ export class DataConcentratorUnitsStaticTextService {
     return this.i18n('Next planned read') + ' ';
   }
 
-  setfilterHeaderText(filterName: string, status: boolean, type: boolean, vendor: boolean, tag: boolean) {
+  setfilterHeaderText(
+    filterName: string,
+    status: boolean,
+    readStatuses: boolean,
+    type: boolean,
+    vendor: boolean,
+    tag: boolean,
+    showDeleted: boolean
+  ) {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
 
     if (filterName !== '' && filterName !== undefined) {
-      additionalString = status || type || vendor || tag ? ' · ' : '';
+      additionalString = status || readStatuses || type || vendor || tag || showDeleted ? ' · ' : '';
       result = filterName + additionalString;
-    } else if (status || type || vendor || tag) {
+    } else if (status || readStatuses || type || vendor || tag || showDeleted) {
       result = '';
     }
 
-    if ((filterName !== '' && filterName !== undefined) || status || type || vendor || tag) {
+    if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag || showDeleted) {
       result = result + this.i18n('Filtered by: ');
     }
 
     if (status) {
-      additionalString = type || vendor || tag ? ', ' : '';
+      additionalString = readStatuses || type || vendor || tag || showDeleted ? ', ' : '';
       result = result + this.i18n('status') + additionalString;
     }
 
+    if (readStatuses) {
+      additionalString = type || vendor || tag || showDeleted ? ', ' : '';
+      result = result + this.i18n('read status') + additionalString;
+    }
+
     if (type) {
-      additionalString = vendor || tag ? ', ' : '';
+      additionalString = vendor || tag || showDeleted ? ', ' : '';
       result = result + this.i18n('type') + additionalString;
     }
 
     if (vendor) {
-      additionalString = tag ? ', ' : '';
+      additionalString = tag || showDeleted ? ', ' : '';
       result = result + this.i18n('vendor') + additionalString;
     }
 
     if (tag) {
-      result = result + this.i18n('tag');
+      additionalString = showDeleted ? ', ' : '';
+      result = result + this.i18n('tag') + additionalString;
+    }
+
+    if (showDeleted) {
+      result = result + this.i18n('show deleted');
     }
     return result;
   }

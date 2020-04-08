@@ -244,9 +244,11 @@ export class DataConcentratorUnitsGridService {
   public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
     if (
       JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
-      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor)
+      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
+      JSON.stringify(sessionFilter.showDeletedFilter) === JSON.stringify(requestModel.showDeleted)
     ) {
       return true;
     }

@@ -58,7 +58,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     searchModel: [],
     filterModel: {
       statuses: [{ id: 0, value: '' }],
-      types: [0],
       tags: [{ id: 0, value: '' }],
       vendor: { id: 0, value: '' },
       readStatus: {
@@ -122,7 +121,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         if (event !== null) {
           this.requestModel.filterModel.statuses = event.statusesFilter;
           this.requestModel.filterModel.vendor = event.vendorFilter;
-          this.requestModel.filterModel.types = event.typesFilter;
           this.requestModel.filterModel.tags = event.tagsFilter;
           this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
@@ -294,7 +292,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // on close tool panel reload filter model
   toolPanelChanged(params) {
     if (params.source === undefined) {
-      console.log(this.sessionNameForGridFilter);
       if (
         !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
           this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
@@ -304,7 +301,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
         this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-        this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
         if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
           this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
@@ -352,12 +348,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
       this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-      this.requestModel.filterModel.types = filterDCU.typesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
         operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
         value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
-        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : null
+        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
       this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
@@ -375,7 +370,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.filters = this.staticTextService.setfilterHeaderText(
       filter.name,
       filter.statusesFilter && filter.statusesFilter.length > 0,
-      filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorFilter ? true : false,
       filter.tagsFilter && filter.tagsFilter.length > 0,
       filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,

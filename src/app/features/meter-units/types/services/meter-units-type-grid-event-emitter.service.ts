@@ -1,19 +1,19 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeterUnitsTypeGridEventEmitterService {
   public eventEmitterSelectDeselectAll: EventEmitter<boolean>;
-  public eventEmitterLayoutChange: EventEmitter<DcuLayout>;
+  public eventEmitterLayoutChange: EventEmitter<MeterUnitsLayout>;
 
   private isSelectedAll = new BehaviorSubject(false);
 
   constructor() {
     this.eventEmitterSelectDeselectAll = new EventEmitter<boolean>();
-    this.eventEmitterLayoutChange = new EventEmitter<DcuLayout>();
+    this.eventEmitterLayoutChange = new EventEmitter<MeterUnitsLayout>();
     this.isSelectedAll = new BehaviorSubject<boolean>(false);
   }
 
@@ -23,7 +23,7 @@ export class MeterUnitsTypeGridEventEmitterService {
   }
 
   // for selecting new grid layout and filter
-  public layoutChange(value: DcuLayout) {
+  public layoutChange(value: MeterUnitsLayout) {
     this.eventEmitterLayoutChange.emit(value);
   }
 

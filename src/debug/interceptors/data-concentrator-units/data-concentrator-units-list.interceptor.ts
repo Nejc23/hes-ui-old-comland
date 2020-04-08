@@ -11,53 +11,6 @@ import { dataConcentratorUnits } from 'src/app/core/repository/consts/data-conce
 export class DataConcentratorUnitsListInterceptor {
   constructor() {}
 
-  /* static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    let skip = 0;
-    let take = 0;
-    let sortColId = '';
-    let sortedUsers = data;
-    let searched = [];
-    if (request.body) {
-      const params = request.body as GridRequestParams;
-*/
-  /* if (params.search && params.search.length > 0) {
-        searched = searchBooks(data, params.search[0].value);
-      }*/
-
-  /*      skip = params.startRow;
-      take = params.endRow;
-*/
-  /*if (params.sort) {
-        params.sort.forEach(element => {
-          sortColId = element.selector;
-          if (element.desc) {
-            sortedUsers = _.sortBy(searched, sortColId).reverse();
-          } else {
-            sortedUsers = _.sortBy(searched, sortColId);
-          }
-        });
-      }*/
-  /*  }
-
-    const body: GridResponse<DataConcentratorUnitsList> = {
-      data: sortedUsers.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
-      totalCount: searched.length,
-      summary: '',
-      groupCount: 0
-    };
-
-    return of(
-      new HttpResponse({
-        status: 200,
-        body
-      })
-    );
-  }
-
-  static canInterceptDataConcentratorUnitsList(request: HttpRequest<any>): boolean {
-    return new RegExp(`/api/data-concentrator-units`).test(request.url);
-  }*/
-
   static interceptDataConcentratorUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     let skip = 0;
     let take = 0;

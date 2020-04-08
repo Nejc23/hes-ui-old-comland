@@ -16,14 +16,14 @@ export interface GridRequestParams {
 
 export interface GridFilterParams {
   statuses: Codelist<number>[];
-  types: number[];
+  types?: number[];
   tags: Codelist<number>[];
   vendor: Codelist<number>;
-  readStatus?: ReadStatus;
+  readStatus: ReadStatus;
   firmware?: Codelist<number>[];
   breakerState?: Codelist<number>[];
   showChildInfoMBus?: boolean;
-  showDeleted?: boolean;
+  showDeleted: boolean;
 }
 
 export interface GridSortParams {

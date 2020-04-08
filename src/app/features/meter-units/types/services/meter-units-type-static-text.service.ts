@@ -38,7 +38,6 @@ export class MeterUnitsTypeStaticTextService {
   setfilterHeaderText(
     filterName: string,
     status: boolean,
-    type: boolean,
     vendor: boolean,
     tag: boolean,
     readStatuses: boolean,
@@ -50,17 +49,15 @@ export class MeterUnitsTypeStaticTextService {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
-      additionalString =
-        status || type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ' · ' : '';
+      additionalString = status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ' · ' : '';
       result = filterName + additionalString;
-    } else if (status || type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted) {
+    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted) {
       result = '';
     }
 
     if (
       (filterName !== '' && filterName !== undefined) ||
       status ||
-      type ||
       vendor ||
       tag ||
       readStatuses ||
@@ -73,13 +70,8 @@ export class MeterUnitsTypeStaticTextService {
     }
 
     if (status) {
-      additionalString = type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
-      result = result + this.i18n('status') + additionalString;
-    }
-
-    if (type) {
       additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
-      result = result + this.i18n('type') + additionalString;
+      result = result + this.i18n('status') + additionalString;
     }
 
     if (vendor) {

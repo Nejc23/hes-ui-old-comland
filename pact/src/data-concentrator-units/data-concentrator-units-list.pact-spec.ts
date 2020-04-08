@@ -47,12 +47,18 @@ describe('Pact consumer test', () => {
       ],
       filterModel: {
         statuses: [{ id: 1, value: 'active' }],
+        readStatus: {
+          operation: { id: 'Greater Than', value: 'Greater Than' },
+          value1: 12,
+          value2: null
+        },
         types: [1, 2],
         vendor: { id: 2, value: 'Vendor 2' },
         tags: [
           { id: 1, value: 'tag1' },
           { id: 2, value: 'tag2' }
-        ]
+        ],
+        showDeleted: true
       }
     };
 
