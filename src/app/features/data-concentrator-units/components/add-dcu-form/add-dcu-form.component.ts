@@ -77,6 +77,8 @@ export class AddDcuFormComponent implements OnInit {
         if (result) {
           if (addNew) {
             this.form.reset();
+          } else {
+            this.modal.close();
           }
         }
       },
