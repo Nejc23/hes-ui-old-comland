@@ -369,7 +369,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorFilter ? true : false,
       filter.tagsFilter && filter.tagsFilter.length > 0,
-      filter.readStatusFilter && filter.readStatusFilter.operation ? true : false,
+      filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
       filter.firmwareFilter && filter.firmwareFilter.length > 0,
       filter.breakerStateFilter && filter.breakerStateFilter.length > 0,
       filter.showOnlyMeterUnitsWithMBusInfoFilter,

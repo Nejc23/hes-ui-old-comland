@@ -49,7 +49,6 @@ export class MeterUnitsTypeStaticTextService {
   ) {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
-    console.log(readStatuses);
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
         status || type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ' · ' : '';
