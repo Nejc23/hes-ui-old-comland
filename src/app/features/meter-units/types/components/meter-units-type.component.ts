@@ -294,15 +294,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // on close tool panel reload filter model
   toolPanelChanged(params) {
     if (params.source === undefined) {
-      console.log(this.requestModel.filterModel);
-      console.log(this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter));
       if (
         !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
           this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
           this.requestModel.filterModel
         )
       ) {
-        console.log('21212 ----->');
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
         this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
@@ -348,9 +345,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
       this.requestModel.filterModel.types = filterDCU.typesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-      this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
-      this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
-      this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+      this.requestModel.filterModel.readStatus = {
+        operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
+        value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
+        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : null
+      };
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
       this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
@@ -364,14 +363,13 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // fill text in header - about selected filters
   setFilterInfo() {
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-    console.log(filter);
     this.filters = this.staticTextService.setfilterHeaderText(
       filter.name,
       filter.statusesFilter && filter.statusesFilter.length > 0,
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorFilter ? true : false,
       filter.tagsFilter && filter.tagsFilter.length > 0,
-      filter.readStatusFilter.operation ? true : false,
+      filter.readStatusFilter && filter.readStatusFilter.operation ? true : false,
       filter.firmwareFilter && filter.firmwareFilter.length > 0,
       filter.breakerStateFilter && filter.breakerStateFilter.length > 0,
       filter.showOnlyMeterUnitsWithMBusInfoFilter,

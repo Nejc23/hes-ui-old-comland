@@ -221,7 +221,6 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   }
 
   applyButtonClicked() {
-    console.log(this.form.get(this.operationProperty).value);
     const currentFilter: MeterUnitsLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
