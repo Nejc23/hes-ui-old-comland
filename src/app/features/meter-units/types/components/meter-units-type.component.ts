@@ -17,6 +17,7 @@ import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -59,7 +60,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       statuses: [{ id: 0, value: '' }],
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' }
+      vendor: { id: 0, value: '' },
+      readStatus: {
+        operation: { id: '', value: '' },
+        value1: 0,
+        value2: null
+      },
+      firmware: [{ id: 0, value: '' }],
+      breakerState: [{ id: 0, value: '' }],
+      showChildInfoMBus: false,
+      showDeleted: false
     }
   };
 
@@ -114,6 +124,13 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.vendor = event.vendorFilter;
           this.requestModel.filterModel.types = event.typesFilter;
           this.requestModel.filterModel.tags = event.tagsFilter;
+          this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
+          this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
+          this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
+          this.requestModel.filterModel.firmware = event.firmwareFilter;
+          this.requestModel.filterModel.breakerState = event.breakerStateFilter;
+          this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
+          this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
           this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -241,7 +258,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         (this.requestModel.filterModel.types === undefined ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0))
+        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0) &&
+        (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
+        (this.requestModel.filterModel.firmware === undefined ||
+          this.requestModel.filterModel.firmware.length === 0 ||
+          this.requestModel.filterModel.firmware[0].id === 0) &&
+        (this.requestModel.filterModel.breakerState === undefined ||
+          this.requestModel.filterModel.breakerState.length === 0 ||
+          this.requestModel.filterModel.breakerState[0].id === 0) &&
+        !this.requestModel.filterModel.showChildInfoMBus &&
+        !this.requestModel.filterModel.showDeleted)
     ) {
       return true;
     }
@@ -268,17 +294,27 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // on close tool panel reload filter model
   toolPanelChanged(params) {
     if (params.source === undefined) {
+      console.log(this.requestModel.filterModel);
+      console.log(this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter));
       if (
         !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
           this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
           this.requestModel.filterModel
         )
       ) {
+        console.log('21212 ----->');
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
         this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+        this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
+        this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
+        this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+        this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+        this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+        this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
+        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -312,6 +348,13 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
       this.requestModel.filterModel.types = filterDCU.typesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+      this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
+      this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
+      this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+      this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+      this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+      this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
+      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
     } else {
       this.setFilterInfo();
     }
@@ -321,13 +364,18 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // fill text in header - about selected filters
   setFilterInfo() {
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-
+    console.log(filter);
     this.filters = this.staticTextService.setfilterHeaderText(
       filter.name,
       filter.statusesFilter && filter.statusesFilter.length > 0,
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorFilter ? true : false,
-      filter.tagsFilter && filter.tagsFilter.length > 0
+      filter.tagsFilter && filter.tagsFilter.length > 0,
+      filter.readStatusFilter.operation ? true : false,
+      filter.firmwareFilter && filter.firmwareFilter.length > 0,
+      filter.breakerStateFilter && filter.breakerStateFilter.length > 0,
+      filter.showOnlyMeterUnitsWithMBusInfoFilter,
+      filter.showDeletedMeterUnitsFilter
     );
   }
 

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { meterUnitsLayout, meterUnits } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { meterUnits, meterUnitsLayout } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
 export class MeterUnitsTypeGridLayoutInterceptor {
@@ -19,7 +19,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           { id: 3, value: 'Mouted' }
         ],
         readStatusFilter: {
-          operation: 'In Range',
+          operation: { id: 'In Range', value: 'In Range' },
           value1: 10,
           value2: 30
         },
@@ -44,7 +44,11 @@ export class MeterUnitsTypeGridLayoutInterceptor {
           { id: 1, value: 'Active' },
           { id: 2, value: 'Inactive' }
         ],
-        readStatusFilter: null,
+        readStatusFilter: {
+          operation: { id: '', value: '' },
+          value1: 0,
+          value2: null
+        },
         typesFilter: [2, 3],
         tagsFilter: [
           { id: 3, value: 'tag 3' },
@@ -63,7 +67,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         vendorFilter: { id: 2, value: 'Vendor 2' },
         statusesFilter: [{ id: 2, value: 'Inactive' }],
         readStatusFilter: {
-          operation: 'Less Than',
+          operation: { id: 'Less Than', value: 'Less Than' },
           value1: 30,
           value2: null
         },
@@ -82,7 +86,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         vendorFilter: { id: 2, value: 'Vendor 2' },
         statusesFilter: [],
         readStatusFilter: {
-          operation: 'Greater Than',
+          operation: { id: 'Greater Than', value: 'Greater Than' },
           value1: 43,
           value2: null
         },
@@ -121,7 +125,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
       vendorFilter: null,
       statusesFilter: [{ id: 3, value: 'Mouted' }],
       readStatusFilter: {
-        operation: 'Greater Than',
+        operation: { id: 'Greater Than', value: 'Greater Than' },
         value1: 43,
         value2: null
       },

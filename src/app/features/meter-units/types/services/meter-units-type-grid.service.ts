@@ -292,7 +292,14 @@ export class MeterUnitsTypeGridService {
       JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
-      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor)
+      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
+      JSON.stringify(sessionFilter.readStatusFilter.operation) === JSON.stringify(requestModel.readStatus.operation) &&
+      JSON.stringify(sessionFilter.readStatusFilter.value1) === JSON.stringify(requestModel.readStatus.value1) &&
+      JSON.stringify(sessionFilter.readStatusFilter.value2) === JSON.stringify(requestModel.readStatus.value2) &&
+      JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
+      JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.breakerState) &&
+      JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
+      JSON.stringify(sessionFilter.showDeletedMeterUnitsFilter) === JSON.stringify(requestModel.showDeleted)
     ) {
       return true;
     }

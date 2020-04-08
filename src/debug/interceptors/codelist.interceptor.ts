@@ -3,7 +3,8 @@ import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { dcuStatuses, dcuTypes, dcuVendors, dcuTags, meterTypes } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { dcuStatuses, dcuTypes, dcuVendors, dcuTags } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
 export class CodelistInterceptor {
@@ -127,29 +128,5 @@ export class CodelistInterceptor {
 
   static canInterceptDcuTag(request: HttpRequest<any>): boolean {
     return new RegExp(dcuTags).test(request.url);
-  }
-
-  static interceptMeterType(): Observable<HttpEvent<any>> {
-    const data: Codelist<number>[] = [
-      {
-        id: 1,
-        value: 'PLC-G3'
-      },
-      {
-        id: 2,
-        value: 'M-BUS'
-      }
-    ];
-
-    return of(
-      new HttpResponse({
-        status: 200,
-        body: data
-      })
-    );
-  }
-
-  static canInterceptMeterType(request: HttpRequest<any>): boolean {
-    return new RegExp(meterTypes).test(request.url);
   }
 }

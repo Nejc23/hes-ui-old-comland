@@ -17,7 +17,9 @@ export class FormErrorComponent {
       maxlength: this.i18n(`Entry exceeds maximum amount of characters`),
       minlength: this.i18n(`Entry does not meet minimum required amount of characters`),
       pattern: this.i18n(`Wrong format`),
-      notMatchPassword: this.i18n(`Password not match`)
+      notMatchPassword: this.i18n(`Password not match`),
+      maxError: this.i18n(`Exceeds max value`),
+      minError: this.i18n(`Exceeds min value`)
     };
   }
 

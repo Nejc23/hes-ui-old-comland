@@ -35,38 +35,86 @@ export class MeterUnitsTypeStaticTextService {
     return this.i18n('Next planned read') + ' ';
   }
 
-  setfilterHeaderText(filterName: string, status: boolean, type: boolean, vendor: boolean, tag: boolean) {
+  setfilterHeaderText(
+    filterName: string,
+    status: boolean,
+    type: boolean,
+    vendor: boolean,
+    tag: boolean,
+    readStatuses: boolean,
+    firmware: boolean,
+    breakerState: boolean,
+    showChildMBus: boolean,
+    showDeleted: boolean
+  ) {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
-
+    console.log(readStatuses);
     if (filterName !== '' && filterName !== undefined) {
-      additionalString = status || type || vendor || tag ? ' · ' : '';
+      additionalString =
+        status || type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ' · ' : '';
       result = filterName + additionalString;
-    } else if (status || type || vendor || tag) {
+    } else if (status || type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted) {
       result = '';
     }
 
-    if ((filterName !== '' && filterName !== undefined) || status || type || vendor || tag) {
+    if (
+      (filterName !== '' && filterName !== undefined) ||
+      status ||
+      type ||
+      vendor ||
+      tag ||
+      readStatuses ||
+      firmware ||
+      breakerState ||
+      showChildMBus ||
+      showDeleted
+    ) {
       result = result + this.i18n('Filtered by: ');
     }
 
     if (status) {
-      additionalString = type || vendor || tag ? ', ' : '';
+      additionalString = type || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
       result = result + this.i18n('status') + additionalString;
     }
 
     if (type) {
-      additionalString = vendor || tag ? ', ' : '';
+      additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
       result = result + this.i18n('type') + additionalString;
     }
 
     if (vendor) {
-      additionalString = tag ? ', ' : '';
+      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
       result = result + this.i18n('vendor') + additionalString;
     }
 
     if (tag) {
-      result = result + this.i18n('tag');
+      additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
+      result = result + this.i18n('tag') + additionalString;
+    }
+
+    if (readStatuses) {
+      additionalString = firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
+      result = result + this.i18n('read status') + additionalString;
+    }
+
+    if (firmware) {
+      additionalString = breakerState || showChildMBus || showDeleted ? ', ' : '';
+      result = result + this.i18n('firmware') + additionalString;
+    }
+
+    if (breakerState) {
+      additionalString = showChildMBus || showDeleted ? ', ' : '';
+      result = result + this.i18n('breaker state') + additionalString;
+    }
+
+    if (showChildMBus) {
+      additionalString = showDeleted ? ', ' : '';
+      result = result + this.i18n('show child MBus') + additionalString;
+    }
+
+    if (showDeleted) {
+      result = result + this.i18n('show deleted');
     }
     return result;
   }

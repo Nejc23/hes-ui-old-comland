@@ -3,14 +3,13 @@ import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -24,14 +23,20 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
 
   form: FormGroup;
 
-  dcuStatuses$: Observable<Codelist<number>[]>;
-  dcuStatuses: Codelist<number>[] = [];
-  dcuTypes$: Observable<Codelist<number>[]>;
-  dcuVendors$: Observable<Codelist<number>[]>;
+  meterUnitStatuses$: Observable<Codelist<number>[]>;
+  meterUnitVendors$: Observable<Codelist<number>[]>;
   mutFilters$: Observable<MeterUnitsLayout[]>;
   data: MeterUnitsLayout[];
-  dcuTags$: Observable<Codelist<number>[]>;
-  dcuTags: Codelist<number>[];
+  meterUnitTags$: Observable<Codelist<number>[]>;
+  breakerState$: Observable<Codelist<number>[]>;
+  firmware$: Observable<Codelist<number>[]>;
+  operatorsList$: Codelist<string>[] = [
+    { id: 'Equals', value: this.i18n('Equals') },
+    { id: 'Not Equals', value: this.i18n('Not Equals') },
+    { id: 'Less than', value: this.i18n('Less than') },
+    { id: 'Greater than', value: this.i18n('Greater than') },
+    { id: 'In Range', value: this.i18n('In Range') }
+  ];
 
   currentStatuses: Codelist<number>[];
   currentTypes: Codelist<number>[];
@@ -44,7 +49,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   paramsSub: Subscription;
   id = 0;
   constructor(
-    private codelistService: CodelistRepositoryService,
+    private codelistService: CodelistMeterUnitsRepositoryService,
     private mutService: MeterUnitsService,
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
@@ -54,6 +59,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe(params => {
+      this.id = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
         : 'grdLayoutMUT-typeId-' + params.id;
@@ -97,16 +103,11 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   // called on init
   agInit(params: IToolPanelParams): void {
     this.params = params;
-
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
-
-    this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
-    this.dcuStatuses$.subscribe(y => (this.dcuStatuses = y));
-
-    this.dcuTags$ = this.codelistService.dcuTagCodelist();
-    this.dcuTags$.subscribe(y => (this.dcuTags = y));
-
+    this.meterUnitVendors$ = this.codelistService.meterUnitVendorCodelist(this.id);
+    this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
+    this.meterUnitTags$ = this.codelistService.meterUnitTagCodelist(this.id);
+    this.breakerState$ = this.codelistService.meterUnitBreakerStateCodelist(this.id);
+    this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
     this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
   }
 
@@ -130,7 +131,11 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       ['vendor']: [filters && selected ? selected.vendorFilter : null],
       ['firmware']: [filters && selected ? selected.firmwareFilter : []],
       ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
-      ['operation']: [filters && selected.readStatusFilter ? selected.readStatusFilter.operation : ''],
+      ['operation']: [
+        filters && selected.readStatusFilter && selected.readStatusFilter.operation
+          ? selected.readStatusFilter.operation
+          : { id: '', value: '' }
+      ],
       ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
       ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : null],
       ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
@@ -194,7 +199,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       name: '',
       statusesFilter: [],
       readStatusFilter: {
-        operation: '',
+        operation: { id: '', value: '' },
         value1: 0,
         value2: null
       },
@@ -216,15 +221,23 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   }
 
   applyButtonClicked() {
+    console.log(this.form.get(this.operationProperty).value);
     const currentFilter: MeterUnitsLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
       statusesFilter: this.form.get(this.statusesProperty).value,
-      readStatusFilter: {
-        operation: this.form.get(this.operationProperty).value,
-        value1: this.form.get(this.value1Property).value,
-        value2: this.form.get(this.value2Property).value
-      },
+      readStatusFilter:
+        this.form.get(this.operationProperty).value !== undefined && this.form.get(this.operationProperty).value != null
+          ? {
+              operation: this.form.get(this.operationProperty).value,
+              value1: this.form.get(this.value1Property).value,
+              value2: this.form.get(this.operationProperty).value.id === 'In Range' ? this.form.get(this.value2Property).value : null
+            }
+          : {
+              operation: { id: '', value: '' },
+              value1: 0,
+              value2: null
+            },
       typesFilter: this.form.get(this.typesProperty).value,
       firmwareFilter: this.form.get(this.firmwareProperty).value,
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,

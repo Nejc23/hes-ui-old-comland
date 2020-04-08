@@ -12,6 +12,7 @@ import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-lay
 import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
 import { MeterUnitsListInterceptor } from './meter-units/meter-units-list.interceptor';
 import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-type-grid-layout.interceptor';
+import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.interceptor';
 import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
 
 @Injectable()
@@ -56,7 +57,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
             }
 
-            // codelists
+            // codelists dcu
             if (CodelistInterceptor.canInterceptDcuStatus(request)) {
               return CodelistInterceptor.interceptDcuStatus();
             }
@@ -69,8 +70,25 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             if (CodelistInterceptor.canInterceptDcuVendor(request)) {
               return CodelistInterceptor.interceptDcuVendor();
             }
-            if (CodelistInterceptor.canInterceptMeterType(request)) {
-              return CodelistInterceptor.interceptMeterType();
+
+            // meter unit codelists
+            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitType(request)) {
+              return MeterUnitCodelistInterceptor.interceptMeterUnitType();
+            }
+            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitStatus(request)) {
+              return MeterUnitCodelistInterceptor.interceptMeterUnitStatus();
+            }
+            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitVendor(request)) {
+              return MeterUnitCodelistInterceptor.interceptMeterUnitVendor();
+            }
+            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitTag(request)) {
+              return MeterUnitCodelistInterceptor.interceptMeterUnitTag();
+            }
+            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitFirmware(request)) {
+              return MeterUnitCodelistInterceptor.interceptMeterUnitFirmware();
+            }
+            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitBreakerState(request)) {
+              return MeterUnitCodelistInterceptor.interceptMeterUnitBreakerState();
             }
 
             // authenticate

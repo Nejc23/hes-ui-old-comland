@@ -15,7 +15,7 @@ export interface MeterUnitsLayout {
   showDeletedMeterUnitsFilter: boolean;
 }
 export interface MeterUnitsReadStatusLayout {
-  operation: string;
+  operation: Codelist<string>;
   value1: number;
   value2?: number;
 }

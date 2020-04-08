@@ -14,8 +14,8 @@ import { Observable, of } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
 import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { MeterTypeRoute } from '../enums/meter-type.enum';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   selector: 'app-base-template',
@@ -54,7 +54,7 @@ export class BaseTemplateComponent implements OnInit {
     public i18n: I18n,
     private formBuilder: FormBuilder,
     private router: Router,
-    private codeList: CodelistRepositoryService
+    private codeList: CodelistMeterUnitsRepositoryService
   ) {
     this.app = {
       layout: {
@@ -97,7 +97,7 @@ export class BaseTemplateComponent implements OnInit {
   }
 
   fillMeterUnits() {
-    this.codeList.meterTypeCodelist().subscribe(list => {
+    this.codeList.meterUnitTypeCodelist().subscribe(list => {
       if (list && list.length > 0) {
         list.forEach(element => {
           const newElement = {

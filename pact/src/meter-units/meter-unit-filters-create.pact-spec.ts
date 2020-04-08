@@ -31,7 +31,7 @@ describe('Pact consumer test', () => {
     name: 'Test filter 1',
     statusesFilter: [{ id: 1, value: 'Active' }],
     readStatusFilter: {
-      operation: 'Greater Than',
+      operation: { id: 'Greater Than', value: 'Greater Than' },
       value1: 12,
       value2: null
     },
@@ -51,7 +51,7 @@ describe('Pact consumer test', () => {
     name: 'Test filter 1',
     statusesFilter: [{ id: 1, value: 'Active' }],
     readStatusFilter: {
-      operation: 'Greater Than',
+      operation: { id: 'Greater Than', value: 'Greater Than' },
       value1: 12,
       value2: null
     },

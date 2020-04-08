@@ -5,8 +5,9 @@ import * as _ from 'lodash';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
-import { dataConcentratorUnits, meterUnits } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { dataConcentratorUnits } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
+import { meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
 export class MeterUnitsListInterceptor {

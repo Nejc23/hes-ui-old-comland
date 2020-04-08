@@ -4,9 +4,9 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { meterUnits, meterUnitsLayout } from '../../consts/data-concentrator-units.const';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
+import { meterUnits, meterUnitsLayout } from '../../consts/meter-units.const';
 
 @Injectable({
   providedIn: 'root'

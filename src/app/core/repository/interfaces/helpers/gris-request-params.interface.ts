@@ -19,6 +19,11 @@ export interface GridFilterParams {
   types: number[];
   tags: Codelist<number>[];
   vendor: Codelist<number>;
+  readStatus?: ReadStatus;
+  firmware?: Codelist<number>[];
+  breakerState?: Codelist<number>[];
+  showChildInfoMBus?: boolean;
+  showDeleted?: boolean;
 }
 
 export interface GridSortParams {
@@ -30,4 +35,10 @@ export interface GridSearchParams {
   colId: string;
   type: string;
   value: string;
+}
+
+export interface ReadStatus {
+  operation: Codelist<string>;
+  value1: number;
+  value2?: number;
 }

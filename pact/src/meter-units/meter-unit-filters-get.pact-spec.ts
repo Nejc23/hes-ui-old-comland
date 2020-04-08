@@ -36,7 +36,7 @@ describe('Pact consumer test', () => {
           { id: 3, value: 'Mouted' }
         ],
         readStatusFilter: {
-          operation: 'Greater Than',
+          operation: { id: 'Greater Than', value: 'Greater Than' },
           value1: 12,
           value2: null
         },
@@ -62,7 +62,7 @@ describe('Pact consumer test', () => {
           { id: 2, value: 'Inactive' }
         ],
         readStatusFilter: {
-          operation: 'In Range',
+          operation: { id: 'In Range', value: 'In Range' },
           value1: 20.5,
           value2: 50.3
         },
@@ -83,7 +83,11 @@ describe('Pact consumer test', () => {
         name: 'My saved filter 3',
         vendorFilter: { id: 2, value: 'Vendor 2' },
         statusesFilter: [{ id: 2, value: 'Inactive' }],
-        readStatusFilter: null,
+        readStatusFilter: {
+          operation: { id: '', value: '' },
+          value1: 0,
+          value2: null
+        },
         typesFilter: [1, 2],
         tagsFilter: [],
         firmwareFilter: [{ id: 2, value: 'frmware 2' }],
@@ -98,7 +102,11 @@ describe('Pact consumer test', () => {
         name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         vendorFilter: { id: 2, value: 'Vendor 2' },
         statusesFilter: [],
-        readStatusFilter: null,
+        readStatusFilter: {
+          operation: { id: '', value: '' },
+          value1: 0,
+          value2: null
+        },
         typesFilter: [2],
         tagsFilter: [],
         firmwareFilter: [{ id: 2, value: 'frmware 2' }],

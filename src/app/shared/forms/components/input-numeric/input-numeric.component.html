@@ -1,0 +1,26 @@
+<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+
+  <label [attr.for]="property" *ngIf="label">
+    {{label}}
+    <span *ngIf="required"> *</span>
+  </label>
+ 
+  <kendo-numerictextbox
+    [name]="property" 
+    class="form-control" 
+    [formControlName]="property"
+    [decimals]="decimals" 
+    [format]="format"
+    [min]="min"
+    [max]="max"
+    [step]="step"
+    [readonly]="isReadOnly"
+    [spinners]="showSpinners"
+  ></kendo-numerictextbox>
+
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()" class="error">
+    <app-form-error [error]="formControl!.errors"></app-form-error>
+  </div>
+
+</div>
