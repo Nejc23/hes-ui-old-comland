@@ -28,7 +28,7 @@ describe('Pact consumer test', () => {
   });
 
   describe('Meter unit registers', () => {
-    const data: RegistersSelectList[] = [
+    const responseBody: RegistersSelectList[] = [
       {
         id: 1,
         name: 'Register PLC temp 1',
@@ -60,13 +60,6 @@ describe('Pact consumer test', () => {
         description: 'description plc 5'
       }
     ];
-
-    const responseBody: GridResponse<RegistersSelectList> = {
-      data,
-      totalCount: 5,
-      summary: '',
-      groupCount: 0
-    };
 
     beforeAll(done => {
       provider

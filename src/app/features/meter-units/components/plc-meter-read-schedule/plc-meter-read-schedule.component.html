@@ -27,6 +27,13 @@
          [options]="weekDays" [inline]="true">
       </app-input-multiselect>
 
+      <label *ngIf="selectedId == 5" i18n>Days in month</label>
+      <div class="d-flex flex-wrap" *ngIf="selectedId == 5">
+       <button class="btn m-1" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'" *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
+          <span>{{i+1}}</span>
+       </button>
+      </div>
+
       <div class="form-row" *ngIf="selectedId > 2">
         <div class="col-3">
           <app-timepicker [form]="form" [property]="timeProperty" i18n-label label="Time" name="timeInDay">
