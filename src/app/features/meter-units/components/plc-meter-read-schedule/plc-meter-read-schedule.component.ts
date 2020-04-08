@@ -6,6 +6,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-plc-meter-read-schedule',
@@ -31,6 +32,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     { id: 8, value: this.i18n('Sun') }
   ];
   selectedId = 0;
+  monthDays: number[] = [];
 
   constructor(
     private meterService: MeterUnitsService,
@@ -48,7 +50,8 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       [this.minutesProperty]: [0],
       [this.hoursProperty]: [0],
       [this.timeProperty]: [new Date()],
-      [this.weekDaysProperty]: [null]
+      [this.weekDaysProperty]: [[]],
+      [this.monthDaysProperty]: [[]]
     });
   }
 
@@ -81,6 +84,30 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     console.log(`changeReadOptionId = ${this.form.get(this.readOptionsProperty).value}`);
   }
 
+  onDayInMonthClick(dayinMonth: number) {
+    const result = _.find(this.monthDays, dayinMonth) ? true : false;
+    if (!result) {
+      this.monthDays.push(dayinMonth);
+    } else {
+      _.remove(this.monthDays, dayinMonth);
+    }
+    // console.log(`day in month clicked = ${dayinMonth}`)
+
+    const realMonthDays = this.monthDays.map(day => (day = day + 1));
+    this.form.get(this.monthDaysProperty).setValue(realMonthDays);
+    // console.log(`this.form.value = ${JSON.stringify(this.form.value)}`);
+  }
+
+  isDayInMonthSelected(index: number) {
+    let isChecked = false;
+    for (const dayNo of this.monthDays) {
+      if (dayNo === index) {
+        isChecked = true;
+      }
+    }
+    return isChecked;
+  }
+
   get readOptionsProperty() {
     return 'readOptions';
   }
@@ -99,6 +126,10 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   get weekDaysProperty() {
     return 'weekDays';
+  }
+
+  get monthDaysProperty() {
+    return 'monthDays';
   }
 
   onDismiss() {
