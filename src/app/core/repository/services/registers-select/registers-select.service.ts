@@ -12,7 +12,7 @@ import { RegistersSelectList } from '../../interfaces/registers-select/registers
 export class RegistersSelectService {
   constructor(private repository: RepositoryService) {}
 
-  getMeterUnitRegisters(): Observable<GridResponse<RegistersSelectList>> {
+  getMeterUnitRegisters(): Observable<RegistersSelectList[]> {
     return this.repository.makeRequest(this.getMeterUnitRegistersRequest());
   }
 

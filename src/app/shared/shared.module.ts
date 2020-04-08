@@ -36,6 +36,7 @@ import { AddDcuFormComponent } from '../features/data-concentrator-units/compone
 import { RegistersSelectComponent } from '../features/registers-select/component/registers-select.component';
 import { PlcMeterReadScheduleComponent } from '../features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
+import { AgGridModule } from '@ag-grid-community/angular';
 
 @NgModule({
   exports: [
@@ -79,7 +80,8 @@ import { SaveViewFormMUTComponent } from '../features/meter-units/types/componen
     TranslateModule,
     CustomFormsModule,
     BreadcrumbsModule,
-    GridsterModule
+    GridsterModule,
+    AgGridModule.withComponents([])
   ],
   declarations: [
     BaseTemplateComponent,

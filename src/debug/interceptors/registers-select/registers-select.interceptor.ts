@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
-import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
-import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
-import { dataConcentratorUnits, meterUnitRegisters } from 'src/app/core/repository/consts/data-concentrator-units.const';
-import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
+import { meterUnitRegisters } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 
 @Injectable()
@@ -14,7 +10,7 @@ export class RegistersSelectInterceptor {
   constructor() {}
 
   static interceptMeterUnitRegisters(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const registers: RegistersSelectList[] = [
+    const body: RegistersSelectList[] = [
       {
         id: 1,
         name: 'Register PLC temp 1',
@@ -46,13 +42,6 @@ export class RegistersSelectInterceptor {
         description: 'description plc 5'
       }
     ];
-
-    const body: GridResponse<RegistersSelectList> = {
-      data: registers,
-      totalCount: registers.length,
-      summary: '',
-      groupCount: 0
-    };
 
     return of(
       new HttpResponse({
