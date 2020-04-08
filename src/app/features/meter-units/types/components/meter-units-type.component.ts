@@ -294,6 +294,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // on close tool panel reload filter model
   toolPanelChanged(params) {
     if (params.source === undefined) {
+      console.log(this.sessionNameForGridFilter);
       if (
         !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
           this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
@@ -305,9 +306,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
-        this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
-        this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+        if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
+          this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
+          this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
+          this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+        } else {
+          this.requestModel.filterModel.readStatus = {
+            operation: { id: '', value: '' },
+            value1: 0,
+            value2: 0
+          };
+        }
         this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
         this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
