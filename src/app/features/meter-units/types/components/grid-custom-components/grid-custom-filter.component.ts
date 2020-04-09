@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -11,6 +11,7 @@ import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
+import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -43,6 +44,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   sessionFilter: MeterUnitsLayout;
   paramsSub: Subscription;
   id = 0;
+
   constructor(
     private codelistService: CodelistMeterUnitsRepositoryService,
     private mutService: MeterUnitsService,
@@ -118,23 +120,26 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   }
 
   createForm(filters: MeterUnitsLayout[], selected: MeterUnitsLayout): FormGroup {
-    return this.fb.group({
-      ['statuses']: [filters && selected ? selected.statusesFilter : []],
-      ['tags']: [filters && selected ? selected.tagsFilter : []],
-      ['filters']: [filters ? filters : []],
-      ['vendor']: [filters && selected ? selected.vendorFilter : null],
-      ['firmware']: [filters && selected ? selected.firmwareFilter : []],
-      ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
-      ['operation']: [
-        filters && selected.readStatusFilter && selected.readStatusFilter.operation
-          ? selected.readStatusFilter.operation
-          : { id: '', value: '' }
-      ],
-      ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-      ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
-      ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
-      ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false]
-    });
+    return this.fb.group(
+      {
+        ['statuses']: [filters && selected ? selected.statusesFilter : []],
+        ['tags']: [filters && selected ? selected.tagsFilter : []],
+        ['filters']: [filters ? filters : []],
+        ['vendor']: [filters && selected ? selected.vendorFilter : null],
+        ['firmware']: [filters && selected ? selected.firmwareFilter : []],
+        ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
+        ['operation']: [
+          filters && selected.readStatusFilter && selected.readStatusFilter.operation
+            ? selected.readStatusFilter.operation
+            : { id: '', value: '' }
+        ],
+        ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
+        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
+        ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
+        ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false]
+      },
+      { validator: rangeFilterValidator }
+    );
   }
 
   get statusesProperty() {

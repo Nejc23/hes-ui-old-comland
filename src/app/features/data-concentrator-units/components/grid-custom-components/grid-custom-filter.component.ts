@@ -10,6 +10,7 @@ import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
+import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 
 @Component({
   selector: 'app-grid-custom-filter',
@@ -101,21 +102,24 @@ export class GridCustomFilterComponent implements IToolPanel {
   }
 
   createForm(filters: DcuLayout[], selected: DcuLayout): FormGroup {
-    return this.fb.group({
-      ['statuses']: [filters && selected ? selected.statusesFilter : []],
-      ['tags']: [filters && selected ? selected.tagsFilter : []],
-      ['types']: [filters && selected ? selected.typesFilter : []],
-      ['filters']: [filters ? filters : []],
-      ['vendor']: [filters && selected ? selected.vendorFilter : null],
-      ['operation']: [
-        filters && selected.readStatusFilter && selected.readStatusFilter.operation
-          ? selected.readStatusFilter.operation
-          : { id: '', value: '' }
-      ],
-      ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-      ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
-      ['showDeleted']: [filters && selected ? selected.showDeletedFilter : false]
-    });
+    return this.fb.group(
+      {
+        ['statuses']: [filters && selected ? selected.statusesFilter : []],
+        ['tags']: [filters && selected ? selected.tagsFilter : []],
+        ['types']: [filters && selected ? selected.typesFilter : []],
+        ['filters']: [filters ? filters : []],
+        ['vendor']: [filters && selected ? selected.vendorFilter : null],
+        ['operation']: [
+          filters && selected.readStatusFilter && selected.readStatusFilter.operation
+            ? selected.readStatusFilter.operation
+            : { id: '', value: '' }
+        ],
+        ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
+        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
+        ['showDeleted']: [filters && selected ? selected.showDeletedFilter : false]
+      },
+      { validator: rangeFilterValidator }
+    );
   }
 
   get statusesProperty() {

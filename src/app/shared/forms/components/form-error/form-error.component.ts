@@ -19,7 +19,8 @@ export class FormErrorComponent {
       pattern: this.i18n(`Wrong format`),
       notMatchPassword: this.i18n(`Password not match`),
       maxError: this.i18n(`Exceeds max value`),
-      minError: this.i18n(`Exceeds min value`)
+      minError: this.i18n(`Exceeds min value`),
+      incorrectRange: this.i18n(`Range is incorect`)
     };
   }
 

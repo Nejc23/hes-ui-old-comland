@@ -20,8 +20,6 @@
           [format]="'#.## \\%'" [step]="1" [isReadOnly]="false"></app-input-numeric>
         </div>
       </div>
-
-      
       <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="meterUnitVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
       </app-select-input>
 
