@@ -20,6 +20,8 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 import { filter } from 'rxjs/operators';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { PlcMeterReadScheduleComponent } from '../../components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -88,7 +90,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private meterUnitsTypeService: MeterUnitsService,
     private eventService: MeterUnitsTypeGridEventEmitterService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
-    private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService
+    private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
+    private modalService: ModalService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -534,6 +537,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );*/
+  }
+
+  onScheduleReadJobs() {
+    const modalRef = this.modalService.open(PlcMeterReadScheduleComponent);
+    modalRef.result.then().catch(() => {});
   }
 
   // TODO

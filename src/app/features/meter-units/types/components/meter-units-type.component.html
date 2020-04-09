@@ -22,6 +22,7 @@
     </div>
     <button type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
     <button type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
+    <button type="button" class="btn btn-link" (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
     <button type="button" class="btn btn-link" (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
     <button type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="far fa-cogs"></i><span i18n>Configuration</span></button>
   </div>
@@ -55,7 +56,7 @@
 
     [overlayNoRowsTemplate]="overlayNoRowsTemplate"
     [overlayLoadingTemplate]="overlayLoadingTemplate"
-    
+
     (selectionChanged)="onSelectionChanged()"
     (gridReady)="onGridReady($event)"
     (columnVisible)="onColumnVisible($event)"
