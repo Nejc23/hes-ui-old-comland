@@ -9,3 +9,4 @@ export const meterUnitBreakerStates = `/api/codelists/meter-unit-breaker-states`
 // meter units by type
 export const meterUnits = '/api/meter-units';
 export const meterUnitsLayout = 'layouts';
+export const meterUnitsScheduler = '/api/meter-units-scheduler';

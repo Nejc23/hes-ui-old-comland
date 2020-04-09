@@ -5,6 +5,9 @@ import { RegistersSelectService } from 'src/app/core/repository/services/registe
 import { Observable } from 'rxjs';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { RegistersSelectGridService } from '../services/registers-select-grid.service';
+import * as _ from 'lodash';
+import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 
 @Component({
   selector: 'app-registers-select',
@@ -34,5 +37,17 @@ export class RegistersSelectComponent implements OnInit {
   ngOnInit() {
     this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
     this.rowData$ = this.registersSelectService.getMeterUnitRegisters();
+  }
+
+  getSelectedRowIds() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    return _.map(
+      selectedRows,
+      nameOf<RegistersSelectList>(o => o.id)
+    );
+  }
+
+  deselectAllRows() {
+    this.gridApi.deselectAll();
   }
 }
