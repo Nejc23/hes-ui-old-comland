@@ -185,6 +185,10 @@ export class GridCustomFilterComponent implements IToolPanel {
   }
 
   applyButtonClicked() {
+    if (!this.form.valid) {
+      return;
+    }
+
     const currentFilter: DcuLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
