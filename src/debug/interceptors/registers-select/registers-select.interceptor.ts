@@ -13,33 +13,33 @@ export class RegistersSelectInterceptor {
     const body: RegistersSelectList[] = [
       {
         id: 1,
-        name: 'Register PLC temp 1',
-        type: 'PLC',
-        description: 'description plc 1'
+        name: 'Register abc 1',
+        type: 'type A',
+        description: 'description 1'
       },
       {
         id: 2,
-        name: 'Register PLC temp 2',
-        type: 'PLC',
-        description: 'description plc 2'
+        name: 'Register def 2',
+        type: 'type B',
+        description: 'description 2'
       },
       {
         id: 3,
-        name: 'Register PLC temp 3',
-        type: 'PLC',
-        description: 'description plc 3'
+        name: 'Register def 3',
+        type: 'type B',
+        description: 'description 3'
       },
       {
         id: 4,
-        name: 'Register PLC temp 4',
-        type: 'PLC',
-        description: 'description plc 4'
+        name: 'Register abc 4',
+        type: 'type A',
+        description: 'description 4'
       },
       {
         id: 5,
-        name: 'Register PLC temp 5',
-        type: 'PLC',
-        description: 'description plc 5'
+        name: 'Register temp 5',
+        type: 'type C',
+        description: 'description 5'
       }
     ];
 

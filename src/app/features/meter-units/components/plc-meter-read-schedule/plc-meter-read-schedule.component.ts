@@ -15,7 +15,7 @@ import { RegistersSelectComponent } from 'src/app/features/registers-select/comp
   selector: 'app-plc-meter-read-schedule',
   templateUrl: './plc-meter-read-schedule.component.html'
 })
-export class PlcMeterReadScheduleComponent implements OnInit, AfterViewInit {
+export class PlcMeterReadScheduleComponent implements OnInit {
   @ViewChild(RegistersSelectComponent, { static: true }) registers;
 
   form: FormGroup;
@@ -62,10 +62,6 @@ export class PlcMeterReadScheduleComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {}
-
-  ngAfterViewInit() {
-    throw new Error('Method not implemented.');
-  }
 
   fillData(): MeterUnitsReadSchedule {
     const formData: MeterUnitsReadSchedule = {
