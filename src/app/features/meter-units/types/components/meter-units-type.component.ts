@@ -14,10 +14,12 @@ import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { filter } from 'rxjs/operators';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -27,6 +29,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   id = 0;
   private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
+  headerTitle = '';
 
   // grid variables
   columns = [];
@@ -39,6 +42,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
+
+  meterTypes$: Codelist<number>[] = [];
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -82,10 +87,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private meterUnitsTypeService: MeterUnitsService,
     private eventService: MeterUnitsTypeGridEventEmitterService,
-    private gridFilterSessionStoreService: GridLayoutSessionStoreService
+    private gridFilterSessionStoreService: GridLayoutSessionStoreService,
+    private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService
   ) {
-    this.sidebarService.headerTitle = 'Meter Units type';
-
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
       meterUnitsTypeGridService.meterUnitsTypeId = params.id;
@@ -110,9 +114,18 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.gridApi.setSortModel(cookieSort);
         }
       }
+
+      // set title by selected meter unit type
+      if (this.meterTypes$.length === 0) {
+        this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe(data => {
+          this.meterTypes$ = data;
+          this.setTitle(this.id);
+        });
+      } else {
+        this.setTitle(this.id);
+      }
     });
 
-    this.sidebarService.headerTitle = staticTextService.headerTitleMeterUnitsType;
     this.filters = staticTextService.noFilterAppliedTekst;
     this.frameworkComponents = meterUnitsTypeGridService.setFrameworkComponents();
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions();
@@ -137,6 +150,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     });
+  }
+
+  // set form title by selected meter unit type
+  private setTitle(id: number) {
+    const selectedType = this.meterTypes$.find(x => x.id == id);
+    if (selectedType !== undefined && selectedType != null) {
+      this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsType;
+    }
   }
 
   ngOnInit() {

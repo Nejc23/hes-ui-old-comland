@@ -8,7 +8,7 @@ export class MeterUnitsTypeStaticTextService {
   constructor(private i18n: I18n) {}
 
   get headerTitleMeterUnitsType() {
-    return this.i18n('Meter Units Type');
+    return this.i18n('Meter Units');
   }
   /*
   get breadcrumbNameDCU() {

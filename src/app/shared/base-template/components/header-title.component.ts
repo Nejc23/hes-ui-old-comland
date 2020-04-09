@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import * as _ from 'lodash';
 import { Subscription } from 'rxjs';
@@ -10,7 +10,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
   templateUrl: './header-title.component.html'
 })
 export class HeaderTitleComponent implements OnInit, OnDestroy {
-  headerTitle: string;
+  @Input() headerTitle: string;
   subscription: Subscription;
 
   constructor(private sidebarService: SidebarService, private router: Router, private i18n: I18n) {
