@@ -19,7 +19,7 @@
   ></kendo-numerictextbox>
 
   <!--Loop through errors-->
-  <div class="help-block" *ngIf="showErrors()" class="error">
+  <div class="help-block" *ngIf="showErrors() && allowShowError" class="error">
     <app-form-error [error]="formControl!.errors"></app-form-error>
   </div>
 

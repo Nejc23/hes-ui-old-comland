@@ -12,12 +12,16 @@
         </div>
         <div class="col-3">
           <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value1Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100" 
-          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false"></app-input-numeric>
+          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
         </div>
         <div class="col-3" *ngIf="form.get(operationProperty).value != null &&  form.get(operationProperty).value.id === 'In Range'">
           <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value2Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100" 
-          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false"></app-input-numeric>
-        </div>
+          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
+        </div>       
+      </div>
+      <div class="form-row text-danger" *ngIf="!form.valid">
+        <div class="col-6"></div>
+        <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
       </div>
 
       <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"

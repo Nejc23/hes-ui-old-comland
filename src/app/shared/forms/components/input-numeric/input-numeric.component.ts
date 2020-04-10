@@ -20,6 +20,7 @@ export class InputNumericComponent implements OnInit {
   @Input() min = 0;
   @Input() max = 100;
   @Input() step = 1;
+  @Input() allowShowError = true;
 
   constructor(private formUtils: FormsUtilsService) {}
 

@@ -248,4 +248,12 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     // close tool-panel
     this.params.api.closeToolPanel();
   }
+
+  errorValidatorReadStatusComponents() {
+    if (this.form.errors != null && this.form.errors.outOfRange) {
+      return this.i18n('Value must be in range 0-100');
+    } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
+      return this.i18n('Range is not correct');
+    }
+  }
 }
