@@ -544,10 +544,20 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     modalRef.result.then().catch(() => {});
   }
 
-  // TODO
-  // upload configuration button click
-  onUploadConfiguration() {
-    //
+  onBreakerStatus() {
+    // TODO
+  }
+
+  onConnect() {
+    // TODO
+  }
+
+  onSetLimiter() {
+    // TODO
+  }
+
+  onTou() {
+    // TODO
   }
 
   // TODO
