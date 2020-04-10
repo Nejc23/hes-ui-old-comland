@@ -37,7 +37,50 @@ describe('Pact consumer test', () => {
     },
     weekDays: [],
     monthDays: [1, 7, 31],
-    registers: [1, 4, 5]
+    registers: [1, 4, 5],
+    bulkActionsRequestParam: {
+      id: [262, 146, 304],
+      filter: {
+        statuses: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        tags: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        vendor: {
+          id: 0,
+          value: ''
+        },
+        readStatus: {
+          operation: {
+            id: '',
+            value: ''
+          },
+          value1: 0,
+          value2: null
+        },
+        firmware: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        breakerState: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        showChildInfoMBus: false,
+        showDeleted: false
+      }
+    }
   };
 
   const responseBody: MeterUnitsReadSchedule = {
@@ -51,7 +94,50 @@ describe('Pact consumer test', () => {
     },
     weekDays: [],
     monthDays: [1, 7, 31],
-    registers: [1, 4, 5]
+    registers: [1, 4, 5],
+    bulkActionsRequestParam: {
+      id: [262, 146, 304],
+      filter: {
+        statuses: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        tags: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        vendor: {
+          id: 0,
+          value: ''
+        },
+        readStatus: {
+          operation: {
+            id: '',
+            value: ''
+          },
+          value1: 0,
+          value2: null
+        },
+        firmware: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        breakerState: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
+        showChildInfoMBus: false,
+        showDeleted: false
+      }
+    }
   };
 
   describe('Meter units read scheduler', () => {

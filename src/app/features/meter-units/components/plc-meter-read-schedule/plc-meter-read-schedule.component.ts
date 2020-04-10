@@ -10,6 +10,8 @@ import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
+import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
+import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
 
 @Component({
   selector: 'app-plc-meter-read-schedule',
@@ -41,6 +43,8 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   constructor(
     private meterService: MeterUnitsService,
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
+    private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     public i18n: I18n,
@@ -71,7 +75,8 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       time: this.selectedId < 3 ? null : this.form.get(this.timeProperty).value,
       weekDays: this.selectedId !== 4 ? [] : this.form.get(this.weekDaysProperty).value,
       monthDays: this.selectedId !== 5 ? [] : this.form.get(this.monthDaysProperty).value,
-      registers: this.form.get(this.registersProperty).value
+      registers: this.form.get(this.registersProperty).value,
+      bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()
     };
     return formData;
   }
@@ -84,12 +89,13 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   }
 
   save(addNew: boolean) {
-    console.log('Save clicked!');
+    // console.log('Save clicked!');
+    // times and selected registers
     const selectedRegisters = this.registers.getSelectedRowIds();
     // console.log(JSON.stringify(selectedRegisters));
     this.form.get(this.registersProperty).setValue(selectedRegisters);
     const values = this.fillData();
-    // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
+    console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
     const request = this.meterService.createMeterUnitsReadScheduler(values);
     const successMessage = this.i18n(`Meter Units Read Scheduler was added successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
