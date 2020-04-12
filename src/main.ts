@@ -5,6 +5,9 @@ import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
 import { selectedLocale } from './environments/locale';
 
+import { LicenseManager } from '@ag-grid-enterprise/core';
+LicenseManager.setLicenseKey(environment.licenseKey);
+
 if (environment.production) {
   enableProdMode();
 }
