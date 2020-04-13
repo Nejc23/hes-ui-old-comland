@@ -50,7 +50,7 @@ export class SaveViewFormMUTComponent implements OnInit {
       : 'grdLayoutMUT-typeId-' + this.meterUnitsTypeId;
     this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT-typeId-' + this.meterUnitsTypeId)
       ? this.cookieNameForGridSettings
-      : 'grdLayoutMUT-typeId-' + this.meterUnitsTypeId;
+      : 'grdColMUT-typeId-' + this.meterUnitsTypeId;
     this.mutLayouts$ = this.mutService.getMeterUnitsLayout(this.meterUnitsTypeId);
     this.mutLayouts$.subscribe(x => {
       this.data = x;
