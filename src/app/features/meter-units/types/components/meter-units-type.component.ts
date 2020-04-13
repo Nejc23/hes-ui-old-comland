@@ -102,9 +102,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         ? this.sessionNameForGridFilter
         : 'grdLayoutMUT-typeId-' + params.id;
 
-      /*if(this.gridApi) {
+      if (this.gridApi) {
         this.gridApi.purgeServerSideCache([]);
-      }*/
+      }
 
       if (this.gridColumnApi) {
         const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
