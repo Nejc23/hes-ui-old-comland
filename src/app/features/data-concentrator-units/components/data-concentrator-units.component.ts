@@ -54,6 +54,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public frameworkComponents;
   public sideBar;
   loadGrid = true;
+  headerTitle = this.staticextService.headerTitleDCU;
 
   requestModel: GridRequestParams = {
     startRow: 0,
@@ -76,7 +77,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
-    private sidebarService: SidebarService,
     private staticextService: DataConcentratorUnitsStaticTextService,
     private i18n: I18n,
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
@@ -86,7 +86,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private formUtils: FormsUtilsService
   ) {
-    this.sidebarService.headerTitle = staticextService.headerTitleDCU;
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
     this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions();
