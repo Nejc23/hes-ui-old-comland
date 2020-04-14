@@ -72,12 +72,4 @@ export class SidebarComponent implements OnInit {
 
     return result;
   }
-
-  getBigLogoUrl() {
-    return environment.bigLogoUrl;
-  }
-
-  getSmallLogoUrl() {
-    return environment.smallLogoUrl;
-  }
 }

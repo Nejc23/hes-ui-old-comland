@@ -35,7 +35,12 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js"
             ],
-            "es5BrowserSupport": true
+            "es5BrowserSupport": true,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles/brand/default"
+              ]
+            }
           },
           "configurations": {
             "develop": {
@@ -144,7 +149,98 @@
               "i18nFormat": "xlf",
               "i18nLocale": "en",
               "baseHref": "/en/"
+            },
+
+            "develop-amera": {
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/amera/brand.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/amera"
+                ]
+              }
+            },
+
+            "production-amera": {
+              "outputPath": "dist/amera/en",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/amera"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            },
+            "production-sl-amera": {
+              "outputPath": "dist/amera/sl",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/amera"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
+              "baseHref": "/sl/"
             }
+
           }
         },
         "serve": {
@@ -156,8 +252,14 @@
             "production": {
               "browserTarget": "advance-hes:build:production"
             },
+            "production-amera": {
+              "browserTarget": "advance-hes:build:production-amera"
+            },
             "develop-sl": {
               "browserTarget": "advance-hes:build:develop-sl"
+            },
+            "develop-amera": {
+              "browserTarget": "advance-hes:build:develop-amera"
             }
           }
         },

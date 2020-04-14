@@ -4,8 +4,10 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
+    "start-amera": "ng serve --proxy-config proxy.conf.json --configuration=develop-amera",
     "build": "ng build",
     "build-production": "ng build --configuration=production && ng build --configuration=production-sl",
+    "build-production-amera": "ng build --configuration=production-amera && ng build --configuration=production-sl-amera",
     "build-production-dev": "ng build --configuration=production-dev",
     "test": "ng test",
     "test-coverage": "ng test --code-coverage=true",

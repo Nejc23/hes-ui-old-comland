@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID, TRANSLATIONS_FORMAT, TRANSLATIONS } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
@@ -28,7 +28,8 @@ declare const require;
       },
       deps: [LOCALE_ID]
     },
-    I18n
+    I18n,
+    Title
   ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule],
   bootstrap: [AppComponent]
