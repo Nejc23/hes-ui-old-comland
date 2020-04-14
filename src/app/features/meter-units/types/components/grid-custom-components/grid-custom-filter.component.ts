@@ -67,39 +67,17 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
         : 'grdStateMUT-typeId-' + params.id;
 
       // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
-      this.mutFilters$ = this.mutService.getMeterUnitsLayout(params.id);
-      this.mutFilters$.subscribe(x => {
-        this.data = x;
-        this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-
-        if (this.sessionFilter) {
-          if (this.sessionFilter.id) {
-            this.form = this.createForm(x, this.sessionFilter);
-          } else {
-            const currentFilter: MeterUnitsLayout = {
-              id: -1,
-              name: '',
-              statusesFilter: this.sessionFilter.statusesFilter,
-              readStatusFilter: this.sessionFilter.readStatusFilter,
-              tagsFilter: this.sessionFilter.tagsFilter,
-              vendorFilter: this.sessionFilter.vendorFilter,
-              firmwareFilter: this.sessionFilter.firmwareFilter,
-              breakerStateFilter: this.sessionFilter.breakerStateFilter,
-              showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
-              showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
-              gridLayout: ''
-            };
-            x.push(currentFilter);
-            this.form = this.createForm(x, currentFilter);
-          }
-        }
-      });
     });
   }
 
   // called on init
   agInit(params: IToolPanelParams): void {
     this.params = params;
+    this.mutFilters$ = this.mutService.getMeterUnitsLayout(this.id);
+    this.mutFilters$.subscribe(x => {
+      this.data = x;
+      this.fillformFromSession(this.data);
+    });
     this.meterUnitVendors$ = this.codelistService.meterUnitVendorCodelist(this.id);
     this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
     this.meterUnitTags$ = this.codelistService.meterUnitTagCodelist(this.id);
@@ -117,6 +95,34 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   doFillData() {
     // todo change filter outside of grid ???
     console.log('model changed');
+    this.fillformFromSession(this.data);
+  }
+
+  fillformFromSession(x: MeterUnitsLayout[]) {
+    this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+    if (this.sessionFilter) {
+      if (this.sessionFilter.id) {
+        this.form = this.createForm(x, this.sessionFilter);
+      } else {
+        const currentFilter: MeterUnitsLayout = {
+          id: -1,
+          name: '',
+          statusesFilter: this.sessionFilter.statusesFilter,
+          readStatusFilter: this.sessionFilter.readStatusFilter,
+          tagsFilter: this.sessionFilter.tagsFilter,
+          vendorFilter: this.sessionFilter.vendorFilter,
+          firmwareFilter: this.sessionFilter.firmwareFilter,
+          breakerStateFilter: this.sessionFilter.breakerStateFilter,
+          showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
+          showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
+          gridLayout: ''
+        };
+        x.push(currentFilter);
+        this.form = this.createForm(x, currentFilter);
+      }
+    } else {
+      this.form = this.createForm(null, null);
+    }
   }
 
   createForm(filters: MeterUnitsLayout[], selected: MeterUnitsLayout): FormGroup {

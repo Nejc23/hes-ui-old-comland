@@ -62,29 +62,8 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuFilters$ = this.dcuService.getDcuLayout();
     this.dcuFilters$.subscribe(x => {
-      console.log(x);
       this.data = x;
-      this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-
-      if (this.sessionFilter) {
-        if (this.sessionFilter.id) {
-          this.form = this.createForm(x, this.sessionFilter);
-        } else {
-          const currentFilter: DcuLayout = {
-            id: -1,
-            name: '',
-            statusesFilter: this.sessionFilter.statusesFilter,
-            readStatusFilter: this.sessionFilter.readStatusFilter,
-            typesFilter: this.sessionFilter.typesFilter,
-            tagsFilter: this.sessionFilter.tagsFilter,
-            vendorFilter: this.sessionFilter.vendorFilter,
-            showDeletedFilter: this.sessionFilter.showDeletedFilter,
-            gridLayout: ''
-          };
-          x.push(currentFilter);
-          this.form = this.createForm(x, currentFilter);
-        }
-      }
+      this.fillformFromSession(this.data);
     });
 
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
@@ -99,6 +78,31 @@ export class GridCustomFilterComponent implements IToolPanel {
   doFillData() {
     // todo change filter outside of grid ???
     console.log('model changed');
+    this.fillformFromSession(this.data);
+  }
+
+  fillformFromSession(x: DcuLayout[]) {
+    this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+
+    if (this.sessionFilter) {
+      if (this.sessionFilter.id) {
+        this.form = this.createForm(x, this.sessionFilter);
+      } else {
+        const currentFilter: DcuLayout = {
+          id: -1,
+          name: '',
+          statusesFilter: this.sessionFilter.statusesFilter,
+          readStatusFilter: this.sessionFilter.readStatusFilter,
+          typesFilter: this.sessionFilter.typesFilter,
+          tagsFilter: this.sessionFilter.tagsFilter,
+          vendorFilter: this.sessionFilter.vendorFilter,
+          showDeletedFilter: this.sessionFilter.showDeletedFilter,
+          gridLayout: ''
+        };
+        x.push(currentFilter);
+        this.form = this.createForm(x, currentFilter);
+      }
+    }
   }
 
   createForm(filters: DcuLayout[], selected: DcuLayout): FormGroup {

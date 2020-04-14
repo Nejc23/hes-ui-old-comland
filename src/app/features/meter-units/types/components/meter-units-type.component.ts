@@ -94,8 +94,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private modalService: ModalService
   ) {
     this.paramsSub = route.params.subscribe(params => {
-      console.log('call????');
-      console.log(params);
       this.id = params.id;
       meterUnitsTypeGridService.meterUnitsTypeId = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
@@ -121,7 +119,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       }
 
       // set title by selected meter unit type
-      console.log(this.meterTypes$.length);
       if (this.meterTypes$.length === 0) {
         this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe(data => {
           this.meterTypes$ = data;
