@@ -1,25 +1,31 @@
-<app-modal-template (dismiss)="onDismiss()">
+<app-modal-template (dismiss)="onDismiss()" style="width: 1000px;">
 
-  <div modal-header i18n>PLC Meter Units Read Scheduler</div>
+  <div modal-header i18n>Reading Jobs</div>
 
   <div modal-body>
     <ng-container>
 
-      <app-input-radio i18n-label label="Trigger" [form]="form" [property]="readOptionsProperty" name="readOptionsRadio"
-        [options]="readOptions" [inline]="false" (change)="changeReadOptionId()">
+      <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty" name="readOptionsRadio"
+        [options]="readOptions" [inline]="true" [border]="true" (change)="changeReadOptionId()">
       </app-input-radio>
 
       <div class="form-row" *ngIf="selectedId == 1">
-        <div class="col-3">
-          <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Minutes">
-          </app-input-text>
+        <div class="col-4">
+          <div class="d-flex">
+            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Read every">
+            </app-input-text>
+            <span class="align-self-end ml-3 mb-4" i18n>minute(s)</span>
+          </div>
         </div>
       </div>
 
       <div class="form-row" *ngIf="selectedId == 2">
-        <div class="col-3">
-          <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Hours">
-          </app-input-text>
+        <div class="col-4">
+          <div class="d-flex">
+            <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Read every">
+            </app-input-text>
+            <span class="align-self-end ml-3 mb-4" i18n>hour(s)</span>
+          </div>
         </div>
       </div>
 

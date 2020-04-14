@@ -7,12 +7,18 @@
   </div>
 
 
-  <div class="form-check" [ngClass]="{'form-check-inline': inline}" *ngFor="let option of options">
-    <input type="radio" id="radio-button-{{option.uid}}" [checked]="isOptionChecked(option)" [formControlName]="property"
-      value="{{option.value}}" class="form-check-input" kendoRadioButton />
-    <label for="{{option.uid}}" class="ml-3 form-check-label">{{option.label}}</label>
+  <div class="form-check" [ngClass]="{'form-check-inline align-items-center': inline, 'border p-2': border, 'border-primary': isOptionChecked(option)}" *ngFor="let option of options">
+    <div>
+      <div class="text-center">
+        <input type="radio" id="radio-button-{{option.uid}}" [checked]="isOptionChecked(option)" [formControlName]="property"
+          value="{{option.value}}" class="form-check-input" kendoRadioButton />
+        <label for="{{option.uid}}" class="ml-2 mt-2 form-check-label">{{option.label}}</label>
+      </div>
+      <div class="text-center">
+        <label for="{{option.uid}}" class="form-check-label">{{option.labelSmall}}</label>
+      </div>
+    </div>
   </div>
-
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">

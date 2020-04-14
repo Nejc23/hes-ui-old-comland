@@ -22,11 +22,11 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   form: FormGroup;
   readOptions: RadioOption[] = [
-    { value: 1 as number, label: this.i18n('Every N minute(s)') },
-    { value: 2 as number, label: this.i18n('Every N hour(s)') },
-    { value: 3 as number, label: this.i18n('Every day at HH:mm') },
-    { value: 4 as number, label: this.i18n('Every one or more days of the week at HH:mm') },
-    { value: 5 as number, label: this.i18n('Every one or more days of the month at HH:mm') }
+    { value: 1 as number, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
+    { value: 2 as number, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
+    { value: 3 as number, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
+    { value: 4 as number, label: this.i18n('Weekly'), labelSmall: this.i18n('One or more days of the week') },
+    { value: 5 as number, label: this.i18n('Monthly'), labelSmall: this.i18n('One or more days in the month') }
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: this.i18n('Mon-Fri') },

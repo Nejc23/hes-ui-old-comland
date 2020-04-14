@@ -13,6 +13,7 @@ export class InputRadioComponent implements OnInit {
   @Input() options: RadioOption[];
   @Input() inline = false;
   @Input() label: string;
+  @Input() border = false;
 
   constructor(private formUtils: FormsUtilsService) {}
 
