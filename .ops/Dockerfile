@@ -6,7 +6,7 @@ FROM node:13.2.0-stretch AS build
 RUN apt update && apt install tree
 WORKDIR /src
 COPY . .
-RUN npm i && npm run postinstall && npm run build-production
+RUN npm i && npm run postinstall && npm run build-production-ePointHES
 
 FROM base
 COPY --from=build /src/dist/advance-hes/ /usr/share/nginx/html
