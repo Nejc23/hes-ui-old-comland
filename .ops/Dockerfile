@@ -9,5 +9,5 @@ COPY . .
 RUN npm i && npm run postinstall && npm run build-production-ePointHES
 
 FROM base
-COPY --from=build /src/dist/advance-hes/ /usr/share/nginx/html
+COPY --from=build /src/dist/ePointHES/ /usr/share/nginx/html
 COPY --from=build /src/.ops/nginx-default.conf /etc/nginx/conf.d/default.conf
