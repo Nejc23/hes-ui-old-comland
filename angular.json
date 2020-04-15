@@ -46,7 +46,13 @@
             "develop": {
               "i18nFile": "src/assets/i18n/messages.en.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "en"
+              "i18nLocale": "en",
+              "fileReplacements": [                
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ]
             },
             "develop-sl": {
               "i18nFile": "src/assets/i18n/messages.sl.xlf",
@@ -56,6 +62,10 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
                 }
               ]
             },
@@ -65,6 +75,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
                 }
               ],
               "optimization": true,
@@ -98,6 +112,10 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
                 }
               ],
               "optimization": true,
@@ -159,11 +177,35 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/amera/brand.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/amera/favicon.ico"
                 }
               ],
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/styles/brand/amera"
+                ]
+              }
+            },
+            "develop-ePointHES": {
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/ePointHES/brand.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/ePointHES/favicon.ico"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
                 ]
               }
             },
@@ -174,6 +216,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/amera/favicon.ico"
                 }
               ],
               "stylePreprocessorOptions": {
@@ -202,6 +248,46 @@
               "i18nLocale": "en",
               "baseHref": "/en/"
             },
+
+            "production-ePointHES": {
+              "outputPath": "dist/ePointHES/en",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/ePointHES/favicon.ico"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            },
+
             "production-sl-amera": {
               "outputPath": "dist/amera/sl",
               "fileReplacements": [
@@ -212,11 +298,58 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/amera/favicon.ico"
                 }
               ],
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/styles/brand/amera"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
+              "baseHref": "/sl/"
+            },
+
+            "production-sl-ePointHES": {
+              "outputPath": "dist/ePointHES/sl",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/ePointHES/favicon.ico"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
                 ]
               },
               "optimization": true,
@@ -255,11 +388,17 @@
             "production-amera": {
               "browserTarget": "advance-hes:build:production-amera"
             },
+            "production-ePointHES": {
+              "browserTarget": "advance-hes:build:production-ePointHES"
+            },
             "develop-sl": {
               "browserTarget": "advance-hes:build:develop-sl"
             },
             "develop-amera": {
               "browserTarget": "advance-hes:build:develop-amera"
+            },
+            "develop-ePointHES": {
+              "browserTarget": "advance-hes:build:develop-ePointHES"
             }
           }
         },

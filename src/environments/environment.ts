@@ -8,7 +8,6 @@ export const environment = {
   // mapUrl: 'https://192.168.0.102/tile'
   mapUrl: 'https://a.tile.openstreetmap.org',
   apiUrl: '',
-  navFixedLogoUrl: 'assets/images/logo/amera.png',
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',

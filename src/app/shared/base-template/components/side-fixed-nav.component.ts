@@ -15,4 +15,8 @@ export class SideFixedNavComponent implements OnInit {
   getSmallLogoUrl() {
     return brand.navFixedLogoUrl;
   }
+
+  getMenuMainLogoUrl() {
+    return brand.navFixedMenuMainUrl;
+  }
 }
