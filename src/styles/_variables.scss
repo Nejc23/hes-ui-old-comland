@@ -58,12 +58,12 @@ $colors: map-merge(("blue": $blue,
     "gray-dark": $gray-800),
   $colors);
 
-$primary: #37D7A8 !default;
+$primary: #981D78 !default;
 $secondary: $gray-400 !default;
-$success: #A2D54B !default;
-$info: #01BEBE !default;
-$warning: #FFAE58 !default;
-$danger: #F15972 !default;
+$success: #7DBD46 !default;
+$info: #05C1A4 !default;
+$warning: #F29A2E !default;
+$danger: #D62767 !default;
 $light: $gray-100 !default;
 $dark: $gray-800 !default;
 
@@ -743,9 +743,6 @@ $navbar-light-brand-hover-color: $navbar-light-active-color !default;
 $navbar-dark-brand-color: $navbar-dark-active-color !default;
 $navbar-dark-brand-hover-color: $navbar-dark-active-color !default;
 
-$navbar-fixed-background-light: #55E59B !default;
-$navbar-fixed-background-dark: #00BDBE !default;
-
 // Dropdowns
 //
 // Dropdown menu container and contents.
@@ -1160,8 +1157,12 @@ $sidebar-base-width: 15rem;
 $sidebar-collapsed-width: 1.5rem;
 $sidebar-fixed-width: 3.5rem;
 
-
 $icon-size-sm: 13.375px;
 $icon-size: 15px;
 $icon-size-lg: 18px;
 $icon-size-xl: 28px;
+
+$nav-active: #e02068 !default;
+
+$navbar-fixed-background-light: #e02068 !default;
+$navbar-fixed-background-dark: #412e80 !default;
