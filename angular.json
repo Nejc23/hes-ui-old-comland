@@ -285,7 +285,12 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
-            ]
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/styles/brand/default"
+              ]
+            }
           },
           "configurations": {
             "pact": {
