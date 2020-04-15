@@ -40,6 +40,24 @@ export class RegistersSelectInterceptor {
         name: 'Register temp 5',
         type: 'type C',
         description: 'description 5'
+      },
+      {
+        id: 6,
+        name: 'Register temp 6',
+        type: 'type C',
+        description: 'description 6'
+      },
+      {
+        id: 7,
+        name: 'Register temp 7',
+        type: 'type C',
+        description: 'description 7'
+      },
+      {
+        id: 8,
+        name: 'Register temp 8',
+        type: 'type C',
+        description: 'description 8'
       }
     ];
 
