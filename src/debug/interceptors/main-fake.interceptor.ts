@@ -15,6 +15,7 @@ import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-t
 import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.interceptor';
 import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
 import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-scheduler.interceptor';
+import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -60,6 +61,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             // registers
             if (RegistersSelectInterceptor.canInterceptMeterUnitRegisters(request)) {
               return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
+            }
+
+            // TOU
+            if (TimeOfUseInterceptor.canInterceptTouConfigList(request)) {
+              return TimeOfUseInterceptor.interceptTouConfigList(request);
             }
 
             // codelists dcu
