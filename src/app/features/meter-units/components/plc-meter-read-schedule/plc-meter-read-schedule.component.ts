@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -8,10 +7,16 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import {
+  MeterUnitsReadSchedule,
+  MeterUnitsReadScheduleForm
+} from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
 import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
+import { PlcMeterReadScheduleService } from '../../services/plc-meter-read-scheduler.service';
+import { from, of } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-plc-meter-read-schedule',
@@ -42,8 +47,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   monthDays: number[] = [];
 
   constructor(
-    private meterService: MeterUnitsService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
+    private meterService: PlcMeterReadScheduleService,
     private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
@@ -67,8 +71,8 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   ngOnInit() {}
 
-  fillData(): MeterUnitsReadSchedule {
-    const formData: MeterUnitsReadSchedule = {
+  fillData(): MeterUnitsReadScheduleForm {
+    const formData: MeterUnitsReadScheduleForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
       nMinutes: this.selectedId !== 1 ? 0 : parseInt(this.form.get(this.nMinutesProperty).value, 10),
       nHours: this.selectedId !== 2 ? 0 : parseInt(this.form.get(this.nHoursProperty).value, 10),
@@ -95,12 +99,14 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     // console.log(JSON.stringify(selectedRegisters));
     this.form.get(this.registersProperty).setValue(selectedRegisters);
     const values = this.fillData();
-    console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
+    // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
     const request = this.meterService.createMeterUnitsReadScheduler(values);
+    // console.log(`request = ${JSON.stringify(request)}`);
     const successMessage = this.i18n(`Meter Units Read Scheduler was added successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         if (result) {
+          // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
           if (addNew) {
             this.resetAll();
           } else {
@@ -146,31 +152,31 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   // properties - START
   get readOptionsProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.readOptions);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.readOptions);
   }
 
   get nMinutesProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.nMinutes);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.nMinutes);
   }
 
   get nHoursProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.nHours);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.nHours);
   }
 
   get timeProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.time);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.time);
   }
 
   get weekDaysProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.weekDays);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.weekDays);
   }
 
   get monthDaysProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.monthDays);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.monthDays);
   }
 
   get registersProperty() {
-    return nameOf<MeterUnitsReadSchedule>(o => o.registers);
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.registers);
   }
   // properties - END
 

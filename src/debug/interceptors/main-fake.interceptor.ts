@@ -14,6 +14,7 @@ import { MeterUnitsListInterceptor } from './meter-units/meter-units-list.interc
 import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-type-grid-layout.interceptor';
 import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.interceptor';
 import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
+import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-scheduler.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -50,6 +51,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
               return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
+            }
+
+            if (MeterUnitsSchedulerInterceptor.canInterceptMeterUnitSchedulerPost(request)) {
+              return MeterUnitsSchedulerInterceptor.interceptMeterUnitSchedulerPost(request);
             }
 
             // registers

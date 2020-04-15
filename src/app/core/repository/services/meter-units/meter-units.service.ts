@@ -7,7 +7,7 @@ import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
 import { meterUnits, meterUnitsLayout, meterUnitsScheduler } from '../../consts/meter-units.const';
-import { MeterUnitsReadSchedule } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
+import { MeterUnitsReadSchedule, MeterUnitsReadScheduleService } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -55,11 +55,11 @@ export class MeterUnitsService {
     return new HttpRequest('POST', `${meterUnits}/${typeId}/${meterUnitsLayout}`, payload as any);
   }
 
-  createMeterUnitsReadScheduler(schedule: MeterUnitsReadSchedule): Observable<MeterUnitsReadSchedule> {
+  createMeterUnitsReadScheduler(schedule: MeterUnitsReadScheduleService): Observable<MeterUnitsReadScheduleService> {
     return this.repository.makeRequest(this.createMeterUnitsReadSchedulerRequest(schedule));
   }
 
-  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadSchedule): HttpRequest<any> {
+  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadScheduleService): HttpRequest<any> {
     return new HttpRequest('POST', `${meterUnitsScheduler}`, param);
   }
 }

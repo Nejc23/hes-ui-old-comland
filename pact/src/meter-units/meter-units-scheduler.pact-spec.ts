@@ -2,7 +2,10 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import {
+  MeterUnitsReadSchedule,
+  MeterUnitsReadScheduleService
+} from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -26,15 +29,11 @@ describe('Pact consumer test', () => {
   });
 
   const typeId = 1;
-  const requestBody: MeterUnitsReadSchedule = {
+  const requestBody: MeterUnitsReadScheduleService = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
-    time: {
-      hour: 13,
-      minute: 18,
-      second: 0
-    },
+    time: '13:18',
     weekDays: [],
     monthDays: [1, 7, 31],
     registers: [1, 4, 5],
@@ -83,15 +82,11 @@ describe('Pact consumer test', () => {
     }
   };
 
-  const responseBody: MeterUnitsReadSchedule = {
+  const responseBody: MeterUnitsReadScheduleService = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
-    time: {
-      hour: 13,
-      minute: 18,
-      second: 0
-    },
+    time: '13:18',
     weekDays: [],
     monthDays: [1, 7, 31],
     registers: [1, 4, 5],
