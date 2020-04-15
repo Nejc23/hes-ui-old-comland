@@ -18,9 +18,11 @@ import { InputTagComponent } from './components/input-tag/input-tag.component';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { InputCheckboxGridComponent } from './components/input-checkbox/input-checkbox-grid.component';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InputNumericComponent } from './components/input-numeric/input-numeric.component';
+import { TimePickerComponent } from './components/time-picker/time-picker.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -43,7 +45,9 @@ import { InputNumericComponent } from './components/input-numeric/input-numeric.
     InputSwitchComponent,
     InputNumericComponent,
     DropDownsModule,
-    InputsModule
+    InputsModule,
+    DateInputsModule,
+    TimePickerComponent
   ],
   declarations: [
     InputTextComponent,
@@ -62,9 +66,10 @@ import { InputNumericComponent } from './components/input-numeric/input-numeric.
     InputTagComponent,
     InputSwitchComponent,
     InputNumericComponent,
-    InputMultiselectComponent
+    InputMultiselectComponent,
+    TimePickerComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule, DateInputsModule]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {
