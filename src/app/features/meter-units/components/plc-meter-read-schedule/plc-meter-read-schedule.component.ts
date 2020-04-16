@@ -46,6 +46,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   selectedId = 0;
   monthDays: number[] = [];
   noRegisters = false;
+  noMonthDays = false;
   registersRequiredText = this.i18n('Required field');
 
   constructor(
@@ -102,6 +103,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     this.noRegisters = selectedRegisters.length === 0;
     // console.log(JSON.stringify(selectedRegisters));
     this.form.get(this.registersProperty).setValue(selectedRegisters);
+    this.noMonthDays = this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
     // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
     const request = this.meterService.createMeterUnitsReadScheduler(values);
@@ -137,16 +139,16 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.find(this.monthDays, dayinMonth) ? true : false;
+    const result = _.find(this.monthDays, x => x === dayinMonth) ? true : false;
     if (!result) {
       this.monthDays.push(dayinMonth);
     } else {
-      _.remove(this.monthDays, dayinMonth);
+      _.remove(this.monthDays, x => x === dayinMonth);
     }
-    // console.log(`day in month clicked = ${dayinMonth}`)
-
     const realMonthDays = this.monthDays.map(day => (day = day + 1));
-    this.form.get(this.monthDaysProperty).setValue(realMonthDays);
+    const daysSorted = realMonthDays.sort((a, b) => a - b);
+    this.noMonthDays = daysSorted.length === 0;
+    this.form.get(this.monthDaysProperty).setValue(daysSorted);
   }
 
   isDayInMonthSelected(index: number) {

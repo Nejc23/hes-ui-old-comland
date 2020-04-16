@@ -42,6 +42,9 @@
           <span>{{i+1}}</span>
        </button>
       </div>
+      <div class="help-block" *ngIf="selectedId == 5 && noMonthDays">
+        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
+      </div>
 
       <div class="form-row" *ngIf="selectedId > 2">
         <div class="col-3">
