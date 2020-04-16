@@ -29,15 +29,15 @@ describe('Pact consumer test', () => {
   describe('Time of use configurations', () => {
     const responseBody: TimeOfUseConfigList[] = [
       {
-        guid: '5e2bc633-fd66-4b5b-888d-77ce1bf7111e',
+        id: '5e2bc633-fd66-4b5b-888d-77ce1bf7111e',
         description: 'ON-PEAK'
       },
       {
-        guid: 'ead2e345-c1df-46c9-843a-af427ae6436a',
+        id: 'ead2e345-c1df-46c9-843a-af427ae6436a',
         description: 'OFF-PEAK'
       },
       {
-        guid: 'aafc795f-3c7c-4bff-802d-a9f654200b2b',
+        id: 'aafc795f-3c7c-4bff-802d-a9f654200b2b',
         description: 'PARTIAL-PEAK'
       }
     ];

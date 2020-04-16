@@ -1,4 +1,4 @@
 export interface TimeOfUseConfigList {
-  guid: string;
+  id: string;
   description: string;
 }
