@@ -3,7 +3,7 @@ import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import * as _ from 'lodash';
 import { TimeOfUseService } from 'src/app/core/repository/services/time-of-use/time-of-use.service';
-import { TimeOfUseConfigList } from 'src/app/core/repository/interfaces/time-of-use/time-of-use-config-list.interface';
+import { TimeOfUseConfig } from 'src/app/core/repository/interfaces/time-of-use/time-of-use-config.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -27,17 +27,17 @@ describe('Pact consumer test', () => {
   });
 
   describe('Time of use configurations', () => {
-    const responseBody: TimeOfUseConfigList[] = [
+    const responseBody: TimeOfUseConfig[] = [
       {
-        guid: '5e2bc633-fd66-4b5b-888d-77ce1bf7111e',
+        id: '5e2bc633-fd66-4b5b-888d-77ce1bf7111e',
         description: 'ON-PEAK'
       },
       {
-        guid: 'ead2e345-c1df-46c9-843a-af427ae6436a',
+        id: 'ead2e345-c1df-46c9-843a-af427ae6436a',
         description: 'OFF-PEAK'
       },
       {
-        guid: 'aafc795f-3c7c-4bff-802d-a9f654200b2b',
+        id: 'aafc795f-3c7c-4bff-802d-a9f654200b2b',
         description: 'PARTIAL-PEAK'
       }
     ];
