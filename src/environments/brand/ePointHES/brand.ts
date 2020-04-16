@@ -1,6 +1,6 @@
 export const brand = {
   // BRAND SETTINGS
-  navFixedLogoUrl: 'assets/images/logo/ePointHes.png',
-  navFixedMenuMainUrl: 'assets/images/menu/myGrid-ePointHes.png',
+  navFixedLogoUrl: 'assets/images/logo/ePointHes.svg',
+  navFixedMenuMainUrl: 'assets/images/logo/ePointHes-sm.png',
   appBrowserTitle: 'ePoint HES'
 };
