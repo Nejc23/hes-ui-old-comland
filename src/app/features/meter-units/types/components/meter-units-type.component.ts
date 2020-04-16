@@ -22,6 +22,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { PlcMeterReadScheduleComponent } from '../../components/plc-meter-read-schedule/plc-meter-read-schedule.component';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -540,7 +541,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
-    const modalRef = this.modalService.open(PlcMeterReadScheduleComponent);
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+    const modalRef = this.modalService.open(PlcMeterReadScheduleComponent, options);
     modalRef.result.then().catch(() => {});
   }
 

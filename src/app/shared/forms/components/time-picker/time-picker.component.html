@@ -1,7 +1,7 @@
 <div class="form-group" [formGroup]="form">
-  <label [attr.for]="property" *ngIf="label">
+  <label [attr.for]="property" *ngIf="label" class="control-label">
     {{label}}
-    <span *ngIf="required"> *</span>
+    <sup *ngIf="required"> *</sup>
   </label>
   <kendo-timepicker
     [formControlName]="property"  class="form-control" [name]="property"

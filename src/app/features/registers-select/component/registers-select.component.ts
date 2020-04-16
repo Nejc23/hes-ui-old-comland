@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { RegistersSelectService } from 'src/app/core/repository/services/registers-select/registers-select.service';
@@ -8,8 +8,9 @@ import { RegistersSelectGridService } from '../services/registers-select-grid.se
 import * as _ from 'lodash';
 import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
   selector: 'app-registers-select',
@@ -17,6 +18,8 @@ import { ActionFormStaticTextService } from '../../data-concentrator-units/compo
 })
 export class RegistersSelectComponent implements OnInit {
   @Input() type = 'meter';
+
+  @Output() onSelectionChanged = new EventEmitter<boolean>();
 
   form: FormGroup;
   searchTextEmpty = true;
@@ -35,7 +38,8 @@ export class RegistersSelectComponent implements OnInit {
     private registersSelectService: RegistersSelectService,
     private registersSelectGridService: RegistersSelectGridService,
     public fb: FormBuilder,
-    public staticTextService: ActionFormStaticTextService
+    public staticTextService: ActionFormStaticTextService,
+    private formUtils: FormsUtilsService
   ) {}
 
   createForm(): FormGroup {
@@ -89,6 +93,11 @@ export class RegistersSelectComponent implements OnInit {
       this.searchTextEmpty = true;
     }
     this.searchChange($event);
+  }
+
+  selectionChanged($event: any) {
+    // console.log($event.node);
+    this.onSelectionChanged.emit(this.getSelectedRowIds().length > 0 ? true : false);
   }
 
   get searchProperty() {

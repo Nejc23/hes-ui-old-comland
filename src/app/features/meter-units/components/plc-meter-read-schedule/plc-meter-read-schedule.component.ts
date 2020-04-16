@@ -45,6 +45,8 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   ];
   selectedId = 0;
   monthDays: number[] = [];
+  noRegisters = false;
+  registersRequiredText = this.i18n('Required field');
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -59,13 +61,13 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      [this.readOptionsProperty]: [0, Validators.required],
-      [this.nMinutesProperty]: [0],
-      [this.nHoursProperty]: [0],
+      [this.readOptionsProperty]: [null, Validators.required],
+      [this.nMinutesProperty]: [null],
+      [this.nHoursProperty]: [null],
       [this.timeProperty]: [new Date()],
       [this.weekDaysProperty]: [[]],
       [this.monthDaysProperty]: [[]],
-      [this.registersProperty]: [[]]
+      [this.registersProperty]: [[], Validators.required]
     });
   }
 
@@ -82,6 +84,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       registers: this.form.get(this.registersProperty).value,
       bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()
     };
+
     return formData;
   }
 
@@ -96,6 +99,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     // console.log('Save clicked!');
     // times and selected registers
     const selectedRegisters = this.registers.getSelectedRowIds();
+    this.noRegisters = selectedRegisters.length === 0;
     // console.log(JSON.stringify(selectedRegisters));
     this.form.get(this.registersProperty).setValue(selectedRegisters);
     const values = this.fillData();
@@ -124,6 +128,11 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   changeReadOptionId() {
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
+    this.form.get(this.timeProperty).setValidators(this.selectedId > 2 ? [Validators.required] : []);
+    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 1 ? [Validators.required] : []);
+    this.form.get(this.nHoursProperty).setValidators(this.selectedId === 2 ? [Validators.required] : []);
+    this.form.get(this.weekDaysProperty).setValidators(this.selectedId === 4 ? [Validators.required] : []);
+    this.form.get(this.monthDaysProperty).setValidators(this.selectedId === 5 ? [Validators.required] : []);
     // console.log(`changeReadOptionId = ${this.form.get(this.readOptionsProperty).value}`);
   }
 
@@ -148,6 +157,11 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       }
     }
     return isChecked;
+  }
+
+  registerSelectionChanged(hasValues: boolean) {
+    // console.log('registerSelcetionChanged');
+    this.noRegisters = !hasValues;
   }
 
   // properties - START

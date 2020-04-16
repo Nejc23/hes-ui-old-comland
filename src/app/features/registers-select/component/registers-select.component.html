@@ -1,5 +1,8 @@
 <div class="d-flex justify-content-between">
-  <span i18n>List of registers</span>
+  <div>
+    <label class="control-label" i18n>Register</label>
+    <sup> *</sup>
+  </div>
   <app-input-searcher class="mr-2" [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
@@ -11,7 +14,7 @@
       [columnDefs]="columnDefs"
       [modules]="modules"
       (gridReady)="onGridReady($event)"
+      (rowSelected)="selectionChanged($event)"
       rowSelection="multiple">
   </ag-grid-angular>
 </div>
-
