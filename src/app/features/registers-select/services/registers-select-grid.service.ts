@@ -27,16 +27,19 @@ export class RegistersSelectGridService {
       },
       {
         field: 'name',
+        pinned: true,
         headerName: this.i18n('Name'),
         headerTooltip: this.i18n('Name')
       },
       {
         field: 'type',
+        pinned: true,
         headerName: this.i18n('Type'),
         headerTooltip: this.i18n('Type')
       },
       {
         field: 'description',
+        pinned: true,
         headerName: this.i18n('Description'),
         headerTooltip: this.i18n('Description')
       }

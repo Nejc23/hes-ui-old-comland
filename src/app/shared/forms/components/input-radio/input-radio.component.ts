@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import * as _ from 'lodash';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { RadioOption } from '../../interfaces/radio-option.interface';
@@ -15,6 +15,8 @@ export class InputRadioComponent implements OnInit {
   @Input() label: string;
   @Input() border = false;
 
+  @Output() refresh: EventEmitter<RadioOption> = new EventEmitter();
+
   constructor(private formUtils: FormsUtilsService) {}
 
   ngOnInit() {
@@ -29,6 +31,11 @@ export class InputRadioComponent implements OnInit {
 
   get formControl(): AbstractControl {
     return this.form.get(this.property);
+  }
+
+  changeValue(option: RadioOption) {
+    this.formControl.setValue(option.value);
+    this.refresh.emit(option);
   }
 
   isOptionChecked(option: RadioOption) {

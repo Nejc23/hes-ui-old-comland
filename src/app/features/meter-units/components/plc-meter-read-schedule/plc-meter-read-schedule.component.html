@@ -6,7 +6,7 @@
     <ng-container>
 
       <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty" name="readOptionsRadio"
-        [options]="readOptions" [inline]="true" [border]="true" (change)="changeReadOptionId()">
+        [options]="readOptions" [inline]="true" [border]="true" (change)="changeReadOptionId()" (refresh)="changeReadOptionId()">
       </app-input-radio>
 
       <div class="form-row" *ngIf="selectedId == 1">

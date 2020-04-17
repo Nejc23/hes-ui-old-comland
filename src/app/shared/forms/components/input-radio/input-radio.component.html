@@ -6,19 +6,21 @@
     </label>
   </div>
 
-
-  <div class="form-check" [ngClass]="{'form-check-inline align-items-center': inline, 'border p-2': border, 'border-primary': isOptionChecked(option)}" *ngFor="let option of options">
+<div [ngClass]="{'row': inline}">
+  <div class="form-check" [ngClass]="{'col mx-3': inline, 'border p-2': border, 'border-primary': isOptionChecked(option)}"
+    *ngFor="let option of options">
     <div>
       <div class="text-center">
         <input type="radio" id="radio-button-{{option.uid}}" [checked]="isOptionChecked(option)" [formControlName]="property"
-          value="{{option.value}}" class="form-check-input" kendoRadioButton />
-        <label for="{{option.uid}}" class="ml-2 mt-2 form-check-label">{{option.label}}</label>
+          value="{{option.value}}" class="form-check-input" (change)="changeValue(option)" kendoRadioButton />
+        <label for="{{option.uid}}" class="control-label ml-2 mt-2 form-check-label" (click)="changeValue(option)">{{option.label}}  </label>
       </div>
-      <div class="text-center">
+      <div class="text-center" (click)="changeValue(option)">
         <label for="{{option.uid}}" class="form-check-label">{{option.labelSmall}}</label>
       </div>
     </div>
   </div>
+</div>
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">

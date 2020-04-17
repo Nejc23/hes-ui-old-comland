@@ -3,11 +3,26 @@
     <label class="control-label" i18n>Register</label>
     <sup> *</sup>
   </div>
-  <app-input-searcher class="mr-2" [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"
-    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
 
 <div>
+  <div class="d-flex justify-content-between align-items-center p-2 bg-white grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid">
+    <small class="text-secondary">{{totalCount}} <span i18n>items</span></small>
+    <app-input-searcher class="mr-2" [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"
+    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
+  </div>
+
+  <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
+    <div class="mr-3" *ngIf="!selectedAll">
+      <small class="text-white">{{gridApi.getSelectedRows().length}} <span i18n>items selected</span>  &middot;
+      <strong><u><a class="text-white" href="javascript:void(0);" (click)="selectAllRows()"><span i18n>Select all</span> ({{totalCount}})</a></u></strong></small>
+    </div>
+    <div class="mr-3" *ngIf="selectedAll">
+      <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
+      <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAllRows()"><span i18n>Clear selected</span></a></u></strong></small>
+    </div>
+  </div>
+
   <ag-grid-angular
       class="ag-theme-epoint" style="width: 100%; height: 240px;" #agGrid
       [rowData]="rowData"
