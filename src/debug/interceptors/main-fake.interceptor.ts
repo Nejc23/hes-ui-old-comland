@@ -24,133 +24,137 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(`${request.method} ${request.url}`);
-    return (
-      of(null)
-        .pipe(
-          mergeMap(() => {
-            // DCU
-            if (DataConcentratorUnitsListInterceptor.canInterceptDataConcentratorUnitsList(request)) {
-              return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList(request);
-            }
+    if (request.url.indexOf('/apigrid/') < 0) {
+      console.log(`${request.method} ${request.url}`);
+      return (
+        of(null)
+          .pipe(
+            mergeMap(() => {
+              // DCU
+              if (DataConcentratorUnitsListInterceptor.canInterceptDataConcentratorUnitsList(request)) {
+                return DataConcentratorUnitsListInterceptor.interceptDataConcentratorUnitsList(request);
+              }
 
-            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutGet(request)) {
-              return DcuGridLayoutInterceptor.interceptDcuLayoutGet();
-            }
+              if (DcuGridLayoutInterceptor.canInterceptDcuLayoutGet(request)) {
+                return DcuGridLayoutInterceptor.interceptDcuLayoutGet();
+              }
 
-            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPost(request)) {
-              return DcuGridLayoutInterceptor.interceptDcuLayoutPost(request);
-            }
+              if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPost(request)) {
+                return DcuGridLayoutInterceptor.interceptDcuLayoutPost(request);
+              }
 
-            if (DataConcentratorUnitInterceptor.canInterceptDcuCreatePost(request)) {
-              return DataConcentratorUnitInterceptor.interceptDcuCreatePost(request);
-            }
+              if (DataConcentratorUnitInterceptor.canInterceptDcuCreatePost(request)) {
+                return DataConcentratorUnitInterceptor.interceptDcuCreatePost(request);
+              }
 
-            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPut(request)) {
-              return DcuGridLayoutInterceptor.interceptDcuLayoutPut(request);
-            }
+              if (DcuGridLayoutInterceptor.canInterceptDcuLayoutPut(request)) {
+                return DcuGridLayoutInterceptor.interceptDcuLayoutPut(request);
+              }
 
-            if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
-              return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
-            }
+              if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
+                return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
+              }
 
-            if (MeterUnitsSchedulerInterceptor.canInterceptMeterUnitSchedulerPost(request)) {
-              return MeterUnitsSchedulerInterceptor.interceptMeterUnitSchedulerPost(request);
-            }
+              if (MeterUnitsSchedulerInterceptor.canInterceptMeterUnitSchedulerPost(request)) {
+                return MeterUnitsSchedulerInterceptor.interceptMeterUnitSchedulerPost(request);
+              }
 
-            // registers
-            if (RegistersSelectInterceptor.canInterceptMeterUnitRegisters(request)) {
-              return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
-            }
+              // registers
+              if (RegistersSelectInterceptor.canInterceptMeterUnitRegisters(request)) {
+                return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
+              }
 
-            // TOU
-            if (TimeOfUseInterceptor.canInterceptTouConfigList(request)) {
-              return TimeOfUseInterceptor.interceptTouConfigList(request);
-            }
+              // TOU
+              if (TimeOfUseInterceptor.canInterceptTouConfigList(request)) {
+                return TimeOfUseInterceptor.interceptTouConfigList(request);
+              }
 
-            // codelists dcu
-            if (CodelistInterceptor.canInterceptDcuStatus(request)) {
-              return CodelistInterceptor.interceptDcuStatus();
-            }
-            if (CodelistInterceptor.canInterceptDcuTag(request)) {
-              return CodelistInterceptor.interceptDcuTag();
-            }
-            if (CodelistInterceptor.canInterceptDcuType(request)) {
-              return CodelistInterceptor.interceptDcuType();
-            }
-            if (CodelistInterceptor.canInterceptDcuVendor(request)) {
-              return CodelistInterceptor.interceptDcuVendor();
-            }
+              // codelists dcu
+              if (CodelistInterceptor.canInterceptDcuStatus(request)) {
+                return CodelistInterceptor.interceptDcuStatus();
+              }
+              if (CodelistInterceptor.canInterceptDcuTag(request)) {
+                return CodelistInterceptor.interceptDcuTag();
+              }
+              if (CodelistInterceptor.canInterceptDcuType(request)) {
+                return CodelistInterceptor.interceptDcuType();
+              }
+              if (CodelistInterceptor.canInterceptDcuVendor(request)) {
+                return CodelistInterceptor.interceptDcuVendor();
+              }
 
-            // meter unit codelists
-            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitType(request)) {
-              return MeterUnitCodelistInterceptor.interceptMeterUnitType();
-            }
-            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitStatus(request)) {
-              return MeterUnitCodelistInterceptor.interceptMeterUnitStatus();
-            }
-            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitVendor(request)) {
-              return MeterUnitCodelistInterceptor.interceptMeterUnitVendor();
-            }
-            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitTag(request)) {
-              return MeterUnitCodelistInterceptor.interceptMeterUnitTag();
-            }
-            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitFirmware(request)) {
-              return MeterUnitCodelistInterceptor.interceptMeterUnitFirmware();
-            }
-            if (MeterUnitCodelistInterceptor.canInterceptMeterUnitBreakerState(request)) {
-              return MeterUnitCodelistInterceptor.interceptMeterUnitBreakerState();
-            }
+              // meter unit codelists
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitType(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitType();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitStatus(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitStatus();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitVendor(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitVendor();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitTag(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitTag();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitFirmware(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitFirmware();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitBreakerState(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitBreakerState();
+              }
 
-            // authenticate
-            if (AuthenticateInterceptor.canInterceptAuthenticateUser(request)) {
-              return AuthenticateInterceptor.interceptAuthenticateUser();
-            }
-            if (AuthenticateInterceptor.canInterceptRefreshToken(request)) {
-              return AuthenticateInterceptor.interceptRefreshToken();
-            }
-            if (UserRequestResetPasswordInterceptor.canInterceptUserRequestResetPassword(request)) {
-              return UserRequestResetPasswordInterceptor.interceptUserRequestResetPassword();
-            }
-            if (UserChangePasswordInterceptor.canInterceptUserChangePassword(request)) {
-              return UserChangePasswordInterceptor.interceptUserChangePassword();
-            }
-            if (UserNewPasswordInterceptor.canInterceptUserNewPassword(request)) {
-              return UserNewPasswordInterceptor.interceptUserNewPassword();
-            }
+              // authenticate
+              if (AuthenticateInterceptor.canInterceptAuthenticateUser(request)) {
+                return AuthenticateInterceptor.interceptAuthenticateUser();
+              }
+              if (AuthenticateInterceptor.canInterceptRefreshToken(request)) {
+                return AuthenticateInterceptor.interceptRefreshToken();
+              }
+              if (UserRequestResetPasswordInterceptor.canInterceptUserRequestResetPassword(request)) {
+                return UserRequestResetPasswordInterceptor.interceptUserRequestResetPassword();
+              }
+              if (UserChangePasswordInterceptor.canInterceptUserChangePassword(request)) {
+                return UserChangePasswordInterceptor.interceptUserChangePassword();
+              }
+              if (UserNewPasswordInterceptor.canInterceptUserNewPassword(request)) {
+                return UserNewPasswordInterceptor.interceptUserNewPassword();
+              }
 
-            // meter Units
-            if (MeterUnitsListInterceptor.canInterceptMeterUnitsList(request)) {
-              return MeterUnitsListInterceptor.interceptMeterUnitsList(request);
-            }
+              // meter Units
+              if (MeterUnitsListInterceptor.canInterceptMeterUnitsList(request)) {
+                return MeterUnitsListInterceptor.interceptMeterUnitsList(request);
+              }
 
-            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutGet(request)) {
-              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutGet();
-            }
+              if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutGet(request)) {
+                return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutGet();
+              }
 
-            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutPost(request)) {
-              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutPost(request);
-            }
+              if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutPost(request)) {
+                return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutPost(request);
+              }
 
-            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutPut(request)) {
-              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutPut(request);
-            }
+              if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutPut(request)) {
+                return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutPut(request);
+              }
 
-            if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutDelete(request)) {
-              return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutDelete(request);
-            }
+              if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutDelete(request)) {
+                return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutDelete(request);
+              }
 
-            // pass through any requests not handled above
-            return next.handle(request);
-          })
-        )
+              // pass through any requests not handled above
+              return next.handle(request);
+            })
+          )
 
-        // call materialize and dematerialize to ensure delay even if an error is thrown
-        // (https://github.com/Reactive-Extensions/RxJS/issues/648)
-        .pipe(materialize())
-        .pipe(delay(500))
-        .pipe(dematerialize())
-    );
+          // call materialize and dematerialize to ensure delay even if an error is thrown
+          // (https://github.com/Reactive-Extensions/RxJS/issues/648)
+          .pipe(materialize())
+          .pipe(delay(500))
+          .pipe(dematerialize())
+      );
+    } else {
+      return next.handle(request);
+    }
   }
 
   setVariables() {

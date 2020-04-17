@@ -23,6 +23,9 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { PlcMeterReadScheduleComponent } from '../../components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { RequestConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -80,6 +83,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   };
 
+  requestId = '';
+  dataResult = '';
+  dataStatusResponse = '';
+
   constructor(
     private sidebarService: SidebarService,
     private i18n: I18n,
@@ -92,7 +99,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private eventService: MeterUnitsTypeGridEventEmitterService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private service: MyGridLinkService,
+    private authService: AuthService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -569,4 +578,48 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onUpgrade() {
     //
   }
+
+  // ************************************************ za test myGrid.Link calls ODSTRANI -->*/
+  callGetToken() {
+    this.service.getMyGridIdentityToken().subscribe(value => {
+      this.dataResult = 'access token to myGrid.Link API is:: ' + value.AccessToken;
+      this.authService.setAuthTokenMyGridLink(value);
+    });
+  }
+
+  callConnect() {
+    if (this.authService.getAuthTokenMyGridLink().length > 0) {
+      const params: RequestConnectDisconnectData = { deviceIds: ['221A39C5-6C84-4F6E-889C-96326862D771'] };
+      this.service.postMyGridConnectDevice(params).subscribe(value => {
+        this.dataResult = 'connect-current Request id is:: ' + value.requestId;
+        this.requestId = value.requestId;
+      });
+    } else {
+      this.dataResult = 'token for myGrid.Link not exists !!';
+    }
+  }
+
+  callDisconnect() {
+    if (this.authService.getAuthTokenMyGridLink().length > 0) {
+      const params: RequestConnectDisconnectData = { deviceIds: ['221A39C5-6C84-4F6E-889C-96326862D771'] };
+      this.service.postMyGridDisconnectDevice(params).subscribe(value => {
+        this.dataResult = 'disconnect-current Request id is:: ' + value.requestId;
+        this.requestId = value.requestId;
+      });
+    } else {
+      this.dataResult = 'token for myGrid.Link not exists !!';
+    }
+  }
+
+  getLastStatus() {
+    if (this.authService.getAuthTokenMyGridLink().length > 0) {
+      this.service.getMyGridLastStatus(this.requestId).subscribe(value => {
+        console.log(value);
+        this.dataStatusResponse = JSON.stringify(value);
+      });
+    } else {
+      this.dataResult = 'token for myGrid.Link not exists !!';
+    }
+  }
+  // ***************************************************************************** */
 }

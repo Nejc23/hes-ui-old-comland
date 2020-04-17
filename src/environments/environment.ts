@@ -4,10 +4,8 @@
 
 export const environment = {
   production: false,
-  // Docker file for a minimal effort OpenStreetMap tile server https://github.com/Overv/openstreetmap-tile-server
-  // mapUrl: 'https://192.168.0.102/tile'
-  mapUrl: 'https://a.tile.openstreetmap.org',
   apiUrl: '',
+  apiMyGridUrl: '',
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',

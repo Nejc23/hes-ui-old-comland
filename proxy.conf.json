@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://91.230.238.178/[api-url]",
+    "target": "not used",
     "secure": false
   }
 }

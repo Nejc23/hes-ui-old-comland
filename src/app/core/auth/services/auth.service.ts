@@ -13,6 +13,7 @@ import { loginRouteUrl } from '../consts/route-url';
 import { PermissionsStoreService } from '../../permissions/services/permissions-store.service';
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
+import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink.interceptor';
 
 @Injectable()
 export class AuthService {
@@ -36,6 +37,27 @@ export class AuthService {
       ? 'bearer'
       : this.cookieService.get(config.authType);
   }
+
+  // for calling API-s on myGrid.Link server
+  // ----------------------------------------
+  setAuthTokenMyGridLink(token: IdentityToken) {
+    localStorage.setItem('myGrid.Link_Token', token.TokenType + ' ' + token.AccessToken);
+    localStorage.setItem('myGrid.Link_Token_DateTime', new Date().toUTCString());
+    localStorage.setItem('myGrid.Link_Token_ExpiresIn', token.ExpiresIn.toString());
+  }
+
+  getAuthTokenMyGridLink(): string {
+    return localStorage.getItem('myGrid.Link_Token');
+  }
+
+  //TODO, check expiration of myGrid.Link_Token
+  isTokenAvailable(): boolean {
+    const expires = localStorage.getItem('Link_Token_ExpiresIn');
+    const dateCreatedToken = localStorage.getItem('Link_Token_DateTime');
+    // todo
+    return true;
+  }
+  // ----------------------------------------
 
   /**
    * Login with user credentials
