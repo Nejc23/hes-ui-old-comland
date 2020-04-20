@@ -31,6 +31,7 @@ export class MeterUnitsTypeGridService {
   cookieNameForGridSettings = 'grdColMUT-typeId-';
   cookieNameForGridSort = 'grdColMUTSort-typeId-';
   sessionNameForGridState = 'grdStateMUT-typeId-';
+  gridName = 'grdMUT';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
@@ -398,6 +399,10 @@ export class MeterUnitsTypeGridService {
       GridSettingsSessionStoreTypeEnum.pageIndex,
       settings
     );
+  }
+
+  saveMyGridLinkRequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
   }
 }
 

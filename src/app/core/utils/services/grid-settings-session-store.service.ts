@@ -218,4 +218,21 @@ export class GridSettingsSessionStoreService {
       isSelectedAll: false
     };
   }
+
+  saveMyGridLinkRequestId(grid: string, requestId: string) {
+    const requestIds = [];
+    const data = JSON.parse(sessionStorage.getItem(grid));
+    if (data) {
+      data.map(row => requestIds.push(row));
+      const value = _.find(data, x => x === requestId);
+      if (!value) {
+        requestIds.push(requestId);
+        sessionStorage.setItem(grid, JSON.stringify(requestIds));
+      }
+    } else {
+      requestIds.push(requestId);
+      sessionStorage.setItem(grid, JSON.stringify(requestIds));
+    }
+    console.log(`requestIds = ${JSON.stringify(requestIds)}`);
+  }
 }

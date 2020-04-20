@@ -25,7 +25,8 @@ import { PlcMeterReadScheduleComponent } from '../../components/plc-meter-read-s
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { RequestConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -557,12 +558,51 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     modalRef.result.then().catch(() => {});
   }
 
+  bulkOperation(operation: MeterUnitsTypeEnum) {
+    if (this.authService.getAuthTokenMyGridLink() && this.authService.getAuthTokenMyGridLink().length > 0) {
+      const selectedRows = this.gridApi.getSelectedRows();
+      const deviceIdsParam = [];
+      // TODO: uncomment this, delete next line -> selectedRows.map(row => deviceIdsParam.push(row));
+      deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+
+      let response: Observable<any> = new Observable();
+      const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
+      switch (operation) {
+        case MeterUnitsTypeEnum.breakerStatus:
+          response = this.service.getDisconnectorState(params);
+          break;
+        case MeterUnitsTypeEnum.connect:
+          response = this.service.postMyGridConnectDevice(params);
+          break;
+        case MeterUnitsTypeEnum.disconnect:
+          response = this.service.postMyGridDisconnectDevice(params);
+          break;
+        case MeterUnitsTypeEnum.touConfig:
+          const paramsConf: RequestTOUData = { deviceIds: deviceIdsParam, timeOfUseId: '1' }; // TODO: timeOfUseId read form store?
+          response = this.service.postMyGridTOUDevice(paramsConf);
+      }
+
+      response.subscribe(value => {
+        this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+      });
+    } else {
+      this.service.getMyGridIdentityToken().subscribe(value => {
+        this.authService.setAuthTokenMyGridLink(value);
+        this.bulkOperation(operation);
+      });
+    }
+  }
+
   onBreakerStatus() {
-    // TODO
+    this.bulkOperation(MeterUnitsTypeEnum.breakerStatus);
   }
 
   onConnect() {
-    // TODO
+    this.bulkOperation(MeterUnitsTypeEnum.connect);
+  }
+
+  onDisconnect() {
+    this.bulkOperation(MeterUnitsTypeEnum.disconnect);
   }
 
   onSetLimiter() {
@@ -570,7 +610,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onTou() {
-    // TODO
+    this.bulkOperation(MeterUnitsTypeEnum.touConfig);
   }
 
   // TODO
