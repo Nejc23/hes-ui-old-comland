@@ -17,6 +17,7 @@ export const environment = {
   // identitiy settings
   stsAuthority: 'http://89.212.201.202:8081/',
   clientId: 'epoint2',
+  ignoreLocale: true,
   clientRoot: 'http://localhost:4200/',
   clientScope: 'openid profile roles offline_access company',
   clientAutoSilentRenew: true

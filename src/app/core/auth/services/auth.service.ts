@@ -15,6 +15,7 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
 import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink.interceptor';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
+import { selectedLocale } from 'src/environments/locale';
 
 @Injectable()
 export class AuthService {
@@ -33,9 +34,13 @@ export class AuthService {
     const settings = {
       authority: environment.stsAuthority,
       client_id: environment.clientId,
-      redirect_uri: `${environment.clientRoot}assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
-      silent_redirect_uri: `${environment.clientRoot}assets/silent-callback.html`,
-      post_logout_redirect_uri: `${environment.clientRoot}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
+      redirect_uri: environment.ignoreLocale
+        ? `${environment.clientRoot}assets/signin-callback.html`
+        : `${environment.clientRoot}${selectedLocale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
+      silent_redirect_uri: environment.ignoreLocale
+        ? `${environment.clientRoot}assets/silent-callback.html`
+        : `${environment.clientRoot}${selectedLocale}assets/silent-callback.html`,
+      post_logout_redirect_uri: environment.ignoreLocale ? `${environment.clientRoot}` : `${environment.clientRoot}${selectedLocale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
       response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
       scope: environment.clientScope,
       automaticSilentRenew: true
