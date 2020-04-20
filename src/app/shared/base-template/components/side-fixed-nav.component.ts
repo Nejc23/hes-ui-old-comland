@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { brand } from 'src/environments/brand/default/brand';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-side-fixed-nav',
@@ -8,7 +9,7 @@ import { brand } from 'src/environments/brand/default/brand';
 })
 export class SideFixedNavComponent implements OnInit {
   // @ViewChild('title', { static: true }) title2: ElementRef;
-  constructor() {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit() {}
 
@@ -18,5 +19,9 @@ export class SideFixedNavComponent implements OnInit {
 
   getMenuMainLogoUrl() {
     return brand.navFixedMenuMainUrl;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }

@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
   subscriptionPageRefresh: Subscription; // page refresh
 
   constructor(public http: HttpClient, private authService: AuthService, public permissionsStore: PermissionsStoreService) {}
-
+  /*
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.authService.setRefreshTokenInterval();
@@ -52,6 +52,22 @@ export class AuthGuard implements CanActivate {
           this.subscriptionPageRefresh.unsubscribe();
         }
       });
+    });
+  }*/
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      console.log(this.authService.isAuthenticated());
+      if (this.authService.isAuthenticated()) {
+        resolve(true);
+      } else {
+        console.log('login');
+        this.authService
+          .login()
+          .then(() => {})
+          .catch(err => console.log(err));
+        resolve(false);
+      }
     });
   }
 }

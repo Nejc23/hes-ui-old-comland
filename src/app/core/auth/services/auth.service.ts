@@ -14,10 +14,14 @@ import { PermissionsStoreService } from '../../permissions/services/permissions-
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
 import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink.interceptor';
+import { User, UserManager, UserManagerSettings } from 'oidc-client';
 
 @Injectable()
 export class AuthService {
   refreshTokenInterval$: Subscription = null;
+
+  userManager: UserManager;
+  public user: User | null;
 
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
@@ -25,7 +29,23 @@ export class AuthService {
     private router: Router,
     private appStore: AppStoreService,
     private permissionsStoreService: PermissionsStoreService
-  ) {}
+  ) {
+    const settings = {
+      authority: environment.stsAuthority,
+      client_id: environment.clientId,
+      redirect_uri: `${environment.clientRoot}assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
+      silent_redirect_uri: `${environment.clientRoot}assets/silent-callback.html`,
+      post_logout_redirect_uri: `${environment.clientRoot}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
+      response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
+      scope: environment.clientScope,
+      automaticSilentRenew: true
+    };
+    this.userManager = new UserManager(settings);
+
+    /* this.userManager.getUser().then(user => {
+      this.user = user;
+    });*/
+  }
 
   getAuthToken(): string {
     return this.cookieService.get(config.authCookie);
@@ -36,6 +56,26 @@ export class AuthService {
     return this.cookieService.get(config.authType) == null || this.cookieService.get(config.authType) === ''
       ? 'bearer'
       : this.cookieService.get(config.authType);
+  }
+
+  public login(): Promise<void> {
+    return this.userManager.signinRedirect();
+  }
+
+  public renewToken(): Promise<User> {
+    return this.userManager.signinSilent();
+  }
+
+  public logout(): Promise<void> {
+    return this.userManager.signoutRedirect();
+  }
+
+  public getUser(): Promise<User> {
+    return this.userManager.getUser();
+  }
+
+  isAuthenticated(): boolean {
+    return this.user != null;
   }
 
   // for calling API-s on myGrid.Link server
@@ -56,26 +96,25 @@ export class AuthService {
     const dateCreatedToken = localStorage.getItem('Link_Token_DateTime');
     // todo
     return true;
+  } /*
+  login(loginCredentials: LoginCredentials) {
+    return this.usersRepositoryService.authenticateUser(loginCredentials);
   }
+*/
+  /**
+   * Refresh token after is not valid anymore
+   */
   // ----------------------------------------
 
   /**
    * Login with user credentials
-   */
-  login(loginCredentials: LoginCredentials) {
-    return this.usersRepositoryService.authenticateUser(loginCredentials);
-  }
-
-  /**
-   * Refresh token after is not valid anymore
-   */
-  refresh() {
+   */ refresh() {
     const expiredToken: RefreshTokenRequest = {
       expiredToken: localStorage.getItem('exp_token')
     };
     return this.usersRepositoryService.refreshUserToken(expiredToken);
   }
-
+  /*
   logout() {
     this.removeAuthTokenData();
     localStorage.removeItem('type_token');
@@ -89,7 +128,7 @@ export class AuthService {
 
   getUser(): string {
     return localStorage.getItem('user_fullName');
-  }
+  }*/
 
   /**
    * Save token to cookie service

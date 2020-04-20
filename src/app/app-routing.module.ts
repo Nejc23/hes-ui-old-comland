@@ -21,7 +21,7 @@ const appRoutes: Routes = [
     path: '',
     component: BaseTemplateComponent,
     canActivate: [AuthGuard],
-    canActivateChild: [PermissionsGuard],
+    ///  canActivateChild: [PermissionsGuard], TODO !!!!
     runGuardsAndResolvers: 'always',
     children: [
       {

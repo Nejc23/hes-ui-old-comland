@@ -3,13 +3,14 @@ import { themeColors } from './shared/base-template/consts/theme-colors.const';
 import * as moment from 'moment';
 import { Title } from '@angular/platform-browser';
 import { brand } from 'src/environments/brand/default/brand';
+import { AuthService } from './core/auth/services/auth.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  constructor(@Inject(LOCALE_ID) private locale: string, private titleService: Title) {
+  constructor(@Inject(LOCALE_ID) private locale: string, private titleService: Title, public authService: AuthService) {
     moment.locale(locale);
   }
 
@@ -17,6 +18,19 @@ export class AppComponent implements OnInit {
     // TODO: complete this
     // this.authService.setRefreshTokenInterval();
     this.titleService.setTitle(brand.appBrowserTitle);
+
+    this.authService
+      .getUser()
+      .then(user => {
+        //  this.currentUser = user;
+        this.authService.user = user;
+        if (user) {
+          console.log('User Logged In');
+        } else {
+          console.log('User Not Logged In');
+        }
+      })
+      .catch(err => console.log(err));
   }
 
   getProgressBarColor() {

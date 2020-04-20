@@ -73,6 +73,7 @@
     "ng-mocks": "^8.1.0",
     "ngx-cookie-service": "~2.1.0",
     "ngx-i18nsupport": "^0.17.1",
+    "oidc-client": "^1.10.1",
     "rxjs": "~6.5.3",
     "stream": "0.0.2",
     "tslib": "^1.9.0",

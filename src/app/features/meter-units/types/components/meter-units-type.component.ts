@@ -87,6 +87,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   requestId = '';
   dataResult = '';
   dataStatusResponse = '';
+  dataResult2 = '';
 
   constructor(
     private sidebarService: SidebarService,
@@ -661,5 +662,18 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.dataResult = 'token for myGrid.Link not exists !!';
     }
   }
+
+  callBreakerState() {
+    if (this.authService.getAuthTokenMyGridLink().length > 0) {
+      const params: RequestConnectDisconnectData = { deviceIds: ['221A39C5-6C84-4F6E-889C-96326862D771'] };
+      this.service.getDisconnectorState(params).subscribe(value => {
+        this.dataResult2 = 'connect-current Request id is:: ' + value.requestId;
+        this.requestId = value.requestId;
+      });
+    } else {
+      this.dataResult2 = 'token for myGrid.Link not exists !!';
+    }
+  }
+
   // ***************************************************************************** */
 }

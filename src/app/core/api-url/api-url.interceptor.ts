@@ -10,6 +10,7 @@ export class ApiUrlInterceptor implements HttpInterceptor {
     // if url request is for myGridLink server
     if (this.checkIfMyGridLinkUrl(request)) {
       const apiReq = request.clone({ url: `${environment.apiMyGridUrl}${request.url}` });
+      console.log('mygrid????');
       return next.handle(apiReq);
     } else {
       const apiReq = request.clone({ url: `${environment.apiUrl}${request.url}` });
