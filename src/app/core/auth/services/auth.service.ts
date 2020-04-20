@@ -46,7 +46,7 @@ export class AuthService {
     localStorage.setItem('myGrid.Link_Token_ExpiresIn', token.ExpiresIn.toString());
   }
 
-  getAuthTokenMyGridLink(): string {
+  getAuthTokenMyGridLink() {
     return localStorage.getItem('myGrid.Link_Token');
   }
 

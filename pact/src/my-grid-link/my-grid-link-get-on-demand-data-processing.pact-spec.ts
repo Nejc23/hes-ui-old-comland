@@ -1,8 +1,8 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
-import { defaultResponseHeader } from 'pact/helpers/default-header.helper';
+import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { IdentityToken } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { OnDemandRequestData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -25,23 +25,28 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(MyGridLinkService);
   });
 
-  const responseBody: IdentityToken = {
-    AccessToken: 'eyJhbGciOiJSUzI1NiIsImtpZCI6IlRhUEJZLUlKT0Vta1M1VWpEYjNESkEiLCJ0eXAiOiJhdCtqd3QifQ.eyJuYmYiOjE1ODY4NzYwNzUsImV4',
-    ExpiresIn: 3600,
-    TokenType: 'Bearer'
+  const requestId = '0a09afe6-143e-4c9f-95dc-6f0b90f95455';
+  const responseBody: OnDemandRequestData = {
+    deviceId: '717d9fd6-478e-4c72-8a3a-0722d85a07b1',
+    data: [
+      {
+        objectType: 'DisconnectorState',
+        value: 'Disconnected'
+      }
+    ]
   };
 
-  describe('myGrid.link get identity token', () => {
+  describe('myGrid.link get on demand data processing', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_GET_IDENTITIY_TOKEN_FOR_MY_GRID_LINK_APIS',
-          uponReceiving: 'a request for get identity token for access to myGrid.link api-s',
+          state: 'A_REQUEST_MY_GRID_LINK_GET_ON_DEMAND_DATA_PROCESSING',
+          uponReceiving: 'a request for get on demand data processing of requested id from myGrid.link',
           withRequest: {
-            method: service.getMyGridIdentityTokenRequest().method,
-            path: service.getMyGridIdentityTokenRequest().url,
+            method: service.geOnDemandDataProcessingRequest(requestId).method,
+            path: service.geOnDemandDataProcessingRequest(requestId).url,
             body: null,
-            headers: null
+            headers: defaultRequestHeader
           },
           willRespondWith: {
             status: 200,
@@ -61,9 +66,9 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for get identity token for access to myGrid.link api-s', done => {
-      service.getMyGridIdentityToken().subscribe(
-        (res: IdentityToken) => {
+    it('should make request for get on demand data processing of requested id from myGrid.link', done => {
+      service.geOnDemandDataProcessing(requestId).subscribe(
+        (res: OnDemandRequestData) => {
           expect(res).toEqual(responseBody);
           done();
         },

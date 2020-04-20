@@ -8,7 +8,8 @@ import {
   RequestConnectDisconnectData,
   ResponseConnectDisconnectData,
   RequestTOUData,
-  ResponseTOUData
+  ResponseTOUData,
+  OnDemandRequestData
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -16,7 +17,9 @@ import {
   lastStatus,
   onDemandConnect,
   onDemandDisconnect,
-  triggerSetTimeOfUse
+  triggerSetTimeOfUse,
+  onDemandDisconnectorState,
+  onDemandData
 } from '../../consts/my-grid-link.const';
 
 @Injectable({
@@ -68,5 +71,23 @@ export class MyGridLinkService {
 
   postMyGridTOUDeviceRequest(params: RequestTOUData): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerSetTimeOfUse}`, params);
+  }
+
+  // get disconnector state
+  getDisconnectorState(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+    return this.repository.makeRequest(this.getDisconnectorStateRequest(params));
+  }
+
+  getDisconnectorStateRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnectorState}`, params);
+  }
+
+  // get data returned on-demand requests
+  geOnDemandDataProcessing(requestId: string): Observable<OnDemandRequestData> {
+    return this.repository.makeRequest(this.geOnDemandDataProcessingRequest(requestId));
+  }
+
+  geOnDemandDataProcessingRequest(requestId: string): HttpRequest<OnDemandRequestData> {
+    return new HttpRequest('GET', `${enumMyGridLink.dataProcessing}/${requestId}${onDemandData}`);
   }
 }

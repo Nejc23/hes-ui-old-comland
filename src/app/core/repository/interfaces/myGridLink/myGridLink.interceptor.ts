@@ -40,3 +40,13 @@ export interface ResponseTOUData {
   deviceIds: string[];
   filter?: GridFilterParams;
 }
+
+export interface OnDemandRequestData {
+  deviceId: string;
+  data: [
+    {
+      objectType: string;
+      value: string;
+    }
+  ];
+}
