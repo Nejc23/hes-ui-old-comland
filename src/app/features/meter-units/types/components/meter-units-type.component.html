@@ -1,3 +1,9 @@
+<app-auto-refresh
+      (timerExpired)="refresh()"
+      [elapseTime]="30"
+      [hidden]="false">
+</app-auto-refresh>
+
 <div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
@@ -94,6 +100,9 @@
   <div class="form-row pt-5">
     <button class="btn btn-primary p-2" (click)="getLastStatus()">Get last status</button>
     RequestId: <input class="p-2" type="text" [(ngModel)] = "requestId">
+  </div>
+  <div class="form-row pt-3">
+    <button class="btn btn-primary p-2" (click)=removeRequest()>Remove request</button>
   </div>
   <div class="form-row pt-3">
     result: {{dataStatusResponse}}

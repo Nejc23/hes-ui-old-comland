@@ -37,6 +37,7 @@ import { RegistersSelectComponent } from '../features/registers-select/component
 import { PlcMeterReadScheduleComponent } from '../features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 import { AgGridModule } from '@ag-grid-community/angular';
+import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refresh.component';
 
 @NgModule({
   exports: [
@@ -68,7 +69,8 @@ import { AgGridModule } from '@ag-grid-community/angular';
     HideIfUnauthorizedDirective,
     NumberOnlyDirective,
     PipesModule,
-    BreadcrumbsModule
+    BreadcrumbsModule,
+    AutoRefreshComponent
   ],
   imports: [
     CommonModule,
@@ -109,7 +111,8 @@ import { AgGridModule } from '@ag-grid-community/angular';
     HideIfUnauthorizedDirective,
     NumberOnlyDirective,
     SideFixedNavComponent,
-    Page404Component
+    Page404Component,
+    AutoRefreshComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,

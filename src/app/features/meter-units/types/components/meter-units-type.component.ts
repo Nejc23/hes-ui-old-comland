@@ -27,6 +27,7 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -37,6 +38,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
   headerTitle = '';
+  taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
+  // taskStatusOK = 'TASK_SUCCESS",';
 
   // grid variables
   columns = [];
@@ -89,6 +92,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataStatusResponse = '';
   dataResult2 = '';
 
+  messageActionInProgress = this.i18n(`Action in progress!`);
+  messageDataRefreshed = this.i18n(`Data refreshed!`);
+
   constructor(
     private sidebarService: SidebarService,
     private i18n: I18n,
@@ -103,7 +109,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
     private modalService: ModalService,
     private service: MyGridLinkService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastNotificationService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -561,10 +568,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   bulkOperation(operation: MeterUnitsTypeEnum) {
     if (this.authService.getAuthTokenMyGridLink() && this.authService.getAuthTokenMyGridLink().length > 0) {
+      this.toast.successToast(this.messageActionInProgress);
       const selectedRows = this.gridApi.getSelectedRows();
       const deviceIdsParam = [];
       // TODO: uncomment this, delete next line -> selectedRows.map(row => deviceIdsParam.push(row));
       deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+      deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
       let response: Observable<any> = new Observable();
       const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
@@ -620,6 +629,42 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     //
   }
 
+  refresh() {
+    if (this.authService.getAuthTokenMyGridLink() && this.authService.getAuthTokenMyGridLink().length > 0) {
+      // console.log('refresh started!');
+      let requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
+      // console.log(`requestIds = ${JSON.stringify(requestIds)}`);
+
+      requestIds.map(requestId =>
+        this.service.getMyGridLastStatus(requestId).subscribe(results => {
+          // console.log(`results = ${JSON.stringify(results)}`);
+          const okRequest = _.find(results, x => x.status === this.taskStatusOK);
+          // console.log(`okRequest = ${JSON.stringify(okRequest)}`);
+          if (okRequest !== undefined) {
+            const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
+            // console.log(`badRequest = ${JSON.stringify(badRequest)}`);
+            if (badRequest === undefined) {
+              // no devices with unsuccessful status, we can delete requestId from session
+              this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
+              this.refreshGrid();
+              this.toast.successToast(this.messageDataRefreshed);
+              // console.log('refresh done!');
+            }
+          }
+        })
+      );
+
+      requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
+      if (requestIds && requestIds.length > 0) {
+        this.toast.successToast(this.messageActionInProgress);
+      }
+    } else {
+      this.service.getMyGridIdentityToken().subscribe(value => {
+        this.authService.setAuthTokenMyGridLink(value);
+      });
+    }
+  }
+
   // ************************************************ za test myGrid.Link calls ODSTRANI -->*/
   callGetToken() {
     this.service.getMyGridIdentityToken().subscribe(value => {
@@ -663,17 +708,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  callBreakerState() {
-    if (this.authService.getAuthTokenMyGridLink().length > 0) {
-      const params: RequestConnectDisconnectData = { deviceIds: ['221A39C5-6C84-4F6E-889C-96326862D771'] };
-      this.service.getDisconnectorState(params).subscribe(value => {
-        this.dataResult2 = 'connect-current Request id is:: ' + value.requestId;
-        this.requestId = value.requestId;
-      });
-    } else {
-      this.dataResult2 = 'token for myGrid.Link not exists !!';
+  removeRequest() {
+    if (this.requestId) {
+      this.meterUnitsTypeGridService.removeMyGridLinkRequestId(this.requestId);
     }
   }
-
   // ***************************************************************************** */
 }

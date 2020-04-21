@@ -235,4 +235,21 @@ export class GridSettingsSessionStoreService {
     }
     console.log(`requestIds = ${JSON.stringify(requestIds)}`);
   }
+
+  removeMyGridLinkRequestId(grid: string, requestId: string) {
+    const data = JSON.parse(sessionStorage.getItem(grid));
+    if (data) {
+      const value = _.find(data, x => x === requestId);
+      if (value) {
+        _.remove(data, x => x === requestId);
+        sessionStorage.setItem(grid, JSON.stringify(data));
+      }
+    }
+    // console.log(`requestIds = ${JSON.stringify(data)}`);
+  }
+
+  getAllMyGridLinkRequestIds(grid: string): string[] {
+    const data = JSON.parse(sessionStorage.getItem(grid));
+    return data;
+  }
 }
