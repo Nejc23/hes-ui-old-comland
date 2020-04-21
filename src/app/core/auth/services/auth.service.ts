@@ -16,12 +16,14 @@ import { AuthenticationRepositoryService } from '../../repository/services/auth/
 import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink.interceptor';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { selectedLocale } from 'src/environments/locale';
+import { JwtHelperService } from './jwt.helper.service';
 
 @Injectable()
 export class AuthService {
   refreshTokenInterval$: Subscription = null;
 
   userManager: UserManager;
+  r: RoleManager;
   public user: User | null;
 
   constructor(
@@ -29,7 +31,8 @@ export class AuthService {
     private cookieService: CookieService,
     private router: Router,
     private appStore: AppStoreService,
-    private permissionsStoreService: PermissionsStoreService
+    private permissionsStoreService: PermissionsStoreService,
+    private jwtHelper: JwtHelperService
   ) {
     const settings = {
       authority: environment.stsAuthority,
@@ -44,6 +47,9 @@ export class AuthService {
       response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
       scope: environment.clientScope,
       automaticSilentRenew: true
+      // accessTokenLifetime: 7200,
+      //Identity token life time is 7200 seconds (2 hour)
+      //  identityTokenLifetime:7200
     };
     this.userManager = new UserManager(settings);
 
@@ -80,7 +86,21 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
+    console.log(this.user);
     return this.user != null;
+  }
+
+  isRefreshNeeded2() {
+    if (this.user != null && this.user.id_token != null) {
+      const decoded = this.jwtHelper.decodeToken(this.user.id_token);
+      if (decoded.exp != undefined && decoded.exp != null) {
+        const secondsSinceEpoch = Math.round(Date.now() / 1000);
+        if (secondsSinceEpoch > decoded.exp) {
+          return true;
+        }
+      }
+    }
+    return false;
   }
 
   // for calling API-s on myGrid.Link server
