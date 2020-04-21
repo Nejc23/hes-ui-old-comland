@@ -713,5 +713,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.meterUnitsTypeGridService.removeMyGridLinkRequestId(this.requestId);
     }
   }
+
+  callBreakerState() {}
   // ***************************************************************************** */
 }
