@@ -23,7 +23,6 @@ export class AuthService {
   refreshTokenInterval$: Subscription = null;
 
   userManager: UserManager;
-  r: RoleManager;
   public user: User | null;
 
   constructor(
