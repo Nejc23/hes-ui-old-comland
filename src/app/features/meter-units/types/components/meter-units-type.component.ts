@@ -12,7 +12,7 @@ import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
-import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
+import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
 import * as moment from 'moment';
 import { Subscription, Observable } from 'rxjs';
 import * as _ from 'lodash';
@@ -40,6 +40,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   headerTitle = '';
   taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   // taskStatusOK = 'TASK_SUCCESS",';
+  refreshInterval = gridRefreshInterval;
 
   // grid variables
   columns = [];

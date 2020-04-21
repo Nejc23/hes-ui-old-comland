@@ -48,3 +48,5 @@ export const configAgGridDefCol = {
   suppressColumnsToolPanel: true,
   floatingFilterComponentParams: { suppressFilterButton: true, suppressFiltersToolPanel: true, suppressColumnsToolPanel: true }
 };
+
+export const gridRefreshInterval = 30;
