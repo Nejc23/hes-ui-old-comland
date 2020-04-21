@@ -3,9 +3,9 @@
     <!-- Generator: Sketch 64 (93537) - https://sketch.com -->
     <title>main</title>
     <desc>Created with Sketch.</desc>
-    <g id="main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="Helvetica-Oblique, Helvetica" font-size="36" font-style="italic" font-weight="normal" letter-spacing="3">
-        <text id="myGrid.Link" fill="#FFFFFF">
-            <tspan x="27.4794922" y="39">myGrid.Link</tspan>
+    <g id="main" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="Helvetica-Oblique, Helvetica" font-size="36" font-style="italic" font-weight="normal" letter-spacing="4">
+        <text id="myGrid-|-Link" fill="#FFFFFF">
+            <tspan x="8.30273438" y="39">myGrid | Link</tspan>
         </text>
     </g>
 </svg>

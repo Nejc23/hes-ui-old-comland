@@ -62,13 +62,13 @@ i.text-secondary {
 label {
   &:not(.control-label) {
     font-size: $font-size-sm !important;
-    color: $gray-600;
+    color: $gray-700;
     font-weight: $font-weight-bold;
   }
 
   &.control-label {
-    font-size: $font-size-sm !important;
-    font-weight: $font-weight-bold;
+    //font-size: $font-size-sm !important;
+    //font-weight: $font-weight-bold;
     margin-bottom: 0 !important;
   }
 }

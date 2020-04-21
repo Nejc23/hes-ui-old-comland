@@ -34,11 +34,11 @@
       </app-input-multiselect>
 
       <div *ngIf="selectedId == 5">
-        <label class="control-label" i18n>Days in month</label>
+        <label i18n>Days in month</label>
         <sup> *</sup>
       </div>
       <div class="d-flex flex-wrap" *ngIf="selectedId == 5">
-       <button class="btn m-1" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'" *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
+       <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'" *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
           <span>{{i+1}}</span>
        </button>
       </div>
