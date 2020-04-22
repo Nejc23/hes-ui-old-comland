@@ -38,6 +38,8 @@ import { PlcMeterReadScheduleComponent } from '../features/meter-units/component
 import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refresh.component';
+import { PlcMeterTouConfigComponent } from '../features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.componente';
+import { TouConfigSelectComponent } from '../features/tou-config-select/component/tou-config-select.component';
 
 @NgModule({
   exports: [
@@ -61,7 +63,9 @@ import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refre
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
+    PlcMeterTouConfigComponent,
     RegistersSelectComponent,
+    TouConfigSelectComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
     DisableIfUnauthorizedDirective,
@@ -98,7 +102,9 @@ import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refre
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
+    PlcMeterTouConfigComponent,
     RegistersSelectComponent,
+    TouConfigSelectComponent,
     ToastComponent,
     CardComponent,
     ModalTemplateComponent,
@@ -121,7 +127,9 @@ import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refre
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
-    RegistersSelectComponent
+    PlcMeterTouConfigComponent,
+    RegistersSelectComponent,
+    TouConfigSelectComponent
   ]
 })
 export class SharedModule {}

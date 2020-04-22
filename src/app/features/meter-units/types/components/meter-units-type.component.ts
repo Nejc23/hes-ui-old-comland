@@ -28,6 +28,7 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { PlcMeterTouConfigComponent } from '../../components/plc-meter-tou-config/plc-meter-tou-config.componente';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -621,7 +622,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onTou() {
-    this.bulkOperation(MeterUnitsTypeEnum.touConfig);
+    // this.bulkOperation(MeterUnitsTypeEnum.touConfig);
+    const selectedRows = this.gridApi.getSelectedRows();
+    const deviceIdsParam = [];
+    // TODO: uncomment this, delete next line -> selectedRows.map(row => deviceIdsParam.push(row));
+    deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+    deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+    const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
+    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
+    modalRef.result.then().catch(() => {});
   }
 
   // TODO

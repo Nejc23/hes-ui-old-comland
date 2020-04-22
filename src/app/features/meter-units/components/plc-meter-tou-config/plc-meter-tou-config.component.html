@@ -1,0 +1,26 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>TOU Configuration</div>
+
+  <div modal-body>
+    <ng-container>
+      <app-tou-config-select (rowSelected)="touConfigSelectionChanged($event)"></app-tou-config-select>
+      <div class="help-block" *ngIf="noConfig">
+        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{configRequiredText}}</small>
+      </div>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
+          i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="save()"><i class="far fa-save"></i><span
+            i18n>Save</span></button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+
+<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>
+
