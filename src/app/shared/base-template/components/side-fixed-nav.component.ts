@@ -26,6 +26,10 @@ export class SideFixedNavComponent implements OnInit {
     return brand.navFixedMenuMainUrl;
   }
 
+  profile() {
+    // TODO
+  }
+
   logout() {
     this.authService.logout();
   }

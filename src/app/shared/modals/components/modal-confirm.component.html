@@ -8,5 +8,5 @@
 <div class="modal-body">{{modalBody}}</div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="dismiss()" i18n>Cancel</button>
-  <button type="button" class="btn" [ngClass]="{ 'btn-danger': confirmDelete, 'btn-primary': !confirmDelete }" (click)="confirm()" i18n>{{btnConfirmText}}</button>
+  <button type="button" class="btn" (click)="confirm()" i18n>{{btnConfirmText}}</button>
 </div>
