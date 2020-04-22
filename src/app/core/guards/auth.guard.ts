@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router } from '@angular/router';
 import { Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +11,12 @@ import { AuthenticatedUser } from '../auth/interfaces/authenticated-user.interfa
 export class AuthGuard implements CanActivate {
   subscriptionPageRefresh: Subscription; // page refresh
 
-  constructor(public http: HttpClient, private authService: AuthService, public permissionsStore: PermissionsStoreService) {}
+  constructor(
+    private router: Router,
+    public http: HttpClient,
+    private authService: AuthService,
+    public permissionsStore: PermissionsStoreService
+  ) {}
   /*
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
@@ -85,7 +90,11 @@ export class AuthGuard implements CanActivate {
                 this.authService.saveTokenAndSetUserRights2(this.authService.user, '');
               }
             })
-            .catch(err => console.log(err));
+            .catch(err => {
+              console.log(err.message);
+
+              this.router.navigate(['/identityError', { error: err.message }]);
+            });
           resolve(false);
         }
       }

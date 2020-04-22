@@ -5,6 +5,7 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { PermissionsGuard } from './core/guards/permissions.guard';
 import { UserLoginComponent } from './features/users/user-login.component';
 import { Page404Component } from './shared/404/page-404.component';
+import { IdentityErrorComponent } from './shared/IdentityError/identity-error.component';
 
 const appRoutes: Routes = [
   {
@@ -37,6 +38,11 @@ const appRoutes: Routes = [
         loadChildren: 'src/app/features/help/modules/help.module#HelpModule'
       }
     ]
+  },
+  {
+    path: 'identityError',
+    component: IdentityErrorComponent,
+    runGuardsAndResolvers: 'always'
   },
   { path: '404', component: Page404Component },
   { path: '**', redirectTo: '404' }
