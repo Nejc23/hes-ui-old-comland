@@ -31,7 +31,7 @@ export class MeterUnitsTypeGridService {
   cookieNameForGridSettings = 'grdColMUT-typeId-';
   cookieNameForGridSort = 'grdColMUTSort-typeId-';
   sessionNameForGridState = 'grdStateMUT-typeId-';
-  gridName = 'grdMUT';
+  gridName = 'grdMUT-requestIds';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;

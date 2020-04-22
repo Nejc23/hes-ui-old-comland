@@ -25,6 +25,10 @@ export class AuthService {
   userManager: UserManager;
   public user: User | null;
 
+  tokenName = 'myGrid.Link_Token';
+  tokenDateTime = 'myGrid.Link_Token_DateTime';
+  tokenExpiresIn = 'myGrid.Link_Token_ExpiresIn';
+
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
     private cookieService: CookieService,
@@ -129,22 +133,31 @@ export class AuthService {
   // for calling API-s on myGrid.Link server
   // ----------------------------------------
   setAuthTokenMyGridLink(token: IdentityToken) {
-    localStorage.setItem('myGrid.Link_Token', token.TokenType + ' ' + token.AccessToken);
-    localStorage.setItem('myGrid.Link_Token_DateTime', new Date().toUTCString());
-    localStorage.setItem('myGrid.Link_Token_ExpiresIn', token.ExpiresIn.toString());
+    localStorage.setItem(this.tokenName, token.TokenType + ' ' + token.AccessToken);
+    localStorage.setItem(this.tokenDateTime, new Date().toUTCString());
+    localStorage.setItem(this.tokenExpiresIn, token.ExpiresIn.toString());
   }
 
   getAuthTokenMyGridLink() {
-    return localStorage.getItem('myGrid.Link_Token');
+    return localStorage.getItem(this.tokenName);
   }
 
-  //TODO, check expiration of myGrid.Link_Token
   isTokenAvailable(): boolean {
-    const expires = localStorage.getItem('Link_Token_ExpiresIn');
-    const dateCreatedToken = localStorage.getItem('Link_Token_DateTime');
-    // todo
-    return true;
-  } /*
+    const expires = localStorage.getItem(this.tokenExpiresIn);
+    const dateCreatedToken = localStorage.getItem(this.tokenDateTime);
+    const expirationSeconds = moment(dateCreatedToken)
+      .add(expires, 'seconds')
+      .diff(moment(), 'seconds');
+    const result =
+      this.getAuthTokenMyGridLink() &&
+      this.getAuthTokenMyGridLink().length > 0 &&
+      expires !== null &&
+      dateCreatedToken !== null &&
+      expirationSeconds > 0;
+    return result;
+  }
+
+  /*
   login(loginCredentials: LoginCredentials) {
     return this.usersRepositoryService.authenticateUser(loginCredentials);
   }

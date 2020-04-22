@@ -568,7 +568,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   bulkOperation(operation: MeterUnitsTypeEnum) {
-    if (this.authService.getAuthTokenMyGridLink() && this.authService.getAuthTokenMyGridLink().length > 0) {
+    if (this.authService.isTokenAvailable()) {
       this.toast.successToast(this.messageActionInProgress);
       const selectedRows = this.gridApi.getSelectedRows();
       const deviceIdsParam = [];
@@ -631,33 +631,28 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    if (this.authService.getAuthTokenMyGridLink() && this.authService.getAuthTokenMyGridLink().length > 0) {
-      // console.log('refresh started!');
+    if (this.authService.isTokenAvailable()) {
       let requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
-      // console.log(`requestIds = ${JSON.stringify(requestIds)}`);
-
-      requestIds.map(requestId =>
-        this.service.getMyGridLastStatus(requestId).subscribe(results => {
-          // console.log(`results = ${JSON.stringify(results)}`);
-          const okRequest = _.find(results, x => x.status === this.taskStatusOK);
-          // console.log(`okRequest = ${JSON.stringify(okRequest)}`);
-          if (okRequest !== undefined) {
-            const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
-            // console.log(`badRequest = ${JSON.stringify(badRequest)}`);
-            if (badRequest === undefined) {
-              // no devices with unsuccessful status, we can delete requestId from session
-              this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
-              this.refreshGrid();
-              this.toast.successToast(this.messageDataRefreshed);
-              // console.log('refresh done!');
-            }
-          }
-        })
-      );
-
-      requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
       if (requestIds && requestIds.length > 0) {
-        this.toast.successToast(this.messageActionInProgress);
+        requestIds.map(requestId =>
+          this.service.getMyGridLastStatus(requestId).subscribe(results => {
+            const okRequest = _.find(results, x => x.status === this.taskStatusOK);
+            if (okRequest !== undefined) {
+              const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
+              if (badRequest === undefined) {
+                // no devices with unsuccessful status, we can delete requestId from session
+                this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
+                this.refreshGrid();
+                this.toast.successToast(this.messageDataRefreshed);
+              }
+            }
+          })
+        );
+
+        requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
+        if (requestIds && requestIds.length > 0) {
+          this.toast.successToast(this.messageActionInProgress);
+        }
       }
     } else {
       this.service.getMyGridIdentityToken().subscribe(value => {
