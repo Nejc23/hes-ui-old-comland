@@ -69,11 +69,7 @@ export class AuthService {
   }
 
   public login(): Promise<void> {
-    return this.userManager.signinRedirect().then(() => {
-      this.userManager.getUser().then(user => {
-        this.user = user;
-      });
-    });
+    return this.userManager.signinRedirect();
   }
 
   public renewToken(): Promise<User> {
