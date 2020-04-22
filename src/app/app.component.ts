@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
         //  this.currentUser = user;
         this.authService.user = user;
         if (user) {
-          console.log('User Logged In');
+          this.authService.saveTokenAndSetUserRights2(user);
         } else {
           console.log('User Not Logged In');
         }

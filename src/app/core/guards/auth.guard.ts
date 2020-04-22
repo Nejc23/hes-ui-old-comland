@@ -60,15 +60,23 @@ export class AuthGuard implements CanActivate {
       console.log(this.authService.isAuthenticated());
 
       if (this.authService.isRefreshNeeded2()) {
+        console.log('to renew');
         this.authService
           .renewToken()
           .then(value => {
             console.log('renew');
             console.log(value);
             this.authService.user = value;
+            this.authService.saveTokenAndSetUserRights2(value);
             resolve(true);
           })
-          .catch(err => console.log(err));
+          .catch(err => {
+            console.log(err.message);
+            if (err.message === 'login_required') {
+              this.authService.login().catch(err => console.log(err));
+            }
+            resolve(false);
+          });
       } else {
         if (this.authService.isAuthenticated()) {
           resolve(true);
@@ -76,7 +84,11 @@ export class AuthGuard implements CanActivate {
           console.log('login');
           this.authService
             .login()
-            .then(() => {})
+            .then(() => {
+              if (this.authService.user != null) {
+                this.authService.saveTokenAndSetUserRights2(this.authService.user);
+              }
+            })
             .catch(err => console.log(err));
           resolve(false);
         }

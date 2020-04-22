@@ -69,7 +69,11 @@ export class AuthService {
   }
 
   public login(): Promise<void> {
-    return this.userManager.signinRedirect();
+    return this.userManager.signinRedirect().then(() => {
+      this.userManager.getUser().then(user => {
+        this.user = user;
+      });
+    });
   }
 
   public renewToken(): Promise<User> {
@@ -102,6 +106,19 @@ export class AuthService {
     return false;
   }
 
+  saveTokenAndSetUserRights2(authenticatedUser: User) {
+    localStorage.clear();
+    localStorage.setItem('type_token', 'Bearer');
+    localStorage.setItem('auth_token', authenticatedUser.id_token);
+    // localStorage.setItem('exp_token', authenticatedUser.expireDate);
+    // localStorage.setItem('refresh_token', authenticatedUser.refreshToken);
+    // localStorage.setItem('user_fullName', authenticatedUser.firstName + ' ' + authenticatedUser.lastName);
+    localStorage.setItem('user_fullName', '2345');
+    this.cookieService.set(config.authCookie, authenticatedUser.id_token, null, environment.cookiePath);
+    //this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
+    this.cookieService.set(config.authType, 'Bearer', null, environment.cookiePath);
+    // this.setUserRights(authenticatedUser);
+  }
   // for calling API-s on myGrid.Link server
   // ----------------------------------------
   setAuthTokenMyGridLink(token: IdentityToken) {

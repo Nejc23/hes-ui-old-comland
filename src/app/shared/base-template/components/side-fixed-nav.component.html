@@ -13,16 +13,14 @@
       <a class="navbar-icon mt-3 d-block" href="#">
         <i class="far fa-cog"></i>
       </a>
-      <div class="btn-group dropright dropup">
-      <a class="bg-white h5 user rounded-circle mt-3 text-center" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <div class="btn-group dropright">
+      <a class="bg-white h5 user rounded-circle mt-3 text-center" id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <span>MD</span>
       </a>
 
-    <div class="dropdown-menu">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
-      </div>
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+        <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>        
+    </ul>
       </div>
 
     </div>
