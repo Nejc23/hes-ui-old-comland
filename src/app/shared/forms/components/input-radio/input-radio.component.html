@@ -6,21 +6,17 @@
     </label>
   </div>
 
-<div [ngClass]="{'row': inline}">
-  <div class="form-check" [ngClass]="{'col mx-3': inline, 'border p-2': border, 'border-primary': isOptionChecked(option)}"
-    *ngFor="let option of options">
-    <div>
-      <div class="text-center">
-        <input type="radio" id="radio-button-{{option.uid}}" [checked]="isOptionChecked(option)" [formControlName]="property"
-          value="{{option.value}}" class="form-check-input" (change)="changeValue(option)" kendoRadioButton />
-        <label for="{{option.uid}}" class="control-label ml-2 mt-2 form-check-label" (click)="changeValue(option)">{{option.label}}  </label>
+  <div [ngClass]="{'row': inline || box}">
+    <div class="form-check"
+      [ngClass]="{'d-flex flex-nowrap justify-content-start': inline, 'col mx-3 border py-3 text-center': box, 'border-primary': box && isSelected(option)}" *ngFor="let option of options">
+      <div>
+        <input type="radio" id="{{option.uid}}" [name]="property" [formControlName]="property"
+          value="{{option.value}}" kendoRadioButton />
+        <label for="{{option.uid}}" class="control-label ml-2">{{option.label}} </label>
       </div>
-      <div class="text-center" (click)="changeValue(option)">
-        <label for="{{option.uid}}" class="form-check-label">{{option.labelSmall}}</label>
-      </div>
+      <label for="{{option.uid}}" class="control-label text-muted" *ngIf="box"><small>{{option.labelSmall}}</small></label>
     </div>
   </div>
-</div>
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">

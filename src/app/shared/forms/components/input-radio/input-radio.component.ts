@@ -13,7 +13,7 @@ export class InputRadioComponent implements OnInit {
   @Input() options: RadioOption[];
   @Input() inline = false;
   @Input() label: string;
-  @Input() border = false;
+  @Input() box = false;
 
   @Output() refresh: EventEmitter<RadioOption> = new EventEmitter();
 
@@ -33,13 +33,15 @@ export class InputRadioComponent implements OnInit {
     return this.form.get(this.property);
   }
 
+  /*
   changeValue(option: RadioOption) {
     this.formControl.setValue(option.value);
     this.refresh.emit(option);
   }
+  */
 
-  isOptionChecked(option: RadioOption) {
-    return this.formControl.value === option.value ? true : null;
+  isSelected(option: RadioOption) {
+    return this.formControl.value == option.value;
   }
 
   get required(): boolean {
