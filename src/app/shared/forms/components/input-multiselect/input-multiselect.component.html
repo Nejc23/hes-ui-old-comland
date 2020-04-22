@@ -3,13 +3,15 @@
         {{label}}
         <sup *ngIf="required"> *</sup>
     </label>
-    <div class="multiselect" [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inline}" [id]="name">
+    <div class="multiselect"
+        [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inline}"
+        [id]="name">
         <div *ngFor="let option of options; let i = index;">
-            <input class="form-control mr-1" type="checkbox" id="input-checkbox-{{i}}"
-                (change)="selectedValue(option, isOptionChecked(option))"
-                [checked]="isOptionChecked(option)" value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox />
+            <input class="form-control" type="checkbox" id="input-checkbox-{{i}}"
+                (change)="selectedValue(option, isOptionChecked(option))" [checked]="isOptionChecked(option)"
+                value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox />
 
-            <label for="{{option.id}}" class="mr-3 control-label"
+            <label for="{{option.id}}" class="mr-3 pl-2 control-label"
                 (click)="selectedValue(option, isOptionChecked(option))">{{option.value}}</label>
         </div>
     </div>

@@ -5,8 +5,9 @@
   <div modal-body>
     <ng-container>
 
-      <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty" name="readOptionsRadio"
-        [options]="readOptions" [inline]="true" [border]="true" (change)="changeReadOptionId()" (refresh)="changeReadOptionId()">
+      <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty"
+        name="readOptionsRadio" [options]="readOptions" [inline]="true" [border]="true" (change)="changeReadOptionId()"
+        (refresh)="changeReadOptionId()">
       </app-input-radio>
 
       <div class="form-row" *ngIf="selectedId == 1">
@@ -29,21 +30,21 @@
         </div>
       </div>
 
-      <app-input-multiselect *ngIf="selectedId == 4" i18n-label label="Week days" [form]="form" [property]="weekDaysProperty" name="weekDaysMultiselect"
-         [options]="weekDays" [inline]="true">
+      <app-input-multiselect *ngIf="selectedId == 4" i18n-label label="Week days" [form]="form"
+        [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
       </app-input-multiselect>
 
-      <div *ngIf="selectedId == 5">
-        <label i18n>Days in month</label>
-        <sup> *</sup>
-      </div>
-      <div class="d-flex flex-wrap" *ngIf="selectedId == 5">
-       <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'" *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
-          <span>{{i+1}}</span>
-       </button>
-      </div>
-      <div class="help-block" *ngIf="selectedId == 5 && noMonthDays">
-        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
+      <div class="form-group" *ngIf="selectedId == 5">
+        <label><span i18n>Days in month</span><sup> *</sup></label>
+        <div class="d-flex flex-wrap">
+          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'"
+            *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
+            <span>{{i+1}}</span>
+          </button>
+        </div>
+        <div class="help-block" *ngIf="selectedId == 5 && noMonthDays">
+          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
+        </div>
       </div>
 
       <div class="form-row" *ngIf="selectedId > 2">
@@ -80,4 +81,3 @@
 </app-modal-template>
 
 <ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>
-
