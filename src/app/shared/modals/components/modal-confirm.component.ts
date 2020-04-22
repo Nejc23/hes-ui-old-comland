@@ -13,7 +13,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
  *   const component: ModalConfirmComponent = modalRef.componentInstance;
  *   component.modalTitle = 'No connection points in solving cycle';
  *   component.modalBody = 'To continue please add connection points to solving cycle.';
- *   component.confirmDelete = true; // if confirm delete
+ *   component.btnConfirmText = this.i18n('Delete'); // if confirm delete
  *
  *   modalRef.result.then((data) => {
  *     // on close (CONFIRM)
@@ -24,17 +24,11 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 export class ModalConfirmComponent implements OnInit {
   @Input() modalTitle: string;
   @Input() modalBody: string;
-  @Input() confirmDelete = false;
-
-  btnConfirmText = this.i18n('Confirm');
+  @Input() btnConfirmText = this.i18n('Confirm');
 
   constructor(public i18n: I18n, public activeModal: NgbActiveModal) {}
 
-  ngOnInit() {
-    if (this.confirmDelete) {
-      this.btnConfirmText = this.i18n('Delete');
-    }
-  }
+  ngOnInit() {}
 
   dismiss() {
     this.activeModal.dismiss();

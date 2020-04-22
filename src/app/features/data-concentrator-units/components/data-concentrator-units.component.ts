@@ -443,7 +443,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.confirmDelete = true;
+    component.btnConfirmText = this.i18n('Delete');
     component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
 
     modalRef.result.then(
