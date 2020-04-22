@@ -13,13 +13,15 @@
       <a class="navbar-icon mt-3 d-block" href="#">
         <i class="far fa-cog"></i>
       </a>
-      <div class="btn-group dropright dropdown-append-to-body">
-      <a class="bg-white h5 user rounded-circle mt-3 text-center" id="dropdownMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <span>MD</span>
+      <div class="btn-group dropup">
+      <a class="bg-white h5 user rounded-circle mt-3 text-center" id="dropdownMenu1" href="#" data-flip="true" data-toggle="dropdown" data-display="static">
+        <span>{{initials}}</span>
       </a>
 
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-        <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()">Logout</a></li>        
+    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="padding-bottom: 1em;">
+      <h6 class="dropdown-header">{{userName}}</h6>
+        <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>                  
+        <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>        
     </ul>
       </div>
 

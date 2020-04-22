@@ -45,10 +45,9 @@ export class AuthService {
       post_logout_redirect_uri: environment.ignoreLocale ? `${environment.clientRoot}` : `${environment.clientRoot}${selectedLocale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
       response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
       scope: environment.clientScope,
-      automaticSilentRenew: true
+      automaticSilentRenew: environment.clientAutoSilentRenew
       // accessTokenLifetime: 7200,
-      //Identity token life time is 7200 seconds (2 hour)
-      //  identityTokenLifetime:7200
+      // identityTokenLifetime:7200
     };
     this.userManager = new UserManager(settings);
 
@@ -77,6 +76,12 @@ export class AuthService {
   }
 
   public logout(): Promise<void> {
+    this.removeAuthTokenData();
+    localStorage.removeItem('type_token');
+    localStorage.removeItem('auth_token');
+    localStorage.removeItem('user_fullName');
+    localStorage.removeItem('user_initials');
+    localStorage.clear();
     return this.userManager.signoutRedirect();
   }
 
@@ -109,10 +114,16 @@ export class AuthService {
     // localStorage.setItem('exp_token', authenticatedUser.expireDate);
     // localStorage.setItem('refresh_token', authenticatedUser.refreshToken);
     // localStorage.setItem('user_fullName', authenticatedUser.firstName + ' ' + authenticatedUser.lastName);
-    localStorage.setItem('user_fullName', '2345');
+    if (authenticatedUser != null && authenticatedUser.profile != null) {
+      localStorage.setItem('user_fullName', authenticatedUser.profile.given_name + ' ' + authenticatedUser.profile.family_name);
+      localStorage.setItem(
+        'user_initials',
+        authenticatedUser.profile.given_name.substr(0, 1) + authenticatedUser.profile.family_name.substr(0, 1)
+      );
+    }
     this.cookieService.set(config.authCookie, authenticatedUser.id_token, null, environment.cookiePath);
-    //this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     this.cookieService.set(config.authType, 'Bearer', null, environment.cookiePath);
+    // this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     // this.setUserRights(authenticatedUser);
   }
   // for calling API-s on myGrid.Link server
@@ -162,10 +173,14 @@ export class AuthService {
     localStorage.clear();
     this.goToLogin();
   }
-
-  getUser(): string {
+*/
+  getLoggedUser(): string {
     return localStorage.getItem('user_fullName');
-  }*/
+  }
+
+  getUserInitials(): string {
+    return localStorage.getItem('user_initials');
+  }
 
   /**
    * Save token to cookie service
@@ -283,7 +298,7 @@ export class AuthService {
     this.cookieService.delete(config.authCookieExp);
     this.cookieService.delete(config.authTimeStamp);
     this.cookieService.delete(config.authType);
-    this.cookieService.deleteAll('/');
+    // this.cookieService.deleteAll('/');
   }
 
   refreshTokenAndSetUserRights() {

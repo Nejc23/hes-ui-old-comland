@@ -9,9 +9,15 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 })
 export class SideFixedNavComponent implements OnInit {
   // @ViewChild('title', { static: true }) title2: ElementRef;
+  userName = '';
+  initials = '';
   constructor(public authService: AuthService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.userName = this.authService.getLoggedUser();
+    this.initials = this.authService.getUserInitials();
+    console.log(this.initials);
+  }
 
   getSmallLogoUrl() {
     return brand.navFixedLogoUrl;
