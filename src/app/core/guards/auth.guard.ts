@@ -58,20 +58,17 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       console.log(this.authService.isAuthenticated());
-
-      if (this.authService.isRefreshNeeded2()) {
-        console.log('to renew');
+      console.log(this.authService.getIsDevelop());
+      if (!this.authService.getIsDevelop() && this.authService.isRefreshNeeded2()) {
         this.authService
           .renewToken()
           .then(value => {
-            console.log('renew');
             console.log(value);
             this.authService.user = value;
-            this.authService.saveTokenAndSetUserRights2(value);
+            this.authService.saveTokenAndSetUserRights2(value, '');
             resolve(true);
           })
           .catch(err => {
-            console.log(err.message);
             if (err.message === 'login_required') {
               this.authService.login().catch(err => console.log(err));
             }
@@ -81,12 +78,11 @@ export class AuthGuard implements CanActivate {
         if (this.authService.isAuthenticated()) {
           resolve(true);
         } else {
-          console.log('login');
           this.authService
             .login()
             .then(() => {
               if (this.authService.user != null) {
-                this.authService.saveTokenAndSetUserRights2(this.authService.user);
+                this.authService.saveTokenAndSetUserRights2(this.authService.user, '');
               }
             })
             .catch(err => console.log(err));

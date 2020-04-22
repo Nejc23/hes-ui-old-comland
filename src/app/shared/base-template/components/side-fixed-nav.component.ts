@@ -16,7 +16,6 @@ export class SideFixedNavComponent implements OnInit {
   ngOnInit() {
     this.userName = this.authService.getLoggedUser();
     this.initials = this.authService.getUserInitials();
-    console.log(this.initials);
   }
 
   getSmallLogoUrl() {

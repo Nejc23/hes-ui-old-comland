@@ -20,6 +20,7 @@ import { AuthenticationRepositoryService } from 'src/app/core/repository/service
 import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/core/repository/interfaces/auth/authentication.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { User } from 'oidc-client';
 
 @Component({
   selector: 'app-user-login',
@@ -121,12 +122,12 @@ export class UserLoginComponent implements OnInit {
   login() {
     this.isFormSubmitted = true;
 
-    const request = this.authRepositoryService.authenticateUser(this.form.value);
+    const request = this.authRepositoryService.authenticateUserDevelop(this.form.value);
     const successMessage = this.i18n(`Login successful`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       token => {
         this.isFormSubmitted = true;
-        this.handleLoginResponse(token);
+        this.handleLoginResponse2(token);
       },
       () => {
         this.onError();
@@ -171,6 +172,21 @@ export class UserLoginComponent implements OnInit {
       null,
       environment.cookiePath
     ); // auth stamp for token refresh (isRefreshAllowed)
+    this.goToStartPageForAuthorizedUser();
+  }
+
+  handleLoginResponse2(authenticatedUser: User) {
+    this.authService.user = authenticatedUser;
+    this.authService.saveTokenAndSetUserRights2(authenticatedUser, authenticatedUser.id_token);
+    this.cookieService.set(
+      config.authTimeStamp,
+      moment()
+        .utc()
+        .toISOString(),
+      null,
+      environment.cookiePath
+    ); // auth stamp for token refresh (isRefreshAllowed)
+    console.log(authenticatedUser);
     this.goToStartPageForAuthorizedUser();
   }
 

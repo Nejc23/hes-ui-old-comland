@@ -107,6 +107,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (AuthenticateInterceptor.canInterceptAuthenticateUser(request)) {
                 return AuthenticateInterceptor.interceptAuthenticateUser();
               }
+              if (AuthenticateInterceptor.canInterceptAuthenticateDevelopUser(request)) {
+                return AuthenticateInterceptor.interceptAuthenticateDevelopUser();
+              }
               if (AuthenticateInterceptor.canInterceptRefreshToken(request)) {
                 return AuthenticateInterceptor.interceptRefreshToken();
               }

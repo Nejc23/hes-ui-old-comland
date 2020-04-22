@@ -111,7 +111,7 @@ export class AuthService {
     return false;
   }
 
-  saveTokenAndSetUserRights2(authenticatedUser: User) {
+  saveTokenAndSetUserRights2(authenticatedUser: User, isDevelop: string) {
     localStorage.clear();
     localStorage.setItem('type_token', 'Bearer');
     localStorage.setItem('auth_token', authenticatedUser.id_token);
@@ -127,6 +127,10 @@ export class AuthService {
     }
     this.cookieService.set(config.authCookie, authenticatedUser.id_token, null, environment.cookiePath);
     this.cookieService.set(config.authType, 'Bearer', null, environment.cookiePath);
+
+    if (isDevelop === this.user.id_token) {
+      localStorage.setItem('is_develop', this.user.id_token);
+    }
     // this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     // this.setUserRights(authenticatedUser);
   }
@@ -195,6 +199,12 @@ export class AuthService {
     return localStorage.getItem('user_initials');
   }
 
+  getIsDevelop(): boolean {
+    if (localStorage.getItem('is_develop') != undefined && localStorage.getItem('is_develop') === this.user.id_token) {
+      return true;
+    }
+    return false;
+  }
   /**
    * Save token to cookie service
    */

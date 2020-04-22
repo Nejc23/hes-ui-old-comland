@@ -10,9 +10,11 @@ import {
   authenticateRefreshTokenEndpointUrl,
   requestPasswordResetEndpointUrl,
   changePasswordEndpointUrl,
-  newPasswordEndpointUrl
+  newPasswordEndpointUrl,
+  authenticateUserEndpointUrlDevelop
 } from '../../consts/authentication-endpoint-url.const';
 import { ResetPasswordRequest, ChangePasswordRequest, NewPasswordRequest } from '../../interfaces/auth/authentication.interface';
+import { User } from 'oidc-client';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,14 @@ export class AuthenticationRepositoryService {
 
   authenticateUserRequest(authenticate: LoginCredentials): HttpRequest<any> {
     return new HttpRequest('POST', `${authenticateUserEndpointUrl}`, authenticate);
+  }
+
+  authenticateUserDevelop(authenticate: LoginCredentials): Observable<User> {
+    return this.repository.makeRequest(this.authenticateUserDevelopRequest(authenticate));
+  }
+
+  authenticateUserDevelopRequest(authenticate: LoginCredentials): HttpRequest<any> {
+    return new HttpRequest('POST', `${authenticateUserEndpointUrlDevelop}`, authenticate);
   }
 
   refreshUserToken(expiredToken: RefreshTokenRequest): Observable<AuthenticatedUser> {
