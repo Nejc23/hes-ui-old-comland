@@ -1,29 +1,18 @@
-<div class="d-flex justify-content-between">
+<label><span i18n>Register</span><sup> *</sup></label>
+
+<div class="d-flex justify-content-between align-items-center p-2 grid-actions">
   <div>
-    <label i18n>Register</label>
-    <sup> *</sup>
-  </div>
-</div>
+    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}} <span
+          i18n>items selected</span></strong></small>
+    <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
+    <small class="text-secondary">{{totalCount}} <span i18n>items found</span></small>
 
-<div>
-  <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
-    <div>
-      <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}} <span i18n>items selected</span></strong></small>
-      <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
-      <small class="text-secondary">{{totalCount}} <span i18n>items found</span></small>
-      
-    </div>
-    <app-input-searcher [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"
+  </div>
+  <app-input-searcher [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
-  </div>
-
-  <ag-grid-angular
-      class="ag-theme-epoint" style="width: 100%; height: 240px;" #agGrid
-      [rowData]="rowData"
-      [columnDefs]="columnDefs"
-      [modules]="modules"
-      (gridReady)="onGridReady($event)"
-      (rowSelected)="selectionChanged($event)"
-      rowSelection="multiple">
-  </ag-grid-angular>
 </div>
+
+<ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: 240px;" #agGrid [rowData]="rowData"
+  [columnDefs]="columnDefs" [modules]="modules" (gridReady)="onGridReady($event)"
+  (rowSelected)="selectionChanged($event)" rowSelection="multiple">
+</ag-grid-angular>

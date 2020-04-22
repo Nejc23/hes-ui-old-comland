@@ -25,6 +25,13 @@ export class TouConfigSelectGridService {
         headerCheckboxSelection: false
       },
       {
+        field: 'id',
+        suppressMovable: true,
+        lockPosition: true,
+        headerName: this.i18n('GUID'),
+        headerTooltip: this.i18n('GUID')
+      },
+      {
         field: 'description',
         suppressMovable: true,
         lockPosition: true,
