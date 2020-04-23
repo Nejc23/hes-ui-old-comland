@@ -99,6 +99,7 @@ export class RegistersSelectComponent implements OnInit {
         data.type.toLowerCase().includes(searchToLower) ||
         data.description.toLowerCase().includes(searchToLower)
     );
+    this.totalCount = this.rowData.length;
   }
 
   insertedValue($event: string) {
