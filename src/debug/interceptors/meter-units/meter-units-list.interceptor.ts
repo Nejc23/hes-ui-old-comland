@@ -81,7 +81,7 @@ function searchById(companies, filter) {
 
 const data: MeterUnitsList[] = [
   {
-    id: 11111,
+    id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 520',
@@ -98,7 +98,7 @@ const data: MeterUnitsList[] = [
     timeOfUseId: '5555'
   },
   {
-    id: 22222,
+    id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
     status: 'Active',
     nextRead: '2020-03-03T15:35:29',
     name: 'Cubis PLC temp 423',
@@ -115,7 +115,7 @@ const data: MeterUnitsList[] = [
     timeOfUseId: '55455'
   },
   {
-    id: 33333,
+    id: '22cfeaae-463a-4055-8632-a6818ba77d81',
     status: 'Mouted',
     nextRead: '2020-05-06T11:02:50',
     name: 'Cubis PLC temp 753',
@@ -132,7 +132,7 @@ const data: MeterUnitsList[] = [
     timeOfUseId: '53555'
   },
   {
-    id: 44444,
+    id: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
     status: 'Active',
     nextRead: '2020-03-29T17:39:41',
     name: 'Cubis PLC temp 844',
@@ -149,7 +149,7 @@ const data: MeterUnitsList[] = [
     timeOfUseId: '55455'
   },
   {
-    id: 55555,
+    id: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 344',
@@ -166,7 +166,7 @@ const data: MeterUnitsList[] = [
     timeOfUseId: '5575'
   },
   {
-    id: 254,
+    id: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 221',
@@ -183,7 +183,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 287,
+    id: 'e4694732-a282-477c-9c47-79ca08f64911',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 915',
@@ -200,7 +200,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 171,
+    id: '4db50891-45dc-4910-bc8e-1d1c15862a68',
     status: 'Active',
     nextRead: '2020-04-11T23:40:46',
     name: 'PLC dat 387',
@@ -217,7 +217,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 247,
+    id: '7f7e9055-ad99-479f-956f-903022e1cccd',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 626',
@@ -234,7 +234,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 113,
+    id: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 623',
@@ -251,7 +251,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 155,
+    id: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 345',
@@ -268,7 +268,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 172,
+    id: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 954',
@@ -285,7 +285,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 324,
+    id: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
     status: 'Active',
     nextRead: '2020-05-06T13:52:33',
     name: 'PLC dat 233',
@@ -302,7 +302,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 325,
+    id: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
     status: 'Warehouse',
     nextRead: '2020-05-15T19:38:31',
     name: 'PLC dat 659',
@@ -319,7 +319,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 203,
+    id: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
     status: 'Mouted',
     nextRead: '2020-02-25T10:01:04',
     name: 'PLC dat 519',
@@ -336,7 +336,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 208,
+    id: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 656',
@@ -353,7 +353,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 198,
+    id: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
     status: 'Warehouse',
     nextRead: '2020-03-05T08:33:05',
     name: 'PLC dat 773',
@@ -370,7 +370,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 122,
+    id: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 284',
@@ -387,7 +387,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 123,
+    id: 'b57ead07-767e-4dc4-b447-ab54b6ed387e',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 359',
@@ -404,7 +404,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 101,
+    id: 'a06b28fe-33c7-4ce2-82f2-4927d6902448',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 220',
@@ -421,7 +421,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 184,
+    id: '6a6479d6-a07a-477f-a65c-11705493e470',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 568',
@@ -438,7 +438,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 100,
+    id: 'f2bdcb5a-9d3d-4a9a-8353-48ebe9a394f2',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 262',
@@ -455,7 +455,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 197,
+    id: 'eb5788a6-1ca4-45fc-b72d-4e7efa9b09a6',
     status: 'Warehouse',
     nextRead: '2020-04-01T03:46:54',
     name: 'PLC dat 480',
@@ -472,7 +472,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 202,
+    id: '923d7506-2466-48b2-a661-eca731ebe6de',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 304',
@@ -489,7 +489,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 186,
+    id: '77a92150-4f9b-4ba7-b0ae-721ddb699274',
     status: 'Active',
     nextRead: '2020-05-05T10:57:46',
     name: 'PLC dat 312',
@@ -506,7 +506,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 199,
+    id: '4f8317d2-46d3-4260-96f6-0f3c23bb6ae5',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 487',
@@ -523,7 +523,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 205,
+    id: '2fd2666e-54a6-432b-b6af-3ec7429f9e59',
     status: 'Warehouse',
     nextRead: '2020-03-16T12:08:58',
     name: 'PLC dat 387',
@@ -540,7 +540,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 189,
+    id: 'd5b8e66d-8572-4239-9164-96dc0d4ed564',
     status: 'Inactive',
     nextRead: '2020-03-30T16:06:54',
     name: 'PLC dat 915',
@@ -557,7 +557,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 183,
+    id: 'e2ee81a1-472b-40e4-824f-aaf3d7a7f57e',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 907',
@@ -574,7 +574,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 271,
+    id: '02f10174-1751-4030-a3e7-bee4dc9ba1b0',
     status: 'Active',
     nextRead: '2020-03-08T07:11:11',
     name: 'PLC dat 962',
@@ -591,7 +591,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 290,
+    id: '73127d97-993c-442c-b8c9-c5361697b066',
     status: 'Inactive',
     nextRead: '2020-03-08T00:52:39',
     name: 'PLC dat 184',
@@ -608,7 +608,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 272,
+    id: 'cdf7e4ed-fa35-49cb-bc4d-d5ff5b0a7d8c',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 685',
@@ -625,7 +625,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 292,
+    id: '5a1ade96-24bd-458e-a517-21ef6bd179d1',
     status: 'Inactive',
     nextRead: '2020-03-12T23:48:34',
     name: 'PLC dat 173',
@@ -642,7 +642,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 273,
+    id: 'cfb82441-bab2-4877-b273-b856f01a8ecd',
     status: 'Inactive',
     nextRead: '2020-05-07T23:34:20',
     name: 'PLC dat 545',
@@ -659,7 +659,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 293,
+    id: '6c452c5c-e455-4150-8fda-44a40ef21273',
     status: 'Inactive',
     nextRead: '2020-05-15T22:48:07',
     name: 'PLC dat 603',
@@ -676,7 +676,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 281,
+    id: '3e3eb6b2-91fd-4543-9b78-7f897438244e',
     status: 'Inactive',
     nextRead: '2020-04-04T01:58:59',
     name: 'PLC dat 616',
@@ -693,7 +693,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 296,
+    id: '59963800-6f06-43ba-85f5-1477daaa2946',
     status: 'Mouted',
     nextRead: '2020-04-20T02:52:19',
     name: 'PLC dat 49',
@@ -710,7 +710,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 297,
+    id: '1ace24ca-bd77-4de0-91c5-62896aa383d9',
     status: 'Mouted',
     nextRead: '2020-03-24T13:35:56',
     name: 'PLC dat 782',
@@ -727,7 +727,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 322,
+    id: '0730bd0b-efc0-4c3e-9ed8-be21fb2a00fa',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 769',
@@ -744,7 +744,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 193,
+    id: 'fcd7e3b3-74ab-41c4-92e5-aa43a2379293',
     status: 'Warehouse',
     nextRead: '2020-04-16T03:01:02',
     name: 'PLC dat 136',
@@ -761,7 +761,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 196,
+    id: 'eab491aa-c0ef-4b3a-8884-76757c4e710a',
     status: 'Mouted',
     nextRead: '2020-04-25T04:12:10',
     name: 'PLC dat 349',
@@ -778,7 +778,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 194,
+    id: '2e6641e2-f356-4349-87a0-b042dc4738af',
     status: 'Active',
     nextRead: '2020-03-07T17:48:34',
     name: 'PLC dat 250',
@@ -795,7 +795,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 200,
+    id: '0584f4bd-37a5-4657-9c85-6a2e234002c0',
     status: 'Mouted',
     nextRead: '2020-03-24T06:26:33',
     name: 'PLC dat 894',
@@ -812,7 +812,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 204,
+    id: '9b1cb9b5-c342-4a03-8fe4-60720ef51261',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 900',
@@ -829,7 +829,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 86,
+    id: 'd68e765f-b1e0-43ba-a736-b27ab2dd34ca',
     status: 'Active',
     nextRead: '2020-03-18T23:53:20',
     name: 'PLC dat 642',
@@ -846,7 +846,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 94,
+    id: '60df22b0-7d33-4b9b-b758-0e583c930196',
     status: 'Active',
     nextRead: '2020-03-19T15:09:36',
     name: 'PLC dat 738',
@@ -863,7 +863,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 99,
+    id: '18f0b08a-b15b-47ac-8ae0-939fbafbb5bb',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 417',
@@ -880,7 +880,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 168,
+    id: 'f87493df-2c8d-4a64-965f-2af0a19cd40f',
     status: 'Warehouse',
     nextRead: '2020-05-03T06:43:22',
     name: 'PLC dat 386',
@@ -897,7 +897,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 165,
+    id: '0ad94c0d-8375-4777-b0ba-e7527e83b2c4',
     status: 'Warehouse',
     nextRead: '2020-05-08T02:51:15',
     name: 'PLC dat 969',
@@ -914,7 +914,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 116,
+    id: '5f0f04d0-a95b-464c-b566-a6f5c4d9ec6a',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 977',
@@ -931,7 +931,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 161,
+    id: 'ab7c6df8-88a6-483b-9ac6-a0c8e6c0d7c8',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 884',
@@ -948,7 +948,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 162,
+    id: 'eff24599-c352-4ffa-9e73-181e6a210766',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 491',
@@ -965,7 +965,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 170,
+    id: 'a3bda79e-7b07-4390-8b5b-00cf5e97b215',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 19',
@@ -982,7 +982,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 248,
+    id: 'c423eee0-bbd3-43f0-baef-3759a48103f7',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 849',
@@ -999,7 +999,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 251,
+    id: '2a12f3fa-ccc4-46ce-8ad6-8d72054bc45f',
     status: 'Mouted',
     nextRead: '2020-03-22T15:06:00',
     name: 'PLC dat 119',
@@ -1016,7 +1016,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 177,
+    id: '3d099b8d-42f6-4fc0-80e7-eacbdb36f973',
     status: 'Warehouse',
     nextRead: '2020-04-14T21:16:32',
     name: 'PLC dat 28',
@@ -1033,7 +1033,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 104,
+    id: '9b0bf187-cae0-49a2-ae59-d21d1084ff8c',
     status: 'Active',
     nextRead: '2020-04-14T11:03:18',
     name: 'PLC dat 368',
@@ -1050,7 +1050,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 108,
+    id: '86e936e6-3769-43c0-b13e-80abfbae9988',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 932',
@@ -1067,7 +1067,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 107,
+    id: 'a8f57911-c602-44cd-a726-8405b939946f',
     status: 'Active',
     nextRead: '2020-03-31T10:24:10',
     name: 'PLC dat 790',
@@ -1084,7 +1084,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 125,
+    id: '04a115fd-1dee-44c9-aeb0-9e925b0948ca',
     status: 'Warehouse',
     nextRead: '2020-03-01T23:34:31',
     name: 'PLC dat 864',
@@ -1101,7 +1101,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 135,
+    id: '3f244417-1f8e-46d8-a968-9125df7b9615',
     status: 'Warehouse',
     nextRead: '2020-04-03T18:12:05',
     name: 'PLC dat 325',
@@ -1118,7 +1118,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 159,
+    id: '95bf5025-9937-4439-b8b7-e0f8b3a9d691',
     status: 'Active',
     nextRead: '2020-04-04T02:41:20',
     name: 'PLC dat 886',
@@ -1135,7 +1135,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 299,
+    id: '2d929743-cd6a-4501-b0d5-60adc2cd39f7',
     status: 'Mouted',
     nextRead: '2020-04-22T22:49:43',
     name: 'PLC dat 176',
@@ -1152,7 +1152,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 304,
+    id: '3721ea4b-8c41-40a5-9cff-1436ac0e7421',
     status: 'Warehouse',
     nextRead: '2020-03-14T06:03:10',
     name: 'PLC dat 330',
@@ -1169,7 +1169,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 300,
+    id: 'bf628bfd-c6ec-435b-b2c7-e226f1cd117b',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 803',
@@ -1186,7 +1186,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 309,
+    id: '5f26b305-8d1d-45b1-8391-185ba2f6a7b4',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 854',
@@ -1203,7 +1203,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 301,
+    id: '65cc84a8-4710-4f7a-85be-7537a1ec5e29',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 589',
@@ -1220,7 +1220,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 310,
+    id: '1c3c39da-4f18-4da0-bc39-2d1dd995bc45',
     status: 'Active',
     nextRead: '2020-04-11T02:38:23',
     name: 'PLC dat 323',
@@ -1237,7 +1237,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 302,
+    id: '2daaf9d0-b648-497a-81a5-ad5ffae09b74',
     status: 'Active',
     nextRead: '2020-05-01T06:44:44',
     name: 'PLC dat 711',
@@ -1254,7 +1254,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 311,
+    id: '66c1e27b-e263-44cf-a06c-ea55cacd828e',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 772',
@@ -1271,7 +1271,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 314,
+    id: 'fa526686-fa4f-4b07-91df-25c3495c4e30',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 776',
@@ -1288,7 +1288,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 305,
+    id: '0a43cce3-6f37-4b27-882a-cb2254f9fb30',
     status: 'Active',
     nextRead: '2020-04-08T04:16:27',
     name: 'PLC dat 877',
@@ -1305,7 +1305,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 316,
+    id: '448dcae4-c2e5-4bf3-b492-b91929abf9e6',
     status: 'Warehouse',
     nextRead: '2020-03-09T09:22:12',
     name: 'PLC dat 377',
@@ -1322,7 +1322,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 306,
+    id: '53c59407-13d3-4a80-bbcc-5c7ba96266a1',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 568',
@@ -1339,7 +1339,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 317,
+    id: '8d51c99b-33e0-4c37-8428-fe75bac132e6',
     status: 'Mouted',
     nextRead: '2020-03-28T13:57:23',
     name: 'PLC dat 275',
@@ -1356,7 +1356,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 307,
+    id: '8fe8468c-0e17-4dda-9624-ccddd49991ab',
     status: 'Mouted',
     nextRead: '2020-02-24T16:47:34',
     name: 'PLC dat 315',
@@ -1373,7 +1373,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 318,
+    id: '97b5958c-c274-45e1-aa4f-42af95958310',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 871',
@@ -1390,7 +1390,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 182,
+    id: 'a3f7167c-3296-4bab-86ba-54a96b9789bc',
     status: 'Warehouse',
     nextRead: '2020-02-28T19:18:06',
     name: 'PLC dat 107',
@@ -1407,7 +1407,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 276,
+    id: 'd2d7b6e5-7f33-44fe-92bc-ac065c5d2192',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 851',
@@ -1424,7 +1424,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 252,
+    id: '2902076a-438a-416a-9b85-20b11585d526',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 220',
@@ -1441,7 +1441,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 255,
+    id: '0d1225f1-7e7c-4cea-bc39-0fd03dbc9a57',
     status: 'Warehouse',
     nextRead: '2020-04-15T10:14:49',
     name: 'PLC dat 805',
@@ -1458,7 +1458,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 277,
+    id: 'fc4f50c7-96c3-4914-8d7d-c27f70a89dd5',
     status: 'Warehouse',
     nextRead: '2020-05-16T11:37:55',
     name: 'PLC dat 750',
@@ -1475,7 +1475,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 256,
+    id: 'f8f69ba8-075e-4f95-915f-839001a20ba0',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 789',
@@ -1492,7 +1492,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 257,
+    id: '768336bf-5779-4009-8cff-4bb3fbe03fec',
     status: 'Mouted',
     nextRead: '2020-04-03T22:59:09',
     name: 'PLC dat 683',
@@ -1509,7 +1509,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 278,
+    id: '752c5cdb-f2fc-44f7-99bb-0c2dd2f8f197',
     status: 'Mouted',
     nextRead: '2020-04-24T04:46:32',
     name: 'PLC dat 204',
@@ -1526,7 +1526,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 258,
+    id: '32c927df-7ef6-482a-8742-df7f2cc0521b',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 879',
@@ -1543,7 +1543,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 260,
+    id: '167bca91-c0ed-4164-97f9-90555716c714',
     status: 'Inactive',
     nextRead: '2020-03-07T11:24:06',
     name: 'PLC dat 989',
@@ -1560,7 +1560,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 279,
+    id: 'ac5d85f3-aa90-4f07-b56d-39deca948cff',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 953',
@@ -1577,7 +1577,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 259,
+    id: 'b9a752d7-6645-44aa-94f1-3c9f56f69c56',
     status: 'Mouted',
     nextRead: '2020-05-20T15:09:49',
     name: 'PLC dat 905',
@@ -1594,7 +1594,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 280,
+    id: 'bc56f033-c381-4cfb-9999-9fb35c142cb2',
     status: 'Warehouse',
     nextRead: '2020-04-14T18:36:42',
     name: 'PLC dat 147',
@@ -1611,7 +1611,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 261,
+    id: '24b8d551-7137-41fa-8747-c23ec0bbe203',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 202',
@@ -1628,7 +1628,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 262,
+    id: 'f04292d7-789e-49c4-925f-4dbc260ea69e',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 576',
@@ -1645,7 +1645,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 282,
+    id: 'e1410088-7a45-49f5-9fc5-fead7fb41e68',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 185',
@@ -1662,7 +1662,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 263,
+    id: '7270b247-ccf0-4e02-80d1-f840a7424e80',
     status: 'Warehouse',
     nextRead: '2020-04-21T20:42:45',
     name: 'PLC dat 917',
@@ -1679,7 +1679,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 283,
+    id: 'f709af44-31d5-4ecf-a206-54339b027625',
     status: 'Warehouse',
     nextRead: '2020-03-23T02:53:32',
     name: 'PLC dat 102',
@@ -1696,7 +1696,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 266,
+    id: '110cd065-11a6-42e0-b4d9-4a4a1e8f51d3',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 356',
@@ -1713,7 +1713,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 284,
+    id: '7d640959-1fbe-499e-82f4-26d5a4f11e55',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 193',
@@ -1730,7 +1730,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 267,
+    id: '3f3a6a5d-7f8f-4a14-8306-e83a590f6f40',
     status: 'Warehouse',
     nextRead: '2020-02-29T01:27:44',
     name: 'PLC dat 961',
@@ -1747,7 +1747,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 285,
+    id: 'f067c48e-a183-4941-80c2-b0b75c5c18ec',
     status: 'Active',
     nextRead: '2020-04-03T21:47:23',
     name: 'PLC dat 249',
@@ -1764,7 +1764,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 269,
+    id: 'f1079925-9eac-45f6-9cb3-a241cc273ee1',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 640',
@@ -1781,7 +1781,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 286,
+    id: '8593accc-3777-4876-a318-d47e3564e974',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 547',
@@ -1798,7 +1798,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 270,
+    id: 'bef3c691-de3a-4e00-991f-61d86f39c0e1',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 804',
@@ -1815,7 +1815,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 201,
+    id: '1b00697c-46ce-4224-a1d8-f9808f4b5e30',
     status: 'Mouted',
     nextRead: '2020-03-30T09:20:09',
     name: 'PLC dat 206',
@@ -1832,7 +1832,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 173,
+    id: 'b961d86d-7696-486e-81ac-5777229e7cfd',
     status: 'Active',
     nextRead: '2020-05-12T12:42:15',
     name: 'PLC dat 428',
@@ -1849,7 +1849,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 178,
+    id: '39d4e93a-7de2-4375-a52a-e43c78fd48f8',
     status: 'Mouted',
     nextRead: '2020-03-07T16:29:29',
     name: 'PLC dat 134',
@@ -1866,7 +1866,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 181,
+    id: '840dc2fa-85e1-4756-9a0a-86fa19a0bf2b',
     status: 'Mouted',
     nextRead: '2020-04-06T13:06:15',
     name: 'PLC dat 801',
@@ -1883,7 +1883,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 96,
+    id: 'c442d076-a419-452e-a0c5-8cb59b75ff6a',
     status: 'Inactive',
     nextRead: '2020-05-08T05:54:05',
     name: 'PLC dat 724',
@@ -1900,7 +1900,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 179,
+    id: 'b9f933d7-0d5e-4391-8941-e7f54bc260f7',
     status: 'Warehouse',
     nextRead: '2020-02-29T08:50:30',
     name: 'PLC dat 200',
@@ -1917,7 +1917,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 180,
+    id: '33df4aaa-028e-4fd8-889e-d331b9397253',
     status: 'Active',
     nextRead: '2020-05-12T15:56:37',
     name: 'PLC dat 588',
@@ -1934,7 +1934,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 141,
+    id: 'a196ebc8-5e80-40cf-9f84-92a03c23bd27',
     status: 'Warehouse',
     nextRead: '2020-05-07T00:58:32',
     name: 'PLC dat 668',
@@ -1951,7 +1951,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 156,
+    id: 'fe0aa2c8-191e-4b2d-8653-58454fc390eb',
     status: 'Mouted',
     nextRead: '2020-03-12T22:17:04',
     name: 'PLC dat 192',
@@ -1968,7 +1968,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 110,
+    id: '1e1dfd1f-b688-42f9-a8c7-b8e11f4fd7c7',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 393',
@@ -1985,7 +1985,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 111,
+    id: '44578e39-a87f-4cc8-b4ab-2e028bccc05b',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 272',
@@ -2002,7 +2002,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 175,
+    id: 'cc5a59d5-c9f7-442a-a540-5274eb564930',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 903',
@@ -2019,7 +2019,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 213,
+    id: '1495c96e-17e4-4c36-a09c-08d3c226fe51',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 509',
@@ -2036,7 +2036,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 249,
+    id: '2be79305-78c7-4cc7-b116-356b62826208',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 696',
@@ -2053,7 +2053,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 214,
+    id: 'd684f089-5edd-43c4-a3b8-822f350dc1cf',
     status: 'Active',
     nextRead: '2020-05-07T11:56:41',
     name: 'PLC dat 713',
@@ -2070,7 +2070,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 215,
+    id: '2cafbb8f-385b-4e74-800e-b40f0a8e6d56',
     status: 'Mouted',
     nextRead: '2020-04-07T20:32:17',
     name: 'PLC dat 682',
@@ -2087,7 +2087,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 223,
+    id: 'c65a122b-92cb-47d4-abac-99e70b2f845c',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 63',
@@ -2104,7 +2104,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 230,
+    id: '26d518af-5005-4655-bfb3-4213a83d2c15',
     status: 'Active',
     nextRead: '2020-03-05T08:36:53',
     name: 'PLC dat 33',
@@ -2121,7 +2121,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 231,
+    id: 'bbb56889-1022-484b-937a-d109761cdba9',
     status: 'Inactive',
     nextRead: '2020-02-29T08:26:16',
     name: 'PLC dat 506',
@@ -2138,7 +2138,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 236,
+    id: 'c53bf65f-ae33-422f-a8dc-2b7c7f282f45',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 658',
@@ -2155,7 +2155,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 237,
+    id: '8563f1d0-c1b5-476e-8902-f4273be98d6c',
     status: 'Active',
     nextRead: '2020-04-13T09:56:35',
     name: 'PLC dat 793',
@@ -2172,7 +2172,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 239,
+    id: '8a72aa46-c42d-421e-ad0b-f7b084aec5c2',
     status: 'Inactive',
     nextRead: '2020-05-11T05:37:35',
     name: 'PLC dat 542',
@@ -2189,7 +2189,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 242,
+    id: '419457e6-0543-4579-b6e8-fb59a14b326f',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 461',
@@ -2206,7 +2206,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 243,
+    id: 'd198a184-5a24-4652-bf9c-4f4014e0b39a',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 87',
@@ -2223,7 +2223,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 191,
+    id: '6afaccb0-1637-4b80-b43d-68776ea4e180',
     status: 'Inactive',
     nextRead: '2020-03-18T14:13:59',
     name: 'PLC dat 735',
@@ -2240,7 +2240,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 185,
+    id: '246a5478-b938-479b-b4a1-a7a7867ffc11',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 5',
@@ -2257,7 +2257,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 190,
+    id: '2ae1498f-54ca-4950-991a-da4efddff64e',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 72',
@@ -2274,7 +2274,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 109,
+    id: '01f27096-0ba1-4f80-baf6-38cdfa7b0efa',
     status: 'Inactive',
     nextRead: '2020-04-05T10:52:32',
     name: 'PLC dat 650',
@@ -2291,7 +2291,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 112,
+    id: '01b55671-2741-41cd-bc14-fd0ee0909408',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 774',
@@ -2308,7 +2308,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 146,
+    id: '6a847148-ce3e-4f2e-9ed0-29e21b51e879',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 398',
@@ -2325,7 +2325,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 245,
+    id: '56079b4d-e785-4c6a-b884-701a24bfbc79',
     status: 'Inactive',
     nextRead: '2020-03-28T19:08:03',
     name: 'PLC dat 680',
@@ -2342,7 +2342,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 246,
+    id: '72fc8b25-4278-44a9-903a-7b2aa39455a3',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 584',
@@ -2359,7 +2359,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 114,
+    id: '15874af2-bf1c-48df-b8f3-81b39cd3bba6',
     status: 'Active',
     nextRead: '2020-05-14T15:49:56',
     name: 'PLC dat 472',
@@ -2376,7 +2376,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 124,
+    id: '395179fe-b679-4a50-8dcd-cf49f6d2ea02',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 953',
@@ -2393,7 +2393,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 129,
+    id: '4f59b0d8-165e-4e2b-8b08-3bec8b87fe20',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 499',
@@ -2410,7 +2410,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 136,
+    id: 'c60d68e7-203c-4460-9032-8bd9c9a7cf8b',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 816',
@@ -2427,7 +2427,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 115,
+    id: 'f0aa1eaa-056c-4f40-8488-cec71ec63db8',
     status: 'Inactive',
     nextRead: '2020-05-13T06:50:17',
     name: 'PLC dat 688',
@@ -2444,7 +2444,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 130,
+    id: '4198844b-8f87-400d-8152-ee97976261ea',
     status: 'Inactive',
     nextRead: '2020-04-24T00:33:33',
     name: 'PLC dat 480',
@@ -2461,7 +2461,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 137,
+    id: 'f6a58b0a-3134-4000-899d-792b7c0a1f09',
     status: 'Active',
     nextRead: '2020-05-09T17:29:16',
     name: 'PLC dat 120',
@@ -2478,7 +2478,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 131,
+    id: 'd491caf6-6e07-43ff-9b70-32491b542a1a',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 734',
@@ -2495,7 +2495,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 138,
+    id: '7c64ee0a-1313-4bc4-9152-f3e2c749cfed',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 50',
@@ -2512,7 +2512,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 132,
+    id: '04016f9d-b4fe-46aa-9ca9-859dda155e23',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 890',
@@ -2529,7 +2529,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 139,
+    id: '4a71bcb8-f9cb-4a12-abcd-75f9927ab9fc',
     status: 'Active',
     nextRead: '2020-05-19T17:38:39',
     name: 'PLC dat 626',
@@ -2546,7 +2546,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 133,
+    id: 'b7314f92-76aa-4a2b-a126-6bdee60d5485',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 16',
@@ -2563,7 +2563,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 134,
+    id: '66f5568d-60ca-4cad-b5ee-fa176ad7986f',
     status: 'Warehouse',
     nextRead: '2020-05-07T01:04:22',
     name: 'PLC dat 438',
@@ -2580,7 +2580,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 250,
+    id: 'd2b422fa-8e91-42ca-a23e-926e34e3005e',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 892',
@@ -2597,7 +2597,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 253,
+    id: '51fa972c-d06b-4175-8139-86fd9e9572e8',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 258',
@@ -2614,7 +2614,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 274,
+    id: '38a4567e-3344-4960-9513-f9e0ad8cd8a2',
     status: 'Warehouse',
     nextRead: '2020-04-03T06:40:04',
     name: 'PLC dat 403',
@@ -2631,7 +2631,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 192,
+    id: '22581e4a-f266-47ea-825d-f209b1dcebbe',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 776',
@@ -2648,7 +2648,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 195,
+    id: '1e39baa7-b4fe-4bd0-b505-a29910939d83',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 23',
@@ -2665,7 +2665,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 59,
+    id: '5a1e01a8-b72b-4ca0-b84b-d493e546b482',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 346',
@@ -2682,7 +2682,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 164,
+    id: 'afcf3fc0-16ce-4cb2-84e3-834fbafedd81',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 337',
@@ -2699,7 +2699,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 167,
+    id: '23fd37ce-957f-47c4-a183-572007125f7c',
     status: 'Mouted',
     nextRead: null,
     name: 'PLC dat 124',
@@ -2716,7 +2716,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 95,
+    id: 'c3a11197-9b56-4724-9b2c-67a1fbcc1a15',
     status: 'Warehouse',
     nextRead: '2020-03-06T13:18:22',
     name: 'PLC dat 429',
@@ -2733,7 +2733,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 323,
+    id: '85da8fbd-a765-4633-8749-bc89eeee6fc3',
     status: 'Active',
     nextRead: '2020-03-23T21:46:37',
     name: 'PLC dat 629',
@@ -2750,7 +2750,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 97,
+    id: '053f417f-90d9-43ba-bf01-88770565a459',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 418',
@@ -2767,7 +2767,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 140,
+    id: 'f1c3f703-9bcc-444c-a0ad-66e21cf13add',
     status: 'Warehouse',
     nextRead: '2020-03-09T15:17:01',
     name: 'PLC dat 457',
@@ -2784,7 +2784,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 152,
+    id: 'cc4e5333-5b36-4fb8-935e-24615a8aa2ed',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 453',
@@ -2801,7 +2801,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 166,
+    id: '708948b6-8b5d-4f72-880c-a4d1a1d2415b',
     status: 'Active',
     nextRead: '2020-04-06T11:02:26',
     name: 'PLC dat 397',
@@ -2818,7 +2818,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 169,
+    id: 'de35f453-f59a-4291-a077-8eee3aa63d53',
     status: 'Inactive',
     nextRead: '2020-05-11T12:55:58',
     name: 'PLC dat 415',
@@ -2835,7 +2835,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 174,
+    id: 'cfb2ce9f-05e5-4548-a926-5a7c863a3f5f',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 759',
@@ -2852,7 +2852,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 211,
+    id: '37eb6c42-16fe-41d4-9d6c-5d2b40a13e95',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 382',
@@ -2869,7 +2869,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 163,
+    id: '9ae0d33d-d7f9-48b3-b194-06eedf909413',
     status: 'Warehouse',
     nextRead: '2020-04-25T02:53:25',
     name: 'PLC dat 307',
@@ -2886,7 +2886,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 176,
+    id: 'ffa41009-4698-434b-b475-a82d88e97c6b',
     status: 'Active',
     nextRead: '2020-03-01T18:30:16',
     name: 'PLC dat 652',
@@ -2903,7 +2903,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 102,
+    id: '8a8ada77-9263-4118-9be2-f83c801d043a',
     status: 'Warehouse',
     nextRead: null,
     name: 'PLC dat 149',
@@ -2920,7 +2920,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 103,
+    id: '58c8f5b7-86cc-4ebe-86eb-8e38c5541ade',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 359',
@@ -2937,7 +2937,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 105,
+    id: '29d502d7-ab92-4cdf-8857-9e05c6c801bb',
     status: 'Active',
     nextRead: null,
     name: 'PLC dat 291',
@@ -2954,7 +2954,7 @@ const data: MeterUnitsList[] = [
     tags: null
   },
   {
-    id: 298,
+    id: 'a2d44ccf-e5e4-41e8-a495-288834b0ee0d',
     status: 'Warehouse',
     nextRead: '2020-04-29T00:47:08',
     name: 'PLC dat 186',
@@ -2971,7 +2971,7 @@ const data: MeterUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 303,
+    id: '8f9ee32e-7b6d-40f3-9c61-c991af1da4d9',
     status: 'Inactive',
     nextRead: null,
     name: 'PLC dat 192',

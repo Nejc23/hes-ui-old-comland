@@ -1,6 +1,6 @@
 import { GridFilterParams } from './gris-request-params.interface';
 
 export interface GridBulkActionRequestParams {
-  id: number[];
+  id: string[];
   filter: GridFilterParams;
 }

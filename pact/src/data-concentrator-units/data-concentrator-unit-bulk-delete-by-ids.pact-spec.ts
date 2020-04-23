@@ -26,7 +26,7 @@ describe('Pact consumer test', () => {
   });
 
   const requestBody: GridBulkActionRequestParams = {
-    id: [1, 34, 322, 44],
+    id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
     filter: null
   };
 

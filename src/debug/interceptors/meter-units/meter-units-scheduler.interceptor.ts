@@ -25,7 +25,7 @@ export class MeterUnitsSchedulerInterceptor {
       monthDays: [1, 7, 31],
       registers: [1, 4, 5],
       bulkActionsRequestParam: {
-        id: [262, 146, 304],
+        id: ['9b837e2d-957d-49e2-8d1d-a2e4b8440b77', 'ebeacc9d-744c-4a88-bb9c-625216ab99b9', '22cfeaae-463a-4055-8632-a6818ba77d81'],
         filter: {
           statuses: [
             {

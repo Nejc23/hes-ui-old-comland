@@ -38,7 +38,7 @@ describe('Pact consumer test', () => {
     monthDays: [1, 7, 31],
     registers: [1, 4, 5],
     bulkActionsRequestParam: {
-      id: [262, 146, 304],
+      id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
       filter: {
         statuses: [
           {
@@ -91,7 +91,7 @@ describe('Pact consumer test', () => {
     monthDays: [1, 7, 31],
     registers: [1, 4, 5],
     bulkActionsRequestParam: {
-      id: [262, 146, 304],
+      id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
       filter: {
         statuses: [
           {

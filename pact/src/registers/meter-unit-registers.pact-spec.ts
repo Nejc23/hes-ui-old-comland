@@ -30,34 +30,22 @@ describe('Pact consumer test', () => {
   describe('Meter unit registers', () => {
     const responseBody: RegistersSelectList[] = [
       {
-        id: 1,
-        name: 'Register PLC temp 1',
-        type: 'PLC',
-        description: 'description plc 1'
+        id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
+        name: 'Register abc 1',
+        type: 'type A',
+        description: 'description 1'
       },
       {
-        id: 2,
-        name: 'Register PLC temp 2',
-        type: 'PLC',
-        description: 'description plc 2'
+        id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
+        name: 'Register def 2',
+        type: 'type B',
+        description: 'description 2'
       },
       {
-        id: 3,
-        name: 'Register PLC temp 3',
-        type: 'PLC',
-        description: 'description plc 3'
-      },
-      {
-        id: 4,
-        name: 'Register PLC temp 4',
-        type: 'PLC',
-        description: 'description plc 4'
-      },
-      {
-        id: 5,
-        name: 'Register PLC temp 5',
-        type: 'PLC',
-        description: 'description plc 5'
+        id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
+        name: 'Register def 3',
+        type: 'type B',
+        description: 'description 3'
       }
     ];
 

@@ -1,5 +1,5 @@
 export interface DataConcentratorUnitsList {
-  id: number;
+  id: string;
   status: string;
   nextRead: string;
   name: string;

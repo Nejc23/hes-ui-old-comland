@@ -64,7 +64,7 @@ describe('Pact consumer test', () => {
 
     const data: DataConcentratorUnitsList[] = [
       {
-        id: 30887,
+        id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
         status: 'Active',
         nextRead: null,
         name: 'Cubis PLC temp 520',
@@ -80,7 +80,7 @@ describe('Pact consumer test', () => {
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572']
       },
       {
-        id: 49454,
+        id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
         nextRead: '2020-03-03T15:35:29',
         name: 'Cubis PLC temp 423',

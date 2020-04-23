@@ -14,7 +14,7 @@ export class DataConcentratorUnitInterceptor {
 
   static interceptDcuCreatePost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const data: DcuForm = {
-      id: 5,
+      id: '48823a66-87f1-495d-bdcc-8d2ed06b0b14',
       name: 'My saved filter NEW',
       idNumber: '12345',
       ip: '127.0.0.1',

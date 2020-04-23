@@ -39,7 +39,7 @@ describe('Pact consumer test', () => {
   };
 
   const responseBody: DcuForm = {
-    id: 1,
+    id: '48823a66-87f1-495d-bdcc-8d2ed06b0b14',
     name: 'Test DCU 1',
     tags: [
       { id: 1, value: 'tag 1' },
@@ -85,7 +85,6 @@ describe('Pact consumer test', () => {
       service.createDcu(requestBody).subscribe(
         (res: DcuForm) => {
           expect(res.id).toEqual(responseBody.id);
-          expect(res.id).toBeGreaterThan(0);
           expect(res.ip).toEqual(responseBody.ip);
           expect(res.idNumber).toEqual(responseBody.idNumber);
           expect(res.name).toEqual(responseBody.name);

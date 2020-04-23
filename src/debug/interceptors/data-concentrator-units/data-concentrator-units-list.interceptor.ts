@@ -81,7 +81,7 @@ function searchById(companies, filter) {
 
 const data: DataConcentratorUnitsList[] = [
   {
-    id: 30887,
+    id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 520',
@@ -97,7 +97,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572']
   },
   {
-    id: 49454,
+    id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
     status: 'Active',
     nextRead: '2020-03-03T15:35:29',
     name: 'Cubis PLC temp 423',
@@ -113,7 +113,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 29983,
+    id: '22cfeaae-463a-4055-8632-a6818ba77d81',
     status: 'Mouted',
     nextRead: '2020-05-06T11:02:50',
     name: 'Cubis PLC temp 753',
@@ -129,7 +129,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 21799,
+    id: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
     status: 'Active',
     nextRead: '2020-03-29T17:39:41',
     name: 'Cubis PLC temp 844',
@@ -145,7 +145,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 4821,
+    id: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 344',
@@ -161,7 +161,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9343,
+    id: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 18',
@@ -177,7 +177,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48597,
+    id: 'e4694732-a282-477c-9c47-79ca08f64911',
     status: 'Inactive',
     nextRead: '2020-03-09T22:10:20',
     name: 'Cubis PLC temp 492',
@@ -193,7 +193,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 15957,
+    id: '4db50891-45dc-4910-bc8e-1d1c15862a68',
     status: 'Mouted',
     nextRead: '2020-03-17T20:47:17',
     name: 'Cubis PLC temp 854',
@@ -209,7 +209,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 48864,
+    id: '7f7e9055-ad99-479f-956f-903022e1cccd',
     status: 'Warehouse',
     nextRead: '2020-03-22T03:36:00',
     name: 'Cubis PLC temp 55',
@@ -225,7 +225,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 51680,
+    id: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 554',
@@ -241,7 +241,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33176,
+    id: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
     status: 'Active',
     nextRead: '2020-03-12T04:52:39',
     name: 'Cubis PLC temp 884',
@@ -257,7 +257,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 44741,
+    id: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
     status: 'Mouted',
     nextRead: '2020-02-26T00:25:42',
     name: 'Cubis PLC temp 631',
@@ -273,7 +273,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54357,
+    id: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
     status: 'Inactive',
     nextRead: '2020-02-26T22:26:37',
     name: 'Cubis PLC temp 770',
@@ -289,7 +289,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 462,
+    id: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
     status: 'Mouted',
     nextRead: '2020-03-16T09:33:56',
     name: 'Cubis PLC temp 159',
@@ -305,7 +305,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 435,
+    id: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 127',
@@ -321,7 +321,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 13791,
+    id: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 888',
@@ -337,7 +337,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29301,
+    id: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
     status: 'Warehouse',
     nextRead: '2020-03-23T08:35:34',
     name: 'Cubis PLC temp 635',
@@ -353,7 +353,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31394,
+    id: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
     status: 'Inactive',
     nextRead: '2020-03-21T13:49:46',
     name: 'Cubis PLC temp 534',
@@ -369,7 +369,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 41575,
+    id: 'b57ead07-767e-4dc4-b447-ab54b6ed387e',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 795',
@@ -385,7 +385,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 822,
+    id: 'a06b28fe-33c7-4ce2-82f2-4927d6902448',
     status: 'Mouted',
     nextRead: '2020-03-01T14:52:34',
     name: 'Cubis PLC temp 674',
@@ -401,7 +401,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13265,
+    id: '6a6479d6-a07a-477f-a65c-11705493e470',
     status: 'Mouted',
     nextRead: '2020-05-17T05:10:05',
     name: 'Cubis PLC temp 172',
@@ -417,7 +417,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 28078,
+    id: 'f2bdcb5a-9d3d-4a9a-8353-48ebe9a394f2',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 449',
@@ -433,7 +433,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 42788,
+    id: 'eb5788a6-1ca4-45fc-b72d-4e7efa9b09a6',
     status: 'Active',
     nextRead: '2020-04-22T17:15:54',
     name: 'Cubis PLC temp 447',
@@ -449,7 +449,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 1031,
+    id: '923d7506-2466-48b2-a661-eca731ebe6de',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 598',
@@ -465,7 +465,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 1175,
+    id: '77a92150-4f9b-4ba7-b0ae-721ddb699274',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 604',
@@ -481,7 +481,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 1296,
+    id: '4f8317d2-46d3-4260-96f6-0f3c23bb6ae5',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 381',
@@ -497,7 +497,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 7634,
+    id: '2fd2666e-54a6-432b-b6af-3ec7429f9e59',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 648',
@@ -513,7 +513,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7750,
+    id: 'd5b8e66d-8572-4239-9164-96dc0d4ed564',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 675',
@@ -529,7 +529,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 16682,
+    id: 'e2ee81a1-472b-40e4-824f-aaf3d7a7f57e',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 447',
@@ -545,7 +545,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 17090,
+    id: '02f10174-1751-4030-a3e7-bee4dc9ba1b0',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 761',
@@ -561,7 +561,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 24503,
+    id: '73127d97-993c-442c-b8c9-c5361697b066',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 567',
@@ -577,7 +577,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24559,
+    id: 'cdf7e4ed-fa35-49cb-bc4d-d5ff5b0a7d8c',
     status: 'Active',
     nextRead: '2020-04-14T13:00:34',
     name: 'Cubis PLC temp 664',
@@ -593,7 +593,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24725,
+    id: '5a1ade96-24bd-458e-a517-21ef6bd179d1',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 43',
@@ -609,7 +609,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 33536,
+    id: 'cfb82441-bab2-4877-b273-b856f01a8ecd',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 155',
@@ -625,7 +625,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33796,
+    id: '6c452c5c-e455-4150-8fda-44a40ef21273',
     status: 'Mouted',
     nextRead: '2020-04-02T23:27:54',
     name: 'Cubis PLC temp 398',
@@ -641,7 +641,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 42126,
+    id: '3e3eb6b2-91fd-4543-9b78-7f897438244e',
     status: 'Warehouse',
     nextRead: '2020-04-25T17:41:57',
     name: 'Cubis PLC temp 745',
@@ -657,7 +657,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 42179,
+    id: '59963800-6f06-43ba-85f5-1477daaa2946',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 937',
@@ -673,7 +673,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 42236,
+    id: '1ace24ca-bd77-4de0-91c5-62896aa383d9',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 261',
@@ -689,7 +689,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53537,
+    id: '0730bd0b-efc0-4c3e-9ed8-be21fb2a00fa',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 600',
@@ -705,7 +705,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 56230,
+    id: 'fcd7e3b3-74ab-41c4-92e5-aa43a2379293',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 625',
@@ -721,7 +721,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 27616,
+    id: 'eab491aa-c0ef-4b3a-8884-76757c4e710a',
     status: 'Mouted',
     nextRead: '2020-04-14T07:00:15',
     name: 'Cubis PLC temp 252',
@@ -737,7 +737,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 779,
+    id: '2e6641e2-f356-4349-87a0-b042dc4738af',
     status: 'Warehouse',
     nextRead: '2020-03-30T01:14:03',
     name: 'Cubis PLC temp 959',
@@ -753,7 +753,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 10592,
+    id: '0584f4bd-37a5-4657-9c85-6a2e234002c0',
     status: 'Active',
     nextRead: '2020-04-16T17:25:11',
     name: 'Cubis PLC temp 713',
@@ -769,7 +769,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 156,
+    id: '9b1cb9b5-c342-4a03-8fe4-60720ef51261',
     status: 'Inactive',
     nextRead: '2020-03-03T07:51:38',
     name: 'Cubis PLC temp 34',
@@ -785,7 +785,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 50798,
+    id: 'd68e765f-b1e0-43ba-a736-b27ab2dd34ca',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 186',
@@ -801,7 +801,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 51789,
+    id: '60df22b0-7d33-4b9b-b758-0e583c930196',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 341',
@@ -817,7 +817,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 16135,
+    id: '18f0b08a-b15b-47ac-8ae0-939fbafbb5bb',
     status: 'Active',
     nextRead: '2020-05-19T20:42:38',
     name: 'Cubis PLC temp 764',
@@ -833,7 +833,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 141,
+    id: 'f87493df-2c8d-4a64-965f-2af0a19cd40f',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 205',
@@ -849,7 +849,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 8195,
+    id: '0ad94c0d-8375-4777-b0ba-e7527e83b2c4',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 654',
@@ -865,7 +865,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 26699,
+    id: '5f0f04d0-a95b-464c-b566-a6f5c4d9ec6a',
     status: 'Active',
     nextRead: '2020-03-05T17:16:04',
     name: 'Cubis PLC temp 820',
@@ -881,7 +881,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41466,
+    id: 'ab7c6df8-88a6-483b-9ac6-a0c8e6c0d7c8',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 828',
@@ -897,7 +897,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 52301,
+    id: 'eff24599-c352-4ffa-9e73-181e6a210766',
     status: 'Active',
     nextRead: '2020-04-26T17:01:57',
     name: 'Cubis PLC temp 452',
@@ -913,7 +913,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33247,
+    id: 'a3bda79e-7b07-4390-8b5b-00cf5e97b215',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 440',
@@ -929,7 +929,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 32854,
+    id: 'c423eee0-bbd3-43f0-baef-3759a48103f7',
     status: 'Mouted',
     nextRead: '2020-04-05T17:41:45',
     name: 'Cubis PLC temp 48',
@@ -945,7 +945,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 203,
+    id: '2a12f3fa-ccc4-46ce-8ad6-8d72054bc45f',
     status: 'Warehouse',
     nextRead: '2020-03-21T06:17:59',
     name: 'Cubis PLC temp 893',
@@ -961,7 +961,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 23087,
+    id: '3d099b8d-42f6-4fc0-80e7-eacbdb36f973',
     status: 'Inactive',
     nextRead: '2020-03-17T22:10:13',
     name: 'Cubis PLC temp 834',
@@ -977,7 +977,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 208,
+    id: '9b0bf187-cae0-49a2-ae59-d21d1084ff8c',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 867',
@@ -993,7 +993,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 40832,
+    id: '86e936e6-3769-43c0-b13e-80abfbae9988',
     status: 'Mouted',
     nextRead: '2020-04-20T17:16:52',
     name: 'Cubis PLC temp 62',
@@ -1009,7 +1009,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5768,
+    id: 'a8f57911-c602-44cd-a726-8405b939946f',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 355',
@@ -1025,7 +1025,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40838,
+    id: '04a115fd-1dee-44c9-aeb0-9e925b0948ca',
     status: 'Active',
     nextRead: '2020-03-11T23:56:32',
     name: 'Cubis PLC temp 133',
@@ -1041,7 +1041,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6540,
+    id: '3f244417-1f8e-46d8-a968-9125df7b9615',
     status: 'Warehouse',
     nextRead: '2020-05-06T23:11:58',
     name: 'Cubis PLC temp 60',
@@ -1057,7 +1057,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 567,
+    id: '95bf5025-9937-4439-b8b7-e0f8b3a9d691',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 887',
@@ -1073,7 +1073,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 4838,
+    id: '2d929743-cd6a-4501-b0d5-60adc2cd39f7',
     status: 'Active',
     nextRead: '2020-03-11T13:20:21',
     name: 'Cubis PLC temp 211',
@@ -1089,7 +1089,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 9270,
+    id: '3721ea4b-8c41-40a5-9cff-1436ac0e7421',
     status: 'Active',
     nextRead: '2020-05-07T10:17:56',
     name: 'Cubis PLC temp 90',
@@ -1105,7 +1105,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 12044,
+    id: 'bf628bfd-c6ec-435b-b2c7-e226f1cd117b',
     status: 'Active',
     nextRead: '2020-04-30T19:53:58',
     name: 'Cubis PLC temp 261',
@@ -1121,7 +1121,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 18086,
+    id: '5f26b305-8d1d-45b1-8391-185ba2f6a7b4',
     status: 'Active',
     nextRead: '2020-03-25T13:47:48',
     name: 'Cubis PLC temp 748',
@@ -1137,7 +1137,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23628,
+    id: '65cc84a8-4710-4f7a-85be-7537a1ec5e29',
     status: 'Mouted',
     nextRead: '2020-04-04T04:53:03',
     name: 'Cubis PLC temp 821',
@@ -1153,7 +1153,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 28535,
+    id: '1c3c39da-4f18-4da0-bc39-2d1dd995bc45',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 43',
@@ -1169,7 +1169,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40732,
+    id: '2daaf9d0-b648-497a-81a5-ad5ffae09b74',
     status: 'Active',
     nextRead: '2020-03-05T14:13:14',
     name: 'Cubis PLC temp 755',
@@ -1185,7 +1185,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 50870,
+    id: '66c1e27b-e263-44cf-a06c-ea55cacd828e',
     status: 'Active',
     nextRead: '2020-04-27T01:51:52',
     name: 'Cubis PLC temp 120',
@@ -1201,7 +1201,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 35899,
+    id: 'fa526686-fa4f-4b07-91df-25c3495c4e30',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 493',
@@ -1217,7 +1217,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 54681,
+    id: '0a43cce3-6f37-4b27-882a-cb2254f9fb30',
     status: 'Active',
     nextRead: '2020-04-08T18:57:03',
     name: 'Cubis PLC temp 832',
@@ -1233,7 +1233,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 940,
+    id: '448dcae4-c2e5-4bf3-b492-b91929abf9e6',
     status: 'Warehouse',
     nextRead: '2020-03-19T11:39:41',
     name: 'Cubis PLC temp 938',
@@ -1249,7 +1249,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38805,
+    id: '53c59407-13d3-4a80-bbcc-5c7ba96266a1',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 939',
@@ -1265,7 +1265,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 27213,
+    id: '8d51c99b-33e0-4c37-8428-fe75bac132e6',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 519',
@@ -1281,7 +1281,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 32271,
+    id: '8fe8468c-0e17-4dda-9624-ccddd49991ab',
     status: 'Mouted',
     nextRead: '2020-02-23T09:59:00',
     name: 'Cubis PLC temp 225',
@@ -1297,7 +1297,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 30766,
+    id: '97b5958c-c274-45e1-aa4f-42af95958310',
     status: 'Inactive',
     nextRead: '2020-05-22T01:16:58',
     name: 'Cubis PLC temp 56',
@@ -1313,7 +1313,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 17,
+    id: 'a3f7167c-3296-4bab-86ba-54a96b9789bc',
     status: 'Inactive',
     nextRead: '2020-03-25T19:06:23',
     name: 'Cubis PLC temp 884',
@@ -1329,7 +1329,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 759,
+    id: 'd2d7b6e5-7f33-44fe-92bc-ac065c5d2192',
     status: 'Active',
     nextRead: '2020-05-07T18:46:35',
     name: 'Cubis PLC temp 574',
@@ -1345,7 +1345,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 3480,
+    id: '2902076a-438a-416a-9b85-20b11585d526',
     status: 'Active',
     nextRead: '2020-03-15T02:50:04',
     name: 'Cubis PLC temp 822',
@@ -1361,7 +1361,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5740,
+    id: '0d1225f1-7e7c-4cea-bc39-0fd03dbc9a57',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 163',
@@ -1377,7 +1377,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 6786,
+    id: 'fc4f50c7-96c3-4914-8d7d-c27f70a89dd5',
     status: 'Active',
     nextRead: '2020-03-24T03:18:47',
     name: 'Cubis PLC temp 158',
@@ -1393,7 +1393,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11214,
+    id: 'f8f69ba8-075e-4f95-915f-839001a20ba0',
     status: 'Warehouse',
     nextRead: '2020-03-18T06:41:17',
     name: 'Cubis PLC temp 470',
@@ -1409,7 +1409,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 13284,
+    id: '768336bf-5779-4009-8cff-4bb3fbe03fec',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 572',
@@ -1425,7 +1425,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 15552,
+    id: '752c5cdb-f2fc-44f7-99bb-0c2dd2f8f197',
     status: 'Mouted',
     nextRead: '2020-03-19T17:11:19',
     name: 'Cubis PLC temp 971',
@@ -1441,7 +1441,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21695,
+    id: '32c927df-7ef6-482a-8742-df7f2cc0521b',
     status: 'Active',
     nextRead: '2020-05-18T13:58:17',
     name: 'Cubis PLC temp 353',
@@ -1457,7 +1457,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 25763,
+    id: '167bca91-c0ed-4164-97f9-90555716c714',
     status: 'Warehouse',
     nextRead: '2020-05-12T20:30:49',
     name: 'Cubis PLC temp 301',
@@ -1473,7 +1473,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 30644,
+    id: 'ac5d85f3-aa90-4f07-b56d-39deca948cff',
     status: 'Inactive',
     nextRead: '2020-02-26T16:41:38',
     name: 'Cubis PLC temp 87',
@@ -1489,7 +1489,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 32415,
+    id: 'b9a752d7-6645-44aa-94f1-3c9f56f69c56',
     status: 'Inactive',
     nextRead: '2020-03-17T12:49:55',
     name: 'Cubis PLC temp 767',
@@ -1505,7 +1505,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 39852,
+    id: 'bc56f033-c381-4cfb-9999-9fb35c142cb2',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 102',
@@ -1521,7 +1521,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41623,
+    id: '24b8d551-7137-41fa-8747-c23ec0bbe203',
     status: 'Warehouse',
     nextRead: '2020-05-17T11:54:23',
     name: 'Cubis PLC temp 85',
@@ -1537,7 +1537,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 48660,
+    id: 'f04292d7-789e-49c4-925f-4dbc260ea69e',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 579',
@@ -1553,7 +1553,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 51298,
+    id: 'e1410088-7a45-49f5-9fc5-fead7fb41e68',
     status: 'Inactive',
     nextRead: '2020-04-28T12:53:09',
     name: 'Cubis PLC temp 401',
@@ -1569,7 +1569,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 2522,
+    id: '7270b247-ccf0-4e02-80d1-f840a7424e80',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 652',
@@ -1585,7 +1585,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 12675,
+    id: 'f709af44-31d5-4ecf-a206-54339b027625',
     status: 'Inactive',
     nextRead: '2020-05-07T12:49:50',
     name: 'Cubis PLC temp 220',
@@ -1601,7 +1601,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 23929,
+    id: '110cd065-11a6-42e0-b4d9-4a4a1e8f51d3',
     status: 'Inactive',
     nextRead: '2020-03-04T01:51:43',
     name: 'Cubis PLC temp 796',
@@ -1617,7 +1617,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40404,
+    id: '7d640959-1fbe-499e-82f4-26d5a4f11e55',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 466',
@@ -1633,7 +1633,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 55267,
+    id: '3f3a6a5d-7f8f-4a14-8306-e83a590f6f40',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 898',
@@ -1649,7 +1649,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 11399,
+    id: 'f067c48e-a183-4941-80c2-b0b75c5c18ec',
     status: 'Mouted',
     nextRead: '2020-05-15T22:19:12',
     name: 'Cubis PLC temp 11',
@@ -1665,7 +1665,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 25787,
+    id: 'f1079925-9eac-45f6-9cb3-a241cc273ee1',
     status: 'Active',
     nextRead: '2020-03-20T06:08:59',
     name: 'Cubis PLC temp 462',
@@ -1681,7 +1681,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34987,
+    id: '8593accc-3777-4876-a318-d47e3564e974',
     status: 'Active',
     nextRead: '2020-05-18T19:03:42',
     name: 'Cubis PLC temp 648',
@@ -1697,7 +1697,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39578,
+    id: 'bef3c691-de3a-4e00-991f-61d86f39c0e1',
     status: 'Warehouse',
     nextRead: '2020-04-23T22:56:48',
     name: 'Cubis PLC temp 33',
@@ -1713,7 +1713,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46399,
+    id: '1b00697c-46ce-4224-a1d8-f9808f4b5e30',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 31',
@@ -1729,7 +1729,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7822,
+    id: 'b961d86d-7696-486e-81ac-5777229e7cfd',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 922',
@@ -1745,7 +1745,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 36755,
+    id: '39d4e93a-7de2-4375-a52a-e43c78fd48f8',
     status: 'Active',
     nextRead: '2020-04-08T16:20:32',
     name: 'Cubis PLC temp 601',
@@ -1761,7 +1761,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 39086,
+    id: '840dc2fa-85e1-4756-9a0a-86fa19a0bf2b',
     status: 'Active',
     nextRead: '2020-03-27T16:55:20',
     name: 'Cubis PLC temp 764',
@@ -1777,7 +1777,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 45947,
+    id: 'c442d076-a419-452e-a0c5-8cb59b75ff6a',
     status: 'Active',
     nextRead: '2020-04-21T05:42:29',
     name: 'Cubis PLC temp 399',
@@ -1793,7 +1793,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 52751,
+    id: 'b9f933d7-0d5e-4391-8941-e7f54bc260f7',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 132',
@@ -1809,7 +1809,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 3278,
+    id: '33df4aaa-028e-4fd8-889e-d331b9397253',
     status: 'Mouted',
     nextRead: '2020-03-01T12:39:02',
     name: 'Cubis PLC temp 102',
@@ -1825,7 +1825,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 20838,
+    id: 'a196ebc8-5e80-40cf-9f84-92a03c23bd27',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 280',
@@ -1841,7 +1841,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37054,
+    id: 'fe0aa2c8-191e-4b2d-8653-58454fc390eb',
     status: 'Inactive',
     nextRead: '2020-03-22T12:51:24',
     name: 'Cubis PLC temp 361',
@@ -1857,7 +1857,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 49364,
+    id: '1e1dfd1f-b688-42f9-a8c7-b8e11f4fd7c7',
     status: 'Active',
     nextRead: '2020-03-10T23:26:20',
     name: 'Cubis PLC temp 236',
@@ -1873,7 +1873,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 4498,
+    id: '44578e39-a87f-4cc8-b4ab-2e028bccc05b',
     status: 'Active',
     nextRead: '2020-03-29T11:29:38',
     name: 'Cubis PLC temp 599',
@@ -1889,7 +1889,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 26624,
+    id: 'cc5a59d5-c9f7-442a-a540-5274eb564930',
     status: 'Warehouse',
     nextRead: '2020-04-30T00:43:38',
     name: 'Cubis PLC temp 77',
@@ -1905,7 +1905,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 44898,
+    id: '1495c96e-17e4-4c36-a09c-08d3c226fe51',
     status: 'Inactive',
     nextRead: '2020-05-05T01:19:48',
     name: 'Cubis PLC temp 906',
@@ -1921,7 +1921,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 2919,
+    id: '2be79305-78c7-4cc7-b116-356b62826208',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 517',
@@ -1937,7 +1937,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7058,
+    id: 'd684f089-5edd-43c4-a3b8-822f350dc1cf',
     status: 'Warehouse',
     nextRead: '2020-05-05T14:54:49',
     name: 'Cubis PLC temp 83',
@@ -1953,7 +1953,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 14992,
+    id: '2cafbb8f-385b-4e74-800e-b40f0a8e6d56',
     status: 'Warehouse',
     nextRead: '2020-03-07T20:51:41',
     name: 'Cubis PLC temp 476',
@@ -1969,7 +1969,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 22996,
+    id: 'c65a122b-92cb-47d4-abac-99e70b2f845c',
     status: 'Warehouse',
     nextRead: '2020-04-03T13:45:22',
     name: 'Cubis PLC temp 449',
@@ -1985,7 +1985,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29545,
+    id: '26d518af-5005-4655-bfb3-4213a83d2c15',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 702',
@@ -2001,7 +2001,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38641,
+    id: 'bbb56889-1022-484b-937a-d109761cdba9',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 610',
@@ -2017,7 +2017,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48227,
+    id: 'c53bf65f-ae33-422f-a8dc-2b7c7f282f45',
     status: 'Warehouse',
     nextRead: '2020-05-10T18:17:11',
     name: 'Cubis PLC temp 772',
@@ -2033,7 +2033,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 54415,
+    id: '8563f1d0-c1b5-476e-8902-f4273be98d6c',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 793',
@@ -2049,7 +2049,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 32138,
+    id: '8a72aa46-c42d-421e-ad0b-f7b084aec5c2',
     status: 'Active',
     nextRead: '2020-04-10T04:25:35',
     name: 'Cubis PLC temp 672',
@@ -2065,7 +2065,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 327,
+    id: '419457e6-0543-4579-b6e8-fb59a14b326f',
     status: 'Active',
     nextRead: '2020-04-11T18:31:55',
     name: 'Cubis PLC temp 110',
@@ -2081,7 +2081,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 825,
+    id: 'd198a184-5a24-4652-bf9c-4f4014e0b39a',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 277',
@@ -2097,7 +2097,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 1678,
+    id: '6afaccb0-1637-4b80-b43d-68776ea4e180',
     status: 'Active',
     nextRead: '2020-04-04T19:03:52',
     name: 'Cubis PLC temp 800',
@@ -2113,7 +2113,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 2163,
+    id: '246a5478-b938-479b-b4a1-a7a7867ffc11',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 319',
@@ -2129,7 +2129,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 2585,
+    id: '2ae1498f-54ca-4950-991a-da4efddff64e',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 14',
@@ -2145,7 +2145,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 2889,
+    id: '01f27096-0ba1-4f80-baf6-38cdfa7b0efa',
     status: 'Active',
     nextRead: '2020-03-23T03:25:06',
     name: 'Cubis PLC temp 641',
@@ -2161,7 +2161,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 3389,
+    id: '01b55671-2741-41cd-bc14-fd0ee0909408',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 474',
@@ -2177,7 +2177,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 3718,
+    id: '6a847148-ce3e-4f2e-9ed0-29e21b51e879',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 316',
@@ -2193,7 +2193,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 4196,
+    id: '56079b4d-e785-4c6a-b884-701a24bfbc79',
     status: 'Active',
     nextRead: '2020-05-19T21:51:17',
     name: 'Cubis PLC temp 436',
@@ -2209,7 +2209,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 4770,
+    id: '72fc8b25-4278-44a9-903a-7b2aa39455a3',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 534',
@@ -2225,7 +2225,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5132,
+    id: '15874af2-bf1c-48df-b8f3-81b39cd3bba6',
     status: 'Active',
     nextRead: '2020-05-07T07:07:21',
     name: 'Cubis PLC temp 819',
@@ -2241,7 +2241,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6469,
+    id: '395179fe-b679-4a50-8dcd-cf49f6d2ea02',
     status: 'Warehouse',
     nextRead: '2020-03-26T14:10:47',
     name: 'Cubis PLC temp 682',
@@ -2257,7 +2257,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7213,
+    id: '4f59b0d8-165e-4e2b-8b08-3bec8b87fe20',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 370',
@@ -2273,7 +2273,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 8429,
+    id: 'c60d68e7-203c-4460-9032-8bd9c9a7cf8b',
     status: 'Active',
     nextRead: '2020-05-20T15:04:23',
     name: 'Cubis PLC temp 799',
@@ -2289,7 +2289,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9157,
+    id: 'f0aa1eaa-056c-4f40-8488-cec71ec63db8',
     status: 'Active',
     nextRead: '2020-04-20T07:36:18',
     name: 'Cubis PLC temp 806',
@@ -2305,7 +2305,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 9794,
+    id: '4198844b-8f87-400d-8152-ee97976261ea',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 834',
@@ -2321,7 +2321,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 10470,
+    id: 'f6a58b0a-3134-4000-899d-792b7c0a1f09',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 490',
@@ -2337,7 +2337,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 11474,
+    id: 'd491caf6-6e07-43ff-9b70-32491b542a1a',
     status: 'Active',
     nextRead: '2020-05-12T18:23:50',
     name: 'Cubis PLC temp 340',
@@ -2353,7 +2353,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11934,
+    id: '7c64ee0a-1313-4bc4-9152-f3e2c749cfed',
     status: 'Warehouse',
     nextRead: '2020-05-06T19:14:01',
     name: 'Cubis PLC temp 248',
@@ -2369,7 +2369,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12386,
+    id: '04016f9d-b4fe-46aa-9ca9-859dda155e23',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 788',
@@ -2385,7 +2385,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13178,
+    id: '4a71bcb8-f9cb-4a12-abcd-75f9927ab9fc',
     status: 'Warehouse',
     nextRead: '2020-05-07T05:08:39',
     name: 'Cubis PLC temp 993',
@@ -2401,7 +2401,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13711,
+    id: 'b7314f92-76aa-4a2b-a126-6bdee60d5485',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 938',
@@ -2417,7 +2417,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 14274,
+    id: '66f5568d-60ca-4cad-b5ee-fa176ad7986f',
     status: 'Active',
     nextRead: '2020-04-13T21:43:40',
     name: 'Cubis PLC temp 17',
@@ -2433,7 +2433,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14754,
+    id: 'd2b422fa-8e91-42ca-a23e-926e34e3005e',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 419',
@@ -2449,7 +2449,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 15555,
+    id: '51fa972c-d06b-4175-8139-86fd9e9572e8',
     status: 'Mouted',
     nextRead: '2020-04-21T09:45:10',
     name: 'Cubis PLC temp 914',
@@ -2465,7 +2465,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 15918,
+    id: '38a4567e-3344-4960-9513-f9e0ad8cd8a2',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 782',
@@ -2481,7 +2481,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 16384,
+    id: '22581e4a-f266-47ea-825d-f209b1dcebbe',
     status: 'Active',
     nextRead: '2020-03-04T14:11:44',
     name: 'Cubis PLC temp 37',
@@ -2497,7 +2497,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 16910,
+    id: '1e39baa7-b4fe-4bd0-b505-a29910939d83',
     status: 'Mouted',
     nextRead: '2020-05-05T00:09:44',
     name: 'Cubis PLC temp 48',
@@ -2513,7 +2513,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 17545,
+    id: '5a1e01a8-b72b-4ca0-b84b-d493e546b482',
     status: 'Mouted',
     nextRead: '2020-04-19T19:11:12',
     name: 'Cubis PLC temp 650',
@@ -2529,7 +2529,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 18607,
+    id: 'afcf3fc0-16ce-4cb2-84e3-834fbafedd81',
     status: 'Mouted',
     nextRead: '2020-03-29T19:47:34',
     name: 'Cubis PLC temp 556',
@@ -2545,7 +2545,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 19457,
+    id: '23fd37ce-957f-47c4-a183-572007125f7c',
     status: 'Active',
     nextRead: '2020-02-24T22:57:09',
     name: 'Cubis PLC temp 957',
@@ -2561,7 +2561,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 20024,
+    id: 'c3a11197-9b56-4724-9b2c-67a1fbcc1a15',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 499',
@@ -2577,7 +2577,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 20646,
+    id: '85da8fbd-a765-4633-8749-bc89eeee6fc3',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 452',
@@ -2593,7 +2593,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21611,
+    id: '053f417f-90d9-43ba-bf01-88770565a459',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 206',
@@ -2609,7 +2609,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22141,
+    id: 'f1c3f703-9bcc-444c-a0ad-66e21cf13add',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 927',
@@ -2625,7 +2625,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 23015,
+    id: 'cc4e5333-5b36-4fb8-935e-24615a8aa2ed',
     status: 'Mouted',
     nextRead: '2020-05-17T19:31:55',
     name: 'Cubis PLC temp 466',
@@ -2641,7 +2641,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 23802,
+    id: '708948b6-8b5d-4f72-880c-a4d1a1d2415b',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 260',
@@ -2657,7 +2657,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24145,
+    id: 'de35f453-f59a-4291-a077-8eee3aa63d53',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 187',
@@ -2673,7 +2673,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24664,
+    id: 'cfb2ce9f-05e5-4548-a926-5a7c863a3f5f',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 195',
@@ -2689,7 +2689,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 25315,
+    id: '37eb6c42-16fe-41d4-9d6c-5d2b40a13e95',
     status: 'Warehouse',
     nextRead: '2020-05-19T23:16:47',
     name: 'Cubis PLC temp 85',
@@ -2705,7 +2705,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 25684,
+    id: '9ae0d33d-d7f9-48b3-b194-06eedf909413',
     status: 'Mouted',
     nextRead: '2020-04-08T22:20:17',
     name: 'Cubis PLC temp 571',
@@ -2721,7 +2721,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 26205,
+    id: 'ffa41009-4698-434b-b475-a82d88e97c6b',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 797',
@@ -2737,7 +2737,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 27082,
+    id: '8a8ada77-9263-4118-9be2-f83c801d043a',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 705',
@@ -2753,7 +2753,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 27880,
+    id: '58c8f5b7-86cc-4ebe-86eb-8e38c5541ade',
     status: 'Warehouse',
     nextRead: '2020-03-21T16:26:41',
     name: 'Cubis PLC temp 870',
@@ -2769,7 +2769,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 28752,
+    id: '29d502d7-ab92-4cdf-8857-9e05c6c801bb',
     status: 'Mouted',
     nextRead: '2020-03-28T13:15:30',
     name: 'Cubis PLC temp 277',
@@ -2785,7 +2785,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 29552,
+    id: 'a2d44ccf-e5e4-41e8-a495-288834b0ee0d',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 924',
@@ -2801,7 +2801,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 30068,
+    id: '8f9ee32e-7b6d-40f3-9c61-c991af1da4d9',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 855',
@@ -2817,7 +2817,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 30981,
+    id: '06673f43-5f6c-4cc9-bfda-af538d7aa18d',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 344',
@@ -2833,7 +2833,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31743,
+    id: '82b49c6e-a577-43a1-b92c-d8542cd6fc81',
     status: 'Active',
     nextRead: '2020-04-15T10:41:23',
     name: 'Cubis PLC temp 522',
@@ -2849,7 +2849,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33091,
+    id: '475b7849-8ab0-4389-bdf1-2fd61757f6c9',
     status: 'Mouted',
     nextRead: '2020-04-16T01:05:09',
     name: 'Cubis PLC temp 623',
@@ -2865,7 +2865,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 34195,
+    id: 'c4b14447-089d-45b0-ac51-5a1f1e1874bb',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 572',
@@ -2881,7 +2881,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 34759,
+    id: '8a2f35f9-3511-4621-8970-c13affb3f1a1',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 493',
@@ -2897,7 +2897,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 35263,
+    id: '29649451-0866-4e65-8ca8-44a1da54b34b',
     status: 'Inactive',
     nextRead: '2020-05-05T14:14:18',
     name: 'Cubis PLC temp 143',
@@ -2913,7 +2913,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35804,
+    id: '074d7597-f6c7-4016-b19c-a279ff66adbe',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 91',
@@ -2929,7 +2929,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 36003,
+    id: '97c3b5a1-ba80-40eb-becb-8d394a4a5585',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 579',
@@ -2945,7 +2945,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 36537,
+    id: '0661501c-4de8-4dcd-845c-df60ad350908',
     status: 'Warehouse',
     nextRead: '2020-05-04T21:34:02',
     name: 'Cubis PLC temp 232',
@@ -2961,7 +2961,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37132,
+    id: 'c3a375bc-4b99-4346-96f1-a683b91e4ef2',
     status: 'Active',
     nextRead: '2020-03-09T10:08:45',
     name: 'Cubis PLC temp 75',
@@ -2977,7 +2977,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 38481,
+    id: 'bc779e29-182a-4b5c-be44-a7245753823b',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 88',
@@ -2993,7 +2993,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 39432,
+    id: '1c8dd693-561c-4424-8d1c-831abfb1c60a',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 400',
@@ -3009,7 +3009,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40538,
+    id: 'e53a9e86-c0e2-4e14-87ad-d20a9e340a84',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 850',
@@ -3025,7 +3025,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41095,
+    id: '98b86e5a-1e5a-4749-8e62-e616b5f756c1',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 966',
@@ -3041,7 +3041,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 41876,
+    id: 'd0688ad9-3f63-47ad-b8eb-2473442c0cbb',
     status: 'Active',
     nextRead: '2020-05-21T05:40:22',
     name: 'Cubis PLC temp 16',
@@ -3057,7 +3057,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 42525,
+    id: '70fecb59-0e37-438d-885d-58fef95dd0da',
     status: 'Warehouse',
     nextRead: '2020-04-19T12:44:30',
     name: 'Cubis PLC temp 364',
@@ -3073,7 +3073,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 43064,
+    id: '6f5739f9-e8c8-4a3b-94b2-0c9e19fe067e',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 522',
@@ -3089,7 +3089,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 44148,
+    id: '361947f7-51a8-492f-9995-7cefe5e12d09',
     status: 'Warehouse',
     nextRead: '2020-03-28T21:56:56',
     name: 'Cubis PLC temp 459',
@@ -3105,7 +3105,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 44801,
+    id: '47632bd0-dc2f-4c5d-9feb-a10dbf28339a',
     status: 'Warehouse',
     nextRead: '2020-02-23T10:33:25',
     name: 'Cubis PLC temp 104',
@@ -3121,7 +3121,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 45237,
+    id: '4b0f6e01-fddf-455c-a002-a52c5adafef2',
     status: 'Inactive',
     nextRead: '2020-05-01T16:21:58',
     name: 'Cubis PLC temp 724',
@@ -3137,7 +3137,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 45754,
+    id: '20d75f00-1e0f-4383-b15e-26adca087b8e',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 500',
@@ -3153,7 +3153,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46285,
+    id: '4496c9bf-a2f8-45cf-80c5-7d8311644b52',
     status: 'Inactive',
     nextRead: '2020-04-02T22:38:27',
     name: 'Cubis PLC temp 386',
@@ -3169,7 +3169,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46881,
+    id: '3e0ee73f-94f1-42b7-9596-7e1f26b5a600',
     status: 'Mouted',
     nextRead: '2020-02-25T06:46:27',
     name: 'Cubis PLC temp 331',
@@ -3185,7 +3185,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 48013,
+    id: '2736d311-c237-4299-aeaa-dbd2983ad0f7',
     status: 'Active',
     nextRead: '2020-03-17T20:53:10',
     name: 'Cubis PLC temp 27',
@@ -3201,7 +3201,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48498,
+    id: '789d1245-0d3b-4dc4-87a9-bd2f01ac9782',
     status: 'Mouted',
     nextRead: '2020-04-04T22:54:51',
     name: 'Cubis PLC temp 317',
@@ -3217,7 +3217,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 49356,
+    id: 'ba4250c3-778a-4a00-924f-1a22541cf18a',
     status: 'Inactive',
     nextRead: '2020-03-05T22:04:48',
     name: 'Cubis PLC temp 219',
@@ -3233,7 +3233,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 50591,
+    id: '5ce271d0-584c-431f-8869-ed9c8a5989d5',
     status: 'Inactive',
     nextRead: '2020-02-26T09:15:28',
     name: 'Cubis PLC temp 549',
@@ -3249,7 +3249,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 51433,
+    id: '8c690005-9631-47df-b509-b140343b126b',
     status: 'Warehouse',
     nextRead: '2020-03-27T12:02:10',
     name: 'Cubis PLC temp 811',
@@ -3265,7 +3265,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 52348,
+    id: 'a5e17620-0e84-4d3e-8e01-8bd5466a4267',
     status: 'Active',
     nextRead: '2020-05-07T18:48:28',
     name: 'Cubis PLC temp 334',
@@ -3281,7 +3281,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 53088,
+    id: 'd522e7c4-d6ce-451c-867c-96d2e1ffc428',
     status: 'Warehouse',
     nextRead: '2020-05-16T15:38:04',
     name: 'Cubis PLC temp 441',
@@ -3297,7 +3297,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54145,
+    id: 'ecdb110e-3fea-40b3-a499-ec4ac7248ba3',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 898',
@@ -3313,7 +3313,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54647,
+    id: '2fd593b1-a5d4-4417-874b-5959cf5ee2db',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 481',
@@ -3329,7 +3329,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 55693,
+    id: '8a489b43-b001-46e1-a9fa-de1e8584c466',
     status: 'Warehouse',
     nextRead: '2020-03-25T14:22:56',
     name: 'Cubis PLC temp 92',
@@ -3345,7 +3345,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23,
+    id: 'b6ceef2d-55f6-40f5-9d7f-88af7fb7a71c',
     status: 'Mouted',
     nextRead: '2020-05-10T05:58:12',
     name: 'Cubis PLC temp 961',
@@ -3361,7 +3361,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 3413,
+    id: '6f5eef7e-5d8e-472c-90c1-0f01ea9cb682',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 932',
@@ -3377,7 +3377,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5678,
+    id: 'cb15d786-16c6-4aff-aaca-df740c053b6a',
     status: 'Mouted',
     nextRead: '2020-04-26T14:13:33',
     name: 'Cubis PLC temp 512',
@@ -3393,7 +3393,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 8182,
+    id: 'a9b4b447-922a-4b92-bf44-f56dfd4a72c5',
     status: 'Mouted',
     nextRead: '2020-03-10T02:44:32',
     name: 'Cubis PLC temp 550',
@@ -3409,7 +3409,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13822,
+    id: '039b80b4-599a-4fe4-a24c-fb9bd2699552',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 997',
@@ -3425,7 +3425,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 18826,
+    id: 'e6898de3-ca77-4724-a5df-578d97a43244',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 552',
@@ -3441,7 +3441,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 22892,
+    id: '87a7e22f-0127-44bd-b3d6-fab3a72f4654',
     status: 'Mouted',
     nextRead: '2020-03-25T01:45:25',
     name: 'Cubis PLC temp 79',
@@ -3457,7 +3457,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31212,
+    id: '67d31091-1d95-4c20-b159-378d718315c2',
     status: 'Active',
     nextRead: '2020-05-10T23:08:21',
     name: 'Cubis PLC temp 176',
@@ -3473,7 +3473,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 36288,
+    id: '80c4a93a-3a86-464e-8e8f-fa79060e72a4',
     status: 'Inactive',
     nextRead: '2020-03-19T23:15:30',
     name: 'Cubis PLC temp 625',
@@ -3489,7 +3489,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 42027,
+    id: '0a019dae-d894-40a8-8fbb-6d48542d78e3',
     status: 'Warehouse',
     nextRead: '2020-03-06T18:33:52',
     name: 'Cubis PLC temp 784',
@@ -3505,7 +3505,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 47465,
+    id: 'dd1cdb9e-3fa7-466e-8859-1bdb226923d6',
     status: 'Active',
     nextRead: '2020-03-20T07:58:04',
     name: 'Cubis PLC temp 681',
@@ -3521,7 +3521,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53046,
+    id: 'c23a100d-6a2e-4608-95ec-f2ae11113936',
     status: 'Inactive',
     nextRead: '2020-04-12T04:07:09',
     name: 'Cubis PLC temp 499',
@@ -3537,7 +3537,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 4888,
+    id: '9496177d-5d34-47c0-a623-c7530f254927',
     status: 'Warehouse',
     nextRead: '2020-03-05T00:11:13',
     name: 'Cubis PLC temp 308',
@@ -3553,7 +3553,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 52193,
+    id: '3511ee7f-43f9-4c66-963a-bbfe7005e83f',
     status: 'Warehouse',
     nextRead: '2020-03-24T06:16:17',
     name: 'Cubis PLC temp 330',
@@ -3569,7 +3569,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5272,
+    id: '34374105-0fe6-43fc-baed-6ab2edae9d29',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 411',
@@ -3585,7 +3585,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 10624,
+    id: '61b3eea2-9260-4c14-bb31-9df45e5b5616',
     status: 'Warehouse',
     nextRead: '2020-03-11T00:30:37',
     name: 'Cubis PLC temp 659',
@@ -3601,7 +3601,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 42378,
+    id: 'a1e3d2bb-c383-47e5-80b2-279c7fd11814',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 574',
@@ -3617,7 +3617,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5283,
+    id: 'dbc4b7f8-8ce1-4c2e-9f38-cc8176044253',
     status: 'Active',
     nextRead: '2020-04-17T20:52:49',
     name: 'Cubis PLC temp 836',
@@ -3633,7 +3633,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 1548,
+    id: '4d75dd91-df97-4920-89ec-7f68fc6f220d',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 725',
@@ -3649,7 +3649,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12176,
+    id: '16a6ccb4-dcc2-44e8-b869-5134e2df7187',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 28',
@@ -3665,7 +3665,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 12531,
+    id: '13b4210b-ad77-469b-be5a-ad2b837edcbe',
     status: 'Mouted',
     nextRead: '2020-03-04T18:00:58',
     name: 'Cubis PLC temp 926',
@@ -3681,7 +3681,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 2036,
+    id: '5024812f-577b-4ef9-87c6-a157a34025f3',
     status: 'Warehouse',
     nextRead: '2020-04-03T01:34:00',
     name: 'Cubis PLC temp 756',
@@ -3697,7 +3697,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 2407,
+    id: 'e8f84ba9-24d5-4ceb-a7c5-d500422f69e5',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 555',
@@ -3713,7 +3713,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 3201,
+    id: '0d9c5e05-bb7d-41f3-b726-ad72fc612853',
     status: 'Mouted',
     nextRead: '2020-03-21T18:28:40',
     name: 'Cubis PLC temp 161',
@@ -3729,7 +3729,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 3391,
+    id: 'd28f9d22-e1f0-4d2f-abf1-399e98443e06',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 13',
@@ -3745,7 +3745,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 3908,
+    id: '4a629b39-c240-4787-a5cc-8480e5a5b115',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 271',
@@ -3761,7 +3761,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 4085,
+    id: '775698d1-927c-4e17-9d1d-9778b4cee396',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 276',
@@ -3777,7 +3777,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 4454,
+    id: 'ec769f2c-46c0-451f-badd-e8c9fb4a6f48',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 763',
@@ -3793,7 +3793,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 5095,
+    id: '7ca79fa7-65d9-40c8-8fbe-fcbeb8b9ad80',
     status: 'Mouted',
     nextRead: '2020-03-11T22:44:30',
     name: 'Cubis PLC temp 662',
@@ -3809,7 +3809,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6387,
+    id: '09304e06-5c18-45db-904a-0411e5cccebe',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 49',
@@ -3825,7 +3825,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5276,
+    id: 'e1a41362-7fc0-4da7-a825-962cd5a9e2aa',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 146',
@@ -3841,7 +3841,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 5719,
+    id: '7bb14817-5bbe-4e55-8b9f-3595808ad8dc',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 237',
@@ -3857,7 +3857,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6341,
+    id: 'ac37d6bf-11be-4254-af2a-68196de62c4f',
     status: 'Inactive',
     nextRead: '2020-05-03T06:54:07',
     name: 'Cubis PLC temp 103',
@@ -3873,7 +3873,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6493,
+    id: '1446f117-6234-4194-9ce1-7d91bb68c262',
     status: 'Warehouse',
     nextRead: '2020-04-27T22:42:14',
     name: 'Cubis PLC temp 745',
@@ -3889,7 +3889,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6859,
+    id: 'faa863ed-61ac-4f2e-aa09-88bc18dc185e',
     status: 'Active',
     nextRead: '2020-03-14T04:46:43',
     name: 'Cubis PLC temp 415',
@@ -3905,7 +3905,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6944,
+    id: 'ae20f89a-c002-4770-8dad-6ea4a07406ca',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 641',
@@ -3921,7 +3921,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 8334,
+    id: 'd72ad3df-5807-487c-8085-e7e9d129c6ae',
     status: 'Active',
     nextRead: '2020-04-02T16:04:34',
     name: 'Cubis PLC temp 530',
@@ -3937,7 +3937,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9071,
+    id: 'c1ce5fea-9f09-48ea-96dd-1f0ba09cb67c',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 637',
@@ -3953,7 +3953,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 9290,
+    id: '8b3eb7d0-b654-4f9e-abab-998bf385a0a6',
     status: 'Warehouse',
     nextRead: '2020-04-09T01:05:57',
     name: 'Cubis PLC temp 989',
@@ -3969,7 +3969,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 9817,
+    id: 'e686d609-4f9b-46df-a032-2fcc36abedaf',
     status: 'Warehouse',
     nextRead: '2020-03-13T03:58:37',
     name: 'Cubis PLC temp 176',
@@ -3985,7 +3985,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 9866,
+    id: '4c4f6d0c-3e9f-45f4-9388-06a3896f5df4',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 699',
@@ -4001,7 +4001,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 9973,
+    id: '26fa9ee1-be5b-4ca1-8d94-ca236f4d6716',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 508',
@@ -4017,7 +4017,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 10655,
+    id: '4766e0ad-02aa-47f5-8b36-086bbd21caab',
     status: 'Inactive',
     nextRead: '2020-04-06T03:08:14',
     name: 'Cubis PLC temp 635',
@@ -4033,7 +4033,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 11327,
+    id: '4411231c-a94f-4043-ade6-8657de477aec',
     status: 'Mouted',
     nextRead: '2020-05-14T05:46:39',
     name: 'Cubis PLC temp 43',
@@ -4049,7 +4049,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11414,
+    id: 'b8aa8b70-b9f3-47e2-b1fb-8985c9df2e01',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 326',
@@ -4065,7 +4065,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11965,
+    id: '62570aa8-0e85-4572-8a8c-427ce0623aea',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 897',
@@ -4081,7 +4081,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 12698,
+    id: '435bda07-7168-4722-9cdf-c1a75ebcc61c',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 104',
@@ -4097,7 +4097,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12857,
+    id: 'b43092fc-f626-41dd-97b7-0a4698eaa317',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 749',
@@ -4113,7 +4113,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 13079,
+    id: 'b5902d6d-2e9a-4465-8504-89f43f82b649',
     status: 'Active',
     nextRead: '2020-03-03T14:47:06',
     name: 'Cubis PLC temp 827',
@@ -4129,7 +4129,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 13090,
+    id: '2a0378f6-03ac-42e5-b1bd-2746a2e9d7d7',
     status: 'Mouted',
     nextRead: '2020-02-26T12:22:06',
     name: 'Cubis PLC temp 338',
@@ -4145,7 +4145,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 14249,
+    id: '5fefa789-b7b0-4877-a25c-d6f199360d41',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 241',
@@ -4161,7 +4161,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14389,
+    id: 'fe3fecb1-d9b9-4545-951e-c22984e9656f',
     status: 'Active',
     nextRead: '2020-04-10T21:00:45',
     name: 'Cubis PLC temp 419',
@@ -4177,7 +4177,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 14666,
+    id: 'beb0d8aa-953a-40ad-b84f-ce05c27e7ed9',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 408',
@@ -4193,7 +4193,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 14823,
+    id: 'a95a7983-4063-4101-b3f3-bfd0d2bc0ff7',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 625',
@@ -4209,7 +4209,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14825,
+    id: '5072f66b-2511-4fa5-ba40-38b2e9806db5',
     status: 'Mouted',
     nextRead: '2020-05-10T02:15:49',
     name: 'Cubis PLC temp 418',
@@ -4225,7 +4225,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 15967,
+    id: '3a6a64d4-8ab5-41d7-9cbf-26522bb2be63',
     status: 'Warehouse',
     nextRead: '2020-04-25T21:48:30',
     name: 'Cubis PLC temp 692',
@@ -4241,7 +4241,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 16860,
+    id: '89f0672f-f057-4945-8707-13901317e4ed',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 975',
@@ -4257,7 +4257,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 17761,
+    id: 'fbd6bf7a-7663-4550-9a8a-5b7a7c7f51f1',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 424',
@@ -4273,7 +4273,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 18232,
+    id: 'bc9c7a72-ffd2-4f9b-b88c-c7389bc6b493',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 200',
@@ -4289,7 +4289,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 18796,
+    id: '9a65bcf3-96c9-48e7-8551-04786ac240a7',
     status: 'Active',
     nextRead: '2020-04-19T21:57:46',
     name: 'Cubis PLC temp 427',
@@ -4305,7 +4305,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 19365,
+    id: 'af4495e5-23d8-4a41-8eca-69cf555628c6',
     status: 'Inactive',
     nextRead: '2020-03-09T02:10:13',
     name: 'Cubis PLC temp 362',
@@ -4321,7 +4321,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 20850,
+    id: 'b92e5897-9c4d-46b8-a34b-1016c7b3e657',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 917',
@@ -4337,7 +4337,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 22500,
+    id: '16a11943-a278-41b8-9d41-23437712e9cc',
     status: 'Warehouse',
     nextRead: '2020-05-15T15:44:50',
     name: 'Cubis PLC temp 655',
@@ -4353,7 +4353,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22796,
+    id: 'eae73679-02f3-49c2-b903-0eebefbe9b8d',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 863',
@@ -4369,7 +4369,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 22798,
+    id: '131b21a5-d834-42d0-b1b8-da1d992f09b2',
     status: 'Active',
     nextRead: '2020-04-27T03:07:53',
     name: 'Cubis PLC temp 805',
@@ -4385,7 +4385,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 23153,
+    id: 'eecd2f84-2a58-47fc-82d2-3acecc2cf763',
     status: 'Active',
     nextRead: '2020-03-28T04:30:35',
     name: 'Cubis PLC temp 314',
@@ -4401,7 +4401,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23754,
+    id: '491b01e3-8273-45dd-8110-d93d2e167eca',
     status: 'Warehouse',
     nextRead: '2020-03-16T11:36:13',
     name: 'Cubis PLC temp 102',
@@ -4417,7 +4417,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23812,
+    id: 'a124e4b8-3a04-40fe-a06c-9d795f174144',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 132',
@@ -4433,7 +4433,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23814,
+    id: 'a44fbe94-a1df-43cb-a04f-c597f77529a6',
     status: 'Active',
     nextRead: '2020-03-18T19:24:20',
     name: 'Cubis PLC temp 752',
@@ -4449,7 +4449,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23815,
+    id: '3ad12974-996f-4330-9ebe-74fd3e4b9b25',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 374',
@@ -4465,7 +4465,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 23818,
+    id: '0c6167eb-b1a3-4b40-b3ba-4b7d3029cdd1',
     status: 'Active',
     nextRead: '2020-04-01T16:31:41',
     name: 'Cubis PLC temp 88',
@@ -4481,7 +4481,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24153,
+    id: '8b2a053f-6c65-40e3-a316-14ceb1b6c8da',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 422',
@@ -4497,7 +4497,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24303,
+    id: '1fd9a160-27f5-493a-b1e0-c37eee885104',
     status: 'Mouted',
     nextRead: '2020-05-03T18:30:39',
     name: 'Cubis PLC temp 287',
@@ -4513,7 +4513,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 26889,
+    id: 'bf2439c0-2413-482d-b722-08c62b7f26d1',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 923',
@@ -4529,7 +4529,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 25143,
+    id: 'c57d4f5e-e819-442c-b469-dfbaf77c61a0',
     status: 'Warehouse',
     nextRead: '2020-05-13T03:53:01',
     name: 'Cubis PLC temp 499',
@@ -4545,7 +4545,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 25462,
+    id: 'eb573053-9cfd-4f9f-a3ea-166c4c9e8de3',
     status: 'Warehouse',
     nextRead: '2020-04-19T13:14:48',
     name: 'Cubis PLC temp 860',
@@ -4561,7 +4561,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 27158,
+    id: '34eadb36-7dc2-4efd-afb8-2d6a497c2597',
     status: 'Active',
     nextRead: '2020-05-09T12:13:56',
     name: 'Cubis PLC temp 453',
@@ -4577,7 +4577,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 27308,
+    id: 'a89dd4b7-8bbe-4ca8-9cd3-184563934924',
     status: 'Mouted',
     nextRead: '2020-04-08T23:37:54',
     name: 'Cubis PLC temp 829',
@@ -4593,7 +4593,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 27630,
+    id: 'e61008cc-d36c-4abd-8cb4-257c72322cfc',
     status: 'Active',
     nextRead: '2020-04-03T23:18:41',
     name: 'Cubis PLC temp 172',
@@ -4609,7 +4609,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 27746,
+    id: 'db847a6c-883b-4066-a16f-61966044fc3f',
     status: 'Inactive',
     nextRead: '2020-04-13T17:08:14',
     name: 'Cubis PLC temp 7',
@@ -4625,7 +4625,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 29555,
+    id: '0b23a17a-a898-4bd3-9db9-b19f01b21008',
     status: 'Warehouse',
     nextRead: '2020-04-14T14:24:57',
     name: 'Cubis PLC temp 56',
@@ -4641,7 +4641,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 28720,
+    id: '5dd0ff35-4419-4588-9466-7948b9c7b16e',
     status: 'Inactive',
     nextRead: '2020-02-29T00:20:20',
     name: 'Cubis PLC temp 10',
@@ -4657,7 +4657,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 29013,
+    id: '5d6702c8-f532-4ed7-af8d-4e3bc4b49930',
     status: 'Mouted',
     nextRead: '2020-05-18T17:56:57',
     name: 'Cubis PLC temp 706',
@@ -4673,7 +4673,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29218,
+    id: 'bd714be9-9f6a-483d-a813-338c2f349e35',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 106',
@@ -4689,7 +4689,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29220,
+    id: 'ea16532e-8473-4df3-ba5f-1a0bec0d4cc7',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 613',
@@ -4705,7 +4705,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 29388,
+    id: 'aa002697-a001-41a6-9b2d-c4c0d83fcc12',
     status: 'Warehouse',
     nextRead: '2020-05-05T22:01:40',
     name: 'Cubis PLC temp 629',
@@ -4721,7 +4721,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29647,
+    id: '924911c5-eea5-48a0-a189-05820cbdc821',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 741',
@@ -4737,7 +4737,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29681,
+    id: '00e654ac-a7c6-4819-b04b-04564b8e104f',
     status: 'Warehouse',
     nextRead: '2020-05-01T10:51:54',
     name: 'Cubis PLC temp 699',
@@ -4753,7 +4753,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 30368,
+    id: '2013b937-f202-47f7-8fe4-e8520c47eda7',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 618',
@@ -4769,7 +4769,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 30567,
+    id: '28296982-6718-43e0-9a63-806834c39658',
     status: 'Warehouse',
     nextRead: '2020-03-02T07:48:54',
     name: 'Cubis PLC temp 773',
@@ -4785,7 +4785,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 30617,
+    id: '52d20ac6-c825-4b45-8e6e-6a736cdb0d7e',
     status: 'Inactive',
     nextRead: '2020-04-14T15:42:50',
     name: 'Cubis PLC temp 867',
@@ -4801,7 +4801,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 30830,
+    id: 'b39ced98-1ead-4a16-b5c0-d5bb0f84a538',
     status: 'Warehouse',
     nextRead: '2020-04-05T08:11:51',
     name: 'Cubis PLC temp 595',
@@ -4817,7 +4817,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 30832,
+    id: '189d2afd-be96-459d-9156-4015dd67b325',
     status: 'Warehouse',
     nextRead: '2020-05-18T17:31:19',
     name: 'Cubis PLC temp 268',
@@ -4833,7 +4833,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 30838,
+    id: 'beaacd8e-833a-4325-804b-6b313574e431',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 45',
@@ -4849,7 +4849,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 30867,
+    id: 'c1ec3b0c-1702-4dac-a47e-d0fc2ee3a600',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 979',
@@ -4865,7 +4865,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31101,
+    id: 'e3714ca4-16b9-46d9-8e36-7d727fe8e1fd',
     status: 'Active',
     nextRead: '2020-03-08T16:05:26',
     name: 'Cubis PLC temp 889',
@@ -4881,7 +4881,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31480,
+    id: '94e4a775-c2b6-435a-bee6-0e7fe29a4766',
     status: 'Inactive',
     nextRead: '2020-05-16T02:06:23',
     name: 'Cubis PLC temp 438',
@@ -4897,7 +4897,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31831,
+    id: 'c89a56a1-6b17-467e-9517-8b5267da16b0',
     status: 'Active',
     nextRead: '2020-04-02T07:47:22',
     name: 'Cubis PLC temp 715',
@@ -4913,7 +4913,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 32059,
+    id: '51dc9120-976c-4d9f-be9f-4cd707078c10',
     status: 'Mouted',
     nextRead: '2020-04-24T01:46:04',
     name: 'Cubis PLC temp 241',
@@ -4929,7 +4929,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33194,
+    id: '18b78141-35ba-453b-99d6-b8f5934bae9c',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 664',
@@ -4945,7 +4945,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33296,
+    id: '518706ad-5833-4f5b-a0ab-a4d26a255075',
     status: 'Inactive',
     nextRead: '2020-02-26T11:36:53',
     name: 'Cubis PLC temp 894',
@@ -4961,7 +4961,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33337,
+    id: 'dffd8616-980a-4478-95c2-6df0d4e35e7f',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 331',
@@ -4977,7 +4977,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33344,
+    id: 'dc9aa653-c460-4442-baf2-655bf0851aa7',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 521',
@@ -4993,7 +4993,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33561,
+    id: '32936f93-ccf0-4c7d-97b5-ac3985bc582b',
     status: 'Warehouse',
     nextRead: '2020-05-08T06:21:17',
     name: 'Cubis PLC temp 83',
@@ -5009,7 +5009,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33672,
+    id: '2dd5fdfa-f747-4c13-b561-182b50efbf4b',
     status: 'Warehouse',
     nextRead: '2020-04-27T09:44:11',
     name: 'Cubis PLC temp 551',
@@ -5025,7 +5025,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33674,
+    id: '2478b60a-63b9-4c50-8970-e80d23c1d289',
     status: 'Warehouse',
     nextRead: '2020-04-13T04:17:12',
     name: 'Cubis PLC temp 175',
@@ -5041,7 +5041,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33838,
+    id: '903bec22-b2f9-4d9f-bc3a-6795bbd8fecb',
     status: 'Active',
     nextRead: '2020-04-07T23:19:41',
     name: 'Cubis PLC temp 979',
@@ -5057,7 +5057,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33840,
+    id: '532a3551-a208-4a78-9b83-82c48da0ff6d',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 323',
@@ -5073,7 +5073,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34010,
+    id: '54f274c2-2005-4db9-bc11-034342e896bb',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 525',
@@ -5089,7 +5089,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 34115,
+    id: '515a23b7-0c34-4c09-a852-f4f99345454b',
     status: 'Warehouse',
     nextRead: '2020-04-19T08:34:48',
     name: 'Cubis PLC temp 283',
@@ -5105,7 +5105,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34735,
+    id: '670f5823-19a2-42ba-844b-89912fc8f9ae',
     status: 'Warehouse',
     nextRead: '2020-05-10T07:34:12',
     name: 'Cubis PLC temp 761',
@@ -5121,7 +5121,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 34800,
+    id: '2db73850-f3f9-4a29-992c-d1c218093f35',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 633',
@@ -5137,7 +5137,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34843,
+    id: '0c3f469f-5fe8-4f4e-a4ff-a81ee191d600',
     status: 'Inactive',
     nextRead: '2020-04-04T13:58:43',
     name: 'Cubis PLC temp 663',
@@ -5153,7 +5153,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35254,
+    id: 'c767f515-a7ea-4749-9c4b-7694ea33537a',
     status: 'Active',
     nextRead: '2020-05-06T05:24:58',
     name: 'Cubis PLC temp 687',
@@ -5169,7 +5169,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 35711,
+    id: '6272bd79-1b93-4d7c-96cc-8ce2ab15e93e',
     status: 'Active',
     nextRead: '2020-05-13T13:12:03',
     name: 'Cubis PLC temp 655',
@@ -5185,7 +5185,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35948,
+    id: '02343875-a5f3-4450-8666-93df0805ecd4',
     status: 'Warehouse',
     nextRead: '2020-03-31T12:41:28',
     name: 'Cubis PLC temp 687',
@@ -5201,7 +5201,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 36086,
+    id: '792102dc-44d3-4083-8032-09bee561473c',
     status: 'Mouted',
     nextRead: '2020-04-13T00:27:19',
     name: 'Cubis PLC temp 187',
@@ -5217,7 +5217,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 36594,
+    id: '4156858a-f12b-48a3-a9f1-751e318f0978',
     status: 'Active',
     nextRead: '2020-02-24T18:03:27',
     name: 'Cubis PLC temp 742',
@@ -5233,7 +5233,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 36636,
+    id: '85b140f8-c323-49fe-9e40-857da7cd3eab',
     status: 'Active',
     nextRead: '2020-02-25T18:59:16',
     name: 'Cubis PLC temp 990',
@@ -5249,7 +5249,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 36943,
+    id: '8ae82bb2-7d86-4dc9-89d6-28dd192e345e',
     status: 'Inactive',
     nextRead: '2020-05-10T12:51:30',
     name: 'Cubis PLC temp 431',
@@ -5265,7 +5265,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 37012,
+    id: '87b7ce88-967a-44d4-991b-6fbd22c3886e',
     status: 'Active',
     nextRead: '2020-05-04T05:02:03',
     name: 'Cubis PLC temp 561',
@@ -5281,7 +5281,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37047,
+    id: 'deac6f07-05a1-49f9-8aac-c35521220c23',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 688',
@@ -5297,7 +5297,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37338,
+    id: 'fcee3a09-14e3-4f68-8dbe-613b60691f76',
     status: 'Inactive',
     nextRead: '2020-05-03T01:37:00',
     name: 'Cubis PLC temp 630',
@@ -5313,7 +5313,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37767,
+    id: '42a88cf1-0dd0-4b46-9bcc-a9ae532afd2d',
     status: 'Mouted',
     nextRead: '2020-03-09T01:23:24',
     name: 'Cubis PLC temp 62',
@@ -5329,7 +5329,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 37786,
+    id: 'b4434c03-25f4-472b-bfce-2cec3b2d14ee',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 629',
@@ -5345,7 +5345,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 37998,
+    id: '4379a903-b6b2-41a6-9d74-690a58cf71fb',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 674',
@@ -5361,7 +5361,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38199,
+    id: '5fed8c92-59d5-43d8-bcb1-cc9ca13d4f10',
     status: 'Active',
     nextRead: '2020-03-17T10:09:41',
     name: 'Cubis PLC temp 91',
@@ -5377,7 +5377,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38658,
+    id: '1c4999c9-2e65-424f-8a80-63ae54c5d233',
     status: 'Active',
     nextRead: '2020-05-11T21:36:52',
     name: 'Cubis PLC temp 195',
@@ -5393,7 +5393,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38811,
+    id: 'ee189686-d617-4f12-be6d-c7a3f43193f7',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 127',
@@ -5409,7 +5409,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 38837,
+    id: 'a3fe58a1-8c40-46b4-ad3f-1bba35f85916',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 687',
@@ -5425,7 +5425,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 38874,
+    id: '8af06df6-7107-4e10-a5d2-a7e8d72fddb1',
     status: 'Warehouse',
     nextRead: '2020-04-20T08:51:14',
     name: 'Cubis PLC temp 694',
@@ -5441,7 +5441,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39697,
+    id: 'd606bb75-abbf-4df9-9664-79cf5d365ea5',
     status: 'Inactive',
     nextRead: '2020-05-06T07:02:32',
     name: 'Cubis PLC temp 170',
@@ -5457,7 +5457,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40136,
+    id: 'f06f41f0-ec24-4885-ac77-819c59342fd3',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 844',
@@ -5473,7 +5473,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 40622,
+    id: '75031890-2d59-420a-9914-2f98dbfae4e4',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 72',
@@ -5489,7 +5489,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 40878,
+    id: '1f355cf5-cd21-431b-8a93-2a46361400f8',
     status: 'Active',
     nextRead: '2020-04-30T11:27:34',
     name: 'Cubis PLC temp 860',
@@ -5505,7 +5505,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 41159,
+    id: 'acbb55e3-1d4b-4506-a098-e2d42f43414a',
     status: 'Warehouse',
     nextRead: '2020-03-20T17:58:35',
     name: 'Cubis PLC temp 448',
@@ -5521,7 +5521,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41873,
+    id: '285c1ffa-8ef7-4a21-9b92-f5c1f5810a12',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 314',
@@ -5537,7 +5537,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 42933,
+    id: 'ef39b172-e660-45ce-a649-ba60413d4cbf',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 795',
@@ -5553,7 +5553,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 43249,
+    id: '0a1bcbdb-8f32-4b73-8aab-c1a06eafdbd6',
     status: 'Warehouse',
     nextRead: '2020-03-11T05:57:26',
     name: 'Cubis PLC temp 622',
@@ -5569,7 +5569,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 43440,
+    id: '2b426719-91d0-4840-b97b-70912be36271',
     status: 'Mouted',
     nextRead: '2020-02-23T08:40:11',
     name: 'Cubis PLC temp 983',
@@ -5585,7 +5585,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 43442,
+    id: '603cf7a3-0ae3-454d-b693-1d9cee05944f',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 61',
@@ -5601,7 +5601,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 43759,
+    id: '845cadaa-9f52-426a-9856-5aa343a9dbf5',
     status: 'Warehouse',
     nextRead: '2020-04-22T06:25:42',
     name: 'Cubis PLC temp 694',
@@ -5617,7 +5617,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 43969,
+    id: '58eeaf33-86ea-496c-b825-915fb258ff15',
     status: 'Warehouse',
     nextRead: '2020-05-03T10:36:44',
     name: 'Cubis PLC temp 685',
@@ -5633,7 +5633,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 44233,
+    id: 'ef95156c-4490-4b01-bb86-669b96213fa2',
     status: 'Inactive',
     nextRead: '2020-02-27T09:35:07',
     name: 'Cubis PLC temp 514',
@@ -5649,7 +5649,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 44235,
+    id: '251cdeb8-0644-4aab-856d-7f8baf5db3a7',
     status: 'Warehouse',
     nextRead: '2020-04-10T18:19:45',
     name: 'Cubis PLC temp 619',
@@ -5665,7 +5665,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 44432,
+    id: '45cb2131-25c7-4b4f-babb-2f9128db40b6',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 468',
@@ -5681,7 +5681,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 44580,
+    id: 'cc449382-a81f-4c19-abfb-1b76c378936a',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 843',
@@ -5697,7 +5697,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 44711,
+    id: 'fccfb009-5773-40b4-a0f6-3013345116eb',
     status: 'Active',
     nextRead: '2020-03-06T10:32:56',
     name: 'Cubis PLC temp 614',
@@ -5713,7 +5713,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 45020,
+    id: '6f474dee-8925-4bf6-8442-b60c3eaafe3f',
     status: 'Mouted',
     nextRead: '2020-03-14T04:06:20',
     name: 'Cubis PLC temp 306',
@@ -5729,7 +5729,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 45939,
+    id: '2d8dcd9c-1887-4cee-9f5a-8919ad184995',
     status: 'Warehouse',
     nextRead: '2020-03-07T02:53:37',
     name: 'Cubis PLC temp 754',
@@ -5745,7 +5745,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 46354,
+    id: 'aed1154a-bd4c-4cd5-831a-75af0a44233f',
     status: 'Active',
     nextRead: '2020-04-15T08:43:42',
     name: 'Cubis PLC temp 305',
@@ -5761,7 +5761,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 46369,
+    id: '3ec61981-4a96-4068-bcf0-86e574d2a550',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 80',
@@ -5777,7 +5777,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 47138,
+    id: 'a5ec3598-feb2-49ba-bad3-c4181d688cf5',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 330',
@@ -5793,7 +5793,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 47899,
+    id: 'e168f4ed-6aac-42c0-b873-a2a1d4157808',
     status: 'Warehouse',
     nextRead: '2020-03-15T00:54:12',
     name: 'Cubis PLC temp 433',
@@ -5809,7 +5809,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 47922,
+    id: '8790ec4b-65b1-4792-910b-9399edaac176',
     status: 'Active',
     nextRead: '2020-03-27T23:21:29',
     name: 'Cubis PLC temp 19',
@@ -5825,7 +5825,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 49066,
+    id: '32adc1ad-d1a8-4d74-9015-ce4f5af8c440',
     status: 'Active',
     nextRead: '2020-04-14T07:17:59',
     name: 'Cubis PLC temp 598',
@@ -5841,7 +5841,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 49523,
+    id: '414ecd4f-08da-4168-a370-92bd4dcab54c',
     status: 'Active',
     nextRead: '2020-04-18T16:51:29',
     name: 'Cubis PLC temp 51',
@@ -5857,7 +5857,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50075,
+    id: '766fe807-a49a-49a4-98ab-275b2a1414d0',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 780',
@@ -5873,7 +5873,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50342,
+    id: 'cdc5b411-8a38-450d-ab88-6178564be2f4',
     status: 'Active',
     nextRead: '2020-03-06T15:10:30',
     name: 'Cubis PLC temp 641',
@@ -5889,7 +5889,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 56878,
+    id: '59304b1d-4800-4112-8ed8-6c28f3cc5018',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 948',
@@ -5905,7 +5905,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50345,
+    id: '66acbc5d-9c46-460a-baa1-e4785d5f1e7e',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 34',
@@ -5921,7 +5921,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50354,
+    id: '10c97803-43e8-46e3-83ec-5f33cb4af701',
     status: 'Mouted',
     nextRead: '2020-03-01T22:01:06',
     name: 'Cubis PLC temp 637',
@@ -5937,7 +5937,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 50376,
+    id: '27946720-d493-410c-9418-1d425d45be23',
     status: 'Mouted',
     nextRead: '2020-04-13T00:19:43',
     name: 'Cubis PLC temp 781',
@@ -5953,7 +5953,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50675,
+    id: '5de06184-3007-4258-b0bb-e34c1bd7b583',
     status: 'Warehouse',
     nextRead: '2020-03-04T15:15:39',
     name: 'Cubis PLC temp 137',
@@ -5969,7 +5969,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 51943,
+    id: '1e138808-e7cc-4ec4-adf9-cfb25479b447',
     status: 'Warehouse',
     nextRead: '2020-03-16T13:36:19',
     name: 'Cubis PLC temp 546',
@@ -5985,7 +5985,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 52564,
+    id: '5f25ea95-2ea0-4359-befa-e20c2eb502b4',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 353',
@@ -6001,7 +6001,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 52583,
+    id: 'b6e162b9-d51b-4158-8118-4fa87fae0947',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 340',
@@ -6017,7 +6017,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 52584,
+    id: '2e555543-03c6-489b-a155-78040962a6c1',
     status: 'Active',
     nextRead: '2020-03-20T06:24:58',
     name: 'Cubis PLC temp 858',
@@ -6033,7 +6033,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 53068,
+    id: '96a98bf8-4c39-4506-9f85-ae45626bbea8',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 681',
@@ -6049,7 +6049,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 53097,
+    id: '8d2b1c08-797a-4659-8dbe-097cbaa719fa',
     status: 'Inactive',
     nextRead: '2020-03-28T05:27:21',
     name: 'Cubis PLC temp 728',
@@ -6065,7 +6065,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 53506,
+    id: '1eaf95a9-ffd2-465e-a4b9-c8c3dfab27e7',
     status: 'Active',
     nextRead: '2020-03-08T01:27:52',
     name: 'Cubis PLC temp 280',
@@ -6081,7 +6081,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53618,
+    id: 'c1422912-0cc2-42c4-892d-e5da54dd6afd',
     status: 'Inactive',
     nextRead: '2020-05-07T11:51:04',
     name: 'Cubis PLC temp 427',
@@ -6097,7 +6097,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53806,
+    id: '0ceb5b0c-cf4e-43db-b341-1b779b519495',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 863',
@@ -6113,7 +6113,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 54123,
+    id: '5caac857-5b88-4397-8a0a-3847be451d68',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 953',
@@ -6129,7 +6129,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 54607,
+    id: 'a7126196-125c-4caa-ab89-64d232535f90',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 733',
@@ -6145,7 +6145,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54709,
+    id: '05791cdd-f31b-436c-90a5-a5b55b0f7c64',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 564',
@@ -6161,7 +6161,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54977,
+    id: 'c465879a-93c2-4406-a323-347845b344f5',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 835',
@@ -6177,7 +6177,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 55375,
+    id: '0c9627fa-e7e1-4faa-aeb5-d41b369a2366',
     status: 'Inactive',
     nextRead: '2020-04-28T03:17:05',
     name: 'Cubis PLC temp 770',
@@ -6193,7 +6193,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 55583,
+    id: '8333bc5f-243d-470f-8271-1b53b474765f',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 32',
@@ -6209,7 +6209,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 11269,
+    id: 'bff0b3c0-0e53-485e-ab94-6aa1735818d3',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 492',
@@ -6225,7 +6225,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23906,
+    id: '44e0006e-eb72-4c78-b2a9-c2ca6caf9a7d',
     status: 'Mouted',
     nextRead: '2020-04-09T22:09:03',
     name: 'Cubis PLC temp 280',
@@ -6241,7 +6241,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 32020,
+    id: '1249dcac-d8b9-4d25-ab01-cd1c9cf05825',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 836',
@@ -6257,7 +6257,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 32662,
+    id: '63d7f666-4a25-45b6-ba8c-5088eeaefa16',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 833',
@@ -6273,7 +6273,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 30,
+    id: '03add20d-6dfc-41df-a40f-24e0f4f9f980',
     status: 'Warehouse',
     nextRead: '2020-02-29T07:52:15',
     name: 'Cubis PLC temp 932',
@@ -6289,7 +6289,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 2041,
+    id: 'd04aadb5-0ab0-4d2b-a10c-34d77700743e',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 303',
@@ -6305,7 +6305,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 3181,
+    id: '6dbba31a-65d6-485f-b3f7-90a231927a2e',
     status: 'Mouted',
     nextRead: '2020-04-21T15:16:53',
     name: 'Cubis PLC temp 477',
@@ -6321,7 +6321,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 3961,
+    id: '6ee5f794-88d4-4b7b-afc4-4c88a2668654',
     status: 'Active',
     nextRead: '2020-04-20T02:21:56',
     name: 'Cubis PLC temp 538',
@@ -6337,7 +6337,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 7110,
+    id: 'aacabd35-0d1a-42fe-a254-0a7ea242ab1d',
     status: 'Active',
     nextRead: '2020-03-28T17:00:53',
     name: 'Cubis PLC temp 99',
@@ -6353,7 +6353,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7526,
+    id: 'eb352c5b-3872-4ac4-a745-6968add49a6e',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 197',
@@ -6369,7 +6369,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 8201,
+    id: '6ae8f385-06da-4e35-98f0-9fc2e37f703d',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 332',
@@ -6385,7 +6385,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9701,
+    id: '524dd465-ce1f-45e6-a5f5-ef6f72255aa4',
     status: 'Inactive',
     nextRead: '2020-03-21T07:08:39',
     name: 'Cubis PLC temp 542',
@@ -6401,7 +6401,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 9834,
+    id: '549f5ba6-9cab-420c-b332-b8499435bcef',
     status: 'Inactive',
     nextRead: '2020-03-18T17:54:34',
     name: 'Cubis PLC temp 159',
@@ -6417,7 +6417,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9836,
+    id: '9f0260c4-2176-4d7c-924c-c5f8e426c5b8',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 502',
@@ -6433,7 +6433,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 11265,
+    id: 'ea646c2e-bf71-4b35-9cd0-8cacf2b2cc38',
     status: 'Active',
     nextRead: '2020-03-18T14:59:30',
     name: 'Cubis PLC temp 926',
@@ -6449,7 +6449,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11271,
+    id: '7c7c30d1-3dd3-4c84-9d53-1589bb2b54b3',
     status: 'Warehouse',
     nextRead: '2020-04-29T19:44:20',
     name: 'Cubis PLC temp 954',
@@ -6465,7 +6465,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11417,
+    id: '0ca42d26-11d4-4d70-9722-e8e4cf0095fd',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 14',
@@ -6481,7 +6481,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12446,
+    id: '5cc8bc15-57c7-496f-a970-85b57fc7dfb3',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 716',
@@ -6497,7 +6497,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12541,
+    id: 'edc428d1-383b-4d3f-9a4a-414b7ad7fa96',
     status: 'Warehouse',
     nextRead: '2020-05-10T02:18:21',
     name: 'Cubis PLC temp 963',
@@ -6513,7 +6513,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14178,
+    id: '49ab223b-c797-4469-91e2-ca288c8bebf7',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 15',
@@ -6529,7 +6529,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 14544,
+    id: '0eb83df6-3827-4a42-b3bc-8ca5730607bd',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 894',
@@ -6545,7 +6545,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 16015,
+    id: '64d395e1-5fc8-47ff-a01b-c1cc719e049d',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 671',
@@ -6561,7 +6561,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 16796,
+    id: '52b4a85a-3a31-4df1-a324-96714b3500b5',
     status: 'Mouted',
     nextRead: '2020-03-11T13:20:11',
     name: 'Cubis PLC temp 137',
@@ -6577,7 +6577,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 18140,
+    id: '81e59e9b-5349-47be-b9fc-a7e357b7a577',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 997',
@@ -6593,7 +6593,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 19160,
+    id: '7b3fc4b5-4bfc-48e2-8d50-6565af31d402',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 226',
@@ -6609,7 +6609,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21675,
+    id: '50239ae0-ae6d-44c2-b736-5f609480f263',
     status: 'Inactive',
     nextRead: '2020-03-31T06:53:06',
     name: 'Cubis PLC temp 530',
@@ -6625,7 +6625,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 21950,
+    id: '0f937eef-338e-46f7-9966-044ab496312f',
     status: 'Inactive',
     nextRead: '2020-05-18T22:34:38',
     name: 'Cubis PLC temp 537',
@@ -6641,7 +6641,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 22331,
+    id: '9a9fd7fa-9762-4192-b997-2534077a40ea',
     status: 'Mouted',
     nextRead: '2020-05-13T14:33:22',
     name: 'Cubis PLC temp 176',
@@ -6657,7 +6657,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24206,
+    id: '524a1d8c-0b3f-4349-8304-c046e3423756',
     status: 'Inactive',
     nextRead: '2020-04-07T16:03:24',
     name: 'Cubis PLC temp 529',
@@ -6673,7 +6673,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 26080,
+    id: 'ce79edcf-f9c6-4151-bf3c-8e99017599ce',
     status: 'Active',
     nextRead: '2020-04-16T16:24:31',
     name: 'Cubis PLC temp 656',
@@ -6689,7 +6689,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 29582,
+    id: 'ea641585-65a2-44d4-b65f-f5a56422709b',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 331',
@@ -6705,7 +6705,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 30706,
+    id: '0e988923-9490-449c-bc7a-8d91ddfe7ea9',
     status: 'Warehouse',
     nextRead: '2020-03-26T09:18:38',
     name: 'Cubis PLC temp 468',
@@ -6721,7 +6721,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33916,
+    id: 'f7fa6b23-ed3e-43c6-bdcd-3eb09fc0bde6',
     status: 'Warehouse',
     nextRead: '2020-03-30T16:39:44',
     name: 'Cubis PLC temp 372',
@@ -6737,7 +6737,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33918,
+    id: '9d77d560-f230-4b15-9792-33f6c583c7c7',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 731',
@@ -6753,7 +6753,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35155,
+    id: '58f2aba6-b34c-4724-b0d3-2f372ca72b47',
     status: 'Warehouse',
     nextRead: '2020-05-09T19:29:03',
     name: 'Cubis PLC temp 50',
@@ -6769,7 +6769,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 37751,
+    id: 'b0270c1a-0d8a-4fb2-be73-3a12c1fb603a',
     status: 'Mouted',
     nextRead: '2020-04-05T08:06:08',
     name: 'Cubis PLC temp 941',
@@ -6785,7 +6785,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38594,
+    id: 'a90e5a37-b3b4-486c-8a90-e361a4f04a4b',
     status: 'Active',
     nextRead: '2020-03-12T15:47:54',
     name: 'Cubis PLC temp 4',
@@ -6801,7 +6801,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 38724,
+    id: 'b02d6aca-e2d1-4e3e-b66c-197e2e81ec43',
     status: 'Active',
     nextRead: '2020-03-05T07:26:35',
     name: 'Cubis PLC temp 157',
@@ -6817,7 +6817,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38835,
+    id: '5b328ce2-02b7-430f-9192-db03f96f7070',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 920',
@@ -6833,7 +6833,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 40684,
+    id: 'a95e604c-fd7c-4467-aef4-343a407dff79',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 583',
@@ -6849,7 +6849,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 42993,
+    id: '79fe53bf-2352-4ec5-8365-8d6cee0140a7',
     status: 'Active',
     nextRead: '2020-05-12T06:19:24',
     name: 'Cubis PLC temp 105',
@@ -6865,7 +6865,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 43996,
+    id: 'f3d94f9b-2969-472c-b186-0568f190d955',
     status: 'Active',
     nextRead: '2020-04-14T06:09:04',
     name: 'Cubis PLC temp 779',
@@ -6881,7 +6881,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 44107,
+    id: '0d5a23bf-695f-49c1-b0ed-50176a84e6b6',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 786',
@@ -6897,7 +6897,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 44109,
+    id: 'a7578625-ee10-4a24-b39c-de2ee0e7aefd',
     status: 'Mouted',
     nextRead: '2020-03-05T09:12:17',
     name: 'Cubis PLC temp 778',
@@ -6913,7 +6913,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5245,
+    id: 'f6deead8-3ffe-46b5-8a11-c0a3d070a159',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 485',
@@ -6929,7 +6929,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5246,
+    id: '407bca21-01ac-4fc8-8ebd-287dd494087a',
     status: 'Inactive',
     nextRead: '2020-04-27T14:50:40',
     name: 'Cubis PLC temp 432',
@@ -6945,7 +6945,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5281,
+    id: '43a0ddc3-3375-4148-81ae-3cb108b6e6a9',
     status: 'Warehouse',
     nextRead: '2020-03-14T20:10:26',
     name: 'Cubis PLC temp 928',
@@ -6961,7 +6961,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5285,
+    id: '7ef30735-827f-45eb-bc3c-b8ba12d4012f',
     status: 'Inactive',
     nextRead: '2020-04-01T07:49:17',
     name: 'Cubis PLC temp 81',
@@ -6977,7 +6977,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5777,
+    id: 'aa165034-a5fe-4535-947d-b34af22693fb',
     status: 'Active',
     nextRead: '2020-04-01T23:35:55',
     name: 'Cubis PLC temp 10',
@@ -6993,7 +6993,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 5822,
+    id: '7b0097be-59f0-4e9b-9fcc-cdc09cdd9a2d',
     status: 'Inactive',
     nextRead: '2020-04-01T11:53:16',
     name: 'Cubis PLC temp 175',
@@ -7009,7 +7009,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 5932,
+    id: '11d45868-c401-446f-9fe6-7c808473152a',
     status: 'Inactive',
     nextRead: '2020-05-11T17:39:24',
     name: 'Cubis PLC temp 832',
@@ -7025,7 +7025,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6056,
+    id: '38746cc1-9aae-4b8d-a47e-e0a5ff336237',
     status: 'Warehouse',
     nextRead: '2020-04-17T12:43:12',
     name: 'Cubis PLC temp 333',
@@ -7041,7 +7041,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6141,
+    id: 'd2eba286-fb3f-4017-9625-6e7c63686766',
     status: 'Active',
     nextRead: '2020-04-03T14:40:41',
     name: 'Cubis PLC temp 527',
@@ -7057,7 +7057,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6156,
+    id: 'f9eca964-18f2-4613-a40b-e0f992464366',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 252',
@@ -7073,7 +7073,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6168,
+    id: 'c58bab2c-a995-4962-abbd-aeeac4ea0499',
     status: 'Inactive',
     nextRead: '2020-03-24T20:59:50',
     name: 'Cubis PLC temp 257',
@@ -7089,7 +7089,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 6464,
+    id: 'a81b6cfb-c177-4585-9b63-67f6ab282d23',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 914',
@@ -7105,7 +7105,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6474,
+    id: 'aabb25f0-d71a-4ae5-8924-21296e87113e',
     status: 'Warehouse',
     nextRead: '2020-03-02T09:15:46',
     name: 'Cubis PLC temp 977',
@@ -7121,7 +7121,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 6477,
+    id: '31e090b3-3cdf-4ecd-8d14-f3444e8b22aa',
     status: 'Active',
     nextRead: '2020-03-18T03:14:37',
     name: 'Cubis PLC temp 995',
@@ -7137,7 +7137,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6659,
+    id: '6f6ee41c-670b-468c-88a8-adf75fbb08fd',
     status: 'Mouted',
     nextRead: '2020-05-20T01:44:24',
     name: 'Cubis PLC temp 413',
@@ -7153,7 +7153,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6812,
+    id: '83cab715-f183-4768-9b3e-b961f2f33544',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 592',
@@ -7169,7 +7169,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 6839,
+    id: '461a7a3d-76c4-4520-8974-ce7d88f1351c',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 691',
@@ -7185,7 +7185,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6878,
+    id: '8740e64c-4f57-496e-83af-26497d11e7db',
     status: 'Warehouse',
     nextRead: '2020-03-26T19:31:42',
     name: 'Cubis PLC temp 654',
@@ -7201,7 +7201,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 6914,
+    id: '38b788d1-1b24-4dcf-b494-c24cb121d9ea',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 480',
@@ -7217,7 +7217,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 6949,
+    id: '5ad450bb-3278-4e8e-a5cd-bbe3379dfaee',
     status: 'Inactive',
     nextRead: '2020-04-27T16:17:10',
     name: 'Cubis PLC temp 839',
@@ -7233,7 +7233,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 6971,
+    id: '7c6353f7-0429-4178-90bd-64c79ae2afe9',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 423',
@@ -7249,7 +7249,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 7086,
+    id: 'e7b29037-8e47-4ad3-88e5-fd27d56cee33',
     status: 'Mouted',
     nextRead: '2020-03-26T13:49:19',
     name: 'Cubis PLC temp 884',
@@ -7265,7 +7265,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7313,
+    id: 'f8e0b311-ceca-4dce-a4e0-97be2f9f506d',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 199',
@@ -7281,7 +7281,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 7566,
+    id: '6a79c4da-086a-4762-89af-c5bdbfe36a3c',
     status: 'Warehouse',
     nextRead: '2020-02-28T19:42:34',
     name: 'Cubis PLC temp 667',
@@ -7297,7 +7297,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 7655,
+    id: '6a82e00b-8ea8-489a-8cc4-e781fef116b9',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 53',
@@ -7313,7 +7313,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 8448,
+    id: 'b8d19103-ba72-48ed-b36b-ad9fecf8ca50',
     status: 'Inactive',
     nextRead: '2020-05-04T09:06:00',
     name: 'Cubis PLC temp 113',
@@ -7329,7 +7329,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 8754,
+    id: '97ef44e6-e722-4316-a623-547860c7798b',
     status: 'Active',
     nextRead: '2020-03-11T06:03:26',
     name: 'Cubis PLC temp 801',
@@ -7345,7 +7345,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 9240,
+    id: '5c215736-c914-47c9-b6c1-48ede93ea7d9',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 513',
@@ -7361,7 +7361,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9377,
+    id: 'd6c7e973-fc8c-409b-8588-9ba10669e3f8',
     status: 'Active',
     nextRead: '2020-02-24T15:15:59',
     name: 'Cubis PLC temp 71',
@@ -7377,7 +7377,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 9384,
+    id: '303278e0-79a0-4f77-995b-f80950d966e5',
     status: 'Inactive',
     nextRead: '2020-05-03T02:49:11',
     name: 'Cubis PLC temp 252',
@@ -7393,7 +7393,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9453,
+    id: '76701b89-62b0-44aa-a35b-bc4191ffd977',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 157',
@@ -7409,7 +7409,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9454,
+    id: '5b169e4d-de68-4803-84bc-1d20659f71ce',
     status: 'Inactive',
     nextRead: '2020-04-09T04:11:54',
     name: 'Cubis PLC temp 483',
@@ -7425,7 +7425,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 9895,
+    id: 'c27f46e3-6cb9-47f1-97ce-2529f25861f0',
     status: 'Mouted',
     nextRead: '2020-03-10T21:46:02',
     name: 'Cubis PLC temp 653',
@@ -7441,7 +7441,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 10201,
+    id: '3d270c19-3b42-4571-9af2-2d2ce0de275c',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 680',
@@ -7457,7 +7457,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 10473,
+    id: 'bc3b90b0-8757-49ef-b0db-4bffe44dfaf7',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 710',
@@ -7473,7 +7473,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 10601,
+    id: '3b3403b9-997f-4c47-9cd8-4d4650517160',
     status: 'Active',
     nextRead: '2020-04-15T04:53:49',
     name: 'Cubis PLC temp 96',
@@ -7489,7 +7489,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 10764,
+    id: 'ee86be6e-f54a-47ae-b90e-9e4a23321684',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 659',
@@ -7505,7 +7505,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 10805,
+    id: '301861a4-090a-42b9-84b6-630170d45dd2',
     status: 'Inactive',
     nextRead: '2020-03-21T14:49:06',
     name: 'Cubis PLC temp 846',
@@ -7521,7 +7521,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 11389,
+    id: '97f1d752-c63c-4b6e-bd5a-5ad30f46bdbe',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 957',
@@ -7537,7 +7537,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 11555,
+    id: '357deeb8-9fbc-418e-a587-945689af9045',
     status: 'Inactive',
     nextRead: '2020-04-26T05:36:57',
     name: 'Cubis PLC temp 6',
@@ -7553,7 +7553,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 11734,
+    id: '5a838039-f9f7-4a2e-b799-308c923eb1c5',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 788',
@@ -7569,7 +7569,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12467,
+    id: '118ca11c-26c7-42a8-a08d-74560a60b7a0',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 759',
@@ -7585,7 +7585,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12535,
+    id: 'edc39ed6-7f69-4c9f-9545-7566ad98c2cf',
     status: 'Active',
     nextRead: '2020-05-02T09:25:49',
     name: 'Cubis PLC temp 470',
@@ -7601,7 +7601,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 12694,
+    id: '72841136-090a-4c8e-b8f2-00c8da821a95',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 829',
@@ -7617,7 +7617,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 12696,
+    id: '4f92cee8-b843-4b88-84e0-9d524052005c',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 58',
@@ -7633,7 +7633,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 12736,
+    id: 'b4156d82-0b7f-4999-9afd-5947011194e3',
     status: 'Active',
     nextRead: '2020-04-24T20:14:47',
     name: 'Cubis PLC temp 483',
@@ -7649,7 +7649,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13047,
+    id: '26787675-bc61-4b39-803f-cfd09888eaca',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 396',
@@ -7665,7 +7665,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 13260,
+    id: '2255517d-89da-478f-951a-65ad15a8387d',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 691',
@@ -7681,7 +7681,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13286,
+    id: '462940d3-814c-4d11-bc04-3d405b244e24',
     status: 'Active',
     nextRead: '2020-02-26T14:45:21',
     name: 'Cubis PLC temp 292',
@@ -7697,7 +7697,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 13422,
+    id: 'fa5f7f0f-4ca4-4219-bfd8-5a4376b1ec7b',
     status: 'Inactive',
     nextRead: '2020-04-07T01:25:25',
     name: 'Cubis PLC temp 699',
@@ -7713,7 +7713,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 14316,
+    id: '149792fe-02d0-41e4-903a-507ebc84188e',
     status: 'Active',
     nextRead: '2020-03-02T12:16:23',
     name: 'Cubis PLC temp 351',
@@ -7729,7 +7729,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14442,
+    id: '30e12c3d-7e5e-46d6-99fa-9519b9796ce0',
     status: 'Warehouse',
     nextRead: '2020-04-18T10:53:48',
     name: 'Cubis PLC temp 341',
@@ -7745,7 +7745,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 14527,
+    id: '315eddd4-8796-463e-8167-534941eb171e',
     status: 'Warehouse',
     nextRead: '2020-02-25T21:01:05',
     name: 'Cubis PLC temp 927',
@@ -7761,7 +7761,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14789,
+    id: '27182422-d8e4-4a1b-b7d3-46b52d3805a4',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 359',
@@ -7777,7 +7777,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 14932,
+    id: '4d565ddc-27a9-46b7-9efa-c87d3bc65e50',
     status: 'Warehouse',
     nextRead: '2020-04-30T16:36:39',
     name: 'Cubis PLC temp 208',
@@ -7793,7 +7793,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 14989,
+    id: '74e55ba2-760c-45b8-bc42-c493d36c7068',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 111',
@@ -7809,7 +7809,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 15277,
+    id: 'cf5ff596-3594-4b59-b88e-56b88cba8654',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 832',
@@ -7825,7 +7825,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 15293,
+    id: '0c571b9b-b17f-4b33-8159-b36368133f3a',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 523',
@@ -7841,7 +7841,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 15853,
+    id: 'cf97e344-1dc6-4870-8a43-fd83f9aa2f23',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 728',
@@ -7857,7 +7857,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 15862,
+    id: 'f6a57247-b93e-4f06-be9f-bd2a4cf5f2cb',
     status: 'Mouted',
     nextRead: '2020-04-30T23:25:26',
     name: 'Cubis PLC temp 64',
@@ -7873,7 +7873,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 15938,
+    id: 'a6c00c6f-9d75-4e8c-8a66-ab832004e0a6',
     status: 'Active',
     nextRead: '2020-03-16T10:27:18',
     name: 'Cubis PLC temp 147',
@@ -7889,7 +7889,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 15948,
+    id: '95cfb629-667f-4361-bcc6-0a50b2e6ac9f',
     status: 'Warehouse',
     nextRead: '2020-04-28T16:15:56',
     name: 'Cubis PLC temp 317',
@@ -7905,7 +7905,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 16562,
+    id: '92d7c747-37ea-422c-9756-156dfd5c336b',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 761',
@@ -7921,7 +7921,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 16723,
+    id: '201831d0-b23b-4826-8c83-a987a497ab18',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 29',
@@ -7937,7 +7937,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 17300,
+    id: '18f917da-7e83-4dac-a6ae-6593db29c1cf',
     status: 'Warehouse',
     nextRead: '2020-05-13T12:30:48',
     name: 'Cubis PLC temp 907',
@@ -7953,7 +7953,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 17414,
+    id: 'cb563608-a542-4928-9a22-a2cb2b63c03b',
     status: 'Active',
     nextRead: '2020-04-30T10:29:52',
     name: 'Cubis PLC temp 796',
@@ -7969,7 +7969,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 17547,
+    id: 'ab36e3e2-dd7c-43e5-ba7b-885f31782807',
     status: 'Mouted',
     nextRead: '2020-04-25T02:48:28',
     name: 'Cubis PLC temp 498',
@@ -7985,7 +7985,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 18020,
+    id: '95df261c-76b1-413b-add8-ea7efbe8e4cc',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 192',
@@ -8001,7 +8001,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 18082,
+    id: '395ef2cb-5237-487f-932f-1d77f36b1beb',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 777',
@@ -8017,7 +8017,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 18243,
+    id: '4e5b2742-5c31-46cc-9e2b-745fe278d601',
     status: 'Active',
     nextRead: '2020-04-28T04:11:58',
     name: 'Cubis PLC temp 728',
@@ -8033,7 +8033,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 18495,
+    id: '81df00bf-e733-4927-8869-5d6a443238d5',
     status: 'Warehouse',
     nextRead: '2020-04-06T05:22:59',
     name: 'Cubis PLC temp 855',
@@ -8049,7 +8049,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 18496,
+    id: '40c53d57-82c2-48fe-b7eb-16fd0dafa2d9',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 788',
@@ -8065,7 +8065,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 18509,
+    id: '27f9443c-55ab-4eaa-880f-3cd8024e121b',
     status: 'Active',
     nextRead: '2020-03-22T19:28:15',
     name: 'Cubis PLC temp 283',
@@ -8081,7 +8081,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 18511,
+    id: '4b798530-68f0-4de4-82e9-5c94cdd25f07',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 189',
@@ -8097,7 +8097,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 18764,
+    id: 'd54aace5-c988-48c1-be51-8ca76e420011',
     status: 'Mouted',
     nextRead: '2020-04-21T15:42:27',
     name: 'Cubis PLC temp 219',
@@ -8113,7 +8113,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 19688,
+    id: 'ed7590cb-921c-4e23-b18d-c0536056eee7',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 923',
@@ -8129,7 +8129,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 19801,
+    id: '235de276-4015-4d5e-b29a-4d5d23c94887',
     status: 'Warehouse',
     nextRead: '2020-04-07T17:10:45',
     name: 'Cubis PLC temp 884',
@@ -8145,7 +8145,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 19832,
+    id: '66c25ff4-bd0a-4643-b77b-9709dd538588',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 407',
@@ -8161,7 +8161,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 19873,
+    id: '7203a56a-5771-4974-8d44-e6d29124e22e',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 640',
@@ -8177,7 +8177,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 20122,
+    id: '5c158c11-d556-43dc-b373-b62034d9f4c1',
     status: 'Mouted',
     nextRead: '2020-02-25T03:07:05',
     name: 'Cubis PLC temp 456',
@@ -8193,7 +8193,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 20138,
+    id: 'f1be051d-547e-4982-98f5-89bb0d6e74d9',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 738',
@@ -8209,7 +8209,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 20259,
+    id: 'a2e934fb-7248-4e83-8879-3ddaa8d9b210',
     status: 'Inactive',
     nextRead: '2020-05-20T03:18:44',
     name: 'Cubis PLC temp 66',
@@ -8225,7 +8225,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 20537,
+    id: 'f07e4aaf-171d-4a7f-a8e7-c8f4ef8512d0',
     status: 'Active',
     nextRead: '2020-03-26T10:26:24',
     name: 'Cubis PLC temp 982',
@@ -8241,7 +8241,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 20549,
+    id: '86d186c9-5486-498b-86d8-092fb35b17ae',
     status: 'Inactive',
     nextRead: '2020-03-18T23:26:17',
     name: 'Cubis PLC temp 376',
@@ -8257,7 +8257,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 20789,
+    id: 'ff25e1ca-f680-4d95-a536-dee6a86f9427',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 528',
@@ -8273,7 +8273,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 20907,
+    id: 'c1859598-2968-4d28-9171-94f082a730b1',
     status: 'Inactive',
     nextRead: '2020-04-09T08:27:28',
     name: 'Cubis PLC temp 872',
@@ -8289,7 +8289,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21222,
+    id: 'cd9a921e-0ae6-4c10-8a99-ba8384c8406f',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 684',
@@ -8305,7 +8305,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 21270,
+    id: '88fc1f5a-845d-4483-bc5e-bdc8cf2a4892',
     status: 'Inactive',
     nextRead: '2020-04-03T18:50:44',
     name: 'Cubis PLC temp 784',
@@ -8321,7 +8321,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21579,
+    id: 'c4f191ca-e80f-445b-a615-1d9c316af3ee',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 475',
@@ -8337,7 +8337,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 21648,
+    id: '0e23b67a-6df5-4d4a-b30d-4492d4f4998e',
     status: 'Warehouse',
     nextRead: '2020-05-15T01:42:03',
     name: 'Cubis PLC temp 465',
@@ -8353,7 +8353,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21800,
+    id: '459af72c-2b0b-43d1-a560-d65cf7a07748',
     status: 'Mouted',
     nextRead: '2020-03-02T03:47:28',
     name: 'Cubis PLC temp 489',
@@ -8369,7 +8369,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 21865,
+    id: 'ad7260c5-32d1-443c-961a-f5036e7159b2',
     status: 'Inactive',
     nextRead: '2020-02-27T18:57:13',
     name: 'Cubis PLC temp 422',
@@ -8385,7 +8385,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22150,
+    id: '1ef5da72-8d87-46a8-ad2c-f422a4258847',
     status: 'Mouted',
     nextRead: '2020-05-01T22:53:10',
     name: 'Cubis PLC temp 827',
@@ -8401,7 +8401,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22156,
+    id: 'd61a8394-939d-43ab-95c6-a2a38d2146cf',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 548',
@@ -8417,7 +8417,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 22230,
+    id: '42e41fdb-ba5d-460d-b3bf-a49930039a05',
     status: 'Active',
     nextRead: '2020-04-04T17:31:56',
     name: 'Cubis PLC temp 142',
@@ -8433,7 +8433,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 22508,
+    id: '546f231f-f8a6-4ce4-870f-406f3501bc7a',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 917',
@@ -8449,7 +8449,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22522,
+    id: 'c116bcd6-1ac6-46ea-acbe-fc07d13297df',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 726',
@@ -8465,7 +8465,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22539,
+    id: '67c40bf3-8ad5-400d-8f96-47b01a6e93ae',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 939',
@@ -8481,7 +8481,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 22759,
+    id: '1d388edd-7c8d-420d-a660-d82360228aef',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 660',
@@ -8497,7 +8497,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 22794,
+    id: 'b3bb3904-222d-491e-9c8f-44f2a1d9bc53',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 540',
@@ -8513,7 +8513,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23331,
+    id: '7afd9f18-794a-4789-8208-a6a9d22c1798',
     status: 'Warehouse',
     nextRead: '2020-04-29T21:14:13',
     name: 'Cubis PLC temp 188',
@@ -8529,7 +8529,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 23356,
+    id: '562bbacc-0730-4588-9ff2-3ea2e1a7dc8e',
     status: 'Warehouse',
     nextRead: '2020-03-09T20:30:26',
     name: 'Cubis PLC temp 569',
@@ -8545,7 +8545,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 23555,
+    id: 'b3327e89-3946-4f81-baf8-1cac00340db2',
     status: 'Inactive',
     nextRead: '2020-04-08T16:21:08',
     name: 'Cubis PLC temp 656',
@@ -8561,7 +8561,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23604,
+    id: '80ec38c1-2820-44c5-91ac-725600e95872',
     status: 'Inactive',
     nextRead: '2020-04-08T03:38:30',
     name: 'Cubis PLC temp 616',
@@ -8577,7 +8577,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 23752,
+    id: 'e73b3bc2-42ef-4019-9cf1-e00a15bfaf9e',
     status: 'Warehouse',
     nextRead: '2020-04-25T00:30:27',
     name: 'Cubis PLC temp 548',
@@ -8593,7 +8593,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 23974,
+    id: '96db2a66-0abd-47fe-9565-7f19dbb960b7',
     status: 'Inactive',
     nextRead: '2020-04-29T20:07:37',
     name: 'Cubis PLC temp 957',
@@ -8609,7 +8609,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24225,
+    id: '1bf63825-db8e-43af-b8c4-b2b49183113a',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 992',
@@ -8625,7 +8625,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24317,
+    id: '03c8efac-c215-40c2-9456-fb0816d4eb2f',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 256',
@@ -8641,7 +8641,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 24365,
+    id: 'aa08451b-d019-415f-9cc2-8a3c1aad1069',
     status: 'Warehouse',
     nextRead: '2020-03-18T19:22:48',
     name: 'Cubis PLC temp 516',
@@ -8657,7 +8657,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 24451,
+    id: 'ed627f2c-66f0-40a8-bce6-456f4f656e08',
     status: 'Inactive',
     nextRead: '2020-03-21T16:50:57',
     name: 'Cubis PLC temp 326',
@@ -8673,7 +8673,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 25770,
+    id: '182d14db-709d-4bfd-b09a-b32801d64d67',
     status: 'Warehouse',
     nextRead: '2020-05-14T01:08:18',
     name: 'Cubis PLC temp 161',
@@ -8689,7 +8689,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 26291,
+    id: '7f21915f-2e4a-403b-9d4d-7eae5940ac98',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 854',
@@ -8705,7 +8705,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 26815,
+    id: 'ba6d346e-5319-4605-b77c-8f841d50c68c',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 27',
@@ -8721,7 +8721,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 27054,
+    id: '0c1f6538-9bde-4013-baef-0170d84e2b8d',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 81',
@@ -8737,7 +8737,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 27152,
+    id: 'c7984272-a619-4000-9467-1afd2a53003f',
     status: 'Warehouse',
     nextRead: '2020-05-18T15:37:24',
     name: 'Cubis PLC temp 700',
@@ -8753,7 +8753,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 27222,
+    id: 'c85342d4-7e38-496b-8e42-70715c268f89',
     status: 'Warehouse',
     nextRead: '2020-05-03T14:53:11',
     name: 'Cubis PLC temp 538',
@@ -8769,7 +8769,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 27314,
+    id: 'aa317336-1f93-4766-b588-6c73d554499b',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 329',
@@ -8785,7 +8785,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 28158,
+    id: '1ca23558-3f6b-45ee-8b77-33a529946b90',
     status: 'Active',
     nextRead: '2020-03-14T05:04:30',
     name: 'Cubis PLC temp 483',
@@ -8801,7 +8801,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 28631,
+    id: '3a845f3c-a785-42f8-9907-991f7f0f00ce',
     status: 'Warehouse',
     nextRead: '2020-03-12T14:31:49',
     name: 'Cubis PLC temp 651',
@@ -8817,7 +8817,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 28849,
+    id: '469924aa-9d1e-420c-9b7e-675f57d524fe',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 482',
@@ -8833,7 +8833,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29673,
+    id: '04b6601f-d17e-4e62-a1e9-4ec6bc651e56',
     status: 'Warehouse',
     nextRead: '2020-03-07T11:43:49',
     name: 'Cubis PLC temp 542',
@@ -8849,7 +8849,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 29859,
+    id: '9173ce28-db69-4adf-afb9-c7ec2752cb27',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 670',
@@ -8865,7 +8865,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 29940,
+    id: 'bb7267c7-e456-4ce7-862c-1458927545dc',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 378',
@@ -8881,7 +8881,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 30190,
+    id: '164e57c3-21e3-4241-98af-d0be8c090441',
     status: 'Warehouse',
     nextRead: '2020-04-14T22:46:53',
     name: 'Cubis PLC temp 143',
@@ -8897,7 +8897,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 31445,
+    id: '661548ca-b2e8-4227-bf8e-a415b83bff4b',
     status: 'Mouted',
     nextRead: '2020-04-09T17:33:51',
     name: 'Cubis PLC temp 718',
@@ -8913,7 +8913,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31624,
+    id: '8ae5d9e2-15ad-4437-b1d4-4bc493ec5941',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 990',
@@ -8929,7 +8929,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 31730,
+    id: '0bde9eee-055c-400b-a9fe-b1309d6c5459',
     status: 'Inactive',
     nextRead: '2020-04-03T08:32:08',
     name: 'Cubis PLC temp 74',
@@ -8945,7 +8945,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 31776,
+    id: '3be83992-fbc7-45a0-bda1-80b26f194c9f',
     status: 'Active',
     nextRead: '2020-03-25T07:12:09',
     name: 'Cubis PLC temp 157',
@@ -8961,7 +8961,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 31827,
+    id: '813104c5-3ff9-47af-9986-4055a0eb41b1',
     status: 'Mouted',
     nextRead: '2020-03-05T04:16:51',
     name: 'Cubis PLC temp 377',
@@ -8977,7 +8977,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 31861,
+    id: '8428cc65-c5dc-4044-b0b8-32658897ef34',
     status: 'Inactive',
     nextRead: '2020-03-06T00:41:41',
     name: 'Cubis PLC temp 300',
@@ -8993,7 +8993,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 31898,
+    id: 'ac43ee24-1759-4369-9417-34bddb268735',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 255',
@@ -9009,7 +9009,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 31971,
+    id: 'bf7a3512-74b8-46e8-b12d-7ae95d0a2a71',
     status: 'Inactive',
     nextRead: '2020-04-15T12:02:50',
     name: 'Cubis PLC temp 15',
@@ -9025,7 +9025,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33283,
+    id: 'f1050343-0ea3-4cb6-b3de-9dc47fe2ddee',
     status: 'Mouted',
     nextRead: '2020-02-28T20:09:48',
     name: 'Cubis PLC temp 140',
@@ -9041,7 +9041,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33376,
+    id: 'c7ef54b0-a384-4a54-b75d-3f9262a8a931',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 106',
@@ -9057,7 +9057,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34322,
+    id: '9ec422c5-4dee-41da-9439-fd88a5ecb762',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 460',
@@ -9073,7 +9073,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33948,
+    id: '8d95e74d-5ffd-4172-8e65-2e80911f7ba5',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 901',
@@ -9089,7 +9089,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 33950,
+    id: 'e1140da0-36b1-4121-8d91-7aedfd288b4f',
     status: 'Mouted',
     nextRead: '2020-05-08T08:51:07',
     name: 'Cubis PLC temp 632',
@@ -9105,7 +9105,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 33960,
+    id: '570b97a1-b2be-4a51-bfc5-964d3f7a78bf',
     status: 'Active',
     nextRead: '2020-03-09T16:46:41',
     name: 'Cubis PLC temp 577',
@@ -9121,7 +9121,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 34019,
+    id: 'fb5e2a54-44bd-4960-adc3-c23c045778a3',
     status: 'Mouted',
     nextRead: '2020-03-08T10:04:27',
     name: 'Cubis PLC temp 298',
@@ -9137,7 +9137,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34022,
+    id: 'b509326d-0234-4787-a881-1a04c7d47366',
     status: 'Active',
     nextRead: '2020-04-01T06:56:16',
     name: 'Cubis PLC temp 5',
@@ -9153,7 +9153,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34199,
+    id: '1eab917a-8bdf-4525-a930-daf4e55f6f5b',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 667',
@@ -9169,7 +9169,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39260,
+    id: '23be96a2-1a5f-4759-a8b2-5520ee7ca48c',
     status: 'Warehouse',
     nextRead: '2020-05-20T22:04:38',
     name: 'Cubis PLC temp 335',
@@ -9185,7 +9185,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 34757,
+    id: 'de6bb9af-a911-4ab4-b90f-785176a31e9a',
     status: 'Warehouse',
     nextRead: '2020-04-25T20:45:43',
     name: 'Cubis PLC temp 422',
@@ -9201,7 +9201,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 34774,
+    id: '68a4d4c6-efe6-457b-baa6-f95b7e8777a6',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 954',
@@ -9217,7 +9217,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35019,
+    id: '79495846-5853-4ae7-a1e7-5be566eb04af',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 68',
@@ -9233,7 +9233,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 35325,
+    id: '17f8e463-f870-4809-85b1-d9e8551e8adb',
     status: 'Active',
     nextRead: '2020-04-01T11:02:20',
     name: 'Cubis PLC temp 165',
@@ -9249,7 +9249,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35634,
+    id: 'f6e3daf8-d18b-4664-9a49-94f4efe61ec9',
     status: 'Active',
     nextRead: '2020-04-23T18:38:45',
     name: 'Cubis PLC temp 997',
@@ -9265,7 +9265,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35859,
+    id: '6528c4c6-fb7c-4d11-b81c-a1fffe08fe69',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 268',
@@ -9281,7 +9281,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 35861,
+    id: '9498b9b3-7f24-4fd4-b027-a92ed0eb9f81',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 241',
@@ -9297,7 +9297,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 36880,
+    id: 'd49c30c6-3786-4df1-9950-f4df785b39a3',
     status: 'Inactive',
     nextRead: '2020-03-10T03:38:30',
     name: 'Cubis PLC temp 627',
@@ -9313,7 +9313,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 36912,
+    id: 'e945211a-2728-4d77-a815-62ac0c80a83e',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 918',
@@ -9329,7 +9329,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 36956,
+    id: '9ba290a1-9aa3-4fe4-9f42-46be5ab409ea',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 391',
@@ -9345,7 +9345,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37308,
+    id: '5f8ea9f1-92bd-43a6-810a-bb3674b4e8d5',
     status: 'Active',
     nextRead: '2020-04-17T00:42:22',
     name: 'Cubis PLC temp 637',
@@ -9361,7 +9361,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 37477,
+    id: '1af3c61c-cc61-42fd-ace9-25aea36a0f77',
     status: 'Active',
     nextRead: '2020-03-18T15:48:51',
     name: 'Cubis PLC temp 295',
@@ -9377,7 +9377,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 37489,
+    id: 'f95dcf3a-8b8b-4e2c-87b0-800a1c032c7e',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 321',
@@ -9393,7 +9393,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37570,
+    id: '01b7c5f3-a92d-48a1-8429-9401baa2179f',
     status: 'Warehouse',
     nextRead: '2020-04-09T08:18:03',
     name: 'Cubis PLC temp 26',
@@ -9409,7 +9409,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 37653,
+    id: '8ce09193-da0f-45a9-9ad6-e7312476e467',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 339',
@@ -9425,7 +9425,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 37774,
+    id: 'ce9331e8-b1a3-4cb0-80e0-6e101c2c2dea',
     status: 'Inactive',
     nextRead: '2020-03-24T14:59:47',
     name: 'Cubis PLC temp 181',
@@ -9441,7 +9441,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38244,
+    id: 'd94a66bb-6685-4340-90d8-63b892ebc0ea',
     status: 'Inactive',
     nextRead: '2020-02-23T03:32:54',
     name: 'Cubis PLC temp 214',
@@ -9457,7 +9457,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 38325,
+    id: '132a9d5c-10f0-4817-96c5-b5b44879f9c6',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 371',
@@ -9473,7 +9473,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 38580,
+    id: '79bd586f-7631-4559-8965-4bac62eceb1a',
     status: 'Mouted',
     nextRead: '2020-04-14T11:48:20',
     name: 'Cubis PLC temp 733',
@@ -9489,7 +9489,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39234,
+    id: 'b2b6bcd0-a999-47cf-9724-57e72eb5ff5d',
     status: 'Warehouse',
     nextRead: '2020-04-17T19:07:05',
     name: 'Cubis PLC temp 550',
@@ -9505,7 +9505,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39262,
+    id: 'c3a08be0-5f5d-4107-82ae-f338b7f8faf0',
     status: 'Warehouse',
     nextRead: '2020-05-11T16:23:31',
     name: 'Cubis PLC temp 589',
@@ -9521,7 +9521,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39636,
+    id: 'ae85831f-f327-40db-a1c7-82e04e99ba62',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 951',
@@ -9537,7 +9537,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 39849,
+    id: 'ba0e47b4-c3d0-4cde-9fa0-237b6462323d',
     status: 'Active',
     nextRead: '2020-03-06T16:56:58',
     name: 'Cubis PLC temp 967',
@@ -9553,7 +9553,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40176,
+    id: '2a038ed0-839f-4f72-b14e-64b47732ccee',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 402',
@@ -9569,7 +9569,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 40530,
+    id: 'a1a78b07-e5b8-4263-bbee-4f355d8c3e2a',
     status: 'Active',
     nextRead: '2020-03-07T15:08:50',
     name: 'Cubis PLC temp 40',
@@ -9585,7 +9585,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40578,
+    id: '82b8d6b3-b4d5-480a-980e-098351a6ccab',
     status: 'Warehouse',
     nextRead: '2020-03-02T09:27:59',
     name: 'Cubis PLC temp 568',
@@ -9601,7 +9601,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 40817,
+    id: '23609d7b-4712-464a-9341-1b4cf752f6fb',
     status: 'Warehouse',
     nextRead: '2020-03-07T08:24:43',
     name: 'Cubis PLC temp 169',
@@ -9617,7 +9617,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41215,
+    id: 'ab06c761-c26d-4660-a315-43cb034bc172',
     status: 'Mouted',
     nextRead: '2020-04-07T20:40:05',
     name: 'Cubis PLC temp 952',
@@ -9633,7 +9633,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41573,
+    id: 'ebd4f2c0-65fd-4810-b7ed-c1e8892f47d9',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 548',
@@ -9649,7 +9649,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 41619,
+    id: 'a3dd82c7-dd64-4376-9610-c15f36702065',
     status: 'Active',
     nextRead: '2020-03-23T02:22:27',
     name: 'Cubis PLC temp 801',
@@ -9665,7 +9665,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 41621,
+    id: '0ae0b834-680a-4908-b699-12b5979ee1f2',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 138',
@@ -9681,7 +9681,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 41819,
+    id: '71dd34a4-68b1-499d-874e-20fb43db6286',
     status: 'Inactive',
     nextRead: '2020-05-14T13:20:34',
     name: 'Cubis PLC temp 939',
@@ -9697,7 +9697,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 42282,
+    id: '28abc466-b078-414e-8bdf-a6b307878240',
     status: 'Warehouse',
     nextRead: '2020-03-29T18:56:42',
     name: 'Cubis PLC temp 137',
@@ -9713,7 +9713,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 42366,
+    id: '5d003e46-11ec-4a91-b0e9-beed6b4fda4e',
     status: 'Active',
     nextRead: '2020-03-01T14:13:28',
     name: 'Cubis PLC temp 194',
@@ -9729,7 +9729,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 42778,
+    id: '66e80bdc-b3d9-48ac-b0f1-8eafee13706d',
     status: 'Mouted',
     nextRead: '2020-03-10T16:39:56',
     name: 'Cubis PLC temp 866',
@@ -9745,7 +9745,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 42869,
+    id: '331fba28-7c0d-4296-a8c0-44640015aa6c',
     status: 'Active',
     nextRead: '2020-05-10T04:53:54',
     name: 'Cubis PLC temp 264',
@@ -9761,7 +9761,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 42938,
+    id: '1d20d775-5f4d-4faa-bdc6-af890bf32765',
     status: 'Warehouse',
     nextRead: '2020-05-11T14:41:59',
     name: 'Cubis PLC temp 849',
@@ -9777,7 +9777,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 43224,
+    id: 'f681b7de-d8d6-4b89-a770-adb401c1c4e6',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 566',
@@ -9793,7 +9793,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 43303,
+    id: '079044cd-816a-42e8-9d23-dda57cd9d9e7',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 517',
@@ -9809,7 +9809,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 43409,
+    id: 'b1bd7bbc-7224-4470-9d45-60c6cdf4c99e',
     status: 'Inactive',
     nextRead: '2020-05-13T19:26:54',
     name: 'Cubis PLC temp 512',
@@ -9825,7 +9825,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 43512,
+    id: '8384853c-0535-44ab-84f9-a8514cf62f33',
     status: 'Mouted',
     nextRead: '2020-05-18T05:42:40',
     name: 'Cubis PLC temp 769',
@@ -9841,7 +9841,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 43754,
+    id: '4f34c8d4-f4ba-4259-96c4-e3c52e636b61',
     status: 'Inactive',
     nextRead: '2020-04-09T21:14:43',
     name: 'Cubis PLC temp 120',
@@ -9857,7 +9857,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 43893,
+    id: '84383773-8124-45ec-8de0-ec576cd7b170',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 541',
@@ -9873,7 +9873,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 44064,
+    id: 'a26157a7-9b1e-4913-aef4-24ff6e73c47f',
     status: 'Inactive',
     nextRead: '2020-03-25T07:03:53',
     name: 'Cubis PLC temp 242',
@@ -9889,7 +9889,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 44383,
+    id: '6a3a2113-d702-43e7-8488-9fab5a561043',
     status: 'Mouted',
     nextRead: '2020-05-07T22:28:20',
     name: 'Cubis PLC temp 360',
@@ -9905,7 +9905,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 44483,
+    id: '4d60574b-154e-4ad3-b130-79541a317d08',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 743',
@@ -9921,7 +9921,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 45101,
+    id: 'ef0a820a-e8b5-4c41-a7c9-cfe0b9eefad9',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 907',
@@ -9937,7 +9937,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 45382,
+    id: 'fba26af3-a458-44cb-84d1-558bd692bbac',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 985',
@@ -9953,7 +9953,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 45462,
+    id: 'fd7aab2e-ac02-4e60-9d17-3a2a37702784',
     status: 'Active',
     nextRead: '2020-03-25T05:24:48',
     name: 'Cubis PLC temp 767',
@@ -9969,7 +9969,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 45842,
+    id: 'cf3b83ac-e350-4a4e-bb84-3c11a2ea4247',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 862',
@@ -9985,7 +9985,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 46077,
+    id: '7e12bba4-b9a3-444d-a764-b897f774b864',
     status: 'Active',
     nextRead: '2020-05-20T15:43:18',
     name: 'Cubis PLC temp 688',
@@ -10001,7 +10001,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46224,
+    id: '58b11522-2451-40cc-820f-9997a79cd58c',
     status: 'Active',
     nextRead: '2020-05-14T10:52:17',
     name: 'Cubis PLC temp 5',
@@ -10017,7 +10017,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46324,
+    id: 'bc7d54a9-3506-4aa1-8b24-ab691ad8452a',
     status: 'Warehouse',
     nextRead: '2020-04-26T13:28:26',
     name: 'Cubis PLC temp 655',
@@ -10033,7 +10033,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46453,
+    id: '3c7450a8-cad3-45f9-8449-5772b580d014',
     status: 'Warehouse',
     nextRead: '2020-04-08T23:23:47',
     name: 'Cubis PLC temp 474',
@@ -10049,7 +10049,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 46885,
+    id: '1c21ad03-767a-40c2-97fc-db1b4da07027',
     status: 'Inactive',
     nextRead: '2020-04-30T21:35:32',
     name: 'Cubis PLC temp 496',
@@ -10065,7 +10065,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 47297,
+    id: '3a0c420e-51e4-47d7-8afd-f84187ee9f4f',
     status: 'Active',
     nextRead: '2020-05-21T00:32:39',
     name: 'Cubis PLC temp 305',
@@ -10081,7 +10081,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 47408,
+    id: 'f81c0f63-bec6-44f6-8ec7-17c088b925e7',
     status: 'Mouted',
     nextRead: '2020-04-24T06:42:53',
     name: 'Cubis PLC temp 826',
@@ -10097,7 +10097,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 47713,
+    id: '458b1f8e-cc77-4290-acb9-86e630fe7c2f',
     status: 'Mouted',
     nextRead: '2020-03-22T23:38:01',
     name: 'Cubis PLC temp 813',
@@ -10113,7 +10113,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 47715,
+    id: '994bb8f4-ee37-4613-a2a8-2fc083f2613d',
     status: 'Mouted',
     nextRead: '2020-04-17T03:54:32',
     name: 'Cubis PLC temp 959',
@@ -10129,7 +10129,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 47956,
+    id: 'e7439456-68a3-4465-a4b3-5de922f99d8e',
     status: 'Warehouse',
     nextRead: '2020-04-18T20:35:16',
     name: 'Cubis PLC temp 680',
@@ -10145,7 +10145,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48198,
+    id: '509910fb-e62a-4c28-9835-9cbf6eae932f',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 263',
@@ -10161,7 +10161,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48354,
+    id: 'ff4183ca-a161-49c8-ac0b-7648f3edb84e',
     status: 'Warehouse',
     nextRead: '2020-05-01T08:15:54',
     name: 'Cubis PLC temp 395',
@@ -10177,7 +10177,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48362,
+    id: '2c98d4b2-e520-4833-8842-817722d60eda',
     status: 'Active',
     nextRead: '2020-03-20T23:36:57',
     name: 'Cubis PLC temp 785',
@@ -10193,7 +10193,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 48421,
+    id: '0a30dcac-2321-4a3d-8f5e-09e9dcd5ad3c',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 295',
@@ -10209,7 +10209,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 48695,
+    id: 'fa58b4dc-af11-456e-b7dd-6da56b530639',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 16',
@@ -10225,7 +10225,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 48714,
+    id: '8f1d8581-75e1-43c2-8728-3336bf68b5e3',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 973',
@@ -10241,7 +10241,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 48876,
+    id: 'ff8f4a89-46c0-4598-a09f-0b16cee8826a',
     status: 'Mouted',
     nextRead: '2020-04-04T09:57:13',
     name: 'Cubis PLC temp 4',
@@ -10257,7 +10257,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 49553,
+    id: '8a6d38b8-d06a-40b7-aed5-9bb68cfe0368',
     status: 'Active',
     nextRead: null,
     name: 'Cubis PLC temp 627',
@@ -10273,7 +10273,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 50482,
+    id: 'b4006df6-c48a-443a-8320-b014968ca3c7',
     status: 'Warehouse',
     nextRead: '2020-04-09T10:12:15',
     name: 'Cubis PLC temp 119',
@@ -10289,7 +10289,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 49907,
+    id: 'e2ee38da-2022-44ee-93b4-bdb4fab13e60',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 672',
@@ -10305,7 +10305,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 51360,
+    id: '93820230-11cb-4573-b617-f38853441b9c',
     status: 'Active',
     nextRead: '2020-05-05T14:21:43',
     name: 'Cubis PLC temp 463',
@@ -10321,7 +10321,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50311,
+    id: '10ce8c1e-6018-44b7-8341-725d1fae7661',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 379',
@@ -10337,7 +10337,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50570,
+    id: 'a8c35889-d592-4a2c-9037-2165ebcbb6fe',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 301',
@@ -10353,7 +10353,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 50772,
+    id: '7aca62f2-d8d2-4135-be05-a464fe89e756',
     status: 'Mouted',
     nextRead: '2020-02-26T01:00:25',
     name: 'Cubis PLC temp 539',
@@ -10369,7 +10369,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 50875,
+    id: '8fff018d-482b-4b47-9da9-f526bc605483',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 912',
@@ -10385,7 +10385,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 50906,
+    id: '85f6bc56-bde9-4069-b3ab-380f9620fa7e',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 273',
@@ -10401,7 +10401,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 51203,
+    id: '60b42998-80c6-4fea-9318-23308405c694',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 228',
@@ -10417,7 +10417,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 51212,
+    id: '6f80d2fa-8804-4cb7-888d-144cb6c89723',
     status: 'Mouted',
     nextRead: '2020-05-11T01:21:58',
     name: 'Cubis PLC temp 707',
@@ -10433,7 +10433,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 51267,
+    id: '0842be47-e33a-42f9-b2aa-995a607f63af',
     status: 'Mouted',
     nextRead: null,
     name: 'Cubis PLC temp 88',
@@ -10449,7 +10449,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 51478,
+    id: 'eb4e00c7-3d01-4cc2-8ee1-9da116433ec4',
     status: 'Warehouse',
     nextRead: '2020-04-24T23:13:38',
     name: 'Cubis PLC temp 126',
@@ -10465,7 +10465,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 51571,
+    id: 'd975b88a-21f7-4e98-b310-c1284f469628',
     status: 'Active',
     nextRead: '2020-04-19T18:08:02',
     name: 'Cubis PLC temp 667',
@@ -10481,7 +10481,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 52388,
+    id: '0f3d89a6-c3f1-4f20-b2a2-bbba9a925b55',
     status: 'Inactive',
     nextRead: '2020-04-05T14:02:48',
     name: 'Cubis PLC temp 779',
@@ -10497,7 +10497,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53605,
+    id: '82da3910-d664-445b-abd8-1a00b5c8f14e',
     status: 'Active',
     nextRead: '2020-03-12T14:46:39',
     name: 'Cubis PLC temp 908',
@@ -10513,7 +10513,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53811,
+    id: 'eb92e2aa-fd95-42d3-95e8-06bb626affd0',
     status: 'Active',
     nextRead: '2020-03-04T18:09:55',
     name: 'Cubis PLC temp 265',
@@ -10529,7 +10529,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 53871,
+    id: 'b8bd65de-f905-41ed-9522-f92cec7997a8',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 373',
@@ -10545,7 +10545,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 53940,
+    id: '332ae8ba-4372-4b53-bf9a-433639a5b540',
     status: 'Mouted',
     nextRead: '2020-03-18T02:20:28',
     name: 'Cubis PLC temp 926',
@@ -10561,7 +10561,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 54071,
+    id: 'c4d5ee74-9905-4fff-8917-534fd525bffb',
     status: 'Active',
     nextRead: '2020-03-22T03:37:57',
     name: 'Cubis PLC temp 610',
@@ -10577,7 +10577,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 54247,
+    id: 'c712e91e-4ddc-419b-9cb6-a521a44ff575',
     status: 'Warehouse',
     nextRead: '2020-03-24T01:18:28',
     name: 'Cubis PLC temp 609',
@@ -10593,7 +10593,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 54463,
+    id: '362a7c59-0564-4d04-ad31-cdf6a702b406',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 271',
@@ -10609,7 +10609,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54638,
+    id: '114ea1fc-3aa5-4980-92df-0e0e869be04b',
     status: 'Warehouse',
     nextRead: null,
     name: 'Cubis PLC temp 274',
@@ -10625,7 +10625,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag1', 'tag3', 'tag5']
   },
   {
-    id: 54673,
+    id: '776008ab-7242-4fad-ae7a-5aae0b41538d',
     status: 'Inactive',
     nextRead: null,
     name: 'Cubis PLC temp 899',
@@ -10641,7 +10641,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: ['tag31', 'tag32']
   },
   {
-    id: 54675,
+    id: '423cd872-39fa-48f7-81be-e001b3408aab',
     status: 'Mouted',
     nextRead: '2020-04-05T05:12:10',
     name: 'Cubis PLC temp 664',
@@ -10657,7 +10657,7 @@ const data: DataConcentratorUnitsList[] = [
     tags: null
   },
   {
-    id: 54717,
+    id: '79e8a17a-15a2-49f1-ab44-da9f000d8532',
     status: 'Warehouse',
     nextRead: '2020-02-27T04:53:07',
     name: 'Cubis PLC temp 225',

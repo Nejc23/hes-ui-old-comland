@@ -70,7 +70,7 @@ describe('Pact consumer test', () => {
 
     const data: MeterUnitsList[] = [
       {
-        id: 11111,
+        id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
         status: 'Active',
         nextRead: null,
         name: 'Cubis PLC temp 520',
@@ -87,7 +87,7 @@ describe('Pact consumer test', () => {
         timeOfUseId: '5555'
       },
       {
-        id: 22222,
+        id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
         nextRead: '2020-03-03T15:35:29',
         name: 'Cubis PLC temp 423',

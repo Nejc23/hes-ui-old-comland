@@ -1,7 +1,7 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 export interface DcuForm {
-  id: number;
+  id: string;
   name: string;
   idNumber: string;
   ip: string;
