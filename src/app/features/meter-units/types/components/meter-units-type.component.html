@@ -82,38 +82,3 @@
   <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
   <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus"><span i18n> Add New</span></i></button></div>
 </div>
-
-
-<!-- za testiranje povezave na myGrid.Link ODSTRANI -->
-<div class="card">
-  <div class="form-row pt-3">
-  <button class="btn btn-primary p-2" (click)=callGetToken()>Get myGrid.Link Token</button>
-  <button class="btn btn-primary p-2" (click)=callConnect()>Connect device 221A39C5-6C84-4F6E-889C-96326862D771 </button>
-  <button class="btn btn-primary p-2" (click)=callDisconnect()>Disconnect device 221A39C5-6C84-4F6E-889C-96326862D771 </button>
-  </div>
-  <div class="form-row pt-3">
-    result: {{dataResult}}
-  </div>
-</div>
-
-<div class="card">
-  <div class="form-row pt-5">
-    <button class="btn btn-primary p-2" (click)="getLastStatus()">Get last status</button>
-    RequestId: <input class="p-2" type="text" [(ngModel)] = "requestId">
-  </div>
-  <div class="form-row pt-3">
-    <button class="btn btn-primary p-2" (click)=removeRequest()>Remove request</button>
-  </div>
-  <div class="form-row pt-3">
-    result: {{dataStatusResponse}}
-  </div>
-</div>
-
-<div class="card">
-  <div class="form-row pt-3">
-  <button class="btn btn-primary p-2" (click)=callBreakerState()>breaker </button>
-  </div>
-  <div class="form-row pt-3">
-    result: {{dataResult2}}
-  </div>
-</div>

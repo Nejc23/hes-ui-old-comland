@@ -96,6 +96,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult2 = '';
 
   messageActionInProgress = this.i18n(`Action in progress!`);
+  messageServerError = this.i18n(`Server error!`);
   messageDataRefreshed = this.i18n(`Data refreshed!`);
 
   constructor(
@@ -618,19 +619,29 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         data => {
           // on close (CONFIRM)
           this.toast.successToast(this.messageActionInProgress);
-          response.subscribe(value => {
-            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-          });
+          response.subscribe(
+            value => {
+              this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            },
+            e => {
+              this.toast.errorToast(this.messageServerError);
+            }
+          );
         },
         reason => {
           // on dismiss (CLOSE)
         }
       );
     } else {
-      this.service.getMyGridIdentityToken().subscribe(value => {
-        this.authService.setAuthTokenMyGridLink(value);
-        this.bulkOperation(operation);
-      });
+      this.service.getMyGridIdentityToken().subscribe(
+        value => {
+          this.authService.setAuthTokenMyGridLink(value);
+          this.bulkOperation(operation);
+        },
+        e => {
+          this.toast.errorToast(this.messageServerError);
+        }
+      );
     }
   }
 
@@ -702,61 +713,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         }
       }
     } else {
-      this.service.getMyGridIdentityToken().subscribe(value => {
-        this.authService.setAuthTokenMyGridLink(value);
-      });
+      this.service.getMyGridIdentityToken().subscribe(
+        value => {
+          this.authService.setAuthTokenMyGridLink(value);
+        },
+        e => {
+          this.toast.errorToast(this.messageServerError);
+        }
+      );
     }
   }
-
-  // ************************************************ za test myGrid.Link calls ODSTRANI -->*/
-  callGetToken() {
-    this.service.getMyGridIdentityToken().subscribe(value => {
-      this.dataResult = 'access token to myGrid.Link API is:: ' + value.AccessToken;
-      this.authService.setAuthTokenMyGridLink(value);
-    });
-  }
-
-  callConnect() {
-    if (this.authService.getAuthTokenMyGridLink().length > 0) {
-      const params: RequestConnectDisconnectData = { deviceIds: ['221A39C5-6C84-4F6E-889C-96326862D771'] };
-      this.service.postMyGridConnectDevice(params).subscribe(value => {
-        this.dataResult = 'connect-current Request id is:: ' + value.requestId;
-        this.requestId = value.requestId;
-      });
-    } else {
-      this.dataResult = 'token for myGrid.Link not exists !!';
-    }
-  }
-
-  callDisconnect() {
-    if (this.authService.getAuthTokenMyGridLink().length > 0) {
-      const params: RequestConnectDisconnectData = { deviceIds: ['221A39C5-6C84-4F6E-889C-96326862D771'] };
-      this.service.postMyGridDisconnectDevice(params).subscribe(value => {
-        this.dataResult = 'disconnect-current Request id is:: ' + value.requestId;
-        this.requestId = value.requestId;
-      });
-    } else {
-      this.dataResult = 'token for myGrid.Link not exists !!';
-    }
-  }
-
-  getLastStatus() {
-    if (this.authService.getAuthTokenMyGridLink().length > 0) {
-      this.service.getMyGridLastStatus(this.requestId).subscribe(value => {
-        console.log(value);
-        this.dataStatusResponse = JSON.stringify(value);
-      });
-    } else {
-      this.dataResult = 'token for myGrid.Link not exists !!';
-    }
-  }
-
-  removeRequest() {
-    if (this.requestId) {
-      this.meterUnitsTypeGridService.removeMyGridLinkRequestId(this.requestId);
-    }
-  }
-
-  callBreakerState() {}
-  // ***************************************************************************** */
 }
