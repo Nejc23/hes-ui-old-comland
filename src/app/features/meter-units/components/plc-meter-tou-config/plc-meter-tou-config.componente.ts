@@ -10,6 +10,7 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 
 @Component({
   selector: 'app-plc-meter-tou-config',
@@ -21,6 +22,7 @@ export class PlcMeterTouConfigComponent implements OnInit {
   form: FormGroup;
   noConfig = false;
   configRequiredText = this.i18n('Required field');
+  messageServerError = this.i18n(`Server error!`);
   deviceIdsParam = [];
 
   constructor(
@@ -30,7 +32,8 @@ export class PlcMeterTouConfigComponent implements OnInit {
     private modal: NgbActiveModal,
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toast: ToastNotificationService
   ) {
     this.form = this.createForm();
   }
@@ -62,21 +65,31 @@ export class PlcMeterTouConfigComponent implements OnInit {
         const paramsConf: RequestTOUData = { deviceIds: this.deviceIdsParam, timeOfUseId: selectedTouConfig };
         console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
         response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
-        response.subscribe(value => {
-          this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-          this.cancel();
-        });
+        response.subscribe(
+          value => {
+            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            this.cancel('save');
+          },
+          e => {
+            this.toast.errorToast(this.messageServerError);
+          }
+        );
       }
     } else {
-      this.gridLinkService.getMyGridIdentityToken().subscribe(value => {
-        this.authService.setAuthTokenMyGridLink(value);
-        this.save();
-      });
+      this.gridLinkService.getMyGridIdentityToken().subscribe(
+        value => {
+          this.authService.setAuthTokenMyGridLink(value);
+          this.save();
+        },
+        e => {
+          this.toast.errorToast(this.messageServerError);
+        }
+      );
     }
   }
 
-  cancel() {
-    this.modal.close();
+  cancel(reason: string = 'cancel') {
+    this.modal.close(reason);
   }
 
   touConfigSelectionChanged(value: number) {

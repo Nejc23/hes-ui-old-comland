@@ -413,17 +413,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // fill text in header - about selected filters
   setFilterInfo() {
-    const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+    const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     this.filters = this.staticTextService.setfilterHeaderText(
-      filter.name,
-      filter.statusesFilter && filter.statusesFilter.length > 0,
-      filter.vendorFilter ? true : false,
-      filter.tagsFilter && filter.tagsFilter.length > 0,
-      filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
-      filter.firmwareFilter && filter.firmwareFilter.length > 0,
-      filter.breakerStateFilter && filter.breakerStateFilter.length > 0,
-      filter.showOnlyMeterUnitsWithMBusInfoFilter,
-      filter.showDeletedMeterUnitsFilter
+      filterInfo.name,
+      filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
+      filterInfo.vendorFilter ? true : false,
+      filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
+      filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
+        ? true
+        : false,
+      filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
+      filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
+      filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
+      filterInfo.showDeletedMeterUnitsFilter
     );
   }
 
@@ -674,7 +676,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
       },
       reason => {
         // on dismiss (CLOSE)

@@ -17,7 +17,7 @@ export class RegistersSelectGridService {
         minWidth: 45,
         maxWidth: 45,
         width: 45,
-        suppressColumnsToolPanel: true,
+        suppressMenu: true,
         checkboxSelection: true,
         suppressMovable: true,
         lockPosition: true,
@@ -27,18 +27,24 @@ export class RegistersSelectGridService {
       },
       {
         field: 'name',
+        suppressMenu: true,
+        sortable: true,
         pinned: true,
         headerName: this.i18n('Name'),
         headerTooltip: this.i18n('Name')
       },
       {
         field: 'type',
+        suppressMenu: true,
+        sortable: true,
         pinned: true,
         headerName: this.i18n('Type'),
         headerTooltip: this.i18n('Type')
       },
       {
         field: 'description',
+        suppressMenu: true,
+        sortable: true,
         pinned: true,
         headerName: this.i18n('Description'),
         headerTooltip: this.i18n('Description')

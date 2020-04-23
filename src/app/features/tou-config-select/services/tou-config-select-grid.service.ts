@@ -16,8 +16,8 @@ export class TouConfigSelectGridService {
         minWidth: 45,
         maxWidth: 45,
         width: 45,
-        suppressColumnsToolPanel: true,
         checkboxSelection: true,
+        suppressMenu: true,
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
@@ -26,13 +26,18 @@ export class TouConfigSelectGridService {
       },
       {
         field: 'id',
+        width: 45,
+        suppressMenu: true,
+        sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('GUID'),
-        headerTooltip: this.i18n('GUID')
+        headerName: this.i18n('Id'),
+        headerTooltip: this.i18n('Id')
       },
       {
         field: 'description',
+        suppressMenu: true,
+        sortable: true,
         suppressMovable: true,
         lockPosition: true,
         headerName: this.i18n('Description'),
