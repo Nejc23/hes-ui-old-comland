@@ -10,19 +10,26 @@
       <a class="navbar-icon d-block" href="#">
         <i class="far fa-border-all"></i>
       </a>
-      <a class="navbar-icon mt-3 d-block" href="#">
-        <i class="far fa-cog"></i>
-      </a>
       <div class="btn-group dropup">
-      <a class="bg-white h5 user rounded-circle mt-3 text-center" id="dropdownMenu1" href="#" data-flip="true" data-toggle="dropdown" data-display="static">
-        <span>{{initials}}</span>
-      </a>
-
-    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1" style="padding-bottom: 1em;">
-      <h6 class="dropdown-header">{{userName}}</h6>
-        <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>                  
-        <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>        
-    </ul>
+        <a class="navbar-icon mt-3 d-block" id="dropdownMenuLang" href="#" data-flip="true" data-toggle="dropdown" data-display="static">
+          <i class="fal fa-language"></i>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLang">       
+            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>English</span></a></li>                  
+            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>Slovenian</span></a></li>        
+            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>Czech</span></a></li>        
+            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>German</span></a></li>        
+        </ul>
+      </div>
+      <div class="btn-group dropup">
+        <a class="bg-white h5 user rounded-circle mt-3 text-center" id="dropdownMenu1" href="#" data-flip="true" data-toggle="dropdown" data-display="static">
+          <span>{{initials}}</span>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+          <h6 class="dropdown-header">{{userName}}</h6>
+          <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>                  
+          <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>        
+        </ul>
       </div>
 
     </div>
