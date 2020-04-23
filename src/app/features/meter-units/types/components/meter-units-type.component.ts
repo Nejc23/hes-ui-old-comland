@@ -473,7 +473,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         });
       } else if (
         node.data !== undefined &&
-        node.data.id > 0 &&
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !selectedAll &&
@@ -587,9 +586,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       let response: Observable<any> = new Observable();
 
       // TODO: ONLY FOR TESTING !!!
-      deviceIdsParam = [];
-      deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-      deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+      //deviceIdsParam = [];
+      //deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+      //deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
       const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
       let operationName = '';

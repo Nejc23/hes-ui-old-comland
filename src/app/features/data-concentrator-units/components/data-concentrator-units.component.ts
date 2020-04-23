@@ -379,7 +379,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         });
       } else if (
         node.data !== undefined &&
-        node.data.id > 0 &&
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll() &&
