@@ -14,11 +14,12 @@
         <a class="navbar-icon mt-3 d-block" id="dropdownMenuLang" href="#" data-flip="true" data-toggle="dropdown" data-display="static">
           <i class="fal fa-language"></i>
         </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLang">       
-            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>English</span></a></li>                  
-            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>Slovenian</span></a></li>        
-            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>Czech</span></a></li>        
-            <li role="presentation"><a class="dropdown-item" href="#" ><span i18n>German</span></a></li>        
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenuLang">
+          <li role="presentation">
+            <div *ngFor="let obj of languages$">
+              <a class="dropdown-item" href="javascript:void(0);" (click)="selectLang(obj.id)">{{obj.value}}</a>
+            </div>
+          </li>
         </ul>
       </div>
       <div class="btn-group dropup">

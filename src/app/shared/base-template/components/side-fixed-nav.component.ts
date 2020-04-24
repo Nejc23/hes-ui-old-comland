@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
+import { languages } from 'src/environments/locale';
+import { LanguageService } from 'src/app/core/base-template/services/language.service';
 
 @Component({
   selector: 'app-side-fixed-nav',
@@ -8,12 +11,17 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
   encapsulation: ViewEncapsulation.None
 })
 export class SideFixedNavComponent implements OnInit {
-  // @ViewChild('title', { static: true }) title2: ElementRef;
   userName = '';
   initials = '';
-  constructor(public authService: AuthService) {}
+
+  languages$: Codelist<string>[];
+  language = 'English';
+
+  constructor(public authService: AuthService, private languageService: LanguageService) {}
 
   ngOnInit() {
+    this.languages$ = languages;
+
     this.userName = this.authService.getLoggedUser();
     this.initials = this.authService.getUserInitials();
   }
@@ -24,6 +32,10 @@ export class SideFixedNavComponent implements OnInit {
 
   getMenuMainLogoUrl() {
     return brand.navFixedMenuMainUrl;
+  }
+
+  selectLang(id: string) {
+    this.languageService.selectLang(id);
   }
 
   profile() {

@@ -8,11 +8,17 @@ import { selectedLocale } from 'src/environments/locale';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { registerLocaleData } from '@angular/common';
 import localeSl from '@angular/common/locales/sl';
+import localeCz from '@angular/common/locales/cs';
+import localeDe from '@angular/common/locales/de';
 import localeSlExtra from '@angular/common/locales/extra/sl';
+import localeCzExtra from '@angular/common/locales/extra/cs';
+import localeDeExtra from '@angular/common/locales/extra/de';
 import { UserModule } from './features/users/modules/user.module';
 import { CoreModule } from './core/core.module';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
+registerLocaleData(localeCz, 'cs', localeCzExtra);
+registerLocaleData(localeDe, 'de', localeDeExtra);
 
 declare const require;
 
