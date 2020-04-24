@@ -6,7 +6,15 @@ import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
-import { meterUnits, meterUnitsLayout, meterUnitsScheduler } from '../../consts/meter-units.const';
+import {
+  meterUnits,
+  meterUnitsLayout,
+  meterUnitsScheduler,
+  deleteJob,
+  executeJob,
+  enableJob,
+  disableJob
+} from '../../consts/meter-units.const';
 import { MeterUnitsReadSchedule, MeterUnitsReadScheduleService } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
 
 @Injectable({
@@ -61,5 +69,37 @@ export class MeterUnitsService {
 
   createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadScheduleService): HttpRequest<any> {
     return new HttpRequest('POST', `${meterUnitsScheduler}`, param);
+  }
+
+  deleteSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.deleteSchedulerJobRequest(id));
+  }
+
+  deleteSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('DELETE', `${meterUnitsScheduler}/${deleteJob}/${id}`);
+  }
+
+  executeSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.executeSchedulerJobRequest(id));
+  }
+
+  executeSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${meterUnitsScheduler}/${executeJob}/${id}`, null);
+  }
+
+  enableSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.enableSchedulerJobRequest(id));
+  }
+
+  enableSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${meterUnitsScheduler}/${enableJob}/${id}`, null);
+  }
+
+  disableSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.disableSchedulerJobRequest(id));
+  }
+
+  disableSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${meterUnitsScheduler}/${disableJob}/${id}`, null);
   }
 }

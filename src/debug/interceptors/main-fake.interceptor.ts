@@ -55,10 +55,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
               }
 
-              if (MeterUnitsSchedulerInterceptor.canInterceptMeterUnitSchedulerPost(request)) {
-                return MeterUnitsSchedulerInterceptor.interceptMeterUnitSchedulerPost(request);
-              }
-
               // registers
               if (RegistersSelectInterceptor.canInterceptMeterUnitRegisters(request)) {
                 return RegistersSelectInterceptor.interceptMeterUnitRegisters(request);
@@ -142,6 +138,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsTypeGridLayoutInterceptor.canInterceptMutLayoutDelete(request)) {
                 return MeterUnitsTypeGridLayoutInterceptor.interceptMutLayoutDelete(request);
+              }
+
+              if (MeterUnitsSchedulerInterceptor.canInterceptMeterUnitSchedulerPost(request)) {
+                return MeterUnitsSchedulerInterceptor.interceptMeterUnitSchedulerPost(request);
+              }
+
+              if (MeterUnitsSchedulerInterceptor.canInterceptSchedulerJobDelete(request)) {
+                return MeterUnitsSchedulerInterceptor.interceptSchedulerJobDelete(request);
+              }
+
+              if (MeterUnitsSchedulerInterceptor.canInterceptSchedulerJobExecute(request)) {
+                return MeterUnitsSchedulerInterceptor.interceptSchedulerJobExecute(request);
+              }
+
+              if (MeterUnitsSchedulerInterceptor.canInterceptSchedulerJobEnable(request)) {
+                return MeterUnitsSchedulerInterceptor.interceptSchedulerJobEnable(request);
+              }
+
+              if (MeterUnitsSchedulerInterceptor.canInterceptSchedulerJobDisable(request)) {
+                return MeterUnitsSchedulerInterceptor.interceptSchedulerJobDisable(request);
               }
 
               // pass through any requests not handled above

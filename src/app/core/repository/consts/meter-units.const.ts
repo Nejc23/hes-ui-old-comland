@@ -10,3 +10,7 @@ export const meterUnitBreakerStates = `/api/codelists/meter-unit-breaker-states`
 export const meterUnits = '/api/meter-units';
 export const meterUnitsLayout = 'layouts';
 export const meterUnitsScheduler = '/api/meter-units-scheduler';
+export const deleteJob = 'delete-job';
+export const executeJob = 'execute-job';
+export const enableJob = 'enable-job';
+export const disableJob = 'disable-job';

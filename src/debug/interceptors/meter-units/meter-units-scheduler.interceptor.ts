@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { meterUnitsScheduler } from 'src/app/core/repository/consts/meter-units.const';
+import { meterUnitsScheduler, deleteJob, executeJob, enableJob, disableJob } from 'src/app/core/repository/consts/meter-units.const';
 import {
   MeterUnitsReadSchedule,
   MeterUnitsReadScheduleService
@@ -73,6 +73,66 @@ export class MeterUnitsSchedulerInterceptor {
       new HttpResponse({
         status: 201,
         body: data
+      })
+    );
+  }
+
+  static canInterceptSchedulerJobDelete(request: HttpRequest<any>): boolean {
+    return request.url.startsWith(`${meterUnitsScheduler}/${deleteJob}`) && request.method.endsWith('DELETE');
+  }
+
+  static interceptSchedulerJobDelete(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null;
+
+    return of(
+      new HttpResponse({
+        status: 204,
+        body
+      })
+    );
+  }
+
+  static canInterceptSchedulerJobExecute(request: HttpRequest<any>): boolean {
+    return request.url.startsWith(`${meterUnitsScheduler}/${executeJob}`) && request.method.endsWith('PUT');
+  }
+
+  static interceptSchedulerJobExecute(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null;
+
+    return of(
+      new HttpResponse({
+        status: 204,
+        body
+      })
+    );
+  }
+
+  static canInterceptSchedulerJobEnable(request: HttpRequest<any>): boolean {
+    return request.url.startsWith(`${meterUnitsScheduler}/${enableJob}`) && request.method.endsWith('PUT');
+  }
+
+  static interceptSchedulerJobEnable(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null;
+
+    return of(
+      new HttpResponse({
+        status: 204,
+        body
+      })
+    );
+  }
+
+  static canInterceptSchedulerJobDisable(request: HttpRequest<any>): boolean {
+    return request.url.startsWith(`${meterUnitsScheduler}/${disableJob}`) && request.method.endsWith('PUT');
+  }
+
+  static interceptSchedulerJobDisable(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const body = null;
+
+    return of(
+      new HttpResponse({
+        status: 204,
+        body
       })
     );
   }

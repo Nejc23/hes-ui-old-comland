@@ -40,11 +40,11 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('PUT', `${dcuLayout}/${id}`, payload as any);
   }
 
-  deleteDcuLayout(id: number): Observable<DcuLayout> {
+  deleteDcuLayout(id: number): Observable<any> {
     return this.repository.makeRequest(this.deleteDcuLayoutRequest(id));
   }
 
-  deleteDcuLayoutRequest(id: number): HttpRequest<DcuLayout> {
+  deleteDcuLayoutRequest(id: number): HttpRequest<any> {
     return new HttpRequest('DELETE', `${dcuLayout}/${id}`);
   }
 
