@@ -58,7 +58,11 @@
               "i18nFile": "src/assets/i18n/messages.sl.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "sl",
-              "fileReplacements": [               
+              "fileReplacements": [    
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
+                },           
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -104,7 +108,11 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
-                },               
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
+                },           
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -296,6 +304,10 @@
                   "with": "src/environments/environment.prod.ts"
                 },
                 {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
+                },
+                {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/amera/brand.ts"
                 },               
@@ -337,6 +349,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
                 },
                 {
                   "replace": "src/environments/brand/default/brand.ts",
