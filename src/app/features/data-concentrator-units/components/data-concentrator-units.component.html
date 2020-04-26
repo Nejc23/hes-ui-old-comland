@@ -48,7 +48,8 @@
     [overlayLoadingTemplate]="overlayLoadingTemplate" (selectionChanged)="onSelectionChanged()"
     (gridReady)="onGridReady($event)" (columnVisible)="onColumnVisible($event)"
     (toolPanelVisibleChanged)="toolPanelChanged($event)" (paginationChanged)="onPaginationChange($event)"
-    (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)">
+    (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)"
+    [localeText]="localeText">
   </ag-grid-angular>
 </div>
 

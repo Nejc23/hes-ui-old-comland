@@ -4,14 +4,23 @@ import * as moment from 'moment';
 import { Title } from '@angular/platform-browser';
 import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from './core/auth/services/auth.service';
+import { IntlService, CldrIntlService } from '@progress/kendo-angular-intl';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-  constructor(@Inject(LOCALE_ID) private locale: string, private titleService: Title, public authService: AuthService) {
+  constructor(
+    @Inject(LOCALE_ID) public locale: string,
+    private titleService: Title,
+    public authService: AuthService,
+    public intlService: IntlService
+  ) {
     moment.locale(locale);
+    console.log(locale);
+    this.locale = locale;
+    (this.intlService as CldrIntlService).localeId = locale;
   }
 
   ngOnInit(): void {

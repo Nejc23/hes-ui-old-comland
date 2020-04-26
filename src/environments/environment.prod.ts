@@ -12,9 +12,9 @@ export const environment = {
 
   // identitiy settings
   stsAuthority: 'http://89.212.201.202:8081/',
-  clientId: 'epoint3', //'ePoint4'
+  clientId: 'ePoint4', //'ePoint3'
   ignoreLocale: false,
-  clientRoot: 'http://advance-hes.azurewebsites.net/', ///'http://localhost/',//'http://advance-hes.azurewebsites.net/',
+  clientRoot: 'http://localhost/', ///'http://localhost/',//'http://advance-hes.azurewebsites.net/',
   clientScope: 'openid profile roles offline_access company',
   clientAutoSilentRenew: true
 };

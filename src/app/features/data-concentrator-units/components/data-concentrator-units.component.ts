@@ -37,6 +37,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   totalCount = 0;
   filters = '';
   private layoutChangeSubscription: Subscription;
+  private localeText;
 
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;
@@ -115,6 +116,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
     this.sideBar = this.dataConcentratorUnitsGridService.setSideBar();
+
+    this.localeText = {
+      columns: this.i18n('Columns'),
+      filters: this.i18n('Filters')
+    };
   }
 
   ngOnDestroy(): void {
