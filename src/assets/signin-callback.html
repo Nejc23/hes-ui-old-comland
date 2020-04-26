@@ -12,18 +12,14 @@
         Log.logger = console;
         new UserManager().signinRedirectCallback().then(function (user) {
             if (user == null) {
-                console.log('not logged in');
-                
                 document.getElementById("waiting").style.display = "none";
                 document.getElementById("error").innerText = "No sign-in request pending.";
             }
             else {
-                console.log('logged in ->redirect');
                 window.location = "/en/";
             }
         })
         .catch(function (er) {
-            console.log('login error');
             document.getElementById("waiting").style.display = "none";
             document.getElementById("error").innerText = er.message;
         });
