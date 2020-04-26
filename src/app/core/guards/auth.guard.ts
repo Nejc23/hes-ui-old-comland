@@ -68,6 +68,7 @@ export class AuthGuard implements CanActivate {
         this.authService
           .renewToken()
           .then(value => {
+            console.log('renew');
             console.log(value);
             this.authService.user = value;
             this.authService.saveTokenAndSetUserRights2(value, '');
@@ -75,22 +76,27 @@ export class AuthGuard implements CanActivate {
           })
           .catch(err => {
             if (err.message === 'login_required') {
+              console.log('login 1');
               this.authService.login().catch(err => console.log(err));
             }
             resolve(false);
           });
       } else {
         if (this.authService.isAuthenticated()) {
+          console.log('user is ok');
           resolve(true);
         } else {
+          console.log('login 2');
           this.authService
             .login()
             .then(() => {
               if (this.authService.user != null) {
+                console.log('set user to token');
                 this.authService.saveTokenAndSetUserRights2(this.authService.user, '');
               }
             })
             .catch(err => {
+              console.log('error');
               console.log(err.message);
 
               this.router.navigate(['/identityError', { error: err.message }]);
