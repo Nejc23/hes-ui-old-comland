@@ -2,8 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
-import { languages } from 'src/environments/locale';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
+import { languages } from 'src/environments/config';
 
 @Component({
   selector: 'app-side-fixed-nav',

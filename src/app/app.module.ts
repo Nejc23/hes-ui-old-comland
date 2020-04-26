@@ -17,6 +17,8 @@ import { UserModule } from './features/users/modules/user.module';
 import { CoreModule } from './core/core.module';
 // Load all required data for the sl locale
 import '@progress/kendo-angular-intl/locales/sl/all';
+import '@progress/kendo-angular-intl/locales/cs/all';
+import '@progress/kendo-angular-intl/locales/de/all';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);

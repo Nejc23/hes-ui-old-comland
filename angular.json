@@ -139,6 +139,229 @@
               "i18nLocale": "sl",
               "baseHref": "/sl/"
             },
+            "production-cs": {
+              "outputPath": "dist/advance-hes/cs",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-cs.ts"
+                },           
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.cs.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "production-de": {
+              "outputPath": "dist/advance-hes/de",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-de.ts"
+                },           
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "baseHref": "/de/"
+            },
+
+
+
+            "staging-en": {
+              "outputPath": "dist/staging/advance-hes/en",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            },
+            "staging-sl": {
+              "outputPath": "dist/staging/advance-hes/sl",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-sl.ts"
+                },           
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.sl.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "sl",
+              "baseHref": "/sl/"
+            },
+            "staging-cs": {
+              "outputPath": "dist/staging/advance-hes/cs",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-cs.ts"
+                },           
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.cs.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "staging-de": {
+              "outputPath": "dist/staging/advance-hes/de",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-de.ts"
+                },           
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/default/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "baseHref": "/de/"
+            },
+
+
             "production-dev": {
               "outputPath": "c:/inetpub/wwwroot/en",
               "fileReplacements": [
@@ -491,6 +714,30 @@
                 "defaultLanguage": "en",
                 "languages": [
                   "en"
+                ],
+                "useSourceAsTarget": true
+              }
+            },
+            "czech": {
+              "xliffmergeOptions": {
+                "i18nFormat": "xlf",
+                "srcDir": "src/assets/i18n",
+                "genDir": "src/assets/i18n",
+                "defaultLanguage": "cs",
+                "languages": [
+                  "cs"
+                ],
+                "useSourceAsTarget": true
+              }
+            },
+            "deutch": {
+              "xliffmergeOptions": {
+                "i18nFormat": "xlf",
+                "srcDir": "src/assets/i18n",
+                "genDir": "src/assets/i18n",
+                "defaultLanguage": "de",
+                "languages": [
+                  "de"
                 ],
                 "useSourceAsTarget": true
               }

@@ -6,7 +6,6 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
-import { languages } from 'src/environments/locale';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
@@ -37,7 +36,7 @@ export class BaseTemplateComponent implements OnInit {
   public isMouseOverNav = false;
   public submenu = false;
 
-  languages$: Codelist<string>[];
+  // languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
   companies: Codelist<number>[] = [];
 
@@ -113,7 +112,7 @@ export class BaseTemplateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.languages$ = languages;
+    // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
     this.companies.push(
       { id: 1, value: 'Eles' },

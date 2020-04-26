@@ -45,7 +45,7 @@ export class AuthService {
         : `${environment.clientRoot}${selectedLocale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
       silent_redirect_uri: environment.ignoreLocale
         ? `${environment.clientRoot}assets/silent-callback.html`
-        : `${environment.clientRoot}${selectedLocale}assets/silent-callback.html`,
+        : `${environment.clientRoot}${selectedLocale}/assets/silent-callback.html`,
       post_logout_redirect_uri: environment.ignoreLocale ? `${environment.clientRoot}` : `${environment.clientRoot}${selectedLocale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
       response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
       scope: environment.clientScope,

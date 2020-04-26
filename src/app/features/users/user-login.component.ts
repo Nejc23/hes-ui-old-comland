@@ -11,7 +11,6 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
-import { languages } from 'src/environments/locale';
 import { UserLoginCredentials } from './models/user-login-form.model';
 import { matchPasswordsValidator } from './consts/login-validators';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
@@ -34,7 +33,7 @@ export class UserLoginComponent implements OnInit {
   nameOf = nameOfFactory<UserLoginCredentials>();
   nameOfReset = nameOfFactory<ResetPasswordRequest>();
   nameOfNewPassword = nameOfFactory<NewPasswordFrom>();
-  languages$: Codelist<string>[];
+  // languages$: Codelist<string>[];
 
   public version = '';
   forgotPassword = false;
@@ -57,14 +56,14 @@ export class UserLoginComponent implements OnInit {
     private i18n: I18n,
     @Inject(LOCALE_ID) private locale: string
   ) {
-    this.languages$ = languages;
+    // this.languages$ = languages;
     this.form = this.createForm();
     this.formReset = this.createResetForm();
     this.formNewPassword = this.createNewPasswordForm();
   }
 
   ngOnInit() {
-    this.language = this.languages$.find(x => x.id === this.locale).value;
+    //  this.language = this.languages$.find(x => x.id === this.locale).value;
     this.route.queryParams.subscribe(params => {
       this.resetToken = params.resetToken;
       if (this.resetToken !== undefined && this.resetToken.length > 0) {

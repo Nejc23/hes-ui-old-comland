@@ -16,7 +16,8 @@
                 document.getElementById("error").innerText = "No sign-in request pending.";
             }
             else {
-                window.location = "/";
+                var splitstring = window.location.pathname.split('assets');
+                window.location = splitstring[0];
             }
         })
         .catch(function (er) {

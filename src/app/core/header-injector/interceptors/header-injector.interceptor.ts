@@ -1,8 +1,8 @@
 import { Injectable, LOCALE_ID, Inject } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { languages } from 'src/environments/locale';
 import * as _ from 'lodash';
+import { languages } from 'src/environments/config';
 
 @Injectable()
 export class HeaderInjectorInterceptor implements HttpInterceptor {
