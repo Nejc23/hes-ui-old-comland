@@ -486,7 +486,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/ePointHES/brand.ts"
-                },
+                }, 
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/ePointHES/favicon.ico"

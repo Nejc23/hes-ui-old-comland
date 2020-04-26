@@ -16,9 +16,10 @@
                 document.getElementById("error").innerText = "No sign-in request pending.";
             }
             else {
-                var splitstring = window.location.pathname.split('assets');
-                alert(splitstring[0]);
-                window.location = splitstring[0];
+                alert(window.location.pathname);
+              //  var splitstring = window.location.pathname.split('assets');
+             //   alert(splitstring[0]);
+                window.location = '/en/';
             }
         })
         .catch(function (er) {
