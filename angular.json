@@ -611,6 +611,98 @@
               "i18nFormat": "xlf",
               "i18nLocale": "sl",
               "baseHref": "/sl/"
+            },
+            "production-cs-ePointHES": {
+              "outputPath": "dist/ePointHES/cs",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-cs.ts"
+                },
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/ePointHES/brand.ts"
+                },               
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/ePointHES/favicon.ico"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.cs.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "cs",
+              "baseHref": "/cs/"
+            },
+            "production-de-ePointHES": {
+              "outputPath": "dist/ePointHES/de",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/locale.ts",
+                  "with": "src/environments/locale-de.ts"
+                },
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/ePointHES/brand.ts"
+                },               
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/ePointHES/favicon.ico"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.de.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "de",
+              "baseHref": "/de/"
             }
 
           }
