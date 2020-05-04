@@ -3,12 +3,12 @@
   
     <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
       <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
-        [autocompleteItemsAsObjects]="meterUnitStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+        [autocompleteItemsAsObjects]="meterUnitStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-input-tag>
 
       <div class="form-row">
         <div class="col-6">
-          <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+          <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-select-input>      
         </div>
         <div class="col-3">
@@ -24,21 +24,21 @@
         <div class="col-6"></div>
         <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
       </div>
-      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="meterUnitVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="meterUnitVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-select-input>
 
-      <app-input-tag label="Firmware" [allowCustomValues]="true" [property]="firmwareProperty" [form]="form" [autocompleteItemsAsObjects]="firmware$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+      <app-input-tag label="Firmware" [allowCustomValues]="true" [property]="firmwareProperty" [form]="form" [autocompleteItemsAsObjects]="firmware$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-input-tag>
 
-      <app-input-switch label="Show only Meter units with information of child (MBus)" [form]="form" [property]="showOnlyMeterUnitsWithMBusInfoProperty"></app-input-switch>
+      <app-input-switch label="Show only Meter units with information of child (MBus)" [form]="form" [property]="showOnlyMeterUnitsWithMBusInfoProperty" i18n-label></app-input-switch>
 
-      <app-input-tag label="Breaker state" [property]="breakerStateProperty" [form]="form" [autocompleteItemsAsObjects]="breakerState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+      <app-input-tag label="Breaker state" [property]="breakerStateProperty" [form]="form" [autocompleteItemsAsObjects]="breakerState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-input-tag>
 
-      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="meterUnitTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="meterUnitTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-input-tag>
    
-      <app-input-switch label="Show deleteted Meter Units" [form]="form" [property]="showDeletedMeterUnitsProperty"></app-input-switch>
+      <app-input-switch label="Show deleteted Meter Units" [form]="form" [property]="showDeletedMeterUnitsProperty" i18n-label></app-input-switch>
      
     </fieldset>
     <div class="d-flex justify-content-end" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">

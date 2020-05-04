@@ -94,6 +94,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult = '';
   dataStatusResponse = '';
   dataResult2 = '';
+  private localeText;
 
   messageActionInProgress = this.i18n(`Action in progress!`);
   messageServerError = this.i18n(`Server error!`);
@@ -191,6 +192,23 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.columns = this.meterUnitsTypeGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
     this.sideBar = this.meterUnitsTypeGridService.setSideBar();
+
+    this.localeText = {
+      // for side panel
+      columns: this.i18n('Columns'),
+      filters: this.i18n('Filters'),
+
+      // for filter panel
+      page: this.i18n('page'),
+      more: this.i18n('more'),
+      to: this.i18n('to'),
+      of: this.i18n('of'),
+      next: this.i18n('next'),
+      last: this.i18n('last'),
+      first: this.i18n('first'),
+      previous: this.i18n('previous'),
+      loadingOoo: this.i18n('loading...')
+    };
   }
 
   ngOnDestroy() {
