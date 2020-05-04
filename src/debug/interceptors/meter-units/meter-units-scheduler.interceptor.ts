@@ -4,7 +4,7 @@ import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { meterUnitsScheduler, deleteJob, executeJob, enableJob, disableJob } from 'src/app/core/repository/consts/meter-units.const';
 import {
   MeterUnitsReadSchedule,
-  MeterUnitsReadScheduleService
+  MeterUnitsReadScheduleForService
 } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class MeterUnitsSchedulerInterceptor {
   }
 
   static interceptMeterUnitSchedulerPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const data: MeterUnitsReadScheduleService = {
+    const data: MeterUnitsReadScheduleForService = {
       readOptions: 5,
       nMinutes: 0,
       nHours: 0,

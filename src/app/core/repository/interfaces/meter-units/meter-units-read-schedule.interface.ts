@@ -14,6 +14,6 @@ export interface MeterUnitsReadScheduleForm extends MeterUnitsReadSchedule {
   time: Date;
 }
 
-export interface MeterUnitsReadScheduleService extends MeterUnitsReadSchedule {
+export interface MeterUnitsReadScheduleForService extends MeterUnitsReadSchedule {
   time: string;
 }

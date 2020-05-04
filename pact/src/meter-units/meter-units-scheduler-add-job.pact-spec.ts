@@ -4,7 +4,7 @@ import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/defaul
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import {
   MeterUnitsReadSchedule,
-  MeterUnitsReadScheduleService
+  MeterUnitsReadScheduleForService
 } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 
 describe('Pact consumer test', () => {
@@ -29,7 +29,7 @@ describe('Pact consumer test', () => {
   });
 
   const typeId = 1;
-  const requestBody: MeterUnitsReadScheduleService = {
+  const requestBody: MeterUnitsReadScheduleForService = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
@@ -82,7 +82,7 @@ describe('Pact consumer test', () => {
     }
   };
 
-  const responseBody: MeterUnitsReadScheduleService = {
+  const responseBody: MeterUnitsReadScheduleForService = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,

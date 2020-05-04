@@ -15,7 +15,7 @@ import {
   enableJob,
   disableJob
 } from '../../consts/meter-units.const';
-import { MeterUnitsReadSchedule, MeterUnitsReadScheduleService } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
+import { MeterUnitsReadSchedule, MeterUnitsReadScheduleForService } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -63,11 +63,11 @@ export class MeterUnitsService {
     return new HttpRequest('POST', `${meterUnits}/${typeId}/${meterUnitsLayout}`, payload as any);
   }
 
-  createMeterUnitsReadScheduler(schedule: MeterUnitsReadScheduleService): Observable<MeterUnitsReadScheduleService> {
+  createMeterUnitsReadScheduler(schedule: MeterUnitsReadScheduleForService): Observable<MeterUnitsReadScheduleForService> {
     return this.repository.makeRequest(this.createMeterUnitsReadSchedulerRequest(schedule));
   }
 
-  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadScheduleService): HttpRequest<any> {
+  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadScheduleForService): HttpRequest<any> {
     return new HttpRequest('POST', `${meterUnitsScheduler}`, param);
   }
 

@@ -4,7 +4,7 @@ import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/
 import {
   MeterUnitsReadSchedule,
   MeterUnitsReadScheduleForm,
-  MeterUnitsReadScheduleService
+  MeterUnitsReadScheduleForService
 } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -16,8 +16,8 @@ import { map } from 'rxjs/operators';
 export class PlcMeterReadScheduleService {
   constructor(private meterService: MeterUnitsService) {}
 
-  createMeterUnitsReadScheduler(values: MeterUnitsReadScheduleForm): Observable<MeterUnitsReadScheduleService> {
-    const serviceData: MeterUnitsReadScheduleService = {
+  createMeterUnitsReadScheduler(values: MeterUnitsReadScheduleForm): Observable<MeterUnitsReadScheduleForService> {
+    const serviceData: MeterUnitsReadScheduleForService = {
       readOptions: values.readOptions,
       nMinutes: values.nMinutes,
       nHours: values.nHours,
