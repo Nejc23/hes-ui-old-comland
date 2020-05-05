@@ -38,7 +38,7 @@ import { PlcMeterReadScheduleComponent } from '../features/meter-units/component
 import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refresh.component';
-import { PlcMeterTouConfigComponent } from '../features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.componente';
+import { PlcMeterTouConfigComponent } from '../features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { TouConfigSelectComponent } from '../features/tou-config-select/component/tou-config-select.component';
 import { IdentityErrorComponent } from './IdentityError/identity-error.component';
 

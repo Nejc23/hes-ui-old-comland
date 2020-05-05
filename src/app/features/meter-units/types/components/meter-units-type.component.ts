@@ -28,7 +28,7 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { PlcMeterTouConfigComponent } from '../../components/plc-meter-tou-config/plc-meter-tou-config.componente';
+import { PlcMeterTouConfigComponent } from '../../components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 
 @Component({
