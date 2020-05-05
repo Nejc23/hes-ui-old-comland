@@ -1,7 +1,29 @@
+
 <div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div>
-<div>
-  test scheduled jobs list
+
+<div class="row d-flex flex-nowrap justify-content-start">
+  <div class="col mx-3 border py-3 text-center border-primary">
+    <span i18n>Scheduled</span>
+    <span class="counter">5</span>
+  </div>
+  <div class="col mx-3 border py-3 text-center border-secondary">
+    <span i18n>Pending</span>
+    <span class="counter">10</span>
+  </div>
+  <div class="col mx-3 border py-3 text-center border-secondary">
+    <span i18n>Running</span>
+    <span class="counter">0</span>
+  </div>
+  <div class="col mx-3 border py-3 text-center border-secondary">
+    <span i18n>Finished</span>
+    <span class="counter">1000</span>
+  </div>
+</div>
+<div class="row py-3 mx-1">
+  <span>
+    test scheduled jobs list
+  </span>
 </div>

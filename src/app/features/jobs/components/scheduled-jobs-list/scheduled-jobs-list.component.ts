@@ -11,6 +11,7 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { ScheduledJobsListGridService } from '../../services/scheduled-jobs-list-grid.service';
 import { ScheduledJobsService } from 'src/app/core/repository/services/jobs/scheduled-jobs.service';
 import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-static-text.service';
+import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 
 @Component({
   selector: 'app-scheduled-jobs-list',
@@ -18,6 +19,9 @@ import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-st
 })
 export class ScheduledJobsListComponent implements OnInit {
   form: FormGroup;
+
+  selectedId = 1;
+
   searchTextEmpty = true;
   public modules: Module[] = AllModules;
   public gridApi;
@@ -75,6 +79,13 @@ export class ScheduledJobsListComponent implements OnInit {
 
   deselectAllRows() {
     this.gridApi.deselectAll();
+  }
+
+  changeJobType() {
+    /*
+    this.selectedId = parseInt(this.form.get(this.jobTypeProperty).value, 10);
+    console.log(`changeJobType = ${this.form.get(this.jobTypeProperty).value}`);
+    */
   }
 
   get searchProperty() {
