@@ -16,7 +16,7 @@ const routes: Routes = [
       {
         path: 'overview',
         data: {
-          breadcrumb: 'Meter Units - Overview'
+          breadcrumb: 'Overview - Meter Units'
         },
         children: [
           {

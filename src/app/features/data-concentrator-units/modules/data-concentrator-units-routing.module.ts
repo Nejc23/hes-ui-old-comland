@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
+
 const routes: Routes = [
   {
     path: '',

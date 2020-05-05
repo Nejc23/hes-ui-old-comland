@@ -5,6 +5,8 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
+  public titleBreadCrumbs = this.i18n('Overview - Data Concentrator Units');
+
   constructor(private i18n: I18n) {}
 
   get headerTitleDCU() {
