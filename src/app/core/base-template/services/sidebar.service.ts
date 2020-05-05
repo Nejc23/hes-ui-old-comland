@@ -35,6 +35,19 @@ export class SidebarService {
         isBorder: true
       },
       {
+        title: this.i18n(`Jobs`),
+        routeLink: '/scheduledJobs',
+        hasChildren: false,
+        children: []
+      },
+      {
+        title: ``,
+        routeLink: '',
+        hasChildren: false,
+        children: [],
+        isBorder: true
+      },
+      {
         title: this.i18n(`TOU Edit`),
         routeLink: '/touEdit',
         hasChildren: false,

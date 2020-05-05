@@ -4,6 +4,7 @@ export const dcuCreate = '/api/dcu-create';
 export const bulkDelete = '/api/dcu-bulk-delete';
 export const meterUnitRegisters = '/api/meter-unit-registers';
 export const touConfigurations = '/api/tou-configurations';
+export const scheduledJobs = '/api/scheduled-jobs';
 
 // codelist
 export const dcuStatuses = `/api/codelists/dcu-statuses`;

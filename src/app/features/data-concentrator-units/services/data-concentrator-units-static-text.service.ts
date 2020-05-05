@@ -12,6 +12,11 @@ export class DataConcentratorUnitsStaticTextService {
   get headerTitleDCU() {
     return this.i18n('Data Concentrator Units');
   }
+
+  get jobsTitle() {
+    return this.i18n('Jobs');
+  }
+
   /*
   get breadcrumbNameDCU() {
     return this.i18n('Overview - Data Concentrator Units');
