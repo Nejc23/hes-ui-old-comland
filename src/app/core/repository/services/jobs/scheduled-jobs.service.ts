@@ -3,7 +3,7 @@ import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { scheduledJobs } from '../../consts/data-concentrator-units.const';
-import { ScheduledJobsList } from '../../interfaces/scheduled-jobs/scheduled-jobs-list.interface';
+import { ScheduledJobsList } from '../../interfaces/jobs/scheduled-jobs-list.interface';
 
 @Injectable({
   providedIn: 'root'

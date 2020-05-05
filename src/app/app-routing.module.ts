@@ -35,7 +35,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'scheduledJobs',
-        loadChildren: 'src/app/features/scheduled-jobs/modules/scheduled-jobs.module#ScheduledJobsModule'
+        loadChildren: 'src/app/features/jobs/modules/scheduled-jobs.module#ScheduledJobsModule'
       },
       {
         path: 'help',

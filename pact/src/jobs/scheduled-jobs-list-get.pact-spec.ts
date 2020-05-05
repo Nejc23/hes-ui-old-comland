@@ -1,8 +1,8 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { ScheduledJobsService } from 'src/app/core/repository/services/scheduled-jobs/scheduled-jobs.service';
-import { ScheduledJobsList } from 'src/app/core/repository/interfaces/scheduled-jobs/scheduled-jobs-list.interface';
+import { ScheduledJobsService } from 'src/app/core/repository/services/jobs/scheduled-jobs.service';
+import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
 
 describe('Pact consumer test', () => {
   let provider;

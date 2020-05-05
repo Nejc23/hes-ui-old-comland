@@ -5,11 +5,11 @@ import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
-import { ScheduledJobsList } from 'src/app/core/repository/interfaces/scheduled-jobs/scheduled-jobs-list.interface';
+import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
 import { ActionFormStaticTextService } from 'src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ScheduledJobsListGridService } from '../../services/scheduled-jobs-list-grid.service';
-import { ScheduledJobsService } from 'src/app/core/repository/services/scheduled-jobs/scheduled-jobs.service';
+import { ScheduledJobsService } from 'src/app/core/repository/services/jobs/scheduled-jobs.service';
 import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-static-text.service';
 
 @Component({
@@ -56,7 +56,6 @@ export class ScheduledJobsListComponent implements OnInit {
     this.rowData$ = this.scheduledJobsService.getScheduledJobsList();
     this.rowData$.subscribe(x => {
       this.rowData = x;
-      console.log(JSON.stringify(this.rowData));
       this.totalCount = x.length;
     });
   }

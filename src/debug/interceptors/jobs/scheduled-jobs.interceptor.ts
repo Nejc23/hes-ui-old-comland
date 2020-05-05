@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
 import { meterUnitRegisters, scheduledJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
-import { ScheduledJobsList } from 'src/app/core/repository/interfaces/scheduled-jobs/scheduled-jobs-list.interface';
+import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
 
 @Injectable()
 export class ScheduledJobsInterceptor {
