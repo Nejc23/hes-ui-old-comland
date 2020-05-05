@@ -7,12 +7,13 @@
 <div class="row d-flex flex-nowrap justify-content-start">
   <div class="col mx-3 border py-3 text-center border-primary">
     <span i18n>Scheduled</span>
-    <span class="counter">5</span>
+    <span class="counter">{{countScheduled}}</span>
   </div>
   <div class="col mx-3 border py-3 text-center border-secondary">
     <span i18n>Pending</span>
     <span class="counter">10</span>
   </div>
+
   <div class="col mx-3 border py-3 text-center border-secondary">
     <span i18n>Running</span>
     <span class="counter">0</span>
@@ -22,8 +23,25 @@
     <span class="counter">1000</span>
   </div>
 </div>
-<div class="row py-3 mx-1">
-  <span>
-    test scheduled jobs list
-  </span>
+
+<div class="d-flex justify-content-between align-items-center p-2 grid-actions">
+  <div>
+    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}} <span
+          i18n>items selected</span></strong></small>
+    <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
+    <small class="text-secondary">{{countScheduled}} <span i18n>items found</span></small>
+
+  </div>
+  <app-input-searcher [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"
+    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
+
+<ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: 400px;" #agGrid
+  [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [modules]="modules"
+  (gridReady)="onGridReady($event)"
+  (rowSelected)="selectionChanged($event)"
+  suppressRowClickSelection="true"
+  rowSelection="multiple">
+</ag-grid-angular>

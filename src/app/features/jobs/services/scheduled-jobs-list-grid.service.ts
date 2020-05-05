@@ -25,14 +25,13 @@ export class ScheduledJobsListGridService {
         headerCheckboxSelection: false
       },
       {
-        field: 'id',
-        width: 45,
+        field: 'type',
         suppressMenu: true,
         sortable: true,
-        suppressMovdataConcentratorUnitsable: true,
+        suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Id'),
-        headerTooltip: this.i18n('Id')
+        headerName: this.i18n('Job Type'),
+        headerTooltip: this.i18n('Job Type')
       },
       {
         field: 'description',
@@ -42,6 +41,24 @@ export class ScheduledJobsListGridService {
         lockPosition: true,
         headerName: this.i18n('Description'),
         headerTooltip: this.i18n('Description')
+      },
+      {
+        field: 'nextRun',
+        suppressMenu: true,
+        sortable: true,
+        suppressMovable: true,
+        lockPosition: true,
+        headerName: this.i18n('Next run'),
+        headerTooltip: this.i18n('Next run')
+      },
+      {
+        field: 'owner',
+        suppressMenu: true,
+        sortable: true,
+        suppressMovable: true,
+        lockPosition: true,
+        headerName: this.i18n('Owner'),
+        headerTooltip: this.i18n('Owner')
       }
     ];
   }

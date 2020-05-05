@@ -30,4 +30,8 @@ export class ScheduledJobsStaticTextService {
   get nextPlannedReadText() {
     return this.i18n('Next planned read') + ' ';
   }
+
+  get placeholderSearch() {
+    return this.i18n('Search');
+  }
 }

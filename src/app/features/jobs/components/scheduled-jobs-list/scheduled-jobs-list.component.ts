@@ -21,7 +21,7 @@ export class ScheduledJobsListComponent implements OnInit {
   form: FormGroup;
 
   selectedId = 1;
-
+  countScheduled = 0;
   searchTextEmpty = true;
   public modules: Module[] = AllModules;
   public gridApi;
@@ -29,7 +29,6 @@ export class ScheduledJobsListComponent implements OnInit {
   rowData$: Observable<ScheduledJobsList[]>;
   rowData: ScheduledJobsList[];
   allRowData: ScheduledJobsList[];
-  totalCount = 0;
   selectedAll = false;
   headerTitle = this.staticTextService.jobsTitle;
 
@@ -59,22 +58,18 @@ export class ScheduledJobsListComponent implements OnInit {
     this.columnDefs = this.scheduledJobsListGridService.setGridDefaultColumns();
     this.rowData$ = this.scheduledJobsService.getScheduledJobsList();
     this.rowData$.subscribe(x => {
-      this.rowData = x;
-      this.totalCount = x.length;
+      this.allRowData = x;
+      this.countScheduled = x.length;
+      this.searchChange();
     });
   }
 
-  getSelectedRowId() {
+  getSelectedRowIds() {
     const selectedRows = this.gridApi.getSelectedRows();
-    const rows = _.map(
+    return _.map(
       selectedRows,
       nameOf<ScheduledJobsList>(o => o.id)
     );
-    if (rows.length > 0) {
-      return rows[0];
-    } else {
-      return null;
-    }
   }
 
   deselectAllRows() {
@@ -86,6 +81,43 @@ export class ScheduledJobsListComponent implements OnInit {
     this.selectedId = parseInt(this.form.get(this.jobTypeProperty).value, 10);
     console.log(`changeJobType = ${this.form.get(this.jobTypeProperty).value}`);
     */
+  }
+
+  searchChange(search: string = '') {
+    const searchToLower = search.toLowerCase();
+    this.rowData = _.filter(
+      this.allRowData,
+      data =>
+        data.type.toLowerCase().includes(searchToLower) ||
+        data.description.toLowerCase().includes(searchToLower) ||
+        data.nextRun.toLowerCase().includes(searchToLower) ||
+        data.owner.toLowerCase().includes(searchToLower)
+    );
+    this.countScheduled = this.rowData.length;
+  }
+
+  selectionChanged($event: any) {
+    this.selectedAll = this.getSelectedRowIds().length === this.countScheduled;
+  }
+
+  insertedValue($event: string) {
+    if ($event !== undefined) {
+      this.searchTextEmpty = $event.length === 0;
+    } else {
+      this.searchTextEmpty = true;
+    }
+    this.searchChange($event);
+  }
+
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.gridApi) {
+      const selectedRows = this.gridApi.getSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
   }
 
   get searchProperty() {

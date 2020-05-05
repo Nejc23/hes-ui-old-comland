@@ -9,7 +9,7 @@ import { ScheduledJobsRoutingModule } from './scheduled-jobs-routing.module';
 @NgModule({
   entryComponents: [],
   declarations: [ScheduledJobsListComponent],
-  imports: [SharedModule, ScheduledJobsRoutingModule, BreadcrumbsModule],
+  imports: [SharedModule, ScheduledJobsRoutingModule, BreadcrumbsModule, AgGridModule.withComponents([])],
   exports: []
 })
 export class ScheduledJobsModule {}
