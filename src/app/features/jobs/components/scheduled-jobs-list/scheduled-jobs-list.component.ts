@@ -25,6 +25,7 @@ export class ScheduledJobsListComponent implements OnInit {
   searchTextEmpty = true;
   public modules: Module[] = AllModules;
   public gridApi;
+  public frameworkComponents;
   columnDefs = [];
   rowData$: Observable<ScheduledJobsList[]>;
   rowData: ScheduledJobsList[];
@@ -39,7 +40,9 @@ export class ScheduledJobsListComponent implements OnInit {
     public fb: FormBuilder,
     public staticTextService: ScheduledJobsStaticTextService,
     private formUtils: FormsUtilsService
-  ) {}
+  ) {
+    this.frameworkComponents = scheduledJobsListGridService.setFrameworkComponents();
+  }
 
   createForm(): FormGroup {
     return this.fb.group({

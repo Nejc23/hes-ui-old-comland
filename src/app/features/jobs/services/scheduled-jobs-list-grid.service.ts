@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
+import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,18 +11,23 @@ export class ScheduledJobsListGridService {
 
   constructor(private i18n: I18n) {}
 
+  public setFrameworkComponents() {
+    return {
+      gridCellActiveComponent: GridCellActiveComponent
+    };
+  }
+
   setGridDefaultColumns() {
     return [
       {
         width: 90,
-        checkboxSelection: true,
         suppressMenu: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'active',
+        field: 'active',
+        cellRenderer: 'gridCellActiveComponent',
         headerName: this.i18n('Active'),
-        headerTooltip: this.i18n('Active'),
-        headerCheckboxSelection: false
+        headerTooltip: this.i18n('Active')
       },
       {
         field: 'type',
