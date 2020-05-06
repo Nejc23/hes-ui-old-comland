@@ -13,15 +13,14 @@ export class ScheduledJobsListGridService {
   setGridDefaultColumns() {
     return [
       {
-        minWidth: 45,
-        maxWidth: 45,
-        width: 45,
+        width: 90,
         checkboxSelection: true,
         suppressMenu: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'id',
-        headerTooltip: this.i18n('Select/deselect'),
+        colId: 'active',
+        headerName: this.i18n('Active'),
+        headerTooltip: this.i18n('Active'),
         headerCheckboxSelection: false
       },
       {

@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Jobs',
+      breadcrumb: 'Overview - Jobs',
       permission: FunctionalityEnumerator.dashboard
     },
     children: [

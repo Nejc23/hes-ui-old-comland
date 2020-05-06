@@ -24,11 +24,8 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-between align-items-center p-2 grid-actions">
+<div class="d-flex justify-content-between align-items-center p-2 grid-actions my-3">
   <div>
-    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}} <span
-          i18n>items selected</span></strong></small>
-    <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
     <small class="text-secondary">{{countScheduled}} <span i18n>items found</span></small>
 
   </div>
@@ -36,9 +33,10 @@
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
 
-<ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: 400px;" #agGrid
+<ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
   [rowData]="rowData"
   [columnDefs]="columnDefs"
+  domLayout="autoHeight"
   [modules]="modules"
   (gridReady)="onGridReady($event)"
   (rowSelected)="selectionChanged($event)"

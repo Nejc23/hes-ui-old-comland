@@ -109,17 +109,6 @@ export class ScheduledJobsListComponent implements OnInit {
     this.searchChange($event);
   }
 
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  }
-
   get searchProperty() {
     return 'content';
   }
