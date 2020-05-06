@@ -57,36 +57,21 @@ export class ScheduledJobsListComponent implements OnInit {
 
   ngOnInit() {
     console.log('scheduled-jobs-list.component ngOnInit');
-    this.form = this.createForm();
     this.columnDefs = this.scheduledJobsListGridService.setGridDefaultColumns();
+    this.refreshGrid();
+  }
+
+  refreshGrid() {
+    this.form = this.createForm();
     this.rowData$ = this.scheduledJobsService.getScheduledJobsList();
     this.rowData$.subscribe(x => {
       this.allRowData = x;
       this.countScheduled = x.length;
-      this.searchChange();
+      this.searchData();
     });
   }
 
-  getSelectedRowIds() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    return _.map(
-      selectedRows,
-      nameOf<ScheduledJobsList>(o => o.id)
-    );
-  }
-
-  deselectAllRows() {
-    this.gridApi.deselectAll();
-  }
-
-  changeJobType() {
-    /*
-    this.selectedId = parseInt(this.form.get(this.jobTypeProperty).value, 10);
-    console.log(`changeJobType = ${this.form.get(this.jobTypeProperty).value}`);
-    */
-  }
-
-  searchChange(search: string = '') {
+  searchData(search: string = '') {
     const searchToLower = search.toLowerCase();
     this.rowData = _.filter(
       this.allRowData,
@@ -97,22 +82,5 @@ export class ScheduledJobsListComponent implements OnInit {
         data.owner.toLowerCase().includes(searchToLower)
     );
     this.countScheduled = this.rowData.length;
-  }
-
-  selectionChanged($event: any) {
-    this.selectedAll = this.getSelectedRowIds().length === this.countScheduled;
-  }
-
-  insertedValue($event: string) {
-    if ($event !== undefined) {
-      this.searchTextEmpty = $event.length === 0;
-    } else {
-      this.searchTextEmpty = true;
-    }
-    this.searchChange($event);
-  }
-
-  get searchProperty() {
-    return 'content';
   }
 }

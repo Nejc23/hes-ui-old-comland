@@ -1,0 +1,13 @@
+<div class="d-flex">
+  <app-input-searcher class="mr-2" [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
+    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
+  <button type="button" class="btn btn-link" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
+      class="far fa-redo"></i></button>
+  <button type="button" class="btn btn-link" [ngbTooltip]="tipContentExport"><i class="far fa-file-excel"></i></button>
+</div>
+<ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
+<ng-template #tipContentFilter><span i18n>Apply saved state or save new</span></ng-template>
+<ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
+<ng-template #tipContentExport><span i18n>Export in excel</span></ng-template>
+
+
