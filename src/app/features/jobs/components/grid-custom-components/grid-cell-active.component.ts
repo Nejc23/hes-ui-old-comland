@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
@@ -13,8 +13,11 @@ import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/
   templateUrl: './grid-cell-active.component.html'
 })
 export class GridCellActiveComponent implements ICellRendererAngularComp {
+  @ViewChild('activeSwitch', { static: true }) activeSwitch;
+
   public params: any;
-  messageActionInProgress = this.i18n(`Action in progress!`);
+  messageEnabled = this.i18n(`Scheduled job enabled!`);
+  messageDisabled = this.i18n(`Scheduled job disabled!`);
   messageServerError = this.i18n(`Server error!`);
 
   constructor(
@@ -35,8 +38,6 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
   }
 
   valueChange(params: any, event: boolean) {
-    // console.log(`valueChange event = ${event}`);
-    // console.log(JSON.stringify(params.node.data));
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
@@ -51,21 +52,16 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
         // on close (CONFIRM)
         response.subscribe(
           value => {
-            this.toast.successToast(this.messageActionInProgress);
-            this.refresh(this.params);
+            this.toast.successToast(event ? this.messageEnabled : this.messageDisabled);
           },
           e => {
             this.toast.errorToast(this.messageServerError);
-            this.params.data.active = !this.params.data.active;
-            this.refresh(this.params);
           }
         );
       },
       reason => {
         // on dismiss (CLOSE)
-        this.params.data.active = !event;
-        console.log(`cancel = ${JSON.stringify(this.params.data)}`);
-        this.refresh(this.params);
+        this.activeSwitch.checked = !event;
       }
     );
   }

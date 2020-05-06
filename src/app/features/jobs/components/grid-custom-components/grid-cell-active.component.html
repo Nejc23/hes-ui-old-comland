@@ -1,3 +1,3 @@
-<div class="d-flex align-items-center mt-1">
-  <kendo-switch [(ngModel)]="params.value" (valueChange)="valueChange(params, $event)"></kendo-switch>
+<div class="d-flex align-items-center mt-1" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="setToolTip(params.value)">
+  <kendo-switch #activeSwitch [(ngModel)]="params.value" (valueChange)="valueChange(params, $event)"></kendo-switch>
 </div>
