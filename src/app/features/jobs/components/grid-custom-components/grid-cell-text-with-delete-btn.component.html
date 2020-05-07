@@ -2,7 +2,7 @@
   <div class="mr-auto">
     <span>{{params.value}}</span>
   </div>
-  <div>
+  <div container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip()">
     <button type="button" class="btn btn-link text-danger" (click)="deleteJob(params)"><i class="far fa-trash"></i></button>
   </div>
 </div>
