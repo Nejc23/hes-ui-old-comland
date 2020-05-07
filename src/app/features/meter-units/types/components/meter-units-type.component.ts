@@ -30,6 +30,8 @@ import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { PlcMeterTouConfigComponent } from '../../components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
+import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -177,6 +179,33 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     });
+  }
+
+  // form - rights
+  get formFunctionality() {
+    return FunctionalityEnumerator.MU;
+  }
+  // actions - rights
+  get actionMUBreakerStatus() {
+    return ActionEnumerator.MUBreakerStatus;
+  }
+  get actionMUConnect() {
+    return ActionEnumerator.MUConnect;
+  }
+  get actionMUDisconnect() {
+    return ActionEnumerator.MUDisconnect;
+  }
+  get actionMUReadJobs() {
+    return ActionEnumerator.MUReadJobs;
+  }
+  get actionMUSetLimiter() {
+    return ActionEnumerator.MUSetLimiter;
+  }
+  get actionMUTOU() {
+    return ActionEnumerator.MUTOU;
+  }
+  get actionMUUpgrade() {
+    return ActionEnumerator.MUUpgrade;
   }
 
   // set form title by selected meter unit type

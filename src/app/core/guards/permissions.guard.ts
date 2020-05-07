@@ -19,6 +19,7 @@ export class PermissionsGuard implements CanActivateChild, CanActivate {
 
   guardLogic(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const permission = _.get(next.data, 'permission', false);
+    console.log(permission);
     // If no permission property always allow access
     if (!permission) {
       return true;

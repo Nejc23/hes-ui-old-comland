@@ -23,23 +23,28 @@ export class UserNewPasswordInterceptor {
       userRights: [
         {
           functionality: 'dashboard',
-          writeRights: true
+          writeRights: true,
+          action: []
         },
         {
           functionality: 'configuration',
-          writeRights: true
+          writeRights: true,
+          action: []
         },
         {
           functionality: 'analytics',
-          writeRights: true
+          writeRights: true,
+          action: []
         },
         {
           functionality: 'reports',
-          writeRights: true
+          writeRights: true,
+          action: []
         },
         {
           functionality: 'users',
-          writeRights: true
+          writeRights: true,
+          action: []
         }
       ]
     };

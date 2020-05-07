@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     path: '',
     component: BaseTemplateComponent,
     canActivate: [AuthGuard],
-    ///  canActivateChild: [PermissionsGuard], TODO !!!!
+    canActivateChild: [PermissionsGuard],
     runGuardsAndResolvers: 'always',
     children: [
       {

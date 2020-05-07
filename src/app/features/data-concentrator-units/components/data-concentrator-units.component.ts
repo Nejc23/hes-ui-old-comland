@@ -23,6 +23,8 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
+import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
+import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -109,6 +111,18 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     });
+  }
+
+  // form - rights
+  get formFunctionality() {
+    return FunctionalityEnumerator.DCU;
+  }
+  // actions - rights
+  get actionDCUUpgrade() {
+    return ActionEnumerator.DCUUpgrade;
+  }
+  get actionDCUConfiguration() {
+    return ActionEnumerator.DCUConfiguration;
   }
 
   ngOnInit() {

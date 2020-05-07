@@ -26,15 +26,22 @@
       <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear selected</span></a></u></strong></small>
     </div>
-    <button type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
-    <button type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
-    <button type="button" class="btn btn-link" (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
-    <button type="button" class="btn btn-link" (click)="onBreakerStatus()"><i class="far fa-list-alt"></i><span i18n>Breaker Status</span></button>
-    <button type="button" class="btn btn-link" (click)="onConnect()"><i class="far fa-plug"></i><span i18n>Connect</span></button>
-    <button type="button" class="btn btn-link" (click)="onDisconnect()"><i class="far fa-plug"></i><span i18n>Disconnect</span></button>
-    <button type="button" class="btn btn-link" (click)="onSetLimiter()"><i class="far fa-exclamation-triangle"></i><span i18n>Set Limiter</span></button>
-    <button type="button" class="btn btn-link" (click)="onTou()"><i class="far fa-cog"></i><span i18n>TOU</span></button>
-    <button type="button" class="btn btn-link" (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" type="button" class="btn btn-link" 
+            (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" type="button" class="btn btn-link"
+            (click)="onBreakerStatus()"><i class="far fa-list-alt"></i><span i18n>Breaker Status</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" type="button" class="btn btn-link"
+            (click)="onConnect()"><i class="far fa-plug"></i><span i18n>Connect</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" type="button" class="btn btn-link"
+            (click)="onDisconnect()"><i class="far fa-plug"></i><span i18n>Disconnect</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" type="button" class="btn btn-link"
+            (click)="onSetLimiter()"><i class="far fa-exclamation-triangle"></i><span i18n>Set Limiter</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" type="button" class="btn btn-link"
+            (click)="onTou()"><i class="far fa-cog"></i><span i18n>TOU</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
+            (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
   </div>
 
   <!-- ag-grid -->

@@ -41,6 +41,8 @@ import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refre
 import { PlcMeterTouConfigComponent } from '../features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { TouConfigSelectComponent } from '../features/tou-config-select/component/tou-config-select.component';
 import { IdentityErrorComponent } from './IdentityError/identity-error.component';
+import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
+import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide-if-action-unauthorized.directive';
 
 @NgModule({
   exports: [
@@ -72,6 +74,8 @@ import { IdentityErrorComponent } from './IdentityError/identity-error.component
     DisableIfUnauthorizedDirective,
     HideIfAuthorizedReadonlyDirective,
     HideIfUnauthorizedDirective,
+    DisableIfActionUnauthorizedDirective,
+    HideIfActionUnauthorizedDirective,
     NumberOnlyDirective,
     PipesModule,
     BreadcrumbsModule,
@@ -116,6 +120,8 @@ import { IdentityErrorComponent } from './IdentityError/identity-error.component
     DisableIfUnauthorizedDirective,
     HideIfAuthorizedReadonlyDirective,
     HideIfUnauthorizedDirective,
+    DisableIfActionUnauthorizedDirective,
+    HideIfActionUnauthorizedDirective,
     NumberOnlyDirective,
     SideFixedNavComponent,
     Page404Component,

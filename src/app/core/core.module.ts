@@ -20,6 +20,7 @@ import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.intercepto
 import { GridSettingsCookieStoreService } from './utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
 import { GridLayoutSessionStoreService } from './utils/services/grid-layout-session-store.service';
+import { RoleService } from './permissions/services/role.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -32,6 +33,7 @@ import { GridLayoutSessionStoreService } from './utils/services/grid-layout-sess
     CookieService,
     PermissionsService,
     PermissionsStoreService,
+    RoleService,
     ErrorHandlerService,
     GridSettingsCookieStoreService,
     GridSettingsSessionStoreService,

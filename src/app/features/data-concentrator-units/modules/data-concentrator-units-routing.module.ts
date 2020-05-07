@@ -9,13 +9,14 @@ const routes: Routes = [
     path: '',
     data: {
       breadcrumb: 'Overview - Data Concentrator Units',
-      permission: FunctionalityEnumerator.dashboard
+      permission: FunctionalityEnumerator.DCU
     },
     children: [
       {
         path: '',
         data: {
-          breadcrumb: null
+          breadcrumb: null,
+          permission: FunctionalityEnumerator.DCU
         },
         component: DataConcentratorUnitsComponent
       }

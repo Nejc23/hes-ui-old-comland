@@ -17,6 +17,8 @@ import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { selectedLocale } from 'src/environments/locale';
 import { JwtHelperService } from './jwt.helper.service';
+import { RoleService } from '../../permissions/services/role.service';
+import { UserRight } from '../../permissions/interfaces/user-rights.interface';
 
 @Injectable()
 export class AuthService {
@@ -28,14 +30,15 @@ export class AuthService {
   tokenName = 'myGrid.Link_Token';
   tokenDateTime = 'myGrid.Link_Token_DateTime';
   tokenExpiresIn = 'myGrid.Link_Token_ExpiresIn';
-
+  currentPermissions: UserRight[];
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
     private cookieService: CookieService,
     private router: Router,
     private appStore: AppStoreService,
     private permissionsStoreService: PermissionsStoreService,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private roleService: RoleService
   ) {
     const settings = {
       authority: environment.stsAuthority,
@@ -58,6 +61,10 @@ export class AuthService {
     /* this.userManager.getUser().then(user => {
       this.user = user;
     });*/
+
+    permissionsStoreService.userRightsObservable.subscribe(permissions => {
+      this.currentPermissions = permissions;
+    });
   }
 
   getAuthToken(): string {
@@ -132,7 +139,7 @@ export class AuthService {
       localStorage.setItem('is_develop', this.user.id_token);
     }
     // this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
-    // this.setUserRights(authenticatedUser);
+    this.setUserRights(authenticatedUser);
   }
   // for calling API-s on myGrid.Link server
   // ----------------------------------------
@@ -218,20 +225,20 @@ export class AuthService {
     this.cookieService.set(config.authCookie, authenticatedUser.accessToken, null, environment.cookiePath);
     this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     this.cookieService.set(config.authType, authenticatedUser.tokenType, null, environment.cookiePath);
-    this.setUserRights(authenticatedUser);
+    //this.setUserRights(authenticatedUser);
   }
 
   /**
    * Set User and his Rights
    */
-  private setUserRights(authenticatedUser: AuthenticatedUser) {
+  private setUserRights(authenticatedUser: User) {
     // if Token is OK
     if (this.getAuthToken() != null && this.getAuthToken().length > 0) {
       return of(null)
         .pipe(
           map((x: any) => {
-            this.permissionsStoreService.setUserRights(authenticatedUser.userRights);
-            this.appStore.setUser(authenticatedUser);
+            this.permissionsStoreService.setUserRights(this.roleService.setUSerRightsFromRoles(authenticatedUser));
+            // this.appStore.setUser(authenticatedUser);
           })
         )
         .subscribe(
@@ -261,7 +268,7 @@ export class AuthService {
    * Refresh Token if needed
    * If user is inactive more than 110 minutes, return to LOGIN
    */
-  setRefreshTokenInterval() {
+  /*setRefreshTokenInterval() {
     if (this.isIntervalTokenSet()) {
       return;
     }
@@ -273,7 +280,7 @@ export class AuthService {
         this.refreshTokenAndSetUserRights();
       }
     });
-  }
+  }*/
 
   removeRefreshTokenInterval() {
     if (this.refreshTokenInterval$) {
@@ -323,7 +330,7 @@ export class AuthService {
     this.cookieService.delete(config.authType);
     // this.cookieService.deleteAll('/');
   }
-
+  /*
   refreshTokenAndSetUserRights() {
     this.refresh().subscribe(
       response => {
@@ -333,5 +340,5 @@ export class AuthService {
         console.warn(e);
       }
     );
-  }
+  }*/
 }

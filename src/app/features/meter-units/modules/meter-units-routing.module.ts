@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '',
     data: {
       breadcrumb: '',
-      permission: FunctionalityEnumerator.dashboard
+      permission: FunctionalityEnumerator.MU
     },
     children: [
       {

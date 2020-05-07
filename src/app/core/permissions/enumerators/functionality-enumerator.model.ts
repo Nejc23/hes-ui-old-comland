@@ -1,7 +1,6 @@
 export enum FunctionalityEnumerator {
-  dashboard = 'dashboard',
-  configuration = 'configuration',
-  analytics = 'analytics',
-  reports = 'reports',
-  users = 'users'
+  dashboard = 'Dashboard',
+  DCU = 'Data-Concentrator-Units',
+  MU = 'Meter-Units',
+  jobs = 'Jobs'
 }
