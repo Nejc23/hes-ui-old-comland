@@ -1,6 +1,9 @@
 
 <div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
+  <button class="btn btn-primary btn-round" (click)="addScheduledJob()">
+    <i class="far fa-plus"></i>
+  </button>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div>
 
@@ -39,5 +42,7 @@
   [modules]="modules"
   (gridReady)="onGridReady($event)"
   suppressRowClickSelection="true"
+  [pagination]="true"
+  [paginationPageSize]="10"
   rowSelection="multiple">
 </ag-grid-angular>

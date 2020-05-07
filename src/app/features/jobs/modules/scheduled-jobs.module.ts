@@ -6,11 +6,24 @@ import { ScheduledJobsListComponent } from '../components/scheduled-jobs-list/sc
 import { ScheduledJobsRoutingModule } from './scheduled-jobs-routing.module';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
+import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
+import { GridCellTextWithDeleteComponent } from '../components/grid-custom-components/grid-cell-text-with-delete-btn.component';
 
 @NgModule({
   entryComponents: [],
-  declarations: [ScheduledJobsListComponent, GridCellActiveComponent, ActionFormComponent],
-  imports: [SharedModule, ScheduledJobsRoutingModule, BreadcrumbsModule, AgGridModule.withComponents([GridCellActiveComponent])],
+  declarations: [
+    ScheduledJobsListComponent,
+    GridCellActiveComponent,
+    GridCellNextRunComponent,
+    GridCellTextWithDeleteComponent,
+    ActionFormComponent
+  ],
+  imports: [
+    SharedModule,
+    ScheduledJobsRoutingModule,
+    BreadcrumbsModule,
+    AgGridModule.withComponents([GridCellActiveComponent, GridCellNextRunComponent, GridCellTextWithDeleteComponent])
+  ],
   exports: []
 })
 export class ScheduledJobsModule {}

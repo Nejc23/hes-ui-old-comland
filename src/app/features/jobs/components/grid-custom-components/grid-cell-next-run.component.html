@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="setToolTip()">
+  <div class="mr-auto">
+    <span>{{params.value}}</span>
+  </div>
+  <div>
+    <button type="button" class="btn btn-link text-primary" (click)="runJob(params)"><i class="far fa-play-circle primary"></i></button>
+  </div>
+</div>

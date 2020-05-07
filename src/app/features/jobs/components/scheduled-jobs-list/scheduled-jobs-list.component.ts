@@ -83,4 +83,8 @@ export class ScheduledJobsListComponent implements OnInit {
     );
     this.countScheduled = this.rowData.length;
   }
+
+  addScheduledJob() {
+    // TODO: AO, 07.05.2020, open form for adding new scheduled job
+  }
 }

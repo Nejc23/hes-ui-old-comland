@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
+import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
+import { GridCellTextWithDeleteComponent } from '../components/grid-custom-components/grid-cell-text-with-delete-btn.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +15,9 @@ export class ScheduledJobsListGridService {
 
   public setFrameworkComponents() {
     return {
-      gridCellActiveComponent: GridCellActiveComponent
+      gridCellActiveComponent: GridCellActiveComponent,
+      gridCellNextRunComponent: GridCellNextRunComponent,
+      gridCellTextWithDeleteComponent: GridCellTextWithDeleteComponent
     };
   }
 
@@ -53,6 +57,7 @@ export class ScheduledJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
+        cellRenderer: 'gridCellNextRunComponent',
         headerName: this.i18n('Next run'),
         headerTooltip: this.i18n('Next run')
       },
@@ -62,6 +67,7 @@ export class ScheduledJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
+        cellRenderer: 'gridCellTextWithDeleteComponent',
         headerName: this.i18n('Owner'),
         headerTooltip: this.i18n('Owner')
       }
