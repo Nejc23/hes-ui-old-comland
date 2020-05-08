@@ -10,7 +10,7 @@
 <div class="row d-flex flex-nowrap justify-content-start">
   <div class="col mx-3 border py-3 text-center border-primary">
     <span i18n>Scheduled</span>
-    <span class="counter">{{countScheduled}}</span>
+    <span class="counter">{{totalCount}}</span>
   </div>
   <div class="col mx-3 border py-3 text-center border-secondary">
     <span i18n>Pending</span>
@@ -29,12 +29,15 @@
 
 <div class="d-flex justify-content-between align-items-center p-2 grid-actions my-3">
   <div>
-    <small class="text-secondary">{{countScheduled}} <span i18n>items found</span></small>
+    <small class="text-secondary">{{totalCount}} <span i18n>items found</span></small>
   </div>
   <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
 </div>
 
-<ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
+<ag-grid-angular class="ag-theme-epoint"
+  style="width: 100%; height: calc(100% - 25px);"
+  #agGrid
+
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   domLayout="autoHeight"
@@ -44,5 +47,18 @@
   suppressRowClickSelection="true"
   [pagination]="true"
   [paginationPageSize]="10"
-  rowSelection="multiple">
+
+  suppressSizeToFit="true"
+  [cacheOverflowSize]="2"
+  [maxConcurrentDatasourceRequests]="2"
+  [cacheBlockSize]="10"
+  [maxBlocksInCache]="1"
+  [gridOptions]="gridOptions"
+
+  [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+  [overlayLoadingTemplate]="overlayLoadingTemplate"
+  (paginationChanged)="onPaginationChange($event)"
+  (firstDataRendered)="onFirstDataRendered($event)"
+
+  >
 </ag-grid-angular>

@@ -5,13 +5,15 @@ import * as _ from 'lodash';
 import { meterUnitRegisters, scheduledJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 
 @Injectable()
 export class ScheduledJobsInterceptor {
   constructor() {}
 
   static interceptScheduledJobsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const body: ScheduledJobsList[] = [
+    const data: ScheduledJobsList[] = [
       {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
@@ -78,6 +80,44 @@ export class ScheduledJobsInterceptor {
       }
     ];
 
+    let skip = 0;
+    let take = 0;
+    let sortColId = '';
+    let sortedJobs = []; // data;
+    let searched = data;
+    if (request.body) {
+      const params = request.body as GridRequestParams;
+      if (params.searchModel && params.searchModel.length > 0) {
+        searched = searchById(data, params.searchModel[0].value);
+      }
+
+      skip = params.startRow;
+      take = params.endRow;
+
+      if (params.sortModel) {
+        if (params.sortModel.length > 0) {
+          params.sortModel.forEach(element => {
+            sortColId = element.colId;
+
+            if (element.sort === 'desc') {
+              sortedJobs = _.sortBy(searched, sortColId).reverse();
+            } else {
+              sortedJobs = _.sortBy(searched, sortColId);
+            }
+          });
+        } else {
+          sortedJobs = searched;
+        }
+      }
+    }
+
+    const body: GridResponse<ScheduledJobsList> = {
+      data: sortedJobs.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
+      totalCount: searched.length,
+      summary: '',
+      groupCount: 0
+    };
+
     return of(
       new HttpResponse({
         status: 200,
@@ -87,6 +127,24 @@ export class ScheduledJobsInterceptor {
   }
 
   static canInterceptScheduledJobsList(request: HttpRequest<any>): boolean {
-    return new RegExp(scheduledJobs).test(request.url) && request.method.endsWith('GET');
+    return new RegExp(scheduledJobs).test(request.url) && request.method.endsWith('POST');
   }
+}
+
+function searchById(companies, filter) {
+  let result;
+  if (typeof filter === 'undefined' || filter.length === 0) {
+    result = companies;
+  } else {
+    result = _.filter(companies, c => {
+      const cProperties = _.keys(c);
+      _.pull(cProperties, 'id');
+      return _.find(cProperties, property => {
+        if (c[property]) {
+          return _.includes(_.lowerCase(c[property]), _.lowerCase(filter));
+        }
+      });
+    });
+  }
+  return result;
 }

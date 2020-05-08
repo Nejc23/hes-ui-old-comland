@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { scheduledJobs } from '../../consts/data-concentrator-units.const';
 import { ScheduledJobsList } from '../../interfaces/jobs/scheduled-jobs-list.interface';
+import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
+import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +13,11 @@ import { ScheduledJobsList } from '../../interfaces/jobs/scheduled-jobs-list.int
 export class ScheduledJobsService {
   constructor(private repository: RepositoryService) {}
 
-  getScheduledJobsList(): Observable<ScheduledJobsList[]> {
-    return this.repository.makeRequest(this.getScheduledJobsListRequest());
+  getScheduledJobsList(param: GridRequestParams): Observable<GridResponse<ScheduledJobsList>> {
+    return this.repository.makeRequest(this.getScheduledJobsListRequest(param));
   }
 
-  getScheduledJobsListRequest(): HttpRequest<any> {
-    return new HttpRequest('GET', scheduledJobs);
+  getScheduledJobsListRequest(param: GridRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', scheduledJobs, param);
   }
 }

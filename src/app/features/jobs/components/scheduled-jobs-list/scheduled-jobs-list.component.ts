@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
+import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
@@ -12,6 +12,8 @@ import { ScheduledJobsListGridService } from '../../services/scheduled-jobs-list
 import { ScheduledJobsService } from 'src/app/core/repository/services/jobs/scheduled-jobs.service';
 import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-static-text.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
+import { enumSearchFilterOperators } from 'src/environments/config';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 
 @Component({
   selector: 'app-scheduled-jobs-list',
@@ -21,17 +23,35 @@ export class ScheduledJobsListComponent implements OnInit {
   form: FormGroup;
 
   selectedId = 1;
-  countScheduled = 0;
+  totalCount = 0;
   searchTextEmpty = true;
-  public modules: Module[] = AllModules;
-  public gridApi;
-  public frameworkComponents;
-  columnDefs = [];
+
   rowData$: Observable<ScheduledJobsList[]>;
   rowData: ScheduledJobsList[];
   allRowData: ScheduledJobsList[];
-  selectedAll = false;
   headerTitle = this.staticTextService.jobsTitle;
+
+  // N/A
+  notAvailableText = this.staticTextService.notAvailableTekst;
+  overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
+  overlayLoadingTemplate = this.staticTextService.loadingData;
+  noData = false;
+
+  // ag-grid
+  public modules: Module[] = AllModules;
+  public gridOptions: Partial<GridOptions>;
+  public gridApi;
+  public frameworkComponents;
+  loadGrid = true;
+  requestModel: GridRequestParams = {
+    startRow: 0,
+    endRow: 0,
+    sortModel: [],
+    searchModel: []
+  };
+  columnDefs = [];
+
+  private localeText;
 
   constructor(
     private i18n: I18n,
@@ -41,7 +61,12 @@ export class ScheduledJobsListComponent implements OnInit {
     public staticTextService: ScheduledJobsStaticTextService,
     private formUtils: FormsUtilsService
   ) {
+    if (this.gridApi) {
+      this.gridApi.purgeServerSideCache([]);
+    }
+
     this.frameworkComponents = scheduledJobsListGridService.setFrameworkComponents();
+    this.gridOptions = this.scheduledJobsListGridService.setGridOptions();
   }
 
   createForm(): FormGroup {
@@ -50,38 +75,102 @@ export class ScheduledJobsListComponent implements OnInit {
     });
   }
 
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  setSearch() {
+    const search = this.scheduledJobsListGridService.getSessionSettingsSearchedText();
+    if (search && search !== '') {
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+    }
+    return [];
+  }
+
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
+
+    const that = this;
+    const datasource = {
+      getRows(paramsRow) {
+        that.requestModel.startRow = that.scheduledJobsListGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.scheduledJobsListGridService.getCurrentRowIndex().endRow;
+        that.requestModel.sortModel = paramsRow.request.sortModel;
+        that.requestModel.searchModel = that.setSearch();
+        that.scheduledJobsService.getScheduledJobsList(that.requestModel).subscribe(data => {
+          that.gridApi.hideOverlay();
+          that.totalCount = data.totalCount;
+          if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {
+            that.noData = true;
+          } else if (data.totalCount === 0) {
+            that.gridApi.showNoRowsOverlay();
+          }
+
+          that.gridApi.paginationGoToPage(that.scheduledJobsListGridService.getSessionSettingsPageIndex());
+          paramsRow.successCallback(data.data, data.totalCount);
+        });
+      }
+    };
+    this.gridApi.setServerSideDatasource(datasource);
   }
 
   ngOnInit() {
     console.log('scheduled-jobs-list.component ngOnInit');
     this.columnDefs = this.scheduledJobsListGridService.setGridDefaultColumns();
-    this.refreshGrid();
+
+    this.localeText = {
+      // for side panel
+      columns: this.i18n('Columns'),
+      filters: this.i18n('Filters'),
+
+      // for filter panel
+      page: this.i18n('page'),
+      more: this.i18n('more'),
+      to: this.i18n('to'),
+      of: this.i18n('of'),
+      next: this.i18n('next'),
+      last: this.i18n('last'),
+      first: this.i18n('first'),
+      previous: this.i18n('previous'),
+      loadingOoo: this.i18n('loading...')
+    };
   }
 
   refreshGrid() {
-    this.form = this.createForm();
-    this.rowData$ = this.scheduledJobsService.getScheduledJobsList();
-    this.rowData$.subscribe(x => {
-      this.allRowData = x;
-      this.countScheduled = x.length;
-      this.searchData();
-    });
+    this.gridApi.purgeServerSideCache([]);
   }
 
-  searchData(search: string = '') {
-    const searchToLower = search.toLowerCase();
-    this.rowData = _.filter(
-      this.allRowData,
-      data =>
-        data.type.toLowerCase().includes(searchToLower) ||
-        data.description.toLowerCase().includes(searchToLower) ||
-        data.nextRun.toLowerCase().includes(searchToLower) ||
-        data.owner.toLowerCase().includes(searchToLower)
-    );
-    this.countScheduled = this.rowData.length;
+  searchData($event: string) {
+    if ($event !== this.scheduledJobsListGridService.getSessionSettingsSearchedText()) {
+      this.scheduledJobsListGridService.setSessionSettingsSearchedText($event);
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+
+      this.scheduledJobsListGridService.setSessionSettingsPageIndex(0);
+      this.gridApi.onFilterChanged();
+    }
+  }
+
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
+    params.api.showLoadingOverlay();
+  }
+
+  // on change page in the grid
+  onPaginationChange(params) {
+    if (this.gridApi) {
+      this.gridApi.refreshHeader();
+    }
+
+    if (params.newPage && !this.loadGrid) {
+      this.scheduledJobsListGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
+    } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
+      this.loadGrid = false;
+      params.api.paginationGoToPage(this.scheduledJobsListGridService.getSessionSettingsPageIndex());
+    }
   }
 
   addScheduledJob() {

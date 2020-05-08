@@ -52,9 +52,7 @@ export class GridCellTextWithDeleteComponent implements ICellRendererAngularComp
           value => {
             console.log(params);
             const gridApi = this.params.api as GridApi;
-            const rowNodes: RowNode[] = [];
-            rowNodes.push(params.node);
-            gridApi.removeItems(rowNodes);
+            gridApi.purgeServerSideCache([]);
             this.toast.successToast(this.messageStarted);
           },
           e => {
