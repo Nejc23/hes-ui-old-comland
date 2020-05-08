@@ -138,7 +138,7 @@ export class AuthenticateInterceptor {
         company_name: 'Comland',
         family_name: 'Develop',
         given_name: 'User',
-        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': ['Partner', 'User', 'RegisteredUser'],
+        'http://schemas.microsoft.com/ws/2008/06/identity/claims/role': ['SuperAdmin', 'User', 'RegisteredUser'],
         'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name': 'damijan.kavs@comland.si',
         idp: 'local',
         name: 'damijan.kavs@comland.si',

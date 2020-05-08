@@ -30,7 +30,7 @@ export class AuthService {
   tokenName = 'myGrid.Link_Token';
   tokenDateTime = 'myGrid.Link_Token_DateTime';
   tokenExpiresIn = 'myGrid.Link_Token_ExpiresIn';
-  currentPermissions: UserRight[];
+
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
     private cookieService: CookieService,
@@ -61,10 +61,6 @@ export class AuthService {
     /* this.userManager.getUser().then(user => {
       this.user = user;
     });*/
-
-    permissionsStoreService.userRightsObservable.subscribe(permissions => {
-      this.currentPermissions = permissions;
-    });
   }
 
   getAuthToken(): string {
