@@ -74,7 +74,8 @@ describe('Pact consumer test', () => {
         status: 'Active',
         nextRead: null,
         name: 'Cubis PLC temp 520',
-        readStatusPercent: 93.5,
+        readStatusDate: '2020-05-05T03:21:19',
+        readStatusColor: 'ok',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
         breakerState: 'on',
@@ -84,14 +85,16 @@ describe('Pact consumer test', () => {
         meterId: '123456',
         moduleId: '22222',
         parent: '77777',
-        timeOfUseId: '5555'
+        timeOfUseId: '5555',
+        jobStatus: 'Success'
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
         nextRead: '2020-03-03T15:35:29',
         name: 'Cubis PLC temp 423',
-        readStatusPercent: 13.5,
+        readStatusDate: '2020-03-15T03:21:19',
+        readStatusColor: 'warning',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
         breakerState: 'off',
@@ -101,7 +104,27 @@ describe('Pact consumer test', () => {
         meterId: '1234456',
         moduleId: '22252',
         parent: '774777',
-        timeOfUseId: '55455'
+        timeOfUseId: '55455',
+        jobStatus: 'Failed'
+      },
+      {
+        id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
+        status: 'Warehouse',
+        nextRead: '2019-11-30T02:32:13',
+        name: 'Cubis PLC temp 642',
+        readStatusDate: '2019-12-19T13:55:55',
+        readStatusColor: 'alarm',
+        vendor: 'Landis+Gy',
+        tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
+        breakerState: 'off',
+        childInfo: 12345,
+        firmware: 'FM-223',
+        id5: 'ID-12345',
+        meterId: '1234456',
+        moduleId: '22252',
+        parent: '774777',
+        timeOfUseId: '55455',
+        jobStatus: 'Running'
       }
     ];
 

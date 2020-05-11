@@ -3,15 +3,12 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
-import { readStatusTrashold } from 'src/app/features/data-concentrator-units/consts/data-concentrator-units.consts';
 
 @Component({
-  selector: 'app-grid-cell-read-status',
-  templateUrl: './grid-cell-read-status.component.html'
+  selector: 'app-grid-cell-icon',
+  templateUrl: './grid-cell-icon.component.html'
 })
-export class GridCellReadStatusComponent implements ICellRendererAngularComp {
-  trasholds = readStatusTrashold;
-
+export class GridCellIconComponent implements ICellRendererAngularComp {
   public params: any;
 
   constructor(private staticextService: MeterUnitsTypeStaticTextService, private i18n: I18n) {}
@@ -26,13 +23,8 @@ export class GridCellReadStatusComponent implements ICellRendererAngularComp {
     return true;
   }
 
-  // set tooltip text
-  setToolTip(value: string) {
-    return moment(value).format('L') + ' ' + moment(value).format('LTS');
-  }
-
   // set momemnt text (next planned read) out of date and time
-  setMomentStatusDate(value: string) {
-    return moment(value).format('L');
+  setMomentNextPlannedReadTime(time: string) {
+    return this.staticextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
   }
 }

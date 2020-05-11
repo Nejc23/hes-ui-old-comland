@@ -5,7 +5,8 @@ export interface MeterUnitsList {
   status: string;
   nextRead: string;
   name: string;
-  readStatusPercent: number;
+  readStatusDate: string;
+  readStatusColor: string;
   vendor: string;
   parent: string;
   moduleId: string;
@@ -16,4 +17,5 @@ export interface MeterUnitsList {
   childInfo: number;
   breakerState: string;
   tags: string[];
+  jobStatus: string;
 }

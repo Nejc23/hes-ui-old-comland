@@ -1,0 +1,14 @@
+
+
+<div class="d-flex align-items-center" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom"
+  [ngbTooltip]="params.value">
+  <i class="fad fa-circle-notch text-success" *ngIf="params.value.toLowerCase() == 'running'"></i>
+  <i class="far fa-check-circle text-success" *ngIf="params.value.toLowerCase() == 'success'"></i>
+  <i class="fas fa-exclamation-circle text-danger" *ngIf="params.value.toLowerCase() == 'failed'"></i>
+  <i class="far fa-pause-circle text-warning" *ngIf="params.value.toLowerCase() == 'pending'"></i>
+  <span class="text-truncate flex-shrink-1" [ngClass]="{
+    'text-success': params.value.toLowerCase() == 'running' || params.value.toLowerCase() == 'success',
+    'text-danger': params.value.toLowerCase() == 'failed',
+    'text-warning': params.value.toLowerCase() == 'pending'}">{{params.value}}</span>
+</div>
+<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>

@@ -23,6 +23,8 @@ import { GridCellTimeOfUseIdComponent } from '../components/grid-custom-componen
 import { GridCellBreakerStateComponent } from '../components/grid-custom-components/grid-cell-breaker-state.component';
 import { GridCellInfoOfChildComponent } from '../components/grid-custom-components/grid-cell-info-of-child.component';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
+import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 
 @Injectable({
   providedIn: 'root'
@@ -75,6 +77,22 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Select/deselect all')
       },
       {
+        field: 'nextRead',
+        headerName: this.i18n(''),
+        suppressColumnsToolPanel: true,
+        suppressMovable: true,
+        lockPosition: true,
+        pinned: 'left',
+        lockPinned: true,
+        sortable: false,
+        filter: false,
+        cellRenderer: 'gridCellIconComponent',
+        headerTooltip: this.i18n(''),
+        minWidth: 50,
+        maxWidth: 50,
+        width: 50
+      },
+      {
         field: 'status',
         headerName: this.i18n('Status'),
         pinned: true,
@@ -93,14 +111,14 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Name')
       },
       {
-        field: 'readStatusPercent',
-        headerName: this.i18n('Read status'),
+        field: 'readStatusDate',
+        headerName: this.i18n('Status'),
         pinned: true,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: this.i18n('Read status')
+        headerTooltip: this.i18n('Status')
       },
       {
         field: 'vendor',
@@ -191,6 +209,16 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
         headerTooltip: this.i18n('Tags')
+      },
+      {
+        field: 'jobStatus',
+        headerName: this.i18n('Job status'),
+        pinned: 'right',
+        lockPinned: true,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellJobStatusComponent',
+        headerTooltip: this.i18n('Job status')
       }
     ];
   }
@@ -211,7 +239,9 @@ export class MeterUnitsTypeGridService {
       gridCellIdNumberComponent: GridCellIdNumberComponent,
       gridCellTimeOfUseIdComponent: GridCellTimeOfUseIdComponent,
       gridCellBreakerStateComponent: GridCellBreakerStateComponent,
-      gridCellInfoOfChildComponent: GridCellInfoOfChildComponent
+      gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
+      gridCellIconComponent: GridCellIconComponent,
+      gridCellJobStatusComponent: GridCellJobStatusComponent
     };
   }
 

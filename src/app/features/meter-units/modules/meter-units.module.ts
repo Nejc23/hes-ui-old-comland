@@ -21,6 +21,8 @@ import { GridCellFirmwareComponent } from '../types/components/grid-custom-compo
 import { GridCellTimeOfUseIdComponent } from '../types/components/grid-custom-components/grid-cell-time-of-use-id.component';
 import { GridCellBreakerStateComponent } from '../types/components/grid-custom-components/grid-cell-breaker-state.component';
 import { GridCellInfoOfChildComponent } from '../types/components/grid-custom-components/grid-cell-info-of-child.component';
+import { GridCellIconComponent } from '../types/components/grid-custom-components/grid-cell-icon.component';
+import { GridCellJobStatusComponent } from '../types/components/grid-custom-components/grid-cell-job-status.component';
 
 @NgModule({
   entryComponents: [],
@@ -42,7 +44,9 @@ import { GridCellInfoOfChildComponent } from '../types/components/grid-custom-co
     GridCellIdNumberComponent,
     GridCellTimeOfUseIdComponent,
     GridCellBreakerStateComponent,
-    GridCellInfoOfChildComponent
+    GridCellInfoOfChildComponent,
+    GridCellIconComponent,
+    GridCellJobStatusComponent
   ],
   imports: [
     SharedModule,
@@ -63,7 +67,9 @@ import { GridCellInfoOfChildComponent } from '../types/components/grid-custom-co
       GridCellIdNumberComponent,
       GridCellTimeOfUseIdComponent,
       GridCellBreakerStateComponent,
-      GridCellInfoOfChildComponent
+      GridCellInfoOfChildComponent,
+      GridCellIconComponent,
+      GridCellJobStatusComponent
     ])
   ]
 })
