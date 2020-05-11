@@ -5,10 +5,12 @@ import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelist
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { dcuStatuses, dcuTypes, dcuVendors, dcuTags } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { companies } from 'src/app/core/repository/consts/authentication-endpoint-url.const';
 
 @Injectable()
 export class CodelistInterceptor {
-  constructor() {}
+  constructor(private jwtHelperService: JwtHelperService) {}
 
   static interceptDcuStatus(): Observable<HttpEvent<any>> {
     const data: Codelist<number>[] = [
@@ -128,5 +130,47 @@ export class CodelistInterceptor {
 
   static canInterceptDcuTag(request: HttpRequest<any>): boolean {
     return new RegExp(dcuTags).test(request.url);
+  }
+
+  // list of user companies
+  static interceptCompanies(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const helper = new JwtHelperService();
+    const token = request.headers.get('Authorization').replace('Bearer ', '');
+    const decodedToken = helper.decodeToken(token);
+    let data: Codelist<number>[];
+    if (decodedToken.family_name.includes('SuperAdmin')) {
+      data = [
+        {
+          id: 1,
+          value: 'Enerdat'
+        },
+        {
+          id: 2,
+          value: 'Comland'
+        },
+        {
+          id: 3,
+          value: 'Eles'
+        }
+      ];
+    } else {
+      data = [
+        {
+          id: 1,
+          value: 'Enerdat'
+        }
+      ];
+    }
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptCompanies(request: HttpRequest<any>): boolean {
+    return new RegExp(companies).test(request.url);
   }
 }

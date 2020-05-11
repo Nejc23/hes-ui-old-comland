@@ -82,6 +82,10 @@ export class AuthService {
     return this.userManager.signinSilent();
   }
 
+  storeUser() {
+    this.userManager.storeUser(this.user);
+  }
+
   public logout(): Promise<void> {
     this.removeAuthTokenData();
     localStorage.removeItem('type_token');
