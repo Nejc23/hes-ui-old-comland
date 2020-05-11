@@ -1,7 +1,7 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { ScheduledJobsService } from 'src/app/core/repository/services/jobs/scheduled-jobs.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
@@ -9,7 +9,7 @@ import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-re
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: ScheduledJobsService;
+  let service: JobsService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -25,7 +25,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(ScheduledJobsService);
+    service = getTestBed().get(JobsService);
   });
 
   describe('Scheduled jobs list get request', () => {

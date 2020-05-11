@@ -9,7 +9,7 @@ import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/sched
 import { ActionFormStaticTextService } from 'src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ScheduledJobsListGridService } from '../../services/scheduled-jobs-list-grid.service';
-import { ScheduledJobsService } from 'src/app/core/repository/services/jobs/scheduled-jobs.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-static-text.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
@@ -55,7 +55,7 @@ export class ScheduledJobsListComponent implements OnInit {
 
   constructor(
     private i18n: I18n,
-    private scheduledJobsService: ScheduledJobsService,
+    private scheduledJobsService: JobsService,
     private scheduledJobsListGridService: ScheduledJobsListGridService,
     public fb: FormBuilder,
     public staticTextService: ScheduledJobsStaticTextService,
