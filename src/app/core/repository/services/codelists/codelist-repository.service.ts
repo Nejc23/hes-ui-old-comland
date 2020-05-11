@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { dcuStatuses, dcuTags, dcuTypes, dcuVendors } from '../../consts/data-concentrator-units.const';
+import { companies } from '../../consts/authentication-endpoint-url.const';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,12 @@ export class CodelistRepositoryService {
   }
   dcuVendorCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', dcuVendors);
+  }
+
+  companyCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.companyCodelistRequest());
+  }
+  companyCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', companies);
   }
 }

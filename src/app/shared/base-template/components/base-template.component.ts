@@ -15,6 +15,9 @@ import { transition, trigger, style, animate } from '@angular/animations';
 import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-base-template',
@@ -38,7 +41,6 @@ export class BaseTemplateComponent implements OnInit {
 
   // languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
-  companies: Codelist<number>[] = [];
 
   screenHeight: number;
   screenWidth: number;
@@ -53,7 +55,9 @@ export class BaseTemplateComponent implements OnInit {
     public i18n: I18n,
     private formBuilder: FormBuilder,
     private router: Router,
-    private codeList: CodelistMeterUnitsRepositoryService
+    private codeList: CodelistMeterUnitsRepositoryService,
+    private codelistAuth: CodelistRepositoryService,
+    private auth: AuthService
   ) {
     this.app = {
       layout: {
@@ -77,6 +81,19 @@ export class BaseTemplateComponent implements OnInit {
         }
       }
     });
+  }
+
+  reloadPage(selected: Codelist<number>) {
+    // get changed Token
+    /*  const helper = new JwtHelperService();
+    console.log(this.auth.user.id_token);
+    const token = this.auth.user.id_token
+    const decodedToken = helper.decodeToken(token);
+*/
+    console.log(selected);
+    this.auth.user.profile.company_name = selected.value;
+    this.auth.storeUser();
+    window.location.reload();
   }
 
   @HostListener('window:resize', ['$event'])
@@ -114,14 +131,16 @@ export class BaseTemplateComponent implements OnInit {
   ngOnInit() {
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
-    this.companies.push(
-      { id: 1, value: 'Eles' },
-      { id: 2, value: 'Company 2' },
-      { id: 3, value: 'Company 3' },
-      { id: 4, value: 'Company 4' }
-    );
-    this.selectedCompany = this.companies[0];
-    this.companies$ = of(this.companies);
+
+    this.codelistAuth.companyCodelist().subscribe(value => {
+      this.companies$ = of(value);
+      if (value.length > 1 && this.auth.user && this.auth.user.profile && this.auth.user.profile.company_name) {
+        const company = value.find(x => x.value == this.auth.user.profile.company_name);
+        if (company != null) {
+          this.selectedCompany = company;
+        }
+      }
+    });
   }
 
   createForm(): FormGroup {

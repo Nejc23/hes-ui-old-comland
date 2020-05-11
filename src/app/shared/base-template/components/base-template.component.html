@@ -22,7 +22,7 @@
       </button>
 
       <div @navItemsTrigger class="nav-items" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown" *ngIf="(companies$ | async)?.length > 1">
           <a class="nav-link dropdown-toggle pr-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             <i class="far fa-building mr-2"></i>
@@ -30,7 +30,7 @@
           </a>
           <div class="dropdown-menu ml-3" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" *ngFor="let company of companies$ | async"
-              href="#company/{{company.id}}">{{company.value}}</a>
+              href="#" (click)="reloadPage(company)">{{company.value}}</a>
           </div>
         </li>
         <app-sidebar [items]="sidebarItems" class="mt-3 d-block" *ngIf="!submenu"></app-sidebar>
