@@ -4,7 +4,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 @Injectable({
   providedIn: 'root'
 })
-export class ScheduledJobsStaticTextService {
+export class JobsStaticTextService {
   constructor(private i18n: I18n) {}
 
   get jobsTitle() {
@@ -33,5 +33,21 @@ export class ScheduledJobsStaticTextService {
 
   get placeholderSearch() {
     return this.i18n('Search');
+  }
+
+  get messageScheduledJobStarted() {
+    return this.i18n(`Scheduled job started!`);
+  }
+
+  get messageJobStopped() {
+    return this.i18n(`Job stoped!`);
+  }
+
+  get messageJobCanceled() {
+    return this.i18n(`Job canceled!`);
+  }
+
+  get messageServerError() {
+    return this.i18n(`Server error!`);
   }
 }

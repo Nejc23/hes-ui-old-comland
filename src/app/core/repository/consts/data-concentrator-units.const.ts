@@ -6,6 +6,8 @@ export const meterUnitRegisters = '/api/meter-unit-registers';
 export const touConfigurations = '/api/tou-configurations';
 export const scheduledJobs = '/api/scheduled-jobs';
 export const activeJobs = '/api/active-jobs';
+export const stopJob = 'stop-job';
+export const cancelJob = 'cancel-job';
 
 // codelist
 export const dcuStatuses = `/api/codelists/dcu-statuses`;

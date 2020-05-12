@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center" container="body" [openDelay]="1000" placement="bottom"
+  [ngbTooltip]="setToolTip(params.value)">
+  <i class="far fa-pause-circle text-warning" *ngIf="!params.value"></i>
+  <i class="far fa-play-circle text-success" *ngIf="params.value"></i>
+  <span class="text-truncate flex-shrink-1 text-warning" *ngIf="!params.value" i18n>Pending</span>
+  <span class="text-truncate flex-shrink-1 text-success" *ngIf="params.value" i18n>Downloading packages...</span>
+</div>

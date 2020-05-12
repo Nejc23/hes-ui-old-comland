@@ -10,7 +10,7 @@ import { ActionFormStaticTextService } from 'src/app/features/data-concentrator-
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ScheduledJobsListGridService } from '../../services/scheduled-jobs-list-grid.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-static-text.service';
+import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
@@ -62,7 +62,7 @@ export class ScheduledJobsListComponent implements OnInit {
     private scheduledJobsService: JobsService,
     private scheduledJobsListGridService: ScheduledJobsListGridService,
     public fb: FormBuilder,
-    public staticTextService: ScheduledJobsStaticTextService,
+    public staticTextService: JobsStaticTextService,
     private formUtils: FormsUtilsService,
     private modalService: ModalService
   ) {

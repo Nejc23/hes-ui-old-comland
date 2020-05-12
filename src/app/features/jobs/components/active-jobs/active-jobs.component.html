@@ -4,11 +4,12 @@
 
   <div modal-body>
     <ng-container>
-      <ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: 240px;" #agGrid
+      <ag-grid-angular class="ag-theme-epoint-popup" style="width: 100%; height: 240px;" #agGrid
         [rowData]="rowData"
         [columnDefs]="columnDefs"
         headerHeight="0"
         [modules]="modules"
+        [frameworkComponents]="frameworkComponents"
         (gridReady)="onGridReady($event)"
         suppressRowClickSelection="true">
       </ag-grid-angular>

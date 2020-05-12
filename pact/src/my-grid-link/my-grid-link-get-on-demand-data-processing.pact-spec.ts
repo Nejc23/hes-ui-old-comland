@@ -43,8 +43,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_MY_GRID_LINK_GET_ON_DEMAND_DATA_PROCESSING',
           uponReceiving: 'a request for get on demand data processing of requested id from myGrid.link',
           withRequest: {
-            method: service.geOnDemandDataProcessingRequest(requestId).method,
-            path: service.geOnDemandDataProcessingRequest(requestId).url,
+            method: service.getOnDemandDataProcessingRequest(requestId).method,
+            path: service.getOnDemandDataProcessingRequest(requestId).url,
             body: null,
             headers: defaultRequestHeader
           },

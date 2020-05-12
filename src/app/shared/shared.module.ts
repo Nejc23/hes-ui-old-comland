@@ -44,6 +44,8 @@ import { IdentityErrorComponent } from './IdentityError/identity-error.component
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
 import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide-if-action-unauthorized.directive';
 import { ActiveJobsComponent } from '../features/jobs/components/active-jobs/active-jobs.component';
+import { GridCellActiveJobStatusComponent } from '../features/jobs/components/grid-custom-components/grid-cell-active-job-status.component';
+import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-components/grid-cell-link.component';
 
 @NgModule({
   exports: [
@@ -94,7 +96,7 @@ import { ActiveJobsComponent } from '../features/jobs/components/active-jobs/act
     CustomFormsModule,
     BreadcrumbsModule,
     GridsterModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([GridCellActiveJobStatusComponent, GridCellLinkComponent])
   ],
   declarations: [
     BaseTemplateComponent,
@@ -129,7 +131,9 @@ import { ActiveJobsComponent } from '../features/jobs/components/active-jobs/act
     SideFixedNavComponent,
     Page404Component,
     AutoRefreshComponent,
-    IdentityErrorComponent
+    IdentityErrorComponent,
+    GridCellActiveJobStatusComponent,
+    GridCellLinkComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,

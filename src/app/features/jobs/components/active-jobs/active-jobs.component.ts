@@ -19,6 +19,7 @@ export class ActiveJobsComponent implements OnInit {
 
   public modules: Module[] = AllModules;
   public gridApi;
+  public frameworkComponents;
   columnDefs = [];
   rowData$: Observable<ActiveJobsList[]>;
   rowData: ActiveJobsList[];
@@ -28,7 +29,9 @@ export class ActiveJobsComponent implements OnInit {
     private activeJobsGridService: ActiveJobsGridService,
     public i18n: I18n,
     private modal: NgbActiveModal
-  ) {}
+  ) {
+    this.frameworkComponents = activeJobsGridService.setFrameworkComponents();
+  }
 
   ngOnInit() {
     this.columnDefs = this.activeJobsGridService.setGridDefaultColumns();
