@@ -14,6 +14,10 @@ import { ScheduledJobsStaticTextService } from '../../services/scheduled-jobs-st
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { ActiveJobsComponent } from '../active-jobs/active-jobs.component';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 
 @Component({
   selector: 'app-scheduled-jobs-list',
@@ -59,7 +63,8 @@ export class ScheduledJobsListComponent implements OnInit {
     private scheduledJobsListGridService: ScheduledJobsListGridService,
     public fb: FormBuilder,
     public staticTextService: ScheduledJobsStaticTextService,
-    private formUtils: FormsUtilsService
+    private formUtils: FormsUtilsService,
+    private modalService: ModalService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -175,5 +180,19 @@ export class ScheduledJobsListComponent implements OnInit {
 
   addScheduledJob() {
     // TODO: AO, 07.05.2020, open form for adding new scheduled job
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    const deviceId = '221A39C5-6C84-4F6E-889C-96326862D771';
+    const modalRef = this.modalService.open(ActiveJobsComponent, options);
+    modalRef.componentInstance.deviceId = deviceId;
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 }

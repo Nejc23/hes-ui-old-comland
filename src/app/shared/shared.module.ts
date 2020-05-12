@@ -43,6 +43,7 @@ import { TouConfigSelectComponent } from '../features/tou-config-select/componen
 import { IdentityErrorComponent } from './IdentityError/identity-error.component';
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
 import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide-if-action-unauthorized.directive';
+import { ActiveJobsComponent } from '../features/jobs/components/active-jobs/active-jobs.component';
 
 @NgModule({
   exports: [
@@ -66,6 +67,7 @@ import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
+    ActiveJobsComponent,
     PlcMeterTouConfigComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent,
@@ -107,6 +109,7 @@ import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
+    ActiveJobsComponent,
     PlcMeterTouConfigComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent,
@@ -135,6 +138,7 @@ import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
+    ActiveJobsComponent,
     PlcMeterTouConfigComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent
