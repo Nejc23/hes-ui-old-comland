@@ -215,6 +215,8 @@ export class MeterUnitsTypeGridService {
         headerName: this.i18n('Job status'),
         pinned: 'right',
         lockPinned: true,
+        lockPosition: true,
+        suppressMovable: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',

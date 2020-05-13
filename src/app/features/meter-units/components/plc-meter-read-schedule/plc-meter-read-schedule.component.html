@@ -47,12 +47,31 @@
         </div>
       </div>
 
-      <div class="form-row" *ngIf="selectedId > 2">
+      <div class="form-row" *ngIf="selectedId > 2 && selectedId != 6">
         <div class="col-3">
           <app-time-picker [form]="form" [property]="timeProperty" i18n-label label="Time">
           </app-time-picker>
         </div>
       </div>
+      <div class="form-row" *ngIf="selectedId == 6">
+        <div class="col-3">
+          <app-datetime-picker [form]="form" [property]="timeProperty" i18n-label label="Date time">
+          </app-datetime-picker>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="selectedId >= 1 && selectedId <=6">
+        <div class="col-5">
+          <app-input-switch [form]="form" [property]="iecProperty" i18n-label label="IEC">
+          </app-input-switch>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="selectedId >= 1 && selectedId <=6">
+        <div class="col-12">
+          <app-input-text [form]="form" [property]="descriptionProperty" i18n-label label="Description">
+          </app-input-text>
+        </div>
+      </div>
+     
       <hr>
       <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)"></app-registers-select>
       <div class="help-block" *ngIf="noRegisters">

@@ -1,0 +1,15 @@
+<div class="form-group" [formGroup]="form">
+  <label [attr.for]="property" *ngIf="label">
+    {{label}}
+    <sup *ngIf="required"> *</sup>
+  </label>
+  <kendo-datetimepicker
+    [formControlName]="property"  class="form-control" [name]="property"
+    [min]="min"
+    [max]="max"
+  ></kendo-datetimepicker>
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>

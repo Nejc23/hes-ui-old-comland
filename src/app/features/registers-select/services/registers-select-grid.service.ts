@@ -13,7 +13,6 @@ export class RegistersSelectGridService {
   setGridDefaultColumns() {
     return [
       {
-        pinned: true,
         minWidth: 45,
         maxWidth: 45,
         width: 45,
@@ -29,7 +28,6 @@ export class RegistersSelectGridService {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        pinned: true,
         headerName: this.i18n('Name'),
         headerTooltip: this.i18n('Name')
       },
@@ -37,7 +35,6 @@ export class RegistersSelectGridService {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        pinned: true,
         headerName: this.i18n('Type'),
         headerTooltip: this.i18n('Type')
       },
@@ -45,7 +42,6 @@ export class RegistersSelectGridService {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        pinned: true,
         headerName: this.i18n('Description'),
         headerTooltip: this.i18n('Description')
       }

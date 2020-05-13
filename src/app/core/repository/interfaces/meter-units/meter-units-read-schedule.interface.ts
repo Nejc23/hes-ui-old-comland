@@ -7,6 +7,9 @@ export interface MeterUnitsReadSchedule {
   weekDays: number[];
   monthDays: number[];
   registers: number[];
+  description: string;
+  iec: boolean;
+  dateTime: string;
   bulkActionsRequestParam: GridBulkActionRequestParams;
 }
 

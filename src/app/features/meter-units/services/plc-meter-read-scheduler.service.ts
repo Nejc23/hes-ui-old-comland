@@ -25,6 +25,9 @@ export class PlcMeterReadScheduleService {
       weekDays: values.weekDays,
       monthDays: values.monthDays,
       registers: values.registers,
+      iec: values.iec,
+      description: values.description,
+      dateTime: values.dateTime,
       bulkActionsRequestParam: values.bulkActionsRequestParam
     };
     return this.meterService.createMeterUnitsReadScheduler(serviceData);

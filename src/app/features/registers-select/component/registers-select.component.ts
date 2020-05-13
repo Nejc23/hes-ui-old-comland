@@ -47,7 +47,10 @@ export class RegistersSelectComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
+  }
+
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
   }
 
   ngOnInit() {

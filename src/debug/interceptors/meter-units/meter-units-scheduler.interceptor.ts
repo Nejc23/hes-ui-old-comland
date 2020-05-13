@@ -24,6 +24,9 @@ export class MeterUnitsSchedulerInterceptor {
       weekDays: [],
       monthDays: [1, 7, 31],
       registers: [1, 4, 5],
+      dateTime: '2020-05-22T10:02:00.000Z',
+      description: '',
+      iec: false,
       bulkActionsRequestParam: {
         id: ['9b837e2d-957d-49e2-8d1d-a2e4b8440b77', 'ebeacc9d-744c-4a88-bb9c-625216ab99b9', '22cfeaae-463a-4055-8632-a6818ba77d81'],
         filter: {

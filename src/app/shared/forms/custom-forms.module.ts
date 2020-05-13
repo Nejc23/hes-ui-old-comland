@@ -22,6 +22,7 @@ import { InputCheckboxGridComponent } from './components/input-checkbox/input-ch
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
 import { InputNumericComponent } from './components/input-numeric/input-numeric.component';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
+import { DateTimePickerComponent } from './components/datetime-picker/datetime-picker.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -45,7 +46,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     DropDownsModule,
     InputsModule,
     DateInputsModule,
-    TimePickerComponent
+    TimePickerComponent,
+    DateTimePickerComponent
   ],
   declarations: [
     InputTextComponent,
@@ -64,7 +66,8 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
     InputSwitchComponent,
     InputNumericComponent,
     InputMultiselectComponent,
-    TimePickerComponent
+    TimePickerComponent,
+    DateTimePickerComponent
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule, DateInputsModule]
 })

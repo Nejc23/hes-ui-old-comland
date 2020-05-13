@@ -27,6 +27,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   form: FormGroup;
   readOptions: RadioOption[] = [
+    { value: 6 as number, label: this.i18n('One-time'), labelSmall: this.i18n('Once') },
     { value: 1 as number, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
     { value: 2 as number, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
     { value: 3 as number, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
@@ -68,7 +69,9 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       [this.timeProperty]: [new Date()],
       [this.weekDaysProperty]: [[]],
       [this.monthDaysProperty]: [[]],
-      [this.registersProperty]: [[], Validators.required]
+      [this.registersProperty]: [[], Validators.required],
+      [this.iecProperty]: [false],
+      [this.descriptionProperty]: [[], Validators.maxLength(500)]
     });
   }
 
@@ -83,6 +86,9 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       weekDays: this.selectedId !== 4 ? [] : this.form.get(this.weekDaysProperty).value,
       monthDays: this.selectedId !== 5 ? [] : this.form.get(this.monthDaysProperty).value,
       registers: this.form.get(this.registersProperty).value,
+      iec: this.form.get(this.iecProperty).value,
+      description: this.form.get(this.descriptionProperty).value,
+      dateTime: this.selectedId != 6 ? null : this.form.get(this.timeProperty).value,
       bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()
     };
 
@@ -106,6 +112,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     this.noMonthDays = this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
     // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
+    console.log(values);
     const request = this.meterService.createMeterUnitsReadScheduler(values);
     // console.log(`request = ${JSON.stringify(request)}`);
     const successMessage = this.i18n(`Meter Units Read Scheduler was added successfully`);
@@ -131,7 +138,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   changeReadOptionId() {
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
     this.form.get(this.timeProperty).setValidators(this.selectedId > 2 ? [Validators.required] : []);
-    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 1 ? [Validators.required] : []);
+    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 1 || this.selectedId === 6 ? [Validators.required] : []);
     this.form.get(this.nHoursProperty).setValidators(this.selectedId === 2 ? [Validators.required] : []);
     this.form.get(this.weekDaysProperty).setValidators(this.selectedId === 4 ? [Validators.required] : []);
     this.form.get(this.monthDaysProperty).setValidators(this.selectedId === 5 ? [Validators.required] : []);
@@ -193,6 +200,14 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   get registersProperty() {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.registers);
+  }
+
+  get iecProperty() {
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.iec);
+  }
+
+  get descriptionProperty() {
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.description);
   }
   // properties - END
 
