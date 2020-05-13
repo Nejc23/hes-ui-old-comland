@@ -16,29 +16,24 @@ export class ActiveJobsGridService {
     return [
       {
         field: 'type',
-        suppressMenu: true,
-        pinned: true
+        suppressMenu: true
       },
       {
         field: 'running',
         suppressMenu: true,
-        pinned: true,
         cellRenderer: 'gridCellActiveJobStatusComponent'
       },
       {
         field: 'triggerInfo',
-        suppressMenu: true,
-        pinned: true
+        suppressMenu: true
       },
       {
         field: 'timeInfo',
-        suppressMenu: true,
-        pinned: true
+        suppressMenu: true
       },
       {
         field: 'id',
         suppressMenu: true,
-        pinned: true,
         cellRenderer: 'gridCellLinkComponent'
       }
     ];

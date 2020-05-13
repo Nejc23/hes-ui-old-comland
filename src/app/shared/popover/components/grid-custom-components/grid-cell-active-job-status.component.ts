@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { JobsStaticTextService } from '../../services/jobs-static-text.service';
+import { ActiveJobsStaticTextService } from '../../services/active-jobs-static-text.service';
 
 @Component({
   selector: 'app-grid-cell-active-job-status',
@@ -11,7 +11,7 @@ export class GridCellActiveJobStatusComponent implements ICellRendererAngularCom
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private statictextService: JobsStaticTextService, private i18n: I18n) {}
+  constructor(private statictextService: ActiveJobsStaticTextService, private i18n: I18n) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

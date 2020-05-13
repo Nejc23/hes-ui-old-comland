@@ -1,29 +1,28 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { Observable } from 'rxjs';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { ActiveJobsStaticTextService } from '../../services/active-jobs-static-text.service';
 
 @Component({
   selector: 'app-grid-cell-link',
   templateUrl: './grid-cell-link.component.html'
 })
 export class GridCellLinkComponent implements ICellRendererAngularComp {
-  notAvailableText = this.statictextService.notAvailableTekst; // N/A
+  notAvailableText = this.staticTextService.notAvailableTekst; // N/A
   public params: any;
   stopJobConst = 'stop';
   cancelJobConst = 'cancel';
 
   constructor(
-    private statictextService: JobsStaticTextService,
     private i18n: I18n,
     private modalService: ModalService,
     private toast: ToastNotificationService,
-    private staticTextService: JobsStaticTextService,
+    private staticTextService: ActiveJobsStaticTextService,
     private service: JobsService
   ) {}
   // called on init

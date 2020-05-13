@@ -16,7 +16,6 @@ import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { ActiveJobsComponent } from '../active-jobs/active-jobs.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 
 @Component({
@@ -176,23 +175,5 @@ export class ScheduledJobsListComponent implements OnInit {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.scheduledJobsListGridService.getSessionSettingsPageIndex());
     }
-  }
-
-  addScheduledJob() {
-    // TODO: AO, 07.05.2020, open form for adding new scheduled job
-    const options: NgbModalOptions = {
-      size: 'lg'
-    };
-    const deviceId = '221A39C5-6C84-4F6E-889C-96326862D771';
-    const modalRef = this.modalService.open(ActiveJobsComponent, options);
-    modalRef.componentInstance.deviceId = deviceId;
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
   }
 }

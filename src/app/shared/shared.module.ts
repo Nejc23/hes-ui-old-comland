@@ -43,9 +43,9 @@ import { TouConfigSelectComponent } from '../features/tou-config-select/componen
 import { IdentityErrorComponent } from './IdentityError/identity-error.component';
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
 import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide-if-action-unauthorized.directive';
-import { ActiveJobsComponent } from '../features/jobs/components/active-jobs/active-jobs.component';
-import { GridCellActiveJobStatusComponent } from '../features/jobs/components/grid-custom-components/grid-cell-active-job-status.component';
-import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-components/grid-cell-link.component';
+import { ActiveJobComponent } from './popover/components/active-job/active-job.component';
+import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
+import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
 
 @NgModule({
   exports: [
@@ -69,7 +69,6 @@ import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-c
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
-    ActiveJobsComponent,
     PlcMeterTouConfigComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent,
@@ -83,7 +82,8 @@ import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-c
     NumberOnlyDirective,
     PipesModule,
     BreadcrumbsModule,
-    AutoRefreshComponent
+    AutoRefreshComponent,
+    ActiveJobComponent
   ],
   imports: [
     CommonModule,
@@ -111,7 +111,6 @@ import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-c
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
-    ActiveJobsComponent,
     PlcMeterTouConfigComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent,
@@ -133,7 +132,8 @@ import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-c
     AutoRefreshComponent,
     IdentityErrorComponent,
     GridCellActiveJobStatusComponent,
-    GridCellLinkComponent
+    GridCellLinkComponent,
+    ActiveJobComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,
@@ -142,7 +142,6 @@ import { GridCellLinkComponent } from '../features/jobs/components/grid-custom-c
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
-    ActiveJobsComponent,
     PlcMeterTouConfigComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent

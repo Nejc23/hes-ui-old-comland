@@ -1,0 +1,11 @@
+
+    <ag-grid-angular class="ag-theme-epoint-popup" style="width: 1000px; height: 240px;" #agGrid
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      headerHeight="0"
+      [modules]="modules"
+      [frameworkComponents]="frameworkComponents"
+      (gridReady)="onGridReady($event)"
+      (firstDataRendered)="onFirstDataRendered($event)"
+      suppressRowClickSelection="true">
+    </ag-grid-angular>

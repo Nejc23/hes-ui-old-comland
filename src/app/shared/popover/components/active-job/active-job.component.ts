@@ -1,8 +1,6 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import * as moment from 'moment';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
@@ -11,10 +9,10 @@ import { ActiveJobsList } from 'src/app/core/repository/interfaces/jobs/active-j
 import { ActiveJobsGridService } from '../../services/active-jobs-grid.service';
 
 @Component({
-  selector: 'app-active-jobs',
-  templateUrl: './active-jobs.component.html'
+  selector: 'app-active-job',
+  templateUrl: './active-job.component.html'
 })
-export class ActiveJobsComponent implements OnInit {
+export class ActiveJobComponent implements OnInit {
   @Input() deviceId: string;
 
   public modules: Module[] = AllModules;
@@ -24,12 +22,7 @@ export class ActiveJobsComponent implements OnInit {
   rowData$: Observable<ActiveJobsList[]>;
   rowData: ActiveJobsList[];
 
-  constructor(
-    private activeJobsService: JobsService,
-    private activeJobsGridService: ActiveJobsGridService,
-    public i18n: I18n,
-    private modal: NgbActiveModal
-  ) {
+  constructor(private activeJobsService: JobsService, private activeJobsGridService: ActiveJobsGridService, public i18n: I18n) {
     this.frameworkComponents = activeJobsGridService.setFrameworkComponents();
   }
 
@@ -43,10 +36,9 @@ export class ActiveJobsComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
   }
 
-  onDismiss() {
-    this.modal.dismiss();
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
   }
 }

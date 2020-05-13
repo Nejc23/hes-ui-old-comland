@@ -1,7 +1,6 @@
-
-
 <div class="d-flex align-items-center" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom"
   [ngbTooltip]="params.value">
+  <div container="body" [placement]="['left','top-left']" [ngbPopover]="popActiveJobContent" popoverClass="active-job-popover">
   <i class="fad fa-circle-notch text-success" *ngIf="params.value.toLowerCase() == 'running'"></i>
   <i class="far fa-check-circle text-success" *ngIf="params.value.toLowerCase() == 'success'"></i>
   <i class="fas fa-exclamation-circle text-danger" *ngIf="params.value.toLowerCase() == 'failed'"></i>
@@ -11,4 +10,10 @@
     'text-danger': params.value.toLowerCase() == 'failed',
     'text-warning': params.value.toLowerCase() == 'pending'}">{{params.value}}</span>
 </div>
+</div>
 <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
+
+
+<ng-template #popActiveJobContent>
+  <app-active-job></app-active-job>
+</ng-template>
