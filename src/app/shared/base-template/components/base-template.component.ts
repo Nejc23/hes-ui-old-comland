@@ -16,7 +16,7 @@ import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { JwtHelperService } from '@auth0/angular-jwt';
+// import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
@@ -38,6 +38,7 @@ export class BaseTemplateComponent implements OnInit {
   public sidebarMeterUnitsItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
   public submenu = false;
+  public organisation = this.i18n('no organisation');
 
   // languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
@@ -53,10 +54,10 @@ export class BaseTemplateComponent implements OnInit {
     private cookieService: CookieService,
     @Inject(LOCALE_ID) private locale: string,
     public i18n: I18n,
-    private formBuilder: FormBuilder,
+    //  private formBuilder: FormBuilder,
     private router: Router,
     private codeList: CodelistMeterUnitsRepositoryService,
-    private codelistAuth: CodelistRepositoryService,
+    //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService
   ) {
     this.app = {
@@ -69,7 +70,7 @@ export class BaseTemplateComponent implements OnInit {
       }
     };
     this.getScreenSize();
-    this.form = this.createForm();
+    // this.form = this.createForm();
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -83,18 +84,18 @@ export class BaseTemplateComponent implements OnInit {
     });
   }
 
-  reloadPage(selected: Codelist<number>) {
+  /*  reloadPage(selected: Codelist<number>) {
     // get changed Token
-    /*  const helper = new JwtHelperService();
-    console.log(this.auth.user.id_token);
-    const token = this.auth.user.id_token
-    const decodedToken = helper.decodeToken(token);
-*/
+//      const helper = new JwtHelperService();
+//    console.log(this.auth.user.id_token);
+//    const token = this.auth.user.id_token
+//    const decodedToken = helper.decodeToken(token);
+
     console.log(selected);
     this.auth.user.profile.company_name = selected.value;
     this.auth.storeUser();
     window.location.reload();
-  }
+  }*/
 
   @HostListener('window:resize', ['$event'])
   getScreenSize(event?) {
@@ -132,7 +133,10 @@ export class BaseTemplateComponent implements OnInit {
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
 
-    this.codelistAuth.companyCodelist().subscribe(value => {
+    if (this.auth.user.profile != null && this.auth.user.profile.company_name.length > 0) {
+      this.organisation = this.auth.user.profile.company_name;
+    }
+    /*this.codelistAuth.companyCodelist().subscribe(value => {
       this.companies$ = of(value);
       if (value.length > 1 && this.auth.user && this.auth.user.profile && this.auth.user.profile.company_name) {
         const company = value.find(x => x.value == this.auth.user.profile.company_name);
@@ -140,14 +144,14 @@ export class BaseTemplateComponent implements OnInit {
           this.selectedCompany = company;
         }
       }
-    });
+    });*/
   }
 
-  createForm(): FormGroup {
+  /*createForm(): FormGroup {
     return this.formBuilder.group({
       ['companyId']: [1]
     });
-  }
+  }*/
 
   @HostListener('click', ['$event.target'])
   onClick(btn) {
@@ -169,7 +173,7 @@ export class BaseTemplateComponent implements OnInit {
     this.isMouseOverNav = false;
   }
 
-  get companyIdProperty() {
+  /*  get companyIdProperty() {
     return 'companyId';
-  }
+  }*/
 }
