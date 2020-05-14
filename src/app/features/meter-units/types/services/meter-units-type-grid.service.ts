@@ -220,7 +220,8 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
-        headerTooltip: this.i18n('Job status')
+        headerTooltip: this.i18n('Job status'),
+        resizable: false
       }
     ];
   }
