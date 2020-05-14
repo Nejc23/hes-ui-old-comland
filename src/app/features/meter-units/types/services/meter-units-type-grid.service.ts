@@ -112,13 +112,13 @@ export class MeterUnitsTypeGridService {
       },
       {
         field: 'readStatusTimeStamp',
-        headerName: this.i18n('Status'),
+        headerName: this.i18n('Read status'),
         pinned: true,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: this.i18n('Status')
+        headerTooltip: this.i18n('Read status')
       },
       {
         field: 'vendor',
