@@ -17,6 +17,8 @@ import { GridCellIpComponent } from '../components/grid-custom-components/grid-c
 import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
 import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
+import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
+import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 
 @NgModule({
   entryComponents: [],
@@ -34,7 +36,9 @@ import { GridCellIdNumberComponent } from '../components/grid-custom-components/
     GridCellIpComponent,
     GridCellVendorComponent,
     GridCellTypeComponent,
-    GridCellIdNumberComponent
+    GridCellIdNumberComponent,
+    GridCellIconComponent,
+    GridCellJobStatusComponent
   ], // StringifyDataPipe
   imports: [
     SharedModule,
@@ -52,7 +56,9 @@ import { GridCellIdNumberComponent } from '../components/grid-custom-components/
       GridCellIpComponent,
       GridCellVendorComponent,
       GridCellTypeComponent,
-      GridCellIdNumberComponent
+      GridCellIdNumberComponent,
+      GridCellIconComponent,
+      GridCellJobStatusComponent
     ])
   ],
   exports: []

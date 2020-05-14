@@ -111,7 +111,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Name')
       },
       {
-        field: 'readStatusDate',
+        field: 'readStatusTimeStamp',
         headerName: this.i18n('Status'),
         pinned: true,
         sortable: true,

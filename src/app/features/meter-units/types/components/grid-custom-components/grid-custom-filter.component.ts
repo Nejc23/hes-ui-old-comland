@@ -229,8 +229,12 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
       statusesFilter: this.form.get(this.statusesProperty).value,
-      readStatusFilter:
-        this.form.get(this.operationProperty).value !== undefined && this.form.get(this.operationProperty).value != null
+      readStatusFilter: {
+        operation: { id: '', value: '' },
+        value1: 0,
+        value2: 0
+      },
+      /*   this.form.get(this.operationProperty).value !== undefined && this.form.get(this.operationProperty).value != null
           ? {
               operation: this.form.get(this.operationProperty).value,
               value1: this.form.get(this.value1Property).value,
@@ -240,7 +244,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
               operation: { id: '', value: '' },
               value1: 0,
               value2: 0
-            },
+            },*/
       firmwareFilter: this.form.get(this.firmwareProperty).value,
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,

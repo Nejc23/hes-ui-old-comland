@@ -20,6 +20,8 @@ import { GridCellVendorComponent } from '../components/grid-custom-components/gr
 import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
 import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
 import * as _ from 'lodash';
+import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
+import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 
 @Injectable({
   providedIn: 'root'
@@ -57,6 +59,22 @@ export class DataConcentratorUnitsGridService {
         headerTooltip: this.i18n('Select/deselect all')
       },
       {
+        field: 'nextRead',
+        headerName: this.i18n(''),
+        suppressColumnsToolPanel: true,
+        suppressMovable: true,
+        lockPosition: true,
+        pinned: 'left',
+        lockPinned: true,
+        sortable: false,
+        filter: false,
+        cellRenderer: 'gridCellIconComponent',
+        headerTooltip: this.i18n(''),
+        minWidth: 50,
+        maxWidth: 50,
+        width: 50
+      },
+      {
         field: 'status',
         headerName: this.i18n('Status'),
         pinned: true,
@@ -84,7 +102,7 @@ export class DataConcentratorUnitsGridService {
         headerTooltip: this.i18n('Meters')
       },
       {
-        field: 'readStatusPercent',
+        field: 'readStatusTimeStamp',
         headerName: this.i18n('Read status'),
         pinned: true,
         sortable: true,
@@ -146,6 +164,18 @@ export class DataConcentratorUnitsGridService {
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
         headerTooltip: this.i18n('Tags')
+      },
+      {
+        field: 'jobStatus',
+        headerName: this.i18n('Job status'),
+        pinned: 'right',
+        lockPinned: true,
+        lockPosition: true,
+        suppressMovable: true,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellJobStatusComponent',
+        headerTooltip: this.i18n('Job status')
       }
     ];
   }
@@ -163,7 +193,9 @@ export class DataConcentratorUnitsGridService {
       gridCellIpComponent: GridCellIpComponent,
       gridCellVendorComponent: GridCellVendorComponent,
       gridCellTypeComponent: GridCellTypeComponent,
-      gridCellIdNumberComponent: GridCellIdNumberComponent
+      gridCellIdNumberComponent: GridCellIdNumberComponent,
+      gridCellIconComponent: GridCellIconComponent,
+      gridCellJobStatusComponent: GridCellJobStatusComponent
     };
   }
 

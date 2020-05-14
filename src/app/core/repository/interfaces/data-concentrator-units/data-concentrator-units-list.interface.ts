@@ -6,11 +6,13 @@ export interface DataConcentratorUnitsList {
   metersValue: number;
   metersPercent: number;
   metersUp: boolean;
-  readStatusPercent: number;
+  readStatusTimeStamp: string;
+  readStatusColor: string;
   type: string;
   vendor: string;
   idNumber: string;
   ip: string;
   lastCommunication: string;
   tags: string[];
+  jobStatus: string;
 }

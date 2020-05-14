@@ -71,29 +71,51 @@ describe('Pact consumer test', () => {
         metersValue: 102,
         metersPercent: 93.4,
         metersUp: false,
-        readStatusPercent: 93.5,
+        readStatusTimeStamp: '2020-05-05T03:21:19',
+        readStatusColor: 'green',
         type: 'G0-PLC',
         vendor: 'Landis+Gy',
         idNumber: '771929394001',
         ip: '234.88.127.4',
         lastCommunication: '2020-02-21T07:03:02',
-        tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572']
+        tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
+        jobStatus: 'Success'
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
         nextRead: '2020-03-03T15:35:29',
         name: 'Cubis PLC temp 423',
-        metersValue: null,
-        metersPercent: null,
-        metersUp: null,
-        readStatusPercent: 99.3,
+        metersValue: 45,
+        metersPercent: 32.3,
+        metersUp: true,
+        readStatusTimeStamp: '2020-01-16T23:00:03',
+        readStatusColor: 'red',
         type: 'G0-PLC',
         vendor: 'Iskra',
         idNumber: '210808585671',
         ip: null,
         lastCommunication: '2020-02-19T07:03:02',
-        tags: null
+        tags: null,
+        jobStatus: 'Failed'
+      },
+      {
+        id: 'dewee32-744c-4a88-bb9c-625216ab99b9',
+        status: 'Active',
+        nextRead: '2020-05-23T00:20:00',
+        name: 'Cubis PLC temp 3423',
+        metersValue: null,
+        metersPercent: null,
+        metersUp: null,
+        readStatusTimeStamp: '2020-03-31T14:30:33',
+        readStatusColor: 'yellow',
+        type: 'G0-PLC',
+        vendor: 'Iskra',
+        idNumber: '452804585671',
+        ip: '932.32.32.2',
+        lastCommunication: '2020-05-12T19:18:39',
+        tags: null,
+        jobStatus: 'Running'
       }
     ];
 

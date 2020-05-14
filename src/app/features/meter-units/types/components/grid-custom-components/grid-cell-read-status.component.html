@@ -1,9 +1,9 @@
 <div class="d-flex align-items-center" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom"
   [ngbTooltip]="setToolTip(params.value)">
   <span class="full-circle mr-2 flex-shrink-0" [ngClass]="{
-        'bg-danger': params.data.readStatusColor == 'alarm', 
-        'bg-warning': params.data.readStatusColor == 'warning',
-        'bg-success': params.data.readStatusColor == 'ok' }">
+        'bg-danger': params.data.readStatusColor.toLowerCase() == trasholds.red, 
+        'bg-warning': params.data.readStatusColor.toLowerCase() == trasholds.yellow,
+        'bg-success': params.data.readStatusColor.toLowerCase() == trasholds.green }">
   </span>
   <span class="text-truncate flex-shrink-1 ">{{setMomentStatusDate(params.value)}}</span>
 </div>

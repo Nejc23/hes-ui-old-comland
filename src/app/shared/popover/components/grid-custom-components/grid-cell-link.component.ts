@@ -28,7 +28,6 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
   // called on init
   agInit(params: any): void {
     this.params = params;
-    console.log(this.params);
   }
 
   // called when the cell is refreshed

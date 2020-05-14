@@ -67,7 +67,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for get on demand data processing of requested id from myGrid.link', done => {
-      service.geOnDemandDataProcessing(requestId).subscribe(
+      service.getOnDemandDataProcessing(requestId).subscribe(
         (res: OnDemandRequestData) => {
           expect(res).toEqual(responseBody);
           done();

@@ -1,9 +1,4 @@
 <div class="d-flex">
   <div class="mr-1 flex-shrink-1 text-truncate" container="body" placement="bottom" [openDelay]="500"
   [ngbTooltip]="params.value">{{params.value}}</div>
-  <div class="ml-auto" *ngIf="params.data && params.data.nextRead">
-    <i class="far fa-clock text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContent"></i>
-  </div>
 </div>
-
-<ng-template #tipContent id="tipContent">{{setMomentNextPlannedReadTime(params.data ? params.data.nextRead: null)}}</ng-template>

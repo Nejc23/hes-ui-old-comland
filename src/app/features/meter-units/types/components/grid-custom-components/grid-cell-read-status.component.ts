@@ -3,14 +3,14 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
-import { readStatusTrashold } from 'src/app/features/data-concentrator-units/consts/data-concentrator-units.consts';
+import { readStatusColor } from '../../consts/meter-units.consts';
 
 @Component({
   selector: 'app-grid-cell-read-status',
   templateUrl: './grid-cell-read-status.component.html'
 })
 export class GridCellReadStatusComponent implements ICellRendererAngularComp {
-  trasholds = readStatusTrashold;
+  trasholds = readStatusColor;
 
   public params: any;
 

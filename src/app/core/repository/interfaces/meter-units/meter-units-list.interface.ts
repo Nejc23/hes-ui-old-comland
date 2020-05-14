@@ -5,7 +5,7 @@ export interface MeterUnitsList {
   status: string;
   nextRead: string;
   name: string;
-  readStatusDate: string;
+  readStatusTimeStamp: string;
   readStatusColor: string;
   vendor: string;
   parent: string;

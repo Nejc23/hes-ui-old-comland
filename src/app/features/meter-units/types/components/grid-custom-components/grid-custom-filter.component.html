@@ -6,7 +6,7 @@
         [autocompleteItemsAsObjects]="meterUnitStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-input-tag>
 
-      <div class="form-row">
+   <!--   <div class="form-row">
         <div class="col-6">
           <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-select-input>      
@@ -19,7 +19,7 @@
           <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value2Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100" 
           [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
         </div>       
-      </div>
+      </div>-->
       <div class="form-row text-danger" *ngIf="!form.valid">
         <div class="col-6"></div>
         <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>

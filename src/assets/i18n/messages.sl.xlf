@@ -269,7 +269,7 @@
       </trans-unit><trans-unit id="d7b35c384aecd25a516200d6921836374613dfe7" datatype="html">
         <source>Cancel</source><target state="translated">Prekliči</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">42</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">68</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.html</context><context context-type="linenumber">16</context></context-group></trans-unit><trans-unit id="d229c742a0f872e20ae0ed39f0c69eb5fe10db93" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">42</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">87</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.html</context><context context-type="linenumber">16</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/popover/components/grid-custom-components/grid-cell-link.component.html</context><context context-type="linenumber">3</context></context-group></trans-unit><trans-unit id="d229c742a0f872e20ae0ed39f0c69eb5fe10db93" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{btnConfirmText}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{btnConfirmText}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context>
@@ -290,7 +290,7 @@
       <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context><context context-type="linenumber">14</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component.html</context><context context-type="linenumber">14</context></context-group></trans-unit><trans-unit id="68e710782ccb5398b3acb8844caf0b199da2c3da" datatype="html">
         <source>Confirm</source><target state="translated">Potrdi</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/modals/components/modal-confirm.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="f6b042f601d8b48d45e0a4ccab565142baa7834c" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/modals/components/modal-confirm.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-link.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="f6b042f601d8b48d45e0a4ccab565142baa7834c" datatype="html">
         <source>Get breaker status</source><target state="translated">Prenesi status brakerja</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
@@ -440,7 +440,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-list-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-list-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/registers-select/services/registers-select-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/registers-select/services/registers-select-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/tou-config-select/services/tou-config-select-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/tou-config-select/services/tou-config-select-grid.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="8860a5ca6c03a7573283f08580ea962e91d6aa48" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">70</context></context-group></trans-unit><trans-unit id="8860a5ca6c03a7573283f08580ea962e91d6aa48" datatype="html">
         <source>Next run</source><target state="final">Next run</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-list-grid.service.ts</context>
@@ -458,6 +458,18 @@
         </context-group>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-list-grid.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="a97b9a81b325ef17b3ad024c3fc5b8ad7ecd4ff8" datatype="html">
+        <source>One-time</source><target state="final">One-time</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="4aa5ebffb16263064ac9db1d97100667efc46f93" datatype="html">
+        <source>Once</source><target state="final">Once</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit><trans-unit id="5722ec407e603d31090bb04f6371986438c7ffe8" datatype="html">
@@ -479,7 +491,7 @@
       </trans-unit><trans-unit id="826b25211922a1b46436589233cb6f1a163d89b7" datatype="html">
         <source>Delete</source><target state="translated">Briši</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="99ee4faa69cd2ea8e3678c1f557c0ff1f05aae46" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="99ee4faa69cd2ea8e3678c1f557c0ff1f05aae46" datatype="html">
         <source>Clear</source><target state="translated">Počisti</target>
         
       <context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">40</context></context-group></trans-unit><trans-unit id="c2d0ac9f528bbd5f53fd34269fde8b59e029621b" datatype="html">
@@ -537,6 +549,18 @@
           <context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context>
           <context context-type="linenumber">52</context>
         </context-group>
+      </trans-unit><trans-unit id="faf9670fd71f8492a31194de455b2f04408cb210" datatype="html">
+        <source>Date time</source><target state="final">Date time</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+      </trans-unit><trans-unit id="3154a0bd140f2f50b2c7138b4eed4c27d21cd449" datatype="html">
+        <source>IEC</source><target state="final">IEC</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context>
+          <context context-type="linenumber">64</context>
+        </context-group>
       </trans-unit><trans-unit id="064ce5140698af55532d5c8c6355e4605d2bcc1b" datatype="html">
         <source>items</source><target state="translated">zadev</target>
         
@@ -546,7 +570,7 @@
       <context-group purpose="location"><context context-type="sourcefile">app/features/registers-select/component/registers-select.component.html</context><context context-type="linenumber">6</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">22</context></context-group></trans-unit><trans-unit id="df9514d72a91bea69a5fb9f696ff3e6e4ea279c2" datatype="html">
         <source>items found</source><target state="translated">zadeve najdene</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/registers-select/component/registers-select.component.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit><trans-unit id="b463541a7e303aa4d0b1102eaff8afbaf34e7a74" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/registers-select/component/registers-select.component.html</context><context context-type="linenumber">8</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context><context context-type="linenumber">32</context></context-group></trans-unit><trans-unit id="b463541a7e303aa4d0b1102eaff8afbaf34e7a74" datatype="html">
         <source>Select all</source><target state="translated">Izberi vse</target>
         
       <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">23</context></context-group></trans-unit><trans-unit id="40d3b2127388b0eb08226557eb03c4458c6b9da5" datatype="html">
@@ -635,7 +659,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">71</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context><context context-type="linenumber">32</context></context-group></trans-unit><trans-unit id="047f50bc5b5d17b5bec0196355953e1a5c590ddb" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component.html</context><context context-type="linenumber">15</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">90</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-change-password.component.html</context><context context-type="linenumber">32</context></context-group></trans-unit><trans-unit id="047f50bc5b5d17b5bec0196355953e1a5c590ddb" datatype="html">
         <source>Update</source><target state="translated">Popravi</target>
         
       <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/save-view-form/save-view-form.component.html</context><context context-type="linenumber">17</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component.html</context><context context-type="linenumber">17</context></context-group></trans-unit><trans-unit id="8b170bdac5e706352989bba974eaff60109a617b" datatype="html">
@@ -1077,29 +1101,29 @@
         
       <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">13</context></context-group></trans-unit><trans-unit id="5e420747842373fa99a75a7a18df068cc81e46fb" datatype="html">
         <source>Scheduled</source><target state="final">Scheduled</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context>
-          <context context-type="linenumber">9</context>
-        </context-group>
-      </trans-unit><trans-unit id="e6a27066251ca1e04c5be86ad758380856df2506" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context><context context-type="linenumber">12</context></context-group></trans-unit><trans-unit id="e6a27066251ca1e04c5be86ad758380856df2506" datatype="html">
         <source>Pending</source><target state="final">Pending</target>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/shared/popover/components/grid-custom-components/grid-cell-active-job-status.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context><context context-type="linenumber">16</context></context-group></trans-unit><trans-unit id="e466d3c6beeedfa3d89a86cb6e2d6566c5c736e6" datatype="html">
+        <source>Downloading packages...</source><target state="final">Downloading packages...</target>
         <context-group purpose="location">
-          <context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context>
-          <context context-type="linenumber">13</context>
+          <context context-type="sourcefile">app/shared/popover/components/grid-custom-components/grid-cell-active-job-status.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit><trans-unit id="1d0d5c9a36e72bd9643ff1ede69736ae063d652b" datatype="html">
+        <source>Stop</source><target state="final">Stop</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/popover/components/grid-custom-components/grid-cell-link.component.html</context>
+          <context context-type="linenumber">4</context>
         </context-group>
       </trans-unit><trans-unit id="8dd15f6c73c05a8b0bd7b6d416487ab6570b88c8" datatype="html">
         <source>Running</source><target state="final">Running</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context>
-          <context context-type="linenumber">18</context>
-        </context-group>
-      </trans-unit><trans-unit id="edcc19a49c950289ffe5d38be4843cdf194e5622" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context><context context-type="linenumber">21</context></context-group></trans-unit><trans-unit id="edcc19a49c950289ffe5d38be4843cdf194e5622" datatype="html">
         <source>Finished</source><target state="final">Finished</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context>
-          <context context-type="linenumber">22</context>
-        </context-group>
-      </trans-unit><trans-unit id="f058f4543f99ef3df799dbf3b579b67d2287317d" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.html</context><context context-type="linenumber">25</context></context-group></trans-unit><trans-unit id="f058f4543f99ef3df799dbf3b579b67d2287317d" datatype="html">
         <source>Data Concentrator Units</source><target state="translated">Enote Podatkovnih Koncentratorjev</target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="cdb3c88f25af3041ddf296fa073198bd0b656bfd" datatype="html">
@@ -1107,19 +1131,10 @@
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/overview/components/meter-units-overview.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="43f1cc191ebc0b8ce89f6916aa634f5a57158798" datatype="html">
         <source>Jobs</source><target state="final">Jobs</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="73c4569568285a3285b2fdf30066b9464f58e9ef" datatype="html">
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="73c4569568285a3285b2fdf30066b9464f58e9ef" datatype="html">
         <source>TOU Edit</source><target state="translated">ČU urejanje</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/core/base-template/services/sidebar.service.ts</context>
@@ -1204,7 +1219,7 @@
       <trans-unit id="7e892ba15f2c6c17e83510e273b3e10fc32ea016" datatype="html">
         <source>Search</source><target state="translated">Iskanje</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/action-form/services/action-form-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/action-form/services/action-form-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="8ec8cf1d0c7227029fbe4b195ff8d9e3fe5913d5" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/action-form/services/action-form-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/action-form/services/action-form-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="8ec8cf1d0c7227029fbe4b195ff8d9e3fe5913d5" datatype="html">
         <source>Data Concentration Unit was added successfully</source><target state="translated">Enota podatkovnega koncentratorja uspešno dodana</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.ts</context>
@@ -1213,100 +1228,46 @@
       </trans-unit><trans-unit id="b169576ab898458aa823e09c1e7f3397f8f011a0" datatype="html">
         <source>Columns</source><target state="translated">Stolpci</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="1298c1d2bbbb7415f5494e800f6775fdb70f4df6" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="1298c1d2bbbb7415f5494e800f6775fdb70f4df6" datatype="html">
         <source>Filters</source><target state="translated">Filtri</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="216065a76eda382e233b8a2c032bd74da4947906" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="216065a76eda382e233b8a2c032bd74da4947906" datatype="html">
         <source>page</source><target state="translated">stran</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="7f32abe3fc638f65c0d3eb269d478ee49ad41ebe" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="7f32abe3fc638f65c0d3eb269d478ee49ad41ebe" datatype="html">
         <source>more</source><target state="translated">več</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="e04356b41e0d85f3e2f7ebc72a3f75c6e1147663" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="e04356b41e0d85f3e2f7ebc72a3f75c6e1147663" datatype="html">
         <source>to</source><target state="translated">do</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="169eed2bc3e08e1bea977bcc5d799379f6b8a758" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="169eed2bc3e08e1bea977bcc5d799379f6b8a758" datatype="html">
         <source>of</source><target state="translated">od</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="612af120c77b52601251e6833cb9e3cfb55fe0fe" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="612af120c77b52601251e6833cb9e3cfb55fe0fe" datatype="html">
         <source>next</source><target state="translated">naslednja</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="124ece77851dc93e5e6c9fb67cbedf6ec37550c4" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="124ece77851dc93e5e6c9fb67cbedf6ec37550c4" datatype="html">
         <source>last</source><target state="translated">zadnja</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="8fe2da08ab9e881c45432b4656d4743714785885" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="8fe2da08ab9e881c45432b4656d4743714785885" datatype="html">
         <source>first</source><target state="translated">prva</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="bb4da0c71fba282b1b0e54169c81fb9b804922db" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="bb4da0c71fba282b1b0e54169c81fb9b804922db" datatype="html">
         <source>previous</source><target state="translated">prejšnja</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="2c6c698aa09d0fd026800df7991fa1916c79830b" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="2c6c698aa09d0fd026800df7991fa1916c79830b" datatype="html">
         <source>loading...</source><target state="translated">polnjenje...</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="3f8313b67ab41503ad4389b36a2f9e0087cc8e3a" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/scheduled-jobs-list/scheduled-jobs-list.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="3f8313b67ab41503ad4389b36a2f9e0087cc8e3a" datatype="html">
         <source>Selected items deleted</source><target state="translated">Izbrane zadeve odstranjene</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts</context>
@@ -1361,7 +1322,7 @@
       </trans-unit><trans-unit id="74e4beaa8f12e0f0d5779b4fa13c0668b6860897" datatype="html">
         <source>Read status</source><target state="translated">Status branja</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">10</context></context-group></trans-unit><trans-unit id="e9734a931c4b3c2185d2da92482122c90a80dbca" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="e9734a931c4b3c2185d2da92482122c90a80dbca" datatype="html">
         <source>Show deleteted Data Concentrator Units</source><target state="translated">Prikaži pobrisane podatkovne koncentratorje</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/data-concentrator-units/components/grid-custom-components/grid-custom-filter.component.html</context>
@@ -1388,10 +1349,10 @@
       <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">18</context></context-group></trans-unit><trans-unit id="0c1ac46617f7aca7f7ecf94242b96356098e6c5c" datatype="html">
         <source>Save and Add another</source><target state="translated">Shrani in dodaj nov</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">50</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">76</context></context-group></trans-unit><trans-unit id="5835eb84a0959185fdbaee172e33ef9af39ad934" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">50</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">95</context></context-group></trans-unit><trans-unit id="5835eb84a0959185fdbaee172e33ef9af39ad934" datatype="html">
         <source>More Save options</source><target state="translated">Več opcij shranjevanja</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">57</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">83</context></context-group></trans-unit><trans-unit id="cfc2f436ec2beffb042e7511a73c89c372e86a6c" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">57</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">102</context></context-group></trans-unit><trans-unit id="cfc2f436ec2beffb042e7511a73c89c372e86a6c" datatype="html">
         <source>Register</source><target state="translated">Registriraj</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/registers-select/component/registers-select.component.html</context>
@@ -1406,22 +1367,40 @@
       </trans-unit><trans-unit id="cafc87479686947e2590b9f588a88040aeaf660b" datatype="html">
         <source>Tags</source><target state="translated">Oznake</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="84a36cb75660b736773fe36ffa3d54f0f0fe363e" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="fe415ec3932ea4eec9f78c5778aa478dae515876" datatype="html">
+        <source>Job status</source><target state="final">Job status</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="84a36cb75660b736773fe36ffa3d54f0f0fe363e" datatype="html">
         <source>N/A</source><target state="translated">N/N</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="1e5a00f4a78b5f0a7bb000e6bf52607ad237c469" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/popover/services/active-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="1e5a00f4a78b5f0a7bb000e6bf52607ad237c469" datatype="html">
         <source>No records found. You need to adjust your search or filter parameters.</source><target state="translated">Ni podatkov. Potrebno je prilagoditi iskalni tekst oz. filtre.</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="fb421f3f9b2c232498e459cfcf9ac4cd706a30e5" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="fb421f3f9b2c232498e459cfcf9ac4cd706a30e5" datatype="html">
         <source>Loading data...</source><target state="translated">Nalaganje podatkov...</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="3976bbe85c35a428b7a95ce713c64ddaea966628" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="3976bbe85c35a428b7a95ce713c64ddaea966628" datatype="html">
         <source>No filter applied</source><target state="translated">Noben filter ni uporabljen</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="2bb1bffeac05141ee5d639347a168a1ad47030de" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="2bb1bffeac05141ee5d639347a168a1ad47030de" datatype="html">
         <source>Next planned read</source><target state="translated">Planirano naslednje branje</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/scheduled-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="17468b5ae4e932bc609930197afcc04856ed6124" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="17468b5ae4e932bc609930197afcc04856ed6124" datatype="html">
         <source>Filtered by: </source><target state="translated">Filtrirano po: </target>
         
       <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="74ac724decc8ee58e90042e703408a8642cf5405" datatype="html">
@@ -1620,6 +1599,12 @@
           <context context-type="sourcefile">src/app/features/users/user-login.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
+      </trans-unit><trans-unit id="53f7ec2d445dc6b9e683738742e523e9f4757225" datatype="html">
+        <source>no organisation</source><target state="final">no organisation</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/base-template/components/base-template.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
       </trans-unit>
       
       
@@ -1644,7 +1629,7 @@
         <source>Server error!</source><target state="translated">Napaka na strežniku!</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="ac6c9212896d39b23811ed2dadab7d07336ec559" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/popover/services/active-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="ac6c9212896d39b23811ed2dadab7d07336ec559" datatype="html">
         <source>Enable</source><target state="final">Enable</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context>
@@ -1658,11 +1643,8 @@
         </context-group>
       </trans-unit><trans-unit id="bf73c6956270f1a796d65ca7a37b827e8e4162b2" datatype="html">
         <source>Confirm operation</source><target state="final">Confirm operation</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context>
-          <context context-type="linenumber">1</context>
-        </context-group>
-      </trans-unit><trans-unit id="e49a02bae109f0ef7be96b84ccb155d10f2ff949" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-link.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="e49a02bae109f0ef7be96b84ccb155d10f2ff949" datatype="html">
         <source>Do you want to change scheduled job status?</source><target state="final">Do you want to change scheduled job status?</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context>
@@ -1686,6 +1668,78 @@
         <source>Inactive</source><target state="final">Inactive</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="c35ae0c79febdb492de3e2c6b2878c1ea1b2ebb4" datatype="html">
+        <source>Scheduled job started!</source><target state="final">Scheduled job started!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="699b690d686dbb8e00a1e95b89ba2fffb548da6e" datatype="html">
+        <source>Execute</source><target state="final">Execute</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="66a93242f31e0a077b769f1a5d583ae12a6850b3" datatype="html">
+        <source>Do you want to execute scheduled job now?</source><target state="final">Do you want to execute scheduled job now?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="00b883b9ce364a880a12da81d9163ed3db53ccbd" datatype="html">
+        <source>Execute job</source><target state="final">Execute job</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="6afd1cafaa16fe0466e65453a313098eb0ab94a3" datatype="html">
+        <source>Scheduled job deleted!</source><target state="final">Scheduled job deleted!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="3568b788ff89cd81b4af5b52a7e12cdc9cbd3063" datatype="html">
+        <source>Confirm delete</source><target state="final">Confirm delete</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="4450bae1004ff869ad7cd98065f257b4413da559" datatype="html">
+        <source>Do you want to delete scheduled job?</source><target state="final">Do you want to delete scheduled job?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="15f459c9e1a06fcc74c4b1f57dc7e8fe594e914a" datatype="html">
+        <source>Delete job</source><target state="final">Delete job</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="8ce93f2d8373a69ebe636fccea68b7d3b67caa0a" datatype="html">
+        <source>Job stoped!</source><target state="final">Job stoped!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/services/active-jobs-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="9bc95b1c0f99b49694b30a2db1595067a2879640" datatype="html">
+        <source>Job canceled!</source><target state="final">Job canceled!</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/services/active-jobs-static-text.service.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit><trans-unit id="502fee113bf533c81d1391d25ae409c5e644e84b" datatype="html">
@@ -1806,6 +1860,42 @@
         <source>Change password successful</source><target state="translated">Menjava gesla uspela</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/shared/modals/components/modal-change-password.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="98ae04eac68e2373d49e8529bf906bbc847c09af" datatype="html">
+        <source>Running job</source><target state="final">Running job</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-active-job-status.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="7efd34034050d796f951c92347a4c9ce765fc27c" datatype="html">
+        <source>Pending job</source><target state="final">Pending job</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-active-job-status.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="6d5a9b44ef744f1aeaf2c835b160fe8a592c943f" datatype="html">
+        <source>Stop job</source><target state="final">Stop job</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-link.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="74875ba70d2de0b64ab31da7fabe45afcadb21b1" datatype="html">
+        <source>Cancel job</source><target state="final">Cancel job</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-link.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="d3609f132ee9c6f4817f190874e596173f3ba32e" datatype="html">
+        <source>Do you want to cancel scheduled job now?</source><target state="final">Do you want to cancel scheduled job now?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-link.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit><trans-unit id="1e8813c67a97b137728a8369df6e2226544271a9" datatype="html">
+        <source>Do you want to stop running job now?</source><target state="final">Do you want to stop running job now?</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/shared/popover/components/grid-custom-components/grid-cell-link.component.ts</context>
           <context context-type="linenumber">1</context>
         </context-group>
       </trans-unit>
