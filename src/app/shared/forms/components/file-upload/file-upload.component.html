@@ -1,0 +1,18 @@
+<div class="form-group" [formGroup]="form">
+  <label [attr.for]="property" *ngIf="label">
+    {{label}}
+    <sup *ngIf="required"> *</sup>
+  </label>
+  <kendo-upload required
+    [formControlName]="property"
+    [name]="property" 
+    [saveUrl]="uploadSaveUrl"
+    [removeUrl]="uploadRemoveUrl"
+    [restrictions]="myRestrictions"
+    >
+  </kendo-upload>
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>

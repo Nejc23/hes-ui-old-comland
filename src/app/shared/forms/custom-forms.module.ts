@@ -23,6 +23,8 @@ import { InputSwitchComponent } from './components/input-switch/input-switch.com
 import { InputNumericComponent } from './components/input-numeric/input-numeric.component';
 import { TimePickerComponent } from './components/time-picker/time-picker.component';
 import { DateTimePickerComponent } from './components/datetime-picker/datetime-picker.component';
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
+import { UploadsModule } from '@progress/kendo-angular-upload';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,10 +46,12 @@ import { DateTimePickerComponent } from './components/datetime-picker/datetime-p
     InputSwitchComponent,
     InputNumericComponent,
     DropDownsModule,
+    UploadsModule,
     InputsModule,
     DateInputsModule,
     TimePickerComponent,
-    DateTimePickerComponent
+    DateTimePickerComponent,
+    FileUploadComponent
   ],
   declarations: [
     InputTextComponent,
@@ -67,9 +71,10 @@ import { DateTimePickerComponent } from './components/datetime-picker/datetime-p
     InputNumericComponent,
     InputMultiselectComponent,
     TimePickerComponent,
-    DateTimePickerComponent
+    DateTimePickerComponent,
+    FileUploadComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule, DateInputsModule]
+  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule, DateInputsModule, UploadsModule]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {
