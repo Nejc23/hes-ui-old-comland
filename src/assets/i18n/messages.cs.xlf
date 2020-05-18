@@ -152,6 +152,222 @@
         </context-group>
         <note priority="1" from="description">The text displayed in the popup when there are no items</note>
         <note priority="1" from="meaning">kendo.multiselect.noDataText</note>
+      </trans-unit><trans-unit id="262a7a2e1c2c01f72e494499e4031ca52bfb6c62" datatype="html">
+        <source>Cancel</source><target state="final">Cancel</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Cancel button</note>
+        <note priority="1" from="meaning">kendo.upload.cancel</note>
+      </trans-unit><trans-unit id="47d53c4c549530374586d580a1fffb90509aa114" datatype="html">
+        <source>Clear</source><target state="final">Clear</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Clear button</note>
+        <note priority="1" from="meaning">kendo.upload.clearSelectedFiles</note>
+      </trans-unit><trans-unit id="ed0e4f0924eb8ac2dfc0a30d0852da2f0a356e8f" datatype="html">
+        <source>Drop files here to upload</source><target state="final">Drop files here to upload</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">The drop zone hint</note>
+        <note priority="1" from="meaning">kendo.upload.dropFilesHere</note>
+      </trans-unit><trans-unit id="c6ce7b0d23357eba501fa8e17eb2e2c8ce2ca81a" datatype="html">
+        <source>files</source><target state="final">files</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">The status message for a batch of files</note>
+        <note priority="1" from="meaning">kendo.upload.filesBatchStatus</note>
+      </trans-unit><trans-unit id="1b556c65fa0c566e50ca9a29984c0f2c1299f1a1" datatype="html">
+        <source>files failed to upload.</source><target state="final">files failed to upload.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">The status message for a batch of files after failed upload</note>
+        <note priority="1" from="meaning">kendo.upload.filesBatchStatusFailed</note>
+      </trans-unit><trans-unit id="799ee1c7cad3b2114cfbf5cdc4811d87261a2ed8" datatype="html">
+        <source>files successfully uploaded.</source><target state="final">files successfully uploaded.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">The status message for a batch of files after successful upload</note>
+        <note priority="1" from="meaning">kendo.upload.filesBatchStatusUploaded</note>
+      </trans-unit><trans-unit id="4a3deae307b634742b5b7d7790c22e60ddd83668" datatype="html">
+        <source>File failed to upload.</source><target state="final">File failed to upload.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <note priority="1" from="description">The file status message after failed upload</note>
+        <note priority="1" from="meaning">kendo.upload.fileStatusFailed</note>
+      </trans-unit><trans-unit id="967a89b151d61724cee57583e4c5f50cd5419369" datatype="html">
+        <source>File successfully uploaded.</source><target state="final">File successfully uploaded.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <note priority="1" from="description">The file status message after successful upload</note>
+        <note priority="1" from="meaning">kendo.upload.fileStatusUploaded</note>
+      </trans-unit><trans-unit id="940cf4e04c5b4fd5e98b4affd35a4b2c9c3036a4" datatype="html">
+        <source>Paused</source><target state="final">Paused</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">28</context>
+        </context-group>
+        <note priority="1" from="description">The header status message when the file upload is paused</note>
+        <note priority="1" from="meaning">kendo.upload.headerStatusPaused</note>
+      </trans-unit><trans-unit id="30d5eeceb66bae90056d593fcf90eecd851b36a4" datatype="html">
+        <source>Done</source><target state="final">Done</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+        <note priority="1" from="description">The header status message after file upload completion</note>
+        <note priority="1" from="meaning">kendo.upload.headerStatusUploaded</note>
+      </trans-unit><trans-unit id="be0775f64ce53906c132f6b5a50280ff5b948b35" datatype="html">
+        <source>Uploading...</source><target state="final">Uploading...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">34</context>
+        </context-group>
+        <note priority="1" from="description">The header status message during file upload</note>
+        <note priority="1" from="meaning">kendo.upload.headerStatusUploading</note>
+      </trans-unit><trans-unit id="8292c7f6c967dcade8639d0dd477a67ad08457c7" datatype="html">
+        <source>File type not allowed.</source><target state="final">File type not allowed.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <note priority="1" from="description">The text for the invalid allowed extensions restriction message</note>
+        <note priority="1" from="meaning">kendo.upload.invalidFileExtension</note>
+      </trans-unit><trans-unit id="1d3c53a4169aceb03929a0dcdd2f4c5436aa4470" datatype="html">
+        <source>File size too large.</source><target state="final">File size too large.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+        <note priority="1" from="description">The text for the invalid max file size restriction message</note>
+        <note priority="1" from="meaning">kendo.upload.invalidMaxFileSize</note>
+      </trans-unit><trans-unit id="dde6c68c96cf06aab654c8054c516d0d12f6309a" datatype="html">
+        <source>File size too small.</source><target state="final">File size too small.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+        <note priority="1" from="description">The text for the invalid min file size restriction message</note>
+        <note priority="1" from="meaning">kendo.upload.invalidMinFileSize</note>
+      </trans-unit><trans-unit id="8a0a61519fec031579cf6b1c4f31c94578bd0981" datatype="html">
+        <source>Pause</source><target state="final">Pause</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">46</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Pause button</note>
+        <note priority="1" from="meaning">kendo.upload.pause</note>
+      </trans-unit><trans-unit id="1e81e5de447f5792cd15c18c435360a7b946ac70" datatype="html">
+        <source>Remove</source><target state="final">Remove</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">49</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Remove button</note>
+        <note priority="1" from="meaning">kendo.upload.remove</note>
+      </trans-unit><trans-unit id="f9ef89f76dd3d8c5a3184830d60e4d4f9c4dc998" datatype="html">
+        <source>Resume</source><target state="final">Resume</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Resume button</note>
+        <note priority="1" from="meaning">kendo.upload.resume</note>
+      </trans-unit><trans-unit id="9150dfa816d23dfa75f231ca6f053f5e0ae26713" datatype="html">
+        <source>Retry</source><target state="final">Retry</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">55</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Retry button</note>
+        <note priority="1" from="meaning">kendo.upload.retry</note>
+      </trans-unit><trans-unit id="24063b06532dc5303d28524d6245ba6d3eed80c1" datatype="html">
+        <source>Select files...</source><target state="final">Select files...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">58</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Select button</note>
+        <note priority="1" from="meaning">kendo.upload.select</note>
+      </trans-unit><trans-unit id="3449491aa76964a8dceb9ed3957b6fc4c17f568f" datatype="html">
+        <source>Upload</source><target state="final">Upload</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/upload.component.d.ts</context>
+          <context context-type="linenumber">61</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Upload files button</note>
+        <note priority="1" from="meaning">kendo.upload.uploadSelectedFiles</note>
+      </trans-unit><trans-unit id="fc9dc41483f5cb38bd14b6c7003fb09ef73aa357" datatype="html">
+        <source>Drop files here to select</source><target state="final">Drop files here to select</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/fileselect.component.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">The drop zone hint</note>
+        <note priority="1" from="meaning">kendo.fileselect.dropFilesHere</note>
+      </trans-unit><trans-unit id="cd37b839ea9e6b35f63d735544dee56d4380e2f9" datatype="html">
+        <source>File type not allowed.</source><target state="final">File type not allowed.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/fileselect.component.d.ts</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+        <note priority="1" from="description">The text for the invalid allowed extensions restriction message</note>
+        <note priority="1" from="meaning">kendo.fileselect.invalidFileExtension</note>
+      </trans-unit><trans-unit id="98382b80d6551de7650912776b22a6c70a80f7fd" datatype="html">
+        <source>File size too large.</source><target state="final">File size too large.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/fileselect.component.d.ts</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+        <note priority="1" from="description">The text for the invalid max file size restriction message</note>
+        <note priority="1" from="meaning">kendo.fileselect.invalidMaxFileSize</note>
+      </trans-unit><trans-unit id="448bd77b7081ff65298df29ebcfe776401613b21" datatype="html">
+        <source>File size too small.</source><target state="final">File size too small.</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/fileselect.component.d.ts</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <note priority="1" from="description">The text for the invalid min file size restriction message</note>
+        <note priority="1" from="meaning">kendo.fileselect.invalidMinFileSize</note>
+      </trans-unit><trans-unit id="19fcca3d504982c668a7a793a545930003c7a0a7" datatype="html">
+        <source>Remove</source><target state="final">Remove</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/fileselect.component.d.ts</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Remove button</note>
+        <note priority="1" from="meaning">kendo.fileselect.remove</note>
+      </trans-unit><trans-unit id="fb88c598155545d9cb1e15ff76bdec63d72c03c9" datatype="html">
+        <source>Select files...</source><target state="final">Select files...</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/fileselect.component.d.ts</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <note priority="1" from="description">The text for the Select button</note>
+        <note priority="1" from="meaning">kendo.fileselect.select</note>
+      </trans-unit><trans-unit id="0b9299bc1023ea6dce824348625df34e3ca92374" datatype="html">
+        <source>Drag and drop files here to upload</source><target state="final">Drag and drop files here to upload</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../node_modules/@progress/kendo-angular-upload/dist/es2015/dropzone.component.d.ts</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <note priority="1" from="description">Sets the external drop-zone hint</note>
+        <note priority="1" from="meaning">kendo.uploaddropzone.externalDropFilesHere</note>
       </trans-unit><trans-unit id="0fa71630d40c425b9c366afd7f6c3cecc5bef59d" datatype="html">
         <source>increment</source><target state="final">increment</target>
         <context-group purpose="location">
@@ -486,6 +702,12 @@
           <context context-type="sourcefile">app/shared/forms/components/input-select/input-select.component.html</context>
           <context context-type="linenumber">21</context>
         </context-group>
+      </trans-unit><trans-unit id="96ba00ed5219dee91d78887aa06c55235cd8d907" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="{{textExplanation}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{textExplanation}}"/></target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/shared/forms/components/file-upload/file-upload.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
       </trans-unit><trans-unit id="ngb.alert.close" datatype="html">
         <source>Close</source><target state="final">Close</target>
         <context-group purpose="location">
@@ -694,7 +916,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">42</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">87</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.html</context><context context-type="linenumber">16</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/popover/components/grid-custom-components/grid-cell-link.component.html</context><context context-type="linenumber">3</context></context-group></trans-unit><trans-unit id="d229c742a0f872e20ae0ed39f0c69eb5fe10db93" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">42</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.html</context><context context-type="linenumber">87</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.html</context><context context-type="linenumber">16</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context><context context-type="linenumber">45</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/shared/popover/components/grid-custom-components/grid-cell-link.component.html</context><context context-type="linenumber">3</context></context-group></trans-unit><trans-unit id="d229c742a0f872e20ae0ed39f0c69eb5fe10db93" datatype="html">
         <source><x id="INTERPOLATION" equiv-text="{{btnConfirmText}}"/></source><target state="final"><x id="INTERPOLATION" equiv-text="{{btnConfirmText}}"/></target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/shared/modals/components/modal-confirm.component.html</context>
@@ -937,6 +1159,36 @@
           <context context-type="sourcefile">app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.html</context>
           <context context-type="linenumber">19</context>
         </context-group>
+      </trans-unit><trans-unit id="474d80f023ba5da6a1d6517bd3fcc4d35bb81805" datatype="html">
+        <source>FW Upgrade</source><target state="final">FW Upgrade</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context>
+          <context context-type="linenumber">3</context>
+        </context-group>
+      </trans-unit><trans-unit id="a5f9ba9bb9faa8284bcadb1cdbc6aaf969e9c4bb" datatype="html">
+        <source>Image</source><target state="final">Image</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit><trans-unit id="2db849b45113c7be02e6b066bc9992585f0179ce" datatype="html">
+        <source>Image Identifyer</source><target state="final">Image Identifyer</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit><trans-unit id="b31fe502b98138038d5a1fd7cd8926a98697af7d" datatype="html">
+        <source>Image signature</source><target state="final">Image signature</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit><trans-unit id="5f102702887ae7307de21df1e59da98c75eacff5" datatype="html">
+        <source>Fill last block</source><target state="final">Fill last block</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
       </trans-unit><trans-unit id="739516c2ca75843d5aec9cf0e6b3e4335c4227b9" datatype="html">
         <source>Change password</source><target state="final">Change password</target>
         <context-group purpose="location">
@@ -1069,7 +1321,13 @@
         <source>Upgrade</source><target state="final">Upgrade</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">33</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">44</context></context-group></trans-unit><trans-unit id="1256ac2bfeda1377d5305f537bd2d657fa68f939" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context><context context-type="linenumber">48</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">33</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">44</context></context-group></trans-unit><trans-unit id="a8f5a3b30397a5dc1051a9c90c1cfa22537d7c4d" datatype="html">
+        <source>Activate</source><target state="final">Activate</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context>
+          <context context-type="linenumber">52</context>
+        </context-group>
+      </trans-unit><trans-unit id="1256ac2bfeda1377d5305f537bd2d657fa68f939" datatype="html">
         <source>You have no Data Concentrator Units yet!</source><target state="final">You have no Data Concentrator Units yet!</target>
         
         
@@ -1398,7 +1656,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/data-concentrator-units/services/data-concentrator-units-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/services/meter-units-type-grid.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
       <trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
         <source>ID</source><target state="final">ID</target>
         <context-group purpose="location">
@@ -1712,7 +1970,13 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/forms/components/form-error/form-error.component.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="30f13d98f05c3a7f31885433f3544cfd5348e3cc" datatype="html">
+        <source>Meter Units upload Edited was successfully</source><target state="final">Meter Units upload Edited was successfully</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.ts</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="aea50f2d222a6e5285537926a4f2cbb4a772fcea" datatype="html">
         <source>Meter Units Read Scheduler was added successfully</source><target state="final">Meter Units Read Scheduler was added successfully</target>
         <context-group purpose="location">
@@ -1724,7 +1988,7 @@
         <source>Server error!</source><target state="final">Server error!</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/popover/services/active-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="ac6c9212896d39b23811ed2dadab7d07336ec559" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-next-run.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-text-with-delete-btn.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/jobs/services/jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/features/meter-units/types/components/meter-units-type.component.ts</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">src/app/shared/popover/services/active-jobs-static-text.service.ts</context><context context-type="linenumber">1</context></context-group></trans-unit><trans-unit id="ac6c9212896d39b23811ed2dadab7d07336ec559" datatype="html">
         <source>Enable</source><target state="final">Enable</target>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/features/jobs/components/grid-custom-components/grid-cell-active.component.ts</context>
