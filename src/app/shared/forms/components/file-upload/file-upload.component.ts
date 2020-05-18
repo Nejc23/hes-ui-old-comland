@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import * as _ from 'lodash';
@@ -15,22 +15,38 @@ export class FileUploadComponent implements OnInit {
   @Input() label;
   @Input() uploadSaveUrl: string;
   @Input() uploadRemoveUrl: string;
-  controlId: string;
+  @Input() textExplanation: string;
+  @Input() multiple = true;
+  @Input() autoUpload = true;
+  @Input() allowedExtensions: string[] = [];
+  @Output() successEvent = new EventEmitter<any>();
 
-  public myRestrictions: FileRestrictions = {
-    allowedExtensions: ['jpg', 'jpeg', 'png']
-  };
+  controlId: string;
+  restrictions: FileRestrictions;
 
   constructor(private formUtils: FormsUtilsService) {}
 
   ngOnInit() {
+    this.restrictions = {
+      allowedExtensions: this.allowedExtensions
+    };
+
     if (!this.form) {
-      throw Error('TimePickerComponent - form input missing.');
+      throw Error('FileUploadComponent - form input missing.');
     }
     if (!this.property) {
-      throw Error('TimePickerComponent - property input missing.');
+      throw Error('FileUploadComponent - property input missing.');
     }
-    this.controlId = _.uniqueId('fileupload');
+
+    if (!this.uploadSaveUrl) {
+      throw Error('FileUploadComponent - property upload save URL missing.');
+    }
+
+    if (!this.uploadRemoveUrl) {
+      throw Error('FileUploadComponent - property upload remove URL missing.');
+    }
+
+    this.controlId = _.uniqueId('fileUpload');
   }
 
   get formControl(): AbstractControl {
@@ -43,5 +59,9 @@ export class FileUploadComponent implements OnInit {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  onSuccess(event) {
+    this.successEvent.emit(event);
   }
 }

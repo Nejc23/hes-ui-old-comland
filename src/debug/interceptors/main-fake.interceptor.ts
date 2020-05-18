@@ -18,6 +18,7 @@ import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-schedu
 import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
 import { ScheduledJobsInterceptor } from './jobs/scheduled-jobs.interceptor';
 import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
+import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -173,6 +174,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsSchedulerInterceptor.canInterceptSchedulerJobDisable(request)) {
                 return MeterUnitsSchedulerInterceptor.interceptSchedulerJobDisable(request);
+              }
+
+              if (MeterUnitsFwUpgradeInterceptor.canInterceptMeterUniFwUpgradeUploadPost(request)) {
+                return MeterUnitsFwUpgradeInterceptor.interceptMeterUniFwUpgradeUploadPost(request);
+              }
+
+              if (MeterUnitsFwUpgradeInterceptor.canInterceptMeterUniFwUpgradePost(request)) {
+                return MeterUnitsFwUpgradeInterceptor.interceptMeterUniFwUpgradePost(request);
               }
 
               // pass through any requests not handled above

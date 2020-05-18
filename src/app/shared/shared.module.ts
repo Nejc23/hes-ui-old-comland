@@ -46,6 +46,7 @@ import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide
 import { ActiveJobComponent } from './popover/components/active-job/active-job.component';
 import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
 import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
+import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 
 @NgModule({
   exports: [
@@ -70,6 +71,7 @@ import { GridCellLinkComponent } from './popover/components/grid-custom-componen
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
     PlcMeterTouConfigComponent,
+    PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent,
     ModalChangePasswordComponent,
@@ -112,6 +114,7 @@ import { GridCellLinkComponent } from './popover/components/grid-custom-componen
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
     PlcMeterTouConfigComponent,
+    PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent,
     ToastComponent,
@@ -143,6 +146,7 @@ import { GridCellLinkComponent } from './popover/components/grid-custom-componen
     AddDcuFormComponent,
     PlcMeterReadScheduleComponent,
     PlcMeterTouConfigComponent,
+    PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
     TouConfigSelectComponent
   ]

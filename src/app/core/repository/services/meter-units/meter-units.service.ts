@@ -13,9 +13,11 @@ import {
   deleteJob,
   executeJob,
   enableJob,
-  disableJob
+  disableJob,
+  fwUpgrade
 } from '../../consts/meter-units.const';
 import { MeterUnitsReadSchedule, MeterUnitsReadScheduleForService } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
+import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -101,5 +103,13 @@ export class MeterUnitsService {
 
   disableSchedulerJobRequest(id: string): HttpRequest<any> {
     return new HttpRequest('PUT', `${meterUnitsScheduler}/${disableJob}/${id}`, null);
+  }
+
+  createFwUpgrade(payload: MeterUnitsFwUpgrade): Observable<DcResponse> {
+    return this.repository.makeRequest(this.createFwUpgradeRequest(payload));
+  }
+
+  createFwUpgradeRequest(payload: MeterUnitsFwUpgrade): HttpRequest<any> {
+    return new HttpRequest('POST', `${meterUnits}/${fwUpgrade}`, payload);
   }
 }

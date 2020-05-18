@@ -32,4 +32,22 @@
   &.k-i-clock::before {
     content: "\f017";
   }
+
+  &.k-i-file-image::before {
+    content: "\f1c5",
+  }
+
+  &.k-i-file::before,
+  &.k-i-file-vertical::before {
+    content: "\f15b",
+  }
+
+  &.k-i-file-txt::before,
+  &.k-i-txt::before {
+    content: "\f15c",
+  }
+
+  &.k-i-checkmark::before {
+    content: "\f00c"
+  }
 }

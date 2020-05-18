@@ -5,12 +5,15 @@
   </label>
   <kendo-upload required
     [formControlName]="property"
-    [name]="property" 
     [saveUrl]="uploadSaveUrl"
     [removeUrl]="uploadRemoveUrl"
-    [restrictions]="myRestrictions"
-    >
+    [restrictions]="restrictions"
+    [multiple]="multiple"
+    [autoUpload]="autoUpload"
+    (success)="onSuccess($event)"
+    [id]="controlId" [name]="controlId">
   </kendo-upload>
+  <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>

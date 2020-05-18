@@ -14,3 +14,6 @@ export const deleteJob = 'delete-job';
 export const executeJob = 'execute-job';
 export const enableJob = 'enable-job';
 export const disableJob = 'disable-job';
+export const fwUploadFile = 'fw-upload-file';
+export const fwRemoveFile = 'fw-remove-file';
+export const fwUpgrade = 'fw-upgrade';

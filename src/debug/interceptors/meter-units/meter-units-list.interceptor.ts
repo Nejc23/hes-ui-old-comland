@@ -14,7 +14,6 @@ export class MeterUnitsListInterceptor {
   constructor() {}
 
   static interceptMeterUnitsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    console.log(request.body);
     let skip = 0;
     let take = 0;
     let sortColId = '';
@@ -57,7 +56,7 @@ export class MeterUnitsListInterceptor {
   }
 
   static canInterceptMeterUnitsList(request: HttpRequest<any>): boolean {
-    return new RegExp(meterUnits).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(meterUnits + `$`).test(request.url) && request.method.endsWith('POST');
   }
 }
 
