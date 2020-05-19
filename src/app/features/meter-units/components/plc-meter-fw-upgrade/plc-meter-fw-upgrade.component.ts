@@ -11,7 +11,11 @@ import { RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/my
 import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { MeterUnitsFwUpgradeForm, FileGuid } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
+import {
+  MeterUnitsFwUpgradeForm,
+  FileGuid,
+  MeterUnitsFwUpgrade
+} from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
 import { PlcMeterReadScheduleService } from '../../services/plc-meter-read-scheduler.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
@@ -64,9 +68,9 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   ngOnInit() {}
 
-  fillData(): MeterUnitsFwUpgradeForm {
-    const formData: MeterUnitsFwUpgradeForm = {
-      files: this.form.get(this.imageProperty).value,
+  fillData(): MeterUnitsFwUpgrade {
+    const formData: MeterUnitsFwUpgrade = {
+      //  files: this.form.get(this.imageProperty).value,
       imageIdenifyer: this.form.get(this.imageIdenifyerProperty).value,
       imageGuid: this.form.get(this.imageGuidProperty).value,
       imageSize: parseInt(this.form.get(this.imageSizeProperty).value, 10),
