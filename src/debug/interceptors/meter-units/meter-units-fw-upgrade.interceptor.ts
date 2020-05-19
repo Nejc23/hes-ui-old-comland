@@ -38,7 +38,8 @@ export class MeterUnitsFwUpgradeInterceptor {
   }
 
   static canInterceptMeterUniFwUpgradePost(request: HttpRequest<any>): boolean {
-    return request.url.startsWith(`${meterUnits}/${fwUpgrade}`) && request.method.endsWith('POST');
+    //return request.url.startsWith(`${meterUnits}/${fwUpgrade}$`) && request.method.endsWith('POST');
+    return new RegExp(`${meterUnits}/${fwUpgrade}`).test(request.url) && request.method.endsWith('POST');
   }
 
   static interceptMeterUniFwUpgradePost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
