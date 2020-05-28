@@ -15,20 +15,24 @@ export class CodelistInterceptor {
   static interceptDcuStatus(): Observable<HttpEvent<any>> {
     const data: Codelist<number>[] = [
       {
+        id: 0,
+        value: 'unknow'
+      },
+      {
         id: 1,
-        value: 'Active'
+        value: 'ACTIVE'
       },
       {
         id: 2,
-        value: 'Inactive'
+        value: 'INACTIVE'
       },
       {
         id: 3,
-        value: 'Mouted'
+        value: 'MOUNTED'
       },
       {
         id: 4,
-        value: 'Warehouse'
+        value: 'DELETED'
       }
     ];
 
@@ -47,16 +51,12 @@ export class CodelistInterceptor {
   static interceptDcuType(): Observable<HttpEvent<any>> {
     const data: Codelist<number>[] = [
       {
+        id: 0,
+        value: 'unknow'
+      },
+      {
         id: 1,
-        value: 'G2-PLX'
-      },
-      {
-        id: 2,
-        value: 'G3-PLC'
-      },
-      {
-        id: 3,
-        value: 'G4-PLC'
+        value: 'DC450G3'
       }
     ];
 
@@ -75,16 +75,28 @@ export class CodelistInterceptor {
   static interceptDcuVendor(): Observable<HttpEvent<any>> {
     const data: Codelist<number>[] = [
       {
+        id: 0,
+        value: 'unknown'
+      },
+      {
         id: 1,
-        value: 'Vendor 1'
+        value: 'LANDISGYR'
       },
       {
         id: 2,
-        value: 'Vendor 2'
+        value: 'ISKRAEMECO'
       },
       {
         id: 3,
-        value: 'Vendor 3'
+        value: 'ENSOR'
+      },
+      {
+        id: 4,
+        value: 'ELSTER'
+      },
+      {
+        id: 5,
+        value: 'SAGEMCOM'
       }
     ];
 

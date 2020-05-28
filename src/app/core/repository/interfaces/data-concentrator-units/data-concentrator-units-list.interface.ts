@@ -1,16 +1,16 @@
 export interface DataConcentratorUnitsList {
-  id: string;
+  concentratorId: string;
   status: string;
   nextRead: string;
   name: string;
-  metersValue: number;
+  meters: number;
   metersPercent: number;
   metersUp: boolean;
   readStatusTimeStamp: string;
   readStatusColor: string;
   type: string;
   vendor: string;
-  idNumber: string;
+  id: string;
   ip: string;
   lastCommunication: string;
   tags: string[];

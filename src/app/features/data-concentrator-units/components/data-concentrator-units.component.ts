@@ -220,6 +220,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
+          console.log(data);
           that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {

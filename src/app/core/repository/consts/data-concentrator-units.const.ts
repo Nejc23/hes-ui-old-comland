@@ -1,4 +1,4 @@
-export const dataConcentratorUnits = '/api/dcu';
+export const dataConcentratorUnits = '/api/concentrator-management/concentrators';
 export const dcuLayout = '/api/dcu-layout';
 export const dcuCreate = '/api/dcu-create';
 export const bulkDelete = '/api/dcu-bulk-delete';
@@ -9,8 +9,8 @@ export const activeJobs = '/api/active-jobs';
 export const stopJob = 'stop-job';
 export const cancelJob = 'cancel-job';
 
-// codelist
-export const dcuStatuses = `/api/codelists/dcu-statuses`;
+// codelist DCU
+export const dcuStatuses = `/api/concentrator-management/concentrator-status-codes`;
 export const dcuTags = `/api/codelists/dcu-tags`;
-export const dcuTypes = `/api/codelists/dcu-types`;
-export const dcuVendors = `/api/codelists/dcu-vendors`;
+export const dcuTypes = `/api/concentrator-management/concentrator-types`;
+export const dcuVendors = `/api/concentrator-management/concentrator-vendor-codes`;

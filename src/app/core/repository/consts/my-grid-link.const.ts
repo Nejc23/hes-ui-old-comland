@@ -1,6 +1,6 @@
 export enum enumMyGridLink {
   identityTokenServer = '/api/identity-server',
-  managment = '/api/concentrator-management',
+  //managment = '/api/concentrator-management',
   dataProcessing = '/api/on-demand-data-processing'
 }
 

@@ -57,9 +57,9 @@ import { RoleService } from './permissions/services/role.service';
       provide: HTTP_INTERCEPTORS,
       useClass: ApiUrlInterceptor,
       multi: true
-    },
+    }
     // fakeBaceknd
-    fakeBackendProvider
+    //    fakeBackendProvider
   ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {
