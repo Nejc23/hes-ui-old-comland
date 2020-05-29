@@ -9,6 +9,13 @@ const PROXY_CONFIG = [
   //},
   {
     context: [
+      "/api/device-information",        
+    ],
+    target: "http://localhost:5013",
+    secure: false
+  },
+  {
+    context: [
       "/api/concentrator-management/concentrators",  
       "/api/concentrator-management/concentrator-status-codes",      
       "/api/concentrator-management/concentrator-vendor-codes",      
