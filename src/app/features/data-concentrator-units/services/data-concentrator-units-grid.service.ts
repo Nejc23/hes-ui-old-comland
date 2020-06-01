@@ -93,7 +93,7 @@ export class DataConcentratorUnitsGridService {
         headerTooltip: this.i18n('Name')
       },
       {
-        field: 'metersValue',
+        field: 'meters',
         headerName: this.i18n('Meters'),
         pinned: true,
         sortable: true,

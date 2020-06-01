@@ -10,6 +10,7 @@ import { readStatusColor } from '../../consts/data-concentrator-units.consts';
   templateUrl: './grid-cell-read-status.component.html'
 })
 export class GridCellReadStatusComponent implements ICellRendererAngularComp {
+  notAvailableText = this.staticextService.notAvailableTekst; // N/A
   trasholds = readStatusColor;
 
   public params: any;
