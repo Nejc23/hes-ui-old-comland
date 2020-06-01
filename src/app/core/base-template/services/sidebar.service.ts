@@ -23,7 +23,7 @@ export class SidebarService {
       },
       {
         title: this.i18n(`Meter Units`),
-        routeLink: '/meterUnits/overview',
+        routeLink: '/meterUnits/1', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
         children: []
       },
@@ -75,8 +75,8 @@ export class SidebarService {
         hasChildren: false,
         children: [],
         isBorder: true
-      },
-      {
+      }
+      /*{ /// TODO uncomment when overview implemented
         title: this.i18n(`Overview`),
         routeLink: `/${MeterTypeRoute.meterUnits}/overview`,
         hasChildren: false,
@@ -88,7 +88,7 @@ export class SidebarService {
         hasChildren: false,
         children: [],
         isBorder: true
-      }
+      }*/
     ];
   }
 
