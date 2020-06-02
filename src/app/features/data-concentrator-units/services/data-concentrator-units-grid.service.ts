@@ -255,16 +255,19 @@ export class DataConcentratorUnitsGridService {
   }
 
   public onColumnVisibility(params) {
-    this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
+    // TODO change to different store
+    //  this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
   private onColumnMoved = params => {
-    this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   };
 
   private onSortChanged = params => {
     console.log(params.api.getSortModel());
-    this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
   };
 
   public getCookieData() {

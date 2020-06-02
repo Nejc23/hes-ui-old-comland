@@ -7,10 +7,11 @@ import { Injectable } from '@angular/core';
 export class GridSettingsCookieStoreService {
   constructor(private cookieService: CookieService) {}
 
-  setGridColumnsSettings(gridId: string, state) {
+  // TODO change to different store
+  /* setGridColumnsSettings(gridId: string, state) {
     // this.cookieService.delete('gridSettings')
     this.cookieService.set(gridId, JSON.stringify(state), null, environment.cookiePath);
-  }
+  }*/
 
   getGridColumnsSettings(gridId: string) {
     // this.cookieService.delete(this.gridSettings);
@@ -20,10 +21,11 @@ export class GridSettingsCookieStoreService {
     return null;
   }
 
-  setGridColumnsSortOrder(gridId: string, state) {
+  // TODO change to different store
+  /*setGridColumnsSortOrder(gridId: string, state) {
     // this.cookieService.delete('gridSettings')
     this.cookieService.set(gridId, JSON.stringify(state), null, environment.cookiePath);
-  }
+  }*/
 
   getGridColumnsSortOrder(gridId: string) {
     // this.cookieService.delete(this.gridSettings);
