@@ -33,8 +33,9 @@ export class SidebarService {
         hasChildren: false,
         children: [],
         isBorder: true
-      },
-      {
+      }
+      // TODO uncomment when implemented
+      /* {
         title: this.i18n(`Jobs`),
         routeLink: '/scheduledJobs',
         hasChildren: false,
@@ -58,7 +59,7 @@ export class SidebarService {
         routeLink: '/dcuReadingConfiguration',
         hasChildren: false,
         children: []
-      }
+      }*/
     ];
 
     this.sidebarMeterUnitsItems = [

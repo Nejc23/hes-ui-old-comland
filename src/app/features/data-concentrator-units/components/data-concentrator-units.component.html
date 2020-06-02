@@ -2,9 +2,11 @@
 
 <div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
+  <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
   <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary btn-round" (click)="addDcu()" *ngIf="!noData">
     <i class="far fa-plus"></i>
   </button>
+  </div>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div>
 
@@ -27,12 +29,14 @@
         <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
                 selected</span></a></u></strong></small>
     </div>
+    <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
     <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
     <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionDCUUpgrade" type="button" class="btn btn-link" (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span
         i18n>Upgrade</span></button>
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionDCUConfiguration" type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="far fa-cogs"></i><span
         i18n>Configuration</span></button>
+      </div>
   </div>
 
   <!-- ag-grid -->

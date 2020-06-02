@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
@@ -60,7 +60,7 @@ export class GridCustomFilterComponent implements IToolPanel {
 
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
-    this.dcuFilters$ = this.dcuService.getDcuLayout();
+    this.dcuFilters$ = of([]); // this.dcuService.getDcuLayout();  // TODO uncomment when implemented
     this.dcuFilters$.subscribe(x => {
       this.data = x;
       this.fillformFromSession(this.data);
@@ -69,7 +69,7 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuStatuses$.subscribe(y => (this.dcuStatuses = y));
 
-    this.dcuTags$ = this.codelistService.dcuTagCodelist();
+    this.dcuTags$ = of([]); // this.codelistService.dcuTagCodelist(); // TODO uncomment when implemented
     this.dcuTags$.subscribe(y => (this.dcuTags = y));
 
     this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
