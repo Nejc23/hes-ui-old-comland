@@ -10,17 +10,17 @@ export class TokenInterceptor implements HttpInterceptor {
   constructor(private authService: AuthService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // authorization token for myGrid.Link API-s
-    if (this.checkIfMyGridLinkUrl(request)) {
-      return next.handle(this.createAuthorizationTokenMyGridLinkApi(request));
-    } else {
-      // authorization token for others API-s
-      if (!this.authService.getAuthToken()) {
-        return next.handle(request);
-      }
-      return next.handle(this.createAuthorizationTokenApi(request));
+    //    if (this.checkIfMyGridLinkUrl(request)) {
+    //      return next.handle(this.createAuthorizationTokenMyGridLinkApi(request));
+    //    } else {
+    // authorization token for others API-s
+    if (!this.authService.getAuthToken()) {
+      return next.handle(request);
     }
+    return next.handle(this.createAuthorizationTokenApi(request));
+    //    }
   }
-
+  /*
   // authorization token for myGrid.Link API-s
   private createAuthorizationTokenMyGridLinkApi(request: HttpRequest<any>) {
     const authToken = `${this.authService.getAuthTokenMyGridLink()}`;
@@ -37,7 +37,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
     return request;
   }
-
+*/
   // authorization token for other API-s
   private createAuthorizationTokenApi(request: HttpRequest<any>) {
     const authToken = `${this.authService.getAuthTokenType()} ${this.authService.getAuthToken()}`;
@@ -49,17 +49,17 @@ export class TokenInterceptor implements HttpInterceptor {
     });
 
     return authReq;
-  }
-
-  /**
-   * Check if request is for BE server myGrid.Link
-   * @param request request data
-   */
+  } /*
   private checkIfMyGridLinkUrl(request: HttpRequest<any>) {
     const listOfMyLinkApiUrl = Object.values(enumMyGridLink);
     if (listOfMyLinkApiUrl.some(v => request.url.includes(v))) {
       return true;
     }
     return false;
-  }
+  }*/
+
+  /**
+   * Check if request is for BE server myGrid.Link
+   * @param request request data
+   */
 }

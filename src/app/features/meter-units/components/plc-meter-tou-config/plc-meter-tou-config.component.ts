@@ -56,26 +56,26 @@ export class PlcMeterTouConfigComponent implements OnInit {
   }
 
   save() {
-    if (this.authService.isTokenAvailable()) {
-      const selectedTouConfig = this.touConfigSelect.getSelectedRowId();
-      this.noConfig = selectedTouConfig === null;
-      if (!this.noConfig) {
-        this.form.get(this.touConfigProperty).setValue(selectedTouConfig);
-        let response: Observable<any> = new Observable();
-        const paramsConf: RequestTOUData = { deviceIds: this.deviceIdsParam, timeOfUseId: selectedTouConfig };
-        console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
-        response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
-        response.subscribe(
-          value => {
-            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-            this.cancel('save');
-          },
-          e => {
-            this.toast.errorToast(this.messageServerError);
-          }
-        );
-      }
-    } else {
+    //  if (this.authService.isTokenAvailable()) {
+    const selectedTouConfig = this.touConfigSelect.getSelectedRowId();
+    this.noConfig = selectedTouConfig === null;
+    if (!this.noConfig) {
+      this.form.get(this.touConfigProperty).setValue(selectedTouConfig);
+      let response: Observable<any> = new Observable();
+      const paramsConf: RequestTOUData = { deviceIds: this.deviceIdsParam, timeOfUseId: selectedTouConfig };
+      console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
+      response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
+      response.subscribe(
+        value => {
+          this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+          this.cancel('save');
+        },
+        e => {
+          this.toast.errorToast(this.messageServerError);
+        }
+      );
+    }
+    /*  } else {
       this.gridLinkService.getMyGridIdentityToken().subscribe(
         value => {
           this.authService.setAuthTokenMyGridLink(value);
@@ -85,7 +85,7 @@ export class PlcMeterTouConfigComponent implements OnInit {
           this.toast.errorToast(this.messageServerError);
         }
       );
-    }
+    }*/
   }
 
   cancel(reason: string = 'cancel') {

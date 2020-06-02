@@ -143,6 +143,7 @@ export class AuthService {
   }
   // for calling API-s on myGrid.Link server
   // ----------------------------------------
+  /*
   setAuthTokenMyGridLink(token: IdentityToken) {
     localStorage.setItem(this.tokenName, token.TokenType + ' ' + token.AccessToken);
     localStorage.setItem(this.tokenDateTime, new Date().toUTCString());
@@ -167,7 +168,7 @@ export class AuthService {
       expirationSeconds > 0;
     return result;
   }
-
+*/
   /*
   login(loginCredentials: LoginCredentials) {
     return this.usersRepositoryService.authenticateUser(loginCredentials);

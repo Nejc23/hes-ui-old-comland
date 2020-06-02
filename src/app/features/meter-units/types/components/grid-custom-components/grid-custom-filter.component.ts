@@ -1,7 +1,7 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
 import { FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, of } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
@@ -73,16 +73,16 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   // called on init
   agInit(params: IToolPanelParams): void {
     this.params = params;
-    this.mutFilters$ = this.mutService.getMeterUnitsLayout(this.id);
+    this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
     this.mutFilters$.subscribe(x => {
       this.data = x;
       this.fillformFromSession(this.data);
     });
     this.meterUnitVendors$ = this.codelistService.meterUnitVendorCodelist(this.id);
     this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
-    this.meterUnitTags$ = this.codelistService.meterUnitTagCodelist(this.id);
-    this.breakerState$ = this.codelistService.meterUnitBreakerStateCodelist(this.id);
-    this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
+    this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
+    this.breakerState$ = of([]); // this.codelistService.meterUnitBreakerStateCodelist(this.id); // TODO uncomment when implemented
+    this.firmware$ = of([]); // this.codelistService.meterUnitFirmwareCodelist(this.id);  // TODO uncomment when implemented
     this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
   }
 
