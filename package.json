@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.js",
-    "start-amera": "ng serve --proxy-config proxy.conf.js --configuration=develop-amera",
-    "start-ePointHES": "ng serve --proxy-config proxy.conf.js --configuration=develop-ePointHES",
+    "start": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js",
+    "start-amera": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js --configuration=develop-amera",
+    "start-ePointHES": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js --configuration=develop-ePointHES",
     "build": "ng build",
     "build-production": "ng build --configuration=production && ng build --configuration=production-sl  && ng build --configuration=production-cs  && ng build --configuration=production-de",
     "build-staging": "ng build --configuration=staging-en && ng build --configuration=staging-sl  && ng build --configuration=staging-cs  && ng build --configuration=staging-de",
