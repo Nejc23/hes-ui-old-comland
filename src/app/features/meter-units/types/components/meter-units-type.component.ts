@@ -624,7 +624,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const selectedRows = this.gridApi.getSelectedRows();
     let deviceIdsParam = [];
     if (selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.id));
+      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
       console.log(`deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
     }
     let selectedText = `${deviceIdsParam.length} rows `;

@@ -41,9 +41,9 @@ export class MyGridLinkService {
   getMyGridLastStatus(requestId: string): Observable<LastStatus[]> {
     return this.repository.makeRequest(this.getMyGridLastStatusRequest(requestId));
   }
-  ///api/concentrator-management
+  // api/concentrator-management
   getMyGridLastStatusRequest(requestId: string): HttpRequest<LastStatus[]> {
-    return new HttpRequest('GET', `/api/concentrator-management/${requestId}${lastStatus}`); //`${enumMyGridLink.managment}/${requestId}${lastStatus}`
+    return new HttpRequest('GET', `${enumMyGridLink.managment}/${requestId}${lastStatus}`);
   }
 
   // connect device
@@ -52,7 +52,7 @@ export class MyGridLinkService {
   }
 
   postMyGridConnectDeviceRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
-    return new HttpRequest('POST', `/api/concentrator-management${onDemandConnect}`, params);
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandConnect}`, params);
   }
 
   // disconnect device
@@ -61,7 +61,7 @@ export class MyGridLinkService {
   }
 
   postMyGridDisconnectDeviceRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
-    return new HttpRequest('POST', `/api/concentrator-management${onDemandDisconnect}`, params);
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnect}`, params);
   }
 
   // trigger TOU
@@ -70,7 +70,7 @@ export class MyGridLinkService {
   }
 
   postMyGridTOUDeviceRequest(params: RequestTOUData): HttpRequest<any> {
-    return new HttpRequest('POST', `/api/concentrator-management${triggerSetTimeOfUse}`, params);
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerSetTimeOfUse}`, params);
   }
 
   // get disconnector state
@@ -79,7 +79,7 @@ export class MyGridLinkService {
   }
 
   getDisconnectorStateRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
-    return new HttpRequest('POST', `/api/concentrator-management${onDemandDisconnectorState}`, params);
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnectorState}`, params);
   }
 
   // get data returned on-demand requests

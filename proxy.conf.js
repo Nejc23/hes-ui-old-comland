@@ -1,12 +1,12 @@
 const PROXY_CONFIG = [
- // {
- //     context: [
+  {
+      context: [
   //      "/api/identity-server"
-      //  "/api/concentrator-management",
-  //    ],
-  //    target: "https://89.212.201.202:54322",
-  //    secure: false
-  //},
+        "/api/concentrator-management",
+      ],
+      target: "https://89.212.201.202:54322",
+      secure: false
+  },
   {
     context: [
       "/api/device-inventory-ui",
