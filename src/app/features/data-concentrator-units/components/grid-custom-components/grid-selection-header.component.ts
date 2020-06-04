@@ -71,7 +71,6 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
   }
 
   agInit(params): void {
-    console.log('header');
     this.params = params;
 
     const rowCount = this.params.api.getDisplayedRowCount();

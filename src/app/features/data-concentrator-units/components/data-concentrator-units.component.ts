@@ -25,6 +25,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -87,7 +88,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     private modalService: ModalService,
-    private formUtils: FormsUtilsService
+    private formUtils: FormsUtilsService,
+    private authService: AuthService
   ) {
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -219,21 +221,49 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
-        that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
-          console.log(data);
-          that.gridApi.hideOverlay();
-          that.totalCount = data.totalCount;
-          if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-            that.noData = true;
-          } else if (data.totalCount === 0) {
-            that.gridApi.showNoRowsOverlay();
-          }
+        if (that.authService.isRefreshNeeded2()) {
+          that.authService
+            .renewToken()
+            .then(value => {
+              that.authService.user = value;
+              that.authService.saveTokenAndSetUserRights2(value, '');
 
-          that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-          paramsRow.successCallback(data.data, data.totalCount);
-          that.selectRows(that.gridApi);
-          // params.failCallback();
-        });
+              that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
+                that.gridApi.hideOverlay();
+                that.totalCount = data.totalCount;
+                if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                  that.noData = true;
+                } else if (data.totalCount === 0) {
+                  that.gridApi.showNoRowsOverlay();
+                }
+
+                that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+                paramsRow.successCallback(data.data, data.totalCount);
+                that.selectRows(that.gridApi);
+                // params.failCallback();
+              });
+            })
+            .catch(err => {
+              if (err.message === 'login_required') {
+                that.authService.login().catch(err => console.log(err));
+              }
+            });
+        } else {
+          that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
+            that.gridApi.hideOverlay();
+            that.totalCount = data.totalCount;
+            if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+              that.noData = true;
+            } else if (data.totalCount === 0) {
+              that.gridApi.showNoRowsOverlay();
+            }
+
+            that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+            paramsRow.successCallback(data.data, data.totalCount);
+            that.selectRows(that.gridApi);
+            // params.failCallback();
+          });
+        }
       }
     };
     this.gridApi.setServerSideDatasource(datasource);

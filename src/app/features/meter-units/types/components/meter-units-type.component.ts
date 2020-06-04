@@ -311,21 +311,51 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
-        that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
-          that.gridApi.hideOverlay();
-          that.totalCount = data.totalCount;
-          if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-            that.noData = true;
-          } else if (data.totalCount === 0) {
-            that.gridApi.showNoRowsOverlay();
-          }
+        if (that.authService.isRefreshNeeded2()) {
+          that.authService
+            .renewToken()
+            .then(value => {
+              that.authService.user = value;
+              that.authService.saveTokenAndSetUserRights2(value, '');
 
-          that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-          paramsRow.successCallback(data.data, data.totalCount);
-          that.selectRows(that.gridApi);
-          that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-          // params.failCallback();
-        });
+              that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
+                that.gridApi.hideOverlay();
+                that.totalCount = data.totalCount;
+                if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                  that.noData = true;
+                } else if (data.totalCount === 0) {
+                  that.gridApi.showNoRowsOverlay();
+                }
+
+                that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+                paramsRow.successCallback(data.data, data.totalCount);
+                that.selectRows(that.gridApi);
+                that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+                // params.failCallback();
+              });
+            })
+            .catch(err => {
+              if (err.message === 'login_required') {
+                that.authService.login().catch(err => console.log(err));
+              }
+            });
+        } else {
+          that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
+            that.gridApi.hideOverlay();
+            that.totalCount = data.totalCount;
+            if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+              that.noData = true;
+            } else if (data.totalCount === 0) {
+              that.gridApi.showNoRowsOverlay();
+            }
+
+            that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+            paramsRow.successCallback(data.data, data.totalCount);
+            that.selectRows(that.gridApi);
+            that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+            // params.failCallback();
+          });
+        }
       }
     };
     this.gridApi.setServerSideDatasource(datasource);
