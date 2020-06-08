@@ -5,10 +5,11 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuLayout, bulkDelete, dcuCreate } from '../../consts/data-concentrator-units.const';
+import { dataConcentratorUnits, dcuLayout, bulkDelete, addConcentrator } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
+import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -64,11 +65,21 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', `${bulkDelete}`, object);
   }
 
-  createDcu(payload: DcuForm): Observable<DcuForm> {
-    return this.repository.makeRequest(this.createDcuRequest(payload));
+  createDcu(payload: DcuForm): Observable<string> {
+    console.log(payload);
+    const dcuRequest: DcuRequest = {
+      concentratorId: payload.idNumber,
+      concentratorIp: payload.ip,
+      timeZoneInfo: 'Central Europe Standard Time', // TODO: config or browser ?
+      type: payload.type.id,
+      vendor: payload.vendor.id,
+      name: payload.name
+    };
+    console.log(dcuRequest);
+    return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
   }
 
-  createDcuRequest(payload: DcuForm): HttpRequest<DcuForm> {
-    return new HttpRequest('POST', dcuCreate, payload as any);
+  createDcuRequest(payload: DcuRequest): HttpRequest<string> {
+    return new HttpRequest('POST', addConcentrator, payload as any);
   }
 }

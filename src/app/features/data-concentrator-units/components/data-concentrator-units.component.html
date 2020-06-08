@@ -2,13 +2,11 @@
 
 <div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
-  <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
   <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary btn-round" (click)="addDcu()" *ngIf="!noData">
     <i class="far fa-plus"></i>
   </button>
   </div>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
-</div>
 
 <!-- row total items, selected filter name -->
 <div *ngIf="!noData">

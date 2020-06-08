@@ -5,7 +5,7 @@ export interface DcuForm {
   name: string;
   idNumber: string;
   ip: string;
-  type: number;
-  vendor: number;
+  type: Codelist<number>;
+  vendor: Codelist<number>;
   tags: Codelist<number>[];
 }

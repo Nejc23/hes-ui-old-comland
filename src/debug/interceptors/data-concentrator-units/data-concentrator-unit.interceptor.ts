@@ -1,36 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { dcuCreate } from 'src/app/core/repository/consts/data-concentrator-units.const';
-import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
+import { addConcentrator } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 
 @Injectable()
 export class DataConcentratorUnitInterceptor {
   constructor() {}
 
   static canInterceptDcuCreatePost(request: HttpRequest<any>): boolean {
-    return new RegExp(dcuCreate).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(addConcentrator).test(request.url) && request.method.endsWith('POST');
   }
 
   static interceptDcuCreatePost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const data: DcuForm = {
-      id: '48823a66-87f1-495d-bdcc-8d2ed06b0b14',
-      name: 'My saved filter NEW',
-      idNumber: '12345',
-      ip: '127.0.0.1',
-      tags: [
-        { id: 1, value: 'tag 1' },
-        { id: 2, value: 'tag 2' },
-        { id: 1, value: 'tag 3' }
-      ],
-      type: 3,
-      vendor: 1
+    const data: DcuRequest = {
+      concentratorId: '041874801506',
+      concentratorIp: '192.168.3.14',
+      timeZoneInfo: 'Central Europe Standard Time',
+      type: 1,
+      vendor: 1,
+      name: 'DC_3.14'
     };
 
     return of(
       new HttpResponse({
         status: 201,
-        body: data
+        body: 'd18b2e3-f0e0-48fd-a0df-b30513f17555'
       })
     );
   }

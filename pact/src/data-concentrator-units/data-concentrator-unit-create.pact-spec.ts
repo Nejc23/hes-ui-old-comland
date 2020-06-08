@@ -2,6 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 
 describe('Pact consumer test', () => {
@@ -25,6 +26,15 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(DataConcentratorUnitsService);
   });
 
+  const requestBody1: DcuRequest = {
+    concentratorId: '1234567',
+    name: 'Test DCU 1',
+    type: 1,
+    vendor: 1,
+    concentratorIp: '127.0.0.1',
+    timeZoneInfo: 'Central Europe Standard Time'
+  };
+
   const requestBody: DcuForm = {
     id: null,
     name: 'Test DCU 1',
@@ -32,24 +42,13 @@ describe('Pact consumer test', () => {
       { id: 1, value: 'tag 1' },
       { id: 2, value: 'tag 2' }
     ],
-    type: 1,
-    vendor: 1,
+    type: { id: 1, value: 'type 1' },
+    vendor: { id: 1, value: 'vendor 1' },
     idNumber: '123456',
     ip: '127.0.0.1'
   };
 
-  const responseBody: DcuForm = {
-    id: '48823a66-87f1-495d-bdcc-8d2ed06b0b14',
-    name: 'Test DCU 1',
-    tags: [
-      { id: 1, value: 'tag 1' },
-      { id: 2, value: 'tag 2' }
-    ],
-    type: 1,
-    vendor: 1,
-    idNumber: '123456',
-    ip: '127.0.0.1'
-  };
+  const responseBody = '0d18b2e3-f0e0-48fd-a0df-b30513f17555';
 
   describe('Data concentrator unit manually create', () => {
     beforeAll(done => {
@@ -58,8 +57,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_CREATE_DATA_CONCENTRATOR_UNIT',
           uponReceiving: 'a request for creating data concentrator unit',
           withRequest: {
-            method: service.createDcuRequest(requestBody).method,
-            path: service.createDcuRequest(requestBody).url,
+            method: service.createDcuRequest(requestBody1).method,
+            path: service.createDcuRequest(requestBody1).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -83,14 +82,8 @@ describe('Pact consumer test', () => {
 
     it('should make request for creating data concentrator unit', done => {
       service.createDcu(requestBody).subscribe(
-        (res: DcuForm) => {
-          expect(res.id).toEqual(responseBody.id);
-          expect(res.ip).toEqual(responseBody.ip);
-          expect(res.idNumber).toEqual(responseBody.idNumber);
-          expect(res.name).toEqual(responseBody.name);
-          expect(res.tags).toEqual(responseBody.tags);
-          expect(res.type).toEqual(responseBody.type);
-          expect(res.vendor).toEqual(responseBody.vendor);
+        res => {
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {
