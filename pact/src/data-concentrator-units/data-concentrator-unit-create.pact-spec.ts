@@ -44,7 +44,7 @@ describe('Pact consumer test', () => {
     ],
     type: { id: 1, value: 'type 1' },
     vendor: { id: 1, value: 'vendor 1' },
-    idNumber: '123456',
+    idNumber: '1234567',
     ip: '127.0.0.1'
   };
 
@@ -59,7 +59,7 @@ describe('Pact consumer test', () => {
           withRequest: {
             method: service.createDcuRequest(requestBody1).method,
             path: service.createDcuRequest(requestBody1).url,
-            body: requestBody,
+            body: requestBody1,
             headers: defaultRequestHeader
           },
           willRespondWith: {
