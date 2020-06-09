@@ -7,8 +7,8 @@ let authServiceStub: Partial<AuthService>;
 
 authServiceStub = {
   getAuthToken: () => 'token',
-  getAuthTokenType: () => 'bearer',
-  getAuthTokenMyGridLink: () => 'bearer token'
+  getAuthTokenType: () => 'bearer'
+  //  getAuthTokenMyGridLink: () => 'bearer token'
 };
 
 export const defaultAuthProvider = [
