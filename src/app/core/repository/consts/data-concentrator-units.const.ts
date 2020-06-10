@@ -2,6 +2,7 @@ export const basePathConcentratorInventory = '/api/concentrator-inventory';
 export const basePath = '/api/concentrator-inventory-ui';
 export const dataConcentratorUnits = `${basePath}/concentrators`;
 export const addConcentrator = `${basePathConcentratorInventory}/add-concentrator`;
+export const dcuSync = `${basePath}/sync`;
 export const dcuLayout = '/api/dcu-layout';
 export const bulkDelete = '/api/dcu-bulk-delete';
 export const meterUnitRegisters = '/api/meter-unit-registers';

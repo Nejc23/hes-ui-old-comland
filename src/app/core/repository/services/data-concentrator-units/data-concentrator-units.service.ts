@@ -5,7 +5,7 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuLayout, bulkDelete, addConcentrator } from '../../consts/data-concentrator-units.const';
+import { dataConcentratorUnits, dcuLayout, bulkDelete, addConcentrator, dcuSync } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
@@ -70,7 +70,6 @@ export class DataConcentratorUnitsService {
     const dcuRequest: DcuRequest = {
       concentratorId: payload.idNumber,
       concentratorIp: payload.ip,
-      timeZoneInfo: 'Central Europe Standard Time', // TODO: config or browser ?
       type: payload.type.id,
       vendor: payload.vendor.id,
       name: payload.name
@@ -81,5 +80,13 @@ export class DataConcentratorUnitsService {
 
   createDcuRequest(payload: DcuRequest): HttpRequest<string> {
     return new HttpRequest('POST', addConcentrator, payload as any);
+  }
+
+  dcuSync(): Observable<any> {
+    return this.repository.makeRequest(this.dcuSyncRequest());
+  }
+  dcuSyncRequest(): HttpRequest<any> {
+    console.log(`GET ${dcuSync}`);
+    return new HttpRequest('GET', dcuSync);
   }
 }

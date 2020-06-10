@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 
 @Component({
   selector: 'app-add-dcu-form',
@@ -67,6 +68,29 @@ export class AddDcuFormComponent implements OnInit {
     return formData;
   }
 
+  prepareAddedDcu(newId: string): DataConcentratorUnitsList {
+    const formData = this.fillData();
+    const data: DataConcentratorUnitsList = {
+      concentratorId: newId,
+      name: formData.name,
+      type: formData.type.value,
+      vendor: formData.vendor.value,
+      id: formData.idNumber,
+      ip: formData.ip,
+      jobStatus: '',
+      lastCommunication: '',
+      meters: 0,
+      metersPercent: 0,
+      metersUp: false,
+      nextRead: '',
+      readStatusColor: '',
+      readStatusTimeStamp: '',
+      status: 'INACTIVE',
+      tags: null
+    };
+    return data;
+  }
+
   save(addNew: boolean) {
     console.log('Save clicked!');
 
@@ -75,6 +99,7 @@ export class AddDcuFormComponent implements OnInit {
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         if (result) {
+          this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
           if (addNew) {
             this.form.reset();
           } else {
