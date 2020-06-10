@@ -81,7 +81,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
   };
 
-  //dcuAdded: DataConcentratorUnitsList[] = [];
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private staticextService: DataConcentratorUnitsStaticTextService,
@@ -119,9 +118,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.dcuAddedSubscription = this.eventService.eventEmitterDcuAdded.subscribe({
       next: (dcu: DataConcentratorUnitsList) => {
         if (dcu) {
-          console.log('dcuAddedSubscription dcu = ', dcu);
           this.dataConcentratorUnitsService.dcuSync();
-          //this.dcuAdded.push(dcu);
           this.refreshGrid();
         }
       }
@@ -210,19 +207,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // addNewDcuToGrid(data: DataConcentratorUnitsList[]): number {
-  //   let countAdded = 0;
-  //   if (data && this.dcuAdded.length > 0) {
-  //     this.dcuAdded.forEach(newDcu => {
-  //       if (!_.find(data, gridDcus => gridDcus.concentratorId === newDcu.concentratorId)) {
-  //         data.unshift(newDcu);
-  //         countAdded++;
-  //       }
-  //     })
-  //   }
-  //   return countAdded;
-  // }
-
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
     this.gridApi = params.api;
@@ -258,7 +242,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
               that.authService.saveTokenAndSetUserRights2(value, '');
 
               that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
-                //data.totalCount = data.totalCount + that.addNewDcuToGrid(data.data);
                 that.gridApi.hideOverlay();
                 that.totalCount = data.totalCount;
                 if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
@@ -280,14 +263,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
             });
         } else {
           that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
-            //data.totalCount = data.totalCount + that.addNewDcuToGrid(data.data);
-
-            // if (data && data.data && that.dcuAdded.length > 0) {
-            //   that.dcuAdded.forEach(x => {
-            //     data.data.unshift(x);
-            //     data.totalCount++;
-            //   })
-            // }
             that.gridApi.hideOverlay();
             that.totalCount = data.totalCount;
             if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
