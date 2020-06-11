@@ -112,7 +112,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     this.noMonthDays = this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
     // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
-    console.log(values);
+    // console.log(values);
     const request = this.meterService.createMeterUnitsReadScheduler(values);
     // console.log(`request = ${JSON.stringify(request)}`);
     const successMessage = this.i18n(`Meter Units Read Scheduler was added successfully`);

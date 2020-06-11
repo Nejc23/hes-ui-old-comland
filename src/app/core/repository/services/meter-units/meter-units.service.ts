@@ -17,7 +17,7 @@ import {
   fwUpgrade,
   meterUnitsOld
 } from '../../consts/meter-units.const';
-import { MeterUnitsReadSchedule, MeterUnitsReadScheduleForService } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
+import { MeterUnitsReadSchedule } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 
 @Injectable({
@@ -66,11 +66,11 @@ export class MeterUnitsService {
     return new HttpRequest('POST', `${meterUnitsOld}/${typeId}/${meterUnitsLayout}`, payload as any);
   }
 
-  createMeterUnitsReadScheduler(schedule: MeterUnitsReadScheduleForService): Observable<MeterUnitsReadScheduleForService> {
+  createMeterUnitsReadScheduler(schedule: MeterUnitsReadSchedule): Observable<MeterUnitsReadSchedule> {
     return this.repository.makeRequest(this.createMeterUnitsReadSchedulerRequest(schedule));
   }
 
-  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadScheduleForService): HttpRequest<any> {
+  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadSchedule): HttpRequest<any> {
     return new HttpRequest('POST', `${meterUnitsScheduler}`, param);
   }
 

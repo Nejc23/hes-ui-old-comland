@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { meterUnitsScheduler, deleteJob, executeJob, enableJob, disableJob } from 'src/app/core/repository/consts/meter-units.const';
-import {
-  MeterUnitsReadSchedule,
-  MeterUnitsReadScheduleForService
-} from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 
 @Injectable()
 export class MeterUnitsSchedulerInterceptor {
@@ -16,15 +13,14 @@ export class MeterUnitsSchedulerInterceptor {
   }
 
   static interceptMeterUnitSchedulerPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const data: MeterUnitsReadScheduleForService = {
+    const data: MeterUnitsReadSchedule = {
       readOptions: 5,
       nMinutes: 0,
       nHours: 0,
-      time: '13:18',
       weekDays: [],
       monthDays: [1, 7, 31],
       registers: [1, 4, 5],
-      dateTime: '2020-05-22T10:02:00.000Z',
+      dateTime: '2020-05-22 10:02',
       description: '',
       iec: false,
       bulkActionsRequestParam: {

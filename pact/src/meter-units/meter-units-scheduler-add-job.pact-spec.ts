@@ -2,10 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import {
-  MeterUnitsReadSchedule,
-  MeterUnitsReadScheduleForService
-} from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,17 +26,16 @@ describe('Pact consumer test', () => {
   });
 
   const typeId = 1;
-  const requestBody: MeterUnitsReadScheduleForService = {
+  const requestBody: MeterUnitsReadSchedule = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
-    time: '13:18',
     weekDays: [],
     monthDays: [1, 7, 31],
     registers: [1, 4, 5],
     iec: true,
     description: 'description',
-    dateTime: '2020-05-14T10:02:00.000Z',
+    dateTime: '2020-05-14 13:18',
     bulkActionsRequestParam: {
       id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
       filter: {
@@ -85,17 +81,16 @@ describe('Pact consumer test', () => {
     }
   };
 
-  const responseBody: MeterUnitsReadScheduleForService = {
+  const responseBody: MeterUnitsReadSchedule = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
-    time: '13:18',
     weekDays: [],
     monthDays: [1, 7, 31],
     registers: [1, 4, 5],
     iec: true,
     description: 'description',
-    dateTime: '2020-05-14T10:02:00.000Z',
+    dateTime: '2020-05-14 13:18',
     bulkActionsRequestParam: {
       id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
       filter: {

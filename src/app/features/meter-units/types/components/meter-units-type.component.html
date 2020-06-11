@@ -28,8 +28,19 @@
     </div>
     <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
     <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" type="button" class="btn btn-link" 
-            (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
+
+    <div class="btn-group dropdown" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs">
+      <button  type="button" class="btn btn-link"
+        (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
+      <button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>Assign jobs</a>
+        <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>De-assign jobs</a>
+      </div>
+    </div>
+
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" type="button" class="btn btn-link"
             (click)="onBreakerStatus()"><i class="far fa-list-alt"></i><span i18n>Breaker Status</span></button>
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" type="button" class="btn btn-link"
@@ -53,7 +64,7 @@
     [domLayout]=agGridSettings.domLayout
     suppressSizeToFit=agGridSettings.suppressSizeToFit
     [localeText]="localeText"
-    
+
     [modules]="modules"
     [icons]="icons"
     [pagination]=agGridSettings.pagination
@@ -90,3 +101,5 @@
   <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
   <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus"><span i18n> Add New</span></i></button></div>
 </div>
+
+<ng-template #tipMoreSave><span i18n>More options</span></ng-template>

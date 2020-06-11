@@ -35,12 +35,13 @@ export class SidebarService {
         isBorder: true
       }
       // TODO uncomment when implemented
-      /* {
+      /*
+      {
         title: this.i18n(`Jobs`),
         routeLink: '/scheduledJobs',
         hasChildren: false,
         children: []
-      },
+      }
       {
         title: ``,
         routeLink: '',
