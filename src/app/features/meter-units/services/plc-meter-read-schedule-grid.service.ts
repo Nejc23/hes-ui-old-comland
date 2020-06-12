@@ -20,10 +20,11 @@ export class PlcMeterReadScheduleGridService {
 
   getSelectedRowsOrFilters(): GridBulkActionRequestParams {
     const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
-    console.log(`selectedAll = ${JSON.stringify(selectedAll)}`);
+    // console.log(`selectedAll = ${JSON.stringify(selectedAll)}`);
     const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
-    console.log(`selectedRows = ${JSON.stringify(selectedRows)}`);
-    const selectedRowsIDs = _.map(selectedRows, 'id');
+    // console.log(`selectedRows = ${JSON.stringify(selectedRows)}`);
+    const selectedRowsIDs = _.map(selectedRows, 'deviceId');
+    // console.log(`selectedRowsIDs = ${JSON.stringify(selectedRowsIDs)}`);
 
     const requestModel: GridBulkActionRequestParams = {
       id: selectedRowsIDs,

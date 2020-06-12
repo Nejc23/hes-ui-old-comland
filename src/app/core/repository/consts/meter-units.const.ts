@@ -9,7 +9,6 @@ export const meterUnitBreakerStates = `/api/codelists/meter-unit-breaker-states`
 
 // meter units by type
 export const meterUnits = `${basePath}/meter-units`;
-export const meterUnitsOld = `/api/meter-units`;
 export const meterUnitsLayout = `layouts`;
 export const meterUnitsScheduler = `/api/meter-units-scheduler`;
 export const deleteJob = `delete-job`;

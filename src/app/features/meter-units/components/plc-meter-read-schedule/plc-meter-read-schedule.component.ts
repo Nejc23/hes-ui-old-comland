@@ -15,8 +15,10 @@ import { RegistersSelectComponent } from 'src/app/features/registers-select/comp
 import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
 import { PlcMeterReadScheduleService } from '../../services/plc-meter-read-scheduler.service';
-import { from, of } from 'rxjs';
+import { from, of, Observable } from 'rxjs';
 import * as moment from 'moment';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { List } from 'lodash';
 
 @Component({
   selector: 'app-plc-meter-read-schedule',
@@ -27,12 +29,12 @@ export class PlcMeterReadScheduleComponent implements OnInit {
 
   form: FormGroup;
   readOptions: RadioOption[] = [
-    { value: 6 as number, label: this.i18n('One-time'), labelSmall: this.i18n('Once') },
-    { value: 1 as number, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
-    { value: 2 as number, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
-    { value: 3 as number, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
-    { value: 4 as number, label: this.i18n('Weekly'), labelSmall: this.i18n('One or more days of the week') },
-    { value: 5 as number, label: this.i18n('Monthly'), labelSmall: this.i18n('One or more days in the month') }
+    { value: 1 as number, label: this.i18n('One-time'), labelSmall: this.i18n('Once') },
+    { value: 2 as number, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
+    { value: 3 as number, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
+    { value: 4 as number, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
+    { value: 5 as number, label: this.i18n('Weekly'), labelSmall: this.i18n('One or more days of the week') },
+    { value: 6 as number, label: this.i18n('Monthly'), labelSmall: this.i18n('One or more days in the month') }
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: this.i18n('Mon-Fri') },
@@ -50,9 +52,12 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   noMonthDays = false;
   registersRequiredText = this.i18n('Required field');
 
+  jobsTimeUnits$: Observable<Codelist<number>[]>;
+
   constructor(
     private meterService: PlcMeterReadScheduleService,
     private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
+    private codelistService: CodelistRepositoryService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     public i18n: I18n,
@@ -71,25 +76,36 @@ export class PlcMeterReadScheduleComponent implements OnInit {
       [this.monthDaysProperty]: [[]],
       [this.registersProperty]: [[], Validators.required],
       [this.iecProperty]: [false],
-      [this.descriptionProperty]: [[], Validators.maxLength(500)]
+      [this.descriptionProperty]: [null, Validators.maxLength(500)],
+      [this.usePointerProperty]: [false],
+      [this.intervalRangeProperty]: [null],
+      [this.timeUnitProperty]: [null]
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.jobsTimeUnits$ = this.codelistService.timeUnitCodeslist();
+  }
 
   fillData(): MeterUnitsReadScheduleForm {
+    console.log('MeterUnitsReadScheduleForm', this.form.get(this.timeUnitProperty).value);
     const formData: MeterUnitsReadScheduleForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
-      nMinutes: this.selectedId !== 1 ? 0 : parseInt(this.form.get(this.nMinutesProperty).value, 10),
-      nHours: this.selectedId !== 2 ? 0 : parseInt(this.form.get(this.nHoursProperty).value, 10),
-      time: this.selectedId < 3 ? null : this.form.get(this.timeProperty).value,
-      weekDays: this.selectedId !== 4 ? [] : this.form.get(this.weekDaysProperty).value,
-      monthDays: this.selectedId !== 5 ? [] : this.form.get(this.monthDaysProperty).value,
+      nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
+      nHours: this.show_nHours() ? parseInt(this.form.get(this.nHoursProperty).value, 10) : 0,
+      time: this.showTime() ? this.form.get(this.timeProperty).value : null,
+      weekDays: this.showWeekDays() ? this.form.get(this.weekDaysProperty).value : [],
+      monthDays: this.showMonthDays() ? this.form.get(this.monthDaysProperty).value : [],
       registers: this.form.get(this.registersProperty).value,
       iec: this.form.get(this.iecProperty).value,
       description: this.form.get(this.descriptionProperty).value,
-      dateTime: this.selectedId != 6 ? null : this.form.get(this.timeProperty).value,
-      bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()
+      dateTime: this.showDateTime() ? this.form.get(this.timeProperty).value : null,
+      bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters(),
+      usePointer: this.form.get(this.usePointerProperty).value,
+      intervalRange:
+        this.form.get(this.intervalRangeProperty).value !== null ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
+      timeUnit:
+        this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
     };
 
     return formData;
@@ -109,7 +125,7 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     this.noRegisters = selectedRegisters.length === 0;
     // console.log(JSON.stringify(selectedRegisters));
     this.form.get(this.registersProperty).setValue(selectedRegisters);
-    this.noMonthDays = this.form.get(this.monthDaysProperty).value.length === 0;
+    this.noMonthDays = this.form.get(this.monthDaysProperty).value !== null && this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
     // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
     // console.log(values);
@@ -118,14 +134,14 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     const successMessage = this.i18n(`Meter Units Read Scheduler was added successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
-        if (result) {
-          // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
-          if (addNew) {
-            this.resetAll();
-          } else {
-            this.cancel();
-          }
+        // if (result) {
+        // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
+        if (addNew) {
+          this.resetAll();
+        } else {
+          this.cancel();
         }
+        // }
       },
       () => {} // error
     );
@@ -136,12 +152,15 @@ export class PlcMeterReadScheduleComponent implements OnInit {
   }
 
   changeReadOptionId() {
+    const selectedValuesForTimeProperty = [1, 4, 5, 6];
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
-    this.form.get(this.timeProperty).setValidators(this.selectedId > 2 ? [Validators.required] : []);
-    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 1 || this.selectedId === 6 ? [Validators.required] : []);
-    this.form.get(this.nHoursProperty).setValidators(this.selectedId === 2 ? [Validators.required] : []);
-    this.form.get(this.weekDaysProperty).setValidators(this.selectedId === 4 ? [Validators.required] : []);
-    this.form.get(this.monthDaysProperty).setValidators(this.selectedId === 5 ? [Validators.required] : []);
+    this.form
+      .get(this.timeProperty)
+      .setValidators(_.find(selectedValuesForTimeProperty, x => x === this.selectedId) ? [Validators.required] : []);
+    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 2 ? [Validators.required] : []);
+    this.form.get(this.nHoursProperty).setValidators(this.selectedId === 3 ? [Validators.required] : []);
+    this.form.get(this.weekDaysProperty).setValidators(this.selectedId === 5 ? [Validators.required] : []);
+    this.form.get(this.monthDaysProperty).setValidators(this.selectedId === 6 ? [Validators.required] : []);
     // console.log(`changeReadOptionId = ${this.form.get(this.readOptionsProperty).value}`);
   }
 
@@ -182,20 +201,46 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.nMinutes);
   }
 
+  show_nMinutes() {
+    return this.selectedId === 2;
+  }
+
   get nHoursProperty() {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.nHours);
+  }
+
+  show_nHours() {
+    return this.selectedId === 3;
   }
 
   get timeProperty() {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.time);
   }
 
+  showTime() {
+    const idsForTime = [4, 5, 6];
+    const found = _.find(idsForTime, x => x === this.selectedId);
+    return found !== undefined;
+  }
+
+  showDateTime() {
+    return this.selectedId === 1;
+  }
+
   get weekDaysProperty() {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.weekDays);
   }
 
+  showWeekDays() {
+    return this.selectedId === 5;
+  }
+
   get monthDaysProperty() {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.monthDays);
+  }
+
+  showMonthDays() {
+    return this.selectedId === 6;
   }
 
   get registersProperty() {
@@ -206,9 +251,26 @@ export class PlcMeterReadScheduleComponent implements OnInit {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.iec);
   }
 
+  showIec() {
+    return this.selectedId > 1;
+  }
+
   get descriptionProperty() {
     return nameOf<MeterUnitsReadScheduleForm>(o => o.description);
   }
+
+  get usePointerProperty() {
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.usePointer);
+  }
+
+  get intervalRangeProperty() {
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.intervalRange);
+  }
+
+  get timeUnitProperty() {
+    return nameOf<MeterUnitsReadScheduleForm>(o => o.timeUnit);
+  }
+
   // properties - END
 
   onDismiss() {

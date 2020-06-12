@@ -14,11 +14,11 @@ import {
   executeJob,
   enableJob,
   disableJob,
-  fwUpgrade,
-  meterUnitsOld
+  fwUpgrade
 } from '../../consts/meter-units.const';
 import { MeterUnitsReadSchedule } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
+import { schedulerJobs } from '../../consts/jobs.const';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +39,7 @@ export class MeterUnitsService {
   }
 
   getMeterUnitsLayoutRequest(typeId: number): HttpRequest<any> {
-    return new HttpRequest('GET', `${meterUnitsOld}/${typeId}/${meterUnitsLayout}`);
+    return new HttpRequest('GET', `${meterUnits}/${typeId}/${meterUnitsLayout}`);
   }
 
   saveMeterUnitsLayout(typeId: number, id: number, payload: MeterUnitsLayout): Observable<MeterUnitsLayout> {
@@ -47,7 +47,7 @@ export class MeterUnitsService {
   }
 
   saveMeterUnitsFilterRequest(typeId: number, id: number, payload: MeterUnitsLayout): HttpRequest<MeterUnitsLayout> {
-    return new HttpRequest('PUT', `${meterUnitsOld}/${typeId}/${meterUnitsLayout}/${id}`, payload as any);
+    return new HttpRequest('PUT', `${meterUnits}/${typeId}/${meterUnitsLayout}/${id}`, payload as any);
   }
 
   deleteMeterUnitsLayout(typeId: number, id: number): Observable<MeterUnitsLayout> {
@@ -55,7 +55,7 @@ export class MeterUnitsService {
   }
 
   deleteMeterUnitsLayoutRequest(typeId: number, id: number): HttpRequest<MeterUnitsLayout> {
-    return new HttpRequest('DELETE', `${meterUnitsOld}/${typeId}/${meterUnitsLayout}/${id}`);
+    return new HttpRequest('DELETE', `${meterUnits}/${typeId}/${meterUnitsLayout}/${id}`);
   }
 
   createMeterUnitsLayout(typeId: number, payload: MeterUnitsLayout): Observable<MeterUnitsLayout> {
@@ -63,7 +63,7 @@ export class MeterUnitsService {
   }
 
   createMeterUnitsLayoutRequest(typeId: number, payload: MeterUnitsLayout): HttpRequest<MeterUnitsLayout> {
-    return new HttpRequest('POST', `${meterUnitsOld}/${typeId}/${meterUnitsLayout}`, payload as any);
+    return new HttpRequest('POST', `${meterUnits}/${typeId}/${meterUnitsLayout}`, payload as any);
   }
 
   createMeterUnitsReadScheduler(schedule: MeterUnitsReadSchedule): Observable<MeterUnitsReadSchedule> {
@@ -71,7 +71,7 @@ export class MeterUnitsService {
   }
 
   createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadSchedule): HttpRequest<any> {
-    return new HttpRequest('POST', `${meterUnitsScheduler}`, param);
+    return new HttpRequest('POST', `${schedulerJobs}`, param);
   }
 
   deleteSchedulerJob(id: string): Observable<any> {

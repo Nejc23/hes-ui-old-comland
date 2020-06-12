@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { RegistersSelectService } from 'src/app/core/repository/services/registers-select/registers-select.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { RegistersSelectGridService } from '../services/registers-select-grid.service';
 import * as _ from 'lodash';
@@ -56,7 +56,31 @@ export class RegistersSelectComponent implements OnInit {
   ngOnInit() {
     this.form = this.createForm();
     this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
-    this.rowData$ = this.registersSelectService.getMeterUnitRegisters();
+
+    // TODO: remove this when API for registers is avaliable
+    const responseBody: RegistersSelectList[] = [
+      {
+        id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
+        name: 'Register abc 1',
+        type: 'type A',
+        description: 'description 1'
+      },
+      {
+        id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
+        name: 'Register def 2',
+        type: 'type B',
+        description: 'description 2'
+      },
+      {
+        id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
+        name: 'Register def 3',
+        type: 'type B',
+        description: 'description 3'
+      }
+    ];
+    this.rowData$ = of(responseBody);
+
+    // this.rowData$ = this.registersSelectService.getMeterUnitRegisters();
     this.rowData$.subscribe(x => {
       this.allRowData = x;
       this.totalCount = x.length;

@@ -16,6 +16,11 @@ export class PlcMeterReadScheduleService {
   constructor(private meterService: MeterUnitsService) {}
 
   createMeterUnitsReadScheduler(values: MeterUnitsReadScheduleForm): Observable<MeterUnitsReadSchedule> {
+    console.log(values);
+    const currentOffset = Date.now();
+    const dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime !== null ? values.dateTime : Date.now());
+
+    console.log(dateTimeMoment.toDate(), currentOffset);
     const serviceData: MeterUnitsReadSchedule = {
       readOptions: values.readOptions,
       nMinutes: values.nMinutes,
@@ -25,8 +30,11 @@ export class PlcMeterReadScheduleService {
       registers: values.registers,
       iec: values.iec,
       description: values.description,
-      dateTime: `${moment(values.dateTime).format(moment.HTML5_FMT.DATE)} ${moment(values.time).format(moment.HTML5_FMT.TIME)}`,
-      bulkActionsRequestParam: values.bulkActionsRequestParam
+      dateTime: dateTimeMoment.format(),
+      bulkActionsRequestParam: values.bulkActionsRequestParam,
+      usePointer: values.usePointer,
+      intervalRange: values.intervalRange,
+      timeUnit: values.timeUnit
     };
     return this.meterService.createMeterUnitsReadScheduler(serviceData);
   }

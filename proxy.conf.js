@@ -20,6 +20,13 @@ const PROXY_CONFIG = [
     ],
     target: "http://localhost:5012",
     secure: false
+  },
+  {
+    context: [
+      "/api/scheduler",
+    ],
+    target: "http://localhost:5009",
+    secure: false
   }
 ]
 

@@ -1,4 +1,5 @@
 import { GridBulkActionRequestParams } from '../helpers/grid-bulk-action-request-params.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 export interface MeterUnitsReadSchedule {
   readOptions: number;
@@ -10,6 +11,9 @@ export interface MeterUnitsReadSchedule {
   description: string;
   iec: boolean;
   dateTime: string;
+  usePointer: boolean;
+  intervalRange: number;
+  timeUnit: number;
   bulkActionsRequestParam: GridBulkActionRequestParams;
 }
 

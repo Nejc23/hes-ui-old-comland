@@ -10,7 +10,7 @@
         (refresh)="changeReadOptionId()">
       </app-input-radio>
 
-      <div class="form-row" *ngIf="selectedId == 1">
+      <div class="form-row" *ngIf="show_nMinutes()">
         <div class="col-4">
           <div class="d-flex">
             <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Read every">
@@ -20,7 +20,7 @@
         </div>
       </div>
 
-      <div class="form-row" *ngIf="selectedId == 2">
+      <div class="form-row" *ngIf="show_nHours()">
         <div class="col-4">
           <div class="d-flex">
             <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Read every">
@@ -30,11 +30,11 @@
         </div>
       </div>
 
-      <app-input-multiselect *ngIf="selectedId == 4" i18n-label label="Week days" [form]="form"
+      <app-input-multiselect *ngIf="showWeekDays()" i18n-label label="Week days" [form]="form"
         [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
       </app-input-multiselect>
 
-      <div class="form-group" *ngIf="selectedId == 5">
+      <div class="form-group" *ngIf="showMonthDays()">
         <label><span i18n>Days in month</span><sup> *</sup></label>
         <div class="d-flex flex-wrap">
           <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'"
@@ -42,36 +42,52 @@
             <span>{{i+1}}</span>
           </button>
         </div>
-        <div class="help-block" *ngIf="selectedId == 5 && noMonthDays">
+        <div class="help-block" *ngIf="showMonthDays() && noMonthDays">
           <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
         </div>
       </div>
 
-      <div class="form-row" *ngIf="selectedId > 2 && selectedId != 6">
+      <div class="form-row" *ngIf="showTime()">
         <div class="col-3">
           <app-time-picker [form]="form" [property]="timeProperty" i18n-label label="Time">
           </app-time-picker>
         </div>
       </div>
-      <div class="form-row" *ngIf="selectedId == 6">
+      <div class="form-row" *ngIf="showDateTime()">
         <div class="col-3">
           <app-datetime-picker [form]="form" [property]="timeProperty" i18n-label label="Date time">
           </app-datetime-picker>
         </div>
       </div>
-      <div class="form-row" *ngIf="selectedId >= 1 && selectedId <=6">
+      <div class="form-row" *ngIf="showIec()">
         <div class="col-5">
           <app-input-switch [form]="form" [property]="iecProperty" i18n-label label="IEC">
           </app-input-switch>
         </div>
       </div>
-      <div class="form-row" *ngIf="selectedId >= 1 && selectedId <=6">
+      <div class="form-row">
+        <div class="col-5">
+          <app-input-switch [form]="form" [property]="usePointerProperty" i18n-label label="Use pointers">
+          </app-input-switch>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-2">
+          <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For last">
+          </app-input-text>
+        </div>
+        <div class="col-3">
+          <app-select-input [form]="form" [property]="timeUnitProperty" label="_" [selectOptions]="jobsTimeUnits$ | async" [disabled]="false">
+          </app-select-input>
+        </div>
+      </div>
+      <div class="form-row">
         <div class="col-12">
           <app-input-text [form]="form" [property]="descriptionProperty" i18n-label label="Description">
           </app-input-text>
         </div>
       </div>
-     
+
       <hr>
       <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)"></app-registers-select>
       <div class="help-block" *ngIf="noRegisters">

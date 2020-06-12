@@ -19,6 +19,7 @@ import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
 import { ScheduledJobsInterceptor } from './jobs/scheduled-jobs.interceptor';
 import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
 import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
+import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -76,6 +77,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // active jobs
               if (ActiveJobsInterceptor.canInterceptActiveJobs(request)) {
                 return ActiveJobsInterceptor.interceptActiveJobs(request);
+              }
+
+              // codelists jobs
+              if (JobsCodelistInterceptor.canInterceptTimeUnitCode(request)) {
+                return JobsCodelistInterceptor.interceptTimeUnitCode();
               }
 
               // codelists dcu

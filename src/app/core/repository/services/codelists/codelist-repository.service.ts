@@ -5,6 +5,7 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { dcuStatuses, dcuTags, dcuTypes, dcuVendors } from '../../consts/data-concentrator-units.const';
 import { companies } from '../../consts/authentication-endpoint-url.const';
+import { timeUnitCodes } from '../../consts/jobs.const';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,12 @@ export class CodelistRepositoryService {
   }
   companyCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', companies);
+  }
+
+  timeUnitCodeslist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.timeUnitCodelistRequest());
+  }
+  timeUnitCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', timeUnitCodes);
   }
 }

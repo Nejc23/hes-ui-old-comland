@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { scheduledJobs, activeJobs, stopJob, cancelJob } from '../../consts/data-concentrator-units.const';
+import { activeJobs, stopJob, cancelJob } from '../../consts/data-concentrator-units.const';
 import { ScheduledJobsList } from '../../interfaces/jobs/scheduled-jobs-list.interface';
 import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
+import { schedulerJobs, schedulerJobsList } from '../../consts/jobs.const';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,7 @@ export class JobsService {
   }
 
   getScheduledJobsListRequest(param: GridRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', scheduledJobs, param);
+    return new HttpRequest('POST', schedulerJobsList, param);
   }
 
   getActiveJobsList(deviceId: string): Observable<ActiveJobsList[]> {
