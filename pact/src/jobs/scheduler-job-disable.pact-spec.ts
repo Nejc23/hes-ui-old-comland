@@ -1,11 +1,11 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: MeterUnitsService;
+  let service: JobsService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -21,7 +21,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().get(JobsService);
   });
 
   const id = 'e7a59990-51e8-4fd5-994b-a3a102b42436';

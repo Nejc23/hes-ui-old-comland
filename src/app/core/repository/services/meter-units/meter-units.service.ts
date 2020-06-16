@@ -6,19 +6,10 @@ import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
-import {
-  meterUnits,
-  meterUnitsLayout,
-  meterUnitsScheduler,
-  deleteJob,
-  executeJob,
-  enableJob,
-  disableJob,
-  fwUpgrade
-} from '../../consts/meter-units.const';
-import { MeterUnitsReadSchedule } from '../../interfaces/meter-units/meter-units-read-schedule.interface';
+import { meterUnits, meterUnitsLayout, meterUnitsScheduler, deleteJob, fwUpgrade } from '../../consts/meter-units.const';
+import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
-import { schedulerJobs } from '../../consts/jobs.const';
+import { schedulerJobs, enableJob, executeJob } from '../../consts/jobs.const';
 
 @Injectable({
   providedIn: 'root'
@@ -64,46 +55,6 @@ export class MeterUnitsService {
 
   createMeterUnitsLayoutRequest(typeId: number, payload: MeterUnitsLayout): HttpRequest<MeterUnitsLayout> {
     return new HttpRequest('POST', `${meterUnits}/${typeId}/${meterUnitsLayout}`, payload as any);
-  }
-
-  createMeterUnitsReadScheduler(schedule: MeterUnitsReadSchedule): Observable<MeterUnitsReadSchedule> {
-    return this.repository.makeRequest(this.createMeterUnitsReadSchedulerRequest(schedule));
-  }
-
-  createMeterUnitsReadSchedulerRequest(param: MeterUnitsReadSchedule): HttpRequest<any> {
-    return new HttpRequest('POST', `${schedulerJobs}`, param);
-  }
-
-  deleteSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.deleteSchedulerJobRequest(id));
-  }
-
-  deleteSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('DELETE', `${meterUnitsScheduler}/${deleteJob}/${id}`);
-  }
-
-  executeSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.executeSchedulerJobRequest(id));
-  }
-
-  executeSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('PUT', `${meterUnitsScheduler}/${executeJob}/${id}`, null);
-  }
-
-  enableSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.enableSchedulerJobRequest(id));
-  }
-
-  enableSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('PUT', `${meterUnitsScheduler}/${enableJob}/${id}`, null);
-  }
-
-  disableSchedulerJob(id: string): Observable<any> {
-    return this.repository.makeRequest(this.disableSchedulerJobRequest(id));
-  }
-
-  disableSchedulerJobRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('PUT', `${meterUnitsScheduler}/${disableJob}/${id}`, null);
   }
 
   createFwUpgrade(payload: MeterUnitsFwUpgrade): Observable<DcResponse> {

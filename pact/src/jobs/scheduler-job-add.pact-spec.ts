@@ -1,12 +1,12 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: MeterUnitsService;
+  let service: JobsService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -22,18 +22,22 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().get(JobsService);
   });
 
   const typeId = 1;
-  const requestBody: MeterUnitsReadSchedule = {
+  const requestBody: SchedulerJob = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
     weekDays: [],
     monthDays: [1, 7, 31],
-    registers: [1, 4, 5],
+    registers: ['guid-1', 'guid-4', 'guid-5'],
     iec: true,
+    enable: false,
+    usePointer: false,
+    intervalRange: 120,
+    timeUnit: 1,
     description: 'description',
     dateTime: '2020-05-14 13:18',
     bulkActionsRequestParam: {
@@ -81,14 +85,18 @@ describe('Pact consumer test', () => {
     }
   };
 
-  const responseBody: MeterUnitsReadSchedule = {
+  const responseBody: SchedulerJob = {
     readOptions: 5,
     nMinutes: 0,
     nHours: 0,
     weekDays: [],
     monthDays: [1, 7, 31],
-    registers: [1, 4, 5],
+    registers: ['guid-1', 'guid-4', 'guid-5'],
     iec: true,
+    enable: false,
+    usePointer: false,
+    intervalRange: 120,
+    timeUnit: 1,
     description: 'description',
     dateTime: '2020-05-14 13:18',
     bulkActionsRequestParam: {
@@ -143,8 +151,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_CREATE_METER_UNITS_READ_SCHEDULER',
           uponReceiving: 'a request for creating meter units read scheduler',
           withRequest: {
-            method: service.createMeterUnitsReadSchedulerRequest(requestBody).method,
-            path: service.createMeterUnitsReadSchedulerRequest(requestBody).url,
+            method: service.createSchedulerJobRequest(requestBody).method,
+            path: service.createSchedulerJobRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -167,8 +175,8 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for creating meter units read scheduler', done => {
-      service.createMeterUnitsReadScheduler(requestBody).subscribe(
-        (res: MeterUnitsReadSchedule) => {
+      service.createSchedulerJob(requestBody).subscribe(
+        (res: SchedulerJob) => {
           expect(requestBody).toEqual(responseBody);
           done();
         },

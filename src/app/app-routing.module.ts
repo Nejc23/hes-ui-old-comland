@@ -34,8 +34,8 @@ const appRoutes: Routes = [
         loadChildren: 'src/app/features/meter-units/modules/meter-units.module#MeterUnitsModule'
       },
       {
-        path: 'scheduledJobs',
-        loadChildren: 'src/app/features/jobs/modules/scheduled-jobs.module#ScheduledJobsModule'
+        path: 'schedulerJobs',
+        loadChildren: 'src/app/features/jobs/modules/scheduler-jobs.module#SchedulerJobsModule'
       },
       {
         path: 'help',

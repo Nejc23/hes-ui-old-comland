@@ -7,6 +7,7 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 
 @Component({
   selector: 'app-grid-cell-active',
@@ -16,15 +17,15 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
   @ViewChild('activeSwitch', { static: true }) activeSwitch;
 
   public params: any;
-  messageEnabled = this.i18n(`Scheduled job enabled!`);
-  messageDisabled = this.i18n(`Scheduled job disabled!`);
+  messageEnabled = this.i18n(`Scheduler job enabled!`);
+  messageDisabled = this.i18n(`Scheduler job disabled!`);
   messageServerError = this.i18n(`Server error!`);
 
   constructor(
     private i18n: I18n,
     private modalService: ModalService,
     private toast: ToastNotificationService,
-    private service: MeterUnitsService
+    private service: JobsService
   ) {}
   // called on init
   agInit(params: any): void {
@@ -45,7 +46,7 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
     response = event ? this.service.enableSchedulerJob(params.node.data.id) : this.service.disableSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
     component.modalTitle = this.i18n('Confirm operation');
-    component.modalBody = this.i18n('Do you want to change scheduled job status?');
+    component.modalBody = this.i18n('Do you want to change scheduler job status?');
 
     modalRef.result.then(
       data => {

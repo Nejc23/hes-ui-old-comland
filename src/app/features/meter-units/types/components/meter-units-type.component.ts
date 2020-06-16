@@ -21,7 +21,6 @@ import { filter } from 'rxjs/operators';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { PlcMeterReadScheduleComponent } from '../../components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
@@ -33,6 +32,7 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { PlcMeterFwUpgradeComponent } from '../../components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
+import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -645,7 +645,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const options: NgbModalOptions = {
       size: 'xl'
     };
-    const modalRef = this.modalService.open(PlcMeterReadScheduleComponent, options);
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
     modalRef.result.then().catch(() => {});
   }
 

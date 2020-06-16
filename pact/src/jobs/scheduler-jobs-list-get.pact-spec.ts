@@ -2,7 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
@@ -28,7 +28,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(JobsService);
   });
 
-  describe('Scheduled jobs list get request', () => {
+  describe('Scheduler jobs list get request', () => {
     const requestBody: GridRequestParams = {
       startRow: 0,
       endRow: 9,
@@ -47,7 +47,7 @@ describe('Pact consumer test', () => {
       ]
     };
 
-    const data: ScheduledJobsList[] = [
+    const data: SchedulerJobsList[] = [
       {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
@@ -114,7 +114,7 @@ describe('Pact consumer test', () => {
       }
     ];
 
-    const responseBody: GridResponse<ScheduledJobsList> = {
+    const responseBody: GridResponse<SchedulerJobsList> = {
       data,
       totalCount: 8,
       summary: '',
@@ -127,8 +127,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_GET_SCHEDULED_JOBS_LIST',
           uponReceiving: 'a request for getting scheduled jobs list',
           withRequest: {
-            method: service.getScheduledJobsListRequest(requestBody).method,
-            path: service.getScheduledJobsListRequest(requestBody).url,
+            method: service.getSchedulerJobsListRequest(requestBody).method,
+            path: service.getSchedulerJobsListRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -151,7 +151,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for fetching scheduled jobs list', done => {
-      service.getScheduledJobsList(requestBody).subscribe(res => {
+      service.getSchedulerJobsList(requestBody).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });

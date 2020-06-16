@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { meterUnitsScheduler, deleteJob, executeJob, enableJob, disableJob } from 'src/app/core/repository/consts/meter-units.const';
-import { MeterUnitsReadSchedule } from 'src/app/core/repository/interfaces/meter-units/meter-units-read-schedule.interface';
+import { meterUnitsScheduler, deleteJob } from 'src/app/core/repository/consts/meter-units.const';
+import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { enableJob, executeJob } from 'src/app/core/repository/consts/jobs.const';
 
 @Injectable()
 export class MeterUnitsSchedulerInterceptor {
@@ -13,16 +14,17 @@ export class MeterUnitsSchedulerInterceptor {
   }
 
   static interceptMeterUnitSchedulerPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const data: MeterUnitsReadSchedule = {
+    const data: SchedulerJob = {
       readOptions: 5,
       nMinutes: 0,
       nHours: 0,
       weekDays: [],
       monthDays: [1, 7, 31],
-      registers: [1, 4, 5],
+      registers: ['guid-1', 'guid-4', 'guid-5'],
       dateTime: '2020-05-22 10:02',
       description: '',
       iec: false,
+      enable: false,
       usePointer: false,
       intervalRange: 1440,
       timeUnit: 1,
@@ -110,7 +112,7 @@ export class MeterUnitsSchedulerInterceptor {
   }
 
   static canInterceptSchedulerJobEnable(request: HttpRequest<any>): boolean {
-    return request.url.startsWith(`${meterUnitsScheduler}/${enableJob}`) && request.method.endsWith('PUT');
+    return request.url.startsWith(`${enableJob}`) && request.url.endsWith('1') && request.method.endsWith('PUT');
   }
 
   static interceptSchedulerJobEnable(request: HttpRequest<any>): Observable<HttpEvent<any>> {
@@ -125,7 +127,7 @@ export class MeterUnitsSchedulerInterceptor {
   }
 
   static canInterceptSchedulerJobDisable(request: HttpRequest<any>): boolean {
-    return request.url.startsWith(`${meterUnitsScheduler}/${disableJob}`) && request.method.endsWith('PUT');
+    return request.url.startsWith(`${enableJob}`) && request.url.endsWith('0') && request.method.endsWith('PUT');
   }
 
   static interceptSchedulerJobDisable(request: HttpRequest<any>): Observable<HttpEvent<any>> {

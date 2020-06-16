@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
-import { meterUnitRegisters, scheduledJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { meterUnitRegisters, schedulerJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
-import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 
 @Injectable()
-export class ScheduledJobsInterceptor {
+export class SchedulerJobsInterceptor {
   constructor() {}
 
-  static interceptScheduledJobsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const data: ScheduledJobsList[] = [
+  static interceptSchedulerJobsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const data: SchedulerJobsList[] = [
       {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
@@ -111,7 +111,7 @@ export class ScheduledJobsInterceptor {
       }
     }
 
-    const body: GridResponse<ScheduledJobsList> = {
+    const body: GridResponse<SchedulerJobsList> = {
       data: sortedJobs.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
       totalCount: searched.length,
       summary: '',
@@ -126,8 +126,8 @@ export class ScheduledJobsInterceptor {
     );
   }
 
-  static canInterceptScheduledJobsList(request: HttpRequest<any>): boolean {
-    return new RegExp(scheduledJobs).test(request.url) && request.method.endsWith('POST');
+  static canInterceptSchedulerJobsList(request: HttpRequest<any>): boolean {
+    return new RegExp(schedulerJobs).test(request.url) && request.method.endsWith('POST');
   }
 }
 

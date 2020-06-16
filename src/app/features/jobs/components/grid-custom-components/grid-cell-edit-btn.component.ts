@@ -8,21 +8,23 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { GridApi, RowNode } from '@ag-grid-community/core';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
+import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 
 @Component({
-  selector: 'app-grid-cell-text-with-delete-btn',
-  templateUrl: './grid-cell-text-with-delete-btn.component.html'
+  selector: 'app-grid-cell-edit-btn',
+  templateUrl: './grid-cell-edit-btn.component.html'
 })
-export class GridCellTextWithDeleteComponent implements ICellRendererAngularComp {
+export class GridCellEditComponent implements ICellRendererAngularComp {
   public params: any;
-  messageStarted = this.i18n(`Scheduled job deleted!`);
-  messageServerError = this.i18n(`Server error!`);
 
   constructor(
     private i18n: I18n,
     private modalService: ModalService,
     private toast: ToastNotificationService,
-    private service: MeterUnitsService
+    private service: MeterUnitsService,
+    private eventService: SchedulerJobsEventEmitterService
   ) {}
   // called on init
   agInit(params: any): void {
@@ -35,30 +37,19 @@ export class GridCellTextWithDeleteComponent implements ICellRendererAngularComp
     return true;
   }
 
-  deleteJob(params: any) {
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    let response: Observable<any> = new Observable();
-    const operation = this.i18n('Delete');
-    response = this.service.executeSchedulerJob(params.node.data.id);
-    component.btnConfirmText = operation;
-    component.modalTitle = this.i18n('Confirm delete');
-    component.modalBody = this.i18n('Do you want to delete scheduled job?');
+  editJob(params: any) {
+    console.log(params);
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.selectedDeviceId = params.data.id;
 
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
-        response.subscribe(
-          value => {
-            console.log(params);
-            const gridApi = this.params.api as GridApi;
-            gridApi.purgeServerSideCache([]);
-            this.toast.successToast(this.messageStarted);
-          },
-          e => {
-            this.toast.errorToast(this.messageServerError);
-          }
-        );
+        this.eventService.eventEmitterRefresh.emit(true);
       },
       reason => {
         // on dismiss (CLOSE)
@@ -68,6 +59,6 @@ export class GridCellTextWithDeleteComponent implements ICellRendererAngularComp
 
   // set tooltip text
   setToolTip() {
-    return this.i18n('Delete job');
+    return this.i18n('Edit job');
   }
 }

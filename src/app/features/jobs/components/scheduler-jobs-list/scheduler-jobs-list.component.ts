@@ -1,14 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
-import { ScheduledJobsList } from 'src/app/core/repository/interfaces/jobs/scheduled-jobs-list.interface';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { ActionFormStaticTextService } from 'src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ScheduledJobsListGridService } from '../../services/scheduled-jobs-list-grid.service';
+import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
@@ -17,21 +17,22 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 
 @Component({
-  selector: 'app-scheduled-jobs-list',
-  templateUrl: './scheduled-jobs-list.component.html'
+  selector: 'app-scheduler-jobs-list',
+  templateUrl: './scheduler-jobs-list.component.html'
 })
-export class ScheduledJobsListComponent implements OnInit {
+export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   selectedId = 1;
   totalCount = 0;
   searchTextEmpty = true;
 
-  rowData$: Observable<ScheduledJobsList[]>;
-  rowData: ScheduledJobsList[];
-  allRowData: ScheduledJobsList[];
+  rowData$: Observable<SchedulerJobsList[]>;
+  rowData: SchedulerJobsList[];
+  allRowData: SchedulerJobsList[];
   headerTitle = this.staticTextService.jobsTitle;
 
   // N/A
@@ -56,12 +57,15 @@ export class ScheduledJobsListComponent implements OnInit {
 
   private localeText;
 
+  private refreshSubscription: Subscription;
+
   constructor(
     private i18n: I18n,
-    private scheduledJobsService: JobsService,
-    private scheduledJobsListGridService: ScheduledJobsListGridService,
+    private schedulerJobsService: JobsService,
+    private schedulerJobsListGridService: SchedulerJobsListGridService,
     public fb: FormBuilder,
     public staticTextService: JobsStaticTextService,
+    private eventService: SchedulerJobsEventEmitterService,
     private formUtils: FormsUtilsService,
     private modalService: ModalService
   ) {
@@ -69,8 +73,16 @@ export class ScheduledJobsListComponent implements OnInit {
       this.gridApi.purgeServerSideCache([]);
     }
 
-    this.frameworkComponents = scheduledJobsListGridService.setFrameworkComponents();
-    this.gridOptions = this.scheduledJobsListGridService.setGridOptions();
+    this.frameworkComponents = schedulerJobsListGridService.setFrameworkComponents();
+    this.gridOptions = this.schedulerJobsListGridService.setGridOptions();
+
+    this.refreshSubscription = this.eventService.eventEmitterRefresh.subscribe({
+      next: (event: boolean) => {
+        if (event) {
+          this.refreshGrid();
+        }
+      }
+    });
   }
 
   createForm(): FormGroup {
@@ -87,7 +99,7 @@ export class ScheduledJobsListComponent implements OnInit {
   }
 
   setSearch() {
-    const search = this.scheduledJobsListGridService.getSessionSettingsSearchedText();
+    const search = this.schedulerJobsListGridService.getSessionSettingsSearchedText();
     if (search && search !== '') {
       return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
     }
@@ -101,11 +113,11 @@ export class ScheduledJobsListComponent implements OnInit {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.startRow = that.scheduledJobsListGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.scheduledJobsListGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.searchModel = that.setSearch();
-        that.scheduledJobsService.getScheduledJobsList(that.requestModel).subscribe(data => {
+        that.schedulerJobsService.getSchedulerJobsList(that.requestModel).subscribe(data => {
           that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {
@@ -114,7 +126,7 @@ export class ScheduledJobsListComponent implements OnInit {
             that.gridApi.showNoRowsOverlay();
           }
 
-          that.gridApi.paginationGoToPage(that.scheduledJobsListGridService.getSessionSettingsPageIndex());
+          that.gridApi.paginationGoToPage(that.schedulerJobsListGridService.getSessionSettingsPageIndex());
           paramsRow.successCallback(data.data, data.totalCount);
         });
       }
@@ -124,7 +136,7 @@ export class ScheduledJobsListComponent implements OnInit {
 
   ngOnInit() {
     console.log('scheduled-jobs-list.component ngOnInit');
-    this.columnDefs = this.scheduledJobsListGridService.setGridDefaultColumns();
+    this.columnDefs = this.schedulerJobsListGridService.setGridDefaultColumns();
 
     this.localeText = {
       // for side panel
@@ -144,16 +156,22 @@ export class ScheduledJobsListComponent implements OnInit {
     };
   }
 
+  ngOnDestroy() {
+    if (this.refreshSubscription) {
+      this.refreshSubscription.unsubscribe();
+    }
+  }
+
   refreshGrid() {
     this.gridApi.purgeServerSideCache([]);
   }
 
   searchData($event: string) {
-    if ($event !== this.scheduledJobsListGridService.getSessionSettingsSearchedText()) {
-      this.scheduledJobsListGridService.setSessionSettingsSearchedText($event);
+    if ($event !== this.schedulerJobsListGridService.getSessionSettingsSearchedText()) {
+      this.schedulerJobsListGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
-      this.scheduledJobsListGridService.setSessionSettingsPageIndex(0);
+      this.schedulerJobsListGridService.setSessionSettingsPageIndex(0);
       this.gridApi.onFilterChanged();
     }
   }
@@ -170,10 +188,10 @@ export class ScheduledJobsListComponent implements OnInit {
     }
 
     if (params.newPage && !this.loadGrid) {
-      this.scheduledJobsListGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
+      this.schedulerJobsListGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
-      params.api.paginationGoToPage(this.scheduledJobsListGridService.getSessionSettingsPageIndex());
+      params.api.paginationGoToPage(this.schedulerJobsListGridService.getSessionSettingsPageIndex());
     }
   }
 }

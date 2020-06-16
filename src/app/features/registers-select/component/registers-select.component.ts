@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { RegistersSelectService } from 'src/app/core/repository/services/registers-select/registers-select.service';
@@ -15,8 +15,10 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
   selector: 'app-registers-select',
   templateUrl: './registers-select.component.html'
 })
-export class RegistersSelectComponent implements OnInit {
+export class RegistersSelectComponent implements OnInit, OnChanges {
   @Input() type = 'meter';
+  @Input() selectedRegisters: string[];
+  // tslint:disable-next-line: no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
 
   form: FormGroup;
@@ -39,6 +41,19 @@ export class RegistersSelectComponent implements OnInit {
     private formUtils: FormsUtilsService
   ) {}
 
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(`changes = `, changes);
+    this.selectedRegisters = changes.selectedRegisters.currentValue;
+    this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
+    if (this.selectedRegisters) {
+      // this.rowData = _.filter(this.allRowData, data => this.selectedRegisters.includes(data.id));
+      // console.log(`this.allRowData = `,this.rowData);
+      // console.log(`this.selectedRegisters = `,this.selectedRegisters)
+      // this.totalCount = this.allRowData.length;
+      this.selectRows(this.gridApi);
+    }
+  }
+
   createForm(): FormGroup {
     return this.fb.group({
       ['content']: ['']
@@ -47,10 +62,29 @@ export class RegistersSelectComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
+    this.selectRows(this.gridApi);
   }
 
   onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
+  }
+
+  selectRows(api: any) {
+    console.log(`api = `, api);
+    console.log(`selectedRegisters = `, this.selectedRegisters);
+    if (api) {
+      api.forEachNode(node => {
+        const selectedRows = this.selectedRegisters;
+        if (
+          node.data !== undefined &&
+          selectedRows !== undefined &&
+          selectedRows.length > 0 &&
+          _.find(selectedRows, x => x === node.data.id && !node.selected) !== undefined
+        ) {
+          node.setSelected(true);
+        }
+      });
+    }
   }
 
   ngOnInit() {
@@ -83,7 +117,7 @@ export class RegistersSelectComponent implements OnInit {
     // this.rowData$ = this.registersSelectService.getMeterUnitRegisters();
     this.rowData$.subscribe(x => {
       this.allRowData = x;
-      this.totalCount = x.length;
+      this.totalCount = this.allRowData.length;
       this.searchChange();
     });
   }

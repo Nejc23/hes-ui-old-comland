@@ -16,7 +16,7 @@ import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.intercept
 import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
 import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-scheduler.interceptor';
 import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
-import { ScheduledJobsInterceptor } from './jobs/scheduled-jobs.interceptor';
+import { SchedulerJobsInterceptor } from './jobs/scheduler-jobs.interceptor';
 import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
 import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
 import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
@@ -70,8 +70,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               }
 
               // scheduled jobs
-              if (ScheduledJobsInterceptor.canInterceptScheduledJobsList(request)) {
-                return ScheduledJobsInterceptor.interceptScheduledJobsList(request);
+              if (SchedulerJobsInterceptor.canInterceptSchedulerJobsList(request)) {
+                return SchedulerJobsInterceptor.interceptSchedulerJobsList(request);
               }
 
               // active jobs

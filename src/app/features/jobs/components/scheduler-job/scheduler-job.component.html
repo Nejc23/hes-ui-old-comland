@@ -89,7 +89,7 @@
       </div>
 
       <hr>
-      <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)"></app-registers-select>
+      <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)" [selectedRegisters]="currentJobSelectedRegisters"></app-registers-select>
       <div class="help-block" *ngIf="noRegisters">
         <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
       </div>

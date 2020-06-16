@@ -2,28 +2,30 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { AgGridModule } from '@ag-grid-community/angular';
-import { ScheduledJobsListComponent } from '../components/scheduled-jobs-list/scheduled-jobs-list.component';
-import { ScheduledJobsRoutingModule } from './scheduled-jobs-routing.module';
+import { SchedulerJobsListComponent } from '../components/scheduler-jobs-list/scheduler-jobs-list.component';
+import { SchedulerJobsRoutingModule } from './scheduler-jobs-routing.module';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
-import { GridCellTextWithDeleteComponent } from '../components/grid-custom-components/grid-cell-text-with-delete-btn.component';
+import { GridCellDeleteComponent } from '../components/grid-custom-components/grid-cell-delete-btn.component';
+import { GridCellEditComponent } from '../components/grid-custom-components/grid-cell-edit-btn.component';
 
 @NgModule({
   entryComponents: [],
   declarations: [
-    ScheduledJobsListComponent,
+    SchedulerJobsListComponent,
     GridCellActiveComponent,
     GridCellNextRunComponent,
-    GridCellTextWithDeleteComponent,
+    GridCellDeleteComponent,
+    GridCellEditComponent,
     ActionFormComponent
   ],
   imports: [
     SharedModule,
-    ScheduledJobsRoutingModule,
+    SchedulerJobsRoutingModule,
     BreadcrumbsModule,
-    AgGridModule.withComponents([GridCellActiveComponent, GridCellNextRunComponent, GridCellTextWithDeleteComponent])
+    AgGridModule.withComponents([GridCellActiveComponent, GridCellNextRunComponent, GridCellDeleteComponent, GridCellEditComponent])
   ],
   exports: []
 })
-export class ScheduledJobsModule {}
+export class SchedulerJobsModule {}

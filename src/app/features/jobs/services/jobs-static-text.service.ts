@@ -35,8 +35,8 @@ export class JobsStaticTextService {
     return this.i18n('Search');
   }
 
-  get messageScheduledJobStarted() {
-    return this.i18n(`Scheduled job started!`);
+  get messageSchedulerJobStarted() {
+    return this.i18n(`Scheduler job started!`);
   }
 
   get messageJobStopped() {

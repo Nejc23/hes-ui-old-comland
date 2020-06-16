@@ -51,11 +51,11 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
 
     switch (operationType) {
       case this.cancelJobConst:
-        response = this.service.cancelJob(this.params.node.data.id);
+        response = this.service.cancelJob(this.params.node.data.id, null);
         component.modalBody = this.i18n('Do you want to cancel scheduled job now?');
         break;
       case this.stopJobConst:
-        response = this.service.stopJob(this.params.node.data.id);
+        response = this.service.stopJob(this.params.node.data.id, null);
         component.modalBody = this.i18n('Do you want to stop running job now?');
     }
 

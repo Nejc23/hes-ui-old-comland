@@ -3,17 +3,18 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
-import { GridCellTextWithDeleteComponent } from '../components/grid-custom-components/grid-cell-text-with-delete-btn.component';
+import { GridCellDeleteComponent } from '../components/grid-custom-components/grid-cell-delete-btn.component';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
 import { GridPagination } from '../../meter-units/types/interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
+import { GridCellEditComponent } from '../components/grid-custom-components/grid-cell-edit-btn.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ScheduledJobsListGridService {
+export class SchedulerJobsListGridService {
   sessionNameForGridState = 'grdJobs-scheduled';
 
   columns = [];
@@ -28,7 +29,8 @@ export class ScheduledJobsListGridService {
     return {
       gridCellActiveComponent: GridCellActiveComponent,
       gridCellNextRunComponent: GridCellNextRunComponent,
-      gridCellTextWithDeleteComponent: GridCellTextWithDeleteComponent
+      gridCellDeleteComponent: GridCellDeleteComponent,
+      gridCellEditComponent: GridCellEditComponent
     };
   }
 
@@ -38,7 +40,7 @@ export class ScheduledJobsListGridService {
   setGridDefaultColumns() {
     return [
       {
-        width: 90,
+        width: 100,
         suppressMenu: true,
         suppressMovable: true,
         lockPosition: true,
@@ -81,9 +83,30 @@ export class ScheduledJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        cellRenderer: 'gridCellTextWithDeleteComponent',
         headerName: this.i18n('Owner'),
         headerTooltip: this.i18n('Owner')
+      },
+      {
+        field: 'id',
+        width: 60,
+        suppressMenu: true,
+        sortable: true,
+        suppressMovable: true,
+        lockPosition: true,
+        cellRenderer: 'gridCellEditComponent',
+        headerName: '',
+        headerTooltip: this.i18n('Owner')
+      },
+      {
+        field: 'id',
+        width: 60,
+        suppressMenu: true,
+        sortable: true,
+        suppressMovable: true,
+        lockPosition: true,
+        cellRenderer: 'gridCellDeleteComponent',
+        headerName: '',
+        headerTooltip: this.i18n('Delete job')
       }
     ];
   }

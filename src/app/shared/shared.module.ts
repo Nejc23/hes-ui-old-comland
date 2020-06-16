@@ -34,7 +34,6 @@ import { Page404Component } from './404/page-404.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
 import { RegistersSelectComponent } from '../features/registers-select/component/registers-select.component';
-import { PlcMeterReadScheduleComponent } from '../features/meter-units/components/plc-meter-read-schedule/plc-meter-read-schedule.component';
 import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refresh.component';
@@ -47,6 +46,7 @@ import { ActiveJobComponent } from './popover/components/active-job/active-job.c
 import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
 import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
 import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
+import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
 
 @NgModule({
   exports: [
@@ -69,7 +69,7 @@ import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/p
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
-    PlcMeterReadScheduleComponent,
+    SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
@@ -112,7 +112,7 @@ import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/p
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
-    PlcMeterReadScheduleComponent,
+    SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
@@ -144,7 +144,7 @@ import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/p
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
-    PlcMeterReadScheduleComponent,
+    SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,

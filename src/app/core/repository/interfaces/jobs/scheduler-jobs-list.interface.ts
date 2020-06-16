@@ -1,4 +1,4 @@
-export interface ScheduledJobsList {
+export interface SchedulerJobsList {
   id: string;
   active: boolean;
   type: string;

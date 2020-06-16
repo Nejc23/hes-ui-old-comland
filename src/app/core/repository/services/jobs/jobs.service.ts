@@ -3,11 +3,12 @@ import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { activeJobs, stopJob, cancelJob } from '../../consts/data-concentrator-units.const';
-import { ScheduledJobsList } from '../../interfaces/jobs/scheduled-jobs-list.interface';
+import { SchedulerJobsList } from '../../interfaces/jobs/scheduler-jobs-list.interface';
 import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
-import { schedulerJobs, schedulerJobsList } from '../../consts/jobs.const';
+import { schedulerJobs, schedulerJobsList, executeJob, enableJob } from '../../consts/jobs.const';
+import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,11 +16,11 @@ import { schedulerJobs, schedulerJobsList } from '../../consts/jobs.const';
 export class JobsService {
   constructor(private repository: RepositoryService) {}
 
-  getScheduledJobsList(param: GridRequestParams): Observable<GridResponse<ScheduledJobsList>> {
-    return this.repository.makeRequest(this.getScheduledJobsListRequest(param));
+  getSchedulerJobsList(param: GridRequestParams): Observable<GridResponse<SchedulerJobsList>> {
+    return this.repository.makeRequest(this.getSchedulerJobsListRequest(param));
   }
 
-  getScheduledJobsListRequest(param: GridRequestParams): HttpRequest<any> {
+  getSchedulerJobsListRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', schedulerJobsList, param);
   }
 
@@ -31,19 +32,75 @@ export class JobsService {
     return new HttpRequest('GET', `${activeJobs}/${deviceId}`);
   }
 
-  stopJob(jobId: string): Observable<any> {
-    return this.repository.makeRequest(this.stopJobRequest(jobId));
+  getJob(jobId: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.getJobRequest(jobId));
   }
 
-  stopJobRequest(jobId: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${activeJobs}/${stopJob}/${jobId}`);
+  getJobRequest(jobId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${schedulerJobs}/${jobId}`);
   }
 
-  cancelJob(jobId: string): Observable<any> {
-    return this.repository.makeRequest(this.cancelJobRequest(jobId));
+  stopJob(jobId: string, payload: any): Observable<any> {
+    return this.repository.makeRequest(this.stopJobRequest(jobId, payload));
   }
 
-  cancelJobRequest(jobId: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${activeJobs}/${cancelJob}/${jobId}`);
+  stopJobRequest(jobId: string, payload: any): HttpRequest<any> {
+    return new HttpRequest('PUT', `${activeJobs}/${stopJob}/${jobId}`, payload as any);
+  }
+
+  cancelJob(jobId: string, payload: any): Observable<any> {
+    return this.repository.makeRequest(this.cancelJobRequest(jobId, payload));
+  }
+
+  cancelJobRequest(jobId: string, payload: any): HttpRequest<any> {
+    return new HttpRequest('PUT', `${activeJobs}/${cancelJob}/${jobId}`, payload as any);
+  }
+
+  createSchedulerJob(schedule: SchedulerJob): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.createSchedulerJobRequest(schedule));
+  }
+
+  createSchedulerJobRequest(param: SchedulerJob): HttpRequest<any> {
+    return new HttpRequest('POST', `${schedulerJobs}`, param);
+  }
+
+  updateSchedulerJob(schedule: SchedulerJob, id: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.updateSchedulerJobRequest(schedule, id));
+  }
+
+  updateSchedulerJobRequest(param: SchedulerJob, id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${schedulerJobs}/${id}`, param);
+  }
+
+  deleteSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.deleteSchedulerJobRequest(id));
+  }
+
+  deleteSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('DELETE', `${schedulerJobs}/${id}`);
+  }
+
+  executeSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.executeSchedulerJobRequest(id));
+  }
+
+  executeSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${executeJob}/${id}`, null);
+  }
+
+  enableSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.enableSchedulerJobRequest(id));
+  }
+
+  enableSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${enableJob}/${id}/1`, null);
+  }
+
+  disableSchedulerJob(id: string): Observable<any> {
+    return this.repository.makeRequest(this.disableSchedulerJobRequest(id));
+  }
+
+  disableSchedulerJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('PUT', `${enableJob}/${id}/0`, null);
   }
 }
