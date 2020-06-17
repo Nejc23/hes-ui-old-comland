@@ -18,6 +18,7 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { List } from 'lodash';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
+import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -26,6 +27,7 @@ import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-
 export class SchedulerJobComponent implements OnInit {
   @ViewChild(RegistersSelectComponent, { static: true }) registers;
   @Input() selectedDeviceId: string;
+  @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
   form: FormGroup;
   readOptions: RadioOption[] = [
@@ -117,7 +119,7 @@ export class SchedulerJobComponent implements OnInit {
       iec: this.form.get(this.iecProperty).value,
       description: this.form.get(this.descriptionProperty).value,
       dateTime: this.showDateTime() ? this.form.get(this.timeProperty).value : null,
-      bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters(),
+      bulkActionsRequestParam: this.deviceFiltersAndSearch,
       usePointer: this.form.get(this.usePointerProperty).value,
       intervalRange:
         this.form.get(this.intervalRangeProperty).value !== null ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,

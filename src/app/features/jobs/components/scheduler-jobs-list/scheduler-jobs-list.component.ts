@@ -18,6 +18,7 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
+import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -193,5 +194,23 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.schedulerJobsListGridService.getSessionSettingsPageIndex());
     }
+  }
+
+  addJob() {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.refreshGrid();
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 }

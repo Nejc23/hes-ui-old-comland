@@ -642,10 +642,22 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    const deviceIdsParam = [];
+    if (selectedRows && selectedRows.length > 0) {
+      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+    }
+
     const options: NgbModalOptions = {
       size: 'xl'
     };
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.deviceFiltersAndSearch = {
+      id: deviceIdsParam,
+      search: this.requestModel.searchModel,
+      filter: this.requestModel.filterModel
+    };
     modalRef.result.then().catch(() => {});
   }
 
