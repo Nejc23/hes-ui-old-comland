@@ -30,6 +30,7 @@ describe('Pact consumer test', () => {
 
   describe('Meter units list get request', () => {
     const requestBody: GridRequestParams = {
+      requestId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
       typeId: 1,
       startRow: 0,
       endRow: 19,

@@ -19,7 +19,7 @@ export class MeterUnitsService {
   constructor(private repository: RepositoryService) {}
 
   getGridMeterUnits(param: GridRequestParams): Observable<GridResponse<MeterUnitsList>> {
-    param.requestId = uuidv4();
+    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
     return this.repository.makeRequest(this.getGridMeterUnitsRequest(param));
   }
 

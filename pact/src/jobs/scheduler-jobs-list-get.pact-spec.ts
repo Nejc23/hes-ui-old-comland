@@ -30,6 +30,7 @@ describe('Pact consumer test', () => {
 
   describe('Scheduler jobs list get request', () => {
     const requestBody: GridRequestParams = {
+      requestId: '06130d62-f67c-41a2-98f7-ef521db2cee6',
       startRow: 0,
       endRow: 9,
       searchModel: [

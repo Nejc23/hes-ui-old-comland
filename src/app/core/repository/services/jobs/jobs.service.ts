@@ -18,7 +18,7 @@ export class JobsService {
   constructor(private repository: RepositoryService) {}
 
   getSchedulerJobsList(param: GridRequestParams): Observable<GridResponse<SchedulerJobsList>> {
-    param.requestId = uuidv4();
+    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
     return this.repository.makeRequest(this.getSchedulerJobsListRequest(param));
   }
 
