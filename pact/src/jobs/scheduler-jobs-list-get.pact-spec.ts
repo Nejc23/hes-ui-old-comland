@@ -4,7 +4,7 @@ import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/defaul
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 
 describe('Pact consumer test', () => {

@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
 import { GridCellDeleteComponent } from '../components/grid-custom-components/grid-cell-delete-btn.component';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridPagination } from '../../meter-units/types/interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';

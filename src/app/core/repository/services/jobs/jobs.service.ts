@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { activeJobs, stopJob, cancelJob } from '../../consts/data-concentrator-units.const';
 import { SchedulerJobsList } from '../../interfaces/jobs/scheduler-jobs-list.interface';
-import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
 import { schedulerJobs, schedulerJobsList, executeJob, enableJob } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,7 @@ export class JobsService {
   constructor(private repository: RepositoryService) {}
 
   getSchedulerJobsList(param: GridRequestParams): Observable<GridResponse<SchedulerJobsList>> {
+    param.requestId = uuidv4();
     return this.repository.makeRequest(this.getSchedulerJobsListRequest(param));
   }
 

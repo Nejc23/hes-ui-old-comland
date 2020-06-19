@@ -1,7 +1,7 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';

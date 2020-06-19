@@ -1,4 +1,4 @@
-import { GridFilterParams } from '../helpers/gris-request-params.interface';
+import { GridFilterParams } from '../helpers/grid-request-params.interface';
 
 export interface IdentityToken {
   AccessToken: string;

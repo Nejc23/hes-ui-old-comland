@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { dataConcentratorUnits, dcuLayout, bulkDelete, addConcentrator, dcuSync } from '../../consts/data-concentrator-units.const';
@@ -10,6 +10,7 @@ import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class DataConcentratorUnitsService {
   constructor(private repository: RepositoryService) {}
 
   getGridDcu(param: GridRequestParams): Observable<GridResponse<DataConcentratorUnitsList>> {
+    param.requestId = uuidv4();
     return this.repository.makeRequest(this.getGridDcuRequest(param));
   }
 

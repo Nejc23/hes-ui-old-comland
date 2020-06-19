@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams } from '../../interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
@@ -10,6 +10,7 @@ import { meterUnits, meterUnitsLayout, meterUnitsScheduler, deleteJob, fwUpgrade
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { schedulerJobs, enableJob, executeJob } from '../../consts/jobs.const';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class MeterUnitsService {
   constructor(private repository: RepositoryService) {}
 
   getGridMeterUnits(param: GridRequestParams): Observable<GridResponse<MeterUnitsList>> {
+    param.requestId = uuidv4();
     return this.repository.makeRequest(this.getGridMeterUnitsRequest(param));
   }
 

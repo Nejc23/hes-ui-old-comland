@@ -1,6 +1,7 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 export interface GridRequestParams {
+  requestId: string;
   startRow: number;
   endRow: number;
   sortModel?: GridSortParams[];

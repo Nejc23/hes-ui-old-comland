@@ -1,5 +1,5 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { ReadStatus } from '../helpers/gris-request-params.interface';
+import { ReadStatus } from '../helpers/grid-request-params.interface';
 
 export interface MeterUnitsLayout {
   id: number;

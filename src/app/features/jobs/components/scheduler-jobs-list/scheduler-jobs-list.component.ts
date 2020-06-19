@@ -13,7 +13,7 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gris-request-params.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
@@ -49,6 +49,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   public frameworkComponents;
   loadGrid = true;
   requestModel: GridRequestParams = {
+    requestId: null,
     startRow: 0,
     endRow: 0,
     sortModel: [],

@@ -1,4 +1,4 @@
-import { GridFilterParams, GridSearchParams } from './gris-request-params.interface';
+import { GridFilterParams, GridSearchParams } from './grid-request-params.interface';
 
 export interface GridBulkActionRequestParams {
   id: string[];
