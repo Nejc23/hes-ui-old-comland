@@ -73,6 +73,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   loadGrid = true;
   programmaticallySelectRow = false;
   requestModel: GridRequestParams = {
+    requestId: null,
     startRow: 0,
     endRow: 0,
     sortModel: [],
