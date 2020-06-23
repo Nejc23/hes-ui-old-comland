@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
-import { meterUnitRegisters, schedulerJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { schedulerJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';

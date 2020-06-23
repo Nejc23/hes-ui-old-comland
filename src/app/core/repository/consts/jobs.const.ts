@@ -5,3 +5,4 @@ export const schedulerActiveJobs = `${basePath}/active-jobs`;
 export const schedulerJobsList = `${basePath}/jobs-list`;
 export const enableJob = `${basePath}/jobs-enable`;
 export const executeJob = `${basePath}/jobs-execute`;
+export const registers = `${basePath}/registers`;

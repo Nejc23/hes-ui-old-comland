@@ -5,7 +5,6 @@ export const addConcentrator = `${basePathConcentratorInventory}/add-concentrato
 export const dcuSync = `${basePath}/sync`;
 export const dcuLayout = '/api/dcu-layout';
 export const bulkDelete = '/api/dcu-bulk-delete';
-export const meterUnitRegisters = '/api/meter-unit-registers';
 export const touConfigurations = '/api/tou-configurations';
 export const schedulerJobs = '/api/scheduler-jobs';
 export const activeJobs = '/api/active-jobs';
