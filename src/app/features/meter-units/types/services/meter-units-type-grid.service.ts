@@ -183,15 +183,15 @@ export class MeterUnitsTypeGridService {
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: this.i18n('ID5')
       },
-      {
-        field: 'childInfo',
-        headerName: this.i18n('Information of child (MBus)'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellInfoOfChildComponent',
-        headerTooltip: this.i18n('Information of child (MBus)')
-      },
+      // {
+      //   field: 'childInfo',
+      //   headerName: this.i18n('Information of child (MBus)'),
+      //   pinned: false,
+      //   sortable: true,
+      //   filter: false,
+      //   cellRenderer: 'gridCellInfoOfChildComponent',
+      //   headerTooltip: this.i18n('Information of child (MBus)')
+      // },
       {
         field: 'breakerState',
         headerName: this.i18n('Breaker State'),
@@ -387,11 +387,11 @@ export class MeterUnitsTypeGridService {
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, x => x.id === selectedRow.data.id)) {
+      if (!_.find(settings.selectedRows, x => x.deviceId === selectedRow.data.deviceId)) {
         settings.selectedRows.push(selectedRow.data);
       }
     } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter(obj => obj.id !== selectedRow.data.id);
+      settings.selectedRows = settings.selectedRows.filter(obj => obj.deviceId !== selectedRow.data.deviceId);
     } else if (selectedRow.length === 0) {
       settings.selectedRows = [];
     }

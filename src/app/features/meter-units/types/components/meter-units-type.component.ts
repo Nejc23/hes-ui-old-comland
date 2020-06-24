@@ -555,7 +555,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !selectedAll &&
-        _.find(selectedRows, x => x.id === node.data.id) !== undefined
+        _.find(selectedRows, x => x.deviceId === node.data.deviceId) !== undefined
       ) {
         node.setSelected(true);
       } else {

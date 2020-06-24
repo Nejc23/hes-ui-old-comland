@@ -330,7 +330,6 @@ export class DataConcentratorUnitsGridService {
   // selected rows
   public getSessionSettingsSelectedRows() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    console.log(`settings.selectedRows = ${JSON.stringify(settings.selectedRows)}`);
     return settings.selectedRows;
   }
 
