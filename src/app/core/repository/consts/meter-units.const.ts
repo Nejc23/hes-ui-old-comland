@@ -15,3 +15,5 @@ export const deleteJob = `delete-job`;
 export const fwUploadFile = `fw-upload-file`;
 export const fwRemoveFile = `fw-remove-file`;
 export const fwUpgrade = `fw-upgrade`;
+
+export const registers = `${basePath}/registers`;

@@ -72,8 +72,8 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
   }
 
   selectRows(api: any) {
-    console.log(`api = `, api);
-    console.log(`selectedRegisters = `, this.selectedRegisters);
+    //console.log(`api = `, api);
+    //console.log(`selectedRegisters = `, this.selectedRegisters);
     if (api) {
       api.forEachNode(node => {
         const selectedRows = this.selectedRegisters;
@@ -92,11 +92,14 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.form = this.createForm();
     this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
-
+    if (!this.deviceFiltersAndSearch) {
+      this.deviceFiltersAndSearch = { id: [], filter: null };
+    }
+    //console.log(`deviceFiltersAndSearch = `, this.deviceFiltersAndSearch);
     this.rowData$ = this.registersSelectService.getDeviceRegisters(this.deviceFiltersAndSearch);
     this.rowData$.subscribe(x => {
       this.allRowData = x;
-      this.totalCount = this.allRowData.length;
+      this.totalCount = this.allRowData ? this.allRowData.length : 0;
       this.searchChange();
     });
   }
