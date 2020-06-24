@@ -8,6 +8,7 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 
 @Component({
   selector: 'app-grid-cell-next-run',
@@ -22,7 +23,8 @@ export class GridCellNextRunComponent implements ICellRendererAngularComp {
     private i18n: I18n,
     private modalService: ModalService,
     private toast: ToastNotificationService,
-    private service: JobsService
+    private service: JobsService,
+    private staticextService: JobsStaticTextService
   ) {}
   // called on init
   agInit(params: any): void {
@@ -66,5 +68,9 @@ export class GridCellNextRunComponent implements ICellRendererAngularComp {
   // set tooltip text
   setToolTip() {
     return this.i18n('Execute job');
+  }
+
+  setNextReadText(time: string) {
+    return this.i18n(time ? moment(time).fromNow() : this.staticextService.notAvailableTekst);
   }
 }
