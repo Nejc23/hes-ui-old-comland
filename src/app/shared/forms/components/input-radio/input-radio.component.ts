@@ -41,7 +41,7 @@ export class InputRadioComponent implements OnInit {
   */
 
   isSelected(option: RadioOption) {
-    return this.formControl.value == option.value;
+    return this.formControl.value === option.value;
   }
 
   get required(): boolean {

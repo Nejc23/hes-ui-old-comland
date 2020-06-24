@@ -9,7 +9,6 @@ import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
-import { MeterUnitsTypeGridService } from '../../../meter-units/types/services/meter-units-type-grid.service';
 import { PlcMeterReadScheduleGridService } from '../../../meter-units/services/plc-meter-read-schedule-grid.service';
 import { PlcMeterReadScheduleService } from '../../../meter-units/services/plc-meter-read-scheduler.service';
 import { from, of, Observable, Subscription } from 'rxjs';
@@ -17,7 +16,6 @@ import * as moment from 'moment';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { List } from 'lodash';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 
 @Component({
@@ -31,12 +29,12 @@ export class SchedulerJobComponent implements OnInit {
 
   form: FormGroup;
   readOptions: RadioOption[] = [
-    { value: 1 as number, label: this.i18n('One-time'), labelSmall: this.i18n('Once') },
-    { value: 2 as number, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
-    { value: 3 as number, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
-    { value: 4 as number, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
-    { value: 5 as number, label: this.i18n('Weekly'), labelSmall: this.i18n('One or more days of the week') },
-    { value: 6 as number, label: this.i18n('Monthly'), labelSmall: this.i18n('One or more days in the month') }
+    { value: '1' as string, label: this.i18n('One-time'), labelSmall: this.i18n('Once') },
+    { value: '2' as string, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
+    { value: '3' as string, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
+    { value: '4' as string, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
+    { value: '5' as string, label: this.i18n('Weekly'), labelSmall: this.i18n('One or more days of the week') },
+    { value: '6' as string, label: this.i18n('Monthly'), labelSmall: this.i18n('One or more days in the month') }
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: this.i18n('Mon-Fri') },
@@ -56,6 +54,7 @@ export class SchedulerJobComponent implements OnInit {
 
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
+  defaultTimeUnit: Codelist<number>;
 
   currentJobSelectedRegisters: string[];
 
@@ -73,41 +72,49 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   createForm(formData: SchedulerJob): FormGroup {
+    //console.log(`createForm `, formData);
     return this.formBuilder.group({
-      [this.readOptionsProperty]: [formData ? formData.readOptions : null, Validators.required],
+      [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '4', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
-      [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : new Date()],
+      [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : new Date(new Date().toISOString().substring(0, 10) + 'T00:01')],
       [this.weekDaysProperty]: [formData ? formData.weekDays : []],
       [this.monthDaysProperty]: [formData ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
       [this.iecProperty]: [formData ? formData.iec : false],
       [this.descriptionProperty]: [formData ? formData.description : null, Validators.maxLength(500)],
-      [this.usePointerProperty]: [formData ? formData.usePointer : false],
-      [this.intervalRangeProperty]: [formData ? formData.intervalRange : null],
-      [this.timeUnitProperty]: [formData ? this.jobsTimeUnits.find(x => x.id === formData.timeUnit) : null]
+      [this.usePointerProperty]: [formData ? formData.usePointer : true],
+      [this.intervalRangeProperty]: [formData ? formData.intervalRange : 1, Validators.required],
+      [this.timeUnitProperty]: [
+        formData ? this.jobsTimeUnits.find(x => x.id === formData.timeUnit) : this.defaultTimeUnit,
+        Validators.required
+      ]
     });
   }
 
   ngOnInit() {
-    console.log(`selectedDeviceId = ${this.selectedDeviceId}`);
+    //console.log(`selectedDeviceId = ${this.selectedDeviceId}`);
     this.jobsTimeUnits$ = this.codelistService.timeUnitCodeslist();
     this.jobsTimeUnits$.subscribe(units => {
       this.jobsTimeUnits = units;
+      this.defaultTimeUnit = this.jobsTimeUnits.find(x => x.id === 3);
       if (this.selectedDeviceId) {
         this.jobsService.getJob(this.selectedDeviceId).subscribe(data => {
           this.selectedId = data.readOptions;
           this.currentJobSelectedRegisters = data.registers;
           this.form = this.createForm(data);
           this.changeReadOptionId();
-          console.log(`data = `, data);
+          //console.log(`data = `, data);
         });
+      } else {
+        this.form = this.createForm(null);
+        this.changeReadOptionId();
       }
     });
   }
 
   fillData(): SchedulerJobForm {
-    console.log('MeterUnitsReadScheduleForm', this.form.get(this.timeUnitProperty).value);
+    //console.log('MeterUnitsReadScheduleForm', this.form.get(this.timeUnitProperty).value);
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
       nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
