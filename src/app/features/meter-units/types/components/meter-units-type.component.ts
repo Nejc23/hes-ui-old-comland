@@ -43,8 +43,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
   headerTitle = '';
-  taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
-  // taskStatusOK = 'TASK_SUCCESS",';
+  // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
+  taskStatusOK = 'TASK_SUCCESS",';
   refreshInterval = gridRefreshInterval;
 
   // grid variables
@@ -103,6 +103,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   messageActionInProgress = this.i18n(`Action in progress!`);
   messageServerError = this.i18n(`Server error!`);
   messageDataRefreshed = this.i18n(`Data refreshed!`);
+  messageActionFailed = this.i18n(`Action failed!`);
 
   constructor(
     private sidebarService: SidebarService,
@@ -240,6 +241,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       previous: this.i18n('previous'),
       loadingOoo: this.i18n('loading...')
     };
+
+    this.deleteAllRequests();
   }
 
   ngOnDestroy() {
@@ -800,9 +803,18 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
   }
 
+  deleteAllRequests() {
+    const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
+    if (requestIds && requestIds.length > 0) {
+      console.log(`deleteing requests `, requestIds);
+      requestIds.map(requestId => this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId));
+    }
+  }
+
   refresh() {
     // if (this.authService.isTokenAvailable()) {
-    let requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
+    const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
+    console.log(`refresh `, requestIds);
     if (requestIds && requestIds.length > 0) {
       requestIds.map(requestId =>
         this.service.getMyGridLastStatus(requestId).subscribe(results => {
@@ -812,17 +824,20 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
             if (badRequest === undefined) {
               // no devices with unsuccessful status, we can delete requestId from session
               this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
-              this.refreshGrid();
               this.toast.successToast(this.messageDataRefreshed);
+            }
+          } else {
+            const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
+            if (badRequest !== undefined) {
+              this.toast.errorToast(this.messageActionFailed);
+              if (badRequest.isFinished) {
+                this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
+              }
             }
           }
         })
       );
-
-      requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
-      if (requestIds && requestIds.length > 0) {
-        this.toast.successToast(this.messageActionInProgress);
-      }
+      this.refreshGrid();
     }
     /* } else {
       this.service.getMyGridIdentityToken().subscribe(
