@@ -20,7 +20,11 @@ export class MeterUnitsSchedulerInterceptor {
       nHours: 0,
       weekDays: [],
       monthDays: [1, 7, 31],
-      registers: ['guid-1', 'guid-4', 'guid-5'],
+      registers: [
+        { name: 'guid-1', type: 'type-1' },
+        { name: 'guid-4', type: 'type-1' },
+        { name: 'guid-5', type: 'type-1' }
+      ],
       dateTime: '2020-05-22 10:02',
       description: '',
       iec: false,

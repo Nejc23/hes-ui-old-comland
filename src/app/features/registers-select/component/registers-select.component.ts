@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
+import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/registers-select/registers-select-request.interface';
 
 @Component({
   selector: 'app-registers-select',
@@ -18,7 +19,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 })
 export class RegistersSelectComponent implements OnInit, OnChanges {
   @Input() type = 'meter';
-  @Input() selectedRegisters: string[];
+  @Input() selectedRegisters: RegistersSelectRequest[];
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
@@ -106,10 +107,9 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
 
   getSelectedRowIds() {
     const selectedRows = this.gridApi.getSelectedRows();
-    return _.map(
-      selectedRows,
-      nameOf<RegistersSelectList>(o => o.id)
-    );
+    const req: RegistersSelectRequest[] = [];
+    selectedRows.forEach(x => req.push({ name: x.name, type: x.type }));
+    return req;
   }
 
   get selectedAtLeastOneRowOnGrid() {

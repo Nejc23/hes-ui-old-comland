@@ -17,6 +17,7 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { List } from 'lodash';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
+import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/registers-select/registers-select-request.interface';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -56,7 +57,7 @@ export class SchedulerJobComponent implements OnInit {
   jobsTimeUnits: Codelist<number>[];
   defaultTimeUnit: Codelist<number>;
 
-  currentJobSelectedRegisters: string[];
+  currentJobSelectedRegisters: RegistersSelectRequest[];
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -150,7 +151,6 @@ export class SchedulerJobComponent implements OnInit {
     // times and selected registers
     const selectedRegisters = this.registers.getSelectedRowIds();
     this.noRegisters = selectedRegisters.length === 0;
-    // console.log(JSON.stringify(selectedRegisters));
     this.form.get(this.registersProperty).setValue(selectedRegisters);
     this.noMonthDays = this.form.get(this.monthDaysProperty).value !== null && this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
