@@ -1,4 +1,7 @@
 export interface TimeOfUseConfigList {
-  id: string;
+  timeOfUseId: string;
+  activationDate: string;
+  timeOfUseTag: string;
+  timeOfUseName: string;
   description: string;
 }

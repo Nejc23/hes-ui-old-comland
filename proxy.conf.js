@@ -3,6 +3,7 @@ const PROXY_CONFIG = [
       context: [
         "/api/concentrator-inventory/",
         "/api/concentrator-management",
+        "/api/time-of-use/get-time-of-use",
       ],
       target: "http://89.212.201.202:54322",
       secure: false

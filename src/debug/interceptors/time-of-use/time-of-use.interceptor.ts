@@ -13,15 +13,24 @@ export class TimeOfUseInterceptor {
   static interceptTouConfigList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const body: TimeOfUseConfigList[] = [
       {
-        id: '1',
+        timeOfUseId: '1',
+        activationDate: '2020-03-01T00:00:00+01:00',
+        timeOfUseTag: 's2w2d2',
+        timeOfUseName: 'NameYourTimeOfUseFile',
         description: 'ON-PEAK'
       },
       {
-        id: '2',
+        timeOfUseId: '2',
+        activationDate: '2020-03-01T00:00:00+01:00',
+        timeOfUseTag: 's2w2d2',
+        timeOfUseName: 'NameYourTimeOfUseFile2',
         description: 'OFF-PEAK'
       },
       {
-        id: '3',
+        timeOfUseId: '3',
+        activationDate: '2020-03-03T00:00:00+01:00',
+        timeOfUseTag: 's3w3d2',
+        timeOfUseName: 'NameYourTimeOfUseFile3',
         description: 'PARTIAL-PEAK'
       }
     ];

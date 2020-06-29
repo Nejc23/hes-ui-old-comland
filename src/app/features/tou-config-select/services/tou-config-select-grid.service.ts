@@ -20,12 +20,12 @@ export class TouConfigSelectGridService {
         suppressMenu: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'id',
+        colId: 'timeOfUseId',
         headerTooltip: this.i18n('Select/deselect'),
         headerCheckboxSelection: false
       },
       {
-        field: 'id',
+        field: 'timeOfUseId',
         width: 45,
         suppressMenu: true,
         sortable: true,
