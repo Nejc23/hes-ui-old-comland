@@ -39,6 +39,18 @@ export class SidebarService {
         routeLink: '/schedulerJobs',
         hasChildren: false,
         children: []
+      },
+      {
+        title: this.i18n(`Import templates`),
+        routeLink: '/importTemplates',
+        hasChildren: false,
+        children: []
+      },
+      {
+        title: this.i18n(`Import TOU configuration`),
+        routeLink: '/importTouConfiguration',
+        hasChildren: false,
+        children: []
       }
       // TODO uncomment when implemented
       /*
