@@ -6,11 +6,20 @@ import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
-import { meterUnits, meterUnitsLayout, meterUnitsScheduler, deleteJob, fwUpgrade } from '../../consts/meter-units.const';
+import {
+  meterUnits,
+  meterUnitsLayout,
+  meterUnitsScheduler,
+  deleteJob,
+  fwUpgrade,
+  meterUnitsBreakerState
+} from '../../consts/meter-units.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { schedulerJobs, enableJob, executeJob } from '../../consts/jobs.const';
 import { v4 as uuidv4 } from 'uuid';
+import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
+import * as _ from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +34,14 @@ export class MeterUnitsService {
 
   getGridMeterUnitsRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', meterUnits, param);
+  }
+
+  updateReaderState(param: OnDemandRequestData): Observable<MeterUnitsList> {
+    return this.repository.makeRequest(this.updateReaderStateRequest(param));
+  }
+
+  updateReaderStateRequest(param: OnDemandRequestData): HttpRequest<any> {
+    return new HttpRequest('PUT', meterUnitsBreakerState, param);
   }
 
   getMeterUnitsLayout(typeId: number): Observable<MeterUnitsLayout[]> {

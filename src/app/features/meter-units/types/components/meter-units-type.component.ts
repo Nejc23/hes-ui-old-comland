@@ -717,6 +717,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         response.subscribe(
           value => {
             this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            if (operation === MeterUnitsTypeEnum.breakerStatus) {
+              this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
+            }
           },
           e => {
             this.toast.errorToast(this.messageServerError);
@@ -814,25 +817,36 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   refresh() {
     // if (this.authService.isTokenAvailable()) {
     const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
-    console.log(`refresh `, requestIds);
+    // console.log(`refresh `, requestIds);
     if (requestIds && requestIds.length > 0) {
       requestIds.map(requestId =>
         this.service.getMyGridLastStatus(requestId).subscribe(results => {
-          const okRequest = _.find(results, x => x.status === this.taskStatusOK);
+          const okRequest = _.find(results, x => x.status === this.taskStatusOK && x.isFinished);
           if (okRequest !== undefined) {
             const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
             if (badRequest === undefined) {
               // no devices with unsuccessful status, we can delete requestId from session
               this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
+              const breakerStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_BreakerState_RequestIds();
+              const isBreakerState = _.find(breakerStateRequests, x => x === requestId);
+              // 3th step for breaker state
+              if (isBreakerState) {
+                this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
+                  // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
+                  if (resultsBreakerState) {
+                    this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
+                  }
+                  this.meterUnitsTypeGridService.removeMyGridLink_BreakerState_RequestId(requestId);
+                });
+              }
               this.toast.successToast(this.messageDataRefreshed);
             }
           } else {
-            const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
+            const badRequest = _.find(results, x => x.status !== this.taskStatusOK && x.isFinished);
             if (badRequest !== undefined) {
               this.toast.errorToast(this.messageActionFailed);
-              if (badRequest.isFinished) {
-                this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
-              }
+              this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
+              this.meterUnitsTypeGridService.removeMyGridLink_BreakerState_RequestId(requestId);
             }
           }
         })

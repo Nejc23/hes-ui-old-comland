@@ -34,6 +34,7 @@ export class MeterUnitsTypeGridService {
   cookieNameForGridSort = 'grdColMUTSort-typeId-';
   sessionNameForGridState = 'grdStateMUT-typeId-';
   gridName = 'grdMUT-requestIds';
+  gridNameBreakerState = 'grdMUT-breaker-state-requestIds';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
@@ -447,6 +448,18 @@ export class MeterUnitsTypeGridService {
 
   getAllMyGridLinkRequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
+  }
+
+  saveMyGridLink_BreakerState_RequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameBreakerState, requestId);
+  }
+
+  removeMyGridLink_BreakerState_RequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameBreakerState, requestId);
+  }
+
+  getAllMyGridLink_BreakerState_RequestIds(): string[] {
+    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
   }
 }
 
