@@ -29,15 +29,24 @@ describe('Pact consumer test', () => {
   describe('Time of use configurations', () => {
     const responseBody: TimeOfUseConfigList[] = [
       {
-        id: '1',
+        timeOfUseId: '1',
+        activationDate: '2020-03-03T00:00:00+01:00',
+        timeOfUseTag: 's1w3d1',
+        timeOfUseName: 'NameYourTimeOfUseFile1',
         description: 'ON-PEAK'
       },
       {
-        id: '2',
+        timeOfUseId: '2',
+        activationDate: '2020-03-14T00:00:00+01:00',
+        timeOfUseTag: 's2w2d2',
+        timeOfUseName: 'NameYourTimeOfUseFile2',
         description: 'OFF-PEAK'
       },
       {
-        id: '3',
+        timeOfUseId: '3',
+        activationDate: '2020-03-31T00:00:00+01:00',
+        timeOfUseTag: 's3w3d3',
+        timeOfUseName: 'NameYourTimeOfUseFile3',
         description: 'PARTIAL-PEAK'
       }
     ];
