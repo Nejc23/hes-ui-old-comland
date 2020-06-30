@@ -6,12 +6,22 @@
     <ng-container>
       <div class="form-row">
         <div class="col-12">
-            <app-file-select label="File" [form]="form" [property]="imageProperty" 
+         <app-input-text [form]="form" [property]="nameProperty" label="Name" i18n-label></app-input-text>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+            <app-file-select label="File" [form]="form" [property]="fileProperty" 
                 [multiple]="false"
                 [allowedExtensions]="allowedExt"
                 [textExplanation]="'can only select one XML file.'"
                 (selectEvent)="selected($event)"
                 i18n-label></app-file-select>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="errorMsg != ''">
+        <div class="col-12 text-danger">
+           {{errorMsg}}
         </div>
       </div>
     </ng-container>

@@ -16,5 +16,6 @@ export const deleteJob = `delete-job`;
 export const fwUploadFile = `fw-upload-file`;
 export const fwRemoveFile = `fw-remove-file`;
 export const fwUpgrade = `fw-upgrade`;
+export const touConfigImport = `/api/time-of-use/import-time-of-use`;
 
 export const registers = `${basePath}/registers`;

@@ -12,7 +12,8 @@ import {
   meterUnitsScheduler,
   deleteJob,
   fwUpgrade,
-  meterUnitsBreakerState
+  meterUnitsBreakerState,
+  touConfigImport
 } from '../../consts/meter-units.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
@@ -20,6 +21,7 @@ import { schedulerJobs, enableJob, executeJob } from '../../consts/jobs.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import * as _ from 'lodash';
+import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -82,5 +84,13 @@ export class MeterUnitsService {
 
   createFwUpgradeRequest(payload: MeterUnitsFwUpgrade): HttpRequest<any> {
     return new HttpRequest('POST', `${meterUnits}/${fwUpgrade}`, payload);
+  }
+
+  importConfigTou(payload: MeterUnitsTouConfigImport): Observable<any> {
+    return this.repository.makeRequest(this.importConfigTouRequest(payload));
+  }
+
+  importConfigTouRequest(payload: MeterUnitsTouConfigImport): HttpRequest<any> {
+    return new HttpRequest('POST', `${touConfigImport}`, payload);
   }
 }
