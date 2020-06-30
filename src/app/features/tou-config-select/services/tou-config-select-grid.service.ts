@@ -26,7 +26,7 @@ export class TouConfigSelectGridService {
       },
       {
         field: 'timeOfUseId',
-        width: 45,
+        width: 160,
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
