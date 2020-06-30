@@ -49,6 +49,7 @@ import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/p
 import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
 import { ModalContainerComponent } from './modals/components/modal-container.component';
 import { PlcMeterTouConfigImportComponent } from '../features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { PlcMeterTemplatesImportComponent } from '../features/meter-units/components/plc-meter-templates-import/plc-meter-templates-import.component';
 
 @NgModule({
   exports: [
@@ -89,7 +90,8 @@ import { PlcMeterTouConfigImportComponent } from '../features/meter-units/compon
     AutoRefreshComponent,
     ActiveJobComponent,
     ModalContainerComponent,
-    PlcMeterTouConfigImportComponent
+    PlcMeterTouConfigImportComponent,
+    PlcMeterTemplatesImportComponent
   ],
   imports: [
     CommonModule,
@@ -142,7 +144,8 @@ import { PlcMeterTouConfigImportComponent } from '../features/meter-units/compon
     GridCellLinkComponent,
     ActiveJobComponent,
     ModalContainerComponent,
-    PlcMeterTouConfigImportComponent
+    PlcMeterTouConfigImportComponent,
+    PlcMeterTemplatesImportComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,
@@ -156,7 +159,8 @@ import { PlcMeterTouConfigImportComponent } from '../features/meter-units/compon
     RegistersSelectComponent,
     TouConfigSelectComponent,
     ModalContainerComponent,
-    PlcMeterTouConfigImportComponent
+    PlcMeterTouConfigImportComponent,
+    PlcMeterTemplatesImportComponent
   ]
 })
 export class SharedModule {}

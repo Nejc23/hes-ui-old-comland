@@ -19,7 +19,8 @@ import {
   onDemandDisconnect,
   triggerSetTimeOfUse,
   onDemandDisconnectorState,
-  onDemandData
+  onDemandData,
+  importTemplates
 } from '../../consts/my-grid-link.const';
 
 @Injectable({
@@ -89,5 +90,14 @@ export class MyGridLinkService {
 
   getOnDemandDataProcessingRequest(requestId: string): HttpRequest<OnDemandRequestData> {
     return new HttpRequest('GET', `${enumMyGridLink.dataProcessing}/${requestId}${onDemandData}`);
+  }
+
+  // trigger TOU
+  postMyGridTemplatesImport(params: string): Observable<any> {
+    return this.repository.makeRequest(this.postMyGridTemplatesImportRequest(params));
+  }
+
+  postMyGridTemplatesImportRequest(params: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.templating}${importTemplates}`, params);
   }
 }

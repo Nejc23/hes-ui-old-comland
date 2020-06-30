@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PlcMeterTouConfigImportComponent } from 'src/app/features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { PlcMeterTemplatesImportComponent } from 'src/app/features/meter-units/components/plc-meter-templates-import/plc-meter-templates-import.component';
 
 @Component({
   selector: 'app-modal-container',
@@ -18,7 +19,10 @@ export class ModalContainerComponent implements OnDestroy {
     console.log(router.url);
     route.params.pipe(takeUntil(this.destroy)).subscribe(params => {
       // When router navigates on this component is takes the params and opens up the photo detail modal
-      this.currentDialog = this.modalService.open(PlcMeterTouConfigImportComponent, { centered: true });
+      this.currentDialog = this.modalService.open(
+        router.url === '/importTemplates' ? PlcMeterTemplatesImportComponent : PlcMeterTouConfigImportComponent,
+        { centered: true }
+      );
       this.currentDialog.componentInstance.photo = params.id;
 
       // Go back to home page after the modal is closed
