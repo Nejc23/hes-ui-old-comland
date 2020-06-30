@@ -107,13 +107,12 @@ export class BaseTemplateComponent implements OnInit {
     } else {
       this.sidebarItems = this.sidebarService.getSidebarItems();
     }
-
     // fill submenu for meter units
-    this.sidebarMeterUnitsItems = this.sidebarService.getSidebarMeterUnitsItems();
     this.fillMeterUnits();
   }
 
   fillMeterUnits() {
+    const sidebarItems = this.sidebarService.getSidebarMeterUnitsItems();
     this.codeList.meterUnitTypeCodelist().subscribe(list => {
       if (list && list.length > 0) {
         list.forEach(element => {
@@ -123,8 +122,9 @@ export class BaseTemplateComponent implements OnInit {
             hasChildren: false,
             children: []
           };
-          this.sidebarMeterUnitsItems.push(newElement);
+          sidebarItems.push(newElement);
         });
+        this.sidebarMeterUnitsItems = sidebarItems;
       }
     });
   }
