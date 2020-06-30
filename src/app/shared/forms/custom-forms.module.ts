@@ -25,6 +25,7 @@ import { TimePickerComponent } from './components/time-picker/time-picker.compon
 import { DateTimePickerComponent } from './components/datetime-picker/datetime-picker.component';
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadsModule } from '@progress/kendo-angular-upload';
+import { FileSelectComponent } from './components/file-select/file-select.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -51,7 +52,8 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
     DateInputsModule,
     TimePickerComponent,
     DateTimePickerComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    FileSelectComponent
   ],
   declarations: [
     InputTextComponent,
@@ -72,7 +74,8 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
     InputMultiselectComponent,
     TimePickerComponent,
     DateTimePickerComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    FileSelectComponent
   ],
   imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule, DateInputsModule, UploadsModule]
 })

@@ -1,0 +1,30 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>TOU Import configuration</div>
+
+  <div modal-body>
+    <ng-container>
+      <div class="form-row">
+        <div class="col-12">
+            <app-file-select label="File" [form]="form" [property]="imageProperty" 
+                [multiple]="false"
+                [allowedExtensions]="allowedExt"
+                [textExplanation]="'can only select one XML file.'"
+                (selectEvent)="selected($event)"
+                i18n-label></app-file-select>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
+          i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="save()"><span
+            i18n>Import</span></button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+

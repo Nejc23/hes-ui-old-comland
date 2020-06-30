@@ -47,6 +47,8 @@ import { GridCellActiveJobStatusComponent } from './popover/components/grid-cust
 import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
 import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
+import { ModalContainerComponent } from './modals/components/modal-container.component';
+import { PlcMeterTouConfigImportComponent } from '../features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
 
 @NgModule({
   exports: [
@@ -85,7 +87,9 @@ import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job
     PipesModule,
     BreadcrumbsModule,
     AutoRefreshComponent,
-    ActiveJobComponent
+    ActiveJobComponent,
+    ModalContainerComponent,
+    PlcMeterTouConfigImportComponent
   ],
   imports: [
     CommonModule,
@@ -136,7 +140,9 @@ import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job
     IdentityErrorComponent,
     GridCellActiveJobStatusComponent,
     GridCellLinkComponent,
-    ActiveJobComponent
+    ActiveJobComponent,
+    ModalContainerComponent,
+    PlcMeterTouConfigImportComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,
@@ -148,7 +154,9 @@ import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
-    TouConfigSelectComponent
+    TouConfigSelectComponent,
+    ModalContainerComponent,
+    PlcMeterTouConfigImportComponent
   ]
 })
 export class SharedModule {}

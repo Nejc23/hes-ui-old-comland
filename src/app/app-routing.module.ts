@@ -6,6 +6,7 @@ import { PermissionsGuard } from './core/guards/permissions.guard';
 import { UserLoginComponent } from './features/users/user-login.component';
 import { Page404Component } from './shared/404/page-404.component';
 import { IdentityErrorComponent } from './shared/IdentityError/identity-error.component';
+import { ModalContainerComponent } from './shared/modals/components/modal-container.component';
 
 const appRoutes: Routes = [
   {
@@ -36,6 +37,10 @@ const appRoutes: Routes = [
       {
         path: 'schedulerJobs',
         loadChildren: 'src/app/features/jobs/modules/scheduler-jobs.module#SchedulerJobsModule'
+      },
+      {
+        path: 'importTouConfiguration',
+        component: ModalContainerComponent
       },
       {
         path: 'help',
