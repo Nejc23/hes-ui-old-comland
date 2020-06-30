@@ -96,7 +96,15 @@ const data: MeterUnitsList[] = [
     moduleId: '22222',
     parent: '77777',
     timeOfUseId: '5555',
-    jobStatus: 'Running'
+    jobStatus: 'Running',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -115,7 +123,15 @@ const data: MeterUnitsList[] = [
     moduleId: '22252',
     parent: '774777',
     timeOfUseId: '55455',
-    jobStatus: 'Running'
+    jobStatus: 'Running',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '22cfeaae-463a-4055-8632-a6818ba77d81',
@@ -134,7 +150,15 @@ const data: MeterUnitsList[] = [
     moduleId: '222522',
     parent: '774777',
     timeOfUseId: '53555',
-    jobStatus: 'Running'
+    jobStatus: 'Running',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
@@ -153,7 +177,15 @@ const data: MeterUnitsList[] = [
     moduleId: '225222',
     parent: '777677',
     timeOfUseId: '55455',
-    jobStatus: 'Success'
+    jobStatus: 'Success',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
@@ -172,7 +204,15 @@ const data: MeterUnitsList[] = [
     moduleId: '222522',
     parent: '776777',
     timeOfUseId: '5575',
-    jobStatus: 'Success'
+    jobStatus: 'Success',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
@@ -191,7 +231,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 2',
     timeOfUseId: 'TimeOfUse - 17',
     tags: null,
-    jobStatus: 'Success'
+    jobStatus: 'Success',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'e4694732-a282-477c-9c47-79ca08f64911',
@@ -210,7 +258,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 31',
     timeOfUseId: 'TimeOfUse - 21',
     tags: null,
-    jobStatus: 'Failed'
+    jobStatus: 'Failed',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '4db50891-45dc-4910-bc8e-1d1c15862a68',
@@ -229,7 +285,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 36',
     timeOfUseId: 'TimeOfUse - 4',
     tags: ['tag1', 'tag3', 'tag5'],
-    jobStatus: 'Pending'
+    jobStatus: 'Pending',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '7f7e9055-ad99-479f-956f-903022e1cccd',
@@ -248,7 +312,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 33',
     timeOfUseId: 'TimeOfUse - 15',
     tags: ['tag31', 'tag32'],
-    jobStatus: 'Failed'
+    jobStatus: 'Failed',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
@@ -267,7 +339,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 13',
     timeOfUseId: 'TimeOfUse - 10',
     tags: ['tag1', 'tag3', 'tag5'],
-    jobStatus: 'Pending'
+    jobStatus: 'Pending',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
@@ -286,7 +366,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 30',
     timeOfUseId: 'TimeOfUse - 17',
     tags: null,
-    jobStatus: 'Failed'
+    jobStatus: 'Failed',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
@@ -305,7 +393,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 29',
     timeOfUseId: 'TimeOfUse - 12',
     tags: ['tag1', 'tag3', 'tag5'],
-    jobStatus: 'Failed'
+    jobStatus: 'Failed',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
@@ -324,7 +420,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 12',
     timeOfUseId: 'TimeOfUse - 33',
     tags: null,
-    jobStatus: null
+    jobStatus: null,
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
@@ -343,7 +447,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 44',
     timeOfUseId: 'TimeOfUse - 13',
     tags: ['tag31', 'tag32'],
-    jobStatus: null
+    jobStatus: null,
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
@@ -362,7 +474,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 24',
     timeOfUseId: 'TimeOfUse - 26',
     tags: null,
-    jobStatus: null
+    jobStatus: null,
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
@@ -381,7 +501,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 48',
     timeOfUseId: 'TimeOfUse - 27',
     tags: ['tag1', 'tag3', 'tag5'],
-    jobStatus: 'Running'
+    jobStatus: 'Running',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
@@ -400,7 +528,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 30',
     timeOfUseId: 'TimeOfUse - 3',
     tags: null,
-    jobStatus: 'Failed'
+    jobStatus: 'Failed',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
@@ -419,7 +555,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 34',
     timeOfUseId: 'TimeOfUse - 32',
     tags: null,
-    jobStatus: 'Success'
+    jobStatus: 'Success',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: 'r42234-9c3d-46ea-bbdd-4770baefafbf',
@@ -438,7 +582,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 134',
     timeOfUseId: 'TimeOfUse - 322',
     tags: null,
-    jobStatus: 'Pending'
+    jobStatus: 'Pending',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '90976-9c3d-46ea-bbdd-4770baefafbf',
@@ -457,7 +609,15 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 331',
     timeOfUseId: 'TimeOfUse - 2123',
     tags: null,
-    jobStatus: 'Pending'
+    jobStatus: 'Pending',
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   },
   {
     id: '90976-9c3d-46ea-642234-4770baefafbf',
@@ -476,6 +636,14 @@ const data: MeterUnitsList[] = [
     parent: 'Parent - 12',
     timeOfUseId: 'TimeOfUse - 22',
     tags: null,
-    jobStatus: null
+    jobStatus: null,
+    configurationId: 'conf1',
+    id1: 'id1',
+    id2: 'id2',
+    id3: 'id3',
+    id4: 'id4',
+    id6: 'id6',
+    logicalDeviceName: 'device name 1',
+    parametrisationId: 'param 1'
   }
 ];

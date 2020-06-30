@@ -87,7 +87,15 @@ describe('Pact consumer test', () => {
         moduleId: '22222',
         parent: '77777',
         timeOfUseId: '5555',
-        jobStatus: 'Success'
+        jobStatus: 'Success',
+        configurationId: 'conf1',
+        id1: 'id1',
+        id2: 'id2',
+        id3: 'id3',
+        id4: 'id4',
+        id6: 'id6',
+        logicalDeviceName: 'device name 1',
+        parametrisationId: 'param 1'
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -106,7 +114,15 @@ describe('Pact consumer test', () => {
         moduleId: '22252',
         parent: '774777',
         timeOfUseId: '55455',
-        jobStatus: 'Failed'
+        jobStatus: 'Failed',
+        configurationId: 'conf1',
+        id1: 'id1',
+        id2: 'id2',
+        id3: 'id3',
+        id4: 'id4',
+        id6: 'id6',
+        logicalDeviceName: 'device name 1',
+        parametrisationId: 'param 1'
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -125,7 +141,15 @@ describe('Pact consumer test', () => {
         moduleId: '22252',
         parent: '774777',
         timeOfUseId: '55455',
-        jobStatus: 'Running'
+        jobStatus: 'Running',
+        configurationId: 'conf1',
+        id1: 'id1',
+        id2: 'id2',
+        id3: 'id3',
+        id4: 'id4',
+        id6: 'id6',
+        logicalDeviceName: 'device name 1',
+        parametrisationId: 'param 1'
       }
     ];
 

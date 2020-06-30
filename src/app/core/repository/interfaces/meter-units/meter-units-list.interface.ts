@@ -18,4 +18,12 @@ export interface MeterUnitsList {
   breakerState: string;
   tags: string[];
   jobStatus: string;
+  configurationId: string;
+  logicalDeviceName: string;
+  id1: string;
+  id2: string;
+  id3: string;
+  id4: string;
+  id6: string;
+  parametrisationId: string;
 }

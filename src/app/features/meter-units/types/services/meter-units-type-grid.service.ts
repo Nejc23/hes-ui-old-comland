@@ -176,6 +176,46 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Time of use Id')
       },
       {
+        field: 'id1',
+        headerName: this.i18n('ID1'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID1'),
+        hide: true
+      },
+      {
+        field: 'id2',
+        headerName: this.i18n('ID2'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID2'),
+        hide: true
+      },
+      {
+        field: 'id3',
+        headerName: this.i18n('ID3'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID3'),
+        hide: true
+      },
+      {
+        field: 'id4',
+        headerName: this.i18n('ID4'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID4'),
+        hide: true
+      },
+      {
         field: 'id5',
         headerName: this.i18n('ID5'),
         pinned: false,
@@ -183,6 +223,44 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: this.i18n('ID5')
+      },
+      {
+        field: 'id6',
+        headerName: this.i18n('ID6'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID6'),
+        hide: true
+      },
+      {
+        field: 'configurationId',
+        headerName: this.i18n('Configuration Id'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('Configuration Id')
+      },
+      {
+        field: 'parametrisationId',
+        headerName: this.i18n('Parametrisation Id'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('Parametrisation Id')
+      },
+      {
+        field: 'logicalDeviceName',
+        headerName: this.i18n('Logical device name'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellNameComponent',
+        headerTooltip: this.i18n('Logical device name'),
+        hide: true
       },
       // {
       //   field: 'childInfo',
