@@ -763,10 +763,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     // this.bulkOperation(MeterUnitsTypeEnum.touConfig);
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
-    // TODO: uncomment this, delete next line -> selectedRows.map(row => deviceIdsParam.push(row.id));
+    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
     // TODO: ONLY FOR TESTING !
-    deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
     modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
     modalRef.result.then(
@@ -786,10 +786,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onUpgrade() {
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
-    // TODO: uncomment this, delete next line -> selectedRows.map(row => deviceIdsParam.push(row.id));
+    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
     // TODO: ONLY FOR TESTING !
-    deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
     const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
     modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
