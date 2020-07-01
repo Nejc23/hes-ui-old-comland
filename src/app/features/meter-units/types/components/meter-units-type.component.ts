@@ -292,6 +292,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+    window.onresize = () => {
+      this.gridApi.sizeColumnsToFit();
+    };
     this.icons = {
       filter: ''
     };
@@ -401,7 +404,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     return false;
   }
   onFirstDataRendered(params) {
-    params.api.sizeColumnsToFit();
+    //  params.api.sizeColumnsToFit();
     params.api.showLoadingOverlay();
   }
 

@@ -128,6 +128,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
+    window.onresize = () => {
+      this.gridApi.sizeColumnsToFit();
+    };
 
     const that = this;
     const datasource = {
@@ -200,7 +203,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   }
 
   onFirstDataRendered(params) {
-    params.api.sizeColumnsToFit();
+    // params.api.sizeColumnsToFit();
     params.api.showLoadingOverlay();
   }
 
