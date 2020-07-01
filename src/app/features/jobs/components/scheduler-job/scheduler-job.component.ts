@@ -89,7 +89,8 @@ export class SchedulerJobComponent implements OnInit {
       [this.timeUnitProperty]: [
         formData ? this.jobsTimeUnits.find(x => x.id === formData.timeUnit) : this.defaultTimeUnit,
         Validators.required
-      ]
+      ],
+      [this.enableProperty]: [formData ? formData.enable : true]
     });
   }
 
@@ -133,7 +134,7 @@ export class SchedulerJobComponent implements OnInit {
         this.form.get(this.intervalRangeProperty).value !== null ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
       timeUnit:
         this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0,
-      enable: false
+      enable: this.form.get(this.enableProperty).value
     };
 
     return formData;
@@ -303,6 +304,10 @@ export class SchedulerJobComponent implements OnInit {
 
   get timeUnitProperty() {
     return nameOf<SchedulerJobForm>(o => o.timeUnit);
+  }
+
+  get enableProperty() {
+    return nameOf<SchedulerJobForm>(o => o.enable);
   }
 
   // properties - END

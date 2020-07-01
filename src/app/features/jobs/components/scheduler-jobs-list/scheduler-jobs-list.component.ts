@@ -19,6 +19,7 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -69,7 +70,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     public staticTextService: JobsStaticTextService,
     private eventService: SchedulerJobsEventEmitterService,
     private formUtils: FormsUtilsService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private authService: AuthService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -108,6 +110,21 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     return [];
   }
 
+  loadData(instance: SchedulerJobsListComponent, paramsRow: any) {
+    instance.schedulerJobsService.getSchedulerJobsList(instance.requestModel).subscribe(data => {
+      instance.gridApi.hideOverlay();
+      instance.totalCount = data.totalCount;
+      if ((data === undefined || data == null || data.totalCount === 0) && instance.noSearch()) {
+        instance.noData = true;
+      } else if (data.totalCount === 0) {
+        instance.gridApi.showNoRowsOverlay();
+      }
+
+      instance.gridApi.paginationGoToPage(instance.schedulerJobsListGridService.getSessionSettingsPageIndex());
+      paramsRow.successCallback(data.data, data.totalCount);
+    });
+  }
+
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
@@ -119,18 +136,22 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.searchModel = that.setSearch();
-        that.schedulerJobsService.getSchedulerJobsList(that.requestModel).subscribe(data => {
-          that.gridApi.hideOverlay();
-          that.totalCount = data.totalCount;
-          if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {
-            that.noData = true;
-          } else if (data.totalCount === 0) {
-            that.gridApi.showNoRowsOverlay();
-          }
-
-          that.gridApi.paginationGoToPage(that.schedulerJobsListGridService.getSessionSettingsPageIndex());
-          paramsRow.successCallback(data.data, data.totalCount);
-        });
+        if (that.authService.isRefreshNeeded2()) {
+          that.authService
+            .renewToken()
+            .then(value => {
+              that.authService.user = value;
+              that.authService.saveTokenAndSetUserRights2(value, '');
+              that.loadData(that, paramsRow);
+            })
+            .catch(err => {
+              if (err.message === 'login_required') {
+                that.authService.login().catch(err2 => console.log(err2));
+              }
+            });
+        } else {
+          that.loadData(that, paramsRow);
+        }
       }
     };
     this.gridApi.setServerSideDatasource(datasource);

@@ -31,7 +31,7 @@ export class PlcMeterReadScheduleService {
       usePointer: values.usePointer,
       intervalRange: values.intervalRange,
       timeUnit: values.timeUnit,
-      enable: false
+      enable: values.enable
     };
 
     return serviceData;
