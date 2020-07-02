@@ -72,7 +72,7 @@ export class SchedulerJobsListGridService {
       {
         field: 'nextRun',
         suppressMenu: true,
-        sortable: true,
+        sortable: false,
         suppressMovable: true,
         lockPosition: true,
         cellRenderer: 'gridCellNextRunComponent',
