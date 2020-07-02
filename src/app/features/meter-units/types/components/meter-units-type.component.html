@@ -26,10 +26,10 @@
       <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
       <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear selected</span></a></u></strong></small>
     </div>
-    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
-    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
+    <!-- <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button> -->
 
-    <div class="btn-group dropdown" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs">
+    <!-- <div class="btn-group dropdown" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs">
       <button  type="button" class="btn btn-link"
         (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
       <button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
@@ -39,7 +39,10 @@
         <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>Assign jobs</a>
         <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>De-assign jobs</a>
       </div>
-    </div>
+    </div> -->
+
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" type="button" class="btn btn-link"
+    (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
 
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" type="button" class="btn btn-link"
             (click)="onBreakerStatus()"><i class="far fa-list-alt"></i><span i18n>Breaker Status</span></button>
@@ -51,8 +54,8 @@
             (click)="onSetLimiter()"><i class="far fa-exclamation-triangle"></i><span i18n>Set Limiter</span></button>
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" type="button" class="btn btn-link"
             (click)="onTou()"><i class="far fa-cog"></i><span i18n>TOU</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
-            (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
+    <!-- <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
+            (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button> -->
   </div>
 
   <!-- ag-grid -->
