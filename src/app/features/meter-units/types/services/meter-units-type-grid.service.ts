@@ -149,15 +149,6 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Module Id')
       },
       {
-        field: 'meterId',
-        headerName: this.i18n('Meter Id'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellMeterIdComponent',
-        headerTooltip: this.i18n('Meter Id')
-      },
-      {
         field: 'firmware',
         headerName: this.i18n('Firmware'),
         pinned: false,
