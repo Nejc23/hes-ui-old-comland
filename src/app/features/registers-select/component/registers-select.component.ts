@@ -45,15 +45,12 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(`changes = `, changes);
-    this.selectedRegisters = changes.selectedRegisters.currentValue;
-    this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
-    if (this.selectedRegisters) {
-      // this.rowData = _.filter(this.allRowData, data => this.selectedRegisters.includes(data.id));
-      // console.log(`this.allRowData = `,this.rowData);
-      // console.log(`this.selectedRegisters = `,this.selectedRegisters)
-      // this.totalCount = this.allRowData.length;
+    if (changes.selectedRegisters.currentValue) {
+      this.selectedRegisters = changes.selectedRegisters.currentValue;
+      this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
       this.selectRows(this.gridApi);
+    } else {
+      this.loadData();
     }
   }
 
@@ -65,7 +62,6 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.selectRows(this.gridApi);
   }
 
   onFirstDataRendered(params) {
@@ -73,8 +69,6 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
   }
 
   selectRows(api: any) {
-    //console.log(`api = `, api);
-    //console.log(`selectedRegisters = `, this.selectedRegisters);
     if (api) {
       api.forEachNode(node => {
         const selectedRows = this.selectedRegisters;
@@ -90,19 +84,21 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
     }
   }
 
-  ngOnInit() {
-    this.form = this.createForm();
-    this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
+  loadData() {
     if (!this.deviceFiltersAndSearch) {
       this.deviceFiltersAndSearch = { id: [], filter: null };
     }
-    //console.log(`deviceFiltersAndSearch = `, this.deviceFiltersAndSearch);
     this.rowData$ = this.registersSelectService.getDeviceRegisters(this.deviceFiltersAndSearch);
     this.rowData$.subscribe(x => {
       this.allRowData = x;
       this.totalCount = this.allRowData ? this.allRowData.length : 0;
       this.searchChange();
     });
+  }
+
+  ngOnInit() {
+    this.form = this.createForm();
+    this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
   }
 
   getSelectedRowIds() {
