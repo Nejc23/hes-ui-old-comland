@@ -47,7 +47,9 @@ export class SchedulerJobsListGridService {
         field: 'active',
         cellRenderer: 'gridCellActiveComponent',
         headerName: this.i18n('Active'),
-        headerTooltip: this.i18n('Active')
+        headerTooltip: this.i18n('Active'),
+        minWidth: 100,
+        maxWidth: 100
       },
       {
         field: 'type',
@@ -89,6 +91,8 @@ export class SchedulerJobsListGridService {
       {
         field: 'id',
         width: 60,
+        minWidth: 60,
+        maxWidth: 60,
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
@@ -100,6 +104,8 @@ export class SchedulerJobsListGridService {
       {
         field: 'id',
         width: 60,
+        minWidth: 60,
+        maxWidth: 60,
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
