@@ -45,3 +45,8 @@ Access url  https://advance-hes.comland.si:9443/
 ## Translation commands
 `npm run translation` - creates/updates translation file. Location of translation files is `src/assets/i18n`.
 Translation files can be updated in PoEdit editor.
+
+## Production build
+nmp install
+npm postinstall
+npm run build-production[-amera][-ePointHES]
