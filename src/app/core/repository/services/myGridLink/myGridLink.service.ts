@@ -84,11 +84,11 @@ export class MyGridLinkService {
   }
 
   // get data returned on-demand requests
-  getOnDemandDataProcessing(requestId: string): Observable<OnDemandRequestData> {
+  getOnDemandDataProcessing(requestId: string): Observable<OnDemandRequestData[]> {
     return this.repository.makeRequest(this.getOnDemandDataProcessingRequest(requestId));
   }
 
-  getOnDemandDataProcessingRequest(requestId: string): HttpRequest<OnDemandRequestData> {
+  getOnDemandDataProcessingRequest(requestId: string): HttpRequest<OnDemandRequestData[]> {
     return new HttpRequest('GET', `${enumMyGridLink.dataProcessing}/${requestId}${onDemandData}`);
   }
 

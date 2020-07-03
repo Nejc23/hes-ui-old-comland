@@ -44,7 +44,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
   headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
-  taskStatusOK = 'TASK_SUCCESS",';
+  taskStatusOK = 'TASK_SUCCESS';
   refreshInterval = gridRefreshInterval;
 
   // grid variables
@@ -825,8 +825,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       requestIds.map(requestId =>
         this.service.getMyGridLastStatus(requestId).subscribe(results => {
           const okRequest = _.find(results, x => x.status === this.taskStatusOK && x.isFinished);
+          console.log(okRequest);
           if (okRequest !== undefined) {
             const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
+            console.log(badRequest);
             if (badRequest === undefined) {
               // no devices with unsuccessful status, we can delete requestId from session
               this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
@@ -835,7 +837,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               // 3th step for breaker state
               if (isBreakerState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
-                  // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
+                  console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
                   if (resultsBreakerState) {
                     this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
                   }

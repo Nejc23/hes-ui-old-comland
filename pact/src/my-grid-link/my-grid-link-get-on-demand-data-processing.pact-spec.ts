@@ -26,15 +26,17 @@ describe('Pact consumer test', () => {
   });
 
   const requestId = '0a09afe6-143e-4c9f-95dc-6f0b90f95455';
-  const responseBody: OnDemandRequestData = {
-    deviceId: '717d9fd6-478e-4c72-8a3a-0722d85a07b1',
-    data: [
-      {
-        objectType: 'DisconnectorState',
-        value: 'Disconnected'
-      }
-    ]
-  };
+  const responseBody: OnDemandRequestData[] = [
+    {
+      deviceId: '717d9fd6-478e-4c72-8a3a-0722d85a07b1',
+      data: [
+        {
+          objectType: 'DisconnectorState',
+          value: 'Disconnected'
+        }
+      ]
+    }
+  ];
 
   describe('myGrid.link get on demand data processing', () => {
     beforeAll(done => {
@@ -68,7 +70,7 @@ describe('Pact consumer test', () => {
 
     it('should make request for get on demand data processing of requested id from myGrid.link', done => {
       service.getOnDemandDataProcessing(requestId).subscribe(
-        (res: OnDemandRequestData) => {
+        (res: OnDemandRequestData[]) => {
           expect(res).toEqual(responseBody);
           done();
         },

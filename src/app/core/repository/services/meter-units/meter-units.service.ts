@@ -38,11 +38,11 @@ export class MeterUnitsService {
     return new HttpRequest('POST', meterUnits, param);
   }
 
-  updateReaderState(param: OnDemandRequestData): Observable<MeterUnitsList> {
+  updateReaderState(param: OnDemandRequestData[]): Observable<MeterUnitsList> {
     return this.repository.makeRequest(this.updateReaderStateRequest(param));
   }
 
-  updateReaderStateRequest(param: OnDemandRequestData): HttpRequest<any> {
+  updateReaderStateRequest(param: OnDemandRequestData[]): HttpRequest<any> {
     return new HttpRequest('PUT', meterUnitsBreakerState, param);
   }
 
