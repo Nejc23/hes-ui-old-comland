@@ -44,7 +44,7 @@ export class GridCellEditComponent implements ICellRendererAngularComp {
     };
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.selectedDeviceId = params.data.id;
+    component.selectedJobId = params.data.id;
 
     modalRef.result.then(
       data => {

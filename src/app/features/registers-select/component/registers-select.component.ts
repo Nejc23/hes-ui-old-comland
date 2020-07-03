@@ -12,14 +12,15 @@ import { ActionFormStaticTextService } from '../../data-concentrator-units/compo
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/registers-select/registers-select-request.interface';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 
 @Component({
   selector: 'app-registers-select',
   templateUrl: './registers-select.component.html'
 })
-export class RegistersSelectComponent implements OnInit, OnChanges {
+export class RegistersSelectComponent implements OnInit {
   @Input() type = 'meter';
-  @Input() selectedRegisters: RegistersSelectRequest[];
+  @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
@@ -41,18 +42,9 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
     private registersSelectGridService: RegistersSelectGridService,
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
-    private formUtils: FormsUtilsService
+    private formUtils: FormsUtilsService,
+    private jobsService: JobsService
   ) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.selectedRegisters.currentValue) {
-      this.selectedRegisters = changes.selectedRegisters.currentValue;
-      this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
-      this.selectRows(this.gridApi);
-    } else {
-      this.loadData();
-    }
-  }
 
   createForm(): FormGroup {
     return this.fb.group({
@@ -62,19 +54,19 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
 
   onGridReady(params) {
     this.gridApi = params.api;
+    this.loadData();
   }
 
   onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
   }
 
-  selectRows(api: any) {
-    if (api) {
-      api.forEachNode(node => {
-        const selectedRows = this.selectedRegisters;
+  selectRows(selectedRows: RegistersSelectRequest[]) {
+    if (this.gridApi) {
+      this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
+      this.gridApi.forEachNode(node => {
         if (
           node.data !== undefined &&
-          selectedRows !== undefined &&
           selectedRows.length > 0 &&
           _.find(selectedRows, x => x === node.data.id && !node.selected) !== undefined
         ) {
@@ -93,6 +85,11 @@ export class RegistersSelectComponent implements OnInit, OnChanges {
       this.allRowData = x;
       this.totalCount = this.allRowData ? this.allRowData.length : 0;
       this.searchChange();
+      if (this.selectedJobId) {
+        this.jobsService.getJob(this.selectedJobId).subscribe(data => {
+          this.selectRows(data.registers);
+        });
+      }
     });
   }
 

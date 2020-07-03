@@ -25,7 +25,7 @@ import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/regis
 })
 export class SchedulerJobComponent implements OnInit {
   @ViewChild(RegistersSelectComponent, { static: true }) registers;
-  @Input() selectedDeviceId: string;
+  @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
   form: FormGroup;
@@ -56,8 +56,6 @@ export class SchedulerJobComponent implements OnInit {
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
   defaultTimeUnit: Codelist<number>;
-
-  currentJobSelectedRegisters: RegistersSelectRequest[];
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -100,10 +98,9 @@ export class SchedulerJobComponent implements OnInit {
     this.jobsTimeUnits$.subscribe(units => {
       this.jobsTimeUnits = units;
       this.defaultTimeUnit = this.jobsTimeUnits.find(x => x.id === 3);
-      if (this.selectedDeviceId) {
-        this.jobsService.getJob(this.selectedDeviceId).subscribe(data => {
+      if (this.selectedJobId) {
+        this.jobsService.getJob(this.selectedJobId).subscribe(data => {
           this.selectedId = data.readOptions;
-          this.currentJobSelectedRegisters = data.registers;
           this.form = this.createForm(data);
           this.changeReadOptionId();
           //console.log(`data = `, data);
@@ -159,9 +156,9 @@ export class SchedulerJobComponent implements OnInit {
     // console.log(values);
     let request: Observable<SchedulerJob> = null;
     let operation = this.i18n('added');
-    if (this.selectedDeviceId) {
+    if (this.selectedJobId) {
       operation = this.i18n(`updated`);
-      request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedDeviceId);
+      request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
