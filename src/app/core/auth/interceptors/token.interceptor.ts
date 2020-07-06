@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { enumMyGridLink } from '../../repository/consts/my-grid-link.const';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
+  private refreshTokenInProgress = false;
+  private refreshTokenSubject: Subject<any> = new BehaviorSubject<any>(null);
+
   constructor(private authService: AuthService) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // authorization token for myGrid.Link API-s
@@ -14,9 +17,27 @@ export class TokenInterceptor implements HttpInterceptor {
     //      return next.handle(this.createAuthorizationTokenMyGridLinkApi(request));
     //    } else {
     // authorization token for others API-s
+
+    const accessExpired = this.authService.isRefreshNeeded2();
+
     if (!this.authService.getAuthToken()) {
       return next.handle(request);
     }
+
+    if (accessExpired) {
+      if (!this.refreshTokenInProgress) {
+        this.refreshTokenInProgress = true;
+        this.refreshTokenSubject.next(null);
+
+        this.authService.renewToken().then(value => {
+          this.authService.user = value;
+          this.authService.saveTokenAndSetUserRights2(value, '');
+          this.refreshTokenInProgress = false;
+          return next.handle(this.createAuthorizationTokenApi(request));
+        });
+      }
+    }
+
     return next.handle(this.createAuthorizationTokenApi(request));
     //    }
   }
