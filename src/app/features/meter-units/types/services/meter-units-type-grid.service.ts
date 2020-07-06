@@ -330,6 +330,7 @@ export class MeterUnitsTypeGridService {
         filter: true
       },
       animateRows: configAgGrid.animateRows,
+      isRowSelectable: this.isRowSelectable,
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
@@ -370,6 +371,10 @@ export class MeterUnitsTypeGridService {
         }
       ]
     };
+  }
+
+  public isRowSelectable(rowNode: any) {
+    return rowNode.data ? rowNode.data.templateId : false;
   }
 
   public onColumnVisibility(params) {
