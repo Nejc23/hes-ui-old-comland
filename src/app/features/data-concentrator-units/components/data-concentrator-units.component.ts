@@ -318,7 +318,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     // console.log(params);
     // this.autoSizeAll(params);
     // params.api.sizeColumnsToFit();
-    params.api.showLoadingOverlay();
+    // params.api.showLoadingOverlay();
   }
 
   // ag-grid change visibillity of columns
