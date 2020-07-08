@@ -405,7 +405,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
   onFirstDataRendered(params) {
     //  params.api.sizeColumnsToFit();
-    params.api.showLoadingOverlay();
+    // params.api.showLoadingOverlay();
   }
 
   // ag-grid change visibillity of columns

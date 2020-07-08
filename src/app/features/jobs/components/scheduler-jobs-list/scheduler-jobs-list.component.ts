@@ -204,7 +204,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   onFirstDataRendered(params) {
     // params.api.sizeColumnsToFit();
-    params.api.showLoadingOverlay();
+    // params.api.showLoadingOverlay();
   }
 
   // on change page in the grid
