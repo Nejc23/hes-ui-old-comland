@@ -36,8 +36,9 @@ export class BaseTemplateComponent implements OnInit {
   public version = '';
   public sidebarItems: Array<SidebarItem> = [];
   public sidebarMeterUnitsItems: Array<SidebarItem> = [];
+  public sidebarConfigurationItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
-  public submenu = false;
+  public submenu = 0;
   public organisation = this.i18n('no organisation');
 
   // languages$: Codelist<string>[];
@@ -76,9 +77,11 @@ export class BaseTemplateComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects;
         if (currentUrl.includes('/meterUnits')) {
-          this.submenu = true;
+          this.submenu = 1;
+        } else if (currentUrl.includes('/configuration')) {
+          this.submenu = 2;
         } else {
-          this.submenu = false;
+          this.submenu = 0;
         }
       }
     });
@@ -109,6 +112,8 @@ export class BaseTemplateComponent implements OnInit {
     }
     // fill submenu for meter units
     this.fillMeterUnits();
+    // fill submenu for configuration
+    this.fillConfiguration();
   }
 
   fillMeterUnits() {
@@ -127,6 +132,10 @@ export class BaseTemplateComponent implements OnInit {
         this.sidebarMeterUnitsItems = sidebarItems;
       }
     });
+  }
+
+  fillConfiguration() {
+    this.sidebarConfigurationItems = this.sidebarService.getSidebarConfigurationItems();
   }
 
   ngOnInit() {

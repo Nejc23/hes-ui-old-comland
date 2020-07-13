@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { PlcMeterTouConfigImportComponent } from 'src/app/features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
 import { PlcMeterTemplatesImportComponent } from 'src/app/features/meter-units/components/plc-meter-templates-import/plc-meter-templates-import.component';
+import { ConfigurationRoute } from '../../base-template/enums/configuration.enum';
 
 @Component({
   selector: 'app-modal-container',
@@ -20,7 +21,7 @@ export class ModalContainerComponent implements OnDestroy {
     route.params.pipe(takeUntil(this.destroy)).subscribe(params => {
       // When router navigates on this component is takes the params and opens up the photo detail modal
       this.currentDialog = this.modalService.open(
-        router.url === '/importTemplates' ? PlcMeterTemplatesImportComponent : PlcMeterTouConfigImportComponent,
+        router.url.endsWith('/importTemplates') ? PlcMeterTemplatesImportComponent : PlcMeterTouConfigImportComponent,
         { centered: true }
       );
       this.currentDialog.componentInstance.photo = params.id;
@@ -28,10 +29,10 @@ export class ModalContainerComponent implements OnDestroy {
       // Go back to home page after the modal is closed
       this.currentDialog.result.then(
         result => {
-          router.navigateByUrl('/');
+          router.navigateByUrl(`/${ConfigurationRoute.configuration}`);
         },
         reason => {
-          router.navigateByUrl('/');
+          router.navigateByUrl(`/${ConfigurationRoute.configuration}`);
         }
       );
     });

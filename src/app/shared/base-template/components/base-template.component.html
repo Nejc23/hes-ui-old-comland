@@ -39,8 +39,9 @@
               href="#" (click)="reloadPage(company)">{{company.value}}</a>
           </div>
         </li>-->
-        <app-sidebar [items]="sidebarItems" class="mt-3 d-block" *ngIf="!submenu"></app-sidebar>
-        <app-sidebar-meter [items]="sidebarMeterUnitsItems" class="mt-3 d-block" *ngIf="submenu"></app-sidebar-meter>
+        <app-sidebar [items]="sidebarItems" class="mt-3 d-block" *ngIf="submenu == 0"></app-sidebar>
+        <app-sidebar-meter [items]="sidebarMeterUnitsItems" class="mt-3 d-block" *ngIf="submenu == 1"></app-sidebar-meter>
+        <app-sidebar-meter [items]="sidebarConfigurationItems" class="mt-3 d-block" *ngIf="submenu == 2"></app-sidebar-meter>
       </div>
     </ul>
 
