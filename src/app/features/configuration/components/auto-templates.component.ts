@@ -25,17 +25,17 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   public modules: Module[] = AllModules;
 
-  private columnDefs;
-  private defaultColDef;
-  private detailCellRendererParams;
-  private rowData: AutoTemplateList[];
+  public columnDefs;
+  public defaultColDef;
+  public detailCellRendererParams;
+  public rowData: AutoTemplateList[];
 
-  private context;
+  public context;
   public editType;
   public frameworkComponents;
   public gridOptions;
 
-  private headerTitle = this.staticTextService.title;
+  public headerTitle = this.staticTextService.title;
   private form: FormGroup;
 
   private expadedTemplates: string[] = [];

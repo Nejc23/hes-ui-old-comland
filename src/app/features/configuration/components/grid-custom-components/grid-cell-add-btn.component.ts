@@ -9,7 +9,7 @@ import { GridApi } from '@ag-grid-community/core';
 })
 export class GridCellAddBtnComponent implements ICellRendererAngularComp {
   public params: any;
-  private label = '';
+  public label = '';
 
   constructor(private i18n: I18n) {}
 

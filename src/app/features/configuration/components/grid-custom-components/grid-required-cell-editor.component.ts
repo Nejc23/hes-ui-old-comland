@@ -8,7 +8,7 @@ import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 })
 export class GridRequiredCellEditorComponent implements ICellEditorAngularComp {
   public params: any;
-  private form: FormGroup;
+  public form: FormGroup;
   private formName = '';
 
   constructor(private formBuilder: FormBuilder) {}

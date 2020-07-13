@@ -12,7 +12,7 @@ import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templa
 export class GridCellEditActionsComponent implements ICellRendererAngularComp, OnDestroy {
   public params: any;
   public gridApi: GridApi;
-  private hideEditDelete = false;
+  public hideEditDelete = false;
   private serviceSubscription: Subscription;
 
   constructor(private i18n: I18n, private service: AutoTemplatesGridEventEmitterService) {
