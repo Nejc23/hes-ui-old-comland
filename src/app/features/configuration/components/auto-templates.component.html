@@ -1,0 +1,27 @@
+<div class="d-flex align-items-center mb-3">
+  <app-header-title [headerTitle]="headerTitle"></app-header-title>  
+  <app-breadcrumb class="ml-auto"></app-breadcrumb>
+</div>
+
+<div>
+  <ag-grid-angular
+        class="ag-theme-epoint"
+        style="width: 100%; height: calc(100% - 25px);"
+        #agGrid
+        domLayout="autoHeight"
+        id="myGrid"
+        [modules]="modules"
+        [columnDefs]="columnDefs"
+        [headerHeight]="0"
+        [defaultColDef]="defaultColDef"
+        [masterDetail]="true"
+        [detailCellRendererParams]="detailCellRendererParams"
+        [rowData]="rowData"
+        (firstDataRendered)="onFirstDataRendered($event)"
+        (gridReady)="onGridReady($event)"
+        [frameworkComponents]="frameworkComponents"        
+        [context]="context"     
+        (rowGroupOpened)="onRowGroupOpened($event)"
+        [gridOptions]="gridOptions"                      
+      ></ag-grid-angular>
+</div>

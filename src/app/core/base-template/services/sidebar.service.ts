@@ -4,6 +4,7 @@ import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-ite
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { CodelistRepositoryService } from '../../repository/services/codelists/codelist-repository.service';
 import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
+import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.en
 export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
   private sidebarMeterUnitsItems: Array<SidebarItem> = [];
+  private sidebarConfigurationItems: Array<SidebarItem> = [];
   public headerTitle = '';
 
   constructor(private i18n: I18n) {
@@ -41,14 +43,8 @@ export class SidebarService {
         children: []
       },
       {
-        title: this.i18n(`Import templates`),
-        routeLink: '/importTemplates',
-        hasChildren: false,
-        children: []
-      },
-      {
-        title: this.i18n(`Import TOU configuration`),
-        routeLink: '/importTouConfiguration',
+        title: this.i18n(`Configuration`),
+        routeLink: '/configuration',
         hasChildren: false,
         children: []
       }
@@ -104,6 +100,41 @@ export class SidebarService {
         isBorder: true
       }*/
     ];
+
+    this.sidebarConfigurationItems = [
+      {
+        title: this.i18n(`Back to main menu`),
+        icon: 'fas fa-arrow-alt-circle-left',
+        routeLink: '/dataConcentratorUnits',
+        hasChildren: false,
+        children: []
+      },
+      {
+        title: ``,
+        routeLink: '',
+        hasChildren: false,
+        children: [],
+        isBorder: true
+      },
+      {
+        title: this.i18n(`Import templates`),
+        routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
+        hasChildren: false,
+        children: []
+      },
+      {
+        title: this.i18n(`Import TOU configuration`),
+        routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
+        hasChildren: false,
+        children: []
+      },
+      {
+        title: this.i18n(`Auto templates`),
+        routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
+        hasChildren: false,
+        children: []
+      }
+    ];
   }
 
   getSidebarItems() {
@@ -112,6 +143,10 @@ export class SidebarService {
 
   getSidebarMeterUnitsItems() {
     return [...this.sidebarMeterUnitsItems];
+  }
+
+  getSidebarConfigurationItems() {
+    return [...this.sidebarConfigurationItems];
   }
 
   getSidebarItemsMobile() {

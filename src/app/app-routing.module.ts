@@ -39,12 +39,8 @@ const appRoutes: Routes = [
         loadChildren: 'src/app/features/jobs/modules/scheduler-jobs.module#SchedulerJobsModule'
       },
       {
-        path: 'importTemplates',
-        component: ModalContainerComponent
-      },
-      {
-        path: 'importTouConfiguration',
-        component: ModalContainerComponent
+        path: 'configuration',
+        loadChildren: 'src/app/features/configuration/modules/configuration.module#ConfigurationModule'
       },
       {
         path: 'help',

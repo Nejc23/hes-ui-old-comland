@@ -20,6 +20,9 @@ import { SchedulerJobsInterceptor } from './jobs/scheduler-jobs.interceptor';
 import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
 import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
 import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
+import { AutoTemplatesListInterceptor } from './configuration/auto-templates/auto-templates-list.interceptor';
+import { AutoTemplatesRulesListInterceptor } from './configuration/auto-templates/auto-templates-rules-list.interceptor';
+import { AutoTemplatesRulesInterceptor } from './configuration/auto-templates/auto-templates-rules.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -190,6 +193,26 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitsFwUpgradeInterceptor.interceptMeterUniFwUpgradePost(request);
               }
 
+              // auto-templates
+              if (AutoTemplatesListInterceptor.canInterceptAutoTemplatesList(request)) {
+                return AutoTemplatesListInterceptor.interceptAutoTemplatesList(request);
+              }
+
+              if (AutoTemplatesRulesListInterceptor.canInterceptAutoTemplatesRulesList(request)) {
+                return AutoTemplatesRulesListInterceptor.interceptAutoTemplatesRulesList(request);
+              }
+
+              if (AutoTemplatesRulesInterceptor.canInterceptAutoTemplatesRulePost(request)) {
+                return AutoTemplatesRulesInterceptor.interceptAutoTemplatesRulePost(request);
+              }
+
+              if (AutoTemplatesRulesInterceptor.canInterceptAutoTemplatesRuleUpdate(request)) {
+                return AutoTemplatesRulesInterceptor.interceptAutoTemplatesRuleUpdate(request);
+              }
+
+              if (AutoTemplatesRulesInterceptor.canInterceptAutoTemplatesRuleDelete(request)) {
+                return AutoTemplatesRulesInterceptor.interceptAutoTemplatesRuleDelete(request);
+              }
               // pass through any requests not handled above
               return next.handle(request);
             })
