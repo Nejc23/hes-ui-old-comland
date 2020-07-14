@@ -514,6 +514,28 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
   }
 
+  isFilterSet(): boolean {
+    const filterInfo: MeterUnitsLayout = this.gridFilterSessionStoreService.getGridLayout(
+      this.sessionNameForGridFilter
+    ) as MeterUnitsLayout;
+    return (
+      (filterInfo.name !== '' && filterInfo.name !== undefined) ||
+      (filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0) ||
+      (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
+      (filterInfo.vendorFilter && filterInfo.vendorFilter.value !== undefined && filterInfo.vendorFilter.value !== '') ||
+      (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
+      (filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0) ||
+      (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
+      filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
+      filterInfo.showDeletedMeterUnitsFilter
+    );
+  }
+
+  clearFilter() {
+    this.gridFilterSessionStoreService.clearGridLayout();
+    this.refreshGrid();
+  }
+
   // on change page in the grid
   onPaginationChange(params) {
     if (this.gridApi) {
@@ -867,4 +889,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       );
     }*/
   }
+
+  // isFilterSet(): boolean {
+  //   // const tmpFilter: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+  //   // return (tmpFilter.name !== '' && tmpFilter.name !== undefined)||
+  //   //   (tmpFilter.statusesFilter && tmpFilter.statusesFilter.length > 0) ||
+  //   //   (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
+  //   //   (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
+  //   //   tmpFilter.vendorFilter ||
+  //   //   (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0) ||
+  //   //   tmpFilter.showDeletedFilter;
+  // }
+
+  // clearFilter() {
+
+  // }
 }
