@@ -195,26 +195,10 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   refresh() {}
 
   clearButtonClicked() {
-    const currentFilter: MeterUnitsLayout = {
-      id: 0,
-      name: '',
-      statusesFilter: [],
-      readStatusFilter: {
-        operation: { id: '', value: '' },
-        value1: 0,
-        value2: 0
-      },
-      tagsFilter: [],
-      vendorFilter: null,
-      firmwareFilter: [],
-      breakerStateFilter: [],
-      showDeletedMeterUnitsFilter: false,
-      showOnlyMeterUnitsWithMBusInfoFilter: false,
-      gridLayout: ''
-    };
-    this.sessionFilter = currentFilter;
     this.gridFilterSessionStoreService.clearGridLayout();
-    this.form = this.createForm(null, null);
+
+    // refresh form
+    this.doFillData();
 
     // close tool-panel
     this.params.api.closeToolPanel();

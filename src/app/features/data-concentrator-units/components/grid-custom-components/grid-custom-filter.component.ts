@@ -83,7 +83,6 @@ export class GridCustomFilterComponent implements IToolPanel {
 
   fillformFromSession(x: DcuLayout[]) {
     this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-
     if (this.sessionFilter && x != undefined) {
       if (this.sessionFilter.id) {
         this.form = this.createForm(x, this.sessionFilter);
@@ -102,6 +101,8 @@ export class GridCustomFilterComponent implements IToolPanel {
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
       }
+    } else {
+      this.form = this.createForm(null, null);
     }
   }
 
@@ -165,24 +166,10 @@ export class GridCustomFilterComponent implements IToolPanel {
   refresh() {}
 
   clearButtonClicked() {
-    const currentFilter: DcuLayout = {
-      id: 0,
-      name: '',
-      statusesFilter: [],
-      readStatusFilter: {
-        operation: { id: '', value: '' },
-        value1: 0,
-        value2: 0
-      },
-      typesFilter: [],
-      tagsFilter: [],
-      vendorFilter: null,
-      showDeletedFilter: false,
-      gridLayout: ''
-    };
-    this.sessionFilter = currentFilter;
     this.gridFilterSessionStoreService.clearGridLayout();
-    this.form = this.createForm(null, null);
+
+    // reset form;
+    this.doFillData();
 
     // close tool-panel
     this.params.api.closeToolPanel();

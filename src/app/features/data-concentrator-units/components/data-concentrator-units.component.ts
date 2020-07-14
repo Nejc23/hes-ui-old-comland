@@ -417,6 +417,27 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     );
   }
 
+  isFilterSet(): boolean {
+    const tmpFilter: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+    return (
+      (tmpFilter.name !== '' && tmpFilter.name !== undefined) ||
+      (tmpFilter.statusesFilter && tmpFilter.statusesFilter.length > 0) ||
+      (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
+      (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
+      (tmpFilter.vendorFilter &&
+        tmpFilter.vendorFilter.value &&
+        tmpFilter.vendorFilter.value !== undefined &&
+        tmpFilter.vendorFilter.value !== '') ||
+      (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0) ||
+      tmpFilter.showDeletedFilter
+    );
+  }
+
+  clearFilter() {
+    this.gridFilterSessionStoreService.clearGridLayout();
+    this.refreshGrid();
+  }
+
   // on change page in the grid
   onPaginationChange(params) {
     if (this.gridApi) {
