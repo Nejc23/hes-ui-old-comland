@@ -47,7 +47,7 @@
               "i18nFile": "src/assets/i18n/messages.en.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "en",
-              "fileReplacements": [                
+              "fileReplacements": [
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -58,11 +58,11 @@
               "i18nFile": "src/assets/i18n/messages.sl.xlf",
               "i18nFormat": "xlf",
               "i18nLocale": "sl",
-              "fileReplacements": [    
+              "fileReplacements": [
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -112,7 +112,7 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -149,7 +149,7 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-cs.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -186,7 +186,7 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-de.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -257,7 +257,7 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -294,7 +294,7 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-cs.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -331,7 +331,7 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-de.ts"
-                },           
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
@@ -358,7 +358,43 @@
               "i18nLocale": "de",
               "baseHref": "/de/"
             },
-
+            "staging-en-amera": {
+              "outputPath": "c:/inetpub/wwwroot/en",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.staging.ts"
+                },
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/amera/brand.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/amera/favicon.ico"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                }
+              ],
+              "i18nFile": "src/assets/i18n/messages.en.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en",
+              "baseHref": "/en/"
+            },
 
             "production-dev": {
               "outputPath": "c:/inetpub/wwwroot/en",
@@ -484,7 +520,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/ePointHES/brand.ts"
-                }, 
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/ePointHES/favicon.ico"
@@ -531,7 +567,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/amera/brand.ts"
-                },               
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/amera/favicon.ico"
@@ -577,7 +613,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/amera/brand.ts"
-                },               
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/amera/favicon.ico"
@@ -623,7 +659,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/amera/brand.ts"
-                },               
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/amera/favicon.ico"
@@ -670,7 +706,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/ePointHES/brand.ts"
-                },               
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/ePointHES/favicon.ico"
@@ -716,7 +752,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/ePointHES/brand.ts"
-                },               
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/ePointHES/favicon.ico"
@@ -762,7 +798,7 @@
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/ePointHES/brand.ts"
-                },               
+                },
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/ePointHES/favicon.ico"
