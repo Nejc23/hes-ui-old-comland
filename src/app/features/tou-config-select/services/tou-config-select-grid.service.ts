@@ -25,14 +25,14 @@ export class TouConfigSelectGridService {
         headerCheckboxSelection: false
       },
       {
-        field: 'timeOfUseId',
+        field: 'timeOfUseName',
         width: 160,
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Id'),
-        headerTooltip: this.i18n('Id')
+        headerName: this.i18n('Name'),
+        headerTooltip: this.i18n('Name')
       },
       {
         field: 'description',
