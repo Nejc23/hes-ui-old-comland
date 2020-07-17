@@ -22,6 +22,7 @@ export class AddDcuFormComponent implements OnInit {
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
   dcuTags$: Observable<Codelist<number>[]>;
+  saveError: string;
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -107,7 +108,9 @@ export class AddDcuFormComponent implements OnInit {
           }
         }
       },
-      () => {} // error
+      errResult => {
+        this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+      } // error
     );
   }
 
