@@ -14,7 +14,6 @@ export class PlcMeterReadScheduleService {
   constructor(private jobsService: JobsService) {}
 
   transformData(values: SchedulerJobForm): SchedulerJob {
-    const currentOffset = Date.now();
     const dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime !== null ? values.dateTime : Date.now());
 
     const serviceData: SchedulerJob = {
@@ -31,7 +30,8 @@ export class PlcMeterReadScheduleService {
       usePointer: values.usePointer,
       intervalRange: values.intervalRange,
       timeUnit: values.timeUnit,
-      enable: values.enable
+      enable: values.enable,
+      actionType: values.actionType
     };
 
     return serviceData;

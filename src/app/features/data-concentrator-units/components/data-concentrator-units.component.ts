@@ -158,7 +158,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       last: this.i18n('last'),
       first: this.i18n('first'),
       previous: this.i18n('previous'),
-      loadingOoo: this.i18n('loading...')
+      loadingOoo: this.i18n('loading...'),
+
+      selectAll: this.i18n('Select All')
     };
   }
 

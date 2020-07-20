@@ -16,3 +16,6 @@ export const dcuStatuses = `${basePath}/concentrator-status-codes`;
 export const dcuTags = `${basePath}/dcu-tags`;
 export const dcuTypes = `${basePath}/concentrator-types`;
 export const dcuVendors = `${basePath}/concentrator-vendor-codes`;
+
+// DCU select
+export const dcuSelect = `${basePath}/select-concentrators`;

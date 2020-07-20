@@ -53,6 +53,7 @@ describe('Pact consumer test', () => {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
         type: 'Reading',
+        actionType: 4,
         description: 'Daily read of 15 min energy (A+)',
         nextRun: 'In 15 minutes',
         owner: 'Jan Benedičič'
@@ -60,7 +61,8 @@ describe('Pact consumer test', () => {
       {
         id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
         active: true,
-        type: 'FW Upgrade',
+        type: 'Discovery',
+        actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 30 minutes',
         owner: 'Miha Galičič'
@@ -69,6 +71,7 @@ describe('Pact consumer test', () => {
         id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
         active: true,
         type: 'Reading',
+        actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 18 hours',
         owner: 'Jan Benedičič'
@@ -76,7 +79,8 @@ describe('Pact consumer test', () => {
       {
         id: 'c129f32f-33f8-4917-a190-53dfe388cc6d',
         active: true,
-        type: 'FW Upgrade',
+        type: 'Discovery',
+        actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 1 day',
         owner: 'Miha Galičič'
@@ -85,6 +89,7 @@ describe('Pact consumer test', () => {
         id: '5f128531-0bce-46f9-b8df-264d8a3945fb',
         active: true,
         type: 'Reading',
+        actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 1 day',
         owner: 'Jan Benedičič'
@@ -92,7 +97,8 @@ describe('Pact consumer test', () => {
       {
         id: '2eee0a94-cb09-4334-b36f-796ef0e08983',
         active: false,
-        type: 'FW Upgrade',
+        type: 'Disovery',
+        actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 3 days',
         owner: 'Miha Galičič'
@@ -101,6 +107,7 @@ describe('Pact consumer test', () => {
         id: '6f3c7dc9-784e-4d8f-b6dc-913f116e94a6',
         active: true,
         type: 'Reading',
+        actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 5 days',
         owner: 'Jan Benedičič'
@@ -108,7 +115,8 @@ describe('Pact consumer test', () => {
       {
         id: '845d8f84-705a-44bd-a5e1-e27cb705ecfc',
         active: false,
-        type: 'FW Upgrade',
+        type: 'Discovery',
+        actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: 'In 7 days',
         owner: 'Miha Galičič'
