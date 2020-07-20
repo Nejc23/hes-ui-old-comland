@@ -13,6 +13,7 @@ export class InputTextComponent implements OnInit {
 
   // optional
   @Input() label: string;
+  @Input() labelRight: string;
   @Input() inputType: string;
   @Input() numberOnly = false; // input text receives only Numbers!
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)

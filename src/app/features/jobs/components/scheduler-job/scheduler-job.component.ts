@@ -116,7 +116,7 @@ export class SchedulerJobComponent implements OnInit {
     //console.log('MeterUnitsReadScheduleForm', this.form.get(this.timeUnitProperty).value);
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
-      nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
+      nMinutes: this.show_nMinutes() || this.show_nHours() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
       nHours: this.show_nHours() ? parseInt(this.form.get(this.nHoursProperty).value, 10) : 0,
       time: this.showTime() ? this.form.get(this.timeProperty).value : null,
       weekDays: this.showWeekDays() ? this.form.get(this.weekDaysProperty).value : [],
@@ -146,15 +146,15 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   save(addNew: boolean) {
-    // console.log('Save clicked!');
     // times and selected registers
     const selectedRegisters = this.registers.getSelectedRowIds();
     this.noRegisters = selectedRegisters.length === 0;
     this.form.get(this.registersProperty).setValue(selectedRegisters);
-    this.noMonthDays = this.form.get(this.monthDaysProperty).value !== null && this.form.get(this.monthDaysProperty).value.length === 0;
+    this.noMonthDays =
+      this.showMonthDays() &&
+      this.form.get(this.monthDaysProperty).value !== null &&
+      this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
-    // console.log(`selectedId = ${this.selectedId}, values = ${JSON.stringify(values)}`);
-    // console.log(values);
     let request: Observable<SchedulerJob> = null;
     let operation = this.i18n('added');
     if (this.selectedJobId) {
@@ -164,7 +164,6 @@ export class SchedulerJobComponent implements OnInit {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
     const successMessage = this.i18n(`Meter Units Read Scheduler was ${operation} successfully`);
-    // console.log(`request = ${JSON.stringify(request)}`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         // if (result) {
@@ -190,11 +189,15 @@ export class SchedulerJobComponent implements OnInit {
     this.form
       .get(this.timeProperty)
       .setValidators(_.find(selectedValuesForTimeProperty, x => x === this.selectedId) ? [Validators.required] : []);
-    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 2 ? [Validators.required] : []);
-    this.form.get(this.nHoursProperty).setValidators(this.selectedId === 3 ? [Validators.required] : []);
-    this.form.get(this.weekDaysProperty).setValidators(this.selectedId === 5 ? [Validators.required] : []);
-    this.form.get(this.monthDaysProperty).setValidators(this.selectedId === 6 ? [Validators.required] : []);
-    // console.log(`changeReadOptionId = ${this.form.get(this.readOptionsProperty).value}`);
+    this.form
+      .get(this.nMinutesProperty)
+      .setValidators(this.show_nMinutes() || this.show_nHours() ? [Validators.required, Validators.max(59)] : []);
+    this.form.get(this.nHoursProperty).setValidators(this.show_nHours() ? [Validators.required, Validators.max(23)] : []);
+    this.form.get(this.weekDaysProperty).setValidators(this.showWeekDays() ? [Validators.required] : []);
+    this.form.get(this.monthDaysProperty).setValidators(this.showMonthDays() ? [Validators.required] : []);
+    if (this.show_nHours() && !this.form.get(this.nMinutesProperty).value) {
+      this.form.get(this.nMinutesProperty).setValue(0);
+    }
   }
 
   onDayInMonthClick(dayinMonth: number) {
