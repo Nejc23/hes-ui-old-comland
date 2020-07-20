@@ -56,6 +56,7 @@ import { GridSelectionHeaderComponent } from './ag-grid/components/grid-selectio
 import { GridCellNameComponent } from './ag-grid/components/grid-cell-name.component';
 import { GridCellIdNumberComponent } from './ag-grid/components/grid-cell-id-number.component';
 import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component';
+import { AgGridSharedFunctionsService } from './ag-grid/services/ag-grid-shared-functions.service';
 
 @NgModule({
   exports: [
@@ -184,6 +185,7 @@ import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component
     ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent
-  ]
+  ],
+  providers: [AgGridSharedFunctionsService]
 })
 export class SharedModule {}

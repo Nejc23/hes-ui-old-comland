@@ -33,6 +33,7 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { PlcMeterFwUpgradeComponent } from '../../components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
+import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -120,7 +121,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private service: MyGridLinkService,
     private authService: AuthService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private agGridSharedFunctionsService: AgGridSharedFunctionsService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -292,6 +294,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+    this.agGridSharedFunctionsService.addSelectDeselectAllText();
+
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
     };

@@ -27,6 +27,7 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
+import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -92,7 +93,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     private modalService: ModalService,
     private formUtils: FormsUtilsService,
-    private authService: AuthService
+    private authService: AuthService,
+    private agGridSharedFunctionsService: AgGridSharedFunctionsService
   ) {
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -215,6 +217,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
+    this.agGridSharedFunctionsService.addSelectDeselectAllText();
+
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
     };
