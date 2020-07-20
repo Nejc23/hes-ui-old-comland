@@ -14,6 +14,8 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { AutoTemplatesGridEventEmitterService } from '../services/auto-templates-grid-event-emitter.service';
 import { GridRequiredCellEditorComponent } from './grid-custom-components/grid-required-cell-editor.component';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Component({
   selector: 'app-auto-templates',
@@ -34,6 +36,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   public editType;
   public frameworkComponents;
   public gridOptions;
+  getRowHeight;
 
   public headerTitle = this.staticTextService.title;
   private form: FormGroup;
@@ -48,6 +51,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     private serviceRepository: AutoTemplatesService,
     private event: AutoTemplatesGridEventEmitterService,
     private toast: ToastNotificationService,
+    private modalService: ModalService,
     private i18n: I18n
   ) {
     this.form = this.createForm();
@@ -56,6 +60,14 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     this.frameworkComponents = this.service.setFrameworkComponents();
     this.context = { componentParent: this };
     this.gridOptions = this.service.setGridOptions();
+    this.getRowHeight = params => {
+      if (params.node && params.node.detail) {
+        const offset = 60;
+        const allDetailRowHeight = params.data.rules.length * 1.7 * params.api.getSizesForCurrentTheme().rowHeight;
+        const gridSizes = params.api.getSizesForCurrentTheme();
+        return allDetailRowHeight + gridSizes.headerHeight + offset;
+      }
+    };
     this.columnDefs = this.service.setGridMasterDefaultColumns();
     this.detailCellRendererParams = {
       detailGridOptions: {
@@ -64,6 +76,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
         frameworkComponents: this.setFrameworkComponentsDetail(),
         editType: 'fullRow',
         suppressClickEdit: 'true',
+        suppressCellSelection: true,
         columnDefs: this.service.setGridDetailDefaultColumns(),
         defaultColDef: { flex: 1, editable: true },
         onRowEditingStopped: params => {
@@ -297,13 +310,44 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   }
 
   deleteForm(id: string) {
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    let response: Observable<any> = new Observable();
+    const operation = this.i18n('Delete');
+    response = this.serviceRepository.deleteAutoTemplateRule(id);
+    component.btnConfirmText = operation;
+    component.modalTitle = this.i18n('Confirm delete');
+    component.modalBody = this.i18n('Do you want to delete rule?');
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        response.subscribe(
+          value => {
+            this.getData();
+            this.toast.successToast(this.i18n(`Rule deleted!`));
+          },
+          e => {
+            this.toast.errorToast(this.i18n(`Server error!`));
+          }
+        );
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+
+    /*
+    messageStarted = this.i18n(`Scheduler job deleted!`);
+    messageServerError = this.i18n(`Server error!`);
+  
     const request = this.serviceRepository.deleteAutoTemplateRule(id);
     this.formUtils.deleteForm(request, this.i18n('Selected item deleted')).subscribe(
       (response: any) => {
         this.getData();
       },
       () => {}
-    );
+    );*/
   }
 
   cancelForm(grid: GridApi) {

@@ -16,6 +16,7 @@ export interface SchedulerJob {
   usePointer: boolean;
   intervalRange: number;
   timeUnit: number;
+  actionType: number;
   bulkActionsRequestParam: GridBulkActionRequestParams;
 }
 

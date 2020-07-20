@@ -4,7 +4,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormBuilder, AbstractControl, FormGroup } from '@angular/forms';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { ActionFormStaticTextService } from 'src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -20,14 +20,14 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
   templateUrl: './scheduler-jobs-list.component.html'
 })
 export class SchedulerJobsListComponent implements OnInit, OnDestroy {
-  form: FormGroup;
-
   selectedId = 1;
   totalCount = 0;
   searchTextEmpty = true;
@@ -86,12 +86,6 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
           this.refreshGrid();
         }
       }
-    });
-  }
-
-  createForm(): FormGroup {
-    return this.fb.group({
-      ['content']: ['']
     });
   }
 
@@ -226,6 +220,24 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       size: 'xl'
     };
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.refreshGrid();
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  addDiscoveryJob() {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+    const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
 
     modalRef.result.then(

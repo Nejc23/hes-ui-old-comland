@@ -1,9 +1,15 @@
 
 <div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
-  <button class="btn btn-primary btn-round" (click)="addJob()">
-    <i class="far fa-plus"></i>
-  </button>
+  <div class="dropdown">
+    <button class="btn btn-primary btn-round">
+      <i class="far fa-plus"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="javascript:void(0);" (click)="addJob()"><span i18n>Reading job</span></a>
+      <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>      
+    </div>
+  </div>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div>
 

@@ -77,6 +77,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return SchedulerJobsInterceptor.interceptSchedulerJobsList(request);
               }
 
+              if (SchedulerJobsInterceptor.canInterceptSchedulerJobs(request)) {
+                return SchedulerJobsInterceptor.interceptSchedulerJobs();
+              }
+
               // active jobs
               if (ActiveJobsInterceptor.canInterceptActiveJobs(request)) {
                 return ActiveJobsInterceptor.interceptActiveJobs(request);
@@ -213,6 +217,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (AutoTemplatesRulesInterceptor.canInterceptAutoTemplatesRuleDelete(request)) {
                 return AutoTemplatesRulesInterceptor.interceptAutoTemplatesRuleDelete(request);
               }
+
               // pass through any requests not handled above
               return next.handle(request);
             })
