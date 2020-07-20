@@ -11,6 +11,7 @@ import { GridApi, RowNode } from '@ag-grid-community/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
+import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 
 @Component({
   selector: 'app-grid-cell-edit-btn',
@@ -42,8 +43,33 @@ export class GridCellEditComponent implements ICellRendererAngularComp {
     const options: NgbModalOptions = {
       size: 'xl'
     };
+    if (params.data.actionType == 1) {
+      this.editDiscoveryJob(params, options);
+    } else {
+      this.editReadingJob(params, options);
+    }
+  }
+
+  private editReadingJob(params: any, options: NgbModalOptions) {
+    console.log(params);
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.selectedJobId = params.data.id;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.eventService.eventEmitterRefresh.emit(true);
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  private editDiscoveryJob(params: any, options: NgbModalOptions) {
+    const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
+    const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
     component.selectedJobId = params.data.id;
 
     modalRef.result.then(

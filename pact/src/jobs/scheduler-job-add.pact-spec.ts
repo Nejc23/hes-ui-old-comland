@@ -37,6 +37,7 @@ describe('Pact consumer test', () => {
       { name: 'guid-4', type: 'type-1' },
       { name: 'guid-5', type: 'type-1' }
     ],
+    actionType: 2,
     iec: true,
     enable: false,
     usePointer: false,
@@ -100,6 +101,7 @@ describe('Pact consumer test', () => {
       { name: 'guid-4', type: 'type-1' },
       { name: 'guid-5', type: 'type-1' }
     ],
+    actionType: 2,
     iec: true,
     enable: false,
     usePointer: false,

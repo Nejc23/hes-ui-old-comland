@@ -50,6 +50,12 @@ import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job
 import { ModalContainerComponent } from './modals/components/modal-container.component';
 import { PlcMeterTouConfigImportComponent } from '../features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/components/plc-meter-templates-import/plc-meter-templates-import.component';
+import { SchedulerDiscoveryJobComponent } from '../features/jobs/components/scheduler-discovery-job/scheduler-discovery-job.component';
+import { DataConcentratorUnitsSelectComponent } from '../features/data-concentrator-units-select/component/data-concentrator-units-select.component';
+import { GridSelectionHeaderComponent } from './ag-grid/components/grid-selection-header.component';
+import { GridCellNameComponent } from './ag-grid/components/grid-cell-name.component';
+import { GridCellIdNumberComponent } from './ag-grid/components/grid-cell-id-number.component';
+import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component';
 
 @NgModule({
   exports: [
@@ -73,9 +79,11 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/compon
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     SchedulerJobComponent,
+    SchedulerDiscoveryJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
+    DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
@@ -104,7 +112,14 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/compon
     CustomFormsModule,
     BreadcrumbsModule,
     GridsterModule,
-    AgGridModule.withComponents([GridCellActiveJobStatusComponent, GridCellLinkComponent])
+    AgGridModule.withComponents([
+      GridCellActiveJobStatusComponent,
+      GridCellLinkComponent,
+      GridSelectionHeaderComponent,
+      GridCellNameComponent,
+      GridCellIdNumberComponent,
+      GridCellIpComponent
+    ])
   ],
   declarations: [
     BaseTemplateComponent,
@@ -119,9 +134,11 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/compon
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     SchedulerJobComponent,
+    SchedulerDiscoveryJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
+    DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     ToastComponent,
     CardComponent,
@@ -145,7 +162,11 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/compon
     ActiveJobComponent,
     ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
-    PlcMeterTemplatesImportComponent
+    PlcMeterTemplatesImportComponent,
+    GridSelectionHeaderComponent,
+    GridCellNameComponent,
+    GridCellIdNumberComponent,
+    GridCellIpComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,
@@ -154,9 +175,11 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/compon
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     SchedulerJobComponent,
+    SchedulerDiscoveryJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     RegistersSelectComponent,
+    DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     ModalContainerComponent,
     PlcMeterTouConfigImportComponent,

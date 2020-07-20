@@ -1,0 +1,94 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Discovery Job</div>
+
+  <div modal-body>
+    <ng-container>
+
+      <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty"
+        name="readOptionsRadio" [options]="readOptions" box="'true'" (change)="changeReadOptionId()"
+        (refresh)="changeReadOptionId()">
+      </app-input-radio>
+
+      <div class="form-row" *ngIf="show_nMinutes()">
+        <div class="col-4">
+          <div class="d-flex">
+            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Read every">
+            </app-input-text>
+            <span class="align-self-end ml-3 mb-4" i18n>minute(s)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row" *ngIf="show_nHours()">
+        <div class="col-4">
+          <div class="d-flex">
+            <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Read every">
+            </app-input-text>
+            <span class="align-self-end ml-3 mb-4" i18n>hour(s)</span>
+          </div>
+        </div>
+      </div>
+
+      <app-input-multiselect *ngIf="showWeekDays()" i18n-label label="Week days" [form]="form"
+        [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
+      </app-input-multiselect>
+
+      <div class="form-group" *ngIf="showMonthDays()">
+        <label><span i18n>Days in month</span><sup> *</sup></label>
+        <div class="d-flex flex-wrap">
+          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'"
+            *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
+            <span>{{i+1}}</span>
+          </button>
+        </div>
+        <div class="help-block" *ngIf="showMonthDays() && noMonthDays">
+          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+        </div>
+      </div>
+
+      <div class="form-row" *ngIf="showTime()">
+        <div class="col-3">
+          <app-time-picker [form]="form" [property]="timeProperty" i18n-label label="Time">
+          </app-time-picker>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="showDateTime()">
+        <div class="col-3">
+          <app-datetime-picker [form]="form" [property]="timeProperty" i18n-label label="Date time">
+          </app-datetime-picker>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
+          <app-input-text [form]="form" [property]="descriptionProperty" i18n-label label="Description">
+          </app-input-text>
+        </div>
+      </div>
+
+      <hr>
+      <app-data-concentrator-units-select (onSelectionChanged)="selectionChanged($event)" [selectedJobId]="selectedJobId" [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-data-concentrator-units-select>
+      <div class="help-block" *ngIf="noDCUs">
+        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+      </div>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
+          i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="save(false)"><i class="far fa-save"></i><span
+            i18n>Save</span></button>
+        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+
+<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>
