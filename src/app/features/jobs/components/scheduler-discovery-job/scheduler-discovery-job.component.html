@@ -10,22 +10,19 @@
         (refresh)="changeReadOptionId()">
       </app-input-radio>
 
-      <div class="form-row" *ngIf="show_nMinutes()">
-        <div class="col-4">
+      <div class="form-row" *ngIf="show_nHours() || show_nMinutes()">
+        <div class="col-3" *ngIf="show_nHours()">
           <div class="d-flex">
-            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Read every">
+            <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Read every" labelRight="hour(s)">
             </app-input-text>
-            <span class="align-self-end ml-3 mb-4" i18n>minute(s)</span>
           </div>
         </div>
-      </div>
-
-      <div class="form-row" *ngIf="show_nHours()">
-        <div class="col-4">
+        <div class="col-3" *ngIf="show_nHours() || show_nMinutes()">
           <div class="d-flex">
-            <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Read every">
+            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Read every" labelRight="minute(s)" *ngIf="show_nMinutes()">
             </app-input-text>
-            <span class="align-self-end ml-3 mb-4" i18n>hour(s)</span>
+            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label=" " labelRight="minute(s)" *ngIf="show_nHours()">
+            </app-input-text>
           </div>
         </div>
       </div>

@@ -116,7 +116,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     }
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
-      nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
+      nMinutes: this.show_nMinutes() || this.show_nHours() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
       nHours: this.show_nHours() ? parseInt(this.form.get(this.nHoursProperty).value, 10) : 0,
       time: this.showTime() ? this.form.get(this.timeProperty).value : null,
       weekDays: this.showWeekDays() ? this.form.get(this.weekDaysProperty).value : [],
@@ -183,10 +183,15 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     this.form
       .get(this.timeProperty)
       .setValidators(_.find(selectedValuesForTimeProperty, x => x === this.selectedId) ? [Validators.required] : []);
-    this.form.get(this.nMinutesProperty).setValidators(this.selectedId === 2 ? [Validators.required] : []);
-    this.form.get(this.nHoursProperty).setValidators(this.selectedId === 3 ? [Validators.required] : []);
-    this.form.get(this.weekDaysProperty).setValidators(this.selectedId === 5 ? [Validators.required] : []);
-    this.form.get(this.monthDaysProperty).setValidators(this.selectedId === 6 ? [Validators.required] : []);
+    this.form
+      .get(this.nMinutesProperty)
+      .setValidators(this.show_nMinutes() || this.show_nHours() ? [Validators.required, Validators.max(59)] : []);
+    this.form.get(this.nHoursProperty).setValidators(this.show_nHours() ? [Validators.required, Validators.max(23)] : []);
+    this.form.get(this.weekDaysProperty).setValidators(this.showWeekDays() ? [Validators.required] : []);
+    this.form.get(this.monthDaysProperty).setValidators(this.showMonthDays() ? [Validators.required] : []);
+    if (this.show_nHours() && !this.form.get(this.nMinutesProperty).value) {
+      this.form.get(this.nMinutesProperty).setValue(0);
+    }
   }
 
   onDayInMonthClick(dayinMonth: number) {
