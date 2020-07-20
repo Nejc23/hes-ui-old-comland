@@ -18,19 +18,25 @@ export class FormErrorComponent {
       minlength: this.i18n(`Entry does not meet minimum required amount of characters`),
       pattern: this.i18n(`Wrong format`),
       notMatchPassword: this.i18n(`Password not match`),
-      maxError: this.i18n(`Exceeds max value`),
-      minError: this.i18n(`Exceeds min value`),
+      max: this.i18n(`Exceeds max value`),
+      min: this.i18n(`Exceeds min value`),
       incorrectRange: this.i18n(`Range is incorect`)
     };
   }
 
   @Input()
   set error(error: any) {
+    console.log(`error = `, error);
     this.errors = [];
     for (const key in error) {
       if (error.hasOwnProperty(key)) {
-        const text = _.get(this.translations, key, this.errors[key]);
-
+        let text = _.get(this.translations, key, this.errors[key]);
+        if (key === 'max') {
+          text = `${text} (${error.max.max})`;
+        }
+        if (key === 'min') {
+          text = `${text} (${error.min.min})`;
+        }
         this.errors.push(text);
       }
     }
