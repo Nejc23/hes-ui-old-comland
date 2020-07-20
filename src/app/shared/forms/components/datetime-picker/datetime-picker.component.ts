@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-datetime-picker',
@@ -27,6 +28,10 @@ export class DateTimePickerComponent implements OnInit {
       throw Error('DatetimePickerComponent - property input missing.');
     }
     this.controlId = _.uniqueId('datetimepicker');
+  }
+
+  get format() {
+    return environment.dateTimeFormat;
   }
 
   get formControl(): AbstractControl {

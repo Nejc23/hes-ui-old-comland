@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-time-picker',
@@ -27,6 +28,10 @@ export class TimePickerComponent implements OnInit {
       throw Error('TimePickerComponent - property input missing.');
     }
     this.controlId = _.uniqueId('timepicker');
+  }
+
+  get format() {
+    return environment.timeFormat;
   }
 
   get formControl(): AbstractControl {
