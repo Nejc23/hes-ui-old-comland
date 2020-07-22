@@ -12,5 +12,6 @@ export interface MeterUnitsLayout {
   breakerStateFilter: Codelist<number>[];
   showOnlyMeterUnitsWithMBusInfoFilter: boolean;
   showDeletedMeterUnitsFilter: boolean;
+  showMeterUnitsWithoutTemplateFilter: boolean;
   gridLayout: string;
 }

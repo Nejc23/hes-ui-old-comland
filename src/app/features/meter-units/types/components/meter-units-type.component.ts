@@ -90,7 +90,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       firmware: [{ id: 0, value: '' }],
       breakerState: [{ id: 0, value: '' }],
       showChildInfoMBus: false,
-      showDeleted: false
+      showDeleted: false,
+      showWithoutTemplate: false
     }
   };
 
@@ -163,6 +164,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions();
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: MeterUnitsLayout) => {
+        console.log('test 1');
         if (event !== null) {
           this.requestModel.filterModel.statuses = event.statusesFilter;
           this.requestModel.filterModel.vendor = event.vendorFilter;
@@ -174,6 +176,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.breakerState = event.breakerStateFilter;
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
           this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
+          this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
           this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -316,6 +319,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex().startRow;
         that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
+        console.log(`requestModel = `, that.requestModel);
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         if (that.authService.isRefreshNeeded2()) {
@@ -347,6 +351,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               }
             });
         } else {
+          console.log(`requestModel = `, this.requestModel);
           that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
             that.gridApi.hideOverlay();
             that.totalCount = data.totalCount;
@@ -379,25 +384,26 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   private noFilters() {
     if (
       this.requestModel.filterModel == null ||
-      ((this.requestModel.filterModel.statuses === undefined ||
+      ((!this.requestModel.filterModel.statuses ||
         this.requestModel.filterModel.statuses.length === 0 ||
         this.requestModel.filterModel.statuses[0].id === 0) &&
-        (this.requestModel.filterModel.tags === undefined ||
+        (!this.requestModel.filterModel.tags ||
           this.requestModel.filterModel.tags.length === 0 ||
           this.requestModel.filterModel.tags[0].id === 0) &&
-        (this.requestModel.filterModel.types === undefined ||
+        (!this.requestModel.filterModel.types ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0) &&
-        (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
-        (this.requestModel.filterModel.firmware === undefined ||
+        (!this.requestModel.filterModel.vendor || this.requestModel.filterModel.vendor.id === 0) &&
+        (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
+        (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
           this.requestModel.filterModel.firmware[0].id === 0) &&
-        (this.requestModel.filterModel.breakerState === undefined ||
+        (!this.requestModel.filterModel.breakerState ||
           this.requestModel.filterModel.breakerState.length === 0 ||
           this.requestModel.filterModel.breakerState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showDeleted)
+        !this.requestModel.filterModel.showDeleted &&
+        !this.requestModel.filterModel.showWithoutTemplate)
     ) {
       return true;
     }
@@ -449,6 +455,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+        this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -490,6 +498,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+      this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
     } else {
       this.setFilterInfo();
     }
@@ -510,7 +519,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
-      filterInfo.showDeletedMeterUnitsFilter
+      filterInfo.showDeletedMeterUnitsFilter,
+      filterInfo.showMeterUnitsWithoutTemplateFilter
     );
   }
 
@@ -527,7 +537,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       (filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0) ||
       (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
-      filterInfo.showDeletedMeterUnitsFilter
+      filterInfo.showDeletedMeterUnitsFilter ||
+      filterInfo.showMeterUnitsWithoutTemplateFilter
     );
   }
 

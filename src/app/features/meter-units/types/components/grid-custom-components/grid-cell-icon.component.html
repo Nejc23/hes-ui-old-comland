@@ -1,7 +1,11 @@
 <div class="d-flex">
   <div class="ml-auto" *ngIf="params.data && params.data.nextRead">
-    <i class="far fa-clock text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContent"></i>
+    <i class="far fa-clock text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentNextRead"></i>
+  </div>
+  <div class="ml-auto" *ngIf="params.data && !params.data.templateId">
+    <i class="far fa-ban text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentMissingTemplate"></i>
   </div>
 </div>
 
-<ng-template #tipContent id="tipContent">{{setMomentNextPlannedReadTime(params.data ? params.data.nextRead: null)}}</ng-template>
+<ng-template #tipContentNextRead id="tipContentNextRead">{{setMomentNextPlannedReadTime(params.data ? params.data.nextRead: null)}}</ng-template>
+<ng-template #tipContentMissingTemplate id="tipContentMissingTemplate"><span i18n>Missing template!</span></ng-template>

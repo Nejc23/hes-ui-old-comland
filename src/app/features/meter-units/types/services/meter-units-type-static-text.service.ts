@@ -46,14 +46,18 @@ export class MeterUnitsTypeStaticTextService {
     firmware: boolean,
     breakerState: boolean,
     showChildMBus: boolean,
-    showDeleted: boolean
+    showDeleted: boolean,
+    showWithoutTemplate: boolean
   ) {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
-      additionalString = status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ' · ' : '';
+      additionalString =
+        status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate
+          ? ' · '
+          : '';
       result = filterName + additionalString;
-    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted) {
+    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate) {
       result = '';
     }
 
@@ -66,48 +70,55 @@ export class MeterUnitsTypeStaticTextService {
       firmware ||
       breakerState ||
       showChildMBus ||
-      showDeleted
+      showDeleted ||
+      showWithoutTemplate
     ) {
       result = result + this.i18n('Filtered by: ');
     }
 
     if (status) {
-      additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
+      additionalString =
+        vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('status') + additionalString;
     }
 
     if (vendor) {
-      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
+      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('vendor') + additionalString;
     }
 
     if (tag) {
-      additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
+      additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('tag') + additionalString;
     }
 
     if (readStatuses) {
-      additionalString = firmware || breakerState || showChildMBus || showDeleted ? ', ' : '';
+      additionalString = firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('read status') + additionalString;
     }
 
     if (firmware) {
-      additionalString = breakerState || showChildMBus || showDeleted ? ', ' : '';
+      additionalString = breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('firmware') + additionalString;
     }
 
     if (breakerState) {
-      additionalString = showChildMBus || showDeleted ? ', ' : '';
+      additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('breaker state') + additionalString;
     }
 
     if (showChildMBus) {
-      additionalString = showDeleted ? ', ' : '';
+      additionalString = showDeleted || showWithoutTemplate ? ', ' : '';
       result = result + this.i18n('show child MBus') + additionalString;
     }
 
     if (showDeleted) {
-      result = result + this.i18n('show deleted');
+      additionalString = showWithoutTemplate ? ', ' : '';
+      result = result + this.i18n('show deleted') + additionalString;
+    }
+
+    if (showWithoutTemplate) {
+      result = result + this.i18n('show without template');
     }
     return result;
   }

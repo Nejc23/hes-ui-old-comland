@@ -115,6 +115,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
+          showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
           gridLayout: ''
         };
         x.push(currentFilter);
@@ -142,7 +143,8 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
         ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
         ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
-        ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false]
+        ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
+        ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false]
       },
       { validator: rangeFilterValidator }
     );
@@ -186,6 +188,10 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
 
   get showDeletedMeterUnitsProperty() {
     return 'showDeletedMeterUnits';
+  }
+
+  get showMeterUnitsWithoutTemplateProperty() {
+    return 'showMeterUnitsWithoutTemplate';
   }
 
   get showOnlyMeterUnitsWithMBusInfoProperty() {
@@ -235,6 +241,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       vendorFilter: this.form.get(this.vendorProperty).value,
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
       showDeletedMeterUnitsFilter: this.form.get(this.showDeletedMeterUnitsProperty).value,
+      showMeterUnitsWithoutTemplateFilter: this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
