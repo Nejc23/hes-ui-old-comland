@@ -89,9 +89,9 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIconComponent',
         headerTooltip: this.i18n(''),
-        minWidth: 50,
-        maxWidth: 50,
-        width: 50
+        minWidth: 70,
+        maxWidth: 70,
+        width: 70
       },
       {
         field: 'status',
@@ -330,7 +330,6 @@ export class MeterUnitsTypeGridService {
         filter: true
       },
       animateRows: configAgGrid.animateRows,
-      isRowSelectable: this.isRowSelectable,
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
@@ -373,10 +372,6 @@ export class MeterUnitsTypeGridService {
     };
   }
 
-  public isRowSelectable(rowNode: any) {
-    return rowNode.data ? rowNode.data.templateId : false;
-  }
-
   public onColumnVisibility(params) {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
@@ -408,7 +403,8 @@ export class MeterUnitsTypeGridService {
       JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
       JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.breakerState) &&
       JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
-      JSON.stringify(sessionFilter.showDeletedMeterUnitsFilter) === JSON.stringify(requestModel.showDeleted)
+      JSON.stringify(sessionFilter.showDeletedMeterUnitsFilter) === JSON.stringify(requestModel.showDeleted) &&
+      JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate)
     ) {
       return true;
     }

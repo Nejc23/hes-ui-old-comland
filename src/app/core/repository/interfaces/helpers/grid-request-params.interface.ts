@@ -25,6 +25,7 @@ export interface GridFilterParams {
   breakerState?: Codelist<number>[];
   showChildInfoMBus?: boolean;
   showDeleted: boolean;
+  showWithoutTemplate?: boolean;
 }
 
 export interface GridSortParams {

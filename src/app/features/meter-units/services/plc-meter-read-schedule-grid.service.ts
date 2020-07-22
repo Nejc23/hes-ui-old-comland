@@ -64,6 +64,7 @@ export class PlcMeterReadScheduleGridService {
       requestModel.filter.breakerState = filterDCU.breakerStateFilter;
       requestModel.filter.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       requestModel.filter.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+      requestModel.filter.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
     }
 
     return requestModel;
