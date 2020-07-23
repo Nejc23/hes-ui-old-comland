@@ -29,6 +29,14 @@ export class JobsService {
     return new HttpRequest('POST', schedulerJobsList, param);
   }
 
+  getSchedulerActiveJobsList(deviceId: string): Observable<GridResponse<SchedulerJobsList>> {
+    return this.repository.makeRequest(this.getSchedulerActiveJobsListRequest(deviceId));
+  }
+
+  getSchedulerActiveJobsListRequest(deviceId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${schedulerJobsList}/${deviceId}`);
+  }
+
   getActiveJobsList(deviceId: string): Observable<ActiveJobsList[]> {
     return this.repository.makeRequest(this.getActiveJobsListRequest(deviceId));
   }
@@ -112,8 +120,8 @@ export class JobsService {
   createScheduleDevice(deviceId: string, scheduleId: string) {
     const sdRequest: ScheduleDevice = {
       scheduleDeviceId: null,
-      scheduleId: scheduleId,
-      deviceId: deviceId,
+      scheduleId,
+      deviceId,
       readingId: null,
       registerGroupName: null,
       registerGroupType: null,
