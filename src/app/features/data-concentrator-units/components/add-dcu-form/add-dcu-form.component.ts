@@ -1,3 +1,6 @@
+import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { EnsureModuleLoadedOnceGuard } from './../../../../core/ensureModuleLoadedOnceGuard';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -11,6 +14,8 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
+import * as moment from 'moment';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 
 @Component({
   selector: 'app-add-dcu-form',
@@ -23,6 +28,7 @@ export class AddDcuFormComponent implements OnInit {
   dcuVendors$: Observable<Codelist<number>[]>;
   dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
+  discoveryJobs: Codelist<string>[];
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -31,7 +37,9 @@ export class AddDcuFormComponent implements OnInit {
     private formUtils: FormsUtilsService,
     public i18n: I18n,
     private modal: NgbActiveModal,
-    private eventService: DataConcentratorUnitsGridEventEmitterService
+    private eventService: DataConcentratorUnitsGridEventEmitterService,
+    private jobsService: JobsService,
+    private toast: ToastNotificationService
   ) {
     this.form = this.createForm();
   }
@@ -40,6 +48,12 @@ export class AddDcuFormComponent implements OnInit {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuTags$ = this.codelistService.dcuTagCodelist();
+    this.codelistService.jobsDiscoveryJobsCodelist().subscribe(
+      dj => {
+        this.discoveryJobs = dj.map(j => ({ id: j.id, value: `${j.value} - ${moment(j.nextRun).fromNow()}` }));
+      },
+      () => {} // error
+    );
   }
 
   createForm(): FormGroup {
@@ -50,6 +64,7 @@ export class AddDcuFormComponent implements OnInit {
         [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
         [this.typeProperty]: [null, Validators.required],
         [this.vendorProperty]: [null, Validators.required],
+        [this.discoveryJobProperty]: [null],
         [this.tagsProperty]: [null]
       },
       { updateOn: 'blur' }
@@ -66,6 +81,12 @@ export class AddDcuFormComponent implements OnInit {
       type: this.form.get(this.typeProperty).value,
       vendor: this.form.get(this.vendorProperty).value
     };
+
+    const selectedDiscoveryJob = this.form.get(this.discoveryJobProperty).value as Codelist<string>;
+    if (selectedDiscoveryJob) {
+      formData.discoveryJob = selectedDiscoveryJob;
+    }
+
     return formData;
   }
 
@@ -89,29 +110,66 @@ export class AddDcuFormComponent implements OnInit {
       status: 'INACTIVE',
       tags: null
     };
+
     return data;
   }
 
   save(addNew: boolean) {
     console.log('Save clicked!');
 
-    const request = this.dcuService.createDcu(this.fillData());
+    const dcuFormData = this.fillData();
+    const request = this.dcuService.createDcu(dcuFormData);
+
     const successMessage = this.i18n(`Data Concentration Unit was added successfully`);
-    this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
-        if (result) {
-          this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
-          if (addNew) {
-            this.form.reset();
-          } else {
-            this.modal.close();
+
+    try {
+      this.formUtils.saveForm(this.form, request, '').subscribe(
+        result => {
+          if (result) {
+            this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
+
+            if (dcuFormData.discoveryJob && dcuFormData.discoveryJob.id) {
+              this.jobsService.createScheduleDevice(result, dcuFormData.discoveryJob.id).subscribe(
+                () => {
+                  this.showSuccessAndTryCloseForm(successMessage, addNew);
+                },
+                errResult => {
+                  console.log('Error adding ScheduleDevice: ', errResult);
+                  const resultErrMessage = errResult.error ? errResult.error : null;
+                  const errMessage = this.i18n('Error adding new Schedule Device. ') + resultErrMessage;
+
+                  this.toast.successToast(successMessage);
+                  this.toast.errorToast(errMessage);
+
+                  this.closeOrResetForm(addNew);
+                }
+              );
+            } else {
+              this.showSuccessAndTryCloseForm(successMessage, addNew);
+            }
           }
-        }
-      },
-      errResult => {
-        this.saveError = errResult && errResult.error ? errResult.error[0] : null;
-      } // error
-    );
+        },
+        errResult => {
+          console.log('Error saving form: ', errResult);
+          this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+        } // error
+      );
+    } catch (error) {
+      console.log('Add-DCU Form Error:', error);
+    }
+  }
+
+  showSuccessAndTryCloseForm(successMessage: string, addNew: boolean) {
+    this.toast.successToast(successMessage);
+    this.closeOrResetForm(addNew);
+  }
+
+  closeOrResetForm(addNew: boolean) {
+    if (addNew) {
+      this.form.reset();
+    } else {
+      this.modal.close();
+    }
   }
 
   cancel() {
@@ -137,6 +195,10 @@ export class AddDcuFormComponent implements OnInit {
 
   get vendorProperty() {
     return nameOf<DcuForm>(o => o.vendor);
+  }
+
+  get discoveryJobProperty() {
+    return nameOf<DcuForm>(o => o.discoveryJob);
   }
 
   get tagsProperty() {

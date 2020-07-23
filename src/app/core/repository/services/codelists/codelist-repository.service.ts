@@ -1,3 +1,5 @@
+import { jobsDiscoveryJobs } from './../../consts/jobs.const';
+import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -51,7 +53,15 @@ export class CodelistRepositoryService {
   timeUnitCodeslist(): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.timeUnitCodelistRequest());
   }
+
   timeUnitCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', timeUnitCodes);
+  }
+
+  jobsDiscoveryJobsCodelist(): Observable<CodelistExt<string>[]> {
+    return this.repository.makeRequest(this.jobsDiscoveryJobsCodelistRequest());
+  }
+  jobsDiscoveryJobsCodelistRequest(): HttpRequest<CodelistExt<string>[]> {
+    return new HttpRequest('GET', jobsDiscoveryJobs);
   }
 }

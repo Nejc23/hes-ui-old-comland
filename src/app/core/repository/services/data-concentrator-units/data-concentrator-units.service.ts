@@ -68,15 +68,17 @@ export class DataConcentratorUnitsService {
   }
 
   createDcu(payload: DcuForm): Observable<string> {
-    console.log(payload);
+    const vendorId: number = payload.vendor ? payload.vendor.id : -1;
+
     const dcuRequest: DcuRequest = {
       concentratorId: payload.idNumber,
       concentratorIp: payload.ip,
-      type: payload.type.id,
-      vendor: payload.vendor.id,
+      type: payload.type ? payload.type.id : -1,
+      vendor: payload.vendor ? payload.vendor.id : -1,
       name: payload.name
     };
-    console.log(dcuRequest);
+
+    console.log('dcuRequest: ', dcuRequest);
     return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
   }
 
