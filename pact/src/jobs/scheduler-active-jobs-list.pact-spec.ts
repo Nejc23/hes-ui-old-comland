@@ -29,16 +29,14 @@ describe('Pact consumer test', () => {
   });
 
   describe('Scheduler active jobs list get request', () => {
-    const deviceId = '06130d62-f67c-41a2-98f7-ef521db2cee6';
-
-    const data: SchedulerActiveJobsList[] = [
+    const data: SchedulerJobsList[] = [
       {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
         type: 'Reading',
         actionType: 4,
         description: 'Daily read of 15 min energy (A+)',
-        nextRun: 'In 15 minutes',
+        nextRun: '2020-08-25T15:45:45+00:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -47,7 +45,7 @@ describe('Pact consumer test', () => {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 30 minutes',
+        nextRun: '2021-07-26T05:45:45+00:00',
         owner: 'Miha Galičič'
       },
       {
@@ -56,7 +54,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 18 hours',
+        nextRun: '2022-07-28T12:45:45+00:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -65,7 +63,7 @@ describe('Pact consumer test', () => {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 1 day',
+        nextRun: '2021-08-28T12:45:45+00:00',
         owner: 'Miha Galičič'
       },
       {
@@ -74,7 +72,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 1 day',
+        nextRun: '2023-09-28T18:05:05+02:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -83,7 +81,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 5 days',
+        nextRun: '2023-11-18T11:19:25+01:00',
         owner: 'Jan Benedičič'
       }
     ];
@@ -95,15 +93,15 @@ describe('Pact consumer test', () => {
       groupCount: 0
     };
 
+    const deviceId = '06130d62-f67c-41a2-98f7-ef521db2cee6';
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_FOR_GET_SCHEDULED_JOBS_LIST',
-          uponReceiving: 'a request for getting scheduled jobs list',
+          state: 'A_REQUEST_FOR_GET_SCHEDULED_ACTIVE_JOBS_LIST',
+          uponReceiving: 'a request for getting scheduled active jobs list',
           withRequest: {
-            method: service.getSchedulerJobsListRequest(requestBody).method,
-            path: service.getSchedulerJobsListRequest(requestBody).url,
-            body: requestBody,
+            method: service.getSchedulerActiveJobsListRequest(deviceId).method,
+            path: service.getSchedulerActiveJobsListRequest(deviceId).url,
             headers: defaultRequestHeader
           },
           willRespondWith: {
@@ -124,8 +122,8 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for fetching scheduled jobs list', done => {
-      service.getSchedulerJobsList(requestBody).subscribe(res => {
+    it('should make request for fetching scheduled active jobs list', done => {
+      service.getSchedulerActiveJobsList(deviceId).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });

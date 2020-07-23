@@ -138,7 +138,115 @@ export class SchedulerJobsInterceptor {
   }
 
   static canInterceptSchedulerJobsList(request: HttpRequest<any>): boolean {
-    return new RegExp(schedulerJobsList).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(`${schedulerJobsList}/[0-9]+$`).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptSchedulerActiveJobsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const data: SchedulerJobsList[] = [
+      {
+        id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Daily read of 15 min energy (A+)',
+        nextRun: '2020-08-25T15:45:45+00:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
+        active: true,
+        type: 'Discovery',
+        actionType: 1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2021-07-26T05:45:45+00:00',
+        owner: 'Miha Galičič'
+      },
+      {
+        id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2022-07-28T12:45:45+00:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: 'c129f32f-33f8-4917-a190-53dfe388cc6d',
+        active: true,
+        type: 'Discovery',
+        actionType: 1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2021-08-28T12:45:45+00:00',
+        owner: 'Miha Galičič'
+      },
+      {
+        id: '5f128531-0bce-46f9-b8df-264d8a3945fb',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2023-09-28T18:05:05+02:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: '6f3c7dc9-784e-4d8f-b6dc-913f116e94a6',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2023-11-18T11:19:25+01:00',
+        owner: 'Jan Benedičič'
+      }
+    ];
+
+    let skip = 0;
+    let take = 0;
+    let sortColId = '';
+    let sortedJobs = []; // data;
+    let searched = data;
+    if (request.body) {
+      const params = request.body as GridRequestParams;
+      if (params.searchModel && params.searchModel.length > 0) {
+        searched = searchById(data, params.searchModel[0].value);
+      }
+
+      skip = params.startRow;
+      take = params.endRow;
+
+      if (params.sortModel) {
+        if (params.sortModel.length > 0) {
+          params.sortModel.forEach(element => {
+            sortColId = element.colId;
+
+            if (element.sort === 'desc') {
+              sortedJobs = _.sortBy(searched, sortColId).reverse();
+            } else {
+              sortedJobs = _.sortBy(searched, sortColId);
+            }
+          });
+        } else {
+          sortedJobs = searched;
+        }
+      }
+    }
+
+    const body: GridResponse<SchedulerJobsList> = {
+      data: sortedJobs.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
+      totalCount: searched.length,
+      summary: '',
+      groupCount: 0
+    };
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body
+      })
+    );
+  }
+
+  static canInterceptSchedulerActiveJobsList(request: HttpRequest<any>): boolean {
+    return new RegExp(schedulerJobsList).test(request.url) && request.method.endsWith('GET');
   }
 
   static interceptSchedulerJobs(): Observable<HttpEvent<any>> {
