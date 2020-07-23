@@ -1,3 +1,4 @@
+import { schedulerActiveJobs } from './../../app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -76,6 +77,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (SchedulerJobsInterceptor.canInterceptSchedulerJobsList(request)) {
                 return SchedulerJobsInterceptor.interceptSchedulerJobsList(request);
               }
+              if (SchedulerJobsInterceptor.canInterceptAddNewScheduleDevice(request)) {
+                return SchedulerJobsInterceptor.interceptAddNewScheduleDevice(request);
+              }
 
               if (SchedulerJobsInterceptor.canInterceptSchedulerJobs(request)) {
                 return SchedulerJobsInterceptor.interceptSchedulerJobs();
@@ -89,6 +93,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // codelists jobs
               if (JobsCodelistInterceptor.canInterceptTimeUnitCode(request)) {
                 return JobsCodelistInterceptor.interceptTimeUnitCode();
+              }
+              if (JobsCodelistInterceptor.canInterceptJobsDiscoveryJobs(request)) {
+                return JobsCodelistInterceptor.interceptJobsDiscoveryJobs();
               }
 
               // codelists dcu

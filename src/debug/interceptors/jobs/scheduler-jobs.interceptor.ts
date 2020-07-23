@@ -1,3 +1,5 @@
+import { DataConcentratorUnitsComponent } from './../../../app/features/data-concentrator-units/components/data-concentrator-units.component';
+import { addNewScheduleDevice } from './../../../app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -7,6 +9,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { schedulerJobsList, schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
 import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 
 @Injectable()
 export class SchedulerJobsInterceptor {
@@ -20,7 +23,7 @@ export class SchedulerJobsInterceptor {
         type: 'Reading',
         actionType: 4,
         description: 'Daily read of 15 min energy (A+)',
-        nextRun: 'In 15 minutes',
+        nextRun: '2020-08-25T15:45:45+00:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -29,7 +32,7 @@ export class SchedulerJobsInterceptor {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 30 minutes',
+        nextRun: '2021-07-26T05:45:45+00:00',
         owner: 'Miha Galičič'
       },
       {
@@ -38,7 +41,7 @@ export class SchedulerJobsInterceptor {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 18 hours',
+        nextRun: '2022-07-28T12:45:45+00:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -47,7 +50,7 @@ export class SchedulerJobsInterceptor {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 1 day',
+        nextRun: '2021-08-28T12:45:45+00:00',
         owner: 'Miha Galičič'
       },
       {
@@ -56,7 +59,7 @@ export class SchedulerJobsInterceptor {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 1 day',
+        nextRun: '2023-09-28T18:05:05+02:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -65,7 +68,7 @@ export class SchedulerJobsInterceptor {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 3 days',
+        nextRun: '2023-07-28T15:08:05+02:00',
         owner: 'Miha Galičič'
       },
       {
@@ -74,7 +77,7 @@ export class SchedulerJobsInterceptor {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 5 days',
+        nextRun: '2023-11-18T11:19:25+01:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -83,7 +86,7 @@ export class SchedulerJobsInterceptor {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 7 days',
+        nextRun: '2025-11-18T09:17:25+01:00',
         owner: 'Miha Galičič'
       }
     ];
@@ -168,6 +171,29 @@ export class SchedulerJobsInterceptor {
   }
   static canInterceptSchedulerJobs(request: HttpRequest<any>): boolean {
     return new RegExp(`${schedulerJobs}/`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptAddNewScheduleDevice(request: HttpRequest<ScheduleDevice>): Observable<HttpEvent<ScheduleDevice>> {
+    const data: ScheduleDevice = {
+      scheduleDeviceId: 'af9c4a3e-8080-4e09-ae44-f1928967d8eb',
+      scheduleId: request.body.scheduleId,
+      deviceId: request.body.deviceId,
+      readingId: request.body.readingId,
+      templateId: request.body.templateId,
+      registerGroupName: request.body.registerGroupName,
+      registerGroupType: request.body.registerGroupType
+    };
+
+    return of(
+      new HttpResponse({
+        status: 201,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptAddNewScheduleDevice(request: HttpRequest<any>): boolean {
+    return new RegExp(addNewScheduleDevice).test(request.url);
   }
 }
 

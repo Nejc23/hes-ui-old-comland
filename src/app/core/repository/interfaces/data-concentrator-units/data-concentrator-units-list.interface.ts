@@ -15,4 +15,5 @@ export interface DataConcentratorUnitsList {
   lastCommunication: string;
   tags: string[];
   jobStatus: string;
+  discoveryJob?: string;
 }

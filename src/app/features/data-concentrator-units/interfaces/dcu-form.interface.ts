@@ -8,4 +8,5 @@ export interface DcuForm {
   type: Codelist<number>;
   vendor: Codelist<number>;
   tags: Codelist<number>[];
+  discoveryJob?: Codelist<string>;
 }

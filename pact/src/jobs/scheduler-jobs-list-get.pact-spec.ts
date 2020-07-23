@@ -55,7 +55,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Daily read of 15 min energy (A+)',
-        nextRun: 'In 15 minutes',
+        nextRun: '2020-08-25T15:45:45+00:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -64,7 +64,7 @@ describe('Pact consumer test', () => {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 30 minutes',
+        nextRun: '2021-07-26T05:45:45+00:00',
         owner: 'Miha Galičič'
       },
       {
@@ -73,7 +73,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 18 hours',
+        nextRun: '2022-07-28T12:45:45+00:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -82,7 +82,7 @@ describe('Pact consumer test', () => {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 1 day',
+        nextRun: '2021-08-28T12:45:45+00:00',
         owner: 'Miha Galičič'
       },
       {
@@ -91,7 +91,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 1 day',
+        nextRun: '2023-09-28T18:05:05+02:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -100,7 +100,7 @@ describe('Pact consumer test', () => {
         type: 'Disovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 3 days',
+        nextRun: '2023-07-28T15:08:05+02:00',
         owner: 'Miha Galičič'
       },
       {
@@ -109,7 +109,7 @@ describe('Pact consumer test', () => {
         type: 'Reading',
         actionType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 5 days',
+        nextRun: '2023-11-18T11:19:25+01:00',
         owner: 'Jan Benedičič'
       },
       {
@@ -118,7 +118,7 @@ describe('Pact consumer test', () => {
         type: 'Discovery',
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: 'In 7 days',
+        nextRun: '2025-11-18T09:17:25+01:00',
         owner: 'Miha Galičič'
       }
     ];
