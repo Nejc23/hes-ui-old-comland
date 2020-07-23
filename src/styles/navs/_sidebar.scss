@@ -98,7 +98,50 @@
       }
     }
   }
+
+  &.sidebar-light {
+    background-color: $gray-100;
+    border-right: $border-width solid lighten($color: $border-color, $amount: 10%);
+
+    hr.sidebar-divider {
+      border-top: 1px solid $border-color;
+    }
+
+    .nav-item {
+      .nav-link {
+        color: $gray-600;
+
+        &.active {
+          color: $nav-active;
+        }
+
+        &:hover {
+          color: $gray-700;
+          background-color: darken($color: $gray-100, $amount: 3%);
+        }
+
+      }
+
+      &.active {
+        .nav-link {
+          color: $white;
+        }
+      }
+    }
+
+    // Color the sidebar toggler
+    #sidebarToggle {
+      color: $white;
+      background-color: $gray-700;
+
+      &:hover {
+        background-color: $gray-900;
+      }
+    }
+  }
 }
+
+
 
 /************* ANTIMATIONS *************/
 .sidebar {
