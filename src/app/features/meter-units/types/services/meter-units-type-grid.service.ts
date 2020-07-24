@@ -89,9 +89,9 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIconComponent',
         headerTooltip: this.i18n(''),
-        minWidth: 70,
-        maxWidth: 70,
-        width: 70
+        minWidth: 80,
+        maxWidth: 80,
+        width: 80
       },
       {
         field: 'status',

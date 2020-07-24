@@ -20,12 +20,12 @@ export class MeterUnitCodelistInterceptor {
     const data: Codelist<number>[] = [
       {
         id: 1,
-        value: 'PLC-G3'
-      },
-      {
-        id: 2,
-        value: 'M-Bus'
+        value: 'G3-PLC'
       }
+      // {
+      //   id: 2,
+      //   value: 'M-Bus'
+      // }
     ];
 
     return of(
