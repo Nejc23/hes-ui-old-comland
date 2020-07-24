@@ -57,6 +57,7 @@ import { GridCellNameComponent } from './ag-grid/components/grid-cell-name.compo
 import { GridCellIdNumberComponent } from './ag-grid/components/grid-cell-id-number.component';
 import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component';
 import { AgGridSharedFunctionsService } from './ag-grid/services/ag-grid-shared-functions.service';
+import { TopFixedNavComponent } from './base-template/components/top-fixed-nav.component';
 
 @NgModule({
   exports: [
@@ -155,6 +156,7 @@ import { AgGridSharedFunctionsService } from './ag-grid/services/ag-grid-shared-
     HideIfActionUnauthorizedDirective,
     NumberOnlyDirective,
     SideFixedNavComponent,
+    TopFixedNavComponent,
     Page404Component,
     AutoRefreshComponent,
     IdentityErrorComponent,
