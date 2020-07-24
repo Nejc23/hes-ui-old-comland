@@ -2,7 +2,7 @@
 
   <label [attr.for]="property" *ngIf="label">
     {{label}}
-    <span *ngIf="required"> *</span>
+    <span *ngIf="required && label !== ' '"> *</span>
   </label>
 
   <div class="d-flex">

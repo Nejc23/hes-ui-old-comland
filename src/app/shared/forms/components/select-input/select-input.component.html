@@ -1,7 +1,7 @@
 <div class="form-group" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{label !== '_' ? label : '&nbsp;'}}
-    <span *ngIf="required"> *</span>
+    {{label !== ' ' ? label : '&nbsp;'}}
+    <span *ngIf="required && label !== ' '"> *</span>
   </label>
   <kendo-combobox [name]="property"
     [disabled]="disabled"
