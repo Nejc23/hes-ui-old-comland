@@ -3,8 +3,14 @@
   <div modal-header i18n>Reading Jobs</div>
 
   <div modal-body>
-    <ng-container>
-
+    <ng-container *ngIf="form">
+    <div id="step1" *ngIf="step === 1">
+      <div class="form-row">
+        <div class="col-12">
+          <app-input-text [form]="form" [property]="descriptionProperty" i18n-label label="Description">
+          </app-input-text>
+        </div>
+      </div>
       <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty"
         name="readOptionsRadio" [options]="readOptions" box="'true'" (change)="changeReadOptionId()"
         (refresh)="changeReadOptionId()">
@@ -68,7 +74,7 @@
           </app-input-switch>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row" *ngIf="showUsePointer()">
         <div class="col-2">
           <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For last">
           </app-input-text>
@@ -78,19 +84,13 @@
           </app-select-input>
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-12">
-          <app-input-text [form]="form" [property]="descriptionProperty" i18n-label label="Description">
-          </app-input-text>
-        </div>
-      </div>
-
-      <hr>
+    </div>
+    <div id="step2" *ngIf="step === 2">      
       <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)" [selectedJobId]="selectedJobId" [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-registers-select>
       <div class="help-block" *ngIf="noRegisters">
         <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
       </div>
-
+    </div>
 
     </ng-container>
   </div>
@@ -98,7 +98,10 @@
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
           i18n>Cancel</span></button>
-      <div class="btn-group dropdown">
+      <button *ngIf="step > 1" type="button" class="btn btn-secondary" (click)="next(-1)"> <i class="far fa-arrow-left"></i><span
+          i18n>Previous</span></button>      
+
+      <div class="btn-group dropdown" *ngIf="step === 2">
         <button type="submit" class="btn btn-primary" (click)="save(false)"><i class="far fa-save"></i><span
             i18n>Save</span></button>
         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
@@ -106,8 +109,11 @@
         </button>
         <div class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
-        </div>
-      </div>
+        </div>        
+      </div>   
+      
+      <button *ngIf="step === 1" type="button" class="btn btn-primary" (click)="next(1)"> <i class="far fa-arrow-right"></i><span
+          i18n>Next</span></button>      
     </div>
   </div>
 </app-modal-template>

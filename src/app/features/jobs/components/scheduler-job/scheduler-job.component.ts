@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -11,20 +11,18 @@ import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfac
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
 import { PlcMeterReadScheduleGridService } from '../../../meter-units/services/plc-meter-read-schedule-grid.service';
 import { PlcMeterReadScheduleService } from '../../../meter-units/services/plc-meter-read-scheduler.service';
-import { from, of, Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { List } from 'lodash';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
-import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/registers-select/registers-select-request.interface';
 
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
 })
 export class SchedulerJobComponent implements OnInit {
-  @ViewChild(RegistersSelectComponent, { static: true }) registers;
+  @ViewChild(RegistersSelectComponent, { static: false }) registers;
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
@@ -56,6 +54,7 @@ export class SchedulerJobComponent implements OnInit {
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
   defaultTimeUnit: Codelist<number>;
+  step = 1;
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -66,12 +65,9 @@ export class SchedulerJobComponent implements OnInit {
     private formUtils: FormsUtilsService,
     public i18n: I18n,
     private modal: NgbActiveModal
-  ) {
-    this.form = this.createForm(null);
-  }
+  ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
-    //console.log(`createForm `, formData);
     return this.formBuilder.group({
       [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '4', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
@@ -93,7 +89,6 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(`selectedDeviceId = ${this.selectedDeviceId}`);
     this.jobsTimeUnits$ = this.codelistService.timeUnitCodeslist();
     this.jobsTimeUnits$.subscribe(units => {
       this.jobsTimeUnits = units;
@@ -103,17 +98,17 @@ export class SchedulerJobComponent implements OnInit {
           this.selectedId = data.readOptions;
           this.form = this.createForm(data);
           this.changeReadOptionId();
-          //console.log(`data = `, data);
+          this.form.get(this.registersProperty).clearValidators();
         });
       } else {
         this.form = this.createForm(null);
         this.changeReadOptionId();
+        this.form.get(this.registersProperty).clearValidators();
       }
     });
   }
 
   fillData(): SchedulerJobForm {
-    //console.log('MeterUnitsReadScheduleForm', this.form.get(this.timeUnitProperty).value);
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
       nMinutes: this.show_nMinutes() || this.show_nHours() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
@@ -139,10 +134,15 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   resetAll() {
+    this.step = 1;
     this.form.reset();
     this.monthDays = [];
     this.registers.deselectAllRows();
     this.selectedId = 0;
+  }
+
+  showUsePointer() {
+    return this.form.get(this.usePointerProperty).value === true;
   }
 
   save(addNew: boolean) {
@@ -315,5 +315,23 @@ export class SchedulerJobComponent implements OnInit {
 
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  next(value) {
+    if (!this.form.get(this.usePointerProperty).value) {
+      this.form.get(this.intervalRangeProperty).setValue(1);
+      this.form.get(this.timeUnitProperty).setValue(1);
+    }
+
+    // check form
+    if (value > 0 && !this.form.valid) {
+      return;
+    }
+    this.step = this.step + value;
+    if (this.step === 2) {
+      this.form.get(this.registersProperty).setValidators(Validators.required);
+    } else {
+      this.form.get(this.registersProperty).clearValidators();
+    }
   }
 }
