@@ -12,7 +12,7 @@
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
 
-<ag-grid-angular class="ag-theme-epoint" style="width: 98%; height: 240px;" #agGrid
+<ag-grid-angular class="ag-theme-epoint" style="width: 98%; height: 450px;" #agGrid
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   [modules]="modules"
@@ -22,7 +22,7 @@
   [domLayout]=agGridSettings.domLayout 
   [frameworkComponents]="frameworkComponents"
   suppressSizeToFit=agGridSettings.suppressSizeToFit
-  [pagination]=agGridSettings.pagination [paginationPageSize]="4"
+  [pagination]=agGridSettings.pagination [paginationPageSize]="10"
   [multiSortKey]=agGridSettings.multiSortKey [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
   [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
   [cacheBlockSize]=agGridSettings.paginationPageSize

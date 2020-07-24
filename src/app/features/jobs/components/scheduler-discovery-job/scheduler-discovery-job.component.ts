@@ -22,7 +22,7 @@ import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-co
   templateUrl: './scheduler-discovery-job.component.html'
 })
 export class SchedulerDiscoveryJobComponent implements OnInit {
-  @ViewChild(DataConcentratorUnitsSelectComponent, { static: true }) listOfDCUs;
+  @ViewChild(DataConcentratorUnitsSelectComponent, { static: false }) listOfDCUs: DataConcentratorUnitsSelectComponent;
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
@@ -54,6 +54,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
   defaultTimeUnit: Codelist<number>;
+  step = 1;
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -64,9 +65,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     public i18n: I18n,
     private modal: NgbActiveModal,
     private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService
-  ) {
-    this.form = this.createForm(null);
-  }
+  ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
     return this.formBuilder.group({
@@ -95,10 +94,12 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
           // fill session with selected importTemplates
           this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam.id);
           this.changeReadOptionId();
+          this.form.get(this.registersProperty).clearValidators();
         });
       } else {
         this.form = this.createForm(null);
         this.changeReadOptionId();
+        this.form.get(this.registersProperty).clearValidators();
       }
     });
   }
@@ -137,6 +138,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   resetAll() {
+    this.step = 1;
     this.form.reset();
     this.monthDays = [];
     this.listOfDCUs.deselectAllRows();
@@ -158,16 +160,14 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
-    const successMessage = this.i18n(`Meter Units Read Scheduler was ${operation} successfully`);
+    const successMessage = this.i18n(`Data Concentrator Discovery Scheduler was ${operation} successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
-        // if (result) {
         if (addNew) {
           this.resetAll();
         } else {
           this.modal.close();
         }
-        // }
       },
       () => {} // error
     );
@@ -288,5 +288,18 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
 
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  next(value) {
+    // check form
+    if (value > 0 && !this.form.valid) {
+      return;
+    }
+    this.step = this.step + value;
+    if (this.step === 2) {
+      this.form.get(this.registersProperty).setValidators(Validators.required);
+    } else {
+      this.form.get(this.registersProperty).clearValidators();
+    }
   }
 }
