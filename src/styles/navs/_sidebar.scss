@@ -8,7 +8,8 @@
   z-index: 200;
   position: fixed;
   overflow: visible;
-  margin-left: $sidebar-fixed-width;
+  margin-top: $sidebar-fixed-width; // if top fixed header
+  // margin-left: $sidebar-fixed-width; // if left fixed sidebar
   padding-top: $spacer;
 
   .nav-item {
@@ -37,7 +38,7 @@
 
   .sidebar-version {
     position: absolute;
-    bottom: 10px;
+    bottom: calc(10px + #{$sidebar-fixed-width});
     width: 100%;
     color: fade-out($white, 0.5);
   }

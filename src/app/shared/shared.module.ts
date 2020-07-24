@@ -58,6 +58,7 @@ import { GridCellIdNumberComponent } from './ag-grid/components/grid-cell-id-num
 import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component';
 import { AgGridSharedFunctionsService } from './ag-grid/services/ag-grid-shared-functions.service';
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
+import { TopFixedNavComponent } from './base-template/components/top-fixed-nav.component';
 
 @NgModule({
   exports: [
@@ -157,6 +158,7 @@ import { SchedulerActiveJobsComponent } from './popover/components/scheduler-act
     HideIfActionUnauthorizedDirective,
     NumberOnlyDirective,
     SideFixedNavComponent,
+    TopFixedNavComponent,
     Page404Component,
     AutoRefreshComponent,
     IdentityErrorComponent,

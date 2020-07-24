@@ -1,11 +1,11 @@
 .navbar {
-  width: $sidebar-fixed-width;
-  height: 100%;
+  width: 100%;
+  height: $sidebar-fixed-width;
   z-index: 220;
-  background: linear-gradient(180deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
+  background: linear-gradient(90deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
   padding: $spacer 0;
   text-align: center;
-
+  position: fixed;
 
   i {
     font-size: $icon-size-xl;
@@ -21,13 +21,13 @@
   }
 
   .navbar-title {
-    line-height: $sidebar-fixed-width;
+    //line-height: $sidebar-fixed-width;
     color: $white;
     font-family: 'Roboto Slab', serif;
     font-weight: 700;
   }
 
-  .rotate {
+  /*.rotate {
     transform: rotate(-90deg);
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
@@ -37,7 +37,7 @@
     > * {
       transform: translate(-50%, 0);
     }
-  }
+  }*/
 }
 
 @media only screen and (max-height: 450px) {
