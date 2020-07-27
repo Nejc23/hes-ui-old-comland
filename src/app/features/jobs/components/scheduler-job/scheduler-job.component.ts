@@ -184,6 +184,7 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   changeReadOptionId() {
+    this.form.get(this.weekDaysProperty).enable();
     const selectedValuesForTimeProperty = [1, 4, 5, 6];
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
     this.form
@@ -198,10 +199,18 @@ export class SchedulerJobComponent implements OnInit {
     if (this.show_nHours() && !this.form.get(this.nMinutesProperty).value) {
       this.form.get(this.nMinutesProperty).setValue(0);
     }
+
+    if (this.showMonthDays()) {
+      const realMonthDays = this.monthDays.map(day => (day = day + 1));
+      const daysSorted = realMonthDays.sort((a, b) => a - b);
+
+      this.noMonthDays = daysSorted.length === 0;
+      this.form.get(this.monthDaysProperty).setValue(daysSorted);
+    }
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.find(this.monthDays, x => x === dayinMonth) ? true : false;
+    const result = _.findIndex(this.monthDays, x => x === dayinMonth) > -1 ? true : false;
     if (!result) {
       this.monthDays.push(dayinMonth);
     } else {
@@ -318,12 +327,14 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   next(value) {
-    if (!this.form.get(this.usePointerProperty).value) {
-      this.form.get(this.intervalRangeProperty).setValue(1);
-      this.form.get(this.timeUnitProperty).setValue(1);
+    if (this.showWeekDays()) {
+      this.form.get(this.weekDaysProperty).enable();
+    } else {
+      this.form.get(this.weekDaysProperty).disable();
     }
 
     // check form
+    this.formUtils.touchElementsAndValidate(this.form);
     if (value > 0 && !this.form.valid) {
       return;
     }
