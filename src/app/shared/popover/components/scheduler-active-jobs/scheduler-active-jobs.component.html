@@ -1,0 +1,18 @@
+<div class="form">
+  <div *ngIf="isContentLoaded">
+    <div class="form-row" *ngFor="let activeJob of visibleActiveJobs" >
+      <div class="col-8 text-truncate" placement="bottom" openDelay="500" [ngbTooltip]="activeJob.description" container="body" #divDescription>
+        {{activeJob.description}}
+      </div>
+      <div class="col-4 text-truncate" placement="bottom" openDelay="500" [ngbTooltip]="setMomentNextRun(activeJob.nextRun)" container="body">
+        {{setMomentNextRun(activeJob.nextRun)}}
+      </div>
+    </div>
+    <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1" >
+      <a href="javascript:void(0);" (click)="showMore()">{{getShowAllText()}}</a>
+    </div>
+  </div>
+  <div class="text-center pt-2 pb-2" *ngIf="!isContentLoaded" >
+    <span class="ag-theme-epoint">Loading...</span>
+  </div>
+</div>
