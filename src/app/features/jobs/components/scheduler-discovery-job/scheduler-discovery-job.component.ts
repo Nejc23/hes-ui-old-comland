@@ -76,7 +76,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
       [this.weekDaysProperty]: [formData && formData.weekDays ? formData.weekDays : []],
       [this.monthDaysProperty]: [formData && formData.monthDays ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
-      [this.descriptionProperty]: [formData ? formData.description : null, Validators.maxLength(500)],
+      [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
       [this.enableProperty]: [formData ? formData.enable : true]
     });
   }

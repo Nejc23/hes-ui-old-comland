@@ -77,7 +77,7 @@ export class SchedulerJobComponent implements OnInit {
       [this.monthDaysProperty]: [formData ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
       [this.iecProperty]: [formData ? formData.iec : false],
-      [this.descriptionProperty]: [formData ? formData.description : null, Validators.maxLength(500)],
+      [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
       [this.usePointerProperty]: [formData ? formData.usePointer : true],
       [this.intervalRangeProperty]: [formData ? formData.intervalRange : 1, Validators.required],
       [this.timeUnitProperty]: [
