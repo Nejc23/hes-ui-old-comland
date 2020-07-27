@@ -1,7 +1,14 @@
-<div class="d-flex">
+<div class="d-flex" container="body">
   <div class="ml-auto" *ngIf="params.data && params.data.nextRead">
-    <i class="far fa-clock text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContent"></i>
+      <i class="far fa-clock text-secondary" container="body" placement="bottom"
+        [placement]="['right-top']"
+        [ngbPopover]="popActiveJobsContent"
+        [autoClose]="'outside'"
+        popoverClass="scheduler-active-job-popover">
+      </i>
   </div>
 </div>
 
-<ng-template #tipContent id="tipContent">{{setMomentNextPlannedReadTime(params.data ? params.data.nextRead: null)}}</ng-template>
+<ng-template #popActiveJobsContent>
+  <app-scheduler-active-jobs [deviceId]="params.data.concentratorId"></app-scheduler-active-jobs>
+</ng-template>

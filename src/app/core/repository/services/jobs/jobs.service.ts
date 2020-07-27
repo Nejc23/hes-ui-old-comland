@@ -9,7 +9,7 @@ import { SchedulerJobsList } from '../../interfaces/jobs/scheduler-jobs-list.int
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
-import { schedulerJobs, schedulerJobsList, executeJob, enableJob } from '../../consts/jobs.const';
+import { schedulerJobs, schedulerJobsList, executeJob, enableJob, schedulerActiveJobs } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
@@ -27,6 +27,14 @@ export class JobsService {
 
   getSchedulerJobsListRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', schedulerJobsList, param);
+  }
+
+  getSchedulerActiveJobsList(deviceId: string): Observable<SchedulerJobsList[]> {
+    return this.repository.makeRequest(this.getSchedulerActiveJobsListRequest(deviceId));
+  }
+
+  getSchedulerActiveJobsListRequest(deviceId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${schedulerActiveJobs}/${deviceId}`);
   }
 
   getActiveJobsList(deviceId: string): Observable<ActiveJobsList[]> {
@@ -112,8 +120,8 @@ export class JobsService {
   createScheduleDevice(deviceId: string, scheduleId: string) {
     const sdRequest: ScheduleDevice = {
       scheduleDeviceId: null,
-      scheduleId: scheduleId,
-      deviceId: deviceId,
+      scheduleId,
+      deviceId,
       readingId: null,
       registerGroupName: null,
       registerGroupType: null,
