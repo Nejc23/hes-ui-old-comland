@@ -30,7 +30,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
     this.params = params;
     this.gridApi = this.params.api as GridApi;
 
-    if (params.data.autoTemplateRuleId == 'new') {
+    if (params.data.autoTemplateRuleId === 'new') {
       this.hideEditDelete = true;
     }
   }
@@ -44,7 +44,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   editItem(params: any) {
     const cellDefs2 = this.gridApi.getEditingCells();
 
-    if (cellDefs2.length == 0) {
+    if (cellDefs2.length === 0) {
       this.gridApi.setFocusedCell(params.rowIndex, 'obis');
       this.gridApi.startEditingCell({
         rowIndex: params.rowIndex,

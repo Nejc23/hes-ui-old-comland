@@ -33,10 +33,10 @@ export class PermissionsService {
     }
 
     const listFunct = _.find(this.currentPermissions, x => x.functionality === permission);
-    if (listFunct != undefined && listFunct != null) {
+    if (typeof listFunct !== 'undefined' && listFunct != null) {
       const actionFound = _.find(listFunct.action, x => x.toString().toLowerCase() === action.toString().toLowerCase());
 
-      if (actionFound != undefined && actionFound != null) {
+      if (typeof actionFound !== 'undefined' && actionFound != null) {
         return true;
       }
       return false;

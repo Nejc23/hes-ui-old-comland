@@ -77,7 +77,7 @@ export class AuthGuard implements CanActivate {
           .catch(err => {
             if (err.message === 'login_required') {
               console.log('login 1');
-              this.authService.login().catch(err => console.log(err));
+              this.authService.login().catch(errDetail => console.log(errDetail));
             }
             resolve(false);
           });

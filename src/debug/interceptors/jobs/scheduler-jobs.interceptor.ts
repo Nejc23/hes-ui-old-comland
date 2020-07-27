@@ -305,7 +305,7 @@ export class SchedulerJobsInterceptor {
 
 function searchById(companies, filter) {
   let result;
-  if (typeof filter === 'undefined' || filter.length === 0) {
+  if (typeof filter === 'undefined' || !filter || filter.length === 0) {
     result = companies;
   } else {
     result = _.filter(companies, c => {

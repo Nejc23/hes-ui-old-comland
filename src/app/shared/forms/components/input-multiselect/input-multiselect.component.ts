@@ -30,7 +30,7 @@ export class InputMultiselectComponent implements OnInit {
   @Input() isReadOnly = false;
   @Input() inline = false;
 
-  @Output() onChange = new EventEmitter<any>();
+  // @Output() onChange = new EventEmitter<any>();
 
   selectedValuesArray = [];
 
@@ -81,7 +81,7 @@ export class InputMultiselectComponent implements OnInit {
 
     this.form.get(this.property).setValue(Array.from(new Set(this.selectedValuesArray)).sort());
     this.form.get(this.property).markAsDirty(); // form has changed
-    this.onChange.emit(selected);
+    // this.onChange.emit(selected);
   }
 
   fetchCodelist() {
