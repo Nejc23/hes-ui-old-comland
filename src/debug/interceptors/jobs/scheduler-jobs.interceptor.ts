@@ -1,5 +1,5 @@
 import { DataConcentratorUnitsComponent } from './../../../app/features/data-concentrator-units/components/data-concentrator-units.component';
-import { addNewScheduleDevice } from './../../../app/core/repository/consts/jobs.const';
+import { addNewScheduleDevice, schedulerActiveJobs } from './../../../app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -138,7 +138,113 @@ export class SchedulerJobsInterceptor {
   }
 
   static canInterceptSchedulerJobsList(request: HttpRequest<any>): boolean {
-    return new RegExp(schedulerJobsList).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(`${schedulerJobsList}/[0-9]+$`).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptSchedulerActiveJobsList(request: HttpRequest<any>): Observable<HttpEvent<SchedulerJobsList[]>> {
+    const data: SchedulerJobsList[] = [
+      {
+        id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Daily read of 15 min energy (A+)',
+        nextRun: '2020-08-25T15:45:45+00:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
+        active: true,
+        type: 'Discovery',
+        actionType: 1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2021-07-26T05:45:45+00:00',
+        owner: 'Miha Galičič'
+      },
+      {
+        id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2022-07-28T12:45:45+00:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: 'c129f32f-33f8-4917-a190-53dfe388cc6d',
+        active: true,
+        type: 'Discovery',
+        actionType: 1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2021-08-28T12:45:45+00:00',
+        owner: 'Miha Galičič'
+      },
+      {
+        id: '5f128531-0bce-46f9-b8df-264d8a3945fb',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2023-09-28T18:05:05+02:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: '6f3c7dc9-784e-4d8f-b6dc-913f116e94a6',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2020-07-18T09:17:25+01:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: '06130d62-f67c-41a2-98f7-ef521db2cee7',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Daily read of 15 min energy (B+)',
+        nextRun: '2021-03-01T15:45:45+00:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b01',
+        active: true,
+        type: 'Discovery',
+        actionType: 1,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2020-05-11T05:45:45+00:00',
+        owner: 'Miha Galičič'
+      },
+      {
+        id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe55',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2019-03-05T12:45:45+00:00',
+        owner: 'Jan Benedičič'
+      },
+      {
+        id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe56',
+        active: true,
+        type: 'Reading',
+        actionType: 4,
+        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        nextRun: '2020-04-28T12:45:45+00:00',
+        owner: 'Jan Benedičič'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptSchedulerActiveJobsList(request: HttpRequest<any>): boolean {
+    return new RegExp(schedulerActiveJobs).test(request.url) && request.method.endsWith('GET');
   }
 
   static interceptSchedulerJobs(): Observable<HttpEvent<any>> {
