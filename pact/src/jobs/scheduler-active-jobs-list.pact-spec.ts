@@ -3,7 +3,6 @@ import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
-import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 
 describe('Pact consumer test', () => {
   let provider;
