@@ -13,6 +13,7 @@ export class InputNumericComponent implements OnInit {
 
   // optional
   @Input() label: string;
+  @Input() labelRight: string;
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)
   @Input() showSpinners = false;
   @Input() decimals = 2;

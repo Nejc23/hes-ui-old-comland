@@ -20,6 +20,8 @@ export class FormErrorComponent {
       notMatchPassword: this.i18n(`Password not match`),
       max: this.i18n(`Exceeds max value`),
       min: this.i18n(`Exceeds min value`),
+      maxError: this.i18n(`Exceeds max value`),
+      minError: this.i18n(`Exceeds min value`),
       incorrectRange: this.i18n(`Range is incorect`)
     };
   }
@@ -36,6 +38,14 @@ export class FormErrorComponent {
         }
         if (key === 'min') {
           text = `${text} (${error.min.min})`;
+        }
+
+        //  handle errors from kendo-numerictextbox
+        if (key === 'maxError') {
+          text = `${text} (${error.maxError.maxValue})`;
+        }
+        if (key === 'minError') {
+          text = `${text} (${error.minError.minValue})`;
         }
         this.errors.push(text);
       }

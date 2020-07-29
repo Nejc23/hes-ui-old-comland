@@ -14,7 +14,10 @@ export class PlcMeterReadScheduleService {
   constructor(private jobsService: JobsService) {}
 
   transformData(values: SchedulerJobForm): SchedulerJob {
-    const dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime !== null ? values.dateTime : Date.now());
+    let dateTimeMoment = null;
+    if (values.time !== null || values.dateTime !== null) {
+      dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime).format();
+    }
 
     const serviceData: SchedulerJob = {
       readOptions: values.readOptions,
@@ -25,7 +28,7 @@ export class PlcMeterReadScheduleService {
       registers: values.registers,
       iec: values.iec,
       description: values.description,
-      dateTime: dateTimeMoment.format(),
+      dateTime: dateTimeMoment,
       bulkActionsRequestParam: values.bulkActionsRequestParam,
       usePointer: values.usePointer,
       intervalRange: values.intervalRange,
