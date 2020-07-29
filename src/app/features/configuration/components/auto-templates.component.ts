@@ -62,7 +62,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = params => {
       if (params.node && params.node.detail) {
-        const offset = 60;
+        const offset = 65;
         const allDetailRowHeight = params.data.rules.length * 1.7 * params.api.getSizesForCurrentTheme().rowHeight;
         const gridSizes = params.api.getSizesForCurrentTheme();
         return allDetailRowHeight + gridSizes.headerHeight + offset;
@@ -170,6 +170,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   getData() {
     this.serviceRepository.getTemplates().subscribe(templates => {
+      this.rowData = this.prepareData(templates, []);
       if (templates != null && templates.length > 0) {
         this.serviceRepository.getAutoTemplateRules().subscribe(rules => {
           this.rowData = this.prepareData(templates, rules);
