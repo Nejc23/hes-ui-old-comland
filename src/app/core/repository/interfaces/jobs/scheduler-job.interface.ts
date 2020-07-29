@@ -22,4 +22,5 @@ export interface SchedulerJob {
 
 export interface SchedulerJobForm extends SchedulerJob {
   time: Date;
+  timeForHours: Date;
 }

@@ -4,19 +4,22 @@
     {{label}}
     <span *ngIf="required"> *</span>
   </label>
- 
-  <kendo-numerictextbox
-    [name]="property" 
-    class="form-control" 
-    [formControlName]="property"
-    [decimals]="decimals" 
-    [format]="format"
-    [min]="min"
-    [max]="max"
-    [step]="step"
-    [readonly]="isReadOnly"
-    [spinners]="showSpinners"
-  ></kendo-numerictextbox>
+
+  <div class="d-flex">
+    <kendo-numerictextbox
+      [name]="property"
+      class="form-control"
+      [formControlName]="property"
+      [decimals]="decimals"
+      [format]="format"
+      [min]="min"
+      [max]="max"
+      [step]="step"
+      [readonly]="isReadOnly"
+      [spinners]="showSpinners"
+    ></kendo-numerictextbox>
+    <span class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
+  </div>
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors() && allowShowError" class="error">

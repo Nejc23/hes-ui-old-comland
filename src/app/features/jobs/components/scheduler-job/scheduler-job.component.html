@@ -18,18 +18,18 @@
 
       <div class="form-row" *ngIf="show_nHours() || show_nMinutes()">
         <div class="col-3" *ngIf="show_nHours()">
-          <div class="d-flex">
-            <app-input-text [form]="form" [property]="nHoursProperty" i18n-label label="Read every" labelRight="hour(s)">
-            </app-input-text>
-          </div>
+          <app-input-numeric [label]="'Read every'" [form]="form" [property]="nHoursProperty" [showSpinners]="false" [decimals]="0" [min]="1" [max]="23"
+          [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight="hour(s)"></app-input-numeric>
         </div>
-        <div class="col-3" *ngIf="show_nHours() || show_nMinutes()">
-          <div class="d-flex">
-            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label="Read every" labelRight="minute(s)" *ngIf="show_nMinutes()">
-            </app-input-text>
-            <app-input-text [form]="form" [property]="nMinutesProperty" i18n-label label=" " labelRight="minute(s)" *ngIf="show_nHours()">
-            </app-input-text>
-          </div>
+        <div class="col-3" *ngIf="show_nMinutes()">
+          <app-input-numeric [label]="'Read every'" [form]="form" [property]="nMinutesProperty" [showSpinners]="false" [decimals]="0" [min]="1" [max]="59"
+          [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight="minute(s)"></app-input-numeric>
+        </div>
+      </div>
+      <div class="form-row" *ngIf="show_nHours()">
+        <div class="col-3">
+          <app-time-picker [form]="form" [property]="timeForHoursProperty" i18n-label label="Starts at">
+          </app-time-picker>
         </div>
       </div>
 
