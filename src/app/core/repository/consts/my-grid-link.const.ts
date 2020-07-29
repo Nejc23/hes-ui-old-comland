@@ -13,3 +13,4 @@ export const onDemandDisconnectorState = '/on-demand/trigger-get-disconnector-st
 export const triggerSetTimeOfUse = '/trigger-set-time-of-use';
 export const onDemandData = '/data';
 export const importTemplates = '/import-templates';
+export const triggerDeviceUpgrade = '/trigger-device-upgrade';

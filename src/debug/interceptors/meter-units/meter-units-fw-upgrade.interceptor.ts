@@ -10,7 +10,7 @@ export class MeterUnitsFwUpgradeInterceptor {
   constructor() {}
 
   static canInterceptMeterUniFwUpgradeUploadPost(request: HttpRequest<any>): boolean {
-    return new RegExp(`${meterUnits}/${fwUploadFile}`).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(`${fwUploadFile}`).test(request.url) && request.method.endsWith('POST');
   }
 
   static interceptMeterUniFwUpgradeUploadPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
@@ -45,7 +45,13 @@ export class MeterUnitsFwUpgradeInterceptor {
 
   static interceptMeterUniFwUpgradePost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const body: DcResponse = {
-      status: 'waiting for activiation'
+      fileId: '32-323-4fgf-ew-434',
+      imageIdent: 'identifyer',
+      imageSize: 5442,
+      signature: 'signature',
+      overrideFillLastBlock: true,
+      deviceIds: ['kfkff-werre-rerrr', 'froo4344-434443-4344-4344'],
+      requestId: '3090f96a-e341-437c-92bb-2e10d5a8062a'
     };
     return of(
       new HttpResponse({

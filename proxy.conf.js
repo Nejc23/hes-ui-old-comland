@@ -5,7 +5,8 @@ const PROXY_CONFIG = [
         "/api/concentrator-management",
         "/api/time-of-use/",
         "/api/on-demand-data-processing",
-        "/api/templating"
+        "/api/templating",
+        "/api/file-storage"
       ],
       target: "http://89.212.201.202:54322",
       secure: false

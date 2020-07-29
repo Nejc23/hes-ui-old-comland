@@ -19,7 +19,9 @@ export class FileUploadComponent implements OnInit {
   @Input() multiple = true;
   @Input() autoUpload = true;
   @Input() allowedExtensions: string[] = [];
+  @Input() responseType = 'json';
   @Output() successEvent = new EventEmitter<any>();
+  @Output() uploadEvent = new EventEmitter<any>();
 
   controlId: string;
   restrictions: FileRestrictions;
@@ -42,10 +44,6 @@ export class FileUploadComponent implements OnInit {
       throw Error('FileUploadComponent - property upload save URL missing.');
     }
 
-    if (!this.uploadRemoveUrl) {
-      throw Error('FileUploadComponent - property upload remove URL missing.');
-    }
-
     this.controlId = _.uniqueId('fileUpload');
   }
 
@@ -62,6 +60,14 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSuccess(event) {
+    console.log('success');
     this.successEvent.emit(event);
+  }
+  errorEventHandler(event) {
+    console.log(event);
+  }
+
+  uploadEventHandler(event) {
+    this.uploadEvent.emit(event);
   }
 }
