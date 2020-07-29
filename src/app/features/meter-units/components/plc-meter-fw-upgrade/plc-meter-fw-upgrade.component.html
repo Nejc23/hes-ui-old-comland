@@ -7,12 +7,13 @@
       <div class="form-row">
         <div class="col-12">
             <app-file-upload label="Image" [form]="form" [property]="imageProperty" 
-                [uploadSaveUrl]="uploadSaveUrl" 
-                [uploadRemoveUrl]="uploadRemoveUrl" 
+                [uploadSaveUrl]="uploadSaveUrl"    
+                [uploadRemoveUrl]=""
                 [multiple]="false"
+                [responseType]="'text'"
                 [allowedExtensions]="allowedExt"
-                [textExplanation]="'can only upload one GIF, JPG, JPEG or PNG file.'"
-                (successEvent)="successUploaded($event)"
+                [textExplanation]="allowedExtExplainText"
+                (successEvent)="successUploaded($event)"                
                 i18n-label></app-file-upload>
         </div>
       </div>

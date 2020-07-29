@@ -9,8 +9,11 @@
     [removeUrl]="uploadRemoveUrl"
     [restrictions]="restrictions"
     [multiple]="multiple"
+    [responseType]="responseType"
     [autoUpload]="autoUpload"
     (success)="onSuccess($event)"
+    (error)="errorEventHandler($event)"
+    (upload)="uploadEventHandler($event)"
     [id]="controlId" [name]="controlId">
   </kendo-upload>
   <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small>
