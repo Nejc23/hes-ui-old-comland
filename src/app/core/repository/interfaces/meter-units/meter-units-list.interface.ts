@@ -26,4 +26,5 @@ export interface MeterUnitsList {
   id4: string;
   id6: string;
   parametrisationId: string;
+  readyForActivation: boolean;
 }

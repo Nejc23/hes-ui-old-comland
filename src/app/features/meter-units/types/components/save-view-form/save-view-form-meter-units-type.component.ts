@@ -74,7 +74,8 @@ export class SaveViewFormMUTComponent implements OnInit {
             showDeletedMeterUnitsFilter: this.sessionLayout.showDeletedMeterUnitsFilter,
             showMeterUnitsWithoutTemplateFilter: this.sessionLayout.showMeterUnitsWithoutTemplateFilter,
             showOnlyMeterUnitsWithMBusInfoFilter: this.sessionLayout.showOnlyMeterUnitsWithMBusInfoFilter,
-            readStatusFilter: this.sessionLayout.readStatusFilter
+            readStatusFilter: this.sessionLayout.readStatusFilter,
+            showOnlyImageReadyForActivationFilter: this.sessionLayout.showOnlyImageReadyForActivationFilter
           };
           x.push(currentLayout);
           this.form = this.createForm(x, currentLayout);

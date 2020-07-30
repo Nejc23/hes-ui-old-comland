@@ -47,7 +47,8 @@ export class MeterUnitsTypeStaticTextService {
     breakerState: boolean,
     showChildMBus: boolean,
     showDeleted: boolean,
-    showWithoutTemplate: boolean
+    showWithoutTemplate: boolean,
+    showOnlyReadyForActivation: boolean
   ) {
     let result = this.noFilterAppliedTekst;
     let additionalString = '';
@@ -118,8 +119,14 @@ export class MeterUnitsTypeStaticTextService {
     }
 
     if (showWithoutTemplate) {
-      result = result + this.i18n('show without template');
+      additionalString = showOnlyReadyForActivation ? ', ' : '';
+      result = result + this.i18n('show without template') + additionalString;
     }
+
+    if (showOnlyReadyForActivation) {
+      result = result + this.i18n('show only ready for activation');
+    }
+
     return result;
   }
 }
