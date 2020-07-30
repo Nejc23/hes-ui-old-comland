@@ -86,6 +86,45 @@
           color: $white;
         }
       }
+
+      &.dropdown .arrow {
+        position: absolute;
+        right: 20px;
+        line-height: 35px;
+        font-size: 17px;
+      }
+
+      ul.dropdown-menu {
+        margin-top: -5px; 
+        padding-bottom: 10px;
+        
+
+        .nav-item.dropdown {
+          padding: 5px 0;
+
+          > a {
+            padding: 0;
+          }
+        }
+      }
+
+      &.open {
+        
+        .dropdown-menu .arrow {
+          line-height: 21px;
+        }
+      }
+
+      &.active {
+        border-right: 3px solid $primary;
+        > a {
+          color: $primary;
+        }
+
+        ul.dropdown-menu .nav-item.dropdown.active > a {
+          color: $primary;
+        }
+      }
     }
 
     // Color the sidebar toggler

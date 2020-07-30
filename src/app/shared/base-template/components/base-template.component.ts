@@ -111,11 +111,11 @@ export class BaseTemplateComponent implements OnInit {
       this.sidebarItems = this.sidebarService.getSidebarItems();
     }
     // fill submenu for meter units
-    this.fillMeterUnits();
+    //   this.fillMeterUnits();
     // fill submenu for configuration
-    this.fillConfiguration();
+    //   this.fillConfiguration();
   }
-
+  /*
   fillMeterUnits() {
     const sidebarItems = this.sidebarService.getSidebarMeterUnitsItems();
     this.codeList.meterUnitTypeCodelist().subscribe(list => {
@@ -133,10 +133,10 @@ export class BaseTemplateComponent implements OnInit {
       }
     });
   }
-
-  fillConfiguration() {
+*/
+  /* fillConfiguration() {
     this.sidebarConfigurationItems = this.sidebarService.getSidebarConfigurationItems();
-  }
+  }*/
 
   ngOnInit() {
     // this.languages$ = languages;

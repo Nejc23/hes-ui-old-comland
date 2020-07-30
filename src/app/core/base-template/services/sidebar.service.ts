@@ -45,8 +45,27 @@ export class SidebarService {
       {
         title: this.i18n(`Configuration`),
         routeLink: '/configuration',
-        hasChildren: false,
-        children: []
+        hasChildren: true,
+        children: [
+          {
+            title: this.i18n(`Import templates`),
+            routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
+            hasChildren: false,
+            children: []
+          },
+          {
+            title: this.i18n(`Import TOU configuration`),
+            routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
+            hasChildren: false,
+            children: []
+          },
+          {
+            title: this.i18n(`Auto templates`),
+            routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
+            hasChildren: false,
+            children: []
+          }
+        ]
       }
       // TODO uncomment when implemented
       /*
@@ -140,7 +159,7 @@ export class SidebarService {
   getSidebarItems() {
     return [...this.sidebarItems];
   }
-
+  /*
   getSidebarMeterUnitsItems() {
     return [...this.sidebarMeterUnitsItems];
   }
@@ -148,7 +167,7 @@ export class SidebarService {
   getSidebarConfigurationItems() {
     return [...this.sidebarConfigurationItems];
   }
-
+*/
   getSidebarItemsMobile() {
     return [...this.sidebarItems.filter(x => x.routeLink === '/dcuReadingConfiguration' || x.routeLink === '/help')];
   }
