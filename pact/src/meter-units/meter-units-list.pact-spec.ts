@@ -95,7 +95,8 @@ describe('Pact consumer test', () => {
         id4: 'id4',
         id6: 'id6',
         logicalDeviceName: 'device name 1',
-        parametrisationId: 'param 1'
+        parametrisationId: 'param 1',
+        readyForActivation: true
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -122,7 +123,8 @@ describe('Pact consumer test', () => {
         id4: 'id4',
         id6: 'id6',
         logicalDeviceName: 'device name 1',
-        parametrisationId: 'param 1'
+        parametrisationId: 'param 1',
+        readyForActivation: false
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -149,7 +151,8 @@ describe('Pact consumer test', () => {
         id4: 'id4',
         id6: 'id6',
         logicalDeviceName: 'device name 1',
-        parametrisationId: 'param 1'
+        parametrisationId: 'param 1',
+        readyForActivation: true
       }
     ];
 
