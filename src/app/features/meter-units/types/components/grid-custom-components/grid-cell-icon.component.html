@@ -1,14 +1,29 @@
-<div class="d-flex">
-  <div class="ml-auto" *ngIf="params.data && params.data.nextRead">
-    <i class="far fa-clock fa-fw text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentNextRead"></i>
+<div class="d-flex flex-row">
+
+
+  <div class="" *ngIf="params.data && params.data.nextRead">
+    <i class="far fa-clock text-secondary" container="body" placement="bottom"
+      [placement]="['right-top']"
+      [ngbPopover]="tipContentNextRead"
+      [autoClose]="'outside'"
+      popoverClass="scheduler-active-job-popover">
+    </i>
   </div>
-  <div class="ml-auto" *ngIf="params.data && !params.data.templateId">
+  <div class="" *ngIf="params.data && !params.data.templateId">
     <i class="far fa-exclamation-triangle fa-fw text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentMissingTemplate"></i>
   </div>
-  <div class="ml-auto" *ngIf="params.data && params.data.templateId">
-    <i class="far fa-fw"></i>
+ 
+  <div class="" *ngIf="params.data && params.data.readyForActivation">
+    <i class="far fa-life-ring text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentReadyForActivation"></i>
   </div>
 </div>
 
-<ng-template #tipContentNextRead id="tipContentNextRead">{{setMomentNextPlannedReadTime(params.data ? params.data.nextRead: null)}}</ng-template>
-<ng-template #tipContentMissingTemplate id="tipContentMissingTemplate"><span i18n>Missing template!</span></ng-template>
+<ng-template #tipContentNextRead id="tipContentNextRead">
+  <app-scheduler-active-jobs [deviceId]="params.data.deviceId"></app-scheduler-active-jobs>
+</ng-template>
+<ng-template #tipContentMissingTemplate id="tipContentMissingTemplate">
+  <span i18n>Missing template!</span>
+</ng-template>
+<ng-template #tipContentReadyForActivation id="tipContentReadyForActivation">
+  <span i18n>Ready for activation!</span>
+</ng-template>

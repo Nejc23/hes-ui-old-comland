@@ -50,15 +50,15 @@ export class RoleService {
       }
 });*/
     for (const role of rolesArray) {
-      if (role.toLowerCase() == RoleEnumerator.user.toString().toLowerCase()) {
+      if (role.toLowerCase() === RoleEnumerator.user.toString().toLowerCase()) {
         resultUserRight = this.unionOfRights(resultUserRight, this.user);
-      } else if (role.toLowerCase() == RoleEnumerator.partner.toString().toLowerCase()) {
+      } else if (role.toLowerCase() === RoleEnumerator.partner.toString().toLowerCase()) {
         resultUserRight = this.unionOfRights(resultUserRight, this.partner);
-      } else if (role.toLowerCase() == RoleEnumerator.registeredUser.toString().toLowerCase()) {
+      } else if (role.toLowerCase() === RoleEnumerator.registeredUser.toString().toLowerCase()) {
         resultUserRight = this.unionOfRights(resultUserRight, this.registeredUser);
-      } else if (role.toLowerCase() == RoleEnumerator.companyAdmin.toString().toLowerCase()) {
+      } else if (role.toLowerCase() === RoleEnumerator.companyAdmin.toString().toLowerCase()) {
         resultUserRight = this.unionOfRights(resultUserRight, this.companyAdmin);
-      } else if (role.toLowerCase() == RoleEnumerator.superAdmin.toString().toLowerCase()) {
+      } else if (role.toLowerCase() === RoleEnumerator.superAdmin.toString().toLowerCase()) {
         resultUserRight = this.unionOfRights(resultUserRight, this.superAdmin);
       }
     }
@@ -67,19 +67,19 @@ export class RoleService {
   }
 
   private unionOfRights(resultUserRight: UserRight[], role: Role): UserRight[] {
-    if (resultUserRight.length == 0) {
+    if (resultUserRight.length === 0) {
       this.pushNewUserRight(resultUserRight, role);
     } else {
       role.userRights.forEach(elmnCurrentRole => {
-        const exs = resultUserRight.find(x => x.functionality.toLowerCase() == elmnCurrentRole.functionality.toLowerCase());
+        const exs = resultUserRight.find(x => x.functionality.toLowerCase() === elmnCurrentRole.functionality.toLowerCase());
 
-        if (exs != undefined && exs != null) {
+        if (typeof exs !== 'undefined' && exs != null) {
           if (!exs.writeRights) {
             exs.writeRights = elmnCurrentRole.writeRights;
           }
           elmnCurrentRole.action.forEach(actT => {
-            const actExists = exs.action.find(x => x == actT);
-            if (actExists == undefined || actExists == null) {
+            const actExists = exs.action.find(x => x === actT);
+            if (typeof actExists === 'undefined' || actExists == null) {
               exs.action.push(actT);
             }
           });

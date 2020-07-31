@@ -1,4 +1,3 @@
-import { schedulerActiveJobs } from './../../app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -83,6 +82,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (SchedulerJobsInterceptor.canInterceptSchedulerJobs(request)) {
                 return SchedulerJobsInterceptor.interceptSchedulerJobs();
+              }
+
+              if (SchedulerJobsInterceptor.canInterceptSchedulerActiveJobsList(request)) {
+                return SchedulerJobsInterceptor.interceptSchedulerActiveJobsList(request);
               }
 
               // active jobs

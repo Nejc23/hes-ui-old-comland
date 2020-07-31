@@ -62,7 +62,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = params => {
       if (params.node && params.node.detail) {
-        const offset = 60;
+        const offset = 65;
         const allDetailRowHeight = params.data.rules.length * 1.7 * params.api.getSizesForCurrentTheme().rowHeight;
         const gridSizes = params.api.getSizesForCurrentTheme();
         return allDetailRowHeight + gridSizes.headerHeight + offset;
@@ -98,7 +98,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   rowEditingStopped($event) {
     this.event.edit(1);
-    if ($event.data.autoTemplateRuleId == 'new') {
+    if ($event.data.autoTemplateRuleId === 'new') {
       this.rowData.forEach(element => {
         const index = element.rules
           .map(x => {
@@ -153,7 +153,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     } else {
       const index = this.expadedTemplates.indexOf($event.data.templateId);
       if (index > -1) {
-        const rules = this.rowData.find(x => x.templateId == $event.data.templateId);
+        const rules = this.rowData.find(x => x.templateId === $event.data.templateId);
 
         if (rules != null) {
           const index2 = rules.rules.map(e => e.autoTemplateRuleId).indexOf('new');
@@ -170,6 +170,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   getData() {
     this.serviceRepository.getTemplates().subscribe(templates => {
+      this.rowData = this.prepareData(templates, []);
       if (templates != null && templates.length > 0) {
         this.serviceRepository.getAutoTemplateRules().subscribe(rules => {
           this.rowData = this.prepareData(templates, rules);
@@ -183,7 +184,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     templates.forEach(template => {
       let rulesNew: AutoTemplateRule[] = [];
       rules.forEach(r => {
-        if (r.templateId == template.templateId) {
+        if (r.templateId === template.templateId) {
           rulesNew = r.autoTemplateRules;
         }
       });
@@ -219,7 +220,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     // if not new row is afdded jet add new else return
     let alreadyNewRow = false;
     this.rowData.forEach(element => {
-      const rule = element.rules.find(x => x.autoTemplateRuleId == 'new');
+      const rule = element.rules.find(x => x.autoTemplateRuleId === 'new');
       if (rule != null) {
         this.toast.infoToast(this.i18n('Aready added empty row for new item!'));
         alreadyNewRow = true;
@@ -301,7 +302,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   editForm(id: string) {
     this.rowData.forEach(element => {
-      const rule = element.rules.find(x => x.autoTemplateRuleId == id);
+      const rule = element.rules.find(x => x.autoTemplateRuleId === id);
       if (rule != null) {
         this.form.get('templateId').setValue(element.templateId);
         return;

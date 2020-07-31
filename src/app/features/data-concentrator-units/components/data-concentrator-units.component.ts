@@ -268,7 +268,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
             })
             .catch(err => {
               if (err.message === 'login_required') {
-                that.authService.login().catch(err => console.log(err));
+                that.authService.login().catch(errDetail => console.log(errDetail));
               }
             });
         } else {
@@ -337,7 +337,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     if (this.gridApi) {
       this.gridApi.refreshHeader();
     }
-    //this.eventService.checkChange(true);
+    // this.eventService.checkChange(true);
   }
 
   // on close tool panel reload filter model

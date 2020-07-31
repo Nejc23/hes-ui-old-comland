@@ -43,7 +43,7 @@ export class GridCellEditComponent implements ICellRendererAngularComp {
     const options: NgbModalOptions = {
       size: 'xl'
     };
-    if (params.data.actionType == 1) {
+    if (params.data.actionType === 1) {
       this.editDiscoveryJob(params, options);
     } else {
       this.editReadingJob(params, options);

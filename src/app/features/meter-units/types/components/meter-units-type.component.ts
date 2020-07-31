@@ -179,6 +179,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
           this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
+          this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
           this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -218,7 +219,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // set form title by selected meter unit type
   private setTitle(id: number) {
-    const selectedType = this.meterTypes$.find(x => x.id == id);
+    const selectedType = this.meterTypes$.find(x => x.id === id);
     if (selectedType !== undefined && selectedType != null) {
       this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsType;
     }
@@ -351,7 +352,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
             })
             .catch(err => {
               if (err.message === 'login_required') {
-                that.authService.login().catch(err => console.log(err));
+                that.authService.login().catch(errDetail => console.log(errDetail));
               }
             });
         } else {
@@ -407,7 +408,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.breakerState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showDeleted &&
-        !this.requestModel.filterModel.showWithoutTemplate)
+        !this.requestModel.filterModel.showWithoutTemplate &&
+        !this.requestModel.filterModel.readyForActivation)
     ) {
       return true;
     }
@@ -460,6 +462,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+        this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
@@ -503,6 +506,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+      this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
     } else {
       this.setFilterInfo();
     }
@@ -524,7 +528,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
       filterInfo.showDeletedMeterUnitsFilter,
-      filterInfo.showMeterUnitsWithoutTemplateFilter
+      filterInfo.showMeterUnitsWithoutTemplateFilter,
+      filterInfo.showOnlyImageReadyForActivationFilter
     );
   }
 
@@ -542,7 +547,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
       filterInfo.showDeletedMeterUnitsFilter ||
-      filterInfo.showMeterUnitsWithoutTemplateFilter
+      filterInfo.showMeterUnitsWithoutTemplateFilter ||
+      filterInfo.showOnlyImageReadyForActivationFilter
     );
   }
 
@@ -708,7 +714,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   bulkOperation(operation: MeterUnitsTypeEnum) {
     // if (this.authService.isTokenAvailable()) {
     const selectedRows = this.gridApi.getSelectedRows();
-    let deviceIdsParam = [];
+    const deviceIdsParam = [];
     if (selectedRows && selectedRows.length > 0) {
       selectedRows.map(row => deviceIdsParam.push(row.deviceId));
       console.log(`deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
@@ -720,9 +726,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     let response: Observable<any> = new Observable();
 
     // TODO: ONLY FOR TESTING !!!
-    //deviceIdsParam = [];
-    //deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    //deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+    // deviceIdsParam = [];
+    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
     const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
     let operationName = '';
@@ -872,7 +878,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               // 3th step for breaker state
               if (isBreakerState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
-                  //console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
+                  // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
                   if (resultsBreakerState) {
                     this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
                   }

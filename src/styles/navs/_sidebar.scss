@@ -25,11 +25,11 @@
       width: $sidebar-base-width;
     }
 
-    &.active {
+   /* &.active {
       .nav-link {
         font-weight: $font-weight-bold;
       }
-    }
+    }*/
   }
 
   hr.sidebar-divider {
@@ -68,25 +68,96 @@
     }
 
     .nav-item {
+      
       .nav-link {
         color: $gray-400;
-
-        &.active {
-          color: $nav-active;
-        }
 
         &:hover {
           color: $gray-100;
           background-color: lighten($color: $gray-800, $amount: 5%);
+          width:  calc(#{$sidebar-base-width} - 25px);          
         }
-
       }
 
+      &.dropdown .arrow {
+        position: absolute;
+        top: 2px;
+        right: 20px;
+        line-height: 35px;
+        font-size: 17px;
+      }
+
+      ul.dropdown-menu {
+        margin-top: -5px; 
+        padding-bottom: 10px;
+        padding-left: 20px !important;  
+        border: 0;      
+        .nav-item {
+          padding: 5px 0;
+
+          > a {            
+            padding: 0;
+          }
+        }
+      }
+      &.open {
+        > a {
+          color: $gray-400;
+
+          .icon-holder {
+            color: $gray-400;
+          }
+
+          > .arrow {
+            @include transform(rotate(90deg));
+          }
+        }
+
+        > .dropdown-menu {
+          display: block;
+          
+          .dropdown-menu {
+            padding-left: 20px;	
+          }
+
+          .arrow {
+            line-height: 25px;
+          }
+        }
+      }
+  
       &.active {
-        .nav-link {
-          color: $white;
+        border-right: 3px solid $primary;
+        > a {
+          font-weight: $font-weight-bold;
+          color:  $gray-200;
+        }
+        
+
+        ul.dropdown-menu{         
+          font-weight: none; 
+          .nav-item.active > a {
+            color: $gray-200;
+            font-weight: $font-weight-bold;
+          }
         }
       }
+      
+      a {
+        color: $gray-700;
+        @include transition(all 0.3s ease); 
+        
+        &:hover,
+        &:focus {
+          text-decoration: none;
+          color: $gray-400;
+
+          .icon-holder {
+            color: $gray-400;
+          }
+        }
+      }
+      
     }
 
     // Color the sidebar toggler

@@ -83,7 +83,7 @@ export class GridCustomFilterComponent implements IToolPanel {
 
   fillformFromSession(x: DcuLayout[]) {
     this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-    if (this.sessionFilter && x != undefined) {
+    if (this.sessionFilter && typeof x !== 'undefined') {
       if (this.sessionFilter.id) {
         this.form = this.createForm(x, this.sessionFilter);
       } else {

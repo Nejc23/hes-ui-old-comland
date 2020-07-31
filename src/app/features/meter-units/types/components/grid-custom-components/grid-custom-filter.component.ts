@@ -116,6 +116,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
+          showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
           gridLayout: ''
         };
         x.push(currentFilter);
@@ -144,7 +145,8 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
         ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
         ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
         ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
-        ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false]
+        ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
+        ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false]
       },
       { validator: rangeFilterValidator }
     );
@@ -198,6 +200,10 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     return 'showOnlyMeterUnitsWithMBusInfo';
   }
 
+  get showOnlyImageReadyForActivationProperty() {
+    return 'showOnlyImageReadyForActivation';
+  }
+
   refresh() {}
 
   clearButtonClicked() {
@@ -242,6 +248,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
       showDeletedMeterUnitsFilter: this.form.get(this.showDeletedMeterUnitsProperty).value,
       showMeterUnitsWithoutTemplateFilter: this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
+      showOnlyImageReadyForActivationFilter: this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);

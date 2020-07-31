@@ -7,13 +7,13 @@ import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-en
   selector: '[appDisableIfActionUnauthorized]'
 })
 export class DisableIfActionUnauthorizedDirective implements OnInit {
-  @Input('functionality') permission: FunctionalityEnumerator; // Required permission passed in
-  @Input('action') action: ActionEnumerator; // Required permission passed in
+  @Input() functionality: FunctionalityEnumerator; // Required permission passed in
+  @Input() action: ActionEnumerator; // Required permission passed in
 
   constructor(private el: ElementRef, private authorizationService: PermissionsService) {}
 
   ngOnInit() {
-    if (!this.authorizationService.hasActionAccess(this.permission, this.action)) {
+    if (!this.authorizationService.hasActionAccess(this.functionality, this.action)) {
       this.el.nativeElement.disabled = true;
     }
   }

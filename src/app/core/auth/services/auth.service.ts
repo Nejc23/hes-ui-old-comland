@@ -108,7 +108,7 @@ export class AuthService {
   isRefreshNeeded2() {
     if (this.user != null && this.user.id_token != null) {
       const decoded = this.jwtHelper.decodeToken(this.user.id_token);
-      if (decoded.exp != undefined && decoded.exp != null) {
+      if (typeof decoded.exp !== 'undefined' && decoded.exp != null) {
         const secondsSinceEpoch = Math.round(Date.now() / 1000);
         if (secondsSinceEpoch > decoded.exp) {
           return true;
@@ -208,7 +208,12 @@ export class AuthService {
   }
 
   getIsDevelop(): boolean {
-    if (localStorage.getItem('is_develop') != undefined && localStorage.getItem('is_develop') === this.user.id_token) {
+    if (
+      typeof localStorage.getItem('is_develop') !== 'undefined' &&
+      localStorage.getItem('is_develop') &&
+      this.user &&
+      localStorage.getItem('is_develop') === this.user.id_token
+    ) {
       return true;
     }
     return false;
@@ -226,7 +231,7 @@ export class AuthService {
     this.cookieService.set(config.authCookie, authenticatedUser.accessToken, null, environment.cookiePath);
     this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     this.cookieService.set(config.authType, authenticatedUser.tokenType, null, environment.cookiePath);
-    //this.setUserRights(authenticatedUser);
+    // this.setUserRights(authenticatedUser);
   }
 
   /**

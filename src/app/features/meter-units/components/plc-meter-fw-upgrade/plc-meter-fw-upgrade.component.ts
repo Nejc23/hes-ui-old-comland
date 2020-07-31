@@ -1,25 +1,16 @@
-import { Component, OnInit, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
-import { Observable } from 'rxjs';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import {
-  MeterUnitsFwUpgradeForm,
-  FileGuid,
-  MeterUnitsFwUpgrade
-} from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
+import { FileGuid, MeterUnitsFwUpgrade } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
-import { PlcMeterReadScheduleService } from '../../services/plc-meter-read-scheduler.service';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { fwUploadFile, meterUnits, fwRemoveFile } from 'src/app/core/repository/consts/meter-units.const';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',
@@ -33,10 +24,10 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   configRequiredText = this.i18n('Required field');
   messageServerError = this.i18n(`Server error!`);
   deviceIdsParam = [];
-  uploadSaveUrl = `${meterUnits}/${fwUploadFile}`;
-  uploadRemoveUrl = `${meterUnits}/${fwRemoveFile}`;
+  uploadSaveUrl = `${fwUploadFile}`;
   imgGuid: FileGuid = null;
-  allowedExt = ['gif', 'jpg', 'jpeg', 'png'];
+  allowedExt = [];
+  allowedExtExplainText = 'can only upload one file.';
   public files: Array<any>;
   activate = false;
 
@@ -45,12 +36,10 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     private formUtils: FormsUtilsService,
     public i18n: I18n,
     private modal: NgbActiveModal,
-    private gridLinkService: MyGridLinkService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
-    private meterService: MeterUnitsService,
-    private authService: AuthService,
-    private toast: ToastNotificationService
+    private myGridService: MyGridLinkService,
+    private toast: ToastNotificationService,
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService
   ) {
     this.form = this.createForm();
   }
@@ -71,14 +60,14 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   fillData(): MeterUnitsFwUpgrade {
     const formData: MeterUnitsFwUpgrade = {
       //  files: this.form.get(this.imageProperty).value,
-      imageIdenifyer: this.form.get(this.imageIdenifyerProperty).value,
-      imageGuid: this.form.get(this.imageGuidProperty).value,
+      imageIdent: this.form.get(this.imageIdenifyerProperty).value,
+      fileId: this.form.get(this.imageGuidProperty).value,
       imageSize: parseInt(this.form.get(this.imageSizeProperty).value, 10),
-      imageSignature: this.form.get(this.imageSignatureProperty).value,
-      imageFillLastBlock: this.form.get(this.imageFillLastBlockProperty).value,
-      bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()
+      signature: this.form.get(this.imageSignatureProperty).value,
+      overrideFillLastBlock: this.form.get(this.imageFillLastBlockProperty).value,
+      // bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters() // todo for filters
+      deviceIds: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters().id.filter(Boolean)
     };
-    console.log(formData);
     return formData;
   }
 
@@ -88,24 +77,26 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   }
 
   upgrade() {
-    if (this.imgGuid != null && this.imgGuid.imageGuid.length > 0) {
-      console.log(this.imgGuid.imageGuid);
+    if (this.imgGuid != null && this.imgGuid.imageGuid && this.imgGuid.imageGuid.length > 0) {
       this.form.get(this.imageGuidProperty).setValue(this.imgGuid.imageGuid);
+    } else if (this.imgGuid) {
+      this.form.get(this.imageGuidProperty).setValue(this.imgGuid);
     }
 
     const values = this.fillData();
-    const request = this.meterService.createFwUpgrade(values);
-    // console.log(`request = ${JSON.stringify(request)}`);
+    const request = this.myGridService.createFwUpgrade(values);
     const successMessage = this.i18n(`Meter Units upload Edited was successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
-        console.log(result);
-        if (result) {
-          this.toast.infoToast(result.status);
+        if (result && result.requestId.length > 0) {
+          this.meterUnitsTypeGridService.saveMyGridLinkRequestId(result.requestId);
+        }
+        this.modal.close();
+        /*this.toast.infoToast(result.status);
           if (result.status.includes('waiting for activiation')) {
             this.activate = true;
           }
-        }
+        }*/
       },
       () => {} // error
     );

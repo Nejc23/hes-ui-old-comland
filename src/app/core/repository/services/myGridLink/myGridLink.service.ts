@@ -20,8 +20,10 @@ import {
   triggerSetTimeOfUse,
   onDemandDisconnectorState,
   onDemandData,
-  importTemplates
+  importTemplates,
+  triggerDeviceUpgrade
 } from '../../consts/my-grid-link.const';
+import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -99,5 +101,14 @@ export class MyGridLinkService {
 
   postMyGridTemplatesImportRequest(params: string): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.templating}${importTemplates}`, params);
+  }
+
+  // trigger FW upgrade
+  createFwUpgrade(payload: MeterUnitsFwUpgrade): Observable<DcResponse> {
+    return this.repository.makeRequest(this.createFwUpgradeRequest(payload));
+  }
+
+  createFwUpgradeRequest(payload: MeterUnitsFwUpgrade): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgrade}`, payload);
   }
 }

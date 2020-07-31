@@ -13,5 +13,6 @@ export interface MeterUnitsLayout {
   showOnlyMeterUnitsWithMBusInfoFilter: boolean;
   showDeletedMeterUnitsFilter: boolean;
   showMeterUnitsWithoutTemplateFilter: boolean;
+  showOnlyImageReadyForActivationFilter: boolean;
   gridLayout: string;
 }

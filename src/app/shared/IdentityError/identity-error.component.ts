@@ -9,6 +9,7 @@ export class IdentityErrorComponent implements OnInit {
 
   error = '';
   ngOnInit() {
-    this.route.params.subscribe((params: Params) => (this.error = params['error']));
+    const key = 'error';
+    this.route.params.subscribe((params: Params) => (this.error = params[key]));
   }
 }

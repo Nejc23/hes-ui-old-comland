@@ -1,3 +1,4 @@
+import { DateTimePickerComponent } from './../../../../shared/forms/components/datetime-picker/datetime-picker.component';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -68,15 +69,19 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
+    const currentDateWithZeroMinutes = new Date();
+    currentDateWithZeroMinutes.setMinutes(0);
+
     return this.formBuilder.group({
       [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '1', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
-      [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : new Date(new Date().toISOString().substring(0, 10) + 'T00:01')],
-      [this.weekDaysProperty]: [formData ? formData.weekDays : []],
-      [this.monthDaysProperty]: [formData ? formData.monthDays : []],
+      [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : null],
+      [this.timeForHoursProperty]: [formData ? moment(formData.dateTime).toDate() : currentDateWithZeroMinutes],
+      [this.weekDaysProperty]: [formData && formData.weekDays ? formData.weekDays : []],
+      [this.monthDaysProperty]: [formData && formData.monthDays ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
-      [this.descriptionProperty]: [formData ? formData.description : null, Validators.maxLength(500)],
+      [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
       [this.enableProperty]: [formData ? formData.enable : true]
     });
   }
@@ -115,17 +120,30 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
         id: concentrList
       };
     }
+
+    let time: string = null;
+
+    if (this.show_nHours()) {
+      time = this.form.get(this.timeForHoursProperty).value;
+    } else {
+      time = this.form.get(this.timeProperty).value;
+      if (time === null) {
+        time = new Date().toUTCString();
+      }
+    }
+
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
-      nMinutes: this.show_nMinutes() || this.show_nHours() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
+      nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
       nHours: this.show_nHours() ? parseInt(this.form.get(this.nHoursProperty).value, 10) : 0,
       time: this.showTime() ? this.form.get(this.timeProperty).value : null,
+      timeForHours: this.show_nHours() ? this.form.get(this.timeForHoursProperty).value : null,
       weekDays: this.showWeekDays() ? this.form.get(this.weekDaysProperty).value : [],
       monthDays: this.showMonthDays() ? this.form.get(this.monthDaysProperty).value : [],
       registers: null,
       iec: false,
       description: this.form.get(this.descriptionProperty).value,
-      dateTime: this.showDateTime() ? this.form.get(this.timeProperty).value : null,
+      dateTime: time,
       bulkActionsRequestParam: this.deviceFiltersAndSearch,
       usePointer: false,
       intervalRange: 0,
@@ -178,24 +196,28 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   changeReadOptionId() {
+    this.form.get(this.weekDaysProperty).enable();
     const selectedValuesForTimeProperty = [1, 4, 5, 6];
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
     this.form
       .get(this.timeProperty)
       .setValidators(_.find(selectedValuesForTimeProperty, x => x === this.selectedId) ? [Validators.required] : []);
-    this.form
-      .get(this.nMinutesProperty)
-      .setValidators(this.show_nMinutes() || this.show_nHours() ? [Validators.required, Validators.max(59)] : []);
-    this.form.get(this.nHoursProperty).setValidators(this.show_nHours() ? [Validators.required, Validators.max(23)] : []);
+    this.form.get(this.nMinutesProperty).setValidators(this.show_nMinutes() ? [Validators.required] : []);
+    this.form.get(this.nHoursProperty).setValidators(this.show_nHours() ? [Validators.required] : []);
     this.form.get(this.weekDaysProperty).setValidators(this.showWeekDays() ? [Validators.required] : []);
     this.form.get(this.monthDaysProperty).setValidators(this.showMonthDays() ? [Validators.required] : []);
-    if (this.show_nHours() && !this.form.get(this.nMinutesProperty).value) {
-      this.form.get(this.nMinutesProperty).setValue(0);
+
+    if (this.showMonthDays()) {
+      const realMonthDays = this.monthDays.map(day => (day = day + 1));
+      const daysSorted = realMonthDays.sort((a, b) => a - b);
+
+      this.noMonthDays = daysSorted.length === 0;
+      this.form.get(this.monthDaysProperty).setValue(daysSorted);
     }
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.find(this.monthDays, x => x === dayinMonth) ? true : false;
+    const result = _.findIndex(this.monthDays, x => x === dayinMonth) > -1 ? true : false;
     if (!result) {
       this.monthDays.push(dayinMonth);
     } else {
@@ -246,6 +268,10 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     return nameOf<SchedulerJobForm>(o => o.time);
   }
 
+  get timeForHoursProperty() {
+    return nameOf<SchedulerJobForm>(o => o.timeForHours);
+  }
+
   showTime() {
     const idsForTime = [4, 5, 6];
     const found = _.find(idsForTime, x => x === this.selectedId);
@@ -291,6 +317,18 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   next(value) {
+    if (this.showWeekDays()) {
+      this.form.get(this.weekDaysProperty).enable();
+    } else {
+      this.form.get(this.weekDaysProperty).disable();
+    }
+
+    // check form
+    this.formUtils.touchElementsAndValidate(this.form);
+    if (value > 0 && !this.form.valid) {
+      return;
+    }
+
     // check form
     if (value > 0 && !this.form.valid) {
       return;

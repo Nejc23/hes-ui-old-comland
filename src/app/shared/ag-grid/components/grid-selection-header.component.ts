@@ -40,7 +40,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
         if (selectedAll) {
           // if selected all rows
           for (let i = startRow; i <= endRow; i++) {
-            this.params.api.forEachNode((node, i) => {
+            this.params.api.forEachNode((node, ix) => {
               node.setSelected(true);
             });
           }
