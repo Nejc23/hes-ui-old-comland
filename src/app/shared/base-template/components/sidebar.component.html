@@ -12,9 +12,9 @@
   <li *ngFor="let item of items; let first = first" class="nav-item" [ngClass]="{'dropdown': item.hasChildren}"
     routerLinkActive="active">
   -->
-    <div *ngFor="let item of items; let first = first" class="nav-item" [ngClass]="{'dropdown': item.hasChildren}" routerLinkActive="active">
+    
 
-  
+    <li *ngFor="let item of items; let first = first" class="nav-item bg-dark" [ngClass]="{'dropdown': item.hasChildren}" routerLinkActive="active">
     <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" *ngIf="!item.hasChildren && hasAccess(item)">    
       <span class="title">{{item.title}}</span>
     </a>
@@ -26,33 +26,18 @@
         <i class="fa fa-angle-right"></i>
       </span>
     </a>
-<div class="nav-item">
-    <ul class="dropdown-menu bg-dark nav-item" *ngIf="item.hasChildren" appSidebarDropdown [opened]="item.opened">
+  
+    <ul class="dropdown-menu bg-dark" *ngIf="item.hasChildren" appSidebarDropdown [opened]="item.opened">
       <li class="nav-item dropdown" *ngFor="let obj of item.children" [ngClass]="{'d-none': !hasAccess(obj)}" routerLinkActive="active">
-        <a class="nav-link" href="javascript:void(0);" [routerLink]="obj.routeLink" *ngIf="!obj.hasChildren && hasAccess(obj) && !obj.openInNewTab">
-          <span innerHTML={{obj.title}}></span>
+        <a class="nav-link" href="javascript:void(0);" [routerLink]="obj.routeLink" *ngIf="!obj.hasChildren && hasAccess(obj) && !obj.openInNewTab"> 
+          <span class="title" innerHTML={{obj.title}}></span>
         </a>
 
-        <a class="nav-link" href="javascript:void(0);" *ngIf="obj.hasChildren && hasActiveChildLinks(item, null)" (click)="toggleDropdown(obj)"
-          appSidebarDropdown [opened]="obj.opened">
-          {{obj.title}}
-          <span class="arrow">
-            <i class="fa fa-angle-right"></i>
-          </span>
-        </a>
-        <ul class="dropdown-menu" *ngIf="obj.hasChildren">
-          <li *ngFor="let secondLevelChild of obj.children" [ngClass]="{'d-none': !hasAccess(secondLevelChild)}" class="nav-item dropdown" routerLinkActive="active">
-            <a href="javascript:void(0);" [routerLink]="secondLevelChild.routeLink">{{secondLevelChild.title}}</a>
-          </li>
-        </ul>
-
-        <a href="{{obj.routeLink}}" target="_blank" *ngIf="!obj.hasChildren && hasAccess(obj) && obj.openInNewTab">
-            <span innerHTML={{obj.title}}></span>
-        </a>
+        
       </li>
     </ul>
-  </div>
-</div>
+  </li>
+
 <!-- </li>
 </ul>-->
 <!--/div>-->

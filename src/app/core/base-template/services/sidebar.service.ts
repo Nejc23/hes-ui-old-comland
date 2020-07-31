@@ -30,13 +30,6 @@ export class SidebarService {
         children: []
       },
       {
-        title: ``,
-        routeLink: '',
-        hasChildren: false,
-        children: [],
-        isBorder: true
-      },
-      {
         title: this.i18n(`Jobs`),
         routeLink: '/schedulerJobs',
         hasChildren: false,
