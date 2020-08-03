@@ -27,8 +27,8 @@ describe('Pact consumer test', () => {
 
   const requestBody: Rule = {
     templateId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
-    obis: 'opis added',
-    regex: 'regex added'
+    propertyName: 'opis added',
+    propertyValue: 'regex added'
   };
 
   const responseBody = null;

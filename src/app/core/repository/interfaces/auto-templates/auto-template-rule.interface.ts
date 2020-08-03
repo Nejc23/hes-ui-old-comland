@@ -5,6 +5,6 @@ export interface AutoTemplateRuleList {
 
 export interface AutoTemplateRule {
   autoTemplateRuleId: string;
-  obis: string;
-  regex: string;
+  propertyName: string;
+  propertyValue: string;
 }
