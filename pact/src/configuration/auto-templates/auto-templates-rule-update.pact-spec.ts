@@ -27,8 +27,8 @@ describe('Pact consumer test', () => {
 
   const requestBody: AutoTemplateRule = {
     autoTemplateRuleId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
-    obis: 'opis update',
-    regex: 'regex update'
+    propertyName: 'opis update',
+    propertyValue: 'regex update'
   };
 
   const responseBody = null;

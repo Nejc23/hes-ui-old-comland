@@ -123,7 +123,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   createForm(): FormGroup {
     return this.formBuilder.group({
       ['ruleId']: ['', [Validators.required]],
-      ['obis']: [
+      ['propertyName']: [
         '',
         [
           Validators.required,
@@ -132,7 +132,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
           )
         ]
       ],
-      ['regex']: ['', [Validators.required]],
+      ['propertyValue']: ['', [Validators.required]],
       ['templateId']: [0]
     });
   }
@@ -196,12 +196,12 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
       };
 
       rows.push(templateNew);
-      this.ExpandTemplateRows();
+      this.expandTemplateRows();
     });
     return rows;
   }
 
-  private ExpandTemplateRows() {
+  private expandTemplateRows() {
     const that = this.gridApi;
     if (this.expadedTemplates != null && this.expadedTemplates.length > 0) {
       this.expadedTemplates.forEach(element => {
@@ -216,7 +216,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     }
   }
 
-  AddNewItem(templateId, rowIndex, gridApi: GridApi) {
+  addNewItem(templateId, rowIndex, gridApi: GridApi) {
     // if not new row is afdded jet add new else return
     let alreadyNewRow = false;
     this.rowData.forEach(element => {
@@ -234,8 +234,8 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
       if (element.templateId.localeCompare(templateId) === 0) {
         element.rules.splice(0, 0, {
           autoTemplateRuleId: 'new',
-          obis: '',
-          regex: ''
+          propertyName: '',
+          propertyValue: ''
         });
       }
     });
@@ -249,10 +249,10 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
       gridApi.forEachDetailGridInfo(detailGridApi => {
         console.log(detailGridApi.api);
-        detailGridApi.api.setFocusedCell(0, 'obis');
+        detailGridApi.api.setFocusedCell(0, 'propertyName');
         detailGridApi.api.startEditingCell({
           rowIndex: 0,
-          colKey: 'obis'
+          colKey: 'propertyName'
         });
       });
     }, 100);
@@ -282,8 +282,8 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   fillDataNewRule(): Rule {
     const formData: Rule = {
-      obis: this.form.get('obis').value,
-      regex: this.form.get('regex').value,
+      propertyName: this.form.get('propertyName').value,
+      propertyValue: this.form.get('propertyValue').value,
       templateId: this.form.get('templateId').value
     };
 
@@ -292,8 +292,8 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   fillDataEditRule(): AutoTemplateRule {
     const formData: AutoTemplateRule = {
-      obis: this.form.get('obis').value,
-      regex: this.form.get('regex').value,
+      propertyName: this.form.get('propertyName').value,
+      propertyValue: this.form.get('propertyValue').value,
       autoTemplateRuleId: this.form.get('ruleId').value
     };
 
@@ -341,7 +341,7 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     /*
     messageStarted = this.i18n(`Scheduler job deleted!`);
     messageServerError = this.i18n(`Server error!`);
-  
+
     const request = this.serviceRepository.deleteAutoTemplateRule(id);
     this.formUtils.deleteForm(request, this.i18n('Selected item deleted')).subscribe(
       (response: any) => {
