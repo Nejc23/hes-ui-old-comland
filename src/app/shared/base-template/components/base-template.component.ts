@@ -73,18 +73,19 @@ export class BaseTemplateComponent implements OnInit {
     this.getScreenSize();
     // this.form = this.createForm();
 
-    this.router.events.subscribe(event => {
+    /*this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects;
         if (currentUrl.includes('/meterUnits')) {
           this.submenu = 1;
         } else if (currentUrl.includes('/configuration')) {
           this.submenu = 2;
+         
         } else {
           this.submenu = 0;
         }
       }
-    });
+    });*/
   }
 
   /*  reloadPage(selected: Codelist<number>) {
@@ -111,13 +112,14 @@ export class BaseTemplateComponent implements OnInit {
       this.sidebarItems = this.sidebarService.getSidebarItems();
     }
     // fill submenu for meter units
-    this.fillMeterUnits();
+    //     this.fillMeterUnits();
     // fill submenu for configuration
-    this.fillConfiguration();
+    //   this.fillConfiguration();
   }
 
   fillMeterUnits() {
-    const sidebarItems = this.sidebarService.getSidebarMeterUnitsItems();
+    const sidebarItems = this.sidebarService.getSidebarItems();
+    console.log(sidebarItems);
     this.codeList.meterUnitTypeCodelist().subscribe(list => {
       if (list && list.length > 0) {
         list.forEach(element => {
@@ -127,18 +129,20 @@ export class BaseTemplateComponent implements OnInit {
             hasChildren: false,
             children: []
           };
-          sidebarItems.push(newElement);
+          sidebarItems[1].children.push(newElement);
+          sidebarItems[1].hasChildren = true;
         });
         this.sidebarMeterUnitsItems = sidebarItems;
       }
     });
   }
 
-  fillConfiguration() {
+  /* fillConfiguration() {
     this.sidebarConfigurationItems = this.sidebarService.getSidebarConfigurationItems();
-  }
+  }*/
 
   ngOnInit() {
+    this.fillMeterUnits();
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
 

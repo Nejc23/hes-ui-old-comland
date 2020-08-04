@@ -26,6 +26,7 @@ export interface GridFilterParams {
   showChildInfoMBus?: boolean;
   showDeleted: boolean;
   showWithoutTemplate?: boolean;
+  readyForActivation?: boolean;
 }
 
 export interface GridSortParams {

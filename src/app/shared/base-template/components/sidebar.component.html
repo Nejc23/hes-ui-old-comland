@@ -1,5 +1,5 @@
 <!-- Nav Item - Dashboard -->
-<div *ngFor="let item of items">
+<!--<div *ngFor="let item of items">
   <hr class="sidebar-divider" *ngIf="item.isBorder">
   <li class="nav-item" >
     <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" routerLinkActive="active"
@@ -7,8 +7,40 @@
       <span>{{ item.title }}</span>
     </a>
 
+  </li>-->
+  <!--<ul class="side-nav-menu scrollable">
+  <li *ngFor="let item of items; let first = first" class="nav-item" [ngClass]="{'dropdown': item.hasChildren}"
+    routerLinkActive="active">
+  -->
+    
+
+    <li *ngFor="let item of items; let first = first" class="nav-item bg-dark" [ngClass]="{'dropdown': item.hasChildren}" routerLinkActive="active">
+    <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" *ngIf="!item.hasChildren && hasAccess(item)">    
+      <span class="title">{{item.title}}</span>
+    </a>
+
+    <a class="nav-link dropdown-toggle-menu" href="javascript:void(0);" (click)="toggleDropdown(item)"
+      *ngIf="item.hasChildren && hasActiveChildLinks(item, null)">  
+      <span class="title">{{item.title}}</span>
+      <span class="arrow">
+        <i class="fa fa-angle-right"></i>
+      </span>
+    </a>
+  
+    <ul class="dropdown-menu bg-dark" *ngIf="item.hasChildren" appSidebarDropdown [opened]="item.opened">
+      <li class="nav-item dropdown" *ngFor="let obj of item.children" [ngClass]="{'d-none': !hasAccess(obj)}" routerLinkActive="active">
+        <a class="nav-link" href="javascript:void(0);" [routerLink]="obj.routeLink" *ngIf="!obj.hasChildren && hasAccess(obj) && !obj.openInNewTab"> 
+          <span class="title" innerHTML={{obj.title}}></span>
+        </a>
+
+        
+      </li>
+    </ul>
   </li>
-</div>
+
+<!-- </li>
+</ul>-->
+<!--/div>-->
 <div class="sidebar-version text-center">
   <small>{{version}}</small>
 </div>

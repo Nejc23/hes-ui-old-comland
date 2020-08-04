@@ -179,6 +179,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
           this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
+          this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
           this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -407,7 +408,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.breakerState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showDeleted &&
-        !this.requestModel.filterModel.showWithoutTemplate)
+        !this.requestModel.filterModel.showWithoutTemplate &&
+        !this.requestModel.filterModel.readyForActivation)
     ) {
       return true;
     }
@@ -460,6 +462,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+        this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
@@ -503,6 +506,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+      this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
     } else {
       this.setFilterInfo();
     }
@@ -524,7 +528,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
       filterInfo.showDeletedMeterUnitsFilter,
-      filterInfo.showMeterUnitsWithoutTemplateFilter
+      filterInfo.showMeterUnitsWithoutTemplateFilter,
+      filterInfo.showOnlyImageReadyForActivationFilter
     );
   }
 
@@ -542,7 +547,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
       filterInfo.showDeletedMeterUnitsFilter ||
-      filterInfo.showMeterUnitsWithoutTemplateFilter
+      filterInfo.showMeterUnitsWithoutTemplateFilter ||
+      filterInfo.showOnlyImageReadyForActivationFilter
     );
   }
 

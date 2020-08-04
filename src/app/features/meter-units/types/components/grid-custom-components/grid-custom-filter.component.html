@@ -40,6 +40,7 @@
 
       <app-input-switch label="Show deleted Meter Units" [form]="form" [property]="showDeletedMeterUnitsProperty" i18n-label></app-input-switch>
       <app-input-switch label="Show Meter Units without template" [form]="form" [property]="showMeterUnitsWithoutTemplateProperty" i18n-label></app-input-switch>
+      <app-input-switch label="Show only image ready for activation" [form]="form" [property]="showOnlyImageReadyForActivationProperty" i18n-label></app-input-switch>
 
     </fieldset>
     <div class="d-flex justify-content-end" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
