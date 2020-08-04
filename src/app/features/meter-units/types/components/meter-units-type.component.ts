@@ -100,7 +100,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult = '';
   dataStatusResponse = '';
   dataResult2 = '';
-  private localeText;
+  public localeText;
 
   messageActionInProgress = this.i18n(`Action in progress!`);
   messageServerError = this.i18n(`Server error!`);

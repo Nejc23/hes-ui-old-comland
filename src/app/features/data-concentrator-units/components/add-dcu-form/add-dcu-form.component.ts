@@ -104,11 +104,11 @@ export class AddDcuFormComponent implements OnInit {
       meters: 0,
       metersPercent: 0,
       metersUp: false,
-      nextRead: '',
       readStatusColor: '',
       readStatusTimeStamp: '',
       status: 'INACTIVE',
-      tags: null
+      tags: null,
+      hasActiveJob: true
     };
 
     return data;

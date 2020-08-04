@@ -84,7 +84,6 @@ function setData(): MeterUnitsList[] {
     {
       id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 520',
       readStatusTimeStamp: '2020-01-03T05:32:32',
       readStatusColor: 'red',
@@ -107,12 +106,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: true
     },
     {
       id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
       status: 'Active',
-      nextRead: '2020-06-03T15:35:29',
       name: 'Cubis PLC temp 423',
       readStatusTimeStamp: '2020-04-30T15:00:01',
       readStatusColor: 'green',
@@ -135,12 +134,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: true
     },
     {
       id: '22cfeaae-463a-4055-8632-a6818ba77d81',
       status: 'Mouted',
-      nextRead: '2020-07-06T11:02:50',
       name: 'Cubis PLC temp 753',
       readStatusTimeStamp: '2020-05-10T01:04:01',
       readStatusColor: 'green',
@@ -163,12 +162,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: true
     },
     {
       id: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
       status: 'Active',
-      nextRead: '2020-05-29T17:39:41',
       name: 'Cubis PLC temp 844',
       readStatusTimeStamp: '2020-05-10T09:34:32',
       readStatusColor: 'Yellow',
@@ -191,12 +190,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: true
     },
     {
       id: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 344',
       readStatusTimeStamp: '2020-05-05T11:04:03',
       readStatusColor: 'yellow',
@@ -219,12 +218,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
       status: 'Active',
-      nextRead: '2020-05-31T11:04:03',
       name: 'PLC dat 221',
       readStatusTimeStamp: '2020-02-17T04:26:37',
       readStatusColor: 'red',
@@ -247,12 +246,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: false
     },
     {
       id: 'e4694732-a282-477c-9c47-79ca08f64911',
       status: 'Mouted',
-      nextRead: '2020-05-30T02:00:03',
       name: 'PLC dat 915',
       readStatusTimeStamp: '2020-02-17T05:26:37',
       readStatusColor: 'red',
@@ -275,12 +274,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: true
     },
     {
       id: '4db50891-45dc-4910-bc8e-1d1c15862a68',
       status: 'Active',
-      nextRead: '2020-07-01T20:40:46',
       name: 'PLC dat 387',
       readStatusTimeStamp: '2020-03-31T17:08:00',
       readStatusColor: 'red',
@@ -303,12 +302,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: '7f7e9055-ad99-479f-956f-903022e1cccd',
       status: 'Warehouse',
-      nextRead: null,
       name: 'PLC dat 626',
       readStatusTimeStamp: '2020-05-09T12:02:33',
       readStatusColor: 'green',
@@ -331,12 +330,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
       status: 'Warehouse',
-      nextRead: '2020-06-03T09:04:03',
       name: 'PLC dat 623',
       readStatusTimeStamp: '2020-05-11T12:14:00',
       readStatusColor: 'green',
@@ -359,12 +358,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
       status: 'Warehouse',
-      nextRead: null,
       name: 'PLC dat 345',
       readStatusTimeStamp: '2020-05-03T00:00:00',
       readStatusColor: 'green',
@@ -387,12 +386,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: false
     },
     {
       id: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
       status: 'Warehouse',
-      nextRead: null,
       name: 'PLC dat 954',
       readStatusTimeStamp: '2019-12-14T03:12:11',
       readStatusColor: 'red',
@@ -415,12 +414,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: false
     },
     {
       id: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
       status: 'Active',
-      nextRead: '2020-05-06T13:52:33',
       name: 'PLC dat 233',
       readStatusTimeStamp: '2019-12-20T20:20:20',
       readStatusColor: 'red',
@@ -443,12 +442,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: false
     },
     {
       id: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
       status: 'Warehouse',
-      nextRead: '2020-05-15T19:38:31',
       name: 'PLC dat 659',
       readStatusTimeStamp: '2019-10-02T05:09:23',
       readStatusColor: 'red',
@@ -471,12 +470,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: false
+      readyForActivation: false,
+      hasActiveJobs: false
     },
     {
       id: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
       status: 'Mouted',
-      nextRead: '2020-02-25T10:01:04',
       name: 'PLC dat 519',
       readStatusTimeStamp: '2019-09-18T19:18:59',
       readStatusColor: 'red',
@@ -499,12 +498,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
       status: 'Mouted',
-      nextRead: null,
       name: 'PLC dat 656',
       readStatusTimeStamp: '2020-01-18T19:18:59',
       readStatusColor: 'red',
@@ -527,12 +526,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
       status: 'Warehouse',
-      nextRead: '2020-03-05T08:33:05',
       name: 'PLC dat 773',
       readStatusTimeStamp: '2020-05-05T03:29:19',
       readStatusColor: 'green',
@@ -555,12 +554,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
       status: 'Active',
-      nextRead: null,
       name: 'PLC dat 284',
       readStatusTimeStamp: '2020-05-05T03:21:19',
       readStatusColor: 'yellow',
@@ -583,12 +582,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: 'r42234-9c3d-46ea-bbdd-4770baefafbf',
       status: 'Mouted',
-      nextRead: null,
       name: 'PLC dat 2824',
       readStatusTimeStamp: '2020-04-02T12:33:12',
       readStatusColor: 'yellow',
@@ -611,12 +610,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: '90976-9c3d-46ea-bbdd-4770baefafbf',
       status: 'Active',
-      nextRead: null,
       name: 'PLC dat 22384',
       readStatusTimeStamp: '2020-01-24T04:31:00',
       readStatusColor: 'red',
@@ -639,12 +638,12 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     },
     {
       id: '90976-9c3d-46ea-642234-4770baefafbf',
       status: 'Active',
-      nextRead: null,
       name: 'PLC dat 543',
       readStatusTimeStamp: '2020-05-10T10:00:03',
       readStatusColor: 'green',
@@ -667,7 +666,8 @@ function setData(): MeterUnitsList[] {
       id6: 'id6',
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
-      readyForActivation: true
+      readyForActivation: true,
+      hasActiveJobs: false
     }
   ];
 }

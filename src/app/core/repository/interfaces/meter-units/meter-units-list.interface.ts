@@ -3,7 +3,6 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 export interface MeterUnitsList {
   id: string;
   status: string;
-  nextRead: string;
   name: string;
   readStatusTimeStamp: string;
   readStatusColor: string;
@@ -27,4 +26,5 @@ export interface MeterUnitsList {
   id6: string;
   parametrisationId: string;
   readyForActivation: boolean;
+  hasActiveJobs: boolean;
 }
