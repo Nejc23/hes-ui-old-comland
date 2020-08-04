@@ -1,7 +1,6 @@
 export interface DataConcentratorUnitsList {
   concentratorId: string;
   status: string;
-  nextRead: string;
   name: string;
   meters: number;
   metersPercent: number;
@@ -16,4 +15,5 @@ export interface DataConcentratorUnitsList {
   tags: string[];
   jobStatus: string;
   discoveryJob?: string;
+  hasActiveJob: boolean;
 }

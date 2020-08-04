@@ -73,7 +73,6 @@ describe('Pact consumer test', () => {
       {
         id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
         status: 'Active',
-        nextRead: null,
         name: 'Cubis PLC temp 520',
         readStatusTimeStamp: '2020-05-05T03:21:19',
         readStatusColor: 'green',
@@ -96,12 +95,12 @@ describe('Pact consumer test', () => {
         id6: 'id6',
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
-        readyForActivation: true
+        readyForActivation: true,
+        hasActiveJobs: false
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
-        nextRead: '2020-03-03T15:35:29',
         name: 'Cubis PLC temp 423',
         readStatusTimeStamp: '2020-03-15T03:21:19',
         readStatusColor: 'yellow',
@@ -124,12 +123,12 @@ describe('Pact consumer test', () => {
         id6: 'id6',
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
-        readyForActivation: false
+        readyForActivation: false,
+        hasActiveJobs: true
       },
       {
         id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Warehouse',
-        nextRead: '2019-11-30T02:32:13',
         name: 'Cubis PLC temp 642',
         readStatusTimeStamp: '2019-12-19T13:55:55',
         readStatusColor: 'red',
@@ -152,7 +151,8 @@ describe('Pact consumer test', () => {
         id6: 'id6',
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
-        readyForActivation: true
+        readyForActivation: true,
+        hasActiveJobs: true
       }
     ];
 

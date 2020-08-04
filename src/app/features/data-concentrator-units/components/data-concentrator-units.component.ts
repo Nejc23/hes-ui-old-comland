@@ -43,7 +43,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   filters = '';
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
-  private localeText;
+  public localeText;
 
   // N/A
   notAvailableText = this.staticextService.notAvailableTekst;

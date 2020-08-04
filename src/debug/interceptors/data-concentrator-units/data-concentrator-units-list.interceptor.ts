@@ -85,7 +85,6 @@ function setData(): DataConcentratorUnitsList[] {
     {
       concentratorId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
       status: 'Active',
-      nextRead: '2020-05-15T10:35:29',
       name: 'Cubis PLC temp 520',
       meters: 102,
       metersPercent: 93.4,
@@ -98,12 +97,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '234.88.127.4',
       lastCommunication: '2020-02-21T07:03:02',
       tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
       status: 'Active',
-      nextRead: '2020-06-03T15:35:29',
       name: 'Cubis PLC temp 423',
       meters: null,
       metersPercent: null,
@@ -116,12 +115,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: '2020-02-19T07:03:02',
       tags: null,
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '22cfeaae-463a-4055-8632-a6818ba77d81',
       status: 'Mouted',
-      nextRead: '2020-05-30T11:02:50',
       name: 'Cubis PLC temp 753',
       meters: 126,
       metersPercent: 91.2,
@@ -134,12 +133,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '56.8.249.89',
       lastCommunication: '2020-02-02T20:14:15',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: true
     },
     {
       concentratorId: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
       status: 'Active',
-      nextRead: '2020-07-29T17:39:41',
       name: 'Cubis PLC temp 844',
       meters: 60,
       metersPercent: 51,
@@ -152,12 +151,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '29.87.178.125',
       lastCommunication: '2020-01-14T06:32:32',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 344',
       meters: null,
       metersPercent: null,
@@ -170,12 +169,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
       status: 'Warehouse',
-      nextRead: '2020-06-04T15:35:29',
       name: 'Cubis PLC temp 18',
       meters: 51,
       metersPercent: 36,
@@ -188,12 +187,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '104.144.4.163',
       lastCommunication: '2019-12-12T03:03:31',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'B1EC59FD-D575-4BD0-92B7-4DE44101814D',
       status: 'Mouted',
-      nextRead: '2020-04-17T12:28:31',
       name: 'Cubis PLC temp 731',
       meters: null,
       metersPercent: null,
@@ -206,12 +205,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '8567A0A0-0B06-4D64-948B-48DC1D2C7152',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 857',
       meters: 65,
       metersPercent: 14,
@@ -224,12 +223,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '63.241.139.60',
       lastCommunication: '2019-12-18T02:22:53',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '6DFB4D01-F0B7-44D0-8578-A3A04CEC8383',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 472',
       meters: 159,
       metersPercent: 47,
@@ -242,12 +241,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '60.92.38.60',
       lastCommunication: '2019-11-10T19:52:56',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'C2E98E47-8079-4BF0-89D5-7E3E469DFB0E',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 901',
       meters: 56,
       metersPercent: 43,
@@ -260,12 +259,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '184.255.204.127',
       lastCommunication: '2020-02-19T21:22:21',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'DCC6446A-59FD-4412-BAB3-E92D4FF83DEA',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 98',
       meters: 170,
       metersPercent: 19,
@@ -278,12 +277,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '243.94.204.129',
       lastCommunication: '2019-12-25T20:12:41',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F58AC0E6-A592-481C-80C7-704120A61EBD',
       status: 'Inactive',
-      nextRead: '2020-03-29T12:07:03',
       name: 'Cubis PLC temp 386',
       meters: 155,
       metersPercent: 48,
@@ -296,12 +295,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '135.76.7.241',
       lastCommunication: '2019-12-05T09:33:02',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '399F93F4-185E-496E-8269-3DD43F1C3949',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 518',
       meters: 66,
       metersPercent: 16,
@@ -314,12 +313,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '86.150.95.102',
       lastCommunication: '2020-01-02T04:27:10',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '6C158A45-9369-42FE-BDA6-D0A4A57B4949',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 587',
       meters: null,
       metersPercent: null,
@@ -332,12 +331,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '1482954C-B2E6-4582-8DF7-214C2C966042',
       status: 'Inactive',
-      nextRead: '2020-04-16T04:44:51',
       name: 'Cubis PLC temp 197',
       meters: 163,
       metersPercent: 80,
@@ -350,12 +349,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '238.184.144.180',
       lastCommunication: '2020-01-03T20:30:14',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F9C1F0DE-0E50-4D20-A016-B907B9E64DD9',
       status: 'Active',
-      nextRead: '2020-04-10T03:37:33',
       name: 'Cubis PLC temp 908',
       meters: 91,
       metersPercent: 70,
@@ -368,12 +367,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '106.231.191.115',
       lastCommunication: '2019-11-11T16:54:36',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'AC9D7C4F-08C7-46A0-930B-61A0B1FE678D',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 138',
       meters: 86,
       metersPercent: 10,
@@ -386,12 +385,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '230.57.27.185',
       lastCommunication: '2019-11-19T21:32:13',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '0975B298-791F-49AB-A9CA-541B30C893E9',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 979',
       meters: 85,
       metersPercent: 18,
@@ -404,12 +403,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '16.78.240.50',
       lastCommunication: '2019-11-24T03:36:37',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '0A9E1847-CA66-4A35-9DC3-5C7003C2E531',
       status: 'Mouted',
-      nextRead: '2020-05-07T01:57:10',
       name: 'Cubis PLC temp 143',
       meters: 63,
       metersPercent: 63,
@@ -422,12 +421,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '20.151.223.223',
       lastCommunication: '2019-11-07T12:16:45',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '84B8272C-9448-4F56-BD6D-1BB09D1A5EBB',
       status: 'Inactive',
-      nextRead: '2020-03-16T05:33:50',
       name: 'Cubis PLC temp 911',
       meters: 151,
       metersPercent: 84,
@@ -440,12 +439,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '3.135.65.193',
       lastCommunication: '2020-01-11T14:46:52',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '9A7CFE4C-EC1F-4847-86D5-1AEFD5BD4A5A',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 977',
       meters: 66,
       metersPercent: 46,
@@ -458,12 +457,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '28.228.200.43',
       lastCommunication: '2020-02-08T21:41:49',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '93460A0A-43EA-4C36-A5A4-954FE5EFDC07',
       status: 'Active',
-      nextRead: '2020-03-27T23:10:01',
       name: 'Cubis PLC temp 841',
       meters: 134,
       metersPercent: 61,
@@ -476,12 +475,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '237.11.84.3',
       lastCommunication: '2019-11-09T16:46:20',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '0D686BD4-E6F0-4BC7-8E6A-C7E7293DD44E',
       status: 'Warehouse',
-      nextRead: '2020-04-29T09:00:49',
       name: 'Cubis PLC temp 43',
       meters: 135,
       metersPercent: 43,
@@ -494,12 +493,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '160.39.192.162',
       lastCommunication: '2020-01-01T05:01:35',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '26590FFF-8A26-4E26-B283-544A7B34F558',
       status: 'Mouted',
-      nextRead: '2020-03-31T19:34:30',
       name: 'Cubis PLC temp 776',
       meters: 81,
       metersPercent: 70,
@@ -512,12 +511,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '126.199.190.60',
       lastCommunication: '2020-02-05T01:17:33',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '30785B72-7812-4729-9689-57CC148CC27A',
       status: 'Mouted',
-      nextRead: '2020-05-11T13:01:51',
       name: 'Cubis PLC temp 518',
       meters: 53,
       metersPercent: 37,
@@ -530,12 +529,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '243.172.73.57',
       lastCommunication: '2020-01-09T20:59:35',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'B5560FB0-B498-4C6F-BC6C-10834D30366F',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 384',
       meters: 159,
       metersPercent: 25,
@@ -548,12 +547,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '228.217.160.104',
       lastCommunication: '2020-01-31T04:36:17',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '9567F114-61DA-40AE-8110-801AB20A0397',
       status: 'Mouted',
-      nextRead: '2020-04-26T10:00:11',
       name: 'Cubis PLC temp 159',
       meters: null,
       metersPercent: null,
@@ -566,12 +565,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'B5B05565-7C27-4120-A190-D5B2B7150BCD',
       status: 'Warehouse',
-      nextRead: '2020-05-11T04:37:03',
       name: 'Cubis PLC temp 587',
       meters: 105,
       metersPercent: 1,
@@ -584,12 +583,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '18.9.74.77',
       lastCommunication: '2019-12-09T16:43:49',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '21B26727-C20C-4022-B82F-7E06575C25D2',
       status: 'Warehouse',
-      nextRead: '2020-03-28T22:34:22',
       name: 'Cubis PLC temp 12',
       meters: 49,
       metersPercent: 97,
@@ -602,12 +601,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '60.115.23.22',
       lastCommunication: '2019-12-20T01:21:54',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'DF075172-7B98-462D-8FD6-AAAA52926617',
       status: 'Active',
-      nextRead: '2020-02-25T19:15:06',
       name: 'Cubis PLC temp 694',
       meters: 155,
       metersPercent: 13,
@@ -620,12 +619,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '62.142.210.158',
       lastCommunication: '2019-11-25T06:08:42',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '82BFE0FB-38DE-4CF2-B9A7-004F57F3B9B3',
       status: 'Inactive',
-      nextRead: '2020-03-03T15:10:18',
       name: 'Cubis PLC temp 213',
       meters: 103,
       metersPercent: 41,
@@ -638,12 +637,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '2.130.116.120',
       lastCommunication: '2019-12-20T04:54:25',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '3C7D3E01-0E44-4F5F-A8AB-1C6AE9D0E9A1',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 983',
       meters: 163,
       metersPercent: 64,
@@ -656,12 +655,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '13.154.106.149',
       lastCommunication: '2020-01-13T07:46:35',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '40ECCEDE-9505-4A13-8396-4157891E78A9',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 940',
       meters: 130,
       metersPercent: 68,
@@ -674,12 +673,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '71.123.236.155',
       lastCommunication: '2020-01-25T22:08:05',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '75560C9B-8E2C-46DD-9E1E-3AD1C232FA95',
       status: 'Mouted',
-      nextRead: '2020-03-12T15:12:53',
       name: 'Cubis PLC temp 863',
       meters: 87,
       metersPercent: 48,
@@ -692,12 +691,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '220.91.239.44',
       lastCommunication: '2019-11-02T15:16:24',
       tags: ['tag31', 'tag32'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '5D4C60E9-CC48-4E26-AC36-5DF6F0776E69',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 683',
       meters: 191,
       metersPercent: 80,
@@ -710,12 +709,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '133.216.195.206',
       lastCommunication: '2019-11-21T17:11:48',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '31D90A55-C67F-4CA1-A239-F781849C0187',
       status: 'Inactive',
-      nextRead: '2020-05-06T16:38:41',
       name: 'Cubis PLC temp 9',
       meters: null,
       metersPercent: null,
@@ -728,12 +727,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '2525A2F8-D18D-4496-AE1D-DF10F8919A0B',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 102',
       meters: 136,
       metersPercent: 18,
@@ -746,12 +745,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '207.134.127.233',
       lastCommunication: '2019-12-10T17:51:11',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '72E5E11C-7BD6-4E77-8F32-B516D2DD34A4',
       status: 'Warehouse',
-      nextRead: '2020-05-13T20:32:01',
       name: 'Cubis PLC temp 580',
       meters: 45,
       metersPercent: 20,
@@ -764,12 +763,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '199.18.60.70',
       lastCommunication: '2020-02-06T23:00:13',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '792DDABC-DD4C-42B1-89EB-C8DEFB57C579',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 541',
       meters: 34,
       metersPercent: 56,
@@ -782,12 +781,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '84.137.159.8',
       lastCommunication: '2019-11-09T13:49:50',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '0F50A5AF-E6E4-476A-9743-30A5E36208DE',
       status: 'Active',
-      nextRead: '2020-05-19T00:46:51',
       name: 'Cubis PLC temp 805',
       meters: 78,
       metersPercent: 61,
@@ -800,12 +799,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '92.10.78.58',
       lastCommunication: '2019-12-23T13:08:47',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '2B61C9F5-6F08-4669-8D18-DA4F5602C219',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 151',
       meters: 113,
       metersPercent: 31,
@@ -818,12 +817,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '141.51.187.2',
       lastCommunication: '2019-11-06T00:37:48',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '2E58E785-6F32-4C4A-B938-3419893E7B7C',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 914',
       meters: 108,
       metersPercent: 78,
@@ -836,12 +835,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '157.169.119.187',
       lastCommunication: '2020-02-02T05:48:18',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '96A279E1-3653-4658-B71E-01AD0950C660',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 17',
       meters: 194,
       metersPercent: 93,
@@ -854,12 +853,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '19.230.134.114',
       lastCommunication: '2019-11-08T04:06:28',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '03AB5072-9B64-4963-89E8-7D0BDB54D9F7',
       status: 'Warehouse',
-      nextRead: '2020-05-03T01:48:46',
       name: 'Cubis PLC temp 381',
       meters: 194,
       metersPercent: 28,
@@ -872,12 +871,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '65.108.239.251',
       lastCommunication: '2019-12-04T23:53:37',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '60D20FDD-6B4A-487A-AFE8-C9A4EF3B5CC8',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 76',
       meters: 151,
       metersPercent: 99,
@@ -890,12 +889,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '212.133.83.31',
       lastCommunication: '2020-01-25T20:34:43',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '615505EE-E1E4-4613-B0B7-DA9BE860C0E2',
       status: 'Inactive',
-      nextRead: '2020-05-08T02:43:17',
       name: 'Cubis PLC temp 543',
       meters: 71,
       metersPercent: 83,
@@ -908,12 +907,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '35.83.86.66',
       lastCommunication: '2019-11-13T09:52:07',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '46B1A625-E45F-461E-B8B3-E668C64C698B',
       status: 'Warehouse',
-      nextRead: '2020-04-20T07:43:52',
       name: 'Cubis PLC temp 948',
       meters: 76,
       metersPercent: 7,
@@ -926,12 +925,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '246.58.121.47',
       lastCommunication: '2020-01-01T06:59:21',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '5298F878-97A3-4AD4-97AD-63ABE0712002',
       status: 'Mouted',
-      nextRead: '2020-04-21T21:11:44',
       name: 'Cubis PLC temp 149',
       meters: null,
       metersPercent: null,
@@ -944,12 +943,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '8959EFAB-24F9-423E-BF4B-4D69E33CE8C4',
       status: 'Inactive',
-      nextRead: '2020-03-30T10:14:45',
       name: 'Cubis PLC temp 364',
       meters: 114,
       metersPercent: 11,
@@ -962,12 +961,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '126.167.151.116',
       lastCommunication: '2020-02-13T12:05:49',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '1BEEEC3F-326F-451F-850A-38432D63CAB1',
       status: 'Active',
-      nextRead: '2020-03-16T10:29:52',
       name: 'Cubis PLC temp 295',
       meters: 198,
       metersPercent: 29,
@@ -980,12 +979,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '63.178.167.239',
       lastCommunication: '2019-11-10T00:52:40',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '5ED114D9-74A1-4B3F-9893-D8410EC6FBB3',
       status: 'Active',
-      nextRead: '2020-03-09T07:54:31',
       name: 'Cubis PLC temp 215',
       meters: 63,
       metersPercent: 7,
@@ -998,12 +997,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '63.213.219.78',
       lastCommunication: '2019-11-29T21:24:08',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '346BC795-9331-4ECA-9C5E-C07A0EE06DD2',
       status: 'Warehouse',
-      nextRead: '2020-04-21T11:47:04',
       name: 'Cubis PLC temp 596',
       meters: 184,
       metersPercent: 3,
@@ -1016,12 +1015,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '186.202.108.222',
       lastCommunication: '2019-11-07T12:55:45',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '4C02BD31-BEE4-470D-AEE1-C8B8B556F307',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 389',
       meters: 99,
       metersPercent: 5,
@@ -1034,12 +1033,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '237.228.151.81',
       lastCommunication: '2020-01-10T05:03:56',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D72BFB76-0933-449D-B04E-22CDB902D72B',
       status: 'Mouted',
-      nextRead: '2020-03-24T22:45:47',
       name: 'Cubis PLC temp 359',
       meters: 93,
       metersPercent: 65,
@@ -1052,12 +1051,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '122.58.105.109',
       lastCommunication: '2020-02-06T20:25:35',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'AF4514F5-36F3-4C63-8475-4CC2B0FD22BA',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 538',
       meters: 126,
       metersPercent: 30,
@@ -1070,12 +1069,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '238.255.95.105',
       lastCommunication: '2020-02-08T12:21:25',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D9FC04A6-1FE4-49A5-9A63-0F38C5D5054B',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 565',
       meters: 101,
       metersPercent: 23,
@@ -1088,12 +1087,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '216.192.164.30',
       lastCommunication: '2020-01-09T14:59:16',
       tags: ['tag31', 'tag32'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'D19233E9-41DE-4026-BF4E-5F3361685583',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 623',
       meters: 166,
       metersPercent: 90,
@@ -1106,12 +1105,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '164.19.225.145',
       lastCommunication: '2019-11-19T12:24:46',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '573787C3-EF61-453E-9F09-58A31647E75D',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 251',
       meters: 159,
       metersPercent: 85,
@@ -1124,12 +1123,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '210.121.42.228',
       lastCommunication: '2020-01-20T17:41:30',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'EF4A66DC-2B0A-46F5-934D-2D00E47B2410',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 32',
       meters: 180,
       metersPercent: 40,
@@ -1142,12 +1141,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '161.115.191.151',
       lastCommunication: '2020-01-04T10:27:15',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '51621BFC-A595-4BAF-B463-582986443F21',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 160',
       meters: 108,
       metersPercent: 77,
@@ -1160,12 +1159,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '18.160.2.88',
       lastCommunication: '2019-11-26T23:23:13',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '110CB3CB-3BDC-4765-B97F-02B5B3D9D712',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 75',
       meters: 109,
       metersPercent: 47,
@@ -1178,12 +1177,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '213.126.116.38',
       lastCommunication: '2019-11-16T18:29:44',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '18D5E48A-F64B-4829-AF73-B1318CD739BA',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 799',
       meters: 171,
       metersPercent: 21,
@@ -1196,12 +1195,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '110.26.251.219',
       lastCommunication: '2020-02-19T18:21:53',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '496BD7B2-D8E2-4E79-8054-60C198334D72',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 96',
       meters: 81,
       metersPercent: 46,
@@ -1214,12 +1213,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '95.187.202.41',
       lastCommunication: '2020-01-01T17:24:10',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '54586B6E-49DA-4547-AEFE-9D1C82FC9D0C',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 515',
       meters: 174,
       metersPercent: 50,
@@ -1232,12 +1231,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '156.210.186.125',
       lastCommunication: '2019-12-26T05:31:39',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '775EEB7C-018B-4399-8942-2BBCE9E47651',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 792',
       meters: null,
       metersPercent: null,
@@ -1250,12 +1249,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '9211558E-96BA-459B-ACC2-3C2B1F67D683',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 477',
       meters: 183,
       metersPercent: 1,
@@ -1268,12 +1267,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '184.64.240.135',
       lastCommunication: '2020-01-13T22:31:28',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'F3D7209E-B654-416F-835B-AA702E4586FD',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 540',
       meters: 138,
       metersPercent: 96,
@@ -1286,12 +1285,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '197.210.248.122',
       lastCommunication: '2019-11-20T05:54:25',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '83549B69-D51B-48F3-AB06-BE667F67A70D',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 868',
       meters: 112,
       metersPercent: 98,
@@ -1304,12 +1303,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '130.251.252.52',
       lastCommunication: '2020-01-03T19:34:30',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'BC7E5F22-5DD4-4A0E-8567-3AA829C622A8',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 659',
       meters: 104,
       metersPercent: 5,
@@ -1322,12 +1321,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '54.151.126.193',
       lastCommunication: '2020-02-10T13:59:43',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '545C514C-76DE-41DD-808B-799C4A9D444A',
       status: 'Inactive',
-      nextRead: '2020-04-24T06:50:58',
       name: 'Cubis PLC temp 951',
       meters: 63,
       metersPercent: 72,
@@ -1340,12 +1339,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '64.148.76.184',
       lastCommunication: '2020-02-03T10:42:40',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'C6FFFF9B-C8E3-4CC4-BC51-864BE7AC0E3F',
       status: 'Active',
-      nextRead: '2020-03-01T01:44:30',
       name: 'Cubis PLC temp 520',
       meters: 57,
       metersPercent: 2,
@@ -1358,12 +1357,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '254.210.118.51',
       lastCommunication: '2020-01-04T06:51:19',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '8CDC0963-2DFC-4272-BD54-B02625A69A3F',
       status: 'Inactive',
-      nextRead: '2020-04-29T02:04:40',
       name: 'Cubis PLC temp 686',
       meters: 126,
       metersPercent: 61,
@@ -1376,12 +1375,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '91.164.70.122',
       lastCommunication: '2020-02-13T04:51:38',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'BFC40773-28B1-46C9-9E62-936128D2C21E',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 305',
       meters: 80,
       metersPercent: 72,
@@ -1394,12 +1393,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '128.215.46.230',
       lastCommunication: '2019-11-16T06:48:21',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'A80F79AD-445E-4CE9-8E27-353DE1F21CD7',
       status: 'Warehouse',
-      nextRead: '2020-03-06T08:04:28',
       name: 'Cubis PLC temp 649',
       meters: 56,
       metersPercent: 37,
@@ -1412,12 +1411,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '50.157.10.14',
       lastCommunication: '2019-12-16T23:39:56',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D70A22E7-BB5C-4073-B891-4BA56EDFC910',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 719',
       meters: 35,
       metersPercent: 51,
@@ -1430,12 +1429,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '135.253.250.150',
       lastCommunication: '2019-11-09T01:47:40',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '43D0547D-8E98-4C40-B3CD-B2800FAF8742',
       status: 'Warehouse',
-      nextRead: '2020-03-25T12:26:33',
       name: 'Cubis PLC temp 838',
       meters: 65,
       metersPercent: 79,
@@ -1448,12 +1447,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '208.226.84.17',
       lastCommunication: '2019-11-15T05:38:26',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '7E7429D9-B4C0-4358-AE15-AA16E6084539',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 395',
       meters: 61,
       metersPercent: 14,
@@ -1466,12 +1465,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '132.155.14.225',
       lastCommunication: '2019-12-25T08:37:51',
       tags: ['tag31', 'tag32'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'FF445240-946A-469B-8756-BF1739E183A8',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 592',
       meters: 94,
       metersPercent: 89,
@@ -1484,12 +1483,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '199.178.192.139',
       lastCommunication: '2020-01-05T02:02:27',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '6F0F73D0-45C6-4FC1-86E4-E55885BEB44B',
       status: 'Mouted',
-      nextRead: '2020-03-08T23:29:27',
       name: 'Cubis PLC temp 606',
       meters: 183,
       metersPercent: 60,
@@ -1502,12 +1501,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '177.195.140.205',
       lastCommunication: '2019-11-29T07:31:46',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '8B30A99E-17F0-4D2E-902D-662159F587F2',
       status: 'Inactive',
-      nextRead: '2020-04-01T10:15:05',
       name: 'Cubis PLC temp 45',
       meters: 192,
       metersPercent: 59,
@@ -1520,12 +1519,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '70.92.199.252',
       lastCommunication: '2019-11-02T11:50:02',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '007D141D-640F-47C0-B302-E25F7BDAA999',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 812',
       meters: 102,
       metersPercent: 49,
@@ -1538,12 +1537,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '59.160.222.202',
       lastCommunication: '2019-11-28T21:40:15',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '183629E9-2412-402E-84E9-9587E4C07C30',
       status: 'Mouted',
-      nextRead: '2020-04-01T12:43:03',
       name: 'Cubis PLC temp 473',
       meters: 78,
       metersPercent: 20,
@@ -1556,12 +1555,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '192.22.56.87',
       lastCommunication: '2019-12-05T02:03:59',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'BC934A85-E64F-44CF-AE1C-657E09E52EE9',
       status: 'Inactive',
-      nextRead: '2020-03-11T14:48:04',
       name: 'Cubis PLC temp 44',
       meters: null,
       metersPercent: null,
@@ -1574,12 +1573,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '7340DF87-1834-4726-8A7E-092C6E63F10C',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 232',
       meters: 62,
       metersPercent: 87,
@@ -1592,12 +1591,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '181.158.31.190',
       lastCommunication: '2020-01-04T16:58:59',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '867C88A0-B7A5-4F88-A420-8CF2D6A0BFE5',
       status: 'Inactive',
-      nextRead: '2020-04-27T18:32:58',
       name: 'Cubis PLC temp 169',
       meters: 157,
       metersPercent: 1,
@@ -1610,12 +1609,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '87.237.59.254',
       lastCommunication: '2020-01-26T12:34:53',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '352B5D04-51DC-4359-8D6B-1A28CD161226',
       status: 'Warehouse',
-      nextRead: '2020-03-15T03:48:28',
       name: 'Cubis PLC temp 634',
       meters: null,
       metersPercent: null,
@@ -1628,12 +1627,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '5E2F4FBB-0382-467F-A9AA-E5A1D968548B',
       status: 'Inactive',
-      nextRead: '2020-02-29T21:32:58',
       name: 'Cubis PLC temp 886',
       meters: 76,
       metersPercent: 92,
@@ -1646,12 +1645,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '212.47.210.54',
       lastCommunication: '2019-12-06T02:16:03',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: true
     },
     {
       concentratorId: '6AF65C41-F6A8-486C-A1D4-290E76368F7C',
       status: 'Active',
-      nextRead: '2020-03-26T08:56:22',
       name: 'Cubis PLC temp 418',
       meters: 58,
       metersPercent: 20,
@@ -1664,12 +1663,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '149.251.220.50',
       lastCommunication: '2020-01-03T04:59:51',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '433525B2-65BE-4AC2-B6EE-407A2B8769BC',
       status: 'Inactive',
-      nextRead: '2020-04-14T05:25:28',
       name: 'Cubis PLC temp 125',
       meters: null,
       metersPercent: null,
@@ -1682,12 +1681,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'C964BC3B-CEFD-4627-BA18-9F01F12E5F86',
       status: 'Mouted',
-      nextRead: '2020-05-21T15:11:18',
       name: 'Cubis PLC temp 130',
       meters: 150,
       metersPercent: 4,
@@ -1700,12 +1699,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '9.104.242.223',
       lastCommunication: '2019-12-26T03:57:35',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: 'E759310A-6B12-4120-9989-4846625D4202',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 154',
       meters: 163,
       metersPercent: 50,
@@ -1718,12 +1717,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '37.222.241.50',
       lastCommunication: '2019-11-28T18:51:46',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'B89A5CC0-F776-416F-BF02-7088C902F020',
       status: 'Active',
-      nextRead: '2020-03-18T07:02:38',
       name: 'Cubis PLC temp 575',
       meters: 156,
       metersPercent: 8,
@@ -1736,12 +1735,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '92.223.111.244',
       lastCommunication: '2019-12-28T11:05:43',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '594C335B-FA22-426D-8798-90DE40F1627F',
       status: 'Active',
-      nextRead: '2020-04-28T05:09:19',
       name: 'Cubis PLC temp 77',
       meters: 121,
       metersPercent: 21,
@@ -1754,12 +1753,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '250.114.75.188',
       lastCommunication: '2020-02-16T15:04:18',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '441F0EAB-3603-42DE-A80A-4F28873038BD',
       status: 'Warehouse',
-      nextRead: '2020-04-22T15:36:16',
       name: 'Cubis PLC temp 344',
       meters: 163,
       metersPercent: 88,
@@ -1772,12 +1771,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '49.133.169.223',
       lastCommunication: '2020-02-18T01:08:35',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'D9287049-F309-4335-AA5C-EFE65701207A',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 980',
       meters: 90,
       metersPercent: 56,
@@ -1790,12 +1789,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '218.195.3.211',
       lastCommunication: '2020-02-17T02:54:43',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '83BE7FAC-09F0-4BAC-A8E4-671596DE696B',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 58',
       meters: 107,
       metersPercent: 58,
@@ -1808,12 +1807,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '154.90.164.230',
       lastCommunication: '2019-11-27T05:19:05',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D6851391-E0B2-43F1-A72A-51D5B91AAA50',
       status: 'Active',
-      nextRead: '2020-05-12T15:06:31',
       name: 'Cubis PLC temp 792',
       meters: 90,
       metersPercent: 16,
@@ -1826,12 +1825,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '227.160.121.201',
       lastCommunication: '2019-11-14T05:58:54',
       tags: null,
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '9284F1D5-DB64-4B23-9FB8-E6A187C334FC',
       status: 'Warehouse',
-      nextRead: '2020-04-24T03:19:31',
       name: 'Cubis PLC temp 183',
       meters: 198,
       metersPercent: 85,
@@ -1844,12 +1843,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '78.71.184.131',
       lastCommunication: '2020-02-01T10:24:25',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'DD07F2B8-92F9-476C-A276-C84825E489E1',
       status: 'Warehouse',
-      nextRead: '2020-03-06T09:02:52',
       name: 'Cubis PLC temp 534',
       meters: 50,
       metersPercent: 28,
@@ -1862,12 +1861,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '152.168.231.119',
       lastCommunication: '2020-01-16T18:44:56',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'B9062B4D-277F-4F97-8B29-B78A19C6FF72',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 354',
       meters: 109,
       metersPercent: 8,
@@ -1880,12 +1879,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '103.133.243.59',
       lastCommunication: '2019-12-25T22:17:08',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '688D3FCA-58DF-47CD-8FD3-F6FA328A189A',
       status: 'Warehouse',
-      nextRead: '2020-05-05T20:43:21',
       name: 'Cubis PLC temp 197',
       meters: 37,
       metersPercent: 31,
@@ -1898,12 +1897,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '164.116.195.4',
       lastCommunication: '2019-12-20T07:31:52',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '1322DCD3-57FC-4709-AEBE-02C8249382DE',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 665',
       meters: 166,
       metersPercent: 52,
@@ -1916,12 +1915,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '201.165.153.102',
       lastCommunication: '2020-01-14T14:20:51',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'D845E9C0-9F68-4070-864F-A29EE5F58743',
       status: 'Active',
-      nextRead: '2020-04-01T14:29:25',
       name: 'Cubis PLC temp 84',
       meters: 32,
       metersPercent: 74,
@@ -1934,12 +1933,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '96.83.185.108',
       lastCommunication: '2019-12-17T00:55:10',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '491752E4-6B2B-49EC-8ACF-2F73F1FDA416',
       status: 'Active',
-      nextRead: '2020-05-04T18:48:01',
       name: 'Cubis PLC temp 905',
       meters: 106,
       metersPercent: 72,
@@ -1952,12 +1951,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '18.61.50.253',
       lastCommunication: '2019-12-22T16:27:36',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '142E70D6-8A7F-4588-B5EE-A5B09D5491FE',
       status: 'Active',
-      nextRead: '2020-03-25T06:33:15',
       name: 'Cubis PLC temp 299',
       meters: 171,
       metersPercent: 10,
@@ -1970,12 +1969,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '60.17.63.240',
       lastCommunication: '2019-11-26T01:58:00',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '22C46FB2-21DF-4F40-AFA4-05B3D38CEFE4',
       status: 'Inactive',
-      nextRead: '2020-04-21T07:39:03',
       name: 'Cubis PLC temp 939',
       meters: 75,
       metersPercent: 24,
@@ -1988,12 +1987,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '69.192.229.84',
       lastCommunication: '2019-11-03T01:33:18',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'AF6FE9C7-DEC1-4323-BBB4-0E1B9ED224D9',
       status: 'Warehouse',
-      nextRead: '2020-04-03T02:36:41',
       name: 'Cubis PLC temp 37',
       meters: 101,
       metersPercent: 44,
@@ -2006,12 +2005,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '25.139.112.202',
       lastCommunication: '2020-01-09T15:09:16',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '6284D81B-0CC8-4B65-93D4-75C32FE194C5',
       status: 'Mouted',
-      nextRead: '2020-03-04T19:41:31',
       name: 'Cubis PLC temp 830',
       meters: null,
       metersPercent: null,
@@ -2024,12 +2023,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '82D7DABA-6F42-4448-BEFF-CDD99E9D99FC',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 897',
       meters: 126,
       metersPercent: 28,
@@ -2042,12 +2041,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '117.33.12.209',
       lastCommunication: '2020-02-13T16:05:23',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'CBA2DED4-0813-41D3-8A63-FABB11144BBC',
       status: 'Warehouse',
-      nextRead: '2020-04-19T20:12:27',
       name: 'Cubis PLC temp 700',
       meters: 157,
       metersPercent: 22,
@@ -2060,12 +2059,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '249.48.73.101',
       lastCommunication: '2020-01-19T10:28:25',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '62D22996-C855-4466-B310-72FF2483354D',
       status: 'Mouted',
-      nextRead: '2020-04-15T18:01:15',
       name: 'Cubis PLC temp 927',
       meters: 89,
       metersPercent: 52,
@@ -2078,12 +2077,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '137.14.171.47',
       lastCommunication: '2019-12-31T22:03:10',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '0188B670-2975-4585-A6EF-D326D232FCA2',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 172',
       meters: null,
       metersPercent: null,
@@ -2096,12 +2095,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'B7A09129-7C76-4708-AA09-43A40685BC12',
       status: 'Inactive',
-      nextRead: '2020-03-14T19:01:57',
       name: 'Cubis PLC temp 660',
       meters: 199,
       metersPercent: 69,
@@ -2114,12 +2113,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '34.204.77.113',
       lastCommunication: '2020-02-10T13:46:25',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '4EA475C1-297E-461D-8628-7FC006567BA8',
       status: 'Warehouse',
-      nextRead: '2020-03-18T18:24:33',
       name: 'Cubis PLC temp 767',
       meters: 84,
       metersPercent: 86,
@@ -2132,12 +2131,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '54.142.145.171',
       lastCommunication: '2019-12-30T01:47:42',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '837580A7-314E-4606-BDD1-F9BA2000F8E6',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 660',
       meters: 128,
       metersPercent: 80,
@@ -2150,12 +2149,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '40.9.255.125',
       lastCommunication: '2020-01-26T09:26:20',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Pending'
+      jobStatus: 'Pending',
+      hasActiveJob: false
     },
     {
       concentratorId: '960B1E30-E21F-47F1-BE8A-83526E0F88B3',
       status: 'Inactive',
-      nextRead: '2020-04-29T19:06:23',
       name: 'Cubis PLC temp 994',
       meters: 95,
       metersPercent: 29,
@@ -2168,12 +2167,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '110.52.112.51',
       lastCommunication: '2019-11-26T11:50:44',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '653D9C47-99CF-4BD4-A3E3-A35563919D08',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 477',
       meters: 94,
       metersPercent: 98,
@@ -2186,12 +2185,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '86.190.80.157',
       lastCommunication: '2020-02-07T01:35:54',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '8AAF1723-90A5-491B-AD73-0C5821408DA9',
       status: 'Warehouse',
-      nextRead: '2020-04-20T07:36:39',
       name: 'Cubis PLC temp 998',
       meters: null,
       metersPercent: null,
@@ -2204,12 +2203,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '4E00393C-8786-406F-BF1F-3E2F7F992BDC',
       status: 'Active',
-      nextRead: '2020-04-22T18:30:59',
       name: 'Cubis PLC temp 535',
       meters: 116,
       metersPercent: 98,
@@ -2222,12 +2221,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '113.39.184.102',
       lastCommunication: '2019-11-23T15:33:16',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F5B098EC-EE90-4FC4-A4F4-A4BAD40BB65B',
       status: 'Inactive',
-      nextRead: '2020-05-08T07:10:42',
       name: 'Cubis PLC temp 357',
       meters: 116,
       metersPercent: 90,
@@ -2240,12 +2239,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '45.64.131.30',
       lastCommunication: '2020-01-18T08:22:47',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'E2587737-9183-4079-9BD4-162E3EE591FB',
       status: 'Active',
-      nextRead: '2020-05-12T02:20:16',
       name: 'Cubis PLC temp 675',
       meters: 37,
       metersPercent: 55,
@@ -2258,12 +2257,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '184.242.225.90',
       lastCommunication: '2020-02-02T16:27:02',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '4128FC77-2878-4CEF-BD27-4B1C6AEDD52C',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 104',
       meters: 35,
       metersPercent: 4,
@@ -2276,12 +2275,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '89.206.2.105',
       lastCommunication: '2019-11-19T21:30:12',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '2CF221ED-40AF-46A3-8354-14840EBD3579',
       status: 'Warehouse',
-      nextRead: '2020-04-26T01:55:52',
       name: 'Cubis PLC temp 510',
       meters: 168,
       metersPercent: 74,
@@ -2294,12 +2293,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '153.150.82.255',
       lastCommunication: '2020-01-12T16:14:17',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'A3D8FD36-9510-44CC-9455-F7C582359C52',
       status: 'Active',
-      nextRead: '2020-04-07T23:22:08',
       name: 'Cubis PLC temp 862',
       meters: 145,
       metersPercent: 6,
@@ -2312,12 +2311,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '250.81.5.101',
       lastCommunication: '2019-12-23T14:02:15',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '35D36D07-4535-43C4-B0E9-69ED9B759ABF',
       status: 'Mouted',
-      nextRead: '2020-05-04T13:26:53',
       name: 'Cubis PLC temp 656',
       meters: 144,
       metersPercent: 88,
@@ -2330,12 +2329,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '210.158.128.6',
       lastCommunication: '2019-12-03T13:20:08',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F0E0B36F-4BE1-4A00-8E6B-7FF14C8040B2',
       status: 'Warehouse',
-      nextRead: '2020-03-18T12:35:42',
       name: 'Cubis PLC temp 760',
       meters: 48,
       metersPercent: 90,
@@ -2348,12 +2347,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '122.164.137.244',
       lastCommunication: '2020-01-03T15:11:59',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D716099D-7085-481B-85E3-466D9023CBBC',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 982',
       meters: 172,
       metersPercent: 83,
@@ -2366,12 +2365,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '239.106.205.128',
       lastCommunication: '2020-02-13T15:11:09',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D12433AF-7C3E-4E8E-BF4E-7E6C291A54CE',
       status: 'Inactive',
-      nextRead: '2020-04-30T00:34:24',
       name: 'Cubis PLC temp 527',
       meters: null,
       metersPercent: null,
@@ -2384,12 +2383,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag31', 'tag32'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '17F58F78-CA55-49DA-A45F-3CFAE5C21E9B',
       status: 'Active',
-      nextRead: '2020-03-18T07:18:58',
       name: 'Cubis PLC temp 102',
       meters: 30,
       metersPercent: 72,
@@ -2402,12 +2401,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '88.102.185.155',
       lastCommunication: '2020-02-10T16:27:08',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'E8685362-6AEC-433B-9246-0BC24EE1BD45',
       status: 'Inactive',
-      nextRead: '2020-04-24T08:09:49',
       name: 'Cubis PLC temp 184',
       meters: 153,
       metersPercent: 64,
@@ -2420,12 +2419,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '204.98.55.28',
       lastCommunication: '2020-02-11T07:25:31',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '749175E2-CCBB-438A-A609-99AFA2CD7DAE',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 678',
       meters: null,
       metersPercent: null,
@@ -2438,12 +2437,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '16B18A5A-D83B-4158-88BC-3B3C268F19BF',
       status: 'Warehouse',
-      nextRead: '2020-04-18T18:53:31',
       name: 'Cubis PLC temp 605',
       meters: 52,
       metersPercent: 7,
@@ -2456,12 +2455,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '158.115.78.112',
       lastCommunication: '2020-02-19T22:22:25',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '233AA96D-57B8-4297-8366-CCE1C7009AB9',
       status: 'Inactive',
-      nextRead: '2020-03-06T14:47:38',
       name: 'Cubis PLC temp 636',
       meters: 41,
       metersPercent: 62,
@@ -2474,12 +2473,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '173.227.65.48',
       lastCommunication: '2019-11-12T07:22:24',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'E4DF238C-23DE-445E-9EA6-E159CD283474',
       status: 'Warehouse',
-      nextRead: '2020-02-23T19:28:48',
       name: 'Cubis PLC temp 759',
       meters: 120,
       metersPercent: 2,
@@ -2492,12 +2491,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '139.164.173.245',
       lastCommunication: '2019-11-17T12:23:36',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '120C99BF-5C59-4B15-8BEF-0F4376809F9F',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 506',
       meters: 185,
       metersPercent: 36,
@@ -2510,12 +2509,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '4.22.196.33',
       lastCommunication: '2019-11-12T07:00:27',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '1BE29AF1-8DE6-40E4-9A17-1AF30FBA8BF0',
       status: 'Inactive',
-      nextRead: '2020-05-04T08:58:48',
       name: 'Cubis PLC temp 650',
       meters: 165,
       metersPercent: 60,
@@ -2528,12 +2527,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '71.195.193.188',
       lastCommunication: '2019-12-31T23:46:28',
       tags: ['tag31', 'tag32'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '86311A89-553B-4BA5-84F1-81126A18BFD9',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 872',
       meters: 59,
       metersPercent: 61,
@@ -2546,12 +2545,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '182.233.114.118',
       lastCommunication: '2019-12-15T17:54:51',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '3E18C7AC-482A-4FD5-B275-FEDF847BF40F',
       status: 'Mouted',
-      nextRead: '2020-03-20T16:40:03',
       name: 'Cubis PLC temp 10',
       meters: 165,
       metersPercent: 8,
@@ -2564,12 +2563,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '99.203.134.147',
       lastCommunication: '2019-12-23T12:33:50',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '38D2B51A-F930-40E6-AAB8-F412AF7F955A',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 888',
       meters: 133,
       metersPercent: 54,
@@ -2582,12 +2581,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '95.131.87.98',
       lastCommunication: '2020-01-17T22:22:46',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'EEB111F6-76F9-4EC4-9114-4EF5C99980D6',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 731',
       meters: 109,
       metersPercent: 34,
@@ -2600,12 +2599,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '80.158.240.3',
       lastCommunication: '2019-12-16T06:36:40',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F72FDF22-C981-460C-848F-43FC95681521',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 706',
       meters: 138,
       metersPercent: 67,
@@ -2618,12 +2617,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '134.12.96.139',
       lastCommunication: '2019-12-30T11:54:16',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '8A4CC75F-4A44-4F75-BD45-2A38BA43F83D',
       status: 'Inactive',
-      nextRead: '2020-04-04T13:03:30',
       name: 'Cubis PLC temp 357',
       meters: null,
       metersPercent: null,
@@ -2636,12 +2635,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F39E20E7-1F0B-48A8-A807-2F7C25E82088',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 230',
       meters: 87,
       metersPercent: 61,
@@ -2654,12 +2653,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '83.169.118.235',
       lastCommunication: '2020-02-05T04:03:42',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '3398E325-F3A5-4D8D-AB00-A8A4FE6A7AD4',
       status: 'Mouted',
-      nextRead: '2020-04-28T19:10:54',
       name: 'Cubis PLC temp 640',
       meters: 86,
       metersPercent: 50,
@@ -2672,12 +2671,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '208.4.179.123',
       lastCommunication: '2020-02-12T14:48:54',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: true
     },
     {
       concentratorId: '42737E3B-C773-4C95-B574-55D43B6C7504',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 231',
       meters: 171,
       metersPercent: 87,
@@ -2690,12 +2689,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '99.128.145.73',
       lastCommunication: '2019-11-21T23:17:50',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: true
     },
     {
       concentratorId: '00143E2F-893F-41A4-A328-CEAC0039D486',
       status: 'Warehouse',
-      nextRead: '2020-05-04T17:56:17',
       name: 'Cubis PLC temp 156',
       meters: 191,
       metersPercent: 88,
@@ -2708,12 +2707,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '216.216.223.202',
       lastCommunication: '2019-11-14T22:29:46',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '529DCA31-A224-4096-B931-87834E28B444',
       status: 'Active',
-      nextRead: '2020-04-26T23:30:11',
       name: 'Cubis PLC temp 223',
       meters: 58,
       metersPercent: 10,
@@ -2726,12 +2725,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '106.140.179.72',
       lastCommunication: '2019-11-15T00:32:36',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '139A889F-3A68-47B5-AFA3-718CCA636A44',
       status: 'Warehouse',
-      nextRead: '2020-03-14T03:09:44',
       name: 'Cubis PLC temp 690',
       meters: 168,
       metersPercent: 62,
@@ -2744,12 +2743,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '103.173.136.232',
       lastCommunication: '2020-01-15T15:39:58',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '270CB026-6788-437F-877D-AC8D8BDC4381',
       status: 'Active',
-      nextRead: '2020-02-28T22:00:37',
       name: 'Cubis PLC temp 201',
       meters: 166,
       metersPercent: 54,
@@ -2762,12 +2761,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '56.157.197.72',
       lastCommunication: '2019-12-18T14:55:43',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '7A4827B5-3281-4779-AFCA-C8E6F4B1A688',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 494',
       meters: 177,
       metersPercent: 47,
@@ -2780,12 +2779,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '119.177.6.217',
       lastCommunication: '2020-02-18T12:00:30',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: 'C2C3E4FC-7D58-4BC4-924F-32E87BA74BD3',
       status: 'Active',
-      nextRead: '2020-05-16T09:15:34',
       name: 'Cubis PLC temp 292',
       meters: null,
       metersPercent: null,
@@ -2798,12 +2797,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '23F0F316-D755-431A-9B5E-67BE34EDF2C8',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 587',
       meters: null,
       metersPercent: null,
@@ -2816,12 +2815,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'F05CBDD0-5342-4D38-97A6-11EC38AF82FA',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 551',
       meters: 162,
       metersPercent: 47,
@@ -2834,12 +2833,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '245.163.73.204',
       lastCommunication: '2020-01-31T14:03:54',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: 'C76CCE40-C271-44C9-A87D-CB16390EC042',
       status: 'Active',
-      nextRead: '2020-03-24T00:31:31',
       name: 'Cubis PLC temp 312',
       meters: 130,
       metersPercent: 35,
@@ -2852,12 +2851,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '111.244.20.139',
       lastCommunication: '2020-02-06T07:45:51',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '73DB4EEE-7CED-40AF-B4C5-6C1BDDD0E031',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 939',
       meters: 116,
       metersPercent: 65,
@@ -2870,12 +2869,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '72.37.221.248',
       lastCommunication: '2019-12-01T03:16:54',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '543D4586-A44D-468C-BBDC-BAF685489692',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 47',
       meters: 69,
       metersPercent: 61,
@@ -2888,12 +2887,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '178.185.245.64',
       lastCommunication: '2019-11-29T22:29:37',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '393F65A7-728A-4321-893D-7E9A207777D6',
       status: 'Warehouse',
-      nextRead: '2020-05-12T09:50:32',
       name: 'Cubis PLC temp 264',
       meters: 77,
       metersPercent: 70,
@@ -2906,12 +2905,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '129.129.111.191',
       lastCommunication: '2019-11-20T05:05:02',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '5DDA3B10-CCD3-46B9-A925-06FCF40D2F4E',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 926',
       meters: 63,
       metersPercent: 27,
@@ -2924,12 +2923,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '182.254.127.130',
       lastCommunication: '2019-11-15T22:02:17',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '393FC784-A299-4B36-8AEA-91893A55FFA6',
       status: 'Warehouse',
-      nextRead: '2020-05-20T11:51:11',
       name: 'Cubis PLC temp 866',
       meters: 43,
       metersPercent: 43,
@@ -2942,12 +2941,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '196.66.182.143',
       lastCommunication: '2019-12-11T02:47:15',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '623C072D-D5EF-4E5A-AAFD-7F41A3BE24A3',
       status: 'Warehouse',
-      nextRead: '2020-05-07T13:03:54',
       name: 'Cubis PLC temp 357',
       meters: 36,
       metersPercent: 93,
@@ -2960,12 +2959,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '187.140.47.162',
       lastCommunication: '2020-02-01T01:35:12',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'B46F9FEC-12C0-45EA-9527-98A0C7ECA3DC',
       status: 'Warehouse',
-      nextRead: '2020-04-16T22:00:07',
       name: 'Cubis PLC temp 664',
       meters: 140,
       metersPercent: 85,
@@ -2978,12 +2977,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '155.95.25.24',
       lastCommunication: '2020-01-25T22:50:02',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '039206C7-9D21-4B54-A799-5CA1D376D078',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 972',
       meters: 170,
       metersPercent: 56,
@@ -2996,12 +2995,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '175.46.95.51',
       lastCommunication: '2019-11-05T01:11:51',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '1AC32A41-749A-4EE2-A903-B706640B31B9',
       status: 'Active',
-      nextRead: '2020-05-18T13:18:37',
       name: 'Cubis PLC temp 139',
       meters: 46,
       metersPercent: 29,
@@ -3014,12 +3013,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '207.87.26.2',
       lastCommunication: '2019-12-05T23:04:09',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'A5422BDA-1C21-455A-A244-3DF10492E11B',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 934',
       meters: 31,
       metersPercent: 12,
@@ -3032,12 +3031,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '165.8.32.209',
       lastCommunication: '2019-12-27T10:23:06',
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: 'ECCB308A-CD7D-4DEB-B8E5-207483BF5320',
       status: 'Mouted',
-      nextRead: null,
       name: 'Cubis PLC temp 695',
       meters: 102,
       metersPercent: 36,
@@ -3050,12 +3049,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '60.249.25.62',
       lastCommunication: '2019-12-12T12:00:13',
       tags: ['tag1', 'tag3', 'tag5'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '55E79128-F4E8-4DB0-A6F9-0CBA37C2420B',
       status: 'Warehouse',
-      nextRead: '2020-03-19T00:41:17',
       name: 'Cubis PLC temp 767',
       meters: 100,
       metersPercent: 40,
@@ -3068,12 +3067,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '176.64.99.30',
       lastCommunication: '2019-11-08T14:48:45',
       tags: null,
-      jobStatus: null
+      jobStatus: null,
+      hasActiveJob: false
     },
     {
       concentratorId: '4894DBF5-1031-41AB-913B-38DC83E7F13D',
       status: 'Warehouse',
-      nextRead: '2020-03-09T02:10:53',
       name: 'Cubis PLC temp 859',
       meters: null,
       metersPercent: null,
@@ -3086,12 +3085,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'D2A56410-B901-4F76-806E-A50C84BEFEC8',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 806',
       meters: 93,
       metersPercent: 22,
@@ -3104,12 +3103,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '23.153.33.63',
       lastCommunication: '2019-12-28T21:28:27',
       tags: null,
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '6F66AD78-5FC5-4934-8545-CE48DA9A9F61',
       status: 'Inactive',
-      nextRead: null,
       name: 'Cubis PLC temp 65',
       meters: 126,
       metersPercent: 4,
@@ -3122,12 +3121,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '124.146.82.185',
       lastCommunication: '2019-11-03T06:57:52',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: '8CAE0AC4-2562-4CC6-A6C1-A73850D27EBF',
       status: 'Warehouse',
-      nextRead: null,
       name: 'Cubis PLC temp 557',
       meters: 52,
       metersPercent: 10,
@@ -3140,12 +3139,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '230.200.183.17',
       lastCommunication: '2019-11-07T06:31:01',
       tags: null,
-      jobStatus: 'Running'
+      jobStatus: 'Running',
+      hasActiveJob: false
     },
     {
       concentratorId: 'BD2E72B6-7B58-42BB-B61E-63F1EA50CA9F',
       status: 'Warehouse',
-      nextRead: '2020-03-24T11:09:21',
       name: 'Cubis PLC temp 31',
       meters: 114,
       metersPercent: 67,
@@ -3158,12 +3157,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '188.240.247.6',
       lastCommunication: '2020-01-07T11:47:33',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     },
     {
       concentratorId: '0B32F829-4F52-4C19-B343-6DC7071899EC',
       status: 'Active',
-      nextRead: '2020-03-04T20:19:03',
       name: 'Cubis PLC temp 563',
       meters: null,
       metersPercent: null,
@@ -3176,12 +3175,12 @@ function setData(): DataConcentratorUnitsList[] {
       ip: null,
       lastCommunication: null,
       tags: ['tag31', 'tag32'],
-      jobStatus: 'Success'
+      jobStatus: 'Success',
+      hasActiveJob: false
     },
     {
       concentratorId: '931CE1A6-D336-4C84-B29F-596E3F202A66',
       status: 'Active',
-      nextRead: null,
       name: 'Cubis PLC temp 905',
       meters: 136,
       metersPercent: 2,
@@ -3194,7 +3193,8 @@ function setData(): DataConcentratorUnitsList[] {
       ip: '3.69.169.33',
       lastCommunication: '2019-11-09T08:57:44',
       tags: null,
-      jobStatus: 'Failed'
+      jobStatus: 'Failed',
+      hasActiveJob: false
     }
   ];
 }
