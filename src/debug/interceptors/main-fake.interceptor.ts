@@ -1,3 +1,4 @@
+import { DcuManagementActivateTriggerDeviceUpgradeRequest } from './../../app/core/repository/interfaces/dcu-management/dcu-management-trigger-device-upgrade.interface';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -23,6 +24,7 @@ import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
 import { AutoTemplatesListInterceptor } from './configuration/auto-templates/auto-templates-list.interceptor';
 import { AutoTemplatesRulesListInterceptor } from './configuration/auto-templates/auto-templates-rules-list.interceptor';
 import { AutoTemplatesRulesInterceptor } from './configuration/auto-templates/auto-templates-rules.interceptor';
+import { DcuManagementInterceptor } from './dcu-management/dcu-management.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -60,6 +62,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (DcuGridLayoutInterceptor.canInterceptDcuLayoutDelete(request)) {
                 return DcuGridLayoutInterceptor.interceptDcuLayoutDelete(request);
+              }
+
+              // DCU Management
+              if (DcuManagementInterceptor.canInterceptDcuManagementActivateTriggerDeviceUpdatePost(request)) {
+                return DcuManagementInterceptor.interceptDcuManagementActivateTriggerDeviceUpdatePost(request);
               }
 
               // registers
