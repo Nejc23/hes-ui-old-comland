@@ -694,7 +694,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onScheduleReadJobs() {
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
-    if (selectedRows && selectedRows.length > 0) {
+    const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
+    if (!selectedAll && selectedRows && selectedRows.length > 0) {
       selectedRows.map(row => deviceIdsParam.push(row.deviceId));
     }
 
