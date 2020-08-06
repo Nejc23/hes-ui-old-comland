@@ -129,6 +129,16 @@ export class BaseTemplateComponent implements OnInit {
           };
           sidebarItems.push(newElement);
         });
+
+        // add All to the menu
+        const allElement = {
+          title: this.i18n('All'),
+          routeLink: `/${MeterTypeRoute.meterUnitsAll}`,
+          hasChildren: false,
+          children: []
+        };
+        sidebarItems.push(allElement);
+
         this.sidebarMeterUnitsItems = sidebarItems;
       }
     });

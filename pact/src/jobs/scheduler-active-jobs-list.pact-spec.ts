@@ -34,7 +34,8 @@ describe('Pact consumer test', () => {
         actionType: 4,
         description: 'Daily read of 15 min energy (A+)',
         nextRun: '2020-08-25T15:45:45+00:00',
-        owner: 'Jan Benedičič'
+        owner: 'Jan Benedičič',
+        deviceCount: 5
       },
       {
         id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
@@ -43,7 +44,8 @@ describe('Pact consumer test', () => {
         actionType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2021-07-26T05:45:45+00:00',
-        owner: 'Miha Galičič'
+        owner: 'Miha Galičič',
+        deviceCount: 0
       }
     ];
 

@@ -1,9 +1,10 @@
+import { MeterUnitsAllComponent } from './../../all-for-job/meter-units-all.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { MeterUnitsOverviewComponent } from '../overview/components/meter-units-overview.component';
-import { MeterUnitsTypeComponent } from '../types/components/meter-units-type.component';
+import { MeterUnitsOverviewComponent } from '../../overview/components/meter-units-overview.component';
+import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,21 @@ const routes: Routes = [
               breadcrumb: null
             },
             component: MeterUnitsOverviewComponent
+          }
+        ]
+      },
+      {
+        path: 'all',
+        data: {
+          breadcrumb: null
+        },
+        children: [
+          {
+            path: '',
+            data: {
+              breadcrumb: null
+            },
+            component: MeterUnitsAllComponent
           }
         ]
       },

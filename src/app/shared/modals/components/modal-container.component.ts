@@ -4,9 +4,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { PlcMeterTouConfigImportComponent } from 'src/app/features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
-import { PlcMeterTemplatesImportComponent } from 'src/app/features/meter-units/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { ConfigurationRoute } from '../../base-template/enums/configuration.enum';
+import { PlcMeterTemplatesImportComponent } from 'src/app/features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
+import { PlcMeterTouConfigImportComponent } from 'src/app/features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
 
 @Component({
   selector: 'app-modal-container',

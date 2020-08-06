@@ -1,3 +1,4 @@
+import { PlcMeterFwUpgradeComponent } from './../features/meter-units/common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -37,7 +38,6 @@ import { RegistersSelectComponent } from '../features/registers-select/component
 import { SaveViewFormMUTComponent } from '../features/meter-units/types/components/save-view-form/save-view-form-meter-units-type.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { AutoRefreshComponent } from './forms/components/auto-refresh/auto-refresh.component';
-import { PlcMeterTouConfigComponent } from '../features/meter-units/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { TouConfigSelectComponent } from '../features/tou-config-select/component/tou-config-select.component';
 import { IdentityErrorComponent } from './IdentityError/identity-error.component';
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
@@ -45,11 +45,8 @@ import { HideIfActionUnauthorizedDirective } from './directives/permissions/hide
 import { ActiveJobComponent } from './popover/components/active-job/active-job.component';
 import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
 import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
-import { PlcMeterFwUpgradeComponent } from '../features/meter-units/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
 import { ModalContainerComponent } from './modals/components/modal-container.component';
-import { PlcMeterTouConfigImportComponent } from '../features/meter-units/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
-import { PlcMeterTemplatesImportComponent } from '../features/meter-units/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { SchedulerDiscoveryJobComponent } from '../features/jobs/components/scheduler-discovery-job/scheduler-discovery-job.component';
 import { DataConcentratorUnitsSelectComponent } from '../features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { GridSelectionHeaderComponent } from './ag-grid/components/grid-selection-header.component';
@@ -58,6 +55,9 @@ import { GridCellIdNumberComponent } from './ag-grid/components/grid-cell-id-num
 import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component';
 import { AgGridSharedFunctionsService } from './ag-grid/services/ag-grid-shared-functions.service';
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
+import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
+import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 
 @NgModule({
   exports: [

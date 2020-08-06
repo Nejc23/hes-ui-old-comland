@@ -8,9 +8,9 @@ import { Observable } from 'rxjs';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
 
 @Component({
   selector: 'app-plc-meter-tou-config',

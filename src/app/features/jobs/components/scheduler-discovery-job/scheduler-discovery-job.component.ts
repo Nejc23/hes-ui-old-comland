@@ -9,7 +9,6 @@ import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interf
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
-import { PlcMeterReadScheduleService } from '../../../meter-units/services/plc-meter-read-scheduler.service';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
@@ -17,6 +16,7 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { DataConcentratorUnitsSelectComponent } from 'src/app/features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
+import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 
 @Component({
   selector: 'app-scheduler-discovery-job',

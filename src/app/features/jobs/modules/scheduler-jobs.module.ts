@@ -1,3 +1,4 @@
+import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
@@ -18,13 +19,20 @@ import { GridCellEditComponent } from '../components/grid-custom-components/grid
     GridCellNextRunComponent,
     GridCellDeleteComponent,
     GridCellEditComponent,
+    GridCellDeviceCountComponent,
     ActionFormComponent
   ],
   imports: [
     SharedModule,
     SchedulerJobsRoutingModule,
     BreadcrumbsModule,
-    AgGridModule.withComponents([GridCellActiveComponent, GridCellNextRunComponent, GridCellDeleteComponent, GridCellEditComponent])
+    AgGridModule.withComponents([
+      GridCellActiveComponent,
+      GridCellNextRunComponent,
+      GridCellDeleteComponent,
+      GridCellEditComponent,
+      GridCellDeviceCountComponent
+    ])
   ],
   exports: []
 })
