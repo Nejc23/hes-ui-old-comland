@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
-import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
-import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
-import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
-import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
+import { AllForJobGridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
+import { AllForJobGridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
+import { AllForJobGridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
+import { AllForJobGridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
+import { AllForJobGridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
@@ -17,7 +17,7 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 @Injectable({
   providedIn: 'root'
 })
-export class MeterUnitsAllGridService {
+export class AllForJobGridService {
   cookieNameForGridSettings = 'grdColMUT-allId-';
   cookieNameForGridSort = 'grdColMUTSort-allId-';
   sessionNameForGridState = 'grdStateMUT-allId-';
@@ -49,10 +49,10 @@ export class MeterUnitsAllGridService {
 
   public setFrameworkComponents() {
     return {
-      gridCellNameComponent: GridCellNameComponent,
-      gridCellVendorComponent: GridCellVendorComponent,
-      gridCellIdNumberComponent: GridCellIdNumberComponent,
-      gridCustomFilterComponent: GridCustomFilterComponent
+      gridCellNameComponent: AllForJobGridCellNameComponent,
+      gridCellVendorComponent: AllForJobGridCellVendorComponent,
+      gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent,
+      gridCustomFilterComponent: AllForJobGridCustomFilterComponent
 
       // gridCellMeterIdComponent: GridCellMeterIdComponent,
       // gridCellTagsComponent: GridCellTagsComponent,
@@ -110,7 +110,7 @@ export class MeterUnitsAllGridService {
   public setGridDefaultColumns(sample: boolean) {
     return [
       {
-        headerComponentFramework: GridSelectionHeaderComponent,
+        headerComponentFramework: AllForJobGridSelectionHeaderComponent,
         pinned: true,
         minWidth: 45,
         maxWidth: 45,

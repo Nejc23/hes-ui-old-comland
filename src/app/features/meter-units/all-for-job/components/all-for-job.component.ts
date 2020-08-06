@@ -1,35 +1,44 @@
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { gridRefreshInterval, configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
-import { MeterUnitsTypeStaticTextService } from '../types/services/meter-units-type-static-text.service';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { FormBuilder } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { MeterUnitsAllGridService } from '../types/services/meter-units-all-grid-service';
-import { MeterUnitsAllStaticTextService } from '../types/services/meter-units-all-static-text-service';
-import { MeterUnitsTypeGridService } from '../types/services/meter-units-type-grid.service';
-import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
+import * as moment from 'moment';
+import { Subscription, Observable } from 'rxjs';
 import * as _ from 'lodash';
-import { MeterUnitsTypeGridEventEmitterService } from '../types/services/meter-units-type-grid-event-emitter.service';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { filter } from 'rxjs/operators';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
+import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
+import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
+import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
+import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
+import { AllForJobGridService } from '../services/all-for-job-grid.service';
+import { AllForJobStaticTextService } from '../services/all-for-job-static-text.service';
+import { AllForJobGridEventEmitterService } from '../services/all-for-job-grid-event-emitter.service';
 
 @Component({
-  selector: 'app-meter-units-type',
-  templateUrl: './meter-units-all.component.html'
+  // selector: 'app-meter-units-all-for-job',
+  templateUrl: './all-for-job.component.html'
 })
-export class MeterUnitsAllComponent implements OnInit, OnDestroy {
+export class AllForJobComponent implements OnInit, OnDestroy {
   meterTypes$: Codelist<number>[] = [];
   public scheduleId: string;
 
@@ -100,22 +109,22 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private meterUnitsAllGridService: MeterUnitsAllGridService,
+    private allForJobGridService: AllForJobGridService,
     private sidebarService: SidebarService,
     private i18n: I18n,
-    private staticTextService: MeterUnitsAllStaticTextService,
+    private staticTextService: AllForJobStaticTextService,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private service: MyGridLinkService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     private meterUnitsTypeService: MeterUnitsService,
     private toast: ToastNotificationService,
-    private eventService: MeterUnitsTypeGridEventEmitterService,
+    private eventService: AllForJobGridEventEmitterService,
     private authService: AuthService,
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
-      meterUnitsAllGridService.meterUnitsAllId = params.id;
+      allForJobGridService.meterUnitsAllId = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
         : 'grdLayoutMUT-typeId-' + params.id;
@@ -125,14 +134,14 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
       }
 
       if (this.gridColumnApi) {
-        const dataFromCookie = this.meterUnitsAllGridService.getCookieData(); // saved columns settings
+        const dataFromCookie = this.allForJobGridService.getCookieData(); // saved columns settings
         if (dataFromCookie) {
           this.gridColumnApi.setColumnState(dataFromCookie);
         }
       }
 
       if (this.gridApi) {
-        const cookieSort = this.meterUnitsAllGridService.getCookieDataSortModel();
+        const cookieSort = this.allForJobGridService.getCookieDataSortModel();
         if (cookieSort !== undefined && cookieSort !== null) {
           this.gridApi.setSortModel(cookieSort);
         }
@@ -150,8 +159,8 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
     });
 
     this.filters = staticTextService.noFilterAppliedTekst;
-    this.frameworkComponents = meterUnitsAllGridService.setFrameworkComponents();
-    this.gridOptions = this.meterUnitsAllGridService.setGridOptions();
+    this.frameworkComponents = allForJobGridService.setFrameworkComponents();
+    this.gridOptions = this.allForJobGridService.setGridOptions();
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: MeterUnitsLayout) => {
         console.log('test 1');
@@ -169,8 +178,8 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
           this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
-          this.meterUnitsAllGridService.setSessionSettingsPageIndex(0);
-          this.meterUnitsAllGridService.setSessionSettingsSelectedRows([]);
+          this.allForJobGridService.setSessionSettingsPageIndex(0);
+          this.allForJobGridService.setSessionSettingsSelectedRows([]);
         }
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
@@ -193,9 +202,9 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
     });
 
     // set grid columns
-    this.columns = this.meterUnitsAllGridService.setGridDefaultColumns(false);
+    this.columns = this.allForJobGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
-    this.sideBar = this.meterUnitsAllGridService.setSideBar();
+    this.sideBar = this.allForJobGridService.setSideBar();
 
     this.localeText = {
       // for side panel
@@ -228,10 +237,10 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
   }
 
   deleteAllRequests() {
-    const requestIds = this.meterUnitsAllGridService.getAllMyGridLinkRequestIds();
+    const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
     if (requestIds && requestIds.length > 0) {
       console.log(`deleteing requests `, requestIds);
-      requestIds.map(requestId => this.meterUnitsAllGridService.removeMyGridLinkRequestId(requestId));
+      requestIds.map(requestId => this.allForJobGridService.removeMyGridLinkRequestId(requestId));
     }
   }
 
@@ -255,7 +264,7 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
   }
 
   checkSelectedAll() {
-    return this.meterUnitsAllGridService.getSessionSettingsSelectedAll();
+    return this.allForJobGridService.getSessionSettingsSelectedAll();
   }
 
   clearFilter() {
@@ -272,12 +281,12 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    if ($event !== this.meterUnitsAllGridService.getSessionSettingsSearchedText()) {
-      this.meterUnitsAllGridService.setSessionSettingsSearchedText($event);
+    if ($event !== this.allForJobGridService.getSessionSettingsSearchedText()) {
+      this.allForJobGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
-      this.meterUnitsAllGridService.setSessionSettingsPageIndex(0);
-      this.meterUnitsAllGridService.setSessionSettingsSelectedRows([]);
+      this.allForJobGridService.setSessionSettingsPageIndex(0);
+      this.allForJobGridService.setSessionSettingsSelectedRows([]);
       this.gridApi.onFilterChanged();
     }
   }
@@ -297,15 +306,15 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
 
   // click on the link "select all"
   selectAll() {
-    this.meterUnitsAllGridService.setSessionSettingsSelectedAll(true);
+    this.allForJobGridService.setSessionSettingsSelectedAll(true);
     this.eventService.selectDeselectAll(true);
     this.eventService.setIsSelectedAll(true);
   }
 
   // click on the link "deselect all"
   deselectAll() {
-    this.meterUnitsAllGridService.setSessionSettingsSelectedRows([]);
-    this.meterUnitsAllGridService.setSessionSettingsSelectedAll(false);
+    this.allForJobGridService.setSessionSettingsSelectedRows([]);
+    this.allForJobGridService.setSessionSettingsSelectedAll(false);
     this.eventService.selectDeselectAll(false);
     this.eventService.setIsSelectedAll(false);
   }
@@ -346,8 +355,8 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
     const datasource = {
       getRows(paramsRow) {
         that.requestModel.typeId = that.id; // type of meter units
-        that.requestModel.startRow = that.meterUnitsAllGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.meterUnitsAllGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.allForJobGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.allForJobGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         console.log(`requestModel = `, that.requestModel);
         that.requestModel.filterModel = that.setFilter();
@@ -368,10 +377,10 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
                   that.gridApi.showNoRowsOverlay();
                 }
 
-                that.gridApi.paginationGoToPage(that.meterUnitsAllGridService.getSessionSettingsPageIndex());
+                that.gridApi.paginationGoToPage(that.allForJobGridService.getSessionSettingsPageIndex());
                 paramsRow.successCallback(data.data, data.totalCount);
                 that.selectRows(that.gridApi);
-                that.eventService.setIsSelectedAll(that.meterUnitsAllGridService.getSessionSettingsSelectedAll());
+                that.eventService.setIsSelectedAll(that.allForJobGridService.getSessionSettingsSelectedAll());
                 // params.failCallback();
               });
             })
@@ -391,10 +400,10 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
               that.gridApi.showNoRowsOverlay();
             }
 
-            that.gridApi.paginationGoToPage(that.meterUnitsAllGridService.getSessionSettingsPageIndex());
+            that.gridApi.paginationGoToPage(that.allForJobGridService.getSessionSettingsPageIndex());
             paramsRow.successCallback(data.data, data.totalCount);
             that.selectRows(that.gridApi);
-            that.eventService.setIsSelectedAll(that.meterUnitsAllGridService.getSessionSettingsSelectedAll());
+            that.eventService.setIsSelectedAll(that.allForJobGridService.getSessionSettingsSelectedAll());
             // params.failCallback();
           });
         }
@@ -406,14 +415,14 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
 
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
-    this.meterUnitsAllGridService.onColumnVisibility(params);
+    this.allForJobGridService.onColumnVisibility(params);
   }
 
   // on close tool panel reload filter model
   toolPanelChanged(params) {
     if (params.source === undefined) {
       if (
-        !this.meterUnitsAllGridService.checkIfFilterModelAndCookieAreSame(
+        !this.allForJobGridService.checkIfFilterModelAndCookieAreSame(
           this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
           this.requestModel.filterModel
         )
@@ -440,9 +449,9 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
         this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
-        this.meterUnitsAllGridService.setSessionSettingsPageIndex(0);
-        this.meterUnitsAllGridService.setSessionSettingsSelectedAll(false);
-        this.meterUnitsAllGridService.setSessionSettingsSelectedRows([]);
+        this.allForJobGridService.setSessionSettingsPageIndex(0);
+        this.allForJobGridService.setSessionSettingsSelectedAll(false);
+        this.allForJobGridService.setSessionSettingsSelectedRows([]);
         this.eventService.selectDeselectAll(false);
         this.eventService.setIsSelectedAll(false);
         this.gridApi.onFilterChanged();
@@ -458,17 +467,17 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
     }
 
     if (params.newPage && !this.loadGrid) {
-      this.meterUnitsAllGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
+      this.allForJobGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
-      params.api.paginationGoToPage(this.meterUnitsAllGridService.getSessionSettingsPageIndex());
+      params.api.paginationGoToPage(this.allForJobGridService.getSessionSettingsPageIndex());
     }
   }
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.meterUnitsAllGridService.setSessionSettingsSelectedRows(params.node);
-    if (this.meterUnitsAllGridService.getSessionSettingsSelectedAll()) {
+    this.allForJobGridService.setSessionSettingsSelectedRows(params.node);
+    if (this.allForJobGridService.getSessionSettingsSelectedAll()) {
       // && !this.programmaticallySelectRow) {
       params.node.setSelected(true);
     }
@@ -478,7 +487,7 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
 
   refresh() {
     // if (this.authService.isTokenAvailable()) {
-    const requestIds = this.meterUnitsAllGridService.getAllMyGridLinkRequestIds();
+    const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
     // console.log(`refresh `, requestIds);
     if (requestIds && requestIds.length > 0) {
       requestIds.map(requestId =>
@@ -488,8 +497,8 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
             const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
             if (badRequest === undefined) {
               // no devices with unsuccessful status, we can delete requestId from session
-              this.meterUnitsAllGridService.removeMyGridLinkRequestId(requestId);
-              const breakerStateRequests = this.meterUnitsAllGridService.getAllMyGridLink_BreakerState_RequestIds();
+              this.allForJobGridService.removeMyGridLinkRequestId(requestId);
+              const breakerStateRequests = this.allForJobGridService.getAllMyGridLink_BreakerState_RequestIds();
               const isBreakerState = _.find(breakerStateRequests, x => x === requestId);
               // 3th step for breaker state
               if (isBreakerState) {
@@ -498,7 +507,7 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
                   if (resultsBreakerState) {
                     this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
                   }
-                  this.meterUnitsAllGridService.removeMyGridLink_BreakerState_RequestId(requestId);
+                  this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
                 });
               }
               this.toast.successToast(this.messageDataRefreshed);
@@ -507,8 +516,8 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
             const badRequest = _.find(results, x => x.status !== this.taskStatusOK && x.isFinished);
             if (badRequest !== undefined) {
               this.toast.errorToast(this.messageActionFailed);
-              this.meterUnitsAllGridService.removeMyGridLinkRequestId(requestId);
-              this.meterUnitsAllGridService.removeMyGridLink_BreakerState_RequestId(requestId);
+              this.allForJobGridService.removeMyGridLinkRequestId(requestId);
+              this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
             }
           }
         })
@@ -530,7 +539,7 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
   // set filter in request model
   setFilter() {
     if (
-      !this.meterUnitsAllGridService.checkIfFilterModelAndCookieAreSame(
+      !this.allForJobGridService.checkIfFilterModelAndCookieAreSame(
         this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
         this.requestModel.filterModel
       )
@@ -578,7 +587,7 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
   }
 
   setSearch() {
-    const search = this.meterUnitsAllGridService.getSessionSettingsSearchedText();
+    const search = this.allForJobGridService.getSessionSettingsSearchedText();
     if (search && search !== '') {
       return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
     }
@@ -588,8 +597,8 @@ export class MeterUnitsAllComponent implements OnInit, OnDestroy {
   // select rows on load grid from session
   selectRows(api: any) {
     this.programmaticallySelectRow = true;
-    const selectedAll = this.meterUnitsAllGridService.getSessionSettingsSelectedAll();
-    const selectedRows = this.meterUnitsAllGridService.getSessionSettingsSelectedRows();
+    const selectedAll = this.allForJobGridService.getSessionSettingsSelectedAll();
+    const selectedRows = this.allForJobGridService.getSessionSettingsSelectedRows();
     api.forEachNode(node => {
       if (selectedAll) {
         const startRow = api.getFirstDisplayedRow();
