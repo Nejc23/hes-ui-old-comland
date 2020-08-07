@@ -10,7 +10,7 @@ export class AllForJobStaticTextService {
   constructor(private i18n: I18n) {}
 
   get headerTitleMeterUnitsAll() {
-    return this.i18n('All Meter Units For Job');
+    return this.i18n('Meter Units for');
   }
 
   get notAvailableTekst() {

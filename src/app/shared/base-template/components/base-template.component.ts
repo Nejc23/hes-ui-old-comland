@@ -132,7 +132,7 @@ export class BaseTemplateComponent implements OnInit {
 
         // add All to the menu
         const allElement = {
-          title: this.i18n('All'),
+          title: this.i18n('Meter units for job'),
           routeLink: `/${MeterTypeRoute.meterUnitsAll}`,
           hasChildren: false,
           children: []

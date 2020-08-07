@@ -1,3 +1,4 @@
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -33,6 +34,8 @@ import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw
 import { AllForJobGridService } from '../services/all-for-job-grid.service';
 import { AllForJobStaticTextService } from '../services/all-for-job-static-text.service';
 import { AllForJobGridEventEmitterService } from '../services/all-for-job-grid-event-emitter.service';
+import { RequestMeterUnitsForJob } from 'src/app/core/repository/interfaces/meter-units/meter-units-for-job.interface';
+import { RequestRemoveScheduleDevices } from 'src/app/core/repository/interfaces/jobs/remove-schedule-devices.interface';
 
 @Component({
   // selector: 'app-meter-units-all-for-job',
@@ -45,7 +48,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   id = 0;
   private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
-  headerTitle = 'Meter';
+  headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
   refreshInterval = gridRefreshInterval;
@@ -73,8 +76,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   public sideBar;
   loadGrid = true;
   programmaticallySelectRow = false;
-  requestModel: GridRequestParams = {
+  requestModel: RequestMeterUnitsForJob = {
     requestId: null,
+    scheduleId: this.scheduleId,
     startRow: 0,
     endRow: 0,
     sortModel: [],
@@ -120,7 +124,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private toast: ToastNotificationService,
     private eventService: AllForJobGridEventEmitterService,
     private authService: AuthService,
-    private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService
+    private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
+    private modalService: ModalService,
+    private jobsService: JobsService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -146,45 +152,35 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           this.gridApi.setSortModel(cookieSort);
         }
       }
-
-      // set title by selected meter unit type
-      if (this.meterTypes$.length === 0) {
-        this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe(data => {
-          this.meterTypes$ = data;
-          this.setTitle();
-        });
-      } else {
-        this.setTitle();
-      }
     });
 
-    this.filters = staticTextService.noFilterAppliedTekst;
+    // this.filters = staticTextService.noFilterAppliedTekst;
     this.frameworkComponents = allForJobGridService.setFrameworkComponents();
     this.gridOptions = this.allForJobGridService.setGridOptions();
-    this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
-      next: (event: MeterUnitsLayout) => {
-        console.log('test 1');
-        if (event !== null) {
-          this.requestModel.filterModel.statuses = event.statusesFilter;
-          this.requestModel.filterModel.vendor = event.vendorFilter;
-          this.requestModel.filterModel.tags = event.tagsFilter;
-          this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
-          this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
-          this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
-          this.requestModel.filterModel.firmware = event.firmwareFilter;
-          this.requestModel.filterModel.breakerState = event.breakerStateFilter;
-          this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
-          this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
-          this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
-          this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
-          this.gridColumnApi.setColumnState(event.gridLayout);
-          this.allForJobGridService.setSessionSettingsPageIndex(0);
-          this.allForJobGridService.setSessionSettingsSelectedRows([]);
-        }
-        this.gridApi.onFilterChanged();
-        this.setFilterInfo();
-      }
-    });
+    // this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
+    //   next: (event: MeterUnitsLayout) => {
+    //     console.log('test 1');
+    //     if (event !== null) {
+    //       this.requestModel.filterModel.statuses = event.statusesFilter;
+    //       this.requestModel.filterModel.vendor = event.vendorFilter;
+    //       this.requestModel.filterModel.tags = event.tagsFilter;
+    //       this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
+    //       this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
+    //       this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
+    //       this.requestModel.filterModel.firmware = event.firmwareFilter;
+    //       this.requestModel.filterModel.breakerState = event.breakerStateFilter;
+    //       this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
+    //       this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
+    //       this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
+    //       this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
+    //       this.gridColumnApi.setColumnState(event.gridLayout);
+    //       this.allForJobGridService.setSessionSettingsPageIndex(0);
+    //       this.allForJobGridService.setSessionSettingsSelectedRows([]);
+    //     }
+    //     this.gridApi.onFilterChanged();
+    //     this.setFilterInfo();
+    //   }
+    // });
   }
 
   // form - rights
@@ -287,7 +283,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
       this.allForJobGridService.setSessionSettingsPageIndex(0);
       this.allForJobGridService.setSessionSettingsSelectedRows([]);
-      this.gridApi.onFilterChanged();
+      // this.gridApi.onFilterChanged();
     }
   }
 
@@ -359,7 +355,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         that.requestModel.endRow = that.allForJobGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         console.log(`requestModel = `, that.requestModel);
-        that.requestModel.filterModel = that.setFilter();
+        // that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         if (that.authService.isRefreshNeeded2()) {
           that.authService
@@ -368,17 +364,21 @@ export class AllForJobComponent implements OnInit, OnDestroy {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
+              that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
                 that.gridApi.hideOverlay();
-                that.totalCount = data.totalCount;
-                if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+
+                that.totalCount = 0;
+                that.setTitle(response.jobDescription);
+
+                if ((response === undefined || response == null || response.grid.totalCount === 0) && that.noSearch() && that.noFilters()) {
                   that.noData = true;
-                } else if (data.totalCount === 0) {
+                } else if (response.grid.totalCount === 0) {
                   that.gridApi.showNoRowsOverlay();
                 }
 
+                that.totalCount = response.grid.totalCount;
                 that.gridApi.paginationGoToPage(that.allForJobGridService.getSessionSettingsPageIndex());
-                paramsRow.successCallback(data.data, data.totalCount);
+                paramsRow.successCallback(response.grid.data, response.grid.totalCount);
                 that.selectRows(that.gridApi);
                 that.eventService.setIsSelectedAll(that.allForJobGridService.getSessionSettingsSelectedAll());
                 // params.failCallback();
@@ -391,17 +391,20 @@ export class AllForJobComponent implements OnInit, OnDestroy {
             });
         } else {
           console.log(`requestModel = `, this.requestModel);
-          that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
+          that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
             that.gridApi.hideOverlay();
-            that.totalCount = data.totalCount;
-            if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+            that.totalCount = 0;
+            that.setTitle(response.jobDescription);
+
+            if ((response === undefined || response == null || response.grid.totalCount === 0) && that.noSearch() && that.noFilters()) {
               that.noData = true;
-            } else if (data.totalCount === 0) {
+            } else if (response.grid.totalCount === 0) {
               that.gridApi.showNoRowsOverlay();
             }
 
+            that.totalCount = response.grid.totalCount;
             that.gridApi.paginationGoToPage(that.allForJobGridService.getSessionSettingsPageIndex());
-            paramsRow.successCallback(data.data, data.totalCount);
+            paramsRow.successCallback(response.grid.data, response.grid.totalCount);
             that.selectRows(that.gridApi);
             that.eventService.setIsSelectedAll(that.allForJobGridService.getSessionSettingsSelectedAll());
             // params.failCallback();
@@ -427,35 +430,35 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel
         )
       ) {
-        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-        this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-        this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
-          this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
-          this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
-          this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
-        } else {
-          this.requestModel.filterModel.readStatus = {
-            operation: { id: '', value: '' },
-            value1: 0,
-            value2: 0
-          };
-        }
-        this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-        this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
-        this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
-        this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
-        this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
+        // const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+        // this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+        // this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+        // this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+        // if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
+        //   this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
+        //   this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
+        //   this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+        // } else {
+        //   this.requestModel.filterModel.readStatus = {
+        //     operation: { id: '', value: '' },
+        //     value1: 0,
+        //     value2: 0
+        //   };
+        // }
+        // this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+        // this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+        // this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
+        // this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+        // this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+        // this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
         this.allForJobGridService.setSessionSettingsPageIndex(0);
         this.allForJobGridService.setSessionSettingsSelectedAll(false);
         this.allForJobGridService.setSessionSettingsSelectedRows([]);
         this.eventService.selectDeselectAll(false);
         this.eventService.setIsSelectedAll(false);
-        this.gridApi.onFilterChanged();
-        this.setFilterInfo();
+        // this.gridApi.onFilterChanged();
+        // this.setFilterInfo();
       }
     }
   }
@@ -536,55 +539,55 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     }*/
   }
 
-  // set filter in request model
-  setFilter() {
-    if (
-      !this.allForJobGridService.checkIfFilterModelAndCookieAreSame(
-        this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
-        this.requestModel.filterModel
-      )
-    ) {
-      this.setFilterInfo();
-      const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-      this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-      this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-      this.requestModel.filterModel.readStatus = {
-        operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
-        value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
-        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
-      };
-      this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-      this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
-      this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
-      this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
-      this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
-    } else {
-      this.setFilterInfo();
-    }
-    return this.requestModel.filterModel;
-  }
+  // // set filter in request model
+  // setFilter() {
+  //   if (
+  //     !this.allForJobGridService.checkIfFilterModelAndCookieAreSame(
+  //       this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
+  //       this.requestModel.filterModel
+  //     )
+  //   ) {
+  //     this.setFilterInfo();
+  //     const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+  //     this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+  //     this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+  //     this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+  //     this.requestModel.filterModel.readStatus = {
+  //       operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
+  //       value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
+  //       value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
+  //     };
+  //     this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+  //     this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+  //     this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
+  //     this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+  //     this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+  //     this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
+  //   } else {
+  //     this.setFilterInfo();
+  //   }
+  //   return this.requestModel.filterModel;
+  // }
 
-  // fill text in header - about selected filters
-  setFilterInfo() {
-    const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-    this.filters = this.staticTextService.setfilterHeaderText(
-      filterInfo.name,
-      filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
-      filterInfo.vendorFilter ? true : false,
-      filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
-      filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
-        ? true
-        : false,
-      filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
-      filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
-      filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
-      filterInfo.showDeletedMeterUnitsFilter,
-      filterInfo.showMeterUnitsWithoutTemplateFilter,
-      filterInfo.showOnlyImageReadyForActivationFilter
-    );
-  }
+  // // fill text in header - about selected filters
+  // setFilterInfo() {
+  //   const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+  //   this.filters = this.staticTextService.setfilterHeaderText(
+  //     filterInfo.name,
+  //     filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
+  //     filterInfo.vendorFilter ? true : false,
+  //     filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
+  //     filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
+  //       ? true
+  //       : false,
+  //     filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
+  //     filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
+  //     filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
+  //     filterInfo.showDeletedMeterUnitsFilter,
+  //     filterInfo.showMeterUnitsWithoutTemplateFilter,
+  //     filterInfo.showOnlyImageReadyForActivationFilter
+  //   );
+  // }
 
   setSearch() {
     const search = this.allForJobGridService.getSessionSettingsSearchedText();
@@ -662,13 +665,140 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   }
 
   // set form title by selected meter unit type
-  private setTitle() {
+  public setTitle(jobDescription?: string) {
     // const selectedType = this.meterTypes$.find(x => x.id === id);
     // if (selectedType !== undefined && selectedType != null) {
     //   this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsAll;
     // }
-    this.headerTitle = this.staticTextService.headerTitleMeterUnitsAll;
+    if (jobDescription === undefined || jobDescription.trim().length === 0) {
+      jobDescription = this.staticTextService.notAvailableTekst;
+    }
+
+    this.headerTitle = `${this.staticTextService.headerTitleMeterUnitsAll} ${jobDescription}`;
   }
 
-  onRemoveFromJob() {}
+  onRemoveFromJob() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    const deviceIdsParam = [];
+    if (selectedRows && selectedRows.length > 0) {
+      selectedRows.map(row => deviceIdsParam.push(row.id));
+      console.log(`RemoveScheduleDevicesFromJob deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
+    }
+
+    const selectedText = `${deviceIdsParam.length}`;
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    component.btnConfirmText = this.i18n('Confirm');
+    let response: Observable<any> = new Observable();
+
+    const request: RequestRemoveScheduleDevices = {
+      requestId: null,
+      scheduleId: this.scheduleId,
+      devices: deviceIdsParam
+    };
+
+    response = this.jobsService.removeScheduleDevices(request);
+
+    component.btnConfirmText = this.i18n('Remove');
+    component.modalTitle = this.i18n('Confirm bulk operation');
+    component.modalBody = this.i18n(`Remove ${selectedText} schedule device(s) from job?`);
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.toast.successToast(this.messageActionInProgress);
+        response.subscribe(
+          value => {
+            this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
+            this.toast.errorToast('Success');
+            this.refresh();
+          },
+          e => {
+            this.toast.errorToast(this.messageServerError);
+          }
+        );
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  // bulkOperation(operation: MeterUnitsTypeEnum) {
+  //   // if (this.authService.isTokenAvailable()) {
+  //   const selectedRows = this.gridApi.getSelectedRows();
+  //   const deviceIdsParam = [];
+  //   if (selectedRows && selectedRows.length > 0) {
+  //     selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+  //     console.log(`deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
+  //   }
+  //   let selectedText = `${deviceIdsParam.length} rows `;
+  //   const modalRef = this.modalService.open(ModalConfirmComponent);
+  //   const component: ModalConfirmComponent = modalRef.componentInstance;
+  //   component.btnConfirmText = this.i18n('Confirm');
+  //   let response: Observable<any> = new Observable();
+
+  //   // TODO: ONLY FOR TESTING !!!
+  //   // deviceIdsParam = [];
+  //   // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+  //   // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+
+  //   const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
+  //   let operationName = '';
+  //   switch (operation) {
+  //     case MeterUnitsTypeEnum.breakerStatus:
+  //       response = this.service.getDisconnectorState(params);
+  //       operationName = this.i18n('Get breaker status');
+  //       selectedText = `${this.i18n('for')} ${selectedText}`;
+  //       break;
+  //     case MeterUnitsTypeEnum.connect:
+  //       response = this.service.postMyGridConnectDevice(params);
+  //       operationName = this.i18n('Connect');
+  //       break;
+  //     case MeterUnitsTypeEnum.disconnect:
+  //       response = this.service.postMyGridDisconnectDevice(params);
+  //       operationName = this.i18n('Disconnect');
+  //       break;
+  //     case MeterUnitsTypeEnum.touConfig:
+  //       const paramsConf: RequestTOUData = { deviceIds: deviceIdsParam, timeOfUseId: '1' }; // TODO: timeOfUseId read form store?
+  //       response = this.service.postMyGridTOUDevice(paramsConf);
+  //       operationName = this.i18n('Configure TOU');
+  //       selectedText = `${this.i18n('for')} ${selectedText}`;
+  //   }
+  //   component.btnConfirmText = operationName;
+  //   component.modalTitle = this.i18n('Confirm bulk operation');
+  //   component.modalBody = this.i18n(`${operationName} ${selectedText} selected meter unit(s)?`);
+
+  //   modalRef.result.then(
+  //     data => {
+  //       // on close (CONFIRM)
+  //       this.toast.successToast(this.messageActionInProgress);
+  //       response.subscribe(
+  //         value => {
+  //           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+  //           if (operation === MeterUnitsTypeEnum.breakerStatus) {
+  //             this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
+  //           }
+  //         },
+  //         e => {
+  //           this.toast.errorToast(this.messageServerError);
+  //         }
+  //       );
+  //     },
+  //     reason => {
+  //       // on dismiss (CLOSE)
+  //     }
+  //   );
+  //   /* } else {
+  //     this.service.getMyGridIdentityToken().subscribe(
+  //       value => {
+  //         this.authService.setAuthTokenMyGridLink(value);
+  //         this.bulkOperation(operation);
+  //       },
+  //       e => {
+  //         this.toast.errorToast(this.messageServerError);
+  //       }
+  //     );
+  //   }*/
+  // }
 }

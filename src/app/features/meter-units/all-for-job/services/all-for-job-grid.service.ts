@@ -487,6 +487,10 @@ export class AllForJobGridService {
     );
   }
 
+  saveMyGridLinkRequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
+  }
+
   removeMyGridLinkRequestId(requestId: string) {
     this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridName, requestId);
   }
