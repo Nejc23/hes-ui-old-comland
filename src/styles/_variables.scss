@@ -102,7 +102,7 @@ $escaped-characters: (("<", "%3c"),
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
-$enable-shadows: false !default;
+$enable-shadows: true !default;
 $enable-gradients: false !default;
 $enable-transitions: true !default;
 $enable-prefers-reduced-motion-media-query: true !default;
@@ -221,9 +221,9 @@ $border-radius-sm: .145rem !default;
 
 $rounded-pill: 50rem !default;
 
-$box-shadow-sm: 0 .125rem .25rem rgba($black, .075) !default;
-$box-shadow: 0 .5rem 1rem rgba($black, .15) !default;
-$box-shadow-lg: 0 1rem 3rem rgba($black, .175) !default;
+$box-shadow-sm: 0 .125rem .25rem 0 rgba($black, .065) !default;
+$box-shadow: 0 .3rem 0.6rem 0 rgba($black, .1) !default;
+$box-shadow-lg: 0 0.5rem 1rem 0 rgba($black, .125) !default;
 
 $component-active-color: $white !default;
 $component-active-bg: theme-color("primary") !default;
@@ -280,7 +280,7 @@ $font-weight-lighter: lighter !default;
 $font-weight-light: 300 !default;
 $font-weight-normal: 400 !default;
 $font-weight-bold: 500 !default;
-$font-weight-bolder: 700 !default;
+$font-weight-bolder: 500 !default;
 
 $font-weight-base: $font-weight-normal !default;
 $line-height-base: 1.5 !default;
@@ -298,10 +298,10 @@ $headings-font-weight: 500 !default;
 $headings-line-height: 1.2 !default;
 $headings-color: $gray-700 !default;
 
-$display1-size: 6rem !default;
-$display2-size: 5.5rem !default;
-$display3-size: 4.5rem !default;
-$display4-size: 3.5rem !default;
+$display1-size: 5rem !default;
+$display2-size: 3.5rem !default;
+$display3-size: 2.5rem !default;
+$display4-size: 1.8rem !default;
 
 $display1-weight: 300 !default;
 $display2-weight: 300 !default;
@@ -708,8 +708,8 @@ $nav-divider-margin-y: $spacer / 2 !default;
 
 // Navbar
 
-$navbar-padding-y: $spacer / 2 !default;
-$navbar-padding-x: $spacer !default;
+$navbar-padding-y: $spacer / 4 !default;
+$navbar-padding-x: $spacer * 2 !default;
 
 $navbar-nav-link-padding-x: .5rem !default;
 
@@ -724,16 +724,16 @@ $navbar-toggler-padding-x: .75rem !default;
 $navbar-toggler-font-size: $font-size-lg !default;
 $navbar-toggler-border-radius: $btn-border-radius !default;
 
-$navbar-dark-color: rgba($white, .5) !default;
-$navbar-dark-hover-color: rgba($white, .75) !default;
+$navbar-dark-color: rgba($white, .7) !default;
+$navbar-dark-hover-color: rgba($white, .85) !default;
 $navbar-dark-active-color: $white !default;
 $navbar-dark-disabled-color: rgba($white, .25) !default;
 $navbar-dark-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-dark-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-dark-toggler-border-color: rgba($white, .1) !default;
 
 $navbar-light-color: rgba($black, .5) !default;
-$navbar-light-hover-color: rgba($black, .7) !default;
-$navbar-light-active-color: rgba($black, .9) !default;
+$navbar-light-hover-color: rgba($black, .75) !default;
+$navbar-light-active-color: $primary !default;
 $navbar-light-disabled-color: rgba($black, .3) !default;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-light-toggler-border-color: rgba($black, .1) !default;
@@ -755,23 +755,23 @@ $dropdown-color: $body-color !default;
 $dropdown-bg: $white !default;
 $dropdown-border-color: rgba($black, .15) !default;
 $dropdown-border-radius: $border-radius !default;
-$dropdown-border-width: $border-width !default;
+$dropdown-border-width: 0;//$border-width !default;
 $dropdown-inner-border-radius: subtract($dropdown-border-radius, $dropdown-border-width) !default;
 $dropdown-divider-bg: $gray-200 !default;
 $dropdown-divider-margin-y: $nav-divider-margin-y !default;
-$dropdown-box-shadow: 0 .5rem 1rem rgba($black, .175) !default;
+$dropdown-box-shadow: $box-shadow;
 
 $dropdown-link-color: $gray-900 !default;
 $dropdown-link-hover-color: darken($gray-900, 5%) !default;
-$dropdown-link-hover-bg: $gray-100 !default;
+$dropdown-link-hover-bg: $gray-300 !default;
 
 $dropdown-link-active-color: $component-active-color !default;
 $dropdown-link-active-bg: $component-active-bg !default;
 
 $dropdown-link-disabled-color: $gray-600 !default;
 
-$dropdown-item-padding-y: .25rem !default;
-$dropdown-item-padding-x: 1.5rem !default;
+$dropdown-item-padding-y: .5rem !default;
+$dropdown-item-padding-x: 1rem !default;
 
 $dropdown-header-color: $gray-600 !default;
 
@@ -1043,15 +1043,15 @@ $figure-caption-color: $gray-600 !default;
 
 $breadcrumb-font-size: $font-size-sm !default;
 
-$breadcrumb-padding-y: .75rem !default;
-$breadcrumb-padding-x: 1rem !default;
+$breadcrumb-padding-y: 0; //.75rem !default;
+$breadcrumb-padding-x: 0; //1rem !default;
 $breadcrumb-item-padding: .5rem !default;
 
 $breadcrumb-margin-bottom: 0rem !default;
 
 $breadcrumb-bg: transparent !default;
-$breadcrumb-divider-color: $gray-600 !default;
-$breadcrumb-active-color: $gray-600 !default;
+$breadcrumb-divider-color: white;//$gray-600 !default;
+$breadcrumb-active-color: white;//$gray-600 !default;
 $breadcrumb-divider: quote("•") !default;
 
 $breadcrumb-border-radius: $border-radius !default;
@@ -1150,19 +1150,20 @@ $print-body-min-width: map-get($grid-breakpoints, "lg") !default;
 // Custom spacing Variables
 
 // Change below variable if the height of the navbar changes
-$topbar-base-height: 3.8rem;
+$topbar-base-height: 4.1rem;
 // Change below variable to change the width of the sidenav
 $sidebar-base-width: 15rem;
 // Change below variable to change the width of the sidenav when collapsed
-$sidebar-collapsed-width: 1.5rem;
-$sidebar-fixed-width: 3.5rem;
+$sidebar-collapsed-width: 3rem;
 
 $icon-size-sm: 13.375px;
 $icon-size: 15px;
 $icon-size-lg: 18px;
 $icon-size-xl: 28px;
 
-$nav-active: #e02068 !default;
+$navbar-fixed-background-light: #b52d72 !default;
+$navbar-fixed-background-dark: #49348a !default;
 
-$navbar-fixed-background-light: #e02068 !default;
-$navbar-fixed-background-dark: #412e80 !default;
+//$navbar-fixed-background-light: #e02068 !default;
+//$navbar-fixed-background-dark: #412e80 !default;
+

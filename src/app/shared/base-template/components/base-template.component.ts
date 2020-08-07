@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -9,15 +9,13 @@ import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
-import { Observable, of } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
-import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-// import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { brand } from 'src/environments/brand/default/brand';
 
 @Component({
   selector: 'app-base-template',
@@ -53,10 +51,7 @@ export class BaseTemplateComponent implements OnInit {
   constructor(
     private sidebarService: SidebarService,
     private cookieService: CookieService,
-    @Inject(LOCALE_ID) private locale: string,
     public i18n: I18n,
-    //  private formBuilder: FormBuilder,
-    private router: Router,
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService
@@ -102,7 +97,7 @@ export class BaseTemplateComponent implements OnInit {
   }*/
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
+  getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     // console.log(`SCREEN SIZE = ${this.screenWidth}, ${this.screenHeight}`);
@@ -167,7 +162,7 @@ export class BaseTemplateComponent implements OnInit {
   }*/
 
   @HostListener('click', ['$event.target'])
-  onClick(btn) {
+  onClick() {
     this.cookieService.set(
       config.authTimeStamp,
       moment()
@@ -184,6 +179,14 @@ export class BaseTemplateComponent implements OnInit {
 
   mouseLeavesNav() {
     this.isMouseOverNav = false;
+  }
+
+  getMenuMainLogoUrl() {
+    return brand.navFixedMenuMainUrl;
+  }
+
+  getAppTitle() {
+    return brand.appTitle;
   }
 
   /*  get companyIdProperty() {

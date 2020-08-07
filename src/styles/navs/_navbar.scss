@@ -1,47 +1,68 @@
 .navbar {
-  width: 100%;
-  height: $sidebar-fixed-width;
-  z-index: 220;
-  background: linear-gradient(90deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
-  padding: $spacer 0;
-  text-align: center;
-  position: fixed;
+  height: $topbar-base-height;
 
-  i {
-    font-size: $icon-size-xl;
-    color: $white !important;
-  }
-  
-  .user {
-    height: $icon-size-xl;
-    width: $icon-size-xl;
-    line-height: $icon-size-xl;
-    display: inline-block;
-    text-align: center;
+  margin-left: $sidebar-base-width;
+  transition: margin-left .3s;
+  width: auto;
+
+  &.menu-collapsed {
+    margin-left: $sidebar-collapsed-width !important;
   }
 
-  .navbar-title {
-    //line-height: $sidebar-fixed-width;
-    color: $white;
-    font-family: 'Roboto Slab', serif;
-    font-weight: 700;
+  .page-name {
+    padding: 0;
+    font-size: $h4-font-size;
+    line-height: 1;
   }
 
-  /*.rotate {
-    transform: rotate(-90deg);
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
+  .navbar-nav {
+    .nav-item {
+      .nav-link {
+        i {
+          font-size: $font-size-base * 1.8;
+        }
 
-    > * {
-      transform: translate(-50%, 0);
+        &.user {
+          background-color: $navbar-dark-color;
+          width: calc((#{$nav-link-padding-y} * 2) + (#{$font-size-base} * 1.5));
+          color: rgba($body-color, .7);
+
+          &:hover {
+            background-color: $navbar-dark-hover-color;
+            color: $body-color;
+          }
+        }
+      }
     }
-  }*/
+  }
 }
 
-@media only screen and (max-height: 450px) {
-  .navbar-title {
-    display: none;
+.navbar.navbar-dark {
+  background: linear-gradient(90deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
+
+  .page-name {
+    color: $navbar-dark-brand-color;
+  }
+
+  .breadcrumb {
+    .breadcrumb-item {
+      color: $navbar-dark-color;
+
+      &.active {
+        color: $navbar-dark-color;
+      }
+
+      a {
+        color: $navbar-dark-color;
+
+        @include hover-focus {
+          color: $navbar-dark-hover-color;
+        }
+
+        &.disabled {
+          color: $navbar-dark-disabled-color;
+        }
+      }
+    }
   }
 }

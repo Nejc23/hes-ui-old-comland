@@ -10,43 +10,50 @@
     <!-- deprecated -->
     <!--<app-side-fixed-nav></app-side-fixed-nav>-->
     <!-- Fixed top -->
-    <app-top-fixed-nav></app-top-fixed-nav>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top justify-content-between"
+      [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
+      <div>
+        <app-breadcrumb></app-breadcrumb>
+      </div>
+      <app-top-fixed-nav></app-top-fixed-nav>
+    </nav>
+
 
     <!-- Sidebar -->
-    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar"
+    <div class="sidebar sidebar-light shadow d-flex flex-column"
       [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
       (mouseleave)="mouseLeavesNav()">
-      <!-- Sidebar Toggler (Sidebar) -->
 
-      <button @navItemsTrigger id="sidebarToggle" class="btn btn-round position-absolute"
+      <button @navItemsTrigger id="sidebarToggle" class="btn btn-round position-absolute shadow"
         *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
         (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
-        <i class='far' [ngClass]="{'fa-compress-alt': !app.layout.isMenuCollapsed, 'fa-expand-alt': app.layout.isMenuCollapsed}"></i>
+        <i class='far'
+          [ngClass]="{'fa-compress-alt': !app.layout.isMenuCollapsed, 'fa-expand-alt': app.layout.isMenuCollapsed}"></i>
       </button>
 
-      <div @navItemsTrigger class="nav-items" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
-        <li class="nav-item">
-          <div class="nav-link disabled pr-4">
-            <i class="far fa-building mr-2"></i>
-            <span>{{organisation}}</span>
-          </div>
-        </li>
-        <!-- <li class="nav-item dropdown" *ngIf="(companies$ | async)?.length > 1">
-          <a class="nav-link dropdown-toggle pr-4" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            <i class="far fa-building mr-2"></i>
-            <span>{{selectedCompany.value}}</span>
-          </a>
-          <div class="dropdown-menu ml-3" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" *ngFor="let company of companies$ | async"
-              href="#" (click)="reloadPage(company)">{{company.value}}</a>
-          </div>
-        </li>-->
-        <app-sidebar [items]="sidebarItems" class="mt-3 d-block"></app-sidebar>
-      <!--  <app-sidebar-meter [items]="sidebarMeterUnitsItems" class="mt-3 d-block" *ngIf="submenu == 1"></app-sidebar-meter>
-        <app-sidebar-meter [items]="sidebarConfigurationItems" class="mt-3 d-block" *ngIf="submenu == 2"></app-sidebar-meter>-->
+      <div class="brand d-flex justify-content-center align-items-center mb-4">
+        <img class="brand-logo mx-2" [src]="getMenuMainLogoUrl()">
+        <span @navItemsTrigger *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
+          class="brand-name display-4">{{getAppTitle()}}</span>
       </div>
-    </ul>
+      <!-- Sidebar Toggler (Sidebar) -->
+
+      <div @navItemsTrigger class="mb-2 px-3 py-2" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+        <i class="far fa-building mr-2"></i>
+        <strong>{{organisation}}</strong>
+      </div>
+
+      <ul @navItemsTrigger class="navbar-nav" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+        <app-sidebar [items]="sidebarItems"></app-sidebar>
+      </ul>
+
+      <div @navItemsTrigger class="mt-auto sidebar-version text-center"
+        *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+        <small>{{version}}</small><br />
+        <small>{{getAppTitle()}} by Enerdat</small><br />
+        <small>© 2020. All rights reserved</small>
+      </div>
+    </div>
 
     <div id="content-wrapper" [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
       <!-- Main Content -->

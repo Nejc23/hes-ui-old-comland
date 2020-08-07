@@ -1,12 +1,12 @@
 <!-- header -->
 
-<div class="d-flex align-items-center mb-3">
+<!--<div class="d-flex align-items-center mb-3">
   <app-header-title [headerTitle]="headerTitle"></app-header-title>
   <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary btn-round" (click)="addDcu()" *ngIf="!noData">
     <i class="far fa-plus"></i>
   </button>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
-</div>
+</div>-->
 
 <!-- row total items, selected filter name -->
 <div *ngIf="!noData">
@@ -17,6 +17,9 @@
     </small>
     <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end">
     </app-action-form>
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary btn-sm" (click)="addDcu()" *ngIf="!noData">
+      <i class="far fa-plus"></i>
+    </button>
   </div>
 
   <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">

@@ -22,7 +22,7 @@ body {
 }
 
 #content {
-  margin-top: $sidebar-fixed-width;
+  margin-top: calc(#{$topbar-base-height} + #{$spacer/2});
 }
 
 /****************************************/

@@ -5,49 +5,70 @@
 .sidebar {
   width: $sidebar-base-width;
   height: 100%;
-  z-index: 200;
+  z-index: 1040;
   position: fixed;
   overflow: visible;
-  margin-top: $sidebar-fixed-width; // if top fixed header
-  // margin-left: $sidebar-fixed-width; // if left fixed sidebar
-  padding-top: $spacer;
+  margin-top: 0;
 
-  .nav-item {
-    position: relative;
+  .navbar-nav {
+    overflow-y: auto;
 
-    &:last-child {
-      margin-bottom: $spacer;
-    }
+    .nav-item {
+      position: relative;
+      width: 100%;
 
-    .nav-link {
-      text-align: left;
-      padding: 0.5 * $spacer $spacer;
-      width: $sidebar-base-width;
-    }
-
-   /* &.active {
       .nav-link {
-        font-weight: $font-weight-bold;
+        text-align: left;
+        padding: 0.75 * $spacer $spacer;
       }
-    }*/
+
+      .dropdown-menu {
+        padding: 0 0 0.375 * $spacer 0;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+
+        .nav-item {
+          padding-left: $spacer;
+
+          &:first-child .nav-link {
+            padding-top: 0.375 * $spacer;
+          }
+        }
+      }
+
+      &.open {
+        >a {
+          >.arrow i {
+            @include transform(rotate(90deg));
+          }
+        }
+      }
+    }
   }
 
   hr.sidebar-divider {
     margin: 0 1rem 1rem;
   }
 
+  .brand {
+    height: $topbar-base-height;
+
+    .brand-logo {
+      max-height: 30px;
+      max-width: 30px;
+    }
+  }
+
   .sidebar-version {
-    position: absolute;
-    bottom: calc(10px + #{$sidebar-fixed-width});
-    width: 100%;
-    color: fade-out($white, 0.5);
+    padding: $spacer 0;
   }
 
   #sidebarToggle {
     left: calc(#{$sidebar-base-width} - (#{$input-height}/2));
-    z-index: 201;
+    z-index: 1041;
     display: block;
-
+    top: $spacer / 2;
   }
 
   /************ Sidebar Toggled ****************/
@@ -63,112 +84,9 @@
   // Sidebar Dark
   &.sidebar-dark {
 
-    hr.sidebar-divider {
-      border-top: 1px solid fade-out($white, 0.85);
-    }
+    //TODO
 
-    .nav-item {
-      
-      .nav-link {
-        color: $gray-400;
 
-        &:hover {
-          color: $gray-100;
-          background-color: lighten($color: $gray-800, $amount: 5%);
-          width:  calc(#{$sidebar-base-width} - 25px);          
-        }
-      }
-
-      &.dropdown .arrow {
-        position: absolute;
-        top: 2px;
-        right: 20px;
-        line-height: 35px;
-        font-size: 17px;
-      }
-
-      ul.dropdown-menu {
-        margin-top: -5px; 
-        padding-bottom: 10px;
-        padding-left: 20px !important;  
-        border: 0;      
-        .nav-item {
-          padding: 5px 0;
-
-          > a {            
-            padding: 0;
-          }
-        }
-      }
-      &.open {
-        > a {
-          color: $gray-400;
-
-          .icon-holder {
-            color: $gray-400;
-          }
-
-          > .arrow {
-            @include transform(rotate(90deg));
-          }
-        }
-
-        > .dropdown-menu {
-          display: block;
-          
-          .dropdown-menu {
-            padding-left: 20px;	
-          }
-
-          .arrow {
-            line-height: 25px;
-          }
-        }
-      }
-  
-      &.active {
-        border-right: 3px solid $primary;
-        > a {
-          font-weight: $font-weight-bold;
-          color:  $gray-200;
-        }
-        
-
-        ul.dropdown-menu{         
-          font-weight: none; 
-          .nav-item.active > a {
-            color: $gray-200;
-            font-weight: $font-weight-bold;
-          }
-        }
-      }
-      
-      a {
-        color: $gray-700;
-        @include transition(all 0.3s ease); 
-        
-        &:hover,
-        &:focus {
-          text-decoration: none;
-          color: $gray-400;
-
-          .icon-holder {
-            color: $gray-400;
-          }
-        }
-      }
-      
-    }
-
-    // Color the sidebar toggler
-    #sidebarToggle {
-      color: $white;
-      background-color: $gray-700;
-
-      &:hover {
-        background-color: $gray-900;
-      }
-    }
   }
 
   &.sidebar-light {
@@ -179,67 +97,39 @@
       border-top: 1px solid $border-color;
     }
 
-    .nav-item {
-      .nav-link {
-        color: $gray-600;
-
-        &.active {
-          color: $nav-active;
-        }
-
-        &:hover {
-          color: $gray-700;
-          background-color: darken($color: $gray-100, $amount: 3%);
-        }
-
+    .brand {
+      .brand-name {
+        color: $primary
       }
-
-      &.active {
-        .nav-link {
-          color: $white;
-        }
-      }
-    }
-
-    // Color the sidebar toggler
-    #sidebarToggle {
-      color: $white;
-      background-color: $gray-700;
-
-      &:hover {
-        background-color: $gray-900;
-      }
-    }
-  }
-
-  &.sidebar-light {
-    background-color: $gray-100;
-    border-right: $border-width solid lighten($color: $border-color, $amount: 10%);
-
-    hr.sidebar-divider {
-      border-top: 1px solid $border-color;
     }
 
     .nav-item {
       .nav-link {
-        color: $gray-600;
+        color: $navbar-light-color;
+      }
 
-        &.active {
-          color: $nav-active;
+      &:hover,
+      &.dropdown.open {
+        background-color: $gray-300;
+
+        >.nav-link {
+          color: $navbar-light-hover-color;
         }
+      }
 
-        &:hover {
-          color: $gray-700;
-          background-color: darken($color: $gray-100, $amount: 3%);
-        }
-
+      .dropdown-menu {
+        background-color: $gray-300;
       }
 
       &.active {
-        .nav-link {
-          color: $white;
+        >.nav-link {
+          color: $navbar-light-active-color;
         }
       }
+    }
+
+    .sidebar-version {
+      color: $navbar-light-color;
     }
 
     // Color the sidebar toggler
@@ -260,4 +150,3 @@
 .sidebar {
   transition: width .35s ease;
 }
-

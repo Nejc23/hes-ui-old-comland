@@ -1,46 +1,29 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">          
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav navbar-expand-lg fixed-top py-lg-2">
-        <li class="nav-item">
-          <a class="navbar-icon mt-auto" href="#">     
-            <img [src]="getMenuMainLogoUrl()" style='height: 60%; width: 60%; object-fit: contain'>
-          </a>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-logo mx-auto py-lg-2">
-        <li class="nav-item">
-          <img class="navbar-title display-5" [src]="getSmallLogoUrl()">
-        </li>          
-      </ul>     
-      <ul class="navbar-nav mr-3 mt-2">
-        <li class="nav-item">
-          <a class="navbar-icon d-block" href="#">
-            <i class="far fa-border-all"></i>
-          </a>
-        </li>
-        <li class="nav-item dropdown mr-2">
-        <a class="navbar-icon d-block px-2" id="dropdownMenuLang" href="#" data-toggle="dropdown" >
-          <i class="fal fa-language"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuLang">
-          
-            <div *ngFor="let obj of languages$">
-              <a class="dropdown-item px-2" href="javascript:void(0);" (click)="selectLang(obj.id)">{{obj.value}}</a>
-            </div>
-          
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="bg-white h5 user rounded-circle text-center px-2" id="dropdownMenu1" href="#" data-flip="true" data-toggle="dropdown" data-display="static">
-          <span>{{initials}}</span>
-        </a>
-        <ul class="dropdown-menu dropdown-menu-lg-right" role="menu" aria-labelledby="dropdownMenu1">
-          <h6 class="dropdown-header">{{userName}}</h6>
-          <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>                  
-          <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>        
-        </ul>
-        </li>
-      </ul>
+<ul class="navbar-nav">
+  <!-- <li class="nav-item">
+    <a class="nav-link" href="#">
+      <i class="far fa-border-all"></i>
+    </a>
+  </li> -->
+  <li class="nav-item dropdown">
+    <a class="nav-link" id="dropdownMenuLang" href="#" data-toggle="dropdown">
+      <i class="fal fa-language px-2"></i>
+    </a>
+    <div class="dropdown-menu dropdown-menu-lg-right" aria-labelledby="dropdownMenuLang">
+      <div *ngFor="let obj of languages$">
+        <a class="dropdown-item" href="javascript:void(0);" (click)="selectLang(obj.id)">{{obj.value}}</a>
+      </div>
     </div>
-  </nav>
-  
+  </li>
+
+  <li class="nav-item dropdown">
+    <a class="nav-link user rounded-circle text-center" id="dropdownUser" href="#" data-flip="true"
+      data-toggle="dropdown">
+      <small><strong>{{initials}}</strong></small>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-lg-right" role="menu" aria-labelledby="dropdownUser">
+      <h6 class="dropdown-header">{{userName}}</h6>
+      <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>
+      <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>
+    </ul>
+  </li>
+</ul>
