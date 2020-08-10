@@ -90,8 +90,8 @@
   }
 
   &.sidebar-light {
-    background-color: $gray-100;
-    border-right: $border-width solid lighten($color: $border-color, $amount: 10%);
+    background-color: $gray-200;
+    border-right: $border-width solid lighten($color: $border-color, $amount: 8%);
 
     hr.sidebar-divider {
       border-top: 1px solid $border-color;
