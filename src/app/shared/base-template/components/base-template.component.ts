@@ -59,7 +59,8 @@ export class BaseTemplateComponent implements OnInit {
     private router: Router,
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
-    private auth: AuthService
+    private auth: AuthService,
+    private acitavedRouter: ActivatedRoute
   ) {
     this.app = {
       layout: {
@@ -70,6 +71,7 @@ export class BaseTemplateComponent implements OnInit {
         rtlActived: false
       }
     };
+
     this.getScreenSize();
     // this.form = this.createForm();
 
@@ -82,6 +84,11 @@ export class BaseTemplateComponent implements OnInit {
           this.submenu = 2;
         } else {
           this.submenu = 0;
+        }
+        if (currentUrl.includes('/meterUnits/all')) {
+          acitavedRouter.queryParams.subscribe(qParams => {
+            this.fillMeterUnits(qParams.scheduleId);
+          });
         }
       }
     });
@@ -116,7 +123,7 @@ export class BaseTemplateComponent implements OnInit {
     this.fillConfiguration();
   }
 
-  fillMeterUnits() {
+  fillMeterUnits(scheduleId: string = null) {
     const sidebarItems = this.sidebarService.getSidebarMeterUnitsItems();
     this.codeList.meterUnitTypeCodelist().subscribe(list => {
       if (list && list.length > 0) {
@@ -131,13 +138,16 @@ export class BaseTemplateComponent implements OnInit {
         });
 
         // add All to the menu
-        const allElement = {
-          title: this.i18n('Meter units for job'),
-          routeLink: `/${MeterTypeRoute.meterUnitsAll}`,
-          hasChildren: false,
-          children: []
-        };
-        sidebarItems.push(allElement);
+        if (scheduleId !== null && scheduleId) {
+          const allElement = {
+            title: this.i18n('Meter units for job'),
+            routeLink: `/${MeterTypeRoute.meterUnitsAll}`,
+            queryParams: { scheduleId },
+            hasChildren: false,
+            children: []
+          };
+          sidebarItems.push(allElement);
+        }
 
         this.sidebarMeterUnitsItems = sidebarItems;
       }

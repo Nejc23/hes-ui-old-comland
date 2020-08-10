@@ -680,12 +680,17 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   onRemoveFromJob() {
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
-    if (selectedRows && selectedRows.length > 0) {
+
+    let selectedDeviceCount = this.totalCount;
+
+    const selectedAll = this.allForJobGridService.getSessionSettingsSelectedAll();
+    if (!selectedAll && selectedRows && selectedRows.length > 0) {
       selectedRows.map(row => deviceIdsParam.push(row.id));
       console.log(`RemoveScheduleDevicesFromJob deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
+      selectedDeviceCount = deviceIdsParam.length;
     }
 
-    const selectedText = `${deviceIdsParam.length}`;
+    const selectedText = `${selectedDeviceCount}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = this.i18n('Confirm');
@@ -710,7 +715,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         response.subscribe(
           value => {
             this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.errorToast('Success');
+            this.toast.errorToast(this.i18n('Devices removed from job successfully.'));
             this.refresh();
           },
           e => {
