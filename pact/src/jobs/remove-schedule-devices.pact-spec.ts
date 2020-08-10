@@ -41,7 +41,8 @@ describe('Pact consumer test', () => {
           withRequest: {
             method: service.removeScheduleDevicesRequest(data).method,
             path: service.removeScheduleDevicesRequest(data).url,
-            headers: defaultRequestHeader
+            headers: defaultRequestHeader,
+            body: data
           },
           willRespondWith: {
             status: 200,
