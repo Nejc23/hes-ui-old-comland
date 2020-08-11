@@ -19,3 +19,4 @@ export const fwUpgrade = `fw-upgrade`;
 export const touConfigImport = `/api/time-of-use/import-time-of-use`;
 
 export const registers = `${basePath}/registers`;
+export const importDeviceKeys = `${basePath}/crypto/import`;

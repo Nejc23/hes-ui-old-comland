@@ -1,0 +1,32 @@
+<app-auto-refresh
+      (timerExpired)="checkImportResults()"
+      [elapseTime]="refreshInterval"
+      [hidden]="true">
+</app-auto-refresh>
+
+<div class="d-flex align-items-center mb-3">
+  <app-header-title [headerTitle]="headerTitle"></app-header-title>
+  <app-breadcrumb class="ml-auto"></app-breadcrumb>
+
+</div>
+
+<app-input-radio i18n-label label="File type" [form]="form" [property]="fileTypeProperty"
+name="fileTypeRadio" [options]="fileTypeOptions" inline="true" (change)="changeReadOptionId()"
+(refresh)="changeReadOptionId()">
+</app-input-radio>
+
+<div class="form-row">
+  <div class="col-12">
+      <app-file-upload label="GULF" [form]="form" [property]="gulfProperty"
+          [uploadSaveUrl]="uploadSaveUrl"
+          [uploadRemoveUrl]=""
+          [multiple]="false"
+          [responseType]="'text'"
+          [allowedExtensions]="allowedExt"
+          [textExplanation]="allowedExtExplainText"
+          (successEvent)="successUploaded($event)"
+          (uploadEvent)="uploadEvent($event)"
+          i18n-label></app-file-upload>
+  </div>
+</div>
+<div class="form-row" *ngFor="let item of allResultTexts">{{item}}</div>

@@ -133,6 +133,12 @@ export class SidebarService {
         routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
         hasChildren: false,
         children: []
+      },
+      {
+        title: this.i18n(`Import device keys`),
+        routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
+        hasChildren: false,
+        children: []
       }
     ];
   }
