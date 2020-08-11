@@ -6,6 +6,7 @@ import { GridSettingsSessionStoreTypeEnum } from '../enums/grid-settings-session
 @Injectable()
 export class GridSettingsSessionStoreService {
   gridSettings = 'gridSettings';
+  cryptoImportIds = 'cryptoImportIds';
 
   constructor() {}
   // searchText
@@ -250,6 +251,40 @@ export class GridSettingsSessionStoreService {
 
   getAllMyGridLinkRequestIds(grid: string): string[] {
     const data = JSON.parse(sessionStorage.getItem(grid));
+    return data;
+  }
+
+  saveCryptoImportId(importId: string) {
+    const importIds = [];
+    const data = JSON.parse(sessionStorage.getItem(this.cryptoImportIds));
+    if (data) {
+      data.map(row => importIds.push(row));
+      const value = _.find(data, x => x === importId);
+      if (!value) {
+        importIds.push(importId);
+        sessionStorage.setItem(this.cryptoImportIds, JSON.stringify(importIds));
+      }
+    } else {
+      importIds.push(importId);
+      sessionStorage.setItem(this.cryptoImportIds, JSON.stringify(importIds));
+    }
+    console.log(`importIds = ${JSON.stringify(importIds)}`);
+  }
+
+  removeCryptoImportId(importId: string) {
+    const data = JSON.parse(sessionStorage.getItem(this.cryptoImportIds));
+    if (data) {
+      const value = _.find(data, x => x === importId);
+      if (value) {
+        _.remove(data, x => x === importId);
+        sessionStorage.setItem(this.cryptoImportIds, JSON.stringify(data));
+      }
+    }
+    // console.log(`requestIds = ${JSON.stringify(data)}`);
+  }
+
+  getAllCryptoImportIds(): string[] {
+    const data = JSON.parse(sessionStorage.getItem(this.cryptoImportIds));
     return data;
   }
 }

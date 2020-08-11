@@ -7,15 +7,15 @@ import { AutoTemplatesService } from 'src/app/core/repository/services/auto-temp
 import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
 import { AutoTemplateRuleList, AutoTemplateRule } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
 import { AutoTemplateList } from 'src/app/core/repository/interfaces/auto-templates/auto-templates-list.interface';
-import { AutoTemplatesStaticTextService } from '../services/auto-templates-static-text.service';
-import { AutoTemplatesGridService } from '../services/auto-templates-grid.service';
 import { Rule } from 'src/app/core/repository/interfaces/auto-templates/rule.interface';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { AutoTemplatesGridEventEmitterService } from '../services/auto-templates-grid-event-emitter.service';
-import { GridRequiredCellEditorComponent } from './grid-custom-components/grid-required-cell-editor.component';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { AutoTemplatesStaticTextService } from '../../services/auto-templates-static-text.service';
+import { AutoTemplatesGridService } from '../../services/auto-templates-grid.service';
+import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templates-grid-event-emitter.service';
+import { GridRequiredCellEditorComponent } from '../grid-custom-components/grid-required-cell-editor.component';
 
 @Component({
   selector: 'app-auto-templates',

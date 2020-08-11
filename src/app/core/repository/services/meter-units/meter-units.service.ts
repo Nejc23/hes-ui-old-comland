@@ -6,11 +6,12 @@ import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
-import { meterUnits, meterUnitsLayout, meterUnitsBreakerState, touConfigImport } from '../../consts/meter-units.const';
+import { meterUnits, meterUnitsLayout, meterUnitsBreakerState, touConfigImport, importDeviceKeys } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import * as _ from 'lodash';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
+import { CryptoImportCheckResponse } from '../../interfaces/meter-units/crypto-import-check-response.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +74,13 @@ export class MeterUnitsService {
 
   importConfigTouRequest(payload: MeterUnitsTouConfigImport): HttpRequest<any> {
     return new HttpRequest('POST', `${touConfigImport}`, payload);
+  }
+
+  checkCryptoImport(importId: string): Observable<CryptoImportCheckResponse> {
+    return this.repository.makeRequest(this.checkCryptoImportRequest(importId));
+  }
+
+  checkCryptoImportRequest(importId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${importDeviceKeys}/${importId}`);
   }
 }
