@@ -83,4 +83,12 @@ export class MeterUnitsService {
   checkCryptoImportRequest(importId: string): HttpRequest<any> {
     return new HttpRequest('GET', `${importDeviceKeys}/${importId}`);
   }
+
+  uploadCryptoImport(): Observable<CryptoImportCheckResponse> {
+    return this.repository.makeRequest(this.uploadCryptoImportRequest());
+  }
+
+  uploadCryptoImportRequest(): HttpRequest<any> {
+    return new HttpRequest('POST', `${importDeviceKeys}`, null);
+  }
 }
