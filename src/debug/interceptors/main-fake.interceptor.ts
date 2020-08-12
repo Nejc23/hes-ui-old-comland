@@ -23,6 +23,7 @@ import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
 import { AutoTemplatesListInterceptor } from './configuration/auto-templates/auto-templates-list.interceptor';
 import { AutoTemplatesRulesListInterceptor } from './configuration/auto-templates/auto-templates-rules-list.interceptor';
 import { AutoTemplatesRulesInterceptor } from './configuration/auto-templates/auto-templates-rules.interceptor';
+import { MeterUnitsActivateUpgradeInterceptor } from './meter-units/meter-units-activate-upgrade.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -205,6 +206,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsFwUpgradeInterceptor.canInterceptMeterUniFwUpgradePost(request)) {
                 return MeterUnitsFwUpgradeInterceptor.interceptMeterUniFwUpgradePost(request);
+              }
+
+              if (MeterUnitsActivateUpgradeInterceptor.canInterceptActivateDeviceUpgradePost(request)) {
+                return MeterUnitsActivateUpgradeInterceptor.interceptActivateDeviceUpgradePost(request);
               }
 
               // auto-templates
