@@ -752,6 +752,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         response = this.service.postMyGridTOUDevice(paramsConf);
         operationName = this.i18n('Configure TOU');
         selectedText = `${this.i18n('for')} ${selectedText}`;
+        break;
+      case MeterUnitsTypeEnum.activateUpgrade:
+        response = this.service.activateDeviceUpgrade(params);
+        operationName = this.i18n('Activate FW upgrade');
+        selectedText = `${this.i18n('for')} ${selectedText}`;
     }
     component.btnConfirmText = operationName;
     component.modalTitle = this.i18n('Confirm bulk operation');
@@ -792,6 +797,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onBreakerStatus() {
     this.bulkOperation(MeterUnitsTypeEnum.breakerStatus);
+  }
+
+  onActivateUpgrade() {
+    this.bulkOperation(MeterUnitsTypeEnum.activateUpgrade);
   }
 
   onConnect() {
