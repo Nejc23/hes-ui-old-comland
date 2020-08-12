@@ -32,7 +32,7 @@ const appRoutes: Routes = [
       },
       {
         path: 'meterUnits',
-        loadChildren: 'src/app/features/meter-units/modules/meter-units.module#MeterUnitsModule'
+        loadChildren: 'src/app/features/meter-units/common/modules/meter-units.module#MeterUnitsModule'
       },
       {
         path: 'schedulerJobs',

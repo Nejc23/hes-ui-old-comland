@@ -17,6 +17,7 @@ export const fwUploadFile = `/api/file-storage/save-file`;
 export const fwRemoveFile = `fw-remove-file`;
 export const fwUpgrade = `fw-upgrade`;
 export const touConfigImport = `/api/time-of-use/import-time-of-use`;
+export const meterUnitsForJob = `${basePath}/meter-units-for-job`;
 
 export const registers = `${basePath}/registers`;
 export const importDeviceKeys = `${basePath}/crypto/import`;

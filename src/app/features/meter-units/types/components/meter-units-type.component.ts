@@ -27,13 +27,13 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { PlcMeterTouConfigComponent } from '../../components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
-import { PlcMeterFwUpgradeComponent } from '../../components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
+import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
+import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 
 @Component({
   selector: 'app-meter-units-type',

@@ -2,7 +2,7 @@
 <div *ngFor="let item of items">
   <hr class="sidebar-divider" *ngIf="item.isBorder">
   <li class="nav-item" >
-    <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" routerLinkActive="active"
+    <a class="nav-link" href="javascript:void(0);" [routerLink]="item.routeLink" [queryParams]="item.queryParams"  routerLinkActive="active"
       *ngIf="!item.hasChildren && hasAccess(item) && !item.isBorder">
       <i [class]="item.icon"></i>
       <span> {{ item.title }}</span>

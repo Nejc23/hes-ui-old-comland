@@ -1,3 +1,4 @@
+import { RequestRemoveScheduleDevices } from './../../../src/app/core/repository/interfaces/jobs/remove-schedule-devices.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
@@ -25,47 +26,30 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(JobsService);
   });
 
-  describe('Scheduler active jobs list get request', () => {
-    const data: SchedulerJobsList[] = [
-      {
-        id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
-        active: true,
-        type: 'Reading',
-        actionType: 4,
-        description: 'Daily read of 15 min energy (A+)',
-        nextRun: '2020-08-25T15:45:45+00:00',
-        owner: 'Jan Benedičič',
-        deviceCount: 5
-      },
-      {
-        id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
-        active: true,
-        type: 'Discovery',
-        actionType: 1,
-        description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-        nextRun: '2021-07-26T05:45:45+00:00',
-        owner: 'Miha Galičič',
-        deviceCount: 0
-      }
-    ];
+  describe('Remove schedule devices request', () => {
+    const data: RequestRemoveScheduleDevices = {
+      requestId: 'eb86212f-ba3b-49d6-bef5-eaca32b38a81',
+      scheduleId: '82a70604-8fce-4d07-917f-368be21d6b9b',
+      devices: ['b6802f30-0641-4ac8-9508-b0dbaf7acd80', '160c0cd4-908e-4f29-b81b-d98b79907b66']
+    };
 
-    const deviceId = '06130d62-f67c-41a2-98f7-ef521db2cee6';
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_FOR_GET_SCHEDULED_ACTIVE_JOBS_LIST',
-          uponReceiving: 'a request for getting scheduled active jobs list',
+          state: 'A_REQUEST_FOR_REMOVE_SCHEDULE_DEVICES_FROM_JOB',
+          uponReceiving: 'a request for removing schedule devices from job',
           withRequest: {
-            method: service.getSchedulerActiveJobsListRequest(deviceId).method,
-            path: service.getSchedulerActiveJobsListRequest(deviceId).url,
-            headers: defaultRequestHeader
+            method: service.removeScheduleDevicesRequest(data).method,
+            path: service.removeScheduleDevicesRequest(data).url,
+            headers: defaultRequestHeader,
+            body: data
           },
           willRespondWith: {
             status: 200,
             headers: {
               ...defaultResponseHeader
             },
-            body: data
+            body: null
           }
         })
         .then(
@@ -79,8 +63,8 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for fetching scheduled active jobs list', done => {
-      service.getSchedulerActiveJobsList(deviceId).subscribe(res => {
-        expect(res).toEqual(data);
+      service.removeScheduleDevices(data).subscribe(res => {
+        expect(res).toEqual(null);
         done();
       });
     });

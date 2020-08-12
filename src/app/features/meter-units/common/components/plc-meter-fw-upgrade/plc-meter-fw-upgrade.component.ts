@@ -1,3 +1,4 @@
+import { MeterUnitsTypeGridService } from './../../../types/services/meter-units-type-grid.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -10,7 +11,6 @@ import { FileGuid, MeterUnitsFwUpgrade } from 'src/app/core/repository/interface
 import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
 import { fwUploadFile, meterUnits, fwRemoveFile } from 'src/app/core/repository/consts/meter-units.const';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',

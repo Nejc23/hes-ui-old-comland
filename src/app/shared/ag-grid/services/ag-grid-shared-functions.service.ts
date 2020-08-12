@@ -12,6 +12,9 @@ export class AgGridSharedFunctionsService {
     text.innerHTML = this.i18n('Select/deselect all columns');
 
     const panel = document.querySelector('[ref=primaryColsHeaderPanel]');
-    panel.appendChild(text);
+
+    if (panel !== undefined && panel !== null) {
+      panel.appendChild(text);
+    }
   }
 }
