@@ -29,4 +29,5 @@ name="fileTypeRadio" [options]="fileTypeOptions" inline="true" (change)="changeR
           i18n-label></app-file-upload>
   </div>
 </div>
-<div class="form-row" *ngFor="let item of allResultTexts">{{item}}</div>
+<div class="alert alert-danger form-row" role="alert" *ngFor="let item of allErrorTexts">{{item}}</div>
+<div class="alert alert-success form-row" role="alert" *ngFor="let item of allResultTexts">{{item}}</div>

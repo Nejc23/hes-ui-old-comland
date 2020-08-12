@@ -37,6 +37,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   importResult: CryptoImportResponse;
   refreshInterval = gridRefreshInterval;
   allResultTexts = [];
+  allErrorTexts = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -119,7 +120,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
           this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
         }
         if (o.errorMsg) {
-          this.allResultTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
+          this.allErrorTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
           this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
         }
       });
