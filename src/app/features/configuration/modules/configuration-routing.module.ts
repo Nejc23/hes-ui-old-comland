@@ -3,8 +3,8 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { NgModule } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ModalContainerComponent } from 'src/app/shared/modals/components/modal-container.component';
-import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 import { AutoTemplatesComponent } from '../components/auto-templates/auto-templates.component';
+import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 
 const routes: Routes = [
   {
