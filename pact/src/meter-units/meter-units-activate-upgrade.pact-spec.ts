@@ -1,15 +1,15 @@
-import {
-  DcuManagementActivateTriggerDeviceUpgradeRequest,
-  DcuManagementActivateTriggerDeviceUpgradeResponse
-} from './../../../src/app/core/repository/interfaces/dcu-management/dcu-management-trigger-device-upgrade.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { DcuManagementService } from 'src/app/core/repository/services/dcu-management/dcu-management.service';
+import {
+  MeterUnitsActivateUpgradeRequest,
+  MeterUnitsActivateUpgradeResponse
+} from 'src/app/core/repository/interfaces/meter-units/meter-units-acctivate-upgrade.interface';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: DcuManagementService;
+  let service: MyGridLinkService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -25,15 +25,15 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(DcuManagementService);
+    service = getTestBed().get(MyGridLinkService);
   });
 
-  describe('Data concentrator management activate trigger device upgrade request', () => {
-    const requestBody: DcuManagementActivateTriggerDeviceUpgradeRequest = {
+  describe('Data concentrator management activate device upgrade request', () => {
+    const requestBody: MeterUnitsActivateUpgradeRequest = {
       deviceIds: ['2e9a0af2-cc88-43e0-9dfd-4cb1d7457ed6', 'd4c180db-f5f2-4c99-937e-9b92200d5526']
     };
 
-    const responseBody: DcuManagementActivateTriggerDeviceUpgradeResponse = {
+    const responseBody: MeterUnitsActivateUpgradeResponse = {
       requestId: 'ceb64f17-1d49-4532-830f-55c15e1b88ff',
       deviceIds: ['2e9a0af2-cc88-43e0-9dfd-4cb1d7457ed6', 'd4c180db-f5f2-4c99-937e-9b92200d5526']
     };
@@ -41,16 +41,16 @@ describe('Pact consumer test', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_FOR_ACTIVATE_TRIGGER_DEVICE_UPGRADE',
-          uponReceiving: 'a request for activate trigger device uprade',
+          state: 'A_REQUEST_FOR_ACTIVATE_DEVICE_UPGRADE',
+          uponReceiving: 'a request for activate device uprade',
           withRequest: {
-            method: service.activateTriggerDeviceUpgradeRequest(requestBody).method,
-            path: service.activateTriggerDeviceUpgradeRequest(requestBody).url,
+            method: service.activateDeviceUpgradeRequest(requestBody).method,
+            path: service.activateDeviceUpgradeRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
           willRespondWith: {
-            status: 201,
+            status: 200,
             headers: {
               ...defaultResponseHeader
             },
@@ -67,8 +67,8 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for activating trigger device upgrade', done => {
-      service.activateTriggerDeviceUpgrade(requestBody).subscribe(res => {
+    fit('should make request for activating device upgrade', done => {
+      service.activateDeviceUpgrade(requestBody).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });

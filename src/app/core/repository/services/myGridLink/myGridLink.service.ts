@@ -21,9 +21,14 @@ import {
   onDemandDisconnectorState,
   onDemandData,
   importTemplates,
-  triggerDeviceUpgrade
+  triggerDeviceUpgrade,
+  activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
+import {
+  MeterUnitsActivateUpgradeRequest,
+  MeterUnitsActivateUpgradeResponse
+} from '../../interfaces/meter-units/meter-units-acctivate-upgrade.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -110,5 +115,13 @@ export class MyGridLinkService {
 
   createFwUpgradeRequest(payload: MeterUnitsFwUpgrade): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgrade}`, payload);
+  }
+
+  activateDeviceUpgrade(param: MeterUnitsActivateUpgradeRequest): Observable<MeterUnitsActivateUpgradeResponse> {
+    return this.repository.makeRequest(this.activateDeviceUpgradeRequest(param));
+  }
+
+  activateDeviceUpgradeRequest(param: MeterUnitsActivateUpgradeRequest): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgradeActivate}`, param);
   }
 }
