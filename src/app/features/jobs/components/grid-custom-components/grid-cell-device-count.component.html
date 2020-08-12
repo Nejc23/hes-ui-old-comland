@@ -1,6 +1,6 @@
 <div container="body" placement="bottom">
 
-  <a *ngIf="isDeviceCountVisible()" [routerLink]="['/meterUnits/all']" [queryParams]="{scheduleId: params.node.data.id}" target="_blank">
+  <a *ngIf="isDeviceCountVisible()" [routerLink]="['/meterUnits/all']" [queryParams]="{scheduleId: params.node.data.id}">
     <span class="badge badge-secondary">
       {{ params.node.data.deviceCount }}
     </span>

@@ -43,7 +43,6 @@ import { RequestRemoveScheduleDevices } from 'src/app/core/repository/interfaces
 })
 export class AllForJobComponent implements OnInit, OnDestroy {
   meterTypes$: Codelist<number>[] = [];
-  public scheduleId: string;
 
   id = 0;
   private paramsSub: Subscription;
@@ -78,7 +77,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   programmaticallySelectRow = false;
   requestModel: RequestMeterUnitsForJob = {
     requestId: null,
-    scheduleId: this.scheduleId,
+    scheduleId: null,
     startRow: 0,
     endRow: 0,
     sortModel: [],
@@ -95,8 +94,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       firmware: [{ id: 0, value: '' }],
       breakerState: [{ id: 0, value: '' }],
       showChildInfoMBus: false,
-      showDeleted: false,
-      showWithoutTemplate: false
+      showDeleted: true,
+      showWithoutTemplate: true
     }
   };
 
@@ -194,7 +193,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
-      this.scheduleId = params.scheduleId;
+      this.requestModel.scheduleId = params.scheduleId;
     });
 
     // set grid columns
@@ -283,7 +282,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
       this.allForJobGridService.setSessionSettingsPageIndex(0);
       this.allForJobGridService.setSessionSettingsSelectedRows([]);
-      // this.gridApi.onFilterChanged();
+      this.gridApi.onFilterChanged();
     }
   }
 
@@ -430,35 +429,35 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel
         )
       ) {
-        // const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-        // this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-        // this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-        // this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        // if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
-        //   this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
-        //   this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
-        //   this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
-        // } else {
-        //   this.requestModel.filterModel.readStatus = {
-        //     operation: { id: '', value: '' },
-        //     value1: 0,
-        //     value2: 0
-        //   };
-        // }
-        // this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-        // this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
-        // this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-        // this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
-        // this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
-        // this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
+        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+        this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+        this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+        if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
+          this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
+          this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
+          this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
+        } else {
+          this.requestModel.filterModel.readStatus = {
+            operation: { id: '', value: '' },
+            value1: 0,
+            value2: 0
+          };
+        }
+        this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+        this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+        this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
+        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+        this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+        this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
         this.allForJobGridService.setSessionSettingsPageIndex(0);
         this.allForJobGridService.setSessionSettingsSelectedAll(false);
         this.allForJobGridService.setSessionSettingsSelectedRows([]);
         this.eventService.selectDeselectAll(false);
         this.eventService.setIsSelectedAll(false);
-        // this.gridApi.onFilterChanged();
-        // this.setFilterInfo();
+        this.gridApi.onFilterChanged();
+        this.setFilterInfo();
       }
     }
   }
@@ -539,55 +538,55 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     }*/
   }
 
-  // // set filter in request model
-  // setFilter() {
-  //   if (
-  //     !this.allForJobGridService.checkIfFilterModelAndCookieAreSame(
-  //       this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
-  //       this.requestModel.filterModel
-  //     )
-  //   ) {
-  //     this.setFilterInfo();
-  //     const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-  //     this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-  //     this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-  //     this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-  //     this.requestModel.filterModel.readStatus = {
-  //       operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
-  //       value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
-  //       value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
-  //     };
-  //     this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-  //     this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
-  //     this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-  //     this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
-  //     this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
-  //     this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
-  //   } else {
-  //     this.setFilterInfo();
-  //   }
-  //   return this.requestModel.filterModel;
-  // }
+  // set filter in request model
+  setFilter() {
+    if (
+      !this.allForJobGridService.checkIfFilterModelAndCookieAreSame(
+        this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
+        this.requestModel.filterModel
+      )
+    ) {
+      this.setFilterInfo();
+      const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+      this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+      this.requestModel.filterModel.readStatus = {
+        operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
+        value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
+        value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
+      };
+      this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
+      this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+      this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
+      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
+      this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
+      this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
+    } else {
+      this.setFilterInfo();
+    }
+    return this.requestModel.filterModel;
+  }
 
-  // // fill text in header - about selected filters
-  // setFilterInfo() {
-  //   const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-  //   this.filters = this.staticTextService.setfilterHeaderText(
-  //     filterInfo.name,
-  //     filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
-  //     filterInfo.vendorFilter ? true : false,
-  //     filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
-  //     filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
-  //       ? true
-  //       : false,
-  //     filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
-  //     filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
-  //     filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
-  //     filterInfo.showDeletedMeterUnitsFilter,
-  //     filterInfo.showMeterUnitsWithoutTemplateFilter,
-  //     filterInfo.showOnlyImageReadyForActivationFilter
-  //   );
-  // }
+  // fill text in header - about selected filters
+  setFilterInfo() {
+    const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+    this.filters = this.staticTextService.setfilterHeaderText(
+      filterInfo.name,
+      filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
+      filterInfo.vendorFilter ? true : false,
+      filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
+      filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
+        ? true
+        : false,
+      filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
+      filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
+      filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
+      filterInfo.showDeletedMeterUnitsFilter,
+      filterInfo.showMeterUnitsWithoutTemplateFilter,
+      filterInfo.showOnlyImageReadyForActivationFilter
+    );
+  }
 
   setSearch() {
     const search = this.allForJobGridService.getSessionSettingsSearchedText();
@@ -698,7 +697,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     const request: RequestRemoveScheduleDevices = {
       requestId: null,
-      scheduleId: this.scheduleId,
+      scheduleId: this.requestModel.scheduleId,
       devices: deviceIdsParam
     };
 
