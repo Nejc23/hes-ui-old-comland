@@ -1,4 +1,3 @@
 export enum MeterTypeRoute {
-  meterUnits = 'meterUnits',
-  meterUnitsAll = 'meterUnits/all'
+  meterUnits = 'meterUnits'
 }

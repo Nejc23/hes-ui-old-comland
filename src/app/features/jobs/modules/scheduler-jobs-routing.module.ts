@@ -1,3 +1,4 @@
+import { AllForJobComponent } from '../meter-units-for-job/components/meter-units-for-job.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
@@ -18,6 +19,13 @@ const routes: Routes = [
           breadcrumb: null
         },
         component: SchedulerJobsListComponent
+      },
+      {
+        path: ':scheduleId',
+        data: {
+          breadcrumb: 'Meter Units'
+        },
+        component: AllForJobComponent
       }
     ]
   }

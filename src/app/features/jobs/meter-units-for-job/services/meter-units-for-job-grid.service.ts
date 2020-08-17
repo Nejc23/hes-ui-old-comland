@@ -487,17 +487,17 @@ export class AllForJobGridService {
     );
   }
 
-  saveMyGridLinkRequestId(requestId: string) {
-    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
-  }
+  // saveMyGridLinkRequestId(requestId: string) {
+  //   this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
+  // }
 
-  removeMyGridLinkRequestId(requestId: string) {
-    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridName, requestId);
-  }
+  // removeMyGridLinkRequestId(requestId: string) {
+  //   this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridName, requestId);
+  // }
 
-  getAllMyGridLinkRequestIds(): string[] {
-    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
-  }
+  // getAllMyGridLinkRequestIds(): string[] {
+  //   return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
+  // }
 
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);

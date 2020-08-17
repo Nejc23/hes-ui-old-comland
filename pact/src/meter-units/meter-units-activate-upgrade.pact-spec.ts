@@ -67,7 +67,7 @@ describe('Pact consumer test', () => {
         );
     });
 
-    fit('should make request for activating device upgrade', done => {
+    it('should make request for activating device upgrade', done => {
       service.activateDeviceUpgrade(requestBody).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();

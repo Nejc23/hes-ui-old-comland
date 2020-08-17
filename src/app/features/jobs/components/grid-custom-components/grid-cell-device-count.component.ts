@@ -43,6 +43,6 @@ export class GridCellDeviceCountComponent {
 
   public showAllDevices(): void {
     console.log('params: ', this.params);
-    window.open(`${window.location.origin}/${MeterTypeRoute.meterUnitsAll}?scheduleId=${this.params.node.data.id}`);
+    window.open(`${window.location.origin}/schedulerJobs/${this.params.node.data.id}`);
   }
 }
