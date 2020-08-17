@@ -124,6 +124,10 @@
       &.active {
         >.nav-link {
           color: $navbar-light-active-color;
+
+          &:hover {
+            color: $link-hover-color;
+          }
         }
       }
     }

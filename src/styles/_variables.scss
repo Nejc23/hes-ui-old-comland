@@ -34,10 +34,10 @@ $blue: #007bff !default;
 $indigo: #6610f2 !default;
 $purple: #6f42c1 !default;
 $pink: #e83e8c !default;
-$red: #dc3545 !default;
+$red: #D62745 !default;
 $orange: #fd7e14 !default;
 $yellow: #ffc107 !default;
-$green: #28a745 !default;
+$green: #7FAB3C !default;
 $teal: #20c997 !default;
 $cyan: #17a2b8 !default;
 
@@ -59,12 +59,12 @@ $colors: map-merge(("blue": $blue,
   $colors);
 
 $primary: #981D78 !default;
-$secondary: $gray-400 !default;
-$success: #7DBD46 !default;
-$info: #05C1A4 !default;
-$warning: #F29A2E !default;
-$danger: #D62767 !default;
-$light: $gray-100 !default;
+$secondary:  #053876!default;
+$success: #37A350 !default;
+$info: #47A8BD !default;
+$warning: #E9BD4A !default;
+$danger: #E43458 !default;
+$light: $gray-300 !default;
 $dark: $gray-800 !default;
 
 $theme-colors: () !default;
@@ -155,7 +155,7 @@ $body-color: $gray-900 !default;
 //
 // Style anchor elements.
 
-$link-color: theme-color("primary") !default;
+$link-color: theme-color("secondary") !default;
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: none !default;
@@ -733,7 +733,7 @@ $navbar-dark-toggler-border-color: rgba($white, .1) !default;
 
 $navbar-light-color: rgba($black, .5) !default;
 $navbar-light-hover-color: rgba($black, .75) !default;
-$navbar-light-active-color: $primary !default;
+$navbar-light-active-color: $link-color !default;
 $navbar-light-disabled-color: rgba($black, .3) !default;
 $navbar-light-toggler-icon-bg: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'><path stroke='#{$navbar-light-color}' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg>") !default;
 $navbar-light-toggler-border-color: rgba($black, .1) !default;
@@ -1161,9 +1161,4 @@ $icon-size: 15px;
 $icon-size-lg: 18px;
 $icon-size-xl: 28px;
 
-$navbar-fixed-background-light: #b52d72 !default;
-$navbar-fixed-background-dark: #49348a !default;
-
-//$navbar-fixed-background-light: #e02068 !default;
-//$navbar-fixed-background-dark: #412e80 !default;
-
+$navbar-dark-bg: linear-gradient(132deg, #AE4993 0%, #981D78 26%, #053876 100%) !default;

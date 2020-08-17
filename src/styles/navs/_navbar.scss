@@ -38,7 +38,7 @@
 }
 
 .navbar.navbar-dark {
-  background: linear-gradient(90deg, $navbar-fixed-background-light 0%, $navbar-fixed-background-dark 100%);
+  background: $navbar-dark-bg;
 
   .page-name {
     color: $navbar-dark-brand-color;

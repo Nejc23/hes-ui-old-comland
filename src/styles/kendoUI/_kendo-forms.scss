@@ -14,6 +14,7 @@ input[type=search]:hover+.far.fa-search {
 .k-combobox {
   .k-select {
     background: none;
+    color: $body-color;
 
     &:hover {
       background: none;
@@ -29,7 +30,7 @@ input[type=search]:hover+.far.fa-search {
 .k-multiselect-wrap {
   .k-button {
     background-image: none;
-    background-color: $gray-100;
+    background-color: $gray-200;
   }
 }
 
@@ -38,6 +39,20 @@ input[type=search]:hover+.far.fa-search {
 }
 
 .k-switch {
-  width: 6em;
   font-size: 7px !important;
+  width: 2.75rem !important;
+
+  .k-switch-container {
+    width: 2.75rem !important;
+  }
+
+  &.k-switch-on .k-switch-handle {
+    left: calc(100% - 2em);
+  }
+
+  &.k-switch-off .k-switch-container {
+    background-color: $gray-300;
+  }
 }
+
+

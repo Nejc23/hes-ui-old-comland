@@ -10,16 +10,17 @@
 
 <!-- row total items, selected filter name -->
 <div *ngIf="!noData">
-  <div class="d-flex align-items-center p-2 grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid" style="background-color: #F8F8FA;">
-    <small class="text-secondary">
+  <div class="d-flex align-items-center p-2 grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid">
+    <!--<small class="text-secondary">
       {{totalCount}} <span i18n>items</span> &middot; {{filters}}
       <a class="ml-3" *ngIf="isFilterSet()" href="javascript:void(0);" (click)="clearFilter()"><span i18n>Clear all</span></a>
-    </small>
+    </small>-->
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()" *ngIf="!noData">
+      <i class="far fa-plus"></i> <span i18n>Add</span>
+    </button>
     <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end">
     </app-action-form>
-    <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary btn-sm" (click)="addDcu()" *ngIf="!noData">
-      <i class="far fa-plus"></i>
-    </button>
+
   </div>
 
   <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">

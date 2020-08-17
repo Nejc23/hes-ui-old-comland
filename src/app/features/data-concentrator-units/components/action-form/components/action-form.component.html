@@ -2,13 +2,13 @@
   <app-input-searcher class="mr-2" [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
     <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
-    <button type="button" class="btn btn-link" (click)="openSaveLayoutModal($event)"
+    <button type="button" class="btn btn-light" (click)="openSaveLayoutModal($event)"
     [ngbTooltip]="tipContentFilter"><i class="far fa-bookmark"></i></button>
     </div>
-  <button type="button" class="btn btn-link" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
+  <button type="button" class="btn btn-light" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="far fa-redo"></i></button>
       <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
-  <button type="button" class="btn btn-link" [ngbTooltip]="tipContentExport"><i class="far fa-file-excel"></i></button>
+  <button type="button" class="btn btn-light" [ngbTooltip]="tipContentExport"><i class="far fa-file-excel"></i></button>
       </div>
 </div>
 <ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
