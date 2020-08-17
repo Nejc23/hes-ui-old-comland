@@ -69,15 +69,12 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
-    const currentDateWithZeroMinutes = new Date();
-    currentDateWithZeroMinutes.setMinutes(0);
-
     return this.formBuilder.group({
       [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '1', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
       [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : null],
-      [this.timeForHoursProperty]: [formData ? moment(formData.dateTime).toDate() : currentDateWithZeroMinutes],
+      [this.timeForHoursProperty]: [formData ? moment(formData.dateTime).toDate() : null],
       [this.weekDaysProperty]: [formData && formData.weekDays ? formData.weekDays : []],
       [this.monthDaysProperty]: [formData && formData.monthDays ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
