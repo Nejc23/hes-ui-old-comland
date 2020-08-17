@@ -1,5 +1,4 @@
-import { RequestRemoveScheduleDevices } from './../../interfaces/jobs/remove-schedule-devices.interface';
-import { addNewScheduleDevice, removeScheduleDevices } from './../../consts/jobs.const';
+import { addNewScheduleDevice } from './../../consts/jobs.const';
 import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -138,14 +137,5 @@ export class JobsService {
 
   addNewScheduleDeviceRequest(payload: ScheduleDevice): HttpRequest<ScheduleDevice> {
     return new HttpRequest('POST', addNewScheduleDevice, payload as any);
-  }
-
-  removeScheduleDevices(payload: RequestRemoveScheduleDevices): Observable<any> {
-    payload.requestId = payload.requestId === null ? uuidv4() : payload.requestId;
-    return this.repository.makeRequest(this.removeScheduleDevicesRequest(payload));
-  }
-
-  removeScheduleDevicesRequest(payload: RequestRemoveScheduleDevices): HttpRequest<any> {
-    return new HttpRequest('POST', removeScheduleDevices, payload as any);
   }
 }

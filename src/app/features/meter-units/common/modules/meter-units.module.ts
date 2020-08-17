@@ -1,5 +1,3 @@
-import { AllForJobGridCustomFilterComponent } from './../../all-for-job/components/grid-custom-components/grid-custom-filter.component';
-import { AllForJobGridSelectionHeaderComponent } from './../../all-for-job/components/grid-custom-components/grid-selection-header.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
@@ -25,17 +23,13 @@ import { GridCellBreakerStateComponent } from '../../types/components/grid-custo
 import { GridCellInfoOfChildComponent } from '../../types/components/grid-custom-components/grid-cell-info-of-child.component';
 import { GridCellIconComponent } from '../../types/components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../../types/components/grid-custom-components/grid-cell-job-status.component';
-import { AllForJobComponent } from '../../all-for-job/components/all-for-job.component';
-import { AllForJobGridCellNameComponent } from '../../all-for-job/components/grid-custom-components/grid-cell-name.component';
-import { AllForJobGridCellVendorComponent } from '../../all-for-job/components/grid-custom-components/grid-cell-vendor.component';
-import { AllForJobGridCellIdNumberComponent } from '../../all-for-job/components/grid-custom-components/grid-cell-id-number.component';
 
 @NgModule({
   entryComponents: [],
   declarations: [
     MeterUnitsOverviewComponent,
     MeterUnitsTypeComponent,
-    AllForJobComponent,
+    // AllForJobComponent,
     ActionFormComponent,
     GridSelectionHeaderComponent,
     GridCellStatusComponent,
@@ -53,12 +47,7 @@ import { AllForJobGridCellIdNumberComponent } from '../../all-for-job/components
     GridCellBreakerStateComponent,
     GridCellInfoOfChildComponent,
     GridCellIconComponent,
-    GridCellJobStatusComponent,
-    AllForJobGridSelectionHeaderComponent,
-    AllForJobGridCellNameComponent,
-    AllForJobGridCellVendorComponent,
-    AllForJobGridCellIdNumberComponent,
-    AllForJobGridCustomFilterComponent
+    GridCellJobStatusComponent
   ],
   imports: [
     SharedModule,
@@ -81,12 +70,7 @@ import { AllForJobGridCellIdNumberComponent } from '../../all-for-job/components
       GridCellBreakerStateComponent,
       GridCellInfoOfChildComponent,
       GridCellIconComponent,
-      GridCellJobStatusComponent,
-      AllForJobGridSelectionHeaderComponent,
-      AllForJobGridCellNameComponent,
-      AllForJobGridCellVendorComponent,
-      AllForJobGridCellIdNumberComponent,
-      AllForJobGridCustomFilterComponent
+      GridCellJobStatusComponent
     ])
   ]
 })

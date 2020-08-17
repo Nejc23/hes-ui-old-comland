@@ -2,49 +2,38 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
-import * as moment from 'moment';
 import { Subscription, Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { filter } from 'rxjs/operators';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
-import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
-import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
-import { AllForJobGridService } from '../services/all-for-job-grid.service';
-import { AllForJobStaticTextService } from '../services/all-for-job-static-text.service';
-import { AllForJobGridEventEmitterService } from '../services/all-for-job-grid-event-emitter.service';
+import { AllForJobStaticTextService } from '../services/meter-units-for-job-static-text.service';
+import { AllForJobGridEventEmitterService } from '../services/meter-units-for-job-grid-event-emitter.service';
 import { RequestMeterUnitsForJob } from 'src/app/core/repository/interfaces/meter-units/meter-units-for-job.interface';
-import { RequestRemoveScheduleDevices } from 'src/app/core/repository/interfaces/jobs/remove-schedule-devices.interface';
+import { AllForJobGridService } from '../services/meter-units-for-job-grid.service';
 
 @Component({
   // selector: 'app-meter-units-all-for-job',
-  templateUrl: './all-for-job.component.html'
+  templateUrl: './meter-units-for-job.component.html'
 })
 export class AllForJobComponent implements OnInit, OnDestroy {
   meterTypes$: Codelist<number>[] = [];
 
-  id = 0;
+  scheduleId = '';
   private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
   headerTitle = '';
@@ -83,16 +72,12 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     sortModel: [],
     searchModel: [],
     filterModel: {
-      statuses: [{ id: 0, value: '' }],
-      tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' },
-      readStatus: {
-        operation: { id: '', value: '' },
-        value1: 0,
-        value2: null
-      },
-      firmware: [{ id: 0, value: '' }],
-      breakerState: [{ id: 0, value: '' }],
+      statuses: null,
+      tags: null,
+      firmware: null,
+      vendor: null,
+      readStatus: null,
+      breakerState: null,
       showChildInfoMBus: false,
       showDeleted: true,
       showWithoutTemplate: true
@@ -105,7 +90,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  messageActionInProgress = this.i18n(`Action in progress!`);
+  // messageActionInProgress = this.i18n(`Action in progress!`);
   messageServerError = this.i18n(`Server error!`);
   messageDataRefreshed = this.i18n(`Data refreshed!`);
   messageActionFailed = this.i18n(`Action failed!`);
@@ -114,8 +99,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private allForJobGridService: AllForJobGridService,
     private sidebarService: SidebarService,
-    private i18n: I18n,
     private staticTextService: AllForJobStaticTextService,
+    private i18n: I18n,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private service: MyGridLinkService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
@@ -128,7 +113,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private jobsService: JobsService
   ) {
     this.paramsSub = route.params.subscribe(params => {
-      this.id = params.id;
+      this.scheduleId = params.scheduleId;
       allForJobGridService.meterUnitsAllId = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
@@ -218,7 +203,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       loadingOoo: this.i18n('loading...')
     };
 
-    this.deleteAllRequests();
+    // this.deleteAllRequests();
   }
 
   ngOnDestroy() {
@@ -231,13 +216,13 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     }
   }
 
-  deleteAllRequests() {
-    const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
-    if (requestIds && requestIds.length > 0) {
-      console.log(`deleteing requests `, requestIds);
-      requestIds.map(requestId => this.allForJobGridService.removeMyGridLinkRequestId(requestId));
-    }
-  }
+  // deleteAllRequests() {
+  //   const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
+  //   if (requestIds && requestIds.length > 0) {
+  //     console.log(`deleteing requests `, requestIds);
+  //     requestIds.map(requestId => this.allForJobGridService.removeMyGridLinkRequestId(requestId));
+  //   }
+  // }
 
   isFilterSet(): boolean {
     const filterInfo: MeterUnitsLayout = this.gridFilterSessionStoreService.getGridLayout(
@@ -270,7 +255,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   // ag-grid
   // button click refresh grid
   refreshGrid() {
-    this.gridApi.purgeServerSideCache([]);
+    if (this.gridApi) {
+      this.gridApi.purgeServerSideCache([]);
+    }
   }
 
   // ag-grid
@@ -349,11 +336,11 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.typeId = that.id; // type of meter units
+        that.requestModel.scheduleId = that.scheduleId; // type of meter units
         that.requestModel.startRow = that.allForJobGridService.getCurrentRowIndex().startRow;
         that.requestModel.endRow = that.allForJobGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
-        console.log(`requestModel = `, that.requestModel);
+        // console.log(`requestModel = `, that.requestModel);
         // that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         if (that.authService.isRefreshNeeded2()) {
@@ -389,7 +376,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
               }
             });
         } else {
-          console.log(`requestModel = `, this.requestModel);
+          console.log(`requestModel = `, that.requestModel);
           that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
             that.gridApi.hideOverlay();
             that.totalCount = 0;
@@ -489,43 +476,46 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   refresh() {
     // if (this.authService.isTokenAvailable()) {
-    const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
-    // console.log(`refresh `, requestIds);
-    if (requestIds && requestIds.length > 0) {
-      requestIds.map(requestId =>
-        this.service.getMyGridLastStatus(requestId).subscribe(results => {
-          const okRequest = _.find(results, x => x.status === this.taskStatusOK && x.isFinished);
-          if (okRequest !== undefined) {
-            const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
-            if (badRequest === undefined) {
-              // no devices with unsuccessful status, we can delete requestId from session
-              this.allForJobGridService.removeMyGridLinkRequestId(requestId);
-              const breakerStateRequests = this.allForJobGridService.getAllMyGridLink_BreakerState_RequestIds();
-              const isBreakerState = _.find(breakerStateRequests, x => x === requestId);
-              // 3th step for breaker state
-              if (isBreakerState) {
-                this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
-                  // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
-                  if (resultsBreakerState) {
-                    this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
-                  }
-                  this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
-                });
-              }
-              this.toast.successToast(this.messageDataRefreshed);
-            }
-          } else {
-            const badRequest = _.find(results, x => x.status !== this.taskStatusOK && x.isFinished);
-            if (badRequest !== undefined) {
-              this.toast.errorToast(this.messageActionFailed);
-              this.allForJobGridService.removeMyGridLinkRequestId(requestId);
-              this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
-            }
-          }
-        })
-      );
-      this.refreshGrid();
-    }
+    // const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
+    // // console.log(`refresh `, requestIds);
+    // if (requestIds && requestIds.length > 0) {
+    //   requestIds.map(requestId =>
+    //     this.service.getMyGridLastStatus(requestId).subscribe(results => {
+    //       const okRequest = _.find(results, x => x.status === this.taskStatusOK && x.isFinished);
+    //       if (okRequest !== undefined) {
+    //         const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
+    //         if (badRequest === undefined) {
+    //           // no devices with unsuccessful status, we can delete requestId from session
+    //           this.allForJobGridService.removeMyGridLinkRequestId(requestId);
+    //           const breakerStateRequests = this.allForJobGridService.getAllMyGridLink_BreakerState_RequestIds();
+    //           const isBreakerState = _.find(breakerStateRequests, x => x === requestId);
+    //           // 3th step for breaker state
+    //           if (isBreakerState) {
+    //             this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
+    //               // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
+    //               if (resultsBreakerState) {
+    //                 this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
+    //               }
+    //               this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
+    //             });
+    //           }
+    //           this.toast.successToast(this.messageDataRefreshed);
+    //         }
+    //       } else {
+    //         const badRequest = _.find(results, x => x.status !== this.taskStatusOK && x.isFinished);
+    //         if (badRequest !== undefined) {
+    //           this.toast.errorToast(this.messageActionFailed);
+    //           this.allForJobGridService.removeMyGridLinkRequestId(requestId);
+    //           this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
+    //         }
+    //       }
+    //     })
+    //   );
+
+    this.refreshGrid();
+    this.deselectAll();
+
+    // }
     /* } else {
       this.service.getMyGridIdentityToken().subscribe(
         value => {
@@ -680,11 +670,13 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
 
+    console.log('selectedRows', selectedRows);
+
     let selectedDeviceCount = this.totalCount;
 
     const selectedAll = this.allForJobGridService.getSessionSettingsSelectedAll();
     if (!selectedAll && selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.id));
+      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
       console.log(`RemoveScheduleDevicesFromJob deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
       selectedDeviceCount = deviceIdsParam.length;
     }
@@ -695,26 +687,32 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     component.btnConfirmText = this.i18n('Confirm');
     let response: Observable<any> = new Observable();
 
-    const request: RequestRemoveScheduleDevices = {
+    const request: RequestMeterUnitsForJob = {
       requestId: null,
       scheduleId: this.requestModel.scheduleId,
-      devices: deviceIdsParam
+      startRow: 0,
+      endRow: 0,
+      sortModel: [],
+      searchModel: this.requestModel.searchModel,
+      filterModel: this.requestModel.filterModel,
+      deviceIds: deviceIdsParam
     };
 
-    response = this.jobsService.removeScheduleDevices(request);
+    console.log('removeMeterUnits.request', request);
+    response = this.meterUnitsTypeService.removeMeterUnitsFromJob(request);
 
     component.btnConfirmText = this.i18n('Remove');
     component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`Remove ${selectedText} schedule device(s) from job?`);
+    component.modalBody = this.i18n(`Remove ${selectedText} Meter Unit(s) from Job?`);
 
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
+        // this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
           value => {
-            this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.errorToast(this.i18n('Devices removed from job successfully.'));
+            // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
+            this.toast.successToast(this.i18n('Selected Meter Units removed successfully.'));
             this.refresh();
           },
           e => {

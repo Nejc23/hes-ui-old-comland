@@ -4,7 +4,7 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { MeterUnitsOverviewComponent } from '../../overview/components/meter-units-overview.component';
 import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
-import { AllForJobComponent } from '../../all-for-job/components/all-for-job.component';
+// import { AllForJobComponent } from '../../all-for-job/components/all-for-job.component';
 
 const routes: Routes = [
   {
@@ -26,21 +26,6 @@ const routes: Routes = [
               breadcrumb: null
             },
             component: MeterUnitsOverviewComponent
-          }
-        ]
-      },
-      {
-        path: 'all',
-        data: {
-          breadcrumb: null
-        },
-        children: [
-          {
-            path: '',
-            data: {
-              breadcrumb: null
-            },
-            component: AllForJobComponent
           }
         ]
       },

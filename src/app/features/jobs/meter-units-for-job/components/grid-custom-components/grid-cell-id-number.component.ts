@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { AllForJobStaticTextService } from '../../services/all-for-job-static-text.service';
+import { AllForJobStaticTextService } from '../../services/meter-units-for-job-static-text.service';
 
 @Component({
-  // selector: 'app-grid-cell-vendor',
-  templateUrl: './grid-cell-vendor.component.html'
+  // selector: 'app-meter-units-grid-cell-id-number',
+  templateUrl: './grid-cell-id-number.component.html'
 })
-export class AllForJobGridCellVendorComponent implements ICellRendererAngularComp {
+export class AllForJobGridCellIdNumberComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 

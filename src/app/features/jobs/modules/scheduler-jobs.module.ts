@@ -1,3 +1,4 @@
+import { AllForJobComponent } from '../meter-units-for-job/components/meter-units-for-job.component';
 import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -10,6 +11,11 @@ import { ActionFormComponent } from '../components/action-form/components/action
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
 import { GridCellDeleteComponent } from '../components/grid-custom-components/grid-cell-delete-btn.component';
 import { GridCellEditComponent } from '../components/grid-custom-components/grid-cell-edit-btn.component';
+import { AllForJobGridCellNameComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-name.component';
+import { AllForJobGridCellIdNumberComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-id-number.component';
+import { AllForJobGridCellVendorComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-vendor.component';
+import { AllForJobGridCustomFilterComponent } from '../meter-units-for-job/components/grid-custom-components/grid-custom-filter.component';
+import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/components/grid-custom-components/grid-selection-header.component';
 
 @NgModule({
   entryComponents: [],
@@ -20,7 +26,13 @@ import { GridCellEditComponent } from '../components/grid-custom-components/grid
     GridCellDeleteComponent,
     GridCellEditComponent,
     GridCellDeviceCountComponent,
-    ActionFormComponent
+    ActionFormComponent,
+    AllForJobGridCellNameComponent,
+    AllForJobGridCellVendorComponent,
+    AllForJobGridCellIdNumberComponent,
+    AllForJobGridCustomFilterComponent,
+    AllForJobComponent,
+    AllForJobGridSelectionHeaderComponent
   ],
   imports: [
     SharedModule,
@@ -31,7 +43,12 @@ import { GridCellEditComponent } from '../components/grid-custom-components/grid
       GridCellNextRunComponent,
       GridCellDeleteComponent,
       GridCellEditComponent,
-      GridCellDeviceCountComponent
+      GridCellDeviceCountComponent,
+      AllForJobGridSelectionHeaderComponent,
+      AllForJobGridCellNameComponent,
+      AllForJobGridCellVendorComponent,
+      AllForJobGridCellIdNumberComponent,
+      AllForJobGridCustomFilterComponent
     ])
   ],
   exports: []

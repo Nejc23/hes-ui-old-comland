@@ -13,6 +13,7 @@ export interface GridRequestParams {
   pivotMode?: boolean;
   groupKeys?: any[];
   typeId?: number;
+  deviceIds?: string[];
 }
 
 export interface GridFilterParams {

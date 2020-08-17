@@ -85,11 +85,11 @@ export class BaseTemplateComponent implements OnInit {
         } else {
           this.submenu = 0;
         }
-        if (currentUrl.includes('/meterUnits/all')) {
-          acitavedRouter.queryParams.subscribe(qParams => {
-            this.fillMeterUnits(qParams.scheduleId);
-          });
-        }
+        // if (currentUrl.includes('/schedulerJobs/allForJob')) {
+        //   acitavedRouter.queryParams.subscribe(qParams => {
+        //     this.fillMeterUnits(qParams.scheduleId);
+        //   });
+        // }
       }
     });
   }
@@ -123,7 +123,7 @@ export class BaseTemplateComponent implements OnInit {
     this.fillConfiguration();
   }
 
-  fillMeterUnits(scheduleId: string = null) {
+  fillMeterUnits() {
     const sidebarItems = this.sidebarService.getSidebarMeterUnitsItems();
     this.codeList.meterUnitTypeCodelist().subscribe(list => {
       if (list && list.length > 0) {
@@ -136,18 +136,6 @@ export class BaseTemplateComponent implements OnInit {
           };
           sidebarItems.push(newElement);
         });
-
-        // add All to the menu
-        if (scheduleId !== null && scheduleId) {
-          const allElement = {
-            title: this.i18n('Meter units for job'),
-            routeLink: `/${MeterTypeRoute.meterUnitsAll}`,
-            queryParams: { scheduleId },
-            hasChildren: false,
-            children: []
-          };
-          sidebarItems.push(allElement);
-        }
 
         this.sidebarMeterUnitsItems = sidebarItems;
       }
