@@ -16,6 +16,7 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import * as moment from 'moment';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 
 @Component({
   selector: 'app-add-dcu-form',
@@ -29,6 +30,8 @@ export class AddDcuFormComponent implements OnInit {
   dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
   discoveryJobs: Codelist<string>[];
+
+  public credentialsVisible = false;
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -54,6 +57,8 @@ export class AddDcuFormComponent implements OnInit {
       },
       () => {} // error
     );
+
+    this.setCredentialsControls(this.credentialsVisible);
   }
 
   createForm(): FormGroup {
@@ -63,11 +68,14 @@ export class AddDcuFormComponent implements OnInit {
         [this.idNumberProperty]: ['', Validators.required],
         [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
         [this.typeProperty]: [null, Validators.required],
+        [this.userNameProperty]: [null, Validators.required],
+        [this.passwordProperty]: [null],
+        [this.confirmPasswordProperty]: [null],
         [this.vendorProperty]: [null, Validators.required],
         [this.discoveryJobProperty]: [null],
         [this.tagsProperty]: [null]
       },
-      { updateOn: 'blur' }
+      { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
     );
   }
 
@@ -81,6 +89,11 @@ export class AddDcuFormComponent implements OnInit {
       type: this.form.get(this.typeProperty).value,
       vendor: this.form.get(this.vendorProperty).value
     };
+
+    if (this.credentialsVisible) {
+      formData.userName = this.form.get(this.userNameProperty).value;
+      formData.password = this.form.get(this.passwordProperty).value;
+    }
 
     const selectedDiscoveryJob = this.form.get(this.discoveryJobProperty).value as Codelist<string>;
     if (selectedDiscoveryJob) {
@@ -189,6 +202,18 @@ export class AddDcuFormComponent implements OnInit {
     return nameOf<DcuForm>(o => o.ip);
   }
 
+  get userNameProperty() {
+    return nameOf<DcuForm>(o => o.userName);
+  }
+
+  get passwordProperty() {
+    return nameOf<DcuForm>(o => o.password);
+  }
+
+  get confirmPasswordProperty() {
+    return nameOf<DcuForm>(o => o.confirmPassword);
+  }
+
   get typeProperty() {
     return nameOf<DcuForm>(o => o.type);
   }
@@ -205,7 +230,46 @@ export class AddDcuFormComponent implements OnInit {
     return nameOf<DcuForm>(o => o.tags);
   }
 
+  // public credentialsVisible(refControl): boolean
+  // {
+  //   console.log('refControl', refControl);
+
+  //   const typeValue = this.form.get(this.typeProperty).value;
+  //   let ctrVisible = false;
+
+  //   console.log('credentialsVisible, typeValue=', typeValue);
+
+  //   if (typeValue !== null && typeValue.id !== undefined)
+  //   {
+  //     ctrVisible = typeValue.id === 2;
+  //   }
+
+  //   console.log('credentialsVisible=', ctrVisible);
+  //   return ctrVisible;
+  // }
+
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  public onTypeChanged(value) {
+    if (value !== null && value.id) {
+      this.credentialsVisible = value.id === 2;
+    }
+
+    this.setCredentialsControls(this.credentialsVisible);
+  }
+
+  setCredentialsControls(credentialsVisible: boolean) {
+    // Disable fields just for form validation. Disabled fields are also not validated in custom matchPasswordsValidator.
+    if (credentialsVisible) {
+      this.form.get(this.userNameProperty).enable();
+      this.form.get(this.passwordProperty).enable();
+      this.form.get(this.confirmPasswordProperty).enable();
+    } else {
+      this.form.get(this.userNameProperty).disable();
+      this.form.get(this.passwordProperty).disable();
+      this.form.get(this.confirmPasswordProperty).disable();
+    }
   }
 }

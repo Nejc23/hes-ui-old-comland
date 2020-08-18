@@ -75,7 +75,9 @@ export class DataConcentratorUnitsService {
       concentratorIp: payload.ip,
       type: payload.type ? payload.type.id : -1,
       vendor: payload.vendor ? payload.vendor.id : -1,
-      name: payload.name
+      name: payload.name,
+      userName: payload.userName,
+      password: payload.password
     };
 
     console.log('dcuRequest: ', dcuRequest);
