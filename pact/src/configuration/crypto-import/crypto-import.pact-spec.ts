@@ -1,13 +1,12 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { CryptoImportResponse } from 'src/app/core/repository/interfaces/meter-units/crypto-import-response.interface';
+import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
+import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: MeterUnitsService;
+  let service: CryptoLiteService;
 
   beforeAll(done => {
     provider = setupPactProvider(done);
@@ -23,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().get(CryptoLiteService);
   });
 
   const responseBody: CryptoImportResponse = {
