@@ -26,8 +26,6 @@ export class AddDcuFormComponent implements OnInit {
   form: FormGroup;
 
   dcuTypes$: Observable<Codelist<number>[]>;
-  dcuTypes: Codelist<number>[];
-
   dcuVendors$: Observable<Codelist<number>[]>;
   dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
@@ -59,11 +57,6 @@ export class AddDcuFormComponent implements OnInit {
       },
       () => {} // error
     );
-
-    this.dcuTypes$.subscribe(res => {
-      this.dcuTypes = res;
-      this.dcuTypes.push({ id: 2, value: 'AC750' });
-    });
 
     this.setCredentialsControls(this.credentialsVisible);
   }
