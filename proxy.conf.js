@@ -31,7 +31,14 @@ const PROXY_CONFIG = [
     ],
     target: "http://localhost:5009",
     secure: false
-  }
+  },
+  {
+    context: [
+      "/api/crypto",
+    ],
+    target: "http://localhost:5014",
+    secure: false
+  },
 ]
 
 module.exports = PROXY_CONFIG;

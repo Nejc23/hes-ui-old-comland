@@ -5,17 +5,16 @@ import { ImportDeviceKeysStaticTextService } from '../../services/import-device-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { importDeviceKeys } from 'src/app/core/repository/consts/meter-units.const';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
-import { create } from 'lodash';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
-import { CryptoImportResponse } from 'src/app/core/repository/interfaces/meter-units/crypto-import-response.interface';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { gridRefreshInterval } from 'src/environments/config';
 import { MeterUnitsTypeGridService } from 'src/app/features/meter-units/types/services/meter-units-type-grid.service';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/meter-units/crypto-import-check-response.interface';
+import { importDeviceKeys } from 'src/app/core/repository/consts/crypto-lite.const';
+import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
+import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-check-response.interface';
+import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -48,7 +47,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private meterUnitsService: MeterUnitsService
+    private cryptoLiteService: CryptoLiteService
   ) {
     this.allowedExtExplainText = this.i18n('can only upload one file.');
     this.form = this.createForm();
@@ -111,7 +110,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     console.log(`checkImportResults, ids = `, ids);
     const results: CryptoImportCheckResponse[] = [];
     ids.forEach(x => {
-      this.meterUnitsService.checkCryptoImport(x).subscribe(o => {
+      this.cryptoLiteService.checkCryptoImport(x).subscribe(o => {
         results.push(o);
         if (o.status === 'SUCCESS') {
           this.allResultTexts.push(

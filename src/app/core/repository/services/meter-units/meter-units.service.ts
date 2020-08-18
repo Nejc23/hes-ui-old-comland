@@ -12,7 +12,6 @@ import {
   meterUnitsLayout,
   meterUnitsBreakerState,
   touConfigImport,
-  importDeviceKeys,
   meterUnitsForJob,
   removeMeterUnitsFromJob
 } from '../../consts/meter-units.const';
@@ -20,7 +19,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import * as _ from 'lodash';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
-import { CryptoImportCheckResponse } from '../../interfaces/meter-units/crypto-import-check-response.interface';
 import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
 
 @Injectable({
@@ -84,22 +82,6 @@ export class MeterUnitsService {
 
   importConfigTouRequest(payload: MeterUnitsTouConfigImport): HttpRequest<any> {
     return new HttpRequest('POST', `${touConfigImport}`, payload);
-  }
-
-  checkCryptoImport(importId: string): Observable<CryptoImportCheckResponse> {
-    return this.repository.makeRequest(this.checkCryptoImportRequest(importId));
-  }
-
-  checkCryptoImportRequest(importId: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${importDeviceKeys}/${importId}`);
-  }
-
-  uploadCryptoImport(): Observable<CryptoImportCheckResponse> {
-    return this.repository.makeRequest(this.uploadCryptoImportRequest());
-  }
-
-  uploadCryptoImportRequest(): HttpRequest<any> {
-    return new HttpRequest('POST', `${importDeviceKeys}`, null);
   }
 
   getGridMeterUnitsForJob(param: RequestMeterUnitsForJob): Observable<ResponseMeterUnitsForJob> {
