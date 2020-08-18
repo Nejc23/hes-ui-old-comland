@@ -4,4 +4,6 @@ export interface DcuRequest {
   type: number;
   vendor: number;
   name: string;
+  userName?: string;
+  password?: string;
 }

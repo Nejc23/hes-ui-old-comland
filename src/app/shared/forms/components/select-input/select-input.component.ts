@@ -18,6 +18,8 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() disabled = false;
   @Input() clearButton = true;
 
+  @Output() selectedValueChanged: EventEmitter<any> = new EventEmitter<any>();
+
   active = new Subject<void>();
 
   selection: Codelist<number | string> = { id: null, value: 'Select item...' };
@@ -45,6 +47,7 @@ export class SelectInputComponent implements OnInit, OnDestroy {
 
   public valueChange(value: any): void {
     console.log('valueChange', value);
+    this.selectedValueChanged.emit(value);
   }
 
   public selectionChange(value: any): void {
