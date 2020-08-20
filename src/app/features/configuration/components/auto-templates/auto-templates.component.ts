@@ -301,11 +301,14 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   }
 
   editForm(id: string) {
+    let found = false;
     this.rowData.forEach(element => {
-      const rule = element.rules.find(x => x.autoTemplateRuleId === id);
-      if (rule != null) {
-        this.form.get('templateId').setValue(element.templateId);
-        return;
+      if (!found) {
+        const rule = element.rules.find(x => x.autoTemplateRuleId === id);
+        if (rule != null) {
+          this.form.get('templateId').setValue(element.templateId);
+          found = true;
+        }
       }
     });
   }
