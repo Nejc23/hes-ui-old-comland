@@ -35,13 +35,13 @@ describe('Pact consumer test', () => {
         autoTemplateRules: [
           {
             autoTemplateRuleId: '9b837e2d-957d-49e2-8d1d-a2e4b843rrr77',
-            obis: 'obis2',
-            regex: 'rule 22212'
+            propertyName: 'obis2',
+            propertyValue: 'rule 22212'
           },
           {
             autoTemplateRuleId: '5456643-957d-49e2-8d1d-a2e4b843rrr77',
-            obis: 'obis3322',
-            regex: 'rule2'
+            propertyName: 'obis3322',
+            propertyValue: 'rule2'
           }
         ]
       },
@@ -50,13 +50,13 @@ describe('Pact consumer test', () => {
         autoTemplateRules: [
           {
             autoTemplateRuleId: '556ki8-77689-49e2-8d1d-a2e4b843rrr77',
-            obis: 'obis 4555 he',
-            regex: 'rule 483'
+            propertyName: 'obis 4555 he',
+            propertyValue: 'rule 483'
           },
           {
             autoTemplateRuleId: '5456643-957d-49e2-8d1d-55',
-            obis: 'obis 7',
-            regex: 'rule 7'
+            propertyName: 'obis 7',
+            propertyValue: 'rule 7'
           }
         ]
       }

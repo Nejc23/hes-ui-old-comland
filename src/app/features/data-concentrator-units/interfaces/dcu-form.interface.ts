@@ -6,6 +6,9 @@ export interface DcuForm {
   idNumber: string;
   ip: string;
   type: Codelist<number>;
+  userName?: string;
+  password?: string;
+  confirmPassword?: string;
   vendor: Codelist<number>;
   tags: Codelist<number>[];
   discoveryJob?: Codelist<string>;

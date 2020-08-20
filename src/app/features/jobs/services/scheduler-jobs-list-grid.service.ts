@@ -1,3 +1,4 @@
+import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
@@ -30,7 +31,8 @@ export class SchedulerJobsListGridService {
       gridCellActiveComponent: GridCellActiveComponent,
       gridCellNextRunComponent: GridCellNextRunComponent,
       gridCellDeleteComponent: GridCellDeleteComponent,
-      gridCellEditComponent: GridCellEditComponent
+      gridCellEditComponent: GridCellEditComponent,
+      gridCellDeviceCountComponent: GridCellDeviceCountComponent
     };
   }
 
@@ -87,6 +89,19 @@ export class SchedulerJobsListGridService {
         lockPosition: true,
         headerName: this.i18n('Owner'),
         headerTooltip: this.i18n('Owner')
+      },
+      {
+        field: 'deviceCount',
+        width: 100,
+        minWidth: 100,
+        maxWidth: 100,
+        suppressMenu: true,
+        sortable: true,
+        suppressMovable: true,
+        lockPosition: true,
+        cellRenderer: 'gridCellDeviceCountComponent',
+        headerName: this.i18n('Devices'),
+        headerTooltip: this.i18n('Devices')
       },
       {
         field: 'id',

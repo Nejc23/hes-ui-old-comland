@@ -3,6 +3,7 @@ import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/f
 export interface SidebarItem {
   title: string;
   routeLink: string;
+  queryParams?: any;
   icon?: string;
   children: Array<SidebarItem>;
   hasChildren: boolean;

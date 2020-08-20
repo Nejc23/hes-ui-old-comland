@@ -7,5 +7,6 @@ export enum ActionEnumerator {
   MUDisconnect = 'Meter-Units-Disconnect',
   MUSetLimiter = 'Meter-Units-SetLimiter',
   MUTOU = 'Meter-Units-TOU',
-  MUUpgrade = 'Meter-Units-Upgrade'
+  MUUpgrade = 'Meter-Units-Upgrade',
+  MURemoveFromJob = 'Meter-Units-RemoveFromJob'
 }

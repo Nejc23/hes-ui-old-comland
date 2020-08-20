@@ -24,7 +24,7 @@ export class GridCellAddBtnComponent implements ICellRendererAngularComp {
 
   public add() {
     const gridApi = this.params.api as GridApi;
-    this.params.context.componentParent.AddNewItem(this.params.data.templateId, this.params.node.rowIndex, gridApi);
+    this.params.context.componentParent.addNewItem(this.params.data.templateId, this.params.node.rowIndex, gridApi);
   }
 
   refresh(): boolean {

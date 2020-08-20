@@ -10,19 +10,27 @@ import { registerLocaleData } from '@angular/common';
 import localeSl from '@angular/common/locales/sl';
 import localeCz from '@angular/common/locales/cs';
 import localeDe from '@angular/common/locales/de';
+import localeFr from '@angular/common/locales/fr';
+import localeIt from '@angular/common/locales/it';
 import localeSlExtra from '@angular/common/locales/extra/sl';
 import localeCzExtra from '@angular/common/locales/extra/cs';
 import localeDeExtra from '@angular/common/locales/extra/de';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import localeItExtra from '@angular/common/locales/extra/it';
 import { UserModule } from './features/users/modules/user.module';
 import { CoreModule } from './core/core.module';
 // Load all required data for the sl locale
 import '@progress/kendo-angular-intl/locales/sl/all';
 import '@progress/kendo-angular-intl/locales/cs/all';
 import '@progress/kendo-angular-intl/locales/de/all';
+import '@progress/kendo-angular-intl/locales/fr/all';
+import '@progress/kendo-angular-intl/locales/it/all';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
 registerLocaleData(localeDe, 'de', localeDeExtra);
+registerLocaleData(localeFr, 'fr', localeFrExtra);
+registerLocaleData(localeIt, 'it', localeItExtra);
 
 declare const require;
 

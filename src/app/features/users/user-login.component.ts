@@ -12,7 +12,6 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
 import { UserLoginCredentials } from './models/user-login-form.model';
-import { matchPasswordsValidator } from './consts/login-validators';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
@@ -20,6 +19,7 @@ import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/core/repository/i
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { User } from 'oidc-client';
+import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 
 @Component({
   selector: 'app-user-login',
@@ -93,7 +93,7 @@ export class UserLoginComponent implements OnInit {
         [this.nameOfNewPassword('resetToken')]: [this.resetToken]
       },
       {
-        validators: [matchPasswordsValidator]
+        validators: [matchPasswordsValidator('password', 'confirmPassword')]
       }
     );
   }

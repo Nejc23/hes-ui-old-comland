@@ -1,3 +1,4 @@
+import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -6,11 +7,19 @@ import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
-import { meterUnits, meterUnitsLayout, meterUnitsBreakerState, touConfigImport } from '../../consts/meter-units.const';
+import {
+  meterUnits,
+  meterUnitsLayout,
+  meterUnitsBreakerState,
+  touConfigImport,
+  meterUnitsForJob,
+  removeMeterUnitsFromJob
+} from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import * as _ from 'lodash';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
+import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -73,5 +82,23 @@ export class MeterUnitsService {
 
   importConfigTouRequest(payload: MeterUnitsTouConfigImport): HttpRequest<any> {
     return new HttpRequest('POST', `${touConfigImport}`, payload);
+  }
+
+  getGridMeterUnitsForJob(param: RequestMeterUnitsForJob): Observable<ResponseMeterUnitsForJob> {
+    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
+    return this.repository.makeRequest(this.getGridMeterUnitsForJobRequest(param));
+  }
+
+  getGridMeterUnitsForJobRequest(param: RequestMeterUnitsForJob): HttpRequest<any> {
+    return new HttpRequest('POST', meterUnitsForJob, param);
+  }
+
+  removeMeterUnitsFromJob(payload: RequestMeterUnitsForJob): Observable<any> {
+    payload.requestId = payload.requestId === null ? uuidv4() : payload.requestId;
+    return this.repository.makeRequest(this.removeMeterUnitsFromJobRequest(payload));
+  }
+
+  removeMeterUnitsFromJobRequest(payload: RequestMeterUnitsForJob): HttpRequest<any> {
+    return new HttpRequest('POST', removeMeterUnitsFromJob, payload as any);
   }
 }

@@ -9,13 +9,13 @@ import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
-import { PlcMeterReadScheduleGridService } from '../../../meter-units/services/plc-meter-read-schedule-grid.service';
-import { PlcMeterReadScheduleService } from '../../../meter-units/services/plc-meter-read-scheduler.service';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
+import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
+import { PlcMeterReadScheduleGridService } from 'src/app/features/meter-units/common/services/plc-meter-read-schedule-grid.service';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -68,15 +68,13 @@ export class SchedulerJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
-    const currentDateWithZeroMinutes = new Date();
-    currentDateWithZeroMinutes.setMinutes(0);
-
+    console.log('formdata on createForm', formData);
     return this.formBuilder.group({
       [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '4', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
-      [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : null],
-      [this.timeForHoursProperty]: [formData ? moment(formData.dateTime).toDate() : currentDateWithZeroMinutes],
+      [this.timeProperty]: [formData && formData.dateTime ? moment(formData.dateTime).toDate() : null],
+      [this.timeForHoursProperty]: [formData && formData.dateTime ? moment(formData.dateTime).toDate() : ''],
       [this.weekDaysProperty]: [formData ? formData.weekDays : []],
       [this.monthDaysProperty]: [formData ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
@@ -118,16 +116,18 @@ export class SchedulerJobComponent implements OnInit {
       time = this.form.get(this.timeForHoursProperty).value;
     } else {
       time = this.form.get(this.timeProperty).value;
-      if (time === null) {
+      if (time === null || time === '') {
         time = new Date().toUTCString();
       }
     }
+
+    console.log('form', this.form);
 
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
       nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
       nHours: this.show_nHours() ? parseInt(this.form.get(this.nHoursProperty).value, 10) : 0,
-      time: this.showTime() ? this.form.get(this.timeProperty).value : null,
+      time: (this.showTime() && this.form.get(this.timeProperty)).value !== '' ? this.form.get(this.timeProperty).value : null,
       timeForHours: this.show_nHours() ? this.form.get(this.timeForHoursProperty).value : null,
       weekDays: this.showWeekDays() ? this.form.get(this.weekDaysProperty).value : [],
       monthDays: this.showMonthDays() ? this.form.get(this.monthDaysProperty).value : [],

@@ -16,6 +16,7 @@ import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { brand } from 'src/environments/brand/default/brand';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-base-template',
@@ -54,7 +55,8 @@ export class BaseTemplateComponent implements OnInit {
     public i18n: I18n,
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
-    private auth: AuthService
+    private auth: AuthService,
+    private acitavedRouter: ActivatedRoute
   ) {
     this.app = {
       layout: {
@@ -65,6 +67,7 @@ export class BaseTemplateComponent implements OnInit {
         rtlActived: false
       }
     };
+
     this.getScreenSize();
     // this.form = this.createForm();
 
@@ -79,6 +82,11 @@ export class BaseTemplateComponent implements OnInit {
         } else {
           this.submenu = 0;
         }
+        // if (currentUrl.includes('/schedulerJobs/allForJob')) {
+        //   acitavedRouter.queryParams.subscribe(qParams => {
+        //     this.fillMeterUnits(qParams.scheduleId);
+        //   });
+        // }
       }
     });*/
   }
@@ -127,6 +135,7 @@ export class BaseTemplateComponent implements OnInit {
           sidebarItems[1].children.push(newElement);
           sidebarItems[1].hasChildren = true;
         });
+
         this.sidebarMeterUnitsItems = sidebarItems;
       }
     });

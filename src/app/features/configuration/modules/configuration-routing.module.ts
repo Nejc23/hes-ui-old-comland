@@ -2,8 +2,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { AutoTemplatesComponent } from '../components/auto-templates.component';
 import { ModalContainerComponent } from 'src/app/shared/modals/components/modal-container.component';
+import { AutoTemplatesComponent } from '../components/auto-templates/auto-templates.component';
+import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,13 @@ const routes: Routes = [
           breadcrumb: 'Auto templates'
         },
         component: AutoTemplatesComponent
+      },
+      {
+        path: 'importDeviceKeys',
+        data: {
+          breadcrumb: 'Import device Keys'
+        },
+        component: ImportDeviceKeysComponent
       }
     ]
   }

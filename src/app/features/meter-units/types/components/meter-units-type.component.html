@@ -59,8 +59,9 @@
             (click)="onTou()"><i class="far fa-cog"></i><span i18n>TOU</span></button>
     <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
             (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
+    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
+            (click)="onActivateUpgrade()"><i class="far fa-level-up"></i><span i18n>Activate upgrade</span></button>
   </div>
-
   <!-- ag-grid -->
   <ag-grid-angular
     class="ag-theme-epoint"
@@ -91,7 +92,6 @@
 
     [overlayNoRowsTemplate]="overlayNoRowsTemplate"
     [overlayLoadingTemplate]="overlayLoadingTemplate"
-
     (selectionChanged)="onSelectionChanged()"
     (gridReady)="onGridReady($event)"
     (columnVisible)="onColumnVisible($event)"
