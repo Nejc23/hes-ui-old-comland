@@ -68,12 +68,13 @@ export class SchedulerJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
+    console.log('formdata on createForm', formData);
     return this.formBuilder.group({
       [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '4', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
-      [this.timeProperty]: [formData ? moment(formData.dateTime).toDate() : null],
-      [this.timeForHoursProperty]: [formData ? moment(formData.dateTime).toDate() : null],
+      [this.timeProperty]: [formData && formData.dateTime ? moment(formData.dateTime).toDate() : null],
+      [this.timeForHoursProperty]: [formData && formData.dateTime ? moment(formData.dateTime).toDate() : ''],
       [this.weekDaysProperty]: [formData ? formData.weekDays : []],
       [this.monthDaysProperty]: [formData ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
@@ -115,16 +116,18 @@ export class SchedulerJobComponent implements OnInit {
       time = this.form.get(this.timeForHoursProperty).value;
     } else {
       time = this.form.get(this.timeProperty).value;
-      if (time === null) {
+      if (time === null || time === '') {
         time = new Date().toUTCString();
       }
     }
+
+    console.log('form', this.form);
 
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
       nMinutes: this.show_nMinutes() ? parseInt(this.form.get(this.nMinutesProperty).value, 10) : 0,
       nHours: this.show_nHours() ? parseInt(this.form.get(this.nHoursProperty).value, 10) : 0,
-      time: this.showTime() ? this.form.get(this.timeProperty).value : null,
+      time: (this.showTime() && this.form.get(this.timeProperty)).value !== '' ? this.form.get(this.timeProperty).value : null,
       timeForHours: this.show_nHours() ? this.form.get(this.timeForHoursProperty).value : null,
       weekDays: this.showWeekDays() ? this.form.get(this.weekDaysProperty).value : [],
       monthDays: this.showMonthDays() ? this.form.get(this.monthDaysProperty).value : [],
