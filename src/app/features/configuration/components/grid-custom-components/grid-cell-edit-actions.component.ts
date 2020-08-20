@@ -3,7 +3,7 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
 import { Subscription } from 'rxjs';
-import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templates-grid-event-emitter.service';
+import { AutoTemplatesGridEventEmitterService } from '../../auto-templates/services/auto-templates-grid-event-emitter.service';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',

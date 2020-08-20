@@ -1,3 +1,4 @@
+import { AutoTemplatesGridService } from './../services/auto-templates-grid.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,10 +13,9 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { AutoTemplatesStaticTextService } from '../../services/auto-templates-static-text.service';
-import { AutoTemplatesGridService } from '../../services/auto-templates-grid.service';
-import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templates-grid-event-emitter.service';
-import { GridRequiredCellEditorComponent } from '../grid-custom-components/grid-required-cell-editor.component';
+import { AutoTemplatesStaticTextService } from '../services/auto-templates-static-text.service';
+import { AutoTemplatesGridEventEmitterService } from '../services/auto-templates-grid-event-emitter.service';
+import { GridRequiredCellEditorComponent } from '../../components/grid-custom-components/grid-required-cell-editor.component';
 
 @Component({
   selector: 'app-auto-templates',

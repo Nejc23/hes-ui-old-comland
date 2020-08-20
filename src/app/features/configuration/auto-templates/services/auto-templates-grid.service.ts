@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { configAgGrid } from 'src/environments/config';
-import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
-import { GridCellAddBtnComponent } from '../components/grid-custom-components/grid-cell-add-btn.component';
+import { GridCellEditActionsComponent } from '../../components/grid-custom-components/grid-cell-edit-actions.component';
+import { GridCellAddBtnComponent } from '../../components/grid-custom-components/grid-cell-add-btn.component';
 
 @Injectable({
   providedIn: 'root'

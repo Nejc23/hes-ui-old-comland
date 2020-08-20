@@ -1,9 +1,9 @@
+import { AutoTemplatesComponent } from './../auto-templates/components/auto-templates.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ModalContainerComponent } from 'src/app/shared/modals/components/modal-container.component';
-import { AutoTemplatesComponent } from '../components/auto-templates/auto-templates.component';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 
 const routes: Routes = [

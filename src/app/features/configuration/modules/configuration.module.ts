@@ -7,7 +7,7 @@ import { GridCellAddBtnComponent } from '../components/grid-custom-components/gr
 import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { GridRequiredCellEditorComponent } from '../components/grid-custom-components/grid-required-cell-editor.component';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
-import { AutoTemplatesComponent } from '../components/auto-templates/auto-templates.component';
+import { AutoTemplatesComponent } from '../auto-templates/components/auto-templates.component';
 
 @NgModule({
   entryComponents: [],
