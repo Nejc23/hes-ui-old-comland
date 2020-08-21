@@ -15,6 +15,7 @@ import { importDeviceKeys } from 'src/app/core/repository/consts/crypto-lite.con
 import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
 import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-check-response.interface';
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -54,7 +55,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   }
 
   setFileTypeId() {
-    this.uploadSaveUrl = `${importDeviceKeys}/GULF${this.fileTypeId}`;
+    this.uploadSaveUrl = `${environment.apiUrl}${importDeviceKeys}/GULF${this.fileTypeId}`;
   }
 
   createForm(): FormGroup {
