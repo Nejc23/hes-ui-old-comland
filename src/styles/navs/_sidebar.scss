@@ -124,6 +124,7 @@
       &.active {
         >.nav-link {
           color: $navbar-light-active-color;
+          font-weight: $font-weight-bold;
 
           &:hover {
             color: $link-hover-color;
