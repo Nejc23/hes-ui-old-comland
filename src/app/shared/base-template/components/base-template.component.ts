@@ -190,6 +190,10 @@ export class BaseTemplateComponent implements OnInit {
     this.isMouseOverNav = false;
   }
 
+  getSmallLogoUrl() {
+    return brand.navFixedLogoUrl;
+  }
+
   getMenuMainLogoUrl() {
     return brand.navFixedMenuMainUrl;
   }
