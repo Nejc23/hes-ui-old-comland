@@ -6,4 +6,5 @@ export interface SchedulerJobsList {
   description: string;
   nextRun: string;
   owner: string;
+  deviceCount: number;
 }

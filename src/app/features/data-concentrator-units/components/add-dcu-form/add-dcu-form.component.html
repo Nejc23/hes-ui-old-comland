@@ -30,8 +30,24 @@
       <div class="form-row">
         <div class="col-4">
           <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async"
-            [disabled]="false">
+            [disabled]="false" (selectedValueChanged)="onTypeChanged($event)">
           </app-select-input>
+        </div>
+      </div>
+
+      <div *ngIf="credentialsVisible">
+        <div class="form-row">
+          <div class="col-6">
+            <app-input-text [form]="form" [property]="userNameProperty" i18n-label label="Username"></app-input-text>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="col-6">
+            <app-input-text [form]="form" [property]="passwordProperty" i18n-label label="Password" inputType="password"></app-input-text>
+          </div>
+          <div class="col-6">
+            <app-input-text [form]="form" [property]="confirmPasswordProperty" i18n-label label="Confirm password" inputType="password"></app-input-text>
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,96 @@
+<app-auto-refresh
+      (timerExpired)="refresh()"
+      [elapseTime]="refreshInterval"
+      [hidden]="true">
+</app-auto-refresh>
+
+<div class="d-flex align-items-center mb-3">
+  <app-header-title [headerTitle]="headerTitle"></app-header-title>
+  <app-breadcrumb class="ml-auto"></app-breadcrumb>
+</div>
+<!--ID: {{id}}-->
+
+<!-- row total items, selected filter name -->
+<div *ngIf="!noData">
+  <div class="d-flex align-items-center p-2 bg-white grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid">
+    <small class="text-secondary">
+      {{totalCount}} <span i18n>items</span>
+      <a class="ml-3" *ngIf="isFilterSet()" href="javascript:void(0);" (click)="clearFilter()"><span i18n>Clear all</span></a>
+    </small>
+    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
+  </div>
+
+  <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
+    <div class="mr-3" *ngIf="!checkSelectedAll()">
+      <small class="text-white">{{gridApi.getSelectedRows().length}} <span i18n>items selected</span>  &middot;
+      <strong><u><a class="text-white" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span> ({{totalCount}})</a></u></strong></small>
+    </div>
+    <div class="mr-3" *ngIf="checkSelectedAll()">
+      <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
+      <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear selected</span></a></u></strong></small>
+    </div>
+    <!-- <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button> -->
+
+    <!-- <div class="btn-group dropdown" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs">
+      <button  type="button" class="btn btn-link"
+        (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
+      <button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>Assign jobs</a>
+        <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>De-assign jobs</a>
+      </div>
+    </div> -->
+
+    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
+    (click)="onRemoveFromJob()"><i class="far fa-calendar"></i><span i18n>Remove from Job</span></button>
+
+  </div>
+  <!-- ag-grid -->
+  <ag-grid-angular
+    class="ag-theme-epoint"
+    style="width: 100%; height: calc(100% - 25px);"
+    #agGrid
+
+    [domLayout]=agGridSettings.domLayout
+    suppressSizeToFit=agGridSettings.suppressSizeToFit
+    [localeText]="localeText"
+
+    [modules]="modules"
+    [icons]="icons"
+    [pagination]=agGridSettings.pagination
+
+    [paginationPageSize]=agGridSettings.paginationPageSize
+    [multiSortKey]=agGridSettings.multiSortKey
+    [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+    [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+    [frameworkComponents]="frameworkComponents"
+    [cacheBlockSize]=agGridSettings.paginationPageSize
+    [maxBlocksInCache]="1"
+    [gridOptions]="gridOptions"
+    [columnDefs]="columns"
+
+    [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+    [rowSelection]=agGridSettings.rowSelection
+
+    [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+    [overlayLoadingTemplate]="overlayLoadingTemplate"
+    (selectionChanged)="onSelectionChanged()"
+    (gridReady)="onGridReady($event)"
+    (columnVisible)="onColumnVisible($event)"
+    (toolPanelVisibleChanged)="toolPanelChanged($event)"
+    (paginationChanged)="onPaginationChange($event)"
+    (rowSelected)="onRowSelect($event)"
+    (firstDataRendered)="onFirstDataRendered($event)"
+    >
+  </ag-grid-angular>
+</div>
+<div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height:80vh;">
+  <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
+  <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
+  <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus"><span i18n> Add New</span></i></button></div>
+</div>
+
+<ng-template #tipMoreSave><span i18n>More options</span></ng-template>

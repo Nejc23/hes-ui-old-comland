@@ -45,10 +45,10 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
     const cellDefs2 = this.gridApi.getEditingCells();
 
     if (cellDefs2.length === 0) {
-      this.gridApi.setFocusedCell(params.rowIndex, 'obis');
+      this.gridApi.setFocusedCell(params.rowIndex, 'propertyName');
       this.gridApi.startEditingCell({
         rowIndex: params.rowIndex,
-        colKey: 'obis'
+        colKey: 'propertyName'
       });
       const cellDefs = this.gridApi.getEditingCells();
       if (cellDefs.length > 0) {

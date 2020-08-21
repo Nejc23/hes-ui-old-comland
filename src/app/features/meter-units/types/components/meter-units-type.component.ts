@@ -27,13 +27,13 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { PlcMeterTouConfigComponent } from '../../components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
-import { PlcMeterFwUpgradeComponent } from '../../components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
+import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
+import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -100,7 +100,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult = '';
   dataStatusResponse = '';
   dataResult2 = '';
-  private localeText;
+  public localeText;
 
   messageActionInProgress = this.i18n(`Action in progress!`);
   messageServerError = this.i18n(`Server error!`);
@@ -694,7 +694,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onScheduleReadJobs() {
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
-    if (selectedRows && selectedRows.length > 0) {
+    const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
+    if (!selectedAll && selectedRows && selectedRows.length > 0) {
       selectedRows.map(row => deviceIdsParam.push(row.deviceId));
     }
 
@@ -751,6 +752,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         response = this.service.postMyGridTOUDevice(paramsConf);
         operationName = this.i18n('Configure TOU');
         selectedText = `${this.i18n('for')} ${selectedText}`;
+        break;
+      case MeterUnitsTypeEnum.activateUpgrade:
+        response = this.service.activateDeviceUpgrade(params);
+        operationName = this.i18n('Activate FW upgrade');
+        selectedText = `${this.i18n('for')} ${selectedText}`;
     }
     component.btnConfirmText = operationName;
     component.modalTitle = this.i18n('Confirm bulk operation');
@@ -791,6 +797,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onBreakerStatus() {
     this.bulkOperation(MeterUnitsTypeEnum.breakerStatus);
+  }
+
+  onActivateUpgrade() {
+    this.bulkOperation(MeterUnitsTypeEnum.activateUpgrade);
   }
 
   onConnect() {

@@ -531,6 +531,18 @@ export class MeterUnitsTypeGridService {
   getAllMyGridLink_BreakerState_RequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
   }
+
+  saveCryptoimportId(importId: string) {
+    this.gridSettingsSessionStoreService.saveCryptoImportId(importId);
+  }
+
+  removeCryptoImportId(importId: string) {
+    this.gridSettingsSessionStoreService.removeCryptoImportId(importId);
+  }
+
+  getAllCryptoImportIds(): string[] {
+    return this.gridSettingsSessionStoreService.getAllCryptoImportIds();
+  }
 }
 
 // extra functions for grid

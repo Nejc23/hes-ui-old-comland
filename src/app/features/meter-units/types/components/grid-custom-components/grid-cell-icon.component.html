@@ -1,7 +1,7 @@
 <div class="d-flex flex-row">
 
 
-  <div class="" *ngIf="params.data && params.data.nextRead">
+  <div class="" *ngIf="params.data && params.data.hasActiveJobs">
     <i class="far fa-clock text-secondary" container="body" placement="bottom"
       [placement]="['right-top']"
       [ngbPopover]="tipContentNextRead"
@@ -12,7 +12,7 @@
   <div class="" *ngIf="params.data && !params.data.templateId">
     <i class="far fa-exclamation-triangle fa-fw text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentMissingTemplate"></i>
   </div>
- 
+
   <div class="" *ngIf="params.data && params.data.readyForActivation">
     <i class="far fa-life-ring text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentReadyForActivation"></i>
   </div>

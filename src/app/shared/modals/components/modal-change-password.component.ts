@@ -4,11 +4,11 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { nameOfFactory } from '../../utils/consts/nameOfFactory.const';
 import { tap } from 'rxjs/operators';
-import { matchPasswordsValidator } from './consts/password-validators';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ChangePasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { matchPasswordsValidator } from '../../validators/passwords-match-validator';
 
 @Component({
   selector: 'app-modal-change-password',
@@ -41,7 +41,7 @@ export class ModalChangePasswordComponent implements OnInit {
         [this.nameOf('repeatedPassword')]: ['', [Validators.required, Validators.minLength(8)]]
       },
       {
-        validators: [matchPasswordsValidator]
+        validators: [matchPasswordsValidator('newPassword', 'repeatedPassword')]
       }
     );
   }

@@ -55,9 +55,9 @@ export class AutoTemplatesGridService {
     return [
       { field: 'autoTemplateRuleId', hide: true },
       {
-        field: 'obis',
+        field: 'propertyName',
         cellEditor: 'gridRequiredCellEditorComponent',
-        cellEditorParams: { formName: 'obis' },
+        cellEditorParams: { formName: 'propertyName' },
         valueSetter: params => {
           if (params.oldValue !== params.newValue) {
             return true;
@@ -67,9 +67,9 @@ export class AutoTemplatesGridService {
         }
       },
       {
-        field: 'regex',
+        field: 'propertyValue',
         cellEditor: 'gridRequiredCellEditorComponent',
-        cellEditorParams: { formName: 'regex' },
+        cellEditorParams: { formName: 'propertyValue' },
         valueSetter: params => {
           if (params.oldValue !== params.newValue) {
             return true;

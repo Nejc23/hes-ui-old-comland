@@ -51,12 +51,12 @@ export class CodelistInterceptor {
   static interceptDcuType(): Observable<HttpEvent<any>> {
     const data: Codelist<number>[] = [
       {
-        id: 0,
-        value: 'unknow'
-      },
-      {
         id: 1,
         value: 'DC450G3'
+      },
+      {
+        id: 2,
+        value: 'AC750'
       }
     ];
 

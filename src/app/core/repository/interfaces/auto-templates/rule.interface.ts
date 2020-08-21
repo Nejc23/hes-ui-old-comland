@@ -1,5 +1,5 @@
 export interface Rule {
   templateId: string;
-  obis: string;
-  regex: string;
+  propertyName: string;
+  propertyValue: string;
 }

@@ -67,7 +67,6 @@ describe('Pact consumer test', () => {
       {
         concentratorId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
         status: 'Active',
-        nextRead: null,
         name: 'Cubis PLC temp 520',
         meters: 102,
         metersPercent: 93.4,
@@ -80,12 +79,12 @@ describe('Pact consumer test', () => {
         ip: '234.88.127.4',
         lastCommunication: '2020-02-21T07:03:02',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-        jobStatus: 'Success'
+        jobStatus: 'Success',
+        hasActiveJob: true
       },
       {
         concentratorId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
-        nextRead: '2020-03-03T15:35:29',
         name: 'Cubis PLC temp 423',
         meters: 45,
         metersPercent: 32.3,
@@ -98,12 +97,12 @@ describe('Pact consumer test', () => {
         ip: null,
         lastCommunication: '2020-02-19T07:03:02',
         tags: null,
-        jobStatus: 'Failed'
+        jobStatus: 'Failed',
+        hasActiveJob: true
       },
       {
         concentratorId: 'dewee32-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
-        nextRead: '2020-05-23T00:20:00',
         name: 'Cubis PLC temp 3423',
         meters: null,
         metersPercent: null,
@@ -116,7 +115,8 @@ describe('Pact consumer test', () => {
         ip: '932.32.32.2',
         lastCommunication: '2020-05-12T19:18:39',
         tags: null,
-        jobStatus: 'Running'
+        jobStatus: 'Running',
+        hasActiveJob: false
       }
     ];
 

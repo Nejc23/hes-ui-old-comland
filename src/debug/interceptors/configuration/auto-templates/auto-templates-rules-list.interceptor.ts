@@ -16,13 +16,13 @@ export class AutoTemplatesRulesListInterceptor {
         autoTemplateRules: [
           {
             autoTemplateRuleId: '99434-434-5532-1245-6frw4434455',
-            obis: '1.0.0.2.3.3',
-            regex: 'regex 5'
+            propertyName: '1.0.0.2.3.3',
+            propertyValue: 'regex 5'
           },
           {
             autoTemplateRuleId: 'mi43455-4443-434-5532-1245-6frw4434455',
-            obis: '1.0.2.2.3.255',
-            regex: 'regex 11'
+            propertyName: '1.0.2.2.3.255',
+            propertyValue: 'regex 11'
           }
         ]
       },
@@ -31,8 +31,8 @@ export class AutoTemplatesRulesListInterceptor {
         autoTemplateRules: [
           {
             autoTemplateRuleId: '111111-434-5532-1245-9494949494',
-            obis: '12.0.223.2.3.233',
-            regex: 'regex 9'
+            propertyName: '12.0.223.2.3.233',
+            propertyValue: 'regex 9'
           }
         ]
       },
@@ -41,8 +41,8 @@ export class AutoTemplatesRulesListInterceptor {
         autoTemplateRules: [
           {
             autoTemplateRuleId: '33444-434-5532-1245-44444',
-            obis: '8.0.20.2.39.20',
-            regex: 'regex 59'
+            propertyName: '8.0.20.2.39.20',
+            propertyValue: 'regex 59'
           }
         ]
       }
