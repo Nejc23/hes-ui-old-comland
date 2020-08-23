@@ -3,7 +3,7 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
 import { Subscription } from 'rxjs';
-import { AutoTemplatesGridEventEmitterService } from '../../auto-templates/services/auto-templates-grid-event-emitter.service';
+import { AutoTemplatesGridEventEmitterService } from '../../auto-template/services/auto-template-grid-event-emitter.service';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -43,7 +43,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   // action edit
   editItem(params: any) {
     const cellDefs2 = this.gridApi.getEditingCells();
-
+    console.log('cellDefs2', cellDefs2);
+    console.log('params.rowIndex=', params.rowIndex);
     if (cellDefs2.length === 0) {
       this.gridApi.setFocusedCell(params.rowIndex, 'propertyName');
       this.gridApi.startEditingCell({
@@ -51,6 +52,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
         colKey: 'propertyName'
       });
       const cellDefs = this.gridApi.getEditingCells();
+      console.log('cellDefs=', cellDefs);
       if (cellDefs.length > 0) {
         this.hideEditDelete = true;
       }
@@ -71,6 +73,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   // action cancel
   cancelItem(params: any) {
     const gridApi = this.params.api as GridApi;
+    console.log('this.params', this.params);
+    console.log('this.params.api', this.params.api);
     this.params.context.componentParent.cancelForm(gridApi);
   }
 

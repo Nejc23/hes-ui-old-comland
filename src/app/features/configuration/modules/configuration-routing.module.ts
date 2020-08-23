@@ -1,4 +1,4 @@
-import { AutoTemplatesComponent } from './../auto-templates/components/auto-templates.component';
+import { AutoTemplateComponent } from '../auto-template/components/auto-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
@@ -29,11 +29,11 @@ const routes: Routes = [
         component: ModalContainerComponent
       },
       {
-        path: 'autoTemplates',
+        path: 'autoTemplate/:templateId',
         data: {
-          breadcrumb: 'Auto templates'
+          breadcrumb: 'Auto template'
         },
-        component: AutoTemplatesComponent
+        component: AutoTemplateComponent
       },
       {
         path: 'importDeviceKeys',

@@ -19,6 +19,7 @@ export class GridRequiredCellEditorComponent implements ICellEditorAngularComp {
     this.formName = params.formName;
 
     this.form = this.params.context.forma;
+    console.log('GridRequiredCellEditorComponent params=', params);
     this.form.get(this.formName).setValue(params.value);
     this.form.get('ruleId').setValue(params.data.autoTemplateRuleId);
   }

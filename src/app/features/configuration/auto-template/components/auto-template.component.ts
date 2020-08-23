@@ -1,4 +1,6 @@
-import { AutoTemplatesGridService } from './../services/auto-templates-grid.service';
+import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
+import { ActivatedRoute } from '@angular/router';
+import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -7,21 +9,22 @@ import { AllModules, Module, GridApi } from '@ag-grid-enterprise/all-modules';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
 import { AutoTemplateRuleList, AutoTemplateRule } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
-import { AutoTemplateList } from 'src/app/core/repository/interfaces/auto-templates/auto-templates-list.interface';
 import { Rule } from 'src/app/core/repository/interfaces/auto-templates/rule.interface';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { AutoTemplatesStaticTextService } from '../services/auto-templates-static-text.service';
-import { AutoTemplatesGridEventEmitterService } from '../services/auto-templates-grid-event-emitter.service';
+import { AutoTemplatesStaticTextService } from '../services/auto-template-static-text.service';
+import { AutoTemplatesGridEventEmitterService } from '../services/auto-template-grid-event-emitter.service';
 import { GridRequiredCellEditorComponent } from '../../components/grid-custom-components/grid-required-cell-editor.component';
+import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead-window';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-auto-templates',
-  templateUrl: './auto-templates.component.html'
+  templateUrl: './auto-template.component.html'
 })
-export class AutoTemplatesComponent implements OnInit, OnDestroy {
+export class AutoTemplateComponent implements OnInit, OnDestroy {
   private gridApi;
   private gridColumnApi;
 
@@ -29,8 +32,9 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
 
   public columnDefs;
   public defaultColDef;
-  public detailCellRendererParams;
-  public rowData: AutoTemplateList[];
+  public rowData: AutoTemplateRule[];
+
+  public cellRendererParams;
 
   public context;
   public editType;
@@ -39,9 +43,18 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   getRowHeight;
 
   public headerTitle = this.staticTextService.title;
-  private form: FormGroup;
+  public form: FormGroup;
 
   private expadedTemplates: string[] = [];
+
+  private templateId: string;
+
+  jobList: Codelist<string>[];
+  public selectedJob: Codelist<string>;
+
+  // get jobsProperty() {
+  //   return nameOf<DcuForm>(o => o.type);
+  // }
 
   constructor(
     public staticTextService: AutoTemplatesStaticTextService,
@@ -52,13 +65,14 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     private event: AutoTemplatesGridEventEmitterService,
     private toast: ToastNotificationService,
     private modalService: ModalService,
-    private i18n: I18n
+    public i18n: I18n,
+    private route: ActivatedRoute
   ) {
     this.form = this.createForm();
 
     // grid settings
     this.frameworkComponents = this.service.setFrameworkComponents();
-    this.context = { componentParent: this };
+    this.context = { forma: this.form, componentParent: this };
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = params => {
       if (params.node && params.node.detail) {
@@ -68,27 +82,33 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
         return allDetailRowHeight + gridSizes.headerHeight + offset;
       }
     };
-    this.columnDefs = this.service.setGridMasterDefaultColumns();
-    this.detailCellRendererParams = {
-      detailGridOptions: {
-        context: { forma: this.form, componentParent: this },
-        rowHeight: 60,
-        frameworkComponents: this.setFrameworkComponentsDetail(),
-        editType: 'fullRow',
-        suppressClickEdit: 'true',
-        suppressCellSelection: true,
-        columnDefs: this.service.setGridDetailDefaultColumns(),
-        defaultColDef: { flex: 1, editable: true },
-        onRowEditingStopped: params => {
-          this.rowEditingStopped(params);
-        },
-        onGridReady: params => {
-          params.api.setDomLayout('autoHeight');
-        },
-        getRowStyle: () => {
-          // TODO use css class !!!
-          return { border: 0 };
-        }
+    this.columnDefs = this.service.setGridDefaultColumns();
+
+    this.cellRendererParams = {
+      context: { forma: this.form, componentParent: this },
+      // rowHeight: 60,
+      // frameworkComponents: this.setFrameworkComponentsDetail(),
+      editType: 'fullRow',
+      suppressClickEdit: 'true',
+      suppressCellSelection: true,
+      columnDefs: this.service.setGridDefaultColumns(),
+      onRowEditingStopped: params => {
+        this.rowEditingStopped(params);
+      },
+      onGridReady: params => {
+        params.api.setDomLayout('autoHeight');
+      },
+      // getRowStyle: () => {
+      //   // TODO use css class !!!
+      //   return { border: 0 };
+      // },
+      defaultColDef: {
+        sortable: false,
+        resizable: false,
+        checkboxSelection: false,
+        filter: false,
+        flex: 1,
+        editable: true
       },
       getDetailRowData: params => {
         params.successCallback(params.data.rules);
@@ -97,27 +117,27 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   }
 
   rowEditingStopped($event) {
-    this.event.edit(1);
-    if ($event.data.autoTemplateRuleId === 'new') {
-      this.rowData.forEach(element => {
-        const index = element.rules
-          .map(x => {
-            return x.autoTemplateRuleId;
-          })
-          .indexOf('new');
-        if (index > -1) {
-          element.rules.splice(index, 1);
-          this.rowData = [...this.rowData];
-        }
-      });
-    }
+    // this.event.edit(1);
+    // if ($event.data.autoTemplateRuleId === 'new') {
+    //   this.rowData.forEach(element => {
+    //     const index = element.rules
+    //       .map(x => {
+    //         return x.autoTemplateRuleId;
+    //       })
+    //       .indexOf('new');
+    //     if (index > -1) {
+    //       element.rules.splice(index, 1);
+    //       this.rowData = [...this.rowData];
+    //     }
+    //   });
+    // }
   }
 
-  private setFrameworkComponentsDetail() {
-    return {
-      gridRequiredCellEditorComponent: GridRequiredCellEditorComponent
-    };
-  }
+  // private setFrameworkComponentsDetail() {
+  //   return {
+  //     gridRequiredCellEditorComponent: GridRequiredCellEditorComponent
+  //   };
+  // }
 
   // form for edit
   createForm(): FormGroup {
@@ -133,7 +153,8 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
         ]
       ],
       ['propertyValue']: ['', [Validators.required]],
-      ['templateId']: [0]
+      ['templateId']: [0],
+      ['selectedJob']: [null]
     });
   }
 
@@ -146,38 +167,93 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   }
 
   onRowGroupOpened($event) {
-    if ($event.node.expanded) {
-      if (this.expadedTemplates.indexOf($event.data.templateId) === -1) {
-        this.expadedTemplates.push($event.data.templateId);
-      }
-    } else {
-      const index = this.expadedTemplates.indexOf($event.data.templateId);
-      if (index > -1) {
-        const rules = this.rowData.find(x => x.templateId === $event.data.templateId);
-
-        if (rules != null) {
-          const index2 = rules.rules.map(e => e.autoTemplateRuleId).indexOf('new');
-          if (index2 > -1) {
-            this.rowData[index].rules.splice(index2, 1);
-            this.rowData = [...this.rowData];
-          }
-        }
-      }
-    }
+    // if ($event.node.expanded) {
+    //   if (this.expadedTemplates.indexOf($event.data.templateId) === -1) {
+    //     this.expadedTemplates.push($event.data.templateId);
+    //   }
+    // } else {
+    //   const index = this.expadedTemplates.indexOf($event.data.templateId);
+    //   if (index > -1) {
+    //     const rules = this.rowData.find(x => x.templateId === $event.data.templateId);
+    //     if (rules != null) {
+    //       const index2 = rules.rules.map(e => e.autoTemplateRuleId).indexOf('new');
+    //       if (index2 > -1) {
+    //         this.rowData[index].rules.splice(index2, 1);
+    //         this.rowData = [...this.rowData];
+    //       }
+    //     }
+    //   }
+    // }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.templateId = params.templateId;
+    });
+
+    this.jobList = [
+      { id: 'id1', value: 'value1' },
+      { id: 'id2', value: 'value2' },
+      { id: 'id3', value: 'value3' }
+    ];
+  }
 
   getData() {
-    this.serviceRepository.getTemplates().subscribe(templates => {
-      this.rowData = this.prepareData(templates, []);
-      if (templates != null && templates.length > 0) {
-        this.serviceRepository.getAutoTemplateRules().subscribe(rules => {
-          this.rowData = this.prepareData(templates, rules);
-        });
-      }
-    });
+    // this.serviceRepository.getAutoTemplateRulesForTemplateId(this.templateId).subscribe(template => {
+    //     this.rowData = template;
+    // });
+
+    this.rowData =
+      // templateId: 'TemplateId',
+      // name: 'TemplateName',
+      // rules:
+      [
+        {
+          autoTemplateRuleId: 'autoTemplateRuleId1',
+          propertyName: '1.0.0.2.3.3',
+          propertyValue: 'PropertyValue1'
+        },
+        {
+          autoTemplateRuleId: 'autoTemplateRuleId2',
+          propertyName: '1.0.0.2.3.4',
+          propertyValue: 'PropertyValue2'
+        }
+      ];
+
+    console.log('rowData', this.rowData);
+
+    // this.serviceRepository.getTemplates().subscribe(templates => {
+    //   this.rowData = this.prepareData(templates, []);
+    //   if (templates != null && templates.length > 0) {
+    //     this.serviceRepository.getAutoTemplateRules().subscribe(rules => {
+    //       console.log('templates', templates);
+    //       this.rowData = this.prepareData(templates, rules);
+    //     });
+    //   }
+    // });
   }
+
+  // private prepareData(template: template, rules: AutoTemplateRuleList[]) {
+  //   const rows: AutoTemplateList[] = [];
+  //   templates.forEach(template => {
+  //     let rulesNew: AutoTemplateRule[] = [];
+  //     rules.forEach(r => {
+  //       if (r.templateId === template.templateId) {
+  //         rulesNew = r.autoTemplateRules;
+  //       }
+  //     });
+
+  //     const templateNew: AutoTemplateList = {
+  //       templateId: template.templateId,
+  //       name: template.name,
+  //       rules: rulesNew
+  //     };
+
+  //     rows.push(templateNew);
+  //     this.expandTemplateRows();
+  //   });
+  //   return rows;
+  // }
 
   private prepareData(templates: TemplatesList[], rules: AutoTemplateRuleList[]) {
     const rows: AutoTemplateList[] = [];
@@ -216,49 +292,46 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
     }
   }
 
-  addNewItem(templateId, rowIndex, gridApi: GridApi) {
-    // if not new row is afdded jet add new else return
+  addNewRuleItem() {
+    // if not new row is added jet add new else return
+
     let alreadyNewRow = false;
     this.rowData.forEach(element => {
-      const rule = element.rules.find(x => x.autoTemplateRuleId === 'new');
-      if (rule != null) {
-        this.toast.infoToast(this.i18n('Aready added empty row for new item!'));
-        alreadyNewRow = true;
+      if (!alreadyNewRow) {
+        const rule = this.rowData.find(x => x.autoTemplateRuleId === 'new');
+        if (rule != null) {
+          this.toast.infoToast(this.i18n('Aready added empty row for new item!'));
+          alreadyNewRow = true;
+        }
       }
     });
     if (alreadyNewRow) {
       return;
     }
 
-    this.rowData.forEach(element => {
-      if (element.templateId.localeCompare(templateId) === 0) {
-        element.rules.splice(0, 0, {
-          autoTemplateRuleId: 'new',
-          propertyName: '',
-          propertyValue: ''
-        });
-      }
+    this.rowData.splice(0, 0, {
+      autoTemplateRuleId: 'new',
+      propertyName: '',
+      propertyValue: ''
     });
 
-    this.form.get('templateId').setValue(templateId);
     this.rowData = [...this.rowData];
 
     // alert('Parent Component Method from ' + templateId + '!');
     setTimeout(() => {
-      this.gridApi.getDisplayedRowAtIndex(rowIndex).setExpanded(true);
+      // this.gridApi.getDisplayedRowAtIndex(rowIndex).setExpanded(true);
 
-      gridApi.forEachDetailGridInfo(detailGridApi => {
-        console.log(detailGridApi.api);
-        detailGridApi.api.setFocusedCell(0, 'propertyName');
-        detailGridApi.api.startEditingCell({
-          rowIndex: 0,
-          colKey: 'propertyName'
-        });
+      this.gridApi.setFocusedCell(0, 'propertyName');
+      this.gridApi.startEditingCell({
+        rowIndex: 0,
+        colKey: 'propertyName'
       });
     }, 100);
   }
 
   saveForm(gridApi: GridApi, params: any) {
+    console.log('in saveForm');
+    console.log('this.form', this.form);
     let request: Observable<any> = null;
     let successMessage = '';
 
@@ -301,16 +374,16 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   }
 
   editForm(id: string) {
-    let found = false;
-    this.rowData.forEach(element => {
-      if (!found) {
-        const rule = element.rules.find(x => x.autoTemplateRuleId === id);
-        if (rule != null) {
-          this.form.get('templateId').setValue(element.templateId);
-          found = true;
-        }
-      }
-    });
+    // let found = true;
+    // this.rowData.forEach(element => {
+    //   if (!found) {
+    //     // const rule = element.find(x => x.autoTemplateRuleId === id);
+    //     if (element.autoTemplateRuleId === id) {
+    //       this.form.get('templateId').setValue(element.templateId);
+    //       found = true;
+    //     }
+    //   }
+    // });
   }
 
   deleteForm(id: string) {
@@ -355,7 +428,22 @@ export class AutoTemplatesComponent implements OnInit, OnDestroy {
   }
 
   cancelForm(grid: GridApi) {
+    console.log('im in cancelForm');
     grid.stopEditing();
+  }
+
+  addJob() {}
+
+  cellMouseOver(event) {
+    // console.log('cell mouse over', event.node.rowIndex);
+  }
+
+  cellMouseOut(event) {
+    // console.log('cell mouse out', event.node.rowIndex);
+  }
+
+  rowSelected() {
+    console.log('row selected');
   }
 
   ngOnDestroy() {}

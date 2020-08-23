@@ -3,6 +3,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { configAgGrid } from 'src/environments/config';
 import { GridCellEditActionsComponent } from '../../components/grid-custom-components/grid-cell-edit-actions.component';
 import { GridCellAddBtnComponent } from '../../components/grid-custom-components/grid-cell-add-btn.component';
+import { GridRequiredCellEditorComponent } from '../../components/grid-custom-components/grid-required-cell-editor.component';
 
 @Injectable({
   providedIn: 'root'
@@ -31,31 +32,12 @@ export class AutoTemplatesGridService {
     };
   }
 
-  setGridMasterDefaultColumns() {
-    return [
-      {
-        field: 'templateId',
-        hide: true
-      },
-      {
-        field: 'name',
-        cellRenderer: 'agGroupCellRenderer',
-        showRowGroup: true,
-        stopEditingWhenGridLosesFocus: false,
-        cellRendererParams: {
-          suppressCount: true, // turn off the row count
-          checkbox: false, // enable checkbox selection
-          innerRenderer: 'gridCellAddBtnComponent'
-        }
-      }
-    ];
-  }
-
-  setGridDetailDefaultColumns() {
+  setGridDefaultColumns() {
     return [
       { field: 'autoTemplateRuleId', hide: true },
       {
         field: 'propertyName',
+        headerName: this.i18n('Obis'),
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyName' },
         valueSetter: params => {
@@ -70,6 +52,7 @@ export class AutoTemplatesGridService {
         field: 'propertyValue',
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyValue' },
+        headerName: this.i18n('Regex'),
         valueSetter: params => {
           if (params.oldValue !== params.newValue) {
             return true;
@@ -80,6 +63,7 @@ export class AutoTemplatesGridService {
       },
       {
         field: 'autoTemplateRuleId',
+        pinned: 'right',
         width: 100,
         minWidth: 100,
         maxWidth: 100,
@@ -94,7 +78,8 @@ export class AutoTemplatesGridService {
 
   public setFrameworkComponents() {
     return {
-      gridCellAddBtnComponent: GridCellAddBtnComponent
+      gridCellAddBtnComponent: GridCellAddBtnComponent,
+      gridRequiredCellEditorComponent: GridRequiredCellEditorComponent
     };
   }
 }
