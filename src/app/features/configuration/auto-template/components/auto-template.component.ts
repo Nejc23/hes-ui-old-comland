@@ -16,7 +16,7 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { AutoTemplatesStaticTextService } from '../services/auto-template-static-text.service';
 import { AutoTemplatesGridEventEmitterService } from '../services/auto-template-grid-event-emitter.service';
-import { GridRequiredCellEditorComponent } from '../../components/grid-custom-components/grid-required-cell-editor.component';
+import { GridRequiredCellEditorComponent } from './grid-custom-components/grid-required-cell-editor.component';
 import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead-window';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
@@ -117,7 +117,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   rowEditingStopped($event) {
-    // this.event.edit(1);
+    this.event.edit(1);
     // if ($event.data.autoTemplateRuleId === 'new') {
     //   this.rowData.forEach(element => {
     //     const index = element.rules
@@ -164,26 +164,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.getData();
-  }
-
-  onRowGroupOpened($event) {
-    // if ($event.node.expanded) {
-    //   if (this.expadedTemplates.indexOf($event.data.templateId) === -1) {
-    //     this.expadedTemplates.push($event.data.templateId);
-    //   }
-    // } else {
-    //   const index = this.expadedTemplates.indexOf($event.data.templateId);
-    //   if (index > -1) {
-    //     const rules = this.rowData.find(x => x.templateId === $event.data.templateId);
-    //     if (rules != null) {
-    //       const index2 = rules.rules.map(e => e.autoTemplateRuleId).indexOf('new');
-    //       if (index2 > -1) {
-    //         this.rowData[index].rules.splice(index2, 1);
-    //         this.rowData = [...this.rowData];
-    //       }
-    //     }
-    //   }
-    // }
   }
 
   ngOnInit() {
@@ -435,11 +415,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   addJob() {}
 
   cellMouseOver(event) {
-    // console.log('cell mouse over', event.node.rowIndex);
+    this.event.eventEmitterRowMouseOver.emit(event.rowIndex);
   }
 
   cellMouseOut(event) {
-    // console.log('cell mouse out', event.node.rowIndex);
+    this.event.eventEmitterRowMouseOut.emit(event.rowIndex);
   }
 
   rowSelected() {
