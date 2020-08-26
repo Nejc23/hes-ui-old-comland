@@ -56,7 +56,12 @@
 
     .brand-logo {
       max-height: 30px;
-      max-width: 30px;
+      width: auto;
+    }
+
+    .brand-name img {
+      max-height: 30px;
+      width: auto;
     }
   }
 
@@ -68,7 +73,7 @@
     left: calc(#{$sidebar-base-width} - (#{$input-height}/2));
     z-index: 1041;
     display: block;
-    top: $spacer / 2;
+    bottom: $spacer * 2;
   }
 
   /************ Sidebar Toggled ****************/
@@ -124,6 +129,7 @@
       &.active {
         >.nav-link {
           color: $navbar-light-active-color;
+          font-weight: $font-weight-bold;
 
           &:hover {
             color: $link-hover-color;

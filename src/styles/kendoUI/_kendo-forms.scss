@@ -1,20 +1,30 @@
-input[type=search]+.far.fa-search {
-  position: absolute;
-  right: .5rem;
-  top: 0;
-  height: $input-height;
-  line-height: $input-height;
-}
+input[type=search] {
+  background-color: $gray-300;
+  border-width: 0;
+  box-shadow: none;
 
-input[type=search]:focus+.far.fa-search,
-input[type=search]:hover+.far.fa-search {
-  display: none;
+  +.far.fa-search {
+    position: absolute;
+    right: .5rem;
+    top: 0;
+    height: $input-height;
+    line-height: $input-height;
+  }
+
+  &:focus, &:hover {
+    background-color: darken($gray-300, 7.5%);
+
+    +.far.fa-search {
+      display: none;
+    }
+  }
 }
 
 .k-combobox {
   .k-select {
     background: none;
     color: $body-color;
+    border-color: $border-color;
 
     &:hover {
       background: none;
@@ -22,8 +32,10 @@ input[type=search]:hover+.far.fa-search {
     }
   }
 
-  > :hover .k-select, .k-state-hover .k-select {
+  > :hover .k-select, .k-state-hover .k-select, .k-combobox .k-state-hover .k-select {
     background: none;
+    border-color: $border-color;
+    color: $body-color;
   }
 }
 
@@ -31,6 +43,8 @@ input[type=search]:hover+.far.fa-search {
   .k-button {
     background-image: none;
     background-color: $gray-200;
+    border-width: 0 !important;
+    color: $body-color;
   }
 }
 
@@ -41,13 +55,20 @@ input[type=search]:hover+.far.fa-search {
 .k-switch {
   font-size: 7px !important;
   width: 2.75rem !important;
+  border-width: 0 !important;
 
   .k-switch-container {
     width: 2.75rem !important;
   }
 
-  &.k-switch-on .k-switch-handle {
-    left: calc(100% - 2em);
+  &.k-switch-on {
+    .k-switch-handle {
+      left: calc(100% - 2em);
+    }
+
+    .k-switch-container {
+      background-color: $secondary;
+    }
   }
 
   &.k-switch-off .k-switch-container {
@@ -55,4 +76,13 @@ input[type=search]:hover+.far.fa-search {
   }
 }
 
+.k-checkbox:checked {
+  border-color: $secondary;
+  background-color: $secondary;
+}
 
+
+.k-combobox .k-state-focused, .k-multiselect.k-state-focused > .k-multiselect-wrap, .k-state-focused.k-dropdowntree > .k-multiselect-wrap {
+  box-shadow: $input-btn-focus-box-shadow !important;
+  border-color: $secondary;
+}

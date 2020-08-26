@@ -32,9 +32,11 @@
       </button>
 
       <div class="brand d-flex justify-content-center align-items-center mb-4">
-        <img class="brand-logo mx-2" [src]="getMenuMainLogoUrl()">
+        <img class="brand-logo" [src]="getMenuMainLogoUrl()" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
         <span @navItemsTrigger *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
-          class="brand-name display-4">{{getAppTitle()}}</span>
+          class="brand-name">
+          <img [src]="getSmallLogoUrl()">
+        </span>
       </div>
       <!-- Sidebar Toggler (Sidebar) -->
 
