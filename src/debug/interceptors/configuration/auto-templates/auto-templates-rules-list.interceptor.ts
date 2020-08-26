@@ -57,6 +57,6 @@ export class AutoTemplatesRulesListInterceptor {
   }
 
   static canInterceptAutoTemplatesRulesList(request: HttpRequest<any>): boolean {
-    return new RegExp(autoTemplateRules).test(request.url) && request.method.endsWith('GET');
+    return new RegExp(`${autoTemplateRules}$`).test(request.url) && request.method.endsWith('GET');
   }
 }

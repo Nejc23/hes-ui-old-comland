@@ -78,7 +78,7 @@ export class AutoTemplatesRulesInterceptor {
         }
       ]
     };
-
+    console.log('99');
     return of(
       new HttpResponse({
         status: 200,

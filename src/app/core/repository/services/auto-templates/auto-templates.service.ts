@@ -36,11 +36,12 @@ export class AutoTemplatesService {
     return new HttpRequest('GET', autoTemplateRules);
   }
 
-  getAutoTemplateRulesForTemplateId(templateId: string): Observable<AutoTemplateList> {
+  getAutoTemplateRulesForTemplateId(templateId: string): Observable<AutoTemplateRuleList> {
     return this.repository.makeRequest(this.getAutoTemplateRulesForTemplateIdRequest(templateId));
   }
 
   getAutoTemplateRulesForTemplateIdRequest(templateId: string): HttpRequest<any> {
+    console.log(templateId);
     return new HttpRequest('GET', `${autoTemplateRules}/${templateId}`);
   }
 

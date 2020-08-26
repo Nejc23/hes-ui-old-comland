@@ -1,0 +1,7 @@
+<div class="d-flex align-items-center row-actions">
+    <div *ngIf="isRowMouseOver" class="btn-group">
+      <button container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('delete')"
+          type="button" class="btn btn-primary" (click)="removeItem(params)"><i class="far fa-minus-circle"></i></button>
+    </div>    
+  </div>
+  

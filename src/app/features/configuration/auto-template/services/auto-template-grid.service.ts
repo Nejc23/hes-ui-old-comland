@@ -4,6 +4,10 @@ import { configAgGrid } from 'src/environments/config';
 import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { GridCellAddBtnComponent } from '../components/grid-custom-components/grid-cell-add-btn.component';
 import { GridRequiredCellEditorComponent } from '../components/grid-custom-components/grid-required-cell-editor.component';
+import { GridCellRemoveBtnComponent } from '../components/grid-custom-components/grid-cell-remove-btn.component';
+import { GridCellDeviceCountComponent } from '../components/grid-custom-components/grid-cell-device-count.component';
+import { GridCellActiveReadonlyComponent } from '../components/grid-custom-components/grid-cell-active-readonly.component';
+import { GridCellNextRunNoEventComponent } from '../components/grid-custom-components/grid-cell-next-run-no-event.component';
 
 @Injectable({
   providedIn: 'root'
@@ -71,6 +75,65 @@ export class AutoTemplatesGridService {
         editable: false,
         suppressMovable: true,
         cellRendererFramework: GridCellEditActionsComponent,
+        headerName: ''
+      }
+    ];
+  }
+
+  public setFrameworkComponentsJobs() {
+    return {
+      gridCellActiveComponent: GridCellActiveReadonlyComponent,
+      gridCellNextRunComponent: GridCellNextRunNoEventComponent,
+      gridCellDeviceCountComponent: GridCellDeviceCountComponent
+    };
+  }
+
+  setGridDefaultColumnsJobs() {
+    return [
+      {
+        field: 'active',
+        cellRenderer: 'gridCellActiveComponent',
+        headerName: this.i18n('Active'),
+        headerTooltip: this.i18n('Active'),
+        editable: false
+      },
+      {
+        field: 'type',
+        headerName: this.i18n('Job Type'),
+        headerTooltip: this.i18n('Job Type')
+      },
+      {
+        field: 'description',
+        headerName: this.i18n('Description'),
+        headerTooltip: this.i18n('Description')
+      },
+      {
+        field: 'nextRun',
+        cellRenderer: 'gridCellNextRunComponent',
+        headerName: this.i18n('Next run'),
+        headerTooltip: this.i18n('Next run')
+      },
+      {
+        field: 'owner',
+        headerName: this.i18n('Owner'),
+        headerTooltip: this.i18n('Owner')
+      },
+      {
+        field: 'deviceCount',
+        cellRenderer: 'gridCellDeviceCountComponent',
+        headerName: this.i18n('Devices'),
+        headerTooltip: this.i18n('Devices')
+      },
+      {
+        field: 'id',
+        pinned: 'right',
+        width: 100,
+        minWidth: 100,
+        maxWidth: 100,
+        suppressMenu: true,
+        editable: false,
+        suppressMovable: true,
+        cellRendererFramework: GridCellRemoveBtnComponent,
         headerName: ''
       }
     ];

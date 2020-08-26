@@ -19,6 +19,11 @@ import { AutoTemplatesGridEventEmitterService } from '../services/auto-template-
 import { GridRequiredCellEditorComponent } from './grid-custom-components/grid-required-cell-editor.component';
 import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead-window';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
 
 @Component({
   selector: 'app-auto-templates',
@@ -28,17 +33,24 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   private gridApi;
   private gridColumnApi;
 
+  private gridApiJobs;
+  private gridColumnApiJobs;
+
   public modules: Module[] = AllModules;
 
   public columnDefs;
+  public columnDefsJobs;
   public defaultColDef;
+  public defaultColDefJobs;
   public rowData: AutoTemplateRule[];
-
+  public rowDataJobs: SchedulerJobsList[];
   public cellRendererParams;
+  public cellRendererParamsJobs;
 
   public context;
   public editType;
   public frameworkComponents;
+  public frameworkComponentsJobs;
   public gridOptions;
   getRowHeight;
 
@@ -49,12 +61,23 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   private templateId: string;
 
-  jobList: Codelist<string>[];
+  jobList$: Observable<CodelistExt<string>[]>;
   public selectedJob: Codelist<string>;
+  hide = false;
+  activeElement: TemplatesList = { templateId: '', name: '' };
 
+  templates: TemplatesList[];
   // get jobsProperty() {
   //   return nameOf<DcuForm>(o => o.type);
   // }
+
+  requestModel: GridRequestParams = {
+    requestId: null,
+    startRow: 0,
+    endRow: 0,
+    sortModel: [],
+    searchModel: []
+  };
 
   constructor(
     public staticTextService: AutoTemplatesStaticTextService,
@@ -62,7 +85,10 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private serviceRepository: AutoTemplatesService,
+    private serviceJob: JobsService,
     private event: AutoTemplatesGridEventEmitterService,
+    private event2: AutoTemplatesGridEventEmitterService,
+    private codelistService: CodelistRepositoryService,
     private toast: ToastNotificationService,
     private modalService: ModalService,
     public i18n: I18n,
@@ -71,7 +97,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.form = this.createForm();
 
     // grid settings
-    this.frameworkComponents = this.service.setFrameworkComponents();
+    this.frameworkComponentsJobs = this.service.setFrameworkComponents();
+    this.frameworkComponentsJobs = this.service.setFrameworkComponentsJobs();
     this.context = { forma: this.form, componentParent: this };
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = params => {
@@ -83,6 +110,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       }
     };
     this.columnDefs = this.service.setGridDefaultColumns();
+    this.columnDefsJobs = this.service.setGridDefaultColumnsJobs();
 
     this.cellRendererParams = {
       context: { forma: this.form, componentParent: this },
@@ -110,10 +138,41 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         flex: 1,
         editable: true
       },
+
       getDetailRowData: params => {
         params.successCallback(params.data.rules);
       }
     };
+
+    this.cellRendererParamsJobs = {
+      context: { forma: this.form, componentParent: this },
+      editType: 'fullRow',
+      suppressClickEdit: 'true',
+      suppressCellSelection: true,
+      columnDefs: this.service.setGridDefaultColumnsJobs(),
+      onRowEditingStopped: params => {
+        this.rowEditingStopped(params);
+      },
+      onGridReady: params => {
+        params.api.setDomLayout('autoHeight');
+      },
+
+      defaultColDefJobs: {
+        sortable: false,
+        resizable: false,
+        checkboxSelection: false,
+        filter: false,
+        flex: 1,
+        editable: true
+      },
+      getDetailRowData: params => {
+        params.successCallback(params.data.rules);
+      }
+    };
+  }
+
+  click() {
+    this.hide = !this.hide;
   }
 
   rowEditingStopped($event) {
@@ -159,6 +218,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   onFirstDataRendered(params) {}
+  onFirstDataRenderedJobs(params) {}
 
   onGridReady(params) {
     this.gridApi = params.api;
@@ -166,51 +226,85 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.getData();
   }
 
+  onGridReadyJobs(params) {
+    this.gridApiJobs = params.api;
+    this.gridColumnApiJobs = params.columnApi;
+    this.gridApiJobs.sizeColumnsToFit();
+    window.onresize = () => {
+      this.gridApiJobs.sizeColumnsToFit();
+    };
+    this.getDataJobs();
+  }
+
+  onSelect(val) {
+    val.active = true;
+    this.activeElement = val;
+
+    this.getData();
+    this.getDataJobs();
+  }
   ngOnInit() {
-    this.route.params.subscribe(params => {
-      this.templateId = params.templateId;
+    this.serviceRepository.getTemplates().subscribe(temp => {
+      this.templates = temp;
     });
 
+    /*  this.route.params.subscribe(params => {
+      this.templateId = params.templateId;
+    });*/
+
+    this.jobList$ = this.codelistService.jobsReadingJobsCodelistCodes();
+    /*
     this.jobList = [
       { id: 'id1', value: 'value1' },
       { id: 'id2', value: 'value2' },
       { id: 'id3', value: 'value3' }
-    ];
+    ];*/
   }
 
   getData() {
-    // this.serviceRepository.getAutoTemplateRulesForTemplateId(this.templateId).subscribe(template => {
-    //     this.rowData = template;
-    // });
+    try {
+      if (this.activeElement.templateId.length > 0) {
+        this.serviceRepository.getAutoTemplateRulesForTemplateId(this.activeElement.templateId).subscribe(
+          template => {
+            this.rowData = template.autoTemplateRules;
+          },
+          error => {
+            console.log(error);
+            this.rowData = [];
+          }
+        );
+      } else {
+        this.rowData = [];
+      }
+    } catch (err) {
+      this.rowData = [];
+    }
+  }
 
-    this.rowData =
-      // templateId: 'TemplateId',
-      // name: 'TemplateName',
-      // rules:
-      [
-        {
-          autoTemplateRuleId: 'autoTemplateRuleId1',
-          propertyName: '1.0.0.2.3.3',
-          propertyValue: 'PropertyValue1'
-        },
-        {
-          autoTemplateRuleId: 'autoTemplateRuleId2',
-          propertyName: '1.0.0.2.3.4',
-          propertyValue: 'PropertyValue2'
-        }
-      ];
+  // get list of jobs by selected template
+  getDataJobs() {
+    try {
+      if (this.activeElement.templateId.length > 0) {
+        // get list of ids from service enerdat
+        // TODO only sample
+        const params = ['DF4626B5-C057-44CE-B32C-14247BD27EA0', '96289ED8-194F-4283-9A27-934AE935EB20'];
 
-    console.log('rowData', this.rowData);
-
-    // this.serviceRepository.getTemplates().subscribe(templates => {
-    //   this.rowData = this.prepareData(templates, []);
-    //   if (templates != null && templates.length > 0) {
-    //     this.serviceRepository.getAutoTemplateRules().subscribe(rules => {
-    //       console.log('templates', templates);
-    //       this.rowData = this.prepareData(templates, rules);
-    //     });
-    //   }
-    // });
+        this.serviceJob.getSchedulerJobsListByJobId(params).subscribe(
+          jobs => {
+            console.log(jobs);
+            this.rowDataJobs = jobs;
+          },
+          error => {
+            console.log(error);
+            this.rowDataJobs = [];
+          }
+        );
+      } else {
+        this.rowDataJobs = [];
+      }
+    } catch (err) {
+      this.rowDataJobs = [];
+    }
   }
 
   // private prepareData(template: template, rules: AutoTemplateRuleList[]) {
@@ -310,10 +404,9 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   saveForm(gridApi: GridApi, params: any) {
-    console.log('in saveForm');
-    console.log('this.form', this.form);
     let request: Observable<any> = null;
     let successMessage = '';
+    this.form.get('templateId').setValue(this.activeElement.templateId);
 
     if (this.form != null && this.form.get('ruleId').value.localeCompare('new') === 0) {
       const values = this.fillDataNewRule();
@@ -326,8 +419,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     }
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
-        gridApi.stopEditing();
         this.getData();
+        gridApi.stopEditing();
       },
       () => {} // error
     );
@@ -407,6 +500,35 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     );*/
   }
 
+  removeForm(id: string) {
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    let response: Observable<any> = new Observable();
+    const operation = this.i18n('Remove');
+    response = this.serviceRepository.deleteAutoTemplateRule(id);
+    component.btnConfirmText = operation;
+    component.modalTitle = this.i18n('Confirm remove');
+    component.modalBody = this.i18n('Do you want to remove job from template?');
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        response.subscribe(
+          value => {
+            this.getData();
+            this.toast.successToast(this.i18n(`Job removed!`));
+          },
+          e => {
+            this.toast.errorToast(this.i18n(`Server error!`));
+          }
+        );
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
   cancelForm(grid: GridApi) {
     console.log('im in cancelForm');
     grid.stopEditing();
@@ -415,11 +537,23 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   addJob() {}
 
   cellMouseOver(event) {
+    console.log(1);
+    console.log(event);
     this.event.eventEmitterRowMouseOver.emit(event.rowIndex);
   }
 
   cellMouseOut(event) {
     this.event.eventEmitterRowMouseOut.emit(event.rowIndex);
+  }
+
+  cellMouseOverJobs(event) {
+    console.log(2);
+    console.log(event);
+    this.event2.eventEmitterRowMouseOverJobs.emit(event.rowIndex);
+  }
+
+  cellMouseOutJobs(event) {
+    this.event2.eventEmitterRowMouseOutJobs.emit(event.rowIndex);
   }
 
   rowSelected() {

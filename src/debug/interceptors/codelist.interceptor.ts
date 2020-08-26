@@ -7,6 +7,8 @@ import { dcuStatuses, dcuTypes, dcuVendors, dcuTags } from 'src/app/core/reposit
 import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { companies } from 'src/app/core/repository/consts/authentication-endpoint-url.const';
+import { jobsReadingJobs } from 'src/app/core/repository/consts/jobs.const';
+import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
 
 @Injectable()
 export class CodelistInterceptor {
@@ -184,5 +186,31 @@ export class CodelistInterceptor {
 
   static canInterceptCompanies(request: HttpRequest<any>): boolean {
     return new RegExp(companies).test(request.url);
+  }
+
+  static canInterceptReadingJobList(request: HttpRequest<any>): boolean {
+    return new RegExp(jobsReadingJobs).test(request.url);
+  }
+
+  static interceptReadingJobList(): Observable<HttpEvent<any>> {
+    const data: CodelistExt<string>[] = [
+      {
+        id: '3323-3434-4344-443',
+        value: 'reading job 1',
+        nextRun: '2021-07-24T08:30:30+00:00'
+      },
+      {
+        id: '55-3434-4344-35',
+        value: 'reading job 2',
+        nextRun: '2021-02-2T08:30:30+00:00'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
   }
 }

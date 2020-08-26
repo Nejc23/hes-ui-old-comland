@@ -8,6 +8,10 @@ import { GridCellEditActionsComponent } from '../auto-template/components/grid-c
 import { GridRequiredCellEditorComponent } from '../auto-template/components/grid-custom-components/grid-required-cell-editor.component';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 import { AutoTemplateComponent } from '../auto-template/components/auto-template.component';
+import { GridCellRemoveBtnComponent } from '../auto-template/components/grid-custom-components/grid-cell-remove-btn.component';
+import { GridCellDeviceCountComponent } from '../auto-template/components/grid-custom-components/grid-cell-device-count.component';
+import { GridCellActiveReadonlyComponent } from '../auto-template/components/grid-custom-components/grid-cell-active-readonly.component';
+import { GridCellNextRunNoEventComponent } from '../auto-template/components/grid-custom-components/grid-cell-next-run-no-event.component';
 
 @NgModule({
   entryComponents: [],
@@ -16,13 +20,25 @@ import { AutoTemplateComponent } from '../auto-template/components/auto-template
     AutoTemplateComponent,
     GridCellEditActionsComponent,
     GridCellAddBtnComponent,
-    GridRequiredCellEditorComponent
+    GridRequiredCellEditorComponent,
+    GridCellRemoveBtnComponent,
+    GridCellNextRunNoEventComponent,
+    GridCellActiveReadonlyComponent,
+    GridCellDeviceCountComponent
   ],
   imports: [
     SharedModule,
     ConfigurationRoutingModule,
     BreadcrumbsModule,
-    AgGridModule.withComponents([GridCellEditActionsComponent, GridCellAddBtnComponent, GridRequiredCellEditorComponent])
+    AgGridModule.withComponents([
+      GridCellEditActionsComponent,
+      GridCellNextRunNoEventComponent,
+      GridCellActiveReadonlyComponent,
+      GridCellDeviceCountComponent,
+      GridCellRemoveBtnComponent,
+      GridCellAddBtnComponent,
+      GridRequiredCellEditorComponent
+    ])
   ],
   exports: []
 })
