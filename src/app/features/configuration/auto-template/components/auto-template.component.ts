@@ -97,7 +97,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.form = this.createForm();
 
     // grid settings
-    this.frameworkComponentsJobs = this.service.setFrameworkComponents();
+    this.frameworkComponents = this.service.setFrameworkComponents();
     this.frameworkComponentsJobs = this.service.setFrameworkComponentsJobs();
     this.context = { forma: this.form, componentParent: this };
     this.gridOptions = this.service.setGridOptions();
@@ -291,7 +291,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
         this.serviceJob.getSchedulerJobsListByJobId(params).subscribe(
           jobs => {
-            console.log(jobs);
             this.rowDataJobs = jobs;
           },
           error => {
@@ -447,16 +446,16 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   editForm(id: string) {
-    // let found = true;
-    // this.rowData.forEach(element => {
-    //   if (!found) {
-    //     // const rule = element.find(x => x.autoTemplateRuleId === id);
-    //     if (element.autoTemplateRuleId === id) {
-    //       this.form.get('templateId').setValue(element.templateId);
-    //       found = true;
-    //     }
-    //   }
-    // });
+    let found = true;
+    this.rowData.forEach(element => {
+      if (!found) {
+        // const rule = element.find(x => x.autoTemplateRuleId === id);
+        if (element.autoTemplateRuleId === id) {
+          this.form.get('templateId').setValue(this.activeElement.templateId);
+          found = true;
+        }
+      }
+    });
   }
 
   deleteForm(id: string) {
@@ -537,8 +536,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   addJob() {}
 
   cellMouseOver(event) {
-    console.log(1);
-    console.log(event);
     this.event.eventEmitterRowMouseOver.emit(event.rowIndex);
   }
 
@@ -547,8 +544,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   cellMouseOverJobs(event) {
-    console.log(2);
-    console.log(event);
     this.event2.eventEmitterRowMouseOverJobs.emit(event.rowIndex);
   }
 

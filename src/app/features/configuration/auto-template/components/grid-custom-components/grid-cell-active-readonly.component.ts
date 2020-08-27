@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 
@@ -24,6 +24,6 @@ export class GridCellActiveReadonlyComponent implements ICellRendererAngularComp
 
   // set tooltip text
   setToolTip(value: boolean) {
-    return value ? this.i18n('Active') : this.i18n('Inactive');
+    return value ? this.i18n('Job is active') : this.i18n('Job is inactive');
   }
 }

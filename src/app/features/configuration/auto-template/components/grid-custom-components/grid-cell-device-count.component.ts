@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Component({
@@ -29,18 +28,5 @@ export class GridCellDeviceCountComponent {
   refresh(params: any): boolean {
     this.params = params;
     return true;
-  }
-
-  public setToolTip(): string {
-    return 'tester';
-  }
-
-  public isDeviceCountVisible(): boolean {
-    return this.params.node.data.deviceCount > 0;
-  }
-
-  public showAllDevices(): void {
-    console.log('params: ', this.params);
-    window.open(`${window.location.origin}/schedulerJobs/${this.params.node.data.id}`);
   }
 }

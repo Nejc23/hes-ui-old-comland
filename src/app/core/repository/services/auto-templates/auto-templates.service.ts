@@ -41,7 +41,6 @@ export class AutoTemplatesService {
   }
 
   getAutoTemplateRulesForTemplateIdRequest(templateId: string): HttpRequest<any> {
-    console.log(templateId);
     return new HttpRequest('GET', `${autoTemplateRules}/${templateId}`);
   }
 

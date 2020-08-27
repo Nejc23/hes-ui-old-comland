@@ -24,7 +24,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
     (this.serviceSubscription = this.service.eventEmitterEdit.subscribe({
       next: () => {
         //  read state
-        console.log('edit/delete hidden');
         this.hideEditDelete = false;
       }
     })),
@@ -70,8 +69,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   // action edit
   editItem(params: any) {
     const cellDefs2 = this.gridApi.getEditingCells();
-    console.log('cellDefs2', cellDefs2);
-    console.log('params.rowIndex=', params.rowIndex);
     if (cellDefs2.length === 0) {
       this.gridApi.setFocusedCell(params.rowIndex, 'propertyName');
       this.gridApi.startEditingCell({
@@ -79,7 +76,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
         colKey: 'propertyName'
       });
       const cellDefs = this.gridApi.getEditingCells();
-      console.log('cellDefs=', cellDefs);
       if (cellDefs.length > 0) {
         this.hideEditDelete = true;
       }
@@ -100,8 +96,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   // action cancel
   cancelItem(params: any) {
     const gridApi = this.params.api as GridApi;
-    console.log('this.params', this.params);
-    console.log('this.params.api', this.params.api);
     this.params.context.componentParent.cancelForm(gridApi);
   }
 
