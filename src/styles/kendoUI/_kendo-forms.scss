@@ -20,37 +20,11 @@ input[type=search] {
   }
 }
 
-.k-combobox {
-  .k-select {
-    background: none;
-    color: $body-color;
-    border-color: $border-color;
-
-    &:hover {
-      background: none;
-      color: $primary;
-    }
-  }
-
-  > :hover .k-select, .k-state-hover .k-select, .k-combobox .k-state-hover .k-select {
-    background: none;
-    border-color: $border-color;
-    color: $body-color;
-  }
-}
-
-.k-multiselect-wrap {
-  .k-button {
-    background-image: none;
-    background-color: $gray-200;
-    border-width: 0 !important;
-    color: $body-color;
-  }
-}
-
+/*
 .ng-invalid.ng-dirty > .k-dropdown-wrap {
   border-color: transparent;
 }
+*/
 
 .k-switch {
   font-size: 7px !important;
@@ -74,15 +48,4 @@ input[type=search] {
   &.k-switch-off .k-switch-container {
     background-color: $gray-300;
   }
-}
-
-.k-checkbox:checked {
-  border-color: $secondary;
-  background-color: $secondary;
-}
-
-
-.k-combobox .k-state-focused, .k-multiselect.k-state-focused > .k-multiselect-wrap, .k-state-focused.k-dropdowntree > .k-multiselect-wrap {
-  box-shadow: $input-btn-focus-box-shadow !important;
-  border-color: $secondary;
 }

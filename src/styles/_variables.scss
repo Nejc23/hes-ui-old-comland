@@ -102,7 +102,7 @@ $escaped-characters: (("<", "%3c"),
 
 $enable-caret: true !default;
 $enable-rounded: true !default;
-$enable-shadows: true !default;
+$enable-shadows: false !default;
 $enable-gradients: false !default;
 $enable-transitions: true !default;
 $enable-prefers-reduced-motion-media-query: true !default;
@@ -285,10 +285,10 @@ $font-weight-bolder: 500 !default;
 $font-weight-base: $font-weight-normal !default;
 $line-height-base: 1.5 !default;
 
-$h1-font-size: $font-size-base * 2 !default;
-$h2-font-size: $font-size-base * 1.75 !default;
-$h3-font-size: $font-size-base * 1.5 !default;
-$h4-font-size: $font-size-base * 1.25 !default;
+$h1-font-size: $font-size-base * 1.5 !default;
+$h2-font-size: $font-size-base * 1.3 !default;
+$h3-font-size: $font-size-base * 1.15 !default;
+$h4-font-size: $font-size-base * 1.05 !default;
 $h5-font-size: $font-size-base !default;
 $h6-font-size: $font-size-base * .75 !default;
 
@@ -377,7 +377,7 @@ $table-border-level: -6 !default;
 // Shared variables that are reassigned to `$input-` and `$btn-` specific variables.
 
 $input-btn-padding-y: .375rem !default;
-$input-btn-padding-x: .75rem !default;
+$input-btn-padding-x:  1.25rem !default;
 $input-btn-font-family: null !default;
 $input-btn-font-size: $font-size-base !default;
 $input-btn-line-height: $line-height-base !default;
@@ -387,12 +387,12 @@ $input-btn-focus-color: rgba($component-active-bg, .25) !default;
 $input-btn-focus-box-shadow: none !default;
 
 $input-btn-padding-y-sm: .25rem !default;
-$input-btn-padding-x-sm: .5rem !default;
+$input-btn-padding-x-sm: .75rem !default;
 $input-btn-font-size-sm: $font-size-sm !default;
 $input-btn-line-height-sm: $line-height-sm !default;
 
 $input-btn-padding-y-lg: .5rem !default;
-$input-btn-padding-x-lg: 1rem !default;
+$input-btn-padding-x-lg: 1.5rem !default;
 $input-btn-font-size-lg: $font-size-lg !default;
 $input-btn-line-height-lg: $line-height-lg !default;
 
@@ -450,19 +450,19 @@ box-shadow .15s ease-in-out !default;
 $label-margin-bottom: .25rem !important;
 
 $input-padding-y: $input-btn-padding-y !default;
-$input-padding-x: $input-btn-padding-x !default;
+$input-padding-x: $input-btn-padding-x * 0.5 !default;
 $input-font-family: $input-btn-font-family !default;
 $input-font-size: $input-btn-font-size !default;
 $input-font-weight: $font-weight-base !default;
 $input-line-height: $input-btn-line-height !default;
 
 $input-padding-y-sm: $input-btn-padding-y-sm !default;
-$input-padding-x-sm: $input-btn-padding-x-sm !default;
+$input-padding-x-sm: $input-btn-padding-x-sm * 0.75 !default;
 $input-font-size-sm: $input-btn-font-size-sm !default;
 $input-line-height-sm: $input-btn-line-height-sm !default;
 
 $input-padding-y-lg: $input-btn-padding-y-lg !default;
-$input-padding-x-lg: $input-btn-padding-x-lg !default;
+$input-padding-x-lg: $input-btn-padding-x-lg * 0.25 !default;
 $input-font-size-lg: $input-btn-font-size-lg !default;
 $input-line-height-lg: $input-btn-line-height-lg !default;
 
@@ -1097,9 +1097,9 @@ $spinner-border-width-sm: .2em !default;
 
 // Close
 
-$close-font-size: $font-size-base * 1.5 !default;
-$close-font-weight: $font-weight-bold !default;
-$close-color: $black !default;
+$close-font-size: $font-size-base * 1.15 !default;
+$close-font-weight: $font-weight-normal !default;
+$close-color: $gray-700 !default;
 $close-text-shadow: 0 1px 0 $white !default;
 
 
@@ -1162,3 +1162,12 @@ $icon-size-lg: 18px;
 $icon-size-xl: 28px;
 
 $navbar-dark-bg: linear-gradient(132deg, #AE4993 0%, #981D78 26%, #053876 100%) !default;
+
+// Kendo UI values
+$button-bg: $light;
+$button-text: $body-color;
+$button-border: $border-color;
+
+
+$checkbox-checked-bg: $secondary;
+$checkbox-checked-border: $secondary;
