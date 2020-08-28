@@ -8,7 +8,6 @@ import { GridCellReadStatusComponent } from '../components/grid-custom-component
 import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
@@ -304,7 +303,6 @@ export class MeterUnitsTypeGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellMeterIdComponent: GridCellMeterIdComponent,
       gridCellTagsComponent: GridCellTagsComponent,
-      gridCustomFilterComponent: GridCustomFilterComponent,
       gridCellVendorComponent: GridCellVendorComponent,
       gidCellParentComponent: GridCellParentComponent,
       gridCellModuleIdComponent: GridCellModuleIdComponent,
@@ -341,17 +339,6 @@ export class MeterUnitsTypeGridService {
   public setSideBar() {
     return {
       toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
         {
           id: 'columns',
           labelDefault: 'Columns',
