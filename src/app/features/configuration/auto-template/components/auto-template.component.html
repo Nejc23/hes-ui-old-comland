@@ -11,14 +11,16 @@
     *ngFor="let temp of templates let first = first" >{{temp.name}}</a>
   </div>
 </div>
-<div class="col-10">  
+<div [ngClass]="{'col-10': !hide, 'col-12': hide}">  
   <div class="d-flex align-items-center mb-3"> 
   <h4 class="align-items-center mb-0 ml-3" *ngIf="hide">
     {{activeElement.name}}
   </h4>
   </div>
 <div class="d-flex align-items-center mb-3"> 
-  <a href="javascript:void(0);" title="Hide/show templates list" class="" (click)="click()"><i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hide, 'far fa-arrow-right': hide}" ></i></a>
+  <a [ngbTooltip]="hidwShowTemplates" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
+    <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hide, 'far fa-arrow-right': hide}" ></i>
+  </a>
   <h4 class="mb-0 mr-3">{{i18n('Rules')}}</h4>
   <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
     <i class="far fa-plus"></i> <span i18n>Add</span>
@@ -83,3 +85,4 @@
 
 </div>
 </div>
+<ng-template #hidwShowTemplates><span i18n>Show/hide templates</span></ng-template>
