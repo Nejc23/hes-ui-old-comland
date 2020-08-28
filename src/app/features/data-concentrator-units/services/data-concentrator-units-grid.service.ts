@@ -10,7 +10,6 @@ import { GridCellNameComponent } from '../components/grid-custom-components/grid
 import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -190,7 +189,6 @@ export class DataConcentratorUnitsGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellLastCommunicationComponent: GridCellLastCommunicationComponent,
       gridCellTagsComponent: GridCellTagsComponent,
-      gridCustomFilterComponent: GridCustomFilterComponent,
       gridCellIpComponent: GridCellIpComponent,
       gridCellVendorComponent: GridCellVendorComponent,
       gridCellTypeComponent: GridCellTypeComponent,
@@ -223,17 +221,6 @@ export class DataConcentratorUnitsGridService {
   public setSideBar() {
     return {
       toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
         {
           id: 'columns',
           labelDefault: 'Columns',

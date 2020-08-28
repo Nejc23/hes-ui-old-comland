@@ -5,6 +5,40 @@
     <button type="button" class="btn btn-light" (click)="openSaveLayoutModal($event)"
     [ngbTooltip]="tipContentFilter"><i class="far fa-bookmark"></i></button>
     </div>
+    <div class="btn-group">
+      <button type="button" class="btn btn-light"  [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
+      </button>   
+      <div class="dropdown-menu dropdown-menu-right">        
+        <div class="dropdown-item p-2">          
+          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty">Select/deselect all columns</app-input-checkbox-grid>                  
+        <hr>
+          <app-input-multiselect [form]="form" [property]="columnsProperty" name="multSelectTypes" [isReadOnly]="false"
+          [options]="columns$" [inline]="false" i18n-label>
+          </app-input-multiselect>
+        </div>
+      </div>
+  
+</div>
+<!-- SAMPLE navaden dropdown meni z checkboxi, tudi ne dela-->
+  <div class="btn-group">
+    <button class="btn btn-light dropdown-toggle" type="button" 
+    id="sampleDropdownMenu" data-toggle="dropdown">
+    Dropdown
+    </button>
+    <div class="dropdown-menu">
+    <button class="dropdown-item" type="button">
+    <input type="checkbox">Action
+    </button>
+    <button class="dropdown-item" type="button">
+    <input type="checkbox">Action
+    </button>
+    <button class="dropdown-item" type="button">
+      <input type="checkbox">Action
+    </button>
+    </div>
+  </div>
+
+
   <button type="button" class="btn btn-light" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="far fa-redo"></i></button>
       <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
@@ -13,6 +47,7 @@
 </div>
 <ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
 <ng-template #tipContentFilter><span i18n>Apply saved state or save new</span></ng-template>
+<ng-template #tipContentColumns><span i18n>Show/hide grid columns</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
 <ng-template #tipContentExport><span i18n>Export in excel</span></ng-template>
 

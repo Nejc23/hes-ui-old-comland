@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
@@ -20,6 +20,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() searchChange = new EventEmitter<string>();
+  @Input() gridColumns = [];
 
   @ViewChild('modalFilter', { static: true }) input;
 
@@ -34,9 +35,16 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
 
+    this.columns$ = [
+      { id: '1', value: 'col1' },
+      { id: '2', value: 'col 3' },
+      { id: '3', value: 'col 4' }
+    ];
+
     const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     this.form = this.createForm(search.searchText);
     this.insertedValue(search.searchText);
+    console.log(this.gridColumns);
   }
 
   insertedValue($event: string) {
@@ -53,7 +61,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   }
   createForm(search: string): FormGroup {
     return this.fb.group({
-      ['content']: search
+      ['content']: search,
+      ['columns']: [[1]],
+      ['selectAll']: [false]
     });
   }
 
@@ -70,5 +80,15 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   openSaveLayoutModal($event: any) {
     const modalRef = this.modalService.open(SaveViewFormComponent);
     modalRef.result.then().catch(() => {});
+  }
+
+  openColumnsSelector($event: any) {}
+
+  get columnsProperty() {
+    return 'columns';
+  }
+
+  get selectAllProperty() {
+    return 'selectAll';
   }
 }
