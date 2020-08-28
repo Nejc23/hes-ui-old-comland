@@ -18,7 +18,7 @@ import { GridCellTypeComponent } from '../components/grid-custom-components/grid
 import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
-import { DcFilterComponent } from '../components/filter-component/dc-filter.component';
+import { DcFilterComponent } from '../components/filter-form/dc-filter.component';
 
 @NgModule({
   entryComponents: [],
