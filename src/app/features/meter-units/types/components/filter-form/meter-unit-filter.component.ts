@@ -1,6 +1,5 @@
-import { Component, OnDestroy } from '@angular/core';
-import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
-import { FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
+import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subscription, of } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -14,12 +13,11 @@ import { CodelistHelperService } from 'src/app/core/repository/services/codelist
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 
 @Component({
-  selector: 'app-grid-custom-filter',
-  templateUrl: './grid-custom-filter.component.html'
+  selector: 'app-meter-unit-filter',
+  templateUrl: './meter-unit-filter.component.html'
 })
-export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
-  private params: IToolPanelParams;
-
+export class MeterUnitFilterComponent implements OnInit, OnDestroy {
+  @Output() filterChange = new EventEmitter();
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
   sessionNameForGridState = 'grdStateMUT-typeId-';
 
@@ -71,8 +69,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
   }
 
   // called on init
-  agInit(params: IToolPanelParams): void {
-    this.params = params;
+  ngOnInit(): void {
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
     this.mutFilters$.subscribe(x => {
       this.data = x;
@@ -83,7 +80,6 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
     this.breakerState$ = of([]); // this.codelistService.meterUnitBreakerStateCodelist(this.id); // TODO uncomment when implemented
     this.firmware$ = of([]); // this.codelistService.meterUnitFirmwareCodelist(this.id);  // TODO uncomment when implemented
-    this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
   }
 
   ngOnDestroy() {
@@ -213,7 +209,7 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     this.doFillData();
 
     // close tool-panel
-    this.params.api.closeToolPanel();
+    this.filterChange.emit();
   }
 
   applyButtonClicked() {
@@ -254,7 +250,8 @@ export class GridCustomFilterComponent implements IToolPanel, OnDestroy {
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 
     // close tool-panel
-    this.params.api.closeToolPanel();
+    // this.params.api.closeToolPanel();
+    this.filterChange.emit();
   }
 
   errorValidatorReadStatusComponents() {

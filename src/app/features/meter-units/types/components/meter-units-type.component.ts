@@ -61,6 +61,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   noData = false;
 
   meterTypes$: Codelist<number>[] = [];
+  public hideFilter = false;
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -557,6 +558,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.refreshGrid();
   }
 
+  reloadGrid() {
+    this.refreshGrid();
+  }
+
   // on change page in the grid
   onPaginationChange(params) {
     if (this.gridApi) {
@@ -692,6 +697,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
+    console.log('2121211121212122');
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
     const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
@@ -935,4 +941,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // clearFilter() {
 
   // }
+
+  clickShowHideFilter() {
+    this.hideFilter = !this.hideFilter;
+    this.gridColumnApi.autoSizeAllColumns();
+    window.onresize = () => {
+      this.gridApi.sizeColumnsToFit();
+    };
+  }
 }

@@ -12,13 +12,13 @@ import { GridCellMetersComponent } from '../components/grid-custom-components/gr
 import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
-import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridCellIpComponent } from '../components/grid-custom-components/grid-cell-ip.component';
 import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
 import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
+import { DcFilterComponent } from '../components/filter-form/dc-filter.component';
 
 @NgModule({
   entryComponents: [],
@@ -32,13 +32,13 @@ import { GridCellJobStatusComponent } from '../components/grid-custom-components
     GridCellNameComponent,
     GridCellLastCommunicationComponent,
     GridCellTagsComponent,
-    GridCustomFilterComponent,
     GridCellIpComponent,
     GridCellVendorComponent,
     GridCellTypeComponent,
     GridCellIdNumberComponent,
     GridCellIconComponent,
-    GridCellJobStatusComponent
+    GridCellJobStatusComponent,
+    DcFilterComponent
   ], // StringifyDataPipe
   imports: [
     SharedModule,
@@ -52,7 +52,6 @@ import { GridCellJobStatusComponent } from '../components/grid-custom-components
       GridCellNameComponent,
       GridCellLastCommunicationComponent,
       GridCellTagsComponent,
-      GridCustomFilterComponent,
       GridCellIpComponent,
       GridCellVendorComponent,
       GridCellTypeComponent,

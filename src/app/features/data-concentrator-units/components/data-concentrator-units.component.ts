@@ -50,6 +50,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   overlayNoRowsTemplate = this.staticextService.noRecordsFound;
   overlayLoadingTemplate = this.staticextService.loadingData;
   noData = false;
+  public hideFilter = false;
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -444,6 +445,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.refreshGrid();
   }
 
+  reloadGrid() {
+    this.refreshGrid();
+  }
+
   // on change page in the grid
   onPaginationChange(params) {
     if (this.gridApi) {
@@ -591,5 +596,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // upgrade button click
   onUpgrade() {
     //
+  }
+
+  clickShowHideFilter() {
+    this.hideFilter = !this.hideFilter;
+    this.gridColumnApi.autoSizeAllColumns();
+    window.onresize = () => {
+      this.gridApi.sizeColumnsToFit();
+    };
   }
 }
