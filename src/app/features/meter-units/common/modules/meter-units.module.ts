@@ -23,6 +23,7 @@ import { GridCellInfoOfChildComponent } from '../../types/components/grid-custom
 import { GridCellIconComponent } from '../../types/components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../../types/components/grid-custom-components/grid-cell-job-status.component';
 import { MeterUnitFilterComponent } from '../../types/components/filter-form/meter-unit-filter.component';
+import { GridCellActionsComponent } from '../../types/components/grid-custom-components/grid-cell-actions.component';
 
 @NgModule({
   entryComponents: [],
@@ -47,6 +48,7 @@ import { MeterUnitFilterComponent } from '../../types/components/filter-form/met
     GridCellInfoOfChildComponent,
     GridCellIconComponent,
     GridCellJobStatusComponent,
+    GridCellActionsComponent,
     MeterUnitFilterComponent
   ],
   imports: [
@@ -69,7 +71,8 @@ import { MeterUnitFilterComponent } from '../../types/components/filter-form/met
       GridCellBreakerStateComponent,
       GridCellInfoOfChildComponent,
       GridCellIconComponent,
-      GridCellJobStatusComponent
+      GridCellJobStatusComponent,
+      GridCellActionsComponent
     ])
   ]
 })

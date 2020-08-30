@@ -24,6 +24,7 @@ import { GridCellInfoOfChildComponent } from '../components/grid-custom-componen
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
+import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 
 @Injectable({
   providedIn: 'root'
@@ -292,6 +293,23 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Job status'),
         resizable: false
       }
+      /* {
+        field: 'id',
+        pinned: 'right',
+        width: 120,
+        minWidth: 120,
+        maxWidth: 120,
+        suppressMenu: true,
+        editable: false,
+        suppressMovable: true,
+        lockPinned: true,
+        lockPosition: true,
+        sortable: false,
+        filter: false,
+        cellRendererFramework: GridCellActionsComponent,
+        headerName: '',
+        // cellClass: "actions-button-cell"
+      }*/
     ];
   }
 
