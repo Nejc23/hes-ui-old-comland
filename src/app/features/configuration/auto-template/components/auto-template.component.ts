@@ -87,7 +87,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private serviceRepository: AutoTemplatesService,
     private serviceJob: JobsService,
     private event: AutoTemplatesGridEventEmitterService,
-    private event2: AutoTemplatesGridEventEmitterService,
     private codelistService: CodelistRepositoryService,
     private toast: ToastNotificationService,
     private modalService: ModalService,
@@ -228,7 +227,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   onGridReadyJobs(params) {
     this.gridApiJobs = params.api;
-    this.gridColumnApiJobs = params.columnApi;
+    this.gridColumnApiJobs = params.coflumnApi;
     this.gridApiJobs.sizeColumnsToFit();
     window.onresize = () => {
       this.gridApiJobs.sizeColumnsToFit();
@@ -246,6 +245,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.serviceRepository.getTemplates().subscribe(temp => {
       this.templates = temp;
+
+      // select first template
+      if (this.templates && this.templates.length > 0) {
+        this.onSelect(this.templates[0]);
+      }
     });
 
     /*  this.route.params.subscribe(params => {
@@ -544,15 +548,19 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   cellMouseOverJobs(event) {
-    this.event2.eventEmitterRowMouseOverJobs.emit(event.rowIndex);
+    this.event.eventEmitterRowMouseOverJobs.emit(event.rowIndex);
   }
 
   cellMouseOutJobs(event) {
-    this.event2.eventEmitterRowMouseOutJobs.emit(event.rowIndex);
+    this.event.eventEmitterRowMouseOutJobs.emit(event.rowIndex);
   }
 
   rowSelected() {
     console.log('row selected');
+  }
+
+  setTemplateListActivityClass(template: TemplatesList) {
+    return typeof this.activeElement !== 'undefined' && template.templateId === this.activeElement.templateId ? 'active' : 'none';
   }
 
   ngOnDestroy() {}

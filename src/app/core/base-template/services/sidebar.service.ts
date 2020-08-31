@@ -54,7 +54,7 @@ export class SidebarService {
           },
           {
             title: this.i18n(`Auto templates`),
-            routeLink: `/${ConfigurationRoute.configuration}/autoTemplate/9986-4549-579909-kioop8989-77acb54a0b00`,
+            routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
             children: []
           }

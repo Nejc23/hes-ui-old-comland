@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable, Subscription } from 'rxjs';
@@ -249,5 +249,13 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  cellMouseOver(event) {
+    this.eventService.eventEmitterRowMouseOver.emit(event.rowIndex);
+  }
+
+  cellMouseOut(event) {
+    this.eventService.eventEmitterRowMouseOut.emit(event.rowIndex);
   }
 }

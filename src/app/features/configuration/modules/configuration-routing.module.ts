@@ -29,7 +29,7 @@ const routes: Routes = [
         component: ModalContainerComponent
       },
       {
-        path: 'autoTemplate/:templateId',
+        path: 'autoTemplates',
         data: {
           breadcrumb: 'Auto template'
         },

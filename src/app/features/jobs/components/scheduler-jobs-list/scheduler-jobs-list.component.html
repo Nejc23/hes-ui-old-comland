@@ -7,7 +7,7 @@
     </button>
     <div class="dropdown-content">
       <a href="javascript:void(0);" (click)="addJob()"><span i18n>Reading job</span></a>
-      <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>      
+      <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>
     </div>
   </div>
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
@@ -65,6 +65,7 @@
   [overlayLoadingTemplate]="overlayLoadingTemplate"
   (paginationChanged)="onPaginationChange($event)"
   (firstDataRendered)="onFirstDataRendered($event)"
-
+  (cellMouseOver)="cellMouseOver($event)"
+  (cellMouseOut)="cellMouseOut($event)"
   >
 </ag-grid-angular>
