@@ -91,4 +91,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   get selectAllProperty() {
     return 'selectAll';
   }
+
+  selectDeselect() {
+    const vv = this.form.get(this.selectAllProperty).value;
+    console.log(vv);
+  }
 }

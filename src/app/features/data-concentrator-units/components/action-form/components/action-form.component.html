@@ -9,35 +9,15 @@
       <button type="button" class="btn btn-light"  [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
       </button>   
       <div class="dropdown-menu dropdown-menu-right">        
-        <div class="dropdown-item p-2">          
-          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty">Select/deselect all columns</app-input-checkbox-grid>                  
-        <hr>
-          <app-input-multiselect [form]="form" [property]="columnsProperty" name="multSelectTypes" [isReadOnly]="false"
-          [options]="columns$" [inline]="false" i18n-label>
-          </app-input-multiselect>
-        </div>
-      </div>
-  
-</div>
-<!-- SAMPLE navaden dropdown meni z checkboxi, tudi ne dela-->
-  <div class="btn-group">
-    <button class="btn btn-light dropdown-toggle" type="button" 
-    id="sampleDropdownMenu" data-toggle="dropdown">
-    Dropdown
-    </button>
-    <div class="dropdown-menu">
-    <button class="dropdown-item" type="button">
-    <input type="checkbox">Action
-    </button>
-    <button class="dropdown-item" type="button">
-    <input type="checkbox">Action
-    </button>
-    <button class="dropdown-item" type="button">
-      <input type="checkbox">Action
-    </button>
-    </div>
+        <div class="dropdown-item">
+          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="selectDeselect()" label="Select/deselect all columns"></app-input-checkbox-grid>                  
+        </div>        
+        <div class="dropdown-divider"></div>        
+        <app-input-multiselect [form]="form" [property]="columnsProperty" name="multSelectTypes" [isReadOnly]="false"
+          [options]="columns$" [inline]="false" class="dropdown-item" i18n-label>
+        </app-input-multiselect>        
+      </div>  
   </div>
-
 
   <button type="button" class="btn btn-light" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="far fa-redo"></i></button>
