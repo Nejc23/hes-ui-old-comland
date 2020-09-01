@@ -97,6 +97,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     }
 
     this.staticTextService.removePopupBackdropIfClickOnMenu();
+    this.subscription.unsubscribe();
   }
 
   openSaveLayoutModal($event: any) {
