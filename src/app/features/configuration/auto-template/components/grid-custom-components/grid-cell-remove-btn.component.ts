@@ -20,24 +20,17 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp, OnD
   public rowIndex = -1;
 
   constructor(private i18n: I18n, private service: AutoTemplatesGridEventEmitterService, private cdRef: ChangeDetectorRef) {
-    // catcht event from master component
-    (this.serviceSubscription = this.service.eventEmitterEdit.subscribe({
-      next: () => {
-        //  read state
-        this.hideEditDelete = false;
-      }
-    })),
-      (this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOverJobs.subscribe({
-        next: index => {
-          if (index === this.rowIndex) {
-            this.isRowMouseOver = true;
-            this.cdRef.detectChanges();
-          } else {
-            this.isRowMouseOver = false; // prevent active buttons on multiple rows
-            this.cdRef.detectChanges();
-          }
+    this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOverJobs.subscribe({
+      next: index => {
+        if (index === this.rowIndex) {
+          this.isRowMouseOver = true;
+          this.cdRef.detectChanges();
+        } else {
+          this.isRowMouseOver = false; // prevent active buttons on multiple rows
+          this.cdRef.detectChanges();
         }
-      }));
+      }
+    });
 
     this.serviceSubscriptionRowMouseOut = this.service.eventEmitterRowMouseOutJobs.subscribe({
       next: index => {

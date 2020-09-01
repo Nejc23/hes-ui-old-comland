@@ -52,7 +52,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   public frameworkComponents;
   public frameworkComponentsJobs;
   public gridOptions;
-  getRowHeight;
+  public getRowHeight;
 
   public headerTitle = this.staticTextService.title;
   public form: FormGroup;
@@ -101,12 +101,14 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.context = { forma: this.form, componentParent: this };
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = params => {
-      if (params.node && params.node.detail) {
-        const offset = 65;
-        const allDetailRowHeight = params.data.rules.length * 1.7 * params.api.getSizesForCurrentTheme().rowHeight;
-        const gridSizes = params.api.getSizesForCurrentTheme();
-        return allDetailRowHeight + gridSizes.headerHeight + offset;
+      const editingCells = this.gridApi.getEditingCells();
+
+      if (editingCells.length > 0) {
+        if (editingCells[0].rowIndex === params.node.rowIndex) {
+          return 65;
+        }
       }
+      return 35;
     };
     this.columnDefs = this.service.setGridDefaultColumns();
     this.columnDefsJobs = this.service.setGridDefaultColumnsJobs();
@@ -118,7 +120,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       editType: 'fullRow',
       suppressClickEdit: 'true',
       suppressCellSelection: true,
-      columnDefs: this.service.setGridDefaultColumns(),
       onRowEditingStopped: params => {
         this.rowEditingStopped(params);
       },
@@ -175,7 +176,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   rowEditingStopped($event) {
-    this.event.edit(1);
+    // this.event.edit(1);
     // if ($event.data.autoTemplateRuleId === 'new') {
     //   this.rowData.forEach(element => {
     //     const index = element.rules
@@ -424,8 +425,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       result => {
         this.getData();
         gridApi.stopEditing();
+        params.api.resetRowHeights();
       },
-      () => {} // error
+      () => {
+        params.api.resetRowHeights();
+      }
     );
   }
 
@@ -449,17 +453,26 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     return formData;
   }
 
-  editForm(id: string) {
-    let found = true;
-    this.rowData.forEach(element => {
-      if (!found) {
-        // const rule = element.find(x => x.autoTemplateRuleId === id);
-        if (element.autoTemplateRuleId === id) {
-          this.form.get('templateId').setValue(this.activeElement.templateId);
-          found = true;
+  editForm(id: string, rowIndex: number) {
+    const cellDefs2 = this.gridApi.getEditingCells();
+
+    if (cellDefs2.length === 0) {
+      this.gridApi.setFocusedCell(rowIndex, 'propertyName');
+      this.gridApi.startEditingCell({
+        rowIndex,
+        colKey: 'propertyName'
+      });
+      let found = true;
+      this.rowData.forEach(element => {
+        if (!found) {
+          // const rule = element.find(x => x.autoTemplateRuleId === id);
+          if (element.autoTemplateRuleId === id) {
+            this.form.get('templateId').setValue(this.activeElement.templateId);
+            found = true;
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   deleteForm(id: string) {
@@ -533,8 +546,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   cancelForm(grid: GridApi) {
-    console.log('im in cancelForm');
     grid.stopEditing();
+    this.gridApi.resetRowHeights();
   }
 
   addJob() {}

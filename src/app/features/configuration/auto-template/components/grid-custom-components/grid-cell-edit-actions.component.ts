@@ -12,7 +12,6 @@ import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templa
 export class GridCellEditActionsComponent implements ICellRendererAngularComp, OnDestroy {
   public params: any;
   public gridApi: GridApi;
-  public hideEditDelete = false;
   private serviceSubscription: Subscription;
   private serviceSubscriptionRowMouseOver: Subscription;
   private serviceSubscriptionRowMouseOut: Subscription;
@@ -20,24 +19,17 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   public rowIndex = -1;
 
   constructor(private i18n: I18n, private service: AutoTemplatesGridEventEmitterService, private cdRef: ChangeDetectorRef) {
-    // catcht event from master component
-    (this.serviceSubscription = this.service.eventEmitterEdit.subscribe({
-      next: () => {
-        //  read state
-        this.hideEditDelete = false;
-      }
-    })),
-      (this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOver.subscribe({
-        next: index => {
-          if (index === this.rowIndex) {
-            this.isRowMouseOver = true;
-            this.cdRef.detectChanges();
-          } else {
-            this.isRowMouseOver = false; // prevent active buttons on multiple rows
-            this.cdRef.detectChanges();
-          }
+    this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOver.subscribe({
+      next: index => {
+        if (index === this.rowIndex) {
+          this.isRowMouseOver = true;
+          this.cdRef.detectChanges();
+        } else {
+          this.isRowMouseOver = false; // prevent active buttons on multiple rows
+          this.cdRef.detectChanges();
         }
-      }));
+      }
+    });
 
     this.serviceSubscriptionRowMouseOut = this.service.eventEmitterRowMouseOut.subscribe({
       next: index => {
@@ -53,11 +45,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   agInit(params: any): void {
     this.params = params;
     this.gridApi = this.params.api as GridApi;
-
-    if (params.data.autoTemplateRuleId === 'new') {
-      this.hideEditDelete = true;
-    }
-
     this.rowIndex = params.rowIndex;
   }
 
@@ -68,19 +55,12 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
 
   // action edit
   editItem(params: any) {
-    const cellDefs2 = this.gridApi.getEditingCells();
-    if (cellDefs2.length === 0) {
-      this.gridApi.setFocusedCell(params.rowIndex, 'propertyName');
-      this.gridApi.startEditingCell({
-        rowIndex: params.rowIndex,
-        colKey: 'propertyName'
-      });
-      const cellDefs = this.gridApi.getEditingCells();
-      if (cellDefs.length > 0) {
-        this.hideEditDelete = true;
-      }
-      this.params.context.componentParent.editForm(params.data.autoTemplateRuleId);
-    }
+    this.params.context.componentParent.editForm(this.params.autoTemplateRuleId, this.rowIndex);
+  }
+
+  isRowInEditMode() {
+    const editingCells = this.gridApi.getEditingCells();
+    return editingCells && editingCells.length > 0 ? editingCells[0].rowIndex === this.rowIndex : false;
   }
 
   // action delete

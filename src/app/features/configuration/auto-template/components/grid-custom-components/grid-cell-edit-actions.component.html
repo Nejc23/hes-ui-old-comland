@@ -1,11 +1,11 @@
 <div class="d-flex align-items-center row-actions">
-  <div *ngIf="isRowMouseOver && !hideEditDelete" class="btn-group">
+  <div *ngIf="isRowMouseOver && !isRowInEditMode()" class="btn-group">
     <button
         type="button" class="btn btn-primary" (click)="editItem(params)"><i class="far fa-edit"></i></button>
     <button
         type="button" class="btn btn-primary" (click)="deleteItem(params)"><i class="far fa-trash"></i></button>
   </div>
-  <div *ngIf="isRowMouseOver && hideEditDelete" class="btn-group">
+  <div *ngIf="isRowMouseOver && isRowInEditMode()" class="btn-group">
     <button
         type="button" class="btn btn-primary" (click)="saveItem(params)"><i class="far fa-check"></i></button>
     <button
