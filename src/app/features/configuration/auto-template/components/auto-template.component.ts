@@ -176,6 +176,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   rowEditingStopped($event) {
+    this.gridApi.resetRowHeights();
     // this.event.edit(1);
     // if ($event.data.autoTemplateRuleId === 'new') {
     //   this.rowData.forEach(element => {
@@ -566,10 +567,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   cellMouseOutJobs(event) {
     this.event.eventEmitterRowMouseOutJobs.emit(event.rowIndex);
-  }
-
-  rowSelected() {
-    console.log('row selected');
   }
 
   setTemplateListActivityClass(template: TemplatesList) {
