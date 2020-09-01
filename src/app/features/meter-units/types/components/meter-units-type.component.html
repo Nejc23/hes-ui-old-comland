@@ -96,7 +96,7 @@
     </div>
    
     <div class="p-2 d-flex align-items-center p-2 grid-actions">
-      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
+      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end" [gridColumns]="columns"></app-action-form>
     </div>
   </div>
 

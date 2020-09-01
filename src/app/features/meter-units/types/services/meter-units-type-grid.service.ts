@@ -25,6 +25,7 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,8 @@ export class MeterUnitsTypeGridService {
   constructor(
     private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {}
 
   public set meterUnitsTypeId(id: number) {
@@ -350,10 +352,11 @@ export class MeterUnitsTypeGridService {
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
-      onSortChanged: this.onSortChanged
+      onSortChanged: this.onSortChanged,
+      onColumnVisible: this.onColumnVisible
     };
   }
-
+  /*
   public setSideBar() {
     return {
       toolPanels: [
@@ -375,7 +378,7 @@ export class MeterUnitsTypeGridService {
         }
       ]
     };
-  }
+  }*/
 
   public onColumnVisibility(params) {
     // TODO change to different store
@@ -390,6 +393,11 @@ export class MeterUnitsTypeGridService {
   private onSortChanged = params => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
+
+  private onColumnVisible = params => {
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
   };
 
   public getCookieData() {

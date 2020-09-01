@@ -6,6 +6,8 @@ import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/gri
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SaveViewFormComponent } from '../../save-view-form/save-view-form.component';
+import { Subscription } from 'rxjs';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Component({
   selector: 'app-action-form',
@@ -21,6 +23,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() searchChange = new EventEmitter<string>();
   @Input() gridColumns = [];
+  subscription: Subscription;
 
   @ViewChild('modalFilter', { static: true }) input;
 
@@ -29,22 +32,22 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private modalService: ModalService
-  ) {}
+    private modalService: ModalService,
+    private gridColumnShowHideService: GridColumnShowHideService
+  ) {
+    // subscribe to changes of visibility of columns on grid
+    this.subscription = gridColumnShowHideService.listOfColumnVisibilitySet$.subscribe(visibleColumnList => {
+      this.setColumnVisibilityForm(visibleColumnList);
+    });
+  }
 
   ngOnInit() {
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
-
-    this.columns$ = [
-      { id: '1', value: 'col1' },
-      { id: '2', value: 'col 3' },
-      { id: '3', value: 'col 4' }
-    ];
+    this.setColumnsListForArrayOfCheckBox();
 
     const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     this.form = this.createForm(search.searchText);
     this.insertedValue(search.searchText);
-    console.log(this.gridColumns);
   }
 
   insertedValue($event: string) {
@@ -62,7 +65,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   createForm(search: string): FormGroup {
     return this.fb.group({
       ['content']: search,
-      ['columns']: [[1]],
+      ['columns']: [[]],
       ['selectAll']: [false]
     });
   }
@@ -75,6 +78,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.staticTextService.removePopupBackdropIfClickOnMenu();
+    this.subscription.unsubscribe();
   }
 
   openSaveLayoutModal($event: any) {
@@ -92,8 +96,43 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     return 'selectAll';
   }
 
-  selectDeselect() {
-    const vv = this.form.get(this.selectAllProperty).value;
-    console.log(vv);
+  /// set dropdown checkboxes of visible columns
+  setColumnVisibilityForm(visibleColumnList: string[]) {
+    const listCheckBoxColumns = this.columns$.map(a => a.id);
+    if (
+      visibleColumnList.length === listCheckBoxColumns.length &&
+      visibleColumnList.sort().every((value, index) => value === listCheckBoxColumns.sort()[index])
+    ) {
+      this.form.get(this.selectAllProperty).setValue(true);
+    } else {
+      this.form.get(this.selectAllProperty).setValue(false);
+    }
+
+    this.form.get(this.columnsProperty).setValue(visibleColumnList);
+  }
+
+  showHideAll() {
+    // show all columns
+    if (this.form.get(this.selectAllProperty).value) {
+      this.gridColumnShowHideService.listOfColumnsVisibilityChanged(this.columns$.map(a => a.id));
+    } else {
+      // hide all columns
+      this.gridColumnShowHideService.listOfColumnsVisibilityChanged([]);
+    }
+  }
+
+  showHideFromArrayOfCheckBoxes() {
+    const listOfVisibleCols = this.form.get(this.columnsProperty).value;
+    this.gridColumnShowHideService.listOfColumnsVisibilityChanged(listOfVisibleCols);
+  }
+
+  setColumnsListForArrayOfCheckBox() {
+    if (this.gridColumns != null) {
+      this.gridColumns
+        .filter(x => x.headerName !== undefined && x.headerName.length > 0)
+        .forEach(element => {
+          this.columns$.push({ id: element.field, value: element.headerName });
+        });
+    }
   }
 }

@@ -10,10 +10,10 @@
       </button>   
       <div class="dropdown-menu dropdown-menu-right">        
         <div class="dropdown-item">
-          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="selectDeselect()" label="Select/deselect all columns"></app-input-checkbox-grid>                  
+          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>                  
         </div>        
         <div class="dropdown-divider"></div>        
-        <app-input-multiselect [form]="form" [property]="columnsProperty" name="multSelectTypes" [isReadOnly]="false"
+        <app-input-multiselect [form]="form" [property]="columnsProperty" (change)="showHideFromArrayOfCheckBoxes()" name="multSelectTypes" [isReadOnly]="false"
           [options]="columns$" [inline]="false" class="dropdown-item" i18n-label>
         </app-input-multiselect>        
       </div>  

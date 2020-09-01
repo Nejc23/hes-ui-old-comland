@@ -28,6 +28,7 @@ import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-en
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -43,6 +44,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   filters = '';
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
+  private subscription: Subscription;
   public localeText;
 
   // N/A
@@ -57,7 +59,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
   public gridApi;
-  private gridColumnApi;
+  public gridColumnApi;
   public icons;
   public frameworkComponents;
   public sideBar;
@@ -95,7 +97,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private formUtils: FormsUtilsService,
     private authService: AuthService,
-    private agGridSharedFunctionsService: AgGridSharedFunctionsService
+    private agGridSharedFunctionsService: AgGridSharedFunctionsService,
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -127,6 +130,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    // subscribe to changes of columns visibility from other components
+    this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe(listOfVisibleColumns => {
+      gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
+    });
   }
 
   // form - rights
@@ -145,7 +153,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     // set grid columns
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
-    this.sideBar = this.dataConcentratorUnitsGridService.setSideBar();
+    // this.sideBar = this.dataConcentratorUnitsGridService.setSideBar(); // no toopanel anymore
 
     this.localeText = {
       // for side panel
@@ -173,6 +181,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
     if (this.dcuAddedSubscription) {
       this.dcuAddedSubscription.unsubscribe();
+    }
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -219,6 +231,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
 
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
@@ -342,7 +356,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   // on close tool panel reload filter model
-  toolPanelChanged(params) {
+  // no toolpanel anymore
+  /*toolPanelChanged(params) {
     if (params.source === undefined) {
       if (
         !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
@@ -373,7 +388,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     }
-  }
+  }*/
 
   setSearch() {
     const search = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
