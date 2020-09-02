@@ -33,12 +33,14 @@ describe('Pact consumer test', () => {
         {
           autoTemplateRuleId: '9b837e2d-957d-49e2-8d1d-a2e4b843rrr77',
           propertyName: 'obis2',
-          propertyValue: 'rule 22212'
+          propertyValue: 'rule 22212',
+          jobIds: ['ff11d571-8ff7-4c1a-aaa2-61c6bfdd2383', 'b8342f41-4131-4e43-8ea7-71da78636420']
         },
         {
           autoTemplateRuleId: '5456643-957d-49e2-8d1d-a2e4b843rrr77',
           propertyName: 'obis3322',
-          propertyValue: 'rule2'
+          propertyValue: 'rule2',
+          jobIds: ['e27d45fd-8f27-4593-a70c-6bf3369fd379', '75279ce2-1f34-4f32-8075-6193225d4917']
         }
       ]
     };

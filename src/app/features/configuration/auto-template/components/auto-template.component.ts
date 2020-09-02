@@ -1,10 +1,10 @@
 import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
 import { ActivatedRoute } from '@angular/router';
 import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { AllModules, Module, GridApi } from '@ag-grid-enterprise/all-modules';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
@@ -61,8 +61,10 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   private templateId: string;
 
-  jobList$: Observable<CodelistExt<string>[]>;
-  public selectedJob: Codelist<string>;
+  // jobList$: Observable<CodelistExt<string>[]>;
+  allJobList: CodelistExt<string>[];
+  jobList: CodelistExt<string>[];
+
   hide = false;
   activeElement: TemplatesList = { templateId: '', name: '' };
 
@@ -214,7 +216,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       ],
       ['propertyValue']: ['', [Validators.required]],
       ['templateId']: [0],
-      ['selectedJob']: [null]
+      ['selectedJob']: [null, null]
     });
   }
 
@@ -241,9 +243,13 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     val.active = true;
     this.activeElement = val;
 
+    this.rowData = [];
+    this.rowDataJobs = [];
+
     this.getData();
     this.getDataJobs();
   }
+
   ngOnInit() {
     this.serviceRepository.getTemplates().subscribe(temp => {
       this.templates = temp;
@@ -254,17 +260,21 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       }
     });
 
-    /*  this.route.params.subscribe(params => {
-      this.templateId = params.templateId;
-    });*/
+    this.codelistService.jobsReadingJobsCodelistCodes().subscribe(result => {
+      this.allJobList = result;
+      this.setJobListWithoutAssignedJobs();
+    });
+  }
 
-    this.jobList$ = this.codelistService.jobsReadingJobsCodelistCodes();
-    /*
-    this.jobList = [
-      { id: 'id1', value: 'value1' },
-      { id: 'id2', value: 'value2' },
-      { id: 'id3', value: 'value3' }
-    ];*/
+  setJobListWithoutAssignedJobs() {
+    const jobIds = this.getJobIds();
+    this.jobList = this.allJobList
+      .filter(j => {
+        return jobIds.indexOf(j.id) < 0;
+      })
+      .sort((j1, j2) => (j1.value > j2.value ? 1 : j2.value > j1.value ? -1 : 0));
+
+    this.form.get('selectedJob').setValue(null);
   }
 
   getData() {
@@ -273,29 +283,31 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         this.serviceRepository.getAutoTemplateRulesForTemplateId(this.activeElement.templateId).subscribe(
           template => {
             this.rowData = template.autoTemplateRules;
+            this.setJobListWithoutAssignedJobs();
           },
           error => {
             console.log(error);
             this.rowData = [];
+            this.setJobListWithoutAssignedJobs();
           }
         );
       } else {
         this.rowData = [];
+        this.setJobListWithoutAssignedJobs();
       }
     } catch (err) {
       this.rowData = [];
+      this.setJobListWithoutAssignedJobs();
     }
   }
 
   // get list of jobs by selected template
   getDataJobs() {
     try {
-      if (this.activeElement.templateId.length > 0) {
+      const jobIds = this.getJobIds();
+      if (this.activeElement.templateId && jobIds.length > 0) {
         // get list of ids from service enerdat
-        // TODO only sample
-        const params = ['DF4626B5-C057-44CE-B32C-14247BD27EA0', '96289ED8-194F-4283-9A27-934AE935EB20'];
-
-        this.serviceJob.getSchedulerJobsListByJobId(params).subscribe(
+        this.serviceJob.getSchedulerJobsListByJobId(jobIds).subscribe(
           jobs => {
             this.rowDataJobs = jobs;
           },
@@ -391,7 +403,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.rowData.splice(0, 0, {
       autoTemplateRuleId: 'new',
       propertyName: '',
-      propertyValue: ''
+      propertyValue: '',
+      jobIds: []
     });
 
     this.rowData = [...this.rowData];
@@ -416,12 +429,13 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     if (this.form != null && this.form.get('ruleId').value.localeCompare('new') === 0) {
       const values = this.fillDataNewRule();
       request = this.serviceRepository.createAutoTemplateRule(values);
-      successMessage = 'Rule was added successfully';
+      successMessage = this.i18n('Rule was added successfully');
     } else {
       const values = this.fillDataEditRule();
       request = this.serviceRepository.updateAutoTemplateRule(values);
-      successMessage = 'Rule was updated successfully';
+      successMessage = this.i18n('Rule was updated successfully');
     }
+
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.getData();
@@ -438,7 +452,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const formData: Rule = {
       propertyName: this.form.get('propertyName').value,
       propertyValue: this.form.get('propertyValue').value,
-      templateId: this.form.get('templateId').value
+      templateId: this.form.get('templateId').value,
+      jobIds: this.getJobIds()
     };
 
     return formData;
@@ -448,10 +463,19 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const formData: AutoTemplateRule = {
       propertyName: this.form.get('propertyName').value,
       propertyValue: this.form.get('propertyValue').value,
-      autoTemplateRuleId: this.form.get('ruleId').value
+      autoTemplateRuleId: this.form.get('ruleId').value,
+      jobIds: this.getJobIds()
     };
 
     return formData;
+  }
+
+  getJobIds(): string[] {
+    if (!this.rowData || this.rowData.length === 0) {
+      return [];
+    }
+
+    return [...new Set(this.rowData[0].jobIds)];
   }
 
   editForm(id: string, rowIndex: number) {
@@ -491,8 +515,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         // on close (CONFIRM)
         response.subscribe(
           value => {
-            this.getData();
+            // this.getData();
             this.toast.successToast(this.i18n(`Rule deleted!`));
+            if (!this.rowData || this.rowData.length === 0) {
+              this.rowDataJobs = [];
+            }
           },
           e => {
             this.toast.errorToast(this.i18n(`Server error!`));
@@ -517,31 +544,44 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     );*/
   }
 
-  removeForm(id: string) {
+  removeForm(jobId: string) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    let response: Observable<any> = new Observable();
     const operation = this.i18n('Remove');
-    response = this.serviceRepository.deleteAutoTemplateRule(id);
+    // response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
     component.modalTitle = this.i18n('Confirm remove');
     component.modalBody = this.i18n('Do you want to remove job from template?');
 
     modalRef.result.then(
       data => {
-        // on close (CONFIRM)
-        response.subscribe(
-          value => {
-            this.getData();
-            this.toast.successToast(this.i18n(`Job removed!`));
-          },
-          e => {
-            this.toast.errorToast(this.i18n(`Server error!`));
-          }
-        );
+        this.removeJobIdFromAllRules(jobId);
       },
-      reason => {
+      () => {
         // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  removeJobIdFromAllRules(jobId: string) {
+    const batch: Observable<any>[] = [];
+
+    for (const rule of this.rowData) {
+      const jobIdLowerCase = jobId.toLowerCase();
+      rule.jobIds = rule.jobIds.filter(j => j.toLowerCase() !== jobIdLowerCase);
+
+      batch.push(this.serviceRepository.updateAutoTemplateRule(rule));
+    }
+
+    const joinedObservables = forkJoin(batch);
+    joinedObservables.subscribe(
+      () => {
+        this.getDataJobs();
+        this.setJobListWithoutAssignedJobs();
+        this.toast.infoToast(this.i18n('Job successfully removed from all rules.'));
+      },
+      err => {
+        this.toast.errorToast(this.i18n('Failed to remove job from all rules.'));
       }
     );
   }
@@ -551,7 +591,43 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.gridApi.resetRowHeights();
   }
 
-  addJob() {}
+  addJob() {
+    const selectedJob: Codelist<string> = this.form.get('selectedJob').value;
+
+    if (!selectedJob || !selectedJob.id) {
+      this.toast.errorToast('Select a job to add.');
+    }
+
+    this.addJobIdToAllRules(selectedJob.id);
+  }
+
+  addJobIdToAllRules(jobId: string) {
+    const batch: Observable<any>[] = [];
+
+    for (const rule of this.rowData) {
+      if (!rule.jobIds) {
+        rule.jobIds = [];
+      }
+      rule.jobIds.push(jobId);
+
+      batch.push(this.serviceRepository.updateAutoTemplateRule(rule));
+    }
+
+    const joinedObservables = forkJoin(batch);
+    joinedObservables.subscribe(
+      () => {
+        this.toast.infoToast(this.i18n('Job successfully added to all rules.'));
+
+        // TODO replace this with this.getData();
+        this.setJobListWithoutAssignedJobs();
+
+        this.getDataJobs();
+      },
+      err => {
+        this.toast.errorToast(this.i18n('Failed to add job to all rules.'));
+      }
+    );
+  }
 
   cellMouseOver(event) {
     this.event.eventEmitterRowMouseOver.emit(event.rowIndex);

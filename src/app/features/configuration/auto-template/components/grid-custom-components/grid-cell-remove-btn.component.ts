@@ -10,12 +10,14 @@ import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templa
   templateUrl: './grid-cell-remove-btn.component.html'
 })
 export class GridCellRemoveBtnComponent implements ICellRendererAngularComp, OnDestroy {
+  private serviceSubscriptionRowMouseOver: Subscription;
+  private serviceSubscriptionRowMouseOut: Subscription;
+  private jobId = '';
+
   public params: any;
   public gridApi: GridApi;
   public hideEditDelete = false;
   private serviceSubscription: Subscription;
-  private serviceSubscriptionRowMouseOver: Subscription;
-  private serviceSubscriptionRowMouseOut: Subscription;
   public isRowMouseOver = false;
   public rowIndex = -1;
 
@@ -52,6 +54,7 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp, OnD
     }
 
     this.rowIndex = params.rowIndex;
+    this.jobId = params.data.id;
   }
 
   // called when the cell is refreshed
@@ -61,7 +64,7 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp, OnD
 
   // action delete
   removeItem(params: any) {
-    this.params.context.componentParent.removeForm(params.data.autoTemplateRuleId);
+    this.params.context.componentParent.removeForm(this.jobId);
   }
 
   // set tooltip text

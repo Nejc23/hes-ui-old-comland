@@ -17,12 +17,14 @@ export class AutoTemplatesRulesListInterceptor {
           {
             autoTemplateRuleId: '99434-434-5532-1245-6frw4434455',
             propertyName: '1.0.0.2.3.3',
-            propertyValue: 'regex 5'
+            propertyValue: 'regex 5',
+            jobIds: ['ff11d571-8ff7-4c1a-aaa2-61c6bfdd2383', 'b8342f41-4131-4e43-8ea7-71da78636420']
           },
           {
             autoTemplateRuleId: 'mi43455-4443-434-5532-1245-6frw4434455',
             propertyName: '1.0.2.2.3.255',
-            propertyValue: 'regex 11'
+            propertyValue: 'regex 11',
+            jobIds: ['ff11d571-8ff7-4c1a-aaa2-61c6bfdd2383', 'b8342f41-4131-4e43-8ea7-71da78636420']
           }
         ]
       },
@@ -32,7 +34,8 @@ export class AutoTemplatesRulesListInterceptor {
           {
             autoTemplateRuleId: '111111-434-5532-1245-9494949494',
             propertyName: '12.0.223.2.3.233',
-            propertyValue: 'regex 9'
+            propertyValue: 'regex 9',
+            jobIds: []
           }
         ]
       },
@@ -42,7 +45,8 @@ export class AutoTemplatesRulesListInterceptor {
           {
             autoTemplateRuleId: '33444-434-5532-1245-44444',
             propertyName: '8.0.20.2.39.20',
-            propertyValue: 'regex 59'
+            propertyValue: 'regex 59',
+            jobIds: ['ff11d571-8ff7-4c1a-aaa2-61c6bfdd2383', 'b8342f41-4131-4e43-8ea7-71da78636420']
           }
         ]
       }
