@@ -75,7 +75,7 @@ export class SchedulerActiveJobsComponent implements OnInit {
 
   // set momemnt text (last communication) out of date and time
   setMomentNextRun(time: string): string {
-    return moment(time).fromNow();
+    return time != null && time.length > 0 ? moment(time).fromNow() : this.i18n('N/A');
   }
 
   getShowAllText(): string {
