@@ -180,19 +180,16 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   rowEditingStopped($event) {
     this.gridApi.resetRowHeights();
     // this.event.edit(1);
-    // if ($event.data.autoTemplateRuleId === 'new') {
-    //   this.rowData.forEach(element => {
-    //     const index = element.rules
-    //       .map(x => {
-    //         return x.autoTemplateRuleId;
-    //       })
-    //       .indexOf('new');
-    //     if (index > -1) {
-    //       element.rules.splice(index, 1);
-    //       this.rowData = [...this.rowData];
-    //     }
-    //   });
-    // }
+    console.log('event', $event);
+    if ($event && $event.data && $event.data.autoTemplateRuleId === 'new') {
+      const index = this.rowData.map(x => x.autoTemplateRuleId).indexOf('new');
+      if (index > -1) {
+        this.rowData.splice(index, 1);
+
+        // reset grid
+        this.gridApi.setRowData(this.rowData);
+      }
+    }
   }
 
   // private setFrameworkComponentsDetail() {
@@ -236,7 +233,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     window.onresize = () => {
       this.gridApiJobs.sizeColumnsToFit();
     };
-    this.getDataJobs();
   }
 
   onSelect(val) {
@@ -247,7 +243,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.rowDataJobs = [];
 
     this.getData();
-    this.getDataJobs();
   }
 
   ngOnInit() {
@@ -267,14 +262,16 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   setJobListWithoutAssignedJobs() {
-    const jobIds = this.getJobIds();
-    this.jobList = this.allJobList
-      .filter(j => {
-        return jobIds.indexOf(j.id) < 0;
-      })
-      .sort((j1, j2) => (j1.value > j2.value ? 1 : j2.value > j1.value ? -1 : 0));
+    if (this.allJobList) {
+      const jobIds = this.getJobIds();
+      this.jobList = this.allJobList
+        .filter(j => {
+          return jobIds.indexOf(j.id) < 0;
+        })
+        .sort((j1, j2) => (j1.value > j2.value ? 1 : j2.value > j1.value ? -1 : 0));
 
-    this.form.get('selectedJob').setValue(null);
+      this.form.get('selectedJob').setValue(null);
+    }
   }
 
   getData() {
@@ -283,7 +280,9 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         this.serviceRepository.getAutoTemplateRulesForTemplateId(this.activeElement.templateId).subscribe(
           template => {
             this.rowData = template.autoTemplateRules;
+            this.gridApi.setRowData(this.rowData);
             this.setJobListWithoutAssignedJobs();
+            this.getDataJobs();
           },
           error => {
             console.log(error);
@@ -310,17 +309,21 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         this.serviceJob.getSchedulerJobsListByJobId(jobIds).subscribe(
           jobs => {
             this.rowDataJobs = jobs;
+            this.gridApiJobs.setRowData(this.rowDataJobs);
           },
           error => {
             console.log(error);
             this.rowDataJobs = [];
+            this.gridApiJobs.setRowData(this.rowDataJobs);
           }
         );
       } else {
         this.rowDataJobs = [];
+        this.gridApiJobs.setRowData(this.rowDataJobs);
       }
     } catch (err) {
       this.rowDataJobs = [];
+      this.gridApiJobs.setRowData(this.rowDataJobs);
     }
   }
 
@@ -385,7 +388,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   addNewRuleItem() {
     // if not new row is added jet add new else return
-
     let alreadyNewRow = false;
     this.rowData.forEach(element => {
       if (!alreadyNewRow) {
@@ -407,7 +409,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       jobIds: []
     });
 
-    this.rowData = [...this.rowData];
+    this.gridApi.setRowData(this.rowData);
 
     // alert('Parent Component Method from ' + templateId + '!');
     setTimeout(() => {
@@ -515,11 +517,12 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         // on close (CONFIRM)
         response.subscribe(
           value => {
-            // this.getData();
+            this.getData();
+
+            // refresh grid
+            this.gridApiJobs.setRowData(this.rowDataJobs);
+
             this.toast.successToast(this.i18n(`Rule deleted!`));
-            if (!this.rowData || this.rowData.length === 0) {
-              this.rowDataJobs = [];
-            }
           },
           e => {
             this.toast.errorToast(this.i18n(`Server error!`));
@@ -551,7 +554,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     // response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
     component.modalTitle = this.i18n('Confirm remove');
-    component.modalBody = this.i18n('Do you want to remove job from template?');
+    component.modalBody = this.i18n('Do you want to remove job from all rules?');
 
     modalRef.result.then(
       data => {
@@ -576,8 +579,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const joinedObservables = forkJoin(batch);
     joinedObservables.subscribe(
       () => {
-        this.getDataJobs();
-        this.setJobListWithoutAssignedJobs();
+        this.getData();
         this.toast.infoToast(this.i18n('Job successfully removed from all rules.'));
       },
       err => {
@@ -618,10 +620,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       () => {
         this.toast.infoToast(this.i18n('Job successfully added to all rules.'));
 
-        // TODO replace this with this.getData();
-        this.setJobListWithoutAssignedJobs();
-
-        this.getDataJobs();
+        this.getData();
       },
       err => {
         this.toast.errorToast(this.i18n('Failed to add job to all rules.'));
