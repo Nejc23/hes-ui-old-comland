@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, of } from 'rxjs';
@@ -13,11 +13,11 @@ import { CodelistHelperService } from 'src/app/core/repository/services/codelist
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 
 @Component({
-  selector: 'app-grid-custom-filter',
-  templateUrl: './grid-custom-filter.component.html'
+  selector: 'app-dc-filter',
+  templateUrl: './dc-filter.component.html'
 })
-export class GridCustomFilterComponent implements IToolPanel {
-  private params: IToolPanelParams;
+export class DcFilterComponent implements OnInit {
+  @Output() filterChange = new EventEmitter();
 
   sessionNameForGridFilter = 'grdLayoutDCU';
   sessionNameForGridState = 'grdStateDCU';
@@ -55,9 +55,7 @@ export class GridCustomFilterComponent implements IToolPanel {
   }
 
   // called on init
-  agInit(params: IToolPanelParams): void {
-    this.params = params;
-
+  ngOnInit(): void {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuFilters$ = of([]); // this.dcuService.getDcuLayout();  // TODO uncomment when implemented
@@ -72,12 +70,11 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.dcuTags$ = of([]); // this.codelistService.dcuTagCodelist(); // TODO uncomment when implemented
     this.dcuTags$.subscribe(y => (this.dcuTags = y));
 
-    this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
+    //this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
   }
 
   doFillData() {
     // todo change filter outside of grid ???
-    console.log('model changed');
     this.fillformFromSession(this.data);
   }
 
@@ -172,7 +169,8 @@ export class GridCustomFilterComponent implements IToolPanel {
     this.doFillData();
 
     // close tool-panel
-    this.params.api.closeToolPanel();
+    // this.params.api.closeToolPanel();
+    this.filterChange.emit();
   }
 
   applyButtonClicked() {
@@ -208,8 +206,9 @@ export class GridCustomFilterComponent implements IToolPanel {
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 
+    this.filterChange.emit();
     // close tool-panel
-    this.params.api.closeToolPanel();
+    //this.params.api.closeToolPanel();
   }
 
   errorValidatorReadStatusComponents() {

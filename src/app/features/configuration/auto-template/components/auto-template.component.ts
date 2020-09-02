@@ -173,7 +173,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     };
   }
 
-  click() {
+  clickShowHideFilter() {
     this.hide = !this.hide;
   }
 

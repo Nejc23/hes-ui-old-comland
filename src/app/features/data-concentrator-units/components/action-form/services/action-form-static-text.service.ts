@@ -14,7 +14,7 @@ export class ActionFormStaticTextService {
   preventCloseDropDownWhenClickInsideMenu() {
     $('.dropdown-menu').on('click.bs.dropdown', e => {
       e.stopPropagation();
-      e.preventDefault();
+      //    e.preventDefault();
     });
   }
 

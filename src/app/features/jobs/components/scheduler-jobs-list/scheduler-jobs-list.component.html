@@ -1,37 +1,23 @@
-
 <div class="d-flex align-items-center mb-3">
-  <app-header-title [headerTitle]="headerTitle"></app-header-title>
+  <!--<app-header-title [headerTitle]="headerTitle"></app-header-title>-->
   <div class="dropdown">
-    <button class="btn btn-primary btn-round">
-      <i class="far fa-plus"></i>
+    <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->      
+      <i class="far fa-plus"></i> <span i18n>Add</span>
     </button>
     <div class="dropdown-content">
       <a href="javascript:void(0);" (click)="addJob()"><span i18n>Reading job</span></a>
       <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>
     </div>
   </div>
-  <app-breadcrumb class="ml-auto"></app-breadcrumb>
+  <!--<app-breadcrumb class="ml-auto"></app-breadcrumb>-->
 </div>
 
-<div class="row d-flex flex-nowrap justify-content-start">
-  <div class="col mx-3 border py-3 text-center border-primary">
-    <span i18n>Scheduled</span>
-    <span class="counter">{{totalCount}}</span>
-  </div>
-  <div class="col mx-3  py-3 text-center border-secondary">
-  <!--  <span i18n>Pending</span>
-    <span class="counter">10</span>-->
-  </div>
-
-  <div class="col mx-3  py-3 text-center border-secondary">
-    <!-- <span i18n>Running</span>
-    <span class="counter">0</span>-->
-  </div>
-  <div class="col mx-3  py-3 text-center border-secondary">
-    <!-- <span i18n>Finished</span>
-    <span class="counter">1000</span>-->
-  </div>
-</div>
+<nav class="nav nav-pills nav-justified">
+  <a class="nav-link active"><span i18n>Scheduled</span><span class="badge badge-pill badge-light ml-1">{{totalCount}}</span></a>
+  <!--<a class="nav-link">Pending</a>
+  <a class="nav-link">Running</a>
+  <a class="nav-link">Finished</a>-->
+</nav>
 
 <div class="d-flex justify-content-between align-items-center p-2 grid-actions my-3">
   <div>

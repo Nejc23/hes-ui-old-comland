@@ -10,7 +10,6 @@ import { GridCellNameComponent } from '../components/grid-custom-components/grid
 import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -22,6 +21,7 @@ import { GridCellIdNumberComponent } from '../components/grid-custom-components/
 import * as _ from 'lodash';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +37,8 @@ export class DataConcentratorUnitsGridService {
   constructor(
     private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {}
 
   /**
@@ -55,7 +56,7 @@ export class DataConcentratorUnitsGridService {
         checkboxSelection: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'id',
+        colId: 'concentratorId',
         headerTooltip: this.i18n('Select/deselect all')
       },
       {
@@ -190,7 +191,6 @@ export class DataConcentratorUnitsGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellLastCommunicationComponent: GridCellLastCommunicationComponent,
       gridCellTagsComponent: GridCellTagsComponent,
-      gridCustomFilterComponent: GridCustomFilterComponent,
       gridCellIpComponent: GridCellIpComponent,
       gridCellVendorComponent: GridCellVendorComponent,
       gridCellTypeComponent: GridCellTypeComponent,
@@ -216,24 +216,14 @@ export class DataConcentratorUnitsGridService {
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
-      onSortChanged: this.onSortChanged
+      onSortChanged: this.onSortChanged,
+      onColumnVisible: this.onColumnVisible
     };
   }
 
-  public setSideBar() {
+  /*public setSideBar() {
     return {
       toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
         {
           id: 'columns',
           labelDefault: 'Columns',
@@ -252,7 +242,7 @@ export class DataConcentratorUnitsGridService {
         }
       ]
     };
-  }
+  }*/
 
   public onColumnVisibility(params) {
     // TODO change to different store
@@ -268,6 +258,11 @@ export class DataConcentratorUnitsGridService {
     console.log(params.api.getSortModel());
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
+
+  private onColumnVisible = params => {
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
   };
 
   public getCookieData() {
