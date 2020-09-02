@@ -23,12 +23,18 @@
 </div>
 
 -->
-<div class="container d-flex align-items-center actions-button-cell">
-  <div class="dropdown3">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Dropdown button
+<div class="d-flex grid2">
+  <div class="btn-group">
+    <button 
+        type="button" class="btn btn-primary" (click)="editItem(params)"><i class="far fa-edit"></i></button>
+    <button 
+        type="button" class="btn btn-primary" (click)="deleteItem(params)"><i class="far fa-trash"></i></button>
+  </div>
+  <div class="dropdown-ag-grid">
+    <button class="btn btn-primary" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      ...
     </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <div id="element" class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       <a class="dropdown-item" href="#">Action</a>
       <a class="dropdown-item" href="#">Another action</a>
       <a class="dropdown-item" href="#">Something else here</a>
@@ -47,6 +53,8 @@
       <a class="dropdown-item" href="#">Action</a>
       <a class="dropdown-item" href="#">Another action</a>
       <a class="dropdown-item" href="#">Something else here</a>
-    </div>
-  </div>
-  </div>
+    </div>  
+  </div>  
+
+
+</div>

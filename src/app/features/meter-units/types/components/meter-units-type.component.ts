@@ -652,6 +652,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.eventService.setIsSelectedAll(false);
   }
 
+  cellMouseOver(event) {
+    this.eventService.eventEmitterRowMouseOver.emit(event.rowIndex);
+  }
+
+  cellMouseOut(event) {
+    this.eventService.eventEmitterRowMouseOut.emit(event.rowIndex);
+  }
+
   // TODO
   // tsg button click
   onTag() {

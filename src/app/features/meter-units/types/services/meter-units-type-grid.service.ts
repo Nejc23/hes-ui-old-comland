@@ -294,13 +294,13 @@ export class MeterUnitsTypeGridService {
         cellRenderer: 'gridCellJobStatusComponent',
         headerTooltip: this.i18n('Job status'),
         resizable: false
-      }
-      /* {
+      },
+      {
         field: 'id',
         pinned: 'right',
-        width: 120,
-        minWidth: 120,
-        maxWidth: 120,
+        width: 180,
+        minWidth: 180,
+        maxWidth: 180,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,
@@ -310,8 +310,8 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRendererFramework: GridCellActionsComponent,
         headerName: '',
-        // cellClass: "actions-button-cell"
-      }*/
+        cellClass: 'actions-button-cell'
+      }
     ];
   }
 
