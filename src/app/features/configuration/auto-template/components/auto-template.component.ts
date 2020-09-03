@@ -202,15 +202,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   createForm(): FormGroup {
     return this.formBuilder.group({
       ['ruleId']: ['', [Validators.required]],
-      ['propertyName']: [
-        '',
-        [
-          Validators.required,
-          Validators.pattern(
-            '^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
-          )
-        ]
-      ],
+      ['propertyName']: ['', [Validators.required]],
       ['propertyValue']: ['', [Validators.required]],
       ['templateId']: [0],
       ['selectedJob']: [null, null]
