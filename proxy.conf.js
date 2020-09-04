@@ -8,28 +8,28 @@ const PROXY_CONFIG = [
         "/api/templating",
         "/api/file-storage"
       ],
-      target: "http://89.212.201.202:54322",
+      target: "http://localhost:54322",
       secure: false
   },
   {
     context: [
       "/api/device-inventory-ui",
     ],
-    target: "http://10.20.8.49:5013",
+    target: "http://localhost:5013",
     secure: false
   },
   {
     context: [
       "/api/concentrator-inventory-ui",
     ],
-    target: "http://10.20.8.49:5012",
+    target: "http://localhost:5012",
     secure: false
   },
   {
     context: [
       "/api/scheduler",
     ],
-    target: "http://10.20.8.49:5009",
+    target: "http://localhost:5009",
     secure: false
   },
   {
