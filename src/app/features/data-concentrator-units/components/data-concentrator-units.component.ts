@@ -466,9 +466,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
     if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      params.node.setSelected(true);
+      // params.node.setSelected(true);
+      console.log('onRowSelect() params', params);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludeRows(params.node);
+    } else {
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
     }
   }
 
