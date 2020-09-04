@@ -15,21 +15,21 @@ const PROXY_CONFIG = [
     context: [
       "/api/device-inventory-ui",
     ],
-    target: "http://localhost:5013",
+    target: "http://10.20.8.49:5013",
     secure: false
   },
   {
     context: [
       "/api/concentrator-inventory-ui",
     ],
-    target: "http://localhost:5012",
+    target: "http://10.20.8.49:5012",
     secure: false
   },
   {
     context: [
       "/api/scheduler",
     ],
-    target: "http://localhost:5009",
+    target: "http://10.20.8.49:5009",
     secure: false
   },
   {

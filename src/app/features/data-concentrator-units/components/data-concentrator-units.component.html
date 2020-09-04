@@ -26,7 +26,7 @@
               ({{totalCount}})</a></u></strong></small>
     </div>
     <div class="mr-3" *ngIf="checkSelectedAll()">
-      <small class="text-white"><span i18n>All ({{totalCount}}) items selected</span> &middot;
+      <small class="text-white"><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
         <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
                 selected</span></a></u></strong></small>
     </div>

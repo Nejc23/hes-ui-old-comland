@@ -1,3 +1,4 @@
+import { GridSearchParams, GridFilterParams } from './../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { Component, OnInit, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -24,6 +25,9 @@ export class PlcMeterTouConfigComponent implements OnInit {
   configRequiredText = this.i18n('Required field');
   messageServerError = this.i18n(`Server error!`);
   deviceIdsParam = [];
+  filterParam?: GridFilterParams;
+  searchParam?: GridSearchParams[];
+  excludeIdsParam?: string[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -62,7 +66,13 @@ export class PlcMeterTouConfigComponent implements OnInit {
     if (!this.noConfig) {
       this.form.get(this.touConfigProperty).setValue(selectedTouConfig);
       let response: Observable<any> = new Observable();
-      const paramsConf: RequestTOUData = { deviceIds: this.deviceIdsParam, timeOfUseId: selectedTouConfig };
+      const paramsConf: RequestTOUData = {
+        deviceIds: this.deviceIdsParam,
+        timeOfUseId: selectedTouConfig,
+        filter: this.filterParam,
+        search: this.searchParam,
+        excludeIds: this.excludeIdsParam
+      };
       console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
       response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
       response.subscribe(

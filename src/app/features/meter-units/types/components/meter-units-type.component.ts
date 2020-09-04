@@ -1,3 +1,4 @@
+import { PactWeb } from '@pact-foundation/pact-web';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -183,6 +184,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
           this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
+          this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
         }
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
@@ -289,6 +291,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
       this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
       this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
+      this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
       this.gridApi.onFilterChanged();
     }
   }
@@ -467,6 +470,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
+        this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+
         this.eventService.selectDeselectAll(false);
         this.eventService.setIsSelectedAll(false);
         this.gridApi.onFilterChanged();
@@ -576,12 +581,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     return this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
   }
 
-  // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.meterUnitsTypeGridService.setSessionSettingsSelectedRows(params.node);
     if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      // && !this.programmaticallySelectRow) {
-      params.node.setSelected(true);
+      this.meterUnitsTypeGridService.setSessionSettingsExcludedRows(params.node);
+    } else {
+      this.meterUnitsTypeGridService.setSessionSettingsSelectedRows(params.node);
     }
   }
 
@@ -594,8 +598,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (selectedAll) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
+        const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
         api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow) {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.id === node2.data.id)) {
             node2.setSelected(true);
           }
         });
@@ -692,12 +697,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    const deviceIdsParam = [];
-    const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
-    if (!selectedAll && selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
-    }
+    // const selectedRows = this.gridApi.getSelectedRows();
+    // const deviceIdsParam = [];
+    // const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
+    // if (!selectedAll && selectedRows && selectedRows.length > 0) {
+    //   selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+    // }
+
+    const params = this.getBulkRequestParam();
 
     const options: NgbModalOptions = {
       size: 'xl'
@@ -705,22 +712,20 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
     component.deviceFiltersAndSearch = {
-      id: deviceIdsParam,
-      search: this.requestModel.searchModel,
-      filter: this.requestModel.filterModel
+      id: params.deviceIds,
+      search: params.search,
+      filter: params.filter,
+      excludeIds: params.excludeIds
     };
     modalRef.result.then().catch(() => {});
   }
 
   bulkOperation(operation: MeterUnitsTypeEnum) {
     // if (this.authService.isTokenAvailable()) {
-    const selectedRows = this.gridApi.getSelectedRows();
-    const deviceIdsParam = [];
-    if (selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
-      console.log(`deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
-    }
-    let selectedText = `${deviceIdsParam.length} rows `;
+
+    const params = this.getBulkRequestParam();
+
+    let selectedText = `${this.getTotalCountWithoutExcluded().length} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = this.i18n('Confirm');
@@ -731,7 +736,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
     // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
-    const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
     let operationName = '';
     switch (operation) {
       case MeterUnitsTypeEnum.breakerStatus:
@@ -748,7 +752,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         operationName = this.i18n('Disconnect');
         break;
       case MeterUnitsTypeEnum.touConfig:
-        const paramsConf: RequestTOUData = { deviceIds: deviceIdsParam, timeOfUseId: '1' }; // TODO: timeOfUseId read form store?
+        const paramsConf: RequestTOUData = {
+          deviceIds: params.deviceIds,
+          filter: params.filter,
+          search: params.search,
+          excludeIds: params.excludeIds,
+          timeOfUseId: '1'
+        }; // TODO: timeOfUseId read form store?
+
         response = this.service.postMyGridTOUDevice(paramsConf);
         operationName = this.i18n('Configure TOU');
         selectedText = `${this.i18n('for')} ${selectedText}`;
@@ -795,6 +806,35 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }*/
   }
 
+  getBulkRequestParam(): RequestConnectDisconnectData {
+    const requestParam: RequestConnectDisconnectData = {
+      deviceIds: [],
+      filter: null,
+      search: null,
+      excludeIds: null
+    };
+
+    if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
+      const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
+
+      requestParam.filter = this.requestModel.filterModel;
+      requestParam.search = this.requestModel.searchModel;
+      requestParam.excludeIds = [];
+
+      excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
+
+      console.log(`excludeIdsParam = ${JSON.stringify(requestParam.excludeIds)}`);
+    } else {
+      const selectedRows = this.gridApi.getSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
+        selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
+        console.log(`deviceIdsParam = ${JSON.stringify(requestParam.deviceIds)}`);
+      }
+    }
+
+    return requestParam;
+  }
+
   onBreakerStatus() {
     this.bulkOperation(MeterUnitsTypeEnum.breakerStatus);
   }
@@ -816,15 +856,18 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onTou() {
-    // this.bulkOperation(MeterUnitsTypeEnum.touConfig);
-    const selectedRows = this.gridApi.getSelectedRows();
-    const deviceIdsParam = [];
-    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
     // TODO: ONLY FOR TESTING !
     // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
     // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+
+    const params = this.getBulkRequestParam();
+
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
-    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
@@ -840,15 +883,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // upgrade button click
   onUpgrade() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    const deviceIdsParam = [];
-    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
     // TODO: ONLY FOR TESTING !
     // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
     // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
+    const params = this.getBulkRequestParam();
+
     const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
-    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
+
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
@@ -935,4 +982,13 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // clearFilter() {
 
   // }
+
+  getTotalCountWithoutExcluded(): string {
+    const excludedRowsLength = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows().length;
+    if (excludedRowsLength === 0) {
+      return this.totalCount.toString();
+    } else {
+      return `${this.totalCount - excludedRowsLength} ${this.i18n('of')} ${this.totalCount}`;
+    }
+  }
 }

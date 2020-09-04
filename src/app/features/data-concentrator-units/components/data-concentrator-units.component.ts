@@ -113,6 +113,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
           this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+          this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
         }
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
@@ -208,12 +209,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
       this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
       this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
       this.gridApi.onFilterChanged();
     }
   }
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
+    console.log('grid is ready');
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
@@ -368,6 +371,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedFilter;
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
         this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -467,9 +471,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
     if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      // params.node.setSelected(true);
-      console.log('onRowSelect() params', params);
-      this.dataConcentratorUnitsGridService.setSessionSettingsExcludeRows(params.node);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows(params.node);
     } else {
       this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
     }
@@ -482,8 +484,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
+        const excludedRows = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows();
         api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow) {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.id === node2.data.id)) {
             node2.setSelected(true);
           }
         });
@@ -510,6 +513,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // click on the link "deselect all"
   deselectAll() {
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+    this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
     this.eventService.selectDeselectAll(-1); // -1 = deselect all
   }
@@ -562,6 +566,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+            this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
             this.eventService.selectDeselectAll(-1);
             this.gridApi.forEachNode(node => {
@@ -577,6 +582,16 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  getTotalCountWithoutExcluded(): string {
+    const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
+
+    if (excludedRowsLength === 0) {
+      return this.totalCount.toString();
+    } else {
+      return `${this.totalCount - excludedRowsLength} ${this.i18n('of')} ${this.totalCount}`;
+    }
   }
 
   addDcu() {
