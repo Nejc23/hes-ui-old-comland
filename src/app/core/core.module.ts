@@ -59,7 +59,7 @@ import { RoleService } from './permissions/services/role.service';
       multi: true
     }
     // fakeBaceknd
-    // , fakeBackendProvider
+    // fakeBackendProvider
   ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

@@ -1,0 +1,6 @@
+<div class="d-flex align-items-center row-actions">
+  <div *ngIf="isRowMouseOver" class="btn-group">
+      <button type="button" class="btn btn-primary" (click)="editJob(params)"><i class="far fa-edit"></i></button>
+      <button type="button" class="btn btn-primary" (click)="deleteJob(params)"><i class="far fa-trash"></i></button>
+  </div>
+</div>

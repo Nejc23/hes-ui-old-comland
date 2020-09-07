@@ -1,4 +1,4 @@
-import { addNewScheduleDevice } from './../../consts/jobs.const';
+import { addNewScheduleDevice, schedulerJobsListByJobId } from './../../consts/jobs.const';
 import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -12,7 +12,6 @@ import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface
 import { schedulerJobs, schedulerJobsList, executeJob, enableJob, schedulerActiveJobs } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { v4 as uuidv4 } from 'uuid';
-import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,6 +26,14 @@ export class JobsService {
 
   getSchedulerJobsListRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', schedulerJobsList, param);
+  }
+
+  getSchedulerJobsListByJobId(param: string[]): Observable<SchedulerJobsList[]> {
+    return this.repository.makeRequest(this.getSchedulerJobsListByJobIdRequest(param));
+  }
+
+  getSchedulerJobsListByJobIdRequest(param: string[]): HttpRequest<any> {
+    return new HttpRequest('POST', schedulerJobsListByJobId, param);
   }
 
   getSchedulerActiveJobsList(deviceId: string): Observable<SchedulerJobsList[]> {

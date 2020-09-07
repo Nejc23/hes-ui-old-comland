@@ -34,6 +34,7 @@ import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/sc
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -42,6 +43,7 @@ import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw
 export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   id = 0;
   private paramsSub: Subscription;
+  private subscription: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
   headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
@@ -61,6 +63,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   noData = false;
 
   meterTypes$: Codelist<number>[] = [];
+  public hideFilter = false;
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -123,7 +126,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private service: MyGridLinkService,
     private authService: AuthService,
     private toast: ToastNotificationService,
-    private agGridSharedFunctionsService: AgGridSharedFunctionsService
+    private agGridSharedFunctionsService: AgGridSharedFunctionsService,
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -188,6 +192,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     });
+
+    // subscribe to changes of columns visibility from other components
+    this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe(listOfVisibleColumns => {
+      gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
+    });
   }
 
   // form - rights
@@ -229,7 +238,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     // set grid columns
     this.columns = this.meterUnitsTypeGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
-    this.sideBar = this.meterUnitsTypeGridService.setSideBar();
+    // this.sideBar = this.meterUnitsTypeGridService.setSideBar(); // no sidebar anymore
 
     this.localeText = {
       // for side panel
@@ -258,6 +267,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     if (this.layoutChangeSubscription) {
       this.layoutChangeSubscription.unsubscribe();
+    }
+
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 
@@ -299,6 +312,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
 
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
@@ -434,7 +449,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   // on close tool panel reload filter model
-  toolPanelChanged(params) {
+  // no toolpanel anymore
+  /*toolPanelChanged(params) {
     if (params.source === undefined) {
       if (
         !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
@@ -473,7 +489,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.setFilterInfo();
       }
     }
-  }
+  }*/
 
   setSearch() {
     const search = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
@@ -557,6 +573,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.refreshGrid();
   }
 
+  reloadGrid() {
+    this.refreshGrid();
+  }
+
   // on change page in the grid
   onPaginationChange(params) {
     if (this.gridApi) {
@@ -632,6 +652,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.eventService.setIsSelectedAll(false);
   }
 
+  cellMouseOver(event) {
+    this.eventService.eventEmitterRowMouseOver.emit(event.rowIndex);
+  }
+
+  cellMouseOut(event) {
+    this.eventService.eventEmitterRowMouseOut.emit(event.rowIndex);
+  }
+
   // TODO
   // tsg button click
   onTag() {
@@ -692,6 +720,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
+    console.log('2121211121212122');
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
     const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
@@ -935,4 +964,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // clearFilter() {
 
   // }
+
+  clickShowHideFilter() {
+    this.hideFilter = !this.hideFilter;
+    this.gridColumnApi.autoSizeAllColumns();
+    window.onresize = () => {
+      this.gridApi.sizeColumnsToFit();
+    };
+  }
 }

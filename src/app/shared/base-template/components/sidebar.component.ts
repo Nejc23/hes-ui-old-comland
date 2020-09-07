@@ -1,12 +1,10 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import * as _ from 'lodash';
 import { filter } from 'rxjs/operators';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
-import { VERSION } from 'src/environments/version';
 import { PermissionsService } from '../../../core/permissions/services/permissions.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,16 +13,14 @@ import { environment } from 'src/environments/environment';
 })
 export class SidebarComponent implements OnInit {
   @Input() items: Array<SidebarItem> = [];
-  public version = '';
 
   constructor(private router: Router, public permissionsService: PermissionsService) {}
 
   ngOnInit() {
-    this.version = `${VERSION.version} - ${VERSION.hash}`;
     this.updateItems(this.items);
 
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
       this.updateItems(this.items);
     });
   }

@@ -5,28 +5,44 @@
 .sidebar {
   width: $sidebar-base-width;
   height: 100%;
-  z-index: 200;
+  z-index: 1040;
   position: fixed;
   overflow: visible;
-  margin-left: $sidebar-fixed-width;
-  padding-top: $spacer;
+  margin-top: 0;
 
-  .nav-item {
-    position: relative;
+  .navbar-nav {
+    overflow-y: auto;
 
-    &:last-child {
-      margin-bottom: $spacer;
-    }
+    .nav-item {
+      position: relative;
+      width: 100%;
 
-    .nav-link {
-      text-align: left;
-      padding: 0.5 * $spacer $spacer;
-      width: $sidebar-base-width;
-    }
-
-    &.active {
       .nav-link {
-        font-weight: $font-weight-bold;
+        text-align: left;
+        padding: 0.75 * $spacer $spacer;
+      }
+
+      .dropdown-menu {
+        padding: 0 0 0.375 * $spacer 0;
+        margin: 0;
+        border: 0;
+        box-shadow: none;
+
+        .nav-item {
+          padding-left: $spacer;
+
+          &:first-child .nav-link {
+            padding-top: 0.375 * $spacer;
+          }
+        }
+      }
+
+      &.open {
+        >a {
+          >.arrow i {
+            @include transform(rotate(90deg));
+          }
+        }
       }
     }
   }
@@ -35,18 +51,29 @@
     margin: 0 1rem 1rem;
   }
 
+  .brand {
+    height: $topbar-base-height;
+
+    .brand-logo {
+      max-height: 30px;
+      width: auto;
+    }
+
+    .brand-name img {
+      max-height: 30px;
+      width: auto;
+    }
+  }
+
   .sidebar-version {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    color: fade-out($white, 0.5);
+    padding: $spacer 0;
   }
 
   #sidebarToggle {
     left: calc(#{$sidebar-base-width} - (#{$input-height}/2));
-    z-index: 201;
+    z-index: 1041;
     display: block;
-
+    bottom: $spacer * 2;
   }
 
   /************ Sidebar Toggled ****************/
@@ -62,30 +89,57 @@
   // Sidebar Dark
   &.sidebar-dark {
 
+    //TODO
+
+
+  }
+
+  &.sidebar-light {
+    background-color: $gray-200;
+    border-right: $border-width solid lighten($color: $border-color, $amount: 8%);
+
     hr.sidebar-divider {
-      border-top: 1px solid fade-out($white, 0.85);
+      border-top: 1px solid $border-color;
+    }
+
+    .brand {
+      .brand-name {
+        color: $primary
+      }
     }
 
     .nav-item {
       .nav-link {
-        color: $gray-400;
+        color: $navbar-light-color;
+      }
 
-        &.active {
-          color: $nav-active;
+      &:hover,
+      &.dropdown.open {
+        background-color: $gray-300;
+
+        >.nav-link {
+          color: $navbar-light-hover-color;
         }
+      }
 
-        &:hover {
-          color: $gray-100;
-          background-color: lighten($color: $gray-800, $amount: 5%);
-        }
-
+      .dropdown-menu {
+        background-color: $gray-300;
       }
 
       &.active {
-        .nav-link {
-          color: $white;
+        >.nav-link {
+          color: $navbar-light-active-color;
+          font-weight: $font-weight-bold;
+
+          &:hover {
+            color: $link-hover-color;
+          }
         }
       }
+    }
+
+    .sidebar-version {
+      color: $navbar-light-color;
     }
 
     // Color the sidebar toggler
@@ -100,8 +154,9 @@
   }
 }
 
+
+
 /************* ANTIMATIONS *************/
 .sidebar {
   transition: width .35s ease;
 }
-

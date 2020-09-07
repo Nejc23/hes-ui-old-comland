@@ -40,7 +40,7 @@
       <div class="form-group" *ngIf="showMonthDays()">
         <label><span i18n>Days in month</span><sup> *</sup></label>
         <div class="d-flex flex-wrap">
-          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-primary' : 'btn-outline-primary'"
+          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i) ? 'btn-secondary' : 'btn-outline-secondary'"
             *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i)">
             <span>{{i+1}}</span>
           </button>
@@ -73,14 +73,12 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
-          i18n>Cancel</span></button>
+      <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
       <button *ngIf="step > 1" type="button" class="btn btn-secondary" (click)="next(-1)"> <i class="far fa-arrow-left"></i><span
           i18n>Previous</span></button>
 
       <div class="btn-group dropdown" *ngIf="step === 2">
-        <button type="submit" class="btn btn-primary" (click)="save(false)"><i class="far fa-save"></i><span
-            i18n>Save</span></button>
+        <button type="submit" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button>

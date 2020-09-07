@@ -1,43 +1,51 @@
-input[type=search]+.far.fa-search {
-  position: absolute;
-  right: .5rem;
-  top: 0;
-  height: $input-height;
-  line-height: $input-height;
-}
+input[type=search] {
+  background-color: $gray-300;
+  border-width: 0;
+  box-shadow: none;
 
-input[type=search]:focus+.far.fa-search,
-input[type=search]:hover+.far.fa-search {
-  display: none;
-}
+  +.far.fa-search {
+    position: absolute;
+    right: .5rem;
+    top: 0;
+    height: $input-height;
+    line-height: $input-height;
+  }
 
-.k-combobox {
-  .k-select {
-    background: none;
+  &:focus, &:hover {
+    background-color: darken($gray-300, 7.5%);
 
-    &:hover {
-      background: none;
-      color: $primary;
+    +.far.fa-search {
+      display: none;
     }
   }
-
-  > :hover .k-select, .k-state-hover .k-select {
-    background: none;
-  }
 }
 
-.k-multiselect-wrap {
-  .k-button {
-    background-image: none;
-    background-color: $gray-100;
-  }
-}
-
+/*
 .ng-invalid.ng-dirty > .k-dropdown-wrap {
   border-color: transparent;
 }
+*/
 
 .k-switch {
-  width: 6em;
   font-size: 7px !important;
+  width: 2.75rem !important;
+  border-width: 0 !important;
+
+  .k-switch-container {
+    width: 2.75rem !important;
+  }
+
+  &.k-switch-on {
+    .k-switch-handle {
+      left: calc(100% - 2em);
+    }
+
+    .k-switch-container {
+      background-color: $secondary;
+    }
+  }
+
+  &.k-switch-off .k-switch-container {
+    background-color: $gray-300;
+  }
 }

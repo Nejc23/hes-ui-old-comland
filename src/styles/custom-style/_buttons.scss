@@ -27,11 +27,7 @@
     color: $white;
   }
 
-  &.btn-secondary {
-    color: $gray-700;
-  }
-
-  i {
+/*  i {
     font-size: $icon-size;
     line-height: 21px;
   }
@@ -40,13 +36,13 @@
     font-size: $icon-size-sm;
     line-height: 18.375px;
   }
-
+*/
   &.btn-link {
-    color: $gray-700;
+    color: $primary;
     font-weight: $font-weight-bold;
   
     &:hover {
-      color: $primary;
+      color: darken($primary, 15%);
     }
   }
 }

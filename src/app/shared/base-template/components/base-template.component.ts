@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -9,15 +9,14 @@ import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
-import { Observable, of } from 'rxjs';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { FormGroup } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
-import { Route, ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-// import { JwtHelperService } from '@auth0/angular-jwt';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { brand } from 'src/environments/brand/default/brand';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-base-template',
@@ -53,10 +52,7 @@ export class BaseTemplateComponent implements OnInit {
   constructor(
     private sidebarService: SidebarService,
     private cookieService: CookieService,
-    @Inject(LOCALE_ID) private locale: string,
     public i18n: I18n,
-    //  private formBuilder: FormBuilder,
-    private router: Router,
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService,
@@ -75,13 +71,14 @@ export class BaseTemplateComponent implements OnInit {
     this.getScreenSize();
     // this.form = this.createForm();
 
-    this.router.events.subscribe(event => {
+    /*this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         const currentUrl = event.urlAfterRedirects;
         if (currentUrl.includes('/meterUnits')) {
           this.submenu = 1;
         } else if (currentUrl.includes('/configuration')) {
           this.submenu = 2;
+         
         } else {
           this.submenu = 0;
         }
@@ -91,7 +88,7 @@ export class BaseTemplateComponent implements OnInit {
         //   });
         // }
       }
-    });
+    });*/
   }
 
   /*  reloadPage(selected: Codelist<number>) {
@@ -108,7 +105,7 @@ export class BaseTemplateComponent implements OnInit {
   }*/
 
   @HostListener('window:resize', ['$event'])
-  getScreenSize(event?) {
+  getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
     // console.log(`SCREEN SIZE = ${this.screenWidth}, ${this.screenHeight}`);
@@ -118,13 +115,14 @@ export class BaseTemplateComponent implements OnInit {
       this.sidebarItems = this.sidebarService.getSidebarItems();
     }
     // fill submenu for meter units
-    this.fillMeterUnits();
+    //     this.fillMeterUnits();
     // fill submenu for configuration
-    this.fillConfiguration();
+    //   this.fillConfiguration();
   }
 
   fillMeterUnits() {
-    const sidebarItems = this.sidebarService.getSidebarMeterUnitsItems();
+    const sidebarItems = this.sidebarService.getSidebarItems();
+    console.log(sidebarItems);
     this.codeList.meterUnitTypeCodelist().subscribe(list => {
       if (list && list.length > 0) {
         list.forEach(element => {
@@ -134,7 +132,8 @@ export class BaseTemplateComponent implements OnInit {
             hasChildren: false,
             children: []
           };
-          sidebarItems.push(newElement);
+          sidebarItems[1].children.push(newElement);
+          sidebarItems[1].hasChildren = true;
         });
 
         this.sidebarMeterUnitsItems = sidebarItems;
@@ -142,11 +141,12 @@ export class BaseTemplateComponent implements OnInit {
     });
   }
 
-  fillConfiguration() {
+  /* fillConfiguration() {
     this.sidebarConfigurationItems = this.sidebarService.getSidebarConfigurationItems();
-  }
+  }*/
 
   ngOnInit() {
+    this.fillMeterUnits();
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
 
@@ -171,7 +171,7 @@ export class BaseTemplateComponent implements OnInit {
   }*/
 
   @HostListener('click', ['$event.target'])
-  onClick(btn) {
+  onClick() {
     this.cookieService.set(
       config.authTimeStamp,
       moment()
@@ -188,6 +188,18 @@ export class BaseTemplateComponent implements OnInit {
 
   mouseLeavesNav() {
     this.isMouseOverNav = false;
+  }
+
+  getSmallLogoUrl() {
+    return brand.navFixedLogoUrl;
+  }
+
+  getMenuMainLogoUrl() {
+    return brand.navFixedMenuMainUrl;
+  }
+
+  getAppTitle() {
+    return brand.appTitle;
   }
 
   /*  get companyIdProperty() {

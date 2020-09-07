@@ -54,6 +54,7 @@ import { GridCellNameComponent } from './ag-grid/components/grid-cell-name.compo
 import { GridCellIdNumberComponent } from './ag-grid/components/grid-cell-id-number.component';
 import { GridCellIpComponent } from './ag-grid/components/grid-cell-ip.component';
 import { AgGridSharedFunctionsService } from './ag-grid/services/ag-grid-shared-functions.service';
+import { TopFixedNavComponent } from './base-template/components/top-fixed-nav.component';
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
@@ -157,6 +158,7 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common
     HideIfActionUnauthorizedDirective,
     NumberOnlyDirective,
     SideFixedNavComponent,
+    TopFixedNavComponent,
     Page404Component,
     AutoRefreshComponent,
     IdentityErrorComponent,

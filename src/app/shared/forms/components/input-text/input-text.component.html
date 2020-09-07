@@ -7,7 +7,7 @@
 
   <div class="d-flex">
     <input [name]="property" [placeholder]="placeholder"  [type]="inputType" class="form-control" [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
-    <span class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
+    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
   </div>
 
   <!--Loop through errors-->

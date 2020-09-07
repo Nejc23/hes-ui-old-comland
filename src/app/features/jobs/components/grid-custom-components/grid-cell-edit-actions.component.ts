@@ -1,8 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
@@ -14,19 +15,49 @@ import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 
 @Component({
-  selector: 'app-grid-cell-edit-btn',
-  templateUrl: './grid-cell-edit-btn.component.html'
+  selector: 'app-grid-cell-edit-actions',
+  templateUrl: './grid-cell-edit-actions.component.html'
 })
-export class GridCellEditComponent implements ICellRendererAngularComp {
+export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
+
+  private rowMouseOverSubscription: Subscription;
+  private rowMouseOutSubscription: Subscription;
+
+  messageDeleteStarted = this.i18n(`Scheduler job deleted!`);
+  messageDeleteServerError = this.i18n(`Server error!`);
+
+  public isRowMouseOver = false;
 
   constructor(
     private i18n: I18n,
     private modalService: ModalService,
     private toast: ToastNotificationService,
-    private service: MeterUnitsService,
-    private eventService: SchedulerJobsEventEmitterService
-  ) {}
+    private service: JobsService,
+    private eventService: SchedulerJobsEventEmitterService,
+    private cdRef: ChangeDetectorRef
+  ) {
+    this.rowMouseOverSubscription = this.eventService.eventEmitterRowMouseOver.subscribe({
+      next: index => {
+        if (index === this.params.rowIndex) {
+          this.isRowMouseOver = true;
+          this.cdRef.detectChanges();
+        } else {
+          this.isRowMouseOver = false; // prevent active buttons on multiple rows
+          this.cdRef.detectChanges();
+        }
+      }
+    });
+
+    this.rowMouseOutSubscription = this.eventService.eventEmitterRowMouseOut.subscribe({
+      next: index => {
+        if (index === this.params.rowIndex) {
+          this.isRowMouseOver = false;
+          this.cdRef.detectChanges();
+        }
+      }
+    });
+  }
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -83,8 +114,34 @@ export class GridCellEditComponent implements ICellRendererAngularComp {
     );
   }
 
-  // set tooltip text
-  setToolTip() {
-    return this.i18n('Edit job');
+  deleteJob(params: any) {
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    let response: Observable<any> = new Observable();
+    const operation = this.i18n('Delete');
+    response = this.service.deleteSchedulerJob(params.node.data.id);
+    component.btnConfirmText = operation;
+    component.modalTitle = this.i18n('Confirm delete');
+    component.modalBody = this.i18n('Do you want to delete scheduler job?');
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        response.subscribe(
+          value => {
+            console.log(params);
+            const gridApi = this.params.api as GridApi;
+            gridApi.purgeServerSideCache([]);
+            this.toast.successToast(this.messageDeleteStarted);
+          },
+          e => {
+            this.toast.errorToast(this.messageDeleteServerError);
+          }
+        );
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 }

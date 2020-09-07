@@ -10,7 +10,6 @@
 
       <div class="d-flex justify-content-end">
         <button type="button" class="btn btn-primary" (click)="save(true)">
-          <i class="far fa-save"></i>
           <span *ngIf="sessionLayout && sessionLayout.id > 0" i18n>Save As New</span>
           <span *ngIf="!sessionLayout || sessionLayout.id < 1" i18n>Save</span>
         </button>

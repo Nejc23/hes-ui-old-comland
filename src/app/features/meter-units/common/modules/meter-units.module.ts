@@ -12,7 +12,6 @@ import { GridCellStatusComponent } from '../../types/components/grid-custom-comp
 import { GridCellReadStatusComponent } from '../../types/components/grid-custom-components/grid-cell-read-status.component';
 import { GridCellNameComponent } from '../../types/components/grid-custom-components/grid-cell-name.component';
 import { GridCellTagsComponent } from '../../types/components/grid-custom-components/grid-cell-tags.component';
-import { GridCustomFilterComponent } from '../../types/components/grid-custom-components/grid-custom-filter.component';
 import { GridCellVendorComponent } from '../../types/components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellParentComponent } from '../../types/components/grid-custom-components/grid-cell-parent.component';
 import { GridCellModuleIdComponent } from '../../types/components/grid-custom-components/grid-cell-module-id.component';
@@ -23,6 +22,8 @@ import { GridCellBreakerStateComponent } from '../../types/components/grid-custo
 import { GridCellInfoOfChildComponent } from '../../types/components/grid-custom-components/grid-cell-info-of-child.component';
 import { GridCellIconComponent } from '../../types/components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../../types/components/grid-custom-components/grid-cell-job-status.component';
+import { MeterUnitFilterComponent } from '../../types/components/filter-form/meter-unit-filter.component';
+import { GridCellActionsComponent } from '../../types/components/grid-custom-components/grid-cell-actions.component';
 
 @NgModule({
   entryComponents: [],
@@ -37,7 +38,6 @@ import { GridCellJobStatusComponent } from '../../types/components/grid-custom-c
     GridCellNameComponent,
     GridCellMeterIdComponent,
     GridCellTagsComponent,
-    GridCustomFilterComponent,
     GridCellParentComponent,
     GridCellVendorComponent,
     GridCellModuleIdComponent,
@@ -47,7 +47,9 @@ import { GridCellJobStatusComponent } from '../../types/components/grid-custom-c
     GridCellBreakerStateComponent,
     GridCellInfoOfChildComponent,
     GridCellIconComponent,
-    GridCellJobStatusComponent
+    GridCellJobStatusComponent,
+    GridCellActionsComponent,
+    MeterUnitFilterComponent
   ],
   imports: [
     SharedModule,
@@ -60,7 +62,6 @@ import { GridCellJobStatusComponent } from '../../types/components/grid-custom-c
       GridCellNameComponent,
       GridCellMeterIdComponent,
       GridCellTagsComponent,
-      GridCustomFilterComponent,
       GridCellParentComponent,
       GridCellVendorComponent,
       GridCellModuleIdComponent,
@@ -70,7 +71,8 @@ import { GridCellJobStatusComponent } from '../../types/components/grid-custom-c
       GridCellBreakerStateComponent,
       GridCellInfoOfChildComponent,
       GridCellIconComponent,
-      GridCellJobStatusComponent
+      GridCellJobStatusComponent,
+      GridCellActionsComponent
     ])
   ]
 })

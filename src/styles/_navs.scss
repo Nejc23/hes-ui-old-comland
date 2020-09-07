@@ -1,2 +1,28 @@
+
+//--------------------------------------------------
+// [Transition]
+//--------------------------------------------------
+
+// eg: @include transition(all 0.4s ease-in-out); 
+@mixin transition($transition) {
+    transition: $transition;
+    -webkit-transition: $transition;
+    -moz-transition: $transition;
+    -o-transition: $transition;
+    -ms-transition: $transition;
+}
+//--------------------------------------------------
+// [Transform]
+//--------------------------------------------------
+
+// usage : @include transform(translateX(-50%) translateY(-50%));
+@mixin transform($transforms) {
+    transform: $transforms;
+    -webkit-transform: $transforms;
+    -moz-transform: $transforms;
+    -o-transform: $transforms;
+    -ms-transform: $transforms;
+}
+
 @import "navs/sidebar.scss";
 @import "navs/navbar.scss";

@@ -146,7 +146,7 @@ export class SchedulerJobsInterceptor {
   }
 
   static canInterceptSchedulerJobsList(request: HttpRequest<any>): boolean {
-    return new RegExp(`${schedulerJobsList}`).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(`${schedulerJobsList}$`).test(request.url) && request.method.endsWith('POST');
   }
 
   static interceptSchedulerActiveJobsList(request: HttpRequest<any>): Observable<HttpEvent<SchedulerJobsList[]>> {

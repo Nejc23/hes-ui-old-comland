@@ -1,4 +1,4 @@
-<div class="container-fluid pt-3 h-100 border-bottom">
+<div class="pt-3 h-100">
   <form [formGroup]="form">
     <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
       <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
@@ -36,9 +36,18 @@
 
       <app-input-switch label="Show deleted Data Concentrator Units" [form]="form" [property]="showDeletedProperty" i18n-label></app-input-switch>
     </fieldset>
-    <div class="d-flex justify-content-end" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-      <button type="button" class="btn btn-link" (click)="clearButtonClicked()"><i class="far fa-times"></i><span i18n>Clear</span></button>
-      <button type="submit" class="btn btn-primary bg-primary" (click)="applyButtonClicked()"><i class="far fa-check"></i><span i18n>Apply</span></button>
-    </div>
+    <div class="form-group" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">      
+      <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()"><span i18n>Apply Filters</span></button>
+    </div>  
+    <div class="form-group link">
+      <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()"><span i18n>Clear Filters</span></a></strong>
+    </div>        
+    <div class="form-group link">
+      <strong><span i18n class="text-secondary">Save Filter Set</span></strong>
+      <hr>    
+    </div>  
+    <div class="form-group link">
+      <strong><span  class="small" i18n>Saved Filter Sets</span></strong>        
+    </div>    
   </form>
 </div>

@@ -10,4 +10,8 @@ export class AutoTemplatesStaticTextService {
   get title() {
     return this.i18n('Auto Templates');
   }
+
+  get notAvailableTekst() {
+    return this.i18n('N/A');
+  }
 }

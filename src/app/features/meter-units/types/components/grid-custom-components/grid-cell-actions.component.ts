@@ -1,28 +1,49 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
 import { Subscription } from 'rxjs';
-import { AutoTemplatesGridEventEmitterService } from '../../services/auto-templates-grid-event-emitter.service';
+import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
 
 @Component({
-  selector: 'app-grid-cell-edit-actions',
-  templateUrl: './grid-cell-edit-actions.component.html'
+  selector: 'app-grid-cell-actions',
+  templateUrl: './grid-cell-actions.component.html'
 })
-export class GridCellEditActionsComponent implements ICellRendererAngularComp, OnDestroy {
+export class GridCellActionsComponent implements ICellRendererAngularComp, OnDestroy {
   public params: any;
   public gridApi: GridApi;
   public hideEditDelete = false;
-  private serviceSubscription: Subscription;
+  public isRowMouseOver = false;
+  public rowIndex = -1;
+  private serviceSubscriptionRowMouseOver: Subscription;
+  private serviceSubscriptionRowMouseOut: Subscription;
 
-  constructor(private i18n: I18n, private service: AutoTemplatesGridEventEmitterService) {
-    // catcht event from master component
-    this.serviceSubscription = this.service.eventEmitterEdit.subscribe({
-      next: () => {
-        //  read state
-        this.hideEditDelete = false;
+  constructor(private i18n: I18n, private cdRef: ChangeDetectorRef, private service: MeterUnitsTypeGridEventEmitterService) {
+    /*
+    (this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOver.subscribe({
+      next: index => {
+        if (index === this.rowIndex) {
+          this.isRowMouseOver = true;
+          this.cdRef.detectChanges();
+        } else {
+          this.isRowMouseOver = false; // prevent active buttons on multiple rows
+          this.cdRef.detectChanges();
+        }
       }
-    });
+    }));
+
+  this.serviceSubscriptionRowMouseOut = this.service.eventEmitterRowMouseOut.subscribe({
+    next: index => {
+      if (index === this.rowIndex) {
+        console.log('2121212');
+        var isShown = document.getElementById('element').children;
+        //.classList//.contains('dropdown-menu');
+        console.log(isShown);
+        this.isRowMouseOver = false;
+        this.cdRef.detectChanges();
+      }
+    }
+  });*/
   }
 
   // called on init
@@ -30,9 +51,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
     this.params = params;
     this.gridApi = this.params.api as GridApi;
 
-    if (params.data.autoTemplateRuleId === 'new') {
-      this.hideEditDelete = true;
-    }
+    this.rowIndex = params.rowIndex;
   }
 
   // called when the cell is refreshed
@@ -43,7 +62,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
   // action edit
   editItem(params: any) {
     const cellDefs2 = this.gridApi.getEditingCells();
-
     if (cellDefs2.length === 0) {
       this.gridApi.setFocusedCell(params.rowIndex, 'propertyName');
       this.gridApi.startEditingCell({
@@ -86,13 +104,16 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp, O
       case 'cancel':
         return this.i18n('Cancel');
     }
-
     return '';
   }
 
   ngOnDestroy() {
-    if (this.serviceSubscription) {
-      this.serviceSubscription.unsubscribe();
+    if (this.serviceSubscriptionRowMouseOver) {
+      this.serviceSubscriptionRowMouseOver.unsubscribe();
+    }
+
+    if (this.serviceSubscriptionRowMouseOut) {
+      this.serviceSubscriptionRowMouseOut.unsubscribe();
     }
   }
 }
