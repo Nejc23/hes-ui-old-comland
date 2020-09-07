@@ -76,7 +76,7 @@ export class MeterUnitsTypeGridService {
         checkboxSelection: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'id',
+        colId: 'deviceId',
         headerTooltip: this.i18n('Select/deselect all')
       },
       {

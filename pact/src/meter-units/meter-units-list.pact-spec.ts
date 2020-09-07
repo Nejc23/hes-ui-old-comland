@@ -71,7 +71,7 @@ describe('Pact consumer test', () => {
 
     const data: MeterUnitsList[] = [
       {
-        id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
+        deviceId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
         status: 'Active',
         name: 'Cubis PLC temp 520',
         readStatusTimeStamp: '2020-05-05T03:21:19',
@@ -99,7 +99,7 @@ describe('Pact consumer test', () => {
         hasActiveJobs: false
       },
       {
-        id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
+        deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Active',
         name: 'Cubis PLC temp 423',
         readStatusTimeStamp: '2020-03-15T03:21:19',
@@ -127,7 +127,7 @@ describe('Pact consumer test', () => {
         hasActiveJobs: true
       },
       {
-        id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
+        deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
         status: 'Warehouse',
         name: 'Cubis PLC temp 642',
         readStatusTimeStamp: '2019-12-19T13:55:55',

@@ -1,7 +1,7 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 export interface MeterUnitsList {
-  id: string;
+  deviceId: string;
   status: string;
   name: string;
   readStatusTimeStamp: string;
