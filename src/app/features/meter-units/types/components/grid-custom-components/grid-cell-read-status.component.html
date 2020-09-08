@@ -5,7 +5,7 @@
         'bg-warning': params.data.readStatusColor.toLowerCase() == trasholds.yellow,
         'bg-success': params.data.readStatusColor.toLowerCase() == trasholds.green }">
   </span>
-  <span class="text-truncate flex-shrink-1 ">{{setMomentStatusDate(params.value)}}</span>
+  <small class="text-truncate flex-shrink-1 ">{{setMomentStatusDate(params.value)}}</small>
 </div>
 
 <span class="text-muted" *ngIf="!params.value">{{notAvailableText}}</span>

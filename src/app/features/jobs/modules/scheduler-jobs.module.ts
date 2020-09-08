@@ -9,8 +9,7 @@ import { SchedulerJobsRoutingModule } from './scheduler-jobs-routing.module';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
-import { GridCellDeleteComponent } from '../components/grid-custom-components/grid-cell-delete-btn.component';
-import { GridCellEditComponent } from '../components/grid-custom-components/grid-cell-edit-btn.component';
+import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { AllForJobGridCellNameComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-name.component';
 import { AllForJobGridCellIdNumberComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-id-number.component';
 import { AllForJobGridCellVendorComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-vendor.component';
@@ -23,8 +22,7 @@ import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/co
     SchedulerJobsListComponent,
     GridCellActiveComponent,
     GridCellNextRunComponent,
-    GridCellDeleteComponent,
-    GridCellEditComponent,
+    GridCellEditActionsComponent,
     GridCellDeviceCountComponent,
     ActionFormComponent,
     AllForJobGridCellNameComponent,
@@ -41,8 +39,7 @@ import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/co
     AgGridModule.withComponents([
       GridCellActiveComponent,
       GridCellNextRunComponent,
-      GridCellDeleteComponent,
-      GridCellEditComponent,
+      GridCellEditActionsComponent,
       GridCellDeviceCountComponent,
       AllForJobGridSelectionHeaderComponent,
       AllForJobGridCellNameComponent,

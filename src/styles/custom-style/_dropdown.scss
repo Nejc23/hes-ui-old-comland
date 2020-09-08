@@ -20,11 +20,14 @@
   }
 }
 
+.dropdown-menu {
+  box-shadow: 5px 10px 10px  rgba(0,0,0,0.2);
+}
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: $gray-100;
+  background-color: $gray-300;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
@@ -39,3 +42,10 @@
 
 .dropdown-content a:hover {background-color: #ddd;}
 .dropdown:hover .dropdown-content {display: block;}
+
+.dropdown-toggle-menu {
+	&:after {
+		border: 0px;
+		display: none;
+	}
+}

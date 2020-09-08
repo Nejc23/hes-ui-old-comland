@@ -11,6 +11,7 @@ export class InputCheckboxGridComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() property: string;
   @Input() indeterminate = false;
+  @Input() label = '';
 
   constructor(private formUtils: FormsUtilsService) {}
 

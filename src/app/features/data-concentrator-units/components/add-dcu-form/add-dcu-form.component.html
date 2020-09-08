@@ -62,11 +62,9 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
-          i18n>Cancel</span></button>
+      <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="save(false)"><i class="far fa-save"></i><span
-            i18n>Save</span></button>
+        <button type="submit" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
         <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button>

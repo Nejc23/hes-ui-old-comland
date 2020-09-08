@@ -4,13 +4,12 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
-import { GridCellDeleteComponent } from '../components/grid-custom-components/grid-cell-delete-btn.component';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridPagination } from '../../meter-units/types/interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
-import { GridCellEditComponent } from '../components/grid-custom-components/grid-cell-edit-btn.component';
+import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +29,7 @@ export class SchedulerJobsListGridService {
     return {
       gridCellActiveComponent: GridCellActiveComponent,
       gridCellNextRunComponent: GridCellNextRunComponent,
-      gridCellDeleteComponent: GridCellDeleteComponent,
-      gridCellEditComponent: GridCellEditComponent,
+      gridCellEditActionsComponent: GridCellEditActionsComponent,
       gridCellDeviceCountComponent: GridCellDeviceCountComponent
     };
   }
@@ -105,29 +103,16 @@ export class SchedulerJobsListGridService {
       },
       {
         field: 'id',
-        width: 60,
-        minWidth: 60,
-        maxWidth: 60,
+        width: 120,
+        minWidth: 120,
+        maxWidth: 120,
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        cellRenderer: 'gridCellEditComponent',
+        cellRenderer: 'gridCellEditActionsComponent',
         headerName: '',
         headerTooltip: this.i18n('Owner')
-      },
-      {
-        field: 'id',
-        width: 60,
-        minWidth: 60,
-        maxWidth: 60,
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        lockPosition: true,
-        cellRenderer: 'gridCellDeleteComponent',
-        headerName: '',
-        headerTooltip: this.i18n('Delete job')
       }
     ];
   }

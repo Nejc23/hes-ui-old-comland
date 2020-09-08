@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
@@ -8,6 +8,7 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SaveViewFormMUTComponent } from '../../save-view-form/save-view-form-meter-units-type.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Component({
   selector: 'app-action-form',
@@ -25,8 +26,11 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() searchChange = new EventEmitter<string>();
+  @Input() gridColumns = [];
 
   @ViewChild('modalFilter', { static: true }) input;
+
+  subscription: Subscription;
 
   constructor(
     private i18n: I18n,
@@ -34,7 +38,8 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private modalService: ModalService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.meterUnitTypeid = params.id;
@@ -44,10 +49,16 @@ export class ActionFormComponent implements OnInit, OnDestroy {
         this.form.get('content').setValue(search.searchText);
       }*/
     });
+
+    // subscribe to changes of visibility of columns on grid
+    this.subscription = gridColumnShowHideService.listOfColumnVisibilitySet$.subscribe(visibleColumnList => {
+      this.setColumnVisibilityForm(visibleColumnList);
+    });
   }
 
   ngOnInit() {
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
+    this.setColumnsListForArrayOfCheckBox();
 
     const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     this.form = this.createForm(search.searchText);
@@ -68,7 +79,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   }
   createForm(search: string): FormGroup {
     return this.fb.group({
-      ['content']: search
+      ['content']: search,
+      ['columns']: [[]],
+      ['selectAll']: [false]
     });
   }
 
@@ -84,6 +97,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     }
 
     this.staticTextService.removePopupBackdropIfClickOnMenu();
+    this.subscription.unsubscribe();
   }
 
   openSaveLayoutModal($event: any) {
@@ -91,5 +105,53 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     const component: SaveViewFormMUTComponent = modalRef.componentInstance;
     component.meterUnitsTypeId = this.meterUnitTypeid;
     modalRef.result.then().catch(() => {});
+  }
+
+  get columnsProperty() {
+    return 'columns';
+  }
+
+  get selectAllProperty() {
+    return 'selectAll';
+  }
+
+  /// set dropdown checkboxes of visible columns
+  setColumnVisibilityForm(visibleColumnList: string[]) {
+    const listCheckBoxColumns = this.columns$.map(a => a.id);
+    if (
+      visibleColumnList.length === listCheckBoxColumns.length &&
+      visibleColumnList.sort().every((value, index) => value === listCheckBoxColumns.sort()[index])
+    ) {
+      this.form.get(this.selectAllProperty).setValue(true);
+    } else {
+      this.form.get(this.selectAllProperty).setValue(false);
+    }
+
+    this.form.get(this.columnsProperty).setValue(visibleColumnList);
+  }
+
+  showHideAll() {
+    // show all columns
+    if (this.form.get(this.selectAllProperty).value) {
+      this.gridColumnShowHideService.listOfColumnsVisibilityChanged(this.columns$.map(a => a.id));
+    } else {
+      // hide all columns
+      this.gridColumnShowHideService.listOfColumnsVisibilityChanged([]);
+    }
+  }
+
+  showHideFromArrayOfCheckBoxes() {
+    const listOfVisibleCols = this.form.get(this.columnsProperty).value;
+    this.gridColumnShowHideService.listOfColumnsVisibilityChanged(listOfVisibleCols);
+  }
+
+  setColumnsListForArrayOfCheckBox() {
+    if (this.gridColumns != null) {
+      this.gridColumns
+        .filter(x => x.headerName !== undefined && x.headerName.length > 0)
+        .forEach(element => {
+          this.columns$.push({ id: element.field, value: element.headerName });
+        });
+    }
   }
 }

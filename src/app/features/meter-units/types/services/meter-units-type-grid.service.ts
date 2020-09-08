@@ -8,7 +8,6 @@ import { GridCellReadStatusComponent } from '../components/grid-custom-component
 import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { GridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
@@ -25,6 +24,8 @@ import { GridCellInfoOfChildComponent } from '../components/grid-custom-componen
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
+import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,8 @@ export class MeterUnitsTypeGridService {
   constructor(
     private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private gridColumnShowHideService: GridColumnShowHideService
   ) {}
 
   public set meterUnitsTypeId(id: number) {
@@ -293,6 +295,23 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Job status'),
         resizable: false
       }
+      /*    {
+        field: 'id',
+        pinned: 'right',
+        width: 180,
+        minWidth: 180,
+        maxWidth: 180,
+        suppressMenu: true,
+        editable: false,
+        suppressMovable: true,
+        lockPinned: true,
+        lockPosition: true,
+        sortable: false,
+        filter: false,
+        cellRendererFramework: GridCellActionsComponent,
+        headerName: '',
+        cellClass: 'actions-button-cell'
+      }*/
     ];
   }
 
@@ -304,7 +323,6 @@ export class MeterUnitsTypeGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellMeterIdComponent: GridCellMeterIdComponent,
       gridCellTagsComponent: GridCellTagsComponent,
-      gridCustomFilterComponent: GridCustomFilterComponent,
       gridCellVendorComponent: GridCellVendorComponent,
       gidCellParentComponent: GridCellParentComponent,
       gridCellModuleIdComponent: GridCellModuleIdComponent,
@@ -334,24 +352,14 @@ export class MeterUnitsTypeGridService {
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
-      onSortChanged: this.onSortChanged
+      onSortChanged: this.onSortChanged,
+      onColumnVisible: this.onColumnVisible
     };
   }
-
+  /*
   public setSideBar() {
     return {
       toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
         {
           id: 'columns',
           labelDefault: 'Columns',
@@ -370,7 +378,7 @@ export class MeterUnitsTypeGridService {
         }
       ]
     };
-  }
+  }*/
 
   public onColumnVisibility(params) {
     // TODO change to different store
@@ -385,6 +393,11 @@ export class MeterUnitsTypeGridService {
   private onSortChanged = params => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
+
+  private onColumnVisible = params => {
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
   };
 
   public getCookieData() {

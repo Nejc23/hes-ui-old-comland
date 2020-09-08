@@ -8,6 +8,8 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 export class MeterUnitsTypeGridEventEmitterService {
   public eventEmitterSelectDeselectAll: EventEmitter<boolean>;
   public eventEmitterLayoutChange: EventEmitter<MeterUnitsLayout>;
+  public eventEmitterRowMouseOver: EventEmitter<number>;
+  public eventEmitterRowMouseOut: EventEmitter<number>;
 
   private isSelectedAll = new BehaviorSubject(false);
 
@@ -15,6 +17,9 @@ export class MeterUnitsTypeGridEventEmitterService {
     this.eventEmitterSelectDeselectAll = new EventEmitter<boolean>();
     this.eventEmitterLayoutChange = new EventEmitter<MeterUnitsLayout>();
     this.isSelectedAll = new BehaviorSubject<boolean>(false);
+
+    this.eventEmitterRowMouseOver = new EventEmitter<number>();
+    this.eventEmitterRowMouseOut = new EventEmitter<number>();
   }
 
   // for check-box in header
@@ -33,5 +38,13 @@ export class MeterUnitsTypeGridEventEmitterService {
 
   public setIsSelectedAll(val: boolean) {
     this.isSelectedAll.next(val);
+  }
+
+  public rowMouseOver(rowNumber: number, gridNumber: number) {
+    this.eventEmitterRowMouseOver.emit(rowNumber);
+  }
+
+  public rowMouseOut(rowNumber: number, gridNumber: number) {
+    this.eventEmitterRowMouseOut.emit(rowNumber);
   }
 }

@@ -10,15 +10,19 @@ body {
 }
 
 #content-wrapper {
-  height: 100%;
-  margin-left: $sidebar-base-width  + 3.5rem ;
+  height: 100%;  
+  margin-left: $sidebar-base-width;
   transition: margin-left .3s;
   width: auto;
   padding: $spacer;
 
   &.menu-collapsed {
-    margin-left: $sidebar-collapsed-width  + 3.5rem !important;
-  }
+    margin-left: $sidebar-collapsed-width !important;
+  }  
+}
+
+#content {
+  margin-top: calc(#{$topbar-base-height} + #{$spacer/2});
 }
 
 /****************************************/
@@ -53,10 +57,6 @@ button {
 
 small.text-secondary {
   font-weight: $font-weight-bold;
-}
-
-i.text-secondary {
-  color: $gray-500 !important;
 }
 
 label {

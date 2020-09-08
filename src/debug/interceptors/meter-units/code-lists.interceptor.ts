@@ -21,11 +21,11 @@ export class MeterUnitCodelistInterceptor {
       {
         id: 1,
         value: 'G3-PLC'
+      },
+      {
+        id: 2,
+        value: 'M-Bus'
       }
-      // {
-      //   id: 2,
-      //   value: 'M-Bus'
-      // }
     ];
 
     return of(

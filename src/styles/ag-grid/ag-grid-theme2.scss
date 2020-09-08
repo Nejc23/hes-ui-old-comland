@@ -224,6 +224,21 @@
 
   .ag-row {
     font-size: $font-size-base;
+    z-index: 1;
+  }
+
+  .actions-button-cell {
+    overflow:visible;
+  }
+
+  .ag-row.ag-row-focus {
+      z-index: 1;
+  }
+
+  .ag-root,
+  .ag-body-viewport,
+  .ag-body-viewport-wrapper {
+      overflow: visible !important;
   }
 
   .ag-header-row {
@@ -355,5 +370,4 @@
     height: 100%;
     border: none !important;
   }
-
 }

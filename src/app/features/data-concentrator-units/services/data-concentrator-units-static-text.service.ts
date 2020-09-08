@@ -5,7 +5,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  public titleBreadCrumbs = this.i18n('Overview - Data Concentrator Units');
+  public titleBreadCrumbs = this.i18n('Data Concentrator Units');
 
   constructor(private i18n: I18n) {}
 
@@ -17,11 +17,6 @@ export class DataConcentratorUnitsStaticTextService {
     return this.i18n('Jobs');
   }
 
-  /*
-  get breadcrumbNameDCU() {
-    return this.i18n('Overview - Data Concentrator Units');
-  }
-*/
   get notAvailableTekst() {
     return this.i18n('N/A');
   }

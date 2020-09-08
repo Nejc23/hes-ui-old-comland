@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Overview - Data Concentrator Units',
+      breadcrumb: 'Data Concentrator Units',
       permission: FunctionalityEnumerator.DCU
     },
     children: [
