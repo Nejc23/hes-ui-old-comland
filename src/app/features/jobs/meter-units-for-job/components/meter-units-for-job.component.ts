@@ -77,7 +77,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       firmware: null,
       vendor: null,
       readStatus: null,
-      breakerState: null,
+      disconnectorState: null,
       showChildInfoMBus: false,
       showDeleted: true,
       showWithoutTemplate: true
@@ -432,7 +432,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           };
         }
         this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-        this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+        this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -547,7 +547,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-      this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+      this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -640,9 +640,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
           this.requestModel.filterModel.firmware[0].id === 0) &&
-        (!this.requestModel.filterModel.breakerState ||
-          this.requestModel.filterModel.breakerState.length === 0 ||
-          this.requestModel.filterModel.breakerState[0].id === 0) &&
+        (!this.requestModel.filterModel.disconnectorState ||
+          this.requestModel.filterModel.disconnectorState.length === 0 ||
+          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showDeleted &&
         !this.requestModel.filterModel.showWithoutTemplate &&

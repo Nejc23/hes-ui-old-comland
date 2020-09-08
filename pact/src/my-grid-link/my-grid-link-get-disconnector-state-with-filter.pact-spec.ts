@@ -43,7 +43,7 @@ describe('Pact consumer test', () => {
         { id: 2, value: 'tag2' }
       ],
       firmware: [{ id: 1, value: '12.3.1' }],
-      breakerState: [
+      disconnectorState: [
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
@@ -68,7 +68,7 @@ describe('Pact consumer test', () => {
         { id: 2, value: 'tag2' }
       ],
       firmware: [{ id: 1, value: '12.3.1' }],
-      breakerState: [
+      disconnectorState: [
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],

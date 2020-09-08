@@ -66,7 +66,7 @@ export class MeterUnitsSchedulerInterceptor {
               value: ''
             }
           ],
-          breakerState: [
+          disconnectorState: [
             {
               id: 0,
               value: ''

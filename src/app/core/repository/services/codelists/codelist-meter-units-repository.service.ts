@@ -6,10 +6,10 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import {
   meterUnitTypes,
   meterUnitFirmwares,
-  meterUnitBreakerStates,
   meterUnitStatuses,
   meterUnitTags,
-  meterUnitVendors
+  meterUnitVendors,
+  meterUnitDisconnectorStates
 } from '../../consts/meter-units.const';
 
 @Injectable({
@@ -47,11 +47,11 @@ export class CodelistMeterUnitsRepositoryService {
     return new HttpRequest('GET', `${meterUnitFirmwares}/${id}`);
   }
 
-  meterUnitBreakerStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
-    return this.repository.makeRequest(this.meterUnitBreakerStateCodelistRequest(meterUnitTypeId));
+  meterUnitDisconnectorStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitDisconnectorStateCodelistRequest(meterUnitTypeId));
   }
-  meterUnitBreakerStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitBreakerStates}/${id}`);
+  meterUnitDisconnectorStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitDisconnectorStates}/${id}`);
   }
 
   meterUnitVendorCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {

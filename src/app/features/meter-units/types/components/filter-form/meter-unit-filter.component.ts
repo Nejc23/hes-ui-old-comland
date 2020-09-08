@@ -28,7 +28,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   mutFilters$: Observable<MeterUnitsLayout[]>;
   data: MeterUnitsLayout[];
   meterUnitTags$: Observable<Codelist<number>[]>;
-  breakerState$: Observable<Codelist<number>[]>;
+  disconnectorState$: Observable<Codelist<number>[]>;
   firmware$: Observable<Codelist<number>[]>;
   operatorsList$ = this.codelistHelperService.operationsList();
 
@@ -78,8 +78,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.meterUnitVendors$ = this.codelistService.meterUnitVendorCodelist(this.id);
     this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
     this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
-    this.breakerState$ = of([]); // this.codelistService.meterUnitBreakerStateCodelist(this.id); // TODO uncomment when implemented
-    this.firmware$ = of([]); // this.codelistService.meterUnitFirmwareCodelist(this.id);  // TODO uncomment when implemented
+    this.disconnectorState$ = this.codelistService.meterUnitDisconnectorStateCodelist(this.id); // TODO uncomment when implemented
+    this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
   }
 
   ngOnDestroy() {
@@ -89,8 +89,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   }
 
   doFillData() {
-    // todo change filter outside of grid ???
-    console.log('model changed');
+    // change filter outside of grid ???
     this.fillformFromSession(this.data);
   }
 

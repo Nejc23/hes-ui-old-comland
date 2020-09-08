@@ -38,7 +38,7 @@ export class PlcMeterReadScheduleGridService {
           value2: null
         },
         firmware: [{ id: 0, value: '' }],
-        breakerState: [{ id: 0, value: '' }],
+        disconnectorState: [{ id: 0, value: '' }],
         showChildInfoMBus: false,
         showDeleted: false
       }
@@ -61,7 +61,7 @@ export class PlcMeterReadScheduleGridService {
         };
       }
       requestModel.filter.firmware = filterDCU.firmwareFilter;
-      requestModel.filter.breakerState = filterDCU.breakerStateFilter;
+      requestModel.filter.disconnectorState = filterDCU.breakerStateFilter;
       requestModel.filter.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       requestModel.filter.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       requestModel.filter.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;

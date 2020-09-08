@@ -265,7 +265,7 @@ export class MeterUnitsTypeGridService {
       //   headerTooltip: this.i18n('Information of child (MBus)')
       // },
       {
-        field: 'breakerState',
+        field: 'disconnectorState',
         headerName: this.i18n('Breaker State'),
         pinned: false,
         sortable: true,
@@ -414,7 +414,7 @@ export class MeterUnitsTypeGridService {
       JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
-      JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.breakerState) &&
+      JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.disconnectorState) &&
       JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
       JSON.stringify(sessionFilter.showDeletedMeterUnitsFilter) === JSON.stringify(requestModel.showDeleted) &&
       JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate)
