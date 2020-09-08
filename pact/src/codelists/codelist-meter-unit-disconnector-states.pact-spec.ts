@@ -26,7 +26,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(CodelistMeterUnitsRepositoryService);
   });
 
-  describe('Codelist - meter unit braker states by type', () => {
+  describe('Codelist - meter unit disconnector states by type', () => {
     const meterUnitTypeId = 1;
     const responseBody: Codelist<number>[] = [
       {
@@ -41,11 +41,11 @@ describe('Pact consumer test', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_FOR_GET_METER_UNIT_BREAKER_STATES_CODELIST_BY_TYPE',
-          uponReceiving: 'a request for getting meter unit breaker states codelist by type',
+          state: 'A_REQUEST_FOR_GET_METER_UNIT_DISCONNECTOR_STATES_CODELIST_BY_TYPE',
+          uponReceiving: 'a request for getting meter unit disconnector states codelist by type',
           withRequest: {
-            method: service.meterUnitBreakerStateCodelistRequest(meterUnitTypeId).method,
-            path: service.meterUnitBreakerStateCodelistRequest(meterUnitTypeId).url,
+            method: service.meterUnitDisconnectorStateCodelistRequest(meterUnitTypeId).method,
+            path: service.meterUnitDisconnectorStateCodelistRequest(meterUnitTypeId).url,
             headers: defaultRequestHeader
           },
           willRespondWith: {
@@ -64,8 +64,8 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for fetching meter units breaker states codelist by type', done => {
-      service.meterUnitBreakerStateCodelist(meterUnitTypeId).subscribe(res => {
+    it('should make request for fetching meter units disconnector states codelist by type', done => {
+      service.meterUnitDisconnectorStateCodelist(meterUnitTypeId).subscribe(res => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);
         done();

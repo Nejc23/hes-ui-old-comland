@@ -4,8 +4,8 @@ export const meterUnitStatuses = `${basePath}/meter-unit-status-codes`;
 export const meterUnitTags = `/api/codelists/meter-unit-tags`;
 export const meterUnitTypes = `${basePath}/meter-unit-types`;
 export const meterUnitVendors = `${basePath}/meter-unit-vendor-codes`;
-export const meterUnitFirmwares = `/api/codelists/meter-unit-firmwares`;
-export const meterUnitBreakerStates = `/api/codelists/meter-unit-breaker-states`;
+export const meterUnitFirmwares = `${basePath}/meter-unit-firmwares`;
+export const meterUnitDisconnectorStates = `${basePath}/meter-unit-disconnector-states`;
 
 // meter units by type
 export const meterUnits = `${basePath}/meter-units`;

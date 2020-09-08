@@ -78,7 +78,7 @@ describe('Pact consumer test', () => {
             value: ''
           }
         ],
-        breakerState: [
+        disconnectorState: [
           {
             id: 0,
             value: ''
@@ -142,7 +142,7 @@ describe('Pact consumer test', () => {
             value: ''
           }
         ],
-        breakerState: [
+        disconnectorState: [
           {
             id: 0,
             value: ''

@@ -4,8 +4,6 @@ import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
-import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
-import { dataConcentratorUnits } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
 import { meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 
@@ -82,7 +80,7 @@ function searchById(companies, filter) {
 function setData(): MeterUnitsList[] {
   return [
     {
-      id: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
+      deviceId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
       status: 'Active',
       name: 'Cubis PLC temp 520',
       readStatusTimeStamp: '2020-01-03T05:32:32',
@@ -110,7 +108,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: true
     },
     {
-      id: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
+      deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
       status: 'Active',
       name: 'Cubis PLC temp 423',
       readStatusTimeStamp: '2020-04-30T15:00:01',
@@ -138,7 +136,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: true
     },
     {
-      id: '22cfeaae-463a-4055-8632-a6818ba77d81',
+      deviceId: '22cfeaae-463a-4055-8632-a6818ba77d81',
       status: 'Mouted',
       name: 'Cubis PLC temp 753',
       readStatusTimeStamp: '2020-05-10T01:04:01',
@@ -166,7 +164,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: true
     },
     {
-      id: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
+      deviceId: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
       status: 'Active',
       name: 'Cubis PLC temp 844',
       readStatusTimeStamp: '2020-05-10T09:34:32',
@@ -194,7 +192,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: true
     },
     {
-      id: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
+      deviceId: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
       status: 'Active',
       name: 'Cubis PLC temp 344',
       readStatusTimeStamp: '2020-05-05T11:04:03',
@@ -222,7 +220,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
+      deviceId: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
       status: 'Active',
       name: 'PLC dat 221',
       readStatusTimeStamp: '2020-02-17T04:26:37',
@@ -250,7 +248,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'e4694732-a282-477c-9c47-79ca08f64911',
+      deviceId: 'e4694732-a282-477c-9c47-79ca08f64911',
       status: 'Mouted',
       name: 'PLC dat 915',
       readStatusTimeStamp: '2020-02-17T05:26:37',
@@ -278,7 +276,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: true
     },
     {
-      id: '4db50891-45dc-4910-bc8e-1d1c15862a68',
+      deviceId: '4db50891-45dc-4910-bc8e-1d1c15862a68',
       status: 'Active',
       name: 'PLC dat 387',
       readStatusTimeStamp: '2020-03-31T17:08:00',
@@ -306,7 +304,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '7f7e9055-ad99-479f-956f-903022e1cccd',
+      deviceId: '7f7e9055-ad99-479f-956f-903022e1cccd',
       status: 'Warehouse',
       name: 'PLC dat 626',
       readStatusTimeStamp: '2020-05-09T12:02:33',
@@ -334,7 +332,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
+      deviceId: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
       status: 'Warehouse',
       name: 'PLC dat 623',
       readStatusTimeStamp: '2020-05-11T12:14:00',
@@ -362,7 +360,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
+      deviceId: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
       status: 'Warehouse',
       name: 'PLC dat 345',
       readStatusTimeStamp: '2020-05-03T00:00:00',
@@ -390,7 +388,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
+      deviceId: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
       status: 'Warehouse',
       name: 'PLC dat 954',
       readStatusTimeStamp: '2019-12-14T03:12:11',
@@ -418,7 +416,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
+      deviceId: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
       status: 'Active',
       name: 'PLC dat 233',
       readStatusTimeStamp: '2019-12-20T20:20:20',
@@ -446,7 +444,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
+      deviceId: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
       status: 'Warehouse',
       name: 'PLC dat 659',
       readStatusTimeStamp: '2019-10-02T05:09:23',
@@ -474,7 +472,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
+      deviceId: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
       status: 'Mouted',
       name: 'PLC dat 519',
       readStatusTimeStamp: '2019-09-18T19:18:59',
@@ -502,7 +500,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
+      deviceId: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
       status: 'Mouted',
       name: 'PLC dat 656',
       readStatusTimeStamp: '2020-01-18T19:18:59',
@@ -530,7 +528,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
+      deviceId: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
       status: 'Warehouse',
       name: 'PLC dat 773',
       readStatusTimeStamp: '2020-05-05T03:29:19',
@@ -558,7 +556,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
+      deviceId: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
       status: 'Active',
       name: 'PLC dat 284',
       readStatusTimeStamp: '2020-05-05T03:21:19',
@@ -586,7 +584,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: 'r42234-9c3d-46ea-bbdd-4770baefafbf',
+      deviceId: 'r42234-9c3d-46ea-bbdd-4770baefafbf',
       status: 'Mouted',
       name: 'PLC dat 2824',
       readStatusTimeStamp: '2020-04-02T12:33:12',
@@ -614,7 +612,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '90976-9c3d-46ea-bbdd-4770baefafbf',
+      deviceId: '90976-9c3d-46ea-bbdd-4770baefafbf',
       status: 'Active',
       name: 'PLC dat 22384',
       readStatusTimeStamp: '2020-01-24T04:31:00',
@@ -642,7 +640,7 @@ function setData(): MeterUnitsList[] {
       hasActiveJobs: false
     },
     {
-      id: '90976-9c3d-46ea-642234-4770baefafbf',
+      deviceId: '90976-9c3d-46ea-642234-4770baefafbf',
       status: 'Active',
       name: 'PLC dat 543',
       readStatusTimeStamp: '2020-05-10T10:00:03',

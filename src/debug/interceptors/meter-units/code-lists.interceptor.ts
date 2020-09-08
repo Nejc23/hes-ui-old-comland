@@ -9,7 +9,7 @@ import {
   meterUnitVendors,
   meterUnitTags,
   meterUnitFirmwares,
-  meterUnitBreakerStates
+  meterUnitDisconnectorStates
 } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
@@ -193,6 +193,6 @@ export class MeterUnitCodelistInterceptor {
   }
 
   static canInterceptMeterUnitBreakerState(request: HttpRequest<any>): boolean {
-    return new RegExp(`${meterUnitBreakerStates}/[0-9]+$`).test(request.url) && request.method.endsWith('GET');
+    return new RegExp(`${meterUnitDisconnectorStates}/[0-9]+$`).test(request.url) && request.method.endsWith('GET');
   }
 }
