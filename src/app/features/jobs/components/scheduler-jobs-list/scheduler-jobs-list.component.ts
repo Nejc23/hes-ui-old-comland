@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -71,7 +72,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private eventService: SchedulerJobsEventEmitterService,
     private formUtils: FormsUtilsService,
     private modalService: ModalService,
-    private authService: AuthService
+    private authService: AuthService,
+    private breadcrumbService: BreadcrumbService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -174,6 +176,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       previous: this.i18n('previous'),
       loadingOoo: this.i18n('loading...')
     };
+
+    this.breadcrumbService.setPageName(this.headerTitle);
   }
 
   ngOnDestroy() {

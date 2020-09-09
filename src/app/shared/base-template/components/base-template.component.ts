@@ -49,6 +49,8 @@ export class BaseTemplateComponent implements OnInit {
   form: FormGroup;
   selectedCompany: Codelist<number>;
 
+  pageTitle = '';
+
   constructor(
     private sidebarService: SidebarService,
     private cookieService: CookieService,
@@ -69,6 +71,7 @@ export class BaseTemplateComponent implements OnInit {
     };
 
     this.getScreenSize();
+
     // this.form = this.createForm();
 
     /*this.router.events.subscribe(event => {
@@ -78,7 +81,7 @@ export class BaseTemplateComponent implements OnInit {
           this.submenu = 1;
         } else if (currentUrl.includes('/configuration')) {
           this.submenu = 2;
-         
+
         } else {
           this.submenu = 0;
         }

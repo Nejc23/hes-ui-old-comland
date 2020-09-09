@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { PactWeb } from '@pact-foundation/pact-web';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
@@ -128,8 +129,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private toast: ToastNotificationService,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
-    private gridColumnShowHideService: GridColumnShowHideService
+    private gridColumnShowHideService: GridColumnShowHideService,
+    private breadcrumbService: BreadcrumbService
   ) {
+    this.setTitle(-1);
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
       meterUnitsTypeGridService.meterUnitsTypeId = params.id;
@@ -233,7 +236,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const selectedType = this.meterTypes$.find(x => x.id === id);
     if (selectedType !== undefined && selectedType != null) {
       this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsType;
+    } else {
+      this.headerTitle = this.staticTextService.headerTitleMeterUnitsType;
     }
+
+    this.breadcrumbService.setPageName(this.headerTitle);
   }
 
   ngOnInit() {
@@ -506,6 +513,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // set filter in request model
   setFilter() {
+    console.log('set filter');
     if (
       !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
         this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
@@ -620,7 +628,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         const endRow = api.getLastDisplayedRow();
         const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
         api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.id === node2.data.id)) {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.deviceId === node2.data.deviceId)) {
             node2.setSelected(true);
           }
         });
@@ -644,6 +652,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // click on the link "select all"
   selectAll() {
+    this.meterUnitsTypeGridService.setSessionSettingsClearExcludedRows();
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(true);
     this.eventService.selectDeselectAll(true);
     this.eventService.setIsSelectedAll(true);
@@ -651,6 +660,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // click on the link "deselect all"
   deselectAll() {
+    this.meterUnitsTypeGridService.setSessionSettingsClearExcludedRows();
     this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
     this.eventService.selectDeselectAll(false);
@@ -753,7 +763,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     const params = this.getBulkRequestParam();
 
-    let selectedText = `${this.getTotalCountWithoutExcluded().length} rows `;
+    let selectedText = `${this.getSelectedCount()} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = this.i18n('Confirm');
@@ -850,13 +860,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       requestParam.excludeIds = [];
 
       excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
-
-      console.log(`excludeIdsParam = ${JSON.stringify(requestParam.excludeIds)}`);
     } else {
       const selectedRows = this.gridApi.getSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
-        console.log(`deviceIdsParam = ${JSON.stringify(requestParam.deviceIds)}`);
       }
     }
 
@@ -1011,12 +1018,25 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // }
 
-  getTotalCountWithoutExcluded(): string {
-    const excludedRowsLength = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows().length;
-    if (excludedRowsLength === 0) {
-      return this.totalCount.toString();
+  getSelectedCount(): number {
+    if (this.checkSelectedAll()) {
+      const excludedRowsLength = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows().length;
+      return this.totalCount - excludedRowsLength;
     } else {
-      return `${this.totalCount - excludedRowsLength} ${this.i18n('of')} ${this.totalCount}`;
+      return this.meterUnitsTypeGridService.getSessionSettingsSelectedRows().length;
+    }
+  }
+
+  getTotalCountWithoutExcludedDisplay(): string {
+    const selectedCount = this.getSelectedCount();
+    if (this.checkSelectedAll()) {
+      if (selectedCount === this.totalCount) {
+        return `${this.totalCount}`;
+      } else {
+        return `${selectedCount} ${this.i18n('of')} ${this.totalCount}`;
+      }
+    } else {
+      return `${selectedCount}`;
     }
   }
 

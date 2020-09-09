@@ -1,6 +1,6 @@
-<span class="navbar-text page-name">{{ breadcrumbs[0].label }}</span>
+<span class="navbar-text page-name">{{ pageName }}</span>
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
+  <ol class="breadcrumb" *ngIf="showBreadcrumb()">
     <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last"
       [ngClass]="{'active': last}">
       <a [routerLink]="[breadcrumb.url]" role="button" *ngIf="!last">

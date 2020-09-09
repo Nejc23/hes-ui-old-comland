@@ -14,6 +14,7 @@ export interface GridRequestParams {
   groupKeys?: any[];
   typeId?: number;
   deviceIds?: string[];
+  excludeIds?: string[];
 }
 
 export interface GridFilterParams {

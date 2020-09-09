@@ -32,7 +32,7 @@
                     ({{totalCount}})</a></strong></small>
           </div>
           <div class="mr-3" *ngIf="checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-            <small class="link"><strong><span i18n>All ({{totalCount}}) items selected</span> &middot;
+            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
                       selected</span></a></strong></small>
           </div>
@@ -81,7 +81,7 @@
         [sideBar]="sideBar" [overlayNoRowsTemplate]="overlayNoRowsTemplate"
         [overlayLoadingTemplate]="overlayLoadingTemplate" (selectionChanged)="onSelectionChanged()"
         (gridReady)="onGridReady($event)" (columnVisible)="onColumnVisible($event)"
-        (toolPanelVisibleChanged)="toolPanelChanged($event)" (paginationChanged)="onPaginationChange($event)"
+        (paginationChanged)="onPaginationChange($event)"
         (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)"
         [localeText]="localeText">
       </ag-grid-angular>

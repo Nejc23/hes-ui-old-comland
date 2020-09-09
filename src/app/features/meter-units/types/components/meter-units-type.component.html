@@ -8,7 +8,7 @@
   <div class="col-2" *ngIf="!hideFilter">
     <app-meter-unit-filter (filterChange)="reloadGrid()"></app-meter-unit-filter>
   </div>
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">    
+  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
     <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
         <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
     </a>
@@ -17,7 +17,7 @@
 <div *ngIf="!noData">
 
   <div class="d-flex justify-content-between mb-2">
-    <div class="d-flex align-items-center p-2 grid-actions">          
+    <div class="d-flex align-items-center p-2 grid-actions">
       <div class="mr-3" *ngIf="!selectedAtLeastOneRowOnGrid">
         <small class="text-secondary">
           {{totalCount}} <span i18n>items</span> &middot; {{filters}}
@@ -30,24 +30,24 @@
                 ({{totalCount}})</a></strong></small>
       </div>
       <div class="mr-3" *ngIf="checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-        <small class="link"><strong><span i18n>All ({{totalCount}}) items selected</span> &middot;
+        <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcludedDisplay()}}) items selected</span> &middot;
           <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
                   selected</span></a></strong></small>
-      </div> 
+      </div>
       <div *ngIf="selectedAtLeastOneRowOnGrid">
 
         <div class="btn-group">
           <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
           <div class="dropdown-menu">
-            
+
             <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
-            
+
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item" type="button"
                 (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
             </button>
 
             <div class="dropdown-divider"></div>
-              
+
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
                 (click)="onUpgrade()"><span i18n>Upload image</span>
             </button>
@@ -57,25 +57,25 @@
             </button>
 
             <div class="dropdown-divider"></div>
-            
+
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="dropdown-item" type="button"
                 (click)="onConnect()"><span i18n>Connect</span>
             </button>
-            
+
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="dropdown-item" type="button"
                 (click)="onDisconnect()"><span i18n>Disconnect</span>
             </button>
-            
+
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="dropdown-item" type="button"
                 (click)="onBreakerStatus()"><span i18n>State</span>
             </button>
-            
+
             <div class="dropdown-divider"></div>
-            
+
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="dropdown-item" type="button"
                 (click)="onTou()"><span i18n>TOU Upload</span>
             </button>
-            
+
             <div class="dropdown-divider"></div>
 
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
@@ -91,10 +91,10 @@
 
         <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-tags"></i><span i18n>Tags</span></button>
         <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="fa far-line-chart" disabled></i><span i18n>Data</span></button>
-       
-      </div>     
+
+      </div>
     </div>
-   
+
     <div class="p-2 d-flex align-items-center p-2 grid-actions">
       <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end" [gridColumns]="columns"></app-action-form>
     </div>
@@ -188,7 +188,6 @@
     (selectionChanged)="onSelectionChanged()"
     (gridReady)="onGridReady($event)"
     (columnVisible)="onColumnVisible($event)"
-    (toolPanelVisibleChanged)="toolPanelChanged($event)"
     (paginationChanged)="onPaginationChange($event)"
     (rowSelected)="onRowSelect($event)"
     (firstDataRendered)="onFirstDataRendered($event)"

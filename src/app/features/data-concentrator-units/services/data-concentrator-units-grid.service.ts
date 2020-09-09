@@ -354,6 +354,18 @@ export class DataConcentratorUnitsGridService {
     return settings.excludedRows;
   }
 
+  // clear excluded rows
+  public setSessionSettingsClearExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.excludedRows = [];
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
+      settings
+    );
+  }
+
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);

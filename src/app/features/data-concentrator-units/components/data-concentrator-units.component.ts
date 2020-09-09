@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -98,7 +99,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private formUtils: FormsUtilsService,
     private authService: AuthService,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
-    private gridColumnShowHideService: GridColumnShowHideService
+    private gridColumnShowHideService: GridColumnShowHideService,
+    private bredcrumbService: BreadcrumbService
   ) {
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -174,6 +176,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
       selectAll: this.i18n('Select All')
     };
+
+    this.bredcrumbService.setPageName(this.headerTitle);
   }
 
   ngOnDestroy(): void {
@@ -526,12 +530,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // click on the link "select all"
   selectAll() {
+    this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
     this.eventService.selectDeselectAll(this.gridApi.paginationGetCurrentPage());
   }
 
   // click on the link "deselect all"
   deselectAll() {
+    this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
     this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
