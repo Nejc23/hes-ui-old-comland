@@ -24,7 +24,7 @@ export interface GridFilterParams {
   vendor: Codelist<number>;
   readStatus: ReadStatus;
   firmware?: Codelist<number>[];
-  breakerState?: Codelist<number>[];
+  disconnectorState?: Codelist<number>[];
   showChildInfoMBus?: boolean;
   showDeleted: boolean;
   showWithoutTemplate?: boolean;

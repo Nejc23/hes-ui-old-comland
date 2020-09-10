@@ -9,7 +9,8 @@ import {
   ResponseConnectDisconnectData,
   RequestTOUData,
   ResponseTOUData,
-  OnDemandRequestData
+  OnDemandRequestData,
+  RequestSetMonitor
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -22,7 +23,8 @@ import {
   onDemandData,
   importTemplates,
   triggerDeviceUpgrade,
-  activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate
+  activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
+  onDemandSetMonitor
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
@@ -123,5 +125,14 @@ export class MyGridLinkService {
 
   activateDeviceUpgradeRequest(param: MeterUnitsActivateUpgradeRequest): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgradeActivate}`, param);
+  }
+
+  // trigger set montor
+  setMonitor(payload: RequestSetMonitor): Observable<any> {
+    return this.repository.makeRequest(this.setMonitorRequest(payload));
+  }
+
+  setMonitorRequest(payload: RequestSetMonitor): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetMonitor}`, payload);
   }
 }

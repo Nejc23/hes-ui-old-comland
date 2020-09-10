@@ -2,10 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import {
-  RequestConnectDisconnectData,
-  ResponseConnectDisconnectData
-} from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { ResponseSetMonitor, RequestSetMonitor } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -28,7 +25,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(MyGridLinkService);
   });
 
-  const requestBody: RequestConnectDisconnectData = {
+  const requestBody: RequestSetMonitor = {
     deviceIds: null,
     filter: {
       statuses: [{ id: 1, value: 'active' }],
@@ -49,10 +46,24 @@ describe('Pact consumer test', () => {
       ],
       showChildInfoMBus: true,
       showDeleted: true
-    }
+    },
+    monitorObjects: [
+      {
+        name: 'Phase 1',
+        threshold: 50
+      },
+      {
+        name: 'Phase 2',
+        threshold: 150
+      },
+      {
+        name: 'Phase 3',
+        threshold: 983
+      }
+    ]
   };
 
-  const responseBody: ResponseConnectDisconnectData = {
+  const responseBody: ResponseSetMonitor = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: null,
     filter: {
@@ -74,15 +85,29 @@ describe('Pact consumer test', () => {
       ],
       showChildInfoMBus: true,
       showDeleted: true
-    }
+    },
+    monitorObjects: [
+      {
+        name: 'Phase 1',
+        threshold: 50
+      },
+      {
+        name: 'Phase 2',
+        threshold: 150
+      },
+      {
+        name: 'Phase 3',
+        threshold: 983
+      }
+    ]
   };
 
-  describe('myGrid.link get disconnector state with filter request', () => {
+  describe('myGrid.link set monitor with filter request', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_DISCONNECTOR_STATE_WITH_FILTER',
-          uponReceiving: 'a request for getting disconnector state with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_SET_MONITOR_WITH_FILTER',
+          uponReceiving: 'a request for setting monitor with filter in request - myGrid.Link',
           withRequest: {
             method: service.postMyGridConnectDeviceRequest(requestBody).method,
             path: service.postMyGridConnectDeviceRequest(requestBody).url,
@@ -107,11 +132,13 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for getting disconnector state with filter in request - myGrid.Link', done => {
+    it('should make request for setting monitor with filter in request - myGrid.Link', done => {
       service.postMyGridConnectDevice(requestBody).subscribe(
-        (res: ResponseConnectDisconnectData) => {
+        (res: ResponseSetMonitor) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);
+          expect(res.filter).toEqual(responseBody.filter);
+          expect(res.monitorObjects).toEqual(responseBody.monitorObjects);
           done();
         },
         err => {

@@ -37,6 +37,7 @@ import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag
 import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -94,7 +95,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         value2: null
       },
       firmware: [{ id: 0, value: '' }],
-      breakerState: [{ id: 0, value: '' }],
+      disconnectorState: [{ id: 0, value: '' }],
       showChildInfoMBus: false,
       showDeleted: false,
       showWithoutTemplate: false
@@ -183,7 +184,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
           this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
           this.requestModel.filterModel.firmware = event.firmwareFilter;
-          this.requestModel.filterModel.breakerState = event.breakerStateFilter;
+          this.requestModel.filterModel.disconnectorState = event.breakerStateFilter;
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
           this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
@@ -428,9 +429,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
           this.requestModel.filterModel.firmware[0].id === 0) &&
-        (!this.requestModel.filterModel.breakerState ||
-          this.requestModel.filterModel.breakerState.length === 0 ||
-          this.requestModel.filterModel.breakerState[0].id === 0) &&
+        (!this.requestModel.filterModel.disconnectorState ||
+          this.requestModel.filterModel.disconnectorState.length === 0 ||
+          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showDeleted &&
         !this.requestModel.filterModel.showWithoutTemplate &&
@@ -531,7 +532,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-      this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
+      this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -931,6 +932,29 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     modalRef.componentInstance.searchParam = params.search;
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
 
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onSetMonitor() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    const deviceIdsParam = [];
+    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+    // TODO: ONLY FOR TESTING !
+    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+
+    const modalRef = this.modalService.open(PlcMeterMonitorComponent);
+    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
