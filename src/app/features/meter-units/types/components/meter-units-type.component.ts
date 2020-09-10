@@ -36,6 +36,7 @@ import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-to
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
+import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -721,7 +722,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
-    console.log('2121211121212122');
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
     const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
@@ -841,10 +841,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.bulkOperation(MeterUnitsTypeEnum.disconnect);
   }
 
-  onSetLimiter() {
-    // TODO
-  }
-
   onTou() {
     // this.bulkOperation(MeterUnitsTypeEnum.touConfig);
     const selectedRows = this.gridApi.getSelectedRows();
@@ -901,6 +897,29 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
 
     const modalRef = this.modalService.open(PlcMeterMonitorComponent);
+    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onSetLimiter() {
+    const selectedRows = this.gridApi.getSelectedRows();
+    const deviceIdsParam = [];
+    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+    // TODO: ONLY FOR TESTING !
+    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
+    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+
+    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
     modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
     modalRef.result.then(
       data => {
