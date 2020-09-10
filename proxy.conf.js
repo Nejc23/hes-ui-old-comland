@@ -8,7 +8,7 @@ const PROXY_CONFIG = [
         "/api/templating",
         "/api/file-storage"
       ],
-      target: "http://localhost:54322",
+      target: "http://89.212.201.202:54322",
       secure: false
   },
   {
