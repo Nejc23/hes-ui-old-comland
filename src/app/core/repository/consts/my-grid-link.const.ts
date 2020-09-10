@@ -15,3 +15,4 @@ export const onDemandData = '/data';
 export const importTemplates = '/import-templates';
 export const triggerDeviceUpgrade = '/trigger-device-upgrade';
 export const activateTriggerDeviceUpgrade = `${triggerDeviceUpgrade}/activate`;
+export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';

@@ -83,7 +83,8 @@
             </button>
 
             <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Monitor</span></button>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
+                (click)="onSetMonitor()"><span i18n>Monitor</span></button>
             <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear FF</span></button>
             <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
           </div>

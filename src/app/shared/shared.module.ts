@@ -59,6 +59,7 @@ import { SchedulerActiveJobsComponent } from './popover/components/scheduler-act
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
+import { PlcMeterMonitorComponent } from '../features/meter-units/common/components/plc-meter-monitor/plc-meter-monitor.component';
 
 @NgModule({
   exports: [
@@ -85,6 +86,7 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common
     SchedulerDiscoveryJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
+    PlcMeterMonitorComponent,
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
@@ -141,6 +143,7 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common
     SchedulerDiscoveryJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
+    PlcMeterMonitorComponent,
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
@@ -184,6 +187,7 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common
     SchedulerDiscoveryJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
+    PlcMeterMonitorComponent,
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
