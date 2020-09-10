@@ -50,3 +50,21 @@ export interface OnDemandRequestData {
     }
   ];
 }
+
+// Set Monitor bulk action
+export interface RequestSetMonitor {
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  monitorObjects: MonitorObjects[];
+}
+export interface MonitorObjects {
+  name: string;
+  threshold: number;
+}
+
+export interface ResponseSetMonitor {
+  requestId: string;
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  monitorObjects: MonitorObjects[];
+}
