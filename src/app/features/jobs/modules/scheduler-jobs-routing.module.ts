@@ -4,6 +4,7 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { NgModule } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { SchedulerJobsListComponent } from '../components/scheduler-jobs-list/scheduler-jobs-list.component';
+import { DcuForJobComponent } from '../dcu-for-job/components/dcu-for-job.component';
 
 const routes: Routes = [
   {
@@ -21,11 +22,18 @@ const routes: Routes = [
         component: SchedulerJobsListComponent
       },
       {
-        path: ':scheduleId',
+        path: 'meter-units/:scheduleId',
         data: {
           breadcrumb: 'Meter Units'
         },
         component: AllForJobComponent
+      },
+      {
+        path: 'concentrators/:scheduleId',
+        data: {
+          breadcrumb: 'Concentrator Units'
+        },
+        component: DcuForJobComponent
       }
     ]
   }

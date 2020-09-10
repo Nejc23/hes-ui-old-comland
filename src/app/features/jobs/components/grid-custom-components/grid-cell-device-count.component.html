@@ -1,6 +1,6 @@
 <div container="body" placement="bottom">
 
-  <a *ngIf="isDeviceCountVisible()" [routerLink]="['/schedulerJobs', params.node.data.id]">
+  <a *ngIf="isDeviceCountVisible()" (click)="showDevicesForJob(params)" href="javascript:void(0);">
     <span class="badge badge-secondary">
       {{ params.node.data.deviceCount }}
     </span>

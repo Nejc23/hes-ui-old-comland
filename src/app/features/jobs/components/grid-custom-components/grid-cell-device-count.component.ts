@@ -5,6 +5,7 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grid-cell-device-count',
@@ -18,7 +19,8 @@ export class GridCellDeviceCountComponent {
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: MeterUnitsService,
-    private eventService: SchedulerJobsEventEmitterService
+    private eventService: SchedulerJobsEventEmitterService,
+    private router: Router
   ) {}
 
   // called on init
@@ -41,8 +43,12 @@ export class GridCellDeviceCountComponent {
     return this.params.node.data.deviceCount > 0;
   }
 
-  public showAllDevices(): void {
-    console.log('params: ', this.params);
-    window.open(`${window.location.origin}/schedulerJobs/${this.params.node.data.id}`);
+  public showDevicesForJob(params): void {
+    let baseUrl = '/schedulerJobs/meter-units';
+    if (params.data.actionType === 1) {
+      baseUrl = '/schedulerJobs/concentrators';
+    }
+
+    this.router.navigate([baseUrl, params.node.data.id]);
   }
 }

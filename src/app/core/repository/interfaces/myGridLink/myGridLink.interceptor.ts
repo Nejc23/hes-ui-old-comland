@@ -1,3 +1,4 @@
+import { GridSearchParams } from './../helpers/grid-request-params.interface';
 import { GridFilterParams } from '../helpers/grid-request-params.interface';
 
 export interface IdentityToken {
@@ -19,6 +20,8 @@ export interface LastStatus {
 export interface RequestConnectDisconnectData {
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
 }
 
 export interface ResponseConnectDisconnectData {
