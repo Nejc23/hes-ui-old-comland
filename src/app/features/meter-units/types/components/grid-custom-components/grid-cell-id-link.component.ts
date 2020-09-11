@@ -7,7 +7,7 @@ import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type
   selector: 'app-grid-cell-id-number',
   templateUrl: './grid-cell-id-number.component.html'
 })
-export class GridCellIdNumberComponent implements ICellRendererAngularComp {
+export class GridCellIdLinkComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 

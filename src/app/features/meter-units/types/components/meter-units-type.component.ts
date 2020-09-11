@@ -173,7 +173,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.filters = staticTextService.noFilterAppliedTekst;
     this.frameworkComponents = meterUnitsTypeGridService.setFrameworkComponents();
-    this.gridOptions = this.meterUnitsTypeGridService.setGridOptions();
+    this.gridOptions = this.meterUnitsTypeGridService.setGridOptions(this);
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: MeterUnitsLayout) => {
         console.log('test 1');
@@ -1090,5 +1090,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
     };
+  }
+
+  showItem(deviceId: string) {
+    console.log('showItem, deviceId: ', deviceId);
   }
 }

@@ -19,8 +19,7 @@ export class GridCellActionsComponent implements ICellRendererAngularComp, OnDes
   private serviceSubscriptionRowMouseOut: Subscription;
 
   constructor(private i18n: I18n, private cdRef: ChangeDetectorRef, private service: MeterUnitsTypeGridEventEmitterService) {
-    /*
-    (this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOver.subscribe({
+    this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOver.subscribe({
       next: index => {
         if (index === this.rowIndex) {
           this.isRowMouseOver = true;
@@ -30,20 +29,23 @@ export class GridCellActionsComponent implements ICellRendererAngularComp, OnDes
           this.cdRef.detectChanges();
         }
       }
-    }));
+    });
 
-  this.serviceSubscriptionRowMouseOut = this.service.eventEmitterRowMouseOut.subscribe({
-    next: index => {
-      if (index === this.rowIndex) {
-        console.log('2121212');
-        var isShown = document.getElementById('element').children;
-        //.classList//.contains('dropdown-menu');
-        console.log(isShown);
-        this.isRowMouseOver = false;
-        this.cdRef.detectChanges();
+    this.serviceSubscriptionRowMouseOut = this.service.eventEmitterRowMouseOut.subscribe({
+      next: index => {
+        if (index === this.rowIndex) {
+          this.isRowMouseOver = false;
+        }
+        // if (index === this.rowIndex) {
+        //   console.log('2121212');
+        //   var isShown = document.getElementById('element').children;
+        //   .classList//.contains('dropdown-menu');
+        //   console.log(isShown);
+        //   this.isRowMouseOver = false;
+        //   this.cdRef.detectChanges();
+        // }
       }
-    }
-  });*/
+    });
   }
 
   // called on init
@@ -57,6 +59,11 @@ export class GridCellActionsComponent implements ICellRendererAngularComp, OnDes
   // called when the cell is refreshed
   refresh(params: any): boolean {
     return true;
+  }
+
+  // action show details
+  showItem() {
+    this.params.context.showItem(this.params.data.deviceId);
   }
 
   // action edit

@@ -1,3 +1,4 @@
+import { GridCellIdLinkComponent } from './../../types/components/grid-custom-components/grid-cell-id-link.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
@@ -49,7 +50,8 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
     GridCellIconComponent,
     GridCellJobStatusComponent,
     GridCellActionsComponent,
-    MeterUnitFilterComponent
+    MeterUnitFilterComponent,
+    GridCellIdLinkComponent
   ],
   imports: [
     SharedModule,
@@ -72,7 +74,8 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
       GridCellInfoOfChildComponent,
       GridCellIconComponent,
       GridCellJobStatusComponent,
-      GridCellActionsComponent
+      GridCellActionsComponent,
+      GridCellIdLinkComponent
     ])
   ]
 })

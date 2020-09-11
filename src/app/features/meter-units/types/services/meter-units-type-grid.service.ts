@@ -1,3 +1,4 @@
+import { GridCellIdLinkComponent } from './../components/grid-custom-components/grid-cell-id-link.component';
 import { Injectable, Input, setTestabilityGetter } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -214,8 +215,9 @@ export class MeterUnitsTypeGridService {
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID5')
+        cellRenderer: 'gridCellIdLinkComponent',
+        headerTooltip: this.i18n('ID5'),
+        hide: true
       },
       {
         field: 'id6',
@@ -294,13 +296,13 @@ export class MeterUnitsTypeGridService {
         cellRenderer: 'gridCellJobStatusComponent',
         headerTooltip: this.i18n('Job status'),
         resizable: false
-      }
-      /*    {
+      },
+      {
         field: 'id',
         pinned: 'right',
-        width: 180,
-        minWidth: 180,
-        maxWidth: 180,
+        width: 90,
+        minWidth: 90,
+        maxWidth: 90,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,
@@ -311,7 +313,7 @@ export class MeterUnitsTypeGridService {
         cellRendererFramework: GridCellActionsComponent,
         headerName: '',
         cellClass: 'actions-button-cell'
-      }*/
+      }
     ];
   }
 
@@ -332,12 +334,13 @@ export class MeterUnitsTypeGridService {
       gridCellBreakerStateComponent: GridCellBreakerStateComponent,
       gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
       gridCellIconComponent: GridCellIconComponent,
-      gridCellJobStatusComponent: GridCellJobStatusComponent
+      gridCellJobStatusComponent: GridCellJobStatusComponent,
+      gridCellIdLinkComponent: GridCellIdLinkComponent
     };
   }
 
   // grid settings
-  public setGridOptions() {
+  public setGridOptions(context: any) {
     return {
       rowModelType: configAgGrid.rowModelType,
       defaultColDef: {
@@ -353,7 +356,8 @@ export class MeterUnitsTypeGridService {
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
       onSortChanged: this.onSortChanged,
-      onColumnVisible: this.onColumnVisible
+      onColumnVisible: this.onColumnVisible,
+      context
     };
   }
   /*

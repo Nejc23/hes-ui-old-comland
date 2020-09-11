@@ -20,4 +20,9 @@ export class GridCellNameComponent implements ICellRendererAngularComp {
     this.params = params;
     return true;
   }
+
+  // action show details
+  showItem() {
+    this.params.context.showItem(this.params.data.deviceId);
+  }
 }
