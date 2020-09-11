@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
+import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,14 @@ const routes: Routes = [
           permission: FunctionalityEnumerator.DCU
         },
         component: DataConcentratorUnitsComponent
+      },
+      {
+        path: ':id',
+        data: {
+          breadcrumb: 'Concentrator',
+          permission: FunctionalityEnumerator.DCU
+        },
+        component: DataConcentratorDetailComponent
       }
     ]
   }

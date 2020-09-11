@@ -12,4 +12,8 @@ export interface DcuForm {
   vendor: Codelist<number>;
   tags: Codelist<number>[];
   discoveryJob?: Codelist<string>;
+  status?: Codelist<number>;
+  port?: string;
+  address?: string;
+  mac?: string;
 }

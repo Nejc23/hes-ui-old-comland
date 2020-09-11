@@ -5,12 +5,20 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuLayout, bulkDelete, addConcentrator, dcuSync } from '../../consts/data-concentrator-units.const';
+import {
+  dataConcentratorUnits,
+  dcuLayout,
+  bulkDelete,
+  addConcentrator,
+  dcuSync,
+  updateConcentrator
+} from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -80,7 +88,6 @@ export class DataConcentratorUnitsService {
       password: payload.password
     };
 
-    console.log('dcuRequest: ', dcuRequest);
     return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
   }
 
@@ -88,11 +95,40 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', addConcentrator, payload as any);
   }
 
+  updateDcu(id: string, payload: DcuForm): Observable<string> {
+    const dcuRequest: DcuRequest = {
+      concentratorId: payload.idNumber,
+      concentratorIp: payload.ip,
+      type: payload.type ? payload.type.id : -1,
+      vendor: payload.vendor ? payload.vendor.id : -1,
+      name: payload.name,
+      userName: payload.userName,
+      password: payload.password,
+      address: payload.address,
+      mac: payload.mac,
+      port: payload.port,
+      status: payload.status ? payload.status.id : -1
+    };
+
+    return this.repository.makeRequest(this.updateDcuRequest(id, dcuRequest));
+  }
+
+  updateDcuRequest(id: string, payload: DcuRequest): HttpRequest<string> {
+    return new HttpRequest('PUT', `${updateConcentrator}/${id}`, payload as any);
+  }
+
   dcuSync(): Observable<any> {
     return this.repository.makeRequest(this.dcuSyncRequest());
   }
   dcuSyncRequest(): HttpRequest<any> {
-    console.log(`GET ${dcuSync}`);
     return new HttpRequest('GET', dcuSync);
+  }
+
+  getDataConcentratorUnit(id: string): Observable<DataConcentratorUnit> {
+    return this.repository.makeRequest(this.getDataConcentratorUnitRequest(id));
+  }
+
+  getDataConcentratorUnitRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${dataConcentratorUnits}/${id}`);
   }
 }

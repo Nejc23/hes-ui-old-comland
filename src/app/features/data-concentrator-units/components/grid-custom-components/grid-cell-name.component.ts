@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grid-cell-name',
@@ -8,7 +9,7 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 export class GridCellNameComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   // called on init
   agInit(params: any): void {
@@ -19,5 +20,10 @@ export class GridCellNameComponent implements ICellRendererAngularComp {
   refresh(params: any): boolean {
     this.params = params;
     return true;
+  }
+
+  toDetails() {
+    console.log(this.params.data.concentratorId);
+    this.router.navigate(['dataConcentratorUnits/' + this.params.data.concentratorId]);
   }
 }
