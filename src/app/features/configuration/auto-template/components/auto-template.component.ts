@@ -644,5 +644,9 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     return typeof this.activeElement !== 'undefined' && template.templateId === this.activeElement.templateId ? 'active' : 'none';
   }
 
+  showJobSection(): boolean {
+    return this.rowData && this.rowData.filter(d => d.autoTemplateRuleId !== 'new').length > 0;
+  }
+
   ngOnDestroy() {}
 }

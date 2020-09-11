@@ -1,3 +1,8 @@
+import { DcuForJobGridCellTypeComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-type.component';
+import { DcuForJobGridCellVendorComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-vendor.component';
+import { DcuForJobGridCellNameComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-name.component';
+import { DcuForJobGridCellIdNumberComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-id-number.component';
+import { DcuForJobComponent } from './../dcu-for-job/components/dcu-for-job.component';
 import { AllForJobComponent } from '../meter-units-for-job/components/meter-units-for-job.component';
 import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { NgModule } from '@angular/core';
@@ -15,6 +20,7 @@ import { AllForJobGridCellIdNumberComponent } from '../meter-units-for-job/compo
 import { AllForJobGridCellVendorComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-vendor.component';
 import { AllForJobGridCustomFilterComponent } from '../meter-units-for-job/components/grid-custom-components/grid-custom-filter.component';
 import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/components/grid-custom-components/grid-selection-header.component';
+import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components/grid-custom-components/grid-selection-header.component';
 
 @NgModule({
   entryComponents: [],
@@ -30,7 +36,13 @@ import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/co
     AllForJobGridCellIdNumberComponent,
     AllForJobGridCustomFilterComponent,
     AllForJobComponent,
-    AllForJobGridSelectionHeaderComponent
+    AllForJobGridSelectionHeaderComponent,
+    DcuForJobComponent,
+    DcuForJobGridCellIdNumberComponent,
+    DcuForJobGridCellNameComponent,
+    DcuForJobGridCellVendorComponent,
+    DcuForJobGridSelectionHeaderComponent,
+    DcuForJobGridCellTypeComponent
   ],
   imports: [
     SharedModule,
@@ -45,7 +57,12 @@ import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/co
       AllForJobGridCellNameComponent,
       AllForJobGridCellVendorComponent,
       AllForJobGridCellIdNumberComponent,
-      AllForJobGridCustomFilterComponent
+      AllForJobGridCustomFilterComponent,
+      DcuForJobGridCellIdNumberComponent,
+      DcuForJobGridCellNameComponent,
+      DcuForJobGridCellVendorComponent,
+      DcuForJobGridSelectionHeaderComponent,
+      DcuForJobGridCellTypeComponent
     ])
   ],
   exports: []

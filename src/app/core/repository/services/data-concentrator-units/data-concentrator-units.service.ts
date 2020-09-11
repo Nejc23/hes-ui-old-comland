@@ -2,15 +2,24 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams, GridFilterParams } from '../../interfaces/helpers/grid-request-params.interface';
+import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { dataConcentratorUnits, dcuLayout, bulkDelete, addConcentrator, dcuSync } from '../../consts/data-concentrator-units.const';
+import {
+  dataConcentratorUnits,
+  dcuLayout,
+  bulkDelete,
+  addConcentrator,
+  dcuSync,
+  dcuForJob,
+  removeDcuFromJob
+} from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -94,5 +103,23 @@ export class DataConcentratorUnitsService {
   dcuSyncRequest(): HttpRequest<any> {
     console.log(`GET ${dcuSync}`);
     return new HttpRequest('GET', dcuSync);
+  }
+
+  getConcentratorsForJob(param: RequestDcuForJob): Observable<ResponseDcuForJob> {
+    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
+    return this.repository.makeRequest(this.getConcentratorsForJobRequest(param));
+  }
+
+  getConcentratorsForJobRequest(param: RequestDcuForJob): HttpRequest<any> {
+    return new HttpRequest('POST', dcuForJob, param);
+  }
+
+  removeConcentratorsFromJob(payload: RequestDcuForJob): Observable<any> {
+    payload.requestId = payload.requestId === null ? uuidv4() : payload.requestId;
+    return this.repository.makeRequest(this.removeConcentratorsFromJobRequest(payload));
+  }
+
+  removeConcentratorsFromJobRequest(payload: RequestDcuForJob): HttpRequest<any> {
+    return new HttpRequest('POST', removeDcuFromJob, payload as any);
   }
 }

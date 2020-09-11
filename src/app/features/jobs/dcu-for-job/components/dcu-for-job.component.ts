@@ -1,9 +1,8 @@
+import { DataConcentratorUnitsService } from './../../../../core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ActivatedRoute } from '@angular/router';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
@@ -21,17 +20,18 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { AllForJobStaticTextService } from '../services/meter-units-for-job-static-text.service';
-import { AllForJobGridEventEmitterService } from '../services/meter-units-for-job-grid-event-emitter.service';
-import { RequestMeterUnitsForJob } from 'src/app/core/repository/interfaces/meter-units/meter-units-for-job.interface';
-import { MeterUnitsForJobGridService } from '../services/meter-units-for-job-grid.service';
 import { RequestConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestDcuForJob } from 'src/app/core/repository/interfaces/jobs/dcu/dcu-for-job.interface';
+import { DcuForJobGridService } from '../services/dcu-for-job-grid.service';
+import { DcuForJobStaticTextService } from '../services/dcu-for-job-static-text.service';
+import { DcuForJobGridEventEmitterService } from '../services/dcu-for-job-grid-event-emitter.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 
 @Component({
-  templateUrl: './meter-units-for-job.component.html'
+  // selector: 'app-meter-units-all-for-job',
+  templateUrl: './dcu-for-job.component.html'
 })
-export class AllForJobComponent implements OnInit, OnDestroy {
+export class DcuForJobComponent implements OnInit, OnDestroy {
   meterTypes$: Codelist<number>[] = [];
 
   scheduleId = '';
@@ -62,10 +62,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   private gridColumnApi;
   public icons;
   public frameworkComponents;
-  public sideBar;
   loadGrid = true;
   programmaticallySelectRow = false;
-  requestModel: RequestMeterUnitsForJob = {
+  requestModel: RequestDcuForJob = {
     requestId: null,
     scheduleId: null,
     startRow: 0,
@@ -78,7 +77,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       firmware: null,
       vendor: null,
       readStatus: null,
-      disconnectorState: null,
       showChildInfoMBus: false,
       showDeleted: true,
       showWithoutTemplate: true
@@ -98,16 +96,15 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private meterUnitsForJobGridService: MeterUnitsForJobGridService,
-    private sidebarService: SidebarService,
-    private staticTextService: AllForJobStaticTextService,
+    private dcuForJobGridService: DcuForJobGridService,
+    private staticTextService: DcuForJobStaticTextService,
     private i18n: I18n,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private service: MyGridLinkService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
-    private meterUnitsTypeService: MeterUnitsService,
+    private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private toast: ToastNotificationService,
-    private eventService: AllForJobGridEventEmitterService,
+    private eventService: DcuForJobGridEventEmitterService,
     private authService: AuthService,
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
     private modalService: ModalService,
@@ -116,7 +113,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.scheduleId = params.scheduleId;
-      meterUnitsForJobGridService.meterUnitsAllId = params.id;
+      dcuForJobGridService.dcuId = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
         : 'grdLayoutMUT-typeId-' + params.id;
@@ -126,14 +123,14 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       }
 
       if (this.gridColumnApi) {
-        const dataFromCookie = this.meterUnitsForJobGridService.getCookieData(); // saved columns settings
+        const dataFromCookie = this.dcuForJobGridService.getCookieData(); // saved columns settings
         if (dataFromCookie) {
           this.gridColumnApi.setColumnState(dataFromCookie);
         }
       }
 
       if (this.gridApi) {
-        const cookieSort = this.meterUnitsForJobGridService.getCookieDataSortModel();
+        const cookieSort = this.dcuForJobGridService.getCookieDataSortModel();
         if (cookieSort !== undefined && cookieSort !== null) {
           this.gridApi.setSortModel(cookieSort);
         }
@@ -141,8 +138,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     });
 
     // this.filters = staticTextService.noFilterAppliedTekst;
-    this.frameworkComponents = meterUnitsForJobGridService.setFrameworkComponents();
-    this.gridOptions = this.meterUnitsForJobGridService.setGridOptions();
+    this.frameworkComponents = dcuForJobGridService.setFrameworkComponents();
+    this.gridOptions = this.dcuForJobGridService.setGridOptions();
     // this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
     //   next: (event: MeterUnitsLayout) => {
     //     console.log('test 1');
@@ -186,9 +183,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     });
 
     // set grid columns
-    this.columns = this.meterUnitsForJobGridService.setGridDefaultColumns(false);
-    // set right sidebar on the grid
-    this.sideBar = this.meterUnitsForJobGridService.setSideBar();
+    this.columns = this.dcuForJobGridService.setGridDefaultColumns(false);
 
     this.localeText = {
       // for side panel
@@ -248,7 +243,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   }
 
   checkSelectedAll() {
-    return this.meterUnitsForJobGridService.getSessionSettingsSelectedAll();
+    return this.dcuForJobGridService.getSessionSettingsSelectedAll();
   }
 
   clearFilter() {
@@ -267,12 +262,12 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    if ($event !== this.meterUnitsForJobGridService.getSessionSettingsSearchedText()) {
-      this.meterUnitsForJobGridService.setSessionSettingsSearchedText($event);
+    if ($event !== this.dcuForJobGridService.getSessionSettingsSearchedText()) {
+      this.dcuForJobGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
-      this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
-      this.meterUnitsForJobGridService.setSessionSettingsSelectedRows([]);
+      this.dcuForJobGridService.setSessionSettingsPageIndex(0);
+      this.dcuForJobGridService.setSessionSettingsSelectedRows([]);
       this.gridApi.onFilterChanged();
     }
   }
@@ -292,17 +287,17 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   // click on the link "select all"
   selectAll() {
-    this.meterUnitsForJobGridService.setSessionSettingsClearExcludedRows();
-    this.meterUnitsForJobGridService.setSessionSettingsSelectedAll(true);
+    this.dcuForJobGridService.setSessionSettingsClearExcludedRows();
+    this.dcuForJobGridService.setSessionSettingsSelectedAll(true);
     this.eventService.selectDeselectAll(true);
     this.eventService.setIsSelectedAll(true);
   }
 
   // click on the link "deselect all"
   deselectAll() {
-    this.meterUnitsForJobGridService.setSessionSettingsClearExcludedRows();
-    this.meterUnitsForJobGridService.setSessionSettingsSelectedRows([]);
-    this.meterUnitsForJobGridService.setSessionSettingsSelectedAll(false);
+    this.dcuForJobGridService.setSessionSettingsClearExcludedRows();
+    this.dcuForJobGridService.setSessionSettingsSelectedRows([]);
+    this.dcuForJobGridService.setSessionSettingsSelectedAll(false);
     this.eventService.selectDeselectAll(false);
     this.eventService.setIsSelectedAll(false);
   }
@@ -343,8 +338,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const datasource = {
       getRows(paramsRow) {
         that.requestModel.scheduleId = that.scheduleId; // type of meter units
-        that.requestModel.startRow = that.meterUnitsForJobGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.meterUnitsForJobGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.dcuForJobGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.dcuForJobGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         // console.log(`requestModel = `, that.requestModel);
         // that.requestModel.filterModel = that.setFilter();
@@ -356,7 +351,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
+              that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe(response => {
                 that.gridApi.hideOverlay();
 
                 that.totalCount = 0;
@@ -366,10 +361,10 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
                 if (response && response.grid && response.grid.totalCount > 0) {
                   that.totalCount = response.grid.totalCount;
-                  that.gridApi.paginationGoToPage(that.meterUnitsForJobGridService.getSessionSettingsPageIndex());
+                  that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
                   paramsRow.successCallback(response.grid.data, response.grid.totalCount);
                   that.selectRows(that.gridApi);
-                  that.eventService.setIsSelectedAll(that.meterUnitsForJobGridService.getSessionSettingsSelectedAll());
+                  that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
                   // params.failCallback();
                 } else {
                   if (that.noSearch() && that.noFilters()) {
@@ -386,7 +381,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
             });
         } else {
           console.log(`requestModel = `, that.requestModel);
-          that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
+          that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe(response => {
             that.gridApi.hideOverlay();
             that.totalCount = 0;
             if (response) {
@@ -395,10 +390,10 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
             if (response && response.grid && response.grid.totalCount > 0) {
               that.totalCount = response.grid.totalCount;
-              that.gridApi.paginationGoToPage(that.meterUnitsForJobGridService.getSessionSettingsPageIndex());
+              that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
               paramsRow.successCallback(response.grid.data, response.grid.totalCount);
               that.selectRows(that.gridApi);
-              that.eventService.setIsSelectedAll(that.meterUnitsForJobGridService.getSessionSettingsSelectedAll());
+              that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
               // params.failCallback();
             } else {
               // if (that.noSearch() && that.noFilters()) {
@@ -418,14 +413,14 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
-    this.meterUnitsForJobGridService.onColumnVisibility(params);
+    this.dcuForJobGridService.onColumnVisibility(params);
   }
 
   // on close tool panel reload filter model
   toolPanelChanged(params) {
     if (params.source === undefined) {
       if (
-        !this.meterUnitsForJobGridService.checkIfFilterModelAndCookieAreSame(
+        !this.dcuForJobGridService.checkIfFilterModelAndCookieAreSame(
           this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
           this.requestModel.filterModel
         )
@@ -446,15 +441,15 @@ export class AllForJobComponent implements OnInit, OnDestroy {
           };
         }
         this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-        this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
+        // this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
         this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
-        this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
-        this.meterUnitsForJobGridService.setSessionSettingsSelectedAll(false);
-        this.meterUnitsForJobGridService.setSessionSettingsSelectedRows([]);
+        this.dcuForJobGridService.setSessionSettingsPageIndex(0);
+        this.dcuForJobGridService.setSessionSettingsSelectedAll(false);
+        this.dcuForJobGridService.setSessionSettingsSelectedRows([]);
         this.eventService.selectDeselectAll(false);
         this.eventService.setIsSelectedAll(false);
         this.gridApi.onFilterChanged();
@@ -470,19 +465,19 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     }
 
     if (params.newPage && !this.loadGrid) {
-      this.meterUnitsForJobGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
+      this.dcuForJobGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
-      params.api.paginationGoToPage(this.meterUnitsForJobGridService.getSessionSettingsPageIndex());
+      params.api.paginationGoToPage(this.dcuForJobGridService.getSessionSettingsPageIndex());
     }
   }
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    if (this.meterUnitsForJobGridService.getSessionSettingsSelectedAll()) {
-      this.meterUnitsForJobGridService.setSessionSettingsExcludedRows(params.node);
+    if (this.dcuForJobGridService.getSessionSettingsSelectedAll()) {
+      this.dcuForJobGridService.setSessionSettingsExcludedRows(params.node);
     } else {
-      this.meterUnitsForJobGridService.setSessionSettingsSelectedRows(params.node);
+      this.dcuForJobGridService.setSessionSettingsSelectedRows(params.node);
     }
   }
 
@@ -545,7 +540,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   // set filter in request model
   setFilter() {
     if (
-      !this.meterUnitsForJobGridService.checkIfFilterModelAndCookieAreSame(
+      !this.dcuForJobGridService.checkIfFilterModelAndCookieAreSame(
         this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
         this.requestModel.filterModel
       )
@@ -561,7 +556,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-      this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
+      // this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -593,7 +588,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   }
 
   setSearch() {
-    const search = this.meterUnitsForJobGridService.getSessionSettingsSearchedText();
+    const search = this.dcuForJobGridService.getSessionSettingsSearchedText();
     if (search && search !== '') {
       return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
     }
@@ -603,16 +598,20 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   // select rows on load grid from session
   selectRows(api: any) {
     this.programmaticallySelectRow = true;
-    const selectedAll = this.meterUnitsForJobGridService.getSessionSettingsSelectedAll();
-    const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
+    const selectedAll = this.dcuForJobGridService.getSessionSettingsSelectedAll();
+    const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
     api.forEachNode(node => {
       if (selectedAll) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
 
-        const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
+        const excludedRows = this.dcuForJobGridService.getSessionSettingsExcludedRows();
         api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.deviceId === node2.data.deviceId)) {
+          if (
+            node2.rowIndex >= startRow &&
+            node2.rowIndex <= endRow &&
+            !_.find(excludedRows, x => x.concentratorId === node2.data.concentratorId)
+          ) {
             node2.setSelected(true);
           }
         });
@@ -621,7 +620,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !selectedAll &&
-        _.find(selectedRows, x => x.deviceId === node.data.deviceId) !== undefined
+        _.find(selectedRows, x => x.concentratorId === node.data.concentratorId) !== undefined
       ) {
         node.setSelected(true);
       } else {
@@ -656,9 +655,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
           this.requestModel.filterModel.firmware[0].id === 0) &&
-        (!this.requestModel.filterModel.disconnectorState ||
-          this.requestModel.filterModel.disconnectorState.length === 0 ||
-          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
+        // (!this.requestModel.filterModel.breakerState ||
+        //   this.requestModel.filterModel.breakerState.length === 0 ||
+        //   this.requestModel.filterModel.breakerState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showDeleted &&
         !this.requestModel.filterModel.showWithoutTemplate &&
@@ -678,10 +677,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     if (jobDescription === undefined || jobDescription.trim().length === 0) {
       jobDescription = this.staticTextService.notAvailableTekst;
     } else {
-      jobDescription = this.staticTextService.headerTitleMeterUnitsAll + jobDescription;
+      jobDescription = this.staticTextService.headerTitleDcu + jobDescription;
     }
 
-    // this.headerTitle = `${this.staticTextService.headerTitleMeterUnitsAll} ${jobDescription}`;
     this.breadcrumbService.setPageName(jobDescription);
   }
 
@@ -689,10 +687,12 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const selectedRows = this.gridApi.getSelectedRows();
     const deviceIdsParam = [];
 
+    console.log('onRemoveFromJob, selectedRows', selectedRows);
+
     // const selectedDeviceCount = this.totalCount;
-    const selectedAll = this.meterUnitsForJobGridService.getSessionSettingsSelectedAll();
+    const selectedAll = this.dcuForJobGridService.getSessionSettingsSelectedAll();
     if (!selectedAll && selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+      selectedRows.map(row => deviceIdsParam.push(row.concentratorId));
     }
 
     const selectedText = `${this.getSelectedCount()}`;
@@ -701,7 +701,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     component.btnConfirmText = this.i18n('Confirm');
     let response: Observable<any> = new Observable();
 
-    const request: RequestMeterUnitsForJob = {
+    const request: RequestDcuForJob = {
       requestId: null,
       scheduleId: this.requestModel.scheduleId,
       startRow: 0,
@@ -713,19 +713,19 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     };
 
     if (selectedAll) {
-      const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
+      const excludedRows = this.dcuForJobGridService.getSessionSettingsExcludedRows();
       if (excludedRows && excludedRows.length > 0) {
         request.excludeIds = [];
-        excludedRows.map(row => request.excludeIds.push(row.deviceId));
+        excludedRows.map(row => request.excludeIds.push(row.concentratorId));
       }
     }
 
-    console.log('removeMeterUnits.request', request);
-    response = this.meterUnitsTypeService.removeMeterUnitsFromJob(request);
+    console.log('removeConcentratorsFromJob.request', request);
+    response = this.dataConcentratorUnitsService.removeConcentratorsFromJob(request);
 
     component.btnConfirmText = this.i18n('Remove');
     component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`Remove ${selectedText} Meter Unit(s) from Job?`);
+    component.modalBody = this.i18n(`Remove ${selectedText} Concentrator(s) from Job?`);
 
     modalRef.result.then(
       data => {
@@ -734,7 +734,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         response.subscribe(
           value => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.successToast(this.i18n('Selected Meter Units removed successfully.'));
+            this.toast.successToast(this.i18n('Selected Concentrators removed successfully.'));
             this.refresh();
           },
           e => {
@@ -756,8 +756,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       excludeIds: null
     };
 
-    if (this.meterUnitsForJobGridService.getSessionSettingsSelectedAll()) {
-      const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
+    if (this.dcuForJobGridService.getSessionSettingsSelectedAll()) {
+      const excludedRows = this.dcuForJobGridService.getSessionSettingsExcludedRows();
 
       requestParam.filter = this.requestModel.filterModel;
       requestParam.search = this.requestModel.searchModel;
@@ -776,10 +776,10 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   getSelectedCount(): number {
     if (this.checkSelectedAll()) {
-      const excludedRowsLength = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows().length;
+      const excludedRowsLength = this.dcuForJobGridService.getSessionSettingsExcludedRows().length;
       return this.totalCount - excludedRowsLength;
     } else {
-      return this.meterUnitsForJobGridService.getSessionSettingsSelectedRows().length;
+      return this.dcuForJobGridService.getSessionSettingsSelectedRows().length;
     }
   }
 
