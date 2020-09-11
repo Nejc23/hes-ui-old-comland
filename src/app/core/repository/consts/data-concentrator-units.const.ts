@@ -20,3 +20,6 @@ export const dcuVendors = `${basePath}/concentrator-vendor-codes`;
 
 // DCU select
 export const dcuSelect = `${basePath}/select-concentrators`;
+export const dcuForJob = `${basePath}/concentrators-for-job`;
+
+export const removeDcuFromJob = `${basePath}/remove-concentrators-from-job`;

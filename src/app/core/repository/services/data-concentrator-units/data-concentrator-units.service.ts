@@ -11,7 +11,9 @@ import {
   bulkDelete,
   addConcentrator,
   dcuSync,
-  updateConcentrator
+  dcuForJob,
+  updateConcentrator,
+  removeDcuFromJob
 } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
@@ -19,6 +21,7 @@ import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu
 import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
+import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -88,6 +91,7 @@ export class DataConcentratorUnitsService {
       password: payload.password
     };
 
+    console.log('dcuRequest: ', dcuRequest);
     return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
   }
 
@@ -130,5 +134,23 @@ export class DataConcentratorUnitsService {
 
   getDataConcentratorUnitRequest(id: string): HttpRequest<any> {
     return new HttpRequest('GET', `${dataConcentratorUnits}/${id}`);
+  }
+
+  getConcentratorsForJob(param: RequestDcuForJob): Observable<ResponseDcuForJob> {
+    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
+    return this.repository.makeRequest(this.getConcentratorsForJobRequest(param));
+  }
+
+  getConcentratorsForJobRequest(param: RequestDcuForJob): HttpRequest<any> {
+    return new HttpRequest('POST', dcuForJob, param);
+  }
+
+  removeConcentratorsFromJob(payload: RequestDcuForJob): Observable<any> {
+    payload.requestId = payload.requestId === null ? uuidv4() : payload.requestId;
+    return this.repository.makeRequest(this.removeConcentratorsFromJobRequest(payload));
+  }
+
+  removeConcentratorsFromJobRequest(payload: RequestDcuForJob): HttpRequest<any> {
+    return new HttpRequest('POST', removeDcuFromJob, payload as any);
   }
 }

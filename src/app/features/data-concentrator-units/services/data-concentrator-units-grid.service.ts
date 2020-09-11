@@ -348,6 +348,51 @@ export class DataConcentratorUnitsGridService {
     );
   }
 
+  // excluded rows
+  public getSessionSettingsExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.excludedRows;
+  }
+
+  // clear excluded rows
+  public setSessionSettingsClearExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.excludedRows = [];
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
+      settings
+    );
+  }
+
+  // set excluded rows
+  public setSessionSettingsExcludedRows(excludedRow: any) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+
+    if (!settings.excludedRows) {
+      settings.excludedRows = [];
+    }
+
+    if (excludedRow.selected !== undefined && excludedRow.selected) {
+      if (_.find(settings.excludedRows, x => x.id === excludedRow.data.id)) {
+        settings.excludedRows = settings.excludedRows.filter(obj => obj.id !== excludedRow.data.id);
+      }
+    } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
+      if (!_.find(settings.excludedRows, x => x.id === excludedRow.data.id)) {
+        settings.excludedRows.push(excludedRow.data);
+      }
+    } else if (excludedRow.length === 0) {
+      settings.excludedRows = [];
+    }
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
+      settings
+    );
+  }
+
   // searched text
   public getSessionSettingsSearchedText() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);

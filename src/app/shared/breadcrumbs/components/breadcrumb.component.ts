@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Breadcrumb } from '../interfaces/breadcrumb.interface';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { BreadcrumbService } from '../services/breadcrumb.service';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -11,9 +12,10 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 })
 export class BreadcrumbComponent implements OnInit {
   public breadcrumbs: Breadcrumb[];
+  public pageName: string;
   a = 'Close';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private i18n: I18n) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private i18n: I18n, private service: BreadcrumbService) {
     this.breadcrumbs = [];
   }
 
@@ -25,6 +27,10 @@ export class BreadcrumbComponent implements OnInit {
       // set breadcrumbs
       const root: ActivatedRoute = this.activatedRoute.root;
       this.breadcrumbs = this.buildBreadCrumb(root);
+    });
+
+    this.service.eventEmitterSetPageName.subscribe(pageName => {
+      this.pageName = pageName;
     });
   }
 
@@ -66,5 +72,9 @@ export class BreadcrumbComponent implements OnInit {
 
   getBreadcrumbLabel(breadcrumb: Breadcrumb) {
     return this.i18n('{{label}}', { label: breadcrumb.label });
+  }
+
+  showBreadcrumb(): boolean {
+    return this.breadcrumbs && this.breadcrumbs.length > 0 && this.breadcrumbs[0].label !== this.pageName;
   }
 }

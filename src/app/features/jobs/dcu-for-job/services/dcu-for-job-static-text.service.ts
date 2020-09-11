@@ -4,13 +4,13 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 @Injectable({
   providedIn: 'root'
 })
-export class AllForJobStaticTextService {
-  public titleBreadCrumbs = this.i18n('Overview - Meter Units');
+export class DcuForJobStaticTextService {
+  public titleBreadCrumbs = this.i18n('Overview - Concentrators');
 
   constructor(private i18n: I18n) {}
 
-  get headerTitleMeterUnitsAll() {
-    return this.i18n('Meter Units for');
+  get headerTitleDcu() {
+    return this.i18n('Concentrator units for');
   }
 
   get notAvailableTekst() {

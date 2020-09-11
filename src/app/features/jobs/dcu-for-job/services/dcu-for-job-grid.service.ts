@@ -1,32 +1,32 @@
+import { DcuForJobGridCellTypeComponent } from './../components/grid-custom-components/grid-cell-type.component';
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
-import { AllForJobGridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
-import { AllForJobGridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
-import { AllForJobGridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
-import { AllForJobGridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
-import { AllForJobGridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
-import { GridPagination } from '../interfaces/grid-pagination.interface';
-import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { GridPagination } from 'src/app/shared/ag-grid/interfaces/grid-pagination.interface';
+import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { DcuForJobGridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
+import { DcuForJobGridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
+import { DcuForJobGridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
+import { DcuForJobGridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MeterUnitsForJobGridService {
-  cookieNameForGridSettings = 'grdColMUT-allId-';
-  cookieNameForGridSort = 'grdColMUTSort-allId-';
-  sessionNameForGridState = 'grdStateMUT-allId-';
-  gridName = 'grdMUT-requestAllIds';
-  gridNameBreakerState = 'grdMUT-breaker-state-requestAllIds';
+export class DcuForJobGridService {
+  cookieNameForGridSettings = 'grdColDCU-allId-';
+  cookieNameForGridSort = 'grdColDCUSort-allId-';
+  sessionNameForGridState = 'grdStateDCU-allId-';
+  gridName = 'grdDCU-requestAllIds';
+  gridNameBreakerState = 'grdDCU-breaker-state-requestAllIds';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
-  meterUnitsId: number;
+  dcuId: number;
 
   constructor(
     private i18n: I18n,
@@ -34,25 +34,25 @@ export class MeterUnitsForJobGridService {
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService
   ) {}
 
-  public set meterUnitsAllId(id: number) {
-    this.meterUnitsId = id;
-    this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT-allId-' + id)
+  public set dcuForJobId(id: number) {
+    this.dcuId = id;
+    this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes(this.cookieNameForGridSettings + id)
       ? this.cookieNameForGridSettings
-      : 'grdColMUT-allId-' + id;
-    this.cookieNameForGridSort = this.cookieNameForGridSort.includes('grdColMUTSort-allId-' + id)
+      : this.cookieNameForGridSettings + id;
+    this.cookieNameForGridSort = this.cookieNameForGridSort.includes(this.cookieNameForGridSort + id)
       ? this.cookieNameForGridSort
-      : 'grdColMUTSort-allId-' + id;
-    this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT-allId-' + id)
+      : this.cookieNameForGridSort + id;
+    this.sessionNameForGridState = this.sessionNameForGridState.includes(this.sessionNameForGridState + id)
       ? this.sessionNameForGridState
-      : 'grdStateMUT-allId-' + id;
+      : this.sessionNameForGridState + id;
   }
 
   public setFrameworkComponents() {
     return {
-      gridCellNameComponent: AllForJobGridCellNameComponent,
-      gridCellVendorComponent: AllForJobGridCellVendorComponent,
-      gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent,
-      gridCustomFilterComponent: AllForJobGridCustomFilterComponent
+      gridCellNameComponent: DcuForJobGridCellNameComponent,
+      gridCellVendorComponent: DcuForJobGridCellVendorComponent,
+      gridCellIdNumberComponent: DcuForJobGridCellIdNumberComponent,
+      gridCellTypeComponent: DcuForJobGridCellTypeComponent
 
       // gridCellMeterIdComponent: GridCellMeterIdComponent,
       // gridCellTagsComponent: GridCellTagsComponent,
@@ -70,47 +70,13 @@ export class MeterUnitsForJobGridService {
     };
   }
 
-  public setSideBar() {
-    return {
-      toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
-        {
-          id: 'columns',
-          labelDefault: 'Columns',
-          labelKey: 'columns',
-          iconKey: 'columns',
-          toolPanel: 'agColumnsToolPanel',
-          toolPanelParams: {
-            suppressRowGroups: true,
-            suppressValues: true,
-            suppressPivots: true,
-            suppressPivotMode: true,
-            suppressSideButtons: true,
-            suppressColumnFilter: true,
-            suppressColumnExpandAll: true
-          }
-        }
-      ]
-    };
-  }
-
   /**
    *  grid columns settings
    */
   public setGridDefaultColumns(sample: boolean) {
     return [
       {
-        headerComponentFramework: AllForJobGridSelectionHeaderComponent,
+        headerComponentFramework: DcuForJobGridSelectionHeaderComponent,
         pinned: true,
         minWidth: 45,
         maxWidth: 45,
@@ -132,6 +98,24 @@ export class MeterUnitsForJobGridService {
         headerTooltip: this.i18n('Name')
       },
       {
+        field: 'id',
+        headerName: this.i18n('ID'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID')
+      },
+      {
+        field: 'type',
+        headerName: this.i18n('Type'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellTypeComponent',
+        headerTooltip: this.i18n('Type')
+      },
+      {
         field: 'vendor',
         headerName: this.i18n('Vendor'),
         pinned: false,
@@ -139,15 +123,6 @@ export class MeterUnitsForJobGridService {
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
         headerTooltip: this.i18n('Vendor')
-      },
-      {
-        field: 'id5',
-        headerName: this.i18n('ID5'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID5')
       }
     ];
   }
@@ -217,11 +192,11 @@ export class MeterUnitsForJobGridService {
     }
 
     if (excludedRow.selected !== undefined && excludedRow.selected) {
-      if (_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
-        settings.excludedRows = settings.excludedRows.filter(obj => obj.deviceId !== excludedRow.data.deviceId);
+      if (_.find(settings.excludedRows, x => x.concentratorId === excludedRow.data.concentratorId)) {
+        settings.excludedRows = settings.excludedRows.filter(obj => obj.concentratorId !== excludedRow.data.concentratorId);
       }
     } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
-      if (!_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
+      if (!_.find(settings.excludedRows, x => x.concentratorId === excludedRow.data.concentratorId)) {
         settings.excludedRows.push(excludedRow.data);
       }
     } else if (excludedRow.length === 0) {
@@ -245,11 +220,11 @@ export class MeterUnitsForJobGridService {
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, x => x.deviceId === selectedRow.data.deviceId)) {
+      if (!_.find(settings.selectedRows, x => x.concentratorId === selectedRow.data.concentratorId)) {
         settings.selectedRows.push(selectedRow.data);
       }
     } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter(obj => obj.deviceId !== selectedRow.data.deviceId);
+      settings.selectedRows = settings.selectedRows.filter(obj => obj.concentratorId !== selectedRow.data.concentratorId);
     } else if (selectedRow.length === 0) {
       settings.selectedRows = [];
     }
@@ -261,17 +236,14 @@ export class MeterUnitsForJobGridService {
     );
   }
 
-  public checkIfFilterModelAndCookieAreSame(sessionFilter: MeterUnitsLayout, requestModel: GridFilterParams) {
+  public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
     if (
       JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
-      JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
-      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
-      JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
-      JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.disconnectorState) &&
-      JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
-      JSON.stringify(sessionFilter.showDeletedMeterUnitsFilter) === JSON.stringify(requestModel.showDeleted) &&
-      JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate)
+      JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
+      JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
+      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
+      JSON.stringify(sessionFilter.showDeletedFilter) === JSON.stringify(requestModel.showDeleted)
     ) {
       return true;
     }

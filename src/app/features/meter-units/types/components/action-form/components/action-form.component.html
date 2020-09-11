@@ -7,16 +7,16 @@
     </div>
   <div class="btn-group">
       <button type="button" class="btn btn-light"  [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
-      </button>   
-      <div class="dropdown-menu dropdown-menu-right">        
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-item">
-          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>                  
-        </div>        
-        <div class="dropdown-divider"></div>        
+          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>
+        </div>
+        <div class="dropdown-divider"></div>
         <app-input-multiselect [form]="form" [property]="columnsProperty" (change)="showHideFromArrayOfCheckBoxes()" name="multSelectTypes" [isReadOnly]="false"
           [options]="columns$" [inline]="false" class="dropdown-item" i18n-label>
-        </app-input-multiselect>        
-      </div>  
+        </app-input-multiselect>
+      </div>
   </div>
   <button type="button" class="btn btn-light" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="far fa-redo"></i></button>

@@ -3,4 +3,5 @@ export interface GridSettingsSessionStore {
   pageIndex: number;
   selectedRows: any[];
   isSelectedAll: boolean;
+  excludedRows: any[];
 }
