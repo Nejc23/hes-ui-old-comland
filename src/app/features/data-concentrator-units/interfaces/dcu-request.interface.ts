@@ -6,4 +6,8 @@ export interface DcuRequest {
   name: string;
   userName?: string;
   password?: string;
+  address?: string;
+  mac?: string;
+  status?: number;
+  port?: string;
 }

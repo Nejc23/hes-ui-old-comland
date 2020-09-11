@@ -19,11 +19,13 @@ import { GridCellIdNumberComponent } from '../components/grid-custom-components/
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 import { DcFilterComponent } from '../components/filter-form/dc-filter.component';
+import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 
 @NgModule({
   entryComponents: [],
   declarations: [
     DataConcentratorUnitsComponent,
+    DataConcentratorDetailComponent,
     ActionFormComponent,
     GridSelectionHeaderComponent,
     GridCellStatusComponent,
