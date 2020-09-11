@@ -120,6 +120,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (CodelistInterceptor.canInterceptCompanies(request)) {
                 return CodelistInterceptor.interceptCompanies(request);
               }
+              if (CodelistInterceptor.canInterceptGetRegisters(request)) {
+                return CodelistInterceptor.interceptGetRegisters();
+              }
 
               // meter unit codelists
               if (MeterUnitCodelistInterceptor.canInterceptMeterUnitType(request)) {

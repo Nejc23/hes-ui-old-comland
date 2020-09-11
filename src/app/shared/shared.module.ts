@@ -60,6 +60,7 @@ import { PlcMeterTouConfigComponent } from '../features/meter-units/common/compo
 import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { PlcMeterMonitorComponent } from '../features/meter-units/common/components/plc-meter-monitor/plc-meter-monitor.component';
+import { PlcMeterLimiterComponent } from '../features/meter-units/common/components/plc-meter-limiter/plc-meter-limiter.component';
 
 @NgModule({
   exports: [
@@ -87,6 +88,7 @@ import { PlcMeterMonitorComponent } from '../features/meter-units/common/compone
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
+    PlcMeterLimiterComponent,
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
@@ -144,6 +146,7 @@ import { PlcMeterMonitorComponent } from '../features/meter-units/common/compone
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
+    PlcMeterLimiterComponent,
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
@@ -188,6 +191,7 @@ import { PlcMeterMonitorComponent } from '../features/meter-units/common/compone
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
+    PlcMeterLimiterComponent,
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,

@@ -10,7 +10,6 @@ export class AutoTemplatesReadingJobsListInterceptor {
   constructor() {}
 
   static interceptAutoTemplatesReadingJobsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    console.log('2222222222222222222222222222222222222222222222222222222222222');
     const body: SchedulerJobsList[] = [
       {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
@@ -63,8 +62,6 @@ export class AutoTemplatesReadingJobsListInterceptor {
   }
 
   static canInterceptAutoTemplatesReadingJobsList(request: HttpRequest<any>): boolean {
-    console.log('ena ena');
-    console.log(request.url);
     return new RegExp(`${schedulerJobsListByJobId}$`).test(request.url) && request.method.endsWith('POST');
   }
 }

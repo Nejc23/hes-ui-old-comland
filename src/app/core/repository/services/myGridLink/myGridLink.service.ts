@@ -10,7 +10,11 @@ import {
   RequestTOUData,
   ResponseTOUData,
   OnDemandRequestData,
-  RequestSetMonitor
+  RequestSetMonitor,
+  RequestLimiterGetRegisters,
+  RequestSetLimiter,
+  ResponseSetMonitor,
+  ResponseSetLimiter
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -24,13 +28,16 @@ import {
   importTemplates,
   triggerDeviceUpgrade,
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
-  onDemandSetMonitor
+  onDemandSetMonitor,
+  getRegisters,
+  onDemandSetLimiter
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
   MeterUnitsActivateUpgradeRequest,
   MeterUnitsActivateUpgradeResponse
 } from '../../interfaces/meter-units/meter-units-acctivate-upgrade.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -128,11 +135,28 @@ export class MyGridLinkService {
   }
 
   // trigger set montor
-  setMonitor(payload: RequestSetMonitor): Observable<any> {
+  setMonitor(payload: RequestSetMonitor): Observable<ResponseSetMonitor> {
     return this.repository.makeRequest(this.setMonitorRequest(payload));
   }
 
   setMonitorRequest(payload: RequestSetMonitor): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetMonitor}`, payload);
+  }
+
+  // trigger set limter
+  getLimiterRegisters(request: RequestLimiterGetRegisters): Observable<Codelist<string>[]> {
+    return this.repository.makeRequest(this.getLimiterRegistersRequest(request));
+  }
+
+  getLimiterRegistersRequest(request: RequestLimiterGetRegisters): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.templating}${getRegisters}`, request);
+  }
+
+  setLimiter(payload: RequestSetLimiter): Observable<ResponseSetLimiter> {
+    return this.repository.makeRequest(this.setLimiterRequest(payload));
+  }
+
+  setLimiterRequest(payload: RequestSetLimiter): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetLimiter}`, payload);
   }
 }
