@@ -17,7 +17,7 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 @Injectable({
   providedIn: 'root'
 })
-export class AllForJobGridService {
+export class MeterUnitsForJobGridService {
   cookieNameForGridSettings = 'grdColMUT-allId-';
   cookieNameForGridSort = 'grdColMUTSort-allId-';
   sessionNameForGridState = 'grdStateMUT-allId-';
@@ -149,212 +149,6 @@ export class AllForJobGridService {
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: this.i18n('ID5')
       }
-
-      // {
-      //   headerComponentFramework: GridSelectionHeaderComponent,
-      //   pinned: true,
-      //   minWidth: 45,
-      //   maxWidth: 45,
-      //   width: 45,
-      //   suppressColumnsToolPanel: true,
-      //   checkboxSelection: true,
-      //   suppressMovable: true,
-      //   lockPosition: true,
-      //   colId: 'id',
-      //   headerTooltip: this.i18n('Select/deselect all')
-      // },
-      // {
-      //   field: 'status',
-      //   headerName: this.i18n('Status'),
-      //   pinned: true,
-      //   sortable: false,
-      //   filter: false,
-      //   cellRenderer: 'gridCellStatusComponent',
-      //   headerTooltip: this.i18n('Status')
-      // },
-      // {
-      //   field: 'name',
-      //   headerName: this.i18n('Name'),
-      //   pinned: true,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellNameComponent',
-      //   headerTooltip: this.i18n('Name')
-      // },
-      // {
-      //   field: 'readStatusTimeStamp',
-      //   headerName: this.i18n('Read status'),
-      //   pinned: true,
-      //   sortable: true,
-      //   filter: false,
-      //   sort: 'desc',
-      //   cellRenderer: 'gridCellReadStatusComponent',
-      //   headerTooltip: this.i18n('Read status')
-      // },
-
-      // {
-      //   field: 'parent',
-      //   headerName: this.i18n('Parent'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gidCellParentComponent',
-      //   headerTooltip: this.i18n('Parent')
-      // },
-      // {
-      //   field: 'moduleId',
-      //   headerName: this.i18n('Module Id'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellModuleIdComponent',
-      //   headerTooltip: this.i18n('Module Id')
-      // },
-      // {
-      //   field: 'firmware',
-      //   headerName: this.i18n('Firmware'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellFirmwareComponent',
-      //   headerTooltip: this.i18n('Firmware')
-      // },
-      // {
-      //   field: 'timeOfUseId',
-      //   headerName: this.i18n('Time of use Id'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellTimeOfUseIdComponent',
-      //   headerTooltip: this.i18n('Time of use Id')
-      // },
-      // {
-      //   field: 'id1',
-      //   headerName: this.i18n('ID1'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('ID1'),
-      //   hide: true
-      // },
-      // {
-      //   field: 'id2',
-      //   headerName: this.i18n('ID2'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('ID2'),
-      //   hide: true
-      // },
-      // {
-      //   field: 'id3',
-      //   headerName: this.i18n('ID3'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('ID3'),
-      //   hide: true
-      // },
-      // {
-      //   field: 'id4',
-      //   headerName: this.i18n('ID4'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('ID4'),
-      //   hide: true
-      // },
-      // {
-      //   field: 'id5',
-      //   headerName: this.i18n('ID5'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('ID5')
-      // },
-      // {
-      //   field: 'id6',
-      //   headerName: this.i18n('ID6'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('ID6'),
-      //   hide: true
-      // },
-      // {
-      //   field: 'configurationId',
-      //   headerName: this.i18n('Configuration Id'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('Configuration Id')
-      // },
-      // {
-      //   field: 'parametrisationId',
-      //   headerName: this.i18n('Parametrisation Id'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellIdNumberComponent',
-      //   headerTooltip: this.i18n('Parametrisation Id')
-      // },
-      // {
-      //   field: 'logicalDeviceName',
-      //   headerName: this.i18n('Logical device name'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellNameComponent',
-      //   headerTooltip: this.i18n('Logical device name'),
-      //   hide: true
-      // },
-      // // {
-      // //   field: 'childInfo',
-      // //   headerName: this.i18n('Information of child (MBus)'),
-      // //   pinned: false,
-      // //   sortable: true,
-      // //   filter: false,
-      // //   cellRenderer: 'gridCellInfoOfChildComponent',
-      // //   headerTooltip: this.i18n('Information of child (MBus)')
-      // // },
-      // {
-      //   field: 'breakerState',
-      //   headerName: this.i18n('Breaker State'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellBreakerStateComponent',
-      //   headerTooltip: this.i18n('Breaker State')
-      // },
-      // {
-      //   field: 'tags',
-      //   headerName: this.i18n('Tags'),
-      //   pinned: false,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellTagsComponent',
-      //   headerTooltip: this.i18n('Tags')
-      // },
-      // {
-      //   field: 'jobStatus',
-      //   headerName: this.i18n('Job status'),
-      //   pinned: 'right',
-      //   lockPinned: true,
-      //   lockPosition: true,
-      //   suppressMovable: true,
-      //   sortable: true,
-      //   filter: false,
-      //   cellRenderer: 'gridCellJobStatusComponent',
-      //   headerTooltip: this.i18n('Job status'),
-      //   resizable: false
-      // }
     ];
   }
 
@@ -391,6 +185,52 @@ export class AllForJobGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.isSelectedAll,
+      settings
+    );
+  }
+
+  // get excluded rows
+  public getSessionSettingsExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.excludedRows;
+  }
+
+  // cleer excluded rows
+  public setSessionSettingsClearExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.excludedRows = [];
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
+      settings
+    );
+  }
+
+  // set excluded rows
+  public setSessionSettingsExcludedRows(excludedRow: any) {
+    console.log('excluded row', excludedRow);
+
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    if (!settings.excludedRows) {
+      settings.excludedRows = [];
+    }
+
+    if (excludedRow.selected !== undefined && excludedRow.selected) {
+      if (_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
+        settings.excludedRows = settings.excludedRows.filter(obj => obj.deviceId !== excludedRow.data.deviceId);
+      }
+    } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
+      if (!_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
+        settings.excludedRows.push(excludedRow.data);
+      }
+    } else if (excludedRow.length === 0) {
+      settings.excludedRows = [];
+    }
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
       settings
     );
   }

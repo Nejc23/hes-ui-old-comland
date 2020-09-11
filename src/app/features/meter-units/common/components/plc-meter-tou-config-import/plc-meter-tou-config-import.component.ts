@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -24,7 +25,8 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     private formUtils: FormsUtilsService,
     public i18n: I18n,
     private modal: NgbActiveModal,
-    private meterService: MeterUnitsService
+    private meterService: MeterUnitsService,
+    private breadcrumbService: BreadcrumbService
   ) {
     this.form = this.createForm();
   }
@@ -36,7 +38,9 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.breadcrumbService.setPageName(this.i18n('Import TOU Configuration'));
+  }
 
   selected(event: any) {
     event.files.forEach((file: FileInfo) => {

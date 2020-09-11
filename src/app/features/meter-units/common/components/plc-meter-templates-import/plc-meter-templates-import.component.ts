@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -36,7 +37,8 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private authService: AuthService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private breadcrumbService: BreadcrumbService
   ) {
     this.form = this.createForm();
   }
@@ -47,7 +49,9 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.breadcrumbService.setPageName(this.i18n('Import templates'));
+  }
 
   public selected(e: SelectEvent): void {
     const that = this;

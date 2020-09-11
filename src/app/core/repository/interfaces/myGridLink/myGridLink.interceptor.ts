@@ -35,6 +35,8 @@ export interface RequestTOUData {
   timeOfUseId: string;
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
 }
 
 export interface ResponseTOUData {
@@ -70,4 +72,37 @@ export interface ResponseSetMonitor {
   deviceIds: string[];
   filter?: GridFilterParams;
   monitorObjects: MonitorObjects[];
+}
+
+// get registers
+export interface RequestLimiterGetRegisters {
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  groupType: number;
+}
+/*export interface ResponseLimiterGetRegisters {
+  registerId: string;
+  name: string;
+}*/
+
+// set limiter
+
+export interface RequestSetLimiter {
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  limiterDefinitions: LimiterDefinitions;
+}
+export interface LimiterDefinitions {
+  thresholdNormal: number;
+  thresholdEmergency: number;
+  minOverThresholdDuration: number;
+  minUnderThresholdDuration: number;
+  registerGroupId: string;
+}
+
+export interface ResponseSetLimiter {
+  requestId: string;
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  limiterDefinitions: LimiterDefinitions;
 }

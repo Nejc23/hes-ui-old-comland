@@ -18,7 +18,7 @@ export class AllForJobStaticTextService {
   }
 
   get noRecordsFound() {
-    return this.i18n('No records found. You need to adjust your search or filter parameters.');
+    return this.i18n('No records found.');
   }
 
   get loadingData() {

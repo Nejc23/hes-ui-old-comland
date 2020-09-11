@@ -1,4 +1,4 @@
-import { Injectable, Input } from '@angular/core';
+import { Injectable, Input, setTestabilityGetter } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
@@ -483,6 +483,52 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.selectedRows,
+      settings
+    );
+  }
+
+  // get excluded rows
+  public getSessionSettingsExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.excludedRows;
+  }
+
+  // cleer excluded rows
+  public setSessionSettingsClearExcludedRows() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.excludedRows = [];
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
+      settings
+    );
+  }
+
+  // set excluded rows
+  public setSessionSettingsExcludedRows(excludedRow: any) {
+    console.log('excluded row', excludedRow);
+
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    if (!settings.excludedRows) {
+      settings.excludedRows = [];
+    }
+
+    if (excludedRow.selected !== undefined && excludedRow.selected) {
+      if (_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
+        settings.excludedRows = settings.excludedRows.filter(obj => obj.deviceId !== excludedRow.data.deviceId);
+      }
+    } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
+      if (!_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
+        settings.excludedRows.push(excludedRow.data);
+      }
+    } else if (excludedRow.length === 0) {
+      settings.excludedRows = [];
+    }
+
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.excludedRows,
       settings
     );
   }
