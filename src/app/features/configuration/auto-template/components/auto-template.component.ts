@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
 import { ActivatedRoute } from '@angular/router';
 import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
@@ -93,7 +94,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private toast: ToastNotificationService,
     private modalService: ModalService,
     public i18n: I18n,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private breadcrumbService: BreadcrumbService
   ) {
     this.form = this.createForm();
 
@@ -251,6 +253,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       this.allJobList = result;
       this.setJobListWithoutAssignedJobs();
     });
+
+    this.breadcrumbService.setPageName(this.headerTitle);
   }
 
   setJobListWithoutAssignedJobs() {

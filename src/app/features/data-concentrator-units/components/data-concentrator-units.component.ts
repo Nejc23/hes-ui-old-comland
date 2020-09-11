@@ -1,3 +1,4 @@
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -98,7 +99,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private formUtils: FormsUtilsService,
     private authService: AuthService,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
-    private gridColumnShowHideService: GridColumnShowHideService
+    private gridColumnShowHideService: GridColumnShowHideService,
+    private bredcrumbService: BreadcrumbService
   ) {
     this.filters = staticextService.noFilterAppliedTekst;
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
@@ -117,6 +119,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
           this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+          this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
         }
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
@@ -173,6 +176,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
       selectAll: this.i18n('Select All')
     };
+
+    this.bredcrumbService.setPageName(this.headerTitle);
   }
 
   ngOnDestroy(): void {
@@ -221,12 +226,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
       this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
       this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
       this.gridApi.onFilterChanged();
     }
   }
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
+    console.log('grid is ready');
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
@@ -384,6 +391,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.showDeleted = filterDCU.showDeletedFilter;
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
         this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
         this.gridApi.onFilterChanged();
         this.setFilterInfo();
       }
@@ -486,9 +494,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
     if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      params.node.setSelected(true);
+      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows(params.node);
+    } else {
+      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows(params.node);
     }
   }
 
@@ -499,8 +508,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
+        const excludedRows = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows();
         api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow) {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.id === node2.data.id)) {
             node2.setSelected(true);
           }
         });
@@ -520,13 +530,16 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // click on the link "select all"
   selectAll() {
+    this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
     this.eventService.selectDeselectAll(this.gridApi.paginationGetCurrentPage());
   }
 
   // click on the link "deselect all"
   deselectAll() {
+    this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+    this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
     this.eventService.selectDeselectAll(-1); // -1 = deselect all
   }
@@ -579,6 +592,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+            this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
             this.eventService.selectDeselectAll(-1);
             this.gridApi.forEachNode(node => {
@@ -594,6 +608,16 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  getTotalCountWithoutExcluded(): string {
+    const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
+
+    if (excludedRowsLength === 0) {
+      return this.totalCount.toString();
+    } else {
+      return `${this.totalCount - excludedRowsLength} ${this.i18n('of')} ${this.totalCount}`;
+    }
   }
 
   addDcu() {

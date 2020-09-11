@@ -13,14 +13,14 @@
   <div class="col-2" *ngIf="!hideFilter">
     <app-dc-filter (filterChange)="reloadGrid()"></app-dc-filter>
   </div>
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">    
+  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
     <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
         <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
     </a>
     <!-- row total items, selected filter name -->
     <div *ngIf="!noData">
       <div class="d-flex justify-content-between mb-2">
-        <div class="d-flex align-items-center p-2 grid-actions">          
+        <div class="d-flex align-items-center p-2 grid-actions">
           <div class="mr-3" *ngIf="!selectedAtLeastOneRowOnGrid">
             <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()" *ngIf="!noData">
               <i class="far fa-plus"></i> <span i18n>Add</span>
@@ -32,7 +32,7 @@
                     ({{totalCount}})</a></strong></small>
           </div>
           <div class="mr-3" *ngIf="checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-            <small class="link"><strong><span i18n>All ({{totalCount}}) items selected</span> &middot;
+            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
                       selected</span></a></strong></small>
           </div>
@@ -45,12 +45,12 @@
           <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionDCUConfiguration" type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="far fa-cogs"></i><span
               i18n>Configuration</span></button>
             </div>
-          
+
         </div>
-       
+
         <div class="p-2 d-flex align-items-center p-2 grid-actions">
           <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end" [gridColumns]="columns">
-          </app-action-form>  
+          </app-action-form>
         </div>
       </div>
 <!--
@@ -62,11 +62,11 @@
     <!--    <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()" *ngIf="!noData">
           <i class="far fa-plus"></i> <span i18n>Add</span>
         </button>
-        
+
       </div>
 
       <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
-        
+
       </div>
     -->
       <!-- ag-grid -->
@@ -81,7 +81,7 @@
         [sideBar]="sideBar" [overlayNoRowsTemplate]="overlayNoRowsTemplate"
         [overlayLoadingTemplate]="overlayLoadingTemplate" (selectionChanged)="onSelectionChanged()"
         (gridReady)="onGridReady($event)" (columnVisible)="onColumnVisible($event)"
-        (toolPanelVisibleChanged)="toolPanelChanged($event)" (paginationChanged)="onPaginationChange($event)"
+        (paginationChanged)="onPaginationChange($event)"
         (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)"
         [localeText]="localeText">
       </ag-grid-angular>

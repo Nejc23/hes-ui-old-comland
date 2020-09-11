@@ -1,0 +1,6 @@
+diff a/src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts b/src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts	(rejected hunks)
+@@ -473,3 +473 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
+-    }
+-    else
+-    {
++    } else {
