@@ -1,3 +1,4 @@
+import { DcuForJobGridCellTypeComponent } from './../components/grid-custom-components/grid-cell-type.component';
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -50,7 +51,8 @@ export class DcuForJobGridService {
     return {
       gridCellNameComponent: DcuForJobGridCellNameComponent,
       gridCellVendorComponent: DcuForJobGridCellVendorComponent,
-      gridCellIdNumberComponent: DcuForJobGridCellIdNumberComponent
+      gridCellIdNumberComponent: DcuForJobGridCellIdNumberComponent,
+      gridCellTypeComponent: DcuForJobGridCellTypeComponent
 
       // gridCellMeterIdComponent: GridCellMeterIdComponent,
       // gridCellTagsComponent: GridCellTagsComponent,
@@ -94,6 +96,24 @@ export class DcuForJobGridService {
         filter: false,
         cellRenderer: 'gridCellNameComponent',
         headerTooltip: this.i18n('Name')
+      },
+      {
+        field: 'id',
+        headerName: this.i18n('ID'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('ID')
+      },
+      {
+        field: 'type',
+        headerName: this.i18n('Type'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellTypeComponent',
+        headerTooltip: this.i18n('Type')
       },
       {
         field: 'vendor',

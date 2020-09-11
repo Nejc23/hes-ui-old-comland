@@ -11,7 +11,9 @@ export interface ResponseDcuForJob {
 }
 
 export interface DcuForJob {
-  id: string;
+  concentratorId: string;
   name: string;
   vendor: string;
+  type: string;
+  id: string;
 }

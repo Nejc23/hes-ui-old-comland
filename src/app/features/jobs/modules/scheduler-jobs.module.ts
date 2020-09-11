@@ -1,3 +1,4 @@
+import { DcuForJobGridCellTypeComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-type.component';
 import { DcuForJobGridCellVendorComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-vendor.component';
 import { DcuForJobGridCellNameComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-name.component';
 import { DcuForJobGridCellIdNumberComponent } from './../dcu-for-job/components/grid-custom-components/grid-cell-id-number.component';
@@ -40,7 +41,8 @@ import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components
     DcuForJobGridCellIdNumberComponent,
     DcuForJobGridCellNameComponent,
     DcuForJobGridCellVendorComponent,
-    DcuForJobGridSelectionHeaderComponent
+    DcuForJobGridSelectionHeaderComponent,
+    DcuForJobGridCellTypeComponent
   ],
   imports: [
     SharedModule,
@@ -59,7 +61,8 @@ import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components
       DcuForJobGridCellIdNumberComponent,
       DcuForJobGridCellNameComponent,
       DcuForJobGridCellVendorComponent,
-      DcuForJobGridSelectionHeaderComponent
+      DcuForJobGridSelectionHeaderComponent,
+      DcuForJobGridCellTypeComponent
     ])
   ],
   exports: []
