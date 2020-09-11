@@ -10,7 +10,7 @@ export class DcuForJobStaticTextService {
   constructor(private i18n: I18n) {}
 
   get headerTitleDcu() {
-    return this.i18n('Concentrators for');
+    return this.i18n('Concentrator units for');
   }
 
   get notAvailableTekst() {

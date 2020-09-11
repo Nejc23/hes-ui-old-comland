@@ -25,6 +25,7 @@ import { RequestDcuForJob } from 'src/app/core/repository/interfaces/jobs/dcu/dc
 import { DcuForJobGridService } from '../services/dcu-for-job-grid.service';
 import { DcuForJobStaticTextService } from '../services/dcu-for-job-static-text.service';
 import { DcuForJobGridEventEmitterService } from '../services/dcu-for-job-grid-event-emitter.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 
 @Component({
   // selector: 'app-meter-units-all-for-job',
@@ -107,9 +108,9 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
     private modalService: ModalService,
-    private jobsService: JobsService // TODO uncomment this after next merge
-  ) // private breadcrumbService: BreadcrumbService
-  {
+    private jobsService: JobsService,
+    private breadcrumbService: BreadcrumbService
+  ) {
     this.paramsSub = route.params.subscribe(params => {
       this.scheduleId = params.scheduleId;
       dcuForJobGridService.dcuId = params.id;
@@ -676,13 +677,10 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     if (jobDescription === undefined || jobDescription.trim().length === 0) {
       jobDescription = this.staticTextService.notAvailableTekst;
     } else {
-      jobDescription = this.i18n('Meter units for ') + jobDescription;
+      jobDescription = this.staticTextService.headerTitleDcu + jobDescription;
     }
 
-    // this.headerTitle = `${this.staticTextService.headerTitleMeterUnitsAll} ${jobDescription}`;
-
-    // TODO uncomment this after next merge
-    // this.breadcrumbService.setPageName(jobDescription);
+    this.breadcrumbService.setPageName(jobDescription);
   }
 
   onRemoveFromJob() {

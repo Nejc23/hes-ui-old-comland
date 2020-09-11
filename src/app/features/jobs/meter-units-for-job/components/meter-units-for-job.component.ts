@@ -678,7 +678,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     if (jobDescription === undefined || jobDescription.trim().length === 0) {
       jobDescription = this.staticTextService.notAvailableTekst;
     } else {
-      jobDescription = this.i18n('Meter units for ') + jobDescription;
+      jobDescription = this.staticTextService.headerTitleMeterUnitsAll + jobDescription;
     }
 
     // this.headerTitle = `${this.staticTextService.headerTitleMeterUnitsAll} ${jobDescription}`;
