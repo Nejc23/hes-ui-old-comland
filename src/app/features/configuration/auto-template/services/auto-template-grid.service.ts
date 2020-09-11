@@ -5,8 +5,6 @@ import { GridCellEditActionsComponent } from '../components/grid-custom-componen
 import { GridCellAddBtnComponent } from '../components/grid-custom-components/grid-cell-add-btn.component';
 import { GridRequiredCellEditorComponent } from '../components/grid-custom-components/grid-required-cell-editor.component';
 import { GridCellRemoveBtnComponent } from '../components/grid-custom-components/grid-cell-remove-btn.component';
-import { GridCellDeviceCountComponent } from '../components/grid-custom-components/grid-cell-device-count.component';
-import { GridCellActiveReadonlyComponent } from '../components/grid-custom-components/grid-cell-active-readonly.component';
 import { GridCellNextRunNoEventComponent } from '../components/grid-custom-components/grid-cell-next-run-no-event.component';
 
 @Injectable({
@@ -82,21 +80,12 @@ export class AutoTemplatesGridService {
 
   public setFrameworkComponentsJobs() {
     return {
-      gridCellActiveComponent: GridCellActiveReadonlyComponent,
-      gridCellNextRunComponent: GridCellNextRunNoEventComponent,
-      gridCellDeviceCountComponent: GridCellDeviceCountComponent
+      gridCellNextRunComponent: GridCellNextRunNoEventComponent
     };
   }
 
   setGridDefaultColumnsJobs() {
     return [
-      {
-        field: 'active',
-        cellRenderer: 'gridCellActiveComponent',
-        headerName: this.i18n('Active'),
-        headerTooltip: this.i18n('Active'),
-        editable: false
-      },
       {
         field: 'type',
         headerName: this.i18n('Job Type'),
@@ -117,12 +106,6 @@ export class AutoTemplatesGridService {
         field: 'owner',
         headerName: this.i18n('Owner'),
         headerTooltip: this.i18n('Owner')
-      },
-      {
-        field: 'deviceCount',
-        cellRenderer: 'gridCellDeviceCountComponent',
-        headerName: this.i18n('Devices'),
-        headerTooltip: this.i18n('Devices')
       },
       {
         field: 'id',
