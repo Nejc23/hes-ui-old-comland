@@ -4,10 +4,10 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 
 @Component({
-  selector: 'app-grid-cell-id-number',
-  templateUrl: './grid-cell-id-number.component.html'
+  selector: 'app-grid-cell-detail-link',
+  templateUrl: './grid-cell-detail-link.component.html'
 })
-export class GridCellIdLinkComponent implements ICellRendererAngularComp {
+export class GridCellDetailLinkComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 

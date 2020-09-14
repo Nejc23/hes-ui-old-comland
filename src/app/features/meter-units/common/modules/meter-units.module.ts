@@ -1,4 +1,4 @@
-import { GridCellIdLinkComponent } from './../../types/components/grid-custom-components/grid-cell-id-link.component';
+import { MeterUnitDetailComponent } from './../../detail/components/meter-unit-detail.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
@@ -11,7 +11,6 @@ import { GridSelectionHeaderComponent } from '../../types/components/grid-custom
 import { GridCellIdNumberComponent } from '../../types/components/grid-custom-components/grid-cell-id-number.component';
 import { GridCellStatusComponent } from '../../types/components/grid-custom-components/grid-cell-status.component';
 import { GridCellReadStatusComponent } from '../../types/components/grid-custom-components/grid-cell-read-status.component';
-import { GridCellNameComponent } from '../../types/components/grid-custom-components/grid-cell-name.component';
 import { GridCellTagsComponent } from '../../types/components/grid-custom-components/grid-cell-tags.component';
 import { GridCellVendorComponent } from '../../types/components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellParentComponent } from '../../types/components/grid-custom-components/grid-cell-parent.component';
@@ -25,6 +24,7 @@ import { GridCellIconComponent } from '../../types/components/grid-custom-compon
 import { GridCellJobStatusComponent } from '../../types/components/grid-custom-components/grid-cell-job-status.component';
 import { MeterUnitFilterComponent } from '../../types/components/filter-form/meter-unit-filter.component';
 import { GridCellActionsComponent } from '../../types/components/grid-custom-components/grid-cell-actions.component';
+import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
 
 @NgModule({
   entryComponents: [],
@@ -36,7 +36,6 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
     GridSelectionHeaderComponent,
     GridCellStatusComponent,
     GridCellReadStatusComponent,
-    GridCellNameComponent,
     GridCellMeterIdComponent,
     GridCellTagsComponent,
     GridCellParentComponent,
@@ -51,7 +50,8 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
     GridCellJobStatusComponent,
     GridCellActionsComponent,
     MeterUnitFilterComponent,
-    GridCellIdLinkComponent
+    GridCellDetailLinkComponent,
+    MeterUnitDetailComponent
   ],
   imports: [
     SharedModule,
@@ -61,7 +61,6 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
       GridSelectionHeaderComponent,
       GridCellStatusComponent,
       GridCellReadStatusComponent,
-      GridCellNameComponent,
       GridCellMeterIdComponent,
       GridCellTagsComponent,
       GridCellParentComponent,
@@ -75,7 +74,7 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
       GridCellIconComponent,
       GridCellJobStatusComponent,
       GridCellActionsComponent,
-      GridCellIdLinkComponent
+      GridCellDetailLinkComponent
     ])
   ]
 })
