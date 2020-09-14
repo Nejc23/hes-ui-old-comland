@@ -12,6 +12,7 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 import { property } from 'lodash';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -36,10 +37,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private formUtils: FormsUtilsService,
     public i18n: I18n,
     private codelistService: CodelistRepositoryService,
-    private dataConcentratorUnitsService: DataConcentratorUnitsService
+    private dataConcentratorUnitsService: DataConcentratorUnitsService,
+    private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit() {
+    this.breadcrumbService.setPageName(this.i18n('Data concentrator unit'));
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
