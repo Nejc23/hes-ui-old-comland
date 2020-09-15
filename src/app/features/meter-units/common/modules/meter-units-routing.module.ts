@@ -33,7 +33,7 @@ const routes: Routes = [
       {
         path: 'detail/:deviceId',
         data: {
-          breadcrumb: null
+          breadcrumb: 'Meter Unit'
         },
         component: MeterUnitDetailComponent
       },
