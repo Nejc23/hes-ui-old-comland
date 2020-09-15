@@ -1,3 +1,4 @@
+import { MeterUnitInterceptor } from './meter-units/meter-unit.interceptor';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -223,6 +224,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsForJobInterceptor.canInterceptMeterUnitsForJob(request)) {
                 return MeterUnitsForJobInterceptor.interceptMeterUnitsForJobPost(request);
+              }
+
+              if (MeterUnitInterceptor.canInterceptGetMeterUnit(request)) {
+                return MeterUnitInterceptor.interceptGetMeterUnit(request);
               }
 
               // auto-templates

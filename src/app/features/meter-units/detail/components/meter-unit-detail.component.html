@@ -1,62 +1,159 @@
 <div class="row">
   <div class="col-4 ng-star-inserted">
-    <button class="btn btn-primary" (click)="editMeterUnit()">
-      <i class="far fa-edit"></i><span i18n>Edit</span>
-    </button>
+    <div class="form-group" *ngIf="!editMode">
+      <button class="btn btn-primary" (click)="editMeterUnit()">
+        <i class="far fa-edit"></i><span i18n>Edit</span>
+      </button>
+      <div class="btn-group">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
+        <div class="dropdown-menu">
 
-    <div class="btn-group">
-      <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-      <div class="dropdown-menu">
+          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
 
-        <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item" type="button"
+              (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item" type="button"
-            (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
-        </button>
+          <div class="dropdown-divider"></div>
 
-        <div class="dropdown-divider"></div>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
+              (click)="onUpgrade()"><span i18n>Upload image</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
-            (click)="onUpgrade()"><span i18n>Upload image</span>
-        </button>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
+              (click)="onActivateUpgrade()"><span i18n>Activate image</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
-            (click)="onActivateUpgrade()"><span i18n>Activate image</span>
-        </button>
+          <div class="dropdown-divider"></div>
 
-        <div class="dropdown-divider"></div>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="dropdown-item" type="button"
+              (click)="onConnect()"><span i18n>Connect</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="dropdown-item" type="button"
-            (click)="onConnect()"><span i18n>Connect</span>
-        </button>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="dropdown-item" type="button"
+              (click)="onDisconnect()"><span i18n>Disconnect</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="dropdown-item" type="button"
-            (click)="onDisconnect()"><span i18n>Disconnect</span>
-        </button>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="dropdown-item" type="button"
+              (click)="onBreakerStatus()"><span i18n>State</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="dropdown-item" type="button"
-            (click)="onBreakerStatus()"><span i18n>State</span>
-        </button>
+          <div class="dropdown-divider"></div>
 
-        <div class="dropdown-divider"></div>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="dropdown-item" type="button"
+              (click)="onTou()"><span i18n>TOU Upload</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="dropdown-item" type="button"
-            (click)="onTou()"><span i18n>TOU Upload</span>
-        </button>
+          <div class="dropdown-divider"></div>
 
-        <div class="dropdown-divider"></div>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
+              (click)="onSetLimiter()"><span i18n>Limiter</span>
+          </button>
 
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
-            (click)="onSetLimiter()"><span i18n>Limiter</span>
-        </button>
+          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
+          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
+              (click)="onSetMonitor()"><span i18n>Monitor</span></button>
+          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear FF</span></button>
+          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
+        </div>
+      </div>
+    </div>
+    <div class="form-group" *ngIf="editMode">
+      <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
+      <button class="btn btn-primary" (click)="saveMeterUnit()">Save</button>
+    </div>
 
-        <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
-        <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
-            (click)="onSetMonitor()"><span i18n>Monitor</span></button>
-        <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear FF</span></button>
-        <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
+    <div class="form-group" *ngIf="!editMode">
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>Name</label></div>
+          <div><span>{{form.get(nameProperty).value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>ID</label></div>
+          <div><span>{{form.get(id5Property).value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>Systitle</label></div>
+          <div><span>{{form.get(logicalDeviceNameProperty).value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>State</label></div>
+          <div><span>{{form.get(statusProperty).value?.value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>Type</label></div>
+          <div><span>{{form.get(typeProperty).value?.value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>Manufacturer</label></div>
+          <div><span>{{form.get(vendorProperty).value?.value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <div><label i18n>Template</label></div>
+          <div><span>{{form.get(templateProperty).value?.value}}</span></div>
+        </div>
       </div>
     </div>
 
+    <div class="form-group" *ngIf="editMode">
+      <div class="form-row">
+        <div class="col">
+            <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name">
+            </app-input-text>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+            <app-input-text [form]="form" [property]="id5Property" i18n-label label="ID">
+            </app-input-text>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+            <app-input-text [form]="form" [property]="logicalDeviceNameProperty" i18n-label label="Systitle">
+            </app-input-text>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="muStatuses$ | async"
+            [disabled]="false">
+          </app-select-input>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="muTypes$ | async"
+            [disabled]="false" (selectedValueChanged)="onTypeChanged($event)">
+          </app-select-input>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="vendorProperty" [selectOptions]="muVendors$ | async"
+            [disabled]="false">
+          </app-select-input>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col">
+          <app-select-input i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="muTemplates"
+          [disabled]="false">
+        </app-select-input>
+        </div>
+      </div>
   </div>
 </div>
