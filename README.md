@@ -47,8 +47,8 @@ Access url  https://advance-hes.comland.si:9443/
 Translation files can be updated in PoEdit editor.
 
 ## Production build
-`nmp install`
+`npm install`
 
-`npm postinstall`
+`npm run postinstall`
 
 `npm run build-production[-amera][-ePointHES]`
