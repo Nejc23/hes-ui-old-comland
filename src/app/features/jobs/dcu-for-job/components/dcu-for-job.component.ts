@@ -276,7 +276,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
@@ -684,7 +684,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   }
 
   onRemoveFromJob() {
-    const selectedRows = this.gridApi.getSelectedRows();
+    const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
     const deviceIdsParam = [];
 
     console.log('onRemoveFromJob, selectedRows', selectedRows);
@@ -765,7 +765,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
       excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
     } else {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
       }

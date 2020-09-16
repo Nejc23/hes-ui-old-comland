@@ -208,7 +208,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
@@ -569,12 +569,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       }
     };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
       selectedRows.forEach(element => {
         object.id.push(element.id);
       });
       object.filter = null;
-      selectedText = selectedRows ? selectedRows.length : 0;
+      selectedText = selectedRows ? selectedRows.length.toString() : '0';
     } else {
       object.filter = this.requestModel.filterModel;
       object.id = null;
