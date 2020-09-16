@@ -140,16 +140,16 @@ export class MeterUnitDetailComponent implements OnInit {
     });
   }
 
-  onTypeChanged(selectedType: Codelist<number>) {
-    this.setVendorsAndStatuses(selectedType.id);
+  // onTypeChanged(selectedType: Codelist<number>) {
+  //   this.setVendorsAndStatuses(selectedType.id);
 
-    // TODO clear fields if value not exists in lists
-    // this.muVendors$ = of();
-    // this.muStatuses$ = of();
+  //   // TODO clear fields if value not exists in lists
+  //   // this.muVendors$ = of();
+  //   // this.muStatuses$ = of();
 
-    // this.form.get(this.vendorProperty).setValue(null);
-    // this.form.get(this.statusProperty).setValue(null);
-  }
+  //   // this.form.get(this.vendorProperty).setValue(null);
+  //   // this.form.get(this.statusProperty).setValue(null);
+  // }
 
   fillData(): MeterUnitDetailForm {
     const formData: MeterUnitDetailForm = {
