@@ -295,7 +295,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
@@ -737,13 +737,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onScheduleReadJobs() {
-    // const selectedRows = this.gridApi.getSelectedRows();
-    // const deviceIdsParam = [];
-    // const selectedAll = this.meterUnitsTypeGridService.getSessionSettingsSelectedAll();
-    // if (!selectedAll && selectedRows && selectedRows.length > 0) {
-    //   selectedRows.map(row => deviceIdsParam.push(row.deviceId));
-    // }
-
     const params = this.getBulkRequestParam();
 
     const options: NgbModalOptions = {
@@ -863,7 +856,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
       excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
     } else {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
+
       if (selectedRows && selectedRows.length > 0) {
         selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
       }
@@ -943,15 +937,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onSetMonitor() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    const deviceIdsParam = [];
-    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
-    // TODO: ONLY FOR TESTING !
-    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+    const params = this.getBulkRequestParam();
 
     const modalRef = this.modalService.open(PlcMeterMonitorComponent);
-    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
+
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
@@ -966,15 +960,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onSetLimiter() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    const deviceIdsParam = [];
-    selectedRows.map(row => deviceIdsParam.push(row.deviceId));
-    // TODO: ONLY FOR TESTING !
-    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
+    const params = this.getBulkRequestParam();
 
     const modalRef = this.modalService.open(PlcMeterLimiterComponent);
-    modalRef.componentInstance.deviceIdsParam = deviceIdsParam;
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
