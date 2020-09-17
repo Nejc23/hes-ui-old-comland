@@ -294,8 +294,8 @@ export class MeterUnitsTypeGridService {
         cellRenderer: 'gridCellJobStatusComponent',
         headerTooltip: this.i18n('Job status'),
         resizable: false
-      }
-      /*    {
+      },
+      {
         field: 'id',
         pinned: 'right',
         width: 180,
@@ -311,7 +311,7 @@ export class MeterUnitsTypeGridService {
         cellRendererFramework: GridCellActionsComponent,
         headerName: '',
         cellClass: 'actions-button-cell'
-      }*/
+      }
     ];
   }
 
@@ -337,7 +337,7 @@ export class MeterUnitsTypeGridService {
   }
 
   // grid settings
-  public setGridOptions() {
+  public setGridOptions(context: any) {
     return {
       rowModelType: configAgGrid.rowModelType,
       defaultColDef: {
@@ -353,7 +353,8 @@ export class MeterUnitsTypeGridService {
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
       onSortChanged: this.onSortChanged,
-      onColumnVisible: this.onColumnVisible
+      onColumnVisible: this.onColumnVisible,
+      context
     };
   }
   /*

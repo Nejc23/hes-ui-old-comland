@@ -1,0 +1,38 @@
+<div class="row">
+
+  <div class="col-2" *ngIf="!hideFilter">
+      <div class="form-group">
+        <div class="form-row">
+          <div class="col">
+            <app-select-input i18n-label label="Register" [form]="form" [property]="registerProperty" [selectOptions]="registers$ | async"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+
+        <app-input-radio i18n-label label="Frequency" [form]="form" [property]="rangeProperty"
+          name="readOptionsRadio" [options]="rangeOptions" box="'true'" (change)="changeRangeOptionId()"
+          (refresh)="changeRangeOptionId()">
+        </app-input-radio>
+
+        <app-datetime-picker [form]="form" [property]="startTimeProperty" i18n-label label="Start time">
+        </app-datetime-picker>
+        <app-datetime-picker [form]="form" [property]="endTimeProperty" i18n-label label="End time">
+        </app-datetime-picker>
+
+        <!-- Display options -->
+        <app-input-switch label="Show line chart" [form]="form" [property]="showLineChartProperty" i18n-label></app-input-switch>
+        <app-input-switch label="Show table" [form]="form" [property]="showTableProperty" i18n-label></app-input-switch>
+        <button class="btn btn-primary" (click)="showData()">Show Data</button>
+      </div>
+  </div>
+  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
+    <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
+      <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
+  </a>
+  </div>
+</div>
+<ng-template #hidwShowFilters><span i18n>Show/hide filters</span></ng-template>
+
+
+

@@ -1,3 +1,4 @@
+import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
@@ -49,7 +50,8 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
     GridCellIconComponent,
     GridCellJobStatusComponent,
     GridCellActionsComponent,
-    MeterUnitFilterComponent
+    MeterUnitFilterComponent,
+    MeterUnitRegistersComponent
   ],
   imports: [
     SharedModule,
