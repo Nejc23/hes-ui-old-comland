@@ -620,6 +620,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
   }
 
+  getSelectedCount(): number {
+    if (this.checkSelectedAll()) {
+      const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
+      return this.totalCount - excludedRowsLength;
+    } else {
+      return this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows().length;
+    }
+  }
+
   addDcu() {
     const modalRef = this.modalService.open(AddDcuFormComponent);
     modalRef.result.then().catch(() => {});

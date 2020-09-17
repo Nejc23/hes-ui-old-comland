@@ -249,7 +249,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   }
 
   getSelectedRowIds() {
-    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+    const selectedRows = this.gridApi.getSelectedRows();
     const req: DataConcentratorUnitsSelectRequest[] = [];
     selectedRows.forEach(x => req.push({ name: x.name, concentratorId: x.concentratorId }));
     return req;
@@ -257,7 +257,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+      const selectedRows = this.gridApi.getSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
