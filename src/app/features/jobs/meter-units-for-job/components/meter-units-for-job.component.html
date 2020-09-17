@@ -18,7 +18,7 @@
         </small>
       </div>
       <div class="mr-3" *ngIf="!checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-        <small class="link">{{gridApi.getSelectedRows().length}} <strong><span i18n>items selected</span> &middot;
+        <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
           <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
                 ({{totalCount}})</a></strong></small>
       </div>
