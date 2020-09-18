@@ -11,6 +11,9 @@ import { FileGuid, MeterUnitsFwUpgrade } from 'src/app/core/repository/interface
 import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
 import { fwUploadFile, meterUnits, fwRemoveFile } from 'src/app/core/repository/consts/meter-units.const';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { environment } from 'src/environments/environment';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',
@@ -24,7 +27,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   configRequiredText = this.i18n('Required field');
   messageServerError = this.i18n(`Server error!`);
   deviceIdsParam = [];
-  uploadSaveUrl = `${fwUploadFile}`;
+  uploadSaveUrl = `${environment.apiUrl}${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = 'can only upload one file.';
@@ -39,7 +42,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
     private myGridService: MyGridLinkService,
     private toast: ToastNotificationService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
+    private authService: AuthService
   ) {
     this.form = this.createForm();
   }
@@ -112,6 +116,24 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   successUploaded(event) {
     this.imgGuid = event.response.body;
+  }
+
+  uploadEvent(event) {
+    const bearer = `bearer ${this.authService.user.id_token}`;
+    event.headers = new HttpHeaders({ Authorization: bearer });
+    if (this.authService.isRefreshNeeded2()) {
+      this.authService
+        .renewToken()
+        .then(value => {
+          this.authService.user = value;
+          this.authService.saveTokenAndSetUserRights2(value, '');
+        })
+        .catch(err => {
+          if (err.message === 'login_required') {
+            this.authService.login().catch(err2 => console.log(err2));
+          }
+        });
+    }
   }
 
   // properties - START
