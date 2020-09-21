@@ -204,6 +204,16 @@ export class CodelistInterceptor {
         id: '55-3434-4344-35',
         value: 'reading job 2',
         nextRun: '2021-02-2T08:30:30+00:00'
+      },
+      {
+        id: '55-3434-4344-55',
+        value: 'reading job 42',
+        nextRun: '2021-02-2T08:30:30+00:00'
+      },
+      {
+        id: '55-3434-4344-3444',
+        value: 'reading job 5',
+        nextRun: '2021-02-2T08:30:30+00:00'
       }
     ];
 

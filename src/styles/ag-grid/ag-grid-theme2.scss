@@ -227,15 +227,25 @@
     z-index: 1;
   }
 
-  .actions-button-cell {
-    overflow:visible;
+  .actions-button-cell {   
+    display: none;    
   }
 
   .ag-row.ag-row-focus {
-      z-index: 1;
+    z-index: 2;
+  }
+
+  .ag-row-hover {
+    .actions-button-cell {
+      display: block;
+      color: $primary !important;  
+      z-index: 900;
+      text-align: right;
+    }
   }
 
   .ag-root,
+  .ag-root-wrapper,
   .ag-body-viewport,
   .ag-body-viewport-wrapper {
       overflow: visible !important;
@@ -277,7 +287,7 @@
     border-top: none;
   }
 
-  .ag-side-bar {
+  /*.ag-side-bar {
 
     .ag-side-button {
 
@@ -314,7 +324,7 @@
         width: 100%;
       }
     }
-  }
+  }*/
 
   .ag-column-select-list {
     padding: $spacer;
