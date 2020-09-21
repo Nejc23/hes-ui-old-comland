@@ -4,24 +4,24 @@
       <div class="form-group">
         <div class="form-row">
           <div class="col">
-            <app-select-input i18n-label label="Register" [form]="form" [property]="registerProperty" [selectOptions]="registers$ | async"
+            <app-select-input i18n-label label="Register" [form]="form" [property]="registerProperty" [selectOptions]="registers"
               [disabled]="false">
             </app-select-input>
           </div>
         </div>
 
-        <app-input-radio i18n-label label="Frequency" [form]="form" [property]="rangeProperty"
-          name="readOptionsRadio" [options]="rangeOptions" box="'true'" (change)="changeRangeOptionId()"
+        <app-input-radio class="remove-padding-left" i18n-label label="Frequency" [form]="form" [property]="rangeProperty"
+          name="range" [options]="rangeOptions" (change)="changeRangeOptionId()" formControlName="range"
           (refresh)="changeRangeOptionId()">
         </app-input-radio>
 
-        <app-datetime-picker [form]="form" [property]="startTimeProperty" i18n-label label="Start time">
+        <app-datetime-picker [readonly]="!isRangeCustom" [form]="form" [property]="startTimeProperty" i18n-label label="Start time" >
         </app-datetime-picker>
-        <app-datetime-picker [form]="form" [property]="endTimeProperty" i18n-label label="End time">
+        <app-datetime-picker [readonly]="!isRangeCustom" [form]="form" [property]="endTimeProperty" i18n-label label="End time">
         </app-datetime-picker>
 
         <!-- Display options -->
-        <app-input-switch label="Show line chart" [form]="form" [property]="showLineChartProperty" i18n-label></app-input-switch>
+        <app-input-switch label="Show line chart" [form]="form" [property]="showLineChartProperty" i18n-label ></app-input-switch>
         <app-input-switch label="Show table" [form]="form" [property]="showTableProperty" i18n-label></app-input-switch>
         <button class="btn btn-primary" (click)="showData()">Show Data</button>
       </div>

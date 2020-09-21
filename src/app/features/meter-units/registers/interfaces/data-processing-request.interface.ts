@@ -16,7 +16,7 @@ export interface Profile {
 export interface MeterUnitRegistersForm {
   deviceId: string;
   register: Codelist<string>;
-  range: RadioOption;
+  range: number;
   startTime: Date;
   endTime: Date;
   showLineChart: boolean;
