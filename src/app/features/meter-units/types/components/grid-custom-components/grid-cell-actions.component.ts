@@ -1,9 +1,7 @@
-import { Component, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
-import { Subscription } from 'rxjs';
-import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
 
 @Component({
   selector: 'app-grid-cell-actions',
@@ -12,49 +10,13 @@ import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-unit
 export class GridCellActionsComponent implements ICellRendererAngularComp, OnDestroy {
   public params: any;
   public gridApi: GridApi;
-  public hideEditDelete = false;
-  public isRowMouseOver = false;
-  public rowIndex = -1;
-  private serviceSubscriptionRowMouseOver: Subscription;
-  private serviceSubscriptionRowMouseOut: Subscription;
 
-  constructor(private i18n: I18n, private cdRef: ChangeDetectorRef, private service: MeterUnitsTypeGridEventEmitterService) {
-    this.serviceSubscriptionRowMouseOver = this.service.eventEmitterRowMouseOver.subscribe({
-      next: index => {
-        if (index === this.rowIndex) {
-          this.isRowMouseOver = true;
-          this.cdRef.detectChanges();
-        } else {
-          this.isRowMouseOver = false; // prevent active buttons on multiple rows
-          this.cdRef.detectChanges();
-        }
-      }
-    });
-
-    this.serviceSubscriptionRowMouseOut = this.service.eventEmitterRowMouseOut.subscribe({
-      next: index => {
-        if (index === this.rowIndex) {
-          this.isRowMouseOver = false;
-        }
-
-        // if (index === this.rowIndex) {
-        //   console.log('2121212');
-        //   var isShown = document.getElementById('element').children;
-        //   //.classList//.contains('dropdown-menu');
-        //   console.log(isShown);
-        //   this.isRowMouseOver = false;
-        //   this.cdRef.detectChanges();
-        // }
-      }
-    });
-  }
+  constructor(private i18n: I18n, private cdRef: ChangeDetectorRef) {}
 
   // called on init
   agInit(params: any): void {
     this.params = params;
     this.gridApi = this.params.api as GridApi;
-
-    this.rowIndex = params.rowIndex;
   }
 
   // called when the cell is refreshed
@@ -73,7 +35,7 @@ export class GridCellActionsComponent implements ICellRendererAngularComp, OnDes
       });
       const cellDefs = this.gridApi.getEditingCells();
       if (cellDefs.length > 0) {
-        this.hideEditDelete = true;
+        // this.hideEditDelete = true;
       }
       this.params.context.componentParent.editForm(params.data.autoTemplateRuleId);
     }
@@ -110,15 +72,15 @@ export class GridCellActionsComponent implements ICellRendererAngularComp, OnDes
     return '';
   }
 
-  ngOnDestroy() {
-    if (this.serviceSubscriptionRowMouseOver) {
-      this.serviceSubscriptionRowMouseOver.unsubscribe();
-    }
+  // ngOnDestroy() {
+  //   if (this.serviceSubscriptionRowMouseOver) {
+  //     this.serviceSubscriptionRowMouseOver.unsubscribe();
+  //   }
 
-    if (this.serviceSubscriptionRowMouseOut) {
-      this.serviceSubscriptionRowMouseOut.unsubscribe();
-    }
-  }
+  //   if (this.serviceSubscriptionRowMouseOut) {
+  //     this.serviceSubscriptionRowMouseOut.unsubscribe();
+  //   }
+  // }
 
   showRegisters() {
     this.params.context.showRegisters(this.params.data.deviceId);
