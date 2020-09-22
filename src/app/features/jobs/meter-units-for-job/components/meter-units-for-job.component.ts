@@ -25,8 +25,8 @@ import { AllForJobStaticTextService } from '../services/meter-units-for-job-stat
 import { AllForJobGridEventEmitterService } from '../services/meter-units-for-job-grid-event-emitter.service';
 import { RequestMeterUnitsForJob } from 'src/app/core/repository/interfaces/meter-units/meter-units-for-job.interface';
 import { MeterUnitsForJobGridService } from '../services/meter-units-for-job-grid.service';
-import { RequestConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 @Component({
   templateUrl: './meter-units-for-job.component.html'
@@ -748,8 +748,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     );
   }
 
-  getBulkRequestParam(): RequestConnectDisconnectData {
-    const requestParam: RequestConnectDisconnectData = {
+  getBulkRequestParam(): RequestFilterParams {
+    const requestParam: RequestFilterParams = {
       deviceIds: [],
       filter: null,
       search: null,

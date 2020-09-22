@@ -44,8 +44,6 @@
         [context]="context"
         [gridOptions]="cellRendererParams"
         [getRowHeight]="getRowHeight"
-        (cellMouseOver)="cellMouseOver($event)"
-        (cellMouseOut)="cellMouseOut($event)"
         (rowEditingStopped)='rowEditingStopped($event)'
       ></ag-grid-angular>
 </div>
@@ -78,9 +76,7 @@
           (gridReady)="onGridReadyJobs($event)"
           [frameworkComponents]="frameworkComponentsJobs"
           [context]="context"
-          [gridOptions]="cellRendererParamsJobs"
-          (cellMouseOver)="cellMouseOverJobs($event)"
-          (cellMouseOut)="cellMouseOutJobs($event)"
+          [gridOptions]="cellRendererParamsJobs"      
         ></ag-grid-angular>
   </div>
 </div>

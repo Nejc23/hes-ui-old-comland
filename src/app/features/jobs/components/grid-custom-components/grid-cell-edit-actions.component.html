@@ -1,6 +1,8 @@
-<div class="d-flex align-items-center row-actions">
-  <div *ngIf="isRowMouseOver" class="btn-group">
-      <button type="button" class="btn btn-primary" (click)="editJob(params)"><i class="far fa-edit"></i></button>
-      <button type="button" class="btn btn-primary" (click)="deleteJob(params)"><i class="far fa-trash"></i></button>
+<div class="d-flex row-actions justify-content-end" >
+  <div class="btn-group-sm">
+      <button type="button" class="btn btn-primary m-0" (click)="editJob(params)"><i class="far fa-edit"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('edit')"></i></button>
+      <button type="button" class="btn btn-primary m-0" (click)="deleteJob(params)"><i class="far fa-trash"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('delete')"></i></button>
   </div>
 </div>

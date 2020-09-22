@@ -17,7 +17,7 @@ export interface LastStatus {
 }
 
 // connect/disconnect
-export interface RequestConnectDisconnectData {
+export interface RequestFilterParams {
   deviceIds: string[];
   filter?: GridFilterParams;
   search?: GridSearchParams[];
@@ -28,6 +28,8 @@ export interface ResponseConnectDisconnectData {
   requestId: string;
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
 }
 
 // TOU
@@ -44,6 +46,8 @@ export interface ResponseTOUData {
   requestId: string;
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
 }
 
 export interface OnDemandRequestData {
@@ -60,6 +64,8 @@ export interface OnDemandRequestData {
 export interface RequestSetMonitor {
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
   monitorObjects: MonitorObjects[];
 }
 export interface MonitorObjects {
@@ -71,6 +77,8 @@ export interface ResponseSetMonitor {
   requestId: string;
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
   monitorObjects: MonitorObjects[];
 }
 
@@ -78,6 +86,8 @@ export interface ResponseSetMonitor {
 export interface RequestLimiterGetRegisters {
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
   groupType: number;
 }
 /*export interface ResponseLimiterGetRegisters {
@@ -90,6 +100,8 @@ export interface RequestLimiterGetRegisters {
 export interface RequestSetLimiter {
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
   limiterDefinitions: LimiterDefinitions;
 }
 export interface LimiterDefinitions {
@@ -104,5 +116,7 @@ export interface ResponseSetLimiter {
   requestId: string;
   deviceIds: string[];
   filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
   limiterDefinitions: LimiterDefinitions;
 }

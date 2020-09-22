@@ -1,4 +1,5 @@
 import { GridBulkActionRequestParams } from '../helpers/grid-bulk-action-request-params.interface';
+import { GridFilterParams, GridSearchParams } from '../helpers/grid-request-params.interface';
 
 export interface MeterUnitsFwUpgrade {
   fileId: string;
@@ -7,6 +8,9 @@ export interface MeterUnitsFwUpgrade {
   signature: string;
   overrideFillLastBlock: boolean;
   deviceIds: string[];
+  filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
   // bulkActionsRequestParam: GridBulkActionRequestParams;
 }
 export interface MeterUnitsFwUpgradeForm extends MeterUnitsFwUpgrade {

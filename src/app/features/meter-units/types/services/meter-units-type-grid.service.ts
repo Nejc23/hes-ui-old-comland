@@ -337,8 +337,9 @@ export class MeterUnitsTypeGridService {
   }
 
   // grid settings
-  public setGridOptions() {
+  public setGridOptions(component: any) {
     return {
+      context: { forma: component.form, componentParent: component },
       rowModelType: configAgGrid.rowModelType,
       defaultColDef: {
         sortable: configAgGridDefCol.sortable,

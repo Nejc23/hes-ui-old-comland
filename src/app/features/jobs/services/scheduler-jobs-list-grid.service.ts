@@ -107,12 +107,15 @@ export class SchedulerJobsListGridService {
         minWidth: 120,
         maxWidth: 120,
         suppressMenu: true,
-        sortable: true,
+        editable: false,
         suppressMovable: true,
+        lockPinned: true,
         lockPosition: true,
+        sortable: false,
+        filter: false,
         cellRenderer: 'gridCellEditActionsComponent',
         headerName: '',
-        headerTooltip: this.i18n('Owner')
+        cellClass: 'actions-button-cell'
       }
     ];
   }

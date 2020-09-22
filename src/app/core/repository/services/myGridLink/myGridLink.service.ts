@@ -5,7 +5,6 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import {
   IdentityToken,
   LastStatus,
-  RequestConnectDisconnectData,
   ResponseConnectDisconnectData,
   RequestTOUData,
   ResponseTOUData,
@@ -14,7 +13,8 @@ import {
   RequestLimiterGetRegisters,
   RequestSetLimiter,
   ResponseSetMonitor,
-  ResponseSetLimiter
+  ResponseSetLimiter,
+  RequestFilterParams
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -64,20 +64,20 @@ export class MyGridLinkService {
   }
 
   // connect device
-  postMyGridConnectDevice(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+  postMyGridConnectDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
     return this.repository.makeRequest(this.postMyGridConnectDeviceRequest(params));
   }
 
-  postMyGridConnectDeviceRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+  postMyGridConnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandConnect}`, params);
   }
 
   // disconnect device
-  postMyGridDisconnectDevice(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+  postMyGridDisconnectDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
     return this.repository.makeRequest(this.postMyGridDisconnectDeviceRequest(params));
   }
 
-  postMyGridDisconnectDeviceRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+  postMyGridDisconnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnect}`, params);
   }
 
@@ -91,11 +91,11 @@ export class MyGridLinkService {
   }
 
   // get disconnector state
-  getDisconnectorState(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+  getDisconnectorState(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
     return this.repository.makeRequest(this.getDisconnectorStateRequest(params));
   }
 
-  getDisconnectorStateRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+  getDisconnectorStateRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnectorState}`, params);
   }
 

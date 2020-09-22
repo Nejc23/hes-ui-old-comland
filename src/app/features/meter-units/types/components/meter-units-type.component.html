@@ -40,7 +40,7 @@
           <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
           <div class="dropdown-menu">
 
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
+            <button class="dropdown-item" type="button" (click)="onDelete()" [disabled]="true"><span i18n>Delete</span></button>
 
             <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item" type="button"
                 (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
@@ -91,7 +91,7 @@
         </div>
 
         <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-tags"></i><span i18n>Tags</span></button>
-        <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="fa far-line-chart" disabled></i><span i18n>Data</span></button>
+        <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-chart-bar" disabled></i><span i18n>Data</span></button>
 
       </div>
     </div>
@@ -192,8 +192,6 @@
     (paginationChanged)="onPaginationChange($event)"
     (rowSelected)="onRowSelect($event)"
     (firstDataRendered)="onFirstDataRendered($event)"
-    (cellMouseOver)="cellMouseOver($event)"
-    (cellMouseOut)="cellMouseOut($event)"
     >
   </ag-grid-angular>
 </div>

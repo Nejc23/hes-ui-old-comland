@@ -65,15 +65,17 @@ export class AutoTemplatesGridService {
       },
       {
         field: 'autoTemplateRuleId',
-        pinned: 'right',
         width: 100,
         minWidth: 100,
         maxWidth: 100,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,
+        sortable: false,
+        filter: false,
         cellRendererFramework: GridCellEditActionsComponent,
-        headerName: ''
+        headerName: '',
+        cellClass: 'actions-button-cell'
       }
     ];
   }
@@ -109,15 +111,17 @@ export class AutoTemplatesGridService {
       },
       {
         field: 'id',
-        pinned: 'right',
-        width: 100,
-        minWidth: 100,
-        maxWidth: 100,
+        width: 70,
+        minWidth: 70,
+        maxWidth: 70,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,
+        sortable: false,
+        filter: false,
         cellRendererFramework: GridCellRemoveBtnComponent,
-        headerName: ''
+        headerName: '',
+        cellClass: 'actions-button-cell'
       }
     ];
   }
