@@ -7,7 +7,7 @@ import { GridApi } from '@ag-grid-community/core';
   selector: 'app-grid-cell-actions',
   templateUrl: './grid-cell-actions.component.html'
 })
-export class GridCellActionsComponent implements ICellRendererAngularComp, OnDestroy {
+export class GridCellActionsComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
 
@@ -71,16 +71,6 @@ export class GridCellActionsComponent implements ICellRendererAngularComp, OnDes
     }
     return '';
   }
-
-  // ngOnDestroy() {
-  //   if (this.serviceSubscriptionRowMouseOver) {
-  //     this.serviceSubscriptionRowMouseOver.unsubscribe();
-  //   }
-
-  //   if (this.serviceSubscriptionRowMouseOut) {
-  //     this.serviceSubscriptionRowMouseOut.unsubscribe();
-  //   }
-  // }
 
   showRegisters() {
     this.params.context.showRegisters(this.params.data.deviceId);
