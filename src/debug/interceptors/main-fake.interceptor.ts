@@ -1,3 +1,4 @@
+import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -256,6 +257,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (AutoTemplatesReadingJobsListInterceptor.canInterceptAutoTemplatesReadingJobsList(request)) {
                 return AutoTemplatesReadingJobsListInterceptor.interceptAutoTemplatesReadingJobsList(request);
+              }
+
+              // data-processing
+              if (DataProcessingInterceptor.canInterceptGetProfiles(request)) {
+                return DataProcessingInterceptor.interceptGetProfiles(request);
+              }
+
+              if (DataProcessingInterceptor.canInterceptGetEvents(request)) {
+                return DataProcessingInterceptor.interceptGetEvents(request);
+              }
+
+              if (DataProcessingInterceptor.canInterceptGetInstantaneousValues(request)) {
+                return DataProcessingInterceptor.interceptGetInstantaneousValues(request);
               }
 
               // pass through any requests not handled above
