@@ -8,12 +8,12 @@ import * as _ from 'lodash';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { FileGuid, MeterUnitsFwUpgrade } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
-import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
-import { fwUploadFile, meterUnits, fwRemoveFile } from 'src/app/core/repository/consts/meter-units.const';
+import { fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
+import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',
@@ -27,6 +27,9 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   configRequiredText = this.i18n('Required field');
   messageServerError = this.i18n(`Server error!`);
   deviceIdsParam = [];
+  filterParam?: GridFilterParams;
+  searchParam?: GridSearchParams[];
+  excludeIdsParam?: string[];
   uploadSaveUrl = `${environment.apiUrl}${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
@@ -39,7 +42,6 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     private formUtils: FormsUtilsService,
     public i18n: I18n,
     private modal: NgbActiveModal,
-    private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
     private myGridService: MyGridLinkService,
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
@@ -63,14 +65,15 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   fillData(): MeterUnitsFwUpgrade {
     const formData: MeterUnitsFwUpgrade = {
-      //  files: this.form.get(this.imageProperty).value,
       imageIdent: this.form.get(this.imageIdenifyerProperty).value,
       fileId: this.form.get(this.imageGuidProperty).value,
       imageSize: parseInt(this.form.get(this.imageSizeProperty).value, 10),
       signature: this.form.get(this.imageSignatureProperty).value,
       overrideFillLastBlock: this.form.get(this.imageFillLastBlockProperty).value,
-      // bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters() // todo for filters
-      deviceIds: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters().id.filter(Boolean)
+      deviceIds: this.deviceIdsParam,
+      filter: this.filterParam,
+      search: this.searchParam,
+      excludeIds: this.excludeIdsParam
     };
     return formData;
   }
@@ -107,7 +110,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   }
 
   activateMU() {
-    this.toast.infoToast('// TODO ');
+    this.toast.infoToast(' ');
   }
 
   cancel(reason: string = 'cancel') {

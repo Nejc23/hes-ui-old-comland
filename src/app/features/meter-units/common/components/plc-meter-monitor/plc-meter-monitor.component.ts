@@ -6,7 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { RequestSetMonitor } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
+import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 
 @Component({
   selector: 'app-plc-meter-monitor',
@@ -14,14 +14,17 @@ import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-s
 })
 export class PlcMeterMonitorComponent implements OnInit {
   form: FormGroup;
+  deviceIdsParam = [];
+  filterParam?: GridFilterParams;
+  searchParam?: GridSearchParams[];
+  excludeIdsParam?: string[];
 
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private i18n: I18n,
     private modal: NgbActiveModal,
-    private myGridService: MyGridLinkService,
-    private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService
+    private myGridService: MyGridLinkService
   ) {
     this.form = this.createForm();
   }
@@ -71,8 +74,10 @@ export class PlcMeterMonitorComponent implements OnInit {
     }
     const formData: RequestSetMonitor = {
       monitorObjects: data,
-      // bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()   // todo for filters
-      deviceIds: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters().id.filter(Boolean) /// for test ony that two devices are working on test environment '8EC1791C-E99C-499D-823A-D3F821B77097', '8E520D4A-3B9A-4F1B-B3DB-A6D95D8057F0'
+      deviceIds: this.deviceIdsParam,
+      filter: this.filterParam,
+      search: this.searchParam,
+      excludeIds: this.excludeIdsParam
     };
 
     return formData;
