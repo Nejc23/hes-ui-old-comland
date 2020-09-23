@@ -54,6 +54,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   onDisconnect() {
     this.params.context.componentParent.onDisconnect(this.params.data.deviceId);
   }
+  onClearFF() {
+    this.params.context.componentParent.onClearFF(this.params.data.deviceId);
+  }
   onDelete() {
     this.params.context.componentParent.onDelete(this.params.data.deviceId);
   }

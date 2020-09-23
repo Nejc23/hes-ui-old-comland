@@ -16,7 +16,8 @@ import {
   ResponseSetLimiter,
   RequestFilterParams,
   RequestSetBreakerMode,
-  ResponseSetBreakerMode
+  ResponseSetBreakerMode,
+  ResponseClearFF
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -33,7 +34,8 @@ import {
   onDemandSetMonitor,
   getRegisters,
   onDemandSetLimiter,
-  onDemandSetBreakerMode
+  onDemandSetBreakerMode,
+  onDemandClearFF
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
@@ -155,6 +157,7 @@ export class MyGridLinkService {
     return new HttpRequest('POST', `${enumMyGridLink.templating}${getRegisters}`, request);
   }
 
+  // trigger set limiter
   setLimiter(payload: RequestSetLimiter): Observable<ResponseSetLimiter> {
     return this.repository.makeRequest(this.setLimiterRequest(payload));
   }
@@ -163,11 +166,21 @@ export class MyGridLinkService {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetLimiter}`, payload);
   }
 
+  // trigger set breaker mode
   setBreakerMode(payload: RequestSetBreakerMode): Observable<ResponseSetBreakerMode> {
     return this.repository.makeRequest(this.setBreakerModeRequest(payload));
   }
 
   setBreakerModeRequest(payload: RequestSetBreakerMode): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetBreakerMode}`, payload);
+  }
+
+  // trigger set breaker mode
+  clearFF(param: RequestFilterParams): Observable<ResponseClearFF> {
+    return this.repository.makeRequest(this.clearFFRequest(param));
+  }
+
+  clearFFRequest(param: RequestFilterParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearFF}`, param);
   }
 }
