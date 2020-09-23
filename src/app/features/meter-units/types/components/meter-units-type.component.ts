@@ -700,6 +700,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
   }
 
+  onClearFF(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.clearFF,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
   // delete button click
   // TODO missing BE api !!
   onDelete(selectedGuid: string) {

@@ -2,12 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import {
-  ResponseSetMonitor,
-  RequestSetMonitor,
-  RequestSetBreakerMode,
-  ResponseSetBreakerMode
-} from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestFilterParams, ResponseClearFF } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -30,7 +25,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(MyGridLinkService);
   });
 
-  const requestBody: RequestSetBreakerMode = {
+  const requestBody: RequestFilterParams = {
     deviceIds: null,
     filter: {
       statuses: [{ id: 1, value: 'active' }],
@@ -53,11 +48,10 @@ describe('Pact consumer test', () => {
       showDeleted: true
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
-    excludeIds: [],
-    breakerMode: 1
+    excludeIds: ['excluded']
   };
 
-  const responseBody: ResponseSetBreakerMode = {
+  const responseBody: ResponseClearFF = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: null,
     filter: {
@@ -81,19 +75,18 @@ describe('Pact consumer test', () => {
       showDeleted: true
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
-    excludeIds: [],
-    breakerMode: 1
+    excludeIds: ['excluded']
   };
 
-  describe('myGrid.link set breaker mode with filter request', () => {
+  describe('myGrid.link clear FF with filter request', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_SET_BREAKER_MODE_WITH_FILTER',
-          uponReceiving: 'a request for setting breaker mode with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_CLEAR_FF_WITH_FILTER',
+          uponReceiving: 'a request for clear FF with filter in request - myGrid.Link',
           withRequest: {
-            method: service.setBreakerModeRequest(requestBody).method,
-            path: service.setBreakerModeRequest(requestBody).url,
+            method: service.clearFFRequest(requestBody).method,
+            path: service.clearFFRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -115,13 +108,14 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for setting breaker mode with filter in request - myGrid.Link', done => {
-      service.setBreakerMode(requestBody).subscribe(
-        (res: ResponseSetBreakerMode) => {
+    it('should make request for clear FF with filter in request - myGrid.Link', done => {
+      service.clearFF(requestBody).subscribe(
+        (res: ResponseClearFF) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);
           expect(res.filter).toEqual(responseBody.filter);
-          expect(res.breakerMode).toEqual(responseBody.breakerMode);
+          expect(res.search).toEqual(responseBody.search);
+          expect(res.excludeIds).toEqual(responseBody.excludeIds);
           done();
         },
         err => {

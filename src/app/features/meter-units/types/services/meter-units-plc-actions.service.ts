@@ -246,6 +246,11 @@ export class MeterUnitsPlcActionsService {
         response = this.service.activateDeviceUpgrade(params);
         operationName = this.i18n('Activate FW upgrade');
         selectedText = `${this.i18n('for')} ${selectedText}`;
+        break;
+      case MeterUnitsTypeEnum.clearFF:
+        response = this.service.clearFF(params);
+        operationName = this.i18n('Activate Clear FF');
+        selectedText = `${this.i18n('for')} ${selectedText}`;
     }
     component.btnConfirmText = operationName;
     component.modalTitle = this.i18n('Confirm bulk operation');

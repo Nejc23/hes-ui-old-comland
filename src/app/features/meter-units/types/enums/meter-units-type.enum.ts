@@ -4,5 +4,6 @@ export enum MeterUnitsTypeEnum {
   breakerStatus = 'breakerStatus',
   touConfig = 'touConfig',
   activateUpgrade = 'activateUpgrade',
-  delete = 'delete'
+  delete = 'delete',
+  clearFF = 'clearFF'
 }

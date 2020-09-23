@@ -138,3 +138,12 @@ export interface ResponseSetBreakerMode {
   excludeIds?: string[];
   breakerMode: number;
 }
+
+// clear FF
+export interface ResponseClearFF {
+  requestId: string;
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
+}
