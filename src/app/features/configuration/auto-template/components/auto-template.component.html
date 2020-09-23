@@ -3,7 +3,7 @@
   <app-breadcrumb class="ml-auto"></app-breadcrumb>
 </div> -->
 <div class="row">
-<div class="col-2" *ngIf="!hide">
+<div class="col-2  filter-shadow" *ngIf="!hide">
   <div><span class="small ml-3" i18n>Templates list</span></div>
   <div>
     <a href="javascript:void(0);" (click)="onSelect(temp)" class="list-group-item list-group-item-action border-0"
@@ -11,16 +11,17 @@
     *ngFor="let temp of templates let first = first" >{{temp.name}}</a>
   </div>
 </div>
-<div [ngClass]="{'col-10': !hide, 'col-12': hide}">
+<div class="filter-button" [ngClass]="{'col-10': !hide, 'col-12': hide}">
   <div class="d-flex align-items-center mb-3">
   <h4 class="align-items-center mb-0 ml-3" *ngIf="hide">
     {{activeElement.name}}
   </h4>
   </div>
 <div class="d-flex align-items-center mb-3">
-  <a [ngbTooltip]="hidwShowTemplates" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
-    <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hide, 'far fa-arrow-right': hide}" ></i>
-  </a>
+  <button @navItemsTrigger id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
+    <i class='far'
+       [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
+  </button>
   <h4 class="mb-0 mr-3">{{i18n('Rules')}}</h4>
   <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
     <i class="far fa-plus"></i> <span i18n>Add</span>
