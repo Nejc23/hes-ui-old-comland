@@ -20,7 +20,7 @@
 <div class="d-flex align-items-center mb-3">
   <button @navItemsTrigger id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
     <i class='far'
-       [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
+       [ngClass]="{'fa-compress-alt': !hide, 'fa-expand-alt': hide}"></i>
   </button>
   <h4 class="mb-0 mr-3">{{i18n('Rules')}}</h4>
   <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
