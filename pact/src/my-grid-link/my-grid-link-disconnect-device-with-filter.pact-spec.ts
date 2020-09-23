@@ -2,10 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import {
-  RequestConnectDisconnectData,
-  ResponseConnectDisconnectData
-} from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestFilterParams, ResponseConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -28,7 +25,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(MyGridLinkService);
   });
 
-  const requestBody: RequestConnectDisconnectData = {
+  const requestBody: RequestFilterParams = {
     deviceIds: null,
     filter: {
       statuses: [{ id: 1, value: 'active' }],

@@ -79,6 +79,7 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     const successMessage = this.i18n(`Meter Units set Breaker mode was successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
+        console.log(result);
         this.modal.close();
       },
       err => {
