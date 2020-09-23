@@ -42,6 +42,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   onBreakerStatus() {
     this.params.context.componentParent.onBreakerStatus(this.params.data.deviceId);
   }
+  onBreakerMode() {
+    this.params.context.componentParent.onBreakerMode(this.params.data.deviceId);
+  }
   onActivateUpgrade() {
     this.params.context.componentParent.onActivateUpgrade(this.params.data.deviceId);
   }

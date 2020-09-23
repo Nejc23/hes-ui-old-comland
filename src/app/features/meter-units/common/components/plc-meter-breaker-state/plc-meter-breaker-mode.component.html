@@ -1,0 +1,29 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Set Breaker mode</div>
+
+  <div modal-body>
+    <ng-container>      
+      <form class="form-horizontal" [formGroup]="form">
+        <div class="form-row">          
+          <div class="col-12">  
+            <app-select-input label="Disconnector mode" [form]="form" [property]="disconnectorModeProperty" [selectOptions]="disconnectorModes" required i18n-label>
+            </app-select-input>                      
+          </div>
+        </div>                  
+        <div class="text-danger" *ngIf="errMsg.length > 0"><small>{{errMsg}}</small></div>      
+      </form>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i><span
+          i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="onSet()"><span
+            i18n>Set</span></button>
+      </div>      
+    </div>
+  </div>
+</app-modal-template>
+
