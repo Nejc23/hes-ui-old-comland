@@ -108,7 +108,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.setLimiter(values);
-    const successMessage = this.i18n(`Meter Units set Monitor was successfully`);
+    const successMessage = this.i18n(`Meter Units set Limiter was successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

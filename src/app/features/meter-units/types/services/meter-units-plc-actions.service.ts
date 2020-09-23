@@ -9,6 +9,7 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
@@ -110,6 +111,26 @@ export class MeterUnitsPlcActionsService {
 
   onSetLimiter(params: RequestFilterParams) {
     const modalRef = this.modalService.open(PlcMeterLimiterComponent);
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onBreakerMode(params: RequestFilterParams) {
+    const modalRef = this.modalService.open(PlcMeterBreakerModeComponent);
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;

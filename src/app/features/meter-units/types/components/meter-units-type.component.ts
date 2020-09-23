@@ -740,6 +740,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetLimiter(params);
   }
+
+  // popup
+  onBreakerMode(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onBreakerMode(params);
+  }
   // <-- end Operations action click (bulk or selected row)
 
   // --> for checking long bulk action finished

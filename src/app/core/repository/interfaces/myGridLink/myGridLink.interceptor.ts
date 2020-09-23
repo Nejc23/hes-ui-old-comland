@@ -120,3 +120,21 @@ export interface ResponseSetLimiter {
   excludeIds?: string[];
   limiterDefinitions: LimiterDefinitions;
 }
+
+// set breaker mode
+export interface RequestSetBreakerMode {
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
+  breakerMode: number;
+}
+
+export interface ResponseSetBreakerMode {
+  requestId: string;
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
+  breakerMode: number;
+}

@@ -14,7 +14,9 @@ import {
   RequestSetLimiter,
   ResponseSetMonitor,
   ResponseSetLimiter,
-  RequestFilterParams
+  RequestFilterParams,
+  RequestSetBreakerMode,
+  ResponseSetBreakerMode
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -30,7 +32,8 @@ import {
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
   onDemandSetMonitor,
   getRegisters,
-  onDemandSetLimiter
+  onDemandSetLimiter,
+  onDemandSetBreakerMode
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
@@ -158,5 +161,13 @@ export class MyGridLinkService {
 
   setLimiterRequest(payload: RequestSetLimiter): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetLimiter}`, payload);
+  }
+
+  setBreakerMode(payload: RequestSetBreakerMode): Observable<ResponseSetBreakerMode> {
+    return this.repository.makeRequest(this.setBreakerModeRequest(payload));
+  }
+
+  setBreakerModeRequest(payload: RequestSetBreakerMode): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetBreakerMode}`, payload);
   }
 }

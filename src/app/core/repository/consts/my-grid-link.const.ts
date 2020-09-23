@@ -17,4 +17,5 @@ export const triggerDeviceUpgrade = '/trigger-device-upgrade';
 export const activateTriggerDeviceUpgrade = `${triggerDeviceUpgrade}/activate`;
 export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';
 export const onDemandSetLimiter = '/on-demand/trigger-set-limiter';
+export const onDemandSetBreakerMode = '/on-demand/trigger-set-breaker-mode';
 export const getRegisters = '/get-registers';
