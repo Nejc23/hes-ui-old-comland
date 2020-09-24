@@ -3,17 +3,19 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 export interface DcuForm {
   id: string;
   name: string;
-  idNumber: string;
+  serialNumber: string;
   ip: string;
   type: Codelist<number>;
   userName?: string;
   password?: string;
   confirmPassword?: string;
-  vendor: Codelist<number>;
+  manufacturer: Codelist<number>;
   tags: Codelist<number>[];
   discoveryJob?: Codelist<string>;
   status?: Codelist<number>;
   port?: string;
   address?: string;
   mac?: string;
+  latitude?: number;
+  longitude?: number;
 }

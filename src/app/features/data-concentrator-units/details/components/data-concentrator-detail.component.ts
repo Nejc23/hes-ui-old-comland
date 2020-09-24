@@ -70,7 +70,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return this.formBuilder.group(
       {
         [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-        [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
+        [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
         [this.statusProperty]: [
           this.data && this.data.statusId > 0 ? { id: this.data.statusId, value: this.data.statusValue } : null,
           [Validators.required]
@@ -79,15 +79,17 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
           this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
           [Validators.required]
         ],
-        [this.vendorProperty]: [this.data && this.data.vendorId > 0 ? { id: this.data.vendorId, value: this.data.vendorValue } : null],
+        [this.vendorProperty]: [
+          this.data && this.data.manufacturerId > 0 ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null
+        ],
         [this.ipProperty]: [this.data ? this.data.ip : null],
         [this.portProperty]: [this.data ? this.data.port : null],
         [this.addressProperty]: [this.data ? this.data.address : null],
         [this.tagsProperty]: [this.data ? this.data.tags : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
         [this.macProperty]: [this.data ? this.data.mac : null],
-        [this.passwordProperty]: [''],
-        [this.confirmPasswordProperty]: ['']
+        [this.passwordProperty]: [this.data ? this.data.password : null],
+        [this.confirmPasswordProperty]: [this.data ? this.data.password : null]
       },
       { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
     );
@@ -97,8 +99,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>(o => o.name);
   }
 
-  get idNumberProperty() {
-    return nameOf<DcuForm>(o => o.idNumber);
+  get serialNumberProperty() {
+    return nameOf<DcuForm>(o => o.serialNumber);
   }
 
   get ipProperty() {
@@ -126,7 +128,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   get vendorProperty() {
-    return nameOf<DcuForm>(o => o.vendor);
+    return nameOf<DcuForm>(o => o.manufacturer);
   }
 
   get statusProperty() {
@@ -145,19 +147,29 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>(o => o.mac);
   }
 
+  get latitudeProperty() {
+    return nameOf<DcuForm>(o => o.latitude);
+  }
+
+  get longitudeProperty() {
+    return nameOf<DcuForm>(o => o.longitude);
+  }
+
   fillData(): DcuForm {
     const formData: DcuForm = {
       id: this.concentratorId,
       name: this.form.get(this.nameProperty).value,
-      idNumber: this.form.get(this.idNumberProperty).value,
+      serialNumber: this.form.get(this.serialNumberProperty).value,
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       tags: this.form.get(this.tagsProperty).value,
       type: this.form.get(this.typeProperty).value,
-      vendor: this.form.get(this.vendorProperty).value,
+      manufacturer: this.form.get(this.vendorProperty).value,
       status: this.form.get(this.statusProperty).value,
       mac: this.form.get(this.macProperty).value,
-      address: this.form.get(this.addressProperty).value
+      address: this.form.get(this.addressProperty).value,
+      latitude: 0, //this.form.get(this.latitudeProperty).value,
+      longitude: 0 // this.form.get(this.longitudeProperty).value,
     };
 
     if (this.credentialsVisible) {
