@@ -11,6 +11,7 @@ export const schedulerJobs = '/api/scheduler-jobs';
 export const activeJobs = '/api/active-jobs';
 export const stopJob = 'stop-job';
 export const cancelJob = 'cancel-job';
+export const dataConcentrator = `${basePath}/concentrator`;
 
 // codelist DCU
 export const dcuStatuses = `${basePath}/concentrator-status-codes`;

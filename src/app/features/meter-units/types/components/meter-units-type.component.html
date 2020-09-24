@@ -40,60 +40,64 @@
 
         <div class="btn-group">
           <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-          <div class="dropdown-menu">
-
-            <button class="dropdown-item" type="button" (click)="onDelete()" [disabled]="true"><span i18n>Delete</span></button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item" type="button"
-                (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
-                (click)="onUpgrade()"><span i18n>Upload image</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
-                (click)="onActivateUpgrade()"><span i18n>Activate image</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="dropdown-item" type="button"
-                (click)="onConnect()"><span i18n>Connect</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="dropdown-item" type="button"
-                (click)="onDisconnect()"><span i18n>Disconnect</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="dropdown-item" type="button"
-                (click)="onBreakerStatus()"><span i18n>State</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="dropdown-item" type="button"
-              (click)="onBreakerMode()"><span i18n>Mode</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="dropdown-item" type="button"
-                (click)="onTou()"><span i18n>TOU Upload</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
-                (click)="onSetLimiter()"><span i18n>Limiter</span>
-            </button>
-
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
+          <div class="dropdown-menu" style="min-width: 13rem">
+            <div>
+              <button class="btn btn-link dropdown-item" (click)="onDelete()" [disabled]="true"><span i18n>Delete</span></button> 
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="btn btn-link dropdown-item" type="button"
+                (click)="onScheduleReadJobs()"><span i18n>Jobs</span></button>
+            </div>
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="btn btn-link dropdown-item" type="button"
+                (click)="onUpgrade()"><span i18n>Upload image</span></button>
+            </div>
+            <div>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="btn btn-link dropdown-item" type="button"
+                (click)="onActivateUpgrade()"><span i18n>Activate image</span></button>
+            </div>
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="btn btn-link dropdown-item" type="button"
+                (click)="onConnect()"><span i18n>Connect</span></button>
+            </div>
+            <div>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="btn btn-link dropdown-item" type="button"
+                (click)="onDisconnect()"><span i18n>Disconnect</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="btn btn-link dropdown-item" type="button"
+                (click)="onBreakerStatus()"><span i18n>State</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="btn btn-link dropdown-item" type="button"
+                (click)="onBreakerMode()"><span i18n>Mode</span></button>
+            </div>
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="btn btn-link dropdown-item" type="button"
+                (click)="onTou()"><span i18n>TOU Upload</span></button>
+            </div>            
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="btn btn-link dropdown-item" type="button"
+                (click)="onSetLimiter()"><span i18n>Limiter</span></button>
+            </div>
+            <div>
+              <button class="btn btn-link dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="btn btn-link dropdown-item" type="button"
                 (click)="onSetMonitor()"><span i18n>Monitor</span></button>
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter"  class="dropdown-item" type="button"
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter"  class="btn btn-link dropdown-item" type="button"
                 (click)="onClearFF()"><span i18n>Clear FF</span></button>
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
+            </div>
+            <div>
+              <button class="btn btn-link dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
+            </div>
           </div>
         </div>
 

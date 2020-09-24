@@ -30,17 +30,20 @@ describe('Pact consumer test', () => {
     name: 'Test DCU 1',
     typeId: 1,
     typeValue: 'Type 1',
-    vendorId: 1,
-    vendorValue: 'Vendor 3',
+    manufacurerId: 1,
+    manufacurerValue: 'Vendor 3',
     statusId: 1,
     statusValue: 'CREATED',
     address: 'Ljubljana 1000',
-    id: '3323333',
+    serialNumber: '3323333',
     ip: '2.32.3.5',
     mac: 'mac',
     port: '3333',
     tags: 'tag55',
-    username: 'name user'
+    username: 'name user',
+    password: 'password',
+    longitude: 3233,
+    latitude: 330323
   };
 
   const id = '1D372C3F-D1FC-4BB1-BF34-0E4925D4BA8E';

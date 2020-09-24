@@ -13,7 +13,8 @@ import {
   dcuSync,
   dcuForJob,
   updateConcentrator,
-  removeDcuFromJob
+  removeDcuFromJob,
+  dataConcentrator
 } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
@@ -79,13 +80,13 @@ export class DataConcentratorUnitsService {
   }
 
   createDcu(payload: DcuForm): Observable<string> {
-    const vendorId: number = payload.vendor ? payload.vendor.id : -1;
+    const vendorId: number = payload.manufacturer ? payload.manufacturer.id : -1;
 
     const dcuRequest: DcuRequest = {
-      concentratorId: payload.idNumber,
+      concentratorId: payload.serialNumber,
       concentratorIp: payload.ip,
       type: payload.type ? payload.type.id : -1,
-      vendor: payload.vendor ? payload.vendor.id : -1,
+      vendor: payload.manufacturer ? payload.manufacturer.id : -1,
       name: payload.name,
       userName: payload.userName,
       password: payload.password
@@ -101,10 +102,10 @@ export class DataConcentratorUnitsService {
 
   updateDcu(id: string, payload: DcuForm): Observable<string> {
     const dcuRequest: DcuRequest = {
-      concentratorId: payload.idNumber,
+      concentratorId: payload.serialNumber,
       concentratorIp: payload.ip,
       type: payload.type ? payload.type.id : -1,
-      vendor: payload.vendor ? payload.vendor.id : -1,
+      vendor: payload.manufacturer ? payload.manufacturer.id : -1,
       name: payload.name,
       userName: payload.userName,
       password: payload.password,
@@ -112,6 +113,8 @@ export class DataConcentratorUnitsService {
       mac: payload.mac,
       port: payload.port,
       status: payload.status ? payload.status.id : -1
+      // latitude: payload.latitude,
+      // longitude: payload.longitude,
     };
 
     return this.repository.makeRequest(this.updateDcuRequest(id, dcuRequest));
@@ -133,7 +136,7 @@ export class DataConcentratorUnitsService {
   }
 
   getDataConcentratorUnitRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${dataConcentratorUnits}/${id}`);
+    return new HttpRequest('GET', `${dataConcentrator}/${id}`);
   }
 
   getConcentratorsForJob(param: RequestDcuForJob): Observable<ResponseDcuForJob> {
