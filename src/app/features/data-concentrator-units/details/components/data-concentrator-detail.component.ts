@@ -71,17 +71,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       {
         [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
         [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
-        [this.statusProperty]: [
-          this.data && this.data.statusId > 0 ? { id: this.data.statusId, value: this.data.statusValue } : null,
-          [Validators.required]
-        ],
+        [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
         [this.typeProperty]: [
           this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
           [Validators.required]
         ],
-        [this.vendorProperty]: [
-          this.data && this.data.manufacturerId > 0 ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null
-        ],
+        [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
         [this.ipProperty]: [this.data ? this.data.ip : null],
         [this.portProperty]: [this.data ? this.data.port : null],
         [this.addressProperty]: [this.data ? this.data.address : null],

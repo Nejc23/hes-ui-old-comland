@@ -70,7 +70,7 @@
       <div><span>{{form.get(tagsProperty).value}}</span></div>        
     </div>
   </div>
-  <div *ngIf="credentialsVisible">
+  <div class="form-row mb-4" *ngIf="credentialsVisible">
     <div class="col-4">
         <div><label i18n>Username</label></div>
         <div><span>{{form.get(userNameProperty).value}}</span></div>        
@@ -93,28 +93,30 @@
   </div>
   <div class="form-row">
     <div class="col-4">
+      <fieldset [disabled]="true">
         <app-input-text [form]="form" [property]="macProperty" i18n-label label="MAC">
         </app-input-text>
+      </fieldset>
     </div>
   </div>
   <div class="form-row">
-    <div class="col-4">
+    <div class="col-4">      
       <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="dcuStatuses$ | async"
-        [disabled]="false">
-      </app-select-input>
+        [disabled]="true">
+      </app-select-input>      
     </div>
   </div>
   <div class="form-row">
     <div class="col-4">
       <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async"
-        [disabled]="false" (selectedValueChanged)="onTypeChanged($event)">
+        [disabled]="true" (selectedValueChanged)="onTypeChanged($event)">
       </app-select-input>
     </div>
   </div>
   <div class="form-row">
     <div class="col-4">
       <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
-        [disabled]="false">
+        [disabled]="true">
       </app-select-input>
     </div>
   </div>
@@ -134,10 +136,12 @@
         </app-input-text>
     </div>
   </div>
-  <div class="form-row">
+  <div class="form-row">    
     <div class="col-4">
+      <fieldset [disabled]="true">
         <app-input-text [form]="form" [property]="tagsProperty" i18n-label label="Tags">
         </app-input-text>
+      </fieldset>
     </div>
   </div>
 
