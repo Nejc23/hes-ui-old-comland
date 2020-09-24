@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { addConcentrator } from 'src/app/core/repository/consts/data-concentrator-units.const';
-import { DcuRequest } from 'src/app/features/data-concentrator-units/interfaces/dcu-request.interface';
 
 @Injectable()
 export class DataConcentratorUnitInterceptor {

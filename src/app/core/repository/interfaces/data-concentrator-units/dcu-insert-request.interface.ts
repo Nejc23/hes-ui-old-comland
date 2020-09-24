@@ -1,4 +1,4 @@
-export interface DcuRequest {
+export interface DcuInsertRequest {
   concentratorId: string;
   concentratorIp: string;
   type: number;
