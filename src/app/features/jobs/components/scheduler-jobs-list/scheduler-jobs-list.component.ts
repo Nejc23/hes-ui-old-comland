@@ -1,27 +1,21 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormBuilder, AbstractControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
-import { ActionFormStaticTextService } from 'src/app/features/data-concentrator-units/components/action-form/services/action-form-static-text.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { JobsStaticTextService } from '../../services/jobs-static-text.service';
-import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 
 @Component({
@@ -70,7 +64,6 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     public staticTextService: JobsStaticTextService,
     private eventService: SchedulerJobsEventEmitterService,
-    private formUtils: FormsUtilsService,
     private modalService: ModalService,
     private authService: AuthService,
     private breadcrumbService: BreadcrumbService
@@ -253,13 +246,5 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
-  }
-
-  cellMouseOver(event) {
-    this.eventService.eventEmitterRowMouseOver.emit(event.rowIndex);
-  }
-
-  cellMouseOut(event) {
-    this.eventService.eventEmitterRowMouseOut.emit(event.rowIndex);
   }
 }

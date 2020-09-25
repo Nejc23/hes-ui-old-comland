@@ -6,9 +6,9 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { RequestSetLimiter, LimiterDefinitions } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { PlcMeterReadScheduleGridService } from '../../services/plc-meter-read-schedule-grid.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { Observable } from 'rxjs/internal/Observable';
+import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 
 @Component({
   selector: 'app-plc-meter-limiter',
@@ -16,7 +16,10 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class PlcMeterLimiterComponent implements OnInit {
   form: FormGroup;
-
+  deviceIdsParam = [];
+  filterParam?: GridFilterParams;
+  searchParam?: GridSearchParams[];
+  excludeIdsParam?: string[];
   registers$: Observable<Codelist<string>[]>;
 
   constructor(
@@ -24,8 +27,7 @@ export class PlcMeterLimiterComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private i18n: I18n,
     private modal: NgbActiveModal,
-    private myGridService: MyGridLinkService,
-    private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService
+    private myGridService: MyGridLinkService
   ) {
     this.form = this.createForm();
   }
@@ -47,8 +49,10 @@ export class PlcMeterLimiterComponent implements OnInit {
 
   ngOnInit() {
     this.registers$ = this.myGridService.getLimiterRegisters({
-      // bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()   // todo for filters
-      deviceIds: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters().id.filter(Boolean),
+      deviceIds: this.deviceIdsParam,
+      filter: this.filterParam,
+      search: this.searchParam,
+      excludeIds: this.excludeIdsParam,
       /// for test ony that two devices are working on test environment '8EC1791C-E99C-499D-823A-D3F821B77097', '8E520D4A-3B9A-4F1B-B3DB-A6D95D8057F0'
       groupType: 10 // fixed id - defined in task LU-62 !!!
     });
@@ -65,8 +69,10 @@ export class PlcMeterLimiterComponent implements OnInit {
 
     const formData: RequestSetLimiter = {
       limiterDefinitions: data,
-      // bulkActionsRequestParam: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters()   // todo for filters
-      deviceIds: this.plcMeterReadScheduleGridService.getSelectedRowsOrFilters().id.filter(Boolean) /// for test ony that two devices are working on test environment '8EC1791C-E99C-499D-823A-D3F821B77097', '8E520D4A-3B9A-4F1B-B3DB-A6D95D8057F0'
+      deviceIds: this.deviceIdsParam,
+      filter: this.filterParam,
+      search: this.searchParam,
+      excludeIds: this.excludeIdsParam
     };
 
     return formData;
@@ -102,7 +108,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.setLimiter(values);
-    const successMessage = this.i18n(`Meter Units set Monitor was successfully`);
+    const successMessage = this.i18n(`Meter Units set Limiter was successfully`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

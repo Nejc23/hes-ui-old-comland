@@ -1,5 +1,4 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { PactWeb } from '@pact-foundation/pact-web';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
@@ -16,29 +15,21 @@ import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
 import * as moment from 'moment';
-import { Subscription, Observable } from 'rxjs';
+import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { filter } from 'rxjs/operators';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
-import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
-import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
-import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
+import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -109,13 +100,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = this.i18n(`Server error!`);
   messageDataRefreshed = this.i18n(`Data refreshed!`);
   messageActionFailed = this.i18n(`Action failed!`);
 
   constructor(
-    private sidebarService: SidebarService,
+    // private sidebarService: SidebarService,
     private i18n: I18n,
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -126,14 +115,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private eventService: MeterUnitsTypeGridEventEmitterService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
-    private modalService: ModalService,
     private service: MyGridLinkService,
     private authService: AuthService,
     private toast: ToastNotificationService,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private gridColumnShowHideService: GridColumnShowHideService,
     private breadcrumbService: BreadcrumbService,
-    private router: Router
+    private router: Router,
+    private plcActionsService: MeterUnitsPlcActionsService
   ) {
     this.setTitle(-1);
     this.paramsSub = route.params.subscribe(params => {
@@ -670,310 +659,106 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.eventService.setIsSelectedAll(false);
   }
 
-  // TODO
   // tsg button click
   onTag() {
     //
   }
 
+  // --> Operations action click (bulk or selected row)
+  onBreakerStatus(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.breakerStatus,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onActivateUpgrade(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.activateUpgrade,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onConnect(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.connect,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onDisconnect(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.disconnect,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onClearFF(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.clearFF,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
   // delete button click
-  onDelete() {
-    /*  let selectedText = 'all';
-    const object: GridBulkActionRequestParams = {
-      id: [],
-      filter: {
-        statuses: [],
-        types: [],
-        vendor: { id: 0, value: '' },
-        tags: []
-      }
-    };
-    if (!this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      selectedRows.forEach(element => {
-        object.id.push(element.id);
-      });
-      object.filter = null;
-      selectedText = selectedRows ? selectedRows.length : 0;
-    } else {
-      object.filter = this.requestModel.filterModel;
-      object.id = null;
-    }
-
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.confirmDelete = true;
-    component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        const request = this.meterUnitsTypeService.deleteDcu(object);
-        this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
-          (response: any) => {
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-            this.eventService.selectDeselectAll(-1);
-            this.gridApi.forEachNode(node => {
-              node.setSelected(false);
-            });
-
-            this.gridApi.onFilterChanged();
-          },
-          () => {}
-        );
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );*/
-  }
-
-  onScheduleReadJobs() {
-    const params = this.getBulkRequestParam();
-
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.deviceFiltersAndSearch = {
-      id: params.deviceIds,
-      search: params.search,
-      filter: params.filter,
-      excludeIds: params.excludeIds
-    };
-    modalRef.result.then().catch(() => {});
-  }
-
-  bulkOperation(operation: MeterUnitsTypeEnum) {
-    // if (this.authService.isTokenAvailable()) {
-
-    const params = this.getBulkRequestParam();
-
-    let selectedText = `${this.getSelectedCount()} rows `;
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.i18n('Confirm');
-    let response: Observable<any> = new Observable();
-
-    // TODO: ONLY FOR TESTING !!!
-    // deviceIdsParam = [];
-    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
-
-    let operationName = '';
-    switch (operation) {
-      case MeterUnitsTypeEnum.breakerStatus:
-        response = this.service.getDisconnectorState(params);
-        operationName = this.i18n('Get breaker status');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
-        break;
-      case MeterUnitsTypeEnum.connect:
-        response = this.service.postMyGridConnectDevice(params);
-        operationName = this.i18n('Connect');
-        break;
-      case MeterUnitsTypeEnum.disconnect:
-        response = this.service.postMyGridDisconnectDevice(params);
-        operationName = this.i18n('Disconnect');
-        break;
-      case MeterUnitsTypeEnum.touConfig:
-        const paramsConf: RequestTOUData = {
-          deviceIds: params.deviceIds,
-          filter: params.filter,
-          search: params.search,
-          excludeIds: params.excludeIds,
-          timeOfUseId: '1'
-        }; // TODO: timeOfUseId read form store?
-
-        response = this.service.postMyGridTOUDevice(paramsConf);
-        operationName = this.i18n('Configure TOU');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
-        break;
-      case MeterUnitsTypeEnum.activateUpgrade:
-        response = this.service.activateDeviceUpgrade(params);
-        operationName = this.i18n('Activate FW upgrade');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
-    }
-    component.btnConfirmText = operationName;
-    component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`${operationName} ${selectedText} selected meter unit(s)?`);
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
-        response.subscribe(
-          value => {
-            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-            if (operation === MeterUnitsTypeEnum.breakerStatus) {
-              this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
-            }
-          },
-          e => {
-            this.toast.errorToast(this.messageServerError);
-          }
-        );
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-    /* } else {
-      this.service.getMyGridIdentityToken().subscribe(
-        value => {
-          this.authService.setAuthTokenMyGridLink(value);
-          this.bulkOperation(operation);
-        },
-        e => {
-          this.toast.errorToast(this.messageServerError);
-        }
-      );
-    }*/
-  }
-
-  getBulkRequestParam(): RequestConnectDisconnectData {
-    const requestParam: RequestConnectDisconnectData = {
-      deviceIds: [],
-      filter: null,
-      search: null,
-      excludeIds: null
-    };
-
-    if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
-
-      requestParam.filter = this.requestModel.filterModel;
-      requestParam.search = this.requestModel.searchModel;
-      requestParam.excludeIds = [];
-
-      excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
-    } else {
-      const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
-
-      if (selectedRows && selectedRows.length > 0) {
-        selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
-      }
-    }
-
-    return requestParam;
-  }
-
-  onBreakerStatus() {
-    this.bulkOperation(MeterUnitsTypeEnum.breakerStatus);
-  }
-
-  onActivateUpgrade() {
-    this.bulkOperation(MeterUnitsTypeEnum.activateUpgrade);
-  }
-
-  onConnect() {
-    this.bulkOperation(MeterUnitsTypeEnum.connect);
-  }
-
-  onDisconnect() {
-    this.bulkOperation(MeterUnitsTypeEnum.disconnect);
-  }
-
-  onTou() {
-    // TODO: ONLY FOR TESTING !
-    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
-
-    const params = this.getBulkRequestParam();
-
-    const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
+  // TODO missing BE api !!
+  onDelete(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.delete,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
-  // upgrade button click
-  onUpgrade() {
-    // TODO: ONLY FOR TESTING !
-    // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-    // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
-
-    const params = this.getBulkRequestParam();
-
-    const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  // popup
+  onScheduleReadJobs(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onScheduleReadJobs(params);
   }
 
-  onSetMonitor() {
-    const params = this.getBulkRequestParam();
-
-    const modalRef = this.modalService.open(PlcMeterMonitorComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  // popup
+  onTou(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onTou(params);
   }
 
-  onSetLimiter() {
-    const params = this.getBulkRequestParam();
-
-    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  // popup
+  onUpgrade(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onUpgrade(params);
   }
 
+  // popup
+  onSetMonitor(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onSetMonitor(params);
+  }
+
+  // popup
+  onSetLimiter(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onSetLimiter(params);
+  }
+
+  // popup
+  onBreakerMode(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onBreakerMode(params);
+  }
+  // <-- end Operations action click (bulk or selected row)
+
+  // --> for checking long bulk action finished
   deleteAllRequests() {
     const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
     if (requestIds && requestIds.length > 0) {
@@ -1032,6 +817,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       );
     }*/
   }
+  // <-- end for checking long bulk action finished
 
   // isFilterSet(): boolean {
   //   // const tmpFilter: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;

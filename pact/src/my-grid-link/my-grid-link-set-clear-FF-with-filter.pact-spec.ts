@@ -2,7 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestFilterParams, ResponseConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestFilterParams, ResponseClearFF } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -46,10 +46,12 @@ describe('Pact consumer test', () => {
       ],
       showChildInfoMBus: true,
       showDeleted: true
-    }
+    },
+    search: [{ colId: 'all', type: 'like', value: 'name' }],
+    excludeIds: ['excluded']
   };
 
-  const responseBody: ResponseConnectDisconnectData = {
+  const responseBody: ResponseClearFF = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: null,
     filter: {
@@ -71,18 +73,20 @@ describe('Pact consumer test', () => {
       ],
       showChildInfoMBus: true,
       showDeleted: true
-    }
+    },
+    search: [{ colId: 'all', type: 'like', value: 'name' }],
+    excludeIds: ['excluded']
   };
 
-  describe('myGrid.link get disconnector state with filter request', () => {
+  describe('myGrid.link clear FF with filter request', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_DISCONNECTOR_STATE_WITH_FILTER',
-          uponReceiving: 'a request for getting disconnector state with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_CLEAR_FF_WITH_FILTER',
+          uponReceiving: 'a request for clear FF with filter in request - myGrid.Link',
           withRequest: {
-            method: service.postMyGridConnectDeviceRequest(requestBody).method,
-            path: service.postMyGridConnectDeviceRequest(requestBody).url,
+            method: service.clearFFRequest(requestBody).method,
+            path: service.clearFFRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -104,11 +108,14 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for getting disconnector state with filter in request - myGrid.Link', done => {
-      service.postMyGridConnectDevice(requestBody).subscribe(
-        (res: ResponseConnectDisconnectData) => {
+    it('should make request for clear FF with filter in request - myGrid.Link', done => {
+      service.clearFF(requestBody).subscribe(
+        (res: ResponseClearFF) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);
+          expect(res.filter).toEqual(responseBody.filter);
+          expect(res.search).toEqual(responseBody.search);
+          expect(res.excludeIds).toEqual(responseBody.excludeIds);
           done();
         },
         err => {

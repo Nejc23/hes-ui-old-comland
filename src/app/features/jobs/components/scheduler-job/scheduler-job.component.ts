@@ -15,7 +15,6 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
-import { PlcMeterReadScheduleGridService } from 'src/app/features/meter-units/common/services/plc-meter-read-schedule-grid.service';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -58,7 +57,6 @@ export class SchedulerJobComponent implements OnInit {
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
-    private plcMeterReadScheduleGridService: PlcMeterReadScheduleGridService,
     private codelistService: CodelistRepositoryService,
     private jobsService: JobsService,
     private formBuilder: FormBuilder,

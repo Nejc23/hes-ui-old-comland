@@ -5,13 +5,15 @@
 </app-auto-refresh>
 
 <div class="row">
-  <div class="col-2" *ngIf="!hideFilter">
+  <div class="col-2 filter-shadow" *ngIf="!hideFilter">
     <app-meter-unit-filter (filterChange)="reloadGrid()"></app-meter-unit-filter>
   </div>
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
-    <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
-        <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
-    </a>
+  
+  <div class="filter-button" [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
+    <button @navItemsTrigger id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
+      <i class='far'
+         [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
+    </button>
 
 <!-- row total items, selected filter name -->
 <div *ngIf="!noData">
@@ -38,60 +40,69 @@
 
         <div class="btn-group">
           <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-          <div class="dropdown-menu">
-
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item" type="button"
-                (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
-                (click)="onUpgrade()"><span i18n>Upload image</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="dropdown-item" type="button"
-                (click)="onActivateUpgrade()"><span i18n>Activate image</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="dropdown-item" type="button"
-                (click)="onConnect()"><span i18n>Connect</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="dropdown-item" type="button"
-                (click)="onDisconnect()"><span i18n>Disconnect</span>
-            </button>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="dropdown-item" type="button"
-                (click)="onBreakerStatus()"><span i18n>State</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="dropdown-item" type="button"
-                (click)="onTou()"><span i18n>TOU Upload</span>
-            </button>
-
-            <div class="dropdown-divider"></div>
-
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
-                (click)="onSetLimiter()"><span i18n>Limiter</span>
-            </button>
-
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
-            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="dropdown-item" type="button"
+          <div class="dropdown-menu" style="min-width: 13rem">
+            <div>
+              <button class="dropdown-item" (click)="onDelete()" [disabled]="true"><span i18n>Delete</span></button> 
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="btn btn-link dropdown-item" type="button"
+                (click)="onScheduleReadJobs()"><span i18n>Jobs</span></button>
+            </div>
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="btn btn-link dropdown-item" type="button"
+                (click)="onUpgrade()"><span i18n>Upload image</span></button>
+            </div>
+            <div>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" class="btn btn-link dropdown-item" type="button"
+                (click)="onActivateUpgrade()"><span i18n>Activate image</span></button>
+            </div>
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" class="btn btn-link dropdown-item" type="button"
+                (click)="onConnect()"><span i18n>Connect</span></button>
+            </div>
+            <div>
+            <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" class="btn btn-link dropdown-item" type="button"
+                (click)="onDisconnect()"><span i18n>Disconnect</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="btn btn-link dropdown-item" type="button"
+                (click)="onBreakerStatus()"><span i18n>State</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" class="btn btn-link dropdown-item" type="button"
+                (click)="onBreakerMode()"><span i18n>Mode</span></button>
+            </div>
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="btn btn-link dropdown-item" type="button"
+                (click)="onTou()"><span i18n>TOU Upload</span></button>
+            </div>            
+            <div class="pl-3 pr-3"><hr/></div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="btn btn-link dropdown-item" type="button"
+                (click)="onSetLimiter()"><span i18n>Limiter</span></button>
+            </div>
+            <div>
+              <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" class="btn btn-link dropdown-item" type="button"
                 (click)="onSetMonitor()"><span i18n>Monitor</span></button>
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear FF</span></button>
-            <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
+            </div>
+            <div>
+              <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter"  class="btn btn-link dropdown-item" type="button"
+                (click)="onClearFF()"><span i18n>Clear FF</span></button>
+            </div>
+            <div>
+              <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
+            </div>
           </div>
         </div>
 
         <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-tags"></i><span i18n>Tags</span></button>
-        <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="fa far-line-chart" disabled></i><span i18n>Data</span></button>
+        <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-chart-bar" disabled></i><span i18n>Data</span></button>
 
       </div>
     </div>

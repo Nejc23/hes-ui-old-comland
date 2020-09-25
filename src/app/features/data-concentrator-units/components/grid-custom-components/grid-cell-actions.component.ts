@@ -28,4 +28,13 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   toDetails() {
     this.router.navigate(['dataConcentratorUnits/' + this.params.data.concentratorId]);
   }
+
+  // set tooltip text
+  setToolTip(type: string) {
+    switch (type) {
+      case 'details':
+        return this.i18n('Open details');
+    }
+    return '';
+  }
 }

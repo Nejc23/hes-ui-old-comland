@@ -10,13 +10,16 @@
 
 
 <div class="row">
-  <div class="col-2" *ngIf="!hideFilter">
+  <div class="col-2 filter-shadow" *ngIf="!hideFilter">
     <app-dc-filter (filterChange)="reloadGrid()"></app-dc-filter>
   </div>
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
-    <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
-        <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
-    </a>
+
+  <div class="filter-button" [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">    
+    <button @navItemsTrigger id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
+      <i class='far'
+         [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
+    </button>
+
     <!-- row total items, selected filter name -->
     <div *ngIf="!noData">
       <div class="d-flex justify-content-between mb-2">

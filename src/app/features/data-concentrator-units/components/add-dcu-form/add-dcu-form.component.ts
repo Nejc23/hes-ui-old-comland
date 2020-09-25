@@ -83,11 +83,11 @@ export class AddDcuFormComponent implements OnInit {
     const formData: DcuForm = {
       id: null,
       name: this.form.get(this.nameProperty).value,
-      idNumber: this.form.get(this.idNumberProperty).value,
+      serialNumber: this.form.get(this.idNumberProperty).value,
       ip: this.form.get(this.ipProperty).value,
       tags: this.form.get(this.tagsProperty).value,
       type: this.form.get(this.typeProperty).value,
-      vendor: this.form.get(this.vendorProperty).value
+      manufacturer: this.form.get(this.vendorProperty).value
     };
 
     if (this.credentialsVisible) {
@@ -109,8 +109,8 @@ export class AddDcuFormComponent implements OnInit {
       concentratorId: newId,
       name: formData.name,
       type: formData.type.value,
-      vendor: formData.vendor.value,
-      id: formData.idNumber,
+      vendor: formData.manufacturer.value,
+      id: formData.serialNumber,
       ip: formData.ip,
       jobStatus: '',
       lastCommunication: '',
@@ -195,7 +195,7 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   get idNumberProperty() {
-    return nameOf<DcuForm>(o => o.idNumber);
+    return nameOf<DcuForm>(o => o.serialNumber);
   }
 
   get ipProperty() {
@@ -219,7 +219,7 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   get vendorProperty() {
-    return nameOf<DcuForm>(o => o.vendor);
+    return nameOf<DcuForm>(o => o.manufacturer);
   }
 
   get discoveryJobProperty() {

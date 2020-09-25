@@ -1,14 +1,18 @@
-<div class="d-flex align-items-center row-actions">
-  <div *ngIf="isRowMouseOver && !isRowInEditMode()" class="btn-group">
+<div class="d-flex row-actions justify-content-end">
+  <div *ngIf="!isRowInEditMode()" class="btn-group-sm">
     <button
-        type="button" class="btn btn-primary" (click)="editItem(params)"><i class="far fa-edit"></i></button>
+        type="button" class="btn btn-primary m-0" (click)="editItem(params)"><i class="far fa-edit"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('edit')"></i></button>
     <button
-        type="button" class="btn btn-primary" (click)="deleteItem(params)"><i class="far fa-trash"></i></button>
+        type="button" class="btn btn-primary m-0" (click)="deleteItem(params)"><i class="far fa-trash"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('delete')"></i></button>
   </div>
-  <div *ngIf="isRowMouseOver && isRowInEditMode()" class="btn-group">
+  <div *ngIf="isRowInEditMode()" class="btn-group-sm">
     <button
-        type="button" class="btn btn-primary" (click)="saveItem(params)"><i class="far fa-check"></i></button>
+        type="button" class="btn btn-primary m-0" (click)="saveItem(params)"><i class="far fa-check"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('save')"></i></button>
     <button
-        type="button" class="btn btn-primary" (click)="cancelItem(params)"><i class="far fa-ban"></i></button>
+        type="button" class="btn btn-primary m-0" (click)="cancelItem(params)"><i class="far fa-ban"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('cancel')"></i></button>
   </div>
 </div>

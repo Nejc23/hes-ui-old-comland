@@ -11,7 +11,7 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
 
-  constructor(private i18n: I18n, private cdRef: ChangeDetectorRef) {}
+  constructor(private i18n: I18n) {}
 
   // called on init
   agInit(params: any): void {
@@ -24,55 +24,53 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     return true;
   }
 
-  // action edit
-  editItem(params: any) {
-    const cellDefs2 = this.gridApi.getEditingCells();
-    if (cellDefs2.length === 0) {
-      this.gridApi.setFocusedCell(params.rowIndex, 'propertyName');
-      this.gridApi.startEditingCell({
-        rowIndex: params.rowIndex,
-        colKey: 'propertyName'
-      });
-      const cellDefs = this.gridApi.getEditingCells();
-      if (cellDefs.length > 0) {
-        // this.hideEditDelete = true;
-      }
-      this.params.context.componentParent.editForm(params.data.autoTemplateRuleId);
-    }
+  onScheduleReadJobs() {
+    this.params.context.componentParent.onScheduleReadJobs(this.params.data.deviceId);
   }
-
-  // action delete
-  deleteItem(params: any) {
-    this.params.context.componentParent.deleteForm(params.data.autoTemplateRuleId);
+  onTou() {
+    this.params.context.componentParent.onTou(this.params.data.deviceId);
   }
-
-  // action save
-  saveItem(params: any) {
-    this.params.context.componentParent.saveForm(this.gridApi, params);
+  onUpgrade() {
+    this.params.context.componentParent.onUpgrade(this.params.data.deviceId);
   }
-
-  // action cancel
-  cancelItem(params: any) {
-    const gridApi = this.params.api as GridApi;
-    this.params.context.componentParent.cancelForm(gridApi);
+  onSetMonitor() {
+    this.params.context.componentParent.onSetMonitor(this.params.data.deviceId);
+  }
+  onSetLimiter() {
+    this.params.context.componentParent.onSetLimiter(this.params.data.deviceId);
+  }
+  onBreakerStatus() {
+    this.params.context.componentParent.onBreakerStatus(this.params.data.deviceId);
+  }
+  onBreakerMode() {
+    this.params.context.componentParent.onBreakerMode(this.params.data.deviceId);
+  }
+  onActivateUpgrade() {
+    this.params.context.componentParent.onActivateUpgrade(this.params.data.deviceId);
+  }
+  onConnect() {
+    this.params.context.componentParent.onConnect(this.params.data.deviceId);
+  }
+  onDisconnect() {
+    this.params.context.componentParent.onDisconnect(this.params.data.deviceId);
+  }
+  onClearFF() {
+    this.params.context.componentParent.onClearFF(this.params.data.deviceId);
+  }
+  onDelete() {
+    this.params.context.componentParent.onDelete(this.params.data.deviceId);
   }
 
   // set tooltip text
   setToolTip(type: string) {
     switch (type) {
-      case 'edit':
-        return this.i18n('Edit rule');
-      case 'delete':
-        return this.i18n('Delete rule');
-      case 'save':
-        return this.i18n('Save');
-      case 'cancel':
-        return this.i18n('Cancel');
+      case 'detail':
+        return this.i18n('Open detail');
+      case 'chart':
+        return this.i18n('Open data');
+      case 'operation':
+        return this.i18n('Select operation');
     }
     return '';
-  }
-
-  showRegisters() {
-    this.params.context.showRegisters(this.params.data.deviceId);
   }
 }
