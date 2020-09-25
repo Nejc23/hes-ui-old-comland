@@ -25,8 +25,8 @@ import { AllForJobStaticTextService } from '../services/meter-units-for-job-stat
 import { AllForJobGridEventEmitterService } from '../services/meter-units-for-job-grid-event-emitter.service';
 import { RequestMeterUnitsForJob } from 'src/app/core/repository/interfaces/meter-units/meter-units-for-job.interface';
 import { MeterUnitsForJobGridService } from '../services/meter-units-for-job-grid.service';
-import { RequestConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 @Component({
   templateUrl: './meter-units-for-job.component.html'
@@ -281,7 +281,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
@@ -686,7 +686,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   }
 
   onRemoveFromJob() {
-    const selectedRows = this.gridApi.getSelectedRows();
+    const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
     const deviceIdsParam = [];
 
     // const selectedDeviceCount = this.totalCount;
@@ -748,8 +748,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     );
   }
 
-  getBulkRequestParam(): RequestConnectDisconnectData {
-    const requestParam: RequestConnectDisconnectData = {
+  getBulkRequestParam(): RequestFilterParams {
+    const requestParam: RequestFilterParams = {
       deviceIds: [],
       filter: null,
       search: null,
@@ -765,7 +765,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
       excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
     } else {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
       }

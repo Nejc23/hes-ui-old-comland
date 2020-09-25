@@ -2,7 +2,7 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
 import { ActivatedRoute } from '@angular/router';
 import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, forkJoin } from 'rxjs';
@@ -16,9 +16,6 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { AutoTemplatesStaticTextService } from '../services/auto-template-static-text.service';
-import { AutoTemplatesGridEventEmitterService } from '../services/auto-template-grid-event-emitter.service';
-import { GridRequiredCellEditorComponent } from './grid-custom-components/grid-required-cell-editor.component';
-import { NgbTypeaheadWindow } from '@ng-bootstrap/ng-bootstrap/typeahead/typeahead-window';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
@@ -89,7 +86,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private formUtils: FormsUtilsService,
     private serviceRepository: AutoTemplatesService,
     private serviceJob: JobsService,
-    private event: AutoTemplatesGridEventEmitterService,
     private codelistService: CodelistRepositoryService,
     private toast: ToastNotificationService,
     private modalService: ModalService,
@@ -622,22 +618,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         this.toast.errorToast(this.i18n('Failed to add job to all rules.'));
       }
     );
-  }
-
-  cellMouseOver(event) {
-    this.event.eventEmitterRowMouseOver.emit(event.rowIndex);
-  }
-
-  cellMouseOut(event) {
-    this.event.eventEmitterRowMouseOut.emit(event.rowIndex);
-  }
-
-  cellMouseOverJobs(event) {
-    this.event.eventEmitterRowMouseOverJobs.emit(event.rowIndex);
-  }
-
-  cellMouseOutJobs(event) {
-    this.event.eventEmitterRowMouseOutJobs.emit(event.rowIndex);
   }
 
   setTemplateListActivityClass(template: TemplatesList) {

@@ -20,12 +20,12 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { RequestConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { RequestDcuForJob } from 'src/app/core/repository/interfaces/jobs/dcu/dcu-for-job.interface';
 import { DcuForJobGridService } from '../services/dcu-for-job-grid.service';
 import { DcuForJobStaticTextService } from '../services/dcu-for-job-static-text.service';
 import { DcuForJobGridEventEmitterService } from '../services/dcu-for-job-grid-event-emitter.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 @Component({
   // selector: 'app-meter-units-all-for-job',
@@ -276,7 +276,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
@@ -684,7 +684,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   }
 
   onRemoveFromJob() {
-    const selectedRows = this.gridApi.getSelectedRows();
+    const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
     const deviceIdsParam = [];
 
     console.log('onRemoveFromJob, selectedRows', selectedRows);
@@ -748,8 +748,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     );
   }
 
-  getBulkRequestParam(): RequestConnectDisconnectData {
-    const requestParam: RequestConnectDisconnectData = {
+  getBulkRequestParam(): RequestFilterParams {
+    const requestParam: RequestFilterParams = {
       deviceIds: [],
       filter: null,
       search: null,
@@ -765,7 +765,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
       excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
     } else {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
       }

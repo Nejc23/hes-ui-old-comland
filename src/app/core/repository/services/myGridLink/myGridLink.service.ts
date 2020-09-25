@@ -5,7 +5,6 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import {
   IdentityToken,
   LastStatus,
-  RequestConnectDisconnectData,
   ResponseConnectDisconnectData,
   RequestTOUData,
   ResponseTOUData,
@@ -14,7 +13,11 @@ import {
   RequestLimiterGetRegisters,
   RequestSetLimiter,
   ResponseSetMonitor,
-  ResponseSetLimiter
+  ResponseSetLimiter,
+  RequestFilterParams,
+  RequestSetBreakerMode,
+  ResponseSetBreakerMode,
+  ResponseClearFF
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -30,7 +33,9 @@ import {
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
   onDemandSetMonitor,
   getRegisters,
-  onDemandSetLimiter
+  onDemandSetLimiter,
+  onDemandSetBreakerMode,
+  onDemandClearFF
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
@@ -64,20 +69,20 @@ export class MyGridLinkService {
   }
 
   // connect device
-  postMyGridConnectDevice(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+  postMyGridConnectDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
     return this.repository.makeRequest(this.postMyGridConnectDeviceRequest(params));
   }
 
-  postMyGridConnectDeviceRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+  postMyGridConnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandConnect}`, params);
   }
 
   // disconnect device
-  postMyGridDisconnectDevice(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+  postMyGridDisconnectDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
     return this.repository.makeRequest(this.postMyGridDisconnectDeviceRequest(params));
   }
 
-  postMyGridDisconnectDeviceRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+  postMyGridDisconnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnect}`, params);
   }
 
@@ -91,11 +96,11 @@ export class MyGridLinkService {
   }
 
   // get disconnector state
-  getDisconnectorState(params: RequestConnectDisconnectData): Observable<ResponseConnectDisconnectData> {
+  getDisconnectorState(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
     return this.repository.makeRequest(this.getDisconnectorStateRequest(params));
   }
 
-  getDisconnectorStateRequest(params: RequestConnectDisconnectData): HttpRequest<any> {
+  getDisconnectorStateRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnectorState}`, params);
   }
 
@@ -152,11 +157,30 @@ export class MyGridLinkService {
     return new HttpRequest('POST', `${enumMyGridLink.templating}${getRegisters}`, request);
   }
 
+  // trigger set limiter
   setLimiter(payload: RequestSetLimiter): Observable<ResponseSetLimiter> {
     return this.repository.makeRequest(this.setLimiterRequest(payload));
   }
 
   setLimiterRequest(payload: RequestSetLimiter): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetLimiter}`, payload);
+  }
+
+  // trigger set breaker mode
+  setBreakerMode(payload: RequestSetBreakerMode): Observable<ResponseSetBreakerMode> {
+    return this.repository.makeRequest(this.setBreakerModeRequest(payload));
+  }
+
+  setBreakerModeRequest(payload: RequestSetBreakerMode): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetBreakerMode}`, payload);
+  }
+
+  // trigger set breaker mode
+  clearFF(param: RequestFilterParams): Observable<ResponseClearFF> {
+    return this.repository.makeRequest(this.clearFFRequest(param));
+  }
+
+  clearFFRequest(param: RequestFilterParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearFF}`, param);
   }
 }

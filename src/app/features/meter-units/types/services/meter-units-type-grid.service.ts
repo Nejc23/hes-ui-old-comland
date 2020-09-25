@@ -338,8 +338,9 @@ export class MeterUnitsTypeGridService {
   }
 
   // grid settings
-  public setGridOptions(context: any) {
+  public setGridOptions(component: any) {
     return {
+      context: { forma: component.form, componentParent: component },
       rowModelType: configAgGrid.rowModelType,
       defaultColDef: {
         sortable: configAgGridDefCol.sortable,
@@ -354,8 +355,7 @@ export class MeterUnitsTypeGridService {
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
       onSortChanged: this.onSortChanged,
-      onColumnVisible: this.onColumnVisible,
-      context
+      onColumnVisible: this.onColumnVisible
     };
   }
   /*

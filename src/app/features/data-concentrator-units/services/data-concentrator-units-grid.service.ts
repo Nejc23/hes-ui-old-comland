@@ -22,6 +22,7 @@ import * as _ from 'lodash';
 import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 
 @Injectable({
   providedIn: 'root'
@@ -178,6 +179,23 @@ export class DataConcentratorUnitsGridService {
         cellRenderer: 'gridCellJobStatusComponent',
         headerTooltip: this.i18n('Job status'),
         resizable: false
+      },
+      {
+        field: 'id',
+        pinned: 'right',
+        width: 70,
+        minWidth: 70,
+        maxWidth: 70,
+        suppressMenu: true,
+        editable: false,
+        suppressMovable: true,
+        lockPinned: true,
+        lockPosition: true,
+        sortable: false,
+        filter: false,
+        cellRendererFramework: GridCellActionsComponent,
+        headerName: '',
+        cellClass: 'actions-button-cell'
       }
     ];
   }

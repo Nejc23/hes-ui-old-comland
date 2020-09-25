@@ -3,5 +3,7 @@ export enum MeterUnitsTypeEnum {
   disconnect = 'disconnect',
   breakerStatus = 'breakerStatus',
   touConfig = 'touConfig',
-  activateUpgrade = 'activateUpgrade'
+  activateUpgrade = 'activateUpgrade',
+  delete = 'delete',
+  clearFF = 'clearFF'
 }

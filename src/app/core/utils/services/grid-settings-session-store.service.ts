@@ -158,39 +158,12 @@ export class GridSettingsSessionStoreService {
   /**************************************** */
 
   setGridSettings(gridId: string, type: GridSettingsSessionStoreTypeEnum, object: GridSettingsSessionStore) {
-    if (sessionStorage.getItem(this.gridSettings)) {
-      const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
-      if (data) {
-        const value = _.find(data, x => x.id === gridId);
-        if (value) {
-          switch (type) {
-            case GridSettingsSessionStoreTypeEnum.searchString:
-              value.value.searchText = object.searchText;
-              break;
-            case GridSettingsSessionStoreTypeEnum.pageIndex:
-              value.value.pageIndex = object.pageIndex;
-              break;
-            case GridSettingsSessionStoreTypeEnum.selectedRows:
-              value.value.selectedRows = object.selectedRows;
-              break;
-            case GridSettingsSessionStoreTypeEnum.isSelectedAll:
-              value.value.isSelectedAll = object.isSelectedAll;
-              break;
-            case GridSettingsSessionStoreTypeEnum.excludedRows:
-              value.value.excludedRows = object.excludedRows;
-              break;
-          }
-          sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
-        } else {
-          data.push({
-            id: gridId,
-            value: object as GridSettingsSessionStore
-          });
-          sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
-        }
-      }
+    const sessionValue = sessionStorage.getItem(this.gridSettings);
+    let data;
+    if (sessionValue) {
+      data = JSON.parse(sessionValue);
     } else {
-      const data = [
+      data = [
         {
           id: gridId,
           value: {
@@ -202,6 +175,33 @@ export class GridSettingsSessionStoreService {
           } as GridSettingsSessionStore
         }
       ];
+    }
+
+    const value = _.find(data, x => x.id === gridId);
+    if (value) {
+      switch (type) {
+        case GridSettingsSessionStoreTypeEnum.searchString:
+          value.value.searchText = object.searchText;
+          break;
+        case GridSettingsSessionStoreTypeEnum.pageIndex:
+          value.value.pageIndex = object.pageIndex;
+          break;
+        case GridSettingsSessionStoreTypeEnum.selectedRows:
+          value.value.selectedRows = object.selectedRows;
+          break;
+        case GridSettingsSessionStoreTypeEnum.isSelectedAll:
+          value.value.isSelectedAll = object.isSelectedAll;
+          break;
+        case GridSettingsSessionStoreTypeEnum.excludedRows:
+          value.value.excludedRows = object.excludedRows;
+          break;
+      }
+      sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
+    } else {
+      data.push({
+        id: gridId,
+        value: object as GridSettingsSessionStore
+      });
       sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
     }
   }

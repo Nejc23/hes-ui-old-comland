@@ -2,7 +2,7 @@ export const basePathConcentratorInventory = '/api/concentrator-inventory';
 export const basePath = '/api/concentrator-inventory-ui';
 export const dataConcentratorUnits = `${basePath}/concentrators`;
 export const addConcentrator = `${basePathConcentratorInventory}/add-concentrator`;
-export const updateConcentrator = `${basePathConcentratorInventory}/update-concentrator`;
+export const updateConcentrator = `${basePath}/concentrator`;
 export const dcuSync = `${basePath}/sync`;
 export const dcuLayout = '/api/dcu-layout';
 export const bulkDelete = '/api/dcu-bulk-delete';
@@ -11,6 +11,7 @@ export const schedulerJobs = '/api/scheduler-jobs';
 export const activeJobs = '/api/active-jobs';
 export const stopJob = 'stop-job';
 export const cancelJob = 'cancel-job';
+export const dataConcentrator = `${basePath}/concentrator`;
 
 // codelist DCU
 export const dcuStatuses = `${basePath}/concentrator-status-codes`;

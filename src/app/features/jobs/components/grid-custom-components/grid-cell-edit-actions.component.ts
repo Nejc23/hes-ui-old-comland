@@ -1,14 +1,13 @@
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { Component, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { GridApi, RowNode } from '@ag-grid-community/core';
+import { GridApi } from '@ag-grid-community/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
@@ -20,14 +19,8 @@ import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/sched
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
-
-  private rowMouseOverSubscription: Subscription;
-  private rowMouseOutSubscription: Subscription;
-
   messageDeleteStarted = this.i18n(`Scheduler job deleted!`);
   messageDeleteServerError = this.i18n(`Server error!`);
-
-  public isRowMouseOver = false;
 
   constructor(
     private i18n: I18n,
@@ -36,28 +29,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private service: JobsService,
     private eventService: SchedulerJobsEventEmitterService,
     private cdRef: ChangeDetectorRef
-  ) {
-    this.rowMouseOverSubscription = this.eventService.eventEmitterRowMouseOver.subscribe({
-      next: index => {
-        if (index === this.params.rowIndex) {
-          this.isRowMouseOver = true;
-          this.cdRef.detectChanges();
-        } else {
-          this.isRowMouseOver = false; // prevent active buttons on multiple rows
-          this.cdRef.detectChanges();
-        }
-      }
-    });
+  ) {}
 
-    this.rowMouseOutSubscription = this.eventService.eventEmitterRowMouseOut.subscribe({
-      next: index => {
-        if (index === this.params.rowIndex) {
-          this.isRowMouseOver = false;
-          this.cdRef.detectChanges();
-        }
-      }
-    });
-  }
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -70,7 +43,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   }
 
   editJob(params: any) {
-    console.log(params);
     const options: NgbModalOptions = {
       size: 'xl'
     };
@@ -82,7 +54,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   }
 
   private editReadingJob(params: any, options: NgbModalOptions) {
-    console.log(params);
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
     component.selectedJobId = params.data.id;
@@ -129,7 +100,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
         // on close (CONFIRM)
         response.subscribe(
           value => {
-            console.log(params);
             const gridApi = this.params.api as GridApi;
             gridApi.purgeServerSideCache([]);
             this.toast.successToast(this.messageDeleteStarted);
@@ -143,5 +113,16 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  // set tooltip text
+  setToolTip(type: string) {
+    switch (type) {
+      case 'edit':
+        return this.i18n('Edit job');
+      case 'delete':
+        return this.i18n('Delete job');
+    }
+    return '';
   }
 }

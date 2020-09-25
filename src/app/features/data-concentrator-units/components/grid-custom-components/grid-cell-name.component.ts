@@ -23,7 +23,6 @@ export class GridCellNameComponent implements ICellRendererAngularComp {
   }
 
   toDetails() {
-    console.log(this.params.data.concentratorId);
     this.router.navigate(['dataConcentratorUnits/' + this.params.data.concentratorId]);
   }
 }

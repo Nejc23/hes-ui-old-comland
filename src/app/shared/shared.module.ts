@@ -61,6 +61,7 @@ import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { PlcMeterMonitorComponent } from '../features/meter-units/common/components/plc-meter-monitor/plc-meter-monitor.component';
 import { PlcMeterLimiterComponent } from '../features/meter-units/common/components/plc-meter-limiter/plc-meter-limiter.component';
+import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 
 @NgModule({
   exports: [
@@ -107,7 +108,8 @@ import { PlcMeterLimiterComponent } from '../features/meter-units/common/compone
     SchedulerActiveJobsComponent,
     ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
-    PlcMeterTemplatesImportComponent
+    PlcMeterTemplatesImportComponent,
+    PlcMeterBreakerModeComponent
   ],
   imports: [
     CommonModule,
@@ -178,7 +180,8 @@ import { PlcMeterLimiterComponent } from '../features/meter-units/common/compone
     GridSelectionHeaderComponent,
     GridCellNameComponent,
     GridCellIdNumberComponent,
-    GridCellIpComponent
+    GridCellIpComponent,
+    PlcMeterBreakerModeComponent
   ],
   entryComponents: [
     ModalChangePasswordComponent,
@@ -197,7 +200,8 @@ import { PlcMeterLimiterComponent } from '../features/meter-units/common/compone
     TouConfigSelectComponent,
     ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
-    PlcMeterTemplatesImportComponent
+    PlcMeterTemplatesImportComponent,
+    PlcMeterBreakerModeComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

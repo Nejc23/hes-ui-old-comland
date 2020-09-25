@@ -2,7 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestFilterParams, ResponseConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestFilterParams, ResponseClearFF } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,20 +29,20 @@ describe('Pact consumer test', () => {
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
-  const responseBody: ResponseConnectDisconnectData = {
+  const responseBody: ResponseClearFF = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
-  describe('myGrid.link trigger connect device with device ids', () => {
+  describe('myGrid.link clear FF with no filter request', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_CONNECT_DEVICE_WITH_IDS',
-          uponReceiving: 'a request for trigger connect device with ids in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_CLEAR_FF_WITH_NO_FILTER',
+          uponReceiving: 'a request for clear FF with no filter in request - myGrid.Link',
           withRequest: {
-            method: service.postMyGridConnectDeviceRequest(requestBody).method,
-            path: service.postMyGridConnectDeviceRequest(requestBody).url,
+            method: service.clearFFRequest(requestBody).method,
+            path: service.clearFFRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -64,9 +64,9 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for trigger connect device with ids in request - myGrid.Link', done => {
-      service.postMyGridConnectDevice(requestBody).subscribe(
-        (res: ResponseConnectDisconnectData) => {
+    it('should make request for clear FF with no filter in request - myGrid.Link', done => {
+      service.clearFF(requestBody).subscribe(
+        (res: ResponseClearFF) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);
           done();

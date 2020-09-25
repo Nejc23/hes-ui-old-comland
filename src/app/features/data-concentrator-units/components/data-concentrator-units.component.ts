@@ -208,7 +208,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // checking if at least one row on the grid is selected
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
         return true;
       }
@@ -569,12 +569,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       }
     };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.gridApi.getSelectedRows();
+      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
       selectedRows.forEach(element => {
         object.id.push(element.id);
       });
       object.filter = null;
-      selectedText = selectedRows ? selectedRows.length : 0;
+      selectedText = selectedRows ? selectedRows.length.toString() : '0';
     } else {
       object.filter = this.requestModel.filterModel;
       object.id = null;
@@ -617,6 +617,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       return this.totalCount.toString();
     } else {
       return `${this.totalCount - excludedRowsLength} ${this.i18n('of')} ${this.totalCount}`;
+    }
+  }
+
+  getSelectedCount(): number {
+    if (this.checkSelectedAll()) {
+      const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
+      return this.totalCount - excludedRowsLength;
+    } else {
+      return this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows().length;
     }
   }
 
