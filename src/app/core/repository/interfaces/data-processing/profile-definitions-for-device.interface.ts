@@ -21,7 +21,7 @@ export interface EventProfileDefinition {
 export interface EventRegisterDefinition {
   registerId: string;
   registerStatus: string;
-  eventRegisterValues: EventRegisterValue[];
+  eventRegisterValues: RegisterValue[];
 }
 
 export interface ProfileDefinition {
@@ -37,16 +37,11 @@ export interface EventProfileDefinition {
 export interface RegisterDefinition {
   registerId: string;
   registerStatus: string;
-  registerValues: EventRegisterValue[];
+  registerValues: RegisterValue[];
 }
 
-export interface EventRegisterValue {
-  value: number;
-  timestamp: string;
-}
-
-export interface EventRegisterValue {
+export interface RegisterValue {
   value: number;
   status?: number;
-  timestamp: string;
+  timestamp: Date;
 }

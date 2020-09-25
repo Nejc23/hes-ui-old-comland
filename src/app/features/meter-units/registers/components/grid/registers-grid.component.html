@@ -1,0 +1,18 @@
+<ag-grid-angular
+    class="ag-theme-epoint"
+    style="width: 100%; height: calc(100% - 25px);"
+    #agGrid
+    [columnDefs]="columnDefs"
+    [rowData]="rowData"
+    (gridReady)="onGridReady($event)"
+    (firstDataRendered)="onFirstDataRendered($event)"
+    suppressRowClickSelection="true"
+    [modules]="modules"
+    [pagination]="agGridSettings.pagination"
+    [paginationPageSize]="agGridSettings.paginationPageSize"
+    [domLayout]="agGridSettings.domLayout"
+    suppressSizeToFit=agGridSettings.suppressSizeToFit
+    [localeText]="localeText"
+    [suppressMovableColumns]="true"
+>
+</ag-grid-angular>

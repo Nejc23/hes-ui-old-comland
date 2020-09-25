@@ -1,0 +1,27 @@
+<kendo-chart>
+  <kendo-chart-title></kendo-chart-title>
+  <kendo-chart-category-axis baseUnit="years">
+      <kendo-chart-category-axis-item maxDivisions="20" [categories]="categories">
+        <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats">
+
+        </kendo-chart-category-axis-item-labels>
+        <kendo-chart-value-axis-item>
+          <kendo-chart-value-axis-item-labels>
+            </kendo-chart-value-axis-item-labels>
+        </kendo-chart-value-axis-item>
+      </kendo-chart-category-axis-item>
+  </kendo-chart-category-axis>
+  <kendo-chart-series>
+    <kendo-chart-series-item margin="0" [markers]="{size: 4, background:'#053876'}" [highlight]="{markers: { border: {color:'#053876', width:2}}}" padding="0" width="1" color="#053876" type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
+      <kendo-chart-series-item-tooltip background="#ffffff">
+        <ng-template let-dataItem="dataItem"  >
+          <div style="text-align:center;">
+            <div>{{ dataItem.timestamp | formatDateTime }}</div>
+            <div>{{ dataItem.value }}</div>
+            <div>{{ dataItem.status }}</div>
+          </div>
+        </ng-template>
+      </kendo-chart-series-item-tooltip>
+    </kendo-chart-series-item>
+  </kendo-chart-series>
+</kendo-chart>

@@ -1,6 +1,5 @@
 <div class="row">
-
-  <div class="col-2" *ngIf="!hideFilter">
+  <div class="col-2" *ngIf="!hideFilter" [formGroup]="form">
       <div class="form-group">
         <div class="form-row">
           <div class="col">
@@ -11,8 +10,7 @@
         </div>
 
         <app-input-radio class="remove-padding-left" i18n-label label="Frequency" [form]="form" [property]="rangeProperty"
-          name="range" [options]="rangeOptions" (change)="changeRangeOptionId()" formControlName="range"
-          (refresh)="changeRangeOptionId()">
+          name="range" [options]="rangeOptions" (change)="changeRangeOptionId()" (refresh)="changeRangeOptionId()">
         </app-input-radio>
 
         <app-datetime-picker [readonly]="!isRangeCustom" [form]="form" [property]="startTimeProperty" i18n-label label="Start time" >
@@ -27,11 +25,33 @@
       </div>
   </div>
   <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
-    <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
-      <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
-  </a>
+    <div *ngIf="!showNoData && rowData">
+      <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
+        <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
+      </a>
+      <div class="mt-1">
+        <h4>{{pageSubtitle}}</h4>
+      </div>
+      <div class="row mb-5" *ngIf="showLineChart">
+        <div class="col-12">
+          <app-registers-chart [filter]="registersFilter"></app-registers-chart>
+        </div>
+      </div>
+      <div class="row">
+        <div [ngClass]="{'col-12': !showStatistics, 'col-8': showStatistics }" *ngIf="showTable">
+          <app-registers-grid [rowData]="rowData"></app-registers-grid>
+        </div>
+        <div class="col-4" *ngIf="showStatistics && registerStatisticsData">
+          <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
+        </div>
+      </div>
+    </div>
+    <div class="text-center p-5" *ngIf="showNoData" in18n>
+      NO DATA FOUND
+    </div>
   </div>
 </div>
+
 <ng-template #hidwShowFilters><span i18n>Show/hide filters</span></ng-template>
 
 

@@ -57,17 +57,17 @@ describe('Pact consumer test', () => {
                   {
                     value: 21.0,
                     status: 0,
-                    timestamp: '2020-03-17T01:00:00+00:00'
+                    timestamp: new Date('2020-03-17T01:00:00+00:00')
                   },
                   {
                     value: 22.0,
                     status: 0,
-                    timestamp: '2020-03-17T02:00:00+00:00'
+                    timestamp: new Date('2020-03-17T02:00:00+00:00')
                   },
                   {
                     value: 23.0,
                     status: 0,
-                    timestamp: '2020-03-17T03:00:00+00:00'
+                    timestamp: new Date('2020-03-17T03:00:00+00:00')
                   }
                 ]
               },
@@ -78,12 +78,12 @@ describe('Pact consumer test', () => {
                   {
                     value: 21.0,
                     status: 0,
-                    timestamp: '2020-03-17T01:00:00+00:00'
+                    timestamp: new Date('2020-03-17T01:00:00+00:00')
                   },
                   {
                     value: 22.0,
                     status: 0,
-                    timestamp: '2020-03-17T02:00:00+00:00'
+                    timestamp: new Date('2020-03-17T02:00:00+00:00')
                   }
                 ]
               }
@@ -104,12 +104,12 @@ describe('Pact consumer test', () => {
                   {
                     value: 21.0,
                     status: 0,
-                    timestamp: '2020-03-17T01:00:00+00:00'
+                    timestamp: new Date('2020-03-17T01:00:00+00:00')
                   },
                   {
                     value: 22.0,
                     status: 0,
-                    timestamp: '2020-03-17T02:00:00+00:00'
+                    timestamp: new Date('2020-03-17T02:00:00+00:00')
                   }
                 ]
               }
