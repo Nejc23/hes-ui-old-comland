@@ -60,6 +60,31 @@ export interface OnDemandRequestData {
   ];
 }
 
+// Set Monitor list of names from register definition
+export interface RequestCommonRegisterGroup {
+  deviceIds: string[];
+  filter?: GridFilterParams;
+  search?: GridSearchParams[];
+  excludeIds?: string[];
+  type: string;
+}
+export interface ResponseCommonRegisterGroup {
+  registerGroupId: string;
+  name: string;
+  type: string;
+  registerDefinitions: RegisterDefinitions[];
+}
+export interface RegisterDefinitions {
+  registerDefinitionId: string;
+  name: string;
+  obisCode: string;
+  classId: number;
+  attributeId: number;
+  type: string;
+  dataType: string;
+  iecCode: string;
+}
+
 // Set Monitor bulk action
 export interface RequestSetMonitor {
   deviceIds: string[];
