@@ -17,7 +17,9 @@ import {
   RequestFilterParams,
   RequestSetBreakerMode,
   ResponseSetBreakerMode,
-  ResponseClearFF
+  ResponseClearFF,
+  RequestCommonRegisterGroup,
+  ResponseCommonRegisterGroup
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -35,7 +37,8 @@ import {
   getRegisters,
   onDemandSetLimiter,
   onDemandSetBreakerMode,
-  onDemandClearFF
+  onDemandClearFF,
+  getCommonRegisterGroups
 } from '../../consts/my-grid-link.const';
 import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
@@ -137,6 +140,15 @@ export class MyGridLinkService {
 
   activateDeviceUpgradeRequest(param: MeterUnitsActivateUpgradeRequest): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgradeActivate}`, param);
+  }
+
+  // get common register group
+  getCommonRegisterGroup(payload: RequestCommonRegisterGroup): Observable<ResponseCommonRegisterGroup[]> {
+    return this.repository.makeRequest(this.getCommonRegisterGroupRequest(payload));
+  }
+
+  getCommonRegisterGroupRequest(payload: RequestCommonRegisterGroup): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.templating}${getCommonRegisterGroups}`, payload);
   }
 
   // trigger set montor
