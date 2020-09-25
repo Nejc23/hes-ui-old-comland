@@ -9,7 +9,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
   templateUrl: 'registers-grid.component.html',
   selector: 'app-registers-grid'
 })
-export class RegistersGridComponent implements OnChanges, OnInit {
+export class RegistersGridComponent implements OnInit {
   @Input() rowData: any[] = [];
 
   public columnDefs = [];
@@ -44,13 +44,7 @@ export class RegistersGridComponent implements OnChanges, OnInit {
     };
   }
 
-  ngOnChanges() {
-    console.log('registersGridComponent - rowData', this.rowData);
-    console.log('registersGridComponent - gridApi', this.gridApi);
-  }
-
   onGridReady(params) {
-    console.log('grid ready');
     this.gridApi = params.api;
     this.gridApi.sizeColumnsToFit();
 

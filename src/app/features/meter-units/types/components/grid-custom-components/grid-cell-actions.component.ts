@@ -73,4 +73,8 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     }
     return '';
   }
+
+  showRegisters() {
+    this.params.context.componentParent.showRegisters(this.params.data.deviceId);
+  }
 }
