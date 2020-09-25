@@ -299,9 +299,9 @@ export class MeterUnitsTypeGridService {
       {
         field: 'id',
         pinned: 'right',
-        width: 90,
-        minWidth: 90,
-        maxWidth: 90,
+        width: 180,
+        minWidth: 180,
+        maxWidth: 180,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,

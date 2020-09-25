@@ -24,12 +24,14 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { RequestConnectDisconnectData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestFilterParams, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
 import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
+import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
+import { guid } from '@progress/kendo-angular-common';
 
 @Component({
   templateUrl: 'meter-unit-detail.component.html'
@@ -40,6 +42,8 @@ export class MeterUnitDetailComponent implements OnInit {
 
   private messageActionInProgress = this.i18n(`Action in progress!`);
   private messageServerError = this.i18n(`Server error!`);
+
+  private requestModel;
 
   public editMode = false;
   public data: MeterUnit;
@@ -61,7 +65,8 @@ export class MeterUnitDetailComponent implements OnInit {
     private autoTemplateService: AutoTemplatesService,
     private modalService: ModalService,
     private bulkService: MyGridLinkService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private plcActionsService: MeterUnitsPlcActionsService
   ) {
     breadcrumbService.setPageName('Meter Unit');
   }
@@ -69,7 +74,15 @@ export class MeterUnitDetailComponent implements OnInit {
   ngOnInit() {
     const meterUnitTypeId = 1;
 
-    this.deviceId = this.route.snapshot.paramMap.get('deviceId');
+    this.deviceId = this.route.params.subscribe(params => {
+      this.deviceId = params.deviceId;
+      this.requestModel = {
+        deviceIds: [this.deviceId],
+        filter: null,
+        search: null,
+        excludeIds: null
+      };
+    });
 
     this.muTypes$ = this.codelistService.meterUnitTypeCodelist();
 
@@ -166,33 +179,6 @@ export class MeterUnitDetailComponent implements OnInit {
     return formData;
   }
 
-  createForm(): FormGroup {
-    return this.formBuilder.group({
-      [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-      // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
-      [this.statusProperty]: [
-        this.data && this.data.statusId > 0 ? { id: this.data.statusId, value: this.data.statusValue } : null,
-        [Validators.required]
-      ],
-      [this.typeProperty]: [
-        this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
-        [Validators.required]
-      ],
-      [this.vendorProperty]: [this.data && this.data.vendorId > 0 ? { id: this.data.vendorId, value: this.data.vendorValue } : null],
-      [this.templateProperty]: [
-        this.data.templateId.length > 0 ? { id: this.data.templateId, value: this.getTemplateValue(this.data.templateId) } : null,
-        Validators.required
-      ],
-      [this.logicalDeviceNameProperty]: [this.data ? this.data.logicalDeviceName : null, Validators.required],
-      [this.id5Property]: [this.data ? this.data.id5 : null, Validators.required]
-    });
-  }
-
-  getTemplateValue(templateId: string) {
-    templateId = templateId.toLowerCase();
-    return this.muTemplates.find(t => t.id.toLowerCase() === templateId).value;
-  }
-
   get nameProperty() {
     return nameOf<MeterUnitDetailForm>(o => o.name);
   }
@@ -247,210 +233,104 @@ export class MeterUnitDetailComponent implements OnInit {
     return ActionEnumerator.MUReadJobs;
   }
 
-  onScheduleReadJobs() {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.deviceFiltersAndSearch = {
-      id: [this.deviceId]
-    };
-    modalRef.result.then().catch(() => {});
+  createForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
+      // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
+      [this.statusProperty]: [
+        this.data && this.data.statusId > 0 ? { id: this.data.statusId, value: this.data.statusValue } : null,
+        [Validators.required]
+      ],
+      [this.typeProperty]: [
+        this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
+        [Validators.required]
+      ],
+      [this.vendorProperty]: [this.data && this.data.vendorId > 0 ? { id: this.data.vendorId, value: this.data.vendorValue } : null],
+      [this.templateProperty]: [
+        this.data.templateId.length > 0 ? { id: this.data.templateId, value: this.getTemplateValue(this.data.templateId) } : null,
+        Validators.required
+      ],
+      [this.logicalDeviceNameProperty]: [this.data ? this.data.logicalDeviceName : null, Validators.required],
+      [this.id5Property]: [this.data ? this.data.id5 : null, Validators.required]
+    });
   }
 
-  onBreakerStatus() {
-    this.bulkOperation(MeterUnitsTypeEnum.breakerStatus);
+  getTemplateValue(templateId: string) {
+    templateId = templateId.toLowerCase();
+    return this.muTemplates.find(t => t.id.toLowerCase() === templateId).value;
   }
 
-  onActivateUpgrade() {
-    this.bulkOperation(MeterUnitsTypeEnum.activateUpgrade);
+  // --> Operations action click
+  onBreakerStatus(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.breakerStatus, params, 1);
   }
 
-  onConnect() {
-    this.bulkOperation(MeterUnitsTypeEnum.connect);
+  onActivateUpgrade(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.activateUpgrade, params, 1);
   }
 
-  onDisconnect() {
-    this.bulkOperation(MeterUnitsTypeEnum.disconnect);
+  onConnect(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.connect, params, 1);
   }
 
-  onTou() {
-    const params = this.getBulkRequestParam();
-
-    const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  onDisconnect(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.disconnect, params, 1);
   }
 
-  // upgrade button click
-  onUpgrade() {
-    const params = this.getBulkRequestParam();
-
-    const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  onClearFF(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearFF, params, 1);
   }
 
-  onSetMonitor() {
-    const modalRef = this.modalService.open(PlcMeterMonitorComponent);
-
-    const params = this.getBulkRequestParam();
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  // delete button click
+  // TODO missing BE api !!
+  onDelete(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.delete, params, 1);
   }
 
-  onSetLimiter() {
-    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
-
-    const params = this.getBulkRequestParam();
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+  // popup
+  onScheduleReadJobs(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onScheduleReadJobs(params);
   }
 
-  bulkOperation(operation: MeterUnitsTypeEnum) {
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.i18n('Confirm');
-    let response: Observable<any> = new Observable();
-
-    const params: RequestConnectDisconnectData = {
-      deviceIds: [this.deviceId],
-      filter: null,
-      search: null,
-      excludeIds: null
-    };
-
-    let operationName = '';
-    let selectedText = ``;
-    switch (operation) {
-      case MeterUnitsTypeEnum.breakerStatus:
-        response = this.bulkService.getDisconnectorState(params);
-        operationName = this.i18n('Get breaker status');
-        selectedText = `${this.i18n('for')} ${this.data.name}`;
-        break;
-      case MeterUnitsTypeEnum.connect:
-        response = this.bulkService.postMyGridConnectDevice(params);
-        operationName = this.i18n('Connect');
-        break;
-      case MeterUnitsTypeEnum.disconnect:
-        response = this.bulkService.postMyGridDisconnectDevice(params);
-        operationName = this.i18n('Disconnect');
-        break;
-      case MeterUnitsTypeEnum.touConfig:
-        const paramsConf: RequestTOUData = {
-          deviceIds: params.deviceIds,
-          filter: params.filter,
-          search: params.search,
-          excludeIds: params.excludeIds,
-          timeOfUseId: '1'
-        }; // TODO: timeOfUseId read form store?
-
-        response = this.bulkService.postMyGridTOUDevice(paramsConf);
-        operationName = this.i18n('Configure TOU');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
-        break;
-      case MeterUnitsTypeEnum.activateUpgrade:
-        response = this.bulkService.activateDeviceUpgrade(params);
-        operationName = this.i18n('Activate FW upgrade');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
-    }
-    component.btnConfirmText = operationName;
-    component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`${operationName} ${selectedText} selected meter unit(s)?`);
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
-        response.subscribe(
-          value => {
-            // this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-            // if (operation === MeterUnitsTypeEnum.breakerStatus) {
-            //   this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
-            // }
-          },
-          e => {
-            this.toast.errorToast(this.messageServerError);
-          }
-        );
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-    /* } else {
-      this.service.getMyGridIdentityToken().subscribe(
-        value => {
-          this.authService.setAuthTokenMyGridLink(value);
-          this.bulkOperation(operation);
-        },
-        e => {
-          this.toast.errorToast(this.messageServerError);
-        }
-      );
-    }*/
+  // popup
+  onTou(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onTou(params);
   }
 
-  getBulkRequestParam(): RequestConnectDisconnectData {
+  // popup
+  onUpgrade(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onUpgrade(params);
+  }
+
+  // popup
+  onSetMonitor(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onSetMonitor(params);
+  }
+
+  // popup
+  onSetLimiter(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onSetLimiter(params);
+  }
+
+  // popup
+  onBreakerMode(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onBreakerMode(params);
+  }
+  // <-- end Operations action click (bulk or selected row)
+
+  getBulkRequestParam(): RequestFilterParams {
     return {
       deviceIds: [this.deviceId],
       filter: null,
