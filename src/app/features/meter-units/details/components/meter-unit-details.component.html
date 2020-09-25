@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-4 ng-star-inserted">
-    <div class="form-group" *ngIf="!editMode">
+    <div class="form-group" *ngIf="!editMode && data">
       <button class="btn btn-primary" (click)="editMeterUnit()">
         <i class="far fa-edit"></i><span i18n>Edit</span>
       </button>
@@ -63,7 +63,7 @@
       <button class="btn btn-primary" (click)="saveMeterUnit()">Save</button>
     </div>
 
-    <div class="form-group" *ngIf="!editMode">
+    <div class="form-group" *ngIf="!editMode && data">
       <div class="form-row">
         <div class="col">
           <div><label i18n>Name</label></div>
@@ -72,14 +72,8 @@
       </div>
       <div class="form-row">
         <div class="col">
-          <div><label i18n>ID</label></div>
-          <div><span>{{form.get(id5Property).value}}</span></div>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
           <div><label i18n>Systitle</label></div>
-          <div><span>{{form.get(logicalDeviceNameProperty).value}}</span></div>
+          <div><span>{{form.get(systitleProperty).value}}</span></div>
         </div>
       </div>
       <div class="form-row">
@@ -117,33 +111,27 @@
       </div>
       <div class="form-row">
         <div class="col">
-            <app-input-text [form]="form" [property]="id5Property" i18n-label label="ID">
+            <app-input-text [form]="form" [property]="systitleProperty" i18n-label label="ID">
             </app-input-text>
         </div>
       </div>
       <div class="form-row">
         <div class="col">
-            <app-input-text [form]="form" [property]="logicalDeviceNameProperty" i18n-label label="Systitle">
-            </app-input-text>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="muStatuses$ | async"
+          <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="muStatuses"
             [disabled]="false">
           </app-select-input>
         </div>
       </div>
       <div class="form-row">
         <div class="col">
-          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="muTypes$ | async"
+          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="muTypes"
             [disabled]="false">
           </app-select-input>
         </div>
       </div>
       <div class="form-row">
         <div class="col">
-          <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="vendorProperty" [selectOptions]="muVendors$ | async"
+          <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="vendorProperty" [selectOptions]="muVendors"
             [disabled]="false">
           </app-select-input>
         </div>

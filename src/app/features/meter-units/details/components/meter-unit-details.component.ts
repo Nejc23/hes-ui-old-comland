@@ -1,10 +1,10 @@
 import { map } from 'rxjs/operators';
-import { meterUnitVendors } from './../../../../core/repository/consts/meter-units.const';
+import { meterUnitVendors } from '../../../../core/repository/consts/meter-units.const';
 import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { Observable, of } from 'rxjs';
-import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { MeterUnitDetailForm } from './../interfaces/meter-unit-form.interface';
+import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
+import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,7 +12,6 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ActivatedRoute } from '@angular/router';
-import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
@@ -32,11 +31,12 @@ import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-moni
 import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
 import { guid } from '@progress/kendo-angular-common';
+import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 
 @Component({
-  templateUrl: 'meter-unit-detail.component.html'
+  templateUrl: 'meter-unit-details.component.html'
 })
-export class MeterUnitDetailComponent implements OnInit {
+export class MeterUnitDetailsComponent implements OnInit {
   private deviceId;
   private saveError;
 
@@ -46,11 +46,11 @@ export class MeterUnitDetailComponent implements OnInit {
   private requestModel;
 
   public editMode = false;
-  public data: MeterUnit;
+  public data: MeterUnitDetails;
   public form: FormGroup;
-  public muStatuses$: Observable<Codelist<number>[]>;
-  public muTypes$: Observable<Codelist<number>[]>;
-  public muVendors$: Observable<Codelist<number>[]>;
+  public muStatuses: Codelist<number>[];
+  public muTypes: Codelist<number>[];
+  public muVendors: Codelist<number>[];
 
   public muTemplates: Codelist<string>[];
 
@@ -72,9 +72,7 @@ export class MeterUnitDetailComponent implements OnInit {
   }
 
   ngOnInit() {
-    const meterUnitTypeId = 1;
-
-    this.deviceId = this.route.params.subscribe(params => {
+    this.route.params.subscribe(params => {
       this.deviceId = params.deviceId;
       this.requestModel = {
         deviceIds: [this.deviceId],
@@ -84,7 +82,9 @@ export class MeterUnitDetailComponent implements OnInit {
       };
     });
 
-    this.muTypes$ = this.codelistService.meterUnitTypeCodelist();
+    this.codelistService.meterUnitTypeCodelist().subscribe(params => {
+      this.muTypes = params;
+    });
 
     this.autoTemplateService.getTemplates().subscribe(templates => {
       this.muTemplates = templates.map(t => ({ id: t.templateId, value: t.name }));
@@ -95,8 +95,13 @@ export class MeterUnitDetailComponent implements OnInit {
   }
 
   setVendorsAndStatuses(typeId) {
-    this.muStatuses$ = this.codelistService.meterUnitStatusCodelist(typeId); // PLC
-    this.muVendors$ = this.codelistService.meterUnitVendorCodelist(typeId);
+    this.codelistService.meterUnitStatusCodelist(typeId).subscribe(params => {
+      this.muStatuses = params;
+    }); // PLC
+
+    this.codelistService.meterUnitVendorCodelist(typeId).subscribe(params => {
+      this.muVendors = params;
+    });
   }
 
   // form - rights
@@ -143,13 +148,11 @@ export class MeterUnitDetailComponent implements OnInit {
       return;
     }
 
-    this.meterUnitsService.getMeterUnit(this.deviceId).subscribe((response: MeterUnit) => {
+    this.meterUnitsService.getMeterUnit(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
-      console.log('getData()', this.data);
-
       this.form = this.createForm();
 
-      this.setVendorsAndStatuses(this.data.typeId);
+      this.setVendorsAndStatuses(this.data.type);
     });
   }
 
@@ -164,47 +167,42 @@ export class MeterUnitDetailComponent implements OnInit {
   //   // this.form.get(this.statusProperty).setValue(null);
   // }
 
-  fillData(): MeterUnitDetailForm {
-    const formData: MeterUnitDetailForm = {
+  fillData(): MeterUnitDetailsForm {
+    const formData: MeterUnitDetailsForm = {
       deviceId: this.deviceId,
       name: this.form.get(this.nameProperty).value,
       type: this.form.get(this.typeProperty).value,
       vendor: this.form.get(this.vendorProperty).value,
       status: this.form.get(this.statusProperty).value,
       template: this.form.get(this.templateProperty).value,
-      logicalDeviceName: this.form.get(this.logicalDeviceNameProperty).value,
-      id5: this.form.get(this.id5Property).value
+      systitle: this.form.get(this.systitleProperty).value
     };
 
     return formData;
   }
 
   get nameProperty() {
-    return nameOf<MeterUnitDetailForm>(o => o.name);
+    return nameOf<MeterUnitDetailsForm>(o => o.name);
   }
 
   get typeProperty() {
-    return nameOf<MeterUnitDetailForm>(o => o.type);
+    return nameOf<MeterUnitDetailsForm>(o => o.type);
   }
 
   get vendorProperty() {
-    return nameOf<MeterUnitDetailForm>(o => o.vendor);
+    return nameOf<MeterUnitDetailsForm>(o => o.vendor);
   }
 
   get statusProperty() {
-    return nameOf<MeterUnitDetailForm>(o => o.status);
+    return nameOf<MeterUnitDetailsForm>(o => o.status);
   }
 
   get templateProperty() {
-    return nameOf<MeterUnitDetailForm>(o => o.template);
+    return nameOf<MeterUnitDetailsForm>(o => o.template);
   }
 
-  get logicalDeviceNameProperty() {
-    return nameOf<MeterUnitDetailForm>(o => o.logicalDeviceName);
-  }
-
-  get id5Property() {
-    return nameOf<MeterUnitDetailForm>(o => o.id5);
+  get systitleProperty() {
+    return nameOf<MeterUnitDetailsForm>(o => o.systitle);
   }
 
   // actions - rights
@@ -234,24 +232,19 @@ export class MeterUnitDetailComponent implements OnInit {
   }
 
   createForm(): FormGroup {
+    const selectedStatus = this.muStatuses.find(s => s.value === this.data.state);
+    const selectedType = this.muTypes.find(s => s.id === this.data.type);
+    const selectedTemplate = this.muTemplates.find(s => s.value === this.data.templateName);
+    const selectedVendor = this.muVendors.find(v => v.value === this.data.manufacturer);
+
     return this.formBuilder.group({
       [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
       // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
-      [this.statusProperty]: [
-        this.data && this.data.statusId > 0 ? { id: this.data.statusId, value: this.data.statusValue } : null,
-        [Validators.required]
-      ],
-      [this.typeProperty]: [
-        this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
-        [Validators.required]
-      ],
-      [this.vendorProperty]: [this.data && this.data.vendorId > 0 ? { id: this.data.vendorId, value: this.data.vendorValue } : null],
-      [this.templateProperty]: [
-        this.data.templateId.length > 0 ? { id: this.data.templateId, value: this.getTemplateValue(this.data.templateId) } : null,
-        Validators.required
-      ],
-      [this.logicalDeviceNameProperty]: [this.data ? this.data.logicalDeviceName : null, Validators.required],
-      [this.id5Property]: [this.data ? this.data.id5 : null, Validators.required]
+      [this.statusProperty]: [selectedStatus, [Validators.required]],
+      [this.typeProperty]: [selectedType, [Validators.required]],
+      [this.vendorProperty]: [selectedVendor],
+      [this.templateProperty]: [selectedTemplate, Validators.required],
+      [this.systitleProperty]: [this.data ? this.data.systitle : null, Validators.required]
     });
   }
 
@@ -329,13 +322,4 @@ export class MeterUnitDetailComponent implements OnInit {
     this.plcActionsService.onBreakerMode(params);
   }
   // <-- end Operations action click (bulk or selected row)
-
-  getBulkRequestParam(): RequestFilterParams {
-    return {
-      deviceIds: [this.deviceId],
-      filter: null,
-      search: null,
-      excludeIds: null
-    };
-  }
 }

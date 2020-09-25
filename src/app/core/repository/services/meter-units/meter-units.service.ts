@@ -13,7 +13,8 @@ import {
   meterUnitsBreakerState,
   touConfigImport,
   meterUnitsForJob,
-  removeMeterUnitsFromJob
+  removeMeterUnitsFromJob,
+  device
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
@@ -21,6 +22,7 @@ import * as _ from 'lodash';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
 import { MeterUnit } from '../../interfaces/meter-units/meter-unit.interface';
+import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,12 +39,12 @@ export class MeterUnitsService {
     return new HttpRequest('POST', meterUnits, param);
   }
 
-  getMeterUnit(id: string): Observable<MeterUnit> {
+  getMeterUnit(id: string): Observable<MeterUnitDetails> {
     return this.repository.makeRequest(this.getMeterUnitRequest(id));
   }
 
   getMeterUnitRequest(id: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${meterUnits}/${id}`);
+    return new HttpRequest('GET', `${device}/${id}`);
   }
 
   updateReaderState(param: OnDemandRequestData[]): Observable<MeterUnitsList> {
