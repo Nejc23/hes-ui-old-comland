@@ -163,8 +163,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       status: this.form.get(this.statusProperty).value,
       mac: this.form.get(this.macProperty).value,
       address: this.form.get(this.addressProperty).value,
-      latitude: 0, //this.form.get(this.latitudeProperty).value,
-      longitude: 0 // this.form.get(this.longitudeProperty).value,
+      latitude: null, // this.form.get(this.latitudeProperty).value,
+      longitude: null // this.form.get(this.longitudeProperty).value,
     };
 
     if (this.credentialsVisible) {

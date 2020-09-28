@@ -3,7 +3,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
 import { MeterUnitsTypeStaticTextService } from '../services/meter-units-type-static-text.service';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
@@ -121,6 +121,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private gridColumnShowHideService: GridColumnShowHideService,
     private breadcrumbService: BreadcrumbService,
+    private router: Router,
     private plcActionsService: MeterUnitsPlcActionsService
   ) {
     this.setTitle(-1);
@@ -861,5 +862,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
     };
+  }
+
+  showItem(deviceId: string) {
+    this.router.navigate(['/meterUnits/details', deviceId]);
   }
 }

@@ -1,3 +1,4 @@
+import { GridCellDetailLinkComponent } from '../components/grid-custom-components/grid-cell-detail-link.component';
 import { Injectable, Input, setTestabilityGetter } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -5,7 +6,6 @@ import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
 import { GridCellReadStatusComponent } from '../components/grid-custom-components/grid-cell-read-status.component';
-import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
@@ -110,7 +110,7 @@ export class MeterUnitsTypeGridService {
         pinned: true,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellNameComponent',
+        cellRenderer: 'gridCellDetailLinkComponent',
         headerTooltip: this.i18n('Name')
       },
       {
@@ -214,8 +214,9 @@ export class MeterUnitsTypeGridService {
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID5')
+        cellRenderer: 'gridCellDetailLinkComponent',
+        headerTooltip: this.i18n('ID5'),
+        hide: false
       },
       {
         field: 'id6',
@@ -320,7 +321,6 @@ export class MeterUnitsTypeGridService {
     return {
       gridCellStatusComponent: GridCellStatusComponent,
       gridCellReadStatusComponent: GridCellReadStatusComponent,
-      gridCellNameComponent: GridCellNameComponent,
       gridCellMeterIdComponent: GridCellMeterIdComponent,
       gridCellTagsComponent: GridCellTagsComponent,
       gridCellVendorComponent: GridCellVendorComponent,
@@ -332,7 +332,8 @@ export class MeterUnitsTypeGridService {
       gridCellBreakerStateComponent: GridCellBreakerStateComponent,
       gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
       gridCellIconComponent: GridCellIconComponent,
-      gridCellJobStatusComponent: GridCellJobStatusComponent
+      gridCellJobStatusComponent: GridCellJobStatusComponent,
+      gridCellDetailLinkComponent: GridCellDetailLinkComponent
     };
   }
 

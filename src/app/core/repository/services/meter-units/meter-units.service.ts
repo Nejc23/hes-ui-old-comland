@@ -1,3 +1,4 @@
+import { MeterUnitDetailsForm } from './../../../../features/meter-units/details/interfaces/meter-unit-form.interface';
 import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -13,13 +14,18 @@ import {
   meterUnitsBreakerState,
   touConfigImport,
   meterUnitsForJob,
-  removeMeterUnitsFromJob
+  removeMeterUnitsFromJob,
+  device,
+  updateMeterUnit
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import * as _ from 'lodash';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
+import { MeterUnit } from '../../interfaces/meter-units/meter-unit.interface';
+import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
+import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +40,14 @@ export class MeterUnitsService {
 
   getGridMeterUnitsRequest(param: GridRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', meterUnits, param);
+  }
+
+  getMeterUnit(id: string): Observable<MeterUnitDetails> {
+    return this.repository.makeRequest(this.getMeterUnitRequest(id));
+  }
+
+  getMeterUnitRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${device}/${id}`);
   }
 
   updateReaderState(param: OnDemandRequestData[]): Observable<MeterUnitsList> {
@@ -100,5 +114,24 @@ export class MeterUnitsService {
 
   removeMeterUnitsFromJobRequest(payload: RequestMeterUnitsForJob): HttpRequest<any> {
     return new HttpRequest('POST', removeMeterUnitsFromJob, payload as any);
+  }
+
+  updateMuFromForm(payload: MeterUnitDetailsForm): Observable<any> {
+    const muRequest: MuUpdateRequest = {
+      deviceId: payload.deviceId,
+      name: payload.name,
+      address: payload.address,
+      serialNumber: payload.id
+    };
+
+    return this.updateMu(payload.deviceId, muRequest);
+  }
+
+  updateMu(id: string, payload: MuUpdateRequest): Observable<any> {
+    return this.repository.makeRequest(this.updateMuRequest(id, payload));
+  }
+
+  updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
+    return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
   }
 }
