@@ -15,6 +15,7 @@ export const onDemandData = '/data';
 export const importTemplates = '/import-templates';
 export const triggerDeviceUpgrade = '/trigger-device-upgrade';
 export const activateTriggerDeviceUpgrade = `${triggerDeviceUpgrade}/activate`;
+export const getCommonRegisterGroups = `/get-common-register-groups`;
 export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';
 export const onDemandSetLimiter = '/on-demand/trigger-set-limiter';
 export const onDemandSetBreakerMode = '/on-demand/trigger-set-breaker-mode';

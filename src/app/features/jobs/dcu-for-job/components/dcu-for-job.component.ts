@@ -677,7 +677,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     if (jobDescription === undefined || jobDescription.trim().length === 0) {
       jobDescription = this.staticTextService.notAvailableTekst;
     } else {
-      jobDescription = this.staticTextService.headerTitleDcu + jobDescription;
+      jobDescription = this.staticTextService.headerTitleDcu + ' ' + jobDescription;
     }
 
     this.breadcrumbService.setPageName(jobDescription);

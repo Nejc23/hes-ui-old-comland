@@ -24,6 +24,10 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     return true;
   }
 
+  showItem() {
+    this.params.context.componentParent.showItem(this.params.data.deviceId);
+  }
+
   onScheduleReadJobs() {
     this.params.context.componentParent.onScheduleReadJobs(this.params.data.deviceId);
   }

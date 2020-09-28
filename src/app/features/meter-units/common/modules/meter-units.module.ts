@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { RegistersGridComponent } from './../../registers/components/grid/registers-grid.component';
 import { ChartsModule } from '@progress/kendo-angular-charts';
 import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
+import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
@@ -16,7 +17,6 @@ import { GridSelectionHeaderComponent } from '../../types/components/grid-custom
 import { GridCellIdNumberComponent } from '../../types/components/grid-custom-components/grid-cell-id-number.component';
 import { GridCellStatusComponent } from '../../types/components/grid-custom-components/grid-cell-status.component';
 import { GridCellReadStatusComponent } from '../../types/components/grid-custom-components/grid-cell-read-status.component';
-import { GridCellNameComponent } from '../../types/components/grid-custom-components/grid-cell-name.component';
 import { GridCellTagsComponent } from '../../types/components/grid-custom-components/grid-cell-tags.component';
 import { GridCellVendorComponent } from '../../types/components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellParentComponent } from '../../types/components/grid-custom-components/grid-cell-parent.component';
@@ -33,6 +33,7 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
 import { RegistersChartComponent } from '../../registers/components/chart/registers-chart.component';
 import { ClientSideRowModelModule } from '@ag-grid-enterprise/all-modules';
 import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
+import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
 
 @NgModule({
   entryComponents: [],
@@ -44,7 +45,6 @@ import { RegistersStatisticsComponent } from '../../registers/components/statist
     GridSelectionHeaderComponent,
     GridCellStatusComponent,
     GridCellReadStatusComponent,
-    GridCellNameComponent,
     GridCellMeterIdComponent,
     GridCellTagsComponent,
     GridCellParentComponent,
@@ -63,17 +63,19 @@ import { RegistersStatisticsComponent } from '../../registers/components/statist
     RegistersChartComponent,
     RegistersGridComponent,
     RegistersStatisticsComponent,
-    GridCellDateComponent
+    GridCellDateComponent,
+    GridCellDetailLinkComponent,
+    MeterUnitDetailsComponent
   ],
   imports: [
     SharedModule,
     MeterUnitsRoutingModule,
     BreadcrumbsModule,
+    ChartsModule,
     AgGridModule.withComponents([
       GridSelectionHeaderComponent,
       GridCellStatusComponent,
       GridCellReadStatusComponent,
-      GridCellNameComponent,
       GridCellMeterIdComponent,
       GridCellTagsComponent,
       GridCellParentComponent,
@@ -89,9 +91,9 @@ import { RegistersStatisticsComponent } from '../../registers/components/statist
       GridCellActionsComponent,
       ClientSideRowModelModule,
       PipesModule,
-      GridCellDateComponent
-    ]),
-    ChartsModule
+      GridCellDateComponent,
+      GridCellDetailLinkComponent
+    ])
   ]
 })
 export class MeterUnitsModule {}

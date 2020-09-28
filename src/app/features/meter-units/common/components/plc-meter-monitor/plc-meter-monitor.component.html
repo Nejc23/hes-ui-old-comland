@@ -4,38 +4,15 @@
 
   <div modal-body>
     <ng-container>      
-      <form class="form-horizontal" [formGroup]="form">
-        <div class="form-row">
-          <div class="col-12"><h4><span i18n>Phase 1</span></h4></div>
-          <div class="col-6">            
-            <app-input-text [form]="form" [property]="phase1NameProperty" label="Name" i18n-label></app-input-text>       
-          </div>
+      <form class="form-horizontal" *ngIf="form" [formGroup]="form">
+        <div class="form-row" *ngFor="let form_elem of formTemplate">
+          <div class="col-12"><h4><span>{{form_elem.name}}</span></h4></div>
           <div class="col-6">        
-            <app-input-numeric [label]="'Threshold'" [form]="form" [property]="phase1TresholdProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>            
+            <app-input-numeric [label]="'Threshold'" [form]="form" [property]="form_elem.name" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" (valueChange)="onChangeField()" i18n-label labelRight=""></app-input-numeric>            
           </div>
-        </div>            
-        <div class="form-row">
-          <div class="col-12"><h4><span i18n>Phase 2</span></h4></div>
-          <div class="col-6">
-            <app-input-text [form]="form" [property]="phase2NameProperty" label="Name" i18n-label></app-input-text>       
-          </div>
-          <div class="col-6">            
-            <app-input-numeric [label]="'Threshold'" [form]="form" [property]="phase2TresholdProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
-          </div>
-        </div>            
-        <div class="form-row">
-          <div class="col-12"><h4><span i18n>Phase 3</span></h4></div>
-          <div class="col-6">
-            <app-input-text [form]="form" [property]="phase3NameProperty" label="Name" i18n-label></app-input-text>       
-          </div>
-          <div class="col-6">            
-            <app-input-numeric [label]="'Threshold'" [form]="form" [property]="phase3TresholdProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
-          </div>
-        </div>      
-        <div class="text-danger" *ngIf="form.errors && form.errors['atLeastOneRequired'] == true"><small><span i18n>At least one phase with name and treshold should be filled</span></small></div>
+        </div>
+        <div class="text-danger" *ngIf="showError"><small><span i18n>At least one treshold should be filled!</span></small></div>
       </form>
     </ng-container>
   </div>

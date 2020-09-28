@@ -1,5 +1,6 @@
 import { AutoTemplateRegister } from './../../app/core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
+import { MeterUnitInterceptor } from './meter-units/meter-unit.interceptor';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -29,6 +30,7 @@ import { MeterUnitsActivateUpgradeInterceptor } from './meter-units/meter-units-
 import { MeterUnitsForJobInterceptor } from './meter-units/meter-units-for-job.interceptor';
 import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-templates/auto-templates-reading-jobs-list.interceptor';
 import { AutoTemplatesRegistersInterceptor } from './configuration/auto-templates/auto-templates-get-registers.interceptor';
+import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -226,6 +228,14 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsForJobInterceptor.canInterceptMeterUnitsForJob(request)) {
                 return MeterUnitsForJobInterceptor.interceptMeterUnitsForJobPost(request);
+              }
+
+              if (MeterUnitInterceptor.canInterceptGetMeterUnit(request)) {
+                return MeterUnitInterceptor.interceptGetMeterUnit(request);
+              }
+
+              if (MeterUnitsSetMonitorInterceptor.canInterceptMeterUnitGetCommonRegisterGroupsPost(request)) {
+                return MeterUnitsSetMonitorInterceptor.interceptMeterUnitGetCommonRegisterGroupsPost();
               }
 
               // auto-templates
