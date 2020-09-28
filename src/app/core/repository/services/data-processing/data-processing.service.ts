@@ -51,7 +51,10 @@ export class DataProcessingService {
           }
         })
       );
-    } else if (filter.register.categorization === 'INTSTANTANEOUS_VALUE') {
+    } else if (filter.register.categorization === 'INSTANTANEOUS_VALUE') {
+      request.registerIds = request.profiles[0].registerIds;
+      request.profiles = null;
+
       return this.getInstantaneousValues(request).pipe(
         map(response => {
           if (!response || response.length === 0 || !response[0].registerDefinitions || response[0].registerDefinitions.length === 0) {

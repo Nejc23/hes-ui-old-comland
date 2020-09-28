@@ -1,4 +1,4 @@
-import { getProfiles, getEvents } from './../../../../app/core/repository/consts/data-processing.const';
+import { getProfiles, getEvents, getInstantaneousValues } from './../../../../app/core/repository/consts/data-processing.const';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
@@ -630,7 +630,7 @@ export class DataProcessingInterceptor {
   }
 
   static canInterceptGetInstantaneousValues(request: HttpRequest<any>): boolean {
-    return new RegExp(getEvents).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(getInstantaneousValues).test(request.url) && request.method.endsWith('POST');
   }
 
   static interceptGetInstantaneousValues(request: HttpRequest<any>): Observable<HttpEvent<any>> {

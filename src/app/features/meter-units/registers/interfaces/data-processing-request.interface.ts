@@ -3,18 +3,6 @@ import { RegistersSelectList } from 'src/app/core/repository/interfaces/register
 import { RadioOption } from './../../../../shared/forms/interfaces/radio-option.interface';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { RegisterValue } from 'src/app/core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-export interface DataProcessingRequest {
-  deviceIds: string[];
-  startTime: string;
-  endTime: string;
-  profiles?: Profile[];
-  registerIds?: string[];
-}
-
-export interface Profile {
-  profileId: string;
-  registerIds: string[];
-}
 
 export interface RegistersFilter {
   deviceId: string;

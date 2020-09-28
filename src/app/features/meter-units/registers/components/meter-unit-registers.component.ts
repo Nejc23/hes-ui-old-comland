@@ -174,6 +174,10 @@ export class MeterUnitRegistersComponent implements OnInit {
     const rangeValue = this.rangeOptions[1].value;
     this.form = this.createForm(rangeValue);
     this.setRange(rangeValue);
+
+    this.muService.getMeterUnit(this.deviceId).subscribe(result => {
+      this.setTitle(result.name);
+    });
   }
 
   setTitle(title) {
@@ -220,8 +224,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     console.log('show data clicked');
     this.fillData();
 
-    const dcuFormData = this.fillData();
-
     this.registersFilter = {
       deviceId: this.deviceId,
       register: this.selectedRegister,
@@ -234,10 +236,11 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     // const request = this.dataProcessingService.getChartData(this.registersFilter);
 
+    this.showNoData = false;
+
     try {
       this.formUtils.saveForm(this.form, of({}), '').subscribe(
         success => {
-          console.log('success', success);
           this.dataProcessingService.getChartData(this.registersFilter).subscribe(values => {
             if (values) {
               this.showNoData = false;

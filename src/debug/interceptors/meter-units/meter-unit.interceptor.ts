@@ -4,7 +4,7 @@ import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
-import { meterUnits } from 'src/app/core/repository/consts/meter-units.const';
+import { device } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
 export class MeterUnitInterceptor {
@@ -35,7 +35,7 @@ export class MeterUnitInterceptor {
   }
 
   static canInterceptGetMeterUnit(request: HttpRequest<any>): boolean {
-    return new RegExp(meterUnits + `/`).test(request.url) && request.method.endsWith('GET');
+    return new RegExp(device + `/`).test(request.url) && request.method.endsWith('GET');
   }
 }
 

@@ -1,8 +1,9 @@
 export interface DataProcessingRequest {
   deviceIds: string[];
-  profiles: DataProcessingProfile[];
   startTime: string;
   endTime: string;
+  profiles?: DataProcessingProfile[];
+  registerIds?: string[];
 }
 
 export interface DataProcessingProfile {

@@ -16,7 +16,7 @@
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem"  >
           <div style="text-align:center;">
-            <div>{{ dataItem.timestamp | formatDateTime }}</div>
+            <div class="text-black-50 small">{{ dataItem.timestamp | formatDateTime }}</div>
             <div>{{ dataItem.value }}</div>
             <div>{{ dataItem.status }}</div>
           </div>
