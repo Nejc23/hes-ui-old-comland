@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit, OnDestroy } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
@@ -76,5 +76,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
         return this.i18n('Select operation');
     }
     return '';
+  }
+
+  showRegisters() {
+    this.params.context.componentParent.showRegisters(this.params.data.deviceId);
   }
 }

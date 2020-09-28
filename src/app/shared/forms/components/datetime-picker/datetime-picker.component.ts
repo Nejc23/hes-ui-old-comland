@@ -15,6 +15,7 @@ export class DateTimePickerComponent implements OnInit {
   @Input() label;
   @Input() min: Date;
   @Input() max: Date;
+  @Input() readonly = false;
 
   controlId: string;
 

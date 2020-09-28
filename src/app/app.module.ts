@@ -25,6 +25,8 @@ import '@progress/kendo-angular-intl/locales/cs/all';
 import '@progress/kendo-angular-intl/locales/de/all';
 import '@progress/kendo-angular-intl/locales/fr/all';
 import '@progress/kendo-angular-intl/locales/it/all';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import 'hammerjs';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -49,7 +51,7 @@ declare const require;
     I18n,
     Title
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule, ChartsModule],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

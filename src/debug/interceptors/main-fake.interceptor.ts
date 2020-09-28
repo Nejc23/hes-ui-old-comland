@@ -1,3 +1,5 @@
+import { AutoTemplateRegister } from './../../app/core/repository/interfaces/auto-templates/auto-template-register.interface';
+import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
 import { MeterUnitInterceptor } from './meter-units/meter-unit.interceptor';
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -27,6 +29,7 @@ import { AutoTemplatesRulesInterceptor } from './configuration/auto-templates/au
 import { MeterUnitsActivateUpgradeInterceptor } from './meter-units/meter-units-activate-upgrade.interceptor';
 import { MeterUnitsForJobInterceptor } from './meter-units/meter-units-for-job.interceptor';
 import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-templates/auto-templates-reading-jobs-list.interceptor';
+import { AutoTemplatesRegistersInterceptor } from './configuration/auto-templates/auto-templates-get-registers.interceptor';
 import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
 
 @Injectable()
@@ -266,6 +269,23 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (AutoTemplatesReadingJobsListInterceptor.canInterceptAutoTemplatesReadingJobsList(request)) {
                 return AutoTemplatesReadingJobsListInterceptor.interceptAutoTemplatesReadingJobsList(request);
+              }
+
+              if (AutoTemplatesRegistersInterceptor.canInterceptGetRegisters(request)) {
+                return AutoTemplatesRegistersInterceptor.interceptGetRegisters(request);
+              }
+
+              // data-processing
+              if (DataProcessingInterceptor.canInterceptGetProfiles(request)) {
+                return DataProcessingInterceptor.interceptGetProfiles(request);
+              }
+
+              if (DataProcessingInterceptor.canInterceptGetEvents(request)) {
+                return DataProcessingInterceptor.interceptGetEvents(request);
+              }
+
+              if (DataProcessingInterceptor.canInterceptGetInstantaneousValues(request)) {
+                return DataProcessingInterceptor.interceptGetInstantaneousValues(request);
               }
 
               // pass through any requests not handled above

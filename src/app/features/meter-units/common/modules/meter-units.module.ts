@@ -1,3 +1,9 @@
+import { GridCellDateComponent } from './../../registers/components/grid/grid-custom-components/grid-cell-date.component';
+import { PipesModule } from './../../../../shared/pipes/pipes.module';
+import { environment } from 'src/environments/environment';
+import { RegistersGridComponent } from './../../registers/components/grid/registers-grid.component';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -24,6 +30,9 @@ import { GridCellIconComponent } from '../../types/components/grid-custom-compon
 import { GridCellJobStatusComponent } from '../../types/components/grid-custom-components/grid-cell-job-status.component';
 import { MeterUnitFilterComponent } from '../../types/components/filter-form/meter-unit-filter.component';
 import { GridCellActionsComponent } from '../../types/components/grid-custom-components/grid-cell-actions.component';
+import { RegistersChartComponent } from '../../registers/components/chart/registers-chart.component';
+import { ClientSideRowModelModule } from '@ag-grid-enterprise/all-modules';
+import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
 import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
 
 @NgModule({
@@ -50,6 +59,11 @@ import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-
     GridCellJobStatusComponent,
     GridCellActionsComponent,
     MeterUnitFilterComponent,
+    MeterUnitRegistersComponent,
+    RegistersChartComponent,
+    RegistersGridComponent,
+    RegistersStatisticsComponent,
+    GridCellDateComponent,
     GridCellDetailLinkComponent,
     MeterUnitDetailsComponent
   ],
@@ -57,6 +71,7 @@ import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-
     SharedModule,
     MeterUnitsRoutingModule,
     BreadcrumbsModule,
+    ChartsModule,
     AgGridModule.withComponents([
       GridSelectionHeaderComponent,
       GridCellStatusComponent,
@@ -74,6 +89,9 @@ import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-
       GridCellIconComponent,
       GridCellJobStatusComponent,
       GridCellActionsComponent,
+      ClientSideRowModelModule,
+      PipesModule,
+      GridCellDateComponent,
       GridCellDetailLinkComponent
     ])
   ]

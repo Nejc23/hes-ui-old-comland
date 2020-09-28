@@ -1,3 +1,4 @@
+import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
@@ -27,6 +28,21 @@ const routes: Routes = [
               breadcrumb: null
             },
             component: MeterUnitsOverviewComponent
+          }
+        ]
+      },
+      {
+        path: 'registers/:deviceId',
+        data: {
+          breadcrumb: null
+        },
+        children: [
+          {
+            path: '',
+            data: {
+              breadcrumb: null
+            },
+            component: MeterUnitRegistersComponent
           }
         ]
       },

@@ -1,3 +1,4 @@
+import { AutoTemplateRegister } from './../../interfaces/auto-templates/auto-template-register.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,7 +9,8 @@ import {
   autoTemplateRules,
   autoTemplateRulesAdd,
   autoTemplateRulesUpdate,
-  autoTemplateRulesDelete
+  autoTemplateRulesDelete,
+  autoTemplateDevice
 } from '../../consts/auto-templates.const';
 import { AutoTemplateRuleList, AutoTemplateRule } from '../../interfaces/auto-templates/auto-template-rule.interface';
 import { Rule } from '../../interfaces/auto-templates/rule.interface';
@@ -66,5 +68,13 @@ export class AutoTemplatesService {
 
   deleteAutoTemplateRuleRequest(id: string): HttpRequest<any> {
     return new HttpRequest('DELETE', `${autoTemplateRulesDelete}/${id}`);
+  }
+
+  getRegisters(deviceId: string): Observable<AutoTemplateRegister[]> {
+    return this.repository.makeRequest(this.getRegistersRequest(deviceId));
+  }
+
+  getRegistersRequest(deviceId: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${autoTemplateDevice}/${deviceId}/registers`);
   }
 }
