@@ -15,7 +15,7 @@
   </div>
 
   <div class="filter-button" [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">    
-    <button @navItemsTrigger id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
+    <button id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
       <i class='far'
          [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
     </button>

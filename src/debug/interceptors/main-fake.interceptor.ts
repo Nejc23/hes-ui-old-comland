@@ -27,6 +27,7 @@ import { AutoTemplatesRulesInterceptor } from './configuration/auto-templates/au
 import { MeterUnitsActivateUpgradeInterceptor } from './meter-units/meter-units-activate-upgrade.interceptor';
 import { MeterUnitsForJobInterceptor } from './meter-units/meter-units-for-job.interceptor';
 import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-templates/auto-templates-reading-jobs-list.interceptor';
+import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -228,6 +229,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitInterceptor.canInterceptGetMeterUnit(request)) {
                 return MeterUnitInterceptor.interceptGetMeterUnit(request);
+              }
+
+              if (MeterUnitsSetMonitorInterceptor.canInterceptMeterUnitGetCommonRegisterGroupsPost(request)) {
+                return MeterUnitsSetMonitorInterceptor.interceptMeterUnitGetCommonRegisterGroupsPost();
               }
 
               // auto-templates

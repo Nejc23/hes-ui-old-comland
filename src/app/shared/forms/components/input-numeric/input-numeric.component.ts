@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
@@ -22,6 +22,8 @@ export class InputNumericComponent implements OnInit {
   @Input() max = 100;
   @Input() step = 1;
   @Input() allowShowError = true;
+
+  @Output() valueChange: EventEmitter<number> = new EventEmitter();
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -50,5 +52,9 @@ export class InputNumericComponent implements OnInit {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  public onChange(value: number) {
+    this.valueChange.emit(value);
   }
 }
