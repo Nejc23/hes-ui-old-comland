@@ -31,7 +31,6 @@ import { GridCellJobStatusComponent } from '../../types/components/grid-custom-c
 import { MeterUnitFilterComponent } from '../../types/components/filter-form/meter-unit-filter.component';
 import { GridCellActionsComponent } from '../../types/components/grid-custom-components/grid-cell-actions.component';
 import { RegistersChartComponent } from '../../registers/components/chart/registers-chart.component';
-import { ClientSideRowModelModule } from '@ag-grid-enterprise/all-modules';
 import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
 import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
 
@@ -89,7 +88,6 @@ import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-
       GridCellIconComponent,
       GridCellJobStatusComponent,
       GridCellActionsComponent,
-      ClientSideRowModelModule,
       PipesModule,
       GridCellDateComponent,
       GridCellDetailLinkComponent
