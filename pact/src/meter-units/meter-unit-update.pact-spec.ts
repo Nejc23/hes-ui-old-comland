@@ -26,8 +26,10 @@ describe('Pact consumer test', () => {
     service = getTestBed().get(MeterUnitsService);
   });
 
+  const deviceId = '32A7C6B2-DC94-498C-9437-2607E833D06E';
+
   const requestBody: MuUpdateRequest = {
-    deviceId: '32A7C6B2-DC94-498C-9437-2607E833D06E',
+    deviceId,
     name: 'Test MU Update 1',
     address: 'Address 1',
     serialNumber: 'SerialNo1',
@@ -43,8 +45,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_UPDATE_METE_UNIT',
           uponReceiving: 'a request for updating meter unit',
           withRequest: {
-            method: service.updateMuRequest(requestBody).method,
-            path: service.updateMuRequest(requestBody).url,
+            method: service.updateMuRequest(deviceId, requestBody).method,
+            path: service.updateMuRequest(deviceId, requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -67,7 +69,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for updating meter unit', done => {
-      service.updateMu(requestBody).subscribe(
+      service.updateMu(deviceId, requestBody).subscribe(
         res => {
           expect(res).toEqual(null);
           done();

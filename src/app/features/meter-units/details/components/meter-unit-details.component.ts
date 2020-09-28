@@ -123,15 +123,12 @@ export class MeterUnitDetailsComponent implements OnInit {
   saveMeterUnit() {
     const muFormData = this.fillData();
     const request = this.meterUnitsService.updateMuFromForm(muFormData);
-    const successMessage = this.i18n(`Data Concentration Unit was updated successfully`);
+    const successMessage = this.i18n(`Meter Unit was updated successfully`);
 
-    this.editMode = false;
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         result => {
-          if (result) {
-            this.editMode = false;
-          }
+          this.editMode = false;
         },
         errResult => {
           console.log('Error saving form: ', errResult);

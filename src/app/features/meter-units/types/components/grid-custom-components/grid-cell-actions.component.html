@@ -1,11 +1,11 @@
 <div class="d-flex row-actions justify-content-end" >
   <div class="btn-group-sm">
     <button
-        type="button" class="btn btn-primary m-0" ><i class="far fa-eye"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('detail')" (click)="showItem()"></i></button>
+        type="button" class="btn btn-primary m-0" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('detail')" (click)="showItem()">
+          <i class="far fa-eye" container="body" placement="bottom"></i></button>
     <button
-        type="button" class="btn btn-primary m-0" ><i class="far fa-chart-bar"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('chart')"></i></button>
+        type="button" class="btn btn-primary m-0" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('chart')"><i class="far fa-chart-bar"
+        container="body" placement="bottom"></i></button>
   </div>
   <div class="dropdown-ag-grid btn-group-sm">
     <button class="btn btn-primary btn-sm" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

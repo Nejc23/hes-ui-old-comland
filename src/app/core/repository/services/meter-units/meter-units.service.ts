@@ -124,14 +124,14 @@ export class MeterUnitsService {
       serialNumber: payload.id
     };
 
-    return this.updateMu(muRequest);
+    return this.updateMu(payload.deviceId, muRequest);
   }
 
-  updateMu(payload: MuUpdateRequest): Observable<any> {
-    return this.repository.makeRequest(this.updateMuRequest(payload));
+  updateMu(id: string, payload: MuUpdateRequest): Observable<any> {
+    return this.repository.makeRequest(this.updateMuRequest(id, payload));
   }
 
-  updateMuRequest(payload: MuUpdateRequest): HttpRequest<any> {
-    return new HttpRequest('PUT', `${updateMeterUnit}`, payload as any);
+  updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
+    return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
   }
 }
