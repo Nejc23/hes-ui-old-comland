@@ -1,3 +1,4 @@
+import { MeterUnitDetailsForm } from './../../../../features/meter-units/details/interfaces/meter-unit-form.interface';
 import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -14,7 +15,8 @@ import {
   touConfigImport,
   meterUnitsForJob,
   removeMeterUnitsFromJob,
-  device
+  device,
+  updateMeterUnit
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
@@ -23,6 +25,7 @@ import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-un
 import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
 import { MeterUnit } from '../../interfaces/meter-units/meter-unit.interface';
 import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
+import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -111,5 +114,24 @@ export class MeterUnitsService {
 
   removeMeterUnitsFromJobRequest(payload: RequestMeterUnitsForJob): HttpRequest<any> {
     return new HttpRequest('POST', removeMeterUnitsFromJob, payload as any);
+  }
+
+  updateMuFromForm(payload: MeterUnitDetailsForm): Observable<any> {
+    const muRequest: MuUpdateRequest = {
+      deviceId: payload.deviceId,
+      name: payload.name,
+      address: payload.address,
+      serialNumber: payload.id
+    };
+
+    return this.updateMu(muRequest);
+  }
+
+  updateMu(payload: MuUpdateRequest): Observable<any> {
+    return this.repository.makeRequest(this.updateMuRequest(payload));
+  }
+
+  updateMuRequest(payload: MuUpdateRequest): HttpRequest<any> {
+    return new HttpRequest('PUT', `${updateMeterUnit}`, payload as any);
   }
 }

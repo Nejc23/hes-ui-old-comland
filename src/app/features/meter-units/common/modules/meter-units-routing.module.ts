@@ -31,7 +31,7 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'detail/:deviceId',
+        path: 'details/:deviceId',
         data: {
           breadcrumb: 'Meter Unit'
         },

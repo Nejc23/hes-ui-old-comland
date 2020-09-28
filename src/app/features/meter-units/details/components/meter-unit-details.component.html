@@ -63,85 +63,73 @@
       <button class="btn btn-primary" (click)="saveMeterUnit()">Save</button>
     </div>
 
-    <div class="form-group" *ngIf="!editMode && data">
-      <div class="form-row">
-        <div class="col">
+    <div class="form-group" *ngIf="data">
+      <div class="form-row mb-4">
+        <div class="col" *ngIf="!editMode">
           <div><label i18n>Name</label></div>
           <div><span>{{form.get(nameProperty).value}}</span></div>
         </div>
+        <div class="col" *ngIf="editMode">
+          <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name">
+          </app-input-text>
+        </div>
       </div>
-      <div class="form-row">
+      <div class="form-row mb-4">
+        <div class="col" *ngIf="!editMode">
+          <div><label i18n>Id</label></div>
+          <div><span>{{form.get(idProperty).value}}</span></div>
+        </div>
+        <div class="col" *ngIf="editMode">
+          <app-input-text [form]="form" [property]="idProperty" i18n-label label="ID">
+          </app-input-text>
+        </div>
+      </div>
+      <div class="form-row mb-4">
+        <div class="col">
+          <div><label i18n>Mac</label></div>
+          <div><span>{{form.get(macProperty).value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row mb-4">
         <div class="col">
           <div><label i18n>Systitle</label></div>
           <div><span>{{form.get(systitleProperty).value}}</span></div>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row mb-4">
         <div class="col">
           <div><label i18n>State</label></div>
-          <div><span>{{form.get(statusProperty).value?.value}}</span></div>
+          <div><span>{{form.get(statusProperty).value}}</span></div>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row mb-4">
         <div class="col">
           <div><label i18n>Type</label></div>
-          <div><span>{{form.get(typeProperty).value?.value}}</span></div>
+          <div><span>{{form.get(typeProperty).value}}</span></div>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row mb-4">
         <div class="col">
           <div><label i18n>Manufacturer</label></div>
-          <div><span>{{form.get(vendorProperty).value?.value}}</span></div>
+          <div><span>{{form.get(vendorProperty).value}}</span></div>
         </div>
       </div>
-      <div class="form-row">
+      <div class="form-row mb-4">
         <div class="col">
           <div><label i18n>Template</label></div>
-          <div><span>{{form.get(templateProperty).value?.value}}</span></div>
+          <div><span>{{form.get(templateProperty).value}}</span></div>
+        </div>
+      </div>
+      <div class="form-row mb-4">
+        <div class="col" *ngIf="!editMode">
+          <div><label i18n>Address</label></div>
+          <div><span>{{form.get(addressProperty).value}}</span></div>
+        </div>
+        <div class="col" *ngIf="editMode">
+          <app-input-text [form]="form" [property]="addressProperty" i18n-label label="Address">
+          </app-input-text>
         </div>
       </div>
     </div>
-
-    <div class="form-group" *ngIf="editMode">
-      <div class="form-row">
-        <div class="col">
-            <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name">
-            </app-input-text>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
-            <app-input-text [form]="form" [property]="systitleProperty" i18n-label label="ID">
-            </app-input-text>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="muStatuses"
-            [disabled]="false">
-          </app-select-input>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="muTypes"
-            [disabled]="false">
-          </app-select-input>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="vendorProperty" [selectOptions]="muVendors"
-            [disabled]="false">
-          </app-select-input>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col">
-          <app-select-input i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="muTemplates"
-          [disabled]="false">
-        </app-select-input>
-        </div>
-      </div>
   </div>
 </div>

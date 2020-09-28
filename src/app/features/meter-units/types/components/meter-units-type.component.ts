@@ -865,6 +865,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   showItem(deviceId: string) {
-    this.router.navigate(['/meterUnits/detail', deviceId]);
+    this.router.navigate(['/meterUnits/details', deviceId]);
   }
 }
