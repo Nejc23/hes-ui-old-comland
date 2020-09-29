@@ -45,22 +45,22 @@ describe('Pact consumer test', () => {
               {
                 value: 356.0,
                 status: 0,
-                timestamp: new Date('2020-03-17T01:02:00+00:00')
+                timestamp: '2020-03-17T01:02:00+00:00'
               },
               {
                 value: 255.0,
                 status: 0,
-                timestamp: new Date('2020-03-17T01:03:00+00:00')
+                timestamp: '2020-03-17T01:03:00+00:00'
               },
               {
                 value: 256.0,
                 status: 0,
-                timestamp: new Date('2020-03-17T01:08:00+00:00')
+                timestamp: '2020-03-17T01:08:00+00:00'
               },
               {
                 value: 358.0,
                 status: 0,
-                timestamp: new Date('2020-03-17T01:09:00+00:00')
+                timestamp: '2020-03-17T01:09:00+00:00'
               }
             ]
           }

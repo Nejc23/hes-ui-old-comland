@@ -162,10 +162,10 @@
 
   .ag-row {
     font-size: $font-size-base;
-    z-index: 1;   
+    z-index: 1;
   }
 
-  .actions-button-cell { 
+  .actions-button-cell {
     display: none;
   }
 
@@ -176,12 +176,12 @@
   .ag-row-hover {
     .actions-button-cell {
       display: block;
-      color: $primary !important;  
+      color: $primary !important;
       z-index: 900;
       text-align: right;
     }
   }
-  
+
   .ag-root,
   .ag-root-wrapper,
   .ag-body-viewport,
@@ -201,6 +201,11 @@
   .ag-paging-panel {
     border-top: none;
     font-size: $font-size-sm;
+    color: $gray-900;
+
+    &.ag-disabled {
+      color: $text-muted;
+    }
   }
 
   button {
@@ -259,7 +264,7 @@
   .ag-column-select-header {
     padding: 0 $spacer;
   }
- 
+
   .ag-checkbox-input-wrapper {
     border-color: $border-color;
     color: transparent;

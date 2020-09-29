@@ -43,5 +43,5 @@ export interface RegisterDefinition {
 export interface RegisterValue {
   value: number;
   status?: number;
-  timestamp: Date;
+  timestamp: string;
 }

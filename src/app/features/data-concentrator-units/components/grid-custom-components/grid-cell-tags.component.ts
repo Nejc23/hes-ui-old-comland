@@ -14,6 +14,7 @@ export class GridCellTagsComponent implements ICellRendererAngularComp {
 
   // called on init
   agInit(params: any): void {
+    console.log('grid-cell-tags params', params);
     this.params = params;
   }
 
@@ -21,5 +22,9 @@ export class GridCellTagsComponent implements ICellRendererAngularComp {
   refresh(params: any): boolean {
     this.params = params;
     return true;
+  }
+
+  isValueValidArray(params: any): boolean {
+    return params.value && params instanceof Array;
   }
 }

@@ -28,7 +28,7 @@ export class RegistersChartComponent implements OnChanges {
     if (this.filter) {
       this.dataProcessingService.getChartData(this.filter).subscribe(val => {
         this.eventValues = val;
-        this.categories = this.eventValues.map(v => v.timestamp); // this.eventValues.map(v => `${v.timestamp.toLocaleDateString()} ${v.timestamp.toLocaleTimeString()}`);
+        this.categories = this.eventValues.map(v => new Date(v.timestamp)); // this.eventValues.map(v => `${v.timestamp.toLocaleDateString()} ${v.timestamp.toLocaleTimeString()}`);
         this.chartData = [this.eventValues];
       });
     }

@@ -1,9 +1,9 @@
-import { DataProcessingService } from '../../../../src/app/core/repository/services/data-processing/data-processing.service';
-import { DataProcessingRequest } from '../../../../src/app/features/meter-units/registers/interfaces/data-processing-request.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { EventProfileDefinitionsForDevice } from 'src/app/core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
+import { DataProcessingRequest } from 'src/app/core/repository/interfaces/data-processing/data-processing-request.interface';
 
 describe('Pact consumer test', () => {
   let provider;

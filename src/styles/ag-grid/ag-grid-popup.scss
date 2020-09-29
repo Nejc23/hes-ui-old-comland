@@ -238,6 +238,11 @@
   .ag-paging-panel {
     border-top: none;
     font-size: $font-size-sm;
+    color: $gray-900;
+
+    &.ag-disabled {
+      color: $text-muted;
+    }
   }
 
   button {
