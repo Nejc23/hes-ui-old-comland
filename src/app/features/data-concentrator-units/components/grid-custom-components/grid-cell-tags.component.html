@@ -1,10 +1,10 @@
-<div container="body" *ngIf="params.value" placement="bottom" [openDelay]="1000" [ngbTooltip]="tipContent2">
+<div container="body" *ngIf="isValueValidArray(params);" placement="bottom" [openDelay]="1000" [ngbTooltip]="tipContent2">
   <div class="d-flex">
     <!--<div *ngFor="let item of params.value; let i = index" class="bg-secondary rounded mr-1 p-1">{{item}}</div>-->
     <span *ngFor="let item of params.value; let i = index" class="badge badge-light mr-1">{{item}}</span>
   </div>
 </div>
 
-<span class="text-muted" *ngIf="!params.value">{{notAvailableText}}</span>
+<span class="text-muted" *ngIf="!isValueValidArray(params);">{{notAvailableText}}</span>
 
 <ng-template #tipContent2 id="tipContent2">{{params.value}}</ng-template>

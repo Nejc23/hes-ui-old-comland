@@ -227,8 +227,8 @@
     z-index: 1;
   }
 
-  .actions-button-cell {   
-    display: none;    
+  .actions-button-cell {
+    display: none;
   }
 
   .ag-row.ag-row-focus {
@@ -238,7 +238,7 @@
   .ag-row-hover {
     .actions-button-cell {
       display: block;
-      color: $primary !important;  
+      color: $primary !important;
       z-index: 900;
       text-align: right;
     }
@@ -263,6 +263,11 @@
   .ag-paging-panel {
     border-top: none;
     font-size: $font-size-sm;
+    color: $gray-900;
+
+    &.ag-disabled {
+      color: $text-muted;
+    }
   }
 
   button {

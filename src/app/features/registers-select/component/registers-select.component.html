@@ -12,13 +12,16 @@
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
 
-<ag-grid-angular class="ag-theme-epoint" style="width: 98%; height: 280px;" #agGrid
+<ag-grid-angular class="ag-theme-epoint" style="width: 98%; height: 430px;" #agGrid
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   [modules]="modules"
   (gridReady)="onGridReady($event)"
   (rowSelected)="selectionChanged($event)"
   (firstDataRendered)="onFirstDataRendered($event)"
-  suppressRowClickSelection="true"  
-  rowSelection="multiple">
+  suppressRowClickSelection="true"
+  rowSelection="multiple"
+  [pagination]="true"
+  [paginationPageSize]="10"
+  >
 </ag-grid-angular>

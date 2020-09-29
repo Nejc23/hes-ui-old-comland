@@ -1,9 +1,9 @@
-import { DataProcessingService } from '../../../../src/app/core/repository/services/data-processing/data-processing.service';
 import { ProfileDefinitionsForDevice } from '../../../../src/app/core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-import { DataProcessingRequest } from '../../../../src/app/features/meter-units/registers/interfaces/data-processing-request.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
+import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
+import { DataProcessingRequest } from 'src/app/core/repository/interfaces/data-processing/data-processing-request.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -57,17 +57,17 @@ describe('Pact consumer test', () => {
                   {
                     value: 21.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T01:00:00+00:00')
+                    timestamp: '2020-03-17T01:00:00+00:00'
                   },
                   {
                     value: 22.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T02:00:00+00:00')
+                    timestamp: '2020-03-17T02:00:00+00:00'
                   },
                   {
                     value: 23.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T03:00:00+00:00')
+                    timestamp: '2020-03-17T03:00:00+00:00'
                   }
                 ]
               },
@@ -78,12 +78,12 @@ describe('Pact consumer test', () => {
                   {
                     value: 21.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T01:00:00+00:00')
+                    timestamp: '2020-03-17T01:00:00+00:00'
                   },
                   {
                     value: 22.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T02:00:00+00:00')
+                    timestamp: '2020-03-17T02:00:00+00:00'
                   }
                 ]
               }
@@ -104,12 +104,12 @@ describe('Pact consumer test', () => {
                   {
                     value: 21.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T01:00:00+00:00')
+                    timestamp: '2020-03-17T01:00:00+00:00'
                   },
                   {
                     value: 22.0,
                     status: 0,
-                    timestamp: new Date('2020-03-17T02:00:00+00:00')
+                    timestamp: '2020-03-17T02:00:00+00:00'
                   }
                 ]
               }
