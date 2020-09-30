@@ -1,29 +1,30 @@
 <div class="d-flex">
-  <app-input-searcher class="mr-2" [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
-    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
     <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
     <button type="button" class="btn btn-light" (click)="openSaveLayoutModal($event)"
     [ngbTooltip]="tipContentFilter"><i class="far fa-bookmark"></i></button>
     </div>
     <div class="btn-group">
-      <button type="button" class="btn btn-light"  [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
-      </button>   
-      <div class="dropdown-menu dropdown-menu-right">        
+      <button type="button" class="btn btn-light pl-2 pr-2"  [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-item">
-          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>                  
-        </div>        
-        <div class="dropdown-divider"></div>        
+          <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>
+        </div>
+        <div class="dropdown-divider"></div>
         <app-input-multiselect [form]="form" [property]="columnsProperty" (change)="showHideFromArrayOfCheckBoxes()" name="multSelectTypes" [isReadOnly]="false"
           [options]="columns$" [inline]="false" class="dropdown-item" i18n-label>
-        </app-input-multiselect>        
-      </div>  
+        </app-input-multiselect>
+      </div>
   </div>
 
-  <button type="button" class="btn btn-light" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
+  <button type="button" class="btn btn-light pl-2 pr-2 mr-2" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="far fa-redo"></i></button>
       <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
   <button type="button" class="btn btn-light" [ngbTooltip]="tipContentExport"><i class="far fa-file-excel"></i></button>
       </div>
+
+      <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
+    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
 <ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
 <ng-template #tipContentFilter><span i18n>Apply saved state or save new</span></ng-template>

@@ -11,14 +11,14 @@
 
 <div class="row">
   <div class="col-2 filter-shadow" *ngIf="!hideFilter">
-    <app-dc-filter (filterChange)="reloadGrid()"></app-dc-filter>
+    <app-dc-filter (filterChange)="reloadGrid()" (toggleFilter)="toggleFilter()"></app-dc-filter>
   </div>
 
-  <div class="filter-button" [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">    
-    <button id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
+  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
+    <!-- <button id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
       <i class='far'
          [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
-    </button>
+    </button> -->
 
     <!-- row total items, selected filter name -->
     <div *ngIf="!noData">
@@ -27,6 +27,10 @@
           <div class="mr-3" *ngIf="!selectedAtLeastOneRowOnGrid">
             <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()" *ngIf="!noData">
               <i class="far fa-plus"></i> <span i18n>Add</span>
+            </button>
+
+            <button type="button" class="btn btn-light pl-2 pr-2" [ngClass]="{'active': isFilterSet()}" (click)="toggleFilter()" [ngbTooltip]="hideShowFilter">
+              <i class="far fa-filter"></i>
             </button>
           </div>
           <div class="mr-3" *ngIf="!checkSelectedAll() && selectedAtLeastOneRowOnGrid">
@@ -48,7 +52,6 @@
           <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionDCUConfiguration" type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="far fa-cogs"></i><span
               i18n>Configuration</span></button>
             </div>
-
         </div>
 
         <div class="p-2 d-flex align-items-center p-2 grid-actions">
@@ -98,4 +101,4 @@
   </div>
 </div>
 
-<ng-template #hidwShowFilters><span i18n>Show/hide filters</span></ng-template>
+<ng-template #hideShowFilter><span i18n>Show/hide filters</span></ng-template>
