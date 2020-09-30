@@ -1,3 +1,4 @@
+import { SidebarSessionStoreService } from './../shared/base-template/components/services/sidbebar-session-store.service';
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -37,6 +38,7 @@ import { RoleService } from './permissions/services/role.service';
     ErrorHandlerService,
     GridSettingsCookieStoreService,
     GridSettingsSessionStoreService,
+    SidebarSessionStoreService,
     GridLayoutSessionStoreService,
     {
       provide: HTTP_INTERCEPTORS,
