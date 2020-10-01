@@ -38,7 +38,7 @@ import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units
 })
 export class MeterUnitDetailsComponent implements OnInit {
   private deviceId;
-  private saveError;
+  public saveError;
 
   private messageActionInProgress = this.i18n(`Action in progress!`);
   private messageServerError = this.i18n(`Server error!`);
@@ -121,6 +121,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   saveMeterUnit() {
+    this.saveError = null;
+
     const muFormData = this.fillData();
     const request = this.meterUnitsService.updateMuFromForm(muFormData);
     const successMessage = this.i18n(`Meter Unit was updated successfully`);

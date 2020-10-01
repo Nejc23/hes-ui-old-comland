@@ -118,7 +118,6 @@ export class MeterUnitsService {
 
   updateMuFromForm(payload: MeterUnitDetailsForm): Observable<any> {
     const muRequest: MuUpdateRequest = {
-      deviceId: payload.deviceId,
       name: payload.name,
       address: payload.address,
       serialNumber: payload.id
@@ -132,6 +131,6 @@ export class MeterUnitsService {
   }
 
   updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
-    return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
+    return new HttpRequest('PUT', `${updateMeterUnit}test/${id}`, payload as any);
   }
 }
