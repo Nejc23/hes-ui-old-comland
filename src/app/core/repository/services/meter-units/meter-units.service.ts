@@ -131,6 +131,6 @@ export class MeterUnitsService {
   }
 
   updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
-    return new HttpRequest('PUT', `${updateMeterUnit}test/${id}`, payload as any);
+    return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
   }
 }
