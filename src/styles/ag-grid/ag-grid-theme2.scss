@@ -241,6 +241,7 @@
       color: $primary !important;
       z-index: 900;
       text-align: right;
+      border: none !important;
     }
   }
 
@@ -248,7 +249,7 @@
   .ag-root-wrapper,
   .ag-body-viewport,
   .ag-body-viewport-wrapper {
-      overflow: visible !important;
+      overflow: visible !important;      
   }
 
   .ag-header-row {
