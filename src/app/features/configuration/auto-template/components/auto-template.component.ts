@@ -297,7 +297,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     try {
       const jobIds = this.getJobIds();
       if (this.activeElement.templateId && jobIds.length > 0) {
-        // get list of ids from service enerdat
+        // get list of ids from service
         this.serviceJob.getSchedulerJobsListByJobId(jobIds).subscribe(
           jobs => {
             this.rowDataJobs = jobs;

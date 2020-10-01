@@ -157,7 +157,7 @@ export class CodelistInterceptor {
       data = [
         {
           id: 1,
-          value: 'Enerdat'
+          value: 'Metricsx'
         },
         {
           id: 2,
@@ -172,7 +172,7 @@ export class CodelistInterceptor {
       data = [
         {
           id: 1,
-          value: 'Enerdat'
+          value: 'Metricsx'
         }
       ];
     }
