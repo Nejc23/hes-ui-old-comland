@@ -58,7 +58,7 @@ export class MeterUnitsSetMonitorInterceptor {
         type: 'MONITOR',
         registerDefinitions: [
           {
-            registerDefinitionId: '6ce3983d-e653-41e6-a314-4edd928f1728',
+            registerDefinitionId: '97179cc6-bd90-43aa-9f15-8cc19ef38eb8',
             name: 'Current L2 monitor',
             obisCode: '1.0.51.4.0.255',
             classId: 21,

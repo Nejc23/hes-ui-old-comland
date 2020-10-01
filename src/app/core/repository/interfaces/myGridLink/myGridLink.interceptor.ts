@@ -113,7 +113,7 @@ export interface RequestLimiterGetRegisters {
   filter?: GridFilterParams;
   search?: GridSearchParams[];
   excludeIds?: string[];
-  groupType: number;
+  type: number;
 }
 /*export interface ResponseLimiterGetRegisters {
   registerId: string;
@@ -127,7 +127,7 @@ export interface RequestSetLimiter {
   filter?: GridFilterParams;
   search?: GridSearchParams[];
   excludeIds?: string[];
-  limiterDefinitions: LimiterDefinitions;
+  limiterDefinitions: LimiterDefinitions[];
 }
 export interface LimiterDefinitions {
   thresholdNormal: number;
