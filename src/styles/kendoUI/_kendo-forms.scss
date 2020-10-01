@@ -49,3 +49,11 @@ input[type=search] {
     background-color: $gray-300;
   }
 }
+
+.k-datetime-container .k-datetime-wrap {
+  width: 22em;
+}
+
+.k-calendar-infinite .k-calendar-header {
+  margin-right: 0;
+}
