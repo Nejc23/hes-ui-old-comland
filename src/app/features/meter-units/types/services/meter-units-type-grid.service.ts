@@ -121,25 +121,8 @@ export class MeterUnitsTypeGridService {
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: this.i18n('Read status')
-      },
-      {
-        field: 'vendor',
-        headerName: this.i18n('Vendor'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: this.i18n('Vendor')
-      },
-      {
-        field: 'parent',
-        headerName: this.i18n('Parent'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gidCellParentComponent',
-        headerTooltip: this.i18n('Parent')
+        headerTooltip: this.i18n('Read status'),
+        hide: true
       },
       {
         field: 'moduleId',
@@ -151,13 +134,22 @@ export class MeterUnitsTypeGridService {
         headerTooltip: this.i18n('Module Id')
       },
       {
-        field: 'firmware',
-        headerName: this.i18n('Firmware'),
+        field: 'parent',
+        headerName: this.i18n('Parent'),
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellFirmwareComponent',
-        headerTooltip: this.i18n('Firmware')
+        cellRenderer: 'gidCellParentComponent',
+        headerTooltip: this.i18n('Parent')
+      },
+      {
+        field: 'parametrisationId',
+        headerName: this.i18n('Parametrisation Id'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: this.i18n('Parametrisation Id')
       },
       {
         field: 'timeOfUseId',
@@ -167,6 +159,24 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellTimeOfUseIdComponent',
         headerTooltip: this.i18n('Time of use Id')
+      },
+      {
+        field: 'vendor',
+        headerName: this.i18n('Vendor'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellVendorComponent',
+        headerTooltip: this.i18n('Vendor')
+      },
+      {
+        field: 'firmware',
+        headerName: this.i18n('Firmware'),
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellFirmwareComponent',
+        headerTooltip: this.i18n('Firmware')
       },
       {
         field: 'id1',
@@ -216,7 +226,7 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellDetailLinkComponent',
         headerTooltip: this.i18n('ID5'),
-        hide: false
+        hide: true
       },
       {
         field: 'id6',
@@ -235,16 +245,8 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('Configuration Id')
-      },
-      {
-        field: 'parametrisationId',
-        headerName: this.i18n('Parametrisation Id'),
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('Parametrisation Id')
+        headerTooltip: this.i18n('Configuration Id'),
+        hide: true
       },
       {
         field: 'logicalDeviceName',
@@ -281,7 +283,8 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
-        headerTooltip: this.i18n('Tags')
+        headerTooltip: this.i18n('Tags'),
+        hide: true
       },
       {
         field: 'jobStatus',
