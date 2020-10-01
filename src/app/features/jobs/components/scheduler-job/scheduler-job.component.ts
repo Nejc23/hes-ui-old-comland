@@ -185,6 +185,7 @@ export class SchedulerJobComponent implements OnInit {
         // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
         if (addNew) {
           this.resetAll();
+          this.ngOnInit();
         } else {
           this.modal.close();
         }
