@@ -151,18 +151,18 @@ export class DataConcentratorUnitsSelectGridService {
     };
   }
 
-  public getCurrentRowIndex(): GridPagination {
+  public getCurrentRowIndex(pageSize: number): GridPagination {
     const index = this.getSessionSettingsPageIndex();
     const result: GridPagination = {
       currentPage: 0,
       startRow: 0,
-      endRow: configAgGrid.paginationPageSize
+      endRow: pageSize
     };
 
     if (index !== undefined && index !== null) {
       result.currentPage = index;
-      result.startRow = index * configAgGrid.paginationPageSize;
-      result.endRow = index * configAgGrid.paginationPageSize + configAgGrid.paginationPageSize;
+      result.startRow = index * pageSize;
+      result.endRow = index * pageSize + pageSize;
     }
 
     return result;

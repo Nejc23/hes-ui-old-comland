@@ -46,6 +46,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   allRowData: RegistersSelectList[];
   selectedAll = false;
 
+  public pageSize = 10;
+
   requestModel: GridRequestParams = {
     requestId: null,
     startRow: 0,
@@ -156,8 +158,12 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.startRow = that.dataConcentratorUnitsSelectGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.dataConcentratorUnitsSelectGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.dataConcentratorUnitsSelectGridService.getCurrentRowIndex(
+          that.gridApi.paginationProxy.pageSize
+        ).startRow;
+        that.requestModel.endRow = that.dataConcentratorUnitsSelectGridService.getCurrentRowIndex(
+          that.gridApi.paginationProxy.pageSize
+        ).endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
@@ -177,6 +183,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         });
       }
     };
+
     this.gridApi.setServerSideDatasource(datasource);
   }
 
@@ -188,7 +195,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
     if (params.newPage && !this.loadGrid) {
       this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
-      //  this.eventService.pageChange(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex());

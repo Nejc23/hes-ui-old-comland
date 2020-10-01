@@ -19,16 +19,16 @@
   (gridReady)="onGridReady($event)"
   (rowSelected)="onRowSelect($event)"
   (firstDataRendered)="onFirstDataRendered($event)"
-  [domLayout]=agGridSettings.domLayout 
+  [domLayout]=agGridSettings.domLayout
   [frameworkComponents]="frameworkComponents"
   suppressSizeToFit=agGridSettings.suppressSizeToFit
-  [pagination]=agGridSettings.pagination [paginationPageSize]="10"
+  [pagination]=agGridSettings.pagination [paginationPageSize]="pageSize"
   [multiSortKey]=agGridSettings.multiSortKey [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
   [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-  [cacheBlockSize]=agGridSettings.paginationPageSize
+  [cacheBlockSize]="pageSize"
   [maxBlocksInCache]="1" [gridOptions]="gridOptions"
-  [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection 
-  [rowSelection]=agGridSettings.rowSelection  
+  [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+  [rowSelection]=agGridSettings.rowSelection
   (selectionChanged)="selectionChanged()"
   (columnVisible)="onColumnVisible($event)"
   (paginationChanged)="onPaginationChange($event)"
