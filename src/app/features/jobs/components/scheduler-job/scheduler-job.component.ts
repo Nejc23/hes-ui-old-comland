@@ -342,7 +342,6 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   next(value) {
-    console.log('next clicked', value);
     if (this.showWeekDays()) {
       this.form.get(this.weekDaysProperty).enable();
     } else {
@@ -352,14 +351,12 @@ export class SchedulerJobComponent implements OnInit {
     // check form
     this.formUtils.touchElementsAndValidate(this.form);
     if (value > 0 && !this.form.valid) {
-      console.log('form is invalid', this.form);
       return;
     }
     this.step = this.step + value;
     if (this.step === 2) {
       this.form.get(this.registersProperty).setValidators(Validators.required);
     } else {
-      console.log('before clear validators');
       this.form.get(this.registersProperty).clearValidators();
     }
   }
