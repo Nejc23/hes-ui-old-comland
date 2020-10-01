@@ -68,8 +68,8 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   // set tooltip text
   setToolTip(type: string) {
     switch (type) {
-      case 'detail':
-        return this.i18n('Open detail');
+      case 'details':
+        return this.i18n('Open details');
       case 'chart':
         return this.i18n('Open data');
       case 'operation':
