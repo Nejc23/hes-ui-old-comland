@@ -190,7 +190,7 @@ export class DataConcentratorUnitsGridService {
         editable: false,
         suppressMovable: true,
         lockPinned: true,
-        lockPosition: true,
+        //  lockPosition: true,
         sortable: false,
         filter: false,
         cellRendererFramework: GridCellActionsComponent,
