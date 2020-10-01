@@ -19,4 +19,4 @@ export const getCommonRegisterGroups = `/get-common-register-groups`;
 export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';
 export const onDemandSetLimiter = '/on-demand/trigger-set-limiter';
 export const onDemandSetBreakerMode = '/on-demand/trigger-set-breaker-mode';
-export const onDemandClearFF = '/on-demand/trigger-clear-ff-registers';
+export const onDemandClearFF = '/on-demand/trigger-clear-ff-register';
