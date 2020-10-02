@@ -123,8 +123,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   }
 
   uploadEvent(event) {
-    // const bearer = `bearer ${this.authService.user.id_token}`;
-    // event.headers = new HttpHeaders({ Authorization: bearer });
+    const bearer = `bearer ${this.authService.user.id_token}`;
+    event.headers = new HttpHeaders({ Authorization: bearer });
     if (this.authService.isRefreshNeeded2()) {
       this.authService
         .renewToken()
