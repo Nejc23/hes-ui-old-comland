@@ -34,6 +34,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = 'can only upload one file.';
+  acceptExtensions = '.img';
   public files: Array<any>;
   activate = false;
 

@@ -27,6 +27,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   deviceIdsParam = [];
   public files: Array<any>;
   allowedExt = ['json'];
+  acceptExtensions = '.json';
   jsonString = '{}';
 
   constructor(
