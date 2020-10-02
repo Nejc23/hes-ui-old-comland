@@ -17,6 +17,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   form: FormGroup;
   public files: Array<any>;
   allowedExt = ['xml'];
+  acceptExtensions = '.xml';
   data = '';
   errorMsg = '';
 

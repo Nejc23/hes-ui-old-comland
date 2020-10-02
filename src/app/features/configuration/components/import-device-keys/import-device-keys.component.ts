@@ -16,6 +16,7 @@ import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-
 import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-check-response.interface';
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
 import { environment } from 'src/environments/environment';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -48,7 +49,8 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private cryptoLiteService: CryptoLiteService
+    private cryptoLiteService: CryptoLiteService,
+    private breadcrumbService: BreadcrumbService
   ) {
     this.allowedExtExplainText = this.i18n('can only upload one file.');
     this.form = this.createForm();
@@ -68,6 +70,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setFileTypeId();
     this.createForm();
+    this.breadcrumbService.setPageName(this.headerTitle);
   }
 
   ngOnDestroy(): void {}
@@ -108,24 +111,24 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
 
   checkImportResults() {
     const ids = this.meterUnitsTypeGridService.getAllCryptoImportIds();
-    console.log(`checkImportResults, ids = `, ids);
     const results: CryptoImportCheckResponse[] = [];
-    ids.forEach(x => {
-      this.cryptoLiteService.checkCryptoImport(x).subscribe(o => {
-        results.push(o);
-        if (o.status === 'SUCCESS') {
-          this.allResultTexts.push(
-            `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
-          );
-          this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
-        }
-        if (o.errorMsg) {
-          this.allErrorTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
-          this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
-        }
+    if (ids && ids.length > 0) {
+      ids.forEach(x => {
+        this.cryptoLiteService.checkCryptoImport(x).subscribe(o => {
+          results.push(o);
+          if (o.status === 'SUCCESS') {
+            this.allResultTexts.push(
+              `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
+            );
+            this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
+          }
+          if (o.errorMsg) {
+            this.allErrorTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
+            this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
+          }
+        });
       });
-    });
-    console.log(`results = `, results);
+    }
   }
 
   get gulfProperty() {

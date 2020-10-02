@@ -14,7 +14,6 @@ export class GridCellTagsComponent implements ICellRendererAngularComp {
 
   // called on init
   agInit(params: any): void {
-    console.log('grid-cell-tags params', params);
     this.params = params;
   }
 

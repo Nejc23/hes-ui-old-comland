@@ -16,6 +16,7 @@ export class FileSelectComponent implements OnInit {
   @Input() textExplanation: string;
   @Input() multiple = true;
   @Input() allowedExtensions: string[] = [];
+  @Input() acceptExtensions = '';
   @Output() selectEvent = new EventEmitter<any>();
 
   controlId: string;
