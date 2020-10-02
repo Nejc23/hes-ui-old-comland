@@ -20,6 +20,7 @@ export class FileUploadComponent implements OnInit {
   @Input() autoUpload = true;
   @Input() allowedExtensions: string[] = [];
   @Input() responseType = 'json';
+  @Input() acceptExtensions = '';
   @Output() successEvent = new EventEmitter<any>();
   @Output() uploadEvent = new EventEmitter<any>();
 

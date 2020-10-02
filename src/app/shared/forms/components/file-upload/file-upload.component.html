@@ -3,7 +3,7 @@
     {{label}}
     <sup *ngIf="required"> *</sup>
   </label>
-  <kendo-upload required
+  <kendo-upload #upload required 
     [formControlName]="property"
     [saveUrl]="uploadSaveUrl"
     [removeUrl]="uploadRemoveUrl"
@@ -14,6 +14,7 @@
     (success)="onSuccess($event)"
     (error)="errorEventHandler($event)"
     (upload)="uploadEventHandler($event)"
+    [accept]="acceptExtensions"
     [id]="controlId" [name]="controlId">
   </kendo-upload>
   <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small>
