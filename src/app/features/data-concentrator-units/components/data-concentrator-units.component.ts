@@ -630,7 +630,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   addDcu() {
     const modalRef = this.modalService.open(AddDcuFormComponent);
-    modalRef.result.then().catch(() => {});
+    modalRef.result
+      .then(result => {
+        this.refreshGrid();
+      })
+      .catch(() => {});
   }
 
   // TODO
