@@ -111,24 +111,24 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
 
   checkImportResults() {
     const ids = this.meterUnitsTypeGridService.getAllCryptoImportIds();
-    console.log(`checkImportResults, ids = `, ids);
     const results: CryptoImportCheckResponse[] = [];
-    ids.forEach(x => {
-      this.cryptoLiteService.checkCryptoImport(x).subscribe(o => {
-        results.push(o);
-        if (o.status === 'SUCCESS') {
-          this.allResultTexts.push(
-            `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
-          );
-          this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
-        }
-        if (o.errorMsg) {
-          this.allErrorTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
-          this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
-        }
+    if (ids && ids.length > 0) {
+      ids.forEach(x => {
+        this.cryptoLiteService.checkCryptoImport(x).subscribe(o => {
+          results.push(o);
+          if (o.status === 'SUCCESS') {
+            this.allResultTexts.push(
+              `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
+            );
+            this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
+          }
+          if (o.errorMsg) {
+            this.allErrorTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
+            this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
+          }
+        });
       });
-    });
-    console.log(`results = `, results);
+    }
   }
 
   get gulfProperty() {
