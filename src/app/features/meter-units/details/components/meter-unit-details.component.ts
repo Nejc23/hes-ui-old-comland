@@ -32,6 +32,7 @@ import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limi
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
 import { guid } from '@progress/kendo-angular-common';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
+import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html'
@@ -44,6 +45,9 @@ export class MeterUnitDetailsComponent implements OnInit {
   private messageServerError = this.i18n(`Server error!`);
 
   private requestModel;
+
+  private typeId;
+  private typeName;
 
   public editMode = false;
   public data: MeterUnitDetails;
@@ -65,7 +69,8 @@ export class MeterUnitDetailsComponent implements OnInit {
     private modalService: ModalService,
     private bulkService: MyGridLinkService,
     private toast: ToastNotificationService,
-    private plcActionsService: MeterUnitsPlcActionsService
+    private plcActionsService: MeterUnitsPlcActionsService,
+    private codeList: CodelistMeterUnitsRepositoryService
   ) {
     breadcrumbService.setPageName('Meter Unit');
   }
@@ -156,6 +161,12 @@ export class MeterUnitDetailsComponent implements OnInit {
       this.form = this.createForm();
       // this.setFormType();
       // this.setFormVendor();
+      this.typeId = response.type === 0 ? 1 : response.type; // TODO remove this after BE fix.
+
+      this.codeList.meterUnitTypeCodelist().subscribe(list => {
+        this.typeName = list.find(l => l.id === this.typeId).value;
+        this.setBreadcrumbs();
+      });
     });
   }
 
@@ -267,6 +278,32 @@ export class MeterUnitDetailsComponent implements OnInit {
       [this.macProperty]: [this.data ? this.data.mac : null],
       [this.addressProperty]: [this.data ? this.data.address : null]
     });
+  }
+
+  setBreadcrumbs() {
+    const breadcrumbs: Breadcrumb[] = [
+      {
+        label: this.i18n('Meters'),
+        params: {},
+        url: null
+      }
+    ];
+
+    if (this.typeId && this.typeName) {
+      breadcrumbs.push({
+        label: this.i18n(this.typeName),
+        params: {},
+        url: `/meterUnits/${this.typeId}`
+      });
+    }
+
+    breadcrumbs.push({
+      label: this.i18n('Meter Unit'),
+      params: {},
+      url: null
+    });
+
+    this.breadcrumbService.setBreadcrumbs(breadcrumbs);
   }
 
   // setFormType() {

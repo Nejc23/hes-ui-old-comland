@@ -16,8 +16,8 @@ export class RegistersGridService {
         field: 'timestamp',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Time'),
-        headerTooltip: this.i18n('Time'),
+        headerName: this.i18n('Timestamp'),
+        headerTooltip: this.i18n('Timestamp'),
         cellRendererFramework: GridCellDateComponent
         // cellRenderer: (data:any) => {
         //   return data && data.value ? formatDate(data.value, environment.dateTimeFormat, selectedLocale) : ''; // return data.value ? (new Date(data.value)).toLocaleDateString() : '';
