@@ -783,7 +783,7 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/registers-select/component/registers-select.component.html</context><context context-type="linenumber">6</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units-select/component/data-concentrator-units-select.component.html</context><context context-type="linenumber">6</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">33</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/dcu-for-job/components/dcu-for-job.component.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/meter-units-for-job.component.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/registers-select/component/registers-select.component.html</context><context context-type="linenumber">6</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units-select/component/data-concentrator-units-select.component.html</context><context context-type="linenumber">6</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">37</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/dcu-for-job/components/dcu-for-job.component.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/meter-units-for-job.component.html</context><context context-type="linenumber">21</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
       <trans-unit id="df9514d72a91bea69a5fb9f696ff3e6e4ea279c2" datatype="html">
         <source>items found</source>
         <target>Elemente gefunden</target>
@@ -796,21 +796,15 @@
         <target>Alle auswählen</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">34</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/dcu-for-job/components/dcu-for-job.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/meter-units-for-job.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">31</context></context-group></trans-unit><trans-unit id="7d95a08e0cc9d4258e527c91d9ed78af8d696e07" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">38</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/dcu-for-job/components/dcu-for-job.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/meter-units-for-job.component.html</context><context context-type="linenumber">22</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">31</context></context-group></trans-unit><trans-unit id="7d95a08e0cc9d4258e527c91d9ed78af8d696e07" datatype="html">
         <source>All (<x id="INTERPOLATION" equiv-text="{{getTotalCountWithoutExcluded()}}"/>) items selected</source><target state="final">All (<x id="INTERPOLATION" equiv-text="{{getTotalCountWithoutExcluded()}}"/>) items selected</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
-          <context context-type="linenumber">38</context>
-        </context-group>
-      </trans-unit><trans-unit id="7249541901378692818655fab1d4d34a0db77009" datatype="html">
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">42</context></context-group></trans-unit><trans-unit id="7249541901378692818655fab1d4d34a0db77009" datatype="html">
         <source>Clear
                       selected</source><target state="final">Clear
                       selected</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
-          <context context-type="linenumber">39</context>
-        </context-group>
-      </trans-unit>
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">43</context></context-group></trans-unit>
       
       
       
@@ -938,13 +932,13 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context><context context-type="linenumber">51</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">47</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component.html</context><context context-type="linenumber">51</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">51</context></context-group></trans-unit>
       <trans-unit id="4a41f824a35ba01d5bd7be61aa06b3e8145209d0" datatype="html">
         <source>Configuration</source>
         <target>Konfiguration</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/tou-config-select/component/tou-config-select.component.html</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">49</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/tou-config-select/component/tou-config-select.component.html</context><context context-type="linenumber">1</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">53</context></context-group></trans-unit>
       <trans-unit id="4cd81c82dcb96d36732e42164148aa34b0c69652" datatype="html">
         <source>TOU Configuration</source>
         <target>TOU Konfiguration</target>
@@ -960,26 +954,17 @@
         <target state="final">You have no Data Concentrator Units yet!</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">95</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">211</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">98</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">211</context></context-group></trans-unit>
       <trans-unit id="f7f410dc2ee00a95ca3b02f3443cf43fc7277fe6" datatype="html">
         <source>Add First</source>
         <target>Zuerst hinzufügen</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">96</context></context-group></trans-unit><trans-unit id="a9cb357416d15d302785d0eb3f9334fab7f3d8c1" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">99</context></context-group></trans-unit><trans-unit id="a9cb357416d15d302785d0eb3f9334fab7f3d8c1" datatype="html">
         <source>Show/hide filters</source><target state="final">Show/hide filters</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context>
-          <context context-type="linenumber">101</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/registers/components/meter-unit-registers.component.html</context>
-          <context context-type="linenumber">55</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context>
-          <context context-type="linenumber">216</context>
-        </context-group>
-      </trans-unit><trans-unit id="4af07947240e10e3e5638ec0e4d9c80c1109564a" datatype="html">
+        
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/data-concentrator-units.component.html</context><context context-type="linenumber">104</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/registers/components/meter-unit-registers.component.html</context><context context-type="linenumber">55</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/meter-units-type.component.html</context><context context-type="linenumber">216</context></context-group></trans-unit><trans-unit id="4af07947240e10e3e5638ec0e4d9c80c1109564a" datatype="html">
         <source>Templates list</source><target state="final">Templates list</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/configuration/auto-template/components/auto-template.component.html</context>
@@ -1589,38 +1574,42 @@
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">28</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">27</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">27</context></context-group></trans-unit>
       <trans-unit id="6bf889110c9f0d9a27f05544ef0f2466a5abd889" datatype="html">
         <source>Apply saved state or save new</source>
         <target>Übernehme gespeicherten Status oder speichere neu</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">29</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">28</context></context-group></trans-unit><trans-unit id="b274bea28bf4249c607a22a86f9ba412ad6fbd0a" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">30</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">11</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">28</context></context-group></trans-unit><trans-unit id="b274bea28bf4249c607a22a86f9ba412ad6fbd0a" datatype="html">
         <source>Show/hide grid columns</source><target state="final">Show/hide grid columns</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context>
-          <context context-type="linenumber">30</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context>
-          <context context-type="linenumber">31</context>
-        </context-group>
-      </trans-unit>
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">31</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">31</context></context-group></trans-unit>
       <trans-unit id="6e54bd4595104df4acfc48e99d818bf93fd0aa2a" datatype="html">
         <source>Refresh grid</source>
         <target>Raster aktualisieren</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">31</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">12</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">12</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">29</context></context-group></trans-unit>
       <trans-unit id="73866f7a960486a75966b19d63f68d11f240ac0e" datatype="html">
         <source>Export in excel</source>
         <target>Als Excel exportieren</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/action-form/components/action-form.component.html</context><context context-type="linenumber">33</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/components/action-form/components/action-form.component.html</context><context context-type="linenumber">13</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/action-form/components/action-form.component.html</context><context context-type="linenumber">30</context></context-group></trans-unit><trans-unit id="16e70bede1f2436583858271529018001c80babd" datatype="html">
+        <source>
+        <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/>
+      </source><target state="final">
+        <x id="START_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;i>"/><x id="CLOSE_ITALIC_TEXT" ctype="x-i" equiv-text="&lt;/i>"/>
+      </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context>
+          <context context-type="linenumber">5</context>
+        </context-group>
+      </trans-unit>
       <trans-unit id="f058f4543f99ef3df799dbf3b579b67d2287317d" datatype="html">
         <source>Data Concentrator Units</source>
         <target state="final">Data Concentrator Units</target>
@@ -1819,7 +1808,7 @@
         <target state="final">Status</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">4</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">10</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">5</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">5</context></context-group></trans-unit>
       <trans-unit id="048a6a9904e85222c25d702aa7a575b4e86df0b4" datatype="html">
         <source>Meters</source>
         <target>Zähler</target>
@@ -1851,21 +1840,21 @@
         <target>Typ</target>
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">27</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/details/components/data-concentrator-detail.component.html</context><context context-type="linenumber">41</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/details/components/data-concentrator-detail.component.html</context><context context-type="linenumber">111</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/details/components/meter-unit-details.component.html</context><context context-type="linenumber">115</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">32</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">33</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/details/components/data-concentrator-detail.component.html</context><context context-type="linenumber">41</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/details/components/data-concentrator-detail.component.html</context><context context-type="linenumber">111</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/details/components/meter-unit-details.component.html</context><context context-type="linenumber">115</context></context-group></trans-unit>
       <trans-unit id="396974120fc614fc930a27c8d15a094d82a3a9e4" datatype="html">
         <source>Vendor</source>
         <target state="final">Vendor</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">26</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">31</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">27</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">27</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">26</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">37</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">27</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">27</context></context-group></trans-unit>
       <trans-unit id="337ca2e5eeea28eaca91e8511eb5eaafdb385ce6" datatype="html">
         <source>Tag</source>
         <target>Tag</target>
         
         
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">58</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">34</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">38</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">38</context></context-group></trans-unit>
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component.html</context><context context-type="linenumber">58</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">40</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/jobs/meter-units-for-job/components/grid-custom-components/grid-custom-filter.component.html</context><context context-type="linenumber">38</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">38</context></context-group></trans-unit>
       <trans-unit id="45cc8ca94b5a50842a9a8ef804a5ab089a38ae5c" datatype="html">
         <source>ID</source>
         <target>ID</target>
@@ -3879,47 +3868,23 @@
         <source>Show deleted Data Concentrator Units</source>
         <target state="final">Show deleted Data Concentrator Units</target>
         
-      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">37</context></context-group></trans-unit><trans-unit id="43130d4fd4c7ec39ea6dd101c9f97d4cb10c00f5" datatype="html">
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">43</context></context-group></trans-unit><trans-unit id="43130d4fd4c7ec39ea6dd101c9f97d4cb10c00f5" datatype="html">
         <source>Apply Filters</source><target state="final">Apply Filters</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context>
-          <context context-type="linenumber">40</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context>
-          <context context-type="linenumber">53</context>
-        </context-group>
-      </trans-unit><trans-unit id="46d83add16f907cff71b5b6133f9eb5c8888ed15" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">46</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">53</context></context-group></trans-unit><trans-unit id="46d83add16f907cff71b5b6133f9eb5c8888ed15" datatype="html">
         <source>Clear Filters</source><target state="final">Clear Filters</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context>
-          <context context-type="linenumber">43</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context>
-          <context context-type="linenumber">56</context>
-        </context-group>
-      </trans-unit><trans-unit id="716b7035a5ccdcca052bc3a11443c2ca7cb344e0" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">49</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">56</context></context-group></trans-unit><trans-unit id="716b7035a5ccdcca052bc3a11443c2ca7cb344e0" datatype="html">
         <source>Save Filter Set</source><target state="final">Save Filter Set</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context>
-          <context context-type="linenumber">46</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context>
-          <context context-type="linenumber">59</context>
-        </context-group>
-      </trans-unit><trans-unit id="23db61487b4ed86148880776328ff5b84a9f5bff" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">52</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">59</context></context-group></trans-unit><trans-unit id="23db61487b4ed86148880776328ff5b84a9f5bff" datatype="html">
         <source>Saved Filter Sets</source><target state="final">Saved Filter Sets</target>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context>
-          <context context-type="linenumber">50</context>
-        </context-group>
-        <context-group purpose="location">
-          <context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context>
-          <context context-type="linenumber">63</context>
-        </context-group>
-      </trans-unit><trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
+        
+        
+      <context-group purpose="location"><context context-type="sourcefile">app/features/data-concentrator-units/components/filter-form/dc-filter.component.html</context><context context-type="linenumber">56</context></context-group><context-group purpose="location"><context context-type="sourcefile">app/features/meter-units/types/components/filter-form/meter-unit-filter.component.html</context><context context-type="linenumber">63</context></context-group></trans-unit><trans-unit id="28f86ffd419b869711aa13f5e5ff54be6d70731c" datatype="html">
         <source>Edit</source><target state="final">Edit</target>
         <context-group purpose="location">
           <context context-type="sourcefile">app/features/data-concentrator-units/details/components/data-concentrator-detail.component.html</context>
