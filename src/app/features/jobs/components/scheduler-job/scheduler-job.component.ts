@@ -96,6 +96,7 @@ export class SchedulerJobComponent implements OnInit {
       if (this.selectedJobId) {
         this.jobsService.getJob(this.selectedJobId).subscribe(data => {
           this.selectedId = data.readOptions;
+          this.monthDays = data.monthDays;
           this.form = this.createForm(data);
           this.changeReadOptionId();
           this.form.get(this.registersProperty).clearValidators();
@@ -185,6 +186,7 @@ export class SchedulerJobComponent implements OnInit {
         // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
         if (addNew) {
           this.resetAll();
+          this.ngOnInit();
         } else {
           this.modal.close();
         }
@@ -211,8 +213,7 @@ export class SchedulerJobComponent implements OnInit {
     this.form.get(this.monthDaysProperty).setValidators(this.showMonthDays() ? [Validators.required] : []);
 
     if (this.showMonthDays()) {
-      const realMonthDays = this.monthDays.map(day => (day = day + 1));
-      const daysSorted = realMonthDays.sort((a, b) => a - b);
+      const daysSorted = this.monthDays.sort((a, b) => a - b);
 
       this.noMonthDays = daysSorted.length === 0;
       this.form.get(this.monthDaysProperty).setValue(daysSorted);
@@ -226,20 +227,19 @@ export class SchedulerJobComponent implements OnInit {
     } else {
       _.remove(this.monthDays, x => x === dayinMonth);
     }
-    const realMonthDays = this.monthDays.map(day => (day = day + 1));
-    const daysSorted = realMonthDays.sort((a, b) => a - b);
+    const daysSorted = this.monthDays.sort((a, b) => a - b);
+
     this.noMonthDays = daysSorted.length === 0;
     this.form.get(this.monthDaysProperty).setValue(daysSorted);
   }
 
   isDayInMonthSelected(index: number) {
-    let isChecked = false;
     for (const dayNo of this.monthDays) {
       if (dayNo === index) {
-        isChecked = true;
+        return true;
       }
     }
-    return isChecked;
+    return false;
   }
 
   registerSelectionChanged(hasValues: boolean) {

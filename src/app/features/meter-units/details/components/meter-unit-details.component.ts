@@ -32,18 +32,22 @@ import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limi
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
 import { guid } from '@progress/kendo-angular-common';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
+import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html'
 })
 export class MeterUnitDetailsComponent implements OnInit {
   private deviceId;
-  private saveError;
+  public saveError;
 
   private messageActionInProgress = this.i18n(`Action in progress!`);
   private messageServerError = this.i18n(`Server error!`);
 
   private requestModel;
+
+  private typeId;
+  private typeName;
 
   public editMode = false;
   public data: MeterUnitDetails;
@@ -65,7 +69,8 @@ export class MeterUnitDetailsComponent implements OnInit {
     private modalService: ModalService,
     private bulkService: MyGridLinkService,
     private toast: ToastNotificationService,
-    private plcActionsService: MeterUnitsPlcActionsService
+    private plcActionsService: MeterUnitsPlcActionsService,
+    private codeList: CodelistMeterUnitsRepositoryService
   ) {
     breadcrumbService.setPageName('Meter Unit');
   }
@@ -121,6 +126,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   saveMeterUnit() {
+    this.saveError = null;
+
     const muFormData = this.fillData();
     const request = this.meterUnitsService.updateMuFromForm(muFormData);
     const successMessage = this.i18n(`Meter Unit was updated successfully`);
@@ -154,6 +161,12 @@ export class MeterUnitDetailsComponent implements OnInit {
       this.form = this.createForm();
       // this.setFormType();
       // this.setFormVendor();
+      this.typeId = response.type === 0 ? 1 : response.type; // TODO remove this after BE fix.
+
+      this.codeList.meterUnitTypeCodelist().subscribe(list => {
+        this.typeName = list.find(l => l.id === this.typeId).value;
+        this.setBreadcrumbs();
+      });
     });
   }
 
@@ -267,6 +280,32 @@ export class MeterUnitDetailsComponent implements OnInit {
     });
   }
 
+  setBreadcrumbs() {
+    const breadcrumbs: Breadcrumb[] = [
+      {
+        label: this.i18n('Meters'),
+        params: {},
+        url: null
+      }
+    ];
+
+    if (this.typeId && this.typeName) {
+      breadcrumbs.push({
+        label: this.i18n(this.typeName),
+        params: {},
+        url: `/meterUnits/${this.typeId}`
+      });
+    }
+
+    breadcrumbs.push({
+      label: this.i18n('Meter Unit'),
+      params: {},
+      url: null
+    });
+
+    this.breadcrumbService.setBreadcrumbs(breadcrumbs);
+  }
+
   // setFormType() {
   //   if (this.data) {
   //     if (this.muTypes) {
@@ -291,72 +330,73 @@ export class MeterUnitDetailsComponent implements OnInit {
   // }
 
   // --> Operations action click
-  onBreakerStatus(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onBreakerStatus() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.breakerStatus, params, 1);
   }
 
-  onActivateUpgrade(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onActivateUpgrade() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.activateUpgrade, params, 1);
   }
 
-  onConnect(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onConnect() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.connect, params, 1);
   }
 
-  onDisconnect(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onDisconnect() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.disconnect, params, 1);
   }
 
-  onClearFF(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onClearFF() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearFF, params, 1);
   }
 
   // delete button click
   // TODO missing BE api !!
-  onDelete(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onDelete() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.delete, params, 1);
   }
 
   // popup
-  onScheduleReadJobs(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onScheduleReadJobs() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onScheduleReadJobs(params);
   }
 
   // popup
-  onTou(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onTou() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onTou(params);
   }
 
   // popup
-  onUpgrade(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onUpgrade() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onUpgrade(params);
   }
 
   // popup
-  onSetMonitor(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onSetMonitor() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onSetMonitor(params);
   }
 
   // popup
-  onSetLimiter(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onSetLimiter() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onSetLimiter(params);
   }
 
   // popup
-  onBreakerMode(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+  onBreakerMode() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onBreakerMode(params);
   }
+
   // <-- end Operations action click (bulk or selected row)
 }

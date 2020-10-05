@@ -5,10 +5,14 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestSetLimiter, LimiterDefinitions } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import {
+  RequestSetLimiter,
+  LimiterDefinitions,
+  ResponseCommonRegisterGroup
+} from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { Observable } from 'rxjs/internal/Observable';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
 
 @Component({
   selector: 'app-plc-meter-limiter',
@@ -20,14 +24,15 @@ export class PlcMeterLimiterComponent implements OnInit {
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
   excludeIdsParam?: string[];
-  registers$: Observable<Codelist<string>[]>;
+  registers$: Codelist<string>[];
 
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private i18n: I18n,
     private modal: NgbActiveModal,
-    private myGridService: MyGridLinkService
+    private myGridService: MyGridLinkService,
+    private setLimiterService: PlcMeterSetLimiterService
   ) {
     this.form = this.createForm();
   }
@@ -48,24 +53,31 @@ export class PlcMeterLimiterComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.registers$ = this.myGridService.getLimiterRegisters({
-      deviceIds: this.deviceIdsParam,
-      filter: this.filterParam,
-      search: this.searchParam,
-      excludeIds: this.excludeIdsParam,
-      /// for test ony that two devices are working on test environment '8EC1791C-E99C-499D-823A-D3F821B77097', '8E520D4A-3B9A-4F1B-B3DB-A6D95D8057F0'
-      groupType: 10 // fixed id - defined in task LU-62 !!!
-    });
+    this.myGridService
+      .getCommonRegisterGroup({
+        deviceIds: this.deviceIdsParam,
+        filter: this.filterParam,
+        search: this.searchParam,
+        excludeIds: this.excludeIdsParam,
+        type: '10'
+      })
+      .subscribe((result: ResponseCommonRegisterGroup[]) => {
+        if (result && result.length > 0) {
+          this.registers$ = this.setLimiterService.getListOfRegisterDefinitionNames(result);
+        }
+      });
   }
 
   fillData(): RequestSetLimiter {
-    const data: LimiterDefinitions = {
-      thresholdNormal: this.form.get(this.tresholdNormalProperty).value,
-      thresholdEmergency: this.form.get(this.tresholdEmergencyProperty).value,
-      minOverThresholdDuration: this.form.get(this.minOverTresholdDurationProperty).value,
-      minUnderThresholdDuration: this.form.get(this.minUnderTresholdDurationProperty).value,
-      registerGroupId: this.form.get(this.registerProperty).value.id
-    };
+    const data: LimiterDefinitions[] = [
+      {
+        thresholdNormal: this.form.get(this.tresholdNormalProperty).value,
+        thresholdEmergency: this.form.get(this.tresholdEmergencyProperty).value,
+        minOverThresholdDuration: this.form.get(this.minOverTresholdDurationProperty).value,
+        minUnderThresholdDuration: this.form.get(this.minUnderTresholdDurationProperty).value,
+        registerGroupId: this.form.get(this.registerProperty).value.value
+      }
+    ];
 
     const formData: RequestSetLimiter = {
       limiterDefinitions: data,
@@ -108,7 +120,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.setLimiter(values);
-    const successMessage = this.i18n(`Meter Units set Limiter was successfully`);
+    const successMessage = this.i18n(`Meter Units set Limiter was successful`);
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

@@ -341,7 +341,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex().startRow;
         that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
-        console.log(`requestModel = `, that.requestModel);
+
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
         if (that.authService.isRefreshNeeded2()) {

@@ -17,12 +17,17 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { of } from 'rxjs';
+import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
 })
 export class MeterUnitRegistersComponent implements OnInit {
   private selectedRegister: AutoTemplateRegister;
+  private typeId: number;
+  private typeName: string;
+
   public isRangeCustom = false;
 
   public selectedRange: RadioOption;
@@ -58,7 +63,8 @@ export class MeterUnitRegistersComponent implements OnInit {
     private dataProcessingService: DataProcessingService,
     private breadcrumbService: BreadcrumbService,
     private muService: MeterUnitsService,
-    private formUtils: FormsUtilsService
+    private formUtils: FormsUtilsService,
+    private codeList: CodelistMeterUnitsRepositoryService
   ) {
     // this.formData =  this.createForm();
     // this.form = this.createForm();
@@ -177,7 +183,39 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.muService.getMeterUnit(this.deviceId).subscribe(result => {
       this.setTitle(result.name);
+      this.typeId = result.type === 0 ? 1 : result.type; // TODO remove this after BE fix.
+
+      this.codeList.meterUnitTypeCodelist().subscribe(list => {
+        this.typeName = list.find(l => l.id === this.typeId).value;
+        this.setBreadcrumbs();
+      });
     });
+  }
+
+  setBreadcrumbs() {
+    const breadcrumbs: Breadcrumb[] = [
+      {
+        label: this.i18n('Meters'),
+        params: {},
+        url: null
+      }
+    ];
+
+    if (this.typeId && this.typeName) {
+      breadcrumbs.push({
+        label: this.i18n(this.typeName),
+        params: {},
+        url: `/meterUnits/${this.typeId}`
+      });
+    }
+
+    breadcrumbs.push({
+      label: this.i18n('Data view'),
+      params: {},
+      url: null
+    });
+
+    this.breadcrumbService.setBreadcrumbs(breadcrumbs);
   }
 
   setTitle(title) {
@@ -202,7 +240,16 @@ export class MeterUnitRegistersComponent implements OnInit {
   setRegisters() {
     this.autoTemplateService.getRegisters(this.deviceId).subscribe(reg => {
       this.deviceRegisters = reg;
-      this.registers = this.deviceRegisters.map(r => ({ id: r.registerDefinitionId, value: r.name }));
+      this.registers = this.deviceRegisters
+        .map(r => ({ id: r.registerDefinitionId, value: r.name }))
+        .sort((r1, r2) => {
+          if (r1.value < r2.value) {
+            return -1;
+          } else if (r1.value === r2.value) {
+            return 0;
+          }
+          return 1;
+        });
     });
   }
 
@@ -221,7 +268,6 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   showData() {
-    console.log('show data clicked');
     this.fillData();
 
     this.registersFilter = {

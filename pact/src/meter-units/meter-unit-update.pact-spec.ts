@@ -29,7 +29,6 @@ describe('Pact consumer test', () => {
   const deviceId = '32A7C6B2-DC94-498C-9437-2607E833D06E';
 
   const requestBody: MuUpdateRequest = {
-    deviceId,
     name: 'Test MU Update 1',
     address: 'Address 1',
     serialNumber: 'SerialNo1',

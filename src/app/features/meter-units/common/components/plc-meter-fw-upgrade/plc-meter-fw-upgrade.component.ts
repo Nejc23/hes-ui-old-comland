@@ -30,10 +30,11 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
   excludeIdsParam?: string[];
-  uploadSaveUrl = `${environment.apiUrl}${fwUploadFile}`;
+  uploadSaveUrl = `${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = 'can only upload one file.';
+  acceptExtensions = '.img';
   public files: Array<any>;
   activate = false;
 

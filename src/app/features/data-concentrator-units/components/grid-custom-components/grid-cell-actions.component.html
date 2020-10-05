@@ -1,7 +1,7 @@
 <div class="d-flex row-actions justify-content-end" >
-  <div class="btn-group-sm">
+  <div class="btn-group-sm" container="body" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('details')">
     <button 
         type="button" class="btn btn-primary m-0" (click)="toDetails()"><i class="far fa-eye"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('details')"></i></button>    
+        ></i></button>    
   </div>  
 </div>

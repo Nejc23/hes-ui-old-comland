@@ -32,6 +32,10 @@ export class BreadcrumbComponent implements OnInit {
     this.service.eventEmitterSetPageName.subscribe(pageName => {
       this.pageName = pageName;
     });
+
+    this.service.eventEmitterSetBreadcrumbs.subscribe(breadcrumbs => {
+      this.breadcrumbs = breadcrumbs;
+    });
   }
 
   private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Array<Breadcrumb> = []): Array<Breadcrumb> {

@@ -233,7 +233,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
-    console.log('grid is ready');
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.gridApi.sizeColumnsToFit();
@@ -631,7 +630,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   addDcu() {
     const modalRef = this.modalService.open(AddDcuFormComponent);
-    modalRef.result.then().catch(() => {});
+    modalRef.result
+      .then(result => {
+        this.refreshGrid();
+      })
+      .catch(() => {});
   }
 
   // TODO

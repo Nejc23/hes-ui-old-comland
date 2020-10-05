@@ -30,7 +30,7 @@ describe('Pact consumer test', () => {
     const responseBody: Codelist<number>[] = [
       {
         id: 1,
-        value: 'Enerdat'
+        value: 'Metricsx'
       },
       {
         id: 2,

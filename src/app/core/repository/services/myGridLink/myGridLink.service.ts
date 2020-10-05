@@ -34,7 +34,6 @@ import {
   triggerDeviceUpgrade,
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
   onDemandSetMonitor,
-  getRegisters,
   onDemandSetLimiter,
   onDemandSetBreakerMode,
   onDemandClearFF,
@@ -158,15 +157,6 @@ export class MyGridLinkService {
 
   setMonitorRequest(payload: RequestSetMonitor): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetMonitor}`, payload);
-  }
-
-  // trigger set limter
-  getLimiterRegisters(request: RequestLimiterGetRegisters): Observable<Codelist<string>[]> {
-    return this.repository.makeRequest(this.getLimiterRegistersRequest(request));
-  }
-
-  getLimiterRegistersRequest(request: RequestLimiterGetRegisters): HttpRequest<any> {
-    return new HttpRequest('POST', `${enumMyGridLink.templating}${getRegisters}`, request);
   }
 
   // trigger set limiter

@@ -9,7 +9,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { companies } from 'src/app/core/repository/consts/authentication-endpoint-url.const';
 import { jobsReadingJobs } from 'src/app/core/repository/consts/jobs.const';
 import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
-import { getRegisters, enumMyGridLink } from 'src/app/core/repository/consts/my-grid-link.const';
+import { enumMyGridLink } from 'src/app/core/repository/consts/my-grid-link.const';
 
 @Injectable()
 export class CodelistInterceptor {
@@ -157,7 +157,7 @@ export class CodelistInterceptor {
       data = [
         {
           id: 1,
-          value: 'Enerdat'
+          value: 'Metricsx'
         },
         {
           id: 2,
@@ -172,7 +172,7 @@ export class CodelistInterceptor {
       data = [
         {
           id: 1,
-          value: 'Enerdat'
+          value: 'Metricsx'
         }
       ];
     }
@@ -214,29 +214,6 @@ export class CodelistInterceptor {
         id: '55-3434-4344-3444',
         value: 'reading job 5',
         nextRun: '2021-02-2T08:30:30+00:00'
-      }
-    ];
-
-    return of(
-      new HttpResponse({
-        status: 200,
-        body: data
-      })
-    );
-  }
-
-  static canInterceptGetRegisters(request: HttpRequest<any>): boolean {
-    return new RegExp(`${enumMyGridLink.templating}${getRegisters}`).test(request.url) && request.method.endsWith('POST');
-  }
-  static interceptGetRegisters(): Observable<HttpEvent<any>> {
-    const data: Codelist<string>[] = [
-      {
-        id: '3323-3434-4344-443',
-        value: 'reading job 1'
-      },
-      {
-        id: '55-3434-4344-35',
-        value: 'reading job 2'
       }
     ];
 

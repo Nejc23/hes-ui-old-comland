@@ -56,7 +56,11 @@ export class TouConfigSelectComponent implements OnInit {
     this.rowData$ = this.registersSelectService.getTouConfigList();
     this.rowData$.subscribe(x => {
       this.rowData = x;
-      this.totalCount = x.length;
+      if (x) {
+        this.totalCount = x.length;
+      } else {
+        this.totalCount = 0;
+      }
     });
   }
 
