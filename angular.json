@@ -46,7 +46,6 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.js"
             ],
-            "es5BrowserSupport": false,
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles/brand/default"
