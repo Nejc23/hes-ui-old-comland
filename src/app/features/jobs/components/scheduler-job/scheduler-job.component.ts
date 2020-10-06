@@ -21,7 +21,7 @@ import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common
   templateUrl: './scheduler-job.component.html'
 })
 export class SchedulerJobComponent implements OnInit {
-  @ViewChild(RegistersSelectComponent, { static: false }) registers;
+  @ViewChild(RegistersSelectComponent) registers;
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 

@@ -23,7 +23,7 @@ import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common
   templateUrl: './scheduler-discovery-job.component.html'
 })
 export class SchedulerDiscoveryJobComponent implements OnInit {
-  @ViewChild(DataConcentratorUnitsSelectComponent, { static: false }) listOfDCUs: DataConcentratorUnitsSelectComponent;
+  @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 

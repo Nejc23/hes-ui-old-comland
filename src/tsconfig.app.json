@@ -12,12 +12,11 @@
       ]
     }
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "debug/"
+  "files": [
+    "main.ts",
+    "polyfills.ts"
   ],
   "include": [
-    "./**/*.ts"
+    "./**/*.d.ts"
   ]
 }

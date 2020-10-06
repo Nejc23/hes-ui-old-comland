@@ -4,6 +4,16 @@
   "newProjectRoot": "projects",
   "projects": {
     "myGrid": {
+      "i18n": {
+        "locales": {
+          "en": "src/assets/i18n/messages.en.xlf",
+          "sl": "src/assets/i18n/messages.sl.xlf",
+          "cs": "src/assets/i18n/messages.cs.xlf",
+          "de": "src/assets/i18n/messages.de.xlf",
+          "fr": "src/assets/i18n/messages.fr.xlf",
+          "it": "src/assets/i18n/messages.it.xlf"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,6 +27,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/myGrid",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -44,20 +55,29 @@
           },
           "configurations": {
             "develop": {
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
                 }
               ]
-            },
+            ,            "localize": [
+              "en"
+            ]
+},
             "develop-sl": {
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/locale.ts",
@@ -68,9 +88,15 @@
                   "with": "src/environments/brand/default/favicon.ico"
                 }
               ]
-            },
+            ,            "localize": [
+              "sl"
+            ]
+},
             "production": {
-              "outputPath": "dist/myGrid/en",
+            "localize": [
+              "en"
+            ],
+              "outputPath": "dist/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -95,15 +121,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
+              ]},
             "production-sl": {
-              "outputPath": "dist/myGrid/sl",
+            "localize": [
+              "sl"
+            ],
+              "outputPath": "dist/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -132,15 +160,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
+              ]},
             "production-cs": {
-              "outputPath": "dist/myGrid/cs",
+            "localize": [
+              "cs"
+            ],
+              "outputPath": "dist/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -169,15 +199,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
+              ]},
             "production-de": {
-              "outputPath": "dist/myGrid/de",
+            "localize": [
+              "de"
+            ],
+              "outputPath": "dist/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -206,15 +238,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
+              ]},
             "production-fr": {
-              "outputPath": "dist/myGrid/fr",
+            "localize": [
+              "fr"
+            ],
+              "outputPath": "dist/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -243,15 +277,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            }, 
+              ]}, 
             "production-it": {
-              "outputPath": "dist/myGrid/it",
+            "localize": [
+              "it"
+            ],
+              "outputPath": "dist/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -280,15 +316,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            },
+              ]},
             "staging-en": {
-              "outputPath": "dist/staging/myGrid/en",
+            "localize": [
+              "en"
+            ],
+              "outputPath": "dist/staging/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -313,15 +351,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
+              ]},
             "staging-sl": {
-              "outputPath": "dist/staging/myGrid/sl",
+            "localize": [
+              "sl"
+            ],
+              "outputPath": "dist/staging/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -350,15 +390,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
+              ]},
             "staging-cs": {
-              "outputPath": "dist/staging/myGrid/cs",
+            "localize": [
+              "cs"
+            ],
+              "outputPath": "dist/staging/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -387,15 +429,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
+              ]},
             "staging-de": {
-              "outputPath": "dist/staging/myGrid/de",
+            "localize": [
+              "de"
+            ],
+              "outputPath": "dist/staging/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -424,15 +468,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
+              ]},
             "staging-fr": {
-              "outputPath": "dist/staging/myGrid/fr",
+            "localize": [
+              "fr"
+            ],
+              "outputPath": "dist/staging/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -461,15 +507,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            },
+              ]},
             "staging-it": {
-              "outputPath": "dist/staging/myGrid/it",
+            "localize": [
+              "it"
+            ],
+              "outputPath": "dist/staging/myGrid",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -498,15 +546,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            },
+              ]},
             "staging-en-amera": {
-              "outputPath": "c:/inetpub/wwwroot/en",
+            "localize": [
+              "en"
+            ],
+              "outputPath": "c:/inetpub/wwwroot",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -535,16 +585,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
+              ]},
 
             "production-dev": {
-              "outputPath": "c:/inetpub/wwwroot/en",
+            "localize": [
+              "en"
+            ],
+              "outputPath": "c:/inetpub/wwwroot",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -565,17 +617,19 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]},
+            "develop-amera": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
-            "develop-amera": {
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
               "fileReplacements": [
                 {
                   "replace": "src/environments/brand/default/brand.ts",
@@ -586,6 +640,9 @@
                   "with": "src/environments/brand/amera/favicon.ico"
                 }
               ],
+            "localize": [
+              "sl"
+            ],
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/styles/brand/amera"
@@ -593,9 +650,12 @@
               }
             },
             "develop-ePointHES": {
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/brand/default/brand.ts",
@@ -606,6 +666,9 @@
                   "with": "src/environments/brand/ePointHES/favicon.ico"
                 }
               ],
+            "localize": [
+              "sl"
+            ],
               "stylePreprocessorOptions": {
                 "includePaths": [
                   "src/styles/brand/ePointHES"
@@ -614,7 +677,10 @@
             },
 
             "production-amera": {
-              "outputPath": "dist/amera/en",
+            "localize": [
+              "en"
+            ],
+              "outputPath": "dist/amera",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -648,16 +714,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
+              ]},
 
             "production-ePointHES": {
-              "outputPath": "dist/ePointHES/en",
+            "localize": [
+              "en"
+            ],
+              "outputPath": "dist/ePointHES",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -691,16 +759,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
+              ]},
 
             "production-sl-amera": {
-              "outputPath": "dist/amera/sl",
+            "localize": [
+              "sl"
+            ],
+              "outputPath": "dist/amera",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -738,15 +808,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
+              ]},
             "production-cs-amera": {
-              "outputPath": "dist/amera/cs",
+            "localize": [
+              "cs"
+            ],
+              "outputPath": "dist/amera",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -784,15 +856,17 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
+              ]},
             "production-de-amera": {
-              "outputPath": "dist/amera/de",
+            "localize": [
+              "de"
+            ],
+              "outputPath": "dist/amera",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -830,16 +904,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
+              ]},
 
             "production-fr-amera": {
-              "outputPath": "dist/amera/fr",
+            "localize": [
+              "fr"
+            ],
+              "outputPath": "dist/amera",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -877,16 +953,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            },
+              ]},
 
             "production-it-amera": {
-              "outputPath": "dist/amera/it",
+            "localize": [
+              "it"
+            ],
+              "outputPath": "dist/amera",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -924,16 +1002,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            },
+              ]},
 
             "production-sl-ePointHES": {
-              "outputPath": "dist/ePointHES/sl",
+            "localize": [
+              "sl"
+            ],
+              "outputPath": "dist/ePointHES",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -971,16 +1051,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
+              ]},
 
             "production-cs-ePointHES": {
-              "outputPath": "dist/ePointHES/cs",
+            "localize": [
+              "cs"
+            ],
+              "outputPath": "dist/ePointHES",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1018,16 +1100,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
+              ]},
 
             "production-de-ePointHES": {
-              "outputPath": "dist/ePointHES/de",
+            "localize": [
+              "de"
+            ],
+              "outputPath": "dist/ePointHES",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1065,16 +1149,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
+              ]},
 
             "production-fr-ePointHES": {
-              "outputPath": "dist/ePointHES/fr",
+            "localize": [
+              "fr"
+            ],
+              "outputPath": "dist/ePointHES",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1112,16 +1198,18 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            },
+              ]},
 
             "production-it-ePointHES": {
-              "outputPath": "dist/ePointHES/it",
+            "localize": [
+              "it"
+            ],
+              "outputPath": "dist/ePointHES",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1159,13 +1247,12 @@
                   "type": "initial",
                   "maximumWarning": "9mb",
                   "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            }
+              ]}
           }
         },
         "serve": {
@@ -1355,7 +1442,7 @@
   "defaultProject": "myGrid",
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "style": "scss"
     }
   }
 }
