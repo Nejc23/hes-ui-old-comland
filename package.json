@@ -82,6 +82,7 @@
     "moment": "^2.29.0",
     "ng-bootstrap": "^1.6.3",
     "ng-mocks": "^8.1.0",
+    "ngx-bootstrap": "^6.1.0",
     "ngx-cookie-service": "~2.1.0",
     "ngx-i18nsupport": "^0.17.1",
     "oidc-client": "^1.10.1",
