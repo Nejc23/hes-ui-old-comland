@@ -32,7 +32,7 @@
   },
   "private": true,
   "dependencies": {
-    "@ag-grid-community/angular": "~22.1.2",
+    "@ag-grid-community/angular": "~24.0.0",
     "@ag-grid-enterprise/all-modules": "^24.0.0",
     "@angular-devkit/build-angular": "~0.901.12",
     "@angular/animations": "~9.1.12",
@@ -92,7 +92,7 @@
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
-    "@ag-grid-community/core": "^23.0.2",
+    "@ag-grid-community/core": "^24.0.0",
     "@pact-foundation/karma-pact": "^2.2.0",
     "@pact-foundation/pact": "^8.2.6",
     "@pact-foundation/pact-node": "^8.6.2",
