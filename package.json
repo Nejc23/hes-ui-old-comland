@@ -81,7 +81,6 @@
     "lodash": "^4.17.20",
     "moment": "^2.29.0",
     "ng-bootstrap": "^1.6.3",
-    "ng-mock": "^0.10.10",
     "ng-mocks": "^8.1.0",
     "ngx-bootstrap": "^6.1.0",
     "ngx-cookie-service": "~2.1.0",
