@@ -30,6 +30,7 @@ import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-en
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
+import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -48,7 +49,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // grid variables
   columns = [];
   totalCount = 0;
-  filters = '';
+  filtersInfo: FiltersInfo;
   private layoutChangeSubscription: Subscription;
 
   // N/A
@@ -124,6 +125,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private router: Router,
     private plcActionsService: MeterUnitsPlcActionsService
   ) {
+    this.filtersInfo = {
+      isSet: false,
+      count: 0,
+      text: staticTextService.noFilterAppliedTekst
+    };
+
     this.setTitle(-1);
     this.paramsSub = route.params.subscribe(params => {
       this.id = params.id;
@@ -161,7 +168,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.filters = staticTextService.noFilterAppliedTekst;
     this.frameworkComponents = meterUnitsTypeGridService.setFrameworkComponents();
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions(this);
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
@@ -297,6 +303,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
+    this.deselectAll();
     if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedText()) {
       this.meterUnitsTypeGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
@@ -537,7 +544,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // fill text in header - about selected filters
   setFilterInfo() {
     const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-    this.filters = this.staticTextService.setfilterHeaderText(
+    this.filtersInfo = this.staticTextService.getFiltersInfo(
       filterInfo.name,
       filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
       filterInfo.vendorFilter ? true : false,
@@ -550,25 +557,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
       filterInfo.showDeletedMeterUnitsFilter,
       filterInfo.showMeterUnitsWithoutTemplateFilter,
-      filterInfo.showOnlyImageReadyForActivationFilter
-    );
-  }
-
-  isFilterSet(): boolean {
-    const filterInfo: MeterUnitsLayout = this.gridFilterSessionStoreService.getGridLayout(
-      this.sessionNameForGridFilter
-    ) as MeterUnitsLayout;
-    return (
-      (filterInfo.name !== '' && filterInfo.name !== undefined) ||
-      (filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0) ||
-      (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
-      (filterInfo.vendorFilter && filterInfo.vendorFilter.value !== undefined && filterInfo.vendorFilter.value !== '') ||
-      (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
-      (filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0) ||
-      (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
-      filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
-      filterInfo.showDeletedMeterUnitsFilter ||
-      filterInfo.showMeterUnitsWithoutTemplateFilter ||
       filterInfo.showOnlyImageReadyForActivationFilter
     );
   }
@@ -870,5 +858,13 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   showItem(deviceId: string) {
     this.router.navigate(['/meterUnits/details', deviceId]);
+  }
+
+  toggleFilter() {
+    this.hideFilter = !this.hideFilter;
+    this.gridColumnApi.autoSizeAllColumns();
+    window.onresize = () => {
+      this.gridApi.sizeColumnsToFit();
+    };
   }
 }

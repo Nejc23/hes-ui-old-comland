@@ -11,7 +11,7 @@
 
 <div class="row">
   <div class="col-2 filter-shadow" *ngIf="!hideFilter">
-    <app-dc-filter (filterChange)="reloadGrid()" (toggleFilter)="toggleFilter()"></app-dc-filter>
+    <app-dc-filter (filterChange)="reloadGrid(); deselectAll();" (toggleFilter)="toggleFilter()"></app-dc-filter>
   </div>
 
   <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
@@ -22,40 +22,18 @@
 
     <!-- row total items, selected filter name -->
     <div *ngIf="!noData">
-      <div class="d-flex justify-content-between mb-2">
-        <div class="d-flex align-items-center p-2 grid-actions">
-          <div class="mr-3" *ngIf="!selectedAtLeastOneRowOnGrid">
-            <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()" *ngIf="!noData">
-              <i class="far fa-plus"></i> <span i18n>Add</span>
-            </button>
+      <div class="mb-2">
+        <div class="grid-actions">
+          <app-action-form
+            [gridColumns]="columns"
+            [filtersInfo]="filtersInfo"
+            [isFilterOpened]="!hideFilter"
+            [selectedCount]="getSelectedCount()"
+            (searchChange)=searchData($event)
+            (refresh)="refreshGrid()"
+            (addDcu)="addDcu()"
+            (toggleFilter)="toggleFilter()">
 
-            <button type="button" class="btn btn-light pl-2 pr-2" [ngClass]="{'active': isFilterSet()}" (click)="toggleFilter()" [ngbTooltip]="hideShowFilter">
-              <i class="far fa-filter"></i>
-            </button>
-          </div>
-          <div class="mr-3" *ngIf="!checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-            <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
-                    ({{totalCount}})</a></strong></small>
-          </div>
-          <div class="mr-3" *ngIf="checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
-                      selected</span></a></strong></small>
-          </div>
-
-          <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
-          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
-          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button>
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionDCUUpgrade" type="button" class="btn btn-link" (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span
-              i18n>Upgrade</span></button>
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionDCUConfiguration" type="button" class="btn btn-link" (click)="onUploadConfiguration()"><i class="far fa-cogs"></i><span
-              i18n>Configuration</span></button>
-            </div>
-        </div>
-
-        <div class="p-2 d-flex align-items-center p-2 grid-actions">
-          <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end" [gridColumns]="columns">
           </app-action-form>
         </div>
       </div>
@@ -91,6 +69,23 @@
         (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)"
         [localeText]="localeText">
       </ag-grid-angular>
+
+      <div class="ag-paging-panel-selection">
+        <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
+          <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+            <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
+                    ({{totalCount}})</a></strong></small>
+          </div>
+
+          <div class="mr-3" *ngIf="checkSelectedAll()">
+            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
+                      selected</span></a></strong></small>
+          </div>
+        </div>
+      </div>
+
     </div>
 
     <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height: 30vh;">

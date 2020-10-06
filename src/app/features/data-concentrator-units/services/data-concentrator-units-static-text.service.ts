@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class DataConcentratorUnitsStaticTextService {
     return this.i18n('Next planned read') + ' ';
   }
 
-  setfilterHeaderText(
+  getFiltersInfo(
     filterName: string,
     status: boolean,
     readStatuses: boolean,
@@ -45,49 +46,63 @@ export class DataConcentratorUnitsStaticTextService {
     vendor: boolean,
     tag: boolean,
     showDeleted: boolean
-  ) {
-    let result = this.noFilterAppliedTekst;
+  ): FiltersInfo {
+    const result: FiltersInfo = {
+      isSet: false,
+      count: 0,
+      text: this.noFilterAppliedTekst
+    };
+
     let additionalString = '';
 
     if (filterName !== '' && filterName !== undefined) {
       additionalString = status || readStatuses || type || vendor || tag || showDeleted ? ' · ' : '';
-      result = filterName + additionalString;
+      result.text = filterName + additionalString;
     } else if (status || readStatuses || type || vendor || tag || showDeleted) {
-      result = '';
+      result.text = '';
     }
 
     if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag || showDeleted) {
-      result = result + this.i18n('Filtered by: ');
+      result.text += this.i18n('Filtered by: ');
     }
 
     if (status) {
       additionalString = readStatuses || type || vendor || tag || showDeleted ? ', ' : '';
-      result = result + this.i18n('status') + additionalString;
+      result.text += this.i18n('status') + additionalString;
+      result.count++;
     }
 
     if (readStatuses) {
       additionalString = type || vendor || tag || showDeleted ? ', ' : '';
-      result = result + this.i18n('read status') + additionalString;
+      result.text += this.i18n('read status') + additionalString;
+      result.count++;
     }
 
     if (type) {
       additionalString = vendor || tag || showDeleted ? ', ' : '';
-      result = result + this.i18n('type') + additionalString;
+      result.text += this.i18n('type') + additionalString;
+      result.count++;
     }
 
     if (vendor) {
       additionalString = tag || showDeleted ? ', ' : '';
-      result = result + this.i18n('vendor') + additionalString;
+      result.text += this.i18n('vendor') + additionalString;
+      result.count++;
     }
 
     if (tag) {
       additionalString = showDeleted ? ', ' : '';
-      result = result + this.i18n('tag') + additionalString;
+      result.text += this.i18n('tag') + additionalString;
+      result.count++;
     }
 
     if (showDeleted) {
-      result = result + this.i18n('show deleted');
+      result.text += this.i18n('show deleted');
+      result.count++;
     }
+
+    result.isSet = result.count > 0;
+
     return result;
   }
 }

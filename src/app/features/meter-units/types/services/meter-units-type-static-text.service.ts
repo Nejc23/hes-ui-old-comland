@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
+import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,7 @@ export class MeterUnitsTypeStaticTextService {
     return this.i18n('Next planned read') + ' ';
   }
 
-  setfilterHeaderText(
+  getFiltersInfo(
     filterName: string,
     status: boolean,
     vendor: boolean,
@@ -49,17 +50,22 @@ export class MeterUnitsTypeStaticTextService {
     showDeleted: boolean,
     showWithoutTemplate: boolean,
     showOnlyReadyForActivation: boolean
-  ) {
-    let result = this.noFilterAppliedTekst;
+  ): FiltersInfo {
+    const result: FiltersInfo = {
+      isSet: false,
+      count: 0,
+      text: this.noFilterAppliedTekst
+    };
+
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
         status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate
           ? ' · '
           : '';
-      result = filterName + additionalString;
+      result.text = filterName + additionalString;
     } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate) {
-      result = '';
+      result.text = '';
     }
 
     if (
@@ -74,58 +80,70 @@ export class MeterUnitsTypeStaticTextService {
       showDeleted ||
       showWithoutTemplate
     ) {
-      result = result + this.i18n('Filtered by: ');
+      result.text += this.i18n('Filtered by: ');
     }
 
     if (status) {
       additionalString =
         vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('status') + additionalString;
+      result.text += this.i18n('status') + additionalString;
+      result.count++;
     }
 
     if (vendor) {
       additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('vendor') + additionalString;
+      result.text += this.i18n('vendor') + additionalString;
+      result.count++;
     }
 
     if (tag) {
       additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('tag') + additionalString;
+      result.text += this.i18n('tag') + additionalString;
+      result.count++;
     }
 
     if (readStatuses) {
       additionalString = firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('read status') + additionalString;
+      result.text += this.i18n('read status') + additionalString;
+      result.count++;
     }
 
     if (firmware) {
       additionalString = breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('firmware') + additionalString;
+      result.text += this.i18n('firmware') + additionalString;
+      result.count++;
     }
 
     if (breakerState) {
       additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('breaker state') + additionalString;
+      result.text += this.i18n('breaker state') + additionalString;
+      result.count++;
     }
 
     if (showChildMBus) {
       additionalString = showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('show child MBus') + additionalString;
+      result.text += this.i18n('show child MBus') + additionalString;
+      result.count++;
     }
 
     if (showDeleted) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('show deleted') + additionalString;
+      result.text += this.i18n('show deleted') + additionalString;
+      result.count++;
     }
 
     if (showWithoutTemplate) {
       additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result = result + this.i18n('show without template') + additionalString;
+      result.text += this.i18n('show without template') + additionalString;
+      result.count++;
     }
 
     if (showOnlyReadyForActivation) {
-      result = result + this.i18n('show only ready for activation');
+      result.text += this.i18n('show only ready for activation');
+      result.count++;
     }
+
+    result.isSet = result.count > 0;
 
     return result;
   }
