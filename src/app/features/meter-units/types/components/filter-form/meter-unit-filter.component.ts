@@ -43,6 +43,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   paramsSub: Subscription;
   id = 0;
 
+  @Output() toggleFilter = new EventEmitter();
+
   constructor(
     private codelistService: CodelistMeterUnitsRepositoryService,
     private mutService: MeterUnitsService,
@@ -259,5 +261,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
       return this.i18n('Range is not correct');
     }
+  }
+
+  doToggleFilter() {
+    this.toggleFilter.emit();
   }
 }

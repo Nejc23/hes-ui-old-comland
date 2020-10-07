@@ -1,22 +1,23 @@
 .filter-button {
     height: 100%;
     #filterToggle {
-      position:absolute; 
+      position:absolute;
       left: -1.0em;
       top: -1.5em;
       z-index: 900;
-      display: block;  
+      display: block;
       color: $white;
       background-color: $gray-700;
-    
+
       &:hover {
         background-color: $gray-900;
-      }      
-    }         
+      }
+    }
 }
 
 .filter-shadow {
+    margin-top: -1.5rem;
+    padding-top: 1.5rem;
     height: calc(100vh - 2.5rem - #{$topbar-base-height}) !important;// 100vh
-    box-shadow: 10px 0px 15px -10px rgba(0,0,0,0.2);
+    box-shadow: 5px 0px 15px -8px rgba(0,0,0,0.1);
 }
-    

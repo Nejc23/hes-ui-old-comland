@@ -1,5 +1,5 @@
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
@@ -27,8 +27,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: JobsService,
-    private eventService: SchedulerJobsEventEmitterService,
-    private cdRef: ChangeDetectorRef
+    private eventService: SchedulerJobsEventEmitterService
   ) {}
 
   // called on init

@@ -239,6 +239,8 @@
     border-top: none;
     font-size: $font-size-sm;
     color: $gray-900;
+    flex-wrap: wrap;
+    margin-left: 200px;
 
     &.ag-disabled {
       color: $text-muted;

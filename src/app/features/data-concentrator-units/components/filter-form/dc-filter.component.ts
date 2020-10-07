@@ -42,6 +42,8 @@ export class DcFilterComponent implements OnInit {
 
   sessionFilter: DcuLayout;
 
+  @Output() toggleFilter = new EventEmitter();
+
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
@@ -70,7 +72,7 @@ export class DcFilterComponent implements OnInit {
     this.dcuTags$ = of([]); // this.codelistService.dcuTagCodelist(); // TODO uncomment when implemented
     this.dcuTags$.subscribe(y => (this.dcuTags = y));
 
-    //this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
+    // this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
   }
 
   doFillData() {
@@ -208,7 +210,7 @@ export class DcFilterComponent implements OnInit {
 
     this.filterChange.emit();
     // close tool-panel
-    //this.params.api.closeToolPanel();
+    // this.params.api.closeToolPanel();
   }
 
   errorValidatorReadStatusComponents() {
@@ -217,5 +219,9 @@ export class DcFilterComponent implements OnInit {
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
       return this.i18n('Range is not correct');
     }
+  }
+
+  doToggleFilter() {
+    this.toggleFilter.emit();
   }
 }

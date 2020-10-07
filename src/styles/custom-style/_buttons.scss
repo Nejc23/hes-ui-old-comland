@@ -40,10 +40,18 @@
   &.btn-link {
     color: $primary;
     font-weight: $font-weight-bold;
-  
+
     &:hover {
       color: darken($primary, 15%);
     }
+  }
+
+  .badge {
+    position:absolute;
+    top:4px;
+    right:3px;
+    font-size:10px;
+    padding: 2px 2px 1px 2px;
   }
 }
 
@@ -57,6 +65,7 @@
     }
   }
 }
+
 
 
 

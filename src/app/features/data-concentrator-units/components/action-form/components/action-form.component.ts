@@ -1,3 +1,4 @@
+import { FiltersInfo } from '../../../../../shared/forms/interfaces/filters-info.interface';
 import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
 import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -24,6 +25,14 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   @Output() searchChange = new EventEmitter<string>();
   @Input() gridColumns = [];
   subscription: Subscription;
+
+  @Input() filtersInfo: FiltersInfo;
+  @Input() isFilterOpened = false;
+
+  @Input() selectedCount = 0;
+
+  @Output() addDcu: EventEmitter<void> = new EventEmitter<void>();
+  @Output() toggleFilter: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('modalFilter', { static: true }) input;
 
@@ -134,5 +143,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
           this.columns$.push({ id: element.field, value: element.headerName });
         });
     }
+  }
+
+  doToggleFilter() {
+    this.toggleFilter.emit();
   }
 }
