@@ -31,9 +31,6 @@
   </div>
   <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
     <div>
-      <!-- <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
-        <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
-      </a> -->
       <div class="d-flex pb-2">
         <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hideFilter}" (click)="clickShowHideFilter()" [ngbTooltip]="hideShowFilters">
           <i class="far fa-ellipsis-v"></i>
