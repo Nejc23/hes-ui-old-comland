@@ -150,10 +150,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     return FunctionalityEnumerator.DCU;
   }
 
-  doAddDcu() {
-    this.addDcu.emit();
-  }
-
   doToggleFilter() {
     this.toggleFilter.emit();
   }

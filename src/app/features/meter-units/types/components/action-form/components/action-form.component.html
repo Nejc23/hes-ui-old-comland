@@ -21,6 +21,8 @@
   <button type="button" class="btn btn-light pl-2 pr-2" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
     <i class="far fa-redo"></i></button>
 
+  <ng-content></ng-content>
+
   <div class="ml-auto">
     <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
       [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>

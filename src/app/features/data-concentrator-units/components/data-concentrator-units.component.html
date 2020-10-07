@@ -33,7 +33,9 @@
             (refresh)="refreshGrid()"
             (addDcu)="addDcu()"
             (toggleFilter)="toggleFilter()">
-
+            <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary ml-3 mr-2" (click)="addDcu()" *ngIf="getSelectedCount() === 0">
+              <i class="far fa-plus"></i> <span i18n>Add</span>
+            </button>
           </app-action-form>
         </div>
       </div>
