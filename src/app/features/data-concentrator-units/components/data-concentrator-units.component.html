@@ -1,24 +1,9 @@
-<!-- header -->
-
-<!--<div class="d-flex align-items-center mb-3">
-  <app-header-title [headerTitle]="headerTitle"></app-header-title>
-  <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary btn-round" (click)="addDcu()" *ngIf="!noData">
-    <i class="far fa-plus"></i>
-  </button>
-  <app-breadcrumb class="ml-auto"></app-breadcrumb>
-</div>-->
-
-
 <div class="row">
   <div class="col-2 filter-shadow" *ngIf="!hideFilter">
     <app-dc-filter (filterChange)="reloadGrid(); deselectAll();" (toggleFilter)="toggleFilter()"></app-dc-filter>
   </div>
 
   <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
-    <!-- <button id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
-      <i class='far'
-         [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
-    </button> -->
 
     <!-- row total items, selected filter name -->
     <div *ngIf="!noData">
@@ -33,28 +18,16 @@
             (refresh)="refreshGrid()"
             (addDcu)="addDcu()"
             (toggleFilter)="toggleFilter()">
-            <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary ml-3 mr-2" (click)="addDcu()" *ngIf="getSelectedCount() === 0">
-              <i class="far fa-plus"></i> <span i18n>Add</span>
-            </button>
+            <div *ngIf="getSelectedCount() === 0" class="mr-3">
+              <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()">
+                <i class="far fa-plus"></i> <span i18n>Add</span>
+              </button>
+            </div>
+
           </app-action-form>
         </div>
       </div>
-<!--
-      <div class="d-flex align-items-center p-2 grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid">-->
-        <!--<small class="text-secondary">
-          {{totalCount}} <span i18n>items</span> &middot; {{filters}}
-          <a class="ml-3" *ngIf="isFilterSet()" href="javascript:void(0);" (click)="clearFilter()"><span i18n>Clear all</span></a>
-        </small>-->
-    <!--    <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()" *ngIf="!noData">
-          <i class="far fa-plus"></i> <span i18n>Add</span>
-        </button>
 
-      </div>
-
-      <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
-
-      </div>
-    -->
       <!-- ag-grid -->
       <ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
         [domLayout]=agGridSettings.domLayout suppressSizeToFit=agGridSettings.suppressSizeToFit [modules]="modules"

@@ -10,10 +10,6 @@
   </div>
 
   <div class="filter-button" [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
-  <!--  <button id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowFilters">
-      <i class='far'
-         [ngClass]="{'fa-compress-alt': !hideFilter, 'fa-expand-alt': hideFilter}"></i>
-    </button> -->
 
 <!-- row total items, selected filter name -->
 <div *ngIf="!noData">
@@ -28,9 +24,8 @@
         (refresh)="refreshGrid()"
         (toggleFilter)="toggleFilter()">
 
-        <div *ngIf="selectedAtLeastOneRowOnGrid">
-
-          <div class="btn-group ml-2">
+        <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
+          <div class="btn-group">
             <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
             <div class="dropdown-menu" style="min-width: 13rem">
               <div>
@@ -95,69 +90,11 @@
 
           <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-tags"></i><span i18n>Tags</span></button>
           <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-chart-bar" disabled></i><span i18n>Data</span></button>
-
         </div>
       </app-action-form>
     </div>
   </div>
 
-
-
-
-<!--
-
-  <div class="d-flex align-items-center p-2 bg-white grid-actions" *ngIf="!selectedAtLeastOneRowOnGrid">
-    <small class="text-secondary">
-      {{totalCount}} <span i18n>items</span> &middot; {{filters}}
-      <a class="ml-3" *ngIf="isFilterSet()" href="javascript:void(0);" (click)="clearFilter()"><span i18n>Clear all</span></a>
-    </small>
-    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
-  </div>
-
-  <div class="d-flex align-items-center p-2 bg-primary" *ngIf="selectedAtLeastOneRowOnGrid">
-    <div class="mr-3" *ngIf="!checkSelectedAll()">
-      <small class="text-white">{{gridApi.getSelectedRows().length}} <span i18n>items selected</span>  &middot;
-      <strong><u><a class="text-white" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span> ({{totalCount}})</a></u></strong></small>
-    </div>
-    <div class="mr-3" *ngIf="checkSelectedAll()">
-      <small class="text-white"><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
-      <strong><u><a class="text-white" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear selected</span></a></u></strong></small>
-    </div>
-    -->
-    <!-- <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onDelete()"><i class="far fa-trash"></i></button>
-    <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link" (click)="onTag()"><i class="far fa-tags"></i></button> -->
-
-    <!-- <div class="btn-group dropdown" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs">
-      <button  type="button" class="btn btn-link"
-        (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
-      <button type="button" class="btn btn-link dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
-      </button>
-      <div class="dropdown-menu dropdown-menu-right">
-        <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>Assign jobs</a>
-        <a class="dropdown-item" (click)="onScheduleReadJobs()" i18n>De-assign jobs</a>
-      </div>
-    </div> -->
-  <!--
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" type="button" class="btn btn-link"
-    (click)="onScheduleReadJobs()"><i class="far fa-calendar"></i><span i18n>Read Jobs</span></button>
-
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" type="button" class="btn btn-link"
-            (click)="onBreakerStatus()"><i class="far fa-list-alt"></i><span i18n>Breaker Status</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" type="button" class="btn btn-link"
-            (click)="onConnect()"><i class="far fa-plug"></i><span i18n>Connect</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" type="button" class="btn btn-link"
-            (click)="onDisconnect()"><i class="far fa-plug"></i><span i18n>Disconnect</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" type="button" class="btn btn-link"
-            (click)="onSetLimiter()"><i class="far fa-info-circle"></i><span i18n>Set Limiter</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" type="button" class="btn btn-link"
-            (click)="onTou()"><i class="far fa-cog"></i><span i18n>TOU</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
-            (click)="onUpgrade()"><i class="far fa-arrow-alt-square-up"></i><span i18n>Upgrade</span></button>
-    <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" type="button" class="btn btn-link"
-            (click)="onActivateUpgrade()"><i class="far fa-level-up"></i><span i18n>Activate upgrade</span></button>
-  </div>
-  -->
   <!-- ag-grid -->
   <ag-grid-angular
     class="ag-theme-epoint"

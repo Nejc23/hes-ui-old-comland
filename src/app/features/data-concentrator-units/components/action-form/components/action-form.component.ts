@@ -9,7 +9,6 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SaveViewFormComponent } from '../../save-view-form/save-view-form.component';
 import { Subscription } from 'rxjs';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 
 @Component({
   selector: 'app-action-form',
@@ -144,10 +143,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
           this.columns$.push({ id: element.field, value: element.headerName });
         });
     }
-  }
-
-  get formFunctionality() {
-    return FunctionalityEnumerator.DCU;
   }
 
   doToggleFilter() {
