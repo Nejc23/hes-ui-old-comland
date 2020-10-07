@@ -1,7 +1,3 @@
-<!-- <div class="d-flex align-items-center mb-3">
-  <app-header-title [headerTitle]="headerTitle"></app-header-title>
-  <app-breadcrumb class="ml-auto"></app-breadcrumb>
-</div> -->
 <div class="row">
 <div class="col-2  filter-shadow" *ngIf="!hide">
   <div class="d-flex mb-3 mt-2">
@@ -18,16 +14,7 @@
   </div>
 </div>
 <div class="filter-button" [ngClass]="{'col-10': !hide, 'col-12': hide}">
-  <!-- <div class="d-flex align-items-center">
-  <h4 class="align-items-center mb-0 ml-3" *ngIf="hide">
-    {{activeElement.name}}
-  </h4>
-</div> -->
 <div class="d-flex align-items-center mb-3 mt-0">
-  <!-- <button id="filterToggle" class="btn btn-round position-absolute shadow" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
-    <i class='far'
-       [ngClass]="{'fa-compress-alt': !hide, 'fa-expand-alt': hide}"></i>
-  </button> -->
   <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hide}" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
     <i class="far fa-ellipsis-v"></i>
   </button>
@@ -38,8 +25,6 @@
     <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
       <i class="far fa-plus"></i> <span i18n>Add</span>
     </button>
-
-
 </div>
 
 <div>
