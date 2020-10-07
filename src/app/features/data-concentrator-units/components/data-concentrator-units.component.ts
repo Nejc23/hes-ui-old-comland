@@ -1,3 +1,4 @@
+import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
@@ -42,18 +43,19 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // grid variables
   columns = [];
   totalCount = 0;
-  filters = '';
+  filtersInfo: FiltersInfo;
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
   private subscription: Subscription;
   public localeText;
 
   // N/A
-  notAvailableText = this.staticextService.notAvailableTekst;
-  overlayNoRowsTemplate = this.staticextService.noRecordsFound;
-  overlayLoadingTemplate = this.staticextService.loadingData;
+  notAvailableText = this.staticTextService.notAvailableTekst;
+  overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
+  overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
   public hideFilter = false;
+  public filterCount = 0;
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -65,7 +67,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public frameworkComponents;
   public sideBar;
   loadGrid = true;
-  headerTitle = this.staticextService.headerTitleDCU;
+  headerTitle = this.staticTextService.headerTitleDCU;
 
   requestModel: GridRequestParams = {
     requestId: null,
@@ -89,7 +91,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
-    private staticextService: DataConcentratorUnitsStaticTextService,
+    private staticTextService: DataConcentratorUnitsStaticTextService,
     private i18n: I18n,
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
@@ -102,7 +104,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private gridColumnShowHideService: GridColumnShowHideService,
     private bredcrumbService: BreadcrumbService
   ) {
-    this.filters = staticextService.noFilterAppliedTekst;
+    this.filtersInfo = {
+      isSet: false,
+      count: 0,
+      text: staticTextService.noFilterAppliedTekst
+    };
+
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
     this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions();
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
@@ -195,7 +202,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // set momemnt text (next planned read) out of date and time
   setMomentNextPlannedReadTime(time: string) {
-    return this.staticextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
+    return this.staticTextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
   }
 
   // ag-grid
@@ -220,6 +227,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
+    this.deselectAll();
     if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
       this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
@@ -435,7 +443,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   setFilterInfo() {
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
 
-    this.filters = this.staticextService.setfilterHeaderText(
+    this.filtersInfo = this.staticTextService.getFiltersInfo(
       filter.name,
       filter.statusesFilter && filter.statusesFilter.length > 0,
       filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
@@ -649,7 +657,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     //
   }
 
-  clickShowHideFilter() {
+  toggleFilter() {
     this.hideFilter = !this.hideFilter;
     this.gridColumnApi.autoSizeAllColumns();
     window.onresize = () => {

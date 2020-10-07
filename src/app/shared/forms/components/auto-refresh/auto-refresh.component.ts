@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, Input, EventEmitter, ChangeDetectorRef, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, Input, EventEmitter, OnDestroy } from '@angular/core';
 import { Subscription, Observable, timer } from 'rxjs';
 import * as moment from 'moment';
 
