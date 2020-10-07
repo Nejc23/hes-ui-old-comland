@@ -11,20 +11,6 @@
           [autocompleteItemsAsObjects]="meterUnitStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
         </app-input-tag>
 
-     <!--   <div class="form-row">
-          <div class="col-6">
-            <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
-            </app-select-input>
-          </div>
-          <div class="col-3">
-            <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value1Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
-            [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
-          </div>
-          <div class="col-3" *ngIf="form.get(operationProperty).value != null &&  form.get(operationProperty).value.id === 'In Range'">
-            <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value2Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
-            [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
-          </div>
-        </div>-->
         <div class="form-row text-danger" *ngIf="!form.valid">
           <div class="col-6"></div>
           <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
@@ -48,12 +34,7 @@
         <app-input-switch label="Show only image ready for activation" [form]="form" [property]="showOnlyImageReadyForActivationProperty" i18n-label></app-input-switch>
 
       </fieldset>
-      <!--<div class="d-flex justify-content-end" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-        <button type="button" class="btn btn-link" (click)="clearButtonClicked()"><i class="far fa-times"></i><span i18n>Clear</span></button>
-        <button type="submit" class="btn btn-primary bg-primary" (click)="applyButtonClicked()"><i class="far fa-check"></i><span i18n>Apply</span></button>
-      </div>
-      <br/>
-    -->
+
       <div class="form-group" > <!--</div>*ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">      -->
         <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()"><span i18n>Apply Filters</span></button>
       </div>
