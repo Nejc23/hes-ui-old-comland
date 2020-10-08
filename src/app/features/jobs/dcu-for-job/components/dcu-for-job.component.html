@@ -1,89 +1,56 @@
 <div class="row">
-  <!-- <div class="col-2" *ngIf="!hideFilter">
-  </div>-->
   <div [ngClass]="'col-12'">
-    <!--
-    <a [ngbTooltip]="hidwShowFilters" href="javascript:void(0);" style="position:absolute; top:-20px" (click)="clickShowHideFilter()">
-        <i class="fa fa-arrow-right" [ngClass]="{'far fa-arrow-left': !hideFilter, 'far fa-arrow-right': hideFilter}" ></i>
-    </a> -->
+    <div *ngIf="!noData">
+      <div class="mb-2">
+        <div class="mb-2 grid-actions">
+          <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="">
+            <div *ngIf="selectedAtLeastOneRowOnGrid">
+              <div class="btn-group">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
+                  data-toggle="dropdown"><span i18n>Operations</span></button>
+                <div class="dropdown-menu" style="min-width: 13rem">
+                  <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
+                    (click)="onRemoveFromJob()"><i class="far fa-calendar"></i><span i18n>Remove from
+                      Job</span></button>
 
-<!-- row total items, selected filter name -->
-<div *ngIf="!noData">
-  <div class="d-flex justify-content-between mb-2">
-    <div class="d-flex align-items-center p-2 grid-actions">
-      <div class="mr-3" *ngIf="!selectedAtLeastOneRowOnGrid">
-        <small class="text-secondary">
-          {{totalCount}} <span i18n>items</span> &middot; {{filters}}
-          <a class="ml-3" *ngIf="isFilterSet()" href="javascript:void(0);" (click)="clearFilter()"><span i18n>Clear all</span></a>
-        </small>
+                </div>
+              </div>
+            </div>
+          </app-action-form>
+        </div>
       </div>
-      <div class="mr-3" *ngIf="!checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-        <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
-          <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
-                ({{totalCount}})</a></strong></small>
-      </div>
-      <div class="mr-3" *ngIf="checkSelectedAll() && selectedAtLeastOneRowOnGrid">
-        <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcludedDisplay()}}) items selected</span> &middot;
-          <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
-                  selected</span></a></strong></small>
-      </div>
-      <div *ngIf="selectedAtLeastOneRowOnGrid">
-
-        <div dropdown class="btn-group">
-         <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-          <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
-
-            <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
-              (click)="onRemoveFromJob()"><i class="far fa-calendar"></i><span i18n>Remove from Job</span></button>
-
+      <!-- ag-grid -->
+      <ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
+        [domLayout]=agGridSettings.domLayout suppressSizeToFit=agGridSettings.suppressSizeToFit
+        [localeText]="localeText" [modules]="modules" [icons]="icons" [pagination]=agGridSettings.pagination
+        [paginationPageSize]=agGridSettings.paginationPageSize [multiSortKey]=agGridSettings.multiSortKey
+        [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+        [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+        [frameworkComponents]="frameworkComponents" [cacheBlockSize]=agGridSettings.paginationPageSize
+        [maxBlocksInCache]="1" [gridOptions]="gridOptions" [columnDefs]="columns"
+        [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection [rowSelection]=agGridSettings.rowSelection
+        [overlayNoRowsTemplate]="overlayNoRowsTemplate" [overlayLoadingTemplate]="overlayLoadingTemplate"
+        (selectionChanged)="onSelectionChanged()" (gridReady)="onGridReady($event)"
+        (columnVisible)="onColumnVisible($event)" (toolPanelVisibleChanged)="toolPanelChanged($event)"
+        (paginationChanged)="onPaginationChange($event)" (rowSelected)="onRowSelect($event)"
+        (firstDataRendered)="onFirstDataRendered($event)">
+      </ag-grid-angular>
+      <div class="ag-paging-panel-selection">
+        <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
+          <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+            <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
+                <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
+                  ({{totalCount}})</a></strong></small>
+          </div>
+          <div class="mr-3" *ngIf="checkSelectedAll()">
+            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcludedDisplay()}}) items selected</span>
+                &middot;
+                <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
+                    selected</span></a></strong></small>
           </div>
         </div>
       </div>
     </div>
-    <div class="p-2 d-flex align-items-center p-2 grid-actions">
-      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
-    </div>
-
   </div>
-  <!-- ag-grid -->
-  <ag-grid-angular
-    class="ag-theme-epoint"
-    style="width: 100%; height: calc(100% - 25px);"
-    #agGrid
 
-    [domLayout]=agGridSettings.domLayout
-    suppressSizeToFit=agGridSettings.suppressSizeToFit
-    [localeText]="localeText"
-
-    [modules]="modules"
-    [icons]="icons"
-    [pagination]=agGridSettings.pagination
-
-    [paginationPageSize]=agGridSettings.paginationPageSize
-    [multiSortKey]=agGridSettings.multiSortKey
-    [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-    [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-    [frameworkComponents]="frameworkComponents"
-    [cacheBlockSize]=agGridSettings.paginationPageSize
-    [maxBlocksInCache]="1"
-    [gridOptions]="gridOptions"
-    [columnDefs]="columns"
-
-    [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
-    [rowSelection]=agGridSettings.rowSelection
-
-    [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-    [overlayLoadingTemplate]="overlayLoadingTemplate"
-    (selectionChanged)="onSelectionChanged()"
-    (gridReady)="onGridReady($event)"
-    (columnVisible)="onColumnVisible($event)"
-    (toolPanelVisibleChanged)="toolPanelChanged($event)"
-    (paginationChanged)="onPaginationChange($event)"
-    (rowSelected)="onRowSelect($event)"
-    (firstDataRendered)="onFirstDataRendered($event)"
-    >
-  </ag-grid-angular>
-</div>
-</div>
-
-<ng-template #tipMoreSave><span i18n>More options</span></ng-template>
+  <ng-template #tipMoreSave><span i18n>More options</span></ng-template>
