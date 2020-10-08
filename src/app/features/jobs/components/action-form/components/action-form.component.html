@@ -1,8 +1,13 @@
 <div class="d-flex">
-  <app-input-searcher class="mr-2" [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
-    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
-  <button type="button" class="btn btn-link" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
-      class="far fa-redo"></i></button>
+
+  <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
+    <i class="far fa-redo"></i></button>
+  <ng-content></ng-content>
+  <div class="ml-auto">
+    <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
+      [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"></app-input-searcher>
+  </div>
+
   <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
     <button type="button" class="btn btn-link" [ngbTooltip]="tipContentExport"><i class="far fa-file-excel"></i></button>
   </div>
