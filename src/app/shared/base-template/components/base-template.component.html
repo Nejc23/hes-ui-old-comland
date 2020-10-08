@@ -24,19 +24,23 @@
       [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
       (mouseleave)="mouseLeavesNav()">
 
-      <button @navItemsTrigger id="sidebarToggle" class="btn btn-round position-absolute shadow"
-        *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
-        (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed">
-        <i class='far'
-          [ngClass]="{'fa-compress-alt': !app.layout.isMenuCollapsed, 'fa-expand-alt': app.layout.isMenuCollapsed}"></i>
-      </button>
+      <div class="brand d-flex align-items-center mb-4">
+        <div class="ml-2" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
+          <img class="brand-logo" [src]="getMenuMainLogoUrl()">
+        </div>
 
-      <div class="brand d-flex justify-content-center align-items-center mb-4">
-        <img class="brand-logo" [src]="getMenuMainLogoUrl()" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
-        <span @navItemsTrigger *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
-          class="brand-name">
-          <img [src]="getSmallLogoUrl()">
-        </span>
+
+        <div @navItemsTrigger *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
+            class="ml-2 brand-name">
+            <img [src]="getSmallLogoUrl()">
+        </div>
+        <div @navItemsTrigger class="ml-auto mr-1"  *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+          <a class="sidebar-light p-0" [ngClass]="{'text-black-50': app.layout.isMenuCollapsed }" href="javascript:void(0);"
+            (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed" [ngbTooltip]="tipContentMenu">
+            <i class="far fa-bars"></i>
+          </a>
+        </div>
+
       </div>
       <!-- Sidebar Toggler (Sidebar) -->
 
@@ -78,3 +82,5 @@
   </div>
   <!-- End of Page Wrapper -->
 </body>
+
+<ng-template #tipContentMenu><span i18n>Pin/collapse menu</span></ng-template>
