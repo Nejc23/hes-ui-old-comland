@@ -41,7 +41,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="!showNoData">
+    <div *ngIf="!showNoData && rowData">
       <div class="row mb-5" *ngIf="showLineChart">
         <div class="col-12">
           <app-registers-chart [filter]="registersFilter"></app-registers-chart>
