@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FormErrorComponent } from './components/form-error/form-error.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { InputToggleComponent } from './components/input-toggle/input-toggle.component';
 import { InputTextareaComponent } from './components/input-textarea/input-textarea.component';
 import { InputRadioComponent } from './components/input-radio/input-radio.component';
@@ -77,7 +78,17 @@ import { FileSelectComponent } from './components/file-select/file-select.compon
     FileUploadComponent,
     FileSelectComponent
   ],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NgbModule, DropDownsModule, InputsModule, DateInputsModule, UploadsModule]
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NgbModule,
+    BsDropdownModule.forRoot(),
+    DropDownsModule,
+    InputsModule,
+    DateInputsModule,
+    UploadsModule
+  ]
 })
 export class CustomFormsModule {
   static forRoot(): ModuleWithProviders<CustomFormsModule> {

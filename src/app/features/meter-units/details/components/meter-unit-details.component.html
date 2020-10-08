@@ -5,10 +5,10 @@
       <button class="btn btn-primary" (click)="editMeterUnit()">
         <i class="far fa-edit"></i><span i18n>Edit</span>
       </button>
-      <div class="btn-group">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
+      <div dropdown class="btn-group">
+        <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
           data-toggle="dropdown"><span i18n>Operations</span></button>
-        <div class="dropdown-menu">
+        <div *dropdownMenu class="dropdown-menu">
 
           <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
 

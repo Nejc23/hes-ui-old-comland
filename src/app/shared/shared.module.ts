@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { BaseTemplateComponent } from './base-template/components/base-template.component';
 import { SidebarComponent } from './base-template/components/sidebar.component';
 import { SidebarMeterComponent } from './base-template/components/sidebar-meter.component';
@@ -81,6 +82,7 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     ModalTemplateComponent,
     ModalConfirmComponent,
     NgbModule,
+    BsDropdownModule,
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
@@ -117,6 +119,7 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
+    BsDropdownModule,
     RouterModule,
     TranslateModule,
     CustomFormsModule,

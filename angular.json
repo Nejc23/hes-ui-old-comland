@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "myGrid": {
-      "i18n": {
+      "i18n": {        
         "locales": {
           "en": "src/assets/i18n/messages.en.xlf",
           "sl": "src/assets/i18n/messages.sl.xlf",
@@ -24,9 +24,10 @@
         }
       },
       "architect": {
-        "build": {
+        "build": {          
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": true,
             "aot": true,
             "outputPath": "dist/myGrid",
             "index": "src/index.html",
@@ -41,16 +42,21 @@
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },
-              "src/styles.scss"
+              "src/styles.scss"              
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js"
-            ],
+            ],            
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles/brand/default"
               ]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "jquery",
+              "lodash",
+              "@progress/kendo-angular-intl/locales/*"
+           ]
           },
           "configurations": {
             "develop": {
@@ -65,11 +71,9 @@
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
                 }
-              ]
-            ,            "localize": [
-              "en"
-            ]
-},
+              ],            
+              "localize": ["en"]
+            },
             "develop-sl": {
               "budgets": [
                 {
@@ -90,12 +94,17 @@
             ,            "localize": [
               "sl"
             ]
-},
+          },
             "production": {
             "localize": [
               "en"
             ],
               "outputPath": "dist/myGrid",
+              "deleteOutputPath": false,
+              "assets": [                
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -131,6 +140,11 @@
               "sl"
             ],
               "outputPath": "dist/myGrid",
+              "deleteOutputPath": false,
+              "assets": [                
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -170,6 +184,11 @@
               "cs"
             ],
               "outputPath": "dist/myGrid",
+              "deleteOutputPath": false,
+              "assets": [                
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -209,6 +228,11 @@
               "de"
             ],
               "outputPath": "dist/myGrid",
+              "deleteOutputPath": false,
+              "assets": [                
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -248,6 +272,11 @@
               "fr"
             ],
               "outputPath": "dist/myGrid",
+              "deleteOutputPath": false,
+              "assets": [                
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -287,6 +316,11 @@
               "it"
             ],
               "outputPath": "dist/myGrid",
+              "deleteOutputPath": false,
+              "assets": [                
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -326,6 +360,7 @@
               "en"
             ],
               "outputPath": "dist/staging/myGrid",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -361,6 +396,7 @@
               "sl"
             ],
               "outputPath": "dist/staging/myGrid",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -400,6 +436,7 @@
               "cs"
             ],
               "outputPath": "dist/staging/myGrid",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -439,6 +476,7 @@
               "de"
             ],
               "outputPath": "dist/staging/myGrid",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -478,6 +516,7 @@
               "fr"
             ],
               "outputPath": "dist/staging/myGrid",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -517,6 +556,7 @@
               "it"
             ],
               "outputPath": "dist/staging/myGrid",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -555,7 +595,7 @@
             "localize": [
               "en"
             ],
-              "outputPath": "c:/inetpub/wwwroot",
+              "outputPath": "c:/inetpub/wwwroot",              
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -680,6 +720,7 @@
               "en"
             ],
               "outputPath": "dist/amera",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -725,6 +766,7 @@
               "en"
             ],
               "outputPath": "dist/ePointHES",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -770,6 +812,7 @@
               "sl"
             ],
               "outputPath": "dist/amera",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -818,6 +861,7 @@
               "cs"
             ],
               "outputPath": "dist/amera",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -866,6 +910,7 @@
               "de"
             ],
               "outputPath": "dist/amera",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -915,6 +960,7 @@
               "fr"
             ],
               "outputPath": "dist/amera",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -964,6 +1010,7 @@
               "it"
             ],
               "outputPath": "dist/amera",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1013,6 +1060,7 @@
               "sl"
             ],
               "outputPath": "dist/ePointHES",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1062,6 +1110,7 @@
               "cs"
             ],
               "outputPath": "dist/ePointHES",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1111,6 +1160,7 @@
               "de"
             ],
               "outputPath": "dist/ePointHES",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1160,6 +1210,7 @@
               "fr"
             ],
               "outputPath": "dist/ePointHES",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -1209,6 +1260,7 @@
               "it"
             ],
               "outputPath": "dist/ePointHES",
+              "deleteOutputPath": false,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",

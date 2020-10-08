@@ -29,9 +29,9 @@
       </div>
       <div *ngIf="selectedAtLeastOneRowOnGrid">
 
-        <div class="btn-group">
-         <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-          <div class="dropdown-menu" style="min-width: 13rem">
+        <div dropdown class="btn-group">
+         <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
+          <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
 
             <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
               (click)="onRemoveFromJob()"><i class="far fa-calendar"></i><span i18n>Remove from Job</span></button>

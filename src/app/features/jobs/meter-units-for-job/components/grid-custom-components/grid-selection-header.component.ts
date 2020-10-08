@@ -105,6 +105,10 @@ export class AllForJobGridSelectionHeaderComponent implements IHeaderAngularComp
     }
   }
 
+  refresh(params: any): boolean {
+    return true;
+  }
+
   ngOnDestroy() {
     if (this.serviceSubscription2) {
       this.serviceSubscription2.unsubscribe();

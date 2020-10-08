@@ -1,7 +1,6 @@
 import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import 'bootstrap/dist/js/bootstrap.bundle';
 import * as moment from 'moment';
 import { VERSION } from 'src/environments/version';
 import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';

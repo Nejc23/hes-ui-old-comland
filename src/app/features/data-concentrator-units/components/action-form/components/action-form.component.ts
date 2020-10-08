@@ -51,7 +51,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
+    //  this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
     this.setColumnsListForArrayOfCheckBox();
 
     const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);

@@ -21,7 +21,7 @@ export const environment = {
   stsAuthority: 'http://89.212.201.202:8081/',
   clientId: 'epoint3',
   ignoreLocale: false,
-  clientRoot: 'http://localhost/',
+  clientRoot: 'http://advance-hes.azurewebsites.net/',
   clientScope: 'openid profile roles offline_access company',
   clientAutoSilentRenew: true
 };
