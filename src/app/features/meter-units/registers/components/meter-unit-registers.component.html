@@ -1,54 +1,84 @@
 <div class="row">
+
   <div class="col-2 filter-shadow" *ngIf="!hideFilter" [formGroup]="form">
-      <div class="form-group">
-        <div class="form-row">
-          <button i18n type="button" class="close ml-auto pt-2" (click)="clickShowHideFilter()" aria-label="Close">
-            <i class="far fa-times"></i>
-          </button>
-        </div>
-        <div class="form-row">
-          <div class="col">
-            <app-select-input i18n-label label="Register" [form]="form" [property]="registerProperty" [selectOptions]="registers"
-              [disabled]="false">
-            </app-select-input>
-          </div>
-        </div>
-
-        <app-input-radio class="remove-padding-left" i18n-label label="Frequency" [form]="form" [property]="rangeProperty"
-          name="range" [options]="rangeOptions" (change)="changeRangeOptionId()" (refresh)="changeRangeOptionId()">
-        </app-input-radio>
-
-        <app-datetime-picker [readonly]="!isRangeCustom" [form]="form" [property]="startTimeProperty" i18n-label label="Start time" >
-        </app-datetime-picker>
-        <app-datetime-picker [readonly]="!isRangeCustom" [form]="form" [property]="endTimeProperty" i18n-label label="End time">
-        </app-datetime-picker>
-
-        <!-- Display options -->
-        <app-input-switch label="Show line chart" [form]="form" [property]="showLineChartProperty" i18n-label ></app-input-switch>
-        <app-input-switch label="Show table" [form]="form" [property]="showTableProperty" i18n-label></app-input-switch>
-        <button class="btn btn-primary" (click)="showData()">Show Data</button>
+    <div class="form-group">
+      <div class="form-row d-flex mb-2 mt-2">
+        <h3 i18n class="mb-0">Register</h3>
+        <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close">
+          <i class="far fa-times"></i>
+        </button>
       </div>
+
+      <div class="form-row" *ngFor="let g of registerGroups2">
+        <app-input-radio class="remove-padding-left" i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
+          [options]="g.registerOptions" (change)="changeRegisterOptionId()">
+        </app-input-radio>
+      </div>
+    </div>
   </div>
+
   <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
     <div>
-      <div class="d-flex pb-2">
+      <div class="d-flex pb-3">
         <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hideFilter}" (click)="clickShowHideFilter()" [ngbTooltip]="hideShowFilters">
           <i class="far fa-ellipsis-v"></i>
         </button>
 
         <div class="mt-2">
-          <h4>{{pageSubtitle}}</h4>
+          <h4>{{selectedRegister ? selectedRegister.name : null}}</h4>
+        </div>
+        <div class="ml-auto">
+          <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
+            <i class="far fa-redo"></i></button>
         </div>
       </div>
+      <div class="d-flex">
+        <label i18n class="mr-2 my-auto">From</label>
+        <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlur()">
+        </app-datetime-picker>
+        <label i18n class="mr-2 ml-2 my-auto">to</label>
+        <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlur()">
+        </app-datetime-picker>
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(1)">Today</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(2)">Yesterday</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(3)">Last 7 days</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(4)">Last 30 days</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(5)">Current month</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(6)">Last month</button>
+      </div>
     </div>
-    <div *ngIf="!showNoData && rowData">
-      <div class="row mb-5" *ngIf="showLineChart">
+
+    <div class="card text-center border-0 mt-5" *ngIf="!isRegisterSelected">
+      <div class="card-header border-0 bg-transparent">
+        <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+      </div>
+      <div class="card-body">
+        <div class="display-4 font-weight-bold pb-2" i18n>No register selected</div>
+        <div class="text-secondary" i18n>To display data, select register from the list on the left.</div>
+      </div>
+    </div>
+    <div class="card text-center border-0 mt-5" *ngIf="isRegisterSelected && !isDataFound">
+      <div class="card-header border-0 bg-transparent">
+        <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+      </div>
+      <div class="card-body">
+        <div class="display-4 font-weight-bold pb-2" i18n>No data found</div>
+        <div class="text-secondary" i18n>There seems to be no available data to show.</div>
+        <div class="text-secondary" i18n>Try changing the time.</div>
+      </div>
+    </div>
+
+
+    <div *ngIf="isDataFound">
+      <div class="row mb-5">
         <div class="col-12">
           <app-registers-chart [filter]="registersFilter"></app-registers-chart>
         </div>
       </div>
       <div class="row">
-        <div [ngClass]="{'col-12': !showStatistics, 'col-8': showStatistics }" *ngIf="showTable">
+        <div [ngClass]="{'col-12': !showStatistics, 'col-8': showStatistics }">
           <app-registers-grid [rowData]="rowData"></app-registers-grid>
         </div>
         <div class="col-4" *ngIf="showStatistics && registerStatisticsData">
@@ -56,13 +86,11 @@
         </div>
       </div>
     </div>
-    <div class="text-center p-5" *ngIf="showNoData" in18n>
-      NO DATA FOUND
-    </div>
   </div>
 </div>
 
 <ng-template #hideShowFilters><span i18n>Show/hide filters</span></ng-template>
+<ng-template #tipContentRefresh><span i18n>Refresh data</span></ng-template>
 
 
 

@@ -1,4 +1,4 @@
-<div class="form-group" [formGroup]="form">
+<div [ngClass]="{'form-group': !isInline}" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
     {{label}}
     <sup *ngIf="required"> *</sup>
@@ -9,6 +9,7 @@
     [max]="max"
     [format]="format"
     [readonly]="readonly"
+    (blur)="onBlur()"
   ></kendo-datetimepicker>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
