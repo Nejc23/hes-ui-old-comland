@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
 
 @Component({
@@ -11,7 +10,7 @@ export class GridCellAddBtnComponent implements ICellRendererAngularComp {
   public params: any;
   public label = '';
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   agInit(params: any): void {
     this.params = params;
@@ -33,6 +32,6 @@ export class GridCellAddBtnComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip() {
-    return this.i18n('Add new rule');
+    return $localize `Add new rule`;
   }
 }

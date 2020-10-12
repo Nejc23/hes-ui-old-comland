@@ -1,9 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
-import { FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, Subscription, of } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { ActivatedRoute } from '@angular/router';
@@ -51,7 +50,6 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private i18n: I18n,
     private route: ActivatedRoute,
     private codelistHelperService: CodelistHelperService
   ) {
@@ -94,7 +92,6 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
 
   doFillData() {
     // todo change filter outside of grid ???
-    console.log('model changed');
     this.fillformFromSession(this.data);
   }
 
@@ -259,9 +256,9 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
 
   errorValidatorReadStatusComponents() {
     if (this.form.errors != null && this.form.errors.outOfRange) {
-      return this.i18n('Value must be in range 0-100');
+      return $localize `Value must be in range 0-100`;
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return this.i18n('Range is not correct');
+      return $localize `Range is not correct`;
     }
   }
 }

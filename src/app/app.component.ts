@@ -27,7 +27,6 @@ export class AppComponent implements OnInit {
     // TODO: complete this
     // this.authService.setRefreshTokenInterval();
     this.titleService.setTitle(brand.appBrowserTitle);
-
     this.authService
       .getUser()
       .then(user => {

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 
@@ -11,7 +10,7 @@ import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type
 export class GridCellIconComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private staticextService: MeterUnitsTypeStaticTextService, private i18n: I18n) {}
+  constructor(private staticextService: MeterUnitsTypeStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -25,6 +24,6 @@ export class GridCellIconComponent implements ICellRendererAngularComp {
 
   // set momemnt text (next planned read) out of date and time
   setMomentNextPlannedReadTime(time: string) {
-    return this.staticextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
+    return this.staticextService.nextPlannedReadText + $localize `${moment(time).fromNow()}`;
   }
 }

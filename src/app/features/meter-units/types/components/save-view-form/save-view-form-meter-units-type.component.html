@@ -5,7 +5,8 @@
   <div modal-body>
     <ng-container>
       <!--<h4 i18n>Save state</h4>-->
-      <p class="text-secondary"><span i18n>Do you like the current view?</span><br/><span i18n>Save set filters, column order/size, and use it later.</span></p>
+      <p class="text-secondary"><span i18n>Do you like the current view?</span><br/>
+        <span i18n>Save set filters, column order/size, and use it later.</span></p>
       <app-input-text [form]="form" [property]="namePropety" i18n-label label=""></app-input-text>
 
       <div class="d-flex justify-content-end">
@@ -13,7 +14,10 @@
           <span *ngIf="sessionLayout && sessionLayout.id > 0" i18n>Save As New</span>
           <span *ngIf="!sessionLayout || sessionLayout.id < 1" i18n>Save</span>
         </button>
-        <button type="button" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary" (click)="save(false)"><i class="far fa-sync"></i><span i18n>Update</span></button>
+        <button type="button" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary" (click)="save(false)">
+          <i class="far fa-sync"></i>
+          <span i18n>Update</span>
+        </button>
       </div>
       <h4 class="mt-5" i18n>Saved States</h4>
       <div class="py-1 border-bottom" *ngFor="let layoutItem of (mutLayouts$ | async ); let i = index"

@@ -44,15 +44,15 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i><span
-          i18n>Cancel</span></button>
+      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i>
+        <span i18n>Cancel</span></button>
       <div class="btn-group dropdown" *ngIf="!activate">
-        <button type="submit" class="btn btn-primary" (click)="upgrade()"><span
-            i18n>Upgrade</span></button>
+        <button type="submit" class="btn btn-primary" (click)="upgrade()">
+          <span i18n>Upgrade</span></button>
       </div>
       <div class="btn-group dropdown"*ngIf="activate">
-        <button type="submit" class="btn btn-primary" (click)="activateMU()"><span
-            i18n>Activate</span></button>
+        <button type="submit" class="btn btn-primary" (click)="activateMU()">
+          <span i18n>Activate</span></button>
       </div>
     </div>
   </div>

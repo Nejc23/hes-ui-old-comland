@@ -35,17 +35,18 @@
               [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
           </div>
         </div>
-        <div class="text-danger" *ngIf="form.errors && form.errors['atLeastOneRequired'] == true"><small><span i18n>At least one phase with name and treshold should be filled</span></small></div>
+        <div class="text-danger" *ngIf="form.errors && form.errors['atLeastOneRequired'] == true"><small>
+          <span i18n>At least one phase with name and treshold should be filled</span></small></div>
       </form>
     </ng-container>
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i><span
-          i18n>Cancel</span></button>
+      <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i>
+        <span i18n>Cancel</span></button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onSet()"><span
-            i18n>Set</span></button>
+        <button type="submit" class="btn btn-primary" (click)="onSet()">
+          <span i18n>Set</span></button>
       </div>      
     </div>
   </div>

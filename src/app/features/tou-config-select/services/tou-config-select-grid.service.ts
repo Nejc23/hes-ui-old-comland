@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 
 @Injectable({
@@ -8,7 +7,7 @@ import * as _ from 'lodash';
 export class TouConfigSelectGridService {
   columns = [];
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   setGridDefaultColumns() {
     return [
@@ -21,7 +20,7 @@ export class TouConfigSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'timeOfUseId',
-        headerTooltip: this.i18n('Select/deselect'),
+        headerTooltip: $localize `Select/deselect`,
         headerCheckboxSelection: false
       },
       {
@@ -31,8 +30,8 @@ export class TouConfigSelectGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Name'),
-        headerTooltip: this.i18n('Name')
+        headerName: $localize `Name`,
+        headerTooltip: $localize `'Name`
       },
       {
         field: 'description',
@@ -40,8 +39,8 @@ export class TouConfigSelectGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Description'),
-        headerTooltip: this.i18n('Description')
+        headerName: $localize `Description`,
+        headerTooltip: $localize `Description`
       }
     ];
   }

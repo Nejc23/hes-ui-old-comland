@@ -1,6 +1,5 @@
 import { GridCellDetailLinkComponent } from '../components/grid-custom-components/grid-cell-detail-link.component';
-import { Injectable, Input, setTestabilityGetter } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
+import { Injectable } from '@angular/core';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
@@ -42,7 +41,6 @@ export class MeterUnitsTypeGridService {
   meterUnitsId: number;
 
   constructor(
-    private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private gridColumnShowHideService: GridColumnShowHideService
@@ -77,11 +75,11 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'deviceId',
-        headerTooltip: this.i18n('Select/deselect all')
+        headerTooltip: $localize `Select/deselect all`
       },
       {
         field: 'nextRead',
-        headerName: this.i18n(''),
+        headerName: $localize ``,
         suppressColumnsToolPanel: true,
         suppressMovable: true,
         lockPosition: true,
@@ -90,204 +88,204 @@ export class MeterUnitsTypeGridService {
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellIconComponent',
-        headerTooltip: this.i18n(''),
+        headerTooltip:$localize ``,
         minWidth: 100,
         maxWidth: 100,
         width: 100
       },
       {
         field: 'status',
-        headerName: this.i18n('Status'),
+        headerName: $localize `Status`,
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: this.i18n('Status')
+        headerTooltip: $localize `Status`
       },
       {
         field: 'name',
-        headerName: this.i18n('Name'),
+        headerName: $localize `Name`,
         //    pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellDetailLinkComponent',
-        headerTooltip: this.i18n('Name')
+        headerTooltip:$localize `Name`
       },
       {
         field: 'moduleId',
-        headerName: this.i18n('Module Id'),
+        headerName: $localize `Module Id`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellModuleIdComponent',
-        headerTooltip: this.i18n('Module Id')
+        headerTooltip: $localize `Module Id`
       },
       {
         field: 'parent',
-        headerName: this.i18n('Parent'),
+        headerName: $localize `Parent`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gidCellParentComponent',
-        headerTooltip: this.i18n('Parent')
+        headerTooltip: $localize `Parent`
       },
       {
         field: 'parametrisationId',
-        headerName: this.i18n('Parametrisation Id'),
+        headerName: $localize `Parametrisation Id`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('Parametrisation Id')
+        headerTooltip: $localize `Parametrisation Id`
       },
       {
         field: 'timeOfUseId',
-        headerName: this.i18n('Time of use Id'),
+        headerName: $localize `Time of use Id`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTimeOfUseIdComponent',
-        headerTooltip: this.i18n('Time of use Id')
+        headerTooltip: $localize `Time of use Id`
       },
       {
         field: 'vendor',
-        headerName: this.i18n('Vendor'),
+        headerName: $localize `Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: this.i18n('Vendor')
+        headerTooltip: $localize `Vendor`
       },
       {
         field: 'firmware',
-        headerName: this.i18n('Firmware'),
+        headerName: $localize `Firmware`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellFirmwareComponent',
-        headerTooltip: this.i18n('Firmware')
+        headerTooltip: $localize `Firmware`
       },
       {
         field: 'id1',
-        headerName: this.i18n('ID1'),
+        headerName: $localize `ID1`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID1'),
+        headerTooltip: $localize `ID1`,
         hide: true
       },
       {
         field: 'id2',
-        headerName: this.i18n('ID2'),
+        headerName: $localize `ID2`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID2'),
+        headerTooltip: $localize `ID2`,
         hide: true
       },
       {
         field: 'id3',
-        headerName: this.i18n('ID3'),
+        headerName: $localize `ID3`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID3'),
+        headerTooltip: $localize `ID3`,
         hide: true
       },
       {
         field: 'id4',
-        headerName: this.i18n('ID4'),
+        headerName: $localize `ID4`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID4'),
+        headerTooltip: $localize `ID4`,
         hide: true
       },
       {
         field: 'id5',
-        headerName: this.i18n('ID5'),
+        headerName: $localize `ID5`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellDetailLinkComponent',
-        headerTooltip: this.i18n('ID5'),
+        headerTooltip: $localize `ID5`,
         hide: true
       },
       {
         field: 'id6',
-        headerName: this.i18n('ID6'),
+        headerName: $localize `ID6`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID6'),
+        headerTooltip: $localize `ID6`,
         hide: true
       },
       {
         field: 'configurationId',
-        headerName: this.i18n('Configuration Id'),
+        headerName: $localize `Configuration Id`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('Configuration Id'),
+        headerTooltip: $localize `Configuration Id`,
         hide: true
       },
       {
         field: 'logicalDeviceName',
-        headerName: this.i18n('Logical device name'),
+        headerName: $localize `Logical device name`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: this.i18n('Logical device name'),
+        headerTooltip: $localize `Logical device name`,
         hide: true
       },
       // {
       //   field: 'childInfo',
-      //   headerName: this.i18n('Information of child (MBus)'),
+      //   headerName: $localize `Information of child (MBus)`,
       //   pinned: false,
       //   sortable: true,
       //   filter: false,
       //   cellRenderer: 'gridCellInfoOfChildComponent',
-      //   headerTooltip: this.i18n('Information of child (MBus)')
+      //   headerTooltip: $localize `Information of child (MBus)`
       // },
       {
         field: 'disconnectorState',
-        headerName: this.i18n('Breaker State'),
+        headerName: $localize `Breaker State`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellBreakerStateComponent',
-        headerTooltip: this.i18n('Breaker State')
+        headerTooltip: $localize `Breaker State`
       },
       {
         field: 'tags',
-        headerName: this.i18n('Tags'),
+        headerName: $localize `Tags`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
-        headerTooltip: this.i18n('Tags'),
+        headerTooltip: $localize `Tags`,
         hide: true
       },
       {
         field: 'readStatusTimeStamp',
-        headerName: this.i18n('Read status'),
+        headerName: $localize `Read status`,
         //   pinned: true,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: this.i18n('Read status')
+        headerTooltip: $localize `Read status`
       },
       {
         field: 'jobStatus',
-        headerName: this.i18n('Job status'),
+        headerName: $localize `Job status`,
         //    pinned: 'right',
         //    lockPinned: true,
         //   lockPosition: true,
@@ -295,7 +293,7 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
-        headerTooltip: this.i18n('Job status'),
+        headerTooltip: $localize `Job status`,
         resizable: false
       },
       {
@@ -511,7 +509,6 @@ export class MeterUnitsTypeGridService {
 
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
-    console.log('excluded row', excludedRow);
 
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (!settings.excludedRows) {

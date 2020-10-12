@@ -3,8 +3,6 @@ import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid
 import * as _ from 'lodash';
 import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
@@ -27,8 +25,8 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   fileTypeOptions: RadioOption[] = [
-    { value: '1' as string, label: this.i18n('GULF1') },
-    { value: '2' as string, label: this.i18n('GULF2') }
+    { value: '1' as string, label: $localize `GULF1` },
+    { value: '2' as string, label: $localize `GULF2` }
   ];
   fileTypeId = '1';
   uploadSaveUrl: string;
@@ -42,8 +40,6 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private staticextService: ImportDeviceKeysStaticTextService,
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private authService: AuthService,
@@ -52,7 +48,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     private cryptoLiteService: CryptoLiteService,
     private breadcrumbService: BreadcrumbService
   ) {
-    this.allowedExtExplainText = this.i18n('can only upload one file.');
+    this.allowedExtExplainText = $localize `can only upload one file.`;
     this.form = this.createForm();
   }
 
@@ -118,12 +114,12 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
           results.push(o);
           if (o.status === 'SUCCESS') {
             this.allResultTexts.push(
-              `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
+              $localize `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
           if (o.errorMsg) {
-            this.allErrorTexts.push(this.i18n(`File ${o.fileName} import failed, error message: ${o.errorMsg}`));
+            this.allErrorTexts.push($localize `File ${o.fileName} import failed, error message: ${o.errorMsg}`);
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
         });

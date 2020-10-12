@@ -1,8 +1,8 @@
 <div class="pt-1 h-100">
   <form [formGroup]="form">
     <div class="d-flex mb-2">
-      <h3 class="mb-0">Filters</h3>
-      <button i18n type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close">
+      <h3 class="mb-0" i18n>Filters</h3>
+      <button type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close" i18n>
         <i class="far fa-times"></i>
       </button>
     </div>
@@ -43,13 +43,17 @@
       <app-input-switch label="Show deleted Data Concentrator Units" [form]="form" [property]="showDeletedProperty" i18n-label></app-input-switch>
     </fieldset>
     <div class="form-group" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-      <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()"><span i18n>Apply Filters</span></button>
+      <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()">
+        <span i18n>Apply Filters</span>
+      </button>
     </div>
     <div class="form-group link">
-      <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()"><span i18n>Clear Filters</span></a></strong>
+      <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
+        <span i18n>Clear Filters</span></a>
+      </strong>
     </div>
     <div class="form-group link">
-      <strong><span i18n class="text-secondary">Save Filter Set</span></strong>
+      <strong><span class="text-secondary" i18n>Save Filter Set</span></strong>
       <hr>
     </div>
     <div class="form-group link">

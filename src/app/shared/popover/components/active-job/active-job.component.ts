@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
@@ -22,7 +21,7 @@ export class ActiveJobComponent implements OnInit {
   rowData$: Observable<ActiveJobsList[]>;
   rowData: ActiveJobsList[];
 
-  constructor(private activeJobsService: JobsService, private activeJobsGridService: ActiveJobsGridService, public i18n: I18n) {
+  constructor(private activeJobsService: JobsService, private activeJobsGridService: ActiveJobsGridService) {
     this.frameworkComponents = activeJobsGridService.setFrameworkComponents();
   }
 

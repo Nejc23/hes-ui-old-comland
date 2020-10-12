@@ -1,53 +1,52 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsStaticTextService {
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   get jobsTitle() {
-    return this.i18n('Jobs');
+    return $localize `Jobs`;
   }
 
   get notAvailableTekst() {
-    return this.i18n('N/A');
+    return $localize `N/A`;
   }
 
   get noRecordsFound() {
-    return this.i18n('No records found. You need to adjust your search or filter parameters.');
+    return $localize `No records found. You need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {
-    return this.i18n('Loading data...');
+    return $localize `Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return this.i18n('No filter applied');
+    return $localize `No filter applied`;
   }
 
   get nextPlannedReadText() {
-    return this.i18n('Next planned read') + ' ';
+    return $localize `Next planned read` + ' ';
   }
 
   get placeholderSearch() {
-    return this.i18n('Search');
+    return $localize `Search`;
   }
 
   get messageSchedulerJobStarted() {
-    return this.i18n(`Scheduler job started!`);
+    return $localize `Scheduler job started!`;
   }
 
   get messageJobStopped() {
-    return this.i18n(`Job stoped!`);
+    return $localize `Job stoped!`;
   }
 
   get messageJobCanceled() {
-    return this.i18n(`Job canceled!`);
+    return $localize `Job canceled!`;
   }
 
   get messageServerError() {
-    return this.i18n(`Server error!`);
+    return $localize `Server error!`;
   }
 }

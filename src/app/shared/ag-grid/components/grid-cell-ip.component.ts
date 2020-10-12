@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-grid-cell-ip',
   templateUrl: './grid-cell-ip.component.html'
 })
 export class GridCellIpComponent implements ICellRendererAngularComp {
-  notAvailableText = this.i18n('N/A'); // N/A
+  notAvailableText = $localize `N/A`; // N/A
   public params: any;
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
   // called on init
   agInit(params: any): void {
     this.params = params;

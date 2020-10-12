@@ -5,7 +5,6 @@ import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import * as moment from 'moment';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-scheduler-active-jobs',
@@ -28,7 +27,7 @@ export class SchedulerActiveJobsComponent implements OnInit {
   allActiveJobs: SchedulerJobsList[];
   visibleActiveJobs: SchedulerJobsList[];
 
-  constructor(private activeJobsService: JobsService, private activeJobsGridService: ActiveJobsGridService, private i18n: I18n) {
+  constructor(private activeJobsService: JobsService, private activeJobsGridService: ActiveJobsGridService) {
     this.frameworkComponents = activeJobsGridService.setFrameworkComponents();
   }
 
@@ -75,10 +74,10 @@ export class SchedulerActiveJobsComponent implements OnInit {
 
   // set momemnt text (last communication) out of date and time
   setMomentNextRun(time: string): string {
-    return time != null && time.length > 0 ? moment(time).fromNow() : this.i18n('N/A');
+    return time != null && time.length > 0 ? moment(time).fromNow() : $localize `N/A`;
   }
 
   getShowAllText(): string {
-    return `${this.i18n('Show all')} ${this.allActiveJobs.length} ${this.i18n('jobs')}`;
+    return `${$localize `Show all`} ${this.allActiveJobs.length} ${$localize `jobs`}`;
   }
 }

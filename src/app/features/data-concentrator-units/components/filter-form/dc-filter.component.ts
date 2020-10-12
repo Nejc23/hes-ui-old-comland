@@ -1,11 +1,9 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { IToolPanel, IToolPanelParams } from '@ag-grid-community/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -50,7 +48,6 @@ export class DcFilterComponent implements OnInit {
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private i18n: I18n,
     private codelistHelperService: CodelistHelperService
   ) {
     this.form = this.createForm(null, null);
@@ -215,9 +212,9 @@ export class DcFilterComponent implements OnInit {
 
   errorValidatorReadStatusComponents() {
     if (this.form.errors != null && this.form.errors.outOfRange) {
-      return this.i18n('Value must be in range 0-100');
+      return $localize `Value must be in range 0-100`;
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return this.i18n('Range is not correct');
+      return $localize `Range is not correct`;
     }
   }
 

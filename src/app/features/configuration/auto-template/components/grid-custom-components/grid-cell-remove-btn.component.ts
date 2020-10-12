@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
 
 @Component({
@@ -12,7 +11,7 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   // called on init
   agInit(params: any): void {
@@ -32,6 +31,6 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip() {
-    return this.i18n('Remove job');
+    return $localize `Remove job`;
   }
 }

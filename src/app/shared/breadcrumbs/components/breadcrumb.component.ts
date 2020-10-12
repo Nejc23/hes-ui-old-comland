@@ -3,7 +3,6 @@ import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Breadcrumb } from '../interfaces/breadcrumb.interface';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { BreadcrumbService } from '../services/breadcrumb.service';
 
 @Component({
@@ -15,7 +14,7 @@ export class BreadcrumbComponent implements OnInit {
   public pageName: string;
   a = 'Close';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private i18n: I18n, private service: BreadcrumbService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private service: BreadcrumbService) {
     this.breadcrumbs = [];
   }
 
@@ -74,9 +73,9 @@ export class BreadcrumbComponent implements OnInit {
     );
   }
 
-  getBreadcrumbLabel(breadcrumb: Breadcrumb) {
-    return this.i18n('{{label}}', { label: breadcrumb.label });
-  }
+  /*getBreadcrumbLabel(breadcrumb: Breadcrumb) {
+    return  '' // $localize `{{label}}`, { label: breadcrumb.label }; 
+  }*/
 
   showBreadcrumb(): boolean {
     return this.breadcrumbs && this.breadcrumbs.length > 0 && this.breadcrumbs[0].label !== this.pageName;

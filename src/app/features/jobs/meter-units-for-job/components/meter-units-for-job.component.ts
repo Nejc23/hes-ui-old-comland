@@ -1,7 +1,4 @@
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
@@ -12,9 +9,7 @@ import { Subscription, Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
@@ -92,26 +87,21 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   public localeText;
 
   // messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = this.i18n(`Server error!`);
-  messageDataRefreshed = this.i18n(`Data refreshed!`);
-  messageActionFailed = this.i18n(`Action failed!`);
+  messageServerError = $localize `Server error!`;
+  messageDataRefreshed = $localize `Data refreshed!`;
+  messageActionFailed = $localize `Action failed!`;
 
   constructor(
     private route: ActivatedRoute,
     private meterUnitsForJobGridService: MeterUnitsForJobGridService,
-    private sidebarService: SidebarService,
     private staticTextService: AllForJobStaticTextService,
-    private i18n: I18n,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
-    private service: MyGridLinkService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     private meterUnitsTypeService: MeterUnitsService,
     private toast: ToastNotificationService,
     private eventService: AllForJobGridEventEmitterService,
     private authService: AuthService,
-    private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
     private modalService: ModalService,
-    private jobsService: JobsService,
     private breadcrumbService: BreadcrumbService
   ) {
     this.paramsSub = route.params.subscribe(params => {
@@ -192,19 +182,19 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: this.i18n('Columns'),
-      filters: this.i18n('Filters'),
+      columns: $localize `Columns`,
+      filters: $localize `Filters`,
 
       // for filter panel
-      page: this.i18n('page'),
-      more: this.i18n('more'),
-      to: this.i18n('to'),
-      of: this.i18n('of'),
-      next: this.i18n('next'),
-      last: this.i18n('last'),
-      first: this.i18n('first'),
-      previous: this.i18n('previous'),
-      loadingOoo: this.i18n('loading...')
+      page: $localize `page`,
+      more: $localize `more`,
+      to: $localize `to`,
+      of: $localize `of`,
+      next: $localize `next`,
+      last: $localize `last`,
+      first: $localize `first`,
+      previous: $localize `previous`,
+      loadingOoo: $localize `loading...`
     };
 
     // this.deleteAllRequests();
@@ -385,7 +375,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
               }
             });
         } else {
-          console.log(`requestModel = `, that.requestModel);
           that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
             that.gridApi.hideOverlay();
             that.totalCount = 0;
@@ -698,7 +687,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const selectedText = `${this.getSelectedCount()}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.i18n('Confirm');
+    component.btnConfirmText = $localize `Confirm`;
     let response: Observable<any> = new Observable();
 
     const request: RequestMeterUnitsForJob = {
@@ -720,12 +709,11 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log('removeMeterUnits.request', request);
     response = this.meterUnitsTypeService.removeMeterUnitsFromJob(request);
 
-    component.btnConfirmText = this.i18n('Remove');
-    component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`Remove ${selectedText} Meter Unit(s) from Job?`);
+    component.btnConfirmText = $localize `Remove`;
+    component.modalTitle = $localize `Confirm bulk operation`;
+    component.modalBody = $localize `Remove ${selectedText} Meter Unit(s) from Job?`;
 
     modalRef.result.then(
       data => {
@@ -734,7 +722,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         response.subscribe(
           value => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.successToast(this.i18n('Selected Meter Units removed successfully.'));
+            this.toast.successToast($localize `Selected Meter Units removed successfully`);
             this.refresh();
           },
           e => {
@@ -789,7 +777,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${this.i18n('of')} ${this.totalCount}`;
+        return `${selectedCount} ${$localize `of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;

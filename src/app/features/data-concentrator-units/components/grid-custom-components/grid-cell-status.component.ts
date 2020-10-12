@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-grid-cell-status',
@@ -9,7 +8,7 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 export class GridCellStatusComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
   // called on init
   agInit(params: any): void {
     this.params = params;

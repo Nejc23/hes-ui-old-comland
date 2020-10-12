@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
@@ -31,7 +30,6 @@ export class TouConfigSelectComponent implements OnInit {
   selectedAll = false;
 
   constructor(
-    private i18n: I18n,
     private registersSelectService: TimeOfUseService,
     private registersSelectGridService: TouConfigSelectGridService,
     public fb: FormBuilder,

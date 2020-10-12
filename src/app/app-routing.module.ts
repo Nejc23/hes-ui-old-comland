@@ -42,10 +42,6 @@ const appRoutes: Routes = [
       {
         path: 'configuration',
         loadChildren: () => import('src/app/features/configuration/modules/configuration.module').then(m => m.ConfigurationModule)
-      },
-      {
-        path: 'help',
-        loadChildren: () => import('src/app/features/help/modules/help.module').then(m => m.HelpModule)
       }
     ]
   },

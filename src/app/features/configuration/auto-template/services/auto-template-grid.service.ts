@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { configAgGrid } from 'src/environments/config';
 import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { GridCellAddBtnComponent } from '../components/grid-custom-components/grid-cell-add-btn.component';
@@ -11,7 +10,7 @@ import { GridCellNextRunNoEventComponent } from '../components/grid-custom-compo
   providedIn: 'root'
 })
 export class AutoTemplatesGridService {
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   /**
    * Set grid settings master
@@ -39,7 +38,7 @@ export class AutoTemplatesGridService {
       { field: 'autoTemplateRuleId', hide: true },
       {
         field: 'propertyName',
-        headerName: this.i18n('Obis'),
+        headerName: $localize `Obis`,
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyName' },
         valueSetter: params => {
@@ -54,7 +53,7 @@ export class AutoTemplatesGridService {
         field: 'propertyValue',
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyValue' },
-        headerName: this.i18n('Regex'),
+        headerName: $localize `Regex`,
         valueSetter: params => {
           if (params.oldValue !== params.newValue) {
             return true;
@@ -90,24 +89,24 @@ export class AutoTemplatesGridService {
     return [
       {
         field: 'type',
-        headerName: this.i18n('Job Type'),
-        headerTooltip: this.i18n('Job Type')
+        headerName: $localize `Job Type`,
+        headerTooltip: $localize `Job Type`
       },
       {
         field: 'description',
-        headerName: this.i18n('Description'),
-        headerTooltip: this.i18n('Description')
+        headerName: $localize `Description`,
+        headerTooltip: $localize `Description`
       },
       {
         field: 'nextRun',
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: this.i18n('Next run'),
-        headerTooltip: this.i18n('Next run')
+        headerName: $localize `Next run`,
+        headerTooltip: $localize `Next run`
       },
       {
         field: 'owner',
-        headerName: this.i18n('Owner'),
-        headerTooltip: this.i18n('Owner')
+        headerName: $localize `Owner`,
+        headerTooltip: $localize `Owner`
       },
       {
         field: 'id',

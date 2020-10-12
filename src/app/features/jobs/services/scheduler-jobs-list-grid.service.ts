@@ -1,6 +1,5 @@
 import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
@@ -20,7 +19,7 @@ export class SchedulerJobsListGridService {
   columns = [];
   paramsJobs = {} as GridRequestParams;
 
-  constructor(private i18n: I18n, private gridSettingsSessionStoreService: GridSettingsSessionStoreService) {}
+  constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService) {}
 
   /**
    *  Set templates for grid
@@ -46,8 +45,8 @@ export class SchedulerJobsListGridService {
         lockPosition: true,
         field: 'active',
         cellRenderer: 'gridCellActiveComponent',
-        headerName: this.i18n('Active'),
-        headerTooltip: this.i18n('Active'),
+        headerName: $localize `Active`,
+        headerTooltip: $localize `Active`,
         minWidth: 100,
         maxWidth: 100
       },
@@ -57,8 +56,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Job Type'),
-        headerTooltip: this.i18n('Job Type')
+        headerName: $localize `Job Type`,
+        headerTooltip: $localize `Job Type`
       },
       {
         field: 'description',
@@ -66,8 +65,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Description'),
-        headerTooltip: this.i18n('Description')
+        headerName: $localize `Description`,
+        headerTooltip: $localize `Description`
       },
       {
         field: 'nextRun',
@@ -76,8 +75,8 @@ export class SchedulerJobsListGridService {
         suppressMovable: true,
         lockPosition: true,
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: this.i18n('Next run'),
-        headerTooltip: this.i18n('Next run')
+        headerName: $localize `Next run`,
+        headerTooltip: $localize `Next run`
       },
       {
         field: 'owner',
@@ -85,8 +84,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: this.i18n('Owner'),
-        headerTooltip: this.i18n('Owner')
+        headerName: $localize `Owner`,
+        headerTooltip: $localize `Owner`
       },
       {
         field: 'deviceCount',
@@ -98,8 +97,8 @@ export class SchedulerJobsListGridService {
         suppressMovable: true,
         lockPosition: true,
         cellRenderer: 'gridCellDeviceCountComponent',
-        headerName: this.i18n('Devices'),
-        headerTooltip: this.i18n('Devices')
+        headerName: $localize `Devices`,
+        headerTooltip: $localize `Devices`
       },
       {
         field: 'id',

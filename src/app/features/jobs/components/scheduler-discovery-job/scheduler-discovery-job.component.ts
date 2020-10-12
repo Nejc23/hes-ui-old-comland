@@ -1,8 +1,6 @@
-import { DateTimePickerComponent } from './../../../../shared/forms/components/datetime-picker/datetime-picker.component';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
@@ -29,28 +27,28 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
 
   form: FormGroup;
   readOptions: RadioOption[] = [
-    { value: '1' as string, label: this.i18n('One-time'), labelSmall: this.i18n('Once') },
-    { value: '2' as string, label: this.i18n('Minute(s)'), labelSmall: this.i18n('Every N minute(s)') },
-    { value: '3' as string, label: this.i18n('Hour(s)'), labelSmall: this.i18n('Every N hour(s)') },
-    { value: '4' as string, label: this.i18n('Daily'), labelSmall: this.i18n('Every day specific time') },
-    { value: '5' as string, label: this.i18n('Weekly'), labelSmall: this.i18n('One or more days of the week') },
-    { value: '6' as string, label: this.i18n('Monthly'), labelSmall: this.i18n('One or more days in the month') }
+    { value: '1' as string, label: $localize `One-time`, labelSmall: $localize `Once` },
+    { value: '2' as string, label: $localize `Minute(s)`, labelSmall: $localize `Every N minute(s)` },
+    { value: '3' as string, label: $localize `Hour(s)`, labelSmall: $localize `Every N hour(s)` },
+    { value: '4' as string, label: $localize `Daily`, labelSmall: $localize `Every day specific time` },
+    { value: '5' as string, label: $localize `Weekly`, labelSmall: $localize `One or more days of the week` },
+    { value: '6' as string, label: $localize `Monthly`, labelSmall: $localize `One or more days in the month` }
   ];
   weekDays: Codelist<number>[] = [
-    { id: 1, value: this.i18n('Mon-Fri') },
-    { id: 2, value: this.i18n('Mon') },
-    { id: 3, value: this.i18n('Tue') },
-    { id: 4, value: this.i18n('Wed') },
-    { id: 5, value: this.i18n('Thu') },
-    { id: 6, value: this.i18n('Fri') },
-    { id: 7, value: this.i18n('Sat') },
-    { id: 8, value: this.i18n('Sun') }
+    { id: 1, value: $localize `Mon-Fri` },
+    { id: 2, value: $localize `Mon` },
+    { id: 3, value: $localize `Tue` },
+    { id: 4, value: $localize `Wed` },
+    { id: 5, value: $localize `Thu` },
+    { id: 6, value: $localize `Fri` },
+    { id: 7, value: $localize `Sat` },
+    { id: 8, value: $localize `Sun` }
   ];
   selectedId = 0;
   monthDays: number[] = [];
   noDCUs = false;
   noMonthDays = false;
-  requiredText = this.i18n('Required field');
+  requiredText = $localize `Required field`;
 
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
@@ -63,7 +61,6 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     private jobsService: JobsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService
   ) {}
@@ -169,14 +166,14 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     this.noMonthDays = this.form.get(this.monthDaysProperty).value !== null && this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
     let request: Observable<SchedulerJob> = null;
-    let operation = this.i18n('added');
+    let operation = $localize `added`;
     if (this.selectedJobId) {
-      operation = this.i18n(`updated`);
+      operation = $localize `updated`;
       request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
-    const successMessage = this.i18n(`Data Concentrator Discovery Scheduler was ${operation} successfully`);
+    const successMessage = $localize `Data Concentrator Discovery Scheduler was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         if (addNew) {

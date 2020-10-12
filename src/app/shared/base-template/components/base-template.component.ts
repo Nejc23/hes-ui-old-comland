@@ -1,7 +1,6 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
@@ -38,7 +37,7 @@ export class BaseTemplateComponent implements OnInit {
   public sidebarConfigurationItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
   public submenu = 0;
-  public organisation = this.i18n('no organisation');
+  public organisation = $localize `no organisation`;
 
   // languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
@@ -53,8 +52,7 @@ export class BaseTemplateComponent implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
-    private cookieService: CookieService,
-    public i18n: I18n,
+    private cookieService: CookieService,    
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService,
@@ -130,7 +128,7 @@ export class BaseTemplateComponent implements OnInit {
       if (list && list.length > 0) {
         list.forEach(element => {
           const newElement = {
-            title: this.i18n(element.value),
+            title:  $localize `${element.value}`,
             routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
             hasChildren: false,
             children: []

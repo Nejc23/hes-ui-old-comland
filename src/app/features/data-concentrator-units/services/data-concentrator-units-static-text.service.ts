@@ -1,41 +1,40 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  public titleBreadCrumbs = this.i18n('Data Concentrator Units');
+  public titleBreadCrumbs = $localize `Data Concentrator Units`;
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   get headerTitleDCU() {
-    return this.i18n('Data Concentrator Units');
+    return $localize `Data Concentrator Units`;
   }
 
   get jobsTitle() {
-    return this.i18n('Jobs');
+    return $localize `Jobs`;
   }
 
   get notAvailableTekst() {
-    return this.i18n('N/A');
+    return $localize `N/A`;
   }
 
   get noRecordsFound() {
-    return this.i18n('No records found. You need to adjust your search or filter parameters.');
+    return $localize `No records found. You need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {
-    return this.i18n('Loading data...');
+    return $localize `Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return this.i18n('No filter applied');
+    return $localize `No filter applied`;
   }
 
   get nextPlannedReadText() {
-    return this.i18n('Next planned read') + ' ';
+    return $localize `Next planned read` + ' ';
   }
 
   getFiltersInfo(
@@ -63,41 +62,41 @@ export class DataConcentratorUnitsStaticTextService {
     }
 
     if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag || showDeleted) {
-      result.text += this.i18n('Filtered by: ');
+      result.text += $localize `Filtered by: `;
     }
 
     if (status) {
       additionalString = readStatuses || type || vendor || tag || showDeleted ? ', ' : '';
-      result.text += this.i18n('status') + additionalString;
+      result.text += $localize `status` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
       additionalString = type || vendor || tag || showDeleted ? ', ' : '';
-      result.text += this.i18n('read status') + additionalString;
+      result.text += $localize `read status` + additionalString;
       result.count++;
     }
 
     if (type) {
       additionalString = vendor || tag || showDeleted ? ', ' : '';
-      result.text += this.i18n('type') + additionalString;
+      result.text += $localize `type` + additionalString;
       result.count++;
     }
 
     if (vendor) {
       additionalString = tag || showDeleted ? ', ' : '';
-      result.text += this.i18n('vendor') + additionalString;
+      result.text += $localize `vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
       additionalString = showDeleted ? ', ' : '';
-      result.text += this.i18n('tag') + additionalString;
+      result.text += $localize `tag` + additionalString;
       result.count++;
     }
 
     if (showDeleted) {
-      result.text += this.i18n('show deleted');
+      result.text += $localize `show deleted`;
       result.count++;
     }
 

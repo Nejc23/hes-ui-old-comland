@@ -1,7 +1,5 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
@@ -14,13 +12,11 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
@@ -101,12 +97,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  messageDataRefreshed = this.i18n(`Data refreshed!`);
-  messageActionFailed = this.i18n(`Action failed!`);
+  messageDataRefreshed = $localize `Data refreshed!`;
+  messageActionFailed = $localize `Action failed!`;
 
   constructor(
-    // private sidebarService: SidebarService,
-    private i18n: I18n,
     public fb: FormBuilder,
     private route: ActivatedRoute,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
@@ -172,7 +166,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions(this);
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: MeterUnitsLayout) => {
-        console.log('test 1');
         if (event !== null) {
           this.requestModel.filterModel.statuses = event.statusesFilter;
           this.requestModel.filterModel.vendor = event.vendorFilter;
@@ -249,19 +242,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: this.i18n('Columns'),
-      filters: this.i18n('Filters'),
+      columns: $localize `Columns`,
+      filters: $localize `Filters`,
 
       // for filter panel
-      page: this.i18n('page'),
-      more: this.i18n('more'),
-      to: this.i18n('to'),
-      of: this.i18n('of'),
-      next: this.i18n('next'),
-      last: this.i18n('last'),
-      first: this.i18n('first'),
-      previous: this.i18n('previous'),
-      loadingOoo: this.i18n('loading...')
+      page: $localize `page`,
+      more: $localize `more`,
+      to: $localize `to`,
+      of: $localize `of`,
+      next: $localize `next`,
+      last: $localize `last`,
+      first: $localize `first`,
+      previous: $localize `previous`,
+      loadingOoo: $localize `loading...`
     };
 
     this.deleteAllRequests();
@@ -380,7 +373,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               }
             });
         } else {
-          console.log(`requestModel = `, this.requestModel);
           that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
             that.gridApi.hideOverlay();
             that.totalCount = data.totalCount;
@@ -512,7 +504,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // set filter in request model
   setFilter() {
-    console.log('set filter');
     if (
       !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
         this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
@@ -750,7 +741,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   deleteAllRequests() {
     const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
     if (requestIds && requestIds.length > 0) {
-      console.log(`deleteing requests `, requestIds);
       requestIds.map(requestId => this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId));
     }
   }
@@ -837,7 +827,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${this.i18n('of')} ${this.totalCount}`;
+        return `${selectedCount} ${$localize `of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;

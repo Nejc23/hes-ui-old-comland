@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/functionality-enumerator.model';
 import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { CodelistRepositoryService } from '../../repository/services/codelists/codelist-repository.service';
 import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
@@ -15,51 +14,51 @@ export class SidebarService {
   private sidebarConfigurationItems: Array<SidebarItem> = [];
   public headerTitle = '';
 
-  constructor(private i18n: I18n) {
+  constructor() {
     this.sidebarItems = [
       {
-        title: this.i18n(`Data Concentrator Units`),
+        title: $localize `Data Concentrator Units`,
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         children: []
       },
       {
-        title: this.i18n(`Meter Units`),
+        title: $localize `Meter Units`,
         routeLink: '/meterUnits/1', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
         children: []
       },
       {
-        title: this.i18n(`Jobs`),
+        title: $localize `Jobs`,
         routeLink: '/schedulerJobs',
         hasChildren: false,
         children: []
       },
       {
-        title: this.i18n(`Configuration`),
+        title: $localize `Configuration`,
         routeLink: '/configuration',
         hasChildren: true,
         children: [
           {
-            title: this.i18n(`Import templates`),
+            title: $localize `Import templates`,
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,
             children: []
           },
           {
-            title: this.i18n(`Import TOU configuration`),
+            title: $localize `Import TOU configuration`,
             routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
             hasChildren: false,
             children: []
           },
           {
-            title: this.i18n(`Auto templates`),
+            title: $localize `Auto templates`,
             routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
             children: []
           },
           {
-            title: this.i18n(`Import device keys`),
+            title: $localize `Import device keys`,
             routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
             hasChildren: false,
             children: []
@@ -91,7 +90,7 @@ export class SidebarService {
 
     this.sidebarMeterUnitsItems = [
       {
-        title: this.i18n(`Back to main menu`),
+        title: $localize `Back to main menu`,
         icon: 'fas fa-arrow-alt-circle-left',
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
@@ -121,7 +120,7 @@ export class SidebarService {
 
     this.sidebarConfigurationItems = [
       {
-        title: this.i18n(`Back to main menu`),
+        title: $localize `Back to main menu`,
         icon: 'fas fa-arrow-alt-circle-left',
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
@@ -135,25 +134,25 @@ export class SidebarService {
         isBorder: true
       },
       {
-        title: this.i18n(`Import templates`),
+        title: $localize `Import templates`,
         routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
         hasChildren: false,
         children: []
       },
       {
-        title: this.i18n(`Import TOU configuration`),
+        title: $localize `Import TOU configuration`,
         routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
         hasChildren: false,
         children: []
       },
       {
-        title: this.i18n(`Auto templates`),
+        title: $localize `Auto templates`,
         routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
         hasChildren: false,
         children: []
       },
       {
-        title: this.i18n(`Import device keys`),
+        title: $localize `Import device keys`,
         routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
         hasChildren: false,
         children: []

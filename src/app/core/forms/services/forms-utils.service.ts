@@ -3,14 +3,13 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
 import { ToastNotificationService } from '../../toast-notification/services/toast-notification.service';
 import { Observable, throwError, of } from 'rxjs';
-import { map, catchError, switchMap, first, tap, take } from 'rxjs/operators';
-import { I18n } from '@ngx-translate/i18n-polyfill';
+import { map, catchError, switchMap, first, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FormsUtilsService {
-  constructor(private toast: ToastNotificationService, private i18n: I18n) {}
+  constructor(private toast: ToastNotificationService) {}
 
   hasFormControlRequiredField = (abstractControl: AbstractControl): boolean => {
     if (abstractControl.validator) {
@@ -27,7 +26,7 @@ export class FormsUtilsService {
     const throwErrorOrMakeRequest = (formValid: boolean) => {
       if (!formValid) {
         console.log('invalid form=', form);
-        return throwError(new Error(this.i18n(`invalid form`)));
+        return throwError(new Error($localize`invalid form`));
       }
       return request;
     };
@@ -60,7 +59,6 @@ export class FormsUtilsService {
   }
 
   touchAllFormElements(form: FormGroup) {
-    console.log('form.controls', form.controls);
     _.each(form.controls, (x: AbstractControl) => {
       if (_.has(x, 'controls')) {
         this.touchAllFormElements(x as any);
@@ -83,7 +81,7 @@ export class FormsUtilsService {
   throwErrorWithToastIfInvalid(form: FormGroup) {
     if (!form.valid) {
       // this.toast.warningToast(this.i18n(`Form not valid`));
-      throw new Error(this.i18n(`invalid form`));
+      throw new Error($localize `invalid form`);
     }
   }
 

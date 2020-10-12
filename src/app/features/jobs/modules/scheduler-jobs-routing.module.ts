@@ -2,7 +2,6 @@ import { AllForJobComponent } from '../meter-units-for-job/components/meter-unit
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { SchedulerJobsListComponent } from '../components/scheduler-jobs-list/scheduler-jobs-list.component';
 import { DcuForJobComponent } from '../dcu-for-job/components/dcu-for-job.component';
 
@@ -44,9 +43,9 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class SchedulerJobsRoutingModule {
-  constructor(private i18n: I18n) {
+  constructor() {
     routes.forEach(x => {
-      x.data.breadcrumb = i18n(x.data.breadcrumb);
+      x.data.breadcrumb = $localize `${(x.data.breadcrumb)}`;
     });
   }
 }

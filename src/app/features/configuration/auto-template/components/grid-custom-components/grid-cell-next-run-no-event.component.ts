@@ -1,6 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { AutoTemplatesStaticTextService } from '../../services/auto-template-static-text.service';
 
@@ -11,7 +10,7 @@ import { AutoTemplatesStaticTextService } from '../../services/auto-template-sta
 export class GridCellNextRunNoEventComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private i18n: I18n, private staticextService: AutoTemplatesStaticTextService) {}
+  constructor(private staticextService: AutoTemplatesStaticTextService) {}
 
   // called on init
   agInit(params: any): void {
@@ -25,6 +24,6 @@ export class GridCellNextRunNoEventComponent implements ICellRendererAngularComp
   }
 
   setNextReadText(time: string) {
-    return this.i18n(time ? moment(time).fromNow() : this.staticextService.notAvailableTekst);
+    return $localize `${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
   }
 }

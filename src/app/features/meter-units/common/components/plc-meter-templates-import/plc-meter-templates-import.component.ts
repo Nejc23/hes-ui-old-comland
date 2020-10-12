@@ -1,18 +1,12 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit, ViewChild, AfterViewInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
-import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SelectEvent } from '@progress/kendo-angular-upload';
-import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
 
 @Component({
   selector: 'app-plc-meter-templates-import',
@@ -21,9 +15,9 @@ import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-t
 export class PlcMeterTemplatesImportComponent implements OnInit {
   form: FormGroup;
   noConfig = false;
-  configRequiredText = this.i18n('Required field');
-  messageServerError = this.i18n(`Server error!`);
-  successMessage = this.i18n(`Import successful!`);
+  configRequiredText = $localize `Required field`;
+  messageServerError = $localize `Server error!`;
+  successMessage = $localize `Import successful!`;
   deviceIdsParam = [];
   public files: Array<any>;
   allowedExt = ['json'];
@@ -32,12 +26,8 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private gridLinkService: MyGridLinkService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private authService: AuthService,
     private toast: ToastNotificationService,
     private breadcrumbService: BreadcrumbService
   ) {
@@ -51,13 +41,12 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName(this.i18n('Import templates'));
+    this.breadcrumbService.setPageName($localize `Import templates`);
   }
 
   public selected(e: SelectEvent): void {
     const that = this;
     e.files.forEach(file => {
-      console.log(`File selected: ${file.name}`);
 
       if (!file.validationErrors) {
         const reader = new FileReader();
@@ -87,7 +76,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     response.subscribe(
       value => {
         // TODO: return is ?
-        console.log(`postMyGridTemplatesImport, value = `, value);
+       // console.log(`postMyGridTemplatesImport, value = `, value);
         this.toast.successToast(this.successMessage);
         this.cancel('save');
       },

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-grid-cell-id-number',
@@ -11,7 +10,7 @@ export class GridCellIdNumberComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private statictextService: DataConcentratorUnitsStaticTextService, private i18n: I18n) {}
+  constructor(private statictextService: DataConcentratorUnitsStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

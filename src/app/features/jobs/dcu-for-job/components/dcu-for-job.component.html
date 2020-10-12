@@ -10,9 +10,9 @@
                   data-toggle="dropdown"><span i18n>Operations</span></button>
                 <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
                   <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
-                    (click)="onRemoveFromJob()"><i class="far fa-calendar"></i><span i18n>Remove from
-                      Job</span></button>
-
+                    (click)="onRemoveFromJob()"><i class="far fa-calendar"></i>
+                    <span i18n>Remove from Job</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -39,14 +39,16 @@
         <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
           <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
             <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
-                <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
+                <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
+                  <span i18n>Select all</span>
                   ({{totalCount}})</a></strong></small>
           </div>
           <div class="mr-3" *ngIf="checkSelectedAll()">
-            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcludedDisplay()}}) items selected</span>
+            <small class="link"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) 
+              <span i18n>items selected</span>
                 &middot;
-                <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
-                    selected</span></a></strong></small>
+                <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+                  <span i18n>Clear selected</span></a></strong></small>
           </div>
         </div>
       </div>

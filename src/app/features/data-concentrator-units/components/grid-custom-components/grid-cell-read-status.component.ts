@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 import { readStatusColor } from '../../consts/data-concentrator-units.consts';
 
@@ -15,7 +14,7 @@ export class GridCellReadStatusComponent implements ICellRendererAngularComp {
 
   public params: any;
 
-  constructor(private staticextService: DataConcentratorUnitsStaticTextService, private i18n: I18n) {}
+  constructor(private staticextService: DataConcentratorUnitsStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

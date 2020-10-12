@@ -8,7 +8,6 @@ import { BaseTemplateComponent } from './base-template/components/base-template.
 import { SidebarComponent } from './base-template/components/sidebar.component';
 import { SidebarMeterComponent } from './base-template/components/sidebar-meter.component';
 import { SidebarDropdownDirective } from './base-template/directives/sidebar-dropdown.directive';
-import { UserLoggedInfoComponent } from './base-template/components/user-logged-info.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActionPreventerComponent } from './action-preventer/components/action-preventer.component';
@@ -23,7 +22,6 @@ import { CardComponent } from './card/components/card.component';
 import { ModalTemplateComponent } from './modals/components/modal-template.component';
 import { GridsterModule } from 'angular-gridster2';
 import { WidgetSettingsFormDirective } from './modals/directives/widget-settings-form.directive';
-import { ModalChangePasswordComponent } from './modals/components/modal-change-password.component';
 import { DisableIfAuthorizedReadonlyDirective } from './directives/permissions/disable-if-authorized-readonly.directive';
 import { DisableIfUnauthorizedDirective } from './directives/permissions/disable-if-unauthorized.directive';
 import { HideIfAuthorizedReadonlyDirective } from './directives/permissions/hide-if-authorized-readonly.directive';
@@ -95,7 +93,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
-    ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
     DisableIfUnauthorizedDirective,
     HideIfAuthorizedReadonlyDirective,
@@ -139,7 +136,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     SidebarComponent,
     SidebarMeterComponent,
     SidebarDropdownDirective,
-    UserLoggedInfoComponent,
     ActionPreventerComponent,
     LocaleDatePipe,
     HeaderTitleComponent,
@@ -160,7 +156,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     ModalTemplateComponent,
     ModalConfirmComponent,
     WidgetSettingsFormDirective,
-    ModalChangePasswordComponent,
     DisableIfAuthorizedReadonlyDirective,
     DisableIfUnauthorizedDirective,
     HideIfAuthorizedReadonlyDirective,
@@ -187,7 +182,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     PlcMeterBreakerModeComponent
   ],
   entryComponents: [
-    ModalChangePasswordComponent,
     ModalConfirmComponent,
     SaveViewFormComponent,
     SaveViewFormMUTComponent,

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
 
 @Component({
@@ -12,7 +11,7 @@ export class GridCellLastCommunicationComponent implements ICellRendererAngularC
   notAvailableText = this.staticextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private staticextService: DataConcentratorUnitsStaticTextService, private i18n: I18n) {}
+  constructor(private staticextService: DataConcentratorUnitsStaticTextService) {}
 
   // called on init
   agInit(params: any): void {
@@ -27,6 +26,6 @@ export class GridCellLastCommunicationComponent implements ICellRendererAngularC
 
   // set momemnt text (last communication) out of date and time
   setMomentLastCommunicationTime(time: string) {
-    return this.i18n(moment(time).fromNow());
+    return $localize `${moment(time).fromNow()}`;
   }
 }

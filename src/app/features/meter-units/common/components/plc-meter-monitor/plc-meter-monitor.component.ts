@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -12,7 +11,6 @@ import {
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetMonitorService } from '../../services/plc-meter-set-monitor.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-plc-meter-monitor',
@@ -29,7 +27,6 @@ export class PlcMeterMonitorComponent implements OnInit {
   showError = true;
 
   constructor(
-    private i18n: I18n,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
@@ -78,7 +75,7 @@ export class PlcMeterMonitorComponent implements OnInit {
     };
 
     const request = this.myGridService.setMonitor(formData);
-    const successMessage = this.i18n(`Set Monitor was successful`);
+    const successMessage = $localize `Set Monitor was successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

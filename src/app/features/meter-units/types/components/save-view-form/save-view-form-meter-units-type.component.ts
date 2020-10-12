@@ -1,14 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { filter } from 'rxjs/operators';
 import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
@@ -34,9 +31,6 @@ export class SaveViewFormMUTComponent implements OnInit {
     private mutService: MeterUnitsService,
     private formBuilder: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
-    private formUtils: FormsUtilsService,
-    private toast: ToastNotificationService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private eventService: MeterUnitsTypeGridEventEmitterService
@@ -141,6 +135,5 @@ export class SaveViewFormMUTComponent implements OnInit {
     this.mutService.deleteMeterUnitsLayout(this.meterUnitsTypeId, this.data[filterIdx].id);
     this.data.splice(filterIdx, 1);
     this.mutLayouts$ = of(this.data);
-    console.log('Delete clicked!');
   }
 }

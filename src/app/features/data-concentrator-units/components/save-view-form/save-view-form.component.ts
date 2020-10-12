@@ -1,16 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { filter } from 'rxjs/operators';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 
 @Component({
@@ -32,9 +29,6 @@ export class SaveViewFormComponent implements OnInit {
     private dcuService: DataConcentratorUnitsService,
     private formBuilder: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
-    private formUtils: FormsUtilsService,
-    private toast: ToastNotificationService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private eventService: DataConcentratorUnitsGridEventEmitterService

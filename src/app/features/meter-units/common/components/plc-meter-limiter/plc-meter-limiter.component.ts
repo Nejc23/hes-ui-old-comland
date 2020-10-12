@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -29,7 +28,6 @@ export class PlcMeterLimiterComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private i18n: I18n,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private setLimiterService: PlcMeterSetLimiterService
@@ -120,7 +118,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.setLimiter(values);
-    const successMessage = this.i18n(`Meter Units set Limiter was successful`);
+    const successMessage = $localize `Meter Units set Limiter was successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

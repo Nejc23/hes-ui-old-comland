@@ -5,7 +5,7 @@
   <div modal-body>
     <ng-container>
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong>Error saving DCU!</strong> <br/> {{saveError}}
+        <strong><span i18n>Error saving DCU!</span></strong> <br/> {{saveError}}
       </div>
 
       <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>

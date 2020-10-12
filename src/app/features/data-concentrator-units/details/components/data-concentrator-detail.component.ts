@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { Observable } from 'rxjs';
@@ -11,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
-import { property } from 'lodash';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 
 @Component({
@@ -20,7 +18,6 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 })
 export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  headerTitle = '2122121212';
   saveError: string;
   edit = false;
   public credentialsVisible = false;
@@ -35,14 +32,13 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private codelistService: CodelistRepositoryService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService
   ) {}
 
   ngOnInit() {
-    this.breadcrumbService.setPageName(this.i18n('Data concentrator unit'));
+    this.breadcrumbService.setPageName($localize `Data concentrator unit`);
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -182,7 +178,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   saveDcu() {
     const dcuFormData = this.fillData();
     const request = this.dataConcentratorUnitsService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = this.i18n(`Data Concentration Unit was updated successfully`);
+    const successMessage = $localize `Data Concentration Unit was updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(

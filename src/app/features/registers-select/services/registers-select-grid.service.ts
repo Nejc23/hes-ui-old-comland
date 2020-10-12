@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 
 @Injectable({
@@ -8,7 +7,7 @@ import * as _ from 'lodash';
 export class RegistersSelectGridService {
   columns = [];
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   setGridReadOnlyColumns() {
     return [
@@ -22,29 +21,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: this.i18n('Select/deselect all'),
+        headerTooltip: $localize `Select/deselect all`,
         headerCheckboxSelection: false
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Name'),
-        headerTooltip: this.i18n('Name')
+        headerName: $localize `Name`,
+        headerTooltip: $localize `Name`
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Type'),
-        headerTooltip: this.i18n('Type')
+        headerName: $localize `Type`,
+        headerTooltip: $localize `Type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Description'),
-        headerTooltip: this.i18n('Description')
+        headerName: $localize `Description`,
+        headerTooltip: $localize `Description`
       }
     ];
   }
@@ -60,29 +59,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: this.i18n('Select/deselect all'),
+        headerTooltip: $localize `Select/deselect all`,
         headerCheckboxSelection: true
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Name'),
-        headerTooltip: this.i18n('Name')
+        headerName: $localize `Name`,
+        headerTooltip: $localize `Name`
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Type'),
-        headerTooltip: this.i18n('Type')
+        headerName: $localize `Type`,
+        headerTooltip: $localize `Type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: this.i18n('Description'),
-        headerTooltip: this.i18n('Description')
+        headerName: $localize `Description`,
+        headerTooltip: $localize `Description`
       }
     ];
   }

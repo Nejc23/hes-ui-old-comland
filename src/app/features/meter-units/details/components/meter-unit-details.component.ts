@@ -13,7 +13,6 @@ import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-en
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
@@ -41,8 +40,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   private deviceId;
   public saveError;
 
-  private messageActionInProgress = this.i18n(`Action in progress!`);
-  private messageServerError = this.i18n(`Server error!`);
+  private messageActionInProgress = $localize `Action in progress!`;
+  private messageServerError = $localize `Server error!`;
 
   private requestModel;
 
@@ -64,7 +63,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private codelistService: CodelistMeterUnitsRepositoryService,
-    public i18n: I18n,
     private autoTemplateService: AutoTemplatesService,
     private modalService: ModalService,
     private bulkService: MyGridLinkService,
@@ -130,7 +128,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     const muFormData = this.fillData();
     const request = this.meterUnitsService.updateMuFromForm(muFormData);
-    const successMessage = this.i18n(`Meter Unit was updated successfully`);
+    const successMessage = $localize `Meter Unit was updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
@@ -262,10 +260,6 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   createForm(): FormGroup {
-    console.log('im in createForm');
-
-    console.log('after createForm code lists');
-
     return this.formBuilder.group({
       [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
       // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
@@ -283,7 +277,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: this.i18n('Meters'),
+        label: $localize `Meters`,
         params: {},
         url: null
       }
@@ -291,14 +285,14 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     if (this.typeId && this.typeName) {
       breadcrumbs.push({
-        label: this.i18n(this.typeName),
+        label: $localize `${this.typeName}`,
         params: {},
         url: `/meterUnits/${this.typeId}`
       });
     }
 
     breadcrumbs.push({
-      label: this.i18n('Meter Unit'),
+      label: $localize `Meter Unit`,
       params: {},
       url: null
     });

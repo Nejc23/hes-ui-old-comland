@@ -7,7 +7,7 @@
       "i18nFormat": "xlf",
       "encoding": "UTF-8",
       "defaultLanguage": "en",
-      "languages": ["en", "de"],
+      "languages": ["en", "sl", "cs", "de", "fr", "it"],
       "removeUnusedIds": true,
       "supportNgxTranslate": false,
       "ngxTranslateExtractionPattern": "@@|ngx-translate",
