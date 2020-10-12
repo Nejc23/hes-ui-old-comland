@@ -739,6 +739,12 @@
       <trans-unit id="5540997364935800094" datatype="html">
         <source>GULF</source>
         <target>GULF</target>
+      </trans-unit><trans-unit id="5667900632592970266" datatype="html">
+        <source>Timestamp</source>
+        <target state="final">Timestamp</target>
+      </trans-unit><trans-unit id="6555318547274416232" datatype="html">
+        <source>Value</source>
+        <target state="final">Value</target>
       </trans-unit>
       <trans-unit id="283213258714202260" datatype="html">
         <source>Average value</source>
@@ -755,19 +761,31 @@
       <trans-unit id="3301086086650990787" datatype="html">
         <source>Register</source>
         <target>Register</target>
+      </trans-unit><trans-unit id="7354496590208496775" datatype="html">
+        <source>No register selected</source>
+        <target state="final">No register selected</target>
+      </trans-unit><trans-unit id="5041746882731559292" datatype="html">
+        <source>To display data, select register from the list on the left.</source>
+        <target state="final">To display data, select register from the list on the left.</target>
+      </trans-unit><trans-unit id="6882901562096359676" datatype="html">
+        <source>No data found</source>
+        <target state="final">No data found</target>
+      </trans-unit><trans-unit id="2686786622868978521" datatype="html">
+        <source>There seems to be no available data to show.</source>
+        <target state="final">There seems to be no available data to show.</target>
+      </trans-unit><trans-unit id="2508222366608888453" datatype="html">
+        <source>Try changing the time.</source>
+        <target state="final">Try changing the time.</target>
+      </trans-unit><trans-unit id="9067968943390939929" datatype="html">
+        <source>Show/hide registers</source>
+        <target state="final">Show/hide registers</target>
+      </trans-unit><trans-unit id="1774583572584926827" datatype="html">
+        <source>Refresh data</source>
+        <target state="final">Refresh data</target>
       </trans-unit>
-      <trans-unit id="3029887440722063094" datatype="html">
-        <source>End time</source>
-        <target>End time</target>
-      </trans-unit>
-      <trans-unit id="3676553019400894078" datatype="html">
-        <source>Show line chart</source>
-        <target>Show line chart</target>
-      </trans-unit>
-      <trans-unit id="2282754875787531911" datatype="html">
-        <source>Show table</source>
-        <target>Show table</target>
-      </trans-unit>
+      
+      
+      
       <trans-unit id="5461424821674495162" datatype="html">
         <source>Show/hide filters</source>
         <target>Show/hide filters</target>
@@ -1035,6 +1053,12 @@
       <trans-unit id="6478311374284260655" datatype="html">
         <source>Meters</source>
         <target>Meters</target>
+      </trans-unit><trans-unit id="2886025673327817047" datatype="html">
+        <source>Data view</source>
+        <target state="final">Data view</target>
+      </trans-unit><trans-unit id="5203279511751768967" datatype="html">
+        <source>From</source>
+        <target state="final">From</target>
       </trans-unit>
       <trans-unit id="8013136913336134227" datatype="html">
         <source>Meter Unit</source>
