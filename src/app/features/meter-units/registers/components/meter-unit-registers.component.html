@@ -1,18 +1,21 @@
 <div class="row">
 
-  <div class="col-2 filter-shadow h-100" *ngIf="!hideFilter" [formGroup]="form">
-    <div class="form-group">
-      <div class="form-row d-flex mb-2 mt-2">
-        <h3 i18n class="mb-0">Register</h3>
-        <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close">
-          <i class="far fa-times"></i>
-        </button>
-      </div>
 
-      <div class="form-row" *ngFor="let g of registerGroups2">
-        <app-input-radio class="remove-padding-left" i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
-          [options]="g.registerOptions" (change)="changeRegisterOptionId()">
-        </app-input-radio>
+  <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
+    <div class="filter-shadow h-100">
+      <div class="form-group">
+        <div class="d-flex mb-3 mt-2">
+          <h4 i18n class="mb-0">Register</h4>
+          <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close">
+            <i class="far fa-times"></i>
+          </button>
+        </div>
+
+        <div *ngFor="let g of registerGroups">
+          <app-input-radio i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
+            [options]="g.registerOptions" (change)="changeRegisterOptionId()">
+          </app-input-radio>
+        </div>
       </div>
     </div>
   </div>
@@ -25,10 +28,10 @@
         </button>
 
         <div class="mt-2">
-          <h4 i18n>{{selectedRegister ? selectedRegister.name : 'No register selected'}}</h4>
+          <h3 class="mb-0" i18n>{{selectedRegister ? selectedRegister.name : 'No register selected'}}</h3>
         </div>
         <div class="ml-auto">
-          <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
+          <button type="button" class="btn btn-light pl-2 pr-2 mr-0" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
             <i class="far fa-redo"></i></button>
         </div>
       </div>

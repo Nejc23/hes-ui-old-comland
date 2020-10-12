@@ -56,10 +56,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   public register;
   public showNoData = false;
 
-  public registerGroups: string[];
-
   public registerGroupOptions: RadioOption[];
-  public registerGroups2: RegisterGroup[];
+  public registerGroups: RegisterGroup[];
 
   public isRegisterSelected = false;
   public isDataFound = false;
@@ -263,21 +261,21 @@ export class MeterUnitRegistersComponent implements OnInit {
           return 1;
         });
 
-      this.registerGroups = this.deviceRegisters
-        .map(d => d.groupName)
-        .filter((value, index, self) => self.indexOf(value) === index)
-        .sort((r1, r2) => {
-          if (r1 < r2) {
-            return -1;
-          } else if (r1 === r2) {
-            return 0;
-          }
-          return 1;
-        });
+      // this.registerGroups = this.deviceRegisters
+      //   .map(d => d.groupName)
+      //   .filter((value, index, self) => self.indexOf(value) === index)
+      //   .sort((r1, r2) => {
+      //     if (r1 < r2) {
+      //       return -1;
+      //     } else if (r1 === r2) {
+      //       return 0;
+      //     }
+      //     return 1;
+      //   });
 
       const uniqueGroups = this.deviceRegisters.map(d => d.groupName).filter((value, index, self) => self.indexOf(value) === index);
 
-      this.registerGroups2 = uniqueGroups
+      this.registerGroups = uniqueGroups
         .map(r => ({ groupId: null, groupName: r, registerOptions: this.getRegisterGroupOptions(r) }))
         .sort((r1, r2) => {
           if (r1.groupName < r2.groupName) {
@@ -288,7 +286,7 @@ export class MeterUnitRegistersComponent implements OnInit {
           return 1;
         });
 
-      this.getRegisterGroupOptions(this.registerGroups[0]);
+      this.getRegisterGroupOptions(this.registerGroups[0].groupName);
     });
   }
 
@@ -392,12 +390,12 @@ export class MeterUnitRegistersComponent implements OnInit {
     };
   }
 
-  getRegisterGroupOptions(registerGroup: string): RadioOption[] {
+  getRegisterGroupOptions(groupName: string): RadioOption[] {
     if (!this.deviceRegisters || this.deviceRegisters.length === 0) {
       return [];
     }
 
-    const registersByGroup = this.deviceRegisters.filter(r => r.groupName.toLowerCase() === registerGroup.toLowerCase());
+    const registersByGroup = this.deviceRegisters.filter(r => r.groupName.toLowerCase() === groupName.toLowerCase());
 
     const registerGroupOptions = registersByGroup
       .map(r => ({ label: r.name, value: r.registerDefinitionId }))
