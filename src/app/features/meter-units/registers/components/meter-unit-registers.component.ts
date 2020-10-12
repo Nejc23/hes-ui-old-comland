@@ -1,5 +1,6 @@
+import { registers } from 'src/app/core/repository/consts/meter-units.const';
 import { RegisterValue } from './../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-import { RegisterStatistics } from './../interfaces/data-processing-request.interface';
+import { RegisterGroup, RegisterStatistics } from './../interfaces/data-processing-request.interface';
 import { DataProcessingService } from './../../../../core/repository/services/data-processing/data-processing.service';
 import { AutoTemplateRegister } from './../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
@@ -24,7 +25,7 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
   templateUrl: 'meter-unit-registers.component.html'
 })
 export class MeterUnitRegistersComponent implements OnInit {
-  private selectedRegister: AutoTemplateRegister;
+  public selectedRegister: AutoTemplateRegister;
   private typeId: number;
   private typeName: string;
 
@@ -55,6 +56,21 @@ export class MeterUnitRegistersComponent implements OnInit {
   public register;
   public showNoData = false;
 
+  public registerGroups: string[];
+
+  public registerGroupOptions: RadioOption[];
+  public registerGroups2: RegisterGroup[];
+
+  public isRegisterSelected = false;
+  public isDataFound = false;
+
+  public chartCategories: Date[];
+  public chartData: any[][];
+
+  public form: FormGroup;
+
+  public hideFilter;
+
   constructor(
     private formBuilder: FormBuilder,
     private i18n: I18n,
@@ -65,22 +81,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     private muService: MeterUnitsService,
     private formUtils: FormsUtilsService,
     private codeList: CodelistMeterUnitsRepositoryService
-  ) {
-    // this.formData =  this.createForm();
-    // this.form = this.createForm();
-  }
-
-  public form: FormGroup;
-  public rangeOptions: RadioOption[] = [
-    { value: '1' as string, label: this.i18n('Today') },
-    { value: '2' as string, label: this.i18n('Yesterday') },
-    { value: '3' as string, label: this.i18n('Last 7 days') },
-    { value: '4' as string, label: this.i18n('Current month') },
-    { value: '5' as string, label: this.i18n('Last Month') },
-    { value: '6' as string, label: this.i18n('Custom') }
-  ];
-
-  public hideFilter;
+  ) {}
 
   get registerProperty() {
     return 'register';
@@ -106,62 +107,74 @@ export class MeterUnitRegistersComponent implements OnInit {
     return 'showTable';
   }
 
-  changeRangeOptionId() {
-    const rangeValue = this.form.get(this.rangeProperty).value;
-    this.setRange(rangeValue);
+  changeRegisterOptionId() {
+    const registerValue = this.form.get(this.registerProperty).value;
+    const selectedRegister = this.deviceRegisters.find(r => r.registerDefinitionId === registerValue);
+    this.isRegisterSelected = true;
+    this.showStatistics = selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
+
+    this.setPageSubtitle();
+
+    window.scroll(0, 0);
+    this.showData(selectedRegister);
   }
 
-  setRange(selectedRangeId: string) {
+  setRange(selectedRangeId: number) {
     const date = new Date();
     this.isRangeCustom = false;
 
     switch (selectedRangeId) {
-      case '1': {
+      case 1: {
         // today
         this.form.patchValue({
           startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
           endTime: date
         });
-        return;
+        break;
       }
-      case '2': {
+      case 2: {
         // yesterday
         this.form.patchValue({
           startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1),
           endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
         });
-        return;
+        break;
       }
-      case '3': {
+      case 3: {
         // Last 7 days
         this.form.patchValue({
           startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7),
           endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
         });
-        return;
+        break;
       }
-      case '4': {
+      case 4: {
+        // Last 30 days
+        this.form.patchValue({
+          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 30),
+          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
+        });
+        break;
+      }
+      case 5: {
         // Current month
         this.form.patchValue({
           startTime: new Date(date.getFullYear(), date.getMonth(), 1),
           endTime: date
         });
-
-        return;
+        break;
       }
-      case '5': {
+      case 6: {
         // Last month
         this.form.patchValue({
           startTime: new Date(date.getFullYear(), date.getMonth() - 1, 1),
           endTime: new Date(date.getFullYear(), date.getMonth(), 1, 0, 0)
         });
-        return;
-      }
-      case '6': {
-        // Custom
-        this.isRangeCustom = true;
+        break;
       }
     }
+
+    this.showData(this.selectedRegister);
   }
 
   clickShowHideFilter() {
@@ -177,9 +190,8 @@ export class MeterUnitRegistersComponent implements OnInit {
       this.setRegisters();
     });
 
-    const rangeValue = this.rangeOptions[1].value;
-    this.form = this.createForm(rangeValue);
-    this.setRange(rangeValue);
+    this.form = this.createForm();
+    this.setRange(2); // yesterday
 
     this.muService.getMeterUnit(this.deviceId).subscribe(result => {
       this.setTitle(result.name);
@@ -250,25 +262,64 @@ export class MeterUnitRegistersComponent implements OnInit {
           }
           return 1;
         });
+
+      this.registerGroups = this.deviceRegisters
+        .map(d => d.groupName)
+        .filter((value, index, self) => self.indexOf(value) === index)
+        .sort((r1, r2) => {
+          if (r1 < r2) {
+            return -1;
+          } else if (r1 === r2) {
+            return 0;
+          }
+          return 1;
+        });
+
+      const uniqueGroups = this.deviceRegisters.map(d => d.groupName).filter((value, index, self) => self.indexOf(value) === index);
+
+      this.registerGroups2 = uniqueGroups
+        .map(r => ({ groupId: null, groupName: r, registerOptions: this.getRegisterGroupOptions(r) }))
+        .sort((r1, r2) => {
+          if (r1.groupName < r2.groupName) {
+            return -1;
+          } else if (r1.groupName === r2.groupName) {
+            return 0;
+          }
+          return 1;
+        });
+
+      this.getRegisterGroupOptions(this.registerGroups[0]);
     });
   }
 
-  createForm(rangeValue: string): FormGroup {
-    return this.formBuilder.group(
-      {
-        [this.registerProperty]: [null, Validators.required],
-        [this.rangeProperty]: [rangeValue, Validators.required],
-        [this.startTimeProperty]: [null, Validators.required],
-        [this.endTimeProperty]: [null, Validators.required],
-        [this.showLineChartProperty]: [true, null],
-        [this.showTableProperty]: [true, null]
-      }
-      // { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
-    );
+  createForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.registerProperty]: [null],
+      [this.rangeProperty]: [null, Validators.required],
+      [this.startTimeProperty]: [null, Validators.required],
+      [this.endTimeProperty]: [null, Validators.required],
+      [this.showLineChartProperty]: [true, null],
+      [this.showTableProperty]: [true, null]
+    });
   }
 
-  showData() {
-    this.fillData();
+  showData(register: AutoTemplateRegister, forceRefresh: boolean = false) {
+    const startTime = this.form.get(this.startTimeProperty).value;
+    const endTime = this.form.get(this.endTimeProperty).value;
+
+    if (!register || !startTime || !endTime) {
+      this.isDataFound = false;
+      return;
+    }
+
+    if (!forceRefresh && register === this.selectedRegister && startTime === this.startTime && endTime === this.endTime) {
+      console.log('showData: nothing changed');
+      return;
+    }
+
+    this.selectedRegister = register;
+    this.startTime = startTime;
+    this.endTime = endTime;
 
     this.registersFilter = {
       deviceId: this.deviceId,
@@ -280,28 +331,20 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.rowData = null;
     this.registerStatisticsData = null;
 
-    // const request = this.dataProcessingService.getChartData(this.registersFilter);
-
-    this.showNoData = false;
-
     try {
-      this.formUtils.saveForm(this.form, of({}), '').subscribe(
-        success => {
-          this.dataProcessingService.getChartData(this.registersFilter).subscribe(values => {
-            if (values) {
-              this.showNoData = false;
-              this.rowData = values;
-              this.registerStatisticsData = this.getRegisterStatistics(this.rowData);
-              this.setPageSubtitle();
-            } else {
-              this.showNoData = true;
-            }
-          });
-        },
-        errResult => {
-          console.log('Error saving form: ', errResult);
+      this.dataProcessingService.getChartData(this.registersFilter).subscribe(values => {
+        if (values) {
+          this.isDataFound = true;
+          this.rowData = values;
+          this.registerStatisticsData = this.getRegisterStatistics(this.rowData);
+          this.setPageSubtitle();
+
+          this.chartCategories = values.map(v => new Date(v.timestamp));
+          this.chartData = [values];
+        } else {
+          this.isDataFound = false;
         }
-      );
+      });
     } catch (error) {
       console.log('showData() Error:', error);
     }
@@ -315,13 +358,13 @@ export class MeterUnitRegistersComponent implements OnInit {
     }
 
     this.selectedRange = null;
-    const selectedRangeValue = this.form.get(this.rangeProperty).value;
-    if (selectedRangeValue) {
-      this.selectedRange = this.rangeOptions.find(r => r.value === selectedRangeValue);
-    }
+    // const selectedRangeValue = this.form.get(this.rangeProperty).value;
+    // if (selectedRangeValue) {
+    //   this.selectedRange = this.rangeOptions.find(r => r.value === selectedRangeValue);
+    // }
 
-    this.showLineChart = this.form.get(this.showLineChartProperty).value;
-    this.showTable = this.form.get(this.showTableProperty).value;
+    // this.showLineChart = this.form.get(this.showLineChartProperty).value;
+    // this.showTable = this.form.get(this.showTableProperty).value;
 
     this.startTime = this.form.get(this.startTimeProperty).value;
     this.endTime = this.form.get(this.endTimeProperty).value;
@@ -347,5 +390,41 @@ export class MeterUnitRegistersComponent implements OnInit {
       minValue: registerValues.find(r => r.value === min),
       maxValue: registerValues.find(r => r.value === max)
     };
+  }
+
+  getRegisterGroupOptions(registerGroup: string): RadioOption[] {
+    if (!this.deviceRegisters || this.deviceRegisters.length === 0) {
+      return [];
+    }
+
+    const registersByGroup = this.deviceRegisters.filter(r => r.groupName.toLowerCase() === registerGroup.toLowerCase());
+
+    const registerGroupOptions = registersByGroup
+      .map(r => ({ label: r.name, value: r.registerDefinitionId }))
+      .sort((r1, r2) => {
+        if (r1.label < r2.label) {
+          return -1;
+        } else if (r1.label === r2.label) {
+          return 0;
+        }
+        return 1;
+      });
+    return registerGroupOptions;
+  }
+
+  startTimeChanged(event: any) {
+    console.log('start time changed');
+  }
+
+  onStartTimeBlur() {
+    this.showData(this.selectedRegister);
+  }
+
+  onEndTimeBlur() {
+    this.showData(this.selectedRegister);
+  }
+
+  onRefresh() {
+    this.showData(this.selectedRegister, true);
   }
 }

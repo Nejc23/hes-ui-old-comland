@@ -16,3 +16,9 @@ export interface RegisterStatistics {
   maxValue: RegisterValue;
   minValue: RegisterValue;
 }
+
+export interface RegisterGroup {
+  groupId: string;
+  groupName: string;
+  registerOptions: RadioOption[];
+}
