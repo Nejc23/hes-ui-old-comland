@@ -30,7 +30,7 @@ export class InputMultiselectComponent implements OnInit {
   @Input() isReadOnly = false;
   @Input() inline = false;
 
-  // @Output() onChange = new EventEmitter<any>();
+  @Output() change = new EventEmitter<any>();
 
   selectedValuesArray = [];
 
@@ -58,7 +58,7 @@ export class InputMultiselectComponent implements OnInit {
     return this.formUtils.shouldInputShowErrors(this.formControl);
   }
 
-  selectedValue(selected: Codelist<number>, checked: boolean) {
+  selectedValue(selected: Codelist<number>, checked: boolean, clickOnText: boolean): void {
     if (this.isReadOnly) {
       return;
     }
@@ -81,7 +81,11 @@ export class InputMultiselectComponent implements OnInit {
 
     this.form.get(this.property).setValue(Array.from(new Set(this.selectedValuesArray)).sort());
     this.form.get(this.property).markAsDirty(); // form has changed
-    // this.onChange.emit(selected);
+
+    // emit event when click on tekst not in checkbox
+    if (clickOnText) {
+      this.change.emit(selected);
+    }
   }
 
   fetchCodelist() {

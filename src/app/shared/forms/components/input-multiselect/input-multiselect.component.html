@@ -8,11 +8,11 @@
         [id]="name">
         <div *ngFor="let option of options; let i = index;">
             <input class="form-control" type="checkbox" id="input-checkbox-{{i}}"
-                (change)="selectedValue(option, isOptionChecked(option))" [checked]="isOptionChecked(option)"
+                (change)="selectedValue(option, isOptionChecked(option), false)" [checked]="isOptionChecked(option)"
                 value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox />
 
             <label for="{{option.id}}" class="mr-3 pl-2 control-label"
-                (click)="selectedValue(option, isOptionChecked(option))">{{option.value}}</label>
+                (click)="selectedValue(option, isOptionChecked(option), true)">{{option.value}}</label>
         </div>
     </div>
     <!--Loop through errors-->
