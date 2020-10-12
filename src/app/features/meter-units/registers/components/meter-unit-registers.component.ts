@@ -68,6 +68,8 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   public hideFilter;
 
+  public registerSearch;
+
   constructor(
     private formBuilder: FormBuilder,
     private router: ActivatedRoute,
@@ -101,6 +103,10 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   get showTableProperty() {
     return 'showTable';
+  }
+
+  get registerSearchProperty() {
+    return 'registerSearch';
   }
 
   changeRegisterOptionId() {
@@ -295,7 +301,8 @@ export class MeterUnitRegistersComponent implements OnInit {
       [this.startTimeProperty]: [null, Validators.required],
       [this.endTimeProperty]: [null, Validators.required],
       [this.showLineChartProperty]: [true, null],
-      [this.showTableProperty]: [true, null]
+      [this.showTableProperty]: [true, null],
+      [this.registerSearchProperty]: [null]
     });
   }
 
@@ -422,5 +429,14 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   onRefresh() {
     this.showData(this.selectedRegister, true);
+  }
+
+  get placeholderSearch() {
+    return $localize`Search`;
+  }
+
+  insertedSearchValue(searchValue) {
+    console.log('inserted search value', searchValue);
+    console.log('inserted search value', searchValue);
   }
 }
