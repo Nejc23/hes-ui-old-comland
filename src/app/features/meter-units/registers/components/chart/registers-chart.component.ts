@@ -12,26 +12,14 @@ import { IntlService } from '@progress/kendo-angular-intl';
   templateUrl: 'registers-chart.component.html',
   selector: 'app-registers-chart'
 })
-export class RegistersChartComponent implements OnChanges {
-  @Input() filter: RegistersFilter;
-
+export class RegistersChartComponent {
   public eventValues: RegisterValue[];
-  public categories: Date[];
-  public chartData: any[][];
+  @Input() public categories: Date[];
+  @Input() public chartData: any[][];
   public dateFormats;
 
   constructor(private dataProcessingService: DataProcessingService, private intl: IntlService) {
     this.dateFormats = environment.kendoChartCategoryDateFormats;
-  }
-
-  ngOnChanges() {
-    if (this.filter) {
-      this.dataProcessingService.getChartData(this.filter).subscribe(val => {
-        this.eventValues = val;
-        this.categories = this.eventValues.map(v => new Date(v.timestamp)); // this.eventValues.map(v => `${v.timestamp.toLocaleDateString()} ${v.timestamp.toLocaleTimeString()}`);
-        this.chartData = [this.eventValues];
-      });
-    }
   }
 
   getDateWithTime(dateTime: any) {

@@ -1,6 +1,8 @@
 <div class="row">
-  <div class="col-2 filter-shadow" *ngIf="!hideFilter">
-    <app-dc-filter (filterChange)="reloadGrid(); deselectAll();" (toggleFilter)="toggleFilter()"></app-dc-filter>
+  <div class="col-2 filter-shadow-container" *ngIf="!hideFilter">
+    <div class="filter-shadow"  >
+      <app-dc-filter (filterChange)="reloadGrid(); deselectAll();" (toggleFilter)="toggleFilter()"></app-dc-filter>
+    </div>
   </div>
 
   <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
