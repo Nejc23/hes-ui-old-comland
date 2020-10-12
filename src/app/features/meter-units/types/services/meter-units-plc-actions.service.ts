@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -21,11 +20,10 @@ import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
   providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
-  messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = this.i18n(`Server error!`);
+  messageActionInProgress = $localize`Action in progress!`;
+  messageServerError = $localize`Server error!`;
 
   constructor(
-    private i18n: I18n,
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: MyGridLinkService,
@@ -211,23 +209,23 @@ export class MeterUnitsPlcActionsService {
     let selectedText = `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.i18n('Confirm');
+    component.btnConfirmText = $localize`Confirm`;
     let response: Observable<any> = new Observable();
 
     let operationName = '';
     switch (operation) {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
-        operationName = this.i18n('Get breaker status');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
+        operationName = $localize`Get breaker status`;
+        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.connect:
         response = this.service.postMyGridConnectDevice(params);
-        operationName = this.i18n('Connect');
+        operationName = $localize`Connect`;
         break;
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
-        operationName = this.i18n('Disconnect');
+        operationName = $localize`Disconnect`;
         break;
       case MeterUnitsTypeEnum.touConfig:
         const paramsConf: RequestTOUData = {
@@ -239,22 +237,22 @@ export class MeterUnitsPlcActionsService {
         }; // TODO: timeOfUseId read form store?
 
         response = this.service.postMyGridTOUDevice(paramsConf);
-        operationName = this.i18n('Configure TOU');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
+        operationName = $localize`Configure TOU`;
+        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
-        operationName = this.i18n('Activate FW upgrade');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
+        operationName = $localize`Activate FW upgrade`;
+        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.clearFF:
         response = this.service.clearFF(params);
-        operationName = this.i18n('Activate Clear FF');
-        selectedText = `${this.i18n('for')} ${selectedText}`;
+        operationName = $localize`Activate Clear FF`;
+        selectedText = `${$localize`for`} ${selectedText}`;
     }
     component.btnConfirmText = operationName;
-    component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`${operationName} ${selectedText} selected meter unit(s)?`);
+    component.modalTitle = $localize`Confirm bulk operation`;
+    component.modalBody = `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
 
     modalRef.result.then(
       data => {

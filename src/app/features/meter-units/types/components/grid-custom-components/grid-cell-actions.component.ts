@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridApi } from '@ag-grid-community/core';
 
 @Component({
@@ -11,7 +10,7 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   // called on init
   agInit(params: any): void {
@@ -69,11 +68,11 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'details':
-        return this.i18n('Open details');
+        return $localize`Open details`;
       case 'chart':
-        return this.i18n('Open data');
+        return $localize`Open data`;
       case 'operation':
-        return this.i18n('Select operation');
+        return $localize`Select operation`;
     }
     return '';
   }

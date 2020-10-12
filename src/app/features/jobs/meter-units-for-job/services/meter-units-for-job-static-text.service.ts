@@ -1,32 +1,31 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllForJobStaticTextService {
-  public titleBreadCrumbs = this.i18n('Overview - Meter Units');
+  public titleBreadCrumbs = $localize`Overview - Meter Units`;
 
-  constructor(private i18n: I18n) {}
+  constructor() {}
 
   get headerTitleMeterUnitsAll() {
-    return this.i18n('Meter Units for');
+    return $localize`Meter Units for`;
   }
 
   get notAvailableTekst() {
-    return this.i18n('N/A');
+    return $localize`N/A`;
   }
 
   get noRecordsFound() {
-    return this.i18n('No records found.');
+    return $localize`No records found.`;
   }
 
   get loadingData() {
-    return this.i18n('Loading data...');
+    return $localize`Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return this.i18n('No filter applied');
+    return $localize`No filter applied`;
   }
 
   setfilterHeaderText(
@@ -66,57 +65,57 @@ export class AllForJobStaticTextService {
       showDeleted ||
       showWithoutTemplate
     ) {
-      result = result + this.i18n('Filtered by: ');
+      result = result + $localize`Filtered by: `;
     }
 
     if (status) {
       additionalString =
         vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('status') + additionalString;
+      result = result + $localize`status` + additionalString;
     }
 
     if (vendor) {
       additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('vendor') + additionalString;
+      result = result + $localize`vendor` + additionalString;
     }
 
     if (tag) {
       additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('tag') + additionalString;
+      result = result + $localize`tag` + additionalString;
     }
 
     if (readStatuses) {
       additionalString = firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('read status') + additionalString;
+      result = result + $localize`read status` + additionalString;
     }
 
     if (firmware) {
       additionalString = breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('firmware') + additionalString;
+      result = result + $localize`firmware` + additionalString;
     }
 
     if (breakerState) {
       additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('breaker state') + additionalString;
+      result = result + $localize`breaker state` + additionalString;
     }
 
     if (showChildMBus) {
       additionalString = showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('show child MBus') + additionalString;
+      result = result + $localize`show child MBus` + additionalString;
     }
 
     if (showDeleted) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result = result + this.i18n('show deleted') + additionalString;
+      result = result + $localize`show deleted` + additionalString;
     }
 
     if (showWithoutTemplate) {
       additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result = result + this.i18n('show without template') + additionalString;
+      result = result + $localize`show without template` + additionalString;
     }
 
     if (showOnlyReadyForActivation) {
-      result = result + this.i18n('show only ready for activation');
+      result = result + $localize`show only ready for activation`;
     }
 
     return result;

@@ -1,10 +1,7 @@
-import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { EnsureModuleLoadedOnceGuard } from './../../../../core/ensureModuleLoadedOnceGuard';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
@@ -38,7 +35,6 @@ export class AddDcuFormComponent implements OnInit {
     private dcuService: DataConcentratorUnitsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private jobsService: JobsService,
@@ -128,12 +124,10 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   save(addNew: boolean) {
-    console.log('Save clicked!');
-
     const dcuFormData = this.fillData();
     const request = this.dcuService.createDcu(dcuFormData);
 
-    const successMessage = this.i18n(`Data Concentration Unit was added successfully`);
+    const successMessage = $localize`Data Concentration Unit was added successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
@@ -147,9 +141,8 @@ export class AddDcuFormComponent implements OnInit {
                   this.showSuccessAndTryCloseForm(successMessage, addNew);
                 },
                 errResult => {
-                  console.log('Error adding ScheduleDevice: ', errResult);
                   const resultErrMessage = errResult.error ? errResult.error : null;
-                  const errMessage = this.i18n('Error adding new Schedule Device. ') + resultErrMessage;
+                  const errMessage = $localize`Error adding scheduler.` + ` ` + resultErrMessage;
 
                   this.toast.successToast(successMessage);
                   this.toast.errorToast(errMessage);
@@ -163,7 +156,6 @@ export class AddDcuFormComponent implements OnInit {
           }
         },
         errResult => {
-          console.log('Error saving form: ', errResult);
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
         } // error
       );
@@ -229,24 +221,6 @@ export class AddDcuFormComponent implements OnInit {
   get tagsProperty() {
     return nameOf<DcuForm>(o => o.tags);
   }
-
-  // public credentialsVisible(refControl): boolean
-  // {
-  //   console.log('refControl', refControl);
-
-  //   const typeValue = this.form.get(this.typeProperty).value;
-  //   let ctrVisible = false;
-
-  //   console.log('credentialsVisible, typeValue=', typeValue);
-
-  //   if (typeValue !== null && typeValue.id !== undefined)
-  //   {
-  //     ctrVisible = typeValue.id === 2;
-  //   }
-
-  //   console.log('credentialsVisible=', ctrVisible);
-  //   return ctrVisible;
-  // }
 
   onDismiss() {
     this.modal.dismiss();

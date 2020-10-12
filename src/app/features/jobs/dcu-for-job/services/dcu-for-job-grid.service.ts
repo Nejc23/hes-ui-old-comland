@@ -1,6 +1,5 @@
 import { DcuForJobGridCellTypeComponent } from './../components/grid-custom-components/grid-cell-type.component';
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
@@ -29,7 +28,6 @@ export class DcuForJobGridService {
   dcuId: number;
 
   constructor(
-    private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService
   ) {}
@@ -86,43 +84,43 @@ export class DcuForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: this.i18n('Select/deselect all')
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'name',
-        headerName: this.i18n('Name'),
+        headerName: $localize`Name`,
         pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: this.i18n('Name')
+        headerTooltip: $localize`Name`
       },
       {
         field: 'id',
-        headerName: this.i18n('ID'),
+        headerName: $localize`ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID')
+        headerTooltip: $localize`ID`
       },
       {
         field: 'type',
-        headerName: this.i18n('Type'),
+        headerName: $localize`Type`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: this.i18n('Type')
+        headerTooltip: $localize`Type`
       },
       {
         field: 'vendor',
-        headerName: this.i18n('Vendor'),
+        headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: this.i18n('Vendor')
+        headerTooltip: $localize`Vendor`
       }
     ];
   }
@@ -184,7 +182,7 @@ export class DcuForJobGridService {
 
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
-    console.log('excluded row', excludedRow);
+    // console.log('excluded row', excludedRow);
 
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (!settings.excludedRows) {

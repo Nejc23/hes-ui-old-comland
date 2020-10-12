@@ -1,6 +1,5 @@
 import { FiltersInfo } from './../../../../../../shared/forms/interfaces/filters-info.interface';
 import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -38,7 +37,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
   constructor(
-    private i18n: I18n,
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
@@ -62,7 +60,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
+    // this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
     this.setColumnsListForArrayOfCheckBox();
 
     const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);

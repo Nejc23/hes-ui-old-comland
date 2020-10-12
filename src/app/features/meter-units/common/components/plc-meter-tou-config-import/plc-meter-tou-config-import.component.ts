@@ -2,7 +2,6 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { FileInfo } from '@progress/kendo-angular-upload';
@@ -24,7 +23,6 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private meterService: MeterUnitsService,
     private breadcrumbService: BreadcrumbService
@@ -40,7 +38,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName(this.i18n('Import TOU Configuration'));
+    this.breadcrumbService.setPageName($localize`Import TOU Configuration`);
   }
 
   selected(event: any) {
@@ -70,7 +68,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     const values = this.fillData();
     const request = this.meterService.importConfigTou(values);
     // console.log(`request = ${JSON.stringify(request)}`);
-    const successMessage = this.i18n(`Import xml file was successfully`);
+    const successMessage = $localize`Import xml file was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

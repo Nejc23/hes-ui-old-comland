@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 import { GridSelectionHeaderComponent } from 'src/app/shared/ag-grid/components/grid-selection-header.component';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
@@ -22,7 +21,6 @@ export class DataConcentratorUnitsSelectGridService {
   columns = [];
 
   constructor(
-    private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService
   ) {}
@@ -40,35 +38,35 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: this.i18n('Select/deselect all')
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'name',
-        headerName: this.i18n('Name'),
+        headerName: $localize`Name`,
         pinned: false,
         sortable: true,
         filter: false,
         sort: 'asc',
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: this.i18n('Name')
+        headerTooltip: $localize`Name`
       },
       {
         field: 'id',
-        headerName: this.i18n('ID'),
+        headerName: $localize`ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID')
+        headerTooltip: $localize`ID`
       },
       {
         field: 'ip',
-        headerName: this.i18n('IP'),
+        headerName: $localize`IP`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: this.i18n('IP')
+        headerTooltip: $localize`IP`
       }
     ];
   }
@@ -86,7 +84,7 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: this.i18n('Select/deselect all')
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'name',
@@ -94,30 +92,30 @@ export class DataConcentratorUnitsSelectGridService {
         sortable: true,
         suppressMovable: true,
         sort: 'asc',
-        headerName: this.i18n('Name'),
-        headerTooltip: this.i18n('Name')
+        headerName: $localize`Name`,
+        headerTooltip: $localize`Name`
       },
       {
         field: 'id',
-        headerName: this.i18n('ID'),
+        headerName: $localize`ID`,
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID')
+        headerTooltip: $localize`ID`
       },
       {
         field: 'ip',
-        headerName: this.i18n('IP'),
+        headerName: $localize`IP`,
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: this.i18n('IP')
+        headerTooltip: $localize`IP`
       }
     ];
   }

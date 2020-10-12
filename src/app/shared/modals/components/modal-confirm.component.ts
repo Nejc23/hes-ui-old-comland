@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 
 @Component({
   selector: 'app-modal-confirm',
@@ -24,9 +23,9 @@ import { I18n } from '@ngx-translate/i18n-polyfill';
 export class ModalConfirmComponent implements OnInit {
   @Input() modalTitle: string;
   @Input() modalBody: string;
-  @Input() btnConfirmText = this.i18n('Confirm');
+  @Input() btnConfirmText = $localize`Confirm`;
 
-  constructor(public i18n: I18n, public activeModal: NgbActiveModal) {}
+  constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {}
 

@@ -2,7 +2,6 @@ import { MeterUnitsTypeGridService } from './../../../types/services/meter-units
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
@@ -10,7 +9,6 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { FileGuid, MeterUnitsFwUpgrade } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -24,8 +22,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = this.i18n('Required field');
-  messageServerError = this.i18n(`Server error!`);
+  configRequiredText = $localize`Required field`;
+  messageServerError = $localize`Server error!`;
   deviceIdsParam = [];
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
@@ -33,7 +31,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   uploadSaveUrl = `${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
-  allowedExtExplainText = 'can only upload one file.';
+  allowedExtExplainText = $localize`can only upload one file.`;
   acceptExtensions = '.img';
   public files: Array<any>;
   activate = false;
@@ -41,7 +39,6 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    public i18n: I18n,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private toast: ToastNotificationService,
@@ -93,7 +90,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.createFwUpgrade(values);
-    const successMessage = this.i18n(`Meter Units upload Edited was successfully`);
+    const successMessage = $localize`Meter Units upload Edited was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         if (result && result.requestId.length > 0) {

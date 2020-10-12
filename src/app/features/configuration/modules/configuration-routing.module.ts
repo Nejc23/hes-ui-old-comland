@@ -2,7 +2,6 @@ import { AutoTemplateComponent } from '../auto-template/components/auto-template
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ModalContainerComponent } from 'src/app/shared/modals/components/modal-container.component';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 
@@ -51,9 +50,9 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class ConfigurationRoutingModule {
-  constructor(private i18n: I18n) {
+  constructor() {
     routes.forEach(x => {
-      x.data.breadcrumb = i18n(x.data.breadcrumb);
+      x.data.breadcrumb = $localize`${x.data.breadcrumb}`;
     });
   }
 }

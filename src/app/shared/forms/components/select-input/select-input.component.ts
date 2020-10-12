@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angu
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
@@ -24,7 +23,7 @@ export class SelectInputComponent implements OnInit, OnDestroy {
 
   selection: Codelist<number | string> = { id: null, value: 'Select item...' };
 
-  constructor(private i18n: I18n, private formUtils: FormsUtilsService) {}
+  constructor(private formUtils: FormsUtilsService) {}
 
   ngOnInit() {
     if (!this.form) {

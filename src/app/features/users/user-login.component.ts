@@ -1,7 +1,6 @@
 import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import 'bootstrap/dist/js/bootstrap.bundle';
 import * as moment from 'moment';
 import { VERSION } from 'src/environments/version';
 import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
@@ -17,7 +16,6 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
 import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/core/repository/interfaces/auth/authentication.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { User } from 'oidc-client';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 
@@ -53,7 +51,6 @@ export class UserLoginComponent implements OnInit {
     private cookieService: CookieService,
     private route: ActivatedRoute,
     private languageService: LanguageService,
-    private i18n: I18n,
     @Inject(LOCALE_ID) private locale: string
   ) {
     // this.languages$ = languages;
@@ -107,7 +104,7 @@ export class UserLoginComponent implements OnInit {
 
   reset() {
     const request = this.authRepositoryService.requestPasswordReset(this.formReset.value);
-    const successMessage = this.i18n(`Reset password request successful`);
+    const successMessage = $localize`Reset password request successful`;
     this.formUtils.saveForm(this.formReset, request, successMessage).subscribe(
       response => {
         this.forgotPassword = false;
@@ -122,7 +119,7 @@ export class UserLoginComponent implements OnInit {
     this.isFormSubmitted = true;
 
     const request = this.authRepositoryService.authenticateUserDevelop(this.form.value);
-    const successMessage = this.i18n(`Login successful`);
+    const successMessage = $localize`Login successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       token => {
         this.isFormSubmitted = true;
@@ -139,7 +136,7 @@ export class UserLoginComponent implements OnInit {
     this.isFormSubmitted = true;
 
     const request = this.authRepositoryService.newPassword(this.formNewPassword.value);
-    const successMessage = this.i18n(`New password successful saved`);
+    const successMessage = $localize`New password successful saved`;
     this.formUtils.saveForm(this.formNewPassword, request, successMessage).subscribe(
       token => {
         this.isFormSubmitted = true;
@@ -155,7 +152,7 @@ export class UserLoginComponent implements OnInit {
   onError(): () => void {
     return () => {
       this.isFormSubmitted = false;
-      const errorMessage = this.i18n(`Login failed! Check your credentials ...`);
+      const errorMessage = $localize`Login failed! Check your credentials ...`;
       this.toast.errorToast(errorMessage);
     };
   }

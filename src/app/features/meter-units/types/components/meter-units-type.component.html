@@ -27,9 +27,9 @@
         (toggleFilter)="toggleFilter()">
 
         <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
-          <div class="btn-group">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-            <div class="dropdown-menu" style="min-width: 13rem">
+          <div dropdown class="btn-group">
+            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
+            <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
               <div>
                 <button class="dropdown-item" (click)="onDelete()" [disabled]="true"><span i18n>Delete</span></button>
               </div>
@@ -90,8 +90,14 @@
             </div>
           </div>
 
-          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-tags"></i><span i18n>Tags</span></button>
-          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true"><i class="far fa-chart-bar" disabled></i><span i18n>Data</span></button>
+          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
+            <i class="far fa-tags"></i>
+            <span i18n>Tags</span>
+          </button>
+          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
+            <i class="far fa-chart-bar" disabled></i>
+            <span i18n>Data</span>
+          </button>
         </div>
       </app-action-form>
     </div>
@@ -140,7 +146,9 @@
 <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height:80vh;">
   <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
   <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
-  <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus"><span i18n> Add New</span></i></button></div>
+  <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus">
+    <span i18n> Add New</span></i>
+  </button></div>
 </div>
 </div>
 <ng-template #tipMoreSave><span i18n>More options</span></ng-template>

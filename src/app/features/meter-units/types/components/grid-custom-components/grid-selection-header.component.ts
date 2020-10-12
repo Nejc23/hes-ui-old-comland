@@ -105,6 +105,10 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
     }
   }
 
+  refresh(params: any): boolean {
+    return true;
+  }
+
   ngOnDestroy() {
     if (this.serviceSubscription2) {
       this.serviceSubscription2.unsubscribe();

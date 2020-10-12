@@ -51,14 +51,15 @@
         <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
           <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
             <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()"><span i18n>Select all</span>
+              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
+                <span i18n>Select all</span>
                     ({{totalCount}})</a></strong></small>
           </div>
 
           <div class="mr-3" *ngIf="checkSelectedAll()">
-            <small class="link"><strong><span i18n>All ({{getTotalCountWithoutExcluded()}}) items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"><span i18n>Clear
-                      selected</span></a></strong></small>
+            <small class="link"><strong><span i18n>All</span> ({{getTotalCountWithoutExcluded()}}) <span i18n>items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+                <span i18n>Clear selected</span></a></strong></small>
           </div>
         </div>
       </div>
@@ -68,7 +69,8 @@
     <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height: 30vh;">
       <i class="far fa-empty-set fa-5x text-secondary mb-4"></i>
       <h3 class="mb-3" i18n>You have no Data Concentrator Units yet!</h3>
-      <button type="button" class="btn btn-lg btn-primary" (click)="addDcu()"><i class="far fa-plus"></i><span i18n>Add First</span></button>
+      <button type="button" class="btn btn-lg btn-primary" (click)="addDcu()"><i class="far fa-plus"></i>
+        <span i18n>Add First</span></button>
     </div>
   </div>
 </div>

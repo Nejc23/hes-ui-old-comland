@@ -6,7 +6,6 @@ import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 import { VERSION } from 'src/environments/version';
 import { PermissionsService } from '../../../core/permissions/services/permissions.service';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-sidebar-meter',

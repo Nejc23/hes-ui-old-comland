@@ -4,6 +4,16 @@
   "newProjectRoot": "projects",
   "projects": {
     "myGrid": {
+      "i18n": {        
+        "locales": {
+          "en": "src/assets/i18n/messages.en.xlf",
+          "sl": "src/assets/i18n/messages.sl.xlf",
+          "cs": "src/assets/i18n/messages.cs.xlf",
+          "de": "src/assets/i18n/messages.de.xlf",
+          "fr": "src/assets/i18n/messages.fr.xlf",
+          "it": "src/assets/i18n/messages.it.xlf"
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -14,9 +24,11 @@
         }
       },
       "architect": {
-        "build": {
+        "build": {          
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "localize": false,
+            "aot": true,
             "outputPath": "dist/myGrid",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -30,34 +42,49 @@
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },
-              "src/styles.scss"
+              "src/styles.scss"              
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js"
-            ],
-            "es5BrowserSupport": true,
+            ],            
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles/brand/default"
               ]
-            }
+            },
+            "allowedCommonJsDependencies": [
+              "jquery",
+              "lodash",
+              "@progress/kendo-angular-intl/locales/sl/all",
+              "@progress/kendo-angular-intl/locales/cs/all",
+              "@progress/kendo-angular-intl/locales/de/all",
+              "@progress/kendo-angular-intl/locales/fr/all",
+              "@progress/kendo-angular-intl/locales/it/all"
+           ]
           },
           "configurations": {
             "develop": {
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
                 }
-              ]
+              ],            
+              "localize": ["en"]
             },
             "develop-sl": {
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/locale.ts",
@@ -68,1104 +95,182 @@
                   "with": "src/environments/brand/default/favicon.ico"
                 }
               ]
-            },
-            "production": {
-              "outputPath": "dist/myGrid/en",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
-            "production-sl": {
-              "outputPath": "dist/myGrid/sl",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-sl.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
-            "production-cs": {
-              "outputPath": "dist/myGrid/cs",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-cs.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
-            "production-de": {
-              "outputPath": "dist/myGrid/de",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-de.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
-            "production-fr": {
-              "outputPath": "dist/myGrid/fr",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-fr.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            }, 
-            "production-it": {
-              "outputPath": "dist/myGrid/it",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-it.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            },
-            "staging-en": {
-              "outputPath": "dist/staging/myGrid/en",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
-            "staging-sl": {
-              "outputPath": "dist/staging/myGrid/sl",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-sl.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
-            "staging-cs": {
-              "outputPath": "dist/staging/myGrid/cs",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-cs.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
-            "staging-de": {
-              "outputPath": "dist/staging/myGrid/de",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-de.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
-            "staging-fr": {
-              "outputPath": "dist/staging/myGrid/fr",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-fr.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            },
-            "staging-it": {
-              "outputPath": "dist/staging/myGrid/it",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-it.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            },
-            "staging-en-amera": {
-              "outputPath": "c:/inetpub/wwwroot/en",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.staging.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
-
-            "production-dev": {
-              "outputPath": "c:/inetpub/wwwroot/en",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
-            },
-            "develop-amera": {
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/amera"
-                ]
+            ,            "localize": [
+              "sl"
+            ]
+          },
+          "production": { 
+            "outputPath": "dist/hes",
+            "deleteOutputPath": true,
+            "localize": false,
+            "assets": [                
+              "src/assets",
+              { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+            ],
+            "fileReplacements": [                
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              },
+              {
+                "replace": "src/favicon.ico",
+                "with": "src/environments/brand/default/favicon.ico"
+              }                
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "9mb",
+                "maximumError": "13mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "6kb"
               }
-            },
-            "develop-ePointHES": {
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
+            ]
+          },
+          "production-myGrid": { 
+            "localize": ["en", "sl", "cs", "de", "fr", "it"],
+            "outputPath": "dist/myGrid",
+            "deleteOutputPath": true,
+            "assets": [                
+              "src/assets",
+              { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
+            ],
+            "fileReplacements": [                
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              },
+              {
+                "replace": "src/favicon.ico",
+                "with": "src/environments/brand/default/favicon.ico"
+              }                
+            ],
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "9mb",
+                "maximumError": "13mb"
+              },
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "6kb"
               }
-            },
-
-            "production-amera": {
-              "outputPath": "dist/amera/en",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
+            ]
+          },
+          "production-amera": {
+            "localize": ["en", "sl", "cs", "de", "fr", "it"],
+            "outputPath": "dist/amera",
+            "deleteOutputPath": true,
+            "assets": [                
+              "src/assets",
+              { "glob": "favicon.ico", "input": "src/environments/brand/amera/", "output": "/" }
+            ],
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              },
+              {
+                "replace": "src/environments/brand/default/brand.ts",
+                "with": "src/environments/brand/amera/brand.ts"
+              },
+              {
+                "replace": "src/favicon.ico",
+                "with": "src/environments/brand/amera/favicon.ico"
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
                   "src/styles/brand/amera"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
+              ]
             },
-
-            "production-ePointHES": {
-              "outputPath": "dist/ePointHES/en",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "9mb",
+                "maximumError": "13mb"
               },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.en.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "en",
-              "baseHref": "/en/"
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "6kb"
+              }
+            ]
+          },
+          "production-ePointHES": {
+            "localize": ["en", "sl", "cs", "de", "fr", "it"],
+            "outputPath": "dist/ePointHES",
+            "deleteOutputPath": true,
+            "assets": [                
+              "src/assets",
+              { "glob": "favicon.ico", "input": "src/environments/brand/ePointHES/", "output": "/" }
+            ],
+            "fileReplacements": [
+              {
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              },
+              {
+                "replace": "src/environments/brand/default/brand.ts",
+                "with": "src/environments/brand/ePointHES/brand.ts"
+              },
+              {
+                "replace": "src/favicon.ico",
+                "with": "src/environments/brand/ePointHES/favicon.ico"
+              }
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                    "src/styles/brand/ePointHES"
+              ]
             },
-
-            "production-sl-amera": {
-              "outputPath": "dist/amera/sl",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-sl.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/amera"
-                ]
+            "optimization": true,
+            "outputHashing": "all",
+            "sourceMap": false,
+            "extractCss": true,
+            "namedChunks": false,
+            "aot": true,
+            "extractLicenses": true,
+            "vendorChunk": false,
+            "buildOptimizer": true,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "9mb",
+                "maximumError": "13mb"
               },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
-            "production-cs-amera": {
-              "outputPath": "dist/amera/cs",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-cs.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/amera"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
-            "production-de-amera": {
-              "outputPath": "dist/amera/de",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-de.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/amera"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
-
-            "production-fr-amera": {
-              "outputPath": "dist/amera/fr",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-fr.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/amera"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            },
-
-            "production-it-amera": {
-              "outputPath": "dist/amera/it",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-it.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/amera"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            },
-
-            "production-sl-ePointHES": {
-              "outputPath": "dist/ePointHES/sl",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-sl.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.sl.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "sl",
-              "baseHref": "/sl/"
-            },
-
-            "production-cs-ePointHES": {
-              "outputPath": "dist/ePointHES/cs",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-cs.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.cs.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "cs",
-              "baseHref": "/cs/"
-            },
-
-            "production-de-ePointHES": {
-              "outputPath": "dist/ePointHES/de",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-de.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.de.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "de",
-              "baseHref": "/de/"
-            },
-
-            "production-fr-ePointHES": {
-              "outputPath": "dist/ePointHES/fr",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-fr.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.fr.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "fr",
-              "baseHref": "/fr/"
-            },
-
-            "production-it-ePointHES": {
-              "outputPath": "dist/ePointHES/it",
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                },
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-it.ts"
-                },
-                {
-                  "replace": "src/environments/brand/default/brand.ts",
-                  "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }
-              ],
-              "stylePreprocessorOptions": {
-                "includePaths": [
-                  "src/styles/brand/ePointHES"
-                ]
-              },
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "9mb",
-                  "maximumError": "13mb"
-                }
-              ],
-              "i18nFile": "src/assets/i18n/messages.it.xlf",
-              "i18nFormat": "xlf",
-              "i18nLocale": "it",
-              "baseHref": "/it/"
-            }
+              {
+                "type": "anyComponentStyle",
+                "maximumWarning": "6kb"
+              }
+            ]}
           }
         },
         "serve": {
@@ -1191,6 +296,9 @@
             },
             "develop-ePointHES": {
               "browserTarget": "myGrid:build:develop-ePointHES"
+            },
+            "sl": {
+              "browserTarget": "myGrid:build:sl"
             }
           }
         },
@@ -1355,7 +463,7 @@
   "defaultProject": "myGrid",
   "schematics": {
     "@schematics/angular:component": {
-      "styleext": "scss"
+      "style": "scss"
     }
   }
 }

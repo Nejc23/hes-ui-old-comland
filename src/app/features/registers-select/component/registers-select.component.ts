@@ -1,15 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { RegistersSelectService } from 'src/app/core/repository/services/registers-select/registers-select.service';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { RegistersSelectGridService } from '../services/registers-select-grid.service';
 import * as _ from 'lodash';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/registers-select/registers-select-request.interface';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
@@ -37,12 +34,10 @@ export class RegistersSelectComponent implements OnInit {
   selectedAll = false;
 
   constructor(
-    private i18n: I18n,
     private registersSelectService: RegistersSelectService,
     private registersSelectGridService: RegistersSelectGridService,
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
-    private formUtils: FormsUtilsService,
     private jobsService: JobsService
   ) {}
 

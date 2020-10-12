@@ -113,6 +113,10 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
     this.isDisabled = settings != null && settings.isSelectedAll ? settings.isSelectedAll : false;
   }
 
+  refresh(params: any): boolean {
+    return true;
+  }
+
   ngOnDestroy() {
     if (this.serviceSubscription) {
       this.serviceSubscription.unsubscribe();

@@ -1,7 +1,6 @@
 import { DataConcentratorUnitsService } from './../../../../core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ActivatedRoute } from '@angular/router';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridOptions, Module } from '@ag-grid-community/core';
@@ -90,15 +89,14 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   public localeText;
 
   // messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = this.i18n(`Server error!`);
-  messageDataRefreshed = this.i18n(`Data refreshed!`);
-  messageActionFailed = this.i18n(`Action failed!`);
+  messageServerError = $localize`Server error!`;
+  messageDataRefreshed = $localize`Data refreshed!`;
+  messageActionFailed = $localize`Action failed!`;
 
   constructor(
     private route: ActivatedRoute,
     private dcuForJobGridService: DcuForJobGridService,
     private staticTextService: DcuForJobStaticTextService,
-    private i18n: I18n,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private service: MyGridLinkService,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
@@ -187,19 +185,19 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: this.i18n('Columns'),
-      filters: this.i18n('Filters'),
+      columns: $localize`Columns`,
+      filters: $localize`Filters`,
 
       // for filter panel
-      page: this.i18n('page'),
-      more: this.i18n('more'),
-      to: this.i18n('to'),
-      of: this.i18n('of'),
-      next: this.i18n('next'),
-      last: this.i18n('last'),
-      first: this.i18n('first'),
-      previous: this.i18n('previous'),
-      loadingOoo: this.i18n('loading...')
+      page: $localize`page`,
+      more: $localize`more`,
+      to: $localize`to`,
+      of: $localize`of`,
+      next: $localize`next`,
+      last: $localize`last`,
+      first: $localize`first`,
+      previous: $localize`previous`,
+      loadingOoo: $localize`loading...`
     };
 
     // this.deleteAllRequests();
@@ -380,7 +378,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
               }
             });
         } else {
-          console.log(`requestModel = `, that.requestModel);
           that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe(response => {
             that.gridApi.hideOverlay();
             that.totalCount = 0;
@@ -686,9 +683,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   onRemoveFromJob() {
     const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
     const deviceIdsParam = [];
-
-    console.log('onRemoveFromJob, selectedRows', selectedRows);
-
     // const selectedDeviceCount = this.totalCount;
     const selectedAll = this.dcuForJobGridService.getSessionSettingsSelectedAll();
     if (!selectedAll && selectedRows && selectedRows.length > 0) {
@@ -698,7 +692,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     const selectedText = `${this.getSelectedCount()}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.i18n('Confirm');
+    component.btnConfirmText = $localize`Confirm`;
     let response: Observable<any> = new Observable();
 
     const request: RequestDcuForJob = {
@@ -720,12 +714,11 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       }
     }
 
-    console.log('removeConcentratorsFromJob.request', request);
     response = this.dataConcentratorUnitsService.removeConcentratorsFromJob(request);
 
-    component.btnConfirmText = this.i18n('Remove');
-    component.modalTitle = this.i18n('Confirm bulk operation');
-    component.modalBody = this.i18n(`Remove ${selectedText} Concentrator(s) from Job?`);
+    component.btnConfirmText = $localize`Remove`;
+    component.modalTitle = $localize`Confirm bulk operation`;
+    component.modalBody = $localize`Remove ${selectedText} Concentrator(s) from Job?`;
 
     modalRef.result.then(
       data => {
@@ -734,7 +727,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         response.subscribe(
           value => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.successToast(this.i18n('Selected Concentrators removed successfully.'));
+            this.toast.successToast($localize`Selected Concentrators removed successfully.`);
             this.refresh();
           },
           e => {
@@ -789,7 +782,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${this.i18n('of')} ${this.totalCount}`;
+        return `${selectedCount} ${$localize`of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;

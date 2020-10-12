@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -25,7 +24,6 @@ export class PlcMeterBreakerModeComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private i18n: I18n,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService
   ) {
@@ -40,13 +38,13 @@ export class PlcMeterBreakerModeComponent implements OnInit {
 
   ngOnInit() {
     this.disconnectorModes = [
-      { id: 0, value: this.i18n('Always connected') },
-      { id: 1, value: this.i18n('Only manual re-connection allowed') },
-      { id: 2, value: this.i18n('Remote and manual re-connection allowed') },
-      { id: 3, value: this.i18n('Only manual re-connection allowed / Manual disconnection not allowed') },
-      { id: 4, value: this.i18n('Remote and manual re-connection allowed / Manual disconnection not allowed') },
-      { id: 5, value: this.i18n('Manual and local re-connection allowed') },
-      { id: 6, value: this.i18n('Manual and local re-connection allowed / Manual disconnection not allowed') }
+      { id: 0, value: $localize`Always connected` },
+      { id: 1, value: $localize`Only manual re-connection allowed` },
+      { id: 2, value: $localize`Remote and manual re-connection allowed` },
+      { id: 3, value: $localize`Only manual re-connection allowed / Manual disconnection not allowed` },
+      { id: 4, value: $localize`Remote and manual re-connection allowed / Manual disconnection not allowed` },
+      { id: 5, value: $localize`Manual and local re-connection allowed` },
+      { id: 6, value: $localize`Manual and local re-connection allowed / Manual disconnection not allowed` }
     ];
   }
 
@@ -76,7 +74,7 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     this.errMsg = '';
     const values = this.fillData();
     const request = this.myGridService.setBreakerMode(values);
-    const successMessage = this.i18n(`Meter Units set Breaker mode was successfully`);
+    const successMessage = $localize`Meter Units set Breaker mode was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         console.log(result);

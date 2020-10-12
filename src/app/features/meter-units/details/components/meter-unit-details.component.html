@@ -5,10 +5,10 @@
       <button class="btn btn-primary" (click)="editMeterUnit()">
         <i class="far fa-edit"></i><span i18n>Edit</span>
       </button>
-      <div class="btn-group">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
+      <div dropdown class="btn-group">
+        <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
           data-toggle="dropdown"><span i18n>Operations</span></button>
-        <div class="dropdown-menu">
+        <div *dropdownMenu class="dropdown-menu">
 
           <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
 
@@ -63,12 +63,12 @@
 
     <div class="form-group" *ngIf="editMode">
       <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
-      <button class="btn btn-primary" (click)="saveMeterUnit()">Save</button>
+      <button class="btn btn-primary" (click)="saveMeterUnit()" i18n>Save</button>
     </div>
 
     <div class="form-group" *ngIf="data">
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong>Error saving Meter Unit!</strong> <br /> {{saveError}}
+        <strong><span i18n>Error saving Meter Unit!</span></strong> <br /> {{saveError}}
       </div>
 
       <div class="form-group">

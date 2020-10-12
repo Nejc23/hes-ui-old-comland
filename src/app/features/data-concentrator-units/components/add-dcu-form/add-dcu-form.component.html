@@ -5,7 +5,7 @@
   <div modal-body>
     <ng-container>
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong>Error saving DCU!</strong> <br/> {{saveError}}
+        <strong><span i18n>Error saving DCU!</span></strong> <br/> {{saveError}}
       </div>
 
       <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
@@ -63,12 +63,12 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
-      <div class="btn-group dropdown">
+      <div dropdown class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
-        <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button>
-        <div class="dropdown-menu dropdown-menu-right">
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
           <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
         </div>
       </div>

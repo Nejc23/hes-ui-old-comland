@@ -2,7 +2,6 @@ import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.inter
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
@@ -92,7 +91,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private staticTextService: DataConcentratorUnitsStaticTextService,
-    private i18n: I18n,
     public gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
@@ -167,21 +165,21 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: this.i18n('Columns'),
-      filters: this.i18n('Filters'),
+      columns: $localize`Columns`,
+      filters: $localize`Filters`,
 
       // for filter panel
-      page: this.i18n('page'),
-      more: this.i18n('more'),
-      to: this.i18n('to'),
-      of: this.i18n('of'),
-      next: this.i18n('next'),
-      last: this.i18n('last'),
-      first: this.i18n('first'),
-      previous: this.i18n('previous'),
-      loadingOoo: this.i18n('loading...'),
+      page: $localize`page`,
+      more: $localize`more`,
+      to: $localize`to`,
+      of: $localize`of`,
+      next: $localize`next`,
+      last: $localize`last`,
+      first: $localize`first`,
+      previous: $localize`previous`,
+      loadingOoo: $localize`loading...`,
 
-      selectAll: this.i18n('Select All')
+      selectAll: $localize`Select All`
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
@@ -202,7 +200,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // set momemnt text (next planned read) out of date and time
   setMomentNextPlannedReadTime(time: string) {
-    return this.staticTextService.nextPlannedReadText + this.i18n(moment(time).fromNow());
+    return this.staticTextService.nextPlannedReadText + $localize`${moment(time).fromNow()}`;
   }
 
   // ag-grid
@@ -589,14 +587,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.i18n('Delete');
-    component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
+    component.btnConfirmText = $localize`Delete`;
+    component.modalBody = $localize`Delete` + ` ${selectedText} ` + $localize`selected Data Concentrator Units?`;
 
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
         const request = this.dataConcentratorUnitsService.deleteDcu(object);
-        this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
+        this.formUtils.deleteForm(request, $localize`Selected items deleted`).subscribe(
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
@@ -623,7 +621,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     if (excludedRowsLength === 0) {
       return this.totalCount.toString();
     } else {
-      return `${this.totalCount - excludedRowsLength} ${this.i18n('of')} ${this.totalCount}`;
+      return `${this.totalCount - excludedRowsLength} ${$localize`of`} ${this.totalCount}`;
     }
   }
 

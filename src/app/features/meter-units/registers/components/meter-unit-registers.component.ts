@@ -5,7 +5,6 @@ import { DataProcessingService } from './../../../../core/repository/services/da
 import { AutoTemplateRegister } from './../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { ActivatedRoute } from '@angular/router';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
@@ -71,7 +70,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private i18n: I18n,
     private router: ActivatedRoute,
     private autoTemplateService: AutoTemplatesService,
     private dataProcessingService: DataProcessingService,
@@ -205,7 +203,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: this.i18n('Meters'),
+        label: $localize`Meters`,
         params: {},
         url: null
       }
@@ -213,14 +211,14 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     if (this.typeId && this.typeName) {
       breadcrumbs.push({
-        label: this.i18n(this.typeName),
+        label: this.typeName,
         params: {},
         url: `/meterUnits/${this.typeId}`
       });
     }
 
     breadcrumbs.push({
-      label: this.i18n('Data view'),
+      label: $localize`Data view`,
       params: {},
       url: null
     });

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
@@ -36,7 +35,6 @@ export class DataConcentratorUnitsGridService {
   paramsDCU = {} as GridRequestParams;
 
   constructor(
-    private i18n: I18n,
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private gridColumnShowHideService: GridColumnShowHideService
@@ -58,11 +56,11 @@ export class DataConcentratorUnitsGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: this.i18n('Select/deselect all')
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'nextRead',
-        headerName: this.i18n(''),
+        headerName: $localize``,
         suppressColumnsToolPanel: true,
         suppressMovable: true,
         //  lockPosition: true,
@@ -71,105 +69,105 @@ export class DataConcentratorUnitsGridService {
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellIconComponent',
-        headerTooltip: this.i18n(''),
+        headerTooltip: $localize``,
         minWidth: 50,
         maxWidth: 50,
         width: 50
       },
       {
         field: 'status',
-        headerName: this.i18n('Status'),
+        headerName: $localize`Status`,
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: this.i18n('Status')
+        headerTooltip: $localize`Status`
       },
       {
         field: 'name',
-        headerName: this.i18n('Name'),
+        headerName: $localize`Name`,
         //   pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: this.i18n('Name')
+        headerTooltip: $localize`Name`
       },
       {
         field: 'meters',
-        headerName: this.i18n('Meters'),
+        headerName: $localize`Meters`,
         //    pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellMetersComponent',
-        headerTooltip: this.i18n('Meters')
+        headerTooltip: $localize`Meters`
       },
       {
         field: 'readStatusTimeStamp',
-        headerName: this.i18n('Read status'),
+        headerName: $localize`Read status`,
         //    pinned: true,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: this.i18n('Read status')
+        headerTooltip: $localize`Read status`
       },
       {
         field: 'type',
-        headerName: this.i18n('Type'),
+        headerName: $localize`Type`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: this.i18n('Type')
+        headerTooltip: $localize`Type`
       },
       {
         field: 'vendor',
-        headerName: this.i18n('Vendor'),
+        headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: this.i18n('Vendor')
+        headerTooltip: $localize`Vendor`
       },
       {
         field: 'id',
-        headerName: this.i18n('ID'),
+        headerName: $localize`ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: this.i18n('ID')
+        headerTooltip: $localize`ID`
       },
       {
         field: 'ip',
-        headerName: this.i18n('IP'),
+        headerName: $localize`IP`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: this.i18n('IP')
+        headerTooltip: $localize`IP`
       },
       {
         field: 'lastCommunication',
-        headerName: this.i18n('Last communication'),
+        headerName: $localize`Last communication`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellLastCommunicationComponent',
-        headerTooltip: this.i18n('Last communication')
+        headerTooltip: $localize`Last communication`
       },
       {
         field: 'tags',
-        headerName: this.i18n('Tags'),
+        headerName: $localize`Tags`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
-        headerTooltip: this.i18n('Tags')
+        headerTooltip: $localize`Tags`
       },
       {
         field: 'jobStatus',
-        headerName: this.i18n('Job status'),
+        headerName: $localize`Job status`,
         // pinned: 'right',
         // lockPinned: true,
         // lockPosition: true,
@@ -177,7 +175,7 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
-        headerTooltip: this.i18n('Job status'),
+        headerTooltip: $localize`Job status`,
         resizable: false
       },
       {

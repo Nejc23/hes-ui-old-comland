@@ -1,7 +1,6 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { FormBuilder } from '@angular/forms';
@@ -53,12 +52,11 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   };
   columnDefs = [];
 
-  private localeText;
+  public localeText;
 
   private refreshSubscription: Subscription;
 
   constructor(
-    private i18n: I18n,
     private schedulerJobsService: JobsService,
     private schedulerJobsListGridService: SchedulerJobsListGridService,
     public fb: FormBuilder,
@@ -150,24 +148,23 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    console.log('scheduled-jobs-list.component ngOnInit');
     this.columnDefs = this.schedulerJobsListGridService.setGridDefaultColumns();
 
     this.localeText = {
       // for side panel
-      columns: this.i18n('Columns'),
-      filters: this.i18n('Filters'),
+      columns: $localize`Columns`,
+      filters: $localize`Filters`,
 
       // for filter panel
-      page: this.i18n('page'),
-      more: this.i18n('more'),
-      to: this.i18n('to'),
-      of: this.i18n('of'),
-      next: this.i18n('next'),
-      last: this.i18n('last'),
-      first: this.i18n('first'),
-      previous: this.i18n('previous'),
-      loadingOoo: this.i18n('loading...')
+      page: $localize`page`,
+      more: $localize`more`,
+      to: $localize`to`,
+      of: $localize`of`,
+      next: $localize`next`,
+      last: $localize`last`,
+      first: $localize`first`,
+      previous: $localize`previous`,
+      loadingOoo: $localize`loading...`
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);

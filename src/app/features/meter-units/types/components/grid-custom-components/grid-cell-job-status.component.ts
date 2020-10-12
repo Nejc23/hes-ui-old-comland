@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 import { jobStatus } from '../../consts/meter-units.consts';
 
@@ -13,7 +12,7 @@ export class GridCellJobStatusComponent implements ICellRendererAngularComp {
   public params: any;
   jobStatus = jobStatus;
 
-  constructor(private statictextService: MeterUnitsTypeStaticTextService, private i18n: I18n) {}
+  constructor(private statictextService: MeterUnitsTypeStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

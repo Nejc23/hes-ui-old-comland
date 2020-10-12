@@ -1,11 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
-import { I18n } from '@ngx-translate/i18n-polyfill';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import * as _ from 'lodash';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
@@ -74,7 +72,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   };
 
   constructor(
-    private i18n: I18n,
     private repositoryService: DataConcentratorUnitsService,
     private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService,
     public fb: FormBuilder,

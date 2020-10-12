@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { ActiveJobsStaticTextService } from '../../services/active-jobs-static-text.service';
 
 @Component({
@@ -11,7 +10,7 @@ export class GridCellActiveJobStatusComponent implements ICellRendererAngularCom
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private statictextService: ActiveJobsStaticTextService, private i18n: I18n) {}
+  constructor(private statictextService: ActiveJobsStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -24,6 +23,6 @@ export class GridCellActiveJobStatusComponent implements ICellRendererAngularCom
   }
 
   setToolTip(value: boolean) {
-    return value ? this.i18n('Running job') : this.i18n('Pending job');
+    return value ? $localize`Running job` : $localize`Pending job`;
   }
 }

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import { DcuForJobStaticTextService } from '../../services/dcu-for-job-static-text.service';
 
 @Component({
@@ -11,7 +10,7 @@ export class DcuForJobGridCellVendorComponent implements ICellRendererAngularCom
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private statictextService: DcuForJobStaticTextService, private i18n: I18n) {}
+  constructor(private statictextService: DcuForJobStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

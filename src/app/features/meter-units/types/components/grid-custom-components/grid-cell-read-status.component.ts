@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as moment from 'moment';
-import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 import { readStatusColor } from '../../consts/meter-units.consts';
 
 @Component({
@@ -14,7 +12,7 @@ export class GridCellReadStatusComponent implements ICellRendererAngularComp {
 
   public params: any;
 
-  constructor(private staticextService: MeterUnitsTypeStaticTextService, private i18n: I18n) {}
+  constructor() {}
   // called on init
   agInit(params: any): void {
     this.params = params;

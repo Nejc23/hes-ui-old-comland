@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { of, Subscription, timer } from 'rxjs';
 import { LoginCredentials } from '../interfaces/login-credentials.interface';
 import { AuthenticatedUser } from '../interfaces/authenticated-user.interface';
@@ -15,7 +15,6 @@ import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
 import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink.interceptor';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
-import { selectedLocale } from 'src/environments/locale';
 import { JwtHelperService } from './jwt.helper.service';
 import { RoleService } from '../../permissions/services/role.service';
 import { UserRight } from '../../permissions/interfaces/user-rights.interface';
@@ -38,18 +37,19 @@ export class AuthService {
     private appStore: AppStoreService,
     private permissionsStoreService: PermissionsStoreService,
     private jwtHelper: JwtHelperService,
-    private roleService: RoleService
+    private roleService: RoleService,
+    @Inject(LOCALE_ID) public locale: string
   ) {
     const settings = {
       authority: environment.stsAuthority,
       client_id: environment.clientId,
       redirect_uri: environment.ignoreLocale
         ? `${environment.clientRoot}assets/signin-callback.html`
-        : `${environment.clientRoot}${selectedLocale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
+        : `${environment.clientRoot}${locale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
       silent_redirect_uri: environment.ignoreLocale
         ? `${environment.clientRoot}assets/silent-callback.html`
-        : `${environment.clientRoot}${selectedLocale}/assets/silent-callback.html`,
-      post_logout_redirect_uri: environment.ignoreLocale ? `${environment.clientRoot}` : `${environment.clientRoot}${selectedLocale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
+        : `${environment.clientRoot}${locale}/assets/silent-callback.html`,
+      post_logout_redirect_uri: environment.ignoreLocale ? `${environment.clientRoot}` : `${environment.clientRoot}${locale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
       response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
       scope: environment.clientScope,
       automaticSilentRenew: environment.clientAutoSilentRenew

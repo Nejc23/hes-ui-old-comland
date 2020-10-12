@@ -1,5 +1,4 @@
 import { Component, Input } from '@angular/core';
-import { I18n } from '@ngx-translate/i18n-polyfill';
 import * as _ from 'lodash';
 
 @Component({
@@ -10,19 +9,19 @@ export class FormErrorComponent {
   public errors: Array<string> = []; // public because of translation error
   private translations = {};
 
-  constructor(private i18n: I18n) {
+  constructor() {
     this.translations = {
-      required: this.i18n(`Required field`),
-      email: this.i18n(`Entry is not a valid email`),
-      maxlength: this.i18n(`Entry exceeds maximum amount of characters`),
-      minlength: this.i18n(`Entry does not meet minimum required amount of characters`),
-      pattern: this.i18n(`Wrong format`),
-      notMatchPassword: this.i18n(`Password not match`),
-      max: this.i18n(`Exceeds max value`),
-      min: this.i18n(`Exceeds min value`),
-      maxError: this.i18n(`Exceeds max value`),
-      minError: this.i18n(`Exceeds min value`),
-      incorrectRange: this.i18n(`Range is incorect`)
+      required: $localize`Required field`,
+      email: $localize`Entry is not a valid email`,
+      maxlength: $localize`Entry exceeds maximum amount of characters`,
+      minlength: $localize`Entry does not meet minimum required amount of characters`,
+      pattern: $localize`Wrong format`,
+      notMatchPassword: $localize`Password not match`,
+      max: $localize`Exceeds max value`,
+      min: $localize`Exceeds min value`,
+      maxError: $localize`Exceeds max value`,
+      minError: $localize`Exceeds min value`,
+      incorrectRange: $localize`Range is incorect`
     };
   }
 
