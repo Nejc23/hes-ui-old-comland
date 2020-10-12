@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -16,6 +16,8 @@ export class DateTimePickerComponent implements OnInit {
   @Input() min: Date;
   @Input() max: Date;
   @Input() readonly = false;
+  @Input() isInline = false;
+  @Output() blur = new EventEmitter();
 
   controlId: string;
 
@@ -45,5 +47,9 @@ export class DateTimePickerComponent implements OnInit {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  onBlur() {
+    this.blur.emit();
   }
 }
