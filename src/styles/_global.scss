@@ -10,15 +10,15 @@ body {
 }
 
 #content-wrapper {
-  height: 100%;  
+  height: 100%;
   margin-left: $sidebar-base-width;
   transition: margin-left .3s;
   width: auto;
-  padding: $spacer;
+  padding: $spacer 0;
 
   &.menu-collapsed {
     margin-left: $sidebar-collapsed-width !important;
-  }  
+  }
 }
 
 #content {

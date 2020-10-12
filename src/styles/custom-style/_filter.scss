@@ -15,9 +15,16 @@
     }
 }
 
+.filter-shadow-container {
+  padding-left:0;
+  padding-right:5px; // shadow width
+}
+
 .filter-shadow {
     margin-top: -1.5rem;
     padding-top: 1.5rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     height: calc(100vh - 2.5rem - #{$topbar-base-height}) !important;// 100vh
     box-shadow: 5px 0px 15px -8px rgba(0,0,0,0.1);
 }
