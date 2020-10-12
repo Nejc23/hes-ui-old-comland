@@ -1,6 +1,6 @@
 <div class="row">
 
-  <div class="col-2 filter-shadow" *ngIf="!hideFilter" [formGroup]="form">
+  <div class="col-2 filter-shadow h-100" *ngIf="!hideFilter" [formGroup]="form">
     <div class="form-group">
       <div class="form-row d-flex mb-2 mt-2">
         <h3 i18n class="mb-0">Register</h3>
@@ -25,7 +25,7 @@
         </button>
 
         <div class="mt-2">
-          <h4>{{selectedRegister ? selectedRegister.name : null}}</h4>
+          <h4 i18n>{{selectedRegister ? selectedRegister.name : 'No register selected'}}</h4>
         </div>
         <div class="ml-auto">
           <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
@@ -70,11 +70,13 @@
       </div>
     </div>
 
-
     <div *ngIf="isDataFound">
       <div class="row mb-5">
         <div class="col-12">
-          <app-registers-chart [filter]="registersFilter"></app-registers-chart>
+          <app-registers-chart
+            [categories]="chartCategories"
+            [chartData]="chartData">
+          </app-registers-chart>
         </div>
       </div>
       <div class="row">
@@ -89,7 +91,7 @@
   </div>
 </div>
 
-<ng-template #hideShowFilters><span i18n>Show/hide filters</span></ng-template>
+<ng-template #hideShowFilters><span i18n>Show/hide registers</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh data</span></ng-template>
 
 

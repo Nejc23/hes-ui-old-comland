@@ -64,6 +64,13 @@ export class MeterUnitRegistersComponent implements OnInit {
   public isRegisterSelected = false;
   public isDataFound = false;
 
+  public chartCategories: Date[];
+  public chartData: any[][];
+
+  public form: FormGroup;
+
+  public hideFilter;
+
   constructor(
     private formBuilder: FormBuilder,
     private i18n: I18n,
@@ -74,22 +81,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     private muService: MeterUnitsService,
     private formUtils: FormsUtilsService,
     private codeList: CodelistMeterUnitsRepositoryService
-  ) {
-    // this.formData =  this.createForm();
-    // this.form = this.createForm();
-  }
-
-  public form: FormGroup;
-  public rangeOptions: RadioOption[] = [
-    { value: '1' as string, label: this.i18n('Today') },
-    { value: '2' as string, label: this.i18n('Yesterday') },
-    { value: '3' as string, label: this.i18n('Last 7 days') },
-    { value: '4' as string, label: this.i18n('Current month') },
-    { value: '5' as string, label: this.i18n('Last Month') },
-    { value: '6' as string, label: this.i18n('Custom') }
-  ];
-
-  public hideFilter;
+  ) {}
 
   get registerProperty() {
     return 'register';
@@ -198,9 +190,8 @@ export class MeterUnitRegistersComponent implements OnInit {
       this.setRegisters();
     });
 
-    const rangeValue = this.rangeOptions[1].value;
-    this.form = this.createForm(rangeValue);
-    this.setRange(2);
+    this.form = this.createForm();
+    this.setRange(2); // yesterday
 
     this.muService.getMeterUnit(this.deviceId).subscribe(result => {
       this.setTitle(result.name);
@@ -301,7 +292,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     });
   }
 
-  createForm(rangeValue: string): FormGroup {
+  createForm(): FormGroup {
     return this.formBuilder.group({
       [this.registerProperty]: [null],
       [this.rangeProperty]: [null, Validators.required],
@@ -347,6 +338,9 @@ export class MeterUnitRegistersComponent implements OnInit {
           this.rowData = values;
           this.registerStatisticsData = this.getRegisterStatistics(this.rowData);
           this.setPageSubtitle();
+
+          this.chartCategories = values.map(v => new Date(v.timestamp));
+          this.chartData = [values];
         } else {
           this.isDataFound = false;
         }
@@ -364,13 +358,13 @@ export class MeterUnitRegistersComponent implements OnInit {
     }
 
     this.selectedRange = null;
-    const selectedRangeValue = this.form.get(this.rangeProperty).value;
-    if (selectedRangeValue) {
-      this.selectedRange = this.rangeOptions.find(r => r.value === selectedRangeValue);
-    }
+    // const selectedRangeValue = this.form.get(this.rangeProperty).value;
+    // if (selectedRangeValue) {
+    //   this.selectedRange = this.rangeOptions.find(r => r.value === selectedRangeValue);
+    // }
 
-    this.showLineChart = this.form.get(this.showLineChartProperty).value;
-    this.showTable = this.form.get(this.showTableProperty).value;
+    // this.showLineChart = this.form.get(this.showLineChartProperty).value;
+    // this.showTable = this.form.get(this.showTableProperty).value;
 
     this.startTime = this.form.get(this.startTimeProperty).value;
     this.endTime = this.form.get(this.endTimeProperty).value;
