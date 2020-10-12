@@ -68,11 +68,11 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'details':
-        return $localize `Open details`;
+        return $localize`Open details`;
       case 'chart':
-        return $localize `Open data`;
+        return $localize`Open data`;
       case 'operation':
-        return $localize `Select operation`;
+        return $localize`Select operation`;
     }
     return '';
   }

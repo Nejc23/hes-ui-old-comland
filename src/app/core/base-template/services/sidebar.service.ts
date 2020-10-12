@@ -17,48 +17,48 @@ export class SidebarService {
   constructor() {
     this.sidebarItems = [
       {
-        title: $localize `Data Concentrator Units`,
+        title: $localize`Data Concentrator Units`,
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         children: []
       },
       {
-        title: $localize `Meter Units`,
+        title: $localize`Meter Units`,
         routeLink: '/meterUnits/1', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
         children: []
       },
       {
-        title: $localize `Jobs`,
+        title: $localize`Jobs`,
         routeLink: '/schedulerJobs',
         hasChildren: false,
         children: []
       },
       {
-        title: $localize `Configuration`,
+        title: $localize`Configuration`,
         routeLink: '/configuration',
         hasChildren: true,
         children: [
           {
-            title: $localize `Import templates`,
+            title: $localize`Import templates`,
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,
             children: []
           },
           {
-            title: $localize `Import TOU configuration`,
+            title: $localize`Import TOU configuration`,
             routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
             hasChildren: false,
             children: []
           },
           {
-            title: $localize `Auto templates`,
+            title: $localize`Auto templates`,
             routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
             children: []
           },
           {
-            title: $localize `Import device keys`,
+            title: $localize`Import device keys`,
             routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
             hasChildren: false,
             children: []
@@ -90,7 +90,7 @@ export class SidebarService {
 
     this.sidebarMeterUnitsItems = [
       {
-        title: $localize `Back to main menu`,
+        title: $localize`Back to main menu`,
         icon: 'fas fa-arrow-alt-circle-left',
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
@@ -120,7 +120,7 @@ export class SidebarService {
 
     this.sidebarConfigurationItems = [
       {
-        title: $localize `Back to main menu`,
+        title: $localize`Back to main menu`,
         icon: 'fas fa-arrow-alt-circle-left',
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
@@ -134,25 +134,25 @@ export class SidebarService {
         isBorder: true
       },
       {
-        title: $localize `Import templates`,
+        title: $localize`Import templates`,
         routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
         hasChildren: false,
         children: []
       },
       {
-        title: $localize `Import TOU configuration`,
+        title: $localize`Import TOU configuration`,
         routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
         hasChildren: false,
         children: []
       },
       {
-        title: $localize `Auto templates`,
+        title: $localize`Auto templates`,
         routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
         hasChildren: false,
         children: []
       },
       {
-        title: $localize `Import device keys`,
+        title: $localize`Import device keys`,
         routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
         hasChildren: false,
         children: []

@@ -20,8 +20,8 @@ import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
   providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
-  messageActionInProgress = $localize `Action in progress!`;
-  messageServerError = $localize `Server error!`;
+  messageActionInProgress = $localize`Action in progress!`;
+  messageServerError = $localize`Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -209,23 +209,23 @@ export class MeterUnitsPlcActionsService {
     let selectedText = `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize `Confirm`;
+    component.btnConfirmText = $localize`Confirm`;
     let response: Observable<any> = new Observable();
 
     let operationName = '';
     switch (operation) {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
-        operationName = $localize `Get breaker status`;
-        selectedText = `${$localize `for`} ${selectedText}`;
+        operationName = $localize`Get breaker status`;
+        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.connect:
         response = this.service.postMyGridConnectDevice(params);
-        operationName = $localize `Connect`;
+        operationName = $localize`Connect`;
         break;
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
-        operationName = $localize `Disconnect`;
+        operationName = $localize`Disconnect`;
         break;
       case MeterUnitsTypeEnum.touConfig:
         const paramsConf: RequestTOUData = {
@@ -237,22 +237,22 @@ export class MeterUnitsPlcActionsService {
         }; // TODO: timeOfUseId read form store?
 
         response = this.service.postMyGridTOUDevice(paramsConf);
-        operationName = $localize `Configure TOU`;
-        selectedText = `${$localize `for`} ${selectedText}`;
+        operationName = $localize`Configure TOU`;
+        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
-        operationName = $localize `Activate FW upgrade`;
-        selectedText = `${$localize `for`} ${selectedText}`;
+        operationName = $localize`Activate FW upgrade`;
+        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.clearFF:
         response = this.service.clearFF(params);
-        operationName = $localize `Activate Clear FF`;
-        selectedText = `${$localize `for`} ${selectedText}`;
+        operationName = $localize`Activate Clear FF`;
+        selectedText = `${$localize`for`} ${selectedText}`;
     }
     component.btnConfirmText = operationName;
-    component.modalTitle = $localize `Confirm bulk operation`;
-    component.modalBody = `${operationName} ${selectedText} ` + $localize `selected meter unit(s)?`;
+    component.modalTitle = $localize`Confirm bulk operation`;
+    component.modalBody = `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
 
     modalRef.result.then(
       data => {

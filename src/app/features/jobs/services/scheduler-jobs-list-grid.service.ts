@@ -45,8 +45,8 @@ export class SchedulerJobsListGridService {
         lockPosition: true,
         field: 'active',
         cellRenderer: 'gridCellActiveComponent',
-        headerName: $localize `Active`,
-        headerTooltip: $localize `Active`,
+        headerName: $localize`Active`,
+        headerTooltip: $localize`Active`,
         minWidth: 100,
         maxWidth: 100
       },
@@ -56,8 +56,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: $localize `Job Type`,
-        headerTooltip: $localize `Job Type`
+        headerName: $localize`Job Type`,
+        headerTooltip: $localize`Job Type`
       },
       {
         field: 'description',
@@ -65,8 +65,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: $localize `Description`,
-        headerTooltip: $localize `Description`
+        headerName: $localize`Description`,
+        headerTooltip: $localize`Description`
       },
       {
         field: 'nextRun',
@@ -75,8 +75,8 @@ export class SchedulerJobsListGridService {
         suppressMovable: true,
         lockPosition: true,
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: $localize `Next run`,
-        headerTooltip: $localize `Next run`
+        headerName: $localize`Next run`,
+        headerTooltip: $localize`Next run`
       },
       {
         field: 'owner',
@@ -84,8 +84,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: $localize `Owner`,
-        headerTooltip: $localize `Owner`
+        headerName: $localize`Owner`,
+        headerTooltip: $localize`Owner`
       },
       {
         field: 'deviceCount',
@@ -97,8 +97,8 @@ export class SchedulerJobsListGridService {
         suppressMovable: true,
         lockPosition: true,
         cellRenderer: 'gridCellDeviceCountComponent',
-        headerName: $localize `Devices`,
-        headerTooltip: $localize `Devices`
+        headerName: $localize`Devices`,
+        headerTooltip: $localize`Devices`
       },
       {
         field: 'id',

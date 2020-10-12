@@ -7,9 +7,9 @@ export class ActionFormStaticTextService {
   constructor() {}
 
   get placeholderSearch() {
-    return $localize `Search`;
+    return $localize`Search`;
   }
-/* deprecated
+  /* deprecated
   preventCloseDropDownWhenClickInsideMenu() {
     $('.dropdown-menu').on('click.bs.dropdown', e => {
       e.stopPropagation();

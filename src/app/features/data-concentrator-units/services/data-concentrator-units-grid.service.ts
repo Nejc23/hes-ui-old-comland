@@ -56,11 +56,11 @@ export class DataConcentratorUnitsGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: $localize `Select/deselect all`
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'nextRead',
-        headerName: $localize ``,
+        headerName: $localize``,
         suppressColumnsToolPanel: true,
         suppressMovable: true,
         //  lockPosition: true,
@@ -69,105 +69,105 @@ export class DataConcentratorUnitsGridService {
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellIconComponent',
-        headerTooltip: $localize ``,
+        headerTooltip: $localize``,
         minWidth: 50,
         maxWidth: 50,
         width: 50
       },
       {
         field: 'status',
-        headerName: $localize `Status`,
+        headerName: $localize`Status`,
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: $localize `Status`
+        headerTooltip: $localize`Status`
       },
       {
         field: 'name',
-        headerName: $localize `Name`,
+        headerName: $localize`Name`,
         //   pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize `Name`
+        headerTooltip: $localize`Name`
       },
       {
         field: 'meters',
-        headerName: $localize `Meters`,
+        headerName: $localize`Meters`,
         //    pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellMetersComponent',
-        headerTooltip: $localize `Meters`
+        headerTooltip: $localize`Meters`
       },
       {
         field: 'readStatusTimeStamp',
-        headerName: $localize `Read status`,
+        headerName: $localize`Read status`,
         //    pinned: true,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: $localize `Read status`
+        headerTooltip: $localize`Read status`
       },
       {
         field: 'type',
-        headerName: $localize `Type`,
+        headerName: $localize`Type`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: $localize `Type`
+        headerTooltip: $localize`Type`
       },
       {
         field: 'vendor',
-        headerName: $localize `Vendor`,
+        headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize `Vendor`
+        headerTooltip: $localize`Vendor`
       },
       {
         field: 'id',
-        headerName: $localize `ID`,
+        headerName: $localize`ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize `ID`
+        headerTooltip: $localize`ID`
       },
       {
         field: 'ip',
-        headerName: $localize `IP`,
+        headerName: $localize`IP`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: $localize `IP`
+        headerTooltip: $localize`IP`
       },
       {
         field: 'lastCommunication',
-        headerName: $localize `Last communication`,
+        headerName: $localize`Last communication`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellLastCommunicationComponent',
-        headerTooltip: $localize `Last communication`
+        headerTooltip: $localize`Last communication`
       },
       {
         field: 'tags',
-        headerName: $localize `Tags`,
+        headerName: $localize`Tags`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
-        headerTooltip: $localize `Tags`
+        headerTooltip: $localize`Tags`
       },
       {
         field: 'jobStatus',
-        headerName: $localize `Job status`,
+        headerName: $localize`Job status`,
         // pinned: 'right',
         // lockPinned: true,
         // lockPosition: true,
@@ -175,7 +175,7 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
-        headerTooltip: $localize `Job status`,
+        headerTooltip: $localize`Job status`,
         resizable: false
       },
       {

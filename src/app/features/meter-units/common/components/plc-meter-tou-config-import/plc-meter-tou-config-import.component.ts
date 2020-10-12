@@ -38,7 +38,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize `Import TOU Configuration`);
+    this.breadcrumbService.setPageName($localize`Import TOU Configuration`);
   }
 
   selected(event: any) {
@@ -68,7 +68,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     const values = this.fillData();
     const request = this.meterService.importConfigTou(values);
     // console.log(`request = ${JSON.stringify(request)}`);
-    const successMessage = $localize `Import xml file was successfully`;
+    const successMessage = $localize`Import xml file was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();

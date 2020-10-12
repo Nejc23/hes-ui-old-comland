@@ -17,8 +17,8 @@ import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/sched
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
-  messageDeleteStarted = $localize `Scheduler job deleted!`;
-  messageDeleteServerError = $localize `Server error!`;
+  messageDeleteStarted = $localize`Scheduler job deleted!`;
+  messageDeleteServerError = $localize`Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -85,11 +85,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize `Delete`;
+    const operation = $localize`Delete`;
     response = this.service.deleteSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize `Confirm delete`;
-    component.modalBody = $localize `Do you want to delete scheduler job?`;
+    component.modalTitle = $localize`Confirm delete`;
+    component.modalBody = $localize`Do you want to delete scheduler job?`;
 
     modalRef.result.then(
       data => {
@@ -115,9 +115,9 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'edit':
-        return $localize `Edit job`;
+        return $localize`Edit job`;
       case 'delete':
-        return $localize `Delete job`;
+        return $localize`Delete job`;
     }
     return '';
   }

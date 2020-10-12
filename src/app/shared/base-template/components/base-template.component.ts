@@ -37,7 +37,7 @@ export class BaseTemplateComponent implements OnInit {
   public sidebarConfigurationItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
   public submenu = 0;
-  public organisation = $localize `no organisation`;
+  public organisation = $localize`no organisation`;
 
   // languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
@@ -52,7 +52,7 @@ export class BaseTemplateComponent implements OnInit {
 
   constructor(
     private sidebarService: SidebarService,
-    private cookieService: CookieService,    
+    private cookieService: CookieService,
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService,
@@ -128,7 +128,7 @@ export class BaseTemplateComponent implements OnInit {
       if (list && list.length > 0) {
         list.forEach(element => {
           const newElement = {
-            title:  $localize `${element.value}`,
+            title: $localize`${element.value}`,
             routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
             hasChildren: false,
             children: []

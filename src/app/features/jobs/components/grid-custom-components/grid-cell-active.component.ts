@@ -14,15 +14,11 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
   @ViewChild('activeSwitch', { static: true }) activeSwitch;
 
   public params: any;
-  messageEnabled = $localize `Scheduler job enabled!`;
-  messageDisabled = $localize `Scheduler job disabled!`;
-  messageServerError = $localize `Server error!`;
+  messageEnabled = $localize`Scheduler job enabled!`;
+  messageDisabled = $localize`Scheduler job disabled!`;
+  messageServerError = $localize`Server error!`;
 
-  constructor(
-    private modalService: ModalService,
-    private toast: ToastNotificationService,
-    private service: JobsService
-  ) {}
+  constructor(private modalService: ModalService, private toast: ToastNotificationService, private service: JobsService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -38,11 +34,11 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = event ? $localize `Enable` : $localize `Disable`;
+    const operation = event ? $localize`Enable` : $localize`Disable`;
     response = event ? this.service.enableSchedulerJob(params.node.data.id) : this.service.disableSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize `Confirm operation`;
-    component.modalBody = $localize `Do you want to change scheduler job status`;
+    component.modalTitle = $localize`Confirm operation`;
+    component.modalBody = $localize`Do you want to change scheduler job status`;
 
     modalRef.result.then(
       data => {
@@ -65,6 +61,6 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip(value: boolean) {
-    return value ? $localize `Active` : $localize `Inactive`;
+    return value ? $localize`Active` : $localize`Inactive`;
   }
 }

@@ -31,6 +31,6 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip() {
-    return $localize `Remove job`;
+    return $localize`Remove job`;
   }
 }

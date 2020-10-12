@@ -6,7 +6,7 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
   templateUrl: './grid-cell-ip.component.html'
 })
 export class GridCellIpComponent implements ICellRendererAngularComp {
-  notAvailableText = $localize `N/A`; // N/A
+  notAvailableText = $localize`N/A`; // N/A
   public params: any;
 
   constructor() {}

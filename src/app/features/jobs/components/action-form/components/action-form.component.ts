@@ -21,7 +21,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   constructor(
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
   ) {}
 
   ngOnInit() {

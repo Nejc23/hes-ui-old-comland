@@ -14,8 +14,8 @@ import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 })
 export class GridCellNextRunComponent implements ICellRendererAngularComp {
   public params: any;
-  messageStarted = $localize `Scheduled job started!`;
-  messageServerError = $localize `Server error!`;
+  messageStarted = $localize`Scheduled job started!`;
+  messageServerError = $localize`Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -38,11 +38,11 @@ export class GridCellNextRunComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize `Execute`;
+    const operation = $localize`Execute`;
     response = this.service.executeSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize `Confirm operation`;
-    component.modalBody = $localize `Do you want to execute scheduler job now`;
+    component.modalTitle = $localize`Confirm operation`;
+    component.modalBody = $localize`Do you want to execute scheduler job now`;
 
     modalRef.result.then(
       data => {
@@ -64,10 +64,10 @@ export class GridCellNextRunComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip() {
-    return $localize `Execute job`;
+    return $localize`Execute job`;
   }
 
   setNextReadText(time: string) {
-    return $localize `${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
+    return $localize`${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
   }
 }

@@ -38,7 +38,7 @@ export class AuthService {
     private permissionsStoreService: PermissionsStoreService,
     private jwtHelper: JwtHelperService,
     private roleService: RoleService,
-    @Inject(LOCALE_ID) public locale: string,
+    @Inject(LOCALE_ID) public locale: string
   ) {
     const settings = {
       authority: environment.stsAuthority,

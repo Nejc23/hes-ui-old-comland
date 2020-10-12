@@ -23,7 +23,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalConfirmComponent implements OnInit {
   @Input() modalTitle: string;
   @Input() modalBody: string;
-  @Input() btnConfirmText = $localize `Confirm`;
+  @Input() btnConfirmText = $localize`Confirm`;
 
   constructor(public activeModal: NgbActiveModal) {}
 

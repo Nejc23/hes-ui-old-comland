@@ -5,12 +5,12 @@ import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interf
   providedIn: 'root'
 })
 export class MeterUnitsTypeStaticTextService {
-  public titleBreadCrumbs = $localize `Overview - Meter Units`;
+  public titleBreadCrumbs = $localize`Overview - Meter Units`;
 
   constructor() {}
 
   get headerTitleMeterUnitsType() {
-    return $localize `Meter Units`;
+    return $localize`Meter Units`;
   }
   /*
   get breadcrumbNameDCU() {
@@ -18,23 +18,23 @@ export class MeterUnitsTypeStaticTextService {
   }
 */
   get notAvailableTekst() {
-    return $localize `N/A`;
+    return $localize`N/A`;
   }
 
   get noRecordsFound() {
-    return $localize `No records found. You need to adjust your search or filter parameters.`;
+    return $localize`No records found. You need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {
-    return $localize `Loading data...`;
+    return $localize`Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return $localize `No filter applied`;
+    return $localize`No filter applied`;
   }
 
   get nextPlannedReadText() {
-    return $localize `Next planned read` + ' ';
+    return $localize`Next planned read` + ' ';
   }
 
   getFiltersInfo(
@@ -79,66 +79,66 @@ export class MeterUnitsTypeStaticTextService {
       showDeleted ||
       showWithoutTemplate
     ) {
-      result.text += $localize `Filtered by: `;
+      result.text += $localize`Filtered by: `;
     }
 
     if (status) {
       additionalString =
         vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `status` + additionalString;
+      result.text += $localize`status` + additionalString;
       result.count++;
     }
 
     if (vendor) {
       additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `vendor` + additionalString;
+      result.text += $localize`vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
       additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `tag` + additionalString;
+      result.text += $localize`tag` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
       additionalString = firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `read status` + additionalString;
+      result.text += $localize`read status` + additionalString;
       result.count++;
     }
 
     if (firmware) {
       additionalString = breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `firmware` + additionalString;
+      result.text += $localize`firmware` + additionalString;
       result.count++;
     }
 
     if (breakerState) {
       additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `breaker state` + additionalString;
+      result.text += $localize`breaker state` + additionalString;
       result.count++;
     }
 
     if (showChildMBus) {
       additionalString = showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize `show child MBus` + additionalString;
+      result.text += $localize`show child MBus` + additionalString;
       result.count++;
     }
 
     if (showDeleted) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result.text += $localize `show deleted` + additionalString;
+      result.text += $localize`show deleted` + additionalString;
       result.count++;
     }
 
     if (showWithoutTemplate) {
       additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result.text += $localize `show without template` + additionalString;
+      result.text += $localize`show without template` + additionalString;
       result.count++;
     }
 
     if (showOnlyReadyForActivation) {
-      result.text += $localize `show only ready for activation`;
+      result.text += $localize`show only ready for activation`;
       result.count++;
     }
 

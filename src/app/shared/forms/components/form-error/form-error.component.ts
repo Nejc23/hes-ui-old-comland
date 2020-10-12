@@ -11,17 +11,17 @@ export class FormErrorComponent {
 
   constructor() {
     this.translations = {
-      required: $localize `Required field`,
-      email: $localize `Entry is not a valid email`,
-      maxlength: $localize `Entry exceeds maximum amount of characters`,
-      minlength: $localize `Entry does not meet minimum required amount of characters`,
-      pattern: $localize `Wrong format`,
-      notMatchPassword: $localize `Password not match`,
-      max: $localize `Exceeds max value`,
-      min: $localize `Exceeds min value`,
-      maxError: $localize `Exceeds max value`,
-      minError: $localize `Exceeds min value`,
-      incorrectRange:$localize `Range is incorect`
+      required: $localize`Required field`,
+      email: $localize`Entry is not a valid email`,
+      maxlength: $localize`Entry exceeds maximum amount of characters`,
+      minlength: $localize`Entry does not meet minimum required amount of characters`,
+      pattern: $localize`Wrong format`,
+      notMatchPassword: $localize`Password not match`,
+      max: $localize`Exceeds max value`,
+      min: $localize`Exceeds min value`,
+      maxError: $localize`Exceeds max value`,
+      minError: $localize`Exceeds min value`,
+      incorrectRange: $localize`Range is incorect`
     };
   }
 

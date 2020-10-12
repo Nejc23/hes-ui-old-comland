@@ -8,7 +8,7 @@ import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/com
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { FileGuid, MeterUnitsFwUpgrade } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';;
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -22,8 +22,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize `Required field`;
-  messageServerError = $localize `Server error!`;
+  configRequiredText = $localize`Required field`;
+  messageServerError = $localize`Server error!`;
   deviceIdsParam = [];
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
@@ -31,7 +31,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   uploadSaveUrl = `${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
-  allowedExtExplainText = $localize `can only upload one file.`;
+  allowedExtExplainText = $localize`can only upload one file.`;
   acceptExtensions = '.img';
   public files: Array<any>;
   activate = false;
@@ -90,7 +90,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.createFwUpgrade(values);
-    const successMessage = $localize `Meter Units upload Edited was successfully`;
+    const successMessage = $localize`Meter Units upload Edited was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         if (result && result.requestId.length > 0) {

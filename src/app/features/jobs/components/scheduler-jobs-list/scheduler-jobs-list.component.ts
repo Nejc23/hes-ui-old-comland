@@ -152,19 +152,19 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: $localize `Columns`,
-      filters: $localize `Filters`,
+      columns: $localize`Columns`,
+      filters: $localize`Filters`,
 
       // for filter panel
-      page: $localize `page`,
-      more: $localize `more`,
-      to: $localize `to`,
-      of: $localize `of`,
-      next: $localize `next`,
-      last: $localize `last`,
-      first: $localize `first`,
-      previous: $localize `previous`,
-      loadingOoo: $localize `loading...`
+      page: $localize`page`,
+      more: $localize`more`,
+      to: $localize`to`,
+      of: $localize`of`,
+      next: $localize`next`,
+      last: $localize`last`,
+      first: $localize`first`,
+      previous: $localize`previous`,
+      loadingOoo: $localize`loading...`
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);

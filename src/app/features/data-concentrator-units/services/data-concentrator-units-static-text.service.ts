@@ -5,36 +5,36 @@ import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.inter
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  public titleBreadCrumbs = $localize `Data Concentrator Units`;
+  public titleBreadCrumbs = $localize`Data Concentrator Units`;
 
   constructor() {}
 
   get headerTitleDCU() {
-    return $localize `Data Concentrator Units`;
+    return $localize`Data Concentrator Units`;
   }
 
   get jobsTitle() {
-    return $localize `Jobs`;
+    return $localize`Jobs`;
   }
 
   get notAvailableTekst() {
-    return $localize `N/A`;
+    return $localize`N/A`;
   }
 
   get noRecordsFound() {
-    return $localize `No records found. You need to adjust your search or filter parameters.`;
+    return $localize`No records found. You need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {
-    return $localize `Loading data...`;
+    return $localize`Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return $localize `No filter applied`;
+    return $localize`No filter applied`;
   }
 
   get nextPlannedReadText() {
-    return $localize `Next planned read` + ' ';
+    return $localize`Next planned read` + ' ';
   }
 
   getFiltersInfo(
@@ -62,41 +62,41 @@ export class DataConcentratorUnitsStaticTextService {
     }
 
     if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag || showDeleted) {
-      result.text += $localize `Filtered by: `;
+      result.text += $localize`Filtered by: `;
     }
 
     if (status) {
       additionalString = readStatuses || type || vendor || tag || showDeleted ? ', ' : '';
-      result.text += $localize `status` + additionalString;
+      result.text += $localize`status` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
       additionalString = type || vendor || tag || showDeleted ? ', ' : '';
-      result.text += $localize `read status` + additionalString;
+      result.text += $localize`read status` + additionalString;
       result.count++;
     }
 
     if (type) {
       additionalString = vendor || tag || showDeleted ? ', ' : '';
-      result.text += $localize `type` + additionalString;
+      result.text += $localize`type` + additionalString;
       result.count++;
     }
 
     if (vendor) {
       additionalString = tag || showDeleted ? ', ' : '';
-      result.text += $localize `vendor` + additionalString;
+      result.text += $localize`vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
       additionalString = showDeleted ? ', ' : '';
-      result.text += $localize `tag` + additionalString;
+      result.text += $localize`tag` + additionalString;
       result.count++;
     }
 
     if (showDeleted) {
-      result.text += $localize `show deleted`;
+      result.text += $localize`show deleted`;
       result.count++;
     }
 

@@ -87,9 +87,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   public localeText;
 
   // messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = $localize `Server error!`;
-  messageDataRefreshed = $localize `Data refreshed!`;
-  messageActionFailed = $localize `Action failed!`;
+  messageServerError = $localize`Server error!`;
+  messageDataRefreshed = $localize`Data refreshed!`;
+  messageActionFailed = $localize`Action failed!`;
 
   constructor(
     private route: ActivatedRoute,
@@ -182,19 +182,19 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: $localize `Columns`,
-      filters: $localize `Filters`,
+      columns: $localize`Columns`,
+      filters: $localize`Filters`,
 
       // for filter panel
-      page: $localize `page`,
-      more: $localize `more`,
-      to: $localize `to`,
-      of: $localize `of`,
-      next: $localize `next`,
-      last: $localize `last`,
-      first: $localize `first`,
-      previous: $localize `previous`,
-      loadingOoo: $localize `loading...`
+      page: $localize`page`,
+      more: $localize`more`,
+      to: $localize`to`,
+      of: $localize`of`,
+      next: $localize`next`,
+      last: $localize`last`,
+      first: $localize`first`,
+      previous: $localize`previous`,
+      loadingOoo: $localize`loading...`
     };
 
     // this.deleteAllRequests();
@@ -687,7 +687,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const selectedText = `${this.getSelectedCount()}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize `Confirm`;
+    component.btnConfirmText = $localize`Confirm`;
     let response: Observable<any> = new Observable();
 
     const request: RequestMeterUnitsForJob = {
@@ -711,9 +711,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     response = this.meterUnitsTypeService.removeMeterUnitsFromJob(request);
 
-    component.btnConfirmText = $localize `Remove`;
-    component.modalTitle = $localize `Confirm bulk operation`;
-    component.modalBody = $localize `Remove ${selectedText} Meter Unit(s) from Job?`;
+    component.btnConfirmText = $localize`Remove`;
+    component.modalTitle = $localize`Confirm bulk operation`;
+    component.modalBody = $localize`Remove ${selectedText} Meter Unit(s) from Job?`;
 
     modalRef.result.then(
       data => {
@@ -722,7 +722,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         response.subscribe(
           value => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.successToast($localize `Selected Meter Units removed successfully`);
+            this.toast.successToast($localize`Selected Meter Units removed successfully`);
             this.refresh();
           },
           e => {
@@ -777,7 +777,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${$localize `of`} ${this.totalCount}`;
+        return `${selectedCount} ${$localize`of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;

@@ -212,9 +212,9 @@ export class DcFilterComponent implements OnInit {
 
   errorValidatorReadStatusComponents() {
     if (this.form.errors != null && this.form.errors.outOfRange) {
-      return $localize `Value must be in range 0-100`;
+      return $localize`Value must be in range 0-100`;
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return $localize `Range is not correct`;
+      return $localize`Range is not correct`;
     }
   }
 

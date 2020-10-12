@@ -21,29 +21,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize `Select/deselect all`,
+        headerTooltip: $localize`Select/deselect all`,
         headerCheckboxSelection: false
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize `Name`,
-        headerTooltip: $localize `Name`
+        headerName: $localize`Name`,
+        headerTooltip: $localize`Name`
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize `Type`,
-        headerTooltip: $localize `Type`
+        headerName: $localize`Type`,
+        headerTooltip: $localize`Type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize `Description`,
-        headerTooltip: $localize `Description`
+        headerName: $localize`Description`,
+        headerTooltip: $localize`Description`
       }
     ];
   }
@@ -59,29 +59,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize `Select/deselect all`,
+        headerTooltip: $localize`Select/deselect all`,
         headerCheckboxSelection: true
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize `Name`,
-        headerTooltip: $localize `Name`
+        headerName: $localize`Name`,
+        headerTooltip: $localize`Name`
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize `Type`,
-        headerTooltip: $localize `Type`
+        headerName: $localize`Type`,
+        headerTooltip: $localize`Type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize `Description`,
-        headerTooltip: $localize `Description`
+        headerName: $localize`Description`,
+        headerTooltip: $localize`Description`
       }
     ];
   }

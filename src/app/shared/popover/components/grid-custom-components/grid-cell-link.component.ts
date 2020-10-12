@@ -35,26 +35,26 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
   }
 
   setToolTip(value: boolean) {
-    return value ? $localize `Stop job` : $localize `Cancel job`;
+    return value ? $localize`Stop job` : $localize`Cancel job`;
   }
 
   execute(operationType: string, id: string) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize `Confirm`;
+    const operation = $localize`Confirm`;
 
     component.btnConfirmText = operation;
-    component.modalTitle = $localize `Confirm operation`;
+    component.modalTitle = $localize`Confirm operation`;
 
     switch (operationType) {
       case this.cancelJobConst:
         response = this.service.cancelJob(this.params.node.data.id, null);
-        component.modalBody = $localize `Do you want to cancel scheduled job now?`;
+        component.modalBody = $localize`Do you want to cancel scheduled job now?`;
         break;
       case this.stopJobConst:
         response = this.service.stopJob(this.params.node.data.id, null);
-        component.modalBody = $localize `Do you want to stop running job now?`;
+        component.modalBody = $localize`Do you want to stop running job now?`;
     }
 
     modalRef.result.then(

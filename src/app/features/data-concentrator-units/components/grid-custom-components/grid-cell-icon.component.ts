@@ -24,6 +24,6 @@ export class GridCellIconComponent implements ICellRendererAngularComp {
 
   // set momemnt text (next planned read) out of date and time
   setMomentNextPlannedReadTime(time: string) {
-    return this.staticextService.nextPlannedReadText +  $localize `${moment(time).fromNow()}`;
+    return this.staticextService.nextPlannedReadText + $localize`${moment(time).fromNow()}`;
   }
 }

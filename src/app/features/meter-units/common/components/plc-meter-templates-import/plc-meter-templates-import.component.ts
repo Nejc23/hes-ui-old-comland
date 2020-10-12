@@ -15,9 +15,9 @@ import { SelectEvent } from '@progress/kendo-angular-upload';
 export class PlcMeterTemplatesImportComponent implements OnInit {
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize `Required field`;
-  messageServerError = $localize `Server error!`;
-  successMessage = $localize `Import successful!`;
+  configRequiredText = $localize`Required field`;
+  messageServerError = $localize`Server error!`;
+  successMessage = $localize`Import successful!`;
   deviceIdsParam = [];
   public files: Array<any>;
   allowedExt = ['json'];
@@ -41,13 +41,12 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize `Import templates`);
+    this.breadcrumbService.setPageName($localize`Import templates`);
   }
 
   public selected(e: SelectEvent): void {
     const that = this;
     e.files.forEach(file => {
-
       if (!file.validationErrors) {
         const reader = new FileReader();
 
@@ -76,7 +75,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     response.subscribe(
       value => {
         // TODO: return is ?
-       // console.log(`postMyGridTemplatesImport, value = `, value);
+        // console.log(`postMyGridTemplatesImport, value = `, value);
         this.toast.successToast(this.successMessage);
         this.cancel('save');
       },

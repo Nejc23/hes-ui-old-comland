@@ -9,6 +9,6 @@ export class Page404Component implements OnInit {
   constructor(public router: Router, private breadcrumbService: BreadcrumbService) {}
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize `404 - page not exists`);
+    this.breadcrumbService.setPageName($localize`404 - page not exists`);
   }
 }

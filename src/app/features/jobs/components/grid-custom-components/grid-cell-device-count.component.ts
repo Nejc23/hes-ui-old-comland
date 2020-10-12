@@ -8,9 +8,7 @@ import { Router } from '@angular/router';
 export class GridCellDeviceCountComponent {
   public params: any;
 
-  constructor(
-    private router: Router
-  ) {}
+  constructor(private router: Router) {}
 
   // called on init
   agInit(params: any): void {

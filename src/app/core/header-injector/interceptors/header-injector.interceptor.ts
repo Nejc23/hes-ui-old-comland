@@ -10,14 +10,13 @@ export class HeaderInjectorInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log(this.locale);
     const newRequest = request.clone({
-      headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())  
+      headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())
     });
-console.log(newRequest);
+    console.log(newRequest);
     return next.handle(newRequest);
   }
 
   localeToHeaderLocale(): string {
-   
     if (this.locale && this.locale !== null) {
       console.log(2);
       const loc = _.find(languages, x => x.id === this.locale);

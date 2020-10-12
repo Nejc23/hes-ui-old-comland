@@ -84,43 +84,43 @@ export class DcuForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize `Select/deselect all`
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'name',
-        headerName: $localize `Name`,
+        headerName: $localize`Name`,
         pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize `Name`
+        headerTooltip: $localize`Name`
       },
       {
         field: 'id',
-        headerName: $localize `ID`,
+        headerName: $localize`ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize `ID`
+        headerTooltip: $localize`ID`
       },
       {
         field: 'type',
-        headerName: $localize `Type`,
+        headerName: $localize`Type`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: $localize `Type`
+        headerTooltip: $localize`Type`
       },
       {
         field: 'vendor',
-        headerName: $localize `Vendor`,
+        headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize `Vendor`
+        headerTooltip: $localize`Vendor`
       }
     ];
   }
@@ -182,7 +182,7 @@ export class DcuForJobGridService {
 
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
-   // console.log('excluded row', excludedRow);
+    // console.log('excluded row', excludedRow);
 
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (!settings.excludedRows) {

@@ -26,28 +26,28 @@ export class SchedulerJobComponent implements OnInit {
 
   form: FormGroup;
   readOptions: RadioOption[] = [
-    { value: '1' as string, label: $localize `One-time`, labelSmall: $localize `Once` },
-    { value: '2' as string, label: $localize `Minute(s)`, labelSmall: $localize `Every N minute(s)` },
-    { value: '3' as string, label: $localize `Hour(s)`, labelSmall: $localize `Every N hour(s` },
-    { value: '4' as string, label: $localize `Daily`, labelSmall: $localize `Every day specific time` },
-    { value: '5' as string, label: $localize `Weekly`, labelSmall: $localize `One or more days of the week` },
-    { value: '6' as string, label: $localize `Monthly`, labelSmall: $localize `One or more days in the month` }
+    { value: '1' as string, label: $localize`One-time`, labelSmall: $localize`Once` },
+    { value: '2' as string, label: $localize`Minute(s)`, labelSmall: $localize`Every N minute(s)` },
+    { value: '3' as string, label: $localize`Hour(s)`, labelSmall: $localize`Every N hour(s` },
+    { value: '4' as string, label: $localize`Daily`, labelSmall: $localize`Every day specific time` },
+    { value: '5' as string, label: $localize`Weekly`, labelSmall: $localize`One or more days of the week` },
+    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` }
   ];
   weekDays: Codelist<number>[] = [
-    { id: 1, value: $localize `Mon-Fri` },
-    { id: 2, value: $localize `Mon` },
-    { id: 3, value: $localize `Tue` },
-    { id: 4, value: $localize `Wed` },
-    { id: 5, value: $localize `Thu` },
-    { id: 6, value: $localize `Fri` },
-    { id: 7, value: $localize `Sat` },
-    { id: 8, value: $localize `Sun` }
+    { id: 1, value: $localize`Mon-Fri` },
+    { id: 2, value: $localize`Mon` },
+    { id: 3, value: $localize`Tue` },
+    { id: 4, value: $localize`Wed` },
+    { id: 5, value: $localize`Thu` },
+    { id: 6, value: $localize`Fri` },
+    { id: 7, value: $localize`Sat` },
+    { id: 8, value: $localize`Sun` }
   ];
   selectedId = 0;
   monthDays: number[] = [];
   noRegisters = false;
   noMonthDays = false;
-  registersRequiredText = $localize `Required field`;
+  registersRequiredText = $localize`Required field`;
 
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
@@ -163,14 +163,14 @@ export class SchedulerJobComponent implements OnInit {
       this.form.get(this.monthDaysProperty).value.length === 0;
     const values = this.fillData();
     let request: Observable<SchedulerJob> = null;
-    let operation = $localize `added`;
+    let operation = $localize`added`;
     if (this.selectedJobId) {
-      operation = $localize `updated`;
+      operation = $localize`updated`;
       request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
-    const successMessage = $localize `Meter Units Read Scheduler was` + ` ${operation} ` + $localize `successfully`;
+    const successMessage = $localize`Meter Units Read Scheduler was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         // if (result) {

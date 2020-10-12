@@ -7,10 +7,10 @@ export class ImportDeviceKeysStaticTextService {
   constructor() {}
 
   get headerTitleImportDeviceKeys() {
-    return $localize `Import device keys`;
+    return $localize`Import device keys`;
   }
 
   get uploadSuccessful() {
-    return $localize `Upload successful`;
+    return $localize`Upload successful`;
   }
 }

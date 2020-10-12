@@ -118,34 +118,34 @@ export class MeterUnitsForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize `Select/deselect all`
+        headerTooltip: $localize`Select/deselect all`
       },
       {
         field: 'name',
-        headerName: $localize `Name`,
+        headerName: $localize`Name`,
         pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize `Name`
+        headerTooltip: $localize`Name`
       },
       {
         field: 'vendor',
-        headerName: $localize `Vendor`,
+        headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize `Vendor`
+        headerTooltip: $localize`Vendor`
       },
       {
         field: 'id5',
-        headerName: $localize `ID5`,
+        headerName: $localize`ID5`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize `ID5`
+        headerTooltip: $localize`ID5`
       }
     ];
   }
@@ -207,7 +207,6 @@ export class MeterUnitsForJobGridService {
 
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
-
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (!settings.excludedRows) {
       settings.excludedRows = [];

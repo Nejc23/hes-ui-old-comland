@@ -19,8 +19,8 @@ export class PlcMeterTouConfigComponent implements OnInit {
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize `Required field`;
-  messageServerError = $localize `Server error!`;
+  configRequiredText = $localize`Required field`;
+  messageServerError = $localize`Server error!`;
   deviceIdsParam = [];
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];

@@ -97,8 +97,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  messageDataRefreshed = $localize `Data refreshed!`;
-  messageActionFailed = $localize `Action failed!`;
+  messageDataRefreshed = $localize`Data refreshed!`;
+  messageActionFailed = $localize`Action failed!`;
 
   constructor(
     public fb: FormBuilder,
@@ -242,19 +242,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: $localize `Columns`,
-      filters: $localize `Filters`,
+      columns: $localize`Columns`,
+      filters: $localize`Filters`,
 
       // for filter panel
-      page: $localize `page`,
-      more: $localize `more`,
-      to: $localize `to`,
-      of: $localize `of`,
-      next: $localize `next`,
-      last: $localize `last`,
-      first: $localize `first`,
-      previous: $localize `previous`,
-      loadingOoo: $localize `loading...`
+      page: $localize`page`,
+      more: $localize`more`,
+      to: $localize`to`,
+      of: $localize`of`,
+      next: $localize`next`,
+      last: $localize`last`,
+      first: $localize`first`,
+      previous: $localize`previous`,
+      loadingOoo: $localize`loading...`
     };
 
     this.deleteAllRequests();
@@ -827,7 +827,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${$localize `of`} ${this.totalCount}`;
+        return `${selectedCount} ${$localize`of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;

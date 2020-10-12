@@ -24,6 +24,6 @@ export class GridCellNextRunNoEventComponent implements ICellRendererAngularComp
   }
 
   setNextReadText(time: string) {
-    return $localize `${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
+    return $localize`${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
   }
 }

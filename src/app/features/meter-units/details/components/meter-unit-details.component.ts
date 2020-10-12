@@ -40,8 +40,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   private deviceId;
   public saveError;
 
-  private messageActionInProgress = $localize `Action in progress!`;
-  private messageServerError = $localize `Server error!`;
+  private messageActionInProgress = $localize`Action in progress!`;
+  private messageServerError = $localize`Server error!`;
 
   private requestModel;
 
@@ -128,7 +128,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     const muFormData = this.fillData();
     const request = this.meterUnitsService.updateMuFromForm(muFormData);
-    const successMessage = $localize `Meter Unit was updated successfully`;
+    const successMessage = $localize`Meter Unit was updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
@@ -277,7 +277,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: $localize `Meters`,
+        label: $localize`Meters`,
         params: {},
         url: null
       }
@@ -285,14 +285,14 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     if (this.typeId && this.typeName) {
       breadcrumbs.push({
-        label: $localize `${this.typeName}`,
+        label: $localize`${this.typeName}`,
         params: {},
         url: `/meterUnits/${this.typeId}`
       });
     }
 
     breadcrumbs.push({
-      label: $localize `Meter Unit`,
+      label: $localize`Meter Unit`,
       params: {},
       url: null
     });
