@@ -78,7 +78,7 @@ describe('Pact consumer test', () => {
         readStatusColor: 'green',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-        breakerState: 'on',
+        disconnectorState: 'on',
         childInfo: 12345,
         firmware: 'FM-123',
         id5: 'ID-12345',
@@ -96,7 +96,8 @@ describe('Pact consumer test', () => {
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
         readyForActivation: true,
-        hasActiveJobs: false
+        hasActiveJobs: false,
+        ciiState: 'off'
       },
       {
         deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -106,7 +107,7 @@ describe('Pact consumer test', () => {
         readStatusColor: 'yellow',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-        breakerState: 'off',
+        disconnectorState: 'off',
         childInfo: 12345,
         firmware: 'FM-223',
         id5: 'ID-12345',
@@ -134,7 +135,7 @@ describe('Pact consumer test', () => {
         readStatusColor: 'red',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-        breakerState: 'off',
+        disconnectorState: 'off',
         childInfo: 12345,
         firmware: 'FM-223',
         id5: 'ID-12345',
@@ -152,7 +153,8 @@ describe('Pact consumer test', () => {
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
         readyForActivation: true,
-        hasActiveJobs: true
+        hasActiveJobs: true,
+        ciiState: 'on'
       }
     ];
 

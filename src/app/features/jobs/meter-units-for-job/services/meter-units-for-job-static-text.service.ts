@@ -96,7 +96,7 @@ export class AllForJobStaticTextService {
 
     if (breakerState) {
       additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`breaker state` + additionalString;
+      result = result + $localize`disconnector state` + additionalString;
     }
 
     if (showChildMBus) {

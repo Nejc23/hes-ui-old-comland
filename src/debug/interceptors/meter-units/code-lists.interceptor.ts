@@ -172,15 +172,15 @@ export class MeterUnitCodelistInterceptor {
     const data: Codelist<number>[] = [
       {
         id: 1,
-        value: 'on'
+        value: 'Connected'
       },
       {
         id: 2,
-        value: 'off'
+        value: 'Disconnected'
       },
       {
         id: 3,
-        value: 'undefined'
+        value: 'ReadyForReConnection'
       }
     ];
 

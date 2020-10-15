@@ -115,7 +115,7 @@ export class MeterUnitsTypeStaticTextService {
 
     if (breakerState) {
       additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
-      result.text += $localize`breaker state` + additionalString;
+      result.text += $localize`disconnector state` + additionalString;
       result.count++;
     }
 

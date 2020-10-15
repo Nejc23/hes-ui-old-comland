@@ -14,7 +14,7 @@ export interface MeterUnitsList {
   timeOfUseId: string;
   id5: string;
   childInfo: number;
-  breakerState: string;
+  disconnectorState: string;
   tags: string[];
   jobStatus: string;
   configurationId: string;
@@ -27,4 +27,5 @@ export interface MeterUnitsList {
   parametrisationId: string;
   readyForActivation: boolean;
   hasActiveJobs: boolean;
+  ciiState?: string;
 }
