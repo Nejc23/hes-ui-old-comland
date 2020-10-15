@@ -209,6 +209,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get actionMUDisconnect() {
     return ActionEnumerator.MUDisconnect;
   }
+  get actionMUCiiState() {
+    return ActionEnumerator.MUCiiState;
+  }
+  get actionMUCiiActivate() {
+    return ActionEnumerator.MUCiiActivate;
+  }
+  get actionMUCiiDeactivate() {
+    return ActionEnumerator.MUCiiDeactivate;
+  }
   get actionMUReadJobs() {
     return ActionEnumerator.MUReadJobs;
   }
@@ -680,6 +689,33 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
   }
 
+  onCiiState(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.ciiState,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onCiiActivate(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.ciiActivate,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onCiiDeactivate(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.ciiDeactivate,
+      params,
+      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
   onClearFF(selectedGuid: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.bulkOperation(
@@ -760,6 +796,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               this.meterUnitsTypeGridService.removeMyGridLinkRequestId(requestId);
               const breakerStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_BreakerState_RequestIds();
               const isBreakerState = _.find(breakerStateRequests, x => x === requestId);
+
               // 3th step for breaker state
               if (isBreakerState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
@@ -770,6 +807,20 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                   this.meterUnitsTypeGridService.removeMyGridLink_BreakerState_RequestId(requestId);
                 });
               }
+
+              const ciiStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_CiiState_RequestIds();
+              const isCiiState = _.find(ciiStateRequests, x => x === requestId);
+              // 3th step for CII state
+              if (isCiiState) {
+                this.service.getOnDemandDataProcessing(requestId).subscribe(resultsCiiState => {
+                  // // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
+                  // if (resultsCiiState) {
+                  //   this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
+                  // }
+                  this.meterUnitsTypeGridService.removeMyGridLink_CiiState_RequestId(requestId);
+                });
+              }
+
               this.toast.successToast(this.messageDataRefreshed);
             }
           } else {

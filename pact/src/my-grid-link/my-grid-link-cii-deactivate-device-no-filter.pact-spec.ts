@@ -26,63 +26,23 @@ describe('Pact consumer test', () => {
   });
 
   const requestBody: RequestFilterParams = {
-    deviceIds: null,
-    filter: {
-      statuses: [{ id: 1, value: 'active' }],
-      readStatus: {
-        operation: { id: 'Greater Than', value: 'Greater Than' },
-        value1: 12,
-        value2: null
-      },
-      vendor: { id: 2, value: 'Vendor 2' },
-      tags: [
-        { id: 1, value: 'tag1' },
-        { id: 2, value: 'tag2' }
-      ],
-      firmware: [{ id: 1, value: '12.3.1' }],
-      disconnectorState: [
-        { id: 1, value: 'breaker 1' },
-        { id: 5, value: 'breaker 5' }
-      ],
-      showChildInfoMBus: true,
-      showDeleted: true
-    }
+    deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
   const responseBody: ResponseConnectDisconnectData = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
-    deviceIds: null,
-    filter: {
-      statuses: [{ id: 1, value: 'active' }],
-      readStatus: {
-        operation: { id: 'Greater Than', value: 'Greater Than' },
-        value1: 12,
-        value2: null
-      },
-      vendor: { id: 2, value: 'Vendor 2' },
-      tags: [
-        { id: 1, value: 'tag1' },
-        { id: 2, value: 'tag2' }
-      ],
-      firmware: [{ id: 1, value: '12.3.1' }],
-      disconnectorState: [
-        { id: 1, value: 'breaker 1' },
-        { id: 5, value: 'breaker 5' }
-      ],
-      showChildInfoMBus: true,
-      showDeleted: true
-    }
+    deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
-  describe('myGrid.link get disconnector state with filter request', () => {
+  describe('myGrid.link trigger CII deactivate device with device ids', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_DISCONNECTOR_STATE_WITH_FILTER',
-          uponReceiving: 'a request for getting disconnector state with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_CII_DEACTIVATE_DEVICE_WITH_IDS',
+          uponReceiving: 'a request for trigger CII deactivate device with ids in request - myGrid.Link',
           withRequest: {
-            method: service.getDisconnectorStateRequest(requestBody).method,
-            path: service.getDisconnectorStateRequest(requestBody).url,
+            method: service.postMyGridCiiDeactivateDeviceRequest(requestBody).method,
+            path: service.postMyGridCiiDeactivateDeviceRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -104,8 +64,8 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for getting disconnector state with filter in request - myGrid.Link', done => {
-      service.getDisconnectorState(requestBody).subscribe(
+    it('should make request for trigger CII deactivate device with ids in request - myGrid.Link', done => {
+      service.postMyGridCiiDeactivateDevice(requestBody).subscribe(
         (res: ResponseConnectDisconnectData) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);

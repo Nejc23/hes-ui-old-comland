@@ -244,6 +244,16 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUDisconnect;
   }
 
+  get actionMUCiiState() {
+    return ActionEnumerator.MUCiiState;
+  }
+  get actionMUCiiActivate() {
+    return ActionEnumerator.MUCiiActivate;
+  }
+  get actionMUCiiDeactivate() {
+    return ActionEnumerator.MUCiiDeactivate;
+  }
+
   get actionMUSetLimiter() {
     return ActionEnumerator.MUSetLimiter;
   }
@@ -342,6 +352,21 @@ export class MeterUnitDetailsComponent implements OnInit {
   onDisconnect() {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.disconnect, params, 1);
+  }
+
+  onCiiState() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiState, params, 1);
+  }
+
+  onCiiActivate() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiActivate, params, 1);
+  }
+
+  onCiiDeactivate() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiDeactivate, params, 1);
   }
 
   onClearFF() {

@@ -65,6 +65,19 @@
               </div>
               <div class="pl-3 pr-3"><hr/></div>
               <div>
+                <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiActivate" class="btn btn-link dropdown-item" type="button"
+                    (click)="onCiiActivate()"><span i18n>CII - Activate</span></button>
+              </div>
+              <div>
+                <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiDeactivate" class="btn btn-link dropdown-item" type="button"
+                    (click)="onCiiDeactivate()"><span i18n>CII - Deactivate</span></button>
+              </div>
+              <div>
+                  <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiState" class="btn btn-link dropdown-item" type="button"
+                    (click)="onCiiState()"><span i18n>CII - State</span></button>
+              </div>
+              <div class="pl-3 pr-3"><hr/></div>
+              <div>
                 <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU" class="btn btn-link dropdown-item" type="button"
                   (click)="onTou()"><span i18n>TOU Upload</span></button>
               </div>

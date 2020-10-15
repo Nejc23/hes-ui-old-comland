@@ -74,15 +74,15 @@ describe('Pact consumer test', () => {
     }
   };
 
-  describe('myGrid.link get disconnector state with filter request', () => {
+  describe('myGrid.link get cii state with filter request', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_DISCONNECTOR_STATE_WITH_FILTER',
-          uponReceiving: 'a request for getting disconnector state with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_CII_STATE_WITH_FILTER',
+          uponReceiving: 'a request for getting CII state with filter in request - myGrid.Link',
           withRequest: {
-            method: service.getDisconnectorStateRequest(requestBody).method,
-            path: service.getDisconnectorStateRequest(requestBody).url,
+            method: service.getCiiStateRequest(requestBody).method,
+            path: service.getCiiStateRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -104,8 +104,8 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for getting disconnector state with filter in request - myGrid.Link', done => {
-      service.getDisconnectorState(requestBody).subscribe(
+    it('should make request for getting CII state with filter in request - myGrid.Link', done => {
+      service.getCiiState(requestBody).subscribe(
         (res: ResponseConnectDisconnectData) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);

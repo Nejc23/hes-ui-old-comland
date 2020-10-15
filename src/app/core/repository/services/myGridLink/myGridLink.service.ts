@@ -1,3 +1,4 @@
+import { onDemandCiiState, onDemandCiiActivate, onDemandCiiDeactivate } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -86,6 +87,33 @@ export class MyGridLinkService {
 
   postMyGridDisconnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnect}`, params);
+  }
+
+  // get cii status device
+  getCiiState(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+    return this.repository.makeRequest(this.getCiiStateRequest(params));
+  }
+
+  getCiiStateRequest(params: RequestFilterParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandCiiState}`, params);
+  }
+
+  // cii activate device
+  postMyGridCiiActivateDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+    return this.repository.makeRequest(this.postMyGridCiiActivateDeviceRequest(params));
+  }
+
+  postMyGridCiiActivateDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandCiiActivate}`, params);
+  }
+
+  // cii deactivate device
+  postMyGridCiiDeactivateDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+    return this.repository.makeRequest(this.postMyGridCiiDeactivateDeviceRequest(params));
+  }
+
+  postMyGridCiiDeactivateDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandCiiDeactivate}`, params);
   }
 
   // trigger TOU
