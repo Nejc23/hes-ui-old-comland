@@ -8,13 +8,13 @@
         border: 0;
         font-weight: 400;
         font-family: "Font Awesome 5 Pro";
-        content: '\f107';
+        content: '\f105';
       }
     }
   
     &.show {
       .dropdown-toggle::after {
-        content: '\f107';
+        content: '\f105';
       }
     }
   
@@ -24,12 +24,15 @@
       margin-right: 20px;
       min-width: 13rem;
       width: auto;     
-      height: 380px;
-      overflow-y:auto;      
+     // height: 380px;
+     // overflow-y:auto;      
       position: absolute;   
       .dropdown-item {
         height: 40px;
-      }  
+      }        
+      .dropdown-item:hover  { 
+        color: $primary;
+      }
     }  
   }
   

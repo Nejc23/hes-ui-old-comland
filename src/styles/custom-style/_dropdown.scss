@@ -24,6 +24,10 @@
   box-shadow: 5px 10px 10px  rgba(0,0,0,0.2);
 }
 
+.custom-hover-display:hover  { 
+  color: $primary;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -47,5 +51,5 @@
 	&:after {
 		border: 0px;
 		display: none;
-	}
+  }
 }
