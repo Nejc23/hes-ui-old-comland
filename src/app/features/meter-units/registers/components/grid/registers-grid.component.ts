@@ -16,6 +16,7 @@ export class RegistersGridComponent implements OnInit {
   public modules: Module[] = [ClientSideRowModelModule];
 
   public agGridSettings = configAgGrid;
+  public gridPageSize = 10;
 
   public localeText;
 

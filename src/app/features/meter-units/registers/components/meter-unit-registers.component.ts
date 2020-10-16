@@ -31,8 +31,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   public isRangeCustom = false;
 
   public selectedRange: RadioOption;
-  public registers: Codelist<string>[];
   public deviceRegisters: AutoTemplateRegister[];
+  public foundDeviceRegisters: AutoTemplateRegister[];
 
   deviceId: string;
 
@@ -67,6 +67,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   public form: FormGroup;
 
   public hideFilter;
+
+  public registerSearch;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -103,6 +105,10 @@ export class MeterUnitRegistersComponent implements OnInit {
     return 'showTable';
   }
 
+  get registerSearchProperty() {
+    return 'registerSearch';
+  }
+
   changeRegisterOptionId() {
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find(r => r.registerDefinitionId === registerValue);
@@ -111,7 +117,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.setPageSubtitle();
 
-    window.scroll(0, 0);
     this.showData(selectedRegister);
   }
 
@@ -248,44 +253,30 @@ export class MeterUnitRegistersComponent implements OnInit {
   setRegisters() {
     this.autoTemplateService.getRegisters(this.deviceId).subscribe(reg => {
       this.deviceRegisters = reg;
-      this.registers = this.deviceRegisters
-        .map(r => ({ id: r.registerDefinitionId, value: r.name }))
-        .sort((r1, r2) => {
-          if (r1.value < r2.value) {
-            return -1;
-          } else if (r1.value === r2.value) {
-            return 0;
-          }
-          return 1;
-        });
-
-      // this.registerGroups = this.deviceRegisters
-      //   .map(d => d.groupName)
-      //   .filter((value, index, self) => self.indexOf(value) === index)
-      //   .sort((r1, r2) => {
-      //     if (r1 < r2) {
-      //       return -1;
-      //     } else if (r1 === r2) {
-      //       return 0;
-      //     }
-      //     return 1;
-      //   });
-
-      const uniqueGroups = this.deviceRegisters.map(d => d.groupName).filter((value, index, self) => self.indexOf(value) === index);
-
-      this.registerGroups = uniqueGroups
-        .map(r => ({ groupId: null, groupName: r, registerOptions: this.getRegisterGroupOptions(r) }))
-        .sort((r1, r2) => {
-          if (r1.groupName < r2.groupName) {
-            return -1;
-          } else if (r1.groupName === r2.groupName) {
-            return 0;
-          }
-          return 1;
-        });
-
-      this.getRegisterGroupOptions(this.registerGroups[0].groupName);
+      this.setRegisterGroups(null);
     });
+  }
+
+  setRegisterGroups(searchText: string) {
+    this.foundDeviceRegisters = this.deviceRegisters;
+
+    if (searchText && searchText.length > 0) {
+      searchText = searchText.toLowerCase();
+      this.foundDeviceRegisters = this.deviceRegisters.filter(d => d.name.toLowerCase().indexOf(searchText) > -1);
+    }
+
+    const uniqueGroups = this.foundDeviceRegisters.map(d => d.groupName).filter((value, index, self) => self.indexOf(value) === index);
+
+    this.registerGroups = uniqueGroups
+      .map(r => ({ groupId: null, groupName: r, registerOptions: this.getRegisterGroupOptions(r) }))
+      .sort((r1, r2) => {
+        if (r1.groupName < r2.groupName) {
+          return -1;
+        } else if (r1.groupName === r2.groupName) {
+          return 0;
+        }
+        return 1;
+      });
   }
 
   createForm(): FormGroup {
@@ -295,7 +286,8 @@ export class MeterUnitRegistersComponent implements OnInit {
       [this.startTimeProperty]: [null, Validators.required],
       [this.endTimeProperty]: [null, Validators.required],
       [this.showLineChartProperty]: [true, null],
-      [this.showTableProperty]: [true, null]
+      [this.showTableProperty]: [true, null],
+      [this.registerSearchProperty]: [null]
     });
   }
 
@@ -354,13 +346,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     }
 
     this.selectedRange = null;
-    // const selectedRangeValue = this.form.get(this.rangeProperty).value;
-    // if (selectedRangeValue) {
-    //   this.selectedRange = this.rangeOptions.find(r => r.value === selectedRangeValue);
-    // }
-
-    // this.showLineChart = this.form.get(this.showLineChartProperty).value;
-    // this.showTable = this.form.get(this.showTableProperty).value;
 
     this.startTime = this.form.get(this.startTimeProperty).value;
     this.endTime = this.form.get(this.endTimeProperty).value;
@@ -389,11 +374,11 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   getRegisterGroupOptions(groupName: string): RadioOption[] {
-    if (!this.deviceRegisters || this.deviceRegisters.length === 0) {
+    if (!this.foundDeviceRegisters || this.foundDeviceRegisters.length === 0) {
       return [];
     }
 
-    const registersByGroup = this.deviceRegisters.filter(r => r.groupName.toLowerCase() === groupName.toLowerCase());
+    const registersByGroup = this.foundDeviceRegisters.filter(r => r.groupName.toLowerCase() === groupName.toLowerCase());
 
     const registerGroupOptions = registersByGroup
       .map(r => ({ label: r.name, value: r.registerDefinitionId }))
@@ -422,5 +407,13 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   onRefresh() {
     this.showData(this.selectedRegister, true);
+  }
+
+  get placeholderSearch() {
+    return $localize`Search`;
+  }
+
+  insertedSearchValue(searchValue) {
+    this.setRegisterGroups(searchValue);
   }
 }
