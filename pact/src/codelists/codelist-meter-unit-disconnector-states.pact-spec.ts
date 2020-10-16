@@ -23,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(CodelistMeterUnitsRepositoryService);
+    service = getTestBed().inject(CodelistMeterUnitsRepositoryService);
   });
 
   describe('Codelist - meter unit disconnector states by type', () => {

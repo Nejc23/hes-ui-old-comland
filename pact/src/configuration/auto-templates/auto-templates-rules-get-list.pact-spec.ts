@@ -25,7 +25,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(AutoTemplatesService);
+    service = getTestBed().inject(AutoTemplatesService);
   });
 
   describe('Auto templates get list of rules request', () => {

@@ -25,7 +25,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MyGridLinkService);
+    service = getTestBed().inject(MyGridLinkService);
   });
 
   describe('Data concentrator management activate device upgrade request', () => {

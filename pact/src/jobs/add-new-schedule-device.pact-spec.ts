@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(JobsService);
+    service = getTestBed().inject(JobsService);
   });
 
   const responseId = 'af9c4a3e-8080-4e09-ae44-f1928967d8eb';
