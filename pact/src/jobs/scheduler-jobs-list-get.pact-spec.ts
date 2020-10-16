@@ -25,7 +25,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(JobsService);
+    service = getTestBed().inject(JobsService);
   });
 
   describe('Scheduler jobs list get request', () => {

@@ -21,7 +21,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(AutoTemplatesService);
+    service = getTestBed().inject(AutoTemplatesService);
   });
 
   const id = '4344553-443456-23323-5555-2333';

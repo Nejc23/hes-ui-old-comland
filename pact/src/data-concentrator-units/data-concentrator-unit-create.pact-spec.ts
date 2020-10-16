@@ -32,7 +32,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(DataConcentratorUnitsService);
+    service = getTestBed().inject(DataConcentratorUnitsService);
   });
 
   const requestBody1: DcuRequest = {

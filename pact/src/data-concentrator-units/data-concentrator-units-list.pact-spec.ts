@@ -25,7 +25,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(DataConcentratorUnitsService);
+    service = getTestBed().inject(DataConcentratorUnitsService);
   });
 
   describe('Data concentrator units list get request', () => {
