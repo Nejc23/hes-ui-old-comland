@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(CryptoLiteService);
+    service = getTestBed().inject(CryptoLiteService);
   });
 
   const responseBody: CryptoImportResponse = {

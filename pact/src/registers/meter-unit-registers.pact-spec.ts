@@ -25,7 +25,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(RegistersSelectService);
+    service = getTestBed().inject(RegistersSelectService);
   });
 
   describe('Meter unit registers', () => {

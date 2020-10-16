@@ -23,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(TimeOfUseService);
+    service = getTestBed().inject(TimeOfUseService);
   });
 
   describe('Time of use configurations', () => {

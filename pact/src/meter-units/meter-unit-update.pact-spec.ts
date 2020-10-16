@@ -23,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().inject(MeterUnitsService);
   });
 
   const deviceId = '32A7C6B2-DC94-498C-9437-2607E833D06E';

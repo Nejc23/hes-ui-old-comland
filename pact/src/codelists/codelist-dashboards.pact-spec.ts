@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(CodelistRepositoryService);
+    service = getTestBed().inject(CodelistRepositoryService);
   });
 
   describe('Codelist - dashboards', () => {

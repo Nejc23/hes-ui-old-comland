@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MyGridLinkService);
+    service = getTestBed().inject(MyGridLinkService);
   });
 
   const requestId = '0a09afe6-143e-4c9f-95dc-6f0b90f95455';
