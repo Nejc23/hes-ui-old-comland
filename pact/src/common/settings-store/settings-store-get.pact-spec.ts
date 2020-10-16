@@ -1,4 +1,3 @@
-import { UserSettingsGetRequest } from './../../../../src/app/core/repository/interfaces/settings-store/user-settings-get-request.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
@@ -26,10 +25,7 @@ describe('Pact consumer test', () => {
   });
 
   describe('Settings store get user settings', () => {
-    const request: UserSettingsGetRequest = {
-      userName: 'admin@admin.com',
-      key: 'dcuList'
-    };
+    const key = 'dcuList';
 
     const responseBody = {
       gridState: {
@@ -72,8 +68,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_GETTING_USER_SETTINGS',
           uponReceiving: 'a request for getting user settings',
           withRequest: {
-            method: service.getUserSettingsRequest(request).method,
-            path: service.getUserSettingsRequest(request).url,
+            method: service.getUserSettingsRequest(key).method,
+            path: service.getUserSettingsRequest(key).url,
             body: null,
             headers: defaultRequestHeader
           },
@@ -96,7 +92,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for getting user settings', done => {
-      service.getUserSettings(request).subscribe(res => {
+      service.getUserSettings(key).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });

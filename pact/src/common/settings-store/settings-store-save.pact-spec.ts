@@ -2,7 +2,6 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
-import { UserSettingsSaveRequest } from 'src/app/core/repository/interfaces/settings-store/user-settings-save-request.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -26,41 +25,39 @@ describe('Pact consumer test', () => {
   });
 
   describe('Settings store save user settings', () => {
-    const request: UserSettingsSaveRequest = {
-      userName: 'admin@admin.com',
-      key: 'dcuList',
-      settings: {
-        gridState: {
-          searchText: 'DC30',
-          pageIndex: 0,
-          selectedRows: [],
-          isSelectedAll: false,
-          excludedRows: []
-        },
-        gridLayout: {
-          filter: {
-            id: 0,
-            name: '',
-            statusesFilter: [
-              {
-                id: 0,
-                value: 'UNKNOWN'
-              }
-            ],
-            readStatusFilter: {
-              operation: {
-                id: '',
-                value: ''
-              },
-              value1: 0,
-              value2: 0
+    const key = 'dcuList';
+
+    const settings = {
+      gridState: {
+        searchText: 'DC30',
+        pageIndex: 0,
+        selectedRows: [],
+        isSelectedAll: false,
+        excludedRows: []
+      },
+      gridLayout: {
+        filter: {
+          id: 0,
+          name: '',
+          statusesFilter: [
+            {
+              id: 0,
+              value: 'UNKNOWN'
+            }
+          ],
+          readStatusFilter: {
+            operation: {
+              id: '',
+              value: ''
             },
-            typesFilter: [],
-            tagsFilter: [],
-            vendorFilter: null,
-            showDeletedFilter: true,
-            gridLayout: ''
-          }
+            value1: 0,
+            value2: 0
+          },
+          typesFilter: [],
+          tagsFilter: [],
+          vendorFilter: null,
+          showDeletedFilter: true,
+          gridLayout: ''
         }
       }
     };
@@ -71,8 +68,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_SAVING_USER_SETTINGS',
           uponReceiving: 'a request for saving user settings',
           withRequest: {
-            method: service.saveUserSettingsRequest(request).method,
-            path: service.saveUserSettingsRequest(request).url,
+            method: service.saveUserSettingsRequest(key, settings).method,
+            path: service.saveUserSettingsRequest(key, settings).url,
             body: null,
             headers: defaultRequestHeader
           },
@@ -95,7 +92,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for saving user settings', done => {
-      service.saveUserSettings(request).subscribe(res => {
+      service.saveUserSettings(key, settings).subscribe(res => {
         expect(res).toEqual(null);
         done();
       });

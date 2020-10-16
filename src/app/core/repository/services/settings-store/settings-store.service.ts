@@ -3,8 +3,7 @@ import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { userSettings } from '../../consts/settings-store.const';
-import { UserSettingsGetRequest } from '../../interfaces/settings-store/user-settings-get-request.interface';
-import { UserSettingsSaveRequest } from '../../interfaces/settings-store/user-settings-save-request.interface';
+import { AnyARecord } from 'dns';
 
 @Injectable({
   providedIn: 'root'
@@ -12,19 +11,19 @@ import { UserSettingsSaveRequest } from '../../interfaces/settings-store/user-se
 export class SettingsStoreService {
   constructor(private repository: RepositoryService) {}
 
-  getUserSettings(param: UserSettingsGetRequest): Observable<any> {
-    return this.repository.makeRequest(this.getUserSettingsRequest(param));
+  getUserSettings(key: string): Observable<any> {
+    return this.repository.makeRequest(this.getUserSettingsRequest(key));
   }
 
-  getUserSettingsRequest(param: UserSettingsGetRequest): HttpRequest<any> {
-    return new HttpRequest('POST', userSettings, param);
+  getUserSettingsRequest(key: string): HttpRequest<any> {
+    return new HttpRequest('GET', userSettings + `/${key}`);
   }
 
-  saveUserSettings(param: UserSettingsSaveRequest): Observable<any> {
-    return this.repository.makeRequest(this.saveUserSettingsRequest(param));
+  saveUserSettings(key: string, settings: any): Observable<any> {
+    return this.repository.makeRequest(this.saveUserSettingsRequest(key, settings));
   }
 
-  saveUserSettingsRequest(param: UserSettingsSaveRequest): HttpRequest<any> {
-    return new HttpRequest('PUT', userSettings, param);
+  saveUserSettingsRequest(key: string, settings: any): HttpRequest<any> {
+    return new HttpRequest('PUT', userSettings + `/${key}`, settings);
   }
 }
