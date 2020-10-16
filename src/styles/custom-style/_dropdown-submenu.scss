@@ -2,7 +2,7 @@
     position: relative;
   }
   .dropdown-submenu a {
-    color: $black;
+    color: $dropdown-link-color;
   }
   .dropdown-submenu:hover a {
     color: $primary;
@@ -16,39 +16,36 @@
    // -webkit-border-radius: 0 6px 6px 6px;
    // -moz-border-radius: 0 6px 6px;
    // border-radius: 0 6px 6px 6px;
+    .dropdown-item a  {
+      color: $dropdown-link-color;
+    }
+    .dropdown-item:hover> a {
+      color: $primary;
+    }
   }
   
   .dropdown-submenu:hover>.dropdown-menu {
     display: block;
   }
-  
-  .dropdown-submenu .dropdown-menu .dropdown-item:hover> a {
-    color: $primary;
-  }
-
-  
+   
   .dropdown-submenu
-  .dropdown-toggle{ &::after {
-    width: 1rem;
-    text-align: center;
-   // float: right;
-    position: absolute;
-    vertical-align: 0;
-    right: 1rem;
-    border: 0;
-    font-weight: 400;
-    font-family: "Font Awesome 5 Pro";
-    content: '\f105';
+  .dropdown-toggle { &::after {
+      width: 1rem;
+      text-align: center;
+    // float: right;
+      position: absolute;
+      vertical-align: 0;
+      right: 1rem;
+      border: 0;
+      font-weight: 400;
+      font-family: "Font Awesome 5 Pro";
+      content: '\f105';
+    }
+    &.show {
+      z-index: 9999; // go over the title bar
+    }
   }
-  &.show {
-    z-index: 9999; // go over the title bar
-  }
-  }
-  .dropdown-submenu .dropdown-menu
-  .dropdown-item a  {
-    color: $black;
-  }
-
+ 
   .dropdown-submenu:hover>::after {
     border-left-color: #fff;
     color: $primary;
@@ -66,6 +63,6 @@
   //  border-radius: 6px 0 6px 6px;
     position: absolute;
     overflow:visible;
-    color: $black;
+    color: $dropdown-link-color;
   }
 
