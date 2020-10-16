@@ -28,6 +28,10 @@
   }
 }
 
+.custom-hover-display:hover  { 
+  color: $primary;
+}
+
 .dropdown-content {
   display: none;
   position: absolute;
@@ -51,5 +55,5 @@
 	&:after {
 		border: 0px;
 		display: none;
-	}
+  }
 }
