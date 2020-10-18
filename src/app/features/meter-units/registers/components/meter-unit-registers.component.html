@@ -2,7 +2,7 @@
 
 
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
-    <div class="filter-shadow" style="overflow-y:auto; overflow-x:hidden;">
+    <div class="filter-shadow">
       <div class="form-group">
         <div class="d-flex mb-3 mt-2">
           <h4 i18n class="mb-0">Register</h4>
@@ -14,6 +14,8 @@
           <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedSearchValue($event)" [form]="form"
           [property]="registerSearchProperty" [placeholder]="placeholderSearch"></app-input-searcher>
         </div>
+      </div>
+      <div class="form-group filter-registers">
         <div *ngFor="let g of registerGroups">
           <app-input-radio i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
             [options]="g.registerOptions" style="white-space:nowrap" (change)="changeRegisterOptionId()" [showTooltip]="true">

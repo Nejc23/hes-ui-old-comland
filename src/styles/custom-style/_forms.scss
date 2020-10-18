@@ -10,7 +10,8 @@ input[type=radio]:checked + label {
 }
 
 input[type=radio] {
-  margin-bottom: 4px;
+  margin-top: 2px;
+  min-width:15px;
 }
 
 input.form-control[type=checkbox] {
