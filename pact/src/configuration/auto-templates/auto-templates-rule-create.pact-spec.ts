@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(AutoTemplatesService);
+    service = getTestBed().inject(AutoTemplatesService);
   });
 
   const requestBody: Rule = {

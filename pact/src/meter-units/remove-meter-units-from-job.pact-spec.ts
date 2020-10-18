@@ -23,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().inject(MeterUnitsService);
   });
 
   describe('Remove Meter Units from Job request', () => {

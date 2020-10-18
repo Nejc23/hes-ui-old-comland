@@ -23,7 +23,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(DataProcessingService);
+    service = getTestBed().inject(DataProcessingService);
   });
 
   describe('Data processing get instantaneous values request', () => {

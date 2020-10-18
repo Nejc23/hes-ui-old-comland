@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MyGridLinkService);
+    service = getTestBed().inject(MyGridLinkService);
   });
 
   const requestBody: MeterUnitsFwUpgrade = {

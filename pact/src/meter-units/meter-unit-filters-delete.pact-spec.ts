@@ -21,7 +21,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().inject(MeterUnitsService);
   });
 
   const meterUnitTypeId = 1;

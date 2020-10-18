@@ -21,7 +21,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(JobsService);
+    service = getTestBed().inject(JobsService);
   });
 
   const id = 'e7a59990-51e8-4fd5-994b-a3a102b42436';

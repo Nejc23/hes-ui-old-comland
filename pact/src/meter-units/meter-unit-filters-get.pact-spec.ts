@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MeterUnitsService);
+    service = getTestBed().inject(MeterUnitsService);
   });
 
   describe('Meter unit filters get request', () => {

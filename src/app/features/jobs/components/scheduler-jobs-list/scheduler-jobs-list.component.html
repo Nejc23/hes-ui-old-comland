@@ -1,27 +1,23 @@
-<div class="d-flex align-items-center mb-3">
-  <!--<app-header-title [headerTitle]="headerTitle"></app-header-title>-->
-  <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->
-      <i class="far fa-plus"></i> <span i18n>Add</span>
-    </button>
-    <div class="dropdown-content">
-      <a href="javascript:void(0);" (click)="addJob()"><span i18n>Reading job</span></a>
-      <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>
-    </div>
-  </div>
-  <!--<app-breadcrumb class="ml-auto"></app-breadcrumb>-->
-</div>
-
-<nav class="nav nav-pills nav-justified">
+<nav class="nav nav-pills">
   <a class="nav-link active"><span i18n>Scheduled</span><span class="badge badge-pill badge-light ml-1">{{totalCount}}</span></a>
   <!--<a class="nav-link">Pending</a>
   <a class="nav-link">Running</a>
   <a class="nav-link">Finished</a>-->
 </nav>
 
-<div class="mt-4 mb-2">
+<div class="mt-3 mb-2">
   <div class="grid-actions">
-    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end"></app-action-form>
+    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end">
+      <div class="dropdown mr-3">
+        <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->
+          <i class="far fa-plus"></i> <span i18n>Add</span>
+        </button>
+        <div class="dropdown-content">
+          <a href="javascript:void(0);" (click)="addJob()"><span i18n>Reading job</span></a>
+          <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>
+        </div>
+      </div>
+    </app-action-form>
   </div>
 </div>
 <ag-grid-angular class="ag-theme-epoint"
@@ -45,7 +41,7 @@
   [maxBlocksInCache]="1"
   [gridOptions]="gridOptions"
   [localeText]="localeText"
-  
+
   [overlayNoRowsTemplate]="overlayNoRowsTemplate"
   [overlayLoadingTemplate]="overlayLoadingTemplate"
   (paginationChanged)="onPaginationChange($event)"
