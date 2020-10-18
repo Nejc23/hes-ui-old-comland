@@ -2,7 +2,7 @@
 
 
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
-    <div class="filter-shadow overflow-auto">
+    <div class="filter-shadow" style="overflow-y:auto; overflow-x:hidden;">
       <div class="form-group">
         <div class="d-flex mb-3 mt-2">
           <h4 i18n class="mb-0">Register</h4>
@@ -16,7 +16,7 @@
         </div>
         <div *ngFor="let g of registerGroups">
           <app-input-radio i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
-            [options]="g.registerOptions" style="white-space:nowrap" (change)="changeRegisterOptionId()">
+            [options]="g.registerOptions" style="white-space:nowrap" (change)="changeRegisterOptionId()" [showTooltip]="true">
           </app-input-radio>
         </div>
       </div>

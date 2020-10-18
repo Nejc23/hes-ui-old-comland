@@ -12,7 +12,8 @@
       <div>
         <input type="radio" id="{{option.uid}}" [name]="property" [formControlName]="property"
           value="{{option.value}}" [attr.name]="property" kendoRadioButton />
-        <label for="{{option.uid}}" class="control-label ml-2">{{option.label}} </label>
+        <label for="{{option.uid}}" class="control-label ml-2" [ngbTooltip]="getTooltip(option)" placement="bottom" [openDelay]="500" triggers="hover">
+          {{option.label}} </label>
       </div>
       <label for="{{option.uid}}" class="control-label text-muted" *ngIf="box"><small>{{option.labelSmall}}</small></label>
     </div>

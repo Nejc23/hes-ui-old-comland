@@ -14,6 +14,7 @@ export class InputRadioComponent implements OnInit {
   @Input() inline = false;
   @Input() label: string;
   @Input() box = false;
+  @Input() showTooltip = false;
 
   @Output() refresh: EventEmitter<RadioOption> = new EventEmitter();
 
@@ -54,5 +55,13 @@ export class InputRadioComponent implements OnInit {
 
   addUids() {
     _.each(this.options, x => (x.uid = _.uniqueId('input-radio-')));
+  }
+
+  getTooltip(option: RadioOption): string {
+    if (this.showTooltip) {
+      return option.label;
+    } else {
+      return '';
+    }
   }
 }
