@@ -82,18 +82,16 @@
                 <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>CII</span></a>
                 <div class="dropdown-menu">
                   <div class="dropdown-item">
-                    <div class="dropdown-item">
-                      <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiActivate" href="javascript:void(0)"
-                        (click)="onCiiActivate()"><span i18n>Connect</span></a>
-                    </div>
-                    <div class="dropdown-item">
-                      <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiDeactivate" href="javascript:void(0)"
-                        (click)="onCiiDeactivate()"><span i18n>Disconnect</span></a>
-                    </div>
-                    <div class="dropdown-item">
-                      <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiState" href="javascript:void(0)"
-                        (click)="onCiiState()"><span i18n>State</span></a>
-                    </div>
+                    <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiActivate" href="javascript:void(0)"
+                      (click)="onCiiActivate()"><span i18n>Activate</span></a>
+                  </div>
+                  <div class="dropdown-item">
+                    <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiDeactivate" href="javascript:void(0)"
+                      (click)="onCiiDeactivate()"><span i18n>Deactivate</span></a>
+                  </div>
+                  <div class="dropdown-item">
+                    <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiState" href="javascript:void(0)"
+                      (click)="onCiiState()"><span i18n>State</span></a>
                   </div>
                 </div>
               </div>
