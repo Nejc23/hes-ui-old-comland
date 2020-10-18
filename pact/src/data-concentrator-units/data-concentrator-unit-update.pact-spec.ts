@@ -23,11 +23,11 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(DataConcentratorUnitsService);
+    service = getTestBed().inject(DataConcentratorUnitsService);
   });
 
   const requestBody1: DcuRequest = {
-    concentratorId: '1234567',    
+    concentratorId: '1234567',
     name: 'Test DCU 1',
     type: 1,
     vendor: 1,
@@ -37,7 +37,7 @@ describe('Pact consumer test', () => {
     mac: 'mac 444',
     password: '2222',
     userName: 'user2',
-    port: '1111',    
+    port: '1111',
   };
 
   const requestBody: DcuForm = {
@@ -56,7 +56,7 @@ describe('Pact consumer test', () => {
     mac: 'mac 444',
     password: '2222',
     userName: 'user2',
-    port: '1111',    
+    port: '1111',
   };
 
   const id = '32A7C6B2-DC94-498C-9437-2607E833D06D';

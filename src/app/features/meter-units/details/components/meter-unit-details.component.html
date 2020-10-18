@@ -9,55 +9,89 @@
         <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
           data-toggle="dropdown"><span i18n>Operations</span></button>
         <div *dropdownMenu class="dropdown-menu">
-
-          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Delete</span></button>
-
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs"
-            class="dropdown-item" type="button" (click)="onScheduleReadJobs()"><span i18n>Jobs</span>
-          </button>
-
-          <div class="dropdown-divider"></div>
-
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade"
-            class="dropdown-item" type="button" (click)="onUpgrade()"><span i18n>Upload image</span>
-          </button>
-
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade"
-            class="dropdown-item" type="button" (click)="onActivateUpgrade()"><span i18n>Activate image</span>
-          </button>
+          <div>
+            <a (click)="onDelete()" [disabled]="true" class="dropdown-item custom-hover-display" href="javascript:void(0)" style="pointer-events: none;cursor: default;color:gainsboro;"><span i18n>Delete</span></a>
+          </div>
+          <div>
+            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item custom-hover-display" href="javascript:void(0)"
+              (click)="onScheduleReadJobs()"><span i18n>Jobs</span></a>
+          </div>
 
           <div class="dropdown-divider"></div>
 
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect"
-            class="dropdown-item" type="button" (click)="onConnect()"><span i18n>Connect</span>
-          </button>
+          <div class="dropdown-item">
+            <div class="dropdown-submenu">
+                  <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>FW upgrade</span></a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-item">
+                    <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" href="javascript:void(0)"
+                      (click)="onUpgrade()"><span i18n>Upload image</span></a>
+                  </div>
+                  <div class="dropdown-item">
+                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade"  href="javascript:void(0)"
+                      (click)="onActivateUpgrade()"><span i18n>Activate image</span></a>
+                  </div>                 
+                </div>
+            </div>
+          </div>
 
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect"
-            class="dropdown-item" type="button" (click)="onDisconnect()"><span i18n>Disconnect</span>
-          </button>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-item">
+            <div class="dropdown-submenu">
+              <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Breaker</span></a>
+              <div class="dropdown-menu">
+                <div class="dropdown-item">
+                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" href="javascript:void(0)"
+                    (click)="onConnect()"><span i18n>Connect</span></a>
+                </div>
+                <div class="dropdown-item">
+                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" href="javascript:void(0)"
+                    (click)="onDisconnect()"><span i18n>Disconnect</span></a>
+                </div>
+                <div class="dropdown-item">
+                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" href="javascript:void(0)"
+                    (click)="onBreakerStatus()"><span i18n>State</span></a>
+                </div>
+                <div class="dropdown-item">
+                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus"href="javascript:void(0)"
+                    (click)="onBreakerMode()"><span i18n>Mode</span></a>
+                </div>            
+              </div>
+            </div>
+          </div>
 
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus"
-            class="dropdown-item" type="button" (click)="onBreakerStatus()"><span i18n>State</span>
-          </button>
+          <div class="dropdown-item">
+            <div class="dropdown-submenu">
+              <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" style="pointer-events: none;cursor: default; color:gainsboro;"><span i18n>CII</span></a>
+            </div>
+          </div>
 
           <div class="dropdown-divider"></div>
 
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU"
-            class="dropdown-item" type="button" (click)="onTou()"><span i18n>TOU Upload</span>
-          </button>
-
+          <div>
+            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU"  href="javascript:void(0)" class="dropdown-item custom-hover-display"
+              (click)="onTou()"><span i18n>TOU Upload</span></a>
+          </div>
           <div class="dropdown-divider"></div>
-
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter"
-            class="dropdown-item" type="button" (click)="onSetLimiter()"><span i18n>Limiter</span>
-          </button>
-
-          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Display</span></button>
-          <button appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter"
-            class="dropdown-item" type="button" (click)="onSetMonitor()"><span i18n>Monitor</span></button>
-          <button class="dropdown-item" type="button" (click)="onClearFF()"><span i18n>Clear FF</span></button>
-          <button class="dropdown-item" type="button" [disabled]="true"><span i18n>Clear Alarms</span></button>
-        </div>
+          <div>
+            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter"  href="javascript:void(0)" class="dropdown-item custom-hover-display"
+              (click)="onSetLimiter()"><span i18n>Limiter</span></a>
+          </div>
+          <div>
+            <a class="dropdown-item" type="button"  href="javascript:void(0)"  class="dropdown-item custom-hover-displaym" style="pointer-events: none;cursor: default;color:gainsboro;"><span i18n>Display</span></a>
+          </div>
+          <div>
+            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" href="javascript:void(0)" class="dropdown-item custom-hover-display" 
+              (click)="onSetMonitor()"><span i18n>Monitor</span></a>
+          </div>
+          <div>
+            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUSetLimiter" href="javascript:void(0)" class="dropdown-item custom-hover-display"
+              (click)="onClearFF()"><span i18n>Clear FF</span></a>
+          </div>
+          <div>
+            <button class="dropdown-item" type="button" href="javascript:void(0)"  class="dropdown-item custom-hover-display" style="pointer-events: none;cursor: default; color:gainsboro;"><span i18n>Clear Alarms</span></button>
+          </div>
+        </div>         
       </div>
     </div>
 
