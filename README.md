@@ -43,7 +43,7 @@ Access url  https://advance-hes.comland.si:9443/
 `npm run pact` - runs pact tests.
 
 ## Translation commands
-`npm run translation` - creates/updates translation file. Location of translation files is `src/assets/i18n`.
+`npm run build-and-extract-i18n` - creates/updates translation file. Location of translation files is `src/assets/i18n`.
 Translation files can be updated in PoEdit editor.
 
 ## Production build
@@ -51,4 +51,4 @@ Translation files can be updated in PoEdit editor.
 
 `npm run postinstall`
 
-`npm run build-production[-amera][-ePointHES]`
+`npm run build-production[:myGrid][:amera][:ePointHES]`
