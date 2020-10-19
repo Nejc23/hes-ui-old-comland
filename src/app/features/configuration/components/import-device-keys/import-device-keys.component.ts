@@ -13,8 +13,8 @@ import { importDeviceKeys } from 'src/app/core/repository/consts/crypto-lite.con
 import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
 import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-check-response.interface';
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
-import { environment } from 'src/environments/environment';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { AppConfigService } from 'src/app/core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -53,7 +53,11 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   }
 
   setFileTypeId() {
-    this.uploadSaveUrl = `${environment.apiUrl}${importDeviceKeys}/GULF${this.fileTypeId}`;
+    let urlPath = '';
+    if (AppConfigService.settings) {
+      urlPath = AppConfigService.settings.apiServer.url;
+    }
+    this.uploadSaveUrl = `${urlPath}${importDeviceKeys}/GULF${this.fileTypeId}`;
   }
 
   createForm(): FormGroup {
