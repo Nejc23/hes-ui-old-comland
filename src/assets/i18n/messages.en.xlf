@@ -1001,6 +1001,9 @@
       <trans-unit id="146442697456175258" datatype="html">
         <source>Data</source>
         <target>Data</target>
+      </trans-unit><trans-unit id="623420298642677840" datatype="html">
+        <source>FW upgrade</source>
+        <target state="final">FW upgrade</target>
       </trans-unit>
       <trans-unit id="2501989539336327542" datatype="html">
         <source>Upload image</source>
@@ -1009,10 +1012,16 @@
       <trans-unit id="8247620175611326692" datatype="html">
         <source>Activate image</source>
         <target>Activate image</target>
+      </trans-unit><trans-unit id="5209672282513780219" datatype="html">
+        <source>Breaker</source>
+        <target state="final">Breaker</target>
       </trans-unit>
       <trans-unit id="1713271461473302108" datatype="html">
         <source>Mode</source>
         <target>Mode</target>
+      </trans-unit><trans-unit id="1778275808932346500" datatype="html">
+        <source>CII</source>
+        <target state="final">CII</target>
       </trans-unit>
       <trans-unit id="4691747907262765119" datatype="html">
         <source>TOU Upload</source>
