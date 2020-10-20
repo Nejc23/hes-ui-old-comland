@@ -25,6 +25,7 @@ export interface GridFilterParams {
   readStatus: ReadStatus;
   firmware?: Codelist<number>[];
   disconnectorState?: Codelist<number>[];
+  ciiState?: Codelist<number>[];
   showChildInfoMBus?: boolean;
   showDeleted: boolean;
   showWithoutTemplate?: boolean;

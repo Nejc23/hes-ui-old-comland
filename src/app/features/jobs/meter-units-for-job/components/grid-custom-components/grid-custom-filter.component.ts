@@ -110,6 +110,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
           vendorFilter: this.sessionFilter.vendorFilter,
           firmwareFilter: this.sessionFilter.firmwareFilter,
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
+          ciiStateFilter: this.sessionFilter.ciiStateFilter,
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
@@ -185,6 +186,10 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
     return 'breakerState';
   }
 
+  get ciiStateProperty() {
+    return 'ciiState';
+  }
+
   get showDeletedMeterUnitsProperty() {
     return 'showDeletedMeterUnits';
   }
@@ -240,6 +245,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
             },*/
       firmwareFilter: this.form.get(this.firmwareProperty).value,
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,
+      ciiStateFilter: this.form.get(this.ciiStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,

@@ -28,6 +28,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   data: MeterUnitsLayout[];
   meterUnitTags$: Observable<Codelist<number>[]>;
   disconnectorState$: Observable<Codelist<number>[]>;
+  ciiState$: Observable<Codelist<number>[]>;
   firmware$: Observable<Codelist<number>[]>;
   operatorsList$ = this.codelistHelperService.operationsList();
 
@@ -79,6 +80,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
     this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
     this.disconnectorState$ = this.codelistService.meterUnitDisconnectorStateCodelist(this.id); // TODO uncomment when implemented
+    this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
     this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
   }
 
@@ -108,6 +110,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           vendorFilter: this.sessionFilter.vendorFilter,
           firmwareFilter: this.sessionFilter.firmwareFilter,
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
+          ciiStateFilter: this.sessionFilter.ciiStateFilter,
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
@@ -131,6 +134,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ['vendor']: [filters && selected ? selected.vendorFilter : null],
         ['firmware']: [filters && selected ? selected.firmwareFilter : []],
         ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
+        ['ciiState']: [filters && selected ? selected.ciiStateFilter : []],
         ['operation']: [
           filters && selected.readStatusFilter && selected.readStatusFilter.operation
             ? selected.readStatusFilter.operation
@@ -181,6 +185,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   get breakerStateProperty() {
     return 'breakerState';
+  }
+
+  get ciiStateProperty() {
+    return 'ciiState';
   }
 
   get showDeletedMeterUnitsProperty() {
@@ -238,6 +246,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
             },*/
       firmwareFilter: this.form.get(this.firmwareProperty).value,
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,
+      ciiStateFilter: this.form.get(this.ciiStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,

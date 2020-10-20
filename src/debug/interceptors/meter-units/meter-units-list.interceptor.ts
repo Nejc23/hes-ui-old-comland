@@ -87,7 +87,7 @@ function setData(): MeterUnitsList[] {
       readStatusColor: 'red',
       vendor: 'Landis+Gy',
       tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-      breakerState: 'on',
+      disconnectorState: 'Connected',
       childInfo: 12345,
       firmware: 'FM-123',
       id5: 'ID-12345',
@@ -105,7 +105,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: true
+      hasActiveJobs: true,
+      ciiState: 'off'
     },
     {
       deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -115,7 +116,7 @@ function setData(): MeterUnitsList[] {
       readStatusColor: 'green',
       vendor: 'Landis+Gy',
       tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-      breakerState: 'off',
+      disconnectorState: 'ReadyForReConnection',
       childInfo: 12345,
       firmware: 'FM-223',
       id5: 'ID-12345',
@@ -133,7 +134,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: true
+      hasActiveJobs: true,
+      ciiState: 'on'
     },
     {
       deviceId: '22cfeaae-463a-4055-8632-a6818ba77d81',
@@ -143,7 +145,7 @@ function setData(): MeterUnitsList[] {
       readStatusColor: 'green',
       vendor: 'Landis+Gy',
       tags: ['tag 8', 'tag 05', 'tag 572'],
-      breakerState: null,
+      disconnectorState: 'Connected',
       childInfo: 12345,
       firmware: 'FM-223',
       id5: 'ID-12345',
@@ -161,7 +163,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: true
+      hasActiveJobs: true,
+      ciiState: 'on'
     },
     {
       deviceId: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
@@ -171,7 +174,7 @@ function setData(): MeterUnitsList[] {
       readStatusColor: 'Yellow',
       vendor: 'Landis+Gy',
       tags: ['tag 31', 'tag 572'],
-      breakerState: 'on',
+      disconnectorState: 'connected',
       childInfo: 12345,
       firmware: 'FM-324',
       id5: 'ID-12345',
@@ -189,7 +192,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: true
+      hasActiveJobs: true,
+      ciiState: 'off'
     },
     {
       deviceId: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
@@ -199,7 +203,7 @@ function setData(): MeterUnitsList[] {
       readStatusColor: 'yellow',
       vendor: 'Landis+Gy',
       tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 12345,
       firmware: 'FM-123',
       id5: 'ID-12345',
@@ -217,7 +221,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
@@ -226,7 +231,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-02-17T04:26:37',
       readStatusColor: 'red',
       vendor: 'Iskra',
-      breakerState: 'on',
+      disconnectorState: 'Disconnected',
       childInfo: 5,
       firmware: 'Firm Ware - 5',
       id5: '626516631021',
@@ -245,7 +250,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'on'
     },
     {
       deviceId: 'e4694732-a282-477c-9c47-79ca08f64911',
@@ -254,7 +260,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-02-17T05:26:37',
       readStatusColor: 'red',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 3,
       firmware: 'Firm Ware - 1',
       id5: '977862534617',
@@ -273,7 +279,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: true
+      hasActiveJobs: true,
+      ciiState: 'off'
     },
     {
       deviceId: '4db50891-45dc-4910-bc8e-1d1c15862a68',
@@ -282,7 +289,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-03-31T17:08:00',
       readStatusColor: 'red',
       vendor: 'Landis+Gy',
-      breakerState: 'on',
+      disconnectorState: 'connected',
       childInfo: 1,
       firmware: 'Firm Ware - 3',
       id5: '991196390689',
@@ -301,7 +308,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '7f7e9055-ad99-479f-956f-903022e1cccd',
@@ -310,7 +318,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-09T12:02:33',
       readStatusColor: 'green',
       vendor: 'Landis+Gy',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 4,
       firmware: 'Firm Ware - 1',
       id5: '645461952652',
@@ -329,7 +337,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
@@ -338,7 +347,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-11T12:14:00',
       readStatusColor: 'green',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 5,
       firmware: 'Firm Ware - 1',
       id5: '372969078122',
@@ -357,7 +366,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
@@ -366,7 +376,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-03T00:00:00',
       readStatusColor: 'green',
       vendor: 'Iskra',
-      breakerState: 'on',
+      disconnectorState: 'connected',
       childInfo: 4,
       firmware: 'Firm Ware - 3',
       id5: '878565520965',
@@ -385,7 +395,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: ''
     },
     {
       deviceId: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
@@ -394,7 +405,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2019-12-14T03:12:11',
       readStatusColor: 'red',
       vendor: 'Iskra',
-      breakerState: 'on',
+      disconnectorState: 'connected',
       childInfo: 1,
       firmware: 'Firm Ware - 0',
       id5: '297789917782',
@@ -413,7 +424,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
@@ -422,7 +434,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2019-12-20T20:20:20',
       readStatusColor: 'red',
       vendor: 'Landis+Gy',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 1,
       firmware: 'Firm Ware - 5',
       id5: '833452712479',
@@ -441,7 +453,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
@@ -450,7 +463,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2019-10-02T05:09:23',
       readStatusColor: 'red',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 0,
       firmware: 'Firm Ware - 5',
       id5: '770053695430',
@@ -469,7 +482,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: false,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
@@ -478,7 +492,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2019-09-18T19:18:59',
       readStatusColor: 'red',
       vendor: 'Landis+Gy',
-      breakerState: 'on',
+      disconnectorState: 'connected',
       childInfo: 0,
       firmware: 'Firm Ware - 1',
       id5: '591174417896',
@@ -497,7 +511,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
@@ -506,7 +521,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-01-18T19:18:59',
       readStatusColor: 'red',
       vendor: 'Landis+Gy',
-      breakerState: 'on',
+      disconnectorState: 'connected',
       childInfo: 4,
       firmware: 'Firm Ware - 3',
       id5: '335885084936',
@@ -525,7 +540,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
@@ -534,7 +550,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-05T03:29:19',
       readStatusColor: 'green',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 2,
       firmware: 'Firm Ware - 4',
       id5: '755019885413',
@@ -553,7 +569,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
@@ -562,7 +579,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-05T03:21:19',
       readStatusColor: 'yellow',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 4,
       firmware: 'Firm Ware - 3',
       id5: '778012660138',
@@ -581,7 +598,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: 'r42234-9c3d-46ea-bbdd-4770baefafbf',
@@ -590,7 +608,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-04-02T12:33:12',
       readStatusColor: 'yellow',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 14,
       firmware: 'Firm Ware - 3',
       id5: '778012660138',
@@ -609,7 +627,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '90976-9c3d-46ea-bbdd-4770baefafbf',
@@ -618,7 +637,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-01-24T04:31:00',
       readStatusColor: 'red',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 3,
       firmware: 'Firm Ware - 312',
       id5: '3q233112',
@@ -637,7 +656,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     },
     {
       deviceId: '90976-9c3d-46ea-642234-4770baefafbf',
@@ -646,7 +666,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-10T10:00:03',
       readStatusColor: 'green',
       vendor: 'Iskra',
-      breakerState: 'off',
+      disconnectorState: 'disconnected',
       childInfo: 3,
       firmware: 'Firm Ware - 312',
       id5: '3q233112',
@@ -665,7 +685,8 @@ function setData(): MeterUnitsList[] {
       logicalDeviceName: 'device name 1',
       parametrisationId: 'param 1',
       readyForActivation: true,
-      hasActiveJobs: false
+      hasActiveJobs: false,
+      ciiState: 'off'
     }
   ];
 }

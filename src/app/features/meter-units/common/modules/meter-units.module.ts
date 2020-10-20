@@ -33,6 +33,7 @@ import { GridCellActionsComponent } from '../../types/components/grid-custom-com
 import { RegistersChartComponent } from '../../registers/components/chart/registers-chart.component';
 import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
 import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
+import { GridCellCiiStateComponent } from '../../types/components/grid-custom-components/grid-cell-cii-state.component';
 
 @NgModule({
   entryComponents: [],
@@ -53,6 +54,7 @@ import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-
     GridCellIdNumberComponent,
     GridCellTimeOfUseIdComponent,
     GridCellBreakerStateComponent,
+    GridCellCiiStateComponent,
     GridCellInfoOfChildComponent,
     GridCellIconComponent,
     GridCellJobStatusComponent,
@@ -84,6 +86,7 @@ import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-
       GridCellIdNumberComponent,
       GridCellTimeOfUseIdComponent,
       GridCellBreakerStateComponent,
+      GridCellCiiStateComponent,
       GridCellInfoOfChildComponent,
       GridCellIconComponent,
       GridCellJobStatusComponent,

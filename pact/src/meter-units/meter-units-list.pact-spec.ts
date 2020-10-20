@@ -64,6 +64,10 @@ describe('Pact consumer test', () => {
           { id: 1, value: 'breaker 1' },
           { id: 5, value: 'breaker 5' }
         ],
+        ciiState: [
+          { id: 0, value: 'on' },
+          { id: 1, value: 'off' }
+        ],
         showChildInfoMBus: true,
         showDeleted: true
       }
@@ -78,7 +82,7 @@ describe('Pact consumer test', () => {
         readStatusColor: 'green',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8', 'tag 05', 'tag 572'],
-        breakerState: 'on',
+        disconnectorState: 'connected',
         childInfo: 12345,
         firmware: 'FM-123',
         id5: 'ID-12345',
@@ -96,7 +100,8 @@ describe('Pact consumer test', () => {
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
         readyForActivation: true,
-        hasActiveJobs: false
+        hasActiveJobs: false,
+        ciiState: 'off'
       },
       {
         deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -106,7 +111,7 @@ describe('Pact consumer test', () => {
         readStatusColor: 'yellow',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-        breakerState: 'off',
+        disconnectorState: 'disconnected',
         childInfo: 12345,
         firmware: 'FM-223',
         id5: 'ID-12345',
@@ -124,7 +129,8 @@ describe('Pact consumer test', () => {
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
         readyForActivation: false,
-        hasActiveJobs: true
+        hasActiveJobs: true,
+        ciiState: ''
       },
       {
         deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -134,7 +140,7 @@ describe('Pact consumer test', () => {
         readStatusColor: 'red',
         vendor: 'Landis+Gy',
         tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-        breakerState: 'off',
+        disconnectorState: 'disconnected',
         childInfo: 12345,
         firmware: 'FM-223',
         id5: 'ID-12345',
@@ -152,7 +158,8 @@ describe('Pact consumer test', () => {
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
         readyForActivation: true,
-        hasActiveJobs: true
+        hasActiveJobs: true,
+        ciiState: 'on'
       }
     ];
 

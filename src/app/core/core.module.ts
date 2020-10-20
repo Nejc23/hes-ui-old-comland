@@ -63,7 +63,7 @@ import { AppConfigStoreService } from './configuration/services/app-config-store
       multi: true
     }
     // fakeBaceknd
-    // fakeBackendProvider
+    // , fakeBackendProvider
   ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

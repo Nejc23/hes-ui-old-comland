@@ -216,7 +216,7 @@ export class MeterUnitsPlcActionsService {
     switch (operation) {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
-        operationName = $localize`Get breaker status`;
+        operationName = $localize`Get disconnector status`;
         selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.connect:
