@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
@@ -24,6 +24,8 @@ import '@progress/kendo-angular-intl/locales/de/all';
 import '@progress/kendo-angular-intl/locales/fr/all';
 import '@progress/kendo-angular-intl/locales/it/all';
 import { ChartsModule } from '@progress/kendo-angular-charts';
+import { AppConfigService } from './core/configuration/services/app-config.service';
+import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -33,9 +35,29 @@ registerLocaleData(localeIt, 'it', localeItExtra);
 
 declare const require;
 
+/*export function initializeApp(appConfigService: AppConfigService) {
+  return (): Promise<any> => { 
+    return appConfigService.load();
+  }
+}*/
+
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => {
+    return appConfig.loadAppConfig();
+  };
+};
+
 @NgModule({
   declarations: [AppComponent],
-  providers: [],
+  providers: [
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    }
+  ],
   imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule, ChartsModule],
   bootstrap: [AppComponent]
 })
