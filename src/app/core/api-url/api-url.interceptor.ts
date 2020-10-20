@@ -1,8 +1,8 @@
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { enumMyGridLink } from '../repository/consts/my-grid-link.const';
+import { AppConfigService } from '../configuration/services/app-config.service';
 
 @Injectable()
 export class ApiUrlInterceptor implements HttpInterceptor {
@@ -13,7 +13,12 @@ export class ApiUrlInterceptor implements HttpInterceptor {
       console.log('mygrid????');
       return next.handle(apiReq);
     } else {*/
-    const apiReq = request.clone({ url: `${environment.apiUrl}${request.url}` });
+
+    let urlPath = '';
+    if (AppConfigService.settings) {
+      urlPath = AppConfigService.settings.apiServer.url;
+    }
+    const apiReq = request.clone({ url: `${urlPath}${request.url}` });
     return next.handle(apiReq);
     // }
   }
