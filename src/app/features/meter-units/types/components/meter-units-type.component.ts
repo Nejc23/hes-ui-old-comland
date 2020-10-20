@@ -85,6 +85,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       },
       firmware: [{ id: 0, value: '' }],
       disconnectorState: [{ id: 0, value: '' }],
+      ciiState: [{ id: 0, value: '' }],
       showChildInfoMBus: false,
       showDeleted: false,
       showWithoutTemplate: false
@@ -175,6 +176,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
           this.requestModel.filterModel.firmware = event.firmwareFilter;
           this.requestModel.filterModel.disconnectorState = event.breakerStateFilter;
+          this.requestModel.filterModel.ciiState = event.ciiStateFilter;
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
           this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
@@ -422,6 +424,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.disconnectorState ||
           this.requestModel.filterModel.disconnectorState.length === 0 ||
           this.requestModel.filterModel.disconnectorState[0].id === 0) &&
+        (!this.requestModel.filterModel.ciiState ||
+          this.requestModel.filterModel.ciiState.length === 0 ||
+          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showDeleted &&
         !this.requestModel.filterModel.showWithoutTemplate &&
@@ -522,6 +527,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       };
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
       this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
+      this.requestModel.filterModel.ciiState = filterDCU.ciiStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
@@ -545,6 +551,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         : false,
       filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
+      filterInfo.ciiStateFilter && filterInfo.ciiStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
       filterInfo.showDeletedMeterUnitsFilter,
       filterInfo.showMeterUnitsWithoutTemplateFilter,

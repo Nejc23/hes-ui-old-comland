@@ -145,6 +145,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (MeterUnitCodelistInterceptor.canInterceptMeterUnitBreakerState(request)) {
                 return MeterUnitCodelistInterceptor.interceptMeterUnitBreakerState();
               }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitCiiState(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitCiiState();
+              }
 
               // authenticate
               if (AuthenticateInterceptor.canInterceptAuthenticateUser(request)) {

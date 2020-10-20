@@ -44,7 +44,8 @@ export class MeterUnitsTypeStaticTextService {
     tag: boolean,
     readStatuses: boolean,
     firmware: boolean,
-    breakerState: boolean,
+    disconnectorState: boolean,
+    ciiState: boolean,
     showChildMBus: boolean,
     showDeleted: boolean,
     showWithoutTemplate: boolean,
@@ -59,11 +60,31 @@ export class MeterUnitsTypeStaticTextService {
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
-        status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate
+        status ||
+        vendor ||
+        tag ||
+        readStatuses ||
+        firmware ||
+        disconnectorState ||
+        ciiState ||
+        showChildMBus ||
+        showDeleted ||
+        showWithoutTemplate
           ? ' · '
           : '';
       result.text = filterName + additionalString;
-    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate) {
+    } else if (
+      status ||
+      vendor ||
+      tag ||
+      readStatuses ||
+      firmware ||
+      disconnectorState ||
+      ciiState ||
+      showChildMBus ||
+      showDeleted ||
+      showWithoutTemplate
+    ) {
       result.text = '';
     }
 
@@ -74,7 +95,8 @@ export class MeterUnitsTypeStaticTextService {
       tag ||
       readStatuses ||
       firmware ||
-      breakerState ||
+      disconnectorState ||
+      ciiState ||
       showChildMBus ||
       showDeleted ||
       showWithoutTemplate
@@ -84,38 +106,48 @@ export class MeterUnitsTypeStaticTextService {
 
     if (status) {
       additionalString =
-        vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+        vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showDeleted || showWithoutTemplate
+          ? ', '
+          : '';
       result.text += $localize`status` + additionalString;
       result.count++;
     }
 
     if (vendor) {
-      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString =
+        tag || readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result.text += $localize`vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
-      additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString =
+        readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result.text += $localize`tag` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
-      additionalString = firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = firmware || disconnectorState || ciiState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result.text += $localize`read status` + additionalString;
       result.count++;
     }
 
     if (firmware) {
-      additionalString = breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = disconnectorState || ciiState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result.text += $localize`firmware` + additionalString;
       result.count++;
     }
 
-    if (breakerState) {
-      additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+    if (disconnectorState) {
+      additionalString = ciiState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
       result.text += $localize`disconnector state` + additionalString;
+      result.count++;
+    }
+
+    if (ciiState) {
+      additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      result.text += $localize`CII state` + additionalString;
       result.count++;
     }
 

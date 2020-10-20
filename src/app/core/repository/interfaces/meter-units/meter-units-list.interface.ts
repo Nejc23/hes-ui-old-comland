@@ -27,5 +27,5 @@ export interface MeterUnitsList {
   parametrisationId: string;
   readyForActivation: boolean;
   hasActiveJobs: boolean;
-  ciiState?: string;
+  ciiState: string;
 }

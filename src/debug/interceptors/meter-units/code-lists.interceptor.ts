@@ -9,7 +9,8 @@ import {
   meterUnitVendors,
   meterUnitTags,
   meterUnitFirmwares,
-  meterUnitDisconnectorStates
+  meterUnitDisconnectorStates,
+  meterUnitCiiStates
 } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
@@ -194,5 +195,29 @@ export class MeterUnitCodelistInterceptor {
 
   static canInterceptMeterUnitBreakerState(request: HttpRequest<any>): boolean {
     return new RegExp(`${meterUnitDisconnectorStates}/[0-9]+$`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptMeterUnitCiiState(): Observable<HttpEvent<any>> {
+    const data: Codelist<number>[] = [
+      {
+        id: 1,
+        value: 'on'
+      },
+      {
+        id: 2,
+        value: 'off'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptMeterUnitCiiState(request: HttpRequest<any>): boolean {
+    return new RegExp(`${meterUnitCiiStates}/[0-9]+$`).test(request.url) && request.method.endsWith('GET');
   }
 }
