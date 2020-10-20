@@ -36,6 +36,7 @@ export class MeterUnitsTypeGridService {
   sessionNameForGridState = 'grdStateMUT-typeId-';
   gridName = 'grdMUT-requestIds';
   gridNameBreakerState = 'grdMUT-breaker-state-requestIds';
+  gridNameCiiState = 'grdMUT-cii-state-requestIds';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
@@ -594,12 +595,24 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameBreakerState, requestId);
   }
 
+  saveMyGridLink_CiiState_RequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameCiiState, requestId);
+  }
+
   removeMyGridLink_BreakerState_RequestId(requestId: string) {
     this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameBreakerState, requestId);
   }
 
+  removeMyGridLink_CiiState_RequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameCiiState, requestId);
+  }
+
   getAllMyGridLink_BreakerState_RequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
+  }
+
+  getAllMyGridLink_CiiState_RequestIds(): string[] {
+    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameCiiState);
   }
 
   saveCryptoimportId(importId: string) {

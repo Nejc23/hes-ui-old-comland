@@ -227,6 +227,19 @@ export class MeterUnitsPlcActionsService {
         response = this.service.postMyGridDisconnectDevice(params);
         operationName = $localize`Disconnect`;
         break;
+      case MeterUnitsTypeEnum.ciiState:
+        response = this.service.getCiiState(params);
+        operationName = $localize`Get CII state`;
+        selectedText = `${$localize`for`} ${selectedText}`;
+        break;
+      case MeterUnitsTypeEnum.ciiActivate:
+        response = this.service.postMyGridCiiActivateDevice(params);
+        operationName = $localize`CII Activate`;
+        break;
+      case MeterUnitsTypeEnum.ciiDeactivate:
+        response = this.service.postMyGridCiiDeactivateDevice(params);
+        operationName = $localize`CII Deactivate`;
+        break;
       case MeterUnitsTypeEnum.touConfig:
         const paramsConf: RequestTOUData = {
           deviceIds: params.deviceIds,
@@ -263,6 +276,8 @@ export class MeterUnitsPlcActionsService {
             this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
+            } else if (operation === MeterUnitsTypeEnum.ciiState) {
+              this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
             }
           },
           e => {

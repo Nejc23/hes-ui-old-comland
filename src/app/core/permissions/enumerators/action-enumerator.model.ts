@@ -8,5 +8,8 @@ export enum ActionEnumerator {
   MUSetLimiter = 'Meter-Units-SetLimiter',
   MUTOU = 'Meter-Units-TOU',
   MUUpgrade = 'Meter-Units-Upgrade',
-  MURemoveFromJob = 'Meter-Units-RemoveFromJob'
+  MURemoveFromJob = 'Meter-Units-RemoveFromJob',
+  MUCiiState = 'Meter-Units-CiiState',
+  MUCiiActivate = 'Meter-Units-CiiActivate',
+  MUCiiDeactivate = 'Meter-Units-CiiDeactivate'
 }
