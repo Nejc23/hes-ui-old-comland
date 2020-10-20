@@ -22,6 +22,7 @@ import { GridSettingsCookieStoreService } from './utils/services/grid-settings-c
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
 import { GridLayoutSessionStoreService } from './utils/services/grid-layout-session-store.service';
 import { RoleService } from './permissions/services/role.service';
+import { AppConfigStoreService } from './configuration/services/app-config-store.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -34,6 +35,7 @@ import { RoleService } from './permissions/services/role.service';
     CookieService,
     PermissionsService,
     PermissionsStoreService,
+    AppConfigStoreService,
     RoleService,
     ErrorHandlerService,
     GridSettingsCookieStoreService,

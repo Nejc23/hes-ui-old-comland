@@ -18,6 +18,7 @@ import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { JwtHelperService } from './jwt.helper.service';
 import { RoleService } from '../../permissions/services/role.service';
 import { UserRight } from '../../permissions/interfaces/user-rights.interface';
+import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
 
 @Injectable()
 export class AuthService {
@@ -38,25 +39,30 @@ export class AuthService {
     private permissionsStoreService: PermissionsStoreService,
     private jwtHelper: JwtHelperService,
     private roleService: RoleService,
+    private configStoreService: AppConfigStoreService,
     @Inject(LOCALE_ID) public locale: string
   ) {
-    const settings = {
-      authority: environment.stsAuthority,
-      client_id: environment.clientId,
-      redirect_uri: environment.ignoreLocale
-        ? `${environment.clientRoot}assets/signin-callback.html`
-        : `${environment.clientRoot}${locale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
-      silent_redirect_uri: environment.ignoreLocale
-        ? `${environment.clientRoot}assets/silent-callback.html`
-        : `${environment.clientRoot}${locale}/assets/silent-callback.html`,
-      post_logout_redirect_uri: environment.ignoreLocale ? `${environment.clientRoot}` : `${environment.clientRoot}${locale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
-      response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
-      scope: environment.clientScope,
-      automaticSilentRenew: environment.clientAutoSilentRenew
-      // accessTokenLifetime: 7200,
-      // identityTokenLifetime:7200
-    };
-    this.userManager = new UserManager(settings);
+    this.configStoreService.configObservable.subscribe(appConfig => {
+      const settings = {
+        authority: appConfig.identityServer.stsAuthority, // environment.stsAuthority,
+        client_id: appConfig.identityServer.clientId, // environment.clientId,
+        redirect_uri: environment.ignoreLocale
+          ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html` // ${environment.clientRoot}
+          : `${appConfig.identityServer.clientRoot}${locale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
+        silent_redirect_uri: environment.ignoreLocale
+          ? `${appConfig.identityServer.clientRoot}assets/silent-callback.html`
+          : `${appConfig.identityServer.clientRoot}${locale}/assets/silent-callback.html`,
+        post_logout_redirect_uri: environment.ignoreLocale
+          ? `${appConfig.identityServer.clientRoot}`
+          : `${appConfig.identityServer.clientRoot}${locale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
+        response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
+        scope: appConfig.identityServer.clientScope, // environment.clientScope,
+        automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew // environment.clientAutoSilentRenew
+        // accessTokenLifetime: 7200,
+        // identityTokenLifetime:7200
+      };
+      this.userManager = new UserManager(settings);
+    });
 
     /* this.userManager.getUser().then(user => {
       this.user = user;

@@ -142,7 +142,10 @@ export class RoleService {
             ActionEnumerator.MUReadJobs,
             ActionEnumerator.MUSetLimiter,
             ActionEnumerator.MUTOU,
-            ActionEnumerator.MUUpgrade
+            ActionEnumerator.MUUpgrade,
+            ActionEnumerator.MUCiiState,
+            ActionEnumerator.MUCiiActivate,
+            ActionEnumerator.MUCiiDeactivate
           ]
         },
         {
