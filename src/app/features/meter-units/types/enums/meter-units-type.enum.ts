@@ -5,5 +5,8 @@ export enum MeterUnitsTypeEnum {
   touConfig = 'touConfig',
   activateUpgrade = 'activateUpgrade',
   delete = 'delete',
-  clearFF = 'clearFF'
+  clearFF = 'clearFF',
+  ciiActivate = 'ciiActivate',
+  ciiDeactivate = 'ciiDeactivate',
+  ciiState = 'ciiState'
 }

@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().inject(MyGridLinkService);
+    service = getTestBed().get(MyGridLinkService);
   });
 
   const requestBody: RequestFilterParams = {
@@ -74,15 +74,15 @@ describe('Pact consumer test', () => {
     }
   };
 
-  describe('myGrid.link get disconnector state with filter request', () => {
+  describe('myGrid.link trigger CII deactivate device with filter request', () => {
     beforeAll(done => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_DISCONNECTOR_STATE_WITH_FILTER',
-          uponReceiving: 'a request for getting disconnector state with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_CII_DEACTIVATE_DEVICE_WITH_FILTER',
+          uponReceiving: 'a request for trigger CII deactivate device with filter in request - myGrid.Link',
           withRequest: {
-            method: service.getDisconnectorStateRequest(requestBody).method,
-            path: service.getDisconnectorStateRequest(requestBody).url,
+            method: service.postMyGridCiiDeactivateDeviceRequest(requestBody).method,
+            path: service.postMyGridCiiDeactivateDeviceRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -104,8 +104,8 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for getting disconnector state with filter in request - myGrid.Link', done => {
-      service.getDisconnectorState(requestBody).subscribe(
+    it('should make request for trigger CII deactivate device with filter in request - myGrid.Link', done => {
+      service.postMyGridCiiDeactivateDevice(requestBody).subscribe(
         (res: ResponseConnectDisconnectData) => {
           expect(res.requestId).toEqual(responseBody.requestId);
           expect(res.deviceIds).toEqual(responseBody.deviceIds);
