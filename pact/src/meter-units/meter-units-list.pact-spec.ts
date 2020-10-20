@@ -129,7 +129,8 @@ describe('Pact consumer test', () => {
         logicalDeviceName: 'device name 1',
         parametrisationId: 'param 1',
         readyForActivation: false,
-        hasActiveJobs: true
+        hasActiveJobs: true,
+        ciiState: ''
       },
       {
         deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
