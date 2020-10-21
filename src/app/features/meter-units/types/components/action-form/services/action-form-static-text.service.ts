@@ -9,14 +9,14 @@ export class ActionFormStaticTextService {
   get placeholderSearch() {
     return $localize`Search`;
   }
-  /* deprecated
+
   preventCloseDropDownWhenClickInsideMenu() {
     $('.dropdown-menu').on('click.bs.dropdown', e => {
       e.stopPropagation();
       // e.preventDefault();
     });
   }
-*/
+
   removePopupBackdropIfClickOnMenu() {
     $(document.body).removeClass('modal-open');
     $('.modal-backdrop').remove();
