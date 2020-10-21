@@ -1,5 +1,7 @@
+import { HostListener, ViewChild } from '@angular/core';
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
+import { ComboBoxComponent } from '@progress/kendo-angular-dropdowns';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -10,6 +12,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
   templateUrl: './select-input.component.html'
 })
 export class SelectInputComponent implements OnInit, OnDestroy {
+  @ViewChild(ComboBoxComponent) public combobox;
   @Input() form: FormGroup;
   @Input() property: string;
   @Input() label;
@@ -71,5 +74,9 @@ export class SelectInputComponent implements OnInit, OnDestroy {
 
   get formControl(): AbstractControl {
     return this.form.get(this.property);
+  }
+
+  click() {
+    this.combobox.toggle(true);
   }
 }
