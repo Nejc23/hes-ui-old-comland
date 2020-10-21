@@ -4,10 +4,10 @@
     <span class="badge badge-primary" *ngIf="filtersInfo.isSet">{{filtersInfo.count}}</span>
   </button>
 
-  <div dropdown class="btn-group ml-2" [autoClose]="false">
-    <button dropdownToggle type="button" class="btn btn-light pl-2 pr-2"  [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
+  <div class="btn-group ml-2" dropdown>
+    <button dropdownToggle type="button" class="btn btn-light pl-2 pr-2" (click)="$event.stopPropagation();" [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="far fa-columns"></i>
     </button>
-    <div *dropdownMenu class="dropdown-menu">
+    <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu">
       <div class="dropdown-item">
         <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>
       </div>
