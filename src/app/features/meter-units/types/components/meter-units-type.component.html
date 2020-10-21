@@ -137,51 +137,70 @@
   </div>
 
   <!-- ag-grid -->
-  <ag-grid-angular
-    class="ag-theme-epoint"
-    style="width: 100%; height: calc(100% - 25px);"
-    #agGrid
+  <div class="content-body-scroll">
+    <div>
+      <ag-grid-angular
+        class="ag-theme-epoint"
+        style="width: 100%; height: calc(100% - 25px);"
+        #agGrid
 
-    [domLayout]=agGridSettings.domLayout
-    suppressSizeToFit=agGridSettings.suppressSizeToFit
-    [localeText]="localeText"
+        [domLayout]=agGridSettings.domLayout
+        suppressSizeToFit=agGridSettings.suppressSizeToFit
+        [localeText]="localeText"
 
-    [modules]="modules"
-    [icons]="icons"
-    [pagination]=agGridSettings.pagination
+        [modules]="modules"
+        [icons]="icons"
+        [pagination]=agGridSettings.pagination
 
-    [paginationPageSize]=agGridSettings.paginationPageSize
-    [multiSortKey]=agGridSettings.multiSortKey
-    [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-    [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-    [frameworkComponents]="frameworkComponents"
-    [cacheBlockSize]=agGridSettings.paginationPageSize
-    [maxBlocksInCache]="1"
-    [gridOptions]="gridOptions"
-    [columnDefs]="columns"
+        [paginationPageSize]=agGridSettings.paginationPageSize
+        [multiSortKey]=agGridSettings.multiSortKey
+        [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+        [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+        [frameworkComponents]="frameworkComponents"
+        [cacheBlockSize]=agGridSettings.paginationPageSize
+        [maxBlocksInCache]="1"
+        [gridOptions]="gridOptions"
+        [columnDefs]="columns"
 
-    [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
-    [rowSelection]=agGridSettings.rowSelection
-    [sideBar]="sideBar"
+        [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+        [rowSelection]=agGridSettings.rowSelection
+        [sideBar]="sideBar"
 
-    [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-    [overlayLoadingTemplate]="overlayLoadingTemplate"
-    (selectionChanged)="onSelectionChanged()"
-    (gridReady)="onGridReady($event)"
-    (columnVisible)="onColumnVisible($event)"
-    (paginationChanged)="onPaginationChange($event)"
-    (rowSelected)="onRowSelect($event)"
-    (firstDataRendered)="onFirstDataRendered($event)"
-    >
-  </ag-grid-angular>
+        [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+        [overlayLoadingTemplate]="overlayLoadingTemplate"
+        (selectionChanged)="onSelectionChanged()"
+        (gridReady)="onGridReady($event)"
+        (columnVisible)="onColumnVisible($event)"
+        (paginationChanged)="onPaginationChange($event)"
+        (rowSelected)="onRowSelect($event)"
+        (firstDataRendered)="onFirstDataRendered($event)"
+        >
+      </ag-grid-angular>
+      <div class="ag-paging-panel-selection">
+        <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
+          <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+            <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
+                <span i18n>Select all</span>
+                    ({{totalCount}})</a></strong></small>
+          </div>
 
-</div>
-<div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height:80vh;">
-  <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
-  <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
-  <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus">
-    <span i18n> Add New</span></i>
-  </button></div>
+          <div class="mr-3" *ngIf="checkSelectedAll()">
+            <small class="link"><strong><span i18n>All</span> ({{getTotalCountWithoutExcluded()}}) <span i18n>items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+                <span i18n>Clear selected</span></a></strong></small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height:80vh;">
+      <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
+      <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
+      <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus">
+        <span i18n> Add New</span></i>
+      </button></div>
+    </div>
+    </div>
 </div>
 </div>
 <ng-template #tipMoreSave><span i18n>More options</span></ng-template>

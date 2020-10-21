@@ -14,7 +14,7 @@ body {
   margin-left: $sidebar-base-width;
   transition: margin-left .3s;
   width: auto;
-  padding: $spacer 0;
+  padding: $spacer 0 0 0;
 
   &.menu-collapsed {
     margin-left: $sidebar-collapsed-width !important;
