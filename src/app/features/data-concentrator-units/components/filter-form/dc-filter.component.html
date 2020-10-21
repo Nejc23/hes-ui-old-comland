@@ -1,63 +1,65 @@
 <div class="pt-1 h-100">
   <form [formGroup]="form">
     <div class="d-flex mb-2">
-      <h3 class="mb-0" i18n>Filters</h3>
+      <h3 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h3>
       <button type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close" i18n>
         <i class="far fa-times"></i>
       </button>
     </div>
-    <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-      <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
-        [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
-      </app-input-tag>
+    <div class="filter-scroll">
+      <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+        <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
+          [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+        </app-input-tag>
 
-      <!--<div class="form-row">
-        <div class="col-6">
-          <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
-          </app-select-input>
+        <!--<div class="form-row">
+          <div class="col-6">
+            <app-select-input label="Read status" [form]="form" [property]="operationProperty"  [selectOptions]="operatorsList$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+            </app-select-input>
+          </div>
+          <div class="col-3">
+            <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value1Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
+            [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
+          </div>
+          <div class="col-3" *ngIf="form.get(operationProperty).value != null &&  form.get(operationProperty).value.id === 'In Range'">
+            <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value2Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
+            [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
+          </div>
+        </div>-->
+        <div class="form-row text-danger" *ngIf="!form.valid">
+          <div class="col-6"></div>
+          <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
         </div>
-        <div class="col-3">
-          <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value1Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
-          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
-        </div>
-        <div class="col-3" *ngIf="form.get(operationProperty).value != null &&  form.get(operationProperty).value.id === 'In Range'">
-          <app-input-numeric [label]="'&nbsp;'" [form]="form" [property]="value2Property" [showSpinners]="false" [decimals]="2" [min]="0" [max]="100"
-          [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
-        </div>
-      </div>-->
-      <div class="form-row text-danger" *ngIf="!form.valid">
-        <div class="col-6"></div>
-        <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
+
+        <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
+          [options]="dcuTypes$ | async" [inline]="true" i18n-label>
+        </app-input-multiselect>
+
+        <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+        </app-select-input>
+
+        <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+        </app-input-tag>
+
+        <app-input-switch label="Show deleted Data Concentrator Units" [form]="form" [property]="showDeletedProperty" i18n-label></app-input-switch>
+      </fieldset>
+      <div class="form-group" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+        <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()">
+          <span i18n>Apply Filters</span>
+        </button>
       </div>
-
-      <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-        [options]="dcuTypes$ | async" [inline]="true" i18n-label>
-      </app-input-multiselect>
-
-      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
-      </app-select-input>
-
-      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
-      </app-input-tag>
-
-      <app-input-switch label="Show deleted Data Concentrator Units" [form]="form" [property]="showDeletedProperty" i18n-label></app-input-switch>
-    </fieldset>
-    <div class="form-group" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-      <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()">
-        <span i18n>Apply Filters</span>
-      </button>
-    </div>
-    <div class="form-group link">
-      <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
-        <span i18n>Clear Filters</span></a>
-      </strong>
-    </div>
-    <div class="form-group link">
-      <strong><span class="text-secondary" i18n>Save Filter Set</span></strong>
-      <hr>
-    </div>
-    <div class="form-group link">
-      <strong><span  class="small" i18n>Saved Filter Sets</span></strong>
+      <div class="form-group link">
+        <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
+          <span i18n>Clear Filters</span></a>
+        </strong>
+      </div>
+      <div class="form-group link">
+        <strong><span class="text-secondary" i18n>Save Filter Set</span></strong>
+        <hr>
+      </div>
+      <div class="form-group link">
+        <strong><span  class="small" i18n>Saved Filter Sets</span></strong>
+      </div>
     </div>
   </form>
 </div>

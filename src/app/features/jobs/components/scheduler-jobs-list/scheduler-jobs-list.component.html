@@ -20,31 +20,34 @@
     </app-action-form>
   </div>
 </div>
-<ag-grid-angular class="ag-theme-epoint"
-  style="width: 100%; height: calc(100% - 25px);"
-  #agGrid
 
-  [rowData]="rowData"
-  [columnDefs]="columnDefs"
-  domLayout="autoHeight"
-  [frameworkComponents]="frameworkComponents"
-  [modules]="modules"
-  (gridReady)="onGridReady($event)"
-  suppressRowClickSelection="true"
-  [pagination]="true"
-  [paginationPageSize]="10"
+<div class="jobs-body-scroll">
+  <ag-grid-angular class="ag-theme-epoint"
+    style="width: 100%; height: calc(100% - 25px);"
+    #agGrid
 
-  suppressSizeToFit="true"
-  [cacheOverflowSize]="2"
-  [maxConcurrentDatasourceRequests]="2"
-  [cacheBlockSize]="10"
-  [maxBlocksInCache]="1"
-  [gridOptions]="gridOptions"
-  [localeText]="localeText"
+    [rowData]="rowData"
+    [columnDefs]="columnDefs"
+    domLayout="autoHeight"
+    [frameworkComponents]="frameworkComponents"
+    [modules]="modules"
+    (gridReady)="onGridReady($event)"
+    suppressRowClickSelection="true"
+    [pagination]="true"
+    [paginationPageSize]="10"
 
-  [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-  [overlayLoadingTemplate]="overlayLoadingTemplate"
-  (paginationChanged)="onPaginationChange($event)"
-  (firstDataRendered)="onFirstDataRendered($event)"
-  >
-</ag-grid-angular>
+    suppressSizeToFit="true"
+    [cacheOverflowSize]="2"
+    [maxConcurrentDatasourceRequests]="2"
+    [cacheBlockSize]="10"
+    [maxBlocksInCache]="1"
+    [gridOptions]="gridOptions"
+    [localeText]="localeText"
+
+    [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+    [overlayLoadingTemplate]="overlayLoadingTemplate"
+    (paginationChanged)="onPaginationChange($event)"
+    (firstDataRendered)="onFirstDataRendered($event)"
+    >
+  </ag-grid-angular>
+</div>

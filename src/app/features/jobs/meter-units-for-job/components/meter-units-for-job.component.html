@@ -1,25 +1,25 @@
-<div class="row">
-  <div [ngClass]="'col-12'">
-    <div *ngIf="!noData">
-      <div class="mb-2">
-        <div class="mb-2 grid-actions">
-          <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="">
-            <div *ngIf="selectedAtLeastOneRowOnGrid">
-              <div dropdown class="btn-group">
-                <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
-                  data-toggle="dropdown"><span i18n>Operations</span></button>
-                <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
-                  <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
-                    (click)="onRemoveFromJob()"><i class="far fa-calendar"></i>
-                    <span i18n>Remove from Job</span></button>
-                </div>
-              </div>
+<div *ngIf="!noData">
+  <div class="mb-2">
+    <div class="mb-2 grid-actions">
+      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="">
+        <div *ngIf="selectedAtLeastOneRowOnGrid">
+          <div dropdown class="btn-group">
+            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
+              data-toggle="dropdown"><span i18n>Operations</span></button>
+            <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
+              <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
+                (click)="onRemoveFromJob()"><i class="far fa-calendar"></i>
+                <span i18n>Remove from Job</span></button>
             </div>
-          </app-action-form>
+          </div>
         </div>
-      </div>
-      <!-- ag-grid -->
-      <ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
+      </app-action-form>
+    </div>
+  </div>
+  <!-- ag-grid -->
+  <div class="list-for-job-body-scroll">
+    <div>
+      <ag-grid-angular class="ag-theme-epoint" style="width: 100%;" #agGrid
         [domLayout]=agGridSettings.domLayout suppressSizeToFit=agGridSettings.suppressSizeToFit
         [localeText]="localeText" [modules]="modules" [icons]="icons" [pagination]=agGridSettings.pagination
         [paginationPageSize]=agGridSettings.paginationPageSize [multiSortKey]=agGridSettings.multiSortKey
@@ -34,26 +34,23 @@
         (paginationChanged)="onPaginationChange($event)" (rowSelected)="onRowSelect($event)"
         (firstDataRendered)="onFirstDataRendered($event)">
       </ag-grid-angular>
-      <div class="ag-paging-panel-selection">
+      <div class="ag-paging-panel-selection" style="margin-bottom:-40px">
         <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
           <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
-            <small class="link">{{getSelectedCount()}} <strong>
-              <span i18n>items selected</span> &middot;
-                <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
-                  <span i18n>Select all</span>
-                  ({{totalCount}})</a></strong></small>
+            <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
+                <span i18n>Select all</span>
+                    ({{totalCount}})</a></strong></small>
           </div>
+
           <div class="mr-3" *ngIf="checkSelectedAll()">
-            <small class="link"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) 
-              <span i18n>items selected</span>
-                &middot;
-                <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
-                  <span i18n>Clear selected</span>
-                </a></strong></small>
+            <small class="link"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) <span i18n>items selected</span> &middot;
+              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+                <span i18n>Clear selected</span></a></strong></small>
           </div>
         </div>
       </div>
     </div>
   </div>
-
-  <ng-template #tipMoreSave><span i18n>More options</span></ng-template>
+</div>
+<ng-template #tipMoreSave><span i18n>More options</span></ng-template>

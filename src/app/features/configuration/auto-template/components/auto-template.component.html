@@ -3,36 +3,37 @@
 <div class="col-2 filter-shadow-container" *ngIf="!hide">
   <div class="filter-shadow" >
     <div class="d-flex mb-3 mt-2">
-      <h4 i18n class="mb-0">Templates list</h4>
+      <h4 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h4>
       <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close">
         <i class="far fa-times"></i>
       </button>
     </div>
 
-    <div>
-      <a href="javascript:void(0);" (click)="onSelect(temp)" class="list-group-item list-group-item-action border-0"
-      [ngClass]="setTemplateListActivityClass(temp)"
-      *ngFor="let temp of templates let first = first" >{{temp.name}}</a>
+    <div class="filter-scroll-templates">
+      <a href="javascript:void(0);" (click)="onSelect(temp)" class="list-group-item list-group-item-action border-0 text-truncate"
+      [ngClass]="setTemplateListActivityClass(temp)" container="body" placement="bottom"  [openDelay]="500" [ngbTooltip]="temp.name"
+      *ngFor="let temp of templates let first = first">{{temp.name}}</a>
     </div>
   </div>
 </div>
 
 <div class="filter-button" [ngClass]="{'col-10': !hide, 'col-12': hide}">
-<div class="d-flex align-items-center mb-3 mt-0">
-  <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hide}" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
-    <i class="far fa-ellipsis-v"></i>
-  </button>
-  <h3 class="mr-3 mb-0">{{activeElement.name}}</h3>
-</div>
-<div class="d-flex align-items-center mb-3 mt-0">
-    <h4 class="mr-3 mb-0" i18n>Rules</h4>
-    <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
-      <i class="far fa-plus"></i> <span i18n>Add</span>
+  <div class="d-flex align-items-center mb-3 mt-0">
+    <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hide}" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
+      <i class="far fa-ellipsis-v"></i>
     </button>
-</div>
+    <h3 class="mr-3 mb-0">{{activeElement.name}}</h3>
+  </div>
+  <div class="d-flex align-items-center mb-3 mt-0">
+      <h4 class="mr-3 mb-0" i18n>Rules</h4>
+      <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
+        <i class="far fa-plus"></i> <span i18n>Add</span>
+      </button>
+  </div>
 
-<div>
-  <ag-grid-angular
+  <div class="content-body-scroll-templates">
+    <div>
+      <ag-grid-angular
         class="ag-theme-epoint"
         style="width: 100%; height: calc(98% - 25px);"
         #agGrid
@@ -50,40 +51,41 @@
         [getRowHeight]="getRowHeight"
         (rowEditingStopped)='rowEditingStopped($event)'
       ></ag-grid-angular>
-</div>
-
-<div *ngIf="showJobSection()">
-  <div class="d-flex align-items-center mb-3 mt-5">
-    <div class="form-group mr-3">
-      <h4 class="mb-0" i18n>Jobs</h4>
     </div>
-    <app-select-input i18n-label [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
-    <div class="form-group">
-      <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement.templateId.length == 0">
-        <i class="far fa-plus"></i> <span i18n>Add</span>
-      </button>
+
+    <div *ngIf="showJobSection()">
+      <div class="d-flex align-items-center mb-3 mt-5">
+        <div class="form-group mr-3">
+          <h4 class="mb-0" i18n>Jobs</h4>
+        </div>
+        <app-select-input i18n-label [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
+        <div class="form-group">
+          <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement.templateId.length == 0">
+            <i class="far fa-plus"></i> <span i18n>Add</span>
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <ag-grid-angular
+              class="ag-theme-epoint"
+              style="width: 100%; height: calc(98% - 25px);"
+              #agGrid
+              domLayout="autoHeight"
+              id="myGridJobs"
+              [modules]="modules"
+              [columnDefs]="columnDefsJobs"
+              [defaultColDef]="defaultColDefJobs"
+              [rowData]="rowDataJobs"
+              (firstDataRendered)="onFirstDataRenderedJobs($event)"
+              (gridReady)="onGridReadyJobs($event)"
+              [frameworkComponents]="frameworkComponentsJobs"
+              [context]="context"
+              [gridOptions]="cellRendererParamsJobs"
+            ></ag-grid-angular>
+      </div>
     </div>
   </div>
-
-  <div>
-    <ag-grid-angular
-          class="ag-theme-epoint"
-          style="width: 100%; height: calc(98% - 25px);"
-          #agGrid
-          domLayout="autoHeight"
-          id="myGridJobs"
-          [modules]="modules"
-          [columnDefs]="columnDefsJobs"
-          [defaultColDef]="defaultColDefJobs"
-          [rowData]="rowDataJobs"
-          (firstDataRendered)="onFirstDataRenderedJobs($event)"
-          (gridReady)="onGridReadyJobs($event)"
-          [frameworkComponents]="frameworkComponentsJobs"
-          [context]="context"
-          [gridOptions]="cellRendererParamsJobs"
-        ></ag-grid-angular>
   </div>
-</div>
-</div>
 </div>
 <ng-template #hidwShowTemplates><span i18n>Show/hide templates</span></ng-template>

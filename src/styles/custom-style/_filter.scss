@@ -25,6 +25,24 @@
     padding-top: 1.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    height: calc(100vh - 2.5rem - #{$topbar-base-height}) !important;// 100vh
+    height: calc(100vh - #{$topbar-base-height}) !important;// 100vh
     box-shadow: 5px 0px 15px -8px rgba(0,0,0,0.1);
+}
+
+.filter-scroll {
+  overflow-y:auto;
+  overflow-x:hidden;
+  height: calc(100vh - #{$topbar-base-height} - 4.7rem);
+}
+
+.filter-scroll-templates {
+  overflow-y:auto;
+  overflow-x:hidden;
+  height: calc(100vh - #{$topbar-base-height} - 5.3rem);
+}
+
+.filter-scroll-registers {
+  overflow-y:auto;
+  overflow-x:hidden;
+  height: calc(100vh - #{$topbar-base-height} - 8.8rem);
 }

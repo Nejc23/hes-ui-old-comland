@@ -273,4 +273,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   doToggleFilter() {
     this.toggleFilter.emit();
   }
+
+  getFilterTitle(): string {
+    return $localize`Filters`;
+  }
 }

@@ -2,11 +2,11 @@
 
 
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
-    <div class="filter-shadow overflow-auto">
+    <div class="filter-shadow">
       <div class="form-group">
         <div class="d-flex mb-3 mt-2">
-          <h4 i18n class="mb-0">Register</h4>
-          <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close">
+          <h4 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h4>
+          <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close" *ngIf="false">
             <i class="far fa-times"></i>
           </button>
         </div>
@@ -14,19 +14,21 @@
           <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedSearchValue($event)" [form]="form"
           [property]="registerSearchProperty" [placeholder]="placeholderSearch"></app-input-searcher>
         </div>
+      </div>
+      <div class="form-group filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
           <app-input-radio i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
-            [options]="g.registerOptions" style="white-space:nowrap" (change)="changeRegisterOptionId()">
+            [options]="g.registerOptions" style="white-space:nowrap" (change)="changeRegisterOptionId()" [showTooltip]="true">
           </app-input-radio>
         </div>
       </div>
     </div>
   </div>
 
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
-    <div>
+  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}" class="pr-0">
+    <div class="mr-3">
       <div class="d-flex pb-3">
-        <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hideFilter}" (click)="clickShowHideFilter()" [ngbTooltip]="hideShowFilters">
+        <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hideFilter}" (click)="clickShowHideFilter()" [ngbTooltip]="hideShowFilters" *ngIf="false">
           <i class="far fa-ellipsis-v"></i>
         </button>
 
@@ -56,41 +58,43 @@
       </div>
     </div>
 
-    <div class="card text-center border-0 mt-5" *ngIf="!isRegisterSelected">
-      <div class="card-header border-0 bg-transparent">
-        <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+    <div class="mu-registers-body-scroll">
+      <div class="card text-center border-0 mt-5" *ngIf="!isRegisterSelected">
+        <div class="card-header border-0 bg-transparent">
+          <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+        </div>
+        <div class="card-body">
+          <div class="display-4 font-weight-bold pb-2" i18n>No register selected</div>
+          <div class="text-secondary" i18n>To display data, select register from the list on the left.</div>
+        </div>
       </div>
-      <div class="card-body">
-        <div class="display-4 font-weight-bold pb-2" i18n>No register selected</div>
-        <div class="text-secondary" i18n>To display data, select register from the list on the left.</div>
+      <div class="card text-center border-0 mt-5" *ngIf="isRegisterSelected && !isDataFound">
+        <div class="card-header border-0 bg-transparent">
+          <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+        </div>
+        <div class="card-body">
+          <div class="display-4 font-weight-bold pb-2" i18n>No data found</div>
+          <div class="text-secondary" i18n>There seems to be no available data to show.</div>
+          <div class="text-secondary" i18n>Try changing the time.</div>
+        </div>
       </div>
-    </div>
-    <div class="card text-center border-0 mt-5" *ngIf="isRegisterSelected && !isDataFound">
-      <div class="card-header border-0 bg-transparent">
-        <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
-      </div>
-      <div class="card-body">
-        <div class="display-4 font-weight-bold pb-2" i18n>No data found</div>
-        <div class="text-secondary" i18n>There seems to be no available data to show.</div>
-        <div class="text-secondary" i18n>Try changing the time.</div>
-      </div>
-    </div>
 
-    <div *ngIf="isDataFound">
-      <div class="row mb-5">
-        <div class="col-12">
-          <app-registers-chart
-            [categories]="chartCategories"
-            [chartData]="chartData">
-          </app-registers-chart>
+      <div *ngIf="isDataFound">
+        <div class="row mb-5">
+          <div class="col-12">
+            <app-registers-chart
+              [categories]="chartCategories"
+              [chartData]="chartData">
+            </app-registers-chart>
+          </div>
         </div>
-      </div>
-      <div class="row">
-        <div [ngClass]="{'col-12': !showStatistics, 'col-8': showStatistics }">
-          <app-registers-grid [rowData]="rowData"></app-registers-grid>
-        </div>
-        <div class="col-4" *ngIf="showStatistics && registerStatisticsData">
-          <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
+        <div class="row">
+          <div [ngClass]="{'col-12': !showStatistics, 'col-8': showStatistics }">
+            <app-registers-grid [rowData]="rowData"></app-registers-grid>
+          </div>
+          <div class="col-4" *ngIf="showStatistics && registerStatisticsData">
+            <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
+          </div>
         </div>
       </div>
     </div>

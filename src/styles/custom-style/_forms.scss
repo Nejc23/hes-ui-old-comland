@@ -10,9 +10,45 @@ input[type=radio]:checked + label {
 }
 
 input[type=radio] {
-  margin-bottom: 4px;
+  margin-top: 2px;
+  min-width:15px;
 }
 
 input.form-control[type=checkbox] {
   margin-bottom: 4px;
+}
+
+.content-body-scroll
+{
+  height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important;// 100vh
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.content-body-scroll-templates
+{
+  height: calc(100vh - #{$topbar-base-height} - 9.3rem) !important;// 100vh
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.list-for-job-body-scroll
+{
+  height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important;// 100vh
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.jobs-body-scroll
+{
+  height: calc(100vh - #{$topbar-base-height} - 9rem) !important;// 100vh
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
+.mu-registers-body-scroll {
+  height:calc(100vh - #{$topbar-base-height} - 10.85rem);
+  margin-right:1rem;
+  overflow-y:auto;
+  overflow-x:hidden;
 }
