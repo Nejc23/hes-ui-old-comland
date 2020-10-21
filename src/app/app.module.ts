@@ -36,7 +36,7 @@ registerLocaleData(localeIt, 'it', localeItExtra);
 declare const require;
 
 /*export function initializeApp(appConfigService: AppConfigService) {
-  return (): Promise<any> => { 
+  return (): Promise<any> => {
     return appConfigService.load();
   }
 }*/

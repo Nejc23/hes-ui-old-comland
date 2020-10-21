@@ -2,8 +2,9 @@ import { AutoTemplateComponent } from '../auto-template/components/auto-template
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
-import { ModalContainerComponent } from 'src/app/shared/modals/components/modal-container.component';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
+import { PlcMeterTouConfigImportComponent } from '../../meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { PlcMeterTemplatesImportComponent } from '../../meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 
 const routes: Routes = [
   {
@@ -18,14 +19,14 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Import templates'
         },
-        component: ModalContainerComponent
+        component: PlcMeterTemplatesImportComponent
       },
       {
         path: 'importTouConfiguration',
         data: {
           breadcrumb: 'Import TOU configuration'
         },
-        component: ModalContainerComponent
+        component: PlcMeterTouConfigImportComponent
       },
       {
         path: 'autoTemplates',
