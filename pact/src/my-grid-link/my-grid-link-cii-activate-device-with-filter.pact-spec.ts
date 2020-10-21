@@ -81,8 +81,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_CII_ACTIVATE_DEVICE_WITH_FILTER',
           uponReceiving: 'a request for trigger CII activate device with filter in request - myGrid.Link',
           withRequest: {
-            method: service.postMyGridConnectDeviceRequest(requestBody).method,
-            path: service.postMyGridConnectDeviceRequest(requestBody).url,
+            method: service.postMyGridCiiActivateDeviceRequest(requestBody).method,
+            path: service.postMyGridCiiActivateDeviceRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },

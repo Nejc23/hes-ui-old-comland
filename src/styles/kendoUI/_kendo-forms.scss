@@ -58,3 +58,18 @@ input[type=search] {
   margin-right: 0;
 }
 
+.expand-dropzone .k-dropzone {
+  height: 300px;
+  display:block !important;
+}
+
+.expand-dropzone  .k-upload-button {
+  margin-right:calc(50% - 58px);
+  margin-top: 110px;
+  margin-bottom:20px;
+}
+.expand-dropzone .k-dropzone-hint {
+  text-align: center;
+  position:absolute;
+  top:0;
+}

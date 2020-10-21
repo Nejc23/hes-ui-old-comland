@@ -75,7 +75,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for fetching list of rules with templates', done => {
-      service.getAutoTemplateRulesForTemplateId(this.requestTemplateId).subscribe(res => {
+      service.getAutoTemplateRulesForTemplateId(requestTemplateId).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });
