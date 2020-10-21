@@ -10,6 +10,7 @@ export interface MeterUnitsLayout {
   tagsFilter: Codelist<number>[];
   firmwareFilter: Codelist<number>[];
   breakerStateFilter: Codelist<number>[];
+  ciiStateFilter: Codelist<number>[];
   showOnlyMeterUnitsWithMBusInfoFilter: boolean;
   showDeletedMeterUnitsFilter: boolean;
   showMeterUnitsWithoutTemplateFilter: boolean;

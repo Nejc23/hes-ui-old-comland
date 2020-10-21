@@ -24,6 +24,12 @@
 
           <app-input-switch label="Show only Meter units with information of child (MBus)" [form]="form" [property]="showOnlyMeterUnitsWithMBusInfoProperty" i18n-label></app-input-switch>
 
+          <app-input-tag label="Disconnector state" [property]="breakerStateProperty" [form]="form" [autocompleteItemsAsObjects]="disconnectorState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+          </app-input-tag>
+
+          <app-input-tag label="CII state" [property]="ciiStateProperty" [form]="form" [autocompleteItemsAsObjects]="ciiState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+          </app-input-tag>
+
           <app-input-tag label="Breaker state" [property]="breakerStateProperty" [form]="form" [autocompleteItemsAsObjects]="disconnectorState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-input-tag>
 

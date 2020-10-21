@@ -25,6 +25,7 @@ import { GridCellIconComponent } from '../components/grid-custom-components/grid
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { GridCellCiiStateComponent } from '../components/grid-custom-components/grid-cell-cii-state.component';
 
 @Injectable({
   providedIn: 'root'
@@ -257,12 +258,21 @@ export class MeterUnitsTypeGridService {
       // },
       {
         field: 'disconnectorState',
-        headerName: $localize`Breaker State`,
+        headerName: $localize`Disconnector State`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellBreakerStateComponent',
-        headerTooltip: $localize`Breaker State`
+        headerTooltip: $localize`Disconnector State`
+      },
+      {
+        field: 'ciiState',
+        headerName: $localize`CII State`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellCiiStateComponent',
+        headerTooltip: $localize`CII State`
       },
       {
         field: 'tags',
@@ -331,6 +341,7 @@ export class MeterUnitsTypeGridService {
       gridCellIdNumberComponent: GridCellIdNumberComponent,
       gridCellTimeOfUseIdComponent: GridCellTimeOfUseIdComponent,
       gridCellBreakerStateComponent: GridCellBreakerStateComponent,
+      gridCellCiiStateComponent: GridCellCiiStateComponent,
       gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
       gridCellIconComponent: GridCellIconComponent,
       gridCellJobStatusComponent: GridCellJobStatusComponent,
@@ -418,6 +429,7 @@ export class MeterUnitsTypeGridService {
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
       JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.disconnectorState) &&
+      JSON.stringify(sessionFilter.ciiStateFilter) === JSON.stringify(requestModel.ciiState) &&
       JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
       JSON.stringify(sessionFilter.showDeletedMeterUnitsFilter) === JSON.stringify(requestModel.showDeleted) &&
       JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate)

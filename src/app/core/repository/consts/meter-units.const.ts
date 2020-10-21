@@ -6,6 +6,7 @@ export const meterUnitTypes = `${basePath}/meter-unit-types`;
 export const meterUnitVendors = `${basePath}/meter-unit-vendor-codes`;
 export const meterUnitFirmwares = `${basePath}/meter-unit-firmwares`;
 export const meterUnitDisconnectorStates = `${basePath}/meter-unit-disconnector-states`;
+export const meterUnitCiiStates = `${basePath}/meter-unit-cii-states`;
 
 // meter units by type
 export const meterUnits = `${basePath}/meter-units`;

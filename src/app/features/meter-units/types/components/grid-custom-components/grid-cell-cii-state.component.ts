@@ -3,13 +3,12 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 
 @Component({
-  selector: 'app-grid-cell-breaker-state',
-  templateUrl: './grid-cell-breaker-state.component.html'
+  selector: 'app-grid-cell-cii-state',
+  templateUrl: './grid-cell-cii-state.component.html'
 })
-export class GridCellBreakerStateComponent implements ICellRendererAngularComp {
+export class GridCellCiiStateComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
-
   public valueClass: any;
 
   constructor(private statictextService: MeterUnitsTypeStaticTextService) {}
@@ -21,9 +20,8 @@ export class GridCellBreakerStateComponent implements ICellRendererAngularComp {
     if (value) {
       value = value.toLowerCase();
       this.valueClass = {
-        'badge-success': value === 'connected',
-        'badge-info ': value === 'readyforreconnection',
-        'badge-dark ': value === 'disconnected'
+        'badge-success': value === 'on',
+        'badge-dark': value === 'off'
       };
     }
   }

@@ -61,9 +61,9 @@ import { AppConfigStoreService } from './configuration/services/app-config-store
       provide: HTTP_INTERCEPTORS,
       useClass: ApiUrlInterceptor,
       multi: true
-    },
+    }
     // fakeBaceknd
-    fakeBackendProvider
+    // fakeBackendProvider
   ]
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {

@@ -9,7 +9,8 @@ import {
   meterUnitStatuses,
   meterUnitTags,
   meterUnitVendors,
-  meterUnitDisconnectorStates
+  meterUnitDisconnectorStates,
+  meterUnitCiiStates
 } from '../../consts/meter-units.const';
 
 @Injectable({
@@ -52,6 +53,13 @@ export class CodelistMeterUnitsRepositoryService {
   }
   meterUnitDisconnectorStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitDisconnectorStates}/${id}`);
+  }
+
+  meterUnitCiiStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitCiiStateCodelistRequest(meterUnitTypeId));
+  }
+  meterUnitCiiStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitCiiStates}/${id}`);
   }
 
   meterUnitVendorCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {

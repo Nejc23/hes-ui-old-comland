@@ -45,7 +45,6 @@ import { ActiveJobComponent } from './popover/components/active-job/active-job.c
 import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
 import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
 import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
-import { ModalContainerComponent } from './modals/components/modal-container.component';
 import { SchedulerDiscoveryJobComponent } from '../features/jobs/components/scheduler-discovery-job/scheduler-discovery-job.component';
 import { DataConcentratorUnitsSelectComponent } from '../features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { GridSelectionHeaderComponent } from './ag-grid/components/grid-selection-header.component';
@@ -105,7 +104,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     AutoRefreshComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
-    ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent,
     PlcMeterBreakerModeComponent
@@ -172,7 +170,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     GridCellLinkComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
-    ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent,
     GridSelectionHeaderComponent,
@@ -195,7 +192,6 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
-    ModalContainerComponent,
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent,
     PlcMeterBreakerModeComponent

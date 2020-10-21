@@ -26,12 +26,11 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private modal: NgbActiveModal,
     private gridLinkService: MyGridLinkService,
     private toast: ToastNotificationService,
     private breadcrumbService: BreadcrumbService
   ) {
-    this.form = this.createForm();
+    this.resetForm();
   }
 
   createForm(): FormGroup {
@@ -77,7 +76,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
         // TODO: return is ?
         // console.log(`postMyGridTemplatesImport, value = `, value);
         this.toast.successToast(this.successMessage);
-        this.cancel('save');
+        this.resetForm();
       },
       e => {
         this.toast.errorToast(this.messageServerError);
@@ -85,15 +84,12 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     );
   }
 
-  cancel(reason: string = 'cancel') {
-    this.modal.close(reason);
+  resetForm() {
+    this.files = [];
+    this.form = this.createForm();
   }
 
   get fileProperty() {
     return 'files';
-  }
-
-  onDismiss() {
-    this.modal.dismiss();
   }
 }

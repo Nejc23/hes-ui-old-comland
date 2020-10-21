@@ -2,7 +2,6 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import * as _ from 'lodash';
 import { FileInfo } from '@progress/kendo-angular-upload';
 import { MeterUnitsTouConfigImport } from 'src/app/core/repository/interfaces/meter-units/meter-units-tou-config-import.interface';
@@ -23,11 +22,10 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private modal: NgbActiveModal,
     private meterService: MeterUnitsService,
     private breadcrumbService: BreadcrumbService
   ) {
-    this.form = this.createForm();
+    this.resetForm();
   }
 
   createForm(): FormGroup {
@@ -71,7 +69,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     const successMessage = $localize`Import xml file was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
-        this.modal.close();
+        this.resetForm();
       },
       x => {
         this.errorMsg = x.statusText;
@@ -80,8 +78,9 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     );
   }
 
-  cancel(reason: string = 'cancel') {
-    this.modal.close(reason);
+  resetForm() {
+    this.files = [];
+    this.form = this.createForm();
   }
 
   // properties - START
@@ -93,8 +92,4 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     return 'files';
   }
   // properties - END
-
-  onDismiss() {
-    this.modal.dismiss();
-  }
 }
