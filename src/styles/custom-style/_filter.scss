@@ -35,6 +35,12 @@
   height: calc(100vh - #{$topbar-base-height} - 4.7rem);
 }
 
+.filter-scroll-templates {
+  overflow-y:auto;
+  overflow-x:hidden;
+  height: calc(100vh - #{$topbar-base-height} - 5.3rem);
+}
+
 .filter-scroll-registers {
   overflow-y:auto;
   overflow-x:hidden;

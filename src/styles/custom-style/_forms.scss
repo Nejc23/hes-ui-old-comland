@@ -25,6 +25,13 @@ input.form-control[type=checkbox] {
   overflow-x:hidden;
 }
 
+.content-body-scroll-templates
+{
+  height: calc(100vh - #{$topbar-base-height} - 9.3rem) !important;// 100vh
+  overflow-y:auto;
+  overflow-x:hidden;
+}
+
 .list-for-job-body-scroll
 {
   height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important;// 100vh

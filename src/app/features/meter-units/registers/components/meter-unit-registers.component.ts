@@ -416,4 +416,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   insertedSearchValue(searchValue) {
     this.setRegisterGroups(searchValue);
   }
+
+  getFilterTitle(): string {
+    return $localize`Register`;
+  }
 }

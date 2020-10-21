@@ -5,7 +5,7 @@
     <div class="filter-shadow">
       <div class="form-group">
         <div class="d-flex mb-3 mt-2">
-          <h4 i18n class="mb-0">Register</h4>
+          <h4 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h4>
           <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close" *ngIf="false">
             <i class="far fa-times"></i>
           </button>

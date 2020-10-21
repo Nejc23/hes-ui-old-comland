@@ -221,4 +221,8 @@ export class DcFilterComponent implements OnInit {
   doToggleFilter() {
     this.toggleFilter.emit();
   }
+
+  getFilterTitle(): string {
+    return $localize`Filters`;
+  }
 }

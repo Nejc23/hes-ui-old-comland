@@ -1,7 +1,7 @@
 <div class="pt-1 h-100">
     <form [formGroup]="form">
       <div class="d-flex mb-2">
-        <h3 class="mb-0" i18n>Filters</h3>
+        <h3 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h3>
         <button i18n type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close">
           <i class="far fa-times"></i>
         </button>
