@@ -18,7 +18,7 @@ export class InputSwitchComponent implements OnInit {
   controlId: string;
 
   constructor(private formUtils: FormsUtilsService) {}
-
+  valueTmp = false;
   ngOnInit() {
     if (!this.form) {
       throw Error('InputTextComponent - form input missing.');
@@ -27,6 +27,7 @@ export class InputSwitchComponent implements OnInit {
       throw Error('InputTextComponent - property input missing.');
     }
     this.controlId = _.uniqueId('switch');
+    this.valueTmp = this.form.get(this.property).value;
   }
 
   get formControl(): AbstractControl {
@@ -39,5 +40,12 @@ export class InputSwitchComponent implements OnInit {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  labelClick() {
+    if (this.valueTmp === this.form.get(this.property).value) {
+      this.form.get(this.property).setValue(!this.form.get(this.property).value);
+    }
+    this.valueTmp = this.form.get(this.property).value;
   }
 }
