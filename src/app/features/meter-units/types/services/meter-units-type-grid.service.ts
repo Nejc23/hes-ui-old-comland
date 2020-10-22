@@ -69,9 +69,9 @@ export class MeterUnitsTypeGridService {
       {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
-        minWidth: 45,
-        maxWidth: 45,
-        width: 45,
+        minWidth: 50,
+        maxWidth: 50,
+        width: 50,
         suppressColumnsToolPanel: true,
         checkboxSelection: true,
         suppressMovable: true,
