@@ -2,7 +2,7 @@
 
 <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
   <div>
-    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}} <span
+    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{getSelectedRowsCount()}} <span
           i18n>items selected</span></strong></small>
     <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
     <small class="text-secondary">{{totalCount}} <span i18n>items found</span></small>

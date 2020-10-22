@@ -107,10 +107,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   fillData(): SchedulerJobForm {
     const ids = this.form.get(this.registersProperty).value;
     if (ids != null) {
-      const concentrList: string[] = [];
-      ids.forEach(id => {
-        concentrList.push(id.concentratorId);
-      });
+      const concentrList: string[] = ids;
       this.deviceFiltersAndSearch = {
         id: concentrList
       };
