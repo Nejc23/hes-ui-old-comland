@@ -264,7 +264,7 @@
   .ag-paging-panel {
     border-top: none;
     font-size: $font-size-sm;
-    color: $gray-900;
+    color: $gray-600;
     flex-wrap: wrap;
     margin-left: 200px;
 
@@ -366,8 +366,8 @@
     }
 
     &.ag-checked {
-      border-color: $primary;
-      background-color: $primary;
+      border-color: $checkbox-checked-border;
+      background-color: $checkbox-checked-bg;
 
       &::after {
         color: $white;
