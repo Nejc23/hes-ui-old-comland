@@ -342,6 +342,10 @@
     padding: 0 $spacer;
   }
 
+  .ag-checkbox-input {
+    cursor:pointer;
+  }
+
   .ag-checkbox-input-wrapper {
     border-color: $border-color;
     color: transparent;

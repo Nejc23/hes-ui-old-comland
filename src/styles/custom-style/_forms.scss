@@ -15,7 +15,8 @@ input[type=radio] {
 }
 
 input.form-control[type=checkbox] {
-  margin-bottom: 4px;
+  margin-top: 2px;
+  min-width:15px;
 }
 
 .content-body-scroll
@@ -51,4 +52,8 @@ input.form-control[type=checkbox] {
   margin-right:1rem;
   overflow-y:auto;
   overflow-x:hidden;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
