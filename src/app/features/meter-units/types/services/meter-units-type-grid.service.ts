@@ -69,9 +69,9 @@ export class MeterUnitsTypeGridService {
       {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
-        minWidth: 45,
-        maxWidth: 45,
-        width: 45,
+        minWidth: 50,
+        maxWidth: 50,
+        width: 50,
         suppressColumnsToolPanel: true,
         checkboxSelection: true,
         suppressMovable: true,
@@ -362,6 +362,7 @@ export class MeterUnitsTypeGridService {
         filter: true
       },
       animateRows: configAgGrid.animateRows,
+      suppressCellSelection: true,
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,

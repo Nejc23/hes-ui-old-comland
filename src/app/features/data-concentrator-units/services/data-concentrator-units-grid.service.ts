@@ -48,9 +48,9 @@ export class DataConcentratorUnitsGridService {
       {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
-        minWidth: 45,
-        maxWidth: 45,
-        width: 45,
+        minWidth: 60,
+        maxWidth: 60,
+        width: 60,
         suppressColumnsToolPanel: true,
         checkboxSelection: true,
         suppressMovable: true,
@@ -227,6 +227,7 @@ export class DataConcentratorUnitsGridService {
         checkboxSelection: isFirstColumn,
         filter: true
       },
+      suppressCellSelection: true,
       animateRows: configAgGrid.animateRows,
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,

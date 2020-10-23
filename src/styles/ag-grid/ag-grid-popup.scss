@@ -226,6 +226,36 @@
     font-size: $font-size-base;
   }
 
+  .actions-button-cell {
+    .btn-group-sm {
+      display: none;
+    }
+  }
+
+  .ag-row.ag-row-focus {
+    z-index: 2;
+  }
+
+  .ag-row-hover {
+    .actions-button-cell {
+      display: block;
+      color: $primary !important;
+      z-index: 900;
+      text-align: right;
+      // border: none !important;
+      .btn-group-sm {
+        display: block;
+      }
+    }
+  }
+
+  .ag-root,
+  .ag-root-wrapper,
+  .ag-body-viewport,
+  .ag-body-viewport-wrapper {
+      overflow: visible !important;
+  }
+
   .ag-header-row {
     font-size: $font-size-sm;
   }
@@ -238,7 +268,7 @@
   .ag-paging-panel {
     border-top: none;
     font-size: $font-size-sm;
-    color: $gray-900;
+    color: $gray-600;
     flex-wrap: wrap;
     margin-left: 200px;
 
@@ -340,8 +370,8 @@
     }
 
     &.ag-checked {
-      border-color: $primary;
-      background-color: $primary;
+      border-color: $checkbox-checked-border;
+      background-color: $checkbox-checked-bg;
 
       &::after {
         color: $white;
@@ -356,5 +386,10 @@
         left: 2px;
       }
     }
+  }
+  
+  .ag-cell-inline-editing {
+    height: 100%;
+    border: none !important;
   }
 }
