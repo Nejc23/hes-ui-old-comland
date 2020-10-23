@@ -4,7 +4,7 @@
   "newProjectRoot": "projects",
   "projects": {
     "myGrid": {
-      "i18n": {        
+      "i18n": {
         "locales": {
           "en": "src/assets/i18n/messages.en.xlf",
           "sl": "src/assets/i18n/messages.sl.xlf",
@@ -24,7 +24,7 @@
         }
       },
       "architect": {
-        "build": {          
+        "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "localize": false,
@@ -42,11 +42,11 @@
               {
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },
-              "src/styles.scss"              
+              "src/styles.scss"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js"
-            ],            
+            ],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "src/styles/brand/default"
@@ -75,7 +75,61 @@
                   "replace": "src/favicon.ico",
                   "with": "src/environments/brand/default/favicon.ico"
                 }
-              ],            
+              ],
+              "localize": ["en"]
+            },
+            "develop-amera": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "assets": [
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/amera/", "output": "/" }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/amera/brand.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/amera/favicon.ico"
+                }],
+                "stylePreprocessorOptions": {
+                  "includePaths": [
+                      "src/styles/brand/amera"
+                  ]
+                },
+              "localize": ["en"]
+            },
+            "develop-ePointHES": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "assets": [
+                "src/assets",
+                { "glob": "favicon.ico", "input": "src/environments/brand/ePointHES/", "output": "/" }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/ePointHES/brand.ts"
+                },
+                {
+                  "replace": "src/favicon.ico",
+                  "with": "src/environments/brand/ePointHES/favicon.ico"
+                }],
+                "stylePreprocessorOptions": {
+                  "includePaths": [
+                      "src/styles/brand/ePointHES"
+                  ]
+                },
               "localize": ["en"]
             },
             "develop-sl": {
@@ -99,15 +153,15 @@
               "sl"
             ]
           },
-          "production": { 
+          "production": {
             "outputPath": "dist/hes",
             "deleteOutputPath": true,
             "localize": false,
-            "assets": [                
+            "assets": [
               "src/assets",
               { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
             ],
-            "fileReplacements": [                
+            "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
                 "with": "src/environments/environment.prod.ts"
@@ -115,7 +169,7 @@
               {
                 "replace": "src/favicon.ico",
                 "with": "src/environments/brand/default/favicon.ico"
-              }                
+              }
             ],
             "optimization": true,
             "outputHashing": "all",
@@ -137,15 +191,15 @@
               }
             ]
           },
-          "production-myGrid": { 
+          "production-myGrid": {
             "localize": ["en", "sl", "cs", "de", "fr", "it"],
             "outputPath": "dist/myGrid",
             "deleteOutputPath": true,
-            "assets": [                
+            "assets": [
               "src/assets",
               { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
             ],
-            "fileReplacements": [                
+            "fileReplacements": [
               {
                 "replace": "src/environments/environment.ts",
                 "with": "src/environments/environment.prod.ts"
@@ -153,7 +207,7 @@
               {
                 "replace": "src/favicon.ico",
                 "with": "src/environments/brand/default/favicon.ico"
-              }                
+              }
             ],
             "optimization": true,
             "outputHashing": "all",
@@ -180,7 +234,7 @@
             "localize": ["en", "sl", "cs", "de", "fr", "it"],
             "outputPath": "dist/amera",
             "deleteOutputPath": true,
-            "assets": [                
+            "assets": [
               "src/assets",
               { "glob": "favicon.ico", "input": "src/environments/brand/amera/", "output": "/" }
             ],
@@ -228,7 +282,7 @@
             "localize": ["en", "sl", "cs", "de", "fr", "it"],
             "outputPath": "dist/ePointHES",
             "deleteOutputPath": true,
-            "assets": [                
+            "assets": [
               "src/assets",
               { "glob": "favicon.ico", "input": "src/environments/brand/ePointHES/", "output": "/" }
             ],

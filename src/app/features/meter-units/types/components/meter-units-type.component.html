@@ -186,7 +186,7 @@
           </div>
 
           <div class="mr-3" *ngIf="checkSelectedAll()">
-            <small class="link text-secondary"><strong><span i18n>All</span> ({{getTotalCountWithoutExcluded()}}) <span i18n>items selected</span> &middot;
+            <small class="link text-secondary"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) <span i18n>items selected</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
                 <span i18n>Clear selected</span></a></strong></small>
           </div>

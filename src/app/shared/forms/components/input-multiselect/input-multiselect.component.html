@@ -6,13 +6,13 @@
     <div class="multiselect"
         [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inline}"
         [id]="name">
-        <div *ngFor="let option of options; let i = index;">
+        <div *ngFor="let option of options; let i = index;" class="d-flex" style="min-width: 0;" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="option.value">
             <input class="form-control" type="checkbox" id="input-checkbox-{{i}}"
                 (change)="selectedValue(option, isOptionChecked(option), false)" [checked]="isOptionChecked(option)"
                 value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox />
 
-            <label for="{{option.id}}" class="mr-3 pl-2 control-label"
-                (click)="selectedValue(option, isOptionChecked(option), true)">{{option.value}}</label>
+            <div class="mr-3 pl-2 control-label text-truncate cursor-pointer"
+                (click)="selectedValue(option, isOptionChecked(option), true)">{{option.value}}</div>
         </div>
     </div>
     <!--Loop through errors-->

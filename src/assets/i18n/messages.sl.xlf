@@ -38,9 +38,9 @@
       </trans-unit><trans-unit id="4994015739479223775" datatype="html">
         <source>firmware</source>
         <target state="translated">strojna oprema</target>
-      </trans-unit><trans-unit id="3211404111798330300" datatype="html">
-        <source>breaker state</source>
-        <target state="new">breaker state</target>
+      </trans-unit><trans-unit id="2111349956961375226" datatype="html">
+        <source>disconnector state</source>
+        <target state="new">disconnector state</target>
       </trans-unit><trans-unit id="2572210680699877416" datatype="html">
         <source>show child MBus</source>
         <target state="new">show child MBus</target>
@@ -77,6 +77,9 @@
       </trans-unit><trans-unit id="563763657621318504" datatype="html">
         <source>Show only Meter units with information of child (MBus)</source>
         <target state="new">Show only Meter units with information of child (MBus)</target>
+      </trans-unit><trans-unit id="1455609772073018250" datatype="html">
+        <source>Disconnector state</source>
+        <target state="new">Disconnector state</target>
       </trans-unit><trans-unit id="2424171035945003949" datatype="html">
         <source>Breaker state</source>
         <target state="new">Breaker state</target>
@@ -527,9 +530,6 @@
       </trans-unit><trans-unit id="7396016917405031408" datatype="html">
         <source>Import xml file was successfully</source>
         <target state="translated">Uvoz xml datoteke je bil uspešen</target>
-      </trans-unit><trans-unit id="4626655389089267322" datatype="html">
-        <source>TOU Import configuration</source>
-        <target state="translated">Uvoz TOU konfiguracije</target>
       </trans-unit><trans-unit id="4908129342757001956" datatype="html">
         <source>Import device keys</source>
         <target state="translated">Uvoz ključev naprave</target>
@@ -695,9 +695,9 @@
       </trans-unit><trans-unit id="3142656752815743749" datatype="html">
         <source>Action in progress!</source>
         <target state="translated">Akcija se izvaja!</target>
-      </trans-unit><trans-unit id="7831909466988934904" datatype="html">
-        <source>Get breaker status</source>
-        <target state="translated">Preberi status odklopnika</target>
+      </trans-unit><trans-unit id="7747802785044922675" datatype="html">
+        <source>Get disconnector status</source>
+        <target state="new">Get disconnector status</target>
       </trans-unit><trans-unit id="8553460997100418147" datatype="html">
         <source>for</source>
         <target state="translated">za</target>
@@ -707,6 +707,15 @@
       </trans-unit><trans-unit id="2907016025519254862" datatype="html">
         <source>Disconnect</source>
         <target state="translated">Odklop</target>
+      </trans-unit><trans-unit id="4444662695942306976" datatype="html">
+        <source>Get CII state</source>
+        <target state="new">Get CII state</target>
+      </trans-unit><trans-unit id="9137722871648654892" datatype="html">
+        <source>CII Activate</source>
+        <target state="new">CII Activate</target>
+      </trans-unit><trans-unit id="4036972195870632158" datatype="html">
+        <source>CII Deactivate</source>
+        <target state="new">CII Deactivate</target>
       </trans-unit><trans-unit id="7528900661835627425" datatype="html">
         <source>Configure TOU</source>
         <target state="translated">Nastavi TOU</target>
@@ -719,6 +728,9 @@
       </trans-unit><trans-unit id="847536618547042324" datatype="html">
         <source>selected meter unit(s)?</source>
         <target state="new">selected meter unit(s)?</target>
+      </trans-unit><trans-unit id="8831210954511169288" datatype="html">
+        <source>CII state</source>
+        <target state="new">CII state</target>
       </trans-unit><trans-unit id="4252274043276232149" datatype="html">
         <source>Apply Filters</source>
         <target state="translated">Uporabi  filtre</target>
@@ -776,6 +788,9 @@
       </trans-unit><trans-unit id="1778275808932346500" datatype="html">
         <source>CII</source>
         <target state="new">CII</target>
+      </trans-unit><trans-unit id="5322473252816589112" datatype="html">
+        <source>Deactivate</source>
+        <target state="new">Deactivate</target>
       </trans-unit><trans-unit id="4691747907262765119" datatype="html">
         <source>TOU Upload</source>
         <target state="translated">Naloži TOU</target>
@@ -812,6 +827,24 @@
       </trans-unit><trans-unit id="5203279511751768967" datatype="html">
         <source>From</source>
         <target state="new">From</target>
+      </trans-unit><trans-unit id="6048892649018070225" datatype="html">
+        <source>Today</source>
+        <target state="new">Today</target>
+      </trans-unit><trans-unit id="4498682414491138092" datatype="html">
+        <source>Yesterday</source>
+        <target state="new">Yesterday</target>
+      </trans-unit><trans-unit id="4873149362496451858" datatype="html">
+        <source>Last 7 days</source>
+        <target state="new">Last 7 days</target>
+      </trans-unit><trans-unit id="2949150997160654358" datatype="html">
+        <source>Last 30 days</source>
+        <target state="new">Last 30 days</target>
+      </trans-unit><trans-unit id="7383756232563820625" datatype="html">
+        <source>Current month</source>
+        <target state="new">Current month</target>
+      </trans-unit><trans-unit id="4463380307954693363" datatype="html">
+        <source>Last month</source>
+        <target state="new">Last month</target>
       </trans-unit><trans-unit id="8013136913336134227" datatype="html">
         <source>Meter Unit</source>
         <target state="translated">Števec</target>
@@ -896,9 +929,12 @@
       </trans-unit><trans-unit id="5969472311191597146" datatype="html">
         <source>Logical device name</source>
         <target state="translated">Ime logične naprave</target>
-      </trans-unit><trans-unit id="169959432880745985" datatype="html">
-        <source>Breaker State</source>
-        <target state="translated">Stanje odklopnika</target>
+      </trans-unit><trans-unit id="8323133589882752562" datatype="html">
+        <source>Disconnector State</source>
+        <target state="new">Disconnector State</target>
+      </trans-unit><trans-unit id="3713168783920734881" datatype="html">
+        <source>CII State</source>
+        <target state="new">CII State</target>
       </trans-unit><trans-unit id="5171031114500370592" datatype="html">
         <source>Read status</source>
         <target state="translated">Status branja</target>
@@ -920,6 +956,9 @@
       </trans-unit><trans-unit id="2246939716429792950" datatype="html">
         <source>In Range</source>
         <target state="translated">V razponu</target>
+      </trans-unit><trans-unit id="7708270344948043036" datatype="html">
+        <source> <x id="INTERPOLATION"/> </source>
+        <target state="new"> <x id="INTERPOLATION"/> </target>
       </trans-unit><trans-unit id="6917779175852211923" datatype="html">
         <source>Every N hour(s</source>
         <target state="translated">Vsakih N ur</target>
