@@ -29,7 +29,7 @@
         <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
           <div dropdown class="btn-group">
             <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-            <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
+            <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
               <div>
                 <a (click)="onDelete()" [disabled]="true" class="dropdown-item custom-hover-display" href="javascript:void(0)" style="pointer-events: none;cursor: default;color:gainsboro;"><span i18n>Delete</span></a>
               </div>
@@ -40,7 +40,7 @@
               <div class="dropdown-divider"></div>
               <div class="dropdown-item">
               <div class="dropdown-submenu">
-                    <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>FW upgrade</span></a>
+                    <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>FW upgrade</span></a>
                   <div class="dropdown-menu">
                     <div class="dropdown-item">
                       <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" href="javascript:void(0)"
@@ -52,11 +52,11 @@
                     </div>
                   </div>
               </div>
-            </div>
-            <div class="dropdown-divider"></div>
+             </div>
+             <div class="dropdown-divider"></div>
               <div class="dropdown-item">
               <div class="dropdown-submenu">
-                <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Breaker</span></a>
+                <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Breaker</span></a>
               <div class="dropdown-menu">
                 <div class="dropdown-item">
                   <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" href="javascript:void(0)"
@@ -76,10 +76,10 @@
                   </div>
               </div>
              </div>
-            </div>
-            <div class="dropdown-item">
+             </div>
+             <div class="dropdown-item">
              <div class="dropdown-submenu">
-                <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>CII</span></a>
+                <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>CII</span></a>
                 <div class="dropdown-menu">
                   <div class="dropdown-item">
                     <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiActivate" href="javascript:void(0)"
@@ -179,14 +179,14 @@
       <div class="ag-paging-panel-selection">
         <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
           <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
-            <small class="link">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
+            <small class="link text-secondary">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
                 <span i18n>Select all</span>
                     ({{totalCount}})</a></strong></small>
           </div>
 
           <div class="mr-3" *ngIf="checkSelectedAll()">
-            <small class="link"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) <span i18n>items selected</span> &middot;
+            <small class="link text-secondary"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) <span i18n>items selected</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
                 <span i18n>Clear selected</span></a></strong></small>
           </div>

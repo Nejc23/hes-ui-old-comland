@@ -1,5 +1,10 @@
 .dropdown-submenu {
     position: relative;
+
+    a.disabled {
+      pointer-events: none;
+      cursor: default;
+    }
   }
   .dropdown-submenu a {
     color: $dropdown-link-color;
@@ -16,11 +21,20 @@
    // -webkit-border-radius: 0 6px 6px 6px;
    // -moz-border-radius: 0 6px 6px;
    // border-radius: 0 6px 6px 6px;
-    .dropdown-item a  {
+    & a  {
       color: $dropdown-link-color;
     }
-    .dropdown-item:hover> a {
+    &:hover> a {
       color: $primary;
+    }
+
+    .dropdown-item {
+      & a  {
+      color: $dropdown-link-color;
+      }
+      &:hover> a {
+        color: $primary;
+      }
     }
   }
   

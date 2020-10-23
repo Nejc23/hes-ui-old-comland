@@ -142,6 +142,7 @@ export class DataConcentratorUnitsSelectGridService {
       },
       animateRows: configAgGrid.animateRows,
       debug: configAgGrid.debug,
+      suppressCellSelection: true,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,
@@ -208,23 +209,31 @@ export class DataConcentratorUnitsSelectGridService {
   }
 
   // set selected rows
-  public setSessionSettingsSelectedRows(selectedRow: any) {
+  public setSessionSettingsSelectedRows(concentratorId: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, x => x.id === selectedRow.data.id)) {
-        settings.selectedRows.push(selectedRow.data);
-      }
-    } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter(obj => obj.id !== selectedRow.data.id);
-    } else if (selectedRow.length === 0) {
-      settings.selectedRows = [];
-    }
+    if (!_.find(settings.selectedRows, x => x === concentratorId)) {
+      settings.selectedRows.push(concentratorId);
 
-    this.gridSettingsSessionStoreService.setGridSettings(
-      this.sessionNameForGridState,
-      GridSettingsSessionStoreTypeEnum.selectedRows,
-      settings
-    );
+      this.gridSettingsSessionStoreService.setGridSettings(
+        this.sessionNameForGridState,
+        GridSettingsSessionStoreTypeEnum.selectedRows,
+        settings
+      );
+    }
+  }
+
+  // remove selected rows
+  public setSessionSettingsRemoveSelectedRow(concentratorId: string) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    if (_.find(settings.selectedRows, x => x === concentratorId)) {
+      settings.selectedRows = settings.selectedRows.filter(x => x !== concentratorId);
+
+      this.gridSettingsSessionStoreService.setGridSettings(
+        this.sessionNameForGridState,
+        GridSettingsSessionStoreTypeEnum.selectedRows,
+        settings
+      );
+    }
   }
 
   public setSessionSettingsSelectedRowsById(ids: string[]) {

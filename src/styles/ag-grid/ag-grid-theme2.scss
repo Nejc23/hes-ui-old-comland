@@ -228,7 +228,9 @@
   }
 
   .actions-button-cell {
-    display: none;
+    .btn-group-sm {
+      display: none;
+    }
   }
 
   .ag-row.ag-row-focus {
@@ -241,10 +243,13 @@
       color: $primary !important;
       z-index: 900;
       text-align: right;
-      border: none !important;
+     // border: none !important;
+      .btn-group-sm {
+        display: block;
+      }
     }
   }
-
+  
   .ag-root,
   .ag-root-wrapper,
   .ag-body-viewport,
@@ -264,7 +269,7 @@
   .ag-paging-panel {
     border-top: none;
     font-size: $font-size-sm;
-    color: $gray-900;
+    color: $gray-600;
     flex-wrap: wrap;
     margin-left: 200px;
 
@@ -370,8 +375,8 @@
     }
 
     &.ag-checked {
-      border-color: $primary;
-      background-color: $primary;
+      border-color: $checkbox-checked-border;
+      background-color: $checkbox-checked-bg;
 
       &::after {
         color: $white;

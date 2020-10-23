@@ -212,9 +212,16 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRows(params.node);
+    console.log('onRowSelect, params: ', params);
+
     if (this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()) {
       params.node.setSelected(true);
+    } else {
+      if (params.node.selected) {
+        this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRows(params.node.data.concentratorId);
+      } else {
+        this.dataConcentratorUnitsSelectGridService.setSessionSettingsRemoveSelectedRow(params.node.data.concentratorId);
+      }
     }
   }
 
@@ -252,31 +259,53 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   }
 
   getSelectedRowIds() {
-    const selectedRows = this.gridApi.getSelectedRows();
-    const req: DataConcentratorUnitsSelectRequest[] = [];
-    selectedRows.forEach(x => req.push({ name: x.name, concentratorId: x.concentratorId }));
-    return req;
+    // // const selectedRows = this.gridApi.getSelectedRows();
+    // const req: DataConcentratorUnitsSelectRequest[] = [];
+    // // selectedRows.forEach(x => req.push({ name: x.name, concentratorId: x.concentratorId }));
+    // // return req;
+    // const sessionRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+    // console.log('session rows', sessionRows);
+    // sessionRows.forEach(x => req.push({name: x.name, concentratorId: x.concentratorId}));
+    // return req;
+
+    return this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+  }
+
+  getSelectedRowsCount() {
+    const selectedAll = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll();
+    if (selectedAll) {
+      return this.totalCount;
+    }
+    return this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows().length;
   }
 
   get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
+    // if (this.gridApi) {
+    //   const selectedRows = this.gridApi.getSelectedRows();
+    //   if (selectedRows && selectedRows.length > 0) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
+    // return false;
+    const selectedAll = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll();
+    if (selectedAll) {
+      return true;
     }
-    return false;
+    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+    return selectedRows.length > 0;
   }
 
   deselectAllRows() {
     this.gridApi.deselectAll();
     this.selectedAll = false;
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedAll(this.selectedAll);
   }
 
   selectAllRows() {
     this.gridApi.selectAll();
     this.selectedAll = true;
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedAll(this.selectedAll);
   }
 
   searchChange($event: string = '') {
