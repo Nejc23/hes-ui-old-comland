@@ -82,7 +82,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     this.gridOptions = this.dataConcentratorUnitsSelectGridService.setGridOptions();
     this.frameworkComponents = dataConcentratorUnitsSelectGridService.setFrameworkComponents();
     this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(0);
-    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRows([]);
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById([]);
   }
 
   createForm(): FormGroup {
@@ -314,7 +314,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
       this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(0);
-      this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRows([]);
+      this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById([]);
       this.gridApi.onFilterChanged();
     }
   }

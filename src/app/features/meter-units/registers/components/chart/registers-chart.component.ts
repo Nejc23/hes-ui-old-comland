@@ -30,4 +30,8 @@ export class RegistersChartComponent {
   logDataItem(item) {
     console.log('logDataItem:', item);
   }
+
+  getChartColor() {
+    return '#053876';
+  }
 }

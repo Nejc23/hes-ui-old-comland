@@ -12,7 +12,7 @@
       </kendo-chart-category-axis-item>
   </kendo-chart-category-axis>
   <kendo-chart-series>
-    <kendo-chart-series-item margin="0" [markers]="{size: 4, background:'#053876'}" [highlight]="{markers: { border: {color:'#053876', width:2}}}" padding="0" width="1" color="#053876" type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
+    <kendo-chart-series-item margin="0" [markers]="{size: 4, background:getChartColor()}" [highlight]="{markers: { border: {color:getChartColor(), width:2}}}" padding="0" width="1" color={{getChartColor()}} type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem"  >
           <div style="text-align:center;">
