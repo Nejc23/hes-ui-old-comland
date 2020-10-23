@@ -362,6 +362,7 @@ export class MeterUnitsTypeGridService {
         filter: true
       },
       animateRows: configAgGrid.animateRows,
+      suppressCellSelection: true,
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,

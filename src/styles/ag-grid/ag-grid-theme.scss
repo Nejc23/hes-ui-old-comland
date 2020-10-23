@@ -166,7 +166,9 @@
   }
 
   .actions-button-cell {
-    display: none;
+    .btn-group-sm {
+      display: none;
+    }
   }
 
   .ag-row.ag-row-focus {
@@ -179,6 +181,10 @@
       color: $primary !important;
       z-index: 900;
       text-align: right;
+      // border: none !important;
+      .btn-group-sm {
+        display: block;
+      }
     }
   }
 

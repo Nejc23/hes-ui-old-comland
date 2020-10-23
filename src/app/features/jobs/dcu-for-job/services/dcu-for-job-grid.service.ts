@@ -329,6 +329,7 @@ export class DcuForJobGridService {
       },
       animateRows: configAgGrid.animateRows,
       debug: configAgGrid.debug,
+      suppressCellSelection: true,
       onColumnMoved: this.onColumnMoved,
       onColumnResized: this.onColumnMoved,
       onColumnPinned: this.onColumnMoved,

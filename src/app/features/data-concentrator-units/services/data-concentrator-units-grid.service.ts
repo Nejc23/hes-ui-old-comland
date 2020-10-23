@@ -227,6 +227,7 @@ export class DataConcentratorUnitsGridService {
         checkboxSelection: isFirstColumn,
         filter: true
       },
+      suppressCellSelection: true,
       animateRows: configAgGrid.animateRows,
       debug: configAgGrid.debug,
       onColumnMoved: this.onColumnMoved,
