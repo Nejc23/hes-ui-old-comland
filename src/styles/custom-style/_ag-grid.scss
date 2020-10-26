@@ -1,3 +1,12 @@
 .row-actions .btn-group-sm button {
   border-radius: 0 !important;
 }
+
+.ag-paging-panel-selection {
+  position:relative;
+  top:-40px;
+}
+
+.ag-paging-page-summary-panel {
+  z-index:1
+}
