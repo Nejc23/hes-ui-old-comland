@@ -657,7 +657,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   toggleFilter() {
     this.hideFilter = !this.hideFilter;
-    this.gridColumnApi.autoSizeAllColumns();
+
+    setTimeout(() => {
+      this.gridApi.sizeColumnsToFit();
+    }, 50);
+
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
     };

@@ -31,7 +31,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   private gridColumnApi;
 
   private gridApiJobs;
-  private gridColumnApiJobs;
 
   public modules: Module[] = AllModules;
 
@@ -171,6 +170,16 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   clickShowHideFilter() {
     this.hide = !this.hide;
+
+    setTimeout(() => {
+      this.gridApiJobs.sizeColumnsToFit();
+      this.gridApi.sizeColumnsToFit();
+    }, 50);
+
+    window.onresize = () => {
+      this.gridApiJobs.sizeColumnsToFit();
+      this.gridApi.sizeColumnsToFit();
+    };
   }
 
   rowEditingStopped($event) {
@@ -211,14 +220,19 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.getData();
+
+    window.onresize = () => {
+      this.gridApiJobs.sizeColumnsToFit();
+      this.gridApi.sizeColumnsToFit();
+    };
   }
 
   onGridReadyJobs(params) {
     this.gridApiJobs = params.api;
-    this.gridColumnApiJobs = params.coflumnApi;
     this.gridApiJobs.sizeColumnsToFit();
     window.onresize = () => {
       this.gridApiJobs.sizeColumnsToFit();
+      this.gridApi.sizeColumnsToFit();
     };
   }
 

@@ -892,14 +892,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  clickShowHideFilter() {
-    this.hideFilter = !this.hideFilter;
-    this.gridColumnApi.autoSizeAllColumns();
-    window.onresize = () => {
-      this.gridApi.sizeColumnsToFit();
-    };
-  }
-
   showRegisters(deviceId: string) {
     this.router.navigate(['/meterUnits/registers', deviceId]);
   }
@@ -910,7 +902,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   toggleFilter() {
     this.hideFilter = !this.hideFilter;
-    this.gridColumnApi.autoSizeAllColumns();
+
+    setTimeout(() => {
+      this.gridApi.sizeColumnsToFit();
+    }, 50);
+
     window.onresize = () => {
       this.gridApi.sizeColumnsToFit();
     };
