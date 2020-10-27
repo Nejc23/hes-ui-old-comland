@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
 import * as _ from 'lodash';
@@ -16,6 +16,7 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { brand } from 'src/environments/brand/default/brand';
 import { ActivatedRoute } from '@angular/router';
+import { SidebarToggleService } from './services/sidebar.service';
 
 @Component({
   selector: 'app-base-template',
@@ -56,7 +57,8 @@ export class BaseTemplateComponent implements OnInit {
     private codeList: CodelistMeterUnitsRepositoryService,
     //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService,
-    private acitavedRouter: ActivatedRoute
+    private acitavedRouter: ActivatedRoute,
+    private sidebarToggleService: SidebarToggleService
   ) {
     this.app = {
       layout: {
@@ -203,6 +205,10 @@ export class BaseTemplateComponent implements OnInit {
     return brand.appTitle;
   }
 
+  doToggleMenu() {
+    this.app.layout.isMenuCollapsed = !this.app.layout.isMenuCollapsed;
+    this.sidebarToggleService.toggleMenu();
+  }
   /*  get companyIdProperty() {
     return 'companyId';
   }*/

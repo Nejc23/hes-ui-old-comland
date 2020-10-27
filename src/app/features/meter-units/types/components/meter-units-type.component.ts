@@ -1,3 +1,4 @@
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
@@ -118,7 +119,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private gridColumnShowHideService: GridColumnShowHideService,
     private breadcrumbService: BreadcrumbService,
     private router: Router,
-    private plcActionsService: MeterUnitsPlcActionsService
+    private plcActionsService: MeterUnitsPlcActionsService,
+    private sidebarToggleService: SidebarToggleService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -269,6 +271,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     };
 
     this.deleteAllRequests();
+
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
   }
 
   ngOnDestroy() {

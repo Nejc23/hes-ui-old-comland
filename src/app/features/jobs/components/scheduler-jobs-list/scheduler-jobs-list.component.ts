@@ -1,3 +1,4 @@
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
@@ -64,7 +65,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private eventService: SchedulerJobsEventEmitterService,
     private modalService: ModalService,
     private authService: AuthService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private sidebarToggleService: SidebarToggleService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -168,6 +170,12 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);
+
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
   }
 
   ngOnDestroy() {
