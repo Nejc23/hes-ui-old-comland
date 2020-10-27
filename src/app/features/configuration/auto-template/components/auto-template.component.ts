@@ -1,3 +1,4 @@
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
 import { ActivatedRoute } from '@angular/router';
@@ -88,7 +89,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private toast: ToastNotificationService,
     private modalService: ModalService,
     private route: ActivatedRoute,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private sidebarToggleService: SidebarToggleService
   ) {
     this.form = this.createForm();
 
@@ -262,6 +264,13 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     });
 
     this.breadcrumbService.setPageName(this.headerTitle);
+
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApiJobs.sizeColumnsToFit();
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
   }
 
   setJobListWithoutAssignedJobs() {

@@ -1,3 +1,5 @@
+import { Subscription } from 'rxjs';
+import { SidebarToggleService } from './../../../../../shared/base-template/components/services/sidebar.service';
 import { RegistersGridService } from './../../services/grid/registers-grid.service';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Module } from '@ag-grid-community/core';
@@ -20,7 +22,7 @@ export class RegistersGridComponent implements OnInit {
 
   public localeText;
 
-  constructor(private registersGridService: RegistersGridService) {}
+  constructor(private registersGridService: RegistersGridService, private sidebarToggleService: SidebarToggleService) {}
 
   ngOnInit() {
     this.columnDefs = this.registersGridService.setGridColumns();
@@ -41,6 +43,12 @@ export class RegistersGridComponent implements OnInit {
       previous: $localize`previous`,
       loadingOoo: $localize`loading...`
     };
+
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
   }
 
   onGridReady(params) {

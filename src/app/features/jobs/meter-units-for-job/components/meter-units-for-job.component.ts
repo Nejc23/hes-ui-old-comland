@@ -1,3 +1,4 @@
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
@@ -102,7 +103,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private eventService: AllForJobGridEventEmitterService,
     private authService: AuthService,
     private modalService: ModalService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private sidebarToggleService: SidebarToggleService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.scheduleId = params.scheduleId;
@@ -196,6 +198,12 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       previous: $localize`previous`,
       loadingOoo: $localize`loading...`
     };
+
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
 
     // this.deleteAllRequests();
   }

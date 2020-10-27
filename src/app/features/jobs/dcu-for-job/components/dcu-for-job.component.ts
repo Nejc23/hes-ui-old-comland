@@ -1,3 +1,4 @@
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { DataConcentratorUnitsService } from './../../../../core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -107,7 +108,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     private codelistMeterUnitsService: CodelistMeterUnitsRepositoryService,
     private modalService: ModalService,
     private jobsService: JobsService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private sidebarToggleService: SidebarToggleService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.scheduleId = params.scheduleId;
@@ -200,6 +202,11 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       loadingOoo: $localize`loading...`
     };
 
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
     // this.deleteAllRequests();
   }
 

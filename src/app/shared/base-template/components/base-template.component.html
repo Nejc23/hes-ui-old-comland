@@ -36,7 +36,7 @@
         </div>
         <div @navItemsTrigger class="ml-auto mr-3"  *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
           <a class="sidebar-light p-0" [ngClass]="{'text-black-50': app.layout.isMenuCollapsed }" href="javascript:void(0);"
-            (click)="app.layout.isMenuCollapsed = !app.layout.isMenuCollapsed" [ngbTooltip]="tipContentMenu">
+            (click)="doToggleMenu()" [ngbTooltip]="tipContentMenu">
             <i class="far fa-bars m-0"></i>
           </a>
         </div>
