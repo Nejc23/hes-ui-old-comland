@@ -27,7 +27,6 @@ export interface GridFilterParams {
   disconnectorState?: Codelist<number>[];
   ciiState?: Codelist<number>[];
   showChildInfoMBus?: boolean;
-  showDeleted: boolean;
   showWithoutTemplate?: boolean;
   readyForActivation?: boolean;
 }

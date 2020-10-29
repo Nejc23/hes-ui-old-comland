@@ -73,7 +73,6 @@ export class MeterUnitsSchedulerInterceptor {
             }
           ],
           showChildInfoMBus: false,
-          showDeleted: false,
           showWithoutTemplate: false
         }
       }

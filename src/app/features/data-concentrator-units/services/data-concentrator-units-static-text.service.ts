@@ -37,15 +37,7 @@ export class DataConcentratorUnitsStaticTextService {
     return $localize`Next planned read` + ' ';
   }
 
-  getFiltersInfo(
-    filterName: string,
-    status: boolean,
-    readStatuses: boolean,
-    type: boolean,
-    vendor: boolean,
-    tag: boolean,
-    showDeleted: boolean
-  ): FiltersInfo {
+  getFiltersInfo(filterName: string, status: boolean, readStatuses: boolean, type: boolean, vendor: boolean, tag: boolean): FiltersInfo {
     const result: FiltersInfo = {
       isSet: false,
       count: 0,
@@ -55,48 +47,42 @@ export class DataConcentratorUnitsStaticTextService {
     let additionalString = '';
 
     if (filterName !== '' && filterName !== undefined) {
-      additionalString = status || readStatuses || type || vendor || tag || showDeleted ? ' · ' : '';
+      additionalString = status || readStatuses || type || vendor || tag ? ' · ' : '';
       result.text = filterName + additionalString;
-    } else if (status || readStatuses || type || vendor || tag || showDeleted) {
+    } else if (status || readStatuses || type || vendor || tag) {
       result.text = '';
     }
 
-    if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag || showDeleted) {
+    if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag) {
       result.text += $localize`Filtered by: `;
     }
 
     if (status) {
-      additionalString = readStatuses || type || vendor || tag || showDeleted ? ', ' : '';
+      additionalString = readStatuses || type || vendor || tag ? ', ' : '';
       result.text += $localize`status` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
-      additionalString = type || vendor || tag || showDeleted ? ', ' : '';
+      additionalString = type || vendor || tag ? ', ' : '';
       result.text += $localize`read status` + additionalString;
       result.count++;
     }
 
     if (type) {
-      additionalString = vendor || tag || showDeleted ? ', ' : '';
+      additionalString = vendor || tag ? ', ' : '';
       result.text += $localize`type` + additionalString;
       result.count++;
     }
 
     if (vendor) {
-      additionalString = tag || showDeleted ? ', ' : '';
+      additionalString = tag ? ', ' : '';
       result.text += $localize`vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
-      additionalString = showDeleted ? ', ' : '';
-      result.text += $localize`tag` + additionalString;
-      result.count++;
-    }
-
-    if (showDeleted) {
-      result.text += $localize`show deleted`;
+      result.text += $localize`tag`;
       result.count++;
     }
 

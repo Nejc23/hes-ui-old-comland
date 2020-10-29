@@ -9,6 +9,5 @@ export interface DcuLayout {
   readStatusFilter: ReadStatus;
   typesFilter: number[];
   tagsFilter: Codelist<number>[];
-  showDeletedFilter: boolean;
   gridLayout: string;
 }

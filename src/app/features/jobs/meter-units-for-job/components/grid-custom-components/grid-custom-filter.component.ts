@@ -112,7 +112,6 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
           ciiStateFilter: this.sessionFilter.ciiStateFilter,
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
-          showDeletedMeterUnitsFilter: this.sessionFilter.showDeletedMeterUnitsFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
           gridLayout: ''
@@ -141,7 +140,6 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
         ],
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
         ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
-        ['showDeletedMeterUnits']: [filters && selected ? selected.showDeletedMeterUnitsFilter : false],
         ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
         ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false]
@@ -188,10 +186,6 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
 
   get ciiStateProperty() {
     return 'ciiState';
-  }
-
-  get showDeletedMeterUnitsProperty() {
-    return 'showDeletedMeterUnits';
   }
 
   get showMeterUnitsWithoutTemplateProperty() {
@@ -249,7 +243,6 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
-      showDeletedMeterUnitsFilter: this.form.get(this.showDeletedMeterUnitsProperty).value,
       showMeterUnitsWithoutTemplateFilter: this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
       showOnlyImageReadyForActivationFilter: this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: ''
