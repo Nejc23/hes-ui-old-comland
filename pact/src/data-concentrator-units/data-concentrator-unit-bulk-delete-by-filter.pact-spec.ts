@@ -39,8 +39,7 @@ describe('Pact consumer test', () => {
       tags: [
         { id: 1, value: 'tag1' },
         { id: 2, value: 'tag2' }
-      ],
-      showDeleted: false
+      ]
     }
   };
 

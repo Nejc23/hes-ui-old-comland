@@ -68,8 +68,7 @@ describe('Pact consumer test', () => {
           { id: 0, value: 'on' },
           { id: 1, value: 'off' }
         ],
-        showChildInfoMBus: true,
-        showDeleted: true
+        showChildInfoMBus: true
       }
     };
 

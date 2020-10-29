@@ -49,8 +49,7 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true,
-      showDeleted: true
+      showChildInfoMBus: true
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
     excludeIds: [],
@@ -77,8 +76,7 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true,
-      showDeleted: true
+      showChildInfoMBus: true
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
     excludeIds: [],

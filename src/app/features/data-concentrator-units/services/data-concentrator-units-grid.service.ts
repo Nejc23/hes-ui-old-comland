@@ -296,8 +296,7 @@ export class DataConcentratorUnitsGridService {
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
-      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
-      JSON.stringify(sessionFilter.showDeletedFilter) === JSON.stringify(requestModel.showDeleted)
+      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor)
     ) {
       return true;
     }

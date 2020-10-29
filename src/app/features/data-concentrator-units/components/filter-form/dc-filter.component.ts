@@ -91,7 +91,6 @@ export class DcFilterComponent implements OnInit {
           typesFilter: this.sessionFilter.typesFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
           vendorFilter: this.sessionFilter.vendorFilter,
-          showDeletedFilter: this.sessionFilter.showDeletedFilter,
           gridLayout: ''
         };
         x.push(currentFilter);
@@ -116,8 +115,7 @@ export class DcFilterComponent implements OnInit {
             : { id: '', value: '' }
         ],
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
-        ['showDeleted']: [filters && selected ? selected.showDeletedFilter : false]
+        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0]
       },
       { validator: rangeFilterValidator }
     );
@@ -153,10 +151,6 @@ export class DcFilterComponent implements OnInit {
 
   get value2Property() {
     return 'value2';
-  }
-
-  get showDeletedProperty() {
-    return 'showDeleted';
   }
 
   refresh() {}
@@ -200,7 +194,6 @@ export class DcFilterComponent implements OnInit {
       typesFilter: this.form.get(this.typesProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
-      showDeletedFilter: this.form.get(this.showDeletedProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
