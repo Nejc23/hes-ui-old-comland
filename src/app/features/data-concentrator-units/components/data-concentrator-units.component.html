@@ -25,7 +25,12 @@
                 <i class="far fa-plus"></i> <span i18n>Add</span>
               </button>
             </div>
-
+            <div class="pr-3">
+              <app-dc-opertions [showOperations]="getSelectedCount() === 0 ? false : true"
+              [requestModel]="requestModel" [guid]="null" [selectedItemsCount]="getSelectedCount()"
+              ></app-dc-opertions>
+               <!-- other buttons as Tags,...etc -->
+            </div>
           </app-action-form>
         </div>
       </div>

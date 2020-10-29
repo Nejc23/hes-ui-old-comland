@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
 import { Router } from '@angular/router';
+import { DcOperationsService } from '../../services/dc-operations.service';
+import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
 
 @Component({
   selector: 'app-grid-cell-actions',
@@ -35,5 +37,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
         return $localize`Open details`;
     }
     return '';
+  }
+
+  onSynchronizeTime() {
+    this.params.context.componentParent.onSynchronizeTime(this.params.data.concentratorId);
   }
 }

@@ -30,6 +30,8 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { DcOperationsService } from '../services/dc-operations.service';
+import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -100,7 +102,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private gridColumnShowHideService: GridColumnShowHideService,
-    private bredcrumbService: BreadcrumbService
+    private bredcrumbService: BreadcrumbService,
+    private dcOperationsService: DcOperationsService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -109,7 +112,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
 
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
-    this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions();
+    this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions(this);
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: DcuLayout) => {
         if (event !== null) {
@@ -666,4 +669,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.gridApi.sizeColumnsToFit();
     };
   }
+
+  // functions for operations called from grid
+  // ******************************************************************************** */
+  onSynchronizeTime(selectedGuid: string) {
+    const params = this.dcOperationsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
+  }
+
+  // ******************************************************************************* */
 }

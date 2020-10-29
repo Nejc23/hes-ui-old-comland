@@ -21,6 +21,7 @@ import { GridCellJobStatusComponent } from '../components/grid-custom-components
 import { DcFilterComponent } from '../components/filter-form/dc-filter.component';
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
+import { DcOperationsComponent } from '../components/operations/dc-operations.component';
 
 @NgModule({
   entryComponents: [],
@@ -42,7 +43,8 @@ import { GridCellActionsComponent } from '../components/grid-custom-components/g
     GridCellIconComponent,
     GridCellJobStatusComponent,
     GridCellActionsComponent,
-    DcFilterComponent
+    DcFilterComponent,
+    DcOperationsComponent
   ], // StringifyDataPipe
   imports: [
     SharedModule,
