@@ -1,7 +1,9 @@
 <div class="form-group" *ngIf="!edit">
-  <button class="btn btn-primary" (click)="editDcu()">
+  <button class="btn btn-primary mr-2" (click)="editDcu()">
     <i class="far fa-pencil"></i> <span i18n>Edit</span>
   </button>
+  <app-dc-opertions [showOperations]="true" [requestModel]="null" 
+    [guid]="concentratorId" [selectedItemsCount]="1"></app-dc-opertions>
 </div>
 <div class="form-group" *ngIf="edit">
     <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
