@@ -1,3 +1,4 @@
+import { SidebarToggleService } from './../../../shared/base-template/components/services/sidebar.service';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
@@ -103,7 +104,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private gridColumnShowHideService: GridColumnShowHideService,
     private bredcrumbService: BreadcrumbService,
-    private dcOperationsService: DcOperationsService
+    private dcOperationsService: DcOperationsService,
+
+    private sidebarToggleService: SidebarToggleService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -186,6 +189,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
+    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 320);
+    });
   }
 
   ngOnDestroy(): void {
@@ -669,7 +677,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.gridApi.sizeColumnsToFit();
     };
   }
-
   // functions for operations called from grid
   // ******************************************************************************** */
   onSynchronizeTime(selectedGuid: string) {
@@ -677,5 +684,5 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
   }
 
-  // ******************************************************************************* */
+  // *******************************************************************************
 }
