@@ -78,7 +78,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       vendor: null,
       readStatus: null,
       showChildInfoMBus: false,
-      showDeleted: true,
       showWithoutTemplate: true
     }
   };
@@ -153,7 +152,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     //       this.requestModel.filterModel.firmware = event.firmwareFilter;
     //       this.requestModel.filterModel.breakerState = event.breakerStateFilter;
     //       this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
-    //       this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
     //       this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
     //       this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
     //       this.gridColumnApi.setColumnState(event.gridLayout);
@@ -241,7 +239,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       (filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0) ||
       (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter ||
-      filterInfo.showDeletedMeterUnitsFilter ||
       filterInfo.showMeterUnitsWithoutTemplateFilter ||
       filterInfo.showOnlyImageReadyForActivationFilter
     );
@@ -447,7 +444,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
         // this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
         this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
@@ -562,7 +558,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
       // this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
       this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
     } else {
@@ -585,7 +580,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
-      filterInfo.showDeletedMeterUnitsFilter,
       filterInfo.showMeterUnitsWithoutTemplateFilter,
       filterInfo.showOnlyImageReadyForActivationFilter
     );
@@ -663,7 +657,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         //   this.requestModel.filterModel.breakerState.length === 0 ||
         //   this.requestModel.filterModel.breakerState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showDeleted &&
         !this.requestModel.filterModel.showWithoutTemplate &&
         !this.requestModel.filterModel.readyForActivation)
     ) {

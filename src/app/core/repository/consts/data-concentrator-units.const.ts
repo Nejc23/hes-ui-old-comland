@@ -24,3 +24,7 @@ export const dcuSelect = `${basePath}/select-concentrators`;
 export const dcuForJob = `${basePath}/concentrators-for-job`;
 
 export const removeDcuFromJob = `${basePath}/remove-concentrators-from-job`;
+
+// DC operations
+export const basePathDcOperations = '/api/concentrator-management';
+export const dcOperationSynchronizeTime = `${basePathDcOperations}/trigger-set-concentrator-time`;

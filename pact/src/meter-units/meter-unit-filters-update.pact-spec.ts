@@ -41,7 +41,6 @@ describe('Pact consumer test', () => {
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
     ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
-    showDeletedMeterUnitsFilter: true,
     showOnlyMeterUnitsWithMBusInfoFilter: false,
     showMeterUnitsWithoutTemplateFilter: false,
     showOnlyImageReadyForActivationFilter: false,
@@ -63,7 +62,6 @@ describe('Pact consumer test', () => {
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
     ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
-    showDeletedMeterUnitsFilter: true,
     showOnlyMeterUnitsWithMBusInfoFilter: false,
     showMeterUnitsWithoutTemplateFilter: false,
     showOnlyImageReadyForActivationFilter: true,
@@ -115,7 +113,6 @@ describe('Pact consumer test', () => {
           expect(res.readStatusFilter.value2).toEqual(responseBody.readStatusFilter.value2);
           expect(res.firmwareFilter).toEqual(responseBody.firmwareFilter);
           expect(res.breakerStateFilter).toEqual(responseBody.breakerStateFilter);
-          expect(res.showDeletedMeterUnitsFilter).toEqual(responseBody.showDeletedMeterUnitsFilter);
           expect(res.showOnlyMeterUnitsWithMBusInfoFilter).toEqual(responseBody.showOnlyMeterUnitsWithMBusInfoFilter);
           done();
         },

@@ -181,9 +181,9 @@ export class DataConcentratorUnitsGridService {
       {
         field: 'id',
         pinned: 'right',
-        width: 70,
-        minWidth: 70,
-        maxWidth: 70,
+        width: 110,
+        minWidth: 110,
+        maxWidth: 110,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,
@@ -217,8 +217,9 @@ export class DataConcentratorUnitsGridService {
   }
 
   // grid settings
-  public setGridOptions() {
+  public setGridOptions(component: any) {
     return {
+      context: { forma: component.form, componentParent: component },
       rowModelType: configAgGrid.rowModelType,
       defaultColDef: {
         sortable: configAgGridDefCol.sortable,
@@ -295,8 +296,7 @@ export class DataConcentratorUnitsGridService {
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
-      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
-      JSON.stringify(sessionFilter.showDeletedFilter) === JSON.stringify(requestModel.showDeleted)
+      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor)
     ) {
       return true;
     }

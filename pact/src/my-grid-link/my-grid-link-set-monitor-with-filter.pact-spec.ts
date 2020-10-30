@@ -44,8 +44,7 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true,
-      showDeleted: true
+      showChildInfoMBus: true
     },
     monitorObjects: [
       {
@@ -83,8 +82,7 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true,
-      showDeleted: true
+      showChildInfoMBus: true
     },
     monitorObjects: [
       {

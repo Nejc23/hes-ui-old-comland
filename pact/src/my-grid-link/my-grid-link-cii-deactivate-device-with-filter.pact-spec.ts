@@ -22,7 +22,7 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().get(MyGridLinkService);
+    service = getTestBed().inject(MyGridLinkService);
   });
 
   const requestBody: RequestFilterParams = {
@@ -44,8 +44,7 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true,
-      showDeleted: true
+      showChildInfoMBus: true
     }
   };
 
@@ -69,8 +68,7 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true,
-      showDeleted: true
+      showChildInfoMBus: true
     }
   };
 

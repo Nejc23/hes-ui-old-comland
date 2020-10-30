@@ -17,7 +17,8 @@ module.exports = function (config) {
       require('@angular-devkit/build-angular/plugins/karma')
     ],
     client: {
-      clearContext: false // leave Jasmine Spec Runner output visible in browser
+      clearContext: false, // leave Jasmine Spec Runner output visible in browser
+      captureConsole: false // hide log text in console
     },
     mime: {
       'text/x-typescript': ['ts', 'tsx']
@@ -46,6 +47,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless'],
-    singleRun: true
+    singleRun: true,
   });
 };

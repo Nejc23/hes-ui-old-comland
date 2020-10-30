@@ -31,6 +31,8 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { DcOperationsService } from '../services/dc-operations.service';
+import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -84,8 +86,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       },
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' },
-      showDeleted: false
+      vendor: { id: 0, value: '' }
     }
   };
 
@@ -102,6 +103,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private agGridSharedFunctionsService: AgGridSharedFunctionsService,
     private gridColumnShowHideService: GridColumnShowHideService,
     private bredcrumbService: BreadcrumbService,
+    private dcOperationsService: DcOperationsService,
+
     private sidebarToggleService: SidebarToggleService
   ) {
     this.filtersInfo = {
@@ -111,7 +114,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
 
     this.frameworkComponents = dataConcentratorUnitsGridService.setFrameworkComponents();
-    this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions();
+    this.gridOptions = this.dataConcentratorUnitsGridService.setGridOptions(this);
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: DcuLayout) => {
         if (event !== null) {
@@ -122,7 +125,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.vendor = event.vendorFilter;
           this.requestModel.filterModel.types = event.typesFilter;
           this.requestModel.filterModel.tags = event.tagsFilter;
-          this.requestModel.filterModel.showDeleted = event.showDeletedFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
           this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
@@ -185,7 +187,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
-
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
       setTimeout(() => {
         this.gridApi.sizeColumnsToFit();
@@ -348,8 +349,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         (this.requestModel.filterModel.types === undefined ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0) &&
-        !this.requestModel.filterModel.showDeleted)
+        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0))
     ) {
       return true;
     }
@@ -401,7 +401,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
         this.requestModel.filterModel.types = filterDCU.typesFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedFilter;
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
         this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
         this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
@@ -438,7 +437,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
       this.requestModel.filterModel.types = filterDCU.typesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedFilter;
     } else {
       this.setFilterInfo();
     }
@@ -455,8 +453,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorFilter ? true : false,
-      filter.tagsFilter && filter.tagsFilter.length > 0,
-      filter.showDeletedFilter
+      filter.tagsFilter && filter.tagsFilter.length > 0
     );
   }
 
@@ -471,8 +468,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         tmpFilter.vendorFilter.value &&
         tmpFilter.vendorFilter.value !== undefined &&
         tmpFilter.vendorFilter.value !== '') ||
-      (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0) ||
-      tmpFilter.showDeletedFilter
+      (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0)
     );
   }
 
@@ -577,8 +573,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         },
         types: [],
         vendor: { id: 0, value: '' },
-        tags: [],
-        showDeleted: false
+        tags: []
       }
     };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
@@ -674,4 +669,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.gridApi.sizeColumnsToFit();
     };
   }
+  // functions for operations called from grid
+  // ******************************************************************************** */
+  onSynchronizeTime(selectedGuid: string) {
+    const params = this.dcOperationsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
+  }
+
+  // *******************************************************************************
 }

@@ -88,7 +88,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       disconnectorState: [{ id: 0, value: '' }],
       ciiState: [{ id: 0, value: '' }],
       showChildInfoMBus: false,
-      showDeleted: false,
       showWithoutTemplate: false
     }
   };
@@ -180,7 +179,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.disconnectorState = event.breakerStateFilter;
           this.requestModel.filterModel.ciiState = event.ciiStateFilter;
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
-          this.requestModel.filterModel.showDeleted = event.showDeletedMeterUnitsFilter;
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
           this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
@@ -445,7 +443,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.ciiState.length === 0 ||
           this.requestModel.filterModel.disconnectorState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showDeleted &&
         !this.requestModel.filterModel.showWithoutTemplate &&
         !this.requestModel.filterModel.readyForActivation)
     ) {
@@ -499,7 +496,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
         this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
         this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-        this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
         this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
         this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
 
@@ -546,7 +542,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.disconnectorState = filterDCU.breakerStateFilter;
       this.requestModel.filterModel.ciiState = filterDCU.ciiStateFilter;
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-      this.requestModel.filterModel.showDeleted = filterDCU.showDeletedMeterUnitsFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
       this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
     } else {
@@ -570,7 +565,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.ciiStateFilter && filterInfo.ciiStateFilter.length > 0,
       filterInfo.showOnlyMeterUnitsWithMBusInfoFilter,
-      filterInfo.showDeletedMeterUnitsFilter,
       filterInfo.showMeterUnitsWithoutTemplateFilter,
       filterInfo.showOnlyImageReadyForActivationFilter
     );
@@ -870,8 +864,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   //   //   (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
   //   //   (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
   //   //   tmpFilter.vendorFilter ||
-  //   //   (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0) ||
-  //   //   tmpFilter.showDeletedFilter;
+  //   //   (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0)
   // }
 
   // clearFilter() {

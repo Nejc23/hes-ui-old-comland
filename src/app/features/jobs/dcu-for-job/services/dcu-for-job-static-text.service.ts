@@ -37,7 +37,6 @@ export class DcuForJobStaticTextService {
     firmware: boolean,
     breakerState: boolean,
     showChildMBus: boolean,
-    showDeleted: boolean,
     showWithoutTemplate: boolean,
     showOnlyReadyForActivation: boolean
   ) {
@@ -45,11 +44,9 @@ export class DcuForJobStaticTextService {
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
-        status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate
-          ? ' · '
-          : '';
+        status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ' · ' : '';
       result = filterName + additionalString;
-    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate) {
+    } else if (status || vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate) {
       result = '';
     }
 
@@ -62,51 +59,44 @@ export class DcuForJobStaticTextService {
       firmware ||
       breakerState ||
       showChildMBus ||
-      showDeleted ||
       showWithoutTemplate
     ) {
       result = result + $localize`Filtered by: `;
     }
 
     if (status) {
-      additionalString =
-        vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + $localize`status` + additionalString;
     }
 
     if (vendor) {
-      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + $localize`vendor` + additionalString;
     }
 
     if (tag) {
-      additionalString = readStatuses || firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + $localize`tag` + additionalString;
     }
 
     if (readStatuses) {
-      additionalString = firmware || breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + $localize`read status` + additionalString;
     }
 
     if (firmware) {
-      additionalString = breakerState || showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + $localize`firmware` + additionalString;
     }
 
     if (breakerState) {
-      additionalString = showChildMBus || showDeleted || showWithoutTemplate ? ', ' : '';
+      additionalString = showChildMBus || showWithoutTemplate ? ', ' : '';
       result = result + $localize`disconnector state` + additionalString;
     }
 
     if (showChildMBus) {
-      additionalString = showDeleted || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`show child MBus` + additionalString;
-    }
-
-    if (showDeleted) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result = result + $localize`show deleted` + additionalString;
+      result = result + $localize`show child MBus` + additionalString;
     }
 
     if (showWithoutTemplate) {
