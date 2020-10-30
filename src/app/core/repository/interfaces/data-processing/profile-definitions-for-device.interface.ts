@@ -44,4 +44,5 @@ export interface RegisterValue {
   value: number;
   status?: number;
   timestamp: string;
+  description?: string;
 }

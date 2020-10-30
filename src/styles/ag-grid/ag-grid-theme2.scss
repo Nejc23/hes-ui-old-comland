@@ -249,7 +249,7 @@
       }
     }
   }
-  
+
   .ag-root,
   .ag-root-wrapper,
   .ag-body-viewport,
@@ -277,6 +277,13 @@
       color: $text-muted;
     }
   }
+
+  &.no-selection {
+    .ag-paging-panel {
+      margin-left: 0;
+    }
+  }
+
 
   button {
     font-family: $btn-font-family;

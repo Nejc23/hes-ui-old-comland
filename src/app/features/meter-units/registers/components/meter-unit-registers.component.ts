@@ -1,4 +1,4 @@
-import { registers } from 'src/app/core/repository/consts/meter-units.const';
+import { EventsById, EventsByTimestamp } from './../interfaces/events-processing.interface';
 import { RegisterValue } from './../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { RegisterGroup, RegisterStatistics } from './../interfaces/data-processing-request.interface';
 import { DataProcessingService } from './../../../../core/repository/services/data-processing/data-processing.service';
@@ -8,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { RegistersFilter } from '../interfaces/data-processing-request.interface';
 import { environment } from 'src/environments/environment';
@@ -16,7 +15,6 @@ import { formatDate } from '@progress/kendo-angular-intl';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { of } from 'rxjs';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
@@ -42,6 +40,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   public showLineChart: boolean;
   public showTable: boolean;
   public showStatistics: boolean;
+  public isEvent: boolean;
 
   public registersFilter: RegistersFilter;
 
@@ -53,7 +52,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   public range;
   public register;
-  public showNoData = false;
 
   public registerGroupOptions: RadioOption[];
   public registerGroups: RegisterGroup[];
@@ -69,6 +67,11 @@ export class MeterUnitRegistersComponent implements OnInit {
   public hideFilter;
 
   public registerSearch;
+
+  public categorization;
+
+  public eventsByTimestamp: EventsByTimestamp[];
+  public eventsById: EventsById[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -114,6 +117,10 @@ export class MeterUnitRegistersComponent implements OnInit {
     const selectedRegister = this.deviceRegisters.find(r => r.registerDefinitionId === registerValue);
     this.isRegisterSelected = true;
     this.showStatistics = selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
+    this.isEvent = selectedRegister.categorization === 'EVENT' ? true : false;
+
+    console.log('parent this.categorization', selectedRegister, this.isEvent, this.showStatistics);
+    this.categorization = selectedRegister.categorization;
 
     this.setPageSubtitle();
 
@@ -321,21 +328,80 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     try {
       this.dataProcessingService.getChartData(this.registersFilter).subscribe(values => {
-        if (values) {
+        if (!values || values.length === 0) {
+          this.isDataFound = false;
+        } else {
           this.isDataFound = true;
           this.rowData = values;
           this.registerStatisticsData = this.getRegisterStatistics(this.rowData);
+
+          this.setEventData();
           this.setPageSubtitle();
 
           this.chartCategories = values.map(v => new Date(v.timestamp));
           this.chartData = [values];
-        } else {
-          this.isDataFound = false;
         }
       });
     } catch (error) {
       console.log('showData() Error:', error);
     }
+  }
+
+  setEventData() {
+    this.eventsByTimestamp = [];
+    this.eventsById = [];
+    if (!this.isEvent) {
+      return;
+    }
+
+    // is it ordered?
+    const startTime = new Date(this.rowData[0].timestamp);
+    const endTime = new Date(this.rowData[this.rowData.length - 1].timestamp);
+
+    const daysDiff = this.getDiffDays(startTime, endTime);
+
+    const currentTime = new Date(this.rowData[0].timestamp);
+    currentTime.setMinutes(0, 0, 0);
+
+    // let inteval = 1000 * 60 * 60 * 60; // hours
+    let outData = [];
+    if (daysDiff <= 1) {
+      // hourly interval
+      outData = this.rowData.map(d => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+    } else {
+      outData = this.rowData.map(d => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+    }
+
+    const groupBy = (array, key) => {
+      // Return the end result
+      return array.reduce((result, currentValue) => {
+        if (!result[currentValue[key]]) {
+          result[currentValue[key]] = 0;
+        }
+        result[currentValue[key]]++;
+
+        // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+        return result;
+      }, {}); // empty object is the initial value for result object
+    };
+
+    this.eventsByTimestamp = Object.entries(groupBy(outData, 'timestamp')).map(e => ({
+      timestamp: new Date(Number(e[0])),
+      count: Number(e[1])
+    }));
+    const dataLength = this.rowData.length;
+    const eventsByIdGroup = groupBy(outData, 'value');
+    this.eventsById = Object.entries(eventsByIdGroup).map(e => ({
+      category: Number(e[0]),
+      count: Number(e[1]),
+      value: Number(e[1]) / dataLength
+    }));
+    this.eventsById[this.eventsById.length - 1].color = environment.kendoPieChartLastSliceColor; // last color fix to avoid the same color for the first and the last pie slice
+  }
+
+  getDiffDays(startTime: Date, endTime: Date): number {
+    const diff = endTime.valueOf() - startTime.valueOf();
+    return diff / (1000 * 3600 * 24);
   }
 
   fillData() {
@@ -361,16 +427,24 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   getRegisterStatistics(registerValues: RegisterValue[]): RegisterStatistics {
-    const values = registerValues.map(r => r.value);
-    const avg = values.reduce((a, b) => a + b) / values.length;
-    const min = Math.min.apply(Math, values);
-    const max = Math.max.apply(Math, values);
+    if (registerValues == null || registerValues.length === 0) {
+      return null;
+    }
 
-    return {
-      averageValue: avg,
-      minValue: registerValues.find(r => r.value === min),
-      maxValue: registerValues.find(r => r.value === max)
-    };
+    const values = registerValues.filter(f => f.value).map(r => r.value);
+    if (values && values.length > 0) {
+      const avg = values.reduce((a, b) => a + b) / values.length;
+      const min = Math.min.apply(Math, values);
+      const max = Math.max.apply(Math, values);
+
+      return {
+        averageValue: avg,
+        minValue: registerValues.find(r => r.value === min),
+        maxValue: registerValues.find(r => r.value === max)
+      };
+    } else {
+      return null;
+    }
   }
 
   getRegisterGroupOptions(groupName: string): RadioOption[] {

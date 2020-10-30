@@ -13,6 +13,7 @@ export const environment = {
     days: 'dd.MM',
     years: 'yyyy'
   },
+  kendoPieChartLastSliceColor: '#9FB740',
   isDebug: false,
   licenseKey:
     'CompanyName=Comland d.o.o.,LicensedApplication=ePoint.HES,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=0,AssetReference=AG-007624,ExpiryDate=2_April_2021_[v2]_MTYxNzMxODAwMDAwMA==c1dec7b42e4f2f63e2882709fbd9598f',

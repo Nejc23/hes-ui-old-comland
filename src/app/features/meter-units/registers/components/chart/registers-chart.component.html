@@ -3,7 +3,6 @@
   <kendo-chart-category-axis baseUnit="years">
       <kendo-chart-category-axis-item maxDivisions="20" [categories]="categories">
         <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats">
-
         </kendo-chart-category-axis-item-labels>
         <kendo-chart-value-axis-item>
           <kendo-chart-value-axis-item-labels>
@@ -12,7 +11,7 @@
       </kendo-chart-category-axis-item>
   </kendo-chart-category-axis>
   <kendo-chart-series>
-    <kendo-chart-series-item margin="0" [markers]="{size: 4, background:getChartColor()}" [highlight]="{markers: { border: {color:getChartColor(), width:2}}}" padding="0" width="1" color={{getChartColor()}} type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
+    <kendo-chart-series-item margin="0" [markers]="{size: 4}" [highlight]="{markers: { border: { width:0 }}}" padding="0" width="1" type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem"  >
           <div style="text-align:center;">

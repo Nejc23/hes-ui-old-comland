@@ -81,28 +81,32 @@
 
       <div *ngIf="isDataFound">
         <div class="row mb-5">
-          <div class="col-12">
+          <div class="col-12" *ngIf="!isEvent">
             <app-registers-chart
               [categories]="chartCategories"
               [chartData]="chartData">
             </app-registers-chart>
           </div>
+          <div class="col-12" *ngIf="isEvent">
+            <h4 i18n class="pt-2">Number of events</h4>
+            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
+          </div>
         </div>
         <div class="row">
-          <div [ngClass]="{'col-12': !showStatistics, 'col-8': showStatistics }">
-            <app-registers-grid [rowData]="rowData"></app-registers-grid>
+          <div [ngClass]="{'col-12': (!showStatistics || !registerStatisticsData) && !isEvent, 'col-8': showStatistics && registerStatisticsData && !isEvent, 'col-6': isEvent }">
+            <app-registers-grid [rowData]="rowData" [categorization]="categorization"></app-registers-grid>
           </div>
-          <div class="col-4" *ngIf="showStatistics && registerStatisticsData">
+          <div class="col-4" *ngIf="showStatistics && !isEvent && registerStatisticsData">
             <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
+          </div>
+          <div class="col-6" *ngIf="isEvent">
+            <h4 i18n>Event type</h4>
+            <app-registers-pie-chart [eventsById]="eventsById"></app-registers-pie-chart>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-
 <ng-template #hideShowFilters><span i18n>Show/hide registers</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh data</span></ng-template>
-
-
-
