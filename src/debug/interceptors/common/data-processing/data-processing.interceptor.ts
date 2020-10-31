@@ -575,15 +575,18 @@ export class DataProcessingInterceptor {
                 eventRegisterValues: [
                   {
                     value: 105.0,
-                    timestamp: '2020-03-17T01:00:00+00:00'
+                    timestamp: '2020-03-17T01:00:00+00:00',
+                    description: 'test description 1'
                   },
                   {
                     value: 20.0,
-                    timestamp: '2020-03-17T03:00:00+00:00'
+                    timestamp: '2020-03-17T03:00:00+00:00',
+                    description: 'test description 2'
                   },
                   {
                     value: 21.0,
-                    timestamp: '2020-03-17T03:35:00+00:00'
+                    timestamp: '2020-03-17T03:35:00+00:00',
+                    description: 'test description 3'
                   }
                 ]
               }
