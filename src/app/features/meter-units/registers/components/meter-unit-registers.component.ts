@@ -396,7 +396,12 @@ export class MeterUnitRegistersComponent implements OnInit {
       count: Number(e[1]),
       value: Number(e[1]) / dataLength
     }));
-    this.eventsById[this.eventsById.length - 1].color = environment.kendoPieChartLastSliceColor; // last color fix to avoid the same color for the first and the last pie slice
+
+    const eventsLength = this.eventsById.length;
+
+    if (eventsLength % 6 === 1) {
+      this.eventsById[eventsLength - 1].color = environment.kendoPieChartLastSliceColor; // last color fix to avoid the same color for the first and the last pie slice
+    }
   }
 
   getDiffDays(startTime: Date, endTime: Date): number {

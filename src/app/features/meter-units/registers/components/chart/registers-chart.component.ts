@@ -23,7 +23,6 @@ export class RegistersChartComponent {
   }
 
   getDateWithTime(dateTime: any) {
-    // return dateTime ?  moment(dateTime).format('L') + ' ' + moment(dateTime).format('LTS') : ''
     return dateTime ? this.intl.formatDate(dateTime, environment.dateTimeFormat) : '';
   }
 

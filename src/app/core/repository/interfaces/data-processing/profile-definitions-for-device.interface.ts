@@ -9,16 +9,19 @@ export interface ProfileDefinitionsForDevice {
 }
 
 export interface EventProfileDefinitionsForDevice {
+  requestId?: string;
   deviceId: string;
   eventProfileDefinitions: EventProfileDefinition[];
 }
 
 export interface EventProfileDefinition {
+  requestId?: string;
   eventProfileId: string;
   eventRegisterDefinition: EventRegisterDefinition[];
 }
 
 export interface EventRegisterDefinition {
+  requestId?: string;
   registerId: string;
   registerStatus: string;
   eventRegisterValues: RegisterValue[];
@@ -41,6 +44,7 @@ export interface RegisterDefinition {
 }
 
 export interface RegisterValue {
+  requestId?: string;
   value: number;
   status?: number;
   timestamp: string;
