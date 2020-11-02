@@ -9,6 +9,7 @@ import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-dc-filter',
@@ -51,6 +52,7 @@ export class DcFilterComponent implements OnInit {
     private codelistHelperService: CodelistHelperService
   ) {
     this.form = this.createForm(null, null);
+    this.applyFilter = _.debounce(this.applyFilter, 2000);
   }
 
   // called on init
@@ -166,7 +168,7 @@ export class DcFilterComponent implements OnInit {
     this.filterChange.emit();
   }
 
-  applyButtonClicked() {
+  applyFilter() {
     if (!this.form.valid) {
       return;
     }

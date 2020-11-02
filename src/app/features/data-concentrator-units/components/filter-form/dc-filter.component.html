@@ -9,7 +9,8 @@
     <div class="filter-scroll">
       <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
         <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
-          [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+          [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+          (valueChanged)="applyFilter()">
         </app-input-tag>
 
         <!--<div class="form-row">
@@ -32,21 +33,20 @@
         </div>
 
         <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-          [options]="dcuTypes$ | async" [inline]="true" i18n-label>
+          [options]="dcuTypes$ | async" [inline]="true" i18n-label (change)="applyFilter()">
         </app-input-multiselect>
 
-        <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+        <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
+          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+          (selectedValueChanged)="applyFilter()">
         </app-select-input>
 
-        <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+        <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
+          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+          (valueChanged)="applyFilter()">
         </app-input-tag>
 
       </fieldset>
-      <div class="form-group" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-        <button type="submit" class="btn btn-block btn-light" (click)="applyButtonClicked()">
-          <span i18n>Apply Filters</span>
-        </button>
-      </div>
       <div class="form-group link">
         <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
           <span i18n>Clear Filters</span></a>

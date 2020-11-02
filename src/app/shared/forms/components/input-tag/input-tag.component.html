@@ -13,5 +13,6 @@
         [textField]="'value'"
         [valueField]="'id'"
         [valueNormalizer]="valueNormalizer"
+        (valueChange)="doValueChange($event)"
       ></kendo-multiselect>
 </div>

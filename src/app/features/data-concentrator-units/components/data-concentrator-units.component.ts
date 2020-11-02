@@ -677,4 +677,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   // *******************************************************************************
+
+  filterChanged() {
+    this.reloadGrid();
+    this.deselectAll();
+  }
 }
