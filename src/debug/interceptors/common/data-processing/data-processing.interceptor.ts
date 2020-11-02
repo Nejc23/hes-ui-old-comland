@@ -564,34 +564,6 @@ export class DataProcessingInterceptor {
   static interceptGetEvents(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const data: EventProfileDefinitionsForDevice[] = [
       {
-        deviceId: '4e43b249-bd4d-4b89-a32b-4d9002f3755f',
-        eventProfileDefinitions: [
-          {
-            eventProfileId: '5e1c3073-af91-4269-887a-3f6f9632dea6',
-            eventRegisterDefinition: [
-              {
-                registerId: '30a24f4a-d21f-4bce-9c98-e1d5a97d362c',
-                registerStatus: 'OK',
-                eventRegisterValues: [
-                  {
-                    value: 105.0,
-                    timestamp: '2020-03-17T01:00:00+00:00'
-                  },
-                  {
-                    value: 20.0,
-                    timestamp: '2020-03-17T03:00:00+00:00'
-                  },
-                  {
-                    value: 21.0,
-                    timestamp: '2020-03-17T03:35:00+00:00'
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
         deviceId: '6ef65085-49f7-4457-a94a-6a846bc8d921',
         eventProfileDefinitions: [
           {
@@ -612,6 +584,86 @@ export class DataProcessingInterceptor {
                   {
                     value: 20.0,
                     timestamp: '2020-03-17T03:00:00+00:00'
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        requestId: null,
+        deviceId: '6704c042-5457-4450-a691-359ab3c6b696',
+        eventProfileDefinitions: [
+          {
+            requestId: null,
+            eventProfileId: 'fd6241a3-9328-461d-8c41-e380b00ff71d',
+            eventRegisterDefinition: [
+              {
+                requestId: null,
+                registerId: 'c3c151ed-7596-4189-bf3a-186df3b85d89',
+                registerStatus: 'OK',
+                eventRegisterValues: [
+                  {
+                    requestId: null,
+                    value: 83,
+                    timestamp: '2020-10-29T08:46:17+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 84,
+                    timestamp: '2020-10-29T08:46:17+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 249,
+                    timestamp: '2020-10-29T09:36:17+01:00',
+                    description: 'test description 1'
+                  },
+                  {
+                    requestId: null,
+                    value: 250,
+                    timestamp: '2020-10-29T09:36:17+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 86,
+                    timestamp: '2020-10-29T09:46:17+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 87,
+                    timestamp: '2020-10-29T09:46:17+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 93,
+                    timestamp: '2020-10-30T00:00:02+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 94,
+                    timestamp: '2020-10-30T00:00:02+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 93,
+                    timestamp: '2020-10-31T00:00:02+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 94,
+                    timestamp: '2020-10-31T00:00:02+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 93,
+                    timestamp: '2020-11-01T00:00:02+01:00'
+                  },
+                  {
+                    requestId: null,
+                    value: 94,
+                    timestamp: '2020-11-01T00:00:02+01:00'
                   }
                 ]
               }

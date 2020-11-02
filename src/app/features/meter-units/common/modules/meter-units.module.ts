@@ -1,3 +1,4 @@
+import { RegistersPieChartComponent } from './../../registers/components/chart/registers-pie-chart.component';
 import { GridCellDateComponent } from './../../registers/components/grid/grid-custom-components/grid-cell-date.component';
 import { PipesModule } from './../../../../shared/pipes/pipes.module';
 import { environment } from 'src/environments/environment';
@@ -34,6 +35,7 @@ import { RegistersChartComponent } from '../../registers/components/chart/regist
 import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
 import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
 import { GridCellCiiStateComponent } from '../../types/components/grid-custom-components/grid-cell-cii-state.component';
+import { RegistersColumnChartComponent } from '../../registers/components/chart/registers-column-chart.component';
 
 @NgModule({
   entryComponents: [],
@@ -62,6 +64,8 @@ import { GridCellCiiStateComponent } from '../../types/components/grid-custom-co
     MeterUnitFilterComponent,
     MeterUnitRegistersComponent,
     RegistersChartComponent,
+    RegistersPieChartComponent,
+    RegistersColumnChartComponent,
     RegistersGridComponent,
     RegistersStatisticsComponent,
     GridCellDateComponent,
