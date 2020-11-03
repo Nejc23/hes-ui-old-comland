@@ -23,13 +23,11 @@
             <div class="dropdown-submenu">
                   <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>FW upgrade</span></a>
                 <div class="dropdown-menu">
-                  <div class="dropdown-item">
-                    <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" href="javascript:void(0)"
-                      (click)="onUpgrade()"><span i18n>Upload image</span></a>
+                  <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" (click)="onUpgrade()">
+                    <a href="javascript:void(0)" ><span i18n>Upload image</span></a>
                   </div>
-                  <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade"  href="javascript:void(0)"
-                      (click)="onActivateUpgrade()"><span i18n>Activate image</span></a>
+                  <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUUpgrade" (click)="onActivateUpgrade()">
+                  <a href="javascript:void(0)"><span i18n>Activate image</span></a>
                   </div>
                 </div>
             </div>
@@ -40,21 +38,17 @@
             <div class="dropdown-submenu">
               <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Breaker</span></a>
               <div class="dropdown-menu">
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" href="javascript:void(0)"
-                    (click)="onConnect()"><span i18n>Connect</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUConnect" (click)="onConnect()">
+                  <a href="javascript:void(0)"><span i18n>Connect</span></a>
                 </div>
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" href="javascript:void(0)"
-                    (click)="onDisconnect()"><span i18n>Disconnect</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUDisconnect" (click)="onDisconnect()">
+                  <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
                 </div>
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" href="javascript:void(0)"
-                    (click)="onDisconnectorStatus()"><span i18n>State</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" (click)="onDisconnectorStatus()">
+                  <a href="javascript:void(0)"><span i18n>State</span></a>
                 </div>
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus"href="javascript:void(0)"
-                    (click)="onDisconnectorMode()"><span i18n>Mode</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUBreakerStatus" (click)="onDisconnectorMode()">
+                  <a href="javascript:void(0)"><span i18n>Mode</span></a>
                 </div>
               </div>
             </div>
@@ -64,23 +58,40 @@
             <div class="dropdown-submenu">
               <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>CII</span></a>
               <div class="dropdown-menu">
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiActivate" href="javascript:void(0)"
-                    (click)="onCiiActivate()"><span i18n>Activate</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiActivate" (click)="onCiiActivate()">
+                  <a href="javascript:void(0)"><span i18n>Activate</span></a>
                 </div>
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiDeactivate" href="javascript:void(0)"
-                    (click)="onCiiDeactivate()"><span i18n>Deactivate</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiDeactivate" (click)="onCiiDeactivate()">
+                  <a href="javascript:void(0)"><span i18n>Deactivate</span></a>
                 </div>
-                <div class="dropdown-item">
-                  <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiState" href="javascript:void(0)"
-                    (click)="onCiiState()"><span i18n>State</span></a>
+                <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUCiiState" (click)="onCiiState()">
+                  <a href="javascript:void(0)"><span i18n>State</span></a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="dropdown-divider"></div>
+          <div class="dropdown-item">
+            <div class="dropdown-submenu">
+              <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Relays</span></a>
+            <div class="dropdown-menu">
+              <div class="dropdown-item" (click)="onRelayConnect()">
+                <a href="javascript:void(0)"><span i18n>Connect</span></a>
+              </div>
+              <div class="dropdown-item" (click)="onRelayDisconnect()">
+                <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
+              </div>
+              <div class="dropdown-item" (click)="onRelayStatus()">
+                <a href="javascript:void(0)"><span i18n>State</span></a>
+              </div>
+              <div class="dropdown-item" (click)="onRelayMode()">
+                <a href="javascript:void(0)" ><span i18n>Mode</span></a>
+              </div>
+            </div>
+          </div>
+         </div>
+
+         <div class="dropdown-divider"></div>
 
           <div>
             <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUTOU"  href="javascript:void(0)" class="dropdown-item custom-hover-display"

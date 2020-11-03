@@ -71,6 +71,26 @@
         </div>
       </div>
 
+      <div class="dropdown-item">
+        <div class="dropdown-submenu pull-left disabled">
+          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Relays</span></a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item" (click)="onRelayConnect()">
+            <a href="javascript:void(0)"><span i18n>Connect</span></a>
+          </div>
+          <div class="dropdown-item" (click)="onRelayDisconnect()">
+            <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
+          </div>
+          <div class="dropdown-item" (click)="onRelayStatus()">
+            <a href="javascript:void(0)"><span i18n>State</span></a>
+          </div>
+          <div class="dropdown-item" (click)="onRelayMode()">
+            <a href="javascript:void(0)" ><span i18n>Mode</span></a>
+          </div>
+        </div>
+      </div>
+     </div>
+
       <div class="dropdown-divider"></div>
       <div>
         <a class="dropdown-item" href="javascript:void(0);" (click)="onTou()"><span i18n>TOU Upload</span></a>
