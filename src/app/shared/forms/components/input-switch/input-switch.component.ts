@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import * as _ from 'lodash';
@@ -14,6 +14,7 @@ export class InputSwitchComponent implements OnInit {
 
   // optional
   @Input() label: string;
+  @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
 
   controlId: string;
 
@@ -47,5 +48,9 @@ export class InputSwitchComponent implements OnInit {
       this.form.get(this.property).setValue(!this.form.get(this.property).value);
     }
     this.valueTmp = this.form.get(this.property).value;
+  }
+
+  onValueChanged(value: any) {
+    this.valueChanged.emit(value);
   }
 }

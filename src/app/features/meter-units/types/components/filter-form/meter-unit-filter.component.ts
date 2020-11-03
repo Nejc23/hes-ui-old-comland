@@ -10,6 +10,7 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-meter-unit-filter',
@@ -67,6 +68,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
       // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
     });
+
+    this.applyFilter = _.debounce(this.applyFilter, 2000);
   }
 
   // called on init
@@ -213,7 +216,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.filterChange.emit();
   }
 
-  applyButtonClicked() {
+  applyFilter() {
     if (!this.form.valid) {
       return;
     }
