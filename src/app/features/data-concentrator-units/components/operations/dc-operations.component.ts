@@ -4,7 +4,7 @@ import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
 import { DcOperationsService } from '../../services/dc-operations.service';
 
 @Component({
-  selector: 'app-dc-opertions',
+  selector: 'app-dc-operations',
   templateUrl: './dc-operations.component.html'
 })
 export class DcOperationsComponent implements OnInit {
