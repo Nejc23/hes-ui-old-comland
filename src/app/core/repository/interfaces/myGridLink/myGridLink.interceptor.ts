@@ -31,7 +31,7 @@ export interface ResponseConnectDisconnectData {
   search?: GridSearchParams[];
   excludeIds?: string[];
 }
-
+/*
 // TOU
 export interface RequestTOUData {
   timeOfUseId: string;
@@ -49,7 +49,7 @@ export interface ResponseTOUData {
   search?: GridSearchParams[];
   excludeIds?: string[];
 }
-
+*/
 export interface OnDemandRequestData {
   deviceId: string;
   data: [

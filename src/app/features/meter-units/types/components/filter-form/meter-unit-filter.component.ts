@@ -32,6 +32,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   ciiState$: Observable<Codelist<number>[]>;
   firmware$: Observable<Codelist<number>[]>;
   operatorsList$ = this.codelistHelperService.operationsList();
+  showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
 
   currentStatuses: Codelist<number>[];
   currentTypes: Codelist<number>[];
@@ -114,6 +115,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           firmwareFilter: this.sessionFilter.firmwareFilter,
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
           ciiStateFilter: this.sessionFilter.ciiStateFilter,
+          showOptionFilter: this.sessionFilter.showOptionFilter,
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
@@ -144,9 +146,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ],
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
         ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
-        ['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
+        /*['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
         ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
-        ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false]
+        ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
+        ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []]
       },
       { validator: rangeFilterValidator }
     );
@@ -191,7 +194,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   get ciiStateProperty() {
     return 'ciiState';
   }
-
+  /*
   get showMeterUnitsWithoutTemplateProperty() {
     return 'showMeterUnitsWithoutTemplate';
   }
@@ -202,6 +205,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   get showOnlyImageReadyForActivationProperty() {
     return 'showOnlyImageReadyForActivation';
+  }*/
+
+  get showOptionFilterProperty() {
+    return 'showOptionFilter';
   }
 
   refresh() {}
@@ -220,7 +227,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     if (!this.form.valid) {
       return;
     }
-
     const currentFilter: MeterUnitsLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
@@ -246,9 +252,18 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       ciiStateFilter: this.form.get(this.ciiStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
-      showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
-      showMeterUnitsWithoutTemplateFilter: this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
-      showOnlyImageReadyForActivationFilter: this.form.get(this.showOnlyImageReadyForActivationProperty).value,
+      showOptionFilter: this.form.get(this.showOptionFilterProperty).value,
+      showOnlyMeterUnitsWithMBusInfoFilter: null, // this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
+      showMeterUnitsWithoutTemplateFilter:
+        this.form.get(this.showOptionFilterProperty).value.filter(x => x.id === 1).length > 0
+          ? false
+          : this.form.get(this.showOptionFilterProperty).value.filter(x => x.id === 2).length > 0
+          ? true
+          : null,
+      // this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
+      showOnlyImageReadyForActivationFilter:
+        this.form.get(this.showOptionFilterProperty).value.filter(x => x.id === 3).length > 0 ? true : false,
+      // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);

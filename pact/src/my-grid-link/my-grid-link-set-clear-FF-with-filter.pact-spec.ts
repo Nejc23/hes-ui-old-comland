@@ -44,7 +44,8 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true
+      showChildInfoMBus: true,
+      showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
     excludeIds: ['excluded']
@@ -70,7 +71,8 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true
+      showChildInfoMBus: true,
+      showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
     excludeIds: ['excluded']
@@ -109,11 +111,7 @@ describe('Pact consumer test', () => {
     it('should make request for clear FF with filter in request - myGrid.Link', done => {
       service.clearFF(requestBody).subscribe(
         (res: ResponseClearFF) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
-          expect(res.filter).toEqual(responseBody.filter);
-          expect(res.search).toEqual(responseBody.search);
-          expect(res.excludeIds).toEqual(responseBody.excludeIds);
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {

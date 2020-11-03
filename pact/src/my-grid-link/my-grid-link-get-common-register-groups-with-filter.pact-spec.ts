@@ -47,7 +47,8 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true
+      showChildInfoMBus: true,
+      showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
     search: [{ colId: 'all', type: 'like', value: 'name' }],
     excludeIds: ['cca9906e-929b-4104-ab54-f866df-79b632'],

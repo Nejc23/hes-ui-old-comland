@@ -46,9 +46,10 @@ export class MeterUnitsTypeStaticTextService {
     firmware: boolean,
     disconnectorState: boolean,
     ciiState: boolean,
-    showChildMBus: boolean,
-    showWithoutTemplate: boolean,
-    showOnlyReadyForActivation: boolean
+    showOptionFilter: boolean
+    // showChildMBus: boolean,
+    // showWithoutTemplate: boolean,
+    // showOnlyReadyForActivation: boolean
   ): FiltersInfo {
     const result: FiltersInfo = {
       isSet: false,
@@ -59,21 +60,9 @@ export class MeterUnitsTypeStaticTextService {
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
-        status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showWithoutTemplate
-          ? ' · '
-          : '';
+        status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ' · ' : '';
       result.text = filterName + additionalString;
-    } else if (
-      status ||
-      vendor ||
-      tag ||
-      readStatuses ||
-      firmware ||
-      disconnectorState ||
-      ciiState ||
-      showChildMBus ||
-      showWithoutTemplate
-    ) {
+    } else if (status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter) {
       result.text = '';
     }
 
@@ -86,70 +75,55 @@ export class MeterUnitsTypeStaticTextService {
       firmware ||
       disconnectorState ||
       ciiState ||
-      showChildMBus ||
-      showWithoutTemplate
+      showOptionFilter
     ) {
       result.text += $localize`Filtered by: `;
     }
 
     if (status) {
-      additionalString =
-        vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
       result.text += $localize`status` + additionalString;
       result.count++;
     }
 
     if (vendor) {
-      additionalString =
-        tag || readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
       result.text += $localize`vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
-      additionalString = readStatuses || firmware || disconnectorState || ciiState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
       result.text += $localize`tag` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
-      additionalString = firmware || disconnectorState || ciiState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
       result.text += $localize`read status` + additionalString;
       result.count++;
     }
 
     if (firmware) {
-      additionalString = disconnectorState || ciiState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = disconnectorState || ciiState || showOptionFilter ? ', ' : '';
       result.text += $localize`firmware` + additionalString;
       result.count++;
     }
 
     if (disconnectorState) {
-      additionalString = ciiState || showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = ciiState || showOptionFilter ? ', ' : '';
       result.text += $localize`disconnector state` + additionalString;
       result.count++;
     }
 
     if (ciiState) {
-      additionalString = showChildMBus || showWithoutTemplate ? ', ' : '';
+      additionalString = showOptionFilter ? ', ' : '';
       result.text += $localize`CII state` + additionalString;
       result.count++;
     }
 
-    if (showChildMBus) {
-      additionalString = showWithoutTemplate ? ', ' : '';
-      result.text += $localize`show child MBus` + additionalString;
-      result.count++;
-    }
-
-    if (showWithoutTemplate) {
-      additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result.text += $localize`show without template` + additionalString;
-      result.count++;
-    }
-
-    if (showOnlyReadyForActivation) {
-      result.text += $localize`show only ready for activation`;
+    if (showOptionFilter) {
+      result.text += $localize`show option`;
       result.count++;
     }
 

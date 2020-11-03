@@ -86,7 +86,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       },
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' }
+      vendor: { id: 0, value: '' },
+      showOptionFilter: null
     }
   };
 
@@ -573,7 +574,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         },
         types: [],
         vendor: { id: 0, value: '' },
-        tags: []
+        tags: [],
+        showOptionFilter: null
       }
     };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {

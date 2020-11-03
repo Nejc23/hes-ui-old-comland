@@ -41,6 +41,7 @@ describe('Pact consumer test', () => {
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
     ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
+    showOptionFilter: [{ id: 3, value: 'Image ready for activation' }],
     showOnlyMeterUnitsWithMBusInfoFilter: false,
     showMeterUnitsWithoutTemplateFilter: false,
     showOnlyImageReadyForActivationFilter: false,
@@ -62,6 +63,7 @@ describe('Pact consumer test', () => {
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
     ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
+    showOptionFilter: [{ id: 3, value: 'Image ready for activation' }],
     showOnlyMeterUnitsWithMBusInfoFilter: false,
     showMeterUnitsWithoutTemplateFilter: false,
     showOnlyImageReadyForActivationFilter: true,
@@ -102,18 +104,8 @@ describe('Pact consumer test', () => {
     it('should make request for updating meter unit filter by type', done => {
       service.saveMeterUnitsLayout(meterUnitTypeId, id, requestBody).subscribe(
         (res: MeterUnitsLayout) => {
-          expect(res.id).toEqual(responseBody.id);
+          expect(res).toEqual(responseBody);
           expect(res.id).toBeGreaterThan(0);
-          expect(res.name).toEqual(responseBody.name);
-          expect(res.statusesFilter).toEqual(responseBody.statusesFilter);
-          expect(res.tagsFilter).toEqual(responseBody.tagsFilter);
-          expect(res.vendorFilter).toEqual(responseBody.vendorFilter);
-          expect(res.readStatusFilter.operation).toEqual(responseBody.readStatusFilter.operation);
-          expect(res.readStatusFilter.value1).toEqual(responseBody.readStatusFilter.value1);
-          expect(res.readStatusFilter.value2).toEqual(responseBody.readStatusFilter.value2);
-          expect(res.firmwareFilter).toEqual(responseBody.firmwareFilter);
-          expect(res.breakerStateFilter).toEqual(responseBody.breakerStateFilter);
-          expect(res.showOnlyMeterUnitsWithMBusInfoFilter).toEqual(responseBody.showOnlyMeterUnitsWithMBusInfoFilter);
           done();
         },
         err => {

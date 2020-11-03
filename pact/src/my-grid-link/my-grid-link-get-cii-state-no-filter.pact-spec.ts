@@ -2,7 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestFilterParams, ResponseConnectDisconnectData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { IActionRequestParams, IActionResponseParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -25,11 +25,31 @@ describe('Pact consumer test', () => {
     service = getTestBed().inject(MyGridLinkService);
   });
 
-  const requestBody: RequestFilterParams = {
+  const requestBody: IActionRequestParams = {
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: '',
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
-  const responseBody: ResponseConnectDisconnectData = {
+  const responseBody: IActionResponseParams = {
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: '',
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
@@ -66,9 +86,8 @@ describe('Pact consumer test', () => {
 
     it('should make request for getting cii state with ids in request - myGrid.Link', done => {
       service.getCiiState(requestBody).subscribe(
-        (res: ResponseConnectDisconnectData) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
+        (res: IActionResponseParams) => {
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {

@@ -6,18 +6,12 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import {
   IdentityToken,
   LastStatus,
-  ResponseConnectDisconnectData,
-  RequestTOUData,
-  ResponseTOUData,
   OnDemandRequestData,
   RequestSetMonitor,
-  RequestLimiterGetRegisters,
   RequestSetLimiter,
   ResponseSetMonitor,
   ResponseSetLimiter,
   RequestFilterParams,
-  RequestSetBreakerMode,
-  ResponseSetBreakerMode,
   ResponseClearFF,
   RequestCommonRegisterGroup,
   ResponseCommonRegisterGroup
@@ -40,12 +34,16 @@ import {
   onDemandClearFF,
   getCommonRegisterGroups
 } from '../../consts/my-grid-link.const';
-import { MeterUnitsFwUpgrade, DcResponse } from '../../interfaces/meter-units/meter-units-fw-upgrade.interface';
 import {
-  MeterUnitsActivateUpgradeRequest,
-  MeterUnitsActivateUpgradeResponse
-} from '../../interfaces/meter-units/meter-units-acctivate-upgrade.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+  IActionRequestFwUpgradeData,
+  IActionRequestParams,
+  IActionRequestSetDisconnectorMode,
+  IActionRequestTOUData,
+  IActionResponseFwUpgradeData,
+  IActionResponseParams,
+  IActionResponseSetDisconnectorMode,
+  IActionResponseTOUData
+} from '../../interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -72,66 +70,75 @@ export class MyGridLinkService {
   }
 
   // connect device
-  postMyGridConnectDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+  postMyGridConnectDevice(params: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.postMyGridConnectDeviceRequest(params));
   }
 
-  postMyGridConnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
+  postMyGridConnectDeviceRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandConnect}`, params);
   }
 
   // disconnect device
-  postMyGridDisconnectDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+  postMyGridDisconnectDevice(params: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.postMyGridDisconnectDeviceRequest(params));
   }
 
-  postMyGridDisconnectDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
+  postMyGridDisconnectDeviceRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnect}`, params);
   }
 
   // get cii status device
-  getCiiState(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+  getCiiState(params: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.getCiiStateRequest(params));
   }
 
-  getCiiStateRequest(params: RequestFilterParams): HttpRequest<any> {
+  getCiiStateRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandCiiState}`, params);
   }
 
   // cii activate device
-  postMyGridCiiActivateDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+  postMyGridCiiActivateDevice(params: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.postMyGridCiiActivateDeviceRequest(params));
   }
 
-  postMyGridCiiActivateDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
+  postMyGridCiiActivateDeviceRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandCiiActivate}`, params);
   }
 
   // cii deactivate device
-  postMyGridCiiDeactivateDevice(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+  postMyGridCiiDeactivateDevice(params: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.postMyGridCiiDeactivateDeviceRequest(params));
   }
 
-  postMyGridCiiDeactivateDeviceRequest(params: RequestFilterParams): HttpRequest<any> {
+  postMyGridCiiDeactivateDeviceRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandCiiDeactivate}`, params);
   }
 
   // trigger TOU
-  postMyGridTOUDevice(params: RequestTOUData): Observable<ResponseTOUData> {
+  postMyGridTOUDevice(params: IActionRequestTOUData): Observable<IActionResponseTOUData> {
     return this.repository.makeRequest(this.postMyGridTOUDeviceRequest(params));
   }
 
-  postMyGridTOUDeviceRequest(params: RequestTOUData): HttpRequest<any> {
+  postMyGridTOUDeviceRequest(params: IActionRequestTOUData): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerSetTimeOfUse}`, params);
   }
 
   // get disconnector state
-  getDisconnectorState(params: RequestFilterParams): Observable<ResponseConnectDisconnectData> {
+  getDisconnectorState(params: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.getDisconnectorStateRequest(params));
   }
 
-  getDisconnectorStateRequest(params: RequestFilterParams): HttpRequest<any> {
+  getDisconnectorStateRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandDisconnectorState}`, params);
+  }
+
+  // trigger set disconnector mode
+  setDisconnectorMode(payload: IActionRequestSetDisconnectorMode): Observable<IActionResponseSetDisconnectorMode> {
+    return this.repository.makeRequest(this.setDisconnectorModeRequest(payload));
+  }
+
+  setDisconnectorModeRequest(payload: IActionRequestSetDisconnectorMode): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetBreakerMode}`, payload);
   }
 
   // get data returned on-demand requests
@@ -143,7 +150,7 @@ export class MyGridLinkService {
     return new HttpRequest('GET', `${enumMyGridLink.dataProcessing}/${requestId}${onDemandData}`);
   }
 
-  // trigger TOU
+  // trigger templte import
   postMyGridTemplatesImport(params: string): Observable<any> {
     return this.repository.makeRequest(this.postMyGridTemplatesImportRequest(params));
   }
@@ -152,20 +159,21 @@ export class MyGridLinkService {
     return new HttpRequest('POST', `${enumMyGridLink.templating}${importTemplates}`, params);
   }
 
-  // trigger FW upgrade
-  createFwUpgrade(payload: MeterUnitsFwUpgrade): Observable<DcResponse> {
+  // trigger upload FW upgrade
+  createFwUpgrade(payload: IActionRequestFwUpgradeData): Observable<IActionResponseFwUpgradeData> {
     return this.repository.makeRequest(this.createFwUpgradeRequest(payload));
   }
 
-  createFwUpgradeRequest(payload: MeterUnitsFwUpgrade): HttpRequest<any> {
+  createFwUpgradeRequest(payload: IActionRequestFwUpgradeData): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgrade}`, payload);
   }
 
-  activateDeviceUpgrade(param: MeterUnitsActivateUpgradeRequest): Observable<MeterUnitsActivateUpgradeResponse> {
+  // trigger activate FW upgrade
+  activateDeviceUpgrade(param: IActionRequestParams): Observable<IActionResponseParams> {
     return this.repository.makeRequest(this.activateDeviceUpgradeRequest(param));
   }
 
-  activateDeviceUpgradeRequest(param: MeterUnitsActivateUpgradeRequest): HttpRequest<any> {
+  activateDeviceUpgradeRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgradeActivate}`, param);
   }
 
@@ -194,15 +202,6 @@ export class MyGridLinkService {
 
   setLimiterRequest(payload: RequestSetLimiter): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetLimiter}`, payload);
-  }
-
-  // trigger set breaker mode
-  setBreakerMode(payload: RequestSetBreakerMode): Observable<ResponseSetBreakerMode> {
-    return this.repository.makeRequest(this.setBreakerModeRequest(payload));
-  }
-
-  setBreakerModeRequest(payload: RequestSetBreakerMode): HttpRequest<any> {
-    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandSetBreakerMode}`, payload);
   }
 
   // trigger set breaker mode

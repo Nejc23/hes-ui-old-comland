@@ -3,7 +3,8 @@ import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { fwUpgrade, meterUnits, fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
 import * as _ from 'lodash';
-import { FileGuid, DcResponse } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
+import { FileGuid } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
+import { IActionResponseFwUpgradeData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Injectable()
 export class MeterUnitsFwUpgradeInterceptor {
@@ -44,14 +45,18 @@ export class MeterUnitsFwUpgradeInterceptor {
   }
 
   static interceptMeterUniFwUpgradePost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const body: DcResponse = {
+    const body: IActionResponseFwUpgradeData = {
       fileId: '32-323-4fgf-ew-434',
       imageIdent: 'identifyer',
       imageSize: 5442,
       signature: 'signature',
       overrideFillLastBlock: true,
       deviceIds: ['kfkff-werre-rerrr', 'froo4344-434443-4344-4344'],
-      requestId: '3090f96a-e341-437c-92bb-2e10d5a8062a'
+      requestId: '3090f96a-e341-437c-92bb-2e10d5a8062a',
+      pageSize: 1,
+      pageNumber: 1,
+      sort: [],
+      textSearch: ''
     };
     return of(
       new HttpResponse({

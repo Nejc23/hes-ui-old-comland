@@ -7,6 +7,10 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { RequestSetBreakerMode } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import {
+  IActionRequestParams,
+  IActionRequestSetDisconnectorMode
+} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-plc-meter-breaker-mode',
@@ -14,11 +18,8 @@ import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/inte
 })
 export class PlcMeterBreakerModeComponent implements OnInit {
   form: FormGroup;
-  deviceIdsParam = [];
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
-  excludeIdsParam?: string[];
   disconnectorModes: Codelist<number>[];
+  actionRequest: IActionRequestParams;
   errMsg = '';
 
   constructor(
@@ -48,13 +49,16 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     ];
   }
 
-  fillData(): RequestSetBreakerMode {
-    const formData: RequestSetBreakerMode = {
+  fillData(): IActionRequestSetDisconnectorMode {
+    const formData: IActionRequestSetDisconnectorMode = {
       breakerMode: this.form.get(this.disconnectorModeProperty).value ? this.form.get(this.disconnectorModeProperty).value.id : null,
-      deviceIds: this.deviceIdsParam,
-      filter: this.filterParam,
-      search: this.searchParam,
-      excludeIds: this.excludeIdsParam
+      pageSize: this.actionRequest.pageSize,
+      pageNumber: this.actionRequest.pageNumber,
+      sort: this.actionRequest.sort,
+      textSearch: this.actionRequest.textSearch,
+      filter: this.actionRequest.filter,
+      deviceIds: this.actionRequest.deviceIds,
+      excludeIds: this.actionRequest.excludeIds
     };
 
     return formData;
@@ -73,7 +77,8 @@ export class PlcMeterBreakerModeComponent implements OnInit {
   onSet() {
     this.errMsg = '';
     const values = this.fillData();
-    const request = this.myGridService.setBreakerMode(values);
+
+    const request = this.myGridService.setDisconnectorMode(values);
     const successMessage = $localize`Meter Units set Breaker mode was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
