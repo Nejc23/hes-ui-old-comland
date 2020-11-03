@@ -1,0 +1,16 @@
+<kendo-chart>
+  <kendo-chart-legend position="right" align="center">
+    <kendo-chart-legend-item [visual]="labelsVisual"></kendo-chart-legend-item>
+  </kendo-chart-legend>
+  <kendo-chart-series>
+    <kendo-chart-series-item
+      type="pie"
+      [data]="eventsById"
+      field="value"
+      categoryField="category"
+      colorField="color"
+      [labels]="{ visible: true, content: labelContent }"
+      >
+    </kendo-chart-series-item>
+  </kendo-chart-series>
+</kendo-chart>

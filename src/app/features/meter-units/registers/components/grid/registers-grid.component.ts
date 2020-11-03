@@ -10,7 +10,7 @@ import { configAgGrid } from 'src/environments/config';
   templateUrl: 'registers-grid.component.html',
   selector: 'app-registers-grid'
 })
-export class RegistersGridComponent implements OnInit {
+export class RegistersGridComponent implements OnInit, OnChanges {
   @Input() rowData: any[] = [];
 
   public columnDefs = [];
@@ -22,11 +22,11 @@ export class RegistersGridComponent implements OnInit {
 
   public localeText;
 
+  @Input() categorization: string;
+
   constructor(private registersGridService: RegistersGridService, private sidebarToggleService: SidebarToggleService) {}
 
   ngOnInit() {
-    this.columnDefs = this.registersGridService.setGridColumns();
-
     this.localeText = {
       // for side panel
       columns: $localize`Columns`,
@@ -62,5 +62,9 @@ export class RegistersGridComponent implements OnInit {
 
   onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
+  }
+
+  ngOnChanges() {
+    this.columnDefs = this.registersGridService.setGridColumnsForCategorization(this.categorization);
   }
 }

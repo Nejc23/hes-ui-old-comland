@@ -7,6 +7,13 @@ import { GridCellDateComponent } from '../../components/grid/grid-custom-compone
 export class RegistersGridService {
   constructor() {}
 
+  setGridColumnsForCategorization(categorization: string) {
+    if (categorization === 'EVENT') {
+      return this.setGridColumnsEvents();
+    }
+    return this.setGridColumns();
+  }
+
   setGridColumns() {
     return [
       {
@@ -30,6 +37,33 @@ export class RegistersGridService {
         sortable: true,
         headerName: $localize`Status`,
         headerTooltip: $localize`Status`
+      }
+    ];
+  }
+
+  setGridColumnsEvents() {
+    return [
+      {
+        field: 'timestamp',
+        suppressMenu: true,
+        sortable: true,
+        headerName: $localize`Timestamp`,
+        headerTooltip: $localize`Timestamp`,
+        cellRendererFramework: GridCellDateComponent
+      },
+      {
+        field: 'value',
+        suppressMenu: true,
+        sortable: true,
+        headerName: $localize`Id`,
+        headerTooltip: $localize`Id`
+      },
+      {
+        field: 'description',
+        suppressMenu: true,
+        sortable: true,
+        headerName: $localize`Description`,
+        headerTooltip: $localize`Description`
       }
     ];
   }

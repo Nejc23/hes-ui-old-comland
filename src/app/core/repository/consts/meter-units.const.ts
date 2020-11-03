@@ -21,7 +21,7 @@ export const touConfigImport = `/api/time-of-use/import-time-of-use`;
 export const meterUnitsForJob = `${basePath}/meter-units-for-job`;
 
 export const removeMeterUnitsFromJob = `${basePath}/remove-meter-units-from-job`;
-export const registers = `${basePath}/registers`;
+export const registers = `${basePath}/registers?=data`;
 export const device = `${basePath}/device`;
 export const updateMeterUnit = `${basePath}/device`;
 // export const importDeviceKeys = `${basePath}/crypto/import`;
