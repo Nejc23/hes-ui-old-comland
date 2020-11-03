@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, HostListener } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Observable } from 'rxjs';
@@ -18,6 +18,7 @@ export class InputTagComponent implements OnInit {
   @Input() autocompleteItemsAsObjects: any;
   @Input() disabled = false;
   @Input() allowCustomValues = false;
+  @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
 
   controlId: string;
   nextId = 0; // for adding more new values we need to store max id
@@ -76,4 +77,8 @@ export class InputTagComponent implements OnInit {
         }
       })
     );
+
+  public doValueChange(value: any) {
+    this.valueChanged.emit(value);
+  }
 }
