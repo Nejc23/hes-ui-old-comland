@@ -22,7 +22,7 @@
           <app-input-tag label="Firmware" [allowCustomValues]="true" [property]="firmwareProperty" [form]="form" [autocompleteItemsAsObjects]="firmware$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-input-tag>
 
-          <app-input-switch label="Show only Meter units with information of child (MBus)" [form]="form" [property]="showOnlyMeterUnitsWithMBusInfoProperty" i18n-label></app-input-switch>
+          <!--<app-input-switch label="Show only Meter units with information of child (MBus)" [form]="form" [property]="showOnlyMeterUnitsWithMBusInfoProperty" i18n-label></app-input-switch>-->
 
           <app-input-tag label="Disconnector state" [property]="breakerStateProperty" [form]="form" [autocompleteItemsAsObjects]="disconnectorState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-input-tag>
@@ -30,11 +30,15 @@
           <app-input-tag label="CII state" [property]="ciiStateProperty" [form]="form" [autocompleteItemsAsObjects]="ciiState$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-input-tag>
 
+          <app-input-tag label="Show" [property]="showOptionFilterProperty" [form]="form"
+            [autocompleteItemsAsObjects]="showOptionFilter$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+          </app-input-tag>
+
           <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="meterUnitTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
           </app-input-tag>
 
-          <app-input-switch label="Show Meter Units without template" [form]="form" [property]="showMeterUnitsWithoutTemplateProperty" i18n-label></app-input-switch>
-          <app-input-switch label="Show only image ready for activation" [form]="form" [property]="showOnlyImageReadyForActivationProperty" i18n-label></app-input-switch>
+          <!--<app-input-switch label="Show Meter Units without template" [form]="form" [property]="showMeterUnitsWithoutTemplateProperty" i18n-label></app-input-switch>
+          <app-input-switch label="Show only image ready for activation" [form]="form" [property]="showOnlyImageReadyForActivationProperty" i18n-label></app-input-switch>-->
 
         </fieldset>
 

@@ -111,6 +111,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
           firmwareFilter: this.sessionFilter.firmwareFilter,
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
           ciiStateFilter: this.sessionFilter.ciiStateFilter,
+          showOptionFilter: this.sessionFilter.showOptionFilter,
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
@@ -242,6 +243,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
       ciiStateFilter: this.form.get(this.ciiStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
       vendorFilter: this.form.get(this.vendorProperty).value,
+      showOptionFilter: this.form.get(this.vendorProperty).value, // TODO dd
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
       showMeterUnitsWithoutTemplateFilter: this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
       showOnlyImageReadyForActivationFilter: this.form.get(this.showOnlyImageReadyForActivationProperty).value,

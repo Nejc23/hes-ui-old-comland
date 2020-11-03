@@ -29,6 +29,7 @@ export interface GridFilterParams {
   showChildInfoMBus?: boolean;
   showWithoutTemplate?: boolean;
   readyForActivation?: boolean;
+  showOptionFilter: Codelist<number>[];
 }
 
 export interface GridSortParams {

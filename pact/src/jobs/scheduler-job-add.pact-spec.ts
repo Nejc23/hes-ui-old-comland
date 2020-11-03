@@ -84,7 +84,8 @@ describe('Pact consumer test', () => {
             value: ''
           }
         ],
-        showChildInfoMBus: false
+        showChildInfoMBus: false,
+        showOptionFilter: null
       }
     }
   };
@@ -147,7 +148,8 @@ describe('Pact consumer test', () => {
             value: ''
           }
         ],
-        showChildInfoMBus: false
+        showChildInfoMBus: false,
+        showOptionFilter: null
       }
     }
   };

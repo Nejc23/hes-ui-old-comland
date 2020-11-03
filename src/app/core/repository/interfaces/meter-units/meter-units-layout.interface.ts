@@ -11,8 +11,9 @@ export interface MeterUnitsLayout {
   firmwareFilter: Codelist<number>[];
   breakerStateFilter: Codelist<number>[];
   ciiStateFilter: Codelist<number>[];
+  showOptionFilter: Codelist<number>[];
   showOnlyMeterUnitsWithMBusInfoFilter: boolean;
-  showMeterUnitsWithoutTemplateFilter: boolean;
-  showOnlyImageReadyForActivationFilter: boolean;
+  showMeterUnitsWithoutTemplateFilter?: boolean;
+  showOnlyImageReadyForActivationFilter?: boolean;
   gridLayout: string;
 }

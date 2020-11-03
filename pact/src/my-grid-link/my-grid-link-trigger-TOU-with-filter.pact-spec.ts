@@ -2,7 +2,7 @@ import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { ResponseTOUData, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { IActionRequestTOUData, IActionResponseTOUData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -25,53 +25,67 @@ describe('Pact consumer test', () => {
     service = getTestBed().inject(MyGridLinkService);
   });
 
-  const requestBody: RequestTOUData = {
-    deviceIds: null,
+  const requestBody: IActionRequestTOUData = {
     timeOfUseId: '717D9FD6-478E-4C72-8A3A-0722D85A07B1',
-    filter: {
-      statuses: [{ id: 1, value: 'active' }],
-      readStatus: {
-        operation: { id: 'Greater Than', value: 'Greater Than' },
-        value1: 12,
-        value2: null
+    filter: [
+      {
+        propName: 'Vendor',
+        propValue: '2',
+        filterOperation: 'Equal'
       },
-      vendor: { id: 2, value: 'Vendor 2' },
-      tags: [
-        { id: 1, value: 'tag1' },
-        { id: 2, value: 'tag2' }
-      ],
-      firmware: [{ id: 1, value: '12.3.1' }],
-      disconnectorState: [
-        { id: 1, value: 'breaker 1' },
-        { id: 5, value: 'breaker 5' }
-      ],
-      showChildInfoMBus: true
-    }
+      {
+        propName: 'Status',
+        propValue: '2',
+        filterOperation: 'Equal'
+      },
+      {
+        propName: 'Firmware',
+        propValue: '2',
+        filterOperation: 'Contains'
+      }
+    ],
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: '1234'
   };
 
-  const responseBody: ResponseTOUData = {
+  const responseBody: IActionResponseTOUData = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
-    deviceIds: null,
     timeOfUseId: '717D9FD6-478E-4C72-8A3A-0722D85A07B1',
-    filter: {
-      statuses: [{ id: 1, value: 'active' }],
-      readStatus: {
-        operation: { id: 'Greater Than', value: 'Greater Than' },
-        value1: 12,
-        value2: null
+    filter: [
+      {
+        propName: 'Vendor',
+        propValue: '2',
+        filterOperation: 'Equal'
       },
-      vendor: { id: 2, value: 'Vendor 2' },
-      tags: [
-        { id: 1, value: 'tag1' },
-        { id: 2, value: 'tag2' }
-      ],
-      firmware: [{ id: 1, value: '12.3.1' }],
-      disconnectorState: [
-        { id: 1, value: 'breaker 1' },
-        { id: 5, value: 'breaker 5' }
-      ],
-      showChildInfoMBus: true
-    }
+      {
+        propName: 'Status',
+        propValue: '2',
+        filterOperation: 'Equal'
+      },
+      {
+        propName: 'Firmware',
+        propValue: '2',
+        filterOperation: 'Contains'
+      }
+    ],
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: '1234'
   };
 
   describe('myGrid.link trigger TOU upload with filter request', () => {
@@ -106,9 +120,8 @@ describe('Pact consumer test', () => {
 
     it('should make request for trigger TOU upload with filter in request - myGrid.Link', done => {
       service.postMyGridTOUDevice(requestBody).subscribe(
-        (res: ResponseTOUData) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
+        (res: IActionResponseTOUData) => {
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {

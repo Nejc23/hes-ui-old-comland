@@ -66,6 +66,7 @@ export class SaveViewFormMUTComponent implements OnInit {
             breakerStateFilter: this.sessionLayout.breakerStateFilter,
             ciiStateFilter: this.sessionLayout.ciiStateFilter,
             gridLayout: this.sessionLayout.gridLayout,
+            showOptionFilter: this.sessionLayout.showOptionFilter,
             showMeterUnitsWithoutTemplateFilter: this.sessionLayout.showMeterUnitsWithoutTemplateFilter,
             showOnlyMeterUnitsWithMBusInfoFilter: this.sessionLayout.showOnlyMeterUnitsWithMBusInfoFilter,
             readStatusFilter: this.sessionLayout.readStatusFilter,

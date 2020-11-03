@@ -44,7 +44,8 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true
+      showChildInfoMBus: true,
+      showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
     monitorObjects: [
       {
@@ -82,7 +83,8 @@ describe('Pact consumer test', () => {
         { id: 1, value: 'breaker 1' },
         { id: 5, value: 'breaker 5' }
       ],
-      showChildInfoMBus: true
+      showChildInfoMBus: true,
+      showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
     monitorObjects: [
       {
@@ -107,8 +109,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_MY_GRID_LINK_FOR_SET_MONITOR_WITH_FILTER',
           uponReceiving: 'a request for setting monitor with filter in request - myGrid.Link',
           withRequest: {
-            method: service.postMyGridConnectDeviceRequest(requestBody).method,
-            path: service.postMyGridConnectDeviceRequest(requestBody).url,
+            method: service.setMonitorRequest(requestBody).method,
+            path: service.setMonitorRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -131,12 +133,9 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for setting monitor with filter in request - myGrid.Link', done => {
-      service.postMyGridConnectDevice(requestBody).subscribe(
+      service.setMonitor(requestBody).subscribe(
         (res: ResponseSetMonitor) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
-          expect(res.filter).toEqual(responseBody.filter);
-          expect(res.monitorObjects).toEqual(responseBody.monitorObjects);
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {
