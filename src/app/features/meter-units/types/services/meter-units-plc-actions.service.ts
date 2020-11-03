@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { RequestFilterParams, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
+import { capitalize } from 'src/app/shared/forms/functions/string.functions';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
@@ -45,12 +49,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.result.then().catch(() => {});
   }
 
-  onTou(params: RequestFilterParams) {
+  onTou(params: IActionRequestParams) {
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.actionRequest = params;
+    /* modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;*/
 
     modalRef.result.then(
       data => {
@@ -65,13 +70,9 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onUpgrade(params: RequestFilterParams) {
+  onUpgrade(params: IActionRequestParams) {
     const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.actionRequest = params;
 
     modalRef.result.then(
       data => {
@@ -127,12 +128,9 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onBreakerMode(params: RequestFilterParams) {
+  onDisconnectorMode(params: IActionRequestParams) {
     const modalRef = this.modalService.open(PlcMeterBreakerModeComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.actionRequest = params;
 
     modalRef.result.then(
       data => {
@@ -240,7 +238,7 @@ export class MeterUnitsPlcActionsService {
         response = this.service.postMyGridCiiDeactivateDevice(params);
         operationName = $localize`CII Deactivate`;
         break;
-      case MeterUnitsTypeEnum.touConfig:
+      /*case MeterUnitsTypeEnum.touConfig:
         const paramsConf: RequestTOUData = {
           deviceIds: params.deviceIds,
           filter: params.filter,
@@ -252,7 +250,7 @@ export class MeterUnitsPlcActionsService {
         response = this.service.postMyGridTOUDevice(paramsConf);
         operationName = $localize`Configure TOU`;
         selectedText = `${$localize`for`} ${selectedText}`;
-        break;
+        break;*/
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
         operationName = $localize`Activate FW upgrade`;
@@ -315,6 +313,136 @@ export class MeterUnitsPlcActionsService {
         const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
 
         if (selectedRows && selectedRows.length > 0) {
+          selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
+        }
+      }
+    }
+    return requestParam;
+  }
+
+  getOperationRequestParam(guid: string, requestModel: GridRequestParams, allItems: number): IActionRequestParams {
+    const requestParam: IActionRequestParams = {
+      pageSize: 0,
+      pageNumber: 0,
+      textSearch: '',
+      sort: []
+    };
+
+    // select from row
+    if (guid && guid.length > 0) {
+      requestParam.deviceIds = [];
+      requestParam.deviceIds.push(guid);
+    } else {
+      if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
+        const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
+
+        requestParam.pageSize = allItems;
+        requestParam.pageNumber = 1;
+        requestParam.textSearch =
+          requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0
+            ? requestModel.searchModel[0].value
+            : '';
+        // create filter object
+        if (requestModel.filterModel) {
+          requestParam.filter = [];
+          if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
+            requestModel.filterModel.statuses.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.status),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.vendor && requestModel.filterModel.vendor.id > 0) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.vendor),
+              propValue: requestModel.filterModel.vendor.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (requestModel.filterModel.firmware && requestModel.filterModel.firmware.length > 0) {
+            requestModel.filterModel.firmware.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.firmware),
+                propValue: row.value,
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+          if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState.length > 0) {
+            requestModel.filterModel.disconnectorState.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState.length > 0) {
+            requestModel.filterModel.ciiState.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.ciiState),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
+            requestModel.filterModel.tags.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.tags),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+
+          // show operations filter
+          if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter.length > 0) {
+            requestModel.filterModel.showOptionFilter.map(row => {
+              if (row.id === 1) {
+                return requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 2) {
+                return requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+                  propValue: 'false',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+              if (row.id === 3) {
+                return requestParam.filter.push({
+                  propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
+                  propValue: 'true',
+                  filterOperation: filterOperationEnum.equal
+                });
+              }
+            });
+          }
+        }
+
+        if (requestModel.sortModel && requestModel.sortModel.length > 0) {
+          requestModel.sortModel.map(row =>
+            requestParam.sort.push({
+              propName: capitalize(row.colId),
+              index: 0,
+              sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+            })
+          );
+        }
+
+        requestParam.excludeIds = [];
+        excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
+      } else {
+        const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
+
+        if (selectedRows && selectedRows.length > 0) {
+          requestParam.deviceIds = [];
           selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
         }
       }

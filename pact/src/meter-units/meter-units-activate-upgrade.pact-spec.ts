@@ -1,11 +1,8 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import {
-  MeterUnitsActivateUpgradeRequest,
-  MeterUnitsActivateUpgradeResponse
-} from 'src/app/core/repository/interfaces/meter-units/meter-units-acctivate-upgrade.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { IActionRequestParams, IActionResponseParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,13 +26,33 @@ describe('Pact consumer test', () => {
   });
 
   describe('Data concentrator management activate device upgrade request', () => {
-    const requestBody: MeterUnitsActivateUpgradeRequest = {
+    const requestBody: IActionRequestParams = {
+      pageSize: 1,
+      pageNumber: 1,
+      sort: [
+        {
+          index: 0,
+          propName: 'Firmware',
+          sortOrder: 'Ascending'
+        }
+      ],
+      textSearch: '',
       deviceIds: ['2e9a0af2-cc88-43e0-9dfd-4cb1d7457ed6', 'd4c180db-f5f2-4c99-937e-9b92200d5526']
     };
 
-    const responseBody: MeterUnitsActivateUpgradeResponse = {
+    const responseBody: IActionResponseParams = {
       requestId: 'ceb64f17-1d49-4532-830f-55c15e1b88ff',
-      deviceIds: ['2e9a0af2-cc88-43e0-9dfd-4cb1d7457ed6', 'd4c180db-f5f2-4c99-937e-9b92200d5526']
+      deviceIds: ['2e9a0af2-cc88-43e0-9dfd-4cb1d7457ed6', 'd4c180db-f5f2-4c99-937e-9b92200d5526'],
+      pageSize: 1,
+      pageNumber: 1,
+      sort: [
+        {
+          index: 0,
+          propName: 'Firmware',
+          sortOrder: 'Ascending'
+        }
+      ],
+      textSearch: ''
     };
 
     beforeAll(done => {

@@ -43,11 +43,11 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   onSetLimiter() {
     this.params.context.componentParent.onSetLimiter(this.params.data.deviceId);
   }
-  onBreakerStatus() {
-    this.params.context.componentParent.onBreakerStatus(this.params.data.deviceId);
+  onDisconnectorStatus() {
+    this.params.context.componentParent.onDisconnectorStatus(this.params.data.deviceId);
   }
-  onBreakerMode() {
-    this.params.context.componentParent.onBreakerMode(this.params.data.deviceId);
+  onDisconnectorMode() {
+    this.params.context.componentParent.onDisconnectorMode(this.params.data.deviceId);
   }
   onActivateUpgrade() {
     this.params.context.componentParent.onActivateUpgrade(this.params.data.deviceId);

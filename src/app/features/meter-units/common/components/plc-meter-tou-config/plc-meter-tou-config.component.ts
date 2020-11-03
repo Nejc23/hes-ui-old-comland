@@ -6,9 +6,9 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
+import { IActionRequestParams, IActionRequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-plc-meter-tou-config',
@@ -21,10 +21,7 @@ export class PlcMeterTouConfigComponent implements OnInit {
   noConfig = false;
   configRequiredText = $localize`Required field`;
   messageServerError = $localize`Server error!`;
-  deviceIdsParam = [];
-  filterParam?: GridFilterParams;
-  searchParam?: GridSearchParams[];
-  excludeIdsParam?: string[];
+  actionRequest: IActionRequestParams;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -60,12 +57,15 @@ export class PlcMeterTouConfigComponent implements OnInit {
     if (!this.noConfig) {
       this.form.get(this.touConfigProperty).setValue(selectedTouConfig);
       let response: Observable<any> = new Observable();
-      const paramsConf: RequestTOUData = {
-        deviceIds: this.deviceIdsParam,
+      const paramsConf: IActionRequestTOUData = {
         timeOfUseId: selectedTouConfig,
-        filter: this.filterParam,
-        search: this.searchParam,
-        excludeIds: this.excludeIdsParam
+        pageSize: this.actionRequest.pageSize,
+        pageNumber: this.actionRequest.pageNumber,
+        sort: this.actionRequest.sort,
+        textSearch: this.actionRequest.textSearch,
+        filter: this.actionRequest.filter,
+        deviceIds: this.actionRequest.deviceIds,
+        excludeIds: this.actionRequest.excludeIds
       };
       console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
       response = this.gridLinkService.postMyGridTOUDevice(paramsConf);

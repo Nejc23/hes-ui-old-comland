@@ -1,9 +1,4 @@
-import { map } from 'rxjs/operators';
-import { meterUnitVendors } from '../../../../core/repository/consts/meter-units.const';
-import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { Observable, of } from 'rxjs';
-import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
@@ -13,23 +8,9 @@ import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-en
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { RequestFilterParams, RequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
-import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
-import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
-import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
-import { guid } from '@progress/kendo-angular-common';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 
@@ -62,11 +43,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private codelistService: CodelistMeterUnitsRepositoryService,
-    private autoTemplateService: AutoTemplatesService,
-    private modalService: ModalService,
-    private bulkService: MyGridLinkService,
-    private toast: ToastNotificationService,
     private plcActionsService: MeterUnitsPlcActionsService,
     private codeList: CodelistMeterUnitsRepositoryService
   ) {
@@ -334,51 +310,51 @@ export class MeterUnitDetailsComponent implements OnInit {
   // }
 
   // --> Operations action click
-  onBreakerStatus() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+  onDisconnectorStatus() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.breakerStatus, params, 1);
   }
 
   onActivateUpgrade() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.activateUpgrade, params, 1);
   }
 
   onConnect() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.connect, params, 1);
   }
 
   onDisconnect() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.disconnect, params, 1);
   }
 
   onCiiState() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiState, params, 1);
   }
 
   onCiiActivate() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiActivate, params, 1);
   }
 
   onCiiDeactivate() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiDeactivate, params, 1);
   }
 
   onClearFF() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearFF, params, 1);
   }
 
   // delete button click
   // TODO missing BE api !!
   onDelete() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.delete, params, 1);
+    //   const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    //   this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.delete, params, 1);
   }
 
   // popup
@@ -389,13 +365,15 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onTou() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onTou(params);
   }
 
   // popup
   onUpgrade() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onUpgrade(params);
   }
 
@@ -412,9 +390,9 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   // popup
-  onBreakerMode() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onBreakerMode(params);
+  onDisconnectorMode() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.onDisconnectorMode(params);
   }
 
   // <-- end Operations action click (bulk or selected row)

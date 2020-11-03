@@ -78,7 +78,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       vendor: null,
       readStatus: null,
       showChildInfoMBus: false,
-      showWithoutTemplate: true
+      showWithoutTemplate: true,
+      showOptionFilter: null
     }
   };
 

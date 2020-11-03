@@ -68,7 +68,8 @@ describe('Pact consumer test', () => {
             value: ''
           }
         ],
-        showChildInfoMBus: false
+        showChildInfoMBus: false,
+        showOptionFilter: [{ id: 2, value: 'Without template' }]
       }
     };
 

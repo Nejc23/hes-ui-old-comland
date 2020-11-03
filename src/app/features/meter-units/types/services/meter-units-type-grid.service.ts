@@ -26,6 +26,7 @@ import { GridCellJobStatusComponent } from '../components/grid-custom-components
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { GridCellCiiStateComponent } from '../components/grid-custom-components/grid-cell-cii-state.component';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -76,11 +77,11 @@ export class MeterUnitsTypeGridService {
         checkboxSelection: true,
         suppressMovable: true,
         lockPosition: true,
-        colId: 'deviceId',
+        colId: gridSysNameColumnsEnum.deviceId,
         headerTooltip: $localize`Select/deselect all`
       },
       {
-        field: 'nextRead',
+        field: gridSysNameColumnsEnum.nextRead,
         headerName: $localize``,
         suppressColumnsToolPanel: true,
         suppressMovable: true,
@@ -96,7 +97,7 @@ export class MeterUnitsTypeGridService {
         width: 100
       },
       {
-        field: 'status',
+        field: gridSysNameColumnsEnum.status,
         headerName: $localize`Status`,
         //   pinned: true,
         sortable: false,
@@ -105,7 +106,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Status`
       },
       {
-        field: 'name',
+        field: gridSysNameColumnsEnum.name,
         headerName: $localize`Name`,
         //    pinned: true,
         sortable: true,
@@ -114,7 +115,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Name`
       },
       {
-        field: 'moduleId',
+        field: gridSysNameColumnsEnum.moduleId,
         headerName: $localize`Module Id`,
         pinned: false,
         sortable: true,
@@ -123,7 +124,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Module Id`
       },
       {
-        field: 'parent',
+        field: gridSysNameColumnsEnum.parent,
         headerName: $localize`Parent`,
         pinned: false,
         sortable: true,
@@ -132,7 +133,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Parent`
       },
       {
-        field: 'parametrisationId',
+        field: gridSysNameColumnsEnum.parametrisationId,
         headerName: $localize`Parametrisation Id`,
         pinned: false,
         sortable: true,
@@ -141,7 +142,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Parametrisation Id`
       },
       {
-        field: 'timeOfUseId',
+        field: gridSysNameColumnsEnum.timeOfUseId,
         headerName: $localize`Time of use Id`,
         pinned: false,
         sortable: true,
@@ -150,7 +151,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Time of use Id`
       },
       {
-        field: 'vendor',
+        field: gridSysNameColumnsEnum.vendor,
         headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
@@ -159,7 +160,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Vendor`
       },
       {
-        field: 'firmware',
+        field: gridSysNameColumnsEnum.firmware,
         headerName: $localize`Firmware`,
         pinned: false,
         sortable: true,
@@ -168,7 +169,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Firmware`
       },
       {
-        field: 'id1',
+        field: gridSysNameColumnsEnum.id1,
         headerName: $localize`ID1`,
         pinned: false,
         sortable: true,
@@ -178,7 +179,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'id2',
+        field: gridSysNameColumnsEnum.id2,
         headerName: $localize`ID2`,
         pinned: false,
         sortable: true,
@@ -188,7 +189,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'id3',
+        field: gridSysNameColumnsEnum.id3,
         headerName: $localize`ID3`,
         pinned: false,
         sortable: true,
@@ -198,7 +199,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'id4',
+        field: gridSysNameColumnsEnum.id4,
         headerName: $localize`ID4`,
         pinned: false,
         sortable: true,
@@ -208,7 +209,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'id5',
+        field: gridSysNameColumnsEnum.id5,
         headerName: $localize`ID5`,
         pinned: false,
         sortable: true,
@@ -218,7 +219,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'id6',
+        field: gridSysNameColumnsEnum.id6,
         headerName: $localize`ID6`,
         pinned: false,
         sortable: true,
@@ -228,7 +229,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'configurationId',
+        field: gridSysNameColumnsEnum.configurationId,
         headerName: $localize`Configuration Id`,
         pinned: false,
         sortable: true,
@@ -238,7 +239,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'logicalDeviceName',
+        field: gridSysNameColumnsEnum.logicalDeviceName,
         headerName: $localize`Logical device name`,
         pinned: false,
         sortable: true,
@@ -257,7 +258,7 @@ export class MeterUnitsTypeGridService {
       //   headerTooltip: $localize `Information of child (MBus)`
       // },
       {
-        field: 'disconnectorState',
+        field: gridSysNameColumnsEnum.disconnectorState,
         headerName: $localize`Disconnector State`,
         pinned: false,
         sortable: true,
@@ -266,7 +267,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Disconnector State`
       },
       {
-        field: 'ciiState',
+        field: gridSysNameColumnsEnum.ciiState,
         headerName: $localize`CII State`,
         pinned: false,
         sortable: true,
@@ -275,7 +276,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`CII State`
       },
       {
-        field: 'tags',
+        field: gridSysNameColumnsEnum.tags,
         headerName: $localize`Tags`,
         pinned: false,
         sortable: true,
@@ -285,7 +286,7 @@ export class MeterUnitsTypeGridService {
         hide: true
       },
       {
-        field: 'readStatusTimeStamp',
+        field: gridSysNameColumnsEnum.readStatusTimeStamp,
         headerName: $localize`Read status`,
         //   pinned: true,
         sortable: true,
@@ -295,7 +296,7 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Read status`
       },
       {
-        field: 'jobStatus',
+        field: gridSysNameColumnsEnum.jobStatus,
         headerName: $localize`Job status`,
         //    pinned: 'right',
         //    lockPinned: true,

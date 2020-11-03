@@ -63,7 +63,8 @@ describe('Pact consumer test', () => {
           { id: 1, value: 'breaker 1' },
           { id: 5, value: 'breaker 5' }
         ],
-        showChildInfoMBus: null
+        showChildInfoMBus: null,
+        showOptionFilter: null
       }
     };
 

@@ -66,7 +66,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       },
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' }
+      vendor: { id: 0, value: '' },
+      showOptionFilter: null
     }
   };
 

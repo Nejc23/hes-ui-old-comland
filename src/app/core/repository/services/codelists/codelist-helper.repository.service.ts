@@ -18,4 +18,14 @@ export class CodelistHelperService {
 
     return result;
   }
+
+  public showOptionFilterList() {
+    const showOptions: Codelist<number>[] = [
+      { id: 1, value: $localize`With template` },
+      { id: 2, value: $localize`Without template` },
+      { id: 3, value: $localize`Image ready for activation` }
+    ];
+
+    return showOptions;
+  }
 }

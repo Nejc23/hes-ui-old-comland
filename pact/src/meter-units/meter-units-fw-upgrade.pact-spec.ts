@@ -1,8 +1,11 @@
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { MeterUnitsFwUpgrade, DcResponse } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import {
+  IActionRequestFwUpgradeData,
+  IActionResponseFwUpgradeData
+} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -25,23 +28,43 @@ describe('Pact consumer test', () => {
     service = getTestBed().inject(MyGridLinkService);
   });
 
-  const requestBody: MeterUnitsFwUpgrade = {
-    fileId: '32-323-4fgf-ew-434',
-    imageIdent: 'identifyer',
-    imageSize: 5442,
-    signature: 'signature',
-    overrideFillLastBlock: true,
-    deviceIds: ['kfkff-werre-rerrr', 'froo4344-434443-4344-4344']
-  };
-
-  const responseBody: DcResponse = {
+  const requestBody: IActionRequestFwUpgradeData = {
     fileId: '32-323-4fgf-ew-434',
     imageIdent: 'identifyer',
     imageSize: 5442,
     signature: 'signature',
     overrideFillLastBlock: true,
     deviceIds: ['kfkff-werre-rerrr', 'froo4344-434443-4344-4344'],
-    requestId: '3090f96a-e341-437c-92bb-2e10d5a8062a'
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: ''
+  };
+
+  const responseBody: IActionResponseFwUpgradeData = {
+    fileId: '32-323-4fgf-ew-434',
+    imageIdent: 'identifyer',
+    imageSize: 5442,
+    signature: 'signature',
+    overrideFillLastBlock: true,
+    deviceIds: ['kfkff-werre-rerrr', 'froo4344-434443-4344-4344'],
+    requestId: '3090f96a-e341-437c-92bb-2e10d5a8062a',
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: ''
   };
 
   describe('Meter unit fw upgrade', () => {
@@ -76,14 +99,8 @@ describe('Pact consumer test', () => {
 
     it('should make request for meter unit fw upgrade', done => {
       service.createFwUpgrade(requestBody).subscribe(
-        (res: DcResponse) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
-          expect(res.fileId).toEqual(responseBody.fileId);
-          expect(res.imageIdent).toEqual(responseBody.imageIdent);
-          expect(res.imageSize).toEqual(responseBody.imageSize);
-          expect(res.overrideFillLastBlock).toEqual(responseBody.overrideFillLastBlock);
-          expect(res.signature).toEqual(responseBody.signature);
+        (res: IActionResponseFwUpgradeData) => {
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {

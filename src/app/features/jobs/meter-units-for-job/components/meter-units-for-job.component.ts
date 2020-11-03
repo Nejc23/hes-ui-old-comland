@@ -76,7 +76,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       readStatus: null,
       disconnectorState: null,
       showChildInfoMBus: false,
-      showWithoutTemplate: true
+      showWithoutTemplate: true,
+      showOptionFilter: null
     }
   };
 

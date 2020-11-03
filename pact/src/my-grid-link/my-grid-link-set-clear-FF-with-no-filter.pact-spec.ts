@@ -67,8 +67,7 @@ describe('Pact consumer test', () => {
     it('should make request for clear FF with no filter in request - myGrid.Link', done => {
       service.clearFF(requestBody).subscribe(
         (res: ResponseClearFF) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {

@@ -3,11 +3,9 @@ import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import {
-  ResponseSetMonitor,
-  RequestSetMonitor,
-  RequestSetBreakerMode,
-  ResponseSetBreakerMode
-} from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+  IActionRequestSetDisconnectorMode,
+  IActionResponseSetDisconnectorMode
+} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -30,56 +28,66 @@ describe('Pact consumer test', () => {
     service = getTestBed().inject(MyGridLinkService);
   });
 
-  const requestBody: RequestSetBreakerMode = {
-    deviceIds: null,
-    filter: {
-      statuses: [{ id: 1, value: 'active' }],
-      readStatus: {
-        operation: { id: 'Greater Than', value: 'Greater Than' },
-        value1: 12,
-        value2: null
+  const requestBody: IActionRequestSetDisconnectorMode = {
+    filter: [
+      {
+        propName: 'Vendor',
+        propValue: '2',
+        filterOperation: 'Equal'
       },
-      vendor: { id: 2, value: 'Vendor 2' },
-      tags: [
-        { id: 1, value: 'tag1' },
-        { id: 2, value: 'tag2' }
-      ],
-      firmware: [{ id: 1, value: '12.3.1' }],
-      disconnectorState: [
-        { id: 1, value: 'breaker 1' },
-        { id: 5, value: 'breaker 5' }
-      ],
-      showChildInfoMBus: true
-    },
-    search: [{ colId: 'all', type: 'like', value: 'name' }],
-    excludeIds: [],
+      {
+        propName: 'Status',
+        propValue: '2',
+        filterOperation: 'Equal'
+      },
+      {
+        propName: 'Firmware',
+        propValue: '2',
+        filterOperation: 'Contains'
+      }
+    ],
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: '1234',
     breakerMode: 1
   };
 
-  const responseBody: ResponseSetBreakerMode = {
+  const responseBody: IActionResponseSetDisconnectorMode = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
-    deviceIds: null,
-    filter: {
-      statuses: [{ id: 1, value: 'active' }],
-      readStatus: {
-        operation: { id: 'Greater Than', value: 'Greater Than' },
-        value1: 12,
-        value2: null
+    filter: [
+      {
+        propName: 'Vendor',
+        propValue: '2',
+        filterOperation: 'Equal'
       },
-      vendor: { id: 2, value: 'Vendor 2' },
-      tags: [
-        { id: 1, value: 'tag1' },
-        { id: 2, value: 'tag2' }
-      ],
-      firmware: [{ id: 1, value: '12.3.1' }],
-      disconnectorState: [
-        { id: 1, value: 'breaker 1' },
-        { id: 5, value: 'breaker 5' }
-      ],
-      showChildInfoMBus: true
-    },
-    search: [{ colId: 'all', type: 'like', value: 'name' }],
-    excludeIds: [],
+      {
+        propName: 'Status',
+        propValue: '2',
+        filterOperation: 'Equal'
+      },
+      {
+        propName: 'Firmware',
+        propValue: '2',
+        filterOperation: 'Contains'
+      }
+    ],
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: '1234',
     breakerMode: 1
   };
 
@@ -90,8 +98,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_MY_GRID_LINK_FOR_SET_BREAKER_MODE_WITH_FILTER',
           uponReceiving: 'a request for setting breaker mode with filter in request - myGrid.Link',
           withRequest: {
-            method: service.setBreakerModeRequest(requestBody).method,
-            path: service.setBreakerModeRequest(requestBody).url,
+            method: service.setDisconnectorModeRequest(requestBody).method,
+            path: service.setDisconnectorModeRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -114,12 +122,9 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for setting breaker mode with filter in request - myGrid.Link', done => {
-      service.setBreakerMode(requestBody).subscribe(
-        (res: ResponseSetBreakerMode) => {
-          expect(res.requestId).toEqual(responseBody.requestId);
-          expect(res.deviceIds).toEqual(responseBody.deviceIds);
-          expect(res.filter).toEqual(responseBody.filter);
-          expect(res.breakerMode).toEqual(responseBody.breakerMode);
+      service.setDisconnectorMode(requestBody).subscribe(
+        (res: IActionResponseSetDisconnectorMode) => {
+          expect(res).toEqual(responseBody);
           done();
         },
         err => {
