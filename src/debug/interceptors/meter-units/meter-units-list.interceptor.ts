@@ -106,7 +106,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: true,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305917'
     },
     {
       deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -135,7 +136,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: true,
-      ciiState: 'on'
+      ciiState: 'on',
+      serialNumber: '39305918'
     },
     {
       deviceId: '22cfeaae-463a-4055-8632-a6818ba77d81',
@@ -164,7 +166,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: true,
-      ciiState: 'on'
+      ciiState: 'on',
+      serialNumber: '39305919'
     },
     {
       deviceId: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
@@ -193,7 +196,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: true,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305920'
     },
     {
       deviceId: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
@@ -222,7 +226,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305921'
     },
     {
       deviceId: 'de32daef-4766-4afc-aa5f-bba5822bf9b0',
@@ -251,7 +256,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: false,
-      ciiState: 'on'
+      ciiState: 'on',
+      serialNumber: '39305922'
     },
     {
       deviceId: 'e4694732-a282-477c-9c47-79ca08f64911',
@@ -280,7 +286,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: true,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305923'
     },
     {
       deviceId: '4db50891-45dc-4910-bc8e-1d1c15862a68',
@@ -309,7 +316,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305924'
     },
     {
       deviceId: '7f7e9055-ad99-479f-956f-903022e1cccd',
@@ -338,7 +346,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305925'
     },
     {
       deviceId: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
@@ -367,7 +376,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305926'
     },
     {
       deviceId: '74cc061f-69f4-48e3-8fb6-1a1e88cdd3d3',
@@ -396,7 +406,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: false,
-      ciiState: ''
+      ciiState: '',
+      serialNumber: '39305927'
     },
     {
       deviceId: 'bd50a59a-e791-470b-b328-7e3dc9b0a5df',
@@ -425,7 +436,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305928'
     },
     {
       deviceId: '18d2fcdc-0809-4fb3-8b68-bbe35262b344',
@@ -454,7 +466,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305929'
     },
     {
       deviceId: 'f790398c-5dc3-4511-ba8b-4b281b78fc49',
@@ -483,7 +496,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: false,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305930'
     },
     {
       deviceId: '26dd5e0a-4342-496a-93c7-a0ee8ac94a33',
@@ -512,7 +526,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305931'
     },
     {
       deviceId: 'bc8b49f4-f3b3-4975-8a6e-05134d1cd350',
@@ -541,7 +556,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305932'
     },
     {
       deviceId: '9b56c3b3-0ba2-4103-ac77-c8732ffb3472',
@@ -570,7 +586,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305933'
     },
     {
       deviceId: '5e8639d1-9c3d-46ea-bbdd-4770baefafbf',
@@ -599,7 +616,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305934'
     },
     {
       deviceId: 'r42234-9c3d-46ea-bbdd-4770baefafbf',
@@ -628,7 +646,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305935'
     },
     {
       deviceId: '90976-9c3d-46ea-bbdd-4770baefafbf',
@@ -657,7 +676,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305936'
     },
     {
       deviceId: '90976-9c3d-46ea-642234-4770baefafbf',
@@ -686,7 +706,8 @@ function setData(): MeterUnitsList[] {
       parametrisationId: 'param 1',
       readyForActivation: true,
       hasActiveJobs: false,
-      ciiState: 'off'
+      ciiState: 'off',
+      serialNumber: '39305937'
     }
   ];
 }

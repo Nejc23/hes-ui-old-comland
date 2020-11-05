@@ -131,12 +131,12 @@ export class DataConcentratorUnitsGridService {
       },
       {
         field: 'id',
-        headerName: $localize`ID`,
+        headerName: $localize`Serial number`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`ID`
+        headerTooltip: $localize`Serial number`
       },
       {
         field: 'ip',

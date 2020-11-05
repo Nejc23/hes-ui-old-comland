@@ -28,4 +28,5 @@ export interface MeterUnitsList {
   readyForActivation: boolean;
   hasActiveJobs: boolean;
   ciiState: string;
+  serialNumber: string;
 }
