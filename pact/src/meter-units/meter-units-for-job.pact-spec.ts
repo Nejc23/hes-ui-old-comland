@@ -56,7 +56,7 @@ describe('Pact consumer test', () => {
           value1: 12,
           value2: null
         },
-        vendor: { id: 2, value: 'Vendor 2' },
+        vendors: [{ id: 2, value: 'Vendor 2' }],
         tags: [
           { id: 1, value: 'tag1' },
           { id: 2, value: 'tag2' }

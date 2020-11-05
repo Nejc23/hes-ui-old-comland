@@ -1,3 +1,4 @@
+import { IActionRequestParams } from './../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -10,6 +11,9 @@ import { SchedulerJobComponent } from 'src/app/features/jobs/components/schedule
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
+import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
+import { capitalize } from 'lodash';
+import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -239,34 +243,86 @@ export class DcOperationsService {
     );
   }
 
-  getRequestFilterParam(guid: string, requestModel: GridRequestParams): RequestFilterParams {
-    const requestParam: RequestFilterParams = {
-      concentratorIds: [],
-      filter: null,
-      search: null,
-      excludeIds: null
+  getOperationRequestParam(guid: string, requestModel: GridRequestParams, allItems: number): IActionRequestParams {
+    const requestParam: IActionRequestParams = {
+      pageSize: 0,
+      pageNumber: 0,
+      textSearch: '',
+      sort: []
     };
 
     // select from row
     if (guid && guid.length > 0) {
-      requestParam.concentratorIds.push(guid);
+      requestParam.deviceIds = [];
+      requestParam.deviceIds.push(guid);
     } else {
       if (this.dcGridService.getSessionSettingsSelectedAll()) {
         const excludedRows = this.dcGridService.getSessionSettingsExcludedRows();
 
-        requestParam.filter = requestModel.filterModel;
-        requestParam.search = requestModel.searchModel;
-        requestParam.excludeIds = [];
+        requestParam.pageSize = allItems;
+        requestParam.pageNumber = 1;
+        requestParam.textSearch =
+          requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0
+            ? requestModel.searchModel[0].value
+            : '';
+        // create filter object
+        if (requestModel.filterModel) {
+          requestParam.filter = [];
+          if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
+            requestModel.filterModel.statuses.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.status),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.types && requestModel.filterModel.types.length > 0) {
+            requestModel.filterModel.types.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.type),
+                propValue: row.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+          if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
+            requestModel.filterModel.tags.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.tags),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.contains
+              })
+            );
+          }
+          if (requestModel.sortModel && requestModel.sortModel.length > 0) {
+            requestModel.sortModel.map(row =>
+              requestParam.sort.push({
+                propName: capitalize(row.colId),
+                index: 0,
+                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+              })
+            );
+          }
 
+          // add vendors to the filter
+          if (requestModel.filter && requestModel.filter.length > 0) {
+            requestModel.filter.map(filter => {
+              requestParam.filter.push(filter);
+            });
+          }
+        }
+        requestParam.excludeIds = [];
         excludedRows.map(row => requestParam.excludeIds.push(row.concentratorId));
       } else {
         const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
-
         if (selectedRows && selectedRows.length > 0) {
-          selectedRows.map(row => requestParam.concentratorIds.push(row.concentratorId));
+          requestParam.deviceIds = [];
+          selectedRows.map(row => requestParam.deviceIds.push(row.concentratorId));
         }
       }
     }
+
     return requestParam;
   }
 }

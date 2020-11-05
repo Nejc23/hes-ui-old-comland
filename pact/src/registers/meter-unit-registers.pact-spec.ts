@@ -44,10 +44,12 @@ describe('Pact consumer test', () => {
             value: ''
           }
         ],
-        vendor: {
-          id: 0,
-          value: ''
-        },
+        vendors: [
+          {
+            id: 0,
+            value: ''
+          }
+        ],
         readStatus: {
           operation: {
             id: '',

@@ -13,7 +13,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
       {
         id: 1,
         name: 'My saved filter 1',
-        vendorFilter: null,
+        vendorsFilter: null,
         statusesFilter: [
           { id: 1, value: 'Active' },
           { id: 3, value: 'Mouted' }
@@ -41,7 +41,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
       {
         id: 2,
         name: 'My saved filter 2',
-        vendorFilter: { id: 1, value: 'Vendor 1' },
+        vendorsFilter: [{ id: 1, value: 'Vendor 1' }],
         statusesFilter: [
           { id: 1, value: 'Active' },
           { id: 2, value: 'Inactive' }
@@ -68,7 +68,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
       {
         id: 3,
         name: 'My saved filter 3',
-        vendorFilter: { id: 2, value: 'Vendor 2' },
+        vendorsFilter: [{ id: 2, value: 'Vendor 2' }],
         statusesFilter: [{ id: 2, value: 'Inactive' }],
         readStatusFilter: {
           operation: { id: 'Less Than', value: 'Less Than' },
@@ -89,7 +89,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
       {
         id: 4,
         name: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        vendorFilter: { id: 2, value: 'Vendor 2' },
+        vendorsFilter: [{ id: 2, value: 'Vendor 2' }],
         statusesFilter: [],
         readStatusFilter: {
           operation: { id: 'Greater Than', value: 'Greater Than' },
@@ -130,7 +130,7 @@ export class MeterUnitsTypeGridLayoutInterceptor {
     const data: MeterUnitsLayout = {
       id: 5,
       name: 'My saved filter NEW',
-      vendorFilter: null,
+      vendorsFilter: null,
       statusesFilter: [{ id: 3, value: 'Mouted' }],
       readStatusFilter: {
         operation: { id: 'Greater Than', value: 'Greater Than' },

@@ -55,7 +55,7 @@ describe('Pact consumer test', () => {
           },
           typesFilter: [],
           tagsFilter: [],
-          vendorFilter: null,
+          vendorsFilter: null,
           gridLayout: ''
         }
       }

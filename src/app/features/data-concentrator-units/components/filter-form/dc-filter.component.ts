@@ -92,7 +92,7 @@ export class DcFilterComponent implements OnInit {
           readStatusFilter: this.sessionFilter.readStatusFilter,
           typesFilter: this.sessionFilter.typesFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
-          vendorFilter: this.sessionFilter.vendorFilter,
+          vendorsFilter: this.sessionFilter.vendorsFilter,
           gridLayout: ''
         };
         x.push(currentFilter);
@@ -110,7 +110,7 @@ export class DcFilterComponent implements OnInit {
         ['tags']: [filters && selected ? selected.tagsFilter : []],
         ['types']: [filters && selected ? selected.typesFilter : []],
         ['filters']: [filters ? filters : []],
-        ['vendor']: [filters && selected ? selected.vendorFilter : null],
+        ['vendors']: [filters && selected ? selected.vendorsFilter : []],
         ['operation']: [
           filters && selected.readStatusFilter && selected.readStatusFilter.operation
             ? selected.readStatusFilter.operation
@@ -139,8 +139,8 @@ export class DcFilterComponent implements OnInit {
     return 'filters';
   }
 
-  get vendorProperty() {
-    return 'vendor';
+  get vendorsProperty() {
+    return 'vendors';
   }
 
   get operationProperty() {
@@ -195,7 +195,7 @@ export class DcFilterComponent implements OnInit {
             },*/
       typesFilter: this.form.get(this.typesProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
-      vendorFilter: this.form.get(this.vendorProperty).value,
+      vendorsFilter: this.form.get(this.vendorsProperty).value,
       gridLayout: ''
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);

@@ -17,10 +17,10 @@
             <div class="col-6"></div>
             <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
           </div>
-          <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="meterUnitVendors$ | async"
+          <app-input-tag label="Vendor" [form]="form" [property]="vendorsProperty" [autocompleteItemsAsObjects]="meterUnitVendors$ | async"
             [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label (selectedValueChanged)="applyFilter()"
-            (selectedValueChanged)="applyFilter()">
-          </app-select-input>
+            (valueChanged)="applyFilter()">
+          </app-input-tag>
 
           <app-input-tag label="Firmware" [allowCustomValues]="true" [property]="firmwareProperty" [form]="form" [autocompleteItemsAsObjects]="firmware$ | async"
             [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label

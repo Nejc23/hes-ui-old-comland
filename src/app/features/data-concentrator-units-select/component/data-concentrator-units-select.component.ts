@@ -66,7 +66,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       },
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' },
       showOptionFilter: null
     }
   };
@@ -244,7 +243,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   setFilter() {
     this.requestModel.filterModel.statuses = [];
     this.requestModel.filterModel.readStatus = null;
-    this.requestModel.filterModel.vendor = null;
+    this.requestModel.filterModel.vendors = null;
     this.requestModel.filterModel.types = null;
     this.requestModel.filterModel.tags = null;
 

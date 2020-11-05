@@ -4,7 +4,7 @@ import { ReadStatus } from '../helpers/grid-request-params.interface';
 export interface MeterUnitsLayout {
   id: number;
   name: string;
-  vendorFilter: Codelist<number>;
+  vendorsFilter: Codelist<number>[];
   statusesFilter: Codelist<number>[];
   readStatusFilter: ReadStatus;
   tagsFilter: Codelist<number>[];

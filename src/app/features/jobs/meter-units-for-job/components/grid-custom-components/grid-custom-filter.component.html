@@ -24,7 +24,7 @@
         <div class="col-6"></div>
         <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
       </div>
-      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="meterUnitVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+      <app-select-input label="Vendor" [form]="form" [property]="vendorsProperty" [selectOptions]="meterUnitVendors$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
       </app-select-input>
 
       <app-input-tag label="Firmware" [allowCustomValues]="true" [property]="firmwareProperty" [form]="form" [autocompleteItemsAsObjects]="firmware$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>

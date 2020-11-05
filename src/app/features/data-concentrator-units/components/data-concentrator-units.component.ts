@@ -33,6 +33,9 @@ import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { DcOperationsService } from '../services/dc-operations.service';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
+import { capitalize } from 'lodash';
+import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
+import { filterOperationEnum } from '../../global/enums/filter-operation-global.enum';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -86,8 +89,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       },
       types: [0],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' },
-      showOptionFilter: null
+      showOptionFilter: []
     }
   };
 
@@ -123,8 +125,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
           this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
-          this.requestModel.filterModel.vendor = event.vendorFilter;
-          this.requestModel.filterModel.types = event.typesFilter;
+          this.requestModel.filterModel.vendors = event.vendorsFilter;
+          this.requestModel.filterModel.types = event.typesFilter.map(t => t.id);
           this.requestModel.filterModel.tags = event.tagsFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
@@ -281,6 +283,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
+
+        that.requestModel.filter = that.setFilterVendors();
+
         if (that.authService.isRefreshNeeded2()) {
           that.authService
             .renewToken()
@@ -350,7 +355,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         (this.requestModel.filterModel.types === undefined ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendor === undefined || this.requestModel.filterModel.vendor.id === 0))
+        (this.requestModel.filterModel.vendors === undefined || this.requestModel.filterModel.vendors.length === 0))
     ) {
       return true;
     }
@@ -419,6 +424,22 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     return [];
   }
 
+  setFilterVendors() {
+    this.requestModel.filter = [];
+
+    const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
+    if (filterDCU.vendorsFilter && filterDCU.vendorsFilter.length > 0 && filterDCU.vendorsFilter[0].id > 0) {
+      for (const filter of filterDCU.vendorsFilter) {
+        this.requestModel.filter.push({
+          propName: capitalize(gridSysNameColumnsEnum.vendor),
+          propValue: filter.id.toString(),
+          filterOperation: filterOperationEnum.equal
+        });
+      }
+    }
+    return this.requestModel.filter;
+  }
+
   // set filter in request model
   setFilter() {
     if (
@@ -435,8 +456,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
         value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
-      this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-      this.requestModel.filterModel.types = filterDCU.typesFilter;
+
+      this.requestModel.filterModel.types = filterDCU.typesFilter?.map(t => t.id);
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
     } else {
       this.setFilterInfo();
@@ -453,7 +474,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       filter.statusesFilter && filter.statusesFilter.length > 0,
       filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
       filter.typesFilter && filter.typesFilter.length > 0,
-      filter.vendorFilter ? true : false,
+      filter.vendorsFilter && filter.vendorsFilter.length > 0 ? true : false,
       filter.tagsFilter && filter.tagsFilter.length > 0
     );
   }
@@ -465,10 +486,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       (tmpFilter.statusesFilter && tmpFilter.statusesFilter.length > 0) ||
       (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
       (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
-      (tmpFilter.vendorFilter &&
-        tmpFilter.vendorFilter.value &&
-        tmpFilter.vendorFilter.value !== undefined &&
-        tmpFilter.vendorFilter.value !== '') ||
+      (tmpFilter.vendorsFilter &&
+        tmpFilter.vendorsFilter.length > 0 &&
+        tmpFilter.vendorsFilter[0].value &&
+        tmpFilter.vendorsFilter[0].value !== undefined &&
+        tmpFilter.vendorsFilter[0].value !== '') ||
       (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0)
     );
   }
@@ -573,7 +595,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           value2: 0
         },
         types: [],
-        vendor: { id: 0, value: '' },
         tags: [],
         showOptionFilter: null
       }
@@ -674,7 +695,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // functions for operations called from grid
   // ******************************************************************************** */
   onSynchronizeTime(selectedGuid: string) {
-    const params = this.dcOperationsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.requestModel.filterModel = this.setFilter();
+    this.requestModel.searchModel = this.setSearch();
+    this.requestModel.filter = this.setFilterVendors();
+
+    const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
   }
 
