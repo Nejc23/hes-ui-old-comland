@@ -1,9 +1,9 @@
 <div class="d-flex row-actions justify-content-end" >
   <div class="btn-group-sm">
-    <button 
+    <button
         type="button" class="btn btn-primary m-0" (click)="toDetails()"><i class="far fa-eye"
-        ></i></button>    
-  </div> 
+        ></i></button>
+  </div>
   <div dropdown class="dropdown-ag-grid btn-group-sm">
     <button dropdownToggle class="btn btn-primary btn-sm" type="button"  [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('operation')" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="far fa-ellipsis-h"></i>
@@ -12,26 +12,6 @@
       <div>
         <a class="dropdown-item" href="javascript:void(0);" (click)="onSynchronizeTime()"><span i18n>Synchronize time</span></a>
       </div>
-      <div class="dropdown-item">
-        <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Relays</span></a>
-          <div class="dropdown-menu">
-            <div>
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onConnect()"><span i18n>Connect</span></a>
-            </div>
-            <div>
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnect()"><span i18n>Disconnect</span></a>
-            </div>
-            <div>
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onBreakerStatus()"><span i18n>State</span></a>
-            </div>
-            <div>
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onBreakerMode()"><span i18n>Mode</span></a>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </div> 
+  </div>
 </div>
