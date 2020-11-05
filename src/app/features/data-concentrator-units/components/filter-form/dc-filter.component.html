@@ -32,14 +32,15 @@
           <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
         </div>
 
-        <app-input-multiselect label="Type" [form]="form" [property]="typesProperty" name="multSelectTypes" [isReadOnly]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-          [options]="dcuTypes$ | async" [inline]="true" i18n-label (change)="applyFilter()">
-        </app-input-multiselect>
+        <app-input-tag label="Type" [form]="form" [property]="typesProperty" [autocompleteItemsAsObjects]="dcuTypes$ | async" i18n-label
+         [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
+          (valueChanged)="applyFilter()">
+        </app-input-tag>
 
-        <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
+        <app-input-tag label="Vendor" [form]="form" [property]="vendorsProperty" [autocompleteItemsAsObjects]="dcuVendors$ | async"
           [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
-          (selectedValueChanged)="applyFilter()">
-        </app-select-input>
+          (valueChanged)="applyFilter()">
+        </app-input-tag>
 
         <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
           [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
@@ -47,7 +48,7 @@
         </app-input-tag>
 
       </fieldset>
-      <div class="form-group link">
+      <div class="form-group link mt-2">
         <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
           <span i18n>Clear Filters</span></a>
         </strong>

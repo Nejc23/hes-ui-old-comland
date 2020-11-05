@@ -1,4 +1,5 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { IActionFilterParams, IActionRequestParams, IActionSortParams } from '../myGridLink/action-prams.interface';
 
 export interface GridRequestParams {
   requestId: string;
@@ -15,13 +16,14 @@ export interface GridRequestParams {
   typeId?: number;
   deviceIds?: string[];
   excludeIds?: string[];
+  filter?: IActionFilterParams[];
 }
 
 export interface GridFilterParams {
   statuses: Codelist<number>[];
   types?: number[];
   tags: Codelist<number>[];
-  vendor: Codelist<number>;
+  vendors?: Codelist<number>[];
   readStatus: ReadStatus;
   firmware?: Codelist<number>[];
   disconnectorState?: Codelist<number>[];

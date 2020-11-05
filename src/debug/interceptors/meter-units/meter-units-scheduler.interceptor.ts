@@ -48,10 +48,12 @@ export class MeterUnitsSchedulerInterceptor {
               value: ''
             }
           ],
-          vendor: {
-            id: 0,
-            value: ''
-          },
+          vendors: [
+            {
+              id: 0,
+              value: ''
+            }
+          ],
           readStatus: {
             operation: {
               id: '',

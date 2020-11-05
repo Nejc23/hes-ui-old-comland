@@ -75,7 +75,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       statuses: null,
       tags: null,
       firmware: null,
-      vendor: null,
       readStatus: null,
       showChildInfoMBus: false,
       showWithoutTemplate: true,
@@ -235,7 +234,10 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       (filterInfo.name !== '' && filterInfo.name !== undefined) ||
       (filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0) ||
       (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
-      (filterInfo.vendorFilter && filterInfo.vendorFilter.value !== undefined && filterInfo.vendorFilter.value !== '') ||
+      (filterInfo.vendorsFilter &&
+        filterInfo.vendorsFilter.length > 0 &&
+        filterInfo.vendorsFilter[0].value !== undefined &&
+        filterInfo.vendorsFilter[0].value !== '') ||
       (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
       (filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0) ||
       (filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0) ||
@@ -429,7 +431,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       ) {
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
         this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-        this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+        this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
         if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
           this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
@@ -549,7 +551,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-      this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
+      this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
         operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
@@ -573,7 +575,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     this.filters = this.staticTextService.setfilterHeaderText(
       filterInfo.name,
       filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
-      filterInfo.vendorFilter ? true : false,
+      filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0 ? true : false,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
         ? true
@@ -649,7 +651,9 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.types ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (!this.requestModel.filterModel.vendor || this.requestModel.filterModel.vendor.id === 0) &&
+        (!this.requestModel.filterModel.vendors ||
+          this.requestModel.filterModel.vendors.length === 0 ||
+          this.requestModel.filterModel.vendors[0].id === 0) &&
         (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||

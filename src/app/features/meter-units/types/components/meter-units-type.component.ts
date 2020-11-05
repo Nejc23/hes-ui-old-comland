@@ -28,6 +28,9 @@ import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
 import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
+import { capitalize } from 'lodash';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -78,7 +81,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     filterModel: {
       statuses: [{ id: 0, value: '' }],
       tags: [{ id: 0, value: '' }],
-      vendor: { id: 0, value: '' },
+      // vendors: [{ id: 0, value: '' }],
       readStatus: {
         operation: { id: '', value: '' },
         value1: 0,
@@ -171,7 +174,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       next: (event: MeterUnitsLayout) => {
         if (event !== null) {
           this.requestModel.filterModel.statuses = event.statusesFilter;
-          this.requestModel.filterModel.vendor = event.vendorFilter;
+          this.requestModel.filterModel.vendors = event.vendorsFilter;
           this.requestModel.filterModel.tags = event.tagsFilter;
           this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
@@ -363,6 +366,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
+
+        that.requestModel.filter = that.setFilterVendors();
+
         if (that.authService.isRefreshNeeded2()) {
           that.authService
             .renewToken()
@@ -412,7 +418,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     };
     this.gridApi.setServerSideDatasource(datasource);
   }
-  // ----------------------- ag-grid set DATASOURCE end --------------------------
+  // ----------------------- ag-grid sets DATASOURCE end --------------------------
 
   private noSearch() {
     if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
@@ -433,7 +439,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.types ||
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
-        (!this.requestModel.filterModel.vendor || this.requestModel.filterModel.vendor.id === 0) &&
+        (!this.requestModel.filterModel.vendors ||
+          this.requestModel.filterModel.vendors.length === 0 ||
+          this.requestModel.filterModel.vendors[0].id === 0) &&
         (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
@@ -526,6 +534,22 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     return [];
   }
 
+  setFilterVendors() {
+    this.requestModel.filter = [];
+    const filterMU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+    if (filterMU.vendorsFilter && filterMU.vendorsFilter.length > 0 && filterMU.vendorsFilter[0].id > 0) {
+      for (const filter of filterMU.vendorsFilter) {
+        this.requestModel.filter.push({
+          propName: capitalize(gridSysNameColumnsEnum.vendor),
+          propValue: filter.id.toString(),
+          filterOperation: filterOperationEnum.equal
+        });
+      }
+    }
+
+    return this.requestModel.filter;
+  }
+
   // set filter in request model
   setFilter() {
     if (
@@ -537,7 +561,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-      this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
         operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
@@ -563,7 +586,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.filtersInfo = this.staticTextService.getFiltersInfo(
       filterInfo.name,
       filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
-      filterInfo.vendorFilter ? true : false,
+      filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0 ? true : false,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
         ? true

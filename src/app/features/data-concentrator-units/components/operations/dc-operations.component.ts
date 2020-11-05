@@ -18,7 +18,7 @@ export class DcOperationsComponent implements OnInit {
   ngOnInit(): void {}
 
   onSynchronizeTime() {
-    const params = this.dcOperationsService.getRequestFilterParam(this.guid, this.requestModel);
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1);
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);
   }
 }

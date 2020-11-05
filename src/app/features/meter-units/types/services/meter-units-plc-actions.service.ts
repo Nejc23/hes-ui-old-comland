@@ -354,12 +354,14 @@ export class MeterUnitsPlcActionsService {
               })
             );
           }
-          if (requestModel.filterModel.vendor && requestModel.filterModel.vendor.id > 0) {
-            requestParam.filter.push({
-              propName: capitalize(gridSysNameColumnsEnum.vendor),
-              propValue: requestModel.filterModel.vendor.id.toString(),
-              filterOperation: filterOperationEnum.equal
-            });
+          if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
+            requestModel.filterModel.vendors.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.vendor),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
           }
           if (requestModel.filterModel.firmware && requestModel.filterModel.firmware.length > 0) {
             requestModel.filterModel.firmware.map(row =>
@@ -422,6 +424,13 @@ export class MeterUnitsPlcActionsService {
                   filterOperation: filterOperationEnum.equal
                 });
               }
+            });
+          }
+
+          // add vendors to the filter
+          if (requestModel.filter && requestModel.filter.length > 0) {
+            requestModel.filter.map(filter => {
+              requestParam.filter.push(filter);
             });
           }
         }

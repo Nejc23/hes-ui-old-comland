@@ -427,7 +427,7 @@ export class MeterUnitsTypeGridService {
     if (
       JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
-      JSON.stringify(sessionFilter.vendorFilter) === JSON.stringify(requestModel.vendor) &&
+      JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.firmwareFilter) === JSON.stringify(requestModel.firmware) &&
       JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.disconnectorState) &&

@@ -107,7 +107,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
           statusesFilter: this.sessionFilter.statusesFilter,
           readStatusFilter: this.sessionFilter.readStatusFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
-          vendorFilter: this.sessionFilter.vendorFilter,
+          vendorsFilter: this.sessionFilter.vendorsFilter,
           firmwareFilter: this.sessionFilter.firmwareFilter,
           breakerStateFilter: this.sessionFilter.breakerStateFilter,
           ciiStateFilter: this.sessionFilter.ciiStateFilter,
@@ -131,7 +131,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
         ['statuses']: [filters && selected ? selected.statusesFilter : []],
         ['tags']: [filters && selected ? selected.tagsFilter : []],
         ['filters']: [filters ? filters : []],
-        ['vendor']: [filters && selected ? selected.vendorFilter : null],
+        ['vendors']: [filters && selected ? selected.vendorsFilter : null],
         ['firmware']: [filters && selected ? selected.firmwareFilter : []],
         ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
         ['operation']: [
@@ -161,8 +161,8 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
     return 'filters';
   }
 
-  get vendorProperty() {
-    return 'vendor';
+  get vendorsProperty() {
+    return 'vendors';
   }
 
   get operationProperty() {
@@ -242,8 +242,8 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
       breakerStateFilter: this.form.get(this.breakerStateProperty).value,
       ciiStateFilter: this.form.get(this.ciiStateProperty).value,
       tagsFilter: this.form.get(this.tagsProperty).value,
-      vendorFilter: this.form.get(this.vendorProperty).value,
-      showOptionFilter: this.form.get(this.vendorProperty).value, // TODO dd
+      vendorsFilter: this.form.get(this.vendorsProperty).value,
+      showOptionFilter: this.form.get(this.vendorsProperty).value, // TODO dd
       showOnlyMeterUnitsWithMBusInfoFilter: this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
       showMeterUnitsWithoutTemplateFilter: this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
       showOnlyImageReadyForActivationFilter: this.form.get(this.showOnlyImageReadyForActivationProperty).value,

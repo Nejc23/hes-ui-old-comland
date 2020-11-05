@@ -37,7 +37,7 @@ describe('Pact consumer test', () => {
       value2: null
     },
     tagsFilter: [{ id: 1, value: 'tag 1' }],
-    vendorFilter: { id: 1, value: 'Vendor 1' },
+    vendorsFilter: [{ id: 1, value: 'Vendor 1' }],
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
     ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
@@ -59,7 +59,7 @@ describe('Pact consumer test', () => {
       value2: null
     },
     tagsFilter: [{ id: 1, value: 'tag 1' }],
-    vendorFilter: { id: 1, value: 'Vendor 1' },
+    vendorsFilter: [{ id: 1, value: 'Vendor 1' }],
     firmwareFilter: [{ id: 1, value: 'frmware 1' }],
     breakerStateFilter: [{ id: 1, value: 'breaker state 1' }],
     ciiStateFilter: [{ id: 1, value: 'cii state 1' }],
