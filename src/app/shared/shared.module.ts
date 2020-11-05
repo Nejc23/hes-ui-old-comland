@@ -1,3 +1,4 @@
+import { SchedulerDcTimeSyncJobComponent } from './../features/jobs/components/dc-time-sync/scheduler-dc-time-sync-job.component';
 import { PlcMeterFwUpgradeComponent } from './../features/meter-units/common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -85,6 +86,7 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     AddDcuFormComponent,
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
+    SchedulerDcTimeSyncJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
@@ -142,6 +144,7 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     AddDcuFormComponent,
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
+    SchedulerDcTimeSyncJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
@@ -185,6 +188,7 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     AddDcuFormComponent,
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
+    SchedulerDcTimeSyncJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,

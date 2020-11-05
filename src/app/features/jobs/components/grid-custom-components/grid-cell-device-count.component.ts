@@ -32,7 +32,7 @@ export class GridCellDeviceCountComponent {
 
   public showDevicesForJob(params): void {
     let baseUrl = '/schedulerJobs/meter-units';
-    if (params.data.actionType === 1) {
+    if (params.data.actionType === 1 || params.data.actionType === 3) {
       baseUrl = '/schedulerJobs/concentrators';
     }
 

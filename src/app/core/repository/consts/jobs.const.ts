@@ -9,5 +9,5 @@ export const addNewScheduleDevice = `${basePath}/add-new-schedule-device`;
 export const schedulerActiveJobs = `${basePath}/active-jobs`;
 
 // codelist
-export const jobsDiscoveryJobs = `${basePath}/discovery-jobs`;
-export const jobsReadingJobs = `${basePath}/reading-jobs`;
+export const jobsDiscoveryJobs = `${basePath}/jobs?type=1`;
+export const jobsReadingJobs = `${basePath}/jobs?type=2`;

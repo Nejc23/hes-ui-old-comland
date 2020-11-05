@@ -17,6 +17,7 @@ import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
+import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -241,6 +242,24 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     };
     const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.refreshGrid();
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  addDcTimeSyncJob() {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+    const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
+    const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
 
     modalRef.result.then(
       data => {
