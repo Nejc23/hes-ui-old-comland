@@ -52,7 +52,7 @@ export class DcFilterComponent implements OnInit {
     private codelistHelperService: CodelistHelperService
   ) {
     this.form = this.createForm(null, null);
-    this.applyFilter = _.debounce(this.applyFilter, 2000);
+    this.applyFilter = _.debounce(this.applyFilter, 1000);
   }
 
   // called on init

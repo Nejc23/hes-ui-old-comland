@@ -70,7 +70,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
     });
 
-    this.applyFilter = _.debounce(this.applyFilter, 2000);
+    this.applyFilter = _.debounce(this.applyFilter, 1000);
   }
 
   // called on init

@@ -24,5 +24,6 @@ export const gridSysNameColumnsEnum = {
   readStatusTimeStamp: 'readStatusTimeStamp',
   jobStatus: 'jobStatus',
   hasTemplate: 'hasTemplate',
-  readyForActivation: 'readyForActivation'
+  readyForActivation: 'readyForActivation',
+  serialNumber: 'serialNumber'
 };
