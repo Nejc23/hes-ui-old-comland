@@ -1,4 +1,4 @@
-import { jobsDiscoveryJobs, jobsReadingJobs } from './../../consts/jobs.const';
+import { schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
 import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -62,7 +62,7 @@ export class CodelistRepositoryService {
     return this.repository.makeRequest(this.jobsDiscoveryJobsCodelistRequest());
   }
   jobsDiscoveryJobsCodelistRequest(): HttpRequest<CodelistExt<string>[]> {
-    return new HttpRequest('GET', jobsDiscoveryJobs);
+    return new HttpRequest('GET', `${schedulerJobs}?type=1&type=3`);
   }
 
   jobsReadingJobsCodelistCodes(): Observable<CodelistExt<string>[]> {
@@ -70,6 +70,6 @@ export class CodelistRepositoryService {
   }
 
   jobsReadingJobsCodelistCodesRequest(): HttpRequest<CodelistExt<string>[]> {
-    return new HttpRequest('GET', `${jobsReadingJobs}`);
+    return new HttpRequest('GET', `${schedulerJobs}?type=2`);
   }
 }

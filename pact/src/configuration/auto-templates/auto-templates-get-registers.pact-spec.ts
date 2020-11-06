@@ -105,7 +105,7 @@ describe('Pact consumer test', () => {
           withRequest: {
             method: service.getRegistersRequest(deviceId).method,
             path: `/api/templating/device/${deviceId}/registers`, // service.getRegistersRequest(deviceId).url,
-            query: { '': 'data' },
+            query: { type: 'data' },
             body: null,
             headers: defaultRequestHeader
           },

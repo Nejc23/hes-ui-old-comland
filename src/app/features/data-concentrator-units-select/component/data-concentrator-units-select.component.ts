@@ -124,7 +124,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     }
     if (this.selectedJobId) {
       this.jobsService.getJob(this.selectedJobId).subscribe(data => {
-        this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam.id);
+        this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam?.id);
       });
     }
   }

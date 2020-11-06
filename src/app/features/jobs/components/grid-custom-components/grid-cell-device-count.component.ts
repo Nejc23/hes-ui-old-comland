@@ -27,12 +27,12 @@ export class GridCellDeviceCountComponent {
   }
 
   public isDeviceCountVisible(): boolean {
-    return this.params.node.data.deviceCount > 0;
+    return this.params.node && this.params.node.data && this.params.node.data.deviceCount && this.params.node.data.deviceCount > 0;
   }
 
   public showDevicesForJob(params): void {
     let baseUrl = '/schedulerJobs/meter-units';
-    if (params.data.actionType === 1) {
+    if (params.data.actionType === 1 || params.data.actionType === 3) {
       baseUrl = '/schedulerJobs/concentrators';
     }
 

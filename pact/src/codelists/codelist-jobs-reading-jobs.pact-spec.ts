@@ -51,7 +51,8 @@ describe('Pact consumer test', () => {
           uponReceiving: 'a request for getting reading jobs',
           withRequest: {
             method: service.jobsDiscoveryJobsCodelistRequest().method,
-            path: service.jobsDiscoveryJobsCodelistRequest().url,
+            path: '/api/scheduler/jobs', // service.jobsDiscoveryJobsCodelistRequest().url,
+            query: { type: ['1', '3'] },
             headers: defaultRequestHeader
           },
           willRespondWith: {

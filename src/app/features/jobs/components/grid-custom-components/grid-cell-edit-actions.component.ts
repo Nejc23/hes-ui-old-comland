@@ -10,6 +10,7 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
+import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -44,6 +45,9 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     };
     if (params.data.actionType === 1) {
       this.editDiscoveryJob(params, options);
+    } else if (params.data.actionType === 3) {
+      // dc time sync
+      this.editDcTimeSyncJob(params, options);
     } else {
       this.editReadingJob(params, options);
     }
@@ -68,6 +72,22 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   private editDiscoveryJob(params: any, options: NgbModalOptions) {
     const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
     const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
+    component.selectedJobId = params.data.id;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.eventService.eventEmitterRefresh.emit(true);
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  private editDcTimeSyncJob(params: any, options: NgbModalOptions) {
+    const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
+    const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
     component.selectedJobId = params.data.id;
 
     modalRef.result.then(

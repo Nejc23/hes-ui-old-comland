@@ -117,11 +117,20 @@ export class MeterUnitsTypeGridService {
       {
         field: gridSysNameColumnsEnum.serialNumber,
         headerName: $localize`Serial number`,
-        //    pinned: true,
+        //  pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`Serial number`
+      },
+      {
+        field: gridSysNameColumnsEnum.logicalDeviceName,
+        headerName: $localize`Logical device name`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellNameComponent',
+        headerTooltip: $localize`Logical device name`
       },
       {
         field: gridSysNameColumnsEnum.moduleId,
@@ -245,16 +254,6 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`Configuration Id`,
-        hide: true
-      },
-      {
-        field: gridSysNameColumnsEnum.logicalDeviceName,
-        headerName: $localize`Logical device name`,
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Logical device name`,
         hide: true
       },
       // {
