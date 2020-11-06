@@ -71,6 +71,6 @@ export class RegistersSelectInterceptor {
 
   static canInterceptMeterUnitRegisters(request: HttpRequest<any>): boolean {
     // return new RegExp(registers).test(request.url) && request.method.endsWith('POST');
-    return new RegExp('api/templating/registers').test(request.url) && request.method.endsWith('GET');
+    return new RegExp(registers).test(request.url) && request.method.endsWith('GET');
   }
 }
