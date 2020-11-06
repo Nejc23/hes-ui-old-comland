@@ -101,7 +101,8 @@ describe('Pact consumer test', () => {
         parametrisationId: 'param 1',
         readyForActivation: true,
         hasActiveJobs: false,
-        ciiState: 'off'
+        ciiState: 'off',
+        serialNumber: '39305918'
       },
       {
         deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -130,7 +131,8 @@ describe('Pact consumer test', () => {
         parametrisationId: 'param 1',
         readyForActivation: false,
         hasActiveJobs: true,
-        ciiState: ''
+        ciiState: '',
+        serialNumber: '39305919'
       },
       {
         deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -159,7 +161,8 @@ describe('Pact consumer test', () => {
         parametrisationId: 'param 1',
         readyForActivation: true,
         hasActiveJobs: true,
-        ciiState: 'on'
+        ciiState: 'on',
+        serialNumber: '39305920'
       }
     ];
 

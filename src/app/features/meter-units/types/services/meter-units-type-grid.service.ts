@@ -115,6 +115,15 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize`Name`
       },
       {
+        field: gridSysNameColumnsEnum.serialNumber,
+        headerName: $localize`Serial number`,
+        //    pinned: true,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: $localize`Serial number`
+      },
+      {
         field: gridSysNameColumnsEnum.moduleId,
         headerName: $localize`Module Id`,
         pinned: false,

@@ -2,12 +2,12 @@
   <button class="btn btn-primary mr-2" (click)="editDcu()">
     <i class="far fa-pencil"></i> <span i18n>Edit</span>
   </button>
-  <app-dc-operations [showOperations]="true" [requestModel]="null" 
+  <app-dc-operations [showOperations]="true" [requestModel]="null"
     [guid]="concentratorId" [selectedItemsCount]="1"></app-dc-operations>
 </div>
 <div class="form-group" *ngIf="edit">
     <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
-    <button class="btn btn-primary" (click)="saveDcu()" i18n>Save</button>    
+    <button class="btn btn-primary" (click)="saveDcu()" i18n>Save</button>
   </div>
 <div *ngIf="data">
 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
@@ -17,65 +17,65 @@
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>Name</label></div>
-      <div><span>{{form.get(nameProperty).value}}</span></div>        
+      <div><span>{{form.get(nameProperty).value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
-      <div><label i18n>ID</label></div>
-      <div><span>{{form.get(serialNumberProperty).value}}</span></div>        
+      <div><label i18n>Serial number</label></div>
+      <div><span>{{form.get(serialNumberProperty).value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>MAC</label></div>
-      <div><span>{{form.get(macProperty).value}}</span></div>        
+      <div><span>{{form.get(macProperty).value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>State</label></div>
-      <div><span>{{form.get(statusProperty).value?.value}}</span></div>        
+      <div><span>{{form.get(statusProperty).value?.value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>Type</label></div>
-      <div><span>{{form.get(typeProperty).value?.value}}</span></div>        
+      <div><span>{{form.get(typeProperty).value?.value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>Manufacturer</label></div>
-      <div><span>{{form.get(vendorProperty).value?.value}}</span></div>        
+      <div><span>{{form.get(vendorProperty).value?.value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-3">
       <div><label i18n>IP</label></div>
-      <div><span>{{form.get(ipProperty).value}}</span></div>        
+      <div><span>{{form.get(ipProperty).value}}</span></div>
     </div>
     <div class="col-1">
         <div><label i18n>Port</label></div>
-        <div><span>{{form.get(portProperty).value}}</span></div>        
+        <div><span>{{form.get(portProperty).value}}</span></div>
       </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>Address</label></div>
-      <div><span>{{form.get(addressProperty).value}}</span></div>        
+      <div><span>{{form.get(addressProperty).value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label i18n>Tags</label></div>
-      <div><span>{{form.get(tagsProperty).value}}</span></div>        
+      <div><span>{{form.get(tagsProperty).value}}</span></div>
     </div>
   </div>
   <div class="form-row mb-4" *ngIf="credentialsVisible">
     <div class="col-4">
         <div><label i18n>Username</label></div>
-        <div><span>{{form.get(userNameProperty).value}}</span></div>        
+        <div><span>{{form.get(userNameProperty).value}}</span></div>
       </div>
   </div>
 </div>
@@ -89,7 +89,7 @@
   </div>
   <div class="form-row">
     <div class="col-4">
-        <app-input-text [form]="form" [property]="serialNumberProperty" i18n-label label="ID">
+        <app-input-text [form]="form" [property]="serialNumberProperty" i18n-label label="Serial number">
         </app-input-text>
     </div>
   </div>
@@ -102,10 +102,10 @@
     </div>
   </div>
   <div class="form-row">
-    <div class="col-4">      
+    <div class="col-4">
       <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="dcuStatuses$ | async"
         [disabled]="true">
-      </app-select-input>      
+      </app-select-input>
     </div>
   </div>
   <div class="form-row">
@@ -138,7 +138,7 @@
         </app-input-text>
     </div>
   </div>
-  <div class="form-row">    
+  <div class="form-row">
     <div class="col-4">
       <fieldset [disabled]="true">
         <app-input-text [form]="form" [property]="tagsProperty" i18n-label label="Tags">
