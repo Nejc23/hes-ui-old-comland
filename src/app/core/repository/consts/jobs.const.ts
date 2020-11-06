@@ -7,7 +7,3 @@ export const enableJob = `${basePath}/jobs-enable`;
 export const executeJob = `${basePath}/jobs-execute`;
 export const addNewScheduleDevice = `${basePath}/add-new-schedule-device`;
 export const schedulerActiveJobs = `${basePath}/active-jobs`;
-
-// codelist
-export const jobsDiscoveryJobs = `${basePath}/jobs?type=1`;
-export const jobsReadingJobs = `${basePath}/jobs?type=2`;

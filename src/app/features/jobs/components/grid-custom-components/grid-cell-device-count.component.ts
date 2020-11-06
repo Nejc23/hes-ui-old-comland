@@ -27,7 +27,7 @@ export class GridCellDeviceCountComponent {
   }
 
   public isDeviceCountVisible(): boolean {
-    return this.params.node.data.deviceCount > 0;
+    return this.params.node && this.params.node.data && this.params.node.data.deviceCount && this.params.node.data.deviceCount > 0;
   }
 
   public showDevicesForJob(params): void {

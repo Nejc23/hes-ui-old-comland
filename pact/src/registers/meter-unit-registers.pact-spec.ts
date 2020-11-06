@@ -103,8 +103,8 @@ describe('Pact consumer test', () => {
           uponReceiving: 'a request for getting meter unit registers',
           withRequest: {
             method: service.getDeviceRegistersRequest(requestBody).method,
-            path: `/api/device-inventory-ui/registers`, // service.getDeviceRegistersRequest(requestBody).url,
-            query: { '': 'data' },
+            path: `/api/templating/registers`, // service.agetDeviceRegistersRequest(requestBody).url,
+            query: { type: 'schedulable' },
             headers: defaultRequestHeader
           },
           willRespondWith: {

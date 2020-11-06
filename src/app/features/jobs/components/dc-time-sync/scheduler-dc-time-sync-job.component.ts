@@ -92,7 +92,7 @@ export class SchedulerDcTimeSyncJobComponent implements OnInit {
           this.monthDays = data.monthDays;
           this.form = this.createForm(data);
           // fill session with selected importTemplates
-          this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam.id);
+          this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam?.id);
           this.changeReadOptionId();
           this.form.get(this.registersProperty).clearValidators();
         });

@@ -2,11 +2,11 @@
 
   <a *ngIf="isDeviceCountVisible()" (click)="showDevicesForJob(params)" href="javascript:void(0);">
     <span class="badge badge-secondary">
-      {{ params.node.data.deviceCount }}
+      {{ params.node?.data?.deviceCount }}
     </span>
   </a>
   <span *ngIf="!isDeviceCountVisible()" class="badge badge-secondary">
-    {{ params.node.data.deviceCount }}
+    {{ params.node?.data?.deviceCount }}
   </span>
 
 </div>
