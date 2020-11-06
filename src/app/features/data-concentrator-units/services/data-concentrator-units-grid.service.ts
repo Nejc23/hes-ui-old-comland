@@ -93,6 +93,42 @@ export class DataConcentratorUnitsGridService {
         headerTooltip: $localize`Name`
       },
       {
+        field: 'id',
+        headerName: $localize`Serial number`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: $localize`Serial number`
+      },
+      {
+        field: 'ip',
+        headerName: $localize`IP`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIpComponent',
+        headerTooltip: $localize`IP`
+      },
+      {
+        field: 'type',
+        headerName: $localize`Type`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellTypeComponent',
+        headerTooltip: $localize`Type`
+      },
+      {
+        field: 'vendor',
+        headerName: $localize`Manufacturer`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellVendorComponent',
+        headerTooltip: $localize`Manufacturer`
+      },
+      {
         field: 'meters',
         headerName: $localize`Meters`,
         //    pinned: true,
@@ -110,42 +146,6 @@ export class DataConcentratorUnitsGridService {
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
         headerTooltip: $localize`Read status`
-      },
-      {
-        field: 'type',
-        headerName: $localize`Type`,
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: $localize`Type`
-      },
-      {
-        field: 'vendor',
-        headerName: $localize`Vendor`,
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Vendor`
-      },
-      {
-        field: 'id',
-        headerName: $localize`Serial number`,
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`Serial number`
-      },
-      {
-        field: 'ip',
-        headerName: $localize`IP`,
-        pinned: false,
-        sortable: true,
-        filter: false,
-        cellRenderer: 'gridCellIpComponent',
-        headerTooltip: $localize`IP`
       },
       {
         field: 'lastCommunication',
