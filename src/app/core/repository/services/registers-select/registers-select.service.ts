@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { RegistersSelectList } from '../../interfaces/registers-select/registers-select-list.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
-import { registers } from '../../consts/meter-units.const';
+import { registers } from '../../consts/auto-templates.const';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +17,7 @@ export class RegistersSelectService {
   }
 
   getDeviceRegistersRequest(param: GridBulkActionRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', registers, param);
+    // return new HttpRequest('POST', registers, param);
+    return new HttpRequest('GET', `${registers}?type=schedulable`);
   }
 }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { timeUnitCodes, jobsDiscoveryJobs } from 'src/app/core/repository/consts/jobs.const';
+import { timeUnitCodes, schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
 
 @Injectable()
 export class JobsCodelistInterceptor {
@@ -42,7 +42,8 @@ export class JobsCodelistInterceptor {
   }
 
   static canInterceptJobsDiscoveryJobs(request: HttpRequest<any>): boolean {
-    return new RegExp(jobsDiscoveryJobs).test(request.url);
+    console.log('canInterceptJobsDiscoveryJobs', request);
+    return new RegExp(`${schedulerJobs}\\?type=1&type=3`).test(request.url);
   }
 
   static interceptJobsDiscoveryJobs(): Observable<HttpEvent<any>> {

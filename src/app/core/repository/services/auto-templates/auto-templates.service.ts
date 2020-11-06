@@ -75,6 +75,6 @@ export class AutoTemplatesService {
   }
 
   getRegistersRequest(deviceId: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${autoTemplateDevice}/${deviceId}/registers?=data`);
+    return new HttpRequest('GET', `${autoTemplateDevice}/${deviceId}/registers?type=data`);
   }
 }

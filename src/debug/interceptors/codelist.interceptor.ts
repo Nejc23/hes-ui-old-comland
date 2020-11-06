@@ -1,3 +1,4 @@
+import { schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -7,7 +8,6 @@ import { dcuStatuses, dcuTypes, dcuVendors, dcuTags } from 'src/app/core/reposit
 import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { companies } from 'src/app/core/repository/consts/authentication-endpoint-url.const';
-import { jobsReadingJobs } from 'src/app/core/repository/consts/jobs.const';
 import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
 import { enumMyGridLink } from 'src/app/core/repository/consts/my-grid-link.const';
 
@@ -190,7 +190,7 @@ export class CodelistInterceptor {
   }
 
   static canInterceptReadingJobList(request: HttpRequest<any>): boolean {
-    return new RegExp(jobsReadingJobs).test(request.url);
+    return new RegExp(`${schedulerJobs}\\?type=2`).test(request.url);
   }
 
   static interceptReadingJobList(): Observable<HttpEvent<any>> {

@@ -3,7 +3,7 @@ import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
-import { registers } from 'src/app/core/repository/consts/meter-units.const';
+import { registers } from 'src/app/core/repository/consts/auto-templates.const';
 
 @Injectable()
 export class RegistersSelectInterceptor {
@@ -70,6 +70,7 @@ export class RegistersSelectInterceptor {
   }
 
   static canInterceptMeterUnitRegisters(request: HttpRequest<any>): boolean {
-    return new RegExp(registers).test(request.url) && request.method.endsWith('POST');
+    // return new RegExp(registers).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(registers).test(request.url) && request.method.endsWith('GET');
   }
 }
