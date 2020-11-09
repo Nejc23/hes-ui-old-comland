@@ -699,7 +699,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.requestModel.searchModel = this.setSearch();
     this.requestModel.filter = this.setFilterVendors();
 
-    const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
   }
 
