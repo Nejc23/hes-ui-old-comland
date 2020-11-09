@@ -1,4 +1,3 @@
-import { onDemandCiiState } from './../../../../../core/repository/consts/my-grid-link.const';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
@@ -67,6 +66,24 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   }
   onCiiDeactivate() {
     this.params.context.componentParent.onCiiDeactivate(this.params.data.deviceId);
+  }
+
+  onRelaysConnect(selectedGuid: string) {
+    this.params.context.componentParent.onRelaysConnect(this.params.data.deviceId);
+  }
+
+  onRelaysDisconnect(selectedGuid: string) {
+    this.params.context.componentParent.onRelaysDisconnect(this.params.data.deviceId);
+  }
+
+  // popup
+  onRelaysState(selectedGuid: string) {
+    this.params.context.componentParent.onRelaysState(this.params.data.deviceId);
+  }
+
+  // popup
+  onRelaysSetMode(selectedGuid: string) {
+    this.params.context.componentParent.onRelaysSetMode(this.params.data.deviceId);
   }
 
   onClearFF() {
