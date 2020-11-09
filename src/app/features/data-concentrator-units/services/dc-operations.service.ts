@@ -325,4 +325,35 @@ export class DcOperationsService {
 
     return requestParam;
   }
+
+  getOperationRequestParamOld(guid: string, requestModel: GridRequestParams): RequestFilterParams {
+    const requestParam: RequestFilterParams = {
+      concentratorIds: null
+    };
+    console.log('getOperationRequestParamOld()', guid, requestModel);
+    // select from row
+    if (guid && guid.length > 0) {
+      requestParam.concentratorIds = [];
+      requestParam.concentratorIds.push(guid);
+    } else {
+      if (this.dcGridService.getSessionSettingsSelectedAll()) {
+        const excludedRows = this.dcGridService.getSessionSettingsExcludedRows();
+
+        requestParam.filter = requestModel.filterModel;
+        requestParam.search = requestModel.searchModel;
+        requestParam.excludeIds = [];
+
+        excludedRows.map(row => requestParam.excludeIds.push(row.concentratorId));
+      } else {
+        const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
+
+        if (selectedRows && selectedRows.length > 0) {
+          requestParam.concentratorIds = [];
+          selectedRows.map(row => requestParam.concentratorIds.push(row.concentratorId));
+        }
+      }
+    }
+
+    return requestParam;
+  }
 }
