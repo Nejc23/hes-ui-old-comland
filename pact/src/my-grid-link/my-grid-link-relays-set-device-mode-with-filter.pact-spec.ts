@@ -1,3 +1,4 @@
+import { RelayMode } from './../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
@@ -26,14 +27,14 @@ describe('Pact consumer test', () => {
   });
 
   const requestBody: IActionRequestRelaysMode = {
-    RelaysObjects: [
+    relayMode: [
       {
-        name: 'relay 1',
-        mode: 1
+        relayGroupId: 'relay 1',
+        relayMode: 1
       },
       {
-        name: 'relay 2',
-        mode: 2
+        relayGroupId: 'relay 2',
+        relayMode: 2
       }
     ],
     filter: [
@@ -67,14 +68,14 @@ describe('Pact consumer test', () => {
 
   const responseBody: IActionResponseRelaysMode = {
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
-    RelaysObjects: [
+    relayMode: [
       {
-        name: 'relay 1',
-        mode: 1
+        relayGroupId: 'relay 1',
+        relayMode: 1
       },
       {
-        name: 'relay 2',
-        mode: 2
+        relayGroupId: 'relay 2',
+        relayMode: 2
       }
     ],
     filter: [

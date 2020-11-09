@@ -64,7 +64,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
 
   fillData(): IActionRequestRelays {
     const formData: IActionRequestRelays = {
-      RelaysObjects: [this.form.get(this.relayProperty).value ? this.form.get(this.relayProperty).value.value : null],
+      relayIds: [this.form.get(this.relayProperty).value ? this.form.get(this.relayProperty).value.value : null],
       pageSize: this.actionRequest.pageSize,
       pageNumber: this.actionRequest.pageNumber,
       sort: this.actionRequest.sort,

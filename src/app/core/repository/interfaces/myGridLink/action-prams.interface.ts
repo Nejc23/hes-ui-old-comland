@@ -20,9 +20,9 @@ export interface IActionFilterParams {
   filterOperation: string;
 }
 
-export interface RelayObject {
-  name: string;
-  mode: number;
+export interface RelayMode {
+  relayGroupId: string;
+  relayMode: number;
 }
 
 export interface IActionResponseParams extends IActionRequestParams {
@@ -67,17 +67,17 @@ export interface IActionResponseFwUpgradeData extends IActionResponseParams {
 
 // for relays actions
 export interface IActionRequestRelays extends IActionRequestParams {
-  RelaysObjects: string[];
+  relayIds: string[];
 }
 
 export interface IActionRequestRelaysMode extends IActionRequestParams {
-  RelaysObjects: RelayObject[];
+  relayMode: RelayMode[];
 }
 
 export interface IActionResponseRelays extends IActionResponseParams {
-  RelaysObjects: string[];
+  relayIds: string[];
 }
 
 export interface IActionResponseRelaysMode extends IActionResponseParams {
-  RelaysObjects: RelayObject[];
+  relayMode: RelayMode[];
 }

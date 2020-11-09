@@ -79,10 +79,10 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
 
   fillData(): IActionRequestRelaysMode {
     const formData: IActionRequestRelaysMode = {
-      RelaysObjects: [
+      relayMode: [
         {
-          name: this.form.get(this.relayProperty).value ? this.form.get(this.relayProperty).value.value : null,
-          mode: this.form.get(this.modeProperty).value ? this.form.get(this.modeProperty).value.id : null
+          relayGroupId: this.form.get(this.relayProperty).value ? this.form.get(this.relayProperty).value.value : null,
+          relayMode: this.form.get(this.modeProperty).value ? this.form.get(this.modeProperty).value.id : null
         }
       ],
       pageSize: this.actionRequest.pageSize,

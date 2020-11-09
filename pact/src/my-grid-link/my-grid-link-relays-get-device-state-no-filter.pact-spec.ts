@@ -26,7 +26,7 @@ describe('Pact consumer test', () => {
   });
 
   const requestBody: IActionRequestRelays = {
-    RelaysObjects: ['relay 1', 'relay 2'],
+    relayIds: ['relay 1', 'relay 2'],
     pageSize: 1,
     pageNumber: 1,
     sort: [
@@ -41,7 +41,7 @@ describe('Pact consumer test', () => {
   };
 
   const responseBody: IActionResponseRelays = {
-    RelaysObjects: ['relay 1', 'relay 2'],
+    relayIds: ['relay 1', 'relay 2'],
     pageSize: 1,
     pageNumber: 1,
     sort: [

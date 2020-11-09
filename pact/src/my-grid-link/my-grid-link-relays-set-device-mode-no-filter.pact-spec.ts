@@ -26,14 +26,14 @@ describe('Pact consumer test', () => {
   });
 
   const requestBody: IActionRequestRelaysMode = {
-    RelaysObjects: [
+    relayMode: [
       {
-        name: 'relay 1',
-        mode: 1
+        relayGroupId: 'relay 1',
+        relayMode: 1
       },
       {
-        name: 'relay 2',
-        mode: 2
+        relayGroupId: 'relay 2',
+        relayMode: 2
       }
     ],
     pageSize: 1,
@@ -50,14 +50,14 @@ describe('Pact consumer test', () => {
   };
 
   const responseBody: IActionResponseRelaysMode = {
-    RelaysObjects: [
+    relayMode: [
       {
-        name: 'relay 1',
-        mode: 1
+        relayGroupId: 'relay 1',
+        relayMode: 1
       },
       {
-        name: 'relay 2',
-        mode: 2
+        relayGroupId: 'relay 2',
+        relayMode: 2
       }
     ],
     pageSize: 1,
