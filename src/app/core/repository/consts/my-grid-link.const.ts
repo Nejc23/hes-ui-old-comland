@@ -23,3 +23,8 @@ export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';
 export const onDemandSetLimiter = '/on-demand/trigger-set-limiter';
 export const onDemandSetBreakerMode = '/on-demand/trigger-set-breaker-mode';
 export const onDemandClearFF = '/on-demand/trigger-clear-ff-register';
+
+export const onDemandRelaysConnect = '/on-demand/relay/connect';
+export const onDemandRelaysDisconnect = '/on-demand/relay/disconnect';
+export const onDemandRelaysState = '/on-demand/trigger-get-named-register-value';
+export const onDemandRelaysMode = '/on-demand/relay/mode';

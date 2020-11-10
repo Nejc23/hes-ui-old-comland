@@ -19,6 +19,10 @@ import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-moni
 import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
+import { PlcMeterRelaysConnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-connect.component';
+import { PlcMeterRelaysDisconnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
+import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
+import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 
 @Injectable({
   providedIn: 'root'
@@ -114,6 +118,91 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+    const modalRef = this.modalService.open(PlcMeterRelaysConnectComponent);
+    modalRef.componentInstance.actionRequest = params;
+
+    // TODO: this should be removed when there is a new filtering structure on every method
+    modalRef.componentInstance.filterParam = paramsLegacy.filter;
+    modalRef.componentInstance.searchParam = paramsLegacy.search;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onRelaysDisconnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+    const modalRef = this.modalService.open(PlcMeterRelaysDisconnectComponent);
+    modalRef.componentInstance.actionRequest = params;
+
+    // TODO: this should be removed when there is a new filtering structure on every method
+    modalRef.componentInstance.filterParam = paramsLegacy.filter;
+    modalRef.componentInstance.searchParam = paramsLegacy.search;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onRelaysState(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+    const modalRef = this.modalService.open(PlcMeterRelaysStateComponent);
+    modalRef.componentInstance.actionRequest = params;
+
+    // TODO: this should be removed when there is a new filtering structure on every method
+    modalRef.componentInstance.filterParam = paramsLegacy.filter;
+    modalRef.componentInstance.searchParam = paramsLegacy.search;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.meterUnitsTypeGridService.saveMyGridLink_RelaysState_RequestId(data.requestId);
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onRelaysSetMode(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+    const modalRef = this.modalService.open(PlcMeterRelaysSetModeComponent);
+    modalRef.componentInstance.actionRequest = params;
+
+    // TODO: this should be removed when there is a new filtering structure on every method
+    modalRef.componentInstance.filterParam = paramsLegacy.filter;
+    modalRef.componentInstance.searchParam = paramsLegacy.search;
 
     modalRef.result.then(
       data => {

@@ -1,3 +1,6 @@
+import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
+import { PlcMeterRelaysDisconnectComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
+import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-connect.component';
 import { SchedulerDcTimeSyncJobComponent } from './../features/jobs/components/dc-time-sync/scheduler-dc-time-sync-job.component';
 import { PlcMeterFwUpgradeComponent } from './../features/meter-units/common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { NgModule } from '@angular/core';
@@ -61,6 +64,7 @@ import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common
 import { PlcMeterMonitorComponent } from '../features/meter-units/common/components/plc-meter-monitor/plc-meter-monitor.component';
 import { PlcMeterLimiterComponent } from '../features/meter-units/common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
+import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 
 @NgModule({
   exports: [
@@ -108,7 +112,11 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     SchedulerActiveJobsComponent,
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent,
-    PlcMeterBreakerModeComponent
+    PlcMeterBreakerModeComponent,
+    PlcMeterRelaysConnectComponent,
+    PlcMeterRelaysDisconnectComponent,
+    PlcMeterRelaysStateComponent,
+    PlcMeterRelaysSetModeComponent
   ],
   imports: [
     CommonModule,
@@ -179,7 +187,11 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     GridCellNameComponent,
     GridCellIdNumberComponent,
     GridCellIpComponent,
-    PlcMeterBreakerModeComponent
+    PlcMeterBreakerModeComponent,
+    PlcMeterRelaysConnectComponent,
+    PlcMeterRelaysDisconnectComponent,
+    PlcMeterRelaysStateComponent,
+    PlcMeterRelaysSetModeComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -198,7 +210,11 @@ import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/com
     TouConfigSelectComponent,
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent,
-    PlcMeterBreakerModeComponent
+    PlcMeterBreakerModeComponent,
+    PlcMeterRelaysConnectComponent,
+    PlcMeterRelaysDisconnectComponent,
+    PlcMeterRelaysStateComponent,
+    PlcMeterRelaysSetModeComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

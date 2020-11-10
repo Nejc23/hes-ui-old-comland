@@ -814,6 +814,34 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   // popup
+  onRelaysConnect(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy);
+  }
+
+  // popup
+  onRelaysDisconnect(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy);
+  }
+
+  // popup
+  onRelaysState(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysState(params, paramsLegacy);
+  }
+
+  // popup
+  onRelaysSetMode(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy);
+  }
+
+  // popup
   onDisconnectorMode(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
@@ -856,16 +884,21 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                 });
               }
 
+              // 4th step for CII state
               const ciiStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_CiiState_RequestIds();
               const isCiiState = _.find(ciiStateRequests, x => x === requestId);
-              // 3th step for CII state
               if (isCiiState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe(resultsCiiState => {
-                  // // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
-                  // if (resultsCiiState) {
-                  //   this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
-                  // }
                   this.meterUnitsTypeGridService.removeMyGridLink_CiiState_RequestId(requestId);
+                });
+              }
+
+              // 5th step for relays state
+              const relaysStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_RelaysState_RequestIds();
+              const isRelaysState = _.find(ciiStateRequests, x => x === requestId);
+              if (isRelaysState) {
+                this.service.getOnDemandDataProcessing(requestId).subscribe(resultsRelaysState => {
+                  this.meterUnitsTypeGridService.removeMyGridLink_RelaysState_RequestId(requestId);
                 });
               }
 

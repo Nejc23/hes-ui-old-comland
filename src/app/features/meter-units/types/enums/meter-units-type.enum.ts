@@ -8,5 +8,9 @@ export enum MeterUnitsTypeEnum {
   clearFF = 'clearFF',
   ciiActivate = 'ciiActivate',
   ciiDeactivate = 'ciiDeactivate',
-  ciiState = 'ciiState'
+  ciiState = 'ciiState',
+  relaysState = 'relaysState',
+  relaysConnect = 'relaysConnect',
+  relaysDisconnect = 'relaysDisconnect',
+  relaysMode = 'relaysMode'
 }

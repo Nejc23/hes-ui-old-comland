@@ -1,4 +1,18 @@
-import { onDemandCiiState, onDemandCiiActivate, onDemandCiiDeactivate } from './../../consts/my-grid-link.const';
+import {
+  IActionRequestRelays,
+  IActionRequestRelaysMode,
+  IActionResponseRelays,
+  IActionResponseRelaysMode
+} from './../../interfaces/myGridLink/action-prams.interface';
+import {
+  onDemandCiiState,
+  onDemandCiiActivate,
+  onDemandCiiDeactivate,
+  onDemandRelaysState,
+  onDemandRelaysMode,
+  onDemandRelaysDisconnect,
+  onDemandRelaysConnect
+} from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -211,5 +225,41 @@ export class MyGridLinkService {
 
   clearFFRequest(param: RequestFilterParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearFF}`, param);
+  }
+
+  // relays connect
+  postRelaysConnectDevice(params: IActionRequestRelays): Observable<IActionResponseRelays> {
+    return this.repository.makeRequest(this.postRelaysConnectDeviceRequest(params));
+  }
+
+  postRelaysConnectDeviceRequest(params: IActionRequestRelays): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRelaysConnect}`, params);
+  }
+
+  // relays disconnect
+  postRelaysDisconnectDevice(params: IActionRequestRelays): Observable<IActionResponseRelays> {
+    return this.repository.makeRequest(this.postRelaysDisconnectDeviceRequest(params));
+  }
+
+  postRelaysDisconnectDeviceRequest(params: IActionRequestRelays): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRelaysDisconnect}`, params);
+  }
+
+  // relays state
+  getRelaysState(params: IActionRequestRelays): Observable<IActionResponseRelays> {
+    return this.repository.makeRequest(this.getRelaysStateRequest(params));
+  }
+
+  getRelaysStateRequest(params: IActionRequestRelays): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRelaysState}`, params);
+  }
+
+  // relays mode
+  setRelaysMode(payload: IActionRequestRelaysMode): Observable<IActionResponseRelaysMode> {
+    return this.repository.makeRequest(this.setRelaysModeRequest(payload));
+  }
+
+  setRelaysModeRequest(payload: IActionRequestRelaysMode): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRelaysMode}`, payload);
   }
 }

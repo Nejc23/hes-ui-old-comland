@@ -20,6 +20,11 @@ export interface IActionFilterParams {
   filterOperation: string;
 }
 
+export interface RelayMode {
+  relayGroupId: string;
+  relayMode: number;
+}
+
 export interface IActionResponseParams extends IActionRequestParams {
   requestId: string;
 }
@@ -58,4 +63,21 @@ export interface IActionResponseFwUpgradeData extends IActionResponseParams {
   imageSize: number;
   signature: string;
   overrideFillLastBlock: boolean;
+}
+
+// for relays actions
+export interface IActionRequestRelays extends IActionRequestParams {
+  relayIds: string[];
+}
+
+export interface IActionRequestRelaysMode extends IActionRequestParams {
+  relayMode: RelayMode[];
+}
+
+export interface IActionResponseRelays extends IActionResponseParams {
+  relayIds: string[];
+}
+
+export interface IActionResponseRelaysMode extends IActionResponseParams {
+  relayMode: RelayMode[];
 }

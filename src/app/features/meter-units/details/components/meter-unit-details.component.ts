@@ -345,6 +345,33 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiDeactivate, params, 1);
   }
 
+  onRelaysConnect(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy);
+  }
+
+  // popup
+  onRelaysDisconnect(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy);
+  }
+
+  // popup
+  onRelaysState(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysState(params, paramsLegacy);
+  }
+
+  // popup
+  onRelaysSetMode(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy);
+  }
+
   onClearFF() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearFF, params, 1);

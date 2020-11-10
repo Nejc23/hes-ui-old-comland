@@ -38,6 +38,7 @@ export class MeterUnitsTypeGridService {
   gridName = 'grdMUT-requestIds';
   gridNameBreakerState = 'grdMUT-breaker-state-requestIds';
   gridNameCiiState = 'grdMUT-cii-state-requestIds';
+  gridNameRelaysState = 'grdMUT-relays-state-requestIds';
 
   columns = [];
   paramsDCU = {} as GridRequestParams;
@@ -609,6 +610,10 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameCiiState, requestId);
   }
 
+  saveMyGridLink_RelaysState_RequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridNameRelaysState, requestId);
+  }
+
   removeMyGridLink_BreakerState_RequestId(requestId: string) {
     this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameBreakerState, requestId);
   }
@@ -617,12 +622,20 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameCiiState, requestId);
   }
 
+  removeMyGridLink_RelaysState_RequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridNameRelaysState, requestId);
+  }
+
   getAllMyGridLink_BreakerState_RequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
   }
 
   getAllMyGridLink_CiiState_RequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameCiiState);
+  }
+
+  getAllMyGridLink_RelaysState_RequestIds(): string[] {
+    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameRelaysState);
   }
 
   saveCryptoimportId(importId: string) {
