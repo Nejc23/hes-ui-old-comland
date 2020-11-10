@@ -90,7 +90,7 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.postRelaysDisconnectDevice(values);
-    const successMessage = $localize`Meter Units Relays Disconnect was successful`;
+    const successMessage = $localize`Action in progress!`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         this.modal.close();
