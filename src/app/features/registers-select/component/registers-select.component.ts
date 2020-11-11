@@ -58,7 +58,7 @@ export class RegistersSelectComponent implements OnInit {
 
   selectRows(selectedRows: RegistersSelectRequest[]) {
     if (this.gridApi) {
-      this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
+      // this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
       this.gridApi.forEachNode(node => {
         if (
           node.data !== undefined &&
