@@ -240,6 +240,8 @@ export class DataConcentratorUnitsSelectGridService {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (ids !== undefined && ids != null && ids.length > 0) {
       settings.selectedRows = ids;
+    } else {
+      settings.selectedRows = [];
     }
 
     this.gridSettingsSessionStoreService.setGridSettings(

@@ -18,6 +18,7 @@ import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component'
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -67,7 +68,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private authService: AuthService,
     private breadcrumbService: BreadcrumbService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private codelistService: CodelistRepositoryService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -222,26 +224,32 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     const options: NgbModalOptions = {
       size: 'xl'
     };
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
 
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.refreshGrid();
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+    this.codelistService.timeUnitCodeslist().subscribe(units => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormAddNew(units);
+
+      modalRef.result.then(
+        data => {
+          // on close (CONFIRM)
+          this.refreshGrid();
+        },
+        reason => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
   }
 
   addDiscoveryJob() {
     const options: NgbModalOptions = {
       size: 'xl'
     };
+
     const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
+    const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
+    component.setFormAddNew();
 
     modalRef.result.then(
       data => {
@@ -258,8 +266,10 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     const options: NgbModalOptions = {
       size: 'xl'
     };
+
     const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
     const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
+    component.setFormAddNew();
 
     modalRef.result.then(
       data => {
