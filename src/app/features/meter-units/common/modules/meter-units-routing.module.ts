@@ -11,14 +11,14 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Meter Units',
+      breadcrumb: $localize`Meter Units`,
       permission: FunctionalityEnumerator.MU
     },
     children: [
       {
         path: 'overview',
         data: {
-          breadcrumb: 'Overview - Meter Units'
+          breadcrumb: $localize`Overview - Meter Units`
         },
         children: [
           {
@@ -48,7 +48,7 @@ const routes: Routes = [
       {
         path: 'details/:deviceId',
         data: {
-          breadcrumb: 'Meter Unit'
+          breadcrumb: $localize`Meter Unit`
         },
         component: MeterUnitDetailsComponent
       },

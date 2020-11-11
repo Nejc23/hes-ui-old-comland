@@ -74,7 +74,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   /*getBreadcrumbLabel(breadcrumb: Breadcrumb) {
-    return  '' // $localize `{{label}}`, { label: breadcrumb.label }; 
+    return  '' // $localize `{{label}}`, { label: breadcrumb.label };
   }*/
 
   showBreadcrumb(): boolean {

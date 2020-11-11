@@ -8,7 +8,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Data Concentrator Units',
+      breadcrumb: $localize`Data Concentrator Units`,
       permission: FunctionalityEnumerator.DCU
     },
     children: [
@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: ':id',
         data: {
-          breadcrumb: 'Concentrator',
+          breadcrumb: $localize`Concentrator`,
           permission: FunctionalityEnumerator.DCU
         },
         component: DataConcentratorDetailComponent

@@ -10,35 +10,35 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Configuration',
+      breadcrumb: $localize`Configuration`,
       permission: FunctionalityEnumerator.MU
     },
     children: [
       {
         path: 'importTemplates',
         data: {
-          breadcrumb: 'Import templates'
+          breadcrumb: $localize`Import templates`
         },
         component: PlcMeterTemplatesImportComponent
       },
       {
         path: 'importTouConfiguration',
         data: {
-          breadcrumb: 'Import TOU configuration'
+          breadcrumb: $localize`Import TOU configuration`
         },
         component: PlcMeterTouConfigImportComponent
       },
       {
         path: 'autoTemplates',
         data: {
-          breadcrumb: 'Auto template'
+          breadcrumb: $localize`Auto template`
         },
         component: AutoTemplateComponent
       },
       {
         path: 'importDeviceKeys',
         data: {
-          breadcrumb: 'Import device Keys'
+          breadcrumb: $localize`Import device Keys`
         },
         component: ImportDeviceKeysComponent
       }
