@@ -5,12 +5,12 @@ import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.inter
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  public titleBreadCrumbs = $localize`Data Concentrator Units`;
+  // public titleBreadCrumbs = $localize`Data Concentrator Units`;
 
   constructor() {}
 
   get headerTitleDCU() {
-    return $localize`Data Concentrator Units`;
+    return $localize`Concentrators`;
   }
 
   get jobsTitle() {

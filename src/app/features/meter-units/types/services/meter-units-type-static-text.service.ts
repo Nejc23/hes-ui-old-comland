@@ -5,12 +5,12 @@ import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interf
   providedIn: 'root'
 })
 export class MeterUnitsTypeStaticTextService {
-  public titleBreadCrumbs = $localize`Overview - Meter Units`;
+  // public titleBreadCrumbs = $localize`Overview - Meter Units`;
 
   constructor() {}
 
   get headerTitleMeterUnitsType() {
-    return $localize`Meter Units`;
+    return $localize`Meters`;
   }
   /*
   get breadcrumbNameDCU() {
