@@ -85,31 +85,36 @@ export class SchedulerJobComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.jobsTimeUnits$ = this.codelistService.timeUnitCodeslist();
-    this.jobsTimeUnits$.subscribe(units => {
-      this.jobsTimeUnits = units;
-      this.defaultTimeUnit = this.jobsTimeUnits.find(x => x.id === 3);
-      if (this.selectedJobId) {
-        this.jobsService.getJob(this.selectedJobId).subscribe(data => {
-          this.selectedId = data.readOptions;
-          this.monthDays = data.monthDays;
-          this.form = this.createForm(data);
-          this.changeReadOptionId();
-          this.form.get(this.registersProperty).clearValidators();
-        });
-      } else {
-        this.form = this.createForm(null);
-        this.changeReadOptionId();
-        this.form.get(this.registersProperty).clearValidators();
-      }
-    });
+  ngOnInit() {}
+
+  setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
+    this.jobsTimeUnits = jobsTimeUnits;
+    this.defaultTimeUnit = jobsTimeUnits.find(x => x.id === 3);
+
+    this.selectedJobId = selectedJobId;
+    this.selectedId = job.readOptions;
+    this.monthDays = job.monthDays;
+    this.form = this.createForm(job);
+    this.changeReadOptionId();
+    this.form.get(this.registersProperty).clearValidators();
+  }
+
+  setFormAddNew(jobsTimeUnits: Codelist<number>[]) {
+    this.jobsTimeUnits = jobsTimeUnits;
+    this.defaultTimeUnit = jobsTimeUnits.find(x => x.id === 3);
+
+    this.form = this.createForm(null);
+    this.changeReadOptionId();
+    this.form.get(this.registersProperty).clearValidators();
   }
 
   fillData(): SchedulerJobForm {
     let time: string = null;
     if (this.show_nHours()) {
       time = this.form.get(this.timeForHoursProperty).value;
+      if (!time) {
+        time = null;
+      }
     } else {
       time = this.form.get(this.timeProperty).value;
       if (time === null || time === '') {
@@ -141,11 +146,11 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   resetAll() {
+    this.selectedJobId = null;
     this.step = 1;
-    this.form.reset();
     this.monthDays = [];
-    this.registers.deselectAllRows();
-    this.selectedId = 0;
+
+    this.setFormAddNew(this.jobsTimeUnits);
   }
 
   showUsePointer() {

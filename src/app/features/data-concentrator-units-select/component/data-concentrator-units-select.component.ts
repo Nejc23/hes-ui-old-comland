@@ -81,12 +81,14 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     this.gridOptions = this.dataConcentratorUnitsSelectGridService.setGridOptions();
     this.frameworkComponents = dataConcentratorUnitsSelectGridService.setFrameworkComponents();
     this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(0);
-    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById([]);
+    // this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById([]);
   }
 
   createForm(): FormGroup {
+    const searchedValue = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSearchedText();
     return this.fb.group({
-      ['content']: ['']
+      ['content']: [''],
+      [this.searchProperty]: [searchedValue]
     });
   }
 
@@ -96,8 +98,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   // select rows on load grid from session
   selectRows(api: any) {
+    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
     api.forEachNode(node => {
-      const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
       if (this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
@@ -110,10 +112,10 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         node.data !== undefined &&
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
-        !this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll() &&
-        _.find(selectedRows, x => x === node.data.concentratorId && !node.selected) !== undefined
+        !this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()
       ) {
-        node.setSelected(true);
+        const isSelected = _.find(selectedRows, x => x === node.data.concentratorId) !== undefined;
+        node.setSelected(isSelected);
       }
     });
   }
@@ -312,7 +314,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
       this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(0);
-      this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById([]);
       this.gridApi.onFilterChanged();
     }
   }

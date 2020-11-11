@@ -1,7 +1,7 @@
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
@@ -11,6 +11,7 @@ import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component'
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -25,7 +26,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: JobsService,
-    private eventService: SchedulerJobsEventEmitterService
+    private eventService: SchedulerJobsEventEmitterService,
+    private codelistService: CodelistRepositoryService
   ) {}
 
   // called on init
@@ -54,51 +56,66 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   }
 
   private editReadingJob(params: any, options: NgbModalOptions) {
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.selectedJobId = params.data.id;
+    const selectedJobId = params.data.id;
 
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.eventService.eventEmitterRefresh.emit(true);
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+    const timeUnits$ = this.codelistService.timeUnitCodeslist();
+    const job$ = this.service.getJob(selectedJobId);
+
+    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe(responseList => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job);
+
+      modalRef.result.then(
+        data => {
+          // on close (CONFIRM)
+          this.eventService.eventEmitterRefresh.emit(true);
+        },
+        reason => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
   }
 
   private editDiscoveryJob(params: any, options: NgbModalOptions) {
-    const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
-    const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
-    component.selectedJobId = params.data.id;
+    const selectedJobId = params.data.id;
 
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.eventService.eventEmitterRefresh.emit(true);
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+    this.service.getJob(selectedJobId).subscribe(job => {
+      const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
+      const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
+      component.setFormEdit(selectedJobId, job);
+
+      modalRef.result.then(
+        data => {
+          // on close (CONFIRM)
+          this.eventService.eventEmitterRefresh.emit(true);
+        },
+        reason => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
   }
 
   private editDcTimeSyncJob(params: any, options: NgbModalOptions) {
-    const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
-    const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
-    component.selectedJobId = params.data.id;
+    const selectedJobId = params.data.id;
 
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.eventService.eventEmitterRefresh.emit(true);
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+    this.service.getJob(selectedJobId).subscribe(job => {
+      const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
+      const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
+      component.setFormEdit(selectedJobId, job);
+
+      modalRef.result.then(
+        data => {
+          // on close (CONFIRM)
+          this.eventService.eventEmitterRefresh.emit(true);
+        },
+        reason => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
   }
 
   deleteJob(params: any) {

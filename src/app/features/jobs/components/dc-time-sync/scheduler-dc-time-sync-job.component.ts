@@ -49,10 +49,6 @@ export class SchedulerDcTimeSyncJobComponent implements OnInit {
   noDCUs = false;
   noMonthDays = false;
   requiredText = $localize`Required field`;
-
-  jobsTimeUnits$: Observable<Codelist<number>[]>;
-  jobsTimeUnits: Codelist<number>[];
-  defaultTimeUnit: Codelist<number>;
   step = 1;
 
   constructor(
@@ -80,28 +76,30 @@ export class SchedulerDcTimeSyncJobComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.jobsTimeUnits$ = this.codelistService.timeUnitCodeslist();
-    this.jobsTimeUnits$.subscribe(units => {
-      this.jobsTimeUnits = units;
-      this.defaultTimeUnit = this.jobsTimeUnits.find(x => x.id === 3);
+  ngOnInit() {}
 
-      if (this.selectedJobId) {
-        this.jobsService.getJob(this.selectedJobId).subscribe(data => {
-          this.selectedId = data.readOptions;
-          this.monthDays = data.monthDays;
-          this.form = this.createForm(data);
-          // fill session with selected importTemplates
-          this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam?.id);
-          this.changeReadOptionId();
-          this.form.get(this.registersProperty).clearValidators();
-        });
-      } else {
-        this.form = this.createForm(null);
-        this.changeReadOptionId();
-        this.form.get(this.registersProperty).clearValidators();
-      }
-    });
+  setFormEdit(selectedJobId: string, job: SchedulerJob) {
+    this.selectedJobId = selectedJobId;
+    this.selectedId = job.readOptions;
+    this.monthDays = job.monthDays;
+    this.form = this.createForm(job);
+
+    // fill session with selected importTemplates
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSearchedText(null);
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(job.bulkActionsRequestParam?.id);
+
+    this.changeReadOptionId();
+    this.form.get(this.registersProperty).clearValidators();
+  }
+
+  setFormAddNew() {
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSearchedText(null);
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(null);
+
+    this.form = this.createForm(null);
+
+    this.changeReadOptionId();
+    this.form.get(this.registersProperty).clearValidators();
   }
 
   fillData(): SchedulerJobForm {
@@ -117,12 +115,17 @@ export class SchedulerDcTimeSyncJobComponent implements OnInit {
 
     if (this.show_nHours()) {
       time = this.form.get(this.timeForHoursProperty).value;
+      if (!time) {
+        time = null;
+      }
     } else {
       time = this.form.get(this.timeProperty).value;
       if (time === null) {
         time = new Date().toUTCString();
       }
     }
+
+    console.log('fillData - time after set', time);
 
     const formData: SchedulerJobForm = {
       readOptions: parseInt(this.form.get(this.readOptionsProperty).value, 10),
@@ -148,11 +151,11 @@ export class SchedulerDcTimeSyncJobComponent implements OnInit {
   }
 
   resetAll() {
+    this.selectedJobId = null;
     this.step = 1;
-    this.form.reset();
     this.monthDays = [];
-    this.listOfDCUs.deselectAllRows();
-    this.selectedId = 0;
+
+    this.setFormAddNew();
   }
 
   save(addNew: boolean) {
