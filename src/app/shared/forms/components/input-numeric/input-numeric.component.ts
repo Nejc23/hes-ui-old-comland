@@ -22,6 +22,7 @@ export class InputNumericComponent implements OnInit {
   @Input() max = 100;
   @Input() step = 1;
   @Input() allowShowError = true;
+  @Input() noFlex = false;
 
   @Output() valueChange: EventEmitter<number> = new EventEmitter();
 

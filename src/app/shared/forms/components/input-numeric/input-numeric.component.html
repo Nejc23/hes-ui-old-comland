@@ -5,7 +5,7 @@
     <span *ngIf="required"> *</span>
   </label>
 
-  <div class="d-flex">
+  <div [ngClass]="{'d-flex': !noFlex}">
     <kendo-numerictextbox
       [name]="property"
       class="form-control"
