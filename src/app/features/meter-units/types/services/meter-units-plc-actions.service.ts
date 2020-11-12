@@ -48,6 +48,7 @@ export class MeterUnitsPlcActionsService {
     this.codelistService.timeUnitCodeslist().subscribe(units => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormAddNew(units);
       component.deviceFiltersAndSearch = {
         id: params.deviceIds,
         search: params.search,
