@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { RegistersSelectList } from '../../interfaces/registers-select/registers-select-list.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
-import { registers } from '../../consts/auto-templates.const';
+import { registers } from '../../consts/meter-units.const';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,8 @@ export class RegistersSelectService {
   }
 
   getDeviceRegistersRequest(param: GridBulkActionRequestParams): HttpRequest<any> {
-    // return new HttpRequest('POST', registers, param);
-    return new HttpRequest('GET', `${registers}?type=schedulable`);
+    return new HttpRequest('POST', registers, param);
+    // return new HttpRequest('GET', `${registers}?type=schedulable`);
+    // return new HttpRequest('GET', `${registers}?type=schedulable`);
   }
 }
