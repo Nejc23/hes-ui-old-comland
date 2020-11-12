@@ -6,4 +6,4 @@ export const autoTemplateRulesUpdate = `${basePath}/update-auto-template-rule`;
 export const autoTemplateRulesDelete = `${basePath}/delete-auto-template-rule`;
 export const autoTemplateDevice = `${basePath}/device`;
 
-export const registers = `${basePath}/registers`;
+// export const registers = `${basePath}/registers`;
