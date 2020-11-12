@@ -23,6 +23,7 @@ import { PlcMeterRelaysConnectComponent } from '../../common/components/plc-mete
 import { PlcMeterRelaysDisconnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
 import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,22 +36,26 @@ export class MeterUnitsPlcActionsService {
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: MyGridLinkService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
+    private codelistService: CodelistRepositoryService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams) {
     const options: NgbModalOptions = {
       size: 'xl'
     };
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.deviceFiltersAndSearch = {
-      id: params.deviceIds,
-      search: params.search,
-      filter: params.filter,
-      excludeIds: params.excludeIds
-    };
-    modalRef.result.then().catch(() => {});
+
+    this.codelistService.timeUnitCodeslist().subscribe(units => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.deviceFiltersAndSearch = {
+        id: params.deviceIds,
+        search: params.search,
+        filter: params.filter,
+        excludeIds: params.excludeIds
+      };
+      modalRef.result.then().catch(() => {});
+    });
   }
 
   onTou(params: IActionRequestParams) {
