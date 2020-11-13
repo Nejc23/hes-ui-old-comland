@@ -190,11 +190,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
-    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
-      setTimeout(() => {
-        this.gridApi.sizeColumnsToFit();
-      }, 320);
-    });
   }
 
   ngOnDestroy(): void {
@@ -253,14 +248,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.gridApi.sizeColumnsToFit();
+
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
     // send to subscribers the visibility of columns
     this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
 
-    window.onresize = () => {
-      this.gridApi.sizeColumnsToFit();
-    };
     this.icons = {
       filter: ''
     };
@@ -306,6 +298,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
                 paramsRow.successCallback(data.data, data.totalCount);
                 that.selectRows(that.gridApi);
                 // params.failCallback();
+                that.resizeColumns();
               });
             })
             .catch(err => {
@@ -327,6 +320,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
             paramsRow.successCallback(data.data, data.totalCount);
             that.selectRows(that.gridApi);
             // params.failCallback();
+            that.resizeColumns();
           });
         }
       }
@@ -361,16 +355,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
     return false;
   }
-  onFirstDataRendered(params) {
-    // console.log(params);
-    // this.autoSizeAll(params);
-    // params.api.sizeColumnsToFit();
-    // params.api.showLoadingOverlay();
-  }
+  onFirstDataRendered(params) {}
 
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.dataConcentratorUnitsGridService.onColumnVisibility(params);
+    this.resizeColumns();
   }
 
   // click on check-box in the grid
@@ -683,14 +673,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   toggleFilter() {
     this.hideFilter = !this.hideFilter;
-
-    setTimeout(() => {
-      this.gridApi.sizeColumnsToFit();
-    }, 50);
-
-    window.onresize = () => {
-      this.gridApi.sizeColumnsToFit();
-    };
   }
   // functions for operations called from grid
   // ******************************************************************************** */
@@ -709,5 +691,24 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   filterChanged() {
     this.reloadGrid();
     this.deselectAll();
+  }
+
+  gridSizeChanged() {
+    this.resizeColumns();
+  }
+
+  resizeColumns() {
+    this.gridColumnApi.autoSizeAllColumns(true);
+    const grid = this.gridOptions.api;
+
+    // tslint:disable-next-line: no-string-literal
+    const panel = grid['gridPanel'];
+    const availableWidth = panel.eBodyViewport.clientWidth;
+    const columns = panel.columnController.getAllDisplayedColumns();
+    const usedWidth = panel.columnController.getWidthOfColsInList(columns);
+
+    if (usedWidth < availableWidth) {
+      this.gridApi.sizeColumnsToFit();
+    }
   }
 }
