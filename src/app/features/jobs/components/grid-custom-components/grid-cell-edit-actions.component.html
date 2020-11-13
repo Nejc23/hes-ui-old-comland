@@ -1,5 +1,7 @@
 <div class="d-flex row-actions justify-content-end" >
   <div class="btn-group-sm">
+      <button type="button" class="btn btn-primary m-0" (click)="runJob(params)"><i class="far fa-play"
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('run')"></i></button>
       <button type="button" class="btn btn-primary m-0" (click)="editJob(params)"><i class="far fa-edit"
         container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('edit')"></i></button>
       <button type="button" class="btn btn-primary m-0" (click)="deleteJob(params)"><i class="far fa-trash"

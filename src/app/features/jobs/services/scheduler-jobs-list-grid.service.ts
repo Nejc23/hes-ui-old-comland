@@ -51,15 +51,6 @@ export class SchedulerJobsListGridService {
         maxWidth: 100
       },
       {
-        field: 'type',
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        lockPosition: true,
-        headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`
-      },
-      {
         field: 'description',
         suppressMenu: true,
         sortable: true,
@@ -67,6 +58,15 @@ export class SchedulerJobsListGridService {
         lockPosition: true,
         headerName: $localize`Description`,
         headerTooltip: $localize`Description`
+      },
+      {
+        field: 'type',
+        suppressMenu: true,
+        sortable: true,
+        suppressMovable: true,
+        lockPosition: true,
+        headerName: $localize`Job Type`,
+        headerTooltip: $localize`Job Type`
       },
       {
         field: 'nextRun',
@@ -84,8 +84,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: $localize`Owner`,
-        headerTooltip: $localize`Owner`
+        headerName: $localize`Created by`,
+        headerTooltip: $localize`Created by`
       },
       {
         field: 'deviceCount',
@@ -102,9 +102,9 @@ export class SchedulerJobsListGridService {
       },
       {
         field: 'id',
-        width: 120,
-        minWidth: 120,
-        maxWidth: 120,
+        width: 150,
+        minWidth: 150,
+        maxWidth: 150,
         suppressMenu: true,
         editable: false,
         suppressMovable: true,

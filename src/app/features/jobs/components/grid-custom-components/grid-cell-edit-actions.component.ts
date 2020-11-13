@@ -20,7 +20,8 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
   messageDeleteStarted = $localize`Scheduler job deleted!`;
-  messageDeleteServerError = $localize`Server error!`;
+  messageStarted = $localize`Scheduled job started!`;
+  messageServerError = $localize`Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -39,6 +40,34 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   refresh(params: any): boolean {
     this.params = params;
     return true;
+  }
+
+  runJob(params: any) {
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    let response: Observable<any> = new Observable();
+    const operation = $localize`Execute`;
+    response = this.service.executeSchedulerJob(params.node.data.id);
+    component.btnConfirmText = operation;
+    component.modalTitle = $localize`Confirm operation`;
+    component.modalBody = $localize`Do you want to execute scheduler job now`;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        response.subscribe(
+          value => {
+            this.toast.successToast(this.messageStarted);
+          },
+          e => {
+            this.toast.errorToast(this.messageServerError);
+          }
+        );
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   editJob(params: any) {
@@ -138,7 +167,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
             this.toast.successToast(this.messageDeleteStarted);
           },
           e => {
-            this.toast.errorToast(this.messageDeleteServerError);
+            this.toast.errorToast(this.messageServerError);
           }
         );
       },
@@ -151,6 +180,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   // set tooltip text
   setToolTip(type: string) {
     switch (type) {
+      case 'run':
+        return $localize`Execute job`;
       case 'edit':
         return $localize`Edit job`;
       case 'delete':
