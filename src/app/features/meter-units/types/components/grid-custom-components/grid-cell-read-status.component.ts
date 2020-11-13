@@ -2,17 +2,20 @@ import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import * as moment from 'moment';
 import { readStatusColor } from '../../consts/meter-units.consts';
+import { DataConcentratorUnitsStaticTextService } from 'src/app/features/data-concentrator-units/services/data-concentrator-units-static-text.service';
 
 @Component({
   selector: 'app-grid-cell-read-status',
   templateUrl: './grid-cell-read-status.component.html'
 })
 export class GridCellReadStatusComponent implements ICellRendererAngularComp {
+  notAvailableText = this.statictextService.notAvailableTekst; // N/A
+
   trasholds = readStatusColor;
 
   public params: any;
 
-  constructor() {}
+  constructor(private statictextService: DataConcentratorUnitsStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;

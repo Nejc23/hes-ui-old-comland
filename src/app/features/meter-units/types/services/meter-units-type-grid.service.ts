@@ -1,3 +1,4 @@
+import { GridCellNameComponent } from 'src/app/shared/ag-grid/components/grid-cell-name.component';
 import { GridCellDetailLinkComponent } from '../components/grid-custom-components/grid-cell-detail-link.component';
 import { Injectable } from '@angular/core';
 import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -71,9 +72,9 @@ export class MeterUnitsTypeGridService {
       {
         headerComponentFramework: GridSelectionHeaderComponent,
         pinned: true,
-        minWidth: 50,
-        maxWidth: 50,
-        width: 50,
+        minWidth: 40,
+        maxWidth: 40,
+        width: 40,
         suppressColumnsToolPanel: true,
         checkboxSelection: true,
         suppressMovable: true,
@@ -355,7 +356,8 @@ export class MeterUnitsTypeGridService {
       gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
       gridCellIconComponent: GridCellIconComponent,
       gridCellJobStatusComponent: GridCellJobStatusComponent,
-      gridCellDetailLinkComponent: GridCellDetailLinkComponent
+      gridCellDetailLinkComponent: GridCellDetailLinkComponent,
+      gridCellNameComponent: GridCellNameComponent
     };
   }
 

@@ -274,12 +274,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     };
 
     this.deleteAllRequests();
-
-    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
-      setTimeout(() => {
-        this.gridApi.sizeColumnsToFit();
-      }, 320);
-    });
   }
 
   ngOnDestroy() {
@@ -334,17 +328,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.gridApi.sizeColumnsToFit();
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
     // send to subscribers the visibility of columns
     this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
 
-    window.onresize = () => {
-      this.gridApi.sizeColumnsToFit();
-    };
-    this.icons = {
-      filter: ''
-    };
     /*
     const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
     if (dataFromCookie) {
@@ -390,6 +377,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                 that.selectRows(that.gridApi);
                 that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
                 // params.failCallback();
+                that.resizeColumns();
               });
             })
             .catch(err => {
@@ -412,6 +400,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
             that.selectRows(that.gridApi);
             that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
             // params.failCallback();
+            that.resizeColumns();
           });
         }
       }
@@ -464,14 +453,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
     return false;
   }
-  onFirstDataRendered(params) {
-    //  params.api.sizeColumnsToFit();
-    // params.api.showLoadingOverlay();
-  }
+  onFirstDataRendered(params) {}
 
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.meterUnitsTypeGridService.onColumnVisibility(params);
+
+    setTimeout(() => {
+      this.resizeColumns();
+    }, 300);
   }
 
   // click on check-box in the grid
@@ -975,13 +965,24 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   toggleFilter() {
     this.hideFilter = !this.hideFilter;
+  }
 
-    setTimeout(() => {
-      this.gridApi.sizeColumnsToFit();
-    }, 50);
+  gridSizeChanged() {
+    this.resizeColumns();
+  }
 
-    window.onresize = () => {
+  resizeColumns() {
+    this.gridColumnApi.autoSizeAllColumns(true);
+    const grid = this.gridOptions.api;
+
+    // tslint:disable-next-line: no-string-literal
+    const panel = grid['gridPanel'];
+    const availableWidth = panel.eBodyViewport.clientWidth;
+    const columns = panel.columnController.getAllDisplayedColumns();
+    const usedWidth = panel.columnController.getWidthOfColsInList(columns);
+
+    if (usedWidth < availableWidth) {
       this.gridApi.sizeColumnsToFit();
-    };
+    }
   }
 }
