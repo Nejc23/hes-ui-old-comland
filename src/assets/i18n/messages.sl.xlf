@@ -11,7 +11,7 @@
         <target>Pregled koncentratorjev</target>
       </trans-unit>
       <trans-unit id="6170762843185284641" datatype="html">
-        <source>Concentrator units for</source>
+        <source>Concentrator for</source>
         <target>Podatkovni koncentratorji za</target>
       </trans-unit>
       <trans-unit id="6811901802533648897" datatype="html">
@@ -39,7 +39,7 @@
         <target>Status</target>
       </trans-unit>
       <trans-unit id="7652014282800283826" datatype="html">
-        <source>vendor</source>
+        <source>manufacturer</source>
         <target>proizvajalec</target>
       </trans-unit>
       <trans-unit id="6402703264596649214" datatype="html">
@@ -55,7 +55,7 @@
         <target>firmware</target>
       </trans-unit>
       <trans-unit id="2572210680699877416" datatype="html">
-        <source>show child MBus</source>
+        <source>show M-Bus</source>
         <target>show child MBus</target>
       </trans-unit>
       <trans-unit id="795604053640683941" datatype="html">
@@ -67,11 +67,11 @@
         <target>show only ready for activation</target>
       </trans-unit>
       <trans-unit id="5359201968934397674" datatype="html">
-        <source>Overview - Meter Units</source>
+        <source>Overview - G3-PLC Meters</source>
         <target>Pregled - Števci</target>
       </trans-unit>
       <trans-unit id="3119296281460532422" datatype="html">
-        <source>Meter Units for</source>
+        <source>Meter for</source>
         <target>Meter Units for</target>
       </trans-unit>
       <trans-unit id="7867994676734078400" datatype="html">
@@ -87,7 +87,7 @@
         <target>Status</target>
       </trans-unit>
       <trans-unit id="158816374076721379" datatype="html">
-        <source>Vendor</source>
+        <source>Manufacturer</source>
         <target>proizvajalec</target>
       </trans-unit>
       <trans-unit id="147289373353675866" datatype="html">
@@ -95,7 +95,7 @@
         <target>firmware</target>
       </trans-unit>
       <trans-unit id="563763657621318504" datatype="html">
-        <source>Show only Meter units with information of child (MBus)</source>
+        <source>Show only meters with M-Bus devices</source>
         <target>Prikaži samo števce ki imajo podrejene informacije (MBus)</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
@@ -103,11 +103,11 @@
         <target>Tag</target>
       </trans-unit>
       <trans-unit id="5292172816313390601" datatype="html">
-        <source>Show Meter Units without template</source>
+        <source>Show meters without template</source>
         <target>Show Meter Units without template</target>
       </trans-unit>
       <trans-unit id="4648310973208555307" datatype="html">
-        <source>Show only image ready for activation</source>
+        <source>Show meters with FW image ready for activation</source>
         <target>Show only image ready for activation</target>
       </trans-unit>
       <trans-unit id="8700121026680200191" datatype="html">
@@ -219,11 +219,11 @@
         <target>Potrdi obsežno operacijo</target>
       </trans-unit>
       <trans-unit id="3475265554652114929" datatype="html">
-        <source>Remove <x id="PH"/> Meter Unit(s) from Job?</source>
+        <source>Remove <x id="PH"/> meter(s) from Job?</source>
         <target>Remove <x id="PH"/> Meter Unit(s) from Job?</target>
       </trans-unit>
       <trans-unit id="6690286116494561643" datatype="html">
-        <source>Selected Meter Units removed successfully</source>
+        <source>Selected meters removed successfully</source>
         <target>Selected Meter Units removed successfully</target>
       </trans-unit>
       <trans-unit id="7457179823984196306" datatype="html">
@@ -287,7 +287,7 @@
         <target>Neaktiven</target>
       </trans-unit>
       <trans-unit id="3229595422546554334" datatype="html">
-        <source>Jobs</source>
+        <source>Jobs...</source>
         <target>Jobs</target>
       </trans-unit>
       <trans-unit id="3192723481488641054" datatype="html">
@@ -339,7 +339,7 @@
         <target>IP</target>
       </trans-unit>
       <trans-unit id="1060461174163754666" datatype="html">
-        <source>Data Concentrator Units</source>
+        <source>Concentrators</source>
         <target>Enote Podatkovnih Koncentratorjev</target>
       </trans-unit>
       <trans-unit id="7048448815246352326" datatype="html">
@@ -501,12 +501,9 @@
       <trans-unit id="3990182196643689218" datatype="html">
         <source>More Save options</source>
         <target>Več opcij shranjevanja</target>
-      </trans-unit><trans-unit id="3164102267265520854" datatype="html">
-        <source>DC Time sync job</source>
-        <target state="new">DC Time sync job</target>
       </trans-unit>
       <trans-unit id="8646797504756663636" datatype="html">
-        <source>Scheduler job deleted!</source>
+        <source>Scheduled job deleted!</source>
         <target>Opravilo izbrisano!</target>
       </trans-unit>
       <trans-unit id="7022070615528435141" datatype="html">
@@ -518,7 +515,7 @@
         <target>Potrdi odstranitev</target>
       </trans-unit>
       <trans-unit id="4528916092728981282" datatype="html">
-        <source>Do you want to delete scheduler job?</source>
+        <source>Do you want to delete scheduled job?</source>
         <target>Do you want to delete scheduler job?</target>
       </trans-unit>
       <trans-unit id="3974480456921534163" datatype="html">
@@ -554,11 +551,8 @@
         <target>Reading job</target>
       </trans-unit>
       <trans-unit id="6420455839696291625" datatype="html">
-        <source>Discovery job</source>
+        <source>New discovery job</source>
         <target>Discovery job</target>
-      </trans-unit><trans-unit id="3059662776648332773" datatype="html">
-        <source>Concentrator Units</source>
-        <target state="new">Concentrator Units</target>
       </trans-unit>
       <trans-unit id="9172233176401579786" datatype="html">
         <source>Scheduled</source>
@@ -605,15 +599,15 @@
         <target>Regex</target>
       </trans-unit>
       <trans-unit id="1009146229864778476" datatype="html">
-        <source>Aready added empty row for new item!</source>
+        <source>New item already added!</source>
         <target>Nova prazna vrstica je že dodana!</target>
       </trans-unit>
       <trans-unit id="1577586869987820319" datatype="html">
-        <source>Rule was added successfully</source>
+        <source>Rule added successfully</source>
         <target>Rule was added successfully</target>
       </trans-unit>
       <trans-unit id="1347392190558339815" datatype="html">
-        <source>Rule was updated successfully</source>
+        <source>Rule updated successfully</source>
         <target>Rule was updated successfully</target>
       </trans-unit>
       <trans-unit id="3048341745183582694" datatype="html">
@@ -775,12 +769,6 @@
       <trans-unit id="2508222366608888453" datatype="html">
         <source>Try changing the time.</source>
         <target>Poizkusite spremeniti čas.</target>
-      </trans-unit><trans-unit id="5969349457365616195" datatype="html">
-        <source>Number of events</source>
-        <target state="new">Number of events</target>
-      </trans-unit><trans-unit id="6121577287984845389" datatype="html">
-        <source>Event type</source>
-        <target state="new">Event type</target>
       </trans-unit>
       <trans-unit id="9067968943390939929" datatype="html">
         <source>Show/hide registers</source>
@@ -795,7 +783,7 @@
         <target>Show/hide filters</target>
       </trans-unit>
       <trans-unit id="5689090354669721014" datatype="html">
-        <source>Meter Units</source>
+        <source>Meters</source>
         <target>Meter Units</target>
       </trans-unit>
       <trans-unit id="4269578151092655782" datatype="html">
@@ -827,11 +815,11 @@
         <target>Manual and local re-connection allowed / Manual disconnection not allowed</target>
       </trans-unit>
       <trans-unit id="8046182994475559393" datatype="html">
-        <source>Meter Units set Breaker mode was successfully</source>
+        <source>Setting of disconnector mode succeeded!</source>
         <target>Meter Units set Breaker mode was successfully</target>
       </trans-unit>
       <trans-unit id="6851988935404309725" datatype="html">
-        <source>Set Breaker mode</source>
+        <source>Set Disconnector mode</source>
         <target>Set Breaker mode</target>
       </trans-unit>
       <trans-unit id="4444252067276184823" datatype="html">
@@ -847,7 +835,7 @@
         <target>Izberi/prekliči izbiro</target>
       </trans-unit>
       <trans-unit id="7804366670597991631" datatype="html">
-        <source>'Name</source>
+        <source>&apos;Name</source>
         <target>Ime</target>
       </trans-unit>
       <trans-unit id="3008420115644088420" datatype="html">
@@ -855,7 +843,7 @@
         <target>Konfiguracija</target>
       </trans-unit>
       <trans-unit id="4178550273903314946" datatype="html">
-        <source>Meter Units upload Edited was successfully</source>
+        <source>Meter upload was successfully</source>
         <target>Programska oprema je uspešno prenesena</target>
       </trans-unit>
       <trans-unit id="1490116990594087894" datatype="html">
@@ -887,7 +875,7 @@
         <target>Aktiviraj</target>
       </trans-unit>
       <trans-unit id="1041031208206930198" datatype="html">
-        <source>Meter Units set Limiter was successful</source>
+        <source>Limiter was successfully set!</source>
         <target>Meter Units set Limiter was successful</target>
       </trans-unit>
       <trans-unit id="8546875105047842211" datatype="html">
@@ -899,7 +887,7 @@
         <target>At least one phase with name and treshold should be filled</target>
       </trans-unit>
       <trans-unit id="1003468704826518252" datatype="html">
-        <source>Set Monitor was successful</source>
+        <source>Monitor was successfully set!</source>
         <target>Set Monitor was successful</target>
       </trans-unit>
       <trans-unit id="81587113757838" datatype="html">
@@ -921,12 +909,6 @@
       <trans-unit id="3142656752815743749" datatype="html">
         <source>Action in progress!</source>
         <target>Akcija se izvaja!</target>
-      </trans-unit><trans-unit id="4847931515328475035" datatype="html">
-        <source>Relay Connect</source>
-        <target state="new">Relay Connect</target>
-      </trans-unit><trans-unit id="5046871534910543138" datatype="html">
-        <source>Relay</source>
-        <target state="new">Relay</target>
       </trans-unit>
       <trans-unit id="8553460997100418147" datatype="html">
         <source>for</source>
@@ -935,27 +917,11 @@
       <trans-unit id="813263746069473514" datatype="html">
         <source>Connect</source>
         <target>Connect</target>
-      </trans-unit><trans-unit id="8139016199092331161" datatype="html">
-        <source>Relay Disconnect</source>
-        <target state="new">Relay Disconnect</target>
       </trans-unit>
       <trans-unit id="2907016025519254862" datatype="html">
         <source>Disconnect</source>
         <target>Disconnect</target>
-      </trans-unit><trans-unit id="8742650603995026790" datatype="html">
-        <source>Relay State</source>
-        <target state="new">Relay State</target>
-      </trans-unit><trans-unit id="6542283139659606573" datatype="html">
-        <source>Get</source>
-        <target state="new">Get</target>
-      </trans-unit><trans-unit id="417669376908238435" datatype="html">
-        <source>Setting of relay mode succeeded!</source>
-        <target state="new">Setting of relay mode succeeded!</target>
-      </trans-unit><trans-unit id="2133214078582343516" datatype="html">
-        <source>Relay Mode</source>
-        <target state="new">Relay Mode</target>
       </trans-unit>
-      
       <trans-unit id="7418282871880113131" datatype="html">
         <source>Activate FW upgrade</source>
         <target>Activate FW upgrade</target>
@@ -965,10 +931,9 @@
         <target>Activate Clear FF</target>
       </trans-unit>
       <trans-unit id="847536618547042324" datatype="html">
-        <source>selected meter unit(s)?</source>
+        <source>selected meter(s)?</source>
         <target>selected meter unit(s)?</target>
       </trans-unit>
-      
       <trans-unit id="4359014576353578997" datatype="html">
         <source>Clear Filters</source>
         <target>Clear Filters</target>
@@ -1018,7 +983,7 @@
         <target>Data</target>
       </trans-unit>
       <trans-unit id="2501989539336327542" datatype="html">
-        <source>Upload image</source>
+        <source>Upload image...</source>
         <target>Upload image</target>
       </trans-unit>
       <trans-unit id="8247620175611326692" datatype="html">
@@ -1026,15 +991,15 @@
         <target>Activate image</target>
       </trans-unit>
       <trans-unit id="1713271461473302108" datatype="html">
-        <source>Mode</source>
+        <source>Mode...</source>
         <target>Mode</target>
       </trans-unit>
       <trans-unit id="4691747907262765119" datatype="html">
-        <source>TOU Upload</source>
+        <source>TOU Upload...</source>
         <target>TOU Upload</target>
       </trans-unit>
       <trans-unit id="3536878313651292186" datatype="html">
-        <source>Limiter</source>
+        <source>Limiter...</source>
         <target>Limiter</target>
       </trans-unit>
       <trans-unit id="6812930637022637485" datatype="html">
@@ -1042,7 +1007,7 @@
         <target>Display</target>
       </trans-unit>
       <trans-unit id="8058994642732449354" datatype="html">
-        <source>Monitor</source>
+        <source>Monitor...</source>
         <target>Monitor</target>
       </trans-unit>
       <trans-unit id="7349942499709408343" datatype="html">
@@ -1054,7 +1019,7 @@
         <target>Clear Alarms</target>
       </trans-unit>
       <trans-unit id="4619541944202030137" datatype="html">
-        <source>You have no Data Concentrator Units yet!</source>
+        <source>You have no concentrator yet!</source>
         <target>Trenutno nimate nobene podatkovno koncentratorske enote</target>
       </trans-unit>
       <trans-unit id="4594629863210876240" datatype="html">
@@ -1062,7 +1027,7 @@
         <target>Dodaj novega</target>
       </trans-unit>
       <trans-unit id="3825649834158937429" datatype="html">
-        <source>Meter Unit was updated successfully</source>
+        <source>Meter was updated successfully</source>
         <target>Meter Unit was updated successfully</target>
       </trans-unit>
       <trans-unit id="6478311374284260655" datatype="html">
@@ -1078,7 +1043,7 @@
         <target>From</target>
       </trans-unit>
       <trans-unit id="8013136913336134227" datatype="html">
-        <source>Meter Unit</source>
+        <source>Meter</source>
         <target>Meter Unit</target>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
@@ -1102,11 +1067,8 @@
         <target>Template</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
-        <source>Error saving Meter Unit!</source>
+        <source>Error saving meter!</source>
         <target>Napaka pri shranjevanju števca!</target>
-      </trans-unit><trans-unit id="4606793880716021431" datatype="html">
-        <source>Serial number</source>
-        <target state="new">Serial number</target>
       </trans-unit>
       <trans-unit id="7286430803380181008" datatype="html">
         <source>Id</source>
@@ -1198,9 +1160,6 @@
       <trans-unit id="4683900563333049294" datatype="html">
         <source>Job status</source>
         <target>Status opravila</target>
-      </trans-unit><trans-unit id="675983518552991332" datatype="html">
-        <source>Concentrators</source>
-        <target state="new">Concentrators</target>
       </trans-unit>
       <trans-unit id="6424246633820870206" datatype="html">
         <source>Equals</source>
@@ -1221,26 +1180,17 @@
       <trans-unit id="2246939716429792950" datatype="html">
         <source>In Range</source>
         <target>In Range</target>
-      </trans-unit><trans-unit id="6252304067943234057" datatype="html">
-        <source>With template</source>
-        <target state="new">With template</target>
-      </trans-unit><trans-unit id="4871748804102563366" datatype="html">
-        <source>Without template</source>
-        <target state="new">Without template</target>
-      </trans-unit><trans-unit id="7654203638411043363" datatype="html">
-        <source>Image ready for activation</source>
-        <target state="new">Image ready for activation</target>
       </trans-unit>
       <trans-unit id="6917779175852211923" datatype="html">
         <source>Every N hour(s</source>
         <target>Vsakih N ur</target>
       </trans-unit>
       <trans-unit id="2701293197858293459" datatype="html">
-        <source>Meter Units Read Scheduler was</source>
+        <source>Meters Read Scheduler was</source>
         <target>Urnik je bil nastavljen</target>
       </trans-unit>
       <trans-unit id="1105511599486801099" datatype="html">
-        <source>Reading Jobs</source>
+        <source>New reading job</source>
         <target>Načrtovanje opravila</target>
       </trans-unit>
       <trans-unit id="2622268509058131533" datatype="html">
@@ -1254,9 +1204,6 @@
       <trans-unit id="7689582560947434727" datatype="html">
         <source>For last</source>
         <target>Za zadnjih</target>
-      </trans-unit><trans-unit id="8198274855826766185" datatype="html">
-        <source>show option</source>
-        <target state="new">show option</target>
       </trans-unit>
       <trans-unit id="6537904131139019667" datatype="html">
         <source>type</source>
@@ -1267,7 +1214,7 @@
         <target>Zadnja komunikacija</target>
       </trans-unit>
       <trans-unit id="8079872604120956170" datatype="html">
-        <source>Data Concentration Unit was added successfully</source>
+        <source>Concentrator was successfully added</source>
         <target>Podatkovna koncentratorska enota je bila uspešno dodana</target>
       </trans-unit>
       <trans-unit id="3505930099459089004" datatype="html">
@@ -1275,17 +1222,13 @@
         <target>Napaka pri kreiranju urnika.</target>
       </trans-unit>
       <trans-unit id="4964011321446375935" datatype="html">
-        <source>Add Data Concentrator Unit</source>
+        <source>Add data concentrator</source>
         <target>Add Data Concentrator Unit</target>
       </trans-unit>
       <trans-unit id="3345127904026423167" datatype="html">
         <source>Id (serial number)</source>
         <target>Id (serijska številka)</target>
-      </trans-unit><trans-unit id="1895957424873987405" datatype="html">
-        <source>Job</source>
-        <target state="new">Job</target>
       </trans-unit>
-      
       <trans-unit id="7784048467069996355" datatype="html">
         <source>Error saving DCU!</source>
         <target>Napaka pri shranjevanju koncentratorja!</target>
@@ -1307,7 +1250,7 @@
         <target>Select all</target>
       </trans-unit>
       <trans-unit id="8074641440649956207" datatype="html">
-        <source>selected Data Concentrator Units?</source>
+        <source>selected concentrators?</source>
         <target>izbrani podatkovni koncetratorji?</target>
       </trans-unit>
       <trans-unit id="4204921246911160131" datatype="html">
@@ -1317,16 +1260,13 @@
       <trans-unit id="1084330548527991808" datatype="html">
         <source>Add First</source>
         <target>Add First</target>
-      </trans-unit><trans-unit id="5770791526843201995" datatype="html">
-        <source>Concentrator</source>
-        <target state="new">Concentrator</target>
       </trans-unit>
       <trans-unit id="8148272978112044294" datatype="html">
-        <source>Data concentrator unit</source>
+        <source>Concentrator</source>
         <target>Data concentrator unit</target>
       </trans-unit>
       <trans-unit id="5540900299365959437" datatype="html">
-        <source>Data Concentration Unit was updated successfully</source>
+        <source>Concentrator was successfully updated</source>
         <target>Data Concentration Unit was updated successfully</target>
       </trans-unit>
       <trans-unit id="3290665917427253156" datatype="html">
@@ -1372,7 +1312,7 @@
         <target>Wrong format</target>
       </trans-unit>
       <trans-unit id="7311556461323387825" datatype="html">
-        <source>Password not match</source>
+        <source>Password does not match</source>
         <target>Geslo se ne ujema</target>
       </trans-unit>
       <trans-unit id="6867272363573367465" datatype="html">
@@ -1718,12 +1658,6 @@
       <trans-unit id="3003806119380279182" datatype="html">
         <source>Import TOU configuration</source>
         <target>Uvoz TOU konfiguracije</target>
-      </trans-unit><trans-unit id="7024091082759407419" datatype="html">
-        <source>Auto template</source>
-        <target state="new">Auto template</target>
-      </trans-unit><trans-unit id="8942859064912377213" datatype="html">
-        <source>Import device Keys</source>
-        <target state="new">Import device Keys</target>
       </trans-unit>
       <trans-unit id="4155936898622302064" datatype="html">
         <source>Auto templates</source>
@@ -1906,7 +1840,7 @@
         <target>FW nadgradnja</target>
       </trans-unit>
       <trans-unit id="5209672282513780219" datatype="html">
-        <source>Breaker</source>
+        <source>Disconnector</source>
         <target>Odklopnik</target>
       </trans-unit>
       <trans-unit id="1778275808932346500" datatype="html">
@@ -1932,9 +1866,6 @@
       <trans-unit id="8831210954511169288" datatype="html">
         <source>CII state</source>
         <target>Stanje CII</target>
-      </trans-unit><trans-unit id="8461842260159597706" datatype="html">
-        <source>Show</source>
-        <target state="new">Show</target>
       </trans-unit>
       <trans-unit id="6048892649018070225" datatype="html">
         <source>Today</source>
@@ -1987,6 +1918,74 @@
       <trans-unit id="2452918553101303072" datatype="html">
         <source>selected DC(s)?</source>
         <target>izbrani koncentratorji?</target>
+      </trans-unit>
+      <trans-unit id="3164102267265520854" datatype="html">
+        <source>DC Time sync job</source>
+        <target>Sinhronizacija časa (DC)</target>
+      </trans-unit>
+      <trans-unit id="5969349457365616195" datatype="html">
+        <source>Number of events</source>
+        <target>Število dogodkov</target>
+      </trans-unit>
+      <trans-unit id="6121577287984845389" datatype="html">
+        <source>Event type</source>
+        <target>Tip dogodka</target>
+      </trans-unit>
+      <trans-unit id="4847931515328475035" datatype="html">
+        <source>Relay Connect</source>
+        <target>Odklopi izhod</target>
+      </trans-unit>
+      <trans-unit id="5046871534910543138" datatype="html">
+        <source>Relay</source>
+        <target>Izhodi</target>
+      </trans-unit>
+      <trans-unit id="8139016199092331161" datatype="html">
+        <source>Relay Disconnect</source>
+        <target>Odklop izhoda</target>
+      </trans-unit>
+      <trans-unit id="8742650603995026790" datatype="html">
+        <source>Relay State</source>
+        <target>Stanje izhoda</target>
+      </trans-unit>
+      <trans-unit id="6542283139659606573" datatype="html">
+        <source>Get</source>
+        <target>Beri</target>
+      </trans-unit>
+      <trans-unit id="417669376908238435" datatype="html">
+        <source>Setting of relay mode succeeded!</source>
+        <target>Nastavitev načine preklopa je bila uspešna!</target>
+      </trans-unit>
+      <trans-unit id="2133214078582343516" datatype="html">
+        <source>Relay Mode</source>
+        <target>Način preklopa</target>
+      </trans-unit>
+      <trans-unit id="4606793880716021431" datatype="html">
+        <source>Serial number</source>
+        <target>Serijska številka</target>
+      </trans-unit>
+      <trans-unit id="6252304067943234057" datatype="html">
+        <source>With template</source>
+        <target>S konfiguracijo</target>
+      </trans-unit>
+      <trans-unit id="4871748804102563366" datatype="html">
+        <source>Without template</source>
+        <target>Brez konfiguracije</target>
+      </trans-unit>
+      <trans-unit id="7654203638411043363" datatype="html">
+        <source>Image ready for activation</source>
+        <target>Pripravljen za aktivacijo nadgradnje</target>
+      </trans-unit>
+      <trans-unit id="8198274855826766185" datatype="html">
+        <source>show option</source>
+        <target>prikaži možnost</target>
+      </trans-unit>
+      <trans-unit id="1895957424873987405" datatype="html">
+        <source>Job</source>
+        <target>Opravilo</target>
+      </trans-unit>
+      <trans-unit id="8461842260159597706" datatype="html">
+        <source>Show</source>
+        <target>Prikaži</target>
       </trans-unit>
     </body>
   </file>
