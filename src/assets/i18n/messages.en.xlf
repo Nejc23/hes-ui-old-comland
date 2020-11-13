@@ -83,8 +83,8 @@
         <target>Range is not correct</target>
       </trans-unit>
       <trans-unit id="5611592591303869712" datatype="html">
-        <source>Status</source>
-        <target>Status</target>
+        <source>State</source>
+        <target>State</target>
       </trans-unit>
       <trans-unit id="158816374076721379" datatype="html">
         <source>Manufacturer</source>
@@ -287,8 +287,8 @@
         <target>Inactive</target>
       </trans-unit>
       <trans-unit id="3229595422546554334" datatype="html">
-        <source>Jobs...</source>
-        <target>Jobs...</target>
+        <source>Jobs</source>
+        <target>Jobs</target>
       </trans-unit>
       <trans-unit id="3192723481488641054" datatype="html">
         <source>No records found. You need to adjust your search or filter parameters.</source>
