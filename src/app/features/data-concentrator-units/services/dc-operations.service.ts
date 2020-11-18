@@ -12,7 +12,7 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
-import { capitalize } from 'lodash';
+import { capitalize, values } from 'lodash';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 
 @Injectable({
@@ -243,11 +243,19 @@ export class DcOperationsService {
     );
   }
 
-  getOperationRequestParam(guid: string, requestModel: GridRequestParams, allItems: number): IActionRequestParams {
+  getOperationRequestParam(
+    guid: string,
+    requestModel: GridRequestParams,
+    allItems: number,
+    allVisibleColumns: string[]
+  ): IActionRequestParams {
     const requestParam: IActionRequestParams = {
       pageSize: 0,
       pageNumber: 0,
-      textSearch: '',
+      textSearch: {
+        value: '',
+        propNames: []
+      },
       sort: []
     };
 
@@ -261,10 +269,12 @@ export class DcOperationsService {
 
         requestParam.pageSize = allItems;
         requestParam.pageNumber = 1;
-        requestParam.textSearch =
-          requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0
-            ? requestModel.searchModel[0].value
-            : '';
+
+        if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
+          requestParam.textSearch.value = requestModel.searchModel[0].value;
+          requestParam.textSearch.propNames = allVisibleColumns;
+        }
+
         // create filter object
         if (requestModel.filterModel) {
           requestParam.filter = [];
@@ -295,6 +305,16 @@ export class DcOperationsService {
               })
             );
           }
+          if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
+            requestModel.filterModel.vendors.map(row =>
+              requestParam.filter.push({
+                propName: capitalize(gridSysNameColumnsEnum.vendor),
+                propValue: row.id.toString(),
+                filterOperation: filterOperationEnum.equal
+              })
+            );
+          }
+
           if (requestModel.sortModel && requestModel.sortModel.length > 0) {
             requestModel.sortModel.map(row =>
               requestParam.sort.push({
@@ -303,13 +323,6 @@ export class DcOperationsService {
                 sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
               })
             );
-          }
-
-          // add vendors to the filter
-          if (requestModel.filter && requestModel.filter.length > 0) {
-            requestModel.filter.map(filter => {
-              requestParam.filter.push(filter);
-            });
           }
         }
         requestParam.excludeIds = [];

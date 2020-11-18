@@ -6,6 +6,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,37 +30,36 @@ describe('Pact consumer test', () => {
   });
 
   describe('Data concentrator units list get request', () => {
-    const requestBody: GridRequestParams = {
-      requestId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
-      startRow: 0,
-      endRow: 19,
-      searchModel: [
+    const requestBody: IActionRequestParams = {
+      pageSize: 20,
+      pageNumber: 1,
+      filter: [
         {
-          colId: 'all',
-          type: enumSearchFilterOperators.like,
-          value: 'search text'
-        }
-      ],
-      sortModel: [
-        {
-          colId: 'name',
-          sort: 'desc'
-        }
-      ],
-      filterModel: {
-        statuses: [{ id: 1, value: 'active' }],
-        readStatus: {
-          operation: { id: 'Greater Than', value: 'Greater Than' },
-          value1: 12,
-          value2: null
+          propName: 'Vendor',
+          propValue: '2',
+          filterOperation: 'Equal'
         },
-        types: [1, 2],
-        vendors: [{ id: 2, value: 'Vendor 2' }],
-        tags: [
-          { id: 1, value: 'tag1' },
-          { id: 2, value: 'tag2' }
-        ],
-        showOptionFilter: null
+        {
+          propName: 'Status',
+          propValue: '2',
+          filterOperation: 'Equal'
+        },
+        {
+          propName: 'Firmware',
+          propValue: '2',
+          filterOperation: 'Contains'
+        }
+      ],
+      sort: [
+        {
+          index: 0,
+          propName: 'Firmware',
+          sortOrder: 'Ascending'
+        }
+      ],
+      textSearch: {
+        value: 'search text',
+        propNames: ['vendor', 'firmware', 'status']
       }
     };
 

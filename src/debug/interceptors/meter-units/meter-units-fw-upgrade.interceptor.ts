@@ -56,7 +56,10 @@ export class MeterUnitsFwUpgradeInterceptor {
       pageSize: 1,
       pageNumber: 1,
       sort: [],
-      textSearch: ''
+      textSearch: {
+        value: '',
+        propNames: []
+      }
     };
     return of(
       new HttpResponse({

@@ -9,7 +9,7 @@ export const meterUnitDisconnectorStates = `${basePath}/meter-unit-disconnector-
 export const meterUnitCiiStates = `${basePath}/meter-unit-cii-states`;
 
 // meter units by type
-export const meterUnits = `${basePath}/meter-units`;
+export const meterUnits = `${basePath}/meters`;
 export const meterUnitsBreakerState = `${basePath}/meter-units-breaker-state`;
 export const meterUnitsLayout = `layouts`;
 export const meterUnitsScheduler = `/api/meter-units-scheduler`;

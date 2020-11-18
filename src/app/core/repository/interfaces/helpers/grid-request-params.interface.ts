@@ -16,7 +16,6 @@ export interface GridRequestParams {
   typeId?: number;
   deviceIds?: string[];
   excludeIds?: string[];
-  filter?: IActionFilterParams[];
 }
 
 export interface GridFilterParams {

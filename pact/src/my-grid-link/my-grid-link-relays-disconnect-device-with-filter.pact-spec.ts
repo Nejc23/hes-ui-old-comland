@@ -54,7 +54,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: '1234'
+    textSearch: {
+      value: '1234',
+      propNames: ['vendor', 'firmware', 'status']
+    }
   };
 
   const responseBody: IActionResponseRelays = {
@@ -86,7 +89,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: '1234'
+    textSearch: {
+      value: '1234',
+      propNames: ['vendor', 'firmware', 'status']
+    }
   };
 
   describe('myGrid.link trigger disconnect device with filter request', () => {

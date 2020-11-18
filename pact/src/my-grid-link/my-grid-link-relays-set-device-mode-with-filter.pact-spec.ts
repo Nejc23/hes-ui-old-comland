@@ -63,7 +63,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: '1234'
+    textSearch: {
+      value: '1234',
+      propNames: ['vendor', 'firmware', 'status']
+    }
   };
 
   const responseBody: IActionResponseRelaysMode = {
@@ -104,7 +107,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: '1234'
+    textSearch: {
+      value: '1234',
+      propNames: ['vendor', 'firmware', 'status']
+    }
   };
 
   describe('myGrid.link trigger set device mode with filter request', () => {
