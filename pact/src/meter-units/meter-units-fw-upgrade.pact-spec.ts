@@ -44,7 +44,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: ''
+    textSearch: {
+      value: '',
+      propNames: []
+    }
   };
 
   const responseBody: IActionResponseFwUpgradeData = {
@@ -64,7 +67,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: ''
+    textSearch: {
+      value: '',
+      propNames: []
+    }
   };
 
   describe('Meter unit fw upgrade', () => {

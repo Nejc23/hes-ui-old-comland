@@ -52,7 +52,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: ''
+    textSearch: {
+      value: '',
+      propNames: []
+    }
   };
 
   const responseBody: IActionResponseParams = {
@@ -83,7 +86,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: ''
+    textSearch: {
+      value: '',
+      propNames: []
+    }
   };
 
   describe('myGrid.link trigger CII activate device with filter request', () => {

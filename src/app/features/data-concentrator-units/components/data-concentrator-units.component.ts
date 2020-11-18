@@ -276,7 +276,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        that.requestModel.filter = that.setFilterVendors();
+        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
 
         if (that.authService.isRefreshNeeded2()) {
           that.authService
@@ -285,21 +285,27 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
-                that.gridApi.hideOverlay();
-                that.totalCount = data.totalCount;
-                if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                  that.noData = true;
-                } else if (data.totalCount === 0) {
-                  that.gridApi.showNoRowsOverlay();
-                }
+              that.dataConcentratorUnitsService
+                .getGridDcuForm(
+                  that.requestModel,
+                  that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
+                  displayedColumnsNames
+                )
+                .subscribe(data => {
+                  that.gridApi.hideOverlay();
+                  that.totalCount = data.totalCount;
+                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                    that.noData = true;
+                  } else if (data.totalCount === 0) {
+                    that.gridApi.showNoRowsOverlay();
+                  }
 
-                that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-                paramsRow.successCallback(data.data, data.totalCount);
-                that.selectRows(that.gridApi);
-                // params.failCallback();
-                that.resizeColumns();
-              });
+                  that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+                  paramsRow.successCallback(data.data, data.totalCount);
+                  that.selectRows(that.gridApi);
+                  // params.failCallback();
+                  that.resizeColumns();
+                });
             })
             .catch(err => {
               if (err.message === 'login_required') {
@@ -307,21 +313,23 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
               }
             });
         } else {
-          that.dataConcentratorUnitsService.getGridDcu(that.requestModel).subscribe(data => {
-            that.gridApi.hideOverlay();
-            that.totalCount = data.totalCount;
-            if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-              that.noData = true;
-            } else if (data.totalCount === 0) {
-              that.gridApi.showNoRowsOverlay();
-            }
+          that.dataConcentratorUnitsService
+            .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
+            .subscribe(data => {
+              that.gridApi.hideOverlay();
+              that.totalCount = data.totalCount;
+              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                that.noData = true;
+              } else if (data.totalCount === 0) {
+                that.gridApi.showNoRowsOverlay();
+              }
 
-            that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-            paramsRow.successCallback(data.data, data.totalCount);
-            that.selectRows(that.gridApi);
-            // params.failCallback();
-            that.resizeColumns();
-          });
+              that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+              paramsRow.successCallback(data.data, data.totalCount);
+              that.selectRows(that.gridApi);
+              // params.failCallback();
+              that.resizeColumns();
+            });
         }
       }
     };
@@ -414,22 +422,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  setFilterVendors() {
-    this.requestModel.filter = [];
-
-    const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-    if (filterDCU.vendorsFilter && filterDCU.vendorsFilter.length > 0 && filterDCU.vendorsFilter[0].id > 0) {
-      for (const filter of filterDCU.vendorsFilter) {
-        this.requestModel.filter.push({
-          propName: capitalize(gridSysNameColumnsEnum.vendor),
-          propValue: filter.id.toString(),
-          filterOperation: filterOperationEnum.equal
-        });
-      }
-    }
-    return this.requestModel.filter;
-  }
-
   // set filter in request model
   setFilter() {
     if (
@@ -449,6 +441,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
       this.requestModel.filterModel.types = filterDCU.typesFilter?.map(t => t.id);
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
+      this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
     } else {
       this.setFilterInfo();
     }
@@ -679,7 +672,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   onSynchronizeTime(selectedGuid: string) {
     this.requestModel.filterModel = this.setFilter();
     this.requestModel.searchModel = this.setSearch();
-    this.requestModel.filter = this.setFilterVendors();
 
     // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
@@ -695,6 +687,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   gridSizeChanged() {
     this.resizeColumns();
+  }
+
+  getAllDisplayedColumnsNames(): string[] {
+    const columns = this.gridApi.columnController.getAllDisplayedColumns();
+    return columns.map(c => c.colId);
   }
 
   resizeColumns() {

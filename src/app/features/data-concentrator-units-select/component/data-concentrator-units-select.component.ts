@@ -166,7 +166,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        that.repositoryService.getGridDcu(that.requestModel).subscribe(data => {
+        that.repositoryService.getGridDcuForm(that.requestModel, 1, []).subscribe(data => {
           that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {

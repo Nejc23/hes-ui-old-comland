@@ -31,6 +31,7 @@ import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interf
 import { capitalize } from 'lodash';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -354,7 +355,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        that.requestModel.filter = that.setFilterVendors();
+        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
 
         if (that.authService.isRefreshNeeded2()) {
           that.authService
@@ -363,22 +364,28 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
-                that.gridApi.hideOverlay();
-                that.totalCount = data.totalCount;
-                if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                  that.noData = true;
-                } else if (data.totalCount === 0) {
-                  that.gridApi.showNoRowsOverlay();
-                }
+              that.meterUnitsTypeService
+                .getGridMeterUnitsForm(
+                  that.requestModel,
+                  that.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
+                  displayedColumnsNames
+                )
+                .subscribe(data => {
+                  that.gridApi.hideOverlay();
+                  that.totalCount = data.totalCount;
+                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                    that.noData = true;
+                  } else if (data.totalCount === 0) {
+                    that.gridApi.showNoRowsOverlay();
+                  }
 
-                that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-                paramsRow.successCallback(data.data, data.totalCount);
-                that.selectRows(that.gridApi);
-                that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-                // params.failCallback();
-                that.resizeColumns();
-              });
+                  that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+                  paramsRow.successCallback(data.data, data.totalCount);
+                  that.selectRows(that.gridApi);
+                  that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+                  // params.failCallback();
+                  that.resizeColumns();
+                });
             })
             .catch(err => {
               if (err.message === 'login_required') {
@@ -386,22 +393,24 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               }
             });
         } else {
-          that.meterUnitsTypeService.getGridMeterUnits(that.requestModel).subscribe(data => {
-            that.gridApi.hideOverlay();
-            that.totalCount = data.totalCount;
-            if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-              that.noData = true;
-            } else if (data.totalCount === 0) {
-              that.gridApi.showNoRowsOverlay();
-            }
+          that.meterUnitsTypeService
+            .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
+            .subscribe(data => {
+              that.gridApi.hideOverlay();
+              that.totalCount = data.totalCount;
+              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                that.noData = true;
+              } else if (data.totalCount === 0) {
+                that.gridApi.showNoRowsOverlay();
+              }
 
-            that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-            paramsRow.successCallback(data.data, data.totalCount);
-            that.selectRows(that.gridApi);
-            that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-            // params.failCallback();
-            that.resizeColumns();
-          });
+              that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+              paramsRow.successCallback(data.data, data.totalCount);
+              that.selectRows(that.gridApi);
+              that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+              // params.failCallback();
+              that.resizeColumns();
+            });
         }
       }
     };
@@ -524,22 +533,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  setFilterVendors() {
-    this.requestModel.filter = [];
-    const filterMU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-    if (filterMU.vendorsFilter && filterMU.vendorsFilter.length > 0 && filterMU.vendorsFilter[0].id > 0) {
-      for (const filter of filterMU.vendorsFilter) {
-        this.requestModel.filter.push({
-          propName: capitalize(gridSysNameColumnsEnum.vendor),
-          propValue: filter.id.toString(),
-          filterOperation: filterOperationEnum.equal
-        });
-      }
-    }
-
-    return this.requestModel.filter;
-  }
-
   // set filter in request model
   setFilter() {
     if (
@@ -564,6 +557,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
       this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
+      this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
     } else {
       this.setFilterInfo();
     }
@@ -682,7 +676,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // --> Operations action click (bulk or selected row)
   onDisconnectorStatus(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.breakerStatus,
       params,
@@ -692,7 +691,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onActivateUpgrade(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.activateUpgrade,
       params,
@@ -702,7 +706,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onConnect(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.connect,
       params,
@@ -712,7 +721,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onDisconnect(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.disconnect,
       params,
@@ -722,7 +736,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onCiiState(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.ciiState,
       params,
@@ -732,7 +751,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onCiiActivate(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.ciiActivate,
       params,
@@ -742,7 +766,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onCiiDeactivate(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.ciiDeactivate,
       params,
@@ -752,7 +781,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onClearFF(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.clearFF,
       params,
@@ -780,14 +814,24 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // popup
   onTou(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.onTou(params);
   }
 
   // popup
   onUpgrade(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.onUpgrade(params);
   }
 
@@ -805,28 +849,48 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysConnect(selectedGuid: string) {
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onRelaysConnect(params, paramsLegacy);
   }
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onRelaysDisconnect(params, paramsLegacy);
   }
 
   // popup
   onRelaysState(selectedGuid: string) {
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onRelaysState(params, paramsLegacy);
   }
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onRelaysSetMode(params, paramsLegacy);
   }
@@ -834,7 +898,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // popup
   onDisconnectorMode(selectedGuid: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, this.getSelectedCount());
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.onDisconnectorMode(params);
   }
   // <-- end Operations action click (bulk or selected row)
@@ -969,6 +1038,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   gridSizeChanged() {
     this.resizeColumns();
+  }
+
+  getAllDisplayedColumnsNames(): string[] {
+    const columns = this.gridApi.columnController.getAllDisplayedColumns();
+    return columns.map(c => c.colId);
   }
 
   resizeColumns() {

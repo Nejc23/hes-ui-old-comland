@@ -2,10 +2,15 @@ export interface IActionRequestParams {
   pageSize: number;
   pageNumber: number;
   sort: IActionSortParams[];
-  textSearch: string;
+  textSearch: IActionSearchParam;
   filter?: IActionFilterParams[];
   deviceIds?: string[];
   excludeIds?: string[];
+}
+
+export interface IActionSearchParam {
+  value: string;
+  propNames: string[];
 }
 
 export interface IActionSortParams {

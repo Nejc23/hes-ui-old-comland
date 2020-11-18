@@ -38,7 +38,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: '1234',
+    textSearch: {
+      value: '1234',
+      propNames: ['vendor', 'firmware', 'status']
+    },
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842'],
     breakerMode: 1
   };
@@ -53,7 +56,10 @@ describe('Pact consumer test', () => {
         sortOrder: 'Ascending'
       }
     ],
-    textSearch: '1234',
+    textSearch: {
+      value: '1234',
+      propNames: ['vendor', 'firmware', 'status']
+    },
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842'],
     breakerMode: 1

@@ -415,11 +415,19 @@ export class MeterUnitsPlcActionsService {
     return requestParam;
   }
 
-  getOperationRequestParam(guid: string, requestModel: GridRequestParams, allItems: number): IActionRequestParams {
+  getOperationRequestParam(
+    guid: string,
+    requestModel: GridRequestParams,
+    allItems: number,
+    visibleColumnsNames?: string[]
+  ): IActionRequestParams {
     const requestParam: IActionRequestParams = {
       pageSize: 0,
       pageNumber: 0,
-      textSearch: '',
+      textSearch: {
+        value: '',
+        propNames: visibleColumnsNames
+      },
       sort: []
     };
 
@@ -433,7 +441,7 @@ export class MeterUnitsPlcActionsService {
 
         requestParam.pageSize = allItems;
         requestParam.pageNumber = 1;
-        requestParam.textSearch =
+        requestParam.textSearch.value =
           requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0
             ? requestModel.searchModel[0].value
             : '';
@@ -519,13 +527,6 @@ export class MeterUnitsPlcActionsService {
                   filterOperation: filterOperationEnum.equal
                 });
               }
-            });
-          }
-
-          // add vendors to the filter
-          if (requestModel.filter && requestModel.filter.length > 0) {
-            requestModel.filter.map(filter => {
-              requestParam.filter.push(filter);
             });
           }
         }

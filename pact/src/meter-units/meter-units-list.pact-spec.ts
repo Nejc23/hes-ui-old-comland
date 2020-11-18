@@ -6,6 +6,7 @@ import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,47 +30,36 @@ describe('Pact consumer test', () => {
   });
 
   describe('Meter units list get request', () => {
-    const requestBody: GridRequestParams = {
-      requestId: '9b837e2d-957d-49e2-8d1d-a2e4b8440b77',
-      typeId: 1,
-      startRow: 0,
-      endRow: 19,
-      searchModel: [
+    const requestBody: IActionRequestParams = {
+      pageSize: 1,
+      pageNumber: 1,
+      filter: [
         {
-          colId: 'all',
-          type: enumSearchFilterOperators.like,
-          value: 'search text'
-        }
-      ],
-      sortModel: [
-        {
-          colId: 'name',
-          sort: 'desc'
-        }
-      ],
-      filterModel: {
-        statuses: [{ id: 1, value: 'active' }],
-        readStatus: {
-          operation: { id: 'Greater Than', value: 'Greater Than' },
-          value1: 12,
-          value2: null
+          propName: 'Vendor',
+          propValue: '2',
+          filterOperation: 'Equal'
         },
-        vendors: [{ id: 2, value: 'Vendor 2' }],
-        tags: [
-          { id: 1, value: 'tag1' },
-          { id: 2, value: 'tag2' }
-        ],
-        firmware: [{ id: 1, value: '12.3.1' }],
-        disconnectorState: [
-          { id: 1, value: 'breaker 1' },
-          { id: 5, value: 'breaker 5' }
-        ],
-        ciiState: [
-          { id: 0, value: 'on' },
-          { id: 1, value: 'off' }
-        ],
-        showChildInfoMBus: true,
-        showOptionFilter: null
+        {
+          propName: 'Status',
+          propValue: '2',
+          filterOperation: 'Equal'
+        },
+        {
+          propName: 'Firmware',
+          propValue: '2',
+          filterOperation: 'Contains'
+        }
+      ],
+      sort: [
+        {
+          index: 0,
+          propName: 'Firmware',
+          sortOrder: 'Ascending'
+        }
+      ],
+      textSearch: {
+        value: '1234',
+        propNames: ['vendor', 'firmware', 'status']
       }
     };
 

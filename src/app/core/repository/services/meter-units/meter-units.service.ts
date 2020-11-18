@@ -1,3 +1,5 @@
+import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
+import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
 import { MeterUnitDetailsForm } from './../../../../features/meter-units/details/interfaces/meter-unit-form.interface';
 import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
 import { Injectable } from '@angular/core';
@@ -26,6 +28,9 @@ import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/rem
 import { MeterUnit } from '../../interfaces/meter-units/meter-unit.interface';
 import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
 import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
+import { capitalize } from 'lodash';
+import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -33,12 +38,21 @@ import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.
 export class MeterUnitsService {
   constructor(private repository: RepositoryService) {}
 
-  getGridMeterUnits(param: GridRequestParams): Observable<GridResponse<MeterUnitsList>> {
-    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
+  getGridMeterUnitsForm(
+    param: GridRequestParams,
+    pageIndex: number,
+    visibleColumnNames: string[]
+  ): Observable<GridResponse<MeterUnitsList>> {
+    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames);
+    return this.repository.makeRequest(this.getGridMeterUnitsRequest(actionRequestParams));
+  }
+
+  getGridMeterUnits(param: IActionRequestParams): Observable<GridResponse<MeterUnitsList>> {
+    // param.requestId = param.requestId === null ? uuidv4() : param.requestId;
     return this.repository.makeRequest(this.getGridMeterUnitsRequest(param));
   }
 
-  getGridMeterUnitsRequest(param: GridRequestParams): HttpRequest<any> {
+  getGridMeterUnitsRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', meterUnits, param);
   }
 
@@ -132,5 +146,124 @@ export class MeterUnitsService {
 
   updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
     return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
+  }
+
+  getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {
+    const pageSize = param.endRow - param.startRow;
+    const requestParam: IActionRequestParams = {
+      pageSize,
+      pageNumber: pageIndex + 1,
+      textSearch: {
+        value: '',
+        propNames: []
+      },
+      sort: []
+    };
+
+    requestParam.pageSize = param.endRow - param.startRow;
+    requestParam.pageNumber = pageIndex + 1;
+
+    if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
+      requestParam.textSearch.value = param.searchModel[0].value;
+      requestParam.textSearch.propNames = visibleColumnNames;
+    }
+
+    // create filter object
+    if (param.filterModel) {
+      requestParam.filter = [];
+      if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
+        param.filterModel.statuses.map(row =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.status),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.equal
+          })
+        );
+      }
+      if (param.filterModel.vendors && param.filterModel.vendors.length > 0) {
+        param.filterModel.vendors.map(row =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.vendor),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.equal
+          })
+        );
+      }
+      if (param.filterModel.firmware && param.filterModel.firmware.length > 0) {
+        param.filterModel.firmware.map(row =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.firmware),
+            propValue: row.value,
+            filterOperation: filterOperationEnum.contains
+          })
+        );
+      }
+      if (param.filterModel.disconnectorState && param.filterModel.disconnectorState.length > 0) {
+        param.filterModel.disconnectorState.map(row =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.equal
+          })
+        );
+      }
+      if (param.filterModel.ciiState && param.filterModel.ciiState.length > 0) {
+        param.filterModel.ciiState.map(row =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.ciiState),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.equal
+          })
+        );
+      }
+      if (param.filterModel.tags && param.filterModel.tags.length > 0) {
+        param.filterModel.tags.map(row =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.tags),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.contains
+          })
+        );
+      }
+
+      // show operations filter
+      if (param.filterModel.showOptionFilter && param.filterModel.showOptionFilter.length > 0) {
+        param.filterModel.showOptionFilter.map(row => {
+          if (row.id === 1) {
+            return requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+              propValue: 'true',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (row.id === 2) {
+            return requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+              propValue: 'false',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (row.id === 3) {
+            return requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
+              propValue: 'true',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+        });
+      }
+
+      if (param.sortModel && param.sortModel.length > 0) {
+        param.sortModel.map(row =>
+          requestParam.sort.push({
+            propName: capitalize(row.colId),
+            index: 0,
+            sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+          })
+        );
+      }
+    }
+
+    return requestParam;
   }
 }
