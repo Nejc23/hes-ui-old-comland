@@ -172,7 +172,7 @@ export class DataConcentratorUnitsService {
   }
 
   getActionRequestParams(param: GridRequestParams, pageIndex: number, allVisibleColumns: string[]): IActionRequestParams {
-    const pageSize = 13; // param.endRow - param.startRow;
+    const pageSize = param.endRow - param.startRow;
     const requestParam: IActionRequestParams = {
       pageSize,
       pageNumber: pageIndex + 1,
