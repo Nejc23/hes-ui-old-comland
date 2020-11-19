@@ -24,6 +24,7 @@ import { PlcMeterRelaysDisconnectComponent } from '../../common/components/plc-m
 import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { toLower } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class MeterUnitsPlcActionsService {
     private codelistService: CodelistRepositoryService
   ) {}
 
-  onScheduleReadJobs(params: RequestFilterParams) {
+  onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
       size: 'xl'
     };
@@ -48,6 +49,7 @@ export class MeterUnitsPlcActionsService {
     this.codelistService.timeUnitCodeslist().subscribe(units => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
+      modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
       component.setFormAddNew(units);
       component.deviceFiltersAndSearch = {
         id: params.deviceIds,
@@ -59,9 +61,10 @@ export class MeterUnitsPlcActionsService {
     });
   }
 
-  onTou(params: IActionRequestParams) {
+  onTou(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
     modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     /* modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
@@ -80,9 +83,10 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onUpgrade(params: IActionRequestParams) {
+  onUpgrade(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
     modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
       data => {
@@ -97,7 +101,7 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onSetMonitor(params: RequestFilterParams) {
+  onSetMonitor(params: RequestFilterParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterMonitorComponent);
 
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
@@ -105,6 +109,8 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.searchParam = params.search;
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
 
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
@@ -118,12 +124,13 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onSetLimiter(params: RequestFilterParams) {
+  onSetLimiter(params: RequestFilterParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterLimiterComponent);
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
       data => {
@@ -138,7 +145,7 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+  onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterRelaysConnectComponent);
     modalRef.componentInstance.actionRequest = params;
 
@@ -146,6 +153,8 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
 
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+
     modalRef.result.then(
       data => {
         // on close (CONFIRM)
@@ -159,13 +168,14 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysDisconnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+  onRelaysDisconnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterRelaysDisconnectComponent);
     modalRef.componentInstance.actionRequest = params;
 
     // TODO: this should be removed when there is a new filtering structure on every method
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
       data => {
@@ -180,13 +190,15 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysState(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+  onRelaysState(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterRelaysStateComponent);
     modalRef.componentInstance.actionRequest = params;
 
     // TODO: this should be removed when there is a new filtering structure on every method
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
+
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
       data => {
@@ -202,13 +214,15 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysSetMode(params: IActionRequestParams, paramsLegacy: RequestFilterParams) {
+  onRelaysSetMode(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterRelaysSetModeComponent);
     modalRef.componentInstance.actionRequest = params;
 
     // TODO: this should be removed when there is a new filtering structure on every method
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
+
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
       data => {
@@ -223,9 +237,10 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onDisconnectorMode(params: IActionRequestParams) {
+  onDisconnectorMode(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterBreakerModeComponent);
     modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
       data => {
@@ -299,7 +314,6 @@ export class MeterUnitsPlcActionsService {
   // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
   // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
   bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number) {
-    let selectedText = `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = $localize`Confirm`;
@@ -310,20 +324,19 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
         operationName = $localize`Get disconnector status`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+
         break;
       case MeterUnitsTypeEnum.connect:
         response = this.service.postMyGridConnectDevice(params);
-        operationName = $localize`Connect`;
+        operationName = $localize`Disconnector connect `;
         break;
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
-        operationName = $localize`Disconnect`;
+        operationName = $localize`Disconnector disconnect`;
         break;
       case MeterUnitsTypeEnum.ciiState:
         response = this.service.getCiiState(params);
         operationName = $localize`Get CII state`;
-        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.ciiActivate:
         response = this.service.postMyGridCiiActivateDevice(params);
@@ -349,16 +362,15 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
         operationName = $localize`Activate FW upgrade`;
-        selectedText = `${$localize`for`} ${selectedText}`;
         break;
       case MeterUnitsTypeEnum.clearFF:
         response = this.service.clearFF(params);
         operationName = $localize`Activate Clear FF`;
-        selectedText = `${$localize`for`} ${selectedText}`;
     }
-    component.btnConfirmText = operationName;
-    component.modalTitle = $localize`Confirm bulk operation`;
-    component.modalBody = `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    // component.btnConfirmText = operationName;
+
+    component.modalTitle = $localize`${operationName} (${selectedCount})`;
+    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
 
     modalRef.result.then(
       data => {

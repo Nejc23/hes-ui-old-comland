@@ -34,6 +34,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   public files: Array<any>;
   activate = false;
 
+  public selectedRowsCount: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,

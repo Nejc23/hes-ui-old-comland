@@ -23,6 +23,8 @@ export class PlcMeterTouConfigComponent implements OnInit {
   messageServerError = $localize`Server error!`;
   actionRequest: IActionRequestParams;
 
+  public selectedRowsCount: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private modal: NgbActiveModal,

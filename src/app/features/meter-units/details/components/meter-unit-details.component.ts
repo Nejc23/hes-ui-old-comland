@@ -348,28 +348,28 @@ export class MeterUnitDetailsComponent implements OnInit {
   onRelaysConnect(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy);
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1);
   }
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy);
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1);
   }
 
   // popup
   onRelaysState(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy);
+    this.plcActionsService.onRelaysState(params, paramsLegacy, 1);
   }
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy);
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1);
   }
 
   onClearFF() {
@@ -387,39 +387,39 @@ export class MeterUnitDetailsComponent implements OnInit {
   // popup
   onScheduleReadJobs() {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onScheduleReadJobs(params);
+    this.plcActionsService.onScheduleReadJobs(params, 1);
   }
 
   // popup
   onTou() {
     // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    this.plcActionsService.onTou(params);
+    this.plcActionsService.onTou(params, 1);
   }
 
   // popup
   onUpgrade() {
     // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    this.plcActionsService.onUpgrade(params);
+    this.plcActionsService.onUpgrade(params, 1);
   }
 
   // popup
   onSetMonitor() {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onSetMonitor(params);
+    this.plcActionsService.onSetMonitor(params, 1);
   }
 
   // popup
   onSetLimiter() {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onSetLimiter(params);
+    this.plcActionsService.onSetLimiter(params, 1);
   }
 
   // popup
   onDisconnectorMode() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    this.plcActionsService.onDisconnectorMode(params);
+    this.plcActionsService.onDisconnectorMode(params, 1);
   }
 
   // <-- end Operations action click (bulk or selected row)

@@ -34,6 +34,8 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
   relays$: Codelist<string>[];
   modes: Codelist<number>[];
 
+  public selectedRowsCount: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,

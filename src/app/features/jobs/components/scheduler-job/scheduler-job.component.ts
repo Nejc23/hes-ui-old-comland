@@ -24,6 +24,8 @@ export class SchedulerJobComponent implements OnInit {
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
+  selectedRowsCount: number = 0;
+
   form: FormGroup;
   readOptions: RadioOption[] = [
     { value: '1' as string, label: $localize`One-time`, labelSmall: $localize`Once` },
@@ -354,5 +356,13 @@ export class SchedulerJobComponent implements OnInit {
     } else {
       this.form.get(this.registersProperty).clearValidators();
     }
+  }
+
+  getSelectedRowsCount() {
+    if (this.selectedRowsCount) {
+      return ` (${this.selectedRowsCount})`;
+    }
+
+    return '';
   }
 }

@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>TOU Configuration</div>
+  <div modal-header i18n>TOU Configuration ({{selectedRowsCount}})</div>
 
   <div modal-body>
     <ng-container>
@@ -16,7 +16,7 @@
         <span i18n>Cancel</span></button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="save()">
-          <span i18n>Set configuration</span></button>
+          <span i18n>Confirm</span></button>
       </div>
     </div>
   </div>
