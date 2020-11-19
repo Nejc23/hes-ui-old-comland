@@ -26,6 +26,8 @@ export class PlcMeterMonitorComponent implements OnInit {
   formTemplate: ResponseCommonRegisterGroup[];
   showError = true;
 
+  public selectedRowsCount: number;
+
   constructor(
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,

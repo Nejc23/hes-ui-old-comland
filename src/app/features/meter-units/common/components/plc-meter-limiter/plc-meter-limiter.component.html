@@ -1,38 +1,38 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Set Limiter</div>
+  <div modal-header i18n>Set Limiter ({{selectedRowsCount}})</div>
 
   <div modal-body>
-    <ng-container>      
+    <ng-container>
       <form class="form-horizontal" [formGroup]="form">
-        <div class="form-row">          
-          <div class="col-12">  
+        <div class="form-row">
+          <div class="col-12">
             <app-select-input label="Register" [form]="form" [property]="registerProperty" [selectOptions]="registers$" i18n-label>
-            </app-select-input>                      
+            </app-select-input>
           </div>
-        </div>            
-        <div class="form-row">          
-          <div class="col-12">            
+        </div>
+        <div class="form-row">
+          <div class="col-12">
             <app-input-numeric [label]="'Threshold normal'" [form]="form" [property]="tresholdNormalProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
         </div>
-        <div class="form-row">          
-          <div class="col-12">            
+        <div class="form-row">
+          <div class="col-12">
             <app-input-numeric [label]="'Threshold emergency'" [form]="form" [property]="tresholdEmergencyProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
         </div>
-        <div class="form-row">          
-          <div class="col-12">            
+        <div class="form-row">
+          <div class="col-12">
             <app-input-numeric [label]="'Minimal over threshold duration'" [form]="form" [property]="minOverTresholdDurationProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
         </div>
-        <div class="form-row">          
-          <div class="col-12">            
+        <div class="form-row">
+          <div class="col-12">
             <app-input-numeric [label]="'Minimal under threshold duration'" [form]="form" [property]="minUnderTresholdDurationProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>                
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
         </div>
         <div class="text-danger" *ngIf="form.errors && form.errors['atLeastOneRequired'] == true"><small>
@@ -46,8 +46,8 @@
         <span i18n>Cancel</span></button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onSet()">
-          <span i18n>Set</span></button>
-      </div>      
+          <span i18n>Confirm</span></button>
+      </div>
     </div>
   </div>
 </app-modal-template>

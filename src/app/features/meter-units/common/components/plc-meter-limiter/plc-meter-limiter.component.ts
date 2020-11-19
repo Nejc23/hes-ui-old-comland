@@ -24,6 +24,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   searchParam?: GridSearchParams[];
   excludeIdsParam?: string[];
   registers$: Codelist<string>[];
+  public selectedRowsCount: number;
 
   constructor(
     private formBuilder: FormBuilder,
