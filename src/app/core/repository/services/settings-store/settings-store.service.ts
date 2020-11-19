@@ -1,29 +1,41 @@
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { userSettingsConfiguration } from './../../consts/settings-store.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { userSettings } from '../../consts/settings-store.const';
-import { AnyARecord } from 'dns';
+import { userSettingsBase } from '../../consts/settings-store.const';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SettingsStoreService {
-  constructor(private repository: RepositoryService) {}
+  constructor(private repository: RepositoryService, private authService: AuthService) {}
 
-  getUserSettings(key: string): Observable<any> {
-    return this.repository.makeRequest(this.getUserSettingsRequest(key));
+  getUserSettings(userId: string, key: string): Observable<any> {
+    return this.repository.makeRequest(this.getUserSettingsRequest(userId, key));
   }
 
-  getUserSettingsRequest(key: string): HttpRequest<any> {
-    return new HttpRequest('GET', userSettings + `/${key}`);
+  getUserSettingsRequest(userId: string, key: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${userSettingsBase}/${userId}/${userSettingsConfiguration}/${key}`);
   }
 
-  saveUserSettings(key: string, settings: any): Observable<any> {
-    return this.repository.makeRequest(this.saveUserSettingsRequest(key, settings));
+  saveUserSettings(userId: string, key: string, settings: any): Observable<any> {
+    return this.repository.makeRequest(this.saveUserSettingsRequest(userId, key, settings));
   }
 
-  saveUserSettingsRequest(key: string, settings: any): HttpRequest<any> {
-    return new HttpRequest('PUT', userSettings + `/${key}`, settings);
+  saveUserSettingsRequest(userId: string, key: string, settings: any): HttpRequest<any> {
+    return new HttpRequest('PUT', `${userSettingsBase}/${userId}/${userSettingsConfiguration}/${key}`, settings);
+  }
+
+  getCurrentUserSettings(key: string): Observable<any> {
+    const sid = this.authService.user.profile.sub;
+    return this.getUserSettings(sid, key);
+  }
+
+  saveCurrentUserSettings(key: string, settings: any) {
+    const sid = this.authService.user.profile.sub;
+    console.log('saveCurrentUserSettings()', key, settings);
+    this.saveUserSettings(sid, key, settings).subscribe();
   }
 }

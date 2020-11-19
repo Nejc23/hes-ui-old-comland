@@ -107,7 +107,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    console.log(this.user);
+    console.log(`Is user authenticated?`, this.user);
     return this.user != null;
   }
 

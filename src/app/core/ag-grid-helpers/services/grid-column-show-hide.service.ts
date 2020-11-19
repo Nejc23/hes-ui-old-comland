@@ -15,6 +15,7 @@ export class GridColumnShowHideService {
 
   // Service commands
   listOfColumnVisibilitySet(columnVisibleList: string[]) {
+    console.log('listOfColumnVisibilitySet()', columnVisibleList);
     this.gridColumnVisibleSetSource.next(columnVisibleList);
   }
 

@@ -8,6 +8,7 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SaveViewFormComponent } from '../../save-view-form/save-view-form.component';
 import { Subscription } from 'rxjs';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 
 @Component({
   selector: 'app-action-form',
@@ -35,12 +36,15 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   @ViewChild('modalFilter', { static: true }) input;
 
+  private eventSettingsStoreLoadedSubscription: Subscription;
+
   constructor(
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private modalService: ModalService,
-    private gridColumnShowHideService: GridColumnShowHideService
+    private gridColumnShowHideService: GridColumnShowHideService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     // subscribe to changes of visibility of columns on grid
     this.subscription = gridColumnShowHideService.listOfColumnVisibilitySet$.subscribe(visibleColumnList => {
@@ -53,17 +57,23 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     this.setColumnsListForArrayOfCheckBox();
 
     const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    this.form = this.createForm(search.searchText);
-    this.insertedValue(search.searchText);
+    this.form = this.createForm(search.searchText === '' ? null : search.searchText);
+
+    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
+      const searchUpdated = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+      this.form.get('content').setValue(searchUpdated.searchText);
+    });
   }
 
   insertedValue($event: string) {
-    if ($event !== undefined) {
-      this.searchTextEmpty = $event.length === 0;
-    } else {
-      this.searchTextEmpty = true;
+    if ($event !== null) {
+      if ($event !== undefined) {
+        this.searchTextEmpty = $event.length === 0;
+      } else {
+        this.searchTextEmpty = true;
+      }
+      this.searchChange.emit($event);
     }
-    this.searchChange.emit($event);
   }
 
   get searchProperty() {
@@ -86,6 +96,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.staticTextService.removePopupBackdropIfClickOnMenu();
     this.subscription.unsubscribe();
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
   }
 
   openSaveLayoutModal($event: any) {
