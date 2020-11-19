@@ -1079,9 +1079,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.meterUnitsTypeGridLayoutStore = settings as MeterUnitsTypeGridLayoutStore;
         this.addSettingsToSession(settings);
         this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       },
       error => {
         this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       }
     );
   }

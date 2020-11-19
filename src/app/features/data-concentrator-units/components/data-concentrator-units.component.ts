@@ -736,9 +736,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
         this.addSettingsToSession(settings);
         this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       },
       error => {
         this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       }
     );
   }
@@ -766,7 +768,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.settingsStoreEmitterService.settingsLoaded();
       // send to subscribers the visibility of columns
     }
-    this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
   }
 
   saveSettingsStore(sortModel: GridSortParams[]) {
