@@ -1,3 +1,4 @@
+import { Params } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -21,6 +22,8 @@ export class PlcMeterBreakerModeComponent implements OnInit {
   disconnectorModes: Codelist<number>[];
   actionRequest: IActionRequestParams;
   errMsg = '';
+
+  selectedRowsCount: number;
 
   constructor(
     private formBuilder: FormBuilder,

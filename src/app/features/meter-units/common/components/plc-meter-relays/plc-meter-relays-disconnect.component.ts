@@ -29,6 +29,8 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
 
   relays$: Codelist<string>[];
 
+  public selectedRowsCount: number;
+
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,

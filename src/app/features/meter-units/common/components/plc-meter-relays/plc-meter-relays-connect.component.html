@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Relay Connect</div>
+  <div modal-header i18n>Relay Connect ({{selectedRowsCount}})</div>
 
   <div modal-body>
     <ng-container>
@@ -20,7 +20,7 @@
         <span i18n>Cancel</span></button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onSet()">
-          <span i18n>Connect</span></button>
+          <span i18n>Confirm</span></button>
       </div>
     </div>
   </div>

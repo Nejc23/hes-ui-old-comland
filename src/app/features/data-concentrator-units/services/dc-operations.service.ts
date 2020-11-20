@@ -12,7 +12,7 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
-import { capitalize, values } from 'lodash';
+import { capitalize, toLower, values } from 'lodash';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 
 @Injectable({
@@ -215,9 +215,9 @@ export class DcOperationsService {
         selectedText = `${$localize`for`} ${selectedText}`;
         break;
     }
-    component.btnConfirmText = operationName;
-    component.modalTitle = $localize`Confirm bulk operation`;
-    component.modalBody = `${operationName} ${selectedText} ` + $localize`selected DC(s)?`;
+
+    component.modalTitle = $localize`${operationName} (${selectedCount})`;
+    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
 
     modalRef.result.then(
       data => {

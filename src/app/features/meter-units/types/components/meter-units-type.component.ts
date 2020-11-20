@@ -622,7 +622,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.breakerStatus,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -637,7 +637,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.activateUpgrade,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -652,7 +652,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.connect,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -667,7 +667,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.disconnect,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -682,7 +682,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.ciiState,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -697,7 +697,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.ciiActivate,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -712,7 +712,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.ciiDeactivate,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -727,7 +727,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.clearFF,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
@@ -738,14 +738,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.delete,
       params,
-      selectedGuid && selectedGuid.length > 0 ? 1 : this.getSelectedCount()
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
   }
 
   // popup
   onScheduleReadJobs(selectedGuid: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onScheduleReadJobs(params);
+    this.plcActionsService.onScheduleReadJobs(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -757,7 +757,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getAllDisplayedColumnsNames()
     );
-    this.plcActionsService.onTou(params);
+    this.plcActionsService.onTou(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -769,19 +769,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getAllDisplayedColumnsNames()
     );
-    this.plcActionsService.onUpgrade(params);
+    this.plcActionsService.onUpgrade(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
   onSetMonitor(selectedGuid: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetMonitor(params);
+    this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
   onSetLimiter(selectedGuid: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetLimiter(params);
+    this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -793,7 +793,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getAllDisplayedColumnsNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy);
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -805,7 +805,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getAllDisplayedColumnsNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy);
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -817,7 +817,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getAllDisplayedColumnsNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy);
+    this.plcActionsService.onRelaysState(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -829,7 +829,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getAllDisplayedColumnsNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy);
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
@@ -841,7 +841,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getAllDisplayedColumnsNames()
     );
-    this.plcActionsService.onDisconnectorMode(params);
+    this.plcActionsService.onDisconnectorMode(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
   // <-- end Operations action click (bulk or selected row)
 
