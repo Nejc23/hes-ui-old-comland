@@ -9,7 +9,7 @@ import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MeterUnitsTypeGridEventEmitterService } from '../services/meter-units-type-grid-event-emitter.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
@@ -32,6 +32,9 @@ import { capitalize } from 'lodash';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
+import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -106,6 +109,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   messageDataRefreshed = $localize`Data refreshed!`;
   messageActionFailed = $localize`Action failed!`;
 
+  meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
+  meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore;
+
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -124,7 +130,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private router: Router,
     private plcActionsService: MeterUnitsPlcActionsService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private settingsStoreService: SettingsStoreService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -148,13 +156,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
         if (dataFromCookie) {
           this.gridColumnApi.setColumnState(dataFromCookie);
-        }
-      }
-
-      if (this.gridApi) {
-        const cookieSort = this.meterUnitsTypeGridService.getCookieDataSortModel();
-        if (cookieSort !== undefined && cookieSort !== null) {
-          this.gridApi.setSortModel(cookieSort);
         }
       }
 
@@ -330,8 +331,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
-    // send to subscribers the visibility of columns
-    this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
 
     /*
     const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
@@ -344,77 +343,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.gridApi.setSortModel(cookieSort);
     }*/
 
-    const that = this;
-    const datasource = {
-      getRows(paramsRow) {
-        that.requestModel.typeId = that.id; // type of meter units
-        that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex().endRow;
-        that.requestModel.sortModel = paramsRow.request.sortModel;
-
-        that.requestModel.filterModel = that.setFilter();
-        that.requestModel.searchModel = that.setSearch();
-
-        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
-
-        if (that.authService.isRefreshNeeded2()) {
-          that.authService
-            .renewToken()
-            .then(value => {
-              that.authService.user = value;
-              that.authService.saveTokenAndSetUserRights2(value, '');
-
-              that.meterUnitsTypeService
-                .getGridMeterUnitsForm(
-                  that.requestModel,
-                  that.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
-                  displayedColumnsNames
-                )
-                .subscribe(data => {
-                  that.gridApi.hideOverlay();
-                  that.totalCount = data.totalCount;
-                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                    that.noData = true;
-                  } else if (data.totalCount === 0) {
-                    that.gridApi.showNoRowsOverlay();
-                  }
-
-                  that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-                  paramsRow.successCallback(data.data, data.totalCount);
-                  that.selectRows(that.gridApi);
-                  that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-                  // params.failCallback();
-                  that.resizeColumns();
-                });
-            })
-            .catch(err => {
-              if (err.message === 'login_required') {
-                that.authService.login().catch(errDetail => console.log(errDetail));
-              }
-            });
-        } else {
-          that.meterUnitsTypeService
-            .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
-            .subscribe(data => {
-              that.gridApi.hideOverlay();
-              that.totalCount = data.totalCount;
-              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                that.noData = true;
-              } else if (data.totalCount === 0) {
-                that.gridApi.showNoRowsOverlay();
-              }
-
-              that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-              paramsRow.successCallback(data.data, data.totalCount);
-              that.selectRows(that.gridApi);
-              that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-              // params.failCallback();
-              that.resizeColumns();
-            });
-        }
-      }
-    };
-    this.gridApi.setServerSideDatasource(datasource);
+    this.getMeterUnitsLayoutGridLayoutStore();
   }
   // ----------------------- ag-grid sets DATASOURCE end --------------------------
 
@@ -467,6 +396,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.meterUnitsTypeGridService.onColumnVisibility(params);
+
+    this.saveSettingsStore(this.requestModel.sortModel);
 
     setTimeout(() => {
       this.resizeColumns();
@@ -1058,5 +989,166 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     if (usedWidth < availableWidth) {
       this.gridApi.sizeColumnsToFit();
     }
+  }
+
+  setGridDataSource() {
+    const that = this;
+    const datasource = {
+      getRows(paramsRow) {
+        that.requestModel.typeId = that.id; // type of meter units
+        that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex().endRow;
+        that.requestModel.sortModel = paramsRow.request.sortModel;
+
+        that.requestModel.filterModel = that.setFilter();
+        that.requestModel.searchModel = that.setSearch();
+
+        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
+
+        that.saveSettingsStore(that.requestModel.sortModel);
+
+        if (that.authService.isRefreshNeeded2()) {
+          that.authService
+            .renewToken()
+            .then(value => {
+              that.authService.user = value;
+              that.authService.saveTokenAndSetUserRights2(value, '');
+
+              that.meterUnitsTypeService
+                .getGridMeterUnitsForm(
+                  that.requestModel,
+                  that.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
+                  displayedColumnsNames
+                )
+                .subscribe(data => {
+                  that.gridApi.hideOverlay();
+                  that.totalCount = data.totalCount;
+                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                    that.noData = true;
+                  } else if (data.totalCount === 0) {
+                    that.gridApi.showNoRowsOverlay();
+                  }
+
+                  that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+                  paramsRow.successCallback(data.data, data.totalCount);
+                  that.selectRows(that.gridApi);
+                  that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+                  // params.failCallback();
+                  that.resizeColumns();
+                });
+            })
+            .catch(err => {
+              if (err.message === 'login_required') {
+                that.authService.login().catch(errDetail => console.log(errDetail));
+              }
+            });
+        } else {
+          that.meterUnitsTypeService
+            .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
+            .subscribe(data => {
+              that.gridApi.hideOverlay();
+              that.totalCount = data.totalCount;
+              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                that.noData = true;
+              } else if (data.totalCount === 0) {
+                that.gridApi.showNoRowsOverlay();
+              }
+
+              that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+              paramsRow.successCallback(data.data, data.totalCount);
+              that.selectRows(that.gridApi);
+              that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+              // params.failCallback();
+              that.resizeColumns();
+            });
+        }
+      }
+    };
+    this.gridApi.setServerSideDatasource(datasource);
+  }
+
+  getMeterUnitsLayoutGridLayoutStore() {
+    this.settingsStoreService.getCurrentUserSettings(this.meterUnitsTypeGridLayoutStoreKey).subscribe(
+      settings => {
+        this.meterUnitsTypeGridLayoutStore = settings as MeterUnitsTypeGridLayoutStore;
+        this.addSettingsToSession(settings);
+        this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
+      },
+      error => {
+        this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
+      }
+    );
+  }
+
+  addSettingsToSession(settings: MeterUnitsTypeGridLayoutStore) {
+    if (settings) {
+      if (settings.currentPageIndex) {
+        this.meterUnitsTypeGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
+      }
+      if (settings.meterUnitsLayout) {
+        this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.meterUnitsLayout);
+      }
+
+      if (settings.sortModel) {
+        this.requestModel.sortModel = settings.sortModel;
+        this.gridApi.setSortModel(settings.sortModel);
+      }
+
+      if (settings.searchText) {
+        this.meterUnitsTypeGridService.setSessionSettingsSearchedText(settings.searchText);
+      }
+
+      if (settings.visibleColumns && settings.visibleColumns.length > 0) {
+        this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
+      }
+
+      this.settingsStoreEmitterService.settingsLoaded();
+    }
+  }
+
+  saveSettingsStore(sortModel: GridSortParams[]) {
+    const store: MeterUnitsTypeGridLayoutStore = {
+      currentPageIndex: this.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
+      meterUnitsLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout,
+      sortModel,
+      searchText: this.meterUnitsTypeGridService.getSessionSettingsSearchedText(),
+      visibleColumns: this.getAllDisplayedColumnsNames()
+    };
+
+    if (
+      !this.meterUnitsTypeGridLayoutStore ||
+      store.currentPageIndex !== this.meterUnitsTypeGridLayoutStore.currentPageIndex ||
+      JSON.stringify(store.meterUnitsLayout) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.meterUnitsLayout) ||
+      JSON.stringify(store.sortModel) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel) ||
+      store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText ||
+      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns)
+    ) {
+      console.log('saving settings store');
+      console.log('!this.meterUnitsTypeGridLayoutStore', !this.meterUnitsTypeGridLayoutStore);
+      console.log(
+        'store.meterUnitsLayout',
+        JSON.stringify(store.meterUnitsLayout) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.meterUnitsLayout)
+      );
+      console.log('sort model', JSON.stringify(store.sortModel) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel));
+      console.log(
+        'store.sortModel',
+        JSON.stringify(store.sortModel),
+        'this.meterUnitsTypeGridLayoutStore.sortModel',
+        JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel)
+      );
+      console.log('searchText', store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText);
+      console.log(
+        'visibleColuns',
+        JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns)
+      );
+      this.settingsStoreService.saveCurrentUserSettings(this.meterUnitsTypeGridLayoutStoreKey, store);
+      this.meterUnitsTypeGridLayoutStore = store;
+    }
+  }
+
+  sortChanged() {
+    console.log('-----sort changed');
   }
 }

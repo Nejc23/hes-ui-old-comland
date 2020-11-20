@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
+import { SettingsStoreEmitterService } from './../../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
@@ -15,7 +16,7 @@ import * as _ from 'lodash';
   selector: 'app-dc-filter',
   templateUrl: './dc-filter.component.html'
 })
-export class DcFilterComponent implements OnInit {
+export class DcFilterComponent implements OnInit, OnDestroy {
   @Output() filterChange = new EventEmitter();
 
   sessionNameForGridFilter = 'grdLayoutDCU';
@@ -43,13 +44,16 @@ export class DcFilterComponent implements OnInit {
 
   @Output() toggleFilter = new EventEmitter();
 
+  private eventSettingsStoreLoadedSubscription: Subscription;
+
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
     public fb: FormBuilder,
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private codelistHelperService: CodelistHelperService
+    private codelistHelperService: CodelistHelperService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     this.form = this.createForm(null, null);
     this.applyFilter = _.debounce(this.applyFilter, 1000);
@@ -72,6 +76,10 @@ export class DcFilterComponent implements OnInit {
     this.dcuTags$.subscribe(y => (this.dcuTags = y));
 
     // this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
+
+    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
+      this.doFillData();
+    });
   }
 
   doFillData() {
@@ -219,5 +227,11 @@ export class DcFilterComponent implements OnInit {
 
   getFilterTitle(): string {
     return $localize`Filters`;
+  }
+
+  ngOnDestroy() {
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
   }
 }

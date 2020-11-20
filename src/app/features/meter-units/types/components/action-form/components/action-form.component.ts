@@ -1,3 +1,4 @@
+import { SettingsStoreEmitterService } from './../../../../../../core/repository/services/settings-store/settings-store-emitter.service';
 import { FiltersInfo } from './../../../../../../shared/forms/interfaces/filters-info.interface';
 import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -9,6 +10,7 @@ import { SaveViewFormMUTComponent } from '../../save-view-form/save-view-form-me
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { MeterUnitsTypeGridService } from '../../../services/meter-units-type-grid.service';
 
 @Component({
   selector: 'app-action-form',
@@ -36,13 +38,17 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   subscription: Subscription;
 
+  private eventSettingsStoreLoadedSubscription: Subscription;
+
   constructor(
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private modalService: ModalService,
     private route: ActivatedRoute,
-    private gridColumnShowHideService: GridColumnShowHideService
+    private gridColumnShowHideService: GridColumnShowHideService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService
   ) {
     this.paramsSub = route.params.subscribe(params => {
       this.meterUnitTypeid = params.id;
@@ -63,18 +69,24 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
     this.setColumnsListForArrayOfCheckBox();
 
-    const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    this.form = this.createForm(search.searchText);
-    this.insertedValue(search.searchText);
+    const searchText = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
+    this.form = this.createForm(searchText === '' ? null : searchText);
+
+    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
+      const searchTextUpdated = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
+      this.form.get(this.searchProperty).setValue(searchTextUpdated === '' ? null : searchTextUpdated);
+    });
   }
 
   insertedValue($event: string) {
-    if ($event !== undefined) {
-      this.searchTextEmpty = $event.length === 0;
-    } else {
-      this.searchTextEmpty = true;
+    if ($event !== null) {
+      if ($event !== undefined) {
+        this.searchTextEmpty = $event.length === 0;
+      } else {
+        this.searchTextEmpty = true;
+      }
+      this.searchChange.emit($event);
     }
-    this.searchChange.emit($event);
   }
 
   get searchProperty() {
@@ -101,6 +113,10 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
     this.staticTextService.removePopupBackdropIfClickOnMenu();
     this.subscription.unsubscribe();
+
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
   }
 
   openSaveLayoutModal($event: any) {

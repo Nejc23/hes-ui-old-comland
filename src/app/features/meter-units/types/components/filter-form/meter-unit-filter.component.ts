@@ -11,6 +11,7 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 import * as _ from 'lodash';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 
 @Component({
   selector: 'app-meter-unit-filter',
@@ -47,6 +48,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   @Output() toggleFilter = new EventEmitter();
 
+  private eventSettingsStoreLoadedSubscription: Subscription;
+
   constructor(
     private codelistService: CodelistMeterUnitsRepositoryService,
     private mutService: MeterUnitsService,
@@ -54,7 +57,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private route: ActivatedRoute,
-    private codelistHelperService: CodelistHelperService
+    private codelistHelperService: CodelistHelperService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe(params => {
@@ -86,11 +90,19 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.disconnectorState$ = this.codelistService.meterUnitDisconnectorStateCodelist(this.id); // TODO uncomment when implemented
     this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
     this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
+
+    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
+      this.doFillData();
+    });
   }
 
   ngOnDestroy() {
     if (this.paramsSub) {
       this.paramsSub.unsubscribe();
+    }
+
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
     }
   }
 

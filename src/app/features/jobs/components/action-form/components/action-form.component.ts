@@ -1,8 +1,10 @@
+import { SchedulerJobsListGridService } from './../../../services/scheduler-jobs-list-grid.service';
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
-import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-action-form',
@@ -18,18 +20,25 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   @Output() refresh: EventEmitter<boolean> = new EventEmitter();
   @Output() searchChange = new EventEmitter<string>();
 
+  private eventSettingsStoreLoadedSubscription: Subscription;
+
   constructor(
     public fb: FormBuilder,
     public staticTextService: ActionFormStaticTextService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private schedulerJobsListGridService: SchedulerJobsListGridService
   ) {}
 
   ngOnInit() {
     // this.staticTextService.preventCloseDropDownWhenClickInsideMenu();
 
-    const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    this.form = this.createForm(search.searchText);
-    this.insertedValue(search.searchText);
+    const searchText = this.schedulerJobsListGridService.getSessionSettingsSearchedText();
+    this.form = this.createForm(searchText === '' ? null : searchText);
+
+    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
+      const searchTextUpdated = this.schedulerJobsListGridService.getSessionSettingsSearchedText();
+      this.form.get(this.searchProperty).setValue(searchTextUpdated === '' ? null : searchTextUpdated);
+    });
   }
 
   insertedValue($event: string) {
@@ -58,5 +67,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.staticTextService.removePopupBackdropIfClickOnMenu();
+
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
   }
 }

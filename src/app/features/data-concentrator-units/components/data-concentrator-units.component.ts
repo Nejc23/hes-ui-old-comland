@@ -1,3 +1,9 @@
+import { GridSettingsSessionStoreService } from './../../../core/utils/services/grid-settings-session-store.service';
+import { GridSearchParams } from './../../../core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridSettingsSessionStore } from './../../../core/utils/interfaces/grid-settings-session-store.interface';
+import { SettingsStoreEmitterService } from './../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { DcuUnitsGridLayoutStore } from './../interfaces/dcu-units-grid-layout.store';
+import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SidebarToggleService } from './../../../shared/base-template/components/services/sidebar.service';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
@@ -13,12 +19,12 @@ import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 
 import * as moment from 'moment';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable, of } from 'rxjs';
 
 // consts
 import { configAgGrid } from 'src/environments/config';
 import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import * as _ from 'lodash';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
@@ -44,6 +50,9 @@ import { filterOperationEnum } from '../../global/enums/filter-operation-global.
 export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   sessionNameForGridState = 'grdStateDCU';
   sessionNameForGridFilter = 'grdLayoutDCU';
+
+  dcuUnitsGridLayoutStoreKey = 'dcu-units-grid-layout';
+  dcuUnitsGridLayoutStore: DcuUnitsGridLayoutStore;
 
   // grid variables
   columns = [];
@@ -107,8 +116,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private gridColumnShowHideService: GridColumnShowHideService,
     private bredcrumbService: BreadcrumbService,
     private dcOperationsService: DcOperationsService,
-
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private settingsStoreService: SettingsStoreService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -250,8 +260,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.gridColumnApi = params.columnApi;
 
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
-    // send to subscribers the visibility of columns
-    this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
 
     this.icons = {
       filter: ''
@@ -267,73 +275,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.gridApi.setSortModel(cookieSort);
     }
 
-    const that = this;
-    const datasource = {
-      getRows(paramsRow) {
-        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().endRow;
-        that.requestModel.sortModel = paramsRow.request.sortModel;
-        that.requestModel.filterModel = that.setFilter();
-        that.requestModel.searchModel = that.setSearch();
-
-        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
-
-        if (that.authService.isRefreshNeeded2()) {
-          that.authService
-            .renewToken()
-            .then(value => {
-              that.authService.user = value;
-              that.authService.saveTokenAndSetUserRights2(value, '');
-
-              that.dataConcentratorUnitsService
-                .getGridDcuForm(
-                  that.requestModel,
-                  that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
-                  displayedColumnsNames
-                )
-                .subscribe(data => {
-                  that.gridApi.hideOverlay();
-                  that.totalCount = data.totalCount;
-                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                    that.noData = true;
-                  } else if (data.totalCount === 0) {
-                    that.gridApi.showNoRowsOverlay();
-                  }
-
-                  that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-                  paramsRow.successCallback(data.data, data.totalCount);
-                  that.selectRows(that.gridApi);
-                  // params.failCallback();
-                  that.resizeColumns();
-                });
-            })
-            .catch(err => {
-              if (err.message === 'login_required') {
-                that.authService.login().catch(errDetail => console.log(errDetail));
-              }
-            });
-        } else {
-          that.dataConcentratorUnitsService
-            .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
-            .subscribe(data => {
-              that.gridApi.hideOverlay();
-              that.totalCount = data.totalCount;
-              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                that.noData = true;
-              } else if (data.totalCount === 0) {
-                that.gridApi.showNoRowsOverlay();
-              }
-
-              that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-              paramsRow.successCallback(data.data, data.totalCount);
-              that.selectRows(that.gridApi);
-              // params.failCallback();
-              that.resizeColumns();
-            });
-        }
-      }
-    };
-    this.gridApi.setServerSideDatasource(datasource);
+    this.getDcuUnitsGridLayoutStore();
   }
   // ----------------------- ag-grid set DATASOURCE end --------------------------
 
@@ -368,6 +310,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.dataConcentratorUnitsGridService.onColumnVisibility(params);
+    this.saveSettingsStore(this.requestModel.sortModel);
     this.resizeColumns();
   }
 
@@ -706,6 +649,147 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     if (usedWidth < availableWidth) {
       this.gridApi.sizeColumnsToFit();
+    }
+  }
+
+  setGridDataSource() {
+    const that = this;
+
+    const datasource = {
+      getRows(paramsRow) {
+        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
+
+        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().endRow;
+
+        that.requestModel.sortModel = paramsRow.request.sortModel;
+        that.requestModel.filterModel = that.setFilter();
+        that.requestModel.searchModel = that.setSearch();
+
+        that.saveSettingsStore(that.requestModel.sortModel);
+
+        if (that.authService.isRefreshNeeded2()) {
+          that.authService
+            .renewToken()
+            .then(value => {
+              that.authService.user = value;
+              that.authService.saveTokenAndSetUserRights2(value, '');
+
+              that.dataConcentratorUnitsService
+                .getGridDcuForm(
+                  that.requestModel,
+                  that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
+                  displayedColumnsNames
+                )
+                .subscribe(data => {
+                  that.gridApi.hideOverlay();
+                  that.totalCount = data.totalCount;
+                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                    that.noData = true;
+                  } else if (data.totalCount === 0) {
+                    that.gridApi.showNoRowsOverlay();
+                  }
+
+                  // that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+                  // that.gridApi.paginationGoToPage(that.dcuUnitsGridLayoutStore.currentRowIndex);
+                  paramsRow.successCallback(data.data, data.totalCount);
+                  that.selectRows(that.gridApi);
+                  // params.failCallback();
+                  that.resizeColumns();
+                });
+            })
+            .catch(err => {
+              if (err.message === 'login_required') {
+                that.authService.login().catch(errDetail => console.log(errDetail));
+              }
+            });
+        } else {
+          that.dataConcentratorUnitsService
+            .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
+            .subscribe(data => {
+              that.gridApi.hideOverlay();
+              that.totalCount = data.totalCount;
+              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
+                that.noData = true;
+              } else if (data.totalCount === 0) {
+                that.gridApi.showNoRowsOverlay();
+              }
+
+              // that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+              // console.log('that.dcuUnitsGridLayoutStore', that.dcuUnitsGridLayoutStore);
+              // that.gridApi.paginationGoToPage(that.dcuUnitsGridLayoutStore.currentRowIndex);
+
+              paramsRow.successCallback(data.data, data.totalCount);
+              that.selectRows(that.gridApi);
+              // params.failCallback();
+              that.resizeColumns();
+            });
+        }
+      }
+    };
+    this.gridApi.setServerSideDatasource(datasource);
+  }
+
+  getDcuUnitsGridLayoutStore() {
+    this.settingsStoreService.getCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey).subscribe(
+      settings => {
+        this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
+        this.addSettingsToSession(settings);
+        this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
+      },
+      error => {
+        this.setGridDataSource();
+        this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
+      }
+    );
+  }
+
+  addSettingsToSession(settings: DcuUnitsGridLayoutStore) {
+    if (settings) {
+      if (settings.currentPageIndex) {
+        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
+      }
+      if (settings.dcuLayout) {
+        this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.dcuLayout);
+      }
+      if (settings.sortModel) {
+        this.requestModel.sortModel = settings.sortModel;
+        this.gridApi.setSortModel(settings.sortModel);
+      }
+
+      if (settings.searchText) {
+        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText(settings.searchText);
+      }
+
+      if (settings.visibleColumns && settings.visibleColumns.length > 0) {
+        this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
+      }
+
+      this.settingsStoreEmitterService.settingsLoaded();
+      // send to subscribers the visibility of columns
+    }
+  }
+
+  saveSettingsStore(sortModel: GridSortParams[]) {
+    const store: DcuUnitsGridLayoutStore = {
+      currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
+      dcuLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout,
+      sortModel,
+      searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
+      visibleColumns: this.getAllDisplayedColumnsNames()
+    };
+
+    if (
+      !this.dcuUnitsGridLayoutStore ||
+      store.currentPageIndex !== this.dcuUnitsGridLayoutStore.currentPageIndex ||
+      JSON.stringify(store.dcuLayout) !== JSON.stringify(this.dcuUnitsGridLayoutStore.dcuLayout) ||
+      JSON.stringify(store.sortModel) !== JSON.stringify(this.dcuUnitsGridLayoutStore.sortModel) ||
+      store.searchText !== this.dcuUnitsGridLayoutStore.searchText ||
+      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns)
+    ) {
+      this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
+      this.dcuUnitsGridLayoutStore = store;
     }
   }
 }
