@@ -674,8 +674,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       getRows(paramsRow) {
         const displayedColumnsNames = that.getAllDisplayedColumnsNames();
 
-        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(this.selectedPageSize).startRow;
-        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(this.selectedPageSize).endRow;
+        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
+        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
 
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
@@ -781,18 +781,24 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
       }
 
+      if (settings.pageSize) {
+        this.selectedPageSize = settings.pageSize;
+        this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+      }
+
       this.settingsStoreEmitterService.settingsLoaded();
       // send to subscribers the visibility of columns
     }
   }
 
-  saveSettingsStore(sortModel: GridSortParams[]) {
+  saveSettingsStore(sortModel?: GridSortParams[]) {
     const store: DcuUnitsGridLayoutStore = {
       currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
       dcuLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout,
-      sortModel,
+      sortModel: sortModel ? sortModel : this.dcuUnitsGridLayoutStore.sortModel,
       searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
-      visibleColumns: this.getAllDisplayedColumnsNames()
+      visibleColumns: this.getAllDisplayedColumnsNames(),
+      pageSize: this.selectedPageSize
     };
 
     if (
@@ -801,7 +807,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       JSON.stringify(store.dcuLayout) !== JSON.stringify(this.dcuUnitsGridLayoutStore.dcuLayout) ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.dcuUnitsGridLayoutStore.sortModel) ||
       store.searchText !== this.dcuUnitsGridLayoutStore.searchText ||
-      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns)
+      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns) ||
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.dcuUnitsGridLayoutStore.pageSize)
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
       this.dcuUnitsGridLayoutStore = store;
@@ -820,6 +827,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   pageSizeChanged(selectedValue: any) {
     this.selectedPageSize = selectedValue;
+    this.saveSettingsStore();
     this.refreshGrid();
   }
 }

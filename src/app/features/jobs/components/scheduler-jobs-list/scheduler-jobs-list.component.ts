@@ -285,8 +285,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex(this.selectedPageSize.id).startRow;
-        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex(this.selectedPageSize.id).endRow;
+        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
+        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.searchModel = that.setSearch();
 
@@ -341,23 +341,30 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         this.schedulerJobsListGridService.setSessionSettingsSearchedText(settings.searchText);
       }
 
+      if (settings.pageSize) {
+        this.selectedPageSize = settings.pageSize;
+        this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+      }
+
       this.settingsStoreEmitterService.settingsLoaded();
       // send to subscribers the visibility of columns
     }
   }
 
-  saveSettingsStore(sortModel: GridSortParams[]) {
+  saveSettingsStore(sortModel?: GridSortParams[]) {
     const store: SchedulerJobsListGridLayoutStore = {
       currentPageIndex: this.schedulerJobsListGridService.getSessionSettingsPageIndex(),
-      sortModel,
-      searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText()
+      sortModel: sortModel ? sortModel : this.schedulerJobsListGridLayoutStore.sortModel,
+      searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText(),
+      pageSize: this.selectedPageSize
     };
 
     if (
       !this.schedulerJobsListGridLayoutStore ||
       store.currentPageIndex !== this.schedulerJobsListGridLayoutStore.currentPageIndex ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.sortModel) ||
-      store.searchText !== this.schedulerJobsListGridLayoutStore.searchText
+      store.searchText !== this.schedulerJobsListGridLayoutStore.searchText ||
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.pageSize)
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.schedulerJobsListGridLayoutStoreKey, store);
       this.schedulerJobsListGridLayoutStore = store;
@@ -376,6 +383,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   pageSizeChanged(selectedValue: any) {
     this.selectedPageSize = selectedValue;
+    this.saveSettingsStore();
     this.refreshGrid();
   }
 }
