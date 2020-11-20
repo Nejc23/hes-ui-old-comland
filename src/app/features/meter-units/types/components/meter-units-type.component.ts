@@ -159,13 +159,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         }
       }
 
-      if (this.gridApi) {
-        const cookieSort = this.meterUnitsTypeGridService.getCookieDataSortModel();
-        if (cookieSort !== undefined && cookieSort !== null) {
-          this.gridApi.setSortModel(cookieSort);
-        }
-      }
-
       // set title by selected meter unit type
       if (this.meterTypes$.length === 0) {
         this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe(data => {
@@ -403,6 +396,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.meterUnitsTypeGridService.onColumnVisibility(params);
+
     this.saveSettingsStore(this.requestModel.sortModel);
 
     setTimeout(() => {
@@ -1096,7 +1090,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (settings.meterUnitsLayout) {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.meterUnitsLayout);
       }
+
       if (settings.sortModel) {
+        this.requestModel.sortModel = settings.sortModel;
         this.gridApi.setSortModel(settings.sortModel);
       }
 
@@ -1129,8 +1125,30 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText ||
       JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns)
     ) {
+      console.log('saving settings store');
+      console.log('!this.meterUnitsTypeGridLayoutStore', !this.meterUnitsTypeGridLayoutStore);
+      console.log(
+        'store.meterUnitsLayout',
+        JSON.stringify(store.meterUnitsLayout) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.meterUnitsLayout)
+      );
+      console.log('sort model', JSON.stringify(store.sortModel) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel));
+      console.log(
+        'store.sortModel',
+        JSON.stringify(store.sortModel),
+        'this.meterUnitsTypeGridLayoutStore.sortModel',
+        JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel)
+      );
+      console.log('searchText', store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText);
+      console.log(
+        'visibleColuns',
+        JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns)
+      );
       this.settingsStoreService.saveCurrentUserSettings(this.meterUnitsTypeGridLayoutStoreKey, store);
       this.meterUnitsTypeGridLayoutStore = store;
     }
+  }
+
+  sortChanged() {
+    console.log('-----sort changed');
   }
 }

@@ -754,6 +754,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.dcuLayout);
       }
       if (settings.sortModel) {
+        this.requestModel.sortModel = settings.sortModel;
         this.gridApi.setSortModel(settings.sortModel);
       }
 

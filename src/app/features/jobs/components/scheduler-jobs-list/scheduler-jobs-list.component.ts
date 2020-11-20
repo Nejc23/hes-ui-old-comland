@@ -10,7 +10,7 @@ import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
@@ -19,6 +19,9 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-jobs-list-grid-layout-store.interface';
+import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -59,6 +62,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   private refreshSubscription: Subscription;
 
+  schedulerJobsListGridLayoutStoreKey = 'scheduler-jobs-list-grid-layout';
+  schedulerJobsListGridLayoutStore: SchedulerJobsListGridLayoutStore;
+
   constructor(
     private schedulerJobsService: JobsService,
     private schedulerJobsListGridService: SchedulerJobsListGridService,
@@ -69,7 +75,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private breadcrumbService: BreadcrumbService,
     private sidebarToggleService: SidebarToggleService,
-    private codelistService: CodelistRepositoryService
+    private codelistService: CodelistRepositoryService,
+    private settingsStoreService: SettingsStoreService,
+    private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -124,32 +132,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       this.gridApi.sizeColumnsToFit();
     };
 
-    const that = this;
-    const datasource = {
-      getRows(paramsRow) {
-        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex().endRow;
-        that.requestModel.sortModel = paramsRow.request.sortModel;
-        that.requestModel.searchModel = that.setSearch();
-        if (that.authService.isRefreshNeeded2()) {
-          that.authService
-            .renewToken()
-            .then(value => {
-              that.authService.user = value;
-              that.authService.saveTokenAndSetUserRights2(value, '');
-              that.loadData(that, paramsRow);
-            })
-            .catch(err => {
-              if (err.message === 'login_required') {
-                that.authService.login().catch(err2 => console.log(err2));
-              }
-            });
-        } else {
-          that.loadData(that, paramsRow);
-        }
-      }
-    };
-    this.gridApi.setServerSideDatasource(datasource);
+    this.getSchedulerJobsListGridLayoutStore();
   }
 
   ngOnInit() {
@@ -280,5 +263,88 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  setGridDataSource() {
+    const that = this;
+    const datasource = {
+      getRows(paramsRow) {
+        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex().startRow;
+        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex().endRow;
+        that.requestModel.sortModel = paramsRow.request.sortModel;
+        that.requestModel.searchModel = that.setSearch();
+
+        that.saveSettingsStore(that.requestModel.sortModel);
+
+        if (that.authService.isRefreshNeeded2()) {
+          that.authService
+            .renewToken()
+            .then(value => {
+              that.authService.user = value;
+              that.authService.saveTokenAndSetUserRights2(value, '');
+              that.loadData(that, paramsRow);
+            })
+            .catch(err => {
+              if (err.message === 'login_required') {
+                that.authService.login().catch(err2 => console.log(err2));
+              }
+            });
+        } else {
+          that.loadData(that, paramsRow);
+        }
+      }
+    };
+    this.gridApi.setServerSideDatasource(datasource);
+  }
+
+  getSchedulerJobsListGridLayoutStore() {
+    this.settingsStoreService.getCurrentUserSettings(this.schedulerJobsListGridLayoutStoreKey).subscribe(
+      settings => {
+        this.schedulerJobsListGridLayoutStore = settings as SchedulerJobsListGridLayoutStore;
+        this.addSettingsToSession(settings);
+        this.setGridDataSource();
+      },
+      error => {
+        this.setGridDataSource();
+      }
+    );
+  }
+
+  addSettingsToSession(settings: SchedulerJobsListGridLayoutStore) {
+    if (settings) {
+      if (settings.currentPageIndex) {
+        this.schedulerJobsListGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
+      }
+
+      if (settings.sortModel) {
+        this.requestModel.sortModel = settings.sortModel;
+        this.gridApi.setSortModel(settings.sortModel);
+      }
+
+      if (settings.searchText) {
+        this.schedulerJobsListGridService.setSessionSettingsSearchedText(settings.searchText);
+      }
+
+      this.settingsStoreEmitterService.settingsLoaded();
+      // send to subscribers the visibility of columns
+    }
+  }
+
+  saveSettingsStore(sortModel: GridSortParams[]) {
+    const store: SchedulerJobsListGridLayoutStore = {
+      currentPageIndex: this.schedulerJobsListGridService.getSessionSettingsPageIndex(),
+      sortModel,
+      searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText()
+    };
+
+    if (
+      !this.schedulerJobsListGridLayoutStore ||
+      store.currentPageIndex !== this.schedulerJobsListGridLayoutStore.currentPageIndex ||
+      JSON.stringify(store.sortModel) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.sortModel) ||
+      store.searchText !== this.schedulerJobsListGridLayoutStore.searchText
+    ) {
+      this.settingsStoreService.saveCurrentUserSettings(this.schedulerJobsListGridLayoutStoreKey, store);
+      this.schedulerJobsListGridLayoutStore = store;
+    }
   }
 }
