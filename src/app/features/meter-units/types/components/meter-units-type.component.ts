@@ -1,7 +1,7 @@
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
 import { MeterUnitsTypeStaticTextService } from '../services/meter-units-type-static-text.service';
@@ -112,6 +112,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
   meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore;
 
+  pageSizes: Codelist<number>[] = [
+    { id: 20, value: '20' },
+    { id: 50, value: '50' },
+    { id: 100, value: '100' }
+  ];
+
+  selectedPageSize: Codelist<number> = this.pageSizes[0];
+
+  form: FormGroup;
+
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -202,6 +212,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe(listOfVisibleColumns => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
     });
+
+    this.form = this.createForm(this.pageSizes[0]);
   }
 
   // form - rights
@@ -1148,7 +1160,18 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  sortChanged() {
-    console.log('-----sort changed');
+  get pageSizeProperty() {
+    return 'pageSize';
+  }
+
+  createForm(pageSize: Codelist<number>): FormGroup {
+    return this.fb.group({
+      [this.pageSizeProperty]: pageSize
+    });
+  }
+
+  pageSizeChanged(selectedValue: any) {
+    this.selectedPageSize = selectedValue;
+    this.refreshGrid();
   }
 }

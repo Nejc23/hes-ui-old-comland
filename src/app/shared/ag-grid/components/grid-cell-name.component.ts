@@ -7,7 +7,7 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 })
 export class GridCellNameComponent implements ICellRendererAngularComp {
   public params: any;
-
+  public notAvailableText = $localize`N/A`;
   constructor() {}
 
   // called on init

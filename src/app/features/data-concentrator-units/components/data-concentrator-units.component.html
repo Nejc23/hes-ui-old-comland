@@ -37,12 +37,12 @@
       <div class="content-body-scroll">
         <div>
           <!-- ag-grid -->
-          <ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
+          <ag-grid-angular class="ag-theme-epoint custom-paging" style="width: 100%; height: calc(100% - 25px);" #agGrid
             [domLayout]=agGridSettings.domLayout [modules]="modules"
-            [icons]="icons" [pagination]=agGridSettings.pagination [paginationPageSize]=agGridSettings.paginationPageSize
+            [icons]="icons" [pagination]=agGridSettings.pagination
             [multiSortKey]=agGridSettings.multiSortKey [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
             [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-            [frameworkComponents]="frameworkComponents" [cacheBlockSize]=agGridSettings.paginationPageSize
+            [frameworkComponents]="frameworkComponents"
             [maxBlocksInCache]="1" [gridOptions]="gridOptions" [columnDefs]="columns"
             [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection [rowSelection]=agGridSettings.rowSelection
             [sideBar]="sideBar" [overlayNoRowsTemplate]="overlayNoRowsTemplate"
@@ -51,10 +51,12 @@
             (paginationChanged)="onPaginationChange($event)"
             (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)"
             [localeText]="localeText"
-            (gridSizeChanged)="gridSizeChanged()">
+            (gridSizeChanged)="gridSizeChanged()"
+            [paginationPageSize]="selectedPageSize.id"
+            [cacheBlockSize]="selectedPageSize.id">
           </ag-grid-angular>
 
-          <div class="ag-paging-panel-selection">
+          <div class="ag-paging-panel-selection d-flex">
             <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
               <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
                 <small class="link text-secondary">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
@@ -68,6 +70,11 @@
                   <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
                     <span i18n>Clear selected</span></a></strong></small>
               </div>
+            </div>
+            <div class="ml-auto">
+              <app-select-dropdown i18n-label [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
+                [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
+              </app-select-dropdown>
             </div>
           </div>
         </div>

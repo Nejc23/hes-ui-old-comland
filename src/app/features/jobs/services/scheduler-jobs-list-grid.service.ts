@@ -123,18 +123,18 @@ export class SchedulerJobsListGridService {
    * Get grid pagination for current row
    * @returns GridPagination
    */
-  public getCurrentRowIndex(): GridPagination {
+  public getCurrentRowIndex(pageSize: number): GridPagination {
     const index = this.getSessionSettingsPageIndex();
     const result: GridPagination = {
       currentPage: 0,
       startRow: 0,
-      endRow: 10
+      endRow: pageSize
     };
 
     if (index !== undefined && index !== null) {
       result.currentPage = index;
-      result.startRow = index * 10;
-      result.endRow = index * 10 + 10;
+      result.startRow = index * pageSize;
+      result.endRow = index * pageSize + pageSize;
     }
 
     return result;

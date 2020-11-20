@@ -1,0 +1,21 @@
+<div class="form-group" [formGroup]="form">
+  <label [attr.for]="property" *ngIf="label">
+    {{label !== ' ' ? label : '&nbsp;'}}
+    <span *ngIf="required && label !== ' '"> *</span>
+  </label>
+  <kendo-dropdownlist [name]="property"
+    [disabled]="disabled"
+    class="form-control"
+    isRequired="false"
+    [formControlName]="property"
+    [data]="selectOptions"
+    [textField]="'value'"
+    [valueField]="'id'"
+    [clearButton]="clearButton"
+  >
+  </kendo-dropdownlist>
+  <!--Loop through errors-->
+  <div class="help-block" *ngIf="showErrors()">
+    <app-form-error [error]="formControl!.errors "></app-form-error>
+  </div>
+</div>

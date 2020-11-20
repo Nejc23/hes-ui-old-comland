@@ -451,7 +451,7 @@ export class MeterUnitsTypeGridService {
     return false;
   }
 
-  public getCurrentRowIndex(): GridPagination {
+  public getCurrentRowIndex(pageSize: number): GridPagination {
     const index = this.getSessionSettingsPageIndex();
     const result: GridPagination = {
       currentPage: 0,
@@ -461,8 +461,8 @@ export class MeterUnitsTypeGridService {
 
     if (index !== undefined && index !== null) {
       result.currentPage = index;
-      result.startRow = index * configAgGrid.paginationPageSize;
-      result.endRow = index * configAgGrid.paginationPageSize + configAgGrid.paginationPageSize;
+      result.startRow = index * pageSize;
+      result.endRow = index * pageSize + pageSize;
     }
 
     return result;

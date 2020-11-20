@@ -1,2 +1,4 @@
 <a class="text-truncate" container="body" placement="bottom" [openDelay]="500"
-  [ngbTooltip]="params.value">{{params.value}}</a>
+  [ngbTooltip]="params.value" *ngIf="params.value">{{params.value}}</a>
+
+  <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>

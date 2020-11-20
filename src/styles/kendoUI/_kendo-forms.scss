@@ -75,3 +75,33 @@ input[type=search] {
   position:absolute;
   top:0;
 }
+
+.ag-paging-panel-selection {
+  .k-dropdown {
+    font-size:0.875rem;
+    height:26px;
+    width:47px;
+    margin-top:0.5rem;
+
+    .k-input {
+      padding: 0 0.3rem;
+      height:1.67rem;
+      width:30px;
+    }
+
+    .k-select {
+      padding-left: 0;
+      padding-right: 0.1rem;
+      font-size: 0.875rem;
+      width:12px;
+    }
+
+    .k-icon {
+      font-size: 0.875rem;
+      margin:0;
+    }
+  }
+  .form-group {
+    margin-bottom: 0;
+  }
+}
