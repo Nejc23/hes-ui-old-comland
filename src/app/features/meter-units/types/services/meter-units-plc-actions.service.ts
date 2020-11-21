@@ -61,6 +61,12 @@ export class MeterUnitsPlcActionsService {
     });
   }
 
+  onJobsTemplates(params: RequestFilterParams, selectedRowsCount: number) {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+  }
+
   onTou(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
     modalRef.componentInstance.actionRequest = params;

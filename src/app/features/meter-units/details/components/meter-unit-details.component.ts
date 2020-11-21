@@ -245,6 +245,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUReadJobs;
   }
 
+  get actionMUJobsTemplates() {
+    return ActionEnumerator.MUJobsTemplates;
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
@@ -388,6 +392,12 @@ export class MeterUnitDetailsComponent implements OnInit {
   onScheduleReadJobs() {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onScheduleReadJobs(params, 1);
+  }
+
+  // popup
+  onJobsTemplates() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.onJobsTemplates(params, 1);
   }
 
   // popup
