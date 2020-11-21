@@ -25,6 +25,7 @@ describe('Pact consumer test', () => {
   });
 
   describe('Settings store save user settings', () => {
+    const userId = '5bcab25b-86a8-4f5a-b869-d147ba1853ce';
     const key = 'dcuList';
 
     const settings = {
@@ -67,8 +68,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_SAVING_USER_SETTINGS',
           uponReceiving: 'a request for saving user settings',
           withRequest: {
-            method: service.saveUserSettingsRequest(key, settings).method,
-            path: service.saveUserSettingsRequest(key, settings).url,
+            method: service.saveUserSettingsRequest(userId, key, settings).method,
+            path: service.saveUserSettingsRequest(userId, key, settings).url,
             body: null,
             headers: defaultRequestHeader
           },
@@ -91,7 +92,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for saving user settings', done => {
-      service.saveUserSettings(key, settings).subscribe(res => {
+      service.saveUserSettings(userId, key, settings).subscribe(res => {
         expect(res).toEqual(null);
         done();
       });

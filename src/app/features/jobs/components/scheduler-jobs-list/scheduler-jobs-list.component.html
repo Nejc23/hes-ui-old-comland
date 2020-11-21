@@ -24,32 +24,41 @@
 </div>
 
 <div class="jobs-body-scroll">
-  <ag-grid-angular class="ag-theme-epoint"
-    style="width: 100%; height: calc(100% - 25px);"
-    #agGrid
+  <div>
+    <ag-grid-angular class="ag-theme-epoint custom-paging"
+      style="width: 100%; height: calc(100% - 25px);"
+      #agGrid
 
-    [rowData]="rowData"
-    [columnDefs]="columnDefs"
-    domLayout="autoHeight"
-    [frameworkComponents]="frameworkComponents"
-    [modules]="modules"
-    (gridReady)="onGridReady($event)"
-    suppressRowClickSelection="true"
-    [pagination]="true"
-    [paginationPageSize]="10"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      domLayout="autoHeight"
+      [frameworkComponents]="frameworkComponents"
+      [modules]="modules"
+      (gridReady)="onGridReady($event)"
+      suppressRowClickSelection="true"
+      [pagination]="true"
+      [paginationPageSize]="selectedPageSize.id"
+      [cacheBlockSize]="selectedPageSize.id"
+      suppressSizeToFit="true"
+      [cacheOverflowSize]="2"
+      [maxConcurrentDatasourceRequests]="2"
+      [maxBlocksInCache]="1"
+      [gridOptions]="gridOptions"
+      [localeText]="localeText"
 
-    suppressSizeToFit="true"
-    [cacheOverflowSize]="2"
-    [maxConcurrentDatasourceRequests]="2"
-    [cacheBlockSize]="10"
-    [maxBlocksInCache]="1"
-    [gridOptions]="gridOptions"
-    [localeText]="localeText"
+      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+      [overlayLoadingTemplate]="overlayLoadingTemplate"
+      (paginationChanged)="onPaginationChange($event)"
+      (firstDataRendered)="onFirstDataRendered($event)"
+      >
+    </ag-grid-angular>
+    <div class="ag-paging-panel-selection d-flex">
+      <div class="ml-auto">
+        <app-select-dropdown i18n-label [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
+          [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
+        </app-select-dropdown>
+      </div>
+    </div>
+  </div>
 
-    [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-    [overlayLoadingTemplate]="overlayLoadingTemplate"
-    (paginationChanged)="onPaginationChange($event)"
-    (firstDataRendered)="onFirstDataRendered($event)"
-    >
-  </ag-grid-angular>
 </div>

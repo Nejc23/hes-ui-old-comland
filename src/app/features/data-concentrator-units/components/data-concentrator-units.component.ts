@@ -42,6 +42,8 @@ import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { capitalize } from 'lodash';
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
 import { filterOperationEnum } from '../../global/enums/filter-operation-global.enum';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -102,6 +104,16 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
   };
 
+  pageSizes: Codelist<number>[] = [
+    { id: 20, value: '20' },
+    { id: 50, value: '50' },
+    { id: 100, value: '100' }
+  ];
+
+  selectedPageSize: Codelist<number> = this.pageSizes[0];
+
+  form: FormGroup;
+
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private staticTextService: DataConcentratorUnitsStaticTextService,
@@ -116,9 +128,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private gridColumnShowHideService: GridColumnShowHideService,
     private bredcrumbService: BreadcrumbService,
     private dcOperationsService: DcOperationsService,
-    private sidebarToggleService: SidebarToggleService,
     private settingsStoreService: SettingsStoreService,
-    private settingsStoreEmitterService: SettingsStoreEmitterService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private sidebarToggleService: SidebarToggleService,
+    public fb: FormBuilder
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -160,6 +173,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe(listOfVisibleColumns => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
     });
+
+    this.form = this.createForm(this.pageSizes[0]);
   }
 
   // form - rights
@@ -659,8 +674,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       getRows(paramsRow) {
         const displayedColumnsNames = that.getAllDisplayedColumnsNames();
 
-        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
+        that.requestModel.endRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
 
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
@@ -766,18 +781,24 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
       }
 
+      if (settings.pageSize) {
+        this.selectedPageSize = settings.pageSize;
+        this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+      }
+
       this.settingsStoreEmitterService.settingsLoaded();
       // send to subscribers the visibility of columns
     }
   }
 
-  saveSettingsStore(sortModel: GridSortParams[]) {
+  saveSettingsStore(sortModel?: GridSortParams[]) {
     const store: DcuUnitsGridLayoutStore = {
       currentPageIndex: this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
       dcuLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout,
-      sortModel,
+      sortModel: sortModel ? sortModel : this.dcuUnitsGridLayoutStore.sortModel,
       searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
-      visibleColumns: this.getAllDisplayedColumnsNames()
+      visibleColumns: this.getAllDisplayedColumnsNames(),
+      pageSize: this.selectedPageSize
     };
 
     if (
@@ -786,10 +807,27 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       JSON.stringify(store.dcuLayout) !== JSON.stringify(this.dcuUnitsGridLayoutStore.dcuLayout) ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.dcuUnitsGridLayoutStore.sortModel) ||
       store.searchText !== this.dcuUnitsGridLayoutStore.searchText ||
-      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns)
+      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns) ||
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.dcuUnitsGridLayoutStore.pageSize)
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
       this.dcuUnitsGridLayoutStore = store;
     }
+  }
+
+  get pageSizeProperty() {
+    return 'pageSize';
+  }
+
+  createForm(pageSize: Codelist<number>): FormGroup {
+    return this.fb.group({
+      [this.pageSizeProperty]: pageSize
+    });
+  }
+
+  pageSizeChanged(selectedValue: any) {
+    this.selectedPageSize = selectedValue;
+    this.saveSettingsStore();
+    this.refreshGrid();
   }
 }

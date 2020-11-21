@@ -25,6 +25,7 @@ describe('Pact consumer test', () => {
   });
 
   describe('Settings store get user settings', () => {
+    const userId = '5bcab25b-86a8-4f5a-b869-d147ba1853ce';
     const key = 'dcuList';
 
     const responseBody = {
@@ -67,8 +68,8 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_GETTING_USER_SETTINGS',
           uponReceiving: 'a request for getting user settings',
           withRequest: {
-            method: service.getUserSettingsRequest(key).method,
-            path: service.getUserSettingsRequest(key).url,
+            method: service.getUserSettingsRequest(userId, key).method,
+            path: service.getUserSettingsRequest(userId, key).url,
             body: null,
             headers: defaultRequestHeader
           },
@@ -91,7 +92,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make request for getting user settings', done => {
-      service.getUserSettings(key).subscribe(res => {
+      service.getUserSettings(userId, key).subscribe(res => {
         expect(res).toEqual(responseBody);
         done();
       });

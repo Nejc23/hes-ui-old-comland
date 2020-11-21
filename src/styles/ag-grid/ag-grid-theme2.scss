@@ -412,6 +412,12 @@
 
   .ag-header-cell {
     padding-left: 7px;
-    padding-righ: 7px;
+    padding-right: 7px;
+  }
+
+  &.custom-paging {
+    .ag-paging-panel {
+      margin-right: 47px;
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
 import { MeterUnitsTypeStaticTextService } from '../services/meter-units-type-static-text.service';
@@ -112,6 +112,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
   meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore;
 
+  pageSizes: Codelist<number>[] = [
+    { id: 20, value: '20' },
+    { id: 50, value: '50' },
+    { id: 100, value: '100' }
+  ];
+
+  selectedPageSize: Codelist<number> = this.pageSizes[0];
+
+  form: FormGroup;
+
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -202,6 +212,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe(listOfVisibleColumns => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
     });
+
+    this.form = this.createForm(this.pageSizes[0]);
   }
 
   // form - rights
@@ -996,8 +1008,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const datasource = {
       getRows(paramsRow) {
         that.requestModel.typeId = that.id; // type of meter units
-        that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
+        that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
 
         that.requestModel.filterModel = that.setFilter();
@@ -1104,17 +1116,23 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
       }
 
+      if (settings.pageSize) {
+        this.selectedPageSize = settings.pageSize;
+        this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+      }
+
       this.settingsStoreEmitterService.settingsLoaded();
     }
   }
 
-  saveSettingsStore(sortModel: GridSortParams[]) {
+  saveSettingsStore(sortModel?: GridSortParams[]) {
     const store: MeterUnitsTypeGridLayoutStore = {
       currentPageIndex: this.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
       meterUnitsLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout,
-      sortModel,
+      sortModel: sortModel ? sortModel : this.meterUnitsTypeGridLayoutStore.sortModel,
       searchText: this.meterUnitsTypeGridService.getSessionSettingsSearchedText(),
-      visibleColumns: this.getAllDisplayedColumnsNames()
+      visibleColumns: this.getAllDisplayedColumnsNames(),
+      pageSize: this.selectedPageSize
     };
 
     if (
@@ -1123,32 +1141,27 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       JSON.stringify(store.meterUnitsLayout) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.meterUnitsLayout) ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel) ||
       store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText ||
-      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns)
+      JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns) ||
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.pageSize)
     ) {
-      console.log('saving settings store');
-      console.log('!this.meterUnitsTypeGridLayoutStore', !this.meterUnitsTypeGridLayoutStore);
-      console.log(
-        'store.meterUnitsLayout',
-        JSON.stringify(store.meterUnitsLayout) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.meterUnitsLayout)
-      );
-      console.log('sort model', JSON.stringify(store.sortModel) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel));
-      console.log(
-        'store.sortModel',
-        JSON.stringify(store.sortModel),
-        'this.meterUnitsTypeGridLayoutStore.sortModel',
-        JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel)
-      );
-      console.log('searchText', store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText);
-      console.log(
-        'visibleColuns',
-        JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns)
-      );
       this.settingsStoreService.saveCurrentUserSettings(this.meterUnitsTypeGridLayoutStoreKey, store);
       this.meterUnitsTypeGridLayoutStore = store;
     }
   }
 
-  sortChanged() {
-    console.log('-----sort changed');
+  get pageSizeProperty() {
+    return 'pageSize';
+  }
+
+  createForm(pageSize: Codelist<number>): FormGroup {
+    return this.fb.group({
+      [this.pageSizeProperty]: pageSize
+    });
+  }
+
+  pageSizeChanged(selectedValue: any) {
+    this.selectedPageSize = selectedValue;
+    this.saveSettingsStore();
+    this.refreshGrid();
   }
 }

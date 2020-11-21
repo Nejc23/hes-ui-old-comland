@@ -1,10 +1,11 @@
+import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
@@ -65,6 +66,16 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   schedulerJobsListGridLayoutStoreKey = 'scheduler-jobs-list-grid-layout';
   schedulerJobsListGridLayoutStore: SchedulerJobsListGridLayoutStore;
 
+  pageSizes: Codelist<number>[] = [
+    { id: 20, value: '20' },
+    { id: 50, value: '50' },
+    { id: 100, value: '100' }
+  ];
+
+  selectedPageSize: Codelist<number> = this.pageSizes[0];
+
+  form: FormGroup;
+
   constructor(
     private schedulerJobsService: JobsService,
     private schedulerJobsListGridService: SchedulerJobsListGridService,
@@ -93,6 +104,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         }
       }
     });
+
+    this.form = this.createForm(this.pageSizes[0]);
   }
 
   private noSearch() {
@@ -195,12 +208,15 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       this.gridApi.refreshHeader();
     }
 
+    console.log('onPaginationChange', params.newPage, !this.loadGrid);
     if (params.newPage && !this.loadGrid) {
       this.schedulerJobsListGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
     } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.schedulerJobsListGridService.getSessionSettingsPageIndex());
     }
+
+    params.api.paginationGoToPage(this.schedulerJobsListGridService.getSessionSettingsPageIndex());
   }
 
   addJob() {
@@ -269,8 +285,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex().startRow;
-        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex().endRow;
+        that.requestModel.startRow = that.schedulerJobsListGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
+        that.requestModel.endRow = that.schedulerJobsListGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.searchModel = that.setSearch();
 
@@ -325,26 +341,49 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         this.schedulerJobsListGridService.setSessionSettingsSearchedText(settings.searchText);
       }
 
+      if (settings.pageSize) {
+        this.selectedPageSize = settings.pageSize;
+        this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+      }
+
       this.settingsStoreEmitterService.settingsLoaded();
       // send to subscribers the visibility of columns
     }
   }
 
-  saveSettingsStore(sortModel: GridSortParams[]) {
+  saveSettingsStore(sortModel?: GridSortParams[]) {
     const store: SchedulerJobsListGridLayoutStore = {
       currentPageIndex: this.schedulerJobsListGridService.getSessionSettingsPageIndex(),
-      sortModel,
-      searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText()
+      sortModel: sortModel ? sortModel : this.schedulerJobsListGridLayoutStore.sortModel,
+      searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText(),
+      pageSize: this.selectedPageSize
     };
 
     if (
       !this.schedulerJobsListGridLayoutStore ||
       store.currentPageIndex !== this.schedulerJobsListGridLayoutStore.currentPageIndex ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.sortModel) ||
-      store.searchText !== this.schedulerJobsListGridLayoutStore.searchText
+      store.searchText !== this.schedulerJobsListGridLayoutStore.searchText ||
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.pageSize)
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.schedulerJobsListGridLayoutStoreKey, store);
       this.schedulerJobsListGridLayoutStore = store;
     }
+  }
+
+  get pageSizeProperty() {
+    return 'pageSize';
+  }
+
+  createForm(pageSize: Codelist<number>): FormGroup {
+    return this.fb.group({
+      [this.pageSizeProperty]: pageSize
+    });
+  }
+
+  pageSizeChanged(selectedValue: any) {
+    this.selectedPageSize = selectedValue;
+    this.saveSettingsStore();
+    this.refreshGrid();
   }
 }

@@ -27,6 +27,7 @@ import { DateTimePickerComponent } from './components/datetime-picker/datetime-p
 import { FileUploadComponent } from './components/file-upload/file-upload.component';
 import { UploadsModule } from '@progress/kendo-angular-upload';
 import { FileSelectComponent } from './components/file-select/file-select.component';
+import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -41,6 +42,7 @@ import { FileSelectComponent } from './components/file-select/file-select.compon
     CustomFormErrorsComponent,
     DefaultFormElementComponent,
     SelectInputComponent,
+    SelectDropdownComponent,
     InputSelectComponent,
     InputSearcherComponent,
     InputTagComponent,
@@ -67,6 +69,7 @@ import { FileSelectComponent } from './components/file-select/file-select.compon
     CustomFormErrorsComponent,
     DefaultFormElementComponent,
     SelectInputComponent,
+    SelectDropdownComponent,
     InputSelectComponent,
     InputSearcherComponent,
     InputTagComponent,
