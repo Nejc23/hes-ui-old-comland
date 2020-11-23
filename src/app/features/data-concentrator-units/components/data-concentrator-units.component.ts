@@ -663,7 +663,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     const usedWidth = panel.columnController.getWidthOfColsInList(columns);
 
     if (usedWidth < availableWidth) {
-      this.gridApi.sizeColumnsToFit();
+      // expand only the last visible nonpinned column
+      const columnStates = this.gridColumnApi.getColumnState();
+      const lastVisibleColumnIndex = columnStates.map(c => !c.hide && !c.pinned).lastIndexOf(true);
+      if (lastVisibleColumnIndex > -1) {
+        columnStates[lastVisibleColumnIndex].width = columnStates[lastVisibleColumnIndex].width + (availableWidth - usedWidth);
+        this.gridColumnApi.applyColumnState({ state: columnStates });
+      }
     }
   }
 
