@@ -15,8 +15,18 @@
       <div>
         <a class="dropdown-item" href="javascript:void(0);" (click)="onDelete()" style="pointer-events: none;cursor: default;color:gainsboro;"><span i18n>Delete</span></a>
       </div>
-      <div>
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onScheduleReadJobs()"><span i18n>Jobs</span></a>
+      <div class="dropdown-item">
+        <div class="dropdown-submenu pull-left">
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Jobs</span></a>
+          <div class="dropdown-menu">
+            <div>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="onScheduleReadJobs()"><span i18n>Create new</span></a>
+            </div>
+            <div>
+            <a class="dropdown-item" href="javascript:void(0)" (click)="onJobsTemplates()"><span i18n>Templates</span></a>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="dropdown-divider"></div>
       <div class="dropdown-item">

@@ -2,6 +2,7 @@ export enum ActionEnumerator {
   DCUUpgrade = 'Data-Concentrator-Units-Upgrade',
   DCUConfiguration = 'Data-Concentrator-Units-Configuration',
   MUReadJobs = 'Meter-Units-ReadJobs',
+  MUJobsTemplates = 'Meter-Units-JobsTemplates',
   MUBreakerStatus = 'Meter-Units-BreakerStatus',
   MUConnect = 'Meter-Units-Connect',
   MUDisconnect = 'Meter-Units-Disconnect',

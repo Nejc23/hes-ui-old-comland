@@ -251,6 +251,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get actionMUUpgrade() {
     return ActionEnumerator.MUUpgrade;
   }
+  get actionMUJobsTemplates() {
+    return ActionEnumerator.MUJobsTemplates;
+  }
 
   // set form title by selected meter unit type
   private setTitle(id: number) {
@@ -752,6 +755,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onScheduleReadJobs(selectedGuid: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onScheduleReadJobs(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  onJobsTemplates(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onJobsTemplates(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup

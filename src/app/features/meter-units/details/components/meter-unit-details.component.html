@@ -12,9 +12,18 @@
           <div>
             <a (click)="onDelete()" class="dropdown-item custom-hover-display" href="javascript:void(0)" style="pointer-events: none;cursor: default;color:gainsboro;"><span i18n>Delete</span></a>
           </div>
-          <div>
-            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" class="dropdown-item custom-hover-display" href="javascript:void(0)"
-              (click)="onScheduleReadJobs()"><span i18n>Jobs</span></a>
+          <div class="dropdown-item">
+            <div class="dropdown-submenu">
+                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Job</span></a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" (click)="onScheduleReadJobs()">
+                    <a href="javascript:void(0)" ><span i18n>Create new</span></a>
+                  </div>
+                  <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUJobsTemplates" (click)="onJobsTemplates()">
+                  <a href="javascript:void(0)"><span i18n>Templates</span></a>
+                  </div>
+                </div>
+            </div>
           </div>
 
           <div class="dropdown-divider"></div>

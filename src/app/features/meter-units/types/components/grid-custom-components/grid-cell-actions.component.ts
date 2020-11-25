@@ -30,6 +30,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   onScheduleReadJobs() {
     this.params.context.componentParent.onScheduleReadJobs(this.params.data.deviceId);
   }
+  onJobsTemplates() {
+    this.params.context.componentParent.onJobsTemplates(this.params.data.deviceId);
+  }
   onTou() {
     this.params.context.componentParent.onTou(this.params.data.deviceId);
   }
