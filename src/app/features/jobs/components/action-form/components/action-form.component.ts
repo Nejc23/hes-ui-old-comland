@@ -42,7 +42,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   }
 
   insertedValue($event: string) {
-    if ($event !== undefined) {
+    if ($event !== undefined && $event) {
       this.searchTextEmpty = $event.length === 0;
     } else {
       this.searchTextEmpty = true;

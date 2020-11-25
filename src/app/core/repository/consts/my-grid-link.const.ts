@@ -28,3 +28,5 @@ export const onDemandRelaysConnect = '/on-demand/relay/connect';
 export const onDemandRelaysDisconnect = '/on-demand/relay/disconnect';
 export const onDemandRelaysState = '/on-demand/trigger-get-named-register-value';
 export const onDemandRelaysMode = '/on-demand/relay/mode';
+
+export const linkDeviceTemplate = '/link-device-template';

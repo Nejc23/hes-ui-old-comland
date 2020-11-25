@@ -758,7 +758,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onJobsTemplates(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.plcActionsService.onJobsTemplates(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 

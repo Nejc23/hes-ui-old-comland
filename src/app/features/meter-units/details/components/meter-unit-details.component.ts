@@ -396,7 +396,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onJobsTemplates() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onJobsTemplates(params, 1);
   }
 

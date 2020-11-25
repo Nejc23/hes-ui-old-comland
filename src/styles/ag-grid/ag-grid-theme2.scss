@@ -420,4 +420,10 @@
       margin-right: 47px;
     }
   }
+
+  &.scrollable {
+    .ag-body-viewport {
+      overflow: auto !important;
+    }
+  }
 }

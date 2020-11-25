@@ -1,6 +1,8 @@
 import {
+  IActionRequestAddTemplate,
   IActionRequestRelays,
   IActionRequestRelaysMode,
+  IActionResponseAddTemplate,
   IActionResponseRelays,
   IActionResponseRelaysMode
 } from './../../interfaces/myGridLink/action-prams.interface';
@@ -11,7 +13,8 @@ import {
   onDemandRelaysState,
   onDemandRelaysMode,
   onDemandRelaysDisconnect,
-  onDemandRelaysConnect
+  onDemandRelaysConnect,
+  linkDeviceTemplate
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -261,5 +264,14 @@ export class MyGridLinkService {
 
   setRelaysModeRequest(payload: IActionRequestRelaysMode): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRelaysMode}`, payload);
+  }
+
+  // trigger templte import
+  postMyGridAddDeviceTemplate(params: IActionRequestAddTemplate): Observable<IActionResponseAddTemplate> {
+    return this.repository.makeRequest(this.postMyGridAddDeviceTemplateRequest(params));
+  }
+
+  postMyGridAddDeviceTemplateRequest(params: IActionRequestAddTemplate): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.templating}${linkDeviceTemplate}`, params);
   }
 }
