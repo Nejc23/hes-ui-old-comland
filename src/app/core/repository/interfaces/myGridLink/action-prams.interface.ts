@@ -86,3 +86,11 @@ export interface IActionResponseRelays extends IActionResponseParams {
 export interface IActionResponseRelaysMode extends IActionResponseParams {
   relayMode: RelayMode[];
 }
+
+export interface IActionRequestAddTemplate extends IActionRequestParams {
+  templateId: string;
+}
+
+export interface IActionResponseAddTemplate extends IActionResponseParams {
+  templateId: string;
+}

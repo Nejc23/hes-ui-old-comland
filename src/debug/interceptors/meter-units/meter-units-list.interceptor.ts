@@ -1,3 +1,4 @@
+import { IActionRequestParams } from './../../../app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -18,20 +19,21 @@ export class MeterUnitsListInterceptor {
     let sortColId = '';
     let sortedUsers = []; // data;
     let searched = data;
+
     if (request.body) {
-      const params = request.body as GridRequestParams;
-      if (params.searchModel && params.searchModel.length > 0) {
-        searched = searchById(data, params.searchModel[0].value);
+      const params = request.body as IActionRequestParams;
+      if (params.textSearch && params.textSearch.value.length > 0) {
+        searched = searchById(data, params.textSearch.value);
       }
 
-      skip = params.startRow;
-      take = params.endRow;
+      skip = (params.pageNumber - 1) * params.pageSize; // params.startRow;
+      take = skip + params.pageSize; // params.endRow;
 
-      if (params.sortModel) {
-        params.sortModel.forEach(element => {
-          sortColId = element.colId;
+      if (params.sort) {
+        params.sort.forEach(element => {
+          sortColId = element.propName;
 
-          if (element.sort === 'desc') {
+          if (element.sortOrder === 'desc') {
             sortedUsers = _.sortBy(searched, sortColId).reverse();
           } else {
             sortedUsers = _.sortBy(searched, sortColId);

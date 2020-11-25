@@ -1,0 +1,7 @@
+diff a/src/app/features/meter-units/common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component.ts b/src/app/features/meter-units/common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component.ts	(rejected hunks)
+@@ -7,4 +7 @@ Component({
+-export class PlcMeterJobsRegistersComponent
+-{
+-
+-}
++export class PlcMeterJobsRegistersComponent {}

@@ -65,6 +65,7 @@ import { PlcMeterMonitorComponent } from '../features/meter-units/common/compone
 import { PlcMeterLimiterComponent } from '../features/meter-units/common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
+import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 
 @NgModule({
   exports: [
@@ -116,7 +117,8 @@ import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/c
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,
     PlcMeterRelaysStateComponent,
-    PlcMeterRelaysSetModeComponent
+    PlcMeterRelaysSetModeComponent,
+    PlcMeterJobsRegistersComponent
   ],
   imports: [
     CommonModule,
@@ -191,7 +193,8 @@ import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/c
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,
     PlcMeterRelaysStateComponent,
-    PlcMeterRelaysSetModeComponent
+    PlcMeterRelaysSetModeComponent,
+    PlcMeterJobsRegistersComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -214,7 +217,8 @@ import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/c
     PlcMeterRelaysConnectComponent,
     PlcMeterRelaysDisconnectComponent,
     PlcMeterRelaysStateComponent,
-    PlcMeterRelaysSetModeComponent
+    PlcMeterRelaysSetModeComponent,
+    PlcMeterJobsRegistersComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

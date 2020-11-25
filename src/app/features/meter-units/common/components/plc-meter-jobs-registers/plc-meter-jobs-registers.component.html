@@ -1,1 +1,43 @@
-test
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Assign to template ({{selectedRowsCount}})</div>
+
+  <div modal-body>
+    <ng-container>
+      <form class="form-horizontal" [formGroup]="form">
+        <div class="form-row">
+          <div class="col-12">
+            <div>
+              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 430px; overflow:auto;" #agGrid
+                [rowData]="rowData"
+                [columnDefs]="columnDefs"
+                [modules]="modules"
+                (gridReady)="onGridReady($event)"
+                (selectionChanged)="selectionChanged()"
+                (firstDataRendered)="onFirstDataRendered($event)"
+                suppressRowClickSelection="true"
+                rowSelection="multiple"
+                [pagination]="false"
+                [rowSelection]="'single'"
+              ></ag-grid-angular>
+              <div class="help-block" *ngIf="noRegisterSelected">
+                <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i>
+        <span i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
+          <span i18n>Confirm</span></button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+

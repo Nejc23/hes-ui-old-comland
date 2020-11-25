@@ -19,11 +19,12 @@
                   <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" (click)="onScheduleReadJobs()">
                     <a href="javascript:void(0)" ><span i18n>Create new</span></a>
                   </div>
-                  <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUJobsTemplates" (click)="onJobsTemplates()">
-                  <a href="javascript:void(0)"><span i18n>Templates</span></a>
-                  </div>
                 </div>
             </div>
+          </div>
+          <div>
+            <a appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUJobsTemplates"  href="javascript:void(0)" class="dropdown-item custom-hover-display"
+            (click)="onJobsTemplates()"><span i18n>Templates</span></a>
           </div>
 
           <div class="dropdown-divider"></div>

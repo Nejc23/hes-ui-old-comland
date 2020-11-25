@@ -6,6 +6,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { dataConcentratorUnits } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Injectable()
 export class DataConcentratorUnitsListInterceptor {
@@ -19,19 +20,19 @@ export class DataConcentratorUnitsListInterceptor {
     let sortedUsers = []; // data;
     let searched = data;
     if (request.body) {
-      const params = request.body as GridRequestParams;
-      if (params.searchModel && params.searchModel.length > 0) {
-        searched = searchById(data, params.searchModel[0].value);
+      const params = request.body as IActionRequestParams;
+      if (params.textSearch && params.textSearch.value.length > 0) {
+        searched = searchById(data, params.textSearch.value);
       }
 
-      skip = params.startRow;
-      take = params.endRow;
+      skip = (params.pageNumber - 1) * params.pageSize; // params.startRow;
+      take = skip + params.pageSize; // params.endRow;
 
-      if (params.sortModel) {
-        params.sortModel.forEach(element => {
-          sortColId = element.colId;
+      if (params.sort) {
+        params.sort.forEach(element => {
+          sortColId = element.propName;
 
-          if (element.sort === 'desc') {
+          if (element.sortOrder === 'desc') {
             sortedUsers = _.sortBy(searched, sortColId).reverse();
           } else {
             sortedUsers = _.sortBy(searched, sortColId);
@@ -39,6 +40,8 @@ export class DataConcentratorUnitsListInterceptor {
         });
       }
     }
+
+    console.log('returned data', sortedUsers.slice(skip, take));
 
     const body: GridResponse<DataConcentratorUnitsList> = {
       data: sortedUsers.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),

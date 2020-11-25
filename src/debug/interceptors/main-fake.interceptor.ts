@@ -218,10 +218,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitsFwUpgradeInterceptor.interceptMeterUniFwUpgradePost(request);
               }
 
-              if (MeterUnitsListInterceptor.canInterceptMeterUnitsList(request)) {
-                return MeterUnitsFwUpgradeInterceptor.interceptMeterUniFwUpgradePost(request);
-              }
-
               if (MeterUnitsActivateUpgradeInterceptor.canInterceptActivateDeviceUpgradePost(request)) {
                 return MeterUnitsActivateUpgradeInterceptor.interceptActivateDeviceUpgradePost(request);
               }

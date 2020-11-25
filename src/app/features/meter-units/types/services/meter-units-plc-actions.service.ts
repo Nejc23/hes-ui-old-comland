@@ -25,6 +25,7 @@ import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-
 import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { toLower } from 'lodash';
+import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 
 @Injectable({
   providedIn: 'root'
@@ -61,10 +62,16 @@ export class MeterUnitsPlcActionsService {
     });
   }
 
-  onJobsTemplates(params: RequestFilterParams, selectedRowsCount: number) {
+  onJobsTemplates(params: IActionRequestParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
       size: 'xl'
     };
+
+    const modalRef = this.modalService.open(PlcMeterJobsRegistersComponent, options);
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionRequest = params;
+
+    modalRef.result.then().catch(() => {});
   }
 
   onTou(params: IActionRequestParams, selectedRowsCount: number) {
