@@ -45,7 +45,6 @@ export class TouConfigSelectComponent implements OnInit {
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
   }
 
   ngOnInit() {
@@ -85,5 +84,9 @@ export class TouConfigSelectComponent implements OnInit {
 
   get searchProperty() {
     return 'content';
+  }
+
+  onFirstDataRendered(params) {
+    params.api.sizeColumnsToFit();
   }
 }

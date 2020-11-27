@@ -38,7 +38,6 @@ export class TouConfigSelectGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        lockPosition: true,
         headerName: $localize`Description`,
         headerTooltip: $localize`Description`
       }
