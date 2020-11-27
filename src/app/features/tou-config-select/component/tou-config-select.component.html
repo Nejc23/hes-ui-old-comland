@@ -1,5 +1,9 @@
 <label><span i18n>Configuration</span><sup> *</sup></label>
-<ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: 240px;" #agGrid [rowData]="rowData"
-  [columnDefs]="columnDefs" [modules]="modules" (gridReady)="onGridReady($event)"
-  (rowSelected)="selectionChanged($event)" rowSelection="single">
+<ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 240px; overflow:auto;" #agGrid [rowData]="rowData"
+  [columnDefs]="columnDefs"
+  [modules]="modules"
+  (gridReady)="onGridReady($event)"
+  (rowSelected)="selectionChanged($event)"
+  (firstDataRendered)="onFirstDataRendered($event)"
+  rowSelection="single">
 </ag-grid-angular>

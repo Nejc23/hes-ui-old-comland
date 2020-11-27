@@ -32,6 +32,41 @@ export class TimeOfUseInterceptor {
         timeOfUseTag: 's3w3d2',
         timeOfUseName: 'NameYourTimeOfUseFile3',
         description: 'PARTIAL-PEAK'
+      },
+      {
+        timeOfUseId: '4',
+        activationDate: '2020-03-31T00:00:00+01:00',
+        timeOfUseTag: 's3w3d3',
+        timeOfUseName: 'NameYourTimeOfUseFile6',
+        description: 'PARTIAL-PEAK'
+      },
+      {
+        timeOfUseId: '5',
+        activationDate: '2020-03-31T00:00:00+01:00',
+        timeOfUseTag: 's3w3d3',
+        timeOfUseName: 'NameYourTimeOfUseFile7',
+        description: 'PARTIAL-PEAK'
+      },
+      {
+        timeOfUseId: '6',
+        activationDate: '2020-03-31T00:00:00+01:00',
+        timeOfUseTag: 's3w3d3',
+        timeOfUseName: 'NameYourTimeOfUseFile8',
+        description: 'PARTIAL-PEAK'
+      },
+      {
+        timeOfUseId: '7',
+        activationDate: '2020-03-31T00:00:00+01:00',
+        timeOfUseTag: 's3w3d3',
+        timeOfUseName: 'NameYourTimeOfUseFile9',
+        description: 'PARTIAL-PEAK'
+      },
+      {
+        timeOfUseId: '8',
+        activationDate: '2020-03-31T00:00:00+01:00',
+        timeOfUseTag: 's3w3d3',
+        timeOfUseName: 'NameYourTimeOfUseFile10',
+        description: 'PARTIAL-PEAK'
       }
     ];
 
