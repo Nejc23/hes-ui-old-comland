@@ -38,22 +38,33 @@
         <div>
           <!-- ag-grid -->
           <ag-grid-angular class="ag-theme-epoint custom-paging" style="width: 100%; height: calc(100% - 25px);" #agGrid
-            [domLayout]=agGridSettings.domLayout [modules]="modules"
-            [icons]="icons" [pagination]=agGridSettings.pagination
-            [multiSortKey]=agGridSettings.multiSortKey [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+            [domLayout]=agGridSettings.domLayout
+            [modules]="modules"
+            [icons]="icons"
+            [pagination]=agGridSettings.pagination
+            [multiSortKey]=agGridSettings.multiSortKey
+            [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
             [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
             [frameworkComponents]="frameworkComponents"
-            [maxBlocksInCache]="1" [gridOptions]="gridOptions" [columnDefs]="columns"
-            [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection [rowSelection]=agGridSettings.rowSelection
-            [sideBar]="sideBar" [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-            [overlayLoadingTemplate]="overlayLoadingTemplate" (selectionChanged)="onSelectionChanged()"
-            (gridReady)="onGridReady($event)" (columnVisible)="onColumnVisible($event)"
+            [maxBlocksInCache]="1"
+            [gridOptions]="gridOptions"
+            [columnDefs]="columns"
+            [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+            [rowSelection]=agGridSettings.rowSelection
+            [sideBar]="sideBar"
+            [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+            [overlayLoadingTemplate]="overlayLoadingTemplate"
+            (selectionChanged)="onSelectionChanged()"
+            (gridReady)="onGridReady($event)"
+            (columnVisible)="onColumnVisible($event)"
             (paginationChanged)="onPaginationChange($event)"
-            (rowSelected)="onRowSelect($event)" (firstDataRendered)="onFirstDataRendered($event)"
+            (rowSelected)="onRowSelect($event)"
+            (firstDataRendered)="onFirstDataRendered($event)"
             [localeText]="localeText"
             (gridSizeChanged)="gridSizeChanged()"
-            [paginationPageSize]="selectedPageSize.id"
-            [cacheBlockSize]="selectedPageSize.id">
+            [paginationPageSize]="this.selectedPageSize.id"
+            [rowModelType]="'serverSide'"
+            [cacheBlockSize]="this.selectedPageSize.id">
           </ag-grid-angular>
 
           <div class="ag-paging-panel-selection d-flex">

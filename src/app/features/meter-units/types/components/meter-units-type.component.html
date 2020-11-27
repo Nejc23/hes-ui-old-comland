@@ -7,7 +7,7 @@
 <div class="row">
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter">
     <div class="filter-shadow">
-      <app-meter-unit-filter (filterChange)="reloadGrid(); deselectAll();" (toggleFilter)="toggleFilter()"></app-meter-unit-filter>
+      <app-meter-unit-filter (filterChange)="filterChanged()" (toggleFilter)="toggleFilter()"></app-meter-unit-filter>
     </div>
   </div>
 

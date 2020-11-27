@@ -74,7 +74,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   public icons;
   public frameworkComponents;
   public sideBar;
-  loadGrid = true;
   programmaticallySelectRow = false;
   requestModel: GridRequestParams = {
     requestId: null,
@@ -121,6 +120,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   selectedPageSize: Codelist<number> = this.pageSizes[0];
 
   form: FormGroup;
+  datasource: any;
+  isGridLoaded = false;
+  areSettingsLoaded = false;
 
   constructor(
     public fb: FormBuilder,
@@ -329,15 +331,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    this.deselectAll();
-    if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedText()) {
-      this.meterUnitsTypeGridService.setSessionSettingsSearchedText($event);
-      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedText()) {
+        this.deselectAll();
+        this.meterUnitsTypeGridService.setSessionSettingsSearchedText($event);
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
-      this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
-      this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-      this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
-      this.gridApi.onFilterChanged();
+        this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
+        this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
+        this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+        this.gridApi.onFilterChanged();
+      }
     }
   }
 
@@ -346,17 +350,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.agGridSharedFunctionsService.addSelectDeselectAllText();
-
-    /*
-    const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
-    if (dataFromCookie) {
-      params.columnApi.setColumnState(dataFromCookie);
-    }
-
-    const cookieSort = this.meterUnitsTypeGridService.getCookieDataSortModel();
-    if (cookieSort !== undefined && cookieSort !== null) {
-      this.gridApi.setSortModel(cookieSort);
-    }*/
 
     this.getMeterUnitsLayoutGridLayoutStore();
   }
@@ -412,11 +405,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   onColumnVisible(params) {
     this.meterUnitsTypeGridService.onColumnVisibility(params);
 
-    this.saveSettingsStore(this.requestModel.sortModel);
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      this.saveSettingsStore(this.requestModel.sortModel);
+    }
+    this.resizeColumns();
 
-    setTimeout(() => {
-      this.resizeColumns();
-    }, 300);
+    // setTimeout(() => {
+    //   this.resizeColumns();
+    // }, 300);
   }
 
   // click on check-box in the grid
@@ -539,15 +535,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // on change page in the grid
   onPaginationChange(params) {
-    if (this.gridApi) {
-      this.gridApi.refreshHeader();
-    }
+    const currentApiPage = params.api.paginationGetCurrentPage();
+    const currentSessionPage = this.meterUnitsTypeGridService.getSessionSettingsPageIndex();
 
-    if (params.newPage && !this.loadGrid) {
-      this.meterUnitsTypeGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
-    } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
-      this.loadGrid = false;
-      params.api.paginationGoToPage(this.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+    if (currentApiPage !== currentSessionPage) {
+      if (this.isGridLoaded && this.areSettingsLoaded) {
+        if (params.newPage) {
+          this.meterUnitsTypeGridService.setSessionSettingsPageIndex(currentApiPage);
+        }
+      } else {
+        // params.api.paginationGoToPage(currentSessionPage);
+      }
     }
   }
 
@@ -992,6 +990,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.hideFilter = !this.hideFilter;
   }
 
+  filterChanged() {
+    this.reloadGrid();
+    this.deselectAll();
+  }
+
   gridSizeChanged() {
     this.resizeColumns();
   }
@@ -1003,10 +1006,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   resizeColumns() {
     this.gridColumnApi.autoSizeAllColumns(true);
-    const grid = this.gridOptions.api;
 
-    // tslint:disable-next-line: no-string-literal
-    const panel = grid['gridPanel'];
+    const grid: any = this.gridOptions.api;
+    const panel = grid.gridPanel;
+
     const availableWidth = panel.eBodyViewport.clientWidth;
     const columns = panel.columnController.getAllDisplayedColumns();
     const usedWidth = panel.columnController.getWidthOfColsInList(columns);
@@ -1024,8 +1027,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   setGridDataSource() {
     const that = this;
-    const datasource = {
+    that.datasource = {
       getRows(paramsRow) {
+        if (!that.areSettingsLoaded) {
+          return;
+        }
+
+        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
+
         that.requestModel.typeId = that.id; // type of meter units
         that.requestModel.startRow = that.meterUnitsTypeGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
         that.requestModel.endRow = that.meterUnitsTypeGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
@@ -1034,9 +1043,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        const displayedColumnsNames = that.getAllDisplayedColumnsNames();
-
-        that.saveSettingsStore(that.requestModel.sortModel);
+        if (that.isGridLoaded) {
+          that.saveSettingsStore(that.requestModel.sortModel);
+        }
 
         if (that.authService.isRefreshNeeded2()) {
           that.authService
@@ -1060,12 +1069,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                     that.gridApi.showNoRowsOverlay();
                   }
 
-                  that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
                   paramsRow.successCallback(data.data, data.totalCount);
+
+                  that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
                   that.selectRows(that.gridApi);
-                  that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+                  // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
                   // params.failCallback();
                   that.resizeColumns();
+                  that.isGridLoaded = true;
                 });
             })
             .catch(err => {
@@ -1085,17 +1096,21 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                 that.gridApi.showNoRowsOverlay();
               }
 
-              that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
               paramsRow.successCallback(data.data, data.totalCount);
-              that.selectRows(that.gridApi);
-              that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-              // params.failCallback();
+
+              that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+
               that.resizeColumns();
+              that.selectRows(that.gridApi);
+              // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+              // params.failCallback();
+
+              that.isGridLoaded = true;
             });
         }
       }
     };
-    this.gridApi.setServerSideDatasource(datasource);
+    that.gridApi.setServerSideDatasource(that.datasource);
   }
 
   getMeterUnitsLayoutGridLayoutStore() {
@@ -1103,10 +1118,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       settings => {
         this.meterUnitsTypeGridLayoutStore = settings as MeterUnitsTypeGridLayoutStore;
         this.addSettingsToSession(settings);
+        this.areSettingsLoaded = true;
         this.setGridDataSource();
         this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       },
       error => {
+        this.areSettingsLoaded = true;
         this.setGridDataSource();
         this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       }
@@ -1118,6 +1135,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (settings.currentPageIndex) {
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
       }
+
       if (settings.meterUnitsLayout) {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.meterUnitsLayout);
       }
@@ -1138,6 +1156,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (settings.pageSize) {
         this.selectedPageSize = settings.pageSize;
         this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+        this.setGridPageSize();
       }
 
       this.settingsStoreEmitterService.settingsLoaded();
@@ -1179,8 +1198,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   pageSizeChanged(selectedValue: any) {
-    this.selectedPageSize = selectedValue;
-    this.saveSettingsStore();
-    this.refreshGrid();
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
+      this.selectedPageSize = selectedValue;
+      this.setGridPageSize();
+    }
+  }
+
+  setGridPageSize() {
+    const api: any = this.gridApi;
+    api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
+    this.gridApi.setServerSideDatasource(this.datasource);
   }
 }

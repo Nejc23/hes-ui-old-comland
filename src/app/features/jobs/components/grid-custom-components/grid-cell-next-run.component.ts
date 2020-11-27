@@ -10,7 +10,9 @@ import { JobsStaticTextService } from '../../services/jobs-static-text.service';
 export class GridCellNextRunComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private staticextService: JobsStaticTextService) {}
+  notAvailableText = this.statictextService.notAvailableTekst; // N/A
+
+  constructor(private statictextService: JobsStaticTextService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -23,6 +25,6 @@ export class GridCellNextRunComponent implements ICellRendererAngularComp {
   }
 
   setNextReadText(time: string) {
-    return $localize`${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
+    return $localize`${time ? moment(time).fromNow() : ''}`;
   }
 }

@@ -82,7 +82,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public icons;
   public frameworkComponents;
   public sideBar;
-  loadGrid = true;
   headerTitle = this.staticTextService.headerTitleDCU;
 
   requestModel: GridRequestParams = {
@@ -113,6 +112,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   selectedPageSize: Codelist<number> = this.pageSizes[0];
 
   form: FormGroup;
+  datasource: any;
+  isGridLoaded = false;
+  areSettingsLoaded = false;
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
@@ -257,15 +259,17 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    this.deselectAll();
-    if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
-      this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
-      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
+        this.deselectAll();
+        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
 
-      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-      this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-      this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-      this.gridApi.onFilterChanged();
+        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
+        this.gridApi.onFilterChanged();
+      }
     }
   }
 
@@ -280,15 +284,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       filter: ''
     };
 
-    const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
-    if (dataFromCookie) {
-      params.columnApi.setColumnState(dataFromCookie);
-    }
+    // const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
+    // if (dataFromCookie) {
+    //   params.columnApi.setColumnState(dataFromCookie);
+    // }
 
-    const cookieSort = this.dataConcentratorUnitsGridService.getCookieDataSortModel();
-    if (cookieSort !== undefined && cookieSort !== null) {
-      this.gridApi.setSortModel(cookieSort);
-    }
+    // const cookieSort = this.dataConcentratorUnitsGridService.getCookieDataSortModel();
+    // if (cookieSort !== undefined && cookieSort !== null) {
+    //   this.gridApi.setSortModel(cookieSort);
+    // }
 
     this.getDcuUnitsGridLayoutStore();
   }
@@ -325,7 +329,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.dataConcentratorUnitsGridService.onColumnVisibility(params);
-    this.saveSettingsStore(this.requestModel.sortModel);
+
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      this.saveSettingsStore(this.requestModel.sortModel);
+    }
     this.resizeColumns();
   }
 
@@ -447,16 +454,17 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // on change page in the grid
   onPaginationChange(params) {
-    if (this.gridApi) {
-      this.gridApi.refreshHeader();
-    }
+    const currentApiPage = params.api.paginationGetCurrentPage();
+    const currentSessionPage = this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex();
 
-    if (params.newPage && !this.loadGrid) {
-      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
-      //  this.eventService.pageChange(params.api.paginationGetCurrentPage());
-    } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
-      this.loadGrid = false;
-      params.api.paginationGoToPage(this.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+    if (currentApiPage !== currentSessionPage) {
+      if (this.isGridLoaded && this.areSettingsLoaded) {
+        if (params.newPage) {
+          this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(currentApiPage);
+        }
+      } else {
+        // params.api.paginationGoToPage(currentSessionPage);
+      }
     }
   }
 
@@ -476,8 +484,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // select rows on load grid from session
   selectRows(api: any) {
+    const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
     api.forEachNode(node => {
-      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
       if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
@@ -654,10 +662,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   resizeColumns() {
     this.gridColumnApi.autoSizeAllColumns(true);
-    const grid = this.gridOptions.api;
 
-    // tslint:disable-next-line: no-string-literal
-    const panel = grid['gridPanel'];
+    const grid: any = this.gridOptions.api;
+    const panel = grid.gridPanel;
+
     const availableWidth = panel.eBodyViewport.clientWidth;
     const columns = panel.columnController.getAllDisplayedColumns();
     const usedWidth = panel.columnController.getWidthOfColsInList(columns);
@@ -675,9 +683,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   setGridDataSource() {
     const that = this;
-
-    const datasource = {
+    that.datasource = {
       getRows(paramsRow) {
+        if (!that.areSettingsLoaded) {
+          return;
+        }
+
         const displayedColumnsNames = that.getAllDisplayedColumnsNames();
 
         that.requestModel.startRow = that.dataConcentratorUnitsGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
@@ -687,7 +698,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        that.saveSettingsStore(that.requestModel.sortModel);
+        if (that.isGridLoaded) {
+          that.saveSettingsStore(that.requestModel.sortModel);
+        }
 
         if (that.authService.isRefreshNeeded2()) {
           that.authService
@@ -711,12 +724,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
                     that.gridApi.showNoRowsOverlay();
                   }
 
-                  // that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-                  // that.gridApi.paginationGoToPage(that.dcuUnitsGridLayoutStore.currentRowIndex);
                   paramsRow.successCallback(data.data, data.totalCount);
+
+                  that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
                   that.selectRows(that.gridApi);
                   // params.failCallback();
                   that.resizeColumns();
+                  that.isGridLoaded = true;
                 });
             })
             .catch(err => {
@@ -736,19 +750,18 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
                 that.gridApi.showNoRowsOverlay();
               }
 
-              // that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-              // console.log('that.dcuUnitsGridLayoutStore', that.dcuUnitsGridLayoutStore);
-              // that.gridApi.paginationGoToPage(that.dcuUnitsGridLayoutStore.currentRowIndex);
-
               paramsRow.successCallback(data.data, data.totalCount);
-              that.selectRows(that.gridApi);
               // params.failCallback();
+              that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+
               that.resizeColumns();
+              that.selectRows(that.gridApi);
+              that.isGridLoaded = true;
             });
         }
       }
     };
-    this.gridApi.setServerSideDatasource(datasource);
+    that.gridApi.setServerSideDatasource(that.datasource);
   }
 
   getDcuUnitsGridLayoutStore() {
@@ -756,10 +769,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       settings => {
         this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
         this.addSettingsToSession(settings);
+        this.areSettingsLoaded = true;
         this.setGridDataSource();
         this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       },
       error => {
+        this.areSettingsLoaded = true;
         this.setGridDataSource();
         this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       }
@@ -771,6 +786,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       if (settings.currentPageIndex) {
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
       }
+
       if (settings.dcuLayout) {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.dcuLayout);
       }
@@ -790,10 +806,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       if (settings.pageSize) {
         this.selectedPageSize = settings.pageSize;
         this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
+        this.setGridPageSize();
       }
 
       this.settingsStoreEmitterService.settingsLoaded();
-      // send to subscribers the visibility of columns
     }
   }
 
@@ -832,8 +848,16 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   pageSizeChanged(selectedValue: any) {
-    this.selectedPageSize = selectedValue;
-    this.saveSettingsStore();
-    this.refreshGrid();
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+      this.selectedPageSize = selectedValue;
+      this.setGridPageSize();
+    }
+  }
+
+  setGridPageSize() {
+    const api: any = this.gridApi;
+    api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
+    this.gridApi.setServerSideDatasource(this.datasource);
   }
 }
