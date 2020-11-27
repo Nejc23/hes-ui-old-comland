@@ -4,6 +4,10 @@
 
   <div modal-body>
     <ng-container>
+      <div class="alert alert-warning" role="alert">
+        <i class="fas fa-exclamation-triangle mr-2"></i>
+        <span i18n>Assigning template to meter(s) may result in irreversible changes to meter data!</span>
+      </div>
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row">
           <div class="col-12">
