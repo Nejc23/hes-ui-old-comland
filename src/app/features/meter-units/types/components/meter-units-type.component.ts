@@ -408,11 +408,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     if (this.isGridLoaded && this.areSettingsLoaded) {
       this.saveSettingsStore(this.requestModel.sortModel);
     }
-    this.resizeColumns();
 
-    // setTimeout(() => {
-    //   this.resizeColumns();
-    // }, 300);
+    this.resizeColumns();
   }
 
   // click on check-box in the grid
@@ -422,50 +419,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
     // this.eventService.checkChange(true);
   }
-
-  // on close tool panel reload filter model
-  // no toolpanel anymore
-  /*toolPanelChanged(params) {
-    if (params.source === undefined) {
-      if (
-        !this.meterUnitsTypeGridService.checkIfFilterModelAndCookieAreSame(
-          this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
-          this.requestModel.filterModel
-        )
-      ) {
-        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-        this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-        this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
-          this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
-          this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
-          this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
-        } else {
-          this.requestModel.filterModel.readStatus = {
-            operation: { id: '', value: '' },
-            value1: 0,
-            value2: 0
-          };
-        }
-        this.requestModel.filterModel.firmware = filterDCU.firmwareFilter;
-        this.requestModel.filterModel.breakerState = filterDCU.breakerStateFilter;
-        this.requestModel.filterModel.showChildInfoMBus = filterDCU.showOnlyMeterUnitsWithMBusInfoFilter;
-        this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
-        this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
-
-        this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
-        this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-        this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-        this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
-
-        this.eventService.selectDeselectAll(false);
-        this.eventService.setIsSelectedAll(false);
-        this.gridApi.onFilterChanged();
-        this.setFilterInfo();
-      }
-    }
-  }*/
 
   setSearch() {
     const search = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
@@ -1005,7 +958,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   resizeColumns() {
-    this.gridColumnApi.autoSizeAllColumns(true);
+    this.gridColumnApi.autoSizeAllColumns(false);
 
     const grid: any = this.gridOptions.api;
     const panel = grid.gridPanel;
@@ -1075,8 +1028,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                   that.selectRows(that.gridApi);
                   // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
                   // params.failCallback();
-                  that.resizeColumns();
+
                   that.isGridLoaded = true;
+                  that.resizeColumns();
                 });
             })
             .catch(err => {
@@ -1100,12 +1054,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
               that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
 
-              that.resizeColumns();
               that.selectRows(that.gridApi);
               // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
               // params.failCallback();
 
               that.isGridLoaded = true;
+              that.resizeColumns();
             });
         }
       }

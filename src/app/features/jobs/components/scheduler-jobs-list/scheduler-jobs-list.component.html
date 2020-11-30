@@ -50,6 +50,8 @@
       [overlayLoadingTemplate]="overlayLoadingTemplate"
       (paginationChanged)="onPaginationChange($event)"
       (firstDataRendered)="onFirstDataRendered($event)"
+      [suppressColumnVirtualisation]="true"
+      (gridSizeChanged)="gridSizeChanged()"
       >
     </ag-grid-angular>
     <div class="ag-paging-panel-selection d-flex">

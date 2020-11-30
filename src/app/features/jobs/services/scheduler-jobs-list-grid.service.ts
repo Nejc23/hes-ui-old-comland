@@ -40,65 +40,62 @@ export class SchedulerJobsListGridService {
     return [
       {
         width: 100,
+        minWidth: 100,
+        maxWidth: 100,
         suppressMenu: true,
         suppressMovable: true,
-        lockPosition: true,
         field: 'active',
         cellRenderer: 'gridCellActiveComponent',
         headerName: $localize`Active`,
         headerTooltip: $localize`Active`,
-        minWidth: 100,
-        maxWidth: 100
+        resizable: false
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        lockPosition: true,
         headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerTooltip: $localize`Description`,
+        resizable: false
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        lockPosition: true,
         headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`
+        headerTooltip: $localize`Job Type`,
+        resizable: false
       },
       {
         field: 'nextRun',
         suppressMenu: true,
         sortable: false,
         suppressMovable: true,
-        lockPosition: true,
         cellRenderer: 'gridCellNextRunComponent',
         headerName: $localize`Next run`,
-        headerTooltip: $localize`Next run`
+        headerTooltip: $localize`Next run`,
+        resizable: false
       },
       {
         field: 'owner',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        lockPosition: true,
         headerName: $localize`Created by`,
-        headerTooltip: $localize`Created by`
+        headerTooltip: $localize`Created by`,
+        resizable: false
       },
       {
         field: 'deviceCount',
-        width: 100,
-        minWidth: 100,
-        maxWidth: 100,
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        lockPosition: true,
         cellRenderer: 'gridCellDeviceCountComponent',
         headerName: $localize`Devices`,
-        headerTooltip: $localize`Devices`
+        headerTooltip: $localize`Devices`,
+        resizable: false
       },
       {
         field: 'id',
@@ -109,12 +106,12 @@ export class SchedulerJobsListGridService {
         editable: false,
         suppressMovable: true,
         lockPinned: true,
-        lockPosition: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellEditActionsComponent',
         headerName: '',
-        cellClass: 'actions-button-cell'
+        cellClass: 'actions-button-cell',
+        resizable: false
       }
     ];
   }
