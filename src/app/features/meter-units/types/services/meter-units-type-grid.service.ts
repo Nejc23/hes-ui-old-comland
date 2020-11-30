@@ -80,7 +80,9 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: gridSysNameColumnsEnum.deviceId,
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: $localize`Select/deselect all`,
+        suppressMenu: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.nextRead,
@@ -96,7 +98,9 @@ export class MeterUnitsTypeGridService {
         headerTooltip: $localize``,
         minWidth: 100,
         maxWidth: 100,
-        width: 100
+        width: 100,
+        suppressMenu: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.status,
@@ -105,7 +109,10 @@ export class MeterUnitsTypeGridService {
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: $localize`Status`
+        headerTooltip: $localize`Status`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.name,
@@ -114,7 +121,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellDetailLinkComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: $localize`Name`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.serialNumber,
@@ -123,7 +133,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`Serial number`
+        headerTooltip: $localize`Serial number`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.logicalDeviceName,
@@ -132,7 +145,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Logical device name`
+        headerTooltip: $localize`Logical device name`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.moduleId,
@@ -141,7 +157,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellModuleIdComponent',
-        headerTooltip: $localize`Module Id`
+        headerTooltip: $localize`Module Id`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.parent,
@@ -150,7 +169,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gidCellParentComponent',
-        headerTooltip: $localize`Parent`
+        headerTooltip: $localize`Parent`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.parametrisationId,
@@ -159,7 +181,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`Parametrisation Id`
+        headerTooltip: $localize`Parametrisation Id`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.timeOfUseId,
@@ -168,7 +193,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTimeOfUseIdComponent',
-        headerTooltip: $localize`Time of use Id`
+        headerTooltip: $localize`Time of use Id`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.vendor,
@@ -177,7 +205,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Vendor`
+        headerTooltip: $localize`Vendor`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.firmware,
@@ -186,7 +217,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellFirmwareComponent',
-        headerTooltip: $localize`Firmware`
+        headerTooltip: $localize`Firmware`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.id1,
@@ -196,7 +230,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`ID1`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.id2,
@@ -206,7 +243,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`ID2`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.id3,
@@ -216,7 +256,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`ID3`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.id4,
@@ -226,7 +269,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`ID4`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.id5,
@@ -236,7 +282,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellDetailLinkComponent',
         headerTooltip: $localize`ID5`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.id6,
@@ -246,7 +295,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`ID6`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: true
       },
       {
         field: gridSysNameColumnsEnum.configurationId,
@@ -256,7 +308,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
         headerTooltip: $localize`Configuration Id`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       // {
       //   field: 'childInfo',
@@ -274,7 +329,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellBreakerStateComponent',
-        headerTooltip: $localize`Disconnector State`
+        headerTooltip: $localize`Disconnector State`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.ciiState,
@@ -283,7 +341,10 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellCiiStateComponent',
-        headerTooltip: $localize`CII State`
+        headerTooltip: $localize`CII State`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.tags,
@@ -293,7 +354,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
         headerTooltip: $localize`Tags`,
-        hide: true
+        hide: true,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.readStatusTimeStamp,
@@ -303,7 +367,10 @@ export class MeterUnitsTypeGridService {
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: $localize`Read status`
+        headerTooltip: $localize`Read status`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: gridSysNameColumnsEnum.jobStatus,
@@ -316,7 +383,9 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
         headerTooltip: $localize`Job status`,
-        resizable: false
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
       },
       {
         field: 'id',
@@ -333,7 +402,8 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRendererFramework: GridCellActionsComponent,
         headerName: '',
-        cellClass: 'actions-button-cell'
+        cellClass: 'actions-button-cell',
+        resizable: false
       }
     ];
   }

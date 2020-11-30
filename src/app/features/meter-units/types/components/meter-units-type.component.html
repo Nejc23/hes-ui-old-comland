@@ -195,6 +195,7 @@
         (gridSizeChanged)="gridSizeChanged()"
         [paginationPageSize]="selectedPageSize.id"
         [cacheBlockSize]="selectedPageSize.id"
+        [suppressColumnVirtualisation]="true"
         >
       </ag-grid-angular>
       <div class="ag-paging-panel-selection d-flex">

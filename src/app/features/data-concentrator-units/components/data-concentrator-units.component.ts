@@ -661,7 +661,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   resizeColumns() {
-    this.gridColumnApi.autoSizeAllColumns(true);
+    this.gridColumnApi.autoSizeAllColumns(false);
 
     const grid: any = this.gridOptions.api;
     const panel = grid.gridPanel;

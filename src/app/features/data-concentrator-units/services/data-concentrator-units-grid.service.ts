@@ -72,7 +72,9 @@ export class DataConcentratorUnitsGridService {
         headerTooltip: $localize``,
         minWidth: 50,
         maxWidth: 50,
-        width: 50
+        width: 50,
+        suppressMenu: true,
+        resizable: false
       },
       {
         field: 'status',
@@ -81,7 +83,10 @@ export class DataConcentratorUnitsGridService {
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: $localize`Status`
+        headerTooltip: $localize`Status`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'name',
@@ -90,7 +95,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: $localize`Name`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'id',
@@ -99,7 +107,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`Serial number`
+        headerTooltip: $localize`Serial number`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'ip',
@@ -108,7 +119,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: $localize`IP`
+        headerTooltip: $localize`IP`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'type',
@@ -117,7 +131,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: $localize`Type`
+        headerTooltip: $localize`Type`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'vendor',
@@ -126,7 +143,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Manufacturer`
+        headerTooltip: $localize`Manufacturer`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'meters',
@@ -135,7 +155,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellMetersComponent',
-        headerTooltip: $localize`Meters`
+        headerTooltip: $localize`Meters`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'readStatusTimeStamp',
@@ -145,7 +168,10 @@ export class DataConcentratorUnitsGridService {
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: $localize`Read status`
+        headerTooltip: $localize`Read status`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'lastCommunication',
@@ -154,7 +180,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellLastCommunicationComponent',
-        headerTooltip: $localize`Last communication`
+        headerTooltip: $localize`Last communication`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'tags',
@@ -163,7 +192,10 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
-        headerTooltip: $localize`Tags`
+        headerTooltip: $localize`Tags`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       },
       {
         field: 'jobStatus',
@@ -176,11 +208,12 @@ export class DataConcentratorUnitsGridService {
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
         headerTooltip: $localize`Job status`,
-        resizable: false
+        resizable: false,
+        suppressMenu: true
       },
       {
-        field: 'id',
         pinned: 'right',
+        field: 'id',
         width: 110,
         minWidth: 110,
         maxWidth: 110,
@@ -193,7 +226,8 @@ export class DataConcentratorUnitsGridService {
         filter: false,
         cellRendererFramework: GridCellActionsComponent,
         headerName: '',
-        cellClass: 'actions-button-cell'
+        cellClass: 'actions-button-cell',
+        resizable: false
       }
     ];
   }

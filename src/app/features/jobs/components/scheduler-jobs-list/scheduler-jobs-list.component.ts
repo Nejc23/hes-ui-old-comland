@@ -78,6 +78,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   isGridLoaded = false;
   areSettingsLoaded = false;
 
+  gridColumnApi;
+
   constructor(
     private schedulerJobsService: JobsService,
     private schedulerJobsListGridService: SchedulerJobsListGridService,
@@ -139,15 +141,14 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
       instance.gridApi.paginationGoToPage(instance.schedulerJobsListGridService.getSessionSettingsPageIndex());
       this.isGridLoaded = true;
+
+      this.resizeColumns();
     });
   }
 
   onGridReady(params) {
     this.gridApi = params.api;
-    this.gridApi.sizeColumnsToFit();
-    window.onresize = () => {
-      this.gridApi.sizeColumnsToFit();
-    };
+    this.gridColumnApi = params.columnApi;
 
     this.getSchedulerJobsListGridLayoutStore();
   }
@@ -173,12 +174,6 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);
-
-    this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
-      setTimeout(() => {
-        this.gridApi.sizeColumnsToFit();
-      }, 320);
-    });
   }
 
   ngOnDestroy() {
@@ -422,5 +417,30 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
     console.log('setGridPageSize - setServierSideDatasource', this.datasource);
     this.gridApi.setServerSideDatasource(this.datasource);
+  }
+
+  gridSizeChanged() {
+    this.resizeColumns();
+  }
+
+  resizeColumns() {
+    this.gridColumnApi.autoSizeAllColumns(false);
+
+    const grid: any = this.gridOptions.api;
+    const panel = grid.gridPanel;
+
+    const availableWidth = panel.eBodyViewport.clientWidth;
+    const columns = panel.columnController.getAllDisplayedColumns();
+    const usedWidth = panel.columnController.getWidthOfColsInList(columns);
+
+    if (usedWidth < availableWidth) {
+      // expand only the last visible nonpinned column
+      const columnStates = this.gridColumnApi.getColumnState();
+      const lastVisibleColumnIndex = columnStates.map(c => !c.hide && !c.pinned && c.colId !== 'id').lastIndexOf(true);
+      if (lastVisibleColumnIndex > -1) {
+        columnStates[lastVisibleColumnIndex].width = columnStates[lastVisibleColumnIndex].width + (availableWidth - usedWidth);
+        this.gridColumnApi.applyColumnState({ state: columnStates });
+      }
+    }
   }
 }
