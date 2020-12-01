@@ -50,9 +50,9 @@ describe('Pact consumer test', () => {
           state: 'A_REQUEST_FOR_GET_READING_JOBS',
           uponReceiving: 'a request for getting reading jobs',
           withRequest: {
-            method: service.jobsDiscoveryJobsCodelistRequest().method,
-            path: '/api/scheduler/jobs', // service.jobsDiscoveryJobsCodelistRequest().url,
-            query: { type: ['1', '3'] },
+            method: service.jobsReadingJobsCodelistCodesRequest().method,
+            path: '/api/scheduler/jobs', // service.jobsReadingJobsCodelistCodesRequest().url,
+            query: { type: ['2'] },
             headers: defaultRequestHeader
           },
           willRespondWith: {
@@ -72,7 +72,7 @@ describe('Pact consumer test', () => {
     });
 
     it('should make a request for fetching reading jobs', done => {
-      service.jobsDiscoveryJobsCodelist().subscribe(res => {
+      service.jobsReadingJobsCodelistCodes().subscribe(res => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);
         done();
