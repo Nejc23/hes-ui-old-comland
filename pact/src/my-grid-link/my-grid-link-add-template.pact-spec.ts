@@ -15,7 +15,6 @@ describe('Pact consumer test', () => {
   afterAll(done => {
     pactFinalize(provider, done);
   });
-  r;
 
   afterEach(done => {
     pactVerify(provider, done);
@@ -38,7 +37,8 @@ describe('Pact consumer test', () => {
     ],
     textSearch: {
       value: '',
-      propNames: []
+      propNames: [],
+      enableWildcards: false
     },
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
@@ -55,7 +55,8 @@ describe('Pact consumer test', () => {
     ],
     textSearch: {
       value: '',
-      propNames: []
+      propNames: [],
+      enableWildcards: false
     },
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']

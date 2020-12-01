@@ -46,7 +46,8 @@ describe('Pact consumer test', () => {
     ],
     textSearch: {
       value: '',
-      propNames: []
+      propNames: [],
+      enableWildcards: false
     }
   };
 
@@ -69,7 +70,8 @@ describe('Pact consumer test', () => {
     ],
     textSearch: {
       value: '',
-      propNames: []
+      propNames: [],
+      enableWildcards: false
     }
   };
 

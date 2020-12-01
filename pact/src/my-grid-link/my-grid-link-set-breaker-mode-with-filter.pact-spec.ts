@@ -57,7 +57,8 @@ describe('Pact consumer test', () => {
     ],
     textSearch: {
       value: '1234',
-      propNames: ['vendor', 'firmware', 'status']
+      propNames: ['vendor', 'firmware', 'status'],
+      enableWildcards: true
     },
     breakerMode: 1
   };
@@ -92,7 +93,8 @@ describe('Pact consumer test', () => {
     ],
     textSearch: {
       value: '1234',
-      propNames: ['vendor', 'firmware', 'status']
+      propNames: ['vendor', 'firmware', 'status'],
+      enableWildcards: false
     },
     breakerMode: 1
   };
