@@ -60,7 +60,7 @@ describe('Pact consumer test', () => {
       textSearch: {
         value: 'search text',
         propNames: ['vendor', 'firmware', 'status'],
-        enableWildcards: true
+        useWildcards: true
       }
     };
 

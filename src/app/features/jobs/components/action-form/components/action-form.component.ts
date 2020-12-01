@@ -23,7 +23,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   private eventSettingsStoreLoadedSubscription: Subscription;
 
   @Output() toggleWildcards: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() enableWildcards: boolean;
+  @Input() useWildcards: boolean;
 
   constructor(
     public fb: FormBuilder,

@@ -156,7 +156,7 @@ export class MeterUnitsService {
       textSearch: {
         value: '',
         propNames: [],
-        enableWildcards: false
+        useWildcards: false
       },
       sort: []
     };
@@ -167,7 +167,7 @@ export class MeterUnitsService {
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;
       requestParam.textSearch.propNames = visibleColumnNames;
-      requestParam.textSearch.enableWildcards = param.searchModel[0].enableWildcards;
+      requestParam.textSearch.useWildcards = param.searchModel[0].useWildcards;
     }
 
     // create filter object

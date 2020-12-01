@@ -264,9 +264,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.deselectAll();
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
 
-        const enableWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
+        const useWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
 
-        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards }];
 
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
         this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
@@ -385,13 +385,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   setSearch() {
     const search = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
 
-    let enableWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
-    if (!enableWildcards) {
-      enableWildcards = false;
+    let useWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
+    if (!useWildcards) {
+      useWildcards = false;
     }
 
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, useWildcards }]);
     }
     return [];
   }
@@ -889,16 +889,20 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     console.log('toggleWildcards');
     if (this.isGridLoaded && this.areSettingsLoaded) {
       if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards()) {
-        this.deselectAll();
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards($event);
 
-        // const value = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
-        // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+        if (this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
+          this.deselectAll();
+          // const value = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
+          // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, useWildcards: $event  }];
 
-        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-        this.gridApi.onFilterChanged();
+          this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+          this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+          this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
+          this.gridApi.onFilterChanged();
+        } else {
+          this.saveSettingsStore(this.requestModel.sortModel);
+        }
       }
     }
   }

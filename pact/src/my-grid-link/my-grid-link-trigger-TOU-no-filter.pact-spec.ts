@@ -38,7 +38,7 @@ describe('Pact consumer test', () => {
     textSearch: {
       value: '1234',
       propNames: ['vendor', 'firmware', 'status'],
-      enableWildcards: true
+      useWildcards: true
     },
     deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842'],
     timeOfUseId: '717D9FD6-478E-4C72-8A3A-0722D85A07B1'
@@ -57,7 +57,7 @@ describe('Pact consumer test', () => {
     textSearch: {
       value: '1234',
       propNames: ['vendor', 'firmware', 'status'],
-      enableWildcards: false
+      useWildcards: false
     },
     timeOfUseId: '717d9fd6-478e-4c72-8a3a-0722d85a07b1',
     requestId: '6211423d-0d7d-4f49-ae02-d681e1f051d1',

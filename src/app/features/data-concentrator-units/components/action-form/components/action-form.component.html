@@ -35,7 +35,7 @@
     <div class="ml-auto">
       <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
         [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"
-        [showEnableWildcard]="true" [enableWildcards]="enableWildcards" (toggleWildcards)="doToggleWildcards($event)"
+        [showUseWildcard]="true" [useWildcards]="useWildcards" (toggleWildcards)="doToggleWildcards($event)"
         ></app-input-searcher>
     </div>
 

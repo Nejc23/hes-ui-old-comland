@@ -37,7 +37,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   @ViewChild('modalFilter', { static: true }) input;
 
   @Output() toggleWildcards: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() enableWildcards: boolean;
+  @Input() useWildcards: boolean;
 
   private eventSettingsStoreLoadedSubscription: Subscription;
 
@@ -65,7 +65,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       const searchUpdated = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
       this.form.get('content').setValue(searchUpdated.searchText);
-      this.enableWildcards = searchUpdated.searchWildcards;
+      this.useWildcards = searchUpdated.searchWildcards;
     });
   }
 

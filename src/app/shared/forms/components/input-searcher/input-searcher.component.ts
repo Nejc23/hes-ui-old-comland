@@ -20,8 +20,8 @@ export class InputSearcherComponent implements OnInit {
 
   @Output() insertedValue = new EventEmitter<string>();
 
-  @Input() showEnableWildcard = false;
-  @Input() enableWildcards = false;
+  @Input() showUseWildcard = false;
+  @Input() useWildcards = false;
   @Output() toggleWildcards = new EventEmitter<boolean>();
 
   constructor(private formUtils: FormsUtilsService) {}
@@ -44,14 +44,14 @@ export class InputSearcherComponent implements OnInit {
     return this.form.get(this.property);
   }
 
-  toggleEnableWildcards() {
-    this.enableWildcards = !this.enableWildcards;
-    this.toggleWildcards.emit(this.enableWildcards);
+  toggleUseWildcards() {
+    this.useWildcards = !this.useWildcards;
+    this.toggleWildcards.emit(this.useWildcards);
   }
 
   getTooltip() {
     let tooltip = $localize`Wildcards search is disabled`;
-    if (this.enableWildcards) {
+    if (this.useWildcards) {
       tooltip = $localize`Wildcards search is enabled`;
     }
     return tooltip;

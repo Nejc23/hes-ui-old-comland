@@ -255,7 +255,7 @@ export class DcOperationsService {
       textSearch: {
         value: '',
         propNames: [],
-        enableWildcards: false
+        useWildcards: false
       },
       sort: []
     };
@@ -274,7 +274,7 @@ export class DcOperationsService {
         if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
           requestParam.textSearch.value = requestModel.searchModel[0].value;
           requestParam.textSearch.propNames = allVisibleColumns;
-          requestParam.textSearch.enableWildcards = requestModel.searchModel[0].enableWildcards;
+          requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
         }
 
         // create filter object

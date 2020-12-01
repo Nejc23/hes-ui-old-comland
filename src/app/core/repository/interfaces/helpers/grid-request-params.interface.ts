@@ -42,7 +42,7 @@ export interface GridSearchParams {
   colId: string;
   type: string;
   value: string;
-  enableWildcards: boolean;
+  useWildcards: boolean;
 }
 
 export interface ReadStatus {

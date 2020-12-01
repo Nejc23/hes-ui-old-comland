@@ -47,7 +47,7 @@ describe('Pact consumer test', () => {
       showChildInfoMBus: true,
       showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
-    search: [{ colId: 'all', type: 'like', value: 'name', enableWildcards: true }],
+    search: [{ colId: 'all', type: 'like', value: 'name', useWildcards: true }],
     excludeIds: ['excluded']
   };
 
@@ -74,7 +74,7 @@ describe('Pact consumer test', () => {
       showChildInfoMBus: true,
       showOptionFilter: [{ id: 2, value: 'Without template' }]
     },
-    search: [{ colId: 'all', type: 'like', value: 'name', enableWildcards: true }],
+    search: [{ colId: 'all', type: 'like', value: 'name', useWildcards: true }],
     excludeIds: ['excluded']
   };
 
