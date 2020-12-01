@@ -263,7 +263,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText()) {
         this.deselectAll();
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText($event);
-        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+
+        const enableWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
+
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
 
         this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
         this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
@@ -381,8 +384,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   setSearch() {
     const search = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
+
+    let enableWildcards = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards();
+    if (!enableWildcards) {
+      enableWildcards = false;
+    }
+
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
     }
     return [];
   }
@@ -640,7 +649,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.requestModel.searchModel = this.setSearch();
 
     // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
+    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
+    const params = this.dcOperationsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
   }
 
@@ -656,8 +671,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   getAllDisplayedColumnsNames(): string[] {
-    const columns = this.gridApi.columnController.getAllDisplayedColumns();
-    return columns.map(c => c.colId);
+    if (this.gridColumnApi) {
+      const columns = this.gridColumnApi.getAllDisplayedColumns();
+      return columns.map(c => c.colId);
+    }
+    return;
   }
 
   resizeColumns() {
@@ -799,6 +817,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedText(settings.searchText);
       }
 
+      if (settings.searchWildcards) {
+        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards(settings.searchWildcards);
+      }
+
       if (settings.visibleColumns && settings.visibleColumns.length > 0) {
         this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
       }
@@ -819,6 +841,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       dcuLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout,
       sortModel: sortModel ? sortModel : this.dcuUnitsGridLayoutStore.sortModel,
       searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
+      searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards(),
       visibleColumns: this.getAllDisplayedColumnsNames(),
       pageSize: this.selectedPageSize
     };
@@ -829,6 +852,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       JSON.stringify(store.dcuLayout) !== JSON.stringify(this.dcuUnitsGridLayoutStore.dcuLayout) ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.dcuUnitsGridLayoutStore.sortModel) ||
       store.searchText !== this.dcuUnitsGridLayoutStore.searchText ||
+      store.searchWildcards !== this.dcuUnitsGridLayoutStore.searchWildcards ||
       JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns) ||
       JSON.stringify(store.pageSize) !== JSON.stringify(this.dcuUnitsGridLayoutStore.pageSize)
     ) {
@@ -859,5 +883,23 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     const api: any = this.gridApi;
     api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
     this.gridApi.setServerSideDatasource(this.datasource);
+  }
+
+  toggleWildcards($event: boolean) {
+    console.log('toggleWildcards');
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards()) {
+        this.deselectAll();
+        this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards($event);
+
+        // const value = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
+        // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+
+        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
+        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
+        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
+        this.gridApi.onFilterChanged();
+      }
+    }
   }
 }

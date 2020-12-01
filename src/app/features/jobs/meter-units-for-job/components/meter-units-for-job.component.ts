@@ -92,6 +92,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   messageDataRefreshed = $localize`Data refreshed!`;
   messageActionFailed = $localize`Action failed!`;
 
+  public enableWildards = false;
+
   constructor(
     private route: ActivatedRoute,
     private meterUnitsForJobGridService: MeterUnitsForJobGridService,
@@ -158,6 +160,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     //     this.setFilterInfo();
     //   }
     // });
+
+    this.enableWildards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
   }
 
   // form - rights
@@ -267,8 +271,11 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   // search string changed call get data
   searchData($event: string) {
     if ($event !== this.meterUnitsForJobGridService.getSessionSettingsSearchedText()) {
+      this.deselectAll();
       this.meterUnitsForJobGridService.setSessionSettingsSearchedText($event);
-      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+
+      const enableWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
 
       this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
       this.meterUnitsForJobGridService.setSessionSettingsSelectedRows([]);
@@ -589,8 +596,14 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   setSearch() {
     const search = this.meterUnitsForJobGridService.getSessionSettingsSearchedText();
+
+    let enableWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
+    if (!enableWildcards) {
+      enableWildcards = false;
+    }
+
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
     }
     return [];
   }
@@ -703,12 +716,14 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       startRow: 0,
       endRow: 0,
       sortModel: [],
-      searchModel: this.requestModel.searchModel,
-      filterModel: this.requestModel.filterModel,
+      searchModel: [],
+      filterModel: null,
       deviceIds: deviceIdsParam
     };
 
     if (selectedAll) {
+      request.searchModel = this.setSearch();
+
       const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
       if (excludedRows && excludedRows.length > 0) {
         request.excludeIds = [];
@@ -754,8 +769,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     if (this.meterUnitsForJobGridService.getSessionSettingsSelectedAll()) {
       const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
 
-      requestParam.filter = this.requestModel.filterModel;
-      requestParam.search = this.requestModel.searchModel;
+      requestParam.filter = this.setFilter();
+      requestParam.search = this.setSearch();
       requestParam.excludeIds = [];
 
       excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
@@ -789,6 +804,20 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     } else {
       return `${selectedCount}`;
     }
+  }
+
+  toggleWildcards($event: boolean) {
+    // if ($event !== this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards()) {
+    this.deselectAll();
+    this.meterUnitsForJobGridService.setSessionSettingsSearchedWildcards($event);
+
+    // const value = this.meterUnitsForJobGridService.getSessionSettingsSearchedText();
+    // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+
+    this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
+
+    this.gridApi.onFilterChanged();
+    // }
   }
 
   // bulkOperation(operation: MeterUnitsTypeEnum) {

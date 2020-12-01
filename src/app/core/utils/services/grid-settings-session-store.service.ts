@@ -195,6 +195,9 @@ export class GridSettingsSessionStoreService {
         case GridSettingsSessionStoreTypeEnum.excludedRows:
           value.value.excludedRows = object.excludedRows;
           break;
+        case GridSettingsSessionStoreTypeEnum.searchWildcards:
+          value.value.searchWildcards = object.searchWildcards;
+          break;
       }
       sessionStorage.setItem(this.gridSettings, JSON.stringify(data));
     } else {
@@ -221,7 +224,8 @@ export class GridSettingsSessionStoreService {
       pageIndex: 0,
       selectedRows: [],
       isSelectedAll: false,
-      excludedRows: []
+      excludedRows: [],
+      searchWildcards: false
     };
   }
 

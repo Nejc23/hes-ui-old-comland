@@ -452,6 +452,12 @@ export class DataConcentratorUnitsGridService {
     return settings.searchText;
   }
 
+  // searched wildcard
+  public getSessionSettingsSearchedWildcards() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.searchWildcards;
+  }
+
   // set searched text
   public setSessionSettingsSearchedText(text: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -459,6 +465,17 @@ export class DataConcentratorUnitsGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.searchString,
+      settings
+    );
+  }
+
+  // set searched wildcard
+  public setSessionSettingsSearchedWildcards(enableWildcards: boolean) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.searchWildcards = enableWildcards;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.searchWildcards,
       settings
     );
   }

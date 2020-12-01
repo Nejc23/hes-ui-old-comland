@@ -1,7 +1,7 @@
 <div *ngIf="!noData">
   <div class="mb-2">
     <div class="mb-2 grid-actions">
-      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="">
+      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="" (toggleWildcards)="toggleWildcards($event)" [enableWildcards]="enableWildcards">
         <div *ngIf="selectedAtLeastOneRowOnGrid">
           <div dropdown class="btn-group">
             <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"

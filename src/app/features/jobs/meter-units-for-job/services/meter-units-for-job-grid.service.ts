@@ -165,6 +165,12 @@ export class MeterUnitsForJobGridService {
     return settings.searchText;
   }
 
+  // searched wildcard
+  public getSessionSettingsSearchedWildcards() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.searchWildcards;
+  }
+
   // set searched text
   public setSessionSettingsSearchedText(text: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -172,6 +178,17 @@ export class MeterUnitsForJobGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.searchString,
+      settings
+    );
+  }
+
+  // set searched wildcard
+  public setSessionSettingsSearchedWildcards(searchWildcards: boolean) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.searchWildcards = searchWildcards;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.searchWildcards,
       settings
     );
   }

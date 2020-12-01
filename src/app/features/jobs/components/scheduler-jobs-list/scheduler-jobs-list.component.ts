@@ -80,6 +80,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   gridColumnApi;
 
+  public enableWildcards = false;
+
   constructor(
     private schedulerJobsService: JobsService,
     private schedulerJobsListGridService: SchedulerJobsListGridService,
@@ -121,8 +123,14 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   setSearch() {
     const search = this.schedulerJobsListGridService.getSessionSettingsSearchedText();
+
+    let enableWildcards = this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards();
+    if (!enableWildcards) {
+      enableWildcards = false;
+    }
+
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
     }
     return [];
   }
@@ -190,7 +198,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     if (this.isGridLoaded && this.areSettingsLoaded) {
       if ($event !== this.schedulerJobsListGridService.getSessionSettingsSearchedText()) {
         this.schedulerJobsListGridService.setSessionSettingsSearchedText($event);
-        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+
+        const enableWildcards = this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards();
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
 
         this.schedulerJobsListGridService.setSessionSettingsPageIndex(0);
         this.gridApi.onFilterChanged();
@@ -363,6 +373,11 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         this.schedulerJobsListGridService.setSessionSettingsSearchedText(settings.searchText);
       }
 
+      if (settings.searchWildcards) {
+        this.schedulerJobsListGridService.setSessionSettingsSearchedWildcards(settings.searchWildcards);
+        this.enableWildcards = settings.searchWildcards;
+      }
+
       if (settings.pageSize) {
         this.selectedPageSize = settings.pageSize;
         this.form.get(this.pageSizeProperty).setValue(this.selectedPageSize);
@@ -379,6 +394,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       currentPageIndex: this.schedulerJobsListGridService.getSessionSettingsPageIndex(),
       sortModel: sortModel ? sortModel : this.schedulerJobsListGridLayoutStore.sortModel,
       searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText(),
+      searchWildcards: this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards(),
       pageSize: this.selectedPageSize
     };
 
@@ -387,6 +403,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       store.currentPageIndex !== this.schedulerJobsListGridLayoutStore.currentPageIndex ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.sortModel) ||
       store.searchText !== this.schedulerJobsListGridLayoutStore.searchText ||
+      store.searchWildcards !== this.schedulerJobsListGridLayoutStore.searchWildcards ||
       JSON.stringify(store.pageSize) !== JSON.stringify(this.schedulerJobsListGridLayoutStore.pageSize)
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.schedulerJobsListGridLayoutStoreKey, store);
@@ -440,6 +457,21 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       if (lastVisibleColumnIndex > -1) {
         columnStates[lastVisibleColumnIndex].width = columnStates[lastVisibleColumnIndex].width + (availableWidth - usedWidth);
         this.gridColumnApi.applyColumnState({ state: columnStates });
+      }
+    }
+  }
+
+  toggleWildcards($event: boolean) {
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      if ($event !== this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards()) {
+        this.schedulerJobsListGridService.setSessionSettingsSearchedWildcards($event);
+
+        // const value = this.schedulerJobsListGridService.getSessionSettingsSearchedText();
+        // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+
+        this.schedulerJobsListGridService.setSessionSettingsPageIndex(0);
+
+        this.gridApi.onFilterChanged();
       }
     }
   }

@@ -7,6 +7,7 @@ export interface DcuUnitsGridLayoutStore {
   dcuLayout?: DcuLayout;
   sortModel?: GridSortParams[];
   searchText: string;
+  searchWildcards: boolean;
   visibleColumns: string[];
   pageSize: Codelist<number>;
 }

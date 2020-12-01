@@ -58,7 +58,8 @@ export class MeterUnitsFwUpgradeInterceptor {
       sort: [],
       textSearch: {
         value: '',
-        propNames: []
+        propNames: [],
+        enableWildcards: false
       }
     };
     return of(

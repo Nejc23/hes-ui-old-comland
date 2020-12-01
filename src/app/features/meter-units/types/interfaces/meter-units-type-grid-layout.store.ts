@@ -9,4 +9,5 @@ export interface MeterUnitsTypeGridLayoutStore {
   searchText: string;
   visibleColumns: string[];
   pageSize: Codelist<number>;
+  searchWildcards: boolean;
 }
