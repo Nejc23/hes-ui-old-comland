@@ -1180,7 +1180,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   toggleWildcards($event: boolean) {
-    console.log('toggleWildcards');
     if (this.isGridLoaded && this.areSettingsLoaded) {
       if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards()) {
         this.meterUnitsTypeGridService.setSessionSettingsSearchedWildcards($event);

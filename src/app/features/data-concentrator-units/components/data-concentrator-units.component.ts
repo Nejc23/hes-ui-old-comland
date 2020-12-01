@@ -886,7 +886,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   toggleWildcards($event: boolean) {
-    console.log('toggleWildcards');
     if (this.isGridLoaded && this.areSettingsLoaded) {
       if ($event !== this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards()) {
         this.dataConcentratorUnitsGridService.setSessionSettingsSearchedWildcards($event);
