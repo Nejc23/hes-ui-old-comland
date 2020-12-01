@@ -634,6 +634,12 @@ export class MeterUnitsTypeGridService {
     return settings.searchText;
   }
 
+  // searched wildcard
+  public getSessionSettingsSearchedWildcards() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.searchWildcards;
+  }
+
   // set searched text
   public setSessionSettingsSearchedText(text: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -641,6 +647,17 @@ export class MeterUnitsTypeGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.searchString,
+      settings
+    );
+  }
+
+  // set searched wildcard
+  public setSessionSettingsSearchedWildcards(searchedWildcards: boolean) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.searchWildcards = searchedWildcards;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.searchWildcards,
       settings
     );
   }

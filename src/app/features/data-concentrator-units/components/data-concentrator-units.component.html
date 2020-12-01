@@ -19,15 +19,20 @@
             (searchChange)=searchData($event)
             (refresh)="refreshGrid()"
             (addDcu)="addDcu()"
-            (toggleFilter)="toggleFilter()">
+            (toggleFilter)="toggleFilter()"
+            (toggleWildcards)="toggleWildcards($event)"
+            >
             <div *ngIf="getSelectedCount() === 0" class="mr-3">
               <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()">
                 <i class="far fa-plus"></i> <span i18n>Add</span>
               </button>
             </div>
             <div class="pr-3">
-              <app-dc-operations [showOperations]="getSelectedCount() === 0 ? false : true"
-              [requestModel]="requestModel" [guid]="null" [selectedItemsCount]="getSelectedCount()"
+              <app-dc-operations
+                [showOperations]="getSelectedCount() === 0 ? false : true"
+                [requestModel]="requestModel" [guid]="null"
+                [selectedItemsCount]="getSelectedCount()"
+                [allVisibleColumns]="getAllDisplayedColumnsNames()"
               ></app-dc-operations>
                <!-- other buttons as Tags,...etc -->
             </div>

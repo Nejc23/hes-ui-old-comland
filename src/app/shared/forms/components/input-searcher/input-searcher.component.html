@@ -1,5 +1,6 @@
 <div class="form-group position-relative" [formGroup]="form">
-  <input #searcher id="search" kendoTextBox 
-  [name]="property" [placeholder]="placeholder" type="search" class="form-control" [formControlName]="property" [readonly]="isReadOnly">
+  <input #searcher id="search" kendoTextBox
+  [name]="property" [placeholder]="placeholder" type="search" class="form-control" [ngClass]="{'wildcard': showEnableWildcard}" [formControlName]="property" [readonly]="isReadOnly">
+  <a *ngIf="showEnableWildcard" href="javascript:void(0)" (click)="toggleEnableWildcards()" [ngClass]="{'text-black-50': !enableWildcards}"><i class='fas fa-star-of-life' container="body" placement="left" [openDelay]="500" [ngbTooltip]="getTooltip()"></i></a>
   <i class='far fa-search'></i>
 </div>

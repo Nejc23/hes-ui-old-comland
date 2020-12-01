@@ -254,7 +254,8 @@ export class DcOperationsService {
       pageNumber: 0,
       textSearch: {
         value: '',
-        propNames: []
+        propNames: [],
+        enableWildcards: false
       },
       sort: []
     };
@@ -273,6 +274,7 @@ export class DcOperationsService {
         if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
           requestParam.textSearch.value = requestModel.searchModel[0].value;
           requestParam.textSearch.propNames = allVisibleColumns;
+          requestParam.textSearch.enableWildcards = requestModel.searchModel[0].enableWildcards;
         }
 
         // create filter object
@@ -339,34 +341,34 @@ export class DcOperationsService {
     return requestParam;
   }
 
-  getOperationRequestParamOld(guid: string, requestModel: GridRequestParams): RequestFilterParams {
-    const requestParam: RequestFilterParams = {
-      concentratorIds: null
-    };
-    console.log('getOperationRequestParamOld()', guid, requestModel);
-    // select from row
-    if (guid && guid.length > 0) {
-      requestParam.concentratorIds = [];
-      requestParam.concentratorIds.push(guid);
-    } else {
-      if (this.dcGridService.getSessionSettingsSelectedAll()) {
-        const excludedRows = this.dcGridService.getSessionSettingsExcludedRows();
+  // getOperationRequestParamOld(guid: string, requestModel: GridRequestParams): RequestFilterParams {
+  //   const requestParam: RequestFilterParams = {
+  //     concentratorIds: null
+  //   };
+  //   console.log('getOperationRequestParamOld()', guid, requestModel);
+  //   // select from row
+  //   if (guid && guid.length > 0) {
+  //     requestParam.concentratorIds = [];
+  //     requestParam.concentratorIds.push(guid);
+  //   } else {
+  //     if (this.dcGridService.getSessionSettingsSelectedAll()) {
+  //       const excludedRows = this.dcGridService.getSessionSettingsExcludedRows();
 
-        requestParam.filter = requestModel.filterModel;
-        requestParam.search = requestModel.searchModel;
-        requestParam.excludeIds = [];
+  //       requestParam.filter = requestModel.filterModel;
+  //       requestParam.search = requestModel.searchModel;
+  //       requestParam.excludeIds = [];
 
-        excludedRows.map(row => requestParam.excludeIds.push(row.concentratorId));
-      } else {
-        const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
+  //       excludedRows.map(row => requestParam.excludeIds.push(row.concentratorId));
+  //     } else {
+  //       const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
 
-        if (selectedRows && selectedRows.length > 0) {
-          requestParam.concentratorIds = [];
-          selectedRows.map(row => requestParam.concentratorIds.push(row.concentratorId));
-        }
-      }
-    }
+  //       if (selectedRows && selectedRows.length > 0) {
+  //         requestParam.concentratorIds = [];
+  //         selectedRows.map(row => requestParam.concentratorIds.push(row.concentratorId));
+  //       }
+  //     }
+  //   }
 
-    return requestParam;
-  }
+  //   return requestParam;
+  // }
 }

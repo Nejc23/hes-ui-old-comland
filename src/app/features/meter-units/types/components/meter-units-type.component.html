@@ -24,7 +24,9 @@
         [filtersInfo]="filtersInfo"
         (searchChange)="searchData($event)"
         (refresh)="refreshGrid()"
-        (toggleFilter)="toggleFilter()">
+        (toggleFilter)="toggleFilter()"
+        (toggleWildcards)="toggleWildcards($event)"
+        >
 
         <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
           <div dropdown class="btn-group">

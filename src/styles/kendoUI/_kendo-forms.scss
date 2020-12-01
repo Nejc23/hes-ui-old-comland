@@ -2,6 +2,8 @@ input[type=search] {
   background-color: $gray-300;
   border-width: 0;
   box-shadow: none;
+  position: relative;
+  // padding-right:3.2rem !important;
 
   +.far.fa-search {
     position: absolute;
@@ -15,6 +17,34 @@ input[type=search] {
     background-color: darken($gray-300, 7.5%);
 
     +.far.fa-search {
+      display: none;
+    }
+  }
+}
+
+input[type=search].wildcard {
+  padding-right:2rem !important;
+
+  ~a .fas.fa-star-of-life {
+    top:0;
+    height: $input-height;
+    line-height: $input-height;
+    position: absolute;
+    right: 0.5rem;
+  }
+
+  ~.far.fa-search {
+    position:absolute;
+    right: 2rem;
+    top: 0;
+    height: $input-height;
+    line-height: $input-height;
+  }
+
+  &:focus, &:hover {
+    background-color: darken($gray-300, 7.5%);
+
+    ~.far.fa-search {
       display: none;
     }
   }

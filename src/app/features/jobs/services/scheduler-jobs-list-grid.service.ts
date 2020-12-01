@@ -145,6 +145,11 @@ export class SchedulerJobsListGridService {
     return settings.searchText;
   }
 
+  public getSessionSettingsSearchedWildcards() {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    return settings.searchWildcards;
+  }
+
   /**
    * Set searched text
    * @param text search text
@@ -155,6 +160,20 @@ export class SchedulerJobsListGridService {
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.searchString,
+      settings
+    );
+  }
+
+  /**
+   * Set searched wildcard
+   * @param boolean search wildcard
+   */
+  public setSessionSettingsSearchedWildcards(searchWildcards: boolean) {
+    const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+    settings.searchWildcards = searchWildcards;
+    this.gridSettingsSessionStoreService.setGridSettings(
+      this.sessionNameForGridState,
+      GridSettingsSessionStoreTypeEnum.searchWildcards,
       settings
     );
   }

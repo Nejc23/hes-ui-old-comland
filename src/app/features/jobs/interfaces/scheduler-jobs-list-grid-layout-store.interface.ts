@@ -6,4 +6,5 @@ export interface SchedulerJobsListGridLayoutStore {
   sortModel?: GridSortParams[];
   searchText: string;
   pageSize: Codelist<number>;
+  searchWildcards: boolean;
 }

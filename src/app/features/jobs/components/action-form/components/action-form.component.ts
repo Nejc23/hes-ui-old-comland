@@ -1,5 +1,5 @@
 import { SchedulerJobsListGridService } from './../../../services/scheduler-jobs-list-grid.service';
-import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -21,6 +21,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   @Output() searchChange = new EventEmitter<string>();
 
   private eventSettingsStoreLoadedSubscription: Subscription;
+
+  @Output() toggleWildcards: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Input() enableWildcards: boolean;
 
   constructor(
     public fb: FormBuilder,
@@ -48,6 +51,12 @@ export class ActionFormComponent implements OnInit, OnDestroy {
       this.searchTextEmpty = true;
     }
     this.searchChange.emit($event);
+  }
+
+  doToggleWildcards($event: boolean) {
+    if ($event !== null) {
+      this.toggleWildcards.emit($event);
+    }
   }
 
   get searchProperty() {

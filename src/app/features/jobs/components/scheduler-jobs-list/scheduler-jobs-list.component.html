@@ -7,7 +7,11 @@
 
 <div class="mt-3 mb-2">
   <div class="grid-actions">
-    <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="ml-auto justify-content-end">
+    <app-action-form (searchChange)=searchData($event)
+      (refresh)="refreshGrid()"
+       class="ml-auto justify-content-end"
+       [enableWildcards]="enableWildcards"
+       (toggleWildcards)="toggleWildcards($event)">
       <div class="dropdown mr-3">
         <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->
           <i class="far fa-plus"></i> <span i18n>Add</span>

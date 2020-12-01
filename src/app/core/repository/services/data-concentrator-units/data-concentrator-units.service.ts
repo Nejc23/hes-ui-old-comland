@@ -178,7 +178,8 @@ export class DataConcentratorUnitsService {
       pageNumber: pageIndex + 1,
       textSearch: {
         value: '',
-        propNames: []
+        propNames: [],
+        enableWildcards: true
       },
       sort: []
     };
@@ -186,6 +187,7 @@ export class DataConcentratorUnitsService {
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;
       requestParam.textSearch.propNames = allVisibleColumns;
+      requestParam.textSearch.enableWildcards = param.searchModel[0].enableWildcards;
     }
 
     // create filter object

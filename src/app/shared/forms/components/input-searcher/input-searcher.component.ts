@@ -20,6 +20,10 @@ export class InputSearcherComponent implements OnInit {
 
   @Output() insertedValue = new EventEmitter<string>();
 
+  @Input() showEnableWildcard = false;
+  @Input() enableWildcards = false;
+  @Output() toggleWildcards = new EventEmitter<boolean>();
+
   constructor(private formUtils: FormsUtilsService) {}
 
   ngOnInit() {
@@ -38,5 +42,18 @@ export class InputSearcherComponent implements OnInit {
 
   get formControl(): AbstractControl {
     return this.form.get(this.property);
+  }
+
+  toggleEnableWildcards() {
+    this.enableWildcards = !this.enableWildcards;
+    this.toggleWildcards.emit(this.enableWildcards);
+  }
+
+  getTooltip() {
+    let tooltip = $localize`Wildcards search is disabled`;
+    if (this.enableWildcards) {
+      tooltip = $localize`Wildcards search is enabled`;
+    }
+    return tooltip;
   }
 }

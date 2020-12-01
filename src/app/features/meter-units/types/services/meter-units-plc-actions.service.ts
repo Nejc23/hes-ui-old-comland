@@ -451,7 +451,8 @@ export class MeterUnitsPlcActionsService {
       pageNumber: 0,
       textSearch: {
         value: '',
-        propNames: visibleColumnsNames
+        propNames: null,
+        enableWildcards: false
       },
       sort: []
     };
@@ -466,10 +467,14 @@ export class MeterUnitsPlcActionsService {
 
         requestParam.pageSize = allItems;
         requestParam.pageNumber = 1;
-        requestParam.textSearch.value =
-          requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0
-            ? requestModel.searchModel[0].value
-            : '';
+
+        requestParam.textSearch.value = '';
+        if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
+          requestParam.textSearch.value = requestModel.searchModel[0].value;
+          requestParam.textSearch.propNames = visibleColumnsNames;
+          requestParam.textSearch.enableWildcards = requestModel.searchModel[0].enableWildcards;
+        }
+
         // create filter object
         if (requestModel.filterModel) {
           requestParam.filter = [];

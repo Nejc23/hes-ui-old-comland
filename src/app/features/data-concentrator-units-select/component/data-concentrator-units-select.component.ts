@@ -237,8 +237,11 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   setSearch() {
     const search = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSearchedText();
+
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+      return (this.requestModel.searchModel = [
+        { colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards: false }
+      ]);
     }
     return [];
   }
@@ -311,7 +314,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   searchChange($event: string = '') {
     if ($event !== this.dataConcentratorUnitsSelectGridService.getSessionSettingsSearchedText()) {
       this.dataConcentratorUnitsSelectGridService.setSessionSettingsSearchedText($event);
-      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards: false }];
 
       this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(0);
       this.gridApi.onFilterChanged();

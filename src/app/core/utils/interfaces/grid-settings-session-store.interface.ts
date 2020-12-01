@@ -4,4 +4,5 @@ export interface GridSettingsSessionStore {
   selectedRows: any[];
   isSelectedAll: boolean;
   excludedRows: any[];
+  searchWildcards: boolean;
 }

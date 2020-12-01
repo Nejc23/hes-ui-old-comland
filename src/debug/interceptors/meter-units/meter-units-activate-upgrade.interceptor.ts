@@ -21,7 +21,8 @@ export class MeterUnitsActivateUpgradeInterceptor {
       sort: [],
       textSearch: {
         value: '',
-        propNames: []
+        propNames: [],
+        enableWildcards: false
       }
     };
 

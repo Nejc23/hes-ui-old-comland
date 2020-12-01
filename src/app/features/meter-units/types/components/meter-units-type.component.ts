@@ -335,7 +335,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedText()) {
         this.deselectAll();
         this.meterUnitsTypeGridService.setSessionSettingsSearchedText($event);
-        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event }];
+
+        const enableWildcards = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
 
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -422,8 +424,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   setSearch() {
     const search = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
+
+    let enableWildcards = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
+    if (!enableWildcards) {
+      enableWildcards = false;
+    }
+
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
     }
     return [];
   }
@@ -1103,6 +1111,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.meterUnitsTypeGridService.setSessionSettingsSearchedText(settings.searchText);
       }
 
+      if (settings.searchWildcards) {
+        this.meterUnitsTypeGridService.setSessionSettingsSearchedWildcards(settings.searchWildcards);
+      }
+
       if (settings.visibleColumns && settings.visibleColumns.length > 0) {
         this.gridColumnShowHideService.listOfColumnsVisibilityChanged(settings.visibleColumns);
       }
@@ -1123,6 +1135,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       meterUnitsLayout: this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout,
       sortModel: sortModel ? sortModel : this.meterUnitsTypeGridLayoutStore.sortModel,
       searchText: this.meterUnitsTypeGridService.getSessionSettingsSearchedText(),
+      searchWildcards: this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards(),
       visibleColumns: this.getAllDisplayedColumnsNames(),
       pageSize: this.selectedPageSize
     };
@@ -1133,6 +1146,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       JSON.stringify(store.meterUnitsLayout) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.meterUnitsLayout) ||
       JSON.stringify(store.sortModel) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.sortModel) ||
       store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText ||
+      store.searchWildcards !== this.meterUnitsTypeGridLayoutStore.searchWildcards ||
       JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns) ||
       JSON.stringify(store.pageSize) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.pageSize)
     ) {
@@ -1163,5 +1177,22 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const api: any = this.gridApi;
     api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
     this.gridApi.setServerSideDatasource(this.datasource);
+  }
+
+  toggleWildcards($event: boolean) {
+    if (this.isGridLoaded && this.areSettingsLoaded) {
+      if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards()) {
+        this.deselectAll();
+        this.meterUnitsTypeGridService.setSessionSettingsSearchedWildcards($event);
+
+        // const value = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
+        // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+
+        this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
+        this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
+        this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+        this.gridApi.onFilterChanged();
+      }
+    }
   }
 }
