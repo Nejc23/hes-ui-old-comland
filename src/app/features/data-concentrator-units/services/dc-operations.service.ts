@@ -14,6 +14,7 @@ import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
 import { capitalize, toLower, values } from 'lodash';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
+import { DcuFwUpgradeComponent } from '../common/dcu-fw-upgrade.component';
 
 @Injectable({
   providedIn: 'root'
@@ -241,6 +242,64 @@ export class DcOperationsService {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  fwUpgrade(operation: DcOperationTypeEnum, params: any, selectedRowsCount: number) {
+    const modalRef = this.modalService.open(DcuFwUpgradeComponent);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+    // let selectedText = ''; // `${selectedCount} rows `;
+    // const modalRef = this.modalService.open(ModalConfirmComponent);
+    // const component: ModalConfirmComponent = modalRef.componentInstance;
+    // component.btnConfirmText = $localize`Confirm`;
+    // let response: Observable<any> = new Observable();
+
+    // let operationName = '';
+    // switch (operation) {
+    //   case DcOperationTypeEnum.syncTime:
+    //     response = this.service.postDcSynchronizeTime(params);
+    //     operationName = $localize`Sync time`;
+    //     selectedText = `${$localize`for`} ${selectedText}`;
+    //     break;
+    // }
+
+    // component.modalTitle = $localize`${operationName} (${selectedCount})`;
+    // component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+
+    // modalRef.result.then(
+    //   data => {
+    //     // on close (CONFIRM)
+    //     this.toast.successToast(this.messageActionInProgress);
+    //     response.subscribe(
+    //       value => {
+    //         /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+    //         if (operation === MeterUnitsTypeEnum.breakerStatus) {
+    //           this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
+    //         } else if (operation === MeterUnitsTypeEnum.ciiState) {
+    //           this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
+    //         }*/
+    //       },
+    //       e => {
+    //         this.toast.errorToast(this.messageServerError);
+    //       }
+    //     );
+    //   },
+    //   reason => {
+    //     // on dismiss (CLOSE)
+    //   }
+    // );
   }
 
   getOperationRequestParam(

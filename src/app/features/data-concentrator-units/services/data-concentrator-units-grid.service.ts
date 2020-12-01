@@ -31,6 +31,8 @@ export class DataConcentratorUnitsGridService {
   cookieNameForGridSort = 'grdColDCUSort';
   sessionNameForGridState = 'grdStateDCU';
 
+  gridName = 'grdDCU-requestIds';
+
   columns = [];
   paramsDCU = {} as GridRequestParams;
 
@@ -495,6 +497,18 @@ export class DataConcentratorUnitsGridService {
       GridSettingsSessionStoreTypeEnum.pageIndex,
       settings
     );
+  }
+
+  saveDcOperationRequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
+  }
+
+  removeDcOperationRequestId(requestId: string) {
+    this.gridSettingsSessionStoreService.removeMyGridLinkRequestId(this.gridName, requestId);
+  }
+
+  getAllDcOperationRequestIds(): string[] {
+    return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
   }
 }
 

@@ -1,5 +1,6 @@
 import {
   IActionRequestAddTemplate,
+  IActionRequestDcuFwUpgradeData,
   IActionRequestRelays,
   IActionRequestRelaysMode,
   IActionResponseAddTemplate,
@@ -14,7 +15,8 @@ import {
   onDemandRelaysMode,
   onDemandRelaysDisconnect,
   onDemandRelaysConnect,
-  linkDeviceTemplate
+  linkDeviceTemplate,
+  upgrade
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';

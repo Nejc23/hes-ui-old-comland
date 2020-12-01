@@ -1,3 +1,4 @@
+import { DcuFwUpgradeComponent } from './../features/data-concentrator-units/common/dcu-fw-upgrade.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysDisconnectComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
 import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-connect.component';
@@ -118,7 +119,8 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     PlcMeterRelaysDisconnectComponent,
     PlcMeterRelaysStateComponent,
     PlcMeterRelaysSetModeComponent,
-    PlcMeterJobsRegistersComponent
+    PlcMeterJobsRegistersComponent,
+    DcuFwUpgradeComponent
   ],
   imports: [
     CommonModule,
@@ -194,7 +196,8 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     PlcMeterRelaysDisconnectComponent,
     PlcMeterRelaysStateComponent,
     PlcMeterRelaysSetModeComponent,
-    PlcMeterJobsRegistersComponent
+    PlcMeterJobsRegistersComponent,
+    DcuFwUpgradeComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -218,7 +221,8 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     PlcMeterRelaysDisconnectComponent,
     PlcMeterRelaysStateComponent,
     PlcMeterRelaysSetModeComponent,
-    PlcMeterJobsRegistersComponent
+    PlcMeterJobsRegistersComponent,
+    DcuFwUpgradeComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

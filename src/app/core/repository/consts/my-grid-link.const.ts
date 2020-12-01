@@ -30,3 +30,5 @@ export const onDemandRelaysState = '/on-demand/trigger-get-named-register-value'
 export const onDemandRelaysMode = '/on-demand/relay/mode';
 
 export const linkDeviceTemplate = '/link-device-template';
+
+export const upgrade = '/upgrade';

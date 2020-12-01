@@ -1,0 +1,39 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Upload FW upgrade image ({{selectedRowsCount}})</div>
+
+  <div modal-body>
+    <ng-container>
+      <div class="form-row">
+        <div class="col-12">
+            <app-file-upload label="Image" [form]="form" [property]="imageProperty"
+                [uploadSaveUrl]="uploadSaveUrl"
+                [uploadRemoveUrl]=""
+                [multiple]="false"
+                [responseType]="'text'"
+                [allowedExtensions]="allowedExt"
+                [textExplanation]="allowedExtExplainText"
+                [acceptExtensions]="acceptExtensions"
+                (uploadEvent)="uploadEvent($event)"
+                (successEvent)="successUploaded($event)"
+                i18n-label></app-file-upload>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i>
+        <span i18n>Cancel</span></button>
+      <div class="btn-group dropdown" *ngIf="!activate">
+        <button type="submit" class="btn btn-primary" (click)="upgrade()">
+          <span i18n>Confirm</span></button>
+      </div>
+      <div class="btn-group dropdown"*ngIf="activate">
+        <button type="submit" class="btn btn-primary" (click)="activateMU()">
+          <span i18n>Activate</span></button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+
