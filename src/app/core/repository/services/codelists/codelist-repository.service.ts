@@ -62,7 +62,7 @@ export class CodelistRepositoryService {
     return this.repository.makeRequest(this.jobsDiscoveryJobsCodelistRequest());
   }
   jobsDiscoveryJobsCodelistRequest(): HttpRequest<CodelistExt<string>[]> {
-    return new HttpRequest('GET', `${schedulerJobs}?type=1&type=3`);
+    return new HttpRequest('GET', `${schedulerJobs}?type=1&type=3&type=4`);
   }
 
   jobsReadingJobsCodelistCodes(): Observable<CodelistExt<string>[]> {
