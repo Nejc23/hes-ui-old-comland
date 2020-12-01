@@ -39,7 +39,7 @@ describe('Pact consumer test', () => {
       textSearch: {
         value: '',
         propNames: [],
-        enableWildcards: false
+        useWildcards: false
       },
       deviceIds: ['2e9a0af2-cc88-43e0-9dfd-4cb1d7457ed6', 'd4c180db-f5f2-4c99-937e-9b92200d5526']
     };
@@ -59,7 +59,7 @@ describe('Pact consumer test', () => {
       textSearch: {
         value: '',
         propNames: [],
-        enableWildcards: false
+        useWildcards: false
       }
     };
 

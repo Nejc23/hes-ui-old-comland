@@ -41,7 +41,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   private eventSettingsStoreLoadedSubscription: Subscription;
 
   @Output() toggleWildcards: EventEmitter<boolean> = new EventEmitter<boolean>();
-  @Input() enableWildcards: boolean;
+  @Input() useWildcards: boolean;
 
   constructor(
     public fb: FormBuilder,
@@ -78,8 +78,8 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       const searchTextUpdated = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
       this.form.get(this.searchProperty).setValue(searchTextUpdated === '' ? null : searchTextUpdated);
-      const enableWildcardsUpdated = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
-      this.enableWildcards = enableWildcardsUpdated;
+      const useWildcardsUpdated = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
+      this.useWildcards = useWildcardsUpdated;
     });
   }
 

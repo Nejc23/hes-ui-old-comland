@@ -470,9 +470,9 @@ export class DataConcentratorUnitsGridService {
   }
 
   // set searched wildcard
-  public setSessionSettingsSearchedWildcards(enableWildcards: boolean) {
+  public setSessionSettingsSearchedWildcards(searchWildcards: boolean) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    settings.searchWildcards = enableWildcards;
+    settings.searchWildcards = searchWildcards;
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,
       GridSettingsSessionStoreTypeEnum.searchWildcards,

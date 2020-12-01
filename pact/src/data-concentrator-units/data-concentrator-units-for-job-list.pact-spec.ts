@@ -38,7 +38,7 @@ describe('Pact consumer test', () => {
           colId: 'all',
           type: enumSearchFilterOperators.like,
           value: 'search text',
-          enableWildcards: true
+          useWildcards: true
         }
       ],
       sortModel: [

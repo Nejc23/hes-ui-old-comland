@@ -59,7 +59,7 @@ describe('Pact consumer test', () => {
     textSearch: {
       value: '',
       propNames: [],
-      enableWildcards: false
+      useWildcards: false
     },
     templateId: '114f5a82-8579-44a3-beb4-483ab677fa32'
   };
@@ -95,7 +95,7 @@ describe('Pact consumer test', () => {
     textSearch: {
       value: '',
       propNames: [],
-      enableWildcards: false
+      useWildcards: false
     },
     templateId: '114f5a82-8579-44a3-beb4-483ab677fa32'
   };

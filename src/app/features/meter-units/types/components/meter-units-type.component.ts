@@ -336,8 +336,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.deselectAll();
         this.meterUnitsTypeGridService.setSessionSettingsSearchedText($event);
 
-        const enableWildcards = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
-        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
+        const useWildcards = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
+        this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards }];
 
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -425,13 +425,13 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   setSearch() {
     const search = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
 
-    let enableWildcards = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
-    if (!enableWildcards) {
-      enableWildcards = false;
+    let useWildcards = this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards();
+    if (!useWildcards) {
+      useWildcards = false;
     }
 
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, useWildcards }]);
     }
     return [];
   }
@@ -1182,16 +1182,20 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   toggleWildcards($event: boolean) {
     if (this.isGridLoaded && this.areSettingsLoaded) {
       if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards()) {
-        this.deselectAll();
         this.meterUnitsTypeGridService.setSessionSettingsSearchedWildcards($event);
 
-        // const value = this.meterUnitsTypeGridService.getSessionSettingsSearchedText();
-        // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+        if (this.meterUnitsTypeGridService.getSessionSettingsSearchedText()) {
+          this.deselectAll();
+          // const value = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();
+          // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, useWildcards: $event  }];
 
-        this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
-        this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-        this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
-        this.gridApi.onFilterChanged();
+          this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
+          this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
+          this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+          this.gridApi.onFilterChanged();
+        } else {
+          this.saveSettingsStore(this.requestModel.sortModel);
+        }
       }
     }
   }

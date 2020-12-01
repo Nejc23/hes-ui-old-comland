@@ -22,7 +22,7 @@ export class MeterUnitsActivateUpgradeInterceptor {
       textSearch: {
         value: '',
         propNames: [],
-        enableWildcards: false
+        useWildcards: false
       }
     };
 

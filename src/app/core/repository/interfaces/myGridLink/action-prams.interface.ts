@@ -11,7 +11,7 @@ export interface IActionRequestParams {
 export interface IActionSearchParam {
   value: string;
   propNames: string[];
-  enableWildcards: boolean;
+  useWildcards: boolean;
 }
 
 export interface IActionSortParams {

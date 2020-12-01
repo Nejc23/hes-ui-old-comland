@@ -93,7 +93,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   messageDataRefreshed = $localize`Data refreshed!`;
   messageActionFailed = $localize`Action failed!`;
 
-  public enableWildcards = false;
+  public useWildcards = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -165,7 +165,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     //   }
     // });
 
-    this.enableWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
+    this.useWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
     console.log(
       'this.dcuForJobGridService.getSessionSettingsSearchedWildcards()',
       this.dcuForJobGridService.getSessionSettingsSearchedWildcards()
@@ -279,8 +279,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       this.deselectAll();
       this.dcuForJobGridService.setSessionSettingsSearchedText($event);
 
-      const enableWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
-      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
+      const useWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards }];
 
       this.dcuForJobGridService.setSessionSettingsPageIndex(0);
       this.dcuForJobGridService.setSessionSettingsSelectedRows([]);
@@ -603,13 +603,13 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   setSearch() {
     const search = this.dcuForJobGridService.getSessionSettingsSearchedText();
 
-    let enableWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
-    if (!enableWildcards) {
-      enableWildcards = false;
+    let useWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
+    if (!useWildcards) {
+      useWildcards = false;
     }
 
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, useWildcards }]);
     }
     return [];
   }
@@ -815,17 +815,16 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   }
 
   toggleWildcards($event: boolean) {
-    // if ($event !== this.dcuForJobGridService.getSessionSettingsSearchedWildcards()) {
     this.deselectAll();
     this.dcuForJobGridService.setSessionSettingsSearchedWildcards($event);
 
-    // const value = this.dcuForJobGridService.getSessionSettingsSearchedText();
-    // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+    if (this.dcuForJobGridService.getSessionSettingsSearchedText()) {
+      // const value = this.dcuForJobGridService.getSessionSettingsSearchedText();
+      // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, useWildcards: $event  }];
 
-    this.dcuForJobGridService.setSessionSettingsPageIndex(0);
-
-    this.gridApi.onFilterChanged();
-    // }
+      this.dcuForJobGridService.setSessionSettingsPageIndex(0);
+      this.gridApi.onFilterChanged();
+    }
   }
 
   // bulkOperation(operation: MeterUnitsTypeEnum) {

@@ -92,7 +92,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   messageDataRefreshed = $localize`Data refreshed!`;
   messageActionFailed = $localize`Action failed!`;
 
-  public enableWildards = false;
+  public useWildcards = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -161,7 +161,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     //   }
     // });
 
-    this.enableWildards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
+    this.useWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
   }
 
   // form - rights
@@ -274,8 +274,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       this.deselectAll();
       this.meterUnitsForJobGridService.setSessionSettingsSearchedText($event);
 
-      const enableWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
-      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, enableWildcards }];
+      const useWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
+      this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards }];
 
       this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
       this.meterUnitsForJobGridService.setSessionSettingsSelectedRows([]);
@@ -597,13 +597,13 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   setSearch() {
     const search = this.meterUnitsForJobGridService.getSessionSettingsSearchedText();
 
-    let enableWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
-    if (!enableWildcards) {
-      enableWildcards = false;
+    let useWildcards = this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards();
+    if (!useWildcards) {
+      useWildcards = false;
     }
 
     if (search && search !== '') {
-      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, enableWildcards }]);
+      return (this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: search, useWildcards }]);
     }
     return [];
   }
@@ -807,17 +807,16 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   }
 
   toggleWildcards($event: boolean) {
-    // if ($event !== this.meterUnitsForJobGridService.getSessionSettingsSearchedWildcards()) {
     this.deselectAll();
     this.meterUnitsForJobGridService.setSessionSettingsSearchedWildcards($event);
 
-    // const value = this.meterUnitsForJobGridService.getSessionSettingsSearchedText();
-    // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, enableWildcards: $event  }];
+    if (this.meterUnitsForJobGridService.getSessionSettingsSearchedText()) {
+      // const value = this.dcuForJobGridService.getSessionSettingsSearchedText();
+      // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, useWildcards: $event  }];
 
-    this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
-
-    this.gridApi.onFilterChanged();
-    // }
+      this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
+      this.gridApi.onFilterChanged();
+    }
   }
 
   // bulkOperation(operation: MeterUnitsTypeEnum) {
