@@ -12,6 +12,7 @@ import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-
 import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
 import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-dc-read-events-job.component';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -79,6 +80,9 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     } else if (params.data.actionType === 3) {
       // dc time sync
       this.editDcTimeSyncJob(params, options);
+    } else if (params.data.actionType === 4) {
+      // dc read events job
+      this.editDcReadEventsJob(params, options);
     } else {
       this.editReadingJob(params, options);
     }
@@ -133,6 +137,26 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     this.service.getJob(selectedJobId).subscribe(job => {
       const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
       const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
+      component.setFormEdit(selectedJobId, job);
+
+      modalRef.result.then(
+        data => {
+          // on close (CONFIRM)
+          this.eventService.eventEmitterRefresh.emit(true);
+        },
+        reason => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editDcReadEventsJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    this.service.getJob(selectedJobId).subscribe(job => {
+      const modalRef = this.modalService.open(SchedulerDcReadEventsJobComponent, options);
+      const component: SchedulerDcReadEventsJobComponent = modalRef.componentInstance;
       component.setFormEdit(selectedJobId, job);
 
       modalRef.result.then(

@@ -1,3 +1,4 @@
+import { SchedulerDcReadEventsJobComponent } from './../features/jobs/components/dc-read-events/scheduler-dc-read-events-job.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysDisconnectComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
 import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-connect.component';
@@ -92,6 +93,7 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
     SchedulerDcTimeSyncJobComponent,
+    SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
@@ -155,6 +157,7 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
     SchedulerDcTimeSyncJobComponent,
+    SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
@@ -204,6 +207,7 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
     SchedulerDcTimeSyncJobComponent,
+    SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,

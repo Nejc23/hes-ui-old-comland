@@ -23,6 +23,7 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-jobs-list-grid-layout-store.interface';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
+import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-dc-read-events-job.component';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -292,6 +293,26 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
     const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
+    component.setFormAddNew();
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        this.refreshGrid();
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  addDcReadEventsJob() {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+
+    const modalRef = this.modalService.open(SchedulerDcReadEventsJobComponent, options);
+    const component: SchedulerDcReadEventsJobComponent = modalRef.componentInstance;
     component.setFormAddNew();
 
     modalRef.result.then(
