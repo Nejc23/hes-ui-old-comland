@@ -23,4 +23,9 @@ export class DcOperationsComponent implements OnInit {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);
   }
+
+  onFwUpgrade() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    this.dcOperationsService.fwUpgrade(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);
+  }
 }

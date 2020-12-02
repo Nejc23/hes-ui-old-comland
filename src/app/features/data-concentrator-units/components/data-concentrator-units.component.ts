@@ -1,3 +1,4 @@
+import { DcLastStatusStatus } from './../../../core/repository/interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
 import { GridSettingsSessionStoreService } from './../../../core/utils/services/grid-settings-session-store.service';
 import { GridSearchParams } from './../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsSessionStore } from './../../../core/utils/interfaces/grid-settings-session-store.interface';
@@ -22,7 +23,7 @@ import * as moment from 'moment';
 import { Subscription, Observable, of } from 'rxjs';
 
 // consts
-import { configAgGrid } from 'src/environments/config';
+import { configAgGrid, gridRefreshInterval } from 'src/environments/config';
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import * as _ from 'lodash';
@@ -44,6 +45,8 @@ import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
 import { filterOperationEnum } from '../../global/enums/filter-operation-global.enum';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -116,6 +119,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   isGridLoaded = false;
   areSettingsLoaded = false;
 
+  messageDataFwUpgraded = $localize`FW Upgrade successful!`;
+  messageActionFailed = $localize`FW Upgrade failed!`;
+
+  taskStatusOK = 'TASK_SUCCESS';
+  taskStatusFailure = 'TASK_FAILURE';
+  refreshInterval = gridRefreshInterval;
+
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
     private staticTextService: DataConcentratorUnitsStaticTextService,
@@ -133,7 +143,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private settingsStoreService: SettingsStoreService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private sidebarToggleService: SidebarToggleService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private dcuOperationsService: DataConcentratorUnitsOperationsService,
+    private toast: ToastNotificationService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -659,6 +671,21 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
   }
 
+  onFwUpgrade(selectedGuid: string) {
+    this.requestModel.filterModel = this.setFilter();
+    this.requestModel.searchModel = this.setSearch();
+
+    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
+    const params = this.dcOperationsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
+    this.dcOperationsService.fwUpgrade(DcOperationTypeEnum.syncTime, params, 1);
+  }
+
   // *******************************************************************************
 
   filterChanged() {
@@ -903,6 +930,28 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.saveSettingsStore(this.requestModel.sortModel);
         }
       }
+    }
+  }
+
+  refresh() {
+    const requestIds = this.dataConcentratorUnitsGridService.getAllDcOperationRequestIds();
+
+    if (requestIds && requestIds.length > 0) {
+      requestIds.map(requestId =>
+        this.dcuOperationsService.getDcLastStatus(requestId).subscribe(results => {
+          if (results && results.tasks && results.tasks.length > 0) {
+            const lastStatus = results.tasks[0].status;
+            if (lastStatus.status === this.taskStatusOK) {
+              this.dataConcentratorUnitsGridService.removeDcOperationRequestId(requestId);
+              this.toast.successToast(this.messageDataFwUpgraded);
+            } else if (lastStatus.status === this.taskStatusFailure) {
+              this.toast.errorToast(this.messageActionFailed);
+              this.dataConcentratorUnitsGridService.removeDcOperationRequestId(requestId);
+            }
+          }
+        })
+      );
+      this.refreshGrid();
     }
   }
 }

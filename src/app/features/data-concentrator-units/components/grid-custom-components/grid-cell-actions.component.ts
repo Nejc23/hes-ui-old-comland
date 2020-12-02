@@ -42,4 +42,8 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   onSynchronizeTime() {
     this.params.context.componentParent.onSynchronizeTime(this.params.data.concentratorId);
   }
+
+  onFwUpgrade() {
+    this.params.context.componentParent.onFwUpgrade(this.params.data.concentratorId);
+  }
 }

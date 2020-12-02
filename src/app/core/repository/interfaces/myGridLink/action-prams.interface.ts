@@ -62,6 +62,7 @@ export interface IActionRequestFwUpgradeData extends IActionRequestParams {
   signature: string;
   overrideFillLastBlock: boolean;
 }
+
 // for FW upgrade response
 export interface IActionResponseFwUpgradeData extends IActionResponseParams {
   fileId: string;
