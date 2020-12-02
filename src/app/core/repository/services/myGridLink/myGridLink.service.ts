@@ -1,6 +1,5 @@
 import {
   IActionRequestAddTemplate,
-  IActionRequestDcuFwUpgradeData,
   IActionRequestRelays,
   IActionRequestRelaysMode,
   IActionResponseAddTemplate,

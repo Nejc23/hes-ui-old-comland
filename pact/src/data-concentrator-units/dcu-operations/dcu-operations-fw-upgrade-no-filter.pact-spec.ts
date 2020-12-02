@@ -1,102 +1,87 @@
-import {
-  IActionRequestDcuFwUpgradeData,
-  IActionResponseDcuFwUpgradeData
-} from './../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
-import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
-import { getTestBed } from '@angular/core/testing';
-import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { IActionRequestTOUData, IActionResponseTOUData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+// import { defaultRequestHeader, defaultResponseHeader } from 'pact/helpers/default-header.helper';
+// import { formDataResponseHeader, formDataRequestHeader } from './../../../helpers/default-header.helper';
 
-describe('Pact consumer test', () => {
-  let provider;
-  let service: DataConcentratorUnitsOperationsService;
+// import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
+// import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
+// import { getTestBed } from '@angular/core/testing';
+// import { defaultFormatUtc } from 'moment';
+// import { term } from '@pact-foundation/pact-web/dsl/matchers';
 
-  beforeAll(done => {
-    provider = setupPactProvider(done);
-  });
+// describe('Pact consumer test', () => {
+//   let provider;
+//   let service: DataConcentratorUnitsOperationsService;
 
-  afterAll(done => {
-    pactFinalize(provider, done);
-  });
+//   beforeAll(done => {
+//     provider = setupPactProvider(done);
+//   });
 
-  afterEach(done => {
-    pactVerify(provider, done);
-  });
+//   afterAll(done => {
+//     pactFinalize(provider, done);
+//   });
 
-  beforeAll(() => {
-    pactSetAngular();
-    service = getTestBed().inject(DataConcentratorUnitsOperationsService);
-  });
+//   afterEach(done => {
+//     pactVerify(provider, done);
+//   });
 
-  const requestBody: IActionRequestDcuFwUpgradeData = {
-    pageSize: 1,
-    pageNumber: 1,
-    sort: [
-      {
-        index: 0,
-        propName: 'Firmware',
-        sortOrder: 'Ascending'
-      }
-    ],
-    textSearch: {
-      value: '',
-      propNames: [],
-      useWildcards: false
-    },
-    concentratorIds: [
-      '0A4A1AE4-3964-47D3-9E38-C017833FFE0C',
-      'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E',
-      '15A607EA-DEB7-46E5-BD5D-F8A067AD2842'
-    ],
-    image: '717D9FD6-478E-4C72-8A3A-0722D85A07B1'
-  };
+//   beforeAll(() => {
+//     pactSetAngular();
+//     service = getTestBed().inject(DataConcentratorUnitsOperationsService);
+//   });
 
-  const responseBody: IActionResponseDcuFwUpgradeData = {
-    requestId: '6211423d-0d7d-4f49-ae02-d681e1f051d1'
-  };
+//   const requestBody = new FormData;
+//   requestBody.append('requestIds', '0A4A1AE4-3964-47D3-9E38-C017833FFE0C');
+//   requestBody.append('requestIds', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E');
+//   requestBody.append('image', 'file binary');
 
-  describe('DCU operation for fw upgrade with ids in request', () => {
-    beforeAll(done => {
-      provider
-        .addInteraction({
-          state: 'A_REQUEST_DCU_OPERATION_FOR_FW_UPGRADE_WITH_IDS_IN_REQUEST',
-          uponReceiving: 'a request for trigger dcu operation for FW upgrade with ids in request',
-          withRequest: {
-            method: service.postDcFwUpgradeRequest(requestBody).method,
-            path: service.postDcFwUpgradeRequest(requestBody).url,
-            body: requestBody,
-            headers: defaultRequestHeader
-          },
-          willRespondWith: {
-            status: 201,
-            headers: {
-              ...defaultResponseHeader
-            },
-            body: responseBody
-          }
-        })
-        .then(
-          () => {
-            done();
-          },
-          err => {
-            done.fail(err);
-          }
-        );
-    });
+//   const responseBody = '6211423d-0d7d-4f49-ae02-d681e1f051d1';
 
-    it('should make request for trigger dcu operation for FW upgrade with ids in request', done => {
-      service.postDcFwUpgrade(requestBody).subscribe(
-        (res: IActionResponseDcuFwUpgradeData) => {
-          expect(res).toEqual(responseBody);
-          done();
-        },
-        err => {
-          done.fail(err);
-        }
-      );
-    });
-  });
-});
+//   describe('DCU operation for fw upgrade with ids in request', () => {
+//     beforeAll(done => {
+//       provider
+//         .addInteraction({
+//           state: 'A_REQUEST_DCU_OPERATION_FOR_FW_UPGRADE_WITH_IDS_IN_REQUEST',
+//           uponReceiving: 'a request for trigger dcu operation for FW upgrade with ids in request',
+//           withRequest: {
+//             method: service.postDcFwUpgradeRequest(requestBody).method,
+//             path: service.postDcFwUpgradeRequest(requestBody).url,
+//             body: '------WebKitFormBoundaryhapbuoAhi5g5hpkh\r\nContent-Disposition: form-data; name=\"requestIds\"\r\n\r\n0A4A1AE4-3964-47D3-9E38-C017833FFE0C\r\n------WebKitFormBoundaryhapbuoAhi5g5hpkh\r\nContent-Disposition: form-data; name=\"requestIds\"\r\n\r\nB1EB39A3-94DA-421A-8E1E-E3F5254A8C8E\r\n------WebKitFormBoundaryhapbuoAhi5g5hpkh\r\nContent-Disposition: form-data; name=\"image\"\r\n\r\nfile binary\r\n------WebKitFormBoundaryhapbuoAhi5g5hpkh--\r\n',
+//             headers: {'Content-Type': term({
+//               generate:
+//                 'multipart/form-data; boundary=----WebKitFormBoundaryhapbuoAhi5g5hpkh',
+//               matcher:
+//                 'multipart/form-data; boundary=----WebKitFormBoundary[.]$'
+//               }),
+//             },
+
+//           },
+//           willRespondWith: {
+//             status: 201,
+//             headers: {
+//               ...defaultResponseHeader
+//             },
+//             body: responseBody
+//           }
+//         })
+//         .then(
+//           () => {
+//             done();
+//           },
+//           err => {
+//             done.fail(err);
+//           }
+//         );
+//     });
+
+//    fit('should make request for trigger dcu operation for FW upgrade with ids in request', done => {
+//       service.postDcFwUpgrade(requestBody).subscribe(
+//         (res: string) => {
+//           expect(res).toEqual(responseBody);
+//           done();
+//         },
+//         err => {
+//           done.fail(err);
+//         }
+//       );
+//     });
+//   });
+// });

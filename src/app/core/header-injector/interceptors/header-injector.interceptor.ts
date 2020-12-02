@@ -3,16 +3,25 @@ import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/c
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { languages } from 'src/environments/config';
+import { dcOperationFwUpgrade } from '../../repository/consts/data-concentrator-units.const';
 
 @Injectable()
 export class HeaderInjectorInterceptor implements HttpInterceptor {
   constructor(@Inject(LOCALE_ID) public locale: string) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log(this.locale);
-    const newRequest = request.clone({
+    let newRequest = request.clone({
       headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())
     });
-    console.log(newRequest);
+
+    if (newRequest.url.toLowerCase().includes(dcOperationFwUpgrade)) {
+      newRequest = request.clone({
+        headers: request.headers.set('Accept-Language', this.localeToHeaderLocale())
+      });
+    }
+
+    console.log('Request after interceptor: ', newRequest);
+
     return next.handle(newRequest);
   }
 

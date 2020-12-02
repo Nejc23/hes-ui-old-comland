@@ -96,12 +96,3 @@ export interface IActionRequestAddTemplate extends IActionRequestParams {
 export interface IActionResponseAddTemplate extends IActionResponseParams {
   templateId: string;
 }
-
-export interface IActionRequestDcuFwUpgradeData extends IActionRequestParams {
-  image: string;
-  concentratorIds?: string[];
-}
-
-export interface IActionResponseDcuFwUpgradeData {
-  requestId: string;
-}

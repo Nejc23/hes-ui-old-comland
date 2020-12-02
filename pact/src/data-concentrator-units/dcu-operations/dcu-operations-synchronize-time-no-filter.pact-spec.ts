@@ -1,8 +1,4 @@
 import { ResponseData } from './../../../../src/app/core/repository/interfaces/data-concentrator-units/dc-operation-simple.interface';
-import {
-  IActionRequestDcuFwUpgradeData,
-  IActionResponseDcuFwUpgradeData
-} from './../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';

@@ -6,15 +6,15 @@
     <ng-container>
       <div class="form-row">
         <div class="col-12">
-            <app-file-select label="Image" [form]="form" [property]="imageProperty"
-
-              [multiple]="false"
-              [allowedExtensions]="allowedExt"
-              [textExplanation]="allowedExtExplainText"
-              [acceptExtensions]="acceptExtensions"
-              (selectEvent)="selected($event)"
-              i18n-label></app-file-select>
-      </div>
+          <app-file-select label="Image" [form]="form" [property]="imageProperty"
+            [multiple]="false"
+            [allowedExtensions]="allowedExt"
+            [textExplanation]="allowedExtExplainText"
+            [acceptExtensions]="acceptExtensions"
+            (selectEvent)="selected($event)"
+            i18n-label
+          ></app-file-select>
+        </div>
       </div>
     </ng-container>
   </div>

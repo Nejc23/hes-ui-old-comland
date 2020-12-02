@@ -1,3 +1,4 @@
+import { DcLastStatusStatus } from './../../../core/repository/interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
 import { GridSettingsSessionStoreService } from './../../../core/utils/services/grid-settings-session-store.service';
 import { GridSearchParams } from './../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsSessionStore } from './../../../core/utils/interfaces/grid-settings-session-store.interface';
@@ -118,10 +119,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   isGridLoaded = false;
   areSettingsLoaded = false;
 
-  messageDataRefreshed = $localize`Data refreshed!`;
-  messageActionFailed = $localize`Action failed!`;
+  messageDataFwUpgraded = $localize`FW Upgrade successful!`;
+  messageActionFailed = $localize`FW Upgrade failed!`;
 
   taskStatusOK = 'TASK_SUCCESS';
+  taskStatusFailure = 'TASK_FAILURE';
   refreshInterval = gridRefreshInterval;
 
   constructor(
@@ -932,23 +934,17 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    // if (this.authService.isTokenAvailable()) {
     const requestIds = this.dataConcentratorUnitsGridService.getAllDcOperationRequestIds();
-    // console.log(`refresh `, requestIds);
+
     if (requestIds && requestIds.length > 0) {
       requestIds.map(requestId =>
         this.dcuOperationsService.getDcLastStatus(requestId).subscribe(results => {
-          const okRequest = _.find(results, x => x.status === this.taskStatusOK && x.isFinished);
-          if (okRequest !== undefined) {
-            const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
-            if (badRequest === undefined) {
-              // no devices with unsuccessful status, we can delete requestId from session
+          if (results && results.tasks && results.tasks.length > 0) {
+            const lastStatus = results.tasks[0].status;
+            if (lastStatus.status === this.taskStatusOK) {
               this.dataConcentratorUnitsGridService.removeDcOperationRequestId(requestId);
-              this.toast.successToast(this.messageDataRefreshed);
-            }
-          } else {
-            const badRequest = _.find(results, x => x.status !== this.taskStatusOK && x.isFinished);
-            if (badRequest !== undefined) {
+              this.toast.successToast(this.messageDataFwUpgraded);
+            } else if (lastStatus.status === this.taskStatusFailure) {
               this.toast.errorToast(this.messageActionFailed);
               this.dataConcentratorUnitsGridService.removeDcOperationRequestId(requestId);
             }

@@ -1,15 +1,12 @@
 import { basePathDcOperations, dcLastStatus } from './../../consts/data-concentrator-units.const';
-import { IActionResponseDcuFwUpgradeData } from './../../interfaces/myGridLink/action-prams.interface';
-import { IActionResponseParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { onDemandCiiState, onDemandCiiActivate, onDemandCiiDeactivate } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
-import { HttpRequest } from '@angular/common/http';
+import { HttpParams, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { dcOperationFwUpgrade, dcOperationSynchronizeTime } from '../../consts/data-concentrator-units.const';
 import { RequestFilterParams, ResponseData } from '../../interfaces/data-concentrator-units/dc-operation-simple.interface';
-import { IActionRequestDcuFwUpgradeData, IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
-import { LastStatus } from '../../interfaces/myGridLink/myGridLink.interceptor';
+import { IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
+import { DcLastStatusResponse } from '../../interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -26,19 +23,19 @@ export class DataConcentratorUnitsOperationsService {
     return new HttpRequest('POST', `${dcOperationSynchronizeTime}`, params);
   }
 
-  postDcFwUpgrade(params: IActionRequestDcuFwUpgradeData): Observable<IActionResponseDcuFwUpgradeData> {
-    return this.repository.makeRequest(this.postDcFwUpgradeRequest(params));
+  postDcFwUpgrade(formData: FormData): Observable<string> {
+    return this.repository.makeRequest(this.postDcFwUpgradeRequest(formData));
   }
 
-  postDcFwUpgradeRequest(params: IActionRequestDcuFwUpgradeData): HttpRequest<any> {
-    return new HttpRequest('POST', `${dcOperationFwUpgrade}`, params);
+  postDcFwUpgradeRequest(formData: FormData): HttpRequest<any> {
+    return new HttpRequest('POST', `${dcOperationFwUpgrade}`, formData);
   }
 
-  getDcLastStatus(requestId: string): Observable<LastStatus[]> {
+  getDcLastStatus(requestId: string): Observable<DcLastStatusResponse> {
     return this.repository.makeRequest(this.getDcLastStatusRequest(requestId));
   }
 
-  getDcLastStatusRequest(requestId: string): HttpRequest<LastStatus[]> {
+  getDcLastStatusRequest(requestId: string): HttpRequest<DcLastStatusResponse> {
     return new HttpRequest('GET', `${basePathDcOperations}/${requestId}${dcLastStatus}`);
   }
 }

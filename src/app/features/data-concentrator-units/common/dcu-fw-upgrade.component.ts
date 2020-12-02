@@ -11,11 +11,7 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import {
-  IActionRequestDcuFwUpgradeData,
-  IActionRequestFwUpgradeData,
-  IActionRequestParams
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsTypeGridService } from '../../meter-units/types/services/meter-units-type-grid.service';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
@@ -33,8 +29,8 @@ export class DcuFwUpgradeComponent implements OnInit {
   actionRequest: IActionRequestParams;
   allowedExt = [];
   allowedExtExplainText = $localize`can only upload one file.`;
-  acceptExtensions = '.img';
-  public fileContent: any;
+  acceptExtensions = '.bin';
+  public file: File;
   activate = false;
 
   public selectedRowsCount: number;
@@ -53,26 +49,26 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      [this.imageProperty]: [this.fileContent, Validators.required],
+      [this.imageProperty]: [this.file, Validators.required],
       [this.imageGuidProperty]: ['']
     });
   }
 
   ngOnInit() {}
 
-  fillData(): IActionRequestDcuFwUpgradeData {
-    const formData: IActionRequestDcuFwUpgradeData = {
-      image: this.fileContent,
-      pageSize: this.actionRequest.pageSize,
-      pageNumber: this.actionRequest.pageNumber,
-      sort: this.actionRequest.sort,
-      textSearch: this.actionRequest.textSearch,
-      filter: this.actionRequest.filter,
-      concentratorIds: this.actionRequest.deviceIds,
-      excludeIds: this.actionRequest.excludeIds
-    };
-    return formData;
-  }
+  // fillData(): IActionRequestDcuFwUpgradeData {
+  //   const formData: IActionRequestDcuFwUpgradeData = {
+  //     image: this.file,
+  //     pageSize: this.actionRequest.pageSize,
+  //     pageNumber: this.actionRequest.pageNumber,
+  //     sort: this.actionRequest.sort,
+  //     textSearch: this.actionRequest.textSearch,
+  //     filter: this.actionRequest.filter,
+  //     concentratorIds: this.actionRequest.deviceIds,
+  //     excludeIds: this.actionRequest.excludeIds
+  //   };
+  //   return formData;
+  // }
 
   resetAll() {
     this.form.reset();
@@ -80,19 +76,23 @@ export class DcuFwUpgradeComponent implements OnInit {
   }
 
   upgrade() {
-    // if (this.imgGuid != null && this.imgGuid.imageGuid && this.imgGuid.imageGuid.length > 0) {
-    //   this.form.get(this.imageGuidProperty).setValue(this.imgGuid.imageGuid);
-    // } else if (this.imgGuid) {
-    //   this.form.get(this.imageGuidProperty).setValue(this.imgGuid);
-    // }
+    const formData = new FormData();
+    if (this.file) {
+      formData.append('image', this.file, this.file?.name);
+    }
 
-    const values = this.fillData();
-    const request = this.dcuOperatrionService.postDcFwUpgrade(values);
-    const successMessage = $localize`FW Upgrade successful`;
+    if (this.actionRequest && this.actionRequest.deviceIds && this.actionRequest.deviceIds.length > 0) {
+      for (const deviceId of this.actionRequest.deviceIds) {
+        formData.append('concentratorIds', deviceId);
+      }
+    }
+
+    const request = this.dcuOperatrionService.postDcFwUpgrade(formData);
+    const successMessage = $localize`FW Upgrade in progress`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
-        if (result && result.requestId.length > 0) {
-          this.dcuGridService.saveDcOperationRequestId(result.requestId);
+        if (result && result.length > 0) {
+          this.dcuGridService.saveDcOperationRequestId(result);
         }
         this.modal.close();
         /*this.toast.infoToast(result.status);
@@ -101,7 +101,9 @@ export class DcuFwUpgradeComponent implements OnInit {
           }
         }*/
       },
-      () => {} // error
+      error => {
+        console.log('upgrade error', error);
+      } // error
     );
   }
 
@@ -150,15 +152,19 @@ export class DcuFwUpgradeComponent implements OnInit {
   }
 
   public selected(event: any): void {
+    console.log('selected ');
     event.files.forEach((file: FileInfo) => {
       if (file.rawFile) {
-        const reader = new FileReader();
+        this.file = file.rawFile;
 
-        reader.onloadend = () => {
-          this.fileContent = reader.result as string;
-        };
+        // const reader = new FileReader();
 
-        reader.readAsDataURL(file.rawFile);
+        // reader.onloadend = () => {
+        //   this.file. = reader.result as Blob;
+        // };
+
+        // reader.readAsArrayBuffer(file.rawFile);
+        // return reader
       }
     });
   }

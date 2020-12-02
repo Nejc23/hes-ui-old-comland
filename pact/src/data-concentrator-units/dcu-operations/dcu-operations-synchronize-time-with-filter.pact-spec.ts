@@ -1,18 +1,8 @@
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
-import {
-  IActionRequestDcuFwUpgradeData,
-  IActionRequestParams,
-  IActionResponseDcuFwUpgradeData
-} from './../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams } from './../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import {
-  IActionRequestTOUData,
-  IActionResponseTOUData,
-  IActionResponseParams
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { ResponseData } from 'src/app/core/repository/interfaces/data-concentrator-units/dc-operation-simple.interface';
 
 describe('Pact consumer test', () => {
