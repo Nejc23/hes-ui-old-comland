@@ -19,6 +19,7 @@ import {
 import { MeterUnitsTypeGridService } from '../../meter-units/types/services/meter-units-type-grid.service';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
+import { FileInfo } from '@progress/kendo-angular-upload';
 
 @Component({
   selector: 'app-dcu-fw-upgrade',
@@ -29,15 +30,11 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize`Required field`;
-  messageServerError = $localize`Server error!`;
   actionRequest: IActionRequestParams;
-  uploadSaveUrl = `${fwUploadFile}`;
-  imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = $localize`can only upload one file.`;
   acceptExtensions = '.img';
-  public files: Array<any>;
+  public fileContent: any;
   activate = false;
 
   public selectedRowsCount: number;
@@ -56,7 +53,7 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      [this.imageProperty]: [this.files, Validators.required],
+      [this.imageProperty]: [this.fileContent, Validators.required],
       [this.imageGuidProperty]: ['']
     });
   }
@@ -65,7 +62,7 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   fillData(): IActionRequestDcuFwUpgradeData {
     const formData: IActionRequestDcuFwUpgradeData = {
-      image: this.form.get(this.imageGuidProperty).value,
+      image: this.fileContent,
       pageSize: this.actionRequest.pageSize,
       pageNumber: this.actionRequest.pageNumber,
       sort: this.actionRequest.sort,
@@ -83,11 +80,11 @@ export class DcuFwUpgradeComponent implements OnInit {
   }
 
   upgrade() {
-    if (this.imgGuid != null && this.imgGuid.imageGuid && this.imgGuid.imageGuid.length > 0) {
-      this.form.get(this.imageGuidProperty).setValue(this.imgGuid.imageGuid);
-    } else if (this.imgGuid) {
-      this.form.get(this.imageGuidProperty).setValue(this.imgGuid);
-    }
+    // if (this.imgGuid != null && this.imgGuid.imageGuid && this.imgGuid.imageGuid.length > 0) {
+    //   this.form.get(this.imageGuidProperty).setValue(this.imgGuid.imageGuid);
+    // } else if (this.imgGuid) {
+    //   this.form.get(this.imageGuidProperty).setValue(this.imgGuid);
+    // }
 
     const values = this.fillData();
     const request = this.dcuOperatrionService.postDcFwUpgrade(values);
@@ -116,39 +113,53 @@ export class DcuFwUpgradeComponent implements OnInit {
     this.modal.close(reason);
   }
 
-  successUploaded(event) {
-    this.imgGuid = event.response.body;
-  }
+  // successUploaded(event) {
+  //   this.imgGuid = event.response.body;
+  // }
 
-  uploadEvent(event) {
-    const bearer = `bearer ${this.authService.user.id_token}`;
-    event.headers = new HttpHeaders({ Authorization: bearer });
-    if (this.authService.isRefreshNeeded2()) {
-      this.authService
-        .renewToken()
-        .then(value => {
-          this.authService.user = value;
-          this.authService.saveTokenAndSetUserRights2(value, '');
-        })
-        .catch(err => {
-          if (err.message === 'login_required') {
-            this.authService.login().catch(err2 => console.log(err2));
-          }
-        });
-    }
-  }
+  // uploadEvent(event) {
+  //   const bearer = `bearer ${this.authService.user.id_token}`;
+  //   event.headers = new HttpHeaders({ Authorization: bearer });
+  //   if (this.authService.isRefreshNeeded2()) {
+  //     this.authService
+  //       .renewToken()
+  //       .then(value => {
+  //         this.authService.user = value;
+  //         this.authService.saveTokenAndSetUserRights2(value, '');
+  //       })
+  //       .catch(err => {
+  //         if (err.message === 'login_required') {
+  //           this.authService.login().catch(err2 => console.log(err2));
+  //         }
+  //       });
+  //   }
+  // }
 
   // properties - START
   get imageGuidProperty() {
     return 'imageGuid';
   }
   get imageProperty() {
-    return 'files';
+    return 'file';
   }
 
   // properties - END
 
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  public selected(event: any): void {
+    event.files.forEach((file: FileInfo) => {
+      if (file.rawFile) {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+          this.fileContent = reader.result as string;
+        };
+
+        reader.readAsDataURL(file.rawFile);
+      }
+    });
   }
 }
