@@ -31,6 +31,7 @@ import { MeterUnitsForJobInterceptor } from './meter-units/meter-units-for-job.i
 import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-templates/auto-templates-reading-jobs-list.interceptor';
 import { AutoTemplatesRegistersInterceptor } from './configuration/auto-templates/auto-templates-get-registers.interceptor';
 import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
+import { MeterUnitsSetDisplaySettingsInterceptor } from './meter-units/meter-units-set-display-settings.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -232,6 +233,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsSetMonitorInterceptor.canInterceptMeterUnitGetCommonRegisterGroupsPost(request)) {
                 return MeterUnitsSetMonitorInterceptor.interceptMeterUnitGetCommonRegisterGroupsPost();
+              }
+
+              if (MeterUnitsSetDisplaySettingsInterceptor.canInterceptMeterUnitGetCommonRegisterGroupsPost(request)) {
+                return MeterUnitsSetDisplaySettingsInterceptor.interceptMeterUnitGetCommonRegisterGroupsPost();
               }
 
               // auto-templates

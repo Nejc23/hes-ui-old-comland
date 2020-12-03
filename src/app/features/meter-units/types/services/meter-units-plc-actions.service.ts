@@ -145,8 +145,7 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.searchParam = params.search;
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
-
-    modalRef.result.then(
+    modalRef.componentInstance.actionRequst = modalRef.result.then(
       data => {
         // on close (CONFIRM)
         if (data === 'save') {
@@ -322,13 +321,14 @@ export class MeterUnitsPlcActionsService {
     );*/
   }
 
-  onSetDisplaySettings(params: RequestFilterParams, selectedRowsCount: number) {
+  onSetDisplaySettings(paramsOld: RequestFilterParams, params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(PlcMeterSetDisplaySettingsComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.deviceIdsParam = paramsOld.deviceIds;
+    modalRef.componentInstance.filterParam = paramsOld.filter;
+    modalRef.componentInstance.searchParam = paramsOld.search;
+    modalRef.componentInstance.excludeIdsParam = paramsOld.excludeIds;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionRequest = params;
 
     modalRef.result.then(
       data => {

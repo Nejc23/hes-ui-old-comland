@@ -101,3 +101,13 @@ export interface IActionRequestGetCommonRegisterGroups extends IActionRequestPar
   search: IActionSearchParam;
   type: number;
 }
+
+export interface IActionRequestSetDisplaySettings extends IActionRequestParams {
+  displayGroupName: string;
+  displayRegisters: string[];
+}
+
+export interface IActionResponseSetDisplaySettings extends IActionResponseParams {
+  displayGroupName: string;
+  displayRegisters: string[];
+}

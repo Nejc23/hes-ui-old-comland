@@ -2,13 +2,50 @@
 
   <div modal-header i18n>Set display settings ({{selectedRowsCount}})</div>
 
+
   <div modal-body>
     <ng-container>
       <form class="form-horizontal" [formGroup]="form">
+
+        <div class="alert alert-warning" role="alert">
+          <i class="fas fa-exclamation-triangle mr-2"></i>
+          <span i18n>Changing the register will deselect all settings.</span>
+        </div>
+
         <div class="form-row">
           <div class="col-12">
-            <app-select-input label="Register" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" i18n-label>
-            </app-select-input>
+            <app-select-dropdown label="Register" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" i18n-label (selectedValueChanged)="selectedValueChanged($event)" >
+            </app-select-dropdown>
+          </div>
+        </div>
+
+        <div class="form-row mt-1">
+          <div class="col-12">
+            <label><span i18n>Settings</span><sup> *</sup></label>
+
+            <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
+              <div>
+                <small class="text-primary" *ngIf="selectedRegisters?.length > 0"><strong>{{gridApi.getSelectedRows().length}} <span
+                      i18n>item(s) selected</span></strong></small>
+                <span class="text-secondary mx-1" *ngIf="selectedRegisters?.length > 0">&middot;</span>
+              </div>
+            </div>
+            <div>
+              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 100%; height: 350px; overflow:auto;" #agGrid
+                [rowData]="registerList"
+                [columnDefs]="columnDefs"
+                [modules]="modules"
+                (gridReady)="onGridReady($event)"
+                (selectionChanged)="selectionChanged()"
+                (firstDataRendered)="onFirstDataRendered($event)"
+                suppressRowClickSelection="true"
+                [pagination]="false"
+                [rowSelection]="'multiple'"
+              ></ag-grid-angular>
+              <div class="help-block" *ngIf="noRegisterSelected">
+                <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+              </div>
+            </div>
           </div>
         </div>
       </form>
@@ -19,7 +56,7 @@
       <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i>
         <span i18n>Cancel</span></button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onSet()">
+        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
           <span i18n>Confirm</span></button>
       </div>
     </div>

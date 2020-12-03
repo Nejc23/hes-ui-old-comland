@@ -2,9 +2,11 @@ import {
   IActionRequestAddTemplate,
   IActionRequestRelays,
   IActionRequestRelaysMode,
+  IActionRequestSetDisplaySettings,
   IActionResponseAddTemplate,
   IActionResponseRelays,
-  IActionResponseRelaysMode
+  IActionResponseRelaysMode,
+  IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
 import {
   onDemandCiiState,
@@ -31,8 +33,7 @@ import {
   ResponseSetLimiter,
   RequestFilterParams,
   ResponseClearFF,
-  RequestCommonRegisterGroup,
-  ResponseCommonRegisterGroup
+  RequestCommonRegisterGroup
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import {
   enumMyGridLink,
@@ -62,6 +63,7 @@ import {
   IActionResponseSetDisconnectorMode,
   IActionResponseTOUData
 } from '../../interfaces/myGridLink/action-prams.interface';
+import { triggerSetDisplaySettings } from '../../consts/meter-units.const';
 
 @Injectable({
   providedIn: 'root'
@@ -275,5 +277,13 @@ export class MyGridLinkService {
 
   postMyGridAddDeviceTemplateRequest(params: IActionRequestAddTemplate): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.templating}${linkDeviceTemplate}`, params);
+  }
+
+  setDisplaySettings(request: IActionRequestSetDisplaySettings): Observable<IActionResponseSetDisplaySettings> {
+    return this.repository.makeRequest(this.setDisplaySettingsRequest(request));
+  }
+
+  setDisplaySettingsRequest(request: IActionRequestSetDisplaySettings): HttpRequest<any> {
+    return new HttpRequest('POST', `${triggerSetDisplaySettings}`, request);
   }
 }

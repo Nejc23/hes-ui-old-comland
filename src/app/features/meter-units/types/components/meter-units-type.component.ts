@@ -827,8 +827,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetDisplaySettings(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetDisplaySettings(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
+
+    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
   // <-- end Operations action click (bulk or selected row)
 
