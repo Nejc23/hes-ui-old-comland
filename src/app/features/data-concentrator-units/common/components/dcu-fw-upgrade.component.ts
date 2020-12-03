@@ -12,10 +12,9 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { MeterUnitsTypeGridService } from '../../meter-units/types/services/meter-units-type-grid.service';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
-import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import { FileInfo } from '@progress/kendo-angular-upload';
+import { DataConcentratorUnitsGridService } from '../../services/data-concentrator-units-grid.service';
 
 @Component({
   selector: 'app-dcu-fw-upgrade',

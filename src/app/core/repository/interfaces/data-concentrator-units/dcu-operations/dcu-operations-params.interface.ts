@@ -14,3 +14,9 @@ export interface DcLastStatusStatus {
   status: string;
   description: string;
 }
+
+export interface SetDisplaySettingsRequest {
+  displayGroupName: string;
+  displayRegisters: string[];
+  deviceIds: string[];
+}

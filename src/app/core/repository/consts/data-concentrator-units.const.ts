@@ -30,3 +30,5 @@ export const basePathDcOperations = '/api/concentrator-management';
 export const dcOperationSynchronizeTime = `${basePathDcOperations}/trigger-set-concentrator-time`;
 export const dcOperationFwUpgrade = `${basePathDcOperations}/upgrade`;
 export const dcLastStatus = '/last-status';
+
+export const triggerSetDisplaySettings = `${basePathDcOperations}/trigger-set-display-settings`;

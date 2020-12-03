@@ -1,4 +1,5 @@
-import { basePathDcOperations, dcLastStatus } from './../../consts/data-concentrator-units.const';
+import { SetDisplaySettingsRequest } from './../../interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
+import { basePathDcOperations, dcLastStatus, triggerSetDisplaySettings } from './../../consts/data-concentrator-units.const';
 import { Injectable } from '@angular/core';
 import { HttpParams, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -37,5 +38,13 @@ export class DataConcentratorUnitsOperationsService {
 
   getDcLastStatusRequest(requestId: string): HttpRequest<DcLastStatusResponse> {
     return new HttpRequest('GET', `${basePathDcOperations}/${requestId}${dcLastStatus}`);
+  }
+
+  setDisplaySettings(request: SetDisplaySettingsRequest): Observable<void> {
+    return this.repository.makeRequest(this.setDisplaySettingsRequest(request));
+  }
+
+  setDisplaySettingsRequest(request: SetDisplaySettingsRequest): HttpRequest<any> {
+    return new HttpRequest('POST', `${triggerSetDisplaySettings}`, request);
   }
 }

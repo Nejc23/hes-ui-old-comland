@@ -432,5 +432,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.onDisconnectorMode(params, 1);
   }
 
+  onSetDisplaySettings() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.onSetDisplaySettings(params, 1);
+  }
+
   // <-- end Operations action click (bulk or selected row)
 }

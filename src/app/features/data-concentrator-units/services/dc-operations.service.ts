@@ -1,4 +1,5 @@
-import { IActionRequestParams } from './../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { device } from 'src/app/core/repository/consts/meter-units.const';
+import { TemplatingService } from './../../../core/repository/services/templating/templating.service';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -14,7 +15,11 @@ import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
 import { capitalize, toLower, values } from 'lodash';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
-import { DcuFwUpgradeComponent } from '../common/dcu-fw-upgrade.component';
+import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
+import {
+  IActionRequestGetCommonRegisterGroups,
+  IActionRequestParams
+} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +32,8 @@ export class DcOperationsService {
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: DataConcentratorUnitsOperationsService,
-    private dcGridService: DataConcentratorUnitsGridService
+    private dcGridService: DataConcentratorUnitsGridService,
+    private templatingService: TemplatingService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams) {
@@ -260,46 +266,6 @@ export class DcOperationsService {
         // on dismiss (CLOSE)
       }
     );
-    // let selectedText = ''; // `${selectedCount} rows `;
-    // const modalRef = this.modalService.open(ModalConfirmComponent);
-    // const component: ModalConfirmComponent = modalRef.componentInstance;
-    // component.btnConfirmText = $localize`Confirm`;
-    // let response: Observable<any> = new Observable();
-
-    // let operationName = '';
-    // switch (operation) {
-    //   case DcOperationTypeEnum.syncTime:
-    //     response = this.service.postDcSynchronizeTime(params);
-    //     operationName = $localize`Sync time`;
-    //     selectedText = `${$localize`for`} ${selectedText}`;
-    //     break;
-    // }
-
-    // component.modalTitle = $localize`${operationName} (${selectedCount})`;
-    // component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
-
-    // modalRef.result.then(
-    //   data => {
-    //     // on close (CONFIRM)
-    //     this.toast.successToast(this.messageActionInProgress);
-    //     response.subscribe(
-    //       value => {
-    //         /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-    //         if (operation === MeterUnitsTypeEnum.breakerStatus) {
-    //           this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
-    //         } else if (operation === MeterUnitsTypeEnum.ciiState) {
-    //           this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
-    //         }*/
-    //       },
-    //       e => {
-    //         this.toast.errorToast(this.messageServerError);
-    //       }
-    //     );
-    //   },
-    //   reason => {
-    //     // on dismiss (CLOSE)
-    //   }
-    // );
   }
 
   getOperationRequestParam(

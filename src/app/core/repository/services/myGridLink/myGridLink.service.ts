@@ -196,7 +196,8 @@ export class MyGridLinkService {
   }
 
   // get common register group
-  getCommonRegisterGroup(payload: RequestCommonRegisterGroup): Observable<ResponseCommonRegisterGroup[]> {
+  // getCommonRegisterGroup(payload: RequestCommonRegisterGroup): Observable<ResponseCommonRegisterGroup[]> {
+  getCommonRegisterGroup(payload: RequestCommonRegisterGroup): Observable<any[]> {
     return this.repository.makeRequest(this.getCommonRegisterGroupRequest(payload));
   }
 

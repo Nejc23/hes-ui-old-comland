@@ -1,3 +1,4 @@
+import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
@@ -138,7 +139,7 @@ export class MeterUnitsPlcActionsService {
   }
 
   onSetLimiter(params: RequestFilterParams, selectedRowsCount: number) {
-    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
+    const modalRef = this.modalService.open(PlcMeterSetDisplaySettingsComponent);
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
@@ -319,6 +320,27 @@ export class MeterUnitsPlcActionsService {
         // on dismiss (CLOSE)
       }
     );*/
+  }
+
+  onSetDisplaySettings(params: RequestFilterParams, selectedRowsCount: number) {
+    const modalRef = this.modalService.open(PlcMeterSetDisplaySettingsComponent);
+    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+
+    modalRef.result.then(
+      data => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      reason => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   // actions without popup

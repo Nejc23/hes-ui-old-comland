@@ -146,7 +146,8 @@ export class RoleService {
             ActionEnumerator.MUUpgrade,
             ActionEnumerator.MUCiiState,
             ActionEnumerator.MUCiiActivate,
-            ActionEnumerator.MUCiiDeactivate
+            ActionEnumerator.MUCiiDeactivate,
+            ActionEnumerator.MUSetDisplaySettings
           ]
         },
         {

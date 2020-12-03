@@ -1,4 +1,3 @@
-import { DcuFwUpgradeComponent } from './../features/data-concentrator-units/common/dcu-fw-upgrade.component';
 import { SchedulerDcReadEventsJobComponent } from './../features/jobs/components/dc-read-events/scheduler-dc-read-events-job.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysDisconnectComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
@@ -68,6 +67,8 @@ import { PlcMeterLimiterComponent } from '../features/meter-units/common/compone
 import { PlcMeterBreakerModeComponent } from '../features/meter-units/common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
+import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/common/components/dcu-fw-upgrade.component';
+import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 
 @NgModule({
   exports: [
@@ -122,6 +123,7 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     PlcMeterRelaysStateComponent,
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
+    PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent
   ],
   imports: [
@@ -200,6 +202,7 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     PlcMeterRelaysStateComponent,
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
+    PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent
   ],
   entryComponents: [
@@ -226,6 +229,7 @@ import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/c
     PlcMeterRelaysStateComponent,
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
+    PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent
   ],
   providers: [AgGridSharedFunctionsService]

@@ -96,3 +96,8 @@ export interface IActionRequestAddTemplate extends IActionRequestParams {
 export interface IActionResponseAddTemplate extends IActionResponseParams {
   templateId: string;
 }
+
+export interface IActionRequestGetCommonRegisterGroups extends IActionRequestParams {
+  search: IActionSearchParam;
+  type: number;
+}
