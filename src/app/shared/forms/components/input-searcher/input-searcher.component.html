@@ -1,6 +1,8 @@
 <div class="form-group position-relative" [formGroup]="form">
   <input #searcher id="search" kendoTextBox
   [name]="property" [placeholder]="placeholder" type="search" class="form-control" [ngClass]="{'wildcard': showUseWildcard}" [formControlName]="property" [readonly]="isReadOnly">
-  <a *ngIf="showUseWildcard" href="javascript:void(0)" (click)="toggleUseWildcards()" [ngClass]="{'text-black-50': !useWildcards, 'text-primary': useWildcards}"><i class='fas fa-star-of-life' container="body" placement="left" [openDelay]="500" [ngbTooltip]="getTooltip()"></i></a>
+  <a *ngIf="showUseWildcard" href="javascript:void(0)" (click)="toggleUseWildcards()">
+    <i class='fas fa-star-of-life' container="body" placement="left" [openDelay]="500"
+      [ngbTooltip]="getTooltip()" [ngClass]="{'text-black-50': !useWildcards, 'text-primary': useWildcards}"></i></a>
   <i class='far fa-search'></i>
 </div>

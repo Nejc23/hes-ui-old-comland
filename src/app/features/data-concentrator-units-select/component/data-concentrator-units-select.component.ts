@@ -162,11 +162,15 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         that.requestModel.endRow = that.dataConcentratorUnitsSelectGridService.getCurrentRowIndex(
           that.gridApi.paginationProxy.pageSize
         ).endRow;
+
         that.requestModel.sortModel = paramsRow.request.sortModel;
         that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        that.repositoryService.getGridDcuForm(that.requestModel, 1, []).subscribe(data => {
+        const currentPageIndex = that.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex();
+        const allDisplayedColumns = that.getAllDisplayedColumnsNames();
+
+        that.repositoryService.getGridDcuForm(that.requestModel, currentPageIndex, allDisplayedColumns).subscribe(data => {
           that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {
@@ -185,6 +189,14 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     this.gridApi.setServerSideDatasource(datasource);
   }
 
+  getAllDisplayedColumnsNames(): string[] {
+    if (this.gridColumnApi) {
+      const columns = this.gridColumnApi.getAllDisplayedColumns();
+      return columns.map(c => c.colId);
+    }
+    return;
+  }
+
   // on change page in the grid
   onPaginationChange(params) {
     if (this.gridApi) {
@@ -197,6 +209,11 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex());
     }
+
+    console.log(
+      'dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex',
+      this.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex()
+    );
   }
 
   // ag-grid change visibillity of columns

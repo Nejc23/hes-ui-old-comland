@@ -179,7 +179,7 @@ export class DataConcentratorUnitsService {
       textSearch: {
         value: '',
         propNames: [],
-        useWildcards: true
+        useWildcards: false
       },
       sort: []
     };
