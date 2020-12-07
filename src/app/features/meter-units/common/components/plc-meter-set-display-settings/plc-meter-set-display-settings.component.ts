@@ -38,16 +38,18 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
   selectedGroup: Codelist<string>;
 
-  registerList: DisplayRegisterDefinition[];
+  registerListLeft: DisplayRegisterDefinition[];
+  registerListRight: DisplayRegisterDefinition[] = [];
 
-  public gridApi;
+  public gridApiLeft;
+  public gridApiRight;
 
-  selectedRegisters: DisplayRegisterDefinition[] = [];
   noRegisterSelected = false;
 
   public modules: Module[] = AllModules;
   requiredText = $localize`At least one register must be selected`;
-  columnDefs = [];
+  columnDefsLeft = [];
+  columnDefsRight = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -71,7 +73,8 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.columnDefs = this.plcMeterSetDisplaySettingsGridService.setGridDefaultColumns();
+    this.columnDefsLeft = this.plcMeterSetDisplaySettingsGridService.setGridDefaultColumnsLeft();
+    this.columnDefsRight = this.plcMeterSetDisplaySettingsGridService.setGridDefaultColumnsRight();
 
     this.myGridService
       .getCommonRegisterGroup({
@@ -84,6 +87,11 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
       .subscribe((result: DisplayGroup[]) => {
         if (result && result.length > 0) {
           this.displayGroups = result;
+          this.initGroupList();
+
+          this.form = this.createForm();
+        } else {
+          this.displayGroups = [];
           this.initGroupList();
 
           this.form = this.createForm();
@@ -100,7 +108,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
   fillData(): IActionRequestSetDisplaySettings {
     const displayRegisters: string[] = [];
-    this.selectedRegisters.map(r => displayRegisters.push(r.name));
+    this.registerListRight.map(r => displayRegisters.push(r.name));
 
     const data: IActionRequestSetDisplaySettings = {
       displayGroupName: this.selectedGroup.value,
@@ -130,7 +138,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   }
 
   onConfirm() {
-    this.noRegisterSelected = this.selectedRegisters.length === 0;
+    this.noRegisterSelected = this.registerListRight.length === 0;
     if (this.noRegisterSelected) {
       return;
     }
@@ -150,33 +158,79 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   selectedValueChanged($event: any) {
     this.noRegisterSelected = false;
     this.selectedGroup = $event;
-    this.selectedRegisters = [];
     this.setRegisterList();
   }
 
   setRegisterList() {
-    this.registerList = this.displayGroups.find(d => d.displayGroupId === this.selectedGroup.id).displayRegisterDefinitions;
+    if (!this.selectedGroup) {
+      this.registerListLeft = [];
+      this.registerListRight = [];
+      return;
+    }
+    this.registerListLeft = this.displayGroups.find(d => d.displayGroupId === this.selectedGroup.id).displayRegisterDefinitions;
+    this.registerListRight = [];
 
     setTimeout(() => {
-      this.gridApi.sizeColumnsToFit();
+      this.gridApiLeft.sizeColumnsToFit();
+      this.gridApiRight.sizeColumnsToFit();
     }, 10);
   }
 
-  onGridReady(params) {
-    this.gridApi = params.api;
+  onLeftGridReady(params) {
+    this.gridApiLeft = params.api;
   }
 
-  selectionChanged() {
-    const selectedRows = this.gridApi.getSelectedRows();
-
-    this.selectedRegisters = null;
-    this.noRegisterSelected = false;
-    if (selectedRows.length > 0) {
-      this.selectedRegisters = selectedRows;
-    }
+  onRightGridReady(params) {
+    this.gridApiRight = params.api;
   }
 
   onFirstDataRendered(params) {
     params.api.sizeColumnsToFit();
+  }
+
+  gridDragOver(event) {
+    const dragSupported = event.dataTransfer.types.length;
+
+    if (dragSupported) {
+      event.dataTransfer.dropEffect = 'copy';
+      event.preventDefault();
+    }
+  }
+
+  gridDrop(event, grid) {
+    event.preventDefault();
+
+    const userAgent = window.navigator.userAgent;
+    const isIE = userAgent.indexOf('Trident/') >= 0;
+    const jsonData = event.dataTransfer.getData(isIE ? 'text' : 'application/json');
+    const data = JSON.parse(jsonData);
+
+    const selectedRegDefId = data.displayRegisterDefinitionId;
+
+    this.registerListRight = this.registerListRight.filter(r => r.displayRegisterDefinitionId !== selectedRegDefId);
+    this.registerListLeft = this.registerListLeft.filter(r => r.displayRegisterDefinitionId !== selectedRegDefId);
+
+    const y = event.layerY;
+    const itemHeight = this.gridApiLeft.getSizesForCurrentTheme().rowHeight;
+
+    if (grid === 'left') {
+      const insertIndex = Math.max(Math.min(Math.floor(y / itemHeight), this.registerListLeft.length), 0);
+      this.registerListLeft.splice(insertIndex, 0, data);
+    } else {
+      const insertIndex = Math.max(Math.min(Math.floor(y / itemHeight), this.registerListRight.length), 0);
+      this.registerListRight.splice(insertIndex, 0, data);
+    }
+
+    this.refreshGrids();
+  }
+
+  refreshGrids() {
+    this.gridApiLeft.setRowData(this.registerListLeft);
+    this.gridApiRight.setRowData(this.registerListRight);
+
+    setTimeout(() => {
+      this.gridApiLeft.sizeColumnsToFit();
+      this.gridApiRight.sizeColumnsToFit();
+    }, 10);
   }
 }

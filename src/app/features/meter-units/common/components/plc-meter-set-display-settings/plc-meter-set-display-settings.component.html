@@ -14,37 +14,40 @@
 
         <div class="form-row">
           <div class="col-12">
-            <app-select-dropdown label="Register group" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" i18n-label (selectedValueChanged)="selectedValueChanged($event)" >
-            </app-select-dropdown>
+            <app-select-input [disabled]="false" label="Register group" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" i18n-label (selectedValueChanged)="selectedValueChanged($event)" >
+            </app-select-input>
           </div>
         </div>
 
         <div class="form-row mt-1">
-          <div class="col-12">
-            <label><span i18n>Registers</span><sup> *</sup></label>
-
-            <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
-              <div>
-                <small class="text-primary" *ngIf="selectedRegisters?.length > 0"><strong>{{gridApi.getSelectedRows().length}} <span
-                      i18n>item(s) selected</span></strong></small>
-                <span class="text-secondary mx-1" *ngIf="selectedRegisters?.length > 0">&middot;</span>
-              </div>
-            </div>
-            <div>
-              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 100%; height: 350px; overflow:auto;" #agGrid
-                [rowData]="registerList"
-                [columnDefs]="columnDefs"
+          <div class="col-6">
+            <div (dragover)="gridDragOver($event)" (drop)="gridDrop($event,'left')">
+              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 350px; overflow:auto;" #agGrid
+                [rowData]="registerListLeft"
+                [columnDefs]="columnDefsLeft"
                 [modules]="modules"
-                (gridReady)="onGridReady($event)"
-                (selectionChanged)="selectionChanged()"
+                (gridReady)="onLeftGridReady($event)"
                 (firstDataRendered)="onFirstDataRendered($event)"
                 suppressRowClickSelection="true"
                 [pagination]="false"
-                [rowSelection]="'multiple'"
+                [suppressMoveWhenRowDragging]="true"
               ></ag-grid-angular>
-              <div class="help-block" *ngIf="noRegisterSelected">
+              <div class="help-block" *ngIf="noRegisterSelected && selectedGroup">
                 <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
               </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div (dragover)="gridDragOver($event)" (drop)="gridDrop($event,'right')">
+              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 350px; overflow:auto;" #agGrid2
+                [rowData]="registerListRight"
+                [columnDefs]="columnDefsRight"
+                [modules]="modules"
+                (gridReady)="onRightGridReady($event)"
+                (firstDataRendered)="onFirstDataRendered($event)"
+                suppressRowClickSelection="true"
+                [pagination]="false"
+              ></ag-grid-angular>
             </div>
           </div>
         </div>
