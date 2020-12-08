@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { SelectEvent } from '@progress/kendo-angular-upload';
+import { RemoveEvent, SelectEvent } from '@progress/kendo-angular-upload';
 
 @Component({
   selector: 'app-plc-meter-templates-import',
@@ -22,7 +22,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   public files: Array<any>;
   allowedExt = ['json'];
   acceptExtensions = '.json';
-  jsonString = '{}';
+  jsonString = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +64,10 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     });
   }
 
+  public removed(e: RemoveEvent): void {
+    this.jsonString = '';
+  }
+
   resetAll() {
     this.form.reset();
   }
@@ -87,6 +91,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   resetForm() {
     this.files = [];
     this.form = this.createForm();
+    this.jsonString = '';
   }
 
   get fileProperty() {
