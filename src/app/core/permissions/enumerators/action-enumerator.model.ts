@@ -12,5 +12,6 @@ export enum ActionEnumerator {
   MURemoveFromJob = 'Meter-Units-RemoveFromJob',
   MUCiiState = 'Meter-Units-CiiState',
   MUCiiActivate = 'Meter-Units-CiiActivate',
-  MUCiiDeactivate = 'Meter-Units-CiiDeactivate'
+  MUCiiDeactivate = 'Meter-Units-CiiDeactivate',
+  MUSetDisplaySettings = 'Meter-Units-SetDisplaySettings'
 }

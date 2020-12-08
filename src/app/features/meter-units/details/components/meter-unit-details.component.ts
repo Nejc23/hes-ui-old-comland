@@ -249,6 +249,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUJobsTemplates;
   }
 
+  get actionMUSetDisplaySettings() {
+    return ActionEnumerator.MUSetDisplaySettings;
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
@@ -430,6 +434,13 @@ export class MeterUnitDetailsComponent implements OnInit {
   onDisconnectorMode() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onDisconnectorMode(params, 1);
+  }
+
+  onSetDisplaySettings() {
+    const paramsOld = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+
+    this.plcActionsService.onSetDisplaySettings(paramsOld, params, 1);
   }
 
   // <-- end Operations action click (bulk or selected row)

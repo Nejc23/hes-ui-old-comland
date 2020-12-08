@@ -256,6 +256,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get actionMUJobsTemplates() {
     return ActionEnumerator.MUJobsTemplates;
   }
+  get actionMUSetDisplaySettings() {
+    return ActionEnumerator.MUSetDisplaySettings;
+  }
 
   // set form title by selected meter unit type
   private setTitle(id: number) {
@@ -820,6 +823,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getAllDisplayedColumnsNames()
     );
     this.plcActionsService.onDisconnectorMode(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  // popup
+  onSetDisplaySettings(selectedGuid: string) {
+    const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
+
+    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
   // <-- end Operations action click (bulk or selected row)
 
