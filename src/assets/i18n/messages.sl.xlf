@@ -780,12 +780,24 @@
       <trans-unit id="1774583572584926827" datatype="html">
         <source>Refresh data</source>
         <target>Osveži podatke</target>
-      </trans-unit><trans-unit id="6139802715791880864" datatype="html">
-        <source>Obis code</source>
-        <target state="new">Obis code</target>
-      </trans-unit><trans-unit id="1562013709116469162" datatype="html">
-        <source>At least one register must be selected</source>
-        <target state="new">At least one register must be selected</target>
+      </trans-unit><trans-unit id="8965979714353748219" datatype="html">
+        <source>Available reigsters</source>
+        <target state="new">Available reigsters</target>
+      </trans-unit><trans-unit id="143200822352285341" datatype="html">
+        <source>Available registers</source>
+        <target state="new">Available registers</target>
+      </trans-unit><trans-unit id="6561268155484935345" datatype="html">
+        <source>Selected registers *</source>
+        <target state="new">Selected registers *</target>
+      </trans-unit><trans-unit id="2514943931232118670" datatype="html">
+        <source>Selected registers</source>
+        <target state="new">Selected registers</target>
+      </trans-unit><trans-unit id="8055772548532730508" datatype="html">
+        <source>At least one register must be on the Selected registers list</source>
+        <target state="new">At least one register must be on the Selected registers list</target>
+      </trans-unit><trans-unit id="968743410791080665" datatype="html">
+        <source>Drop available registers here.</source>
+        <target state="new">Drop available registers here.</target>
       </trans-unit><trans-unit id="2712614620647663712" datatype="html">
         <source>Meter Unit(s) Display settings set successfuly.</source>
         <target state="new">Meter Unit(s) Display settings set successfuly.</target>
@@ -795,12 +807,9 @@
       </trans-unit><trans-unit id="2623300631578636432" datatype="html">
         <source>Changing the register will deselect all settings.</source>
         <target state="new">Changing the register will deselect all settings.</target>
-      </trans-unit><trans-unit id="4930506384627295710" datatype="html">
-        <source>Settings</source>
-        <target state="new">Settings</target>
-      </trans-unit><trans-unit id="3442383465393489602" datatype="html">
-        <source>item(s) selected</source>
-        <target state="new">item(s) selected</target>
+      </trans-unit><trans-unit id="6924306118604242670" datatype="html">
+        <source>Register group</source>
+        <target state="new">Register group</target>
       </trans-unit>
       <trans-unit id="5461424821674495162" datatype="html">
         <source>Show/hide filters</source>
