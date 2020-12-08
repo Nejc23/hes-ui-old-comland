@@ -1,5 +1,4 @@
 import { IActionRequestSetDisplaySettings } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { DisplayGroup, DisplayRegisterDefinition } from 'src/app/core/repository/interfaces/templating/display-group.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -9,7 +8,8 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import {
   RequestSetLimiter,
   LimiterDefinitions,
-  ResponseCommonRegisterGroup
+  ResponseCommonRegisterGroup,
+  RegisterDefinitions
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -34,12 +34,12 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   groupList$: Codelist<string>[];
   public selectedRowsCount: number;
 
-  displayGroups: DisplayGroup[];
+  displayGroups: ResponseCommonRegisterGroup[];
 
   selectedGroup: Codelist<string>;
 
-  registerListLeft: DisplayRegisterDefinition[];
-  registerListRight: DisplayRegisterDefinition[] = [];
+  registerListLeft: RegisterDefinitions[];
+  registerListRight: RegisterDefinitions[] = [];
 
   public gridApiLeft;
   public gridApiRight;
@@ -47,9 +47,11 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   noRegisterSelected = false;
 
   public modules: Module[] = AllModules;
-  requiredText = $localize`At least one register must be selected`;
+  requiredText = $localize`At least one register must be on the Selected registers list`;
   columnDefsLeft = [];
   columnDefsRight = [];
+
+  noRowsTemplate = '<span>' + $localize`Drop available registers here.` + '</span>';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,7 +86,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
         excludeIds: this.excludeIdsParam,
         type: '11'
       })
-      .subscribe((result: DisplayGroup[]) => {
+      .subscribe((result: ResponseCommonRegisterGroup[]) => {
         if (result && result.length > 0) {
           this.displayGroups = result;
           this.initGroupList();
@@ -101,7 +103,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
   initGroupList() {
     this.groupList$ = [];
-    this.displayGroups.map(dg => this.groupList$.push({ id: dg.displayGroupId, value: dg.name }));
+    this.displayGroups.map(dg => this.groupList$.push({ id: dg.groupId, value: dg.name }));
     this.selectedGroup = this.groupList$[0];
     this.setRegisterList();
   }
@@ -167,7 +169,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
       this.registerListRight = [];
       return;
     }
-    this.registerListLeft = this.displayGroups.find(d => d.displayGroupId === this.selectedGroup.id).displayRegisterDefinitions;
+    this.registerListLeft = this.displayGroups.find(d => d.groupId === this.selectedGroup.id).registerDefinitions;
     this.registerListRight = [];
 
     setTimeout(() => {
@@ -205,10 +207,10 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     const jsonData = event.dataTransfer.getData(isIE ? 'text' : 'application/json');
     const data = JSON.parse(jsonData);
 
-    const selectedRegDefId = data.displayRegisterDefinitionId;
+    const selectedRegDefId = data.registerDefinitionId;
 
-    this.registerListRight = this.registerListRight.filter(r => r.displayRegisterDefinitionId !== selectedRegDefId);
-    this.registerListLeft = this.registerListLeft.filter(r => r.displayRegisterDefinitionId !== selectedRegDefId);
+    this.registerListRight = this.registerListRight.filter(r => r.registerDefinitionId !== selectedRegDefId);
+    this.registerListLeft = this.registerListLeft.filter(r => r.registerDefinitionId !== selectedRegDefId);
 
     const y = event.layerY;
     const itemHeight = this.gridApiLeft.getSizesForCurrentTheme().rowHeight;

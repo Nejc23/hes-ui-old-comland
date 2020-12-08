@@ -70,9 +70,14 @@ export interface RequestCommonRegisterGroup {
   type: string;
 }
 export interface ResponseCommonRegisterGroup {
-  registerGroupId: string;
+  registerGroupId?: string;
   name: string;
   type: string;
+  obisCode?: string;
+  classId?: number;
+  attributeId?: number;
+  maxEntries?: number;
+  groupId?: string;
   registerDefinitions: RegisterDefinitions[];
 }
 export interface RegisterDefinitions {
@@ -83,7 +88,7 @@ export interface RegisterDefinitions {
   attributeId: number;
   type: string;
   dataType: string;
-  iecCode: string;
+  iecCode?: string;
 }
 
 // Set Monitor bulk action

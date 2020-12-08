@@ -426,4 +426,14 @@
       overflow: auto !important;
     }
   }
+
+  &.draggable {
+    .ag-icon-grip {
+      font-weight: 200;
+
+      &:before {
+          content: "\f047";
+      }
+    }
+  }
 }

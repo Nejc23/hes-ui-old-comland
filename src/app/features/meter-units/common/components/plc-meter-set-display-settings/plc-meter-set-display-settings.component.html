@@ -22,7 +22,7 @@
         <div class="form-row mt-1">
           <div class="col-6">
             <div (dragover)="gridDragOver($event)" (drop)="gridDrop($event,'left')">
-              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 350px; overflow:auto;" #agGrid
+              <ag-grid-angular class="ag-theme-epoint scrollable draggable" style="width: 98%; height: 350px; overflow:auto;" #agGrid
                 [rowData]="registerListLeft"
                 [columnDefs]="columnDefsLeft"
                 [modules]="modules"
@@ -39,7 +39,7 @@
           </div>
           <div class="col-6">
             <div (dragover)="gridDragOver($event)" (drop)="gridDrop($event,'right')">
-              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 350px; overflow:auto;" #agGrid2
+              <ag-grid-angular class="ag-theme-epoint scrollable draggable" style="width: 98%; height: 350px; overflow:auto;" #agGrid2
                 [rowData]="registerListRight"
                 [columnDefs]="columnDefsRight"
                 [modules]="modules"
@@ -47,6 +47,7 @@
                 (firstDataRendered)="onFirstDataRendered($event)"
                 suppressRowClickSelection="true"
                 [pagination]="false"
+                [overlayNoRowsTemplate]="noRowsTemplate"
               ></ag-grid-angular>
             </div>
           </div>
