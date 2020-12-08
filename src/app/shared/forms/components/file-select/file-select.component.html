@@ -9,6 +9,7 @@
     [multiple]="multiple"
     [accept]="acceptExtensions"
     (select)="onSelect($event)"
+    (remove)="onRemove($event)"
     [id]="controlId" [name]="controlId">
   </kendo-fileselect>
   <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small>

@@ -53,6 +53,10 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     });
   }
 
+  removed(event: any) {
+    this.data = '';
+  }
+
   fillData(): MeterUnitsTouConfigImport {
     const formData: MeterUnitsTouConfigImport = {
       timeOfUseName: this.form.get(this.nameProperty).value,
@@ -81,6 +85,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   resetForm() {
     this.files = [];
     this.form = this.createForm();
+    this.data = '';
   }
 
   // properties - START

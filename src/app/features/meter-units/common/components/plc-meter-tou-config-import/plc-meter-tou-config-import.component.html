@@ -12,6 +12,7 @@
           [textExplanation]="'can only select one XML file.'"
           [acceptExtensions]="acceptExtensions"
           (selectEvent)="selected($event)"
+          (removeEvent)="removed($event)"
           i18n-label></app-file-select>
   </div>
 </div>
@@ -23,7 +24,7 @@
 
 <div class="d-flex justify-content-end">
   <div class="btn-group dropdown">
-    <button type="submit" class="btn btn-primary" (click)="save()">
+    <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="!data">
       <span i18n>Import</span></button>
   </div>
 </div>

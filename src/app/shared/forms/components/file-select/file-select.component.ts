@@ -18,6 +18,7 @@ export class FileSelectComponent implements OnInit {
   @Input() allowedExtensions: string[] = [];
   @Input() acceptExtensions = '';
   @Output() selectEvent = new EventEmitter<any>();
+  @Output() removeEvent = new EventEmitter<any>();
 
   controlId: string;
   restrictions: FileRestrictions;
@@ -53,5 +54,9 @@ export class FileSelectComponent implements OnInit {
 
   onSelect(event) {
     this.selectEvent.emit(event);
+  }
+
+  onRemove(event) {
+    this.removeEvent.emit(event);
   }
 }
