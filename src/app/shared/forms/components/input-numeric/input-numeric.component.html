@@ -19,7 +19,7 @@
       [spinners]="showSpinners"
       (valueChange)="onChange($event)"
     ></kendo-numerictextbox>
-    <span class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
+    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
   </div>
 
   <!--Loop through errors-->

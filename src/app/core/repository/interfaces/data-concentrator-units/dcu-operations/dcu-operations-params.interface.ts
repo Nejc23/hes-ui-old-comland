@@ -1,3 +1,4 @@
+import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 export interface DcLastStatusResponse {
   requestId: string;
   tasks: DcLastStatusTask[];

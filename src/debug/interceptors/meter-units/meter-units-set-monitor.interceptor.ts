@@ -10,7 +10,11 @@ export class MeterUnitsSetMonitorInterceptor {
   constructor() {}
 
   static canInterceptMeterUnitGetCommonRegisterGroupsPost(request: HttpRequest<any>): boolean {
-    return new RegExp(`${enumMyGridLink.templating}${getCommonRegisterGroups}`).test(request.url) && request.method.endsWith('POST');
+    return (
+      new RegExp(`${enumMyGridLink.templating}${getCommonRegisterGroups}`).test(request.url) &&
+      request.method.endsWith('POST') &&
+      request.body.type !== '11'
+    );
   }
 
   static interceptMeterUnitGetCommonRegisterGroupsPost(): Observable<HttpEvent<any>> {
