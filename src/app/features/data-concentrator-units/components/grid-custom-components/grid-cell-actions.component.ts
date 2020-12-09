@@ -35,6 +35,8 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     switch (type) {
       case 'details':
         return $localize`Open details`;
+      case 'operation':
+        return $localize`Select operation`;
     }
     return '';
   }

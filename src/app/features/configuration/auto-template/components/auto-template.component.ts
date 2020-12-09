@@ -239,8 +239,12 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   onSelect(val) {
-    val.active = true;
-    this.activeElement = val;
+    if (val) {
+      val.active = true;
+      this.activeElement = val;
+    } else {
+      this.activeElement = null;
+    }
 
     this.rowData = [];
     this.rowDataJobs = [];
@@ -255,6 +259,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       // select first template
       if (this.templates && this.templates.length > 0) {
         this.onSelect(this.templates[0]);
+      } else {
+        this.onSelect(null);
       }
     });
 
@@ -288,7 +294,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   getData() {
     try {
-      if (this.activeElement.templateId.length > 0) {
+      if (this.activeElement?.templateId.length > 0) {
         this.serviceRepository.getAutoTemplateRulesForTemplateId(this.activeElement.templateId).subscribe(
           template => {
             this.rowData = template.autoTemplateRules;
