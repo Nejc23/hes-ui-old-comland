@@ -98,6 +98,8 @@ export class AuthService {
     localStorage.removeItem('auth_token');
     localStorage.removeItem('user_fullName');
     localStorage.removeItem('user_initials');
+    localStorage.removeItem('user_company');
+    localStorage.removeItem('user_email');
     localStorage.clear();
     return this.userManager.signoutRedirect();
   }
@@ -137,6 +139,9 @@ export class AuthService {
         'user_initials',
         authenticatedUser.profile.given_name.substr(0, 1) + authenticatedUser.profile.family_name.substr(0, 1)
       );
+
+      localStorage.setItem('user_company', authenticatedUser.profile.company_name);
+      localStorage.setItem('user_email', authenticatedUser.profile.name);
     }
     this.cookieService.set(config.authCookie, authenticatedUser.id_token, null, environment.cookiePath);
     this.cookieService.set(config.authType, 'Bearer', null, environment.cookiePath);
@@ -213,6 +218,14 @@ export class AuthService {
     return localStorage.getItem('user_initials');
   }
 
+  getUserCompany(): string {
+    return localStorage.getItem('user_company');
+  }
+
+  getUserEmail(): string {
+    return localStorage.getItem('user_email');
+  }
+
   getIsDevelop(): boolean {
     if (
       typeof localStorage.getItem('is_develop') !== 'undefined' &&
@@ -234,6 +247,8 @@ export class AuthService {
     localStorage.setItem('exp_token', authenticatedUser.expireDate);
     localStorage.setItem('refresh_token', authenticatedUser.refreshToken);
     localStorage.setItem('user_fullName', authenticatedUser.firstName + ' ' + authenticatedUser.lastName);
+    // localStorage.setItem('user_company', authenticatedUser.company);
+    localStorage.setItem('user_email', authenticatedUser.email);
     this.cookieService.set(config.authCookie, authenticatedUser.accessToken, null, environment.cookiePath);
     this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     this.cookieService.set(config.authType, authenticatedUser.tokenType, null, environment.cookiePath);

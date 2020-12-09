@@ -35,6 +35,28 @@
       }
     }
   }
+
+  .profile-dialog {
+    min-width:320px;
+
+    .row {
+      margin:0;
+    }
+
+    .rounded-circle {
+      background-color: $primary;
+      width: calc((15px * 2) + (28px * 1.5));
+      color: white;
+      font-size:28px;
+      padding-top:15px;
+      padding-bottom:15px;
+      margin:0;
+    }
+
+    .logout a span {
+      color: $info;
+    }
+  }
 }
 
 .navbar.navbar-dark {

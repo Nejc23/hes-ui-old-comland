@@ -21,9 +21,20 @@
       <small><strong>{{initials}}</strong></small>
     </a>
     <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownUser">
-      <h6 class="dropdown-header">{{userName}}</h6>
-      <!--<li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>-->
-      <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>
+      <div class="profile-dialog m-2">
+        <div class="row">
+          <div class="col-4 d-flex p-0 my-auto align-items-center justify-content-center">
+            <div class="rounded-circle text-center">{{initials}}</div>
+          </div>
+          <div class="col-8">
+            <h5  class="text-truncate mt-1" placement="left" [openDelay]="500" [ngbTooltip]="company" class="mt-1">{{company}}</h5>
+            <h2 class="text-truncate" placement="left" [openDelay]="500" [ngbTooltip]="userName">{{userName}}</h2>
+            <h5 class="text-truncate" placement="left" [openDelay]="500" [ngbTooltip]="email">{{email}}</h5>
+            <h5 class="logout mt-3"><a href="#" (click)="logout()"><span i18n>Sign out</span></a></h5>
+          </div>
+        </div>
+
+      </div>
     </ul>
   </li>
 </ul>

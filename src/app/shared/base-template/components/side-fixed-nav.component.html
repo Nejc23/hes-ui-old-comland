@@ -1,9 +1,9 @@
 <nav class="navbar navbar-dark bg-primary position-fixed">
   <div class="d-flex flex-column w-100 h-100">
-    <a class="navbar-icon mb-auto" href="#">     
+    <a class="navbar-icon mb-auto" href="#">
       <img [src]="getMenuMainLogoUrl()" style='height: 80%; width: 80%; object-fit: contain'>
     </a>
-    <div class="rotate d-flex align-items-center">     
+    <div class="rotate d-flex align-items-center">
       <img class="navbar-title display-5" [src]="getSmallLogoUrl()">
     </div>
     <div class="mt-auto">
@@ -28,8 +28,8 @@
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
           <h6 class="dropdown-header">{{userName}}</h6>
-          <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>                  
-          <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>        
+          <li role="presentation"><a class="dropdown-item" href="#" (click)="profile()"><span i18n>Profile</span></a></li>
+          <li role="presentation"><a class="dropdown-item" href="#" (click)="logout()"><span i18n>Log out</span></a></li>
         </ul>
       </div>
 
