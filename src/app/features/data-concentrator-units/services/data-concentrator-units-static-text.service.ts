@@ -22,7 +22,7 @@ export class DataConcentratorUnitsStaticTextService {
   }
 
   get noRecordsFound() {
-    return $localize`No records found. You need to adjust your search or filter parameters.`;
+    return $localize`No records found. You may need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {

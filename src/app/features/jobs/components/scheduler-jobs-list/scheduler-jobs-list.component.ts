@@ -139,14 +139,14 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   loadData(instance: SchedulerJobsListComponent, paramsRow: any) {
     instance.schedulerJobsService.getSchedulerJobsList(instance.requestModel).subscribe(data => {
       instance.gridApi.hideOverlay();
-      instance.totalCount = data.totalCount;
-      if ((data === undefined || data == null || data.totalCount === 0) && instance.noSearch()) {
+
+      if (data === undefined || data == null || data.totalCount === 0) {
+        instance.totalCount = 0;
         instance.noData = true;
-      } else if (data.totalCount === 0) {
         instance.gridApi.showNoRowsOverlay();
       }
 
-      paramsRow.successCallback(data.data, data.totalCount);
+      paramsRow.successCallback(data ? data.data : [], instance.totalCount);
 
       instance.gridApi.paginationGoToPage(instance.schedulerJobsListGridService.getSessionSettingsPageIndex());
       this.isGridLoaded = true;

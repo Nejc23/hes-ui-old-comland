@@ -1039,14 +1039,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
                 )
                 .subscribe(data => {
                   that.gridApi.hideOverlay();
-                  that.totalCount = data.totalCount;
-                  if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                    that.noData = true;
-                  } else if (data.totalCount === 0) {
+                  if (data === undefined || data == null || data.totalCount === 0) {
+                    // that.totalCount = 0;
                     that.gridApi.showNoRowsOverlay();
+                    that.noData = false;
+                  } else {
+                    that.totalCount = data.totalCount;
+                    // that.noData = false;
                   }
 
-                  paramsRow.successCallback(data.data, data.totalCount);
+                  paramsRow.successCallback(data ? data.data : [], that.totalCount);
 
                   that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
                   that.selectRows(that.gridApi);
@@ -1067,14 +1069,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
             .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
             .subscribe(data => {
               that.gridApi.hideOverlay();
-              that.totalCount = data.totalCount;
-              if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch() && that.noFilters()) {
-                that.noData = true;
-              } else if (data.totalCount === 0) {
+
+              if (data === undefined || data == null || data.totalCount === 0) {
+                that.totalCount = 0;
+                // that.noData = true;
                 that.gridApi.showNoRowsOverlay();
+              } else {
+                that.totalCount = data.totalCount;
+                // that.noData = false;
               }
 
-              paramsRow.successCallback(data.data, data.totalCount);
+              paramsRow.successCallback(data ? data.data : [], that.totalCount);
 
               that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
 

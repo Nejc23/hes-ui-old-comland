@@ -22,68 +22,79 @@
     <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hide}" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
       <i class="far fa-ellipsis-v"></i>
     </button>
-    <h3 class="mr-3 mb-0">{{activeElement.name}}</h3>
-  </div>
-  <div class="d-flex align-items-center mb-3 mt-0">
-      <h4 class="mr-3 mb-0" i18n>Rules</h4>
-      <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement.templateId.length == 0">
-        <i class="far fa-plus"></i> <span i18n>Add</span>
-      </button>
+    <h3 class="mr-3 mb-0">{{activeElement?.name}}</h3>
   </div>
 
-  <div class="content-body-scroll-templates">
-    <div>
-      <ag-grid-angular
-        class="ag-theme-epoint"
-        style="width: 100%; height: calc(98% - 25px);"
-        #agGrid
-        domLayout="autoHeight"
-        id="myGrid"
-        [modules]="modules"
-        [columnDefs]="columnDefs"
-        [defaultColDef]="defaultColDef"
-        [rowData]="rowData"
-        (firstDataRendered)="onFirstDataRendered($event)"
-        (gridReady)="onGridReady($event)"
-        [frameworkComponents]="frameworkComponents"
-        [context]="context"
-        [gridOptions]="cellRendererParams"
-        [getRowHeight]="getRowHeight"
-        (rowEditingStopped)='rowEditingStopped($event)'
-      ></ag-grid-angular>
+  <div *ngIf="activeElement">
+    <div class="d-flex align-items-center mb-3 mt-0">
+        <h4 class="mr-3 mb-0" i18n>Rules</h4>
+        <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement?.templateId?.length == 0">
+          <i class="far fa-plus"></i> <span i18n>Add</span>
+        </button>
     </div>
 
-    <div *ngIf="showJobSection()">
-      <div class="d-flex align-items-center mb-3 mt-5">
-        <div class="form-group mr-3">
-          <h4 class="mb-0" i18n>Jobs</h4>
-        </div>
-        <app-select-input i18n-label [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
-        <div class="form-group">
-          <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement.templateId.length == 0">
-            <i class="far fa-plus"></i> <span i18n>Add</span>
-          </button>
-        </div>
-      </div>
-
+    <div class="content-body-scroll-templates">
       <div>
         <ag-grid-angular
-              class="ag-theme-epoint"
-              style="width: 100%; height: calc(98% - 25px);"
-              #agGrid
-              domLayout="autoHeight"
-              id="myGridJobs"
-              [modules]="modules"
-              [columnDefs]="columnDefsJobs"
-              [defaultColDef]="defaultColDefJobs"
-              [rowData]="rowDataJobs"
-              (firstDataRendered)="onFirstDataRenderedJobs($event)"
-              (gridReady)="onGridReadyJobs($event)"
-              [frameworkComponents]="frameworkComponentsJobs"
-              [context]="context"
-              [gridOptions]="cellRendererParamsJobs"
-            ></ag-grid-angular>
+          class="ag-theme-epoint"
+          style="width: 100%; height: calc(98% - 25px);"
+          #agGrid
+          domLayout="autoHeight"
+          id="myGrid"
+          [modules]="modules"
+          [columnDefs]="columnDefs"
+          [defaultColDef]="defaultColDef"
+          [rowData]="rowData"
+          (firstDataRendered)="onFirstDataRendered($event)"
+          (gridReady)="onGridReady($event)"
+          [frameworkComponents]="frameworkComponents"
+          [context]="context"
+          [gridOptions]="cellRendererParams"
+          [getRowHeight]="getRowHeight"
+          (rowEditingStopped)='rowEditingStopped($event)'
+        ></ag-grid-angular>
       </div>
+
+      <div *ngIf="showJobSection()">
+        <div class="d-flex align-items-center mb-3 mt-5">
+          <div class="form-group mr-3">
+            <h4 class="mb-0" i18n>Jobs</h4>
+          </div>
+          <app-select-input i18n-label [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
+          <div class="form-group">
+            <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement?.templateId?.length == 0">
+              <i class="far fa-plus"></i> <span i18n>Add</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <ag-grid-angular
+                class="ag-theme-epoint"
+                style="width: 100%; height: calc(98% - 25px);"
+                #agGrid
+                domLayout="autoHeight"
+                id="myGridJobs"
+                [modules]="modules"
+                [columnDefs]="columnDefsJobs"
+                [defaultColDef]="defaultColDefJobs"
+                [rowData]="rowDataJobs"
+                (firstDataRendered)="onFirstDataRenderedJobs($event)"
+                (gridReady)="onGridReadyJobs($event)"
+                [frameworkComponents]="frameworkComponentsJobs"
+                [context]="context"
+                [gridOptions]="cellRendererParamsJobs"
+              ></ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card text-center border-0 mt-5" *ngIf="!activeElement">
+    <div class="card-header border-0 bg-transparent">
+      <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+    </div>
+    <div class="card-body">
+      <div class="display-4 font-weight-bold pb-2" i18n>There are no templates added in the system yet.</div>
     </div>
   </div>
   </div>
