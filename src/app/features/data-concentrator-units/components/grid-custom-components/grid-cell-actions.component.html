@@ -1,7 +1,7 @@
 <div class="d-flex row-actions justify-content-end" >
   <div class="btn-group-sm">
     <button
-        type="button" class="btn btn-primary m-0" (click)="toDetails()"><i class="far fa-eye"
+        type="button" class="btn btn-primary m-0" (click)="toDetails()" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('details')"><i class="far fa-eye"
         ></i></button>
   </div>
   <div dropdown class="dropdown-ag-grid btn-group-sm">
