@@ -184,6 +184,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         result => {
           if (result) {
+            this.edit = false;
+            this.getData();
           }
         },
         errResult => {
