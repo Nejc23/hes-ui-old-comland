@@ -13,6 +13,8 @@ import { languages } from 'src/environments/config';
 export class TopFixedNavComponent implements OnInit {
   userName = '';
   initials = '';
+  company = '';
+  email = '';
 
   languages$: Codelist<string>[];
   language = 'English';
@@ -24,6 +26,8 @@ export class TopFixedNavComponent implements OnInit {
 
     this.userName = this.authService.getLoggedUser();
     this.initials = this.authService.getUserInitials();
+    this.company = this.authService.getUserCompany();
+    this.email = this.authService.getUserEmail();
   }
 
   getSmallLogoUrl() {
