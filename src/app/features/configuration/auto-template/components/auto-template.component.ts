@@ -100,14 +100,16 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.context = { forma: this.form, componentParent: this };
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = params => {
-      const editingCells = this.gridApi.getEditingCells();
+      // const editingCells = this.gridApi.getEditingCells();
 
-      if (editingCells.length > 0) {
-        if (editingCells[0].rowIndex === params.node.rowIndex) {
-          return 65;
-        }
-      }
-      return 35;
+      // console.log('editingCells lenght', editingCells.length);
+      // if (editingCells.length > 0) {
+      //   if (editingCells[0].rowIndex === params.node.rowIndex) {
+      //     alert('row height 65');
+      //     return 65;
+      //   }
+      // }
+      return 38;
     };
     this.columnDefs = this.service.setGridDefaultColumns();
     this.columnDefsJobs = this.service.setGridDefaultColumnsJobs();
@@ -137,6 +139,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         flex: 1,
         editable: true
       },
+      rowHeight: 50,
 
       getDetailRowData: params => {
         params.successCallback(params.data.rules);
@@ -507,7 +510,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
         rowIndex,
         colKey: 'propertyName'
       });
-      let found = true;
+
+      let found = false;
       this.rowData.forEach(element => {
         if (!found) {
           // const rule = element.find(x => x.autoTemplateRuleId === id);
