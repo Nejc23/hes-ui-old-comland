@@ -163,11 +163,27 @@
   .ag-row {
     font-size: $font-size-base;
     z-index: 1;
+
+    &.ag-row-editing {
+      .ag-cell-inline-editing {
+        border: none;
+        box-shadow: none;
+
+        .form-control {
+          border:none;
+          border-bottom:1px solid $border-color;
+        }
+      }
+    }
   }
 
   .actions-button-cell {
     .btn-group-sm {
       display: none;
+    }
+
+    &.pinned {
+      display: block;
     }
   }
 
