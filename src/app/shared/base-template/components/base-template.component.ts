@@ -15,8 +15,9 @@ import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { brand } from 'src/environments/brand/default/brand';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SidebarToggleService } from './services/sidebar.service';
+import { SidebarSessionStoreService } from './services/sidbebar-session-store.service';
 
 @Component({
   selector: 'app-base-template',
@@ -38,7 +39,7 @@ export class BaseTemplateComponent implements OnInit {
   public sidebarConfigurationItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
   public submenu = 0;
-  public organisation = $localize`no organisation`;
+  // public organisation = $localize`no organisation`;
 
   // languages$: Codelist<string>[];
   companies$: Observable<Codelist<number>[]>;
@@ -58,7 +59,9 @@ export class BaseTemplateComponent implements OnInit {
     //  private codelistAuth: CodelistRepositoryService,
     private auth: AuthService,
     private acitavedRouter: ActivatedRoute,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private route: Router,
+    private sessionService: SidebarSessionStoreService
   ) {
     this.app = {
       layout: {
@@ -153,9 +156,9 @@ export class BaseTemplateComponent implements OnInit {
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
 
-    if (this.auth.user.profile != null && this.auth.user.profile.company_name.length > 0) {
-      this.organisation = this.auth.user.profile.company_name;
-    }
+    // if (this.auth.user.profile != null && this.auth.user.profile.company_name.length > 0) {
+    //   this.organisation = this.auth.user.profile.company_name;
+    // }
     /*this.codelistAuth.companyCodelist().subscribe(value => {
       this.companies$ = of(value);
       if (value.length > 1 && this.auth.user && this.auth.user.profile && this.auth.user.profile.company_name) {
@@ -212,4 +215,13 @@ export class BaseTemplateComponent implements OnInit {
   /*  get companyIdProperty() {
     return 'companyId';
   }*/
+
+  isRouteActive(link: string) {
+    return this.route.url.startsWith(link);
+  }
+
+  isMenuDropOpened(item: SidebarItem) {
+    const isOpened = this.sessionService.getSidebarLayout(item.title);
+    return isOpened === 'opened';
+  }
 }

@@ -43,11 +43,23 @@
 
       </div>
       <!-- Sidebar Toggler (Sidebar) -->
-
+<!--
       <div @navItemsTrigger class="mb-2 px-3 py-2" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
         <i class="far fa-building mr-2"></i>
         <strong>{{organisation}}</strong>
-      </div>
+      </div> -->
+
+      <ul class="navbar-nav collapsed" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
+        <li *ngFor="let item of sidebarItems; let first = first"
+          class="nav-item" routerLinkActive="active"
+          [ngClass]="{'active': isRouteActive(item.routeLink)}">
+          <a class="nav-link pl-0 pr-0 text-center"><i class="{{item.icon}}"></i></a>
+
+          <div *ngIf="item.hasChildren && (isMenuDropOpened(item) || isRouteActive(item.routeLink))">
+            <div *ngFor="let child of item.children;" class="nav-link ng-star-inserted"></div>
+          </div>
+        </li>
+      </ul>
 
       <ul @navItemsTrigger class="navbar-nav" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
         <app-sidebar [items]="sidebarItems"></app-sidebar>

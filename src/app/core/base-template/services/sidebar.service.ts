@@ -20,23 +20,27 @@ export class SidebarService {
         title: $localize`Data Concentrator Units`,
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
+        icon: 'far fa-broadcast-tower',
         children: []
       },
       {
         title: $localize`Meter Units`,
         routeLink: '/meterUnits/1', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
+        icon: 'far fa-sensor',
         children: []
       },
       {
         title: $localize`Jobs`,
         routeLink: '/schedulerJobs',
         hasChildren: false,
+        icon: 'far fa-tasks',
         children: []
       },
       {
         title: $localize`Configuration`,
         routeLink: '/configuration',
+        icon: 'far fa-cogs',
         hasChildren: true,
         children: [
           {
