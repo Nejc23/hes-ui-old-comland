@@ -73,7 +73,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
-  public hideFilter = false;
+  public hideFilter = true;
   public filterCount = 0;
 
   // ---------------------- ag-grid ------------------
@@ -652,8 +652,12 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   toggleFilter() {
-    this.hideFilter = !this.hideFilter;
+    if (this.areSettingsLoaded) {
+      this.hideFilter = !this.hideFilter;
+      this.saveSettingsStore(this.requestModel.sortModel);
+    }
   }
+
   // functions for operations called from grid
   // ******************************************************************************** */
   onSynchronizeTime(selectedGuid: string) {
@@ -863,6 +867,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.setGridPageSize();
       }
 
+      this.hideFilter = settings.hideFilter;
+
       this.settingsStoreEmitterService.settingsLoaded();
     }
   }
@@ -875,7 +881,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       searchText: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText(),
       searchWildcards: this.dataConcentratorUnitsGridService.getSessionSettingsSearchedWildcards(),
       visibleColumns: this.getAllDisplayedColumnsNames(),
-      pageSize: this.selectedPageSize
+      pageSize: this.selectedPageSize,
+      hideFilter: this.hideFilter
     };
 
     if (
@@ -886,7 +893,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       store.searchText !== this.dcuUnitsGridLayoutStore.searchText ||
       store.searchWildcards !== this.dcuUnitsGridLayoutStore.searchWildcards ||
       JSON.stringify(store.visibleColumns) !== JSON.stringify(this.dcuUnitsGridLayoutStore.visibleColumns) ||
-      JSON.stringify(store.pageSize) !== JSON.stringify(this.dcuUnitsGridLayoutStore.pageSize)
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.dcuUnitsGridLayoutStore.pageSize) ||
+      store.hideFilter !== this.dcuUnitsGridLayoutStore.hideFilter
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey, store);
       this.dcuUnitsGridLayoutStore = store;

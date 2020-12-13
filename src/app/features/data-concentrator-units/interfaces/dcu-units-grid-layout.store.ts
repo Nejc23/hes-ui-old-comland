@@ -10,4 +10,5 @@ export interface DcuUnitsGridLayoutStore {
   searchWildcards: boolean;
   visibleColumns: string[];
   pageSize: Codelist<number>;
+  hideFilter: boolean;
 }
