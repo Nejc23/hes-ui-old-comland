@@ -63,7 +63,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   noData = false;
 
   meterTypes$: Codelist<number>[] = [];
-  public hideFilter = false;
+  public hideFilter = true;
 
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -977,7 +977,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   toggleFilter() {
-    this.hideFilter = !this.hideFilter;
+    if (this.areSettingsLoaded) {
+      this.hideFilter = !this.hideFilter;
+      this.saveSettingsStore(this.requestModel.sortModel);
+    }
   }
 
   filterChanged() {
@@ -1159,6 +1162,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.setGridPageSize();
       }
 
+      this.hideFilter = settings.hideFilter;
+
       this.settingsStoreEmitterService.settingsLoaded();
     }
   }
@@ -1171,7 +1176,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       searchText: this.meterUnitsTypeGridService.getSessionSettingsSearchedText(),
       searchWildcards: this.meterUnitsTypeGridService.getSessionSettingsSearchedWildcards(),
       visibleColumns: this.getAllDisplayedColumnsNames(),
-      pageSize: this.selectedPageSize
+      pageSize: this.selectedPageSize,
+      hideFilter: this.hideFilter
     };
 
     if (
@@ -1182,7 +1188,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       store.searchText !== this.meterUnitsTypeGridLayoutStore.searchText ||
       store.searchWildcards !== this.meterUnitsTypeGridLayoutStore.searchWildcards ||
       JSON.stringify(store.visibleColumns) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.visibleColumns) ||
-      JSON.stringify(store.pageSize) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.pageSize)
+      JSON.stringify(store.pageSize) !== JSON.stringify(this.meterUnitsTypeGridLayoutStore.pageSize) ||
+      store.hideFilter !== this.meterUnitsTypeGridLayoutStore.hideFilter
     ) {
       this.settingsStoreService.saveCurrentUserSettings(this.meterUnitsTypeGridLayoutStoreKey, store);
       this.meterUnitsTypeGridLayoutStore = store;
