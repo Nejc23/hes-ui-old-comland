@@ -401,6 +401,11 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.clearFF:
         response = this.service.clearFF(params);
         operationName = $localize`Activate Clear FF`;
+        break;
+      case MeterUnitsTypeEnum.clearAlarms:
+        response = this.service.clearAlarms(params);
+        operationName = $localize`Clear alarms`;
+        break;
     }
     // component.btnConfirmText = operationName;
 

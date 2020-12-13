@@ -259,6 +259,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get actionMUSetDisplaySettings() {
     return ActionEnumerator.MUSetDisplaySettings;
   }
+  get actionMUClearAlarms() {
+    return ActionEnumerator.MUClearAlarms;
+  }
 
   // set form title by selected meter unit type
   private setTitle(id: number) {
@@ -836,6 +839,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
 
     this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  // on clear alarms
+  onClearAlarms(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.clearAlarms,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
   }
   // <-- end Operations action click (bulk or selected row)
 

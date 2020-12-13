@@ -13,5 +13,6 @@ export enum ActionEnumerator {
   MUCiiState = 'Meter-Units-CiiState',
   MUCiiActivate = 'Meter-Units-CiiActivate',
   MUCiiDeactivate = 'Meter-Units-CiiDeactivate',
-  MUSetDisplaySettings = 'Meter-Units-SetDisplaySettings'
+  MUSetDisplaySettings = 'Meter-Units-SetDisplaySettings',
+  MUClearAlarms = 'Meter-Units-ClearAlarms'
 }

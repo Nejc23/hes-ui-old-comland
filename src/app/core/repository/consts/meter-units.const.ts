@@ -26,5 +26,7 @@ export const device = `${basePath}/device`;
 export const updateMeterUnit = `${basePath}/device`;
 // export const importDeviceKeys = `${basePath}/crypto/import`;
 
+export const onDemandClearAlarms = '/on-demand/clear-alarms';
+
 export const basePathDcOperations = '/api/concentrator-management';
 export const triggerSetDisplaySettings = `${basePathDcOperations}/trigger-set-display-settings`;
