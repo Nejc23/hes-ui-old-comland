@@ -289,11 +289,14 @@
       <trans-unit id="3229595422546554334" datatype="html">
         <source>Jobs</source>
         <target>Jobs</target>
+      </trans-unit><trans-unit id="3154923008995368575" datatype="html">
+        <source>No records found. You may need to adjust your search or filter parameters.</source>
+        <target state="new">No records found. You may need to adjust your search or filter parameters.</target>
+      </trans-unit><trans-unit id="6854084609654457539" datatype="html">
+        <source>No Jobs have been added yet.</source>
+        <target state="new">No Jobs have been added yet.</target>
       </trans-unit>
-      <trans-unit id="3192723481488641054" datatype="html">
-        <source>No records found. You need to adjust your search or filter parameters.</source>
-        <target>No records found. You need to adjust your search or filter parameters.</target>
-      </trans-unit>
+      
       <trans-unit id="6634220622670193233" datatype="html">
         <source>Next planned read</source>
         <target>Next planned read</target>
@@ -661,6 +664,9 @@
       <trans-unit id="4645345687322304891" datatype="html">
         <source>Rules</source>
         <target>Rules</target>
+      </trans-unit><trans-unit id="7345687016977852692" datatype="html">
+        <source>There are no templates added in the system yet.</source>
+        <target state="new">There are no templates added in the system yet.</target>
       </trans-unit>
       <trans-unit id="8863785805204424868" datatype="html">
         <source>Templates list</source>
@@ -1085,10 +1091,7 @@
         <source>Limiter</source>
         <target>Limiter</target>
       </trans-unit>
-      <trans-unit id="6812930637022637485" datatype="html">
-        <source>Display</source>
-        <target>Display</target>
-      </trans-unit>
+      
       <trans-unit id="8058994642732449354" datatype="html">
         <source>Monitor</source>
         <target>Monitor</target>
@@ -1864,15 +1867,12 @@
         <target>Decrease value</target>
         <note priority="1" from="description">The title for the **Decrement** button in the NumericTextBox</note>
         <note priority="1" from="meaning">kendo.numerictextbox.decrement</note>
+      </trans-unit><trans-unit id="2949848596707725099" datatype="html">
+        <source>Sign out</source>
+        <target state="new">Sign out</target>
       </trans-unit>
-      <trans-unit id="7507948636555938109" datatype="html">
-        <source>Log out</source>
-        <target>Log out</target>
-      </trans-unit>
-      <trans-unit id="6505575992312898460" datatype="html">
-        <source>no organisation</source>
-        <target>no organisation</target>
-      </trans-unit>
+      
+      
       <trans-unit id="6307372410464815488" datatype="html">
         <source>Pin/collapse menu</source>
         <target>Pin/collapse menu</target>
