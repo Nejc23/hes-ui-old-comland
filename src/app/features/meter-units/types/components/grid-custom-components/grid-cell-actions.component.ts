@@ -100,6 +100,10 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     this.params.context.componentParent.onSetDisplaySettings(this.params.data.deviceId);
   }
 
+  onClearAlarms() {
+    this.params.context.componentParent.onClearAlarms(this.params.data.deviceId);
+  }
+
   // set tooltip text
   setToolTip(type: string) {
     switch (type) {

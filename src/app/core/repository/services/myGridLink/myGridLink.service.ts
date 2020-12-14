@@ -63,7 +63,7 @@ import {
   IActionResponseSetDisconnectorMode,
   IActionResponseTOUData
 } from '../../interfaces/myGridLink/action-prams.interface';
-import { triggerSetDisplaySettings } from '../../consts/meter-units.const';
+import { onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
 
 @Injectable({
   providedIn: 'root'
@@ -285,5 +285,13 @@ export class MyGridLinkService {
 
   setDisplaySettingsRequest(request: IActionRequestSetDisplaySettings): HttpRequest<any> {
     return new HttpRequest('POST', `${triggerSetDisplaySettings}`, request);
+  }
+
+  clearAlarms(param: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.clearAlarmsRequest(param));
+  }
+
+  clearAlarmsRequest(param: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearAlarms}`, param);
   }
 }

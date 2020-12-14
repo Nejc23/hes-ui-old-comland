@@ -253,6 +253,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUSetDisplaySettings;
   }
 
+  get actionMUClearAlarms() {
+    return ActionEnumerator.MUClearAlarms;
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
@@ -443,5 +447,9 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.onSetDisplaySettings(paramsOld, params, 1);
   }
 
+  onClearAlarms() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearAlarms, params, 1);
+  }
   // <-- end Operations action click (bulk or selected row)
 }
