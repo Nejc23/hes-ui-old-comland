@@ -1,3 +1,4 @@
+import { PlcMeterSetLimiterService } from './../../common/services/plc-meter-set-limiter.service';
 import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -139,7 +140,7 @@ export class MeterUnitsPlcActionsService {
   }
 
   onSetLimiter(params: RequestFilterParams, selectedRowsCount: number) {
-    const modalRef = this.modalService.open(PlcMeterSetDisplaySettingsComponent);
+    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
