@@ -1,3 +1,6 @@
+import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { capitalize } from 'lodash';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { addNewScheduleDevice, schedulerJobsListByJobId } from './../../consts/jobs.const';
 import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 import { Injectable } from '@angular/core';
@@ -19,12 +22,21 @@ import { v4 as uuidv4 } from 'uuid';
 export class JobsService {
   constructor(private repository: RepositoryService) {}
 
-  getSchedulerJobsList(param: GridRequestParams): Observable<GridResponse<SchedulerJobsList>> {
-    param.requestId = param.requestId === null ? uuidv4() : param.requestId;
+  getSchedulerJobsListForm(
+    param: GridRequestParams,
+    pageIndex: number,
+    visibleColumnNames: string[]
+  ): Observable<GridResponse<SchedulerJobsList>> {
+    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames);
+    return this.getSchedulerJobsList(actionRequestParams);
+  }
+
+  getSchedulerJobsList(param: IActionRequestParams): Observable<GridResponse<SchedulerJobsList>> {
+    // param.requestId = param.requestId === null ? uuidv4() : param.requestId;
     return this.repository.makeRequest(this.getSchedulerJobsListRequest(param));
   }
 
-  getSchedulerJobsListRequest(param: GridRequestParams): HttpRequest<any> {
+  getSchedulerJobsListRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', schedulerJobsList, param);
   }
 
@@ -144,5 +156,78 @@ export class JobsService {
 
   addNewScheduleDeviceRequest(payload: ScheduleDevice): HttpRequest<ScheduleDevice> {
     return new HttpRequest('POST', addNewScheduleDevice, payload as any);
+  }
+
+  getActionRequestParams(param: GridRequestParams, pageIndex: number, allVisibleColumns: string[]): IActionRequestParams {
+    const pageSize = param.endRow - param.startRow;
+    const requestParam: IActionRequestParams = {
+      pageSize,
+      pageNumber: pageIndex + 1,
+      textSearch: {
+        value: '',
+        propNames: [],
+        useWildcards: false
+      },
+      sort: []
+    };
+
+    if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
+      requestParam.textSearch.value = param.searchModel[0].value;
+      requestParam.textSearch.propNames = allVisibleColumns;
+      requestParam.textSearch.useWildcards = param.searchModel[0].useWildcards;
+    }
+
+    // // create filter object
+    // if (param.filterModel) {
+    //   requestParam.filter = [];
+    //   if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
+    //     param.filterModel.statuses.map(row =>
+    //       requestParam.filter.push({
+    //         propName: capitalize(gridSysNameColumnsEnum.status),
+    //         propValue: row.id.toString(),
+    //         filterOperation: filterOperationEnum.equal
+    //       })
+    //     );
+    //   }
+    //   if (param.filterModel.types && param.filterModel.types.length > 0) {
+    //     param.filterModel.types.map(row =>
+    //       requestParam.filter.push({
+    //         propName: capitalize(gridSysNameColumnsEnum.type),
+    //         propValue: row.toString(),
+    //         filterOperation: filterOperationEnum.equal
+    //       })
+    //     );
+    //   }
+    //   if (param.filterModel.tags && param.filterModel.tags.length > 0) {
+    //     param.filterModel.tags.map(row =>
+    //       requestParam.filter.push({
+    //         propName: capitalize(gridSysNameColumnsEnum.tags),
+    //         propValue: row.id.toString(),
+    //         filterOperation: filterOperationEnum.contains
+    //       })
+    //     );
+    //   }
+    //   if (param.filterModel.vendors && param.filterModel.vendors.length > 0) {
+    //     param.filterModel.vendors.map(row =>
+    //       requestParam.filter.push({
+    //         propName: capitalize(gridSysNameColumnsEnum.vendor),
+    //         propValue: row.id.toString(),
+    //         filterOperation: filterOperationEnum.equal
+    //       })
+    //     );
+    //   }
+
+    //   if (param.sortModel && param.sortModel.length > 0) {
+    //     param.sortModel.map(row =>
+    //       requestParam.sort.push({
+    //         propName: capitalize(row.colId),
+    //         index: 0,
+    //         sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+    //       })
+    //     );
+    //   }
+    // }
+
+    return requestParam;
   }
 }

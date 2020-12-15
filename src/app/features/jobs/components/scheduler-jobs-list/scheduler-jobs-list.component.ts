@@ -137,22 +137,33 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   }
 
   loadData(instance: SchedulerJobsListComponent, paramsRow: any) {
-    instance.schedulerJobsService.getSchedulerJobsList(instance.requestModel).subscribe(data => {
-      instance.gridApi.hideOverlay();
+    const displayedColumnsNames = instance.getAllDisplayedColumnsNames();
 
-      if (data === undefined || data == null || data.totalCount === 0) {
-        instance.totalCount = 0;
-        instance.noData = true;
-        instance.gridApi.showNoRowsOverlay();
-      }
+    instance.schedulerJobsService
+      .getSchedulerJobsListForm(
+        instance.requestModel,
+        instance.schedulerJobsListGridService.getSessionSettingsPageIndex(),
+        displayedColumnsNames
+      )
+      .subscribe(data => {
+        instance.gridApi.hideOverlay();
 
-      paramsRow.successCallback(data ? data.data : [], instance.totalCount);
+        if (data === undefined || data == null || data.totalCount === 0) {
+          instance.totalCount = 0;
+          instance.noData = true;
+          instance.gridApi.showNoRowsOverlay();
+        } else {
+          instance.totalCount = data.totalCount;
+          instance.noData = false;
+        }
 
-      instance.gridApi.paginationGoToPage(instance.schedulerJobsListGridService.getSessionSettingsPageIndex());
-      this.isGridLoaded = true;
+        paramsRow.successCallback(data ? data.data : [], instance.totalCount);
 
-      this.resizeColumns();
-    });
+        instance.gridApi.paginationGoToPage(instance.schedulerJobsListGridService.getSessionSettingsPageIndex());
+        this.isGridLoaded = true;
+
+        this.resizeColumns();
+      });
   }
 
   onGridReady(params) {
@@ -498,5 +509,13 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  getAllDisplayedColumnsNames(): string[] {
+    if (this.gridColumnApi) {
+      const columns = this.gridColumnApi.getAllDisplayedColumns();
+      return columns.map(c => c.colId);
+    }
+    return;
   }
 }
