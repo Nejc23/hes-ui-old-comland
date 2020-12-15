@@ -1,3 +1,4 @@
+import { GridUtils } from 'src/app/features/global/grid.utils';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
@@ -473,24 +474,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   }
 
   resizeColumns() {
-    this.gridColumnApi.autoSizeAllColumns(false);
-
-    const grid: any = this.gridOptions.api;
-    const panel = grid.gridPanel;
-
-    const availableWidth = panel.eBodyViewport.clientWidth;
-    const columns = panel.columnController.getAllDisplayedColumns();
-    const usedWidth = panel.columnController.getWidthOfColsInList(columns);
-
-    if (usedWidth < availableWidth) {
-      // expand only the last visible nonpinned column
-      const columnStates = this.gridColumnApi.getColumnState();
-      const lastVisibleColumnIndex = columnStates.map(c => !c.hide && !c.pinned && c.colId !== 'id').lastIndexOf(true);
-      if (lastVisibleColumnIndex > -1) {
-        columnStates[lastVisibleColumnIndex].width = columnStates[lastVisibleColumnIndex].width + (availableWidth - usedWidth);
-        this.gridColumnApi.applyColumnState({ state: columnStates });
-      }
-    }
+    GridUtils.resizeColumns(this.gridColumnApi, this.gridOptions);
   }
 
   toggleWildcards($event: boolean) {
