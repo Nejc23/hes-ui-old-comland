@@ -6,6 +6,7 @@ import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/sched
 import { enumSearchFilterOperators } from 'src/environments/config';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,24 +30,33 @@ describe('Pact consumer test', () => {
   });
 
   describe('Scheduler jobs list get request', () => {
-    const requestBody: GridRequestParams = {
-      requestId: '06130d62-f67c-41a2-98f7-ef521db2cee6',
-      startRow: 0,
-      endRow: 9,
-      searchModel: [
+    const requestBody: IActionRequestParams = {
+      pageSize: 20,
+      pageNumber: 1,
+      filter: [
         {
-          colId: 'all',
-          type: enumSearchFilterOperators.like,
-          value: 'search text',
-          useWildcards: true
+          propName: 'Status',
+          propValue: '2',
+          filterOperation: 'Equal'
+        },
+        {
+          propName: 'Firmware',
+          propValue: '2',
+          filterOperation: 'Contains'
         }
       ],
-      sortModel: [
+      sort: [
         {
-          colId: 'type',
-          sort: 'desc'
+          index: 0,
+          propName: 'Firmware',
+          sortOrder: 'Ascending'
         }
-      ]
+      ],
+      textSearch: {
+        value: 'search text',
+        propNames: ['status'],
+        useWildcards: true
+      }
     };
 
     const data: SchedulerJobsList[] = [
