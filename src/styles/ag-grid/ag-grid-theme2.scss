@@ -451,4 +451,37 @@
       }
     }
   }
+
+    /* Hide right header and spacer */
+  .ag-pinned-right-header,
+  .ag-horizontal-right-spacer {
+    width: 0 !important;
+    min-width: 0 !important;
+    border-left: none;
+  }
+
+  /* Add absolute position so that action buttons column will appear on top of other columns.
+    pointer-events: none to pass on mouse events to behind columns */
+  .ag-pinned-right-cols-container {
+    position: absolute !important;
+    right: 0;
+    pointer-events: none;
+  }
+  /* Reset pointer-events so that click can happen on action buttons */
+  .ag-pinned-right-cols-container * {
+    pointer-events: initial;
+  }
+
+  /* Hide border of right-cols-container */
+  .ag-pinned-right-cols-container .ag-cell {
+    border: none !important;
+  }
+
+  /* Show action buttons only for the row that is being hovered.
+    For rows which are not being hovered, hide them by setting their width and padding to 0. */
+  .ag-pinned-right-cols-container .ag-row:not(.ag-row-hover),
+  .ag-pinned-right-cols-container .ag-row:not(.ag-row-hover) .ag-cell {
+    width: 0 !important;
+    padding: 0 !important;
+  }
 }

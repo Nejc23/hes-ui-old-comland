@@ -111,7 +111,8 @@ export class SchedulerJobsListGridService {
         cellRenderer: 'gridCellEditActionsComponent',
         headerName: '',
         cellClass: 'actions-button-cell',
-        resizable: false
+        resizable: false,
+        pinned: 'right'
       }
     ];
   }

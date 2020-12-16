@@ -47,6 +47,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { GridUtils } from '../../global/grid.utils';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -710,24 +711,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   resizeColumns() {
-    this.gridColumnApi.autoSizeAllColumns(false);
-
-    const grid: any = this.gridOptions.api;
-    const panel = grid.gridPanel;
-
-    const availableWidth = panel.eBodyViewport.clientWidth;
-    const columns = panel.columnController.getAllDisplayedColumns();
-    const usedWidth = panel.columnController.getWidthOfColsInList(columns);
-
-    if (usedWidth < availableWidth) {
-      // expand only the last visible nonpinned column
-      const columnStates = this.gridColumnApi.getColumnState();
-      const lastVisibleColumnIndex = columnStates.map(c => !c.hide && !c.pinned).lastIndexOf(true);
-      if (lastVisibleColumnIndex > -1) {
-        columnStates[lastVisibleColumnIndex].width = columnStates[lastVisibleColumnIndex].width + (availableWidth - usedWidth);
-        this.gridColumnApi.applyColumnState({ state: columnStates });
-      }
-    }
+    GridUtils.resizeColumns(this.gridColumnApi, this.gridOptions);
   }
 
   setGridDataSource() {
