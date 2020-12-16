@@ -5,13 +5,23 @@
       <trans-unit id="ngb.toast.close-aria" datatype="html">
         <source>Close</source>
         <target>Fermer</target>
+      </trans-unit><trans-unit id="2690656529626907484" datatype="html">
+        <source>NO DATA FOUND</source>
+        <target state="new">NO DATA FOUND</target>
+        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
+        <note priority="1" from="meaning">kendo.autocomplete.noDataText</note>
+      </trans-unit><trans-unit id="4821453594854847070" datatype="html">
+        <source>clear</source>
+        <target state="new">clear</target>
+        <note priority="1" from="description">The title of the clear button</note>
+        <note priority="1" from="meaning">kendo.autocomplete.clearTitle</note>
       </trans-unit>
       <trans-unit id="8436180309712376162" datatype="html">
         <source>Overview - Concentrators</source>
         <target>Aperçu - Concentrateurs</target>
       </trans-unit>
       <trans-unit id="6170762843185284641" datatype="html">
-        <source>Concentrator for</source>
+        <source>Concentrator units for</source>
         <target>Unités de concentrateurs pour </target>
       </trans-unit>
       <trans-unit id="6811901802533648897" datatype="html">
@@ -39,7 +49,7 @@
         <target>statut</target>
       </trans-unit>
       <trans-unit id="7652014282800283826" datatype="html">
-        <source>manufacturer</source>
+        <source>vendor</source>
         <target>vendeur</target>
       </trans-unit>
       <trans-unit id="6402703264596649214" datatype="html">
@@ -55,7 +65,7 @@
         <target>firmware</target>
       </trans-unit>
       <trans-unit id="2572210680699877416" datatype="html">
-        <source>show M-Bus</source>
+        <source>show child MBus</source>
         <target>affiche le petit MBus</target>
       </trans-unit>
       <trans-unit id="795604053640683941" datatype="html">
@@ -64,14 +74,14 @@
       </trans-unit>
       <trans-unit id="3367617058643767678" datatype="html">
         <source>show only ready for activation</source>
-        <target>affiche seulement prêt pour l&apos;activation </target>
+        <target>affiche seulement prêt pour l'activation </target>
       </trans-unit>
       <trans-unit id="5359201968934397674" datatype="html">
-        <source>Overview - G3-PLC Meters</source>
+        <source>Overview - Meter Units</source>
         <target>Aperçu - Unités de compteurs</target>
       </trans-unit>
       <trans-unit id="3119296281460532422" datatype="html">
-        <source>Meter for</source>
+        <source>Meter Units for</source>
         <target>Unités de compteurs pour </target>
       </trans-unit>
       <trans-unit id="7867994676734078400" datatype="html">
@@ -80,14 +90,14 @@
       </trans-unit>
       <trans-unit id="4526135070809592108" datatype="html">
         <source>Range is not correct</source>
-        <target>La gamme n&apos;est pas correcte </target>
+        <target>La gamme n'est pas correcte </target>
       </trans-unit>
       <trans-unit id="5611592591303869712" datatype="html">
-        <source>State</source>
+        <source>Status</source>
         <target>Statut</target>
       </trans-unit>
       <trans-unit id="158816374076721379" datatype="html">
-        <source>Manufacturer</source>
+        <source>Vendor</source>
         <target>Vendeur</target>
       </trans-unit>
       <trans-unit id="147289373353675866" datatype="html">
@@ -95,20 +105,20 @@
         <target>Firmware</target>
       </trans-unit>
       <trans-unit id="563763657621318504" datatype="html">
-        <source>Show only meters with M-Bus devices</source>
-        <target>Affiche seulement les unités de compteurs avec l&apos;information du petit (MBus)</target>
+        <source>Show only Meter units with information of child (MBus)</source>
+        <target>Affiche seulement les unités de compteurs avec l'information du petit (MBus)</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
         <source>Tag</source>
         <target>Tag</target>
       </trans-unit>
       <trans-unit id="5292172816313390601" datatype="html">
-        <source>Show meters without template</source>
+        <source>Show Meter Units without template</source>
         <target>Affiche les unités de compteurs sans les modèles </target>
       </trans-unit>
       <trans-unit id="4648310973208555307" datatype="html">
-        <source>Show meters with FW image ready for activation</source>
-        <target>Affiche seulement l&apos;image prêt pour l&apos;activation </target>
+        <source>Show only image ready for activation</source>
+        <target>Affiche seulement l'image prêt pour l'activation </target>
       </trans-unit>
       <trans-unit id="8700121026680200191" datatype="html">
         <source>Clear</source>
@@ -140,7 +150,7 @@
       </trans-unit>
       <trans-unit id="1021945833079685557" datatype="html">
         <source>Apply saved state or save new</source>
-        <target>Appliquer l&apos;état mis en mémoire ou mettre en mémoire un nouveau </target>
+        <target>Appliquer l'état mis en mémoire ou mettre en mémoire un nouveau </target>
       </trans-unit>
       <trans-unit id="4427152030047614151" datatype="html">
         <source>Refresh grid</source>
@@ -148,7 +158,7 @@
       </trans-unit>
       <trans-unit id="9189653751160613475" datatype="html">
         <source>Export in excel</source>
-        <target>Export dans l&apos;excel</target>
+        <target>Export dans l'excel</target>
       </trans-unit>
       <trans-unit id="6172419298317243584" datatype="html">
         <source>Server error!</source>
@@ -160,7 +170,7 @@
       </trans-unit>
       <trans-unit id="1270504316843618310" datatype="html">
         <source>Action failed!</source>
-        <target>L&apos;action a échoué !</target>
+        <target>L'action a échoué !</target>
       </trans-unit>
       <trans-unit id="843548054527451651" datatype="html">
         <source>Columns</source>
@@ -216,14 +226,14 @@
       </trans-unit>
       <trans-unit id="6229478166324408158" datatype="html">
         <source>Confirm bulk operation</source>
-        <target>Confirmer l&apos;opération de masse</target>
+        <target>Confirmer l'opération de masse</target>
       </trans-unit>
       <trans-unit id="3475265554652114929" datatype="html">
-        <source>Remove <x id="PH"/> meter(s) from Job?</source>
+        <source>Remove <x id="PH"/> Meter Unit(s) from Job?</source>
         <target>Enlever <x id="PH"/> unité(s) de compteurs du Job?</target>
       </trans-unit>
       <trans-unit id="6690286116494561643" datatype="html">
-        <source>Selected meters removed successfully</source>
+        <source>Selected Meter Units removed successfully</source>
         <target>Les unités de compteurs sélectionnées ont été enlevées avec succès </target>
       </trans-unit>
       <trans-unit id="7457179823984196306" datatype="html">
@@ -252,7 +262,7 @@
       </trans-unit>
       <trans-unit id="8110367050267853536" datatype="html">
         <source>More options</source>
-        <target>Plus d&apos;options</target>
+        <target>Plus d'options</target>
       </trans-unit>
       <trans-unit id="2064421045373376803" datatype="html">
         <source>Scheduler job enabled!</source>
@@ -272,7 +282,7 @@
       </trans-unit>
       <trans-unit id="7246553099304348111" datatype="html">
         <source>Confirm operation</source>
-        <target>Confirmer l&apos;opération</target>
+        <target>Confirmer l'opération</target>
       </trans-unit>
       <trans-unit id="3881714445409160059" datatype="html">
         <source>Do you want to change scheduler job status</source>
@@ -335,7 +345,7 @@
         <target>IP</target>
       </trans-unit>
       <trans-unit id="1060461174163754666" datatype="html">
-        <source>Concentrators</source>
+        <source>Data Concentrator Units</source>
         <target>Unités de concentrateurs de données </target>
       </trans-unit>
       <trans-unit id="7048448815246352326" datatype="html">
@@ -435,7 +445,7 @@
         <target>actualisé</target>
       </trans-unit>
       <trans-unit id="287086648025556746" datatype="html">
-        <source>Scheduled meter discovery was</source>
+        <source>Data Concentrator Discovery Scheduler was</source>
         <target>Le Discovery Scheduler du concentrateur de données était</target>
       </trans-unit>
       <trans-unit id="4893141395755907203" datatype="html">
@@ -443,7 +453,7 @@
         <target>avec succès</target>
       </trans-unit>
       <trans-unit id="6485314736125303028" datatype="html">
-        <source>Meter discovery</source>
+        <source>Discovery Job</source>
         <target>Discovery Job</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
@@ -496,10 +506,10 @@
       </trans-unit>
       <trans-unit id="3990182196643689218" datatype="html">
         <source>More Save options</source>
-        <target>Plus d&apos;options de mise en mémoire </target>
+        <target>Plus d'options de mise en mémoire </target>
       </trans-unit>
       <trans-unit id="8646797504756663636" datatype="html">
-        <source>Scheduled job deleted!</source>
+        <source>Scheduler job deleted!</source>
         <target>Le scheduler job a été annulé !</target>
       </trans-unit>
       <trans-unit id="7022070615528435141" datatype="html">
@@ -508,10 +518,10 @@
       </trans-unit>
       <trans-unit id="9021887951960049161" datatype="html">
         <source>Confirm delete</source>
-        <target>Confirmer l&apos;annulation</target>
+        <target>Confirmer l'annulation</target>
       </trans-unit>
       <trans-unit id="4528916092728981282" datatype="html">
-        <source>Do you want to delete scheduled job?</source>
+        <source>Do you want to delete scheduler job?</source>
         <target>Voulez-vous annuler le scheduler job?</target>
       </trans-unit>
       <trans-unit id="3974480456921534163" datatype="html">
@@ -543,11 +553,11 @@
         <target>Ajouter</target>
       </trans-unit>
       <trans-unit id="2783293384726138827" datatype="html">
-        <source>Reading</source>
+        <source>Reading job</source>
         <target>Reading job</target>
       </trans-unit>
       <trans-unit id="6420455839696291625" datatype="html">
-        <source>Meter discovery</source>
+        <source>Discovery job</source>
         <target>Discovery job</target>
       </trans-unit>
       <trans-unit id="9172233176401579786" datatype="html">
@@ -595,15 +605,15 @@
         <target>Regex</target>
       </trans-unit>
       <trans-unit id="1009146229864778476" datatype="html">
-        <source>New item already added!</source>
+        <source>Aready added empty row for new item!</source>
         <target>Déjà ajouté une ligne vide pour un nouveau item !</target>
       </trans-unit>
       <trans-unit id="1577586869987820319" datatype="html">
-        <source>Rule added successfully</source>
+        <source>Rule was added successfully</source>
         <target>La règle a été ajoutée avec succès </target>
       </trans-unit>
       <trans-unit id="1347392190558339815" datatype="html">
-        <source>Rule updated successfully</source>
+        <source>Rule was updated successfully</source>
         <target>La règle a été actualisée avec succès</target>
       </trans-unit>
       <trans-unit id="3048341745183582694" datatype="html">
@@ -640,7 +650,7 @@
       </trans-unit>
       <trans-unit id="5586392984837685453" datatype="html">
         <source>Failed to add job to all rules.</source>
-        <target>Ajouter le job à toutes les règles, n&apos;a pas fonctionné.</target>
+        <target>Ajouter le job à toutes les règles, n'a pas fonctionné.</target>
       </trans-unit>
       <trans-unit id="4645345687322304891" datatype="html">
         <source>Rules</source>
@@ -683,7 +693,7 @@
         <target>Importation de la configuration TOU</target>
       </trans-unit>
       <trans-unit id="7396016917405031408" datatype="html">
-        <source>Xml file import was successful</source>
+        <source>Import xml file was successfully</source>
         <target>Importation des documents xml effectuée avec succès</target>
       </trans-unit>
       <trans-unit id="4908129342757001956" datatype="html">
@@ -712,7 +722,7 @@
       </trans-unit>
       <trans-unit id="1670949612083393039" datatype="html">
         <source>File <x id="PH"/> import failed, error message: <x id="PH_1"/></source>
-        <target>Document <x id="PH"/> importation échouée, message d&apos;erreur : <x id="PH_1"/></target>
+        <target>Document <x id="PH"/> importation échouée, message d'erreur : <x id="PH_1"/></target>
       </trans-unit>
       <trans-unit id="7408932238599462499" datatype="html">
         <source>File type</source>
@@ -760,11 +770,11 @@
       </trans-unit>
       <trans-unit id="2686786622868978521" datatype="html">
         <source>There seems to be no available data to show.</source>
-        <target>Il n&apos;y a pas de données disponibles à afficher </target>
+        <target>Il n'y a pas de données disponibles à afficher </target>
       </trans-unit>
       <trans-unit id="2508222366608888453" datatype="html">
         <source>Try changing the time.</source>
-        <target>Essayer de changer la date et l&apos;heure </target>
+        <target>Essayer de changer la date et l'heure </target>
       </trans-unit>
       <trans-unit id="9067968943390939929" datatype="html">
         <source>Show/hide registers</source>
@@ -779,7 +789,7 @@
         <target>Afficher / cacher les filtres </target>
       </trans-unit>
       <trans-unit id="5689090354669721014" datatype="html">
-        <source>Meters</source>
+        <source>Meter Units</source>
         <target>Unités de compteurs </target>
       </trans-unit>
       <trans-unit id="4269578151092655782" datatype="html">
@@ -796,11 +806,11 @@
       </trans-unit>
       <trans-unit id="6296724663928330187" datatype="html">
         <source>Only manual re-connection allowed / Manual disconnection not allowed</source>
-        <target>Seulement la re-connexion manuelle est autorisée / la déconnexion manuelle n&apos;est pas permise. </target>
+        <target>Seulement la re-connexion manuelle est autorisée / la déconnexion manuelle n'est pas permise. </target>
       </trans-unit>
       <trans-unit id="1910653146732578852" datatype="html">
         <source>Remote and manual re-connection allowed / Manual disconnection not allowed</source>
-        <target>La re-connexion à distance et manuelle est autorisée / la disconnexion manuelle n&apos;est pas permise</target>
+        <target>La re-connexion à distance et manuelle est autorisée / la disconnexion manuelle n'est pas permise</target>
       </trans-unit>
       <trans-unit id="4057255027485741951" datatype="html">
         <source>Manual and local re-connection allowed</source>
@@ -808,11 +818,11 @@
       </trans-unit>
       <trans-unit id="7444702813691936186" datatype="html">
         <source>Manual and local re-connection allowed / Manual disconnection not allowed</source>
-        <target>La re-connexion manuelle et locale est permise / la disconnexion manuelle n&apos;est pas autorisée </target>
+        <target>La re-connexion manuelle et locale est permise / la disconnexion manuelle n'est pas autorisée </target>
       </trans-unit>
       <trans-unit id="8046182994475559393" datatype="html">
-        <source>Setting of disconnector mode succeeded!</source>
-        <target>Les unités de comptage ont mis le mode &quot;Breaker&quot; avec succès</target>
+        <source>Meter Units set Breaker mode was successfully</source>
+        <target>Les unités de comptage ont mis le mode "Breaker" avec succès</target>
       </trans-unit>
       <trans-unit id="4444252067276184823" datatype="html">
         <source>Disconnector mode</source>
@@ -823,15 +833,69 @@
         <target>Sélectionner / désélectionner </target>
       </trans-unit>
       <trans-unit id="7804366670597991631" datatype="html">
-        <source>&apos;Name</source>
-        <target>&apos;Nom</target>
+        <source>'Name</source>
+        <target>'Nom</target>
+      </trans-unit><trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <target state="new">Previous month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <target state="new">Next month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <target state="new">Select month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <target state="new">Select year</target>
+      </trans-unit><trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <target state="new">HH</target>
+      </trans-unit><trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <target state="new">Hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <target state="new">MM</target>
+      </trans-unit><trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <target state="new">Minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <target state="new">Increment hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <target state="new">Decrement hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <target state="new">Increment minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <target state="new">Decrement minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <target state="new">SS</target>
+      </trans-unit><trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <target state="new">Seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <target state="new">Increment seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <target state="new">Decrement seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <target state="new"><x id="INTERPOLATION"/></target>
+      </trans-unit><trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <target state="new"><x id="INTERPOLATION"/></target>
       </trans-unit>
       <trans-unit id="3008420115644088420" datatype="html">
         <source>Configuration</source>
         <target>Configuration</target>
       </trans-unit>
       <trans-unit id="4178550273903314946" datatype="html">
-        <source>Meter upload was successful</source>
+        <source>Meter Units upload Edited was successfully</source>
         <target>La modification du téléchargement des unités de compteurs a fonctionné</target>
       </trans-unit>
       <trans-unit id="1490116990594087894" datatype="html">
@@ -844,7 +908,7 @@
       </trans-unit>
       <trans-unit id="5033628167956561398" datatype="html">
         <source>Image Identifyer</source>
-        <target>Identificateur d&apos;image </target>
+        <target>Identificateur d'image </target>
       </trans-unit>
       <trans-unit id="826820050104281179" datatype="html">
         <source>Image signature</source>
@@ -857,9 +921,18 @@
       <trans-unit id="4759723562137600498" datatype="html">
         <source>Activate</source>
         <target>Activation</target>
+      </trans-unit><trans-unit id="1041031208206930198" datatype="html">
+        <source>Meter Units set Limiter was successful</source>
+        <target state="new">Meter Units set Limiter was successful</target>
+      </trans-unit><trans-unit id="8581122523747574165" datatype="html">
+        <source>Set Limiter (<x id="INTERPOLATION"/>)</source>
+        <target state="new">Set Limiter (<x id="INTERPOLATION"/>)</target>
+      </trans-unit><trans-unit id="4057760610235468476" datatype="html">
+        <source>At least one phase with name and treshold should be filled</source>
+        <target state="new">At least one phase with name and treshold should be filled</target>
       </trans-unit>
       <trans-unit id="1003468704826518252" datatype="html">
-        <source>Monitor was successfully set!</source>
+        <source>Set Monitor was successful</source>
         <target>Réglage du moniteur effectué avec succès </target>
       </trans-unit>
       <trans-unit id="693418060270512905" datatype="html">
@@ -889,6 +962,9 @@
       <trans-unit id="2105087540967696443" datatype="html">
         <source>Activate Clear FF</source>
         <target>Activer supprimer FF</target>
+      </trans-unit><trans-unit id="3954602589132656946" datatype="html">
+        <source>Clear alarms</source>
+        <target state="new">Clear alarms</target>
       </trans-unit>
       <trans-unit id="4359014576353578997" datatype="html">
         <source>Clear Filters</source>
@@ -912,7 +988,7 @@
       </trans-unit>
       <trans-unit id="2223296617357040193" datatype="html">
         <source>Save set filters, column order/size, and use it later.</source>
-        <target>Sauvegarder les jeux de filtres, l&apos;ordre et la grandeur des colonnes et les utiliser ultérieurement.</target>
+        <target>Sauvegarder les jeux de filtres, l'ordre et la grandeur des colonnes et les utiliser ultérieurement.</target>
       </trans-unit>
       <trans-unit id="6235526436107824758" datatype="html">
         <source>Saved States</source>
@@ -939,27 +1015,27 @@
         <target>données </target>
       </trans-unit>
       <trans-unit id="2501989539336327542" datatype="html">
-        <source>Upload image...</source>
-        <target>Télécharger l&apos;image</target>
+        <source>Upload image</source>
+        <target>Télécharger l'image</target>
       </trans-unit>
       <trans-unit id="8247620175611326692" datatype="html">
         <source>Activate image</source>
-        <target>Activation de l&apos;image</target>
+        <target>Activation de l'image</target>
       </trans-unit>
       <trans-unit id="1713271461473302108" datatype="html">
-        <source>Mode...</source>
+        <source>Mode</source>
         <target>Mode</target>
       </trans-unit>
       <trans-unit id="4691747907262765119" datatype="html">
-        <source>TOU Upload...</source>
+        <source>TOU Upload</source>
         <target>Téléchargement du TOU </target>
       </trans-unit>
       <trans-unit id="3536878313651292186" datatype="html">
-        <source>Limiter...</source>
+        <source>Limiter</source>
         <target>Limiteur</target>
       </trans-unit>
       <trans-unit id="8058994642732449354" datatype="html">
-        <source>Monitor...</source>
+        <source>Monitor</source>
         <target>Écran</target>
       </trans-unit>
       <trans-unit id="7349942499709408343" datatype="html">
@@ -971,16 +1047,16 @@
         <target>Enlever les alarmes</target>
       </trans-unit>
       <trans-unit id="4619541944202030137" datatype="html">
-        <source>You have no concentrator yet!</source>
-        <target>Vous n&apos;avez pas encore de concentrateur de données !</target>
+        <source>You have no Data Concentrator Units yet!</source>
+        <target>Vous n'avez pas encore de concentrateur de données !</target>
       </trans-unit>
       <trans-unit id="4594629863210876240" datatype="html">
         <source> Add New</source>
         <target> Ajouter un nouveau </target>
       </trans-unit>
       <trans-unit id="3825649834158937429" datatype="html">
-        <source>Meter update was successful</source>
-        <target>L&apos;unité de compteur a  été mise à jour avec succès </target>
+        <source>Meter Unit was updated successfully</source>
+        <target>L'unité de compteur a  été mise à jour avec succès </target>
       </trans-unit>
       <trans-unit id="6478311374284260655" datatype="html">
         <source>Meters</source>
@@ -995,7 +1071,7 @@
         <target>de</target>
       </trans-unit>
       <trans-unit id="8013136913336134227" datatype="html">
-        <source>Meter</source>
+        <source>Meter Unit</source>
         <target>Unité de compteur </target>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
@@ -1019,8 +1095,8 @@
         <target>Modèle</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
-        <source>Error saving meter!</source>
-        <target>Erreur de sauvegarde de l&apos;unité de compteur !</target>
+        <source>Error saving Meter Unit!</source>
+        <target>Erreur de sauvegarde de l'unité de compteur !</target>
       </trans-unit>
       <trans-unit id="7286430803380181008" datatype="html">
         <source>Id</source>
@@ -1040,7 +1116,7 @@
       </trans-unit>
       <trans-unit id="5453725728054241993" datatype="html">
         <source>Select operation</source>
-        <target>Sélectionner l&apos;opération</target>
+        <target>Sélectionner l'opération</target>
       </trans-unit>
       <trans-unit id="6913350655948503449" datatype="html">
         <source>Missing template!</source>
@@ -1048,7 +1124,7 @@
       </trans-unit>
       <trans-unit id="581635739133720418" datatype="html">
         <source>Ready for activation!</source>
-        <target>Prêt à l&apos;activation !</target>
+        <target>Prêt à l'activation !</target>
       </trans-unit>
       <trans-unit id="2946624699882754313" datatype="html">
         <source>Show all</source>
@@ -1138,7 +1214,7 @@
         <target>Toutes les heures N </target>
       </trans-unit>
       <trans-unit id="2701293197858293459" datatype="html">
-        <source>Meters Read Scheduler was</source>
+        <source>Meter Units Read Scheduler was</source>
         <target>Le Scheduler lecture des unités de compteurs était </target>
       </trans-unit>
       <trans-unit id="2622268509058131533" datatype="html">
@@ -1162,20 +1238,20 @@
         <target>Dernière communication</target>
       </trans-unit>
       <trans-unit id="8079872604120956170" datatype="html">
-        <source>Concentrator was successfully added</source>
-        <target>L&apos;unité de concentrateur de données a été ajoutée avec succès</target>
+        <source>Data Concentration Unit was added successfully</source>
+        <target>L'unité de concentrateur de données a été ajoutée avec succès</target>
       </trans-unit>
       <trans-unit id="3505930099459089004" datatype="html">
         <source>Error adding scheduler.</source>
-        <target>Erreur lors de l&apos;ajout du scheduler.</target>
+        <target>Erreur lors de l'ajout du scheduler.</target>
       </trans-unit>
       <trans-unit id="4964011321446375935" datatype="html">
-        <source>Add data concentrator</source>
-        <target>Ajouter l&apos;unité de concentrateur de données </target>
+        <source>Add Data Concentrator Unit</source>
+        <target>Ajouter l'unité de concentrateur de données </target>
       </trans-unit>
       <trans-unit id="3345127904026423167" datatype="html">
         <source>Id (serial number)</source>
-        <target>Id (numéro d&apos;appareil)</target>
+        <target>Id (numéro d'appareil)</target>
       </trans-unit>
       <trans-unit id="7784048467069996355" datatype="html">
         <source>Error saving DCU!</source>
@@ -1183,7 +1259,7 @@
       </trans-unit>
       <trans-unit id="5248717555542428023" datatype="html">
         <source>Username</source>
-        <target>Nom de l&apos;utilisateur </target>
+        <target>Nom de l'utilisateur </target>
       </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
@@ -1198,7 +1274,7 @@
         <target>tout sélectionner </target>
       </trans-unit>
       <trans-unit id="8074641440649956207" datatype="html">
-        <source>selected concentrators?</source>
+        <source>selected Data Concentrator Units?</source>
         <target>Unités de concentrateurs de données sélectionnées ?</target>
       </trans-unit>
       <trans-unit id="4204921246911160131" datatype="html">
@@ -1210,12 +1286,12 @@
         <target>Ajouter en premier </target>
       </trans-unit>
       <trans-unit id="8148272978112044294" datatype="html">
-        <source>Concentrator</source>
+        <source>Data concentrator unit</source>
         <target>Unité de concentrateur de données</target>
       </trans-unit>
       <trans-unit id="5540900299365959437" datatype="html">
-        <source>Concentrator was successfully updated</source>
-        <target>L&apos;unité de concentrateur de données a été mise à jour avec succès </target>
+        <source>Data Concentration Unit was updated successfully</source>
+        <target>L'unité de concentrateur de données a été mise à jour avec succès </target>
       </trans-unit>
       <trans-unit id="3290665917427253156" datatype="html">
         <source>MAC</source>
@@ -1245,22 +1321,22 @@
       </trans-unit>
       <trans-unit id="4798426009986812083" datatype="html">
         <source>Entry is not a valid email</source>
-        <target>L&apos;information entrée n&apos;est pas un courriel valable </target>
+        <target>L'information entrée n'est pas un courriel valable </target>
       </trans-unit>
       <trans-unit id="8384748862762477092" datatype="html">
         <source>Entry exceeds maximum amount of characters</source>
-        <target>L&apos;information entrée dépasse le nombre maximum de caractères </target>
+        <target>L'information entrée dépasse le nombre maximum de caractères </target>
       </trans-unit>
       <trans-unit id="1225258548509383945" datatype="html">
         <source>Entry does not meet minimum required amount of characters</source>
-        <target>L&apos;information entrée ne correspond pas au nombre minimum de caractères requis</target>
+        <target>L'information entrée ne correspond pas au nombre minimum de caractères requis</target>
       </trans-unit>
       <trans-unit id="7118916645245187250" datatype="html">
         <source>Wrong format</source>
         <target>Format erroné </target>
       </trans-unit>
       <trans-unit id="7311556461323387825" datatype="html">
-        <source>Password does not match</source>
+        <source>Password not match</source>
         <target>Le mot de passe ne correspond pas </target>
       </trans-unit>
       <trans-unit id="6867272363573367465" datatype="html">
@@ -1283,7 +1359,7 @@
       </trans-unit>
       <trans-unit id="4664331691591215211" datatype="html">
         <source>File type not allowed.</source>
-        <target>Ce type de document n&apos;est pas autorisé.</target>
+        <target>Ce type de document n'est pas autorisé.</target>
         <note priority="1" from="description">The text for the invalid allowed extensions restriction message</note>
         <note priority="1" from="meaning">kendo.fileselect.invalidFileExtension</note>
       </trans-unit>
@@ -1337,19 +1413,19 @@
       </trans-unit>
       <trans-unit id="5934737755327152932" datatype="html">
         <source>files failed to upload.</source>
-        <target>Le téléchargement des fichiers n&apos;a pas fonctionné.</target>
+        <target>Le téléchargement des fichiers n'a pas fonctionné.</target>
         <note priority="1" from="description">The status message for a batch of files after failed upload</note>
         <note priority="1" from="meaning">kendo.upload.filesBatchStatusFailed</note>
       </trans-unit>
       <trans-unit id="4678582374156884660" datatype="html">
-        <source>Files successfully uploaded.</source>
+        <source>files successfully uploaded.</source>
         <target>Fichiers téléchargés avec succès</target>
         <note priority="1" from="description">The status message for a batch of files after successful upload</note>
         <note priority="1" from="meaning">kendo.upload.filesBatchStatusUploaded</note>
       </trans-unit>
       <trans-unit id="372927175642445287" datatype="html">
         <source>File failed to upload.</source>
-        <target>Le téléchargement du fichier n&apos;a pas fonctionné.</target>
+        <target>Le téléchargement du fichier n'a pas fonctionné.</target>
         <note priority="1" from="description">The file status message after failed upload</note>
         <note priority="1" from="meaning">kendo.upload.fileStatusFailed</note>
       </trans-unit>
@@ -1379,7 +1455,7 @@
       </trans-unit>
       <trans-unit id="2924979995055776233" datatype="html">
         <source>File type not allowed.</source>
-        <target>Ce type de fichier n&apos;est pas autorisé.</target>
+        <target>Ce type de fichier n'est pas autorisé.</target>
         <note priority="1" from="description">The text for the invalid allowed extensions restriction message</note>
         <note priority="1" from="meaning">kendo.upload.invalidFileExtension</note>
       </trans-unit>
@@ -1437,7 +1513,7 @@
       </trans-unit>
       <trans-unit id="826701167553276328" datatype="html">
         <source>TODAY</source>
-        <target>AUJOURD&apos;HUI</target>
+        <target>AUJOURD'HUI</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.calendar.today</note>
       </trans-unit>
@@ -1563,9 +1639,24 @@
       </trans-unit>
       <trans-unit id="7904626229769721311" datatype="html">
         <source>TODAY</source>
-        <target>AUJOURD&apos;HUI</target>
+        <target>AUJOURD'HUI</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.datetimepicker.today</note>
+      </trans-unit><trans-unit id="3892034896682737327" datatype="html">
+        <source>TODAY</source>
+        <target state="new">TODAY</target>
+        <note priority="1" from="description">The label for the today button in the calendar header</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.today</note>
+      </trans-unit><trans-unit id="9101635325676663492" datatype="html">
+        <source>Navigate to previous view</source>
+        <target state="new">Navigate to previous view</target>
+        <note priority="1" from="description">The label for the previous button in the Multiview calendar</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.prevButtonTitle</note>
+      </trans-unit><trans-unit id="3994336778698343633" datatype="html">
+        <source>Navigate to next view</source>
+        <target state="new">Navigate to next view</target>
+        <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
       </trans-unit>
       <trans-unit id="5362895271044573681" datatype="html">
         <source>Set</source>
@@ -1575,7 +1666,7 @@
       </trans-unit>
       <trans-unit id="3417396278000787211" datatype="html">
         <source>Set time</source>
-        <target>Mettre la date et l&apos;heure</target>
+        <target>Mettre la date et l'heure</target>
         <note priority="1" from="description">The label for the Accept button in the timeselector component</note>
         <note priority="1" from="meaning">kendo.timeselector.acceptLabel</note>
       </trans-unit>
@@ -1685,7 +1776,7 @@
       </trans-unit>
       <trans-unit id="3837105101009984064" datatype="html">
         <source>Reset password request successful</source>
-        <target>Requête d&apos;actualisation du mot de passe réussie </target>
+        <target>Requête d'actualisation du mot de passe réussie </target>
       </trans-unit>
       <trans-unit id="8830532201705056775" datatype="html">
         <source>Login successful</source>
@@ -1697,7 +1788,7 @@
       </trans-unit>
       <trans-unit id="2179859519663227716" datatype="html">
         <source>Login failed! Check your credentials ...</source>
-        <target>Le Login n&apos;a pas fonctionné ! Contrôler vos données ...</target>
+        <target>Le Login n'a pas fonctionné ! Contrôler vos données ...</target>
       </trans-unit>
       <trans-unit id="2454050363478003966" datatype="html">
         <source>Login</source>
@@ -1705,7 +1796,7 @@
       </trans-unit>
       <trans-unit id="6873458833769544826" datatype="html">
         <source>Please enter your user name and password to login.</source>
-        <target>Prière d&apos;indiquer votre nom d&apos;utilisateur et votre mot de passe pour effectuer le login.</target>
+        <target>Prière d'indiquer votre nom d'utilisateur et votre mot de passe pour effectuer le login.</target>
       </trans-unit>
       <trans-unit id="2727496946419791472" datatype="html">
         <source>Forgot password?</source>
@@ -1717,7 +1808,7 @@
       </trans-unit>
       <trans-unit id="288598274217757890" datatype="html">
         <source>Please enter your email to reset account password.</source>
-        <target>Prière d&apos;indiquer votre adresse courriel afin de réinitialiser le mot de passe de votre compte.</target>
+        <target>Prière d'indiquer votre adresse courriel afin de réinitialiser le mot de passe de votre compte.</target>
       </trans-unit>
       <trans-unit id="4768749765465246664" datatype="html">
         <source>Email</source>
@@ -1733,7 +1824,7 @@
       </trans-unit>
       <trans-unit id="4783447196985287907" datatype="html">
         <source>Please enter new password.</source>
-        <target>Prière d&apos;indiquer votre nouveau mot de passe</target>
+        <target>Prière d'indiquer votre nouveau mot de passe</target>
       </trans-unit>
       <trans-unit id="3588415639242079458" datatype="html">
         <source>New password</source>
@@ -1741,7 +1832,7 @@
       </trans-unit>
       <trans-unit id="2543774249742331958" datatype="html">
         <source>404 - page not exists</source>
-        <target>404 - la page n&apos;existe pas </target>
+        <target>404 - la page n'existe pas </target>
       </trans-unit>
       <trans-unit id="4606091236515013460" datatype="html">
         <source>Error:</source>
@@ -1749,7 +1840,7 @@
       </trans-unit>
       <trans-unit id="7696766325332008537" datatype="html">
         <source>Login failed! Check Identity server!</source>
-        <target>Le Login n&apos;a pas fonctionné ! vérifier le serveur identité !</target>
+        <target>Le Login n'a pas fonctionné ! vérifier le serveur identité !</target>
       </trans-unit>
       <trans-unit id="7376867099578394316" datatype="html">
         <source>Not valid request</source>
@@ -1757,7 +1848,7 @@
       </trans-unit>
       <trans-unit id="7422622788457315480" datatype="html">
         <source>Action not exists</source>
-        <target>L&apos;action n&apos;existe pas </target>
+        <target>L'action n'existe pas </target>
       </trans-unit>
       <trans-unit id="2657043015926552641" datatype="html">
         <source>Unknown error</source>
@@ -1765,7 +1856,7 @@
       </trans-unit>
       <trans-unit id="4444662695942306976" datatype="html">
         <source>Get CII state</source>
-        <target>Avoir l&apos;état du CII </target>
+        <target>Avoir l'état du CII </target>
       </trans-unit>
       <trans-unit id="9137722871648654892" datatype="html">
         <source>CII Activate</source>
@@ -1780,7 +1871,7 @@
         <target>mise à jour du FW</target>
       </trans-unit>
       <trans-unit id="5209672282513780219" datatype="html">
-        <source>Disconnector</source>
+        <source>Breaker</source>
         <target>Breaker</target>
       </trans-unit>
       <trans-unit id="1778275808932346500" datatype="html">
@@ -1809,7 +1900,7 @@
       </trans-unit>
       <trans-unit id="6048892649018070225" datatype="html">
         <source>Today</source>
-        <target>Aujourd&apos;hui</target>
+        <target>Aujourd'hui</target>
       </trans-unit>
       <trans-unit id="4498682414491138092" datatype="html">
         <source>Yesterday</source>
@@ -1856,16 +1947,16 @@
         <target>Synchroniser date et heure</target>
       </trans-unit>
       <trans-unit id="3164102267265520854" datatype="html">
-        <source>Time sync</source>
+        <source>DC Time sync job</source>
         <target>DC Time sync job</target>
       </trans-unit>
       <trans-unit id="5969349457365616195" datatype="html">
         <source>Number of events</source>
-        <target>Nombre d&apos;événements</target>
+        <target>Nombre d'événements</target>
       </trans-unit>
       <trans-unit id="6121577287984845389" datatype="html">
         <source>Event type</source>
-        <target>Type d&apos;événement</target>
+        <target>Type d'événement</target>
       </trans-unit>
       <trans-unit id="5046871534910543138" datatype="html">
         <source>Relay</source>
@@ -1877,7 +1968,7 @@
       </trans-unit>
       <trans-unit id="4606793880716021431" datatype="html">
         <source>Serial number</source>
-        <target>Numéro d&apos;appareil</target>
+        <target>Numéro d'appareil</target>
       </trans-unit>
       <trans-unit id="6252304067943234057" datatype="html">
         <source>With template</source>
@@ -1889,11 +1980,11 @@
       </trans-unit>
       <trans-unit id="7654203638411043363" datatype="html">
         <source>Image ready for activation</source>
-        <target>Image prête à l&apos;activation</target>
+        <target>Image prête à l'activation</target>
       </trans-unit>
       <trans-unit id="8198274855826766185" datatype="html">
         <source>show option</source>
-        <target>montrer l&apos;option</target>
+        <target>montrer l'option</target>
       </trans-unit>
       <trans-unit id="1895957424873987405" datatype="html">
         <source>Job</source>
@@ -1944,7 +2035,7 @@
         <target>Drop available registers here.</target>
       </trans-unit>
       <trans-unit id="2712614620647663712" datatype="html">
-        <source>Meter Display settings set successfuly.</source>
+        <source>Meter Unit(s) Display settings set successfuly.</source>
         <target>Meter Display settings set successfuly.</target>
       </trans-unit>
       <trans-unit id="8261878501784881616" datatype="html">
@@ -1960,7 +2051,7 @@
         <target>Register group</target>
       </trans-unit>
       <trans-unit id="3059662776648332773" datatype="html">
-        <source>Concentrator</source>
+        <source>Concentrator Units</source>
         <target>Concentrator Units</target>
       </trans-unit>
       <trans-unit id="924694444210319359" datatype="html">
