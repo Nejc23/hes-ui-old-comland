@@ -415,6 +415,22 @@
     }
   }
 
+ .ag-header-cell {
+  .k-checkbox:checked::before {
+      color: $white;
+      content: "\e118";
+      width: $checkbox-size;
+      height: $checkbox-size;
+      line-height: $checkbox-size;
+      font-size: $checkbox-icon-size;
+      font-family: "WebComponentsIcons", monospace;
+      overflow: hidden;
+      position: absolute;
+      text-align:center;
+      background-image:none;
+    }
+  }
+
   .ag-cell-inline-editing {
     height: 100%;
     border: none !important;

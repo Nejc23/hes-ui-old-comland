@@ -60,7 +60,7 @@
               "@progress/kendo-angular-intl/locales/de/all",
               "@progress/kendo-angular-intl/locales/fr/all",
               "@progress/kendo-angular-intl/locales/it/all"
-           ]
+            ]
           },
           "configurations": {
             "develop": {
@@ -70,13 +70,9 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "fileReplacements": [
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
-                }
-              ],
-              "localize": ["en"]
+              "localize": [
+                "en"
+              ]
             },
             "develop-amera": {
               "budgets": [
@@ -87,23 +83,26 @@
               ],
               "assets": [
                 "src/assets",
-                { "glob": "favicon.ico", "input": "src/environments/brand/amera/", "output": "/" }
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/environments/brand/amera/",
+                  "output": "/"
+                }
               ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/amera/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/amera/favicon.ico"
-                }],
-                "stylePreprocessorOptions": {
-                  "includePaths": [
-                      "src/styles/brand/amera"
-                  ]
-                },
-              "localize": ["en"]
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/amera"
+                ]
+              },
+              "localize": [
+                "en"
+              ]
             },
             "develop-ePointHES": {
               "budgets": [
@@ -114,23 +113,26 @@
               ],
               "assets": [
                 "src/assets",
-                { "glob": "favicon.ico", "input": "src/environments/brand/ePointHES/", "output": "/" }
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/environments/brand/ePointHES/",
+                  "output": "/"
+                }
               ],
               "fileReplacements": [
                 {
                   "replace": "src/environments/brand/default/brand.ts",
                   "with": "src/environments/brand/ePointHES/brand.ts"
-                },
-                {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/ePointHES/favicon.ico"
-                }],
-                "stylePreprocessorOptions": {
-                  "includePaths": [
-                      "src/styles/brand/ePointHES"
-                  ]
-                },
-              "localize": ["en"]
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
+                ]
+              },
+              "localize": [
+                "en"
+              ]
             },
             "develop-sl": {
               "budgets": [
@@ -143,188 +145,202 @@
                 {
                   "replace": "src/environments/locale.ts",
                   "with": "src/environments/locale-sl.ts"
+                }
+              ],
+              "localize": [
+                "sl"
+              ]
+            },
+            "production": {
+              "outputPath": "dist/hes",
+              "deleteOutputPath": true,
+              "localize": false,
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/environments/brand/default/",
+                  "output": "/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
                 },
                 {
-                  "replace": "src/favicon.ico",
-                  "with": "src/environments/brand/default/favicon.ico"
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
-            ,            "localize": [
-              "sl"
-            ]
-          },
-          "production": {
-            "outputPath": "dist/hes",
-            "deleteOutputPath": true,
-            "localize": false,
-            "assets": [
-              "src/assets",
-              { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
-            ],
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              },
-              {
-                "replace": "src/favicon.ico",
-                "with": "src/environments/brand/default/favicon.ico"
-              }
-            ],
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true,
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "9mb",
-                "maximumError": "13mb"
-              },
-              {
-                "type": "anyComponentStyle",
-                "maximumWarning": "6kb"
-              }
-            ]
-          },
-          "production-myGrid": {
-            "localize": ["en", "sl", "cs", "de", "fr", "it"],
-            "outputPath": "dist/myGrid",
-            "deleteOutputPath": true,
-            "assets": [
-              "src/assets",
-              { "glob": "favicon.ico", "input": "src/environments/brand/default/", "output": "/" }
-            ],
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              },
-              {
-                "replace": "src/favicon.ico",
-                "with": "src/environments/brand/default/favicon.ico"
-              }
-            ],
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true,
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "9mb",
-                "maximumError": "13mb"
-              },
-              {
-                "type": "anyComponentStyle",
-                "maximumWarning": "6kb"
-              }
-            ]
-          },
-          "production-amera": {
-            "localize": ["en", "sl", "cs", "de", "fr", "it"],
-            "outputPath": "dist/amera",
-            "deleteOutputPath": true,
-            "assets": [
-              "src/assets",
-              { "glob": "favicon.ico", "input": "src/environments/brand/amera/", "output": "/" }
-            ],
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              },
-              {
-                "replace": "src/environments/brand/default/brand.ts",
-                "with": "src/environments/brand/amera/brand.ts"
-              },
-              {
-                "replace": "src/favicon.ico",
-                "with": "src/environments/brand/amera/favicon.ico"
-              }
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
+            },
+            "production-myGrid": {
+              "localize": [
+                "en",
+                "sl",
+                "cs",
+                "de",
+                "fr",
+                "it"
+              ],
+              "outputPath": "dist/myGrid",
+              "deleteOutputPath": true,
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/environments/brand/default/",
+                  "output": "/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ]
+            },
+            "production-amera": {
+              "localize": [
+                "en",
+                "sl",
+                "cs",
+                "de",
+                "fr",
+                "it"
+              ],
+              "outputPath": "dist/amera",
+              "deleteOutputPath": true,
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/environments/brand/amera/",
+                  "output": "/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/amera/brand.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
                   "src/styles/brand/amera"
+                ]
+              },
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
               ]
             },
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true,
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "9mb",
-                "maximumError": "13mb"
+            "production-ePointHES": {
+              "localize": [
+                "en",
+                "sl",
+                "cs",
+                "de",
+                "fr",
+                "it"
+              ],
+              "outputPath": "dist/ePointHES",
+              "deleteOutputPath": true,
+              "assets": [
+                "src/assets",
+                {
+                  "glob": "favicon.ico",
+                  "input": "src/environments/brand/ePointHES/",
+                  "output": "/"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/environments/brand/default/brand.ts",
+                  "with": "src/environments/brand/ePointHES/brand.ts"
+                }
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": [
+                  "src/styles/brand/ePointHES"
+                ]
               },
-              {
-                "type": "anyComponentStyle",
-                "maximumWarning": "6kb"
-              }
-            ]
-          },
-          "production-ePointHES": {
-            "localize": ["en", "sl", "cs", "de", "fr", "it"],
-            "outputPath": "dist/ePointHES",
-            "deleteOutputPath": true,
-            "assets": [
-              "src/assets",
-              { "glob": "favicon.ico", "input": "src/environments/brand/ePointHES/", "output": "/" }
-            ],
-            "fileReplacements": [
-              {
-                "replace": "src/environments/environment.ts",
-                "with": "src/environments/environment.prod.ts"
-              },
-              {
-                "replace": "src/environments/brand/default/brand.ts",
-                "with": "src/environments/brand/ePointHES/brand.ts"
-              },
-              {
-                "replace": "src/favicon.ico",
-                "with": "src/environments/brand/ePointHES/favicon.ico"
-              }
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                    "src/styles/brand/ePointHES"
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "9mb",
+                  "maximumError": "13mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
               ]
-            },
-            "optimization": true,
-            "outputHashing": "all",
-            "sourceMap": false,
-            "extractCss": true,
-            "namedChunks": false,
-            "aot": true,
-            "extractLicenses": true,
-            "vendorChunk": false,
-            "buildOptimizer": true,
-            "budgets": [
-              {
-                "type": "initial",
-                "maximumWarning": "9mb",
-                "maximumError": "13mb"
-              },
-              {
-                "type": "anyComponentStyle",
-                "maximumWarning": "6kb"
-              }
-            ]}
+            }
           }
         },
         "serve": {
