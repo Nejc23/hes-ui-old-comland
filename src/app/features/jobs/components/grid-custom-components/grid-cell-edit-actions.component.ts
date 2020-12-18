@@ -16,7 +16,7 @@ import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-d
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
-  templateUrl: './grid-cell-edit-actions.component.html'
+  templateUrl: './grid-cell-edit-actions.component.html',
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
@@ -54,18 +54,18 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     component.modalBody = $localize`Do you want to execute scheduler job now`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         response.subscribe(
-          value => {
+          (value) => {
             this.toast.successToast(this.messageStarted);
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -73,7 +73,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
 
   editJob(params: any) {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
     if (params.data.actionType === 1) {
       this.editDiscoveryJob(params, options);
@@ -94,17 +94,17 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const timeUnits$ = this.codelistService.timeUnitCodeslist();
     const job$ = this.service.getJob(selectedJobId);
 
-    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe(responseList => {
+    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job);
 
       modalRef.result.then(
-        data => {
+        (data) => {
           // on close (CONFIRM)
           this.eventService.eventEmitterRefresh.emit(true);
         },
-        reason => {
+        (reason) => {
           // on dismiss (CLOSE)
         }
       );
@@ -114,17 +114,17 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   private editDiscoveryJob(params: any, options: NgbModalOptions) {
     const selectedJobId = params.data.id;
 
-    this.service.getJob(selectedJobId).subscribe(job => {
+    this.service.getJob(selectedJobId).subscribe((job) => {
       const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
       const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
       component.setFormEdit(selectedJobId, job);
 
       modalRef.result.then(
-        data => {
+        (data) => {
           // on close (CONFIRM)
           this.eventService.eventEmitterRefresh.emit(true);
         },
-        reason => {
+        (reason) => {
           // on dismiss (CLOSE)
         }
       );
@@ -134,17 +134,17 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   private editDcTimeSyncJob(params: any, options: NgbModalOptions) {
     const selectedJobId = params.data.id;
 
-    this.service.getJob(selectedJobId).subscribe(job => {
+    this.service.getJob(selectedJobId).subscribe((job) => {
       const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
       const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
       component.setFormEdit(selectedJobId, job);
 
       modalRef.result.then(
-        data => {
+        (data) => {
           // on close (CONFIRM)
           this.eventService.eventEmitterRefresh.emit(true);
         },
-        reason => {
+        (reason) => {
           // on dismiss (CLOSE)
         }
       );
@@ -154,17 +154,20 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   private editDcReadEventsJob(params: any, options: NgbModalOptions) {
     const selectedJobId = params.data.id;
 
-    this.service.getJob(selectedJobId).subscribe(job => {
+    const timeUnits$ = this.codelistService.timeUnitCodeslist();
+    const job$ = this.service.getJob(selectedJobId);
+
+    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
       const modalRef = this.modalService.open(SchedulerDcReadEventsJobComponent, options);
       const component: SchedulerDcReadEventsJobComponent = modalRef.componentInstance;
-      component.setFormEdit(selectedJobId, job);
+      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job);
 
       modalRef.result.then(
-        data => {
+        (data) => {
           // on close (CONFIRM)
           this.eventService.eventEmitterRefresh.emit(true);
         },
-        reason => {
+        (reason) => {
           // on dismiss (CLOSE)
         }
       );
@@ -182,20 +185,20 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     component.modalBody = $localize`Do you want to delete scheduler job?`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         response.subscribe(
-          value => {
+          (value) => {
             const gridApi = this.params.api as GridApi;
             gridApi.purgeServerSideCache([]);
             this.toast.successToast(this.messageDeleteStarted);
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );

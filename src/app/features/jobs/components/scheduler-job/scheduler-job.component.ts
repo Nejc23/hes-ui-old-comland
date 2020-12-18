@@ -17,7 +17,7 @@ import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common
 
 @Component({
   selector: 'app-scheduler-job',
-  templateUrl: './scheduler-job.component.html'
+  templateUrl: './scheduler-job.component.html',
 })
 export class SchedulerJobComponent implements OnInit {
   @ViewChild(RegistersSelectComponent) registers;
@@ -33,7 +33,7 @@ export class SchedulerJobComponent implements OnInit {
     { value: '3' as string, label: $localize`Hour(s)`, labelSmall: $localize`Every N hour(s` },
     { value: '4' as string, label: $localize`Daily`, labelSmall: $localize`Every day specific time` },
     { value: '5' as string, label: $localize`Weekly`, labelSmall: $localize`One or more days of the week` },
-    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` }
+    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` },
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: $localize`Mon-Fri` },
@@ -43,7 +43,7 @@ export class SchedulerJobComponent implements OnInit {
     { id: 5, value: $localize`Thu` },
     { id: 6, value: $localize`Fri` },
     { id: 7, value: $localize`Sat` },
-    { id: 8, value: $localize`Sun` }
+    { id: 8, value: $localize`Sun` },
   ];
   selectedId = 0;
   monthDays: number[] = [];
@@ -67,7 +67,7 @@ export class SchedulerJobComponent implements OnInit {
 
   createForm(formData: SchedulerJob): FormGroup {
     return this.formBuilder.group({
-      [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '4', Validators.required],
+      [this.readOptionsProperty]: [formData ? formData.readOptions?.toString() : '4', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
       [this.timeProperty]: [formData && formData.dateTime ? moment(formData.dateTime).toDate() : null],
@@ -80,10 +80,10 @@ export class SchedulerJobComponent implements OnInit {
       [this.usePointerProperty]: [formData ? formData.usePointer : true],
       [this.intervalRangeProperty]: [formData ? formData.intervalRange : 1, Validators.required],
       [this.timeUnitProperty]: [
-        formData ? this.jobsTimeUnits.find(x => x.id === formData.timeUnit) : this.defaultTimeUnit,
-        Validators.required
+        formData ? this.jobsTimeUnits.find((x) => x.id === formData.timeUnit) : this.defaultTimeUnit,
+        Validators.required,
       ],
-      [this.enableProperty]: [formData ? formData.enable : true]
+      [this.enableProperty]: [formData ? formData.enable : true],
     });
   }
 
@@ -91,19 +91,24 @@ export class SchedulerJobComponent implements OnInit {
 
   setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
     this.jobsTimeUnits = jobsTimeUnits;
-    this.defaultTimeUnit = jobsTimeUnits.find(x => x.id === 3);
+    this.defaultTimeUnit = jobsTimeUnits.find((x) => x.id === 3);
 
     this.selectedJobId = selectedJobId;
     this.selectedId = job.readOptions;
     this.monthDays = job.monthDays;
+
+    if (job.readOptions === 0) {
+      job.readOptions = null;
+    }
     this.form = this.createForm(job);
+
     this.changeReadOptionId();
     this.form.get(this.registersProperty).clearValidators();
   }
 
   setFormAddNew(jobsTimeUnits: Codelist<number>[]) {
     this.jobsTimeUnits = jobsTimeUnits;
-    this.defaultTimeUnit = jobsTimeUnits.find(x => x.id === 3);
+    this.defaultTimeUnit = jobsTimeUnits.find((x) => x.id === 3);
 
     this.form = this.createForm(null);
     this.changeReadOptionId();
@@ -142,7 +147,7 @@ export class SchedulerJobComponent implements OnInit {
       timeUnit:
         this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0,
       enable: this.form.get(this.enableProperty).value,
-      actionType: 2
+      actionType: 2,
     };
     return formData;
   }
@@ -179,7 +184,7 @@ export class SchedulerJobComponent implements OnInit {
     }
     const successMessage = $localize`Meter Units Read Scheduler was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         // if (result) {
         // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
         if (addNew) {
@@ -204,7 +209,7 @@ export class SchedulerJobComponent implements OnInit {
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
     this.form
       .get(this.timeProperty)
-      .setValidators(_.find(selectedValuesForTimeProperty, x => x === this.selectedId) ? [Validators.required] : []);
+      .setValidators(_.find(selectedValuesForTimeProperty, (x) => x === this.selectedId) ? [Validators.required] : []);
     this.form.get(this.nMinutesProperty).setValidators(this.show_nMinutes() ? [Validators.required] : []);
     this.form.get(this.nHoursProperty).setValidators(this.show_nHours() ? [Validators.required] : []);
     this.form.get(this.weekDaysProperty).setValidators(this.showWeekDays() ? [Validators.required] : []);
@@ -219,11 +224,11 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.findIndex(this.monthDays, x => x === dayinMonth) > -1 ? true : false;
+    const result = _.findIndex(this.monthDays, (x) => x === dayinMonth) > -1 ? true : false;
     if (!result) {
       this.monthDays.push(dayinMonth);
     } else {
-      _.remove(this.monthDays, x => x === dayinMonth);
+      _.remove(this.monthDays, (x) => x === dayinMonth);
     }
     const daysSorted = this.monthDays.sort((a, b) => a - b);
 
@@ -247,11 +252,11 @@ export class SchedulerJobComponent implements OnInit {
 
   // properties - START
   get readOptionsProperty() {
-    return nameOf<SchedulerJobForm>(o => o.readOptions);
+    return nameOf<SchedulerJobForm>((o) => o.readOptions);
   }
 
   get nMinutesProperty() {
-    return nameOf<SchedulerJobForm>(o => o.nMinutes);
+    return nameOf<SchedulerJobForm>((o) => o.nMinutes);
   }
 
   show_nMinutes() {
@@ -259,7 +264,7 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get nHoursProperty() {
-    return nameOf<SchedulerJobForm>(o => o.nHours);
+    return nameOf<SchedulerJobForm>((o) => o.nHours);
   }
 
   show_nHours() {
@@ -267,16 +272,16 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get timeProperty() {
-    return nameOf<SchedulerJobForm>(o => o.time);
+    return nameOf<SchedulerJobForm>((o) => o.time);
   }
 
   get timeForHoursProperty() {
-    return nameOf<SchedulerJobForm>(o => o.timeForHours);
+    return nameOf<SchedulerJobForm>((o) => o.timeForHours);
   }
 
   showTime() {
     const idsForTime = [4, 5, 6];
-    const found = _.find(idsForTime, x => x === this.selectedId);
+    const found = _.find(idsForTime, (x) => x === this.selectedId);
     return found !== undefined;
   }
 
@@ -285,7 +290,7 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get weekDaysProperty() {
-    return nameOf<SchedulerJobForm>(o => o.weekDays);
+    return nameOf<SchedulerJobForm>((o) => o.weekDays);
   }
 
   showWeekDays() {
@@ -293,7 +298,7 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get monthDaysProperty() {
-    return nameOf<SchedulerJobForm>(o => o.monthDays);
+    return nameOf<SchedulerJobForm>((o) => o.monthDays);
   }
 
   showMonthDays() {
@@ -301,11 +306,11 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get registersProperty() {
-    return nameOf<SchedulerJobForm>(o => o.registers);
+    return nameOf<SchedulerJobForm>((o) => o.registers);
   }
 
   get iecProperty() {
-    return nameOf<SchedulerJobForm>(o => o.iec);
+    return nameOf<SchedulerJobForm>((o) => o.iec);
   }
 
   showIec() {
@@ -313,23 +318,23 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get descriptionProperty() {
-    return nameOf<SchedulerJobForm>(o => o.description);
+    return nameOf<SchedulerJobForm>((o) => o.description);
   }
 
   get usePointerProperty() {
-    return nameOf<SchedulerJobForm>(o => o.usePointer);
+    return nameOf<SchedulerJobForm>((o) => o.usePointer);
   }
 
   get intervalRangeProperty() {
-    return nameOf<SchedulerJobForm>(o => o.intervalRange);
+    return nameOf<SchedulerJobForm>((o) => o.intervalRange);
   }
 
   get timeUnitProperty() {
-    return nameOf<SchedulerJobForm>(o => o.timeUnit);
+    return nameOf<SchedulerJobForm>((o) => o.timeUnit);
   }
 
   get enableProperty() {
-    return nameOf<SchedulerJobForm>(o => o.enable);
+    return nameOf<SchedulerJobForm>((o) => o.enable);
   }
 
   // properties - END
