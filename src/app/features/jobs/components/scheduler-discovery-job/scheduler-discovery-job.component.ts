@@ -18,7 +18,7 @@ import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common
 
 @Component({
   selector: 'app-scheduler-discovery-job',
-  templateUrl: './scheduler-discovery-job.component.html'
+  templateUrl: './scheduler-discovery-job.component.html',
 })
 export class SchedulerDiscoveryJobComponent implements OnInit {
   @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
@@ -32,7 +32,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     { value: '3' as string, label: $localize`Hour(s)`, labelSmall: $localize`Every N hour(s)` },
     { value: '4' as string, label: $localize`Daily`, labelSmall: $localize`Every day specific time` },
     { value: '5' as string, label: $localize`Weekly`, labelSmall: $localize`One or more days of the week` },
-    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` }
+    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` },
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: $localize`Mon-Fri` },
@@ -42,7 +42,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     { id: 5, value: $localize`Thu` },
     { id: 6, value: $localize`Fri` },
     { id: 7, value: $localize`Sat` },
-    { id: 8, value: $localize`Sun` }
+    { id: 8, value: $localize`Sun` },
   ];
   selectedId = 0;
   monthDays: number[] = [];
@@ -63,7 +63,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
 
   createForm(formData: SchedulerJob): FormGroup {
     return this.formBuilder.group({
-      [this.readOptionsProperty]: [formData ? formData.readOptions.toString() : '1', Validators.required],
+      [this.readOptionsProperty]: [formData ? formData.readOptions?.toString() : '1', Validators.required],
       [this.nMinutesProperty]: [formData ? formData.nMinutes : null],
       [this.nHoursProperty]: [formData ? formData.nHours : null],
       [this.timeProperty]: [formData && formData.dateTime ? moment(formData.dateTime).toDate() : null],
@@ -72,7 +72,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
       [this.monthDaysProperty]: [formData && formData.monthDays ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
       [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
-      [this.enableProperty]: [formData ? formData.enable : true]
+      [this.enableProperty]: [formData ? formData.enable : true],
     });
   }
 
@@ -82,6 +82,10 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     this.selectedJobId = selectedJobId;
     this.selectedId = job.readOptions;
     this.monthDays = job.monthDays;
+
+    if (job.readOptions === 0) {
+      job.readOptions = null;
+    }
     this.form = this.createForm(job);
 
     // fill session with selected importTemplates
@@ -106,7 +110,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     if (ids != null) {
       const concentrList: string[] = ids;
       this.deviceFiltersAndSearch = {
-        id: concentrList
+        id: concentrList,
       };
     }
 
@@ -141,7 +145,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
       intervalRange: 0,
       timeUnit: 0,
       actionType: 1,
-      enable: this.form.get(this.enableProperty).value
+      enable: this.form.get(this.enableProperty).value,
     };
 
     return formData;
@@ -173,7 +177,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     }
     const successMessage = $localize`Data Concentrator Discovery Scheduler was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         if (addNew) {
           this.resetAll();
         } else {
@@ -194,7 +198,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     this.selectedId = parseInt(this.form.get(this.readOptionsProperty).value, 10);
     this.form
       .get(this.timeProperty)
-      .setValidators(_.find(selectedValuesForTimeProperty, x => x === this.selectedId) ? [Validators.required] : []);
+      .setValidators(_.find(selectedValuesForTimeProperty, (x) => x === this.selectedId) ? [Validators.required] : []);
     this.form.get(this.nMinutesProperty).setValidators(this.show_nMinutes() ? [Validators.required] : []);
     this.form.get(this.nHoursProperty).setValidators(this.show_nHours() ? [Validators.required] : []);
     this.form.get(this.weekDaysProperty).setValidators(this.showWeekDays() ? [Validators.required] : []);
@@ -209,11 +213,11 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.findIndex(this.monthDays, x => x === dayinMonth) > -1 ? true : false;
+    const result = _.findIndex(this.monthDays, (x) => x === dayinMonth) > -1 ? true : false;
     if (!result) {
       this.monthDays.push(dayinMonth);
     } else {
-      _.remove(this.monthDays, x => x === dayinMonth);
+      _.remove(this.monthDays, (x) => x === dayinMonth);
     }
 
     const daysSorted = this.monthDays.sort((a, b) => a - b);
@@ -236,11 +240,11 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
 
   // properties - START
   get readOptionsProperty() {
-    return nameOf<SchedulerJobForm>(o => o.readOptions);
+    return nameOf<SchedulerJobForm>((o) => o.readOptions);
   }
 
   get nMinutesProperty() {
-    return nameOf<SchedulerJobForm>(o => o.nMinutes);
+    return nameOf<SchedulerJobForm>((o) => o.nMinutes);
   }
 
   show_nMinutes() {
@@ -248,7 +252,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   get nHoursProperty() {
-    return nameOf<SchedulerJobForm>(o => o.nHours);
+    return nameOf<SchedulerJobForm>((o) => o.nHours);
   }
 
   show_nHours() {
@@ -256,16 +260,16 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   get timeProperty() {
-    return nameOf<SchedulerJobForm>(o => o.time);
+    return nameOf<SchedulerJobForm>((o) => o.time);
   }
 
   get timeForHoursProperty() {
-    return nameOf<SchedulerJobForm>(o => o.timeForHours);
+    return nameOf<SchedulerJobForm>((o) => o.timeForHours);
   }
 
   showTime() {
     const idsForTime = [4, 5, 6];
-    const found = _.find(idsForTime, x => x === this.selectedId);
+    const found = _.find(idsForTime, (x) => x === this.selectedId);
     return found !== undefined;
   }
 
@@ -274,7 +278,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   get weekDaysProperty() {
-    return nameOf<SchedulerJobForm>(o => o.weekDays);
+    return nameOf<SchedulerJobForm>((o) => o.weekDays);
   }
 
   showWeekDays() {
@@ -282,7 +286,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   get monthDaysProperty() {
-    return nameOf<SchedulerJobForm>(o => o.monthDays);
+    return nameOf<SchedulerJobForm>((o) => o.monthDays);
   }
 
   showMonthDays() {
@@ -290,15 +294,15 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
   }
 
   get registersProperty() {
-    return nameOf<SchedulerJobForm>(o => o.registers);
+    return nameOf<SchedulerJobForm>((o) => o.registers);
   }
 
   get descriptionProperty() {
-    return nameOf<SchedulerJobForm>(o => o.description);
+    return nameOf<SchedulerJobForm>((o) => o.description);
   }
 
   get enableProperty() {
-    return nameOf<SchedulerJobForm>(o => o.enable);
+    return nameOf<SchedulerJobForm>((o) => o.enable);
   }
 
   // properties - END

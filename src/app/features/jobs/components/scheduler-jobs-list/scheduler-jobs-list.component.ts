@@ -28,7 +28,7 @@ import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-d
 
 @Component({
   selector: 'app-scheduler-jobs-list',
-  templateUrl: './scheduler-jobs-list.component.html'
+  templateUrl: './scheduler-jobs-list.component.html',
 })
 export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   selectedId = 1;
@@ -56,7 +56,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     startRow: 0,
     endRow: 0,
     sortModel: [],
-    searchModel: []
+    searchModel: [],
   };
   columnDefs = [];
 
@@ -70,7 +70,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   pageSizes: Codelist<number>[] = [
     { id: 20, value: '20' },
     { id: 50, value: '50' },
-    { id: 100, value: '100' }
+    { id: 100, value: '100' },
   ];
 
   selectedPageSize: Codelist<number> = this.pageSizes[0];
@@ -110,7 +110,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         if (event) {
           this.refreshGrid();
         }
-      }
+      },
     });
 
     this.form = this.createForm(this.pageSizes[0]);
@@ -146,7 +146,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         instance.schedulerJobsListGridService.getSessionSettingsPageIndex(),
         displayedColumnsNames
       )
-      .subscribe(data => {
+      .subscribe((data) => {
         instance.gridApi.hideOverlay();
 
         if (data === undefined || data == null || data.totalCount === 0) {
@@ -191,7 +191,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       last: $localize`last`,
       first: $localize`first`,
       previous: $localize`previous`,
-      loadingOoo: $localize`loading...`
+      loadingOoo: $localize`loading...`,
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);
@@ -258,20 +258,20 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addJob() {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
 
-    this.codelistService.timeUnitCodeslist().subscribe(units => {
+    this.codelistService.timeUnitCodeslist().subscribe((units) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       component.setFormAddNew(units);
 
       modalRef.result.then(
-        data => {
+        (data) => {
           // on close (CONFIRM)
           this.refreshGrid();
         },
-        reason => {
+        (reason) => {
           // on dismiss (CLOSE)
         }
       );
@@ -280,7 +280,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addDiscoveryJob() {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
 
     const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
@@ -288,11 +288,11 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     component.setFormAddNew();
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         this.refreshGrid();
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -300,7 +300,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addDcTimeSyncJob() {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
 
     const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
@@ -308,11 +308,11 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     component.setFormAddNew();
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         this.refreshGrid();
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -320,22 +320,24 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addDcReadEventsJob() {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
 
-    const modalRef = this.modalService.open(SchedulerDcReadEventsJobComponent, options);
-    const component: SchedulerDcReadEventsJobComponent = modalRef.componentInstance;
-    component.setFormAddNew();
+    this.codelistService.timeUnitCodeslist().subscribe((units) => {
+      const modalRef = this.modalService.open(SchedulerDcReadEventsJobComponent, options);
+      const component: SchedulerDcReadEventsJobComponent = modalRef.componentInstance;
+      component.setFormAddNew(units);
 
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        this.refreshGrid();
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.refreshGrid();
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
   }
 
   setGridDataSource() {
@@ -358,33 +360,33 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         if (that.authService.isRefreshNeeded2()) {
           that.authService
             .renewToken()
-            .then(value => {
+            .then((value) => {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
               that.loadData(that, paramsRow);
             })
-            .catch(err => {
+            .catch((err) => {
               if (err.message === 'login_required') {
-                that.authService.login().catch(err2 => console.log(err2));
+                that.authService.login().catch((err2) => console.log(err2));
               }
             });
         } else {
           that.loadData(that, paramsRow);
         }
-      }
+      },
     };
     this.gridApi.setServerSideDatasource(that.datasource);
   }
 
   getSchedulerJobsListGridLayoutStore() {
     this.settingsStoreService.getCurrentUserSettings(this.schedulerJobsListGridLayoutStoreKey).subscribe(
-      settings => {
+      (settings) => {
         this.schedulerJobsListGridLayoutStore = settings as SchedulerJobsListGridLayoutStore;
         this.addSettingsToSession(settings);
         this.areSettingsLoaded = true;
         this.setGridDataSource();
       },
-      error => {
+      (error) => {
         this.areSettingsLoaded = true;
         this.setGridDataSource();
       }
@@ -428,7 +430,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       sortModel: sortModel ? sortModel : this.schedulerJobsListGridLayoutStore.sortModel,
       searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText(),
       searchWildcards: this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards(),
-      pageSize: this.selectedPageSize
+      pageSize: this.selectedPageSize,
     };
 
     if (
@@ -450,7 +452,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   createForm(pageSize: Codelist<number>): FormGroup {
     return this.fb.group({
-      [this.pageSizeProperty]: pageSize
+      [this.pageSizeProperty]: pageSize,
     });
   }
 
@@ -498,7 +500,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   getAllDisplayedColumnsNames(): string[] {
     if (this.gridColumnApi) {
       const columns = this.gridColumnApi.getAllDisplayedColumns();
-      return columns.map(c => c.colId);
+      return columns.map((c) => c.colId);
     }
     return;
   }
