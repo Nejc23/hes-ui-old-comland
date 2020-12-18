@@ -1,3 +1,4 @@
+import { jobActionType } from './../../enums/job-action-type.enum';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -24,7 +25,7 @@ export class SchedulerJobComponent implements OnInit {
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
-  selectedRowsCount: number = 0;
+  selectedRowsCount = 0;
 
   form: FormGroup;
   readOptions: RadioOption[] = [
@@ -147,7 +148,7 @@ export class SchedulerJobComponent implements OnInit {
       timeUnit:
         this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0,
       enable: this.form.get(this.enableProperty).value,
-      actionType: 2,
+      actionType: jobActionType.reading,
     };
     return formData;
   }
@@ -349,6 +350,18 @@ export class SchedulerJobComponent implements OnInit {
     } else {
       this.form.get(this.weekDaysProperty).disable();
     }
+
+    this.form.get(this.intervalRangeProperty).clearValidators();
+    this.form.get(this.timeUnitProperty).clearValidators();
+
+    console.log('this.form.get(this.usePointerProperty).value', this.form.get(this.usePointerProperty).value);
+    if (this.form.get(this.usePointerProperty).value) {
+      this.form.get(this.intervalRangeProperty).setValidators(Validators.required);
+      this.form.get(this.timeUnitProperty).setValidators(Validators.required);
+    }
+
+    this.form.get(this.intervalRangeProperty).updateValueAndValidity();
+    this.form.get(this.timeUnitProperty).updateValueAndValidity();
 
     // check form
     this.formUtils.touchElementsAndValidate(this.form);

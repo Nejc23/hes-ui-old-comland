@@ -15,6 +15,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { DataConcentratorUnitsSelectComponent } from 'src/app/features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
+import { jobActionType } from '../../enums/job-action-type.enum';
 
 @Component({
   selector: 'app-dc-time-sync-discovery-job',
@@ -147,7 +148,7 @@ export class SchedulerDcTimeSyncJobComponent implements OnInit {
       usePointer: false,
       intervalRange: 0,
       timeUnit: 0,
-      actionType: 3,
+      actionType: jobActionType.timeSync,
       enable: this.form.get(this.enableProperty).value,
     };
 
