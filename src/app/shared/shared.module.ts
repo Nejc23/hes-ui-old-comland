@@ -1,3 +1,4 @@
+import { SchedulerTopologyJobComponent } from './../features/jobs/components/scheduler-topology-job/scheduler-topology-job.component';
 import { SchedulerDcReadEventsJobComponent } from './../features/jobs/components/dc-read-events/scheduler-dc-read-events-job.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysDisconnectComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
@@ -94,6 +95,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     AddDcuFormComponent,
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
+    SchedulerTopologyJobComponent,
     SchedulerDcTimeSyncJobComponent,
     SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
@@ -124,7 +126,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent
+    DcuFwUpgradeComponent,
   ],
   imports: [
     CommonModule,
@@ -144,8 +146,8 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
       GridSelectionHeaderComponent,
       GridCellNameComponent,
       GridCellIdNumberComponent,
-      GridCellIpComponent
-    ])
+      GridCellIpComponent,
+    ]),
   ],
   declarations: [
     BaseTemplateComponent,
@@ -160,6 +162,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     AddDcuFormComponent,
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
+    SchedulerTopologyJobComponent,
     SchedulerDcTimeSyncJobComponent,
     SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
@@ -203,7 +206,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent
+    DcuFwUpgradeComponent,
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -212,6 +215,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     AddDcuFormComponent,
     SchedulerJobComponent,
     SchedulerDiscoveryJobComponent,
+    SchedulerTopologyJobComponent,
     SchedulerDcTimeSyncJobComponent,
     SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
@@ -230,8 +234,8 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent
+    DcuFwUpgradeComponent,
   ],
-  providers: [AgGridSharedFunctionsService]
+  providers: [AgGridSharedFunctionsService],
 })
 export class SharedModule {}

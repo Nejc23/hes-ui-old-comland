@@ -15,6 +15,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { DataConcentratorUnitsSelectComponent } from 'src/app/features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
+import { jobActionType } from '../../enums/job-action-type.enum';
 
 @Component({
   selector: 'app-dc-read-events-discovery-job',
@@ -165,7 +166,7 @@ export class SchedulerDcReadEventsJobComponent implements OnInit {
         this.form.get(this.intervalRangeProperty).value !== null ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
       timeUnit:
         this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0,
-      actionType: 4,
+      actionType: jobActionType.readEvents,
       enable: this.form.get(this.enableProperty).value,
     };
 
@@ -353,6 +354,18 @@ export class SchedulerDcReadEventsJobComponent implements OnInit {
     } else {
       this.form.get(this.weekDaysProperty).disable();
     }
+
+    this.form.get(this.intervalRangeProperty).clearValidators();
+    this.form.get(this.timeUnitProperty).clearValidators();
+
+    console.log('this.form.get(this.usePointerProperty).value', this.form.get(this.usePointerProperty).value);
+    if (this.form.get(this.usePointerProperty).value) {
+      this.form.get(this.intervalRangeProperty).setValidators(Validators.required);
+      this.form.get(this.timeUnitProperty).setValidators(Validators.required);
+    }
+
+    this.form.get(this.intervalRangeProperty).updateValueAndValidity();
+    this.form.get(this.timeUnitProperty).updateValueAndValidity();
 
     // check form
     this.formUtils.touchElementsAndValidate(this.form);

@@ -18,10 +18,10 @@ import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-co
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 
 @Component({
-  selector: 'app-scheduler-discovery-job',
-  templateUrl: './scheduler-discovery-job.component.html',
+  selector: 'app-scheduler-topology-job',
+  templateUrl: './scheduler-topology-job.component.html',
 })
-export class SchedulerDiscoveryJobComponent implements OnInit {
+export class SchedulerTopologyJobComponent implements OnInit {
   @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
@@ -145,7 +145,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
       usePointer: false,
       intervalRange: 0,
       timeUnit: 0,
-      actionType: jobActionType.discovery,
+      actionType: jobActionType.topology,
       enable: this.form.get(this.enableProperty).value,
     };
 
@@ -176,6 +176,7 @@ export class SchedulerDiscoveryJobComponent implements OnInit {
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
+
     const successMessage = $localize`Data Concentrator Discovery Scheduler was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {

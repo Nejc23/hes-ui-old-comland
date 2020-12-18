@@ -25,6 +25,7 @@ import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-job
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-dc-read-events-job.component';
+import { SchedulerTopologyJobComponent } from '../scheduler-topology-job/scheduler-topology-job.component';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -338,6 +339,26 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         }
       );
     });
+  }
+
+  addTopologyJob() {
+    const options: NgbModalOptions = {
+      size: 'xl',
+    };
+
+    const modalRef = this.modalService.open(SchedulerTopologyJobComponent, options);
+    const component: SchedulerTopologyJobComponent = modalRef.componentInstance;
+    component.setFormAddNew();
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        this.refreshGrid();
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   setGridDataSource() {
