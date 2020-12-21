@@ -30,7 +30,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = $localize`can only upload one file.`;
-  acceptExtensions = '.img';
+  acceptExtensions = '.img, .bin';
   public files: Array<any>;
   activate = false;
 
@@ -93,7 +93,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.createFwUpgrade(values);
-    const successMessage = $localize`Meter Units upload Edited was successfully`;
+    const successMessage = $localize`Meter image upload was successfull`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       result => {
         if (result && result.requestId.length > 0) {
@@ -119,7 +119,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   }
 
   successUploaded(event) {
-    this.imgGuid = event.response.body;
+    this.imgGuid = JSON.parse(event.response.body);
   }
 
   uploadEvent(event) {
