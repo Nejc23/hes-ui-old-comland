@@ -2064,6 +2064,9 @@
       <trans-unit id="6924306118604242670" datatype="html">
         <source>Register group</source>
         <target>Register group</target>
+      </trans-unit><trans-unit id="4228487324965058723" datatype="html">
+        <source>Please, check your device template.</source>
+        <target state="new">Please, check your device template.</target>
       </trans-unit>
       <trans-unit id="3059662776648332773" datatype="html">
         <source>Concentrator Units</source>
