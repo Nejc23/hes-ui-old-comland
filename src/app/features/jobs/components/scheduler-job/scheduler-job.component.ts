@@ -378,7 +378,7 @@ export class SchedulerJobComponent implements OnInit {
 
   getSelectedRowsCount() {
     if (this.selectedRowsCount) {
-      return ` (${this.selectedRowsCount})`;
+      return $localize`(${this.selectedRowsCount} selected)`;
     }
 
     return '';

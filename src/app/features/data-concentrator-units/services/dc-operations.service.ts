@@ -18,11 +18,11 @@ import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/fil
 import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
 import {
   IActionRequestGetCommonRegisterGroups,
-  IActionRequestParams
+  IActionRequestParams,
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DcOperationsService {
   messageActionInProgress = $localize`Action in progress!`;
@@ -38,7 +38,7 @@ export class DcOperationsService {
 
   onScheduleReadJobs(params: RequestFilterParams) {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
@@ -46,7 +46,7 @@ export class DcOperationsService {
       id: params.concentratorIds,
       search: params.search,
       filter: params.filter,
-      excludeIds: params.excludeIds
+      excludeIds: params.excludeIds,
     };
     modalRef.result.then().catch(() => {});
   }
@@ -223,15 +223,15 @@ export class DcOperationsService {
         break;
     }
 
-    component.modalTitle = $localize`${operationName} (${selectedCount})`;
+    component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
     component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
-          value => {
+          (value) => {
             /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
@@ -239,12 +239,12 @@ export class DcOperationsService {
               this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
             }*/
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -256,13 +256,13 @@ export class DcOperationsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -280,9 +280,9 @@ export class DcOperationsService {
       textSearch: {
         value: '',
         propNames: [],
-        useWildcards: false
+        useWildcards: false,
       },
-      sort: []
+      sort: [],
     };
 
     // select from row
@@ -306,59 +306,59 @@ export class DcOperationsService {
         if (requestModel.filterModel) {
           requestParam.filter = [];
           if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
-            requestModel.filterModel.statuses.map(row =>
+            requestModel.filterModel.statuses.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.status),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
           if (requestModel.filterModel.types && requestModel.filterModel.types.length > 0) {
-            requestModel.filterModel.types.map(row =>
+            requestModel.filterModel.types.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.type),
                 propValue: row.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
           if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
-            requestModel.filterModel.tags.map(row =>
+            requestModel.filterModel.tags.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.tags),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.contains
+                filterOperation: filterOperationEnum.contains,
               })
             );
           }
           if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
-            requestModel.filterModel.vendors.map(row =>
+            requestModel.filterModel.vendors.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.vendor),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
 
           if (requestModel.sortModel && requestModel.sortModel.length > 0) {
-            requestModel.sortModel.map(row =>
+            requestModel.sortModel.map((row) =>
               requestParam.sort.push({
                 propName: capitalize(row.colId),
                 index: 0,
-                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc,
               })
             );
           }
         }
         requestParam.excludeIds = [];
-        excludedRows.map(row => requestParam.excludeIds.push(row.concentratorId));
+        excludedRows.map((row) => requestParam.excludeIds.push(row.concentratorId));
       } else {
         const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
         if (selectedRows && selectedRows.length > 0) {
           requestParam.deviceIds = [];
-          selectedRows.map(row => requestParam.deviceIds.push(row.concentratorId));
+          selectedRows.map((row) => requestParam.deviceIds.push(row.concentratorId));
         }
       }
     }
