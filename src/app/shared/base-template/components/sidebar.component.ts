@@ -1,27 +1,31 @@
-import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, SimpleChanges, OnChanges } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import * as _ from 'lodash';
 import { filter } from 'rxjs/operators';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 import { PermissionsService } from '../../../core/permissions/services/permissions.service';
-import { SidebarSessionStoreService } from './services/sidbebar-session-store.service';
+import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnChanges {
   @Input() items: Array<SidebarItem> = [];
 
-  constructor(private router: Router, public permissionsService: PermissionsService, private sessionService: SidebarSessionStoreService) {}
+  constructor(
+    private router: Router,
+    public permissionsService: PermissionsService,
+    private sidebarCookieService: SidebarCookieStoreService
+  ) {}
 
   ngOnInit() {
     this.updateItems(this.items);
 
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(() => {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe(() => {
       this.updateItems(this.items);
     });
   }
@@ -30,8 +34,8 @@ export class SidebarComponent implements OnInit {
     const state = item.opened === SidebarAnimationState.open ? SidebarAnimationState.close : SidebarAnimationState.open;
     item.opened = state;
 
-    if (item.children && item.children.length > 0) {
-      this.sessionService.setSidebarLayout(item.title, state);
+    if (item.hasChildren) {
+      this.sidebarCookieService.setSidebarLayout(item.title, state);
     }
   }
 
@@ -44,14 +48,12 @@ export class SidebarComponent implements OnInit {
    */
   private updateItems(items: Array<SidebarItem>) {
     for (const item of items) {
-      if (this.router.isActive(item.routeLink, false)) {
-        item.opened = SidebarAnimationState.open;
-
-        if (item.children && item.children.length > 0) {
-          this.sessionService.setSidebarLayout(item.title, SidebarAnimationState.open);
+      if (item.children && item.children.length > 0) {
+        if (this.sidebarCookieService.getSidebarLayout(item.title)) {
+          item.opened = this.sidebarCookieService.getSidebarLayout(item.title);
+        } else {
+          item.opened = SidebarAnimationState.open;
         }
-      } else {
-        item.opened = this.sessionService.getSidebarLayout(item.title);
       }
 
       if (item.children && item.children.length > 0) {
@@ -69,7 +71,7 @@ export class SidebarComponent implements OnInit {
   }
 
   hasActiveChildLinks(item: SidebarItem, result = false) {
-    _.each(item.children, x => {
+    _.each(item.children, (x) => {
       if (this.hasAccess(x)) {
         result = true;
       }
@@ -77,5 +79,9 @@ export class SidebarComponent implements OnInit {
     });
 
     return result;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.updateItems(this.items);
   }
 }

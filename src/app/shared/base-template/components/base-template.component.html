@@ -54,10 +54,6 @@
           class="nav-item" routerLinkActive="active"
           [ngClass]="{'active': isRouteActive(item.routeLink)}">
           <a class="nav-link pl-0 pr-0 text-center"><i class="{{item.icon}}"></i></a>
-
-          <div *ngIf="item.hasChildren && (isMenuDropOpened(item) || isRouteActive(item.routeLink))">
-            <div *ngFor="let child of item.children;" class="nav-link ng-star-inserted"></div>
-          </div>
         </li>
       </ul>
 

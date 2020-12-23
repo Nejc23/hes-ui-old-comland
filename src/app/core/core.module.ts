@@ -1,4 +1,4 @@
-import { SidebarSessionStoreService } from './../shared/base-template/components/services/sidbebar-session-store.service';
+import { SidebarCookieStoreService } from './../shared/base-template/components/services/sidbebar-cookie-store.service';
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -40,31 +40,31 @@ import { AppConfigStoreService } from './configuration/services/app-config-store
     ErrorHandlerService,
     GridSettingsCookieStoreService,
     GridSettingsSessionStoreService,
-    SidebarSessionStoreService,
+    SidebarCookieStoreService,
     GridLayoutSessionStoreService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorsInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiUrlInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
     // fakeBaceknd
     // ,fakeBackendProvider
-  ]
+  ],
 })
 export class CoreModule extends EnsureModuleLoadedOnceGuard {
   // Ensure that CoreModule is only loaded into AppModule
@@ -75,7 +75,7 @@ export class CoreModule extends EnsureModuleLoadedOnceGuard {
 
   static forRoot(): ModuleWithProviders<CoreModule> {
     return {
-      ngModule: CoreModule
+      ngModule: CoreModule,
     };
   }
 }

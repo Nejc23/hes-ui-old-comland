@@ -38,7 +38,7 @@
       routerLinkActive="active">
       <a class="nav-link" href="javascript:void(0);" [routerLink]="obj.routeLink"
         *ngIf="!obj.hasChildren && hasAccess(obj) && !obj.openInNewTab">
-        <span class="title" innerHTML={{obj.title}}></span>
+        <span class="title" [ngClass]="{'empty-icon': !obj.icon}" innerHTML="{{obj.title}}"></span>
       </a>
     </li>
   </ul>
