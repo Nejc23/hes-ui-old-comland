@@ -9,7 +9,7 @@ import {
   RequestSetLimiter,
   LimiterDefinitions,
   ResponseCommonRegisterGroup,
-  RegisterDefinitions
+  RegisterDefinitions,
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -21,7 +21,7 @@ import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridL
 
 @Component({
   selector: 'app-plc-meter-set-display-settings',
-  templateUrl: './plc-meter-set-display-settings.component.html'
+  templateUrl: './plc-meter-set-display-settings.component.html',
 })
 export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   form: FormGroup;
@@ -53,6 +53,8 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
   noRowsTemplate = '<span>' + $localize`Drop available registers here.` + '</span>';
 
+  dataLoaded = false;
+
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
@@ -66,7 +68,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   createForm(): FormGroup {
     return this.formBuilder.group(
       {
-        [this.groupListProperty]: [this.selectedGroup, [Validators.required]]
+        [this.groupListProperty]: [this.selectedGroup, [Validators.required]],
       }
       // {
       //   validators: [this.atLeastOneValue]
@@ -84,7 +86,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
         filter: this.filterParam,
         search: this.searchParam,
         excludeIds: this.excludeIdsParam,
-        type: '11'
+        type: '11',
       })
       .subscribe((result: ResponseCommonRegisterGroup[]) => {
         if (result && result.length > 0) {
@@ -98,19 +100,20 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
           this.form = this.createForm();
         }
+        this.dataLoaded = true;
       });
   }
 
   initGroupList() {
     this.groupList$ = [];
-    this.displayGroups.map(dg => this.groupList$.push({ id: dg.groupId, value: dg.name }));
+    this.displayGroups.map((dg) => this.groupList$.push({ id: dg.groupId, value: dg.name }));
     this.selectedGroup = this.groupList$[0];
     this.setRegisterList();
   }
 
   fillData(): IActionRequestSetDisplaySettings {
     const displayRegisters: string[] = [];
-    this.registerListRight.map(r => displayRegisters.push(r.name));
+    this.registerListRight.map((r) => displayRegisters.push(r.name));
 
     const data: IActionRequestSetDisplaySettings = {
       displayGroupName: this.selectedGroup.value,
@@ -121,7 +124,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
       deviceIds: this.actionRequest.deviceIds,
-      excludeIds: this.actionRequest.excludeIds
+      excludeIds: this.actionRequest.excludeIds,
     };
 
     return data;
@@ -150,7 +153,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     const successMessage = $localize`Meter Unit(s) Display settings set successfuly.`;
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         this.modal.close();
       },
       () => {} // error
@@ -169,7 +172,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
       this.registerListRight = [];
       return;
     }
-    this.registerListLeft = this.displayGroups.find(d => d.groupId === this.selectedGroup.id).registerDefinitions;
+    this.registerListLeft = this.displayGroups.find((d) => d.groupId === this.selectedGroup.id).registerDefinitions;
     this.registerListRight = [];
 
     setTimeout(() => {
@@ -209,8 +212,8 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
     const selectedRegDefId = data.registerDefinitionId;
 
-    this.registerListRight = this.registerListRight.filter(r => r.registerDefinitionId !== selectedRegDefId);
-    this.registerListLeft = this.registerListLeft.filter(r => r.registerDefinitionId !== selectedRegDefId);
+    this.registerListRight = this.registerListRight.filter((r) => r.registerDefinitionId !== selectedRegDefId);
+    this.registerListLeft = this.registerListLeft.filter((r) => r.registerDefinitionId !== selectedRegDefId);
 
     const y = event.layerY;
     const itemHeight = this.gridApiLeft.getSizesForCurrentTheme().rowHeight;
