@@ -2,6 +2,9 @@
   Sidebar
 ******************************************************************/
 
+$dropdown-left-border: 3px;
+$dropdown-left-margin: 1px;
+
 .sidebar {
   width: $sidebar-base-width;
   height: 100%;
@@ -17,6 +20,11 @@
       position: relative;
       width: 100%;
 
+      &:hover,
+      &.active {
+        background-color: $gray-300;
+      }
+
       .nav-link {
         text-align: left;
         padding: 0.75 * $spacer $spacer;
@@ -27,17 +35,13 @@
       }
 
       .dropdown-menu {
-        padding: 0 0 0.375 * $spacer 0;
+        padding: 0;
         margin: 0;
         border: 0;
         box-shadow: none;
 
         .nav-item {
           padding-left: $spacer;
-
-          &:first-child .nav-link {
-            padding-top: 0.375 * $spacer;
-          }
         }
       }
 
@@ -117,17 +121,40 @@
         color: $navbar-light-color;
       }
 
-      &:hover,
-      &.dropdown.open {
-        background-color: $gray-300;
+      &.dropdown {
+        padding-left: $dropdown-left-border;
+        margin-left: $dropdown-left-margin;
+        width: calc(100% - #{$dropdown-left-margin});
 
-        >.nav-link {
-          color: $navbar-light-hover-color;
+        .nav-link {
+          padding-left: calc(1rem - #{$dropdown-left-margin} - #{$dropdown-left-border});
+        }
+
+        .dropdown-menu {
+          background-color: $gray-200;
+          .nav-item {
+            padding-left:31px;
+          }
         }
       }
 
-      .dropdown-menu {
-        background-color: $gray-300;
+      &:hover,
+      &.dropdown
+      {
+        &.open {
+          border-left: $dropdown-left-border solid $secondary;
+          padding-left:0px;
+          background-color: $gray-200;
+
+          >.nav-link {
+            color: $navbar-light-hover-color;
+          }
+
+        }
+        &.active,
+        &:hover {
+          background-color: $gray-300;
+        }
       }
 
       &.active {

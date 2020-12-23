@@ -1,4 +1,5 @@
-import { Component, OnInit, HostListener, Output, EventEmitter } from '@angular/core';
+import { SidebarComponent } from './sidebar.component';
+import { Component, OnInit, HostListener, Output, EventEmitter, ViewChild } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
 import * as _ from 'lodash';
@@ -17,13 +18,14 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { brand } from 'src/environments/brand/default/brand';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SidebarToggleService } from './services/sidebar.service';
-import { SidebarSessionStoreService } from './services/sidbebar-session-store.service';
+import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
+import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 
 @Component({
   selector: 'app-base-template',
   templateUrl: './base-template.component.html',
   providers: [],
-  animations: [trigger('navItemsTrigger', [transition(':enter', [style({ opacity: 0 }), animate('300ms 200ms', style({ opacity: 1 }))])])]
+  animations: [trigger('navItemsTrigger', [transition(':enter', [style({ opacity: 0 }), animate('300ms 200ms', style({ opacity: 1 }))])])],
 })
 export class BaseTemplateComponent implements OnInit {
   public app: any;
@@ -52,6 +54,8 @@ export class BaseTemplateComponent implements OnInit {
 
   pageTitle = '';
 
+  sidebarMenuStateCookieKey = 'sidebarMenuState';
+
   constructor(
     private sidebarService: SidebarService,
     private cookieService: CookieService,
@@ -61,17 +65,19 @@ export class BaseTemplateComponent implements OnInit {
     private acitavedRouter: ActivatedRoute,
     private sidebarToggleService: SidebarToggleService,
     private route: Router,
-    private sessionService: SidebarSessionStoreService
+    private sidebarCookieService: SidebarCookieStoreService
   ) {
     this.app = {
       layout: {
         sidePanelOpen: true,
         isMenuOpened: true,
-        isMenuCollapsed: false,
+        isMenuCollapsed: this.isMenuCollapsed(),
         themeConfigOpen: false,
-        rtlActived: false
-      }
+        rtlActived: false,
+      },
     };
+
+    console.log('baseTemplate constructor', this.app);
 
     this.getScreenSize();
 
@@ -129,19 +135,20 @@ export class BaseTemplateComponent implements OnInit {
   fillMeterUnits() {
     const sidebarItems = this.sidebarService.getSidebarItems();
     console.log(sidebarItems);
-    this.codeList.meterUnitTypeCodelist().subscribe(list => {
+    this.codeList.meterUnitTypeCodelist().subscribe((list) => {
       if (list && list.length > 0) {
-        list.forEach(element => {
+        list.forEach((element) => {
           const newElement = {
             title: $localize`${element.value}`,
             routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
             hasChildren: false,
-            children: []
+            children: [],
           };
           sidebarItems[1].children.push(newElement);
           sidebarItems[1].hasChildren = true;
         });
 
+        this.sidebarItems = [...this.sidebarItems]; // just to udpate items in child component
         this.sidebarMeterUnitsItems = sidebarItems;
       }
     });
@@ -178,14 +185,7 @@ export class BaseTemplateComponent implements OnInit {
 
   @HostListener('click', ['$event.target'])
   onClick() {
-    this.cookieService.set(
-      config.authTimeStamp,
-      moment()
-        .utc()
-        .toISOString(),
-      null,
-      environment.cookiePath
-    );
+    this.cookieService.set(config.authTimeStamp, moment().utc().toISOString(), null, environment.cookiePath);
   }
 
   mouseOverNav() {
@@ -211,6 +211,13 @@ export class BaseTemplateComponent implements OnInit {
   doToggleMenu() {
     this.app.layout.isMenuCollapsed = !this.app.layout.isMenuCollapsed;
     this.sidebarToggleService.toggleMenu();
+
+    let sidebarState = SidebarAnimationState.open;
+    if (this.app.layout.isMenuCollapsed) {
+      sidebarState = SidebarAnimationState.close;
+    }
+
+    this.sidebarCookieService.setSidebarLayout(this.sidebarMenuStateCookieKey, sidebarState);
   }
   /*  get companyIdProperty() {
     return 'companyId';
@@ -220,8 +227,8 @@ export class BaseTemplateComponent implements OnInit {
     return this.route.url.startsWith(link);
   }
 
-  isMenuDropOpened(item: SidebarItem) {
-    const isOpened = this.sessionService.getSidebarLayout(item.title);
-    return isOpened === 'opened';
+  isMenuCollapsed(): boolean {
+    const sidebarMenuState = this.sidebarCookieService.getSidebarLayout('sidebarMenuState');
+    return sidebarMenuState === SidebarAnimationState.close;
   }
 }
