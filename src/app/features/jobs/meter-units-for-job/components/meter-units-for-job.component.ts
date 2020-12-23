@@ -23,6 +23,7 @@ import { RequestMeterUnitsForJob } from 'src/app/core/repository/interfaces/mete
 import { MeterUnitsForJobGridService } from '../services/meter-units-for-job-grid.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { GridUtils } from '../../../global/grid.utils';
 
 @Component({
   templateUrl: './meter-units-for-job.component.html'
@@ -479,6 +480,14 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.meterUnitsForJobGridService.getSessionSettingsPageIndex());
     }
+  }
+
+  gridSizeChanged() {
+    this.resizeColumns();
+  }
+
+  resizeColumns() {
+    GridUtils.resizeColumns(this.gridColumnApi, this.gridOptions);
   }
 
   // if selected-all clicked, than disable deselection of the rows

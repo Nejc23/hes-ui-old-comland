@@ -3,15 +3,9 @@
     <div class="mb-2 grid-actions">
       <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="" [useWildcards]="useWildcards" (toggleWildcards)="toggleWildcards($event)">
         <div *ngIf="selectedAtLeastOneRowOnGrid">
-          <div dropdown class="btn-group">
-            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
-              data-toggle="dropdown"><span i18n>Operations</span></button>
-            <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
-              <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
+          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary"
                 (click)="onRemoveFromJob()"><i class="far fa-calendar"></i>
                 <span i18n>Remove from Job</span></button>
-            </div>
-          </div>
         </div>
       </app-action-form>
     </div>
@@ -19,28 +13,46 @@
   <!-- ag-grid -->
   <div class="list-for-job-body-scroll">
     <div>
-      <ag-grid-angular class="ag-theme-epoint" style="width: 100%;" #agGrid
-        [domLayout]=agGridSettings.domLayout suppressSizeToFit=agGridSettings.suppressSizeToFit
-        [localeText]="localeText" [modules]="modules" [icons]="icons" [pagination]=agGridSettings.pagination
-        [paginationPageSize]=agGridSettings.paginationPageSize [multiSortKey]=agGridSettings.multiSortKey
+      <ag-grid-angular class="ag-theme-epoint custom-paging" style="width: 100%; height: calc(100% - 25px);" #agGrid
+        [domLayout]=agGridSettings.domLayout
+        [localeText]="localeText"
+        [modules]="modules"
+        [icons]="icons"
+        [pagination]=agGridSettings.pagination
+        [paginationPageSize]=agGridSettings.paginationPageSize
+        [multiSortKey]=agGridSettings.multiSortKey
         [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
         [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-        [frameworkComponents]="frameworkComponents" [cacheBlockSize]=agGridSettings.paginationPageSize
-        [maxBlocksInCache]="1" [gridOptions]="gridOptions" [columnDefs]="columns"
-        [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection [rowSelection]=agGridSettings.rowSelection
-        [overlayNoRowsTemplate]="overlayNoRowsTemplate" [overlayLoadingTemplate]="overlayLoadingTemplate"
-        (selectionChanged)="onSelectionChanged()" (gridReady)="onGridReady($event)"
-        (columnVisible)="onColumnVisible($event)" (toolPanelVisibleChanged)="toolPanelChanged($event)"
-        (paginationChanged)="onPaginationChange($event)" (rowSelected)="onRowSelect($event)"
-        (firstDataRendered)="onFirstDataRendered($event)">
+        [frameworkComponents]="frameworkComponents"
+        [cacheBlockSize]=agGridSettings.paginationPageSize
+        [maxBlocksInCache]="1"
+        [gridOptions]="gridOptions"
+        [columnDefs]="columns"
+        [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+        [rowSelection]=agGridSettings.rowSelection
+        [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+        [overlayLoadingTemplate]="overlayLoadingTemplate"
+        [suppressColumnVirtualisation]="true"
+        (selectionChanged)="onSelectionChanged()"
+        (gridReady)="onGridReady($event)"
+        (columnVisible)="onColumnVisible($event)"
+        (toolPanelVisibleChanged)="toolPanelChanged($event)"
+        (paginationChanged)="onPaginationChange($event)"
+        (rowSelected)="onRowSelect($event)"
+        (firstDataRendered)="onFirstDataRendered($event)"
+        (gridSizeChanged)="gridSizeChanged()">
       </ag-grid-angular>
       <div class="ag-paging-panel-selection">
         <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
           <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
-            <small class="link text-secondary">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
-                <span i18n>Select all</span>
-                    ({{totalCount}})</a></strong></small>
+            <small class="link text-secondary">{{getSelectedCount()}}
+              <strong><span i18n>items selected</span> &middot;
+                <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
+                  <span i18n>Select all</span>({{totalCount}})</a> &middot;
+                <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+                  <span i18n>Clear selected</span></a>
+              </strong>
+            </small>
           </div>
 
           <div class="mr-3" *ngIf="checkSelectedAll()">

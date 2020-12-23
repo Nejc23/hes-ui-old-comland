@@ -12,6 +12,7 @@ import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -121,16 +122,37 @@ export class MeterUnitsForJobGridService {
         headerTooltip: $localize`Select/deselect all`
       },
       {
-        field: 'name',
+        field: gridSysNameColumnsEnum.name,
         headerName: $localize`Name`,
-        pinned: true,
+        pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
         headerTooltip: $localize`Name`
       },
       {
-        field: 'vendor',
+        field: gridSysNameColumnsEnum.serialNumber,
+        headerName: $localize`Serial number`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellIdNumberComponent',
+        headerTooltip: $localize`Serial number`
+      },
+      {
+        field: gridSysNameColumnsEnum.logicalDeviceName,
+        headerName: $localize`Logical device name`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellNameComponent',
+        headerTooltip: $localize`Logical device name`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
+      },
+      {
+        field: gridSysNameColumnsEnum.vendor,
         headerName: $localize`Vendor`,
         pinned: false,
         sortable: true,
@@ -139,13 +161,16 @@ export class MeterUnitsForJobGridService {
         headerTooltip: $localize`Vendor`
       },
       {
-        field: 'id5',
-        headerName: $localize`ID5`,
+        field: gridSysNameColumnsEnum.parent,
+        headerName: $localize`Parent`,
         pinned: false,
         sortable: true,
         filter: false,
-        cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`ID5`
+        cellRenderer: 'gidCellParentComponent',
+        headerTooltip: $localize`Parent`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
       }
     ];
   }
