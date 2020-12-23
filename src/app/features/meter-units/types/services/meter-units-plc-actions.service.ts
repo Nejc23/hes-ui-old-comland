@@ -30,7 +30,7 @@ import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MeterUnitsPlcActionsService {
   messageActionInProgress = $localize`Action in progress!`;
@@ -46,10 +46,10 @@ export class MeterUnitsPlcActionsService {
 
   onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
 
-    this.codelistService.timeUnitCodeslist().subscribe(units => {
+    this.codelistService.timeUnitCodeslist().subscribe((units) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
@@ -58,7 +58,7 @@ export class MeterUnitsPlcActionsService {
         id: params.deviceIds,
         search: params.search,
         filter: params.filter,
-        excludeIds: params.excludeIds
+        excludeIds: params.excludeIds,
       };
       modalRef.result.then().catch(() => {});
     });
@@ -66,7 +66,7 @@ export class MeterUnitsPlcActionsService {
 
   onJobsTemplates(params: IActionRequestParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
-      size: 'xl'
+      size: 'xl',
     };
 
     const modalRef = this.modalService.open(PlcMeterJobsRegistersComponent, options);
@@ -86,13 +86,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;*/
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -104,13 +104,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -127,13 +127,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -147,13 +147,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionRequst = modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -170,13 +170,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -192,13 +192,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -215,14 +215,14 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.meterUnitsTypeGridService.saveMyGridLink_RelaysState_RequestId(data.requestId);
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -239,13 +239,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -257,13 +257,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -332,13 +332,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.actionRequest = params;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -410,15 +410,15 @@ export class MeterUnitsPlcActionsService {
     }
     // component.btnConfirmText = operationName;
 
-    component.modalTitle = $localize`${operationName} (${selectedCount})`;
+    component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
     component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
-          value => {
+          (value) => {
             this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
@@ -426,12 +426,12 @@ export class MeterUnitsPlcActionsService {
               this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
             }
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -442,7 +442,7 @@ export class MeterUnitsPlcActionsService {
       deviceIds: [],
       filter: null,
       search: null,
-      excludeIds: null
+      excludeIds: null,
     };
 
     // select from row
@@ -456,12 +456,12 @@ export class MeterUnitsPlcActionsService {
         requestParam.search = requestModel.searchModel;
         requestParam.excludeIds = [];
 
-        excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
+        excludedRows.map((row) => requestParam.excludeIds.push(row.deviceId));
       } else {
         const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
 
         if (selectedRows && selectedRows.length > 0) {
-          selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
+          selectedRows.map((row) => requestParam.deviceIds.push(row.deviceId));
         }
       }
     }
@@ -480,9 +480,9 @@ export class MeterUnitsPlcActionsService {
       textSearch: {
         value: '',
         propNames: null,
-        useWildcards: false
+        useWildcards: false,
       },
-      sort: []
+      sort: [],
     };
 
     // select from row
@@ -507,82 +507,82 @@ export class MeterUnitsPlcActionsService {
         if (requestModel.filterModel) {
           requestParam.filter = [];
           if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
-            requestModel.filterModel.statuses.map(row =>
+            requestModel.filterModel.statuses.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.status),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
           if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
-            requestModel.filterModel.vendors.map(row =>
+            requestModel.filterModel.vendors.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.vendor),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
           if (requestModel.filterModel.firmware && requestModel.filterModel.firmware.length > 0) {
-            requestModel.filterModel.firmware.map(row =>
+            requestModel.filterModel.firmware.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.firmware),
                 propValue: row.value,
-                filterOperation: filterOperationEnum.contains
+                filterOperation: filterOperationEnum.contains,
               })
             );
           }
           if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState.length > 0) {
-            requestModel.filterModel.disconnectorState.map(row =>
+            requestModel.filterModel.disconnectorState.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
           if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState.length > 0) {
-            requestModel.filterModel.ciiState.map(row =>
+            requestModel.filterModel.ciiState.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.ciiState),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
+                filterOperation: filterOperationEnum.equal,
               })
             );
           }
           if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
-            requestModel.filterModel.tags.map(row =>
+            requestModel.filterModel.tags.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.tags),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.contains
+                filterOperation: filterOperationEnum.contains,
               })
             );
           }
 
           // show operations filter
           if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter.length > 0) {
-            requestModel.filterModel.showOptionFilter.map(row => {
+            requestModel.filterModel.showOptionFilter.map((row) => {
               if (row.id === 1) {
                 return requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
                   propValue: 'true',
-                  filterOperation: filterOperationEnum.equal
+                  filterOperation: filterOperationEnum.equal,
                 });
               }
               if (row.id === 2) {
                 return requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
                   propValue: 'false',
-                  filterOperation: filterOperationEnum.equal
+                  filterOperation: filterOperationEnum.equal,
                 });
               }
               if (row.id === 3) {
                 return requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
                   propValue: 'true',
-                  filterOperation: filterOperationEnum.equal
+                  filterOperation: filterOperationEnum.equal,
                 });
               }
             });
@@ -590,23 +590,23 @@ export class MeterUnitsPlcActionsService {
         }
 
         if (requestModel.sortModel && requestModel.sortModel.length > 0) {
-          requestModel.sortModel.map(row =>
+          requestModel.sortModel.map((row) =>
             requestParam.sort.push({
               propName: capitalize(row.colId),
               index: 0,
-              sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+              sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc,
             })
           );
         }
 
         requestParam.excludeIds = [];
-        excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
+        excludedRows.map((row) => requestParam.excludeIds.push(row.deviceId));
       } else {
         const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
 
         if (selectedRows && selectedRows.length > 0) {
           requestParam.deviceIds = [];
-          selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
+          selectedRows.map((row) => requestParam.deviceIds.push(row.deviceId));
         }
       }
     }
