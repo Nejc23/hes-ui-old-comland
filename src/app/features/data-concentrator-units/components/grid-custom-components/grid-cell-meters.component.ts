@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
@@ -10,7 +11,7 @@ export class GridCellMetersComponent implements ICellRendererAngularComp {
   notAvailableText = this.staticextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private staticextService: DataConcentratorUnitsStaticTextService) {}
+  constructor(private staticextService: DataConcentratorUnitsStaticTextService, private router: Router) {}
 
   // called on init
   agInit(params: any): void {
@@ -30,5 +31,10 @@ export class GridCellMetersComponent implements ICellRendererAngularComp {
       return data.meters + ' m   ' + arrow + ' ' + this.notAvailableText + ' %';
     }
     return data.meters + ' m   ' + arrow + ' ' + data.metersPercent + ' %';
+  }
+
+  openMuGrid() {
+    // TODO G3-PLC shouldn't be hard coded
+    this.router.navigate(['/meterUnits/1'], { queryParams: { search: this.params.data.name } });
   }
 }
