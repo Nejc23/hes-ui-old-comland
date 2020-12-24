@@ -4,9 +4,10 @@ import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-ite
 import { CodelistRepositoryService } from '../../repository/services/codelists/codelist-repository.service';
 import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
@@ -21,21 +22,21 @@ export class SidebarService {
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         icon: 'far fa-broadcast-tower',
-        children: [],
+        children: []
       },
       {
         title: $localize`Meter Units`,
         routeLink: '/meterUnits/1', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
         icon: 'far fa-sensor',
-        children: [],
+        children: []
       },
       {
         title: $localize`Jobs`,
         routeLink: '/schedulerJobs',
         hasChildren: false,
         icon: 'far fa-tasks',
-        children: [],
+        children: []
       },
       {
         title: $localize`Tools`,
@@ -47,28 +48,45 @@ export class SidebarService {
             title: $localize`Import templates`,
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,
-            children: [],
+            children: []
           },
           {
             title: $localize`Import TOU configuration`,
             routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
             hasChildren: false,
-            children: [],
+            children: []
           },
           {
             title: $localize`Auto templates`,
             routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
-            children: [],
+            children: []
           },
           {
             title: $localize`Import device keys`,
             routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
             hasChildren: false,
-            children: [],
-          },
-        ],
+            children: []
+          }
+        ]
       },
+      {
+        title: $localize`Administration`,
+        routeLink: 'administration',
+        icon: 'far fa-cogs',
+        hasChildren: true,
+        children: [
+          {
+            title: $localize`Users`,
+            routeLink: environment.sidebarAdministrationUsersUrl,
+            openInNewTab: true,
+            isRouteAbsolute: true,
+            hasChildren: false,
+            permission: FunctionalityEnumerator.dashboard,
+            children: []
+          }
+        ]
+      }
       // TODO uncomment when implemented
       /*
       {
@@ -98,15 +116,15 @@ export class SidebarService {
         icon: 'fas fa-arrow-alt-circle-left',
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
-        children: [],
+        children: []
       },
       {
         title: ``,
         routeLink: '',
         hasChildren: false,
         children: [],
-        isBorder: true,
-      },
+        isBorder: true
+      }
       /*{ /// TODO uncomment when overview implemented
         title: this.i18n(`Overview`),
         routeLink: `/${MeterTypeRoute.meterUnits}/overview`,
@@ -128,39 +146,39 @@ export class SidebarService {
         icon: 'fas fa-arrow-alt-circle-left',
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
-        children: [],
+        children: []
       },
       {
         title: ``,
         routeLink: '',
         hasChildren: false,
         children: [],
-        isBorder: true,
+        isBorder: true
       },
       {
         title: $localize`Import templates`,
         routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
         hasChildren: false,
-        children: [],
+        children: []
       },
       {
         title: $localize`Import TOU configuration`,
         routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
         hasChildren: false,
-        children: [],
+        children: []
       },
       {
         title: $localize`Auto templates`,
         routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
         hasChildren: false,
-        children: [],
+        children: []
       },
       {
         title: $localize`Import device keys`,
         routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
         hasChildren: false,
-        children: [],
-      },
+        children: []
+      }
     ];
   }
 

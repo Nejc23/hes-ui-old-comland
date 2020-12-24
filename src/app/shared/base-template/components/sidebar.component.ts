@@ -6,11 +6,12 @@ import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 import { PermissionsService } from '../../../core/permissions/services/permissions.service';
 import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
+import { ItemChange } from '@progress/kendo-angular-charts/dist/es2015/common/collection.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  encapsulation: ViewEncapsulation.None,
+  encapsulation: ViewEncapsulation.None
 })
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() items: Array<SidebarItem> = [];
@@ -83,5 +84,14 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     this.updateItems(this.items);
+  }
+
+  openInNewTab(item: SidebarItem) {
+    if (item.isRouteAbsolute) {
+      window.open(item.routeLink, '_blank');
+    } else {
+      const url = this.router.serializeUrl(this.router.createUrlTree([item.routeLink]));
+      window.open(url, '_blank');
+    }
   }
 }

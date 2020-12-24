@@ -40,6 +40,10 @@
         *ngIf="!obj.hasChildren && hasAccess(obj) && !obj.openInNewTab">
         <span class="title" [ngClass]="{'empty-icon': !obj.icon}" innerHTML="{{obj.title}}"></span>
       </a>
+      <a class="nav-link" href="javascript:void(0);" (click)="openInNewTab(obj)"
+        *ngIf="!obj.hasChildren && hasAccess(obj) && obj.openInNewTab">
+        <span class="title" [ngClass]="{'empty-icon': !obj.icon}" innerHTML="{{obj.title}}"></span>
+      </a>
     </li>
   </ul>
 </li>

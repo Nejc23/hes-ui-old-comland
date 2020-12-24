@@ -11,4 +11,5 @@ export interface SidebarItem {
   permission?: FunctionalityEnumerator;
   openInNewTab?: boolean;
   isBorder?: boolean;
+  isRouteAbsolute?: boolean;
 }
