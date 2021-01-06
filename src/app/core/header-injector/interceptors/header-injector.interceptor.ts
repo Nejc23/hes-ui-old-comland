@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { languages } from 'src/environments/config';
 import { dcOperationFwUpgrade } from '../../repository/consts/data-concentrator-units.const';
+import { fwUploadFile } from '../../repository/consts/meter-units.const';
 
 @Injectable()
 export class HeaderInjectorInterceptor implements HttpInterceptor {
@@ -14,7 +15,8 @@ export class HeaderInjectorInterceptor implements HttpInterceptor {
       headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())
     });
 
-    if (newRequest.url.toLowerCase().includes(dcOperationFwUpgrade)) {
+    // don't use application/json Content-Type for file uploads
+    if (newRequest.url.toLowerCase().includes(dcOperationFwUpgrade) || newRequest.url.toLocaleLowerCase().includes(fwUploadFile)) {
       newRequest = request.clone({
         headers: request.headers.set('Accept-Language', this.localeToHeaderLocale())
       });
@@ -28,7 +30,7 @@ export class HeaderInjectorInterceptor implements HttpInterceptor {
   localeToHeaderLocale(): string {
     if (this.locale && this.locale !== null) {
       console.log(2);
-      const loc = _.find(languages, x => x.id === this.locale);
+      const loc = _.find(languages, (x) => x.id === this.locale);
       if (loc !== undefined && loc !== null) {
         console.log(4);
         return loc.acceptLanguage;
