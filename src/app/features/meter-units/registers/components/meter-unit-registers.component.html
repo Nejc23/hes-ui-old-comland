@@ -42,10 +42,10 @@
       </div>
       <div class="d-flex">
         <label i18n class="mr-2 my-auto">From</label>
-        <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlur()">
+        <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlurOrChange()" (valueChange)="onStartTimeBlurOrChange()">
         </app-datetime-picker>
         <label i18n class="mr-2 ml-2 my-auto">to</label>
-        <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlur()">
+        <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlurOrChange()" (valueChange)="onEndTimeBlurOrChange()">
         </app-datetime-picker>
       </div>
       <div class="btn-group">

@@ -10,6 +10,7 @@
     [format]="format"
     [readonly]="readonly"
     (blur)="onBlur()"
+    (valueChange)="onValueChange($event)"
   ></kendo-datetimepicker>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
