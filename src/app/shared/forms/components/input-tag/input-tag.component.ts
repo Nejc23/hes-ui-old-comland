@@ -63,7 +63,7 @@ export class InputTagComponent implements OnInit {
           return null;
         } else {
           if (this.nextId === 0) {
-            this.nextId = Math.max(...this.autocompleteItemsAsObjects.map(codelist => codelist.id)) + 1;
+            this.nextId = Math.max(...this.autocompleteItemsAsObjects.map((codelist) => codelist.id)) + 1;
           } else {
             this.nextId += 1;
           }

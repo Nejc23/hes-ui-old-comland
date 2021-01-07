@@ -89,7 +89,7 @@ export class DcuFwUpgradeComponent implements OnInit {
     const request = this.dcuOperatrionService.postDcFwUpgrade(formData);
     const successMessage = $localize`FW Upgrade in progress`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         if (result && result.length > 0) {
           this.dcuGridService.saveDcOperationRequestId(result);
         }
@@ -100,7 +100,7 @@ export class DcuFwUpgradeComponent implements OnInit {
           }
         }*/
       },
-      error => {
+      (error) => {
         console.log('upgrade error', error);
       } // error
     );

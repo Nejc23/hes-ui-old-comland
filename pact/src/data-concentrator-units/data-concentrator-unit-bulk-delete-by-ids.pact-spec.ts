@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: DataConcentratorUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -31,7 +31,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('Bulk delete data concentrator unit by ids', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_BULK_DELETE_DATA_CONCENTRATOR_UNIT_BY_IDS',
@@ -56,19 +56,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request to bulk delete data concentrator unit by ids', done => {
+    it('should make request to bulk delete data concentrator unit by ids', (done) => {
       service.deleteDcu(requestBody).subscribe(
-        res => {
+        (res) => {
           expect(res).toEqual(null);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

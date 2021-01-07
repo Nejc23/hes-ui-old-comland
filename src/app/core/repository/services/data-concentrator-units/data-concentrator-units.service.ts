@@ -194,7 +194,7 @@ export class DataConcentratorUnitsService {
     if (param.filterModel) {
       requestParam.filter = [];
       if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
-        param.filterModel.statuses.map(row =>
+        param.filterModel.statuses.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.status),
             propValue: row.id.toString(),
@@ -203,7 +203,7 @@ export class DataConcentratorUnitsService {
         );
       }
       if (param.filterModel.types && param.filterModel.types.length > 0) {
-        param.filterModel.types.map(row =>
+        param.filterModel.types.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.type),
             propValue: row.toString(),
@@ -212,7 +212,7 @@ export class DataConcentratorUnitsService {
         );
       }
       if (param.filterModel.tags && param.filterModel.tags.length > 0) {
-        param.filterModel.tags.map(row =>
+        param.filterModel.tags.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.tags),
             propValue: row.id.toString(),
@@ -221,7 +221,7 @@ export class DataConcentratorUnitsService {
         );
       }
       if (param.filterModel.vendors && param.filterModel.vendors.length > 0) {
-        param.filterModel.vendors.map(row =>
+        param.filterModel.vendors.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.vendor),
             propValue: row.id.toString(),
@@ -231,7 +231,7 @@ export class DataConcentratorUnitsService {
       }
 
       if (param.sortModel && param.sortModel.length > 0) {
-        param.sortModel.map(row =>
+        param.sortModel.map((row) =>
           requestParam.sort.push({
             propName: capitalize(row.colId),
             index: 0,

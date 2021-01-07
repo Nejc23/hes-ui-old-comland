@@ -207,11 +207,11 @@ export class DcuForJobGridService {
     }
 
     if (excludedRow.selected !== undefined && excludedRow.selected) {
-      if (_.find(settings.excludedRows, x => x.concentratorId === excludedRow.data.concentratorId)) {
-        settings.excludedRows = settings.excludedRows.filter(obj => obj.concentratorId !== excludedRow.data.concentratorId);
+      if (_.find(settings.excludedRows, (x) => x.concentratorId === excludedRow.data.concentratorId)) {
+        settings.excludedRows = settings.excludedRows.filter((obj) => obj.concentratorId !== excludedRow.data.concentratorId);
       }
     } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
-      if (!_.find(settings.excludedRows, x => x.concentratorId === excludedRow.data.concentratorId)) {
+      if (!_.find(settings.excludedRows, (x) => x.concentratorId === excludedRow.data.concentratorId)) {
         settings.excludedRows.push(excludedRow.data);
       }
     } else if (excludedRow.length === 0) {
@@ -235,11 +235,11 @@ export class DcuForJobGridService {
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, x => x.concentratorId === selectedRow.data.concentratorId)) {
+      if (!_.find(settings.selectedRows, (x) => x.concentratorId === selectedRow.data.concentratorId)) {
         settings.selectedRows.push(selectedRow.data);
       }
     } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter(obj => obj.concentratorId !== selectedRow.data.concentratorId);
+      settings.selectedRows = settings.selectedRows.filter((obj) => obj.concentratorId !== selectedRow.data.concentratorId);
     } else if (selectedRow.length === 0) {
       settings.selectedRows = [];
     }
@@ -286,12 +286,12 @@ export class DcuForJobGridService {
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = params => {
+  private onColumnMoved = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   };
 
-  private onSortChanged = params => {
+  private onSortChanged = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
   };

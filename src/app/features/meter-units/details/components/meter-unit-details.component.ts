@@ -50,7 +50,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.deviceId = params.deviceId;
       this.requestModel = {
         deviceIds: [this.deviceId],
@@ -108,10 +108,10 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-        result => {
+        (result) => {
           this.editMode = false;
         },
-        errResult => {
+        (errResult) => {
           console.log('Error saving form: ', errResult);
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
         } // error
@@ -137,8 +137,8 @@ export class MeterUnitDetailsComponent implements OnInit {
       // this.setFormVendor();
       this.typeId = response.type === 0 ? 1 : response.type; // TODO remove this after BE fix.
 
-      this.codeList.meterUnitTypeCodelist().subscribe(list => {
-        this.typeName = list.find(l => l.id === this.typeId).value;
+      this.codeList.meterUnitTypeCodelist().subscribe((list) => {
+        this.typeName = list.find((l) => l.id === this.typeId).value;
         this.setBreadcrumbs();
       });
     });
@@ -174,39 +174,39 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   get nameProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.name);
+    return nameOf<MeterUnitDetailsForm>((o) => o.name);
   }
 
   get idProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.deviceId);
+    return nameOf<MeterUnitDetailsForm>((o) => o.deviceId);
   }
 
   get macProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.mac);
+    return nameOf<MeterUnitDetailsForm>((o) => o.mac);
   }
 
   get typeProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.type);
+    return nameOf<MeterUnitDetailsForm>((o) => o.type);
   }
 
   get vendorProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.vendor);
+    return nameOf<MeterUnitDetailsForm>((o) => o.vendor);
   }
 
   get statusProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.status);
+    return nameOf<MeterUnitDetailsForm>((o) => o.status);
   }
 
   get templateProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.template);
+    return nameOf<MeterUnitDetailsForm>((o) => o.template);
   }
 
   get systitleProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.systitle);
+    return nameOf<MeterUnitDetailsForm>((o) => o.systitle);
   }
 
   get addressProperty() {
-    return nameOf<MeterUnitDetailsForm>(o => o.address);
+    return nameOf<MeterUnitDetailsForm>((o) => o.address);
   }
 
   // actions - rights

@@ -30,16 +30,16 @@ export class GridColumnShowHideService {
   public refreshGridWithColumnsVisibility(gridColumnApi: any, listOfColumnsToBeDisplayed: string[]) {
     const listCurrentDisplayedColumnsOnGrid = gridColumnApi
       .getAllDisplayedColumns()
-      .filter(y => y.userProvidedColDef.headerName !== undefined && y.userProvidedColDef.headerName.length > 0)
+      .filter((y) => y.userProvidedColDef.headerName !== undefined && y.userProvidedColDef.headerName.length > 0)
       .map((a: { colId: string }) => a.colId);
 
-    const differenceForHide = listCurrentDisplayedColumnsOnGrid.filter(x => !listOfColumnsToBeDisplayed.includes(x));
-    differenceForHide.forEach(element => {
+    const differenceForHide = listCurrentDisplayedColumnsOnGrid.filter((x) => !listOfColumnsToBeDisplayed.includes(x));
+    differenceForHide.forEach((element) => {
       gridColumnApi.setColumnVisible(element, false);
     });
 
-    const differenceForShow = listOfColumnsToBeDisplayed.filter(x => !listCurrentDisplayedColumnsOnGrid.includes(x));
-    differenceForShow.forEach(element => {
+    const differenceForShow = listOfColumnsToBeDisplayed.filter((x) => !listCurrentDisplayedColumnsOnGrid.includes(x));
+    differenceForShow.forEach((element) => {
       gridColumnApi.setColumnVisible(element, true);
     });
   }
@@ -52,8 +52,8 @@ export class GridColumnShowHideService {
     this.listOfColumnVisibilitySet(
       gridColumnApi
         .getAllDisplayedColumns()
-        .filter(y => y.userProvidedColDef.headerName !== undefined && y.userProvidedColDef.headerName.length > 0)
-        .map(a => a.colId)
+        .filter((y) => y.userProvidedColDef.headerName !== undefined && y.userProvidedColDef.headerName.length > 0)
+        .map((a) => a.colId)
     );
   }
 }

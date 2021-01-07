@@ -7,15 +7,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: DataConcentratorUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -27,7 +27,7 @@ describe('Pact consumer test', () => {
   const id = 1;
 
   describe('Delete data concentrator unit filter', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_DELETE_DATA_CONCENTRATOR_UNIT_FILTER',
@@ -51,19 +51,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request to delete data concentrator unit filter', done => {
+    it('should make request to delete data concentrator unit filter', (done) => {
       service.deleteDcuLayout(id).subscribe(
-        res => {
+        (res) => {
           expect(res).toEqual(null);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

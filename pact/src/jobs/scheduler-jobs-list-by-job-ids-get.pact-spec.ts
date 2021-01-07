@@ -11,15 +11,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: JobsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -114,7 +114,7 @@ describe('Pact consumer test', () => {
       }
     ];
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_SCHEDULED_JOBS_LIST_BY_JOB_IDs',
@@ -137,14 +137,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching scheduled jobs list by job ids', done => {
-      service.getSchedulerJobsListByJobId(requestBody).subscribe(res => {
+    it('should make request for fetching scheduled jobs list by job ids', (done) => {
+      service.getSchedulerJobsListByJobId(requestBody).subscribe((res) => {
         expect(res).toEqual(data);
         done();
       });

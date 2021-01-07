@@ -121,7 +121,7 @@ export class PlcMeterLimiterComponent implements OnInit {
     const request = this.myGridService.setLimiter(values);
     const successMessage = $localize`Meter Units set Limiter was successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         this.modal.close();
       },
       () => {} // error
@@ -129,6 +129,6 @@ export class PlcMeterLimiterComponent implements OnInit {
   }
 
   atLeastOneValue(form: FormGroup): ValidationErrors {
-    return Object.keys(form.value).some(key => !!form.value[key] && key !== 'register') ? null : { atLeastOneRequired: true };
+    return Object.keys(form.value).some((key) => !!form.value[key] && key !== 'register') ? null : { atLeastOneRequired: true };
   }
 }

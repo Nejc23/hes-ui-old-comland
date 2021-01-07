@@ -19,7 +19,7 @@ import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common
 
 @Component({
   selector: 'app-scheduler-topology-job',
-  templateUrl: './scheduler-topology-job.component.html',
+  templateUrl: './scheduler-topology-job.component.html'
 })
 export class SchedulerTopologyJobComponent implements OnInit {
   @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
@@ -33,7 +33,7 @@ export class SchedulerTopologyJobComponent implements OnInit {
     { value: '3' as string, label: $localize`Hour(s)`, labelSmall: $localize`Every N hour(s)` },
     { value: '4' as string, label: $localize`Daily`, labelSmall: $localize`Every day specific time` },
     { value: '5' as string, label: $localize`Weekly`, labelSmall: $localize`One or more days of the week` },
-    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` },
+    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` }
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: $localize`Mon-Fri` },
@@ -43,7 +43,7 @@ export class SchedulerTopologyJobComponent implements OnInit {
     { id: 5, value: $localize`Thu` },
     { id: 6, value: $localize`Fri` },
     { id: 7, value: $localize`Sat` },
-    { id: 8, value: $localize`Sun` },
+    { id: 8, value: $localize`Sun` }
   ];
   selectedId = 0;
   monthDays: number[] = [];
@@ -73,7 +73,7 @@ export class SchedulerTopologyJobComponent implements OnInit {
       [this.monthDaysProperty]: [formData && formData.monthDays ? formData.monthDays : []],
       [this.registersProperty]: [formData ? formData.registers : [], Validators.required],
       [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
-      [this.enableProperty]: [formData ? formData.enable : true],
+      [this.enableProperty]: [formData ? formData.enable : true]
     });
   }
 
@@ -111,7 +111,7 @@ export class SchedulerTopologyJobComponent implements OnInit {
     if (ids != null) {
       const concentrList: string[] = ids;
       this.deviceFiltersAndSearch = {
-        id: concentrList,
+        id: concentrList
       };
     }
 
@@ -146,7 +146,7 @@ export class SchedulerTopologyJobComponent implements OnInit {
       intervalRange: 0,
       timeUnit: 0,
       actionType: jobActionType.topology,
-      enable: this.form.get(this.enableProperty).value,
+      enable: this.form.get(this.enableProperty).value
     };
 
     return formData;

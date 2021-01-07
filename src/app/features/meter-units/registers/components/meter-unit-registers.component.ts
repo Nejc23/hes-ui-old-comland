@@ -93,11 +93,11 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   get startTimeProperty() {
-    return nameOf<RegistersFilter>(o => o.startTime);
+    return nameOf<RegistersFilter>((o) => o.startTime);
   }
 
   get endTimeProperty() {
-    return nameOf<RegistersFilter>(o => o.endTime);
+    return nameOf<RegistersFilter>((o) => o.endTime);
   }
 
   get showLineChartProperty() {
@@ -114,7 +114,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   changeRegisterOptionId() {
     const registerValue = this.form.get(this.registerProperty).value;
-    const selectedRegister = this.deviceRegisters.find(r => r.registerDefinitionId === registerValue);
+    const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
     this.isRegisterSelected = true;
     this.showStatistics = selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
     this.isEvent = selectedRegister.categorization === 'EVENT' ? true : false;
@@ -193,7 +193,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.setTitle('');
 
     this.setPageSubtitle();
-    this.router.params.subscribe(params => {
+    this.router.params.subscribe((params) => {
       this.deviceId = params.deviceId;
       this.setRegisters();
     });
@@ -201,12 +201,12 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.form = this.createForm();
     this.setRange(2); // yesterday
 
-    this.muService.getMeterUnit(this.deviceId).subscribe(result => {
+    this.muService.getMeterUnit(this.deviceId).subscribe((result) => {
       this.setTitle(result.name);
       this.typeId = result.type === 0 ? 1 : result.type; // TODO remove this after BE fix.
 
-      this.codeList.meterUnitTypeCodelist().subscribe(list => {
-        this.typeName = list.find(l => l.id === this.typeId).value;
+      this.codeList.meterUnitTypeCodelist().subscribe((list) => {
+        this.typeName = list.find((l) => l.id === this.typeId).value;
         this.setBreadcrumbs();
       });
     });
@@ -258,7 +258,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   setRegisters() {
-    this.autoTemplateService.getRegisters(this.deviceId).subscribe(reg => {
+    this.autoTemplateService.getRegisters(this.deviceId).subscribe((reg) => {
       this.deviceRegisters = reg;
       this.setRegisterGroups(null);
     });
@@ -269,13 +269,13 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     if (searchText && searchText.length > 0) {
       searchText = searchText.toLowerCase();
-      this.foundDeviceRegisters = this.deviceRegisters.filter(d => d.name.toLowerCase().indexOf(searchText) > -1);
+      this.foundDeviceRegisters = this.deviceRegisters.filter((d) => d.name.toLowerCase().indexOf(searchText) > -1);
     }
 
-    const uniqueGroups = this.foundDeviceRegisters.map(d => d.groupName).filter((value, index, self) => self.indexOf(value) === index);
+    const uniqueGroups = this.foundDeviceRegisters.map((d) => d.groupName).filter((value, index, self) => self.indexOf(value) === index);
 
     this.registerGroups = uniqueGroups
-      .map(r => ({ groupId: null, groupName: r, registerOptions: this.getRegisterGroupOptions(r) }))
+      .map((r) => ({ groupId: null, groupName: r, registerOptions: this.getRegisterGroupOptions(r) }))
       .sort((r1, r2) => {
         if (r1.groupName < r2.groupName) {
           return -1;
@@ -327,7 +327,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.registerStatisticsData = null;
 
     try {
-      this.dataProcessingService.getChartData(this.registersFilter).subscribe(values => {
+      this.dataProcessingService.getChartData(this.registersFilter).subscribe((values) => {
         if (!values || values.length === 0) {
           this.isDataFound = false;
         } else {
@@ -338,7 +338,7 @@ export class MeterUnitRegistersComponent implements OnInit {
           this.setEventData();
           this.setPageSubtitle();
 
-          this.chartCategories = values.map(v => new Date(v.timestamp));
+          this.chartCategories = values.map((v) => new Date(v.timestamp));
           this.chartData = [values];
         }
       });
@@ -367,9 +367,9 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
-      outData = this.rowData.map(d => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
     } else {
-      outData = this.rowData.map(d => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
     }
 
     const groupBy = (array, key) => {
@@ -385,13 +385,13 @@ export class MeterUnitRegistersComponent implements OnInit {
       }, {}); // empty object is the initial value for result object
     };
 
-    this.eventsByTimestamp = Object.entries(groupBy(outData, 'timestamp')).map(e => ({
+    this.eventsByTimestamp = Object.entries(groupBy(outData, 'timestamp')).map((e) => ({
       timestamp: new Date(Number(e[0])),
       count: Number(e[1])
     }));
     const dataLength = this.rowData.length;
     const eventsByIdGroup = groupBy(outData, 'value');
-    this.eventsById = Object.entries(eventsByIdGroup).map(e => ({
+    this.eventsById = Object.entries(eventsByIdGroup).map((e) => ({
       category: Number(e[0]),
       count: Number(e[1]),
       value: Number(e[1]) / dataLength
@@ -413,7 +413,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     const registerValue = this.form.get(this.registerProperty).value;
     this.selectedRegister = null;
     if (registerValue && registerValue.id) {
-      this.selectedRegister = this.deviceRegisters.find(d => d.registerDefinitionId === registerValue.id);
+      this.selectedRegister = this.deviceRegisters.find((d) => d.registerDefinitionId === registerValue.id);
     }
 
     this.selectedRange = null;
@@ -436,7 +436,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       return null;
     }
 
-    const values = registerValues.filter(f => f.value).map(r => r.value);
+    const values = registerValues.filter((f) => f.value).map((r) => r.value);
     if (values && values.length > 0) {
       const avg = values.reduce((a, b) => a + b) / values.length;
       const min = Math.min.apply(Math, values);
@@ -444,8 +444,8 @@ export class MeterUnitRegistersComponent implements OnInit {
 
       return {
         averageValue: avg,
-        minValue: registerValues.find(r => r.value === min),
-        maxValue: registerValues.find(r => r.value === max)
+        minValue: registerValues.find((r) => r.value === min),
+        maxValue: registerValues.find((r) => r.value === max)
       };
     } else {
       return null;
@@ -457,10 +457,10 @@ export class MeterUnitRegistersComponent implements OnInit {
       return [];
     }
 
-    const registersByGroup = this.foundDeviceRegisters.filter(r => r.groupName.toLowerCase() === groupName.toLowerCase());
+    const registersByGroup = this.foundDeviceRegisters.filter((r) => r.groupName.toLowerCase() === groupName.toLowerCase());
 
     const registerGroupOptions = registersByGroup
-      .map(r => ({ label: r.name, value: r.registerDefinitionId }))
+      .map((r) => ({ label: r.name, value: r.registerDefinitionId }))
       .sort((r1, r2) => {
         if (r1.label < r2.label) {
           return -1;

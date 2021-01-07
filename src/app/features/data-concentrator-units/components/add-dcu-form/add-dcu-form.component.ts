@@ -48,8 +48,8 @@ export class AddDcuFormComponent implements OnInit {
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuTags$ = this.codelistService.dcuTagCodelist();
     this.codelistService.jobsDiscoveryJobsCodelist().subscribe(
-      dj => {
-        this.discoveryJobs = dj.map(j => ({ id: j.id, value: `${j.value} - ${moment(j.nextRun).fromNow()}` }));
+      (dj) => {
+        this.discoveryJobs = dj.map((j) => ({ id: j.id, value: `${j.value} - ${moment(j.nextRun).fromNow()}` }));
       },
       () => {} // error
     );
@@ -131,7 +131,7 @@ export class AddDcuFormComponent implements OnInit {
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
-        result => {
+        (result) => {
           if (result) {
             this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
 
@@ -140,7 +140,7 @@ export class AddDcuFormComponent implements OnInit {
                 () => {
                   this.showSuccessAndTryCloseForm(successMessage, addNew);
                 },
-                errResult => {
+                (errResult) => {
                   const resultErrMessage = errResult.error ? errResult.error : null;
                   const errMessage = $localize`Error adding scheduler.` + ` ` + resultErrMessage;
 
@@ -155,7 +155,7 @@ export class AddDcuFormComponent implements OnInit {
             }
           }
         },
-        errResult => {
+        (errResult) => {
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
         } // error
       );
@@ -183,43 +183,43 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   get nameProperty() {
-    return nameOf<DcuForm>(o => o.name);
+    return nameOf<DcuForm>((o) => o.name);
   }
 
   get idNumberProperty() {
-    return nameOf<DcuForm>(o => o.serialNumber);
+    return nameOf<DcuForm>((o) => o.serialNumber);
   }
 
   get ipProperty() {
-    return nameOf<DcuForm>(o => o.ip);
+    return nameOf<DcuForm>((o) => o.ip);
   }
 
   get userNameProperty() {
-    return nameOf<DcuForm>(o => o.userName);
+    return nameOf<DcuForm>((o) => o.userName);
   }
 
   get passwordProperty() {
-    return nameOf<DcuForm>(o => o.password);
+    return nameOf<DcuForm>((o) => o.password);
   }
 
   get confirmPasswordProperty() {
-    return nameOf<DcuForm>(o => o.confirmPassword);
+    return nameOf<DcuForm>((o) => o.confirmPassword);
   }
 
   get typeProperty() {
-    return nameOf<DcuForm>(o => o.type);
+    return nameOf<DcuForm>((o) => o.type);
   }
 
   get vendorProperty() {
-    return nameOf<DcuForm>(o => o.manufacturer);
+    return nameOf<DcuForm>((o) => o.manufacturer);
   }
 
   get discoveryJobProperty() {
-    return nameOf<DcuForm>(o => o.discoveryJob);
+    return nameOf<DcuForm>((o) => o.discoveryJob);
   }
 
   get tagsProperty() {
-    return nameOf<DcuForm>(o => o.tags);
+    return nameOf<DcuForm>((o) => o.tags);
   }
 
   onDismiss() {

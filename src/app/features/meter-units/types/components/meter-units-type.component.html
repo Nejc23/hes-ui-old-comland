@@ -148,11 +148,11 @@
             </div>
           </div>
 
-          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
+          <button *ngIf="false" [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
             <i class="far fa-tags"></i>
             <span i18n>Tags</span>
           </button>
-          <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
+          <button *ngIf="false" [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
             <i class="far fa-chart-bar" disabled></i>
             <span i18n>Data</span>
           </button>

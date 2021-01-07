@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MeterUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -35,7 +35,7 @@ describe('Pact consumer test', () => {
       deviceIds: ['b6802f30-0641-4ac8-9508-b0dbaf7acd80', '160c0cd4-908e-4f29-b81b-d98b79907b66']
     };
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_REMOVE_SCHEDULE_DEVICES_FROM_JOB',
@@ -58,14 +58,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching scheduled active jobs list', done => {
-      service.removeMeterUnitsFromJob(data).subscribe(res => {
+    it('should make request for fetching scheduled active jobs list', (done) => {
+      service.removeMeterUnitsFromJob(data).subscribe((res) => {
         expect(res).toEqual(null);
         done();
       });

@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: CodelistMeterUnitsRepositoryService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -37,7 +37,7 @@ describe('Pact consumer test', () => {
         value: 'M-BUS'
       }
     ];
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_METER_UNIT_TYPES_CODELIST',
@@ -57,14 +57,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching meter unit types codelist', done => {
-      service.meterUnitTypeCodelist().subscribe(res => {
+    it('should make request for fetching meter unit types codelist', (done) => {
+      service.meterUnitTypeCodelist().subscribe((res) => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);
         done();

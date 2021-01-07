@@ -11,10 +11,7 @@ import { regexPattern, regexPatternIso } from '../consts/regex.consts';
  */
 export function parse(value: string): NgbDateStruct {
   if (value) {
-    const dateParts = value
-      .replace(/\s/g, '')
-      .trim()
-      .split('.');
+    const dateParts = value.replace(/\s/g, '').trim().split('.');
     return {
       year: toInteger(dateParts[2]),
       month: toInteger(dateParts[1]),
@@ -33,10 +30,7 @@ export function getParsedDateOnly(parsedDate: string): string {
     if (index > 0) {
       parsedDate = parsedDate.substring(0, index);
     }
-    const dateParts = parsedDate
-      .replace(/\s/g, '')
-      .trim()
-      .split('-');
+    const dateParts = parsedDate.replace(/\s/g, '').trim().split('-');
     if (dateParts && dateParts.length === 3) {
       const date = moment()
         .year(toInteger(dateParts[0]))

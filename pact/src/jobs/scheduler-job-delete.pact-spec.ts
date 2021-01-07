@@ -7,15 +7,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: JobsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -27,7 +27,7 @@ describe('Pact consumer test', () => {
   const id = 'e7a59990-51e8-4fd5-994b-a3a102b42436';
 
   describe('Delete meter units scheduler job', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_DELETE_METER_UNITS_SCHEDULER_JOB',
@@ -51,19 +51,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for delete meter units scheduler job', done => {
+    it('should make request for delete meter units scheduler job', (done) => {
       service.deleteSchedulerJob(id).subscribe(
-        res => {
+        (res) => {
           expect(res).toEqual(null);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

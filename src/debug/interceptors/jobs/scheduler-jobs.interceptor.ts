@@ -115,7 +115,7 @@ export class SchedulerJobsInterceptor {
 
       if (params.sortModel) {
         if (params.sortModel.length > 0) {
-          params.sortModel.forEach(element => {
+          params.sortModel.forEach((element) => {
             sortColId = element.colId;
 
             if (element.sort === 'desc') {
@@ -326,10 +326,10 @@ function searchById(companies, filter) {
   if (typeof filter === 'undefined' || !filter || filter.length === 0) {
     result = companies;
   } else {
-    result = _.filter(companies, c => {
+    result = _.filter(companies, (c) => {
       const cProperties = _.keys(c);
       _.pull(cProperties, 'id');
-      return _.find(cProperties, property => {
+      return _.find(cProperties, (property) => {
         if (c[property]) {
           return _.includes(_.lowerCase(c[property]), _.lowerCase(filter));
         }

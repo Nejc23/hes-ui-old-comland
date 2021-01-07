@@ -25,7 +25,7 @@ import { SidebarAnimationState } from '../consts/sidebar-animation.const';
   selector: 'app-base-template',
   templateUrl: './base-template.component.html',
   providers: [],
-  animations: [trigger('navItemsTrigger', [transition(':enter', [style({ opacity: 0 }), animate('300ms 200ms', style({ opacity: 1 }))])])],
+  animations: [trigger('navItemsTrigger', [transition(':enter', [style({ opacity: 0 }), animate('300ms 200ms', style({ opacity: 1 }))])])]
 })
 export class BaseTemplateComponent implements OnInit {
   public app: any;
@@ -73,8 +73,8 @@ export class BaseTemplateComponent implements OnInit {
         isMenuOpened: true,
         isMenuCollapsed: this.isMenuCollapsed(),
         themeConfigOpen: false,
-        rtlActived: false,
-      },
+        rtlActived: false
+      }
     };
 
     console.log('baseTemplate constructor', this.app);
@@ -142,7 +142,7 @@ export class BaseTemplateComponent implements OnInit {
             title: $localize`${element.value}`,
             routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
             hasChildren: false,
-            children: [],
+            children: []
           };
           sidebarItems[1].children.push(newElement);
           sidebarItems[1].hasChildren = true;

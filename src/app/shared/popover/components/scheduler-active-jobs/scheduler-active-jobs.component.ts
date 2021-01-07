@@ -49,7 +49,7 @@ export class SchedulerActiveJobsComponent implements OnInit {
     ];
 
     this.allActiveJobs$ = this.activeJobsService.getSchedulerActiveJobsList(this.deviceId);
-    this.allActiveJobs$.subscribe(x => {
+    this.allActiveJobs$.subscribe((x) => {
       this.allActiveJobs = x;
 
       if (this.allActiveJobs.length > this.defaultItemCount) {

@@ -26,7 +26,7 @@ export class AutoRefreshComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscription = this.everySeconds.subscribe(seconds => {
+    this.subscription = this.everySeconds.subscribe((seconds) => {
       const currentTime: moment.Moment = moment();
       this.remainingTime = this.searchEndDate.diff(currentTime);
       this.remainingTime = this.remainingTime / 1000;

@@ -61,7 +61,7 @@ export class UserLoginComponent implements OnInit {
 
   ngOnInit() {
     //  this.language = this.languages$.find(x => x.id === this.locale).value;
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.resetToken = params.resetToken;
       if (this.resetToken !== undefined && this.resetToken.length > 0) {
         this.resetPassword = true;
@@ -106,7 +106,7 @@ export class UserLoginComponent implements OnInit {
     const request = this.authRepositoryService.requestPasswordReset(this.formReset.value);
     const successMessage = $localize`Reset password request successful`;
     this.formUtils.saveForm(this.formReset, request, successMessage).subscribe(
-      response => {
+      (response) => {
         this.forgotPassword = false;
       },
       () => {
@@ -121,7 +121,7 @@ export class UserLoginComponent implements OnInit {
     const request = this.authRepositoryService.authenticateUserDevelop(this.form.value);
     const successMessage = $localize`Login successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      token => {
+      (token) => {
         this.isFormSubmitted = true;
         this.handleLoginResponse2(token);
       },
@@ -138,7 +138,7 @@ export class UserLoginComponent implements OnInit {
     const request = this.authRepositoryService.newPassword(this.formNewPassword.value);
     const successMessage = $localize`New password successful saved`;
     this.formUtils.saveForm(this.formNewPassword, request, successMessage).subscribe(
-      token => {
+      (token) => {
         this.isFormSubmitted = true;
         this.handleLoginResponse(token);
       },
@@ -160,28 +160,14 @@ export class UserLoginComponent implements OnInit {
   // handle response
   handleLoginResponse(authenticatedUser: AuthenticatedUser) {
     this.authService.saveTokenAndSetUserRights(authenticatedUser);
-    this.cookieService.set(
-      config.authTimeStamp,
-      moment()
-        .utc()
-        .toISOString(),
-      null,
-      environment.cookiePath
-    ); // auth stamp for token refresh (isRefreshAllowed)
+    this.cookieService.set(config.authTimeStamp, moment().utc().toISOString(), null, environment.cookiePath); // auth stamp for token refresh (isRefreshAllowed)
     this.goToStartPageForAuthorizedUser();
   }
 
   handleLoginResponse2(authenticatedUser: User) {
     this.authService.user = authenticatedUser;
     this.authService.saveTokenAndSetUserRights2(authenticatedUser, authenticatedUser.id_token);
-    this.cookieService.set(
-      config.authTimeStamp,
-      moment()
-        .utc()
-        .toISOString(),
-      null,
-      environment.cookiePath
-    ); // auth stamp for token refresh (isRefreshAllowed)
+    this.cookieService.set(config.authTimeStamp, moment().utc().toISOString(), null, environment.cookiePath); // auth stamp for token refresh (isRefreshAllowed)
     console.log(authenticatedUser);
     this.goToStartPageForAuthorizedUser();
   }

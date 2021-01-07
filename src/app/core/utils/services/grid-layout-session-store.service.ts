@@ -11,7 +11,7 @@ export class GridLayoutSessionStoreService {
     if (sessionStorage.getItem(this.gridLayoutName)) {
       const data = JSON.parse(sessionStorage.getItem(this.gridLayoutName));
       if (data) {
-        const value = _.find(data, x => x.id === gridId);
+        const value = _.find(data, (x) => x.id === gridId);
         if (value) {
           value.value.filter = layoutNew;
           sessionStorage.setItem(this.gridLayoutName, JSON.stringify(data));
@@ -46,7 +46,7 @@ export class GridLayoutSessionStoreService {
     if (sessionStorage.getItem(this.gridLayoutName)) {
       const data = JSON.parse(sessionStorage.getItem(this.gridLayoutName));
       if (data) {
-        const value = _.find(data, x => x.id === gridId);
+        const value = _.find(data, (x) => x.id === gridId);
         if (value) {
           return value.value.filter;
         }

@@ -87,63 +87,63 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   get nameProperty() {
-    return nameOf<DcuForm>(o => o.name);
+    return nameOf<DcuForm>((o) => o.name);
   }
 
   get serialNumberProperty() {
-    return nameOf<DcuForm>(o => o.serialNumber);
+    return nameOf<DcuForm>((o) => o.serialNumber);
   }
 
   get ipProperty() {
-    return nameOf<DcuForm>(o => o.ip);
+    return nameOf<DcuForm>((o) => o.ip);
   }
 
   get portProperty() {
-    return nameOf<DcuForm>(o => o.port);
+    return nameOf<DcuForm>((o) => o.port);
   }
 
   get userNameProperty() {
-    return nameOf<DcuForm>(o => o.userName);
+    return nameOf<DcuForm>((o) => o.userName);
   }
 
   get passwordProperty() {
-    return nameOf<DcuForm>(o => o.password);
+    return nameOf<DcuForm>((o) => o.password);
   }
 
   get confirmPasswordProperty() {
-    return nameOf<DcuForm>(o => o.confirmPassword);
+    return nameOf<DcuForm>((o) => o.confirmPassword);
   }
 
   get typeProperty() {
-    return nameOf<DcuForm>(o => o.type);
+    return nameOf<DcuForm>((o) => o.type);
   }
 
   get vendorProperty() {
-    return nameOf<DcuForm>(o => o.manufacturer);
+    return nameOf<DcuForm>((o) => o.manufacturer);
   }
 
   get statusProperty() {
-    return nameOf<DcuForm>(o => o.status);
+    return nameOf<DcuForm>((o) => o.status);
   }
 
   get addressProperty() {
-    return nameOf<DcuForm>(o => o.address);
+    return nameOf<DcuForm>((o) => o.address);
   }
 
   get tagsProperty() {
-    return nameOf<DcuForm>(o => o.tags);
+    return nameOf<DcuForm>((o) => o.tags);
   }
 
   get macProperty() {
-    return nameOf<DcuForm>(o => o.mac);
+    return nameOf<DcuForm>((o) => o.mac);
   }
 
   get latitudeProperty() {
-    return nameOf<DcuForm>(o => o.latitude);
+    return nameOf<DcuForm>((o) => o.latitude);
   }
 
   get longitudeProperty() {
-    return nameOf<DcuForm>(o => o.longitude);
+    return nameOf<DcuForm>((o) => o.longitude);
   }
 
   fillData(): DcuForm {
@@ -182,13 +182,13 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-        result => {
+        (result) => {
           if (result) {
             this.edit = false;
             this.getData();
           }
         },
-        errResult => {
+        (errResult) => {
           console.log('Error saving form: ', errResult);
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
         } // error

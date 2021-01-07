@@ -22,8 +22,8 @@ export class SidebarCookieStoreService {
           data.push({
             id: menuName,
             value: {
-              state,
-            },
+              state
+            }
           });
           this.cookieService.set(this.sidebarLayoutName, JSON.stringify(data), this.getOneYearFromNow());
         }
@@ -33,9 +33,9 @@ export class SidebarCookieStoreService {
         {
           id: menuName,
           value: {
-            state,
-          },
-        },
+            state
+          }
+        }
       ];
       this.cookieService.set(this.sidebarLayoutName, JSON.stringify(data), this.getOneYearFromNow());
     }

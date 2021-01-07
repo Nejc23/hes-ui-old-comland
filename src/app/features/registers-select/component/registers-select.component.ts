@@ -59,11 +59,11 @@ export class RegistersSelectComponent implements OnInit {
   selectRows(selectedRows: RegistersSelectRequest[]) {
     if (this.gridApi) {
       // this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
-      this.gridApi.forEachNode(node => {
+      this.gridApi.forEachNode((node) => {
         if (
           node.data !== undefined &&
           selectedRows.length > 0 &&
-          _.find(selectedRows, x => x === node.data.id && !node.selected) !== undefined
+          _.find(selectedRows, (x) => x === node.data.id && !node.selected) !== undefined
         ) {
           node.setSelected(true);
         }
@@ -76,12 +76,12 @@ export class RegistersSelectComponent implements OnInit {
       this.deviceFiltersAndSearch = { id: [], filter: null };
     }
     this.rowData$ = this.registersSelectService.getDeviceRegisters(this.deviceFiltersAndSearch);
-    this.rowData$.subscribe(x => {
+    this.rowData$.subscribe((x) => {
       this.allRowData = x;
       this.totalCount = this.allRowData ? this.allRowData.length : 0;
       this.searchChange();
       if (this.selectedJobId) {
-        this.jobsService.getJob(this.selectedJobId).subscribe(data => {
+        this.jobsService.getJob(this.selectedJobId).subscribe((data) => {
           this.selectRows(data.registers);
         });
       }
@@ -96,7 +96,7 @@ export class RegistersSelectComponent implements OnInit {
   getSelectedRowIds() {
     const selectedRows = this.gridApi.getSelectedRows();
     const req: RegistersSelectRequest[] = [];
-    selectedRows.forEach(x => req.push({ name: x.name, type: x.type }));
+    selectedRows.forEach((x) => req.push({ name: x.name, type: x.type }));
     return req;
   }
 
@@ -125,7 +125,7 @@ export class RegistersSelectComponent implements OnInit {
     const searchToLower = search.toLowerCase();
     this.rowData = _.filter(
       this.allRowData,
-      data =>
+      (data) =>
         data.name.toLowerCase().includes(searchToLower) ||
         data.type.toLowerCase().includes(searchToLower) ||
         data.description.toLowerCase().includes(searchToLower)

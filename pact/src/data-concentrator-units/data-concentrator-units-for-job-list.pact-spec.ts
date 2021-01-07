@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: DataConcentratorUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -94,7 +94,7 @@ describe('Pact consumer test', () => {
       }
     };
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_ALL_CONCENTRATOR_UNITS_FOR_JOB',
@@ -117,14 +117,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching all concentrators for job', done => {
-      service.getConcentratorsForJob(requestBody).subscribe(res => {
+    it('should make request for fetching all concentrators for job', (done) => {
+      service.getConcentratorsForJob(requestBody).subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: DataProcessingService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -102,7 +102,7 @@ describe('Pact consumer test', () => {
       }
     ];
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_DATA_PROCESSING_GET_EVENTS',
@@ -125,14 +125,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for getting data processing profiles', done => {
-      service.getEvents(request).subscribe(res => {
+    it('should make request for getting data processing profiles', (done) => {
+      service.getEvents(request).subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

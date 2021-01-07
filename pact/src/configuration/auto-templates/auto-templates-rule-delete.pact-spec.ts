@@ -7,15 +7,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: AutoTemplatesService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -27,7 +27,7 @@ describe('Pact consumer test', () => {
   const id = '4344553-443456-23323-5555-2333';
 
   describe('Delete rule from template', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_DELETE_RULE_FROM_TEMPLATE',
@@ -51,19 +51,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request to delete rule form template', done => {
+    it('should make request to delete rule form template', (done) => {
       service.deleteAutoTemplateRule(id).subscribe(
-        res => {
+        (res) => {
           expect(res).toEqual(null);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

@@ -54,7 +54,7 @@ export class InputRadioComponent implements OnInit {
   }
 
   addUids() {
-    _.each(this.options, x => (x.uid = _.uniqueId('input-radio-')));
+    _.each(this.options, (x) => (x.uid = _.uniqueId('input-radio-')));
   }
 
   getTooltip(option: RadioOption): string {

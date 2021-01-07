@@ -164,7 +164,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
           this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
           this.requestModel.filterModel.vendors = event.vendorsFilter;
-          this.requestModel.filterModel.types = event.typesFilter.map(t => t.id);
+          this.requestModel.filterModel.types = event.typesFilter.map((t) => t.id);
           this.requestModel.filterModel.tags = event.tagsFilter;
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
@@ -185,7 +185,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     });
 
     // subscribe to changes of columns visibility from other components
-    this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe(listOfVisibleColumns => {
+    this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe((listOfVisibleColumns) => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
     });
 
@@ -426,7 +426,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         value2: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value2 : 0
       };
 
-      this.requestModel.filterModel.types = filterDCU.typesFilter?.map(t => t.id);
+      this.requestModel.filterModel.types = filterDCU.typesFilter?.map((t) => t.id);
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
     } else {
@@ -507,13 +507,13 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // select rows on load grid from session
   selectRows(api: any) {
     const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-    api.forEachNode(node => {
+    api.forEachNode((node) => {
       if (this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
         const excludedRows = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows();
-        api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.id === node2.data.id)) {
+        api.forEachNode((node2) => {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, (x) => x.id === node2.data.id)) {
             node2.setSelected(true);
           }
         });
@@ -522,7 +522,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll() &&
-        _.find(selectedRows, x => x.id === node.data.id && !node.selected) !== undefined
+        _.find(selectedRows, (x) => x.id === node.data.id && !node.selected) !== undefined
       ) {
         node.setSelected(true);
       }
@@ -572,7 +572,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
     if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
       const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-      selectedRows.forEach(element => {
+      selectedRows.forEach((element) => {
         object.id.push(element.id);
       });
       object.filter = null;
@@ -588,7 +588,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     component.modalBody = $localize`Delete` + ` ${selectedText} ` + $localize`selected Data Concentrator Units?`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         const request = this.dataConcentratorUnitsService.deleteDcu(object);
         this.formUtils.deleteForm(request, $localize`Selected items deleted`).subscribe(
@@ -597,7 +597,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
             this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
             this.eventService.selectDeselectAll(-1);
-            this.gridApi.forEachNode(node => {
+            this.gridApi.forEachNode((node) => {
               node.setSelected(false);
             });
 
@@ -606,7 +606,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           () => {}
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -634,7 +634,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   addDcu() {
     const modalRef = this.modalService.open(AddDcuFormComponent);
     modalRef.result
-      .then(result => {
+      .then((result) => {
         this.refreshGrid();
       })
       .catch(() => {});
@@ -705,7 +705,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   getAllDisplayedColumnsNames(): string[] {
     if (this.gridColumnApi) {
       const columns = this.gridColumnApi.getAllDisplayedColumns();
-      return columns.map(c => c.colId);
+      return columns.map((c) => c.colId);
     }
     return;
   }
@@ -738,7 +738,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         if (that.authService.isRefreshNeeded2()) {
           that.authService
             .renewToken()
-            .then(value => {
+            .then((value) => {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
@@ -748,7 +748,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
                   that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
                   displayedColumnsNames
                 )
-                .subscribe(data => {
+                .subscribe((data) => {
                   that.gridApi.hideOverlay();
                   if (data === undefined || data == null || data.totalCount === 0) {
                     that.totalCount = 0;
@@ -768,15 +768,15 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
                   that.isGridLoaded = true;
                 });
             })
-            .catch(err => {
+            .catch((err) => {
               if (err.message === 'login_required') {
-                that.authService.login().catch(errDetail => console.log(errDetail));
+                that.authService.login().catch((errDetail) => console.log(errDetail));
               }
             });
         } else {
           that.dataConcentratorUnitsService
             .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
-            .subscribe(data => {
+            .subscribe((data) => {
               that.gridApi.hideOverlay();
 
               if (data === undefined || data == null || data.totalCount === 0) {
@@ -804,14 +804,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   getDcuUnitsGridLayoutStore() {
     this.settingsStoreService.getCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey).subscribe(
-      settings => {
+      (settings) => {
         this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
         this.addSettingsToSession(settings);
         this.areSettingsLoaded = true;
         this.setGridDataSource();
         this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
       },
-      error => {
+      (error) => {
         this.areSettingsLoaded = true;
         this.setGridDataSource();
         this.gridColumnShowHideService.sendColumnVisibilityChanged(this.gridColumnApi);
@@ -934,8 +934,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     const requestIds = this.dataConcentratorUnitsGridService.getAllDcOperationRequestIds();
 
     if (requestIds && requestIds.length > 0) {
-      requestIds.map(requestId =>
-        this.dcuOperationsService.getDcLastStatus(requestId).subscribe(results => {
+      requestIds.map((requestId) =>
+        this.dcuOperationsService.getDcLastStatus(requestId).subscribe((results) => {
           if (results && results.tasks && results.tasks.length > 0) {
             const lastStatus = results.tasks[0].status;
             if (lastStatus.status === this.taskStatusOK) {

@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: CodelistRepositoryService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -41,7 +41,7 @@ describe('Pact consumer test', () => {
         value: 'G4-PLC'
       }
     ];
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_DCU_TYPE_CODELISTS',
@@ -61,14 +61,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching data concentrator unit type codelists', done => {
-      service.dcuTypeCodelist().subscribe(res => {
+    it('should make request for fetching data concentrator unit type codelists', (done) => {
+      service.dcuTypeCodelist().subscribe((res) => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);
         done();

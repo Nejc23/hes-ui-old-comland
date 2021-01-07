@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -39,7 +39,7 @@ describe('Pact consumer test', () => {
   ];
 
   describe('myGrid.link get on demand data processing', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_GET_ON_DEMAND_DATA_PROCESSING',
@@ -62,19 +62,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for get on demand data processing of requested id from myGrid.link', done => {
+    it('should make request for get on demand data processing of requested id from myGrid.link', (done) => {
       service.getOnDemandDataProcessing(requestId).subscribe(
         (res: OnDemandRequestData[]) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

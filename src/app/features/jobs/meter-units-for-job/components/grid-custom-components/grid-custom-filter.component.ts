@@ -54,7 +54,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
     private codelistHelperService: CodelistHelperService
   ) {
     this.form = this.createForm(null, null);
-    this.paramsSub = route.params.subscribe(params => {
+    this.paramsSub = route.params.subscribe((params) => {
       this.id = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
@@ -72,7 +72,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
   agInit(params: IToolPanelParams): void {
     this.params = params;
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
-    this.mutFilters$.subscribe(x => {
+    this.mutFilters$.subscribe((x) => {
       this.data = x;
       this.fillformFromSession(this.data);
     });

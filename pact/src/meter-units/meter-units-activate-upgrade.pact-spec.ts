@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -63,7 +63,7 @@ describe('Pact consumer test', () => {
       }
     };
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_ACTIVATE_DEVICE_UPGRADE',
@@ -86,14 +86,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for activating device upgrade', done => {
-      service.activateDeviceUpgrade(requestBody).subscribe(res => {
+    it('should make request for activating device upgrade', (done) => {
+      service.activateDeviceUpgrade(requestBody).subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

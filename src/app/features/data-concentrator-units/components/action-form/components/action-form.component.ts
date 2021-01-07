@@ -50,7 +50,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     // subscribe to changes of visibility of columns on grid
-    this.subscription = gridColumnShowHideService.listOfColumnVisibilitySet$.subscribe(visibleColumnList => {
+    this.subscription = gridColumnShowHideService.listOfColumnVisibilitySet$.subscribe((visibleColumnList) => {
       this.setColumnVisibilityForm(visibleColumnList);
     });
   }
@@ -129,7 +129,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   /// set dropdown checkboxes of visible columns
   setColumnVisibilityForm(visibleColumnList: string[]) {
-    const listCheckBoxColumns = this.columns$.map(a => a.id);
+    const listCheckBoxColumns = this.columns$.map((a) => a.id);
     if (
       visibleColumnList.length === listCheckBoxColumns.length &&
       visibleColumnList.sort().every((value, index) => value === listCheckBoxColumns.sort()[index])
@@ -145,7 +145,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   showHideAll() {
     // show all columns
     if (this.form.get(this.selectAllProperty).value) {
-      this.gridColumnShowHideService.listOfColumnsVisibilityChanged(this.columns$.map(a => a.id));
+      this.gridColumnShowHideService.listOfColumnsVisibilityChanged(this.columns$.map((a) => a.id));
     } else {
       // hide all columns
       this.gridColumnShowHideService.listOfColumnsVisibilityChanged([]);
@@ -160,8 +160,8 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   setColumnsListForArrayOfCheckBox() {
     if (this.gridColumns != null) {
       this.gridColumns
-        .filter(x => x.headerName !== undefined && x.headerName.length > 0)
-        .forEach(element => {
+        .filter((x) => x.headerName !== undefined && x.headerName.length > 0)
+        .forEach((element) => {
           this.columns$.push({ id: element.field, value: element.headerName });
         });
     }

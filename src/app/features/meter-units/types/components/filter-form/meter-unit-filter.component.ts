@@ -61,7 +61,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     private settingsStoreEmitterService: SettingsStoreEmitterService
   ) {
     this.form = this.createForm(null, null);
-    this.paramsSub = route.params.subscribe(params => {
+    this.paramsSub = route.params.subscribe((params) => {
       this.id = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
         ? this.sessionNameForGridFilter
@@ -80,7 +80,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   // called on init
   ngOnInit(): void {
     this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
-    this.mutFilters$.subscribe(x => {
+    this.mutFilters$.subscribe((x) => {
       this.data = x;
       this.fillformFromSession(this.data);
     });
@@ -267,14 +267,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       showOptionFilter: this.form.get(this.showOptionFilterProperty).value,
       showOnlyMeterUnitsWithMBusInfoFilter: null, // this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
       showMeterUnitsWithoutTemplateFilter:
-        this.form.get(this.showOptionFilterProperty).value.filter(x => x.id === 1).length > 0
+        this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 1).length > 0
           ? false
-          : this.form.get(this.showOptionFilterProperty).value.filter(x => x.id === 2).length > 0
+          : this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 2).length > 0
           ? true
           : null,
       // this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
       showOnlyImageReadyForActivationFilter:
-        this.form.get(this.showOptionFilterProperty).value.filter(x => x.id === 3).length > 0 ? true : false,
+        this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 3).length > 0 ? true : false,
       // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: ''
     };

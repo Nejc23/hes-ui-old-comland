@@ -9,7 +9,7 @@ import {
   RequestSetLimiter,
   LimiterDefinitions,
   ResponseCommonRegisterGroup,
-  RegisterDefinitions,
+  RegisterDefinitions
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -21,7 +21,7 @@ import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridL
 
 @Component({
   selector: 'app-plc-meter-set-display-settings',
-  templateUrl: './plc-meter-set-display-settings.component.html',
+  templateUrl: './plc-meter-set-display-settings.component.html'
 })
 export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   form: FormGroup;
@@ -68,7 +68,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   createForm(): FormGroup {
     return this.formBuilder.group(
       {
-        [this.groupListProperty]: [this.selectedGroup, [Validators.required]],
+        [this.groupListProperty]: [this.selectedGroup, [Validators.required]]
       }
       // {
       //   validators: [this.atLeastOneValue]
@@ -86,7 +86,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
         filter: this.filterParam,
         search: this.searchParam,
         excludeIds: this.excludeIdsParam,
-        type: '11',
+        type: '11'
       })
       .subscribe((result: ResponseCommonRegisterGroup[]) => {
         if (result && result.length > 0) {
@@ -124,7 +124,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
       deviceIds: this.actionRequest.deviceIds,
-      excludeIds: this.actionRequest.excludeIds,
+      excludeIds: this.actionRequest.excludeIds
     };
 
     return data;

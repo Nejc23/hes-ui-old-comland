@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     this.titleService.setTitle(brand.appBrowserTitle);
     this.authService
       .getUser()
-      .then(user => {
+      .then((user) => {
         //  this.currentUser = user;
         this.authService.user = user;
         if (user) {
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit {
           console.log('User Not Logged In');
         }
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   }
 
   getProgressBarColor() {

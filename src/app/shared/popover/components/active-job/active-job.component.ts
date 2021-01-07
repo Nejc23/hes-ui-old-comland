@@ -28,7 +28,7 @@ export class ActiveJobComponent implements OnInit {
   ngOnInit() {
     this.columnDefs = this.activeJobsGridService.setGridDefaultColumns();
     this.rowData$ = this.activeJobsService.getActiveJobsList(this.deviceId);
-    this.rowData$.subscribe(x => {
+    this.rowData$.subscribe((x) => {
       this.rowData = x;
     });
   }

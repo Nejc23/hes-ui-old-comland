@@ -16,7 +16,7 @@ export class HeaderInjectorInterceptor implements HttpInterceptor {
     });
 
     // don't use application/json Content-Type for file uploads
-    if (newRequest.url.toLowerCase().includes(dcOperationFwUpgrade) || newRequest.url.toLocaleLowerCase().includes(fwUploadFile)) {
+    if (newRequest.url.toLowerCase().includes(dcOperationFwUpgrade) || newRequest.url.toLowerCase().includes(fwUploadFile)) {
       newRequest = request.clone({
         headers: request.headers.set('Accept-Language', this.localeToHeaderLocale())
       });

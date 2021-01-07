@@ -41,7 +41,7 @@ export class AutoTemplatesGridService {
         headerName: $localize`Obis`,
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyName' },
-        valueSetter: params => {
+        valueSetter: (params) => {
           if (params.oldValue !== params.newValue) {
             return true;
           } else {
@@ -54,7 +54,7 @@ export class AutoTemplatesGridService {
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyValue' },
         headerName: $localize`Regex`,
-        valueSetter: params => {
+        valueSetter: (params) => {
           if (params.oldValue !== params.newValue) {
             return true;
           } else {

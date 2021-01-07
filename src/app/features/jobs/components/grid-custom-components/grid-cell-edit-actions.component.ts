@@ -18,7 +18,7 @@ import { SchedulerTopologyJobComponent } from '../scheduler-topology-job/schedul
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
-  templateUrl: './grid-cell-edit-actions.component.html',
+  templateUrl: './grid-cell-edit-actions.component.html'
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
@@ -75,7 +75,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
 
   editJob(params: any) {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
     if (params.data.actionType === jobActionType.discovery) {
       this.editDiscoveryJob(params, options);

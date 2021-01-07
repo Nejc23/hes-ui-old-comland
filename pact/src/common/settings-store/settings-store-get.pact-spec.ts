@@ -7,15 +7,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: SettingsStoreService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -62,7 +62,7 @@ describe('Pact consumer test', () => {
       }
     };
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GETTING_USER_SETTINGS',
@@ -85,14 +85,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for getting user settings', done => {
-      service.getUserSettings(userId, key).subscribe(res => {
+    it('should make request for getting user settings', (done) => {
+      service.getUserSettings(userId, key).subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

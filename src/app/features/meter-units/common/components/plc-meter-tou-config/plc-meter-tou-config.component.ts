@@ -72,11 +72,11 @@ export class PlcMeterTouConfigComponent implements OnInit {
       console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
       response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
       response.subscribe(
-        value => {
+        (value) => {
           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
           this.cancel('save');
         },
-        e => {
+        (e) => {
           this.toast.errorToast(this.messageServerError);
         }
       );

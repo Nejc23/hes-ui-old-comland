@@ -22,7 +22,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
   constructor(public fb: FormBuilder, private service: MeterUnitsTypeGridEventEmitterService) {
     this.form = this.createForm();
 
-    this.sub = this.service.getIsSelectedAll().subscribe(value => {
+    this.sub = this.service.getIsSelectedAll().subscribe((value) => {
       this.isDisabled = value;
     });
 
@@ -58,7 +58,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
     const startRow = this.params.api.getFirstDisplayedRow();
     const endRow = this.params.api.getLastDisplayedRow();
-    this.params.api.forEachNode(node => {
+    this.params.api.forEachNode((node) => {
       if (node.rowIndex >= startRow && node.rowIndex <= endRow) {
         node.setSelected(this.form.get('checkBox').value);
       }

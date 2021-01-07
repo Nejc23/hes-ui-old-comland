@@ -14,15 +14,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: DataConcentratorUnitsOperationsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -52,7 +52,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('DCU operation for synchronize time with ids in request', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_DCU_OPERATION_FOR_SYNCHRONIZE_TIME_WITH_IDS_IN_REQUEST',
@@ -75,19 +75,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for trigger dcu operation for synchronize time with ids in request', done => {
+    it('should make request for trigger dcu operation for synchronize time with ids in request', (done) => {
       service.postDcSynchronizeTime(requestBody).subscribe(
         (res: ResponseData) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

@@ -32,7 +32,7 @@ export class FormsUtilsService {
     };
 
     return this.touchElementsAndValidate(form).pipe(
-      switchMap(x => {
+      switchMap((x) => {
         return throwErrorOrMakeRequest(x);
       }),
       tap(() => {
@@ -50,7 +50,7 @@ export class FormsUtilsService {
     };
 
     return of(null).pipe(
-      switchMap(x => {
+      switchMap((x) => {
         return throwErrorOrMakeRequest(x);
       }),
       tap(() => this.toast.successToast(successMessage)),
@@ -72,9 +72,9 @@ export class FormsUtilsService {
     this.touchAllFormElements(form);
     return of(null).pipe(
       map(() => this.throwErrorWithToastIfInvalid(form)),
-      map(x => true),
+      map((x) => true),
       first(),
-      catchError(x => of(false))
+      catchError((x) => of(false))
     );
   }
 

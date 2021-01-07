@@ -3,5 +3,5 @@ export const jobActionType = {
   reading: 2,
   timeSync: 3,
   readEvents: 4,
-  topology: 5,
+  topology: 5
 };

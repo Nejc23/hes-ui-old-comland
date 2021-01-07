@@ -303,18 +303,18 @@ export class DataConcentratorUnitsGridService {
     //  this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = params => {
+  private onColumnMoved = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   };
 
-  private onSortChanged = params => {
+  private onSortChanged = (params) => {
     console.log('onSortChanged()', params.api.getSortModel());
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
   };
 
-  private onColumnVisible = params => {
+  private onColumnVisible = (params) => {
     // send to subscribers the visibility of columns
     this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
   };
@@ -387,11 +387,11 @@ export class DataConcentratorUnitsGridService {
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, x => x.id === selectedRow.data.id)) {
+      if (!_.find(settings.selectedRows, (x) => x.id === selectedRow.data.id)) {
         settings.selectedRows.push(selectedRow.data);
       }
     } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter(obj => obj.id !== selectedRow.data.id);
+      settings.selectedRows = settings.selectedRows.filter((obj) => obj.id !== selectedRow.data.id);
     } else if (selectedRow.length === 0) {
       settings.selectedRows = [];
     }
@@ -430,11 +430,11 @@ export class DataConcentratorUnitsGridService {
     }
 
     if (excludedRow.selected !== undefined && excludedRow.selected) {
-      if (_.find(settings.excludedRows, x => x.id === excludedRow.data.id)) {
-        settings.excludedRows = settings.excludedRows.filter(obj => obj.id !== excludedRow.data.id);
+      if (_.find(settings.excludedRows, (x) => x.id === excludedRow.data.id)) {
+        settings.excludedRows = settings.excludedRows.filter((obj) => obj.id !== excludedRow.data.id);
       }
     } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
-      if (!_.find(settings.excludedRows, x => x.id === excludedRow.data.id)) {
+      if (!_.find(settings.excludedRows, (x) => x.id === excludedRow.data.id)) {
         settings.excludedRows.push(excludedRow.data);
       }
     } else if (excludedRow.length === 0) {

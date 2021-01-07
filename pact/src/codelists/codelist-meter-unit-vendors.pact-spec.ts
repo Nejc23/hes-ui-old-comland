@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: CodelistMeterUnitsRepositoryService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -42,7 +42,7 @@ describe('Pact consumer test', () => {
         value: 'Vendor 3'
       }
     ];
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_METER_UNIT_VENDORS_CODELIST_BY_TYPE',
@@ -62,14 +62,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching meter unit vendors codelist by type', done => {
-      service.meterUnitVendorCodelist(meterUnitTypeId).subscribe(res => {
+    it('should make request for fetching meter unit vendors codelist by type', (done) => {
+      service.meterUnitVendorCodelist(meterUnitTypeId).subscribe((res) => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);
         done();

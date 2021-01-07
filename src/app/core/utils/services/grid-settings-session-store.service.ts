@@ -177,7 +177,7 @@ export class GridSettingsSessionStoreService {
       ];
     }
 
-    const value = _.find(data, x => x.id === gridId);
+    const value = _.find(data, (x) => x.id === gridId);
     if (value) {
       switch (type) {
         case GridSettingsSessionStoreTypeEnum.searchString:
@@ -213,7 +213,7 @@ export class GridSettingsSessionStoreService {
     if (sessionStorage.getItem(this.gridSettings)) {
       const data = JSON.parse(sessionStorage.getItem(this.gridSettings));
       if (data) {
-        const value = _.find(data, x => x.id === gridId);
+        const value = _.find(data, (x) => x.id === gridId);
         if (value) {
           return value.value;
         }
@@ -233,8 +233,8 @@ export class GridSettingsSessionStoreService {
     const requestIds = [];
     const data = JSON.parse(sessionStorage.getItem(grid));
     if (data) {
-      data.map(row => requestIds.push(row));
-      const value = _.find(data, x => x === requestId);
+      data.map((row) => requestIds.push(row));
+      const value = _.find(data, (x) => x === requestId);
       if (!value) {
         requestIds.push(requestId);
         sessionStorage.setItem(grid, JSON.stringify(requestIds));
@@ -249,9 +249,9 @@ export class GridSettingsSessionStoreService {
   removeMyGridLinkRequestId(grid: string, requestId: string) {
     const data = JSON.parse(sessionStorage.getItem(grid));
     if (data) {
-      const value = _.find(data, x => x === requestId);
+      const value = _.find(data, (x) => x === requestId);
       if (value) {
-        _.remove(data, x => x === requestId);
+        _.remove(data, (x) => x === requestId);
         sessionStorage.setItem(grid, JSON.stringify(data));
       }
     }
@@ -267,8 +267,8 @@ export class GridSettingsSessionStoreService {
     const importIds = [];
     const data = JSON.parse(sessionStorage.getItem(this.cryptoImportIds));
     if (data) {
-      data.map(row => importIds.push(row));
-      const value = _.find(data, x => x === importId);
+      data.map((row) => importIds.push(row));
+      const value = _.find(data, (x) => x === importId);
       if (!value) {
         importIds.push(importId);
         sessionStorage.setItem(this.cryptoImportIds, JSON.stringify(importIds));
@@ -283,9 +283,9 @@ export class GridSettingsSessionStoreService {
   removeCryptoImportId(importId: string) {
     const data = JSON.parse(sessionStorage.getItem(this.cryptoImportIds));
     if (data) {
-      const value = _.find(data, x => x === importId);
+      const value = _.find(data, (x) => x === importId);
       if (value) {
-        _.remove(data, x => x === importId);
+        _.remove(data, (x) => x === importId);
         sessionStorage.setItem(this.cryptoImportIds, JSON.stringify(data));
       }
     }

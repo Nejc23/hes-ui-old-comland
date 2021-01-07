@@ -112,7 +112,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private sidebarToggleService: SidebarToggleService
   ) {
-    this.paramsSub = route.params.subscribe(params => {
+    this.paramsSub = route.params.subscribe((params) => {
       this.scheduleId = params.scheduleId;
       dcuForJobGridService.dcuId = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
@@ -184,7 +184,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setTitle('');
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.requestModel.scheduleId = params.scheduleId;
     });
 
@@ -364,11 +364,11 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         if (that.authService.isRefreshNeeded2()) {
           that.authService
             .renewToken()
-            .then(value => {
+            .then((value) => {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe(response => {
+              that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
                 that.gridApi.hideOverlay();
 
                 that.totalCount = 0;
@@ -391,13 +391,13 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
                 }
               });
             })
-            .catch(err => {
+            .catch((err) => {
               if (err.message === 'login_required') {
-                that.authService.login().catch(errDetail => console.log(errDetail));
+                that.authService.login().catch((errDetail) => console.log(errDetail));
               }
             });
         } else {
-          that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe(response => {
+          that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
             that.gridApi.hideOverlay();
             that.totalCount = 0;
             if (response) {
@@ -619,17 +619,17 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     this.programmaticallySelectRow = true;
     const selectedAll = this.dcuForJobGridService.getSessionSettingsSelectedAll();
     const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
-    api.forEachNode(node => {
+    api.forEachNode((node) => {
       if (selectedAll) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
 
         const excludedRows = this.dcuForJobGridService.getSessionSettingsExcludedRows();
-        api.forEachNode(node2 => {
+        api.forEachNode((node2) => {
           if (
             node2.rowIndex >= startRow &&
             node2.rowIndex <= endRow &&
-            !_.find(excludedRows, x => x.concentratorId === node2.data.concentratorId)
+            !_.find(excludedRows, (x) => x.concentratorId === node2.data.concentratorId)
           ) {
             node2.setSelected(true);
           }
@@ -639,7 +639,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !selectedAll &&
-        _.find(selectedRows, x => x.concentratorId === node.data.concentratorId) !== undefined
+        _.find(selectedRows, (x) => x.concentratorId === node.data.concentratorId) !== undefined
       ) {
         node.setSelected(true);
       } else {
@@ -709,7 +709,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     // const selectedDeviceCount = this.totalCount;
     const selectedAll = this.dcuForJobGridService.getSessionSettingsSelectedAll();
     if (!selectedAll && selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.concentratorId));
+      selectedRows.map((row) => deviceIdsParam.push(row.concentratorId));
     }
 
     const selectedText = `${this.getSelectedCount()}`;
@@ -735,7 +735,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       const excludedRows = this.dcuForJobGridService.getSessionSettingsExcludedRows();
       if (excludedRows && excludedRows.length > 0) {
         request.excludeIds = [];
-        excludedRows.map(row => request.excludeIds.push(row.concentratorId));
+        excludedRows.map((row) => request.excludeIds.push(row.concentratorId));
       }
     }
 
@@ -746,21 +746,21 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     component.modalBody = $localize`Remove ${selectedText} Concentrator(s) from Job?`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         // this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
-          value => {
+          (value) => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
             this.toast.successToast($localize`Selected Concentrators removed successfully.`);
             this.refresh();
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -781,11 +781,11 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       requestParam.search = this.requestModel.searchModel;
       requestParam.excludeIds = [];
 
-      excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
+      excludedRows.map((row) => requestParam.excludeIds.push(row.deviceId));
     } else {
       const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
-        selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
+        selectedRows.map((row) => requestParam.deviceIds.push(row.deviceId));
       }
     }
 

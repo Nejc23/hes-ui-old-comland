@@ -29,7 +29,7 @@ export class ApiUrlInterceptor implements HttpInterceptor {
    */
   private checkIfMyGridLinkUrl(request: HttpRequest<any>) {
     const listOfMyLinkApiUrl = Object.values(enumMyGridLink);
-    if (listOfMyLinkApiUrl.some(v => request.url.includes(v))) {
+    if (listOfMyLinkApiUrl.some((v) => request.url.includes(v))) {
       return true;
     }
     return false;

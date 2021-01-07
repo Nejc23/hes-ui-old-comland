@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -63,7 +63,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('myGrid.link get disconnector state with device ids', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_DISCONNECTOR_STATE_WITH_IDS',
@@ -86,19 +86,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for getting disconnector state with ids in request - myGrid.Link', done => {
+    it('should make request for getting disconnector state with ids in request - myGrid.Link', (done) => {
       service.getDisconnectorState(requestBody).subscribe(
         (res: IActionResponseParams) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

@@ -58,10 +58,10 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
     }
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         response.subscribe(
-          value => {
+          (value) => {
             let toastString = '';
             switch (operationType) {
               case this.cancelJobConst:
@@ -72,12 +72,12 @@ export class GridCellLinkComponent implements ICellRendererAngularComp {
             }
             this.toast.successToast(toastString);
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.staticTextService.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );

@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: CodelistRepositoryService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -44,7 +44,7 @@ describe('Pact consumer test', () => {
         nextRun: '2022-07-25T15:45:45+00:00'
       }
     ];
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_DISCOVERY_JOBS',
@@ -65,14 +65,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make a request for fetching discovery jobs', done => {
-      service.jobsDiscoveryJobsCodelist().subscribe(res => {
+    it('should make a request for fetching discovery jobs', (done) => {
+      service.jobsDiscoveryJobsCodelist().subscribe((res) => {
         expect(res).toEqual(responseBody);
         expect(res.length).toBeGreaterThan(1);
         done();

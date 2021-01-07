@@ -30,7 +30,7 @@ import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
   messageActionInProgress = $localize`Action in progress!`;
@@ -46,7 +46,7 @@ export class MeterUnitsPlcActionsService {
 
   onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
@@ -58,7 +58,7 @@ export class MeterUnitsPlcActionsService {
         id: params.deviceIds,
         search: params.search,
         filter: params.filter,
-        excludeIds: params.excludeIds,
+        excludeIds: params.excludeIds
       };
       modalRef.result.then().catch(() => {});
     });
@@ -66,7 +66,7 @@ export class MeterUnitsPlcActionsService {
 
   onJobsTemplates(params: IActionRequestParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     const modalRef = this.modalService.open(PlcMeterJobsRegistersComponent, options);
@@ -442,7 +442,7 @@ export class MeterUnitsPlcActionsService {
       deviceIds: [],
       filter: null,
       search: null,
-      excludeIds: null,
+      excludeIds: null
     };
 
     // select from row
@@ -480,9 +480,9 @@ export class MeterUnitsPlcActionsService {
       textSearch: {
         value: '',
         propNames: null,
-        useWildcards: false,
+        useWildcards: false
       },
-      sort: [],
+      sort: []
     };
 
     // select from row
@@ -511,7 +511,7 @@ export class MeterUnitsPlcActionsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.status),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -520,7 +520,7 @@ export class MeterUnitsPlcActionsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.vendor),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -529,7 +529,7 @@ export class MeterUnitsPlcActionsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.firmware),
                 propValue: row.value,
-                filterOperation: filterOperationEnum.contains,
+                filterOperation: filterOperationEnum.contains
               })
             );
           }
@@ -538,7 +538,7 @@ export class MeterUnitsPlcActionsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -547,7 +547,7 @@ export class MeterUnitsPlcActionsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.ciiState),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -556,7 +556,7 @@ export class MeterUnitsPlcActionsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.tags),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.contains,
+                filterOperation: filterOperationEnum.contains
               })
             );
           }
@@ -568,21 +568,21 @@ export class MeterUnitsPlcActionsService {
                 return requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
                   propValue: 'true',
-                  filterOperation: filterOperationEnum.equal,
+                  filterOperation: filterOperationEnum.equal
                 });
               }
               if (row.id === 2) {
                 return requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
                   propValue: 'false',
-                  filterOperation: filterOperationEnum.equal,
+                  filterOperation: filterOperationEnum.equal
                 });
               }
               if (row.id === 3) {
                 return requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
                   propValue: 'true',
-                  filterOperation: filterOperationEnum.equal,
+                  filterOperation: filterOperationEnum.equal
                 });
               }
             });
@@ -594,7 +594,7 @@ export class MeterUnitsPlcActionsService {
             requestParam.sort.push({
               propName: capitalize(row.colId),
               index: 0,
-              sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc,
+              sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
             })
           );
         }

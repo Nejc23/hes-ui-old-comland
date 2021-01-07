@@ -126,7 +126,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent,
+    DcuFwUpgradeComponent
   ],
   imports: [
     CommonModule,
@@ -146,8 +146,8 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
       GridSelectionHeaderComponent,
       GridCellNameComponent,
       GridCellIdNumberComponent,
-      GridCellIpComponent,
-    ]),
+      GridCellIpComponent
+    ])
   ],
   declarations: [
     BaseTemplateComponent,
@@ -206,7 +206,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent,
+    DcuFwUpgradeComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -234,8 +234,8 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent,
+    DcuFwUpgradeComponent
   ],
-  providers: [AgGridSharedFunctionsService],
+  providers: [AgGridSharedFunctionsService]
 })
 export class SharedModule {}

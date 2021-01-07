@@ -38,7 +38,7 @@ export class SaveViewFormComponent implements OnInit {
 
   ngOnInit() {
     this.dcuLayouts$ = this.dcuService.getDcuLayout();
-    this.dcuLayouts$.subscribe(x => {
+    this.dcuLayouts$.subscribe((x) => {
       this.data = x;
       this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as DcuLayout;
       this.cookieSettings = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
@@ -85,7 +85,7 @@ export class SaveViewFormComponent implements OnInit {
       this.dcuService
         .createDcuLayout(this.sessionLayout)
         .toPromise()
-        .then(x => {
+        .then((x) => {
           this.sessionLayout.id = x ? x.id : -1;
         });
     }

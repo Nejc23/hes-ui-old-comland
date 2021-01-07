@@ -11,15 +11,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -111,7 +111,7 @@ describe('Pact consumer test', () => {
   ];
 
   describe('myGrid.link get common register groups with no filter request', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_FOR_GET_COMMON_REGISTER_GROUPS_WITH_NO_FILTER',
@@ -134,19 +134,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for getting common register groups with no filter in request - myGrid.Link', done => {
+    it('should make request for getting common register groups with no filter in request - myGrid.Link', (done) => {
       service.getCommonRegisterGroup(requestBody).subscribe(
         (res: ResponseCommonRegisterGroup[]) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

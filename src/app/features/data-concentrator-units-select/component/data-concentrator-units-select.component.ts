@@ -99,11 +99,11 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   // select rows on load grid from session
   selectRows(api: any) {
     const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
-    api.forEachNode(node => {
+    api.forEachNode((node) => {
       if (this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
-        api.forEachNode(node2 => {
+        api.forEachNode((node2) => {
           if (node2.rowIndex >= startRow && node2.rowIndex <= endRow) {
             node2.setSelected(true);
           }
@@ -114,7 +114,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         selectedRows.length > 0 &&
         !this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()
       ) {
-        const isSelected = _.find(selectedRows, x => x === node.data.concentratorId) !== undefined;
+        const isSelected = _.find(selectedRows, (x) => x === node.data.concentratorId) !== undefined;
         node.setSelected(isSelected);
       }
     });
@@ -125,7 +125,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       this.deviceFiltersAndSearch = { id: [], filter: null };
     }
     if (this.selectedJobId) {
-      this.jobsService.getJob(this.selectedJobId).subscribe(data => {
+      this.jobsService.getJob(this.selectedJobId).subscribe((data) => {
         this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam?.id);
       });
     }
@@ -170,7 +170,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         const currentPageIndex = that.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex();
         const allDisplayedColumns = that.getAllDisplayedColumnsNames();
 
-        that.repositoryService.getGridDcuForm(that.requestModel, currentPageIndex, allDisplayedColumns).subscribe(data => {
+        that.repositoryService.getGridDcuForm(that.requestModel, currentPageIndex, allDisplayedColumns).subscribe((data) => {
           that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {
@@ -192,7 +192,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   getAllDisplayedColumnsNames(): string[] {
     if (this.gridColumnApi) {
       const columns = this.gridColumnApi.getAllDisplayedColumns();
-      return columns.map(c => c.colId);
+      return columns.map((c) => c.colId);
     }
     return;
   }

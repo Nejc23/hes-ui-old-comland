@@ -11,15 +11,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -68,7 +68,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('myGrid.link set breaker mode with no filter request', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_FOR_SET_BREAKER_MODE_WITH_NO_FILTER',
@@ -91,13 +91,13 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for setting breaker mode with no filter in request - myGrid.Link', done => {
+    it('should make request for setting breaker mode with no filter in request - myGrid.Link', (done) => {
       service.setDisconnectorMode(requestBody).subscribe(
         (res: IActionResponseSetDisconnectorMode) => {
           expect(res.requestId).toEqual(responseBody.requestId);
@@ -106,7 +106,7 @@ describe('Pact consumer test', () => {
           expect(res.breakerMode).toEqual(responseBody.breakerMode);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

@@ -18,11 +18,11 @@ import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/fil
 import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
 import {
   IActionRequestGetCommonRegisterGroups,
-  IActionRequestParams,
+  IActionRequestParams
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class DcOperationsService {
   messageActionInProgress = $localize`Action in progress!`;
@@ -38,7 +38,7 @@ export class DcOperationsService {
 
   onScheduleReadJobs(params: RequestFilterParams) {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
@@ -46,7 +46,7 @@ export class DcOperationsService {
       id: params.concentratorIds,
       search: params.search,
       filter: params.filter,
-      excludeIds: params.excludeIds,
+      excludeIds: params.excludeIds
     };
     modalRef.result.then().catch(() => {});
   }
@@ -280,9 +280,9 @@ export class DcOperationsService {
       textSearch: {
         value: '',
         propNames: [],
-        useWildcards: false,
+        useWildcards: false
       },
-      sort: [],
+      sort: []
     };
 
     // select from row
@@ -310,7 +310,7 @@ export class DcOperationsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.status),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -319,7 +319,7 @@ export class DcOperationsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.type),
                 propValue: row.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -328,7 +328,7 @@ export class DcOperationsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.tags),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.contains,
+                filterOperation: filterOperationEnum.contains
               })
             );
           }
@@ -337,7 +337,7 @@ export class DcOperationsService {
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.vendor),
                 propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal,
+                filterOperation: filterOperationEnum.equal
               })
             );
           }
@@ -347,7 +347,7 @@ export class DcOperationsService {
               requestParam.sort.push({
                 propName: capitalize(row.colId),
                 index: 0,
-                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc,
+                sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
               })
             );
           }

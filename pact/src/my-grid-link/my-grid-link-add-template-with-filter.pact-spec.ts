@@ -12,15 +12,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -101,7 +101,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('myGrid.link trigger device add template with filter request', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_DEVICE_ADD_TEMPLATE_WITH_FILTER',
@@ -124,19 +124,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for device add template with filter in request - myGrid.Link', done => {
+    it('should make request for device add template with filter in request - myGrid.Link', (done) => {
       service.postMyGridAddDeviceTemplate(requestBody).subscribe(
         (res: IActionResponseParams) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

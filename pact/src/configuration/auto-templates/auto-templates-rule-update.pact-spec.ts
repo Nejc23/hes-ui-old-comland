@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: AutoTemplatesService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -35,7 +35,7 @@ describe('Pact consumer test', () => {
   const responseBody = null;
 
   describe('Auto templates update rule for template', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_UPDATE_RULE_ON_TEMPLATE',
@@ -58,19 +58,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for updating rule on template', done => {
+    it('should make request for updating rule on template', (done) => {
       service.updateAutoTemplateRule(requestBody).subscribe(
         (res: any) => {
           expect(null).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );
