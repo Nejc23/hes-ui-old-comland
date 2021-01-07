@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -46,7 +46,7 @@ describe('Pact consumer test', () => {
   ];
 
   describe('myGrid.link get last status', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_GET_LAST_STATUS',
@@ -69,19 +69,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for get last status of requested id from myGrid.link', done => {
+    it('should make request for get last status of requested id from myGrid.link', (done) => {
       service.getMyGridLastStatus(requestId).subscribe(
         (res: LastStatus[]) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

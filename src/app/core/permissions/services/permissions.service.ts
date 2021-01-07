@@ -9,14 +9,14 @@ export class PermissionsService {
   private currentPermissions = [];
 
   constructor(public permissionsStore: PermissionsStoreService) {
-    permissionsStore.userRightsObservable.subscribe(permissions => {
+    permissionsStore.userRightsObservable.subscribe((permissions) => {
       this.currentPermissions = permissions;
     });
   }
 
   // has access
   hasAccess(permission: FunctionalityEnumerator): boolean {
-    return _.find(this.currentPermissions, x => x.functionality === permission) ? true : false;
+    return _.find(this.currentPermissions, (x) => x.functionality === permission) ? true : false;
   }
 
   // has write access
@@ -24,7 +24,7 @@ export class PermissionsService {
     if (!this.hasAccess(permission)) {
       return false;
     }
-    return _.find(this.currentPermissions, x => x.functionality === permission).writeRights === true ? true : false;
+    return _.find(this.currentPermissions, (x) => x.functionality === permission).writeRights === true ? true : false;
   }
 
   hasActionAccess(permission: FunctionalityEnumerator, action: ActionEnumerator): boolean {
@@ -32,9 +32,9 @@ export class PermissionsService {
       return false;
     }
 
-    const listFunct = _.find(this.currentPermissions, x => x.functionality === permission);
+    const listFunct = _.find(this.currentPermissions, (x) => x.functionality === permission);
     if (typeof listFunct !== 'undefined' && listFunct != null) {
-      const actionFound = _.find(listFunct.action, x => x.toString().toLowerCase() === action.toString().toLowerCase());
+      const actionFound = _.find(listFunct.action, (x) => x.toString().toLowerCase() === action.toString().toLowerCase());
 
       if (typeof actionFound !== 'undefined' && actionFound != null) {
         return true;

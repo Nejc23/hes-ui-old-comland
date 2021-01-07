@@ -23,7 +23,7 @@ export class SidebarMeterComponent implements OnInit {
     this.updateItems(this.items);
 
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
       this.updateItems(this.items);
     });
   }
@@ -62,7 +62,7 @@ export class SidebarMeterComponent implements OnInit {
   }
 
   hasActiveChildLinks(item: SidebarItem, result = false) {
-    _.each(item.children, x => {
+    _.each(item.children, (x) => {
       if (this.hasAccess(x)) {
         result = true;
       }

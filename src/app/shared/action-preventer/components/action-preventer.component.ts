@@ -13,7 +13,7 @@ export class ActionPreventerComponent implements OnInit, OnDestroy {
   constructor(private loader: LoadingBarService) {}
 
   ngOnInit() {
-    this.subscription = this.loader.progress$.subscribe(x => {
+    this.subscription = this.loader.progress$.subscribe((x) => {
       this.onProgress(x);
     });
   }

@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: JobsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -50,7 +50,7 @@ describe('Pact consumer test', () => {
     ];
 
     const deviceId = '06130d62-f67c-41a2-98f7-ef521db2cee6';
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_SCHEDULED_ACTIVE_JOBS_LIST',
@@ -72,14 +72,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching scheduled active jobs list', done => {
-      service.getSchedulerActiveJobsList(deviceId).subscribe(res => {
+    it('should make request for fetching scheduled active jobs list', (done) => {
+      service.getSchedulerActiveJobsList(deviceId).subscribe((res) => {
         expect(res).toEqual(data);
         done();
       });

@@ -211,7 +211,7 @@ export class DataConcentratorUnitsSelectGridService {
   // set selected rows
   public setSessionSettingsSelectedRows(concentratorId: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    if (!_.find(settings.selectedRows, x => x === concentratorId)) {
+    if (!_.find(settings.selectedRows, (x) => x === concentratorId)) {
       settings.selectedRows.push(concentratorId);
 
       this.gridSettingsSessionStoreService.setGridSettings(
@@ -225,8 +225,8 @@ export class DataConcentratorUnitsSelectGridService {
   // remove selected rows
   public setSessionSettingsRemoveSelectedRow(concentratorId: string) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    if (_.find(settings.selectedRows, x => x === concentratorId)) {
-      settings.selectedRows = settings.selectedRows.filter(x => x !== concentratorId);
+    if (_.find(settings.selectedRows, (x) => x === concentratorId)) {
+      settings.selectedRows = settings.selectedRows.filter((x) => x !== concentratorId);
 
       this.gridSettingsSessionStoreService.setGridSettings(
         this.sessionNameForGridState,
@@ -280,12 +280,12 @@ export class DataConcentratorUnitsSelectGridService {
     //  this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = params => {
+  private onColumnMoved = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   };
 
-  private onSortChanged = params => {
+  private onSortChanged = (params) => {
     console.log(params.api.getSortModel());
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());

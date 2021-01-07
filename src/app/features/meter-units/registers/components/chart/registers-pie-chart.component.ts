@@ -49,10 +49,7 @@ export class RegistersPieChartComponent {
     });
 
     // The paths are constructed by using a chain of commands
-    path1
-      .moveTo(0, 9)
-      .lineTo(20, 9)
-      .close();
+    path1.moveTo(0, 9).lineTo(20, 9).close();
     // path2.moveTo(15, 7).lineTo(25, 7).close();
 
     // Create the text associated with the legend item

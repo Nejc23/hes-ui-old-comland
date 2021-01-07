@@ -13,27 +13,17 @@ export class SidebarDropdownDirective implements OnChanges {
 
   ngOnChanges(changes: any) {
     const addOpenClass = () => {
-      $(this.elRef.nativeElement)
-        .parent()
-        .addClass('open');
+      $(this.elRef.nativeElement).parent().addClass('open');
     };
     const removeClass = () => {
-      $(this.elRef.nativeElement)
-        .parent()
-        .removeClass('open');
+      $(this.elRef.nativeElement).parent().removeClass('open');
     };
 
     if (changes.opened) {
       if (changes.opened.currentValue === SidebarAnimationState.open) {
-        $(this.elRef.nativeElement)
-          .parent()
-          .children('.dropdown-menu')
-          .slideDown(200, addOpenClass);
+        $(this.elRef.nativeElement).parent().children('.dropdown-menu').slideDown(200, addOpenClass);
       } else if (changes.opened.currentValue === SidebarAnimationState.close) {
-        $(this.elRef.nativeElement)
-          .parent()
-          .children('.dropdown-menu')
-          .slideUp(200, removeClass);
+        $(this.elRef.nativeElement).parent().children('.dropdown-menu').slideUp(200, removeClass);
       }
     }
   }

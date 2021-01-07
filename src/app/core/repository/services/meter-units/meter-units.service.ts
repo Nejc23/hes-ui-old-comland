@@ -174,7 +174,7 @@ export class MeterUnitsService {
     if (param.filterModel) {
       requestParam.filter = [];
       if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
-        param.filterModel.statuses.map(row =>
+        param.filterModel.statuses.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.status),
             propValue: row.id.toString(),
@@ -183,7 +183,7 @@ export class MeterUnitsService {
         );
       }
       if (param.filterModel.vendors && param.filterModel.vendors.length > 0) {
-        param.filterModel.vendors.map(row =>
+        param.filterModel.vendors.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.vendor),
             propValue: row.id.toString(),
@@ -192,7 +192,7 @@ export class MeterUnitsService {
         );
       }
       if (param.filterModel.firmware && param.filterModel.firmware.length > 0) {
-        param.filterModel.firmware.map(row =>
+        param.filterModel.firmware.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.firmware),
             propValue: row.value,
@@ -201,7 +201,7 @@ export class MeterUnitsService {
         );
       }
       if (param.filterModel.disconnectorState && param.filterModel.disconnectorState.length > 0) {
-        param.filterModel.disconnectorState.map(row =>
+        param.filterModel.disconnectorState.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
             propValue: row.id.toString(),
@@ -210,7 +210,7 @@ export class MeterUnitsService {
         );
       }
       if (param.filterModel.ciiState && param.filterModel.ciiState.length > 0) {
-        param.filterModel.ciiState.map(row =>
+        param.filterModel.ciiState.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.ciiState),
             propValue: row.id.toString(),
@@ -219,7 +219,7 @@ export class MeterUnitsService {
         );
       }
       if (param.filterModel.tags && param.filterModel.tags.length > 0) {
-        param.filterModel.tags.map(row =>
+        param.filterModel.tags.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.tags),
             propValue: row.id.toString(),
@@ -230,7 +230,7 @@ export class MeterUnitsService {
 
       // show operations filter
       if (param.filterModel.showOptionFilter && param.filterModel.showOptionFilter.length > 0) {
-        param.filterModel.showOptionFilter.map(row => {
+        param.filterModel.showOptionFilter.map((row) => {
           if (row.id === 1) {
             return requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
@@ -256,7 +256,7 @@ export class MeterUnitsService {
       }
 
       if (param.sortModel && param.sortModel.length > 0) {
-        param.sortModel.map(row =>
+        param.sortModel.map((row) =>
           requestParam.sort.push({
             propName: capitalize(row.colId),
             index: 0,

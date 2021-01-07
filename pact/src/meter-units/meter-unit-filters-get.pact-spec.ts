@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MeterUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -128,7 +128,7 @@ describe('Pact consumer test', () => {
 
     const responseBody: MeterUnitsLayout[] = data;
     const meterUnitTypeId = 1;
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_METER_UNIT_FILTERS_BY_TYPE',
@@ -150,14 +150,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching meter unit filters by type', done => {
-      service.getMeterUnitsLayout(meterUnitTypeId).subscribe(res => {
+    it('should make request for fetching meter unit filters by type', (done) => {
+      service.getMeterUnitsLayout(meterUnitTypeId).subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

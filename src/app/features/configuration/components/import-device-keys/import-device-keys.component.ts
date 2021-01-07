@@ -92,13 +92,13 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     if (this.authService.isRefreshNeeded2()) {
       this.authService
         .renewToken()
-        .then(value => {
+        .then((value) => {
           this.authService.user = value;
           this.authService.saveTokenAndSetUserRights2(value, '');
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.message === 'login_required') {
-            this.authService.login().catch(err2 => console.log(err2));
+            this.authService.login().catch((err2) => console.log(err2));
           }
         });
     }
@@ -113,8 +113,8 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     const ids = this.meterUnitsTypeGridService.getAllCryptoImportIds();
     const results: CryptoImportCheckResponse[] = [];
     if (ids && ids.length > 0) {
-      ids.forEach(x => {
-        this.cryptoLiteService.checkCryptoImport(x).subscribe(o => {
+      ids.forEach((x) => {
+        this.cryptoLiteService.checkCryptoImport(x).subscribe((o) => {
           results.push(o);
           if (o.status === 'SUCCESS') {
             this.allResultTexts.push(

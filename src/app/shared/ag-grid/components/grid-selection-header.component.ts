@@ -63,7 +63,7 @@ export class GridSelectionHeaderComponent implements IHeaderAngularComp, OnDestr
 
     const startRow = this.params.api.getFirstDisplayedRow();
     const endRow = this.params.api.getLastDisplayedRow();
-    this.params.api.forEachNode(node => {
+    this.params.api.forEachNode((node) => {
       if (node.rowIndex >= startRow && node.rowIndex <= endRow) {
         node.setSelected(this.form.get('checkBox').value);
       }

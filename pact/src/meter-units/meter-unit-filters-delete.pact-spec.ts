@@ -7,15 +7,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MeterUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -28,7 +28,7 @@ describe('Pact consumer test', () => {
   const id = 1;
 
   describe('Delete meter unit filter by type', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_DELETE_METER_UNIT_FILTER_BY_TYPE',
@@ -52,19 +52,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request to delete meter unit filter by type', done => {
+    it('should make request to delete meter unit filter by type', (done) => {
       service.deleteMeterUnitsLayout(meterUnitTypeId, id).subscribe(
-        res => {
+        (res) => {
           expect(res).toEqual(null);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

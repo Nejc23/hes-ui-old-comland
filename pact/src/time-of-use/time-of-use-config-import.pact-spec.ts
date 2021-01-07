@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MeterUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -33,7 +33,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('TOU import xml configuration file', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_TOU_IMPORT_CONFIGURATION',
@@ -56,18 +56,18 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for import TOU xml config', done => {
+    it('should make request for import TOU xml config', (done) => {
       service.importConfigTou(requestBody).subscribe(
         () => {
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

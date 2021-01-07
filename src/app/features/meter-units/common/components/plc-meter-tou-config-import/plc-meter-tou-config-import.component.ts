@@ -72,10 +72,10 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     // console.log(`request = ${JSON.stringify(request)}`);
     const successMessage = $localize`Import xml file was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         this.resetForm();
       },
-      x => {
+      (x) => {
         this.errorMsg = x.statusText;
         console.log(x);
       } // error

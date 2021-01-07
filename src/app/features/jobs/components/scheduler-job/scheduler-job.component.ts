@@ -18,7 +18,7 @@ import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common
 
 @Component({
   selector: 'app-scheduler-job',
-  templateUrl: './scheduler-job.component.html',
+  templateUrl: './scheduler-job.component.html'
 })
 export class SchedulerJobComponent implements OnInit {
   @ViewChild(RegistersSelectComponent) registers;
@@ -34,7 +34,7 @@ export class SchedulerJobComponent implements OnInit {
     { value: '3' as string, label: $localize`Hour(s)`, labelSmall: $localize`Every N hour(s` },
     { value: '4' as string, label: $localize`Daily`, labelSmall: $localize`Every day specific time` },
     { value: '5' as string, label: $localize`Weekly`, labelSmall: $localize`One or more days of the week` },
-    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` },
+    { value: '6' as string, label: $localize`Monthly`, labelSmall: $localize`One or more days in the month` }
   ];
   weekDays: Codelist<number>[] = [
     { id: 1, value: $localize`Mon-Fri` },
@@ -44,7 +44,7 @@ export class SchedulerJobComponent implements OnInit {
     { id: 5, value: $localize`Thu` },
     { id: 6, value: $localize`Fri` },
     { id: 7, value: $localize`Sat` },
-    { id: 8, value: $localize`Sun` },
+    { id: 8, value: $localize`Sun` }
   ];
   selectedId = 0;
   monthDays: number[] = [];
@@ -82,9 +82,9 @@ export class SchedulerJobComponent implements OnInit {
       [this.intervalRangeProperty]: [formData ? formData.intervalRange : 1, Validators.required],
       [this.timeUnitProperty]: [
         formData ? this.jobsTimeUnits.find((x) => x.id === formData.timeUnit) : this.defaultTimeUnit,
-        Validators.required,
+        Validators.required
       ],
-      [this.enableProperty]: [formData ? formData.enable : true],
+      [this.enableProperty]: [formData ? formData.enable : true]
     });
   }
 
@@ -148,7 +148,7 @@ export class SchedulerJobComponent implements OnInit {
       timeUnit:
         this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0,
       enable: this.form.get(this.enableProperty).value,
-      actionType: jobActionType.reading,
+      actionType: jobActionType.reading
     };
     return formData;
   }

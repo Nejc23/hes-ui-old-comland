@@ -95,7 +95,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
     const request = this.myGridService.postRelaysConnectDevice(values);
     const successMessage = $localize`Action in progress!`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         this.modal.close();
       },
       () => {} // error

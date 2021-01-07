@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -32,7 +32,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('myGrid.link get identity token', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_GET_IDENTITIY_TOKEN_FOR_MY_GRID_LINK_APIS',
@@ -55,19 +55,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for get identity token for access to myGrid.link api-s', done => {
+    it('should make request for get identity token for access to myGrid.link api-s', (done) => {
       service.getMyGridIdentityToken().subscribe(
         (res: IdentityToken) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

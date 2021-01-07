@@ -38,11 +38,11 @@ const routes: Routes = [
 })
 export class DataConcentratorUnitsRoutingModule {
   constructor() {
-    routes.map(x => {
+    routes.map((x) => {
       x.children !== undefined
-        ? x.children.map(y => {
+        ? x.children.map((y) => {
             y.children !== undefined
-              ? y.children.map(z =>
+              ? y.children.map((z) =>
                   z.data.breadcrumb !== null ? (z.data.breadcrumb = $localize`${z.data.breadcrumb}`) : (z.data.breadcrumb = null)
                 )
               : (y = y);

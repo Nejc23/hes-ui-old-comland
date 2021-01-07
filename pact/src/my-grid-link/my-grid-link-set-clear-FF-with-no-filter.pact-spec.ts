@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -35,7 +35,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('myGrid.link clear FF with no filter request', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_FOR_CLEAR_FF_WITH_NO_FILTER',
@@ -58,19 +58,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for clear FF with no filter in request - myGrid.Link', done => {
+    it('should make request for clear FF with no filter in request - myGrid.Link', (done) => {
       service.clearFF(requestBody).subscribe(
         (res: ResponseClearFF) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

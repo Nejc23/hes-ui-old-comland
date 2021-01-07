@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: CryptoLiteService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -33,7 +33,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('Crypro import - upload file', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_UPLOADING_GULF',
@@ -55,20 +55,20 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for uploading GULF file', done => {
+    it('should make request for uploading GULF file', (done) => {
       service.uploadCryptoImport().subscribe(
         (res: CryptoImportResponse) => {
           expect(res.uuid).toBeDefined();
           expect(res.result).toEqual(true);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

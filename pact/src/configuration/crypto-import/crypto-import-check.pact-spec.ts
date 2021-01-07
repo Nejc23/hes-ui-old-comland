@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: CryptoLiteService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -39,7 +39,7 @@ describe('Pact consumer test', () => {
 
     const responseBody: CryptoImportCheckResponse = data;
     const importId = '38cf21aa-821f-40a1-b99d-4368f49196e4';
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_CHECK_CRYPTO_IMPORT',
@@ -61,14 +61,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for check crypto import status', done => {
-      service.checkCryptoImport(importId).subscribe(res => {
+    it('should make request for check crypto import status', (done) => {
+      service.checkCryptoImport(importId).subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

@@ -119,7 +119,7 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
     const request = this.myGridService.setRelaysMode(values);
     const successMessage = $localize`Setting of relay mode succeeded!`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         this.modal.close();
       },
       () => {} // error

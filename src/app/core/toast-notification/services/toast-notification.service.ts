@@ -51,7 +51,7 @@ export class ToastNotificationService {
   }
 
   remove(toast) {
-    this.toasts = this.toasts.filter(t => t !== toast);
+    this.toasts = this.toasts.filter((t) => t !== toast);
   }
 
   clearToasts() {

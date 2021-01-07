@@ -49,7 +49,7 @@ export class InputSelectComponent implements OnInit {
 
   currentValue(): string {
     const current = this.form.get(this.property).value;
-    const selectedOption = _.find(this.options, x => x.id === current);
+    const selectedOption = _.find(this.options, (x) => x.id === current);
     return selectedOption ? selectedOption.value : this.defaultValueString;
   }
 

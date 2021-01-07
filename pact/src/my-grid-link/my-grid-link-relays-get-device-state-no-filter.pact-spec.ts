@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -65,7 +65,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('myGrid.link trigger relays get device state with device ids', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_RELAYS_GET_DEVICE_STATE_WITH_IDS',
@@ -88,19 +88,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for trigger relays get device state with ids in request - myGrid.Link', done => {
+    it('should make request for trigger relays get device state with ids in request - myGrid.Link', (done) => {
       service.getRelaysState(requestBody).subscribe(
         (res: IActionResponseRelays) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

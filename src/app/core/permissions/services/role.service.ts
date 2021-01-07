@@ -23,7 +23,7 @@ export class RoleService {
     if (!Array.isArray(roles)) {
       rolesArray.push(roles);
     } else {
-      roles.forEach(element => {
+      roles.forEach((element) => {
         rolesArray.push(element);
       });
     }
@@ -70,15 +70,15 @@ export class RoleService {
     if (resultUserRight.length === 0) {
       this.pushNewUserRight(resultUserRight, role);
     } else {
-      role.userRights.forEach(elmnCurrentRole => {
-        const exs = resultUserRight.find(x => x.functionality.toLowerCase() === elmnCurrentRole.functionality.toLowerCase());
+      role.userRights.forEach((elmnCurrentRole) => {
+        const exs = resultUserRight.find((x) => x.functionality.toLowerCase() === elmnCurrentRole.functionality.toLowerCase());
 
         if (typeof exs !== 'undefined' && exs != null) {
           if (!exs.writeRights) {
             exs.writeRights = elmnCurrentRole.writeRights;
           }
-          elmnCurrentRole.action.forEach(actT => {
-            const actExists = exs.action.find(x => x === actT);
+          elmnCurrentRole.action.forEach((actT) => {
+            const actExists = exs.action.find((x) => x === actT);
             if (typeof actExists === 'undefined' || actExists == null) {
               exs.action.push(actT);
             }
@@ -96,12 +96,12 @@ export class RoleService {
     let functionalityStr = '';
     let actTmp: ActionEnumerator[] = [];
 
-    role.userRights.forEach(elmnCurrentRole => {
+    role.userRights.forEach((elmnCurrentRole) => {
       functionalityStr = elmnCurrentRole.functionality;
       write = elmnCurrentRole.writeRights;
 
       actTmp = [];
-      elmnCurrentRole.action.forEach(actT => {
+      elmnCurrentRole.action.forEach((actT) => {
         actTmp.push(actT);
       });
 

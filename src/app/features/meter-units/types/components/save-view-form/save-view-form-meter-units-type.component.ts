@@ -46,7 +46,7 @@ export class SaveViewFormMUTComponent implements OnInit {
       ? this.cookieNameForGridSettings
       : 'grdColMUT-typeId-' + this.meterUnitsTypeId;
     this.mutLayouts$ = this.mutService.getMeterUnitsLayout(this.meterUnitsTypeId);
-    this.mutLayouts$.subscribe(x => {
+    this.mutLayouts$.subscribe((x) => {
       this.data = x;
       this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as MeterUnitsLayout;
       this.cookieSettings = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
@@ -99,7 +99,7 @@ export class SaveViewFormMUTComponent implements OnInit {
       this.mutService
         .createMeterUnitsLayout(this.meterUnitsTypeId, this.sessionLayout)
         .toPromise()
-        .then(x => {
+        .then((x) => {
           this.sessionLayout.id = x ? x.id : -1;
         });
     }

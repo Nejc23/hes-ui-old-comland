@@ -41,18 +41,18 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
     component.modalBody = $localize`Do you want to change scheduler job status`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         response.subscribe(
-          value => {
+          (value) => {
             this.toast.successToast(event ? this.messageEnabled : this.messageDisabled);
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
         this.activeSwitch.checked = !event;
       }

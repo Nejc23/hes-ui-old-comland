@@ -84,11 +84,11 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     const request = this.myGridService.setDisconnectorMode(values);
     const successMessage = $localize`Meter Units set Breaker mode was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         console.log(result);
         this.modal.close();
       },
-      err => {
+      (err) => {
         // error
         this.errMsg = err.error.errors.breakerMode[0];
       }

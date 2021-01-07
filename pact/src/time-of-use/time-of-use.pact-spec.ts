@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: TimeOfUseService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -51,7 +51,7 @@ describe('Pact consumer test', () => {
       }
     ];
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_GET_TOU_CONFIGURATIONS',
@@ -71,14 +71,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for fetching TOU configurations', done => {
-      service.getTouConfigList().subscribe(res => {
+    it('should make request for fetching TOU configurations', (done) => {
+      service.getTouConfigList().subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();
       });

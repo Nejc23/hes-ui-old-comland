@@ -22,17 +22,17 @@ export class BreadcrumbComponent implements OnInit {
     this.breadcrumbs = this.buildBreadCrumb(this.activatedRoute.root);
 
     // subscribe to the NavigationEnd event
-    this.router.events.pipe(filter(event => event instanceof NavigationEnd)).subscribe(event => {
+    this.router.events.pipe(filter((event) => event instanceof NavigationEnd)).subscribe((event) => {
       // set breadcrumbs
       const root: ActivatedRoute = this.activatedRoute.root;
       this.breadcrumbs = this.buildBreadCrumb(root);
     });
 
-    this.service.eventEmitterSetPageName.subscribe(pageName => {
+    this.service.eventEmitterSetPageName.subscribe((pageName) => {
       this.pageName = pageName;
     });
 
-    this.service.eventEmitterSetBreadcrumbs.subscribe(breadcrumbs => {
+    this.service.eventEmitterSetBreadcrumbs.subscribe((breadcrumbs) => {
       this.breadcrumbs = breadcrumbs;
     });
   }

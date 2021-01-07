@@ -44,7 +44,7 @@ const routes: Routes = [
 })
 export class SchedulerJobsRoutingModule {
   constructor() {
-    routes.forEach(x => {
+    routes.forEach((x) => {
       x.data.breadcrumb = $localize`${x.data.breadcrumb}`;
     });
   }

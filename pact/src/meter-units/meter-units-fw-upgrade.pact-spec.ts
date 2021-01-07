@@ -11,15 +11,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MyGridLinkService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -76,7 +76,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('Meter unit fw upgrade', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_FW_UPGRADE',
@@ -99,19 +99,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for meter unit fw upgrade', done => {
+    it('should make request for meter unit fw upgrade', (done) => {
       service.createFwUpgrade(requestBody).subscribe(
         (res: IActionResponseFwUpgradeData) => {
           expect(res).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

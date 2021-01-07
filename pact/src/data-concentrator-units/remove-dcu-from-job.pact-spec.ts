@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: DataConcentratorUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -35,7 +35,7 @@ describe('Pact consumer test', () => {
       deviceIds: ['9b837e2d-957d-49e2-8d1d-a2e4b8440b77', 'ebeacc9d-744c-4a88-bb9c-625216ab99b9']
     };
 
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_REMOVE_CONCENTRATORS_FROM_JOB',
@@ -58,14 +58,14 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for removing Concentrators from job', done => {
-      service.removeConcentratorsFromJob(data).subscribe(res => {
+    it('should make request for removing Concentrators from job', (done) => {
+      service.removeConcentratorsFromJob(data).subscribe((res) => {
         expect(res).toEqual(null);
         done();
       });

@@ -67,7 +67,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
 
   loadData() {
     this.rowData$ = this.serviceRepository.getTemplates();
-    this.rowData$.subscribe(x => {
+    this.rowData$.subscribe((x) => {
       this.rowData = x;
       this.totalCount = this.rowData ? this.rowData.length : 0;
     });
@@ -87,7 +87,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
     const request = this.myGridService.postMyGridAddDeviceTemplate(values);
     const successMessage = $localize`Adding template to device(s) succeeded!`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         this.modal.close();
       },
       () => {} // error

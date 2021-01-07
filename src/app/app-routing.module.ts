@@ -28,19 +28,21 @@ const appRoutes: Routes = [
       {
         path: 'dataConcentratorUnits',
         loadChildren: () =>
-          import('src/app/features/data-concentrator-units/modules/data-concentrator-units.module').then(m => m.DataConcentratorUnitsModule)
+          import('src/app/features/data-concentrator-units/modules/data-concentrator-units.module').then(
+            (m) => m.DataConcentratorUnitsModule
+          )
       },
       {
         path: 'meterUnits',
-        loadChildren: () => import('src/app/features/meter-units/common/modules/meter-units.module').then(m => m.MeterUnitsModule)
+        loadChildren: () => import('src/app/features/meter-units/common/modules/meter-units.module').then((m) => m.MeterUnitsModule)
       },
       {
         path: 'schedulerJobs',
-        loadChildren: () => import('src/app/features/jobs/modules/scheduler-jobs.module').then(m => m.SchedulerJobsModule)
+        loadChildren: () => import('src/app/features/jobs/modules/scheduler-jobs.module').then((m) => m.SchedulerJobsModule)
       },
       {
         path: 'configuration',
-        loadChildren: () => import('src/app/features/configuration/modules/configuration.module').then(m => m.ConfigurationModule)
+        loadChildren: () => import('src/app/features/configuration/modules/configuration.module').then((m) => m.ConfigurationModule)
       }
     ]
   },

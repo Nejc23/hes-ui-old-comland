@@ -51,7 +51,7 @@ export class TouConfigSelectComponent implements OnInit {
     this.form = this.createForm();
     this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
     this.rowData$ = this.registersSelectService.getTouConfigList();
-    this.rowData$.subscribe(x => {
+    this.rowData$.subscribe((x) => {
       this.rowData = x;
       if (x) {
         this.totalCount = x.length;
@@ -65,7 +65,7 @@ export class TouConfigSelectComponent implements OnInit {
     const selectedRows = this.gridApi.getSelectedRows();
     const rows = _.map(
       selectedRows,
-      nameOf<TimeOfUseConfigList>(o => o.timeOfUseId)
+      nameOf<TimeOfUseConfigList>((o) => o.timeOfUseId)
     );
     if (rows.length > 0) {
       return rows[0];

@@ -33,7 +33,7 @@ export class CustomFormErrorsComponent implements OnInit, OnDestroy {
     const currentErrors = _.reduce(
       this.form.errors,
       (res, current, index) => {
-        const match = _.find(this.errorMessages, x => {
+        const match = _.find(this.errorMessages, (x) => {
           return x.errorName === index;
         });
 

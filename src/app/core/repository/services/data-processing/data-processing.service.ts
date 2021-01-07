@@ -36,7 +36,7 @@ export class DataProcessingService {
 
     if (filter.register.categorization === 'EVENT') {
       return this.getEvents(request).pipe(
-        map(response => {
+        map((response) => {
           if (
             !response ||
             response.length === 0 ||
@@ -56,7 +56,7 @@ export class DataProcessingService {
       request.profiles = null;
 
       return this.getInstantaneousValues(request).pipe(
-        map(response => {
+        map((response) => {
           if (!response || response.length === 0 || !response[0].registerDefinitions || response[0].registerDefinitions.length === 0) {
             return null;
           } else {
@@ -67,7 +67,7 @@ export class DataProcessingService {
     } else {
       // PROFILE
       return this.getProfiles(request).pipe(
-        map(response => {
+        map((response) => {
           if (
             !response ||
             response.length === 0 ||

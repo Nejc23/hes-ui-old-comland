@@ -17,7 +17,7 @@ export class GridUtils {
     let pinnedRightWidth = 0;
     const columnStates = gridColumnApi.getColumnState();
 
-    const pinnedColumn = columnStates.find(c => c.pinned === 'right');
+    const pinnedColumn = columnStates.find((c) => c.pinned === 'right');
 
     if (pinnedColumn) {
       pinnedRightWidth = pinnedColumn.width;
@@ -26,7 +26,7 @@ export class GridUtils {
     if (usedWidth < availableWidth + pinnedRightWidth) {
       // expand only the last visible nonpinned column
 
-      const lastVisibleColumnIndex = columnStates.map(c => !c.hide && !c.pinned).lastIndexOf(true);
+      const lastVisibleColumnIndex = columnStates.map((c) => !c.hide && !c.pinned).lastIndexOf(true);
       if (lastVisibleColumnIndex > -1) {
         columnStates[lastVisibleColumnIndex].width =
           columnStates[lastVisibleColumnIndex].width + (availableWidth - usedWidth) + pinnedRightWidth;

@@ -482,17 +482,17 @@ export class MeterUnitsTypeGridService {
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = params => {
+  private onColumnMoved = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   };
 
-  private onSortChanged = params => {
+  private onSortChanged = (params) => {
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
   };
 
-  private onColumnVisible = params => {
+  private onColumnVisible = (params) => {
     // send to subscribers the visibility of columns
     this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
   };
@@ -568,11 +568,11 @@ export class MeterUnitsTypeGridService {
   public setSessionSettingsSelectedRows(selectedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (selectedRow.selected !== undefined && selectedRow.selected) {
-      if (!_.find(settings.selectedRows, x => x.deviceId === selectedRow.data.deviceId)) {
+      if (!_.find(settings.selectedRows, (x) => x.deviceId === selectedRow.data.deviceId)) {
         settings.selectedRows.push(selectedRow.data);
       }
     } else if (selectedRow.selected !== undefined && !selectedRow.selected) {
-      settings.selectedRows = settings.selectedRows.filter(obj => obj.deviceId !== selectedRow.data.deviceId);
+      settings.selectedRows = settings.selectedRows.filter((obj) => obj.deviceId !== selectedRow.data.deviceId);
     } else if (selectedRow.length === 0) {
       settings.selectedRows = [];
     }
@@ -610,11 +610,11 @@ export class MeterUnitsTypeGridService {
     }
 
     if (excludedRow.selected !== undefined && excludedRow.selected) {
-      if (_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
-        settings.excludedRows = settings.excludedRows.filter(obj => obj.deviceId !== excludedRow.data.deviceId);
+      if (_.find(settings.excludedRows, (x) => x.deviceId === excludedRow.data.deviceId)) {
+        settings.excludedRows = settings.excludedRows.filter((obj) => obj.deviceId !== excludedRow.data.deviceId);
       }
     } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
-      if (!_.find(settings.excludedRows, x => x.deviceId === excludedRow.data.deviceId)) {
+      if (!_.find(settings.excludedRows, (x) => x.deviceId === excludedRow.data.deviceId)) {
         settings.excludedRows.push(excludedRow.data);
       }
     } else if (excludedRow.length === 0) {

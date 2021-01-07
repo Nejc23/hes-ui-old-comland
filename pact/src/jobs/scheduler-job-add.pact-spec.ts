@@ -8,15 +8,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: JobsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -159,7 +159,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('Meter units read scheduler', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_CREATE_METER_UNITS_READ_SCHEDULER',
@@ -182,19 +182,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for creating meter units read scheduler', done => {
+    it('should make request for creating meter units read scheduler', (done) => {
       service.createSchedulerJob(requestBody).subscribe(
         (res: SchedulerJob) => {
           expect(requestBody).toEqual(responseBody);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

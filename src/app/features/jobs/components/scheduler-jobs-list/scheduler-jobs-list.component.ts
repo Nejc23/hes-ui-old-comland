@@ -29,7 +29,7 @@ import { SchedulerTopologyJobComponent } from '../scheduler-topology-job/schedul
 
 @Component({
   selector: 'app-scheduler-jobs-list',
-  templateUrl: './scheduler-jobs-list.component.html',
+  templateUrl: './scheduler-jobs-list.component.html'
 })
 export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   selectedId = 1;
@@ -57,7 +57,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     startRow: 0,
     endRow: 0,
     sortModel: [],
-    searchModel: [],
+    searchModel: []
   };
   columnDefs = [];
 
@@ -71,7 +71,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   pageSizes: Codelist<number>[] = [
     { id: 20, value: '20' },
     { id: 50, value: '50' },
-    { id: 100, value: '100' },
+    { id: 100, value: '100' }
   ];
 
   selectedPageSize: Codelist<number> = this.pageSizes[0];
@@ -111,7 +111,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         if (event) {
           this.refreshGrid();
         }
-      },
+      }
     });
 
     this.form = this.createForm(this.pageSizes[0]);
@@ -192,7 +192,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       last: $localize`last`,
       first: $localize`first`,
       previous: $localize`previous`,
-      loadingOoo: $localize`loading...`,
+      loadingOoo: $localize`loading...`
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);
@@ -259,7 +259,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addJob() {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
@@ -281,7 +281,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addDiscoveryJob() {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
@@ -301,7 +301,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addDcTimeSyncJob() {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
@@ -321,7 +321,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addDcReadEventsJob() {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
@@ -343,7 +343,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   addTopologyJob() {
     const options: NgbModalOptions = {
-      size: 'xl',
+      size: 'xl'
     };
 
     const modalRef = this.modalService.open(SchedulerTopologyJobComponent, options);
@@ -394,7 +394,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         } else {
           that.loadData(that, paramsRow);
         }
-      },
+      }
     };
     this.gridApi.setServerSideDatasource(that.datasource);
   }
@@ -451,7 +451,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       sortModel: sortModel ? sortModel : this.schedulerJobsListGridLayoutStore.sortModel,
       searchText: this.schedulerJobsListGridService.getSessionSettingsSearchedText(),
       searchWildcards: this.schedulerJobsListGridService.getSessionSettingsSearchedWildcards(),
-      pageSize: this.selectedPageSize,
+      pageSize: this.selectedPageSize
     };
 
     if (
@@ -473,7 +473,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
   createForm(pageSize: Codelist<number>): FormGroup {
     return this.fb.group({
-      [this.pageSizeProperty]: pageSize,
+      [this.pageSizeProperty]: pageSize
     });
   }
 

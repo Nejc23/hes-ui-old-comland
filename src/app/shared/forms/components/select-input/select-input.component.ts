@@ -38,7 +38,7 @@ export class SelectInputComponent implements OnInit, OnDestroy {
     this.form
       .get(this.property)
       .valueChanges.pipe(takeUntil(this.active))
-      .subscribe(x => {
+      .subscribe((x) => {
         this.selectionChange(x);
       });
   }

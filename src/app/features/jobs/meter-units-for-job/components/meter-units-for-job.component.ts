@@ -109,7 +109,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private sidebarToggleService: SidebarToggleService
   ) {
-    this.paramsSub = route.params.subscribe(params => {
+    this.paramsSub = route.params.subscribe((params) => {
       this.scheduleId = params.scheduleId;
       meterUnitsForJobGridService.meterUnitsAllId = params.id;
       this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
@@ -177,7 +177,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.setTitle('');
 
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.requestModel.scheduleId = params.scheduleId;
     });
 
@@ -359,11 +359,11 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         if (that.authService.isRefreshNeeded2()) {
           that.authService
             .renewToken()
-            .then(value => {
+            .then((value) => {
               that.authService.user = value;
               that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
+              that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe((response) => {
                 that.gridApi.hideOverlay();
 
                 that.totalCount = 0;
@@ -386,13 +386,13 @@ export class AllForJobComponent implements OnInit, OnDestroy {
                 }
               });
             })
-            .catch(err => {
+            .catch((err) => {
               if (err.message === 'login_required') {
-                that.authService.login().catch(errDetail => console.log(errDetail));
+                that.authService.login().catch((errDetail) => console.log(errDetail));
               }
             });
         } else {
-          that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe(response => {
+          that.meterUnitsTypeService.getGridMeterUnitsForJob(that.requestModel).subscribe((response) => {
             that.gridApi.hideOverlay();
             that.totalCount = 0;
             if (response) {
@@ -622,14 +622,14 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     this.programmaticallySelectRow = true;
     const selectedAll = this.meterUnitsForJobGridService.getSessionSettingsSelectedAll();
     const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
-    api.forEachNode(node => {
+    api.forEachNode((node) => {
       if (selectedAll) {
         const startRow = api.getFirstDisplayedRow();
         const endRow = api.getLastDisplayedRow();
 
         const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
-        api.forEachNode(node2 => {
-          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, x => x.deviceId === node2.data.deviceId)) {
+        api.forEachNode((node2) => {
+          if (node2.rowIndex >= startRow && node2.rowIndex <= endRow && !_.find(excludedRows, (x) => x.deviceId === node2.data.deviceId)) {
             node2.setSelected(true);
           }
         });
@@ -638,7 +638,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         selectedRows !== undefined &&
         selectedRows.length > 0 &&
         !selectedAll &&
-        _.find(selectedRows, x => x.deviceId === node.data.deviceId) !== undefined
+        _.find(selectedRows, (x) => x.deviceId === node.data.deviceId) !== undefined
       ) {
         node.setSelected(true);
       } else {
@@ -710,7 +710,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     // const selectedDeviceCount = this.totalCount;
     const selectedAll = this.meterUnitsForJobGridService.getSessionSettingsSelectedAll();
     if (!selectedAll && selectedRows && selectedRows.length > 0) {
-      selectedRows.map(row => deviceIdsParam.push(row.deviceId));
+      selectedRows.map((row) => deviceIdsParam.push(row.deviceId));
     }
 
     const selectedText = `${this.getSelectedCount()}`;
@@ -736,7 +736,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       const excludedRows = this.meterUnitsForJobGridService.getSessionSettingsExcludedRows();
       if (excludedRows && excludedRows.length > 0) {
         request.excludeIds = [];
-        excludedRows.map(row => request.excludeIds.push(row.deviceId));
+        excludedRows.map((row) => request.excludeIds.push(row.deviceId));
       }
     }
 
@@ -747,21 +747,21 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     component.modalBody = $localize`Remove ${selectedText} Meter Unit(s) from Job?`;
 
     modalRef.result.then(
-      data => {
+      (data) => {
         // on close (CONFIRM)
         // this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
-          value => {
+          (value) => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
             this.toast.successToast($localize`Selected Meter Units removed successfully`);
             this.refresh();
           },
-          e => {
+          (e) => {
             this.toast.errorToast(this.messageServerError);
           }
         );
       },
-      reason => {
+      (reason) => {
         // on dismiss (CLOSE)
       }
     );
@@ -782,11 +782,11 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       requestParam.search = this.setSearch();
       requestParam.excludeIds = [];
 
-      excludedRows.map(row => requestParam.excludeIds.push(row.deviceId));
+      excludedRows.map((row) => requestParam.excludeIds.push(row.deviceId));
     } else {
       const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
       if (selectedRows && selectedRows.length > 0) {
-        selectedRows.map(row => requestParam.deviceIds.push(row.deviceId));
+        selectedRows.map((row) => requestParam.deviceIds.push(row.deviceId));
       }
     }
 

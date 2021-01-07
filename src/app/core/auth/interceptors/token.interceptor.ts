@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor {
         this.refreshTokenInProgress = true;
         this.refreshTokenSubject.next(null);
 
-        this.authService.renewToken().then(value => {
+        this.authService.renewToken().then((value) => {
           this.authService.user = value;
           this.authService.saveTokenAndSetUserRights2(value, '');
           this.refreshTokenInProgress = false;

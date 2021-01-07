@@ -45,12 +45,12 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
 
   public selected(e: SelectEvent): void {
     const that = this;
-    e.files.forEach(file => {
+    e.files.forEach((file) => {
       if (!file.validationErrors) {
         const reader = new FileReader();
 
         // tslint:disable-next-line: only-arrow-functions
-        reader.onload = function(ev) {
+        reader.onload = function (ev) {
           const jsonFile = {
             // tslint:disable-next-line: no-string-literal
             src: ev.target['result'],
@@ -76,13 +76,13 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     let response: Observable<any> = new Observable();
     response = this.gridLinkService.postMyGridTemplatesImport(this.jsonString);
     response.subscribe(
-      value => {
+      (value) => {
         // TODO: return is ?
         // console.log(`postMyGridTemplatesImport, value = `, value);
         this.toast.successToast(this.successMessage);
         this.resetForm();
       },
-      e => {
+      (e) => {
         this.toast.errorToast(this.messageServerError);
       }
     );

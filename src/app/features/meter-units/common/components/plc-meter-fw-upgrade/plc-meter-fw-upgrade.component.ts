@@ -95,7 +95,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     const request = this.myGridService.createFwUpgrade(values);
     const successMessage = $localize`Meter image upload was successfull`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-      result => {
+      (result) => {
         if (result && result.requestId.length > 0) {
           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(result.requestId);
         }
@@ -128,13 +128,13 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     if (this.authService.isRefreshNeeded2()) {
       this.authService
         .renewToken()
-        .then(value => {
+        .then((value) => {
           this.authService.user = value;
           this.authService.saveTokenAndSetUserRights2(value, '');
         })
-        .catch(err => {
+        .catch((err) => {
           if (err.message === 'login_required') {
-            this.authService.login().catch(err2 => console.log(err2));
+            this.authService.login().catch((err2) => console.log(err2));
           }
         });
     }

@@ -42,7 +42,7 @@ export class AuthService {
     private configStoreService: AppConfigStoreService,
     @Inject(LOCALE_ID) public locale: string
   ) {
-    this.configStoreService.configObservable.subscribe(appConfig => {
+    this.configStoreService.configObservable.subscribe((appConfig) => {
       const settings = {
         authority: appConfig.identityServer.stsAuthority, // environment.stsAuthority,
         client_id: appConfig.identityServer.clientId, // environment.clientId,
@@ -327,9 +327,7 @@ export class AuthService {
    */
   checkIfRefreshIsNeeded() {
     const validUntilUtc = this.getAuthValidTokenTime();
-    const nowUtc = moment()
-      .utc()
-      .format();
+    const nowUtc = moment().utc().format();
 
     const duration = moment.duration(moment(nowUtc).diff(moment(validUntilUtc)));
     const refreshNeeded = duration.asMinutes() >= config.authRefreshBeforeMinutes;
@@ -341,9 +339,7 @@ export class AuthService {
    */
   checkIfRefreshIsAllowed() {
     const timePassedUtc = this.cookieService.get(config.authTimeStamp);
-    const nowMomentUtc = moment()
-      .utc()
-      .format();
+    const nowMomentUtc = moment().utc().format();
 
     const duration = moment.duration(moment(nowMomentUtc).diff(moment(timePassedUtc)));
     const refreshAllowed = duration.asMinutes() <= config.authTokenDuration;

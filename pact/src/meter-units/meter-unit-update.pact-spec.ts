@@ -9,15 +9,15 @@ describe('Pact consumer test', () => {
   let provider;
   let service: MeterUnitsService;
 
-  beforeAll(done => {
+  beforeAll((done) => {
     provider = setupPactProvider(done);
   });
 
-  afterAll(done => {
+  afterAll((done) => {
     pactFinalize(provider, done);
   });
 
-  afterEach(done => {
+  afterEach((done) => {
     pactVerify(provider, done);
   });
 
@@ -38,7 +38,7 @@ describe('Pact consumer test', () => {
   };
 
   describe('Meter unit manually update', () => {
-    beforeAll(done => {
+    beforeAll((done) => {
       provider
         .addInteraction({
           state: 'A_REQUEST_FOR_UPDATE_METE_UNIT',
@@ -61,19 +61,19 @@ describe('Pact consumer test', () => {
           () => {
             done();
           },
-          err => {
+          (err) => {
             done.fail(err);
           }
         );
     });
 
-    it('should make request for updating meter unit', done => {
+    it('should make request for updating meter unit', (done) => {
       service.updateMu(deviceId, requestBody).subscribe(
-        res => {
+        (res) => {
           expect(res).toEqual(null);
           done();
         },
-        err => {
+        (err) => {
           done.fail(err);
         }
       );

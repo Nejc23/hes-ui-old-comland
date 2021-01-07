@@ -64,16 +64,16 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
     this.dcuFilters$ = of([]); // this.dcuService.getDcuLayout();  // TODO uncomment when implemented
-    this.dcuFilters$.subscribe(x => {
+    this.dcuFilters$.subscribe((x) => {
       this.data = x;
       this.fillformFromSession(this.data);
     });
 
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
-    this.dcuStatuses$.subscribe(y => (this.dcuStatuses = y));
+    this.dcuStatuses$.subscribe((y) => (this.dcuStatuses = y));
 
     this.dcuTags$ = of([]); // this.codelistService.dcuTagCodelist(); // TODO uncomment when implemented
-    this.dcuTags$.subscribe(y => (this.dcuTags = y));
+    this.dcuTags$.subscribe((y) => (this.dcuTags = y));
 
     // this.params.api.addEventListener('modelUpdated', this.doFillData.bind(this));
 
