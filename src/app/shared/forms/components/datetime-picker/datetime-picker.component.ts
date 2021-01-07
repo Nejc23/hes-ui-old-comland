@@ -18,6 +18,7 @@ export class DateTimePickerComponent implements OnInit {
   @Input() readonly = false;
   @Input() isInline = false;
   @Output() blur = new EventEmitter();
+  @Output() valueChange = new EventEmitter<Date>();
 
   controlId: string;
 
@@ -51,5 +52,9 @@ export class DateTimePickerComponent implements OnInit {
 
   onBlur() {
     this.blur.emit();
+  }
+
+  onValueChange(changedDate: Date) {
+    this.valueChange.emit(changedDate);
   }
 }

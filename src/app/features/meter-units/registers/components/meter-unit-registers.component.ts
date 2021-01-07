@@ -476,11 +476,11 @@ export class MeterUnitRegistersComponent implements OnInit {
     console.log('start time changed');
   }
 
-  onStartTimeBlur() {
+  onStartTimeBlurOrChange() {
     this.showData(this.selectedRegister);
   }
 
-  onEndTimeBlur() {
+  onEndTimeBlurOrChange() {
     this.showData(this.selectedRegister);
   }
 
