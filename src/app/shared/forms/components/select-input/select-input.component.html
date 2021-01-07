@@ -4,7 +4,7 @@
     <span *ngIf="required && label !== ' '"> *</span>
   </label>
   <kendo-combobox [name]="property"
-    [disabled]="disabled"
+    [attr.disabled]="disabled ? '' : null"
     class="form-control"
     isRequired="false"
     [formControlName]="property"
