@@ -287,8 +287,8 @@ export class DcOperationsService {
 
     // select from row
     if (guid && guid.length > 0) {
-      requestParam.deviceIds = [];
-      requestParam.deviceIds.push(guid);
+      requestParam.concentratorIds = [];
+      requestParam.concentratorIds.push(guid);
     } else {
       if (this.dcGridService.getSessionSettingsSelectedAll()) {
         const excludedRows = this.dcGridService.getSessionSettingsExcludedRows();
@@ -357,8 +357,8 @@ export class DcOperationsService {
       } else {
         const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
         if (selectedRows && selectedRows.length > 0) {
-          requestParam.deviceIds = [];
-          selectedRows.map((row) => requestParam.deviceIds.push(row.concentratorId));
+          requestParam.concentratorIds = [];
+          selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
         }
       }
     }

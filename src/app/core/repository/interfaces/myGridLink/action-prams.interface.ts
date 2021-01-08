@@ -6,6 +6,7 @@ export interface IActionRequestParams {
   filter?: IActionFilterParams[];
   deviceIds?: string[];
   excludeIds?: string[];
+  concentratorIds?: string[];
 }
 
 export interface IActionSearchParam {
