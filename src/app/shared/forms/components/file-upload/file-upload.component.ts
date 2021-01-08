@@ -21,6 +21,7 @@ export class FileUploadComponent implements OnInit {
   @Input() allowedExtensions: string[] = [];
   @Input() responseType = 'json';
   @Input() acceptExtensions = '';
+  @Input() saveField = 'files';
   @Output() successEvent = new EventEmitter<any>();
   @Output() uploadEvent = new EventEmitter<any>();
 
