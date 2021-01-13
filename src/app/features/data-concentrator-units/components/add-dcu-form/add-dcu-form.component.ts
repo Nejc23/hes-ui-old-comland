@@ -1,5 +1,5 @@
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -14,7 +14,8 @@ import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/da
 import * as moment from 'moment';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
-
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { TabStripComponent } from '@progress/kendo-angular-layout';
 @Component({
   selector: 'app-add-dcu-form',
   templateUrl: './add-dcu-form.component.html'
@@ -30,6 +31,12 @@ export class AddDcuFormComponent implements OnInit {
 
   public credentialsVisible = false;
 
+  public isBasicSelected = true;
+
+  gridApi;
+
+  @ViewChild('tabstrip') public tabstrip: TabStripComponent;
+
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
@@ -38,7 +45,8 @@ export class AddDcuFormComponent implements OnInit {
     private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private jobsService: JobsService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private jobsSelectGridService: JobsSelectGridService
   ) {
     this.form = this.createForm();
   }
@@ -129,9 +137,15 @@ export class AddDcuFormComponent implements OnInit {
 
     const successMessage = $localize`Data Concentration Unit was added successfully`;
 
+    const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
+
+    // // TODO implement actual save
+    // return;
+
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
+          console.log('result', result);
           if (result) {
             this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
 
@@ -147,20 +161,23 @@ export class AddDcuFormComponent implements OnInit {
                   this.toast.successToast(successMessage);
                   this.toast.errorToast(errMessage);
 
+                  console.log('errResult block on error');
                   this.closeOrResetForm(addNew);
                 }
               );
             } else {
+              this.tabstrip.selectTab(0);
               this.showSuccessAndTryCloseForm(successMessage, addNew);
             }
           }
         },
         (errResult) => {
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+          this.tabstrip.selectTab(0);
         } // error
       );
     } catch (error) {
-      console.log('Add-DCU Form Error:', error);
+      this.tabstrip.selectTab(0);
     }
   }
 
@@ -245,5 +262,9 @@ export class AddDcuFormComponent implements OnInit {
       this.form.get(this.passwordProperty).disable();
       this.form.get(this.confirmPasswordProperty).disable();
     }
+  }
+
+  public onTabSelect(e) {
+    console.log('on tab select', e);
   }
 }

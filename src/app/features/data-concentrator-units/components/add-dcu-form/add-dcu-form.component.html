@@ -4,6 +4,12 @@
 
   <div modal-body>
     <ng-container>
+
+      <kendo-tabstrip (tabSelect)="onTabSelect($event)" #tabstrip>
+        <kendo-tabstrip-tab [title]="'Basic'" [selected]="true">
+          <ng-template kendoTabContent>
+
+
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
         <strong><span i18n>Error saving DCU!</span></strong> <br/> {{saveError}}
       </div>
@@ -58,6 +64,21 @@
       <app-input-tag i18n-label label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
         [disabled]="false" [allowCustomValues]="true">
       </app-input-tag>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+    <kendo-tabstrip-tab [title]="'Jobs'">
+      <ng-template kendoTabContent>
+        <div class="form-row">
+          <div class="col-12">
+            <div>
+              <app-jobs-select></app-jobs-select>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
     </ng-container>
   </div>
   <div modal-footer>

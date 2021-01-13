@@ -58,7 +58,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       deps: [AppConfigService]
     }
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule, ChartsModule],
+  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule],
+
   bootstrap: [AppComponent]
 })
 export class AppModule {}

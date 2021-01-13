@@ -15,6 +15,7 @@ import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface
 import { schedulerJobs, schedulerJobsList, executeJob, enableJob, schedulerActiveJobs } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -168,7 +169,8 @@ export class JobsService {
         propNames: [],
         useWildcards: false
       },
-      sort: []
+      sort: [],
+      filter: []
     };
 
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
@@ -178,7 +180,17 @@ export class JobsService {
     }
 
     // // create filter object
-    // if (param.filterModel) {
+    if (param.filterModel) {
+      if (param.filterModel.types && param.filterModel.types.length > 0) {
+        param.filterModel.types.map((row) =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.type),
+            propValue: row.toString(),
+            filterOperation: filterOperationEnum.equal
+          })
+        );
+      }
+    }
     //   requestParam.filter = [];
     //   if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
     //     param.filterModel.statuses.map(row =>
