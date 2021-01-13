@@ -13,7 +13,7 @@
       </div>
       <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty"
         name="readOptionsRadio" [options]="readOptions" box="'true'" (change)="changeReadOptionId()"
-        (refresh)="changeReadOptionId()">
+        (refresh)="changeReadOptionId()" [hideLabelSmall]="true">
       </app-input-radio>
 
       <div class="form-row" *ngIf="show_nHours() || show_nMinutes()">

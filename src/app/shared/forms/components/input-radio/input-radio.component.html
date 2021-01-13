@@ -8,14 +8,14 @@
 
   <div [ngClass]="{'row': inline || box}">
     <div
-      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col mx-3 border py-3 text-center': box, 'border-secondary': box && isSelected(option)}" *ngFor="let option of options">
+      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col mx-3 border py-1 text-center': box, 'border-secondary': box && isSelected(option)}" *ngFor="let option of options">
       <div class="d-flex" [ngbTooltip]="getTooltip(option)" placement="bottom" [openDelay]="500" triggers="hover">
         <input type="radio" id="{{option.uid}}" [name]="property" [formControlName]="property"
           value="{{option.value}}" [attr.name]="property"kendoRadioButton>
         <label for="{{option.uid}}" class="control-label ml-2 d-block text-truncate">
           {{option.label}} </label>
       </div>
-      <label for="{{option.uid}}" class="control-label text-muted" *ngIf="box"><small>{{option.labelSmall}}</small></label>
+      <label for="{{option.uid}}" class="control-label text-muted" *ngIf="box && !hideLabelSmall"><small>{{option.labelSmall}}</small></label>
     </div>
   </div>
 
