@@ -230,8 +230,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    console.log('onRowSelect, params: ', params);
-
     if (this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll()) {
       params.node.setSelected(true);
     } else {
