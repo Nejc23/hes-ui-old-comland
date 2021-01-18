@@ -48,12 +48,13 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@progress/kendo-angular-charts": "^4.2.1",
-    "@progress/kendo-angular-common": "^1.2.4",
+    "@progress/kendo-angular-common": "^1.0.0",
     "@progress/kendo-angular-dateinputs": "^4.4.1",
     "@progress/kendo-angular-dropdowns": "^4.4.1",
     "@progress/kendo-angular-inputs": "^6.7.4",
     "@progress/kendo-angular-intl": "^2.0.4",
-    "@progress/kendo-angular-l10n": "^2.0.3",
+    "@progress/kendo-angular-l10n": "^2.0.0",
+    "@progress/kendo-angular-layout": "^5.1.0",
     "@progress/kendo-angular-popup": "^3.0.7",
     "@progress/kendo-angular-upload": "^6.1.0",
     "@progress/kendo-data-query": "^1.5.4",
@@ -82,7 +83,8 @@
     "stream": "0.0.2",
     "tslib": "^2.0.3",
     "uuid": "^8.3.2",
-    "zone.js": "~0.11.3"
+    "zone.js": "~0.11.3",
+    "@progress/kendo-angular-progressbar": "^0.2.3"
   },
   "devDependencies": {
     "@ag-grid-community/core": "^24.1.0",

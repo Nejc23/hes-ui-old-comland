@@ -5,16 +5,6 @@
       <trans-unit id="ngb.toast.close-aria" datatype="html">
         <source>Close</source>
         <target>Schliessen</target>
-      </trans-unit><trans-unit id="2690656529626907484" datatype="html">
-        <source>NO DATA FOUND</source>
-        <target state="new">NO DATA FOUND</target>
-        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
-        <note priority="1" from="meaning">kendo.autocomplete.noDataText</note>
-      </trans-unit><trans-unit id="4821453594854847070" datatype="html">
-        <source>clear</source>
-        <target state="new">clear</target>
-        <note priority="1" from="description">The title of the clear button</note>
-        <note priority="1" from="meaning">kendo.autocomplete.clearTitle</note>
       </trans-unit>
       <trans-unit id="8436180309712376162" datatype="html">
         <source>Overview - Concentrators</source>
@@ -838,60 +828,6 @@
       <trans-unit id="7804366670597991631" datatype="html">
         <source>'Name</source>
         <target>'Name</target>
-      </trans-unit><trans-unit id="ngb.datepicker.previous-month" datatype="html">
-        <source>Previous month</source>
-        <target state="new">Previous month</target>
-      </trans-unit><trans-unit id="ngb.datepicker.next-month" datatype="html">
-        <source>Next month</source>
-        <target state="new">Next month</target>
-      </trans-unit><trans-unit id="ngb.datepicker.select-month" datatype="html">
-        <source>Select month</source>
-        <target state="new">Select month</target>
-      </trans-unit><trans-unit id="ngb.datepicker.select-year" datatype="html">
-        <source>Select year</source>
-        <target state="new">Select year</target>
-      </trans-unit><trans-unit id="ngb.timepicker.HH" datatype="html">
-        <source>HH</source>
-        <target state="new">HH</target>
-      </trans-unit><trans-unit id="ngb.timepicker.hours" datatype="html">
-        <source>Hours</source>
-        <target state="new">Hours</target>
-      </trans-unit><trans-unit id="ngb.timepicker.MM" datatype="html">
-        <source>MM</source>
-        <target state="new">MM</target>
-      </trans-unit><trans-unit id="ngb.timepicker.minutes" datatype="html">
-        <source>Minutes</source>
-        <target state="new">Minutes</target>
-      </trans-unit><trans-unit id="ngb.timepicker.increment-hours" datatype="html">
-        <source>Increment hours</source>
-        <target state="new">Increment hours</target>
-      </trans-unit><trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
-        <source>Decrement hours</source>
-        <target state="new">Decrement hours</target>
-      </trans-unit><trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
-        <source>Increment minutes</source>
-        <target state="new">Increment minutes</target>
-      </trans-unit><trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
-        <source>Decrement minutes</source>
-        <target state="new">Decrement minutes</target>
-      </trans-unit><trans-unit id="ngb.timepicker.SS" datatype="html">
-        <source>SS</source>
-        <target state="new">SS</target>
-      </trans-unit><trans-unit id="ngb.timepicker.seconds" datatype="html">
-        <source>Seconds</source>
-        <target state="new">Seconds</target>
-      </trans-unit><trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
-        <source>Increment seconds</source>
-        <target state="new">Increment seconds</target>
-      </trans-unit><trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
-        <source>Decrement seconds</source>
-        <target state="new">Decrement seconds</target>
-      </trans-unit><trans-unit id="ngb.timepicker.PM" datatype="html">
-        <source><x id="INTERPOLATION"/></source>
-        <target state="new"><x id="INTERPOLATION"/></target>
-      </trans-unit><trans-unit id="ngb.timepicker.AM" datatype="html">
-        <source><x id="INTERPOLATION"/></source>
-        <target state="new"><x id="INTERPOLATION"/></target>
       </trans-unit>
       <trans-unit id="3008420115644088420" datatype="html">
         <source>Configuration</source>
@@ -1645,21 +1581,6 @@
         <target>HEUTE</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.datetimepicker.today</note>
-      </trans-unit><trans-unit id="3892034896682737327" datatype="html">
-        <source>TODAY</source>
-        <target state="new">TODAY</target>
-        <note priority="1" from="description">The label for the today button in the calendar header</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.today</note>
-      </trans-unit><trans-unit id="9101635325676663492" datatype="html">
-        <source>Navigate to previous view</source>
-        <target state="new">Navigate to previous view</target>
-        <note priority="1" from="description">The label for the previous button in the Multiview calendar</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.prevButtonTitle</note>
-      </trans-unit><trans-unit id="3994336778698343633" datatype="html">
-        <source>Navigate to next view</source>
-        <target state="new">Navigate to next view</target>
-        <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
-        <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
       </trans-unit>
       <trans-unit id="5362895271044573681" datatype="html">
         <source>Set</source>

@@ -1,3 +1,5 @@
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import { LayoutModule } from '@progress/kendo-angular-layout';
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputTextComponent } from './components/input-text/input-text.component';
@@ -56,7 +58,9 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
     TimePickerComponent,
     DateTimePickerComponent,
     FileUploadComponent,
-    FileSelectComponent
+    FileSelectComponent,
+    LayoutModule,
+    ChartsModule
   ],
   declarations: [
     InputTextComponent,
@@ -90,7 +94,9 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
     DropDownsModule,
     InputsModule,
     DateInputsModule,
-    UploadsModule
+    UploadsModule,
+    LayoutModule,
+    ChartsModule
   ]
 })
 export class CustomFormsModule {

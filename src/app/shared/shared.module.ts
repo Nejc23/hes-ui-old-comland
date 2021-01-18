@@ -1,3 +1,4 @@
+import { JobsSelectComponent } from './../features/jobs/jobs-select/components/jobs-select.component';
 import { SchedulerTopologyJobComponent } from './../features/jobs/components/scheduler-topology-job/scheduler-topology-job.component';
 import { SchedulerDcReadEventsJobComponent } from './../features/jobs/components/dc-read-events/scheduler-dc-read-events-job.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
@@ -70,6 +71,8 @@ import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/c
 import { PlcMeterJobsRegistersComponent } from '../features/meter-units/common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/common/components/dcu-fw-upgrade.component';
 import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
+import { GridSelectionHeaderScrollableComponent } from './ag-grid/components/grid-selection-header-scrollable.component';
+import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/components/grid-custom-components/grid-cell-active-read-only.component';
 
 @NgModule({
   exports: [
@@ -126,7 +129,8 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent
+    DcuFwUpgradeComponent,
+    JobsSelectComponent
   ],
   imports: [
     CommonModule,
@@ -144,9 +148,11 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
       GridCellActiveJobStatusComponent,
       GridCellLinkComponent,
       GridSelectionHeaderComponent,
+      GridSelectionHeaderScrollableComponent,
       GridCellNameComponent,
       GridCellIdNumberComponent,
-      GridCellIpComponent
+      GridCellIpComponent,
+      GridCellActiveReadOnlyComponent
     ])
   ],
   declarations: [
@@ -196,6 +202,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterTouConfigImportComponent,
     PlcMeterTemplatesImportComponent,
     GridSelectionHeaderComponent,
+    GridSelectionHeaderScrollableComponent,
     GridCellNameComponent,
     GridCellIdNumberComponent,
     GridCellIpComponent,
@@ -206,7 +213,9 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent
+    DcuFwUpgradeComponent,
+    JobsSelectComponent,
+    GridCellActiveReadOnlyComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -234,7 +243,8 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
     PlcMeterRelaysSetModeComponent,
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
-    DcuFwUpgradeComponent
+    DcuFwUpgradeComponent,
+    JobsSelectComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

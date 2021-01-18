@@ -3,7 +3,6 @@ import { GridCellDateComponent } from './../../registers/components/grid/grid-cu
 import { PipesModule } from './../../../../shared/pipes/pipes.module';
 import { environment } from 'src/environments/environment';
 import { RegistersGridComponent } from './../../registers/components/grid/registers-grid.component';
-import { ChartsModule } from '@progress/kendo-angular-charts';
 import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
 import { NgModule } from '@angular/core';
@@ -76,7 +75,6 @@ import { RegistersColumnChartComponent } from '../../registers/components/chart/
     SharedModule,
     MeterUnitsRoutingModule,
     BreadcrumbsModule,
-    ChartsModule,
     AgGridModule.withComponents([
       GridSelectionHeaderComponent,
       GridCellStatusComponent,

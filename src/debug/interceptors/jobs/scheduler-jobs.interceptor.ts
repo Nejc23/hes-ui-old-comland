@@ -1,5 +1,5 @@
 import { DataConcentratorUnitsComponent } from './../../../app/features/data-concentrator-units/components/data-concentrator-units.component';
-import { addNewScheduleDevice, schedulerActiveJobs } from './../../../app/core/repository/consts/jobs.const';
+import { deviceJobs, schedulerActiveJobs } from './../../../app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -10,6 +10,7 @@ import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-re
 import { schedulerJobsList, schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
 import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
+import { DeviceJobs } from 'src/app/core/repository/interfaces/jobs/device-jobs.interface';
 
 @Injectable()
 export class SchedulerJobsInterceptor {
@@ -297,15 +298,10 @@ export class SchedulerJobsInterceptor {
     return new RegExp(`${schedulerJobs}/`).test(request.url) && request.method.endsWith('GET');
   }
 
-  static interceptAddNewScheduleDevice(request: HttpRequest<ScheduleDevice>): Observable<HttpEvent<ScheduleDevice>> {
-    const data: ScheduleDevice = {
-      scheduleDeviceId: 'af9c4a3e-8080-4e09-ae44-f1928967d8eb',
-      scheduleId: request.body.scheduleId,
-      deviceId: request.body.deviceId,
-      readingId: request.body.readingId,
-      templateId: request.body.templateId,
-      registerGroupName: request.body.registerGroupName,
-      registerGroupType: request.body.registerGroupType
+  static interceptAddNewDeviceJobs(request: HttpRequest<DeviceJobs>): Observable<HttpEvent<DeviceJobs>> {
+    const data: DeviceJobs = {
+      scheduleJobIds: ['af9c4a3e-8080-4e09-ae44-f1928967d8eb'],
+      deviceId: request.body.deviceId
     };
 
     return of(
@@ -316,8 +312,8 @@ export class SchedulerJobsInterceptor {
     );
   }
 
-  static canInterceptAddNewScheduleDevice(request: HttpRequest<any>): boolean {
-    return new RegExp(addNewScheduleDevice).test(request.url);
+  static canInterceptAddNewDeviceJobs(request: HttpRequest<any>): boolean {
+    return new RegExp(deviceJobs).test(request.url);
   }
 }
 
