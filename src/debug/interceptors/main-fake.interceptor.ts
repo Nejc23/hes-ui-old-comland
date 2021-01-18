@@ -85,8 +85,8 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               if (SchedulerJobsInterceptor.canInterceptSchedulerJobsList(request)) {
                 return SchedulerJobsInterceptor.interceptSchedulerJobsList(request);
               }
-              if (SchedulerJobsInterceptor.canInterceptAddNewScheduleDevice(request)) {
-                return SchedulerJobsInterceptor.interceptAddNewScheduleDevice(request);
+              if (SchedulerJobsInterceptor.canInterceptAddNewDeviceJobs(request)) {
+                return SchedulerJobsInterceptor.interceptAddNewDeviceJobs(request);
               }
 
               if (SchedulerJobsInterceptor.canInterceptSchedulerJobs(request)) {

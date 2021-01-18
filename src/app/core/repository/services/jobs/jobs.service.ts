@@ -1,8 +1,6 @@
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { capitalize } from 'lodash';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { addNewScheduleDevice, schedulerJobsListByJobId } from './../../consts/jobs.const';
-import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -12,11 +10,18 @@ import { SchedulerJobsList } from '../../interfaces/jobs/scheduler-jobs-list.int
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { ActiveJobsList } from '../../interfaces/jobs/active-jobs-list.interface';
-import { schedulerJobs, schedulerJobsList, executeJob, enableJob, schedulerActiveJobs } from '../../consts/jobs.const';
+import {
+  schedulerJobs,
+  schedulerJobsList,
+  executeJob,
+  enableJob,
+  schedulerActiveJobs,
+  schedulerJobsListByJobId,
+  deviceJobs
+} from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
-import { v4 as uuidv4 } from 'uuid';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
-
+import { DeviceJobs } from '../../interfaces/jobs/device-jobs.interface';
 @Injectable({
   providedIn: 'root'
 })
@@ -137,26 +142,21 @@ export class JobsService {
     return new HttpRequest('PUT', `${enableJob}/${id}/0`, null);
   }
 
-  createScheduleDevice(deviceId: string, scheduleId: string) {
-    const sdRequest: ScheduleDevice = {
-      scheduleDeviceId: null,
-      scheduleId,
+  createDeviceJobs(deviceId: string, scheduleJobIds: string[]) {
+    const sdRequest: DeviceJobs = {
       deviceId,
-      readingId: null,
-      registerGroupName: null,
-      registerGroupType: null,
-      templateId: null
+      scheduleJobIds
     };
 
-    return this.addNewScheduleDevice(sdRequest);
+    return this.addNewDeviceJobs(sdRequest);
   }
 
-  addNewScheduleDevice(payload: ScheduleDevice): Observable<ScheduleDevice> {
-    return this.repository.makeRequest(this.addNewScheduleDeviceRequest(payload));
+  addNewDeviceJobs(payload: DeviceJobs): Observable<DeviceJobs> {
+    return this.repository.makeRequest(this.addNewDeviceJobsRequest(payload));
   }
 
-  addNewScheduleDeviceRequest(payload: ScheduleDevice): HttpRequest<ScheduleDevice> {
-    return new HttpRequest('POST', addNewScheduleDevice, payload as any);
+  addNewDeviceJobsRequest(payload: DeviceJobs): HttpRequest<DeviceJobs> {
+    return new HttpRequest('POST', deviceJobs, payload as any);
   }
 
   getActionRequestParams(param: GridRequestParams, pageIndex: number, allVisibleColumns: string[]): IActionRequestParams {

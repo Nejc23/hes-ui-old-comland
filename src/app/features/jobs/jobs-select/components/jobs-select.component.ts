@@ -91,9 +91,9 @@ export class JobsSelectComponent implements OnInit {
   }
 
   // select rows on load grid from session
-  selectRows(api: any) {
+  selectRows() {
     const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
-    api.forEachNode((node) => {
+    this.gridApi.forEachNode((node) => {
       // if (this.jobsSelectGridService.getSessionSettingsSelectedAll()) {
       //   const startRow = api.getFirstDisplayedRow();
       //   const endRow = api.getLastDisplayedRow();
@@ -173,12 +173,10 @@ export class JobsSelectComponent implements OnInit {
 
           that.gridApi.paginationGoToPage(that.jobsSelectGridService.getSessionSettingsPageIndex());
           paramsRow.successCallback(data.data, data.totalCount);
-          that.selectRows(that.gridApi);
+          that.selectRows();
           // params.failCallback();
 
-          setTimeout(() => {
-            that.gridApi.sizeColumnsToFit();
-          }, 10);
+          that.sizeColumnsToFit();
         });
       }
     };
@@ -227,8 +225,6 @@ export class JobsSelectComponent implements OnInit {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    console.log('onRowSelect, params: ', params);
-
     // if (this.jobsSelectGridService.getSessionSettingsSelectedAll()) {
     //   params.node.setSelected(true);
     // } else {
@@ -313,7 +309,7 @@ export class JobsSelectComponent implements OnInit {
 
   searchChange($event: string = '') {
     if ($event !== this.jobsSelectGridService.getSessionSettingsSearchedText()) {
-      this.jobsSelectGridService.clearSessionSettingsSelectedRows();
+      // this.jobsSelectGridService.clearSessionSettingsSelectedRows();
       this.jobsSelectGridService.setSessionSettingsSearchedText($event);
       this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: $event, useWildcards: false }];
 
@@ -324,5 +320,13 @@ export class JobsSelectComponent implements OnInit {
 
   get searchProperty() {
     return 'content';
+  }
+
+  sizeColumnsToFit() {
+    if (this.gridApi) {
+      setTimeout(() => {
+        this.gridApi.sizeColumnsToFit();
+      }, 10);
+    }
   }
 }

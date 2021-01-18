@@ -5,7 +5,7 @@
   <div modal-body>
     <ng-container>
 
-      <kendo-tabstrip (tabSelect)="onTabSelect($event)" #tabstrip>
+      <kendo-tabstrip (tabSelect)="onTabSelect($event);" [keepTabContent]="true">
         <kendo-tabstrip-tab [title]="'Basic'" [selected]="true">
           <ng-template kendoTabContent>
 
@@ -29,8 +29,8 @@
         </div>
       </div>
 
-      <app-select-input i18n-label label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
-        [disabled]="false">
+      <app-select-input i18n-label label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors"
+        [disabled]="false" (selectedValueChanged)="onVendorChanged($event)">
       </app-select-input>
 
       <div class="form-row">
@@ -56,10 +56,6 @@
           </div>
         </div>
       </div>
-
-      <app-select-input i18n-label label="Job" [form]="form" [property]="discoveryJobProperty" [selectOptions]="discoveryJobs"
-        [disabled]="false">
-      </app-select-input>
 
       <app-input-tag i18n-label label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
         [disabled]="false" [allowCustomValues]="true">

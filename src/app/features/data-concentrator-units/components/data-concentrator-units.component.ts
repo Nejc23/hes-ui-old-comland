@@ -48,6 +48,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { GridUtils } from '../../global/grid.utils';
+import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -146,7 +147,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     private sidebarToggleService: SidebarToggleService,
     public fb: FormBuilder,
     private dcuOperationsService: DataConcentratorUnitsOperationsService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private jobsSelectGridService: JobsSelectGridService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -632,6 +634,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   addDcu() {
+    this.jobsSelectGridService.clearSessionSettingsSelectedRows();
     const modalRef = this.modalService.open(AddDcuFormComponent);
     modalRef.result
       .then((result) => {

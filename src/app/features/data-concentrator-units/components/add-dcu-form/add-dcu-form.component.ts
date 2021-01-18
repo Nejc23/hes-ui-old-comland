@@ -16,6 +16,7 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
+import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
 @Component({
   selector: 'app-add-dcu-form',
   templateUrl: './add-dcu-form.component.html'
@@ -25,9 +26,10 @@ export class AddDcuFormComponent implements OnInit {
 
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
+  dcuVendors: Codelist<number>[];
   dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
-  discoveryJobs: Codelist<string>[];
+  // discoveryJobs: Codelist<string>[];
 
   public credentialsVisible = false;
 
@@ -35,7 +37,8 @@ export class AddDcuFormComponent implements OnInit {
 
   gridApi;
 
-  @ViewChild('tabstrip') public tabstrip: TabStripComponent;
+  @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
+  @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -54,13 +57,18 @@ export class AddDcuFormComponent implements OnInit {
   ngOnInit() {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
+
+    this.dcuVendors$.subscribe((values) => {
+      this.dcuVendors = values;
+    });
+
     this.dcuTags$ = this.codelistService.dcuTagCodelist();
-    this.codelistService.jobsDiscoveryJobsCodelist().subscribe(
-      (dj) => {
-        this.discoveryJobs = dj.map((j) => ({ id: j.id, value: `${j.value} - ${moment(j.nextRun).fromNow()}` }));
-      },
-      () => {} // error
-    );
+    // this.codelistService.jobsDiscoveryJobsCodelist().subscribe(
+    //   (dj) => {
+    //     this.discoveryJobs = dj.map((j) => ({ id: j.id, value: `${j.value} - ${moment(j.nextRun).fromNow()}` }));
+    //   },
+    //   () => {} // error
+    // );
 
     this.setCredentialsControls(this.credentialsVisible);
   }
@@ -76,7 +84,6 @@ export class AddDcuFormComponent implements OnInit {
         [this.passwordProperty]: [null],
         [this.confirmPasswordProperty]: [null],
         [this.vendorProperty]: [null, Validators.required],
-        [this.discoveryJobProperty]: [null],
         [this.tagsProperty]: [null]
       },
       { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
@@ -94,14 +101,11 @@ export class AddDcuFormComponent implements OnInit {
       manufacturer: this.form.get(this.vendorProperty).value
     };
 
+    console.log('manufacturer from form.get()', this.form.get(this.vendorProperty));
+
     if (this.credentialsVisible) {
       formData.userName = this.form.get(this.userNameProperty).value;
       formData.password = this.form.get(this.passwordProperty).value;
-    }
-
-    const selectedDiscoveryJob = this.form.get(this.discoveryJobProperty).value as Codelist<string>;
-    if (selectedDiscoveryJob) {
-      formData.discoveryJob = selectedDiscoveryJob;
     }
 
     return formData;
@@ -133,15 +137,12 @@ export class AddDcuFormComponent implements OnInit {
 
   save(addNew: boolean) {
     const dcuFormData = this.fillData();
+    console.log('dcuFormData on save', dcuFormData);
     const request = this.dcuService.createDcu(dcuFormData);
 
     const successMessage = $localize`Data Concentration Unit was added successfully`;
 
     const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
-
-    // // TODO implement actual save
-    // return;
-
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
@@ -149,8 +150,8 @@ export class AddDcuFormComponent implements OnInit {
           if (result) {
             this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
 
-            if (dcuFormData.discoveryJob && dcuFormData.discoveryJob.id) {
-              this.jobsService.createScheduleDevice(result, dcuFormData.discoveryJob.id).subscribe(
+            if (selectedRows && selectedRows.length > 0) {
+              this.jobsService.createDeviceJobs(result, selectedRows).subscribe(
                 () => {
                   this.showSuccessAndTryCloseForm(successMessage, addNew);
                 },
@@ -172,6 +173,7 @@ export class AddDcuFormComponent implements OnInit {
           }
         },
         (errResult) => {
+          console.log('this.tabstrip', this.tabstrip);
           this.saveError = errResult && errResult.error ? errResult.error[0] : null;
           this.tabstrip.selectTab(0);
         } // error
@@ -189,6 +191,10 @@ export class AddDcuFormComponent implements OnInit {
   closeOrResetForm(addNew: boolean) {
     if (addNew) {
       this.form.reset();
+      this.tabstrip.selectTab(0);
+
+      this.jobsSelectGridService.clearSessionSettingsSelectedRows();
+      this.jobsSelect.selectRows();
     } else {
       this.modal.close();
     }
@@ -231,10 +237,6 @@ export class AddDcuFormComponent implements OnInit {
     return nameOf<DcuForm>((o) => o.manufacturer);
   }
 
-  get discoveryJobProperty() {
-    return nameOf<DcuForm>((o) => o.discoveryJob);
-  }
-
   get tagsProperty() {
     return nameOf<DcuForm>((o) => o.tags);
   }
@@ -243,8 +245,13 @@ export class AddDcuFormComponent implements OnInit {
     this.modal.dismiss();
   }
 
+  public onVendorChanged(value) {
+    this.form.get(this.vendorProperty).setValue(value);
+  }
+
   public onTypeChanged(value) {
-    if (value !== null && value.id) {
+    this.form.get(this.typeProperty).setValue(value);
+    if (value && value.id) {
       this.credentialsVisible = value.id === 2;
     }
 
@@ -265,6 +272,6 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   public onTabSelect(e) {
-    console.log('on tab select', e);
+    this.jobsSelect.sizeColumnsToFit();
   }
 }
