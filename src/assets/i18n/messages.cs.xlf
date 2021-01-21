@@ -1235,6 +1235,9 @@
       <trans-unit id="1784755211608577111" datatype="html">
         <source>Last communication</source>
         <target>Last communication</target>
+      </trans-unit><trans-unit id="8643289769990675407" datatype="html">
+        <source>Basic</source>
+        <target state="new">Basic</target>
       </trans-unit>
       <trans-unit id="8079872604120956170" datatype="html">
         <source>Data Concentration Unit was added successfully</source>

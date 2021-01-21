@@ -40,6 +40,9 @@ export class AddDcuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
+  getTabTitleBasic = $localize`Basic`;
+  getTabTitleJobs = $localize`Jobs`;
+
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
