@@ -1,3 +1,4 @@
+import { ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { jobActionType } from './../../enums/job-action-type.enum';
 import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { jobType } from './../../enums/job-type.enum';
@@ -269,15 +270,15 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   get usePointerProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.usePointer);
+    return nameOf<ReadingProperties>((o) => o.usePointer);
   }
 
   get intervalRangeProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.intervalRange);
+    return nameOf<ReadingProperties>((o) => o.intervalRange);
   }
 
   get timeUnitProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.timeUnit);
+    return nameOf<ReadingProperties>((o) => o.timeUnit);
   }
 
   get activeProperty() {

@@ -1,3 +1,4 @@
+import { ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
@@ -15,29 +16,13 @@ export class PlcMeterReadScheduleService {
   constructor(private jobsService: JobsService) {}
 
   transformData(values: SchedulerJobForm): SchedulerJob {
-    // let dateTimeMoment = null;
-    // if (values.time !== null || values.dateTime !== null) {
-    //   dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime).format();
-    // }
-
     const serviceData: SchedulerJob = {
-      // readOptions: values.readOptions,
-      // nMinutes: values.nMinutes,
-      // nHours: values.nHours,
-      // weekDays: values.weekDays,
-      // monthDays: values.monthDays,
-      registers: values.registers,
-      // iec: values.iec,
       description: values.description,
-      // dateTime: dateTimeMoment,
       devices: values.devices,
-      // usePointer: values.usePointer,
-      // intervalRange: values.intervalRange,
-      // timeUnit: values.timeUnit,
-      enable: values.enable,
-      actionType: values.actionType,
+      registers: values.registers,
 
       readingProperties: values.readingProperties,
+
       active: values.active,
       jobType: values.jobType,
 

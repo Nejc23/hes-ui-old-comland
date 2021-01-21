@@ -18,14 +18,10 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
-import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-jobs-list-grid-layout-store.interface';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
-import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-dc-read-events-job.component';
-import { SchedulerTopologyJobComponent } from '../scheduler-topology-job/scheduler-topology-job.component';
 import { jobType } from '../../enums/job-type.enum';
 
 @Component({

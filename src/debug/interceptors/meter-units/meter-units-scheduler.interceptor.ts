@@ -15,25 +15,22 @@ export class MeterUnitsSchedulerInterceptor {
 
   static interceptMeterUnitSchedulerPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const data: SchedulerJob = {
-      readOptions: 5,
-      nMinutes: 0,
-      nHours: 0,
-      weekDays: [],
-      monthDays: [1, 7, 31],
       registers: [
         { name: 'guid-1', type: 'type-1' },
         { name: 'guid-4', type: 'type-1' },
         { name: 'guid-5', type: 'type-1' }
       ],
-      dateTime: '2020-05-22 10:02',
       description: '',
-      iec: false,
-      enable: false,
-      usePointer: false,
-      intervalRange: 1440,
-      timeUnit: 1,
-      actionType: 2,
-      bulkActionsRequestParam: {
+      active: true,
+      cronExpression: '0 0 0 * * ? *',
+      jobType: 'scheduledReading',
+      readingProperties: {
+        usePointer: false,
+        intervalRange: 1440,
+        timeUnit: 1,
+        iecPushEnabled: false
+      },
+      devices: {
         id: ['9b837e2d-957d-49e2-8d1d-a2e4b8440b77', 'ebeacc9d-744c-4a88-bb9c-625216ab99b9', '22cfeaae-463a-4055-8632-a6818ba77d81'],
         filter: {
           statuses: [

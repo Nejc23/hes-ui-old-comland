@@ -268,24 +268,20 @@ export class SchedulerJobsInterceptor {
 
   static interceptSchedulerJobs(): Observable<HttpEvent<any>> {
     const data: SchedulerJob = {
-      readOptions: 1,
-      nHours: null,
-      nMinutes: null,
-      weekDays: [],
-      monthDays: [],
       registers: [],
       description: 'desc 4444',
-      iec: true,
-      enable: true,
-      dateTime: '2020-03-01T00:00:00+01:00',
-      usePointer: true,
-      intervalRange: 2,
-      timeUnit: 1,
-      actionType: 1,
-      bulkActionsRequestParam: {
+      active: true,
+      cronExpression: '0 1 */3 * * * *',
+      jobType: 'scheduleReading',
+      readingProperties: {
+        usePointer: true,
+        intervalRange: 2,
+        timeUnit: 1,
+        iecPushEnabled: false
+      },
+      devices: {
         id: ['AC9D7C4F-08C7-46A0-930B-61A0B1FE678D', 'de32daef-4766-4afc-aa5f-bba5822bf9b0']
       }
-      // cronExpression: '0 1 */3 * * * *',
     };
 
     return of(

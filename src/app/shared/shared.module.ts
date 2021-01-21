@@ -1,11 +1,8 @@
 import { CronScheduleComponent } from './../features/jobs/cron-schedule/components/cron-schedule.component';
 import { JobsSelectComponent } from './../features/jobs/jobs-select/components/jobs-select.component';
-import { SchedulerTopologyJobComponent } from './../features/jobs/components/scheduler-topology-job/scheduler-topology-job.component';
-import { SchedulerDcReadEventsJobComponent } from './../features/jobs/components/dc-read-events/scheduler-dc-read-events-job.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysDisconnectComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
 import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-connect.component';
-import { SchedulerDcTimeSyncJobComponent } from './../features/jobs/components/dc-time-sync/scheduler-dc-time-sync-job.component';
 import { PlcMeterFwUpgradeComponent } from './../features/meter-units/common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -53,7 +50,6 @@ import { ActiveJobComponent } from './popover/components/active-job/active-job.c
 import { GridCellActiveJobStatusComponent } from './popover/components/grid-custom-components/grid-cell-active-job-status.component';
 import { GridCellLinkComponent } from './popover/components/grid-custom-components/grid-cell-link.component';
 import { SchedulerJobComponent } from '../features/jobs/components/scheduler-job/scheduler-job.component';
-import { SchedulerDiscoveryJobComponent } from '../features/jobs/components/scheduler-discovery-job/scheduler-discovery-job.component';
 import { DataConcentratorUnitsSelectComponent } from '../features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { GridSelectionHeaderComponent } from './ag-grid/components/grid-selection-header.component';
 import { GridCellNameComponent } from './ag-grid/components/grid-cell-name.component';
@@ -98,10 +94,6 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     SchedulerJobComponent,
-    SchedulerDiscoveryJobComponent,
-    SchedulerTopologyJobComponent,
-    SchedulerDcTimeSyncJobComponent,
-    SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
@@ -169,10 +161,6 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     SchedulerJobComponent,
-    SchedulerDiscoveryJobComponent,
-    SchedulerTopologyJobComponent,
-    SchedulerDcTimeSyncJobComponent,
-    SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,
@@ -226,10 +214,6 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
     SchedulerJobComponent,
-    SchedulerDiscoveryJobComponent,
-    SchedulerTopologyJobComponent,
-    SchedulerDcTimeSyncJobComponent,
-    SchedulerDcReadEventsJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
     PlcMeterMonitorComponent,

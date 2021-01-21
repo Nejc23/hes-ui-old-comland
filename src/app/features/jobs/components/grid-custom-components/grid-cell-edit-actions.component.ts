@@ -11,11 +11,7 @@ import { GridApi } from '@ag-grid-community/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
-import { SchedulerDiscoveryJobComponent } from '../scheduler-discovery-job/scheduler-discovery-job.component';
-import { SchedulerDcTimeSyncJobComponent } from '../dc-time-sync/scheduler-dc-time-sync-job.component';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-dc-read-events-job.component';
-import { SchedulerTopologyJobComponent } from '../scheduler-topology-job/scheduler-topology-job.component';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
