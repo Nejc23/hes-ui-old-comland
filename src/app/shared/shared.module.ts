@@ -1,3 +1,4 @@
+import { CronScheduleComponent } from './../features/jobs/cron-schedule/components/cron-schedule.component';
 import { JobsSelectComponent } from './../features/jobs/jobs-select/components/jobs-select.component';
 import { SchedulerTopologyJobComponent } from './../features/jobs/components/scheduler-topology-job/scheduler-topology-job.component';
 import { SchedulerDcReadEventsJobComponent } from './../features/jobs/components/dc-read-events/scheduler-dc-read-events-job.component';
@@ -130,7 +131,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent,
-    JobsSelectComponent
+    JobsSelectComponent,
+    CronScheduleComponent
   ],
   imports: [
     CommonModule,
@@ -215,7 +217,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent,
     JobsSelectComponent,
-    GridCellActiveReadOnlyComponent
+    GridCellActiveReadOnlyComponent,
+    CronScheduleComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -244,7 +247,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     PlcMeterJobsRegistersComponent,
     PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent,
-    JobsSelectComponent
+    JobsSelectComponent,
+    CronScheduleComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

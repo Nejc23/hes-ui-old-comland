@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Reading Jobs {{getSelectedRowsCount()}}</div>
+  <div modal-header>{{title}} {{getSelectedRowsCount()}}</div>
 
   <div modal-body>
     <ng-container *ngIf="form">
@@ -11,84 +11,48 @@
           </app-input-text>
         </div>
       </div>
-      <app-input-radio i18n-label label="Frequency" [form]="form" [property]="readOptionsProperty"
-        name="readOptionsRadio" [options]="readOptions" box="'true'" (change)="changeReadOptionId()"
-        (refresh)="changeReadOptionId()" [hideLabelSmall]="true">
-      </app-input-radio>
-
-      <div class="form-row" *ngIf="show_nHours() || show_nMinutes()">
-        <div class="col-3" *ngIf="show_nHours()">
-          <app-input-numeric [label]="'Read every'" [form]="form" [property]="nHoursProperty" [showSpinners]="false" [decimals]="0" [min]="1" [max]="23"
-          [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight="hour(s)"></app-input-numeric>
+      <div class="form-row">
+        <div class="col-4">
+          <app-datetime-picker [form]="form" [property]="startAtProperty" i18n-label label="Start at">
+          </app-datetime-picker>
         </div>
-        <div class="col-3" *ngIf="show_nMinutes()">
-          <app-input-numeric [label]="'Read every'" [form]="form" [property]="nMinutesProperty" [showSpinners]="false" [decimals]="0" [min]="1" [max]="59"
-          [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight="minute(s)"></app-input-numeric>
-        </div>
-      </div>
-      <div class="form-row" *ngIf="show_nHours()">
-        <div class="col-3">
-          <app-time-picker [form]="form" [property]="timeForHoursProperty" i18n-label label="Start time">
-          </app-time-picker>
-        </div>
-      </div>
-
-      <app-input-multiselect *ngIf="showWeekDays()" i18n-label label="Week days" [form]="form"
-        [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
-      </app-input-multiselect>
-
-      <div class="form-group" *ngIf="showMonthDays()">
-        <label><span i18n>Days in month</span><sup> *</sup></label>
-        <div class="d-flex flex-wrap">
-          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'"
-            *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i+1)">
-            <span>{{i+1}}</span>
-          </button>
-        </div>
-        <div class="help-block" *ngIf="showMonthDays() && noMonthDays">
-          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
-        </div>
-      </div>
-
-      <div class="form-row" *ngIf="showTime()">
-        <div class="col-2">
-          <app-time-picker [form]="form" [property]="timeProperty" i18n-label label="Time">
-          </app-time-picker>
-        </div>
-      </div>
-      <div class="form-row" *ngIf="showDateTime()">
-        <div class="col-3">
-          <app-datetime-picker [form]="form" [property]="timeProperty" i18n-label label="Date time">
+        <div class="col-4">
+          <app-datetime-picker [form]="form" [property]="endAtProperty" i18n-label label="End at">
           </app-datetime-picker>
         </div>
       </div>
-      <div class="form-row" *ngIf="showIec()">
-        <div class="col-5">
-          <app-input-switch [form]="form" [property]="iecProperty" i18n-label label="IEC">
-          </app-input-switch>
+      <app-cron-schedule [cronExpression]="cronExpression" #cronSchedule></app-cron-schedule>
+
+      <div *ngIf="showPointer()">
+        <div class="form-row pt-3">
+          <div class="col-5">
+            <app-input-switch [form]="form" [property]="usePointerProperty" i18n-label label="Read from last value">
+            </app-input-switch>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="col-5">
-          <app-input-switch [form]="form" [property]="usePointerProperty" i18n-label label="Use pointers">
-          </app-input-switch>
-        </div>
-      </div>
-      <div class="form-row" *ngIf="showUsePointer()">
-        <div class="col-2">
-          <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For last">
-          </app-input-text>
-        </div>
-        <div class="col-3">
-          <app-select-input [form]="form" [property]="timeUnitProperty" label=" " [selectOptions]="jobsTimeUnits" [disabled]="false">
-          </app-select-input>
+        <div class="form-row" *ngIf="showUsePointer()">
+          <div class="col-2">
+            <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For last">
+            </app-input-text>
+          </div>
+          <div class="col-3">
+            <app-select-input [form]="form" [property]="timeUnitProperty" label=" " [selectOptions]="jobsTimeUnits" [disabled]="false">
+            </app-select-input>
+          </div>
         </div>
       </div>
     </div>
-    <div id="step2" *ngIf="step === 2">
+    <div id="step2" *ngIf="step === 2 && showRegisters">
       <app-registers-select (onSelectionChanged)="registerSelectionChanged($event)" [selectedJobId]="selectedJobId" [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-registers-select>
       <div class="help-block" *ngIf="noRegisters">
-        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
+        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
+      </div>
+    </div>
+
+    <div id="step2" *ngIf="step === 2 && showConcentrators">
+      <app-data-concentrator-units-select (onSelectionChanged)="dcuSelectionChanged($event)" [selectedJobId]="selectedJobId" [deviceFiltersAndSearch]="deviceFiltersAndSearch"></app-data-concentrator-units-select>
+      <div class="help-block" *ngIf="noDCUs">
+        <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
       </div>
     </div>
 

@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { endsWith } from 'lodash';
 
 @Injectable({
   providedIn: 'root'
@@ -14,27 +15,35 @@ export class PlcMeterReadScheduleService {
   constructor(private jobsService: JobsService) {}
 
   transformData(values: SchedulerJobForm): SchedulerJob {
-    let dateTimeMoment = null;
-    if (values.time !== null || values.dateTime !== null) {
-      dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime).format();
-    }
+    // let dateTimeMoment = null;
+    // if (values.time !== null || values.dateTime !== null) {
+    //   dateTimeMoment = moment(values.time !== null ? values.time : values.dateTime).format();
+    // }
 
     const serviceData: SchedulerJob = {
-      readOptions: values.readOptions,
-      nMinutes: values.nMinutes,
-      nHours: values.nHours,
-      weekDays: values.weekDays,
-      monthDays: values.monthDays,
+      // readOptions: values.readOptions,
+      // nMinutes: values.nMinutes,
+      // nHours: values.nHours,
+      // weekDays: values.weekDays,
+      // monthDays: values.monthDays,
       registers: values.registers,
-      iec: values.iec,
+      // iec: values.iec,
       description: values.description,
-      dateTime: dateTimeMoment,
-      bulkActionsRequestParam: values.bulkActionsRequestParam,
-      usePointer: values.usePointer,
-      intervalRange: values.intervalRange,
-      timeUnit: values.timeUnit,
+      // dateTime: dateTimeMoment,
+      devices: values.devices,
+      // usePointer: values.usePointer,
+      // intervalRange: values.intervalRange,
+      // timeUnit: values.timeUnit,
       enable: values.enable,
-      actionType: values.actionType
+      actionType: values.actionType,
+
+      readingProperties: values.readingProperties,
+      active: values.active,
+      jobType: values.jobType,
+
+      startAt: values.startAtDate ? moment(values.startAtDate).format() : null,
+      endAt: values.endAtDate ? moment(values.endAtDate).format() : null,
+      cronExpression: values.cronExpression
     };
 
     return serviceData;

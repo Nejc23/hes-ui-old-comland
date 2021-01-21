@@ -285,6 +285,7 @@ export class SchedulerJobsInterceptor {
       bulkActionsRequestParam: {
         id: ['AC9D7C4F-08C7-46A0-930B-61A0B1FE678D', 'de32daef-4766-4afc-aa5f-bba5822bf9b0']
       }
+      // cronExpression: '0 1 */3 * * * *',
     };
 
     return of(

@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js",
+    "start-sl": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js --configuration=develop-sl",
     "start-amera": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js --configuration=develop-amera",
     "start-ePointHES": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js --configuration=develop-ePointHES",
     "build": "ng build",
@@ -56,6 +57,7 @@
     "@progress/kendo-angular-l10n": "^2.0.0",
     "@progress/kendo-angular-layout": "^5.1.0",
     "@progress/kendo-angular-popup": "^3.0.7",
+    "@progress/kendo-angular-progressbar": "^0.2.3",
     "@progress/kendo-angular-upload": "^6.1.0",
     "@progress/kendo-data-query": "^1.5.4",
     "@progress/kendo-drawing": "^1.9.3",
@@ -66,6 +68,8 @@
     "angular-gridster2": "^11.0.0",
     "bootstrap": "^4.5.3",
     "core-js": "^3.8.1",
+    "cron-validate": "^1.4.2",
+    "cronstrue": "^1.108.0",
     "current-git-branch": "^1.1.0",
     "fs-extra": "^9.0.1",
     "git-describe": "^4.0.4",
@@ -83,8 +87,7 @@
     "stream": "0.0.2",
     "tslib": "^2.0.3",
     "uuid": "^8.3.2",
-    "zone.js": "~0.11.3",
-    "@progress/kendo-angular-progressbar": "^0.2.3"
+    "zone.js": "~0.11.3"
   },
   "devDependencies": {
     "@ag-grid-community/core": "^24.1.0",

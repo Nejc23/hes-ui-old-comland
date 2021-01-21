@@ -26,6 +26,7 @@ import { SettingsStoreService } from 'src/app/core/repository/services/settings-
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { SchedulerDcReadEventsJobComponent } from '../dc-read-events/scheduler-dc-read-events-job.component';
 import { SchedulerTopologyJobComponent } from '../scheduler-topology-job/scheduler-topology-job.component';
+import { jobType } from '../../enums/job-type.enum';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -265,7 +266,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormAddNew(units);
+      component.setFormAddNew(jobType.reading, units);
 
       modalRef.result.then(
         (data) => {
@@ -284,9 +285,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       size: 'xl'
     };
 
-    const modalRef = this.modalService.open(SchedulerDiscoveryJobComponent, options);
-    const component: SchedulerDiscoveryJobComponent = modalRef.componentInstance;
-    component.setFormAddNew();
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.setFormAddNew(jobType.discovery, null);
 
     modalRef.result.then(
       (data) => {
@@ -304,9 +305,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       size: 'xl'
     };
 
-    const modalRef = this.modalService.open(SchedulerDcTimeSyncJobComponent, options);
-    const component: SchedulerDcTimeSyncJobComponent = modalRef.componentInstance;
-    component.setFormAddNew();
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.setFormAddNew(jobType.timeSync, null);
 
     modalRef.result.then(
       (data) => {
@@ -325,9 +326,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     };
 
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
-      const modalRef = this.modalService.open(SchedulerDcReadEventsJobComponent, options);
-      const component: SchedulerDcReadEventsJobComponent = modalRef.componentInstance;
-      component.setFormAddNew(units);
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormAddNew(jobType.readEvents, units);
 
       modalRef.result.then(
         (data) => {
@@ -346,9 +347,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       size: 'xl'
     };
 
-    const modalRef = this.modalService.open(SchedulerTopologyJobComponent, options);
-    const component: SchedulerTopologyJobComponent = modalRef.componentInstance;
-    component.setFormAddNew();
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.setFormAddNew(jobType.topology, null);
 
     modalRef.result.then(
       (data) => {
