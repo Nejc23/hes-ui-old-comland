@@ -18,6 +18,12 @@ export class CronScheduleComponent implements OnInit {
 
   registersRequiredText = $localize`Required field`;
   cronInvalidError = $localize`Cron expression is invalid.`;
+  tabStripTitleMinutes = $localize`Minutes`;
+  tabStripTitleHourly = $localize`Hourly`;
+  tabStripTitleDaily = $localize`Daily`;
+  tabStripTitleWeekly = $localize`Weekly`;
+  tabStripTitleMonthly = $localize`Monthly`;
+  tabStripTitleAdvanced = $localize`Advanced`;
 
   weekDays: Codelist<number>[] = [
     { id: 8, value: $localize`Mon-Fri` },

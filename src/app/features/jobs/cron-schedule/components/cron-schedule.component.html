@@ -1,5 +1,5 @@
 <kendo-tabstrip (tabSelect)="onTabSelect($event)" [keepTabContent]="false" class="cron">
-  <kendo-tabstrip-tab [title]="'Minutes'" [selected]="selectedFrequency === freq.Minutes">
+  <kendo-tabstrip-tab [title]="tabStripTitleMinutes" [selected]="selectedFrequency === freq.Minutes">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
@@ -14,7 +14,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'Hourly'" [selected]="selectedFrequency === freq.Hourly">
+  <kendo-tabstrip-tab [title]="tabStripTitleHourly" [selected]="selectedFrequency === freq.Hourly">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
@@ -35,7 +35,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'Daily'" [selected]="selectedFrequency === freq.Daily">
+  <kendo-tabstrip-tab [title]="tabStripTitleDaily" [selected]="selectedFrequency === freq.Daily">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
@@ -76,7 +76,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'Weekly'" [selected]="selectedFrequency === freq.Weekly">
+  <kendo-tabstrip-tab [title]="tabStripTitleWeekly" [selected]="selectedFrequency === freq.Weekly">
     <ng-template kendoTabContent>
       <div>
         <app-input-multiselect i18n-label label="Week days" [form]="form"
@@ -100,7 +100,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'Monthly'" [selected]="selectedFrequency === freq.Monthly">
+  <kendo-tabstrip-tab [title]="tabStripTitleMonthly" [selected]="selectedFrequency === freq.Monthly">
     <ng-template kendoTabContent>
       <div>
         <label><span i18n>Days in month</span><sup> *</sup></label>
@@ -131,7 +131,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="'Advanced'" [selected]="selectedFrequency === freq.Advanced">
+  <kendo-tabstrip-tab [title]="tabStripTitleAdvanced" [selected]="selectedFrequency === freq.Advanced">
     <ng-template kendoTabContent>
       <div>
         <div class="col-3">
