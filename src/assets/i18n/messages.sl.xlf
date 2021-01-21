@@ -5,13 +5,23 @@
       <trans-unit id="ngb.toast.close-aria" datatype="html">
         <source>Close</source>
         <target>Zapri</target>
+      </trans-unit><trans-unit id="2690656529626907484" datatype="html">
+        <source>NO DATA FOUND</source>
+        <target state="new">NO DATA FOUND</target>
+        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
+        <note priority="1" from="meaning">kendo.autocomplete.noDataText</note>
+      </trans-unit><trans-unit id="4821453594854847070" datatype="html">
+        <source>clear</source>
+        <target state="new">clear</target>
+        <note priority="1" from="description">The title of the clear button</note>
+        <note priority="1" from="meaning">kendo.autocomplete.clearTitle</note>
       </trans-unit>
       <trans-unit id="8436180309712376162" datatype="html">
         <source>Overview - Concentrators</source>
         <target>Pregled koncentratorjev</target>
       </trans-unit>
       <trans-unit id="6170762843185284641" datatype="html">
-        <source>Concentrator for</source>
+        <source>Concentrator units for</source>
         <target>Podatkovni koncentratorji za</target>
       </trans-unit>
       <trans-unit id="6811901802533648897" datatype="html">
@@ -39,7 +49,7 @@
         <target>Status</target>
       </trans-unit>
       <trans-unit id="7652014282800283826" datatype="html">
-        <source>manufacturer</source>
+        <source>vendor</source>
         <target>proizvajalec</target>
       </trans-unit>
       <trans-unit id="6402703264596649214" datatype="html">
@@ -55,7 +65,7 @@
         <target>firmware</target>
       </trans-unit>
       <trans-unit id="2572210680699877416" datatype="html">
-        <source>show M-Bus</source>
+        <source>show child MBus</source>
         <target>show child MBus</target>
       </trans-unit>
       <trans-unit id="795604053640683941" datatype="html">
@@ -67,11 +77,11 @@
         <target>show only ready for activation</target>
       </trans-unit>
       <trans-unit id="5359201968934397674" datatype="html">
-        <source>Overview - G3-PLC Meters</source>
+        <source>Overview - Meter Units</source>
         <target>Pregled - Števci</target>
       </trans-unit>
       <trans-unit id="3119296281460532422" datatype="html">
-        <source>Meter for</source>
+        <source>Meter Units for</source>
         <target>Meter Units for</target>
       </trans-unit>
       <trans-unit id="7867994676734078400" datatype="html">
@@ -83,11 +93,11 @@
         <target>Range is not correct</target>
       </trans-unit>
       <trans-unit id="5611592591303869712" datatype="html">
-        <source>State</source>
+        <source>Status</source>
         <target>Status</target>
       </trans-unit>
       <trans-unit id="158816374076721379" datatype="html">
-        <source>Manufacturer</source>
+        <source>Vendor</source>
         <target>proizvajalec</target>
       </trans-unit>
       <trans-unit id="147289373353675866" datatype="html">
@@ -95,7 +105,7 @@
         <target>firmware</target>
       </trans-unit>
       <trans-unit id="563763657621318504" datatype="html">
-        <source>Show only meters with M-Bus devices</source>
+        <source>Show only Meter units with information of child (MBus)</source>
         <target>Prikaži samo števce ki imajo podrejene informacije (MBus)</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
@@ -103,11 +113,11 @@
         <target>Tag</target>
       </trans-unit>
       <trans-unit id="5292172816313390601" datatype="html">
-        <source>Show meters without template</source>
+        <source>Show Meter Units without template</source>
         <target>Show Meter Units without template</target>
       </trans-unit>
       <trans-unit id="4648310973208555307" datatype="html">
-        <source>Show meters with FW image ready for activation</source>
+        <source>Show only image ready for activation</source>
         <target>Show only image ready for activation</target>
       </trans-unit>
       <trans-unit id="8700121026680200191" datatype="html">
@@ -219,11 +229,11 @@
         <target>Potrdi obsežno operacijo</target>
       </trans-unit>
       <trans-unit id="3475265554652114929" datatype="html">
-        <source>Remove <x id="PH"/> meter(s) from Job?</source>
+        <source>Remove <x id="PH"/> Meter Unit(s) from Job?</source>
         <target>Remove <x id="PH"/> Meter Unit(s) from Job?</target>
       </trans-unit>
       <trans-unit id="6690286116494561643" datatype="html">
-        <source>Selected meters removed successfully</source>
+        <source>Selected Meter Units removed successfully</source>
         <target>Selected Meter Units removed successfully</target>
       </trans-unit>
       <trans-unit id="7457179823984196306" datatype="html">
@@ -335,61 +345,61 @@
         <target>IP</target>
       </trans-unit>
       <trans-unit id="1060461174163754666" datatype="html">
-        <source>Concentrators</source>
+        <source>Data Concentrator Units</source>
         <target>Enote Podatkovnih Koncentratorjev</target>
       </trans-unit>
       <trans-unit id="7048448815246352326" datatype="html">
         <source>items found</source>
         <target>najdeni predmeti</target>
+      </trans-unit><trans-unit id="3033454360560524781" datatype="html">
+        <source>Cron expression is invalid.</source>
+        <target state="new">Cron expression is invalid.</target>
+      </trans-unit><trans-unit id="5531237363767747080" datatype="html">
+        <source>Minutes</source>
+        <target state="new">Minutes</target>
+      </trans-unit><trans-unit id="2640607428459636406" datatype="html">
+        <source>Hourly</source>
+        <target state="new">Hourly</target>
       </trans-unit>
-      <trans-unit id="1338012638386911217" datatype="html">
-        <source>One-time</source>
-        <target>Enkratno</target>
-      </trans-unit>
-      <trans-unit id="4843029585279212168" datatype="html">
-        <source>Once</source>
-        <target>Enkrat</target>
-      </trans-unit>
+      
+      
       <trans-unit id="2365388243339409921" datatype="html">
         <source>Minute(s)</source>
         <target>minute(s)</target>
       </trans-unit>
-      <trans-unit id="8853697250381324018" datatype="html">
-        <source>Every N minute(s)</source>
-        <target>Every N minute(s)</target>
-      </trans-unit>
+      
       <trans-unit id="660968041670905112" datatype="html">
         <source>Hour(s)</source>
         <target>Hour(s)</target>
+      </trans-unit><trans-unit id="1248117650498822288" datatype="html">
+        <source>:</source>
+        <target state="new">:</target>
+      </trans-unit><trans-unit id="6877003697022351372" datatype="html">
+        <source>Day(s)</source>
+        <target state="new">Day(s)</target>
+      </trans-unit><trans-unit id="466704681453006045" datatype="html">
+        <source>@</source>
+        <target state="new">@</target>
       </trans-unit>
-      <trans-unit id="6497732569657201306" datatype="html">
-        <source>Every N hour(s)</source>
-        <target>Vsakih N ur</target>
-      </trans-unit>
+      
       <trans-unit id="2988589012964101797" datatype="html">
         <source>Daily</source>
         <target>Daily</target>
       </trans-unit>
-      <trans-unit id="593950437046919355" datatype="html">
-        <source>Every day specific time</source>
-        <target>Vsak dan na določeno uro</target>
-      </trans-unit>
+      
       <trans-unit id="928838138686087140" datatype="html">
         <source>Weekly</source>
         <target>Weekly</target>
       </trans-unit>
-      <trans-unit id="8811328962892216843" datatype="html">
-        <source>One or more days of the week</source>
-        <target>En ali več dni v tednu</target>
-      </trans-unit>
+      
       <trans-unit id="6762743264882388498" datatype="html">
         <source>Monthly</source>
         <target>Monthly</target>
+      </trans-unit><trans-unit id="6201638315245239510" datatype="html">
+        <source>Advanced</source>
+        <target state="new">Advanced</target>
       </trans-unit>
-      <trans-unit id="1927217807894188238" datatype="html">
-        <source>One or more days in the month</source>
-        <target>En ali več dni v mesecu</target>
-      </trans-unit>
+      
       <trans-unit id="5753176096081310294" datatype="html">
         <source>Mon-Fri</source>
         <target>Mon-Fri</target>
@@ -421,6 +431,12 @@
       <trans-unit id="4921929243068857081" datatype="html">
         <source>Sun</source>
         <target>Sun</target>
+      </trans-unit><trans-unit id="6189397065139465013" datatype="html">
+        <source>Every</source>
+        <target state="new">Every</target>
+      </trans-unit><trans-unit id="5575034794996442356" datatype="html">
+        <source>Week day (MON-FRI)</source>
+        <target state="new">Week day (MON-FRI)</target>
       </trans-unit>
       <trans-unit id="2175784236523326802" datatype="html">
         <source>Required field</source>
@@ -434,17 +450,17 @@
         <source>updated</source>
         <target>nadgrajen</target>
       </trans-unit>
-      <trans-unit id="287086648025556746" datatype="html">
-        <source>Scheduled meter discovery was</source>
-        <target>Data Concentrator Discovery Scheduler was</target>
-      </trans-unit>
+      
       <trans-unit id="4893141395755907203" datatype="html">
         <source>successfully</source>
         <target>uspešno</target>
       </trans-unit>
       <trans-unit id="6485314736125303028" datatype="html">
-        <source>Meter discovery</source>
+        <source>Discovery Job</source>
         <target>Discovery job</target>
+      </trans-unit><trans-unit id="1105511599486801099" datatype="html">
+        <source>Reading Jobs</source>
+        <target state="new">Reading Jobs</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -454,14 +470,8 @@
         <source>Description</source>
         <target>Description</target>
       </trans-unit>
-      <trans-unit id="6122030973291308530" datatype="html">
-        <source>Frequency</source>
-        <target>Frequency</target>
-      </trans-unit>
-      <trans-unit id="3770761673682962465" datatype="html">
-        <source>Start time</source>
-        <target>Start time</target>
-      </trans-unit>
+      
+      
       <trans-unit id="8035386400282683720" datatype="html">
         <source>Week days</source>
         <target>Week days</target>
@@ -469,15 +479,15 @@
       <trans-unit id="417598902109534086" datatype="html">
         <source>Days in month</source>
         <target>Days in month</target>
+      </trans-unit><trans-unit id="2791965473218359494" datatype="html">
+        <source>Expression</source>
+        <target state="new">Expression</target>
+      </trans-unit><trans-unit id="3659841989098356276" datatype="html">
+        <source>Expression is invalid.</source>
+        <target state="new">Expression is invalid.</target>
       </trans-unit>
-      <trans-unit id="8497528947328199741" datatype="html">
-        <source>Time</source>
-        <target>Time</target>
-      </trans-unit>
-      <trans-unit id="5982320999405543564" datatype="html">
-        <source>Date time</source>
-        <target>Date time</target>
-      </trans-unit>
+      
+      
       <trans-unit id="4452427314943113135" datatype="html">
         <source>Previous</source>
         <target>Previous</target>
@@ -499,7 +509,7 @@
         <target>Več opcij shranjevanja</target>
       </trans-unit>
       <trans-unit id="8646797504756663636" datatype="html">
-        <source>Scheduled job deleted!</source>
+        <source>Scheduler job deleted!</source>
         <target>Opravilo izbrisano!</target>
       </trans-unit>
       <trans-unit id="7022070615528435141" datatype="html">
@@ -511,7 +521,7 @@
         <target>Potrdi odstranitev</target>
       </trans-unit>
       <trans-unit id="4528916092728981282" datatype="html">
-        <source>Do you want to delete scheduled job?</source>
+        <source>Do you want to delete scheduler job?</source>
         <target>Do you want to delete scheduler job?</target>
       </trans-unit>
       <trans-unit id="3974480456921534163" datatype="html">
@@ -543,11 +553,11 @@
         <target>Add</target>
       </trans-unit>
       <trans-unit id="2783293384726138827" datatype="html">
-        <source>Reading</source>
+        <source>Reading job</source>
         <target>Reading job</target>
       </trans-unit>
       <trans-unit id="6420455839696291625" datatype="html">
-        <source>Meter discovery</source>
+        <source>Discovery job</source>
         <target>Discovery job</target>
       </trans-unit>
       <trans-unit id="9172233176401579786" datatype="html">
@@ -595,15 +605,15 @@
         <target>Regex</target>
       </trans-unit>
       <trans-unit id="1009146229864778476" datatype="html">
-        <source>New item already added!</source>
+        <source>Aready added empty row for new item!</source>
         <target>Nova prazna vrstica je že dodana!</target>
       </trans-unit>
       <trans-unit id="1577586869987820319" datatype="html">
-        <source>Rule added successfully</source>
+        <source>Rule was added successfully</source>
         <target>Rule was added successfully</target>
       </trans-unit>
       <trans-unit id="1347392190558339815" datatype="html">
-        <source>Rule updated successfully</source>
+        <source>Rule was updated successfully</source>
         <target>Rule was updated successfully</target>
       </trans-unit>
       <trans-unit id="3048341745183582694" datatype="html">
@@ -683,7 +693,7 @@
         <target>Uvoz TOU konfiguracije</target>
       </trans-unit>
       <trans-unit id="7396016917405031408" datatype="html">
-        <source>Xml file import was successful</source>
+        <source>Import xml file was successfully</source>
         <target>Import xml file was successfully</target>
       </trans-unit>
       <trans-unit id="4908129342757001956" datatype="html">
@@ -779,7 +789,7 @@
         <target>Show/hide filters</target>
       </trans-unit>
       <trans-unit id="5689090354669721014" datatype="html">
-        <source>Meters</source>
+        <source>Meter Units</source>
         <target>Meter Units</target>
       </trans-unit>
       <trans-unit id="4269578151092655782" datatype="html">
@@ -811,7 +821,7 @@
         <target>Manual and local re-connection allowed / Manual disconnection not allowed</target>
       </trans-unit>
       <trans-unit id="8046182994475559393" datatype="html">
-        <source>Setting of disconnector mode succeeded!</source>
+        <source>Meter Units set Breaker mode was successfully</source>
         <target>Meter Units set Breaker mode was successfully</target>
       </trans-unit>
       <trans-unit id="4444252067276184823" datatype="html">
@@ -823,8 +833,62 @@
         <target>Izberi/prekliči izbiro</target>
       </trans-unit>
       <trans-unit id="7804366670597991631" datatype="html">
-        <source>&apos;Name</source>
+        <source>'Name</source>
         <target>Ime</target>
+      </trans-unit><trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <target state="new">Previous month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <target state="new">Next month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <target state="new">Select month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <target state="new">Select year</target>
+      </trans-unit><trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <target state="new">HH</target>
+      </trans-unit><trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <target state="new">Hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <target state="new">MM</target>
+      </trans-unit><trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <target state="new">Minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <target state="new">Increment hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <target state="new">Decrement hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <target state="new">Increment minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <target state="new">Decrement minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <target state="new">SS</target>
+      </trans-unit><trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <target state="new">Seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <target state="new">Increment seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <target state="new">Decrement seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <target state="new"><x id="INTERPOLATION"/></target>
+      </trans-unit><trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <target state="new"><x id="INTERPOLATION"/></target>
       </trans-unit>
       <trans-unit id="3008420115644088420" datatype="html">
         <source>Configuration</source>
@@ -855,7 +919,7 @@
         <target>Aktiviraj</target>
       </trans-unit>
       <trans-unit id="1003468704826518252" datatype="html">
-        <source>Monitor was successfully set!</source>
+        <source>Set Monitor was successful</source>
         <target>Set Monitor was successful</target>
       </trans-unit>
       <trans-unit id="693418060270512905" datatype="html">
@@ -935,7 +999,7 @@
         <target>Data</target>
       </trans-unit>
       <trans-unit id="2501989539336327542" datatype="html">
-        <source>Upload image...</source>
+        <source>Upload image</source>
         <target>Upload image</target>
       </trans-unit>
       <trans-unit id="8247620175611326692" datatype="html">
@@ -943,19 +1007,19 @@
         <target>Activate image</target>
       </trans-unit>
       <trans-unit id="1713271461473302108" datatype="html">
-        <source>Mode...</source>
+        <source>Mode</source>
         <target>Mode</target>
       </trans-unit>
       <trans-unit id="4691747907262765119" datatype="html">
-        <source>TOU Upload...</source>
+        <source>TOU Upload</source>
         <target>TOU Upload</target>
       </trans-unit>
       <trans-unit id="3536878313651292186" datatype="html">
-        <source>Limiter...</source>
+        <source>Limiter</source>
         <target>Limiter</target>
       </trans-unit>
       <trans-unit id="8058994642732449354" datatype="html">
-        <source>Monitor...</source>
+        <source>Monitor</source>
         <target>Monitor</target>
       </trans-unit>
       <trans-unit id="7349942499709408343" datatype="html">
@@ -967,7 +1031,7 @@
         <target>Clear Alarms</target>
       </trans-unit>
       <trans-unit id="4619541944202030137" datatype="html">
-        <source>You have no concentrator yet!</source>
+        <source>You have no Data Concentrator Units yet!</source>
         <target>Trenutno nimate nobene podatkovno koncentratorske enote</target>
       </trans-unit>
       <trans-unit id="4594629863210876240" datatype="html">
@@ -975,7 +1039,7 @@
         <target>Dodaj novega</target>
       </trans-unit>
       <trans-unit id="3825649834158937429" datatype="html">
-        <source>Meter update was successful</source>
+        <source>Meter Unit was updated successfully</source>
         <target>Meter Unit was updated successfully</target>
       </trans-unit>
       <trans-unit id="6478311374284260655" datatype="html">
@@ -991,7 +1055,7 @@
         <target>From</target>
       </trans-unit>
       <trans-unit id="8013136913336134227" datatype="html">
-        <source>Meter</source>
+        <source>Meter Unit</source>
         <target>Meter Unit</target>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
@@ -1015,7 +1079,7 @@
         <target>Template</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
-        <source>Error saving meter!</source>
+        <source>Error saving Meter Unit!</source>
         <target>Napaka pri shranjevanju števca!</target>
       </trans-unit>
       <trans-unit id="7286430803380181008" datatype="html">
@@ -1129,22 +1193,13 @@
         <source>In Range</source>
         <target>In Range</target>
       </trans-unit>
-      <trans-unit id="6917779175852211923" datatype="html">
-        <source>Every N hour(s</source>
-        <target>Vsakih N ur</target>
-      </trans-unit>
+      
       <trans-unit id="2701293197858293459" datatype="html">
-        <source>Meters Read Scheduler was</source>
+        <source>Meter Units Read Scheduler was</source>
         <target>Urnik je bil nastavljen</target>
       </trans-unit>
-      <trans-unit id="2622268509058131533" datatype="html">
-        <source>Use pointers</source>
-        <target>Use pointers</target>
-      </trans-unit>
-      <trans-unit id="8047236914242783645" datatype="html">
-        <source>IEC</source>
-        <target>IEC</target>
-      </trans-unit>
+      
+      
       <trans-unit id="7689582560947434727" datatype="html">
         <source>For last</source>
         <target>Za zadnjih</target>
@@ -1156,9 +1211,12 @@
       <trans-unit id="1784755211608577111" datatype="html">
         <source>Last communication</source>
         <target>Zadnja komunikacija</target>
+      </trans-unit><trans-unit id="8643289769990675407" datatype="html">
+        <source>Basic</source>
+        <target state="new">Basic</target>
       </trans-unit>
       <trans-unit id="8079872604120956170" datatype="html">
-        <source>Concentrator was successfully added</source>
+        <source>Data Concentration Unit was added successfully</source>
         <target>Podatkovna koncentratorska enota je bila uspešno dodana</target>
       </trans-unit>
       <trans-unit id="3505930099459089004" datatype="html">
@@ -1166,7 +1224,7 @@
         <target>Napaka pri kreiranju urnika.</target>
       </trans-unit>
       <trans-unit id="4964011321446375935" datatype="html">
-        <source>Add data concentrator</source>
+        <source>Add Data Concentrator Unit</source>
         <target>Add Data Concentrator Unit</target>
       </trans-unit>
       <trans-unit id="3345127904026423167" datatype="html">
@@ -1194,7 +1252,7 @@
         <target>Select all</target>
       </trans-unit>
       <trans-unit id="8074641440649956207" datatype="html">
-        <source>selected concentrators?</source>
+        <source>selected Data Concentrator Units?</source>
         <target>izbrani podatkovni koncetratorji?</target>
       </trans-unit>
       <trans-unit id="4204921246911160131" datatype="html">
@@ -1206,11 +1264,11 @@
         <target>Add First</target>
       </trans-unit>
       <trans-unit id="8148272978112044294" datatype="html">
-        <source>Concentrator</source>
+        <source>Data concentrator unit</source>
         <target>Data concentrator unit</target>
       </trans-unit>
       <trans-unit id="5540900299365959437" datatype="html">
-        <source>Concentrator was successfully updated</source>
+        <source>Data Concentration Unit was updated successfully</source>
         <target>Data Concentration Unit was updated successfully</target>
       </trans-unit>
       <trans-unit id="3290665917427253156" datatype="html">
@@ -1256,7 +1314,7 @@
         <target>Wrong format</target>
       </trans-unit>
       <trans-unit id="7311556461323387825" datatype="html">
-        <source>Password does not match</source>
+        <source>Password not match</source>
         <target>Geslo se ne ujema</target>
       </trans-unit>
       <trans-unit id="6867272363573367465" datatype="html">
@@ -1338,7 +1396,7 @@
         <note priority="1" from="meaning">kendo.upload.filesBatchStatusFailed</note>
       </trans-unit>
       <trans-unit id="4678582374156884660" datatype="html">
-        <source>Files successfully uploaded.</source>
+        <source>files successfully uploaded.</source>
         <target>files successfully uploaded.</target>
         <note priority="1" from="description">The status message for a batch of files after successful upload</note>
         <note priority="1" from="meaning">kendo.upload.filesBatchStatusUploaded</note>
@@ -1449,48 +1507,13 @@
         <note priority="1" from="description">The label for the **Decrement** button in the DateInput</note>
         <note priority="1" from="meaning">kendo.dateinput.decrement</note>
       </trans-unit>
-      <trans-unit id="7519663530416240229" datatype="html">
-        <source>Set</source>
-        <target>Set</target>
-        <note priority="1" from="description">The Accept button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.accept</note>
-      </trans-unit>
-      <trans-unit id="4355879331538595758" datatype="html">
-        <source>Set time</source>
-        <target>Set time</target>
-        <note priority="1" from="description">The label for the Accept button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.acceptLabel</note>
-      </trans-unit>
-      <trans-unit id="1086687567255473060" datatype="html">
-        <source>Cancel</source>
-        <target>Cancel</target>
-        <note priority="1" from="description">The Cancel button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancel</note>
-      </trans-unit>
-      <trans-unit id="83621966901491941" datatype="html">
-        <source>Cancel changes</source>
-        <target>Cancel changes</target>
-        <note priority="1" from="description">The label for the Cancel button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancelLabel</note>
-      </trans-unit>
-      <trans-unit id="5912507758515138116" datatype="html">
-        <source>Now</source>
-        <target>Now</target>
-        <note priority="1" from="description">The Now button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.now</note>
-      </trans-unit>
-      <trans-unit id="371982627910576599" datatype="html">
-        <source>Select now</source>
-        <target>Select now</target>
-        <note priority="1" from="description">The label for the Now button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.nowLabel</note>
-      </trans-unit>
-      <trans-unit id="6938407659294495526" datatype="html">
-        <source>Toggle time list</source>
-        <target>Preklopi med časovnimi seznami</target>
-        <note priority="1" from="description">The label for the toggle button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.toggle</note>
-      </trans-unit>
+      
+      
+      
+      
+      
+      
+      
       <trans-unit id="3360129034450596425" datatype="html">
         <source>Date</source>
         <target>Date</target>
@@ -1562,6 +1585,21 @@
         <target>TODAY</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.datetimepicker.today</note>
+      </trans-unit><trans-unit id="3892034896682737327" datatype="html">
+        <source>TODAY</source>
+        <target state="new">TODAY</target>
+        <note priority="1" from="description">The label for the today button in the calendar header</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.today</note>
+      </trans-unit><trans-unit id="9101635325676663492" datatype="html">
+        <source>Navigate to previous view</source>
+        <target state="new">Navigate to previous view</target>
+        <note priority="1" from="description">The label for the previous button in the Multiview calendar</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.prevButtonTitle</note>
+      </trans-unit><trans-unit id="3994336778698343633" datatype="html">
+        <source>Navigate to next view</source>
+        <target state="new">Navigate to next view</target>
+        <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
       </trans-unit>
       <trans-unit id="5362895271044573681" datatype="html">
         <source>Set</source>
@@ -1606,6 +1644,12 @@
       <trans-unit id="4155936898622302064" datatype="html">
         <source>Auto templates</source>
         <target>Auto Templates</target>
+      </trans-unit><trans-unit id="7844706011418789951" datatype="html">
+        <source>Administration</source>
+        <target state="new">Administration</target>
+      </trans-unit><trans-unit id="4555457172864212828" datatype="html">
+        <source>Users</source>
+        <target state="new">Users</target>
       </trans-unit>
       <trans-unit id="7413690382234141401" datatype="html">
         <source>Back to main menu</source>
@@ -1776,7 +1820,7 @@
         <target>FW nadgradnja</target>
       </trans-unit>
       <trans-unit id="5209672282513780219" datatype="html">
-        <source>Disconnector</source>
+        <source>Breaker</source>
         <target>Odklopnik</target>
       </trans-unit>
       <trans-unit id="1778275808932346500" datatype="html">
@@ -1852,7 +1896,7 @@
         <target>Sinhroniziraj čas</target>
       </trans-unit>
       <trans-unit id="3164102267265520854" datatype="html">
-        <source>Time sync</source>
+        <source>DC Time sync job</source>
         <target>Sinhronizacija časa (DC)</target>
       </trans-unit>
       <trans-unit id="5969349457365616195" datatype="html">
@@ -1940,7 +1984,7 @@
         <target>Drop available registers here.</target>
       </trans-unit>
       <trans-unit id="2712614620647663712" datatype="html">
-        <source>Meter Display settings set successfuly.</source>
+        <source>Meter Unit(s) Display settings set successfuly.</source>
         <target>Nastavitev prikaza registrov na števcu je bila uspešno izvedena.</target>
       </trans-unit>
       <trans-unit id="2623300631578636432" datatype="html">
@@ -1952,7 +1996,7 @@
         <target>Register group</target>
       </trans-unit>
       <trans-unit id="3059662776648332773" datatype="html">
-        <source>Concentrator</source>
+        <source>Concentrator Units</source>
         <target>Podatkovni zbirniki</target>
       </trans-unit>
       <trans-unit id="137227890362474218" datatype="html">
@@ -2058,7 +2102,7 @@
         <target>Meter image upload was successfull</target>
       </trans-unit>
       <trans-unit id="1041031208206930198" datatype="html">
-        <source>Set limiter operation executed successfully</source>
+        <source>Meter Units set Limiter was successful</source>
         <target>Meter Units set Limiter was successful</target>
       </trans-unit>
       <trans-unit id="4057760610235468476" datatype="html">
@@ -2069,12 +2113,9 @@
         <source>Clear alarms</source>
         <target>Izbris alarmov</target>
       </trans-unit>
-      <trans-unit id="1277466067416500887" datatype="html">
-        <source>Topology Job</source>
-        <target>Topologija</target>
-      </trans-unit>
+      
       <trans-unit id="3575583935097083679" datatype="html">
-        <source>Set disconnector mode (<x id="INTERPOLATION"/> selected)</source>
+        <source>Set Breaker mode (<x id="INTERPOLATION"/> selected)</source>
         <target>Nastavi način izklopa (<x id="INTERPOLATION"/> izbranih)</target>
       </trans-unit>
       <trans-unit id="5972170204882420816" datatype="html">
@@ -2086,31 +2127,37 @@
         <target>TOU konfiguracija (<x id="INTERPOLATION"/> izbranih)</target>
       </trans-unit>
       <trans-unit id="2339880649699708023" datatype="html">
-        <source>Connect relay (<x id="INTERPOLATION"/> selected)</source>
+        <source>Relay Connect (<x id="INTERPOLATION"/> selected)</source>
         <target>Vklop izhoda (<x id="INTERPOLATION"/> izbranih)</target>
       </trans-unit>
       <trans-unit id="7781301631011863993" datatype="html">
         <source>(<x id="PH"/> selected)</source>
         <target>(<x id="PH"/> izbranih)</target>
+      </trans-unit><trans-unit id="1394835141143590910" datatype="html">
+        <source>Start at</source>
+        <target state="new">Start at</target>
+      </trans-unit><trans-unit id="2843324633040409418" datatype="html">
+        <source>End at</source>
+        <target state="new">End at</target>
+      </trans-unit><trans-unit id="7379236614458665713" datatype="html">
+        <source>Read from last value</source>
+        <target state="new">Read from last value</target>
       </trans-unit>
-      <trans-unit id="1729518829537514783" datatype="html">
-        <source>Reading Jobs <x id="INTERPOLATION"/></source>
-        <target>Reading Jobs <x id="INTERPOLATION"/></target>
-      </trans-unit>
+      
       <trans-unit id="1684734235599362204" datatype="html">
         <source>Tools</source>
         <target>Orodja</target>
       </trans-unit>
       <trans-unit id="4829605653773090103" datatype="html">
-        <source>Disconnect relay (<x id="INTERPOLATION"/> selected)</source>
+        <source>Relay Disconnect (<x id="INTERPOLATION"/> selected)</source>
         <target>Izklop izhoda (<x id="INTERPOLATION"/> izbranih)</target>
       </trans-unit>
       <trans-unit id="2702284463870689226" datatype="html">
-        <source>Get relay state (<x id="INTERPOLATION"/> selected)</source>
+        <source>Relay State (<x id="INTERPOLATION"/> selected)</source>
         <target>Pridobi stanje izhoda (<x id="INTERPOLATION"/> izbranih)</target>
       </trans-unit>
       <trans-unit id="1937307249593397398" datatype="html">
-        <source>Set relay mode (<x id="INTERPOLATION"/> selected)</source>
+        <source>Relay Mode (<x id="INTERPOLATION"/> selected)</source>
         <target>Nastavi način preklopa izhoda (<x id="INTERPOLATION"/> izbrani)</target>
       </trans-unit>
       <trans-unit id="694491078978333992" datatype="html">

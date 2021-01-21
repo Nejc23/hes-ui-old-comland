@@ -5,6 +5,16 @@
       <trans-unit id="ngb.toast.close-aria" datatype="html">
         <source>Close</source>
         <target>Fermer</target>
+      </trans-unit><trans-unit id="2690656529626907484" datatype="html">
+        <source>NO DATA FOUND</source>
+        <target state="new">NO DATA FOUND</target>
+        <note priority="1" from="description">The text displayed in the popup when there are no items</note>
+        <note priority="1" from="meaning">kendo.autocomplete.noDataText</note>
+      </trans-unit><trans-unit id="4821453594854847070" datatype="html">
+        <source>clear</source>
+        <target state="new">clear</target>
+        <note priority="1" from="description">The title of the clear button</note>
+        <note priority="1" from="meaning">kendo.autocomplete.clearTitle</note>
       </trans-unit>
       <trans-unit id="8436180309712376162" datatype="html">
         <source>Overview - Concentrators</source>
@@ -341,55 +351,55 @@
       <trans-unit id="7048448815246352326" datatype="html">
         <source>items found</source>
         <target>items trouvés </target>
+      </trans-unit><trans-unit id="3033454360560524781" datatype="html">
+        <source>Cron expression is invalid.</source>
+        <target state="new">Cron expression is invalid.</target>
+      </trans-unit><trans-unit id="5531237363767747080" datatype="html">
+        <source>Minutes</source>
+        <target state="new">Minutes</target>
+      </trans-unit><trans-unit id="2640607428459636406" datatype="html">
+        <source>Hourly</source>
+        <target state="new">Hourly</target>
       </trans-unit>
-      <trans-unit id="1338012638386911217" datatype="html">
-        <source>One-time</source>
-        <target>une fois</target>
-      </trans-unit>
-      <trans-unit id="4843029585279212168" datatype="html">
-        <source>Once</source>
-        <target>une seule fois </target>
-      </trans-unit>
+      
+      
       <trans-unit id="2365388243339409921" datatype="html">
         <source>Minute(s)</source>
         <target>Minute(s)</target>
       </trans-unit>
-      <trans-unit id="8853697250381324018" datatype="html">
-        <source>Every N minute(s)</source>
-        <target>toutes les minute(s) N </target>
-      </trans-unit>
+      
       <trans-unit id="660968041670905112" datatype="html">
         <source>Hour(s)</source>
         <target>Heure(s)</target>
+      </trans-unit><trans-unit id="1248117650498822288" datatype="html">
+        <source>:</source>
+        <target state="new">:</target>
+      </trans-unit><trans-unit id="6877003697022351372" datatype="html">
+        <source>Day(s)</source>
+        <target state="new">Day(s)</target>
+      </trans-unit><trans-unit id="466704681453006045" datatype="html">
+        <source>@</source>
+        <target state="new">@</target>
       </trans-unit>
-      <trans-unit id="6497732569657201306" datatype="html">
-        <source>Every N hour(s)</source>
-        <target>Toutes les heure(s) N </target>
-      </trans-unit>
+      
       <trans-unit id="2988589012964101797" datatype="html">
         <source>Daily</source>
         <target>journalier </target>
       </trans-unit>
-      <trans-unit id="593950437046919355" datatype="html">
-        <source>Every day specific time</source>
-        <target>À une heure spécifique chaque jour </target>
-      </trans-unit>
+      
       <trans-unit id="928838138686087140" datatype="html">
         <source>Weekly</source>
         <target>hebdomadaire</target>
       </trans-unit>
-      <trans-unit id="8811328962892216843" datatype="html">
-        <source>One or more days of the week</source>
-        <target>Un ou plusieurs jours par semaine</target>
-      </trans-unit>
+      
       <trans-unit id="6762743264882388498" datatype="html">
         <source>Monthly</source>
         <target>mensuel</target>
+      </trans-unit><trans-unit id="6201638315245239510" datatype="html">
+        <source>Advanced</source>
+        <target state="new">Advanced</target>
       </trans-unit>
-      <trans-unit id="1927217807894188238" datatype="html">
-        <source>One or more days in the month</source>
-        <target>Un ou plusieurs jours par mois </target>
-      </trans-unit>
+      
       <trans-unit id="5753176096081310294" datatype="html">
         <source>Mon-Fri</source>
         <target>Lun-Ven</target>
@@ -421,6 +431,12 @@
       <trans-unit id="4921929243068857081" datatype="html">
         <source>Sun</source>
         <target>Dim</target>
+      </trans-unit><trans-unit id="6189397065139465013" datatype="html">
+        <source>Every</source>
+        <target state="new">Every</target>
+      </trans-unit><trans-unit id="5575034794996442356" datatype="html">
+        <source>Week day (MON-FRI)</source>
+        <target state="new">Week day (MON-FRI)</target>
       </trans-unit>
       <trans-unit id="2175784236523326802" datatype="html">
         <source>Required field</source>
@@ -434,10 +450,7 @@
         <source>updated</source>
         <target>actualisé</target>
       </trans-unit>
-      <trans-unit id="287086648025556746" datatype="html">
-        <source>Data Concentrator Discovery Scheduler was</source>
-        <target>Le Discovery Scheduler du concentrateur de données était</target>
-      </trans-unit>
+      
       <trans-unit id="4893141395755907203" datatype="html">
         <source>successfully</source>
         <target>avec succès</target>
@@ -445,6 +458,9 @@
       <trans-unit id="6485314736125303028" datatype="html">
         <source>Discovery Job</source>
         <target>Discovery Job</target>
+      </trans-unit><trans-unit id="1105511599486801099" datatype="html">
+        <source>Reading Jobs</source>
+        <target state="new">Reading Jobs</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -454,14 +470,8 @@
         <source>Description</source>
         <target>Description</target>
       </trans-unit>
-      <trans-unit id="6122030973291308530" datatype="html">
-        <source>Frequency</source>
-        <target>Fréquence</target>
-      </trans-unit>
-      <trans-unit id="3770761673682962465" datatype="html">
-        <source>Start time</source>
-        <target>Heure de démarrage </target>
-      </trans-unit>
+      
+      
       <trans-unit id="8035386400282683720" datatype="html">
         <source>Week days</source>
         <target>Jours de la semaine</target>
@@ -469,15 +479,15 @@
       <trans-unit id="417598902109534086" datatype="html">
         <source>Days in month</source>
         <target>Jours du mois</target>
+      </trans-unit><trans-unit id="2791965473218359494" datatype="html">
+        <source>Expression</source>
+        <target state="new">Expression</target>
+      </trans-unit><trans-unit id="3659841989098356276" datatype="html">
+        <source>Expression is invalid.</source>
+        <target state="new">Expression is invalid.</target>
       </trans-unit>
-      <trans-unit id="8497528947328199741" datatype="html">
-        <source>Time</source>
-        <target>Heure </target>
-      </trans-unit>
-      <trans-unit id="5982320999405543564" datatype="html">
-        <source>Date time</source>
-        <target>date, heure</target>
-      </trans-unit>
+      
+      
       <trans-unit id="4452427314943113135" datatype="html">
         <source>Previous</source>
         <target>Précédent</target>
@@ -828,6 +838,60 @@
       <trans-unit id="7804366670597991631" datatype="html">
         <source>'Name</source>
         <target>'Nom</target>
+      </trans-unit><trans-unit id="ngb.datepicker.previous-month" datatype="html">
+        <source>Previous month</source>
+        <target state="new">Previous month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.next-month" datatype="html">
+        <source>Next month</source>
+        <target state="new">Next month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.select-month" datatype="html">
+        <source>Select month</source>
+        <target state="new">Select month</target>
+      </trans-unit><trans-unit id="ngb.datepicker.select-year" datatype="html">
+        <source>Select year</source>
+        <target state="new">Select year</target>
+      </trans-unit><trans-unit id="ngb.timepicker.HH" datatype="html">
+        <source>HH</source>
+        <target state="new">HH</target>
+      </trans-unit><trans-unit id="ngb.timepicker.hours" datatype="html">
+        <source>Hours</source>
+        <target state="new">Hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.MM" datatype="html">
+        <source>MM</source>
+        <target state="new">MM</target>
+      </trans-unit><trans-unit id="ngb.timepicker.minutes" datatype="html">
+        <source>Minutes</source>
+        <target state="new">Minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-hours" datatype="html">
+        <source>Increment hours</source>
+        <target state="new">Increment hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
+        <source>Decrement hours</source>
+        <target state="new">Decrement hours</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
+        <source>Increment minutes</source>
+        <target state="new">Increment minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
+        <source>Decrement minutes</source>
+        <target state="new">Decrement minutes</target>
+      </trans-unit><trans-unit id="ngb.timepicker.SS" datatype="html">
+        <source>SS</source>
+        <target state="new">SS</target>
+      </trans-unit><trans-unit id="ngb.timepicker.seconds" datatype="html">
+        <source>Seconds</source>
+        <target state="new">Seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
+        <source>Increment seconds</source>
+        <target state="new">Increment seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
+        <source>Decrement seconds</source>
+        <target state="new">Decrement seconds</target>
+      </trans-unit><trans-unit id="ngb.timepicker.PM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <target state="new"><x id="INTERPOLATION"/></target>
+      </trans-unit><trans-unit id="ngb.timepicker.AM" datatype="html">
+        <source><x id="INTERPOLATION"/></source>
+        <target state="new"><x id="INTERPOLATION"/></target>
       </trans-unit>
       <trans-unit id="3008420115644088420" datatype="html">
         <source>Configuration</source>
@@ -1141,28 +1205,25 @@
         <source>In Range</source>
         <target>dans la gamme</target>
       </trans-unit>
-      <trans-unit id="6917779175852211923" datatype="html">
-        <source>Every N hour(s</source>
-        <target>Toutes les heures N </target>
-      </trans-unit>
+      
       <trans-unit id="2701293197858293459" datatype="html">
         <source>Meter Units Read Scheduler was</source>
         <target>Le Scheduler lecture des unités de compteurs était </target>
       </trans-unit><trans-unit id="7781301631011863993" datatype="html">
         <source>(<x id="PH"/> selected)</source>
         <target state="new">(<x id="PH"/> selected)</target>
-      </trans-unit><trans-unit id="1729518829537514783" datatype="html">
-        <source>Reading Jobs <x id="INTERPOLATION"/></source>
-        <target state="new">Reading Jobs <x id="INTERPOLATION"/></target>
+      </trans-unit><trans-unit id="1394835141143590910" datatype="html">
+        <source>Start at</source>
+        <target state="new">Start at</target>
+      </trans-unit><trans-unit id="2843324633040409418" datatype="html">
+        <source>End at</source>
+        <target state="new">End at</target>
+      </trans-unit><trans-unit id="7379236614458665713" datatype="html">
+        <source>Read from last value</source>
+        <target state="new">Read from last value</target>
       </trans-unit>
-      <trans-unit id="2622268509058131533" datatype="html">
-        <source>Use pointers</source>
-        <target>Utilisation des pointeurs</target>
-      </trans-unit>
-      <trans-unit id="8047236914242783645" datatype="html">
-        <source>IEC</source>
-        <target>IEC</target>
-      </trans-unit>
+      
+      
       <trans-unit id="7689582560947434727" datatype="html">
         <source>For last</source>
         <target>En dernier </target>
@@ -1174,6 +1235,9 @@
       <trans-unit id="1784755211608577111" datatype="html">
         <source>Last communication</source>
         <target>Dernière communication</target>
+      </trans-unit><trans-unit id="8643289769990675407" datatype="html">
+        <source>Basic</source>
+        <target state="new">Basic</target>
       </trans-unit>
       <trans-unit id="8079872604120956170" datatype="html">
         <source>Data Concentration Unit was added successfully</source>
@@ -1467,48 +1531,13 @@
         <note priority="1" from="description">The label for the **Decrement** button in the DateInput</note>
         <note priority="1" from="meaning">kendo.dateinput.decrement</note>
       </trans-unit>
-      <trans-unit id="7519663530416240229" datatype="html">
-        <source>Set</source>
-        <target>Mettre</target>
-        <note priority="1" from="description">The Accept button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.accept</note>
-      </trans-unit>
-      <trans-unit id="4355879331538595758" datatype="html">
-        <source>Set time</source>
-        <target>Durée déterminée</target>
-        <note priority="1" from="description">The label for the Accept button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.acceptLabel</note>
-      </trans-unit>
-      <trans-unit id="1086687567255473060" datatype="html">
-        <source>Cancel</source>
-        <target>annuler</target>
-        <note priority="1" from="description">The Cancel button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancel</note>
-      </trans-unit>
-      <trans-unit id="83621966901491941" datatype="html">
-        <source>Cancel changes</source>
-        <target>annuler les changements</target>
-        <note priority="1" from="description">The label for the Cancel button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.cancelLabel</note>
-      </trans-unit>
-      <trans-unit id="5912507758515138116" datatype="html">
-        <source>Now</source>
-        <target>maintenant</target>
-        <note priority="1" from="description">The Now button text in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.now</note>
-      </trans-unit>
-      <trans-unit id="371982627910576599" datatype="html">
-        <source>Select now</source>
-        <target>Sélectionner maintenant </target>
-        <note priority="1" from="description">The label for the Now button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.nowLabel</note>
-      </trans-unit>
-      <trans-unit id="6938407659294495526" datatype="html">
-        <source>Toggle time list</source>
-        <target>Toggle time list</target>
-        <note priority="1" from="description">The label for the toggle button in the timepicker component</note>
-        <note priority="1" from="meaning">kendo.timepicker.toggle</note>
-      </trans-unit>
+      
+      
+      
+      
+      
+      
+      
       <trans-unit id="3360129034450596425" datatype="html">
         <source>Date</source>
         <target>Date</target>
@@ -1580,6 +1609,21 @@
         <target>AUJOURD'HUI</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.datetimepicker.today</note>
+      </trans-unit><trans-unit id="3892034896682737327" datatype="html">
+        <source>TODAY</source>
+        <target state="new">TODAY</target>
+        <note priority="1" from="description">The label for the today button in the calendar header</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.today</note>
+      </trans-unit><trans-unit id="9101635325676663492" datatype="html">
+        <source>Navigate to previous view</source>
+        <target state="new">Navigate to previous view</target>
+        <note priority="1" from="description">The label for the previous button in the Multiview calendar</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.prevButtonTitle</note>
+      </trans-unit><trans-unit id="3994336778698343633" datatype="html">
+        <source>Navigate to next view</source>
+        <target state="new">Navigate to next view</target>
+        <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
+        <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
       </trans-unit>
       <trans-unit id="5362895271044573681" datatype="html">
         <source>Set</source>
@@ -1627,6 +1671,12 @@
       <trans-unit id="4155936898622302064" datatype="html">
         <source>Auto templates</source>
         <target>Auto templates</target>
+      </trans-unit><trans-unit id="7844706011418789951" datatype="html">
+        <source>Administration</source>
+        <target state="new">Administration</target>
+      </trans-unit><trans-unit id="4555457172864212828" datatype="html">
+        <source>Users</source>
+        <target state="new">Users</target>
       </trans-unit>
       <trans-unit id="7413690382234141401" datatype="html">
         <source>Back to main menu</source>
@@ -2130,10 +2180,7 @@
         <source><x id="PH"/> (<x id="PH_1"/> selected)</source>
         <target state="new"><x id="PH"/> (<x id="PH_1"/> selected)</target>
       </trans-unit>
-      <trans-unit id="1277466067416500887" datatype="html">
-        <source>Topology Job</source>
-        <target>Topology Job</target>
-      </trans-unit>
+      
     </body>
   </file>
 </xliff>

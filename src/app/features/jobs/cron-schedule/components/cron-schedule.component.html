@@ -1,0 +1,148 @@
+<kendo-tabstrip (tabSelect)="onTabSelect($event)" [keepTabContent]="false" class="cron">
+  <kendo-tabstrip-tab [title]="tabStripTitleMinutes" [selected]="selectedFrequency === freq.Minutes">
+    <ng-template kendoTabContent>
+      <div>
+        <div class="d-flex">
+          <label i18n class="label-left">Every</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="minutesMinutesProperty" [selectOptions]="everyMinutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+        <span class="text-bottom-right">{{getCronDescription(freq.Minutes)}}</span>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="tabStripTitleHourly" [selected]="selectedFrequency === freq.Hourly">
+    <ng-template kendoTabContent>
+      <div>
+        <div class="d-flex">
+          <label i18n class="label-left">Every</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="hourlyHoursProperty" [selectOptions]="everyHours"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+          <label i18n class="label-left">:</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="hourlyMinutesProperty" [selectOptions]="minutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+        <span class="text-bottom-right">{{getCronDescription(freq.Hourly)}}</span>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="tabStripTitleDaily" [selected]="selectedFrequency === freq.Daily">
+    <ng-template kendoTabContent>
+      <div>
+        <div class="d-flex">
+          <app-input-radio class="label-left" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionEvery"></app-input-radio>
+          <div class="col-2">
+            <app-select-input i18n-label label="Day(s)" [form]="form" [property]="dailyEveryDaysProperty" [selectOptions]="everyDays"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+          <label i18n class="label-left">@</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="dailyEveryHoursProperty" [selectOptions]="hours"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+          <label i18n class="label-left">:</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="dailyEveryMinutesProperty" [selectOptions]="minutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+        <div class="d-flex">
+          <app-input-radio class="label-left" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionWeekday"></app-input-radio>
+          <div class="col-2">
+            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="dailyWeekdayHoursProperty" [selectOptions]="hours"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+          <label i18n class="label-left">:</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="dailyWeekdayMinutesProperty" [selectOptions]="minutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+        <span class="text-bottom-right">{{getCronDescription(freq.Daily)}}</span>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="tabStripTitleWeekly" [selected]="selectedFrequency === freq.Weekly">
+    <ng-template kendoTabContent>
+      <div>
+        <app-input-multiselect i18n-label label="Week days" [form]="form"
+          [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
+        </app-input-multiselect>
+        <div class="d-flex">
+          <label i18n class="label-left">@</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="weeklyHoursProperty" [selectOptions]="minutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+          <label i18n class="label-left">:</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="weeklyMinutesProperty" [selectOptions]="minutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+        <span class="text-bottom-right">{{getCronDescription(freq.Weekly)}}</span>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="tabStripTitleMonthly" [selected]="selectedFrequency === freq.Monthly">
+    <ng-template kendoTabContent>
+      <div>
+        <label><span i18n>Days in month</span><sup> *</sup></label>
+        <div class="d-flex flex-wrap">
+          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'"
+            *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i+1)">
+            <span>{{i+1}}</span>
+          </button>
+        </div>
+        <div class="help-block" *ngIf="!isNoMonthDaysValid()">
+          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
+        </div>
+        <div class="d-flex">
+          <label i18n class="label-left">@</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="monthlyHoursProperty" [selectOptions]="hours"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+          <label i18n class="label-left">:</label>
+          <div class="col-2">
+            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="monthlyMinutesProperty" [selectOptions]="minutes"
+              [disabled]="false">
+            </app-select-input>
+          </div>
+        </div>
+        <span class="text-bottom-right">{{getCronDescription(freq.Monthly)}}</span>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+  <kendo-tabstrip-tab [title]="tabStripTitleAdvanced" [selected]="selectedFrequency === freq.Advanced">
+    <ng-template kendoTabContent>
+      <div>
+        <div class="col-3">
+          <app-input-text i18n-label label="Expression" [form]="form" [property]="advancedCronProperty">
+          </app-input-text>
+          <div class="help-block" *ngIf="!isAdvancedCronValid()">
+            <i class="far fa-info-circle text-danger"></i><small class="text-danger" i18n>Expression is invalid.</small>
+          </div>
+        </div>
+        <span class="text-bottom-right">{{getCronDescription(freq.Advanced)}}</span>
+      </div>
+    </ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>

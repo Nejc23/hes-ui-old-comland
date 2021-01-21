@@ -3,24 +3,39 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { RegistersSelectRequest } from '../registers-select/registers-select-request.interface';
 
 export interface SchedulerJob {
-  readOptions: number;
-  nHours: number;
-  nMinutes: number;
-  weekDays: number[];
-  monthDays: number[];
-  registers: RegistersSelectRequest[];
   description: string;
-  iec: boolean;
-  enable: boolean;
-  dateTime: string;
-  usePointer: boolean;
-  intervalRange: number;
-  timeUnit: number;
-  actionType: number;
-  bulkActionsRequestParam: GridBulkActionRequestParams;
+
+  startAt?: string;
+  endAt?: string;
+  cronExpression: string;
+  jobType: string;
+  active: boolean;
+
+  devices?: GridBulkActionRequestParams;
+  registers?: RegistersSelectRequest[];
+  readingProperties?: ReadingProperties;
+  schedules?: Schedule[];
 }
 
 export interface SchedulerJobForm extends SchedulerJob {
-  time: Date;
-  timeForHours: Date;
+  time?: Date;
+  timeForHours?: Date;
+  startAtDate?: Date;
+  endAtDate?: Date;
+}
+
+export interface ReadingProperties {
+  usePointer: boolean;
+  iecPushEnabled: boolean;
+  intervalRange: number;
+  timeUnit: number;
+}
+
+export interface Schedule {
+  id?: string;
+  cronExpression: string;
+  active: boolean;
+  description?: string;
+  startAt?: string;
+  endAt?: string;
 }

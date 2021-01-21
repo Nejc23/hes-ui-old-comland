@@ -27,25 +27,18 @@ describe('Pact consumer test', () => {
 
   const typeId = 1;
   const requestBody: SchedulerJob = {
-    readOptions: 5,
-    nMinutes: 0,
-    nHours: 0,
-    weekDays: [],
-    monthDays: [1, 7, 31],
     registers: [
       { name: 'guid-1', type: 'type-1' },
       { name: 'guid-4', type: 'type-1' },
       { name: 'guid-5', type: 'type-1' }
     ],
-    actionType: 2,
-    iec: true,
-    enable: false,
-    usePointer: false,
-    intervalRange: 120,
-    timeUnit: 1,
+    jobType: 'scheduledReading',
+
+    active: false,
+
     description: 'description',
-    dateTime: '2020-05-14 13:18',
-    bulkActionsRequestParam: {
+    cronExpression: '0 1 0 * * ? *',
+    devices: {
       id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
       filter: {
         statuses: [
@@ -93,25 +86,18 @@ describe('Pact consumer test', () => {
   };
 
   const responseBody: SchedulerJob = {
-    readOptions: 5,
-    nMinutes: 0,
-    nHours: 0,
-    weekDays: [],
-    monthDays: [1, 7, 31],
     registers: [
       { name: 'guid-1', type: 'type-1' },
       { name: 'guid-4', type: 'type-1' },
       { name: 'guid-5', type: 'type-1' }
     ],
-    actionType: 2,
-    iec: true,
-    enable: false,
-    usePointer: false,
-    intervalRange: 120,
-    timeUnit: 1,
+    jobType: 'scheduledReading',
+
+    active: false,
+
     description: 'description',
-    dateTime: '2020-05-14 13:18',
-    bulkActionsRequestParam: {
+    cronExpression: '0 1 0 * * ? *',
+    devices: {
       id: ['40dded4e-1893-4521-80d0-226e3f5ae0f8', 'ad27b761-8bde-4ea8-a380-3d5cefb06f73', '4e1bef62-230a-4f46-a5cf-a869c830669a'],
       filter: {
         statuses: [

@@ -124,11 +124,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     if (!this.deviceFiltersAndSearch) {
       this.deviceFiltersAndSearch = { id: [], filter: null };
     }
-    if (this.selectedJobId) {
-      this.jobsService.getJob(this.selectedJobId).subscribe((data) => {
-        this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam?.id);
-      });
-    }
   }
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------
@@ -209,11 +204,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       this.loadGrid = false;
       params.api.paginationGoToPage(this.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex());
     }
-
-    console.log(
-      'dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex',
-      this.dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex()
-    );
   }
 
   // ag-grid change visibillity of columns
@@ -239,6 +229,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
         this.dataConcentratorUnitsSelectGridService.setSessionSettingsRemoveSelectedRow(params.node.data.concentratorId);
       }
     }
+
+    this.onSelectionChanged.emit(this.getSelectedRowIds().length > 0 ? true : false);
   }
 
   // ----------------------- ag-grid set DATASOURCE end --------------------------

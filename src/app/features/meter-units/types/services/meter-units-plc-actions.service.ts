@@ -28,6 +28,7 @@ import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-mete
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
+import { jobType } from 'src/app/features/jobs/enums/job-type.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +54,7 @@ export class MeterUnitsPlcActionsService {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
-      component.setFormAddNew(units);
+      component.setFormAddNew(jobType.reading, units);
       component.deviceFiltersAndSearch = {
         id: params.deviceIds,
         search: params.search,

@@ -59,7 +59,8 @@
               "@progress/kendo-angular-intl/locales/cs/all",
               "@progress/kendo-angular-intl/locales/de/all",
               "@progress/kendo-angular-intl/locales/fr/all",
-              "@progress/kendo-angular-intl/locales/it/all"
+              "@progress/kendo-angular-intl/locales/it/all",
+              "cronstrue/i18n"
             ]
           },
           "configurations": {
@@ -139,12 +140,6 @@
                 {
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/locale.ts",
-                  "with": "src/environments/locale-sl.ts"
                 }
               ],
               "localize": [
