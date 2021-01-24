@@ -23,8 +23,6 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 })
 export class MeterUnitRegistersComponent implements OnInit {
   public selectedRegister: AutoTemplateRegister;
-  private typeId: number;
-  private typeName: string;
 
   public isRangeCustom = false;
 
@@ -203,12 +201,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.muService.getMeterUnit(this.deviceId).subscribe((result) => {
       this.setTitle(result.name);
-      this.typeId = result.type === 0 ? 1 : result.type; // TODO remove this after BE fix.
-
-      this.codeList.meterUnitTypeCodelist().subscribe((list) => {
-        this.typeName = list.find((l) => l.id === this.typeId).value;
-        this.setBreadcrumbs();
-      });
+      this.setBreadcrumbs();
     });
   }
 
@@ -220,14 +213,6 @@ export class MeterUnitRegistersComponent implements OnInit {
         url: null
       }
     ];
-
-    if (this.typeId && this.typeName) {
-      breadcrumbs.push({
-        label: this.typeName,
-        params: {},
-        url: `/meterUnits/${this.typeId}`
-      });
-    }
 
     breadcrumbs.push({
       label: $localize`Data view`,

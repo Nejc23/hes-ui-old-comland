@@ -1,3 +1,4 @@
+import { Breadcrumb } from './../../../../shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,8 +15,14 @@ const routes: Routes = [
       breadcrumb: $localize`Meter Units`,
       permission: FunctionalityEnumerator.MU
     },
-    component: MeterUnitsTypeComponent,
     children: [
+      {
+        path: '',
+        data: {
+          breadcrumb: null
+        },
+        component: MeterUnitsTypeComponent
+      },
       {
         path: 'overview',
         data: {
@@ -49,25 +56,17 @@ const routes: Routes = [
       {
         path: 'details/:deviceId',
         data: {
-          breadcrumb: $localize`Meter Unit`
+          breadcrumb: $localize`Meter Units`
         },
         component: MeterUnitDetailsComponent
+      },
+      {
+        path: ':id',
+        data: {
+          breadcrumb: null
+        },
+        redirectTo: ''
       }
-      // {
-      //   path: ':id',
-      //   data: {
-      //     breadcrumb: null
-      //   },
-      //   children: [
-      //     {
-      //       path: '',
-      //       data: {
-      //         breadcrumb: null
-      //       },
-      //       component: MeterUnitsTypeComponent
-      //     }
-      //   ]
-      // }
     ]
   }
 ];

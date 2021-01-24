@@ -26,9 +26,6 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   private requestModel;
 
-  private typeId;
-  private typeName;
-
   public editMode = false;
   public data: MeterUnitDetails;
   public form: FormGroup;
@@ -135,12 +132,8 @@ export class MeterUnitDetailsComponent implements OnInit {
       this.form = this.createForm();
       // this.setFormType();
       // this.setFormVendor();
-      this.typeId = response.type === 0 ? 1 : response.type; // TODO remove this after BE fix.
 
-      this.codeList.meterUnitTypeCodelist().subscribe((list) => {
-        this.typeName = list.find((l) => l.id === this.typeId).value;
-        this.setBreadcrumbs();
-      });
+      this.setBreadcrumbs();
     });
   }
 
@@ -280,14 +273,6 @@ export class MeterUnitDetailsComponent implements OnInit {
         url: null
       }
     ];
-
-    if (this.typeId && this.typeName) {
-      breadcrumbs.push({
-        label: $localize`${this.typeName}`,
-        params: {},
-        url: `/meterUnits/${this.typeId}`
-      });
-    }
 
     breadcrumbs.push({
       label: $localize`Meter Unit`,
