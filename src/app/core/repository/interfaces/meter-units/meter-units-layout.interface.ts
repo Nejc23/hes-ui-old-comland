@@ -16,4 +16,6 @@ export interface MeterUnitsLayout {
   showMeterUnitsWithoutTemplateFilter?: boolean;
   showOnlyImageReadyForActivationFilter?: boolean;
   gridLayout: string;
+  deviceMediumFilter?: Codelist<number>[];
+  protocolTypeFilter?: Codelist<number>[];
 }

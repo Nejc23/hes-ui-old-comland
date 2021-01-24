@@ -13,12 +13,22 @@
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
+          <app-input-tag label="Protocol" [property]="protocolTypeProperty" [form]="form"
+            [autocompleteItemsAsObjects]="protocolTypes$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            (valueChanged)="applyFilter()">
+          </app-input-tag>
+
           <div class="form-row text-danger" *ngIf="!form.valid">
             <div class="col-6"></div>
             <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
           </div>
           <app-input-tag label="Vendor" [form]="form" [property]="vendorsProperty" [autocompleteItemsAsObjects]="meterUnitVendors$ | async"
             [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label (selectedValueChanged)="applyFilter()"
+            (valueChanged)="applyFilter()">
+          </app-input-tag>
+
+          <app-input-tag label="Medium" [property]="deviceMediumProperty" [form]="form"
+            [autocompleteItemsAsObjects]="deviceMediums$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
             (valueChanged)="applyFilter()">
           </app-input-tag>
 

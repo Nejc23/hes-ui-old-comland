@@ -469,6 +469,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
       this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
+      this.requestModel.filterModel.protocolType = filterDCU.protocolTypeFilter;
+      this.requestModel.filterModel.deviceMedium = filterDCU.deviceMediumFilter;
     } else {
       this.setFilterInfo();
     }

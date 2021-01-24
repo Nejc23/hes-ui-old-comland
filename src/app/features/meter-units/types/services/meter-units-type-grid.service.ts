@@ -28,6 +28,8 @@ import { GridCellActionsComponent } from '../components/grid-custom-components/g
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { GridCellCiiStateComponent } from '../components/grid-custom-components/grid-cell-cii-state.component';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { GridCellProtocolComponent } from '../components/grid-custom-components/grid-cell-protocol.component';
+import { GridCellMediumComponent } from '../components/grid-custom-components/grid-cell-medium.component';
 
 @Injectable({
   providedIn: 'root'
@@ -110,6 +112,18 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
         headerTooltip: $localize`Status`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
+      },
+      {
+        field: gridSysNameColumnsEnum.protocolType,
+        headerName: $localize`Protocol`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellProtocolComponent',
+        headerTooltip: $localize`Protocol`,
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
@@ -206,6 +220,18 @@ export class MeterUnitsTypeGridService {
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
         headerTooltip: $localize`Vendor`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
+      },
+      {
+        field: gridSysNameColumnsEnum.deviceMedium,
+        headerName: $localize`Medium`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellMediumComponent',
+        headerTooltip: $localize`Medium`,
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
@@ -427,7 +453,9 @@ export class MeterUnitsTypeGridService {
       gridCellIconComponent: GridCellIconComponent,
       gridCellJobStatusComponent: GridCellJobStatusComponent,
       gridCellDetailLinkComponent: GridCellDetailLinkComponent,
-      gridCellNameComponent: GridCellNameComponent
+      gridCellNameComponent: GridCellNameComponent,
+      gridCellProtocolComponent: GridCellProtocolComponent,
+      gridCellMediumComponent: GridCellMediumComponent
     };
   }
 

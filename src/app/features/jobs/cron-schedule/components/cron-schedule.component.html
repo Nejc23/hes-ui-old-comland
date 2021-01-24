@@ -105,7 +105,7 @@
       <div>
         <label><span i18n>Days in month</span><sup> *</sup></label>
         <div class="d-flex flex-wrap">
-          <button class="btn btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-primary' : 'btn-outline-primary'"
+          <button class="btn btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'"
             *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i+1)">
             <span>{{i+1}}</span>
           </button>

@@ -35,6 +35,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   operatorsList$ = this.codelistHelperService.operationsList();
   showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
 
+  deviceMediums$: Observable<Codelist<number>[]>;
+  protocolTypes$: Observable<Codelist<number>[]>;
+
   currentStatuses: Codelist<number>[];
   currentTypes: Codelist<number>[];
   currentVendorId: number;
@@ -91,6 +94,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
     this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
 
+    this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist();
+    this.protocolTypes$ = this.codelistService.meterUnitProtocolTypeCodelist();
+
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       this.doFillData();
     });
@@ -131,7 +137,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
-          gridLayout: ''
+          gridLayout: '',
+          deviceMediumFilter: this.sessionFilter.deviceMediumFilter,
+          protocolTypeFilter: this.sessionFilter.protocolTypeFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -161,7 +169,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         /*['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
         ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
-        ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []]
+        ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []],
+        [this.deviceMediumProperty]: [filters && selected ? selected.deviceMediumFilter : []],
+        [this.protocolTypeProperty]: [filters && selected ? selected.protocolTypeFilter : []]
       },
       { validator: rangeFilterValidator }
     );
@@ -223,6 +233,14 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'showOptionFilter';
   }
 
+  get protocolTypeProperty() {
+    return 'protocolType';
+  }
+
+  get deviceMediumProperty() {
+    return 'deviceMedium';
+  }
+
   refresh() {}
 
   clearButtonClicked() {
@@ -276,7 +294,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       showOnlyImageReadyForActivationFilter:
         this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 3).length > 0 ? true : false,
       // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
-      gridLayout: ''
+      gridLayout: '',
+      deviceMediumFilter: this.form.get(this.deviceMediumProperty).value,
+      protocolTypeFilter: this.form.get(this.protocolTypeProperty).value
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 

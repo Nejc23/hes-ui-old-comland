@@ -228,6 +228,25 @@ export class MeterUnitsService {
         );
       }
 
+      if (param.filterModel.protocolType && param.filterModel.protocolType.length > 0) {
+        param.filterModel.tags.map((row) =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.protocolType),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.contains
+          })
+        );
+      }
+      if (param.filterModel.deviceMedium && param.filterModel.deviceMedium.length > 0) {
+        param.filterModel.tags.map((row) =>
+          requestParam.filter.push({
+            propName: capitalize(gridSysNameColumnsEnum.deviceMedium),
+            propValue: row.id.toString(),
+            filterOperation: filterOperationEnum.contains
+          })
+        );
+      }
+
       // show operations filter
       if (param.filterModel.showOptionFilter && param.filterModel.showOptionFilter.length > 0) {
         param.filterModel.showOptionFilter.map((row) => {
