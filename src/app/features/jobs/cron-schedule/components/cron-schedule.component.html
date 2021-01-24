@@ -105,7 +105,7 @@
       <div>
         <label><span i18n>Days in month</span><sup> *</sup></label>
         <div class="d-flex flex-wrap">
-          <button class="btn m-1 btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'"
+          <button class="btn btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-primary' : 'btn-outline-primary'"
             *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i+1)">
             <span>{{i+1}}</span>
           </button>
@@ -113,7 +113,7 @@
         <div class="help-block" *ngIf="!isNoMonthDaysValid()">
           <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
         </div>
-        <div class="d-flex">
+        <div class="d-flex mt-3">
           <label i18n class="label-left">@</label>
           <div class="col-2">
             <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="monthlyHoursProperty" [selectOptions]="hours"

@@ -20,7 +20,17 @@
   }
 
   &.btn-days {
-    width: 40px;
+    width: 25px;
+    margin:0;
+    padding:0;
+    line-height: 1.8;
+    border-radius: 0;
+    border-color: $gray-400;
+    font-weight: $font-weight-bold;
+
+    &+.btn-days {
+      border-left-width:0;
+    }
   }
 
   &.btn-primary {
