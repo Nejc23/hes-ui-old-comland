@@ -26,7 +26,7 @@ export class SidebarService {
       },
       {
         title: $localize`Meter Units`,
-        routeLink: '/meterUnits/1', // TODO set back when overview implemented '/meterUnits/overview',
+        routeLink: '/meterUnits', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
         icon: 'gps_not_fixed',
         children: []

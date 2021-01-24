@@ -156,34 +156,32 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     };
 
     this.setTitle(-1);
-    this.paramsSub = route.params.subscribe((params) => {
-      this.id = params.id;
-      meterUnitsTypeGridService.meterUnitsTypeId = params.id;
-      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
-        ? this.sessionNameForGridFilter
-        : 'grdLayoutMUT-typeId-' + params.id;
+    // this.paramsSub = route.params.subscribe((params) => {
+    // this.id = params.id;
+    meterUnitsTypeGridService.meterUnitsTypeId = null;
+    this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT') ? this.sessionNameForGridFilter : 'grdLayoutMUT';
 
-      if (this.gridApi) {
-        this.gridApi.purgeServerSideCache([]);
+    if (this.gridApi) {
+      this.gridApi.purgeServerSideCache([]);
+    }
+
+    if (this.gridColumnApi) {
+      const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
+      if (dataFromCookie) {
+        this.gridColumnApi.setColumnState(dataFromCookie);
       }
+    }
 
-      if (this.gridColumnApi) {
-        const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
-        if (dataFromCookie) {
-          this.gridColumnApi.setColumnState(dataFromCookie);
-        }
-      }
-
-      // set title by selected meter unit type
-      if (this.meterTypes$.length === 0) {
-        this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe((data) => {
-          this.meterTypes$ = data;
-          this.setTitle(this.id);
-        });
-      } else {
+    // set title by selected meter unit type
+    if (this.meterTypes$.length === 0) {
+      this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe((data) => {
+        this.meterTypes$ = data;
         this.setTitle(this.id);
-      }
-    });
+      });
+    } else {
+      this.setTitle(this.id);
+    }
+    // });
 
     this.frameworkComponents = meterUnitsTypeGridService.setFrameworkComponents();
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions(this);

@@ -14,6 +14,7 @@ const routes: Routes = [
       breadcrumb: $localize`Meter Units`,
       permission: FunctionalityEnumerator.MU
     },
+    component: MeterUnitsTypeComponent,
     children: [
       {
         path: 'overview',
@@ -51,22 +52,22 @@ const routes: Routes = [
           breadcrumb: $localize`Meter Unit`
         },
         component: MeterUnitDetailsComponent
-      },
-      {
-        path: ':id',
-        data: {
-          breadcrumb: null
-        },
-        children: [
-          {
-            path: '',
-            data: {
-              breadcrumb: null
-            },
-            component: MeterUnitsTypeComponent
-          }
-        ]
       }
+      // {
+      //   path: ':id',
+      //   data: {
+      //     breadcrumb: null
+      //   },
+      //   children: [
+      //     {
+      //       path: '',
+      //       data: {
+      //         breadcrumb: null
+      //       },
+      //       component: MeterUnitsTypeComponent
+      //     }
+      //   ]
+      // }
     ]
   }
 ];

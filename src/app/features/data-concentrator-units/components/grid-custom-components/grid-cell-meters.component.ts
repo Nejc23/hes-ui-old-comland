@@ -35,6 +35,6 @@ export class GridCellMetersComponent implements ICellRendererAngularComp {
 
   openMuGrid() {
     // TODO G3-PLC shouldn't be hard coded
-    this.router.navigate(['/meterUnits/1'], { queryParams: { search: this.params.data.name } });
+    this.router.navigate(['/meterUnits'], { queryParams: { search: this.params.data.name } });
   }
 }

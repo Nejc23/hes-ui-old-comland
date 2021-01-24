@@ -159,7 +159,7 @@ export class BaseTemplateComponent implements OnInit {
   }*/
 
   ngOnInit() {
-    this.fillMeterUnits();
+    // this.fillMeterUnits();
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
 
