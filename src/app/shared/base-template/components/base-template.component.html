@@ -25,7 +25,7 @@
       (mouseleave)="mouseLeavesNav()">
 
       <div class="brand d-flex align-items-center mb-4">
-        <div class="ml-2" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
+        <div class="ml-3" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
           <img class="brand-logo" [src]="getMenuMainLogoUrl()">
         </div>
 
@@ -51,9 +51,9 @@
 
       <ul class="navbar-nav collapsed" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
         <li *ngFor="let item of sidebarItems; let first = first"
-          class="nav-item" routerLinkActive="active"
+          class="nav-item lh-1 px-2" routerLinkActive="active"
           [ngClass]="{'active': isRouteActive(item.routeLink)}">
-          <a class="nav-link pl-0 pr-0 text-center"><i class="{{item.icon}}"></i></a>
+          <a class="nav-link pl-0 pr-0 text-center"><i class="md-20" [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }">{{item.icon}}</i></a>
         </li>
       </ul>
 

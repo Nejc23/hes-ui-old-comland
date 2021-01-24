@@ -5,6 +5,7 @@ export interface SidebarItem {
   routeLink: string;
   queryParams?: any;
   icon?: string;
+  isIconOutlined?: boolean;
   children: Array<SidebarItem>;
   hasChildren: boolean;
   opened?: string;
