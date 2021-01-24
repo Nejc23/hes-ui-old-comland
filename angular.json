@@ -60,7 +60,8 @@
               "@progress/kendo-angular-intl/locales/de/all",
               "@progress/kendo-angular-intl/locales/fr/all",
               "@progress/kendo-angular-intl/locales/it/all",
-              "cronstrue/i18n"
+              "cronstrue/i18n",
+              "cron-validate"
             ]
           },
           "configurations": {

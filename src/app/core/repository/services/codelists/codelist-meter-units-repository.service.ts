@@ -17,6 +17,7 @@ import {
   providedIn: 'root'
 })
 export class CodelistMeterUnitsRepositoryService {
+  id = 0;
   constructor(private repository: RepositoryService) {}
 
   // get all available meter unit types
@@ -31,41 +32,41 @@ export class CodelistMeterUnitsRepositoryService {
     return this.repository.makeRequest(this.meterUnitStatusCodelistRequest(meterUnitTypeId));
   }
   meterUnitStatusCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitStatuses}/${id}`);
+    return new HttpRequest('GET', `${meterUnitStatuses}/${this.id}`);
   }
 
   meterUnitTagCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitTagCodelistRequest(meterUnitTypeId));
   }
   meterUnitTagCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitTags}/${id}`);
+    return new HttpRequest('GET', `${meterUnitTags}/${this.id}`);
   }
 
   meterUnitFirmwareCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitFirmwareCodelistRequest(meterUnitTypeId));
   }
   meterUnitFirmwareCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitFirmwares}/${id}`);
+    return new HttpRequest('GET', `${meterUnitFirmwares}/${this.id}`);
   }
 
   meterUnitDisconnectorStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitDisconnectorStateCodelistRequest(meterUnitTypeId));
   }
   meterUnitDisconnectorStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitDisconnectorStates}/${id}`);
+    return new HttpRequest('GET', `${meterUnitDisconnectorStates}/${this.id}`);
   }
 
   meterUnitCiiStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitCiiStateCodelistRequest(meterUnitTypeId));
   }
   meterUnitCiiStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitCiiStates}/${id}`);
+    return new HttpRequest('GET', `${meterUnitCiiStates}/${this.id}`);
   }
 
   meterUnitVendorCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitVendorCodelistRequest(meterUnitTypeId));
   }
   meterUnitVendorCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', `${meterUnitVendors}/${id}`);
+    return new HttpRequest('GET', `${meterUnitVendors}/${this.id}`);
   }
 }

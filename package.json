@@ -76,6 +76,7 @@
     "hammerjs": "^2.0.8",
     "jquery": "^3.5.1",
     "lodash": "^4.17.20",
+    "material-icons": "^0.5.2",
     "moment": "^2.29.1",
     "ng-bootstrap": "^1.6.3",
     "ng-mocks": "^11.2.4",
