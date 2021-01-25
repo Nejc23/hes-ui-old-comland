@@ -111,13 +111,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   fillformFromSession(x: MeterUnitsLayout[]) {
     this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-    console.log('fillFilterFormFromSession', this.sessionFilter.statusesFilter);
-    console.log('fillFilterFormFromSession', this.sessionFilter.statusesFilter);
-    this.sessionFilter.statusesFilter = [
-      { id: 0, value: 'Test' },
-      { id: 1, value: 'Test2' }
-    ];
-    this.sessionFilter.showOptionFilter = [{ id: 0, value: 'Test2' }];
 
     if (this.sessionFilter) {
       if (this.sessionFilter.id) {
