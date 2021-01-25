@@ -19,8 +19,8 @@ import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-val
 export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy {
   private params: IToolPanelParams;
 
-  sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
-  sessionNameForGridState = 'grdStateMUT-typeId-';
+  sessionNameForGridFilter = 'grdLayoutMUT';
+  sessionNameForGridState = 'grdStateMUT';
 
   form: FormGroup;
 
@@ -56,15 +56,13 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe((params) => {
       this.id = params.id;
-      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
+      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT')
         ? this.sessionNameForGridFilter
-        : 'grdLayoutMUT-typeId-' + params.id;
+        : 'grdLayoutMUT';
 
-      this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT-typeId-' + params.id)
-        ? this.sessionNameForGridState
-        : 'grdStateMUT-typeId-' + params.id;
+      this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT') ? this.sessionNameForGridState : 'grdStateMUT';
 
-      // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
+      // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT';
     });
   }
 

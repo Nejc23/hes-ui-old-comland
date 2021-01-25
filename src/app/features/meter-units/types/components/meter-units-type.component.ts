@@ -45,7 +45,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   id = 0;
   private paramsSub: Subscription;
   private subscription: Subscription;
-  sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
+  sessionNameForGridFilter = 'grdLayoutMUT';
   headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
