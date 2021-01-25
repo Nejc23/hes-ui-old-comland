@@ -22,7 +22,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   searchTextEmpty = true;
-  sessionNameForGridState = 'grdStateMUT-typeId-';
+  sessionNameForGridState = 'grdStateMUT';
 
   columns$: Codelist<string>[] = [];
 
@@ -55,7 +55,7 @@ export class ActionFormComponent implements OnInit, OnDestroy {
   ) {
     this.paramsSub = route.params.subscribe((params) => {
       this.meterUnitTypeid = params.id;
-      /*    this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT-typeId-' + this.meterUnitTypeid) ?  this.sessionNameForGridState : 'grdStateMUT-typeId-' + this.meterUnitTypeid;
+      /*    this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT') ?  this.sessionNameForGridState : 'grdStateMUT';
       const search = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
       if (this.form) {
         this.form.get('content').setValue(search.searchText);
