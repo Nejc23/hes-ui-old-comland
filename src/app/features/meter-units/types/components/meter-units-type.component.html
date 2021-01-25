@@ -29,12 +29,10 @@
         >
 
         <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
+          <button  class="btn btn-primary mr-1" appHideIfActionUnauthorized [action]="actionMUDelete" [functionality]="formFunctionality" i18n href="javascript:void(0)" (click)="onDelete()">Delete</button>
           <div dropdown class="btn-group">
             <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
             <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
-              <div>
-                <a (click)="onDelete()" class="dropdown-item custom-hover-display" href="javascript:void(0)" style="pointer-events: none;cursor: default;color:gainsboro;"><span i18n>Delete</span></a>
-              </div>
               <div class="dropdown-item">
                 <div class="dropdown-submenu">
                   <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Jobs</span></a>

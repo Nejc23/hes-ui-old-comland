@@ -264,6 +264,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     return ActionEnumerator.MUClearAlarms;
   }
 
+  get actionMUDelete() {
+    return ActionEnumerator.MUDelete;
+  }
+
   // set form title by selected meter unit type
   private setTitle(id: number) {
     const selectedType = this.meterTypes$.find((x) => x.id === id);
@@ -710,12 +714,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // delete button click
   // TODO missing BE api !!
   onDelete(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.bulkOperation(
-      MeterUnitsTypeEnum.delete,
-      params,
-      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
     );
+
+    params.id = params.deviceIds;
+    params.deviceIds = null;
+
+    this.plcActionsService.onDelete(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup
