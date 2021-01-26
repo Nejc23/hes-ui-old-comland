@@ -143,7 +143,7 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
         ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false]
       },
-      { validator: rangeFilterValidator }
+      { validators: [rangeFilterValidator] }
     );
   }
 

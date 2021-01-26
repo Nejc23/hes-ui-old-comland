@@ -127,7 +127,7 @@ export class DcFilterComponent implements OnInit, OnDestroy {
         ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
         ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0]
       },
-      { validator: rangeFilterValidator }
+      { validators: [rangeFilterValidator] }
     );
   }
 

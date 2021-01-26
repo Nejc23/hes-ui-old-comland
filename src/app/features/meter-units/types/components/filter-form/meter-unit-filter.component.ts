@@ -162,7 +162,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
         ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []]
       },
-      { validator: rangeFilterValidator }
+      { validators: [rangeFilterValidator] }
     );
   }
 
