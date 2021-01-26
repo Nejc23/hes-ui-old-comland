@@ -92,7 +92,9 @@ export class SchedulerJobComponent implements OnInit {
         formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].endAt
           ? moment(formData.schedules[0].endAt).toDate()
           : null
-      ]
+      ],
+      [this.iecPushEnabledProperty]:
+        formData && formData.readingProperties && this.showIecPush() ? formData.readingProperties.iecPushEnabled : false
     });
   }
 
@@ -175,7 +177,7 @@ export class SchedulerJobComponent implements OnInit {
 
       readingProperties: {
         usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
-        iecPushEnabled: false,
+        iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
         intervalRange:
           this.form.get(this.intervalRangeProperty).value !== null ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
         timeUnit:
@@ -198,6 +200,10 @@ export class SchedulerJobComponent implements OnInit {
 
   showUsePointer() {
     return this.form.get(this.usePointerProperty).value === true;
+  }
+
+  showIecPush() {
+    return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
   }
 
   save(addNew: boolean) {
@@ -283,6 +289,10 @@ export class SchedulerJobComponent implements OnInit {
 
   get activeProperty() {
     return nameOf<SchedulerJobForm>((o) => o.active);
+  }
+
+  get iecPushEnabledProperty() {
+    return nameOf<ReadingProperties>((o) => o.iecPushEnabled);
   }
 
   // properties - END
