@@ -566,21 +566,21 @@ export class MeterUnitsPlcActionsService {
           if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter.length > 0) {
             requestModel.filterModel.showOptionFilter.map((row) => {
               if (row.id === 1) {
-                return requestParam.filter.push({
+                requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
                   propValue: 'true',
                   filterOperation: filterOperationEnum.equal
                 });
               }
               if (row.id === 2) {
-                return requestParam.filter.push({
+                requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
                   propValue: 'false',
                   filterOperation: filterOperationEnum.equal
                 });
               }
               if (row.id === 3) {
-                return requestParam.filter.push({
+                requestParam.filter.push({
                   propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
                   propValue: 'true',
                   filterOperation: filterOperationEnum.equal
