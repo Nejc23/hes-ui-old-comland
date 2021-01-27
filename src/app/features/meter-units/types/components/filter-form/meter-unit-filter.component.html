@@ -13,7 +13,7 @@
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
-          <app-input-tag label="Protocol" [property]="protocolTypeProperty" [form]="form"
+          <app-input-tag label="Protocol" [property]="protocolProperty" [form]="form"
             [autocompleteItemsAsObjects]="protocolTypes$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
             (valueChanged)="applyFilter()">
           </app-input-tag>
@@ -27,7 +27,7 @@
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
-          <app-input-tag label="Medium" [property]="deviceMediumProperty" [form]="form"
+          <app-input-tag label="Medium" [property]="mediumProperty" [form]="form"
             [autocompleteItemsAsObjects]="deviceMediums$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
             (valueChanged)="applyFilter()">
           </app-input-tag>

@@ -138,8 +138,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
           showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
           showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
           gridLayout: '',
-          deviceMediumFilter: this.sessionFilter.deviceMediumFilter,
-          protocolTypeFilter: this.sessionFilter.protocolTypeFilter
+          mediumFilter: this.sessionFilter.mediumFilter,
+          protocolFilter: this.sessionFilter.protocolFilter
         };
         x.push(currentFilter);
         this.form = this.createForm(x, currentFilter);
@@ -170,8 +170,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
         ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []],
-        [this.deviceMediumProperty]: [filters && selected ? selected.deviceMediumFilter : []],
-        [this.protocolTypeProperty]: [filters && selected ? selected.protocolTypeFilter : []]
+        [this.mediumProperty]: [filters && selected ? selected.mediumFilter : []],
+        [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []]
       },
       { validator: rangeFilterValidator }
     );
@@ -233,12 +233,12 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'showOptionFilter';
   }
 
-  get protocolTypeProperty() {
-    return 'protocolType';
+  get protocolProperty() {
+    return 'protocol';
   }
 
-  get deviceMediumProperty() {
-    return 'deviceMedium';
+  get mediumProperty() {
+    return 'medium';
   }
 
   refresh() {}
@@ -295,8 +295,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 3).length > 0 ? true : false,
       // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: '',
-      deviceMediumFilter: this.form.get(this.deviceMediumProperty).value,
-      protocolTypeFilter: this.form.get(this.protocolTypeProperty).value
+      mediumFilter: this.form.get(this.mediumProperty).value,
+      protocolFilter: this.form.get(this.protocolProperty).value
     };
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 

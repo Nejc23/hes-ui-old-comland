@@ -26,6 +26,6 @@ export const gridSysNameColumnsEnum = {
   hasTemplate: 'hasTemplate',
   readyForActivation: 'readyForActivation',
   serialNumber: 'serialNumber',
-  deviceMedium: 'deviceMedium',
-  protocolType: 'protocolType'
+  medium: 'medium',
+  protocol: 'protocol'
 };

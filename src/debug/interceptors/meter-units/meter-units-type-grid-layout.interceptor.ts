@@ -35,11 +35,11 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         showMeterUnitsWithoutTemplateFilter: false,
         showOnlyMeterUnitsWithMBusInfoFilter: false,
         showOnlyImageReadyForActivationFilter: false,
-        deviceMediumFilter: [
+        mediumFilter: [
           { id: 1, value: 'ELECTRICITY' },
           { id: 2, value: 'WATER' }
         ],
-        protocolTypeFilter: [
+        protocolFilter: [
           { id: 0, value: 'UNKNOWN' },
           { id: 1, value: 'DC450G3' }
         ],
@@ -70,11 +70,11 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         showMeterUnitsWithoutTemplateFilter: true,
         showOnlyMeterUnitsWithMBusInfoFilter: true,
         showOnlyImageReadyForActivationFilter: false,
-        deviceMediumFilter: [
+        mediumFilter: [
           { id: 1, value: 'ELECTRICITY' },
           { id: 2, value: 'WATER' }
         ],
-        protocolTypeFilter: [
+        protocolFilter: [
           { id: 0, value: 'UNKNOWN' },
           { id: 1, value: 'DC450G3' }
         ],
@@ -99,11 +99,11 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         showMeterUnitsWithoutTemplateFilter: true,
         showOnlyMeterUnitsWithMBusInfoFilter: false,
         showOnlyImageReadyForActivationFilter: false,
-        deviceMediumFilter: [
+        mediumFilter: [
           { id: 1, value: 'ELECTRICITY' },
           { id: 2, value: 'WATER' }
         ],
-        protocolTypeFilter: [
+        protocolFilter: [
           { id: 0, value: 'UNKNOWN' },
           { id: 1, value: 'DC450G3' }
         ],
@@ -128,11 +128,11 @@ export class MeterUnitsTypeGridLayoutInterceptor {
         showMeterUnitsWithoutTemplateFilter: false,
         showOnlyMeterUnitsWithMBusInfoFilter: true,
         showOnlyImageReadyForActivationFilter: false,
-        deviceMediumFilter: [
+        mediumFilter: [
           { id: 1, value: 'ELECTRICITY' },
           { id: 2, value: 'WATER' }
         ],
-        protocolTypeFilter: [
+        protocolFilter: [
           { id: 0, value: 'UNKNOWN' },
           { id: 1, value: 'DC450G3' }
         ],
@@ -180,11 +180,11 @@ export class MeterUnitsTypeGridLayoutInterceptor {
       showMeterUnitsWithoutTemplateFilter: false,
       showOnlyMeterUnitsWithMBusInfoFilter: true,
       showOnlyImageReadyForActivationFilter: false,
-      deviceMediumFilter: [
+      mediumFilter: [
         { id: 1, value: 'ELECTRICITY' },
         { id: 2, value: 'WATER' }
       ],
-      protocolTypeFilter: [
+      protocolFilter: [
         { id: 0, value: 'UNKNOWN' },
         { id: 1, value: 'DC450G3' }
       ],

@@ -117,7 +117,7 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.protocolType,
+        field: gridSysNameColumnsEnum.protocol,
         headerName: $localize`Protocol`,
         pinned: false,
         sortable: true,
@@ -225,7 +225,7 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.deviceMedium,
+        field: gridSysNameColumnsEnum.medium,
         headerName: $localize`Medium`,
         pinned: false,
         sortable: true,
