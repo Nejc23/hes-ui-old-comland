@@ -23,6 +23,14 @@
       </div>
       <app-cron-schedule [cronExpression]="cronExpression" #cronSchedule></app-cron-schedule>
 
+      <div *ngIf="showIecPush()">
+        <div class="form-row pt-3">
+          <div class="col-5">
+            <app-input-switch [form]="form" [property]="iecPushEnabledProperty" i18n-label label="Push to IEC">
+            </app-input-switch>
+          </div>
+        </div>
+      </div>
       <div *ngIf="showPointer()">
         <div class="form-row pt-3">
           <div class="col-5">
