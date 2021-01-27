@@ -1,3 +1,4 @@
+import { SecurityActivateHlsComponent } from './../features/meter-units/common/components/security/security-activate-hls.component';
 import { CronScheduleComponent } from './../features/jobs/cron-schedule/components/cron-schedule.component';
 import { JobsSelectComponent } from './../features/jobs/jobs-select/components/jobs-select.component';
 import { PlcMeterRelaysStateComponent } from './../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-state.component';
@@ -124,7 +125,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent,
     JobsSelectComponent,
-    CronScheduleComponent
+    CronScheduleComponent,
+    SecurityActivateHlsComponent
   ],
   imports: [
     CommonModule,
@@ -206,7 +208,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     DcuFwUpgradeComponent,
     JobsSelectComponent,
     GridCellActiveReadOnlyComponent,
-    CronScheduleComponent
+    CronScheduleComponent,
+    SecurityActivateHlsComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -232,7 +235,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     PlcMeterSetDisplaySettingsComponent,
     DcuFwUpgradeComponent,
     JobsSelectComponent,
-    CronScheduleComponent
+    CronScheduleComponent,
+    SecurityActivateHlsComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

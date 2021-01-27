@@ -1,0 +1,27 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Activate HLS ({{selectedRowsCount}} selected)</div>
+
+  <div modal-body>
+    <ng-container>
+      <form class="form-horizontal" [formGroup]="form">
+        <div class="form-row">
+          <div class="col-12">
+            <app-select-input label="Security clients" [form]="form" [property]="securityClientProperty" [selectOptions]="securityClients$" i18n-label>
+            </app-select-input>
+          </div>
+        </div>
+      </form>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i>
+        <span i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
+          <span i18n>Confirm</span></button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>

@@ -1,3 +1,4 @@
+import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls';
 import { PlcMeterSetLimiterService } from './../../common/services/plc-meter-set-limiter.service';
 import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
@@ -431,6 +432,24 @@ export class MeterUnitsPlcActionsService {
             this.toast.errorToast(this.messageServerError);
           }
         );
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onSecurityActivateHls(params: IActionRequestParams, selectedRowsCount: number) {
+    const modalRef = this.modalService.open(SecurityActivateHlsComponent);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
       },
       (reason) => {
         // on dismiss (CLOSE)
