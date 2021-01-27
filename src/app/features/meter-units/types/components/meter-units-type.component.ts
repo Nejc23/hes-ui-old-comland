@@ -211,6 +211,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.eventService.eventEmitterDevicesDeleted.subscribe({
+      next: () => {
+        this.deselectAll();
+        if (this.gridApi) {
+          this.gridApi.purgeServerSideCache([]);
+        }
+      }
+    });
+
     // subscribe to changes of columns visibility from other components
     this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe((listOfVisibleColumns) => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);

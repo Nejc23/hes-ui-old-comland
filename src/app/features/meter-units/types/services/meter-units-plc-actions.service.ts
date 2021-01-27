@@ -30,6 +30,7 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { jobType } from 'src/app/features/jobs/enums/job-type.enum';
+import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +46,8 @@ export class MeterUnitsPlcActionsService {
     private service: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private codelistService: CodelistRepositoryService,
-    private router: Router
+    private router: Router,
+    private eventService: MeterUnitsTypeGridEventEmitterService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
@@ -295,6 +297,8 @@ export class MeterUnitsPlcActionsService {
             this.toast.successToast(this.messageActionDeleteSuccess);
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
+            } else {
+              this.eventService.devicesDeleted();
             }
           },
           (e) => {
