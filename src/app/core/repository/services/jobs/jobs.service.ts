@@ -1,3 +1,4 @@
+import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { capitalize } from 'lodash';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
@@ -191,6 +192,16 @@ export class JobsService {
         );
       }
     }
+
+    if (param.sortModel && param.sortModel.length > 0) {
+      param.sortModel.map((row) =>
+        requestParam.sort.push({
+          propName: capitalize(row.colId),
+          index: 0,
+          sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+        })
+      );
+    }
     //   requestParam.filter = [];
     //   if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
     //     param.filterModel.statuses.map(row =>
@@ -229,15 +240,6 @@ export class JobsService {
     //     );
     //   }
 
-    //   if (param.sortModel && param.sortModel.length > 0) {
-    //     param.sortModel.map(row =>
-    //       requestParam.sort.push({
-    //         propName: capitalize(row.colId),
-    //         index: 0,
-    //         sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
-    //       })
-    //     );
-    //   }
     // }
 
     return requestParam;
