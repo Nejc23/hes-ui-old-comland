@@ -76,14 +76,15 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   upgrade() {
     const formData = new FormData();
-    if (this.file) {
-      formData.append('image', this.file, this.file?.name);
+
+    if (this.actionRequest && this.actionRequest.concentratorIds && this.actionRequest.concentratorIds.length > 0) {
+      for (const concentratorId of this.actionRequest.concentratorIds) {
+        formData.append('concentratorIds', concentratorId);
+      }
     }
 
-    if (this.actionRequest && this.actionRequest.deviceIds && this.actionRequest.deviceIds.length > 0) {
-      for (const deviceId of this.actionRequest.deviceIds) {
-        formData.append('concentratorIds', deviceId);
-      }
+    if (this.file) {
+      formData.append('image', this.file, this.file?.name);
     }
 
     const request = this.dcuOperatrionService.postDcFwUpgrade(formData);
@@ -151,7 +152,6 @@ export class DcuFwUpgradeComponent implements OnInit {
   }
 
   public selected(event: any): void {
-    console.log('selected ');
     event.files.forEach((file: FileInfo) => {
       if (file.rawFile) {
         this.file = file.rawFile;

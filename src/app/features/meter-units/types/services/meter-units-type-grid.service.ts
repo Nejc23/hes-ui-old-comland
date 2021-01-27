@@ -33,9 +33,9 @@ import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-unit
   providedIn: 'root'
 })
 export class MeterUnitsTypeGridService {
-  cookieNameForGridSettings = 'grdColMUT-typeId-';
-  cookieNameForGridSort = 'grdColMUTSort-typeId-';
-  sessionNameForGridState = 'grdStateMUT-typeId-';
+  cookieNameForGridSettings = 'grdColMUT';
+  cookieNameForGridSort = 'grdColMUTSort';
+  sessionNameForGridState = 'grdStateMUT';
   gridName = 'grdMUT-requestIds';
   gridNameBreakerState = 'grdMUT-breaker-state-requestIds';
   gridNameCiiState = 'grdMUT-cii-state-requestIds';
@@ -53,15 +53,9 @@ export class MeterUnitsTypeGridService {
 
   public set meterUnitsTypeId(id: number) {
     this.meterUnitsId = id;
-    this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT-typeId-' + id)
-      ? this.cookieNameForGridSettings
-      : 'grdColMUT-typeId-' + id;
-    this.cookieNameForGridSort = this.cookieNameForGridSort.includes('grdColMUTSort-typeId-' + id)
-      ? this.cookieNameForGridSort
-      : 'grdColMUTSort-typeId-' + id;
-    this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT-typeId-' + id)
-      ? this.sessionNameForGridState
-      : 'grdStateMUT-typeId-' + id;
+    this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT') ? this.cookieNameForGridSettings : 'grdColMUT';
+    this.cookieNameForGridSort = this.cookieNameForGridSort.includes('grdColMUTSort') ? this.cookieNameForGridSort : 'grdColMUTSort';
+    this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT') ? this.sessionNameForGridState : 'grdStateMUT';
   }
 
   /**
@@ -514,7 +508,8 @@ export class MeterUnitsTypeGridService {
       JSON.stringify(sessionFilter.breakerStateFilter) === JSON.stringify(requestModel.disconnectorState) &&
       JSON.stringify(sessionFilter.ciiStateFilter) === JSON.stringify(requestModel.ciiState) &&
       JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
-      JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate)
+      JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate) &&
+      JSON.stringify(sessionFilter.showOptionFilter) === JSON.stringify(requestModel.showOptionFilter)
     ) {
       return true;
     }

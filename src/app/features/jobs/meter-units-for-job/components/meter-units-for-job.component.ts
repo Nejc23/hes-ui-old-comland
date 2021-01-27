@@ -33,7 +33,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
   scheduleId = '';
   private paramsSub: Subscription;
-  sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
+  sessionNameForGridFilter = 'grdLayoutMUT';
   // headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
@@ -112,9 +112,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     this.paramsSub = route.params.subscribe((params) => {
       this.scheduleId = params.scheduleId;
       meterUnitsForJobGridService.meterUnitsAllId = params.id;
-      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
+      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT')
         ? this.sessionNameForGridFilter
-        : 'grdLayoutMUT-typeId-' + params.id;
+        : 'grdLayoutMUT';
 
       if (this.gridApi) {
         this.gridApi.purgeServerSideCache([]);

@@ -17,8 +17,8 @@ import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/
 export class SaveViewFormMUTComponent implements OnInit {
   @Input() meterUnitsTypeId: number;
 
-  sessionNameForGridLayout = 'grdLayoutMUT-typeId-';
-  cookieNameForGridSettings = 'grdColMUT-typeId-';
+  sessionNameForGridLayout = 'grdLayoutMUT';
+  cookieNameForGridSettings = 'grdColMUT';
   form: FormGroup;
   mutLayouts$: Observable<MeterUnitsLayout[]>;
   data: MeterUnitsLayout[];
@@ -39,12 +39,8 @@ export class SaveViewFormMUTComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.sessionNameForGridLayout = this.sessionNameForGridLayout.includes('grdLayoutMUT-typeId-' + this.meterUnitsTypeId)
-      ? this.sessionNameForGridLayout
-      : 'grdLayoutMUT-typeId-' + this.meterUnitsTypeId;
-    this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT-typeId-' + this.meterUnitsTypeId)
-      ? this.cookieNameForGridSettings
-      : 'grdColMUT-typeId-' + this.meterUnitsTypeId;
+    this.sessionNameForGridLayout = this.sessionNameForGridLayout.includes('grdLayoutMUT') ? this.sessionNameForGridLayout : 'grdLayoutMUT';
+    this.cookieNameForGridSettings = this.cookieNameForGridSettings.includes('grdColMUT') ? this.cookieNameForGridSettings : 'grdColMUT';
     this.mutLayouts$ = this.mutService.getMeterUnitsLayout(this.meterUnitsTypeId);
     this.mutLayouts$.subscribe((x) => {
       this.data = x;

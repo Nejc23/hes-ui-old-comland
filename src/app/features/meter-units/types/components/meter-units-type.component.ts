@@ -45,7 +45,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   id = 0;
   private paramsSub: Subscription;
   private subscription: Subscription;
-  sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
+  sessionNameForGridFilter = 'grdLayoutMUT';
   headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
@@ -458,6 +458,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     ) {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+      console.log('setFilter() - filterDCU', filterDCU);
+
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
@@ -1149,7 +1151,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.gridApi.setSortModel(settings.sortModel);
       }
 
-      const querySearch = this.route.snapshot.queryParams['search'];
+      const querySearch = this.route.snapshot.queryParams.search;
       if (querySearch && querySearch.length > 0) {
         this.meterUnitsTypeGridService.setSessionSettingsSearchedText(querySearch);
         this.meterUnitsTypeGridService.setSessionSettingsSearchedWildcards(true);

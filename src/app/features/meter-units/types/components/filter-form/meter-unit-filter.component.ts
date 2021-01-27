@@ -19,8 +19,8 @@ import { SettingsStoreEmitterService } from 'src/app/core/repository/services/se
 })
 export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   @Output() filterChange = new EventEmitter();
-  sessionNameForGridFilter = 'grdLayoutMUT-typeId-';
-  sessionNameForGridState = 'grdStateMUT-typeId-';
+  sessionNameForGridFilter = 'grdLayoutMUT';
+  sessionNameForGridState = 'grdStateMUT';
 
   form: FormGroup;
 
@@ -63,15 +63,13 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe((params) => {
       this.id = params.id;
-      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + params.id)
+      this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT')
         ? this.sessionNameForGridFilter
-        : 'grdLayoutMUT-typeId-' + params.id;
+        : 'grdLayoutMUT';
 
-      this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT-typeId-' + params.id)
-        ? this.sessionNameForGridState
-        : 'grdStateMUT-typeId-' + params.id;
+      this.sessionNameForGridState = this.sessionNameForGridState.includes('grdStateMUT') ? this.sessionNameForGridState : 'grdStateMUT';
 
-      // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT-typeId-' + this.id) ?  this.sessionNameForGridFilter : 'grdLayoutMUT-typeId-' + this.id ;
+      // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT') ?  this.sessionNameForGridFilter : 'grdLayoutMUT';
     });
 
     this.applyFilter = _.debounce(this.applyFilter, 1000);
@@ -113,6 +111,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   fillformFromSession(x: MeterUnitsLayout[]) {
     this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+
     if (this.sessionFilter) {
       if (this.sessionFilter.id) {
         this.form = this.createForm(x, this.sessionFilter);
@@ -163,7 +162,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
         ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
         ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []]
       },
-      { validator: rangeFilterValidator }
+      { validators: [rangeFilterValidator] }
     );
   }
 
