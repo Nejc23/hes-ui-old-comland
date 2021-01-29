@@ -5,10 +5,28 @@
   <div modal-body>
     <ng-container>
       <form class="form-horizontal" [formGroup]="form">
-        <div class="form-row">
+        <div class="form-row" *ngIf="!showSecondConfirm">
           <div class="col-12">
+            <span i18n>Please select from the list below for which Security client you would like to activate HLS mode.</span>
+          </div>
+          <div class="col-12 pt-2">
             <app-select-input label="Security clients" [form]="form" [property]="securityClientProperty" [selectOptions]="securityClients$" i18n-label>
             </app-select-input>
+          </div>
+
+          <div class="col-12 pt-2">
+            <div class="alert alert-danger" role="alert">
+              <i class="fas fa-exclamation-triangle mr-2"></i>
+              <span i18n>This action may result in damages, rendering meter inoperable!</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-row pt-2" *ngIf="showSecondConfirm">
+          <div class="col-12">
+            <div class="card-body">
+              <div class="display-4 font-weight-bold pb-1" i18n>Are you sure you would like to perform HLS activation?</div>
+              <div class="text-secondary" i18n>This action may result in damages, rendering meter inoperable!</div>
+            </div>
           </div>
         </div>
       </form>

@@ -32,3 +32,7 @@ export const onDemandRelaysMode = '/on-demand/relay/mode';
 export const linkDeviceTemplate = '/link-device-template';
 
 export const upgrade = '/upgrade';
+
+// security
+export const securitySetup = `${enumMyGridLink.templating}/security-setup`;
+export const securityEnableHls = `${enumMyGridLink.managment}/enable/hls`;

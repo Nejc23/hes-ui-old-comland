@@ -1,9 +1,11 @@
 import {
   IActionRequestAddTemplate,
+  IActionRequestEnableHls,
   IActionRequestRelays,
   IActionRequestRelaysMode,
   IActionRequestSetDisplaySettings,
   IActionResponseAddTemplate,
+  IActionResponseEnableHls,
   IActionResponseRelays,
   IActionResponseRelaysMode,
   IActionResponseSetDisplaySettings
@@ -17,7 +19,9 @@ import {
   onDemandRelaysDisconnect,
   onDemandRelaysConnect,
   linkDeviceTemplate,
-  upgrade
+  upgrade,
+  securitySetup,
+  securityEnableHls
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -293,5 +297,22 @@ export class MyGridLinkService {
 
   clearAlarmsRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearAlarms}`, param);
+  }
+
+  // security
+  getSecurityClients(): Observable<any[]> {
+    return this.repository.makeRequest(this.getSecurityClientsRequest());
+  }
+
+  getSecurityClientsRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${securitySetup}`);
+  }
+
+  postSecurityEnableHls(param: IActionRequestEnableHls): Observable<IActionResponseEnableHls> {
+    return this.repository.makeRequest(this.postSecurityEnableHlsRequest(param));
+  }
+
+  postSecurityEnableHlsRequest(param: IActionRequestEnableHls): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${securityEnableHls}`, param);
   }
 }

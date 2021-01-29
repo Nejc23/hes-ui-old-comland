@@ -1,4 +1,4 @@
-import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls';
+import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
 import { PlcMeterSetLimiterService } from './../../common/services/plc-meter-set-limiter.service';
 import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
@@ -443,6 +443,7 @@ export class MeterUnitsPlcActionsService {
     const modalRef = this.modalService.open(SecurityActivateHlsComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionRequest = params;
 
     modalRef.result.then(
       (data) => {

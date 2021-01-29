@@ -112,3 +112,11 @@ export interface IActionResponseSetDisplaySettings extends IActionResponseParams
   displayGroupName: string;
   displayRegisters: string[];
 }
+
+export interface IActionRequestEnableHls extends IActionRequestParams {
+  clientId: string;
+}
+
+export interface IActionResponseEnableHls extends IActionResponseParams {
+  clientId: string;
+}
