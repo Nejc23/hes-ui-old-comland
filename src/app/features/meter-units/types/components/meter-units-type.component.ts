@@ -211,6 +211,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.eventService.eventEmitterDevicesDeleted.subscribe({
+      next: () => {
+        this.deselectAll();
+        if (this.gridApi) {
+          this.gridApi.purgeServerSideCache([]);
+        }
+      }
+    });
+
     // subscribe to changes of columns visibility from other components
     this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe((listOfVisibleColumns) => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
@@ -262,6 +271,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
   get actionMUClearAlarms() {
     return ActionEnumerator.MUClearAlarms;
+  }
+
+  get actionMUDelete() {
+    return ActionEnumerator.MUDelete;
   }
 
   // set form title by selected meter unit type
@@ -712,12 +725,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // delete button click
   // TODO missing BE api !!
   onDelete(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.bulkOperation(
-      MeterUnitsTypeEnum.delete,
-      params,
-      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
     );
+
+    this.plcActionsService.onDelete(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // popup

@@ -239,6 +239,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitsSetDisplaySettingsInterceptor.interceptMeterUnitGetCommonRegisterGroupsPost();
               }
 
+              if (MeterUnitInterceptor.canInterceptDeleteDevice(request)) {
+                return MeterUnitInterceptor.interceptDeleteDevice(request);
+              }
+
               // auto-templates
               if (AutoTemplatesListInterceptor.canInterceptAutoTemplatesList(request)) {
                 return AutoTemplatesListInterceptor.interceptAutoTemplatesList(request);
