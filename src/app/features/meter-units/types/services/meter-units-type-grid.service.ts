@@ -537,7 +537,9 @@ export class MeterUnitsTypeGridService {
       JSON.stringify(sessionFilter.ciiStateFilter) === JSON.stringify(requestModel.ciiState) &&
       JSON.stringify(sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter) === JSON.stringify(requestModel.showChildInfoMBus) &&
       JSON.stringify(sessionFilter.showMeterUnitsWithoutTemplateFilter) === JSON.stringify(requestModel.showWithoutTemplate) &&
-      JSON.stringify(sessionFilter.showOptionFilter) === JSON.stringify(requestModel.showOptionFilter)
+      JSON.stringify(sessionFilter.showOptionFilter) === JSON.stringify(requestModel.showOptionFilter) &&
+      JSON.stringify(sessionFilter.protocolFilter) === JSON.stringify(requestModel.protocol) &&
+      JSON.stringify(sessionFilter.mediumFilter) === JSON.stringify(requestModel.medium)
     ) {
       return true;
     }

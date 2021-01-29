@@ -297,6 +297,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       mediumFilter: this.form.get(this.mediumProperty).value,
       protocolFilter: this.form.get(this.protocolProperty).value
     };
+
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 
     // close tool-panel

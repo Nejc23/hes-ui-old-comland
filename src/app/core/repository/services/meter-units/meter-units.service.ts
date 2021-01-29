@@ -229,7 +229,7 @@ export class MeterUnitsService {
       }
 
       if (param.filterModel.protocol && param.filterModel.protocol.length > 0) {
-        param.filterModel.tags.map((row) =>
+        param.filterModel.protocol.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.protocol),
             propValue: row.id.toString(),
@@ -238,7 +238,7 @@ export class MeterUnitsService {
         );
       }
       if (param.filterModel.medium && param.filterModel.medium.length > 0) {
-        param.filterModel.tags.map((row) =>
+        param.filterModel.medium.map((row) =>
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.medium),
             propValue: row.id.toString(),
