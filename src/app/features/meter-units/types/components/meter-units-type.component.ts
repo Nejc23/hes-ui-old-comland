@@ -732,9 +732,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
 
-    params.id = params.deviceIds;
-    params.deviceIds = null;
-
     this.plcActionsService.onDelete(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
