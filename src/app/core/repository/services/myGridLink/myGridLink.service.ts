@@ -1,3 +1,4 @@
+import { meterUnits } from './../../consts/meter-units.const';
 import {
   IActionRequestAddTemplate,
   IActionRequestEnableHls,
@@ -314,5 +315,13 @@ export class MyGridLinkService {
 
   postSecurityEnableHlsRequest(param: IActionRequestEnableHls): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${securityEnableHls}`, param);
+  }
+
+  deleteDevice(param: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.deleteDeviceRequest(param));
+  }
+
+  deleteDeviceRequest(param: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('PATCH', `${meterUnits}`, param);
   }
 }

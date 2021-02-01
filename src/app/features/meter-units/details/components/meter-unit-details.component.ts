@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
@@ -37,17 +37,18 @@ export class MeterUnitDetailsComponent implements OnInit {
   constructor(
     private breadcrumbService: BreadcrumbService,
     private meterUnitsService: MeterUnitsService,
-    private route: ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private plcActionsService: MeterUnitsPlcActionsService,
-    private codeList: CodelistMeterUnitsRepositoryService
+    private codeList: CodelistMeterUnitsRepositoryService,
+    private router: Router
   ) {
     breadcrumbService.setPageName('Meter Unit');
   }
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
+    this.activatedRoute.params.subscribe((params) => {
       this.deviceId = params.deviceId;
       this.requestModel = {
         deviceIds: [this.deviceId],
@@ -375,10 +376,9 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   // delete button click
-  // TODO missing BE api !!
   onDelete() {
-    //   const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    //   this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.delete, params, 1);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.onDelete(params, 1, true);
   }
 
   // popup
@@ -436,5 +436,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearAlarms, params, 1);
   }
+
   // <-- end Operations action click (bulk or selected row)
 }
