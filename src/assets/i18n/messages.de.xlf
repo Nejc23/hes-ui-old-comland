@@ -725,6 +725,9 @@
       <trans-unit id="1774583572584926827" datatype="html">
         <source>Refresh data</source>
         <target>Daten aktualisieren</target>
+      </trans-unit><trans-unit id="6915429060840718325" datatype="html">
+        <source>Communication</source>
+        <target state="new">Communication</target>
       </trans-unit>
       <trans-unit id="5461424821674495162" datatype="html">
         <source>Show/hide filters</source>
@@ -965,6 +968,54 @@
       <trans-unit id="5610425955750546094" datatype="html">
         <source>Template</source>
         <target>Ausleseprofile</target>
+      </trans-unit><trans-unit id="8235810663505577273" datatype="html">
+        <source>Connection type</source>
+        <target state="new">Connection type</target>
+      </trans-unit><trans-unit id="8884328223023362104" datatype="html">
+        <source>Communication type</source>
+        <target state="new">Communication type</target>
+      </trans-unit><trans-unit id="3127731073427180886" datatype="html">
+        <source>Use high-level security</source>
+        <target state="new">Use high-level security</target>
+      </trans-unit><trans-unit id="4330808107055850226" datatype="html">
+        <source>Low-level security</source>
+        <target state="new">Low-level security</target>
+      </trans-unit><trans-unit id="2522129837094629838" datatype="html">
+        <source>High-level security</source>
+        <target state="new">High-level security</target>
+      </trans-unit><trans-unit id="9102185935745982355" datatype="html">
+        <source>Public address</source>
+        <target state="new">Public address</target>
+      </trans-unit><trans-unit id="1846555604165869261" datatype="html">
+        <source>HLS address</source>
+        <target state="new">HLS address</target>
+      </trans-unit><trans-unit id="235800882454190328" datatype="html">
+        <source>Gateway</source>
+        <target state="new">Gateway</target>
+      </trans-unit><trans-unit id="968799762062123504" datatype="html">
+        <source>Shortname</source>
+        <target state="new">Shortname</target>
+      </trans-unit><trans-unit id="8120084568349313167" datatype="html">
+        <source>Start with release</source>
+        <target state="new">Start with release</target>
+      </trans-unit><trans-unit id="4284098124301904777" datatype="html">
+        <source>Use Logical Device Name (LDN) as Systitle</source>
+        <target state="new">Use Logical Device Name (LDN) as Systitle</target>
+      </trans-unit><trans-unit id="7520385063679527678" datatype="html">
+        <source>Authentication type</source>
+        <target state="new">Authentication type</target>
+      </trans-unit><trans-unit id="9024026839188318205" datatype="html">
+        <source>Template is not selected</source>
+        <target state="new">Template is not selected</target>
+      </trans-unit><trans-unit id="8688093763221300184" datatype="html">
+        <source>To display the form, select the template</source>
+        <target state="new">To display the form, select the template</target>
+      </trans-unit><trans-unit id="8010254639696213298" datatype="html">
+        <source>Communication type is not selected</source>
+        <target state="new">Communication type is not selected</target>
+      </trans-unit><trans-unit id="3893880817209216856" datatype="html">
+        <source>Select a communication type on the Basic tab</source>
+        <target state="new">Select a communication type on the Basic tab</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
         <source>Error saving Meter Unit!</source>
@@ -2049,6 +2100,36 @@
       <trans-unit id="6201638315245239510" datatype="html">
         <source>Advanced</source>
         <target>Advanced</target>
+      </trans-unit><trans-unit id="2781157479989276850" datatype="html">
+        <source>Custom properties</source>
+        <target state="new">Custom properties</target>
+      </trans-unit><trans-unit id="6199836572724339721" datatype="html">
+        <source>Wrapper</source>
+        <target state="new">Wrapper</target>
+      </trans-unit><trans-unit id="337274749313181619" datatype="html">
+        <source>HDLC</source>
+        <target state="new">HDLC</target>
+      </trans-unit><trans-unit id="6252070156626006029" datatype="html">
+        <source>None</source>
+        <target state="new">None</target>
+      </trans-unit><trans-unit id="802458941707537739" datatype="html">
+        <source>Low</source>
+        <target state="new">Low</target>
+      </trans-unit><trans-unit id="8063651736083474594" datatype="html">
+        <source>High</source>
+        <target state="new">High</target>
+      </trans-unit><trans-unit id="1368144707200781495" datatype="html">
+        <source>High with Generic</source>
+        <target state="new">High with Generic</target>
+      </trans-unit><trans-unit id="8976722461735080572" datatype="html">
+        <source>Meter unit has been added successfully</source>
+        <target state="new">Meter unit has been added successfully</target>
+      </trans-unit><trans-unit id="1900325843387400594" datatype="html">
+        <source>Add new DLMS meter</source>
+        <target state="new">Add new DLMS meter</target>
+      </trans-unit><trans-unit id="6108435102004383383" datatype="html">
+        <source>Serial</source>
+        <target state="new">Serial</target>
       </trans-unit>
       <trans-unit id="6189397065139465013" datatype="html">
         <source>Every</source>

@@ -32,6 +32,7 @@ import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-te
 import { AutoTemplatesRegistersInterceptor } from './configuration/auto-templates/auto-templates-get-registers.interceptor';
 import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
 import { MeterUnitsSetDisplaySettingsInterceptor } from './meter-units/meter-units-set-display-settings.interceptor';
+import { TemplatingInterceptor } from './templating/templating.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -243,6 +244,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitInterceptor.interceptDeleteDevice(request);
               }
 
+              if (MeterUnitInterceptor.canInterceptCreateMuPost(request)) {
+                return MeterUnitInterceptor.interceptCreateMuPost(request);
+              }
+
               // auto-templates
               if (AutoTemplatesListInterceptor.canInterceptAutoTemplatesList(request)) {
                 return AutoTemplatesListInterceptor.interceptAutoTemplatesList(request);
@@ -291,6 +296,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (DataProcessingInterceptor.canInterceptGetInstantaneousValues(request)) {
                 return DataProcessingInterceptor.interceptGetInstantaneousValues(request);
+              }
+
+              // templating
+              if (TemplatingInterceptor.canInterceptGetDefaultValues(request)) {
+                return TemplatingInterceptor.interceptGetGetDefaultValues(request);
               }
 
               // pass through any requests not handled above

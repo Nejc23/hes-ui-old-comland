@@ -1,0 +1,309 @@
+<app-modal-template (dismiss)="onDismiss()">
+  <div modal-header i18n>Add new DLMS meter</div>
+
+  <div modal-body>
+    <ng-container>
+
+      <kendo-tabstrip (tabSelect)="onTabSelect($event);" [keepTabContent]="false" style="height:650px;">
+        <kendo-tabstrip-tab [title]="tabTitleBasic" [selected]="true">
+          <ng-template kendoTabContent>
+            <div>
+              <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
+
+              <div class="form-row">
+                <div class="col-6">
+                  <app-input-text [form]="form" [property]="serialNumberProperty" i18n-label label="Serial">
+                  </app-input-text>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-6">
+                  <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="manufacturerProperty" [selectOptions]="manufacturers"
+                    [disabled]="false">
+                  </app-select-input>
+                </div>
+              </div>
+
+              <app-select-input i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
+                [disabled]="false" (selectedValueChanged)="templateChanged($event)">
+              </app-select-input>
+
+              <div class="form-row">
+                <div class="col-6">
+                  <app-select-input i18n-label label="Connection type" [form]="form" [property]="connectionTypeProperty" [selectOptions]="connectionTypes"
+                    [disabled]="false" (selectedValueChanged)="onConnectionTypeChanged($event)">
+                  </app-select-input>
+                </div>
+              </div>
+
+              <div class="form-row" *ngIf="isConnectionTypeIp">
+                <div class="col-8">
+                  <app-input-text dis [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+                </div>
+                <div class="col-4">
+                  <app-input-numeric i18n-label [label]="'Port'" [form]="form" [property]="portProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                    [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-12">
+                  <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
+                    name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" (selectionChanged)="communicationTypeChanged($event)" >
+                  </app-input-radio>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-6">
+                  <app-input-switch [form]="form" [property]="isHlsProperty" i18n-label label="Use high-level security">
+                  </app-input-switch>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab [title]="tabTitleJobs">
+          <ng-template kendoTabContent>
+            <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
+
+            <div class="form-row" *ngIf="isTemplateSelected">
+              <div class="col-12 p-0">
+                <div>
+                  <app-jobs-select [height]="'530px'"></app-jobs-select>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab [title]="tabTitleCommunication">
+          <ng-template kendoTabContent>
+            <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
+            <ng-template [ngTemplateOutlet]="noCommunicationTypeSelected"></ng-template>
+
+              <div *ngIf="isTemplateSelected && communicationTypeSelected" class="pt-3">
+                <div class="form-row" *ngIf="isHdlcSelected">
+                  <div class="col-6">
+                    <app-input-switch [form]="form" [property]="isShortNameProperty" i18n-label label="Shortname">
+                    </app-input-switch>
+                  </div>
+                </div>
+
+                <div>
+                  <label class="label-primary" i18n>Low-level security</label>
+                </div>
+                <div class="border px-2">
+                  <div class="form-row" *ngIf="isWrapperSelected">
+                    <div class="col-6">
+                      <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperLlsClientProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                      [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                    </div>
+                    <div class="col-6">
+                      <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperLlsServerProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                      [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                    </div>
+                  </div>
+                  <div *ngIf="isHdlcSelected">
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="llsClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="llsServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="llsClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="llsServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-12">
+                      <app-input-text [form]="form" [property]="passwordProperty" i18n-label label="Password" inputType="password"></app-input-text>
+                    </div>
+                  </div>
+                </div>
+                <div class="pt-3">
+                  <label class="label-primary" i18n>High-level security</label>
+                </div>
+                <div class="border px-2">
+                  <div class="border-bottom mb-1 pt-1">
+                    <label i18n>Public address</label>
+                  </div>
+                  <div *ngIf="isWrapperSelected">
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperPublicClientProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperPublicServerProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isHdlcSelected">
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="publicClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="publicServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="publicClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="publicServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="border-bottom mb-1">
+                    <label i18n>HLS address</label>
+                  </div>
+                  <div *ngIf="isWrapperSelected">
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperHlsClientProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperHlsServerProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngIf="isHdlcSelected">
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="hlsClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="hlsServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="hlsClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                      <div class="col-6">
+                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="hlsServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-row pt-3">
+                  <div class="col-6">
+                    <app-input-switch [form]="form" [property]="isGatewayProperty" i18n-label label="Gateway">
+                    </app-input-switch>
+                  </div>
+                </div>
+
+                <div class="border px-2" *ngIf="isWrapperSelected">
+                  <app-input-numeric i18n-label [label]="'Physical address'" [form]="form" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                </div>
+              </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab [title]="tabTitleAdvanced">
+          <ng-template kendoTabContent>
+            <ng-template [ngTemplateOutlet]="noTemplateSelected"></ng-template>
+            <div *ngIf="isTemplateSelected">
+              <div class="form-row pt-2">
+                <div class="col-6">
+                  <app-input-switch [form]="form" [property]="advancedStartWithReleaseProperty" i18n-label label="Start with release">
+                  </app-input-switch>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-8">
+                  <app-input-switch [form]="form" [property]="advancedLdnAsSystitleProperty" i18n-label label="Use Logical Device Name (LDN) as Systitle">
+                  </app-input-switch>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-6">
+                  <app-select-input i18n-label label="Authentication type" [form]="form" [property]="authenticationTypeProperty" [selectOptions]="authenticationTypes"
+                    [disabled]="false">
+                  </app-select-input>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <!-- <kendo-tabstrip-tab [title]="tabTitleCustomProperties">
+          <ng-template kendoTabContent>
+            Custom properties
+          </ng-template>
+        </kendo-tabstrip-tab> -->
+      </kendo-tabstrip>
+    </ng-container>
+  </div>
+
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
+      <div dropdown class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="add()" i18n>Add</button>
+        <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+        </button> -->
+        <!-- <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+
+<ng-template #noTemplateSelected >
+  <div class="card text-center border-0 mt-5" *ngIf="!isTemplateSelected">
+    <div class="card-header border-0 bg-transparent">
+      <i class="far fa-exclamation-triangle display-2 text-light font-weight-bold"></i>
+    </div>
+    <div class="card-body pt-0">
+      <div class="display-4 font-weight-bold pb-2" i18n>Template is not selected</div>
+      <div class="text-secondary" i18n>To display the form, select the template</div>
+      <div class="mt-3 mb-5 mx-5 px-5">
+        <app-select-input [form]="form" [property]="templateProperty" [selectOptions]="templates"
+          [disabled]="false" (selectedValueChanged)="templateChanged($event)">
+        </app-select-input>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #noCommunicationTypeSelected >
+  <div class="card text-center border-0 mt-5" *ngIf="!communicationTypeSelected && isTemplateSelected">
+    <div class="card-header border-0 bg-transparent">
+      <i class="far fa-exclamation-triangle display-2 text-light font-weight-bold"></i>
+    </div>
+    <div class="card-body pt-0">
+      <div class="display-4 font-weight-bold pb-2" i18n>Communication type is not selected</div>
+      <div class="text-secondary" i18n>Select a communication type on the Basic tab</div>
+    </div>
+  </div>
+</ng-template>
+

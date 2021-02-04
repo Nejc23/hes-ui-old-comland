@@ -1,3 +1,4 @@
+import { AddMuFormComponent } from './../../common/components/add-mu-form/add-mu-form.component';
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
@@ -36,6 +37,8 @@ import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridL
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -147,7 +150,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private plcActionsService: MeterUnitsPlcActionsService,
     private sidebarToggleService: SidebarToggleService,
     private settingsStoreService: SettingsStoreService,
-    private settingsStoreEmitterService: SettingsStoreEmitterService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private jobsSelectGridService: JobsSelectGridService,
+    private modalService: ModalService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -274,6 +279,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   get actionMUDelete() {
+    return ActionEnumerator.MUDelete;
+  }
+
+  get actionMUAdd() {
     return ActionEnumerator.MUDelete;
   }
 
@@ -733,6 +742,16 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
 
     this.plcActionsService.onDelete(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  onAdd() {
+    this.jobsSelectGridService.clearSessionSettingsSelectedRows();
+    const modalRef = this.modalService.open(AddMuFormComponent);
+    modalRef.result
+      .then((result) => {
+        this.refreshGrid();
+      })
+      .catch(() => {});
   }
 
   // popup

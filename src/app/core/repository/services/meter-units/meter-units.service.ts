@@ -1,3 +1,5 @@
+import { muCreate } from './../../consts/meter-units.const';
+import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
 import { MeterUnitDetailsForm } from './../../../../features/meter-units/details/interfaces/meter-unit-form.interface';
@@ -31,6 +33,7 @@ import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.
 import { capitalize } from 'lodash';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -146,6 +149,68 @@ export class MeterUnitsService {
 
   updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
     return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
+  }
+
+  createMuForm(payload: MuForm): Observable<string> {
+    const muRequest: MuCreateRequest = {
+      name: payload.name,
+      serial: payload.serialNumber,
+      manufacturer: payload.manufacturer?.id,
+      templateId: payload.template?.id,
+      communicationType: payload.communicationType,
+      protocol: 2, // DLMS
+      medium: 1, // ELECTRICITY
+      jobIds: payload.jobIds,
+      ip: payload.ip,
+      port: payload.port,
+      isHls: payload.isHls,
+      isGateWay: payload.isGateway,
+      isShortName: payload.isShortName,
+      advancedInformation: {
+        authenticationType: payload.authenticationType?.id,
+        ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
+        startWithRelease: payload.advancedInformation?.startWithRelease
+      }
+    };
+
+    if (payload.wrapperInformation) {
+      muRequest.wrapperInformation = {
+        llsClient: payload.wrapperInformation.llsClient,
+        llsServer: payload.wrapperInformation.llsServer,
+        password: payload.wrapperInformation.password,
+        publicClient: payload.wrapperInformation.publicClient,
+        publicServer: payload.wrapperInformation.publicServer,
+        hlsClient: payload.wrapperInformation.hlsClient,
+        hlsServer: payload.wrapperInformation.hlsServer,
+        physicalAddress: payload.wrapperInformation.physicalAddress
+      };
+    }
+    if (payload.hdlcInformation) {
+      muRequest.hdlcInformation = {
+        llsClientLow: payload.hdlcInformation.llsClientLow,
+        llsClientHigh: payload.hdlcInformation.llsClientLow,
+        llsServerLow: payload.hdlcInformation.llsServerLow,
+        llsServerHigh: payload.hdlcInformation.llsServerHigh,
+        password: payload.hdlcInformation.password,
+        publicClientLow: payload.hdlcInformation.publicClientLow,
+        publicClientHigh: payload.hdlcInformation.publicClientHigh,
+        publicServerLow: payload.hdlcInformation.publicServerLow,
+        publicServerHigh: payload.hdlcInformation.publicServerHigh,
+        hlsClientLow: payload.hdlcInformation.hlsClientLow,
+        hlsClientHigh: payload.hdlcInformation.hlsClientHigh,
+        hlsServerLow: payload.hdlcInformation.hlsServerLow,
+        hlsServerHigh: payload.hdlcInformation.hlsServerHigh
+      };
+    }
+    return this.createMu(muRequest);
+  }
+
+  createMu(payload: MuCreateRequest): Observable<string> {
+    return this.repository.makeRequest(this.createMuRequest(payload));
+  }
+
+  createMuRequest(payload: MuCreateRequest): HttpRequest<any> {
+    return new HttpRequest('POST', `${muCreate}`, payload as any);
   }
 
   getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {

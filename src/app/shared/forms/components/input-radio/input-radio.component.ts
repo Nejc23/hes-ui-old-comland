@@ -18,6 +18,7 @@ export class InputRadioComponent implements OnInit {
   @Input() hideLabelSmall = false;
 
   @Output() refresh: EventEmitter<RadioOption> = new EventEmitter();
+  @Output() selectionChanged: EventEmitter<RadioOption> = new EventEmitter();
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -64,5 +65,9 @@ export class InputRadioComponent implements OnInit {
     } else {
       return '';
     }
+  }
+
+  doSelectionChanged(value: RadioOption) {
+    this.selectionChanged.emit(value);
   }
 }
