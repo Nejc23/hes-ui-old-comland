@@ -157,7 +157,7 @@ export class MeterUnitsService {
       serial: payload.serialNumber,
       manufacturer: payload.manufacturer?.id,
       templateId: payload.template?.id,
-      communicationType: payload.communicationType?.id,
+      communicationType: payload.communicationType,
       protocol: 2, // DLMS
       medium: 1, // ELECTRICITY
       jobIds: payload.jobIds,

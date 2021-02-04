@@ -40,8 +40,8 @@ export class AddMuFormComponent implements OnInit {
   connectionTypes: Codelist<number>[] = [{ id: 1, value: $localize`IP` }];
 
   communicationTypes: RadioOption[] = [
-    { value: '1' as string, label: $localize`Wrapper` },
-    { value: '2' as string, label: $localize`HDLC` }
+    { value: 1 as number, label: $localize`Wrapper` },
+    { value: 2 as number, label: $localize`HDLC` }
   ];
 
   communicationTypeSelected: RadioOption = null;
@@ -50,16 +50,18 @@ export class AddMuFormComponent implements OnInit {
     { id: 0, value: $localize`None` },
     { id: 1, value: $localize`Low` },
     { id: 2, value: $localize`High` },
-    { id: 3, value: $localize`High with Generic` }
+    { id: 5, value: $localize`High with Generic` }
   ];
 
-  public isConnectionTypeIp = false;
-  public isTemplateSelected = false;
+  private defaultAuthenticationType = this.authenticationTypes[1];
+
+  isConnectionTypeIp = false;
+  isTemplateSelected = false;
 
   isWrapperSelected = false;
   isHdlcSelected = false;
 
-  public templateDefaultValues: GetDefaultInformationResponse;
+  templateDefaultValues: GetDefaultInformationResponse;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -232,66 +234,55 @@ export class AddMuFormComponent implements OnInit {
   }
 
   createForm(): FormGroup {
-    return this.formBuilder.group(
-      {
-        [this.nameProperty]: ['', Validators.required],
-        [this.serialNumberProperty]: ['', Validators.required],
-        [this.manufacturerProperty]: [null, Validators.required],
-        [this.templateProperty]: [null, Validators.required],
-        [this.connectionTypeProperty]: [null, Validators.required],
-        [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-        [this.portProperty]: [null],
-        [this.communicationTypeProperty]: [null, Validators.required],
-        [this.isHlsProperty]: [false],
+    return this.formBuilder.group({
+      [this.nameProperty]: ['', Validators.required],
+      [this.serialNumberProperty]: ['', Validators.required],
+      [this.manufacturerProperty]: [null, Validators.required],
+      [this.templateProperty]: [null, Validators.required],
+      [this.connectionTypeProperty]: [null, Validators.required],
+      [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
+      [this.portProperty]: [null],
+      [this.communicationTypeProperty]: [null, Validators.required],
+      [this.isHlsProperty]: [false],
 
-        // wrapper
-        [this.wrapperLlsClientProperty]: [null, Validators.required],
-        [this.wrapperLlsServerProperty]: [null, Validators.required],
-        // [this.wrapperPasswordProperty]: [null, Validators.required],
+      // wrapper
+      [this.wrapperLlsClientProperty]: [null, Validators.required],
+      [this.wrapperLlsServerProperty]: [null, Validators.required],
+      // [this.wrapperPasswordProperty]: [null, Validators.required],
 
-        [this.wrapperPublicClientProperty]: [null, Validators.required],
-        [this.wrapperPublicServerProperty]: [null, Validators.required],
+      [this.wrapperPublicClientProperty]: [null, Validators.required],
+      [this.wrapperPublicServerProperty]: [null, Validators.required],
 
-        [this.wrapperHlsClientProperty]: [null, Validators.required],
-        [this.wrapperHlsServerProperty]: [null, Validators.required],
+      [this.wrapperHlsClientProperty]: [null, Validators.required],
+      [this.wrapperHlsServerProperty]: [null, Validators.required],
 
-        [this.isGatewayProperty]: [false],
-        [this.wrapperPhysicalAddressProperty]: [null, Validators.required],
+      [this.isGatewayProperty]: [false],
+      [this.wrapperPhysicalAddressProperty]: [null, Validators.required],
 
-        // hdlc
-        [this.llsClientLowProperty]: [null, Validators.required],
-        [this.llsServerLowProperty]: [null, Validators.required],
-        [this.llsClientHighProperty]: [null, Validators.required],
-        [this.llsServerHighProperty]: [null, Validators.required],
-        [this.passwordProperty]: [null, Validators.required],
-        [this.publicClientLowProperty]: [null, Validators.required],
-        [this.publicServerLowProperty]: [null, Validators.required],
-        [this.publicClientHighProperty]: [null, Validators.required],
-        [this.publicServerHighProperty]: [null, Validators.required],
-        [this.hlsClientLowProperty]: [null, Validators.required],
-        [this.hlsServerLowProperty]: [null, Validators.required],
-        [this.hlsClientHighProperty]: [null, Validators.required],
-        [this.hlsServerHighProperty]: [null, Validators.required],
-        [this.isShortNameProperty]: [false],
+      // hdlc
+      [this.llsClientLowProperty]: [null, Validators.required],
+      [this.llsServerLowProperty]: [null, Validators.required],
+      [this.llsClientHighProperty]: [null, Validators.required],
+      [this.llsServerHighProperty]: [null, Validators.required],
+      [this.passwordProperty]: [null, Validators.required],
+      [this.publicClientLowProperty]: [null, Validators.required],
+      [this.publicServerLowProperty]: [null, Validators.required],
+      [this.publicClientHighProperty]: [null, Validators.required],
+      [this.publicServerHighProperty]: [null, Validators.required],
+      [this.hlsClientLowProperty]: [null, Validators.required],
+      [this.hlsServerLowProperty]: [null, Validators.required],
+      [this.hlsClientHighProperty]: [null, Validators.required],
+      [this.hlsServerHighProperty]: [null, Validators.required],
+      [this.isShortNameProperty]: [false],
 
-        // advanced
-        [this.advancedStartWithReleaseProperty]: [false],
-        [this.advancedLdnAsSystitleProperty]: [false],
-        [this.authenticationTypeProperty]: [this.authenticationTypes[0], Validators.required]
-
-        // [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-        // [this.typeProperty]: [null, Validators.required],
-        // [this.userNameProperty]: [null, Validators.required],
-        // [this.passwordProperty]: [null],
-        // [this.confirmPasswordProperty]: [null],
-        // [this.vendorProperty]: [null, Validators.required],
-        // [this.tagsProperty]: [null]
-      }
-      // { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
-    );
+      // advanced
+      [this.advancedStartWithReleaseProperty]: [false],
+      [this.advancedLdnAsSystitleProperty]: [false],
+      [this.authenticationTypeProperty]: [this.defaultAuthenticationType, Validators.required]
+    });
   }
 
-  public onConnectionTypeChanged(value: Codelist<number>) {
+  onConnectionTypeChanged(value: Codelist<number>) {
     this.isConnectionTypeIp = value && value.id === 1 ? true : false;
     this.setConnectionTypeControls();
   }
@@ -355,7 +346,7 @@ export class AddMuFormComponent implements OnInit {
       if (advancedInformation.authenticationType) {
         const formField = this.form.get(this.authenticationTypeProperty);
         const authenticationType = this.authenticationTypes.find((at) => at.id === advancedInformation.authenticationType);
-        if (formField.value === this.authenticationTypes[0] && authenticationType) {
+        if (formField.value === this.defaultAuthenticationType && authenticationType) {
           formField.setValue(authenticationType);
         }
       }
@@ -455,7 +446,11 @@ export class AddMuFormComponent implements OnInit {
           this.modal.close();
         },
         (errResult) => {
-          // this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+          if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
+            for (const error of errResult.error) {
+              this.toast.errorToast(error);
+            }
+          }
           this.selectTabWithErrors();
         } // error
       );

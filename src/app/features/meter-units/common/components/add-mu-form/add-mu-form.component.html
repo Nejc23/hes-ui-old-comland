@@ -221,7 +221,8 @@
                 </div>
 
                 <div class="border px-2" *ngIf="isWrapperSelected">
-                  <app-input-text [form]="form" [property]="wrapperPhysicalAddressProperty" i18n-label label="Physical address"></app-input-text>
+                  <app-input-numeric i18n-label [label]="'Physical address'" [form]="form" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                 </div>
               </div>
           </ng-template>

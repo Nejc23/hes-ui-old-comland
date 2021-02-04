@@ -11,7 +11,7 @@ export interface MuForm {
   connectionType: Codelist<number>;
   ip: string;
   port: number;
-  communicationType: Codelist<number>;
+  communicationType: number;
   isHls: boolean;
   isGateway: boolean;
   jobIds: string[];
