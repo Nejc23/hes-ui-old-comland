@@ -21,6 +21,7 @@ export class JobsSelectComponent implements OnInit {
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
   // tslint:disable-next-line: no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
+  @Input() height = '378px';
 
   form: FormGroup;
   searchTextEmpty = true;

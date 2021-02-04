@@ -42,7 +42,6 @@ export class JobsCodelistInterceptor {
   }
 
   static canInterceptJobsDiscoveryJobs(request: HttpRequest<any>): boolean {
-    console.log('canInterceptJobsDiscoveryJobs', request);
     return new RegExp(`${schedulerJobs}\\?type=1&type=3`).test(request.url);
   }
 

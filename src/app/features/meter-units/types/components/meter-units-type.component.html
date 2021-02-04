@@ -28,6 +28,10 @@
         (toggleWildcards)="toggleWildcards($event)"
         >
 
+        <div *ngIf="!selectedAtLeastOneRowOnGrid" class="pr-3">
+          <button  class="btn btn-primary mr-1" appHideIfActionUnauthorized [action]="actionMUAdd" [functionality]="formFunctionality" i18n href="javascript:void(0)" (click)="onAdd()">Add</button>
+        </div>
+
         <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
           <button  class="btn btn-primary mr-1" appHideIfActionUnauthorized [action]="actionMUDelete" [functionality]="formFunctionality" i18n href="javascript:void(0)" (click)="onDelete()">Delete</button>
           <div dropdown class="btn-group">

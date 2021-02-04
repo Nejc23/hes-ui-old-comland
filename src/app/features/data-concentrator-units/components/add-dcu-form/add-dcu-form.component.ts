@@ -140,7 +140,6 @@ export class AddDcuFormComponent implements OnInit {
 
   save(addNew: boolean) {
     const dcuFormData = this.fillData();
-    console.log('dcuFormData on save', dcuFormData);
     const request = this.dcuService.createDcu(dcuFormData);
 
     const successMessage = $localize`Data Concentration Unit was added successfully`;
