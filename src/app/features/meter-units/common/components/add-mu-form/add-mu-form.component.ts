@@ -50,7 +50,7 @@ export class AddMuFormComponent implements OnInit {
     { id: 0, value: $localize`None` },
     { id: 1, value: $localize`Low` },
     { id: 2, value: $localize`High` },
-    { id: 5, value: $localize`High with Generic` }
+    { id: 5, value: $localize`High with GMAC` }
   ];
 
   private defaultAuthenticationType = this.authenticationTypes[1];
