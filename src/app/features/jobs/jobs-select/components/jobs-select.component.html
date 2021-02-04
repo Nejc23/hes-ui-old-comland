@@ -10,7 +10,7 @@
     [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
 </div>
 
-<ag-grid-angular class="ag-theme-epoint scrollable" style="width: 100%; height: 378px;" #agGrid
+<ag-grid-angular class="ag-theme-epoint scrollable" style="width: 100%;" [ngStyle]="{'height': height}" #agGrid
   [rowData]="rowData"
   [columnDefs]="columnDefs"
   [modules]="modules"

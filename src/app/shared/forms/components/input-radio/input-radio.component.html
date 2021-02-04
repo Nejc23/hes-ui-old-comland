@@ -6,12 +6,13 @@
     </label>
   </div>
 
-  <div [ngClass]="{'row': inline || box}">
+  <div [ngClass]="{'form-row': inline || box}">
     <div
-      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col mx-3 border py-1 text-center': box, 'border-secondary': box && isSelected(option)}" *ngFor="let option of options">
+      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col border py-2 text-center col-box-check': box, 'border-secondary': box && isSelected(option)}"
+       *ngFor="let option of options">
       <div class="d-flex" [ngbTooltip]="getTooltip(option)" placement="bottom" [openDelay]="500" triggers="hover">
         <input type="radio" id="{{option.uid}}" [name]="property" [formControlName]="property"
-          value="{{option.value}}" [attr.name]="property"kendoRadioButton>
+          value="{{option.value}}" [attr.name]="property" kendoRadioButton (click)="doSelectionChanged(option)">
         <label for="{{option.uid}}" class="control-label ml-2 d-block text-truncate">
           {{option.label}} </label>
       </div>
