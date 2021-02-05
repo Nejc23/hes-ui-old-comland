@@ -1,3 +1,4 @@
+import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
@@ -47,6 +48,19 @@ export class MeterUnitInterceptor {
       new HttpResponse({
         status: 204,
         body: null
+      })
+    );
+  }
+
+  static canInterceptCreateMuPost(request: HttpRequest<any>): boolean {
+    return new RegExp(muCreate).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptCreateMuPost(request: HttpRequest<any>): Observable<HttpEvent<string>> {
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: 'd18b2e3-f0e0-48fd-a0df-b30513f17556'
       })
     );
   }

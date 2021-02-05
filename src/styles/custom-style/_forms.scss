@@ -57,3 +57,23 @@ input.form-control[type=checkbox] {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.col-box-check {
+  margin-left:5px;
+  margin-right:5px;
+}
+
+label {
+  &.label-primary {
+    color: $primary;
+    font-weight: 600;
+  }
+}
+
+.k-numerictextbox.ng-dirty.ng-invalid {
+  border:none;
+}
+
+.k-combobox.k-header.ng-dirty.ng-invalid {
+  border:none;
+}
