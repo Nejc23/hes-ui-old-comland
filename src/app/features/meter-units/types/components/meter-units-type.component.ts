@@ -1,3 +1,4 @@
+import { AddMuFormComponent } from './../../common/components/add-mu-form/add-mu-form.component';
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
@@ -32,10 +33,12 @@ import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interf
 import { capitalize } from 'lodash';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestDeleteDevice, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -147,7 +150,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private plcActionsService: MeterUnitsPlcActionsService,
     private sidebarToggleService: SidebarToggleService,
     private settingsStoreService: SettingsStoreService,
-    private settingsStoreEmitterService: SettingsStoreEmitterService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private jobsSelectGridService: JobsSelectGridService,
+    private modalService: ModalService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -211,6 +216,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.eventService.eventEmitterDevicesDeleted.subscribe({
+      next: () => {
+        this.deselectAll();
+        if (this.gridApi) {
+          this.gridApi.purgeServerSideCache([]);
+        }
+      }
+    });
+
     // subscribe to changes of columns visibility from other components
     this.subscription = gridColumnShowHideService.listOfColumnsVisibilityChanged$.subscribe((listOfVisibleColumns) => {
       gridColumnShowHideService.refreshGridWithColumnsVisibility(this.gridColumnApi, listOfVisibleColumns);
@@ -262,6 +276,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
   get actionMUClearAlarms() {
     return ActionEnumerator.MUClearAlarms;
+  }
+
+  get actionMUDelete() {
+    return ActionEnumerator.MUDelete;
+  }
+
+  get actionMUAdd() {
+    return ActionEnumerator.MUDelete;
   }
 
   // set form title by selected meter unit type
@@ -714,12 +736,24 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // delete button click
   // TODO missing BE api !!
   onDelete(selectedGuid: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.bulkOperation(
-      MeterUnitsTypeEnum.delete,
-      params,
-      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
     );
+
+    this.plcActionsService.onDelete(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  onAdd() {
+    this.jobsSelectGridService.clearSessionSettingsSelectedRows();
+    const modalRef = this.modalService.open(AddMuFormComponent);
+    modalRef.result
+      .then((result) => {
+        this.refreshGrid();
+      })
+      .catch(() => {});
   }
 
   // popup

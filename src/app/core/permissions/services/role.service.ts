@@ -148,7 +148,9 @@ export class RoleService {
             ActionEnumerator.MUCiiActivate,
             ActionEnumerator.MUCiiDeactivate,
             ActionEnumerator.MUSetDisplaySettings,
-            ActionEnumerator.MUClearAlarms
+            ActionEnumerator.MUClearAlarms,
+            ActionEnumerator.MUDelete,
+            ActionEnumerator.MUAdd
           ]
         },
         {

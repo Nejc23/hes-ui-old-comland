@@ -1,5 +1,6 @@
 import { GridCellProtocolComponent } from './../../types/components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from './../../types/components/grid-custom-components/grid-cell-medium.component';
+import { AddMuFormComponent } from './../components/add-mu-form/add-mu-form.component';
 import { RegistersPieChartComponent } from './../../registers/components/chart/registers-pie-chart.component';
 import { GridCellDateComponent } from './../../registers/components/grid/grid-custom-components/grid-cell-date.component';
 import { PipesModule } from './../../../../shared/pipes/pipes.module';
@@ -73,7 +74,8 @@ import { RegistersColumnChartComponent } from '../../registers/components/chart/
     GridCellDetailLinkComponent,
     MeterUnitDetailsComponent,
     GridCellProtocolComponent,
-    GridCellMediumComponent
+    GridCellMediumComponent,
+    AddMuFormComponent
   ],
   imports: [
     SharedModule,

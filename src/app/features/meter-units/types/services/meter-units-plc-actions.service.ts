@@ -1,10 +1,11 @@
+import { Router } from '@angular/router';
 import { PlcMeterSetLimiterService } from './../../common/services/plc-meter-set-limiter.service';
 import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams, IActionRequestDeleteDevice } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -29,12 +30,14 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { jobType } from 'src/app/features/jobs/enums/job-type.enum';
+import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
   messageActionInProgress = $localize`Action in progress!`;
+  messageActionDeleteSuccess = $localize`Delete successful!`;
   messageServerError = $localize`Server error!`;
 
   constructor(
@@ -42,7 +45,9 @@ export class MeterUnitsPlcActionsService {
     private toast: ToastNotificationService,
     private service: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private codelistService: CodelistRepositoryService
+    private codelistService: CodelistRepositoryService,
+    private router: Router,
+    private eventService: MeterUnitsTypeGridEventEmitterService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
@@ -270,8 +275,49 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  // delete button click ali se rabi ?????????
-  onDelete() {
+  // // delete button click ali se rabi ?????????
+  onDelete(params: IActionRequestParams, selectedRowsCount: number, navigateToGrid = false) {
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    component.btnConfirmText = $localize`Confirm`;
+    let response: Observable<any> = new Observable();
+
+    const paramsDeleteDevice = params as IActionRequestDeleteDevice;
+    paramsDeleteDevice.includedIds = params.deviceIds;
+    paramsDeleteDevice.deviceIds = null;
+
+    paramsDeleteDevice.excludedIds = params.excludeIds;
+    paramsDeleteDevice.excludeIds = null;
+
+    response = this.service.deleteDevice(paramsDeleteDevice);
+    const operationName = $localize`Delete devices`;
+
+    const operation = MeterUnitsTypeEnum.delete;
+    component.modalTitle = $localize`${operationName} (${selectedRowsCount} selected)`;
+    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        response.subscribe(
+          (value) => {
+            this.toast.successToast(this.messageActionDeleteSuccess);
+            if (navigateToGrid) {
+              this.router.navigate(['/meterUnits']);
+            } else {
+              this.eventService.devicesDeleted();
+            }
+          },
+          (e) => {
+            this.toast.errorToast(this.messageServerError);
+          }
+        );
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+
     /*  let selectedText = 'all';
     const object: GridBulkActionRequestParams = {
       id: [],
@@ -350,7 +396,7 @@ export class MeterUnitsPlcActionsService {
   // deviceIdsParam = [];
   // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
   // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
-  bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number) {
+  bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = $localize`Confirm`;

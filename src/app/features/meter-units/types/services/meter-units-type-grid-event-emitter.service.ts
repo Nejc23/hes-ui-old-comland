@@ -8,12 +8,14 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 export class MeterUnitsTypeGridEventEmitterService {
   public eventEmitterSelectDeselectAll: EventEmitter<boolean>;
   public eventEmitterLayoutChange: EventEmitter<MeterUnitsLayout>;
+  public eventEmitterDevicesDeleted: EventEmitter<void>;
 
   private isSelectedAll = new BehaviorSubject(false);
 
   constructor() {
     this.eventEmitterSelectDeselectAll = new EventEmitter<boolean>();
     this.eventEmitterLayoutChange = new EventEmitter<MeterUnitsLayout>();
+    this.eventEmitterDevicesDeleted = new EventEmitter<void>();
     this.isSelectedAll = new BehaviorSubject<boolean>(false);
   }
 
@@ -25,6 +27,10 @@ export class MeterUnitsTypeGridEventEmitterService {
   // for selecting new grid layout and filter
   public layoutChange(value: MeterUnitsLayout) {
     this.eventEmitterLayoutChange.emit(value);
+  }
+
+  public devicesDeleted() {
+    this.eventEmitterDevicesDeleted.emit();
   }
 
   public getIsSelectedAll(): Observable<boolean> {
