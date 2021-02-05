@@ -1,10 +1,12 @@
 import { meterUnits } from './../../consts/meter-units.const';
 import {
   IActionRequestAddTemplate,
+  IActionRequestDeleteDevice,
   IActionRequestRelays,
   IActionRequestRelaysMode,
   IActionRequestSetDisplaySettings,
   IActionResponseAddTemplate,
+  IActionResponseDeleteDevice,
   IActionResponseRelays,
   IActionResponseRelaysMode,
   IActionResponseSetDisplaySettings
@@ -296,11 +298,11 @@ export class MyGridLinkService {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearAlarms}`, param);
   }
 
-  deleteDevice(param: IActionRequestParams): Observable<IActionResponseParams> {
+  deleteDevice(param: IActionRequestDeleteDevice): Observable<IActionResponseDeleteDevice> {
     return this.repository.makeRequest(this.deleteDeviceRequest(param));
   }
 
-  deleteDeviceRequest(param: IActionRequestParams): HttpRequest<any> {
+  deleteDeviceRequest(param: IActionRequestDeleteDevice): HttpRequest<any> {
     return new HttpRequest('PATCH', `${meterUnits}`, param);
   }
 }

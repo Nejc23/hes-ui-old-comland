@@ -1,3 +1,7 @@
+import {
+  IActionRequestDeleteDevice,
+  IActionResponseDeleteDevice
+} from './../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
@@ -25,7 +29,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().inject(MyGridLinkService);
   });
 
-  const requestBody: IActionRequestParams = {
+  const requestBody: IActionRequestDeleteDevice = {
     pageSize: 1,
     pageNumber: 1,
     sort: [
@@ -40,10 +44,10 @@ describe('Pact consumer test', () => {
       propNames: [],
       useWildcards: false
     },
-    deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
+    includedIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
-  const responseBody: IActionResponseParams = {
+  const responseBody: IActionResponseDeleteDevice = {
     pageSize: 1,
     pageNumber: 1,
     sort: [
@@ -59,7 +63,7 @@ describe('Pact consumer test', () => {
       useWildcards: false
     },
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
-    deviceIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
+    includedIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842']
   };
 
   describe('myGrid.link delete device with device ids', () => {
@@ -94,7 +98,7 @@ describe('Pact consumer test', () => {
 
     it('should make request for delete device with ids in request - myGrid.Link', (done) => {
       service.deleteDevice(requestBody).subscribe(
-        (res: IActionResponseParams) => {
+        (res: IActionResponseDeleteDevice) => {
           expect(res).toEqual(responseBody);
           done();
         },
