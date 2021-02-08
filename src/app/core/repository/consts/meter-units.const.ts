@@ -31,5 +31,8 @@ export const onDemandClearAlarms = '/on-demand/clear-alarms';
 export const basePathDcOperations = '/api/concentrator-management';
 export const triggerSetDisplaySettings = `${basePathDcOperations}/trigger-set-display-settings`;
 
+export const meterUnitsDeviceMedium = `${basePath}/enums/device-medium`;
+export const meterUnitsProtocolType = `${basePath}/enums/protocol-type`;
+
 export const basePathMuConcentratorInventory = '/api/concentrator-inventory';
 export const muCreate = `${basePathMuConcentratorInventory}/meter`;

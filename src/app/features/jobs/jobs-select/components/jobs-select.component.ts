@@ -23,6 +23,8 @@ export class JobsSelectComponent implements OnInit {
   @Output() onSelectionChanged = new EventEmitter<boolean>();
   @Input() height = '378px';
 
+  @Input() jobTypes: number[];
+
   form: FormGroup;
   searchTextEmpty = true;
   loadGrid = true;
@@ -44,29 +46,7 @@ export class JobsSelectComponent implements OnInit {
 
   public pageSize = 10;
 
-  requestModel: GridRequestParams = {
-    requestId: null,
-    startRow: 0,
-    endRow: 0,
-    sortModel: [
-      {
-        colId: 'name',
-        sort: 'asc'
-      }
-    ],
-    searchModel: [],
-    filterModel: {
-      statuses: [{ id: 0, value: '' }],
-      readStatus: {
-        operation: { id: '', value: '' },
-        value1: 0,
-        value2: null
-      },
-      types: [1, 3, 4],
-      tags: [{ id: 0, value: '' }],
-      showOptionFilter: null
-    }
-  };
+  requestModel: GridRequestParams;
 
   constructor(
     private jobsSelectGridService: JobsSelectGridService,
@@ -132,6 +112,30 @@ export class JobsSelectComponent implements OnInit {
     };
     this.icons = {
       filter: ''
+    };
+
+    this.requestModel = {
+      requestId: null,
+      startRow: 0,
+      endRow: 0,
+      sortModel: [
+        {
+          colId: 'name',
+          sort: 'asc'
+        }
+      ],
+      searchModel: [],
+      filterModel: {
+        statuses: [{ id: 0, value: '' }],
+        readStatus: {
+          operation: { id: '', value: '' },
+          value1: 0,
+          value2: null
+        },
+        types: this.jobTypes,
+        tags: [{ id: 0, value: '' }],
+        showOptionFilter: null
+      }
     };
 
     const dataFromCookie = this.jobsSelectGridService.getCookieData(); // saved columns settings

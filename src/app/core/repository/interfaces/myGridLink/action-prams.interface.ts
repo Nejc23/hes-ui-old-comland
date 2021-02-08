@@ -64,6 +64,11 @@ export interface IActionRequestFwUpgradeData extends IActionRequestParams {
   overrideFillLastBlock: boolean;
 }
 
+export interface IActionRequestDeleteDevice extends IActionRequestParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+}
+
 // for FW upgrade response
 export interface IActionResponseFwUpgradeData extends IActionResponseParams {
   fileId: string;
@@ -119,4 +124,9 @@ export interface IActionRequestEnableHls extends IActionRequestParams {
 
 export interface IActionResponseEnableHls extends IActionResponseParams {
   clientId: string;
+}
+
+export interface IActionResponseDeleteDevice extends IActionResponseParams {
+  includedIds?: string[];
+  excludedIds?: string[];
 }

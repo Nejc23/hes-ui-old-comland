@@ -19,6 +19,7 @@ import { TemplatingService } from 'src/app/core/repository/services/templating/t
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { TouchListener } from '@ag-grid-community/core';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   templateUrl: './add-mu-form.component.html'
@@ -38,11 +39,13 @@ export class AddMuFormComponent implements OnInit {
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
   connectionTypes: Codelist<number>[] = [{ id: 1, value: $localize`IP` }];
+  defaultConnectionType = this.connectionTypes[0];
 
   communicationTypes: RadioOption[] = [
-    { value: 1 as number, label: $localize`Wrapper` },
-    { value: 2 as number, label: $localize`HDLC` }
+    { value: '1' as string, label: $localize`Wrapper` },
+    { value: '2' as string, label: $localize`HDLC` }
   ];
+  defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
 
   communicationTypeSelected: RadioOption = null;
 
@@ -50,16 +53,17 @@ export class AddMuFormComponent implements OnInit {
     { id: 0, value: $localize`None` },
     { id: 1, value: $localize`Low` },
     { id: 2, value: $localize`High` },
-    { id: 5, value: $localize`High with Generic` }
+    { id: 5, value: $localize`High with GMAC` }
   ];
 
   private defaultAuthenticationType = this.authenticationTypes[1];
 
-  isConnectionTypeIp = false;
+  isConnectionTypeIp = this.defaultConnectionType?.id === 1;
   isTemplateSelected = false;
 
   isWrapperSelected = false;
   isHdlcSelected = false;
+  isGatewayEnabled = false;
 
   templateDefaultValues: GetDefaultInformationResponse;
 
@@ -72,13 +76,15 @@ export class AddMuFormComponent implements OnInit {
     private templatingService: TemplatingService,
     private muService: MeterUnitsService,
     private jobsSelectGridService: JobsSelectGridService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private codelistServiceMu: CodelistMeterUnitsRepositoryService
   ) {
     this.form = this.createForm();
+    this.communicationTypeChanged(this.defaultCommunicationType);
   }
 
   ngOnInit() {
-    this.codelistService.dcuVendorCodelist().subscribe((manufacturers) => {
+    this.codelistServiceMu.meterUnitVendorCodelist(null).subscribe((manufacturers) => {
       this.manufacturers = manufacturers;
     });
 
@@ -239,11 +245,11 @@ export class AddMuFormComponent implements OnInit {
       [this.serialNumberProperty]: ['', Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
       [this.templateProperty]: [null, Validators.required],
-      [this.connectionTypeProperty]: [null, Validators.required],
+      [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
       [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
       [this.portProperty]: [null],
-      [this.communicationTypeProperty]: [null, Validators.required],
       [this.isHlsProperty]: [false],
+      [this.communicationTypeProperty]: [this.defaultCommunicationType.value, Validators.required],
 
       // wrapper
       [this.wrapperLlsClientProperty]: [null, Validators.required],
@@ -381,16 +387,6 @@ export class AddMuFormComponent implements OnInit {
   }
 
   setWrapperControls() {
-    this.form.get(this.wrapperLlsClientProperty).disable();
-    this.form.get(this.wrapperLlsServerProperty).disable();
-    // this.form.get(this.wrapperPasswordProperty).disable();
-    this.form.get(this.wrapperHlsClientProperty).disable();
-    this.form.get(this.wrapperHlsServerProperty).disable();
-    this.form.get(this.wrapperPublicClientProperty).disable();
-    this.form.get(this.wrapperPublicServerProperty).disable();
-    // this.form.get(this.isGatewayProperty).disable();
-    this.form.get(this.wrapperPhysicalAddressProperty).disable();
-
     if (this.isWrapperSelected) {
       this.form.get(this.wrapperLlsClientProperty).enable();
       this.form.get(this.wrapperLlsServerProperty).enable();
@@ -400,24 +396,24 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.wrapperPublicClientProperty).enable();
       this.form.get(this.wrapperPublicServerProperty).enable();
       this.form.get(this.isGatewayProperty).enable();
-      this.form.get(this.wrapperPhysicalAddressProperty).enable();
+
+      if (this.isGatewayEnabled) {
+        this.form.get(this.wrapperPhysicalAddressProperty).enable();
+      }
+    } else {
+      this.form.get(this.wrapperLlsClientProperty).disable();
+      this.form.get(this.wrapperLlsServerProperty).disable();
+      // this.form.get(this.wrapperPasswordProperty).disable();
+      this.form.get(this.wrapperHlsClientProperty).disable();
+      this.form.get(this.wrapperHlsServerProperty).disable();
+      this.form.get(this.wrapperPublicClientProperty).disable();
+      this.form.get(this.wrapperPublicServerProperty).disable();
+      this.form.get(this.isGatewayProperty).disable();
+      this.form.get(this.wrapperPhysicalAddressProperty).disable();
     }
   }
 
   setHdlcControls() {
-    this.form.get(this.llsClientLowProperty).disable();
-    this.form.get(this.llsServerLowProperty).disable();
-    this.form.get(this.llsClientHighProperty).disable();
-    this.form.get(this.llsServerHighProperty).disable();
-    this.form.get(this.publicClientLowProperty).disable();
-    this.form.get(this.publicServerLowProperty).disable();
-    this.form.get(this.publicClientHighProperty).disable();
-    this.form.get(this.publicServerHighProperty).disable();
-    this.form.get(this.hlsClientLowProperty).disable();
-    this.form.get(this.hlsServerLowProperty).disable();
-    this.form.get(this.hlsClientHighProperty).disable();
-    this.form.get(this.hlsServerHighProperty).disable();
-
     if (this.isHdlcSelected) {
       this.form.get(this.llsClientLowProperty).enable();
       this.form.get(this.llsServerLowProperty).enable();
@@ -431,6 +427,19 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.hlsServerLowProperty).enable();
       this.form.get(this.hlsClientHighProperty).enable();
       this.form.get(this.hlsServerHighProperty).enable();
+    } else {
+      this.form.get(this.llsClientLowProperty).disable();
+      this.form.get(this.llsServerLowProperty).disable();
+      this.form.get(this.llsClientHighProperty).disable();
+      this.form.get(this.llsServerHighProperty).disable();
+      this.form.get(this.publicClientLowProperty).disable();
+      this.form.get(this.publicServerLowProperty).disable();
+      this.form.get(this.publicClientHighProperty).disable();
+      this.form.get(this.publicServerHighProperty).disable();
+      this.form.get(this.hlsClientLowProperty).disable();
+      this.form.get(this.hlsServerLowProperty).disable();
+      this.form.get(this.hlsClientHighProperty).disable();
+      this.form.get(this.hlsServerHighProperty).disable();
     }
   }
 
@@ -523,7 +532,7 @@ export class AddMuFormComponent implements OnInit {
       connectionType: this.form.get(this.connectionTypeProperty).value,
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
-      communicationType: this.form.get(this.communicationTypeProperty).value,
+      communicationType: +this.form.get(this.communicationTypeProperty).value,
       isHls: this.form.get(this.isHlsProperty).value,
       isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
@@ -538,6 +547,11 @@ export class AddMuFormComponent implements OnInit {
       wrapperInformation,
       hdlcInformation
     };
+  }
+
+  gatewayChanged(value: any) {
+    this.isGatewayEnabled = value;
+    this.setFormControls();
   }
 
   cancel() {

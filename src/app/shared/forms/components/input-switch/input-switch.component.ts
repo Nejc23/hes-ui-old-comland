@@ -44,10 +44,12 @@ export class InputSwitchComponent implements OnInit {
   }
 
   labelClick() {
-    if (this.valueTmp === this.form.get(this.property).value) {
-      this.form.get(this.property).setValue(!this.form.get(this.property).value);
-    }
+    // if (this.valueTmp === this.form.get(this.property).value) {
+    //   this.form.get(this.property).setValue(!this.form.get(this.property).value);
+    // }
+    this.form.get(this.property).setValue(!this.form.get(this.property).value);
     this.valueTmp = this.form.get(this.property).value;
+    this.valueChanged.emit(this.valueTmp);
   }
 
   onValueChanged(value: any) {

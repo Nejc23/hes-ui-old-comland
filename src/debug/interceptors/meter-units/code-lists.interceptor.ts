@@ -1,3 +1,4 @@
+import { meterUnitsDeviceMedium } from './../../../app/core/repository/consts/meter-units.const';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
@@ -10,7 +11,8 @@ import {
   meterUnitTags,
   meterUnitFirmwares,
   meterUnitDisconnectorStates,
-  meterUnitCiiStates
+  meterUnitCiiStates,
+  meterUnitsProtocolType
 } from 'src/app/core/repository/consts/meter-units.const';
 
 @Injectable()
@@ -219,5 +221,73 @@ export class MeterUnitCodelistInterceptor {
 
   static canInterceptMeterUnitCiiState(request: HttpRequest<any>): boolean {
     return new RegExp(`${meterUnitCiiStates}/[0-9]+$`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static canInterceptMeterUnitProtocolType(request: HttpRequest<any>): boolean {
+    return new RegExp(`${meterUnitsProtocolType}$`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptMeterUnitProtocolType(): Observable<HttpEvent<any>> {
+    const data: Codelist<number>[] = [
+      {
+        id: 0,
+        value: 'UNKNOWN'
+      },
+      {
+        id: 1,
+        value: 'DC450G3'
+      },
+      {
+        id: 2,
+        value: 'DLMS'
+      },
+      {
+        id: 3,
+        value: 'AC750'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptMeterUnitDeviceMedium(request: HttpRequest<any>): boolean {
+    return new RegExp(`${meterUnitsDeviceMedium}$`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptMeterUnitDeviceMedium(): Observable<HttpEvent<any>> {
+    const data: Codelist<number>[] = [
+      {
+        id: 0,
+        value: 'UNKNOWN'
+      },
+      {
+        id: 1,
+        value: 'ELECTRICITY'
+      },
+      {
+        id: 2,
+        value: 'WATER'
+      },
+      {
+        id: 3,
+        value: 'GAS'
+      },
+      {
+        id: 4,
+        value: 'HEAT'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
   }
 }

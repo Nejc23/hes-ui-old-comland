@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams, IActionRequestDeleteDevice } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -283,7 +283,14 @@ export class MeterUnitsPlcActionsService {
     component.btnConfirmText = $localize`Confirm`;
     let response: Observable<any> = new Observable();
 
-    response = this.service.deleteDevice(params);
+    const paramsDeleteDevice = params as IActionRequestDeleteDevice;
+    paramsDeleteDevice.includedIds = params.deviceIds;
+    paramsDeleteDevice.deviceIds = null;
+
+    paramsDeleteDevice.excludedIds = params.excludeIds;
+    paramsDeleteDevice.excludeIds = null;
+
+    response = this.service.deleteDevice(paramsDeleteDevice);
     const operationName = $localize`Delete devices`;
 
     const operation = MeterUnitsTypeEnum.delete;

@@ -2118,8 +2118,8 @@
         <source>High</source>
         <target state="new">High</target>
       </trans-unit><trans-unit id="1368144707200781495" datatype="html">
-        <source>High with Generic</source>
-        <target state="new">High with Generic</target>
+        <source>High with GMAC</source>
+        <target state="new">High with GMAC</target>
       </trans-unit><trans-unit id="8976722461735080572" datatype="html">
         <source>Meter unit has been added successfully</source>
         <target state="new">Meter unit has been added successfully</target>

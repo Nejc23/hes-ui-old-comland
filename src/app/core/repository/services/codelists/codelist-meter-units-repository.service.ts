@@ -1,3 +1,4 @@
+import { meterUnitsDeviceMedium, meterUnitsProtocolType } from './../../consts/meter-units.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -68,5 +69,19 @@ export class CodelistMeterUnitsRepositoryService {
   }
   meterUnitVendorCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitVendors}/${this.id}`);
+  }
+
+  meterUnitDeviceMediumCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitDeviceMediumCodelistRequest());
+  }
+  meterUnitDeviceMediumCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitsDeviceMedium}`);
+  }
+
+  meterUnitProtocolTypeCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitProtocolTypeCodelistRequest());
+  }
+  meterUnitProtocolTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitsProtocolType}`);
   }
 }

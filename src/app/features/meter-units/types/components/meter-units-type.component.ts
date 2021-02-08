@@ -33,7 +33,7 @@ import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interf
 import { capitalize } from 'lodash';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestDeleteDevice, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
@@ -493,6 +493,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.requestModel.filterModel.showWithoutTemplate = filterDCU.showMeterUnitsWithoutTemplateFilter;
       this.requestModel.filterModel.readyForActivation = filterDCU.showOnlyImageReadyForActivationFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
+      this.requestModel.filterModel.protocol = filterDCU.protocolFilter;
+      this.requestModel.filterModel.medium = filterDCU.mediumFilter;
     } else {
       this.setFilterInfo();
     }
