@@ -61,6 +61,7 @@ input.form-control[type=checkbox] {
 .col-box-check {
   margin-left:5px;
   margin-right:5px;
+  cursor:pointer;
 }
 
 label {
@@ -76,4 +77,17 @@ label {
 
 .k-combobox.k-header.ng-dirty.ng-invalid {
   border:none;
+}
+
+.form-check-selected {
+  background-color: $secondary;
+
+  label {
+    color: $white !important;
+  }
+  .k-radio {
+    border-color: $white;
+    color: $primary;
+    background-color: $white;
+  }
 }

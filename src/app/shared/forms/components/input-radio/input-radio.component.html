@@ -8,11 +8,11 @@
 
   <div [ngClass]="{'form-row': inline || box}">
     <div
-      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col border py-2 text-center col-box-check': box, 'border-secondary': box && isSelected(option)}"
-       *ngFor="let option of options">
+      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col border py-2 text-center col-box-check': box, 'border-secondary form-check-selected': box && isSelected(option)}"
+       *ngFor="let option of options" (click)="doSelectionChange(option)">
       <div class="d-flex" [ngbTooltip]="getTooltip(option)" placement="bottom" [openDelay]="500" triggers="hover">
         <input type="radio" id="{{option.uid}}" [name]="property" [formControlName]="property"
-          value="{{option.value}}" [attr.name]="property" kendoRadioButton (click)="doSelectionChanged(option)">
+          value="{{option.value}}" [attr.name]="property" kendoRadioButton>
         <label for="{{option.uid}}" class="control-label ml-2 d-block text-truncate">
           {{option.label}} </label>
       </div>

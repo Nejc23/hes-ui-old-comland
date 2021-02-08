@@ -67,7 +67,8 @@ export class InputRadioComponent implements OnInit {
     }
   }
 
-  doSelectionChanged(value: RadioOption) {
+  doSelectionChange(value: RadioOption) {
+    this.formControl.setValue(value.value);
     this.selectionChanged.emit(value);
   }
 }

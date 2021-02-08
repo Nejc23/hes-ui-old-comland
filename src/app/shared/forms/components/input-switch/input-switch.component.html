@@ -1,16 +1,16 @@
 <div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
 
-
-    <label *ngIf="label" [attr.for]="controlId" class="control-label d-flex" (click)="labelClick()" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="label">
-      <kendo-switch formControlName="switch" [name]="property" [id]="controlId" [formControlName]="property"
-        (valueChange)="onValueChanged($event)"></kendo-switch>
-      <div class="text-truncate pl-2" i18n>
-        {{label}}
-      </div>
-    </label>
+  <div *ngIf="label" class="d-flex">
+    <kendo-switch formControlName="switch" [name]="property" [id]="controlId" [formControlName]="property"
+      (valueChange)="onValueChanged($event)" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="label"></kendo-switch>
+    <div class="text-truncate pl-2" style="cursor:pointer;" i18n (click)="labelClick()" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="label">
+      {{label}}
+    </div>
+  </div>
 
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>
   </div>
+
 </div>

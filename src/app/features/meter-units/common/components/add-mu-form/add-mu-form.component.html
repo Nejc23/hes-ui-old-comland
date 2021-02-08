@@ -52,6 +52,8 @@
                   <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
                     name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" (selectionChanged)="communicationTypeChanged($event)" >
                   </app-input-radio>
+                  <!-- <app-input-radio class="label-left" [form]="form" [property]="communicationTypeProperty" [options]="communicationTypes"></app-input-radio> -->
+
                 </div>
               </div>
 
@@ -62,6 +64,8 @@
                 </div>
               </div>
             </div>
+
+
           </ng-template>
         </kendo-tabstrip-tab>
         <kendo-tabstrip-tab [title]="tabTitleJobs">
@@ -71,7 +75,7 @@
             <div class="form-row" *ngIf="isTemplateSelected">
               <div class="col-12 p-0">
                 <div>
-                  <app-jobs-select [height]="'530px'"></app-jobs-select>
+                  <app-jobs-select [jobTypes]="[2]" [height]="'530px'"></app-jobs-select>
                 </div>
               </div>
             </div>
@@ -81,7 +85,6 @@
         <kendo-tabstrip-tab [title]="tabTitleCommunication">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
-            <ng-template [ngTemplateOutlet]="noCommunicationTypeSelected"></ng-template>
 
               <div *ngIf="isTemplateSelected && communicationTypeSelected" class="pt-3">
                 <div class="form-row" *ngIf="isHdlcSelected">
@@ -213,16 +216,17 @@
                   </div>
                 </div>
 
-                <div class="form-row pt-3">
-                  <div class="col-6">
-                    <app-input-switch [form]="form" [property]="isGatewayProperty" i18n-label label="Gateway">
-                    </app-input-switch>
+                <div *ngIf="isWrapperSelected">
+                  <div class="form-row pt-3">
+                    <div class="col-6">
+                      <app-input-switch [form]="form" [property]="isGatewayProperty" i18n-label label="Gateway" (valueChanged)="gatewayChanged($event)">
+                      </app-input-switch>
+                    </div>
                   </div>
-                </div>
-
-                <div class="border px-2" *ngIf="isWrapperSelected">
-                  <app-input-numeric i18n-label [label]="'Physical address'" [form]="form" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                  <div class="border px-2" *ngIf="isGatewayEnabled">
+                    <app-input-numeric i18n-label [label]="'Physical address'" [form]="form" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                          [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                  </div>
                 </div>
               </div>
           </ng-template>
@@ -264,7 +268,7 @@
 
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
+      <button type="button" class="btn btn-lnk" (click)="cancel()" i18n>Cancel</button>
       <div dropdown class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="add()" i18n>Add</button>
         <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
@@ -291,18 +295,6 @@
           [disabled]="false" (selectedValueChanged)="templateChanged($event)">
         </app-select-input>
       </div>
-    </div>
-  </div>
-</ng-template>
-
-<ng-template #noCommunicationTypeSelected >
-  <div class="card text-center border-0 mt-5" *ngIf="!communicationTypeSelected && isTemplateSelected">
-    <div class="card-header border-0 bg-transparent">
-      <i class="far fa-exclamation-triangle display-2 text-light font-weight-bold"></i>
-    </div>
-    <div class="card-body pt-0">
-      <div class="display-4 font-weight-bold pb-2" i18n>Communication type is not selected</div>
-      <div class="text-secondary" i18n>Select a communication type on the Basic tab</div>
     </div>
   </div>
 </ng-template>
