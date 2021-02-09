@@ -10,7 +10,8 @@
             <span i18n>Please select from the list below for which Security client you would like to activate HLS mode.</span>
           </div>
           <div class="col-12 pt-2">
-            <app-select-input label="Security clients" [form]="form" [property]="securityClientProperty" [selectOptions]="securityClients$" i18n-label>
+            <app-select-input label="Security client" [form]="form" [property]="securityClientProperty"
+              [selectOptions]="securityClients" i18n-label (selectedValueChanged)="securityClientChanged($event)">
             </app-select-input>
           </div>
 
@@ -21,10 +22,10 @@
             </div>
           </div>
         </div>
-        <div class="form-row pt-2" *ngIf="showSecondConfirm">
+        <div class="form-row pt-2 text-center" *ngIf="showSecondConfirm">
           <div class="col-12">
             <div class="card-body">
-              <div class="display-4 font-weight-bold pb-1" i18n>Are you sure you would like to perform HLS activation?</div>
+              <div class="display-4 font-weight-bold pb-1" i18n>Are you sure you would like to perform HLS activation for the selected client ({{ selectedSecurityClient.value }})?</div>
               <div class="text-secondary" i18n>This action may result in damages, rendering meter inoperable!</div>
             </div>
           </div>

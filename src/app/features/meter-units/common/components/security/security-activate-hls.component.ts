@@ -8,6 +8,7 @@ import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridL
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   templateUrl: './security-activate-hls.component.html'
@@ -22,7 +23,8 @@ export class SecurityActivateHlsComponent implements OnInit {
   actionRequest: IActionRequestParams;
 
   form: FormGroup;
-  securityClients$;
+  securityClients: Codelist<string>[];
+  selectedSecurityClient: Codelist<string>;
 
   showSecondConfirm = false;
 
@@ -39,7 +41,9 @@ export class SecurityActivateHlsComponent implements OnInit {
 
   ngOnInit() {
     this.gridLinkService.getSecurityClients().subscribe((values) => {
-      console.log('securityClients', values);
+      this.securityClients = values.map((sc) => {
+        return { id: sc.registerDefinitionId, value: sc.registerName };
+      }); // console.log('securityClients', values);
     });
   }
 
@@ -64,12 +68,16 @@ export class SecurityActivateHlsComponent implements OnInit {
       sort: this.actionRequest.sort,
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
-      deviceIds: this.actionRequest.deviceIds,
+      includedIds: this.actionRequest.deviceIds,
       excludeIds: this.actionRequest.excludeIds,
-      clientId: this.form.get(this.securityClientProperty).value.value
+      securitySetup: this.selectedSecurityClient.value
     };
 
     return formData;
+  }
+
+  securityClientChanged(value: Codelist<string>) {
+    this.selectedSecurityClient = value;
   }
 
   onConfirm() {

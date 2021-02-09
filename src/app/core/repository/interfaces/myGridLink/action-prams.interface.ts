@@ -119,11 +119,15 @@ export interface IActionResponseSetDisplaySettings extends IActionResponseParams
 }
 
 export interface IActionRequestEnableHls extends IActionRequestParams {
-  clientId: string;
+  includedIds?: string[];
+  excludedIds?: string[];
+  securitySetup: string;
 }
 
 export interface IActionResponseEnableHls extends IActionResponseParams {
-  clientId: string;
+  includedIds?: string[];
+  excludedIds?: string[];
+  securitySetup: string;
 }
 
 export interface IActionResponseDeleteDevice extends IActionResponseParams {

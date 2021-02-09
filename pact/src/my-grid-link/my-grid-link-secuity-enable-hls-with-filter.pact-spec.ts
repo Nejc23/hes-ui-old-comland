@@ -61,7 +61,7 @@ describe('Pact consumer test', () => {
       propNames: [],
       useWildcards: false
     },
-    clientId: 'afbc44b8-9717-4a7d-aaaa-6c4fede4d811'
+    securitySetup: 'Management client'
   };
 
   const responseBody: IActionResponseEnableHls = {
@@ -97,7 +97,7 @@ describe('Pact consumer test', () => {
       propNames: [],
       useWildcards: false
     },
-    clientId: 'afbc44b8-9717-4a7d-aaaa-6c4fede4d811'
+    securitySetup: 'Management client'
   };
 
   describe('myGrid.link trigger security enable hls with filter request', () => {

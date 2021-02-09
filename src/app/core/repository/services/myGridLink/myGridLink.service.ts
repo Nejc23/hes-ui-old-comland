@@ -71,6 +71,7 @@ import {
   IActionResponseTOUData
 } from '../../interfaces/myGridLink/action-prams.interface';
 import { onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
+import { SecurityClient } from '../../interfaces/templating/security-client.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -303,7 +304,7 @@ export class MyGridLinkService {
   }
 
   // security
-  getSecurityClients(): Observable<any[]> {
+  getSecurityClients(): Observable<SecurityClient[]> {
     return this.repository.makeRequest(this.getSecurityClientsRequest());
   }
 
@@ -316,7 +317,7 @@ export class MyGridLinkService {
   }
 
   postSecurityEnableHlsRequest(param: IActionRequestEnableHls): HttpRequest<any> {
-    return new HttpRequest('POST', `${enumMyGridLink.managment}${securityEnableHls}`, param);
+    return new HttpRequest('POST', `${securityEnableHls}`, param);
   }
 
   deleteDevice(param: IActionRequestDeleteDevice): Observable<IActionResponseDeleteDevice> {
