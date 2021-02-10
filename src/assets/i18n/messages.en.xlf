@@ -2022,8 +2022,8 @@
         <source>Activate HLS (<x id="INTERPOLATION"/> selected)</source>
         <target state="final">Activate HLS (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit><trans-unit id="3167297928612445887" datatype="html">
-        <source>Are you sure you would like to perform HLS activation for the selected client (Admin client)?</source>
-        <target state="final">Are you sure you would like to perform HLS activation for the selected client (Admin client)?</target>
+        <source>Are you sure you would like to perform HLS activation for the management client?</source>
+        <target state="final">Are you sure you would like to perform HLS activation for the management client?</target>
       </trans-unit><trans-unit id="6790462154621359091" datatype="html">
         <source>This action may result in damages, rendering meter inoperable!</source>
         <target state="final">This action may result in damages, rendering meter inoperable!</target>
