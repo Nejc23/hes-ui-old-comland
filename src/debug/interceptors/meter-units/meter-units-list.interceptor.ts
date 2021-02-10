@@ -29,6 +29,8 @@ export class MeterUnitsListInterceptor {
       skip = (params.pageNumber - 1) * params.pageSize; // params.startRow;
       take = skip + params.pageSize; // params.endRow;
 
+      sortedUsers = searched;
+
       if (params.sort) {
         params.sort.forEach((element) => {
           sortColId = element.propName;
@@ -48,6 +50,7 @@ export class MeterUnitsListInterceptor {
       summary: '',
       groupCount: 0
     };
+
     return of(
       new HttpResponse({
         status: 200,

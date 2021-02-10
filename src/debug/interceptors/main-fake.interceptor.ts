@@ -259,6 +259,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitInterceptor.interceptCreateMuPost(request);
               }
 
+              if (MeterUnitsTypeSecurityInterceptor.canInterceptSecurityRekey(request)) {
+                return MeterUnitsTypeSecurityInterceptor.interceptSecurityRekey(request);
+              }
+
               // auto-templates
               if (AutoTemplatesListInterceptor.canInterceptAutoTemplatesList(request)) {
                 return AutoTemplatesListInterceptor.interceptAutoTemplatesList(request);
@@ -311,7 +315,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               // templating
               if (TemplatingInterceptor.canInterceptGetDefaultValues(request)) {
-                return TemplatingInterceptor.interceptGetGetDefaultValues(request);
+                return TemplatingInterceptor.interceptGetDefaultValues(request);
+              }
+
+              if (TemplatingInterceptor.canInterceptGetKeyTypes(request)) {
+                return TemplatingInterceptor.interceptGetKeyTypes(request);
               }
 
               // pass through any requests not handled above

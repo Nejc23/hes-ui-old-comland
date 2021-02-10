@@ -1,6 +1,6 @@
 import {
-  IActionRequestEnableHls,
-  IActionResponseEnableHls
+  IActionRequestSecurityRekey,
+  IActionResponseSecurityRekey
 } from './../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
@@ -29,24 +29,7 @@ describe('Pact consumer test', () => {
     service = getTestBed().inject(MyGridLinkService);
   });
 
-  const requestBody: IActionRequestEnableHls = {
-    filter: [
-      {
-        propName: 'Vendor',
-        propValue: '2',
-        filterOperation: 'Equal'
-      },
-      {
-        propName: 'Status',
-        propValue: '2',
-        filterOperation: 'Equal'
-      },
-      {
-        propName: 'Firmware',
-        propValue: '2',
-        filterOperation: 'Contains'
-      }
-    ],
+  const requestBody: IActionRequestSecurityRekey = {
     pageSize: 1,
     pageNumber: 1,
     sort: [
@@ -61,54 +44,39 @@ describe('Pact consumer test', () => {
       propNames: [],
       useWildcards: false
     },
-    securitySetup: 'Management client'
+    includedIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842'],
+    keyType: 'GUEK'
   };
 
-  const responseBody: IActionResponseEnableHls = {
+  const responseBody: IActionResponseSecurityRekey = {
+    pageSize: 1,
+    pageNumber: 1,
+    sort: [
+      {
+        index: 0,
+        propName: 'Firmware',
+        sortOrder: 'Ascending'
+      }
+    ],
+    textSearch: {
+      value: '',
+      propNames: [],
+      useWildcards: false
+    },
     requestId: 'cca9906e-929b-4104-ab54-f866df79b632',
-    filter: [
-      {
-        propName: 'Vendor',
-        propValue: '2',
-        filterOperation: 'Equal'
-      },
-      {
-        propName: 'Status',
-        propValue: '2',
-        filterOperation: 'Equal'
-      },
-      {
-        propName: 'Firmware',
-        propValue: '2',
-        filterOperation: 'Contains'
-      }
-    ],
-    pageSize: 1,
-    pageNumber: 1,
-    sort: [
-      {
-        index: 0,
-        propName: 'Firmware',
-        sortOrder: 'Ascending'
-      }
-    ],
-    textSearch: {
-      value: '',
-      propNames: [],
-      useWildcards: false
-    },
-    securitySetup: 'Management client'
+    includedIds: ['0A4A1AE4-3964-47D3-9E38-C017833FFE0C', 'B1EB39A3-94DA-421A-8E1E-E3F5254A8C8E', '15A607EA-DEB7-46E5-BD5D-F8A067AD2842'],
+    keyType: 'GUEK'
   };
 
-  describe('myGrid.link trigger security enable hls with filter request', () => {
+  describe('myGrid.link trigger security rekey with device ids', () => {
     beforeAll((done) => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_SECURITY_ENABLE_HLS_WITH_FILTER',
-          uponReceiving: 'a request for trigger security enable hls with filter in request - myGrid.Link',
+          state: 'A_REQUEST_MY_GRID_LINK_FOR_TRIGGER_SECURITY_REKEY_WITH_IDS',
+          uponReceiving: 'a request for trigger security rekey with ids in request - myGrid.Link',
           withRequest: {
-            method: service.postSecurityEnableHlsRequest(requestBody).method,
-            path: service.postSecurityEnableHlsRequest(requestBody).url,
+            method: service.postSecurityRekeyRequest(requestBody).method,
+            path: service.postSecurityRekeyRequest(requestBody).url,
             body: requestBody,
             headers: defaultRequestHeader
           },
@@ -130,9 +98,9 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for trigger security enable hls with filter in request - myGrid.Link', (done) => {
-      service.postSecurityEnableHls(requestBody).subscribe(
-        (res: IActionResponseEnableHls) => {
+    it('should make request for trigger security rekey with ids in request - myGrid.Link', (done) => {
+      service.postSecurityRekey(requestBody).subscribe(
+        (res: IActionResponseSecurityRekey) => {
           expect(res).toEqual(responseBody);
           done();
         },

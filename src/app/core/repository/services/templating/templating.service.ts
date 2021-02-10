@@ -1,3 +1,5 @@
+import { getTemplateKeyTypes } from './../../consts/templating.const';
+import { GetKeyTypesResponse } from './../../interfaces/templating/get-key-types-reponse.interface';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -28,5 +30,13 @@ export class TemplatingService {
 
   getDefaultValuesRequest(templateId: string): HttpRequest<any> {
     return new HttpRequest('GET', `${getTemplatingDefaultValues}/${templateId}`);
+  }
+
+  getKeyTypes(): Observable<GetKeyTypesResponse> {
+    return this.repository.makeRequest(this.getKeyTypesRequest());
+  }
+
+  getKeyTypesRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${getTemplateKeyTypes}`);
   }
 }

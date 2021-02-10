@@ -1,5 +1,6 @@
+import { GetKeyTypesResponse } from './../../../app/core/repository/interfaces/templating/get-key-types-reponse.interface';
 import { SecurityClient } from './../../../app/core/repository/interfaces/templating/security-client.interface';
-import { getTemplatingDefaultValues } from './../../../app/core/repository/consts/templating.const';
+import { getTemplatingDefaultValues, getTemplateKeyTypes } from './../../../app/core/repository/consts/templating.const';
 import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -18,7 +19,7 @@ export class TemplatingInterceptor {
     return new RegExp(getTemplatingDefaultValues + `/`).test(request.url) && request.method.endsWith('GET');
   }
 
-  static interceptGetGetDefaultValues(request: HttpRequest<any>): Observable<HttpEvent<GetDefaultInformationResponse>> {
+  static interceptGetDefaultValues(request: HttpRequest<any>): Observable<HttpEvent<GetDefaultInformationResponse>> {
     const body: GetDefaultInformationResponse = {
       advancedInformation: {
         advancedInformationId: '523d6ed9-d06e-4c63-9606-29e858a7caa3',
@@ -97,6 +98,23 @@ export class TemplatingInterceptor {
         registerType: 'MANAGEMENT_SECURITY_SETUP'
       }
     ];
+
+    return of(
+      new HttpResponse({
+        status: body ? 200 : 204,
+        body
+      })
+    );
+  }
+
+  static canInterceptGetKeyTypes(request: HttpRequest<any>): boolean {
+    return new RegExp(getTemplateKeyTypes).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptGetKeyTypes(request: HttpRequest<any>): Observable<HttpEvent<GetKeyTypesResponse>> {
+    const body: GetKeyTypesResponse = {
+      keyTypes: ['GUEK', 'GAK', 'GBEK']
+    };
 
     return of(
       new HttpResponse({

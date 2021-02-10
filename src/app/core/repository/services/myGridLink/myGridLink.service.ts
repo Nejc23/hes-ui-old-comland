@@ -11,7 +11,9 @@ import {
   IActionResponseDeleteDevice,
   IActionResponseRelays,
   IActionResponseRelaysMode,
-  IActionResponseSetDisplaySettings
+  IActionResponseSetDisplaySettings,
+  IActionRequestSecurityRekey,
+  IActionResponseSecurityRekey
 } from './../../interfaces/myGridLink/action-prams.interface';
 import {
   onDemandCiiState,
@@ -326,5 +328,13 @@ export class MyGridLinkService {
 
   deleteDeviceRequest(param: IActionRequestDeleteDevice): HttpRequest<any> {
     return new HttpRequest('PATCH', `${meterUnits}`, param);
+  }
+
+  postSecurityRekey(param: IActionRequestSecurityRekey): Observable<IActionResponseSecurityRekey> {
+    return this.repository.makeRequest(this.postSecurityRekeyRequest(param));
+  }
+
+  postSecurityRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
+    return new HttpRequest('POST', `${securityEnableHls}`, param);
   }
 }
