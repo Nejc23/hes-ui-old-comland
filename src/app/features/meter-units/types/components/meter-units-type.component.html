@@ -150,6 +150,15 @@
             </div>
           </div>
 
+          <div dropdown class="btn-group pl-2">
+            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="securityDropDown" data-toggle="dropdown"><span i18n>Security</span></button>
+            <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
+              <div>
+                <a (click)="onSecurityActivateHls()" class="dropdown-item custom-hover-display" href="javascript:void(0)"><span i18n>Activate HLS</span></a>
+              </div>
+            </div>
+          </div>
+
           <button *ngIf="false" [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-primary" [disabled]="true">
             <i class="far fa-tags"></i>
             <span i18n>Tags</span>

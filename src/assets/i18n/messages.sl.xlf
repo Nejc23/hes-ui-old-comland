@@ -920,6 +920,9 @@
       <trans-unit id="5350251507991013509" datatype="html">
         <source>Clear Alarms</source>
         <target>Clear Alarms</target>
+      </trans-unit><trans-unit id="1035536452424009821" datatype="html">
+        <source>Activate HLS</source>
+        <target state="new">Activate HLS</target>
       </trans-unit>
       <trans-unit id="4619541944202030137" datatype="html">
         <source>You have no Data Concentrator Units yet!</source>
@@ -1010,12 +1013,6 @@
       </trans-unit><trans-unit id="8688093763221300184" datatype="html">
         <source>To display the form, select the template</source>
         <target state="new">To display the form, select the template</target>
-      </trans-unit><trans-unit id="8010254639696213298" datatype="html">
-        <source>Communication type is not selected</source>
-        <target state="new">Communication type is not selected</target>
-      </trans-unit><trans-unit id="3893880817209216856" datatype="html">
-        <source>Select a communication type on the Basic tab</source>
-        <target state="new">Select a communication type on the Basic tab</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
         <source>Error saving Meter Unit!</source>
@@ -1847,6 +1844,9 @@
       <trans-unit id="8461842260159597706" datatype="html">
         <source>Show</source>
         <target>Prikaži</target>
+      </trans-unit><trans-unit id="8878700331247603166" datatype="html">
+        <source>Security</source>
+        <target state="new">Security</target>
       </trans-unit>
       <trans-unit id="3154923008995368575" datatype="html">
         <source>No records found. You may need to adjust your search or filter parameters.</source>
@@ -2015,6 +2015,18 @@
       <trans-unit id="1041031208206930198" datatype="html">
         <source>Meter Units set Limiter was successful</source>
         <target>Meter Units set Limiter was successful</target>
+      </trans-unit><trans-unit id="6701663255113930742" datatype="html">
+        <source>Error on postSecurityEnableHls</source>
+        <target state="new">Error on postSecurityEnableHls</target>
+      </trans-unit><trans-unit id="2857197357573932828" datatype="html">
+        <source>Activate HLS (<x id="INTERPOLATION"/> selected)</source>
+        <target state="new">Activate HLS (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit><trans-unit id="3167297928612445887" datatype="html">
+        <source>Are you sure you would like to perform HLS activation for the selected client (Admin client)?</source>
+        <target state="new">Are you sure you would like to perform HLS activation for the selected client (Admin client)?</target>
+      </trans-unit><trans-unit id="6790462154621359091" datatype="html">
+        <source>This action may result in damages, rendering meter inoperable!</source>
+        <target state="new">This action may result in damages, rendering meter inoperable!</target>
       </trans-unit>
       <trans-unit id="4057760610235468476" datatype="html">
         <source>At least one phase with name and treshold should be filled</source>
@@ -2023,6 +2035,12 @@
       <trans-unit id="3954602589132656946" datatype="html">
         <source>Clear alarms</source>
         <target>Izbris alarmov</target>
+      </trans-unit><trans-unit id="3783562484965706612" datatype="html">
+        <source>Protocol</source>
+        <target state="new">Protocol</target>
+      </trans-unit><trans-unit id="5982496808088686844" datatype="html">
+        <source>Medium</source>
+        <target state="new">Medium</target>
       </trans-unit>
       <trans-unit id="3575583935097083679" datatype="html">
         <source>Set Breaker mode (<x id="INTERPOLATION"/> selected)</source>
@@ -2117,7 +2135,7 @@
       </trans-unit><trans-unit id="8063651736083474594" datatype="html">
         <source>High</source>
         <target state="new">High</target>
-      </trans-unit><trans-unit id="1368144707200781495" datatype="html">
+      </trans-unit><trans-unit id="9222810869892170667" datatype="html">
         <source>High with GMAC</source>
         <target state="new">High with GMAC</target>
       </trans-unit><trans-unit id="8976722461735080572" datatype="html">

@@ -986,6 +986,21 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // }
 
+  // --> start Security action click (bulk or selected row)
+
+  onSecurityActivateHls(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+
+    this.plcActionsService.onSecurityActivateHls(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  // <-- end  Security action click (bulk or selected row)
+
   getSelectedCount(): number {
     if (this.checkSelectedAll()) {
       const excludedRowsLength = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows().length;

@@ -1,3 +1,4 @@
+import { SecurityClient } from './../../../app/core/repository/interfaces/templating/security-client.interface';
 import { getTemplatingDefaultValues } from './../../../app/core/repository/consts/templating.const';
 import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -62,6 +63,40 @@ export class TemplatingInterceptor {
         }
       }
     };
+
+    return of(
+      new HttpResponse({
+        status: body ? 200 : 204,
+        body
+      })
+    );
+  }
+
+  static canInterceptGetSecurityClients(request: HttpRequest<any>): boolean {
+    return new RegExp(getTemplatingDefaultValues + `/`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptGetSecurityClients(request: HttpRequest<any>): Observable<HttpEvent<SecurityClient[]>> {
+    const body: SecurityClient[] = [
+      {
+        deviceId: 'ec2c5457-6ebc-48a1-a6a7-07b44937fc69',
+        registerDefinitionId: '37d0f05a-9525-4076-9b2c-c5897385b180',
+        registerName: 'Enable HLS 1',
+        registerType: 'MANAGEMENT_SECURITY_SETUP'
+      },
+      {
+        deviceId: 'd8a7c035-35ed-49f2-879e-0917eb1f56fe',
+        registerDefinitionId: '37d0f05a-9525-4076-9b2c-c5897385b180',
+        registerName: 'Enable HLS 2',
+        registerType: 'MANAGEMENT_SECURITY_SETUP'
+      },
+      {
+        deviceId: 'fb8c097a-2088-4d1e-8107-130a89eee156',
+        registerDefinitionId: '37d0f05a-9525-4076-9b2c-c5897385b180',
+        registerName: 'Enable HLS 3',
+        registerType: 'MANAGEMENT_SECURITY_SETUP'
+      }
+    ];
 
     return of(
       new HttpResponse({

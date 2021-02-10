@@ -118,6 +118,16 @@ export interface IActionResponseSetDisplaySettings extends IActionResponseParams
   displayRegisters: string[];
 }
 
+export interface IActionRequestEnableHls extends IActionRequestParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+}
+
+export interface IActionResponseEnableHls extends IActionResponseParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+}
+
 export interface IActionResponseDeleteDevice extends IActionResponseParams {
   includedIds?: string[];
   excludedIds?: string[];

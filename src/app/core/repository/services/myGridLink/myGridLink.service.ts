@@ -1,11 +1,13 @@
 import { meterUnits } from './../../consts/meter-units.const';
 import {
   IActionRequestAddTemplate,
+  IActionRequestEnableHls,
   IActionRequestDeleteDevice,
   IActionRequestRelays,
   IActionRequestRelaysMode,
   IActionRequestSetDisplaySettings,
   IActionResponseAddTemplate,
+  IActionResponseEnableHls,
   IActionResponseDeleteDevice,
   IActionResponseRelays,
   IActionResponseRelaysMode,
@@ -20,7 +22,9 @@ import {
   onDemandRelaysDisconnect,
   onDemandRelaysConnect,
   linkDeviceTemplate,
-  upgrade
+  upgrade,
+  securitySetup,
+  securityEnableHls
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -67,6 +71,7 @@ import {
   IActionResponseTOUData
 } from '../../interfaces/myGridLink/action-prams.interface';
 import { onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
+import { SecurityClient } from '../../interfaces/templating/security-client.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -296,6 +301,23 @@ export class MyGridLinkService {
 
   clearAlarmsRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandClearAlarms}`, param);
+  }
+
+  // security
+  getSecurityClients(): Observable<SecurityClient[]> {
+    return this.repository.makeRequest(this.getSecurityClientsRequest());
+  }
+
+  getSecurityClientsRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${securitySetup}`);
+  }
+
+  postSecurityEnableHls(param: IActionRequestEnableHls): Observable<IActionResponseEnableHls> {
+    return this.repository.makeRequest(this.postSecurityEnableHlsRequest(param));
+  }
+
+  postSecurityEnableHlsRequest(param: IActionRequestEnableHls): HttpRequest<any> {
+    return new HttpRequest('POST', `${securityEnableHls}`, param);
   }
 
   deleteDevice(param: IActionRequestDeleteDevice): Observable<IActionResponseDeleteDevice> {

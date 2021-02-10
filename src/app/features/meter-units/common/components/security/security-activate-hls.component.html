@@ -1,0 +1,27 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Activate HLS ({{selectedRowsCount}} selected)</div>
+
+  <div modal-body>
+    <ng-container>
+      <div class="form-row pt-2 text-center">
+        <div class="col-12">
+          <div class="card-body">
+            <div class="display-4 font-weight-bold pb-1" i18n>Are you sure you would like to perform HLS activation for the selected client (Admin client)?</div>
+            <div class="text-secondary" i18n>This action may result in damages, rendering meter inoperable!</div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="onDismiss()"> <i class="far fa-times"></i>
+        <span i18n>Cancel</span></button>
+      <div class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
+          <span i18n>Confirm</span></button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
