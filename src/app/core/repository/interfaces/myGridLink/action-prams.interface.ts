@@ -121,13 +121,11 @@ export interface IActionResponseSetDisplaySettings extends IActionResponseParams
 export interface IActionRequestEnableHls extends IActionRequestParams {
   includedIds?: string[];
   excludedIds?: string[];
-  securitySetup: string;
 }
 
 export interface IActionResponseEnableHls extends IActionResponseParams {
   includedIds?: string[];
   excludedIds?: string[];
-  securitySetup: string;
 }
 
 export interface IActionResponseDeleteDevice extends IActionResponseParams {

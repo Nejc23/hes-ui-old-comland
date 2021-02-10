@@ -35,4 +35,4 @@ export const upgrade = '/upgrade';
 
 // security
 export const securitySetup = `${enumMyGridLink.templating}/security-setup`;
-export const securityEnableHls = `${enumMyGridLink.managment}/enable/hls`;
+export const securityEnableHls = `${enumMyGridLink.managment}/security/enable/hls`;

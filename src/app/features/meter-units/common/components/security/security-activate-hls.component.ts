@@ -22,12 +22,6 @@ export class SecurityActivateHlsComponent implements OnInit {
 
   actionRequest: IActionRequestParams;
 
-  form: FormGroup;
-  securityClients: Codelist<string>[];
-  selectedSecurityClient: Codelist<string>;
-
-  showSecondConfirm = false;
-
   constructor(
     private formBuilder: FormBuilder,
     private modal: NgbActiveModal,
@@ -35,17 +29,9 @@ export class SecurityActivateHlsComponent implements OnInit {
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
     private formUtils: FormsUtilsService
-  ) {
-    this.form = this.createForm();
-  }
+  ) {}
 
-  ngOnInit() {
-    this.gridLinkService.getSecurityClients().subscribe((values) => {
-      this.securityClients = values.map((sc) => {
-        return { id: sc.registerDefinitionId, value: sc.registerName };
-      }); // console.log('securityClients', values);
-    });
-  }
+  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({
@@ -69,33 +55,24 @@ export class SecurityActivateHlsComponent implements OnInit {
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
       includedIds: this.actionRequest.deviceIds,
-      excludeIds: this.actionRequest.excludeIds,
-      securitySetup: this.selectedSecurityClient.value
+      excludeIds: this.actionRequest.excludeIds
     };
 
     return formData;
   }
 
-  securityClientChanged(value: Codelist<string>) {
-    this.selectedSecurityClient = value;
-  }
-
   onConfirm() {
-    if (!this.showSecondConfirm) {
-      this.form.get(this.securityClientProperty).markAsDirty();
-      if (this.form.valid) {
-        this.showSecondConfirm = true;
+    const values = this.fillData();
+    const request = this.gridLinkService.postSecurityEnableHls(values);
+    const successMessage = $localize`Meter Units set Limiter was successful`;
+
+    this.gridLinkService.postSecurityEnableHls(values).subscribe(
+      (sucess) => {
+        this.toast.successToast(successMessage);
+      },
+      (error) => {
+        console.log($localize`Error on postSecurityEnableHls`, error);
       }
-    } else {
-      const values = this.fillData();
-      const request = this.gridLinkService.postSecurityEnableHls(values);
-      const successMessage = $localize`Meter Units set Limiter was successful`;
-      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-        (result) => {
-          this.modal.close();
-        },
-        () => {} // error
-      );
-    }
+    );
   }
 }
