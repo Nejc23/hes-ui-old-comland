@@ -12,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
+import { TemplatesService } from 'src/app/core/repository/services/templates/templates.service';
 
 @Component({
   templateUrl: './security-rekey.component.html'
@@ -38,13 +39,13 @@ export class SecurityRekeyComponent implements OnInit {
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
     private formUtils: FormsUtilsService,
-    private templatingService: TemplatingService
+    private templatesService: TemplatesService
   ) {
     this.form = this.createForm();
   }
 
   ngOnInit() {
-    this.templatingService.getKeyTypes().subscribe((value) => {
+    this.templatesService.getKeyTypes().subscribe((value) => {
       this.keyTypes = value.keyTypes.map((k) => {
         return { id: k, value: k };
       }); // console.log('securityClients', values);
@@ -65,7 +66,7 @@ export class SecurityRekeyComponent implements OnInit {
     this.modal.dismiss();
   }
 
-  fillData(): IActionRequestEnableHls {
+  fillData(): IActionRequestSecurityRekey {
     const formData: IActionRequestSecurityRekey = {
       pageSize: this.actionRequest.pageSize,
       pageNumber: this.actionRequest.pageNumber,
@@ -92,7 +93,7 @@ export class SecurityRekeyComponent implements OnInit {
       }
     } else {
       const values = this.fillData();
-      const request = this.gridLinkService.postSecurityEnableHls(values);
+      const request = this.gridLinkService.postSecurityRekey(values);
       const successMessage = $localize`Meter Units re-keying was successful`;
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         (result) => {

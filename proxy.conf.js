@@ -6,6 +6,7 @@ const PROXY_CONFIG = [
         "/api/time-of-use/",
         "/api/on-demand-data-processing",
         "/api/templating",
+        "/api/templates",
         "/api/file-storage",
         "/api/data-processing",
 

@@ -10,7 +10,7 @@
             <span i18n>Please select from the list below a key type you would like to re-key.</span>
           </div>
           <div class="col-12 pt-2">
-            <app-select-input label="Security client" [form]="form" [property]="keyTypeProperty"
+            <app-select-input label="Key type" [form]="form" [property]="keyTypeProperty"
               [selectOptions]="keyTypes" i18n-label (selectedValueChanged)="keyTypeChanged($event)">
             </app-select-input>
           </div>

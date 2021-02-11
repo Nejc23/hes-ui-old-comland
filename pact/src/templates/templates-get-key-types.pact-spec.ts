@@ -8,11 +8,12 @@ import { RegistersSelectList } from 'src/app/core/repository/interfaces/register
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
-import { GetKeyTypesResponse } from 'src/app/core/repository/interfaces/templating/get-key-types-reponse.interface';
+import { GetKeyTypesResponse } from 'src/app/core/repository/interfaces/templates/get-key-types-reponse.interface';
+import { TemplatesService } from 'src/app/core/repository/services/templates/templates.service';
 
 describe('Pact consumer test', () => {
   let provider;
-  let service: TemplatingService;
+  let service: TemplatesService;
 
   beforeAll((done) => {
     provider = setupPactProvider(done);
@@ -28,10 +29,10 @@ describe('Pact consumer test', () => {
 
   beforeAll(() => {
     pactSetAngular();
-    service = getTestBed().inject(TemplatingService);
+    service = getTestBed().inject(TemplatesService);
   });
 
-  describe('Template key types', () => {
+  describe('Templates key types', () => {
     const responseBody: GetKeyTypesResponse = {
       keyTypes: ['GUEK', 'GAK', 'GBEK']
     };
@@ -39,8 +40,8 @@ describe('Pact consumer test', () => {
     beforeAll((done) => {
       provider
         .addInteraction({
-          state: 'A_REQUEST_FOR_GETTIING_TEMPLATE_KEY_TYPES',
-          uponReceiving: 'a request for getting template key types',
+          state: 'A_REQUEST_FOR_GETTIING_TEMPLATES_KEY_TYPES',
+          uponReceiving: 'a request for getting templates key types',
           withRequest: {
             method: service.getKeyTypesRequest().method,
             path: service.getKeyTypesRequest().url,
@@ -64,7 +65,7 @@ describe('Pact consumer test', () => {
         );
     });
 
-    it('should make request for fetching template key types', (done) => {
+    it('should make request for fetching templates key types', (done) => {
       service.getKeyTypes().subscribe((res) => {
         expect(res).toEqual(responseBody);
         done();

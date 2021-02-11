@@ -26,7 +26,8 @@ import {
   linkDeviceTemplate,
   upgrade,
   securitySetup,
-  securityEnableHls
+  securityEnableHls,
+  securityRekey
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -335,6 +336,6 @@ export class MyGridLinkService {
   }
 
   postSecurityRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
-    return new HttpRequest('POST', `${securityEnableHls}`, param);
+    return new HttpRequest('POST', `${securityRekey}`, param);
   }
 }

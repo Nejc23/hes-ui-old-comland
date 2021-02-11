@@ -7,26 +7,20 @@ import { GetCommonRegisterGroupsRequest } from '../../interfaces/templating/get-
 import { IActionRequestGetCommonRegisterGroups } from '../../interfaces/myGridLink/action-prams.interface';
 import { ResponseCommonRegisterGroup } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import { GetDefaultInformationResponse } from '../../interfaces/templating/get-default-information.request.interface';
+import { GetKeyTypesResponse } from '../../interfaces/templates/get-key-types-reponse.interface';
+import { getTemplateKeyTypes } from '../../consts/templates.const';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TemplatingService {
+export class TemplatesService {
   constructor(private repository: RepositoryService) {}
 
-  getCommonRegisterGroups(request: IActionRequestGetCommonRegisterGroups): Observable<ResponseCommonRegisterGroup[]> {
-    return this.repository.makeRequest(this.getCommonRegisterGroupsRequest(request));
+  getKeyTypes(): Observable<GetKeyTypesResponse> {
+    return this.repository.makeRequest(this.getKeyTypesRequest());
   }
 
-  getCommonRegisterGroupsRequest(request: IActionRequestGetCommonRegisterGroups): HttpRequest<any> {
-    return new HttpRequest('POST', `${getCommonRegisterGroups}`, request);
-  }
-
-  getDefaultValues(templateId: string): Observable<GetDefaultInformationResponse> {
-    return this.repository.makeRequest(this.getDefaultValuesRequest(templateId));
-  }
-
-  getDefaultValuesRequest(templateId: string): HttpRequest<any> {
-    return new HttpRequest('GET', `${getTemplatingDefaultValues}/${templateId}`);
+  getKeyTypesRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${getTemplateKeyTypes}`);
   }
 }

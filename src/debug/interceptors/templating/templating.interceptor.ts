@@ -1,6 +1,4 @@
-import { GetKeyTypesResponse } from './../../../app/core/repository/interfaces/templating/get-key-types-reponse.interface';
 import { SecurityClient } from './../../../app/core/repository/interfaces/templating/security-client.interface';
-import { getTemplatingDefaultValues, getTemplateKeyTypes } from './../../../app/core/repository/consts/templating.const';
 import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -10,6 +8,7 @@ import * as _ from 'lodash';
 import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
 import { device, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
+import { getTemplatingDefaultValues } from 'src/app/core/repository/consts/templating.const';
 
 @Injectable()
 export class TemplatingInterceptor {
@@ -98,23 +97,6 @@ export class TemplatingInterceptor {
         registerType: 'MANAGEMENT_SECURITY_SETUP'
       }
     ];
-
-    return of(
-      new HttpResponse({
-        status: body ? 200 : 204,
-        body
-      })
-    );
-  }
-
-  static canInterceptGetKeyTypes(request: HttpRequest<any>): boolean {
-    return new RegExp(getTemplateKeyTypes).test(request.url) && request.method.endsWith('GET');
-  }
-
-  static interceptGetKeyTypes(request: HttpRequest<any>): Observable<HttpEvent<GetKeyTypesResponse>> {
-    const body: GetKeyTypesResponse = {
-      keyTypes: ['GUEK', 'GAK', 'GBEK']
-    };
 
     return of(
       new HttpResponse({

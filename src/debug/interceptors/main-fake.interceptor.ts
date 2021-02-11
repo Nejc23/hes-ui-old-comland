@@ -34,6 +34,7 @@ import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-m
 import { MeterUnitsSetDisplaySettingsInterceptor } from './meter-units/meter-units-set-display-settings.interceptor';
 import { MeterUnitsTypeSecurityInterceptor } from './meter-units/meter-units-security.interceptor';
 import { TemplatingInterceptor } from './templating/templating.interceptor';
+import { TemplatesInterceptor } from './templates/templates.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -318,8 +319,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return TemplatingInterceptor.interceptGetDefaultValues(request);
               }
 
-              if (TemplatingInterceptor.canInterceptGetKeyTypes(request)) {
-                return TemplatingInterceptor.interceptGetKeyTypes(request);
+              // templates
+              if (TemplatesInterceptor.canInterceptGetKeyTypes(request)) {
+                return TemplatesInterceptor.interceptGetKeyTypes(request);
               }
 
               // pass through any requests not handled above
