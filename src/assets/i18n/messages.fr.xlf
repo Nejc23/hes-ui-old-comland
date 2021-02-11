@@ -923,6 +923,9 @@
       </trans-unit><trans-unit id="1035536452424009821" datatype="html">
         <source>Activate HLS</source>
         <target state="new">Activate HLS</target>
+      </trans-unit><trans-unit id="4386083438607093987" datatype="html">
+        <source>Rekey</source>
+        <target state="new">Rekey</target>
       </trans-unit>
       <trans-unit id="4619541944202030137" datatype="html">
         <source>You have no Data Concentrator Units yet!</source>
@@ -1013,6 +1016,18 @@
       </trans-unit><trans-unit id="8688093763221300184" datatype="html">
         <source>To display the form, select the template</source>
         <target state="new">To display the form, select the template</target>
+      </trans-unit><trans-unit id="7651496470772766293" datatype="html">
+        <source>Meter Units re-keying was successful</source>
+        <target state="new">Meter Units re-keying was successful</target>
+      </trans-unit><trans-unit id="5417142221033067570" datatype="html">
+        <source>Re-key meter (<x id="INTERPOLATION"/> selected)</source>
+        <target state="new">Re-key meter (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit><trans-unit id="4671774673121980964" datatype="html">
+        <source>Please select from the list below a key type you would like to re-key.</source>
+        <target state="new">Please select from the list below a key type you would like to re-key.</target>
+      </trans-unit><trans-unit id="5867178592770153692" datatype="html">
+        <source>Key type</source>
+        <target state="new">Key type</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
         <source>Error saving Meter Unit!</source>
@@ -2021,12 +2036,18 @@
       </trans-unit><trans-unit id="2857197357573932828" datatype="html">
         <source>Activate HLS (<x id="INTERPOLATION"/> selected)</source>
         <target state="new">Activate HLS (<x id="INTERPOLATION"/> selected)</target>
-      </trans-unit><trans-unit id="3167297928612445887" datatype="html">
+      </trans-unit><trans-unit id="7367649671832930660" datatype="html">
         <source>Are you sure you would like to perform HLS activation for the management client?</source>
         <target state="new">Are you sure you would like to perform HLS activation for the management client?</target>
       </trans-unit><trans-unit id="6790462154621359091" datatype="html">
         <source>This action may result in damages, rendering meter inoperable!</source>
         <target state="new">This action may result in damages, rendering meter inoperable!</target>
+      </trans-unit><trans-unit id="7976536095279909391" datatype="html">
+        <source>Are you sure you would like to perform re-keying of a selected key type (<x id="INTERPOLATION"/>)?</source>
+        <target state="new">Are you sure you would like to perform re-keying of a selected key type (<x id="INTERPOLATION"/>)?</target>
+      </trans-unit><trans-unit id="1242176258209332013" datatype="html">
+        <source>Meter Units activate hls successfull</source>
+        <target state="new">Meter Units activate hls successfull</target>
       </trans-unit>
       <trans-unit id="4057760610235468476" datatype="html">
         <source>At least one phase with name and treshold should be filled</source>

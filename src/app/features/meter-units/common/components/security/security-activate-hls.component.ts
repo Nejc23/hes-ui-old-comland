@@ -64,7 +64,7 @@ export class SecurityActivateHlsComponent implements OnInit {
   onConfirm() {
     const values = this.fillData();
     const request = this.gridLinkService.postSecurityEnableHls(values);
-    const successMessage = $localize`Meter Units set Limiter was successful`;
+    const successMessage = $localize`Meter Units activate hls successfull`;
 
     this.gridLinkService.postSecurityEnableHls(values).subscribe(
       (sucess) => {

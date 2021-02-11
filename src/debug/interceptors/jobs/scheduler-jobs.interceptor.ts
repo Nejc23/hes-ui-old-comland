@@ -114,6 +114,7 @@ export class SchedulerJobsInterceptor {
       skip = params.startRow;
       take = params.endRow;
 
+      sortedJobs = searched;
       if (params.sortModel) {
         if (params.sortModel.length > 0) {
           params.sortModel.forEach((element) => {
@@ -125,8 +126,6 @@ export class SchedulerJobsInterceptor {
               sortedJobs = _.sortBy(searched, sortColId);
             }
           });
-        } else {
-          sortedJobs = searched;
         }
       }
     }

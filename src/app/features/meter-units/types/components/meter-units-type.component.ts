@@ -360,7 +360,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   // ag-grid
   // search string changed call get data
   searchData($event: string) {
-    console.log('is searcData called', $event);
     if (this.isGridLoaded && this.areSettingsLoaded) {
       if ($event !== this.meterUnitsTypeGridService.getSessionSettingsSearchedText()) {
         this.deselectAll();
@@ -476,7 +475,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     ) {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-      console.log('setFilter() - filterDCU', filterDCU);
 
       this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
@@ -997,6 +995,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
 
     this.plcActionsService.onSecurityActivateHls(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  onSecurityRekey(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+
+    this.plcActionsService.onSecurityRekey(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // <-- end  Security action click (bulk or selected row)

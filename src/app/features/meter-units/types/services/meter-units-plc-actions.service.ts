@@ -1,3 +1,4 @@
+import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
 import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
 import { Router } from '@angular/router';
 import { PlcMeterSetLimiterService } from './../../common/services/plc-meter-set-limiter.service';
@@ -487,6 +488,25 @@ export class MeterUnitsPlcActionsService {
 
   onSecurityActivateHls(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(SecurityActivateHlsComponent);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionRequest = params;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onSecurityRekey(params: IActionRequestParams, selectedRowsCount: number) {
+    const modalRef = this.modalService.open(SecurityRekeyComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionRequest = params;

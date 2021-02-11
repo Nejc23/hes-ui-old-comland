@@ -1,5 +1,4 @@
 import { SecurityClient } from './../../../app/core/repository/interfaces/templating/security-client.interface';
-import { getTemplatingDefaultValues } from './../../../app/core/repository/consts/templating.const';
 import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -9,6 +8,7 @@ import * as _ from 'lodash';
 import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
 import { device, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
+import { getTemplatingDefaultValues } from 'src/app/core/repository/consts/templating.const';
 
 @Injectable()
 export class TemplatingInterceptor {
@@ -18,7 +18,7 @@ export class TemplatingInterceptor {
     return new RegExp(getTemplatingDefaultValues + `/`).test(request.url) && request.method.endsWith('GET');
   }
 
-  static interceptGetGetDefaultValues(request: HttpRequest<any>): Observable<HttpEvent<GetDefaultInformationResponse>> {
+  static interceptGetDefaultValues(request: HttpRequest<any>): Observable<HttpEvent<GetDefaultInformationResponse>> {
     const body: GetDefaultInformationResponse = {
       advancedInformation: {
         advancedInformationId: '523d6ed9-d06e-4c63-9606-29e858a7caa3',

@@ -132,3 +132,15 @@ export interface IActionResponseDeleteDevice extends IActionResponseParams {
   includedIds?: string[];
   excludedIds?: string[];
 }
+
+export interface IActionRequestSecurityRekey extends IActionRequestParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  keyType: string;
+}
+
+export interface IActionResponseSecurityRekey extends IActionResponseParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  keyType: string;
+}

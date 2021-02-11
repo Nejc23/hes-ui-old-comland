@@ -1,3 +1,4 @@
+import { SecurityRekeyComponent } from './../features/meter-units/common/components/security/security-rekey.component';
 import { SecurityActivateHlsComponent } from './../features/meter-units/common/components/security/security-activate-hls.component';
 import { CronScheduleComponent } from './../features/jobs/cron-schedule/components/cron-schedule.component';
 import { JobsSelectComponent } from './../features/jobs/jobs-select/components/jobs-select.component';
@@ -126,7 +127,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     DcuFwUpgradeComponent,
     JobsSelectComponent,
     CronScheduleComponent,
-    SecurityActivateHlsComponent
+    SecurityActivateHlsComponent,
+    SecurityRekeyComponent
   ],
   imports: [
     CommonModule,
@@ -209,7 +211,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     JobsSelectComponent,
     GridCellActiveReadOnlyComponent,
     CronScheduleComponent,
-    SecurityActivateHlsComponent
+    SecurityActivateHlsComponent,
+    SecurityRekeyComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -236,7 +239,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     DcuFwUpgradeComponent,
     JobsSelectComponent,
     CronScheduleComponent,
-    SecurityActivateHlsComponent
+    SecurityActivateHlsComponent,
+    SecurityRekeyComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

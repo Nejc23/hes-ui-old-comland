@@ -26,7 +26,6 @@ export class MeterUnitInterceptor {
 
     deviceId = deviceId.toLowerCase();
     const body = data.find((d) => d.deviceId.toLowerCase() === deviceId);
-
     return of(
       new HttpResponse({
         status: body ? 200 : 204,
