@@ -68,8 +68,9 @@ export class SchedulerJobComponent implements OnInit {
 
   createForm(formData: SchedulerJob): FormGroup {
     return this.formBuilder.group({
-      [this.registersProperty]: [formData ? formData.registers : Validators.required],
-      [this.devicesProperty]: [formData ? formData.devices : Validators.required],
+      [this.registersProperty]: [formData ? formData.registers : null, Validators.required],
+      [this.devicesProperty]: [formData ? formData.devices : null, Validators.required],
+      [this.activeProperty]: [formData ? formData.active : true],
       [this.descriptionProperty]: [formData ? formData.description : null, [Validators.maxLength(500), Validators.required]],
       [this.usePointerProperty]: [formData && formData.readingProperties ? formData.readingProperties.usePointer : true],
       [this.intervalRangeProperty]: [
@@ -169,7 +170,7 @@ export class SchedulerJobComponent implements OnInit {
       registers: this.form.get(this.registersProperty).value,
       description: this.form.get(this.descriptionProperty).value,
       devices: this.deviceFiltersAndSearch,
-      active: true,
+      active: this.form.get(this.activeProperty).value,
       jobType: this.jobType,
       cronExpression: this.cronExpression,
       startAtDate: this.form.get(this.startAtProperty).value,
@@ -228,7 +229,7 @@ export class SchedulerJobComponent implements OnInit {
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
     }
-    const successMessage = $localize`Meter Units Read Scheduler was` + ` ${operation} ` + $localize`successfully`;
+    const successMessage = $localize`Job was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         // if (result) {
@@ -302,16 +303,15 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   next(value) {
-    this.form.get(this.intervalRangeProperty).clearValidators();
-    this.form.get(this.timeUnitProperty).clearValidators();
+    this.form.get(this.intervalRangeProperty).disable();
+    this.form.get(this.timeUnitProperty).disable();
+    this.form.get(this.registersProperty).disable();
+    this.form.get(this.devicesProperty).disable();
 
     if (this.showPointer() && this.form.get(this.usePointerProperty).value) {
-      this.form.get(this.intervalRangeProperty).setValidators(Validators.required);
-      this.form.get(this.timeUnitProperty).setValidators(Validators.required);
+      this.form.get(this.intervalRangeProperty).enable();
+      this.form.get(this.timeUnitProperty).enable();
     }
-
-    this.form.get(this.intervalRangeProperty).updateValueAndValidity();
-    this.form.get(this.timeUnitProperty).updateValueAndValidity();
 
     // check form
     this.formUtils.touchElementsAndValidate(this.form);
@@ -330,16 +330,14 @@ export class SchedulerJobComponent implements OnInit {
     }
 
     this.step = this.step + value;
-    this.form.get(this.registersProperty).clearValidators();
-    this.form.get(this.devicesProperty).clearValidators();
 
     if (this.step === 2) {
       if (this.showRegisters) {
-        this.form.get(this.registersProperty).setValidators(Validators.required);
+        this.form.get(this.registersProperty).enable();
       }
 
       if (this.showConcentrators) {
-        this.form.get(this.devicesProperty).setValidators(Validators.required);
+        this.form.get(this.devicesProperty).enable();
       }
     }
   }
