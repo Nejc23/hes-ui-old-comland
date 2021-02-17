@@ -1,4 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { FileUploadComponent } from './../../../../shared/forms/components/file-upload/file-upload.component';
+import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
+import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import * as _ from 'lodash';
 import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';
@@ -21,16 +23,26 @@ import { AppConfigService } from 'src/app/core/configuration/services/app-config
   templateUrl: './import-device-keys.component.html'
 })
 export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
+  @ViewChild('fileUpload') fileUpload: FileUploadComponent;
+
+  uploadDropSubtitle = $localize`Selected Image must be in GULF (.xml, .csv) file format.`;
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
 
   form: FormGroup;
-  fileTypeOptions: RadioOption[] = [
-    { value: '1' as string, label: $localize`GULF1` },
-    { value: '2' as string, label: $localize`GULF2` }
+
+  fileTypes: Codelist<string>[] = [
+    { id: '1' as string, value: $localize`CSV` },
+    { id: '2' as string, value: $localize`GULF_V1_1` },
+    { id: '3' as string, value: $localize`GULF_V2_0` },
+    { id: '4' as string, value: $localize`GULF_V2_3` },
+    { id: '5' as string, value: $localize`GULF_V2_4` }
   ];
-  fileTypeId = '1';
+
+  defaultFileType = this.fileTypes[4];
+  fileTypeValue = this.defaultFileType.value;
+
   uploadSaveUrl: string;
-  allowedExt = [];
+  allowedExt = ['.xml', '.csv'];
   allowedExtExplainText: string;
   public files: Array<any>;
   importResult: CryptoImportResponse;
@@ -57,12 +69,12 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     if (AppConfigService.settings) {
       urlPath = AppConfigService.settings.apiServer.url;
     }
-    this.uploadSaveUrl = `${urlPath}${importDeviceKeys}/GULF${this.fileTypeId}`;
+    this.uploadSaveUrl = `${urlPath}${importDeviceKeys}/${this.fileTypeValue}`;
   }
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      [this.fileTypeProperty]: ['1', Validators.required],
+      [this.fileTypeProperty]: [this.defaultFileType, Validators.required],
       [this.gulfProperty]: [this.files, Validators.required]
     });
   }
@@ -104,9 +116,10 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     }
   }
 
-  changeReadOptionId() {
-    this.fileTypeId = this.form.get(this.fileTypeProperty).value;
+  fileTypeChanged(value: Codelist<string>) {
+    this.fileTypeValue = value.value;
     this.setFileTypeId();
+    this.fileUpload.resetUploadFlags();
   }
 
   checkImportResults() {

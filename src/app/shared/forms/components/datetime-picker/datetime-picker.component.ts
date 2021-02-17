@@ -1,8 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
+import { CldrIntlService } from '@progress/kendo-angular-intl';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { environment } from 'src/environments/environment';
+
+import { LOCALE_ID, Inject } from '@angular/core';
+import { IntlService } from '@progress/kendo-angular-intl';
 
 @Component({
   selector: 'app-datetime-picker',
@@ -20,9 +24,11 @@ export class DateTimePickerComponent implements OnInit {
   @Output() blur = new EventEmitter();
   @Output() valueChange = new EventEmitter<Date>();
 
+  @ViewChild('datetime') dateTime: any;
+
   controlId: string;
 
-  constructor(private formUtils: FormsUtilsService) {}
+  constructor(private formUtils: FormsUtilsService, public intlService: IntlService) {}
 
   ngOnInit() {
     if (!this.form) {
@@ -31,7 +37,6 @@ export class DateTimePickerComponent implements OnInit {
     if (!this.property) {
       throw Error('DatetimePickerComponent - property input missing.');
     }
-    this.controlId = _.uniqueId('datetimepicker');
   }
 
   get format() {

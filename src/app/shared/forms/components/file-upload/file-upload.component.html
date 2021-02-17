@@ -1,9 +1,52 @@
-<div class="form-group" [formGroup]="form">
+<div class="form-group file-upload" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
     {{label}}
     <sup *ngIf="required"> *</sup>
   </label>
+
+  <div *ngIf="isDropZoneCustom" class="dropzone-custom" #customDropzone  [kendoUploadDropZone]="'customZone'"
+    [ngClass]="{'hover-mouse-down': isDropZoneHover}" (dragenter)="onDropZoneEnter($event)"
+    (dragleave)="onDropZoneLeave($event)" (dragend)="onDropZoneEnd($event)" (drop)="onDropZoneEnd($event)">
+    <div class="text-center" style="width:100%">
+      <div *ngIf="!isUploadOk && !isUploadFailed && !isUploadInProgress">
+        <div class="pb-1">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <div class="title"><a i18n (click)="onFileSelectClick()" href="javascript:void(0);">Choose a file</a><span> or drag it here</span></div>
+        <div class="subtitle pt-2">{{ dropUploadSubtitle }}</div>
+      </div>
+
+      <div *ngIf="isUploadInProgress">
+        <div class="pb-1">
+          <i class="fas fa-cloud-upload-alt"></i>
+        </div>
+        <div class="title"><span i18n>Uploading file:</span> {{ fileName }}</div>
+        <kendo-progressbar [label]="false" [min]="0" [max]="100" style="width:50%;" [value]="uploadProgressValue"></kendo-progressbar>
+      </div>
+
+      <div *ngIf="isUploadOk">
+        <div class="pb-1">
+          <i class="fas fa-file"></i>
+        </div>
+        <div class="title"><span i18n>Uploaded file:</span><span> {{ fileName}}</span></div>
+        <div class="subtitle pt-2"><span>Drag to upload a new one or </span><a href="javascript:void(0)" (click)="onFileSelectClick()" i18n>Choose a new file</a></div>
+      </div>
+
+      <div *ngIf="isUploadFailed">
+        <div class="pb-2">
+          <span class="fa-stack" >
+            <i class="fas fa-cloud-upload-alt fa-stack-1x"></i>
+            <i class="fas fa-exclamation-triangle fa-stack-1x"></i>
+          </span>
+        </div>
+        <div class="title"><span>Upload failed:</span><span> {{ fileName }}</span></div>
+        <div class="subtitle pt-2"><a href="javascript:void(0)" (click)="onFileSelectClick()" i18n>Select here</a><span i18n> or drag another file to try again.</span></div>
+      </div>
+    </div>
+  </div>
+
   <kendo-upload #upload required
+    zoneId="customZone"
     [formControlName]="property"
     [saveUrl]="uploadSaveUrl"
     [removeUrl]="uploadRemoveUrl"
@@ -16,9 +59,12 @@
     (upload)="uploadEventHandler($event)"
     [accept]="acceptExtensions"
     [id]="controlId" [name]="controlId"
-    [saveField]="saveField">
+    [saveField]="saveField"
+    (uploadProgress)="uploadProgress($event)"
+    (select)="fileSelected($event)"
+    >
   </kendo-upload>
-  <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small>
+  <!-- <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small> -->
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>

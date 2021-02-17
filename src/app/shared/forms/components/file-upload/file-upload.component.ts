@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
-import { FileRestrictions } from '@progress/kendo-angular-upload';
+import { FileRestrictions, UploadProgressEvent } from '@progress/kendo-angular-upload';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
@@ -22,11 +22,27 @@ export class FileUploadComponent implements OnInit {
   @Input() responseType = 'json';
   @Input() acceptExtensions = '';
   @Input() saveField = 'files';
+  @Input() isDropZoneCustom = false;
+  @Input() dropUploadSubtitle = '';
   @Output() successEvent = new EventEmitter<any>();
   @Output() uploadEvent = new EventEmitter<any>();
 
+  @ViewChild('upload') upload: any;
+
   controlId: string;
   restrictions: FileRestrictions;
+  isUploadInProgress = false;
+  isUploadOk = false;
+  isUploadFailed = false;
+  uploadProgressValue = 0;
+
+  isDropZoneHover = false;
+
+  fileName = '';
+
+  dragEnterCount = 0; // dragEnter and leave are fired for each child element
+
+  @ViewChild('customDropzone') dropZone: ElementRef;
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -62,14 +78,66 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSuccess(event) {
-    console.log('success');
     this.successEvent.emit(event);
   }
+
   errorEventHandler(event) {
-    console.log(event);
+    this.isUploadFailed = true;
+    this.isUploadInProgress = false;
   }
 
   uploadEventHandler(event) {
+    this.resetUploadFlags();
+    this.isUploadInProgress = true;
+    this.fileName = event.files[0].name;
     this.uploadEvent.emit(event);
+  }
+
+  resetUploadFlags() {
+    this.isUploadInProgress = false;
+    this.isUploadOk = false;
+    this.isUploadFailed = false;
+    this.uploadProgressValue = 0;
+    this.fileName = null;
+  }
+
+  onFileSelectClick() {
+    this.upload.fileSelect.nativeElement.click();
+  }
+
+  uploadProgress(event: UploadProgressEvent) {
+    this.uploadProgressValue = +event.percentComplete;
+  }
+
+  onDropZoneEnter(event: any) {
+    this.dragEnterCount++;
+    this.isDropZoneHover = true;
+  }
+
+  onDropZoneLeave(event: any) {
+    this.dragEnterCount--;
+    if (this.dragEnterCount === 0) {
+      this.isDropZoneHover = false;
+    }
+  }
+
+  onDropZoneEnd(event: any) {
+    this.dragEnterCount = 0;
+    this.isDropZoneHover = false;
+  }
+
+  fileSelected(e: any) {
+    this.resetUploadFlags();
+
+    const files = e.files;
+    const isAcceptedImageFormat = $.inArray(files[0].extension, this.allowedExtensions) !== -1;
+
+    this.fileName = files[0].name;
+
+    if (!isAcceptedImageFormat) {
+      e.preventDefault();
+      this.isUploadFailed = true;
+      this.isUploadInProgress = false;
+    }
   }
 }

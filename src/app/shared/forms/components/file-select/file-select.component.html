@@ -3,7 +3,7 @@
     {{label}}
     <sup *ngIf="required"> *</sup>
   </label>
-  <kendo-fileselect required
+  <kendo-fileselect required #uploadSample
     [formControlName]="property"
     [restrictions]="restrictions"
     [multiple]="multiple"
