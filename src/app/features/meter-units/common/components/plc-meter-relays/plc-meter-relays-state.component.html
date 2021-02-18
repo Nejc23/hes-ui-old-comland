@@ -4,14 +4,14 @@
 
   <div modal-body>
     <ng-container>
-      <form class="form-horizontal" [formGroup]="form">
-        <div class="form-row">
-          <div class="col-12">
-            <app-select-input label="Relay" [form]="form" [property]="relayProperty" [selectOptions]="relays$" i18n-label>
-            </app-select-input>
+      <div class="form-row pt-2 text-center">
+        <div class="col-12">
+          <div class="card-body">
+            <div class="display-4 font-weight-bold pb-1" i18n>Are you sure you would like to read state of relay registers for selected meters?</div>
+            <div class="text-secondary" i18n>State of all relay registers defined on the template will be read!</div>
           </div>
         </div>
-      </form>
+      </div>
     </ng-container>
   </div>
   <div modal-footer>

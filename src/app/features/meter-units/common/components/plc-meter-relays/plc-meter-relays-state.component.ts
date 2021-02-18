@@ -1,3 +1,5 @@
+import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
+import { ToastComponent } from './../../../../../shared/toast-notification/components/toast.component';
 import { IActionRequestParams, IActionRequestRelays } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
@@ -22,12 +24,8 @@ export class PlcMeterRelaysStateComponent implements OnInit {
   form: FormGroup;
   actionRequest: IActionRequestParams;
 
-  // deviceIdsParam = [];
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
-  // excludeIdsParam?: string[];
-
-  relays$: Codelist<string>[];
 
   public selectedRowsCount: number;
 
@@ -36,36 +34,15 @@ export class PlcMeterRelaysStateComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private setLimiterService: PlcMeterSetLimiterService
-  ) {
-    this.form = this.createForm();
-  }
+    private setLimiterService: PlcMeterSetLimiterService,
+    private toastService: ToastNotificationService
+  ) {}
 
-  createForm(): FormGroup {
-    return this.formBuilder.group({
-      [this.relayProperty]: [null, [Validators.required]]
-    });
-  }
-
-  ngOnInit() {
-    this.myGridService
-      .getCommonRegisterGroup({
-        deviceIds: this.actionRequest.deviceIds,
-        filter: this.filterParam, // TODO: should be from this.actionRequest.
-        search: this.searchParam,
-        excludeIds: this.actionRequest.excludeIds,
-        type: '19' // "RELAY"
-      })
-      .subscribe((result: ResponseCommonRegisterGroup[]) => {
-        if (result && result.length > 0) {
-          this.relays$ = this.setLimiterService.getListOfRegisterDefinitionNames(result);
-        }
-      });
-  }
+  ngOnInit() {}
 
   fillData(): IActionRequestRelays {
     const formData: IActionRequestRelays = {
-      relayIds: [this.form.get(this.relayProperty).value ? this.form.get(this.relayProperty).value.value : null],
+      relayIds: null,
       pageSize: this.actionRequest.pageSize,
       pageNumber: this.actionRequest.pageNumber,
       sort: this.actionRequest.sort,
@@ -77,13 +54,6 @@ export class PlcMeterRelaysStateComponent implements OnInit {
 
     return formData;
   }
-  // properties - START
-
-  get relayProperty() {
-    return 'relay';
-  }
-
-  // properties - END
 
   onDismiss() {
     this.modal.dismiss();
@@ -93,15 +63,16 @@ export class PlcMeterRelaysStateComponent implements OnInit {
     const values = this.fillData();
     const request = this.myGridService.getRelaysState(values);
     const successMessage = $localize`Action in progress!`;
-    this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+    const errorMessage = $localize`Action failed!`;
+
+    request.subscribe(
       (result) => {
+        this.toastService.successToast(successMessage);
         this.modal.close();
       },
-      () => {} // error
+      (error) => {
+        this.toastService.errorToast(errorMessage);
+      }
     );
   }
-
-  // atLeastOneValue(form: FormGroup): ValidationErrors {
-  //   return Object.keys(form.value).some(key => !!form.value[key] && key !== 'register') ? null : { atLeastOneRequired: true };
-  // }
 }
