@@ -60,6 +60,7 @@
               "@progress/kendo-angular-intl/locales/de/all",
               "@progress/kendo-angular-intl/locales/fr/all",
               "@progress/kendo-angular-intl/locales/it/all",
+              "@progress/kendo-angular-intl/locales/en-GB/all",
               "cronstrue/i18n",
               "cron-validate"
             ]
@@ -73,7 +74,7 @@
                 }
               ],
               "localize": [
-                "en"
+                "sl"
               ]
             },
             "develop-amera": {
