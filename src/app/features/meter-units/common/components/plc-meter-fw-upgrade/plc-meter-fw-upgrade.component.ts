@@ -55,7 +55,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       [this.imageSizeProperty]: [null, [Validators.required, Validators.maxLength(6)]],
       [this.imageSignatureProperty]: [null, Validators.required],
       [this.imageFillLastBlockProperty]: [false, Validators.required],
-      [this.imageGuidProperty]: ['']
+      [this.imageGuidProperty]: [''],
+      [this.imageActivateImmediatelyProperty]: [false]
     });
   }
 
