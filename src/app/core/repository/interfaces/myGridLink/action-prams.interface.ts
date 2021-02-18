@@ -62,6 +62,7 @@ export interface IActionRequestFwUpgradeData extends IActionRequestParams {
   imageSize: number;
   signature: string;
   overrideFillLastBlock: boolean;
+  activateImmediately: boolean;
 }
 
 export interface IActionRequestDeleteDevice extends IActionRequestParams {

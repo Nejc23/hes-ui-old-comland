@@ -74,7 +74,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
       deviceIds: this.actionRequest.deviceIds,
-      excludeIds: this.actionRequest.excludeIds
+      excludeIds: this.actionRequest.excludeIds,
+      activateImmediately: this.form.get(this.imageActivateImmediatelyProperty).value
     };
     return formData;
   }
@@ -162,6 +163,10 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   get imageFillLastBlockProperty() {
     return 'imageFillLastBlock';
+  }
+
+  get imageActivateImmediatelyProperty() {
+    return 'imageActivateImmediately';
   }
   // properties - END
 
