@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, HostListener, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Observable } from 'rxjs';
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
   selector: 'app-input-tag',
   templateUrl: './input-tag.component.html'
 })
-export class InputTagComponent implements OnInit {
+export class InputTagComponent implements OnInit, OnChanges {
   // required
   @Input() form: FormGroup;
   @Input() property: string;
@@ -25,12 +25,24 @@ export class InputTagComponent implements OnInit {
   addedItems: any = [];
   constructor(private formUtils: FormsUtilsService) {}
 
+  autocompleteItemsAsObjectsWithFake: any;
+
   ngOnInit() {
     if (!this.form) {
       throw Error('InputTextComponent - form input missing.');
     }
     if (!this.property) {
       throw Error('InputTextComponent - property input missing.');
+    }
+  }
+
+  ngOnChanges() {
+    if (this.autocompleteItemsAsObjects !== null && this.autocompleteItemsAsObjectsWithFake === null) {
+      this.autocompleteItemsAsObjectsWithFake = this.autocompleteItemsAsObjects.map((v) => ({
+        id: v.id,
+        value: v.value,
+        fakeId: v.id + 1
+      }));
     }
   }
 
