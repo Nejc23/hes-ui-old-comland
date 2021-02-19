@@ -8,10 +8,10 @@
         class="form-control"
         [name]="property"
         [allowCustom]="allowCustomValues"
-        [data]="autocompleteItemsAsObjects"
+        [data]="autocompleteItemsAsObjectsWithFake"
         [formControlName]="property"
         [textField]="'value'"
-        [valueField]="'id'"
+        [valueField]="'fakeId'"
         [valueNormalizer]="valueNormalizer"
         (valueChange)="doValueChange($event)"
       ></kendo-multiselect>
