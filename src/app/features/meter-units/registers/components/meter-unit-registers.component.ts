@@ -117,7 +117,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.showStatistics = selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
     this.isEvent = selectedRegister.categorization === 'EVENT' ? true : false;
 
-    console.log('parent this.categorization', selectedRegister, this.isEvent, this.showStatistics);
+    // console.log('parent this.categorization', selectedRegister, this.isEvent, this.showStatistics);
     this.categorization = selectedRegister.categorization;
 
     this.setPageSubtitle();
@@ -293,7 +293,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     }
 
     if (!forceRefresh && register === this.selectedRegister && startTime === this.startTime && endTime === this.endTime) {
-      console.log('showData: nothing changed');
+      // console.log('showData: nothing changed');
       return;
     }
 
@@ -458,7 +458,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   startTimeChanged(event: any) {
-    console.log('start time changed');
+    // console.log('start time changed');
   }
 
   onStartTimeBlurOrChange() {
