@@ -30,6 +30,7 @@ import { FileUploadComponent } from './components/file-upload/file-upload.compon
 import { UploadsModule } from '@progress/kendo-angular-upload';
 import { FileSelectComponent } from './components/file-select/file-select.component';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
+import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -96,7 +97,8 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
     DateInputsModule,
     UploadsModule,
     LayoutModule,
-    ChartsModule
+    ChartsModule,
+    ProgressBarModule
   ]
 })
 export class CustomFormsModule {

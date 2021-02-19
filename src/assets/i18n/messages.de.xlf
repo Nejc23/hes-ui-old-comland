@@ -648,15 +648,27 @@
       <trans-unit id="2130480301668469363" datatype="html">
         <source>Upload successful</source>
         <target>Hochladen erfolgreich</target>
+      </trans-unit><trans-unit id="3536386519747778703" datatype="html">
+        <source>Selected Image must be in GULF (.xml, .csv) file format.</source>
+        <target state="new">Selected Image must be in GULF (.xml, .csv) file format.</target>
+      </trans-unit><trans-unit id="7926143511350598250" datatype="html">
+        <source>CSV</source>
+        <target state="new">CSV</target>
+      </trans-unit><trans-unit id="5184791213491091785" datatype="html">
+        <source>GULF_V1_1</source>
+        <target state="new">GULF_V1_1</target>
+      </trans-unit><trans-unit id="3309270839514822897" datatype="html">
+        <source>GULF_V2_0</source>
+        <target state="new">GULF_V2_0</target>
+      </trans-unit><trans-unit id="9219995935151239712" datatype="html">
+        <source>GULF_V2_3</source>
+        <target state="new">GULF_V2_3</target>
+      </trans-unit><trans-unit id="4054018915383065279" datatype="html">
+        <source>GULF_V2_4</source>
+        <target state="new">GULF_V2_4</target>
       </trans-unit>
-      <trans-unit id="7263427555677363" datatype="html">
-        <source>GULF1</source>
-        <target>GULF1</target>
-      </trans-unit>
-      <trans-unit id="4717488321271154684" datatype="html">
-        <source>GULF2</source>
-        <target>GULF2</target>
-      </trans-unit>
+      
+      
       <trans-unit id="5798132621218162415" datatype="html">
         <source>can only upload one file.</source>
         <target>Nur eine Datei kann hochgeladen werden.</target>
@@ -1796,6 +1808,24 @@
       <trans-unit id="3713168783920734881" datatype="html">
         <source>CII State</source>
         <target>CII Status</target>
+      </trans-unit><trans-unit id="3825771792569625715" datatype="html">
+        <source>Choose a file</source>
+        <target state="new">Choose a file</target>
+      </trans-unit><trans-unit id="5617275023512756887" datatype="html">
+        <source>Uploading file:</source>
+        <target state="new">Uploading file:</target>
+      </trans-unit><trans-unit id="2193359614283312554" datatype="html">
+        <source>Uploaded file:</source>
+        <target state="new">Uploaded file:</target>
+      </trans-unit><trans-unit id="1977812905929664564" datatype="html">
+        <source>Choose a new file</source>
+        <target state="new">Choose a new file</target>
+      </trans-unit><trans-unit id="7268034088706733842" datatype="html">
+        <source>Select here</source>
+        <target state="new">Select here</target>
+      </trans-unit><trans-unit id="3903518117616881124" datatype="html">
+        <source> or drag another file to try again.</source>
+        <target state="new"> or drag another file to try again.</target>
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source> <x id="INTERPOLATION"/> </source>

@@ -10,22 +10,23 @@
 
 </div>
 -->
-<app-input-radio i18n-label label="File type" [form]="form" [property]="fileTypeProperty"
-name="fileTypeRadio" [options]="fileTypeOptions" inline="true" (change)="changeReadOptionId()"
-(refresh)="changeReadOptionId()">
-</app-input-radio>
+<app-select-input i18n-label label="File type" [form]="form" [property]="fileTypeProperty" [selectOptions]="fileTypes"
+  [disabled]="false" (selectedValueChanged)="fileTypeChanged($event)">
+</app-select-input>
 
 <div class="form-row">
   <div class="col-12 expand-dropzone">
-      <app-file-upload label="GULF" [form]="form" [property]="gulfProperty"
+      <app-file-upload #fileUpload label="GULF" [form]="form" [property]="gulfProperty"
           [uploadSaveUrl]="uploadSaveUrl"
           [uploadRemoveUrl]=""
           [multiple]="false"
           [responseType]="'text'"
           [allowedExtensions]="allowedExt"
           [textExplanation]="allowedExtExplainText"
+          [isDropZoneCustom]="true"
           (successEvent)="successUploaded($event)"
           (uploadEvent)="uploadEvent($event)"
+          [dropUploadSubtitle]="uploadDropSubtitle"
           i18n-label></app-file-upload>
   </div>
 </div>
