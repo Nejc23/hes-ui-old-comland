@@ -18,7 +18,7 @@
       <div class="form-group filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
           <app-input-radio i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
-            [options]="g.registerOptions" style="white-space:nowrap" (change)="changeRegisterOptionId()" [showTooltip]="true">
+            [options]="g.registerOptions" style="white-space:nowrap" (selectionChanged)="changeRegisterOptionId()" [showTooltip]="true">
           </app-input-radio>
         </div>
       </div>

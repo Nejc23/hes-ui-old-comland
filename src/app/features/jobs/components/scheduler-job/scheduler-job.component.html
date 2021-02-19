@@ -7,6 +7,12 @@
     <div id="step1" *ngIf="step === 1">
       <div class="form-row">
         <div class="col-12">
+          <app-input-switch [form]="form" [property]="activeProperty" i18n-label label="Active">
+          </app-input-switch>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-12">
           <app-input-text [form]="form" [property]="descriptionProperty" i18n-label label="Description">
           </app-input-text>
         </div>
@@ -25,7 +31,7 @@
 
       <div *ngIf="showIecPush()">
         <div class="form-row pt-3">
-          <div class="col-5">
+          <div class="col-12">
             <app-input-switch [form]="form" [property]="iecPushEnabledProperty" i18n-label label="Push to IEC">
             </app-input-switch>
           </div>
@@ -33,7 +39,7 @@
       </div>
       <div *ngIf="showPointer()">
         <div class="form-row pt-3">
-          <div class="col-5">
+          <div class="col-12">
             <app-input-switch [form]="form" [property]="usePointerProperty" i18n-label label="Read from last value">
             </app-input-switch>
           </div>

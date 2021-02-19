@@ -10,7 +10,6 @@ import { fwUploadFile } from '../../repository/consts/meter-units.const';
 export class HeaderInjectorInterceptor implements HttpInterceptor {
   constructor(@Inject(LOCALE_ID) public locale: string) {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(this.locale);
     let newRequest = request.clone({
       headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())
     });
@@ -21,9 +20,6 @@ export class HeaderInjectorInterceptor implements HttpInterceptor {
         headers: request.headers.set('Accept-Language', this.localeToHeaderLocale())
       });
     }
-
-    console.log('Request after interceptor: ', newRequest);
-
     return next.handle(newRequest);
   }
 

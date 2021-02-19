@@ -399,6 +399,8 @@ export class AddMuFormComponent implements OnInit {
 
       if (this.isGatewayEnabled) {
         this.form.get(this.wrapperPhysicalAddressProperty).enable();
+      } else {
+        this.form.get(this.wrapperPhysicalAddressProperty).disable();
       }
     } else {
       this.form.get(this.wrapperLlsClientProperty).disable();
