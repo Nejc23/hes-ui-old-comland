@@ -515,6 +515,10 @@ export class DataConcentratorUnitsGridService {
 // extra functions for grid
 // set check box to first column
 function isFirstColumn(params) {
+  if (!params?.columnApi) {
+    return;
+  }
+
   const displayedColumns = params.columnApi.getAllDisplayedColumns();
   const thisIsFirstColumn = displayedColumns[0] === params.column;
   return thisIsFirstColumn;

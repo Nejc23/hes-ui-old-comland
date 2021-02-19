@@ -405,6 +405,9 @@
       <trans-unit id="2847261689301738134" datatype="html">
         <source>updated</source>
         <target>actualisé</target>
+      </trans-unit><trans-unit id="5798687973544276975" datatype="html">
+        <source>Job was</source>
+        <target state="new">Job was</target>
       </trans-unit>
       <trans-unit id="4893141395755907203" datatype="html">
         <source>successfully</source>
@@ -1144,10 +1147,7 @@
         <source>In Range</source>
         <target>dans la gamme</target>
       </trans-unit>
-      <trans-unit id="2701293197858293459" datatype="html">
-        <source>Meter Units Read Scheduler was</source>
-        <target>Le Scheduler lecture des unités de compteurs était </target>
-      </trans-unit>
+      
       <trans-unit id="7689582560947434727" datatype="html">
         <source>For last</source>
         <target>En dernier </target>
@@ -2094,6 +2094,12 @@
       <trans-unit id="2702284463870689226" datatype="html">
         <source>Relay State (<x id="INTERPOLATION"/> selected)</source>
         <target>Relay State (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit><trans-unit id="7112691258699898558" datatype="html">
+        <source>Are you sure you would like to read state of relay registers for selected meters?</source>
+        <target state="new">Are you sure you would like to read state of relay registers for selected meters?</target>
+      </trans-unit><trans-unit id="6923767622951451849" datatype="html">
+        <source>State of all relay registers defined on the template will be read!</source>
+        <target state="new">State of all relay registers defined on the template will be read!</target>
       </trans-unit>
       <trans-unit id="1937307249593397398" datatype="html">
         <source>Relay Mode (<x id="INTERPOLATION"/> selected)</source>
