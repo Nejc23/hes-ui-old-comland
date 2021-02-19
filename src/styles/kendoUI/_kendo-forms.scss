@@ -92,7 +92,15 @@ input[type=search].wildcard {
 
 .expand-dropzone .k-dropzone {
   height: 300px;
-  display:block !important;
+  display: block !important;
+}
+
+.expand-dropzone {
+  .file-upload {
+    .k-upload {
+      display: none !important;
+    }
+  }
 }
 
 .expand-dropzone  .k-upload-button {
@@ -100,6 +108,7 @@ input[type=search].wildcard {
   margin-top: 110px;
   margin-bottom:20px;
 }
+
 .expand-dropzone .k-dropzone-hint {
   text-align: center;
   position:absolute;
@@ -152,3 +161,65 @@ input[type=search].wildcard {
 .k-checkbox::before {
   background-size: 100%;
 }
+
+.expand-dropzone {
+  .dropzone-custom {
+    height: 300px;
+    border:2px dashed $gray-500;
+    border-radius:8px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: $gray-300;
+
+    &.hover-mouse-down {
+      background-color: $gray-400;
+    }
+
+    a {
+      color: $primary;
+      text-decoration: underline;
+    }
+
+    .title {
+      color: $gray-600;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    .subtitle {
+      color: $gray-500;
+      font-weight: bold;
+    }
+
+    .k-progressbar .k-state-selected {
+      background-color: $secondary;
+    }
+
+    .fa-file {
+      color: $gray-500;
+      font-size: 34px;
+    }
+
+    .fa-cloud-upload-alt {
+      color: $gray-500;
+      font-size: 43px;
+    }
+
+    .fa-stack {
+      font-size:22px;
+
+      i.fas.fa-exclamation-triangle{
+        color: $danger;
+        left: 24px;
+        top: 10px;
+        font-size: 28px;
+      }
+
+      i.fas.fa-cloud-upload-alt {
+        margin-left:0px;
+      }
+    }
+  }
+}
+

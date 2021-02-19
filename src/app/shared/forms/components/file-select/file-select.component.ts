@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FileRestrictions } from '@progress/kendo-angular-upload';
 import * as _ from 'lodash';
@@ -19,6 +19,8 @@ export class FileSelectComponent implements OnInit {
   @Input() acceptExtensions = '';
   @Output() selectEvent = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
+
+  @ViewChild('uploadSample') upload: any;
 
   controlId: string;
   restrictions: FileRestrictions;
@@ -58,5 +60,9 @@ export class FileSelectComponent implements OnInit {
 
   onRemove(event) {
     this.removeEvent.emit(event);
+  }
+
+  onFileSelectClick() {
+    this.upload.fileSelect.nativeElement.click();
   }
 }

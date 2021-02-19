@@ -298,7 +298,7 @@ export class MeterUnitsService {
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.protocol),
             propValue: row.id.toString(),
-            filterOperation: filterOperationEnum.contains
+            filterOperation: filterOperationEnum.equal
           })
         );
       }
@@ -307,7 +307,7 @@ export class MeterUnitsService {
           requestParam.filter.push({
             propName: capitalize(gridSysNameColumnsEnum.medium),
             propValue: row.id.toString(),
-            filterOperation: filterOperationEnum.contains
+            filterOperation: filterOperationEnum.equal
           })
         );
       }
