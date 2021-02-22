@@ -21,6 +21,8 @@ import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/
 export class PlcMeterFwUpgradeComponent implements OnInit {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
+  uploadDropSubtitle = $localize`Selected file must be in .img or .bin file format.`;
+
   form: FormGroup;
   noConfig = false;
   configRequiredText = $localize`Required field`;
@@ -30,7 +32,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = $localize`can only upload one file.`;
-  acceptExtensions = '.img, .bin';
+  acceptExtensions = ['.img', '.bin'];
   public files: Array<any>;
   activate = false;
 
@@ -55,7 +57,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       [this.imageSizeProperty]: [null, [Validators.required, Validators.maxLength(6)]],
       [this.imageSignatureProperty]: [null, Validators.required],
       [this.imageFillLastBlockProperty]: [false, Validators.required],
-      [this.imageGuidProperty]: ['']
+      [this.imageGuidProperty]: [''],
+      [this.imageActivateProperty]: [false]
     });
   }
 
@@ -74,7 +77,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
       deviceIds: this.actionRequest.deviceIds,
-      excludeIds: this.actionRequest.excludeIds
+      excludeIds: this.actionRequest.excludeIds,
+      activate: this.form.get(this.imageActivateProperty).value
     };
     return formData;
   }
@@ -162,6 +166,10 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
   get imageFillLastBlockProperty() {
     return 'imageFillLastBlock';
+  }
+
+  get imageActivateProperty() {
+    return 'imageActivateImmediately';
   }
   // properties - END
 

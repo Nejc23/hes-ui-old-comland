@@ -20,7 +20,7 @@ export class FileUploadComponent implements OnInit {
   @Input() autoUpload = true;
   @Input() allowedExtensions: string[] = [];
   @Input() responseType = 'json';
-  @Input() acceptExtensions = '';
+  @Input() acceptExtensions: string[] = [];
   @Input() saveField = 'files';
   @Input() isDropZoneCustom = false;
   @Input() dropUploadSubtitle = '';
@@ -78,6 +78,8 @@ export class FileUploadComponent implements OnInit {
   }
 
   onSuccess(event) {
+    this.isUploadInProgress = false;
+    this.isUploadOk = true;
     this.successEvent.emit(event);
   }
 
@@ -130,11 +132,16 @@ export class FileUploadComponent implements OnInit {
     this.resetUploadFlags();
 
     const files = e.files;
-    const isAcceptedImageFormat = $.inArray(files[0].extension, this.allowedExtensions) !== -1;
+    let isAcceptedImageFormat = true;
+
+    if (this.acceptExtensions && this.acceptExtensions.length > 0) {
+      isAcceptedImageFormat = $.inArray(files[0].extension, this.acceptExtensions) !== -1;
+    }
 
     this.fileName = files[0].name;
 
     if (!isAcceptedImageFormat) {
+      console.log('File extension is not supported:', files[0].extension, '. Supported file extensions:', this.acceptExtensions);
       e.preventDefault();
       this.isUploadFailed = true;
       this.isUploadInProgress = false;

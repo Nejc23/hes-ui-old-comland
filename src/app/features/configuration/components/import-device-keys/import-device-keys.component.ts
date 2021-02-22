@@ -42,7 +42,9 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   fileTypeValue = this.defaultFileType.value;
 
   uploadSaveUrl: string;
-  allowedExt = ['.xml', '.csv'];
+  allowedExt = [];
+  acceptExtensions = ['.xml', '.csv'];
+
   allowedExtExplainText: string;
   public files: Array<any>;
   importResult: CryptoImportResponse;
