@@ -819,6 +819,9 @@
       <trans-unit id="6051387292073491920" datatype="html">
         <source>Fill last block</source>
         <target>Remplir le dernier bloc</target>
+      </trans-unit><trans-unit id="7765850159968782420" datatype="html">
+        <source>Activate immediately</source>
+        <target state="new">Activate immediately</target>
       </trans-unit>
       <trans-unit id="4759723562137600498" datatype="html">
         <source>Activate</source>
@@ -1952,6 +1955,9 @@
       <trans-unit id="137227890362474218" datatype="html">
         <source>Confim</source>
         <target>Confim</target>
+      </trans-unit><trans-unit id="3003589958263647367" datatype="html">
+        <source>Selected file must be in .img or .bin file format.</source>
+        <target state="new">Selected file must be in .img or .bin file format.</target>
       </trans-unit>
       <trans-unit id="1638104096689313605" datatype="html">
         <source>FW Upgrade successful!</source>
