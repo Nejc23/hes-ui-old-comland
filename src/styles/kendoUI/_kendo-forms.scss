@@ -90,6 +90,13 @@ input[type=search].wildcard {
   margin-right: 0;
 }
 
+
+
+.expand-dropzone .k-dropzone {
+  height: 300px;
+  display: block !important;
+}
+
 .expand-dropzone .k-dropzone {
   height: 300px;
   display: block !important;
@@ -163,6 +170,7 @@ input[type=search].wildcard {
 }
 
 .expand-dropzone {
+
   .dropzone-custom {
     height: 300px;
     border:2px dashed $gray-500;
@@ -219,6 +227,11 @@ input[type=search].wildcard {
       i.fas.fa-cloud-upload-alt {
         margin-left:0px;
       }
+    }
+  }
+  &.modal-dropzone {
+    .dropzone-custom {
+      height: 200px;
     }
   }
 }

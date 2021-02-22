@@ -21,6 +21,8 @@ import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/
 export class PlcMeterFwUpgradeComponent implements OnInit {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
+  uploadDropSubtitle = $localize`Selected file must be in .img or .bin file format.`;
+
   form: FormGroup;
   noConfig = false;
   configRequiredText = $localize`Required field`;

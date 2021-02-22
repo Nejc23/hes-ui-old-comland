@@ -5,7 +5,7 @@
   <div modal-body>
     <ng-container>
       <div class="form-row">
-        <div class="col-12">
+        <div class="col-12 expand-dropzone modal-dropzone">
             <app-file-upload label="Image" [form]="form" [property]="imageProperty"
                 [uploadSaveUrl]="uploadSaveUrl"
                 [saveField]="'imageFile'"
@@ -17,7 +17,9 @@
                 [acceptExtensions]="acceptExtensions"
                 (uploadEvent)="uploadEvent($event)"
                 (successEvent)="successUploaded($event)"
-                i18n-label></app-file-upload>
+                i18n-label
+                [isDropZoneCustom]="true"
+                [dropUploadSubtitle]="uploadDropSubtitle"></app-file-upload>
         </div>
       </div>
       <div class="form-row">
