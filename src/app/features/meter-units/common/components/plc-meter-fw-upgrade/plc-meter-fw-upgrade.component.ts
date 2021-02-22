@@ -32,7 +32,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = $localize`can only upload one file.`;
-  acceptExtensions = '.img, .bin';
+  acceptExtensions = ['.img', '.bin'];
   public files: Array<any>;
   activate = false;
 
@@ -58,7 +58,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       [this.imageSignatureProperty]: [null, Validators.required],
       [this.imageFillLastBlockProperty]: [false, Validators.required],
       [this.imageGuidProperty]: [''],
-      [this.imageActivateImmediatelyProperty]: [false]
+      [this.imageActivateProperty]: [false]
     });
   }
 
@@ -78,7 +78,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       filter: this.actionRequest.filter,
       deviceIds: this.actionRequest.deviceIds,
       excludeIds: this.actionRequest.excludeIds,
-      activateImmediately: this.form.get(this.imageActivateImmediatelyProperty).value
+      activate: this.form.get(this.imageActivateProperty).value
     };
     return formData;
   }
@@ -168,7 +168,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     return 'imageFillLastBlock';
   }
 
-  get imageActivateImmediatelyProperty() {
+  get imageActivateProperty() {
     return 'imageActivateImmediately';
   }
   // properties - END
