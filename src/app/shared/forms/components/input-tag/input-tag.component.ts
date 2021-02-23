@@ -37,7 +37,7 @@ export class InputTagComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    if (this.autocompleteItemsAsObjects !== null && this.autocompleteItemsAsObjectsWithFake === null) {
+    if (this.autocompleteItemsAsObjects && !this.autocompleteItemsAsObjectsWithFake) {
       this.autocompleteItemsAsObjectsWithFake = this.autocompleteItemsAsObjects.map((v) => ({
         id: v.id,
         value: v.value,

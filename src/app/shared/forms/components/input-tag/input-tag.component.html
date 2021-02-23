@@ -4,15 +4,15 @@
     <span *ngIf="required"> *</span>
   </label>
   <kendo-multiselect
-        [disabled]="disabled"
-        class="form-control"
-        [name]="property"
-        [allowCustom]="allowCustomValues"
-        [data]="autocompleteItemsAsObjectsWithFake"
-        [formControlName]="property"
-        [textField]="'value'"
-        [valueField]="'fakeId'"
-        [valueNormalizer]="valueNormalizer"
-        (valueChange)="doValueChange($event)"
-      ></kendo-multiselect>
+    [disabled]="disabled"
+    class="form-control"
+    [name]="property"
+    [allowCustom]="allowCustomValues"
+    [data]="autocompleteItemsAsObjectsWithFake"
+    [formControlName]="property"
+    [textField]="'value'"
+    [valueField]="'fakeId'"
+    [valueNormalizer]="valueNormalizer"
+    (valueChange)="doValueChange($event)"
+  ></kendo-multiselect>
 </div>
