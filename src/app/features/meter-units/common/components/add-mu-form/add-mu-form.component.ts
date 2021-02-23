@@ -1,3 +1,4 @@
+import { toLower } from 'lodash';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { MeterUnitsService } from './../../../../../core/repository/services/meter-units/meter-units.service';
@@ -20,6 +21,7 @@ import { GetDefaultInformationResponse } from 'src/app/core/repository/interface
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { TouchListener } from '@ag-grid-community/core';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   templateUrl: './add-mu-form.component.html'
@@ -84,9 +86,12 @@ export class AddMuFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.codelistServiceMu.meterUnitVendorCodelist(null).subscribe((manufacturers) => {
-      this.manufacturers = manufacturers;
-    });
+    this.codelistServiceMu
+      .meterUnitVendorCodelist(null)
+      .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
+      .subscribe((manufacturers) => {
+        this.manufacturers = manufacturers;
+      });
 
     this.autoTemplateService.getTemplates().subscribe((temps) => {
       this.templates = temps
