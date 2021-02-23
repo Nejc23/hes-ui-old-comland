@@ -11,8 +11,8 @@
         <target>Overview - Concentrators</target>
       </trans-unit>
       <trans-unit id="6170762843185284641" datatype="html">
-        <source>Concentrator units for</source>
-        <target state="final">Concentrator units for</target>
+        <source>Concentrator for</source>
+        <target>Concentrator for</target>
       </trans-unit>
       <trans-unit id="6811901802533648897" datatype="html">
         <source>N/A</source>
@@ -39,8 +39,8 @@
         <target>status</target>
       </trans-unit>
       <trans-unit id="7652014282800283826" datatype="html">
-        <source>vendor</source>
-        <target state="final">vendor</target>
+        <source>manufacturer</source>
+        <target>manufacturer</target>
       </trans-unit>
       <trans-unit id="6402703264596649214" datatype="html">
         <source>tag</source>
@@ -55,8 +55,8 @@
         <target>firmware</target>
       </trans-unit>
       <trans-unit id="2572210680699877416" datatype="html">
-        <source>show child MBus</source>
-        <target state="final">show child MBus</target>
+        <source>show M-Bus</source>
+        <target>show M-Bus</target>
       </trans-unit>
       <trans-unit id="795604053640683941" datatype="html">
         <source>show without template</source>
@@ -67,12 +67,12 @@
         <target>show only ready for activation</target>
       </trans-unit>
       <trans-unit id="5359201968934397674" datatype="html">
-        <source>Overview - Meter Units</source>
-        <target state="final">Overview - Meter Units</target>
+        <source>Overview - G3-PLC Meters</source>
+        <target>Overview - G3-PLC Meters</target>
       </trans-unit>
       <trans-unit id="3119296281460532422" datatype="html">
-        <source>Meter Units for</source>
-        <target state="final">Meter Units for</target>
+        <source>Meter for</source>
+        <target>Meter for</target>
       </trans-unit>
       <trans-unit id="7867994676734078400" datatype="html">
         <source>Value must be in range 0-100</source>
@@ -83,32 +83,32 @@
         <target>Range is not correct</target>
       </trans-unit>
       <trans-unit id="5611592591303869712" datatype="html">
-        <source>Status</source>
-        <target state="final">Status</target>
+        <source>State</source>
+        <target>State</target>
       </trans-unit>
       <trans-unit id="158816374076721379" datatype="html">
-        <source>Vendor</source>
-        <target state="final">Vendor</target>
+        <source>Manufacturer</source>
+        <target>Manufacturer</target>
       </trans-unit>
       <trans-unit id="147289373353675866" datatype="html">
         <source>Firmware</source>
         <target>Firmware</target>
       </trans-unit>
       <trans-unit id="563763657621318504" datatype="html">
-        <source>Show only Meter units with information of child (MBus)</source>
-        <target state="final">Show only Meter units with information of child (MBus)</target>
+        <source>Show only meters with M-Bus devices</source>
+        <target>Show only meters with M-Bus devices</target>
       </trans-unit>
       <trans-unit id="1825829511397926879" datatype="html">
         <source>Tag</source>
         <target>Tag</target>
       </trans-unit>
       <trans-unit id="5292172816313390601" datatype="html">
-        <source>Show Meter Units without template</source>
-        <target state="final">Show Meter Units without template</target>
+        <source>Show meters without template</source>
+        <target>Show meters without template</target>
       </trans-unit>
       <trans-unit id="4648310973208555307" datatype="html">
-        <source>Show only image ready for activation</source>
-        <target state="final">Show only image ready for activation</target>
+        <source>Show meters with FW image ready for activation</source>
+        <target>Show meters with FW image ready for activation</target>
       </trans-unit>
       <trans-unit id="8700121026680200191" datatype="html">
         <source>Clear</source>
@@ -219,12 +219,12 @@
         <target>Confirm bulk operation</target>
       </trans-unit>
       <trans-unit id="3475265554652114929" datatype="html">
-        <source>Remove <x id="PH"/> Meter Unit(s) from Job?</source>
-        <target state="final">Remove <x id="PH"/> Meter Unit(s) from Job?</target>
+        <source>Remove <x id="PH"/> meter(s) from Job?</source>
+        <target>Remove <x id="PH"/> meter(s) from Job?</target>
       </trans-unit>
       <trans-unit id="6690286116494561643" datatype="html">
-        <source>Selected Meter Units removed successfully</source>
-        <target state="final">Selected Meter Units removed successfully</target>
+        <source>Selected meters removed successfully</source>
+        <target>Selected meters removed successfully</target>
       </trans-unit>
       <trans-unit id="7457179823984196306" datatype="html">
         <source>Operations</source>
@@ -335,8 +335,8 @@
         <target>IP</target>
       </trans-unit>
       <trans-unit id="1060461174163754666" datatype="html">
-        <source>Data Concentrator Units</source>
-        <target state="final">Data Concentrator Units</target>
+        <source>Concentrators</source>
+        <target>Concentrators</target>
       </trans-unit>
       <trans-unit id="7048448815246352326" datatype="html">
         <source>items found</source>
@@ -405,17 +405,14 @@
       <trans-unit id="2847261689301738134" datatype="html">
         <source>updated</source>
         <target>updated</target>
-      </trans-unit><trans-unit id="5798687973544276975" datatype="html">
-        <source>Job was</source>
-        <target state="final">Job was</target>
       </trans-unit>
       <trans-unit id="4893141395755907203" datatype="html">
         <source>successfully</source>
         <target>successfully</target>
       </trans-unit>
       <trans-unit id="6485314736125303028" datatype="html">
-        <source>Discovery Job</source>
-        <target state="final">Discovery Job</target>
+        <source>Meter discovery</source>
+        <target>Meter discovery</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -454,8 +451,8 @@
         <target>More Save options</target>
       </trans-unit>
       <trans-unit id="8646797504756663636" datatype="html">
-        <source>Scheduler job deleted!</source>
-        <target state="final">Scheduler job deleted!</target>
+        <source>Scheduled job deleted!</source>
+        <target>Scheduled job deleted!</target>
       </trans-unit>
       <trans-unit id="7022070615528435141" datatype="html">
         <source>Delete</source>
@@ -466,8 +463,8 @@
         <target>Confirm delete</target>
       </trans-unit>
       <trans-unit id="4528916092728981282" datatype="html">
-        <source>Do you want to delete scheduler job?</source>
-        <target state="final">Do you want to delete scheduler job?</target>
+        <source>Do you want to delete scheduled job?</source>
+        <target>Do you want to delete scheduled job?</target>
       </trans-unit>
       <trans-unit id="3974480456921534163" datatype="html">
         <source>Edit job</source>
@@ -498,12 +495,12 @@
         <target>Add</target>
       </trans-unit>
       <trans-unit id="2783293384726138827" datatype="html">
-        <source>Reading job</source>
-        <target state="final">Reading job</target>
+        <source>Reading</source>
+        <target>Reading</target>
       </trans-unit>
       <trans-unit id="6420455839696291625" datatype="html">
-        <source>Discovery job</source>
-        <target state="final">Discovery job</target>
+        <source>Meter discovery</source>
+        <target>Meter discovery</target>
       </trans-unit>
       <trans-unit id="9172233176401579786" datatype="html">
         <source>Scheduled</source>
@@ -542,24 +539,24 @@
         <target>Auto Templates</target>
       </trans-unit>
       <trans-unit id="1549788821186672522" datatype="html">
-        <source>Obis</source>
-        <target>Obis</target>
+        <source>Object value</source>
+        <target>Object value</target>
       </trans-unit>
       <trans-unit id="9016240874733836639" datatype="html">
         <source>Regex</source>
         <target>Regex</target>
       </trans-unit>
       <trans-unit id="1009146229864778476" datatype="html">
-        <source>Aready added empty row for new item!</source>
-        <target state="final">Aready added empty row for new item!</target>
+        <source>New item already added!</source>
+        <target>New item already added!</target>
       </trans-unit>
       <trans-unit id="1577586869987820319" datatype="html">
-        <source>Rule was added successfully</source>
-        <target state="final">Rule was added successfully</target>
+        <source>Rule added successfully</source>
+        <target>Rule added successfully</target>
       </trans-unit>
       <trans-unit id="1347392190558339815" datatype="html">
-        <source>Rule was updated successfully</source>
-        <target state="final">Rule was updated successfully</target>
+        <source>Rule updated successfully</source>
+        <target>Rule updated successfully</target>
       </trans-unit>
       <trans-unit id="3048341745183582694" datatype="html">
         <source>Do you want to delete rule?</source>
@@ -638,8 +635,8 @@
         <target>Import TOU Configuration</target>
       </trans-unit>
       <trans-unit id="7396016917405031408" datatype="html">
-        <source>Import xml file was successfully</source>
-        <target state="final">Import xml file was successfully</target>
+        <source>Xml file import was successful</source>
+        <target>Xml file import was successful</target>
       </trans-unit>
       <trans-unit id="4908129342757001956" datatype="html">
         <source>Import device keys</source>
@@ -648,27 +645,7 @@
       <trans-unit id="2130480301668469363" datatype="html">
         <source>Upload successful</source>
         <target>Upload successful</target>
-      </trans-unit><trans-unit id="6851340082437133592" datatype="html">
-        <source>Selected file must be in .xml or .csv file format.</source>
-        <target state="final">Selected file must be in .xml or .csv file format.</target>
-      </trans-unit><trans-unit id="7926143511350598250" datatype="html">
-        <source>CSV</source>
-        <target state="final">CSV</target>
-      </trans-unit><trans-unit id="5184791213491091785" datatype="html">
-        <source>GULF_V1_1</source>
-        <target state="final">GULF_V1_1</target>
-      </trans-unit><trans-unit id="3309270839514822897" datatype="html">
-        <source>GULF_V2_0</source>
-        <target state="final">GULF_V2_0</target>
-      </trans-unit><trans-unit id="9219995935151239712" datatype="html">
-        <source>GULF_V2_3</source>
-        <target state="final">GULF_V2_3</target>
-      </trans-unit><trans-unit id="4054018915383065279" datatype="html">
-        <source>GULF_V2_4</source>
-        <target state="final">GULF_V2_4</target>
       </trans-unit>
-
-
       <trans-unit id="5798132621218162415" datatype="html">
         <source>can only upload one file.</source>
         <target>can only upload one file.</target>
@@ -740,17 +717,14 @@
       <trans-unit id="1774583572584926827" datatype="html">
         <source>Refresh data</source>
         <target>Refresh data</target>
-      </trans-unit><trans-unit id="6915429060840718325" datatype="html">
-        <source>Communication</source>
-        <target state="final">Communication</target>
       </trans-unit>
       <trans-unit id="5461424821674495162" datatype="html">
         <source>Show/hide filters</source>
         <target>Show/hide filters</target>
       </trans-unit>
       <trans-unit id="5689090354669721014" datatype="html">
-        <source>Meter Units</source>
-        <target state="final">Meter Units</target>
+        <source>Meters</source>
+        <target>Meters</target>
       </trans-unit>
       <trans-unit id="4269578151092655782" datatype="html">
         <source>Always connected</source>
@@ -781,8 +755,8 @@
         <target>Manual and local re-connection allowed / Manual disconnection not allowed</target>
       </trans-unit>
       <trans-unit id="8046182994475559393" datatype="html">
-        <source>Meter Units set Breaker mode was successfully</source>
-        <target state="final">Meter Units set Breaker mode was successfully</target>
+        <source>Setting of disconnector mode succeeded!</source>
+        <target>Setting of disconnector mode succeeded!</target>
       </trans-unit>
       <trans-unit id="4444252067276184823" datatype="html">
         <source>Disconnector mode</source>
@@ -793,8 +767,8 @@
         <target>Select/deselect</target>
       </trans-unit>
       <trans-unit id="7804366670597991631" datatype="html">
-        <source>'Name</source>
-        <target>'Name</target>
+        <source>&apos;Name</source>
+        <target>&apos;Name</target>
       </trans-unit>
       <trans-unit id="3008420115644088420" datatype="html">
         <source>Configuration</source>
@@ -809,8 +783,8 @@
         <target>Image</target>
       </trans-unit>
       <trans-unit id="5033628167956561398" datatype="html">
-        <source>Image Identifyer</source>
-        <target>Image Identifyer</target>
+        <source>Image identifier</source>
+        <target>Image identifier</target>
       </trans-unit>
       <trans-unit id="826820050104281179" datatype="html">
         <source>Image signature</source>
@@ -819,17 +793,14 @@
       <trans-unit id="6051387292073491920" datatype="html">
         <source>Fill last block</source>
         <target>Fill last block</target>
-      </trans-unit><trans-unit id="7765850159968782420" datatype="html">
-        <source>Activate immediately</source>
-        <target state="final">Activate immediately</target>
       </trans-unit>
       <trans-unit id="4759723562137600498" datatype="html">
         <source>Activate</source>
         <target>Activate</target>
       </trans-unit>
       <trans-unit id="1003468704826518252" datatype="html">
-        <source>Set Monitor was successful</source>
-        <target state="final">Set Monitor was successful</target>
+        <source>Monitor was successfully set!</source>
+        <target>Monitor was successfully set!</target>
       </trans-unit>
       <trans-unit id="693418060270512905" datatype="html">
         <source>At least one treshold should be filled!</source>
@@ -908,28 +879,28 @@
         <target>Data</target>
       </trans-unit>
       <trans-unit id="2501989539336327542" datatype="html">
-        <source>Upload image</source>
-        <target state="final">Upload image</target>
+        <source>Upload image...</source>
+        <target>Upload image...</target>
       </trans-unit>
       <trans-unit id="8247620175611326692" datatype="html">
         <source>Activate image</source>
         <target>Activate image</target>
       </trans-unit>
       <trans-unit id="1713271461473302108" datatype="html">
-        <source>Mode</source>
-        <target state="final">Mode</target>
+        <source>Mode...</source>
+        <target>Mode...</target>
       </trans-unit>
       <trans-unit id="4691747907262765119" datatype="html">
-        <source>TOU Upload</source>
-        <target state="final">TOU Upload</target>
+        <source>TOU Upload...</source>
+        <target>TOU Upload...</target>
       </trans-unit>
       <trans-unit id="3536878313651292186" datatype="html">
-        <source>Limiter</source>
-        <target state="final">Limiter</target>
+        <source>Limiter...</source>
+        <target>Limiter...</target>
       </trans-unit>
       <trans-unit id="8058994642732449354" datatype="html">
-        <source>Monitor</source>
-        <target state="final">Monitor</target>
+        <source>Monitor...</source>
+        <target>Monitor...</target>
       </trans-unit>
       <trans-unit id="7349942499709408343" datatype="html">
         <source>Clear FF</source>
@@ -938,24 +909,18 @@
       <trans-unit id="5350251507991013509" datatype="html">
         <source>Clear Alarms</source>
         <target>Clear Alarms</target>
-      </trans-unit><trans-unit id="1035536452424009821" datatype="html">
-        <source>Activate HLS</source>
-        <target state="final">Activate HLS</target>
-      </trans-unit><trans-unit id="4386083438607093987" datatype="html">
-        <source>Rekey</source>
-        <target state="final">Rekey</target>
       </trans-unit>
       <trans-unit id="4619541944202030137" datatype="html">
-        <source>You have no Data Concentrator Units yet!</source>
-        <target state="final">You have no Data Concentrator Units yet!</target>
+        <source>You have no concentrator yet!</source>
+        <target>You have no concentrator yet!</target>
       </trans-unit>
       <trans-unit id="4594629863210876240" datatype="html">
         <source> Add New</source>
         <target> Add New</target>
       </trans-unit>
       <trans-unit id="3825649834158937429" datatype="html">
-        <source>Meter Unit was updated successfully</source>
-        <target state="final">Meter Unit was updated successfully</target>
+        <source>Meter update was successful</source>
+        <target>Meter update was successful</target>
       </trans-unit>
       <trans-unit id="6478311374284260655" datatype="html">
         <source>Meters</source>
@@ -970,8 +935,8 @@
         <target>From</target>
       </trans-unit>
       <trans-unit id="8013136913336134227" datatype="html">
-        <source>Meter Unit</source>
-        <target state="final">Meter Unit</target>
+        <source>Meter</source>
+        <target>Meter</target>
       </trans-unit>
       <trans-unit id="7585826646011739428" datatype="html">
         <source>Edit</source>
@@ -992,64 +957,10 @@
       <trans-unit id="5610425955750546094" datatype="html">
         <source>Template</source>
         <target>Template</target>
-      </trans-unit><trans-unit id="8235810663505577273" datatype="html">
-        <source>Connection type</source>
-        <target state="final">Connection type</target>
-      </trans-unit><trans-unit id="8884328223023362104" datatype="html">
-        <source>Communication type</source>
-        <target state="final">Communication type</target>
-      </trans-unit><trans-unit id="3127731073427180886" datatype="html">
-        <source>Use high-level security</source>
-        <target state="final">Use high-level security</target>
-      </trans-unit><trans-unit id="4330808107055850226" datatype="html">
-        <source>Low-level security</source>
-        <target state="final">Low-level security</target>
-      </trans-unit><trans-unit id="2522129837094629838" datatype="html">
-        <source>High-level security</source>
-        <target state="final">High-level security</target>
-      </trans-unit><trans-unit id="9102185935745982355" datatype="html">
-        <source>Public address</source>
-        <target state="final">Public address</target>
-      </trans-unit><trans-unit id="1846555604165869261" datatype="html">
-        <source>HLS address</source>
-        <target state="final">HLS address</target>
-      </trans-unit><trans-unit id="235800882454190328" datatype="html">
-        <source>Gateway</source>
-        <target state="final">Gateway</target>
-      </trans-unit><trans-unit id="968799762062123504" datatype="html">
-        <source>Shortname</source>
-        <target state="final">Shortname</target>
-      </trans-unit><trans-unit id="8120084568349313167" datatype="html">
-        <source>Start with release</source>
-        <target state="final">Start with release</target>
-      </trans-unit><trans-unit id="4284098124301904777" datatype="html">
-        <source>Use Logical Device Name (LDN) as Systitle</source>
-        <target state="final">Use Logical Device Name (LDN) as Systitle</target>
-      </trans-unit><trans-unit id="7520385063679527678" datatype="html">
-        <source>Authentication type</source>
-        <target state="final">Authentication type</target>
-      </trans-unit><trans-unit id="9024026839188318205" datatype="html">
-        <source>Template is not selected</source>
-        <target state="final">Template is not selected</target>
-      </trans-unit><trans-unit id="8688093763221300184" datatype="html">
-        <source>To display the form, select the template</source>
-        <target state="final">To display the form, select the template</target>
-      </trans-unit><trans-unit id="7651496470772766293" datatype="html">
-        <source>Meter Units re-keying was successful</source>
-        <target state="final">Meter Units re-keying was successful</target>
-      </trans-unit><trans-unit id="5417142221033067570" datatype="html">
-        <source>Re-key meter (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Re-key meter (<x id="INTERPOLATION"/> selected)</target>
-      </trans-unit><trans-unit id="4671774673121980964" datatype="html">
-        <source>Please select from the list below a key type you would like to re-key.</source>
-        <target state="final">Please select from the list below a key type you would like to re-key.</target>
-      </trans-unit><trans-unit id="5867178592770153692" datatype="html">
-        <source>Key type</source>
-        <target state="final">Key type</target>
       </trans-unit>
       <trans-unit id="2316302952897056647" datatype="html">
-        <source>Error saving Meter Unit!</source>
-        <target state="final">Error saving Meter Unit!</target>
+        <source>Error saving meter!</source>
+        <target>Error saving meter!</target>
       </trans-unit>
       <trans-unit id="7286430803380181008" datatype="html">
         <source>Id</source>
@@ -1162,7 +1073,6 @@
         <source>In Range</source>
         <target>In Range</target>
       </trans-unit>
-
       <trans-unit id="7689582560947434727" datatype="html">
         <source>For last</source>
         <target>For last</target>
@@ -1176,16 +1086,16 @@
         <target>Last communication</target>
       </trans-unit>
       <trans-unit id="8079872604120956170" datatype="html">
-        <source>Data Concentration Unit was added successfully</source>
-        <target state="final">Data Concentration Unit was added successfully</target>
+        <source>Concentrator was successfully added</source>
+        <target>Concentrator was successfully added</target>
       </trans-unit>
       <trans-unit id="3505930099459089004" datatype="html">
         <source>Error adding scheduler.</source>
         <target>Error adding scheduler.</target>
       </trans-unit>
       <trans-unit id="4964011321446375935" datatype="html">
-        <source>Add Data Concentrator Unit</source>
-        <target state="final">Add Data Concentrator Unit</target>
+        <source>Add data concentrator</source>
+        <target>Add data concentrator</target>
       </trans-unit>
       <trans-unit id="3345127904026423167" datatype="html">
         <source>Id (serial number)</source>
@@ -1212,8 +1122,8 @@
         <target>Select All</target>
       </trans-unit>
       <trans-unit id="8074641440649956207" datatype="html">
-        <source>selected Data Concentrator Units?</source>
-        <target state="final">selected Data Concentrator Units?</target>
+        <source>selected concentrators?</source>
+        <target>selected concentrators?</target>
       </trans-unit>
       <trans-unit id="4204921246911160131" datatype="html">
         <source>Selected items deleted</source>
@@ -1224,12 +1134,12 @@
         <target>Add First</target>
       </trans-unit>
       <trans-unit id="8148272978112044294" datatype="html">
-        <source>Data concentrator unit</source>
-        <target state="final">Data concentrator unit</target>
+        <source>Concentrator</source>
+        <target>Concentrator</target>
       </trans-unit>
       <trans-unit id="5540900299365959437" datatype="html">
-        <source>Data Concentration Unit was updated successfully</source>
-        <target state="final">Data Concentration Unit was updated successfully</target>
+        <source>Concentrator was successfully updated</source>
+        <target>Concentrator was successfully updated</target>
       </trans-unit>
       <trans-unit id="3290665917427253156" datatype="html">
         <source>MAC</source>
@@ -1274,8 +1184,8 @@
         <target>Wrong format</target>
       </trans-unit>
       <trans-unit id="7311556461323387825" datatype="html">
-        <source>Password not match</source>
-        <target state="final">Password not match</target>
+        <source>Password does not match</source>
+        <target>Password does not match</target>
       </trans-unit>
       <trans-unit id="6867272363573367465" datatype="html">
         <source>Exceeds max value</source>
@@ -1356,8 +1266,8 @@
         <note priority="1" from="meaning">kendo.upload.filesBatchStatusFailed</note>
       </trans-unit>
       <trans-unit id="4678582374156884660" datatype="html">
-        <source>files successfully uploaded.</source>
-        <target state="final">files successfully uploaded.</target>
+        <source>Files successfully uploaded.</source>
+        <target>Files successfully uploaded.</target>
         <note priority="1" from="description">The status message for a batch of files after successful upload</note>
         <note priority="1" from="meaning">kendo.upload.filesBatchStatusUploaded</note>
       </trans-unit>
@@ -1752,8 +1662,8 @@
         <target>FW upgrade</target>
       </trans-unit>
       <trans-unit id="5209672282513780219" datatype="html">
-        <source>Breaker</source>
-        <target state="final">Breaker</target>
+        <source>Disconnector</source>
+        <target>Disconnector</target>
       </trans-unit>
       <trans-unit id="1778275808932346500" datatype="html">
         <source>CII</source>
@@ -1810,24 +1720,6 @@
       <trans-unit id="3713168783920734881" datatype="html">
         <source>CII State</source>
         <target>CII State</target>
-      </trans-unit><trans-unit id="3825771792569625715" datatype="html">
-        <source>Choose a file</source>
-        <target state="final">Choose a file</target>
-      </trans-unit><trans-unit id="5617275023512756887" datatype="html">
-        <source>Uploading file:</source>
-        <target state="final">Uploading file:</target>
-      </trans-unit><trans-unit id="2193359614283312554" datatype="html">
-        <source>Uploaded file:</source>
-        <target state="final">Uploaded file:</target>
-      </trans-unit><trans-unit id="1977812905929664564" datatype="html">
-        <source>Choose a new file</source>
-        <target state="final">Choose a new file</target>
-      </trans-unit><trans-unit id="7268034088706733842" datatype="html">
-        <source>Select here</source>
-        <target state="final">Select here</target>
-      </trans-unit><trans-unit id="3903518117616881124" datatype="html">
-        <source> or drag another file to try again.</source>
-        <target state="final"> or drag another file to try again.</target>
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source> <x id="INTERPOLATION"/> </source>
@@ -1846,8 +1738,8 @@
         <target>Sync time</target>
       </trans-unit>
       <trans-unit id="3164102267265520854" datatype="html">
-        <source>DC Time sync job</source>
-        <target state="final">DC Time sync job</target>
+        <source>Time sync</source>
+        <target>Time sync</target>
       </trans-unit>
       <trans-unit id="5969349457365616195" datatype="html">
         <source>Number of events</source>
@@ -1892,9 +1784,6 @@
       <trans-unit id="8461842260159597706" datatype="html">
         <source>Show</source>
         <target>Show</target>
-      </trans-unit><trans-unit id="8878700331247603166" datatype="html">
-        <source>Security</source>
-        <target state="final">Security</target>
       </trans-unit>
       <trans-unit id="3154923008995368575" datatype="html">
         <source>No records found. You may need to adjust your search or filter parameters.</source>
@@ -1937,8 +1826,8 @@
         <target>Drop available registers here.</target>
       </trans-unit>
       <trans-unit id="2712614620647663712" datatype="html">
-        <source>Meter Unit(s) Display settings set successfuly.</source>
-        <target state="final">Meter Unit(s) Display settings set successfuly.</target>
+        <source>Meter Display settings set successfuly.</source>
+        <target>Meter Display settings set successfuly.</target>
       </trans-unit>
       <trans-unit id="2623300631578636432" datatype="html">
         <source>Changing the register will deselect all settings.</source>
@@ -1949,15 +1838,12 @@
         <target>Register group</target>
       </trans-unit>
       <trans-unit id="3059662776648332773" datatype="html">
-        <source>Concentrator Units</source>
-        <target state="final">Concentrator Units</target>
+        <source>Concentrator</source>
+        <target>Concentrator</target>
       </trans-unit>
       <trans-unit id="137227890362474218" datatype="html">
         <source>Confim</source>
         <target>Confim</target>
-      </trans-unit><trans-unit id="3003589958263647367" datatype="html">
-        <source>Selected file must be in .img or .bin file format.</source>
-        <target state="final">Selected file must be in .img or .bin file format.</target>
       </trans-unit>
       <trans-unit id="1638104096689313605" datatype="html">
         <source>FW Upgrade successful!</source>
@@ -1990,12 +1876,6 @@
       <trans-unit id="3574734652560082816" datatype="html">
         <source>Assigning template to meter(s) may result in irreversible changes to meter data!</source>
         <target>Assigning template to meter(s) may result in irreversible changes to meter data!</target>
-      </trans-unit><trans-unit id="1417134044394198016" datatype="html">
-        <source>Delete successful!</source>
-        <target state="final">Delete successful!</target>
-      </trans-unit><trans-unit id="644464233681584563" datatype="html">
-        <source>Delete devices</source>
-        <target state="final">Delete devices</target>
       </trans-unit>
       <trans-unit id="7744152608927602135" datatype="html">
         <source>Set Display Settings</source>
@@ -2064,26 +1944,8 @@
         <target>Meter image upload was successfull</target>
       </trans-unit>
       <trans-unit id="1041031208206930198" datatype="html">
-        <source>Meter Units set Limiter was successful</source>
-        <target state="final">Meter Units set Limiter was successful</target>
-      </trans-unit><trans-unit id="6701663255113930742" datatype="html">
-        <source>Error on postSecurityEnableHls</source>
-        <target state="final">Error on postSecurityEnableHls</target>
-      </trans-unit><trans-unit id="2857197357573932828" datatype="html">
-        <source>Activate HLS (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Activate HLS (<x id="INTERPOLATION"/> selected)</target>
-      </trans-unit><trans-unit id="7367649671832930660" datatype="html">
-        <source>Are you sure you would like to perform HLS activation for the management client?</source>
-        <target state="final">Are you sure you would like to perform HLS activation for the management client?</target>
-      </trans-unit><trans-unit id="6790462154621359091" datatype="html">
-        <source>This action may result in damages, rendering meter inoperable!</source>
-        <target state="final">This action may result in damages, rendering meter inoperable!</target>
-      </trans-unit><trans-unit id="7976536095279909391" datatype="html">
-        <source>Are you sure you would like to perform re-keying of a selected key type (<x id="INTERPOLATION"/>)?</source>
-        <target state="final">Are you sure you would like to perform re-keying of a selected key type (<x id="INTERPOLATION"/>)?</target>
-      </trans-unit><trans-unit id="1242176258209332013" datatype="html">
-        <source>Meter Units activate hls successfull</source>
-        <target state="final">Meter Units activate hls successfull</target>
+        <source>Set limiter operation executed successfully</source>
+        <target>Set limiter operation executed successfully</target>
       </trans-unit>
       <trans-unit id="4057760610235468476" datatype="html">
         <source>At least one phase with name and treshold should be filled</source>
@@ -2092,16 +1954,10 @@
       <trans-unit id="3954602589132656946" datatype="html">
         <source>Clear alarms</source>
         <target>Clear alarms</target>
-      </trans-unit><trans-unit id="3783562484965706612" datatype="html">
-        <source>Protocol</source>
-        <target state="final">Protocol</target>
-      </trans-unit><trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
-        <target state="final">Medium</target>
       </trans-unit>
       <trans-unit id="3575583935097083679" datatype="html">
-        <source>Set Breaker mode (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Set Breaker mode (<x id="INTERPOLATION"/> selected)</target>
+        <source>Set disconnector mode (<x id="INTERPOLATION"/> selected)</source>
+        <target>Set disconnector mode (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit>
       <trans-unit id="5972170204882420816" datatype="html">
         <source>Set Monitor (<x id="INTERPOLATION"/> selected)</source>
@@ -2112,8 +1968,8 @@
         <target>TOU Configuration (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit>
       <trans-unit id="2339880649699708023" datatype="html">
-        <source>Relay Connect (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Relay Connect (<x id="INTERPOLATION"/> selected)</target>
+        <source>Connect relay (<x id="INTERPOLATION"/> selected)</source>
+        <target>Connect relay (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit>
       <trans-unit id="7781301631011863993" datatype="html">
         <source>(<x id="PH"/> selected)</source>
@@ -2124,22 +1980,16 @@
         <target>Tools</target>
       </trans-unit>
       <trans-unit id="4829605653773090103" datatype="html">
-        <source>Relay Disconnect (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Relay Disconnect (<x id="INTERPOLATION"/> selected)</target>
+        <source>Disconnect relay (<x id="INTERPOLATION"/> selected)</source>
+        <target>Disconnect relay (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit>
       <trans-unit id="2702284463870689226" datatype="html">
-        <source>Relay State (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Relay State (<x id="INTERPOLATION"/> selected)</target>
-      </trans-unit><trans-unit id="7112691258699898558" datatype="html">
-        <source>Are you sure you would like to read state of relay registers for selected meters?</source>
-        <target state="final">Are you sure you would like to read state of relay registers for selected meters?</target>
-      </trans-unit><trans-unit id="6923767622951451849" datatype="html">
-        <source>State of all relay registers defined on the template will be read!</source>
-        <target state="final">State of all relay registers defined on the template will be read!</target>
+        <source>Get relay state (<x id="INTERPOLATION"/> selected)</source>
+        <target>Get relay state (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit>
       <trans-unit id="1937307249593397398" datatype="html">
-        <source>Relay Mode (<x id="INTERPOLATION"/> selected)</source>
-        <target state="final">Relay Mode (<x id="INTERPOLATION"/> selected)</target>
+        <source>Set relay mode (<x id="INTERPOLATION"/> selected)</source>
+        <target>Set relay mode (<x id="INTERPOLATION"/> selected)</target>
       </trans-unit>
       <trans-unit id="694491078978333992" datatype="html">
         <source>Set display settings (<x id="INTERPOLATION"/> selected)</source>
@@ -2180,36 +2030,6 @@
       <trans-unit id="6201638315245239510" datatype="html">
         <source>Advanced</source>
         <target>Advanced</target>
-      </trans-unit><trans-unit id="2781157479989276850" datatype="html">
-        <source>Custom properties</source>
-        <target state="final">Custom properties</target>
-      </trans-unit><trans-unit id="6199836572724339721" datatype="html">
-        <source>Wrapper</source>
-        <target state="final">Wrapper</target>
-      </trans-unit><trans-unit id="337274749313181619" datatype="html">
-        <source>HDLC</source>
-        <target state="final">HDLC</target>
-      </trans-unit><trans-unit id="6252070156626006029" datatype="html">
-        <source>None</source>
-        <target state="final">None</target>
-      </trans-unit><trans-unit id="802458941707537739" datatype="html">
-        <source>Low</source>
-        <target state="final">Low</target>
-      </trans-unit><trans-unit id="8063651736083474594" datatype="html">
-        <source>High</source>
-        <target state="final">High</target>
-      </trans-unit><trans-unit id="9222810869892170667" datatype="html">
-        <source>High with GMAC</source>
-        <target state="final">High with GMAC</target>
-      </trans-unit><trans-unit id="8976722461735080572" datatype="html">
-        <source>Meter unit has been added successfully</source>
-        <target state="final">Meter unit has been added successfully</target>
-      </trans-unit><trans-unit id="1900325843387400594" datatype="html">
-        <source>Add new DLMS meter</source>
-        <target state="final">Add new DLMS meter</target>
-      </trans-unit><trans-unit id="6108435102004383383" datatype="html">
-        <source>Serial</source>
-        <target state="final">Serial</target>
       </trans-unit>
       <trans-unit id="6189397065139465013" datatype="html">
         <source>Every</source>
@@ -2250,9 +2070,6 @@
       <trans-unit id="2843324633040409418" datatype="html">
         <source>End at</source>
         <target>End at</target>
-      </trans-unit><trans-unit id="8215051676705605252" datatype="html">
-        <source>Push to IEC</source>
-        <target state="final">Push to IEC</target>
       </trans-unit>
       <trans-unit id="7379236614458665713" datatype="html">
         <source>Read from last value</source>
@@ -2363,6 +2180,246 @@
         <target>Navigate to next view</target>
         <note priority="1" from="description">The label for the next button in the Multiview calendar</note>
         <note priority="1" from="meaning">kendo.multiviewcalendar.nextButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="6915429060840718325" datatype="html">
+        <source>Communication</source>
+        <target>Communication</target>
+      </trans-unit>
+      <trans-unit id="2781157479989276850" datatype="html">
+        <source>Custom properties</source>
+        <target>Custom properties</target>
+      </trans-unit>
+      <trans-unit id="6199836572724339721" datatype="html">
+        <source>Wrapper</source>
+        <target>Wrapper</target>
+      </trans-unit>
+      <trans-unit id="337274749313181619" datatype="html">
+        <source>HDLC</source>
+        <target>HDLC</target>
+      </trans-unit>
+      <trans-unit id="6252070156626006029" datatype="html">
+        <source>None</source>
+        <target>None</target>
+      </trans-unit>
+      <trans-unit id="802458941707537739" datatype="html">
+        <source>Low</source>
+        <target>Low</target>
+      </trans-unit>
+      <trans-unit id="8063651736083474594" datatype="html">
+        <source>High</source>
+        <target>High</target>
+      </trans-unit>
+      <trans-unit id="9222810869892170667" datatype="html">
+        <source>High with GMAC</source>
+        <target>High with GMAC</target>
+      </trans-unit>
+      <trans-unit id="8976722461735080572" datatype="html">
+        <source>Meter unit has been added successfully</source>
+        <target>Meter unit has been added successfully</target>
+      </trans-unit>
+      <trans-unit id="1900325843387400594" datatype="html">
+        <source>Add new DLMS meter</source>
+        <target>Add new DLMS meter</target>
+      </trans-unit>
+      <trans-unit id="6108435102004383383" datatype="html">
+        <source>Serial</source>
+        <target>Serial</target>
+      </trans-unit>
+      <trans-unit id="8235810663505577273" datatype="html">
+        <source>Connection type</source>
+        <target>Connection type</target>
+      </trans-unit>
+      <trans-unit id="8884328223023362104" datatype="html">
+        <source>Communication type</source>
+        <target>Communication type</target>
+      </trans-unit>
+      <trans-unit id="3127731073427180886" datatype="html">
+        <source>Use high-level security</source>
+        <target>Use high-level security</target>
+      </trans-unit>
+      <trans-unit id="4330808107055850226" datatype="html">
+        <source>Low-level security</source>
+        <target>Low-level security</target>
+      </trans-unit>
+      <trans-unit id="2522129837094629838" datatype="html">
+        <source>High-level security</source>
+        <target>High-level security</target>
+      </trans-unit>
+      <trans-unit id="9102185935745982355" datatype="html">
+        <source>Public address</source>
+        <target>Public address</target>
+      </trans-unit>
+      <trans-unit id="1846555604165869261" datatype="html">
+        <source>HLS address</source>
+        <target>HLS address</target>
+      </trans-unit>
+      <trans-unit id="968799762062123504" datatype="html">
+        <source>Shortname</source>
+        <target>Shortname</target>
+      </trans-unit>
+      <trans-unit id="235800882454190328" datatype="html">
+        <source>Gateway</source>
+        <target>Gateway</target>
+      </trans-unit>
+      <trans-unit id="8120084568349313167" datatype="html">
+        <source>Start with release</source>
+        <target>Start with release</target>
+      </trans-unit>
+      <trans-unit id="4284098124301904777" datatype="html">
+        <source>Use Logical Device Name (LDN) as Systitle</source>
+        <target>Use Logical Device Name (LDN) as Systitle</target>
+      </trans-unit>
+      <trans-unit id="7520385063679527678" datatype="html">
+        <source>Authentication type</source>
+        <target>Authentication type</target>
+      </trans-unit>
+      <trans-unit id="9024026839188318205" datatype="html">
+        <source>Template is not selected</source>
+        <target>Template is not selected</target>
+      </trans-unit>
+      <trans-unit id="8688093763221300184" datatype="html">
+        <source>To display the form, select the template</source>
+        <target>To display the form, select the template</target>
+      </trans-unit>
+      <trans-unit id="1417134044394198016" datatype="html">
+        <source>Delete successful!</source>
+        <target>Delete successful!</target>
+      </trans-unit>
+      <trans-unit id="644464233681584563" datatype="html">
+        <source>Delete devices</source>
+        <target>Delete devices</target>
+      </trans-unit>
+      <trans-unit id="3783562484965706612" datatype="html">
+        <source>Protocol</source>
+        <target>Protocol</target>
+      </trans-unit>
+      <trans-unit id="5982496808088686844" datatype="html">
+        <source>Medium</source>
+        <target>Medium</target>
+      </trans-unit>
+      <trans-unit id="8215051676705605252" datatype="html">
+        <source>Push to IEC</source>
+        <target>Push to IEC</target>
+      </trans-unit>
+      <trans-unit id="7651496470772766293" datatype="html">
+        <source>Meter Units re-keying was successful</source>
+        <target>Meter Units re-keying was successful</target>
+      </trans-unit>
+      <trans-unit id="5417142221033067570" datatype="html">
+        <source>Re-key meter (<x id="INTERPOLATION"/> selected)</source>
+        <target>Re-key meter (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit>
+      <trans-unit id="4671774673121980964" datatype="html">
+        <source>Please select from the list below a key type you would like to re-key.</source>
+        <target>Please select from the list below a key type you would like to re-key.</target>
+      </trans-unit>
+      <trans-unit id="5867178592770153692" datatype="html">
+        <source>Key type</source>
+        <target>Key type</target>
+      </trans-unit>
+      <trans-unit id="6790462154621359091" datatype="html">
+        <source>This action may result in damages, rendering meter inoperable!</source>
+        <target>This action may result in damages, rendering meter inoperable!</target>
+      </trans-unit>
+      <trans-unit id="7976536095279909391" datatype="html">
+        <source>Are you sure you would like to perform re-keying of a selected key type (<x id="INTERPOLATION"/>)?</source>
+        <target>Are you sure you would like to perform re-keying of a selected key type (<x id="INTERPOLATION"/>)?</target>
+      </trans-unit>
+      <trans-unit id="1242176258209332013" datatype="html">
+        <source>Meter Units activate hls successfull</source>
+        <target>Meter Units activate hls successfull</target>
+      </trans-unit>
+      <trans-unit id="6701663255113930742" datatype="html">
+        <source>Error on postSecurityEnableHls</source>
+        <target>Error on postSecurityEnableHls</target>
+      </trans-unit>
+      <trans-unit id="2857197357573932828" datatype="html">
+        <source>Activate HLS (<x id="INTERPOLATION"/> selected)</source>
+        <target>Activate HLS (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit>
+      <trans-unit id="7367649671832930660" datatype="html">
+        <source>Are you sure you would like to perform HLS activation for the management client?</source>
+        <target>Are you sure you would like to perform HLS activation for the management client?</target>
+      </trans-unit>
+      <trans-unit id="7112691258699898558" datatype="html">
+        <source>Are you sure you would like to read state of relay registers for selected meters?</source>
+        <target>Are you sure you would like to read state of relay registers for selected meters?</target>
+      </trans-unit>
+      <trans-unit id="6923767622951451849" datatype="html">
+        <source>State of all relay registers defined on the template will be read!</source>
+        <target>State of all relay registers defined on the template will be read!</target>
+      </trans-unit>
+      <trans-unit id="8878700331247603166" datatype="html">
+        <source>Security</source>
+        <target>Security</target>
+      </trans-unit>
+      <trans-unit id="1035536452424009821" datatype="html">
+        <source>Activate HLS</source>
+        <target>Activate HLS</target>
+      </trans-unit>
+      <trans-unit id="4386083438607093987" datatype="html">
+        <source>Rekey</source>
+        <target>Rekey</target>
+      </trans-unit>
+      <trans-unit id="5798687973544276975" datatype="html">
+        <source>Job was</source>
+        <target>Job was</target>
+      </trans-unit>
+      <trans-unit id="6851340082437133592" datatype="html">
+        <source>Selected file must be in .xml or .csv file format.</source>
+        <target>Selected file must be in .xml or .csv file format.</target>
+      </trans-unit>
+      <trans-unit id="7926143511350598250" datatype="html">
+        <source>CSV</source>
+        <target>CSV</target>
+      </trans-unit>
+      <trans-unit id="5184791213491091785" datatype="html">
+        <source>GULF_V1_1</source>
+        <target>GULF_V1_1</target>
+      </trans-unit>
+      <trans-unit id="3309270839514822897" datatype="html">
+        <source>GULF_V2_0</source>
+        <target>GULF_V2_0</target>
+      </trans-unit>
+      <trans-unit id="9219995935151239712" datatype="html">
+        <source>GULF_V2_3</source>
+        <target>GULF_V2_3</target>
+      </trans-unit>
+      <trans-unit id="4054018915383065279" datatype="html">
+        <source>GULF_V2_4</source>
+        <target>GULF_V2_4</target>
+      </trans-unit>
+      <trans-unit id="3003589958263647367" datatype="html">
+        <source>Selected file must be in .img or .bin file format.</source>
+        <target>Selected file must be in .img or .bin file format.</target>
+      </trans-unit>
+      <trans-unit id="7765850159968782420" datatype="html">
+        <source>Activate immediately</source>
+        <target>Activate immediately</target>
+      </trans-unit>
+      <trans-unit id="3825771792569625715" datatype="html">
+        <source>Choose a file</source>
+        <target>Choose a file</target>
+      </trans-unit>
+      <trans-unit id="5617275023512756887" datatype="html">
+        <source>Uploading file:</source>
+        <target>Uploading file:</target>
+      </trans-unit>
+      <trans-unit id="2193359614283312554" datatype="html">
+        <source>Uploaded file:</source>
+        <target>Uploaded file:</target>
+      </trans-unit>
+      <trans-unit id="1977812905929664564" datatype="html">
+        <source>Choose a new file</source>
+        <target>Choose a new file</target>
+      </trans-unit>
+      <trans-unit id="7268034088706733842" datatype="html">
+        <source>Select here</source>
+        <target>Select here</target>
+      </trans-unit>
+      <trans-unit id="3903518117616881124" datatype="html">
+        <source> or drag another file to try again.</source>
+        <target> or drag another file to try again.</target>
       </trans-unit>
       <trans-unit id="7844706011418789951" datatype="html">
         <source>Administration</source>
