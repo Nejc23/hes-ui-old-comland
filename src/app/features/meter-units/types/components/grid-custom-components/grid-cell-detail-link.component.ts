@@ -24,7 +24,6 @@ export class GridCellDetailLinkComponent implements ICellRendererAngularComp {
 
   // action show details
   showItem() {
-
     this.params.context.componentParent.showItem(this.params.data.deviceId);
   }
 }
