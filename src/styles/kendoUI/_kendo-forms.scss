@@ -173,16 +173,16 @@ input[type=search].wildcard {
 
   .dropzone-custom {
     height: 300px;
-    border:2px dashed $gray-500;
+    border:2px dashed $gray-400;
     border-radius:8px;
     display:flex;
     justify-content: center;
     align-items: center;
 
-    background-color: $gray-300;
+    background-color: $gray-200;
 
     &.hover-mouse-down {
-      background-color: $gray-400;
+      background-color: $gray-300;
     }
 
     a {
