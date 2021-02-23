@@ -28,6 +28,8 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   uploadDropSubtitle = $localize`Selected file must be in .xml or .csv file format.`;
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
 
+  subtitle = $localize`To import key material to Vault, first select the security material file type, then select the file to be imported.`;
+
   form: FormGroup;
 
   fileTypes: Codelist<string>[] = [

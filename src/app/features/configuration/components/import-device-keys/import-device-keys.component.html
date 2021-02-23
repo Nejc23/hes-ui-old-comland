@@ -10,9 +10,19 @@
 
 </div>
 -->
-<app-select-input i18n-label label="File type" [form]="form" [property]="fileTypeProperty" [selectOptions]="fileTypes"
-  [disabled]="false" (selectedValueChanged)="fileTypeChanged($event)">
-</app-select-input>
+<div class="form-row mb-2">
+  <div class="col-12">
+    <label class="text-truncate" container="body" placement="bottom" [openDelay]="500"
+    [ngbTooltip]="subtitle">{{ subtitle }}</label>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-4">
+    <app-select-input i18n-label label="File type" [form]="form" [property]="fileTypeProperty" [selectOptions]="fileTypes"
+      [disabled]="false" (selectedValueChanged)="fileTypeChanged($event)">
+    </app-select-input>
+  </div>
+</div>
 
 <div class="form-row">
   <div class="col-12 expand-dropzone">
