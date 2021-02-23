@@ -20,8 +20,9 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()"> <i class="far fa-times"></i>
-        <span i18n>Cancel</span></button>
+      <button type="button" class="btn btn-link" (click)="cancel()">
+        <span i18n>Cancel</span>
+      </button>
       <div class="btn-group dropdown" *ngIf="!activate">
         <button type="submit" class="btn btn-primary" (click)="upgrade()">
           <span i18n>Confirm</span></button>
