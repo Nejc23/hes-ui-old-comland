@@ -25,7 +25,7 @@ import { AppConfigService } from 'src/app/core/configuration/services/app-config
 export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload') fileUpload: FileUploadComponent;
 
-  uploadDropSubtitle = $localize`Selected Image must be in GULF (.xml, .csv) file format.`;
+  uploadDropSubtitle = $localize`Selected file must be in .xml or .csv file format.`;
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
 
   form: FormGroup;

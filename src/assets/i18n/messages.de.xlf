@@ -648,9 +648,9 @@
       <trans-unit id="2130480301668469363" datatype="html">
         <source>Upload successful</source>
         <target>Hochladen erfolgreich</target>
-      </trans-unit><trans-unit id="3536386519747778703" datatype="html">
-        <source>Selected Image must be in GULF (.xml, .csv) file format.</source>
-        <target state="new">Selected Image must be in GULF (.xml, .csv) file format.</target>
+      </trans-unit><trans-unit id="6851340082437133592" datatype="html">
+        <source>Selected file must be in .xml or .csv file format.</source>
+        <target state="new">Selected file must be in .xml or .csv file format.</target>
       </trans-unit><trans-unit id="7926143511350598250" datatype="html">
         <source>CSV</source>
         <target state="new">CSV</target>
@@ -667,8 +667,8 @@
         <source>GULF_V2_4</source>
         <target state="new">GULF_V2_4</target>
       </trans-unit>
-      
-      
+
+
       <trans-unit id="5798132621218162415" datatype="html">
         <source>can only upload one file.</source>
         <target>Nur eine Datei kann hochgeladen werden.</target>
@@ -1162,7 +1162,7 @@
         <source>In Range</source>
         <target>In Reichweite</target>
       </trans-unit>
-      
+
       <trans-unit id="7689582560947434727" datatype="html">
         <source>For last</source>
         <target>Zum Schluss</target>
