@@ -3,7 +3,6 @@ export interface MuHdlcInformation {
   llsServerLow: number;
   llsClientHigh: number;
   llsServerHigh: number;
-  password: string;
   publicClientLow: number;
   publicServerLow: number;
   publicClientHigh: number;

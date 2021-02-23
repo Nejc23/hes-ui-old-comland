@@ -204,10 +204,6 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuHdlcInformation>((o) => o.llsServerHigh);
   }
 
-  get passwordProperty() {
-    return nameOf<MuForm>((o) => o.password);
-  }
-
   get publicClientLowProperty() {
     return nameOf<MuHdlcInformation>((o) => o.publicClientLow);
   }
@@ -259,7 +255,6 @@ export class AddMuFormComponent implements OnInit {
       // wrapper
       [this.wrapperLlsClientProperty]: [null, Validators.required],
       [this.wrapperLlsServerProperty]: [null, Validators.required],
-      // [this.wrapperPasswordProperty]: [null, Validators.required],
 
       [this.wrapperPublicClientProperty]: [null, Validators.required],
       [this.wrapperPublicServerProperty]: [null, Validators.required],
@@ -275,7 +270,6 @@ export class AddMuFormComponent implements OnInit {
       [this.llsServerLowProperty]: [null, Validators.required],
       [this.llsClientHighProperty]: [null, Validators.required],
       [this.llsServerHighProperty]: [null, Validators.required],
-      [this.passwordProperty]: [null, Validators.required],
       [this.publicClientLowProperty]: [null, Validators.required],
       [this.publicServerLowProperty]: [null, Validators.required],
       [this.publicClientHighProperty]: [null, Validators.required],
@@ -331,7 +325,6 @@ export class AddMuFormComponent implements OnInit {
       this.setDefaultValue(this.wrapperPublicClientProperty, wrapperInformation.publicClient);
       this.setDefaultValue(this.wrapperPublicServerProperty, wrapperInformation.publicServer);
 
-      this.setDefaultValue(this.passwordProperty, wrapperInformation.password);
       this.setDefaultValue(this.wrapperPhysicalAddressProperty, wrapperInformation.physicalAddress);
     }
 
@@ -341,7 +334,6 @@ export class AddMuFormComponent implements OnInit {
       this.setDefaultValue(this.llsClientHighProperty, hdlsInformation.llsClientHigh);
       this.setDefaultValue(this.llsServerLowProperty, hdlsInformation.llsServerLow);
       this.setDefaultValue(this.llsServerHighProperty, hdlsInformation.llsServerHigh);
-      this.setDefaultValue(this.passwordProperty, hdlsInformation.password);
       this.setDefaultValue(this.publicClientLowProperty, hdlsInformation.publicClientLow);
       this.setDefaultValue(this.publicClientHighProperty, hdlsInformation.publicClientHigh);
       this.setDefaultValue(this.publicServerLowProperty, hdlsInformation.publicServerLow);
@@ -503,7 +495,6 @@ export class AddMuFormComponent implements OnInit {
       wrapperInformation = {
         llsClient: this.form.get(this.wrapperLlsClientProperty).value,
         llsServer: this.form.get(this.wrapperLlsServerProperty).value,
-        password: this.form.get(this.passwordProperty).value,
         publicClient: this.form.get(this.wrapperPublicClientProperty).value,
         publicServer: this.form.get(this.wrapperPublicServerProperty).value,
         hlsClient: this.form.get(this.wrapperHlsClientProperty).value,
@@ -519,7 +510,6 @@ export class AddMuFormComponent implements OnInit {
         llsClientHigh: this.form.get(this.llsClientHighProperty).value,
         llsServerLow: this.form.get(this.llsServerLowProperty).value,
         llsServerHigh: this.form.get(this.llsServerHighProperty).value,
-        password: this.form.get(this.passwordProperty).value,
         publicClientLow: this.form.get(this.publicClientLowProperty).value,
         publicClientHigh: this.form.get(this.publicClientHighProperty).value,
         publicServerLow: this.form.get(this.publicServerLowProperty).value,
@@ -544,7 +534,6 @@ export class AddMuFormComponent implements OnInit {
       isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
       isShortName: this.form.get(this.isShortNameProperty).value,
-      password: this.form.get(this.passwordProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value,
       advancedInformation: {
         authenticationType: this.form.get(this.authenticationTypeProperty).value,
