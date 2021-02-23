@@ -45,7 +45,6 @@ describe('Pact consumer test', () => {
       llsServerLow: 2,
       llsClientHigh: 3,
       llsServerHigh: 4,
-      password: 'Password',
       publicClientLow: 5,
       publicServerLow: 6,
       publicClientHigh: 7,
@@ -58,7 +57,6 @@ describe('Pact consumer test', () => {
     wrapperInformation: {
       llsClient: 1,
       llsServer: 2,
-      password: 'Password',
       publicClient: 3,
       publicServer: 4,
       hlsClient: 5,

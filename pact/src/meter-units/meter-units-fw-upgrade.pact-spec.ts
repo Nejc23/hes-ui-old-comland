@@ -48,7 +48,8 @@ describe('Pact consumer test', () => {
       value: '',
       propNames: [],
       useWildcards: false
-    }
+    },
+    activate: false
   };
 
   const responseBody: IActionResponseFwUpgradeData = {

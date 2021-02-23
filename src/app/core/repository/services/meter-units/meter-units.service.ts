@@ -177,7 +177,6 @@ export class MeterUnitsService {
       muRequest.wrapperInformation = {
         llsClient: payload.wrapperInformation.llsClient,
         llsServer: payload.wrapperInformation.llsServer,
-        password: payload.wrapperInformation.password,
         publicClient: payload.wrapperInformation.publicClient,
         publicServer: payload.wrapperInformation.publicServer,
         hlsClient: payload.wrapperInformation.hlsClient,
@@ -191,7 +190,6 @@ export class MeterUnitsService {
         llsClientHigh: payload.hdlcInformation.llsClientLow,
         llsServerLow: payload.hdlcInformation.llsServerLow,
         llsServerHigh: payload.hdlcInformation.llsServerHigh,
-        password: payload.hdlcInformation.password,
         publicClientLow: payload.hdlcInformation.publicClientLow,
         publicClientHigh: payload.hdlcInformation.publicClientHigh,
         publicServerLow: payload.hdlcInformation.publicServerLow,

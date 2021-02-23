@@ -16,7 +16,6 @@ export interface MuForm {
   isGateway: boolean;
   jobIds: string[];
   isShortName: boolean;
-  password: string;
   authenticationType: Codelist<number>;
 
   advancedInformation: MuAdvancedInformation;

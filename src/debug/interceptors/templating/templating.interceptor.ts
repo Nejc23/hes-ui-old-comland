@@ -37,7 +37,6 @@ export class TemplatingInterceptor {
           llsServerLow: 1,
           llsClientHigh: 1,
           llsServerHigh: 1,
-          password: '12344567',
           publicClientLow: 1,
           publicServerLow: 1,
           publicClientHigh: 1,
@@ -54,7 +53,6 @@ export class TemplatingInterceptor {
         wrapperInformation: {
           llsClient: 1,
           llsServer: 1,
-          password: '12345678',
           publicClient: 1,
           publicServer: 16,
           hlsClient: 1,
