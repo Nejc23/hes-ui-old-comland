@@ -3,8 +3,11 @@
 
     <div class="form-group" *ngIf="!editMode">
       <button class="btn btn-primary" (click)="editMeterUnit()">
-        <i class="far fa-edit"></i><span i18n>Edit</span>
+        <span i18n>Edit</span>
       </button>
+      <div class="btn-group pr-2" *ngIf="!editMode">
+        <button class="btn btn-secondary" type="button" (click)="onDelete()"><span i18n>Delete</span></button>
+      </div>
       <div dropdown class="btn-group">
         <button dropdownToggle class="btn btn-secondary dropdown-toggle" type="button" id="operationsDropDown"
           data-toggle="dropdown"><span i18n>Operations</span></button>
@@ -126,9 +129,6 @@
               (click)="onClearAlarms()"><span i18n>Clear Alarms</span></a>
           </div>
         </div>
-      </div>
-      <div class="btn-group pl-2" *ngIf="!editMode">
-        <button class="btn btn-secondary" type="button" (click)="onDelete()"><span i18n>Delete</span></button>
       </div>
     </div>
 

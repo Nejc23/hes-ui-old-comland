@@ -29,7 +29,7 @@
     <div class="d-flex align-items-center mb-3 mt-0">
         <h4 class="mr-3 mb-0" i18n>Rules</h4>
         <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement?.templateId?.length == 0">
-          <i class="far fa-plus"></i> <span i18n>Add</span>
+          <span i18n>Add</span>
         </button>
     </div>
 
@@ -63,7 +63,7 @@
           <app-select-input i18n-label [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
           <div class="form-group">
             <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement?.templateId?.length == 0">
-              <i class="far fa-plus"></i> <span i18n>Add</span>
+              <span i18n>Add</span>
             </button>
           </div>
         </div>
