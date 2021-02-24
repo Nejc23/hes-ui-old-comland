@@ -180,9 +180,13 @@ export class SchedulerJobComponent implements OnInit {
         usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
         iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
         intervalRange:
-          this.form.get(this.intervalRangeProperty).value !== null ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
+          this.showForLast() && this.form.get(this.intervalRangeProperty).value
+            ? parseInt(this.form.get(this.intervalRangeProperty).value, 10)
+            : null,
         timeUnit:
-          this.form.get(this.timeUnitProperty).value !== null ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
+          this.showForLast() && this.form.get(this.timeUnitProperty).value
+            ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id
+            : null
       }
     };
     return formData;
@@ -195,13 +199,17 @@ export class SchedulerJobComponent implements OnInit {
     this.setFormAddNew(this.jobType, this.jobsTimeUnits);
   }
 
+  showForLast() {
+    return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
+  }
+
   showPointer() {
     return this.jobType.toLowerCase() === jobType.reading.toLowerCase() || this.jobType.toLowerCase() === jobType.readEvents.toLowerCase();
   }
 
-  showUsePointer() {
-    return this.form.get(this.usePointerProperty).value === true;
-  }
+  // showUsePointer() {
+  //   return this.form.get(this.usePointerProperty).value === true;
+  // }
 
   showIecPush() {
     return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
@@ -303,15 +311,15 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   next(value) {
-    this.form.get(this.intervalRangeProperty).disable();
-    this.form.get(this.timeUnitProperty).disable();
+    // this.form.get(this.intervalRangeProperty).disable();
+    // this.form.get(this.timeUnitProperty).disable();
     this.form.get(this.registersProperty).disable();
     this.form.get(this.devicesProperty).disable();
 
-    if (this.showPointer() && this.form.get(this.usePointerProperty).value) {
-      this.form.get(this.intervalRangeProperty).enable();
-      this.form.get(this.timeUnitProperty).enable();
-    }
+    // if (this.showPointer() && this.form.get(this.usePointerProperty).value) {
+    //   this.form.get(this.intervalRangeProperty).enable();
+    //   this.form.get(this.timeUnitProperty).enable();
+    // }
 
     // check form
     this.formUtils.touchElementsAndValidate(this.form);

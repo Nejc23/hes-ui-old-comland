@@ -27,6 +27,18 @@
           </app-datetime-picker>
         </div>
       </div>
+
+      <div class="form-row" *ngIf="showForLast()">
+        <div class="col-2">
+          <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For last">
+          </app-input-text>
+        </div>
+        <div class="col-3">
+          <app-select-input [form]="form" [property]="timeUnitProperty" label=" " [selectOptions]="jobsTimeUnits" [disabled]="false">
+          </app-select-input>
+        </div>
+      </div>
+
       <app-cron-schedule [cronExpression]="cronExpression" #cronSchedule></app-cron-schedule>
 
       <div *ngIf="showIecPush()">
@@ -42,16 +54,6 @@
           <div class="col-12">
             <app-input-switch [form]="form" [property]="usePointerProperty" i18n-label label="Read from last value">
             </app-input-switch>
-          </div>
-        </div>
-        <div class="form-row" *ngIf="showUsePointer()">
-          <div class="col-2">
-            <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For last">
-            </app-input-text>
-          </div>
-          <div class="col-3">
-            <app-select-input [form]="form" [property]="timeUnitProperty" label=" " [selectOptions]="jobsTimeUnits" [disabled]="false">
-            </app-select-input>
           </div>
         </div>
       </div>
