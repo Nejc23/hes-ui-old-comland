@@ -44,7 +44,7 @@ export class MeterUnitDetailsComponent implements OnInit {
     private codeList: CodelistMeterUnitsRepositoryService,
     private router: Router
   ) {
-    breadcrumbService.setPageName('Meter Unit');
+    breadcrumbService.setPageName($localize`Meter unit`);
   }
 
   ngOnInit() {
