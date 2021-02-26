@@ -1,6 +1,6 @@
 <div class="form-group" *ngIf="!edit">
   <button class="btn btn-primary mr-2" (click)="editDcu()">
-    <i class="far fa-pencil"></i> <span i18n>Edit</span>
+    <span i18n>Edit</span>
   </button>
   <app-dc-operations [showOperations]="true" [requestModel]="null"
     [guid]="concentratorId" [selectedItemsCount]="1"></app-dc-operations>

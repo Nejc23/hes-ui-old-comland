@@ -30,6 +30,7 @@ import { GridCellCiiStateComponent } from '../components/grid-custom-components/
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { GridCellProtocolComponent } from '../components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from '../components/grid-custom-components/grid-cell-medium.component';
+import { GridCellInstantValuesComponent } from '../components/grid-custom-components/grid-cell-instant-values.component';
 
 @Injectable({
   providedIn: 'root'
@@ -355,6 +356,18 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
+        field: gridSysNameColumnsEnum.instantValues,
+        headerName: $localize`Relay`,
+        pinned: false,
+        sortable: false,
+        filter: false,
+        cellRenderer: 'gridCellInstantValuesComponent',
+        headerTooltip: $localize`Relay`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
+      },
+      {
         field: gridSysNameColumnsEnum.ciiState,
         headerName: $localize`CII State`,
         pinned: false,
@@ -449,7 +462,8 @@ export class MeterUnitsTypeGridService {
       gridCellDetailLinkComponent: GridCellDetailLinkComponent,
       gridCellNameComponent: GridCellNameComponent,
       gridCellProtocolComponent: GridCellProtocolComponent,
-      gridCellMediumComponent: GridCellMediumComponent
+      gridCellMediumComponent: GridCellMediumComponent,
+      gridCellInstantValuesComponent: GridCellInstantValuesComponent
     };
   }
 

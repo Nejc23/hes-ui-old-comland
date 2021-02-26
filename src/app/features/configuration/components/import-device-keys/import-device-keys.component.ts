@@ -33,11 +33,11 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   form: FormGroup;
 
   fileTypes: Codelist<string>[] = [
-    { id: '1' as string, value: $localize`CSV` },
-    { id: '2' as string, value: $localize`GULF_V1_1` },
-    { id: '3' as string, value: $localize`GULF_V2_0` },
-    { id: '4' as string, value: $localize`GULF_V2_3` },
-    { id: '5' as string, value: $localize`GULF_V2_4` }
+    { id: '1' as string, value: `CSV` },
+    { id: '2' as string, value: `GULF_V1_1` },
+    { id: '3' as string, value: `GULF_V2_0` },
+    { id: '4' as string, value: `GULF_V2_3` },
+    { id: '5' as string, value: `GULF_V2_4` }
   ];
 
   defaultFileType = this.fileTypes[4];
