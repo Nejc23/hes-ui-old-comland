@@ -1,3 +1,4 @@
+import { GridCellInstantValuesComponent } from './../components/grid-custom-components/grid-cell-instant-values.component';
 import { GridCellNameComponent } from 'src/app/shared/ag-grid/components/grid-cell-name.component';
 import { GridCellDetailLinkComponent } from '../components/grid-custom-components/grid-cell-detail-link.component';
 import { Injectable } from '@angular/core';
@@ -355,6 +356,18 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
+        field: gridSysNameColumnsEnum.instantValues,
+        headerName: $localize`Relay`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellInstantValuesComponent',
+        headerTooltip: $localize`Relay`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
+      },
+      {
         field: gridSysNameColumnsEnum.ciiState,
         headerName: $localize`CII State`,
         pinned: false,
@@ -449,7 +462,8 @@ export class MeterUnitsTypeGridService {
       gridCellDetailLinkComponent: GridCellDetailLinkComponent,
       gridCellNameComponent: GridCellNameComponent,
       gridCellProtocolComponent: GridCellProtocolComponent,
-      gridCellMediumComponent: GridCellMediumComponent
+      gridCellMediumComponent: GridCellMediumComponent,
+      gridCellInstantValuesComponent: GridCellInstantValuesComponent
     };
   }
 

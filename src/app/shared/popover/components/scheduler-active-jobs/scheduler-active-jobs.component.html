@@ -9,7 +9,7 @@
       </div>
     </div>
     <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1" >
-      <a href="javascript:void(0);" (click)="showMore()">{{getShowAllText()}}</a>
+      <a href="javascript:void(0);" (click)="showMore()">{{ getShowAllText() }}</a>
     </div>
   </div>
   <div class="text-center pt-2 pb-2" *ngIf="!isContentLoaded" >
