@@ -1723,6 +1723,9 @@
       <trans-unit id="3713168783920734881" datatype="html">
         <source>CII State</source>
         <target>CII State</target>
+      </trans-unit><trans-unit id="6738217183724690883" datatype="html">
+        <source>relays</source>
+        <target state="final">relays</target>
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source> <x id="INTERPOLATION"/> </source>
