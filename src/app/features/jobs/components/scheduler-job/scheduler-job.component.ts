@@ -316,6 +316,11 @@ export class SchedulerJobComponent implements OnInit {
     this.form.get(this.registersProperty).disable();
     this.form.get(this.devicesProperty).disable();
 
+    if (!this.showForLast()) {
+      this.form.get(this.intervalRangeProperty).disable();
+      this.form.get(this.timeUnitProperty).disable();
+    }
+
     // if (this.showPointer() && this.form.get(this.usePointerProperty).value) {
     //   this.form.get(this.intervalRangeProperty).enable();
     //   this.form.get(this.timeUnitProperty).enable();
