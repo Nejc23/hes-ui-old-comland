@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: $localize`Configuration`,
+      breadcrumb: $localize`Tools`,
       permission: FunctionalityEnumerator.MU
     },
     children: [
