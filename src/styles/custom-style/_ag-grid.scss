@@ -10,3 +10,11 @@
 .ag-paging-page-summary-panel {
   z-index:1
 }
+
+.grid-cell-link-popup a {
+  &:active, &:focus {
+    outline: none;
+    border: 0;
+    box-shadow: none;
+  }
+}

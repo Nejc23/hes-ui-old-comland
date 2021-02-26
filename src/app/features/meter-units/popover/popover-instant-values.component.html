@@ -1,0 +1,16 @@
+<div class="form">
+
+  <div class="form-row mb-1">
+    <div class="col-12">
+      <span class="p-1 {{ titleClass }}">{{ visibleInstantValues && visibleInstantValues.length > 0 ? visibleInstantValues[0].interpretedValue : ''  }}</span>
+    </div>
+  </div>
+  <div class="form-row" *ngFor="let instantValue of visibleInstantValues" mt-1 >
+    <div class="col-12 text-truncate" placement="bottom" openDelay="500" [ngbTooltip]="instantValue.registerName" container="body" #divDescription>
+      {{instantValue.registerName}}
+    </div>
+  </div>
+  <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1" >
+    <a href="javascript:void(0);" (click)="showMore()">{{ getShowAllText() }}</a>
+  </div>
+</div>

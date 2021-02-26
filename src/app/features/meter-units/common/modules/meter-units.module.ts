@@ -1,3 +1,4 @@
+import { GridCellInstantValuesComponent } from './../../types/components/grid-custom-components/grid-cell-instant-values.component';
 import { GridCellProtocolComponent } from './../../types/components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from './../../types/components/grid-custom-components/grid-cell-medium.component';
 import { AddMuFormComponent } from './../components/add-mu-form/add-mu-form.component';
@@ -75,7 +76,8 @@ import { RegistersColumnChartComponent } from '../../registers/components/chart/
     MeterUnitDetailsComponent,
     GridCellProtocolComponent,
     GridCellMediumComponent,
-    AddMuFormComponent
+    AddMuFormComponent,
+    GridCellInstantValuesComponent
   ],
   imports: [
     SharedModule,
@@ -103,7 +105,8 @@ import { RegistersColumnChartComponent } from '../../registers/components/chart/
       GridCellDateComponent,
       GridCellDetailLinkComponent,
       GridCellProtocolComponent,
-      GridCellMediumComponent
+      GridCellMediumComponent,
+      GridCellInstantValuesComponent
     ])
   ]
 })
