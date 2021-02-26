@@ -1,4 +1,3 @@
-import { GridCellInstantValuesComponent } from './../components/grid-custom-components/grid-cell-instant-values.component';
 import { GridCellNameComponent } from 'src/app/shared/ag-grid/components/grid-cell-name.component';
 import { GridCellDetailLinkComponent } from '../components/grid-custom-components/grid-cell-detail-link.component';
 import { Injectable } from '@angular/core';
@@ -31,6 +30,7 @@ import { GridCellCiiStateComponent } from '../components/grid-custom-components/
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { GridCellProtocolComponent } from '../components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from '../components/grid-custom-components/grid-cell-medium.component';
+import { GridCellInstantValuesComponent } from '../components/grid-custom-components/grid-cell-instant-values.component';
 
 @Injectable({
   providedIn: 'root'
@@ -359,7 +359,7 @@ export class MeterUnitsTypeGridService {
         field: gridSysNameColumnsEnum.instantValues,
         headerName: $localize`Relay`,
         pinned: false,
-        sortable: true,
+        sortable: false,
         filter: false,
         cellRenderer: 'gridCellInstantValuesComponent',
         headerTooltip: $localize`Relay`,

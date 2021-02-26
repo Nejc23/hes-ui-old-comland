@@ -486,7 +486,17 @@ function setData(): MeterUnitsList[] {
       readyForActivation: false,
       hasActiveJobs: false,
       ciiState: 'on',
-      serialNumber: '39305922'
+      serialNumber: '39305922',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: 'e4694732-a282-477c-9c47-79ca08f64911',
@@ -516,7 +526,17 @@ function setData(): MeterUnitsList[] {
       readyForActivation: false,
       hasActiveJobs: true,
       ciiState: 'off',
-      serialNumber: '39305923'
+      serialNumber: '39305923',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: '4db50891-45dc-4910-bc8e-1d1c15862a68',
@@ -546,7 +566,17 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: false,
       ciiState: 'off',
-      serialNumber: '39305924'
+      serialNumber: '39305924',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadForActivation',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: '7f7e9055-ad99-479f-956f-903022e1cccd',
@@ -576,7 +606,25 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: false,
       ciiState: 'off',
-      serialNumber: '39305925'
+      serialNumber: '39305925',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        },
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForActivation',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',
