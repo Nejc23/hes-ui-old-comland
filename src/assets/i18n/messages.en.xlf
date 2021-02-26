@@ -917,6 +917,9 @@
       <trans-unit id="4594629863210876240" datatype="html">
         <source> Add New</source>
         <target> Add New</target>
+      </trans-unit><trans-unit id="2896781806939874098" datatype="html">
+        <source>Meter unit</source>
+        <target state="final">Meter unit</target>
       </trans-unit>
       <trans-unit id="3825649834158937429" datatype="html">
         <source>Meter Unit was updated successfully</source>
@@ -1720,6 +1723,9 @@
       <trans-unit id="3713168783920734881" datatype="html">
         <source>CII State</source>
         <target>CII State</target>
+      </trans-unit><trans-unit id="6738217183724690883" datatype="html">
+        <source>relays</source>
+        <target state="final">relays</target>
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source> <x id="INTERPOLATION"/> </source>
@@ -2368,33 +2374,6 @@
       <trans-unit id="6851340082437133592" datatype="html">
         <source>Selected file must be in .xml or .csv file format.</source>
         <target>Selected file must be in .xml or .csv file format.</target>
-      </trans-unit><trans-unit id="2563009273407333245" datatype="html">
-        <source>To import key material to Vault, first select the security material file type, then select the file to be imported.</source>
-        <target state="final">To import key material to Vault, first select the security material file type, then select the file to be imported.</target>
-      </trans-unit>
-      <trans-unit id="7926143511350598250" datatype="html">
-        <source>CSV</source>
-        <target>CSV</target>
-      </trans-unit>
-      <trans-unit id="5184791213491091785" datatype="html">
-        <source>GULF_V1_1</source>
-        <target>GULF_V1_1</target>
-      </trans-unit>
-      <trans-unit id="3309270839514822897" datatype="html">
-        <source>GULF_V2_0</source>
-        <target>GULF_V2_0</target>
-      </trans-unit>
-      <trans-unit id="9219995935151239712" datatype="html">
-        <source>GULF_V2_3</source>
-        <target>GULF_V2_3</target>
-      </trans-unit>
-      <trans-unit id="4054018915383065279" datatype="html">
-        <source>GULF_V2_4</source>
-        <target>GULF_V2_4</target>
-      </trans-unit>
-      <trans-unit id="3003589958263647367" datatype="html">
-        <source>Selected file must be in .img or .bin file format.</source>
-        <target>Selected file must be in .img or .bin file format.</target>
       </trans-unit>
       <trans-unit id="7765850159968782420" datatype="html">
         <source>Activate immediately</source>
@@ -2431,6 +2410,14 @@
       <trans-unit id="4555457172864212828" datatype="html">
         <source>Users</source>
         <target>Users</target>
+      </trans-unit>
+      <trans-unit id="2563009273407333245" datatype="html">
+        <source>To import key material to Vault, first select the security material file type, then select the file to be imported.</source>
+        <target>To import key material to Vault, first select the security material file type, then select the file to be imported.</target>
+      </trans-unit>
+      <trans-unit id="3145605724148235053" datatype="html">
+        <source>Selected file must be in .img, .bin or .dat file format.</source>
+        <target>Selected file must be in .img, .bin or .dat file format.</target>
       </trans-unit>
     </body>
   </file>

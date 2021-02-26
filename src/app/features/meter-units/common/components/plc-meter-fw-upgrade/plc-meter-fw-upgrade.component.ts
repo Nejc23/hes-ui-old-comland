@@ -21,7 +21,7 @@ import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/
 export class PlcMeterFwUpgradeComponent implements OnInit {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
-  uploadDropSubtitle = $localize`Selected file must be in .img or .bin file format.`;
+  uploadDropSubtitle = $localize`Selected file must be in .img, .bin or .dat file format.`;
 
   form: FormGroup;
   noConfig = false;
@@ -32,7 +32,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = $localize`can only upload one file.`;
-  acceptExtensions = ['.img', '.bin'];
+  acceptExtensions = ['.img', '.bin', '.dat'];
   public files: Array<any>;
   activate = false;
 

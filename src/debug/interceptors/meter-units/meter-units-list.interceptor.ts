@@ -112,7 +112,73 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: true,
       ciiState: 'off',
-      serialNumber: '39305917'
+      serialNumber: '39305917',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        },
+        {
+          registerName: 'Relay 2 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        },
+        {
+          registerName: 'Relay 4 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        },
+        {
+          registerName: 'Relay 5 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        },
+        {
+          registerName: 'Relay 6 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
+        },
+        {
+          registerName: 'Relay 7 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
+        },
+        {
+          registerName: 'Relay 8 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
+        },
+        {
+          registerName: 'Relay 9 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
+        }
+      ]
     },
     {
       deviceId: 'ebeacc9d-744c-4a88-bb9c-625216ab99b9',
@@ -142,7 +208,49 @@ function setData(): MeterUnitsList[] {
       readyForActivation: false,
       hasActiveJobs: true,
       ciiState: 'on',
-      serialNumber: '39305918'
+      serialNumber: '39305918',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        },
+        {
+          registerName: 'Relay 2 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        },
+        {
+          registerName: 'Relay 4 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        },
+        {
+          registerName: 'Relay 5 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        },
+        {
+          registerName: 'Relay 6 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        }
+      ]
     },
     {
       deviceId: '22cfeaae-463a-4055-8632-a6818ba77d81',
@@ -172,7 +280,65 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: true,
       ciiState: 'on',
-      serialNumber: '39305919'
+      serialNumber: '39305919',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        },
+        {
+          registerName: 'Relay 8 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
+        },
+        {
+          registerName: 'Relay 7 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
+        },
+        {
+          registerName: 'Relay 2 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
+        },
+        {
+          registerName: 'Relay 4 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
+        },
+        {
+          registerName: 'Relay 5 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b066'
+        },
+        {
+          registerName: 'Relay 6 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b067'
+        }
+      ]
     },
     {
       deviceId: '141c94ca-1838-42b5-8c8a-96c5e07cc155',
@@ -202,7 +368,65 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: true,
       ciiState: 'off',
-      serialNumber: '39305920'
+      serialNumber: '39305920',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
+        },
+        {
+          registerName: 'Relay 8 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
+        },
+        {
+          registerName: 'Relay 7 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
+        },
+        {
+          registerName: 'Relay 2 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
+        },
+        {
+          registerName: 'Relay 4 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
+        },
+        {
+          registerName: 'Relay 5 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b066'
+        },
+        {
+          registerName: 'Relay 6 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForReconnection',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b067'
+        }
+      ]
     },
     {
       deviceId: 'a8c35256-7960-4d0d-b4af-fdb2045378eb',
@@ -262,7 +486,17 @@ function setData(): MeterUnitsList[] {
       readyForActivation: false,
       hasActiveJobs: false,
       ciiState: 'on',
-      serialNumber: '39305922'
+      serialNumber: '39305922',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 1,
+          interpretedValue: 'Connected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: 'e4694732-a282-477c-9c47-79ca08f64911',
@@ -292,7 +526,17 @@ function setData(): MeterUnitsList[] {
       readyForActivation: false,
       hasActiveJobs: true,
       ciiState: 'off',
-      serialNumber: '39305923'
+      serialNumber: '39305923',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: '4db50891-45dc-4910-bc8e-1d1c15862a68',
@@ -322,7 +566,17 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: false,
       ciiState: 'off',
-      serialNumber: '39305924'
+      serialNumber: '39305924',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadForActivation',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: '7f7e9055-ad99-479f-956f-903022e1cccd',
@@ -352,7 +606,25 @@ function setData(): MeterUnitsList[] {
       readyForActivation: true,
       hasActiveJobs: false,
       ciiState: 'off',
-      serialNumber: '39305925'
+      serialNumber: '39305925',
+      instantValues: [
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 0,
+          interpretedValue: 'Disconnected',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        },
+        {
+          registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
+          registerType: 52,
+          timestamp: '2021-02-24T08:46:19.7957895+01:00',
+          value: 2,
+          interpretedValue: 'ReadyForActivation',
+          registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
+        }
+      ]
     },
     {
       deviceId: 'f8eb8b9f-bd39-406c-8ebc-c2659ab48246',

@@ -72,6 +72,7 @@ import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/commo
 import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { GridSelectionHeaderScrollableComponent } from './ag-grid/components/grid-selection-header-scrollable.component';
 import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/components/grid-custom-components/grid-cell-active-read-only.component';
+import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
 
 @NgModule({
   exports: [
@@ -128,7 +129,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     JobsSelectComponent,
     CronScheduleComponent,
     SecurityActivateHlsComponent,
-    SecurityRekeyComponent
+    SecurityRekeyComponent,
+    PopoverInstantValuesComponent
   ],
   imports: [
     CommonModule,
@@ -212,7 +214,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
     GridCellActiveReadOnlyComponent,
     CronScheduleComponent,
     SecurityActivateHlsComponent,
-    SecurityRekeyComponent
+    SecurityRekeyComponent,
+    PopoverInstantValuesComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
