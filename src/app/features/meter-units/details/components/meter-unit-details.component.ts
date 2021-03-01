@@ -235,6 +235,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUUpgrade;
   }
 
+  get actionMUJobsAssignExisting() {
+    return ActionEnumerator.MUJobsAssignExisting;
+  }
+
   get actionMUReadJobs() {
     return ActionEnumerator.MUReadJobs;
   }
@@ -385,6 +389,12 @@ export class MeterUnitDetailsComponent implements OnInit {
   onScheduleReadJobs() {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onScheduleReadJobs(params, 1);
+  }
+
+  // popup
+  onJobsAssignExisting() {
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.onJobsAssignExisting(params, 1);
   }
 
   // popup

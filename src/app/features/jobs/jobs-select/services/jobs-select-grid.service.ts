@@ -10,6 +10,7 @@ import { GridCellIpComponent } from 'src/app/shared/ag-grid/components/grid-cell
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { GridSelectionHeaderScrollableComponent } from 'src/app/shared/ag-grid/components/grid-selection-header-scrollable.component';
 import { GridCellActiveReadOnlyComponent } from '../components/grid-custom-components/grid-cell-active-read-only.component';
+import { GridCellNextRunNoEventComponent } from 'src/app/features/configuration/auto-template/components/grid-custom-components/grid-cell-next-run-no-event.component';
 
 @Injectable({
   providedIn: 'root'
@@ -89,7 +90,8 @@ export class JobsSelectGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellIpComponent: GridCellIpComponent,
       gridCellIdNumberComponent: GridCellIdNumberComponent,
-      gridCellActiveReadOnlyComponent: GridCellActiveReadOnlyComponent
+      gridCellActiveReadOnlyComponent: GridCellActiveReadOnlyComponent,
+      gridCellNextRunComponent: GridCellNextRunNoEventComponent
     };
   }
 

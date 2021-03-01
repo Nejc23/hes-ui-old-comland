@@ -2,7 +2,8 @@ export enum enumMyGridLink {
   identityTokenServer = '/api/identity-server',
   managment = '/api/concentrator-management',
   dataProcessing = '/api/on-demand-data-processing',
-  templating = '/api/templating'
+  templating = '/api/templating',
+  scheduler = '/api/scheduler'
 }
 
 export const identityToken = '/token';
@@ -37,3 +38,6 @@ export const upgrade = '/upgrade';
 export const securitySetup = `${enumMyGridLink.templating}/security-setup`;
 export const securityEnableHls = `${enumMyGridLink.managment}/security/enable/hls`;
 export const securityRekey = `${enumMyGridLink.managment}/security/meter/rekey`;
+
+// jobs
+export const jobsAssignExisting = `${enumMyGridLink.scheduler}/jobs-meters`;
