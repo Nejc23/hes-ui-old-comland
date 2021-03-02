@@ -35,6 +35,7 @@ import { MeterUnitsSetDisplaySettingsInterceptor } from './meter-units/meter-uni
 import { MeterUnitsTypeSecurityInterceptor } from './meter-units/meter-units-security.interceptor';
 import { TemplatingInterceptor } from './templating/templating.interceptor';
 import { TemplatesInterceptor } from './templates/templates.interceptor';
+import { MeterUnitsPlcActionsInterceptor } from './meter-units/meter-units-plc-actions.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -262,6 +263,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (MeterUnitsTypeSecurityInterceptor.canInterceptSecurityRekey(request)) {
                 return MeterUnitsTypeSecurityInterceptor.interceptSecurityRekey(request);
+              }
+
+              // plc-actions
+              if (MeterUnitsPlcActionsInterceptor.canInterceptPostJobsAssignExisting(request)) {
+                return MeterUnitsPlcActionsInterceptor.interceptPostJobsAssignExisting(request);
               }
 
               // auto-templates
