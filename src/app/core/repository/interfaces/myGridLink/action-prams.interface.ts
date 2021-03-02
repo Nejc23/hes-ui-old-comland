@@ -145,3 +145,15 @@ export interface IActionResponseSecurityRekey extends IActionResponseParams {
   excludedIds?: string[];
   keyType: string;
 }
+
+export interface IActionRequestJobsAssignExisting extends IActionRequestParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  scheduleJobIds: string[];
+}
+
+export interface IActionResponseJobsAssignExisting extends IActionResponseParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  scheduleJobIds: string[];
+}

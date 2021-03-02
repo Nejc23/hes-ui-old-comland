@@ -150,7 +150,8 @@ export class RoleService {
             ActionEnumerator.MUSetDisplaySettings,
             ActionEnumerator.MUClearAlarms,
             ActionEnumerator.MUDelete,
-            ActionEnumerator.MUAdd
+            ActionEnumerator.MUAdd,
+            ActionEnumerator.MUJobsAssignExisting
           ]
         },
         {

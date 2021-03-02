@@ -19,6 +19,9 @@
                   <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUReadJobs" (click)="onScheduleReadJobs()">
                     <a href="javascript:void(0)" ><span i18n>Create new</span></a>
                   </div>
+                  <div class="dropdown-item" appHideIfActionUnauthorized [functionality]="formFunctionality" [action]="actionMUJobsAssignExisting" (click)="onJobsAssignExisting()">
+                    <a href="javascript:void(0)" ><span i18n>Assign existing</span></a>
+                  </div>
                 </div>
             </div>
           </div>

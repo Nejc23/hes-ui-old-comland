@@ -75,32 +75,12 @@ export class JobsSelectComponent implements OnInit {
   selectRows() {
     const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
     this.gridApi.forEachNode((node) => {
-      // if (this.jobsSelectGridService.getSessionSettingsSelectedAll()) {
-      //   const startRow = api.getFirstDisplayedRow();
-      //   const endRow = api.getLastDisplayedRow();
-      //   api.forEachNode(node2 => {
-      //     if (node2.rowIndex >= startRow && node2.rowIndex <= endRow) {
-      //       node2.setSelected(true);
-      //     }
-      //   });
-      // } else
       if (node.data !== undefined && selectedRows !== undefined && selectedRows.length > 0) {
         const isSelected = _.find(selectedRows, (x) => x === node.data.id) !== undefined;
         node.setSelected(isSelected);
       }
     });
   }
-
-  // loadData() {
-  //   if (!this.deviceFiltersAndSearch) {
-  //     this.deviceFiltersAndSearch = { id: [], filter: null };
-  //   }
-  //   if (this.selectedJobId) {
-  //     this.jobsService.getJob(this.selectedJobId).subscribe(data => {
-  //       this.jobsSelectGridService.setSessionSettingsSelectedRowsById(data.bulkActionsRequestParam?.id);
-  //     });
-  //   }
-  // }
 
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
@@ -151,13 +131,6 @@ export class JobsSelectComponent implements OnInit {
     const that = this;
     const datasource = {
       getRows(paramsRow) {
-        // that.requestModel.startRow = that.jobsSelectGridService.getCurrentRowIndex(
-        //   that.gridApi.paginationProxy.pageSize
-        // ).startRow;
-        // that.requestModel.endRow = that.jobsSelectGridService.getCurrentRowIndex(
-        //   that.gridApi.paginationProxy.pageSize
-        // ).endRow;
-
         that.requestModel.startRow = 0;
         that.requestModel.endRow = 100;
 
@@ -197,32 +170,16 @@ export class JobsSelectComponent implements OnInit {
     return;
   }
 
-  // on change page in the grid
-  // onPaginationChange(params) {
-  //   if (this.gridApi) {
-  //     this.gridApi.refreshHeader();
-  //   }
-
-  //   if (params.newPage && !this.loadGrid) {
-  //     this.jobsSelectGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
-  //   } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
-  //     this.loadGrid = false;
-  //     params.api.paginationGoToPage(this.jobsSelectGridService.getSessionSettingsPageIndex());
-  //   }
-
-  //   console.log(
-  //     'dataConcentratorUnitsSelectGridService.getSessionSettingsPageIndex',
-  //     this.jobsSelectGridService.getSessionSettingsPageIndex()
-  //   );
-  // }
-
   // ag-grid change visibillity of columns
   onColumnVisible(params) {
     this.jobsSelectGridService.onColumnVisibility(params);
   }
 
   // click on check-box in the grid
-  selectionChanged() {
+  selectionChanged($event: any) {
+    this.selectedAll = this.getSelectedRowIds().length === this.totalCount;
+    this.onSelectionChanged.emit(this.getSelectedRowIds().length > 0 ? true : false);
+
     if (this.gridApi) {
       this.gridApi.refreshHeader();
     }
@@ -230,15 +187,11 @@ export class JobsSelectComponent implements OnInit {
 
   // if selected-all clicked, than disable deselection of the rows
   onRowSelect(params) {
-    // if (this.jobsSelectGridService.getSessionSettingsSelectedAll()) {
-    //   params.node.setSelected(true);
-    // } else {
     if (params.node.selected) {
       this.jobsSelectGridService.setSessionSettingsSelectedRows(params.node.data.id);
     } else {
       this.jobsSelectGridService.setSessionSettingsRemoveSelectedRow(params.node.data.id);
     }
-    // }
   }
 
   // ----------------------- ag-grid set DATASOURCE end --------------------------
@@ -258,56 +211,21 @@ export class JobsSelectComponent implements OnInit {
     }
     return [];
   }
-  // setFilter() {
-  //   this.requestModel.filterModel.statuses = [];
-  //   this.requestModel.filterModel.readStatus = null;
-  //   this.requestModel.filterModel.vendors = null;
-  //   // this.requestModel.filterModel.types = null;
-  //   this.requestModel.filterModel.tags = null;
-
-  //   return this.requestModel.filterModel;
-  // }
 
   ngOnInit() {
     this.form = this.createForm();
     this.columnDefs = this.jobsSelectGridService.setGridDefaultColumns();
-    // this.loadData();
   }
 
   getSelectedRowIds() {
-    // // const selectedRows = this.gridApi.getSelectedRows();
-    // const req: DataConcentratorUnitsSelectRequest[] = [];
-    // // selectedRows.forEach(x => req.push({ name: x.name, concentratorId: x.concentratorId }));
-    // // return req;
-    // const sessionRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
-    // console.log('session rows', sessionRows);
-    // sessionRows.forEach(x => req.push({name: x.name, concentratorId: x.concentratorId}));
-    // return req;
-
     return this.jobsSelectGridService.getSessionSettingsSelectedRows();
   }
 
   getSelectedRowsCount() {
-    // const selectedAll = this.jobsSelectGridService.getSessionSettingsSelectedAll();
-    // if (selectedAll) {
-    //   return this.totalCount;
-    // }
     return this.jobsSelectGridService.getSessionSettingsSelectedRows().length;
   }
 
   get selectedAtLeastOneRowOnGrid() {
-    // if (this.gridApi) {
-    //   const selectedRows = this.gridApi.getSelectedRows();
-    //   if (selectedRows && selectedRows.length > 0) {
-    //     return true;
-    //   }
-    //   return false;
-    // }
-    // return false;
-    // const selectedAll = this.jobsSelectGridService.getSessionSettingsSelectedAll();
-    // if (selectedAll) {
-    //   return true;
-    // }
     const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
     return selectedRows.length > 0;
   }
