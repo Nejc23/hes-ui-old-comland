@@ -72,6 +72,14 @@ export class SidebarService {
         ]
       },
       {
+        title: $localize`Alarms & Events`,
+        routeLink: '/alarmsEvents',
+        hasChildren: false,
+        icon: 'notifications',
+        isIconOutlined: true,
+        children: []
+      },
+      {
         title: $localize`Administration`,
         routeLink: 'administration',
         icon: 'verified_user',
