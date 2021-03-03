@@ -1,9 +1,9 @@
 <div class="d-flex flex-row">
   <div class="" *ngIf="params.data && params.data.isHLS">
-    <i class="fas fa-lock text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentHlsEnabled"></i>
+    <i class="fas fa-lock text-secondary px-1" container="body" placement="bottom" [ngbTooltip]="tipContentHlsEnabled"></i>
   </div>
   <div class="" *ngIf="params.data && params.data.hasActiveJobs">
-    <i class="far fa-clock text-secondary" container="body"
+    <i class="fas fa-clock text-secondary px-1" container="body"
       [placement]="['right-top']"
       [ngbPopover]="tipContentNextRead"
       [autoClose]="'outside'"
@@ -11,10 +11,10 @@
     </i>
   </div>
   <div class="" *ngIf="params.data && !params.data.templateId">
-    <i class="far fa-exclamation-triangle fa-fw text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentMissingTemplate"></i>
+    <i class="far fa-exclamation-triangle fa-fw text-secondary px-1" container="body" placement="bottom" [ngbTooltip]="tipContentMissingTemplate"></i>
   </div>
   <div class="" *ngIf="params.data && params.data.readyForActivation">
-    <i class="far fa-life-ring text-secondary" container="body" placement="bottom" [ngbTooltip]="tipContentReadyForActivation"></i>
+    <i class="fas fa-share-square text-secondary px-1" container="body" placement="bottom" [ngbTooltip]="tipContentReadyForActivation"></i>
   </div>
 </div>
 
