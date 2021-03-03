@@ -33,10 +33,10 @@ export class TemplatingInterceptor {
         hdlcInformationId: '360d2243-8c8c-4c59-bdb4-f61722991cd9',
         templateId: '7fb32618-d93e-4ee7-892d-b5df222ba733',
         hdlcInformation: {
-          llsClientLow: 1,
-          llsServerLow: 1,
-          llsClientHigh: 1,
-          llsServerHigh: 1,
+          clientLow: 1,
+          serverLow: 1,
+          clientHigh: 1,
+          serverHigh: 1,
           publicClientLow: 1,
           publicServerLow: 1,
           publicClientHigh: 1,
@@ -47,10 +47,10 @@ export class TemplatingInterceptor {
         wrapperInformationId: '4d7624e0-1b38-4934-b743-c1d685d3668a',
         templateId: '7fb32618-d93e-4ee7-892d-b5df222ba733',
         wrapperInformation: {
-          llsClient: 1,
-          llsServer: 1,
-          publicClient: 1,
-          publicServer: 16,
+          clientAddress: 1,
+          serverAddress: 1,
+          publicClientAddress: 1,
+          publicServerAddress: 16,
           physicalAddress: 1
         }
       }
