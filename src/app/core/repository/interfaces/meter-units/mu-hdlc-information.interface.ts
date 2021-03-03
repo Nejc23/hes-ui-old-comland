@@ -7,8 +7,4 @@ export interface MuHdlcInformation {
   publicServerLow: number;
   publicClientHigh: number;
   publicServerHigh: number;
-  hlsClientLow: number;
-  hlsServerLow: number;
-  hlsClientHigh: number;
-  hlsServerHigh: number;
 }

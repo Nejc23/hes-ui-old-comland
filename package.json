@@ -1,6 +1,6 @@
 {
   "name": "myGrid",
-  "version": "1.0.0",
+  "version": "2.2.3",
   "scripts": {
     "ng": "ng",
     "start": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --proxy-config proxy.conf.js",

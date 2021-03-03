@@ -179,8 +179,6 @@ export class MeterUnitsService {
         llsServer: payload.wrapperInformation.llsServer,
         publicClient: payload.wrapperInformation.publicClient,
         publicServer: payload.wrapperInformation.publicServer,
-        hlsClient: payload.wrapperInformation.hlsClient,
-        hlsServer: payload.wrapperInformation.hlsServer,
         physicalAddress: payload.wrapperInformation.physicalAddress
       };
     }
@@ -193,11 +191,7 @@ export class MeterUnitsService {
         publicClientLow: payload.hdlcInformation.publicClientLow,
         publicClientHigh: payload.hdlcInformation.publicClientHigh,
         publicServerLow: payload.hdlcInformation.publicServerLow,
-        publicServerHigh: payload.hdlcInformation.publicServerHigh,
-        hlsClientLow: payload.hdlcInformation.hlsClientLow,
-        hlsClientHigh: payload.hdlcInformation.hlsClientHigh,
-        hlsServerLow: payload.hdlcInformation.hlsServerLow,
-        hlsServerHigh: payload.hdlcInformation.hlsServerHigh
+        publicServerHigh: payload.hdlcInformation.publicServerHigh
       };
     }
     return this.createMu(muRequest);

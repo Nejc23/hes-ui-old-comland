@@ -40,11 +40,7 @@ export class TemplatingInterceptor {
           publicClientLow: 1,
           publicServerLow: 1,
           publicClientHigh: 1,
-          publicServerHigh: 1,
-          hlsClientLow: 1,
-          hlsServerLow: 1,
-          hlsClientHigh: 1,
-          hlsServerHigh: 1
+          publicServerHigh: 1
         }
       },
       wrapperInformation: {
@@ -55,8 +51,6 @@ export class TemplatingInterceptor {
           llsServer: 1,
           publicClient: 1,
           publicServer: 16,
-          hlsClient: 1,
-          hlsServer: 16,
           physicalAddress: 1
         }
       }
