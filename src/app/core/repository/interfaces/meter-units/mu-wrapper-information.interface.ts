@@ -1,7 +1,7 @@
 export interface MuWrapperInformation {
-  llsClient: number;
-  llsServer: number;
-  publicClient: number;
-  publicServer: number;
+  clientAddress: number;
+  serverAddress: number;
+  publicClientAddress: number;
+  publicServerAddress: number;
   physicalAddress: number;
 }

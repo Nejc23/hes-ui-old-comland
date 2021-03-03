@@ -175,19 +175,19 @@ export class MeterUnitsService {
 
     if (payload.wrapperInformation) {
       muRequest.wrapperInformation = {
-        llsClient: payload.wrapperInformation.llsClient,
-        llsServer: payload.wrapperInformation.llsServer,
-        publicClient: payload.wrapperInformation.publicClient,
-        publicServer: payload.wrapperInformation.publicServer,
+        clientAddress: payload.wrapperInformation.clientAddress,
+        serverAddress: payload.wrapperInformation.serverAddress,
+        publicClientAddress: payload.wrapperInformation.publicClientAddress,
+        publicServerAddress: payload.wrapperInformation.publicServerAddress,
         physicalAddress: payload.wrapperInformation.physicalAddress
       };
     }
     if (payload.hdlcInformation) {
       muRequest.hdlcInformation = {
-        llsClientLow: payload.hdlcInformation.llsClientLow,
-        llsClientHigh: payload.hdlcInformation.llsClientLow,
-        llsServerLow: payload.hdlcInformation.llsServerLow,
-        llsServerHigh: payload.hdlcInformation.llsServerHigh,
+        clientLow: payload.hdlcInformation.clientLow,
+        clientHigh: payload.hdlcInformation.clientLow,
+        serverLow: payload.hdlcInformation.serverLow,
+        serverHigh: payload.hdlcInformation.serverHigh,
         publicClientLow: payload.hdlcInformation.publicClientLow,
         publicClientHigh: payload.hdlcInformation.publicClientHigh,
         publicServerLow: payload.hdlcInformation.publicServerLow,

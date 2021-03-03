@@ -141,19 +141,19 @@ export class AddMuFormComponent implements OnInit {
   }
 
   get wrapperLlsClientProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.llsClient);
+    return nameOf<MuWrapperInformation>((o) => o.clientAddress);
   }
 
   get wrapperLlsServerProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.llsServer);
+    return nameOf<MuWrapperInformation>((o) => o.serverAddress);
   }
 
   get wrapperPublicClientProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.publicClient);
+    return nameOf<MuWrapperInformation>((o) => o.publicClientAddress);
   }
 
   get wrapperPublicServerProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.publicServer);
+    return nameOf<MuWrapperInformation>((o) => o.publicServerAddress);
   }
 
   get wrapperPhysicalAddressProperty() {
