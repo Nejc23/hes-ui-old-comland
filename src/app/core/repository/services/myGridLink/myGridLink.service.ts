@@ -13,7 +13,9 @@ import {
   IActionResponseRelaysMode,
   IActionResponseSetDisplaySettings,
   IActionRequestSecurityRekey,
-  IActionResponseSecurityRekey
+  IActionResponseSecurityRekey,
+  IActionRequestJobsAssignExisting,
+  IActionResponseJobsAssignExisting
 } from './../../interfaces/myGridLink/action-prams.interface';
 import {
   onDemandCiiState,
@@ -27,7 +29,8 @@ import {
   upgrade,
   securitySetup,
   securityEnableHls,
-  securityRekey
+  securityRekey,
+  jobsAssignExisting
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -337,5 +340,13 @@ export class MyGridLinkService {
 
   postSecurityRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
     return new HttpRequest('POST', `${securityRekey}`, param);
+  }
+
+  postJobsAssignExisting(param: IActionRequestJobsAssignExisting): Observable<IActionResponseJobsAssignExisting> {
+    return this.repository.makeRequest(this.postJobsAssignExistingRequest(param));
+  }
+
+  postJobsAssignExistingRequest(param: IActionRequestJobsAssignExisting): HttpRequest<any> {
+    return new HttpRequest('POST', `${jobsAssignExisting}`, param);
   }
 }

@@ -1856,6 +1856,9 @@
       <trans-unit id="8065541156110468746" datatype="html">
         <source>Create new</source>
         <target>Créer un nouveau</target>
+      </trans-unit><trans-unit id="2657743219188414087" datatype="html">
+        <source>Assign existing</source>
+        <target state="new">Assign existing</target>
       </trans-unit>
       <trans-unit id="5433675495457939071" datatype="html">
         <source>Templates</source>

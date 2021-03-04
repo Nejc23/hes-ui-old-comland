@@ -989,6 +989,9 @@
       <trans-unit id="581635739133720418" datatype="html">
         <source>Ready for activation!</source>
         <target>Bereit für die Aktivierung!</target>
+      </trans-unit><trans-unit id="7990911565052876089" datatype="html">
+        <source>High level security on management client is enabled on this device!</source>
+        <target state="new">High level security on management client is enabled on this device!</target>
       </trans-unit>
       <trans-unit id="2946624699882754313" datatype="html">
         <source>Show all</source>
@@ -1857,6 +1860,9 @@
       <trans-unit id="8065541156110468746" datatype="html">
         <source>Create new</source>
         <target>Neues kreieren</target>
+      </trans-unit><trans-unit id="2657743219188414087" datatype="html">
+        <source>Assign existing</source>
+        <target state="new">Assign existing</target>
       </trans-unit>
       <trans-unit id="5433675495457939071" datatype="html">
         <source>Templates</source>
@@ -1877,6 +1883,18 @@
       <trans-unit id="3574734652560082816" datatype="html">
         <source>Assigning template to meter(s) may result in irreversible changes to meter data!</source>
         <target>Das Zuweisen der Vorlage zu Gerät(en) kann zu irreversiblen Änderungen an der Zählerdaten führen!</target>
+      </trans-unit><trans-unit id="6508572784588919120" datatype="html">
+        <source>At least one job must be selected</source>
+        <target state="new">At least one job must be selected</target>
+      </trans-unit><trans-unit id="5457761005512423645" datatype="html">
+        <source>Existing Jobs assigned to Meter Unit successfully</source>
+        <target state="new">Existing Jobs assigned to Meter Unit successfully</target>
+      </trans-unit><trans-unit id="9097181850552406979" datatype="html">
+        <source>Assign existing jobs (<x id="INTERPOLATION"/> selected)</source>
+        <target state="new">Assign existing jobs (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit><trans-unit id="584754872792429089" datatype="html">
+        <source>Assign</source>
+        <target state="new">Assign</target>
       </trans-unit>
       <trans-unit id="7744152608927602135" datatype="html">
         <source>Set Display Settings</source>

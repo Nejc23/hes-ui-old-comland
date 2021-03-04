@@ -23,7 +23,7 @@
   [gridOptions]="gridOptions"
   suppressRowClickSelection="true"
   [rowSelection]=agGridSettings.rowSelection
-  (selectionChanged)="selectionChanged()"
+  (selectionChanged)="selectionChanged($event)"
   [icons]="icons"
   [maxBlocksInCache]="1"
   [cacheBlockSize]="100"

@@ -1,0 +1,101 @@
+import { IActionRequestJobsAssignExisting } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import * as _ from 'lodash';
+import { RequestSetBreakerMode } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import {
+  IActionRequestParams,
+  IActionRequestSetDisconnectorMode
+} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+
+@Component({
+  selector: 'app-plc-meter-jobs-assign-existing',
+  templateUrl: './plc-meter-jobs-assign-existing.component.html'
+})
+export class PlcMeterJobsAssignExistingComponent {
+  form: FormGroup;
+  actionRequest: IActionRequestParams;
+  errMsg = '';
+  noJobsSelected = false;
+
+  selectedRowsCount: number;
+
+  selectionRequiredText = $localize`At least one job must be selected`;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private formUtils: FormsUtilsService,
+    private modal: NgbActiveModal,
+    private myGridService: MyGridLinkService,
+    private jobsSelectGridService: JobsSelectGridService
+  ) {
+    this.form = this.createForm();
+  }
+
+  createForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.jobsSelectedProperty]: [null, [Validators.required]]
+    });
+  }
+
+  fillData(): IActionRequestJobsAssignExisting {
+    const selectedJobs = this.jobsSelectGridService.getSessionSettingsSelectedRows();
+
+    const formData: IActionRequestJobsAssignExisting = {
+      pageSize: this.actionRequest.pageSize,
+      pageNumber: this.actionRequest.pageNumber,
+      sort: this.actionRequest.sort,
+      textSearch: this.actionRequest.textSearch,
+      filter: this.actionRequest.filter,
+      includedIds: this.actionRequest.deviceIds,
+      excludedIds: this.actionRequest.excludeIds,
+      scheduleJobIds: selectedJobs
+    };
+
+    return formData;
+  }
+
+  // properties - START
+  get jobsSelectedProperty() {
+    return 'jobsSelected';
+  }
+  // properties - END
+
+  onDismiss() {
+    this.modal.dismiss();
+  }
+
+  onAssignExisting() {
+    this.errMsg = '';
+    const values = this.fillData();
+
+    if (!values.scheduleJobIds || values.scheduleJobIds.length === 0) {
+      this.noJobsSelected = true;
+    } else {
+      this.form.get(this.jobsSelectedProperty).setValue(values.scheduleJobIds);
+    }
+
+    const request = this.myGridService.postJobsAssignExisting(values);
+    const successMessage = $localize`Existing Jobs assigned to Meter Unit successfully`;
+    this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+      (result) => {
+        console.log(result);
+        this.modal.close();
+      }
+      // (err) => {
+      //   // error
+      //   this.errMsg = err.error.errors.breakerMode[0];
+      // }
+    );
+  }
+
+  jobSelectionChanged() {
+    this.noJobsSelected = false;
+  }
+}
