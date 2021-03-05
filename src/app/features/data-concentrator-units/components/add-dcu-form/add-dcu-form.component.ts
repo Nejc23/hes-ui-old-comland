@@ -66,13 +66,6 @@ export class AddDcuFormComponent implements OnInit {
     });
 
     this.dcuTags$ = this.codelistService.dcuTagCodelist();
-    // this.codelistService.jobsDiscoveryJobsCodelist().subscribe(
-    //   (dj) => {
-    //     this.discoveryJobs = dj.map((j) => ({ id: j.id, value: `${j.value} - ${moment(j.nextRun).fromNow()}` }));
-    //   },
-    //   () => {} // error
-    // );
-
     this.setCredentialsControls(this.credentialsVisible);
   }
 
