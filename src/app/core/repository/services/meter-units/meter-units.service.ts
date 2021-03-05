@@ -328,6 +328,20 @@ export class MeterUnitsService {
               filterOperation: filterOperationEnum.equal
             });
           }
+          if (row.id === 4) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.isHls),
+              propValue: 'true',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (row.id === 5) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.isHls),
+              propValue: 'false',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
         });
       }
 

@@ -23,7 +23,9 @@ export class CodelistHelperService {
     const showOptions: Codelist<number>[] = [
       { id: 1, value: $localize`With template` },
       { id: 2, value: $localize`Without template` },
-      { id: 3, value: $localize`Image ready for activation` }
+      { id: 3, value: $localize`Image ready for activation` },
+      { id: 4, value: $localize`HLS enabled` },
+      { id: 5, value: $localize`HLS disabled` }
     ];
 
     return showOptions;
