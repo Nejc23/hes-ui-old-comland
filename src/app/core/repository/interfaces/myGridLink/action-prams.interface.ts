@@ -157,3 +157,8 @@ export interface IActionResponseJobsAssignExisting extends IActionResponseParams
   excludedIds?: string[];
   scheduleJobIds: string[];
 }
+
+export interface IActionRequestParamsAlarms extends IActionRequestParams {
+  startTime: string;
+  endTime: string;
+}
