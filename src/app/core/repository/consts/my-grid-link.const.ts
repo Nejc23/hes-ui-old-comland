@@ -38,6 +38,7 @@ export const upgrade = '/upgrade';
 export const securitySetup = `${enumMyGridLink.templating}/security-setup`;
 export const securityEnableHls = `${enumMyGridLink.managment}/security/enable/hls`;
 export const securityRekey = `${enumMyGridLink.managment}/security/meter/rekey`;
+export const securityChangePassword = `${enumMyGridLink.managment}/security/meter/change-password`;
 
 // jobs
 export const jobsAssignExisting = `${enumMyGridLink.scheduler}/jobs-meters`;
