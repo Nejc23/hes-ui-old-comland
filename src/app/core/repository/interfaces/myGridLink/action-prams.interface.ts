@@ -162,3 +162,15 @@ export interface IActionRequestParamsAlarms extends IActionRequestParams {
   startTime: string;
   endTime: string;
 }
+
+export interface IActionRequestSecurityChangePassword extends IActionRequestParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  passwordType: string;
+}
+
+export interface IActionResponseSecurityChangePassword extends IActionResponseParams {
+  includedIds?: string[];
+  excludedIds?: string[];
+  passwordType: string;
+}

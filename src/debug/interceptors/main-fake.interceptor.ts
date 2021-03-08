@@ -262,8 +262,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitInterceptor.interceptCreateMuPost(request);
               }
 
+              // security
               if (MeterUnitsTypeSecurityInterceptor.canInterceptSecurityRekey(request)) {
                 return MeterUnitsTypeSecurityInterceptor.interceptSecurityRekey(request);
+              }
+
+              if (MeterUnitsTypeSecurityInterceptor.canInterceptSecurityChangePassword(request)) {
+                return MeterUnitsTypeSecurityInterceptor.interceptSecurityChangePassword(request);
               }
 
               // plc-actions

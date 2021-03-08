@@ -35,6 +35,7 @@ import { jobType } from 'src/app/features/jobs/enums/job-type.enum';
 import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
 
 @Injectable({
   providedIn: 'root'
@@ -530,6 +531,25 @@ export class MeterUnitsPlcActionsService {
 
   onSecurityRekey(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(SecurityRekeyComponent);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionRequest = params;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onSecurityChangePassword(params: IActionRequestParams, selectedRowsCount: number) {
+    const modalRef = this.modalService.open(SecurityChangePasswordComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionRequest = params;
