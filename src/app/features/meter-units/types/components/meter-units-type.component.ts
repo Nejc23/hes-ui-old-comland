@@ -1013,6 +1013,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.onSecurityRekey(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
+  onSecurityChangePassword(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+
+    this.plcActionsService.onSecurityChangePassword(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
   // <-- end  Security action click (bulk or selected row)
 
   getSelectedCount(): number {

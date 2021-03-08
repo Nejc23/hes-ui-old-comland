@@ -41,26 +41,20 @@ describe('Pact consumer test', () => {
     isGateWay: true,
     isShortName: true,
     hdlcInformation: {
-      llsClientLow: 1,
-      llsServerLow: 2,
-      llsClientHigh: 3,
-      llsServerHigh: 4,
+      clientLow: 1,
+      serverLow: 2,
+      clientHigh: 3,
+      serverHigh: 4,
       publicClientLow: 5,
       publicServerLow: 6,
       publicClientHigh: 7,
-      publicServerHigh: 8,
-      hlsClientLow: 9,
-      hlsServerLow: 10,
-      hlsClientHigh: 11,
-      hlsServerHigh: 12
+      publicServerHigh: 8
     },
     wrapperInformation: {
-      llsClient: 1,
-      llsServer: 2,
-      publicClient: 3,
-      publicServer: 4,
-      hlsClient: 5,
-      hlsServer: 6,
+      clientAddress: 1,
+      serverAddress: 2,
+      publicClientAddress: 3,
+      publicServerAddress: 4,
       physicalAddress: 7
     },
     advancedInformation: {
