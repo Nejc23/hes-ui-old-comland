@@ -28,5 +28,6 @@ export const gridSysNameColumnsEnum = {
   serialNumber: 'serialNumber',
   medium: 'medium',
   protocol: 'protocol',
-  instantValues: 'instantValues'
+  instantValues: 'instantValues',
+  isHls: 'isHLS'
 };

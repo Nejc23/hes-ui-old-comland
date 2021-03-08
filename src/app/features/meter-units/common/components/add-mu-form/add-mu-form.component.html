@@ -97,55 +97,52 @@
                 <div>
                   <label class="label-primary" i18n>Low-level security</label>
                 </div>
-                <div class="border px-2">
+                <div class="border px-2 py-2">
                   <div class="form-row" *ngIf="isWrapperSelected">
                     <div class="col-6">
-                      <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperLlsClientProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                      <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperClientAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                       [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                     </div>
                     <div class="col-6">
-                      <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperLlsServerProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                      <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperServerAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                       [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                     </div>
                   </div>
                   <div *ngIf="isHdlcSelected">
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="llsClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="clientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="llsServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="serverLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="llsClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="clientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="llsServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="serverHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="pt-3">
-                  <label class="label-primary" i18n>High-level security</label>
+                  <label class="label-primary" i18n>High-level security (public)</label>
                 </div>
-                <div class="border px-2">
-                  <div class="border-bottom mb-1 pt-1">
-                    <label i18n>Public address</label>
-                  </div>
+                <div class="border px-2 py-2">
                   <div *ngIf="isWrapperSelected">
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperPublicClientProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperPublicClientAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperPublicServerProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperPublicServerAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
@@ -172,45 +169,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="border-bottom mb-1">
-                    <label i18n>HLS address</label>
-                  </div>
-                  <div *ngIf="isWrapperSelected">
-                    <div class="form-row">
-                      <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperHlsClientProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                      </div>
-                      <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperHlsServerProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                      </div>
-                    </div>
-                  </div>
-                  <div *ngIf="isHdlcSelected">
-                    <div class="form-row">
-                      <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="hlsClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                      </div>
-                      <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="hlsServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                      </div>
-                    </div>
-                    <div class="form-row">
-                      <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="hlsClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                      </div>
-                      <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="hlsServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                        [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                      </div>
-                    </div>
-                  </div>
                 </div>
-
                 <div *ngIf="isWrapperSelected">
                   <div class="form-row pt-3">
                     <div class="col-6">

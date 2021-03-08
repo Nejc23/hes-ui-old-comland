@@ -175,29 +175,23 @@ export class MeterUnitsService {
 
     if (payload.wrapperInformation) {
       muRequest.wrapperInformation = {
-        llsClient: payload.wrapperInformation.llsClient,
-        llsServer: payload.wrapperInformation.llsServer,
-        publicClient: payload.wrapperInformation.publicClient,
-        publicServer: payload.wrapperInformation.publicServer,
-        hlsClient: payload.wrapperInformation.hlsClient,
-        hlsServer: payload.wrapperInformation.hlsServer,
+        clientAddress: payload.wrapperInformation.clientAddress,
+        serverAddress: payload.wrapperInformation.serverAddress,
+        publicClientAddress: payload.wrapperInformation.publicClientAddress,
+        publicServerAddress: payload.wrapperInformation.publicServerAddress,
         physicalAddress: payload.wrapperInformation.physicalAddress
       };
     }
     if (payload.hdlcInformation) {
       muRequest.hdlcInformation = {
-        llsClientLow: payload.hdlcInformation.llsClientLow,
-        llsClientHigh: payload.hdlcInformation.llsClientLow,
-        llsServerLow: payload.hdlcInformation.llsServerLow,
-        llsServerHigh: payload.hdlcInformation.llsServerHigh,
+        clientLow: payload.hdlcInformation.clientLow,
+        clientHigh: payload.hdlcInformation.clientLow,
+        serverLow: payload.hdlcInformation.serverLow,
+        serverHigh: payload.hdlcInformation.serverHigh,
         publicClientLow: payload.hdlcInformation.publicClientLow,
         publicClientHigh: payload.hdlcInformation.publicClientHigh,
         publicServerLow: payload.hdlcInformation.publicServerLow,
-        publicServerHigh: payload.hdlcInformation.publicServerHigh,
-        hlsClientLow: payload.hdlcInformation.hlsClientLow,
-        hlsClientHigh: payload.hdlcInformation.hlsClientHigh,
-        hlsServerLow: payload.hdlcInformation.hlsServerLow,
-        hlsServerHigh: payload.hdlcInformation.hlsServerHigh
+        publicServerHigh: payload.hdlcInformation.publicServerHigh
       };
     }
     return this.createMu(muRequest);
@@ -331,6 +325,20 @@ export class MeterUnitsService {
             requestParam.filter.push({
               propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
               propValue: 'true',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (row.id === 4) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.isHls),
+              propValue: 'true',
+              filterOperation: filterOperationEnum.equal
+            });
+          }
+          if (row.id === 5) {
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.isHls),
+              propValue: 'false',
               filterOperation: filterOperationEnum.equal
             });
           }
