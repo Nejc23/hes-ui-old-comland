@@ -373,6 +373,7 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.publicClientLowProperty).enable();
       this.form.get(this.publicServerLowProperty).enable();
       this.form.get(this.publicClientHighProperty).enable();
+      this.form.get(this.publicServerHighProperty).enable();
     } else {
       this.form.get(this.clientLowProperty).disable();
       this.form.get(this.serverLowProperty).disable();
