@@ -51,6 +51,7 @@ export class SchedulerJobComponent implements OnInit {
 
   showRegisters = false;
   showConcentrators = false;
+  showAlarmNotification = false;
 
   jobType = jobType.reading;
   public title = '';
@@ -115,6 +116,9 @@ export class SchedulerJobComponent implements OnInit {
       case jobType.topology.toLowerCase(): {
         return $localize`Topology job`;
       }
+      case jobType.alarmNotification.toLowerCase(): {
+        return $localize`Alarm notification`;
+      }
       default: {
         return $localize`Reading Jobs`;
       }
@@ -149,8 +153,21 @@ export class SchedulerJobComponent implements OnInit {
     // this.cronScheduler.initForm(this.cronExpression);
 
     this.jobType = jobTypeSetting;
-    this.showRegisters = this.jobType.toLowerCase() === jobType.reading.toLowerCase();
-    this.showConcentrators = !this.showRegisters;
+
+    switch (this.jobType.toLowerCase()) {
+      case jobType.reading.toLowerCase(): {
+        this.showRegisters = true;
+        break;
+      }
+      case jobType.alarmNotification.toLowerCase(): {
+        this.showAlarmNotification = true;
+        break;
+      }
+      default: {
+        this.showConcentrators = true;
+        break;
+      }
+    }
 
     this.title = this.setTitle();
   }

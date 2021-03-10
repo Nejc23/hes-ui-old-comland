@@ -1,0 +1,38 @@
+<h3 i18n>Send notification message when alarm events matches one or more criteria bellow.</h3>
+<div i18n>At least one of the rules below should be active</div>
+
+<div class="form-row">
+  <div class="col-3">
+    <app-input-switch [form]="form" [property]="isAlarmIdActiveProperty" i18n-label label="Alarm ID" (valueChanged)="inputSwitchChange($event, alarmIdsProperty)">
+    </app-input-switch>
+  </div>
+  <div class="col-9">
+    <app-input-tag [property]="alarmIdsProperty" [form]="form" [autocompleteItemsAsObjects]="alarmIds"
+        [disabled]="false">
+      </app-input-tag>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-3">
+    <app-input-switch [form]="form" [property]="isSeverityActiveProperty" i18n-label label="Severity">
+    </app-input-switch>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-3">
+    <app-input-switch [form]="form" [property]="isProtocolActiveProperty" i18n-label label="Protocol">
+    </app-input-switch>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-3">
+    <app-input-switch [form]="form" [property]="isManufacturerActiveProperty" i18n-label label="Manufacturer">
+    </app-input-switch>
+  </div>
+</div>
+<div class="form-row">
+  <div class="col-3">
+    <app-input-switch [form]="form" [property]="isSourceActiveProperty" i18n-label label="Source">
+    </app-input-switch>
+  </div>
+</div>
