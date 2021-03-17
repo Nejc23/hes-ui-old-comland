@@ -33,6 +33,9 @@ import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { jobType } from 'src/app/features/jobs/enums/job-type.enum';
 import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
+import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +52,8 @@ export class MeterUnitsPlcActionsService {
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private codelistService: CodelistRepositoryService,
     private router: Router,
-    private eventService: MeterUnitsTypeGridEventEmitterService
+    private eventService: MeterUnitsTypeGridEventEmitterService,
+    private jobsSelectGridService: JobsSelectGridService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
@@ -70,6 +74,26 @@ export class MeterUnitsPlcActionsService {
       };
       modalRef.result.then().catch(() => {});
     });
+  }
+
+  onJobsAssignExisting(params: RequestFilterParams, selectedRowsCount: number) {
+    this.jobsSelectGridService.clearSessionSettingsSelectedRows();
+
+    const modalRef = this.modalService.open(PlcMeterJobsAssignExistingComponent);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 
   onJobsTemplates(params: IActionRequestParams, selectedRowsCount: number) {
@@ -507,6 +531,25 @@ export class MeterUnitsPlcActionsService {
 
   onSecurityRekey(params: IActionRequestParams, selectedRowsCount: number) {
     const modalRef = this.modalService.open(SecurityRekeyComponent);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionRequest = params;
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  onSecurityChangePassword(params: IActionRequestParams, selectedRowsCount: number) {
+    const modalRef = this.modalService.open(SecurityChangePasswordComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionRequest = params;

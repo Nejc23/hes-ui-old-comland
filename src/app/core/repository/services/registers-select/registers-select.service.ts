@@ -13,12 +13,14 @@ export class RegistersSelectService {
   constructor(private repository: RepositoryService) {}
 
   getDeviceRegisters(param: GridBulkActionRequestParams): Observable<RegistersSelectList[]> {
-    return this.repository.makeRequest(this.getDeviceRegistersRequest(param));
+    return this.repository.makeRequest(this.getDeviceRegistersSchedulableRequest(param));
+  }
+
+  getDeviceRegistersSchedulableRequest(param: GridBulkActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${registers}?type=schedulable`, param);
   }
 
   getDeviceRegistersRequest(param: GridBulkActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', registers, param);
-    // return new HttpRequest('GET', `${registers}?type=schedulable`);
-    // return new HttpRequest('GET', `${registers}?type=schedulable`);
   }
 }

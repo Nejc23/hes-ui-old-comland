@@ -13,7 +13,11 @@ import {
   IActionResponseRelaysMode,
   IActionResponseSetDisplaySettings,
   IActionRequestSecurityRekey,
-  IActionResponseSecurityRekey
+  IActionResponseSecurityRekey,
+  IActionRequestJobsAssignExisting,
+  IActionResponseJobsAssignExisting,
+  IActionRequestSecurityChangePassword,
+  IActionResponseSecurityChangePassword
 } from './../../interfaces/myGridLink/action-prams.interface';
 import {
   onDemandCiiState,
@@ -27,7 +31,9 @@ import {
   upgrade,
   securitySetup,
   securityEnableHls,
-  securityRekey
+  securityRekey,
+  jobsAssignExisting,
+  securityChangePassword
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -337,5 +343,21 @@ export class MyGridLinkService {
 
   postSecurityRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
     return new HttpRequest('POST', `${securityRekey}`, param);
+  }
+
+  postJobsAssignExisting(param: IActionRequestJobsAssignExisting): Observable<IActionResponseJobsAssignExisting> {
+    return this.repository.makeRequest(this.postJobsAssignExistingRequest(param));
+  }
+
+  postJobsAssignExistingRequest(param: IActionRequestJobsAssignExisting): HttpRequest<any> {
+    return new HttpRequest('POST', `${jobsAssignExisting}`, param);
+  }
+
+  postSecurityChangePassword(param: IActionRequestSecurityChangePassword): Observable<IActionResponseSecurityChangePassword> {
+    return this.repository.makeRequest(this.postSecurityChangePasswordRequest(param));
+  }
+
+  postSecurityChangePasswordRequest(param: IActionRequestSecurityChangePassword): HttpRequest<any> {
+    return new HttpRequest('POST', `${securityChangePassword}`, param);
   }
 }

@@ -917,9 +917,6 @@
       <trans-unit id="4594629863210876240" datatype="html">
         <source> Add New</source>
         <target>Aggiungere nuovo</target>
-      </trans-unit><trans-unit id="2896781806939874098" datatype="html">
-        <source>Meter unit</source>
-        <target state="new">Meter unit</target>
       </trans-unit>
       <trans-unit id="3825649834158937429" datatype="html">
         <source>Meter Unit was updated successfully</source>
@@ -1723,9 +1720,6 @@
       <trans-unit id="3713168783920734881" datatype="html">
         <source>CII State</source>
         <target>stato del CII </target>
-      </trans-unit><trans-unit id="6738217183724690883" datatype="html">
-        <source>relays</source>
-        <target state="new">relays</target>
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source> <x id="INTERPOLATION"/> </source>
@@ -1778,6 +1772,12 @@
       <trans-unit id="7654203638411043363" datatype="html">
         <source>Image ready for activation</source>
         <target>Immagine pronta per l'attivazione </target>
+      </trans-unit><trans-unit id="5878681832778143707" datatype="html">
+        <source>HLS enabled</source>
+        <target state="new">HLS enabled</target>
+      </trans-unit><trans-unit id="8347031470440321688" datatype="html">
+        <source>HLS disabled</source>
+        <target state="new">HLS disabled</target>
       </trans-unit>
       <trans-unit id="8198274855826766185" datatype="html">
         <source>show option</source>
@@ -2247,18 +2247,6 @@
         <source>Low-level security</source>
         <target>Low-level security</target>
       </trans-unit>
-      <trans-unit id="2522129837094629838" datatype="html">
-        <source>High-level security</source>
-        <target>High-level security</target>
-      </trans-unit>
-      <trans-unit id="9102185935745982355" datatype="html">
-        <source>Public address</source>
-        <target>Public address</target>
-      </trans-unit>
-      <trans-unit id="1846555604165869261" datatype="html">
-        <source>HLS address</source>
-        <target>HLS address</target>
-      </trans-unit>
       <trans-unit id="968799762062123504" datatype="html">
         <source>Shortname</source>
         <target>Shortname</target>
@@ -2366,6 +2354,9 @@
       <trans-unit id="4386083438607093987" datatype="html">
         <source>Rekey</source>
         <target>Rekey</target>
+      </trans-unit><trans-unit id="6309828574111583895" datatype="html">
+        <source>Change password</source>
+        <target state="new">Change password</target>
       </trans-unit>
       <trans-unit id="5798687973544276975" datatype="html">
         <source>Job was</source>
@@ -2418,6 +2409,57 @@
       <trans-unit id="3145605724148235053" datatype="html">
         <source>Selected file must be in .img, .bin or .dat file format.</source>
         <target>Selected file must be in .img, .bin or .dat file format.</target>
+      </trans-unit>
+      <trans-unit id="2896781806939874098" datatype="html">
+        <source>Meter unit</source>
+        <target>Meter unit</target>
+      </trans-unit>
+      <trans-unit id="7990911565052876089" datatype="html">
+        <source>High level security on management client is enabled on this device!</source>
+        <target>High level security on management client is enabled on this device!</target>
+      </trans-unit>
+      <trans-unit id="6738217183724690883" datatype="html">
+        <source>relays</source>
+        <target>relays</target>
+      </trans-unit>
+      <trans-unit id="7550376856728714481" datatype="html">
+        <source>High-level security (public)</source>
+        <target>High-level security (public)</target>
+      </trans-unit>
+      <trans-unit id="6508572784588919120" datatype="html">
+        <source>At least one job must be selected</source>
+        <target>At least one job must be selected</target>
+      </trans-unit>
+      <trans-unit id="5457761005512423645" datatype="html">
+        <source>Existing Jobs assigned to Meter Unit successfully</source>
+        <target>Existing Jobs assigned to Meter Unit successfully</target>
+      </trans-unit>
+      <trans-unit id="9097181850552406979" datatype="html">
+        <source>Assign existing jobs (<x id="INTERPOLATION"/> selected)</source>
+        <target>Assign existing jobs (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit>
+      <trans-unit id="584754872792429089" datatype="html">
+        <source>Assign</source>
+        <target>Assign</target>
+      </trans-unit><trans-unit id="8637641367518542743" datatype="html">
+        <source>Meter Units password type change was successful</source>
+        <target state="new">Meter Units password type change was successful</target>
+      </trans-unit><trans-unit id="3132665926026774329" datatype="html">
+        <source>Change password (<x id="INTERPOLATION"/> selected)</source>
+        <target state="new">Change password (<x id="INTERPOLATION"/> selected)</target>
+      </trans-unit><trans-unit id="5094514142389238369" datatype="html">
+        <source>Please select from the list below a password type that you would like to change.</source>
+        <target state="new">Please select from the list below a password type that you would like to change.</target>
+      </trans-unit><trans-unit id="5267065318979145847" datatype="html">
+        <source>Password type</source>
+        <target state="new">Password type</target>
+      </trans-unit><trans-unit id="7247696851952296359" datatype="html">
+        <source>Are you sure you would like to change password fo a selected password type (<x id="INTERPOLATION"/>)?</source>
+        <target state="new">Are you sure you would like to change password fo a selected password type (<x id="INTERPOLATION"/>)?</target>
+      </trans-unit>
+      <trans-unit id="2657743219188414087" datatype="html">
+        <source>Assign existing</source>
+        <target>Assign existing</target>
       </trans-unit>
     </body>
   </file>

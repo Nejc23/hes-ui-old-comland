@@ -45,7 +45,7 @@ export class AddMuFormComponent implements OnInit {
 
   communicationTypes: RadioOption[] = [
     { value: '1' as string, label: $localize`Wrapper` },
-    { value: '2' as string, label: $localize`HDLC` }
+    { value: '0' as string, label: $localize`HDLC` }
   ];
   defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
 
@@ -140,32 +140,20 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.isHls);
   }
 
-  get wrapperLlsClientProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.llsClient);
+  get wrapperClientAddressProperty() {
+    return nameOf<MuWrapperInformation>((o) => o.clientAddress);
   }
 
-  get wrapperLlsServerProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.llsServer);
+  get wrapperServerAddressProperty() {
+    return nameOf<MuWrapperInformation>((o) => o.serverAddress);
   }
 
-  // get wrapperPasswordProperty() {
-  //   return nameOf<MuWrapperInformation>((o) => o.password);
-  // }
-
-  get wrapperHlsClientProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.hlsClient);
+  get wrapperPublicClientAddressProperty() {
+    return nameOf<MuWrapperInformation>((o) => o.publicClientAddress);
   }
 
-  get wrapperHlsServerProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.hlsServer);
-  }
-
-  get wrapperPublicClientProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.publicClient);
-  }
-
-  get wrapperPublicServerProperty() {
-    return nameOf<MuWrapperInformation>((o) => o.publicServer);
+  get wrapperPublicServerAddressProperty() {
+    return nameOf<MuWrapperInformation>((o) => o.publicServerAddress);
   }
 
   get wrapperPhysicalAddressProperty() {
@@ -188,20 +176,20 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.authenticationType);
   }
 
-  get llsClientLowProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.llsClientLow);
+  get clientLowProperty() {
+    return nameOf<MuHdlcInformation>((o) => o.clientLow);
   }
 
-  get llsServerLowProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.llsServerLow);
+  get serverLowProperty() {
+    return nameOf<MuHdlcInformation>((o) => o.serverLow);
   }
 
-  get llsClientHighProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.llsClientHigh);
+  get clientHighProperty() {
+    return nameOf<MuHdlcInformation>((o) => o.clientHigh);
   }
 
-  get llsServerHighProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.llsServerHigh);
+  get serverHighProperty() {
+    return nameOf<MuHdlcInformation>((o) => o.serverHigh);
   }
 
   get publicClientLowProperty() {
@@ -218,22 +206,6 @@ export class AddMuFormComponent implements OnInit {
 
   get publicServerHighProperty() {
     return nameOf<MuHdlcInformation>((o) => o.publicServerHigh);
-  }
-
-  get hlsClientLowProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.hlsClientLow);
-  }
-
-  get hlsServerLowProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.hlsServerLow);
-  }
-
-  get hlsClientHighProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.hlsClientHigh);
-  }
-
-  get hlsServerHighProperty() {
-    return nameOf<MuHdlcInformation>((o) => o.hlsServerHigh);
   }
 
   get isShortNameProperty() {
@@ -253,31 +225,24 @@ export class AddMuFormComponent implements OnInit {
       [this.communicationTypeProperty]: [this.defaultCommunicationType.value, Validators.required],
 
       // wrapper
-      [this.wrapperLlsClientProperty]: [null, Validators.required],
-      [this.wrapperLlsServerProperty]: [null, Validators.required],
+      [this.wrapperClientAddressProperty]: [null, Validators.required],
+      [this.wrapperServerAddressProperty]: [null, Validators.required],
 
-      [this.wrapperPublicClientProperty]: [null, Validators.required],
-      [this.wrapperPublicServerProperty]: [null, Validators.required],
-
-      [this.wrapperHlsClientProperty]: [null, Validators.required],
-      [this.wrapperHlsServerProperty]: [null, Validators.required],
+      [this.wrapperPublicClientAddressProperty]: [null, Validators.required],
+      [this.wrapperPublicServerAddressProperty]: [null, Validators.required],
 
       [this.isGatewayProperty]: [false],
       [this.wrapperPhysicalAddressProperty]: [null, Validators.required],
 
       // hdlc
-      [this.llsClientLowProperty]: [null, Validators.required],
-      [this.llsServerLowProperty]: [null, Validators.required],
-      [this.llsClientHighProperty]: [null, Validators.required],
-      [this.llsServerHighProperty]: [null, Validators.required],
+      [this.clientLowProperty]: [null, Validators.required],
+      [this.serverLowProperty]: [null, Validators.required],
+      [this.clientHighProperty]: [null, Validators.required],
+      [this.serverHighProperty]: [null, Validators.required],
       [this.publicClientLowProperty]: [null, Validators.required],
       [this.publicServerLowProperty]: [null, Validators.required],
       [this.publicClientHighProperty]: [null, Validators.required],
       [this.publicServerHighProperty]: [null, Validators.required],
-      [this.hlsClientLowProperty]: [null, Validators.required],
-      [this.hlsServerLowProperty]: [null, Validators.required],
-      [this.hlsClientHighProperty]: [null, Validators.required],
-      [this.hlsServerHighProperty]: [null, Validators.required],
       [this.isShortNameProperty]: [false],
 
       // advanced
@@ -316,32 +281,25 @@ export class AddMuFormComponent implements OnInit {
   setDefaultFormValues() {
     const wrapperInformation = this.templateDefaultValues?.wrapperInformation?.wrapperInformation;
     if (wrapperInformation && this.isWrapperSelected) {
-      this.setDefaultValue(this.wrapperLlsClientProperty, wrapperInformation.llsClient);
-      this.setDefaultValue(this.wrapperLlsServerProperty, wrapperInformation.llsServer);
+      this.setDefaultValue(this.wrapperClientAddressProperty, wrapperInformation.clientAddress);
+      this.setDefaultValue(this.wrapperServerAddressProperty, wrapperInformation.serverAddress);
 
-      this.setDefaultValue(this.wrapperHlsClientProperty, wrapperInformation.hlsClient);
-      this.setDefaultValue(this.wrapperHlsServerProperty, wrapperInformation.hlsServer);
-
-      this.setDefaultValue(this.wrapperPublicClientProperty, wrapperInformation.publicClient);
-      this.setDefaultValue(this.wrapperPublicServerProperty, wrapperInformation.publicServer);
+      this.setDefaultValue(this.wrapperPublicClientAddressProperty, wrapperInformation.publicClientAddress);
+      this.setDefaultValue(this.wrapperPublicServerAddressProperty, wrapperInformation.publicServerAddress);
 
       this.setDefaultValue(this.wrapperPhysicalAddressProperty, wrapperInformation.physicalAddress);
     }
 
     const hdlsInformation = this.templateDefaultValues?.hdlcInformation?.hdlcInformation;
     if (hdlsInformation && this.isHdlcSelected) {
-      this.setDefaultValue(this.llsClientLowProperty, hdlsInformation.llsClientLow);
-      this.setDefaultValue(this.llsClientHighProperty, hdlsInformation.llsClientHigh);
-      this.setDefaultValue(this.llsServerLowProperty, hdlsInformation.llsServerLow);
-      this.setDefaultValue(this.llsServerHighProperty, hdlsInformation.llsServerHigh);
+      this.setDefaultValue(this.clientLowProperty, hdlsInformation.clientLow);
+      this.setDefaultValue(this.clientHighProperty, hdlsInformation.clientHigh);
+      this.setDefaultValue(this.serverLowProperty, hdlsInformation.serverLow);
+      this.setDefaultValue(this.serverHighProperty, hdlsInformation.serverHigh);
       this.setDefaultValue(this.publicClientLowProperty, hdlsInformation.publicClientLow);
       this.setDefaultValue(this.publicClientHighProperty, hdlsInformation.publicClientHigh);
       this.setDefaultValue(this.publicServerLowProperty, hdlsInformation.publicServerLow);
       this.setDefaultValue(this.publicServerHighProperty, hdlsInformation.publicServerHigh);
-      this.setDefaultValue(this.hlsClientLowProperty, hdlsInformation.hlsClientLow);
-      this.setDefaultValue(this.hlsClientHighProperty, hdlsInformation.hlsClientHigh);
-      this.setDefaultValue(this.hlsServerLowProperty, hdlsInformation.hlsServerLow);
-      this.setDefaultValue(this.hlsServerHighProperty, hdlsInformation.hlsServerHigh);
     }
 
     const advancedInformation = this.templateDefaultValues?.advancedInformation?.advancedInformation;
@@ -373,7 +331,7 @@ export class AddMuFormComponent implements OnInit {
   communicationTypeChanged(value: RadioOption) {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = +value.value === 1;
-    this.isHdlcSelected = +value.value === 2;
+    this.isHdlcSelected = +value.value === 0;
     this.setFormControls();
     this.setDefaultFormValues();
   }
@@ -385,13 +343,10 @@ export class AddMuFormComponent implements OnInit {
 
   setWrapperControls() {
     if (this.isWrapperSelected) {
-      this.form.get(this.wrapperLlsClientProperty).enable();
-      this.form.get(this.wrapperLlsServerProperty).enable();
-      // this.form.get(this.wrapperPasswordProperty).enable();
-      this.form.get(this.wrapperHlsClientProperty).enable();
-      this.form.get(this.wrapperHlsServerProperty).enable();
-      this.form.get(this.wrapperPublicClientProperty).enable();
-      this.form.get(this.wrapperPublicServerProperty).enable();
+      this.form.get(this.wrapperClientAddressProperty).enable();
+      this.form.get(this.wrapperServerAddressProperty).enable();
+      this.form.get(this.wrapperPublicClientAddressProperty).enable();
+      this.form.get(this.wrapperPublicServerAddressProperty).enable();
       this.form.get(this.isGatewayProperty).enable();
 
       if (this.isGatewayEnabled) {
@@ -400,13 +355,10 @@ export class AddMuFormComponent implements OnInit {
         this.form.get(this.wrapperPhysicalAddressProperty).disable();
       }
     } else {
-      this.form.get(this.wrapperLlsClientProperty).disable();
-      this.form.get(this.wrapperLlsServerProperty).disable();
-      // this.form.get(this.wrapperPasswordProperty).disable();
-      this.form.get(this.wrapperHlsClientProperty).disable();
-      this.form.get(this.wrapperHlsServerProperty).disable();
-      this.form.get(this.wrapperPublicClientProperty).disable();
-      this.form.get(this.wrapperPublicServerProperty).disable();
+      this.form.get(this.wrapperClientAddressProperty).disable();
+      this.form.get(this.wrapperServerAddressProperty).disable();
+      this.form.get(this.wrapperPublicClientAddressProperty).disable();
+      this.form.get(this.wrapperPublicServerAddressProperty).disable();
       this.form.get(this.isGatewayProperty).disable();
       this.form.get(this.wrapperPhysicalAddressProperty).disable();
     }
@@ -414,31 +366,23 @@ export class AddMuFormComponent implements OnInit {
 
   setHdlcControls() {
     if (this.isHdlcSelected) {
-      this.form.get(this.llsClientLowProperty).enable();
-      this.form.get(this.llsServerLowProperty).enable();
-      this.form.get(this.llsClientHighProperty).enable();
-      this.form.get(this.llsServerHighProperty).enable();
+      this.form.get(this.clientLowProperty).enable();
+      this.form.get(this.serverLowProperty).enable();
+      this.form.get(this.clientHighProperty).enable();
+      this.form.get(this.serverHighProperty).enable();
       this.form.get(this.publicClientLowProperty).enable();
       this.form.get(this.publicServerLowProperty).enable();
       this.form.get(this.publicClientHighProperty).enable();
       this.form.get(this.publicServerHighProperty).enable();
-      this.form.get(this.hlsClientLowProperty).enable();
-      this.form.get(this.hlsServerLowProperty).enable();
-      this.form.get(this.hlsClientHighProperty).enable();
-      this.form.get(this.hlsServerHighProperty).enable();
     } else {
-      this.form.get(this.llsClientLowProperty).disable();
-      this.form.get(this.llsServerLowProperty).disable();
-      this.form.get(this.llsClientHighProperty).disable();
-      this.form.get(this.llsServerHighProperty).disable();
+      this.form.get(this.clientLowProperty).disable();
+      this.form.get(this.serverLowProperty).disable();
+      this.form.get(this.clientHighProperty).disable();
+      this.form.get(this.serverHighProperty).disable();
       this.form.get(this.publicClientLowProperty).disable();
       this.form.get(this.publicServerLowProperty).disable();
       this.form.get(this.publicClientHighProperty).disable();
       this.form.get(this.publicServerHighProperty).disable();
-      this.form.get(this.hlsClientLowProperty).disable();
-      this.form.get(this.hlsServerLowProperty).disable();
-      this.form.get(this.hlsClientHighProperty).disable();
-      this.form.get(this.hlsServerHighProperty).disable();
     }
   }
 
@@ -493,12 +437,10 @@ export class AddMuFormComponent implements OnInit {
     let wrapperInformation: MuWrapperInformation = null;
     if (this.isWrapperSelected) {
       wrapperInformation = {
-        llsClient: this.form.get(this.wrapperLlsClientProperty).value,
-        llsServer: this.form.get(this.wrapperLlsServerProperty).value,
-        publicClient: this.form.get(this.wrapperPublicClientProperty).value,
-        publicServer: this.form.get(this.wrapperPublicServerProperty).value,
-        hlsClient: this.form.get(this.wrapperHlsClientProperty).value,
-        hlsServer: this.form.get(this.wrapperHlsServerProperty).value,
+        clientAddress: this.form.get(this.wrapperClientAddressProperty).value,
+        serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
+        publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
+        publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
         physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
       };
     }
@@ -506,18 +448,14 @@ export class AddMuFormComponent implements OnInit {
     let hdlcInformation: MuHdlcInformation = null;
     if (this.isHdlcSelected) {
       hdlcInformation = {
-        llsClientLow: this.form.get(this.llsClientLowProperty).value,
-        llsClientHigh: this.form.get(this.llsClientHighProperty).value,
-        llsServerLow: this.form.get(this.llsServerLowProperty).value,
-        llsServerHigh: this.form.get(this.llsServerHighProperty).value,
+        clientLow: this.form.get(this.clientLowProperty).value,
+        clientHigh: this.form.get(this.clientHighProperty).value,
+        serverLow: this.form.get(this.serverLowProperty).value,
+        serverHigh: this.form.get(this.serverHighProperty).value,
         publicClientLow: this.form.get(this.publicClientLowProperty).value,
         publicClientHigh: this.form.get(this.publicClientHighProperty).value,
         publicServerLow: this.form.get(this.publicServerLowProperty).value,
-        publicServerHigh: this.form.get(this.publicServerHighProperty).value,
-        hlsClientLow: this.form.get(this.hlsClientLowProperty).value,
-        hlsClientHigh: this.form.get(this.hlsClientHighProperty).value,
-        hlsServerLow: this.form.get(this.hlsServerLowProperty).value,
-        hlsServerHigh: this.form.get(this.hlsServerHighProperty).value
+        publicServerHigh: this.form.get(this.publicServerHighProperty).value
       };
     }
 

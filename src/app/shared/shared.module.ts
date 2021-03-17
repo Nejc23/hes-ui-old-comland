@@ -1,3 +1,5 @@
+import { SecurityChangePasswordComponent } from './../features/meter-units/common/components/security/security-change-password.component';
+import { PlcMeterJobsAssignExistingComponent } from './../features/meter-units/common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { SecurityRekeyComponent } from './../features/meter-units/common/components/security/security-rekey.component';
 import { SecurityActivateHlsComponent } from './../features/meter-units/common/components/security/security-activate-hls.component';
 import { CronScheduleComponent } from './../features/jobs/cron-schedule/components/cron-schedule.component';
@@ -130,7 +132,9 @@ import { PopoverInstantValuesComponent } from '../features/meter-units/popover/p
     CronScheduleComponent,
     SecurityActivateHlsComponent,
     SecurityRekeyComponent,
-    PopoverInstantValuesComponent
+    PopoverInstantValuesComponent,
+    PlcMeterJobsAssignExistingComponent,
+    SecurityChangePasswordComponent
   ],
   imports: [
     CommonModule,
@@ -215,7 +219,9 @@ import { PopoverInstantValuesComponent } from '../features/meter-units/popover/p
     CronScheduleComponent,
     SecurityActivateHlsComponent,
     SecurityRekeyComponent,
-    PopoverInstantValuesComponent
+    PopoverInstantValuesComponent,
+    PlcMeterJobsAssignExistingComponent,
+    SecurityChangePasswordComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -243,7 +249,9 @@ import { PopoverInstantValuesComponent } from '../features/meter-units/popover/p
     JobsSelectComponent,
     CronScheduleComponent,
     SecurityActivateHlsComponent,
-    SecurityRekeyComponent
+    SecurityRekeyComponent,
+    PlcMeterJobsAssignExistingComponent,
+    SecurityChangePasswordComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

@@ -16,5 +16,6 @@ export enum ActionEnumerator {
   MUSetDisplaySettings = 'Meter-Units-SetDisplaySettings',
   MUClearAlarms = 'Meter-Units-ClearAlarms',
   MUDelete = 'Meter-Units-Delete',
-  MUAdd = 'Meter-Units-Add'
+  MUAdd = 'Meter-Units-Add',
+  MUJobsAssignExisting = 'Meter-Units-JobsAssignExisting'
 }

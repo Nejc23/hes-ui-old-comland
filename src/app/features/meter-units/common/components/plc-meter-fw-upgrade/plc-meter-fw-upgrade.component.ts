@@ -144,6 +144,10 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     }
   }
 
+  isFormValid(): boolean {
+    return this.form.valid;
+  }
+
   // properties - START
   get imageGuidProperty() {
     return 'imageGuid';

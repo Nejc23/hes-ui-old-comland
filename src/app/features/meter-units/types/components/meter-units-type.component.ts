@@ -760,6 +760,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.onScheduleReadJobs(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
+  onJobsAssignExisting(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.onJobsAssignExisting(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
   onJobsTemplates(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -1006,6 +1011,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
 
     this.plcActionsService.onSecurityRekey(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+  }
+
+  onSecurityChangePassword(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+
+    this.plcActionsService.onSecurityChangePassword(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
   // <-- end  Security action click (bulk or selected row)
