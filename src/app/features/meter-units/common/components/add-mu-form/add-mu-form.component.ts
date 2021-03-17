@@ -45,7 +45,7 @@ export class AddMuFormComponent implements OnInit {
 
   communicationTypes: RadioOption[] = [
     { value: '1' as string, label: $localize`Wrapper` },
-    { value: '2' as string, label: $localize`HDLC` }
+    { value: '0' as string, label: $localize`HDLC` }
   ];
   defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
 
@@ -331,7 +331,7 @@ export class AddMuFormComponent implements OnInit {
   communicationTypeChanged(value: RadioOption) {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = +value.value === 1;
-    this.isHdlcSelected = +value.value === 2;
+    this.isHdlcSelected = +value.value === 0;
     this.setFormControls();
     this.setDefaultFormValues();
   }
@@ -373,6 +373,7 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.publicClientLowProperty).enable();
       this.form.get(this.publicServerLowProperty).enable();
       this.form.get(this.publicClientHighProperty).enable();
+      this.form.get(this.publicServerHighProperty).enable();
     } else {
       this.form.get(this.clientLowProperty).disable();
       this.form.get(this.serverLowProperty).disable();
