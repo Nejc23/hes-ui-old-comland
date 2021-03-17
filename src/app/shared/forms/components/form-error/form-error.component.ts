@@ -21,7 +21,9 @@ export class FormErrorComponent {
       min: $localize`Exceeds min value`,
       maxError: $localize`Exceeds max value`,
       minError: $localize`Exceeds min value`,
-      incorrectRange: $localize`Range is incorect`
+      incorrectRange: $localize`Range is incorect`,
+      numberError: $localize`Entry is not a valid integer:`,
+      emailError: $localize`Entry is not a valid email:`
     };
   }
 
@@ -39,12 +41,20 @@ export class FormErrorComponent {
           text = `${text} (${error.min.min})`;
         }
 
-        //  handle errors from kendo-numerictextbox
+        // handle errors from kendo-numerictextbox
         if (key === 'maxError') {
           text = `${text} (${error.maxError.maxValue})`;
         }
         if (key === 'minError') {
           text = `${text} (${error.minError.minValue})`;
+        }
+
+        // handle error for kendo-multiselect
+        if (key === 'numberError') {
+          text = `${text} ${error.numberError.value}`;
+        }
+        if (key === 'emailError') {
+          text = `${text} ${error.emailError.value}`;
         }
         this.errors.push(text);
       }

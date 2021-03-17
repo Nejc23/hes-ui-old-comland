@@ -1,11 +1,12 @@
-import { ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
+import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
+import { NotificationFilter, ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { jobActionType } from './../../enums/job-action-type.enum';
 import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { jobType } from './../../enums/job-type.enum';
 import { ToastNotificationService } from './../../../../core/toast-notification/services/toast-notification.service';
 import { ToastComponent } from './../../../../shared/toast-notification/components/toast.component';
 import { CronScheduleComponent } from './../../cron-schedule/components/cron-schedule.component';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ViewChildren } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +23,7 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
+import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -30,6 +32,7 @@ export class SchedulerJobComponent implements OnInit {
   @ViewChild(RegistersSelectComponent) registers;
   @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
   @ViewChild('cronSchedule') cronScheduler: CronScheduleComponent;
+  @ViewChild('notificationRules') notificationRules: AlarmNotificationRulesComponent;
 
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
@@ -55,6 +58,10 @@ export class SchedulerJobComponent implements OnInit {
 
   jobType = jobType.reading;
   public title = '';
+
+  // alarm notifications
+  filter: NotificationFilter;
+  addresses: string[];
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -145,6 +152,8 @@ export class SchedulerJobComponent implements OnInit {
     this.selectedJobId = selectedJobId;
 
     this.form = this.createForm(job);
+    this.filter = job?.filter;
+    this.addresses = job?.addresses;
 
     // this.changeReadOptionId();
     this.form.get(this.registersProperty).clearValidators();
@@ -152,9 +161,10 @@ export class SchedulerJobComponent implements OnInit {
 
     // this.cronScheduler.initForm(this.cronExpression);
 
-    this.jobType = jobTypeSetting;
+    this.jobType = jobTypeSetting.toString() === (+jobActionType.alarmNotification).toString() ? jobType.alarmNotification : jobTypeSetting;
+    console.log('jobType is ', this.jobType);
 
-    switch (this.jobType.toLowerCase()) {
+    switch (this.jobType.toString().toLowerCase()) {
       case jobType.reading.toLowerCase(): {
         this.showRegisters = true;
         break;
@@ -213,7 +223,10 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   showPointer() {
-    return this.jobType.toLowerCase() === jobType.reading.toLowerCase() || this.jobType.toLowerCase() === jobType.readEvents.toLowerCase();
+    return (
+      this.jobType.toString().toLowerCase() === jobType.reading.toString().toLowerCase() ||
+      this.jobType.toString().toLowerCase() === jobType.readEvents.toString().toLowerCase()
+    );
   }
 
   showUsePointer() {
@@ -221,7 +234,7 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   showIecPush() {
-    return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
+    return this.jobType.toString().toLowerCase() === jobType.reading.toLowerCase();
   }
 
   save(addNew: boolean) {
@@ -238,6 +251,17 @@ export class SchedulerJobComponent implements OnInit {
     }
 
     const values = this.fillData();
+
+    if (this.showAlarmNotification) {
+      if (!this.notificationRules.validateForm()) {
+        return;
+      }
+
+      values.filter = this.notificationRules.getFilter();
+      values.addresses = this.notificationRules.getAddresses();
+      values.jobType = '6';
+    }
+
     let request: Observable<SchedulerJob> = null;
     let operation = $localize`added`;
     if (this.selectedJobId) {

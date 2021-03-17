@@ -7,7 +7,8 @@ export interface AlarmNotificationRules {
   isProtocolActive: boolean;
   protocols: Codelist<number>[];
   isManufacturerActive: boolean;
-  manufactrers: Codelist<number>[];
+  manufacturers: Codelist<number>[];
   isSourceActive: boolean;
-  activeSources: Codelist<number>[];
+  sources: Codelist<number>[];
+  addresses: Codelist<number>[];
 }

@@ -28,7 +28,9 @@ export class PlcMeterReadScheduleService {
 
       startAt: values.startAtDate ? moment(values.startAtDate).format() : null,
       endAt: values.endAtDate ? moment(values.endAtDate).format() : null,
-      cronExpression: values.cronExpression
+      cronExpression: values.cronExpression,
+      filter: values.filter,
+      addresses: values.addresses
     };
 
     return serviceData;

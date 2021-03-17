@@ -1,38 +1,67 @@
 <h3 i18n>Send notification message when alarm events matches one or more criteria bellow.</h3>
 <div i18n>At least one of the rules below should be active</div>
 
-<div class="form-row">
-  <div class="col-3">
-    <app-input-switch [form]="form" [property]="isAlarmIdActiveProperty" i18n-label label="Alarm ID" (valueChanged)="inputSwitchChange($event, alarmIdsProperty)">
-    </app-input-switch>
-  </div>
-  <div class="col-9">
-    <app-input-tag [property]="alarmIdsProperty" [form]="form" [autocompleteItemsAsObjects]="alarmIds"
-        [disabled]="false">
+<div *ngIf="form">
+  <div class="form-row mt-4">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isAlarmIdActiveProperty" i18n-label label="Alarm ID" (valueChanged)="inputSwitchChange($event, alarmIdsProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="alarmIdsProperty" [form]="form" [disabled]="false" [allowCustomValues]="true" [selected]="rules?.alarmIds">
       </app-input-tag>
+    </div>
   </div>
-</div>
-<div class="form-row">
-  <div class="col-3">
-    <app-input-switch [form]="form" [property]="isSeverityActiveProperty" i18n-label label="Severity">
-    </app-input-switch>
+  <div class="form-row">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isSeverityActiveProperty" i18n-label label="Severity" (valueChanged)="inputSwitchChange($event, severitiesProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="severitiesProperty" [form]="form" [autocompleteItemsAsObjects]="severities" [disabled]="false" [selected]="rules?.severities">
+        </app-input-tag>
+    </div>
   </div>
-</div>
-<div class="form-row">
-  <div class="col-3">
-    <app-input-switch [form]="form" [property]="isProtocolActiveProperty" i18n-label label="Protocol">
-    </app-input-switch>
+  <div class="form-row">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isProtocolActiveProperty" i18n-label label="Protocol" (valueChanged)="inputSwitchChange($event, protocolsProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="protocolsProperty" [form]="form" [autocompleteItemsAsObjects]="protocols" [disabled]="false" [selected]="rules?.protocols">
+        </app-input-tag>
+    </div>
   </div>
-</div>
-<div class="form-row">
-  <div class="col-3">
-    <app-input-switch [form]="form" [property]="isManufacturerActiveProperty" i18n-label label="Manufacturer">
-    </app-input-switch>
+  <div class="form-row">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isManufacturerActiveProperty" i18n-label label="Manufacturer" (valueChanged)="inputSwitchChange($event, manufacturersProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="manufacturersProperty" [form]="form" [autocompleteItemsAsObjects]="manufacturers" [disabled]="false" [selected]="rules?.manufacturers">
+        </app-input-tag>
+    </div>
   </div>
-</div>
-<div class="form-row">
-  <div class="col-3">
-    <app-input-switch [form]="form" [property]="isSourceActiveProperty" i18n-label label="Source">
-    </app-input-switch>
+  <div class="form-row">
+    <div class="col-3">
+      <app-input-switch [form]="form" [property]="isSourceActiveProperty" i18n-label label="Source" (valueChanged)="inputSwitchChange($event, sourcesProperty)">
+      </app-input-switch>
+    </div>
+    <div class="col-9">
+      <app-input-tag [property]="sourcesProperty" [form]="form" [autocompleteItemsAsObjects]="sources" [selected]="rules?.sources"
+          [disabled]="false">
+        </app-input-tag>
+    </div>
+    <div class="help-block pb-2" *ngIf="noRuleActive">
+      <i class="far fa-info-circle text-danger"></i><small class="text-danger">At least one of the rules must be active.</small>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12">
+      <app-input-tag [property]="addressesProperty" [form]="form" [allowCustomValues]="true" i18n-label [label]="'Send notifications to'"
+          [disabled]="false" [selected]="rules?.addresses">
+      </app-input-tag>
+    </div>
   </div>
 </div>

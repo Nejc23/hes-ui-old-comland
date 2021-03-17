@@ -271,7 +271,7 @@ export class SchedulerJobsInterceptor {
       description: 'desc 4444',
       active: true,
       cronExpression: '0 1 */3 * * * *',
-      jobType: 'scheduleReading',
+      jobType: 'alarmNotification',
       readingProperties: {
         usePointer: true,
         intervalRange: 2,
@@ -280,6 +280,14 @@ export class SchedulerJobsInterceptor {
       },
       devices: {
         id: ['AC9D7C4F-08C7-46A0-930B-61A0B1FE678D', 'de32daef-4766-4afc-aa5f-bba5822bf9b0']
+      },
+      addresses: ['test@test.com', 'test2@test.com'],
+      filter: {
+        alarmIds: [1, 2, 3, 4, 5],
+        severities: [0, 1],
+        protocols: [0, 1, 2, 3],
+        manufacturers: [1, 2, 3],
+        sources: [0, 1]
       }
     };
 
