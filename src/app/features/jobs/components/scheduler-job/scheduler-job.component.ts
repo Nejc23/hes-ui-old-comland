@@ -182,11 +182,11 @@ export class SchedulerJobComponent implements OnInit {
         intervalRange:
           this.showForLast() && this.form.get(this.intervalRangeProperty).value
             ? parseInt(this.form.get(this.intervalRangeProperty).value, 10)
-            : null,
+            : 0,
         timeUnit:
           this.showForLast() && this.form.get(this.timeUnitProperty).value
             ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id
-            : null
+            : 0
       }
     };
     return formData;
