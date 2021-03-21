@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-4 ng-star-inserted">
 
-    <div class="form-group" *ngIf="!editMode">
+    <div class="form-group">
       <button class="btn btn-primary" (click)="editMeterUnit()">
         <span i18n>Edit</span>
       </button>
-      <div class="btn-group pr-2" *ngIf="!editMode">
+      <div class="btn-group pr-2">
         <button class="btn btn-secondary" type="button" (click)="onDelete()"><span i18n>Delete</span></button>
       </div>
       <div dropdown class="btn-group">
@@ -135,11 +135,6 @@
       </div>
     </div>
 
-    <div class="form-group" *ngIf="editMode">
-      <button type="button" class="btn btn-light" (click)="cancel()" i18n>Cancel</button>
-      <button class="btn btn-primary" (click)="saveMeterUnit()" i18n>Save</button>
-    </div>
-
     <div class="form-group" *ngIf="data">
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
         <strong><span i18n>Error saving Meter Unit!</span></strong> <br /> {{saveError}}
@@ -147,69 +142,45 @@
 
       <div class="form-group">
         <div class="form-row mb-4">
-          <div class="col" *ngIf="!editMode">
+          <div class="col">
             <div><label i18n>Name</label></div>
-            <div><span>{{form.get(nameProperty).value}}</span></div>
-          </div>
-          <div class="col" *ngIf="editMode">
-            <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name">
-            </app-input-text>
+            <div><span>{{ data.name }}</span></div>
           </div>
         </div>
         <div class="form-row mb-4">
-          <div class="col" *ngIf="!editMode">
+          <div class="col">
             <div><label i18n>Serial number</label></div>
-            <div><span>{{form.get(idProperty).value}}</span></div>
-          </div>
-          <div class="col" *ngIf="editMode">
-            <app-input-text [form]="form" [property]="idProperty" i18n-label label="Serial number">
-            </app-input-text>
-          </div>
-        </div>
-        <div class="form-row mb-4">
-          <div class="col">
-            <div><label i18n>Mac</label></div>
-            <div><span>{{form.get(macProperty).value}}</span></div>
-          </div>
-        </div>
-        <div class="form-row mb-4">
-          <div class="col">
-            <div><label i18n>Systitle</label></div>
-            <div><span>{{form.get(systitleProperty).value}}</span></div>
-          </div>
-        </div>
-        <div class="form-row mb-4">
-          <div class="col">
-            <div><label i18n>State</label></div>
-            <div><span>{{form.get(statusProperty).value}}</span></div>
-          </div>
-        </div>
-        <div class="form-row mb-4">
-          <div class="col">
-            <div><label i18n>Type</label></div>
-            <div><span>{{form.get(typeProperty).value}}</span></div>
-          </div>
-        </div>
-        <div class="form-row mb-4">
-          <div class="col">
-            <div><label i18n>Manufacturer</label></div>
-            <div><span>{{form.get(vendorProperty).value}}</span></div>
+            <div><span>{{ data.serialNumber }}</span></div>
           </div>
         </div>
         <div class="form-row mb-4">
           <div class="col">
             <div><label i18n>Template</label></div>
-            <div><span>{{form.get(templateProperty).value}}</span></div>
+            <div><span>{{ data.templateName }}</span></div>
           </div>
         </div>
         <div class="form-row mb-4">
-          <div class="col" *ngIf="!editMode">
-            <div><label i18n>Address</label></div>
-            <div><span>{{form.get(addressProperty).value}}</span></div>
+          <div class="col">
+            <div><label i18n>Protocol</label></div>
+            <div><span>{{ data.protocol }}</span></div>
           </div>
-          <div class="col" *ngIf="editMode">
-            <app-input-text [form]="form" [property]="addressProperty" i18n-label label="Address">
-            </app-input-text>
+        </div>
+        <div class="form-row mb-4">
+          <div class="col">
+            <div><label i18n>Manufacturer</label></div>
+            <div><span>{{ data.manufacturer }}</span></div>
+          </div>
+        </div>
+        <div class="form-row mb-4">
+          <div class="col">
+            <div><label i18n>IP</label></div>
+            <div><span>{{data.ip}}</span></div>
+          </div>
+        </div>
+        <div class="form-row mb-4">
+          <div class="col">
+            <div><label i18n>Port</label></div>
+            <div><span>{{data.port}}</span></div>
           </div>
         </div>
       </div>

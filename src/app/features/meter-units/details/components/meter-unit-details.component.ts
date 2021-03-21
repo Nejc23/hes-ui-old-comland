@@ -13,6 +13,8 @@ import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { AddMuFormComponent } from '../../common/components/add-mu-form/add-mu-form.component';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html'
@@ -26,7 +28,6 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   private requestModel;
 
-  public editMode = false;
   public data: MeterUnitDetails;
   public form: FormGroup;
   // public muStatuses: Codelist<number>[];
@@ -42,7 +43,8 @@ export class MeterUnitDetailsComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private plcActionsService: MeterUnitsPlcActionsService,
     private codeList: CodelistMeterUnitsRepositoryService,
-    private router: Router
+    private router: Router,
+    private modalService: ModalService
   ) {
     breadcrumbService.setPageName($localize`Meter unit`);
   }
@@ -89,39 +91,49 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   public editMeterUnit() {
-    this.editMode = true;
+    // this.editMode = true;
+    const modalRef = this.modalService.open(AddMuFormComponent);
+
+    const component: AddMuFormComponent = modalRef.componentInstance;
+    modalRef.componentInstance.setFormEdit(this.data);
+
+    modalRef.result
+      .then((result) => {
+        this.getData();
+      })
+      .catch(() => {});
   }
 
-  public cancel() {
-    this.editMode = false;
-    this.getData();
-  }
+  // public cancel() {
+  //   this.editMode = false;
+  //   this.getData();
+  // }
 
-  saveMeterUnit() {
-    this.saveError = null;
+  // saveMeterUnit() {
+  //   this.saveError = null;
 
-    const muFormData = this.fillData();
-    const request = this.meterUnitsService.updateMuFromForm(muFormData);
-    const successMessage = $localize`Meter Unit was updated successfully`;
+  //   const muFormData = this.fillData();
+  //   const request = this.meterUnitsService.updateMuFromForm(muFormData);
+  //   const successMessage = $localize`Meter Unit was updated successfully`;
 
-    try {
-      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-        (result) => {
-          this.editMode = false;
-        },
-        (errResult) => {
-          console.log('Error saving form: ', errResult);
-          this.saveError = errResult && errResult.error ? errResult.error[0] : null;
-        } // error
-      );
-    } catch (error) {
-      console.log('Edit-MU Form Error:', error);
-    }
-  }
+  //   try {
+  //     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+  //       (result) => {
+  //         this.editMode = false;
+  //       },
+  //       (errResult) => {
+  //         console.log('Error saving form: ', errResult);
+  //         this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+  //       } // error
+  //     );
+  //   } catch (error) {
+  //     console.log('Edit-MU Form Error:', error);
+  //   }
+  // }
 
   getData() {
     if (!this.deviceId || this.deviceId.length === 0) {
-      this.form = this.createForm();
+      // this.form = this.createForm();
       return;
     }
 
@@ -130,7 +142,7 @@ export class MeterUnitDetailsComponent implements OnInit {
       console.log('getMeterUnit returned:', this.data);
       // this.setVendorsAndStatuses(this.data.type);
 
-      this.form = this.createForm();
+      // this.form = this.createForm();
       // this.setFormType();
       // this.setFormVendor();
 
@@ -150,21 +162,23 @@ export class MeterUnitDetailsComponent implements OnInit {
   // }
 
   fillData(): MeterUnitDetailsForm {
-    const formData: MeterUnitDetailsForm = {
-      name: this.form.get(this.nameProperty).value,
-      id: this.form.get(this.idProperty).value,
-      address: this.form.get(this.addressProperty).value,
+    // const formData: MeterUnitDetailsForm = {
+    //   name: this.form.get(this.nameProperty).value,
+    //   id: this.form.get(this.idProperty).value,
+    //   address: this.form.get(this.addressProperty).value,
 
-      deviceId: this.deviceId,
-      type: this.data.type,
-      vendor: this.data.manufacturer,
-      status: this.data.state,
-      template: this.data.templateName,
-      systitle: this.data.systitle,
-      mac: this.data.mac
-    };
+    //   deviceId: this.deviceId,
+    //   type: this.data.type,
+    //   vendor: this.data.manufacturer,
+    //   status: this.data.state,
+    //   template: this.data.templateName,
+    //   systitle: this.data.systitle,
+    //   mac: this.data.mac
+    // };
 
-    return formData;
+    // return formData;
+
+    return null;
   }
 
   get nameProperty() {
@@ -255,20 +269,20 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUClearAlarms;
   }
 
-  createForm(): FormGroup {
-    return this.formBuilder.group({
-      [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-      // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
-      [this.statusProperty]: [this.data ? this.data.state : null],
-      [this.typeProperty]: [this.data ? this.data.type : null],
-      [this.vendorProperty]: [this.data ? this.data.manufacturer : null],
-      [this.templateProperty]: [this.data ? this.data.templateName : null],
-      [this.systitleProperty]: [this.data ? this.data.systitle : null],
-      [this.idProperty]: [this.data ? this.data.serialNumber : null],
-      [this.macProperty]: [this.data ? this.data.mac : null],
-      [this.addressProperty]: [this.data ? this.data.address : null]
-    });
-  }
+  // createForm(): FormGroup {
+  //   // return this.formBuilder.group({
+  //   //   [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
+  //   //   // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
+  //   //   [this.statusProperty]: [this.data ? this.data.state : null],
+  //   //   [this.typeProperty]: [this.data ? this.data.type : null],
+  //   //   [this.vendorProperty]: [this.data ? this.data.manufacturer : null],
+  //   //   [this.templateProperty]: [this.data ? this.data.templateName : null],
+  //   //   [this.systitleProperty]: [this.data ? this.data.systitle : null],
+  //   //   [this.idProperty]: [this.data ? this.data.serialNumber : null],
+  //   //   [this.macProperty]: [this.data ? this.data.mac : null],
+  //   //   [this.addressProperty]: [this.data ? this.data.address : null]
+  //   // });
+  // }
 
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [

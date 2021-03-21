@@ -1,5 +1,5 @@
 <app-modal-template (dismiss)="onDismiss()">
-  <div modal-header i18n>Add new DLMS meter</div>
+  <div modal-header>{{ getTitle() }}</div>
 
   <div modal-body>
     <ng-container>
@@ -25,9 +25,12 @@
                 </div>
               </div>
 
-              <app-select-input i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
+              <app-select-input *ngIf="!isEditMu" i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
                 [disabled]="false" (selectedValueChanged)="templateChanged($event)">
               </app-select-input>
+              <app-input-text  *ngIf="isEditMu" i18n-label label="Template" [form]="form" [property]="templateStringProperty"
+                [disabled]="true">
+              </app-input-text>
 
               <div class="form-row">
                 <div class="col-6">
@@ -49,15 +52,17 @@
 
               <div class="form-row">
                 <div class="col-12">
-                  <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
+                  <app-input-radio *ngIf="!isEditMu" i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
                     name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" (selectionChanged)="communicationTypeChanged($event)" >
                   </app-input-radio>
                   <!-- <app-input-radio class="label-left" [form]="form" [property]="communicationTypeProperty" [options]="communicationTypes"></app-input-radio> -->
-
+                  <app-input-text *ngIf="isEditMu" i18n-label label="Communication type" [form]="form" [property]="communicationTypeStringProperty"
+                    name="fileTypeRadio" box="true" [hideLabelSmall]="true" >
+                  </app-input-text>
                 </div>
               </div>
 
-              <div class="form-row">
+              <div class="form-row" *ngIf="!isEditMu">
                 <div class="col-6">
                   <app-input-switch [form]="form" [property]="isHlsProperty" i18n-label label="Use high-level security">
                   </app-input-switch>
@@ -68,7 +73,7 @@
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleJobs">
+        <kendo-tabstrip-tab [title]="tabTitleJobs" *ngIf="!isEditMu">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
@@ -170,7 +175,7 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="isWrapperSelected">
+                <div *ngIf="isWrapperSelected && !isEditMu">
                   <div class="form-row pt-3">
                     <div class="col-6">
                       <app-input-switch [form]="form" [property]="isGatewayProperty" i18n-label label="Gateway" (valueChanged)="gatewayChanged($event)">
@@ -224,7 +229,8 @@
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="cancel()" i18n>Cancel</button>
       <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="add()" i18n>Add</button>
+        <button type="submit" class="btn btn-primary" (click)="add()" i18n *ngIf="!isEditMu">Add</button>
+        <button type="submit" class="btn btn-primary" (click)="update()" i18n *ngIf="isEditMu">Update</button>
         <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button> -->

@@ -1,3 +1,4 @@
+import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { toLower } from 'lodash';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
@@ -37,6 +38,8 @@ export class AddMuFormComponent implements OnInit {
   tabTitleCustomProperties = $localize`Custom properties`;
 
   form: FormGroup;
+  editMu: MeterUnitDetails;
+  isEditMu = false;
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
@@ -91,6 +94,11 @@ export class AddMuFormComponent implements OnInit {
       .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
       .subscribe((manufacturers) => {
         this.manufacturers = manufacturers;
+
+        if (this.isEditMu) {
+          const manufacturer = this.manufacturers.find((t) => this.editMu.manufacturer.toLowerCase() === t.value.toLowerCase());
+          this.form.get(this.manufacturerProperty).setValue(manufacturer);
+        }
       });
 
     this.autoTemplateService.getTemplates().subscribe((temps) => {
@@ -101,6 +109,12 @@ export class AddMuFormComponent implements OnInit {
         .sort((a, b) => {
           return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
         });
+
+      if (this.isEditMu) {
+        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
+        this.form.get(this.templateProperty).setValue(template);
+        this.isTemplateSelected = template && template.id ? true : false;
+      }
     });
   }
 
@@ -120,6 +134,10 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.template);
   }
 
+  get templateStringProperty() {
+    return 'templateString';
+  }
+
   get connectionTypeProperty() {
     return nameOf<MuForm>((o) => o.connectionType);
   }
@@ -134,6 +152,10 @@ export class AddMuFormComponent implements OnInit {
 
   get communicationTypeProperty() {
     return nameOf<MuForm>((o) => o.communicationType);
+  }
+
+  get communicationTypeStringProperty() {
+    return 'communicationTypeString';
   }
 
   get isHlsProperty() {
@@ -212,42 +234,49 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.isShortName);
   }
 
-  createForm(): FormGroup {
+  createForm(editMu: MeterUnitDetails = null): FormGroup {
+    let communicationType = this.defaultCommunicationType;
+    if (editMu) {
+      communicationType = this.editMu.wrapperInformation ? this.communicationTypes[0] : this.communicationTypes[1];
+      this.communicationTypeSelected = communicationType;
+    }
+
     return this.formBuilder.group({
-      [this.nameProperty]: ['', Validators.required],
-      [this.serialNumberProperty]: ['', Validators.required],
+      [this.nameProperty]: [editMu?.name, Validators.required],
+      [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
-      [this.templateProperty]: [null, Validators.required],
+      [this.templateProperty]: [{ value: null, disabled: this.isEditMu }, Validators.required],
+      [this.templateStringProperty]: [{ value: editMu?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
-      [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-      [this.portProperty]: [null],
+
+      [this.ipProperty]: [editMu?.ip, [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
+      [this.portProperty]: [editMu?.port],
       [this.isHlsProperty]: [false],
-      [this.communicationTypeProperty]: [this.defaultCommunicationType.value, Validators.required],
+      [this.communicationTypeProperty]: [{ value: communicationType.value, disabled: this.isEditMu }, Validators.required],
+      [this.communicationTypeStringProperty]: [{ value: communicationType.value, disabled: true }],
 
       // wrapper
-      [this.wrapperClientAddressProperty]: [null, Validators.required],
-      [this.wrapperServerAddressProperty]: [null, Validators.required],
-
-      [this.wrapperPublicClientAddressProperty]: [null, Validators.required],
-      [this.wrapperPublicServerAddressProperty]: [null, Validators.required],
-
+      [this.wrapperClientAddressProperty]: [editMu?.wrapperInformation?.clientAddress, Validators.required],
+      [this.wrapperServerAddressProperty]: [editMu?.wrapperInformation?.serverAddress, Validators.required],
+      [this.wrapperPublicClientAddressProperty]: [editMu?.wrapperInformation?.publicClientAddress, Validators.required],
+      [this.wrapperPublicServerAddressProperty]: [editMu?.wrapperInformation?.publicServerAddress, Validators.required],
       [this.isGatewayProperty]: [false],
-      [this.wrapperPhysicalAddressProperty]: [null, Validators.required],
+      [this.wrapperPhysicalAddressProperty]: [editMu?.wrapperInformation?.physicalAddress, Validators.required],
 
       // hdlc
-      [this.clientLowProperty]: [null, Validators.required],
-      [this.serverLowProperty]: [null, Validators.required],
-      [this.clientHighProperty]: [null, Validators.required],
-      [this.serverHighProperty]: [null, Validators.required],
-      [this.publicClientLowProperty]: [null, Validators.required],
-      [this.publicServerLowProperty]: [null, Validators.required],
-      [this.publicClientHighProperty]: [null, Validators.required],
-      [this.publicServerHighProperty]: [null, Validators.required],
+      [this.clientLowProperty]: [editMu?.hdlcInformation?.clientLow, Validators.required],
+      [this.serverLowProperty]: [editMu?.hdlcInformation?.serverLow, Validators.required],
+      [this.clientHighProperty]: [editMu?.hdlcInformation?.clientHigh, Validators.required],
+      [this.serverHighProperty]: [editMu?.hdlcInformation?.serverHigh, Validators.required],
+      [this.publicClientLowProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
+      [this.publicServerLowProperty]: [editMu?.hdlcInformation?.publicServerLow, Validators.required],
+      [this.publicClientHighProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
+      [this.publicServerHighProperty]: [editMu?.hdlcInformation?.publicServerHigh, Validators.required],
       [this.isShortNameProperty]: [false],
 
       // advanced
-      [this.advancedStartWithReleaseProperty]: [false],
-      [this.advancedLdnAsSystitleProperty]: [false],
+      [this.advancedStartWithReleaseProperty]: [editMu?.advancedInformation?.startWithRelease],
+      [this.advancedLdnAsSystitleProperty]: [editMu?.advancedInformation?.ldnAsSystitle],
       [this.authenticationTypeProperty]: [this.defaultAuthenticationType, Validators.required]
     });
   }
@@ -411,6 +440,10 @@ export class AddMuFormComponent implements OnInit {
     }
   }
 
+  update() {
+    // TODO
+  }
+
   selectTabWithErrors() {
     if (this.form.valid) {
       return;
@@ -481,6 +514,20 @@ export class AddMuFormComponent implements OnInit {
       wrapperInformation,
       hdlcInformation
     };
+  }
+
+  setFormEdit(job: MeterUnitDetails) {
+    this.editMu = job;
+    this.isEditMu = true;
+
+    this.form = this.createForm(job);
+  }
+
+  getTitle(): string {
+    if (this.isEditMu) {
+      return $localize`Edit DLMS meter`;
+    }
+    return $localize`Add new DLMS meter`;
   }
 
   gatewayChanged(value: any) {
