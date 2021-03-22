@@ -16,4 +16,5 @@ export interface MeterUnitDetails {
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
   advancedInformation: MuAdvancedInformation;
+  type: number;
 }

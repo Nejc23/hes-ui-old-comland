@@ -23,7 +23,7 @@ export const meterUnitsForJob = `${basePath}/meter-units-for-job`;
 export const removeMeterUnitsFromJob = `${basePath}/remove-meter-units-from-job`;
 export const registers = `${basePath}/registers`;
 export const device = `${basePath}/device`;
-export const updateMeterUnit = `${basePath}/device`;
+// export const updateMeterUnit = `${basePath}/device`;
 // export const importDeviceKeys = `${basePath}/crypto/import`;
 
 export const onDemandClearAlarms = '/on-demand/clear-alarms';
@@ -36,3 +36,4 @@ export const meterUnitsProtocolType = `${basePath}/enums/protocol-type`;
 
 export const basePathMuConcentratorInventory = '/api/concentrator-inventory';
 export const muCreate = `${basePathMuConcentratorInventory}/meter`;
+export const muUpdate = `${basePathMuConcentratorInventory}/meter`;

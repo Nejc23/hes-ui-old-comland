@@ -23,6 +23,7 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { TouchListener } from '@ag-grid-community/core';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { map } from 'rxjs/operators';
+import { MuUpdateForm } from '../../../types/interfaces/mu-update-form.interface';
 
 @Component({
   templateUrl: './add-mu-form.component.html'
@@ -237,8 +238,8 @@ export class AddMuFormComponent implements OnInit {
   createForm(editMu: MeterUnitDetails = null): FormGroup {
     let communicationType = this.defaultCommunicationType;
     if (editMu) {
-      communicationType = this.editMu.wrapperInformation ? this.communicationTypes[0] : this.communicationTypes[1];
-      this.communicationTypeSelected = communicationType;
+      communicationType = this.communicationTypes.find((t) => +t.value === editMu.type);
+      this.communicationTypeChanged(communicationType);
     }
 
     return this.formBuilder.group({
@@ -253,7 +254,7 @@ export class AddMuFormComponent implements OnInit {
       [this.portProperty]: [editMu?.port],
       [this.isHlsProperty]: [false],
       [this.communicationTypeProperty]: [{ value: communicationType.value, disabled: this.isEditMu }, Validators.required],
-      [this.communicationTypeStringProperty]: [{ value: communicationType.value, disabled: true }],
+      [this.communicationTypeStringProperty]: [{ value: communicationType.label, disabled: true }],
 
       // wrapper
       [this.wrapperClientAddressProperty]: [editMu?.wrapperInformation?.clientAddress, Validators.required],
@@ -441,7 +442,29 @@ export class AddMuFormComponent implements OnInit {
   }
 
   update() {
-    // TODO
+    this.setFormControls();
+    const muFormData = this.fillUpdateData();
+    const request = this.muService.updateMuForm(muFormData);
+    const successMessage = $localize`Meter unit has been updated successfully`;
+
+    try {
+      this.formUtils.saveForm(this.form, request, '').subscribe(
+        (result) => {
+          this.toast.successToast(successMessage);
+          this.modal.close();
+        },
+        (errResult) => {
+          if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
+            for (const error of errResult.error) {
+              this.toast.errorToast(error);
+            }
+          }
+          this.selectTabWithErrors();
+        } // error
+      );
+    } catch (error) {
+      this.selectTabWithErrors();
+    }
   }
 
   selectTabWithErrors() {
@@ -460,7 +483,11 @@ export class AddMuFormComponent implements OnInit {
     ) {
       this.tabstrip.selectTab(0); // Basic
     } else {
-      this.tabstrip.selectTab(2); // Communication
+      if (this.isEditMu) {
+        this.tabstrip.selectTab(1); // Communication (jobs tab is not visible)
+      } else {
+        this.tabstrip.selectTab(2); // Communication
+      }
     }
   }
 
@@ -508,8 +535,52 @@ export class AddMuFormComponent implements OnInit {
       authenticationType: this.form.get(this.authenticationTypeProperty).value,
       advancedInformation: {
         authenticationType: this.form.get(this.authenticationTypeProperty).value,
-        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value,
-        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value
+        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
+        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
+      },
+      wrapperInformation,
+      hdlcInformation
+    };
+  }
+
+  fillUpdateData(): MuUpdateForm {
+    let wrapperInformation: MuWrapperInformation = null;
+    if (this.isWrapperSelected) {
+      wrapperInformation = {
+        clientAddress: this.form.get(this.wrapperClientAddressProperty).value,
+        serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
+        publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
+        publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
+        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
+      };
+    }
+
+    let hdlcInformation: MuHdlcInformation = null;
+    if (this.isHdlcSelected) {
+      hdlcInformation = {
+        clientLow: this.form.get(this.clientLowProperty).value,
+        clientHigh: this.form.get(this.clientHighProperty).value,
+        serverLow: this.form.get(this.serverLowProperty).value,
+        serverHigh: this.form.get(this.serverHighProperty).value,
+        publicClientLow: this.form.get(this.publicClientLowProperty).value,
+        publicClientHigh: this.form.get(this.publicClientHighProperty).value,
+        publicServerLow: this.form.get(this.publicServerLowProperty).value,
+        publicServerHigh: this.form.get(this.publicServerHighProperty).value
+      };
+    }
+
+    return {
+      deviceId: this.editMu.deviceId,
+      name: this.form.get(this.nameProperty).value,
+      manufacturer: this.form.get(this.manufacturerProperty).value,
+      ip: this.form.get(this.ipProperty).value,
+      port: this.form.get(this.portProperty).value,
+      isGateway: this.form.get(this.isGatewayProperty).value,
+      authenticationType: this.form.get(this.authenticationTypeProperty).value,
+      advancedInformation: {
+        authenticationType: this.form.get(this.authenticationTypeProperty).value,
+        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
+        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
       },
       wrapperInformation,
       hdlcInformation

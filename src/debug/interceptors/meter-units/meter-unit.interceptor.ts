@@ -1,4 +1,4 @@
-import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
+import { muCreate, muUpdate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
@@ -25,6 +25,7 @@ export class MeterUnitInterceptor {
       isGateWay: null,
       deviceStatus: 'active',
       hdlcInformation: null,
+      type: 0,
       wrapperInformation: {
         publicClientAddress: 18,
         publicServerAddress: null,
@@ -85,6 +86,19 @@ export class MeterUnitInterceptor {
       new HttpResponse({
         status: 200,
         body: 'd18b2e3-f0e0-48fd-a0df-b30513f17556'
+      })
+    );
+  }
+
+  static canInterceptUpdateMuPost(request: HttpRequest<any>): boolean {
+    return new RegExp(muUpdate + `/`).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptUpdateMuPost(request: HttpRequest<any>): Observable<HttpEvent<string>> {
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: 'd18b2e3-f0e0-48fd-a0df-b30513f17557'
       })
     );
   }

@@ -1,9 +1,9 @@
 import { device } from './../../../src/app/core/repository/consts/meter-units.const';
-import { MuUpdateRequest } from './../../../src/app/core/repository/interfaces/meter-units/mu-update-request.interface';
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { MuUpdateRequest } from 'src/app/core/repository/interfaces/meter-units/mu-update-request.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -29,12 +29,23 @@ describe('Pact consumer test', () => {
   const deviceId = '32A7C6B2-DC94-498C-9437-2607E833D06E';
 
   const requestBody: MuUpdateRequest = {
-    name: 'Test MU Update 1',
-    address: 'Address 1',
-    serialNumber: 'SerialNo1',
-    latitude: 1.1,
-    longitude: 1.2,
-    tags: ['tag1', 'tag2']
+    name: 'WrapperDevice2',
+    manufacturer: 1,
+    ip: '192.68.3.87',
+    port: 2102,
+    isGateWay: false,
+    advancedInformation: {
+      authenticationType: 1,
+      ldnAsSystitle: true,
+      startWithRelease: false
+    },
+    wrapperInformation: {
+      clientAddress: 1,
+      serverAddress: 1,
+      publicClientAddress: 16,
+      publicServerAddress: 1,
+      physicalAddress: null
+    }
   };
 
   describe('Meter unit manually update', () => {
