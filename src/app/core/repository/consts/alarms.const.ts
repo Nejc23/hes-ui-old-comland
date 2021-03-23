@@ -1,2 +1,2 @@
 export const basePath = '/api/alarming';
-export const alarmingAlarms = `${basePath}/alarms`;
+export const alarmingAlarms = `${basePath}/get-alarms`;
