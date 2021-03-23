@@ -35,16 +35,17 @@ export class AlarmNotificationRulesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    forkJoin([
-      this.codelistService.meterUnitVendorCodelist(0),
-      this.codelistService.meterUnitProtocolTypeCodelist(),
-      this.codelistService.meterUnitAlarmSeverityTypeCodelist(),
-      this.codelistService.meterUnitAlarmSourceTypeCodelist()
-    ]).subscribe(([manufacturers, protocols, severities, sources]) => {
+    forkJoin({
+      manufacturers: this.codelistService.meterUnitVendorCodelist(0),
+      protocols: this.codelistService.meterUnitProtocolTypeCodelist(),
+      severities: this.codelistService.meterUnitAlarmSeverityTypeCodelist(),
+      sources: this.codelistService.meterUnitAlarmSourceTypeCodelist()
+    }).subscribe(({ manufacturers, protocols, severities, sources }) => {
       this.manufacturers = manufacturers;
       this.protocols = protocols;
       this.severities = severities;
       this.sources = sources;
+
       if (this.filter && this.addresses) {
         this.form = this.createForm();
       }
