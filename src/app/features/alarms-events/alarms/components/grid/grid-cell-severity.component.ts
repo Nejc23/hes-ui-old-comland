@@ -20,16 +20,16 @@ export class GridCellSeverityComponent implements ICellRendererAngularComp {
 
     this.class = '';
 
-    switch (this.params?.data?.severityId) {
-      case 0: {
+    switch (this.params?.data?.severity) {
+      case 'HIGH': {
         this.class = 'text-danger';
         break;
       }
-      case 1: {
+      case 'MEDIUM': {
         this.class = 'text-warning';
         break;
       }
-      case 2: {
+      case 'LOW': {
         this.class = 'text-info';
         break;
       }

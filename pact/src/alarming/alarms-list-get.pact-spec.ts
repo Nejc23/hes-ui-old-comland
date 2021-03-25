@@ -2,12 +2,8 @@ import { AlarmingService } from './../../../src/app/core/repository/services/ala
 import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
-import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
-import { IActionRequestParams, IActionRequestParamsAlarms } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParamsAlarms } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { IAlarmsList } from 'src/app/core/repository/interfaces/alarming/alarms-list.interface';
 
 describe('Pact consumer test', () => {
@@ -67,30 +63,30 @@ describe('Pact consumer test', () => {
       {
         alarmId: '6997F403-23D0-437C-372A-08D8B8782BCB',
         deviceId: '2A14D2B3-2F7F-4E9A-9F33-B26DA1021BD4',
-        alarmTimeStamp: '2021-01-15T00:00:00+02:00',
+        alarmTimestamp: '2021-01-15T00:00:00+02:00',
         eventId: 1,
         severityId: 0,
-        severityValue: 'HIGH',
+        severity: 'HIGH',
         sourceId: '12345678',
         sourceTypeId: 1,
-        sourceTypeValue: 'METER',
+        sourceType: 'METER',
         protocolId: 2,
-        protocolValue: 'DLMS',
+        protocol: 'DLMS',
         description: 'Cover opened',
         manufacturer: 'LGZ'
       },
       {
         alarmId: '1D47A5BC-ED65-4A4A-372B-08D8B8782BCB',
         deviceId: '2A14D2B3-2F7F-4E9A-9F33-B26DA1021BD4',
-        alarmTimeStamp: '2021-01-15T00:00:00+02:00',
+        alarmTimestamp: '2021-01-15T00:00:00+02:00',
         eventId: 64,
         severityId: 1,
-        severityValue: 'MEDIUM',
+        severity: 'MEDIUM',
         sourceId: '12345679',
         sourceTypeId: 1,
-        sourceTypeValue: 'METER',
+        sourceType: 'METER',
         protocolId: 2,
-        protocolValue: 'DLMS',
+        protocol: 'DLMS',
         description: 'The meter fell off the wall',
         manufacturer: 'ESR'
       }
