@@ -17,7 +17,7 @@ const PROXY_CONFIG = [
         "/api/configuration",
         "/api/alarming",
       ],
-      target: "http://89.212.201.202:54322",
+      target: "https://89.212.201.202:54322",
       secure: false
   },
   // {
