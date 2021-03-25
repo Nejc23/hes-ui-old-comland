@@ -413,6 +413,9 @@
       <trans-unit id="6485314736125303028" datatype="html">
         <source>Discovery Job</source>
         <target>Discovery job</target>
+      </trans-unit><trans-unit id="8078994432345862204" datatype="html">
+        <source>Alarm notification</source>
+        <target state="new">Alarm notification</target>
       </trans-unit>
       <trans-unit id="2159130950882492111" datatype="html">
         <source>Cancel</source>
@@ -421,6 +424,48 @@
       <trans-unit id="4902817035128594900" datatype="html">
         <source>Description</source>
         <target>Description</target>
+      </trans-unit><trans-unit id="6012976609184577081" datatype="html">
+        <source>set start date</source>
+        <target state="new">set start date</target>
+      </trans-unit><trans-unit id="4632441650705280726" datatype="html">
+        <source>set end date</source>
+        <target state="new">set end date</target>
+      </trans-unit><trans-unit id="8184455266303892368" datatype="html">
+        <source>Start time is required.</source>
+        <target state="new">Start time is required.</target>
+      </trans-unit><trans-unit id="7347162954834875382" datatype="html">
+        <source>End time is required.</source>
+        <target state="new">End time is required.</target>
+      </trans-unit><trans-unit id="5162686434580248853" datatype="html">
+        <source>Start</source>
+        <target state="new">Start</target>
+      </trans-unit><trans-unit id="1241348629231510663" datatype="html">
+        <source>End</source>
+        <target state="new">End</target>
+      </trans-unit><trans-unit id="4104446211755546347" datatype="html">
+        <source>TODAY</source>
+        <target state="new">TODAY</target>
+      </trans-unit><trans-unit id="3948098722421097534" datatype="html">
+        <source>YESTERDAY</source>
+        <target state="new">YESTERDAY</target>
+      </trans-unit><trans-unit id="7816694040184193037" datatype="html">
+        <source>LAST 7 DAYS</source>
+        <target state="new">LAST 7 DAYS</target>
+      </trans-unit><trans-unit id="3768482265675392646" datatype="html">
+        <source>LAST 30 DAYS</source>
+        <target state="new">LAST 30 DAYS</target>
+      </trans-unit><trans-unit id="91194211285332008" datatype="html">
+        <source>CURRENT MONTH</source>
+        <target state="new">CURRENT MONTH</target>
+      </trans-unit><trans-unit id="5732879917099767965" datatype="html">
+        <source>LAST MONTH</source>
+        <target state="new">LAST MONTH</target>
+      </trans-unit><trans-unit id="1958597276922129321" datatype="html">
+        <source>Alarms &amp; Events</source>
+        <target state="new">Alarms &amp; Events</target>
+      </trans-unit><trans-unit id="8105382267489346612" datatype="html">
+        <source>Alarms</source>
+        <target state="new">Alarms</target>
       </trans-unit>
       <trans-unit id="8035386400282683720" datatype="html">
         <source>Week days</source>
@@ -918,10 +963,7 @@
         <source> Add New</source>
         <target>Dodaj novega</target>
       </trans-unit>
-      <trans-unit id="3825649834158937429" datatype="html">
-        <source>Meter Unit was updated successfully</source>
-        <target>Meter Unit was updated successfully</target>
-      </trans-unit>
+      
       <trans-unit id="6478311374284260655" datatype="html">
         <source>Meters</source>
         <target>Števci</target>
@@ -942,14 +984,8 @@
         <source>Edit</source>
         <target>Edit</target>
       </trans-unit>
-      <trans-unit id="823491072360486263" datatype="html">
-        <source>Mac</source>
-        <target>Mac</target>
-      </trans-unit>
-      <trans-unit id="1341073813251178245" datatype="html">
-        <source>Systitle</source>
-        <target>Systitle</target>
-      </trans-unit>
+      
+      
       <trans-unit id="859889886317613793" datatype="html">
         <source>Manufacturer</source>
         <target>proizvajalec</target>
@@ -965,6 +1001,12 @@
       <trans-unit id="7286430803380181008" datatype="html">
         <source>Id</source>
         <target>Id</target>
+      </trans-unit><trans-unit id="6491474782694268231" datatype="html">
+        <source>Severity</source>
+        <target state="new">Severity</target>
+      </trans-unit><trans-unit id="1362080061214626975" datatype="html">
+        <source>Source type</source>
+        <target state="new">Source type</target>
       </trans-unit>
       <trans-unit id="6304432362546770951" datatype="html">
         <source>Address</source>
@@ -1198,6 +1240,12 @@
       <trans-unit id="4234374827162693597" datatype="html">
         <source>Range is incorect</source>
         <target>Range is incorect</target>
+      </trans-unit><trans-unit id="4713765005566261745" datatype="html">
+        <source>Entry is not a valid integer:</source>
+        <target state="new">Entry is not a valid integer:</target>
+      </trans-unit><trans-unit id="8721692694055413095" datatype="html">
+        <source>Entry is not a valid email:</source>
+        <target state="new">Entry is not a valid email:</target>
       </trans-unit>
       <trans-unit id="660278350824582724" datatype="html">
         <source>Drop files here to select</source>
@@ -1782,6 +1830,12 @@
       <trans-unit id="8198274855826766185" datatype="html">
         <source>show option</source>
         <target>prikaži možnost</target>
+      </trans-unit><trans-unit id="4158335983907345604" datatype="html">
+        <source>No Alarms have been added yet.</source>
+        <target state="new">No Alarms have been added yet.</target>
+      </trans-unit><trans-unit id="1293281105824972004" datatype="html">
+        <source>No records found. You may need to adjust your date range.</source>
+        <target state="new">No records found. You may need to adjust your date range.</target>
       </trans-unit>
       <trans-unit id="1895957424873987405" datatype="html">
         <source>Job</source>
@@ -1944,6 +1998,9 @@
       <trans-unit id="1688062318411943539" datatype="html">
         <source>Topology job</source>
         <target>Topologija</target>
+      </trans-unit><trans-unit id="1130354600709040361" datatype="html">
+        <source>Alarm notification job</source>
+        <target state="new">Alarm notification job</target>
       </trans-unit>
       <trans-unit id="4157619404092299583" datatype="html">
         <source>Meter image upload was successfull</source>
@@ -2064,6 +2121,15 @@
       <trans-unit id="3659841989098356276" datatype="html">
         <source>Expression is invalid.</source>
         <target>Expression is invalid.</target>
+      </trans-unit><trans-unit id="6754776264375442016" datatype="html">
+        <source>Send notification message when alarm events matches one or more criteria bellow.</source>
+        <target state="new">Send notification message when alarm events matches one or more criteria bellow.</target>
+      </trans-unit><trans-unit id="1931835209825250776" datatype="html">
+        <source>At least one of the rules below should be active</source>
+        <target state="new">At least one of the rules below should be active</target>
+      </trans-unit><trans-unit id="1385766128664686538" datatype="html">
+        <source>Alarm ID</source>
+        <target state="new">Alarm ID</target>
       </trans-unit>
       <trans-unit id="1105511599486801099" datatype="html">
         <source>Reading Jobs</source>
@@ -2222,6 +2288,12 @@
       <trans-unit id="8976722461735080572" datatype="html">
         <source>Meter unit has been added successfully</source>
         <target>Meter unit has been added successfully</target>
+      </trans-unit><trans-unit id="5598268743384954756" datatype="html">
+        <source>Meter unit has been updated successfully</source>
+        <target state="new">Meter unit has been updated successfully</target>
+      </trans-unit><trans-unit id="6795717712585382450" datatype="html">
+        <source>Edit DLMS meter</source>
+        <target state="new">Edit DLMS meter</target>
       </trans-unit>
       <trans-unit id="1900325843387400594" datatype="html">
         <source>Add new DLMS meter</source>
@@ -2286,6 +2358,9 @@
       <trans-unit id="3783562484965706612" datatype="html">
         <source>Protocol</source>
         <target>Protocol</target>
+      </trans-unit><trans-unit id="9155608366859514313" datatype="html">
+        <source>Source</source>
+        <target state="new">Source</target>
       </trans-unit>
       <trans-unit id="5982496808088686844" datatype="html">
         <source>Medium</source>
