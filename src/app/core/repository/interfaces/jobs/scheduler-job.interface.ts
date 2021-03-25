@@ -15,6 +15,17 @@ export interface SchedulerJob {
   registers?: RegistersSelectRequest[];
   readingProperties?: ReadingProperties;
   schedules?: Schedule[];
+
+  addresses?: string[];
+  filter?: NotificationFilter;
+}
+
+export interface NotificationFilter {
+  alarmIds?: number[];
+  severities?: number[];
+  protocols?: number[];
+  manufacturers?: number[];
+  sources?: number[];
 }
 
 export interface SchedulerJobForm extends SchedulerJob {

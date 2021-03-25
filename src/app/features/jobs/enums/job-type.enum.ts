@@ -3,5 +3,6 @@ export const jobType = {
   reading: 'ScheduledReading',
   timeSync: 'ScheduledConcentratorTimeSync',
   readEvents: 'ScheduledReadingConcentratorEvents',
-  topology: 'ScheduledTopology'
+  topology: 'ScheduledTopology',
+  alarmNotification: 'AlarmNotification'
 };

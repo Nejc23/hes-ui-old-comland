@@ -1,3 +1,4 @@
+import { AlarmingInterceptor } from './alarming/alarming.interceptor';
 import { AutoTemplateRegister } from './../../app/core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
 import { MeterUnitInterceptor } from './meter-units/meter-unit.interceptor';
@@ -158,6 +159,12 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               }
               if (MeterUnitCodelistInterceptor.canInterceptMeterUnitProtocolType(request)) {
                 return MeterUnitCodelistInterceptor.interceptMeterUnitProtocolType();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitAlarmSeverityType(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitAlarmSeverityType();
+              }
+              if (MeterUnitCodelistInterceptor.canInterceptMeterUnitAlarmSourceType(request)) {
+                return MeterUnitCodelistInterceptor.interceptMeterUnitAlarmSourceType();
               }
 
               // authenticate
@@ -337,6 +344,11 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // templates
               if (TemplatesInterceptor.canInterceptGetKeyTypes(request)) {
                 return TemplatesInterceptor.interceptGetKeyTypes(request);
+              }
+
+              // alarming
+              if (AlarmingInterceptor.canInterceptGetAlarmsList(request)) {
+                return AlarmingInterceptor.interceptGetAlarmsList(request);
               }
 
               // pass through any requests not handled above

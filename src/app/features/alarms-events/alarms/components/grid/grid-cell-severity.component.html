@@ -1,0 +1,7 @@
+<div *ngIf="params.value " class="d-flex align-items-center">
+  <div class="mr-auto">
+    <span class="{{ class }}"><strong>{{ params.value }}</strong></span>
+  </div>
+</div>
+
+<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>

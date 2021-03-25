@@ -1,4 +1,9 @@
-import { meterUnitsDeviceMedium, meterUnitsProtocolType } from './../../consts/meter-units.const';
+import {
+  meterUnitsAlarmSeverityType,
+  meterUnitsAlarmSourceType,
+  meterUnitsDeviceMedium,
+  meterUnitsProtocolType
+} from './../../consts/meter-units.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -83,5 +88,19 @@ export class CodelistMeterUnitsRepositoryService {
   }
   meterUnitProtocolTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitsProtocolType}`);
+  }
+
+  meterUnitAlarmSeverityTypeCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitAlarmSeverityTypeCodelistRequest());
+  }
+  meterUnitAlarmSeverityTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitsAlarmSeverityType}`);
+  }
+
+  meterUnitAlarmSourceTypeCodelist(): Observable<Codelist<number>[]> {
+    return this.repository.makeRequest(this.meterUnitAlarmSourceTypeCodelistRequest());
+  }
+  meterUnitAlarmSourceTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
+    return new HttpRequest('GET', `${meterUnitsAlarmSourceType}`);
   }
 }

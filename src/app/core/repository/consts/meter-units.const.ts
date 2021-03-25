@@ -33,6 +33,8 @@ export const triggerSetDisplaySettings = `${basePathDcOperations}/trigger-set-di
 
 export const meterUnitsDeviceMedium = `${basePath}/enums/device-medium`;
 export const meterUnitsProtocolType = `${basePath}/enums/protocol-type`;
+export const meterUnitsAlarmSeverityType = `${basePath}/enums/alarm-severity-type`;
+export const meterUnitsAlarmSourceType = `${basePath}/enums/alarm-source-type`;
 
 export const basePathMuConcentratorInventory = '/api/concentrator-inventory';
 export const muCreate = `${basePathMuConcentratorInventory}/meter`;

@@ -14,5 +14,10 @@
     [valueField]="'fakeId'"
     [valueNormalizer]="valueNormalizer"
     (valueChange)="doValueChange($event)"
+    (removeTag)="removeTag($event)"
+    [valuePrimitive]="false"
   ></kendo-multiselect>
+  <div class="help-block" *ngIf="showErrors()" class="error">
+    <app-form-error [error]="formControl!.errors"></app-form-error>
+  </div>
 </div>

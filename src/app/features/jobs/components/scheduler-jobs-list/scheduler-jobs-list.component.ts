@@ -358,6 +358,26 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     );
   }
 
+  addAlarmNotificationJob() {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+
+    const modalRef = this.modalService.open(SchedulerJobComponent, options);
+    const component: SchedulerJobComponent = modalRef.componentInstance;
+    component.setFormAddNew(jobType.alarmNotification, null);
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        this.refreshGrid();
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
   setGridDataSource() {
     const that = this;
     that.datasource = {

@@ -41,6 +41,10 @@ const appRoutes: Routes = [
         loadChildren: () => import('src/app/features/jobs/modules/scheduler-jobs.module').then((m) => m.SchedulerJobsModule)
       },
       {
+        path: 'alarmsEvents',
+        loadChildren: () => import('src/app/features/alarms-events/modules/alarms-events.module').then((m) => m.AlarmsEventsModule)
+      },
+      {
         path: 'configuration',
         loadChildren: () => import('src/app/features/configuration/modules/configuration.module').then((m) => m.ConfigurationModule)
       }

@@ -158,6 +158,11 @@ export class RoleService {
           functionality: FunctionalityEnumerator.jobs.toString(),
           writeRights: true,
           action: []
+        },
+        {
+          functionality: FunctionalityEnumerator.alarmsEvents.toString(),
+          writeRights: true,
+          action: []
         }
       ]
     };
@@ -189,6 +194,11 @@ export class RoleService {
           functionality: FunctionalityEnumerator.jobs.toString(),
           writeRights: false,
           action: []
+        },
+        {
+          functionality: FunctionalityEnumerator.alarmsEvents.toString(),
+          writeRights: true,
+          action: []
         }
       ]
     };
@@ -218,6 +228,11 @@ export class RoleService {
         },
         {
           functionality: FunctionalityEnumerator.jobs.toString(),
+          writeRights: true,
+          action: []
+        },
+        {
+          functionality: FunctionalityEnumerator.alarmsEvents.toString(),
           writeRights: true,
           action: []
         }
@@ -251,6 +266,11 @@ export class RoleService {
           functionality: FunctionalityEnumerator.jobs.toString(),
           writeRights: true,
           action: []
+        },
+        {
+          functionality: FunctionalityEnumerator.alarmsEvents.toString(),
+          writeRights: true,
+          action: []
         }
       ]
     };
@@ -280,6 +300,11 @@ export class RoleService {
         },
         {
           functionality: FunctionalityEnumerator.jobs.toString(),
+          writeRights: true,
+          action: []
+        },
+        {
+          functionality: FunctionalityEnumerator.alarmsEvents.toString(),
           writeRights: true,
           action: []
         }

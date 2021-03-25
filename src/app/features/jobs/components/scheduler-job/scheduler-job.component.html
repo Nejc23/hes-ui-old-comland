@@ -72,6 +72,10 @@
       </div>
     </div>
 
+    <div id="step2" *ngIf="step === 2 && showAlarmNotification">
+      <app-alarm-notification-rules #notificationRules [filter]="filter" [addresses]="addresses"></app-alarm-notification-rules>
+    </div>
+
     </ng-container>
   </div>
   <div modal-footer>
