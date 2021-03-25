@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { DcLastStatusStatus } from './../../../core/repository/interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
 import { GridSettingsSessionStoreService } from './../../../core/utils/services/grid-settings-session-store.service';
 import { GridSearchParams } from './../../../core/repository/interfaces/helpers/grid-request-params.interface';
@@ -195,15 +196,19 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   // form - rights
-  get formFunctionality() {
-    return FunctionalityEnumerator.DCU;
-  }
+  // get formFunctionality() {
+  //   return FunctionalityEnumerator.DCU;
+  // }
   // actions - rights
-  get actionDCUUpgrade() {
-    return ActionEnumerator.DCUUpgrade;
-  }
-  get actionDCUConfiguration() {
-    return ActionEnumerator.DCUConfiguration;
+  // get actionDCUUpgrade() {
+  //   return ActionEnumerator.DCUUpgrade;
+  // }
+  // get actionDCUConfiguration() {
+  //   return ActionEnumerator.DCUConfiguration;
+  // }
+
+  get permissionAdd() {
+    return PermissionEnumerator.Manage_Concentrators;
   }
 
   ngOnInit() {

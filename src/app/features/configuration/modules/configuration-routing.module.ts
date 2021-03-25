@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from './../../../core/permissions/enumerators/permission-enumerator.model';
 import { AutoTemplateComponent } from '../auto-template/components/auto-template.component';
 import { Routes, RouterModule } from '@angular/router';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
@@ -10,35 +11,38 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: $localize`Tools`,
-      permission: FunctionalityEnumerator.MU
+      breadcrumb: $localize`Tools`
     },
     children: [
       {
         path: 'importTemplates',
         data: {
-          breadcrumb: $localize`Import templates`
+          breadcrumb: $localize`Import templates`,
+          permission: PermissionEnumerator.Import_Templates
         },
         component: PlcMeterTemplatesImportComponent
       },
       {
         path: 'importTouConfiguration',
         data: {
-          breadcrumb: $localize`Import TOU configuration`
+          breadcrumb: $localize`Import TOU configuration`,
+          permission: PermissionEnumerator.Import_TOU_Configuration
         },
         component: PlcMeterTouConfigImportComponent
       },
       {
         path: 'autoTemplates',
         data: {
-          breadcrumb: $localize`Auto template`
+          breadcrumb: $localize`Auto template`,
+          permission: PermissionEnumerator.Manage_Auto_Template_Rules
         },
         component: AutoTemplateComponent
       },
       {
         path: 'importDeviceKeys',
         data: {
-          breadcrumb: $localize`Import device Keys`
+          breadcrumb: $localize`Import device Keys`,
+          permission: PermissionEnumerator.Import_Device_Keys
         },
         component: ImportDeviceKeysComponent
       }

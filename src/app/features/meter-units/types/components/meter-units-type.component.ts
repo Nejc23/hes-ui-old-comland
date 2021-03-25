@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { AddMuFormComponent } from './../../common/components/add-mu-form/add-mu-form.component';
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
@@ -233,57 +234,79 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.form = this.createForm(this.pageSizes[0]);
   }
 
-  // form - rights
-  get formFunctionality() {
-    return FunctionalityEnumerator.MU;
+  // permission rights
+  get permissionMuManage() {
+    return PermissionEnumerator.Manage_Meters;
   }
-  // actions - rights
-  get actionMUBreakerStatus() {
-    return ActionEnumerator.MUBreakerStatus;
+  get permissionManageJobs() {
+    return PermissionEnumerator.Manage_Jobs;
   }
-  get actionMUConnect() {
-    return ActionEnumerator.MUConnect;
+  get permissionManageAutoTemplates() {
+    return PermissionEnumerator.Manage_Auto_Template_Rules;
   }
-  get actionMUDisconnect() {
-    return ActionEnumerator.MUDisconnect;
+  get permissionFwUpgrade() {
+    return PermissionEnumerator.Meter_FW_Upgrade;
   }
-  get actionMUCiiState() {
-    return ActionEnumerator.MUCiiState;
+  get permissionDisconnectorConnect() {
+    return PermissionEnumerator.Disconnector_Connect;
   }
-  get actionMUCiiActivate() {
-    return ActionEnumerator.MUCiiActivate;
+  get permissionDisconnectorDisconnect() {
+    return PermissionEnumerator.Disconnector_Disconnect;
   }
-  get actionMUCiiDeactivate() {
-    return ActionEnumerator.MUCiiDeactivate;
+  get permissionDisconnectorGetState() {
+    return PermissionEnumerator.Disconnector_Get_State;
   }
-  get actionMUReadJobs() {
-    return ActionEnumerator.MUReadJobs;
+  get permissionDisconnectorSetMode() {
+    return PermissionEnumerator.Disconnector_Set_Mode;
   }
-  get actionMUSetLimiter() {
-    return ActionEnumerator.MUSetLimiter;
+  get permissionCiiActivate() {
+    return PermissionEnumerator.CII_Activate;
   }
-  get actionMUTOU() {
-    return ActionEnumerator.MUTOU;
+  get permissionCiiDeactivate() {
+    return PermissionEnumerator.CII_Deactivate;
   }
-  get actionMUUpgrade() {
-    return ActionEnumerator.MUUpgrade;
+  get permissionCiiState() {
+    return PermissionEnumerator.CII_Get_State;
   }
-  get actionMUJobsTemplates() {
-    return ActionEnumerator.MUJobsTemplates;
+  get permissionRelaysConnect() {
+    return PermissionEnumerator.Relay_Connect;
   }
-  get actionMUSetDisplaySettings() {
-    return ActionEnumerator.MUSetDisplaySettings;
+  get permissionRelaysDisconnect() {
+    return PermissionEnumerator.Relay_Disconnect;
   }
-  get actionMUClearAlarms() {
-    return ActionEnumerator.MUClearAlarms;
+  get permissionRelaysState() {
+    return PermissionEnumerator.Relay_Get_State;
+  }
+  get permissionRelaysSetMode() {
+    return PermissionEnumerator.Relay_Set_Mode;
+  }
+  get permissionTouUpload() {
+    return PermissionEnumerator.TOU_Upload;
+  }
+  get permissionSetLimiter() {
+    return PermissionEnumerator.Set_Limiter;
+  }
+  get permissionSetMonitor() {
+    return PermissionEnumerator.Set_Monitor;
+  }
+  get permissionClearFF() {
+    return PermissionEnumerator.Clear_FF;
+  }
+  get permissionSetDisplay() {
+    return PermissionEnumerator.Set_Display;
+  }
+  get permissionClearAlarms() {
+    return PermissionEnumerator.Clear_Alarms;
   }
 
-  get actionMUDelete() {
-    return ActionEnumerator.MUDelete;
+  get permissionSecurityActivateHls() {
+    return PermissionEnumerator.Activate_HLS;
   }
-
-  get actionMUAdd() {
-    return ActionEnumerator.MUDelete;
+  get permissionSecurityRekey() {
+    return PermissionEnumerator.Rekey;
+  }
+  get permissionSecurityChangePassword() {
+    return PermissionEnumerator.Change_Password;
   }
 
   // set form title by selected meter unit type

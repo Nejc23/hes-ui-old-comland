@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
@@ -47,5 +48,13 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
 
   onFwUpgrade() {
     this.params.context.componentParent.onFwUpgrade(this.params.data.concentratorId);
+  }
+
+  get permissionSynchronizeTime() {
+    return PermissionEnumerator.Sync_Time;
+  }
+
+  get permissionFwUpgrade() {
+    return PermissionEnumerator.Concentrator_FW_Upgrade;
   }
 }

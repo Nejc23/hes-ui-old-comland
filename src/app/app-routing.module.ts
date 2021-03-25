@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BaseTemplateComponent } from './shared/base-template/components/base-template.component';
 import { AuthGuard } from './core/guards/auth.guard';
-import { PermissionsGuard } from './core/guards/permissions.guard';
+import { PermissionGuard } from './core/guards/permissions.guard';
 import { UserLoginComponent } from './features/users/user-login.component';
 import { Page404Component } from './shared/404/page-404.component';
 import { IdentityErrorComponent } from './shared/IdentityError/identity-error.component';
@@ -22,7 +22,7 @@ const appRoutes: Routes = [
     path: '',
     component: BaseTemplateComponent,
     canActivate: [AuthGuard],
-    canActivateChild: [PermissionsGuard],
+    canActivateChild: [PermissionGuard],
     runGuardsAndResolvers: 'always',
     children: [
       {

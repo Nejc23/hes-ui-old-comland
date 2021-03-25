@@ -29,7 +29,7 @@
             (toggleWildcards)="toggleWildcards($event)"
             >
             <div *ngIf="getSelectedCount() === 0" class="mr-3">
-              <button [appHideIfAuthorizedReadonly]="formFunctionality" class="btn btn-primary" (click)="addDcu()">
+              <button appHideIfPermissionUnauthorized  [permission]="permissionAdd" class="btn btn-primary" (click)="addDcu()">
                 <span i18n>Add</span>
               </button>
             </div>

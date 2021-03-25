@@ -1,4 +1,4 @@
-import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/functionality-enumerator.model';
+import { PermissionEnumerator } from './../../../core/permissions/enumerators/permission-enumerator.model';
 
 export interface SidebarItem {
   title: string;
@@ -9,7 +9,7 @@ export interface SidebarItem {
   children: Array<SidebarItem>;
   hasChildren: boolean;
   opened?: string;
-  permission?: FunctionalityEnumerator;
+  permission?: PermissionEnumerator;
   openInNewTab?: boolean;
   isBorder?: boolean;
   isRouteAbsolute?: boolean;

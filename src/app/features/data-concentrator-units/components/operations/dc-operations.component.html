@@ -1,12 +1,12 @@
 
-    <div *ngIf="showOperations" dropdown class="btn-group">
+    <div *ngIf="showOperations" dropdown class="btn-group" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade]">
       <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
       <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
         <div>
           <a class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            (click)="onSynchronizeTime()"><span i18n>Synchronize time</span></a>
+            (click)="onSynchronizeTime()" appHideIfPermissionUnauthorized [permission]="permissionSynchronizeTime"><span i18n>Synchronize time</span></a>
           <a class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            (click)="onFwUpgrade()"><span i18n>FW Upgrade</span></a>
+            (click)="onFwUpgrade()" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade"><span i18n>FW Upgrade</span></a>
         </div>
       </div>
     </div>

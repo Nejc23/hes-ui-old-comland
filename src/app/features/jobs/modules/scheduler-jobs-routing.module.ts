@@ -4,13 +4,14 @@ import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/fu
 import { NgModule } from '@angular/core';
 import { SchedulerJobsListComponent } from '../components/scheduler-jobs-list/scheduler-jobs-list.component';
 import { DcuForJobComponent } from '../dcu-for-job/components/dcu-for-job.component';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 
 const routes: Routes = [
   {
     path: '',
     data: {
       breadcrumb: $localize`Jobs`,
-      permission: FunctionalityEnumerator.jobs
+      permission: PermissionEnumerator.View_Jobs
     },
     children: [
       {

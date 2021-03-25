@@ -5,6 +5,7 @@ import { CodelistRepositoryService } from '../../repository/services/codelists/c
 import { MeterTypeRoute } from 'src/app/shared/base-template/enums/meter-type.enum';
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
 import { environment } from 'src/environments/environment';
+import { PermissionEnumerator } from '../../permissions/enumerators/permission-enumerator.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,21 +23,24 @@ export class SidebarService {
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         icon: 'gps_fixed',
-        children: []
+        children: [],
+        permission: PermissionEnumerator.View_Concentrators
       },
       {
         title: $localize`Meter Units`,
         routeLink: '/meterUnits', // TODO set back when overview implemented '/meterUnits/overview',
         hasChildren: false,
         icon: 'gps_not_fixed',
-        children: []
+        children: [],
+        permission: PermissionEnumerator.View_Meters
       },
       {
         title: $localize`Jobs`,
         routeLink: '/schedulerJobs',
         hasChildren: false,
         icon: 'format_list_bulleted',
-        children: []
+        children: [],
+        permission: PermissionEnumerator.View_Jobs
       },
       {
         title: $localize`Tools`,
@@ -49,25 +53,29 @@ export class SidebarService {
             title: $localize`Import templates`,
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,
-            children: []
+            children: [],
+            permission: PermissionEnumerator.Import_Templates
           },
           {
             title: $localize`Import TOU configuration`,
             routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
             hasChildren: false,
-            children: []
+            children: [],
+            permission: PermissionEnumerator.Import_TOU_Configuration
           },
           {
             title: $localize`Auto templates`,
             routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
-            children: []
+            children: [],
+            permission: PermissionEnumerator.Manage_Auto_Template_Rules
           },
           {
             title: $localize`Import device keys`,
             routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
             hasChildren: false,
-            children: []
+            children: [],
+            permission: PermissionEnumerator.Import_Device_Keys
           }
         ]
       },
@@ -84,8 +92,8 @@ export class SidebarService {
             openInNewTab: true,
             isRouteAbsolute: true,
             hasChildren: false,
-            permission: FunctionalityEnumerator.dashboard,
-            children: []
+            children: [],
+            permission: PermissionEnumerator.Manage_Access_Permissions
           }
         ]
       }

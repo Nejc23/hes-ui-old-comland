@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
@@ -203,56 +204,70 @@ export class MeterUnitDetailsComponent implements OnInit {
     return nameOf<MeterUnitDetailsForm>((o) => o.address);
   }
 
-  // actions - rights
-  get actionMUBreakerStatus() {
-    return ActionEnumerator.MUBreakerStatus;
-  }
-  get actionMUConnect() {
-    return ActionEnumerator.MUConnect;
-  }
-  get actionMUDisconnect() {
-    return ActionEnumerator.MUDisconnect;
-  }
+  // permission rights
 
-  get actionMUCiiState() {
-    return ActionEnumerator.MUCiiState;
+  get permissionMuManage() {
+    return PermissionEnumerator.Manage_Meters;
   }
-  get actionMUCiiActivate() {
-    return ActionEnumerator.MUCiiActivate;
+  get permissionManageJobs() {
+    return PermissionEnumerator.Manage_Jobs;
   }
-  get actionMUCiiDeactivate() {
-    return ActionEnumerator.MUCiiDeactivate;
+  get permissionManageAutoTemplates() {
+    return PermissionEnumerator.Manage_Auto_Template_Rules;
   }
-
-  get actionMUSetLimiter() {
-    return ActionEnumerator.MUSetLimiter;
+  get permissionFwUpgrade() {
+    return PermissionEnumerator.Meter_FW_Upgrade;
   }
-  get actionMUTOU() {
-    return ActionEnumerator.MUTOU;
+  get permissionDisconnectorConnect() {
+    return PermissionEnumerator.Disconnector_Connect;
   }
-
-  get actionMUUpgrade() {
-    return ActionEnumerator.MUUpgrade;
+  get permissionDisconnectorDisconnect() {
+    return PermissionEnumerator.Disconnector_Disconnect;
   }
-
-  get actionMUJobsAssignExisting() {
-    return ActionEnumerator.MUJobsAssignExisting;
+  get permissionDisconnectorGetState() {
+    return PermissionEnumerator.Disconnector_Get_State;
   }
-
-  get actionMUReadJobs() {
-    return ActionEnumerator.MUReadJobs;
+  get permissionDisconnectorSetMode() {
+    return PermissionEnumerator.Disconnector_Set_Mode;
   }
-
-  get actionMUJobsTemplates() {
-    return ActionEnumerator.MUJobsTemplates;
+  get permissionCiiActivate() {
+    return PermissionEnumerator.CII_Activate;
   }
-
-  get actionMUSetDisplaySettings() {
-    return ActionEnumerator.MUSetDisplaySettings;
+  get permissionCiiDeactivate() {
+    return PermissionEnumerator.CII_Deactivate;
   }
-
-  get actionMUClearAlarms() {
-    return ActionEnumerator.MUClearAlarms;
+  get permissionCiiState() {
+    return PermissionEnumerator.CII_Get_State;
+  }
+  get permissionRelaysConnect() {
+    return PermissionEnumerator.Relay_Connect;
+  }
+  get permissionRelaysDisconnect() {
+    return PermissionEnumerator.Relay_Disconnect;
+  }
+  get permissionRelaysState() {
+    return PermissionEnumerator.Relay_Get_State;
+  }
+  get permissionRelaysSetMode() {
+    return PermissionEnumerator.Relay_Set_Mode;
+  }
+  get permissionTouUpload() {
+    return PermissionEnumerator.TOU_Upload;
+  }
+  get permissionSetLimiter() {
+    return PermissionEnumerator.Set_Limiter;
+  }
+  get permissionSetMonitor() {
+    return PermissionEnumerator.Set_Monitor;
+  }
+  get permissionClearFF() {
+    return PermissionEnumerator.Clear_FF;
+  }
+  get permissionSetDisplay() {
+    return PermissionEnumerator.Set_Display;
+  }
+  get permissionClearAlarms() {
+    return PermissionEnumerator.Clear_Alarms;
   }
 
   createForm(): FormGroup {

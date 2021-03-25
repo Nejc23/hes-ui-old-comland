@@ -12,7 +12,7 @@
        class="ml-auto justify-content-end"
        [useWildcards]="useWildcards"
        (toggleWildcards)="toggleWildcards($event)">
-      <div class="dropdown mr-3">
+      <div class="dropdown mr-3" appHideIfPermissionUnauthorized [permission]="permissionJobManage">
         <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->
           <span i18n>Add</span>
         </button>

@@ -1,5 +1,5 @@
 <div class="form-group" *ngIf="!edit">
-  <button class="btn btn-primary mr-2" (click)="editDcu()">
+  <button class="btn btn-primary mr-2" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
     <span i18n>Edit</span>
   </button>
   <app-dc-operations [showOperations]="true" [requestModel]="null"

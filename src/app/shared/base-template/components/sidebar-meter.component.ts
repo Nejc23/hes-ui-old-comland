@@ -5,7 +5,7 @@ import { filter } from 'rxjs/operators';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 import { VERSION } from 'src/environments/version';
-import { PermissionsService } from '../../../core/permissions/services/permissions.service';
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 
 @Component({
   selector: 'app-sidebar-meter',
@@ -16,7 +16,7 @@ export class SidebarMeterComponent implements OnInit {
   @Input() items: Array<SidebarItem> = [];
   public version = '';
 
-  constructor(private router: Router, public permissionsService: PermissionsService) {}
+  constructor(private router: Router, public permissionService: PermissionService) {}
 
   ngOnInit() {
     this.version = `${VERSION.version} - ${VERSION.hash}`;
@@ -55,7 +55,7 @@ export class SidebarMeterComponent implements OnInit {
 
   hasAccess(item: SidebarItem): boolean {
     if (item.permission) {
-      return this.permissionsService.hasAccess(item.permission);
+      return this.permissionService.hasAccess(item.permission);
     } else {
       return true;
     }
