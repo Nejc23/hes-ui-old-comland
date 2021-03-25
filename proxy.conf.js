@@ -14,7 +14,8 @@ const PROXY_CONFIG = [
         "/api/concentrator-inventory-ui",
         "/api/scheduler",
         "/api/crypto",
-        "/api/configuration"
+        "/api/configuration",
+        "/api/alarming",
       ],
       target: "https://89.212.201.202:54322",
       secure: false

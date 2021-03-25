@@ -91,3 +91,80 @@ label {
     background-color: $white;
   }
 }
+
+.range-picker-container {
+  .range-field {
+    border: solid $input-border-color $input-border-width;
+    border-radius: $border-radius;
+    min-width: 200px;
+
+    &.focused {
+      border-color: $input-focus-border-color;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.03), 0 4px 5px 0 rgba(0, 0, 0, 0.04);
+    }
+  }
+
+  .k-dateinput-wrap {
+    border-radius: 0;
+    box-shadow:none;
+    border: none;
+
+    &.k-state-focused {
+      box-shadow: none;
+    }
+  }
+
+  .edge-content {
+    text-align: center;
+    padding-top:6px;
+
+    &.left {
+      border-right:none;
+    }
+
+    &.right {
+      border-left:none;
+    }
+  }
+
+  .separator {
+    width:5px;
+    vertical-align: center;
+    padding-top:6px
+  }
+
+  .left-date {
+    width: 127px;
+    .k-dateinput-wrap {
+      width: 127px;
+      input {
+        width: 100%;
+      }
+    }
+  }
+
+  .right-date {
+    width: 100%;
+
+    .k-dateinput-wrap {
+      border-radius: 0;
+      border-right: none;
+      border-left: none;
+    }
+  }
+
+  .range-picker-popup {
+    padding-left: 8px;
+    padding-right: 8px;
+
+    .range-50 {
+      width: calc(50% - 20px);
+    }
+    .range-separator {
+      width: 40px;
+      text-align: center;
+      margin-top:20px;
+      padding-top:10px;
+    }
+  }
+}

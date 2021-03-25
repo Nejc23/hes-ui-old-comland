@@ -31,6 +31,8 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
 import { FileSelectComponent } from './components/file-select/file-select.component';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
+import { TextBoxModule } from '@progress/kendo-angular-inputs';
+import { PopupModule } from '@progress/kendo-angular-popup';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -61,7 +63,9 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
     FileUploadComponent,
     FileSelectComponent,
     LayoutModule,
-    ChartsModule
+    ChartsModule,
+    TextBoxModule,
+    PopupModule
   ],
   declarations: [
     InputTextComponent,
@@ -98,7 +102,9 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
     UploadsModule,
     LayoutModule,
     ChartsModule,
-    ProgressBarModule
+    ProgressBarModule,
+    TextBoxModule,
+    PopupModule
   ]
 })
 export class CustomFormsModule {
