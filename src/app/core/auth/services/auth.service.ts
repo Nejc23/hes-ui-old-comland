@@ -55,7 +55,7 @@ export class AuthService {
         post_logout_redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}`
           : `${appConfig.identityServer.clientRoot}${locale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
-        response_type: 'id_token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
+        response_type: 'id_token token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
         scope: appConfig.identityServer.clientScope, // environment.clientScope,
         automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew // environment.clientAutoSilentRenew
         // accessTokenLifetime: 7200,
