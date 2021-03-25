@@ -29,7 +29,7 @@ export const environment = {
   // clientRoot: 'http://localhost:4200/',
   // clientScope: 'openid profile roles offline_access company',
   // clientAutoSilentRenew: true
-  sidebarAdministrationUsersUrl: 'http://89.212.201.202:8080/Users'
+  sidebarAdministrationUsersUrl: 'https://is.enerdat.com:5443/reg/users'
 };
 
 /*

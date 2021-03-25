@@ -1,0 +1,7 @@
+<div *ngIf="params.value " class="d-flex align-items-center">
+  <div class="mr-auto">
+    <span>{{params.value | formatDateTime}}</span>
+  </div>
+</div>
+
+<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
