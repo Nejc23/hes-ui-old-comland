@@ -1,4 +1,4 @@
-import { muCreate, muUpdate } from './../../../app/core/repository/consts/meter-units.const';
+import { getDevice, muCreate, muUpdate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
@@ -25,7 +25,53 @@ export class MeterUnitInterceptor {
       isGateWay: null,
       deviceStatus: 'active',
       hdlcInformation: null,
-      type: 0,
+      wrapperInformation: {
+        publicClientAddress: 18,
+        publicServerAddress: null,
+        clientAddress: 1,
+        serverAddress: 1,
+        physicalAddress: null
+      },
+      advancedInformation: {
+        startWithRelease: true,
+        ldnAsSystitle: true,
+        authenticationType: 1
+      }
+    };
+
+    // let deviceId = request.url.split('/').pop();
+
+    // if (!deviceId || deviceId.length === 0) {
+    //   return of(
+    //     new HttpResponse({
+    //       status: 204
+    //     })
+    //   );
+    // }
+
+    // deviceId = deviceId.toLowerCase();
+    // const body = data.find((d) => d.deviceId.toLowerCase() === deviceId);
+    return of(
+      new HttpResponse({
+        status: data ? 200 : 204,
+        body: data
+      })
+    );
+  }
+
+  static interceptGetMeterUnitFromConcentrator(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const data: MeterUnitDetails = {
+      deviceId: 'b295a3ec-f335-4f22-a1ee-bacf723ec343',
+      name: 'Meter Unit Test',
+      serialNumber: 'Serial_0124',
+      templateName: 'Template one',
+      protocol: 'dlms',
+      manufacturer: 'Vendor 1',
+      ip: '192.168.94.145',
+      port: 1001,
+      isGateWay: null,
+      deviceStatus: 'active',
+      hdlcInformation: null,
       wrapperInformation: {
         publicClientAddress: 18,
         publicServerAddress: null,
@@ -62,6 +108,10 @@ export class MeterUnitInterceptor {
 
   static canInterceptGetMeterUnit(request: HttpRequest<any>): boolean {
     return new RegExp(device + `/`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static canInterceptGetMeterUnitFromConcentrator(request: HttpRequest<any>): boolean {
+    return new RegExp(getDevice + `/`).test(request.url) && request.method.endsWith('GET');
   }
 
   static canInterceptDeleteDevice(request: HttpRequest<any>): boolean {

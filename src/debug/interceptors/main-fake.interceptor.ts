@@ -248,6 +248,10 @@ export class FakeBackendInterceptor implements HttpInterceptor {
                 return MeterUnitInterceptor.interceptGetMeterUnit(request);
               }
 
+              if (MeterUnitInterceptor.canInterceptGetMeterUnitFromConcentrator(request)) {
+                return MeterUnitInterceptor.interceptGetMeterUnitFromConcentrator(request);
+              }
+
               if (MeterUnitsSetMonitorInterceptor.canInterceptMeterUnitGetCommonRegisterGroupsPost(request)) {
                 return MeterUnitsSetMonitorInterceptor.interceptMeterUnitGetCommonRegisterGroupsPost();
               }
