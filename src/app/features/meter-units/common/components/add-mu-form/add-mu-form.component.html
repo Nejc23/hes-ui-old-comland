@@ -92,15 +92,15 @@
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
               <div *ngIf="isTemplateSelected && communicationTypeSelected" class="pt-3">
-                <div class="form-row" *ngIf="isHdlcSelected">
+                <!--<div class="form-row" *ngIf="isHdlcSelected">
                   <div class="col-6">
                     <app-input-switch [form]="form" [property]="isShortNameProperty" i18n-label label="Shortname">
                     </app-input-switch>
                   </div>
-                </div>
+                </div>-->
 
                 <div>
-                  <label class="label-primary" i18n>Low-level security</label>
+                  <label class="label-primary" i18n>Management association</label>
                 </div>
                 <div class="border px-2 py-2">
                   <div class="form-row" *ngIf="isWrapperSelected">
@@ -137,7 +137,7 @@
                   </div>
                 </div>
                 <div class="pt-3">
-                  <label class="label-primary" i18n>High-level security (public)</label>
+                  <label class="label-primary" i18n>Public associations</label>
                 </div>
                 <div class="border px-2 py-2">
                   <div *ngIf="isWrapperSelected">
