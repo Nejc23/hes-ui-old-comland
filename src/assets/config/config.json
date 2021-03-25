@@ -6,7 +6,7 @@
       "stsAuthority": "https://is.enerdat.com:5443/sso",
       "clientId": "mygridWeb",
       "clientRoot": "https://localhost:4200/",
-      "clientScope": "openid profile roles company",
+      "clientScope": "openid profile roles company segment",
       "clientAutoSilentRenew": true
   }
 }
