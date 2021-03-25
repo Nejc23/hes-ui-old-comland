@@ -85,6 +85,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
       this.editDcReadEventsJob(params, options);
     } else if (params.data.jobType === jobActionType.topology) {
       this.editTopologyJob(params, options);
+    } else if (
+      params.data.jobType.toString() === jobActionType.alarmNotification ||
+      params.data.jobType === +jobActionType.alarmNotification
+    ) {
+      this.editAlarmNotificationJob(params, options);
     } else {
       this.editReadingJob(params, options);
     }
@@ -205,6 +210,26 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.eventService.eventEmitterRefresh.emit(true);
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editAlarmNotificationJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    this.service.getJob(selectedJobId).subscribe((job) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(null, selectedJobId, job);
 
       modalRef.result.then(
         (data) => {
