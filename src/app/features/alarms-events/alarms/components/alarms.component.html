@@ -1,16 +1,14 @@
 <div class="form-row mb-2">
+  <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="dateRangeChanged()" [ngbTooltip]="tipContentRefresh"><i class="far fa-redo"></i></button>
   <div class="col-5">
-
     <app-date-range-picker
-    [startProperty]="startTimeProperty"
-    [endProperty]="endTimeProperty"
-    [form]="form"
-    (valueChange)="dateRangeChanged()"
-    >
+      [startProperty]="startTimeProperty"
+      [endProperty]="endTimeProperty"
+      [form]="form"
+      (valueChange)="dateRangeChanged()">
     </app-date-range-picker>
   </div>
 </div>
-
 
 <div class="content-body-scroll">
   <div>
@@ -51,5 +49,6 @@
       </div>
     </div>
   </div>
-
 </div>
+
+<ng-template #tipContentRefresh><span i18n>Refresh alarms</span></ng-template>

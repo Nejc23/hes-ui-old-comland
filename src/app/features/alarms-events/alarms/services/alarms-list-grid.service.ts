@@ -32,7 +32,7 @@ export class AlarmsListGridService {
   setGridDefaultColumns() {
     return [
       {
-        field: 'alarmTimeStamp',
+        field: 'alarmTimestamp',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
@@ -51,7 +51,7 @@ export class AlarmsListGridService {
         resizable: false
       },
       {
-        field: 'severityValue',
+        field: 'severity',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
@@ -61,7 +61,7 @@ export class AlarmsListGridService {
         resizable: false
       },
       {
-        field: 'sourceTypeValue',
+        field: 'sourceType',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
@@ -71,7 +71,7 @@ export class AlarmsListGridService {
         resizable: false
       },
       {
-        field: 'protocolValue',
+        field: 'protocol',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
