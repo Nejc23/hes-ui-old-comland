@@ -60,30 +60,9 @@ export class MeterUnitDetailsComponent implements OnInit {
       };
     });
 
-    // this.codelistService.meterUnitTypeCodelist().subscribe(params => {
-    //   this.muTypes = params;
-    //   console.log('returned type list', this.muTypes);
-    //   this.setFormType();
-    // });
-
-    // this.autoTemplateService.getTemplates().subscribe(templates => {
-    //   this.muTemplates = templates.map(t => ({ id: t.templateId, value: t.name }));
-    // });
-
     // get MeterUnit
     this.getData();
   }
-
-  // setVendorsAndStatuses(typeId) {
-  //   this.codelistService.meterUnitStatusCodelist(typeId).subscribe(params => {
-  //     this.muStatuses = params;
-  //   }); // PLC
-
-  //   this.codelistService.meterUnitVendorCodelist(typeId).subscribe(params => {
-  //     this.muVendors = params;
-  //     this.setFormVendor();
-  //   });
-  // }
 
   // form - rights
   get formFunctionality() {
@@ -104,80 +83,19 @@ export class MeterUnitDetailsComponent implements OnInit {
       .catch(() => {});
   }
 
-  // public cancel() {
-  //   this.editMode = false;
-  //   this.getData();
-  // }
-
-  // saveMeterUnit() {
-  //   this.saveError = null;
-
-  //   const muFormData = this.fillData();
-  //   const request = this.meterUnitsService.updateMuFromForm(muFormData);
-  //   const successMessage = $localize`Meter Unit was updated successfully`;
-
-  //   try {
-  //     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-  //       (result) => {
-  //         this.editMode = false;
-  //       },
-  //       (errResult) => {
-  //         console.log('Error saving form: ', errResult);
-  //         this.saveError = errResult && errResult.error ? errResult.error[0] : null;
-  //       } // error
-  //     );
-  //   } catch (error) {
-  //     console.log('Edit-MU Form Error:', error);
-  //   }
-  // }
-
   getData() {
     if (!this.deviceId || this.deviceId.length === 0) {
       // this.form = this.createForm();
       return;
     }
 
-    this.meterUnitsService.getMeterUnit(this.deviceId).subscribe((response: MeterUnitDetails) => {
+    this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
-      console.log('getMeterUnit returned:', this.data);
-      // this.setVendorsAndStatuses(this.data.type);
-
-      // this.form = this.createForm();
-      // this.setFormType();
-      // this.setFormVendor();
-
       this.setBreadcrumbs();
     });
   }
 
-  // onTypeChanged(selectedType: Codelist<number>) {
-  //   this.setVendorsAndStatuses(selectedType.id);
-
-  //   // TODO clear fields if value not exists in lists
-  //   // this.muVendors$ = of();
-  //   // this.muStatuses$ = of();
-
-  //   // this.form.get(this.vendorProperty).setValue(null);
-  //   // this.form.get(this.statusProperty).setValue(null);
-  // }
-
   fillData(): MeterUnitDetailsForm {
-    // const formData: MeterUnitDetailsForm = {
-    //   name: this.form.get(this.nameProperty).value,
-    //   id: this.form.get(this.idProperty).value,
-    //   address: this.form.get(this.addressProperty).value,
-
-    //   deviceId: this.deviceId,
-    //   type: this.data.type,
-    //   vendor: this.data.manufacturer,
-    //   status: this.data.state,
-    //   template: this.data.templateName,
-    //   systitle: this.data.systitle,
-    //   mac: this.data.mac
-    // };
-
-    // return formData;
-
     return null;
   }
 
@@ -269,21 +187,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     return ActionEnumerator.MUClearAlarms;
   }
 
-  // createForm(): FormGroup {
-  //   // return this.formBuilder.group({
-  //   //   [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-  //   //   // [this.idNumberProperty]: [this.data ? this.data.id : null, Validators.required],
-  //   //   [this.statusProperty]: [this.data ? this.data.state : null],
-  //   //   [this.typeProperty]: [this.data ? this.data.type : null],
-  //   //   [this.vendorProperty]: [this.data ? this.data.manufacturer : null],
-  //   //   [this.templateProperty]: [this.data ? this.data.templateName : null],
-  //   //   [this.systitleProperty]: [this.data ? this.data.systitle : null],
-  //   //   [this.idProperty]: [this.data ? this.data.serialNumber : null],
-  //   //   [this.macProperty]: [this.data ? this.data.mac : null],
-  //   //   [this.addressProperty]: [this.data ? this.data.address : null]
-  //   // });
-  // }
-
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
@@ -301,29 +204,6 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     this.breadcrumbService.setBreadcrumbs(breadcrumbs);
   }
-
-  // setFormType() {
-  //   if (this.data) {
-  //     if (this.muTypes) {
-  //       const selectedType = this.muTypes.find(s => s.id === this.data.type);
-  //       this.form.get(this.typeProperty).setValue(selectedType);
-  //     }
-  //   }
-  // }
-
-  // setFormVendor() {
-  //   if (this.data) {
-  //     if (this.muTypes) {
-  //       const selectedType = this.muVendors.find(s => s.value.toLowerCase() === this.data.manufacturer.toLowerCase());
-  //       this.form.get(this.vendorProperty).setValue(selectedType);
-  //     }
-  //   }
-  // }
-
-  // getTemplateValue(templateId: string) {
-  //   templateId = templateId.toLowerCase();
-  //   return this.muTemplates.find(t => t.id.toLowerCase() === templateId).value;
-  // }
 
   // --> Operations action click
   onDisconnectorStatus() {

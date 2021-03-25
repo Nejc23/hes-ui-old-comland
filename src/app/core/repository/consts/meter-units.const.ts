@@ -39,3 +39,4 @@ export const meterUnitsAlarmSourceType = `${basePath}/enums/alarm-source-type`;
 export const basePathMuConcentratorInventory = '/api/concentrator-inventory';
 export const muCreate = `${basePathMuConcentratorInventory}/meter`;
 export const muUpdate = `${basePathMuConcentratorInventory}/meter`;
+export const getDevice = `${basePathMuConcentratorInventory}/meter`;

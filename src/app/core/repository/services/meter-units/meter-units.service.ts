@@ -1,4 +1,6 @@
-import { muCreate, muUpdate } from './../../consts/meter-units.const';
+import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { MuAdvancedInformation } from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import { getDevice, muCreate, muUpdate } from './../../consts/meter-units.const';
 import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
@@ -32,7 +34,6 @@ import { capitalize } from 'lodash';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
-import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
 
 @Injectable({
@@ -65,6 +66,14 @@ export class MeterUnitsService {
 
   getMeterUnitRequest(id: string): HttpRequest<any> {
     return new HttpRequest('GET', `${device}/${id}`);
+  }
+
+  getMeterUnitFromConcentrator(id: string): Observable<MeterUnitDetails> {
+    return this.repository.makeRequest(this.getMeterUnitFromConcentratorRequest(id));
+  }
+
+  getMeterUnitFromConcentratorRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${getDevice}/${id}`);
   }
 
   updateReaderState(param: OnDemandRequestData[]): Observable<MeterUnitsList> {
@@ -193,13 +202,20 @@ export class MeterUnitsService {
       manufacturer: payload.manufacturer?.id,
       ip: payload.ip,
       port: payload.port,
-      isGateWay: payload.isGateway,
-      advancedInformation: {
+      isGateWay: payload.isGateway
+    };
+
+    if (payload.communicationType) {
+      muRequest.communicationType = payload.communicationType;
+    }
+
+    if (payload.advancedInformation) {
+      muRequest.advancedInformation = {
         authenticationType: payload.authenticationType?.id,
         ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
         startWithRelease: payload.advancedInformation?.startWithRelease
-      }
-    };
+      };
+    }
 
     if (payload.wrapperInformation) {
       muRequest.wrapperInformation = {

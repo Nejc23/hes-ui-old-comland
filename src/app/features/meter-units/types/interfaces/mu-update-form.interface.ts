@@ -10,6 +10,7 @@ export interface MuUpdateForm {
   ip: string;
   port: number;
   isGateway: boolean;
+  communicationType: number;
 
   authenticationType: Codelist<number>;
   advancedInformation: MuAdvancedInformation;

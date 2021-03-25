@@ -1,3 +1,4 @@
+import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { toLower } from 'lodash';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
@@ -23,8 +24,6 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { TouchListener } from '@ag-grid-community/core';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { map } from 'rxjs/operators';
-import { MuUpdateForm } from '../../../types/interfaces/mu-update-form.interface';
-
 @Component({
   templateUrl: './add-mu-form.component.html'
 })
@@ -155,10 +154,6 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.communicationType);
   }
 
-  get communicationTypeStringProperty() {
-    return 'communicationTypeString';
-  }
-
   get isHlsProperty() {
     return nameOf<MuForm>((o) => o.isHls);
   }
@@ -235,12 +230,23 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.isShortName);
   }
 
+  get protocolProperty() {
+    return nameOf<MeterUnitDetails>((o) => o.protocol);
+  }
+
   createForm(editMu: MeterUnitDetails = null): FormGroup {
     let communicationType = this.defaultCommunicationType;
     if (editMu) {
-      communicationType = this.communicationTypes.find((t) => +t.value === editMu.type);
-      this.communicationTypeChanged(communicationType);
+      if (editMu.protocol.toLowerCase() !== 'dlms') {
+        communicationType = null;
+      } else if (editMu.hdlcInformation) {
+        communicationType = this.communicationTypes[0];
+      }
+
+      this.communicationTypeChanged(communicationType, false);
     }
+
+    console.log('communicationType', communicationType);
 
     return this.formBuilder.group({
       [this.nameProperty]: [editMu?.name, Validators.required],
@@ -253,8 +259,9 @@ export class AddMuFormComponent implements OnInit {
       [this.ipProperty]: [editMu?.ip, [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
       [this.portProperty]: [editMu?.port],
       [this.isHlsProperty]: [false],
-      [this.communicationTypeProperty]: [{ value: communicationType.value, disabled: this.isEditMu }, Validators.required],
-      [this.communicationTypeStringProperty]: [{ value: communicationType.label, disabled: true }],
+      [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
+
+      [this.protocolProperty]: [{ value: editMu?.protocol, disabled: true }],
 
       // wrapper
       [this.wrapperClientAddressProperty]: [editMu?.wrapperInformation?.clientAddress, Validators.required],
@@ -300,7 +307,7 @@ export class AddMuFormComponent implements OnInit {
   templateChanged(value: Codelist<string>) {
     this.isTemplateSelected = value && value.id ? true : false;
 
-    if (this.isTemplateSelected) {
+    if (this.isTemplateSelected && !this.isEditMu) {
       this.templatingService.getDefaultValues(value.id).subscribe((values) => {
         this.templateDefaultValues = values;
         this.setDefaultFormValues();
@@ -358,12 +365,15 @@ export class AddMuFormComponent implements OnInit {
     }
   }
 
-  communicationTypeChanged(value: RadioOption) {
+  communicationTypeChanged(value: RadioOption, getDefaultValues: boolean = true) {
     this.communicationTypeSelected = value;
-    this.isWrapperSelected = +value.value === 1;
-    this.isHdlcSelected = +value.value === 0;
+    this.isWrapperSelected = value ? +value?.value === 1 : false;
+    this.isHdlcSelected = value ? +value?.value === 0 : false;
     this.setFormControls();
-    this.setDefaultFormValues();
+
+    if (getDefaultValues) {
+      this.setDefaultFormValues();
+    }
   }
 
   setFormControls() {
@@ -416,6 +426,12 @@ export class AddMuFormComponent implements OnInit {
     }
   }
 
+  disableAdvancedControls() {
+    this.form.get(this.authenticationTypeProperty).disable();
+    this.form.get(this.advancedLdnAsSystitleProperty).disable();
+    this.form.get(this.advancedStartWithReleaseProperty).disable();
+  }
+
   add() {
     const muFormData = this.fillData();
     const request = this.muService.createMuForm(muFormData);
@@ -443,6 +459,12 @@ export class AddMuFormComponent implements OnInit {
 
   update() {
     this.setFormControls();
+
+    if (!this.isNewOrProtocolDlms) {
+      this.disableAdvancedControls();
+      this.form.get(this.communicationTypeProperty).disable();
+    }
+
     const muFormData = this.fillUpdateData();
     const request = this.muService.updateMuForm(muFormData);
     const successMessage = $localize`Meter unit has been updated successfully`;
@@ -569,6 +591,15 @@ export class AddMuFormComponent implements OnInit {
       };
     }
 
+    let advancedInformation = null;
+    if (this.isNewOrProtocolDlms) {
+      advancedInformation = {
+        authenticationType: this.form.get(this.authenticationTypeProperty).value,
+        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
+        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
+      };
+    }
+
     return {
       deviceId: this.editMu.deviceId,
       name: this.form.get(this.nameProperty).value,
@@ -577,11 +608,8 @@ export class AddMuFormComponent implements OnInit {
       port: this.form.get(this.portProperty).value,
       isGateway: this.form.get(this.isGatewayProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value,
-      advancedInformation: {
-        authenticationType: this.form.get(this.authenticationTypeProperty).value,
-        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
-        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
-      },
+      communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
+      advancedInformation,
       wrapperInformation,
       hdlcInformation
     };
@@ -596,7 +624,7 @@ export class AddMuFormComponent implements OnInit {
 
   getTitle(): string {
     if (this.isEditMu) {
-      return $localize`Edit DLMS meter`;
+      return $localize`Edit ${this.editMu.protocol} meter`;
     }
     return $localize`Add new DLMS meter`;
   }
@@ -618,5 +646,9 @@ export class AddMuFormComponent implements OnInit {
 
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  get isNewOrProtocolDlms() {
+    return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
   }
 }
