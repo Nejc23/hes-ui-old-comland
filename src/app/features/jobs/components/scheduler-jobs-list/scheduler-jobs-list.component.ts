@@ -545,4 +545,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   get permissionJobManage() {
     return PermissionEnumerator.Manage_Jobs;
   }
+
+  get permissionAlarmsManage() {
+    return PermissionEnumerator.Manage_Alarms;
+  }
 }

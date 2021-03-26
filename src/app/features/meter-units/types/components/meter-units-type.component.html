@@ -36,7 +36,7 @@
           <button  class="btn btn-primary mr-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" [functionality]="formFunctionality" i18n href="javascript:void(0)" (click)="onDelete()">Delete</button>
           <div dropdown class="btn-group" appHideIfAllPermissionsUnauthorized [permissions]="[
             permissionManageJobs,
-            permissionManageAutoTemplates,
+            permissionAssignTemplates,
             permissionFwUpgrade,
             permissionFwUpgrade,
             permissionDisconnectorConnect,
@@ -66,12 +66,12 @@
                   </div>
                 </div>
               </div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionManageAutoTemplates">
+              <div appHideIfPermissionUnauthorized [permission]="permissionAssignTemplates">
                 <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
                   (click)="onJobsTemplates()"><span i18n>Templates</span></a>
               </div>
 
-              <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionManageAutoTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
+              <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
 
               <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
                 <div class="dropdown-submenu">

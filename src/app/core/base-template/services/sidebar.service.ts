@@ -44,7 +44,8 @@ export class SidebarService {
         hasChildren: false,
         icon: 'notifications',
         isIconOutlined: true,
-        children: []
+        children: [],
+        permission: PermissionEnumerator.View_Alarms
       },
       {
         title: $localize`Tools`,

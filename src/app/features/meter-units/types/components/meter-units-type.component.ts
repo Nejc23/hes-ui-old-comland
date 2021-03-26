@@ -298,6 +298,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionClearAlarms() {
     return PermissionEnumerator.Clear_Alarms;
   }
+  get permissionAssignTemplates() {
+    return PermissionEnumerator.Assign_Templates;
+  }
 
   get permissionSecurityActivateHls() {
     return PermissionEnumerator.Activate_HLS;

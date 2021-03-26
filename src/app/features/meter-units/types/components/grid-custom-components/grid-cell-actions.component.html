@@ -10,7 +10,7 @@
   <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[
     permissionMuManage,
     permissionManageJobs,
-    permissionManageAutoTemplates,
+    permissionAssignTemplates,
     permissionFwUpgrade,
     permissionFwUpgrade,
     permissionDisconnectorConnect,
@@ -42,11 +42,11 @@
           </div>
         </div>
       </div>
-      <div appHideIfPermissionUnauthorized [permission]="permissionManageAutoTemplates">
+      <div appHideIfPermissionUnauthorized [permission]="permissionAssignTemplates">
         <a class="dropdown-item" href="javascript:void(0);" (click)="onJobsTemplates()"><span i18n>Templates</span></a>
       </div>
 
-      <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionManageAutoTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
+      <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
 
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
         <div class="dropdown-submenu pull-left">

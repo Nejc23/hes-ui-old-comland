@@ -201,6 +201,9 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionClearAlarms() {
     return PermissionEnumerator.Clear_Alarms;
   }
+  get permissionAssignTemplates() {
+    return PermissionEnumerator.Assign_Templates;
+  }
 
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [

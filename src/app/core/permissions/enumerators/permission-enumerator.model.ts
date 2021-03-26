@@ -23,6 +23,7 @@ export enum PermissionEnumerator {
   Set_Display = 'Set_Display',
   Clear_FF = 'Clear_FF',
   Clear_Alarms = 'Clear_Alarms',
+  Assign_Templates = 'Assign_Templates',
   Activate_HLS = 'Activate_HLS',
   Rekey = 'Rekey',
   Change_Password = 'Change_Password',

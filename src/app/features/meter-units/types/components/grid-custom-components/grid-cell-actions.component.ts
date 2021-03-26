@@ -169,6 +169,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   get permissionClearAlarms() {
     return PermissionEnumerator.Clear_Alarms;
   }
+  get permissionAssignTemplates() {
+    return PermissionEnumerator.Assign_Templates;
+  }
 
   // set tooltip text
   setToolTip(type: string) {
