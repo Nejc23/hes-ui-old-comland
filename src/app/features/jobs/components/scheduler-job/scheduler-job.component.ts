@@ -1,8 +1,8 @@
+import { notificationJobs } from './../../../../core/repository/consts/jobs.const';
 import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
 import { NotificationFilter, ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
-import { jobActionType } from './../../enums/job-action-type.enum';
 import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
-import { jobType } from './../../enums/job-type.enum';
+import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { ToastNotificationService } from './../../../../core/toast-notification/services/toast-notification.service';
 import { ToastComponent } from './../../../../shared/toast-notification/components/toast.component';
 import { CronScheduleComponent } from './../../cron-schedule/components/cron-schedule.component';
@@ -24,6 +24,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
+import { isNumber } from 'lodash';
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -36,6 +37,11 @@ export class SchedulerJobComponent implements OnInit {
 
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
+
+  protocols: Codelist<number>[];
+  manufacturers: Codelist<number>[];
+  severities: Codelist<number>[];
+  sources: Codelist<number>[];
 
   selectedRowsCount = 0;
 
@@ -56,7 +62,7 @@ export class SchedulerJobComponent implements OnInit {
   showConcentrators = false;
   showAlarmNotification = false;
 
-  jobType = jobType.reading;
+  jobType: JobTypeEnumeration = JobTypeEnumeration.reading;
   public title = '';
 
   // alarm notifications
@@ -75,14 +81,12 @@ export class SchedulerJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
-    console.log('createForm, this.showAlarmNotification', this.showAlarmNotification);
     let startAt =
       formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
         ? moment(formData.schedules[0].startAt).toDate()
         : null;
     if (this.showAlarmNotification) {
       startAt = formData && formData.startAt ? moment(formData.startAt).toDate() : null;
-      console.log('alarmNotificatoin');
     }
 
     let endAt =
@@ -119,21 +123,21 @@ export class SchedulerJobComponent implements OnInit {
 
   ngOnInit() {}
 
-  setTitle() {
-    switch (this.jobType.toLowerCase()) {
-      case jobType.discovery.toLowerCase(): {
+  setTitle(): string {
+    switch (this.jobType) {
+      case JobTypeEnumeration.discovery: {
         return $localize`Discovery Job`;
       }
-      case jobType.readEvents.toLowerCase(): {
+      case JobTypeEnumeration.readEvents: {
         return $localize`DC Read events job`;
       }
-      case jobType.timeSync.toLowerCase(): {
+      case JobTypeEnumeration.timeSync: {
         return $localize`DC Time sync job`;
       }
-      case jobType.topology.toLowerCase(): {
+      case JobTypeEnumeration.topology: {
         return $localize`Topology job`;
       }
-      case jobType.alarmNotification.toLowerCase(): {
+      case JobTypeEnumeration.alarmNotification: {
         return $localize`Alarm notification`;
       }
       default: {
@@ -142,29 +146,58 @@ export class SchedulerJobComponent implements OnInit {
     }
   }
 
-  setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
-    this.initForm(job.jobType, jobsTimeUnits, selectedJobId, job);
+  setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob, jobType: JobTypeEnumeration) {
+    this.initForm(jobType, jobsTimeUnits, selectedJobId, job);
   }
 
-  setFormAddNew(jobTypeSetting: string, jobsTimeUnits: Codelist<number>[]) {
+  setFormAddNew(jobTypeSetting: JobTypeEnumeration, jobsTimeUnits: Codelist<number>[]) {
     this.initForm(jobTypeSetting, jobsTimeUnits, null, null);
   }
 
-  initForm(jobTypeSetting: string, jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
+  setFormNotificationJobAddNew(
+    protocols: Codelist<number>[],
+    manufacturers: Codelist<number>[],
+    severities: Codelist<number>[],
+    sources: Codelist<number>[]
+  ) {
+    this.protocols = protocols;
+    this.manufacturers = manufacturers;
+    this.severities = severities;
+    this.sources = sources;
+
+    this.initForm(JobTypeEnumeration.alarmNotification, null, null, null);
+  }
+
+  setFormNotificationJobEdit(
+    protocols: Codelist<number>[],
+    manufacturers: Codelist<number>[],
+    severities: Codelist<number>[],
+    sources: Codelist<number>[],
+    selectedJobId: string,
+    job: SchedulerJob
+  ) {
+    this.protocols = protocols;
+    this.manufacturers = manufacturers;
+    this.severities = severities;
+    this.sources = sources;
+
+    this.initForm(JobTypeEnumeration.alarmNotification, null, selectedJobId, job);
+  }
+
+  initForm(selectedJobType: JobTypeEnumeration, jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
     if (jobsTimeUnits && jobsTimeUnits.length > 0) {
       this.jobsTimeUnits = jobsTimeUnits;
       this.defaultTimeUnit = jobsTimeUnits.find((x) => x.id === 3);
     }
 
-    this.jobType =
-      jobTypeSetting.toString().toLowerCase() === jobType.alarmNotification.toLowerCase() ? jobType.alarmNotification : jobTypeSetting;
-
-    switch (this.jobType.toString().toLowerCase()) {
-      case jobType.reading.toLowerCase(): {
+    // this.setJobType(jobTypeSetting);
+    this.jobType = selectedJobType;
+    switch (this.jobType) {
+      case JobTypeEnumeration.reading: {
         this.showRegisters = true;
         break;
       }
-      case jobType.alarmNotification.toLowerCase(): {
+      case JobTypeEnumeration.alarmNotification: {
         this.showAlarmNotification = true;
         break;
       }
@@ -183,13 +216,23 @@ export class SchedulerJobComponent implements OnInit {
     this.filter = job?.filter;
     this.addresses = job?.addresses;
 
-    // this.changeReadOptionId();
     this.form.get(this.registersProperty).clearValidators();
-    this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
 
-    // this.cronScheduler.initForm(this.cronExpression);
+    this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
+    if (job && this.jobType === JobTypeEnumeration.alarmNotification) {
+      this.cronExpression = job.cronExpression;
+    }
 
     this.title = this.setTitle();
+  }
+
+  setJobType(jobTypeSetting: any) {
+    if (!isNaN(Number(jobTypeSetting))) {
+      this.jobType = JobTypeEnumeration[JobTypeEnumeration[+jobTypeSetting]];
+    } else {
+      const jt = String(jobTypeSetting).toLowerCase();
+      this.jobType = JobTypeEnumeration[jt];
+    }
   }
 
   fillData(): SchedulerJobForm {
@@ -237,14 +280,11 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   showForLast() {
-    return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
+    return this.jobType === JobTypeEnumeration.reading;
   }
 
   showPointer() {
-    return (
-      this.jobType.toString().toLowerCase() === jobType.reading.toString().toLowerCase() ||
-      this.jobType.toString().toLowerCase() === jobType.readEvents.toString().toLowerCase()
-    );
+    return this.jobType === JobTypeEnumeration.reading || this.jobType === JobTypeEnumeration.readEvents;
   }
 
   // showUsePointer() {
@@ -252,7 +292,7 @@ export class SchedulerJobComponent implements OnInit {
   // }
 
   showIecPush() {
-    return this.jobType.toString().toLowerCase() === jobType.reading.toLowerCase();
+    return this.jobType === JobTypeEnumeration.reading;
   }
 
   save(addNew: boolean) {
@@ -277,17 +317,17 @@ export class SchedulerJobComponent implements OnInit {
 
       values.filter = this.notificationRules.getFilter();
       values.addresses = this.notificationRules.getAddresses();
-      values.jobType = jobType.alarmNotification;
+      values.jobType = JobTypeEnumeration.alarmNotification;
     }
 
     let request: Observable<SchedulerJob> = null;
     let operation = $localize`added`;
     if (this.selectedJobId) {
       operation = $localize`updated`;
-      request = this.meterService.updateNotificationJob(values, this.selectedJobId);
+      request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
 
       if (this.showAlarmNotification) {
-        request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
+        request = this.meterService.updateNotificationJob(values, this.selectedJobId);
       }
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
@@ -378,6 +418,11 @@ export class SchedulerJobComponent implements OnInit {
     if (!this.showForLast()) {
       this.form.get(this.intervalRangeProperty).disable();
       this.form.get(this.timeUnitProperty).disable();
+    }
+
+    if (this.jobType === JobTypeEnumeration.alarmNotification && value === -1) {
+      this.filter = this.notificationRules.getFilter();
+      this.addresses = this.notificationRules.getAddresses();
     }
 
     // if (this.showPointer() && this.form.get(this.usePointerProperty).value) {

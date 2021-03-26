@@ -92,6 +92,14 @@ export class MeterUnitCodelistInterceptor {
       {
         id: 3,
         value: 'Vendor 3'
+      },
+      {
+        id: 4,
+        value: 'lgz'
+      },
+      {
+        id: 5,
+        value: 'isk'
       }
     ];
 
@@ -308,6 +316,14 @@ export class MeterUnitCodelistInterceptor {
       {
         id: 1,
         value: 'HIGH'
+      },
+      {
+        id: 2,
+        value: 'MEDIUM'
+      },
+      {
+        id: 3,
+        value: 'LOW'
       }
     ];
 
@@ -332,6 +348,14 @@ export class MeterUnitCodelistInterceptor {
       {
         id: 1,
         value: 'SYSTEM'
+      },
+      {
+        id: 2,
+        value: 'concentrator'
+      },
+      {
+        id: 3,
+        value: 'METER'
       }
     ];
 

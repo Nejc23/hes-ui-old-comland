@@ -1,5 +1,4 @@
-import { jobActionType } from './../../enums/job-action-type.enum';
-import { jobType } from './../../enums/job-type.enum';
+import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
@@ -12,6 +11,7 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component';
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -28,7 +28,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private toast: ToastNotificationService,
     private service: JobsService,
     private eventService: SchedulerJobsEventEmitterService,
-    private codelistService: CodelistRepositoryService
+    private codelistService: CodelistRepositoryService,
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
   ) {}
 
   // called on init
@@ -71,24 +72,22 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   }
 
   editJob(params: any) {
+    console.log('editJob params', params);
     const options: NgbModalOptions = {
       size: 'xl'
     };
-    console.log('editJob', params.data);
-    if (params.data.jobType === jobActionType.discovery) {
+
+    if (params.data.jobType === JobTypeEnumeration.discovery) {
       this.editDiscoveryJob(params, options);
-    } else if (params.data.jobType === jobActionType.timeSync) {
+    } else if (params.data.jobType === JobTypeEnumeration.timeSync) {
       // dc time sync
       this.editDcTimeSyncJob(params, options);
-    } else if (params.data.jobType === jobActionType.readEvents) {
+    } else if (params.data.jobType === JobTypeEnumeration.readEvents) {
       // dc read events job
       this.editDcReadEventsJob(params, options);
-    } else if (params.data.jobType === jobActionType.topology) {
+    } else if (params.data.jobType === JobTypeEnumeration.topology) {
       this.editTopologyJob(params, options);
-    } else if (
-      params.data.jobType.toString() === jobActionType.alarmNotification ||
-      params.data.jobType === +jobActionType.alarmNotification
-    ) {
+    } else if (params.data.jobType === JobTypeEnumeration.alarmNotification) {
       this.editAlarmNotificationJob(params, options);
     } else {
       this.editReadingJob(params, options);
@@ -104,7 +103,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job);
+      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job, JobTypeEnumeration.reading);
 
       modalRef.result.then(
         (data) => {
@@ -124,7 +123,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     this.service.getJob(selectedJobId).subscribe((job) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job);
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.discovery);
 
       modalRef.result.then(
         (data) => {
@@ -166,7 +165,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     this.service.getJob(selectedJobId).subscribe((job) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job);
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.topology);
 
       modalRef.result.then(
         (data) => {
@@ -186,7 +185,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     this.service.getJob(selectedJobId).subscribe((job) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job);
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.timeSync);
 
       modalRef.result.then(
         (data) => {
@@ -209,7 +208,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job);
+      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job, JobTypeEnumeration.readEvents);
 
       modalRef.result.then(
         (data) => {
@@ -226,20 +225,27 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   private editAlarmNotificationJob(params: any, options: NgbModalOptions) {
     const selectedJobId = params.data.id;
 
-    this.service.getNotificationJob(selectedJobId).subscribe((job) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormEdit(null, selectedJobId, job);
+    forkJoin({
+      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
+      severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
+      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
+    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+      this.service.getNotificationJob(selectedJobId).subscribe((job) => {
+        const modalRef = this.modalService.open(SchedulerJobComponent, options);
+        const component: SchedulerJobComponent = modalRef.componentInstance;
+        component.setFormNotificationJobEdit(protocols, manufacturers, severities, sources, selectedJobId, job);
 
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.eventService.eventEmitterRefresh.emit(true);
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
+        modalRef.result.then(
+          (data) => {
+            // on close (CONFIRM)
+            this.eventService.eventEmitterRefresh.emit(true);
+          },
+          (reason) => {
+            // on dismiss (CLOSE)
+          }
+        );
+      });
     });
   }
 
