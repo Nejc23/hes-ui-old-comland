@@ -35,6 +35,14 @@ describe('Pact consumer test', () => {
       {
         id: 1,
         value: 'HIGH'
+      },
+      {
+        id: 2,
+        value: 'MEDIUM'
+      },
+      {
+        id: 3,
+        value: 'LOW'
       }
     ];
     beforeAll((done) => {

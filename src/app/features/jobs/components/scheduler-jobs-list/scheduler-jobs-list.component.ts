@@ -1,10 +1,11 @@
+import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
-import { Observable, Subscription } from 'rxjs';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
@@ -22,7 +23,8 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-jobs-list-grid-layout-store.interface';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
-import { jobType } from '../../enums/job-type.enum';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -94,7 +96,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private sidebarToggleService: SidebarToggleService,
     private codelistService: CodelistRepositoryService,
     private settingsStoreService: SettingsStoreService,
-    private settingsStoreEmitterService: SettingsStoreEmitterService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -106,7 +109,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     this.refreshSubscription = this.eventService.eventEmitterRefresh.subscribe({
       next: (event: boolean) => {
         if (event) {
-          this.refreshGrid();
+          setTimeout(() => {
+            this.refreshGrid();
+          }, 500);
         }
       }
     });
@@ -235,23 +240,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
           this.schedulerJobsListGridService.setSessionSettingsPageIndex(currentApiPage);
         }
       } else {
-        // params.api.paginationGoToPage(currentSessionPage);
       }
     }
-
-    // if (this.gridApi) {
-    //   this.gridApi.refreshHeader();
-    // }
-
-    // console.log('onPaginationChange', params.newPage, !this.loadGrid);
-    // if (params.newPage && !this.loadGrid) {
-    //   this.schedulerJobsListGridService.setSessionSettingsPageIndex(params.api.paginationGetCurrentPage());
-    // } else if (!params.newPage && params.keepRenderedRows && this.loadGrid) {
-    //   this.loadGrid = false;
-    //   params.api.paginationGoToPage(this.schedulerJobsListGridService.getSessionSettingsPageIndex());
-    // }
-
-    // params.api.paginationGoToPage(this.schedulerJobsListGridService.getSessionSettingsPageIndex());
   }
 
   addJob() {
@@ -262,7 +252,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormAddNew(jobType.reading, units);
+      component.setFormAddNew(JobTypeEnumeration.reading, units);
 
       modalRef.result.then(
         (data) => {
@@ -283,7 +273,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(jobType.discovery, null);
+    component.setFormAddNew(JobTypeEnumeration.discovery, null);
 
     modalRef.result.then(
       (data) => {
@@ -303,7 +293,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(jobType.timeSync, null);
+    component.setFormAddNew(JobTypeEnumeration.timeSync, null);
 
     modalRef.result.then(
       (data) => {
@@ -324,7 +314,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     this.codelistService.timeUnitCodeslist().subscribe((units) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormAddNew(jobType.readEvents, units);
+      component.setFormAddNew(JobTypeEnumeration.readEvents, units);
 
       modalRef.result.then(
         (data) => {
@@ -345,7 +335,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
     const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(jobType.topology, null);
+    component.setFormAddNew(JobTypeEnumeration.topology, null);
 
     modalRef.result.then(
       (data) => {
@@ -363,21 +353,28 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       size: 'xl'
     };
 
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(jobType.alarmNotification, null);
+    forkJoin({
+      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
+      severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
+      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
+    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormNotificationJobAddNew(protocols, manufacturers, severities, sources);
 
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        setTimeout(() => {
-          this.refreshGrid();
-        }, 500);
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
-    );
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          setTimeout(() => {
+            this.refreshGrid();
+          }, 500);
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
   }
 
   setGridDataSource() {
@@ -507,7 +504,6 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
   setGridPageSize() {
     const api: any = this.gridApi;
     api.gridOptionsWrapper.setProperty('cacheBlockSize', this.selectedPageSize.id);
-    console.log('setGridPageSize - setServierSideDatasource', this.datasource);
     this.gridApi.setServerSideDatasource(this.datasource);
   }
 

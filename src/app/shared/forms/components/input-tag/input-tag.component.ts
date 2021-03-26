@@ -58,7 +58,7 @@ export class InputTagComponent implements OnInit, OnChanges {
 
       this.formControl.setValue(values);
       for (const value of values) {
-        if (!this.autocompleteItemsAsObjects?.includes((v) => v.id === value.id)) {
+        if (!this.autocompleteItemsAsObjects?.find((v) => v.id === value.id)) {
           this.addedItems.push(value);
           this.autocompleteItemsAsObjectsWithFake.push(value);
         }

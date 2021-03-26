@@ -1,8 +1,8 @@
-export const jobType = {
-  discovery: 'ScheduledDeviceDiscovery',
-  reading: 'ScheduledReading',
-  timeSync: 'ScheduledConcentratorTimeSync',
-  readEvents: 'ScheduledReadingConcentratorEvents',
-  topology: 'ScheduledTopology',
-  alarmNotification: 'AlarmNotification'
-};
+export enum JobTypeEnumeration {
+  discovery = 1,
+  reading = 2,
+  timeSync = 3,
+  readEvents = 4,
+  topology = 5,
+  alarmNotification = 6
+}

@@ -7,6 +7,7 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { Observable, forkJoin } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NotificationFilter } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 
 @Component({
   selector: 'app-alarm-notification-rules',
@@ -19,10 +20,10 @@ export class AlarmNotificationRulesComponent implements OnInit {
   form: FormGroup;
   noRuleActive = false;
 
-  protocols: Codelist<number>[];
-  manufacturers: Codelist<number>[];
-  severities: Codelist<number>[];
-  sources: Codelist<number>[];
+  @Input() protocols: Codelist<number>[];
+  @Input() manufacturers: Codelist<number>[];
+  @Input() severities: Codelist<number>[];
+  @Input() sources: Codelist<number>[];
 
   rules: AlarmNotificationRules;
 
@@ -31,25 +32,19 @@ export class AlarmNotificationRulesComponent implements OnInit {
     private codelistService: CodelistMeterUnitsRepositoryService,
     private formUtils: FormsUtilsService
   ) {
-    this.form = this.createForm();
+    // this.updateInputFields();
   }
 
   ngOnInit(): void {
-    forkJoin({
-      manufacturers: this.codelistService.meterUnitVendorCodelist(0),
-      protocols: this.codelistService.meterUnitProtocolTypeCodelist(),
-      severities: this.codelistService.meterUnitAlarmSeverityTypeCodelist(),
-      sources: this.codelistService.meterUnitAlarmSourceTypeCodelist()
-    }).subscribe(({ manufacturers, protocols, severities, sources }) => {
-      this.manufacturers = manufacturers;
-      this.protocols = protocols;
-      this.severities = severities;
-      this.sources = sources;
+    this.form = this.createForm();
+  }
 
-      if (this.filter && this.addresses) {
-        this.form = this.createForm();
-      }
-    });
+  enableField(property: string, isEnabled: boolean) {
+    if (isEnabled) {
+      this.form.get(property).enable();
+    } else {
+      this.form.get(property).disable();
+    }
   }
 
   createForm(): FormGroup {
@@ -62,17 +57,15 @@ export class AlarmNotificationRulesComponent implements OnInit {
       [this.isProtocolActiveProperty]: [rules.isProtocolActive],
       [this.isManufacturerActiveProperty]: [rules.isManufacturerActive],
       [this.isSourceActiveProperty]: [rules.isSourceActive],
-      [this.alarmIdsProperty]: new FormControl({ value: rules.alarmIds, disabled: !rules.isAlarmIdActive }, [
-        Validators.required,
-        customRegexValidator(/^\d+$/, 'numberError')
-      ]),
-      [this.severitiesProperty]: new FormControl({ value: rules.severities, disabled: !rules.isSeverityActive }, Validators.required),
-      [this.protocolsProperty]: new FormControl({ value: rules.protocols, disabled: !rules.isProtocolActive }, Validators.required),
-      [this.manufacturersProperty]: new FormControl(
-        { value: rules.manufacturers, disabled: !rules.isManufacturerActive },
-        Validators.required
-      ),
-      [this.sourcesProperty]: new FormControl({ value: rules.sources, disabled: !rules.isSourceActive }, Validators.required),
+
+      [this.alarmIdsProperty]: [
+        { value: rules.alarmIds, disabled: !rules.isAlarmIdActive },
+        [Validators.required, customRegexValidator(/^\d+$/, 'numberError')]
+      ],
+      [this.severitiesProperty]: [{ value: rules.severities, disabled: !rules.isSeverityActive }, Validators.required],
+      [this.protocolsProperty]: [{ value: rules.protocols, disabled: !rules.isProtocolActive }, Validators.required],
+      [this.manufacturersProperty]: [{ value: rules.manufacturers, disabled: !rules.isManufacturerActive }, Validators.required],
+      [this.sourcesProperty]: [{ value: rules.sources, disabled: !rules.isSourceActive }, Validators.required],
       [this.addressesProperty]: [rules.addresses, [Validators.required, customRegexValidator(/^[^@\s]+@[^@\s]+\.[^@\s]+$/, 'emailError')]]
     });
   }
@@ -101,33 +94,14 @@ export class AlarmNotificationRulesComponent implements OnInit {
     rules.isManufacturerActive = this.filter.manufacturers?.length > 0;
     rules.isSourceActive = this.filter.sources?.length > 0;
 
+    rules.severities = this.getCodelistValues(this.severities, this.filter.severities);
+    rules.protocols = this.getCodelistValues(this.protocols, this.filter.protocols);
+    rules.manufacturers = this.getCodelistValues(this.manufacturers, this.filter.manufacturers);
+    rules.sources = this.getCodelistValues(this.sources, this.filter.sources);
+
     rules.alarmIds = rules.isAlarmIdActive
       ? this.filter.alarmIds.map((a) => {
           return { id: a, value: a.toString() };
-        })
-      : [];
-
-    rules.severities = rules.isSeverityActive
-      ? this.filter.severities.map((a) => {
-          return this.severities.find((s) => a === s.id);
-        })
-      : [];
-
-    rules.protocols = rules.isProtocolActive
-      ? this.filter.protocols.map((a) => {
-          return this.protocols.find((s) => a === s.id);
-        })
-      : [];
-
-    rules.manufacturers = rules.isManufacturerActive
-      ? this.filter.manufacturers.map((a) => {
-          return this.manufacturers.find((s) => a === s.id);
-        })
-      : [];
-
-    rules.sources = rules.isSourceActive
-      ? this.filter.sources.map((a) => {
-          return this.sources.find((s) => a === s.id);
         })
       : [];
 
@@ -139,6 +113,18 @@ export class AlarmNotificationRulesComponent implements OnInit {
       : [];
 
     return rules;
+  }
+
+  getCodelistValues(list: Codelist<number>[], values: any[]) {
+    if (!values || values?.length === 0) {
+      return [];
+    }
+
+    return values.map((value) => {
+      return !isNaN(Number(value))
+        ? list.find((s) => +value === s.id)
+        : list.find((s) => String(value).toLowerCase() === s.value.toLowerCase());
+    });
   }
 
   get isAlarmIdActiveProperty(): string {
@@ -205,7 +191,7 @@ export class AlarmNotificationRulesComponent implements OnInit {
       !this.form.get(this.isManufacturerActiveProperty).value &&
       !this.form.get(this.isSourceActiveProperty).value;
 
-    return this.form.valid || this.noRuleActive;
+    return this.form.valid && !this.noRuleActive;
   }
 
   fillData(): AlarmNotificationRules {

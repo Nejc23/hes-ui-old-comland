@@ -20,7 +20,6 @@ import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.intercept
 import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
 import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-scheduler.interceptor';
 import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
-import { SchedulerJobsInterceptor } from './jobs/scheduler-jobs.interceptor';
 import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
 import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
 import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
@@ -37,6 +36,7 @@ import { MeterUnitsTypeSecurityInterceptor } from './meter-units/meter-units-sec
 import { TemplatingInterceptor } from './templating/templating.interceptor';
 import { TemplatesInterceptor } from './templates/templates.interceptor';
 import { MeterUnitsPlcActionsInterceptor } from './meter-units/meter-units-plc-actions.interceptor';
+import { SchedulerJobsInterceptor } from './jobs/scheduler-jobs.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -100,6 +100,19 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
               if (SchedulerJobsInterceptor.canInterceptSchedulerActiveJobsList(request)) {
                 return SchedulerJobsInterceptor.interceptSchedulerActiveJobsList(request);
+              }
+
+              // notification jobs
+              if (SchedulerJobsInterceptor.canInterceptGetNotificationJob(request)) {
+                return SchedulerJobsInterceptor.interceptGetNotificationJob(request);
+              }
+
+              if (SchedulerJobsInterceptor.canInterceptCreateNotificationJob(request)) {
+                return SchedulerJobsInterceptor.interceptCreateNotificationJob(request);
+              }
+
+              if (SchedulerJobsInterceptor.canInterceptUpdateNotificationJob(request)) {
+                return SchedulerJobsInterceptor.interceptUpdateNotificationJob(request);
               }
 
               // active jobs

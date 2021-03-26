@@ -8,7 +8,7 @@
       </app-input-switch>
     </div>
     <div class="col-9">
-      <app-input-tag [property]="alarmIdsProperty" [form]="form" [disabled]="false" [allowCustomValues]="true" [selected]="rules?.alarmIds">
+      <app-input-tag [property]="alarmIdsProperty" [form]="form" [allowCustomValues]="true" [selected]="rules?.alarmIds">
       </app-input-tag>
     </div>
   </div>
@@ -18,7 +18,7 @@
       </app-input-switch>
     </div>
     <div class="col-9">
-      <app-input-tag [property]="severitiesProperty" [form]="form" [autocompleteItemsAsObjects]="severities" [disabled]="false" [selected]="rules?.severities">
+      <app-input-tag [property]="severitiesProperty" [form]="form" [autocompleteItemsAsObjects]="severities" [selected]="rules?.severities">
         </app-input-tag>
     </div>
   </div>
@@ -28,7 +28,7 @@
       </app-input-switch>
     </div>
     <div class="col-9">
-      <app-input-tag [property]="protocolsProperty" [form]="form" [autocompleteItemsAsObjects]="protocols" [disabled]="false" [selected]="rules?.protocols">
+      <app-input-tag [property]="protocolsProperty" [form]="form" [autocompleteItemsAsObjects]="protocols" [selected]="rules?.protocols">
         </app-input-tag>
     </div>
   </div>
@@ -38,7 +38,7 @@
       </app-input-switch>
     </div>
     <div class="col-9">
-      <app-input-tag [property]="manufacturersProperty" [form]="form" [autocompleteItemsAsObjects]="manufacturers" [disabled]="false" [selected]="rules?.manufacturers">
+      <app-input-tag [property]="manufacturersProperty" [form]="form" [autocompleteItemsAsObjects]="manufacturers" [selected]="rules?.manufacturers">
         </app-input-tag>
     </div>
   </div>
@@ -48,8 +48,7 @@
       </app-input-switch>
     </div>
     <div class="col-9">
-      <app-input-tag [property]="sourcesProperty" [form]="form" [autocompleteItemsAsObjects]="sources" [selected]="rules?.sources"
-          [disabled]="false">
+      <app-input-tag [property]="sourcesProperty" [form]="form" [autocompleteItemsAsObjects]="sources" [selected]="rules?.sources">
         </app-input-tag>
     </div>
     <div class="help-block pb-2" *ngIf="noRuleActive">
