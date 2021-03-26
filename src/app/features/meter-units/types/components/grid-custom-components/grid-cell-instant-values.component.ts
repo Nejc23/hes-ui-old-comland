@@ -15,7 +15,7 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
 
   isConnectedVisible = false;
   isDisconnectedVisible = false;
-  isReadyForActivationVisible = false;
+  isReadyForReconnectionVisible = false;
 
   constructor(private statictextService: MeterUnitsTypeStaticTextService) {}
   // called on init
@@ -27,7 +27,7 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
     });
 
     this.isConnectedVisible = this.values?.some((v) => v === 1);
-    this.isReadyForActivationVisible = this.values?.some((v) => v === 2);
+    this.isReadyForReconnectionVisible = this.values?.some((v) => v === 2);
     this.isDisconnectedVisible = this.values?.some((v) => v === 0);
   }
 

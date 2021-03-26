@@ -21,14 +21,7 @@ export const environment = {
   isDebug: true,
   licenseKey:
     'CompanyName=Comland d.o.o.,LicensedApplication=ePoint.HES,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=0,AssetReference=AG-007624,ExpiryDate=2_April_2021_[v2]_MTYxNzMxODAwMDAwMA==c1dec7b42e4f2f63e2882709fbd9598f',
-
-  // identitiy settings
-  // stsAuthority: 'http://89.212.201.202:8081/',
-  // clientId: 'epoint2',
   ignoreLocale: true,
-  // clientRoot: 'http://localhost:4200/',
-  // clientScope: 'openid profile roles offline_access company',
-  // clientAutoSilentRenew: true
   sidebarAdministrationUsersUrl: 'https://is.enerdat.com:5443/reg/users'
 };
 
