@@ -75,6 +75,24 @@ export class SchedulerJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
+    console.log('createForm, this.showAlarmNotification', this.showAlarmNotification);
+    let startAt =
+      formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
+        ? moment(formData.schedules[0].startAt).toDate()
+        : null;
+    if (this.showAlarmNotification) {
+      startAt = formData && formData.startAt ? moment(formData.startAt).toDate() : null;
+      console.log('alarmNotificatoin');
+    }
+
+    let endAt =
+      formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].endAt
+        ? moment(formData.schedules[0].endAt).toDate()
+        : null;
+    if (this.showAlarmNotification) {
+      endAt = formData && formData.endAt ? moment(formData.endAt).toDate() : null;
+    }
+
     return this.formBuilder.group({
       [this.registersProperty]: [formData ? formData.registers : null, Validators.required],
       [this.devicesProperty]: [formData ? formData.devices : null, Validators.required],
@@ -92,16 +110,8 @@ export class SchedulerJobComponent implements OnInit {
         Validators.required
       ],
 
-      [this.startAtProperty]: [
-        formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
-          ? moment(formData.schedules[0].startAt).toDate()
-          : null
-      ],
-      [this.endAtProperty]: [
-        formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].endAt
-          ? moment(formData.schedules[0].endAt).toDate()
-          : null
-      ],
+      [this.startAtProperty]: [startAt],
+      [this.endAtProperty]: [endAt],
       [this.iecPushEnabledProperty]:
         formData && formData.readingProperties && this.showIecPush() ? formData.readingProperties.iecPushEnabled : false
     });
@@ -146,23 +156,8 @@ export class SchedulerJobComponent implements OnInit {
       this.defaultTimeUnit = jobsTimeUnits.find((x) => x.id === 3);
     }
 
-    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSearchedText(null);
-    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(job?.devices?.id);
-
-    this.selectedJobId = selectedJobId;
-
-    this.form = this.createForm(job);
-    this.filter = job?.filter;
-    this.addresses = job?.addresses;
-
-    // this.changeReadOptionId();
-    this.form.get(this.registersProperty).clearValidators();
-    this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
-
-    // this.cronScheduler.initForm(this.cronExpression);
-
-    this.jobType = jobTypeSetting.toString() === (+jobActionType.alarmNotification).toString() ? jobType.alarmNotification : jobTypeSetting;
-    console.log('jobType is ', this.jobType);
+    this.jobType =
+      jobTypeSetting.toString().toLowerCase() === jobType.alarmNotification.toLowerCase() ? jobType.alarmNotification : jobTypeSetting;
 
     switch (this.jobType.toString().toLowerCase()) {
       case jobType.reading.toLowerCase(): {
@@ -178,6 +173,21 @@ export class SchedulerJobComponent implements OnInit {
         break;
       }
     }
+
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSearchedText(null);
+    this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById(job?.devices?.id);
+
+    this.selectedJobId = selectedJobId;
+
+    this.form = this.createForm(job);
+    this.filter = job?.filter;
+    this.addresses = job?.addresses;
+
+    // this.changeReadOptionId();
+    this.form.get(this.registersProperty).clearValidators();
+    this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
+
+    // this.cronScheduler.initForm(this.cronExpression);
 
     this.title = this.setTitle();
   }
@@ -267,16 +277,24 @@ export class SchedulerJobComponent implements OnInit {
 
       values.filter = this.notificationRules.getFilter();
       values.addresses = this.notificationRules.getAddresses();
-      values.jobType = '6';
+      values.jobType = jobType.alarmNotification;
     }
 
     let request: Observable<SchedulerJob> = null;
     let operation = $localize`added`;
     if (this.selectedJobId) {
       operation = $localize`updated`;
-      request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
+      request = this.meterService.updateNotificationJob(values, this.selectedJobId);
+
+      if (this.showAlarmNotification) {
+        request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
+      }
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
+
+      if (this.showAlarmNotification) {
+        request = this.meterService.createNotificationJob(values);
+      }
     }
     const successMessage = $localize`Job was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(

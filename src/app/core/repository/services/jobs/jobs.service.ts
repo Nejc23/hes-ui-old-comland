@@ -18,7 +18,8 @@ import {
   enableJob,
   schedulerActiveJobs,
   schedulerJobsListByJobId,
-  deviceJobs
+  deviceJobs,
+  notificationJobs
 } from '../../consts/jobs.const';
 import { SchedulerJob } from '../../interfaces/jobs/scheduler-job.interface';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/jobs-global.enum';
@@ -243,5 +244,29 @@ export class JobsService {
     // }
 
     return requestParam;
+  }
+
+  createNotificationJob(schedule: SchedulerJob): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.createNotificationJobRequest(schedule));
+  }
+
+  createNotificationJobRequest(param: SchedulerJob): HttpRequest<any> {
+    return new HttpRequest('POST', `${notificationJobs}`, param);
+  }
+
+  updateNotificationJob(schedule: SchedulerJob, id: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.updateNotificationJobRequest(schedule, id));
+  }
+
+  updateNotificationJobRequest(param: SchedulerJob, id: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${notificationJobs}/${id}`, param);
+  }
+
+  getNotificationJob(id: string): Observable<SchedulerJob> {
+    return this.repository.makeRequest(this.getNotificationJobRequest(id));
+  }
+
+  getNotificationJobRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${notificationJobs}/${id}`);
   }
 }

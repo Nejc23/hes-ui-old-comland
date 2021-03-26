@@ -226,7 +226,7 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   private editAlarmNotificationJob(params: any, options: NgbModalOptions) {
     const selectedJobId = params.data.id;
 
-    this.service.getJob(selectedJobId).subscribe((job) => {
+    this.service.getNotificationJob(selectedJobId).subscribe((job) => {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       component.setFormEdit(null, selectedJobId, job);
