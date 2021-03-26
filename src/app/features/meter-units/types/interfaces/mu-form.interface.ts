@@ -12,7 +12,6 @@ export interface MuForm {
   ip: string;
   port: number;
   communicationType: number;
-  isHls: boolean;
   isGateway: boolean;
   jobIds: string[];
   isShortName: boolean;

@@ -154,7 +154,6 @@ export class MeterUnitsService {
       jobIds: payload.jobIds,
       ip: payload.ip,
       port: payload.port,
-      isHls: payload.isHls,
       isGateWay: payload.isGateway,
       isShortName: payload.isShortName,
       advancedInformation: {
