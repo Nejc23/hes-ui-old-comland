@@ -154,10 +154,6 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.communicationType);
   }
 
-  get isHlsProperty() {
-    return nameOf<MuForm>((o) => o.isHls);
-  }
-
   get wrapperClientAddressProperty() {
     return nameOf<MuWrapperInformation>((o) => o.clientAddress);
   }
@@ -258,7 +254,6 @@ export class AddMuFormComponent implements OnInit {
 
       [this.ipProperty]: [editMu?.ip, [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
       [this.portProperty]: [editMu?.port],
-      [this.isHlsProperty]: [false],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
 
       [this.protocolProperty]: [{ value: editMu?.protocol, disabled: true }],
@@ -550,7 +545,6 @@ export class AddMuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       communicationType: +this.form.get(this.communicationTypeProperty).value,
-      isHls: this.form.get(this.isHlsProperty).value,
       isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
       isShortName: this.form.get(this.isShortNameProperty).value,

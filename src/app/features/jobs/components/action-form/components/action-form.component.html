@@ -1,16 +1,13 @@
 <div class="d-flex">
 
   <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
-    <i class="far fa-redo"></i></button>
+    <i class="fas fa-sync-alt"></i></button>
   <ng-content></ng-content>
   <div class="ml-auto">
     <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
       [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"
       [showUseWildcard]="true" [useWildcards]="useWildcards" (toggleWildcards)="doToggleWildcards($event)">
       </app-input-searcher>
-  </div>
-  <div *ngIf="false"> <!-- TODO uncomment when implemented (remove div) -->
-    <button type="button" class="btn btn-link" [ngbTooltip]="tipContentExport"><i class="far fa-file-excel"></i></button>
   </div>
 </div>
 <ng-template #tipContentSearch><span i18n>Search data</span></ng-template>

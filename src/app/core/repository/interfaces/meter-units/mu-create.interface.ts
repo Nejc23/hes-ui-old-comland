@@ -13,7 +13,6 @@ export interface MuCreateRequest {
   jobIds?: string[];
   ip: string;
   port: number;
-  isHls?: boolean;
   isGateWay: boolean;
   isShortName?: boolean;
   hdlcInformation?: MuHdlcInformation;

@@ -1,4 +1,4 @@
-<div class="d-flex flex-row grid-cell-link-popup" *ngIf="params.value" >
+<div class="d-flex flex-row grid-cell-link-popup" *ngIf="params.values" >
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isConnectedVisible">
     <a class="badge {{ getBadgeClass(1) }} px-2"
       container="body" placement="bottom"
@@ -9,7 +9,7 @@
       href="javascript:void(0);"
     >{{ getValuesCount(1) }}</a>
   </div>
-  <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isReadyForActivationVisible">
+  <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isReadyForReconnectionVisible">
     <a class="badge {{ getBadgeClass(2) }} px-2"
       container="body" placement="bottom"
       [placement]="['right-top']"
@@ -31,7 +31,7 @@
   </div>
 </div>
 
-<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
+<span *ngIf="!params.values" class="text-muted">{{notAvailableText}}</span>
 
 <ng-template #contentForValue1 id="contentForValue1">
   <app-popover-instant-values [selectedValue]="1" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(1)"></app-popover-instant-values>

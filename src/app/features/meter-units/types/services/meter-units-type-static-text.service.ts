@@ -30,7 +30,7 @@ export class MeterUnitsTypeStaticTextService {
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
+    return $localize`No filters applied`;
   }
 
   get nextPlannedReadText() {

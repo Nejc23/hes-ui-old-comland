@@ -37,7 +37,6 @@ describe('Pact consumer test', () => {
     jobIds: ['16DD56FE-E0C9-46A5-9315-177F0585A32A'],
     ip: '1.1.1.1',
     port: 1,
-    isHls: true,
     isGateWay: true,
     isShortName: true,
     hdlcInformation: {
