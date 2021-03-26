@@ -8,7 +8,7 @@ export interface SchedulerJob {
   startAt?: string;
   endAt?: string;
   cronExpression: string;
-  jobType: string;
+  jobType: any;
   active: boolean;
 
   devices?: GridBulkActionRequestParams;
@@ -22,10 +22,10 @@ export interface SchedulerJob {
 
 export interface NotificationFilter {
   alarmIds?: number[];
-  severities?: number[];
-  protocols?: number[];
-  manufacturers?: number[];
-  sources?: number[];
+  severities?: any[];
+  protocols?: any[];
+  manufacturers?: any[];
+  sources?: any[];
 }
 
 export interface SchedulerJobForm extends SchedulerJob {

@@ -38,7 +38,6 @@ describe('Pact consumer test', () => {
     isGateWay: null,
     deviceStatus: 'active',
     hdlcInformation: null,
-    type: 1,
     wrapperInformation: {
       publicClientAddress: 16,
       publicServerAddress: null,

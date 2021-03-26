@@ -370,7 +370,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
-        this.refreshGrid();
+        setTimeout(() => {
+          this.refreshGrid();
+        }, 500);
       },
       (reason) => {
         // on dismiss (CLOSE)
