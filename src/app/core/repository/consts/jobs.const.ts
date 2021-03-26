@@ -7,3 +7,5 @@ export const enableJob = `${basePath}/jobs-enable`;
 export const executeJob = `${basePath}/jobs-execute`;
 export const deviceJobs = `${basePath}/job-device`;
 export const schedulerActiveJobs = `${basePath}/active-jobs`;
+
+export const notificationJobs = `${basePath}/notifications/jobs`;

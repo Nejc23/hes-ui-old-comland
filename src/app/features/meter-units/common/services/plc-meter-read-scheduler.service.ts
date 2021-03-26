@@ -43,4 +43,12 @@ export class PlcMeterReadScheduleService {
   updateMeterUnitsReadScheduler(values: SchedulerJobForm, id: string): Observable<SchedulerJob> {
     return this.jobsService.updateSchedulerJob(this.transformData(values), id);
   }
+
+  createNotificationJob(values: SchedulerJobForm): Observable<SchedulerJob> {
+    return this.jobsService.createNotificationJob(this.transformData(values));
+  }
+
+  updateNotificationJob(values: SchedulerJobForm, id: string): Observable<SchedulerJob> {
+    return this.jobsService.updateNotificationJob(this.transformData(values), id);
+  }
 }
