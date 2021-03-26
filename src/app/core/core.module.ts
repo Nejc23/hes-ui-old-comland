@@ -1,3 +1,4 @@
+import { PermissionService } from './permissions/services/permission.service';
 import { SidebarCookieStoreService } from './../shared/base-template/components/services/sidbebar-cookie-store.service';
 import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,7 +13,7 @@ import { HeaderInjectorInterceptor } from './header-injector/interceptors/header
 import { ErrorsInterceptor } from './error-handler/interceptors/error-handler.interceptor';
 import { ApiUrlInterceptor } from './api-url/api-url.interceptor';
 import { AuthGuard } from './guards/auth.guard';
-import { PermissionsGuard } from './guards/permissions.guard';
+import { PermissionGuard } from './guards/permissions.guard';
 import { CookieService } from 'ngx-cookie-service';
 import { PermissionsService } from './permissions/services/permissions.service';
 import { PermissionsStoreService } from './permissions/services/permissions-store.service';
@@ -31,9 +32,10 @@ import { AppConfigStoreService } from './configuration/services/app-config-store
     AuthService,
     AppStoreService,
     AuthGuard,
-    PermissionsGuard,
+    PermissionGuard,
     CookieService,
     PermissionsService,
+    PermissionService,
     PermissionsStoreService,
     AppConfigStoreService,
     RoleService,

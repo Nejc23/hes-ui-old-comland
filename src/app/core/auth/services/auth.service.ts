@@ -1,3 +1,5 @@
+import { PermissionEnumerator } from './../../permissions/enumerators/permission-enumerator.model';
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { of, Subscription, timer } from 'rxjs';
 import { LoginCredentials } from '../interfaces/login-credentials.interface';
@@ -264,8 +266,8 @@ export class AuthService {
       return of(null)
         .pipe(
           map((x: any) => {
-            this.permissionsStoreService.setUserRights(this.roleService.setUSerRightsFromRoles(authenticatedUser));
-            // this.appStore.setUser(authenticatedUser);
+            // this.permissionsStoreService.setUserRights(this.roleService.setUSerRightsFromRoles(authenticatedUser));
+            this.permissionsStoreService.setUserPermissions(authenticatedUser.profile.permission);
           })
         )
         .subscribe(

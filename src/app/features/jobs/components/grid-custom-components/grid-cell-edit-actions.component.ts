@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component } from '@angular/core';
@@ -290,5 +291,13 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
         return $localize`Delete job`;
     }
     return '';
+  }
+
+  get permissionJobExecute() {
+    return PermissionEnumerator.Execute_Scheduled_Job;
+  }
+
+  get permissionJobManage() {
+    return PermissionEnumerator.Manage_Jobs;
   }
 }

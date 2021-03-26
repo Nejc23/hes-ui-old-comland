@@ -4,9 +4,10 @@ import * as _ from 'lodash';
 import { filter } from 'rxjs/operators';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
-import { PermissionsService } from '../../../core/permissions/services/permissions.service';
+// import { PermissionsService } from '../../../core/permissions/services/permissions.service';
 import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
 import { ItemChange } from '@progress/kendo-angular-charts/dist/es2015/common/collection.service';
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,7 +19,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   constructor(
     private router: Router,
-    public permissionsService: PermissionsService,
+    public permissionService: PermissionService,
     private sidebarCookieService: SidebarCookieStoreService
   ) {}
 
@@ -65,7 +66,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   hasAccess(item: SidebarItem): boolean {
     if (item.permission) {
-      return this.permissionsService.hasAccess(item.permission);
+      return this.permissionService.hasAccess(item.permission);
     } else {
       return true;
     }

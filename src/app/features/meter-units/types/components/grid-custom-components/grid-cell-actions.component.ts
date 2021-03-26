@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from './../../../../../core/permissions/enumerators/permission-enumerator.model';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
@@ -71,21 +72,21 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     this.params.context.componentParent.onCiiDeactivate(this.params.data.deviceId);
   }
 
-  onRelaysConnect(selectedGuid: string) {
+  onRelaysConnect() {
     this.params.context.componentParent.onRelaysConnect(this.params.data.deviceId);
   }
 
-  onRelaysDisconnect(selectedGuid: string) {
+  onRelaysDisconnect() {
     this.params.context.componentParent.onRelaysDisconnect(this.params.data.deviceId);
   }
 
   // popup
-  onRelaysState(selectedGuid: string) {
+  onRelaysState() {
     this.params.context.componentParent.onRelaysState(this.params.data.deviceId);
   }
 
   // popup
-  onRelaysSetMode(selectedGuid: string) {
+  onRelaysSetMode() {
     this.params.context.componentParent.onRelaysSetMode(this.params.data.deviceId);
   }
 
@@ -102,6 +103,74 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
 
   onClearAlarms() {
     this.params.context.componentParent.onClearAlarms(this.params.data.deviceId);
+  }
+
+  // permission rights
+  get permissionMuManage() {
+    return PermissionEnumerator.Manage_Meters;
+  }
+  get permissionManageJobs() {
+    return PermissionEnumerator.Manage_Jobs;
+  }
+  get permissionManageAutoTemplates() {
+    return PermissionEnumerator.Manage_Auto_Template_Rules;
+  }
+  get permissionFwUpgrade() {
+    return PermissionEnumerator.Meter_FW_Upgrade;
+  }
+  get permissionDisconnectorConnect() {
+    return PermissionEnumerator.Disconnector_Connect;
+  }
+  get permissionDisconnectorDisconnect() {
+    return PermissionEnumerator.Disconnector_Disconnect;
+  }
+  get permissionDisconnectorGetState() {
+    return PermissionEnumerator.Disconnector_Get_State;
+  }
+  get permissionDisconnectorSetMode() {
+    return PermissionEnumerator.Disconnector_Set_Mode;
+  }
+  get permissionCiiActivate() {
+    return PermissionEnumerator.CII_Activate;
+  }
+  get permissionCiiDeactivate() {
+    return PermissionEnumerator.CII_Deactivate;
+  }
+  get permissionCiiState() {
+    return PermissionEnumerator.CII_Get_State;
+  }
+  get permissionRelaysConnect() {
+    return PermissionEnumerator.Relay_Connect;
+  }
+  get permissionRelaysDisconnect() {
+    return PermissionEnumerator.Relay_Disconnect;
+  }
+  get permissionRelaysState() {
+    return PermissionEnumerator.Relay_Get_State;
+  }
+  get permissionRelaysSetMode() {
+    return PermissionEnumerator.Relay_Set_Mode;
+  }
+  get permissionTouUpload() {
+    return PermissionEnumerator.TOU_Upload;
+  }
+  get permissionSetLimiter() {
+    return PermissionEnumerator.Set_Limiter;
+  }
+  get permissionSetMonitor() {
+    return PermissionEnumerator.Set_Monitor;
+  }
+  get permissionClearFF() {
+    return PermissionEnumerator.Clear_FF;
+  }
+  get permissionSetDisplay() {
+    return PermissionEnumerator.Set_Display;
+  }
+  get permissionClearAlarms() {
+    return PermissionEnumerator.Clear_Alarms;
+  }
+  get permissionAssignTemplates() {
+    return PermissionEnumerator.Assign_Templates;
   }
 
   // set tooltip text

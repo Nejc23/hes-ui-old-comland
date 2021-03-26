@@ -1,3 +1,4 @@
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -11,6 +12,7 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -34,7 +36,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private formUtils: FormsUtilsService,
     private codelistService: CodelistRepositoryService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private permissionService: PermissionService
   ) {}
 
   ngOnInit() {
@@ -222,5 +225,9 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       this.form.get(this.passwordProperty).disable();
       this.form.get(this.confirmPasswordProperty).disable();
     }
+  }
+
+  get permissionEdit() {
+    return PermissionEnumerator.Manage_Concentrators;
   }
 }

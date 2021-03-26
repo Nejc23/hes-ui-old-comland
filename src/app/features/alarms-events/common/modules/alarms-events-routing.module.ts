@@ -1,7 +1,7 @@
+import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
 import { Breadcrumb } from './../../../../shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { AlarmsEventsComponent } from '../../components/alarms-events.component';
 
 // import { AllForJobComponent } from '../../all-for-job/components/all-for-job.component';
@@ -11,7 +11,7 @@ const routes: Routes = [
     path: '',
     data: {
       breadcrumb: $localize`Alarms & Events`,
-      permission: FunctionalityEnumerator.alarmsEvents
+      permission: PermissionEnumerator.View_Alarms
     },
     children: [
       {

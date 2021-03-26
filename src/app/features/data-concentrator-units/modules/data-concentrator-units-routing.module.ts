@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 
@@ -9,14 +9,14 @@ const routes: Routes = [
     path: '',
     data: {
       breadcrumb: $localize`Data Concentrator Units`,
-      permission: FunctionalityEnumerator.DCU
+      permission: PermissionEnumerator.View_Concentrators
     },
     children: [
       {
         path: '',
         data: {
           breadcrumb: null,
-          permission: FunctionalityEnumerator.DCU
+          permission: PermissionEnumerator.View_Concentrators
         },
         component: DataConcentratorUnitsComponent
       },
@@ -24,7 +24,7 @@ const routes: Routes = [
         path: ':id',
         data: {
           breadcrumb: $localize`Concentrator`,
-          permission: FunctionalityEnumerator.DCU
+          permission: PermissionEnumerator.View_Concentrators
         },
         component: DataConcentratorDetailComponent
       }

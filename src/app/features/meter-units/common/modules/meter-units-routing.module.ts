@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
 import { Breadcrumb } from './../../../../shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,7 @@ const routes: Routes = [
     path: '',
     data: {
       breadcrumb: $localize`Meter Units`,
-      permission: FunctionalityEnumerator.MU
+      permission: PermissionEnumerator.View_Meters
     },
     children: [
       {

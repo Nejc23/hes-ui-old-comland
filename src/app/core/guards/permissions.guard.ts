@@ -3,11 +3,11 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, CanActivateCh
 import { Observable } from 'rxjs';
 
 import * as _ from 'lodash';
-import { PermissionsService } from '../permissions/services/permissions.service';
+import { PermissionService } from '../permissions/services/permission.service';
 
 @Injectable()
-export class PermissionsGuard implements CanActivateChild, CanActivate {
-  constructor(public permissionService: PermissionsService) {}
+export class PermissionGuard implements CanActivateChild, CanActivate {
+  constructor(public permissionService: PermissionService) {}
 
   canActivateChild(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.guardLogic(next, state);
@@ -19,7 +19,6 @@ export class PermissionsGuard implements CanActivateChild, CanActivate {
 
   guardLogic(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const permission = _.get(next.data, 'permission', false);
-    console.log(permission);
     // If no permission property always allow access
     if (!permission) {
       return true;

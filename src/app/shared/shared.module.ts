@@ -1,3 +1,6 @@
+import { HideDividerIfPermissionsUnauthorizedDirective } from './directives/permissions/hide-divider-if-permissions-unauthorized.directive';
+import { HideIfPermissionUnauthorizedDirective } from './directives/permissions/hide-if-permission-unauthorized.directive';
+import { HideIfAllPermissionsUnauthorizedDirective } from './directives/permissions/hide-if-all-permissions-unauthorized.directive';
 import { SecurityChangePasswordComponent } from './../features/meter-units/common/components/security/security-change-password.component';
 import { PlcMeterJobsAssignExistingComponent } from './../features/meter-units/common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { SecurityRekeyComponent } from './../features/meter-units/common/components/security/security-rekey.component';
@@ -136,6 +139,9 @@ import { AlarmNotificationRulesComponent } from '../features/jobs/components/sch
     PopoverInstantValuesComponent,
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
+    HideIfAllPermissionsUnauthorizedDirective,
+    HideIfPermissionUnauthorizedDirective,
+    HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent
   ],
   imports: [
@@ -224,6 +230,9 @@ import { AlarmNotificationRulesComponent } from '../features/jobs/components/sch
     PopoverInstantValuesComponent,
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
+    HideIfAllPermissionsUnauthorizedDirective,
+    HideIfPermissionUnauthorizedDirective,
+    HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent
   ],
   entryComponents: [

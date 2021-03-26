@@ -1,3 +1,4 @@
+import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
@@ -539,5 +540,13 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       return columns.map((c) => c.colId);
     }
     return;
+  }
+
+  get permissionJobManage() {
+    return PermissionEnumerator.Manage_Jobs;
+  }
+
+  get permissionAlarmsManage() {
+    return PermissionEnumerator.Manage_Alarms;
   }
 }
