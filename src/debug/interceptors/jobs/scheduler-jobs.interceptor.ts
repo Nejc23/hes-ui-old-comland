@@ -1,8 +1,8 @@
 import { DataConcentratorUnitsComponent } from './../../../app/features/data-concentrator-units/components/data-concentrator-units.component';
-import { deviceJobs, schedulerActiveJobs } from './../../../app/core/repository/consts/jobs.const';
+import { deviceJobs, schedulerActiveJobs, notificationJobs } from './../../../app/core/repository/consts/jobs.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Observable, of, Scheduler } from 'rxjs';
 import * as _ from 'lodash';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -19,10 +19,20 @@ export class SchedulerJobsInterceptor {
   static interceptSchedulerJobsList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const data: SchedulerJobsList[] = [
       {
+        id: '06130d62-f67c-41a2-98f7-ef521db2cee7',
+        active: true,
+        type: 'alarmNotification',
+        jobType: 6,
+        description: 'Alarm Notification Job',
+        nextRun: '2020-08-25T15:45:45+00:00',
+        owner: 'Jan Benedičič',
+        deviceCount: 0
+      },
+      {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Daily read of 15 min energy (A+)',
         nextRun: '2020-08-25T15:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -32,7 +42,7 @@ export class SchedulerJobsInterceptor {
         id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
         active: true,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2021-07-26T05:45:45+00:00',
         owner: 'Miha Galičič',
@@ -42,7 +52,7 @@ export class SchedulerJobsInterceptor {
         id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2022-07-28T12:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -52,7 +62,7 @@ export class SchedulerJobsInterceptor {
         id: 'c129f32f-33f8-4917-a190-53dfe388cc6d',
         active: true,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2021-08-28T12:45:45+00:00',
         owner: 'Miha Galičič',
@@ -62,7 +72,7 @@ export class SchedulerJobsInterceptor {
         id: '5f128531-0bce-46f9-b8df-264d8a3945fb',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2023-09-28T18:05:05+02:00',
         owner: 'Jan Benedičič',
@@ -72,7 +82,7 @@ export class SchedulerJobsInterceptor {
         id: '2eee0a94-cb09-4334-b36f-796ef0e08983',
         active: false,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2023-07-28T15:08:05+02:00',
         owner: 'Miha Galičič',
@@ -82,7 +92,7 @@ export class SchedulerJobsInterceptor {
         id: '6f3c7dc9-784e-4d8f-b6dc-913f116e94a6',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2023-11-18T11:19:25+01:00',
         owner: 'Jan Benedičič',
@@ -92,7 +102,7 @@ export class SchedulerJobsInterceptor {
         id: '845d8f84-705a-44bd-a5e1-e27cb705ecfc',
         active: false,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2025-11-18T09:17:25+01:00',
         owner: 'Miha Galičič',
@@ -155,7 +165,7 @@ export class SchedulerJobsInterceptor {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Daily read of 15 min energy (A+)',
         nextRun: '2020-08-25T15:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -165,7 +175,7 @@ export class SchedulerJobsInterceptor {
         id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
         active: true,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2021-07-26T05:45:45+00:00',
         owner: 'Miha Galičič',
@@ -175,7 +185,7 @@ export class SchedulerJobsInterceptor {
         id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe54',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2022-07-28T12:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -185,7 +195,7 @@ export class SchedulerJobsInterceptor {
         id: 'c129f32f-33f8-4917-a190-53dfe388cc6d',
         active: true,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2021-08-28T12:45:45+00:00',
         owner: 'Miha Galičič',
@@ -195,7 +205,7 @@ export class SchedulerJobsInterceptor {
         id: '5f128531-0bce-46f9-b8df-264d8a3945fb',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2023-09-28T18:05:05+02:00',
         owner: 'Jan Benedičič',
@@ -205,7 +215,7 @@ export class SchedulerJobsInterceptor {
         id: '6f3c7dc9-784e-4d8f-b6dc-913f116e94a6',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2020-07-18T09:17:25+01:00',
         owner: 'Jan Benedičič',
@@ -215,7 +225,7 @@ export class SchedulerJobsInterceptor {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee7',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Daily read of 15 min energy (B+)',
         nextRun: '2021-03-01T15:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -225,7 +235,7 @@ export class SchedulerJobsInterceptor {
         id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b01',
         active: true,
         type: 'Discovery',
-        actionType: 1,
+        jobType: 1,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2020-05-11T05:45:45+00:00',
         owner: 'Miha Galičič',
@@ -235,7 +245,7 @@ export class SchedulerJobsInterceptor {
         id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe55',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2019-03-05T12:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -245,7 +255,7 @@ export class SchedulerJobsInterceptor {
         id: 'aba5491a-be2b-4115-a64a-ff1c1fcdfe56',
         active: true,
         type: 'Reading',
-        actionType: 4,
+        jobType: 4,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2020-04-28T12:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -271,7 +281,7 @@ export class SchedulerJobsInterceptor {
       description: 'desc 4444',
       active: true,
       cronExpression: '0 1 */3 * * * *',
-      jobType: 'scheduleReading',
+      jobType: '4',
       readingProperties: {
         usePointer: true,
         intervalRange: 2,
@@ -298,6 +308,96 @@ export class SchedulerJobsInterceptor {
     const data: DeviceJobs = {
       scheduleJobIds: ['af9c4a3e-8080-4e09-ae44-f1928967d8eb'],
       deviceId: request.body.deviceId
+    };
+
+    return of(
+      new HttpResponse({
+        status: 201,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptCreateNotificationJob(request: HttpRequest<any>): boolean {
+    return new RegExp(notificationJobs).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptCreateNotificationJob(request: HttpRequest<SchedulerJob>): Observable<HttpEvent<SchedulerJob>> {
+    const data: SchedulerJob = {
+      jobType: 6,
+      active: true,
+      description: 'Notify alarms',
+      cronExpression: '* * 0 * * ?',
+      startAt: '2021-01-14T08:44:00+01:00',
+      endAt: null,
+      addresses: ['gregor@ePoint.si', 'jan@ePoint.si'],
+      filter: {
+        alarmIds: [64, 128, 42], // integer alarm identifiers
+        severities: [1, 2, 3], // enum - TODO get endpoint for list of enum values
+        protocols: [2, 3],
+        manufacturers: [1, 2],
+        sources: [2, 3] // enum - TODO get endpoint for list of enum values
+      }
+    };
+
+    return of(
+      new HttpResponse({
+        status: 201,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptUpdateNotificationJob(request: HttpRequest<any>): boolean {
+    return new RegExp(`${notificationJobs}/`).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptUpdateNotificationJob(request: HttpRequest<SchedulerJob>): Observable<HttpEvent<SchedulerJob>> {
+    const data: SchedulerJob = {
+      jobType: 6,
+      active: true,
+      description: 'Notify alarms',
+      cronExpression: '* * 0 * * ?',
+      startAt: '2021-01-14T08:44:00+01:00',
+      endAt: null,
+      addresses: ['gregor@ePoint.si', 'jan@ePoint.si'],
+      filter: {
+        alarmIds: [64, 128, 42], // integer alarm identifiers
+        severities: [1, 2, 3], // enum - TODO get endpoint for list of enum values
+        protocols: [2, 3],
+        manufacturers: [1, 2],
+        sources: [2, 3] // enum - TODO get endpoint for list of enum values
+      }
+    };
+
+    return of(
+      new HttpResponse({
+        status: 201,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptGetNotificationJob(request: HttpRequest<any>): boolean {
+    return new RegExp(`${notificationJobs}`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptGetNotificationJob(request: HttpRequest<SchedulerJob>): Observable<HttpEvent<SchedulerJob>> {
+    const data: SchedulerJob = {
+      jobType: 6,
+      active: true,
+      description: 'Notify alarms',
+      cronExpression: '* * 1 * * ?',
+      startAt: '2021-01-14T08:44:00+01:00',
+      endAt: null,
+      addresses: ['gregor@ePoint.si', 'jan@ePoint.si'],
+      filter: {
+        alarmIds: [128, 42, 64],
+        manufacturers: ['lgz', 'isk'],
+        protocols: ['aC750', 'dlms'],
+        severities: ['medium', 3, 'high']
+        // sources: ['concentrator', 'meter']
+      }
     };
 
     return of(

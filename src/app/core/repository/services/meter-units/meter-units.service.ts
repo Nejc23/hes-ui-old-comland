@@ -1,4 +1,6 @@
-import { muCreate } from './../../consts/meter-units.const';
+import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { MuAdvancedInformation } from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import { getDevice, muCreate, muUpdate } from './../../consts/meter-units.const';
 import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
@@ -19,8 +21,7 @@ import {
   touConfigImport,
   meterUnitsForJob,
   removeMeterUnitsFromJob,
-  device,
-  updateMeterUnit
+  device
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
@@ -29,11 +30,11 @@ import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-un
 import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
 import { MeterUnit } from '../../interfaces/meter-units/meter-unit.interface';
 import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
-import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
 import { capitalize } from 'lodash';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
+import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -65,6 +66,14 @@ export class MeterUnitsService {
 
   getMeterUnitRequest(id: string): HttpRequest<any> {
     return new HttpRequest('GET', `${device}/${id}`);
+  }
+
+  getMeterUnitFromConcentrator(id: string): Observable<MeterUnitDetails> {
+    return this.repository.makeRequest(this.getMeterUnitFromConcentratorRequest(id));
+  }
+
+  getMeterUnitFromConcentratorRequest(id: string): HttpRequest<any> {
+    return new HttpRequest('GET', `${getDevice}/${id}`);
   }
 
   updateReaderState(param: OnDemandRequestData[]): Observable<MeterUnitsList> {
@@ -133,24 +142,6 @@ export class MeterUnitsService {
     return new HttpRequest('POST', removeMeterUnitsFromJob, payload as any);
   }
 
-  updateMuFromForm(payload: MeterUnitDetailsForm): Observable<any> {
-    const muRequest: MuUpdateRequest = {
-      name: payload.name,
-      address: payload.address,
-      serialNumber: payload.id
-    };
-
-    return this.updateMu(payload.deviceId, muRequest);
-  }
-
-  updateMu(id: string, payload: MuUpdateRequest): Observable<any> {
-    return this.repository.makeRequest(this.updateMuRequest(id, payload));
-  }
-
-  updateMuRequest(id: string, payload: MuUpdateRequest): HttpRequest<any> {
-    return new HttpRequest('PUT', `${updateMeterUnit}/${id}`, payload as any);
-  }
-
   createMuForm(payload: MuForm): Observable<string> {
     const muRequest: MuCreateRequest = {
       name: payload.name,
@@ -163,7 +154,6 @@ export class MeterUnitsService {
       jobIds: payload.jobIds,
       ip: payload.ip,
       port: payload.port,
-      isHls: payload.isHls,
       isGateWay: payload.isGateway,
       isShortName: payload.isShortName,
       advancedInformation: {
@@ -185,7 +175,7 @@ export class MeterUnitsService {
     if (payload.hdlcInformation) {
       muRequest.hdlcInformation = {
         clientLow: payload.hdlcInformation.clientLow,
-        clientHigh: payload.hdlcInformation.clientLow,
+        clientHigh: payload.hdlcInformation.clientHigh,
         serverLow: payload.hdlcInformation.serverLow,
         serverHigh: payload.hdlcInformation.serverHigh,
         publicClientLow: payload.hdlcInformation.publicClientLow,
@@ -205,6 +195,59 @@ export class MeterUnitsService {
     return new HttpRequest('POST', `${muCreate}`, payload as any);
   }
 
+  updateMuForm(payload: MuUpdateForm): Observable<string> {
+    const muRequest: MuUpdateRequest = {
+      name: payload.name,
+      manufacturer: payload.manufacturer?.id,
+      ip: payload.ip,
+      port: payload.port,
+      isGateWay: payload.isGateway
+    };
+
+    if (payload.communicationType) {
+      muRequest.communicationType = payload.communicationType;
+    }
+
+    if (payload.advancedInformation) {
+      muRequest.advancedInformation = {
+        authenticationType: payload.authenticationType?.id,
+        ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
+        startWithRelease: payload.advancedInformation?.startWithRelease
+      };
+    }
+
+    if (payload.wrapperInformation) {
+      muRequest.wrapperInformation = {
+        clientAddress: payload.wrapperInformation.clientAddress,
+        serverAddress: payload.wrapperInformation.serverAddress,
+        publicClientAddress: payload.wrapperInformation.publicClientAddress,
+        publicServerAddress: payload.wrapperInformation.publicServerAddress,
+        physicalAddress: payload.wrapperInformation.physicalAddress
+      };
+    }
+    if (payload.hdlcInformation) {
+      muRequest.hdlcInformation = {
+        clientLow: payload.hdlcInformation.clientLow,
+        clientHigh: payload.hdlcInformation.clientHigh,
+        serverLow: payload.hdlcInformation.serverLow,
+        serverHigh: payload.hdlcInformation.serverHigh,
+        publicClientLow: payload.hdlcInformation.publicClientLow,
+        publicClientHigh: payload.hdlcInformation.publicClientHigh,
+        publicServerLow: payload.hdlcInformation.publicServerLow,
+        publicServerHigh: payload.hdlcInformation.publicServerHigh
+      };
+    }
+    return this.updateMu(payload.deviceId, muRequest);
+  }
+
+  updateMu(deviceId: string, payload: MuUpdateRequest): Observable<string> {
+    return this.repository.makeRequest(this.updateMuRequest(deviceId, payload));
+  }
+
+  updateMuRequest(deviceId: string, payload: MuUpdateRequest): HttpRequest<any> {
+    return new HttpRequest('POST', `${muUpdate}/${deviceId}`, payload as any);
+  }
+  a;
   getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {
     const pageSize = param.endRow - param.startRow;
     const requestParam: IActionRequestParams = {

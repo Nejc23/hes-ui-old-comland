@@ -1,3 +1,4 @@
+import { JobTypeEnumeration } from './../../../jobs/enums/job-type.enum';
 import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
 import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
 import { Router } from '@angular/router';
@@ -31,7 +32,6 @@ import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-mete
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
-import { jobType } from 'src/app/features/jobs/enums/job-type.enum';
 import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
@@ -65,7 +65,7 @@ export class MeterUnitsPlcActionsService {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
-      component.setFormAddNew(jobType.reading, units);
+      component.setFormAddNew(JobTypeEnumeration.reading, units);
       component.deviceFiltersAndSearch = {
         id: params.deviceIds,
         search: params.search,

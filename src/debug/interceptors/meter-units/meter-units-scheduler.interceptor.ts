@@ -23,7 +23,7 @@ export class MeterUnitsSchedulerInterceptor {
       description: '',
       active: true,
       cronExpression: '0 0 0 * * ? *',
-      jobType: 'scheduledReading',
+      jobType: 'alarmNotification',
       readingProperties: {
         usePointer: false,
         intervalRange: 1440,

@@ -1,4 +1,4 @@
-import { muCreate } from './../../../app/core/repository/consts/meter-units.const';
+import { getDevice, muCreate, muUpdate } from './../../../app/core/repository/consts/meter-units.const';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
@@ -6,36 +6,112 @@ import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
 import { device, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
+import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 
 @Injectable()
 export class MeterUnitInterceptor {
   constructor(private router: ActivatedRoute) {}
 
   static interceptGetMeterUnit(request: HttpRequest<any>): Observable<HttpEvent<any>> {
-    const data: MeterUnit[] = setData();
+    const data: MeterUnitDetails = {
+      deviceId: 'b295a3ec-f335-4f22-a1ee-bacf723ec343',
+      name: 'Meter Unit Test',
+      serialNumber: 'Serial_0124',
+      templateName: 'Template one',
+      protocol: 'dlms',
+      manufacturer: 'Vendor 1',
+      ip: '192.168.94.145',
+      port: 1001,
+      isGateWay: null,
+      deviceStatus: 'active',
+      hdlcInformation: null,
+      wrapperInformation: {
+        publicClientAddress: 18,
+        publicServerAddress: null,
+        clientAddress: 1,
+        serverAddress: 1,
+        physicalAddress: null
+      },
+      advancedInformation: {
+        startWithRelease: true,
+        ldnAsSystitle: true,
+        authenticationType: 1
+      }
+    };
 
-    let deviceId = request.url.split('/').pop();
+    // let deviceId = request.url.split('/').pop();
 
-    if (!deviceId || deviceId.length === 0) {
-      return of(
-        new HttpResponse({
-          status: 204
-        })
-      );
-    }
+    // if (!deviceId || deviceId.length === 0) {
+    //   return of(
+    //     new HttpResponse({
+    //       status: 204
+    //     })
+    //   );
+    // }
 
-    deviceId = deviceId.toLowerCase();
-    const body = data.find((d) => d.deviceId.toLowerCase() === deviceId);
+    // deviceId = deviceId.toLowerCase();
+    // const body = data.find((d) => d.deviceId.toLowerCase() === deviceId);
     return of(
       new HttpResponse({
-        status: body ? 200 : 204,
-        body
+        status: data ? 200 : 204,
+        body: data
+      })
+    );
+  }
+
+  static interceptGetMeterUnitFromConcentrator(request: HttpRequest<any>): Observable<HttpEvent<any>> {
+    const data: MeterUnitDetails = {
+      deviceId: 'b295a3ec-f335-4f22-a1ee-bacf723ec343',
+      name: 'Meter Unit Test',
+      serialNumber: 'Serial_0124',
+      templateName: 'Template one',
+      protocol: 'dlms',
+      manufacturer: 'Vendor 1',
+      ip: '192.168.94.145',
+      port: 1001,
+      isGateWay: null,
+      deviceStatus: 'active',
+      hdlcInformation: null,
+      wrapperInformation: {
+        publicClientAddress: 18,
+        publicServerAddress: null,
+        clientAddress: 1,
+        serverAddress: 1,
+        physicalAddress: null
+      },
+      advancedInformation: {
+        startWithRelease: true,
+        ldnAsSystitle: true,
+        authenticationType: 1
+      }
+    };
+
+    // let deviceId = request.url.split('/').pop();
+
+    // if (!deviceId || deviceId.length === 0) {
+    //   return of(
+    //     new HttpResponse({
+    //       status: 204
+    //     })
+    //   );
+    // }
+
+    // deviceId = deviceId.toLowerCase();
+    // const body = data.find((d) => d.deviceId.toLowerCase() === deviceId);
+    return of(
+      new HttpResponse({
+        status: data ? 200 : 204,
+        body: data
       })
     );
   }
 
   static canInterceptGetMeterUnit(request: HttpRequest<any>): boolean {
     return new RegExp(device + `/`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static canInterceptGetMeterUnitFromConcentrator(request: HttpRequest<any>): boolean {
+    return new RegExp(getDevice + `/`).test(request.url) && request.method.endsWith('GET');
   }
 
   static canInterceptDeleteDevice(request: HttpRequest<any>): boolean {
@@ -60,6 +136,19 @@ export class MeterUnitInterceptor {
       new HttpResponse({
         status: 200,
         body: 'd18b2e3-f0e0-48fd-a0df-b30513f17556'
+      })
+    );
+  }
+
+  static canInterceptUpdateMuPost(request: HttpRequest<any>): boolean {
+    return new RegExp(muUpdate + `/`).test(request.url) && request.method.endsWith('POST');
+  }
+
+  static interceptUpdateMuPost(request: HttpRequest<any>): Observable<HttpEvent<string>> {
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: 'd18b2e3-f0e0-48fd-a0df-b30513f17557'
       })
     );
   }

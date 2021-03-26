@@ -1,3 +1,5 @@
+import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { toLower } from 'lodash';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
@@ -22,7 +24,6 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { TouchListener } from '@ag-grid-community/core';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { map } from 'rxjs/operators';
-
 @Component({
   templateUrl: './add-mu-form.component.html'
 })
@@ -37,6 +38,8 @@ export class AddMuFormComponent implements OnInit {
   tabTitleCustomProperties = $localize`Custom properties`;
 
   form: FormGroup;
+  editMu: MeterUnitDetails;
+  isEditMu = false;
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
@@ -91,6 +94,11 @@ export class AddMuFormComponent implements OnInit {
       .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
       .subscribe((manufacturers) => {
         this.manufacturers = manufacturers;
+
+        if (this.isEditMu) {
+          const manufacturer = this.manufacturers.find((t) => this.editMu.manufacturer.toLowerCase() === t.value.toLowerCase());
+          this.form.get(this.manufacturerProperty).setValue(manufacturer);
+        }
       });
 
     this.autoTemplateService.getTemplates().subscribe((temps) => {
@@ -101,6 +109,12 @@ export class AddMuFormComponent implements OnInit {
         .sort((a, b) => {
           return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
         });
+
+      if (this.isEditMu) {
+        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
+        this.form.get(this.templateProperty).setValue(template);
+        this.isTemplateSelected = template && template.id ? true : false;
+      }
     });
   }
 
@@ -120,6 +134,10 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.template);
   }
 
+  get templateStringProperty() {
+    return 'templateString';
+  }
+
   get connectionTypeProperty() {
     return nameOf<MuForm>((o) => o.connectionType);
   }
@@ -134,10 +152,6 @@ export class AddMuFormComponent implements OnInit {
 
   get communicationTypeProperty() {
     return nameOf<MuForm>((o) => o.communicationType);
-  }
-
-  get isHlsProperty() {
-    return nameOf<MuForm>((o) => o.isHls);
   }
 
   get wrapperClientAddressProperty() {
@@ -212,42 +226,60 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.isShortName);
   }
 
-  createForm(): FormGroup {
+  get protocolProperty() {
+    return nameOf<MeterUnitDetails>((o) => o.protocol);
+  }
+
+  createForm(editMu: MeterUnitDetails = null): FormGroup {
+    let communicationType = this.defaultCommunicationType;
+    if (editMu) {
+      if (editMu.protocol.toLowerCase() !== 'dlms') {
+        communicationType = null;
+      } else if (editMu.hdlcInformation) {
+        communicationType = this.communicationTypes[0];
+      }
+
+      this.communicationTypeChanged(communicationType, false);
+    }
+
+    console.log('communicationType', communicationType);
+
     return this.formBuilder.group({
-      [this.nameProperty]: ['', Validators.required],
-      [this.serialNumberProperty]: ['', Validators.required],
+      [this.nameProperty]: [editMu?.name, Validators.required],
+      [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
-      [this.templateProperty]: [null, Validators.required],
+      [this.templateProperty]: [{ value: null, disabled: this.isEditMu }, Validators.required],
+      [this.templateStringProperty]: [{ value: editMu?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
-      [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-      [this.portProperty]: [null],
-      [this.isHlsProperty]: [false],
-      [this.communicationTypeProperty]: [this.defaultCommunicationType.value, Validators.required],
+
+      [this.ipProperty]: [editMu?.ip, [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
+      [this.portProperty]: [editMu?.port],
+      [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
+
+      [this.protocolProperty]: [{ value: editMu?.protocol, disabled: true }],
 
       // wrapper
-      [this.wrapperClientAddressProperty]: [null, Validators.required],
-      [this.wrapperServerAddressProperty]: [null, Validators.required],
-
-      [this.wrapperPublicClientAddressProperty]: [null, Validators.required],
-      [this.wrapperPublicServerAddressProperty]: [null, Validators.required],
-
+      [this.wrapperClientAddressProperty]: [editMu?.wrapperInformation?.clientAddress, Validators.required],
+      [this.wrapperServerAddressProperty]: [editMu?.wrapperInformation?.serverAddress, Validators.required],
+      [this.wrapperPublicClientAddressProperty]: [editMu?.wrapperInformation?.publicClientAddress, Validators.required],
+      [this.wrapperPublicServerAddressProperty]: [editMu?.wrapperInformation?.publicServerAddress, Validators.required],
       [this.isGatewayProperty]: [false],
-      [this.wrapperPhysicalAddressProperty]: [null, Validators.required],
+      [this.wrapperPhysicalAddressProperty]: [editMu?.wrapperInformation?.physicalAddress, Validators.required],
 
       // hdlc
-      [this.clientLowProperty]: [null, Validators.required],
-      [this.serverLowProperty]: [null, Validators.required],
-      [this.clientHighProperty]: [null, Validators.required],
-      [this.serverHighProperty]: [null, Validators.required],
-      [this.publicClientLowProperty]: [null, Validators.required],
-      [this.publicServerLowProperty]: [null, Validators.required],
-      [this.publicClientHighProperty]: [null, Validators.required],
-      [this.publicServerHighProperty]: [null, Validators.required],
+      [this.clientLowProperty]: [editMu?.hdlcInformation?.clientLow, Validators.required],
+      [this.serverLowProperty]: [editMu?.hdlcInformation?.serverLow, Validators.required],
+      [this.clientHighProperty]: [editMu?.hdlcInformation?.clientHigh, Validators.required],
+      [this.serverHighProperty]: [editMu?.hdlcInformation?.serverHigh, Validators.required],
+      [this.publicClientLowProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
+      [this.publicServerLowProperty]: [editMu?.hdlcInformation?.publicServerLow, Validators.required],
+      [this.publicClientHighProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
+      [this.publicServerHighProperty]: [editMu?.hdlcInformation?.publicServerHigh, Validators.required],
       [this.isShortNameProperty]: [false],
 
       // advanced
-      [this.advancedStartWithReleaseProperty]: [false],
-      [this.advancedLdnAsSystitleProperty]: [false],
+      [this.advancedStartWithReleaseProperty]: [editMu?.advancedInformation?.startWithRelease],
+      [this.advancedLdnAsSystitleProperty]: [editMu?.advancedInformation?.ldnAsSystitle],
       [this.authenticationTypeProperty]: [this.defaultAuthenticationType, Validators.required]
     });
   }
@@ -270,7 +302,7 @@ export class AddMuFormComponent implements OnInit {
   templateChanged(value: Codelist<string>) {
     this.isTemplateSelected = value && value.id ? true : false;
 
-    if (this.isTemplateSelected) {
+    if (this.isTemplateSelected && !this.isEditMu) {
       this.templatingService.getDefaultValues(value.id).subscribe((values) => {
         this.templateDefaultValues = values;
         this.setDefaultFormValues();
@@ -328,12 +360,15 @@ export class AddMuFormComponent implements OnInit {
     }
   }
 
-  communicationTypeChanged(value: RadioOption) {
+  communicationTypeChanged(value: RadioOption, getDefaultValues: boolean = true) {
     this.communicationTypeSelected = value;
-    this.isWrapperSelected = +value.value === 1;
-    this.isHdlcSelected = +value.value === 0;
+    this.isWrapperSelected = value ? +value?.value === 1 : false;
+    this.isHdlcSelected = value ? +value?.value === 0 : false;
     this.setFormControls();
-    this.setDefaultFormValues();
+
+    if (getDefaultValues) {
+      this.setDefaultFormValues();
+    }
   }
 
   setFormControls() {
@@ -386,10 +421,48 @@ export class AddMuFormComponent implements OnInit {
     }
   }
 
+  disableAdvancedControls() {
+    this.form.get(this.authenticationTypeProperty).disable();
+    this.form.get(this.advancedLdnAsSystitleProperty).disable();
+    this.form.get(this.advancedStartWithReleaseProperty).disable();
+  }
+
   add() {
     const muFormData = this.fillData();
     const request = this.muService.createMuForm(muFormData);
     const successMessage = $localize`Meter unit has been added successfully`;
+
+    try {
+      this.formUtils.saveForm(this.form, request, '').subscribe(
+        (result) => {
+          this.toast.successToast(successMessage);
+          this.modal.close();
+        },
+        (errResult) => {
+          if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
+            for (const error of errResult.error) {
+              this.toast.errorToast(error);
+            }
+          }
+          this.selectTabWithErrors();
+        } // error
+      );
+    } catch (error) {
+      this.selectTabWithErrors();
+    }
+  }
+
+  update() {
+    this.setFormControls();
+
+    if (!this.isNewOrProtocolDlms) {
+      this.disableAdvancedControls();
+      this.form.get(this.communicationTypeProperty).disable();
+    }
+
+    const muFormData = this.fillUpdateData();
+    const request = this.muService.updateMuForm(muFormData);
+    const successMessage = $localize`Meter unit has been updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
@@ -427,7 +500,11 @@ export class AddMuFormComponent implements OnInit {
     ) {
       this.tabstrip.selectTab(0); // Basic
     } else {
-      this.tabstrip.selectTab(2); // Communication
+      if (this.isEditMu) {
+        this.tabstrip.selectTab(1); // Communication (jobs tab is not visible)
+      } else {
+        this.tabstrip.selectTab(2); // Communication
+      }
     }
   }
 
@@ -468,19 +545,82 @@ export class AddMuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       communicationType: +this.form.get(this.communicationTypeProperty).value,
-      isHls: this.form.get(this.isHlsProperty).value,
       isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
       isShortName: this.form.get(this.isShortNameProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value,
       advancedInformation: {
         authenticationType: this.form.get(this.authenticationTypeProperty).value,
-        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value,
-        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value
+        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
+        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
       },
       wrapperInformation,
       hdlcInformation
     };
+  }
+
+  fillUpdateData(): MuUpdateForm {
+    let wrapperInformation: MuWrapperInformation = null;
+    if (this.isWrapperSelected) {
+      wrapperInformation = {
+        clientAddress: this.form.get(this.wrapperClientAddressProperty).value,
+        serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
+        publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
+        publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
+        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
+      };
+    }
+
+    let hdlcInformation: MuHdlcInformation = null;
+    if (this.isHdlcSelected) {
+      hdlcInformation = {
+        clientLow: this.form.get(this.clientLowProperty).value,
+        clientHigh: this.form.get(this.clientHighProperty).value,
+        serverLow: this.form.get(this.serverLowProperty).value,
+        serverHigh: this.form.get(this.serverHighProperty).value,
+        publicClientLow: this.form.get(this.publicClientLowProperty).value,
+        publicClientHigh: this.form.get(this.publicClientHighProperty).value,
+        publicServerLow: this.form.get(this.publicServerLowProperty).value,
+        publicServerHigh: this.form.get(this.publicServerHighProperty).value
+      };
+    }
+
+    let advancedInformation = null;
+    if (this.isNewOrProtocolDlms) {
+      advancedInformation = {
+        authenticationType: this.form.get(this.authenticationTypeProperty).value,
+        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
+        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
+      };
+    }
+
+    return {
+      deviceId: this.editMu.deviceId,
+      name: this.form.get(this.nameProperty).value,
+      manufacturer: this.form.get(this.manufacturerProperty).value,
+      ip: this.form.get(this.ipProperty).value,
+      port: this.form.get(this.portProperty).value,
+      isGateway: this.form.get(this.isGatewayProperty).value,
+      authenticationType: this.form.get(this.authenticationTypeProperty).value,
+      communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
+      advancedInformation,
+      wrapperInformation,
+      hdlcInformation
+    };
+  }
+
+  setFormEdit(job: MeterUnitDetails) {
+    this.editMu = job;
+    this.isEditMu = true;
+
+    this.form = this.createForm(job);
+  }
+
+  getTitle(): string {
+    if (this.isEditMu) {
+      return $localize`Edit ${this.editMu.protocol} meter`;
+    }
+    return $localize`Add new DLMS meter`;
   }
 
   gatewayChanged(value: any) {
@@ -500,5 +640,9 @@ export class AddMuFormComponent implements OnInit {
 
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  get isNewOrProtocolDlms() {
+    return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
   }
 }

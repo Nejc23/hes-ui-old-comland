@@ -22,10 +22,10 @@ export class InputSwitchComponent implements OnInit {
   valueTmp = false;
   ngOnInit() {
     if (!this.form) {
-      throw Error('InputTextComponent - form input missing.');
+      throw Error('InputSwitchComponent - form input missing.');
     }
     if (!this.property) {
-      throw Error('InputTextComponent - property input missing.');
+      throw Error('InputSwitchComponent - property input missing.');
     }
     this.controlId = _.uniqueId('switch');
     this.valueTmp = this.form.get(this.property).value;

@@ -1,9 +1,9 @@
-<nav class="nav nav-pills">
+<!--<nav class="nav nav-pills">
   <a class="nav-link active"><span i18n>Scheduled</span><span class="badge badge-pill badge-light ml-1">{{totalCount}}</span></a>
-  <!--<a class="nav-link">Pending</a>
+  <a class="nav-link">Pending</a>
   <a class="nav-link">Running</a>
-  <a class="nav-link">Finished</a>-->
-</nav>
+  <a class="nav-link">Finished</a>
+</nav>-->
 
 <div class="mt-3 mb-2">
   <div class="grid-actions">
@@ -16,12 +16,13 @@
         <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->
           <span i18n>Add</span>
         </button>
-        <div class="dropdown-content">
+        <div class="dropdown-content add-job">
           <a href="javascript:void(0);" (click)="addJob()"><span i18n>Reading job</span></a>
           <a href="javascript:void(0);" (click)="addDiscoveryJob()"><span i18n>Discovery job</span></a>
           <a href="javascript:void(0);" (click)="addDcTimeSyncJob()"><span i18n>DC Time sync job</span></a>
           <a href="javascript:void(0);" (click)="addDcReadEventsJob()"><span i18n>DC Read events job</span></a>
           <a href="javascript:void(0);" (click)="addTopologyJob()"><span i18n>Topology job</span></a>
+          <a href="javascript:void(0);" (click)="addAlarmNotificationJob()"><span i18n>Alarm notification job</span></a>
         </div>
       </div>
     </app-action-form>

@@ -158,6 +158,11 @@ export interface IActionResponseJobsAssignExisting extends IActionResponseParams
   scheduleJobIds: string[];
 }
 
+export interface IActionRequestParamsAlarms extends IActionRequestParams {
+  startTime: string;
+  endTime: string;
+}
+
 export interface IActionRequestSecurityChangePassword extends IActionRequestParams {
   includedIds?: string[];
   excludedIds?: string[];

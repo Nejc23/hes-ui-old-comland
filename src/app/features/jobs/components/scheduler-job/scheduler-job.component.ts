@@ -1,11 +1,12 @@
-import { ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
-import { jobActionType } from './../../enums/job-action-type.enum';
+import { notificationJobs } from './../../../../core/repository/consts/jobs.const';
+import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
+import { NotificationFilter, ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
-import { jobType } from './../../enums/job-type.enum';
+import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { ToastNotificationService } from './../../../../core/toast-notification/services/toast-notification.service';
 import { ToastComponent } from './../../../../shared/toast-notification/components/toast.component';
 import { CronScheduleComponent } from './../../cron-schedule/components/cron-schedule.component';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ViewChildren } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +23,8 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
+import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
+import { isNumber } from 'lodash';
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -30,9 +33,15 @@ export class SchedulerJobComponent implements OnInit {
   @ViewChild(RegistersSelectComponent) registers;
   @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
   @ViewChild('cronSchedule') cronScheduler: CronScheduleComponent;
+  @ViewChild('notificationRules') notificationRules: AlarmNotificationRulesComponent;
 
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
+
+  protocols: Codelist<number>[];
+  manufacturers: Codelist<number>[];
+  severities: Codelist<number>[];
+  sources: Codelist<number>[];
 
   selectedRowsCount = 0;
 
@@ -51,9 +60,14 @@ export class SchedulerJobComponent implements OnInit {
 
   showRegisters = false;
   showConcentrators = false;
+  showAlarmNotification = false;
 
-  jobType = jobType.reading;
+  jobType: JobTypeEnumeration = JobTypeEnumeration.reading;
   public title = '';
+
+  // alarm notifications
+  filter: NotificationFilter;
+  addresses: string[];
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -67,6 +81,22 @@ export class SchedulerJobComponent implements OnInit {
   ) {}
 
   createForm(formData: SchedulerJob): FormGroup {
+    let startAt =
+      formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
+        ? moment(formData.schedules[0].startAt).toDate()
+        : null;
+    if (this.showAlarmNotification) {
+      startAt = formData && formData.startAt ? moment(formData.startAt).toDate() : null;
+    }
+
+    let endAt =
+      formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].endAt
+        ? moment(formData.schedules[0].endAt).toDate()
+        : null;
+    if (this.showAlarmNotification) {
+      endAt = formData && formData.endAt ? moment(formData.endAt).toDate() : null;
+    }
+
     return this.formBuilder.group({
       [this.registersProperty]: [formData ? formData.registers : null, Validators.required],
       [this.devicesProperty]: [formData ? formData.devices : null, Validators.required],
@@ -84,16 +114,8 @@ export class SchedulerJobComponent implements OnInit {
         Validators.required
       ],
 
-      [this.startAtProperty]: [
-        formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].startAt
-          ? moment(formData.schedules[0].startAt).toDate()
-          : null
-      ],
-      [this.endAtProperty]: [
-        formData && formData.schedules && formData.schedules.length > 0 && formData.schedules[0].endAt
-          ? moment(formData.schedules[0].endAt).toDate()
-          : null
-      ],
+      [this.startAtProperty]: [startAt],
+      [this.endAtProperty]: [endAt],
       [this.iecPushEnabledProperty]:
         formData && formData.readingProperties && this.showIecPush() ? formData.readingProperties.iecPushEnabled : false
     });
@@ -101,19 +123,22 @@ export class SchedulerJobComponent implements OnInit {
 
   ngOnInit() {}
 
-  setTitle() {
-    switch (this.jobType.toLowerCase()) {
-      case jobType.discovery.toLowerCase(): {
+  setTitle(): string {
+    switch (this.jobType) {
+      case JobTypeEnumeration.discovery: {
         return $localize`Discovery Job`;
       }
-      case jobType.readEvents.toLowerCase(): {
+      case JobTypeEnumeration.readEvents: {
         return $localize`DC Read events job`;
       }
-      case jobType.timeSync.toLowerCase(): {
+      case JobTypeEnumeration.timeSync: {
         return $localize`DC Time sync job`;
       }
-      case jobType.topology.toLowerCase(): {
+      case JobTypeEnumeration.topology: {
         return $localize`Topology job`;
+      }
+      case JobTypeEnumeration.alarmNotification: {
+        return $localize`Alarm notification`;
       }
       default: {
         return $localize`Reading Jobs`;
@@ -121,18 +146,65 @@ export class SchedulerJobComponent implements OnInit {
     }
   }
 
-  setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
-    this.initForm(job.jobType, jobsTimeUnits, selectedJobId, job);
+  setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob, jobType: JobTypeEnumeration) {
+    this.initForm(jobType, jobsTimeUnits, selectedJobId, job);
   }
 
-  setFormAddNew(jobTypeSetting: string, jobsTimeUnits: Codelist<number>[]) {
+  setFormAddNew(jobTypeSetting: JobTypeEnumeration, jobsTimeUnits: Codelist<number>[]) {
     this.initForm(jobTypeSetting, jobsTimeUnits, null, null);
   }
 
-  initForm(jobTypeSetting: string, jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
+  setFormNotificationJobAddNew(
+    protocols: Codelist<number>[],
+    manufacturers: Codelist<number>[],
+    severities: Codelist<number>[],
+    sources: Codelist<number>[]
+  ) {
+    this.protocols = protocols;
+    this.manufacturers = manufacturers;
+    this.severities = severities;
+    this.sources = sources;
+
+    this.initForm(JobTypeEnumeration.alarmNotification, null, null, null);
+  }
+
+  setFormNotificationJobEdit(
+    protocols: Codelist<number>[],
+    manufacturers: Codelist<number>[],
+    severities: Codelist<number>[],
+    sources: Codelist<number>[],
+    selectedJobId: string,
+    job: SchedulerJob
+  ) {
+    this.protocols = protocols;
+    this.manufacturers = manufacturers;
+    this.severities = severities;
+    this.sources = sources;
+
+    this.initForm(JobTypeEnumeration.alarmNotification, null, selectedJobId, job);
+  }
+
+  initForm(selectedJobType: JobTypeEnumeration, jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob) {
     if (jobsTimeUnits && jobsTimeUnits.length > 0) {
       this.jobsTimeUnits = jobsTimeUnits;
       this.defaultTimeUnit = jobsTimeUnits.find((x) => x.id === 3);
+    }
+
+    // this.setJobType(jobTypeSetting);
+    this.jobType = selectedJobType;
+    switch (this.jobType) {
+      case JobTypeEnumeration.reading: {
+        this.showRegisters = true;
+        break;
+      }
+      case JobTypeEnumeration.alarmNotification: {
+        this.showAlarmNotification = true;
+        break;
+      }
+      default: {
+        this.showConcentrators = true;
+        break;
+      }
     }
 
     this.dataConcentratorUnitsSelectGridService.setSessionSettingsSearchedText(null);
@@ -141,18 +213,26 @@ export class SchedulerJobComponent implements OnInit {
     this.selectedJobId = selectedJobId;
 
     this.form = this.createForm(job);
+    this.filter = job?.filter;
+    this.addresses = job?.addresses;
 
-    // this.changeReadOptionId();
     this.form.get(this.registersProperty).clearValidators();
+
     this.cronExpression = job && job.schedules && job.schedules.length > 0 ? job.schedules[0].cronExpression : null;
-
-    // this.cronScheduler.initForm(this.cronExpression);
-
-    this.jobType = jobTypeSetting;
-    this.showRegisters = this.jobType.toLowerCase() === jobType.reading.toLowerCase();
-    this.showConcentrators = !this.showRegisters;
+    if (job && this.jobType === JobTypeEnumeration.alarmNotification) {
+      this.cronExpression = job.cronExpression;
+    }
 
     this.title = this.setTitle();
+  }
+
+  setJobType(jobTypeSetting: any) {
+    if (!isNaN(Number(jobTypeSetting))) {
+      this.jobType = JobTypeEnumeration[JobTypeEnumeration[+jobTypeSetting]];
+    } else {
+      const jt = String(jobTypeSetting).toLowerCase();
+      this.jobType = JobTypeEnumeration[jt];
+    }
   }
 
   fillData(): SchedulerJobForm {
@@ -200,11 +280,11 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   showForLast() {
-    return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
+    return this.jobType === JobTypeEnumeration.reading;
   }
 
   showPointer() {
-    return this.jobType.toLowerCase() === jobType.reading.toLowerCase() || this.jobType.toLowerCase() === jobType.readEvents.toLowerCase();
+    return this.jobType === JobTypeEnumeration.reading || this.jobType === JobTypeEnumeration.readEvents;
   }
 
   // showUsePointer() {
@@ -212,7 +292,7 @@ export class SchedulerJobComponent implements OnInit {
   // }
 
   showIecPush() {
-    return this.jobType.toLowerCase() === jobType.reading.toLowerCase();
+    return this.jobType === JobTypeEnumeration.reading;
   }
 
   save(addNew: boolean) {
@@ -229,13 +309,32 @@ export class SchedulerJobComponent implements OnInit {
     }
 
     const values = this.fillData();
+
+    if (this.showAlarmNotification) {
+      if (!this.notificationRules.validateForm()) {
+        return;
+      }
+
+      values.filter = this.notificationRules.getFilter();
+      values.addresses = this.notificationRules.getAddresses();
+      values.jobType = JobTypeEnumeration.alarmNotification;
+    }
+
     let request: Observable<SchedulerJob> = null;
     let operation = $localize`added`;
     if (this.selectedJobId) {
       operation = $localize`updated`;
       request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
+
+      if (this.showAlarmNotification) {
+        request = this.meterService.updateNotificationJob(values, this.selectedJobId);
+      }
     } else {
       request = this.meterService.createMeterUnitsReadScheduler(values);
+
+      if (this.showAlarmNotification) {
+        request = this.meterService.createNotificationJob(values);
+      }
     }
     const successMessage = $localize`Job was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
@@ -319,6 +418,11 @@ export class SchedulerJobComponent implements OnInit {
     if (!this.showForLast()) {
       this.form.get(this.intervalRangeProperty).disable();
       this.form.get(this.timeUnitProperty).disable();
+    }
+
+    if (this.jobType === JobTypeEnumeration.alarmNotification && value === -1) {
+      this.filter = this.notificationRules.getFilter();
+      this.addresses = this.notificationRules.getAddresses();
     }
 
     // if (this.showPointer() && this.form.get(this.usePointerProperty).value) {

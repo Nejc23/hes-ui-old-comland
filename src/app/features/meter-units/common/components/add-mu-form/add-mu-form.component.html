@@ -1,5 +1,5 @@
 <app-modal-template (dismiss)="onDismiss()">
-  <div modal-header i18n>Add new DLMS meter</div>
+  <div modal-header>{{ getTitle() }}</div>
 
   <div modal-body>
     <ng-container>
@@ -25,9 +25,24 @@
                 </div>
               </div>
 
-              <app-select-input i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
-                [disabled]="false" (selectedValueChanged)="templateChanged($event)">
-              </app-select-input>
+              <div class="form-row">
+                <div class="col-6">
+                  <app-input-text  *ngIf="isEditMu" i18n-label label="Protocol" [form]="form" [property]="protocolProperty"
+                    [disabled]="true">
+                  </app-input-text>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="col-6">
+                  <app-select-input *ngIf="!isEditMu" i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
+                    [disabled]="false" (selectedValueChanged)="templateChanged($event)">
+                  </app-select-input>
+                  <app-input-text  *ngIf="isEditMu" i18n-label label="Template" [form]="form" [property]="templateStringProperty"
+                    [disabled]="true">
+                  </app-input-text>
+                </div>
+              </div>
 
               <div class="form-row">
                 <div class="col-6">
@@ -38,29 +53,20 @@
               </div>
 
               <div class="form-row" *ngIf="isConnectionTypeIp">
-                <div class="col-8">
+                <div class="col-6">
                   <app-input-text dis [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
                 </div>
-                <div class="col-4">
+                <div class="col-3">
                   <app-input-numeric i18n-label [label]="'Port'" [form]="form" [property]="portProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                     [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                 </div>
               </div>
 
-              <div class="form-row">
+              <div class="form-row" *ngIf="isNewOrProtocolDlms">
                 <div class="col-12">
                   <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
-                    name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" (selectionChanged)="communicationTypeChanged($event)" >
+                    name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" (selectionChanged)="communicationTypeChanged($event, !isEditMu)" >
                   </app-input-radio>
-                  <!-- <app-input-radio class="label-left" [form]="form" [property]="communicationTypeProperty" [options]="communicationTypes"></app-input-radio> -->
-
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-6">
-                  <app-input-switch [form]="form" [property]="isHlsProperty" i18n-label label="Use high-level security">
-                  </app-input-switch>
                 </div>
               </div>
             </div>
@@ -68,7 +74,7 @@
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleJobs">
+        <kendo-tabstrip-tab [title]="tabTitleJobs" *ngIf="!isEditMu">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
@@ -82,20 +88,20 @@
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleCommunication">
+        <kendo-tabstrip-tab [title]="tabTitleCommunication" *ngIf="isNewOrProtocolDlms">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
               <div *ngIf="isTemplateSelected && communicationTypeSelected" class="pt-3">
-                <div class="form-row" *ngIf="isHdlcSelected">
+                <!--<div class="form-row" *ngIf="isHdlcSelected">
                   <div class="col-6">
                     <app-input-switch [form]="form" [property]="isShortNameProperty" i18n-label label="Shortname">
                     </app-input-switch>
                   </div>
-                </div>
+                </div>-->
 
                 <div>
-                  <label class="label-primary" i18n>Low-level security</label>
+                  <label class="label-primary" i18n>Management association</label>
                 </div>
                 <div class="border px-2 py-2">
                   <div class="form-row" *ngIf="isWrapperSelected">
@@ -132,7 +138,7 @@
                   </div>
                 </div>
                 <div class="pt-3">
-                  <label class="label-primary" i18n>High-level security (public)</label>
+                  <label class="label-primary" i18n>Public association</label>
                 </div>
                 <div class="border px-2 py-2">
                   <div *ngIf="isWrapperSelected">
@@ -185,7 +191,7 @@
               </div>
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleAdvanced">
+        <kendo-tabstrip-tab [title]="tabTitleAdvanced" *ngIf="isNewOrProtocolDlms">
           <ng-template kendoTabContent>
             <ng-template [ngTemplateOutlet]="noTemplateSelected"></ng-template>
             <div *ngIf="isTemplateSelected">
@@ -224,7 +230,8 @@
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="cancel()" i18n>Cancel</button>
       <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="add()" i18n>Add</button>
+        <button type="submit" class="btn btn-primary" (click)="add()" i18n *ngIf="!isEditMu">Add</button>
+        <button type="submit" class="btn btn-primary" (click)="update()" i18n *ngIf="isEditMu">Update</button>
         <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button> -->

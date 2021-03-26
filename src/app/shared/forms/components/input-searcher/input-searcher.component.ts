@@ -28,10 +28,10 @@ export class InputSearcherComponent implements OnInit {
 
   ngOnInit() {
     if (!this.form) {
-      throw Error('InputTextComponent - form input missing.');
+      throw Error('InputSearcherComponent - form input missing.');
     }
     if (!this.property) {
-      throw Error('InputTextComponent - property input missing.');
+      throw Error('InputSearcherComponent - property input missing.');
     }
     if (!this.isReadOnly) {
       this.isReadOnly = false;

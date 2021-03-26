@@ -27,19 +27,29 @@ describe('Pact consumer test', () => {
   });
 
   const responseBody: MeterUnitDetails = {
-    deviceId: '5388b9bf-c167-42fa-8adb-99281a049464',
-    serialNumber: '36078376',
-    name: '000F93FFFF147C9A',
-    mac: '000F93FFFF147C9A',
-    systitle: '4C475A6672268328',
-    state: 'installed',
-    type: 0,
+    deviceId: 'b295a3ec-f335-4f22-a1ee-bacf723ec343',
+    name: null,
+    serialNumber: null,
+    templateName: 'Flex',
+    protocol: 'dlms',
     manufacturer: 'lgz',
-    templateName: 'PLC_E450_SLO1ph',
-    address: null,
-    latitude: 46.230684,
-    longitude: 14.419062,
-    tags: ['tag1', 'tag2']
+    ip: '192.168.94.145',
+    port: 1001,
+    isGateWay: null,
+    deviceStatus: 'active',
+    hdlcInformation: null,
+    wrapperInformation: {
+      publicClientAddress: 16,
+      publicServerAddress: null,
+      clientAddress: 1,
+      serverAddress: 1,
+      physicalAddress: null
+    },
+    advancedInformation: {
+      startWithRelease: true,
+      ldnAsSystitle: true,
+      authenticationType: 1
+    }
   };
 
   const id = '1D372C3F-D1FC-4BB1-BF34-0E4925D4BA8F';

@@ -78,6 +78,7 @@ import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/com
 import { GridSelectionHeaderScrollableComponent } from './ag-grid/components/grid-selection-header-scrollable.component';
 import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/components/grid-custom-components/grid-cell-active-read-only.component';
 import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
+import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
 
 @NgModule({
   exports: [
@@ -140,7 +141,8 @@ import { PopoverInstantValuesComponent } from '../features/meter-units/popover/p
     SecurityChangePasswordComponent,
     HideIfAllPermissionsUnauthorizedDirective,
     HideIfPermissionUnauthorizedDirective,
-    HideDividerIfPermissionsUnauthorizedDirective
+    HideDividerIfPermissionsUnauthorizedDirective,
+    AlarmNotificationRulesComponent
   ],
   imports: [
     CommonModule,
@@ -230,7 +232,8 @@ import { PopoverInstantValuesComponent } from '../features/meter-units/popover/p
     SecurityChangePasswordComponent,
     HideIfAllPermissionsUnauthorizedDirective,
     HideIfPermissionUnauthorizedDirective,
-    HideDividerIfPermissionsUnauthorizedDirective
+    HideDividerIfPermissionsUnauthorizedDirective,
+    AlarmNotificationRulesComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -260,7 +263,8 @@ import { PopoverInstantValuesComponent } from '../features/meter-units/popover/p
     SecurityActivateHlsComponent,
     SecurityRekeyComponent,
     PlcMeterJobsAssignExistingComponent,
-    SecurityChangePasswordComponent
+    SecurityChangePasswordComponent,
+    AlarmNotificationRulesComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

@@ -1,4 +1,8 @@
-import { meterUnitsDeviceMedium } from './../../../app/core/repository/consts/meter-units.const';
+import {
+  meterUnitsDeviceMedium,
+  meterUnitsAlarmSourceType,
+  meterUnitsAlarmSeverityType
+} from './../../../app/core/repository/consts/meter-units.const';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
@@ -88,6 +92,14 @@ export class MeterUnitCodelistInterceptor {
       {
         id: 3,
         value: 'Vendor 3'
+      },
+      {
+        id: 4,
+        value: 'lgz'
+      },
+      {
+        id: 5,
+        value: 'isk'
       }
     ];
 
@@ -280,6 +292,70 @@ export class MeterUnitCodelistInterceptor {
       {
         id: 4,
         value: 'HEAT'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptMeterUnitAlarmSeverityType(request: HttpRequest<any>): boolean {
+    return new RegExp(`${meterUnitsAlarmSeverityType}$`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptMeterUnitAlarmSeverityType(): Observable<HttpEvent<any>> {
+    const data: Codelist<number>[] = [
+      {
+        id: 0,
+        value: 'UNKNOWN'
+      },
+      {
+        id: 1,
+        value: 'HIGH'
+      },
+      {
+        id: 2,
+        value: 'MEDIUM'
+      },
+      {
+        id: 3,
+        value: 'LOW'
+      }
+    ];
+
+    return of(
+      new HttpResponse({
+        status: 200,
+        body: data
+      })
+    );
+  }
+
+  static canInterceptMeterUnitAlarmSourceType(request: HttpRequest<any>): boolean {
+    return new RegExp(`${meterUnitsAlarmSourceType}$`).test(request.url) && request.method.endsWith('GET');
+  }
+
+  static interceptMeterUnitAlarmSourceType(): Observable<HttpEvent<any>> {
+    const data: Codelist<number>[] = [
+      {
+        id: 0,
+        value: 'UNKNOWN'
+      },
+      {
+        id: 1,
+        value: 'SYSTEM'
+      },
+      {
+        id: 2,
+        value: 'concentrator'
+      },
+      {
+        id: 3,
+        value: 'METER'
       }
     ];
 
