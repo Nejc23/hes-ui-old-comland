@@ -1,6 +1,6 @@
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { toLower } from 'lodash';
+import { identity, toLower } from 'lodash';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { MeterUnitsService } from './../../../../../core/repository/services/meter-units/meter-units.service';
@@ -61,6 +61,13 @@ export class AddMuFormComponent implements OnInit {
     { id: 5, value: $localize`High with GMAC` }
   ];
 
+  authenticationTypesEditMap: { [key: string]: number } = {
+    none: 0,
+    low: 1,
+    high: 2,
+    highgmac: 5
+  };
+
   private defaultAuthenticationType = this.authenticationTypes[1];
 
   isConnectionTypeIp = this.defaultConnectionType?.id === 1;
@@ -76,7 +83,6 @@ export class AddMuFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
-    private codelistService: CodelistRepositoryService,
     private autoTemplateService: AutoTemplatesService,
     private templatingService: TemplatingService,
     private muService: MeterUnitsService,
@@ -101,21 +107,25 @@ export class AddMuFormComponent implements OnInit {
         }
       });
 
-    this.autoTemplateService.getTemplates().subscribe((temps) => {
-      this.templates = temps
-        .map((t) => {
-          return { id: t.templateId, value: t.name };
-        })
-        .sort((a, b) => {
-          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
-        });
+    if (!this.isEditMu) {
+      this.autoTemplateService.getTemplates().subscribe((temps) => {
+        this.templates = temps
+          .map((t) => {
+            return { id: t.templateId, value: t.name };
+          })
+          .sort((a, b) => {
+            return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+          });
 
-      if (this.isEditMu) {
-        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
-        this.form.get(this.templateProperty).setValue(template);
-        this.isTemplateSelected = template && template.id ? true : false;
-      }
-    });
+        if (this.isEditMu) {
+          const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
+          this.form.get(this.templateProperty).setValue(template);
+          this.isTemplateSelected = template && template.id ? true : false;
+        }
+      });
+    } else {
+      this.isTemplateSelected = true;
+    }
   }
 
   get nameProperty() {
@@ -231,18 +241,8 @@ export class AddMuFormComponent implements OnInit {
   }
 
   createForm(editMu: MeterUnitDetails = null): FormGroup {
-    let communicationType = this.defaultCommunicationType;
-    if (editMu) {
-      if (editMu.protocol.toLowerCase() !== 'dlms') {
-        communicationType = null;
-      } else if (editMu.hdlcInformation) {
-        communicationType = this.communicationTypes[0];
-      }
-
-      this.communicationTypeChanged(communicationType, false);
-    }
-
-    console.log('communicationType', communicationType);
+    const communicationType = this.getCommunicationType(editMu);
+    const authenticationType = this.getAuthenticationType(editMu?.advancedInformation?.authenticationType);
 
     return this.formBuilder.group({
       [this.nameProperty]: [editMu?.name, Validators.required],
@@ -280,8 +280,40 @@ export class AddMuFormComponent implements OnInit {
       // advanced
       [this.advancedStartWithReleaseProperty]: [editMu?.advancedInformation?.startWithRelease],
       [this.advancedLdnAsSystitleProperty]: [editMu?.advancedInformation?.ldnAsSystitle],
-      [this.authenticationTypeProperty]: [this.defaultAuthenticationType, Validators.required]
+      [this.authenticationTypeProperty]: [authenticationType, Validators.required]
     });
+  }
+
+  getCommunicationType(muDetails: MeterUnitDetails): RadioOption {
+    if (!muDetails) {
+      return this.defaultCommunicationType;
+    }
+
+    // edit
+    let communicationType = this.defaultCommunicationType;
+    if (muDetails.protocol?.toLowerCase() !== 'dlms') {
+      communicationType = null;
+    } else if (muDetails.hdlcInformation) {
+      communicationType = this.communicationTypes[1];
+    }
+    this.communicationTypeChanged(communicationType, false);
+
+    return communicationType;
+  }
+
+  getAuthenticationType(authenticationType: any): Codelist<number> {
+    if (!authenticationType) {
+      return this.defaultAuthenticationType;
+    }
+
+    let id = -1;
+    if (!isNaN(authenticationType)) {
+      id = +authenticationType;
+    } else {
+      id = this.authenticationTypesEditMap[String(authenticationType).toLowerCase()];
+    }
+
+    return this.authenticationTypes.find((a) => a.id === id);
   }
 
   onConnectionTypeChanged(value: Codelist<number>) {
@@ -322,16 +354,16 @@ export class AddMuFormComponent implements OnInit {
       this.setDefaultValue(this.wrapperPhysicalAddressProperty, wrapperInformation.physicalAddress);
     }
 
-    const hdlsInformation = this.templateDefaultValues?.hdlcInformation?.hdlcInformation;
-    if (hdlsInformation && this.isHdlcSelected) {
-      this.setDefaultValue(this.clientLowProperty, hdlsInformation.clientLow);
-      this.setDefaultValue(this.clientHighProperty, hdlsInformation.clientHigh);
-      this.setDefaultValue(this.serverLowProperty, hdlsInformation.serverLow);
-      this.setDefaultValue(this.serverHighProperty, hdlsInformation.serverHigh);
-      this.setDefaultValue(this.publicClientLowProperty, hdlsInformation.publicClientLow);
-      this.setDefaultValue(this.publicClientHighProperty, hdlsInformation.publicClientHigh);
-      this.setDefaultValue(this.publicServerLowProperty, hdlsInformation.publicServerLow);
-      this.setDefaultValue(this.publicServerHighProperty, hdlsInformation.publicServerHigh);
+    const hdlcInformation = this.templateDefaultValues?.hdlcInformation?.hdlcInformation;
+    if (hdlcInformation && this.isHdlcSelected) {
+      this.setDefaultValue(this.clientLowProperty, hdlcInformation.clientLow);
+      this.setDefaultValue(this.clientHighProperty, hdlcInformation.clientHigh);
+      this.setDefaultValue(this.serverLowProperty, hdlcInformation.serverLow);
+      this.setDefaultValue(this.serverHighProperty, hdlcInformation.serverHigh);
+      this.setDefaultValue(this.publicClientLowProperty, hdlcInformation.publicClientLow);
+      this.setDefaultValue(this.publicClientHighProperty, hdlcInformation.publicClientHigh);
+      this.setDefaultValue(this.publicServerLowProperty, hdlcInformation.publicServerLow);
+      this.setDefaultValue(this.publicServerHighProperty, hdlcInformation.publicServerHigh);
     }
 
     const advancedInformation = this.templateDefaultValues?.advancedInformation?.advancedInformation;
@@ -609,15 +641,15 @@ export class AddMuFormComponent implements OnInit {
     };
   }
 
-  setFormEdit(job: MeterUnitDetails) {
-    this.editMu = job;
+  setFormEdit(muDetails: MeterUnitDetails) {
+    this.editMu = muDetails;
     this.isEditMu = true;
 
-    this.form = this.createForm(job);
+    this.form = this.createForm(muDetails);
   }
 
   getTitle(): string {
-    if (this.isEditMu) {
+    if (this.editMu) {
       return $localize`Edit ${this.editMu.protocol} meter`;
     }
     return $localize`Add new DLMS meter`;
