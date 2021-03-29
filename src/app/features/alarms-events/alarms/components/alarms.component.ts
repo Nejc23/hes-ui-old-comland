@@ -1,6 +1,6 @@
 import { GridUtils } from './../../../global/grid.utils';
 import { AlarmingService } from './../../../../core/repository/services/alarming/alarming.service';
-import { IActionRequestParamsAlarms } from './../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParamsAlarms, IActionSortParams } from './../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAlarmsList } from 'src/app/core/repository/interfaces/alarming/alarms-list.interface';
@@ -9,6 +9,8 @@ import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { AlarmsStaticTextService } from '../services/alarms-static-text.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { capitalize } from 'lodash';
+import { filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -146,6 +148,9 @@ export class AlarmsComponent implements OnInit {
         that.requestModel.startTime = that.form.get(that.startTimeProperty).value;
         that.requestModel.endTime = that.form.get(that.endTimeProperty).value;
 
+        that.requestModel.sort = that.getSort(paramsRow.request.sortModel);
+        console.log('sort', that.requestModel.sort);
+
         if (!that.requestModel.startTime || !that.requestModel.endTime) {
           that.gridApi.hideOverlay();
           that.rowData = null;
@@ -175,6 +180,23 @@ export class AlarmsComponent implements OnInit {
       }
     };
     this.gridApi.setServerSideDatasource(that.datasource);
+  }
+
+  getSort(sortModel: any[]): IActionSortParams[] {
+    console.log('current sortModel', sortModel);
+    if (!sortModel || sortModel.length === 0) {
+      return null;
+    }
+
+    const sortResult: IActionSortParams[] = [];
+    sortModel.map((row) =>
+      sortResult.push({
+        propName: capitalize(row.colId),
+        index: 0,
+        sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
+      })
+    );
+    return sortResult;
   }
 
   loadData(instance: AlarmsComponent, paramsRow: any) {
