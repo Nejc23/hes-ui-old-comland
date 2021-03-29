@@ -65,7 +65,7 @@ export class AddMuFormComponent implements OnInit {
     none: 0,
     low: 1,
     high: 2,
-    highGMAC: 5
+    highgmac: 5
   };
 
   private defaultAuthenticationType = this.authenticationTypes[1];
@@ -310,7 +310,7 @@ export class AddMuFormComponent implements OnInit {
     if (!isNaN(authenticationType)) {
       id = +authenticationType;
     } else {
-      id = this.authenticationTypesEditMap[authenticationType];
+      id = this.authenticationTypesEditMap[String(authenticationType).toLowerCase()];
     }
 
     return this.authenticationTypes.find((a) => a.id === id);
