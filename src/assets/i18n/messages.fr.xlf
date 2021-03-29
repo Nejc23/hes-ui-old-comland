@@ -502,10 +502,6 @@
         <source>Meter discovery</source>
         <target>Discovery job</target>
       </trans-unit>
-      <trans-unit id="9172233176401579786" datatype="html">
-        <source>Scheduled</source>
-        <target>Programmé</target>
-      </trans-unit>
       <trans-unit id="8650499415827640724" datatype="html">
         <source>Type</source>
         <target>Type</target>
@@ -833,14 +829,6 @@
       <trans-unit id="4359014576353578997" datatype="html">
         <source>Clear Filters</source>
         <target>Supprimer les filtres</target>
-      </trans-unit>
-      <trans-unit id="478243073498831727" datatype="html">
-        <source>Save Filter Set</source>
-        <target>Mettre en mémoire le jeu de filtres</target>
-      </trans-unit>
-      <trans-unit id="2094754031576131476" datatype="html">
-        <source>Saved Filter Sets</source>
-        <target>Jeux de filtres sauvegardés </target>
       </trans-unit>
       <trans-unit id="5911214550882917183" datatype="html">
         <source>State</source>
@@ -2217,10 +2205,6 @@
         <source>Communication type</source>
         <target>Type de communication </target>
       </trans-unit>
-      <trans-unit id="3127731073427180886" datatype="html">
-        <source>Use high-level security</source>
-        <target>Utiliser la sécurité de haut niveau </target>
-      </trans-unit>
       <trans-unit id="235800882454190328" datatype="html">
         <source>Gateway</source>
         <target>Gateway</target>
@@ -2565,6 +2549,10 @@
       <trans-unit id="8721692694055413095" datatype="html">
         <source>Entry is not a valid email:</source>
         <target>Entry is not a valid email:</target>
+      </trans-unit>
+      <trans-unit id="478253589858933128" datatype="html">
+        <source>No filters applied</source>
+        <target>No filters applied</target>
       </trans-unit>
     </body>
   </file>
