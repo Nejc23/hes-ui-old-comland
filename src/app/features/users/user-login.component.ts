@@ -168,7 +168,7 @@ export class UserLoginComponent implements OnInit {
     this.authService.user = authenticatedUser;
     this.authService.saveTokenAndSetUserRights2(authenticatedUser, authenticatedUser.id_token);
     this.cookieService.set(config.authTimeStamp, moment().utc().toISOString(), null, environment.cookiePath); // auth stamp for token refresh (isRefreshAllowed)
-    console.log(authenticatedUser);
+    console.log('authtenticatedUser', authenticatedUser);
     this.goToStartPageForAuthorizedUser();
   }
 
