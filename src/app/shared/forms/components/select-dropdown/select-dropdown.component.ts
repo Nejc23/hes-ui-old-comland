@@ -53,7 +53,6 @@ export class SelectDropdownComponent implements OnInit, OnDestroy {
   // }
 
   public selectionChange(value: any): void {
-    console.log('selectionChange', value);
     this.selectedValueChanged.emit(value);
   }
 

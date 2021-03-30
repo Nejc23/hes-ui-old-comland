@@ -141,7 +141,7 @@ export class FileUploadComponent implements OnInit {
     this.fileName = files[0].name;
 
     if (!isAcceptedImageFormat) {
-      console.log('File extension is not supported:', files[0].extension, '. Supported file extensions:', this.acceptExtensions);
+      // console.log('File extension is not supported:', files[0].extension, '. Supported file extensions:', this.acceptExtensions);
       e.preventDefault();
       this.isUploadFailed = true;
       this.isUploadInProgress = false;

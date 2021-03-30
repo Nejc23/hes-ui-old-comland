@@ -46,7 +46,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if (request.url.indexOf('/apigrid/') < 0) {
-      console.log(`${request.method} ${request.url}`);
       return (
         of(null)
           .pipe(

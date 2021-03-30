@@ -108,8 +108,6 @@ export class DateRangePickerComponent implements OnInit {
       return result;
     }
 
-    console.log('targe.typeof', typeof target);
-    console.log('target', target);
     if (target?.classList?.contains && target.classList.contains('k-time-accept')) {
       return true;
     }
@@ -119,7 +117,6 @@ export class DateRangePickerComponent implements OnInit {
     if (datePicker.length === 0) {
       return false;
     }
-    console.log('datePicker[0]', datePicker[0]);
     return datePicker[0]?.contains(target);
   }
 
@@ -129,7 +126,6 @@ export class DateRangePickerComponent implements OnInit {
     if (this.show) {
       this.focused = true;
       const anchorWidth = this.anchorTextbox?.nativeElement?.clientWidth;
-      // console.log('anchorWidth', anchorWidth);
       if (anchorWidth) {
         this.popupWidth = anchorWidth + 2 + 'px'; // 2px is for border
       }
@@ -197,9 +193,6 @@ export class DateRangePickerComponent implements OnInit {
     const startTime = this.form.get(this.startProperty).value;
     const endTime = this.form.get(this.endProperty).value;
 
-    console.log('setDateRangeField() startTime', startTime);
-    console.log('setDateRangeField() endTime', endTime);
-
     const dateRange = `${formatDate(startTime, environment.dateTimeFormat)} - ${formatDate(endTime, environment.dateTimeFormat)}`;
     this.form.patchValue({ dateRange });
   }
@@ -219,12 +212,10 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   onDateFocus() {
-    console.log('onDateFocus()');
     this.focused = true;
   }
 
   onDateBlur() {
-    console.log('onDateBlur()');
     this.focused = false;
   }
 

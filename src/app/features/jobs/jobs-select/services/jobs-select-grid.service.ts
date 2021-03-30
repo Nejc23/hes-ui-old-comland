@@ -265,7 +265,6 @@ export class JobsSelectGridService {
   };
 
   private onSortChanged = (params) => {
-    console.log(params.api.getSortModel());
     // TODO change to different store
     // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
   };

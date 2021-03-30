@@ -149,7 +149,6 @@ export class AlarmsComponent implements OnInit {
         that.requestModel.endTime = that.form.get(that.endTimeProperty).value;
 
         that.requestModel.sort = that.getSort(paramsRow.request.sortModel);
-        console.log('sort', that.requestModel.sort);
 
         if (!that.requestModel.startTime || !that.requestModel.endTime) {
           that.gridApi.hideOverlay();
@@ -183,7 +182,6 @@ export class AlarmsComponent implements OnInit {
   }
 
   getSort(sortModel: any[]): IActionSortParams[] {
-    console.log('current sortModel', sortModel);
     if (!sortModel || sortModel.length === 0) {
       return null;
     }
