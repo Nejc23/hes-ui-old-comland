@@ -201,7 +201,9 @@ export class MeterUnitsService {
       manufacturer: payload.manufacturer?.id,
       ip: payload.ip,
       port: payload.port,
-      isGateWay: payload.isGateway
+      isGateWay: payload.isGateWay,
+      serialNumber: payload.serialNumber,
+      templateId: payload.template.id
     };
 
     if (payload.communicationType) {
@@ -245,9 +247,9 @@ export class MeterUnitsService {
   }
 
   updateMuRequest(deviceId: string, payload: MuUpdateRequest): HttpRequest<any> {
-    return new HttpRequest('POST', `${muUpdate}/${deviceId}`, payload as any);
+    return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
   }
-  a;
+
   getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {
     const pageSize = param.endRow - param.startRow;
     const requestParam: IActionRequestParams = {
