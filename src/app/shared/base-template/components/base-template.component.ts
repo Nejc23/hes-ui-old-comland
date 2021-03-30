@@ -77,8 +77,6 @@ export class BaseTemplateComponent implements OnInit {
       }
     };
 
-    console.log('baseTemplate constructor', this.app);
-
     this.getScreenSize();
 
     // this.form = this.createForm();

@@ -97,8 +97,6 @@ export class AddDcuFormComponent implements OnInit {
       manufacturer: this.form.get(this.vendorProperty).value
     };
 
-    console.log('manufacturer from form.get()', this.form.get(this.vendorProperty));
-
     if (this.credentialsVisible) {
       formData.userName = this.form.get(this.userNameProperty).value;
       formData.password = this.form.get(this.passwordProperty).value;
@@ -141,7 +139,6 @@ export class AddDcuFormComponent implements OnInit {
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
-          console.log('result', result);
           if (result) {
             this.eventService.addNewDcuToList(this.prepareAddedDcu(result));
 

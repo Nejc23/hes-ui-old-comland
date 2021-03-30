@@ -48,13 +48,10 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   }
 
   public valueChange(value: any): void {
-    console.log('valueChange', value);
     this.selectedValueChanged.emit(value);
   }
 
-  public selectionChange(value: any): void {
-    console.log('selectionChange', value);
-  }
+  public selectionChange(value: any): void {}
 
   get formControlValue(): number | string {
     return this.form.get(this.property).value;

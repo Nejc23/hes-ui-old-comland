@@ -122,6 +122,5 @@ export class SaveViewFormComponent implements OnInit {
     this.dcuService.deleteDcuLayout(this.data[filterIdx].id);
     this.data.splice(filterIdx, 1);
     this.dcuLayouts$ = of(this.data);
-    console.log('Delete clicked!');
   }
 }

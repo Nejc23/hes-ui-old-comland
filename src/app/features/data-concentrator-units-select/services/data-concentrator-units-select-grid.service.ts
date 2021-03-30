@@ -224,11 +224,9 @@ export class DataConcentratorUnitsSelectGridService {
 
   // remove selected rows
   public setSessionSettingsRemoveSelectedRow(concentratorId: string) {
-    console.log('setSessionSettingsRemoveSelectedRow', concentratorId);
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (_.find(settings.selectedRows, (x) => x === concentratorId)) {
       settings.selectedRows = settings.selectedRows.filter((x) => x !== concentratorId);
-      console.log('selectedRows', settings.selectedRows);
       this.gridSettingsSessionStoreService.setGridSettings(
         this.sessionNameForGridState,
         GridSettingsSessionStoreTypeEnum.selectedRows,

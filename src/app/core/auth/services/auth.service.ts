@@ -111,7 +111,7 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    console.log(`Is user authenticated?`, this.user);
+    // console.log(`Is user authenticated?`, this.user);
     return this.user != null;
   }
 
@@ -129,6 +129,14 @@ export class AuthService {
   }
 
   saveTokenAndSetUserRights2(authenticatedUser: User, isDevelop: string) {
+    let userInitials = '';
+    if (authenticatedUser.profile.given_name.length > 0 && authenticatedUser.profile.family_name.length > 0) {
+      userInitials = authenticatedUser.profile.given_name.substr(0, 1) + authenticatedUser.profile.family_name.substr(0, 1);
+    } else {
+      userInitials = authenticatedUser.profile.name.substr(0, 2);
+    }
+    userInitials = userInitials.toUpperCase();
+
     localStorage.clear();
     localStorage.setItem('type_token', 'Bearer');
     localStorage.setItem('auth_token', authenticatedUser.id_token);
@@ -137,10 +145,7 @@ export class AuthService {
     // localStorage.setItem('user_fullName', authenticatedUser.firstName + ' ' + authenticatedUser.lastName);
     if (authenticatedUser != null && authenticatedUser.profile != null) {
       localStorage.setItem('user_fullName', authenticatedUser.profile.given_name + ' ' + authenticatedUser.profile.family_name);
-      localStorage.setItem(
-        'user_initials',
-        authenticatedUser.profile.given_name.substr(0, 1) + authenticatedUser.profile.family_name.substr(0, 1)
-      );
+      localStorage.setItem('user_initials', userInitials);
 
       localStorage.setItem('user_company', authenticatedUser.profile.company_name);
       localStorage.setItem('user_email', authenticatedUser.profile.name);

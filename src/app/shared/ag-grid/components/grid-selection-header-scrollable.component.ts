@@ -35,9 +35,6 @@ export class GridSelectionHeaderScrollableComponent implements IHeaderAngularCom
         const startRow = this.params.api.getFirstDisplayedRow();
         const endRow = this.params.api.getLastDisplayedRow();
 
-        console.log('serviceSubscription2: startRow', startRow);
-        console.log('serviceSubscription2: endRow', endRow);
-
         const selectedAll = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll;
         this.isDisabled = selectedAll != null && selectedAll ? selectedAll : false;
         if (selectedAll) {
@@ -66,11 +63,6 @@ export class GridSelectionHeaderScrollableComponent implements IHeaderAngularCom
 
     const startRow = this.params.api.getFirstDisplayedRow();
     const endRow = this.params.api.getLastDisplayedRow();
-
-    console.log('checkHeaderChangedValue: startRow', startRow);
-    console.log('checkHeaderChangedValue: endRow', endRow);
-
-    console.log('this.params.api', this.params.api);
 
     this.params.api.forEachNode((node) => {
       // if (node.rowIndex >= startRow && node.rowIndex <= endRow) {

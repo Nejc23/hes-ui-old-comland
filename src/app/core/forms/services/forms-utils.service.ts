@@ -22,7 +22,6 @@ export class FormsUtilsService {
   };
 
   saveForm<T>(form: FormGroup, request: Observable<T>, successMessage: string): Observable<T> {
-    console.log('saveForm form', form);
     const throwErrorOrMakeRequest = (formValid: boolean) => {
       if (!formValid) {
         console.log('invalid form=', form);

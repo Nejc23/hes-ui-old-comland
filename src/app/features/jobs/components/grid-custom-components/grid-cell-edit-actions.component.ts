@@ -73,7 +73,6 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   }
 
   editJob(params: any) {
-    console.log('editJob params', params);
     const options: NgbModalOptions = {
       size: 'xl'
     };

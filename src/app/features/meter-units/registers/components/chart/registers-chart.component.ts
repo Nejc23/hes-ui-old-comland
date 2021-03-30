@@ -25,8 +25,4 @@ export class RegistersChartComponent {
   getDateWithTime(dateTime: any) {
     return dateTime ? this.intl.formatDate(dateTime, environment.dateTimeFormat) : '';
   }
-
-  logDataItem(item) {
-    console.log('logDataItem:', item);
-  }
 }
