@@ -1,3 +1,4 @@
+import { GridSortParams } from './../../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridUtils } from './../../../global/grid.utils';
 import { AlarmingService } from './../../../../core/repository/services/alarming/alarming.service';
 import { IActionRequestParamsAlarms, IActionSortParams } from './../../../../core/repository/interfaces/myGridLink/action-prams.interface';
@@ -133,6 +134,9 @@ export class AlarmsComponent implements OnInit {
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+
+    this.gridApi.setSortModel([{ colId: 'alarmTimestamp', sort: 'desc' }]);
+
     this.setGridDataSource();
   }
 
