@@ -8,7 +8,7 @@ import { InstantValue } from 'src/app/core/repository/interfaces/meter-units/ins
 export class PopoverInstantValuesComponent implements OnInit {
   @Input() defaultItemCount = 5;
   @Input() inputInstantValues: InstantValue[];
-  @Input() selectedValue: number;
+  @Input() selectedValue: string;
   @Input() titleClass: string;
 
   instantValues: InstantValue[];
