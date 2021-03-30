@@ -107,25 +107,21 @@ export class AddMuFormComponent implements OnInit {
         }
       });
 
-    if (!this.isEditMu) {
-      this.autoTemplateService.getTemplates().subscribe((temps) => {
-        this.templates = temps
-          .map((t) => {
-            return { id: t.templateId, value: t.name };
-          })
-          .sort((a, b) => {
-            return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
-          });
+    this.autoTemplateService.getTemplates().subscribe((temps) => {
+      this.templates = temps
+        .map((t) => {
+          return { id: t.templateId, value: t.name };
+        })
+        .sort((a, b) => {
+          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+        });
 
-        if (this.isEditMu) {
-          const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
-          this.form.get(this.templateProperty).setValue(template);
-          this.isTemplateSelected = template && template.id ? true : false;
-        }
-      });
-    } else {
-      this.isTemplateSelected = true;
-    }
+      if (this.isEditMu) {
+        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
+        this.form.get(this.templateProperty).setValue(template);
+        this.isTemplateSelected = template && template.id ? true : false;
+      }
+    });
   }
 
   get nameProperty() {
@@ -632,12 +628,16 @@ export class AddMuFormComponent implements OnInit {
       manufacturer: this.form.get(this.manufacturerProperty).value,
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
-      isGateway: this.form.get(this.isGatewayProperty).value,
+      isGateWay: this.form.get(this.isGatewayProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value,
       communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
       advancedInformation,
       wrapperInformation,
-      hdlcInformation
+      hdlcInformation,
+
+      serialNumber: this.editMu.serialNumber,
+      template: this.form.get(this.templateProperty).value,
+      connectionType: this.form.get(this.connectionTypeProperty).value
     };
   }
 

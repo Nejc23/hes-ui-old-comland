@@ -12,4 +12,7 @@ export interface MuUpdateRequest {
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
   advancedInformation?: MuAdvancedInformation;
+
+  serialNumber: string;
+  templateId: number;
 }

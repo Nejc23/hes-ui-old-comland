@@ -141,7 +141,7 @@ export class MeterUnitInterceptor {
   }
 
   static canInterceptUpdateMuPost(request: HttpRequest<any>): boolean {
-    return new RegExp(muUpdate + `/`).test(request.url) && request.method.endsWith('POST');
+    return new RegExp(muUpdate + `/`).test(request.url) && request.method.endsWith('PUT');
   }
 
   static interceptUpdateMuPost(request: HttpRequest<any>): Observable<HttpEvent<string>> {
