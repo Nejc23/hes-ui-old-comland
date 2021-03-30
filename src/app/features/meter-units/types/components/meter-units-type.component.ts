@@ -206,6 +206,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
           this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
           this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
+          this.requestModel.filterModel.protocol = event.protocolFilter;
+          this.requestModel.filterModel.medium = event.mediumFilter;
+
           this.gridColumnApi.setColumnState(event.gridLayout);
           this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
           this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
@@ -446,7 +449,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.disconnectorState[0].id === 0) &&
         (!this.requestModel.filterModel.showOptionFilter ||
           this.requestModel.filterModel.showOptionFilter.length === 0 ||
-          this.requestModel.filterModel.showOptionFilter[0].id ===
+          this.requestModel.filterModel.showOptionFilter[0].id === 0) &&
+        (!this.requestModel.filterModel.protocol || this.requestModel.filterModel.protocol.length === 0) &&
+        (!this.requestModel.filterModel.medium ||
+          this.requestModel.filterModel.medium.length ===
             0)) /*
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showWithoutTemplate &&
@@ -539,7 +545,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       filterInfo.firmwareFilter && filterInfo.firmwareFilter.length > 0,
       filterInfo.breakerStateFilter && filterInfo.breakerStateFilter.length > 0,
       filterInfo.ciiStateFilter && filterInfo.ciiStateFilter.length > 0,
-      filterInfo.showOptionFilter && filterInfo.showOptionFilter.length > 0
+      filterInfo.showOptionFilter && filterInfo.showOptionFilter.length > 0,
+      filterInfo.protocolFilter && filterInfo.protocolFilter.length > 0,
+      filterInfo.mediumFilter && filterInfo.mediumFilter.length > 0
     );
   }
 

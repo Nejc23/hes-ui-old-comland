@@ -637,7 +637,8 @@ export class AddMuFormComponent implements OnInit {
 
       serialNumber: this.editMu.serialNumber,
       template: this.form.get(this.templateProperty).value,
-      connectionType: this.form.get(this.connectionTypeProperty).value
+      connectionType: this.form.get(this.connectionTypeProperty).value,
+      protocol: this.isNewOrProtocolDlms ? 2 : 0
     };
   }
 

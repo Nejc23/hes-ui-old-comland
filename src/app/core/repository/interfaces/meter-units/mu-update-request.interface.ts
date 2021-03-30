@@ -15,4 +15,6 @@ export interface MuUpdateRequest {
 
   serialNumber: string;
   templateId: number;
+  interfaceType: number;
+  protocol: number;
 }

@@ -203,7 +203,9 @@ export class MeterUnitsService {
       port: payload.port,
       isGateWay: payload.isGateWay,
       serialNumber: payload.serialNumber,
-      templateId: payload.template.id
+      templateId: payload.template.id,
+      interfaceType: payload.communicationType,
+      protocol: payload.protocol
     };
 
     if (payload.communicationType) {

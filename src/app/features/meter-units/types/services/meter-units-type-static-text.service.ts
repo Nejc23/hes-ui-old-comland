@@ -46,11 +46,14 @@ export class MeterUnitsTypeStaticTextService {
     firmware: boolean,
     disconnectorState: boolean,
     ciiState: boolean,
-    showOptionFilter: boolean
+    showOptionFilter: boolean,
+    protocol: boolean,
+    medium: boolean
     // showChildMBus: boolean,
     // showWithoutTemplate: boolean,
     // showOnlyReadyForActivation: boolean
   ): FiltersInfo {
+    const separator = ', ';
     const result: FiltersInfo = {
       isSet: false,
       count: 0,
@@ -60,9 +63,22 @@ export class MeterUnitsTypeStaticTextService {
     let additionalString = '';
     if (filterName !== '' && filterName !== undefined) {
       additionalString =
-        status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ' · ' : '';
+        status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter || protocol || medium
+          ? ' · '
+          : '';
       result.text = filterName + additionalString;
-    } else if (status || vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter) {
+    } else if (
+      status ||
+      vendor ||
+      tag ||
+      readStatuses ||
+      firmware ||
+      disconnectorState ||
+      ciiState ||
+      showOptionFilter ||
+      protocol ||
+      medium
+    ) {
       result.text = '';
     }
 
@@ -75,59 +91,68 @@ export class MeterUnitsTypeStaticTextService {
       firmware ||
       disconnectorState ||
       ciiState ||
-      showOptionFilter
+      showOptionFilter ||
+      protocol ||
+      medium
     ) {
       result.text += $localize`Filtered by: `;
     }
 
     if (status) {
-      additionalString = vendor || tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
-      result.text += $localize`status` + additionalString;
+      result.text += $localize`status` + separator;
+      result.count++;
+    }
+
+    if (protocol) {
+      result.text += $localize`protocol` + separator;
       result.count++;
     }
 
     if (vendor) {
-      additionalString = tag || readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
-      result.text += $localize`vendor` + additionalString;
+      result.text += $localize`vendor` + separator;
+      result.count++;
+    }
+
+    if (medium) {
+      result.text += $localize`medium` + separator;
       result.count++;
     }
 
     if (tag) {
-      additionalString = readStatuses || firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
-      result.text += $localize`tag` + additionalString;
+      result.text += $localize`tag` + separator;
       result.count++;
     }
 
     if (readStatuses) {
-      additionalString = firmware || disconnectorState || ciiState || showOptionFilter ? ', ' : '';
-      result.text += $localize`read status` + additionalString;
+      result.text += $localize`read status` + separator;
       result.count++;
     }
 
     if (firmware) {
-      additionalString = disconnectorState || ciiState || showOptionFilter ? ', ' : '';
-      result.text += $localize`firmware` + additionalString;
+      result.text += $localize`firmware` + separator;
       result.count++;
     }
 
     if (disconnectorState) {
-      additionalString = ciiState || showOptionFilter ? ', ' : '';
-      result.text += $localize`disconnector state` + additionalString;
+      result.text += $localize`disconnector state` + separator;
       result.count++;
     }
 
     if (ciiState) {
-      additionalString = showOptionFilter ? ', ' : '';
-      result.text += $localize`CII state` + additionalString;
+      result.text += $localize`CII state` + separator;
       result.count++;
     }
 
     if (showOptionFilter) {
-      result.text += $localize`show option`;
+      result.text += $localize`show option` + separator;
       result.count++;
     }
 
-    result.isSet = result.count > 0;
+    result.isSet = false;
+    if (result.count > 0) {
+      result.text = result.text.replace(/\,\s$/, '');
+      result.isSet = true;
+    }
 
     return result;
   }
