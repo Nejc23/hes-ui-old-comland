@@ -99,7 +99,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 1 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 1,
+            value: '1',
             interpretedValue: 'Connected',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           },
@@ -107,7 +107,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 2 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 0,
+            value: '0',
             interpretedValue: 'Disconnected',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           }
@@ -147,7 +147,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 1 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 1,
+            value: '1',
             interpretedValue: 'Connected',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           },
@@ -155,7 +155,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 2 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 0,
+            value: '0',
             interpretedValue: 'Disconnected',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           },
@@ -163,7 +163,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 4 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 2,
+            value: '2',
             interpretedValue: 'ReadyForReconnection',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
           },
@@ -171,7 +171,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 5 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 2,
+            value: '2',
             interpretedValue: 'ReadyForReconnection',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
           },
@@ -179,7 +179,7 @@ describe('Pact consumer test', () => {
             registerName: 'Relay 6 state',
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
-            value: 2,
+            value: '2',
             interpretedValue: 'ReadyForReconnection',
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
           }

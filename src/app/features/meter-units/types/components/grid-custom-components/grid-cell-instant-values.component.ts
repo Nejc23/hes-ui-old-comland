@@ -11,7 +11,7 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
 
   public params: any;
 
-  values: number[] = [];
+  values: string[] = [];
 
   isConnectedVisible = false;
   isDisconnectedVisible = false;
@@ -21,14 +21,15 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   // called on init
   agInit(params: any): void {
     this.params = params;
-    this.values = this.params?.value?.map((v) => v.value);
-    this.values = this.values?.filter((v, i) => {
-      return this.values.indexOf(v) === i;
+
+    const valuesTmp = this.params?.value?.map((v) => v.value);
+    this.values = valuesTmp?.filter((v, i) => {
+      return valuesTmp.indexOf(v) === i;
     });
 
-    this.isConnectedVisible = this.values?.some((v) => v === 1);
-    this.isReadyForReconnectionVisible = this.values?.some((v) => v === 2);
-    this.isDisconnectedVisible = this.values?.some((v) => v === 0);
+    this.isConnectedVisible = this.values?.some((v) => v === '1');
+    this.isReadyForReconnectionVisible = this.values?.some((v) => v === '2');
+    this.isDisconnectedVisible = this.values?.some((v) => v === '0');
   }
 
   // called when the cell is refreshed
@@ -41,11 +42,11 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
     return this.params?.value?.filter((v) => v.value === value)?.length;
   }
 
-  getBadgeClass(selectedValue: number) {
+  getBadgeClass(selectedValue: string) {
     let badgeClass = 'badge-success';
-    if (selectedValue === 0) {
+    if (selectedValue === '0') {
       badgeClass = 'badge-dark';
-    } else if (selectedValue === 2) {
+    } else if (selectedValue === '2') {
       badgeClass = 'badge-info';
     }
 

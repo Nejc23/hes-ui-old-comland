@@ -1,4 +1,4 @@
-<div class="d-flex flex-row grid-cell-link-popup" *ngIf="params.values" >
+<div class="d-flex flex-row grid-cell-link-popup" *ngIf="params.value" >
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isConnectedVisible">
     <a class="badge {{ getBadgeClass(1) }} px-2"
       container="body" placement="bottom"
@@ -7,7 +7,7 @@
       [autoClose]="'outside'"
       popoverClass="instant-values-popover"
       href="javascript:void(0);"
-    >{{ getValuesCount(1) }}</a>
+    >{{ getValuesCount('1') }}</a>
   </div>
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isReadyForReconnectionVisible">
     <a class="badge {{ getBadgeClass(2) }} px-2"
@@ -17,7 +17,7 @@
       [autoClose]="'outside'"
       popoverClass="instant-values-popover"
       href="javascript:void(0);"
-    >{{ getValuesCount(2) }}</a>
+    >{{ getValuesCount('2') }}</a>
   </div>
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isDisconnectedVisible">
     <a class="badge {{ getBadgeClass(0) }} px-2"
@@ -27,20 +27,20 @@
       [autoClose]="'outside'"
       popoverClass="instant-values-popover"
       href="javascript:void(0);"
-    >{{ getValuesCount(0) }}</a>
+    >{{ getValuesCount('0') }}</a>
   </div>
 </div>
 
-<span *ngIf="!params.values" class="text-muted">{{notAvailableText}}</span>
+<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
 
 <ng-template #contentForValue1 id="contentForValue1">
-  <app-popover-instant-values [selectedValue]="1" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(1)"></app-popover-instant-values>
+  <app-popover-instant-values [selectedValue]="'1'" [inputInstantValues]="params.value" [titleClass]="getBadgeClass('1')"></app-popover-instant-values>
 </ng-template>
 
 <ng-template #contentForValue2 id="contentForValue2">
-  <app-popover-instant-values [selectedValue]="2" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(2)"></app-popover-instant-values>
+  <app-popover-instant-values [selectedValue]="'2'" [inputInstantValues]="params.value" [titleClass]="getBadgeClass('2')"></app-popover-instant-values>
 </ng-template>
 
 <ng-template #contentForValue0 id="contentForValue0">
-  <app-popover-instant-values [selectedValue]="0" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(0)"></app-popover-instant-values>
+  <app-popover-instant-values [selectedValue]="'0'" [inputInstantValues]="params.value" [titleClass]="getBadgeClass('0')"></app-popover-instant-values>
 </ng-template>

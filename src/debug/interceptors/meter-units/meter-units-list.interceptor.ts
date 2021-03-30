@@ -118,7 +118,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
@@ -126,7 +126,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 2 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 0,
+          value: '0',
           interpretedValue: 'Disconnected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
@@ -134,7 +134,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 4 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
@@ -142,7 +142,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 5 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
@@ -150,7 +150,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 6 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
         },
@@ -158,7 +158,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 7 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
         },
@@ -166,7 +166,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 8 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
         },
@@ -174,7 +174,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 9 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
         }
@@ -214,7 +214,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
@@ -222,7 +222,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 2 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 0,
+          value: '0',
           interpretedValue: 'Disconnected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
@@ -230,7 +230,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 4 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
@@ -238,7 +238,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 5 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
@@ -246,7 +246,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 6 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         }
@@ -286,7 +286,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
@@ -294,7 +294,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 8 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
         },
@@ -302,7 +302,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 7 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
         },
@@ -310,7 +310,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 2 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 0,
+          value: '0',
           interpretedValue: 'Disconnected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
         },
@@ -318,7 +318,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 4 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
         },
@@ -326,7 +326,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 5 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b066'
         },
@@ -334,7 +334,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 6 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b067'
         }
@@ -374,7 +374,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
@@ -382,7 +382,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 8 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
         },
@@ -390,7 +390,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 7 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
         },
@@ -398,7 +398,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 2 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 0,
+          value: '0',
           interpretedValue: 'Disconnected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
         },
@@ -406,7 +406,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 4 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
         },
@@ -414,7 +414,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 5 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b066'
         },
@@ -422,7 +422,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 6 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForReconnection',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b067'
         }
@@ -492,7 +492,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 1,
+          value: '1',
           interpretedValue: 'Connected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
@@ -532,7 +532,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 0,
+          value: '0',
           interpretedValue: 'Disconnected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
@@ -572,7 +572,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadForActivation',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
@@ -612,7 +612,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 0,
+          value: '0',
           interpretedValue: 'Disconnected',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
@@ -620,7 +620,7 @@ function setData(): MeterUnitsList[] {
           registerName: 'Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state Relay 1 state',
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
-          value: 2,
+          value: '2',
           interpretedValue: 'ReadyForActivation',
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
