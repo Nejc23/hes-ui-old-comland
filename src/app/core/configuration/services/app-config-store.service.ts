@@ -14,6 +14,7 @@ export class AppConfigStoreService extends Store<IAppConfig> {
       apiServer: { url: null },
       identityServer: {
         stsAuthority: null,
+        stsAuthorityWeb: null,
         clientId: null,
         clientRoot: null,
         clientScope: null,

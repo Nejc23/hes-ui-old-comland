@@ -46,22 +46,20 @@ export class AuthService {
   ) {
     this.configStoreService.configObservable.subscribe((appConfig) => {
       const settings = {
-        authority: appConfig.identityServer.stsAuthority, // environment.stsAuthority,
-        client_id: appConfig.identityServer.clientId, // environment.clientId,
+        authority: appConfig.identityServer.stsAuthority,
+        client_id: appConfig.identityServer.clientId,
         redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html` // ${environment.clientRoot}
-          : `${appConfig.identityServer.clientRoot}${locale}/assets/signin-callback.html`, // mora biti enak url kot je v identity "Client Redirect Uris"
+          ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html`
+          : `${appConfig.identityServer.clientRoot}${locale}/assets/signin-callback.html`,
         silent_redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}assets/silent-callback.html`
           : `${appConfig.identityServer.clientRoot}${locale}/assets/silent-callback.html`,
         post_logout_redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}`
-          : `${appConfig.identityServer.clientRoot}${locale}`, // mora biti enak url kot je v identity "Client Post Logout Redirect Uris"
-        response_type: 'id_token token', // !!! bilo je "id_token token",  pobrisal sem token sicer ne dela, verjetno je tako nastavljen server !!!
-        scope: appConfig.identityServer.clientScope, // environment.clientScope,
-        automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew // environment.clientAutoSilentRenew
-        // accessTokenLifetime: 7200,
-        // identityTokenLifetime:7200
+          : `${appConfig.identityServer.clientRoot}${locale}`,
+        response_type: 'id_token token',
+        scope: appConfig.identityServer.clientScope,
+        automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew
       };
       this.userManager = new UserManager(settings);
     });

@@ -6,7 +6,6 @@ import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from './core/auth/services/auth.service';
 import { IntlService, CldrIntlService } from '@progress/kendo-angular-intl';
 import { SidebarService } from './core/base-template/services/sidebar.service';
-import { PermissionsStoreService } from './core/permissions/services/permissions-store.service';
 import { SidebarItem } from './shared/base-template/interfaces/sidebar-item.interface';
 import { Router } from '@angular/router';
 import { PermissionService } from './core/permissions/services/permission.service';
@@ -38,7 +37,6 @@ export class AppComponent implements OnInit {
     this.authService
       .getUser()
       .then((user) => {
-        //  this.currentUser = user;
         this.authService.user = user;
         if (user) {
           this.authService.saveTokenAndSetUserRights2(user, '');

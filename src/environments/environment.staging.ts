@@ -21,9 +21,8 @@ export const environment = {
   // identitiy settings
   // stsAuthority: 'http://89.212.201.202:8081/',
   // clientId: 'ePoint4-staging', // 'ePoint3'
-  ignoreLocale: false,
+  ignoreLocale: false
   // clientRoot: 'http://localhost/', // 'http://localhost/',//'http://advance-hes.azurewebsites.net/',
   // clientScope: 'openid profile roles offline_access company',
   // clientAutoSilentRenew: true
-  sidebarAdministrationUsersUrl: 'http://89.212.201.202:8080/Users'
 };

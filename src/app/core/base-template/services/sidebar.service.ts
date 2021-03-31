@@ -1,18 +1,21 @@
 import { Injectable } from '@angular/core';
-import { FunctionalityEnumerator } from '../../../core/permissions/enumerators/functionality-enumerator.model';
 import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
-import { environment } from 'src/environments/environment';
 import { PermissionEnumerator } from '../../permissions/enumerators/permission-enumerator.model';
+import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
+  private stsAuthorityUsers: string;
   public headerTitle = '';
 
-  constructor() {
+  constructor(private configStoreService: AppConfigStoreService) {
+    console.log('SIDEBARSERVICE');
+    this.stsAuthorityUsers = this.configStoreService.state.identityServer.stsAuthorityWeb;
+
     this.sidebarItems = [
       {
         title: $localize`Data Concentrator Units`,
@@ -93,7 +96,7 @@ export class SidebarService {
         children: [
           {
             title: $localize`Users`,
-            routeLink: environment.sidebarAdministrationUsersUrl,
+            routeLink: this.stsAuthorityUsers,
             openInNewTab: true,
             isRouteAbsolute: true,
             hasChildren: false,

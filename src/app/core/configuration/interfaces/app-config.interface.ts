@@ -4,6 +4,7 @@ export interface IAppConfig {
   };
   identityServer: {
     stsAuthority: string;
+    stsAuthorityWeb: string;
     clientId: string;
     clientRoot: string;
     clientScope: string;
