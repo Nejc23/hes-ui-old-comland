@@ -1,3 +1,4 @@
+import { InstantValues } from './../../consts/meter-units.consts';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
@@ -9,6 +10,7 @@ import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type
 export class GridCellInstantValuesComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst;
 
+  instantValues = InstantValues;
   public params: any;
 
   values: string[] = [];
@@ -21,15 +23,16 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   // called on init
   agInit(params: any): void {
     this.params = params;
+    console.log('this.params.value', this.params.value);
 
     const valuesTmp = this.params?.value?.map((v) => v.value);
     this.values = valuesTmp?.filter((v, i) => {
       return valuesTmp.indexOf(v) === i;
     });
 
-    this.isConnectedVisible = this.values?.some((v) => v === '1');
-    this.isReadyForReconnectionVisible = this.values?.some((v) => v === '2');
-    this.isDisconnectedVisible = this.values?.some((v) => v === '0');
+    this.isConnectedVisible = this.values?.some((v) => v === InstantValues.connected);
+    this.isReadyForReconnectionVisible = this.values?.some((v) => v === InstantValues.readyForConnection);
+    this.isDisconnectedVisible = this.values?.some((v) => v === InstantValues.disconnected);
   }
 
   // called when the cell is refreshed
@@ -44,12 +47,16 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
 
   getBadgeClass(selectedValue: string) {
     let badgeClass = 'badge-success';
-    if (selectedValue === '0') {
+    if (selectedValue === InstantValues.disconnected) {
       badgeClass = 'badge-dark';
-    } else if (selectedValue === '2') {
+    } else if (selectedValue === InstantValues.readyForConnection) {
       badgeClass = 'badge-info';
     }
 
     return badgeClass;
+  }
+
+  areValuesEmpty() {
+    return !this.params.value || this.params.value.length === 0;
   }
 }

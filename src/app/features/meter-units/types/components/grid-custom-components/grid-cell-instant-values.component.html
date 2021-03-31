@@ -1,46 +1,46 @@
-<div class="d-flex flex-row grid-cell-link-popup" *ngIf="params.value" >
+<div class="d-flex flex-row grid-cell-link-popup" *ngIf="!areValuesEmpty()" >
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isConnectedVisible">
-    <a class="badge {{ getBadgeClass(1) }} px-2"
+    <a class="badge {{ getBadgeClass(instantValues.connected) }} px-2"
       container="body" placement="bottom"
       [placement]="['right-top']"
       [ngbPopover]="contentForValue1"
       [autoClose]="'outside'"
       popoverClass="instant-values-popover"
       href="javascript:void(0);"
-    >{{ getValuesCount('1') }}</a>
+    >{{ getValuesCount(instantValues.connected) }}</a>
   </div>
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isReadyForReconnectionVisible">
-    <a class="badge {{ getBadgeClass(2) }} px-2"
+    <a class="badge {{ getBadgeClass(instantValues.readyForConnection) }} px-2"
       container="body" placement="bottom"
       [placement]="['right-top']"
       [ngbPopover]="contentForValue2"
       [autoClose]="'outside'"
       popoverClass="instant-values-popover"
       href="javascript:void(0);"
-    >{{ getValuesCount('2') }}</a>
+    >{{ getValuesCount(instantValues.readyForConnection) }}</a>
   </div>
   <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isDisconnectedVisible">
-    <a class="badge {{ getBadgeClass(0) }} px-2"
+    <a class="badge {{ getBadgeClass(instantValues.disconnected) }} px-2"
       container="body" placement="bottom"
       [placement]="['right-top']"
       [ngbPopover]="contentForValue0"
       [autoClose]="'outside'"
       popoverClass="instant-values-popover"
       href="javascript:void(0);"
-    >{{ getValuesCount('0') }}</a>
+    >{{ getValuesCount(instantValues.disconnected) }}</a>
   </div>
 </div>
 
-<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
+<span *ngIf="areValuesEmpty()" class="text-muted">{{notAvailableText}}</span>
 
 <ng-template #contentForValue1 id="contentForValue1">
-  <app-popover-instant-values [selectedValue]="'1'" [inputInstantValues]="params.value" [titleClass]="getBadgeClass('1')"></app-popover-instant-values>
+  <app-popover-instant-values [selectedValue]="instantValues.connected" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(instantValues.connected)"></app-popover-instant-values>
 </ng-template>
 
 <ng-template #contentForValue2 id="contentForValue2">
-  <app-popover-instant-values [selectedValue]="'2'" [inputInstantValues]="params.value" [titleClass]="getBadgeClass('2')"></app-popover-instant-values>
+  <app-popover-instant-values [selectedValue]="instantValues.readyForConnection" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(instantValues.readyForConnection)"></app-popover-instant-values>
 </ng-template>
 
 <ng-template #contentForValue0 id="contentForValue0">
-  <app-popover-instant-values [selectedValue]="'0'" [inputInstantValues]="params.value" [titleClass]="getBadgeClass('0')"></app-popover-instant-values>
+  <app-popover-instant-values [selectedValue]="instantValues.disconnected" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(instantValues.disconnected)"></app-popover-instant-values>
 </ng-template>
