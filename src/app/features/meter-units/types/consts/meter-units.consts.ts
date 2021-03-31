@@ -10,3 +10,9 @@ export const jobStatus = {
   success: 'success',
   failed: 'failed'
 };
+
+export const InstantValues = {
+  connected: '1',
+  readyForConnection: '2',
+  disconnected: '0'
+};
