@@ -46,14 +46,13 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   }
 
   getBadgeClass(selectedValue: string) {
-    let badgeClass = 'badge-success';
-    if (selectedValue === InstantValues.disconnected) {
-      badgeClass = 'badge-dark';
-    } else if (selectedValue === InstantValues.readyForConnection) {
-      badgeClass = 'badge-info';
-    }
+    var classes = {
+      '0': 'badge-dark',
+      '1': 'badge-success',
+      '2': 'badge-info'
+    };
 
-    return badgeClass;
+    return classes[selectedValue];
   }
 
   areValuesEmpty() {

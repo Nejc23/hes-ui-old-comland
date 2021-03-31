@@ -34,13 +34,13 @@
 <span *ngIf="areValuesEmpty()" class="text-muted">{{notAvailableText}}</span>
 
 <ng-template #contentForValue1 id="contentForValue1">
-  <app-popover-instant-values [selectedValue]="instantValues.connected" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(instantValues.connected)"></app-popover-instant-values>
+  <app-popover-instant-values [inputInstantValues]="params.value"></app-popover-instant-values>
 </ng-template>
 
 <ng-template #contentForValue2 id="contentForValue2">
-  <app-popover-instant-values [selectedValue]="instantValues.readyForConnection" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(instantValues.readyForConnection)"></app-popover-instant-values>
+  <app-popover-instant-values [inputInstantValues]="params.value"></app-popover-instant-values>
 </ng-template>
 
 <ng-template #contentForValue0 id="contentForValue0">
-  <app-popover-instant-values [selectedValue]="instantValues.disconnected" [inputInstantValues]="params.value" [titleClass]="getBadgeClass(instantValues.disconnected)"></app-popover-instant-values>
+  <app-popover-instant-values [inputInstantValues]="params.value"></app-popover-instant-values>
 </ng-template>

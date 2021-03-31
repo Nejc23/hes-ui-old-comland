@@ -2550,8 +2550,16 @@
         <target>Entry is not a valid email:</target>
       </trans-unit>
       <trans-unit id="478253589858933128" datatype="html">
-        <source/>
+        <source>No filters applied</source>
         <target>No filters applied</target>
+      </trans-unit>
+      <trans-unit id="6678876227440504144" datatype="html">
+        <source/>
+        <target>protocol</target>
+      </trans-unit>
+      <trans-unit id="4688460977394283086" datatype="html">
+        <source/>
+        <target>medium</target>
       </trans-unit>
     </body>
   </file>

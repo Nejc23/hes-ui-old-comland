@@ -23,6 +23,11 @@
 // begin - Instant Values popover
 
 .instant-values-popover .form {
-  width: 150px;
+  width: 280px;
+}
+
+.instant-values-popover.bs-popover-right-top {
+  max-width: none;
+  margin-top: -3px;
 }
 // end - Instant Values popover

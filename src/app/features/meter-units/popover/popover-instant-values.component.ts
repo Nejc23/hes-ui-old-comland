@@ -8,33 +8,38 @@ import { InstantValue } from 'src/app/core/repository/interfaces/meter-units/ins
 export class PopoverInstantValuesComponent implements OnInit {
   @Input() defaultItemCount = 5;
   @Input() inputInstantValues: InstantValue[];
-  @Input() selectedValue: string;
-  @Input() titleClass: string;
 
-  instantValues: InstantValue[];
   visibleInstantValues: InstantValue[];
   isMoreButtonVisible = false;
 
   constructor() {}
 
   ngOnInit() {
-    this.instantValues = this.inputInstantValues?.filter((iv) => iv.value === this.selectedValue);
-
-    if (this.instantValues?.length > this.defaultItemCount) {
-      this.visibleInstantValues = this.instantValues.slice(0, this.defaultItemCount);
+    if (this.inputInstantValues?.length > this.defaultItemCount) {
+      this.visibleInstantValues = this.inputInstantValues.slice(0, this.defaultItemCount);
       this.isMoreButtonVisible = true;
     } else {
-      this.visibleInstantValues = this.instantValues;
+      this.visibleInstantValues = this.inputInstantValues;
       this.isMoreButtonVisible = false;
     }
   }
 
   showMore(): void {
-    this.visibleInstantValues = this.instantValues;
+    this.visibleInstantValues = this.inputInstantValues;
     this.isMoreButtonVisible = false;
   }
 
   getShowAllText(): string {
-    return `${$localize`Show all`} ${this.instantValues.length} ${$localize`relays`}`;
+    return `${$localize`Show all`} ${this.inputInstantValues.length} ${$localize`relays`}`;
+  }
+
+  getBadgeClass(selectedValue: string) {
+    var classes = {
+      '0': 'badge-dark',
+      '1': 'badge-success',
+      '2': 'badge-info'
+    };
+
+    return classes[selectedValue];
   }
 }
