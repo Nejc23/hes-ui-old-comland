@@ -361,66 +361,66 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         // that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
-        if (that.authService.isRefreshNeeded2()) {
-          that.authService
-            .renewToken()
-            .then((value) => {
-              that.authService.user = value;
-              that.authService.saveTokenAndSetUserRights2(value, '');
+        // if (that.authService.isRefreshNeeded2()) {
+        //   that.authService
+        //     .renewToken()
+        //     .then((value) => {
+        //       that.authService.user = value;
+        //       that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
-                that.gridApi.hideOverlay();
+        //       that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
+        //         that.gridApi.hideOverlay();
 
-                that.totalCount = 0;
-                if (response) {
-                  that.setTitle(response.jobDescription);
-                }
+        //         that.totalCount = 0;
+        //         if (response) {
+        //           that.setTitle(response.jobDescription);
+        //         }
 
-                if (response && response.grid && response.grid.totalCount > 0) {
-                  that.totalCount = response.grid.totalCount;
-                  that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
-                  paramsRow.successCallback(response.grid.data, response.grid.totalCount);
-                  that.selectRows(that.gridApi);
-                  that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
-                  // params.failCallback();
-                } else {
-                  if (that.noSearch() && that.noFilters()) {
-                    that.noData = true;
-                  }
-                  that.gridApi.showNoRowsOverlay();
-                }
-              });
-            })
-            .catch((err) => {
-              if (err.message === 'login_required') {
-                that.authService.login().catch((errDetail) => console.log(errDetail));
-              }
-            });
-        } else {
-          that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
-            that.gridApi.hideOverlay();
-            that.totalCount = 0;
-            if (response) {
-              that.setTitle(response.jobDescription);
-            }
+        //         if (response && response.grid && response.grid.totalCount > 0) {
+        //           that.totalCount = response.grid.totalCount;
+        //           that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
+        //           paramsRow.successCallback(response.grid.data, response.grid.totalCount);
+        //           that.selectRows(that.gridApi);
+        //           that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
+        //           // params.failCallback();
+        //         } else {
+        //           if (that.noSearch() && that.noFilters()) {
+        //             that.noData = true;
+        //           }
+        //           that.gridApi.showNoRowsOverlay();
+        //         }
+        //       });
+        //     })
+        //     .catch((err) => {
+        //       if (err.message === 'login_required') {
+        //         that.authService.login().catch((errDetail) => console.log(errDetail));
+        //       }
+        //     });
+        // } else {
+        that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
+          that.gridApi.hideOverlay();
+          that.totalCount = 0;
+          if (response) {
+            that.setTitle(response.jobDescription);
+          }
 
-            if (response && response.grid && response.grid.totalCount > 0) {
-              that.totalCount = response.grid.totalCount;
-              that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
-              paramsRow.successCallback(response.grid.data, response.grid.totalCount);
-              that.selectRows(that.gridApi);
-              that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
-              // params.failCallback();
-            } else {
-              // if (that.noSearch() && that.noFilters()) {
-              //   that.noData = true;
-              // }
+          if (response && response.grid && response.grid.totalCount > 0) {
+            that.totalCount = response.grid.totalCount;
+            that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
+            paramsRow.successCallback(response.grid.data, response.grid.totalCount);
+            that.selectRows(that.gridApi);
+            that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
+            // params.failCallback();
+          } else {
+            // if (that.noSearch() && that.noFilters()) {
+            //   that.noData = true;
+            // }
 
-              that.gridApi.showNoRowsOverlay();
-              paramsRow.successCallback([], 0);
-            }
-          });
-        }
+            that.gridApi.showNoRowsOverlay();
+            paramsRow.successCallback([], 0);
+          }
+        });
+        // }
       }
     };
     this.gridApi.setServerSideDatasource(datasource);

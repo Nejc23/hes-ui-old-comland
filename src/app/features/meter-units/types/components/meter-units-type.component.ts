@@ -1148,73 +1148,73 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           that.saveSettingsStore(that.requestModel.sortModel);
         }
 
-        if (that.authService.isRefreshNeeded2()) {
-          that.authService
-            .renewToken()
-            .then((value) => {
-              that.authService.user = value;
-              that.authService.saveTokenAndSetUserRights2(value, '');
+        // if (that.authService.isRefreshNeeded2()) {
+        //   that.authService
+        //     .renewToken()
+        //     .then((value) => {
+        //       that.authService.user = value;
+        //       that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.meterUnitsTypeService
-                .getGridMeterUnitsForm(
-                  that.requestModel,
-                  that.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
-                  displayedColumnsNames
-                )
-                .subscribe((data) => {
-                  that.gridApi.hideOverlay();
-                  if (data === undefined || data == null || data.totalCount === 0) {
-                    // that.totalCount = 0;
-                    that.gridApi.showNoRowsOverlay();
-                    that.noData = false;
-                  } else {
-                    that.totalCount = data.totalCount;
-                    // that.noData = false;
-                  }
+        //       that.meterUnitsTypeService
+        //         .getGridMeterUnitsForm(
+        //           that.requestModel,
+        //           that.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
+        //           displayedColumnsNames
+        //         )
+        //         .subscribe((data) => {
+        //           that.gridApi.hideOverlay();
+        //           if (data === undefined || data == null || data.totalCount === 0) {
+        //             // that.totalCount = 0;
+        //             that.gridApi.showNoRowsOverlay();
+        //             that.noData = false;
+        //           } else {
+        //             that.totalCount = data.totalCount;
+        //             // that.noData = false;
+        //           }
 
-                  paramsRow.successCallback(data ? data.data : [], that.totalCount);
+        //           paramsRow.successCallback(data ? data.data : [], that.totalCount);
 
-                  that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-                  that.selectRows(that.gridApi);
-                  // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-                  // params.failCallback();
+        //           that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+        //           that.selectRows(that.gridApi);
+        //           // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+        //           // params.failCallback();
 
-                  that.isGridLoaded = true;
-                  that.resizeColumns();
-                });
-            })
-            .catch((err) => {
-              if (err.message === 'login_required') {
-                that.authService.login().catch((errDetail) => console.log(errDetail));
-              }
-            });
-        } else {
-          that.meterUnitsTypeService
-            .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
-            .subscribe((data) => {
-              that.gridApi.hideOverlay();
+        //           that.isGridLoaded = true;
+        //           that.resizeColumns();
+        //         });
+        //     })
+        //     .catch((err) => {
+        //       if (err.message === 'login_required') {
+        //         that.authService.login().catch((errDetail) => console.log(errDetail));
+        //       }
+        //     });
+        // } else {
+        that.meterUnitsTypeService
+          .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
+          .subscribe((data) => {
+            that.gridApi.hideOverlay();
 
-              if (data === undefined || data == null || data.totalCount === 0) {
-                that.totalCount = 0;
-                // that.noData = true;
-                that.gridApi.showNoRowsOverlay();
-              } else {
-                that.totalCount = data.totalCount;
-                // that.noData = false;
-              }
+            if (data === undefined || data == null || data.totalCount === 0) {
+              that.totalCount = 0;
+              // that.noData = true;
+              that.gridApi.showNoRowsOverlay();
+            } else {
+              that.totalCount = data.totalCount;
+              // that.noData = false;
+            }
 
-              paramsRow.successCallback(data ? data.data : [], that.totalCount);
+            paramsRow.successCallback(data ? data.data : [], that.totalCount);
 
-              that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+            that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
 
-              that.selectRows(that.gridApi);
-              // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-              // params.failCallback();
+            that.selectRows(that.gridApi);
+            // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
+            // params.failCallback();
 
-              that.isGridLoaded = true;
-              that.resizeColumns();
-            });
-        }
+            that.isGridLoaded = true;
+            that.resizeColumns();
+          });
+        // }
       }
     };
     that.gridApi.setServerSideDatasource(that.datasource);
