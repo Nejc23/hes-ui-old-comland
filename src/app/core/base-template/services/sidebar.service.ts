@@ -12,7 +12,7 @@ export class SidebarService {
   private stsAuthorityUsers: string;
   public headerTitle = '';
 
-  constructor(private configStoreService: AppConfigStoreService,) {
+  constructor(private configStoreService: AppConfigStoreService) {
     this.configStoreService.configObservable.subscribe((appConfig) => {
       this.stsAuthorityUsers = appConfig.identityServer.stsAuthorityWeb;
     });
