@@ -23,7 +23,6 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   // called on init
   agInit(params: any): void {
     this.params = params;
-    console.log('this.params.value', this.params.value);
 
     const valuesTmp = this.params?.value?.map((v) => v.value);
     this.values = valuesTmp?.filter((v, i) => {

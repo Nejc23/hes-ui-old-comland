@@ -1,7 +1,7 @@
 import { PermissionEnumerator } from './../../permissions/enumerators/permission-enumerator.model';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
-import { of, Subscription, timer } from 'rxjs';
+import { from, Observable, of, Subscription } from 'rxjs';
 import { LoginCredentials } from '../interfaces/login-credentials.interface';
 import { AuthenticatedUser } from '../interfaces/authenticated-user.interface';
 import { RefreshTokenRequest } from '../interfaces/refresh-token.interface';
@@ -86,6 +86,10 @@ export class AuthService {
 
   public renewToken(): Promise<User> {
     return this.userManager.signinSilent();
+  }
+
+  public renewToken2(): Observable<User> {
+    return from(this.userManager.signinSilent());
   }
 
   storeUser() {

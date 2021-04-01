@@ -743,68 +743,68 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           that.saveSettingsStore(that.requestModel.sortModel);
         }
 
-        if (that.authService.isRefreshNeeded2()) {
-          that.authService
-            .renewToken()
-            .then((value) => {
-              that.authService.user = value;
-              that.authService.saveTokenAndSetUserRights2(value, '');
+        // if (that.authService.isRefreshNeeded2()) {
+        //   that.authService
+        //     .renewToken()
+        //     .then((value) => {
+        //       that.authService.user = value;
+        //       that.authService.saveTokenAndSetUserRights2(value, '');
 
-              that.dataConcentratorUnitsService
-                .getGridDcuForm(
-                  that.requestModel,
-                  that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
-                  displayedColumnsNames
-                )
-                .subscribe((data) => {
-                  that.gridApi.hideOverlay();
-                  if (data === undefined || data == null || data.totalCount === 0) {
-                    that.totalCount = 0;
-                    // that.noData = true;
-                    that.gridApi.showNoRowsOverlay();
-                  } else {
-                    that.totalCount = data.totalCount;
-                    // that.noData = false;
-                  }
+        //       that.dataConcentratorUnitsService
+        //         .getGridDcuForm(
+        //           that.requestModel,
+        //           that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(),
+        //           displayedColumnsNames
+        //         )
+        //         .subscribe((data) => {
+        //           that.gridApi.hideOverlay();
+        //           if (data === undefined || data == null || data.totalCount === 0) {
+        //             that.totalCount = 0;
+        //             // that.noData = true;
+        //             that.gridApi.showNoRowsOverlay();
+        //           } else {
+        //             that.totalCount = data.totalCount;
+        //             // that.noData = false;
+        //           }
 
-                  paramsRow.successCallback(data ? data.data : [], that.totalCount);
+        //           paramsRow.successCallback(data ? data.data : [], that.totalCount);
 
-                  that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
-                  that.selectRows(that.gridApi);
-                  // params.failCallback();
-                  that.resizeColumns();
-                  that.isGridLoaded = true;
-                });
-            })
-            .catch((err) => {
-              if (err.message === 'login_required') {
-                that.authService.login().catch((errDetail) => console.log(errDetail));
-              }
-            });
-        } else {
-          that.dataConcentratorUnitsService
-            .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
-            .subscribe((data) => {
-              that.gridApi.hideOverlay();
+        //           that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+        //           that.selectRows(that.gridApi);
+        //           // params.failCallback();
+        //           that.resizeColumns();
+        //           that.isGridLoaded = true;
+        //         });
+        //     })
+        //     .catch((err) => {
+        //       if (err.message === 'login_required') {
+        //         that.authService.login().catch((errDetail) => console.log(errDetail));
+        //       }
+        //     });
+        // } else {
+        that.dataConcentratorUnitsService
+          .getGridDcuForm(that.requestModel, that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
+          .subscribe((data) => {
+            that.gridApi.hideOverlay();
 
-              if (data === undefined || data == null || data.totalCount === 0) {
-                that.totalCount = 0;
-                that.gridApi.showNoRowsOverlay();
-                // that.noData = true;
-              } else {
-                that.totalCount = data.totalCount;
-                // that.noData = false;
-              }
+            if (data === undefined || data == null || data.totalCount === 0) {
+              that.totalCount = 0;
+              that.gridApi.showNoRowsOverlay();
+              // that.noData = true;
+            } else {
+              that.totalCount = data.totalCount;
+              // that.noData = false;
+            }
 
-              paramsRow.successCallback(data ? data.data : [], that.totalCount);
-              // params.failCallback();
-              that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
+            paramsRow.successCallback(data ? data.data : [], that.totalCount);
+            // params.failCallback();
+            that.gridApi.paginationGoToPage(that.dataConcentratorUnitsGridService.getSessionSettingsPageIndex());
 
-              that.resizeColumns();
-              that.selectRows(that.gridApi);
-              that.isGridLoaded = true;
-            });
-        }
+            that.resizeColumns();
+            that.selectRows(that.gridApi);
+            that.isGridLoaded = true;
+          });
+        // }
       }
     };
     that.gridApi.setServerSideDatasource(that.datasource);

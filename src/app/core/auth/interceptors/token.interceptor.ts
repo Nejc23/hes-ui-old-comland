@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, Subject, BehaviorSubject, from } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { enumMyGridLink } from '../../repository/consts/my-grid-link.const';
+import { switchMap } from 'rxjs/operators';
+import { User } from 'oidc-client';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -29,17 +31,19 @@ export class TokenInterceptor implements HttpInterceptor {
         this.refreshTokenInProgress = true;
         this.refreshTokenSubject.next(null);
 
-        this.authService.renewToken().then((value) => {
-          this.authService.user = value;
-          this.authService.saveTokenAndSetUserRights2(value, '');
-          this.refreshTokenInProgress = false;
-          return next.handle(this.createAuthorizationTokenApi(request));
-        });
+        // return from(this.authService.renewToken()).pipe(
+        return this.authService.renewToken2().pipe(
+          switchMap((value) => {
+            this.authService.user = value;
+            this.authService.saveTokenAndSetUserRights2(value, '');
+            this.refreshTokenInProgress = false;
+            return next.handle(this.createAuthorizationTokenApi(request));
+          })
+        );
       }
+    } else {
+      return next.handle(this.createAuthorizationTokenApi(request));
     }
-
-    return next.handle(this.createAuthorizationTokenApi(request));
-    //    }
   }
   /*
   // authorization token for myGrid.Link API-s
