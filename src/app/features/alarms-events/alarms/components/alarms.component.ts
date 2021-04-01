@@ -263,6 +263,6 @@ export class AlarmsComponent implements OnInit {
   }
 
   dateRangeChanged() {
-    this.gridApi.purgeServerSideCache([]);
+    this.gridApi?.purgeServerSideCache([]);
   }
 }
