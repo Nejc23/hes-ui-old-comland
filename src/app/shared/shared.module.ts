@@ -32,7 +32,6 @@ import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
 import { ToastComponent } from './toast-notification/components/toast.component';
 import { CardComponent } from './card/components/card.component';
 import { ModalTemplateComponent } from './modals/components/modal-template.component';
-import { GridsterModule } from 'angular-gridster2';
 import { WidgetSettingsFormDirective } from './modals/directives/widget-settings-form.directive';
 import { DisableIfAuthorizedReadonlyDirective } from './directives/permissions/disable-if-authorized-readonly.directive';
 import { DisableIfUnauthorizedDirective } from './directives/permissions/disable-if-unauthorized.directive';
@@ -155,7 +154,6 @@ import { AlarmNotificationRulesComponent } from '../features/jobs/components/sch
     TranslateModule,
     CustomFormsModule,
     BreadcrumbsModule,
-    GridsterModule,
     AgGridModule.withComponents([
       GridCellActiveJobStatusComponent,
       GridCellLinkComponent,

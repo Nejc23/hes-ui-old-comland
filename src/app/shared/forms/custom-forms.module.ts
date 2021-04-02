@@ -1,5 +1,4 @@
 import { ChartsModule } from '@progress/kendo-angular-charts';
-import { LayoutModule } from '@progress/kendo-angular-layout';
 import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputTextComponent } from './components/input-text/input-text.component';
@@ -33,6 +32,7 @@ import { SelectDropdownComponent } from './components/select-dropdown/select-dro
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { TextBoxModule } from '@progress/kendo-angular-inputs';
 import { PopupModule } from '@progress/kendo-angular-popup';
+import { TabStripModule } from '@progress/kendo-angular-layout';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -62,7 +62,7 @@ import { PopupModule } from '@progress/kendo-angular-popup';
     DateTimePickerComponent,
     FileUploadComponent,
     FileSelectComponent,
-    LayoutModule,
+    TabStripModule,
     ChartsModule,
     TextBoxModule,
     PopupModule
@@ -100,7 +100,7 @@ import { PopupModule } from '@progress/kendo-angular-popup';
     InputsModule,
     DateInputsModule,
     UploadsModule,
-    LayoutModule,
+    TabStripModule,
     ChartsModule,
     ProgressBarModule,
     TextBoxModule,
