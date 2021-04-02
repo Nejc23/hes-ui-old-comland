@@ -3,20 +3,16 @@ import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-ite
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
 import { PermissionEnumerator } from '../../permissions/enumerators/permission-enumerator.model';
 import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
+import { AppConfigService } from '../../configuration/services/app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
-  private stsAuthorityUsers: string;
   public headerTitle = '';
 
-  constructor(private configStoreService: AppConfigStoreService) {
-    this.configStoreService.configObservable.subscribe((appConfig) => {
-      this.stsAuthorityUsers = appConfig.identityServer.stsAuthorityWeb;
-    });
-
+  constructor() {
     this.sidebarItems = [
       {
         title: $localize`Data Concentrator Units`,
@@ -97,7 +93,7 @@ export class SidebarService {
         children: [
           {
             title: $localize`Users`,
-            routeLink: this.stsAuthorityUsers,
+            routeLink: AppConfigService.settings.identityServer.stsAuthorityWeb,
             openInNewTab: true,
             isRouteAbsolute: true,
             hasChildren: false,
