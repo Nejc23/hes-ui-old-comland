@@ -124,8 +124,8 @@ export class JobsSelectComponent implements OnInit {
     }
 
     const cookieSort = this.jobsSelectGridService.getCookieDataSortModel();
-    if (cookieSort !== undefined && cookieSort !== null) {
-      this.gridApi.setSortModel(cookieSort);
+    if (cookieSort !== undefined && cookieSort !== null && this.gridColumnApi) {
+      this.gridColumnApi.applyColumnState({ state: cookieSort });
     }
 
     const that = this;
@@ -133,9 +133,7 @@ export class JobsSelectComponent implements OnInit {
       getRows(paramsRow) {
         that.requestModel.startRow = 0;
         that.requestModel.endRow = 100;
-
         that.requestModel.sortModel = paramsRow.request.sortModel;
-        // that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
 
         const currentPageIndex = that.jobsSelectGridService.getSessionSettingsPageIndex();
@@ -152,8 +150,6 @@ export class JobsSelectComponent implements OnInit {
           that.gridApi.paginationGoToPage(that.jobsSelectGridService.getSessionSettingsPageIndex());
           paramsRow.successCallback(data.data, data.totalCount);
           that.selectRows();
-          // params.failCallback();
-
           that.sizeColumnsToFit();
         });
       }

@@ -1247,9 +1247,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.meterUnitsLayout);
       }
 
-      if (settings.sortModel) {
+      if (settings.sortModel && this.gridColumnApi) {
         this.requestModel.sortModel = settings.sortModel;
-        this.gridApi.setSortModel(settings.sortModel);
+        this.gridColumnApi.applyColumnState({ state: settings.sortModel });
       }
 
       const querySearch = this.route.snapshot.queryParams.search;
