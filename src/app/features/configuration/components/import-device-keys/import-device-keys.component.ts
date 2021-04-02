@@ -38,7 +38,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     { id: '3' as string, value: `GULF_V2_0` },
     { id: '4' as string, value: `GULF_V2_3` },
     { id: '5' as string, value: `GULF_V2_4` },
-    { id: '5' as string, value: `SMX_V1_3` }
+    { id: '6' as string, value: `SMX_V1_3` }
   ];
 
   defaultFileType = this.fileTypes[4];
