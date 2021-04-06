@@ -135,7 +135,9 @@ export class AlarmsComponent implements OnInit {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
 
-    this.gridApi.setSortModel([{ colId: 'alarmTimestamp', sort: 'desc' }]);
+    if (this.gridColumnApi) {
+      this.gridColumnApi.applyColumnState({ state: [{ colId: 'alarmTimestamp', sort: 'desc' }] });
+    }
 
     this.setGridDataSource();
   }

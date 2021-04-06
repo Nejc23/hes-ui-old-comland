@@ -307,16 +307,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       filter: ''
     };
 
-    // const dataFromCookie = this.dataConcentratorUnitsGridService.getCookieData(); // saved columns settings
-    // if (dataFromCookie) {
-    //   params.columnApi.setColumnState(dataFromCookie);
-    // }
-
-    // const cookieSort = this.dataConcentratorUnitsGridService.getCookieDataSortModel();
-    // if (cookieSort !== undefined && cookieSort !== null) {
-    //   this.gridApi.setSortModel(cookieSort);
-    // }
-
     this.getDcuUnitsGridLayoutStore();
   }
   // ----------------------- ag-grid set DATASOURCE end --------------------------
@@ -836,9 +826,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       if (settings.dcuLayout) {
         this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, settings.dcuLayout);
       }
-      if (settings.sortModel) {
+      if (settings.sortModel && this.gridColumnApi) {
         this.requestModel.sortModel = settings.sortModel;
-        this.gridApi.setSortModel(settings.sortModel);
+        this.gridColumnApi.applyColumnState({ state: settings.sortModel });
       }
 
       if (settings.searchText) {

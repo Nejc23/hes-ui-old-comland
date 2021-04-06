@@ -125,46 +125,20 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
       if (this.gridColumnApi) {
         const dataFromCookie = this.dcuForJobGridService.getCookieData(); // saved columns settings
+        const cookieSort = this.dcuForJobGridService.getCookieDataSortModel();
+
         if (dataFromCookie) {
           this.gridColumnApi.setColumnState(dataFromCookie);
         }
-      }
 
-      if (this.gridApi) {
-        const cookieSort = this.dcuForJobGridService.getCookieDataSortModel();
-        if (cookieSort !== undefined && cookieSort !== null) {
-          this.gridApi.setSortModel(cookieSort);
+        if (cookieSort !== undefined && cookieSort !== null && this.gridColumnApi) {
+          this.gridApi.applyColumnState({ state: cookieSort });
         }
       }
     });
 
-    // this.filters = staticTextService.noFilterAppliedTekst;
     this.frameworkComponents = dcuForJobGridService.setFrameworkComponents();
     this.gridOptions = this.dcuForJobGridService.setGridOptions();
-    // this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
-    //   next: (event: MeterUnitsLayout) => {
-    //     console.log('test 1');
-    //     if (event !== null) {
-    //       this.requestModel.filterModel.statuses = event.statusesFilter;
-    //       this.requestModel.filterModel.vendor = event.vendorFilter;
-    //       this.requestModel.filterModel.tags = event.tagsFilter;
-    //       this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
-    //       this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
-    //       this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
-    //       this.requestModel.filterModel.firmware = event.firmwareFilter;
-    //       this.requestModel.filterModel.breakerState = event.breakerStateFilter;
-    //       this.requestModel.filterModel.showChildInfoMBus = event.showOnlyMeterUnitsWithMBusInfoFilter;
-    //       this.requestModel.filterModel.showWithoutTemplate = event.showMeterUnitsWithoutTemplateFilter;
-    //       this.requestModel.filterModel.readyForActivation = event.showOnlyImageReadyForActivationFilter;
-    //       this.gridColumnApi.setColumnState(event.gridLayout);
-    //       this.allForJobGridService.setSessionSettingsPageIndex(0);
-    //       this.allForJobGridService.setSessionSettingsSelectedRows([]);
-    //     }
-    //     this.gridApi.onFilterChanged();
-    //     this.setFilterInfo();
-    //   }
-    // });
-
     this.useWildcards = this.dcuForJobGridService.getSessionSettingsSearchedWildcards();
     console.log(
       'this.dcuForJobGridService.getSessionSettingsSearchedWildcards()',
@@ -339,16 +313,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     this.icons = {
       filter: ''
     };
-    /*
-    const dataFromCookie = this.meterUnitsTypeGridService.getCookieData(); // saved columns settings
-    if (dataFromCookie) {
-      params.columnApi.setColumnState(dataFromCookie);
-    }
-
-    const cookieSort = this.meterUnitsTypeGridService.getCookieDataSortModel();
-    if (cookieSort !== undefined && cookieSort !== null) {
-      this.gridApi.setSortModel(cookieSort);
-    }*/
 
     const that = this;
     const datasource = {
@@ -357,46 +321,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         that.requestModel.startRow = that.dcuForJobGridService.getCurrentRowIndex().startRow;
         that.requestModel.endRow = that.dcuForJobGridService.getCurrentRowIndex().endRow;
         that.requestModel.sortModel = paramsRow.request.sortModel;
-        // console.log(`requestModel = `, that.requestModel);
-        // that.requestModel.filterModel = that.setFilter();
         that.requestModel.searchModel = that.setSearch();
-
-        // if (that.authService.isRefreshNeeded2()) {
-        //   that.authService
-        //     .renewToken()
-        //     .then((value) => {
-        //       that.authService.user = value;
-        //       that.authService.saveTokenAndSetUserRights2(value, '');
-
-        //       that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
-        //         that.gridApi.hideOverlay();
-
-        //         that.totalCount = 0;
-        //         if (response) {
-        //           that.setTitle(response.jobDescription);
-        //         }
-
-        //         if (response && response.grid && response.grid.totalCount > 0) {
-        //           that.totalCount = response.grid.totalCount;
-        //           that.gridApi.paginationGoToPage(that.dcuForJobGridService.getSessionSettingsPageIndex());
-        //           paramsRow.successCallback(response.grid.data, response.grid.totalCount);
-        //           that.selectRows(that.gridApi);
-        //           that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
-        //           // params.failCallback();
-        //         } else {
-        //           if (that.noSearch() && that.noFilters()) {
-        //             that.noData = true;
-        //           }
-        //           that.gridApi.showNoRowsOverlay();
-        //         }
-        //       });
-        //     })
-        //     .catch((err) => {
-        //       if (err.message === 'login_required') {
-        //         that.authService.login().catch((errDetail) => console.log(errDetail));
-        //       }
-        //     });
-        // } else {
         that.dataConcentratorUnitsService.getConcentratorsForJob(that.requestModel).subscribe((response) => {
           that.gridApi.hideOverlay();
           that.totalCount = 0;
@@ -410,17 +335,11 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
             paramsRow.successCallback(response.grid.data, response.grid.totalCount);
             that.selectRows(that.gridApi);
             that.eventService.setIsSelectedAll(that.dcuForJobGridService.getSessionSettingsSelectedAll());
-            // params.failCallback();
           } else {
-            // if (that.noSearch() && that.noFilters()) {
-            //   that.noData = true;
-            // }
-
             that.gridApi.showNoRowsOverlay();
             paramsRow.successCallback([], 0);
           }
         });
-        // }
       }
     };
     this.gridApi.setServerSideDatasource(datasource);

@@ -144,8 +144,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     }
 
     const cookieSort = this.dataConcentratorUnitsSelectGridService.getCookieDataSortModel();
-    if (cookieSort !== undefined && cookieSort !== null) {
-      this.gridApi.setSortModel(cookieSort);
+    if (cookieSort !== undefined && cookieSort !== null && this.gridColumnApi) {
+      this.gridColumnApi.applyColumnState({ state: cookieSort });
     }
 
     const that = this;

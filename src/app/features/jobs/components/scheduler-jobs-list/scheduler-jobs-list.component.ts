@@ -437,9 +437,9 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         this.schedulerJobsListGridService.setSessionSettingsPageIndex(settings.currentPageIndex);
       }
 
-      if (settings.sortModel) {
+      if (settings.sortModel && this.gridColumnApi) {
         this.requestModel.sortModel = settings.sortModel;
-        this.gridApi.setSortModel(settings.sortModel);
+        this.gridColumnApi.applyColumnState({ state: settings.sortModel });
       }
 
       if (settings.searchText) {
