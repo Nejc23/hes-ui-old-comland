@@ -449,6 +449,9 @@
       <trans-unit id="3990182196643689218" datatype="html">
         <source>More Save options</source>
         <target>Več opcij shranjevanja</target>
+      </trans-unit><trans-unit id="5983271135704264724" datatype="html">
+        <source>Selected file must be in .bin file format.</source>
+        <target state="new">Selected file must be in .bin file format.</target>
       </trans-unit>
       <trans-unit id="8646797504756663636" datatype="html">
         <source>Scheduler job deleted!</source>
@@ -613,15 +616,15 @@
       <trans-unit id="1572585431178923769" datatype="html">
         <source>Import successful!</source>
         <target>Uvoz uspešen!</target>
+      </trans-unit><trans-unit id="7900792516177766925" datatype="html">
+        <source>Selected file must be in .json file format.</source>
+        <target state="new">Selected file must be in .json file format.</target>
       </trans-unit>
       <trans-unit id="7399625561211407062" datatype="html">
         <source>Import templates</source>
         <target>Uvozi predloge</target>
       </trans-unit>
-      <trans-unit id="8455204924704616723" datatype="html">
-        <source>File</source>
-        <target>File</target>
-      </trans-unit>
+      
       <trans-unit id="1071721880474488785" datatype="html">
         <source>Import</source>
         <target>Uvozi</target>
@@ -661,6 +664,12 @@
       <trans-unit id="5540997364935800094" datatype="html">
         <source>GULF</source>
         <target>GULF</target>
+      </trans-unit><trans-unit id="6074488427876415391" datatype="html">
+        <source>Selected file must be in .xml file format.</source>
+        <target state="new">Selected file must be in .xml file format.</target>
+      </trans-unit><trans-unit id="5911086252684015481" datatype="html">
+        <source>To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.</source>
+        <target state="new">To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.</target>
       </trans-unit>
       <trans-unit id="5667900632592970266" datatype="html">
         <source>Timestamp</source>
@@ -769,6 +778,9 @@
       <trans-unit id="3008420115644088420" datatype="html">
         <source>Configuration</source>
         <target>Konfiguracija</target>
+      </trans-unit><trans-unit id="4265162798035315568" datatype="html">
+        <source>Selected file:</source>
+        <target state="new">Selected file:</target>
       </trans-unit>
       <trans-unit id="1490116990594087894" datatype="html">
         <source>FW Upgrade</source>
