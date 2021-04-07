@@ -1,4 +1,9 @@
-
+<div class="form-row">
+  <div class="col-12">
+    <label class="text-truncate" container="body" placement="bottom" [openDelay]="500"
+    [ngbTooltip]="subtitle">{{ subtitle }}</label>
+  </div>
+</div>
 <div class="form-row">
   <div class="col-12">
     <app-input-text [form]="form" [property]="nameProperty" label="Name" i18n-label></app-input-text>
@@ -6,14 +11,15 @@
 </div>
 <div class="form-row">
   <div class="col-12 expand-dropzone">
-      <app-file-select label="File" [form]="form" [property]="fileProperty"
+      <app-file-select [form]="form" [property]="fileProperty"
           [multiple]="false"
           [allowedExtensions]="allowedExt"
-          [textExplanation]="'can only select one XML file.'"
           [acceptExtensions]="acceptExtensions"
           (selectEvent)="selected($event)"
           (removeEvent)="removed($event)"
-          i18n-label></app-file-select>
+          i18n-label
+          [dropFileSelectSubtitle]="uploadDropSubtitle">
+        </app-file-select>
   </div>
 </div>
 <div class="form-row" *ngIf="errorMsg != ''">
@@ -22,7 +28,7 @@
   </div>
 </div>
 
-<div class="d-flex justify-content-end">
+<div class="d-flex justify-content-start">
   <div class="btn-group dropdown">
     <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="!data">
       <span i18n>Import</span></button>

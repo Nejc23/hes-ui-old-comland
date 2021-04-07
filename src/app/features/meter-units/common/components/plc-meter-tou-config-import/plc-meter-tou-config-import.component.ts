@@ -1,3 +1,4 @@
+import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -15,15 +16,19 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   form: FormGroup;
   public files: Array<any>;
   allowedExt = ['xml'];
-  acceptExtensions = '.xml';
+  acceptExtensions = ['.xml'];
   data = '';
   errorMsg = '';
+
+  uploadDropSubtitle = $localize`Selected file must be in .xml file format.`;
+  subtitle = $localize`To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.`;
 
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private meterService: MeterUnitsService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private toast: ToastNotificationService
   ) {
     this.resetForm();
   }
@@ -76,7 +81,8 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
         this.resetForm();
       },
       (x) => {
-        this.errorMsg = x.statusText;
+        this.toast.errorToast(x.statusText);
+        // this.errorMsg = x.statusText;
         console.log(x);
       } // error
     );

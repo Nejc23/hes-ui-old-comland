@@ -90,8 +90,6 @@ input[type=search].wildcard {
   margin-right: 0;
 }
 
-
-
 .expand-dropzone .k-dropzone {
   height: 300px;
   display: block !important;
@@ -103,12 +101,19 @@ input[type=search].wildcard {
 }
 
 .expand-dropzone {
-  .file-upload {
-    .k-upload {
+  .k-upload {
+    display: none !important;
+  }
+}
+
+.expand-dropzone {
+  .file-select {
+    .k-select {
       display: none !important;
     }
   }
 }
+
 
 .expand-dropzone  .k-upload-button {
   margin-right:calc(50% - 58px);

@@ -26,13 +26,14 @@ export class DcuFwUpgradeComponent implements OnInit {
   form: FormGroup;
   noConfig = false;
   actionRequest: IActionRequestParams;
-  allowedExt = [];
-  allowedExtExplainText = $localize`can only upload one file.`;
-  acceptExtensions = '.bin';
+  allowedExt = ['bin'];
+  acceptExtensions = ['.bin'];
   public file: File;
   activate = false;
 
   public selectedRowsCount: number;
+
+  uploadDropSubtitle = $localize`Selected file must be in .bin file format.`;
 
   constructor(
     private formBuilder: FormBuilder,

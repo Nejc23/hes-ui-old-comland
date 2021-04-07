@@ -5,14 +5,14 @@
   <div modal-body>
     <ng-container>
       <div class="form-row">
-        <div class="col-12">
+        <div class="col-12 expand-dropzone modal-dropzone">
           <app-file-select label="Image" [form]="form" [property]="imageProperty"
             [multiple]="false"
             [allowedExtensions]="allowedExt"
-            [textExplanation]="allowedExtExplainText"
             [acceptExtensions]="acceptExtensions"
             (selectEvent)="selected($event)"
             i18n-label
+            [dropFileSelectSubtitle]="uploadDropSubtitle">
           ></app-file-select>
         </div>
       </div>
