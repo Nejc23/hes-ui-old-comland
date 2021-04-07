@@ -21,8 +21,10 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   deviceIdsParam = [];
   public files: Array<any>;
   allowedExt = ['json'];
-  acceptExtensions = '.json';
+  acceptExtensions = ['.json'];
   jsonString = '';
+
+  uploadDropSubtitle = $localize`Selected file must be in .json file format.`;
 
   constructor(
     private formBuilder: FormBuilder,
