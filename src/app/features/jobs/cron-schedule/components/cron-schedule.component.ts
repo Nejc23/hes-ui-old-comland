@@ -1,4 +1,3 @@
-import { registerLocaleData } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { Component, Inject, Input, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
@@ -27,17 +26,14 @@ export class CronScheduleComponent implements OnInit {
 
   weekDays: Codelist<number>[] = [
     { id: 8, value: $localize`Mon-Fri` },
-    { id: 1, value: $localize`Mon` },
-    { id: 2, value: $localize`Tue` },
-    { id: 3, value: $localize`Wed` },
-    { id: 4, value: $localize`Thu` },
-    { id: 5, value: $localize`Fri` },
-    { id: 6, value: $localize`Sat` },
-    { id: 0, value: $localize`Sun` }
+    { id: 2, value: $localize`Mon` },
+    { id: 3, value: $localize`Tue` },
+    { id: 4, value: $localize`Wed` },
+    { id: 5, value: $localize`Thu` },
+    { id: 6, value: $localize`Fri` },
+    { id: 7, value: $localize`Sat` },
+    { id: 1, value: $localize`Sun` }
   ];
-
-  // monthDays: number[] = [];
-  // noMonthDays = false;
 
   everyMinutes: Codelist<number>[];
   everyHours: Codelist<number>[];
@@ -47,22 +43,16 @@ export class CronScheduleComponent implements OnInit {
 
   form: FormGroup;
 
-  // enum reference
   freq = Frequency;
   selectedFrequency: Frequency = Frequency.Minutes;
 
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
-
-  // dailyOptionDaily: RadioOption[] = [
-  //   { value: '1' as string, label: $localize`Daily` },
-  // ];
 
   dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: $localize`Every` }];
 
   dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: $localize`Week day (MON-FRI)` }];
 
   formValues: FormValues;
-  // weeklyOptions =
 
   constructor(private formBuilder: FormBuilder, @Inject(LOCALE_ID) public locale: string, private formUtils: FormsUtilsService) {}
 
@@ -92,11 +82,7 @@ export class CronScheduleComponent implements OnInit {
       this.hours.push({ id: i, value: `${i}` });
     }
 
-    // this.initForm('1 */1 * * * * *');
-    // this.initForm('0 36 5 1,2,3 * * *'); // monthly
-    // this.initForm('0 25 9 * * 3,4,1-5 *'); // weekly
-    // this.initForm('0 2 1 * * 1-5 *'); // daily - weekday
-    this.initForm(this.cronExpression); // hourly
+    this.initForm(this.cronExpression);
   }
 
   setFormValues() {
@@ -228,13 +214,6 @@ export class CronScheduleComponent implements OnInit {
     return 'dailyWeekdayMinutes'; // nameOf<DcuForm>((o) => o.name);
   }
 
-  // get weeklyCheckMonFriProperty() {
-  //   return 'weeklyCheckMonFri';
-  // }
-  // get weeklyCheckMondayProperty() {
-  //   return 'weeklyCheckMonday';
-  // }
-
   get weekDaysProperty() {
     return 'weeklyWeekday'; // nameOf<SchedulerJobForm>((o) => o.weekDays);
   }
@@ -295,7 +274,6 @@ export class CronScheduleComponent implements OnInit {
       }
       case Frequency.Daily: {
         const dailyFrequency = this.form.get(this.dailyFrequencyProperty).value;
-        // console.log('dailyFrequency', dailyFrequency);
         if (dailyFrequency === '1') {
           const minutes = this.form.get(this.dailyEveryMinutesProperty).value?.value;
           const hours = this.form.get(this.dailyEveryHoursProperty).value?.value;
@@ -309,7 +287,7 @@ export class CronScheduleComponent implements OnInit {
           const hours = this.form.get(this.dailyWeekdayHoursProperty).value?.value;
 
           if (minutes && hours) {
-            return `0 ${minutes} ${hours} ? * 1-5 *`;
+            return `0 ${minutes} ${hours} ? * 2-6 *`;
           }
         }
         break;
@@ -319,7 +297,7 @@ export class CronScheduleComponent implements OnInit {
         const minutes = this.form.get(this.weeklyMinutesProperty).value?.value;
         const hours = this.form.get(this.weeklyHoursProperty).value?.value;
         if (weekdays && weekdays.length > 0 && minutes && hours) {
-          const weekdaysJoined = weekdays.map((days) => (days === 8 ? '1-5' : days.toString())).join();
+          const weekdaysJoined = weekdays.map((days) => (days === 8 ? '2-6' : days.toString())).join();
           return `0 ${minutes} ${hours} ? * ${weekdaysJoined} *`;
         }
         break;
@@ -346,13 +324,7 @@ export class CronScheduleComponent implements OnInit {
     return null;
   }
 
-  // generateCron(minutes:number, hours?:number) {
-  //   return `${minutes} ${hours ? hours : '*'} * * *`;
-  // }
-
-  weeklyCheckChanged(event: any) {
-    // console.log('weeklyCheckChanged', event);
-  }
+  weeklyCheckChanged(event: any) {}
 
   isDayInMonthSelected(index: number) {
     for (const dayNo of this.formValues.monthlyMonthDays) {
@@ -433,7 +405,6 @@ export class CronScheduleComponent implements OnInit {
         this.formValues.hourlyHours = this.everyHours[index - 1];
         return;
       } else if (!isNaN(+minutes) && !isNaN(+hours)) {
-        // console.log('hours', hours, 'and minutes', minutes, 'are numbers');
         const minutesCodelist = this.minutes[+minutes];
         const hoursCodelist = this.hours[+hours];
 
@@ -502,8 +473,6 @@ export class CronScheduleComponent implements OnInit {
       }
     });
     const isError = cronResult.isError();
-    // console.log('cronResult', cronResult);
-    // console.log('cronResult.isError()', isError);
     return !isError;
   }
 }
