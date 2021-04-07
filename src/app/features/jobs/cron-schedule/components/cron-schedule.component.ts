@@ -421,7 +421,7 @@ export class CronScheduleComponent implements OnInit {
               }
             }
           } else {
-            const selectedDays = weekday.split(',').map((d) => (d === '1-5' ? 8 : +d));
+            const selectedDays = weekday.split(',').map((d) => (d === '2-6' ? 8 : +d));
             if (!selectedDays.some((d) => isNaN(d))) {
               if (selectedDays && selectedDays.length > 0) {
                 this.selectedFrequency = Frequency.Weekly;
