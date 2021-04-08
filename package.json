@@ -1,6 +1,6 @@
 {
   "name": "myGrid",
-  "version": "2.3.8",
+  "version": "2.4.0",
   "scripts": {
     "ng": "ng",
     "start": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --ssl --ssl-key ./resources/ssl/localhost/localhost.key --ssl-cert ./resources/ssl/localhost/localhost.crt --proxy-config proxy.conf.js",
@@ -22,9 +22,9 @@
     "format:write": "prettier --write \"src/app/**/*.ts\" && prettier --write \"src/debug/**/*.ts\" && prettier --write \"pact/**/*.ts\"",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "build-and-extract-i18n": "ng build --prod && npx locl extract -s='dist/hes/*.js' -f=xlf -o='src/assets/i18n/messages.xlf' && xliffmerge --profile xliffmerge.json en sl cs de fr it",
-    "build-production:myGrid": "ng build --configuration=production-myGrid",
-    "build-production:amera": "ng build --configuration=production-amera",
-    "build-production:ePointHES": "ng build --configuration=production-ePointHES"
+    "build-production:myGrid": "ng build --configuration=production-myGrid && jscrambler",
+    "build-production:amera": "ng build --configuration=production-amera && jscrambler",
+    "build-production:ePointHES": "ng build --configuration=production-ePointHES && jscrambler"
   },
   "private": true,
   "dependencies": {
@@ -107,6 +107,7 @@
     "husky": "^4.3.6",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
+    "jscrambler": "^5.5.25",
     "karma": "~5.2.3",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.3",
