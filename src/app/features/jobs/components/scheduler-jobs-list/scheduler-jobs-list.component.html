@@ -12,17 +12,17 @@
        class="ml-auto justify-content-end"
        [useWildcards]="useWildcards"
        (toggleWildcards)="toggleWildcards($event)">
-      <div class="dropdown mr-3" appHideIfAllPermissionsUnauthorized [permissions]="[permissionJobManage, permissionAlarmsManage]">
+      <div class="dropdown mr-3" *ngIf="hasUserAddPermissions()">
         <button class="btn btn-primary dropdown-toggle"> <!--btn-round-->
           <span i18n>Add</span>
         </button>
         <div class="dropdown-content add-job">
-          <a href="javascript:void(0);" (click)="addJob()" appHideIfPermissionUnauthorized [permission]="permissionJobManage"><span i18n>Reading job</span></a>
-          <a href="javascript:void(0);" (click)="addDiscoveryJob()" appHideIfPermissionUnauthorized [permission]="permissionJobManage"><span i18n>Discovery job</span></a>
-          <a href="javascript:void(0);" (click)="addDcTimeSyncJob()" appHideIfPermissionUnauthorized [permission]="permissionJobManage"><span i18n>DC Time sync job</span></a>
-          <a href="javascript:void(0);" (click)="addDcReadEventsJob()" appHideIfPermissionUnauthorized [permission]="permissionJobManage"><span i18n>DC Read events job</span></a>
-          <a href="javascript:void(0);" (click)="addTopologyJob()" appHideIfPermissionUnauthorized [permission]="permissionJobManage"><span i18n>Topology job</span></a>
-          <a href="javascript:void(0);" (click)="addAlarmNotificationJob()" appHideIfPermissionUnauthorized [permission]="permissionAlarmsManage"><span i18n>Alarm notification job</span></a>
+          <a href="javascript:void(0);" (click)="addJob()" appHideIfAnyPermissionsUnauthorized [permissions]="[permissionMetersManage, permissionJobsManage]"><span i18n>Reading job</span></a>
+          <a href="javascript:void(0);" (click)="addDiscoveryJob()" appHideIfAnyPermissionsUnauthorized [permissions]="[permissionConcentratorsManage, permissionJobsManage]"><span i18n>Discovery job</span></a>
+          <a href="javascript:void(0);" (click)="addDcTimeSyncJob()" appHideIfAnyPermissionsUnauthorized [permissions]="[permissionConcentratorsManage, permissionJobsManage]"><span i18n>DC Time sync job</span></a>
+          <a href="javascript:void(0);" (click)="addDcReadEventsJob()" appHideIfAnyPermissionsUnauthorized [permissions]="[permissionConcentratorsManage, permissionJobsManage]"><span i18n>DC Read events job</span></a>
+          <a href="javascript:void(0);" (click)="addTopologyJob()" appHideIfAnyPermissionsUnauthorized [permissions]="[permissionConcentratorsManage, permissionJobsManage]"><span i18n>Topology job</span></a>
+          <a href="javascript:void(0);" (click)="addAlarmNotificationJob()" appHideIfAnyPermissionsUnauthorized [permissions]="[permissionAlarmsManage, permissionJobsManage]"><span i18n>Alarm notification job</span></a>
         </div>
       </div>
     </app-action-form>

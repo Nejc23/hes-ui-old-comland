@@ -13,6 +13,7 @@ import { SchedulerJobComponent } from '../scheduler-job/scheduler-job.component'
 import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-event-emitter.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -30,7 +31,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private service: JobsService,
     private eventService: SchedulerJobsEventEmitterService,
     private codelistService: CodelistRepositoryService,
-    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
+    private permissionService: PermissionService
   ) {}
 
   // called on init
@@ -298,5 +300,20 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
 
   get permissionJobManage() {
     return PermissionEnumerator.Manage_Jobs;
+  }
+
+  hasUserAccess(params: any): boolean {
+    if (!this.permissionService.hasAccess(PermissionEnumerator.Manage_Jobs)) {
+      return false;
+    }
+
+    const jobType = params.data.jobType;
+    if (jobType === JobTypeEnumeration.reading) {
+      return this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters);
+    } else if (jobType === JobTypeEnumeration.alarmNotification) {
+      return this.permissionService.hasAccess(PermissionEnumerator.Manage_Alarms);
+    } else {
+      return this.permissionService.hasAccess(PermissionEnumerator.Manage_Concentrators);
+    }
   }
 }
