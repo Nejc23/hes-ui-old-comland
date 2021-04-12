@@ -79,7 +79,7 @@ export class RegistersSelectComponent implements OnInit {
 
     const rowData$ = this.registersSelectService.getSchedulableRegisters(this.deviceFiltersAndSearch);
     rowData$.subscribe((x) => {
-      this.allRowData = x.schedulableRegistersType;
+      this.allRowData = x.schedulableRegistersTypes;
       this.totalCount = this.allRowData ? this.allRowData.length : 0;
       this.allHaveTemplate = x.allHaveTemplate;
       this.searchChange();

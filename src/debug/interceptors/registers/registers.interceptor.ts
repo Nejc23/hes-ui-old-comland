@@ -12,7 +12,7 @@ export class RegistersInterceptor {
     const data: SchedulableRegistersResponse = {
       allHaveTemplate: false,
       templatelessDevices: null,
-      schedulableRegistersType: [
+      schedulableRegistersTypes: [
         {
           name: 'property1',
           isSelectable: false

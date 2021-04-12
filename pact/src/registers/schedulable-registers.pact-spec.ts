@@ -79,7 +79,7 @@ describe('Pact consumer test', () => {
     const responseBody: SchedulableRegistersResponse = {
       allHaveTemplate: true,
       templatelessDevices: null,
-      schedulableRegistersType: [
+      schedulableRegistersTypes: [
         {
           name: 'loadprofilE1',
           isSelectable: true
