@@ -10,6 +10,7 @@ import { ActionFormStaticTextService } from '../../data-concentrator-units/compo
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { RegistersSelectRequest } from 'src/app/core/repository/interfaces/registers-select/registers-select-request.interface';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { SchedulableRegistersType } from 'src/app/core/repository/interfaces/registers-select/schedulable-registers-type.interface';
 
 @Component({
   selector: 'app-registers-select',
@@ -27,11 +28,11 @@ export class RegistersSelectComponent implements OnInit {
   public modules: Module[] = AllModules;
   public gridApi;
   columnDefs = [];
-  rowData$: Observable<RegistersSelectList[]>;
-  rowData: RegistersSelectList[];
-  allRowData: RegistersSelectList[];
+  rowData: SchedulableRegistersType[];
+  allRowData: SchedulableRegistersType[];
   totalCount = 0;
   selectedAll = false;
+  allHaveTemplate = true;
 
   constructor(
     private registersSelectService: RegistersSelectService,
@@ -56,14 +57,14 @@ export class RegistersSelectComponent implements OnInit {
     params.api.sizeColumnsToFit();
   }
 
-  selectRows(selectedRows: RegistersSelectRequest[]) {
+  selectRows(selectedRows: string[]) {
     if (this.gridApi) {
       // this.columnDefs = this.registersSelectGridService.setGridReadOnlyColumns();
       this.gridApi.forEachNode((node) => {
         if (
           node.data !== undefined &&
           selectedRows.length > 0 &&
-          _.find(selectedRows, (x) => x === node.data.id && !node.selected) !== undefined
+          _.find(selectedRows, (x) => x === node.data.name && !node.selected) !== undefined
         ) {
           node.setSelected(true);
         }
@@ -75,10 +76,12 @@ export class RegistersSelectComponent implements OnInit {
     if (!this.deviceFiltersAndSearch) {
       this.deviceFiltersAndSearch = { id: [], filter: null };
     }
-    this.rowData$ = this.registersSelectService.getDeviceRegisters(this.deviceFiltersAndSearch);
-    this.rowData$.subscribe((x) => {
-      this.allRowData = x;
+
+    const rowData$ = this.registersSelectService.getSchedulableRegisters(this.deviceFiltersAndSearch);
+    rowData$.subscribe((x) => {
+      this.allRowData = x.schedulableRegistersType;
       this.totalCount = this.allRowData ? this.allRowData.length : 0;
+      this.allHaveTemplate = x.allHaveTemplate;
       this.searchChange();
       if (this.selectedJobId) {
         this.jobsService.getJob(this.selectedJobId).subscribe((data) => {
@@ -93,10 +96,10 @@ export class RegistersSelectComponent implements OnInit {
     this.columnDefs = this.registersSelectGridService.setGridDefaultColumns();
   }
 
-  getSelectedRowIds() {
+  getSelectedRowNames() {
     const selectedRows = this.gridApi.getSelectedRows();
-    const req: RegistersSelectRequest[] = [];
-    selectedRows.forEach((x) => req.push({ name: x.name, type: x.type }));
+    const req: SchedulableRegistersType[] = [];
+    selectedRows.forEach((x) => req.push(x.name));
     return req;
   }
 
@@ -123,13 +126,12 @@ export class RegistersSelectComponent implements OnInit {
 
   searchChange(search: string = '') {
     const searchToLower = search.toLowerCase();
-    this.rowData = _.filter(
-      this.allRowData,
-      (data) =>
-        data.name.toLowerCase().includes(searchToLower) ||
-        data.type.toLowerCase().includes(searchToLower) ||
-        data.description.toLowerCase().includes(searchToLower)
-    );
+    const rowsFiltered: SchedulableRegistersType[] = _.filter(this.allRowData, (data) => data.name.toLowerCase().includes(searchToLower));
+
+    this.rowData = rowsFiltered.sort((a, b) => {
+      return +a.isSelectable > +b.isSelectable ? -1 : a.name < b.name ? -1 : 1;
+    });
+
     this.totalCount = this.rowData.length;
   }
 
@@ -143,11 +145,15 @@ export class RegistersSelectComponent implements OnInit {
   }
 
   selectionChanged($event: any) {
-    this.selectedAll = this.getSelectedRowIds().length === this.totalCount;
-    this.onSelectionChanged.emit(this.getSelectedRowIds().length > 0 ? true : false);
+    this.selectedAll = this.getSelectedRowNames().length === this.totalCount;
+    this.onSelectionChanged.emit(this.getSelectedRowNames().length > 0 ? true : false);
   }
 
   get searchProperty() {
     return 'content';
+  }
+
+  isRowSelectable(rowNode) {
+    return rowNode.data.isSelectable;
   }
 }
