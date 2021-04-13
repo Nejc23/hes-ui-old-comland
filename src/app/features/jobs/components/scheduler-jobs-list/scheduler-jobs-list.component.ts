@@ -1,3 +1,4 @@
+import { PermissionService } from './../../../../core/permissions/services/permission.service';
 import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { GridUtils } from 'src/app/features/global/grid.utils';
@@ -98,7 +99,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private codelistService: CodelistRepositoryService,
     private settingsStoreService: SettingsStoreService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
-    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
+    private permissionService: PermissionService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -542,8 +544,28 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     return;
   }
 
-  get permissionJobManage() {
+  hasUserAddPermissions(): boolean {
+    if (!this.permissionService.hasAccess(PermissionEnumerator.Manage_Jobs)) {
+      return false;
+    }
+
+    return (
+      this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters) ||
+      this.permissionService.hasAccess(PermissionEnumerator.Manage_Concentrators) ||
+      this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters)
+    );
+  }
+
+  get permissionJobsManage() {
     return PermissionEnumerator.Manage_Jobs;
+  }
+
+  get permissionMetersManage() {
+    return PermissionEnumerator.Manage_Meters;
+  }
+
+  get permissionConcentratorsManage() {
+    return PermissionEnumerator.Manage_Concentrators;
   }
 
   get permissionAlarmsManage() {

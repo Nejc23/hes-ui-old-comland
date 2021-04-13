@@ -2,9 +2,9 @@
   <div class="btn-group-sm">
       <button appHideIfPermissionUnauthorized [permission]="permissionJobExecute" type="button" class="btn btn-primary m-0" (click)="runJob(params)"><i class="far fa-play"
         container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('run')"></i></button>
-      <button appHideIfPermissionUnauthorized [permission]="permissionJobManage" type="button" class="btn btn-primary m-0" (click)="editJob(params)"><i class="far fa-edit"
+      <button *ngIf="hasUserAccess(params)" type="button" class="btn btn-primary m-0" (click)="editJob(params)"><i class="far fa-edit"
         container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('edit')"></i></button>
-      <button appHideIfPermissionUnauthorized [permission]="permissionJobManage" type="button" class="btn btn-primary m-0" (click)="deleteJob(params)"><i class="far fa-trash"
+      <button *ngIf="hasUserAccess(params)" type="button" class="btn btn-primary m-0" (click)="deleteJob(params)"><i class="far fa-trash"
         container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('delete')"></i></button>
   </div>
 </div>

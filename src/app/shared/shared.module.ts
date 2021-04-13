@@ -1,3 +1,4 @@
+import { HideIfAnyPermissionsUnauthorizedDirective } from './directives/permissions/hide-if-any-permissions-unauthorized.directive';
 import { HideDividerIfPermissionsUnauthorizedDirective } from './directives/permissions/hide-divider-if-permissions-unauthorized.directive';
 import { HideIfPermissionUnauthorizedDirective } from './directives/permissions/hide-if-permission-unauthorized.directive';
 import { HideIfAllPermissionsUnauthorizedDirective } from './directives/permissions/hide-if-all-permissions-unauthorized.directive';
@@ -139,6 +140,7 @@ import { AlarmNotificationRulesComponent } from '../features/jobs/components/sch
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
     HideIfAllPermissionsUnauthorizedDirective,
+    HideIfAnyPermissionsUnauthorizedDirective,
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent
@@ -229,6 +231,7 @@ import { AlarmNotificationRulesComponent } from '../features/jobs/components/sch
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
     HideIfAllPermissionsUnauthorizedDirective,
+    HideIfAnyPermissionsUnauthorizedDirective,
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent
