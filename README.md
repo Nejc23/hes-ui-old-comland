@@ -55,6 +55,6 @@ Translation files can be updated in PoEdit editor.
 
 ## Production build with JScrambler - JavaScript obfuscator
 
-`npm run build-production:myGrid:jscr: ng build --configuration=production-myGrid && jscrambler`
-`npm run build-production:amera:jscr: ng build --configuration=production-amera && jscrambler`
-`npm run build-production:ePointHES:jscr: ng build --configuration=production-ePointHES && jscrambler`
+`npm run build-production:myGrid:jscr`
+`npm run build-production:amera:jscr`
+`npm run build-production:ePointHES:jscr`
