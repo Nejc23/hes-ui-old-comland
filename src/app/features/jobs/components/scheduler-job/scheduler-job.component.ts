@@ -108,7 +108,7 @@ export class SchedulerJobComponent implements OnInit {
         Validators.required
       ],
       [this.timeUnitProperty]: [
-        formData && formData.readingProperties && formData.readingProperties.timeUnit && this.jobsTimeUnits
+        formData && formData.readingProperties && formData.readingProperties.timeUnit
           ? this.jobsTimeUnits.find((x) => x.id === formData.readingProperties.timeUnit)
           : this.defaultTimeUnit,
         Validators.required
@@ -299,7 +299,7 @@ export class SchedulerJobComponent implements OnInit {
     // times and selected registers
 
     if (this.showRegisters) {
-      const selectedRegisters = this.registers.getSelectedRowNames();
+      const selectedRegisters = this.registers.getSelectedRowIds();
       this.noRegisters = selectedRegisters.length === 0;
       this.form.get(this.registersProperty).setValue(selectedRegisters);
     } else if (this.showConcentrators) {

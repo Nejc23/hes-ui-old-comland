@@ -40,6 +40,3 @@ export const basePathMuConcentratorInventory = '/api/concentrator-inventory';
 export const muCreate = `${basePathMuConcentratorInventory}/meter`;
 export const muUpdate = `${basePathMuConcentratorInventory}/meter`;
 export const getDevice = `${basePathMuConcentratorInventory}/meter`;
-
-// registers
-export const deviceRegisters = `${basePath}/registers/schedulable`;

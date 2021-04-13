@@ -1,4 +1,3 @@
-import { RegistersInterceptor } from './registers/registers.interceptor';
 import { AlarmingInterceptor } from './alarming/alarming.interceptor';
 import { AutoTemplateRegister } from './../../app/core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
@@ -366,11 +365,6 @@ export class FakeBackendInterceptor implements HttpInterceptor {
               // alarming
               if (AlarmingInterceptor.canInterceptGetAlarmsList(request)) {
                 return AlarmingInterceptor.interceptGetAlarmsList(request);
-              }
-
-              // registers
-              if (RegistersInterceptor.canInterceptGetSchedulableRegisters(request)) {
-                return RegistersInterceptor.interceptGetSchedulableRegisters(request);
               }
 
               // pass through any requests not handled above

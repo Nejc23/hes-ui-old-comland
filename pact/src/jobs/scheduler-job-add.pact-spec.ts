@@ -27,7 +27,11 @@ describe('Pact consumer test', () => {
 
   const typeId = 1;
   const requestBody: SchedulerJob = {
-    registers: ['guid-1', 'guid-4', 'guid-5'],
+    registers: [
+      { name: 'guid-1', type: 'type-1' },
+      { name: 'guid-4', type: 'type-1' },
+      { name: 'guid-5', type: 'type-1' }
+    ],
     jobType: 'scheduledReading',
 
     active: false,
@@ -82,7 +86,11 @@ describe('Pact consumer test', () => {
   };
 
   const responseBody: SchedulerJob = {
-    registers: ['guid-1', 'guid-4', 'guid-5'],
+    registers: [
+      { name: 'guid-1', type: 'type-1' },
+      { name: 'guid-4', type: 'type-1' },
+      { name: 'guid-5', type: 'type-1' }
+    ],
     jobType: 'scheduledReading',
 
     active: false,

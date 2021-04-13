@@ -45,11 +45,7 @@ describe('Pact consumer test', () => {
       publicClientAddress: 16,
       publicServerAddress: 1,
       physicalAddress: null
-    },
-    serialNumber: '1',
-    templateId: 1,
-    interfaceType: 1,
-    protocol: 1
+    }
   };
 
   describe('Meter unit manually update', () => {
