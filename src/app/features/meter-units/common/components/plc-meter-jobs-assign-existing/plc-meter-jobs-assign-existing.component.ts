@@ -3,14 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
-import { RequestSetBreakerMode } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import {
-  IActionRequestParams,
-  IActionRequestSetDisconnectorMode
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 

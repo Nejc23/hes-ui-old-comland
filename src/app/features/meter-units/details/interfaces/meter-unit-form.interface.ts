@@ -1,5 +1,3 @@
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-
 export interface MeterUnitDetailsForm {
   deviceId: string;
   name: string;

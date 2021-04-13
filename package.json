@@ -24,7 +24,10 @@
     "build-and-extract-i18n": "ng build --prod && npx locl extract -s='dist/hes/*.js' -f=xlf -o='src/assets/i18n/messages.xlf' && xliffmerge --profile xliffmerge.json en sl cs de fr it",
     "build-production:myGrid": "ng build --configuration=production-myGrid",
     "build-production:amera": "ng build --configuration=production-amera",
-    "build-production:ePointHES": "ng build --configuration=production-ePointHES"
+    "build-production:ePointHES": "ng build --configuration=production-ePointHES",
+    "build-production:myGrid:jscr": "ng build --configuration=production-myGrid && jscrambler",
+    "build-production:amera:jscr": "ng build --configuration=production-amera && jscrambler",
+    "build-production:ePointHES:jscr": "ng build --configuration=production-ePointHES && jscrambler"
   },
   "private": true,
   "dependencies": {
@@ -107,6 +110,7 @@
     "husky": "^4.3.6",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~6.0.0",
+    "jscrambler": "^5.5.25",
     "karma": "~5.2.3",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.3",

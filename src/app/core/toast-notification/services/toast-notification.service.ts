@@ -1,7 +1,5 @@
 import { Injectable, TemplateRef } from '@angular/core';
 
-import * as _ from 'lodash';
-
 export enum TypeCode {
   default = 'default',
   info = 'info',

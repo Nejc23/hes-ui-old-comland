@@ -1,13 +1,8 @@
-import { ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
-import { map } from 'rxjs/operators';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { endsWith } from 'lodash';
 
 @Injectable({
   providedIn: 'root'

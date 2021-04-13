@@ -1,6 +1,5 @@
 import { AllForJobComponent } from '../meter-units-for-job/components/meter-units-for-job.component';
 import { Routes, RouterModule } from '@angular/router';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
 import { SchedulerJobsListComponent } from '../components/scheduler-jobs-list/scheduler-jobs-list.component';
 import { DcuForJobComponent } from '../dcu-for-job/components/dcu-for-job.component';

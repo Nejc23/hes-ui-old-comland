@@ -1,7 +1,6 @@
 import { PermissionEnumerator } from './../../../core/permissions/enumerators/permission-enumerator.model';
 import { AutoTemplateComponent } from '../auto-template/components/auto-template.component';
 import { Routes, RouterModule } from '@angular/router';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { NgModule } from '@angular/core';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
 import { PlcMeterTouConfigImportComponent } from '../../meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';

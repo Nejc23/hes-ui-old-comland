@@ -24,9 +24,7 @@ import '@progress/kendo-angular-intl/locales/de/all';
 import '@progress/kendo-angular-intl/locales/fr/all';
 import '@progress/kendo-angular-intl/locales/it/all';
 import '@progress/kendo-angular-intl/locales/en-GB/all';
-import { ChartsModule } from '@progress/kendo-angular-charts';
 import { AppConfigService } from './core/configuration/services/app-config.service';
-import { HttpClientModule } from '@angular/common/http';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);

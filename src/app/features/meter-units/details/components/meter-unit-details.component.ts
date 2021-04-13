@@ -1,11 +1,10 @@
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { Component, OnInit } from '@angular/core';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
-import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -24,17 +23,10 @@ export class MeterUnitDetailsComponent implements OnInit {
   private deviceId;
   public saveError;
 
-  private messageActionInProgress = $localize`Action in progress!`;
-  private messageServerError = $localize`Server error!`;
-
   private requestModel;
 
   public data: MeterUnitDetails;
   public form: FormGroup;
-  // public muStatuses: Codelist<number>[];
-  // public muTypes: Codelist<number>[];
-  // public muVendors: Codelist<number>[];
-  // public muTemplates: Codelist<string>[];
 
   constructor(
     private breadcrumbService: BreadcrumbService,

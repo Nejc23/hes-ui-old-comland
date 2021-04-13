@@ -2,7 +2,6 @@ import { JobTypeEnumeration } from './../../../jobs/enums/job-type.enum';
 import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
 import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
 import { Router } from '@angular/router';
-import { PlcMeterSetLimiterService } from './../../common/services/plc-meter-set-limiter.service';
 import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';

@@ -1,18 +1,13 @@
-import { notificationJobs } from './../../../../core/repository/consts/jobs.const';
-import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
 import { NotificationFilter, ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { ToastNotificationService } from './../../../../core/toast-notification/services/toast-notification.service';
-import { ToastComponent } from './../../../../shared/toast-notification/components/toast.component';
 import { CronScheduleComponent } from './../../cron-schedule/components/cron-schedule.component';
 import { Component, OnInit, ViewChild, Input, ViewChildren } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
-import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
@@ -24,7 +19,7 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
-import { isNumber } from 'lodash';
+
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'

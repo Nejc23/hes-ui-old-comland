@@ -1,19 +1,10 @@
-import {
-  IActionRequestParams,
-  IActionRequestRelays,
-  IActionRequestRelaysMode
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestParams, IActionRequestRelaysMode } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, ValidationErrors } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import {
-  RequestSetLimiter,
-  LimiterDefinitions,
-  ResponseCommonRegisterGroup
-} from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { ResponseCommonRegisterGroup } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
@@ -26,10 +17,8 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
   form: FormGroup;
   actionRequest: IActionRequestParams;
 
-  // deviceIdsParam = [];
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
-  // excludeIdsParam?: string[];
 
   relays$: Codelist<string>[];
   modes: Codelist<number>[];

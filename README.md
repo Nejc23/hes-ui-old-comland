@@ -52,3 +52,9 @@ Translation files can be updated in PoEdit editor.
 `npm run postinstall`
 
 `npm run build-production[:myGrid][:amera][:ePointHES]`
+
+## Production build with JScrambler - JavaScript obfuscator
+
+`npm run build-production:myGrid:jscr`
+`npm run build-production:amera:jscr`
+`npm run build-production:ePointHES:jscr`

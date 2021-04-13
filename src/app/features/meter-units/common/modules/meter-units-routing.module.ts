@@ -1,13 +1,10 @@
 import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
-import { Breadcrumb } from './../../../../shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { MeterUnitsOverviewComponent } from '../../overview/components/meter-units-overview.component';
 import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
 import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
-// import { AllForJobComponent } from '../../all-for-job/components/all-for-job.component';
 
 const routes: Routes = [
   {

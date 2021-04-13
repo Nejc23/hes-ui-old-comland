@@ -1,8 +1,5 @@
-import { PermissionEnumerator } from './../../permissions/enumerators/permission-enumerator.model';
-import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 import { Inject, Injectable, LOCALE_ID } from '@angular/core';
 import { from, Observable, of, Subscription } from 'rxjs';
-import { LoginCredentials } from '../interfaces/login-credentials.interface';
 import { AuthenticatedUser } from '../interfaces/authenticated-user.interface';
 import { RefreshTokenRequest } from '../interfaces/refresh-token.interface';
 import { CookieService } from 'ngx-cookie-service';
@@ -15,11 +12,9 @@ import { loginRouteUrl } from '../consts/route-url';
 import { PermissionsStoreService } from '../../permissions/services/permissions-store.service';
 import { environment } from 'src/environments/environment';
 import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
-import { IdentityToken } from '../../repository/interfaces/myGridLink/myGridLink.interceptor';
 import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { JwtHelperService } from './jwt.helper.service';
 import { RoleService } from '../../permissions/services/role.service';
-import { UserRight } from '../../permissions/interfaces/user-rights.interface';
 import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
 
 @Injectable()
@@ -30,8 +25,6 @@ export class AuthService {
   public user: User | null;
 
   tokenName = 'myGrid.Link_Token';
-  tokenDateTime = 'myGrid.Link_Token_DateTime';
-  tokenExpiresIn = 'myGrid.Link_Token_ExpiresIn';
 
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
@@ -63,15 +56,10 @@ export class AuthService {
       };
       this.userManager = new UserManager(settings);
     });
-
-    /* this.userManager.getUser().then(user => {
-      this.user = user;
-    });*/
   }
 
   getAuthToken(): string {
     return this.cookieService.get(config.authCookie);
-    // return 'bearer token';
   }
 
   getAuthTokenType(): string {
@@ -113,7 +101,6 @@ export class AuthService {
   }
 
   isAuthenticated(): boolean {
-    // console.log(`Is user authenticated?`, this.user);
     return this.user != null;
   }
 
@@ -158,46 +145,8 @@ export class AuthService {
     if (isDevelop === this.user.id_token) {
       localStorage.setItem('is_develop', this.user.id_token);
     }
-    // this.cookieService.set(config.authCookieExp, authenticatedUser.expireDate, null, environment.cookiePath);
     this.setUserRights(authenticatedUser);
   }
-  // for calling API-s on myGrid.Link server
-  // ----------------------------------------
-  /*
-  setAuthTokenMyGridLink(token: IdentityToken) {
-    localStorage.setItem(this.tokenName, token.TokenType + ' ' + token.AccessToken);
-    localStorage.setItem(this.tokenDateTime, new Date().toUTCString());
-    localStorage.setItem(this.tokenExpiresIn, token.ExpiresIn.toString());
-  }
-
-  getAuthTokenMyGridLink() {
-    return localStorage.getItem(this.tokenName);
-  }
-
-  isTokenAvailable(): boolean {
-    const expires = localStorage.getItem(this.tokenExpiresIn);
-    const dateCreatedToken = localStorage.getItem(this.tokenDateTime);
-    const expirationSeconds = moment(dateCreatedToken)
-      .add(expires, 'seconds')
-      .diff(moment(), 'seconds');
-    const result =
-      this.getAuthTokenMyGridLink() &&
-      this.getAuthTokenMyGridLink().length > 0 &&
-      expires !== null &&
-      dateCreatedToken !== null &&
-      expirationSeconds > 0;
-    return result;
-  }
-*/
-  /*
-  login(loginCredentials: LoginCredentials) {
-    return this.usersRepositoryService.authenticateUser(loginCredentials);
-  }
-*/
-  /**
-   * Refresh token after is not valid anymore
-   */
-  // ----------------------------------------
 
   /**
    * Login with user credentials

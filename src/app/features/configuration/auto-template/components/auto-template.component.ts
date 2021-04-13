@@ -100,15 +100,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     this.context = { forma: this.form, componentParent: this };
     this.gridOptions = this.service.setGridOptions();
     this.getRowHeight = (params) => {
-      // const editingCells = this.gridApi.getEditingCells();
-
-      // console.log('editingCells lenght', editingCells.length);
-      // if (editingCells.length > 0) {
-      //   if (editingCells[0].rowIndex === params.node.rowIndex) {
-      //     alert('row height 65');
-      //     return 65;
-      //   }
-      // }
       return 38;
     };
     this.columnDefs = this.service.setGridDefaultColumns();
@@ -116,8 +107,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
     this.cellRendererParams = {
       context: { forma: this.form, componentParent: this },
-      // rowHeight: 60,
-      // frameworkComponents: this.setFrameworkComponentsDetail(),
       editType: 'fullRow',
       suppressClickEdit: 'true',
       suppressCellSelection: true,
@@ -127,10 +116,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       onGridReady: (params) => {
         params.api.setDomLayout('autoHeight');
       },
-      // getRowStyle: () => {
-      //   // TODO use css class !!!
-      //   return { border: 0 };
-      // },
       defaultColDef: {
         sortable: false,
         resizable: false,
@@ -200,12 +185,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       }
     }
   }
-
-  // private setFrameworkComponentsDetail() {
-  //   return {
-  //     gridRequiredCellEditorComponent: GridRequiredCellEditorComponent
-  //   };
-  // }
 
   // form for edit
   createForm(): FormGroup {

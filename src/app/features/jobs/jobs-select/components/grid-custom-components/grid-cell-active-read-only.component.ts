@@ -1,7 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { Observable } from 'rxjs';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';

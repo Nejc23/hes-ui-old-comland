@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { PermissionsStoreService } from './permissions-store.service';
-import { ActionEnumerator } from '../enumerators/action-enumerator.model';
 import { PermissionEnumerator } from '../enumerators/permission-enumerator.model';
 
 @Injectable()

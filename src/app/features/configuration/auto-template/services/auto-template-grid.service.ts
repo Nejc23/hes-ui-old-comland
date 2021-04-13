@@ -55,11 +55,7 @@ export class AutoTemplatesGridService {
         cellEditorParams: { formName: 'propertyValue' },
         headerName: $localize`Regex`,
         valueSetter: (params) => {
-          if (params.oldValue !== params.newValue) {
-            return true;
-          } else {
-            return false;
-          }
+          return params.oldValue !== params.newValue;
         }
       },
       {

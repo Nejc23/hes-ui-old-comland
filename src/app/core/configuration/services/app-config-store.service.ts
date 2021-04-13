@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { Subject } from 'rxjs';
 import { Store } from '../../stores/helpers/store.helper';
 import { IAppConfig } from '../interfaces/app-config.interface';

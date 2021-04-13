@@ -1,10 +1,7 @@
 import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
-import { Breadcrumb } from './../../../../shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AlarmsEventsComponent } from '../../components/alarms-events.component';
-
-// import { AllForJobComponent } from '../../all-for-job/components/all-for-job.component';
 
 const routes: Routes = [
   {

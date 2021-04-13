@@ -25,16 +25,10 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
-import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
 import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
-import { capitalize } from 'lodash';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { IActionRequestDeleteDevice, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
