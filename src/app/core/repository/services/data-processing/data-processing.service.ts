@@ -1,10 +1,9 @@
-import { languages } from './../../../../../environments/config';
 import { DataProcessingRequest } from './../../interfaces/data-processing/data-processing-request.interface';
 import { getProfiles, getEvents, getInstantaneousValues } from './../../consts/data-processing.const';
 import { HttpRequest } from '@angular/common/http';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import {
   EventProfileDefinitionsForDevice,
   ProfileDefinitionsForDevice,

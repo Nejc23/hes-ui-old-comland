@@ -1,6 +1,4 @@
 import { CookieService } from 'ngx-cookie-service';
-import * as _ from 'lodash';
-import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 
 @Injectable()

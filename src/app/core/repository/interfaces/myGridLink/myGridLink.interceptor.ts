@@ -1,6 +1,5 @@
 import { GridSearchParams } from './../helpers/grid-request-params.interface';
 import { GridFilterParams } from '../helpers/grid-request-params.interface';
-import { IFilterParams } from '@ag-grid-community/core';
 
 export interface IdentityToken {
   AccessToken: string;

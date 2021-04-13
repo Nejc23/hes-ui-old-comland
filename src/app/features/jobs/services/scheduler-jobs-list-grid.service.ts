@@ -1,6 +1,5 @@
 import { GridCellDeviceCountComponent } from './../components/grid-custom-components/grid-cell-device-count.component';
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { GridCellNextRunComponent } from '../components/grid-custom-components/grid-cell-next-run.component';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';

@@ -1,8 +1,6 @@
-import { SidebarComponent } from './sidebar.component';
-import { Component, OnInit, HostListener, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
-import * as _ from 'lodash';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
@@ -29,28 +27,18 @@ import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 })
 export class BaseTemplateComponent implements OnInit {
   public app: any;
-  public headerThemes: any;
-  public changeHeader: any;
   public sidenavThemes: any;
-  public changeSidenav: any;
-  public headerSelected = 'header-default';
-  public sidenavSelected = 'sidenav-default';
   public version = '';
   public sidebarItems: Array<SidebarItem> = [];
   public sidebarMeterUnitsItems: Array<SidebarItem> = [];
   public sidebarConfigurationItems: Array<SidebarItem> = [];
   public isMouseOverNav = false;
   public submenu = 0;
-  // public organisation = $localize`no organisation`;
-
-  // languages$: Codelist<string>[];
-  companies$: Observable<Codelist<number>[]>;
 
   screenHeight: number;
   screenWidth: number;
 
   form: FormGroup;
-  selectedCompany: Codelist<number>;
 
   pageTitle = '';
 

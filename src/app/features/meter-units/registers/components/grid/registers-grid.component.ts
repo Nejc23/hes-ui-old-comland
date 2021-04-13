@@ -1,4 +1,3 @@
-import { Subscription } from 'rxjs';
 import { SidebarToggleService } from './../../../../../shared/base-template/components/services/sidebar.service';
 import { RegistersGridService } from './../../services/grid/registers-grid.service';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';

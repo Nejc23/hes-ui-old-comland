@@ -1,4 +1,3 @@
-import { GridSortParams } from './../../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridUtils } from './../../../global/grid.utils';
 import { AlarmingService } from './../../../../core/repository/services/alarming/alarming.service';
 import { IActionRequestParamsAlarms, IActionSortParams } from './../../../../core/repository/interfaces/myGridLink/action-prams.interface';

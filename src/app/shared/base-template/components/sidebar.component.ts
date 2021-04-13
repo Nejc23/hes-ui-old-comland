@@ -4,9 +4,7 @@ import * as _ from 'lodash';
 import { filter } from 'rxjs/operators';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
-// import { PermissionsService } from '../../../core/permissions/services/permissions.service';
 import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
-import { ItemChange } from '@progress/kendo-angular-charts/dist/es2015/common/collection.service';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 
 @Component({

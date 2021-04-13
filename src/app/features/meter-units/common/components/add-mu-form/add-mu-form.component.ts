@@ -1,6 +1,5 @@
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { identity, toLower } from 'lodash';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { MeterUnitsService } from './../../../../../core/repository/services/meter-units/meter-units.service';
@@ -8,7 +7,6 @@ import { RadioOption } from './../../../../../shared/forms/interfaces/radio-opti
 import { MuAdvancedInformation } from './../../../../../core/repository/interfaces/meter-units/mu-advanced-information.interface';
 import { MuWrapperInformation } from './../../../../../core/repository/interfaces/meter-units/mu-wrapper-information.interface';
 import { AutoTemplatesService } from './../../../../../core/repository/services/auto-templates/auto-templates.service';
-import { CodelistRepositoryService } from './../../../../../core/repository/services/codelists/codelist-repository.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,9 +19,9 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
-import { TouchListener } from '@ag-grid-community/core';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { map } from 'rxjs/operators';
+
 @Component({
   templateUrl: './add-mu-form.component.html'
 })
@@ -35,7 +33,6 @@ export class AddMuFormComponent implements OnInit {
   tabTitleJobs = $localize`Jobs`;
   tabTitleCommunication = $localize`Communication`;
   tabTitleAdvanced = $localize`Advanced`;
-  tabTitleCustomProperties = $localize`Custom properties`;
 
   form: FormGroup;
   editMu: MeterUnitDetails;

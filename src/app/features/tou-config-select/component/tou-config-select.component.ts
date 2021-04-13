@@ -3,7 +3,7 @@ import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { Observable } from 'rxjs';
 import * as _ from 'lodash';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { TimeOfUseConfigList } from 'src/app/core/repository/interfaces/time-of-use/time-of-use-config-list.interface';
@@ -19,7 +19,6 @@ export class TouConfigSelectComponent implements OnInit {
   @Output() rowSelected = new EventEmitter<number>();
 
   form: FormGroup;
-  searchTextEmpty = true;
   public modules: Module[] = AllModules;
   public gridApi;
   columnDefs = [];
@@ -33,8 +32,7 @@ export class TouConfigSelectComponent implements OnInit {
     private registersSelectService: TimeOfUseService,
     private registersSelectGridService: TouConfigSelectGridService,
     public fb: FormBuilder,
-    public staticTextService: ActionFormStaticTextService,
-    private formUtils: FormsUtilsService
+    public staticTextService: ActionFormStaticTextService
   ) {}
 
   createForm(): FormGroup {

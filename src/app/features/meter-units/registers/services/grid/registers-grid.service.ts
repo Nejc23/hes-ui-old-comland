@@ -1,4 +1,4 @@
-import { Injectable, PipeTransform } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { GridCellDateComponent } from '../../components/grid/grid-custom-components/grid-cell-date.component';
 
 @Injectable({

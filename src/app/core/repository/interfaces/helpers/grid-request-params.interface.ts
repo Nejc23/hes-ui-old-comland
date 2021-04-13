@@ -1,5 +1,4 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { IActionFilterParams, IActionRequestParams, IActionSortParams } from '../myGridLink/action-prams.interface';
 
 export interface GridRequestParams {
   requestId: string;

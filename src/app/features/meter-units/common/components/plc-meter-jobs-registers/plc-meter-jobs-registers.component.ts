@@ -1,12 +1,11 @@
 import { Module, AllModules } from '@ag-grid-enterprise/all-modules';
 import { OnInit } from '@angular/core';
-import { Component, Input } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
-import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { IActionRequestAddTemplate, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';

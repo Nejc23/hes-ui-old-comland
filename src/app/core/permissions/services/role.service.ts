@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { Role } from '../interfaces/role.interface';
 import { RoleEnumerator } from '../enumerators/role-enumerator.model';
 import { FunctionalityEnumerator } from '../enumerators/functionality-enumerator.model';

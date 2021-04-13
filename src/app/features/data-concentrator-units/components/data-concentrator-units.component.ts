@@ -1,16 +1,11 @@
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { DcLastStatusStatus } from './../../../core/repository/interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
-import { GridSettingsSessionStoreService } from './../../../core/utils/services/grid-settings-session-store.service';
-import { GridSearchParams } from './../../../core/repository/interfaces/helpers/grid-request-params.interface';
-import { GridSettingsSessionStore } from './../../../core/utils/interfaces/grid-settings-session-store.interface';
 import { SettingsStoreEmitterService } from './../../../core/repository/services/settings-store/settings-store-emitter.service';
 import { DcuUnitsGridLayoutStore } from './../interfaces/dcu-units-grid-layout.store';
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SidebarToggleService } from './../../../shared/base-template/components/services/sidebar.service';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
@@ -33,17 +28,12 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
-import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
-import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { DcOperationsService } from '../services/dc-operations.service';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
-import { capitalize } from 'lodash';
-import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
-import { filterOperationEnum } from '../../global/enums/filter-operation-global.enum';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
@@ -356,41 +346,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
     // this.eventService.checkChange(true);
   }
-
-  // on close tool panel reload filter model
-  // no toolpanel anymore
-  /*toolPanelChanged(params) {
-    if (params.source === undefined) {
-      if (
-        !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
-          this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),
-          this.requestModel.filterModel
-        )
-      ) {
-        const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
-        if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
-          this.requestModel.filterModel.readStatus.operation = filterDCU.readStatusFilter.operation;
-          this.requestModel.filterModel.readStatus.value1 = filterDCU.readStatusFilter.value1;
-          this.requestModel.filterModel.readStatus.value2 = filterDCU.readStatusFilter.value2;
-        } else {
-          this.requestModel.filterModel.readStatus = {
-            operation: { id: '', value: '' },
-            value1: 0,
-            value2: 0
-          };
-        }
-        this.requestModel.filterModel.vendor = filterDCU.vendorFilter;
-        this.requestModel.filterModel.types = filterDCU.typesFilter;
-        this.requestModel.filterModel.tags = filterDCU.tagsFilter;
-        this.dataConcentratorUnitsGridService.setSessionSettingsPageIndex(0);
-        this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-        this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-        this.gridApi.onFilterChanged();
-        this.setFilterInfo();
-      }
-    }
-  }*/
 
   setSearch() {
     const search = this.dataConcentratorUnitsGridService.getSessionSettingsSearchedText();

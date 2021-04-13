@@ -2,10 +2,8 @@ import { FileUploadComponent } from './../../../../shared/forms/components/file-
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import * as _ from 'lodash';
 import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';

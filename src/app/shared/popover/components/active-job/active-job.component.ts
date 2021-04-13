@@ -1,6 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as _ from 'lodash';
-import * as moment from 'moment';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { Observable } from 'rxjs';
