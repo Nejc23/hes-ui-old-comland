@@ -15,7 +15,11 @@ export class MeterUnitsSchedulerInterceptor {
 
   static interceptMeterUnitSchedulerPost(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const data: SchedulerJob = {
-      registers: ['guid-1', 'guid-4', 'guid-5'],
+      registers: [
+        { name: 'guid-1', type: 'type-1' },
+        { name: 'guid-4', type: 'type-1' },
+        { name: 'guid-5', type: 'type-1' }
+      ],
       description: '',
       active: true,
       cronExpression: '0 0 0 * * ? *',

@@ -12,7 +12,7 @@ export interface SchedulerJob {
   active: boolean;
 
   devices?: GridBulkActionRequestParams;
-  registers?: string[];
+  registers?: RegistersSelectRequest[];
   readingProperties?: ReadingProperties;
   schedules?: Schedule[];
 
