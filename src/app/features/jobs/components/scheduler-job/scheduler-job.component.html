@@ -1,10 +1,30 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header>{{title}} {{getSelectedRowsCount()}}</div>
+  <div *ngIf="step === 0" modal-header i18n>Create a new job</div>
+  <div *ngIf="step > 0" modal-header>{{title}} {{getSelectedRowsCount()}}</div>
 
   <div modal-body>
-    <ng-container *ngIf="form">
-    <div id="step1" *ngIf="step === 1">
+    <ng-container>
+    <div id="step0" *ngIf="step === 0">
+      <div class="form-row">
+        <div class="col-12">
+          <span i18n>To continue, select a job type, please.</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 add-job-grid">
+          <div class="row">
+            <div class="col-4 h-100 p-0 card-container {{addJobTmp.cssClasses}}" *ngFor="let addJobTmp of addJobs">
+              <app-add-job
+                [jobParams]="addJobTmp"
+                (addJob)="addJob($event)"
+              ></app-add-job>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="step1" *ngIf="step === 1 && form">
       <div class="form-row">
         <div class="col-12">
           <app-input-switch [form]="form" [property]="activeProperty" i18n-label label="Active">

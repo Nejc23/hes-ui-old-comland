@@ -168,3 +168,41 @@ label {
     }
   }
 }
+
+.add-job-grid {
+  padding-top:20px;
+  padding-left:80px;
+  padding-right:80px;
+
+  .card-container {
+    :hover {
+      background-color: #f9f9fb;
+    }
+
+    .card
+    {
+      cursor: pointer;
+      border: none;
+
+      .icon {
+        font-size: 48px;
+        text-align: center;
+        color: $primary;
+      }
+      div {
+        text-align: center;
+      }
+      .name {
+        font-weight: 500;
+      }
+      .badge {
+        font-size: 11px;
+
+        &.badge-primary {
+          width: 60px;
+          background-color: $primary !important;
+        }
+      }
+    }
+  }
+}
