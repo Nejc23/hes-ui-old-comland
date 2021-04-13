@@ -928,7 +928,7 @@ $badge-pill-border-radius: 10rem !default;
 // Modals
 
 // Padding applied to the modal body
-$modal-inner-padding: 1rem !default;
+$modal-inner-padding: 2.286rem !default;
 
 // Margin between elements in footer, must be lower than or equal to 2 * $modal-inner-padding
 $modal-footer-margin-between: .5rem !default;
@@ -940,7 +940,7 @@ $modal-title-line-height: $line-height-base !default;
 
 $modal-content-color: null !default;
 $modal-content-bg: $white !default;
-$modal-content-border-color: rgba($black, .2) !default;
+$modal-content-border-color: transparent !default;
 $modal-content-border-width: $border-width !default;
 $modal-content-border-radius: $border-radius-lg !default;
 $modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
@@ -953,12 +953,12 @@ $modal-header-border-color: $border-color !default;
 $modal-footer-border-color: $modal-header-border-color !default;
 $modal-header-border-width: 0px !default;
 $modal-footer-border-width: $modal-header-border-width !default;
-$modal-header-padding-y: 1rem !default;
-$modal-header-padding-x: 1rem !default;
+$modal-header-padding-y: 1.714rem !default;
+$modal-header-padding-x: 1.714rem !default;
 $modal-header-padding: $modal-header-padding-y $modal-header-padding-x !default; // Keep this for backwards compatibility
 
-$modal-xl: 1140px !default;
-$modal-lg: 800px !default;
+$modal-xl: 593px !default;
+//$modal-lg: 800px !default;
 $modal-md: 500px !default;
 $modal-sm: 300px !default;
 
@@ -1097,7 +1097,7 @@ $spinner-border-width-sm: .2em !default;
 
 // Close
 
-$close-font-size: $font-size-base * 1.15 !default;
+$close-font-size: $font-size-base * 2 !default;
 $close-font-weight: $font-weight-normal !default;
 $close-color: $gray-700 !default;
 $close-text-shadow: 0 1px 0 $white !default;

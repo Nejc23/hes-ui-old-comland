@@ -491,12 +491,18 @@ export class MeterUnitsPlcActionsService {
         this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
           (value) => {
+            console.log(value.requestId);
             this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
             } else if (operation === MeterUnitsTypeEnum.ciiState) {
               this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
             }
+            const options: NgbModalOptions = {
+              size: 'xl'
+            };
+            // todo open new modal with status
+            this.modalService.open(SchedulerJobComponent, options);
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);

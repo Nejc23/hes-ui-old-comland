@@ -670,6 +670,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onConnect(selectedGuid: string) {
+    debugger;
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
