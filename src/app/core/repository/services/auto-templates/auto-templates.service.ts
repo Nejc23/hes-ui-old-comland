@@ -14,7 +14,6 @@ import {
 } from '../../consts/auto-templates.const';
 import { AutoTemplateRuleList, AutoTemplateRule } from '../../interfaces/auto-templates/auto-template-rule.interface';
 import { Rule } from '../../interfaces/auto-templates/rule.interface';
-import { AutoTemplateList } from '../../interfaces/auto-templates/auto-templates-list.interface';
 
 @Injectable({
   providedIn: 'root'

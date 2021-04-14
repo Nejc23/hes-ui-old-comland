@@ -1,17 +1,5 @@
-import {
-  Component,
-  OnInit,
-  HostListener,
-  ElementRef,
-  ViewChild,
-  Renderer2,
-  AfterViewInit,
-  Input,
-  EventEmitter,
-  Output
-} from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ValueAxisCrosshairComponentGenerated } from '@progress/kendo-angular-charts';
+import { Component, OnInit, HostListener, ElementRef, ViewChild, Renderer2, Input, EventEmitter, Output } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { formatDate } from '@progress/kendo-angular-intl';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -96,13 +84,12 @@ export class DateRangePickerComponent implements OnInit {
       return false;
     }
 
-    const result =
+    const result = !!(
       this.anchorTextbox?.nativeElement?.contains(target) ||
       this.popup?.nativeElement?.contains(target) ||
       this.datePickerStart?.nativeElement?.contains(target) ||
       this.datePickerEnd?.nativeElement?.contains(target)
-        ? true
-        : false;
+    );
 
     if (result) {
       return result;

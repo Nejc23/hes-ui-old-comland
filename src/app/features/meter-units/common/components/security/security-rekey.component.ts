@@ -1,10 +1,8 @@
-import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { FormsUtilsService } from './../../../../../core/forms/services/forms-utils.service';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { Codelist } from './../../../../../shared/repository/interfaces/codelists/codelist.interface';
 import {
-  IActionRequestEnableHls,
   IActionRequestParams,
   IActionRequestSecurityRekey
 } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
@@ -18,10 +16,6 @@ import { TemplatesService } from 'src/app/core/repository/services/templates/tem
   templateUrl: './security-rekey.component.html'
 })
 export class SecurityRekeyComponent implements OnInit {
-  // deviceIdsParam = [];
-  // filterParam?: GridFilterParams;
-  // searchParam?: GridSearchParams[];
-  // excludeIdsParam?: string[];
   public selectedRowsCount: number;
 
   actionRequest: IActionRequestParams;
@@ -38,8 +32,7 @@ export class SecurityRekeyComponent implements OnInit {
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
-    private formUtils: FormsUtilsService,
-    private templatesService: TemplatesService
+    private formUtils: FormsUtilsService
   ) {
     this.keyTypes = [
       { id: 'GUEK', value: 'GUEK' },

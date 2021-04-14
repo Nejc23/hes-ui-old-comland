@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-item.interface';
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
 import { PermissionEnumerator } from '../../permissions/enumerators/permission-enumerator.model';
-import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
 import { AppConfigService } from '../../configuration/services/app-config.service';
 
 @Injectable({

@@ -1,5 +1,4 @@
 import { GridBulkActionRequestParams } from '../helpers/grid-bulk-action-request-params.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { RegistersSelectRequest } from '../registers-select/registers-select-request.interface';
 
 export interface SchedulerJob {
@@ -12,7 +11,7 @@ export interface SchedulerJob {
   active: boolean;
 
   devices?: GridBulkActionRequestParams;
-  registers?: string[];
+  registers?: RegistersSelectRequest[];
   readingProperties?: ReadingProperties;
   schedules?: Schedule[];
 

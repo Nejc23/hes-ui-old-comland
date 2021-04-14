@@ -25,17 +25,13 @@ export class HeaderInjectorInterceptor implements HttpInterceptor {
 
   localeToHeaderLocale(): string {
     if (this.locale && this.locale !== null) {
-      // console.log(2);
       const loc = _.find(languages, (x) => x.id === this.locale);
       if (loc !== undefined && loc !== null) {
-        // console.log(4);
         return loc.acceptLanguage;
       } else {
-        // console.log(5);
         return this.locale;
       }
     } else {
-      // console.log(6);
       throw new Error('locale not supported!');
     }
   }

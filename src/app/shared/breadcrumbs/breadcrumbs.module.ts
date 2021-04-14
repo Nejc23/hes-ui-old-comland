@@ -1,4 +1,3 @@
-import { BreadcrumbService } from './services/breadcrumb.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BreadcrumbComponent } from './components/breadcrumb.component';

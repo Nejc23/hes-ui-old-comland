@@ -1,10 +1,10 @@
 import { basePathDcOperations, dcLastStatus } from './../../consts/data-concentrator-units.const';
 import { Injectable } from '@angular/core';
-import { HttpParams, HttpRequest } from '@angular/common/http';
+import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { dcOperationFwUpgrade, dcOperationSynchronizeTime } from '../../consts/data-concentrator-units.const';
-import { RequestFilterParams, ResponseData } from '../../interfaces/data-concentrator-units/dc-operation-simple.interface';
+import { ResponseData } from '../../interfaces/data-concentrator-units/dc-operation-simple.interface';
 import { IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
 import { DcLastStatusResponse } from '../../interfaces/data-concentrator-units/dcu-operations/dcu-operations-params.interface';
 

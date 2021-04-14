@@ -1,5 +1,4 @@
 import { InstantValue } from './instant-value.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 export interface MeterUnitsList {
   deviceId: string;

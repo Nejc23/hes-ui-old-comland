@@ -1,8 +1,6 @@
-import { GridSearchParams, GridFilterParams } from './../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';

@@ -1,7 +1,5 @@
-import { ActionEnumerator } from 'src/app/core/permissions/enumerators/action-enumerator.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
 import { DcOperationsService } from '../../services/dc-operations.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';

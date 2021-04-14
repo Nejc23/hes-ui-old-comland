@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as _ from 'lodash';
 import { BehaviorSubject } from 'rxjs';
 import { SavedPermissions } from '../interfaces/permissions.interface';
 import { Store } from '../../stores/helpers/store.helper';

@@ -11,7 +11,6 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
-import * as moment from 'moment';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
@@ -29,11 +28,8 @@ export class AddDcuFormComponent implements OnInit {
   dcuVendors: Codelist<number>[];
   dcuTags$: Observable<Codelist<number>[]>;
   saveError: string;
-  // discoveryJobs: Codelist<string>[];
 
   public credentialsVisible = false;
-
-  public isBasicSelected = true;
 
   gridApi;
 

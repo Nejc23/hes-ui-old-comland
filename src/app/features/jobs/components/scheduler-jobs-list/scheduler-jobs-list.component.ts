@@ -8,7 +8,6 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
 import { forkJoin, Observable, Subscription } from 'rxjs';
-import * as _ from 'lodash';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
@@ -26,7 +25,6 @@ import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-job
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { timeout } from 'rxjs/operators';
 
 @Component({
   selector: 'app-scheduler-jobs-list',

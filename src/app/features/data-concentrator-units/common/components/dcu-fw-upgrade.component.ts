@@ -2,15 +2,9 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import * as _ from 'lodash';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { FileGuid } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
-import { fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { HttpHeaders } from '@angular/common/http';
-import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { FileInfo } from '@progress/kendo-angular-upload';
@@ -96,11 +90,6 @@ export class DcuFwUpgradeComponent implements OnInit {
           this.dcuGridService.saveDcOperationRequestId(result);
         }
         this.modal.close();
-        /*this.toast.infoToast(result.status);
-          if (result.status.includes('waiting for activiation')) {
-            this.activate = true;
-          }
-        }*/
       },
       (error) => {
         console.log('upgrade error', error);
@@ -156,15 +145,6 @@ export class DcuFwUpgradeComponent implements OnInit {
     event.files.forEach((file: FileInfo) => {
       if (file.rawFile) {
         this.file = file.rawFile;
-
-        // const reader = new FileReader();
-
-        // reader.onloadend = () => {
-        //   this.file. = reader.result as Blob;
-        // };
-
-        // reader.readAsArrayBuffer(file.rawFile);
-        // return reader
       }
     });
   }

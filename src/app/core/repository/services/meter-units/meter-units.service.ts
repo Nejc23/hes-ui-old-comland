@@ -1,10 +1,8 @@
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
-import { MuAdvancedInformation } from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 import { getDevice, muCreate, muUpdate } from './../../consts/meter-units.const';
 import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
-import { MeterUnitDetailsForm } from './../../../../features/meter-units/details/interfaces/meter-unit-form.interface';
 import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -25,10 +23,7 @@ import {
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
-import * as _ from 'lodash';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
-import { RequestRemoveMeterUnitsFromJob } from '../../interfaces/meter-units/remove-meter-units-from-job.interface';
-import { MeterUnit } from '../../interfaces/meter-units/meter-unit.interface';
 import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
 import { capitalize } from 'lodash';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
