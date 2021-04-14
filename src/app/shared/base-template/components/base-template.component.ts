@@ -18,6 +18,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SidebarToggleService } from './services/sidebar.service';
 import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
+import { PermissionService } from '../../../core/permissions/services/permission.service';
 
 @Component({
   selector: 'app-base-template',
@@ -53,7 +54,8 @@ export class BaseTemplateComponent implements OnInit {
     private acitavedRouter: ActivatedRoute,
     private sidebarToggleService: SidebarToggleService,
     private route: Router,
-    private sidebarCookieService: SidebarCookieStoreService
+    private sidebarCookieService: SidebarCookieStoreService,
+    private permissionService: PermissionService
   ) {
     this.app = {
       layout: {
@@ -216,5 +218,13 @@ export class BaseTemplateComponent implements OnInit {
   isMenuCollapsed(): boolean {
     const sidebarMenuState = this.sidebarCookieService.getSidebarLayout('sidebarMenuState');
     return sidebarMenuState === SidebarAnimationState.close;
+  }
+
+  hasAccess(item: SidebarItem): boolean {
+    if (item.permission) {
+      return this.permissionService.hasAccess(item.permission);
+    } else {
+      return true;
+    }
   }
 }
