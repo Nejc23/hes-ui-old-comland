@@ -40,6 +40,9 @@ import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { GridUtils } from '../../global/grid.utils';
 import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
+import { StatusJobComponent } from '../../jobs/components/status-job/status-job.component';
+import { ActiveJobsListComponent } from '../../jobs/components/active-jobs-list/active-jobs-list.component';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -202,6 +205,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+    this.modalService.open(ActiveJobsListComponent, options);
     // set grid columns
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid

@@ -18,34 +18,21 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
-import { ActiveJobInterface } from '../../interfaces/active-job-progress.interface';
+import { StatusJobProgressInterface } from '../../interfaces/status-job-progress.interface';
 
 @Component({
-  selector: 'app-active-jobs-list',
-  templateUrl: './active-jobs-list.component.html'
+  selector: 'app-status-job',
+  templateUrl: './status-job.component.html'
 })
-export class ActiveJobsListComponent implements OnInit {
+export class StatusJobComponent implements OnInit {
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
-  activeJobs: ActiveJobInterface = {
-    totalJobs: 2,
-    runningJobs: 1,
-    pendingJobs: 1,
-    jobs: [
-      {
-        jobName: 'Job 1',
-        state: 'running',
-        status: 'TASK_EXECUTING',
-        lastUpdated: '2021-04-13T10:42:40.8694509+02:00'
-      },
-      {
-        jobName: 'Job 2',
-        state: 'pending',
-        status: 'TASK_INITIALIZED',
-        lastUpdated: '2021-04-13T10:42:40.8695399+02:00'
-      }
-    ]
+  statusJobProgress: StatusJobProgressInterface = {
+    deviceCount: 4,
+    successCount: 1,
+    failCount: 1,
+    progress: 50.0
   };
 
   start;

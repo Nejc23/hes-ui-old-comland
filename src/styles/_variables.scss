@@ -67,6 +67,10 @@ $danger: #E43458 !default;
 $light: $gray-300 !default;
 $dark: $gray-800 !default;
 
+$lightestGray: #F4F6F9;
+$mediumGray: #A9ABAF;
+$darkGray: #6F7072;
+
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(("primary": $primary,
@@ -155,7 +159,7 @@ $body-color: $gray-900 !default;
 //
 // Style anchor elements.
 
-$link-color: theme-color("secondary") !default;
+$link-color: $darkGray !default;
 $link-decoration: none !default;
 $link-hover-color: darken($link-color, 15%) !default;
 $link-hover-decoration: none !default;
@@ -285,12 +289,15 @@ $font-weight-bolder: 500 !default;
 $font-weight-base: $font-weight-normal !default;
 $line-height-base: 1.5 !default;
 
-$h1-font-size: $font-size-base * 1.75 !default; //24.5px
+$h1-font-size: $font-size-base * 1.714 !default; //24px
 $h2-font-size: $font-size-base * 1.5 !default; //21px
 $h3-font-size: $font-size-base * 1.3 !default; //18px
-$h4-font-size: $font-size-base * 1.1 !default; //15.5px
+$h4-font-size: $font-size-base * 1.143 !default; //16px
 $h5-font-size: $font-size-base !default;
 $h6-font-size: $font-size-base * .75 !default;
+
+$tinyText: $font-size-base * 0.7857;
+$smallText: $font-size-base * 0.8571;
 
 $headings-margin-bottom: $spacer / 2 !default;
 $headings-font-family: null !default;
@@ -371,6 +378,7 @@ $table-caption-color: $text-muted !default;
 $table-bg-level: -9 !default;
 $table-border-level: -6 !default;
 
+$table-border-color: transparent;
 
 // Buttons + Forms
 //
@@ -953,8 +961,8 @@ $modal-header-border-color: $border-color !default;
 $modal-footer-border-color: $modal-header-border-color !default;
 $modal-header-border-width: 0px !default;
 $modal-footer-border-width: $modal-header-border-width !default;
-$modal-header-padding-y: 1.714rem !default;
-$modal-header-padding-x: 1.714rem !default;
+$modal-header-padding-y: 1.714rem !default; // 24px
+$modal-header-padding-x: 2.286rem !default; // 32px
 $modal-header-padding: $modal-header-padding-y $modal-header-padding-x !default; // Keep this for backwards compatibility
 
 $modal-xl: 593px !default;
@@ -992,7 +1000,7 @@ $progress-bg: $gray-200 !default;
 $progress-border-radius: $border-radius !default;
 $progress-box-shadow: inset 0 .1rem .1rem rgba($black, .1) !default;
 $progress-bar-color: $white !default;
-$progress-bar-bg: theme-color("primary") !default;
+$progress-bar-bg: $success !default;
 $progress-bar-animation-timing: 1s linear infinite !default;
 $progress-bar-transition: width .6s ease !default;
 

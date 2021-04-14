@@ -1,4 +1,4 @@
-<div class="modal-header gray-line" *ngIf="modalTitle">
+<div class="modal-header modal-md gray-line" *ngIf="modalTitle">
   <div class="modal-warning" *ngIf='warningIcon'>
     <img src="../../../assets/images/icons/warning-icon.svg" class="mr-3" />
   </div>
@@ -9,7 +9,7 @@
   </button>
 </div>
 
-<div class="modal-body big-text">{{modalBody}}</div>
+<div class="modal-body large-text-bold">{{modalBody}}</div>
 
 <div class="modal-footer">
   <button type="button" class="btn btn-link" (click)="dismiss()" i18n>Cancel</button>

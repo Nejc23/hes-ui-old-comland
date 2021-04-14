@@ -71,6 +71,7 @@
     "@progress/kendo-theme-default": "latest",
     "@types/jquery": "^3.5.5",
     "@types/lodash": "^4.14.165",
+    "angular-cd-timer": "^1.0.0",
     "bootstrap": "^4.5.3",
     "core-js": "^3.8.1",
     "cron-validate": "^1.4.2",

@@ -103,18 +103,83 @@ label {
   text-align: center;
 }
 
-.gray-line {
-  border-bottom: 1px solid #F4F6F9;
+// fonts as defined in figma -> create _fonts.css
+.text-normal {
+  font-size: $font-size-base; // 14px
+  line-height: 1.7;
 }
 
-.big-text {
+.text-normal-bold {
+  font-size: $font-size-base;
   font-weight: 500;
-  font-size: $h1-font-size;
-  color: black;
+  line-height: 1.7;
+}
+
+.large-text {
+  font-size: $h1-font-size; // 24px
   line-height: 1.4;
 }
 
-.modal-dialog {
-  max-width: 500px;
-  margin: 1.75rem auto;
+.large-text-bold {
+  font-weight: 500;
+  font-size: $h1-font-size;
+  line-height: 1.4;
+}
+
+.small-title {
+  font-weight: 500;
+  font-size: $h4-font-size; // 16px
+  line-height: 1.5;
+}
+
+.small-text {
+  font-size: $smallText; // 12px
+  line-height: 1.7px;
+}
+
+.tiny-text {
+  font-size: $tinyText; // 11px
+  line-height: 1.4;
+}
+
+.modal-footer {
+  padding: 0 2.286rem 2.286rem; // 2.286rem = 32px;
+}
+
+.gray-box {
+  width: 31%;
+  height: 76px;
+  background: rgba(242, 243, 247, 0.5);
+  border-radius: 4px;
+}
+
+.box-data {
+  padding: 12px 20px;
+  height: 100%;
+}
+
+// grays from figma
+// todo check text-darkGray
+.gray-color {
+  color: $mediumGray;
+}
+
+.gray-color-dark {
+  color: $darkGray;
+}
+
+.gray-line {
+  border-bottom: 1px solid $lightestGray;
+}
+
+.modal-footer {
+  border-top: 1px solid $lightestGray;
+}
+
+.gray-background {
+  background-color: $lightestGray;
+}
+
+th {
+  padding: 0 5px 5px !important;
 }

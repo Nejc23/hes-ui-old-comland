@@ -35,6 +35,7 @@ import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-e
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
+import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 
 @Injectable({
   providedIn: 'root'
@@ -422,6 +423,7 @@ export class MeterUnitsPlcActionsService {
   // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
   // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
   bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number, navigateToGrid = false) {
+    debugger;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = $localize`Confirm`;
@@ -502,7 +504,7 @@ export class MeterUnitsPlcActionsService {
               size: 'xl'
             };
             // todo open new modal with status
-            this.modalService.open(SchedulerJobComponent, options);
+            this.modalService.open(StatusJobComponent, options);
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);

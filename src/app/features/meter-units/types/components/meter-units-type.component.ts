@@ -34,6 +34,7 @@ import { SettingsStoreEmitterService } from 'src/app/core/repository/services/se
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -322,6 +323,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.modalService.open(StatusJobComponent);
     // set grid columns
     this.columns = this.meterUnitsTypeGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
@@ -670,7 +672,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onConnect(selectedGuid: string) {
-    debugger;
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,

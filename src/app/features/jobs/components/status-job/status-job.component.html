@@ -1,0 +1,54 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header>Job name here</div>
+
+  <div modal-body>
+      <div class="d-flex justify-content-between mb-5">
+        
+        <div class="boxes">
+          <div class="gray-box">
+            <div class="box-data">
+              <div class="large-text-bold">{{ statusJobProgress.deviceCount}}</div>
+              <div class="tiny-text gray-color">Total devices</div>
+            </div>
+          </div>
+
+          <div class="gray-box">
+            <div class="box-data">
+              <div class="large-text-bold">{{ statusJobProgress.successCount}}</div>
+              <div class="tiny-text gray-color">Succeded</div>
+            </div>
+          </div>
+
+          <div class="gray-box">
+            <div class="box-data">
+              <div class="large-text-bold text-danger">{{ statusJobProgress.failCount}}</div>
+              <div class="tiny-text">Failed</div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="small-text gray-color">
+        Progress:
+      </div>
+      <div class="small-title gray-color">
+        {{ statusJobProgress.progress }} %
+      </div>
+    </div>
+    <div class="progress mt-3">
+      <div class="progress-bar" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+    </div>
+
+      <div class="d-flex pt-3 justify-content-end tiny-text gray-color">
+        Running time: <cd-timer class="pl-3"></cd-timer>
+      </div>
+    </div>
+
+  <div modal-footer>
+       <button type="button" class="btn btn-link" i18n>Close</button>
+  </div>
+</app-modal-template>
+
+<!--<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>-->
