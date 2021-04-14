@@ -50,11 +50,13 @@
       </div> -->
 
       <ul class="navbar-nav collapsed" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
-        <li *ngFor="let item of sidebarItems; let first = first"
-          class="nav-item lh-1 px-2" routerLinkActive="active"
-          [ngClass]="{'active': isRouteActive(item.routeLink)}">
-          <a class="nav-link pl-0 pr-0 text-center"><i class="md-20" [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }">{{item.icon}}</i></a>
-        </li>
+        <ng-container *ngFor="let item of sidebarItems; let first = first">
+          <li *ngIf="hasAccess(item)"
+              class="nav-item lh-1 px-2" routerLinkActive="active"
+              [ngClass]="{'active': isRouteActive(item.routeLink)}">
+            <a class="nav-link pl-0 pr-0 text-center"><i class="md-20" [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }">{{item.icon}}</i></a>
+          </li>
+        </ng-container>
       </ul>
 
       <ul @navItemsTrigger class="navbar-nav" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
