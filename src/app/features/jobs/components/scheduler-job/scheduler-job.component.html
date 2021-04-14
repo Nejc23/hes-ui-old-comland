@@ -14,9 +14,9 @@
       <div class="row">
         <div class="col-12 add-job-grid">
           <div class="row">
-            <div class="col-4 h-100 p-0 card-container {{addJobTmp.cssClasses}}" *ngFor="let addJobTmp of addJobs">
+            <div class="col-4 h-100 p-0 card-container {{addJobForUser.cssClasses}}" *ngFor="let addJobForUser of addJobsForUser">
               <app-add-job
-                [jobParams]="addJobTmp"
+                [jobParams]="addJobForUser"
                 (addJob)="addJob($event)"
               ></app-add-job>
             </div>

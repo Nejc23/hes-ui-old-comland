@@ -29,6 +29,7 @@ import { isNumber } from 'lodash';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { combineLatest, take } from 'rxjs/operators';
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -81,7 +82,6 @@ export class SchedulerJobComponent implements OnInit {
       jobName: $localize`Reading`,
       deviceType: $localize`METER`,
       icon: 'line_weight',
-      cssClasses: 'border-bottom',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
     },
     {
@@ -89,7 +89,6 @@ export class SchedulerJobComponent implements OnInit {
       jobName: $localize`Discovery`,
       deviceType: $localize`DC`,
       icon: 'search',
-      cssClasses: 'border-bottom border-left border-right',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
@@ -97,7 +96,6 @@ export class SchedulerJobComponent implements OnInit {
       jobName: $localize`Time synchronization`,
       deviceType: $localize`DC`,
       icon: 'restore',
-      cssClasses: 'border-bottom',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
@@ -113,7 +111,6 @@ export class SchedulerJobComponent implements OnInit {
       deviceType: $localize`DC`,
       icon: 'share',
       isIconOutlined: true,
-      cssClasses: 'border-left border-right',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
@@ -126,6 +123,8 @@ export class SchedulerJobComponent implements OnInit {
     }
   ];
 
+  addJobsForUser: AddJobParams[];
+
   constructor(
     private meterService: PlcMeterReadScheduleService,
     private codelistService: CodelistRepositoryService,
@@ -137,7 +136,29 @@ export class SchedulerJobComponent implements OnInit {
     private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
     private permissionService: PermissionService
-  ) {}
+  ) {
+    this.initAddJobsForUser();
+  }
+
+  initAddJobsForUser() {
+    const itemsPerRow = 3;
+
+    this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
+    const jobsLength = this.addJobsForUser.length;
+
+    for (let i = 0; i < jobsLength; i++) {
+      if (i < 3 && jobsLength > 3) {
+        this.addJobsForUser[i].cssClasses = 'border-bottom';
+      }
+
+      if (i % 3 > 0) {
+        if (!this.addJobsForUser[i].cssClasses) {
+          this.addJobsForUser[i].cssClasses = '';
+        }
+        this.addJobsForUser[i].cssClasses += ' border-left';
+      }
+    }
+  }
 
   createForm(formData: SchedulerJob): FormGroup {
     let startAt =
@@ -225,6 +246,7 @@ export class SchedulerJobComponent implements OnInit {
     this.severities = severities;
     this.sources = sources;
 
+    console.log('setFormNotificationJobAddNew');
     this.initForm(JobTypeEnumeration.alarmNotification, null, null, null);
   }
 
@@ -536,7 +558,6 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   addJob(jobType: JobTypeEnumeration) {
-    console.log('im in addJob', jobType);
     if (jobType === JobTypeEnumeration.alarmNotification) {
       forkJoin({
         protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
@@ -546,10 +567,7 @@ export class SchedulerJobComponent implements OnInit {
       }).subscribe(({ protocols, manufacturers, severities, sources }) => {
         this.setFormNotificationJobAddNew(protocols, manufacturers, severities, sources);
       });
-      return;
-    }
-
-    if (jobType === JobTypeEnumeration.reading || jobType === JobTypeEnumeration.readEvents) {
+    } else if (jobType === JobTypeEnumeration.reading || jobType === JobTypeEnumeration.readEvents) {
       this.codelistService.timeUnitCodeslist().subscribe((units) => {
         this.setFormAddNew(jobType, units);
       });
