@@ -26,7 +26,12 @@ export class DcOperationsComponent implements OnInit {
 
   onFwUpgrade() {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
-    this.dcOperationsService.fwUpgrade(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);
+    this.dcOperationsService.fwUpgrade(params, this.selectedItemsCount);
+  }
+
+  onDeviceDiscovery() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, this.selectedItemsCount);
   }
 
   get permissionSynchronizeTime() {
@@ -35,5 +40,9 @@ export class DcOperationsComponent implements OnInit {
 
   get permissionFwUpgrade() {
     return PermissionEnumerator.Concentrator_FW_Upgrade;
+  }
+
+  get permissionDeviceDiscovery() {
+    return PermissionEnumerator.Manage_Concentrators;
   }
 }

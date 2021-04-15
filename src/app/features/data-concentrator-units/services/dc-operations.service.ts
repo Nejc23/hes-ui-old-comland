@@ -221,6 +221,11 @@ export class DcOperationsService {
         operationName = $localize`Sync time`;
         selectedText = `${$localize`for`} ${selectedText}`;
         break;
+      case DcOperationTypeEnum.deviceDiscovery:
+        response = this.service.postDcDeviceDiscovery(params);
+        operationName = $localize`Device discovery`;
+        selectedText = `${$localize`for`} ${selectedText}`;
+        break;
     }
 
     component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
@@ -250,7 +255,7 @@ export class DcOperationsService {
     );
   }
 
-  fwUpgrade(operation: DcOperationTypeEnum, params: any, selectedRowsCount: number) {
+  fwUpgrade(params: any, selectedRowsCount: number) {
     const modalRef = this.modalService.open(DcuFwUpgradeComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;

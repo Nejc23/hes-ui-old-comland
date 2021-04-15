@@ -641,7 +641,22 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getAllDisplayedColumnsNames()
     );
-    this.dcOperationsService.fwUpgrade(DcOperationTypeEnum.syncTime, params, 1);
+    this.dcOperationsService.fwUpgrade(params, 1);
+  }
+
+  onDeviceDiscovery(selectedGuid: string) {
+    this.requestModel.filterModel = this.setFilter();
+    this.requestModel.searchModel = this.setSearch();
+
+    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
+    const params = this.dcOperationsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, 1);
   }
 
   // *******************************************************************************

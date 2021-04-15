@@ -1,3 +1,4 @@
 export enum DcOperationTypeEnum {
-  syncTime = 'syncTime'
+  syncTime = 'syncTime',
+  deviceDiscovery = 'deviceDiscovery'
 }
