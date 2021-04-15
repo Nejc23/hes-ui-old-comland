@@ -36,6 +36,7 @@ import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
+import { DcuFwUpgradeComponent } from '../../../data-concentrator-units/common/components/dcu-fw-upgrade.component';
 
 @Injectable({
   providedIn: 'root'
@@ -494,17 +495,20 @@ export class MeterUnitsPlcActionsService {
         response.subscribe(
           (value) => {
             console.log(value.requestId);
-            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-            if (operation === MeterUnitsTypeEnum.breakerStatus) {
-              this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
-            } else if (operation === MeterUnitsTypeEnum.ciiState) {
-              this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
-            }
+            // this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            // if (operation === MeterUnitsTypeEnum.breakerStatus) {
+            //   this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
+            // } else if (operation === MeterUnitsTypeEnum.ciiState) {
+            //   this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
+            // }
             const options: NgbModalOptions = {
               size: 'xl'
             };
             // todo open new modal with status
-            this.modalService.open(StatusJobComponent, options);
+            //     const component: ModalConfirmComponent = modalRef.componentInstance;
+
+            const modalRef = this.modalService.open(StatusJobComponent, options);
+            modalRef.componentInstance.deviceId = value.deviceIds[0];
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);

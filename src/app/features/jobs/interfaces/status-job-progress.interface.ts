@@ -1,4 +1,4 @@
-export interface StatusJobProgressInterface {
+export interface StatusJobProgress {
   deviceCount: number;
   successCount: number;
   failCount: number;

@@ -1,7 +1,7 @@
 <app-modal-template (dismiss)="onDismiss()">
 
   <div modal-header>Active jobs - LGZ TODO</div>
- {{ activeJobs }}
+
   <div modal-body>
     <div class="d-flex justify-content-between mb-5">
       <div class="gray-box">
@@ -30,19 +30,23 @@
     <div class="datatable">
       <table class="table">
         <thead>
-          <tr>
-            <th scope="col" class="tiny-text gray-color">Type</th>
-            <th scope="col" class="tiny-text gray-color">Running Time</th>
-            <th scope="col" class="tiny-text gray-color">State</th>
-            <th scope="col" class="tiny-text gray-color">Status</th>
-          </tr>
+        <tr>
+          <th scope="col" class="tiny-text gray-color">Type</th>
+          <th scope="col" class="tiny-text gray-color">Running Time</th>
+          <th scope="col" class="tiny-text gray-color">State</th>
+          <th scope="col" class="tiny-text gray-color">Status</th>
+        </tr>
         </thead>
         <tbody>
         <tr [ngClass]="i/2 == 0 ? 'gray-background':''" *ngFor="let job of activeJobs.jobs; let i = index;">
           <td>{{ job.jobName }}</td>
-          <td>{{ job.lastUpdated}}</td>
-          <td>{{ job.state}}</td>
-          <td>{{ job.status}}</td>
+          <td>{{ job.lastUpdated | date:'medium' }}</td>
+          <td>
+            <img src="../../../assets/images/icons/{{job.state?.toLowerCase()}}-icon.svg" class="mr-3" />
+          </td>
+          <td>
+            {{ job.status}}
+          </td>
         </tr>
         </tbody>
       </table>

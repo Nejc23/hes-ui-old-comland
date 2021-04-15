@@ -172,14 +172,14 @@ label {
   border-bottom: 1px solid $lightestGray;
 }
 
-.modal-footer {
-  border-top: 1px solid $lightestGray;
-}
-
 .gray-background {
   background-color: $lightestGray;
 }
 
-th {
-  padding: 0 5px 5px !important;
+.datatable table th {
+  padding: 0 10px 5px !important;
+}
+
+button.close {
+  height: 72px;
 }

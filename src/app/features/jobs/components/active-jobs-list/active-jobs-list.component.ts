@@ -18,7 +18,7 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
-import { ActiveJobInterface } from '../../interfaces/active-job-progress.interface';
+import { ActiveJob } from '../../interfaces/active-job-progress.interface';
 
 @Component({
   selector: 'app-active-jobs-list',
@@ -28,7 +28,7 @@ export class ActiveJobsListComponent implements OnInit {
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
 
-  activeJobs: ActiveJobInterface = {
+  activeJobs: ActiveJob = {
     totalJobs: 2,
     runningJobs: 1,
     pendingJobs: 1,
