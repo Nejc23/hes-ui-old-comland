@@ -50,11 +50,19 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     this.params.context.componentParent.onFwUpgrade(this.params.data.concentratorId);
   }
 
+  onDeviceDiscovery() {
+    this.params.context.componentParent.onDeviceDiscovery(this.params.data.concentratorId);
+  }
+
   get permissionSynchronizeTime() {
     return PermissionEnumerator.Sync_Time;
   }
 
   get permissionFwUpgrade() {
     return PermissionEnumerator.Concentrator_FW_Upgrade;
+  }
+
+  get permissionDeviceDiscovery() {
+    return PermissionEnumerator.Sync_Time;
   }
 }

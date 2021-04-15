@@ -15,6 +15,9 @@
       <div appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
         <a class="dropdown-item" href="javascript:void(0);" (click)="onFwUpgrade()"><span i18n>FW Upgrade</span></a>
       </div>
+      <div appHideIfPermissionUnauthorized [permission]="permissionDeviceDiscovery">
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onDeviceDiscovery()"><span i18n>Device discovery</span></a>
+      </div>
     </div>
   </div>
 </div>
