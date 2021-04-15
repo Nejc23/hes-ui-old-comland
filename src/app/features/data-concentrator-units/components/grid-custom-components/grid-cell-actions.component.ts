@@ -63,6 +63,6 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   }
 
   get permissionDeviceDiscovery() {
-    return PermissionEnumerator.Sync_Time;
+    return PermissionEnumerator.Manage_Concentrators;
   }
 }

@@ -4,7 +4,7 @@
         type="button" class="btn btn-primary m-0" (click)="toDetails()" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('details')"><i class="far fa-eye"
         ></i></button>
   </div>
-  <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade]">
+  <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]">
     <button dropdownToggle class="btn btn-primary btn-sm" type="button"  [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('operation')" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="far fa-ellipsis-h"></i>
     </button>

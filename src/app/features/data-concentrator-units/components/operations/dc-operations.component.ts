@@ -43,6 +43,6 @@ export class DcOperationsComponent implements OnInit {
   }
 
   get permissionDeviceDiscovery() {
-    return PermissionEnumerator.Sync_Time;
+    return PermissionEnumerator.Manage_Concentrators;
   }
 }
