@@ -1,3 +1,4 @@
+import { AddJobComponent } from './../features/jobs/components/scheduler-job/add-job.component';
 import { HideIfAnyPermissionsUnauthorizedDirective } from './directives/permissions/hide-if-any-permissions-unauthorized.directive';
 import { HideDividerIfPermissionsUnauthorizedDirective } from './directives/permissions/hide-divider-if-permissions-unauthorized.directive';
 import { HideIfPermissionUnauthorizedDirective } from './directives/permissions/hide-if-permission-unauthorized.directive';
@@ -234,7 +235,8 @@ import { AlarmNotificationRulesComponent } from '../features/jobs/components/sch
     HideIfAnyPermissionsUnauthorizedDirective,
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
-    AlarmNotificationRulesComponent
+    AlarmNotificationRulesComponent,
+    AddJobComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

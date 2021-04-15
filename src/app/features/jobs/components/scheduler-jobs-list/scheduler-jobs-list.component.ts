@@ -250,31 +250,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       size: 'xl'
     };
 
-    this.codelistService.timeUnitCodeslist().subscribe((units) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormAddNew(JobTypeEnumeration.reading, units);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.refreshGrid();
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  addDiscoveryJob() {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
     const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(JobTypeEnumeration.discovery, null);
 
     modalRef.result.then(
       (data) => {
@@ -285,97 +261,6 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
         // on dismiss (CLOSE)
       }
     );
-  }
-
-  addDcTimeSyncJob() {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(JobTypeEnumeration.timeSync, null);
-
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        this.refreshGrid();
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  addDcReadEventsJob() {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
-    this.codelistService.timeUnitCodeslist().subscribe((units) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormAddNew(JobTypeEnumeration.readEvents, units);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          this.refreshGrid();
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
-  }
-
-  addTopologyJob() {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
-    const modalRef = this.modalService.open(SchedulerJobComponent, options);
-    const component: SchedulerJobComponent = modalRef.componentInstance;
-    component.setFormAddNew(JobTypeEnumeration.topology, null);
-
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        this.refreshGrid();
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  addAlarmNotificationJob() {
-    const options: NgbModalOptions = {
-      size: 'xl'
-    };
-
-    forkJoin({
-      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
-      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
-      severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
-      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
-    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
-      const modalRef = this.modalService.open(SchedulerJobComponent, options);
-      const component: SchedulerJobComponent = modalRef.componentInstance;
-      component.setFormNotificationJobAddNew(protocols, manufacturers, severities, sources);
-
-      modalRef.result.then(
-        (data) => {
-          // on close (CONFIRM)
-          setTimeout(() => {
-            this.refreshGrid();
-          }, 500);
-        },
-        (reason) => {
-          // on dismiss (CLOSE)
-        }
-      );
-    });
   }
 
   setGridDataSource() {

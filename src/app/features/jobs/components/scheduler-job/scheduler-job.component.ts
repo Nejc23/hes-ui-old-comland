@@ -1,3 +1,4 @@
+import { PermissionService } from './../../../../core/permissions/services/permission.service';
 import { NotificationFilter, ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
@@ -11,7 +12,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
-import { Observable } from 'rxjs';
+import { forkJoin, Observable } from 'rxjs';
 import * as moment from 'moment';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
@@ -19,7 +20,9 @@ import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
-
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { AddJobParams } from '../../interfaces/add-job-params.interace';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -48,7 +51,7 @@ export class SchedulerJobComponent implements OnInit {
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
   defaultTimeUnit: Codelist<number>;
-  step = 1;
+  step = 0;
 
   noDCUs = false;
   cronExpression: string;
@@ -64,6 +67,57 @@ export class SchedulerJobComponent implements OnInit {
   filter: NotificationFilter;
   addresses: string[];
 
+  jobTypes = JobTypeEnumeration;
+
+  addJobs: AddJobParams[] = [
+    {
+      jobType: JobTypeEnumeration.reading,
+      jobName: $localize`Reading`,
+      deviceType: $localize`METER`,
+      icon: 'line_weight',
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
+    },
+    {
+      jobType: JobTypeEnumeration.discovery,
+      jobName: $localize`Discovery`,
+      deviceType: $localize`DC`,
+      icon: 'search',
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
+    },
+    {
+      jobType: JobTypeEnumeration.timeSync,
+      jobName: $localize`Time synchronization`,
+      deviceType: $localize`DC`,
+      icon: 'restore',
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
+    },
+    {
+      jobType: JobTypeEnumeration.readEvents,
+      jobName: $localize`Read events`,
+      deviceType: $localize`DC`,
+      icon: 'line_style',
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
+    },
+    {
+      jobType: JobTypeEnumeration.topology,
+      jobName: $localize`Topology`,
+      deviceType: $localize`DC`,
+      icon: 'share',
+      isIconOutlined: true,
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
+    },
+    {
+      jobType: JobTypeEnumeration.alarmNotification,
+      jobName: $localize`Notification`,
+      deviceType: $localize`SYSTEM`,
+      icon: 'notification_important',
+      isIconOutlined: true,
+      hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Alarms)
+    }
+  ];
+
+  addJobsForUser: AddJobParams[];
+
   constructor(
     private meterService: PlcMeterReadScheduleService,
     private codelistService: CodelistRepositoryService,
@@ -72,8 +126,32 @@ export class SchedulerJobComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private toast: ToastNotificationService,
-    private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService
-  ) {}
+    private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService,
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
+    private permissionService: PermissionService
+  ) {
+    this.initAddJobsForUser();
+  }
+
+  initAddJobsForUser() {
+    const itemsPerRow = 3;
+
+    this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
+    const jobsLength = this.addJobsForUser.length;
+
+    for (let i = 0; i < jobsLength; i++) {
+      if (i < 3 && jobsLength > 3) {
+        this.addJobsForUser[i].cssClasses = 'border-bottom';
+      }
+
+      if (i % 3 > 0) {
+        if (!this.addJobsForUser[i].cssClasses) {
+          this.addJobsForUser[i].cssClasses = '';
+        }
+        this.addJobsForUser[i].cssClasses += ' border-left';
+      }
+    }
+  }
 
   createForm(formData: SchedulerJob): FormGroup {
     let startAt =
@@ -142,6 +220,7 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob, jobType: JobTypeEnumeration) {
+    this.step = 1;
     this.initForm(jobType, jobsTimeUnits, selectedJobId, job);
   }
 
@@ -160,6 +239,7 @@ export class SchedulerJobComponent implements OnInit {
     this.severities = severities;
     this.sources = sources;
 
+    console.log('setFormNotificationJobAddNew');
     this.initForm(JobTypeEnumeration.alarmNotification, null, null, null);
   }
 
@@ -185,7 +265,6 @@ export class SchedulerJobComponent implements OnInit {
       this.defaultTimeUnit = jobsTimeUnits.find((x) => x.id === 3);
     }
 
-    // this.setJobType(jobTypeSetting);
     this.jobType = selectedJobType;
     switch (this.jobType) {
       case JobTypeEnumeration.reading: {
@@ -219,6 +298,7 @@ export class SchedulerJobComponent implements OnInit {
     }
 
     this.title = this.setTitle();
+    this.step = 1;
   }
 
   setJobType(jobTypeSetting: any) {
@@ -464,5 +544,32 @@ export class SchedulerJobComponent implements OnInit {
 
   dcuSelectionChanged(hasValues: boolean) {
     this.noDCUs = !hasValues;
+  }
+
+  callAction() {
+    alert('abc');
+  }
+
+  addJob(jobType: JobTypeEnumeration) {
+    if (jobType === JobTypeEnumeration.alarmNotification) {
+      forkJoin({
+        protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+        manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
+        severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
+        sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
+      }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+        this.setFormNotificationJobAddNew(protocols, manufacturers, severities, sources);
+      });
+    } else if (jobType === JobTypeEnumeration.reading || jobType === JobTypeEnumeration.readEvents) {
+      this.codelistService.timeUnitCodeslist().subscribe((units) => {
+        this.setFormAddNew(jobType, units);
+      });
+    } else {
+      this.setFormAddNew(jobType, null);
+    }
+  }
+
+  hasJobsManageAccessWith(permission: PermissionEnumerator): boolean {
+    return this.permissionService.hasAccess(PermissionEnumerator.Manage_Jobs) && this.permissionService.hasAccess(permission);
   }
 }
