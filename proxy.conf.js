@@ -1,25 +1,25 @@
 const PROXY_CONFIG = [
   {
-      context: [
-        "/api/concentrator-inventory/",
-        "/api/concentrator-management",
-        "/api/time-of-use/",
-        "/api/on-demand-data-processing",
-        "/api/templating",
-        "/api/templates",
-        "/api/file-storage",
-        "/api/data-processing",
+    context: [
+      '/api/concentrator-inventory/',
+      '/api/concentrator-management',
+      '/api/time-of-use/',
+      '/api/on-demand-data-processing',
+      '/api/templating',
+      '/api/templates',
+      '/api/file-storage',
+      '/api/data-processing',
 
-        "/api/device-inventory-ui",
-        "/api/concentrator-inventory-ui",
-        "/api/scheduler",
-        "/api/crypto",
-        "/api/configuration",
-        "/api/alarming",
-      ],
-      target: "https://89.212.201.202:54322",
-      secure: false
-  },
+      '/api/device-inventory-ui',
+      '/api/concentrator-inventory-ui',
+      '/api/scheduler',
+      '/api/crypto',
+      '/api/configuration',
+      '/api/alarming'
+    ],
+    target: 'https://192.168.2.181:8083',
+    secure: false
+  }
   // {
   //   context: [
   //     "/api/device-inventory-ui",
@@ -48,6 +48,6 @@ const PROXY_CONFIG = [
   //   target: "http://localhost:5014",
   //   secure: false
   // },
-]
+];
 
 module.exports = PROXY_CONFIG;
