@@ -323,7 +323,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.modalService.open(StatusJobComponent);
     // set grid columns
     this.columns = this.meterUnitsTypeGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid

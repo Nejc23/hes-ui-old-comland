@@ -424,7 +424,6 @@ export class MeterUnitsPlcActionsService {
   // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
   // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
   bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number, navigateToGrid = false) {
-    debugger;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = $localize`Confirm`;
@@ -495,20 +494,17 @@ export class MeterUnitsPlcActionsService {
         response.subscribe(
           (value) => {
             console.log(value.requestId);
-            // this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-            // if (operation === MeterUnitsTypeEnum.breakerStatus) {
-            //   this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
-            // } else if (operation === MeterUnitsTypeEnum.ciiState) {
-            //   this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
-            // }
+            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            if (operation === MeterUnitsTypeEnum.breakerStatus) {
+              this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
+            } else if (operation === MeterUnitsTypeEnum.ciiState) {
+              this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
+            }
             const options: NgbModalOptions = {
               size: 'xl'
             };
-            // todo open new modal with status
-            //     const component: ModalConfirmComponent = modalRef.componentInstance;
-
             const modalRef = this.modalService.open(StatusJobComponent, options);
-            modalRef.componentInstance.deviceId = value.deviceIds[0];
+            modalRef.componentInstance.requestId = value.requestId;
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);
