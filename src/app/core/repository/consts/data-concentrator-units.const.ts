@@ -30,3 +30,8 @@ export const basePathDcOperations = '/api/concentrator-management';
 export const dcOperationSynchronizeTime = `${basePathDcOperations}/trigger-set-concentrator-time-filterable`;
 export const dcOperationFwUpgrade = `${basePathDcOperations}/upgrade`;
 export const dcLastStatus = '/last-status';
+
+// Active Jobs
+export const getActiveJobs = `${basePathDcOperations}/device-jobs`;
+
+export const jobStateSummary = `${basePathDcOperations}/job-state/summary`;

@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header>Job name here - TODO</div>
+  <div modal-header>{{ jobName }}</div>
 
   <div modal-body>
     <div class="d-flex justify-content-between mb-5">
@@ -47,7 +47,7 @@
   </div>
 
   <div modal-footer>
-    <button type="button" class="btn btn-link" i18n>Close</button>
+    <button type="button" class="btn btn-link" i18n (click)="onDismiss()">Close</button>
   </div>
 </app-modal-template>
 

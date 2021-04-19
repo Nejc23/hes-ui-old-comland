@@ -1,8 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
-import { ConcentratorManagementService } from '../../../../core/repository/services/concentrator-managment/concentrator-management.service';
 import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 
 @Component({
   selector: 'app-status-job',
@@ -11,23 +11,25 @@ import { ToastNotificationService } from '../../../../core/toast-notification/se
 export class StatusJobComponent implements OnInit, OnDestroy {
   @Input() requestId: string = '';
   @Input() jobName: string = '';
-  statusJobProgress: StatusJobProgress;
+  interval = null;
+  intervalSeconds = 5;
 
-  timeout = null;
+  statusJobProgress: StatusJobProgress = {
+    deviceCount: 0,
+    successCount: 0,
+    failCount: 0,
+    progress: 0
+  };
 
-  constructor(
-    private modal: NgbActiveModal,
-    private concentratorManagementService: ConcentratorManagementService,
-    private toast: ToastNotificationService
-  ) {}
+  constructor(private modal: NgbActiveModal, private concentratorService: ConcentratorService, private toast: ToastNotificationService) {}
 
   ngOnInit() {
     if (this.requestId) {
       this.getProgress();
 
-      this.timeout = setTimeout(() => {
+      this.interval = setInterval(() => {
         this.getProgress();
-      }, 5000);
+      }, this.intervalSeconds * 1000);
     }
   }
 
@@ -36,9 +38,8 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   }
 
   getProgress() {
-    this.concentratorManagementService.getJobProgress(this.requestId).subscribe(
+    this.concentratorService.getJobProgress(this.requestId).subscribe(
       (res) => {
-        console.log(res);
         this.statusJobProgress = res;
       },
       (error) => {
@@ -51,6 +52,7 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    clearTimeout(this.timeout);
+    clearInterval(this.interval);
+    this.interval = null;
   }
 }
