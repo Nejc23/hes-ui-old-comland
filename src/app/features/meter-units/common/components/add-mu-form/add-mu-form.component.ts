@@ -264,7 +264,7 @@ export class AddMuFormComponent implements OnInit {
       [this.serverLowProperty]: [editMu?.hdlcInformation?.serverLow, Validators.required],
       [this.clientHighProperty]: [editMu?.hdlcInformation?.clientHigh, Validators.required],
       [this.serverHighProperty]: [editMu?.hdlcInformation?.serverHigh, Validators.required],
-      [this.publicClientLowProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
+      [this.publicClientLowProperty]: [editMu?.hdlcInformation?.publicClientLow, Validators.required],
       [this.publicServerLowProperty]: [editMu?.hdlcInformation?.publicServerLow, Validators.required],
       [this.publicClientHighProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
       [this.publicServerHighProperty]: [editMu?.hdlcInformation?.publicServerHigh, Validators.required],
