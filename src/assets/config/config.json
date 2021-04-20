@@ -5,7 +5,9 @@
     "identityServer": {
       "stsAuthority": "https://is.enerdat.com:5443/sso",
       "stsAuthorityWeb": "https://is.enerdat.com:5443/reg",
+      "clientId": "mygridWeb",
       "clientRoot": "https://localhost:4200/",
+      "clientScope": "openid profile roles company segment",
       "clientAutoSilentRenew": true
   }
 }

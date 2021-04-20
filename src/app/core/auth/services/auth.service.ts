@@ -26,11 +26,6 @@ export class AuthService {
 
   tokenName = 'myGrid.Link_Token';
 
-  clientSettings = {
-    clientId: 'mygridWeb',
-    clientScope: 'openid profile roles company segment'
-  };
-
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
     private cookieService: CookieService,
@@ -45,7 +40,7 @@ export class AuthService {
     this.configStoreService.configObservable.subscribe((appConfig) => {
       const settings = {
         authority: appConfig.identityServer.stsAuthority,
-        client_id: this.clientSettings.clientId,
+        client_id: appConfig.identityServer.clientId,
         redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html`
           : `${appConfig.identityServer.clientRoot}${locale}/assets/signin-callback.html`,
@@ -56,7 +51,7 @@ export class AuthService {
           ? `${appConfig.identityServer.clientRoot}`
           : `${appConfig.identityServer.clientRoot}${locale}`,
         response_type: 'id_token token',
-        scope: this.clientSettings.clientScope,
+        scope: appConfig.identityServer.clientScope,
         automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew
       };
       this.userManager = new UserManager(settings);
