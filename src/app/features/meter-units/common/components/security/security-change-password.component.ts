@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
-import { TemplatesService } from 'src/app/core/repository/services/templates/templates.service';
 
 @Component({
   templateUrl: './security-change-password.component.html'
@@ -32,15 +31,14 @@ export class SecurityChangePasswordComponent implements OnInit {
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
-    private formUtils: FormsUtilsService,
-    private templatesService: TemplatesService
+    private formUtils: FormsUtilsService
   ) {
     this.passwordTypes = [
-      { id: 'PW_LG', value: 'PW_LG' },
-      { id: 'PW_M2', value: 'PW_M2' },
-      { id: 'PW_L1', value: 'PW_L1' },
-      { id: 'PW_L2', value: 'PW_L2' },
-      { id: 'PW_CALIBRATION', value: 'PW_CALIBRATION' }
+      { id: 'PW_LG', value: 'PW_LG (Management)' },
+      { id: 'PW_M2', value: 'PW_M2 (Operator)' },
+      { id: 'PW_L1', value: 'PW_L1 (Reader)' },
+      { id: 'PW_L2', value: 'PW_L2 (Installer)' },
+      { id: 'PW_CALIBRATION', value: 'PW_CALIBRATION (Verification)' }
     ];
     this.selectedPasswordType = this.passwordTypes[0];
     this.form = this.createForm();
@@ -78,6 +76,7 @@ export class SecurityChangePasswordComponent implements OnInit {
   }
 
   passwordTypeChanged(value: Codelist<string>) {
+    debugger;
     this.selectedPasswordType = value;
   }
 
