@@ -8,7 +8,6 @@ export class FormatDateTimePipe implements PipeTransform {
   constructor(@Inject(LOCALE_ID) public locale: string) {}
 
   public transform(value): any {
-    console.log(value);
     if (!value) {
       return '';
     }
