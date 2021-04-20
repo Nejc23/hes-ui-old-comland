@@ -148,6 +148,17 @@
                 "sl"
               ]
             },
+            "develop-de": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
+              "localize": [
+                "de"
+              ]
+            },
             "production": {
               "outputPath": "dist/hes",
               "deleteOutputPath": true,
@@ -357,6 +368,9 @@
             },
             "develop-sl": {
               "browserTarget": "myGrid:build:develop-sl"
+            },
+            "develop-de": {
+              "browserTarget": "myGrid:build:develop-de"
             },
             "develop-amera": {
               "browserTarget": "myGrid:build:develop-amera"
