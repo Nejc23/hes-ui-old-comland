@@ -36,15 +36,15 @@ export class SecurityRekeyComponent implements OnInit {
   ) {
     this.keyTypes = [
       { id: 'PSK', value: 'PSK' },
-      { id: 'GAK', value: 'GAK' },
-      { id: 'GUEK', value: 'GUEK' },
-      { id: 'GBEK', value: 'GBEK' },
-      { id: 'GAK_M2', value: 'GAK_M2' },
-      { id: 'GUEK_M2', value: 'GUEK_M2' },
-      { id: 'AK_DATA_COLLECTOR', value: 'AK_DATA_COLLECTOR' },
-      { id: 'UEK_DATA_COLLECTOR', value: 'UEK_DATA_COLLECTOR' },
-      { id: 'AK_INSTALLER', value: 'AK_INSTALLER' },
-      { id: 'UEK_INSTALLER', value: 'UEK_INSTALLER' }
+      { id: 'GAK', value: 'GAK (Management)' },
+      { id: 'GUEK', value: 'GUEK (Management)' },
+      { id: 'GBEK', value: 'GBEK (Management)' },
+      { id: 'GAK_M2', value: 'GAK_M2 (Operator)' },
+      { id: 'GUEK_M2', value: 'GUEK_M2 (Operator)' },
+      { id: 'AK_DATA_COLLECTOR', value: 'AK_DATA_COLLECTOR (Reader)' },
+      { id: 'UEK_DATA_COLLECTOR', value: 'UEK_DATA_COLLECTOR (Reader)' },
+      { id: 'AK_INSTALLER', value: 'AK_INSTALLER (Installer)' },
+      { id: 'UEK_INSTALLER', value: 'UEK_INSTALLER (Installer)' }
     ];
     this.selectedKeyType = this.keyTypes[0];
     this.form = this.createForm();
