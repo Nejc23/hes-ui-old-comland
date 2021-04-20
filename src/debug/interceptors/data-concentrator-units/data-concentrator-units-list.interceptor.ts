@@ -41,8 +41,6 @@ export class DataConcentratorUnitsListInterceptor {
       }
     }
 
-    console.log('returned data', sortedUsers.slice(skip, take));
-
     const body: GridResponse<DataConcentratorUnitsList> = {
       data: sortedUsers.slice(skip, take), // sortedUsers.slice(request.body.startRow, request.body.endRow),
       totalCount: searched.length,

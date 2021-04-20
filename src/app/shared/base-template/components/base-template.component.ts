@@ -91,24 +91,10 @@ export class BaseTemplateComponent implements OnInit {
     });*/
   }
 
-  /*  reloadPage(selected: Codelist<number>) {
-    // get changed Token
-//      const helper = new JwtHelperService();
-//    console.log(this.auth.user.id_token);
-//    const token = this.auth.user.id_token
-//    const decodedToken = helper.decodeToken(token);
-
-    console.log(selected);
-    this.auth.user.profile.company_name = selected.value;
-    this.auth.storeUser();
-    window.location.reload();
-  }*/
-
   @HostListener('window:resize', ['$event'])
   getScreenSize() {
     this.screenHeight = window.innerHeight;
     this.screenWidth = window.innerWidth;
-    // console.log(`SCREEN SIZE = ${this.screenWidth}, ${this.screenHeight}`);
     if (this.screenWidth < 577) {
       this.sidebarItems = this.sidebarService.getSidebarItemsMobile();
     } else {
@@ -122,7 +108,6 @@ export class BaseTemplateComponent implements OnInit {
 
   fillMeterUnits() {
     const sidebarItems = this.sidebarService.getSidebarItems();
-    console.log(sidebarItems);
     this.codeList.meterUnitTypeCodelist().subscribe((list) => {
       if (list && list.length > 0) {
         list.forEach((element) => {

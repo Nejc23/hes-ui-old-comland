@@ -932,9 +932,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   refresh() {
-    // if (this.authService.isTokenAvailable()) {
     const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
-    // console.log(`refresh `, requestIds);
     if (requestIds && requestIds.length > 0) {
       requestIds.map((requestId) =>
         this.service.getMyGridLastStatus(requestId).subscribe((results) => {
@@ -950,7 +948,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               // 3th step for breaker state
               if (isBreakerState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe((resultsBreakerState) => {
-                  // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
                   if (resultsBreakerState) {
                     this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
                   }
@@ -990,33 +987,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       );
       this.refreshGrid();
     }
-    /* } else {
-      this.service.getMyGridIdentityToken().subscribe(
-        value => {
-          this.authService.setAuthTokenMyGridLink(value);
-        },
-        e => {
-          this.toast.errorToast(this.messageServerError);
-        }
-      );
-    }*/
   }
-  // <-- end for checking long bulk action finished
-
-  // isFilterSet(): boolean {
-  //   // const tmpFilter: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-  //   // return (tmpFilter.name !== '' && tmpFilter.name !== undefined)||
-  //   //   (tmpFilter.statusesFilter && tmpFilter.statusesFilter.length > 0) ||
-  //   //   (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
-  //   //   (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
-  //   //   tmpFilter.vendorFilter ||
-  //   //   (tmpFilter.tagsFilter && tmpFilter.tagsFilter.length > 0)
-  // }
-
-  // clearFilter() {
-
-  // }
-
   // --> start Security action click (bulk or selected row)
 
   onSecurityActivateHls(selectedGuid: string) {
@@ -1142,47 +1113,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           that.saveSettingsStore(that.requestModel.sortModel);
         }
 
-        // if (that.authService.isRefreshNeeded2()) {
-        //   that.authService
-        //     .renewToken()
-        //     .then((value) => {
-        //       that.authService.user = value;
-        //       that.authService.saveTokenAndSetUserRights2(value, '');
-
-        //       that.meterUnitsTypeService
-        //         .getGridMeterUnitsForm(
-        //           that.requestModel,
-        //           that.meterUnitsTypeGridService.getSessionSettingsPageIndex(),
-        //           displayedColumnsNames
-        //         )
-        //         .subscribe((data) => {
-        //           that.gridApi.hideOverlay();
-        //           if (data === undefined || data == null || data.totalCount === 0) {
-        //             // that.totalCount = 0;
-        //             that.gridApi.showNoRowsOverlay();
-        //             that.noData = false;
-        //           } else {
-        //             that.totalCount = data.totalCount;
-        //             // that.noData = false;
-        //           }
-
-        //           paramsRow.successCallback(data ? data.data : [], that.totalCount);
-
-        //           that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-        //           that.selectRows(that.gridApi);
-        //           // that.eventService.setIsSelectedAll(that.meterUnitsTypeGridService.getSessionSettingsSelectedAll());
-        //           // params.failCallback();
-
-        //           that.isGridLoaded = true;
-        //           that.resizeColumns();
-        //         });
-        //     })
-        //     .catch((err) => {
-        //       if (err.message === 'login_required') {
-        //         that.authService.login().catch((errDetail) => console.log(errDetail));
-        //       }
-        //     });
-        // } else {
         that.meterUnitsTypeService
           .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
           .subscribe((data) => {

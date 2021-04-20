@@ -35,7 +35,6 @@ export class SettingsStoreService {
 
   saveCurrentUserSettings(key: string, settings: any) {
     const sid = this.authService.user.profile.sub;
-    // console.log('saveCurrentUserSettings()', key, settings);
     this.saveUserSettings(sid, key, settings).subscribe();
   }
 }

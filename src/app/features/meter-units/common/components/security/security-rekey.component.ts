@@ -35,52 +35,22 @@ export class SecurityRekeyComponent implements OnInit {
     private formUtils: FormsUtilsService
   ) {
     this.keyTypes = [
-      { id: 'GUEK', value: 'GUEK' },
-      { id: 'GAK', value: 'GAK' },
-      { id: 'GBEK', value: 'GBEK' },
       { id: 'PSK', value: 'PSK' },
-      { id: 'UEK_LOCAL', value: 'UEK_LOCAL' },
-      { id: 'UEK_ADMIN', value: 'UEK_ADMIN' },
-      { id: 'UEK_CIP', value: 'UEK_CIP' },
-      { id: 'AK_CIP', value: 'AK_CIP' },
-      { id: 'AK_LOCAL', value: 'AK_LOCAL' },
-      { id: 'AK_ADMIN', value: 'AK_ADMIN' },
-      { id: 'UEK_PREESTABLISHED', value: 'UEK_PREESTABLISHED' },
-      { id: 'AK_PREESTABLISHED', value: 'AK_PREESTABLISHED' },
-      { id: 'UEK_USER_ADMIN', value: 'UEK_USER_ADMIN' },
-      { id: 'AK_USER_ADMIN', value: 'AK_USER_ADMIN' },
-      { id: 'UEK_DATA_COLLECTOR', value: 'UEK_DATA_COLLECTOR' },
-      { id: 'AK_DATA_COLLECTOR', value: 'AK_DATA_COLLECTOR' },
-      { id: 'UEK_SECURITY_ADMIN', value: 'UEK_SECURITY_ADMIN' },
-      { id: 'AK_SECURITY_ADMIN', value: 'AK_SECURITY_ADMIN' },
-      { id: 'UEK_CALIBRATION', value: 'UEK_CALIBRATION' },
-      { id: 'AK_CALIBRATION', value: 'AK_CALIBRATION' },
-      { id: 'UEK_MAINTENANCE', value: 'UEK_MAINTENANCE' },
-      { id: 'AK_MAINTENANCE', value: 'AK_MAINTENANCE' },
-      { id: 'UEK_INSTALLER', value: 'UEK_INSTALLER' },
-      { id: 'AK_INSTALLER', value: 'AK_INSTALLER' },
-      { id: 'UEK_SECURITY_AUDITOR', value: 'UEK_SECURITY_AUDITOR' },
-      { id: 'AK_SECURITY_AUDITOR', value: 'AK_SECURITY_AUDITOR' },
-      { id: 'GUEK_M2', value: 'GUEK_M2' },
-      { id: 'GAK_M2', value: 'GAK_M2' },
-      { id: 'GUEK_M3', value: 'GUEK_M3' },
-      { id: 'GAK_M3', value: 'GAK_M3' },
-      { id: 'GUEK_M4', value: 'GUEK_M4' },
-      { id: 'GAK_M4', value: 'GAK_M4' },
-      { id: 'GUEK_M5', value: 'GUEK_M5' },
-      { id: 'GAK_M5', value: 'GAK_M5' }
+      { id: 'GAK', value: 'GAK (Management)' },
+      { id: 'GUEK', value: 'GUEK (Management)' },
+      { id: 'GBEK', value: 'GBEK (Management)' },
+      { id: 'GAK_M2', value: 'GAK_M2 (Operator)' },
+      { id: 'GUEK_M2', value: 'GUEK_M2 (Operator)' },
+      { id: 'AK_DATA_COLLECTOR', value: 'AK_DATA_COLLECTOR (Reader)' },
+      { id: 'UEK_DATA_COLLECTOR', value: 'UEK_DATA_COLLECTOR (Reader)' },
+      { id: 'AK_INSTALLER', value: 'AK_INSTALLER (Installer)' },
+      { id: 'UEK_INSTALLER', value: 'UEK_INSTALLER (Installer)' }
     ];
     this.selectedKeyType = this.keyTypes[0];
     this.form = this.createForm();
   }
 
-  ngOnInit() {
-    // this.templatesService.getKeyTypes().subscribe((value) => {
-    //   this.keyTypes = value.keyTypes.map((k) => {
-    //     return { id: k, value: k };
-    //   }); // console.log('securityClients', values);
-    // });
-  }
+  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({

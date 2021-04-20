@@ -414,15 +414,12 @@ export class SchedulerJobComponent implements OnInit {
     const successMessage = $localize`Job was` + ` ${operation} ` + $localize`successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
-        // if (result) {
-        // console.log(`result.time + date = ${moment(values.time).format(moment.HTML5_FMT.DATE)}T${result.time}:00.000Z`);
         if (addNew) {
           this.resetAll();
           this.ngOnInit();
         } else {
           this.modal.close();
         }
-        // }
       },
       (error) => {
         console.log('Error saving job', error);
@@ -435,7 +432,6 @@ export class SchedulerJobComponent implements OnInit {
     this.modal.dismiss();
   }
   registerSelectionChanged(hasValues: boolean) {
-    // console.log('registerSelcetionChanged');
     this.noRegisters = !hasValues;
   }
 
@@ -485,8 +481,6 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   next(value) {
-    // this.form.get(this.intervalRangeProperty).disable();
-    // this.form.get(this.timeUnitProperty).disable();
     this.form.get(this.registersProperty).disable();
     this.form.get(this.devicesProperty).disable();
 

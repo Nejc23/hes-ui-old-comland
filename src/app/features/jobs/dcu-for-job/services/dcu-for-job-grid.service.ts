@@ -129,7 +129,6 @@ export class DcuForJobGridService {
   // ---------------------------------------------------------
   // is selected all
   public getSessionSettingsSelectedAll() {
-    //  console.log(this.sessionNameForGridState);
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.isSelectedAll;
   }
@@ -199,8 +198,6 @@ export class DcuForJobGridService {
 
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
-    // console.log('excluded row', excludedRow);
-
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     if (!settings.excludedRows) {
       settings.excludedRows = [];

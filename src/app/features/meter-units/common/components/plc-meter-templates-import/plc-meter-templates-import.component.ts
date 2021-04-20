@@ -21,6 +21,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   allowedExt = ['json'];
   acceptExtensions = ['.json'];
   jsonString = '';
+  fileValid = false;
 
   uploadDropSubtitle = $localize`Selected file must be in .json file format.`;
 
@@ -68,17 +69,11 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     this.jsonString = '';
   }
 
-  resetAll() {
-    this.form.reset();
-  }
-
   save() {
     let response: Observable<any> = new Observable();
     response = this.gridLinkService.postMyGridTemplatesImport(this.jsonString);
     response.subscribe(
       (value) => {
-        // TODO: return is ?
-        // console.log(`postMyGridTemplatesImport, value = `, value);
         this.toast.successToast(this.successMessage);
         this.resetForm();
       },
@@ -96,5 +91,9 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
 
   get fileProperty() {
     return 'files';
+  }
+
+  isFileValid(event: boolean) {
+    this.fileValid = event;
   }
 }
