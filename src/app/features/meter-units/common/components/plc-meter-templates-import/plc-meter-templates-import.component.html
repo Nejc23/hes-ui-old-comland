@@ -6,6 +6,7 @@
           [acceptExtensions]="acceptExtensions"
           (selectEvent)="selected($event)"
           (removeEvent)="removed($event)"
+          (fileValid)="isFileValid($event)"
           i18n-label
           [dropFileSelectSubtitle]="uploadDropSubtitle">
        </app-file-select>
@@ -14,7 +15,7 @@
 
 <div class="d-flex justify-content-start">
   <div class="btn-group dropdown">
-    <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="!jsonString">
+    <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="!jsonString || !fileValid">
       <span i18n>Import</span></button>
   </div>
 </div>

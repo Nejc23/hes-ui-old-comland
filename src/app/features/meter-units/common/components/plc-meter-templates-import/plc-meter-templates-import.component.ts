@@ -21,6 +21,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   allowedExt = ['json'];
   acceptExtensions = ['.json'];
   jsonString = '';
+  fileValid = false;
 
   uploadDropSubtitle = $localize`Selected file must be in .json file format.`;
 
@@ -96,5 +97,10 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
 
   get fileProperty() {
     return 'files';
+  }
+
+  isFileValid(event: boolean) {
+    console.log(event);
+    this.fileValid = event;
   }
 }

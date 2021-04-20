@@ -1,76 +1,57 @@
 {
-  "keys": {
-    "accessKey": "5636A46066DCF569F1E1926DD6BDD81E4865EAD4",
-    "secretKey": "02B9FBB696777B4A3B59AC8A53AB2C225994D426"
-  },
-  "applicationId": "606ec8700c4d360016139e1a",
-"filesSrc": [
-   "./dist/**/**/*.html",
-   "./dist/**/**/*.js"
- ],
- "filesDest": "./",
-  "params": [
-      {
-        "name": "objectPropertiesSparsing"
-      },
-      {
-        "name": "variableMasking"
-      },
-      {
-        "name": "whitespaceRemoval"
-      },
-      {
-        "name": "identifiersRenaming",
-        "options": {
-          "mode": "SAFEST"
-        }
-      },
-      {
-        "name": "dotToBracketNotation"
-      },
-      {
-        "name": "stringConcealing"
-      },
-      {
-        "name": "functionReordering"
-      },
-      {
-         "name": "deadCodeInjection"
-       },
-      {
-        "options": {
-          "freq": 1,
-          "features": [
-            "opaqueFunctions"
-          ]
-        },
-        "name": "functionOutlining"
-      },
-      {
-        "name": "propertyKeysObfuscation",
-        "options": {
-          "encoding": [
-            "hexadecimal"
-          ]
-        }
-      },
-      {
-        "name": "regexObfuscation"
-      },
-      {
-        "name": "booleanToAnything"
-      }
+    "keys": {
+    "accessKey": "FB39C181BE2FF36451CF52E199689E3CDDF46F5C",
+    "secretKey": "5E758E7B5D5C1D07659217D4BEEE40B1AF4F9457"
+    },
+    "applicationId": "60755b48e2b778001e6f66fb",
+    "filesSrc": [
+    "./dist/**/**/*.html",
+    "./dist/**/**/*.js"
     ],
- "languageSpecifications": {
-    "es5": true,
-    "es6": false,
-    "es7": false
-  },
-  "areSubscribersOrdered": false,
-  "useRecommendedOrder": true,
-  "jscramblerVersion": "7.0",
-  "tolerateMinification": true,
-  "profilingDataMode": "off",
-  "useAppClassification": true,
-  "sourceMaps": false
+    "filesDest": "./",
+    "params": [
+        {
+        "name": "booleanToAnything"
+        },
+        {
+        "name": "deadCodeInjection"
+        },
+        {
+        "name": "functionReordering"
+        },
+        {
+        "name": "identifiersRenaming"
+        },
+        {
+        "name": "dotToBracketNotation"
+        },
+        {
+        "name": "numberToString"
+        },
+        {
+        "name": "propertyKeysObfuscation"
+        },
+        {
+        "name": "regexObfuscation"
+        },
+        {
+        "name": "functionOutlining"
+        },
+        {
+        "name": "stringConcealing"
+        },
+        {
+        "name": "variableGrouping"
+        },
+        {
+        "name": "whitespaceRemoval"
+        }
+    ],
+    "areSubscribersOrdered": false,
+    "useRecommendedOrder": true,
+    "jscramblerVersion": "7.0",
+    "tolerateMinification": true,
+    "profilingDataMode": "off",
+    "useAppClassification": true,
+    "browsers": {}
 }

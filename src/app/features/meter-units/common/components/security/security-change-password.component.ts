@@ -76,7 +76,6 @@ export class SecurityChangePasswordComponent implements OnInit {
   }
 
   passwordTypeChanged(value: Codelist<string>) {
-    debugger;
     this.selectedPasswordType = value;
   }
 

@@ -1544,6 +1544,9 @@
         <target>Diminution de la valeur</target>
         <note priority="1" from="description">The title for the **Decrement** button in the NumericTextBox</note>
         <note priority="1" from="meaning">kendo.numerictextbox.decrement</note>
+      </trans-unit><trans-unit id="4915431133669985304" datatype="html">
+        <source>Profile</source>
+        <target state="new">Profile</target>
       </trans-unit>
       <trans-unit id="6307372410464815488" datatype="html">
         <source>Pin/collapse menu</source>
@@ -2169,10 +2172,7 @@
         <source>Communication</source>
         <target>Communication</target>
       </trans-unit>
-      <trans-unit id="2781157479989276850" datatype="html">
-        <source>Custom properties</source>
-        <target>Propriétés personnalisées</target>
-      </trans-unit>
+      
       <trans-unit id="6199836572724339721" datatype="html">
         <source>Wrapper</source>
         <target>Wrapper</target>
