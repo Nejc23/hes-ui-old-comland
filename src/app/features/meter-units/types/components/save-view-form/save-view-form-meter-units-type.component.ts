@@ -46,7 +46,6 @@ export class SaveViewFormMUTComponent implements OnInit {
       this.data = x;
       this.sessionLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridLayout) as MeterUnitsLayout;
       this.cookieSettings = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
-      // console.log(`sessionLayout GET = ${JSON.stringify(this.sessionLayout)}`);
       if (this.sessionLayout) {
         this.sessionLayout.gridLayout = this.cookieSettings;
         if (this.sessionLayout.id) {

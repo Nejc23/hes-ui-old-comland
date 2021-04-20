@@ -50,13 +50,7 @@ export class SecurityRekeyComponent implements OnInit {
     this.form = this.createForm();
   }
 
-  ngOnInit() {
-    // this.templatesService.getKeyTypes().subscribe((value) => {
-    //   this.keyTypes = value.keyTypes.map((k) => {
-    //     return { id: k, value: k };
-    //   }); // console.log('securityClients', values);
-    // });
-  }
+  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({

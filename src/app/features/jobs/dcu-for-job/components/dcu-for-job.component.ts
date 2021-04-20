@@ -200,14 +200,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     }
   }
 
-  // deleteAllRequests() {
-  //   const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
-  //   if (requestIds && requestIds.length > 0) {
-  //     console.log(`deleteing requests `, requestIds);
-  //     requestIds.map(requestId => this.allForJobGridService.removeMyGridLinkRequestId(requestId));
-  //   }
-  // }
-
   isFilterSet(): boolean {
     const filterInfo: MeterUnitsLayout = this.gridFilterSessionStoreService.getGridLayout(
       this.sessionNameForGridFilter
@@ -418,57 +410,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   onFirstDataRendered(params) {}
 
   refresh() {
-    // if (this.authService.isTokenAvailable()) {
-    // const requestIds = this.allForJobGridService.getAllMyGridLinkRequestIds();
-    // // console.log(`refresh `, requestIds);
-    // if (requestIds && requestIds.length > 0) {
-    //   requestIds.map(requestId =>
-    //     this.service.getMyGridLastStatus(requestId).subscribe(results => {
-    //       const okRequest = _.find(results, x => x.status === this.taskStatusOK && x.isFinished);
-    //       if (okRequest !== undefined) {
-    //         const badRequest = _.find(results, x => x.status !== this.taskStatusOK);
-    //         if (badRequest === undefined) {
-    //           // no devices with unsuccessful status, we can delete requestId from session
-    //           this.allForJobGridService.removeMyGridLinkRequestId(requestId);
-    //           const breakerStateRequests = this.allForJobGridService.getAllMyGridLink_BreakerState_RequestIds();
-    //           const isBreakerState = _.find(breakerStateRequests, x => x === requestId);
-    //           // 3th step for breaker state
-    //           if (isBreakerState) {
-    //             this.service.getOnDemandDataProcessing(requestId).subscribe(resultsBreakerState => {
-    //               // console.log(`getOnDemandDataProcessing = `, resultsBreakerState);
-    //               if (resultsBreakerState) {
-    //                 this.meterUnitsTypeService.updateReaderState(resultsBreakerState).subscribe(() => this.refreshGrid());
-    //               }
-    //               this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
-    //             });
-    //           }
-    //           this.toast.successToast(this.messageDataRefreshed);
-    //         }
-    //       } else {
-    //         const badRequest = _.find(results, x => x.status !== this.taskStatusOK && x.isFinished);
-    //         if (badRequest !== undefined) {
-    //           this.toast.errorToast(this.messageActionFailed);
-    //           this.allForJobGridService.removeMyGridLinkRequestId(requestId);
-    //           this.allForJobGridService.removeMyGridLink_BreakerState_RequestId(requestId);
-    //         }
-    //       }
-    //     })
-    //   );
-
     this.refreshGrid();
     this.deselectAll();
-
-    // }
-    /* } else {
-      this.service.getMyGridIdentityToken().subscribe(
-        value => {
-          this.authService.setAuthTokenMyGridLink(value);
-        },
-        e => {
-          this.toast.errorToast(this.messageServerError);
-        }
-      );
-    }*/
   }
 
   // set filter in request model
@@ -609,10 +552,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
   // set form title by selected meter unit type
   public setTitle(jobDescription?: string) {
-    // const selectedType = this.meterTypes$.find(x => x.id === id);
-    // if (selectedType !== undefined && selectedType != null) {
-    //   this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsAll;
-    // }
     if (jobDescription === undefined || jobDescription.trim().length === 0) {
       jobDescription = this.staticTextService.notAvailableTekst;
     } else {
@@ -666,11 +605,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
     modalRef.result.then(
       (data) => {
-        // on close (CONFIRM)
-        // this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
           (value) => {
-            // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
             this.toast.successToast($localize`Selected Concentrators removed successfully.`);
             this.refresh();
           },
@@ -738,89 +674,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     this.dcuForJobGridService.setSessionSettingsSearchedWildcards($event);
 
     if (this.dcuForJobGridService.getSessionSettingsSearchedText()) {
-      // const value = this.dcuForJobGridService.getSessionSettingsSearchedText();
-      // this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value, useWildcards: $event  }];
-
       this.dcuForJobGridService.setSessionSettingsPageIndex(0);
       this.gridApi.onFilterChanged();
     }
   }
-
-  // bulkOperation(operation: MeterUnitsTypeEnum) {
-  //   // if (this.authService.isTokenAvailable()) {
-  //   const selectedRows = this.gridApi.getSelectedRows();
-  //   const deviceIdsParam = [];
-  //   if (selectedRows && selectedRows.length > 0) {
-  //     selectedRows.map(row => deviceIdsParam.push(row.deviceId));
-  //     console.log(`deviceIdsParam = ${JSON.stringify(deviceIdsParam)}`);
-  //   }
-  //   let selectedText = `${deviceIdsParam.length} rows `;
-  //   const modalRef = this.modalService.open(ModalConfirmComponent);
-  //   const component: ModalConfirmComponent = modalRef.componentInstance;
-  //   component.btnConfirmText = this.i18n('Confirm');
-  //   let response: Observable<any> = new Observable();
-
-  //   // TODO: ONLY FOR TESTING !!!
-  //   // deviceIdsParam = [];
-  //   // deviceIdsParam.push('221A39C5-6C84-4F6E-889C-96326862D771');
-  //   // deviceIdsParam.push('23a8c3e2-b493-475f-a234-aa7491eed2de');
-
-  //   const params: RequestConnectDisconnectData = { deviceIds: deviceIdsParam };
-  //   let operationName = '';
-  //   switch (operation) {
-  //     case MeterUnitsTypeEnum.breakerStatus:
-  //       response = this.service.getDisconnectorState(params);
-  //       operationName = this.i18n('Get breaker status');
-  //       selectedText = `${this.i18n('for')} ${selectedText}`;
-  //       break;
-  //     case MeterUnitsTypeEnum.connect:
-  //       response = this.service.postMyGridConnectDevice(params);
-  //       operationName = this.i18n('Connect');
-  //       break;
-  //     case MeterUnitsTypeEnum.disconnect:
-  //       response = this.service.postMyGridDisconnectDevice(params);
-  //       operationName = this.i18n('Disconnect');
-  //       break;
-  //     case MeterUnitsTypeEnum.touConfig:
-  //       const paramsConf: RequestTOUData = { deviceIds: deviceIdsParam, timeOfUseId: '1' }; // TODO: timeOfUseId read form store?
-  //       response = this.service.postMyGridTOUDevice(paramsConf);
-  //       operationName = this.i18n('Configure TOU');
-  //       selectedText = `${this.i18n('for')} ${selectedText}`;
-  //   }
-  //   component.btnConfirmText = operationName;
-  //   component.modalTitle = this.i18n('Confirm bulk operation');
-  //   component.modalBody = this.i18n(`${operationName} ${selectedText} selected meter unit(s)?`);
-
-  //   modalRef.result.then(
-  //     data => {
-  //       // on close (CONFIRM)
-  //       this.toast.successToast(this.messageActionInProgress);
-  //       response.subscribe(
-  //         value => {
-  //           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-  //           if (operation === MeterUnitsTypeEnum.breakerStatus) {
-  //             this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
-  //           }
-  //         },
-  //         e => {
-  //           this.toast.errorToast(this.messageServerError);
-  //         }
-  //       );
-  //     },
-  //     reason => {
-  //       // on dismiss (CLOSE)
-  //     }
-  //   );
-  //   /* } else {
-  //     this.service.getMyGridIdentityToken().subscribe(
-  //       value => {
-  //         this.authService.setAuthTokenMyGridLink(value);
-  //         this.bulkOperation(operation);
-  //       },
-  //       e => {
-  //         this.toast.errorToast(this.messageServerError);
-  //       }
-  //     );
-  //   }*/
-  // }
 }

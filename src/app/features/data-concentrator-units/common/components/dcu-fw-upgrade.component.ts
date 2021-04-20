@@ -105,28 +105,6 @@ export class DcuFwUpgradeComponent implements OnInit {
     this.modal.close(reason);
   }
 
-  // successUploaded(event) {
-  //   this.imgGuid = event.response.body;
-  // }
-
-  // uploadEvent(event) {
-  //   const bearer = `bearer ${this.authService.user.id_token}`;
-  //   event.headers = new HttpHeaders({ Authorization: bearer });
-  //   if (this.authService.isRefreshNeeded2()) {
-  //     this.authService
-  //       .renewToken()
-  //       .then(value => {
-  //         this.authService.user = value;
-  //         this.authService.saveTokenAndSetUserRights2(value, '');
-  //       })
-  //       .catch(err => {
-  //         if (err.message === 'login_required') {
-  //           this.authService.login().catch(err2 => console.log(err2));
-  //         }
-  //       });
-  //   }
-  // }
-
   // properties - START
   get imageGuidProperty() {
     return 'imageGuid';

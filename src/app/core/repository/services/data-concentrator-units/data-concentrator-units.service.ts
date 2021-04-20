@@ -105,7 +105,6 @@ export class DataConcentratorUnitsService {
       password: payload.password
     };
 
-    // console.log('dcuRequest: ', dcuRequest);
     return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
   }
 

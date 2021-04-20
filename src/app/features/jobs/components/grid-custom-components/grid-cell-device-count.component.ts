@@ -13,7 +13,6 @@ export class GridCellDeviceCountComponent {
   // called on init
   agInit(params: any): void {
     this.params = params;
-    // console.log('params: ', params);
   }
 
   // called when the cell is refreshed

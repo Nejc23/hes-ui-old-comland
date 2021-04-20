@@ -69,17 +69,11 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
     this.jsonString = '';
   }
 
-  resetAll() {
-    this.form.reset();
-  }
-
   save() {
     let response: Observable<any> = new Observable();
     response = this.gridLinkService.postMyGridTemplatesImport(this.jsonString);
     response.subscribe(
       (value) => {
-        // TODO: return is ?
-        // console.log(`postMyGridTemplatesImport, value = `, value);
         this.toast.successToast(this.successMessage);
         this.resetForm();
       },
@@ -100,7 +94,6 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   }
 
   isFileValid(event: boolean) {
-    console.log(event);
     this.fileValid = event;
   }
 }

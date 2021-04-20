@@ -581,7 +581,6 @@ export class MeterUnitsTypeGridService {
   // ---------------------------------------------------------
   // is selected all
   public getSessionSettingsSelectedAll() {
-    //  console.log(this.sessionNameForGridState);
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.isSelectedAll;
   }

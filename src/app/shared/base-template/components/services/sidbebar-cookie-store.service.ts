@@ -41,11 +41,6 @@ export class SidebarCookieStoreService {
     }
   }
 
-  // clearSidebarLayout() {
-  //   console.log('clearSidebarLayout() called');
-  //   this.cookieService.(this.sidebarLayoutName);
-  // }
-
   getSidebarLayout(menuName: string): SidebarAnimationState {
     if (this.cookieService.get(this.sidebarLayoutName)) {
       const data = JSON.parse(this.cookieService.get(this.sidebarLayoutName));

@@ -395,22 +395,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
           that.saveSettingsStore(that.requestModel.sortModel);
         }
 
-        // if (that.authService.isRefreshNeeded2()) {
-        //   that.authService
-        //     .renewToken()
-        //     .then((value) => {
-        //       that.authService.user = value;
-        //       that.authService.saveTokenAndSetUserRights2(value, '');
-        //       that.loadData(that, paramsRow);
-        //     })
-        //     .catch((err) => {
-        //       if (err.message === 'login_required') {
-        //         that.authService.login().catch((err2) => console.log(err2));
-        //       }
-        //     });
-        // } else {
         that.loadData(that, paramsRow);
-        // }
       }
     };
     this.gridApi.setServerSideDatasource(that.datasource);
