@@ -12,33 +12,20 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { ActiveJob } from '../../interfaces/active-job-progress.interface';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 
 @Component({
   selector: 'app-active-jobs-list',
   templateUrl: './active-jobs-list.component.html'
 })
 export class ActiveJobsListComponent implements OnInit {
-  @Input() selectedJobId: string;
-  @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
+  @Input() deviceId: string;
 
   activeJobs: ActiveJob = {
-    totalJobs: 2,
-    runningJobs: 1,
-    pendingJobs: 1,
-    jobs: [
-      {
-        jobName: 'Job 1',
-        state: 'running',
-        status: 'TASK_EXECUTING',
-        lastUpdated: '2021-04-13T10:42:40.8694509+02:00'
-      },
-      {
-        jobName: 'Job 2',
-        state: 'pending',
-        status: 'TASK_INITIALIZED',
-        lastUpdated: '2021-04-13T10:42:40.8695399+02:00'
-      }
-    ]
+    totalJobs: 0,
+    runningJobs: 0,
+    pendingJobs: 0,
+    jobs: []
   };
 
   start;
@@ -49,10 +36,15 @@ export class ActiveJobsListComponent implements OnInit {
     private jobsService: JobsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private modal: NgbActiveModal
+    private modal: NgbActiveModal,
+    private concentratorService: ConcentratorService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.concentratorService.getActiveJobs(this.deviceId).subscribe((res) => {
+      this.activeJobs = res;
+    });
+  }
 
   onDismiss() {
     this.modal.dismiss();

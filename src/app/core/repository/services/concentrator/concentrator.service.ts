@@ -2,7 +2,7 @@ import { HttpRequest } from '@angular/common/http';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Injectable } from '@angular/core';
 import { ActiveJob } from '../../../../features/jobs/interfaces/active-job-progress.interface';
-import { basePathDcOperations, getActiveJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { basePathDcOperations, getActiveJobs, jobStateSummary } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { Observable } from 'rxjs';
 import { StatusJobProgress } from '../../../../features/jobs/interfaces/status-job-progress.interface';
 
@@ -26,5 +26,13 @@ export class ConcentratorService {
 
   getJobStatusRequest(requestId: string): HttpRequest<any> {
     return new HttpRequest('GET', `${basePathDcOperations}/${requestId}/progress`);
+  }
+
+  getJobSummaryPost(deviceIds: string[]): Observable<any> {
+    return this.repository.makeRequest(this.getJobSummaryRequest(deviceIds));
+  }
+
+  getJobSummaryRequest(deviceIds: string[]): HttpRequest<any> {
+    return new HttpRequest('POST', jobStateSummary, deviceIds);
   }
 }

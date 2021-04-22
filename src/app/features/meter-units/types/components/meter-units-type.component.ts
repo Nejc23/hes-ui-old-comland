@@ -34,6 +34,7 @@ import { SettingsStoreEmitterService } from 'src/app/core/repository/services/se
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -125,6 +126,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   isSearchByParent = false;
 
+  gridData: any;
+
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -147,7 +150,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private settingsStoreService: SettingsStoreService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private jobsSelectGridService: JobsSelectGridService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private concentratorService: ConcentratorService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -1186,6 +1190,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.meterUnitsTypeService
           .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
           .subscribe((data) => {
+            that.gridData = data;
+            const deviceIds = data.data.map((data) => data.deviceId);
+
             that.gridApi.hideOverlay();
 
             if (data === undefined || data == null || data.totalCount === 0) {
@@ -1207,6 +1214,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
             that.isGridLoaded = true;
             that.resizeColumns();
+            that.getJobsData(deviceIds);
           });
         // }
       }
@@ -1349,5 +1357,34 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  getJobsData(deviceIds: any) {
+    this.concentratorService.getJobSummaryPost(deviceIds).subscribe((res) => {
+      this.gridData.data.forEach((data) => {
+        const item = res.find((el) => el.deviceId === data.deviceId);
+        if (item) {
+          data.jobStatus = item.state;
+        }
+      });
+      const that = this;
+      this.datasource = {
+        getRows(paramsRow) {
+          console.log(paramsRow);
+          if (that.gridData.data === undefined || that.gridData.data == null || that.gridData.totalCount.data === 0) {
+            this.totalCount = 0;
+            that.gridApi.showNoRowsOverlay();
+          } else {
+            this.totalCount = that.gridData.totalCount;
+          }
+          paramsRow.successCallback(that.gridData ? that.gridData.data : [], that.gridData.totalCount);
+          that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+          that.selectRows(that.gridApi);
+          that.isGridLoaded = true;
+          that.resizeColumns();
+        }
+      };
+      this.gridApi.setServerSideDatasource(this.datasource);
+    });
   }
 }

@@ -1,12 +1,12 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header>Active jobs - LGZ TODO</div>
+  <div modal-header>Active jobs</div>
 
   <div modal-body>
     <div class="d-flex justify-content-between mb-5">
       <div class="gray-box">
         <div class="box-data">
-          <div class="large-text-bold">{{ activeJobs.totalJobs}}</div>
+          <div class="large-text-bold">{{ activeJobs.totalJobs }}</div>
           <div class="tiny-text gray-color">Total jobs</div>
         </div>
       </div>
@@ -14,14 +14,14 @@
       <!-- TODO component -->
       <div class="gray-box">
         <div class="box-data">
-          <div class="large-text-bold text-darkGray">{{ activeJobs.runningJobs}}</div>
+          <div class="large-text-bold text-darkGray">{{ activeJobs.runningJobs }}</div>
           <div class="tiny-text gray-color">Running</div>
         </div>
       </div>
 
       <div class="gray-box">
         <div class="box-data">
-          <div class="large-text-bold gray-color-dark">{{ activeJobs.pendingJobs}}</div>
+          <div class="large-text-bold gray-color-dark">{{ activeJobs.pendingJobs }}</div>
           <div class="tiny-text gray-color">Pending</div>
         </div>
       </div>
@@ -38,7 +38,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr [ngClass]="i/2 == 0 ? 'gray-background':''" *ngFor="let job of activeJobs.jobs; let i = index;">
+        <tr [ngClass]="i%2 == 0 ? 'gray-background':''" *ngFor="let job of activeJobs.jobs; let i = index;">
           <td>{{ job.jobName }}</td>
           <td>{{ job.lastUpdated | date:'medium' }}</td>
           <td>
@@ -54,8 +54,6 @@
   </div>
 
   <div modal-footer>
-    <button type="button" class="btn btn-link" i18n>Close</button>
+    <button type="button" class="btn btn-link" i18n (click)="onDismiss()">Close</button>
   </div>
 </app-modal-template>
-
-<!--<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>-->

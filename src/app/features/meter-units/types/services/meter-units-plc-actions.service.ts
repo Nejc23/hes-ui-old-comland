@@ -501,7 +501,7 @@ export class MeterUnitsPlcActionsService {
               this.meterUnitsTypeGridService.saveMyGridLink_CiiState_RequestId(value.requestId);
             }
             const options: NgbModalOptions = {
-              size: 'xl'
+              size: 'md'
             };
             const modalRef = this.modalService.open(StatusJobComponent, options);
             modalRef.componentInstance.requestId = value.requestId;

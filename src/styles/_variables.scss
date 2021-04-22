@@ -965,8 +965,8 @@ $modal-header-padding-y: 1.714rem !default; // 24px
 $modal-header-padding-x: 2.286rem !default; // 32px
 $modal-header-padding: $modal-header-padding-y $modal-header-padding-x !default; // Keep this for backwards compatibility
 
-$modal-xl: 593px !default;
-//$modal-lg: 800px !default;
+$modal-xl: 900px !default;
+$modal-lg: 5930px !default;
 $modal-md: 500px !default;
 $modal-sm: 300px !default;
 
@@ -994,13 +994,14 @@ $alert-color-level: 6 !default;
 
 // Progress bars
 
-$progress-height: 1rem !default;
+$progress-height: 0.571rem !default; // 8px
 $progress-font-size: $font-size-base * .75 !default;
 $progress-bg: $gray-200 !default;
-$progress-border-radius: $border-radius !default;
+$progress-border-radius: 0.857rem !default; // 12ox
 $progress-box-shadow: inset 0 .1rem .1rem rgba($black, .1) !default;
 $progress-bar-color: $white !default;
 $progress-bar-bg: $success !default;
+$progress-bar-bg-red: $danger !default;
 $progress-bar-animation-timing: 1s linear infinite !default;
 $progress-bar-transition: width .6s ease !default;
 

@@ -36,7 +36,7 @@
       </div>
     </div>
     <div class="progress mt-3">
-      <div class="progress-bar"  [ngStyle]="{width: statusJobProgress.progress + '%'}"
+      <div class="progress-bar" [ngClass]="withError()"  [ngStyle]="{width: statusJobProgress.progress + '%'}"
            role="progressbar" aria-valuemin="0" aria-valuemax="100"></div>
     </div>
 

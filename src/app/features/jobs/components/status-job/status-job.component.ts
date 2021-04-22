@@ -28,7 +28,11 @@ export class StatusJobComponent implements OnInit, OnDestroy {
       this.getProgress();
 
       this.interval = setInterval(() => {
-        this.getProgress();
+        if (this.statusJobProgress.progress < 100) {
+          this.getProgress();
+        } else {
+          this.clearInt();
+        }
       }, this.intervalSeconds * 1000);
     }
   }
@@ -52,6 +56,16 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.clearInt();
+  }
+
+  withError() {
+    if (this.statusJobProgress?.failCount > 0) {
+      return 'red';
+    }
+  }
+
+  clearInt() {
     clearInterval(this.interval);
     this.interval = null;
   }

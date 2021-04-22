@@ -176,10 +176,25 @@ label {
   background-color: $lightestGray;
 }
 
-.datatable table th {
-  padding: 0 10px 5px !important;
+.datatable {
+  position: relative;
+  height: 300px;
+  overflow: auto;
+
+ & table th {
+   padding: 0 10px 5px !important;
+ }
+  thead {
+    position: static;
+  }
 }
 
 button.close {
   height: 72px;
+}
+
+.progress-bar {
+  &.red{
+    background-color: $progress-bar-bg-red;
+  }
 }

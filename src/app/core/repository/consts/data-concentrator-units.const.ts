@@ -33,5 +33,5 @@ export const dcLastStatus = '/last-status';
 
 // Active Jobs
 export const getActiveJobs = `${basePathDcOperations}/device-jobs`;
-
+// Job summary
 export const jobStateSummary = `${basePathDcOperations}/job-state/summary`;
