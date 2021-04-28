@@ -13,6 +13,7 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   @Input() jobName: string = '';
   interval = null;
   intervalSeconds = 5;
+  loading = false;
 
   statusJobProgress: StatusJobProgress = {
     deviceCount: 0,

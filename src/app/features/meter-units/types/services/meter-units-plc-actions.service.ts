@@ -144,7 +144,7 @@ export class MeterUnitsPlcActionsService {
     modalRef.result.then(
       (data) => {
         // on close (cancel or requestId as parameter)
-        if (data !== '') {
+        if (data !== 'cancel') {
           this.toast.successToast(this.messageActionInProgress);
           const options: NgbModalOptions = {
             size: 'md'

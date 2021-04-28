@@ -29,6 +29,7 @@ export class ActiveJobsListComponent implements OnInit {
   };
 
   start;
+  loading = false;
 
   constructor(
     private meterService: PlcMeterReadScheduleService,
@@ -41,7 +42,9 @@ export class ActiveJobsListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.loading = true;
     this.concentratorService.getActiveJobs(this.deviceId).subscribe((res) => {
+      this.loading = false;
       this.activeJobs = res;
     });
   }

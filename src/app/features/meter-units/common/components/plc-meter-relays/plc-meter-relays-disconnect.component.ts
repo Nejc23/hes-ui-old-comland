@@ -2,12 +2,14 @@ import { IActionRequestParams, IActionRequestRelays } from 'src/app/core/reposit
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ResponseCommonRegisterGroup } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-plc-meter-relays-disconnect',
@@ -29,7 +31,8 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private setLimiterService: PlcMeterSetLimiterService
+    private setLimiterService: PlcMeterSetLimiterService,
+    private modalService: ModalService
   ) {
     this.form = this.createForm();
   }
@@ -89,6 +92,12 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
+
+        const options: NgbModalOptions = {
+          size: 'md'
+        };
+        const modalRef = this.modalService.open(StatusJobComponent, options);
+        modalRef.componentInstance.requestId = result.requestId;
       },
       () => {} // error
     );
