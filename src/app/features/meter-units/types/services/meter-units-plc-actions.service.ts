@@ -121,8 +121,13 @@ export class MeterUnitsPlcActionsService {
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
-        if (data === 'save') {
+        if (data !== 'cancel') {
           this.toast.successToast(this.messageActionInProgress);
+          const options: NgbModalOptions = {
+            size: 'md'
+          };
+          const modalRef = this.modalService.open(StatusJobComponent, options);
+          modalRef.componentInstance.requestId = data; // requestId
         }
       },
       (reason) => {
@@ -138,9 +143,14 @@ export class MeterUnitsPlcActionsService {
 
     modalRef.result.then(
       (data) => {
-        // on close (CONFIRM)
-        if (data === 'save') {
+        // on close (cancel or requestId as parameter)
+        if (data !== '') {
           this.toast.successToast(this.messageActionInProgress);
+          const options: NgbModalOptions = {
+            size: 'md'
+          };
+          const modalRef = this.modalService.open(StatusJobComponent, options);
+          modalRef.componentInstance.requestId = data; // requestId
         }
       },
       (reason) => {
@@ -408,7 +418,7 @@ export class MeterUnitsPlcActionsService {
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
-        if (data === 'save') {
+        if (data !== '') {
           this.toast.successToast(this.messageActionInProgress);
         }
       },

@@ -72,7 +72,7 @@ export class PlcMeterTouConfigComponent implements OnInit {
       response.subscribe(
         (value) => {
           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
-          this.cancel('save');
+          this.cancel(value.requestId);
         },
         (e) => {
           this.toast.errorToast(this.messageServerError);

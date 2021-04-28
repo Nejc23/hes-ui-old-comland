@@ -146,7 +146,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
-        this.modal.close();
+        this.modal.close(result.requestId);
       },
       () => {} // error
     );

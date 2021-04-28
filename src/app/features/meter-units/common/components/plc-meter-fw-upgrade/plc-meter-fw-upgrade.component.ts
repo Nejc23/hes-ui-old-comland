@@ -101,7 +101,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
         if (result && result.requestId.length > 0) {
           this.meterUnitsTypeGridService.saveMyGridLinkRequestId(result.requestId);
         }
-        this.modal.close();
+        this.modal.close(result.requestId);
         /*this.toast.infoToast(result.status);
           if (result.status.includes('waiting for activiation')) {
             this.activate = true;
