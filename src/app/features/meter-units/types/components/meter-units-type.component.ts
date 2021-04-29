@@ -398,6 +398,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
         this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+        this.setGridDataSource();
         this.gridApi.onFilterChanged();
       }
     }
@@ -1370,7 +1371,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       const that = this;
       this.datasource = {
         getRows(paramsRow) {
-          console.log(paramsRow);
           if (that.gridData.data === undefined || that.gridData.data == null || that.gridData.totalCount.data === 0) {
             this.totalCount = 0;
             that.gridApi.showNoRowsOverlay();
