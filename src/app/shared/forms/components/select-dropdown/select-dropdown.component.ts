@@ -47,11 +47,6 @@ export class SelectDropdownComponent implements OnInit, OnDestroy {
     this.active.next();
   }
 
-  // public valueChange(value: any): void {
-  //   console.log('valueChange', value);
-  //   this.selectedValueChanged.emit(value);
-  // }
-
   public selectionChange(value: any): void {
     this.selectedValueChanged.emit(value);
   }

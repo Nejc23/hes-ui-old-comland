@@ -4,6 +4,7 @@ import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
 import { languages } from 'src/environments/config';
+import { AppConfigService } from '../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-top-fixed-nav',
@@ -43,7 +44,7 @@ export class TopFixedNavComponent implements OnInit {
   }
 
   profile() {
-    // TODO
+    window.open(AppConfigService.settings.identityServer.stsAuthorityWeb, '_blank');
   }
 
   logout() {

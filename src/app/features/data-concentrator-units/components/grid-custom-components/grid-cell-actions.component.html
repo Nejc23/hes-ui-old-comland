@@ -4,7 +4,7 @@
         type="button" class="btn btn-primary m-0" (click)="toDetails()" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('details')"><i class="far fa-eye"
         ></i></button>
   </div>
-  <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade]">
+  <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]">
     <button dropdownToggle class="btn btn-primary btn-sm" type="button"  [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('operation')" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       <i class="far fa-ellipsis-h"></i>
     </button>
@@ -14,6 +14,9 @@
       </div>
       <div appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
         <a class="dropdown-item" href="javascript:void(0);" (click)="onFwUpgrade()"><span i18n>FW Upgrade</span></a>
+      </div>
+      <div appHideIfPermissionUnauthorized [permission]="permissionDeviceDiscovery">
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onDeviceDiscovery()"><span i18n>Device discovery</span></a>
       </div>
     </div>
   </div>

@@ -150,7 +150,6 @@ export class MeterUnitsTypeGridLayoutInterceptor {
   }
 
   static canInterceptMutLayoutGet(request: HttpRequest<any>): boolean {
-    console.log(request.url);
     return new RegExp(`${meterUnits}/[0-9]+$` && `/${meterUnitsLayout}`).test(request.url) && request.method.endsWith('GET');
   }
 

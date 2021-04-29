@@ -28,26 +28,7 @@ export class RoleService {
     }
 
     let resultUserRight: UserRight[] = [];
-    /*rolesArray.forEach(element2 => {
-  console.log(roles.toLowerCase())
-      console.log(RoleEnumerator.user.toString().toLowerCase())
-      if(element2.toLowerCase() == RoleEnumerator.user.toString().toLowerCase()) {
-        console.log('sem');
-        resultUserRight = this.unionOfRights(resultUserRight, this.user);
-      }
-      else if (element2.toLowerCase() == RoleEnumerator.partner.toString().toLowerCase()) {
-        resultUserRight = this.unionOfRights(resultUserRight, this.partner);
-      }
-      else if (element2.toLowerCase() == RoleEnumerator.registeredUser.toString().toLowerCase()) {
-        resultUserRight = this.unionOfRights(resultUserRight, this.registeredUser);
-      }
-      else if (element2.toLowerCase() == RoleEnumerator.companyAdmin.toString().toLowerCase()) {
-        resultUserRight = this.unionOfRights(resultUserRight, this.companyAdmin);
-      }
-      else if (element2.toLowerCase() == RoleEnumerator.superAdmin.toString().toLowerCase()) {
-        resultUserRight = this.unionOfRights(resultUserRight, this.superAdmin);
-      }
-});*/
+
     for (const role of rolesArray) {
       if (role.toLowerCase() === RoleEnumerator.user.toString().toLowerCase()) {
         resultUserRight = this.unionOfRights(resultUserRight, this.user);

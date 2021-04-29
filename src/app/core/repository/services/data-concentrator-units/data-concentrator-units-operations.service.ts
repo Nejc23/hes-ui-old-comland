@@ -1,4 +1,4 @@
-import { basePathDcOperations, dcLastStatus } from './../../consts/data-concentrator-units.const';
+import { basePathDcOperations, dcLastStatus, dcOperationDeviceDiscovery } from './../../consts/data-concentrator-units.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -37,5 +37,13 @@ export class DataConcentratorUnitsOperationsService {
 
   getDcLastStatusRequest(requestId: string): HttpRequest<DcLastStatusResponse> {
     return new HttpRequest('GET', `${basePathDcOperations}/${requestId}${dcLastStatus}`);
+  }
+
+  postDcDeviceDiscovery(params: IActionRequestParams): Observable<ResponseData> {
+    return this.repository.makeRequest(this.postDcDeviceDiscoveryRequest(params));
+  }
+
+  postDcDeviceDiscoveryRequest(params: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${dcOperationDeviceDiscovery}`, params);
   }
 }

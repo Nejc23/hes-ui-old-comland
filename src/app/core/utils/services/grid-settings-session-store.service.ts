@@ -255,7 +255,6 @@ export class GridSettingsSessionStoreService {
         sessionStorage.setItem(grid, JSON.stringify(data));
       }
     }
-    // console.log(`requestIds = ${JSON.stringify(data)}`);
   }
 
   getAllMyGridLinkRequestIds(grid: string): string[] {
@@ -289,7 +288,6 @@ export class GridSettingsSessionStoreService {
         sessionStorage.setItem(this.cryptoImportIds, JSON.stringify(data));
       }
     }
-    // console.log(`requestIds = ${JSON.stringify(data)}`);
   }
 
   getAllCryptoImportIds(): string[] {

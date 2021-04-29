@@ -23,6 +23,7 @@ export class FileSelectComponent implements OnInit {
 
   @Output() selectEvent = new EventEmitter<any>();
   @Output() removeEvent = new EventEmitter<any>();
+  @Output() fileValid = new EventEmitter<boolean>();
 
   @ViewChild('uploadSample') upload: any;
 
@@ -123,24 +124,20 @@ export class FileSelectComponent implements OnInit {
     const files = e.files;
     let isAcceptedImageFormat = true;
 
-    console.log('acceptExtensions', this.acceptExtensions);
-    console.log('files', files);
-    console.log('files[0].extensions', files[0].extension);
     if (this.acceptExtensions && this.acceptExtensions.length > 0) {
       isAcceptedImageFormat = $.inArray(files[0].extension, this.acceptExtensions) !== -1;
     }
 
-    console.log('isAcceptedImageFormat', isAcceptedImageFormat);
-
     this.fileName = files[0].name;
 
     if (!isAcceptedImageFormat) {
-      // console.log('File extension is not supported:', files[0].extension, '. Supported file extensions:', this.acceptExtensions);
       e.preventDefault();
       this.isFileSelectFailed = true;
+      this.fileValid.emit(false);
     } else {
       this.selectEvent.emit(e);
       this.isFileSelectOk = true;
+      this.fileValid.emit(true);
     }
   }
 }

@@ -1,3 +1,4 @@
+import { AddJobComponent } from './../features/jobs/components/scheduler-job/add-job.component';
 import { HideIfAnyPermissionsUnauthorizedDirective } from './directives/permissions/hide-if-any-permissions-unauthorized.directive';
 import { HideDividerIfPermissionsUnauthorizedDirective } from './directives/permissions/hide-divider-if-permissions-unauthorized.directive';
 import { HideIfPermissionUnauthorizedDirective } from './directives/permissions/hide-if-permission-unauthorized.directive';
@@ -242,7 +243,8 @@ import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent,
     StatusJobComponent,
-    ActiveJobsListComponent
+    ActiveJobsListComponent,
+    AddJobComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -273,9 +275,7 @@ import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs
     SecurityRekeyComponent,
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
-    AlarmNotificationRulesComponent,
-    StatusJobComponent,
-    ActiveJobsListComponent
+    AlarmNotificationRulesComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
-import { TemplatesService } from 'src/app/core/repository/services/templates/templates.service';
 
 @Component({
   templateUrl: './security-change-password.component.html'
@@ -32,27 +31,14 @@ export class SecurityChangePasswordComponent implements OnInit {
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
-    private formUtils: FormsUtilsService,
-    private templatesService: TemplatesService
+    private formUtils: FormsUtilsService
   ) {
     this.passwordTypes = [
-      { id: 'PW_L1', value: 'PW_L1' },
-      { id: 'PW_L2', value: 'PW_L2' },
-      { id: 'PW_L3', value: 'PW_L3' },
-      { id: 'PW_LG', value: 'PW_LG' },
-      { id: 'PW_LL', value: 'PW_LL' },
-      { id: 'PW_LF', value: 'PW_LF' },
-      { id: 'PW_CII', value: 'PW_CII' },
-      { id: 'PW_SECURITY_AUDITOR', value: 'PW_SECURITY_AUDITOR' },
-      { id: 'PW_LOCAL_OPERATOR', value: 'PW_LOCAL_OPERATOR' },
-      { id: 'PW_MAINTENANCE', value: 'PW_MAINTENANCE' },
-      { id: 'PW_CALIBRATION', value: 'PW_CALIBRATION' },
-      { id: 'PW_SECURITY_ADMIN', value: 'PW_SECURITY_ADMIN' },
-      { id: 'PW_USER_ADMIN', value: 'PW_USER_ADMIN' },
-      { id: 'PW_M2', value: 'PW_M2' },
-      { id: 'PW_M3	', value: 'PW_M3' },
-      { id: 'PW_M4', value: 'PW_M4' },
-      { id: 'PW_M5', value: 'PW_M5' }
+      { id: 'PW_LG', value: 'PW_LG (Management)' },
+      { id: 'PW_M2', value: 'PW_M2 (Operator)' },
+      { id: 'PW_L1', value: 'PW_L1 (Reader)' },
+      { id: 'PW_L2', value: 'PW_L2 (Installer)' },
+      { id: 'PW_CALIBRATION', value: 'PW_CALIBRATION (Verification)' }
     ];
     this.selectedPasswordType = this.passwordTypes[0];
     this.form = this.createForm();

@@ -67,7 +67,6 @@ export class PlcMeterTouConfigComponent implements OnInit {
         deviceIds: this.actionRequest.deviceIds,
         excludeIds: this.actionRequest.excludeIds
       };
-      console.log(`paramsConf = ${JSON.stringify(paramsConf)}`);
       response = this.gridLinkService.postMyGridTOUDevice(paramsConf);
       response.subscribe(
         (value) => {

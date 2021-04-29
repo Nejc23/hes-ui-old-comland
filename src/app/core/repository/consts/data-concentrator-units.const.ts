@@ -29,6 +29,7 @@ export const removeDcuFromJob = `${basePath}/remove-concentrators-from-job`;
 export const basePathDcOperations = '/api/concentrator-management';
 export const dcOperationSynchronizeTime = `${basePathDcOperations}/trigger-set-concentrator-time-filterable`;
 export const dcOperationFwUpgrade = `${basePathDcOperations}/upgrade`;
+export const dcOperationDeviceDiscovery = `${basePathDcOperations}/trigger-device-discovery`;
 export const dcLastStatus = '/last-status';
 
 // Active Jobs
