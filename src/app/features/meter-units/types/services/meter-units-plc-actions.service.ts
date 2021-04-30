@@ -109,7 +109,7 @@ export class MeterUnitsPlcActionsService {
     modalRef.result.then().catch(() => {});
   }
 
-  onTou(params: IActionRequestParams, selectedRowsCount: number) {
+  onTou(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
@@ -128,6 +128,7 @@ export class MeterUnitsPlcActionsService {
           };
           const modalRef = this.modalService.open(StatusJobComponent, options);
           modalRef.componentInstance.requestId = data; // requestId
+          modalRef.componentInstance.jobName = actionName;
         }
       },
       (reason) => {
@@ -136,7 +137,7 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onUpgrade(params: IActionRequestParams, selectedRowsCount: number) {
+  onUpgrade(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
@@ -151,6 +152,7 @@ export class MeterUnitsPlcActionsService {
           };
           const modalRef = this.modalService.open(StatusJobComponent, options);
           modalRef.componentInstance.requestId = data; // requestId
+          modalRef.componentInstance.jobName = actionName;
         }
       },
       (reason) => {
@@ -159,7 +161,7 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onSetMonitor(params: RequestFilterParams, selectedRowsCount: number) {
+  onSetMonitor(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterMonitorComponent);
 
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
@@ -182,13 +184,14 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onSetLimiter(params: RequestFilterParams, selectedRowsCount: number) {
+  onSetLimiter(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterLimiterComponent);
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
     modalRef.componentInstance.filterParam = params.filter;
     modalRef.componentInstance.searchParam = params.search;
     modalRef.componentInstance.excludeIdsParam = params.excludeIds;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.actionRequst = modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
@@ -202,14 +205,14 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
+  onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName) {
     const modalRef = this.modalService.open(PlcMeterRelaysConnectComponent);
     modalRef.componentInstance.actionRequest = params;
 
     // TODO: this should be removed when there is a new filtering structure on every method
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
-
+    modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
@@ -225,7 +228,7 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysDisconnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
+  onRelaysDisconnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterRelaysDisconnectComponent);
     modalRef.componentInstance.actionRequest = params;
 
@@ -233,6 +236,7 @@ export class MeterUnitsPlcActionsService {
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionName = actionName;
 
     modalRef.result.then(
       (data) => {
@@ -247,14 +251,14 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysState(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
+  onRelaysState(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName) {
     const modalRef = this.modalService.open(PlcMeterRelaysStateComponent);
     modalRef.componentInstance.actionRequest = params;
 
     // TODO: this should be removed when there is a new filtering structure on every method
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
-
+    modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
@@ -271,14 +275,14 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onRelaysSetMode(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number) {
+  onRelaysSetMode(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterRelaysSetModeComponent);
     modalRef.componentInstance.actionRequest = params;
 
     // TODO: this should be removed when there is a new filtering structure on every method
     modalRef.componentInstance.filterParam = paramsLegacy.filter;
     modalRef.componentInstance.searchParam = paramsLegacy.search;
-
+    modalRef.componentInstance.actionName = actionName;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
 
     modalRef.result.then(
@@ -294,10 +298,11 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
-  onDisconnectorMode(params: IActionRequestParams, selectedRowsCount: number) {
+  onDisconnectorMode(params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterBreakerModeComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.actionName = actionName;
 
     modalRef.result.then(
       (data) => {
@@ -406,14 +411,16 @@ export class MeterUnitsPlcActionsService {
     );*/
   }
 
-  onSetDisplaySettings(paramsOld: RequestFilterParams, params: IActionRequestParams, selectedRowsCount: number) {
+  onSetDisplaySettings(paramsOld: RequestFilterParams, params: IActionRequestParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterSetDisplaySettingsComponent);
+
     modalRef.componentInstance.deviceIdsParam = paramsOld.deviceIds;
     modalRef.componentInstance.filterParam = paramsOld.filter;
     modalRef.componentInstance.searchParam = paramsOld.search;
     modalRef.componentInstance.excludeIdsParam = paramsOld.excludeIds;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
     modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.actionName = actionName;
 
     modalRef.result.then(
       (data) => {
@@ -515,6 +522,7 @@ export class MeterUnitsPlcActionsService {
             };
             const modalRef = this.modalService.open(StatusJobComponent, options);
             modalRef.componentInstance.requestId = value.requestId;
+            modalRef.componentInstance.jobName = operationName;
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);

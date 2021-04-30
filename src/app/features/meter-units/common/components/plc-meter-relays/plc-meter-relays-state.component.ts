@@ -20,6 +20,7 @@ export class PlcMeterRelaysStateComponent implements OnInit {
 
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
+  actionName = '';
 
   public selectedRowsCount: number;
 
@@ -70,6 +71,7 @@ export class PlcMeterRelaysStateComponent implements OnInit {
         };
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       (error) => {
         this.toastService.errorToast(errorMessage);

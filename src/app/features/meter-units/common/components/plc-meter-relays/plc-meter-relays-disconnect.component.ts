@@ -23,6 +23,7 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
   searchParam?: GridSearchParams[];
 
   relays$: Codelist<string>[];
+  actionName = '';
 
   public selectedRowsCount: number;
 
@@ -98,6 +99,7 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
         };
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       () => {} // error
     );

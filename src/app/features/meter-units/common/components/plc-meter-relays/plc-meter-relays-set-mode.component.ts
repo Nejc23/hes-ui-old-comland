@@ -24,6 +24,7 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
 
   relays$: Codelist<string>[];
   modes: Codelist<number>[];
+  actionName = '';
 
   public selectedRowsCount: number;
 
@@ -119,6 +120,7 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
         };
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       () => {} // error
     );

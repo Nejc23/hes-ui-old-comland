@@ -750,7 +750,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onClearFF(selectedGuid: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -810,18 +809,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onTou(selectedGuid: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const actionName = 'TOU Upload';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
       this.getSelectedCount(),
       this.getSearchColumnNames()
     );
-    this.plcActionsService.onTou(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onTou(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onUpgrade(selectedGuid: string) {
+    const actionName = 'Upload image';
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -829,23 +829,26 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getSearchColumnNames()
     );
-    this.plcActionsService.onUpgrade(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onUpgrade(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetMonitor(selectedGuid: string) {
+    const actionName = 'Set monitor';
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetLimiter(selectedGuid: string) {
+    const actionName = 'Set Limiter';
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysConnect(selectedGuid: string) {
+    const actionName = 'Relays Connect';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -853,11 +856,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
+    const actionName = 'Relays Disconnect';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -865,11 +869,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysState(selectedGuid: string) {
+    const actionName = 'Relay State';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -877,11 +882,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysState(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
+    const actionName = 'Relay Mode';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -889,11 +895,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onDisconnectorMode(selectedGuid: string) {
+    const actionName = 'Breaker Mode';
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -901,11 +908,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getSearchColumnNames()
     );
-    this.plcActionsService.onDisconnectorMode(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onDisconnectorMode(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetDisplaySettings(selectedGuid: string) {
+    const actionName = 'Set Display Settings';
     const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -914,7 +922,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
 
-    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // on clear alarms

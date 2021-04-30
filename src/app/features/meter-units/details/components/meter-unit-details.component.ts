@@ -252,30 +252,34 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   onRelaysConnect(selectedGuid: string) {
+    const actionName = 'Relay Connect';
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1);
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1, actionName);
   }
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
+    const actionName = 'Relay Disconnect';
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1);
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1, actionName);
   }
 
   // popup
   onRelaysState(selectedGuid: string) {
+    const actionName = 'Relay State';
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy, 1);
+    this.plcActionsService.onRelaysState(params, paramsLegacy, 1, actionName);
   }
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
+    const actionName = 'Relay Mode';
     const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1);
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1, actionName);
   }
 
   onClearFF() {
@@ -309,41 +313,47 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onTou() {
+    const actionName = 'TOU Upload';
     // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    this.plcActionsService.onTou(params, 1);
+    this.plcActionsService.onTou(params, 1, actionName);
   }
 
   // popup
   onUpgrade() {
-    // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const actionName = 'Upload image';
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    this.plcActionsService.onUpgrade(params, 1);
+    this.plcActionsService.onUpgrade(params, 1, actionName);
   }
 
   // popup
   onSetMonitor() {
+    const actionName = 'Set monitor';
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onSetMonitor(params, 1);
+    this.plcActionsService.onSetMonitor(params, 1, actionName);
   }
 
   // popup
   onSetLimiter() {
+    const actionName = 'Set Limiter';
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
-    this.plcActionsService.onSetLimiter(params, 1);
+    this.plcActionsService.onSetLimiter(params, 1, actionName);
   }
 
   // popup
   onDisconnectorMode() {
+    const actionName = 'Breaker Mode';
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
-    this.plcActionsService.onDisconnectorMode(params, 1);
+    this.plcActionsService.onDisconnectorMode(params, 1, actionName);
   }
 
   onSetDisplaySettings() {
+    const actionName = 'Set Display Settings';
+
     const paramsOld = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
 
-    this.plcActionsService.onSetDisplaySettings(paramsOld, params, 1);
+    this.plcActionsService.onSetDisplaySettings(paramsOld, params, 1, actionName);
   }
 
   onClearAlarms() {

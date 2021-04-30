@@ -21,10 +21,10 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
 
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
-
   relays$: Codelist<string>[];
 
   public selectedRowsCount;
+  actionName = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -99,6 +99,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
         };
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.actionName = this.actionName;
       },
       () => {} // error
     );
