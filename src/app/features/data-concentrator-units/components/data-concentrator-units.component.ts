@@ -40,6 +40,7 @@ import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { GridUtils } from '../../global/grid.utils';
 import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-data-concentrator-units',

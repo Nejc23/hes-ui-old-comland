@@ -6,8 +6,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
-import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
-import { Observable } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { transition, trigger, style, animate } from '@angular/animations';
 import { MeterTypeRoute } from '../enums/meter-type.enum';

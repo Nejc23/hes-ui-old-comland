@@ -34,6 +34,7 @@ import { SettingsStoreEmitterService } from 'src/app/core/repository/services/se
 import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -125,6 +126,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   isSearchByParent = false;
 
+  gridData: any;
+
   constructor(
     public fb: FormBuilder,
     private route: ActivatedRoute,
@@ -147,7 +150,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private settingsStoreService: SettingsStoreService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private jobsSelectGridService: JobsSelectGridService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private concentratorService: ConcentratorService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -394,6 +398,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
         this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
         this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
+        this.setGridDataSource();
         this.gridApi.onFilterChanged();
       }
     }
@@ -745,7 +750,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   onClearFF(selectedGuid: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -805,18 +809,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onTou(selectedGuid: string) {
-    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const actionName = 'TOU Upload';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
       this.getSelectedCount(),
       this.getSearchColumnNames()
     );
-    this.plcActionsService.onTou(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onTou(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onUpgrade(selectedGuid: string) {
+    const actionName = 'Upload image';
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -824,23 +829,26 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getSearchColumnNames()
     );
-    this.plcActionsService.onUpgrade(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onUpgrade(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetMonitor(selectedGuid: string) {
+    const actionName = 'Set monitor';
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetLimiter(selectedGuid: string) {
+    const actionName = 'Set Limiter';
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysConnect(selectedGuid: string) {
+    const actionName = 'Relays Connect';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -848,11 +856,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysConnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysConnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
+    const actionName = 'Relays Disconnect';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -860,11 +869,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysState(selectedGuid: string) {
+    const actionName = 'Relay State';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -872,11 +882,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysState(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysState(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
+    const actionName = 'Relay Mode';
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -884,11 +895,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
-    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onRelaysSetMode(params, paramsLegacy, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onDisconnectorMode(selectedGuid: string) {
+    const actionName = 'Breaker Mode';
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -896,11 +908,12 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSelectedCount(),
       this.getSearchColumnNames()
     );
-    this.plcActionsService.onDisconnectorMode(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onDisconnectorMode(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetDisplaySettings(selectedGuid: string) {
+    const actionName = 'Set Display Settings';
     const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -909,7 +922,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.getSearchColumnNames()
     );
 
-    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
+    this.plcActionsService.onSetDisplaySettings(paramsOld, params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // on clear alarms
@@ -1116,6 +1129,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         that.meterUnitsTypeService
           .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
           .subscribe((data) => {
+            that.gridData = data;
+            const deviceIds = data.data.map((data) => data.deviceId);
+
             that.gridApi.hideOverlay();
 
             if (data === undefined || data == null || data.totalCount === 0) {
@@ -1137,6 +1153,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
             that.isGridLoaded = true;
             that.resizeColumns();
+            that.getJobsData(deviceIds);
           });
         // }
       }
@@ -1279,5 +1296,33 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  getJobsData(deviceIds: any) {
+    this.concentratorService.getJobSummaryPost(deviceIds).subscribe((res) => {
+      this.gridData.data.forEach((data) => {
+        const item = res.find((el) => el.deviceId === data.deviceId);
+        if (item) {
+          data.jobStatus = item.state;
+        }
+      });
+      const that = this;
+      this.datasource = {
+        getRows(paramsRow) {
+          if (that.gridData.data === undefined || that.gridData.data == null || that.gridData.totalCount.data === 0) {
+            this.totalCount = 0;
+            that.gridApi.showNoRowsOverlay();
+          } else {
+            this.totalCount = that.gridData.totalCount;
+          }
+          paramsRow.successCallback(that.gridData ? that.gridData.data : [], that.gridData.totalCount);
+          that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
+          that.selectRows(that.gridApi);
+          that.isGridLoaded = true;
+          that.resizeColumns();
+        }
+      };
+      this.gridApi.setServerSideDatasource(this.datasource);
+    });
   }
 }

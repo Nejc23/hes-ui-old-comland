@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
@@ -9,6 +9,8 @@ import {
   IActionRequestParams,
   IActionRequestSetDisconnectorMode
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-plc-meter-breaker-mode',
@@ -19,6 +21,7 @@ export class PlcMeterBreakerModeComponent implements OnInit {
   disconnectorModes: Codelist<number>[];
   actionRequest: IActionRequestParams;
   errMsg = '';
+  actionName = '';
 
   selectedRowsCount: number;
 
@@ -26,7 +29,8 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
-    private myGridService: MyGridLinkService
+    private myGridService: MyGridLinkService,
+    private modalService: ModalService
   ) {
     this.form = this.createForm();
   }
@@ -82,8 +86,14 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     const successMessage = $localize`Meter Units set Breaker mode was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
-        console.log(result);
         this.modal.close();
+
+        const options: NgbModalOptions = {
+          size: 'md'
+        };
+        const modalRef = this.modalService.open(StatusJobComponent, options);
+        modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       (err) => {
         // error

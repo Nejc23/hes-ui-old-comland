@@ -24,6 +24,7 @@ export class ModalConfirmComponent implements OnInit {
   @Input() modalTitle: string;
   @Input() modalBody: string;
   @Input() btnConfirmText = $localize`Confirm`;
+  @Input() warningIcon = true;
 
   constructor(public activeModal: NgbActiveModal) {}
 

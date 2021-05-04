@@ -1,0 +1,81 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header>{{ jobName }}</div>
+
+  <div modal-body>
+    <div class="d-flex justify-content-between mb-5">
+
+      <div class="gray-box">
+        <div class="box-data">
+          <div class="large-text-bold">
+            <div class="spinner-border text-secondary" role="status" *ngIf="loading">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <ng-container *ngIf="!loading">
+              {{ statusJobProgress.deviceCount }}
+            </ng-container>
+          </div>
+          <div class="tiny-text gray-color">Total devices</div>
+        </div>
+      </div>
+
+      <div class="gray-box">
+        <div class="box-data">
+          <div class="large-text-bold">
+            <div class="spinner-border text-secondary" role="status" *ngIf="loading">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <ng-container *ngIf="!loading">
+              {{ statusJobProgress.successCount }}
+            </ng-container>
+          </div>
+          <div class="tiny-text gray-color">Succeded</div>
+        </div>
+      </div>
+
+      <div class="gray-box">
+        <div class="box-data">
+          <div class="large-text-bold text-danger">
+            <div class="spinner-border text-secondary" role="status" *ngIf="loading">
+              <span class="sr-only">Loading...</span>
+            </div>
+            <ng-container *ngIf="!loading">
+              {{ statusJobProgress.failCount }}
+            </ng-container>
+          </div>
+          <div class="tiny-text">Failed</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="small-text gray-color">
+        Progress:
+      </div>
+      <div class="small-title gray-color">
+        {{ statusJobProgress.progress }} %
+      </div>
+    </div>
+    <div class="progress mt-3">
+      <div class="progress-bar" [ngClass]="withError()" [ngStyle]="{ width: statusJobProgress.progress + '%' }"
+           role="progressbar" aria-valuemin="10" aria-valuemax="100"></div>
+    </div>
+
+    <div class="d-flex pt-3 justify-content-end tiny-text gray-color">
+      <!-- *ngIf="statusJobProgress.progress !== 100"-->
+      <ng-template *ngIf="finished; else running">
+        Total time:
+      </ng-template>
+      <ng-template #running>
+        Running time:
+      </ng-template>
+      <cd-timer #basicTimer class="pl-3"></cd-timer>
+    </div>
+  </div>
+
+  <div modal-footer>
+    <button type="button" class="btn btn-link" i18n (click)="onDismiss()">Close</button>
+  </div>
+</app-modal-template>
+
+<!--<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>-->

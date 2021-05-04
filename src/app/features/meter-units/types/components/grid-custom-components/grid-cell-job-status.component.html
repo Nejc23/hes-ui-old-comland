@@ -1,19 +1,14 @@
-<div class="d-flex align-items-center" *ngIf="params.value" container="body" [openDelay]="1000" placement="bottom"
-  [ngbTooltip]="params.value">
-  <div container="body" [placement]="['left','top-left']" [ngbPopover]="popActiveJobContent" popoverClass="active-job-popover">
-  <i class="fad fa-circle-notch text-success" *ngIf="params.value.toLowerCase() == jobStatus.running"></i>
-  <i class="far fa-check-circle text-success" *ngIf="params.value.toLowerCase() == jobStatus.success"></i>
-  <i class="fas fa-exclamation-circle text-danger" *ngIf="params.value.toLowerCase() == jobStatus.failed"></i>
-  <i class="far fa-pause-circle text-warning" *ngIf="params.value.toLowerCase() == jobStatus.pending"></i>
-  <span class="text-truncate flex-shrink-1" [ngClass]="{
-    'text-success': params.value.toLowerCase() == jobStatus.running || params.value.toLowerCase() == jobStatus.success,
-    'text-danger': params.value.toLowerCase() == jobStatus.failed,
-    'text-warning': params.value.toLowerCase() == jobStatus.pending}">{{params.value}}</span>
+<div class="d-flex align-items-center" *ngIf="params.value" (click)="openModal()">
+  <div role="button">
+    <i class="fad fa-circle-notch text-success" *ngIf="params.value.toLowerCase() == jobStatus.running"></i>
+    <i class="far fa-check-circle text-success" *ngIf="params.value.toLowerCase() == jobStatus.success"></i>
+    <i class="fas fa-exclamation-circle text-danger" *ngIf="params.value.toLowerCase() == jobStatus.failed"></i>
+    <i class="far fa-pause-circle text-warning" *ngIf="params.value.toLowerCase() == jobStatus.pending"></i>
+    <span class="text-truncate flex-shrink-1" [ngClass]="{
+      'text-success': params.value.toLowerCase() == jobStatus.running || params.value.toLowerCase() == jobStatus.success,
+      'text-danger': params.value.toLowerCase() == jobStatus.failed,
+      'text-warning': params.value.toLowerCase() == jobStatus.pending}">{{params.value}}
+    </span>
 </div>
 </div>
 <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
-
-
-<ng-template #popActiveJobContent>
-  <app-active-job [deviceId]="params.data.id"></app-active-job>
-</ng-template>

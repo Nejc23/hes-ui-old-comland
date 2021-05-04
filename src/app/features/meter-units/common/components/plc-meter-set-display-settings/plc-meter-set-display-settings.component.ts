@@ -2,7 +2,7 @@ import { IActionRequestSetDisplaySettings } from './../../../../../core/reposito
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ResponseCommonRegisterGroup, RegisterDefinitions } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -10,6 +10,8 @@ import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/inte
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { PlcMeterSetDisplaySettingsGridService } from '../../services/plc-meter-set-display-settings-grid.service';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-plc-meter-set-display-settings',
@@ -46,13 +48,15 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   noRowsTemplate = '<span>' + $localize`Drop available registers here.` + '</span>';
 
   dataLoaded = false;
+  actionName = '';
 
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private plcMeterSetDisplaySettingsGridService: PlcMeterSetDisplaySettingsGridService
+    private plcMeterSetDisplaySettingsGridService: PlcMeterSetDisplaySettingsGridService,
+    private modalService: ModalService
   ) {
     this.form = this.createForm();
   }
@@ -147,6 +151,13 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
+
+        const options: NgbModalOptions = {
+          size: 'md'
+        };
+        const modalRef = this.modalService.open(StatusJobComponent, options);
+        modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       () => {} // error
     );

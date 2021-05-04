@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import {
   RequestCommonRegisterGroup,
@@ -10,6 +10,8 @@ import {
 } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { PlcMeterSetMonitorService } from '../../services/plc-meter-set-monitor.service';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 
 @Component({
   selector: 'app-plc-meter-monitor',
@@ -20,6 +22,7 @@ export class PlcMeterMonitorComponent implements OnInit {
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
   excludeIdsParam?: string[];
+  actionName = '';
 
   form: FormGroup;
   formTemplate: ResponseCommonRegisterGroup[];
@@ -31,7 +34,8 @@ export class PlcMeterMonitorComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private setMonitorService: PlcMeterSetMonitorService
+    private setMonitorService: PlcMeterSetMonitorService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -80,6 +84,12 @@ export class PlcMeterMonitorComponent implements OnInit {
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
+        const options: NgbModalOptions = {
+          size: 'md'
+        };
+        const modalRef = this.modalService.open(StatusJobComponent, options);
+        modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       () => {} // error
     );
