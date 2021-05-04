@@ -1,25 +1,30 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
 import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { CdTimerComponent } from 'angular-cd-timer';
 
 @Component({
   selector: 'app-status-job',
   templateUrl: './status-job.component.html'
 })
 export class StatusJobComponent implements OnInit, OnDestroy {
+  @ViewChild('basicTimer', { static: false }) cdTimer: CdTimerComponent;
+
   @Input() requestId: string = '';
   @Input() jobName: string = '';
+
   interval = null;
   intervalSeconds = 5;
-  loading = false;
+  loading = true;
+  finished = false;
 
   statusJobProgress: StatusJobProgress = {
     deviceCount: 0,
     successCount: 0,
     failCount: 0,
-    progress: 0
+    progress: 10
   };
 
   constructor(private modal: NgbActiveModal, private concentratorService: ConcentratorService, private toast: ToastNotificationService) {}
@@ -45,7 +50,11 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   getProgress() {
     this.concentratorService.getJobProgress(this.requestId).subscribe(
       (res) => {
+        this.loading = false;
         this.statusJobProgress = res;
+        if (this.statusJobProgress.progress == 0) {
+          this.statusJobProgress.progress += 10;
+        }
       },
       (error) => {
         console.log('error: ' + error);
@@ -63,10 +72,12 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   withError() {
     if (this.statusJobProgress?.failCount > 0) {
       return 'red';
-    }
+    } else return 'progress-bar-striped progress-bar-animated';
   }
 
   clearInt() {
+    this.finished = true;
+    this.cdTimer.stop();
     clearInterval(this.interval);
     this.interval = null;
   }

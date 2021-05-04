@@ -81,8 +81,8 @@ import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/co
 import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
 import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
 import { CdTimerModule } from 'angular-cd-timer';
-import { StatusJobComponent } from '../features/jobs/components/status-job/status-job.component';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
+import { StatusJobComponent } from '../features/jobs/components/status-job/status-job.component';
 
 @NgModule({
   exports: [

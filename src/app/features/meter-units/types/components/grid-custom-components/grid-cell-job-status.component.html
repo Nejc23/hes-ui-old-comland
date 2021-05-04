@@ -1,5 +1,5 @@
 <div class="d-flex align-items-center" *ngIf="params.value" (click)="openModal()">
-  <div>
+  <div role="button">
     <i class="fad fa-circle-notch text-success" *ngIf="params.value.toLowerCase() == jobStatus.running"></i>
     <i class="far fa-check-circle text-success" *ngIf="params.value.toLowerCase() == jobStatus.success"></i>
     <i class="fas fa-exclamation-circle text-danger" *ngIf="params.value.toLowerCase() == jobStatus.failed"></i>

@@ -9,7 +9,6 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { ActiveJob } from '../../interfaces/active-job-progress.interface';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';

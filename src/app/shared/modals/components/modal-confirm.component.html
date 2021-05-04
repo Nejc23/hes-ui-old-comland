@@ -1,6 +1,6 @@
 <div class="modal-header modal-md gray-line" *ngIf="modalTitle">
-  <div class="modal-warning" *ngIf='warningIcon'>
-    <img src="../../../assets/images/icons/warning-icon.svg" class="mr-3" />
+  <div class="modal-warning" *ngIf="warningIcon">
+    <img [src]="'assets/images/icons/warning-icon.svg'" class="mr-3" />
   </div>
   <h3 class="modal-title">{{modalTitle}}</h3>
 
