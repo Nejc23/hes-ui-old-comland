@@ -12,7 +12,6 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
@@ -66,20 +65,15 @@ export class AddDcuFormComponent implements OnInit {
   }
 
   createForm(): FormGroup {
-    return this.formBuilder.group(
-      {
-        [this.nameProperty]: ['', Validators.required],
-        [this.idNumberProperty]: ['', Validators.required],
-        [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-        [this.typeProperty]: [null, Validators.required],
-        [this.userNameProperty]: [null, Validators.required],
-        [this.passwordProperty]: [null],
-        [this.confirmPasswordProperty]: [null],
-        [this.vendorProperty]: [null, Validators.required],
-        [this.tagsProperty]: [null]
-      },
-      { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
-    );
+    return this.formBuilder.group({
+      [this.nameProperty]: ['', Validators.required],
+      [this.idNumberProperty]: ['', Validators.required],
+      [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
+      [this.typeProperty]: [null, Validators.required],
+      [this.userNameProperty]: [null, Validators.required],
+      [this.vendorProperty]: [null, Validators.required],
+      [this.tagsProperty]: [null]
+    });
   }
 
   fillData(): DcuForm {
@@ -95,7 +89,6 @@ export class AddDcuFormComponent implements OnInit {
 
     if (this.credentialsVisible) {
       formData.userName = this.form.get(this.userNameProperty).value;
-      formData.password = this.form.get(this.passwordProperty).value;
     }
 
     return formData;
