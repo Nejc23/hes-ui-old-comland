@@ -10,7 +10,6 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { ActivatedRoute } from '@angular/router';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
-import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 
@@ -81,11 +80,9 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         [this.addressProperty]: [this.data ? this.data.address : null],
         [this.tagsProperty]: [this.data ? this.data.tags : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
-        [this.macProperty]: [this.data ? this.data.mac : null],
-        [this.passwordProperty]: [this.data ? this.data.password : null],
-        [this.confirmPasswordProperty]: [this.data ? this.data.password : null]
+        [this.macProperty]: [this.data ? this.data.mac : null]
       },
-      { updateOn: 'blur', validators: matchPasswordsValidator(this.passwordProperty, this.confirmPasswordProperty) }
+      { updateOn: 'blur' }
     );
   }
 
@@ -107,14 +104,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
   get userNameProperty() {
     return nameOf<DcuForm>((o) => o.userName);
-  }
-
-  get passwordProperty() {
-    return nameOf<DcuForm>((o) => o.password);
-  }
-
-  get confirmPasswordProperty() {
-    return nameOf<DcuForm>((o) => o.confirmPassword);
   }
 
   get typeProperty() {
@@ -168,7 +157,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
     if (this.credentialsVisible) {
       formData.userName = this.form.get(this.userNameProperty).value;
-      formData.password = this.form.get(this.passwordProperty).value;
     }
 
     return formData;
@@ -218,12 +206,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     // Disable fields just for form validation. Disabled fields are also not validated in custom matchPasswordsValidator.
     if (credentialsVisible) {
       this.form.get(this.userNameProperty).enable();
-      this.form.get(this.passwordProperty).enable();
-      this.form.get(this.confirmPasswordProperty).enable();
     } else {
       this.form.get(this.userNameProperty).disable();
-      this.form.get(this.passwordProperty).disable();
-      this.form.get(this.confirmPasswordProperty).disable();
     }
   }
 
