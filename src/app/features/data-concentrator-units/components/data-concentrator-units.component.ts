@@ -586,7 +586,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   addDcu() {
     this.jobsSelectGridService.clearSessionSettingsSelectedRows();
-    const modalRef = this.modalService.open(AddDcuFormComponent);
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    const modalRef = this.modalService.open(AddDcuFormComponent, options);
     modalRef.result
       .then((result) => {
         this.refreshGrid();

@@ -10,7 +10,9 @@ export const environment = {
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',
   dateFormat: 'dd.MM.yyyy',
+  fistDay: 1, // 1 == first day is monday
   timeFormat: 'HH:mm',
+  timeFormatLong: 'HH:mm:ss',
   kendoChartCategoryDateFormats: {
     minutes: 'HH:mm',
     hours: 'HH:mm',

@@ -124,3 +124,52 @@
 
 @import 'custom-style/ag-grid';
 @import 'custom-style/filter';
+
+// fonts as defined in figma -> create _fonts.css
+.text-normal {
+  font-size: $font-size-base; // 14px
+  line-height: 1.7;
+}
+
+.text-normal-bold {
+  font-size: $font-size-base;  // 14px
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.large-text {
+  font-size: $h1-font-size; // 24px
+  line-height: 1.4;
+}
+
+.large-text-bold {
+  font-weight: 500;
+  font-size: $h1-font-size;  // 24px
+  line-height: 1.4;
+}
+
+.small-title {
+  font-weight: 400;
+  font-size: $h4-font-size; // 16px
+  line-height: 1.5;
+}
+
+.small-title-bold {
+  font-weight: 700;
+  font-size: $h4-font-size; // 16px
+  line-height: 1.5;
+}
+
+.small-text {
+  font-size: $smallText; // 12px
+  line-height: 1.7px;
+}
+
+.tiny-text {
+  font-size: $tinyText; // 11px
+  line-height: 1.4;
+}
+
+.alert-danger {
+  font-weight: 500;
+}

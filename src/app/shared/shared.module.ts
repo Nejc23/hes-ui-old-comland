@@ -80,9 +80,14 @@ import { GridSelectionHeaderScrollableComponent } from './ag-grid/components/gri
 import { GridCellActiveReadOnlyComponent } from '../features/jobs/jobs-select/components/grid-custom-components/grid-cell-active-read-only.component';
 import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
 import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
+import { PlcReadRegistersComponent } from '../features/meter-units/common/components/plc-read-meter/plc-read-registers.component';
 import { CdTimerModule } from 'angular-cd-timer';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { StatusJobComponent } from '../features/jobs/components/status-job/status-job.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { environment } from '../../environments/environment';
 
 @NgModule({
   exports: [
@@ -148,6 +153,7 @@ import { StatusJobComponent } from '../features/jobs/components/status-job/statu
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent,
+    PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent
   ],
@@ -172,7 +178,10 @@ import { StatusJobComponent } from '../features/jobs/components/status-job/statu
       GridCellIpComponent,
       GridCellActiveReadOnlyComponent
     ]),
-    CdTimerModule
+    CdTimerModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    NgxDaterangepickerMd.forRoot({ format: environment.dateFormat, firstDay: environment.fistDay })
   ],
   declarations: [
     BaseTemplateComponent,
@@ -242,6 +251,8 @@ import { StatusJobComponent } from '../features/jobs/components/status-job/statu
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent,
+    AddJobComponent,
+    PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
     AddJobComponent
@@ -275,7 +286,8 @@ import { StatusJobComponent } from '../features/jobs/components/status-job/statu
     SecurityRekeyComponent,
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
-    AlarmNotificationRulesComponent
+    AlarmNotificationRulesComponent,
+    PlcReadRegistersComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

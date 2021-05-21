@@ -48,11 +48,11 @@
   }
 */
   &.btn-link {
-    color: $primary;
+    color: $link-color;
     font-weight: $font-weight-bold;
 
     &:hover {
-      color: darken($primary, 15%);
+      color: darken($link-color, 15%);
     }
   }
 

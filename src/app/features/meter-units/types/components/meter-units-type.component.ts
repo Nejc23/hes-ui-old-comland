@@ -35,6 +35,7 @@ import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-gr
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -778,7 +779,10 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   onAdd() {
     this.jobsSelectGridService.clearSessionSettingsSelectedRows();
-    const modalRef = this.modalService.open(AddMuFormComponent);
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    const modalRef = this.modalService.open(AddMuFormComponent, options);
     modalRef.result
       .then((result) => {
         this.refreshGrid();
@@ -933,6 +937,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       params,
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
+  }
+
+  // popup
+  onReadMeter(selectedGuid?: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+    this.plcActionsService.onReadRegisters(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
   // <-- end Operations action click (bulk or selected row)
 

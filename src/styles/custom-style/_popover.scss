@@ -31,3 +31,12 @@
   margin-top: -3px;
 }
 // end - Instant Values popover
+
+.date-range-picker-popover {
+  max-width: 1000px;
+  max-height: 1000px;
+
+  .popover-body {
+    padding: 32px;
+  }
+}

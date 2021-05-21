@@ -206,3 +206,103 @@ label {
     }
   }
 }
+
+.datetime-range-picker {
+
+  .date-range-picker {
+    //width: 699px;
+    //height: 438px;
+
+    .calendar-table {
+      width: 215px;
+    }
+
+    .ranges {
+      padding-right: 24px;
+      padding-top: 8px;
+    }
+
+    .md-drppicker {
+      box-shadow: none;
+    }
+
+    .md-drppicker th {
+      color: #988c8c;
+      font-weight: normal;
+    }
+
+    .md-drppicker td {
+      opacity: 1;
+      font-weight: 500;
+    }
+
+    .md-drppicker td.in-range {
+      background-color: #053876; // darkBlue
+      color: white;
+    }
+
+    .md-drppicker td.active, .md-drppicker td.active:hover {
+      background-color: #225FA9; // lightBlue
+      color: white;
+    }
+
+    .md-drppicker th.month {
+      color: black;
+    }
+
+    th.prev.available {
+      background-color: #F4F6F9;
+      border-radius: 4px;
+    }
+
+    th.available.next {
+      background-color: #F4F6F9;
+      border-radius: 4px;
+    }
+
+    .calendar.left.ng-star-inserted {
+      padding-right: 24px;
+    }
+
+    .md-drppicker .ranges ul li {
+      font-size: 14px;
+      width: 123px;
+      margin-right: 30px;
+    }
+
+    tr.week-days {
+      font-size: 10px;
+      color: #A9ABAF;
+      height: 55px;
+    }
+
+    .md-drppicker .ranges ul li button.active {
+      background-color: #F4F6F9;
+      color: black;
+    }
+
+    .md-drppicker .ranges ul li button {
+      color: #6F7072;
+    }
+
+    .md-drppicker .ranges ul li button {
+      padding: 10px 12px;
+    }
+  }
+
+  input {
+    width: 106px;
+  }
+
+  .padding-left {
+    margin-left: 192px;
+  }
+
+  .padding-top-32 {
+   padding-top: 32px;
+  }
+
+  button.btn-link {
+    padding-left: 0;
+  }
+}

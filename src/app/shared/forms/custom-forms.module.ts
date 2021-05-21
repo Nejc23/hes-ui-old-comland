@@ -33,6 +33,11 @@ import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
 import { TextBoxModule } from '@progress/kendo-angular-inputs';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { TabStripModule } from '@progress/kendo-angular-layout';
+import { DatePickerComponent } from './components/date-picker/date-picker.component';
+import { DateTimeRangePickerComponent } from './components/datetime-range-picker/datetime-range-picker.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -60,12 +65,14 @@ import { TabStripModule } from '@progress/kendo-angular-layout';
     DateInputsModule,
     TimePickerComponent,
     DateTimePickerComponent,
+    DatePickerComponent,
     FileUploadComponent,
     FileSelectComponent,
     TabStripModule,
     ChartsModule,
     TextBoxModule,
-    PopupModule
+    PopupModule,
+    DateTimeRangePickerComponent
   ],
   declarations: [
     InputTextComponent,
@@ -87,8 +94,10 @@ import { TabStripModule } from '@progress/kendo-angular-layout';
     InputMultiselectComponent,
     TimePickerComponent,
     DateTimePickerComponent,
+    DatePickerComponent,
     FileUploadComponent,
-    FileSelectComponent
+    FileSelectComponent,
+    DateTimeRangePickerComponent
   ],
   imports: [
     CommonModule,
@@ -104,7 +113,10 @@ import { TabStripModule } from '@progress/kendo-angular-layout';
     ChartsModule,
     ProgressBarModule,
     TextBoxModule,
-    PopupModule
+    PopupModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    NgxDaterangepickerMd
   ]
 })
 export class CustomFormsModule {

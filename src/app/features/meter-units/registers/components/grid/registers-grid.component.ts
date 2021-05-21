@@ -19,6 +19,8 @@ export class RegistersGridComponent implements OnInit, OnChanges {
   public agGridSettings = configAgGrid;
   public gridPageSize = 10;
 
+  allRowData: any[];
+
   public localeText;
 
   @Input() categorization: string;
