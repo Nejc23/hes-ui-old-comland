@@ -63,12 +63,12 @@
 
     <div class="d-flex pt-3 justify-content-end tiny-text gray-color">
       <!-- *ngIf="statusJobProgress.progress !== 100"-->
-      <ng-container *ngIf="finished">
+      <div *ngIf="finished">
         Total time:
-      </ng-container>
-      <ng-container *ngIf="!finished">
+      </div>
+      <div *ngIf="!finished">
         Running time:
-      </ng-container>
+      </div>
       <cd-timer #basicTimer class="pl-3"></cd-timer>
     </div>
   </div>

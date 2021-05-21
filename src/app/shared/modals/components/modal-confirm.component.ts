@@ -26,6 +26,10 @@ export class ModalConfirmComponent implements OnInit {
   @Input() btnConfirmText = $localize`Confirm`;
   @Input() warningIcon = true;
 
+  @Input() checkboxField = '';
+  @Input() checkboxLabel = '';
+  @Input() checkboxValue: boolean;
+
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {}
@@ -35,6 +39,10 @@ export class ModalConfirmComponent implements OnInit {
   }
 
   confirm() {
-    this.activeModal.close();
+    this.activeModal.close(this.checkboxValue);
+  }
+
+  onValueChanged(event: any) {
+    this.checkboxValue = event;
   }
 }

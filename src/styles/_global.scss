@@ -107,6 +107,13 @@ label {
   padding: 1.714rem; // 24px
 }
 
+.modal-checkbox-label {
+  height: 30px;
+  line-height: 30px;
+  margin-right: 12px;
+  margin-top: 4px;
+}
+
 .gray-box {
   width: 31%;
   height: 76px;
@@ -131,6 +138,10 @@ label {
 
 .gray-line {
   border-bottom: 1px solid $lightestGray;
+}
+
+.gray-line-top {
+  border-top: 1px solid $lightestGray;
 }
 
 .gray-background {
