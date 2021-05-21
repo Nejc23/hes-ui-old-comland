@@ -35,6 +35,7 @@ import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-e
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
+import { PlcReadRegistersComponent } from '../../common/components/plc-read-meter/plc-read-registers.component';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 import { DcuFwUpgradeComponent } from '../../../data-concentrator-units/common/components/dcu-fw-upgrade.component';
 
@@ -766,5 +767,32 @@ export class MeterUnitsPlcActionsService {
       }
     }
     return requestParam;
+  }
+
+  onReadRegisters(params: IActionRequestParams, selectedRowsCount: number) {
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    const modalRef = this.modalService.open(PlcReadRegistersComponent, options);
+    modalRef.componentInstance.actionRequest = params;
+    modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.selectedDeviceIds = params.deviceIds;
+    /* modalRef.componentInstance.deviceIdsParam = params.deviceIds;
+    modalRef.componentInstance.filterParam = params.filter;
+    modalRef.componentInstance.searchParam = params.search;
+    modalRef.componentInstance.excludeIdsParam = params.excludeIds;*/
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        if (data === 'save') {
+          // TODO open date time picker modal
+          this.toast.successToast(this.messageActionInProgress);
+        }
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
   }
 }

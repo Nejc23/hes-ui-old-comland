@@ -194,9 +194,15 @@
                   (click)="onSetDisplaySettings()"><span i18n>Set Display Settings</span></a>
               </div>
               <div appHideIfPermissionUnauthorized [permission]="permissionClearAlarms">
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
+                <a href="javascript:void(0)" class="dropdown-item custom-hover-display gray-line"
                   (click)="onClearAlarms()"><span i18n>Clear Alarms</span></a>
               </div>
+
+              <div> <!-- TODO permissions when BE-->
+                <a href="javascript:void(0)" class="dropdown-item custom-hover-display item-padding"
+                   (click)="onReadMeter()"><span i18n>Read meter </span></a>
+              </div>
+
             </div>
           </div>
 

@@ -62,7 +62,7 @@ small.text-secondary {
 label {
   &:not(.control-label) {
     font-size: $font-size-sm !important;
-    color: $gray-700;
+    color: $darkGray;
     font-weight: $font-weight-bold;
   }
 
@@ -103,47 +103,8 @@ label {
   text-align: center;
 }
 
-// fonts as defined in figma -> create _fonts.css
-.text-normal {
-  font-size: $font-size-base; // 14px
-  line-height: 1.7;
-}
-
-.text-normal-bold {
-  font-size: $font-size-base;
-  font-weight: 500;
-  line-height: 1.7;
-}
-
-.large-text {
-  font-size: $h1-font-size; // 24px
-  line-height: 1.4;
-}
-
-.large-text-bold {
-  font-weight: 500;
-  font-size: $h1-font-size;
-  line-height: 1.4;
-}
-
-.small-title {
-  font-weight: 500;
-  font-size: $h4-font-size; // 16px
-  line-height: 1.5;
-}
-
-.small-text {
-  font-size: $smallText; // 12px
-  line-height: 1.7px;
-}
-
-.tiny-text {
-  font-size: $tinyText; // 11px
-  line-height: 1.4;
-}
-
 .modal-footer {
-  padding: 0 2.286rem 2.286rem; // 2.286rem = 32px;
+  padding: 1.714rem; // 24px
 }
 
 .gray-box {
@@ -204,4 +165,8 @@ button.close {
 
 .display-none {
   display: none;
+}
+
+.item-padding {
+  margin: 0.5rem 0;
 }

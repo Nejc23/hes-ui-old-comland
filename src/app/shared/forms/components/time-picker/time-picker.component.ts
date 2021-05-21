@@ -31,7 +31,7 @@ export class TimePickerComponent implements OnInit {
   }
 
   get format() {
-    return environment.timeFormat;
+    return environment.timeFormatLong;
   }
 
   get formControl(): AbstractControl {

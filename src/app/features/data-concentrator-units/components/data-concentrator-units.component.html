@@ -5,6 +5,7 @@
 </app-auto-refresh>
 
 <div class="row">
+
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter">
     <div class="filter-shadow"  >
       <app-dc-filter (filterChange)="filterChanged()" (toggleFilter)="toggleFilter()"></app-dc-filter>

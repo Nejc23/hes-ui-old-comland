@@ -3,16 +3,9 @@
     {{label}}
     <sup *ngIf="required"> *</sup>
   </label>
-  <kendo-datetimepicker
-    [formControlName]="property"  class="form-control" [name]="property"
-    [min]="min"
-    [max]="max"
-    [format]="'dd.MM.yyyy'"
-    [readonly]="readonly"
-    (blur)="onBlur()"
-    (valueChange)="onValueChange($event)"
-    [placeholder]="'-'"
-  ></kendo-datetimepicker>
+  <kendo-datepicker
+    [(value)]="value"
+  ></kendo-datepicker>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>

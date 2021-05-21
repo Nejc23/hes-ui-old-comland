@@ -15,6 +15,7 @@ import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { AddMuFormComponent } from '../../common/components/add-mu-form/add-mu-form.component';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html'
@@ -64,10 +65,13 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   public editMeterUnit() {
     // this.editMode = true;
-    const modalRef = this.modalService.open(AddMuFormComponent);
 
+    const modalRef = this.modalService.open(AddMuFormComponent);
     const component: AddMuFormComponent = modalRef.componentInstance;
-    modalRef.componentInstance.setFormEdit(this.data);
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    modalRef.componentInstance.setFormEdit(this.data, options);
 
     modalRef.result
       .then((result) => {
