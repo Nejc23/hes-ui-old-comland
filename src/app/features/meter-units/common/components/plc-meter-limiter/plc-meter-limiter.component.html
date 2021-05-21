@@ -23,7 +23,7 @@
               [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
         </div>
-        <div class="form-row">
+        <!--<div class="form-row">
           <div class="col-12">
             <app-input-numeric [label]="'Minimal over threshold duration'" [form]="form" [property]="minOverTresholdDurationProperty" [showSpinners]="false" [decimals]="0" [decimals]="0" [min]="0" [max]="4294967295"
               [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
@@ -34,9 +34,9 @@
             <app-input-numeric [label]="'Minimal under threshold duration'" [form]="form" [property]="minUnderTresholdDurationProperty" [showSpinners]="false" [decimals]="0" [decimals]="0" [min]="0" [max]="4294967295"
               [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
-        </div>
+        </div>-->
         <div class="text-danger" *ngIf="form.errors && form.errors['atLeastOneRequired'] == true"><small>
-          <span i18n>At least one phase with name and treshold should be filled</span></small></div>
+          <span i18n>At least one threshold should be set!</span></small></div>
       </form>
     </ng-container>
   </div>
