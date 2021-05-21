@@ -221,7 +221,7 @@
                   (click)="onClearAlarms()"><span i18n>Clear Alarms</span></a>
               </div>
 
-              <div> <!-- TODO permissions when BE-->
+              <div appHideIfPermissionUnauthorized [permission]="permissionReadMeter">
                 <a href="javascript:void(0)" class="dropdown-item custom-hover-display item-padding"
                    (click)="onReadMeter()"><span i18n>Read meter </span></a>
               </div>

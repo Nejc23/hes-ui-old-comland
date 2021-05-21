@@ -314,6 +314,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionSecurityChangePassword() {
     return PermissionEnumerator.Change_Password;
   }
+  get permissionReadMeter() {
+    return PermissionEnumerator.Read_Meter;
+  }
 
   // set form title by selected meter unit type
   private setTitle(id: number) {

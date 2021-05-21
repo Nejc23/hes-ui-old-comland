@@ -36,5 +36,6 @@ export enum PermissionEnumerator {
   Manage_Auto_Template_Rules = 'Manage_Auto_Template_Rules',
   Manage_Access_Permissions = 'Manage_Access_Permissions',
   View_Alarms = 'View_Alarms',
-  Manage_Alarms = 'Manage_Alarms'
+  Manage_Alarms = 'Manage_Alarms',
+  Read_Meter = 'Read_Meter'
 }
