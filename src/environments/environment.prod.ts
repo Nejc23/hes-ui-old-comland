@@ -8,6 +8,7 @@ export const environment = {
   dateFormat: 'dd.MM.yyyy',
   fistDay: 1, // 1 == first day is monday
   timeFormat: 'HH:mm',
+  timeFormatLong: 'HH:mm:ss',
   kendoChartCategoryDateFormats: {
     minutes: 'HH:mm',
     hours: 'HH:mm',
