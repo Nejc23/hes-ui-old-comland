@@ -3,7 +3,7 @@
   <div *ngIf="label" class="d-flex">
     <kendo-switch formControlName="switch" [name]="property" [id]="controlId" [formControlName]="property"
       (valueChange)="onValueChanged($event)" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="label"></kendo-switch>
-    <div class="text-truncate pl-2" style="cursor:pointer;" i18n (click)="labelClick()" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="label">
+    <div class="text-truncate pl-2 pt-1" style="cursor:pointer;" i18n (click)="labelClick()" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="label">
       {{label}}
     </div>
   </div>

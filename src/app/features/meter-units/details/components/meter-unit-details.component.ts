@@ -50,7 +50,8 @@ export class MeterUnitDetailsComponent implements OnInit {
         deviceIds: [this.deviceId],
         filter: null,
         search: null,
-        excludeIds: null
+        excludeIds: null,
+        InitiateReading: false // TODO get data from BE
       };
     });
 

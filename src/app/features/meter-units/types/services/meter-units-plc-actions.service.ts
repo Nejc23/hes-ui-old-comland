@@ -445,6 +445,7 @@ export class MeterUnitsPlcActionsService {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.btnConfirmText = $localize`Confirm`;
+
     let response: Observable<any> = new Observable();
 
     let operationName = '';
@@ -452,15 +453,20 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
         operationName = $localize`Get disconnector status`;
-
         break;
       case MeterUnitsTypeEnum.connect:
         response = this.service.postMyGridConnectDevice(params);
         operationName = $localize`Disconnector connect `;
+        component.checkboxLabel = $localize`Read registers before ` + operationName?.toLowerCase();
+        component.checkboxField = 'initiateReading';
+        component.checkboxValue = true; // TODO from BE
         break;
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
         operationName = $localize`Disconnector disconnect`;
+        component.checkboxLabel = $localize`'Read registers after ` + operationName?.toLowerCase();
+        component.checkboxField = 'initiateReading';
+        component.checkboxValue = true; // TODO from BE
         break;
       case MeterUnitsTypeEnum.ciiState:
         response = this.service.getCiiState(params);
@@ -507,6 +513,11 @@ export class MeterUnitsPlcActionsService {
 
     modalRef.result.then(
       (data) => {
+        // if checkbox value is true
+        if (data) {
+          params[component.checkboxField] = data; // field must be defined inIActionRequestParams
+          response = this.service.postMyGridConnectDevice(params);
+        }
         // on close (CONFIRM)
         this.toast.successToast(this.messageActionInProgress);
         response.subscribe(
@@ -638,7 +649,8 @@ export class MeterUnitsPlcActionsService {
         propNames: null,
         useWildcards: false
       },
-      sort: []
+      sort: [],
+      initiateReading: false // TODO get data from BE
     };
 
     // select from row

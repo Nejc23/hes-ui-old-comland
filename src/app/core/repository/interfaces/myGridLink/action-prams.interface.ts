@@ -7,6 +7,7 @@ export interface IActionRequestParams {
   deviceIds?: string[];
   excludeIds?: string[];
   concentratorIds?: string[];
+  initiateReading?: boolean;
 }
 
 export interface IActionSearchParam {
