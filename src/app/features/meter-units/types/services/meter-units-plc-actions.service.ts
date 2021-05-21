@@ -7,7 +7,11 @@ import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { IActionRequestParams, IActionRequestDeleteDevice } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import {
+  IActionRequestParams,
+  IActionRequestDeleteDevice,
+  IRegisterTypesEnum
+} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -504,6 +508,18 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.clearAlarms:
         response = this.service.clearAlarms(params);
         operationName = $localize`Clear alarms`;
+        break;
+
+      // TODO register types
+      case MeterUnitsTypeEnum.readThresholdsMonitor:
+        params.registerTypes = [IRegisterTypesEnum.monitorPhase1, IRegisterTypesEnum.monitorPhase2, IRegisterTypesEnum.monitorPhase3];
+        response = this.service.readThresholdValues(params);
+        operationName = $localize`Read thresholds`;
+        break;
+      case MeterUnitsTypeEnum.readThresholdsLimiter:
+        params.registerTypes = [IRegisterTypesEnum.limiterNormal, IRegisterTypesEnum.limiterEmergency];
+        response = this.service.readThresholdValues(params);
+        operationName = $localize`Read thresholds`;
         break;
     }
     // component.btnConfirmText = operationName;

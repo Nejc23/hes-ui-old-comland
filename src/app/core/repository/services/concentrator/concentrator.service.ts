@@ -5,6 +5,8 @@ import { ActiveJob } from '../../../../features/jobs/interfaces/active-job-progr
 import { basePathDcOperations, getActiveJobs, jobStateSummary } from 'src/app/core/repository/consts/data-concentrator-units.const';
 import { Observable } from 'rxjs';
 import { StatusJobProgress } from '../../../../features/jobs/interfaces/status-job-progress.interface';
+import { getPropertyData } from '../../consts/meter-units.const';
+import { IRegisterTypesEnum } from '../../interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +36,24 @@ export class ConcentratorService {
 
   getJobSummaryRequest(deviceIds: string[]): HttpRequest<any> {
     return new HttpRequest('POST', jobStateSummary, deviceIds);
+  }
+
+  getThresholdValuesPost(deviceIds: string[]): Observable<any> {
+    return this.repository.makeRequest(this.getThresholdValuesPostRequest(deviceIds));
+  }
+
+  getThresholdValuesPostRequest(deviceIds: string[]): HttpRequest<any> {
+    const registerTypes = [
+      IRegisterTypesEnum.limiterNormal,
+      IRegisterTypesEnum.limiterEmergency,
+      IRegisterTypesEnum.monitorPhase1,
+      IRegisterTypesEnum.monitorPhase2,
+      IRegisterTypesEnum.monitorPhase3
+    ];
+    let body = {
+      deviceIds: deviceIds,
+      registerTypes: registerTypes
+    };
+    return new HttpRequest('POST', getPropertyData, body);
   }
 }
