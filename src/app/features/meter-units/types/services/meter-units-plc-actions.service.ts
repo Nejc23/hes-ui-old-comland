@@ -468,7 +468,7 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
         operationName = $localize`Disconnector disconnect`;
-        component.checkboxLabel = $localize`'Read registers after ` + operationName?.toLowerCase();
+        component.checkboxLabel = $localize`Read registers after ` + operationName?.toLowerCase();
         component.checkboxField = 'initiateReading';
         component.checkboxValue = true; // TODO from BE
         break;

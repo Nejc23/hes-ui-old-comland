@@ -1,4 +1,4 @@
-<div class="modal-header modal-md gray-line" *ngIf="modalTitle">
+<div class="modal-header modal-md" *ngIf="modalTitle">
   <div class="modal-warning" *ngIf="warningIcon">
     <img [src]="'assets/images/icons/warning-icon.svg'" class="mr-3" />
   </div>
@@ -9,9 +9,9 @@
   </button>
 </div>
 
-<div class="modal-body large-text-bold">{{modalBody}}
+<div class="modal-body small-title">{{modalBody}}
 
- <div *ngIf="checkboxLabel" class="d-flex justify-content-between gray-line gray-line-top py-3">
+ <div *ngIf="checkboxLabel" class="d-flex justify-content-between gray-line gray-line-top py-3 mt-4">
      <div class="modal-checkbox-label text-normal">
        {{ checkboxLabel }}
      </div>

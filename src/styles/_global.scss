@@ -191,3 +191,9 @@ button.close {
 .item-padding {
   margin: 0.5rem 0;
 }
+
+.modal-body {
+  .card-body {
+    padding: 0;
+  }
+}
