@@ -187,7 +187,7 @@
                     <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter" (click)="onSetLimiter()">
                       <a href="javascript:void(0)"><span i18n>Set limiter</span></a>
                     </div>
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter" (click)="onReadLimiterThreshold()">
+                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadLimiterThreshold()">
                       <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
                     </div>
                   </div>
@@ -201,7 +201,7 @@
                     <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor" (click)="onSetMonitor()">
                       <a href="javascript:void(0)"><span i18n>Set monitor</span></a>
                     </div>
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor" (click)="onReadMonitorThreshold()">
+                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadMonitorThreshold()">
                       <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
                     </div>
                   </div>
@@ -221,7 +221,7 @@
                   (click)="onClearAlarms()"><span i18n>Clear Alarms</span></a>
               </div>
 
-              <div appHideIfPermissionUnauthorized [permission]="permissionReadMeter">
+              <div>
                 <a href="javascript:void(0)" class="dropdown-item custom-hover-display item-padding"
                    (click)="onReadMeter()"><span i18n>Read meter </span></a>
               </div>
