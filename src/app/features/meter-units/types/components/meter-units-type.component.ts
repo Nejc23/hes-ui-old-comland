@@ -1347,7 +1347,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     // merge 2 request
     // get Jobs and Get Thresholds
     const jobSummeryPromise = this.concentratorService.getJobSummaryPost(deviceIds).toPromise();
-    const readThresholdsPromise = this.concentratorService.getJobSummaryPost(deviceIds).toPromise();
+    const readThresholdsPromise = this.concentratorService.getThresholdValuesPost(deviceIds).toPromise();
 
     Promise.all([jobSummeryPromise, readThresholdsPromise]).then((responses) => {
       let statusJobsData = responses[0];
