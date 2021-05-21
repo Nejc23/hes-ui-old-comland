@@ -1,4 +1,4 @@
-import { meterUnits } from './../../consts/meter-units.const';
+import { meterUnits, onDemandRegistersType } from './../../consts/meter-units.const';
 import {
   IActionRequestAddTemplate,
   IActionRequestEnableHls,
@@ -359,5 +359,13 @@ export class MyGridLinkService {
 
   postSecurityChangePasswordRequest(param: IActionRequestSecurityChangePassword): HttpRequest<any> {
     return new HttpRequest('POST', `${securityChangePassword}`, param);
+  }
+
+  readThresholdValues(param: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.readThresholdValuesRequest(param));
+  }
+
+  readThresholdValuesRequest(param: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRegistersType}`, param);
   }
 }

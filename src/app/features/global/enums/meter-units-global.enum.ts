@@ -29,5 +29,12 @@ export const gridSysNameColumnsEnum = {
   medium: 'medium',
   protocol: 'protocol',
   instantValues: 'instantValues',
-  isHls: 'isHLS'
+  isHls: 'isHLS',
+  limiter1Normal: 'limiter1Normal',
+  limiter1Emergency: 'limiter1Emergency',
+  limiter2Normal: 'limiter2Normal',
+  limiter2Emergency: 'limiter2Emergency',
+  currentL1: 'currentL1',
+  currentL2: 'currentL2',
+  currentL3: 'currentL3'
 };

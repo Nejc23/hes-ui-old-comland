@@ -344,7 +344,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onSetLimiter(params, 1, actionName);
   }
-
   // popup
   onDisconnectorMode() {
     const actionName = 'Breaker Mode';

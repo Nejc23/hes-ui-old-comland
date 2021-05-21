@@ -31,6 +31,7 @@ import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-unit
 import { GridCellProtocolComponent } from '../components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from '../components/grid-custom-components/grid-cell-medium.component';
 import { GridCellInstantValuesComponent } from '../components/grid-custom-components/grid-cell-instant-values.component';
+import { GridCellThresholdComponent } from '../components/grid-custom-components/grid-cell-threshold.component';
 
 @Injectable({
   providedIn: 'root'
@@ -437,6 +438,84 @@ export class MeterUnitsTypeGridService {
         headerName: '',
         cellClass: 'actions-button-cell',
         resizable: false
+      },
+      {
+        field: gridSysNameColumnsEnum.limiter1Normal,
+        headerName: $localize`Limiter 1 Th. normal`,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Limiter 1 Th. normal`,
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
+      },
+      {
+        field: gridSysNameColumnsEnum.limiter1Emergency,
+        headerName: $localize`Limiter 1 Th. emergency`,
+        pinned: false,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Limiter 1 Th. emergency`,
+        suppressMenu: true,
+        suppressMovable: true,
+        resizable: false
+      },
+      {
+        field: gridSysNameColumnsEnum.limiter2Normal,
+        headerName: $localize`Limiter 2 Th. normal`,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Limiter 2 Th. emergency`,
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
+      },
+      {
+        field: gridSysNameColumnsEnum.limiter2Emergency,
+        headerName: $localize`Limiter 2 Th. emergency`,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Limiter 2 Th. emergency`,
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
+      },
+      {
+        field: gridSysNameColumnsEnum.currentL1,
+        headerName: $localize`Current L1 Monitor`,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Current L1 Monitor`,
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
+      },
+      {
+        field: gridSysNameColumnsEnum.currentL2,
+        headerName: $localize`Current L2 Monitor`,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Current L2 Monitor`,
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
+      },
+      {
+        field: gridSysNameColumnsEnum.currentL3,
+        headerName: $localize`Current L3 Monitor`,
+        sortable: true,
+        filter: false,
+        cellRenderer: 'gridCellThresholdComponent',
+        headerTooltip: $localize`Current L3 Monitor`,
+        resizable: false,
+        suppressMenu: true,
+        suppressMovable: true
       }
     ];
   }
@@ -463,7 +542,8 @@ export class MeterUnitsTypeGridService {
       gridCellNameComponent: GridCellNameComponent,
       gridCellProtocolComponent: GridCellProtocolComponent,
       gridCellMediumComponent: GridCellMediumComponent,
-      gridCellInstantValuesComponent: GridCellInstantValuesComponent
+      gridCellInstantValuesComponent: GridCellInstantValuesComponent,
+      gridCellThresholdComponent: GridCellThresholdComponent
     };
   }
 

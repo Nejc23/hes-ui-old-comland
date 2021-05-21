@@ -178,6 +178,16 @@ button.close {
   display: none;
 }
 
+
+.red-warning-text {
+  font-weight: 500;
+  font-size: $tinyText;
+  color: $danger;
+  padding: 3px 8px;
+  background: rgba(228, 52, 88, 0.1);
+  border-radius: 2px;
+}
+
 .item-padding {
   margin: 0.5rem 0;
 }

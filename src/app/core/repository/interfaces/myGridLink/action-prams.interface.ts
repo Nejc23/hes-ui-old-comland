@@ -7,6 +7,7 @@ export interface IActionRequestParams {
   deviceIds?: string[];
   excludeIds?: string[];
   concentratorIds?: string[];
+  registerTypes?: IRegisterTypesEnum[];
   initiateReading?: boolean;
 }
 
@@ -174,4 +175,12 @@ export interface IActionResponseSecurityChangePassword extends IActionResponsePa
   includedIds?: string[];
   excludedIds?: string[];
   passwordType: string;
+}
+
+export enum IRegisterTypesEnum {
+  limiterNormal = 'LimiterTresholdNormal',
+  limiterEmergency = 'LimiterTresholdEmergency',
+  monitorPhase1 = 'MonitorPhase1',
+  monitorPhase2 = 'MonitorPhase2',
+  monitorPhase3 = 'MonitorPhase3'
 }

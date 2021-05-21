@@ -3,7 +3,7 @@ import { AddMuFormComponent } from './../../common/components/add-mu-form/add-mu
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
@@ -35,6 +35,7 @@ import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-gr
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { ThresholdValues } from '../interfaces/threshold-values.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -437,7 +438,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.vendors ||
           this.requestModel.filterModel.vendors.length === 0 ||
           this.requestModel.filterModel.vendors[0].id === 0) &&
-        (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
+        !this.requestModel.filterModel.readStatus &&
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
           this.requestModel.filterModel.firmware[0].id === 0) &&
@@ -813,7 +814,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onTou(selectedGuid: string) {
-    const actionName = 'TOU Upload';
+    const actionName = $localize`TOU Upload`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -825,7 +826,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onUpgrade(selectedGuid: string) {
-    const actionName = 'Upload image';
+    const actionName = $localize`Upload image`;
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -838,21 +839,50 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetMonitor(selectedGuid: string) {
-    const actionName = 'Set monitor';
+    const actionName = $localize`Set monitor`;
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetLimiter(selectedGuid: string) {
-    const actionName = 'Set Limiter';
+    const actionName = $localize`Set Limiter`;
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
+  onReadLimiterThreshold(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.readThresholdsLimiter,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onReadMonitorThreshold(selectedGuid: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.readThresholdsMonitor,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  // popup
   onRelaysConnect(selectedGuid: string) {
-    const actionName = 'Relays Connect';
+    const actionName = $localize`Relays Connect`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -865,7 +895,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
-    const actionName = 'Relays Disconnect';
+    const actionName = $localize`Relays Disconnect`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -878,7 +908,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysState(selectedGuid: string) {
-    const actionName = 'Relay State';
+    const actionName = $localize`Relay State`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -891,7 +921,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
-    const actionName = 'Relay Mode';
+    const actionName = $localize`Relay Mode`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -904,7 +934,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onDisconnectorMode(selectedGuid: string) {
-    const actionName = 'Breaker Mode';
+    const actionName = $localize`Breaker Mode`;
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -917,7 +947,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetDisplaySettings(selectedGuid: string) {
-    const actionName = 'Set Display Settings';
+    const actionName = $localize`Set Display Settings`;
     const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -1168,7 +1198,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
             that.isGridLoaded = true;
             that.resizeColumns();
-            that.getJobsData(deviceIds);
+            that.getAdditionalData(deviceIds);
           });
         // }
       }
@@ -1313,14 +1343,30 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  getJobsData(deviceIds: any) {
-    this.concentratorService.getJobSummaryPost(deviceIds).subscribe((res) => {
-      this.gridData.data.forEach((data) => {
-        const item = res.find((el) => el.deviceId === data.deviceId);
+  getAdditionalData(deviceIds: any) {
+    // merge 2 request
+    // get Jobs and Get Thresholds
+    const jobSummeryPromise = this.concentratorService.getJobSummaryPost(deviceIds).toPromise();
+    const readThresholdsPromise = this.concentratorService.getJobSummaryPost(deviceIds).toPromise();
+
+    Promise.all([jobSummeryPromise, readThresholdsPromise]).then((responses) => {
+      let statusJobsData = responses[0];
+      let thresholdData = responses[1];
+
+      this.gridData.data.forEach((gridData) => {
+        const item = statusJobsData.find((el) => el.deviceId === gridData.deviceId);
         if (item) {
-          data.jobStatus = item.state;
+          gridData.jobStatus = item.state;
         }
+        thresholdData.forEach((device) => {
+          if (gridData.deviceId === device.deviceId) {
+            device.registers?.forEach((reg) => {
+              gridData[reg.registerId] = reg.registerData;
+            });
+          }
+        });
       });
+
       const that = this;
       this.datasource = {
         getRows(paramsRow) {

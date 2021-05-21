@@ -39,6 +39,7 @@ import { RegistersStatisticsComponent } from '../../registers/components/statist
 import { GridCellDetailLinkComponent } from '../../types/components/grid-custom-components/grid-cell-detail-link.component';
 import { GridCellCiiStateComponent } from '../../types/components/grid-custom-components/grid-cell-cii-state.component';
 import { RegistersColumnChartComponent } from '../../registers/components/chart/registers-column-chart.component';
+import { GridCellThresholdComponent } from '../../types/components/grid-custom-components/grid-cell-threshold.component';
 
 @NgModule({
   entryComponents: [],
@@ -77,7 +78,8 @@ import { RegistersColumnChartComponent } from '../../registers/components/chart/
     GridCellProtocolComponent,
     GridCellMediumComponent,
     AddMuFormComponent,
-    GridCellInstantValuesComponent
+    GridCellInstantValuesComponent,
+    GridCellThresholdComponent
   ],
   imports: [
     SharedModule,
@@ -105,6 +107,7 @@ import { RegistersColumnChartComponent } from '../../registers/components/chart/
       GridCellDateComponent,
       GridCellDetailLinkComponent,
       GridCellProtocolComponent,
+      GridCellThresholdComponent,
       GridCellMediumComponent,
       GridCellInstantValuesComponent
     ])
