@@ -8,6 +8,7 @@ import { DaterangepickerComponent } from 'ngx-daterangepicker-material';
   templateUrl: './datetime-range-picker.component.html'
 })
 export class DateTimeRangePickerComponent {
+  constructor() {}
   @ViewChild(DaterangepickerComponent) datePicker: DaterangepickerComponent;
 
   selected: any;
@@ -20,7 +21,14 @@ export class DateTimeRangePickerComponent {
   @Input() form: FormGroup;
   @Output() formClosed: EventEmitter<boolean> = new EventEmitter();
 
-  constructor() {}
+  ranges: any = {
+    Today: [moment(), moment()],
+    Yesterday: [moment().subtract(1, 'days'), moment()],
+    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    'This Month': [moment().startOf('month'), moment()],
+    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+  };
 
   onSelect(event) {
     this.form.controls.labelText.setValue(event.chosenLabel);
@@ -29,7 +37,12 @@ export class DateTimeRangePickerComponent {
   }
 
   rangeClicked(range) {
-    console.log('[rangeClicked] range is : ', range);
+    if (range.Today) {
+      this.form.controls.endTime.setValue(moment().get('hours') + ':' + moment().get('minutes'));
+    } else {
+      this.form.controls.endTime.setValue('00:00');
+    }
+    console.log('[rangeClicked] range is : ', range.Today);
   }
 
   datesUpdated(range) {
@@ -38,15 +51,6 @@ export class DateTimeRangePickerComponent {
     console.log('[datesUpdated] range is : ', range);
     this.setValues();
   }
-
-  ranges: any = {
-    Today: [moment(), moment()],
-    Yesterday: [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-    'Current Month': [moment().startOf('month'), moment().endOf('month')],
-    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-  };
 
   save() {
     this.formClosed.emit(true);
@@ -58,7 +62,7 @@ export class DateTimeRangePickerComponent {
   }
 
   clear() {
-    this.datesUpdated(this.ranges.Today);
+    this.datesUpdated(this.ranges.Yesterday);
     this.form.controls.startDate.setValue(this.selected.startDate);
     this.form.controls.endDate.setValue(this.selected.endDate);
     this.form.controls.startTime.setValue('00:00');
