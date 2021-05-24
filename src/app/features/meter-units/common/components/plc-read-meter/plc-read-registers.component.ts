@@ -145,6 +145,7 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onConfirm() {
+    // TODO CHECK DATE TIME FORMAT FOR BE (POST REQUEST)
     console.log(this.form);
     this.noRegisterSelected = !this.selectedRegister;
     if (this.noRegisterSelected) {
@@ -182,7 +183,6 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   selectionChanged() {
-    debugger;
     const selectedRows = this.gridApi.getSelectedRows();
 
     this.selectedRegister = null;

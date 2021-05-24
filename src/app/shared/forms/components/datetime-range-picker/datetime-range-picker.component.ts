@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
 import { DaterangepickerComponent } from 'ngx-daterangepicker-material';
+import { environment } from 'src/environments/environment';
+import { dateDisplayFormat } from '../../consts/date-format';
 
 @Component({
   selector: 'app-datetime-range-picker',
@@ -20,6 +22,8 @@ export class DateTimeRangePickerComponent {
 
   @Input() form: FormGroup;
   @Output() formClosed: EventEmitter<boolean> = new EventEmitter();
+  today = false;
+  clearData = false;
 
   ranges: any = {
     Today: [moment(), moment()],
@@ -31,23 +35,27 @@ export class DateTimeRangePickerComponent {
   };
 
   onSelect(event) {
-    this.form.controls.labelText.setValue(event.chosenLabel);
     console.log('[onSelect] : ');
     console.log(event);
   }
 
   rangeClicked(range) {
-    if (range.Today) {
-      this.form.controls.endTime.setValue(moment().get('hours') + ':' + moment().get('minutes'));
+    if (range.label?.toLowerCase() === 'today') {
+      this.today = true;
+      this.form.controls.endTime.setValue(moment().format('hh:mm'));
     } else {
       this.form.controls.endTime.setValue('00:00');
+      this.today = false;
+    }
+    if (this.clearData) {
+      this.datesUpdated(range);
+      this.clearData = false;
     }
     console.log('[rangeClicked] range is : ', range.Today);
   }
 
   datesUpdated(range) {
     this.selected = range;
-    this.datePicker.updateView();
     console.log('[datesUpdated] range is : ', range);
     this.setValues();
   }
@@ -59,14 +67,29 @@ export class DateTimeRangePickerComponent {
   setValues() {
     this.form.controls.startDate.setValue(this.selected.startDate);
     this.form.controls.endDate.setValue(this.selected.endDate);
+
+    let startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    // TODO FORMAT
+    this.form.controls.labelText.setValue(
+      startDateFormatted + ' - ' + endDateFormatted + ' | ' + this.form.controls.startTime.value + ' - ' + this.form.controls.endTime.value
+    );
+
+    this.datePicker.updateView();
   }
 
   clear() {
-    this.datesUpdated(this.ranges.Yesterday);
-    this.form.controls.startDate.setValue(this.selected.startDate);
-    this.form.controls.endDate.setValue(this.selected.endDate);
+    this.clearData = true;
+    this.rangeClicked(this.ranges.Yesterday);
     this.form.controls.startTime.setValue('00:00');
-    this.form.controls.endTime.setValue('00:00');
     this.datePicker.updateView();
   }
+
+  // checkDate() {
+  //   if (this.today) {
+  //     if (this.form.controls.endTime.value(moment().format('hh:mm')) < this.form.controls.startTime.value(moment().format('hh:mm'))) {
+  //       debugger;
+  //     }
+  //   }
+  // }
 }
