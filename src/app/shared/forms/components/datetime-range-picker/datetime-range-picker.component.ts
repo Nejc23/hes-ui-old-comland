@@ -72,7 +72,7 @@ export class DateTimeRangePickerComponent {
     let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
     // TODO FORMAT
     this.form.controls.labelText.setValue(
-      startDateFormatted + ' - ' + endDateFormatted + ' | ' + this.form.controls.startTime.value + ' - ' + this.form.controls.endTime.value
+      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
     );
 
     this.datePicker.updateView();

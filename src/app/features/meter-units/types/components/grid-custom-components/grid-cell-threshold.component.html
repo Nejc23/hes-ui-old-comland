@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center" *ngIf="params.value">
   <div class="mr-1 flex-shrink-1 text-truncate" container="body" placement="bottom" [openDelay]="500"
   [ngbTooltip]="readOnText + ' ' + (params.value.timestamp.toString() | formatDateTime)">{{ params.value.value }}{{ params.value.unit }}
-    <span i18n class="flex-shrink-1 text-truncate red-warning-text small ml-2" *ngIf="oldReadingDate">24d</span>
+    <span i18n class="flex-shrink-1 text-truncate red-warning-text small ml-2" *ngIf="oldReadingDate">24h</span>
   </div>
 </div>
 <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>
