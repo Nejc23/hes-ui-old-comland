@@ -1369,24 +1369,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           }
         });
       });
-
-      const that = this;
-      this.datasource = {
-        getRows(paramsRow) {
-          if (that.gridData.data === undefined || that.gridData.data == null || that.gridData.totalCount.data === 0) {
-            this.totalCount = 0;
-            that.gridApi.showNoRowsOverlay();
-          } else {
-            this.totalCount = that.gridData.totalCount;
-          }
-          paramsRow.successCallback(that.gridData ? that.gridData.data : [], that.gridData.totalCount);
-          that.gridApi.paginationGoToPage(that.meterUnitsTypeGridService.getSessionSettingsPageIndex());
-          that.selectRows(that.gridApi);
-          that.isGridLoaded = true;
-          that.resizeColumns();
-        }
-      };
-      this.gridApi.setServerSideDatasource(this.datasource);
+      this.gridApi.refreshCells();
     });
   }
 }
