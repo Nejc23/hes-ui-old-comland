@@ -1,62 +1,63 @@
-import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import * as moment from 'moment';
-import { DaterangepickerComponent } from 'ngx-daterangepicker-material';
-import { environment } from 'src/environments/environment';
+import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, Inject, LOCALE_ID } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
 import { dateDisplayFormat } from '../../consts/date-format';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-datetime-range-picker',
   templateUrl: './datetime-range-picker.component.html'
 })
-export class DateTimeRangePickerComponent {
-  constructor() {}
+export class DateTimeRangePickerComponent implements AfterViewInit {
   @ViewChild(DaterangepickerComponent) datePicker: DaterangepickerComponent;
 
   selected: any;
-  selectedDate = moment();
-  controlId: string;
-
   @Input() withRanges = true;
   @Input() withTime = true;
-
   @Input() form: FormGroup;
   @Output() formClosed: EventEmitter<boolean> = new EventEmitter();
-  today = false;
-  clearData = false;
 
-  ranges: any = {
-    Today: [moment(), moment()],
-    Yesterday: [moment().subtract(1, 'days'), moment()],
-    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-    'This Month': [moment().startOf('month'), moment()],
-    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+  today = false;
+
+  locale: LocaleConfig = {
+    applyLabel: $localize`Apply`,
+    customRangeLabel: ' - ',
+    daysOfWeek: moment.weekdaysMin(),
+    monthNames: moment.monthsShort(),
+    firstDay: moment.localeData().firstDayOfWeek()
   };
 
-  onSelect(event) {
-    console.log('[onSelect] : ');
-    console.log(event);
+  defaultRanges: any = {
+    [$localize`Today`]: [moment(), moment()],
+    [$localize`Yesterday`]: [moment().subtract(1, 'days'), moment()],
+    [$localize`Last 7 Days`]: [moment().subtract(6, 'days'), moment()],
+    [$localize`Last 30 Days`]: [moment().subtract(29, 'days'), moment()],
+    [$localize`This Month`]: [moment().startOf('month'), moment()],
+    [$localize`Last Month`]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+  };
+
+  constructor(@Inject(LOCALE_ID) public locale_id: string) {
+    moment.locale(locale_id);
   }
 
-  rangeClicked(range) {
-    if (range.label?.toLowerCase() === 'today') {
-      this.today = true;
-      this.form.controls.endTime.setValue(moment().format('hh:mm'));
+  ngAfterViewInit() {
+    this.setDefaultDate();
+  }
+
+  updateRange(range) {
+    if (
+      range.label?.toLowerCase() === $localize`Today`.toLowerCase() ||
+      range.label?.toLowerCase() === $localize`This Month`.toLowerCase()
+    ) {
+      this.form.controls.endTime.setValue(moment().startOf('hour').format('HH:mm'));
     } else {
       this.form.controls.endTime.setValue('00:00');
-      this.today = false;
     }
-    if (this.clearData) {
-      this.datesUpdated(range);
-      this.clearData = false;
-    }
-    console.log('[rangeClicked] range is : ', range.Today);
   }
 
   datesUpdated(range) {
     this.selected = range;
-    console.log('[datesUpdated] range is : ', range);
     this.setValues();
   }
 
@@ -70,26 +71,21 @@ export class DateTimeRangePickerComponent {
 
     let startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
     let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
-    // TODO FORMAT
+
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
     );
-
     this.datePicker.updateView();
   }
 
   clear() {
-    this.clearData = true;
-    this.rangeClicked(this.ranges.Yesterday);
+    this.setDefaultDate();
     this.form.controls.startTime.setValue('00:00');
-    this.datePicker.updateView();
   }
 
-  // checkDate() {
-  //   if (this.today) {
-  //     if (this.form.controls.endTime.value(moment().format('hh:mm')) < this.form.controls.startTime.value(moment().format('hh:mm'))) {
-  //       debugger;
-  //     }
-  //   }
-  // }
+  setDefaultDate() {
+    this.datePicker.setStartDate(moment().subtract(1, 'days'));
+    this.datePicker.setEndDate(moment());
+    this.datePicker.updateView();
+  }
 }

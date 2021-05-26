@@ -3,11 +3,11 @@
     #datePicker
     [autoApply]="true"
     [linkedCalendars]="true"
-    [ranges]="ranges"
+    [ranges]="defaultRanges"
+    [locale]="locale"
     [alwaysShowCalendars]="true"
-    (rangeClicked)="rangeClicked($event)"
+    (rangeClicked)="updateRange($event)"
     (datesUpdated)="datesUpdated($event)"
-    (choosedDate)="onSelect($event)"
     class="date-range-picker">
   </ngx-daterangepicker-material>
 
