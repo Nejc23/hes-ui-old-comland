@@ -12,10 +12,12 @@ import * as moment from 'moment';
 export class DateTimeRangePickerComponent implements AfterViewInit {
   @ViewChild(DaterangepickerComponent) datePicker: DaterangepickerComponent;
 
-  selected: any;
+  selected: any = [];
   @Input() withRanges = true;
   @Input() withTime = true;
   @Input() form: FormGroup;
+  @Input() initValues = false;
+
   @Output() formClosed: EventEmitter<boolean> = new EventEmitter();
 
   today = false;
@@ -42,10 +44,17 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setDefaultDate();
+    if (this.initValues) {
+      this.datePicker.setStartDate(this.form.controls.startDate.value);
+      this.datePicker.setEndDate(this.form.controls.endDate.value);
+      this.form.controls.startTime.setValue(this.form.controls.startTime.value);
+      this.form.controls.endTime.setValue(this.form.controls.endTime.value);
+      this.datePicker.updateView();
+    }
   }
 
   updateRange(range) {
+    if (range.label?.toLowerCase() === $localize`Today`.toLowerCase()) this.today = true;
     if (
       range.label?.toLowerCase() === $localize`Today`.toLowerCase() ||
       range.label?.toLowerCase() === $localize`This Month`.toLowerCase()
@@ -61,7 +70,8 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     this.setValues();
   }
 
-  save() {
+  close() {
+    this.setValues();
     this.formClosed.emit(true);
   }
 
@@ -80,12 +90,23 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
 
   clear() {
     this.setDefaultDate();
-    this.form.controls.startTime.setValue('00:00');
   }
 
   setDefaultDate() {
     this.datePicker.setStartDate(moment().subtract(1, 'days'));
     this.datePicker.setEndDate(moment());
+    this.form.controls.startTime.setValue('00:00');
+    this.form.controls.endTime.setValue('00:00');
+    this.selected = {
+      startDate: moment().subtract(1, 'days'),
+      endDate: (this.selected.endDate = moment())
+    };
     this.datePicker.updateView();
+  }
+
+  checkTimes() {
+    if (this.today && moment(this.form.controls.startTime.value, 'HH.mm') > moment(this.form.controls.endTime.value, 'HH.mm')) {
+      this.form.controls.startTime.setValue(moment(this.form.controls.endTime.value, 'HH.mm').subtract(1, 'hour').format('HH:mm'));
+    }
   }
 }

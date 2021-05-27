@@ -15,6 +15,8 @@ import {
   SchedulableRegisters,
   SchedulableRegistersTypes
 } from '../../../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
+import * as moment from 'moment';
+import { dateDisplayFormat } from '../../../../../shared/forms/consts/date-format';
 
 @Component({
   selector: 'app-plc-read-registers',
@@ -64,13 +66,20 @@ export class PlcReadRegistersComponent implements OnInit {
     private registersService: RegistersSelectService
   ) {
     this.form = this.createForm();
+
+    let startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
+    let endDateFormatted = moment().format(dateDisplayFormat);
+
+    this.form.controls.labelText.setValue(
+      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
+    );
   }
 
   createForm(): FormGroup {
     return this.formBuilder.group({
       // [this.registersProperty]: [null, [Validators.required]],
-      [this.startDateProperty]: [null, Validators.required],
-      [this.endDateProperty]: [null, Validators.required],
+      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endDateProperty]: [moment(), Validators.required],
       [this.startTimeProperty]: ['00:00'],
       [this.endTimeProperty]: ['00:00'],
       [this.searchProperty]: [''],

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
@@ -19,6 +19,8 @@ export class InputTextComponent implements OnInit {
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)
   @Input() placeholder = '';
   @Input() iconName = '';
+
+  @Output() onBlurValue: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -47,5 +49,9 @@ export class InputTextComponent implements OnInit {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  onBlur() {
+    this.onBlurValue.emit(true);
   }
 }

@@ -10,6 +10,7 @@
       <span class="input-group-text"><i class="fas {{iconName}}"></i></span>
     </div>
     <input [name]="property" [placeholder]="placeholder" [type]="inputType" class="form-control"
+           (blur)="onBlur()"
            [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
     <span *ngIf="labelRight" class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
   </div>

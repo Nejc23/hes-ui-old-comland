@@ -84,5 +84,5 @@
 </app-modal-template>
 
 <ng-template #popDateTimePicker>
-  <app-datetime-range-picker [form]="form" (formClosed)="closePopover()"></app-datetime-range-picker>
+  <app-datetime-range-picker [form]="form" [initValues]="true" (formClosed)="closePopover()"></app-datetime-range-picker>
 </ng-template>

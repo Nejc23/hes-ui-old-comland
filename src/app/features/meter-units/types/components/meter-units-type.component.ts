@@ -35,7 +35,6 @@ import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-gr
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
-import { ThresholdValues } from '../interfaces/threshold-values.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
