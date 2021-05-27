@@ -43,8 +43,14 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   onSetMonitor() {
     this.params.context.componentParent.onSetMonitor(this.params.data.deviceId);
   }
+  onReadMonitorThreshold() {
+    this.params.context.componentParent.onReadMonitorThreshold(this.params.data.deviceId);
+  }
   onSetLimiter() {
     this.params.context.componentParent.onSetLimiter(this.params.data.deviceId);
+  }
+  onReadLimiterThreshold() {
+    this.params.context.componentParent.onReadLimiterThreshold(this.params.data.deviceId);
   }
   onDisconnectorStatus() {
     this.params.context.componentParent.onDisconnectorStatus(this.params.data.deviceId);
@@ -171,6 +177,9 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   }
   get permissionAssignTemplates() {
     return PermissionEnumerator.Assign_Templates;
+  }
+  get permissionReadMeter() {
+    return PermissionEnumerator.Read_Meter;
   }
 
   // set tooltip text
