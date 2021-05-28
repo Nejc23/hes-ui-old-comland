@@ -169,12 +169,12 @@ export class PlcReadRegistersComponent implements OnInit {
     }
 
     let startDate =
-      moment.utc(this.form.controls.startDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
+      moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.startTime.value +
       ':00';
     let endDate =
-      moment.utc(this.form.controls.endDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
+      moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.endTime.value +
       ':00';

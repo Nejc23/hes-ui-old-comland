@@ -21,6 +21,10 @@ export class MeterUnitsTypeStaticTextService {
     return $localize`N/A`;
   }
 
+  get notSetText() {
+    return $localize`Not set`;
+  }
+
   get noRecordsFound() {
     return $localize`No records found. You may need to adjust your search or filter parameters.`;
   }

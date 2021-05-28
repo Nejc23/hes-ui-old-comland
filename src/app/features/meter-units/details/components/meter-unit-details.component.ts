@@ -201,6 +201,9 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionAssignTemplates() {
     return PermissionEnumerator.Assign_Templates;
   }
+  get permissionReadMeter() {
+    return PermissionEnumerator.Read_Meter;
+  }
 
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
@@ -338,12 +341,25 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.onSetMonitor(params, 1, actionName);
   }
 
+  onReadMonitorThreshold() {
+    const actionName = 'Read monitor thresholds';
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.onReadMonitorThreshold(params, 1, actionName);
+  }
+
   // popup
   onSetLimiter() {
     const actionName = 'Set Limiter';
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onSetLimiter(params, 1, actionName);
   }
+
+  onReadLimiterThreshold() {
+    const actionName = 'Read limiter thresholds';
+    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    this.plcActionsService.onReadLimiterThreshold(params, 1, actionName);
+  }
+
   // popup
   onDisconnectorMode() {
     const actionName = 'Breaker Mode';

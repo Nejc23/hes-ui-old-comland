@@ -189,6 +189,10 @@ export class MeterUnitsPlcActionsService {
     );
   }
 
+  onReadMonitorThreshold(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+    this.bulkOperation(MeterUnitsTypeEnum.readThresholdsMonitor, null, selectedRowsCount);
+  }
+
   onSetLimiter(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
     const modalRef = this.modalService.open(PlcMeterLimiterComponent);
     modalRef.componentInstance.deviceIdsParam = params.deviceIds;
@@ -208,6 +212,10 @@ export class MeterUnitsPlcActionsService {
         // on dismiss (CLOSE)
       }
     );
+  }
+
+  onReadLimiterThreshold(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
+    this.bulkOperation(MeterUnitsTypeEnum.readThresholdsLimiter, null, selectedRowsCount);
   }
 
   onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName) {
@@ -514,12 +522,12 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.readThresholdsMonitor:
         params.registerTypes = [IRegisterTypesEnum.monitorPhase1, IRegisterTypesEnum.monitorPhase2, IRegisterTypesEnum.monitorPhase3];
         response = this.service.readThresholdValues(params);
-        operationName = $localize`Read thresholds`;
+        operationName = $localize`Read monitor threshold values`;
         break;
       case MeterUnitsTypeEnum.readThresholdsLimiter:
         params.registerTypes = [IRegisterTypesEnum.limiterNormal, IRegisterTypesEnum.limiterEmergency];
         response = this.service.readThresholdValues(params);
-        operationName = $localize`Read thresholds`;
+        operationName = $localize`Read limiter threshold values`;
         break;
     }
     // component.btnConfirmText = operationName;
