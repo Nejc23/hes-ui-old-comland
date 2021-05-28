@@ -18,7 +18,7 @@ import {
 } from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
-import { DcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
+import { DcuForm, EditDcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
@@ -112,15 +112,16 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', addConcentrator, payload as any);
   }
 
-  updateDcu(id: string, payload: DcuForm): Observable<string> {
+  updateDcu(id: string, payload: EditDcuForm): Observable<string> {
     const dcuRequest: DcuUpdateRequest = {
       ip: payload.ip,
       serialNumber: payload.serialNumber,
       // type: payload.type ? payload.type.id : -1,
       // vendor: payload.manufacturer ? payload.manufacturer.id : -1,
       name: payload.name,
+      externalId: payload.externalId,
       userName: payload.userName,
-      password: payload.password,
+      // password: payload.password,
       address: payload.address,
       // mac: payload.mac,
       port: payload.port

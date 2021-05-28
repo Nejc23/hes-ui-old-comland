@@ -1,0 +1,83 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div modal-header i18n>Edit Data Concentrator Unit</div>
+
+  <div modal-body>
+    <ng-container>
+
+
+      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
+        <strong><span i18n>Error saving DCU!</span></strong> <br /> {{saveError}}
+      </div>
+
+      <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
+
+      <div class="form-row">
+        <div class="col-12">
+          <app-input-text [form]="form" [property]="idNumberProperty" i18n-label label="Id (serial number)">
+          </app-input-text>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-6">
+          <app-select-input i18n-label label="Vendor" [form]="form" [property]="vendorProperty"
+                            [disabled]="true">
+          </app-select-input>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-6">
+          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [disabled]="true">
+          </app-select-input>
+        </div>
+      </div>
+
+      <div *ngIf="credentialsVisible">
+        <div class="form-row">
+          <div class="col-6">
+            <app-input-text [form]="form" [property]="userNameProperty" i18n-label label="Username"></app-input-text>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-6">
+          <app-input-text [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+        </div>
+        <div class="form-row">
+          <div class="col-6">
+            <app-input-text [form]="form" [property]="portProperty" i18n-label label="Port"></app-input-text>
+          </div>
+        </div>
+      </div>
+
+      <div i18n type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+           class="gray-color-dark text-normal pt-2"
+           aria-controls="collapseExample">
+        Advanced
+        <i class="far fa-angle-down mr-2"></i>
+      </div>
+
+      <div class="collapse mt-3" id="collapseExample">
+        <div class="form-row">
+          <div class="col-6">
+            <app-input-text [form]="form" [property]="externalIdProperty" i18n-label label="External Id">
+            </app-input-text>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-link" (click)="cancel()" i18n>Cancel</button>
+      <div dropdown class="btn-group dropdown">
+        <button type="submit" class="btn btn-primary" (click)="saveDcu()" i18n>Save</button>
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+

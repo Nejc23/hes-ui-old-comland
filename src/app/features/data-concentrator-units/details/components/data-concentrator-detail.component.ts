@@ -1,6 +1,6 @@
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
@@ -12,6 +12,9 @@ import { DataConcentratorUnitsService } from 'src/app/core/repository/services/d
 import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { ModalService } from '../../../../core/modals/services/modal.service';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -19,6 +22,8 @@ import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permi
 })
 export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   form: FormGroup;
+  editForm: FormGroup;
+
   saveError: string;
   edit = false;
   public credentialsVisible = false;
@@ -36,7 +41,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private codelistService: CodelistRepositoryService,
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -57,6 +63,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
         this.data = response;
         this.form = this.createForm();
+        this.editForm = this.createEditForm();
         this.credentialsVisible = this.data && this.data.typeId === 2;
         this.setCredentialsControls(this.credentialsVisible);
       });
@@ -64,11 +71,13 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       this.form = this.createForm();
     }
   }
+
   createForm(): FormGroup {
     return this.formBuilder.group(
       {
         [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
         [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
+        [this.externalIdProperty]: [this.data ? this.data.externalId : null],
         [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
         [this.typeProperty]: [
           this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
@@ -84,6 +93,21 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       },
       { updateOn: 'blur' }
     );
+  }
+
+  createEditForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
+      [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
+      [this.externalIdProperty]: [this.data ? this.data.externalId : null],
+      [this.typeProperty]: [this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null],
+      [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
+      [this.ipProperty]: [this.data ? this.data.ip : null],
+      [this.portProperty]: [this.data ? this.data.port : null],
+      [this.addressProperty]: [this.data ? this.data.address : null],
+      [this.macProperty]: [this.data ? this.data.mac : null],
+      [this.userNameProperty]: [this.data ? this.data.username : null]
+    });
   }
 
   get nameProperty() {
@@ -138,11 +162,16 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>((o) => o.longitude);
   }
 
+  get externalIdProperty() {
+    return nameOf<DcuForm>((o) => o.externalId);
+  }
+
   fillData(): DcuForm {
     const formData: DcuForm = {
       id: this.concentratorId,
       name: this.form.get(this.nameProperty).value,
       serialNumber: this.form.get(this.serialNumberProperty).value,
+      externalId: this.form.get(this.externalIdProperty).value,
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       tags: this.form.get(this.tagsProperty).value,
@@ -163,7 +192,20 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   editDcu() {
-    this.edit = true;
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+    const modalRef = this.modalService.open(EditDcuFormComponent, options);
+    const component: EditDcuFormComponent = modalRef.componentInstance;
+    component.concentratorId = this.concentratorId;
+    component.form = this.editForm;
+    component.credentialsVisible = this.credentialsVisible;
+
+    modalRef.result
+      .then((data) => {
+        this.getData();
+      })
+      .catch(() => {});
   }
 
   saveDcu() {
@@ -175,7 +217,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         (result) => {
           if (result) {
-            this.edit = false;
             this.getData();
           }
         },
@@ -187,19 +228,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     } catch (error) {
       console.log('Edit-DCU Form Error:', error);
     }
-  }
-
-  cancel() {
-    this.edit = false;
-    this.getData();
-  }
-
-  public onTypeChanged(value) {
-    if (value !== null && value.id) {
-      this.credentialsVisible = value.id === 2;
-    }
-
-    this.setCredentialsControls(this.credentialsVisible);
   }
 
   setCredentialsControls(credentialsVisible: boolean) {

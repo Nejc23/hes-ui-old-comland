@@ -8,6 +8,7 @@ export interface DataConcentratorUnit {
   manufacturerValue: string;
   manufacturerId?: number;
   serialNumber: string;
+  externalId?: string;
   ip: string;
   tags: string;
   address: string;

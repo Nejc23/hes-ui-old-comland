@@ -28,6 +28,12 @@
   </div>
   <div class="form-row mb-4">
     <div class="col-4">
+      <div><label i18n>External Id</label></div>
+      <div><span>{{form.get(externalIdProperty).value}}</span></div>
+    </div>
+  </div>
+  <div class="form-row mb-4">
+    <div class="col-4">
       <div><label i18n>MAC</label></div>
       <div><span>{{form.get(macProperty).value}}</span></div>
     </div>
@@ -78,82 +84,5 @@
         <div><span>{{form.get(userNameProperty).value}}</span></div>
       </div>
   </div>
-</div>
-
-<div class="form-group" *ngIf="edit">
-  <div class="form-row">
-    <div class="col-4">
-        <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name">
-        </app-input-text>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-        <app-input-text [form]="form" [property]="serialNumberProperty" i18n-label label="Serial number">
-        </app-input-text>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-      <fieldset [disabled]="true">
-        <app-input-text [form]="form" [property]="macProperty" i18n-label label="MAC">
-        </app-input-text>
-      </fieldset>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-      <app-select-input i18n-label label="State" [form]="form" [property]="statusProperty" [selectOptions]="dcuStatuses$ | async"
-        [disabled]="true">
-      </app-select-input>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-      <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async"
-        [disabled]="true" (selectedValueChanged)="onTypeChanged($event)">
-      </app-select-input>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-      <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors$ | async"
-        [disabled]="true">
-      </app-select-input>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-3">
-        <app-input-text [form]="form" [property]="ipProperty" i18n-label label="IP">
-        </app-input-text>
-    </div>
-    <div class="col-1">
-        <app-input-text [form]="form" [property]="portProperty" i18n-label label="Port">
-        </app-input-text>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-        <app-input-text [form]="form" [property]="addressProperty" i18n-label label="Address">
-        </app-input-text>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="col-4">
-      <fieldset [disabled]="true">
-        <app-input-text [form]="form" [property]="tagsProperty" i18n-label label="Tags">
-        </app-input-text>
-      </fieldset>
-    </div>
-  </div>
-
-  <div *ngIf="credentialsVisible">
-    <div class="form-row">
-      <div class="col-4">
-        <app-input-text [form]="form" [property]="userNameProperty" i18n-label label="Username"></app-input-text>
-      </div>
-    </div>
-  </div>
-
 </div>
 </div>
