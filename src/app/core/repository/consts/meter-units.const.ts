@@ -43,3 +43,7 @@ export const getDevice = `${basePathMuConcentratorInventory}/meter`;
 
 export const getPropertyData = `${basePath}/get-property-data`;
 export const onDemandRegistersType = '/on-demand/registers/type';
+
+// on-demand/read-meter
+export const onDemandReadMeter = `/on-demand/read-meter`;
+export const templateGroups = `${basePath}/template-groups`;

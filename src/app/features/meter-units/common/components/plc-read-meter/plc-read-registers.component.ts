@@ -2,7 +2,7 @@ import { IActionRequestAddTemplate } from './../../../../../core/repository/inte
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
@@ -16,7 +16,9 @@ import {
   SchedulableRegistersTypes
 } from '../../../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
 import * as moment from 'moment';
-import { dateDisplayFormat } from '../../../../../shared/forms/consts/date-format';
+import { dateDisplayFormat, dateOnlyServerFormat } from '../../../../../shared/forms/consts/date-format';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-plc-read-registers',
@@ -29,7 +31,7 @@ export class PlcReadRegistersComponent implements OnInit {
   public selectedDeviceIds = [];
   noRegisters = false;
   registersRequiredText = $localize`Required field`;
-
+  actionName = $localize`Read Registers`;
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
@@ -63,7 +65,8 @@ export class PlcReadRegistersComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private registersService: RegistersSelectService
+    private registersService: RegistersSelectService,
+    private modalService: ModalService
   ) {
     this.form = this.createForm();
 
@@ -137,7 +140,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
   loadData() {
     let params = { id: this.selectedDeviceIds };
-    this.rowData$ = this.registersService.getDeviceSchedulableRegisters(params);
+    this.rowData$ = this.registersService.getDeviceTemplateGroups(params);
 
     this.rowData$.subscribe((x) => {
       if (!x.allHaveTemplate) {
@@ -154,26 +157,48 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onConfirm() {
+    debugger;
     // TODO CHECK DATE TIME FORMAT FOR BE (POST REQUEST)
     console.log(this.form);
+
+    let registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
+
     this.noRegisterSelected = !this.selectedRegister;
     if (this.noRegisterSelected) {
       return;
     }
 
-    const values = this.fillData();
-    const request = this.myGridService.postMyGridAddDeviceTemplate(values);
-    const successMessage = $localize`Adding template to device(s) succeeded!`;
+    let startDate =
+      moment.utc(this.form.controls.startDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
+      ' ' +
+      this.form.controls.startTime.value +
+      ':00';
+    let endDate =
+      moment.utc(this.form.controls.endDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
+      ' ' +
+      this.form.controls.endTime.value +
+      ':00';
+
+    const values = this.fillData(registerTypes, startDate, endDate);
+    const request = this.myGridService.readMeterValues(values);
+    const successMessage = $localize`Read Registers succeeded!`;
+
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();
+        const options: NgbModalOptions = {
+          size: 'md'
+        };
+        const modalRef = this.modalService.open(StatusJobComponent, options);
+        modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.jobName = this.actionName;
       },
       () => {} // error
     );
   }
 
   // TODO when backend
-  fillData(): IActionRequestAddTemplate {
+  fillData(registerTypes: SchedulableRegistersTypes[], dateFrom: string, dateTo: string): IActionRequestAddTemplate {
     const formData: IActionRequestAddTemplate = {
       pageSize: this.actionRequest.pageSize,
       pageNumber: this.actionRequest.pageNumber,
@@ -182,7 +207,10 @@ export class PlcReadRegistersComponent implements OnInit {
       filter: this.actionRequest.filter,
       deviceIds: this.actionRequest.deviceIds,
       excludeIds: this.actionRequest.excludeIds,
-      templateId: this.selectedRegister.templateId
+      templateId: this.selectedRegister.templateId,
+      from: dateFrom,
+      to: dateTo,
+      groups: registerTypes
     };
     return formData;
   }

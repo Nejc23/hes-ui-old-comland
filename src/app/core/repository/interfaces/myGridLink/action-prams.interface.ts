@@ -9,6 +9,10 @@ export interface IActionRequestParams {
   concentratorIds?: string[];
   registerTypes?: IRegisterTypesEnum[];
   initiateReading?: boolean;
+  from?: string;
+  to?: string;
+  groups?: any[]; // TODO enum
+  //   RegisterGroupType TODO
 }
 
 export interface IActionSearchParam {

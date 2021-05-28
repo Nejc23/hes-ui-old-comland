@@ -4,8 +4,10 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { RegistersSelectList } from '../../interfaces/registers-select/registers-select-list.interface';
 import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
-import { registers } from '../../consts/meter-units.const';
+import { basePath, registers, templateGroups, onDemandReadMeter } from '../../consts/meter-units.const';
 import { SchedulableRegisters } from '../../interfaces/registers-select/schedulable-registers-type.interface';
+import { IActionRequestAddTemplate, IActionResponseAddTemplate } from '../../interfaces/myGridLink/action-prams.interface';
+import { enumMyGridLink, linkDeviceTemplate } from '../../consts/my-grid-link.const';
 
 @Injectable({
   providedIn: 'root'
@@ -25,11 +27,21 @@ export class RegistersSelectService {
     return new HttpRequest('POST', registers, param);
   }
 
-  getDeviceSchedulableRegisters(param: GridBulkActionRequestParams): Observable<SchedulableRegisters> {
-    return this.repository.makeRequest(this.getDeviceSchedulableRegistersRequest(param));
+  // TODO MOVE WHERE?
+  getDeviceTemplateGroups(param: GridBulkActionRequestParams): Observable<SchedulableRegisters> {
+    return this.repository.makeRequest(this.getDeviceTemplateGroupsRequest(param));
   }
 
-  getDeviceSchedulableRegistersRequest(param: GridBulkActionRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', `${registers}/schedulable`, param);
+  getDeviceTemplateGroupsRequest(param: GridBulkActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${templateGroups}`, param);
+  }
+
+  // TODO POST READ METER on-demand/read-meter
+  postOnDemandReadMeter(params: IActionRequestAddTemplate): Observable<IActionResponseAddTemplate> {
+    return this.repository.makeRequest(this.postOnDemandReadMeterRequest(params));
+  }
+
+  postOnDemandReadMeterRequest(params: IActionRequestAddTemplate): HttpRequest<any> {
+    return new HttpRequest('POST', `${onDemandReadMeter}`, params);
   }
 }

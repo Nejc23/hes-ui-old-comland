@@ -1,4 +1,4 @@
-import { meterUnits, onDemandRegistersType } from './../../consts/meter-units.const';
+import { meterUnits, onDemandReadMeter, onDemandRegistersType } from './../../consts/meter-units.const';
 import {
   IActionRequestAddTemplate,
   IActionRequestEnableHls,
@@ -367,5 +367,13 @@ export class MyGridLinkService {
 
   readThresholdValuesRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandRegistersType}`, param);
+  }
+
+  readMeterValues(param: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.readMeterValuesRequest(param));
+  }
+
+  readMeterValuesRequest(param: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandReadMeter}`, param);
   }
 }
