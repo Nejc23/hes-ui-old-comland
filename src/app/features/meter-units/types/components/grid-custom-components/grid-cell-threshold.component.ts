@@ -9,11 +9,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './grid-cell-threshold.component.html'
 })
 export class GridCellThresholdComponent implements ICellRendererAngularComp {
-  notAvailableText = this.statictextService.notAvailableTekst; // N/A
+  notAvailableText = this.statictextService.notAvailableTekst;
+  notSetText = this.statictextService.notSetText;
+  isNotSet = false;
   public params: any;
   oldReadingDate = false;
   readOnText = $localize`Read on`;
   preconfiguredThreshold = environment.thresholdValue;
+  thresholdValue = this.notAvailableText;
 
   constructor(private statictextService: MeterUnitsTypeStaticTextService) {}
   // called on init
@@ -25,6 +28,13 @@ export class GridCellThresholdComponent implements ICellRendererAngularComp {
   // called when the cell is refreshed
   refresh(params: any): boolean {
     this.params = params;
+    if (this.params.value && !this.params.value.contains('not')) {
+      this.thresholdValue = this.params.value.value + ' ' + this.params.value.unit;
+      this.isNotSet = false;
+    } else {
+      this.thresholdValue = this.notSetText;
+      this.isNotSet = true;
+    }
     return true;
   }
 
