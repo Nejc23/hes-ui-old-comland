@@ -80,7 +80,6 @@ export class PlcReadRegistersComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      // [this.registersProperty]: [null, [Validators.required]],
       [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
       [this.endDateProperty]: [moment(), Validators.required],
       [this.startTimeProperty]: ['00:00'],
@@ -157,10 +156,6 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onConfirm() {
-    debugger;
-    // TODO CHECK DATE TIME FORMAT FOR BE (POST REQUEST)
-    console.log(this.form);
-
     let registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
 
     this.noRegisterSelected = !this.selectedRegister;
@@ -197,7 +192,6 @@ export class PlcReadRegistersComponent implements OnInit {
     );
   }
 
-  // TODO when backend
   fillData(registerTypes: SchedulableRegistersTypes[], dateFrom: string, dateTo: string): IActionRequestAddTemplate {
     const formData: IActionRequestAddTemplate = {
       pageSize: this.actionRequest.pageSize,
