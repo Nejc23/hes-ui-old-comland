@@ -157,13 +157,31 @@
                                 permissionClearFF,
                                 permissionSetDisplay,
                                 permissionClearAlarms]"></div>
-          <div appHideIfPermissionUnauthorized [permission]="permissionSetLimiter">
-            <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
-              (click)="onSetLimiter()"><span i18n>Limiter</span></a>
+          <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetLimiter, permissionReadMeter]">
+            <div class="dropdown-submenu">
+              <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Limiter</span></a>
+              <div class="dropdown-menu">
+                <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter" (click)="onSetLimiter()">
+                  <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
+                </div>
+                <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadLimiterThreshold()">
+                  <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
+                </div>
+              </div>
+            </div>
           </div>
-          <div appHideIfPermissionUnauthorized [permission]="permissionSetMonitor">
-            <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
-              (click)="onSetMonitor()"><span i18n>Monitor</span></a>
+          <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetMonitor, permissionReadMeter]">
+            <div class="dropdown-submenu">
+              <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Monitor</span></a>
+              <div class="dropdown-menu">
+                <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor" (click)="onSetMonitor()">
+                  <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
+                </div>
+                <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadMonitorThreshold()">
+                  <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
+                </div>
+              </div>
+            </div>
           </div>
           <div appHideIfPermissionUnauthorized [permission]="permissionClearFF">
             <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
