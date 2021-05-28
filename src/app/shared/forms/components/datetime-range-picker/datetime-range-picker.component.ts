@@ -71,7 +71,6 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   close() {
-    this.setValues();
     this.formClosed.emit(true);
   }
 
@@ -90,6 +89,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
 
   clear() {
     this.setDefaultDate();
+    this.setValues();
   }
 
   setDefaultDate() {
