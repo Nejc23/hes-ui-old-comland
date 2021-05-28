@@ -22,19 +22,21 @@ export class GridCellThresholdComponent implements ICellRendererAngularComp {
   // called on init
   agInit(params: any): void {
     this.params = params;
+    if (this.params?.value?.value !== undefined) {
+      if (!this.params.value.value.toLocaleLowerCase().includes('not')) {
+        this.thresholdValue = this.params.value.value + ' ' + this.params.value.unit;
+        this.isNotSet = false;
+      } else {
+        this.thresholdValue = this.notSetText;
+        this.isNotSet = true;
+      }
+    }
     this.checkDate();
   }
 
   // called when the cell is refreshed
   refresh(params: any): boolean {
     this.params = params;
-    if (this.params.value && !this.params.value.contains('not')) {
-      this.thresholdValue = this.params.value.value + ' ' + this.params.value.unit;
-      this.isNotSet = false;
-    } else {
-      this.thresholdValue = this.notSetText;
-      this.isNotSet = true;
-    }
     return true;
   }
 
