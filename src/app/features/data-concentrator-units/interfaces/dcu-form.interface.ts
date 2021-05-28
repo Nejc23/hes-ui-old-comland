@@ -4,6 +4,7 @@ export interface DcuForm {
   id: string;
   name: string;
   serialNumber: string;
+  externalId?: string;
   ip: string;
   type: Codelist<number>;
   userName?: string;
@@ -18,4 +19,17 @@ export interface DcuForm {
   mac?: string;
   latitude?: number;
   longitude?: number;
+}
+
+export interface EditDcuForm {
+  id: string;
+  name: string;
+  serialNumber: string;
+  externalId?: string;
+  ip: string;
+  port?: string;
+  address?: string;
+  mac?: string;
+  manufacturer?: Codelist<number>;
+  userName?: string;
 }

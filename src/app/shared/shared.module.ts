@@ -84,6 +84,7 @@ import { PlcReadRegistersComponent } from '../features/meter-units/common/compon
 import { CdTimerModule } from 'angular-cd-timer';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { StatusJobComponent } from '../features/jobs/components/status-job/status-job.component';
+import { EditDcuFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
@@ -111,6 +112,7 @@ import { environment } from '../../environments/environment';
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
+    EditDcuFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -194,6 +196,7 @@ import { environment } from '../../environments/environment';
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
+    EditDcuFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -262,6 +265,7 @@ import { environment } from '../../environments/environment';
     SaveViewFormComponent,
     SaveViewFormMUTComponent,
     AddDcuFormComponent,
+    EditDcuFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,

@@ -1,5 +1,6 @@
 export interface DataConcentratorUnitsList {
   concentratorId: string;
+  externalId?: string;
   status: string;
   name: string;
   meters: number;

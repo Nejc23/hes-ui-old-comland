@@ -72,7 +72,8 @@ export class AddDcuFormComponent implements OnInit {
       [this.typeProperty]: [null, Validators.required],
       [this.userNameProperty]: [null, Validators.required],
       [this.vendorProperty]: [null, Validators.required],
-      [this.tagsProperty]: [null]
+      [this.tagsProperty]: [null],
+      [this.externalIdProperty]: [null]
     });
   }
 
@@ -84,7 +85,8 @@ export class AddDcuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       tags: this.form.get(this.tagsProperty).value,
       type: this.form.get(this.typeProperty).value,
-      manufacturer: this.form.get(this.vendorProperty).value
+      manufacturer: this.form.get(this.vendorProperty).value,
+      externalId: this.form.get(this.externalIdProperty).value
     };
 
     if (this.credentialsVisible) {
@@ -98,6 +100,7 @@ export class AddDcuFormComponent implements OnInit {
     const formData = this.fillData();
     const data: DataConcentratorUnitsList = {
       concentratorId: newId,
+      externalId: formData.externalId,
       name: formData.name,
       type: formData.type.value,
       vendor: formData.manufacturer.value,
@@ -192,6 +195,10 @@ export class AddDcuFormComponent implements OnInit {
 
   get idNumberProperty() {
     return nameOf<DcuForm>((o) => o.serialNumber);
+  }
+
+  get externalIdProperty() {
+    return nameOf<DcuForm>((o) => o.externalId);
   }
 
   get ipProperty() {
