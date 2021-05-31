@@ -540,7 +540,6 @@ export class MeterUnitsPlcActionsService {
         // if checkbox value is true
         if (data) {
           params[component.checkboxField] = data; // field must be defined inIActionRequestParams
-          response = this.service.postMyGridConnectDevice(params);
         }
         // on close (CONFIRM)
         this.toast.successToast(this.messageActionInProgress);
