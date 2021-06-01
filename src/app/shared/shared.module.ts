@@ -22,11 +22,11 @@ import { BaseTemplateComponent } from './base-template/components/base-template.
 import { SidebarComponent } from './base-template/components/sidebar.component';
 import { SidebarMeterComponent } from './base-template/components/sidebar-meter.component';
 import { SidebarDropdownDirective } from './base-template/directives/sidebar-dropdown.directive';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ActionPreventerComponent } from './action-preventer/components/action-preventer.component';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { LocaleDatePipe } from './utils/pipes/locale-date.pipe';
 import { CustomFormsModule } from './forms/custom-forms.module';
 import { HeaderTitleComponent } from './base-template/components/header-title.component';
@@ -89,6 +89,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { environment } from '../../environments/environment';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   exports: [
@@ -183,7 +189,16 @@ import { environment } from '../../environments/environment';
     CdTimerModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    NgxDaterangepickerMd.forRoot({ format: environment.dateFormat, firstDay: environment.fistDay })
+    NgxDaterangepickerMd.forRoot({ format: environment.dateFormat, firstDay: environment.fistDay }),
+    TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      extend: true,
+      defaultLanguage: 'en'
+    })
   ],
   declarations: [
     BaseTemplateComponent,

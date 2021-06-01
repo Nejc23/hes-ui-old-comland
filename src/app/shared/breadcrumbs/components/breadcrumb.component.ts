@@ -4,6 +4,7 @@ import { filter } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Breadcrumb } from '../interfaces/breadcrumb.interface';
 import { BreadcrumbService } from '../services/breadcrumb.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -14,7 +15,12 @@ export class BreadcrumbComponent implements OnInit {
   public pageName: string;
   a = 'Close';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private service: BreadcrumbService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private service: BreadcrumbService,
+    private translate: TranslateService
+  ) {
     this.breadcrumbs = [];
   }
 

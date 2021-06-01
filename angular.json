@@ -4,16 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "myGrid": {
-      "i18n": {
-        "locales": {
-          "en": "src/assets/i18n/messages.en.xlf",
-          "sl": "src/assets/i18n/messages.sl.xlf",
-          "cs": "src/assets/i18n/messages.cs.xlf",
-          "de": "src/assets/i18n/messages.de.xlf",
-          "fr": "src/assets/i18n/messages.fr.xlf",
-          "it": "src/assets/i18n/messages.it.xlf"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -75,9 +65,6 @@
                   "maximumWarning": "6kb"
                 }
               ],
-              "localize": [
-                "en"
-              ]
             },
             "develop-amera": {
               "budgets": [
@@ -104,10 +91,7 @@
                 "includePaths": [
                   "src/styles/brand/amera"
                 ]
-              },
-              "localize": [
-                "en"
-              ]
+              }
             },
             "develop-ePointHES": {
               "budgets": [
@@ -134,10 +118,7 @@
                 "includePaths": [
                   "src/styles/brand/ePointHES"
                 ]
-              },
-              "localize": [
-                "en"
-              ]
+              }
             },
             "develop-sl": {
               "budgets": [
@@ -145,9 +126,6 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
-              "localize": [
-                "sl"
               ]
             },
             "develop-de": {
@@ -156,9 +134,6 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
-              "localize": [
-                "de"
               ]
             },
             "production": {
@@ -199,14 +174,6 @@
               ]
             },
             "production-myGrid": {
-              "localize": [
-                "en",
-                "sl",
-                "cs",
-                "de",
-                "fr",
-                "it"
-              ],
               "outputPath": "dist/myGrid",
               "deleteOutputPath": true,
               "assets": [
@@ -244,14 +211,6 @@
               ]
             },
             "production-amera": {
-              "localize": [
-                "en",
-                "sl",
-                "cs",
-                "de",
-                "fr",
-                "it"
-              ],
               "outputPath": "dist/amera",
               "deleteOutputPath": true,
               "assets": [
@@ -298,14 +257,6 @@
               ]
             },
             "production-ePointHES": {
-              "localize": [
-                "en",
-                "sl",
-                "cs",
-                "de",
-                "fr",
-                "it"
-              ],
               "outputPath": "dist/ePointHES",
               "deleteOutputPath": true,
               "assets": [

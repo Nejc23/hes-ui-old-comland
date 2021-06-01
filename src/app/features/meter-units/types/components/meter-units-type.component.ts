@@ -454,9 +454,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.showOptionFilter.length === 0 ||
           this.requestModel.filterModel.showOptionFilter[0].id === 0) &&
         (!this.requestModel.filterModel.protocol || this.requestModel.filterModel.protocol.length === 0) &&
-        (!this.requestModel.filterModel.medium ||
-          this.requestModel.filterModel.medium.length ===
-            0)) /*
+        (!this.requestModel.filterModel.medium || this.requestModel.filterModel.medium.length === 0)) /*
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showWithoutTemplate &&
         !this.requestModel.filterModel.readyForActivation)*/

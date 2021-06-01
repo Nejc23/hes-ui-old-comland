@@ -25,6 +25,9 @@ import '@progress/kendo-angular-intl/locales/fr/all';
 import '@progress/kendo-angular-intl/locales/it/all';
 import '@progress/kendo-angular-intl/locales/en-GB/all';
 import { AppConfigService } from './core/configuration/services/app-config.service';
+import { TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -46,6 +49,11 @@ const appInitializerFn = (appConfig: AppConfigService) => {
   };
 };
 
+// required for AOT compilation
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
 @NgModule({
   declarations: [AppComponent],
   providers: [
@@ -57,7 +65,28 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       deps: [AppConfigService]
     }
   ],
-  imports: [BrowserModule, BrowserAnimationsModule, AppRoutingModule, UserModule, CoreModule.forRoot(), SharedModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    AppRoutingModule,
+    UserModule,
+    CoreModule.forRoot(),
+    SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateModule,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      },
+      // TODO
+      // missingTranslationHandler: {
+      //   provide: MissingTranslationHandler,
+      //   useClass: WordMissingTranslationHandler,
+      // },
+      extend: true,
+      defaultLanguage: 'en'
+    })
+  ],
 
   bootstrap: [AppComponent]
 })
