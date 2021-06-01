@@ -68,8 +68,6 @@ export class PlcReadRegistersComponent implements OnInit {
     private registersService: RegistersSelectService,
     private modalService: ModalService
   ) {
-    debugger;
-    console.log('DAAAAAAAAAAAA FAQQQQQQQQQQQQQQQ');
     this.form = this.createForm();
 
     let startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
@@ -213,6 +211,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
   onDismiss() {
     debugger;
+    console.log('neki');
     this.modal.dismiss();
   }
 
