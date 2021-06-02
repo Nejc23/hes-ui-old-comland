@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule, APP_INITIALIZER, LOCALE_ID } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
@@ -28,6 +28,7 @@ import { AppConfigService } from './core/configuration/services/app-config.servi
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LanguageService } from './core/base-template/services/language.service';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -64,6 +65,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       multi: true,
       deps: [AppConfigService]
     }
+    // {
+    //   provide: LOCALE_ID,
+    //   deps: [LanguageService], //some service handling global settings
+    //   useFactory: (languageService) => languageService.selectedLangLocale() //returns locale string
+    // }
   ],
   imports: [
     BrowserModule,

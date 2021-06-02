@@ -210,8 +210,6 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onDismiss() {
-    debugger;
-    console.log('neki');
     this.modal.dismiss();
   }
 
