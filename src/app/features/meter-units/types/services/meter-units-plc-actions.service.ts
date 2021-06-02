@@ -47,9 +47,9 @@ import { DcuFwUpgradeComponent } from '../../../data-concentrator-units/common/c
   providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
-  messageActionInProgress = $localize`Action in progress!`;
-  messageActionDeleteSuccess = $localize`Delete successful!`;
-  messageServerError = $localize`Server error!`;
+  messageActionInProgress = `Action in progress!`;
+  messageActionDeleteSuccess = `Delete successful!`;
+  messageServerError = `Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -334,7 +334,7 @@ export class MeterUnitsPlcActionsService {
   onDelete(params: IActionRequestParams, selectedRowsCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = `Confirm`;
     let response: Observable<any> = new Observable();
 
     const paramsDeleteDevice = params as IActionRequestDeleteDevice;
@@ -345,11 +345,11 @@ export class MeterUnitsPlcActionsService {
     paramsDeleteDevice.excludeIds = null;
 
     response = this.service.deleteDevice(paramsDeleteDevice);
-    const operationName = $localize`Delete devices`;
+    const operationName = `Delete devices`;
 
     const operation = MeterUnitsTypeEnum.delete;
-    component.modalTitle = $localize`${operationName} (${selectedRowsCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    component.modalTitle = `${operationName} (${selectedRowsCount} selected)`;
+    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` +  `selected meter unit(s)?`;
 
     modalRef.result.then(
       (data) => {
@@ -456,7 +456,7 @@ export class MeterUnitsPlcActionsService {
   bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = `Confirm`;
 
     let response: Observable<any> = new Observable();
 
@@ -464,33 +464,33 @@ export class MeterUnitsPlcActionsService {
     switch (operation) {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
-        operationName = $localize`Get disconnector status`;
+        operationName = `Get disconnector status`;
         break;
       case MeterUnitsTypeEnum.connect:
         response = this.service.postMyGridConnectDevice(params);
-        operationName = $localize`Disconnector connect `;
-        component.checkboxLabel = $localize`Read registers before ` + operationName?.toLowerCase();
+        operationName = `Disconnector connect `;
+        component.checkboxLabel = `Read registers before ` + operationName?.toLowerCase();
         component.checkboxField = 'initiateReading';
         component.checkboxValue = true; // TODO from BE
         break;
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
-        operationName = $localize`Disconnector disconnect`;
-        component.checkboxLabel = $localize`Read registers after ` + operationName?.toLowerCase();
+        operationName = `Disconnector disconnect`;
+        component.checkboxLabel = `Read registers after ` + operationName?.toLowerCase();
         component.checkboxField = 'initiateReading';
         component.checkboxValue = true; // TODO from BE
         break;
       case MeterUnitsTypeEnum.ciiState:
         response = this.service.getCiiState(params);
-        operationName = $localize`Get CII state`;
+        operationName = `Get CII state`;
         break;
       case MeterUnitsTypeEnum.ciiActivate:
         response = this.service.postMyGridCiiActivateDevice(params);
-        operationName = $localize`CII Activate`;
+        operationName = `CII Activate`;
         break;
       case MeterUnitsTypeEnum.ciiDeactivate:
         response = this.service.postMyGridCiiDeactivateDevice(params);
-        operationName = $localize`CII Deactivate`;
+        operationName = `CII Deactivate`;
         break;
       /*case MeterUnitsTypeEnum.touConfig:
         const paramsConf: RequestTOUData = {
@@ -502,38 +502,38 @@ export class MeterUnitsPlcActionsService {
         }; // TODO: timeOfUseId read form store?
 
         response = this.service.postMyGridTOUDevice(paramsConf);
-        operationName = $localize`Configure TOU`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+        operationName =  `Configure TOU`;
+        selectedText = `${ `for`} ${selectedText}`;
         break;*/
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
-        operationName = $localize`Activate FW upgrade`;
+        operationName = `Activate FW upgrade`;
         break;
       case MeterUnitsTypeEnum.clearFF:
         response = this.service.clearFF(params);
-        operationName = $localize`Activate Clear FF`;
+        operationName = `Activate Clear FF`;
         break;
       case MeterUnitsTypeEnum.clearAlarms:
         response = this.service.clearAlarms(params);
-        operationName = $localize`Clear alarms`;
+        operationName = `Clear alarms`;
         break;
 
       // TODO register types
       case MeterUnitsTypeEnum.readThresholdsMonitor:
         params.registerTypes = [IRegisterTypesEnum.monitorPhase1, IRegisterTypesEnum.monitorPhase2, IRegisterTypesEnum.monitorPhase3];
         response = this.service.readThresholdValues(params);
-        operationName = $localize`Read monitor threshold values`;
+        operationName = `Read monitor threshold values`;
         break;
       case MeterUnitsTypeEnum.readThresholdsLimiter:
         params.registerTypes = [IRegisterTypesEnum.limiterNormal, IRegisterTypesEnum.limiterEmergency];
         response = this.service.readThresholdValues(params);
-        operationName = $localize`Read limiter threshold values`;
+        operationName = `Read limiter threshold values`;
         break;
     }
     // component.btnConfirmText = operationName;
 
-    component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    component.modalTitle = `${operationName} (${selectedCount} selected)`;
+    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` +  `selected meter unit(s)?`;
 
     modalRef.result.then(
       (data) => {

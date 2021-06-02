@@ -45,8 +45,8 @@ export class SchedulerJobsListGridService {
         suppressMovable: true,
         field: 'active',
         cellRenderer: 'gridCellActiveComponent',
-        headerName: $localize`Active`,
-        headerTooltip: $localize`Active`,
+        headerName: `Active`,
+        headerTooltip: `Active`,
         resizable: false
       },
       {
@@ -54,8 +54,8 @@ export class SchedulerJobsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`,
+        headerName: `Description`,
+        headerTooltip: `Description`,
         resizable: false
       },
       {
@@ -63,8 +63,8 @@ export class SchedulerJobsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`,
+        headerName: `Job Type`,
+        headerTooltip: `Job Type`,
         resizable: false
       },
       {
@@ -73,8 +73,8 @@ export class SchedulerJobsListGridService {
         sortable: false,
         suppressMovable: true,
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: $localize`Next run`,
-        headerTooltip: $localize`Next run`,
+        headerName: `Next run`,
+        headerTooltip: `Next run`,
         resizable: false
       },
       {
@@ -82,8 +82,8 @@ export class SchedulerJobsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Created by`,
-        headerTooltip: $localize`Created by`,
+        headerName: `Created by`,
+        headerTooltip: `Created by`,
         resizable: false
       },
       {
@@ -92,8 +92,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellDeviceCountComponent',
-        headerName: $localize`Devices`,
-        headerTooltip: $localize`Devices`,
+        headerName: `Devices`,
+        headerTooltip: `Devices`,
         resizable: false
       },
       {

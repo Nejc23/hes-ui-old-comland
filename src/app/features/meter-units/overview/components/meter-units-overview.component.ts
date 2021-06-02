@@ -8,7 +8,7 @@ import { FormBuilder } from '@angular/forms';
 })
 export class MeterUnitsOverviewComponent implements OnInit {
   constructor(private sidebarService: SidebarService, public fb: FormBuilder) {
-    this.sidebarService.headerTitle = $localize`Meter Units`;
+    this.sidebarService.headerTitle = `Meter Units`;
   }
 
   ngOnInit() {}

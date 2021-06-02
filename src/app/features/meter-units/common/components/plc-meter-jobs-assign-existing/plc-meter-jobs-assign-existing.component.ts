@@ -19,7 +19,7 @@ export class PlcMeterJobsAssignExistingComponent {
 
   selectedRowsCount: number;
 
-  selectionRequiredText = $localize`At least one job must be selected`;
+  selectionRequiredText = `At least one job must be selected`;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -75,7 +75,7 @@ export class PlcMeterJobsAssignExistingComponent {
     }
 
     const request = this.myGridService.postJobsAssignExisting(values);
-    const successMessage = $localize`Existing Jobs assigned to Meter Unit successfully`;
+    const successMessage = `Existing Jobs assigned to Meter Unit successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         console.log(result);

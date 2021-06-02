@@ -32,6 +32,6 @@ export class GridCellAddBtnComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip() {
-    return $localize`Add new rule`;
+    return `Add new rule`;
   }
 }

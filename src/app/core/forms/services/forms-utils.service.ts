@@ -25,7 +25,7 @@ export class FormsUtilsService {
     const throwErrorOrMakeRequest = (formValid: boolean) => {
       if (!formValid) {
         console.log('invalid form=', form);
-        return throwError(new Error($localize`invalid form`));
+        return throwError(new Error(`invalid form`));
       }
       return request;
     };
@@ -80,7 +80,7 @@ export class FormsUtilsService {
   throwErrorWithToastIfInvalid(form: FormGroup) {
     if (!form.valid) {
       // this.toast.warningToast(this.i18n(`Form not valid`));
-      throw new Error($localize`invalid form`);
+      throw new Error(`invalid form`);
     }
   }
 

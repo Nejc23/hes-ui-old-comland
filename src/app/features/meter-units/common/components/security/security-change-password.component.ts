@@ -88,7 +88,7 @@ export class SecurityChangePasswordComponent implements OnInit {
     } else {
       const values = this.fillData();
       const request = this.gridLinkService.postSecurityChangePassword(values);
-      const successMessage = $localize`Meter Units password type change was successful`;
+      const successMessage = `Meter Units password type change was successful`;
       this.formUtils.saveForm(this.form, request, successMessage).subscribe((result) => {
         this.modal.close();
       });

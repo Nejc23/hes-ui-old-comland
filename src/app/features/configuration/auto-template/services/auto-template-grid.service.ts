@@ -38,7 +38,7 @@ export class AutoTemplatesGridService {
       { field: 'autoTemplateRuleId', hide: true },
       {
         field: 'propertyName',
-        headerName: $localize`Obis`,
+        headerName: `Obis`,
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyName' },
         valueSetter: (params) => {
@@ -53,7 +53,7 @@ export class AutoTemplatesGridService {
         field: 'propertyValue',
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyValue' },
-        headerName: $localize`Regex`,
+        headerName: `Regex`,
         valueSetter: (params) => {
           return params.oldValue !== params.newValue;
         }
@@ -85,24 +85,24 @@ export class AutoTemplatesGridService {
     return [
       {
         field: 'type',
-        headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`
+        headerName: `Job Type`,
+        headerTooltip: `Job Type`
       },
       {
         field: 'description',
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: `Description`,
+        headerTooltip: `Description`
       },
       {
         field: 'nextRun',
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: $localize`Next run`,
-        headerTooltip: $localize`Next run`
+        headerName: `Next run`,
+        headerTooltip: `Next run`
       },
       {
         field: 'owner',
-        headerName: $localize`Owner`,
-        headerTooltip: $localize`Owner`
+        headerName: `Owner`,
+        headerTooltip: `Owner`
       },
       {
         field: 'id',

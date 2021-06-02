@@ -40,7 +40,7 @@ export class MeterUnitDetailsComponent implements OnInit {
     private router: Router,
     private modalService: ModalService
   ) {
-    breadcrumbService.setPageName($localize`Meter unit`);
+    breadcrumbService.setPageName(`Meter unit`);
   }
 
   ngOnInit() {
@@ -208,14 +208,14 @@ export class MeterUnitDetailsComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: $localize`Meters`,
+        label: `Meters`,
         params: {},
         url: null
       }
     ];
 
     breadcrumbs.push({
-      label: $localize`Meter Unit`,
+      label: `Meter Unit`,
       params: {},
       url: null
     });

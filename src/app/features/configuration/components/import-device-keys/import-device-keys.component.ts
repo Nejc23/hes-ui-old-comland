@@ -23,10 +23,10 @@ import { AppConfigService } from 'src/app/core/configuration/services/app-config
 export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload') fileUpload: FileUploadComponent;
 
-  uploadDropSubtitle = $localize`Selected file must be in .xml or .csv file format.`;
+  uploadDropSubtitle = `Selected file must be in .xml or .csv file format.`;
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
 
-  subtitle = $localize`To import key material to Vault, first select the security material file type, then select the file to be imported.`;
+  subtitle = `To import key material to Vault, first select the security material file type, then select the file to be imported.`;
 
   form: FormGroup;
 
@@ -63,7 +63,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     private cryptoLiteService: CryptoLiteService,
     private breadcrumbService: BreadcrumbService
   ) {
-    this.allowedExtExplainText = $localize`can only upload one file.`;
+    this.allowedExtExplainText = `can only upload one file.`;
     this.form = this.createForm();
   }
 
@@ -134,12 +134,12 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
           results.push(o);
           if (o.status === 'SUCCESS') {
             this.allResultTexts.push(
-              $localize`File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
+              `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
           if (o.errorMsg) {
-            this.allErrorTexts.push($localize`File ${o.fileName} import failed, error message: ${o.errorMsg}`);
+            this.allErrorTexts.push(`File ${o.fileName} import failed, error message: ${o.errorMsg}`);
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
         });

@@ -62,13 +62,13 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
       });
 
     this.modes = [
-      { id: 0, value: $localize`Always connected` },
-      { id: 1, value: $localize`Only manual re-connection allowed` },
-      { id: 2, value: $localize`Remote and manual re-connection allowed` },
-      { id: 3, value: $localize`Only manual re-connection allowed / Manual disconnection not allowed` },
-      { id: 4, value: $localize`Remote and manual re-connection allowed / Manual disconnection not allowed` },
-      { id: 5, value: $localize`Manual and local re-connection allowed` },
-      { id: 6, value: $localize`Manual and local re-connection allowed / Manual disconnection not allowed` }
+      { id: 0, value: `Always connected` },
+      { id: 1, value: `Only manual re-connection allowed` },
+      { id: 2, value: `Remote and manual re-connection allowed` },
+      { id: 3, value: `Only manual re-connection allowed / Manual disconnection not allowed` },
+      { id: 4, value: `Remote and manual re-connection allowed / Manual disconnection not allowed` },
+      { id: 5, value: `Manual and local re-connection allowed` },
+      { id: 6, value: `Manual and local re-connection allowed / Manual disconnection not allowed` }
     ];
   }
 
@@ -110,7 +110,7 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.setRelaysMode(values);
-    const successMessage = $localize`Setting of relay mode succeeded!`;
+    const successMessage = `Setting of relay mode succeeded!`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

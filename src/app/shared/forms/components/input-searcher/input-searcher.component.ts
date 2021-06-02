@@ -50,9 +50,9 @@ export class InputSearcherComponent implements OnInit {
   }
 
   getTooltip() {
-    let tooltip = $localize`Wildcards search is disabled`;
+    let tooltip = `Wildcards search is disabled`;
     if (this.useWildcards) {
-      tooltip = $localize`Wildcards search is enabled`;
+      tooltip = `Wildcards search is enabled`;
     }
     return tooltip;
   }

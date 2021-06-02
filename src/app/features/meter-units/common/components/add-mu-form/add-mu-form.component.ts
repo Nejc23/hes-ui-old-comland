@@ -29,10 +29,10 @@ export class AddMuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  tabTitleBasic = $localize`Basic`;
-  tabTitleJobs = $localize`Jobs`;
-  tabTitleCommunication = $localize`Communication`;
-  tabTitleAdvanced = $localize`Advanced`;
+  tabTitleBasic = `Basic`;
+  tabTitleJobs = `Jobs`;
+  tabTitleCommunication = `Communication`;
+  tabTitleAdvanced = `Advanced`;
 
   form: FormGroup;
   editMu: MeterUnitDetails;
@@ -40,22 +40,22 @@ export class AddMuFormComponent implements OnInit {
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
-  connectionTypes: Codelist<number>[] = [{ id: 1, value: $localize`IP` }];
+  connectionTypes: Codelist<number>[] = [{ id: 1, value: `IP` }];
   defaultConnectionType = this.connectionTypes[0];
 
   communicationTypes: RadioOption[] = [
-    { value: '1' as string, label: $localize`Wrapper` },
-    { value: '0' as string, label: $localize`HDLC` }
+    { value: '1' as string, label: `Wrapper` },
+    { value: '0' as string, label: `HDLC` }
   ];
   defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
 
   communicationTypeSelected: RadioOption = null;
 
   authenticationTypes: Codelist<number>[] = [
-    { id: 0, value: $localize`None` },
-    { id: 1, value: $localize`Low` },
-    { id: 2, value: $localize`High` },
-    { id: 5, value: $localize`High with GMAC` }
+    { id: 0, value: `None` },
+    { id: 1, value: `Low` },
+    { id: 2, value: `High` },
+    { id: 5, value: `High with GMAC` }
   ];
 
   authenticationTypesEditMap: { [key: string]: number } = {
@@ -455,7 +455,7 @@ export class AddMuFormComponent implements OnInit {
   add() {
     const muFormData = this.fillData();
     const request = this.muService.createMuForm(muFormData);
-    const successMessage = $localize`Meter unit has been added successfully`;
+    const successMessage = `Meter unit has been added successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
@@ -487,7 +487,7 @@ export class AddMuFormComponent implements OnInit {
 
     const muFormData = this.fillUpdateData();
     const request = this.muService.updateMuForm(muFormData);
-    const successMessage = $localize`Meter unit has been updated successfully`;
+    const successMessage = `Meter unit has been updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
@@ -648,9 +648,9 @@ export class AddMuFormComponent implements OnInit {
 
   getTitle(): string {
     if (this.editMu) {
-      return $localize`Edit ${this.editMu.protocol} meter`;
+      return `Edit ${this.editMu.protocol} meter`;
     }
-    return $localize`Add new DLMS meter`;
+    return `Add new DLMS meter`;
   }
 
   gatewayChanged(value: any) {

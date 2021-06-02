@@ -10,13 +10,13 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: $localize`Tools`
+      breadcrumb: `Tools`
     },
     children: [
       {
         path: 'importTemplates',
         data: {
-          breadcrumb: $localize`Import templates`,
+          breadcrumb: `Import templates`,
           permission: PermissionEnumerator.Import_Templates
         },
         component: PlcMeterTemplatesImportComponent
@@ -24,7 +24,7 @@ const routes: Routes = [
       {
         path: 'importTouConfiguration',
         data: {
-          breadcrumb: $localize`Import TOU configuration`,
+          breadcrumb: `Import TOU configuration`,
           permission: PermissionEnumerator.Import_TOU_Configuration
         },
         component: PlcMeterTouConfigImportComponent
@@ -32,7 +32,7 @@ const routes: Routes = [
       {
         path: 'autoTemplates',
         data: {
-          breadcrumb: $localize`Auto template`,
+          breadcrumb: `Auto template`,
           permission: PermissionEnumerator.Manage_Auto_Template_Rules
         },
         component: AutoTemplateComponent
@@ -40,7 +40,7 @@ const routes: Routes = [
       {
         path: 'importDeviceKeys',
         data: {
-          breadcrumb: $localize`Import device Keys`,
+          breadcrumb: `Import device Keys`,
           permission: PermissionEnumerator.Import_Device_Keys
         },
         component: ImportDeviceKeysComponent
@@ -56,7 +56,7 @@ const routes: Routes = [
 export class ConfigurationRoutingModule {
   constructor() {
     routes.forEach((x) => {
-      x.data.breadcrumb = $localize`${x.data.breadcrumb}`;
+      x.data.breadcrumb = `${x.data.breadcrumb}`;
     });
   }
 }

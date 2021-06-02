@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
     private permissionService: PermissionService,
     public sidebarService: SidebarService
   ) {
+    debugger;
     moment.locale(locale);
     console.log(locale);
     this.locale = locale;

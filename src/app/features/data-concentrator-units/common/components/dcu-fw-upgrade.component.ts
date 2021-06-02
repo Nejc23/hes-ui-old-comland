@@ -27,7 +27,7 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   public selectedRowsCount: number;
 
-  uploadDropSubtitle = $localize`Selected file must be in .bin file format.`;
+  uploadDropSubtitle = `Selected file must be in .bin file format.`;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -83,7 +83,7 @@ export class DcuFwUpgradeComponent implements OnInit {
     }
 
     const request = this.dcuOperatrionService.postDcFwUpgrade(formData);
-    const successMessage = $localize`FW Upgrade in progress`;
+    const successMessage = `FW Upgrade in progress`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (result && result.length > 0) {

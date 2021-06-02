@@ -5,36 +5,36 @@ import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.inter
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  // public titleBreadCrumbs = $localize`Data Concentrator Units`;
+  // public titleBreadCrumbs =  `Data Concentrator Units`;
 
   constructor() {}
 
   get headerTitleDCU() {
-    return $localize`Concentrators`;
+    return `Concentrators`;
   }
 
   get jobsTitle() {
-    return $localize`Jobs`;
+    return `Jobs`;
   }
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return `N/A`;
   }
 
   get noRecordsFound() {
-    return $localize`No records found. You may need to adjust your search or filter parameters.`;
+    return `No records found. You may need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {
-    return $localize`Loading data...`;
+    return `Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
+    return `No filter applied`;
   }
 
   get nextPlannedReadText() {
-    return $localize`Next planned read` + ' ';
+    return `Next planned read` + ' ';
   }
 
   getFiltersInfo(filterName: string, status: boolean, readStatuses: boolean, type: boolean, vendor: boolean, tag: boolean): FiltersInfo {
@@ -54,35 +54,35 @@ export class DataConcentratorUnitsStaticTextService {
     }
 
     if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag) {
-      result.text += $localize`Filtered by: `;
+      result.text += `Filtered by: `;
     }
 
     if (status) {
       additionalString = readStatuses || type || vendor || tag ? ', ' : '';
-      result.text += $localize`status` + additionalString;
+      result.text += `status` + additionalString;
       result.count++;
     }
 
     if (readStatuses) {
       additionalString = type || vendor || tag ? ', ' : '';
-      result.text += $localize`read status` + additionalString;
+      result.text += `read status` + additionalString;
       result.count++;
     }
 
     if (type) {
       additionalString = vendor || tag ? ', ' : '';
-      result.text += $localize`type` + additionalString;
+      result.text += `type` + additionalString;
       result.count++;
     }
 
     if (vendor) {
       additionalString = tag ? ', ' : '';
-      result.text += $localize`vendor` + additionalString;
+      result.text += `vendor` + additionalString;
       result.count++;
     }
 
     if (tag) {
-      result.text += $localize`tag`;
+      result.text += `tag`;
       result.count++;
     }
 

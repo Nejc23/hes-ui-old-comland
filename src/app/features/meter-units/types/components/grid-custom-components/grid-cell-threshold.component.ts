@@ -14,7 +14,7 @@ export class GridCellThresholdComponent implements ICellRendererAngularComp {
   isNotSet = false;
   public params: any;
   oldReadingDate = false;
-  readOnText = $localize`Read on`;
+  readOnText = `Read on`;
   preconfiguredThreshold = environment.thresholdValue;
   thresholdValue = this.notAvailableText;
 

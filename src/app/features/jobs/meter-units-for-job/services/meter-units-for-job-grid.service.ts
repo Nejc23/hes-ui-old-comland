@@ -119,55 +119,55 @@ export class MeterUnitsForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: `Select/deselect all`
       },
       {
         field: gridSysNameColumnsEnum.name,
-        headerName: $localize`Name`,
+        headerName: `Name`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: `Name`
       },
       {
         field: gridSysNameColumnsEnum.serialNumber,
-        headerName: $localize`Serial number`,
+        headerName: `Serial number`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`Serial number`
+        headerTooltip: `Serial number`
       },
       {
         field: gridSysNameColumnsEnum.logicalDeviceName,
-        headerName: $localize`Logical device name`,
+        headerName: `Logical device name`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Logical device name`,
+        headerTooltip: `Logical device name`,
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: gridSysNameColumnsEnum.vendor,
-        headerName: $localize`Vendor`,
+        headerName: `Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Vendor`
+        headerTooltip: `Vendor`
       },
       {
         field: gridSysNameColumnsEnum.parent,
-        headerName: $localize`Parent`,
+        headerName: `Parent`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gidCellParentComponent',
-        headerTooltip: $localize`Parent`,
+        headerTooltip: `Parent`,
         suppressMenu: true,
         suppressMovable: true,
         resizable: false

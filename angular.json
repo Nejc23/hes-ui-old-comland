@@ -17,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": false,
             "aot": true,
             "outputPath": "dist/myGrid",
             "index": "src/index.html",
@@ -64,7 +63,7 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
+              ]
             },
             "develop-amera": {
               "budgets": [
@@ -128,18 +127,9 @@
                 }
               ]
             },
-            "develop-de": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ]
-            },
             "production": {
               "outputPath": "dist/hes",
               "deleteOutputPath": true,
-              "localize": false,
               "assets": [
                 "src/assets",
                 {
@@ -384,84 +374,6 @@
             "exclude": [
               "**/node_modules/**"
             ]
-          }
-        },
-        "xliffmerge": {
-          "builder": "@ngx-i18nsupport/tooling:xliffmerge",
-          "options": {},
-          "configurations": {
-            "slovenian": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "sl",
-                "languages": [
-                  "sl"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "english": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "en",
-                "languages": [
-                  "en"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "czech": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "cs",
-                "languages": [
-                  "cs"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "deutch": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "de",
-                "languages": [
-                  "de"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "french": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "fr",
-                "languages": [
-                  "fr"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "italian": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "it",
-                "languages": [
-                  "it"
-                ],
-                "useSourceAsTarget": true
-              }
-            }
           }
         }
       }

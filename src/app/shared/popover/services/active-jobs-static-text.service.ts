@@ -7,18 +7,18 @@ export class ActiveJobsStaticTextService {
   constructor() {}
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return `N/A`;
   }
 
   get messageJobStopped() {
-    return $localize`Job stoped!`;
+    return `Job stoped!`;
   }
 
   get messageJobCanceled() {
-    return $localize`Job canceled!`;
+    return `Job canceled!`;
   }
 
   get messageServerError() {
-    return $localize`Server error!`;
+    return `Server error!`;
   }
 }

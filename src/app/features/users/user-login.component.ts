@@ -104,7 +104,7 @@ export class UserLoginComponent implements OnInit {
 
   reset() {
     const request = this.authRepositoryService.requestPasswordReset(this.formReset.value);
-    const successMessage = $localize`Reset password request successful`;
+    const successMessage = `Reset password request successful`;
     this.formUtils.saveForm(this.formReset, request, successMessage).subscribe(
       (response) => {
         this.forgotPassword = false;
@@ -119,7 +119,7 @@ export class UserLoginComponent implements OnInit {
     this.isFormSubmitted = true;
 
     const request = this.authRepositoryService.authenticateUserDevelop(this.form.value);
-    const successMessage = $localize`Login successful`;
+    const successMessage = `Login successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (token) => {
         this.isFormSubmitted = true;
@@ -136,7 +136,7 @@ export class UserLoginComponent implements OnInit {
     this.isFormSubmitted = true;
 
     const request = this.authRepositoryService.newPassword(this.formNewPassword.value);
-    const successMessage = $localize`New password successful saved`;
+    const successMessage = `New password successful saved`;
     this.formUtils.saveForm(this.formNewPassword, request, successMessage).subscribe(
       (token) => {
         this.isFormSubmitted = true;
@@ -152,7 +152,7 @@ export class UserLoginComponent implements OnInit {
   onError(): () => void {
     return () => {
       this.isFormSubmitted = false;
-      const errorMessage = $localize`Login failed! Check your credentials ...`;
+      const errorMessage = `Login failed! Check your credentials ...`;
       this.toast.errorToast(errorMessage);
     };
   }

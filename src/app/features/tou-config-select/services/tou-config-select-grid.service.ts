@@ -19,7 +19,7 @@ export class TouConfigSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'timeOfUseId',
-        headerTooltip: $localize`Select/deselect`,
+        headerTooltip: `Select/deselect`,
         headerCheckboxSelection: false
       },
       {
@@ -29,16 +29,16 @@ export class TouConfigSelectGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`'Name`
+        headerName: `Name`,
+        headerTooltip: 'Name'
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: `Description`,
+        headerTooltip: `Description`
       }
     ];
   }

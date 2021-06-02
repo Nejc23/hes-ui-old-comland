@@ -113,8 +113,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   isGridLoaded = false;
   areSettingsLoaded = false;
 
-  messageDataFwUpgraded = $localize`FW Upgrade successful!`;
-  messageActionFailed = $localize`FW Upgrade failed!`;
+  messageDataFwUpgraded = `FW Upgrade successful!`;
+  messageActionFailed = `FW Upgrade failed!`;
 
   taskStatusOK = 'TASK_SUCCESS';
   taskStatusFailure = 'TASK_FAILURE';
@@ -210,21 +210,21 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: $localize`Columns`,
-      filters: $localize`Filters`,
+      columns: `Columns`,
+      filters: `Filters`,
 
       // for filter panel
-      page: $localize`page`,
-      more: $localize`more`,
-      to: $localize`to`,
-      of: $localize`of`,
-      next: $localize`next`,
-      last: $localize`last`,
-      first: $localize`first`,
-      previous: $localize`previous`,
-      loadingOoo: $localize`loading...`,
+      page: `page`,
+      more: `more`,
+      to: `to`,
+      of: `of`,
+      next: `next`,
+      last: `last`,
+      first: `first`,
+      previous: `previous`,
+      loadingOoo: `loading...`,
 
-      selectAll: $localize`Select All`
+      selectAll: `Select All`
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
@@ -245,7 +245,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // set momemnt text (next planned read) out of date and time
   setMomentNextPlannedReadTime(time: string) {
-    return this.staticTextService.nextPlannedReadText + $localize`${moment(time).fromNow()}`;
+    return this.staticTextService.nextPlannedReadText + `${moment(time).fromNow()}`;
   }
 
   // ag-grid
@@ -537,14 +537,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Delete`;
-    component.modalBody = $localize`Delete` + ` ${selectedText} ` + $localize`selected Data Concentrator Units?`;
+    component.btnConfirmText = `Delete`;
+    component.modalBody = `Delete` + ` ${selectedText} ` + `selected Data Concentrator Units?`;
 
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
         const request = this.dataConcentratorUnitsService.deleteDcu(object);
-        this.formUtils.deleteForm(request, $localize`Selected items deleted`).subscribe(
+        this.formUtils.deleteForm(request, `Selected items deleted`).subscribe(
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
@@ -571,7 +571,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     if (excludedRowsLength === 0) {
       return this.totalCount.toString();
     } else {
-      return `${this.totalCount - excludedRowsLength} ${$localize`of`} ${this.totalCount}`;
+      return `${this.totalCount - excludedRowsLength} ${`of`} ${this.totalCount}`;
     }
   }
 

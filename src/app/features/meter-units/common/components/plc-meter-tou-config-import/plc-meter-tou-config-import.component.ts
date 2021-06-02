@@ -19,8 +19,8 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   data = '';
   errorMsg = '';
 
-  uploadDropSubtitle = $localize`Selected file must be in .xml file format.`;
-  subtitle = $localize`To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.`;
+  uploadDropSubtitle = `Selected file must be in .xml file format.`;
+  subtitle = `To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.`;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -40,7 +40,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize`Import TOU Configuration`);
+    this.breadcrumbService.setPageName(`Import TOU Configuration`);
   }
 
   selected(event: any) {
@@ -73,7 +73,7 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
     this.errorMsg = '';
     const values = this.fillData();
     const request = this.meterService.importConfigTou(values);
-    const successMessage = $localize`Import xml file was successfully`;
+    const successMessage = `Import xml file was successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.resetForm();

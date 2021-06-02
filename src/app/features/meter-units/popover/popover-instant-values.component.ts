@@ -30,7 +30,7 @@ export class PopoverInstantValuesComponent implements OnInit {
   }
 
   getShowAllText(): string {
-    return `${$localize`Show all`} ${this.inputInstantValues.length} ${$localize`relays`}`;
+    return `${`Show all`} ${this.inputInstantValues.length} ${`relays`}`;
   }
 
   getBadgeClass(selectedValue: string) {

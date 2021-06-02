@@ -7,50 +7,50 @@ export class JobsStaticTextService {
   constructor() {}
 
   get jobsTitle() {
-    return $localize`Jobs`;
+    return `Jobs`;
   }
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return `N/A`;
   }
 
   get noRecordsFound() {
-    return $localize`No records found. You may need to adjust your search or filter parameters.`;
+    return `No records found. You may need to adjust your search or filter parameters.`;
   }
 
   get noData() {
-    return $localize`No Jobs have been added yet.`;
+    return `No Jobs have been added yet.`;
   }
 
   get loadingData() {
-    return $localize`Loading data...`;
+    return `Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
+    return `No filter applied`;
   }
 
   get nextPlannedReadText() {
-    return $localize`Next planned read` + ' ';
+    return `Next planned read` + ' ';
   }
 
   get placeholderSearch() {
-    return $localize`Search`;
+    return `Search`;
   }
 
   get messageSchedulerJobStarted() {
-    return $localize`Scheduler job started!`;
+    return `Scheduler job started!`;
   }
 
   get messageJobStopped() {
-    return $localize`Job stoped!`;
+    return `Job stoped!`;
   }
 
   get messageJobCanceled() {
-    return $localize`Job canceled!`;
+    return `Job canceled!`;
   }
 
   get messageServerError() {
-    return $localize`Server error!`;
+    return `Server error!`;
   }
 }

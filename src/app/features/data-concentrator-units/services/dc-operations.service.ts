@@ -25,8 +25,8 @@ import {
   providedIn: 'root'
 })
 export class DcOperationsService {
-  messageActionInProgress = $localize`Action in progress!`;
-  messageServerError = $localize`Server error!`;
+  messageActionInProgress = `Action in progress!`;
+  messageServerError = `Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -211,25 +211,25 @@ export class DcOperationsService {
     let selectedText = ''; // `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = `Confirm`;
     let response: Observable<any> = new Observable();
 
     let operationName = '';
     switch (operation) {
       case DcOperationTypeEnum.syncTime:
         response = this.service.postDcSynchronizeTime(params);
-        operationName = $localize`Sync time`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+        operationName = `Sync time`;
+        selectedText = `${`for`} ${selectedText}`;
         break;
       case DcOperationTypeEnum.deviceDiscovery:
         response = this.service.postDcDeviceDiscovery(params);
-        operationName = $localize`Device discovery`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+        operationName = `Device discovery`;
+        selectedText = `${`for`} ${selectedText}`;
         break;
     }
 
-    component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    component.modalTitle = `${operationName} (${selectedCount} selected)`;
+    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` +  `selected meter unit(s)?`;
 
     modalRef.result.then(
       (data) => {

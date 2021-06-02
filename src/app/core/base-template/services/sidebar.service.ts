@@ -14,7 +14,7 @@ export class SidebarService {
   constructor() {
     this.sidebarItems = [
       {
-        title: $localize`Data Concentrator Units`,
+        title: `Data Concentrator Units`,
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         icon: 'gps_fixed',
@@ -22,7 +22,7 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Concentrators
       },
       {
-        title: $localize`Meter Units`,
+        title: `Meter Units`,
         routeLink: '/meterUnits',
         hasChildren: false,
         icon: 'gps_not_fixed',
@@ -30,7 +30,7 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Meters
       },
       {
-        title: $localize`Jobs`,
+        title: `Jobs`,
         routeLink: '/schedulerJobs',
         hasChildren: false,
         icon: 'format_list_bulleted',
@@ -38,7 +38,7 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Jobs
       },
       {
-        title: $localize`Alarms & Events`,
+        title: `Alarms & Events`,
         routeLink: '/alarmsEvents',
         hasChildren: false,
         icon: 'notifications',
@@ -47,35 +47,35 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Alarms
       },
       {
-        title: $localize`Tools`,
+        title: `Tools`,
         routeLink: '/configuration',
         icon: 'build',
         isIconOutlined: true,
         hasChildren: true,
         children: [
           {
-            title: $localize`Import templates`,
+            title: `Import templates`,
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Import_Templates
           },
           {
-            title: $localize`Import TOU configuration`,
+            title: `Import TOU configuration`,
             routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Import_TOU_Configuration
           },
           {
-            title: $localize`Auto templates`,
+            title: `Auto templates`,
             routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Manage_Auto_Template_Rules
           },
           {
-            title: $localize`Import device keys`,
+            title: `Import device keys`,
             routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
             hasChildren: false,
             children: [],
@@ -84,14 +84,14 @@ export class SidebarService {
         ]
       },
       {
-        title: $localize`Administration`,
+        title: `Administration`,
         routeLink: 'administration',
         icon: 'verified_user',
         isIconOutlined: true,
         hasChildren: true,
         children: [
           {
-            title: $localize`Users`,
+            title: `Users`,
             routeLink: AppConfigService.settings.identityServer.stsAuthorityWeb,
             openInNewTab: true,
             isRouteAbsolute: true,

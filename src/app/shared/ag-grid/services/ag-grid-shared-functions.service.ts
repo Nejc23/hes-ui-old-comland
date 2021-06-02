@@ -8,7 +8,7 @@ export class AgGridSharedFunctionsService {
 
   public addSelectDeselectAllText() {
     const text = document.createElement('div');
-    text.innerHTML = $localize`Select/deselect all columns`;
+    text.innerHTML = `Select/deselect all columns`;
 
     const panel = document.querySelector('[ref=primaryColsHeaderPanel]');
 

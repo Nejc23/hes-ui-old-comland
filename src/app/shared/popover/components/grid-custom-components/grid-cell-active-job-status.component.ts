@@ -23,6 +23,6 @@ export class GridCellActiveJobStatusComponent implements ICellRendererAngularCom
   }
 
   setToolTip(value: boolean) {
-    return value ? $localize`Running job` : $localize`Pending job`;
+    return value ? `Running job` : `Pending job`;
   }
 }

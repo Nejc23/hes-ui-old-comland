@@ -17,8 +17,8 @@ export class PlcMeterTouConfigComponent implements OnInit {
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize`Required field`;
-  messageServerError = $localize`Server error!`;
+  configRequiredText = `Required field`;
+  messageServerError = `Server error!`;
   actionRequest: IActionRequestParams;
 
   public selectedRowsCount: number;

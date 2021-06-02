@@ -30,8 +30,8 @@ export class PlcReadRegistersComponent implements OnInit {
   public selectedRowsCount: number;
   public selectedDeviceIds = [];
   noRegisters = false;
-  registersRequiredText = $localize`Required field`;
-  actionName = $localize`Read Registers`;
+  registersRequiredText = `Required field`;
+  actionName = `Read Registers`;
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
@@ -45,9 +45,9 @@ export class PlcReadRegistersComponent implements OnInit {
 
   public modules: Module[] = AllModules;
 
-  requiredText = $localize`Date and at least one register must be selected`;
-  templateErrorText = $localize`One of the meters selected does not have template assigned!`;
-  foundText = $localize`found`;
+  requiredText = `Date and at least one register must be selected`;
+  templateErrorText = `One of the meters selected does not have template assigned!`;
+  foundText = `found`;
 
   noRegisterSelected = false;
   // TODO when backend
@@ -121,7 +121,7 @@ export class PlcReadRegistersComponent implements OnInit {
         checkboxSelection: true,
         lockPosition: true,
         field: 'name',
-        headerName: $localize`Type`,
+        headerName: `Type`,
         cellStyle: (params) => {
           if (params.data.isSelectable !== true) {
             return { 'padding-left': '34px' };
@@ -176,7 +176,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);
-    const successMessage = $localize`Read Registers succeeded!`;
+    const successMessage = `Read Registers succeeded!`;
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {

@@ -40,15 +40,15 @@ export class JobsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: `Select/deselect all`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`,
+        headerName: `Description`,
+        headerTooltip: `Description`,
         resizable: false
       },
       {
@@ -56,8 +56,8 @@ export class JobsSelectGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`,
+        headerName: `Job Type`,
+        headerTooltip: `Job Type`,
         resizable: false
       },
       {
@@ -66,8 +66,8 @@ export class JobsSelectGridService {
         sortable: false,
         suppressMovable: true,
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: $localize`Next run`,
-        headerTooltip: $localize`Next run`,
+        headerName: `Next run`,
+        headerTooltip: `Next run`,
         resizable: false
       },
       {
@@ -78,8 +78,8 @@ export class JobsSelectGridService {
         suppressMovable: true,
         field: 'active',
         cellRenderer: 'gridCellActiveReadOnlyComponent',
-        headerName: $localize`Active`,
-        headerTooltip: $localize`Active`,
+        headerName: `Active`,
+        headerTooltip: `Active`,
         resizable: false
       }
     ];

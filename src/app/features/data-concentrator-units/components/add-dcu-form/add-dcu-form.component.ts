@@ -35,8 +35,8 @@ export class AddDcuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  getTabTitleBasic = $localize`Basic`;
-  getTabTitleJobs = $localize`Jobs`;
+  getTabTitleBasic = `Basic`;
+  getTabTitleJobs = `Jobs`;
 
   constructor(
     private codelistService: CodelistRepositoryService,
@@ -125,7 +125,7 @@ export class AddDcuFormComponent implements OnInit {
     const dcuFormData = this.fillData();
     const request = this.dcuService.createDcu(dcuFormData);
 
-    const successMessage = $localize`Data Concentration Unit was added successfully`;
+    const successMessage = `Data Concentration Unit was added successfully`;
 
     const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
     try {
@@ -141,7 +141,7 @@ export class AddDcuFormComponent implements OnInit {
                 },
                 (errResult) => {
                   const resultErrMessage = errResult.error ? errResult.error : null;
-                  const errMessage = $localize`Error adding scheduler.` + ` ` + resultErrMessage;
+                  const errMessage = `Error adding scheduler.` + ` ` + resultErrMessage;
 
                   this.toast.successToast(successMessage);
                   this.toast.errorToast(errMessage);

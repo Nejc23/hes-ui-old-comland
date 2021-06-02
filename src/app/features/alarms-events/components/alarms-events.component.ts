@@ -11,12 +11,12 @@ import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-
 export class AlarmsEventsComponent implements OnInit {
   show = false;
 
-  getTabTitleAlarms = $localize`Alarms`;
+  getTabTitleAlarms = `Alarms`;
 
   constructor(private breadcrumbService: BreadcrumbService) {}
 
   ngOnInit(): void {
-    this.breadcrumbService.setPageName($localize`Alarms & Events`);
+    this.breadcrumbService.setPageName(`Alarms & Events`);
   }
 
   public onTabSelect(e) {}

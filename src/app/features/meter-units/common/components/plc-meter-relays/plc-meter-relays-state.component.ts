@@ -58,8 +58,8 @@ export class PlcMeterRelaysStateComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.getRelaysState(values);
-    const successMessage = $localize`Action in progress!`;
-    const errorMessage = $localize`Action failed!`;
+    const successMessage = `Action in progress!`;
+    const errorMessage = `Action failed!`;
 
     request.subscribe(
       (result) => {

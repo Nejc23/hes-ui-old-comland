@@ -46,7 +46,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize`Data concentrator unit`);
+    this.breadcrumbService.setPageName(`Data concentrator unit`);
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -211,7 +211,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   saveDcu() {
     const dcuFormData = this.fillData();
     const request = this.dataConcentratorUnitsService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = $localize`Data Concentration Unit was updated successfully`;
+    const successMessage = `Data Concentration Unit was updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(

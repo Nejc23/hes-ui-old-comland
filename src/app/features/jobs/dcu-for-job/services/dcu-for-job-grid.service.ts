@@ -84,43 +84,43 @@ export class DcuForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: `Select/deselect all`
       },
       {
         field: 'name',
-        headerName: $localize`Name`,
+        headerName: `Name`,
         pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: `Name`
       },
       {
         field: 'id',
-        headerName: $localize`ID`,
+        headerName: `ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`ID`
+        headerTooltip: `ID`
       },
       {
         field: 'type',
-        headerName: $localize`Type`,
+        headerName: `Type`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: $localize`Type`
+        headerTooltip: `Type`
       },
       {
         field: 'vendor',
-        headerName: $localize`Vendor`,
+        headerName: `Vendor`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Vendor`
+        headerTooltip: `Vendor`
       }
     ];
   }

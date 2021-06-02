@@ -7,10 +7,10 @@ export class AutoTemplatesStaticTextService {
   constructor() {}
 
   get title() {
-    return $localize`Auto Templates`;
+    return `Auto Templates`;
   }
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return `N/A`;
   }
 }

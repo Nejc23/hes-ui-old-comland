@@ -393,7 +393,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       if (!alreadyNewRow) {
         const rule = this.rowData.find((x) => x.autoTemplateRuleId === 'new');
         if (rule != null) {
-          this.toast.infoToast($localize`Aready added empty row for new item!`);
+          this.toast.infoToast(`Aready added empty row for new item!`);
           alreadyNewRow = true;
         }
       }
@@ -431,11 +431,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     if (this.form != null && this.form.get('ruleId').value.localeCompare('new') === 0) {
       const values = this.fillDataNewRule();
       request = this.serviceRepository.createAutoTemplateRule(values);
-      successMessage = $localize`Rule was added successfully`;
+      successMessage = `Rule was added successfully`;
     } else {
       const values = this.fillDataEditRule();
       request = this.serviceRepository.updateAutoTemplateRule(values);
-      successMessage = $localize`Rule was updated successfully`;
+      successMessage = `Rule was updated successfully`;
     }
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
@@ -507,11 +507,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize`Delete`;
+    const operation = `Delete`;
     response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm delete`;
-    component.modalBody = $localize`Do you want to delete rule?`;
+    component.modalTitle = `Confirm delete`;
+    component.modalBody = `Do you want to delete rule?`;
 
     modalRef.result.then(
       (data) => {
@@ -523,10 +523,10 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
             // refresh grid
             this.gridApiJobs.setRowData(this.rowDataJobs);
 
-            this.toast.successToast($localize`Rule deleted!`);
+            this.toast.successToast(`Rule deleted!`);
           },
           (e) => {
-            this.toast.errorToast($localize`Server error!`);
+            this.toast.errorToast(`Server error!`);
           }
         );
       },
@@ -536,11 +536,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     );
 
     /*
-    messageStarted = $localize `Scheduler job deleted!`);
-    messageServerError = $localize `Server error!`);
+    messageStarted =   `Scheduler job deleted!`);
+    messageServerError =   `Server error!`);
 
     const request = this.serviceRepository.deleteAutoTemplateRule(id);
-    this.formUtils.deleteForm(request, $localize `Selected item deleted')).subscribe(
+    this.formUtils.deleteForm(request,   `Selected item deleted')).subscribe(
       (response: any) => {
         this.getData();
       },
@@ -551,11 +551,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   removeForm(jobId: string) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    const operation = $localize`Remove`;
+    const operation = `Remove`;
     // response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm remove`;
-    component.modalBody = $localize`Do you want to remove job from all rules?`;
+    component.modalTitle = `Confirm remove`;
+    component.modalBody = `Do you want to remove job from all rules?`;
 
     modalRef.result.then(
       (data) => {
@@ -581,10 +581,10 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     joinedObservables.subscribe(
       () => {
         this.getData();
-        this.toast.infoToast($localize`Job successfully removed from all rules.`);
+        this.toast.infoToast(`Job successfully removed from all rules.`);
       },
       (err) => {
-        this.toast.errorToast($localize`Failed to remove job from all rules.`);
+        this.toast.errorToast(`Failed to remove job from all rules.`);
       }
     );
   }
@@ -598,7 +598,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const selectedJob: Codelist<string> = this.form.get('selectedJob').value;
 
     if (!selectedJob || !selectedJob.id) {
-      this.toast.errorToast($localize`Select a job to add.`);
+      this.toast.errorToast(`Select a job to add.`);
     }
 
     this.addJobIdToAllRules(selectedJob.id);
@@ -619,12 +619,12 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const joinedObservables = forkJoin(batch);
     joinedObservables.subscribe(
       () => {
-        this.toast.infoToast($localize`Job successfully added to all rules.`);
+        this.toast.infoToast(`Job successfully added to all rules.`);
 
         this.getData();
       },
       (err) => {
-        this.toast.errorToast($localize`Failed to add job to all rules.`);
+        this.toast.errorToast(`Failed to add job to all rules.`);
       }
     );
   }
@@ -640,6 +640,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   ngOnDestroy() {}
 
   getFilterTitle(): string {
-    return $localize`Templates list`;
+    return `Templates list`;
   }
 }

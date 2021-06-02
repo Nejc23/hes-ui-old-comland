@@ -80,7 +80,7 @@ export class PlcMeterMonitorComponent implements OnInit {
     };
 
     const request = this.myGridService.setMonitor(formData);
-    const successMessage = $localize`Set Monitor was successful`;
+    const successMessage = `Set Monitor was successful`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

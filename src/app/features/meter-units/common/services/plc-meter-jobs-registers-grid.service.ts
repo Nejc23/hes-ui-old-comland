@@ -20,22 +20,22 @@ export class PlcMeterJobsRegistersGridService {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`Name`
+        headerName: `Name`,
+        headerTooltip: `Name`
       },
       {
         field: 'deviceType',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Device type`,
-        headerTooltip: $localize`Device type`
+        headerName: `Device type`,
+        headerTooltip: `Device type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: `Description`,
+        headerTooltip: `Description`
       }
     ];
   }

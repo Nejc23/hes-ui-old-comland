@@ -41,11 +41,11 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   noRegisterSelected = false;
 
   public modules: Module[] = AllModules;
-  requiredText = $localize`At least one register must be on the Selected registers list`;
+  requiredText = `At least one register must be on the Selected registers list`;
   columnDefsLeft = [];
   columnDefsRight = [];
 
-  noRowsTemplate = '<span>' + $localize`Drop available registers here.` + '</span>';
+  noRowsTemplate = '<span>' + `Drop available registers here.` + '</span>';
 
   dataLoaded = false;
   actionName = '';
@@ -146,7 +146,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.setDisplaySettings(values);
-    const successMessage = $localize`Meter Unit(s) Display settings set successfuly.`;
+    const successMessage = `Meter Unit(s) Display settings set successfuly.`;
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {

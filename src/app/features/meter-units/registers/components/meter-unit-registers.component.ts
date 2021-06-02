@@ -207,14 +207,14 @@ export class MeterUnitRegistersComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: $localize`Meters`,
+        label: `Meters`,
         params: {},
         url: null
       }
     ];
 
     breadcrumbs.push({
-      label: $localize`Data view`,
+      label: `Data view`,
       params: {},
       url: null
     });
@@ -468,7 +468,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   get placeholderSearch() {
-    return $localize`Search`;
+    return `Search`;
   }
 
   insertedSearchValue(searchValue) {
@@ -476,6 +476,6 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   getFilterTitle(): string {
-    return $localize`Register`;
+    return `Register`;
   }
 }

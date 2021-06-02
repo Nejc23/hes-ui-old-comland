@@ -4,28 +4,28 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AllForJobStaticTextService {
-  public titleBreadCrumbs = $localize`Overview - Meter Units`;
+  public titleBreadCrumbs = `Overview - Meter Units`;
 
   constructor() {}
 
   get headerTitleMeterUnitsAll() {
-    return $localize`Meter Units for`;
+    return `Meter Units for`;
   }
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return `N/A`;
   }
 
   get noRecordsFound() {
-    return $localize`No records found.`;
+    return `No records found.`;
   }
 
   get loadingData() {
-    return $localize`Loading data...`;
+    return `Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
+    return `No filter applied`;
   }
 
   setfilterHeaderText(
@@ -61,51 +61,51 @@ export class AllForJobStaticTextService {
       showChildMBus ||
       showWithoutTemplate
     ) {
-      result = result + $localize`Filtered by: `;
+      result = result + `Filtered by: `;
     }
 
     if (status) {
       additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`status` + additionalString;
+      result = result + `status` + additionalString;
     }
 
     if (vendor) {
       additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`vendor` + additionalString;
+      result = result + `vendor` + additionalString;
     }
 
     if (tag) {
       additionalString = readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`tag` + additionalString;
+      result = result + `tag` + additionalString;
     }
 
     if (readStatuses) {
       additionalString = firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`read status` + additionalString;
+      result = result + `read status` + additionalString;
     }
 
     if (firmware) {
       additionalString = breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`firmware` + additionalString;
+      result = result + `firmware` + additionalString;
     }
 
     if (breakerState) {
       additionalString = showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`disconnector state` + additionalString;
+      result = result + `disconnector state` + additionalString;
     }
 
     if (showChildMBus) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result = result + $localize`show child MBus` + additionalString;
+      result = result + `show child MBus` + additionalString;
     }
 
     if (showWithoutTemplate) {
       additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result = result + $localize`show without template` + additionalString;
+      result = result + `show without template` + additionalString;
     }
 
     if (showOnlyReadyForActivation) {
-      result = result + $localize`show only ready for activation`;
+      result = result + `show only ready for activation`;
     }
 
     return result;

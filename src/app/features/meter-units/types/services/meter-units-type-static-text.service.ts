@@ -5,40 +5,40 @@ import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interf
   providedIn: 'root'
 })
 export class MeterUnitsTypeStaticTextService {
-  // public titleBreadCrumbs = $localize`Overview - Meter Units`;
+  // public titleBreadCrumbs =  `Overview - Meter Units`;
 
   constructor() {}
 
   get headerTitleMeterUnitsType() {
-    return $localize`Meters`;
+    return `Meters`;
   }
   /*
   get breadcrumbNameDCU() {
-    return $localize `Overview - Data Concentrator Units`;
+    return   `Overview - Data Concentrator Units`;
   }
 */
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return `N/A`;
   }
 
   get notSetText() {
-    return $localize`Not set`;
+    return `Not set`;
   }
 
   get noRecordsFound() {
-    return $localize`No records found. You may need to adjust your search or filter parameters.`;
+    return `No records found. You may need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {
-    return $localize`Loading data...`;
+    return `Loading data...`;
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filters applied`;
+    return `No filters applied`;
   }
 
   get nextPlannedReadText() {
-    return $localize`Next planned read` + ' ';
+    return `Next planned read` + ' ';
   }
 
   getFiltersInfo(
@@ -99,56 +99,56 @@ export class MeterUnitsTypeStaticTextService {
       protocol ||
       medium
     ) {
-      result.text += $localize`Filtered by: `;
+      result.text += `Filtered by: `;
     }
 
     if (status) {
-      result.text += $localize`status` + separator;
+      result.text += `status` + separator;
       result.count++;
     }
 
     if (protocol) {
-      result.text += $localize`protocol` + separator;
+      result.text += `protocol` + separator;
       result.count++;
     }
 
     if (vendor) {
-      result.text += $localize`vendor` + separator;
+      result.text += `vendor` + separator;
       result.count++;
     }
 
     if (medium) {
-      result.text += $localize`medium` + separator;
+      result.text += `medium` + separator;
       result.count++;
     }
 
     if (tag) {
-      result.text += $localize`tag` + separator;
+      result.text += `tag` + separator;
       result.count++;
     }
 
     if (readStatuses) {
-      result.text += $localize`read status` + separator;
+      result.text += `read status` + separator;
       result.count++;
     }
 
     if (firmware) {
-      result.text += $localize`firmware` + separator;
+      result.text += `firmware` + separator;
       result.count++;
     }
 
     if (disconnectorState) {
-      result.text += $localize`disconnector state` + separator;
+      result.text += `disconnector state` + separator;
       result.count++;
     }
 
     if (ciiState) {
-      result.text += $localize`CII state` + separator;
+      result.text += `CII state` + separator;
       result.count++;
     }
 
     if (showOptionFilter) {
-      result.text += $localize`show option` + separator;
+      result.text += `show option` + separator;
       result.count++;
     }
 

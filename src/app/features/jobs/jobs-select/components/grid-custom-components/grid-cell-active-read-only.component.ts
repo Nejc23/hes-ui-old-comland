@@ -12,9 +12,9 @@ export class GridCellActiveReadOnlyComponent implements ICellRendererAngularComp
   @ViewChild('activeSwitch', { static: true }) activeSwitch;
 
   public params: any;
-  messageEnabled = $localize`Scheduler job enabled!`;
-  messageDisabled = $localize`Scheduler job disabled!`;
-  messageServerError = $localize`Server error!`;
+  messageEnabled = `Scheduler job enabled!`;
+  messageDisabled = `Scheduler job disabled!`;
+  messageServerError = `Server error!`;
 
   constructor(private modalService: ModalService, private toast: ToastNotificationService, private service: JobsService) {}
   // called on init
@@ -30,6 +30,6 @@ export class GridCellActiveReadOnlyComponent implements ICellRendererAngularComp
 
   // set tooltip text
   setToolTip(value: boolean) {
-    return value ? $localize`Active` : $localize`Inactive`;
+    return value ? `Active` : `Inactive`;
   }
 }

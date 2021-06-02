@@ -20,23 +20,23 @@ export class RegistersGridService {
         field: 'timestamp',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Timestamp`,
-        headerTooltip: $localize`Timestamp`,
+        headerName: `Timestamp`,
+        headerTooltip: `Timestamp`,
         cellRendererFramework: GridCellDateComponent
       },
       {
         field: 'value',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Value`,
-        headerTooltip: $localize`Value`
+        headerName: `Value`,
+        headerTooltip: `Value`
       },
       {
         field: 'status',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Status`,
-        headerTooltip: $localize`Status`
+        headerName: `Status`,
+        headerTooltip: `Status`
       }
     ];
   }
@@ -47,23 +47,23 @@ export class RegistersGridService {
         field: 'timestamp',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Timestamp`,
-        headerTooltip: $localize`Timestamp`,
+        headerName: `Timestamp`,
+        headerTooltip: `Timestamp`,
         cellRendererFramework: GridCellDateComponent
       },
       {
         field: 'value',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Id`,
-        headerTooltip: $localize`Id`
+        headerName: `Id`,
+        headerTooltip: `Id`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: `Description`,
+        headerTooltip: `Description`
       }
     ];
   }

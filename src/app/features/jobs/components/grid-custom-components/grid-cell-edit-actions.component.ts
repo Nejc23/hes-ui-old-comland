@@ -21,9 +21,9 @@ import { PermissionService } from 'src/app/core/permissions/services/permission.
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
-  messageDeleteStarted = $localize`Scheduler job deleted!`;
-  messageStarted = $localize`Scheduled job started!`;
-  messageServerError = $localize`Server error!`;
+  messageDeleteStarted = `Scheduler job deleted!`;
+  messageStarted = `Scheduled job started!`;
+  messageServerError = `Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -50,11 +50,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize`Execute`;
+    const operation = `Execute`;
     response = this.service.executeSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm operation`;
-    component.modalBody = $localize`Do you want to execute scheduler job now`;
+    component.modalTitle = `Confirm operation`;
+    component.modalBody = `Do you want to execute scheduler job now`;
 
     modalRef.result.then(
       (data) => {
@@ -255,11 +255,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize`Delete`;
+    const operation = `Delete`;
     response = this.service.deleteSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm delete`;
-    component.modalBody = $localize`Do you want to delete scheduler job?`;
+    component.modalTitle = `Confirm delete`;
+    component.modalBody = `Do you want to delete scheduler job?`;
 
     modalRef.result.then(
       (data) => {
@@ -285,11 +285,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'run':
-        return $localize`Execute job`;
+        return `Execute job`;
       case 'edit':
-        return $localize`Edit job`;
+        return `Edit job`;
       case 'delete':
-        return $localize`Delete job`;
+        return `Delete job`;
     }
     return '';
   }

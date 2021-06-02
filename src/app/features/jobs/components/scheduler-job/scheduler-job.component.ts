@@ -46,7 +46,7 @@ export class SchedulerJobComponent implements OnInit {
   form: FormGroup;
 
   noRegisters = false;
-  requiredText = $localize`Required field`;
+  requiredText = `Required field`;
 
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
@@ -72,44 +72,44 @@ export class SchedulerJobComponent implements OnInit {
   addJobs: AddJobParams[] = [
     {
       jobType: JobTypeEnumeration.reading,
-      jobName: $localize`Reading`,
-      deviceType: $localize`METER`,
+      jobName: `Reading`,
+      deviceType: `METER`,
       icon: 'line_weight',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
     },
     {
       jobType: JobTypeEnumeration.discovery,
-      jobName: $localize`Discovery`,
-      deviceType: $localize`DC`,
+      jobName: `Discovery`,
+      deviceType: `DC`,
       icon: 'search',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.timeSync,
-      jobName: $localize`Time synchronization`,
-      deviceType: $localize`DC`,
+      jobName: `Time synchronization`,
+      deviceType: `DC`,
       icon: 'restore',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.readEvents,
-      jobName: $localize`Read events`,
-      deviceType: $localize`DC`,
+      jobName: `Read events`,
+      deviceType: `DC`,
       icon: 'line_style',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.topology,
-      jobName: $localize`Topology`,
-      deviceType: $localize`DC`,
+      jobName: `Topology`,
+      deviceType: `DC`,
       icon: 'share',
       isIconOutlined: true,
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.alarmNotification,
-      jobName: $localize`Notification`,
-      deviceType: $localize`SYSTEM`,
+      jobName: `Notification`,
+      deviceType: `SYSTEM`,
       icon: 'notification_important',
       isIconOutlined: true,
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Alarms)
@@ -199,22 +199,22 @@ export class SchedulerJobComponent implements OnInit {
   setTitle(): string {
     switch (this.jobType) {
       case JobTypeEnumeration.discovery: {
-        return $localize`Discovery Job`;
+        return `Discovery Job`;
       }
       case JobTypeEnumeration.readEvents: {
-        return $localize`DC Read events job`;
+        return `DC Read events job`;
       }
       case JobTypeEnumeration.timeSync: {
-        return $localize`DC Time sync job`;
+        return `DC Time sync job`;
       }
       case JobTypeEnumeration.topology: {
-        return $localize`Topology job`;
+        return `Topology job`;
       }
       case JobTypeEnumeration.alarmNotification: {
-        return $localize`Alarm notification`;
+        return `Alarm notification`;
       }
       default: {
-        return $localize`Reading Jobs`;
+        return `Reading Jobs`;
       }
     }
   }
@@ -396,9 +396,9 @@ export class SchedulerJobComponent implements OnInit {
     }
 
     let request: Observable<SchedulerJob> = null;
-    let operation = $localize`added`;
+    let operation = `added`;
     if (this.selectedJobId) {
-      operation = $localize`updated`;
+      operation = `updated`;
       request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
 
       if (this.showAlarmNotification) {
@@ -411,7 +411,7 @@ export class SchedulerJobComponent implements OnInit {
         request = this.meterService.createNotificationJob(values);
       }
     }
-    const successMessage = $localize`Job was` + ` ${operation} ` + $localize`successfully`;
+    const successMessage = `Job was` + ` ${operation} ` + `successfully`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (addNew) {
@@ -423,7 +423,7 @@ export class SchedulerJobComponent implements OnInit {
       },
       (error) => {
         console.log('Error saving job', error);
-        // this.toast.errorToast($localize`Error saving job: ` + error);
+        // this.toast.errorToast( `Error saving job: ` + error);
       } // error
     );
   }
@@ -530,7 +530,7 @@ export class SchedulerJobComponent implements OnInit {
 
   getSelectedRowsCount() {
     if (this.selectedRowsCount) {
-      return $localize`(${this.selectedRowsCount} selected)`;
+      return `(${this.selectedRowsCount} selected)`;
     }
 
     return '';

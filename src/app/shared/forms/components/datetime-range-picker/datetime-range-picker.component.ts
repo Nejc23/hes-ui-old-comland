@@ -23,7 +23,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   today = false;
 
   locale: LocaleConfig = {
-    applyLabel: $localize`Apply`,
+    applyLabel: `Apply`,
     customRangeLabel: ' - ',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
@@ -31,12 +31,12 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   };
 
   defaultRanges: any = {
-    [$localize`Today`]: [moment(), moment()],
-    [$localize`Yesterday`]: [moment().subtract(1, 'days'), moment()],
-    [$localize`Last 7 Days`]: [moment().subtract(6, 'days'), moment()],
-    [$localize`Last 30 Days`]: [moment().subtract(29, 'days'), moment()],
-    [$localize`This Month`]: [moment().startOf('month'), moment()],
-    [$localize`Last Month`]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+    [`Today`]: [moment(), moment()],
+    [`Yesterday`]: [moment().subtract(1, 'days'), moment()],
+    [`Last 7 Days`]: [moment().subtract(6, 'days'), moment()],
+    [`Last 30 Days`]: [moment().subtract(29, 'days'), moment()],
+    [`This Month`]: [moment().startOf('month'), moment()],
+    [`Last Month`]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
   };
 
   constructor(@Inject(LOCALE_ID) public locale_id: string) {
@@ -54,11 +54,8 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   updateRange(range) {
-    if (range.label?.toLowerCase() === $localize`Today`.toLowerCase()) this.today = true;
-    if (
-      range.label?.toLowerCase() === $localize`Today`.toLowerCase() ||
-      range.label?.toLowerCase() === $localize`This Month`.toLowerCase()
-    ) {
+    if (range.label?.toLowerCase() === `Today`.toLowerCase()) this.today = true;
+    if (range.label?.toLowerCase() === `Today`.toLowerCase() || range.label?.toLowerCase() === `This Month`.toLowerCase()) {
       this.form.controls.endTime.setValue(moment().startOf('hour').format('HH:mm'));
     } else {
       this.form.controls.endTime.setValue('00:00');

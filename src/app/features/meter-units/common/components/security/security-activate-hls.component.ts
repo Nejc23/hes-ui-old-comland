@@ -58,14 +58,14 @@ export class SecurityActivateHlsComponent implements OnInit {
   onConfirm() {
     const values = this.fillData();
     const request = this.gridLinkService.postSecurityEnableHls(values);
-    const successMessage = $localize`Meter Units activate hls successfull`;
+    const successMessage = `Meter Units activate hls successfull`;
 
     this.gridLinkService.postSecurityEnableHls(values).subscribe(
       (sucess) => {
         this.toast.successToast(successMessage);
       },
       (error) => {
-        console.log($localize`Error on postSecurityEnableHls`, error);
+        console.log(`Error on postSecurityEnableHls`, error);
       }
     );
   }

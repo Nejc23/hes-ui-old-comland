@@ -23,8 +23,8 @@ export class DateRangePickerComponent implements OnInit {
   popupWidth: string;
   errors: string[];
 
-  startDatePlaceholder = $localize`set start date`;
-  endDatePlaceholder = $localize`set end date`;
+  startDatePlaceholder = `set start date`;
+  endDatePlaceholder = `set end date`;
 
   controlId: string;
 
@@ -210,11 +210,11 @@ export class DateRangePickerComponent implements OnInit {
     this.errors = [];
 
     if (this.formUtils.shouldInputShowErrors(this.form.get(this.startProperty))) {
-      this.errors.push($localize`Start time is required.`);
+      this.errors.push(`Start time is required.`);
     }
 
     if (this.formUtils.shouldInputShowErrors(this.form.get(this.endProperty))) {
-      this.errors.push($localize`End time is required.`);
+      this.errors.push(`End time is required.`);
     }
 
     return this.errors.length > 0;

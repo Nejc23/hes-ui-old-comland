@@ -38,35 +38,35 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: `Select/deselect all`
       },
       {
         field: 'name',
-        headerName: $localize`Name`,
+        headerName: `Name`,
         pinned: false,
         sortable: true,
         filter: false,
         sort: 'asc',
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: `Name`
       },
       {
         field: 'id',
-        headerName: $localize`ID`,
+        headerName: `ID`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`ID`
+        headerTooltip: `ID`
       },
       {
         field: 'ip',
-        headerName: $localize`IP`,
+        headerName: `IP`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: $localize`IP`
+        headerTooltip: `IP`
       }
     ];
   }
@@ -84,7 +84,7 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: `Select/deselect all`
       },
       {
         field: 'name',
@@ -92,30 +92,30 @@ export class DataConcentratorUnitsSelectGridService {
         sortable: true,
         suppressMovable: true,
         sort: 'asc',
-        headerName: $localize`Name`,
-        headerTooltip: $localize`Name`
+        headerName: `Name`,
+        headerTooltip: `Name`
       },
       {
         field: 'id',
-        headerName: $localize`ID`,
+        headerName: `ID`,
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`ID`
+        headerTooltip: `ID`
       },
       {
         field: 'ip',
-        headerName: $localize`IP`,
+        headerName: `IP`,
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: $localize`IP`
+        headerTooltip: `IP`
       }
     ];
   }

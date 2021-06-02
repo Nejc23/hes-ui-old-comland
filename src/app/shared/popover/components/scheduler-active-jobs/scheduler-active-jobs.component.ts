@@ -74,10 +74,10 @@ export class SchedulerActiveJobsComponent implements OnInit {
 
   // set momemnt text (last communication) out of date and time
   setMomentNextRun(time: string): string {
-    return time != null && time.length > 0 ? moment(time).fromNow() : $localize`N/A`;
+    return time != null && time.length > 0 ? moment(time).fromNow() : `N/A`;
   }
 
   getShowAllText(): string {
-    return `${$localize`Show all`} ${this.allActiveJobs.length} ${$localize`jobs`}`;
+    return `${`Show all`} ${this.allActiveJobs.length} ${`jobs`}`;
   }
 }

@@ -30,19 +30,19 @@ export class RegistersGridComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.localeText = {
       // for side panel
-      columns: $localize`Columns`,
-      filters: $localize`Filters`,
+      columns: `Columns`,
+      filters: `Filters`,
 
       // for filter panel
-      page: $localize`page`,
-      more: $localize`more`,
-      to: $localize`to`,
-      of: $localize`of`,
-      next: $localize`next`,
-      last: $localize`last`,
-      first: $localize`first`,
-      previous: $localize`previous`,
-      loadingOoo: $localize`loading...`
+      page: `page`,
+      more: `more`,
+      to: `to`,
+      of: `of`,
+      next: `next`,
+      last: `last`,
+      first: `first`,
+      previous: `previous`,
+      loadingOoo: `loading...`
     };
 
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {

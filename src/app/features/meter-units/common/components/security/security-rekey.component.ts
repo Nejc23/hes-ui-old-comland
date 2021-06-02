@@ -94,7 +94,7 @@ export class SecurityRekeyComponent implements OnInit {
     } else {
       const values = this.fillData();
       const request = this.gridLinkService.postSecurityRekey(values);
-      const successMessage = $localize`Meter Units re-keying was successful`;
+      const successMessage = `Meter Units re-keying was successful`;
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         (result) => {
           this.modal.close();

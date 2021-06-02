@@ -19,17 +19,17 @@ import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/
 export class PlcMeterFwUpgradeComponent implements OnInit {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
-  uploadDropSubtitle = $localize`Selected file must be in .img, .bin or .dat file format.`;
+  uploadDropSubtitle = `Selected file must be in .img, .bin or .dat file format.`;
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize`Required field`;
-  messageServerError = $localize`Server error!`;
+  configRequiredText = `Required field`;
+  messageServerError = `Server error!`;
   actionRequest: IActionRequestParams;
   uploadSaveUrl = `${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
-  allowedExtExplainText = $localize`can only upload one file.`;
+  allowedExtExplainText = `can only upload one file.`;
   acceptExtensions = ['.img', '.bin', '.dat'];
   public files: Array<any>;
   activate = false;
@@ -95,7 +95,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.createFwUpgrade(values);
-    const successMessage = $localize`Meter image upload was successfull`;
+    const successMessage = `Meter image upload was successfull`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (result && result.requestId.length > 0) {

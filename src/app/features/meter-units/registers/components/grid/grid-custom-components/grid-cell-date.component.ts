@@ -6,7 +6,7 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
   templateUrl: './grid-cell-date.component.html'
 })
 export class GridCellDateComponent implements ICellRendererAngularComp {
-  notAvailableText = $localize`N/A`;
+  notAvailableText = `N/A`;
   public params: any;
 
   constructor() {}

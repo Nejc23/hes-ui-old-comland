@@ -59,7 +59,7 @@ export class StatusJobComponent implements OnInit, OnDestroy {
       (error) => {
         console.log('error: ' + error);
         const resultErrMessage = error.error ? error.error : null;
-        const errMessage = $localize`Error getting status job ` + ` ` + resultErrMessage;
+        const errMessage = `Error getting status job ` + ` ` + resultErrMessage;
         this.toast.errorToast(errMessage);
       }
     );

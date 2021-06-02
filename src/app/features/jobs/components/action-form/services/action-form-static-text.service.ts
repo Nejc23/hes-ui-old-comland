@@ -7,7 +7,7 @@ export class ActionFormStaticTextService {
   constructor() {}
 
   get placeholderSearch() {
-    return $localize`Search`;
+    return `Search`;
   }
   /* deprecated
   preventCloseDropDownWhenClickInsideMenu() {

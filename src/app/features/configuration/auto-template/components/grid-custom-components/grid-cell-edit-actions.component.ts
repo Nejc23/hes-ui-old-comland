@@ -55,13 +55,13 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'edit':
-        return $localize`Edit rule`;
+        return `Edit rule`;
       case 'delete':
-        return $localize`Delete rule`;
+        return `Delete rule`;
       case 'save':
-        return $localize`Save`;
+        return `Save`;
       case 'cancel':
-        return $localize`Cancel`;
+        return `Cancel`;
     }
     return '';
   }

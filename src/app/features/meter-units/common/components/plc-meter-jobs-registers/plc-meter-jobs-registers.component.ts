@@ -19,7 +19,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
   public selectedRowsCount: number;
 
   noRegisters = false;
-  registersRequiredText = $localize`Required field`;
+  registersRequiredText = `Required field`;
 
   form: FormGroup;
 
@@ -32,7 +32,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
 
   public modules: Module[] = AllModules;
 
-  requiredText = $localize`One register must be selected`;
+  requiredText = `One register must be selected`;
   noRegisterSelected = false;
   selectedRegister: TemplatesList = null;
 
@@ -84,7 +84,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.postMyGridAddDeviceTemplate(values);
-    const successMessage = $localize`Adding template to device(s) succeeded!`;
+    const successMessage = `Adding template to device(s) succeeded!`;
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: $localize`Alarms & Events`,
+      breadcrumb: `Alarms & Events`,
       permission: PermissionEnumerator.View_Alarms
     },
     children: [
@@ -33,13 +33,13 @@ export class AlarmsEventsRoutingModule {
         ? x.children.map((y) => {
             y.children !== undefined
               ? y.children.map((z) =>
-                  z.data.breadcrumb !== null ? (z.data.breadcrumb = $localize`${z.data.breadcrumb}`) : (z.data.breadcrumb = null)
+                  z.data.breadcrumb !== null ? (z.data.breadcrumb = `${z.data.breadcrumb}`) : (z.data.breadcrumb = null)
                 )
               : (y = y);
-            y.data.breadcrumb !== null ? (y.data.breadcrumb = $localize`${y.data.breadcrumb}`) : (y.data.breadcrumb = null);
+            y.data.breadcrumb !== null ? (y.data.breadcrumb = `${y.data.breadcrumb}`) : (y.data.breadcrumb = null);
           })
         : (x = x);
-      x.data.breadcrumb = $localize`${x.data.breadcrumb}`;
+      x.data.breadcrumb = `${x.data.breadcrumb}`;
     });
     // routes.forEach(x => (x.data.breadcrumb = i18n(x.data.breadcrumb)));
   }

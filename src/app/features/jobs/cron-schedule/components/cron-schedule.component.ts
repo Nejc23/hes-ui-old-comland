@@ -15,24 +15,24 @@ import cron from 'cron-validate';
 export class CronScheduleComponent implements OnInit {
   @Input() cronExpression: string;
 
-  registersRequiredText = $localize`Required field`;
-  cronInvalidError = $localize`Cron expression is invalid.`;
-  tabStripTitleMinutes = $localize`Minutes`;
-  tabStripTitleHourly = $localize`Hourly`;
-  tabStripTitleDaily = $localize`Daily`;
-  tabStripTitleWeekly = $localize`Weekly`;
-  tabStripTitleMonthly = $localize`Monthly`;
-  tabStripTitleAdvanced = $localize`Advanced`;
+  registersRequiredText = `Required field`;
+  cronInvalidError = `Cron expression is invalid.`;
+  tabStripTitleMinutes = `Minutes`;
+  tabStripTitleHourly = `Hourly`;
+  tabStripTitleDaily = `Daily`;
+  tabStripTitleWeekly = `Weekly`;
+  tabStripTitleMonthly = `Monthly`;
+  tabStripTitleAdvanced = `Advanced`;
 
   weekDays: Codelist<number>[] = [
-    { id: 8, value: $localize`Mon-Fri` },
-    { id: 2, value: $localize`Mon` },
-    { id: 3, value: $localize`Tue` },
-    { id: 4, value: $localize`Wed` },
-    { id: 5, value: $localize`Thu` },
-    { id: 6, value: $localize`Fri` },
-    { id: 7, value: $localize`Sat` },
-    { id: 1, value: $localize`Sun` }
+    { id: 8, value: `Mon-Fri` },
+    { id: 2, value: `Mon` },
+    { id: 3, value: `Tue` },
+    { id: 4, value: `Wed` },
+    { id: 5, value: `Thu` },
+    { id: 6, value: `Fri` },
+    { id: 7, value: `Sat` },
+    { id: 1, value: `Sun` }
   ];
 
   everyMinutes: Codelist<number>[];
@@ -48,9 +48,9 @@ export class CronScheduleComponent implements OnInit {
 
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: $localize`Every` }];
+  dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: `Every` }];
 
-  dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: $localize`Week day (MON-FRI)` }];
+  dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: `Week day (MON-FRI)` }];
 
   formValues: FormValues;
 
@@ -245,13 +245,13 @@ export class CronScheduleComponent implements OnInit {
   getCronDescription(freq: Frequency) {
     const cronExpression = this.generateCronExpression(freq);
     if (freq === Frequency.Advanced && !this.isAdvancedCronValid) {
-      return $localize`N/A`;
+      return `N/A`;
     }
 
     if (cronExpression && cronExpression !== '') {
       return cronstrue.toString(cronExpression, { locale: this.locale, use24HourTimeFormat: true });
     }
-    return $localize`N/A`;
+    return `N/A`;
   }
 
   generateCronExpression(freq: Frequency = this.selectedFrequency): string {

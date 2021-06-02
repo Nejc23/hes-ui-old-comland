@@ -17,14 +17,14 @@ export class PlcMeterSetDisplaySettingsGridService {
       //   suppressMovable: true,
       //   lockPosition: true,
       //   colId: 'displayRegisterDefinitionId',
-      //   headerTooltip: $localize`Select/deselect all`
+      //   headerTooltip:  `Select/deselect all`
       // },
       {
         field: 'name',
         suppressMenu: true,
         // sortable: true,
-        headerName: $localize`Available reigsters`,
-        headerTooltip: $localize`Available registers`,
+        headerName: `Available reigsters`,
+        headerTooltip: `Available registers`,
         dndSource: true,
         sortable: true
       }
@@ -32,8 +32,8 @@ export class PlcMeterSetDisplaySettingsGridService {
       //   field: 'obisCode',
       //   suppressMenu: true,
       //   sortable: true,
-      //   headerName: $localize`Obis code`,
-      //   headerTooltip: $localize`Obis code`
+      //   headerName:  `Obis code`,
+      //   headerTooltip:  `Obis code`
       // }
     ];
   }
@@ -50,22 +50,22 @@ export class PlcMeterSetDisplaySettingsGridService {
       //   suppressMovable: true,
       //   lockPosition: true,
       //   colId: 'displayRegisterDefinitionId',
-      //   headerTooltip: $localize`Select/deselect all`
+      //   headerTooltip:  `Select/deselect all`
       // },
       {
         field: 'name',
         suppressMenu: true,
         // sortable: true,
-        headerName: $localize`Selected registers *`,
-        headerTooltip: $localize`Selected registers`,
+        headerName: `Selected registers *`,
+        headerTooltip: `Selected registers`,
         dndSource: true
       }
       // {
       //   field: 'obisCode',
       //   suppressMenu: true,
       //   sortable: true,
-      //   headerName: $localize`Obis code`,
-      //   headerTooltip: $localize`Obis code`
+      //   headerName:  `Obis code`,
+      //   headerTooltip:  `Obis code`
       // }
     ];
   }

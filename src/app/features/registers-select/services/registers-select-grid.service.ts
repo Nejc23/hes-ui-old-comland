@@ -20,29 +20,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`,
+        headerTooltip: `Select/deselect all`,
         headerCheckboxSelection: false
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`Name`
+        headerName: `Name`,
+        headerTooltip: `Name`
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Type`,
-        headerTooltip: $localize`Type`
+        headerName: `Type`,
+        headerTooltip: `Type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: `Description`,
+        headerTooltip: `Description`
       }
     ];
   }
@@ -58,29 +58,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`,
+        headerTooltip: `Select/deselect all`,
         headerCheckboxSelection: true
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`Name`
+        headerName: `Name`,
+        headerTooltip: `Name`
       },
       {
         field: 'type',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Type`,
-        headerTooltip: $localize`Type`
+        headerName: `Type`,
+        headerTooltip: `Type`
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: `Description`,
+        headerTooltip: `Description`
       }
     ];
   }

@@ -37,8 +37,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellTimestampComponent',
-        headerName: $localize`Timestamp`,
-        headerTooltip: $localize`Timestamp`,
+        headerName: `Timestamp`,
+        headerTooltip: `Timestamp`,
         resizable: false
       },
       {
@@ -46,8 +46,8 @@ export class AlarmsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Id`,
-        headerTooltip: $localize`Id`,
+        headerName: `Id`,
+        headerTooltip: `Id`,
         resizable: false
       },
       {
@@ -56,8 +56,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellSeverityComponent',
-        headerName: $localize`Severity`,
-        headerTooltip: $localize`Severity`,
+        headerName: `Severity`,
+        headerTooltip: `Severity`,
         resizable: false
       },
       {
@@ -66,8 +66,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellSourceComponent',
-        headerName: $localize`Source type`,
-        headerTooltip: $localize`Source type`,
+        headerName: `Source type`,
+        headerTooltip: `Source type`,
         resizable: false
       },
       {
@@ -76,8 +76,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellProtocolComponent',
-        headerName: $localize`Protocol`,
-        headerTooltip: $localize`Protocol`,
+        headerName: `Protocol`,
+        headerTooltip: `Protocol`,
         resizable: false
       },
       {
@@ -86,8 +86,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellManufacturerComponent',
-        headerName: $localize`Manufacturer`,
-        headerTooltip: $localize`Manufacturer`,
+        headerName: `Manufacturer`,
+        headerTooltip: `Manufacturer`,
         resizable: false
       },
       {
@@ -96,8 +96,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellSourceComponent',
-        headerName: $localize`Source`,
-        headerTooltip: $localize`Source`,
+        headerName: `Source`,
+        headerTooltip: `Source`,
         resizable: false
       },
       {
@@ -105,8 +105,8 @@ export class AlarmsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`,
+        headerName: `Description`,
+        headerTooltip: `Description`,
         resizable: false
       }
     ];

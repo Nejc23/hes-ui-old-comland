@@ -70,7 +70,7 @@ export class EditDcuFormComponent implements OnInit {
   saveDcu() {
     const dcuFormData = this.fillData();
     const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = $localize`Data Concentration Unit was updated successfully`;
+    const successMessage = `Data Concentration Unit was updated successfully`;
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
