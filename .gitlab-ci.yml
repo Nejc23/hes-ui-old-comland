@@ -1,0 +1,193 @@
+image: node:latest
+
+stages:
+  - install
+  - test
+  - build
+  - deploy
+
+.build: &build
+  stage: build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "release" || $CI_COMMIT_BRANCH == "master" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - when: never
+  before_script:
+    - node -v && npm -v
+    - npm ci
+    - npm run postinstall
+  script:
+    - npm run build-production:${CI_JOB_NAME}
+  cache:
+    key:
+      files:
+        - package.json
+    paths:
+      - node_modules
+    policy: pull
+  artifacts:
+    name: "$CI_JOB_NAME-$CI_COMMIT_REF_NAME"
+    paths:
+      - dist/${CI_JOB_NAME}/
+    expire_in: 3 days
+
+.deploy: &deploy
+  stage: deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "release" || $CI_COMMIT_BRANCH == "master" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: manual
+      allow_failure: true
+    - when: never
+
+.deploy_amera: &deploy_amera
+  <<: *deploy
+  needs: ["amera"]
+  script:
+    - .\upgrade.ps1 'C:\Program Files\Enerdat\ePointHES_UI' 'dist\amera'
+
+.deploy_ePointHES: &deploy_ePointHES
+  <<: *deploy
+  needs: ["ePointHES"]
+  script:
+    - .\upgrade.ps1 'C:\Program Files\Enerdat\ePointHES_UI' 'dist\ePointHES'
+
+.deploy_myGrid: &deploy_myGrid
+  <<: *deploy
+  needs: ["myGrid"]
+  script:
+    - .\upgrade.ps1 'C:\Program Files\Enerdat\ePointHES_UI' 'dist\myGrid'
+
+Dependencies:
+  stage: install
+  script:
+    - npm ci
+    - npm run postinstall
+  cache:
+    key:
+      files:
+        - package.json
+    paths:
+      - node_modules
+      - src/environments/version.ts
+  only:
+    changes:
+      - package.json
+
+Unit tests:
+  stage: test
+  script:
+    - echo "I am just a placeholder for now :)"
+
+amera:
+  <<: *build
+
+ePointHES:
+  <<: *build
+
+myGrid:
+  <<: *build
+
+DEV - Amera:
+  <<: *deploy_amera
+  environment:
+    name: development
+  tags:
+    - comlandDeploy
+
+DEV - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: development
+  tags:
+    - comlandDeploy
+
+DEV - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: development
+  tags:
+    - comlandDeploy
+
+TEST03 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: test03
+  tags:
+    - Sisrvtest03Deploy
+
+TEST03 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: test03
+  tags:
+    - Sisrvtest03Deploy
+
+TEST03 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: test03
+  tags:
+    - Sisrvtest03Deploy
+
+TEST04 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: test04
+  tags:
+    - Sisrvtest04Deploy
+
+TEST04 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: test04
+  tags:
+    - Sisrvtest04Deploy
+
+TEST04 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: test04
+  tags:
+    - Sisrvtest04Deploy
+
+QA - Amera:
+  <<: *deploy_amera
+  environment:
+    name: qa
+  tags:
+    - QAServer
+
+QA - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: qa
+  tags:
+    - QAServer
+
+QA - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: qa
+  tags:
+    - QAServer
+
+INNOGY01 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: innogy01
+  tags:
+    - Sisrvinnogy01Deploy
+
+INNOGY01 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: innogy01
+  tags:
+    - Sisrvinnogy01Deploy
+
+INNOGY01 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: innogy01
+  tags:
+    - Sisrvinnogy01Deploy
