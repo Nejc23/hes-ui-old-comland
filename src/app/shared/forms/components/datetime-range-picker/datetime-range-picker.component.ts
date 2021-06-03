@@ -40,6 +40,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   };
 
   constructor(@Inject(LOCALE_ID) public locale_id: string) {
+    debugger;
     moment.locale(locale_id);
   }
 

@@ -64,12 +64,15 @@ export function HttpLoaderFactory(http: HttpClient) {
       useFactory: appInitializerFn,
       multi: true,
       deps: [AppConfigService]
+    },
+    {
+      provide: LOCALE_ID,
+      useFactory: (localeService: LanguageService) => {
+        console.log('locale ID ------------ >', localeService.selectedLang);
+        return localeService.selectedLang;
+      },
+      deps: [LanguageService]
     }
-    // {
-    //   provide: LOCALE_ID,
-    //   deps: [LanguageService], //some service handling global settings
-    //   useFactory: (languageService) => languageService.selectedLangLocale() //returns locale string
-    // }
   ],
   imports: [
     BrowserModule,

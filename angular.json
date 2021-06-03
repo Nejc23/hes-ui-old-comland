@@ -119,14 +119,6 @@
                 ]
               }
             },
-            "develop-sl": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ]
-            },
             "production": {
               "outputPath": "dist/hes",
               "deleteOutputPath": true,
@@ -309,20 +301,11 @@
             "production-ePointHES": {
               "browserTarget": "myGrid:build:production-ePointHES"
             },
-            "develop-sl": {
-              "browserTarget": "myGrid:build:develop-sl"
-            },
-            "develop-de": {
-              "browserTarget": "myGrid:build:develop-de"
-            },
             "develop-amera": {
               "browserTarget": "myGrid:build:develop-amera"
             },
             "develop-ePointHES": {
               "browserTarget": "myGrid:build:develop-ePointHES"
-            },
-            "sl": {
-              "browserTarget": "myGrid:build:sl"
             }
           }
         },
