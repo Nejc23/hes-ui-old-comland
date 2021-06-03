@@ -3,48 +3,53 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
+import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
 
 @Component({
   selector: 'app-grid-cell-threshold',
   templateUrl: './grid-cell-threshold.component.html'
 })
 export class GridCellThresholdComponent implements ICellRendererAngularComp {
-  notAvailableText = this.statictextService.notAvailableTekst;
-  notSetText = this.statictextService.notSetText;
-  isNotSet = false;
+  notAvailableText = this.staticTextService.notAvailableTekst;
+  notSetText = this.staticTextService.notSetText;
   public params: any;
   oldReadingDate = false;
   readOnText = `Read on`;
   preconfiguredThreshold = environment.thresholdValue;
   thresholdValue = this.notAvailableText;
 
-  constructor(private statictextService: MeterUnitsTypeStaticTextService) {}
+  constructor(private staticTextService: MeterUnitsTypeStaticTextService) {}
+
   // called on init
   agInit(params: any): void {
     this.params = params;
+    this.checkDate();
+  }
+
+  isValueSet(): boolean {
     if (this.params?.value?.value !== undefined) {
       if (!this.params.value.value.toLocaleLowerCase().includes('not')) {
         this.thresholdValue = this.params.value.value + ' ' + this.params.value.unit;
-        this.isNotSet = false;
+        return false;
       } else {
         this.thresholdValue = this.notSetText;
-        this.isNotSet = true;
+        return true;
       }
     }
-    this.checkDate();
+    return false;
   }
 
   // called when the cell is refreshed
   refresh(params: any): boolean {
     this.params = params;
+    this.checkDate();
     return true;
   }
 
   checkDate() {
-    //TODO CHECK DATE FORMAT WITH BE
     if (
       this.params.value?.timestamp &&
-      moment(this.params.value.timestamp, 'YYYY-MM-DD hh:mm:ss') < moment().subtract(this.preconfiguredThreshold, 'day')
+      moment(this.params.value.timestamp, dateServerFormat) < moment().subtract(this.preconfiguredThreshold, 'day')
     ) {
       this.oldReadingDate = true;
     }
