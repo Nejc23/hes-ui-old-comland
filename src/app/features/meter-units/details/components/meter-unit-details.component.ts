@@ -204,6 +204,9 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionReadMeter() {
     return PermissionEnumerator.Read_Meter;
   }
+  get permissionSyncTime() {
+    return PermissionEnumerator.Sync_Time;
+  }
 
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
@@ -381,5 +384,8 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.clearAlarms, params, 1);
   }
 
-  // <-- end Operations action click (bulk or selected row)
+  onSyncTime() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.syncTime, params, 1);
+  }
 }

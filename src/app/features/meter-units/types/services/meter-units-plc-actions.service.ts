@@ -535,6 +535,8 @@ export class MeterUnitsPlcActionsService {
         component.checkboxLabel = $localize`Read registers before ` + operationName?.toLowerCase();
         component.checkboxField = 'unconditionalSync';
         component.checkboxValue = false;
+        component.secondConfirmEnabled = true;
+        component.confirmMessage = $localize`Are you sure you would like to trigger un unconditional sync?`;
         break;
     }
     // component.btnConfirmText = operationName;

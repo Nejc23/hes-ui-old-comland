@@ -157,6 +157,12 @@
                                 permissionClearFF,
                                 permissionSetDisplay,
                                 permissionClearAlarms]"></div>
+
+          <div appHideIfPermissionUnauthorized [permission]="permissionSyncTime">
+            <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
+               (click)="onSyncTime()"><span i18n>Synchronize time</span></a>
+          </div>
+
           <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetLimiter, permissionReadMeter]">
             <div class="dropdown-submenu">
               <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Limiter</span></a>
