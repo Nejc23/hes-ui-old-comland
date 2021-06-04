@@ -15,5 +15,6 @@ export enum MeterUnitsTypeEnum {
   relaysMode = 'relaysMode',
   clearAlarms = 'clearAlarms',
   readThresholdsLimiter = 'readThresholdsLimiter',
-  readThresholdsMonitor = 'readThresholdsMonitor'
+  readThresholdsMonitor = 'readThresholdsMonitor',
+  syncTime = 'syncTime'
 }
