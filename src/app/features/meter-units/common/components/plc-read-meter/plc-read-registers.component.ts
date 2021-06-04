@@ -176,7 +176,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);
-    const successMessage = $localize`Read Registers succeeded!`;
+    const successMessage = $localize`Read Meter Objects succeeded!`;
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
