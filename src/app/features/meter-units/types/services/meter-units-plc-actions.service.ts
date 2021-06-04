@@ -532,7 +532,7 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.syncTime:
         response = this.service.synchronizeTime(params);
         operationName = $localize`Synchronize time`;
-        component.checkboxLabel = $localize`Unconditional time synchronization ` + operationName?.toLowerCase();
+        component.checkboxLabel = $localize`Unconditional time synchronization `;
         component.checkboxField = 'unconditionalSync';
         component.checkboxValue = false;
         component.secondConfirmEnabled = true;
