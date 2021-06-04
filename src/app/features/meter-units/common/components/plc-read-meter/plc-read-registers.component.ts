@@ -31,7 +31,7 @@ export class PlcReadRegistersComponent implements OnInit {
   public selectedDeviceIds = [];
   noRegisters = false;
   registersRequiredText = $localize`Required field`;
-  actionName = $localize`Read Registers`;
+  actionName = $localize`Read Meter Objects`;
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
