@@ -536,7 +536,7 @@ export class MeterUnitsPlcActionsService {
         component.checkboxField = 'unconditionalSync';
         component.checkboxValue = false;
         component.secondConfirmEnabled = true;
-        component.confirmMessage = $localize`Are you sure you would like to trigger un unconditional synchronization?`;
+        component.confirmMessage = $localize`Are you sure you would like to trigger unconditional time synchronization?`;
         break;
     }
     // component.btnConfirmText = operationName;
