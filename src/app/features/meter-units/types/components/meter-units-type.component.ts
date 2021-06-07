@@ -316,6 +316,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionReadMeter() {
     return PermissionEnumerator.Read_Meter;
   }
+  get permissionSyncTime() {
+    return PermissionEnumerator.Sync_Time;
+  }
 
   // set form title by selected meter unit type
   private setTitle(id: number) {
@@ -454,9 +457,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.showOptionFilter.length === 0 ||
           this.requestModel.filterModel.showOptionFilter[0].id === 0) &&
         (!this.requestModel.filterModel.protocol || this.requestModel.filterModel.protocol.length === 0) &&
-        (!this.requestModel.filterModel.medium ||
-          this.requestModel.filterModel.medium.length ===
-            0)) /*
+        (!this.requestModel.filterModel.medium || this.requestModel.filterModel.medium.length === 0)) /*
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showWithoutTemplate &&
         !this.requestModel.filterModel.readyForActivation)*/
@@ -1370,5 +1371,15 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       });
       this.gridApi.refreshCells();
     });
+  }
+
+  // popup
+  onSyncTime(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.syncTime,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
   }
 }

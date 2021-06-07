@@ -529,6 +529,15 @@ export class MeterUnitsPlcActionsService {
         response = this.service.readThresholdValues(params);
         operationName = $localize`Read limiter threshold values`;
         break;
+      case MeterUnitsTypeEnum.syncTime:
+        response = this.service.synchronizeTime(params);
+        operationName = $localize`Synchronize time`;
+        component.checkboxLabel = $localize`Unconditional time synchronization `;
+        component.checkboxField = 'unconditionalSync';
+        component.checkboxValue = false;
+        component.secondConfirmEnabled = true;
+        component.confirmMessage = $localize`Are you sure you would like to trigger unconditional time synchronization?`;
+        break;
     }
     // component.btnConfirmText = operationName;
 
