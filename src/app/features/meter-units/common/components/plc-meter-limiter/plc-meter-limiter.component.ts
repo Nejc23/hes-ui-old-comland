@@ -132,6 +132,7 @@ export class PlcMeterLimiterComponent implements OnInit {
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
         modalRef.componentInstance.jobName = this.actionName;
+        modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
       () => {} // error
     );

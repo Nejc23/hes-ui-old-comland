@@ -14,6 +14,7 @@ export class StatusJobComponent implements OnInit, OnDestroy {
 
   @Input() requestId: string = '';
   @Input() jobName: string = '';
+  @Input() deviceCount = 0;
 
   interval = null;
   intervalSeconds = 5;

@@ -134,6 +134,7 @@ export class MeterUnitsPlcActionsService {
           const modalRef = this.modalService.open(StatusJobComponent, options);
           modalRef.componentInstance.requestId = data; // requestId
           modalRef.componentInstance.jobName = actionName;
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -158,6 +159,7 @@ export class MeterUnitsPlcActionsService {
           const modalRef = this.modalService.open(StatusJobComponent, options);
           modalRef.componentInstance.requestId = data; // requestId
           modalRef.componentInstance.jobName = actionName;
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -567,6 +569,7 @@ export class MeterUnitsPlcActionsService {
             const modalRef = this.modalService.open(StatusJobComponent, options);
             modalRef.componentInstance.requestId = value.requestId;
             modalRef.componentInstance.jobName = operationName;
+            modalRef.componentInstance.deviceCount = value.deviceIds.length;
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);
