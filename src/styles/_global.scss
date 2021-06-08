@@ -161,11 +161,14 @@ label {
   }
 }
 
-button.close {
+.modal-header  {
+  button.close {
     height: 72px;
     .far {
       font-weight: 100;
     }
+  }
+
 }
 
 .progress-bar {
@@ -194,6 +197,12 @@ button.close {
 
 .modal-body {
   .card-body {
+    padding: 0;
+  }
+}
+
+.ag-cell {
+  span.k-switch-container {
     padding: 0;
   }
 }

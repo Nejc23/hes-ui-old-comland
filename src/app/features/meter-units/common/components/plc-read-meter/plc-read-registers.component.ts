@@ -30,8 +30,8 @@ export class PlcReadRegistersComponent implements OnInit {
   public selectedRowsCount: number;
   public selectedDeviceIds = [];
   noRegisters = false;
-  registersRequiredText = `Required field`;
-  actionName = `Read Registers`;
+  registersRequiredText = $localize`Required field`;
+  actionName = $localize`Read Meter Objects`;
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
@@ -176,7 +176,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);
-    const successMessage = `Read Registers succeeded!`;
+    const successMessage = $localize`Read Meter Objects succeeded!`;
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
@@ -187,6 +187,7 @@ export class PlcReadRegistersComponent implements OnInit {
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
         modalRef.componentInstance.jobName = this.actionName;
+        modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
       () => {} // error
     );

@@ -61,6 +61,9 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     } else {
       this.form.controls.endTime.setValue('00:00');
     }
+    if (this.today) {
+      this.checkTimes();
+    }
   }
 
   datesUpdated(range) {
@@ -75,13 +78,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   setValues() {
     this.form.controls.startDate.setValue(this.selected.startDate);
     this.form.controls.endDate.setValue(this.selected.endDate);
-
-    let startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
-    let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
-
-    this.form.controls.labelText.setValue(
-      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
-    );
+    this.setLabel();
     this.datePicker.updateView();
   }
 
@@ -103,8 +100,19 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   checkTimes() {
+    this.setLabel();
     if (this.today && moment(this.form.controls.startTime.value, 'HH.mm') > moment(this.form.controls.endTime.value, 'HH.mm')) {
       this.form.controls.startTime.setValue(moment(this.form.controls.endTime.value, 'HH.mm').subtract(1, 'hour').format('HH:mm'));
+      this.setLabel();
     }
+  }
+
+  setLabel() {
+    let startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
+
+    this.form.controls.labelText.setValue(
+      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
+    );
   }
 }

@@ -36,7 +36,6 @@ export class RegistersSelectService {
     return new HttpRequest('POST', `${templateGroups}`, param);
   }
 
-  // TODO POST READ METER on-demand/read-meter
   postOnDemandReadMeter(params: IActionRequestAddTemplate): Observable<IActionResponseAddTemplate> {
     return this.repository.makeRequest(this.postOnDemandReadMeterRequest(params));
   }

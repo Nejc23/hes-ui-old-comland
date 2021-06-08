@@ -178,9 +178,12 @@
                                     permissionSetDisplay,
                                     permissionClearAlarms]"></div>
 
+              <div appHideIfPermissionUnauthorized [permission]="permissionSyncTime">
+                <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
+                   (click)="onSyncTime()"><span i18n>Synchronize time</span></a>
+              </div>
 
-
-              <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetLimiter]">  <!-- TODO permissions -->
+              <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetLimiter]">
                 <div class="dropdown-submenu">
                   <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Limiter</span></a>
                   <div class="dropdown-menu">
@@ -223,7 +226,7 @@
 
               <div>
                 <a href="javascript:void(0)" class="dropdown-item custom-hover-display item-padding"
-                   (click)="onReadMeter()"><span i18n>Read meter </span></a>
+                   (click)="onReadMeter()"><span i18n>Read Meter</span></a>
               </div>
 
             </div>

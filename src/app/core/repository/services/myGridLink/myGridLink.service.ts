@@ -33,7 +33,8 @@ import {
   securityEnableHls,
   securityRekey,
   jobsAssignExisting,
-  securityChangePassword
+  securityChangePassword,
+  onDemandTimeSyc
 } from './../../consts/my-grid-link.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
@@ -375,5 +376,14 @@ export class MyGridLinkService {
 
   readMeterValuesRequest(param: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandReadMeter}`, param);
+  }
+
+  // synchronize time
+  synchronizeTime(params: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.synchronizeRequest(params));
+  }
+
+  synchronizeRequest(params: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandTimeSyc}`, params);
   }
 }

@@ -11,8 +11,8 @@
             <div class="spinner-border text-secondary" role="status" *ngIf="loading">
               <span class="sr-only">Loading...</span>
             </div>
-            <ng-container *ngIf="!loading">
-              {{ statusJobProgress.deviceCount }}
+            <ng-container>
+              {{ deviceCount }}
             </ng-container>
           </div>
           <div class="tiny-text gray-color">Total devices</div>

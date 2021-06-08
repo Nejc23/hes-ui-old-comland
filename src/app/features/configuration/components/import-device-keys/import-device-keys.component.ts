@@ -15,6 +15,7 @@ import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/cr
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { AppConfigService } from 'src/app/core/configuration/services/app-config.service';
+import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -22,6 +23,8 @@ import { AppConfigService } from 'src/app/core/configuration/services/app-config
 })
 export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload') fileUpload: FileUploadComponent;
+  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert;
+  @ViewChild('selfClosingSuccess', { static: false }) selfClosingSuccess: NgbAlert;
 
   uploadDropSubtitle = `Selected file must be in .xml or .csv file format.`;
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
@@ -83,6 +86,14 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    setInterval(() => {
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+      if (this.selfClosingSuccess) {
+        this.selfClosingSuccess.close();
+      }
+    }, 5000);
     this.setFileTypeId();
     this.createForm();
     this.breadcrumbService.setPageName(this.headerTitle);

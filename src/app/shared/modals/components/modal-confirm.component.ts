@@ -30,6 +30,11 @@ export class ModalConfirmComponent implements OnInit {
   @Input() checkboxLabel = '';
   @Input() checkboxValue: boolean;
 
+  @Input() secondConfirmEnabled = false;
+  @Input() confirmMessage = '';
+
+  showSecondConfirm = false;
+
   constructor(public activeModal: NgbActiveModal) {}
 
   ngOnInit() {}
@@ -39,7 +44,12 @@ export class ModalConfirmComponent implements OnInit {
   }
 
   confirm() {
-    this.activeModal.close(this.checkboxValue);
+    if (this.secondConfirmEnabled && this.checkboxValue == true) {
+      this.showSecondConfirm = true;
+      this.secondConfirmEnabled = false;
+    } else {
+      this.activeModal.close(this.checkboxValue);
+    }
   }
 
   onValueChanged(event: any) {

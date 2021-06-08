@@ -316,6 +316,9 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionReadMeter() {
     return PermissionEnumerator.Read_Meter;
   }
+  get permissionSyncTime() {
+    return PermissionEnumerator.Sync_Time;
+  }
 
   // set form title by selected meter unit type
   private setTitle(id: number) {
@@ -1361,12 +1364,22 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
         thresholdData.forEach((device) => {
           if (gridData.deviceId === device.deviceId) {
             device.registers?.forEach((reg) => {
-              gridData[reg.registerId] = reg.registerData;
+              gridData[reg.registerId.toLowerCase()] = reg.registerData;
             });
           }
         });
       });
       this.gridApi.refreshCells();
     });
+  }
+
+  // popup
+  onSyncTime(selectedGuid: string) {
+    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.syncTime,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
   }
 }

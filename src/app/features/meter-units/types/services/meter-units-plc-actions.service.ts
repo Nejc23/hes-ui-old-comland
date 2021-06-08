@@ -134,6 +134,7 @@ export class MeterUnitsPlcActionsService {
           const modalRef = this.modalService.open(StatusJobComponent, options);
           modalRef.componentInstance.requestId = data; // requestId
           modalRef.componentInstance.jobName = actionName;
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -158,6 +159,7 @@ export class MeterUnitsPlcActionsService {
           const modalRef = this.modalService.open(StatusJobComponent, options);
           modalRef.componentInstance.requestId = data; // requestId
           modalRef.componentInstance.jobName = actionName;
+          modalRef.componentInstance.deviceCount = params.deviceIds.length;
         }
       },
       (reason) => {
@@ -529,6 +531,15 @@ export class MeterUnitsPlcActionsService {
         response = this.service.readThresholdValues(params);
         operationName = `Read limiter threshold values`;
         break;
+      case MeterUnitsTypeEnum.syncTime:
+        response = this.service.synchronizeTime(params);
+        operationName = $localize`Synchronize time`;
+        component.checkboxLabel = $localize`Unconditional time synchronization `;
+        component.checkboxField = 'unconditionalSync';
+        component.checkboxValue = false;
+        component.secondConfirmEnabled = true;
+        component.confirmMessage = $localize`Are you sure you would like to trigger unconditional time synchronization?`;
+        break;
     }
     // component.btnConfirmText = operationName;
 
@@ -558,6 +569,7 @@ export class MeterUnitsPlcActionsService {
             const modalRef = this.modalService.open(StatusJobComponent, options);
             modalRef.componentInstance.requestId = value.requestId;
             modalRef.componentInstance.jobName = operationName;
+            modalRef.componentInstance.deviceCount = value.deviceIds.length;
           },
           (e) => {
             this.toast.errorToast(this.messageServerError);

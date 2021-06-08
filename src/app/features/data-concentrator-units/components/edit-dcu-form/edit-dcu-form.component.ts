@@ -31,6 +31,8 @@ export class EditDcuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
+  opened = false;
+
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
@@ -144,5 +146,9 @@ export class EditDcuFormComponent implements OnInit {
 
   onDismiss() {
     this.modal.dismiss();
+  }
+
+  toggle() {
+    this.opened = !this.opened;
   }
 }

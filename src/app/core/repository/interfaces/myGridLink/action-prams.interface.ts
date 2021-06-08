@@ -12,7 +12,7 @@ export interface IActionRequestParams {
   from?: string;
   to?: string;
   groups?: any[]; // TODO enum
-  //   RegisterGroupType TODO
+  unconditionalSync?: string;
 }
 
 export interface IActionSearchParam {

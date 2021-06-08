@@ -42,3 +42,6 @@ export const securityChangePassword = `${enumMyGridLink.managment}/security/mete
 
 // jobs
 export const jobsAssignExisting = `${enumMyGridLink.scheduler}/jobs-meters`;
+
+// synchronize time
+export const onDemandTimeSyc = '/on-demand/trigger-clock-sync';
