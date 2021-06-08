@@ -9,6 +9,7 @@ import { SidebarService } from './core/base-template/services/sidebar.service';
 import { SidebarItem } from './shared/base-template/interfaces/sidebar-item.interface';
 import { Router } from '@angular/router';
 import { PermissionService } from './core/permissions/services/permission.service';
+import { LanguageService } from './core/base-template/services/language.service';
 
 @Component({
   selector: 'app-root',
@@ -16,21 +17,17 @@ import { PermissionService } from './core/permissions/services/permission.servic
 })
 export class AppComponent implements OnInit {
   constructor(
-    @Inject(LOCALE_ID) public locale: string,
     private titleService: Title,
     public authService: AuthService,
     public intlService: IntlService,
     private router: Router,
     private permissionService: PermissionService,
-    public sidebarService: SidebarService
-  ) {
-    debugger;
-    moment.locale(locale);
-    console.log(locale);
-    this.locale = locale;
-  }
+    public sidebarService: SidebarService,
+    private languageService: LanguageService
+  ) {}
 
   ngOnInit(): void {
+    this.languageService.selectLang('en');
     // TODO: complete this
     // this.authService.setRefreshTokenInterval();
     this.titleService.setTitle(brand.appBrowserTitle);

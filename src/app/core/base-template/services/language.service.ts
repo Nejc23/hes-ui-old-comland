@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { languages } from 'src/environments/config';
+import { Language, languages } from 'src/environments/config';
 import localeSl from '@angular/common/locales/global/sl';
 import localeCz from '@angular/common/locales/global/cs';
 import localeDe from '@angular/common/locales/global/de';
@@ -18,25 +18,23 @@ import localeItExtra from '@angular/common/locales/extra/it';
   providedIn: 'root'
 })
 export class LanguageService {
-  selectedLang;
+  public selectedLang = 'en';
 
-  constructor(private translate: TranslateService) {
-    debugger;
-    this.selectedLang = localStorage.getItem('lang') || 'en';
+  constructor(private translate: TranslateService, public intlService: IntlService) {
+    this.selectedLang = localStorage.getItem('lang');
   }
 
   selectLang(lang: string) {
-    debugger;
     if (lang === 'key') {
       this.translate.langs.forEach((ln) => this.translate.resetLang(ln));
     }
     localStorage.setItem('lang', lang);
-    registerLocaleData(localeDe, 'de', localeDeExtra);
     this.translate.use(lang);
     this.selectedLang = lang;
+    (this.intlService as CldrIntlService).localeId = this.getSelectedLang().acceptLanguage;
   }
 
-  selectedLangLocale() {
+  getSelectedLang(): Language {
     return languages.find((lng) => lng.id == this.selectedLang);
   }
 }

@@ -39,8 +39,8 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     [`Last Month`]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
   };
 
-  constructor(@Inject(LOCALE_ID) public locale_id: string) {
-    debugger;
+  constructor() {
+    let locale_id = localStorage.getItem('lang');
     moment.locale(locale_id);
   }
 

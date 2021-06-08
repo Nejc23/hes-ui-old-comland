@@ -1,4 +1,4 @@
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { from, Observable, of, Subscription } from 'rxjs';
 import { AuthenticatedUser } from '../interfaces/authenticated-user.interface';
 import { RefreshTokenRequest } from '../interfaces/refresh-token.interface';
@@ -34,10 +34,10 @@ export class AuthService {
     private permissionsStoreService: PermissionsStoreService,
     private jwtHelper: JwtHelperService,
     private roleService: RoleService,
-    private configStoreService: AppConfigStoreService,
-    @Inject(LOCALE_ID) public locale: string
+    private configStoreService: AppConfigStoreService
   ) {
     this.configStoreService.configObservable.subscribe((appConfig) => {
+      let locale = localStorage.getItem('lang');
       const settings = {
         authority: appConfig.identityServer.stsAuthority,
         client_id: appConfig.identityServer.clientId,

@@ -6,12 +6,14 @@ import { environment } from 'src/environments/environment';
   name: 'formatDate'
 })
 export class FormatDatePipe implements PipeTransform {
-  constructor(@Inject(LOCALE_ID) public locale: string) {}
+  constructor() {}
 
   public transform(value): any {
+    let locale_id = localStorage.getItem('lang');
+
     if (!value) {
       return '';
     }
-    return new DatePipe(this.locale).transform(value, environment.dateFormat);
+    return new DatePipe(locale_id).transform(value, environment.dateFormat);
   }
 }

@@ -53,8 +53,11 @@ export class CronScheduleComponent implements OnInit {
   dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: `Week day (MON-FRI)` }];
 
   formValues: FormValues;
+  locale = '';
 
-  constructor(private formBuilder: FormBuilder, @Inject(LOCALE_ID) public locale: string, private formUtils: FormsUtilsService) {}
+  constructor(private formBuilder: FormBuilder, private formUtils: FormsUtilsService) {
+    this.locale = localStorage.getItem('lang');
+  }
 
   ngOnInit() {
     this.everyMinutes = [];

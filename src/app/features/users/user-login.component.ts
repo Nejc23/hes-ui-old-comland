@@ -40,6 +40,7 @@ export class UserLoginComponent implements OnInit {
   resetToken = '';
 
   language = 'English';
+  locale = '';
 
   constructor(
     public authService: AuthService,
@@ -50,9 +51,9 @@ export class UserLoginComponent implements OnInit {
     private toast: ToastNotificationService,
     private cookieService: CookieService,
     private route: ActivatedRoute,
-    private languageService: LanguageService,
-    @Inject(LOCALE_ID) private locale: string
+    private languageService: LanguageService
   ) {
+    this.locale = localStorage.getItem('lang');
     // this.languages$ = languages;
     this.form = this.createForm();
     this.formReset = this.createResetForm();

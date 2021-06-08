@@ -8,8 +8,10 @@ import { fwUploadFile } from '../../repository/consts/meter-units.const';
 
 @Injectable()
 export class HeaderInjectorInterceptor implements HttpInterceptor {
-  constructor(@Inject(LOCALE_ID) public locale: string) {}
+  locale = '';
+  constructor() {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.locale = localStorage.getItem('lang') || 'en';
     let newRequest = request.clone({
       headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())
     });

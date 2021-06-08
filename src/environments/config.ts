@@ -51,7 +51,7 @@ export const configAgGridDefCol = {
 
 export const gridRefreshInterval = 30;
 
-export const languages = [
+export const languages: Array<Language> = [
   { id: 'en', value: 'English', acceptLanguage: 'en-US' },
   { id: 'sl', value: 'Slovenščina', acceptLanguage: 'sl-SI' },
   { id: 'de', value: 'Deutsch', acceptLanguage: 'de-DE' },
@@ -59,3 +59,9 @@ export const languages = [
   { id: 'fr', value: 'Français', acceptLanguage: 'fr-FR' },
   { id: 'it', value: 'Italiano', acceptLanguage: 'it-IT' }
 ];
+
+export interface Language {
+  id: string;
+  value: string;
+  acceptLanguage: string;
+}
