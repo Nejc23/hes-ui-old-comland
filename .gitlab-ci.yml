@@ -212,3 +212,24 @@ STAGING - myGrid:
     name: staging
   tags:
     - devWindowsDeploy
+
+TEAMADV01 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: TeamAdv01
+  tags:
+    - QATeamAdv01Deploy
+
+TEAMADV01 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: TeamAdv01
+  tags:
+    - QATeamAdv01Deploy
+
+TEAMADV01 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: TeamAdv01
+  tags:
+    - QATeamAdv01Deploy
