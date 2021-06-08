@@ -72,7 +72,9 @@ export class MeterUnitDetailsComponent implements OnInit {
     const options: NgbModalOptions = {
       size: 'lg'
     };
-    modalRef.componentInstance.setFormEdit(this.data, options);
+    if (this.data) {
+      modalRef.componentInstance.setFormEdit(this.data, options);
+    }
 
     modalRef.result
       .then((result) => {
