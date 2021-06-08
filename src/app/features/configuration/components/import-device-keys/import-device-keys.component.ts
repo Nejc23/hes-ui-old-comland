@@ -87,8 +87,12 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     setInterval(() => {
-      this.selfClosingAlert.close();
-      this.selfClosingSuccess.close();
+      if (this.selfClosingAlert) {
+        this.selfClosingAlert.close();
+      }
+      if (this.selfClosingSuccess) {
+        this.selfClosingSuccess.close();
+      }
     }, 5000);
     this.setFileTypeId();
     this.createForm();
