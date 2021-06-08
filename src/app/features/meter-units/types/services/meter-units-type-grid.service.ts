@@ -440,7 +440,7 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.limiter1Normal,
+        field: gridSysNameColumnsEnum.limiter1Normal.toLowerCase(),
         headerName: $localize`Limiter 1 Th. normal`,
         sortable: true,
         filter: false,
@@ -451,7 +451,7 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true
       },
       {
-        field: gridSysNameColumnsEnum.limiter1Emergency,
+        field: gridSysNameColumnsEnum.limiter1Emergency.toLowerCase(),
         headerName: $localize`Limiter 1 Th. emergency`,
         pinned: false,
         sortable: true,
@@ -463,7 +463,7 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.limiter2Normal,
+        field: gridSysNameColumnsEnum.limiter2Normal.toLowerCase(),
         headerName: $localize`Limiter 2 Th. normal`,
         sortable: true,
         filter: false,
@@ -474,7 +474,7 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true
       },
       {
-        field: gridSysNameColumnsEnum.limiter2Emergency,
+        field: gridSysNameColumnsEnum.limiter2Emergency.toLowerCase(),
         headerName: $localize`Limiter 2 Th. emergency`,
         sortable: true,
         filter: false,
@@ -485,7 +485,7 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true
       },
       {
-        field: gridSysNameColumnsEnum.currentL1,
+        field: gridSysNameColumnsEnum.currentL1.toLowerCase(),
         headerName: $localize`Current L1 Monitor`,
         sortable: true,
         filter: false,
@@ -496,7 +496,7 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true
       },
       {
-        field: gridSysNameColumnsEnum.currentL2,
+        field: gridSysNameColumnsEnum.currentL2.toLowerCase(),
         headerName: $localize`Current L2 Monitor`,
         sortable: true,
         filter: false,
@@ -507,7 +507,7 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true
       },
       {
-        field: gridSysNameColumnsEnum.currentL3,
+        field: gridSysNameColumnsEnum.currentL3.toLowerCase(),
         headerName: $localize`Current L3 Monitor`,
         sortable: true,
         filter: false,
