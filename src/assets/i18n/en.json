@@ -1,6 +1,25 @@
 {
   "COMMON": {
-
+    "ACTION-IN-PROGRESS": "Action in progress!",
+    "DELETE-SUCCESS": "Delete successful!",
+    "SERVER-ERROR": "Server error!",
+    "CONFIRM": "Confirm",
+    "DELETE-DEVICES": "Delete devices",
+    "SELECTED": "selected",
+    "GET-DISCONNECTOR-STATUS": "Get disconnector status",
+    "DISCONNECTOR-CONNECT": "Disconnector connect",
+    "READ-REGISTERS-BEFORE": "Read registers before",
+    "DISCONNECTOR-DISCONNECT": "Disconnector disconnect",
+    "READ-REGISTERS-AFTER": "Read registers after",
+    "GET-CII-STATE": "Get CII state",
+    "CII-ACTIVATE": "CII Activate",
+    "CII-DEACTIVATE": "CII Deactivate",
+    "ACTIVATE-FW-UPGRADE": "Activate FW upgrade",
+    "ACTIVATE-CLEAR-FF": "Activate Clear FF",
+    "CLEAR-ALARMS": "Clear alarms",
+    "READ-MONITOR-THRESHOLD-VALUES": "Read monitor threshold values",
+    "READ-LIMITER-THRESHOLD-VALUES": "Read limiter threshold values",
+    "SYNCHRONIZE-TIME": "Synchronize time"
   },
   "FORM": {
 
@@ -9,7 +28,10 @@
 
   },
   "MODAL": {
-
+    "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger",
+    "FOR-DEVICES": "for selected devices",
+    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
+    "SELECTED": "selected"
   },
   "BREADCRUMB": {
 
