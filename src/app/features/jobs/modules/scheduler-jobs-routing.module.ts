@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: `Jobs`,
+      breadcrumb: 'MENU.JOBS',
       permission: PermissionEnumerator.View_Jobs
     },
     children: [
@@ -23,14 +23,14 @@ const routes: Routes = [
       {
         path: 'meter-units/:scheduleId',
         data: {
-          breadcrumb: `Meter Units`
+          breadcrumb: 'MENU.METER-UNITS'
         },
         component: AllForJobComponent
       },
       {
         path: 'concentrators/:scheduleId',
         data: {
-          breadcrumb: `Concentrator Units`
+          breadcrumb: 'BREADCRUMB.DCU'
         },
         component: DcuForJobComponent
       }

@@ -4,9 +4,9 @@
     <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last"
       [ngClass]="{'active': (last || breadcrumb.url === null)}">
       <a [routerLink]="[breadcrumb.url]" role="button" *ngIf="!last && breadcrumb.url">
-        <span>{{ breadcrumb.label }}</span>
+        <span>{{ breadcrumb.label | translate }}</span>
       </a>
-      <span *ngIf="last || breadcrumb.url === null">{{ breadcrumb.label }}</span>
+      <span *ngIf="last || breadcrumb.url === null">{{ breadcrumb.label | translate }}</span>
     </li>
   </ol>
 </nav>

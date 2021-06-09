@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
+import { TranslateService } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: `Data Concentrator Units`,
+      breadcrumb: 'MENU.DCU',
       permission: PermissionEnumerator.View_Concentrators
     },
     children: [
@@ -23,7 +24,7 @@ const routes: Routes = [
       {
         path: ':id',
         data: {
-          breadcrumb: `Concentrator`,
+          breadcrumb: 'BREADCRUMB.CONCENTRATOR',
           permission: PermissionEnumerator.View_Concentrators
         },
         component: DataConcentratorDetailComponent

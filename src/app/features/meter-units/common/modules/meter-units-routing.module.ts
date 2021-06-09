@@ -10,7 +10,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: `Meter Units`,
+      breadcrumb: 'MENU.METER-UNITS',
       permission: PermissionEnumerator.View_Meters
     },
     children: [
@@ -24,7 +24,7 @@ const routes: Routes = [
       {
         path: 'overview',
         data: {
-          breadcrumb: `Overview - Meter Units`
+          breadcrumb: 'BREADCRUMB.OVERVIEW'
         },
         children: [
           {
@@ -54,7 +54,7 @@ const routes: Routes = [
       {
         path: 'details/:deviceId',
         data: {
-          breadcrumb: `Meter Units`
+          breadcrumb: 'MENU.METER_UNITS'
         },
         component: MeterUnitDetailsComponent
       },

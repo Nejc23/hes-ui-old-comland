@@ -7,7 +7,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: `Alarms & Events`,
+      breadcrumb: 'MENU.ALARMS-EVENTS',
       permission: PermissionEnumerator.View_Alarms
     },
     children: [

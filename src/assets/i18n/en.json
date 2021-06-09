@@ -42,6 +42,11 @@
     "ADMINISTRATION": "Administration",
     "USERS": "Users"
   },
+  "BREADCRUMB": {
+    "CONCENTRATOR": "Concentrator",
+    "JOBS": "Jobs",
+    "OVERVIEW": "Overview - Meter Units"
+  },
   "MODAL": {
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger",
     "FOR-DEVICES": "for selected devices",
@@ -50,14 +55,6 @@
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",
     "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!"
-  },
-  "BREADCRUMB": {
-    "ALARM-AND-EVENTS": "Alarms & Events",
-    "TOOLS": {
-      "IMPORT-TOU-CONFIG": "Import TOU configuration",
-      "AUTO-TEMPLATE": "Auto template",
-      "IMPORT-DEVICE-KEYS": "Import device Keys"
-    }
   },
   "DCU": {
 
