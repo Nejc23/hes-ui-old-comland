@@ -1,7 +1,45 @@
 {
     "COMMON": {
-        "REQUIRED": "Champ requis"
+
     },
+    "FORM": {
+
+    },
+    "MENU": {
+
+    },
+    "MODAL": {
+
+    },
+    "BREADCRUMB": {
+
+    },
+    "DCU": {
+
+    },
+    "METER": {
+
+    },
+    "JOB": {
+
+    },
+    "ALARM": {
+
+    },
+    "TOOLS": {
+
+    },
+    "ALERT": {
+
+    },
+    "GRID": {
+
+    },
+    "LOGIN": {
+
+    },
+
+
     "ngb.toast.close-aria": "Fermer",
     "8436180309712376162": "Aperçu - Concentrateurs",
     "6170762843185284641": "Unités de concentrateurs pour ",

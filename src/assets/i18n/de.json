@@ -1,7 +1,45 @@
 {
     "COMMON": {
-    "REQUIRED": "Zwingendes Feld"
+
     },
+    "FORM": {
+
+    },
+    "MENU": {
+
+    },
+    "MODAL": {
+
+    },
+    "BREADCRUMB": {
+
+    },
+    "DCU": {
+
+    },
+    "METER": {
+
+    },
+    "JOB": {
+
+    },
+    "ALARM": {
+
+    },
+    "TOOLS": {
+
+    },
+    "ALERT": {
+
+    },
+    "GRID": {
+
+    },
+    "LOGIN": {
+
+    },
+
+
     "ngb.toast.close-aria": "Schliessen",
     "8436180309712376162": "Übersicht - Datenkonzentratoren",
     "6170762843185284641": "Datenkonzentrator für",

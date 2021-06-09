@@ -1,7 +1,45 @@
 {
     "COMMON": {
-        "REQUIRED": "Obvezno polje"
+
     },
+    "FORM": {
+
+    },
+    "MENU": {
+
+    },
+    "MODAL": {
+
+    },
+    "BREADCRUMB": {
+
+    },
+    "DCU": {
+
+    },
+    "METER": {
+
+    },
+    "JOB": {
+
+    },
+    "ALARM": {
+
+    },
+    "TOOLS": {
+
+    },
+    "ALERT": {
+
+    },
+    "GRID": {
+
+    },
+    "LOGIN": {
+
+    },
+
+
     "ngb.toast.close-aria": "Zapri",
     "8436180309712376162": "Pregled koncentratorjev",
     "6170762843185284641": "Podatkovni koncentratorji za",

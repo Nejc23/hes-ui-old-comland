@@ -1,7 +1,45 @@
 {
   "COMMON": {
-    "REQUIRED": "Required field"
+
   },
+  "FORM": {
+
+  },
+  "MENU": {
+
+  },
+  "MODAL": {
+
+  },
+  "BREADCRUMB": {
+
+  },
+  "DCU": {
+
+  },
+  "METER": {
+
+  },
+  "JOB": {
+
+  },
+  "ALARM": {
+
+  },
+  "TOOLS": {
+
+  },
+  "ALERT": {
+
+  },
+  "GRID": {
+
+  },
+  "LOGIN": {
+
+  },
+
+
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",
   "6170762843185284641": "Concentrator for",

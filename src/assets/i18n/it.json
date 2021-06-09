@@ -1,7 +1,45 @@
 {
     "COMMON": {
-        "REQUIRED": "Campo obbligatorio"
+
     },
+    "FORM": {
+
+    },
+    "MENU": {
+
+    },
+    "MODAL": {
+
+    },
+    "BREADCRUMB": {
+
+    },
+    "DCU": {
+
+    },
+    "METER": {
+
+    },
+    "JOB": {
+
+    },
+    "ALARM": {
+
+    },
+    "TOOLS": {
+
+    },
+    "ALERT": {
+
+    },
+    "GRID": {
+
+    },
+    "LOGIN": {
+
+    },
+
+
     "ngb.toast.close-aria": "Chiudere",
     "8436180309712376162": "Panoramica - Concentratori di dati",
     "6170762843185284641": "Concentratori di dati per",
