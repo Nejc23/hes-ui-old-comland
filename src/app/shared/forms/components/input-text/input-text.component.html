@@ -1,7 +1,7 @@
 <div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
 
   <label [attr.for]="property" *ngIf="label">
-    {{label}}
+    {{label | translate }}
     <span *ngIf="required && label !== ' '"> *</span>
   </label>
 
@@ -12,7 +12,7 @@
     <input [name]="property" [placeholder]="placeholder" [type]="inputType" class="form-control"
            (blur)="onBlur()"
            [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
-    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
+    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2">{{ labelRight | translate }}</span>
   </div>
 
   <!--Loop through errors-->

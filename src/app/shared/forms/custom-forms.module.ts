@@ -38,6 +38,7 @@ import { DateTimeRangePickerComponent } from './components/datetime-range-picker
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -116,7 +117,8 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
     PopupModule,
     MatFormFieldModule,
     MatDatepickerModule,
-    NgxDaterangepickerMd
+    NgxDaterangepickerMd,
+    TranslateModule
   ]
 })
 export class CustomFormsModule {

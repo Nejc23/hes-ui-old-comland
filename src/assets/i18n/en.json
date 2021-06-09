@@ -30,7 +30,17 @@
 
   },
   "MENU": {
-
+    "DCU": "Data Concentrator Units",
+    "METER-UNITS": "Meter Units",
+    "JOBS": "Jobs",
+    "ALARMS-EVENTS": "Alarms & Events",
+    "TOOLS": "Tools",
+    "IMPORT-TEMPLATES": "Import templates",
+    "IMPORT-TOU-CONFIGURATION": "Import TOU configuration",
+    "AUTO-TEMPLATES": "Auto templates",
+    "IMPORT-DEVICE-KEYS": "Import device keys",
+    "ADMINISTRATION": "Administration",
+    "USERS": "Users"
   },
   "MODAL": {
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger",
@@ -42,7 +52,12 @@
     "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!"
   },
   "BREADCRUMB": {
-
+    "ALARM-AND-EVENTS": "Alarms & Events",
+    "TOOLS": {
+      "IMPORT-TOU-CONFIG": "Import TOU configuration",
+      "AUTO-TEMPLATE": "Auto template",
+      "IMPORT-DEVICE-KEYS": "Import device Keys"
+    }
   },
   "DCU": {
 
@@ -98,7 +113,8 @@
     "CURRENT-L3": "Current L3 Monitor"
   },
   "LOGIN": {
-
+    "TITLE": "Login",
+    "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login"
   },
 
 

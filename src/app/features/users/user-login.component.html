@@ -26,10 +26,10 @@
 
       <!-- LOGIN FORM -->
       <form [formGroup]="form" *ngIf="!forgotPassword && !resetPassword" class="px-4">
-        <h2 class="text-uppercase" i18n>Login</h2>
+        <h2 class="text-uppercase">{{ 'LOGIN.TITLE' | translate }}</h2>
 
-        <p i18n>Please enter your user name and password to login.</p>
-          <app-input-text (keyup.enter)="login()" [form]="form" [property]="usernameProperty" i18n-label label="Username"
+        <p i18n>{{ 'LOGIN.ENTER-USERNAME-PASSWORD-TEXT' | translate }}</p>
+          <app-input-text (keyup.enter)="login()" [form]="form" [property]="usernameProperty" [label]="'5248717555542428023'"
             [inputType]="'text'">
           </app-input-text>
           <app-input-text (keyup.enter)="login()" [form]="form" [property]="passwordProperty" i18n-label label="Password"

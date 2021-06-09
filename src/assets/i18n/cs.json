@@ -6,7 +6,17 @@
 
     },
     "MENU": {
-
+        "DCU": "Data Concentrator Units",
+        "METER-UNITS": "Meter Units",
+        "JOBS": "Jobs",
+        "ALARMS-EVENTS": "Alarms & Events",
+        "TOOLS": "Tools",
+        "IMPORT-TEMPLATES": "Import templates",
+        "IMPORT-TOU-CONFIGURATION": "Import TOU configuration",
+        "AUTO-TEMPLATES": "Auto templates",
+        "IMPORT-DEVICE-KEYS": "Import device keys",
+        "ADMINISTRATION": "Administration",
+        "USERS": "Users"
     },
     "MODAL": {
 
