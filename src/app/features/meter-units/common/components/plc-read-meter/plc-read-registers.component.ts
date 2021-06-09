@@ -19,6 +19,7 @@ import * as moment from 'moment';
 import { dateDisplayFormat, dateOnlyServerFormat } from '../../../../../shared/forms/consts/date-format';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-read-registers',
@@ -30,8 +31,8 @@ export class PlcReadRegistersComponent implements OnInit {
   public selectedRowsCount: number;
   public selectedDeviceIds = [];
   noRegisters = false;
-  registersRequiredText = $localize`Required field`;
-  actionName = $localize`Read Meter Objects`;
+  registersRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
+  actionName = this.translate.instant('COMMON.READ-METER-OBJECTS');
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
@@ -45,9 +46,9 @@ export class PlcReadRegistersComponent implements OnInit {
 
   public modules: Module[] = AllModules;
 
-  requiredText = `Date and at least one register must be selected`;
-  templateErrorText = `One of the meters selected does not have template assigned!`;
-  foundText = `found`;
+  requiredText = this.translate.instant('MODAL.SELECT-DATE-AND-REGISTERS');
+  templateErrorText = this.translate.instant('MODAL.METER-TEMPLATE-ERROR');
+  foundText = this.translate.instant('COMMON.FOUND').toLowerCase();
 
   noRegisterSelected = false;
   // TODO when backend
@@ -66,7 +67,8 @@ export class PlcReadRegistersComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private registersService: RegistersSelectService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
 
@@ -120,8 +122,8 @@ export class PlcReadRegistersComponent implements OnInit {
         suppressMenu: true,
         checkboxSelection: true,
         lockPosition: true,
-        field: 'name',
-        headerName: `Type`,
+        field: this.translate.instant('COMMON.NAME'),
+        headerName: this.translate.instant('COMMON.TYPE'),
         cellStyle: (params) => {
           if (params.data.isSelectable !== true) {
             return { 'padding-left': '34px' };
@@ -176,7 +178,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);
-    const successMessage = $localize`Read Meter Objects succeeded!`;
+    const successMessage = this.translate.instant('MODAL.READ-METER-OBJECTS-SUCCEEDED');
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {

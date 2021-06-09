@@ -80,7 +80,7 @@ export class MeterUnitsTypeGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: gridSysNameColumnsEnum.deviceId,
-        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL'), // $localize`Select/deselect all`,
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL'),
         suppressMenu: true,
         resizable: false
       },

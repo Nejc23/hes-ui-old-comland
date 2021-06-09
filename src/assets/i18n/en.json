@@ -19,7 +19,12 @@
     "CLEAR-ALARMS": "Clear alarms",
     "READ-MONITOR-THRESHOLD-VALUES": "Read monitor threshold values",
     "READ-LIMITER-THRESHOLD-VALUES": "Read limiter threshold values",
-    "SYNCHRONIZE-TIME": "Synchronize time"
+    "SYNCHRONIZE-TIME": "Synchronize time",
+    "REQUIRED-FIELD": "Required field",
+    "READ-METER-OBJECTS" : "Read Meter Objects",
+    "FOUND": "Found",
+    "NAME": "Name",
+    "TYPE": "Type"
   },
   "FORM": {
 
@@ -31,7 +36,10 @@
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger",
     "FOR-DEVICES": "for selected devices",
     "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
-    "SELECTED": "selected"
+    "SELECTED": "selected",
+    "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
+    "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",
+    "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!"
   },
   "BREADCRUMB": {
 
