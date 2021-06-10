@@ -2,7 +2,7 @@
   <form [formGroup]="form">
     <div class="d-flex mb-2">
       <h3 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="'FILTER.TITLE' | translate">{{ 'FILTER.TITLE' | translate}}</h3>
-      <button type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close" i18n>
+      <button type="button" class="close ml-auto" (click)="doToggleFilter()">
         <i class="far fa-times"></i>
       </button>
     </div>
@@ -32,25 +32,25 @@
           <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
         </div>
 
-        <app-input-tag label="Type" [form]="form" [property]="typesProperty" [autocompleteItemsAsObjects]="dcuTypes$ | async" i18n-label
+        <app-input-tag label="Type" [form]="form" [property]="typesProperty" [autocompleteItemsAsObjects]="dcuTypes$ | async"
          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
           (valueChanged)="applyFilter()">
         </app-input-tag>
 
         <app-input-tag label="Vendor" [form]="form" [property]="vendorsProperty" [autocompleteItemsAsObjects]="dcuVendors$ | async"
-          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
           (valueChanged)="applyFilter()">
         </app-input-tag>
 
         <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
-          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
           (valueChanged)="applyFilter()">
         </app-input-tag>
 
       </fieldset>
       <div class="form-group link mt-2">
         <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
-          <span i18n>{{ 'FILTER.CLEAR-FILTERS' | translate}}</span></a>
+          <span>{{ 'FILTER.CLEAR-FILTERS' | translate}}</span></a>
         </strong>
       </div>
     </div>

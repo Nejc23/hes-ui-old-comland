@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import * as _ from 'lodash';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form-error',
@@ -9,21 +10,21 @@ export class FormErrorComponent {
   public errors: Array<string> = []; // public because of translation error
   private translations = {};
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     this.translations = {
-      required: `Required field`,
-      email: `Entry is not a valid email`,
-      maxlength: `Entry exceeds maximum amount of characters`,
-      minlength: `Entry does not meet minimum required amount of characters`,
-      pattern: `Wrong format`,
-      notMatchPassword: `Password not match`,
-      max: `Exceeds max value`,
-      min: `Exceeds min value`,
-      maxError: `Exceeds max value`,
-      minError: `Exceeds min value`,
-      incorrectRange: `Range is incorect`,
-      numberError: `Entry is not a valid integer:`,
-      emailError: `Entry is not a valid email:`
+      required: this.translate.instant('FORM.ERROR.REQUIRED'),
+      email: this.translate.instant('FORM.ERROR.EMAIl'),
+      maxlength: this.translate.instant('FORM.ERROR.MAXLENGTH'),
+      minlength: this.translate.instant('FORM.ERROR.MINLENGTH'),
+      pattern: this.translate.instant('FORM.ERROR.PATTERN'),
+      notMatchPassword: this.translate.instant('FORM.ERROR.NOT-MATCH'),
+      max: this.translate.instant('FORM.ERROR.MAX'),
+      min: this.translate.instant('FORM.ERROR.MIN'),
+      maxError: this.translate.instant('FORM.ERROR.MAX'),
+      minError: this.translate.instant('FORM.ERROR.MIN'),
+      incorrectRange: this.translate.instant('FORM.ERROR.RANGE-INCORRECT'),
+      numberError: this.translate.instant('FORM.ERROR.NUMBER-ERROR'),
+      emailError: this.translate.instant('FORM.ERROR.EMAIL-ENTRY')
     };
   }
 

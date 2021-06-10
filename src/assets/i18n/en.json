@@ -34,8 +34,30 @@
     "SAVE-FILTERS": "Save set filters, column order/size, and use it later.",
     "ERROR": {
       "RANGE-VALUE": "Value must be in range 0-100",
-      "RANGE-INCORRECT": "Range is not correct"
-    }
+      "RANGE-INCORRECT": "Range is not correct",
+      "REQUIRED": "Required field",
+      "EMAIl": "Entry is not a valid email",
+      "MAXLENGTH": "Entry exceeds maximum amount of characters",
+      "MINLENGTH": "Entry does not meet minimum required amount of characters",
+      "PATTERN": "Wrong format",
+      "NOT-MATCH": "Password not match",
+      "MAX": "Exceeds max value",
+      "MIN": "Exceeds min value",
+      "NUMBER-ERROR": "Entry is not a valid integer:",
+      "EMAIL-ENTRY": "Entry is not a valid email:"
+    },
+    "STATUS": "Status",
+    "STATE": "State",
+    "TYPE": "Type",
+    "MANUFACTURER": "Manufacturer",
+    "VENDOR": "Vendor",
+    "TAG": "Tag",
+    "PROTOCOL": "Protocol",
+    "MEDIUM": "Medium",
+    "FIRMWARE": "Firmware",
+    "DISCONNECTOR STATE": "Disconnector state",
+    "CII STATE": "CII state",
+    "SHOW": "Show"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -73,6 +95,9 @@
   "FILTER": {
     "TITLE": "Filters",
     "CLEAR-FILTERS": "Clear Filters"
+  },
+  "BUTTON": {
+    "CLOSE": "Close"
   },
   "DCU": {
 
