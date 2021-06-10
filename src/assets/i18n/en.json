@@ -24,10 +24,14 @@
     "READ-METER-OBJECTS" : "Read Meter Objects",
     "FOUND": "Found",
     "NAME": "Name",
-    "TYPE": "Type"
+    "TYPE": "Type",
+    "ADD": "Add",
+    "STATE": "State",
+    "CONFIGURATION": "Configuration"
   },
   "FORM": {
-
+    "CURRENT-VIEW": "Do you like the current view?",
+    "SAVE-FILTERS": "Save set filters, column order/size, and use it later."
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -55,6 +59,12 @@
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",
     "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!"
+  },
+  "OPERATION": {
+    "OPERATIONS": "Operations",
+    "SYNCHRONIZE-TIME": "Synchronize time",
+    "FW-UPGRADE": "FW Upgrade",
+    "DEVICE-DISCOVERY": "Device discovery"
   },
   "DCU": {
 
