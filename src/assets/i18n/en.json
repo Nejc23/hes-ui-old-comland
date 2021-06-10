@@ -31,7 +31,11 @@
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
-    "SAVE-FILTERS": "Save set filters, column order/size, and use it later."
+    "SAVE-FILTERS": "Save set filters, column order/size, and use it later.",
+    "ERROR": {
+      "RANGE-VALUE": "Value must be in range 0-100",
+      "RANGE-INCORRECT": "Range is not correct"
+    }
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -65,6 +69,10 @@
     "SYNCHRONIZE-TIME": "Synchronize time",
     "FW-UPGRADE": "FW Upgrade",
     "DEVICE-DISCOVERY": "Device discovery"
+  },
+  "FILTER": {
+    "TITLE": "Filters",
+    "CLEAR-FILTERS": "Clear Filters"
   },
   "DCU": {
 

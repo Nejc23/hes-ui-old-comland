@@ -1,7 +1,7 @@
 <div class="pt-1 h-100">
   <form [formGroup]="form">
     <div class="d-flex mb-2">
-      <h3 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h3>
+      <h3 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="'FILTER.TITLE' | translate">{{ 'FILTER.TITLE' | translate}}</h3>
       <button type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close" i18n>
         <i class="far fa-times"></i>
       </button>
@@ -50,7 +50,7 @@
       </fieldset>
       <div class="form-group link mt-2">
         <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
-          <span i18n>Clear Filters</span></a>
+          <span i18n>{{ 'FILTER.CLEAR-FILTERS' | translate}}</span></a>
         </strong>
       </div>
     </div>
