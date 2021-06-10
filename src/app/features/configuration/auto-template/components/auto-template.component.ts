@@ -638,8 +638,4 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {}
-
-  getFilterTitle(): string {
-    return `Templates list`;
-  }
 }

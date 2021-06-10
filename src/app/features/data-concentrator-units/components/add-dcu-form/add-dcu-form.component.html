@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Add Data Concentrator Unit</div>
+  <div modal-header>{{ 'FORM.ADD-DCU' | translate }}</div>
 
   <div modal-body>
     <ng-container>
@@ -11,7 +11,7 @@
 
 
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong><span i18n>Error saving DCU!</span></strong> <br/> {{saveError}}
+        <strong><span i18n>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
       </div>
 
       <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>

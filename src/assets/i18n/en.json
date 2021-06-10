@@ -32,6 +32,20 @@
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
     "SAVE-FILTERS": "Save set filters, column order/size, and use it later.",
+    "JOBS": "Jobs",
+    "STATUS": "Status",
+    "STATE": "State",
+    "TYPE": "Type",
+    "MANUFACTURER": "Manufacturer",
+    "VENDOR": "Vendor",
+    "TAG": "Tag",
+    "PROTOCOL": "Protocol",
+    "MEDIUM": "Medium",
+    "FIRMWARE": "Firmware",
+    "DISCONNECTOR STATE": "Disconnector state",
+    "CII STATE": "CII state",
+    "SHOW": "Show",
+    "ADD-DCU": "Add Data Concentrator Unit",
     "ERROR": {
       "RANGE-VALUE": "Value must be in range 0-100",
       "RANGE-INCORRECT": "Range is not correct",
@@ -44,20 +58,9 @@
       "MAX": "Exceeds max value",
       "MIN": "Exceeds min value",
       "NUMBER-ERROR": "Entry is not a valid integer:",
-      "EMAIL-ENTRY": "Entry is not a valid email:"
-    },
-    "STATUS": "Status",
-    "STATE": "State",
-    "TYPE": "Type",
-    "MANUFACTURER": "Manufacturer",
-    "VENDOR": "Vendor",
-    "TAG": "Tag",
-    "PROTOCOL": "Protocol",
-    "MEDIUM": "Medium",
-    "FIRMWARE": "Firmware",
-    "DISCONNECTOR STATE": "Disconnector state",
-    "CII STATE": "CII state",
-    "SHOW": "Show"
+      "EMAIL-ENTRY": "Entry is not a valid email:",
+      "DCU-ERROR": "Error saving DCU!"
+    }
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -94,10 +97,12 @@
   },
   "FILTER": {
     "TITLE": "Filters",
-    "CLEAR-FILTERS": "Clear Filters"
+    "CLEAR-FILTERS": "Clear Filters",
+    "TEMPLATE-LIST": "Templates list"
   },
   "BUTTON": {
-    "CLOSE": "Close"
+    "CLOSE": "Close",
+    "ADD": "Add"
   },
   "DCU": {
 
@@ -112,7 +117,11 @@
 
   },
   "TOOLS": {
-
+    "AUTO-TEMPLATE": {
+      "RULES": "Rules",
+      "ERROR": "There are no templates added in the system yet.",
+      "SHOW-HIDE": "Show/hide templates"
+    }
   },
   "ALERT": {
 
@@ -156,8 +165,6 @@
     "TITLE": "Login",
     "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login"
   },
-
-
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",
   "6170762843185284641": "Concentrator for",
