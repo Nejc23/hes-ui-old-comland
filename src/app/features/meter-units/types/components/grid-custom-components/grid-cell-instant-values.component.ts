@@ -14,6 +14,7 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   public params: any;
 
   values: string[] = [];
+  filteredData: any;
 
   isConnectedVisible = false;
   isDisconnectedVisible = false;
@@ -24,14 +25,16 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   agInit(params: any): void {
     this.params = params;
 
-    const valuesTmp = this.params?.value?.map((v) => v.value);
-    this.values = valuesTmp?.filter((v, i) => {
-      return valuesTmp.indexOf(v) === i;
-    });
-
-    this.isConnectedVisible = this.values?.some((v) => v === InstantValues.connected);
-    this.isReadyForReconnectionVisible = this.values?.some((v) => v === InstantValues.readyForConnection);
-    this.isDisconnectedVisible = this.values?.some((v) => v === InstantValues.disconnected);
+    this.filteredData = this.params.value.filter((value) => value.registerType === 'RELAY_CONTROL_STATE');
+    if (this.filteredData) {
+      const valuesTmp = this.filteredData.map((v) => v.value);
+      this.values = valuesTmp?.filter((v, i) => {
+        return valuesTmp.indexOf(v) === i;
+      });
+      this.isConnectedVisible = this.values?.some((v) => v === InstantValues.connected);
+      this.isReadyForReconnectionVisible = this.values?.some((v) => v === InstantValues.readyForConnection);
+      this.isDisconnectedVisible = this.values?.some((v) => v === InstantValues.disconnected);
+    }
   }
 
   // called when the cell is refreshed
@@ -41,7 +44,7 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   }
 
   getValuesCount(value: number) {
-    return this.params?.value?.filter((v) => v.value === value)?.length;
+    return this.filteredData?.filter((v) => v.value === value)?.length;
   }
 
   getBadgeClass(selectedValue: string) {
@@ -55,6 +58,6 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   }
 
   areValuesEmpty() {
-    return !this.params.value || this.params.value.length === 0;
+    return !this.params.value || this.filteredData.length === 0;
   }
 }
