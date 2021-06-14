@@ -468,7 +468,7 @@ export class MeterUnitsTypeGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellThresholdComponent',
-        headerTooltip: $localize`Limiter 2 Th. emergency`,
+        headerTooltip: $localize`Limiter 2 Th. normal`,
         resizable: false,
         suppressMenu: true,
         suppressMovable: true
