@@ -11,28 +11,28 @@
 
 
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong><span i18n>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
+        <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
       </div>
 
-      <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
+      <app-input-text [form]="form" [property]="nameProperty" label="form.label.name"></app-input-text>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="idNumberProperty" i18n-label label="Id (serial number)">
+          <app-input-text [form]="form" [property]="idNumberProperty" label="form.label.id">
           </app-input-text>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="externalIdProperty" i18n-label label="External Id">
+          <app-input-text [form]="form" [property]="externalIdProperty" label="form.label.external-Id">
           </app-input-text>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+          <app-input-text [form]="form" [property]="ipProperty" label="form.label.ip"></app-input-text>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
       <div *ngIf="credentialsVisible">
         <div class="form-row">
           <div class="col-6">
-            <app-input-text [form]="form" [property]="userNameProperty" i18n-label label="Username"></app-input-text>
+            <app-input-text [form]="form" [property]="userNameProperty" label="form.label.username"></app-input-text>
           </div>
         </div>
       </div>
@@ -78,18 +78,18 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()" i18n>Cancel</button>
+      <button type="button" class="btn btn-link" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
       <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="save(false)" i18n>Save</button>
+        <button type="submit" class="btn btn-primary" (click)="save(false)">{{ 'BUTTON.SAVE' | translate }}</button>
         <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
+          <a class="dropdown-item" (click)="save(true)">{{ 'BUTTON.SAVE-AND-ADD-ANOTHER' | translate }}</a>
         </div>
       </div>
     </div>
   </div>
 </app-modal-template>
 
-<ng-template #tipMoreSave><span i18n>More Save options</span></ng-template>
+<ng-template #tipMoreSave><span>{{'DCU.MORE-SAVE-OPTIONS' | translate}}More Save options</span></ng-template>

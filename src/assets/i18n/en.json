@@ -60,6 +60,12 @@
       "NUMBER-ERROR": "Entry is not a valid integer:",
       "EMAIL-ENTRY": "Entry is not a valid email:",
       "DCU-ERROR": "Error saving DCU!"
+    },
+    "LABEL": {
+      "NAME": "Name",
+      "ID": "Id (serial number)",
+      "EXTERNAL-ID": "External Id",
+      "IP": "IP"
     }
   },
   "MENU": {
@@ -102,10 +108,13 @@
   },
   "BUTTON": {
     "CLOSE": "Close",
-    "ADD": "Add"
+    "ADD": "Add",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "SAVE-AND-ADD-ANOTHER": "Save and Add another"
   },
   "DCU": {
-
+    "MORE-SAVE-OPTIONS": "More Save options"
   },
   "METER": {
 
