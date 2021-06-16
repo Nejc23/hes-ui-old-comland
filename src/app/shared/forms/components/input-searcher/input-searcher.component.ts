@@ -37,7 +37,13 @@ export class InputSearcherComponent implements OnInit {
       this.isReadOnly = false;
     }
 
-    this.form.valueChanges.pipe(debounceTime(this.debounceTimeOut)).subscribe((data) => this.insertedValue.emit(data[this.property]));
+    this.form
+      .get(this.property)
+      .valueChanges.pipe(debounceTime(this.debounceTimeOut))
+      .subscribe((data) => {
+        debugger;
+        this.insertedValue.emit(data);
+      });
   }
 
   get formControl(): AbstractControl {
