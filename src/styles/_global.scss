@@ -108,8 +108,6 @@ label {
 }
 
 .modal-checkbox-label {
-  height: 30px;
-  line-height: 30px;
   margin-right: 12px;
   margin-top: 4px;
 }
@@ -137,11 +135,11 @@ label {
 }
 
 .gray-line {
-  border-bottom: 1px solid $lightestGray;
+  border-bottom: 1px solid $border-color;
 }
 
 .gray-line-top {
-  border-top: 1px solid $lightestGray;
+  border-top: 1px solid $border-color;
 }
 
 .gray-background {
@@ -181,7 +179,6 @@ label {
   display: none;
 }
 
-
 .red-warning-text {
   font-weight: 500;
   font-size: $tinyText;
@@ -203,6 +200,17 @@ label {
 
 .ag-cell {
   span.k-switch-container {
-    padding: 0;
+    padding: 3px;
   }
+}
+
+.align-div-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gray-border {
+  border: 1px solid $border-color;
+  background-clip: padding-box;
 }

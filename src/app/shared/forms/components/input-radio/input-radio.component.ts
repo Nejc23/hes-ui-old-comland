@@ -16,6 +16,7 @@ export class InputRadioComponent implements OnInit {
   @Input() box = false;
   @Input() showTooltip = false;
   @Input() hideLabelSmall = false;
+  @Input() hideCheckbox = false;
 
   @Output() refresh: EventEmitter<RadioOption> = new EventEmitter();
   @Output() selectionChanged: EventEmitter<RadioOption> = new EventEmitter();

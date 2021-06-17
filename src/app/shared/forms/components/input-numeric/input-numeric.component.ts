@@ -20,7 +20,7 @@ export class InputNumericComponent implements OnInit {
   @Input() format = '#.## \\%';
   @Input() min = 0;
   @Input() max = 100;
-  @Input() step = 1;
+  @Input() step = 0;
   @Input() allowShowError = true;
   @Input() noFlex = false;
 

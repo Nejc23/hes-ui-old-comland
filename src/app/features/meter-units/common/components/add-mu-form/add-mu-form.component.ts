@@ -21,6 +21,7 @@ import { GetDefaultInformationResponse } from 'src/app/core/repository/interface
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { map } from 'rxjs/operators';
+import { ReferenceType } from '../../../../../core/repository/interfaces/meter-units/reference-type.enum';
 
 @Component({
   templateUrl: './add-mu-form.component.html'
@@ -42,6 +43,7 @@ export class AddMuFormComponent implements OnInit {
   templates: Codelist<string>[];
   connectionTypes: Codelist<number>[] = [{ id: 1, value: $localize`IP` }];
   defaultConnectionType = this.connectionTypes[0];
+  shortNameSelected = false;
 
   communicationTypes: RadioOption[] = [
     { value: '1' as string, label: $localize`Wrapper` },
@@ -225,12 +227,12 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuHdlcInformation>((o) => o.publicServerHigh);
   }
 
-  get isShortNameProperty() {
-    return nameOf<MuForm>((o) => o.isShortName);
-  }
-
   get protocolProperty() {
     return nameOf<MeterUnitDetails>((o) => o.protocol);
+  }
+
+  get referenceTypeProperty() {
+    return nameOf<MuForm>((o) => o.referencingType);
   }
 
   createForm(editMu: MeterUnitDetails = null): FormGroup {
@@ -268,7 +270,6 @@ export class AddMuFormComponent implements OnInit {
       [this.publicServerLowProperty]: [editMu?.hdlcInformation?.publicServerLow, Validators.required],
       [this.publicClientHighProperty]: [editMu?.hdlcInformation?.publicClientHigh, Validators.required],
       [this.publicServerHighProperty]: [editMu?.hdlcInformation?.publicServerHigh, Validators.required],
-      [this.isShortNameProperty]: [false],
 
       // advanced
       [this.advancedStartWithReleaseProperty]: [editMu?.advancedInformation?.startWithRelease],
@@ -389,6 +390,9 @@ export class AddMuFormComponent implements OnInit {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = value ? +value?.value === 1 : false;
     this.isHdlcSelected = value ? +value?.value === 0 : false;
+    if (!this.isHdlcSelected) {
+      this.shortNameSelected = false;
+    }
     this.setFormControls();
 
     if (getDefaultValues) {
@@ -572,7 +576,6 @@ export class AddMuFormComponent implements OnInit {
       communicationType: +this.form.get(this.communicationTypeProperty).value,
       isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
-      isShortName: this.form.get(this.isShortNameProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value,
       advancedInformation: {
         authenticationType: this.form.get(this.authenticationTypeProperty).value,
@@ -580,7 +583,8 @@ export class AddMuFormComponent implements OnInit {
         startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
       },
       wrapperInformation,
-      hdlcInformation
+      hdlcInformation,
+      referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
     };
   }
 
@@ -635,14 +639,17 @@ export class AddMuFormComponent implements OnInit {
       serialNumber: this.editMu.serialNumber,
       template: this.form.get(this.templateProperty).value,
       connectionType: this.form.get(this.connectionTypeProperty).value,
-      protocol: this.isNewOrProtocolDlms ? 2 : 0
+      protocol: this.isNewOrProtocolDlms ? 2 : 0,
+      referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
     };
   }
 
   setFormEdit(muDetails: MeterUnitDetails) {
     this.editMu = muDetails;
     this.isEditMu = true;
-
+    if (muDetails.referencingType?.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase()) {
+      this.shortNameSelected = true;
+    }
     this.form = this.createForm(muDetails);
   }
 
@@ -674,5 +681,9 @@ export class AddMuFormComponent implements OnInit {
 
   get isNewOrProtocolDlms() {
     return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
+  }
+
+  onShortNameChanges(event: Event) {
+    this.shortNameSelected = !!event;
   }
 }

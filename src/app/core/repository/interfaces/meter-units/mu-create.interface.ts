@@ -1,12 +1,13 @@
 import { MuAdvancedInformation } from './mu-advanced-information.interface';
 import { MuHdlcInformation } from './mu-hdlc-information.interface';
 import { MuWrapperInformation } from './mu-wrapper-information.interface';
+import { ReferenceType } from './reference-type.enum';
 
 export interface MuCreateRequest {
   name: string;
-  serial?: string;
+  serialNumber?: string;
   templateId?: string;
-  communicationType?: number;
+  interfaceType: number;
   manufacturer: number;
   protocol?: number;
   medium?: number;
@@ -14,8 +15,8 @@ export interface MuCreateRequest {
   ip: string;
   port: number;
   isGateWay: boolean;
-  isShortName?: boolean;
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
   advancedInformation: MuAdvancedInformation;
+  referencingType: ReferenceType;
 }

@@ -1,9 +1,9 @@
 import { MuCreateRequest } from './../../../src/app/core/repository/interfaces/meter-units/mu-create.interface';
 import { MeterUnitsService } from './../../../src/app/core/repository/services/meter-units/meter-units.service';
-import { setupPactProvider, pactFinalize, pactVerify, pactSetAngular } from 'pact/helpers/pact-setup.helper';
+import { pactFinalize, pactSetAngular, pactVerify, setupPactProvider } from 'pact/helpers/pact-setup.helper';
 import { getTestBed } from '@angular/core/testing';
-import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
-import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { defaultRequestHeader, defaultResponseHeader } from 'pact/helpers/default-header.helper';
+import { ReferenceType } from '../../../src/app/core/repository/interfaces/meter-units/reference-type.enum';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -38,7 +38,7 @@ describe('Pact consumer test', () => {
     ip: '1.1.1.1',
     port: 1,
     isGateWay: true,
-    isShortName: true,
+    referencingType: ReferenceType.COSEM_LOGICAL_NAME,
     hdlcInformation: {
       clientLow: 1,
       serverLow: 2,
