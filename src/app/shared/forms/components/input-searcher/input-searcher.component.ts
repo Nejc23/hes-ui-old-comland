@@ -41,7 +41,6 @@ export class InputSearcherComponent implements OnInit {
       .get(this.property)
       .valueChanges.pipe(debounceTime(this.debounceTimeOut))
       .subscribe((data) => {
-        debugger;
         this.insertedValue.emit(data);
       });
   }
