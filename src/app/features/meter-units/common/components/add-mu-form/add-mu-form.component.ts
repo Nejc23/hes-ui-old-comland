@@ -94,6 +94,7 @@ export class AddMuFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    // todo set  shortNameSelected from enum
     this.codelistServiceMu
       .meterUnitVendorCodelist(null)
       .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))

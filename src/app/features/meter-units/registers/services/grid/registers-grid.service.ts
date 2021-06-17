@@ -32,6 +32,13 @@ export class RegistersGridService {
         headerTooltip: $localize`Value`
       },
       {
+        field: 'valueWithUnit.unit',
+        suppressMenu: true,
+        sortable: true,
+        headerName: $localize`Unit`,
+        headerTooltip: $localize`Unit`
+      },
+      {
         field: 'status',
         suppressMenu: true,
         sortable: true,
