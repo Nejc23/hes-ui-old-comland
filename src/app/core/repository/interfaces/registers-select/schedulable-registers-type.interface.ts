@@ -1,9 +1,9 @@
 export interface SchedulableRegisters {
   allHaveTemplate: boolean;
-  schedulableRegistersTypes: Array<SchedulableRegistersTypes>;
+  schedulableRegistersTypes: Array<SchedulableRegistersType>;
 }
 
-export interface SchedulableRegistersTypes {
+export interface SchedulableRegistersType {
   name: string;
   isSelectable: boolean;
 }
