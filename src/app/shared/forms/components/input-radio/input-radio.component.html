@@ -6,14 +6,14 @@
     </label>
   </div>
 
-  <div [ngClass]="{'form-row': inline || box}">
+  <div [ngClass]="{'form-row gray-border m-0 rounded': inline || box}">
     <div
-      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap justify-content-start': inline, 'col border py-2 text-center col-box-check': box, 'border-secondary form-check-selected': box && isSelected(option)}"
+      [ngClass]="{'form-check': inline, 'd-flex flex-nowrap': inline, 'col p-1 m-1 align-div-center rounded col-box-check': box, 'form-check-selected': box && isSelected(option)}"
        *ngFor="let option of options" (click)="doSelectionChange(option)">
       <div class="d-flex" [ngbTooltip]="getTooltip(option)" placement="bottom" [openDelay]="500" triggers="hover">
-        <input type="radio" id="{{option.uid}}" [name]="property" [formControlName]="property"
+        <input type="radio" [ngClass]="hideCheckbox ? 'display-none': 'mr-2'" id="{{option.uid}}" [name]="property" [formControlName]="property"
           value="{{option.value}}" [attr.name]="property" kendoRadioButton>
-        <label for="{{option.uid}}" class="control-label ml-2 d-block text-truncate">
+        <label for="{{option.uid}}" class="control-label d-block text-truncate">
           {{option.label}} </label>
       </div>
       <label for="{{option.uid}}" class="control-label text-muted" *ngIf="box && !hideLabelSmall"><small>{{option.labelSmall}}</small></label>
