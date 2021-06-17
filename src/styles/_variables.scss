@@ -230,7 +230,7 @@ $box-shadow: 0 .3rem 0.6rem 0 rgba($black, .1) !default;
 $box-shadow-lg: 0 0.5rem 1rem 0 rgba($black, .125) !default;
 
 $component-active-color: $white !default;
-$component-active-bg: theme-color("primary") !default;
+$component-active-bg: map-get($theme-colors, "primary") !default;
 
 $caret-width: .3em !default;
 $caret-vertical-align: $caret-width * .85 !default;
@@ -547,7 +547,7 @@ $custom-control-label-disabled-color: $gray-600 !default;
 
 $custom-control-indicator-checked-color: $component-active-color !default;
 $custom-control-indicator-checked-bg: $component-active-bg !default;
-$custom-control-indicator-checked-disabled-bg: rgba(theme-color("primary"), .5) !default;
+$custom-control-indicator-checked-disabled-bg: map-get($theme-colors, "primary") !default;
 $custom-control-indicator-checked-box-shadow: none !default;
 $custom-control-indicator-checked-border-color: $custom-control-indicator-checked-bg !default;
 
@@ -661,8 +661,8 @@ $custom-file-text: (en: "Browse"
 
 $form-feedback-margin-top: $form-text-margin-top !default;
 $form-feedback-font-size: $small-font-size !default;
-$form-feedback-valid-color: theme-color("success") !default;
-$form-feedback-invalid-color: theme-color("danger") !default;
+$form-feedback-valid-color: map-get($theme-colors, "success") !default;
+$form-feedback-invalid-color: map-get($theme-colors, "danger") !default;
 
 $form-feedback-icon-valid-color: $form-feedback-valid-color !default;
 $form-feedback-icon-valid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'><path fill='#{$form-feedback-icon-valid-color}' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/></svg>") !default;
