@@ -14,8 +14,8 @@ export const environment = {
   timeFormat: 'HH:mm',
   timeFormatLong: 'HH:mm:ss',
   kendoChartCategoryDateFormats: {
-    minutes: 'HH:mm',
-    hours: 'HH:mm',
+    minutes: 't',
+    hours: 't', // h:mm tt for en-US
     days: 'dd.MM',
     years: 'yyyy'
   },

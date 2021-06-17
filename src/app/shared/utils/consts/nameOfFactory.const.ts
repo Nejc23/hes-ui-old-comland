@@ -1,1 +1,4 @@
-export const nameOfFactory = <T>() => (name: keyof T) => name;
+export const nameOfFactory =
+  <T>() =>
+  (name: keyof T) =>
+    name;
