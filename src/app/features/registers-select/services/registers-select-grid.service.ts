@@ -29,20 +29,6 @@ export class RegistersSelectGridService {
         sortable: true,
         headerName: $localize`Name`,
         headerTooltip: $localize`Name`
-      },
-      {
-        field: 'type',
-        suppressMenu: true,
-        sortable: true,
-        headerName: $localize`Type`,
-        headerTooltip: $localize`Type`
-      },
-      {
-        field: 'description',
-        suppressMenu: true,
-        sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
       }
     ];
   }
@@ -67,20 +53,6 @@ export class RegistersSelectGridService {
         sortable: true,
         headerName: $localize`Name`,
         headerTooltip: $localize`Name`
-      },
-      {
-        field: 'type',
-        suppressMenu: true,
-        sortable: true,
-        headerName: $localize`Type`,
-        headerTooltip: $localize`Type`
-      },
-      {
-        field: 'description',
-        suppressMenu: true,
-        sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
       }
     ];
   }
