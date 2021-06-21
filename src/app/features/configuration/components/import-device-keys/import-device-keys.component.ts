@@ -1,9 +1,9 @@
 import { FileUploadComponent } from './../../../../shared/forms/components/file-upload/file-upload.component';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
@@ -15,7 +15,6 @@ import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/cr
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { AppConfigService } from 'src/app/core/configuration/services/app-config.service';
-import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -23,8 +22,6 @@ import { NgbAlert } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload') fileUpload: FileUploadComponent;
-  @ViewChild('selfClosingAlert', { static: false }) selfClosingAlert: NgbAlert;
-  @ViewChild('selfClosingSuccess', { static: false }) selfClosingSuccess: NgbAlert;
 
   uploadDropSubtitle = $localize`Selected file must be in .xml or .csv file format.`;
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
@@ -86,14 +83,6 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    setInterval(() => {
-      if (this.selfClosingAlert) {
-        this.selfClosingAlert.close();
-      }
-      if (this.selfClosingSuccess) {
-        this.selfClosingSuccess.close();
-      }
-    }, 5000);
     this.setFileTypeId();
     this.createForm();
     this.breadcrumbService.setPageName(this.headerTitle);
@@ -164,5 +153,17 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
 
   get fileTypeProperty() {
     return 'fileType';
+  }
+
+  closeAlert(type: string, index: number) {
+    let id = type + index;
+    setInterval(function () {
+      $('.' + id)
+        .fadeTo(500, 0)
+        .slideUp(500, function () {
+          $(this).remove();
+        });
+    }, 5000);
+    return id;
   }
 }

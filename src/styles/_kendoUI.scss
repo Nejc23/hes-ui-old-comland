@@ -2,3 +2,19 @@
 @import "kendoUI/kendo-icons";
 @import "kendoUI/kendo-charts";
 @import "kendoUI/kendo-tabstrip";
+
+// kendo UI
+.ag-cell {
+  .k-switch {
+    transform: scale(0.75);
+  }
+
+  span.k-switch-container {
+    padding: 1px;
+  }
+}
+
+.k-switch-on .k-switch-container {
+  border-color: #981D78;
+  background-color: $secondary;
+}
