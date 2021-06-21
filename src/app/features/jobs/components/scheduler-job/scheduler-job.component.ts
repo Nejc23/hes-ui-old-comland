@@ -23,6 +23,7 @@ import { AlarmNotificationRulesComponent } from './alarm-notification-rules.comp
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { RegistersSelectRequest } from '../../../../core/repository/interfaces/registers-select/registers-select-request.interface';
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -181,7 +182,7 @@ export class SchedulerJobComponent implements OnInit {
         Validators.required
       ],
       [this.timeUnitProperty]: [
-        formData && formData.readingProperties && formData.readingProperties.timeUnit
+        formData && formData.readingProperties && formData.readingProperties.timeUnit && this.jobsTimeUnits
           ? this.jobsTimeUnits.find((x) => x.id === formData.readingProperties.timeUnit)
           : this.defaultTimeUnit,
         Validators.required
@@ -374,9 +375,16 @@ export class SchedulerJobComponent implements OnInit {
     // times and selected registers
 
     if (this.showRegisters) {
-      const selectedRegisters = this.registers.getSelectedRowIds();
+      const selectedRegisters = this.registers.getSelectedRowNames();
+      let registers: RegistersSelectRequest[] = [];
+      selectedRegisters.forEach((value) => {
+        registers.push({
+          name: value,
+          type: value
+        });
+      });
       this.noRegisters = selectedRegisters.length === 0;
-      this.form.get(this.registersProperty).setValue(selectedRegisters);
+      this.form.get(this.registersProperty).setValue(registers);
     } else if (this.showConcentrators) {
       const selectedData = this.listOfDCUs.getSelectedRowIds();
       this.form.get(this.devicesProperty).setValue(selectedData);

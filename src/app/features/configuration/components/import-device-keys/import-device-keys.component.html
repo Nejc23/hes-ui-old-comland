@@ -41,5 +41,5 @@
           i18n-label></app-file-upload>
   </div>
 </div>
-<ngb-alert #selfClosingAlert class="alert alert-danger form-row dismissible " role="alert" *ngFor="let item of allErrorTexts">{{item}}</ngb-alert>
-<ngb-alert #selfClosingSuccess class="alert alert-success form-row dismissible " type="success" role="alert" *ngFor="let item of allResultTexts">{{item}}</ngb-alert>
+<ngb-alert class="alert alert-danger form-row dismissible" [ngClass]="closeAlert('danger',i)" role="alert" *ngFor="let item of allErrorTexts; let i = index ">{{item}}</ngb-alert>
+<ngb-alert class="alert alert-success form-row dismissible" [ngClass]="closeAlert('success',i)"  type="success" role="alert" *ngFor="let item of allResultTexts; let i = index ">{{item}}</ngb-alert>

@@ -240,7 +240,7 @@ export class AddDcuFormComponent implements OnInit {
   public onTypeChanged(value) {
     this.form.get(this.typeProperty).setValue(value);
     if (value && value.id) {
-      this.credentialsVisible = value.id === 2;
+      this.credentialsVisible = value.id === 2 || value.id === 3;
     }
 
     this.setCredentialsControls(this.credentialsVisible);

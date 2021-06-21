@@ -32,7 +32,7 @@ export class SchedulerJobsInterceptor {
         id: '06130d62-f67c-41a2-98f7-ef521db2cee6',
         active: true,
         type: 'Reading',
-        jobType: 4,
+        jobType: 2,
         description: 'Daily read of 15 min energy (A+)',
         nextRun: '2020-08-25T15:45:45+00:00',
         owner: 'Jan Benedičič',
@@ -41,8 +41,8 @@ export class SchedulerJobsInterceptor {
       {
         id: 'eeb2b97c-4549-4f4b-a33f-77acb54a0b00',
         active: true,
-        type: 'Discovery',
-        jobType: 1,
+        type: 'Reading',
+        jobType: 2,
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
         nextRun: '2021-07-26T05:45:45+00:00',
         owner: 'Miha Galičič',
@@ -277,11 +277,11 @@ export class SchedulerJobsInterceptor {
 
   static interceptSchedulerJobs(): Observable<HttpEvent<any>> {
     const data: SchedulerJob = {
-      registers: [],
+      registers: [{ type: '1', name: 'property3' }],
       description: 'desc 4444',
       active: true,
       cronExpression: '0 1 */3 * * * *',
-      jobType: '4',
+      jobType: '1',
       readingProperties: {
         usePointer: true,
         intervalRange: 2,
@@ -386,7 +386,7 @@ export class SchedulerJobsInterceptor {
     const data: SchedulerJob = {
       jobType: 6,
       active: true,
-      description: 'Notify alarms',
+      description: 'Notify alarms - Fake',
       cronExpression: '* * 1 * * ?',
       startAt: '2021-01-14T08:44:00+01:00',
       endAt: null,

@@ -1,11 +1,7 @@
 import { environment } from './../../../../../../environments/environment';
 import { RegisterValue } from './../../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from './../../../../../core/repository/services/data-processing/data-processing.service';
-import { RegistersFilter } from './../../interfaces/data-processing-request.interface';
-import { DataProcessingRequest } from './../../../../../core/repository/interfaces/data-processing/data-processing-request.interface';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { values } from 'lodash';
-import * as moment from 'moment';
+import { Component, Input } from '@angular/core';
 import { IntlService } from '@progress/kendo-angular-intl';
 
 @Component({
@@ -16,6 +12,8 @@ export class RegistersChartComponent {
   public eventValues: RegisterValue[];
   @Input() public categories: Date[];
   @Input() public chartData: any[][];
+  @Input() public unit = '';
+
   public dateFormats;
 
   constructor(private dataProcessingService: DataProcessingService, private intl: IntlService) {
@@ -25,4 +23,11 @@ export class RegistersChartComponent {
   getDateWithTime(dateTime: any) {
     return dateTime ? this.intl.formatDate(dateTime, environment.dateTimeFormat) : '';
   }
+
+  public labelContent = (e: any) => {
+    if (this.chartData.length > 0) {
+      return e.value + ' ' + this.unit;
+    }
+    return e.value;
+  };
 }

@@ -1,22 +1,24 @@
 <kendo-chart>
   <kendo-chart-title></kendo-chart-title>
-  <kendo-chart-category-axis baseUnit="years">
+  <kendo-chart-category-axis baseUnit="hours">
       <kendo-chart-category-axis-item maxDivisions="20" [categories]="categories">
-        <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats">
+        <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats" culture="en-US">
         </kendo-chart-category-axis-item-labels>
-        <kendo-chart-value-axis-item>
-          <kendo-chart-value-axis-item-labels>
-            </kendo-chart-value-axis-item-labels>
-        </kendo-chart-value-axis-item>
       </kendo-chart-category-axis-item>
   </kendo-chart-category-axis>
+  <kendo-chart-value-axis>
+    <kendo-chart-value-axis-item>
+      <kendo-chart-value-axis-item-labels [content]="labelContent">
+      </kendo-chart-value-axis-item-labels>
+    </kendo-chart-value-axis-item>
+  </kendo-chart-value-axis>
   <kendo-chart-series>
     <kendo-chart-series-item margin="0" [markers]="{size: 4}" [highlight]="{markers: { border: { width:0 }}}" padding="0" width="1" type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem"  >
           <div style="text-align:center;">
             <div class="text-black-50 small">{{ dataItem.timestamp | formatDateTime }}</div>
-            <div>{{ dataItem.value }}</div>
+            <div>{{ dataItem.value }} {{ dataItem.valueWithUnit?.unit }}</div>
             <div>{{ dataItem.status }}</div>
           </div>
         </ng-template>

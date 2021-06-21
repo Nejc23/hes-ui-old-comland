@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class RegistersSelectGridService {
   columns = [];
 
+  // TODO TRANSLATE $localize
   constructor() {}
 
   setGridReadOnlyColumns() {

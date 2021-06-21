@@ -2,6 +2,7 @@ import { MuHdlcInformation } from './../../../../core/repository/interfaces/mete
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { MuAdvancedInformation } from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 import { MuWrapperInformation } from 'src/app/core/repository/interfaces/meter-units/mu-wrapper-information.interface';
+import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 
 export interface MuForm {
   name: string;
@@ -14,10 +15,10 @@ export interface MuForm {
   communicationType: number;
   isGateway: boolean;
   jobIds: string[];
-  isShortName: boolean;
   authenticationType: Codelist<number>;
 
   advancedInformation: MuAdvancedInformation;
   wrapperInformation?: MuWrapperInformation;
   hdlcInformation?: MuHdlcInformation;
+  referencingType: ReferenceType;
 }

@@ -140,17 +140,17 @@ export class MeterUnitsService {
   createMuForm(payload: MuForm): Observable<string> {
     const muRequest: MuCreateRequest = {
       name: payload.name,
-      serial: payload.serialNumber,
+      serialNumber: payload.serialNumber,
       manufacturer: payload.manufacturer?.id,
       templateId: payload.template?.id,
-      communicationType: payload.communicationType,
+      interfaceType: payload.communicationType,
       protocol: 2, // DLMS
       medium: 1, // ELECTRICITY
       jobIds: payload.jobIds,
       ip: payload.ip,
       port: payload.port,
       isGateWay: payload.isGateway,
-      isShortName: payload.isShortName,
+      referencingType: payload.referencingType,
       advancedInformation: {
         authenticationType: payload.authenticationType?.id,
         ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
@@ -200,12 +200,9 @@ export class MeterUnitsService {
       serialNumber: payload.serialNumber,
       templateId: payload.template.id,
       interfaceType: payload.communicationType,
-      protocol: payload.protocol
+      protocol: payload.protocol,
+      referencingType: payload.referencingType
     };
-
-    if (payload.communicationType) {
-      muRequest.communicationType = payload.communicationType;
-    }
 
     if (payload.advancedInformation) {
       muRequest.advancedInformation = {

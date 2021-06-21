@@ -85,7 +85,9 @@
           <div class="col-12" *ngIf="!isEvent">
             <app-registers-chart
               [categories]="chartCategories"
-              [chartData]="chartData">
+              [chartData]="chartData"
+              [unit]="unit"
+            >
             </app-registers-chart>
           </div>
           <div class="col-12" *ngIf="isEvent">

@@ -11,14 +11,14 @@ import { TemplatesList } from '../../../../../core/repository/interfaces/auto-te
 import { DateTimeRange } from '../../../../../shared/forms/interfaces/date-time-range.interface';
 import * as _ from 'lodash';
 import { RegistersSelectService } from '../../../../../core/repository/services/registers-select/registers-select.service';
-import {
-  SchedulableRegisters,
-  SchedulableRegistersTypes
-} from '../../../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
 import * as moment from 'moment';
 import { dateDisplayFormat, dateOnlyServerFormat } from '../../../../../shared/forms/consts/date-format';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import {
+  SchedulableRegisters,
+  SchedulableRegistersType
+} from '../../../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -36,7 +36,7 @@ export class PlcReadRegistersComponent implements OnInit {
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
-  rowData: SchedulableRegistersTypes[];
+  rowData: SchedulableRegistersType[];
 
   allRowData: any;
 
@@ -195,7 +195,7 @@ export class PlcReadRegistersComponent implements OnInit {
     );
   }
 
-  fillData(registerTypes: SchedulableRegistersTypes[], dateFrom: string, dateTo: string): IActionRequestAddTemplate {
+  fillData(registerTypes: SchedulableRegistersType[], dateFrom: string, dateTo: string): IActionRequestAddTemplate {
     const formData: IActionRequestAddTemplate = {
       pageSize: this.actionRequest.pageSize,
       pageNumber: this.actionRequest.pageNumber,
@@ -241,7 +241,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
   searchChange(search: string = '') {
     const searchToLower = search.toLowerCase();
-    const rowsFiltered: SchedulableRegistersTypes[] = _.filter(this.allRowData, (data) => data.name.toLowerCase().includes(searchToLower));
+    const rowsFiltered: SchedulableRegistersType[] = _.filter(this.allRowData, (data) => data.name.toLowerCase().includes(searchToLower));
 
     this.rowData = rowsFiltered.sort((a, b) => {
       return +a.isSelectable > +b.isSelectable ? -1 : a.name < b.name ? -1 : 1;

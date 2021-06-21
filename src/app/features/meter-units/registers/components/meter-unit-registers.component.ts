@@ -70,6 +70,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   public eventsByTimestamp: EventsByTimestamp[];
   public eventsById: EventsById[];
+  unit = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -323,6 +324,9 @@ export class MeterUnitRegistersComponent implements OnInit {
 
           this.chartCategories = values.map((v) => new Date(v.timestamp));
           this.chartData = [values];
+          if (values[0].valueWithUnit?.unit) {
+            this.unit = values[0].valueWithUnit.unit;
+          }
         }
       });
     } catch (error) {
