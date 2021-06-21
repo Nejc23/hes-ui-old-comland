@@ -64,7 +64,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.data = response;
         this.form = this.createForm();
         this.editForm = this.createEditForm();
-        this.credentialsVisible = this.data && this.data.typeId === 2;
+        this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
       });
     } else {
