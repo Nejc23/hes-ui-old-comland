@@ -337,13 +337,6 @@
                 "src/styles/brand/default"
               ]
             }
-          },
-          "configurations": {
-            "pact": {
-              "main": "src/test-pact.ts",
-              "karmaConfig": "src/karma-pact.conf.js",
-              "tsConfig": "src/tsconfig-pact.spec.json"
-            }
           }
         },
         "lint": {

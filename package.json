@@ -14,8 +14,6 @@
     "build": "ng build",
     "test": "ng test",
     "test-coverage": "ng test --code-coverage=true",
-    "pact": "ng test --karmaConfig=src/karma-pact.conf.js --configuration=pact",
-    "pact:publish": "node ./pact/publish-pacts.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "node ./version.js",
@@ -108,10 +106,6 @@
   "devDependencies": {
     "@ag-grid-community/core": "^24.1.0",
     "@locl/cli": "^1.0.0",
-    "@pact-foundation/karma-pact": "^2.3.1",
-    "@pact-foundation/pact": "^9.13.0",
-    "@pact-foundation/pact-node": "^10.11.0",
-    "@pact-foundation/pact-web": "^9.13.0",
     "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.6",
     "@types/jasminewd2": "~2.0.8",
@@ -142,10 +136,6 @@
     }
   },
   "lint-staged": {
-    "pact/**/*.ts": [
-      "npm run format:write",
-      "git add"
-    ],
     "src/**/*.ts": [
       "npm run format:write",
       "git add"
