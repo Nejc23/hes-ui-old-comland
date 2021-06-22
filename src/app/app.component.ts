@@ -63,6 +63,13 @@ export class AppComponent implements OnInit {
   }
 
   getFirstLinkWithAccess(sidebarItems: SidebarItem[]): string {
+    let currentUrl = window.location.href.substring(window.location.href.indexOf('#') + 1, window.location.href.length);
+    let item = sidebarItems.find((item) => currentUrl.indexOf(item.routeLink) !== -1);
+
+    if (sidebarItems.find((item) => currentUrl.indexOf(item.routeLink) !== -1) && this.permissionService.hasAccess(item.permission)) {
+      return currentUrl;
+    }
+
     for (const item of sidebarItems) {
       if (item.permission && this.permissionService.hasAccess(item.permission)) {
         return item.routeLink;
