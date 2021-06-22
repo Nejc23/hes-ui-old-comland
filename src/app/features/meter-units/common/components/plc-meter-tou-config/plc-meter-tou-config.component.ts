@@ -7,6 +7,7 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
 import { IActionRequestParams, IActionRequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-tou-config',
@@ -17,8 +18,8 @@ export class PlcMeterTouConfigComponent implements OnInit {
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = `Required field`;
-  messageServerError = `Server error!`;
+  configRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   actionRequest: IActionRequestParams;
 
   public selectedRowsCount: number;
@@ -28,7 +29,8 @@ export class PlcMeterTouConfigComponent implements OnInit {
     private modal: NgbActiveModal,
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private toast: ToastNotificationService
+    private toast: ToastNotificationService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }

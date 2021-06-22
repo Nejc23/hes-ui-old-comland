@@ -14,25 +14,25 @@
         <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
       </div>
 
-      <app-input-text [form]="form" [property]="nameProperty" label="form.label.name"></app-input-text>
+      <app-input-text [form]="form" [property]="nameProperty" label="form.name"></app-input-text>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="idNumberProperty" label="form.label.id">
+          <app-input-text [form]="form" [property]="idNumberProperty" label="form.id">
           </app-input-text>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="externalIdProperty" label="form.label.external-Id">
+          <app-input-text [form]="form" [property]="externalIdProperty" label="form.external-Id">
           </app-input-text>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="ipProperty" label="form.label.ip"></app-input-text>
+          <app-input-text [form]="form" [property]="ipProperty" label="form.ip"></app-input-text>
         </div>
       </div>
 
@@ -51,7 +51,7 @@
       <div *ngIf="credentialsVisible">
         <div class="form-row">
           <div class="col-6">
-            <app-input-text [form]="form" [property]="userNameProperty" label="form.label.username"></app-input-text>
+            <app-input-text [form]="form" [property]="userNameProperty" label="form.username"></app-input-text>
           </div>
         </div>
       </div>

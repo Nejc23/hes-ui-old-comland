@@ -1,18 +1,20 @@
 <div class="form-group" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{label}}
+    {{ 'FORM.' + label.toUpperCase() | translate }}
     <sup *ngIf="required"> *</sup>
   </label>
 
-  <div *ngIf="isDropZoneCustom" class="dropzone-custom" #customDropzone  [kendoUploadDropZone]="'customZone'"
-    [ngClass]="{'hover-mouse-down': isDropZoneHover}" (dragenter)="onDropZoneEnter($event)"
-    (dragleave)="onDropZoneLeave($event)" (dragend)="onDropZoneEnd($event)" (drop)="onDropZoneEnd($event)">
+  <div *ngIf="isDropZoneCustom" class="dropzone-custom" #customDropzone [kendoUploadDropZone]="'customZone'"
+       [ngClass]="{'hover-mouse-down': isDropZoneHover}" (dragenter)="onDropZoneEnter($event)"
+       (dragleave)="onDropZoneLeave($event)" (dragend)="onDropZoneEnd($event)" (drop)="onDropZoneEnd($event)">
     <div class="text-center" style="width:100%">
       <div *ngIf="!isFileSelectOk && !isFileSelectFailed">
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
-        <div class="title"><a i18n (click)="onFileSelectClick()" href="javascript:void(0);">Choose a file</a><span> or drag it here</span></div>
+        <div class="title"><a (click)="onFileSelectClick()"
+                              href="javascript:void(0);">{{ 'FORM.CHOOSE-FILE' | translate }}</a><span>{{'FORM.DRAG-HERE' | translate }}</span>
+        </div>
         <div class="subtitle pt-2">{{ dropFileSelectSubtitle }}</div>
       </div>
 
@@ -27,35 +29,39 @@
       <div *ngIf="isFileSelectOk">
         <div class="pb-1">
           <i class="fas fa-file"></i>
-        </div>b
-        <div class="title"><span i18n>Selected file:</span><span> {{ fileName}}</span></div>
-        <div class="subtitle pt-2"><span>Drag to upload a new one or </span><a href="javascript:void(0)" (click)="onFileSelectClick()" i18n>Choose a new file</a></div>
+        </div>
+        <div class="title"><span>{{'FORM.SELECTED-FILE' | translate }}:</span><span> {{ fileName}}</span></div>
+        <div class="subtitle pt-2"><span>{{'FORM.DRAG-UPLOAD' | translate }} </span><a href="javascript:void(0)"
+                                                                                       (click)="onFileSelectClick()">{{'FORM.CHOOSE-NEW-FILE' | translate }}</a>
+        </div>
       </div>
 
       <div *ngIf="isFileSelectFailed">
         <div class="pb-2">
-          <span class="fa-stack" >
+          <span class="fa-stack">
             <i class="fas fa-cloud-upload-alt fa-stack-1x"></i>
             <i class="fas fa-exclamation-triangle fa-stack-1x"></i>
           </span>
         </div>
-        <div class="title"><span>File is not supported:</span><span> {{ fileName }}</span></div>
-        <div class="subtitle pt-2"><a href="javascript:void(0)" (click)="onFileSelectClick()" i18n>Select here</a><span i18n> or drag another file to try again.</span></div>
+        <div class="title"><span>{{'FORM.FILE-NOT-SUPPORTED' | translate }}:</span><span> {{ fileName }}</span></div>
+        <div class="subtitle pt-2"><a href="javascript:void(0)"
+                                      (click)="onFileSelectClick()">{{'FORM.SELECT-HERE' | translate }}</a><span> {{ 'FORM.DRAG-ANOTHER' | translate }}</span>
+        </div>
       </div>
     </div>
   </div>
 
   <kendo-fileselect required #uploadSample
-    zoneId="customZone"
-    [formControlName]="property"
-    [restrictions]="restrictions"
-    [multiple]="multiple"
-    [accept]="acceptExtensions"
-    (select)="fileSelected($event)"
-    (remove)="onRemove($event)"
-    [id]="controlId" [name]="controlId">
+                    zoneId="customZone"
+                    [formControlName]="property"
+                    [restrictions]="restrictions"
+                    [multiple]="multiple"
+                    [accept]="acceptExtensions"
+                    (select)="fileSelected($event)"
+                    (remove)="onRemove($event)"
+                    [id]="controlId" [name]="controlId">
   </kendo-fileselect>
-  <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small>
+  <small class="form-text text-muted"><span>{{ textExplanation | translate }}</span> </small>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>

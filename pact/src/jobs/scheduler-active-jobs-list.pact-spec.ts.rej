@@ -1,4 +1,0 @@
-diff a/pact/src/jobs/scheduler-active-jobs-list.pact-spec.ts b/pact/src/jobs/scheduler-active-jobs-list.pact-spec.ts	(rejected hunks)
-@@ -32 +32 @@ describe('Pact consumer test', () => {
--    const deviceId='06130d62-f67c-41a2-98f7-ef521db2cee6'
-+    const deviceId = '06130d62-f67c-41a2-98f7-ef521db2cee6';

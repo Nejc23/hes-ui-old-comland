@@ -1,6 +1,6 @@
 <div class="form-group" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{label !== ' ' ? label : '&nbsp;' | translate}}
+    {{ 'FORM.' + label.toUpperCase() !== ' ' ? label : '&nbsp;' | translate }}
     <span *ngIf="required && label !== ' '"> *</span>
   </label>
   <kendo-combobox [name]="property"

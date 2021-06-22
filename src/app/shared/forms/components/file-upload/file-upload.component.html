@@ -1,6 +1,6 @@
 <div class="form-group file-upload" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{label}}
+    {{ 'FORM' + label.toUpperCase() | translate}}
     <sup *ngIf="required"> *</sup>
   </label>
 
@@ -12,15 +12,15 @@
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
-        <div class="title"><a i18n (click)="onFileSelectClick()" href="javascript:void(0);">Choose a file</a><span> or drag it here</span></div>
-        <div class="subtitle pt-2">{{ dropUploadSubtitle }}</div>
+        <div class="title"><a (click)="onFileSelectClick()" href="javascript:void(0);">{{'FORM.CHOOSE-FILE' | translate }} </a><span> {{'FORM.DRAG-HERE' | translate }}</span></div>
+        <div class="subtitle pt-2">{{ dropUploadSubtitle | translate }}</div>
       </div>
 
       <div *ngIf="isUploadInProgress">
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
-        <div class="title"><span i18n>Uploading file:</span> {{ fileName }}</div>
+        <div class="title"><span>{{'FORM.UPLOADING-FILE' | translate }}:</span> {{ fileName }}</div>
         <kendo-progressbar [label]="false" [min]="0" [max]="100" style="width:50%;" [value]="uploadProgressValue"></kendo-progressbar>
       </div>
 
@@ -28,8 +28,8 @@
         <div class="pb-1">
           <i class="fas fa-file"></i>
         </div>
-        <div class="title"><span i18n>Uploaded file:</span><span> {{ fileName}}</span></div>
-        <div class="subtitle pt-2"><span>Drag to upload a new one or </span><a href="javascript:void(0)" (click)="onFileSelectClick()" i18n>Choose a new file</a></div>
+        <div class="title"><span>{{'FORM.UPLOADED-FILE' | translate }}:</span><span> {{ fileName}}</span></div>
+        <div class="subtitle pt-2"><span>{{'FORM.DRAG-UPLOAD' | translate }} </span><a href="javascript:void(0)" (click)="onFileSelectClick()">{{'FORM.CHOOSE-NEW-FILE' | translate }}</a></div>
       </div>
 
       <div *ngIf="isUploadFailed">
@@ -39,8 +39,8 @@
             <i class="fas fa-exclamation-triangle fa-stack-1x"></i>
           </span>
         </div>
-        <div class="title"><span>Upload failed:</span><span> {{ fileName }}</span></div>
-        <div class="subtitle pt-2"><a href="javascript:void(0)" (click)="onFileSelectClick()" i18n>Select here</a><span i18n> or drag another file to try again.</span></div>
+        <div class="title"><span>{{'FORM.UPLOAD-FILED' | translate }}:</span><span> {{ fileName }}</span></div>
+        <div class="subtitle pt-2"><a href="javascript:void(0)" (click)="onFileSelectClick()">{{'FORM.SELECT-HERE' | translate }}</a><span> {{'FORM.DRAG-ANOTHER' | translate }}</span></div>
       </div>
     </div>
   </div>
@@ -64,7 +64,6 @@
     (select)="fileSelected($event)"
     >
   </kendo-upload>
-  <!-- <small class="form-text text-muted"><span i18n>{{textExplanation}}</span> </small> -->
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>

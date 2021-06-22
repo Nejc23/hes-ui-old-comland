@@ -15,9 +15,9 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   form: FormGroup;
   noConfig = false;
   configRequiredText = this.translate.instant('COMMON.REQUIRED');
-  messageServerError = this.translate.instant('6172419298317243584');
-  successMessage = this.translate.instant('1572585431178923769');
-  uploadDropSubtitle = this.translate.instant('7900792516177766925');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
+  successMessage = this.translate.instant('COMMON.IMPORT-SUCCESSFUL');
+  uploadDropSubtitle = this.translate.instant('COMMON.IMPORT-SUBTITLE');
 
   deviceIdsParam = [];
   public files: Array<any>;
@@ -43,7 +43,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName(this.translate.instant('7399625561211407062'));
+    this.breadcrumbService.setPageName(this.translate.instant('MENU.IMPORT-TEMPLATES'));
   }
 
   public selected(e: SelectEvent): void {

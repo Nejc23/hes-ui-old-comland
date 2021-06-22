@@ -27,7 +27,12 @@
     "TYPE": "Type",
     "ADD": "Add",
     "STATE": "State",
-    "CONFIGURATION": "Configuration"
+    "CONFIGURATION": "Configuration",
+    "ITEMS-SELECTED": "items selected",
+    "ITEMS-FOUND": "items found",
+    "SAVED-STATES": "Saved states",
+    "IMPORT-SUCCESSFUL": "Import successful",
+    "IMPORT-SUBTITLE": "Selected file must be in .json file format."
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -61,12 +66,26 @@
       "EMAIL-ENTRY": "Entry is not a valid email:",
       "DCU-ERROR": "Error saving DCU!"
     },
-    "LABEL": {
-      "NAME": "Name",
-      "ID": "Id (serial number)",
-      "EXTERNAL-ID": "External Id",
-      "IP": "IP"
-    }
+    "FILE": "File",
+    "FILES": "Files",
+    "NAME": "Name",
+    "ID": "Id (serial number)",
+    "EXTERNAL-ID": "External Id",
+    "IP": "IP",
+    "FILE-TYPE": "File type",
+    "UPLOAD": "Upload",
+    "CHOOSE-FILE": "Choose a file",
+    "DRAG-HERE": " or drag it here",
+    "CHOOSE-NEW-FILE": "Choose a new file",
+    "UPLOADING-FILE": "Uploading file",
+    "UPLOADED-FILE": "Uploaded file",
+    "DRAG-UPLOAD": "Drag to upload a new one or ",
+    "UPLOAD-FILED": "Upload failed",
+    "SELECT-HERE": "Select here",
+    "DRAG-ANOTHER": " or drag another file to try again.",
+    "SELECTED-FILE": "Selected file",
+    "FILE-NOT-SUPPORTED": "File is not supported",
+    "IMAGE": "Image"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -111,16 +130,23 @@
     "ADD": "Add",
     "CANCEL": "Cancel",
     "SAVE": "Save",
+    "SAVE-AS-NEW": "Save as new",
     "SAVE-AND-ADD-ANOTHER": "Save and Add another",
-    "CONFIRM": "Confirm"
+    "CONFIRM": "Confirm",
+    "ACTIVATE": "Activate",
+    "UPDATE": "Update",
+    "APPLY": "Apply",
+    "IMPORT": "Import"
   },
   "DCU": {
-    "MORE-SAVE-OPTIONS": "More Save options"
+    "MORE-SAVE-OPTIONS": "More Save options",
+    "FW-UPLOAD-UPGRADE": "Upload FW upgrade image"
   },
   "PLC-METER": {
    "RELAY-STATE-TITLE": "Relay State",
     "RELAY-STATE-BODY": "Are you sure you would like to read state of relay registers for selected meters?",
-    "RELAY-STATE-SECONDARY-TEXT": "State of all relay registers defined on the template will be read!"
+    "RELAY-STATE-SECONDARY-TEXT": "State of all relay registers defined on the template will be read!",
+    "TOU-CONFIG-TITLE": "TOU Configuration"
   },
   "JOB": {
 
