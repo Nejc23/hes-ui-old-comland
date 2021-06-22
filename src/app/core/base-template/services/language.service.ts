@@ -28,10 +28,9 @@ export class LanguageService {
   }
 
   findLanguage(lang: string) {
-    let language = languages.find((lng) => lng.id == lang);
-    if (!language) {
-      language = languages.find((lng) => lng.id == 'en');
+    if (!languages.find((lng) => lng.id == lang)) {
+      return languages.find((lng) => lng.id == 'en');
     }
-    return language;
+    return languages.find((lng) => lng.id == lang);
   }
 }

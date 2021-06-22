@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -23,7 +23,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 export class ModalConfirmComponent implements OnInit {
   @Input() modalTitle: string;
   @Input() modalBody: string;
-  @Input() btnConfirmText = `Confirm`;
+  @Input() btnConfirmText = 'BUTTON.CONFIRM';
   @Input() warningIcon = true;
 
   @Input() checkboxField = '';

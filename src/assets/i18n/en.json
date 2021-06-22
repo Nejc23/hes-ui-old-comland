@@ -111,13 +111,16 @@
     "ADD": "Add",
     "CANCEL": "Cancel",
     "SAVE": "Save",
-    "SAVE-AND-ADD-ANOTHER": "Save and Add another"
+    "SAVE-AND-ADD-ANOTHER": "Save and Add another",
+    "CONFIRM": "Confirm"
   },
   "DCU": {
     "MORE-SAVE-OPTIONS": "More Save options"
   },
-  "METER": {
-
+  "PLC-METER": {
+   "RELAY-STATE-TITLE": "Relay State",
+    "RELAY-STATE-BODY": "Are you sure you would like to read state of relay registers for selected meters?",
+    "RELAY-STATE-SECONDARY-TEXT": "State of all relay registers defined on the template will be read!"
   },
   "JOB": {
 
@@ -130,6 +133,13 @@
       "RULES": "Rules",
       "ERROR": "There are no templates added in the system yet.",
       "SHOW-HIDE": "Show/hide templates"
+    },
+    "IMPORT-DEVICE-KEYS": {
+      "UPLOAD-TEXT": "Selected file must be in .xml or .csv file format.",
+      "SUBTITLE": "To import key material to Vault, first select the security material file type, then select the file to be imported.",
+      "UPLOAD-ONE-FILE": "can only upload one file.",
+      "IMPORT-SUCCESSFUL": "File {{ value1 }}  imported successfully, number of imported meters {{ value2 }}, number of imported keys {{ value3 }}.",
+      "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }`"
     }
   },
   "ALERT": {

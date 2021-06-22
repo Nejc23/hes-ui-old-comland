@@ -15,6 +15,7 @@ import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/cr
 import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { AppConfigService } from 'src/app/core/configuration/services/app-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
@@ -23,10 +24,10 @@ import { AppConfigService } from 'src/app/core/configuration/services/app-config
 export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   @ViewChild('fileUpload') fileUpload: FileUploadComponent;
 
-  uploadDropSubtitle = `Selected file must be in .xml or .csv file format.`;
+  uploadDropSubtitle = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.UPLOAD-TEXT');
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
 
-  subtitle = `To import key material to Vault, first select the security material file type, then select the file to be imported.`;
+  subtitle = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.SUBTITLE');
 
   form: FormGroup;
 
@@ -61,9 +62,10 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private cryptoLiteService: CryptoLiteService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private translate: TranslateService
   ) {
-    this.allowedExtExplainText = `can only upload one file.`;
+    this.allowedExtExplainText = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.UPLOAD-ONE-FILE');
     this.form = this.createForm();
   }
 
@@ -134,12 +136,23 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
           results.push(o);
           if (o.status === 'SUCCESS') {
             this.allResultTexts.push(
-              `File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
+              this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-SUCCESSFUL', {
+                value1: o.fileName,
+                value2: o.meterCount,
+                value3: o.keyCount
+              })
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
           if (o.errorMsg) {
-            this.allErrorTexts.push(`File ${o.fileName} import failed, error message: ${o.errorMsg}`);
+            this.allErrorTexts.push(
+              this.allErrorTexts.push(
+                this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-FAILED', {
+                  value1: o.fileName,
+                  value2: o.errorMsg
+                })
+              )
+            );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
         });
