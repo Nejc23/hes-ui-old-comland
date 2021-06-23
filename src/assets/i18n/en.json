@@ -85,7 +85,8 @@
     "DRAG-ANOTHER": " or drag another file to try again.",
     "SELECTED-FILE": "Selected file",
     "FILE-NOT-SUPPORTED": "File is not supported",
-    "IMAGE": "Image"
+    "IMAGE": "Image",
+    "GULF": "GULF"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",

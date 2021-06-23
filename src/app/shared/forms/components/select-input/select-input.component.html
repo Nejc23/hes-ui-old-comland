@@ -1,24 +1,29 @@
 <div class="form-group" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{ 'FORM.' + label.toUpperCase() !== ' ' ? label : '&nbsp;' | translate }}
+    <ng-container *ngIf="label !== ' '; else blank">
+      {{ 'FORM.' + label.toUpperCase() | translate }}
+    </ng-container>
+    <ng-template #blank>
+      {{ '&nbsp;' }}
+    </ng-template>
     <span *ngIf="required && label !== ' '"> *</span>
   </label>
   <kendo-combobox [name]="property"
-    [attr.disabled]="disabled ? '' : null"
-    class="form-control"
-    isRequired="false"
-    [formControlName]="property"
-    [data]="selectOptions"
-    [defaultItem]="selection"
-    [textField]="'value'"
-    [valueField]="'id'"
-    (valueChange)="valueChange($event)"
-    (selectionChange)="selectionChange($event)"
-    [clearButton]="clearButton"
-    (click)="click()"
+                  [attr.disabled]="disabled ? '' : null"
+                  class="form-control"
+                  isRequired="false"
+                  [formControlName]="property"
+                  [data]="selectOptions"
+                  [defaultItem]="selection"
+                  [textField]="'value'"
+                  [valueField]="'id'"
+                  (valueChange)="valueChange($event)"
+                  (selectionChange)="selectionChange($event)"
+                  [clearButton]="clearButton"
+                  (click)="click()"
   >
   </kendo-combobox>
-    <!--Loop through errors-->
+  <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
     <app-form-error [error]="formControl!.errors "></app-form-error>
   </div>
