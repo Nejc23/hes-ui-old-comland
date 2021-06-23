@@ -32,7 +32,11 @@
     "ITEMS-FOUND": "items found",
     "SAVED-STATES": "Saved states",
     "IMPORT-SUCCESSFUL": "Import successful",
-    "IMPORT-SUBTITLE": "Selected file must be in .json file format."
+    "IMPORT-SUBTITLE": "Selected file must be in .json file format.",
+    "CONFIRM-DELETE": "Confirm delete",
+    "CONFIRM-REMOVE": "Confirm remove",
+    "DELETE": "Delete",
+    "REMOVE": "Remove"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -159,14 +163,25 @@
     "AUTO-TEMPLATE": {
       "RULES": "Rules",
       "ERROR": "There are no templates added in the system yet.",
-      "SHOW-HIDE": "Show/hide templates"
+      "SHOW-HIDE": "Show/hide templates",
+      "ALREADY-ADDED": "Already added empty row for new item!",
+      "RULE-ADDED": "Rule was added successfully",
+      "RULE-UPDATED": "Rule was updated successfully",
+      "DELETE-RULE": "Do you want to delete rule",
+      "RULE-DELETED": "Rule deleted!",
+      "REMOVE-FROM_RULES": "Do you want to remove job from all rules?",
+      "JOB-REMOVED": "Job successfully removed from all rules.",
+      "JOB-FAILED": "Failed to remove job from all rules.",
+      "SELECT-JOB": "Select a job to add.",
+      "JOB-ADDED-TO-ALL": "Job successfully added to all rules",
+      "JOB-FAILED-TO-ALL": "Failed to add job to all rules."
     },
     "IMPORT-DEVICE-KEYS": {
       "UPLOAD-TEXT": "Selected file must be in .xml or .csv file format.",
       "SUBTITLE": "To import key material to Vault, first select the security material file type, then select the file to be imported.",
       "UPLOAD-ONE-FILE": "can only upload one file.",
       "IMPORT-SUCCESSFUL": "File {{ value1 }}  imported successfully, number of imported meters {{ value2 }}, number of imported keys {{ value3 }}.",
-      "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }`"
+      "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }"
     }
   },
   "ALERT": {
