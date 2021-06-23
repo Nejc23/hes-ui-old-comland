@@ -22,6 +22,7 @@ import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service'
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-auto-templates',
@@ -90,7 +91,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private route: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
 
@@ -393,7 +395,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       if (!alreadyNewRow) {
         const rule = this.rowData.find((x) => x.autoTemplateRuleId === 'new');
         if (rule != null) {
-          this.toast.infoToast(`Aready added empty row for new item!`);
+          this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.ALREADY-ADDED"'));
           alreadyNewRow = true;
         }
       }
@@ -431,11 +433,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     if (this.form != null && this.form.get('ruleId').value.localeCompare('new') === 0) {
       const values = this.fillDataNewRule();
       request = this.serviceRepository.createAutoTemplateRule(values);
-      successMessage = `Rule was added successfully`;
+      successMessage = this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-ADDED');
     } else {
       const values = this.fillDataEditRule();
       request = this.serviceRepository.updateAutoTemplateRule(values);
-      successMessage = `Rule was updated successfully`;
+      successMessage = this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-UPDATED');
     }
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
@@ -510,52 +512,35 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const operation = `Delete`;
     response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
-    component.modalTitle = `Confirm delete`;
-    component.modalBody = `Do you want to delete rule?`;
+    component.modalTitle = this.translate.instant('COMMON.DELETE');
+    component.modalBody = this.translate.instant('TOOLS.AUTO-TEMPLATE.DELETE-RULE');
 
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        response.subscribe(
-          (value) => {
-            this.getData();
+    modalRef.result.then((data) => {
+      // on close (CONFIRM)
+      response.subscribe(
+        (value) => {
+          this.getData();
 
-            // refresh grid
-            this.gridApiJobs.setRowData(this.rowDataJobs);
+          // refresh grid
+          this.gridApiJobs.setRowData(this.rowDataJobs);
 
-            this.toast.successToast(`Rule deleted!`);
-          },
-          (e) => {
-            this.toast.errorToast(`Server error!`);
-          }
-        );
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
-    );
-
-    /*
-    messageStarted =   `Scheduler job deleted!`);
-    messageServerError =   `Server error!`);
-
-    const request = this.serviceRepository.deleteAutoTemplateRule(id);
-    this.formUtils.deleteForm(request,   `Selected item deleted')).subscribe(
-      (response: any) => {
-        this.getData();
-      },
-      () => {}
-    );*/
+          this.toast.successToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-DELETED'));
+        },
+        (e) => {
+          this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+        }
+      );
+    });
   }
 
   removeForm(jobId: string) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    const operation = `Remove`;
+    const operation = this.translate.instant('COMMON.REMOVE');
     // response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
-    component.modalTitle = `Confirm remove`;
-    component.modalBody = `Do you want to remove job from all rules?`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-REMOVE');
+    component.modalBody = this.translate.instant('TOOLS.AUTO-TEMPLATE.REMOVE-FROM_RULES');
 
     modalRef.result.then(
       (data) => {
@@ -581,10 +566,10 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     joinedObservables.subscribe(
       () => {
         this.getData();
-        this.toast.infoToast(`Job successfully removed from all rules.`);
+        this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-REMOVED'));
       },
       (err) => {
-        this.toast.errorToast(`Failed to remove job from all rules.`);
+        this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED'));
       }
     );
   }
@@ -598,7 +583,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const selectedJob: Codelist<string> = this.form.get('selectedJob').value;
 
     if (!selectedJob || !selectedJob.id) {
-      this.toast.errorToast(`Select a job to add.`);
+      this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.SELECT-JOB'));
     }
 
     this.addJobIdToAllRules(selectedJob.id);
@@ -619,12 +604,12 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const joinedObservables = forkJoin(batch);
     joinedObservables.subscribe(
       () => {
-        this.toast.infoToast(`Job successfully added to all rules.`);
+        this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-ADDED-TO-ALL'));
 
         this.getData();
       },
       (err) => {
-        this.toast.errorToast(`Failed to add job to all rules.`);
+        this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED-TO-ALL'));
       }
     );
   }
