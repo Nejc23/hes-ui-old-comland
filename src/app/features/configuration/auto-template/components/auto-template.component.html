@@ -63,7 +63,7 @@
           <app-select-input [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
           <div class="form-group">
             <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement?.templateId?.length == 0">
-              <span>{{'BUTTON.ADD' | translate }}</span>
+              <span>{{ 'BUTTON.ADD' | translate }}</span>
             </button>
           </div>
         </div>
@@ -94,9 +94,9 @@
       <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
     </div>
     <div class="card-body">
-      <div class="small-title pb-2">{{'TOOLS.AUTO-TEMPLATE.ERROR' | translate }}</div>
+      <div class="small-title pb-2">{{' TOOLS.AUTO-TEMPLATE.ERROR' | translate }}</div>
     </div>
   </div>
   </div>
 </div>
-<ng-template #hidwShowTemplates><span>{{'TOOLS.AUTO-TEMPLATE.SHOW-HIDE' | translate }}</span></ng-template>
+<ng-template #hidwShowTemplates><span>{{ 'TOOLS.AUTO-TEMPLATE.SHOW-HIDE' | translate }}</span></ng-template>

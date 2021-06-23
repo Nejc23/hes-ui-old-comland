@@ -15,7 +15,6 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { AutoTemplatesStaticTextService } from '../services/auto-template-static-text.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
@@ -52,7 +51,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   public gridOptions;
   public getRowHeight;
 
-  public headerTitle = this.staticTextService.title;
+  public headerTitle = this.translate.instant('AUTO-TEMPLATES');
   public form: FormGroup;
 
   private expadedTemplates: string[] = [];
@@ -80,7 +79,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    public staticTextService: AutoTemplatesStaticTextService,
     private service: AutoTemplatesGridService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,

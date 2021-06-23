@@ -37,7 +37,9 @@
     "CONFIRM-REMOVE": "Confirm remove",
     "DELETE": "Delete",
     "REMOVE": "Remove",
-    "All": "All"
+    "All": "All",
+    "NA": "N/A",
+    "AUTO-TEMPLATES": "Auto Templates"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -226,7 +228,15 @@
     "LIMITER-2-EMERGENCY": "Limiter 2 Th. emergency",
     "CURRENT-L1": "Current L1 Monitor",
     "CURRENT-L2": "Current L2 Monitor",
-    "CURRENT-L3": "Current L3 Monitor"
+    "CURRENT-L3": "Current L3 Monitor",
+    "OBIS": "Obis",
+    "JOB-TYPE": "Job Type",
+    "REGEX": "Regex",
+    "DESCRIPTION": "Description",
+    "NEXT-RUN": "Next run",
+    "OWNER": "Owner",
+    "ADD-NEW-RULE": "Add new rule",
+    "JOB-DESCRIPTION": "Description"
   },
   "LOGIN": {
     "TITLE": "Login",
