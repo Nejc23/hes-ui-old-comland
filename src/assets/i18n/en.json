@@ -32,7 +32,8 @@
     "ITEMS-FOUND": "items found",
     "SAVED-STATES": "Saved states",
     "IMPORT-SUCCESSFUL": "Import successful",
-    "IMPORT-SUBTITLE": "Selected file must be in .json file format."
+    "IMPORT-SUBTITLE": "Selected file must be in .json file format.",
+    "All": "All"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -140,7 +141,10 @@
   },
   "DCU": {
     "MORE-SAVE-OPTIONS": "More Save options",
-    "FW-UPLOAD-UPGRADE": "Upload FW upgrade image"
+    "FW-UPLOAD-UPGRADE": "Upload FW upgrade image",
+    "NO-DATA-CONCENTRATOR-UNITS": "You have no Data Concentrator Units yet!",
+    "ADD-FIRST": "Add First",
+    "SHOW-HIDE-FILTERS": "Show/hide filters"
   },
   "PLC-METER": {
    "RELAY-STATE-TITLE": "Relay State",
@@ -173,6 +177,8 @@
   },
   "GRID": {
     "SELECT-DESELECT-ALL": "Select/deselect all",
+    "SELECT-ALL": "Select all",
+    "CLEAR-SELECTED": "Clear selected",
     "STATUS": "Status",
     "PROTOCOL": "Protocol",
     "NAME": "Name",
