@@ -13,7 +13,7 @@
         </div>
         <div class="dropdown-divider"></div>
         <app-input-multiselect  [form]="form" [property]="columnsProperty" (change)="showHideFromArrayOfCheckBoxes()" name="multSelectTypes"
-          [isReadOnly]="false" [options]="columns$" [inline]="false" class="dropdown-item custom-color-grid-columns" i18n-label>
+          [isReadOnly]="false" [options]="columns$" [inline]="false" class="dropdown-item custom-color-grid-columns">
         </app-input-multiselect>
       </div>
     </div>
@@ -31,9 +31,9 @@
     </div>
 
 </div>
-<ng-template #tipContentSearch><span i18n>Search data</span></ng-template>
-<ng-template #tipContentColumns><span i18n>Show/hide grid columns</span></ng-template>
-<ng-template #tipContentRefresh><span i18n>Refresh grid</span></ng-template>
-<ng-template #hideShowFilter><span i18n>Show/hide filters</span><span><br />{{filtersInfo?.text}}</span></ng-template>
+<ng-template #tipContentSearch><span>{{ 'GRID.SEARCH-DATA' | translate }}</span></ng-template>
+<ng-template #tipContentColumns><span>{{ 'GRID.SHOW-HIDE-COLUMNS' | translate }}</span></ng-template>
+<ng-template #tipContentRefresh><span>{{ 'GRID.REFRESH-GRID' | translate }}</span></ng-template>
+<ng-template #hideShowFilter><span>{{ 'GRID.SHOW-HIDE-FILTERS' | translate }}</span><span><br />{{filtersInfo?.text}}</span></ng-template>
 
 

@@ -44,7 +44,8 @@
     "TAGS": "Tags",
     "EDIT": "Edit",
     "NA": "N/A",
-    "AUTO-TEMPLATES": "Auto Templates"
+    "AUTO-TEMPLATES": "Auto Templates",
+    "ADVANCED": "Advanced"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -100,7 +101,9 @@
     "IMAGE": "Image",
     "GULF": "GULF",
     "SERIAL-NUMBER": "Serial number",
-    "MAC": "MAC"
+    "MAC": "MAC",
+    "USERNAME": "Username",
+    "PORT": "Port"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -158,7 +161,7 @@
     "FW-UPLOAD-UPGRADE": "Upload FW upgrade image",
     "NO-DATA-CONCENTRATOR-UNITS": "You have no Data Concentrator Units yet!",
     "ADD-FIRST": "Add First",
-    "SHOW-HIDE-FILTERS": "Show/hide filters"
+    "EDIT-DCU": "Edit Data Concentrator Unit"
   },
   "PLC-METER": {
    "RELAY-STATE-TITLE": "Relay State",
@@ -243,7 +246,11 @@
     "NEXT-RUN": "Next run",
     "OWNER": "Owner",
     "ADD-NEW-RULE": "Add new rule",
-    "JOB-DESCRIPTION": "Description"
+    "JOB-DESCRIPTION": "Description",
+    "SHOW-HIDE-COLUMNS": "Show/hide grid columns",
+    "REFRESH-GRID": "Refresh grid",
+    "SHOW-HIDE-FILTERS": "Show/hide filters",
+    "SEARCH-DATA": "Search data"
   },
   "LOGIN": {
     "TITLE": "Login",

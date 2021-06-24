@@ -9,7 +9,7 @@
     <div class="filter-scroll">
       <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
         <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
-          [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+          [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
           (valueChanged)="applyFilter()">
         </app-input-tag>
 
