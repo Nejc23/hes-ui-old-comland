@@ -25,6 +25,7 @@ export class AuthService {
   public user: User | null;
 
   tokenName = 'myGrid.Link_Token';
+  locale = '';
 
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
@@ -37,19 +38,19 @@ export class AuthService {
     private configStoreService: AppConfigStoreService
   ) {
     this.configStoreService.configObservable.subscribe((appConfig) => {
-      let locale = localStorage.getItem('lang');
+      this.locale = localStorage.getItem('lang') || 'en';
       const settings = {
         authority: appConfig.identityServer.stsAuthority,
         client_id: appConfig.identityServer.clientId,
         redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html`
-          : `${appConfig.identityServer.clientRoot}${locale}/assets/signin-callback.html`,
+          : `${appConfig.identityServer.clientRoot}${this.locale}/assets/signin-callback.html`,
         silent_redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}assets/silent-callback.html`
-          : `${appConfig.identityServer.clientRoot}${locale}/assets/silent-callback.html`,
+          : `${appConfig.identityServer.clientRoot}${this.locale}/assets/silent-callback.html`,
         post_logout_redirect_uri: environment.ignoreLocale
           ? `${appConfig.identityServer.clientRoot}`
-          : `${appConfig.identityServer.clientRoot}${locale}`,
+          : `${appConfig.identityServer.clientRoot}${this.locale}`,
         response_type: 'id_token token',
         scope: appConfig.identityServer.clientScope,
         automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew
@@ -145,6 +146,7 @@ export class AuthService {
     if (isDevelop === this.user.id_token) {
       localStorage.setItem('is_develop', this.user.id_token);
     }
+    localStorage.setItem('lang', this.locale);
     this.setUserRights(authenticatedUser);
   }
 

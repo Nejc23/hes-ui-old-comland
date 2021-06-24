@@ -7,6 +7,8 @@ import * as _ from 'lodash';
 import cronstrue from 'cronstrue/i18n';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import cron from 'cron-validate';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../../core/base-template/services/language.service';
 
 @Component({
   templateUrl: './cron-schedule.component.html',
@@ -53,10 +55,15 @@ export class CronScheduleComponent implements OnInit {
   dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: `Week day (MON-FRI)` }];
 
   formValues: FormValues;
-  locale = '';
+  locale = 'en';
 
-  constructor(private formBuilder: FormBuilder, private formUtils: FormsUtilsService) {
-    this.locale = localStorage.getItem('lang');
+  constructor(
+    private formBuilder: FormBuilder,
+    private formUtils: FormsUtilsService,
+    private translateService: TranslateService,
+    private languageService: LanguageService
+  ) {
+    this.locale = this.languageService.selectedLang.id;
   }
 
   ngOnInit() {
