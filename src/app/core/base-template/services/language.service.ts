@@ -20,7 +20,7 @@ export class LanguageService {
     localStorage.setItem('lang', language.id);
     this.translate.use(language.id);
     this.selectedLang = language;
-    (this.intlService as CldrIntlService).localeId = language.acceptLanguage;
+    (this.intlService as CldrIntlService).localeId = language.id;
   }
 
   getLang(): Language {

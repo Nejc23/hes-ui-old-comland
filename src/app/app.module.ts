@@ -10,6 +10,29 @@ import { AppConfigService } from './core/configuration/services/app-config.servi
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { registerLocaleData } from '@angular/common';
+// Load all required data for the sl locale
+import localeSl from '@angular/common/locales/global/sl';
+import localeCz from '@angular/common/locales/global/cs';
+import localeDe from '@angular/common/locales/global/de';
+import localeFr from '@angular/common/locales/global/fr';
+import localeIt from '@angular/common/locales/global/it';
+import localeSlExtra from '@angular/common/locales/extra/sl';
+import localeCzExtra from '@angular/common/locales/extra/cs';
+import localeDeExtra from '@angular/common/locales/extra/de';
+import localeFrExtra from '@angular/common/locales/extra/fr';
+import localeItExtra from '@angular/common/locales/extra/it';
+import '@progress/kendo-angular-intl/locales/sl/all';
+import '@progress/kendo-angular-intl/locales/cs/all';
+import '@progress/kendo-angular-intl/locales/de/all';
+import '@progress/kendo-angular-intl/locales/fr/all';
+import '@progress/kendo-angular-intl/locales/it/all';
+import '@progress/kendo-angular-intl/locales/en-GB/all';
+registerLocaleData(localeSl, 'sl', localeSlExtra);
+registerLocaleData(localeCz, 'cs', localeCzExtra);
+registerLocaleData(localeDe, 'de', localeDeExtra);
+registerLocaleData(localeFr, 'fr', localeFrExtra);
+registerLocaleData(localeIt, 'it', localeItExtra);
 import { LanguageService } from './core/base-template/services/language.service';
 
 declare const require;

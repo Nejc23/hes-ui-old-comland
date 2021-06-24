@@ -52,16 +52,15 @@ export const configAgGridDefCol = {
 export const gridRefreshInterval = 30;
 
 export const languages: Array<Language> = [
-  { id: 'en', value: 'English', acceptLanguage: 'en-US' },
-  { id: 'sl', value: 'Slovenščina', acceptLanguage: 'sl-SI' },
-  { id: 'de', value: 'Deutsch', acceptLanguage: 'de-DE' },
-  { id: 'cs', value: 'Čeština', acceptLanguage: 'cs-CZ' },
-  { id: 'fr', value: 'Français', acceptLanguage: 'fr-FR' },
-  { id: 'it', value: 'Italiano', acceptLanguage: 'it-IT' }
+  { id: 'en', acceptLanguage: 'en-US' },
+  { id: 'sl', acceptLanguage: 'sl-SI' },
+  { id: 'de', acceptLanguage: 'de-DE' },
+  { id: 'cs', acceptLanguage: 'cs-CZ' },
+  { id: 'fr', acceptLanguage: 'fr-FR' },
+  { id: 'it', acceptLanguage: 'it-IT' }
 ];
 
 export interface Language {
   id: string;
-  value: string;
   acceptLanguage: string;
 }

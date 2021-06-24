@@ -46,6 +46,7 @@
     "NA": "N/A",
     "AUTO-TEMPLATES": "Auto Templates",
     "ADVANCED": "Advanced",
+    "NO-RECORDS": "No records found. You may need to adjust your date range.",
     "SELECTED-ITEMS-DELETED": "Selected items deleted"
   },
   "FORM": {
@@ -170,16 +171,20 @@
     "CONFIRM-DELETE": "Delete {{param}} selected Data Concentrator Units?"
   },
   "PLC-METER": {
-   "RELAY-STATE-TITLE": "Relay State",
+    "RELAY-STATE-TITLE": "Relay State",
     "RELAY-STATE-BODY": "Are you sure you would like to read state of relay registers for selected meters?",
     "RELAY-STATE-SECONDARY-TEXT": "State of all relay registers defined on the template will be read!",
-    "TOU-CONFIG-TITLE": "TOU Configuration"
+    "TOU-CONFIG-TITLE": "TOU Configuration",
+    "IMPORT-SUCCESSFULLY": "`Import xml file was successfully",
+    "SUBTITLE": "To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.",
+    "DROP-SUBTITLE": "Selected file must be in .xml file format.",
+    "IMPORT-TOU-TITLE": "Import TOU Configuration"
   },
   "JOB": {
 
   },
   "ALARM": {
-
+    "NO-ALARMS": "No Alarms have been added yet"
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {
@@ -257,11 +262,36 @@
     "REFRESH-GRID": "Refresh grid",
     "SHOW-HIDE-FILTERS": "Show/hide filters",
     "SEARCH-DATA": "Search data",
+    "COLUMNS": "columns",
+    "FILTERS": "filters",
+    "PAGE": "page",
+    "MORE": "more",
+    "TO": "to",
+    "OF": "of",
+    "NEXT": "next",
+    "LAST": "last",
+    "FIRST": "first",
+    "PREVIOUS": "previous",
+    "LOADING-WITH-DOTS": "loading...",
+    "TIMESTAMP": "Timestamp",
+    "ID": "Id",
+    "SEVERITY": "Severity",
+    "SOURCE-TYPE": "Source type",
+    "MANUFACTURER": "Manufacturer",
+    "SOURCE": "Source",
     "OF": "{{selected}} of {{all}}"
   },
   "LOGIN": {
     "TITLE": "Login",
     "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login"
+  },
+  "LANGUAGE": {
+    "EN": "English",
+    "SL": "Slovenščina",
+    "DE": "Deutsch",
+    "CS": "Čeština",
+    "FR": "Français",
+    "IT": "Italiano"
   },
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",

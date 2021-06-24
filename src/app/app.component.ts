@@ -1,10 +1,9 @@
-import { Component, OnInit, Inject, LOCALE_ID } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { themeColors } from './shared/base-template/consts/theme-colors.const';
-import * as moment from 'moment';
 import { Title } from '@angular/platform-browser';
 import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from './core/auth/services/auth.service';
-import { IntlService, CldrIntlService } from '@progress/kendo-angular-intl';
+import { IntlService } from '@progress/kendo-angular-intl';
 import { SidebarService } from './core/base-template/services/sidebar.service';
 import { SidebarItem } from './shared/base-template/interfaces/sidebar-item.interface';
 import { Router } from '@angular/router';
