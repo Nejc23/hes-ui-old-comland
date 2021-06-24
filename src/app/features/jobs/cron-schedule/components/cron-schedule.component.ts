@@ -60,7 +60,7 @@ export class CronScheduleComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private translateService: TranslateService,
+    private translate: TranslateService,
     private languageService: LanguageService
   ) {
     this.locale = this.languageService.selectedLang.id;
@@ -255,13 +255,13 @@ export class CronScheduleComponent implements OnInit {
   getCronDescription(freq: Frequency) {
     const cronExpression = this.generateCronExpression(freq);
     if (freq === Frequency.Advanced && !this.isAdvancedCronValid) {
-      return `N/A`;
+      return this.translate.instant('COMMON.NA');
     }
 
     if (cronExpression && cronExpression !== '') {
       return cronstrue.toString(cronExpression, { locale: this.locale, use24HourTimeFormat: true });
     }
-    return `N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   generateCronExpression(freq: Frequency = this.selectedFrequency): string {
@@ -346,7 +346,7 @@ export class CronScheduleComponent implements OnInit {
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.findIndex(this.formValues.monthlyMonthDays, (x) => x === dayinMonth) > -1 ? true : false;
+    const result = _.findIndex(this.formValues.monthlyMonthDays, (x) => x === dayinMonth) > -1;
     if (!result) {
       this.formValues.monthlyMonthDays.push(dayinMonth);
     } else {

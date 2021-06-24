@@ -79,7 +79,7 @@ export class AlarmsComponent implements OnInit {
 
     this.localeText = {
       // for side panel
-      columns: this.translate.instant('GRID.COLUMNS'), //   this.translate.instant('CONFIRM-REMOVE');
+      columns: this.translate.instant('GRID.COLUMNS'),
       filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel

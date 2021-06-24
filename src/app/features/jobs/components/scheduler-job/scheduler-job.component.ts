@@ -1,11 +1,11 @@
-import { PermissionService } from './../../../../core/permissions/services/permission.service';
-import { NotificationFilter, ReadingProperties } from './../../../../core/repository/interfaces/jobs/scheduler-job.interface';
-import { DataConcentratorUnitsSelectComponent } from './../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
+import { PermissionService } from '../../../../core/permissions/services/permission.service';
+import { NotificationFilter, ReadingProperties } from '../../../../core/repository/interfaces/jobs/scheduler-job.interface';
+import { DataConcentratorUnitsSelectComponent } from '../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
-import { ToastNotificationService } from './../../../../core/toast-notification/services/toast-notification.service';
-import { CronScheduleComponent } from './../../cron-schedule/components/cron-schedule.component';
-import { Component, OnInit, ViewChild, Input, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { CronScheduleComponent } from '../../cron-schedule/components/cron-schedule.component';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -24,6 +24,8 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { RegistersSelectRequest } from '../../../../core/repository/interfaces/registers-select/registers-select-request.interface';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
@@ -129,7 +131,8 @@ export class SchedulerJobComponent implements OnInit {
     private toast: ToastNotificationService,
     private dataConcentratorUnitsSelectGridService: DataConcentratorUnitsSelectGridService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private translate: TranslateService
   ) {
     this.initAddJobsForUser();
   }
@@ -200,22 +203,22 @@ export class SchedulerJobComponent implements OnInit {
   setTitle(): string {
     switch (this.jobType) {
       case JobTypeEnumeration.discovery: {
-        return `Discovery Job`;
+        return this.translate.instant('JOB.DISCOVERY-JOB');
       }
       case JobTypeEnumeration.readEvents: {
-        return `DC Read events job`;
+        return this.translate.instant('JOB.DC-READ-EVENTS-JOB');
       }
       case JobTypeEnumeration.timeSync: {
-        return `DC Time sync job`;
+        return this.translate.instant('JOB.DC-TIME-SYNC-JOB');
       }
       case JobTypeEnumeration.topology: {
-        return `Topology job`;
+        return this.translate.instant('JOB.TOPOLOGY-JOB');
       }
       case JobTypeEnumeration.alarmNotification: {
-        return `Alarm notification`;
+        return this.translate.instant('JOB.ALARM-NOTIFICATION');
       }
       default: {
-        return `Reading Jobs`;
+        return this.translate.instant('JOB.READING-JOBS');
       }
     }
   }
@@ -439,6 +442,7 @@ export class SchedulerJobComponent implements OnInit {
   cancel() {
     this.modal.dismiss();
   }
+
   registerSelectionChanged(hasValues: boolean) {
     this.noRegisters = !hasValues;
   }
@@ -451,9 +455,11 @@ export class SchedulerJobComponent implements OnInit {
   get endAtProperty() {
     return nameOf<SchedulerJobForm>((o) => o.endAt);
   }
+
   get registersProperty() {
     return nameOf<SchedulerJobForm>((o) => o.registers);
   }
+
   get devicesProperty() {
     return nameOf<SchedulerJobForm>((o) => o.devices);
   }

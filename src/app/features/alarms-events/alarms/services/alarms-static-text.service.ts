@@ -16,7 +16,7 @@ export class AlarmsStaticTextService {
   }
 
   get noRecordsFound() {
-    return this.translate.instant('COMMON.NO-RECORDS');
+    return this.translate.instant('COMMON.NO-RECORDS-DATE-RANGE');
   }
 
   get loadingData() {

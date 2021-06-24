@@ -1,13 +1,12 @@
-import { PermissionService } from './../../../../core/permissions/services/permission.service';
-import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
-import { JobTypeEnumeration } from './../../enums/job-type.enum';
+import { PermissionService } from '../../../../core/permissions/services/permission.service';
+import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
 import { GridUtils } from 'src/app/features/global/grid.utils';
-import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
+import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
+import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
-import { forkJoin, Observable, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
+import { Observable, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { SchedulerJobsListGridService } from '../../services/scheduler-jobs-list-grid.service';
@@ -25,6 +24,7 @@ import { SchedulerJobsListGridLayoutStore } from '../../interfaces/scheduler-job
 import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-scheduler-jobs-list',
@@ -98,7 +98,8 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     private settingsStoreService: SettingsStoreService,
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private translate: TranslateService
   ) {
     if (this.gridApi) {
       this.gridApi.purgeServerSideCache([]);
@@ -183,19 +184,19 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: `Columns`,
-      filters: `Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: `page`,
-      more: `more`,
-      to: `to`,
-      of: `of`,
-      next: `next`,
-      last: `last`,
-      first: `first`,
-      previous: `previous`,
-      loadingOoo: `loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
     this.breadcrumbService.setPageName(this.headerTitle);
