@@ -9,6 +9,7 @@ import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridL
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { FileInfo } from '@progress/kendo-angular-upload';
 import { DataConcentratorUnitsGridService } from '../../services/data-concentrator-units-grid.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dcu-fw-upgrade',
@@ -26,8 +27,7 @@ export class DcuFwUpgradeComponent implements OnInit {
   activate = false;
 
   public selectedRowsCount: number;
-
-  uploadDropSubtitle = `Selected file must be in .bin file format.`;
+  uploadDropSubtitle = this.translate.instant('DCU.FILE-BIN-FORMAT');
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +36,7 @@ export class DcuFwUpgradeComponent implements OnInit {
     private dcuOperatrionService: DataConcentratorUnitsOperationsService,
     private toast: ToastNotificationService,
     private dcuGridService: DataConcentratorUnitsGridService,
+    private translate: TranslateService,
     private authService: AuthService
   ) {
     this.form = this.createForm();
@@ -83,7 +84,7 @@ export class DcuFwUpgradeComponent implements OnInit {
     }
 
     const request = this.dcuOperatrionService.postDcFwUpgrade(formData);
-    const successMessage = `FW Upgrade in progress`;
+    const successMessage = this.translate.instant('DCU.FW-UPGRADE-PROGRESS');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (result && result.length > 0) {

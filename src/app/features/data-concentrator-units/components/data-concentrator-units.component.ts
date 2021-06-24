@@ -1,46 +1,44 @@
-import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { SettingsStoreEmitterService } from './../../../core/repository/services/settings-store/settings-store-emitter.service';
-import { DcuUnitsGridLayoutStore } from './../interfaces/dcu-units-grid-layout.store';
-import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
-import { SidebarToggleService } from './../../../shared/base-template/components/services/sidebar.service';
-import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
-import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
-import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
-import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
-import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
-
-import * as moment from 'moment';
-import { Subscription, Observable, of } from 'rxjs';
-
-// consts
-import { configAgGrid, gridRefreshInterval } from 'src/environments/config';
-import { enumSearchFilterOperators } from 'src/environments/config';
-import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import * as _ from 'lodash';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
-import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
-import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { DcOperationsService } from '../services/dc-operations.service';
-import { DcOperationTypeEnum } from '../enums/operation-type.enum';
+import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
+import * as moment from 'moment';
+import { Subscription } from 'rxjs';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
+import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
+import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+// consts
+import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
+import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { GridUtils } from '../../global/grid.utils';
 import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { DcOperationTypeEnum } from '../enums/operation-type.enum';
+import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
+import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
+import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
+import { DcOperationsService } from '../services/dc-operations.service';
+import { SettingsStoreEmitterService } from './../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { SidebarToggleService } from './../../../shared/base-template/components/services/sidebar.service';
+import { DcuUnitsGridLayoutStore } from './../interfaces/dcu-units-grid-layout.store';
+import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -113,8 +111,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   isGridLoaded = false;
   areSettingsLoaded = false;
 
-  messageDataFwUpgraded = `FW Upgrade successful!`;
-  messageActionFailed = `FW Upgrade failed!`;
+  messageDataFwUpgraded = this.translate.instant('DCU.FW-UPGRADE-SUCCESSFUL');
+  messageActionFailed = this.translate.instant('DCU.FW-UPGRADE-FAILED');
 
   taskStatusOK = 'TASK_SUCCESS';
   taskStatusFailure = 'TASK_FAILURE';
@@ -140,7 +138,8 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     public fb: FormBuilder,
     private dcuOperationsService: DataConcentratorUnitsOperationsService,
     private toast: ToastNotificationService,
-    private jobsSelectGridService: JobsSelectGridService
+    private jobsSelectGridService: JobsSelectGridService,
+    private translate: TranslateService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -537,14 +536,14 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = `Delete`;
-    component.modalBody = `Delete` + ` ${selectedText} ` + `selected Data Concentrator Units?`;
+    component.btnConfirmText = this.translate.instant('COMMON.DELETE');
+    component.modalBody = this.translate.instant('DCU.CONFIRM-DELETE', { param: selectedText });
 
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
         const request = this.dataConcentratorUnitsService.deleteDcu(object);
-        this.formUtils.deleteForm(request, `Selected items deleted`).subscribe(
+        this.formUtils.deleteForm(request, this.translate.instant('COMMON.SELECTED-ITEMS-DELETED')).subscribe(
           (response: any) => {
             this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
             this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
@@ -567,11 +566,10 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   getTotalCountWithoutExcluded(): string {
     const excludedRowsLength = this.dataConcentratorUnitsGridService.getSessionSettingsExcludedRows().length;
-
     if (excludedRowsLength === 0) {
       return this.totalCount.toString();
     } else {
-      return `${this.totalCount - excludedRowsLength} ${`of`} ${this.totalCount}`;
+      return this.translate.instant('GRID.OF', { selected: this.totalCount - excludedRowsLength, all: this.totalCount });
     }
   }
 

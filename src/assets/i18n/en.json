@@ -37,7 +37,7 @@
     "CONFIRM-REMOVE": "Confirm remove",
     "DELETE": "Delete",
     "REMOVE": "Remove",
-    "All": "All",
+    "ALL": "All",
     "USERNAME": "Username",
     "ADDRESS": "Address",
     "PORT": "Port",
@@ -45,7 +45,8 @@
     "EDIT": "Edit",
     "NA": "N/A",
     "AUTO-TEMPLATES": "Auto Templates",
-    "ADVANCED": "Advanced"
+    "ADVANCED": "Advanced",
+    "SELECTED-ITEMS-DELETED": "Selected items deleted"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -161,7 +162,12 @@
     "FW-UPLOAD-UPGRADE": "Upload FW upgrade image",
     "NO-DATA-CONCENTRATOR-UNITS": "You have no Data Concentrator Units yet!",
     "ADD-FIRST": "Add First",
-    "EDIT-DCU": "Edit Data Concentrator Unit"
+    "EDIT-DCU": "Edit Data Concentrator Unit",
+    "FILE-BIN-FORMAT": "Selected file must be in .bin file format.",
+    "FW-UPGRADE-PROGRESS": "FW Upgrade in progress",
+    "FW-UPGRADE-SUCCESSFUL": "FW Upgrade successful!",
+    "FW-UPGRADE-FAILED": "FW Upgrade failed!",
+    "CONFIRM-DELETE": "Delete {{param}} selected Data Concentrator Units?"
   },
   "PLC-METER": {
    "RELAY-STATE-TITLE": "Relay State",
@@ -250,7 +256,8 @@
     "SHOW-HIDE-COLUMNS": "Show/hide grid columns",
     "REFRESH-GRID": "Refresh grid",
     "SHOW-HIDE-FILTERS": "Show/hide filters",
-    "SEARCH-DATA": "Search data"
+    "SEARCH-DATA": "Search data",
+    "OF": "{{selected}} of {{all}}"
   },
   "LOGIN": {
     "TITLE": "Login",
