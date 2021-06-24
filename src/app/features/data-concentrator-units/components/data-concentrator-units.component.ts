@@ -209,21 +209,21 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: `Columns`,
-      filters: `Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: `page`,
-      more: `more`,
-      to: `to`,
-      of: `of`,
-      next: `next`,
-      last: `last`,
-      first: `first`,
-      previous: `previous`,
-      loadingOoo: `loading...`,
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS'),
 
-      selectAll: `Select All`
+      selectAll: this.translate.instant('GRID.SELECT-ALL')
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
@@ -569,7 +569,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     if (excludedRowsLength === 0) {
       return this.totalCount.toString();
     } else {
-      return this.translate.instant('GRID.OF', { selected: this.totalCount - excludedRowsLength, all: this.totalCount });
+      return this.translate.instant('GRID.SELECTED-OF-ALL', { selected: this.totalCount - excludedRowsLength, all: this.totalCount });
     }
   }
 

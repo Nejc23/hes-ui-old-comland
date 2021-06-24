@@ -279,7 +279,7 @@
     "SOURCE-TYPE": "Source type",
     "MANUFACTURER": "Manufacturer",
     "SOURCE": "Source",
-    "OF": "{{selected}} of {{all}}"
+    "SELECTED-OF-ALL": "{{selected}} of {{all}}"
   },
   "LOGIN": {
     "TITLE": "Login",
