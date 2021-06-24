@@ -8,6 +8,7 @@ import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/gri
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,7 @@ export class SchedulerJobsListGridService {
   columns = [];
   paramsJobs = {} as GridRequestParams;
 
-  constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService) {}
+  constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService, private translate: TranslateService) {}
 
   /**
    *  Set templates for grid
@@ -45,8 +46,8 @@ export class SchedulerJobsListGridService {
         suppressMovable: true,
         field: 'active',
         cellRenderer: 'gridCellActiveComponent',
-        headerName: `Active`,
-        headerTooltip: `Active`,
+        headerName: this.translate.instant('GRID.ACTIVE'),
+        headerTooltip: this.translate.instant('GRID.ACTIVE'),
         resizable: false
       },
       {
@@ -54,8 +55,8 @@ export class SchedulerJobsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: `Description`,
-        headerTooltip: `Description`,
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION'),
         resizable: false
       },
       {
@@ -63,8 +64,8 @@ export class SchedulerJobsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: `Job Type`,
-        headerTooltip: `Job Type`,
+        headerName: this.translate.instant('GRID.JOB-TYPE'),
+        headerTooltip: this.translate.instant('GRID.JOB-TYPE'),
         resizable: false
       },
       {
@@ -73,8 +74,8 @@ export class SchedulerJobsListGridService {
         sortable: false,
         suppressMovable: true,
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: `Next run`,
-        headerTooltip: `Next run`,
+        headerName: this.translate.instant('GRID.NEXT-RUN'),
+        headerTooltip: this.translate.instant('GRID.NEXT-RUN'),
         resizable: false
       },
       {
@@ -82,8 +83,8 @@ export class SchedulerJobsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: `Created by`,
-        headerTooltip: `Created by`,
+        headerName: this.translate.instant('GRID.CREATED-BY'),
+        headerTooltip: this.translate.instant('GRID.CREATED-BY'),
         resizable: false
       },
       {
@@ -92,8 +93,8 @@ export class SchedulerJobsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellDeviceCountComponent',
-        headerName: `Devices`,
-        headerTooltip: `Devices`,
+        headerName: this.translate.instant('GRID.DEVICES'),
+        headerTooltip: this.translate.instant('GRID.DEVICES'),
         resizable: false
       },
       {

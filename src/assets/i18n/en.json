@@ -46,11 +46,15 @@
     "NA": "N/A",
     "AUTO-TEMPLATES": "Auto Templates",
     "ADVANCED": "Advanced",
-    "NO-RECORDS": "No records found. You may need to adjust your date range.",
+    "NO-RECORDS-DATE-RANGE": "No records found. You may need to adjust your date range.",
+    "NO-RECORDS-SEARCH": "No records found. You may need to adjust your search or filter parameters.",
     "SELECTED-ITEMS-DELETED": "Selected items deleted",
     "SEARCH": "Search",
     "OPEN-DETAILS": "Open details",
-    "SELECT-OPERATION": "Select operation"
+    "SELECT-OPERATION": "Select operation",
+    "LOADING-DATA": "Loading data..",
+    "NO-FILTER-APPLIED": "No filter applied",
+    "EVERY": "Every"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -109,7 +113,14 @@
     "MAC": "MAC",
     "USERNAME": "Username",
     "PORT": "Port",
-    "BASIC": "Basic"
+    "BASIC": "Basic",
+    "DESCRIPTION": "Description",
+    "FOR-LAST": "For last",
+    "HOURS": "Hour(s)",
+    "MINUTES" : "Minute(s)",
+    "DAYS": "Day(s)",
+    "WEEK-DAYS": "Week-days",
+    "EXPRESSION": "Expression"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -189,7 +200,19 @@
     "IMPORT-TOU-TITLE": "Import TOU Configuration"
   },
   "JOB": {
-
+    "NO-JOBS": "No Jobs have been added yet.",
+    "NEXT-READ": "Next planned read",
+    "SCHEDULER-JOB-STARTED": "Scheduler job started!",
+    "DISCOVERY-JOB": "Discovery Job",
+    "DC-READ-EVENTS-JOB": "DC Read events job",
+    "DC-TIME-SYNC-JOB": "DC Time sync job",
+    "TOPOLOGY-JOB": "Topology job",
+    "ALARM-NOTIFICATION": "Alarm notification",
+    "READING-JOBS": "Reading Jobs",
+    "CRON-SCHEDULE": {
+      "DAYS-IN-MONTH": "Days in month",
+      "EXPRESSION-INVALID": "Expression is invalid."
+    }
   },
   "ALARM": {
     "NO-ALARMS": "No Alarms have been added yet"
@@ -287,7 +310,10 @@
     "SOURCE-TYPE": "Source type",
     "MANUFACTURER": "Manufacturer",
     "SOURCE": "Source",
-    "SELECTED-OF-ALL": "{{selected}} of {{all}}"
+    "SELECTED-OF-ALL": "{{selected}} of {{all}}",
+    "ACTIVE": "Active",
+    "CREATED-BY": "Created by",
+    "DEVICES": "Devices"
   },
   "LOGIN": {
     "TITLE": "Login",
