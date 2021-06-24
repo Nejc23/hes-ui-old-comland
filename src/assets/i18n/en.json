@@ -161,10 +161,14 @@
     "SHOW-HIDE-FILTERS": "Show/hide filters"
   },
   "PLC-METER": {
-   "RELAY-STATE-TITLE": "Relay State",
+    "RELAY-STATE-TITLE": "Relay State",
     "RELAY-STATE-BODY": "Are you sure you would like to read state of relay registers for selected meters?",
     "RELAY-STATE-SECONDARY-TEXT": "State of all relay registers defined on the template will be read!",
-    "TOU-CONFIG-TITLE": "TOU Configuration"
+    "TOU-CONFIG-TITLE": "TOU Configuration",
+    "IMPORT-SUCCESSFULLY": "`Import xml file was successfully",
+    "SUBTITLE": "To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.",
+    "DROP-SUBTITLE": "Selected file must be in .xml file format.",
+    "IMPORT-TOU-TITLE": "Import TOU Configuration"
   },
   "JOB": {
 
