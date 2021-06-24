@@ -47,7 +47,10 @@
     "AUTO-TEMPLATES": "Auto Templates",
     "ADVANCED": "Advanced",
     "NO-RECORDS": "No records found. You may need to adjust your date range.",
-    "SELECTED-ITEMS-DELETED": "Selected items deleted"
+    "SELECTED-ITEMS-DELETED": "Selected items deleted",
+    "SEARCH": "Search",
+    "OPEN-DETAILS": "Open details",
+    "SELECT-OPERATION": "Select operation"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -105,7 +108,8 @@
     "SERIAL-NUMBER": "Serial number",
     "MAC": "MAC",
     "USERNAME": "Username",
-    "PORT": "Port"
+    "PORT": "Port",
+    "BASIC": "Basic"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -168,7 +172,11 @@
     "FW-UPGRADE-PROGRESS": "FW Upgrade in progress",
     "FW-UPGRADE-SUCCESSFUL": "FW Upgrade successful!",
     "FW-UPGRADE-FAILED": "FW Upgrade failed!",
-    "CONFIRM-DELETE": "Delete {{param}} selected Data Concentrator Units?"
+    "CONFIRM-DELETE": "Delete {{param}} selected Data Concentrator Units?",
+    "DCU-ADDED-SUCCESSFULLY": "Data Concentration Unit was added successfully",
+    "ERROR-SCHEDULER": "Error adding scheduler. {{errorMessage}}",
+    "DCU-UPDATED-SUCCESSFULLY": "Data Concentration Unit was updated successfully",
+    "DATA-CONCENTRATOR-UNIT": "Data concentrator unit"
   },
   "PLC-METER": {
     "RELAY-STATE-TITLE": "Relay State",

@@ -1,25 +1,21 @@
-import { device } from 'src/app/core/repository/consts/meter-units.const';
-import { TemplatingService } from './../../../core/repository/services/templating/templating.service';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { capitalize, toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/data-concentrator-units/dc-operation-simple.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { DcOperationTypeEnum } from '../enums/operation-type.enum';
-import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
-import { capitalize, toLower, values } from 'lodash';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
-import {
-  IActionRequestGetCommonRegisterGroups,
-  IActionRequestParams
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { DcOperationTypeEnum } from '../enums/operation-type.enum';
+import { TemplatingService } from './../../../core/repository/services/templating/templating.service';
+import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 
 @Injectable({
   providedIn: 'root'

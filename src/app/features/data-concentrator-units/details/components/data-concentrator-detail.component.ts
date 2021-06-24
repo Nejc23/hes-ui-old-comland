@@ -15,6 +15,7 @@ import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permi
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -42,11 +43,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
-    this.breadcrumbService.setPageName(`Data concentrator unit`);
+    this.breadcrumbService.setPageName(this.translate.instant('DCU.DATA-CONCENTRATOR-UNIT'));
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -211,7 +213,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   saveDcu() {
     const dcuFormData = this.fillData();
     const request = this.dataConcentratorUnitsService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = `Data Concentration Unit was updated successfully`;
+    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(

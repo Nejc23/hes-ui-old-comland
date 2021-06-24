@@ -15,6 +15,7 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-add-dcu-form',
   templateUrl: './add-dcu-form.component.html'
@@ -35,9 +36,6 @@ export class AddDcuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  getTabTitleBasic = `Basic`;
-  getTabTitleJobs = `Jobs`;
-
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
@@ -47,7 +45,8 @@ export class AddDcuFormComponent implements OnInit {
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private jobsService: JobsService,
     private toast: ToastNotificationService,
-    private jobsSelectGridService: JobsSelectGridService
+    private jobsSelectGridService: JobsSelectGridService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -124,8 +123,7 @@ export class AddDcuFormComponent implements OnInit {
   save(addNew: boolean) {
     const dcuFormData = this.fillData();
     const request = this.dcuService.createDcu(dcuFormData);
-
-    const successMessage = `Data Concentration Unit was added successfully`;
+    const successMessage = this.translate.instant('DCU.DCU-ADDED-SUCCESSFULLY');
 
     const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
     try {
@@ -141,7 +139,7 @@ export class AddDcuFormComponent implements OnInit {
                 },
                 (errResult) => {
                   const resultErrMessage = errResult.error ? errResult.error : null;
-                  const errMessage = `Error adding scheduler.` + ` ` + resultErrMessage;
+                  const errMessage = this.translate.instant('DCU.ERROR-SCHEDULER', { errorMessage: resultErrMessage });
 
                   this.toast.successToast(successMessage);
                   this.toast.errorToast(errMessage);

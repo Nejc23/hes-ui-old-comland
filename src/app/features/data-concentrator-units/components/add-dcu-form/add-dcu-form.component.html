@@ -6,7 +6,7 @@
     <ng-container>
 
       <kendo-tabstrip (tabSelect)="onTabSelect($event);" [keepTabContent]="true">
-        <kendo-tabstrip-tab [title]="getTabTitleBasic" [selected]="true">
+        <kendo-tabstrip-tab title="{{ 'FORM.BASIC' | translate }}" [selected]="true">
           <ng-template kendoTabContent>
 
 
@@ -62,7 +62,7 @@
 
       </ng-template>
     </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab [title]="getTabTitleJobs">
+    <kendo-tabstrip-tab title="{{ 'FORM.JOBS' | translate }}">
       <ng-template kendoTabContent>
         <div class="form-row">
           <div class="col-12 p-0">

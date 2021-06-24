@@ -11,6 +11,7 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-dcu-form',
@@ -39,7 +40,8 @@ export class EditDcuFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
-    private eventService: DataConcentratorUnitsGridEventEmitterService
+    private eventService: DataConcentratorUnitsGridEventEmitterService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -72,7 +74,7 @@ export class EditDcuFormComponent implements OnInit {
   saveDcu() {
     const dcuFormData = this.fillData();
     const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = `Data Concentration Unit was updated successfully`;
+    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
