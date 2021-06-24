@@ -20,6 +20,7 @@ export class InputTagComponent implements OnInit, OnChanges {
   @Input() disabled = false;
   @Input() allowCustomValues = false;
   @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Input() translationKey = '';
 
   controlId: string;
   nextId = 0; // for adding more new values we need to store max id

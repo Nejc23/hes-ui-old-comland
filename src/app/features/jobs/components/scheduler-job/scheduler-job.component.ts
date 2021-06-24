@@ -215,7 +215,7 @@ export class SchedulerJobComponent implements OnInit {
         return this.translate.instant('JOB.TOPOLOGY-JOB');
       }
       case JobTypeEnumeration.alarmNotification: {
-        return this.translate.instant('JOB.ALARM-NOTIFICATION');
+        return this.translate.instant('JOB.ALARM-NOTIFICATION.TITLE');
       }
       default: {
         return this.translate.instant('JOB.READING-JOBS');

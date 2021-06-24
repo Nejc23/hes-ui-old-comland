@@ -1,10 +1,10 @@
-<h3 i18n>Send notification message when alarm events matches one or more criteria bellow.</h3>
-<div i18n>At least one of the rules below should be active</div>
+<h3>{{ 'JOB.ALARM-NOTIFICATION.SUBTITLE' | translate }}</h3>
+<div>{{ 'JOB.ALARM-NOTIFICATION.TEXT' | translate }}</div>
 
 <div *ngIf="form">
   <div class="form-row mt-4">
     <div class="col-3">
-      <app-input-switch [form]="form" [property]="isAlarmIdActiveProperty" i18n-label label="Alarm ID" (valueChanged)="inputSwitchChange($event, alarmIdsProperty)">
+      <app-input-switch [form]="form" [property]="isAlarmIdActiveProperty" label="Alarm-ID" (valueChanged)="inputSwitchChange($event, alarmIdsProperty)">
       </app-input-switch>
     </div>
     <div class="col-9">
@@ -14,7 +14,7 @@
   </div>
   <div class="form-row">
     <div class="col-3">
-      <app-input-switch [form]="form" [property]="isSeverityActiveProperty" i18n-label label="Severity" (valueChanged)="inputSwitchChange($event, severitiesProperty)">
+      <app-input-switch [form]="form" [property]="isSeverityActiveProperty" label="Severity" (valueChanged)="inputSwitchChange($event, severitiesProperty)">
       </app-input-switch>
     </div>
     <div class="col-9">
@@ -24,7 +24,7 @@
   </div>
   <div class="form-row">
     <div class="col-3">
-      <app-input-switch [form]="form" [property]="isProtocolActiveProperty" i18n-label label="Protocol" (valueChanged)="inputSwitchChange($event, protocolsProperty)">
+      <app-input-switch [form]="form" [property]="isProtocolActiveProperty" label="Protocol" (valueChanged)="inputSwitchChange($event, protocolsProperty)">
       </app-input-switch>
     </div>
     <div class="col-9">
@@ -34,7 +34,7 @@
   </div>
   <div class="form-row">
     <div class="col-3">
-      <app-input-switch [form]="form" [property]="isManufacturerActiveProperty" i18n-label label="Manufacturer" (valueChanged)="inputSwitchChange($event, manufacturersProperty)">
+      <app-input-switch [form]="form" [property]="isManufacturerActiveProperty" label="Manufacturer" (valueChanged)="inputSwitchChange($event, manufacturersProperty)">
       </app-input-switch>
     </div>
     <div class="col-9">
@@ -44,7 +44,7 @@
   </div>
   <div class="form-row">
     <div class="col-3">
-      <app-input-switch [form]="form" [property]="isSourceActiveProperty" i18n-label label="Source" (valueChanged)="inputSwitchChange($event, sourcesProperty)">
+      <app-input-switch [form]="form" [property]="isSourceActiveProperty" label="Source" (valueChanged)="inputSwitchChange($event, sourcesProperty)">
       </app-input-switch>
     </div>
     <div class="col-9">
@@ -52,13 +52,13 @@
         </app-input-tag>
     </div>
     <div class="help-block pb-2" *ngIf="noRuleActive">
-      <i class="far fa-info-circle text-danger"></i><small class="text-danger">At least one of the rules must be active.</small>
+      <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{'ALARM-NOTIFICATION.ONE-RULE' | translate }}.</small>
     </div>
   </div>
 
   <div class="form-row">
     <div class="col-12">
-      <app-input-tag [property]="addressesProperty" [form]="form" [allowCustomValues]="true" i18n-label [label]="'Send notifications to'"
+      <app-input-tag [property]="addressesProperty" [form]="form" [allowCustomValues]="true" [translationKey]="'JOB.ALARM-NOTIFICATION.SEND-NOTIFICATIONS-TO'"
           [disabled]="false" [selected]="rules?.addresses">
       </app-input-tag>
     </div>
