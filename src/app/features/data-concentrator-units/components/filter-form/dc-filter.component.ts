@@ -216,7 +216,6 @@ export class DcFilterComponent implements OnInit, OnDestroy {
   }
 
   errorValidatorReadStatusComponents() {
-    debugger;
     if (this.form.errors != null && this.form.errors.outOfRange) {
       return this.translate.instant('FORM.ERROR.RANGE-VALUE');
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {

@@ -80,7 +80,6 @@ export class PlcMeterTouConfigImportComponent implements OnInit {
         this.resetForm();
       },
       (x) => {
-        debugger;
         if (x.statusText) this.toast.errorToast(x.statusText);
         console.log(x);
       } // error

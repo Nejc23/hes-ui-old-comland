@@ -9,9 +9,7 @@ import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
 export class LanguageService {
   public selectedLang: Language;
 
-  constructor(private translate: TranslateService, public intlService: IntlService) {
-    this.selectedLang = this.findLanguage(localStorage.getItem('lang'));
-  }
+  constructor(private translate: TranslateService, public intlService: IntlService) {}
 
   selectLang(lang: string) {
     const language = this.findLanguage(lang);

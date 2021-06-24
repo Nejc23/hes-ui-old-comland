@@ -26,9 +26,7 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.languageService.getLang();
-    console.log('SELECTED LANGUAGE:');
-    console.log(this.languageService.getLang());
+    this.languageService.selectLang(localStorage.getItem('lang') || 'en');
     // TODO: complete this
     // this.authService.setRefreshTokenInterval();
     this.titleService.setTitle(brand.appBrowserTitle);
