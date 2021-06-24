@@ -9,20 +9,8 @@ export class DataConcentratorUnitsStaticTextService {
 
   constructor() {}
 
-  get headerTitleDCU() {
-    return `Concentrators`;
-  }
-
-  get jobsTitle() {
-    return `Jobs`;
-  }
-
   get notAvailableTekst() {
     return `N/A`;
-  }
-
-  get noRecordsFound() {
-    return `No records found. You may need to adjust your search or filter parameters.`;
   }
 
   get loadingData() {

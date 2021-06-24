@@ -62,7 +62,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
-  overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
+  overlayNoRowsTemplate = this.translate.instant('GRID.NO-RECORDS-FOUND');
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
   public hideFilter = true;
@@ -77,7 +77,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public icons;
   public frameworkComponents;
   public sideBar;
-  headerTitle = this.staticTextService.headerTitleDCU;
+  headerTitle = this.translate.instant('COMMON.CONCENTRATORS');
 
   requestModel: GridRequestParams = {
     requestId: null,

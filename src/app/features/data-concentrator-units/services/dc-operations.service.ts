@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { capitalize, toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
@@ -21,15 +22,16 @@ import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid
   providedIn: 'root'
 })
 export class DcOperationsService {
-  messageActionInProgress = `Action in progress!`;
-  messageServerError = `Server error!`;
+  messageActionInProgress = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
 
   constructor(
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: DataConcentratorUnitsOperationsService,
     private dcGridService: DataConcentratorUnitsGridService,
-    private templatingService: TemplatingService
+    private templatingService: TemplatingService,
+    private translate: TranslateService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams) {
@@ -204,28 +206,28 @@ export class DcOperationsService {
 
   // actions without popup
   bulkOperation(operation: DcOperationTypeEnum, params: any, selectedCount: number) {
-    let selectedText = ''; // `${selectedCount} rows `;
+    // let selectedText = ''; // `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = `Confirm`;
+    component.btnConfirmText = this.translate.instant('BUTTON.CONFIRM');
     let response: Observable<any> = new Observable();
 
     let operationName = '';
     switch (operation) {
       case DcOperationTypeEnum.syncTime:
         response = this.service.postDcSynchronizeTime(params);
-        operationName = `Sync time`;
-        selectedText = `${`for`} ${selectedText}`;
+        operationName = this.translate.instant('OPERATION.SYNC-TIME');
+        // selectedText = `${`for`} ${selectedText}`;
         break;
       case DcOperationTypeEnum.deviceDiscovery:
         response = this.service.postDcDeviceDiscovery(params);
-        operationName = `Device discovery`;
-        selectedText = `${`for`} ${selectedText}`;
+        operationName = this.translate.instant('OPERATION.DEVICE-DISCOVERY');
+        // selectedText = `${`for`} ${selectedText}`;
         break;
     }
 
-    component.modalTitle = `${operationName} (${selectedCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` +  `selected meter unit(s)?`;
+    component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
+    component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
 
     modalRef.result.then(
       (data) => {

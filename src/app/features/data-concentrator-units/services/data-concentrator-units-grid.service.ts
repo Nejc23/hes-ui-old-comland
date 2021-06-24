@@ -22,6 +22,7 @@ import { GridCellIconComponent } from '../components/grid-custom-components/grid
 import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,8 @@ export class DataConcentratorUnitsGridService {
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
     private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
-    private gridColumnShowHideService: GridColumnShowHideService
+    private gridColumnShowHideService: GridColumnShowHideService,
+    private translate: TranslateService
   ) {}
 
   /**
@@ -58,7 +60,7 @@ export class DataConcentratorUnitsGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: `Select/deselect all`
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL')
       },
       {
         field: 'nextRead',
@@ -80,128 +82,128 @@ export class DataConcentratorUnitsGridService {
       },
       {
         field: 'status',
-        headerName: `Status`,
+        headerName: this.translate.instant('GRID.STATUS'),
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: `Status`,
+        headerTooltip: this.translate.instant('GRID.STATUS'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'name',
-        headerName: `Name`,
+        headerName: this.translate.instant('GRID.NAME'),
         //   pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: `Name`,
+        headerTooltip: this.translate.instant('GRID.NAME'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'id',
-        headerName: `Serial number`,
+        headerName: this.translate.instant('GRID.SERIAL-NUMBER'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: `Serial number`,
+        headerTooltip: this.translate.instant('GRID.SERIAL-NUMBER'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'ip',
-        headerName: `IP`,
+        headerName: this.translate.instant('GRID.IP'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: `IP`,
+        headerTooltip: this.translate.instant('GRID.IP'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'type',
-        headerName: `Type`,
+        headerName: this.translate.instant('COMMON.TYPE'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: `Type`,
+        headerTooltip: this.translate.instant('COMMON.TYPE'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'vendor',
-        headerName: `Manufacturer`,
+        headerName: this.translate.instant('GRID.MANUFACTURER'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: `Manufacturer`,
+        headerTooltip: this.translate.instant('GRID.MANUFACTURER'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'meters',
-        headerName: `Meters`,
+        headerName: this.translate.instant('COMMON.METERS'),
         //    pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellMetersComponent',
-        headerTooltip: `Meters`,
+        headerTooltip: this.translate.instant('COMMON.METERS'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'readStatusTimeStamp',
-        headerName: `Read status`,
+        headerName: this.translate.instant('GRID.READ-STATUS'),
         //    pinned: true,
         sortable: true,
         filter: false,
         sort: 'desc',
         cellRenderer: 'gridCellReadStatusComponent',
-        headerTooltip: `Read status`,
+        headerTooltip: this.translate.instant('GRID.READ-STATUS'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'lastCommunication',
-        headerName: `Last communication`,
+        headerName: this.translate.instant('GRID.LAST-COMMUNICATION'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellLastCommunicationComponent',
-        headerTooltip: `Last communication`,
+        headerTooltip: this.translate.instant('GRID.LAST-COMMUNICATION'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'tags',
-        headerName: `Tags`,
+        headerName: this.translate.instant('GRID.TAGS'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTagsComponent',
-        headerTooltip: `Tags`,
+        headerTooltip: this.translate.instant('GRID.TAGS'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: 'jobStatus',
-        headerName: `Job status`,
+        headerName: this.translate.instant('GRID.JOB-TYPE'),
         // pinned: 'right',
         // lockPinned: true,
         // lockPosition: true,
@@ -209,7 +211,7 @@ export class DataConcentratorUnitsGridService {
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellJobStatusComponent',
-        headerTooltip: `Job status`,
+        headerTooltip: this.translate.instant('GRID.JOB-TYPE'),
         resizable: false,
         suppressMenu: true
       },
