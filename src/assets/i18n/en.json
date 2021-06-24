@@ -37,7 +37,12 @@
     "CONFIRM-REMOVE": "Confirm remove",
     "DELETE": "Delete",
     "REMOVE": "Remove",
-    "All": "All"
+    "All": "All",
+    "USERNAME": "Username",
+    "ADDRESS": "Address",
+    "PORT": "Port",
+    "TAGS": "Tags",
+    "EDIT": "Edit"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -91,7 +96,9 @@
     "SELECTED-FILE": "Selected file",
     "FILE-NOT-SUPPORTED": "File is not supported",
     "IMAGE": "Image",
-    "GULF": "GULF"
+    "GULF": "GULF",
+    "SERIAL-NUMBER": "Serial number",
+    "MAC": "MAC"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
