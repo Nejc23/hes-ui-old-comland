@@ -1,5 +1,5 @@
-import { GridCellSourceComponent } from './../components/grid/grid-cell-source.component';
-import { GridCellSeverityComponent } from './../components/grid/grid-cell-severity.component';
+import { GridCellSourceComponent } from '../components/grid/grid-cell-source.component';
+import { GridCellSeverityComponent } from '../components/grid/grid-cell-severity.component';
 import { Injectable } from '@angular/core';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -9,6 +9,7 @@ import { GridCellTimestampComponent } from '../components/grid/grid-cell-timesta
 import { GridCellProtocolComponent } from 'src/app/features/meter-units/types/components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellManufacturerComponent } from '../components/grid/grid-cell-manufacturer.component';
 import { GridCellSourceTypeComponent } from '../components/grid/grid-cell-source-type.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ import { GridCellSourceTypeComponent } from '../components/grid/grid-cell-source
 export class AlarmsListGridService {
   sessionNameForGridState = 'grdAlarms-list';
 
-  constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService) {}
+  constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService, private translate: TranslateService) {}
 
   public setFrameworkComponents() {
     return {
@@ -37,8 +38,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellTimestampComponent',
-        headerName: `Timestamp`,
-        headerTooltip: `Timestamp`,
+        headerName: this.translate.instant('GRID.TIMESTAMP'),
+        headerTooltip: this.translate.instant('GRID.TIMESTAMP'),
         resizable: false
       },
       {
@@ -46,8 +47,8 @@ export class AlarmsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: `Id`,
-        headerTooltip: `Id`,
+        headerName: this.translate.instant('GRID.ID'),
+        headerTooltip: this.translate.instant('GRID.ID'),
         resizable: false
       },
       {
@@ -56,8 +57,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellSeverityComponent',
-        headerName: `Severity`,
-        headerTooltip: `Severity`,
+        headerName: this.translate.instant('GRID.SEVERITY'),
+        headerTooltip: this.translate.instant('GRID.SEVERITY'),
         resizable: false
       },
       {
@@ -66,8 +67,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellSourceComponent',
-        headerName: `Source type`,
-        headerTooltip: `Source type`,
+        headerName: this.translate.instant('GRID.SOURCE-TYPE'),
+        headerTooltip: this.translate.instant('GRID.SOURCE-TYPE'),
         resizable: false
       },
       {
@@ -76,8 +77,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellProtocolComponent',
-        headerName: `Protocol`,
-        headerTooltip: `Protocol`,
+        headerName: this.translate.instant('GRID.PROTOCOL'),
+        headerTooltip: this.translate.instant('GRID.PROTOCOL'),
         resizable: false
       },
       {
@@ -86,8 +87,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellManufacturerComponent',
-        headerName: `Manufacturer`,
-        headerTooltip: `Manufacturer`,
+        headerName: this.translate.instant('GRID.MANUFACTURER'),
+        headerTooltip: this.translate.instant('GRID.MANUFACTURER'),
         resizable: false
       },
       {
@@ -96,8 +97,8 @@ export class AlarmsListGridService {
         sortable: true,
         suppressMovable: true,
         cellRenderer: 'gridCellSourceComponent',
-        headerName: `Source`,
-        headerTooltip: `Source`,
+        headerName: this.translate.instant('GRID.SOURCE'),
+        headerTooltip: this.translate.instant('GRID.SOURCE'),
         resizable: false
       },
       {
@@ -105,8 +106,8 @@ export class AlarmsListGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: `Description`,
-        headerTooltip: `Description`,
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION'),
         resizable: false
       }
     ];

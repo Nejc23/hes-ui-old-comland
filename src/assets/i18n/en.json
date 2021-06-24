@@ -45,7 +45,8 @@
     "EDIT": "Edit",
     "NA": "N/A",
     "AUTO-TEMPLATES": "Auto Templates",
-    "ADVANCED": "Advanced"
+    "ADVANCED": "Advanced",
+    "NO-RECORDS": "No records found. You may need to adjust your date range."
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -177,7 +178,7 @@
 
   },
   "ALARM": {
-
+    "NO-ALARMS": "No Alarms have been added yet"
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {
@@ -254,7 +255,24 @@
     "SHOW-HIDE-COLUMNS": "Show/hide grid columns",
     "REFRESH-GRID": "Refresh grid",
     "SHOW-HIDE-FILTERS": "Show/hide filters",
-    "SEARCH-DATA": "Search data"
+    "SEARCH-DATA": "Search data",
+    "COLUMNS": "columns",
+    "FILTERS": "filters",
+    "PAGE": "page",
+    "MORE": "more",
+    "TO": "to",
+    "OF": "of",
+    "NEXT": "next",
+    "LAST": "last",
+    "FIRST": "first",
+    "PREVIOUS": "previous",
+    "LOADING-WITH-DOTS": "loading...",
+    "TIMESTAMP": "Timestamp",
+    "ID": "Id",
+    "SEVERITY": "Severity",
+    "SOURCE-TYPE": "Source type",
+    "MANUFACTURER": "Manufacturer",
+    "SOURCE": "Source"
   },
   "LOGIN": {
     "TITLE": "Login",

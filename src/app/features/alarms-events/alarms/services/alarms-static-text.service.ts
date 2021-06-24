@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlarmsStaticTextService {
+  constructor(private translate: TranslateService) {}
+
   get notAvailableTekst() {
-    return `N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get noData() {
-    return `No Alarms have been added yet.`;
+    return this.translate.instant('ALARM.NO-ALARMS');
   }
 
   get noRecordsFound() {
-    return `No records found. You may need to adjust your date range.`;
+    return this.translate.instant('COMMON.NO-RECORDS');
   }
 
   get loadingData() {
-    return `Loading data...`;
+    return this.translate.instant('GRID.LOADING-WITH-DOTS');
   }
 }
