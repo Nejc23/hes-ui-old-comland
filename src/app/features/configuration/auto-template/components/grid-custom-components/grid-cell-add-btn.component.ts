@@ -29,9 +29,4 @@ export class GridCellAddBtnComponent implements ICellRendererAngularComp {
   refresh(): boolean {
     return false;
   }
-
-  // set tooltip text
-  setToolTip() {
-    return `Add new rule`;
-  }
 }

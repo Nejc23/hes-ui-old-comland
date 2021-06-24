@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import * as moment from 'moment';
-import { AutoTemplatesStaticTextService } from '../../services/auto-template-static-text.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-next-run-no-event',
@@ -10,7 +10,7 @@ import { AutoTemplatesStaticTextService } from '../../services/auto-template-sta
 export class GridCellNextRunNoEventComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private staticextService: AutoTemplatesStaticTextService) {}
+  constructor(private translate: TranslateService) {}
 
   // called on init
   agInit(params: any): void {
@@ -24,6 +24,6 @@ export class GridCellNextRunNoEventComponent implements ICellRendererAngularComp
   }
 
   setNextReadText(time: string) {
-    return `${time ? moment(time).fromNow() : this.staticextService.notAvailableTekst}`;
+    return `${time ? moment(time).fromNow() : this.translate.instant('COMMON.NA')}`;
   }
 }
