@@ -278,6 +278,14 @@
     "TITLE": "Login",
     "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login"
   },
+  "LANGUAGE": {
+    "EN": "English",
+    "SL": "Slovenščina",
+    "DE": "Deutsch",
+    "CS": "Čeština",
+    "FR": "Français",
+    "IT": "Italiano"
+  },
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",
   "6170762843185284641": "Concentrator for",

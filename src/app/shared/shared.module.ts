@@ -42,7 +42,6 @@ import { HideIfUnauthorizedDirective } from './directives/permissions/hide-if-un
 import { NumberOnlyDirective } from './directives/number-only.directive';
 import { ModalConfirmComponent } from './modals/components/modal-confirm.component';
 import { PipesModule } from './pipes/pipes.module';
-import { SideFixedNavComponent } from './base-template/components/side-fixed-nav.component';
 import { Page404Component } from './404/page-404.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
@@ -232,7 +231,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DisableIfActionUnauthorizedDirective,
     HideIfActionUnauthorizedDirective,
     NumberOnlyDirective,
-    SideFixedNavComponent,
     TopFixedNavComponent,
     Page404Component,
     AutoRefreshComponent,

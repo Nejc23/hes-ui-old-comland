@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { brand } from 'src/environments/brand/default/brand';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { Codelist } from '../../repository/interfaces/codelists/codelist.interface';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
-import { languages } from 'src/environments/config';
+import { Language, languages } from 'src/environments/config';
 import { AppConfigService } from '../../../core/configuration/services/app-config.service';
 
 @Component({
@@ -17,7 +16,7 @@ export class TopFixedNavComponent implements OnInit {
   company = '';
   email = '';
 
-  languages$: Codelist<string>[];
+  languages$: Array<Language>;
   language = 'English';
 
   constructor(public authService: AuthService, private languageService: LanguageService) {}
