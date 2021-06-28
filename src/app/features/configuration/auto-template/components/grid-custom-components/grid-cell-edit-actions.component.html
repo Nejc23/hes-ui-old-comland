@@ -2,17 +2,17 @@
   <div *ngIf="!isRowInEditMode()" class="btn-group-sm">
     <button
         type="button" class="btn btn-primary m-0" (click)="editItem(params)"><i class="far fa-edit"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('edit')"></i></button>
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="'COMMON.EDIT-RULE' | translate "></i></button>
     <button
         type="button" class="btn btn-primary m-0" (click)="deleteItem(params)"><i class="far fa-trash"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('delete')"></i></button>
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="'COMMON.DELETE-RULE' | translate "></i></button>
   </div>
   <div *ngIf="isRowInEditMode()" class="btn-group-sm pinned">
     <button
         type="button" class="btn btn-primary m-0" (click)="saveItem(params)"><i class="far fa-check"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('save')"></i></button>
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="'COMMON.SAVE' | translate "></i></button>
     <button
         type="button" class="btn btn-primary m-0" (click)="cancelItem(params)"><i class="far fa-ban"
-        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('cancel')"></i></button>
+        container="body" placement="bottom" [openDelay]="500" triggers="hover" [ngbTooltip]="'COMMON.CANCEL' | translate "></i></button>
   </div>
 </div>

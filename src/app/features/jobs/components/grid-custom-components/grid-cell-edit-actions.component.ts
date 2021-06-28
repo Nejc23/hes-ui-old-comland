@@ -14,6 +14,7 @@ import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -32,7 +33,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private eventService: SchedulerJobsEventEmitterService,
     private codelistService: CodelistRepositoryService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private translate: TranslateService
   ) {}
 
   // called on init
@@ -50,11 +52,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = `Execute`;
+    const operation = this.translate.instant('COMMON.EXECUTE');
     response = this.service.executeSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = `Confirm operation`;
-    component.modalBody = `Do you want to execute scheduler job now`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-OPERATION');
+    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.EXECUTE');
 
     modalRef.result.then(
       (data) => {
@@ -255,11 +257,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = `Delete`;
+    const operation = this.translate.instant('COMMON.DELETE');
     response = this.service.deleteSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = `Confirm delete`;
-    component.modalBody = `Do you want to delete scheduler job?`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-DELETE');
+    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.DELETE');
 
     modalRef.result.then(
       (data) => {
@@ -285,11 +287,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'run':
-        return `Execute job`;
+        return this.translate.instant('COMMON.EXECUTE-JOB');
       case 'edit':
-        return `Edit job`;
+        return this.translate.instant('COMMON.EDIT-JOB');
       case 'delete':
-        return `Delete job`;
+        return this.translate.instant('COMMON.DELETE-JOB');
     }
     return '';
   }

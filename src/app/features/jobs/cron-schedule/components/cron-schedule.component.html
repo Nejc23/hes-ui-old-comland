@@ -5,7 +5,7 @@
         <div class="d-flex">
           <label class="label-left">{{ 'COMMON.EVERY' | translate }}</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minutes" [form]="form" [property]="minutesMinutesProperty" [selectOptions]="everyMinutes"
+            <app-select-input label="Minutes" [form]="form" [property]="minutesMinutesProperty" [selectOptions]="everyMinutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -120,7 +120,7 @@
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">:</label>
+          <label class="label-left">:</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="monthlyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
