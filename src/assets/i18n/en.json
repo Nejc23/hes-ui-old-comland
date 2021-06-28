@@ -64,7 +64,9 @@
     "MONTHLY": "Monthly",
     "TAG": "tag",
     "SELECT-ITEM": "Select item...",
-    "EXPRESSION-INVALID": "Expression invalid"
+    "EXPRESSION-INVALID": "Expression invalid",
+    "SUCCEEDED": "Succeeded",
+    "FAILED": "Failed"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -239,6 +241,13 @@
     "DC-TIME-SYNC-JOB": "DC Time sync job",
     "TOPOLOGY-JOB": "Topology job",
     "READING-JOBS": "Reading Jobs",
+    "STATUS-JOB": {
+      "TOTAL-DEVICES": "Total devices",
+      "TOTAL-TIME": "Total time:",
+      "RUNNING-TIME": "Running time:",
+      "PROGRESS": "Progress",
+      "ERROR": "Error getting status job"
+    },
     "CRON-SCHEDULE": {
       "DAYS-IN-MONTH": "Days in month"
     },

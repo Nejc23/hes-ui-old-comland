@@ -12,7 +12,7 @@
               {{ deviceCount }}
             </ng-container>
           </div>
-          <div class="tiny-text gray-color">Total devices</div>
+          <div class="tiny-text gray-color">{{ 'JOB.STATUS-JOB.TOTAL-DEVICES' | translate }}</div>
         </div>
       </div>
 
@@ -26,7 +26,7 @@
               {{ statusJobProgress.successCount }}
             </ng-container>
           </div>
-          <div class="tiny-text gray-color">Succeded</div>
+          <div class="tiny-text gray-color">{{ 'COMMON.SUCCEEDED' | translate }}</div>
         </div>
       </div>
 
@@ -40,14 +40,14 @@
               {{ statusJobProgress.failCount }}
             </ng-container>
           </div>
-          <div class="tiny-text">Failed</div>
+          <div class="tiny-text">{{ 'COMMON.FAILED' | translate }}</div>
         </div>
       </div>
     </div>
 
     <div class="d-flex justify-content-between align-items-center">
       <div class="small-text gray-color">
-        Progress:
+        {{ 'JOB.STATUS-JOB.PROGRESS' | translate }}
       </div>
       <div class="small-title gray-color">
         {{ statusJobProgress.progress  | number: '1.0-0' }} %
@@ -61,17 +61,17 @@
     <div class="d-flex pt-3 justify-content-end tiny-text gray-color">
       <!-- *ngIf="statusJobProgress.progress !== 100"-->
       <div *ngIf="finished">
-        Total time:
+        {{ 'JOB.STATUS-JOB.TOTAL-TIME' | translate }}
       </div>
       <div *ngIf="!finished">
-        Running time:
+        {{ 'JOB.STATUS-JOB.RUNNING-TIME' | translate }}
       </div>
       <cd-timer #basicTimer class="pl-3"></cd-timer>
     </div>
   </div>
 
   <div modal-footer>
-    <button type="button" class="btn btn-link" i18n (click)="onDismiss()">Close</button>
+    <button type="button" class="btn btn-link" (click)="onDismiss()">{{ 'BUTTON.CLOSE' | translate }}</button>
   </div>
 </app-modal-template>
 
