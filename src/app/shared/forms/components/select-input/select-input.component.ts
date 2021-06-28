@@ -1,11 +1,11 @@
-import { HostListener, ViewChild } from '@angular/core';
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { ComboBoxComponent } from '@progress/kendo-angular-dropdowns';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-select-input',
@@ -24,9 +24,9 @@ export class SelectInputComponent implements OnInit, OnDestroy {
 
   active = new Subject<void>();
 
-  selection: Codelist<number | string> = { id: null, value: 'Select item...' };
+  selection: Codelist<number | string> = { id: null, value: this.translate.instant('COMMON.SELECT-ITEM') };
 
-  constructor(private formUtils: FormsUtilsService) {}
+  constructor(private formUtils: FormsUtilsService, private translate: TranslateService) {}
 
   ngOnInit() {
     if (!this.form) {

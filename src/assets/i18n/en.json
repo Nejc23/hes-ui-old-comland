@@ -61,8 +61,10 @@
     "HOURLY": "Hourly",
     "DAILY": "Daily",
     "WEEKLY": "Weekly",
-    "MONTHLY": "Monthly"
-    "TAG": "tag"
+    "MONTHLY": "Monthly",
+    "TAG": "tag",
+    "SELECT-ITEM": "Select item...",
+    "EXPRESSION-INVALID": "Expression invalid"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -238,8 +240,7 @@
     "TOPOLOGY-JOB": "Topology job",
     "READING-JOBS": "Reading Jobs",
     "CRON-SCHEDULE": {
-      "DAYS-IN-MONTH": "Days in month",
-      "EXPRESSION-INVALID": "Expression is invalid."
+      "DAYS-IN-MONTH": "Days in month"
     },
     "ALARM-NOTIFICATION":{
       "TITLE": "Alarm notification",
@@ -370,6 +371,19 @@
     "FR": "Français",
     "IT": "Italiano"
   },
+  "DAY": {
+    "MON": "Mon",
+    "TUE": "Tue",
+    "WED": "Wed",
+    "THU": "Thu",
+    "FRI": "Fri",
+    "SAT": "Sat",
+    "SUN": "Sun",
+    "MON-FRI": "Mon-Fri",
+    "EVERY": "Every",
+    "WEEK-DAY": "Week day (MON-FRI)"
+  },
+
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",
   "6170762843185284641": "Concentrator for",

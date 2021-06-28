@@ -1,5 +1,5 @@
 <kendo-tabstrip (tabSelect)="onTabSelect($event)" [keepTabContent]="false" class="cron">
-  <kendo-tabstrip-tab [title]="tabStripTitleMinutes" [selected]="selectedFrequency === freq.Minutes">
+  <kendo-tabstrip-tab [title]="'COMMON.MINUTES' | translate" [selected]="selectedFrequency === freq.Minutes">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
@@ -14,7 +14,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleHourly" [selected]="selectedFrequency === freq.Hourly">
+  <kendo-tabstrip-tab [title]="'COMMON.HOURLY' | translate" [selected]="selectedFrequency === freq.Hourly">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
@@ -35,7 +35,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleDaily" [selected]="selectedFrequency === freq.Daily">
+  <kendo-tabstrip-tab [title]="'COMMON.DAILY' | translate" [selected]="selectedFrequency === freq.Daily">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
@@ -76,7 +76,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleWeekly" [selected]="selectedFrequency === freq.Weekly">
+  <kendo-tabstrip-tab [title]="'COMMON.WEEKLY' | translate" [selected]="selectedFrequency === freq.Weekly">
     <ng-template kendoTabContent>
       <div>
         <app-input-multiselect label="Week-days" [form]="form"
@@ -100,7 +100,7 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleMonthly" [selected]="selectedFrequency === freq.Monthly">
+  <kendo-tabstrip-tab [title]="'COMMON.MONTHLY' | translate" [selected]="selectedFrequency === freq.Monthly">
     <ng-template kendoTabContent>
       <div>
         <label><span>{{ 'JOB.CRON-SCHEDULE.DAYS-IN-MONTH' | translate }}</span><sup> *</sup></label>
@@ -131,14 +131,14 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleAdvanced" [selected]="selectedFrequency === freq.Advanced">
+  <kendo-tabstrip-tab [title]="'COMMON.ADVANCED' | translate" [selected]="selectedFrequency === freq.Advanced">
     <ng-template kendoTabContent>
       <div>
         <div class="col-3">
           <app-input-text label="Expression" [form]="form" [property]="advancedCronProperty">
           </app-input-text>
           <div class="help-block" *ngIf="!isAdvancedCronValid()">
-            <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{ 'JOB.CRON-SCHEDULE.EXPRESSION-INVALID' | translate }}</small>
+            <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{ 'COMMON.EXPRESSION-INVALID' | translate }}</small>
           </div>
         </div>
         <span class="text-bottom-right">{{getCronDescription(freq.Advanced)}}</span>
