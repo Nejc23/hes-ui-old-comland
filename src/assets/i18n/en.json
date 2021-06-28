@@ -56,7 +56,12 @@
     "NO-FILTER-APPLIED": "No filter applied",
     "EVERY": "Every",
     "METERS": "Meters",
-    "CONCENTRATORS": "Concentrators"
+    "CONCENTRATORS": "Concentrators",
+    "MINUTES": "Minutes",
+    "HOURLY": "Hourly",
+    "DAILY": "Daily",
+    "WEEKLY": "Weekly",
+    "MONTHLY": "Monthly"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -129,7 +134,11 @@
     "ALARM-ID": "Alarm ID",
     "SEVERITY": "Severity",
     "ACTIVE": "Active",
-    "SOURCE": "Source"
+    "SOURCE": "Source",
+    "START-AT": "Start at",
+    "END-AT": "End at",
+    "PUSH-TO-IEC": "Push to IEC",
+    "READ-FROM-LAST-VALUE": "Read from last value"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -181,7 +190,9 @@
     "ACTIVATE": "Activate",
     "UPDATE": "Update",
     "APPLY": "Apply",
-    "IMPORT": "Import"
+    "IMPORT": "Import",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next"
   },
   "DCU": {
     "MORE-SAVE-OPTIONS": "More Save options",
@@ -230,6 +241,11 @@
       "TEXT": "At least one of the rules below should be active",
       "ONE-RULE": "At least one of the rules must be active.",
       "SEND-NOTIFICATIONS-TO": "Send notifications to"
+    },
+    "SCHEDULER-JOB" : {
+      "SELECT-JOB": "To continue, select a job type, please.",
+      "CREATE-JOB": "Create a new job",
+      "MORE-SAVE-OPTIONS": "More Save options"
     }
   },
   "ALARM": {

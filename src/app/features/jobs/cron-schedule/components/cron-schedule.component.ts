@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { Component, Inject, Input, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import * as _ from 'lodash';
@@ -16,15 +16,6 @@ import { LanguageService } from '../../../../core/base-template/services/languag
 })
 export class CronScheduleComponent implements OnInit {
   @Input() cronExpression: string;
-
-  registersRequiredText = `Required field`;
-  cronInvalidError = `Cron expression is invalid.`;
-  tabStripTitleMinutes = `Minutes`;
-  tabStripTitleHourly = `Hourly`;
-  tabStripTitleDaily = `Daily`;
-  tabStripTitleWeekly = `Weekly`;
-  tabStripTitleMonthly = `Monthly`;
-  tabStripTitleAdvanced = `Advanced`;
 
   weekDays: Codelist<number>[] = [
     { id: 8, value: `Mon-Fri` },

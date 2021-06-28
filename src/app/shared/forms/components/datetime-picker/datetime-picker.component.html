@@ -1,10 +1,10 @@
 <div [ngClass]="{'form-group': !isInline}" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{label}}
+    {{ 'FORM.' + label.toUpperCase() | translate }}
     <sup *ngIf="required"> *</sup>
   </label>
   <kendo-datetimepicker
-    [formControlName]="property"  class="form-control" [name]="property"
+    [formControlName]="property" class="form-control" [name]="property"
     [min]="min"
     [max]="max"
     [format]="'dd.MM.yyyy'"
