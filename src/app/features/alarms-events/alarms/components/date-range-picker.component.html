@@ -27,45 +27,45 @@
         <div class="range-picker-popup">
           <div class="form-row">
             <div class="range-50">
-              <app-datetime-picker #datePickerStart [form]="form" [property]="startProperty" i18n-label label="Start" (valueChange)="dateChanged()">
+              <app-datetime-picker #datePickerStart [form]="form" [property]="startProperty" label="Start" (valueChange)="dateChanged()">
               </app-datetime-picker>
             </div>
             <div class="range-separator">
               <i class="fas fa-minus"></i>
             </div>
             <div class="range-50">
-              <app-datetime-picker #datePickerEnd [form]="form" [property]="endProperty" i18n-label label="End" (valueChange)="dateChanged()">
+              <app-datetime-picker #datePickerEnd [form]="form" [property]="endProperty" label="End" (valueChange)="dateChanged()">
               </app-datetime-picker>
             </div>
           </div>
           <div class="form-row mb-2">
             <div class="range-50">
-              <button class="btn btn-secondary w-100" i18n (click)="setRange(1)">TODAY</button>
+              <button class="btn btn-secondary w-100" i18n (click)="setRange(1)">{{ 'DAY.TODAY' | translate }}</button>
             </div>
             <div class="range-separator">
             </div>
             <div class="range-50">
-              <button class="btn btn-secondary w-100" i18n (click)="setRange(2)">YESTERDAY</button>
+              <button class="btn btn-secondary w-100" i18n (click)="setRange(2)">{{ 'DAY.YESTERDAY' | translate }}</button>
             </div>
           </div>
           <div class="form-row mb-2">
             <div class="range-50">
-              <button class="btn btn-secondary w-100" i18n (click)="setRange(3)">LAST 7 DAYS</button>
+              <button class="btn btn-secondary w-100" i18n (click)="setRange(3)">{{ 'DAY.LAST-7-DAYS' | translate }}</button>
             </div>
             <div class="range-separator">
             </div>
             <div class="range-50">
-              <button class="btn btn-secondary w-100" i18n (click)="setRange(4)">LAST 30 DAYS</button>
+              <button class="btn btn-secondary w-100" i18n (click)="setRange(4)">{{ 'DAY.LAST-30-DAYS' | translate }}</button>
             </div>
           </div>
           <div class="form-row mb-1">
             <div class="range-50">
-              <button class="btn btn-secondary w-100" i18n (click)="setRange(5)">CURRENT MONTH</button>
+              <button class="btn btn-secondary w-100" i18n (click)="setRange(5)">{{ 'DAY.CURRENT-MONTH' | translate }}</button>
             </div>
             <div class="range-separator">
             </div>
             <div class="range-50">
-              <button class="btn btn-secondary w-100" i18n (click)="setRange(6)">LAST MONTH</button>
+              <button class="btn btn-secondary w-100" i18n (click)="setRange(6)">{{ 'DAY.LAST-MONTH' | translate }}</button>
             </div>
           </div>
         </div>
