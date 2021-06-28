@@ -43,14 +43,14 @@
           </app-datetime-picker>
         </div>
         <div class="col-4">
-          <app-datetime-picker [form]="form" [property]="endAtProperty" i18n-label label="End-at">
+          <app-datetime-picker [form]="form" [property]="endAtProperty" label="End-at">
           </app-datetime-picker>
         </div>
       </div>
 
       <div class="form-row" *ngIf="showForLast()">
         <div class="col-2">
-          <app-input-text [form]="form" [property]="intervalRangeProperty" i18n-label label="For-last">
+          <app-input-text [form]="form" [property]="intervalRangeProperty" label="For-last">
           </app-input-text>
         </div>
         <div class="col-3">
@@ -105,9 +105,9 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()" i18n>{{ 'BUTTON.CANCEL' | translate }}</button>
+      <button type="button" class="btn btn-link" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
       <button *ngIf="step > 1" type="button" class="btn btn-secondary" (click)="next(-1)">
-        <span i18n>{{ 'BUTTON.PREVIOUS' | translate }}</span></button>
+        <span>{{ 'BUTTON.PREVIOUS' | translate }}</span></button>
 
       <div dropdown class="btn-group dropdown" *ngIf="step === 2">
         <button type="submit" class="btn btn-primary" (click)="save(false)">{{ 'BUTTON.SAVE' | translate }}</button>
@@ -115,12 +115,12 @@
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
-          <a class="dropdown-item" (click)="save(true)" i18n>{{ 'BUTTON.SAVE-AND-ADD-ANOTHER' | translate }}</a>
+          <a class="dropdown-item" (click)="save(true)">{{ 'BUTTON.SAVE-AND-ADD-ANOTHER' | translate }}</a>
         </div>
       </div>
 
       <button *ngIf="step === 1" type="button" class="btn btn-primary" (click)="next(1)">
-        <span i18n>{{ 'BUTTON.NEXT' | translate }}</span></button>
+        <span>{{ 'BUTTON.NEXT' | translate }}</span></button>
     </div>
   </div>
 </app-modal-template>

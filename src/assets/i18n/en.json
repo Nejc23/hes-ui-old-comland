@@ -281,7 +281,11 @@
     "SCHEDULER-JOB": {
       "SELECT-JOB": "To continue, select a job type, please.",
       "CREATE-JOB": "Create a new job",
-      "MORE-SAVE-OPTIONS": "More Save options"
+      "MORE-SAVE-OPTIONS": "More Save options",
+      "ERROR-SAVING": "Error saving job",
+      "JOB-SUCCESSFULLY": "Job was {{ operation }} successfully",
+      "ADDED": "added",
+      "UPDATED": "updated"
     }
   },
   "ALARM": {

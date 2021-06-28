@@ -407,9 +407,9 @@ export class SchedulerJobComponent implements OnInit {
     }
 
     let request: Observable<SchedulerJob> = null;
-    let operation = `added`;
+    let operation = this.translate.instant('JOB.SCHEDULER-JOB.ADDED');
     if (this.selectedJobId) {
-      operation = `updated`;
+      operation = this.translate.instant('JOB.SCHEDULER-JOB.UPDATED');
       request = this.meterService.updateMeterUnitsReadScheduler(values, this.selectedJobId);
 
       if (this.showAlarmNotification) {
@@ -422,7 +422,7 @@ export class SchedulerJobComponent implements OnInit {
         request = this.meterService.createNotificationJob(values);
       }
     }
-    const successMessage = `Job was` + ` ${operation} ` + `successfully`;
+    const successMessage = this.translate.instant('JOB.SCHEDULER-JOB.JOB-SUCCESSFULLY', { operation: operation });
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (addNew) {
@@ -433,9 +433,9 @@ export class SchedulerJobComponent implements OnInit {
         }
       },
       (error) => {
-        console.log('Error saving job', error);
-        // this.toast.errorToast( `Error saving job: ` + error);
-      } // error
+        console.log('Error saving job ', error);
+        this.toast.errorToast(this.translate.instant('JOB.SCHEDULER-JOB.ERROR-SAVING') + ' ' + error);
+      }
     );
   }
 
@@ -544,7 +544,7 @@ export class SchedulerJobComponent implements OnInit {
 
   getSelectedRowsCount() {
     if (this.selectedRowsCount) {
-      return `(${this.selectedRowsCount} selected)`;
+      return '(' + this.selectedRowsCount + ' ' + this.translate.instant('COMMON.SELECTED') + ')';
     }
 
     return '';
