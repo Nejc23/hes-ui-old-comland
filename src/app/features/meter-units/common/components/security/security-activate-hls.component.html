@@ -1,14 +1,14 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Activate HLS ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.SECURITY.ACTIVATE-HLS' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
       <div class="form-row pt-2">
         <div class="col-12">
           <div class="card-body">
-            <div class="small-title pb-1" i18n>Are you sure you would like to perform HLS activation for the management client?</div>
-            <div class="text-secondary" i18n>This action may result in damages, rendering meter inoperable!</div>
+            <div class="small-title pb-1">{{ 'PLC-METER.SECURITY.CONFIRM-HLS-ACTIVATION' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.SECURITY.HLS-ACTIVATION-DAMAGE' | translate }}</div>
           </div>
         </div>
       </div>
@@ -17,11 +17,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onConfirm()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

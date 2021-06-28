@@ -1,21 +1,20 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Set display settings ({{selectedRowsCount}} selected)</div>
-
-
+  <div modal-header [innerHTML]="'PLC-METER.SET-DISPLAY-SETTINGS' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  
   <div modal-body>
     <ng-container>
       <form class="form-horizontal" [formGroup]="form">
 
         <div class="alert alert-warning" role="alert">
           <i class="fas fa-exclamation-triangle mr-2"></i>
-          <span i18n>Changing the register will deselect all settings.</span>
+          <span>{{ 'PLC-METER.CHANGE-REGISTER' | translate }}</span>
         </div>
 
         <div *ngIf="!dataLoaded || (groupList$?.length > 0)">
           <div class="form-row">
             <div class="col-12">
-              <app-select-input [disabled]="false" label="Register group" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" i18n-label (selectedValueChanged)="selectedValueChanged($event)" >
+              <app-select-input [disabled]="false" label="REGISTER-GROUP" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" (selectedValueChanged)="selectedValueChanged($event)" >
               </app-select-input>
             </div>
           </div>
@@ -59,8 +58,8 @@
             <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
           </div>
           <div class="card-body">
-            <div class="small-title pb-1" i18n>No data found</div>
-            <div class="text-secondary" i18n>Please, check your device template.</div>
+            <div class="small-title pb-1">{{ 'COMMON.NO-DATA-FOUND' | translate }}</div>
+            <div class="text-secondary">{{ 'PLC-METER.CHECK-DEVICE-TEMPLATE' | translate }}</div>
           </div>
         </div>
       </form>
@@ -69,11 +68,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onConfirm()" [disabled]="!dataLoaded || !groupList$ || groupList$.length === 0">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

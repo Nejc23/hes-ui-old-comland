@@ -68,7 +68,10 @@
     "SUCCEEDED": "Succeeded",
     "FAILED": "Failed",
     "COMMUNICATION": "Communication",
-    "BASIC": "Basic"
+    "BASIC": "Basic",
+    "SEARCH-OBJECTS": "Search Objects",
+    "SEARCH-TERM": "Search term",
+    "NO-DATA-FOUND": "No data found"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -163,7 +166,15 @@
     "IMAGE-SIZE": "Image size (bytes)",
     "IMAGE-SIGNATURE": "Image signature",
     "FILL-LAST-BLOCK": "Fill last block",
-    "ACTIVATE-IMMEDIATELY": "Activate immediately"
+    "ACTIVATE-IMMEDIATELY": "Activate immediately",
+    "REGISTER": "Register",
+    "THRESHOLD-NORMAL": "Threshold normal",
+    "THRESHOLD-EMERGENCY": "Threshold emergency",
+    "THRESHOLD": "Threshold",
+    "RELAY": "Relay",
+    "MODE": "Mode",
+    "SELECT-DATE": "Select date",
+    "REGISTER-GROUP": "Register group"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -261,11 +272,25 @@
     "FW-UPGRADE": "Upload FW upgrade image ({{selectedRowsCount}} selected)",
     "ASSIGN-TEMPLATE": "Assign to template ({{selectedRowsCount}} selected)",
     "ASSIGN-TEMPLATE-WARNING": "Assigning template to meter(s) may result in irreversible changes to meter data!",
+    "SET-LIMITER": "Set Limiter ({{selectedRowsCount}} selected)",
+    "SET-ONE-THRESHOLD": "At least one threshold should be set!",
+    "SET-MONITOR": "Set Monitor ({{selectedRowsCount}} selected)",
+    "RELAY-CONNECT": "Relay Connect ({{selectedRowsCount}} selected)",
+    "RELAY-DISCONNECT": "Relay Disconnect ({{selectedRowsCount}} selected)",
+    "RELAY-MODE": "Relay Mode ({{selectedRowsCount}} selected)",
+    "SET-DISPLAY-SETTINGS": "Set display settings ({{selectedRowsCount}} selected)",
+    "CHECK-DEVICE-TEMPLATE": "Please, check your device template.",
+    "CHANGE-REGISTER": "Changing the register will deselect all settings.",
     "BREAKER": {
       "SET-BREAKER-MODE": "Set Breaker mode ({{selectedRowsCount}} selected)"
     },
     "JOBS": {
       "ASSIGN-EXISTING-JOBS": "Assign existing jobs ({{selectedRowsCount}} selected)"
+    },
+    "SECURITY": {
+      "ACTIVATE-HLS": "Activate HLS ({{selectedRowsCount}} selected)",
+      "CONFIRM-HLS-ACTIVATION": "Are you sure you would like to perform HLS activation for the management client?",
+      "HLS-ACTIVATION-DAMAGE": "This action may result in damages, rendering meter inoperable!"
     }
   },
   "JOB": {
