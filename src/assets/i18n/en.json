@@ -286,6 +286,16 @@
       "JOB-SUCCESSFULLY": "Job was {{ operation }} successfully",
       "ADDED": "added",
       "UPDATED": "updated"
+    },
+    "ACTIVE-JOB": {
+      "TITLE": "Active jobs",
+      "TOTAL": "Total jobs",
+      "RUNNING": "Running",
+      "PENDING": "Pending",
+      "TYPE": "Type",
+      "RUNNING-TIME": "Running Time",
+      "STATE": "State",
+      "STATUS": "Status"
     }
   },
   "ALARM": {
@@ -389,7 +399,9 @@
     "DEVICES": "Devices",
     "IP": "IP",
     "LAST-COMMUNICATION": "Last communication",
-    "NO-RECORDS-FOUND": "No records found. You may need to adjust your search or filter parameters."
+    "NO-RECORDS-FOUND": "No records found. You may need to adjust your search or filter parameters.",
+    "EXCEL-EXPORT": "Export in excel",
+    "APPLY-SAVED-STATE": "Apply saved state or save new"
   },
   "LOGIN": {
     "TITLE": "Login",
