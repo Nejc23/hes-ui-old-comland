@@ -659,6 +659,9 @@
       <trans-unit id="6555318547274416232" datatype="html">
         <source>Value</source>
         <target>Value</target>
+      </trans-unit><trans-unit id="8932917860978648376" datatype="html">
+        <source>Unit</source>
+        <target state="final">Unit</target>
       </trans-unit>
       <trans-unit id="283213258714202260" datatype="html">
         <source>Average value</source>
@@ -1366,6 +1369,16 @@
         <target>TODAY</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.calendar.today</note>
+      </trans-unit><trans-unit id="9114031309296786030" datatype="html">
+        <source>Navigate to previous view</source>
+        <target state="final">Navigate to previous view</target>
+        <note priority="1" from="description">The title of the previous button in the Classic calendar</note>
+        <note priority="1" from="meaning">kendo.calendar.prevButtonTitle</note>
+      </trans-unit><trans-unit id="7248948899360601102" datatype="html">
+        <source>Navigate to next view</source>
+        <target state="final">Navigate to next view</target>
+        <note priority="1" from="description">The title of the next button in the Classic calendar</note>
+        <note priority="1" from="meaning">kendo.calendar.nextButtonTitle</note>
       </trans-unit>
       <trans-unit id="589112377451589685" datatype="html">
         <source>Increase value</source>
@@ -1406,7 +1419,7 @@
       <trans-unit id="3159207801887264026" datatype="html">
         <source>Toggle popup</source>
         <target>Toggle popup</target>
-        <note priority="1" from="description">The label for the toggle button in the datetimepicker component</note>
+        <note priority="1" from="description">The title of the toggle button in the datetimepicker component</note>
         <note priority="1" from="meaning">kendo.datetimepicker.toggle</note>
       </trans-unit>
       <trans-unit id="3915774704336012538" datatype="html">
@@ -1450,6 +1463,16 @@
         <target>TODAY</target>
         <note priority="1" from="description">The label for the today button in the calendar header</note>
         <note priority="1" from="meaning">kendo.datetimepicker.today</note>
+      </trans-unit><trans-unit id="6176055232586065404" datatype="html">
+        <source>Navigate to previous view</source>
+        <target state="final">Navigate to previous view</target>
+        <note priority="1" from="description">The title of the previous button in the Classic calendar</note>
+        <note priority="1" from="meaning">kendo.datetimepicker.prevButtonTitle</note>
+      </trans-unit><trans-unit id="6424339255333594510" datatype="html">
+        <source>Navigate to next view</source>
+        <target state="final">Navigate to next view</target>
+        <note priority="1" from="description">The title of the next button in the Classic calendar</note>
+        <note priority="1" from="meaning">kendo.datetimepicker.nextButtonTitle</note>
       </trans-unit>
       <trans-unit id="5362895271044573681" datatype="html">
         <source>Set</source>
@@ -1558,6 +1581,11 @@
         <target>Decrease value</target>
         <note priority="1" from="description">The title for the **Decrement** button in the NumericTextBox</note>
         <note priority="1" from="meaning">kendo.numerictextbox.decrement</note>
+      </trans-unit><trans-unit id="2651889799249671820" datatype="html">
+        <source>Clear</source>
+        <target state="final">Clear</target>
+        <note priority="1" from="description">The title for the **Clear** button in the TextBox.</note>
+        <note priority="1" from="meaning">kendo.textbox.clear</note>
       </trans-unit>
       <trans-unit id="6307372410464815488" datatype="html">
         <source>Pin/collapse menu</source>
@@ -2119,78 +2147,24 @@
         <source>Basic</source>
         <target>Basic</target>
       </trans-unit>
-      <trans-unit id="ngb.datepicker.previous-month" datatype="html">
-        <source>Previous month</source>
-        <target>Previous month</target>
-      </trans-unit>
-      <trans-unit id="ngb.datepicker.next-month" datatype="html">
-        <source>Next month</source>
-        <target>Next month</target>
-      </trans-unit>
-      <trans-unit id="ngb.datepicker.select-month" datatype="html">
-        <source>Select month</source>
-        <target>Select month</target>
-      </trans-unit>
-      <trans-unit id="ngb.datepicker.select-year" datatype="html">
-        <source>Select year</source>
-        <target>Select year</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.HH" datatype="html">
-        <source>HH</source>
-        <target>HH</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.hours" datatype="html">
-        <source>Hours</source>
-        <target>Hours</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.MM" datatype="html">
-        <source>MM</source>
-        <target>MM</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.minutes" datatype="html">
-        <source>Minutes</source>
-        <target>Minutes</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.increment-hours" datatype="html">
-        <source>Increment hours</source>
-        <target>Increment hours</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.decrement-hours" datatype="html">
-        <source>Decrement hours</source>
-        <target>Decrement hours</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.increment-minutes" datatype="html">
-        <source>Increment minutes</source>
-        <target>Increment minutes</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.decrement-minutes" datatype="html">
-        <source>Decrement minutes</source>
-        <target>Decrement minutes</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.SS" datatype="html">
-        <source>SS</source>
-        <target>SS</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.seconds" datatype="html">
-        <source>Seconds</source>
-        <target>Seconds</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.increment-seconds" datatype="html">
-        <source>Increment seconds</source>
-        <target>Increment seconds</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.decrement-seconds" datatype="html">
-        <source>Decrement seconds</source>
-        <target>Decrement seconds</target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.PM" datatype="html">
-        <source><x id="INTERPOLATION"/></source>
-        <target><x id="INTERPOLATION"/></target>
-      </trans-unit>
-      <trans-unit id="ngb.timepicker.AM" datatype="html">
-        <source><x id="INTERPOLATION"/></source>
-        <target><x id="INTERPOLATION"/></target>
-      </trans-unit>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
       <trans-unit id="2690656529626907484" datatype="html">
         <source>NO DATA FOUND</source>
         <target>NO DATA FOUND</target>
@@ -2268,6 +2242,12 @@
       <trans-unit id="8884328223023362104" datatype="html">
         <source>Communication type</source>
         <target>Communication type</target>
+      </trans-unit><trans-unit id="3336750581034233524" datatype="html">
+        <source>Short names referencing</source>
+        <target state="final">Short names referencing</target>
+      </trans-unit><trans-unit id="6991635567683056079" datatype="html">
+        <source>Address object by their short addresses instead of logical names when turned on.</source>
+        <target state="final">Address object by their short addresses instead of logical names when turned on.</target>
       </trans-unit>
       <trans-unit id="235800882454190328" datatype="html">
         <source>Gateway</source>
