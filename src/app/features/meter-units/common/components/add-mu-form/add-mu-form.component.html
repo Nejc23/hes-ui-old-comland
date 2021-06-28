@@ -5,21 +5,21 @@
     <ng-container>
 
       <kendo-tabstrip (tabSelect)="onTabSelect($event);" [keepTabContent]="false" style="min-height:650px;">
-        <kendo-tabstrip-tab [title]="tabTitleBasic" [selected]="true">
+        <kendo-tabstrip-tab title="{{ 'COMMON.BASIC' | translate }}" [selected]="true">
           <ng-template kendoTabContent>
             <div>
-              <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
+              <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
 
               <div class="form-row">
                 <div class="col-12">
-                  <app-input-text [form]="form" [property]="serialNumberProperty" i18n-label label="Serial">
+                  <app-input-text [form]="form" [property]="serialNumberProperty" label="SERIAL">
                   </app-input-text>
                 </div>
               </div>
 
               <div class="form-row">
                 <div class="col-12">
-                  <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="manufacturerProperty" [selectOptions]="manufacturers"
+                  <app-select-input label="MANUFACTURER" [form]="form" [property]="manufacturerProperty" [selectOptions]="manufacturers"
                     [disabled]="false">
                   </app-select-input>
                 </div>
@@ -27,7 +27,7 @@
 
               <div class="form-row">
                 <div class="col-12">
-                  <app-input-text  *ngIf="isEditMu" i18n-label label="Protocol" [form]="form" [property]="protocolProperty"
+                  <app-input-text  *ngIf="isEditMu" label="PROTOCOL" [form]="form" [property]="protocolProperty"
                     [disabled]="true">
                   </app-input-text>
                 </div>
@@ -35,10 +35,10 @@
 
               <div class="form-row">
                 <div class="col-12">
-                  <app-select-input *ngIf="!isEditMu" i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
+                  <app-select-input *ngIf="!isEditMu" label="TEMPLATE" [form]="form" [property]="templateProperty" [selectOptions]="templates"
                     [disabled]="false" (selectedValueChanged)="templateChanged($event)">
                   </app-select-input>
-                  <app-input-text  *ngIf="isEditMu" i18n-label label="Template" [form]="form" [property]="templateStringProperty"
+                  <app-input-text  *ngIf="isEditMu" label="TEMPLATE" [form]="form" [property]="templateStringProperty"
                     [disabled]="true">
                   </app-input-text>
                 </div>
@@ -46,7 +46,7 @@
 
               <div class="form-row">
                 <div class="col-12">
-                  <app-select-input i18n-label label="Connection type" [form]="form" [property]="connectionTypeProperty" [selectOptions]="connectionTypes"
+                  <app-select-input label="CONNECTION-TYPE" [form]="form" [property]="connectionTypeProperty" [selectOptions]="connectionTypes"
                     [disabled]="false" (selectedValueChanged)="onConnectionTypeChanged($event)">
                   </app-select-input>
                 </div>
@@ -54,17 +54,17 @@
 
               <div class="form-row" *ngIf="isConnectionTypeIp">
                 <div class="col-6">
-                  <app-input-text dis [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+                  <app-input-text dis [form]="form" [property]="ipProperty" label="IP"></app-input-text>
                 </div>
                 <div class="col-3">
-                  <app-input-numeric i18n-label [label]="'Port'" [form]="form" [property]="portProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                  <app-input-numeric label="PORT" [form]="form" [property]="portProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                     [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                 </div>
               </div>
 
               <div class="form-row" *ngIf="isNewOrProtocolDlms">
                 <div class="col-12">
-                  <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
+                  <app-input-radio label="COMMUNICATION-TYPE" [form]="form" [property]="communicationTypeProperty"
                     name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" [hideCheckbox]="true" (selectionChanged)="communicationTypeChanged($event, !isEditMu)" >
                   </app-input-radio>
                 </div>
@@ -75,8 +75,8 @@
 
                   <div class="d-flex justify-content-between gray-line gray-line-top py-3 mt-4">
                     <div class="modal-checkbox-label">
-                      <div class="text-normal-bold" i18n>Short names referencing</div>
-                      <div class="tiny-text gray-color-dark pt-1" i18n>Address object by their short addresses instead of logical names when turned on.</div>
+                      <div class="text-normal-bold">{{ 'PLC-METER.SHORT-NAMES-REFERENCING' | translate }}</div>
+                      <div class="tiny-text gray-color-dark pt-1">{{ 'PLC-METER.ADDRESS-BY-SHORT-ADDRESSES' | translate }}</div>
                     </div>
                     <div>
                       <kendo-switch class="mt-2" [(ngModel)]="shortNameSelected"
@@ -92,7 +92,7 @@
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleJobs" *ngIf="!isEditMu">
+        <kendo-tabstrip-tab title="{{ 'FORM.JOBS' | translate }}" *ngIf="!isEditMu">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
@@ -106,7 +106,7 @@
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleCommunication" *ngIf="isNewOrProtocolDlms">
+        <kendo-tabstrip-tab title="{{ 'COMMON.COMMUNICATION' | translate }}" *ngIf="isNewOrProtocolDlms">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
@@ -119,54 +119,54 @@
                 </div>-->
 
                 <div>
-                  <label class="label-primary" i18n>Management association</label>
+                  <label class="label-primary">{{ 'PLC-METER.MANAGEMENT-ASSOCIATION' | translate }}</label>
                 </div>
                 <div class="border px-2 py-2">
                   <div class="form-row" *ngIf="isWrapperSelected">
                     <div class="col-6">
-                      <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperClientAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                      <app-input-numeric label="CLIENT" [form]="form" [property]="wrapperClientAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                       [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                     </div>
                     <div class="col-6">
-                      <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperServerAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                      <app-input-numeric label="SERVER" [form]="form" [property]="wrapperServerAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                       [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                     </div>
                   </div>
                   <div *ngIf="isHdlcSelected">
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="clientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="CLIENT-LOW" [form]="form" [property]="clientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="serverLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="SERVER-LOW" [form]="form" [property]="serverLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="clientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="CLIENT-HIGH" [form]="form" [property]="clientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="serverHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="SERVER-HIGH" [form]="form" [property]="serverHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div class="pt-3">
-                  <label class="label-primary" i18n>Public association</label>
+                  <label class="label-primary">{{ 'PLC-METER.PUBLIC-ASSOCIATION' | translate }}</label>
                 </div>
                 <div class="border px-2 py-2">
                   <div *ngIf="isWrapperSelected">
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client'" [form]="form" [property]="wrapperPublicClientAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="CLIENT" [form]="form" [property]="wrapperPublicClientAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server'" [form]="form" [property]="wrapperPublicServerAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="SERVER" [form]="form" [property]="wrapperPublicServerAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
@@ -174,21 +174,21 @@
                   <div *ngIf="isHdlcSelected">
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client LOW'" [form]="form" [property]="publicClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="CLIENT-LOW" [form]="form" [property]="publicClientLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server LOW'" [form]="form" [property]="publicServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="SERVER-LOW" [form]="form" [property]="publicServerLowProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
                     <div class="form-row">
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Client HIGH'" [form]="form" [property]="publicClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="CLIENT-HIGH" [form]="form" [property]="publicClientHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                       <div class="col-6">
-                        <app-input-numeric i18n-label [label]="'Server HIGH'" [form]="form" [property]="publicServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                        <app-input-numeric label="SERVER-HIGH" [form]="form" [property]="publicServerHighProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                         [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                       </div>
                     </div>
@@ -197,37 +197,37 @@
                 <div *ngIf="isWrapperSelected">
                   <div class="form-row pt-3">
                     <div class="col-6">
-                      <app-input-switch [form]="form" [property]="isGatewayProperty" i18n-label label="Gateway" (valueChanged)="gatewayChanged($event)">
+                      <app-input-switch [form]="form" [property]="isGatewayProperty" label="GATEWAY" (valueChanged)="gatewayChanged($event)">
                       </app-input-switch>
                     </div>
                   </div>
                   <div class="border px-2" *ngIf="isGatewayEnabled">
-                    <app-input-numeric i18n-label [label]="'Physical address'" [form]="form" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                    <app-input-numeric label="PHYSICAL-ADDRESS" [form]="form" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
                           [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
                   </div>
                 </div>
               </div>
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab [title]="tabTitleAdvanced" *ngIf="isNewOrProtocolDlms">
+        <kendo-tabstrip-tab title="{{ 'COMMON.ADVANCED' | translate }}" *ngIf="isNewOrProtocolDlms">
           <ng-template kendoTabContent>
             <ng-template [ngTemplateOutlet]="noTemplateSelected"></ng-template>
             <div *ngIf="isTemplateSelected">
               <div class="form-row pt-2">
                 <div class="col-6">
-                  <app-input-switch [form]="form" [property]="advancedStartWithReleaseProperty" i18n-label label="Start with release">
+                  <app-input-switch [form]="form" [property]="advancedStartWithReleaseProperty" label="START-WITH-RELEASE">
                   </app-input-switch>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-8">
-                  <app-input-switch [form]="form" [property]="advancedLdnAsSystitleProperty" i18n-label label="Use Logical Device Name (LDN) as Systitle">
+                  <app-input-switch [form]="form" [property]="advancedLdnAsSystitleProperty" label="USE-LDN-AS-SYSTITLE">
                   </app-input-switch>
                 </div>
               </div>
               <div class="form-row">
                 <div class="col-6">
-                  <app-select-input i18n-label label="Authentication type" [form]="form" [property]="authenticationTypeProperty" [selectOptions]="authenticationTypes"
+                  <app-select-input label="AUTHENTICATION-TYPE" [form]="form" [property]="authenticationTypeProperty" [selectOptions]="authenticationTypes"
                     [disabled]="false">
                   </app-select-input>
                 </div>
@@ -246,10 +246,10 @@
 
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-link" (click)="cancel()" i18n>Cancel</button>
+      <button type="button" class="btn btn-link" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
       <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="add()" i18n *ngIf="!isEditMu">Add</button>
-        <button type="submit" class="btn btn-primary" (click)="update()" i18n *ngIf="isEditMu">Update</button>
+        <button type="submit" class="btn btn-primary" (click)="add()" *ngIf="!isEditMu">{{ 'BUTTON.ADD' | translate }}</button>
+        <button type="submit" class="btn btn-primary" (click)="update()" *ngIf="isEditMu">{{ 'BUTTON.UPDATE' | translate }}</button>
         <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button> -->
@@ -267,8 +267,8 @@
       <i class="far fa-exclamation-triangle display-2 text-light font-weight-bold"></i>
     </div>
     <div class="card-body pt-0">
-      <div class="small-title pb-2" i18n>Template is not selected</div>
-      <div class="text-secondary" i18n>To display the form, select the template</div>
+      <div class="small-title pb-2">{{ 'PLC-METER.TEMPLATE-NOT-SELECTED' | translate }}</div>
+      <div class="text-secondary">{{ 'PLC-METER.SELECT-TEMPLATE' | translate }}</div>
       <div class="mt-3 mb-5 mx-5 px-5">
         <app-select-input [form]="form" [property]="templateProperty" [selectOptions]="templates"
           [disabled]="false" (selectedValueChanged)="templateChanged($event)">

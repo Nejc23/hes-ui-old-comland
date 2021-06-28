@@ -30,11 +30,6 @@ export class AddMuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  tabTitleBasic = `Basic`;
-  tabTitleJobs = `Jobs`;
-  tabTitleCommunication = `Communication`;
-  tabTitleAdvanced = `Advanced`;
-
   form: FormGroup;
   editMu: MeterUnitDetails;
   isEditMu = false;
