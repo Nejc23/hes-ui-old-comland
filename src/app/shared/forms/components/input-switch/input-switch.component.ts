@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import * as _ from 'lodash';
 
@@ -19,7 +19,9 @@ export class InputSwitchComponent implements OnInit {
   controlId: string;
 
   constructor(private formUtils: FormsUtilsService) {}
+
   valueTmp = false;
+
   ngOnInit() {
     if (!this.form) {
       throw Error('InputSwitchComponent - form input missing.');
