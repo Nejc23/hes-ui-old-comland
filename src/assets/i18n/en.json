@@ -66,7 +66,9 @@
     "SELECT-ITEM": "Select item...",
     "EXPRESSION-INVALID": "Expression invalid",
     "SUCCEEDED": "Succeeded",
-    "FAILED": "Failed"
+    "FAILED": "Failed",
+    "COMMUNICATION": "Communication",
+    "BASIC": "Basic"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -129,7 +131,7 @@
     "DESCRIPTION": "Description",
     "FOR-LAST": "For last",
     "HOURS": "Hour(s)",
-    "MINUTES" : "Minute(s)",
+    "MINUTES": "Minute(s)",
     "DAYS": "Day(s)",
     "WEEK-DAYS": "Week-days",
     "EXPRESSION": "Expression",
@@ -140,6 +142,18 @@
     "SEVERITY": "Severity",
     "ACTIVE": "Active",
     "SOURCE": "Source",
+    "COMMUNICATION-TYPE": "Communication type",
+    "CLIENT": "Client",
+    "SERVER": "Server",
+    "CLIENT-LOW": "Client LOW",
+    "SERVER-LOW": "Server LOW",
+    "CLIENT-HIGH": "Client HIGH",
+    "SERVER-HIGH": "Server HIGH",
+    "GATEWAY": "Gateway",
+    "PHYSICAL-ADDRESS": "Physical address",
+    "START-WITH-RELEASE": "Start with release",
+    "USE-LDN-AS-SYSTITLE": "Use Logical Device Name (LDN) as Systitle",
+    "AUTHENTICATION-TYPE": "Authentication type",
     "START-AT": "Start at",
     "END-AT": "End at",
     "PUSH-TO-IEC": "Push to IEC",
@@ -230,7 +244,13 @@
     "IMPORT-SUCCESSFULLY": "`Import xml file was successfully",
     "SUBTITLE": "To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.",
     "DROP-SUBTITLE": "Selected file must be in .xml file format.",
-    "IMPORT-TOU-TITLE": "Import TOU Configuration"
+    "IMPORT-TOU-TITLE": "Import TOU Configuration",
+    "SHORT-NAMES-REFERENCING": "Short names referencing",
+    "ADDRESS-BY-SHORT-ADDRESSES": "Address object by their short addresses instead of logical names when turned on.",
+    "MANAGEMENT-ASSOCIATION": "Management association",
+    "PUBLIC-ASSOCIATION": "Public association",
+    "TEMPLATE-NOT-SELECTED": "Template is not selected",
+    "SELECT-TEMPLATE": "To display the form, select the template"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
@@ -251,14 +271,14 @@
     "CRON-SCHEDULE": {
       "DAYS-IN-MONTH": "Days in month"
     },
-    "ALARM-NOTIFICATION":{
+    "ALARM-NOTIFICATION": {
       "TITLE": "Alarm notification",
       "SUBTITLE": "Send notification message when alarm events matches one or more criteria bellow.",
       "TEXT": "At least one of the rules below should be active",
       "ONE-RULE": "At least one of the rules must be active.",
       "SEND-NOTIFICATIONS-TO": "Send notifications to"
     },
-    "SCHEDULER-JOB" : {
+    "SCHEDULER-JOB": {
       "SELECT-JOB": "To continue, select a job type, please.",
       "CREATE-JOB": "Create a new job",
       "MORE-SAVE-OPTIONS": "More Save options"
@@ -293,7 +313,6 @@
     }
   },
   "ALERT": {
-
   },
   "GRID": {
     "SELECT-DESELECT-ALL": "Select/deselect all",
@@ -392,7 +411,6 @@
     "EVERY": "Every",
     "WEEK-DAY": "Week day (MON-FRI)"
   },
-
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",
   "6170762843185284641": "Concentrator for",
