@@ -190,7 +190,9 @@
     "RELAY": "Relay",
     "MODE": "Mode",
     "SELECT-DATE": "Select date",
-    "REGISTER-GROUP": "Register group"
+    "REGISTER-GROUP": "Register group",
+    "PASSWORD-TYPE": "Password type",
+    "KEY-TYPE": "Key type"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -246,7 +248,9 @@
     "IMPORT": "Import",
     "PREVIOUS": "Previous",
     "NEXT": "Next",
-    "ASSIGN": "Assign"
+    "ASSIGN": "Assign",
+    "DELETE": "Delete",
+    "EDIT": "Edit"
   },
   "DCU": {
     "MORE-SAVE-OPTIONS": "More Save options",
@@ -297,6 +301,13 @@
     "SET-DISPLAY-SETTINGS": "Set display settings ({{selectedRowsCount}} selected)",
     "CHECK-DEVICE-TEMPLATE": "Please, check your device template.",
     "CHANGE-REGISTER": "Changing the register will deselect all settings.",
+    "CREATE-NEW": "Create new",
+    "ASSIGN-EXISTING": "Assign existing",
+    "JOB": "Job",
+    "TEMPLATES": "Templates",
+    "FW-UPGRADE-TITLE": "FW upgrade",
+    "UPLOAD-IMAGE": "Upload image",
+    "ACTIVATE-IMAGE": "Activate image",
     "BREAKER": {
       "SET-BREAKER-MODE": "Set Breaker mode ({{selectedRowsCount}} selected)"
     },
@@ -306,7 +317,13 @@
     "SECURITY": {
       "ACTIVATE-HLS": "Activate HLS ({{selectedRowsCount}} selected)",
       "CONFIRM-HLS-ACTIVATION": "Are you sure you would like to perform HLS activation for the management client?",
-      "HLS-ACTIVATION-DAMAGE": "This action may result in damages, rendering meter inoperable!"
+      "CHANGE-PASSWORD": "Change password ({{selectedRowsCount}} selected)",
+      "SELECT-PASSWORD-TYPE": "Please select from the list below a password type that you would like to change.",
+      "METER-INOPERABLE-WARNING": "This action may result in damages, rendering meter inoperable!",
+      "CHANGE-PASSWORD-CONFIRM": "Are you sure you would like to change password for a selected password type ({{passwordType}})?",
+      "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
+      "SELECT-KEY-TYPE": "Please select from the list below a key type you would like to re-key.",
+      "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?"
     }
   },
   "JOB": {
