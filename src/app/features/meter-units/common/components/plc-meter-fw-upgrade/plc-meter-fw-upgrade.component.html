@@ -1,12 +1,12 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Upload FW upgrade image ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.FW-UPGRADE' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
       <div class="form-row">
         <div class="col-12 expand-dropzone modal-dropzone">
-            <app-file-upload label="Image" [form]="form" [property]="imageProperty"
+            <app-file-upload label="IMAGE" [form]="form" [property]="imageProperty"
                 [uploadSaveUrl]="uploadSaveUrl"
                 [saveField]="'imageFile'"
                 [uploadRemoveUrl]=""
@@ -17,35 +17,34 @@
                 [acceptExtensions]="acceptExtensions"
                 (uploadEvent)="uploadEvent($event)"
                 (successEvent)="successUploaded($event)"
-                i18n-label
                 [isDropZoneCustom]="true"
                 [dropUploadSubtitle]="uploadDropSubtitle"></app-file-upload>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-text [form]="form" [property]="imageIdenifyerProperty" label="Image Identifyer" i18n-label></app-input-text>
+         <app-input-text [form]="form" [property]="imageIdenifyerProperty" label="IMAGE-IDENTIFIER"></app-input-text>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-          <app-input-numeric [label]="'Image size (bytes)'" [form]="form" [property]="imageSizeProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="999999"
+          <app-input-numeric label="IMAGE-SIZE" [form]="form" [property]="imageSizeProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="999999"
           [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-text [form]="form" [property]="imageSignatureProperty" label="Image signature" i18n-label></app-input-text>
+         <app-input-text [form]="form" [property]="imageSignatureProperty" label="IMAGE-SIGNATURE"></app-input-text>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-switch [form]="form" [property]="imageFillLastBlockProperty" label="Fill last block" i18n-label></app-input-switch>
+         <app-input-switch [form]="form" [property]="imageFillLastBlockProperty" label="FILL-LAST-BLOCK"></app-input-switch>
         </div>
       </div>
       <div class="form-row">
         <div class="col-12">
-         <app-input-switch [form]="form" [property]="imageActivateProperty" label="Activate immediately" i18n-label></app-input-switch>
+         <app-input-switch [form]="form" [property]="imageActivateProperty" label="ACTIVATE-IMMEDIATELY"></app-input-switch>
         </div>
       </div>
     </ng-container>
@@ -53,15 +52,15 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="cancel()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown" *ngIf="!activate">
         <button type="submit" class="btn btn-primary" (click)="upgrade()" [disabled]="!isFormValid()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
       <div class="btn-group dropdown"*ngIf="activate">
         <button type="submit" class="btn btn-primary" (click)="activateMU()">
-          <span i18n>Activate</span></button>
+          <span>{{ 'BUTTON.ACTIVATE' | translate }}</span></button>
       </div>
     </div>
   </div>

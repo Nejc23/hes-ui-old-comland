@@ -162,7 +162,13 @@
     "START-AT": "Start at",
     "END-AT": "End at",
     "PUSH-TO-IEC": "Push to IEC",
-    "READ-FROM-LAST-VALUE": "Read from last value"
+    "READ-FROM-LAST-VALUE": "Read from last value",
+    "DISCONNECTOR-MODE": "Disconnector mode",
+    "IMAGE-IDENTIFIER": "Image identifier",
+    "IMAGE-SIZE": "Image size (bytes)",
+    "IMAGE-SIGNATURE": "Image signature",
+    "FILL-LAST-BLOCK": "Fill last block",
+    "ACTIVATE-IMMEDIATELY": "Activate immediately"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -217,7 +223,8 @@
     "APPLY": "Apply",
     "IMPORT": "Import",
     "PREVIOUS": "Previous",
-    "NEXT": "Next"
+    "NEXT": "Next",
+    "ASSIGN": "Assign"
   },
   "DCU": {
     "MORE-SAVE-OPTIONS": "More Save options",
@@ -255,7 +262,16 @@
     "MANAGEMENT-ASSOCIATION": "Management association",
     "PUBLIC-ASSOCIATION": "Public association",
     "TEMPLATE-NOT-SELECTED": "Template is not selected",
-    "SELECT-TEMPLATE": "To display the form, select the template"
+    "SELECT-TEMPLATE": "To display the form, select the template",
+    "FW-UPGRADE": "Upload FW upgrade image ({{selectedRowsCount}} selected)",
+    "ASSIGN-TEMPLATE": "Assign to template ({{selectedRowsCount}} selected)",
+    "ASSIGN-TEMPLATE-WARNING": "Assigning template to meter(s) may result in irreversible changes to meter data!",
+    "BREAKER": {
+      "SET-BREAKER-MODE": "Set Breaker mode ({{selectedRowsCount}} selected)"
+    },
+    "JOBS": {
+      "ASSIGN-EXISTING-JOBS": "Assign existing jobs ({{selectedRowsCount}} selected)"
+    }
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
