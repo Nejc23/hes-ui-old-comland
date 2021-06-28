@@ -68,7 +68,12 @@
     "SUCCEEDED": "Succeeded",
     "FAILED": "Failed",
     "COMMUNICATION": "Communication",
-    "BASIC": "Basic"
+    "BASIC": "Basic",
+    "ACTIVE": "Active",
+    "INACTIVE": "Inactive",
+    "DISABLE": "Disable",
+    "ENABLE": "Enable",
+    "CONFIRM-OPERATION": "Confirm operation"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -256,6 +261,9 @@
     "NO-JOBS": "No Jobs have been added yet.",
     "NEXT-READ": "Next planned read",
     "SCHEDULER-JOB-STARTED": "Scheduler job started!",
+    "SCHEDULER-JOB-ENABLED" : "Scheduler job enabled!",
+    "SCHEDULER-JOB-DISABLED" : "Scheduler job disabled!",
+    "SCHEDULER-JOB-CHANGE-STATUS": "Do you want to change scheduler job status",
     "DISCOVERY-JOB": "Discovery Job",
     "DC-READ-EVENTS-JOB": "DC Read events job",
     "DC-TIME-SYNC-JOB": "DC Time sync job",
