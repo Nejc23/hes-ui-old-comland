@@ -1,13 +1,13 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Set Breaker mode ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.BREAKER.SET-BREAKER-MODE' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row">
           <div class="col-12">
-            <app-select-input label="Disconnector mode" [form]="form" [property]="disconnectorModeProperty" [selectOptions]="disconnectorModes" required i18n-label>
+            <app-select-input label="DISCONNECTOR-MODE" [form]="form" [property]="disconnectorModeProperty" [selectOptions]="disconnectorModes" required>
             </app-select-input>
           </div>
         </div>
@@ -18,11 +18,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn btn-link" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onSet()">
-          <span i18n>Confim</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>
