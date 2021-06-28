@@ -63,7 +63,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
   overlayNoRowsTemplate = this.translate.instant('GRID.NO-RECORDS-FOUND');
-  overlayLoadingTemplate = this.staticTextService.loadingData;
+  overlayLoadingTemplate = this.translate.instant('COMMON.LOADING-DATA');
   noData = false;
   public hideFilter = true;
   public filterCount = 0;

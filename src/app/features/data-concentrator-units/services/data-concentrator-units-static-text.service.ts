@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 
 @Injectable({
@@ -7,22 +8,18 @@ import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.inter
 export class DataConcentratorUnitsStaticTextService {
   // public titleBreadCrumbs =  `Data Concentrator Units`;
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   get notAvailableTekst() {
-    return `N/A`;
-  }
-
-  get loadingData() {
-    return `Loading data...`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get noFilterAppliedTekst() {
-    return `No filter applied`;
+    return this.translate.instant('COMMON.NO-FILTER-APPLIED');
   }
 
   get nextPlannedReadText() {
-    return `Next planned read` + ' ';
+    return this.translate.instant('JOB.NEXT-READ') + ' ';
   }
 
   getFiltersInfo(filterName: string, status: boolean, readStatuses: boolean, type: boolean, vendor: boolean, tag: boolean): FiltersInfo {
@@ -42,35 +39,35 @@ export class DataConcentratorUnitsStaticTextService {
     }
 
     if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag) {
-      result.text += `Filtered by: `;
+      result.text += this.translate.instant('FILTER.FILTERED-BY');
     }
 
     if (status) {
       additionalString = readStatuses || type || vendor || tag ? ', ' : '';
-      result.text += `status` + additionalString;
+      result.text += this.translate.instant('DCU.STATUS', { additionalString: additionalString });
       result.count++;
     }
 
     if (readStatuses) {
       additionalString = type || vendor || tag ? ', ' : '';
-      result.text += `read status` + additionalString;
+      result.text += this.translate.instant('DCU.READ-STATUS', { additionalString: additionalString });
       result.count++;
     }
 
     if (type) {
       additionalString = vendor || tag ? ', ' : '';
-      result.text += `type` + additionalString;
+      result.text += this.translate.instant('DCU.TYPE', { additionalString: additionalString });
       result.count++;
     }
 
     if (vendor) {
       additionalString = tag ? ', ' : '';
-      result.text += `vendor` + additionalString;
+      result.text += this.translate.instant('DCU.VENDOR', { additionalString: additionalString });
       result.count++;
     }
 
     if (tag) {
-      result.text += `tag`;
+      result.text += this.translate.instant('COMMON.TAG');
       result.count++;
     }
 
