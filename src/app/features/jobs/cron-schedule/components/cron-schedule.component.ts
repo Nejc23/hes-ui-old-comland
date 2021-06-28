@@ -1,6 +1,6 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { Component, Inject, Input, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import * as _ from 'lodash';
@@ -17,24 +17,15 @@ import { LanguageService } from '../../../../core/base-template/services/languag
 export class CronScheduleComponent implements OnInit {
   @Input() cronExpression: string;
 
-  registersRequiredText = `Required field`;
-  cronInvalidError = `Cron expression is invalid.`;
-  tabStripTitleMinutes = `Minutes`;
-  tabStripTitleHourly = `Hourly`;
-  tabStripTitleDaily = `Daily`;
-  tabStripTitleWeekly = `Weekly`;
-  tabStripTitleMonthly = `Monthly`;
-  tabStripTitleAdvanced = `Advanced`;
-
   weekDays: Codelist<number>[] = [
-    { id: 8, value: `Mon-Fri` },
-    { id: 2, value: `Mon` },
-    { id: 3, value: `Tue` },
-    { id: 4, value: `Wed` },
-    { id: 5, value: `Thu` },
-    { id: 6, value: `Fri` },
-    { id: 7, value: `Sat` },
-    { id: 1, value: `Sun` }
+    { id: 8, value: this.translate.instant('DAY.MON-FRI') },
+    { id: 2, value: this.translate.instant('DAY.MON') },
+    { id: 3, value: this.translate.instant('DAY.TUE') },
+    { id: 4, value: this.translate.instant('DAY.WED') },
+    { id: 5, value: this.translate.instant('DAY.THU') },
+    { id: 6, value: this.translate.instant('DAY.FRI') },
+    { id: 7, value: this.translate.instant('DAY.SAT') },
+    { id: 1, value: this.translate.instant('DAY.SUN') }
   ];
 
   everyMinutes: Codelist<number>[];
@@ -50,9 +41,8 @@ export class CronScheduleComponent implements OnInit {
 
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: `Every` }];
-
-  dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: `Week day (MON-FRI)` }];
+  dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: this.translate.instant('DAY.EVERY') }];
+  dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: this.translate.instant('DAY.WEEK-DAY') }];
 
   formValues: FormValues;
   locale = 'en';

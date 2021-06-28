@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header>Active jobs</div>
+  <div modal-header>{{ 'JOB.ACTIVE-JOB.TITLE' | translate }}</div>
 
   <div modal-body>
     <div class="d-flex justify-content-between mb-5">
@@ -14,7 +14,7 @@
               {{ activeJobs.totalJobs }}
             </ng-container>
           </div>
-          <div class="tiny-text gray-color">Total jobs</div>
+          <div class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.TOTAL' | translate }}</div>
         </div>
       </div>
 
@@ -29,7 +29,7 @@
               {{ activeJobs.runningJobs }}
             </ng-container>
           </div>
-          <div class="tiny-text gray-color">Running</div>
+          <div class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.RUNNING' | translate }}</div>
         </div>
       </div>
 
@@ -43,7 +43,7 @@
               {{ activeJobs.pendingJobs }}
             </ng-container>
           </div>
-          <div class="tiny-text gray-color">Pending</div>
+          <div class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.PENDING' | translate }}</div>
         </div>
       </div>
     </div>
@@ -52,10 +52,10 @@
       <table class="table">
         <thead>
         <tr>
-          <th scope="col" class="tiny-text gray-color">Type</th>
-          <th scope="col" class="tiny-text gray-color">Running Time</th>
-          <th scope="col" class="tiny-text gray-color">State</th>
-          <th scope="col" class="tiny-text gray-color">Status</th>
+          <th scope="col" class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.TYPE' | translate }}</th>
+          <th scope="col" class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.RUNNING-TIME' | translate }}</th>
+          <th scope="col" class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.STATE' | translate }}</th>
+          <th scope="col" class="tiny-text gray-color">{{ 'JOB.ACTIVE-JOB.STATUS' | translate }}</th>
         </tr>
         </thead>
         <tbody>
@@ -75,6 +75,6 @@
   </div>
 
   <div modal-footer>
-    <button type="button" class="btn btn-link" i18n (click)="onDismiss()">Close</button>
+    <button type="button" class="btn btn-link" (click)="onDismiss()">{{ 'BUTTON.CLOSE' | translate }}</button>
   </div>
 </app-modal-template>

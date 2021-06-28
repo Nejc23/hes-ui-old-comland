@@ -1,13 +1,11 @@
 import { AlarmNotificationRules } from './../../interfaces/alarm-notification-rules.interface';
 import { Component, Input, OnInit } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { Observable, forkJoin } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NotificationFilter } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
-import { listLazyRoutes } from '@angular/compiler/src/aot/lazy_routes';
 
 @Component({
   selector: 'app-alarm-notification-rules',

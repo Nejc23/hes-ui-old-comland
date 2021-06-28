@@ -57,7 +57,16 @@
     "EVERY": "Every",
     "METERS": "Meters",
     "CONCENTRATORS": "Concentrators",
+    "MINUTES": "Minutes",
+    "HOURLY": "Hourly",
+    "DAILY": "Daily",
+    "WEEKLY": "Weekly",
+    "MONTHLY": "Monthly",
     "TAG": "tag",
+    "SELECT-ITEM": "Select item...",
+    "EXPRESSION-INVALID": "Expression invalid",
+    "SUCCEEDED": "Succeeded",
+    "FAILED": "Failed",
     "COMMUNICATION": "Communication",
     "BASIC": "Basic"
   },
@@ -122,7 +131,7 @@
     "DESCRIPTION": "Description",
     "FOR-LAST": "For last",
     "HOURS": "Hour(s)",
-    "MINUTES" : "Minute(s)",
+    "MINUTES": "Minute(s)",
     "DAYS": "Day(s)",
     "WEEK-DAYS": "Week-days",
     "EXPRESSION": "Expression",
@@ -145,6 +154,10 @@
     "START-WITH-RELEASE": "Start with release",
     "USE-LDN-AS-SYSTITLE": "Use Logical Device Name (LDN) as Systitle",
     "AUTHENTICATION-TYPE": "Authentication type",
+    "START-AT": "Start at",
+    "END-AT": "End at",
+    "PUSH-TO-IEC": "Push to IEC",
+    "READ-FROM-LAST-VALUE": "Read from last value",
     "DISCONNECTOR-MODE": "Disconnector mode",
     "IMAGE-IDENTIFIER": "Image identifier",
     "IMAGE-SIZE": "Image size (bytes)",
@@ -204,6 +217,8 @@
     "UPDATE": "Update",
     "APPLY": "Apply",
     "IMPORT": "Import",
+    "PREVIOUS": "Previous",
+    "NEXT": "Next",
     "ASSIGN": "Assign"
   },
   "DCU": {
@@ -262,16 +277,41 @@
     "DC-TIME-SYNC-JOB": "DC Time sync job",
     "TOPOLOGY-JOB": "Topology job",
     "READING-JOBS": "Reading Jobs",
-    "CRON-SCHEDULE": {
-      "DAYS-IN-MONTH": "Days in month",
-      "EXPRESSION-INVALID": "Expression is invalid."
+    "STATUS-JOB": {
+      "TOTAL-DEVICES": "Total devices",
+      "TOTAL-TIME": "Total time:",
+      "RUNNING-TIME": "Running time:",
+      "PROGRESS": "Progress",
+      "ERROR": "Error getting status job"
     },
-    "ALARM-NOTIFICATION":{
+    "CRON-SCHEDULE": {
+      "DAYS-IN-MONTH": "Days in month"
+    },
+    "ALARM-NOTIFICATION": {
       "TITLE": "Alarm notification",
       "SUBTITLE": "Send notification message when alarm events matches one or more criteria bellow.",
       "TEXT": "At least one of the rules below should be active",
       "ONE-RULE": "At least one of the rules must be active.",
       "SEND-NOTIFICATIONS-TO": "Send notifications to"
+    },
+    "SCHEDULER-JOB": {
+      "SELECT-JOB": "To continue, select a job type, please.",
+      "CREATE-JOB": "Create a new job",
+      "MORE-SAVE-OPTIONS": "More Save options",
+      "ERROR-SAVING": "Error saving job",
+      "JOB-SUCCESSFULLY": "Job was {{ operation }} successfully",
+      "ADDED": "added",
+      "UPDATED": "updated"
+    },
+    "ACTIVE-JOB": {
+      "TITLE": "Active jobs",
+      "TOTAL": "Total jobs",
+      "RUNNING": "Running",
+      "PENDING": "Pending",
+      "TYPE": "Type",
+      "RUNNING-TIME": "Running Time",
+      "STATE": "State",
+      "STATUS": "Status"
     }
   },
   "ALARM": {
@@ -303,7 +343,6 @@
     }
   },
   "ALERT": {
-
   },
   "GRID": {
     "SELECT-DESELECT-ALL": "Select/deselect all",
@@ -376,7 +415,9 @@
     "DEVICES": "Devices",
     "IP": "IP",
     "LAST-COMMUNICATION": "Last communication",
-    "NO-RECORDS-FOUND": "No records found. You may need to adjust your search or filter parameters."
+    "NO-RECORDS-FOUND": "No records found. You may need to adjust your search or filter parameters.",
+    "EXCEL-EXPORT": "Export in excel",
+    "APPLY-SAVED-STATE": "Apply saved state or save new"
   },
   "LOGIN": {
     "TITLE": "Login",
@@ -389,6 +430,18 @@
     "CS": "Čeština",
     "FR": "Français",
     "IT": "Italiano"
+  },
+  "DAY": {
+    "MON": "Mon",
+    "TUE": "Tue",
+    "WED": "Wed",
+    "THU": "Thu",
+    "FRI": "Fri",
+    "SAT": "Sat",
+    "SUN": "Sun",
+    "MON-FRI": "Mon-Fri",
+    "EVERY": "Every",
+    "WEEK-DAY": "Week day (MON-FRI)"
   },
   "ngb.toast.close-aria": "Close",
   "8436180309712376162": "Overview - Concentrators",
