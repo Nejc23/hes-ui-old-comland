@@ -91,7 +91,16 @@
     "SEARCH-TERM": "Search term",
     "NO-DATA-FOUND": "No data found",
     "SHOW-ALL": "Show all",
-    "JOBS": "Jobs"
+    "JOBS": "Jobs",
+    "CONNECT": "Connect",
+    "DISCONNECT": "Disconnect",
+    "MODE": "Mode",
+    "ACTIVATE": "Activate",
+    "DEACTIVATE": "Deactivate",
+    "RELAYS": "Relays",
+    "CII": "CII",
+    "LIMITER": "Limiter",
+    "MONITOR": "Monitor"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -313,7 +322,15 @@
     "FW-UPGRADE-TITLE": "FW upgrade",
     "UPLOAD-IMAGE": "Upload image",
     "ACTIVATE-IMAGE": "Activate image",
+    "TOU-UPLOAD": "TOU Upload",
+    "SET-THRESHOLDS": "Set thresholds",
+    "READ-THRESHOLDS": "Read thresholds",
+    "CLEAR-FF": "Clear FF",
+    "SET-DISPLAY-SETTINGS-TITLE": "Set display settings",
+    "CLEAR-ALARMS": "Clear Alarms",
+    "ERROR-SAVING-MU": "Error saving Meter Unit!",
     "BREAKER": {
+      "BREAKER": "Breaker",
       "SET-BREAKER-MODE": "Set Breaker mode ({{selectedRowsCount}} selected)"
     },
     "JOBS": {
