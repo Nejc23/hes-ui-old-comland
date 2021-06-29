@@ -1,14 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
-import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 
 @Component({
   selector: 'app-save-view-form-meter-units-type',

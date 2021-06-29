@@ -552,7 +552,10 @@
     "NO-RECORDS-FOUND": "No records found. You may need to adjust your search or filter parameters.",
     "EXCEL-EXPORT": "Export in excel",
     "APPLY-SAVED-STATE": "Apply saved state or save new",
-    "TYPE": "Type"
+    "TYPE": "Type",
+    "MISSING-TEMPLATE": "Missing template!",
+    "READY-FOR-ACTIVATION": "Ready for activation!",
+    "HIGH-LEVEL-SECURITY": "High level security on management client is enabled on this device!"
   },
   "LOGIN": {
     "TITLE": "Login",
