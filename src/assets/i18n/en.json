@@ -101,7 +101,9 @@
     "RELAYS": "Relays",
     "CII": "CII",
     "LIMITER": "Limiter",
-    "MONITOR": "Monitor"
+    "MONITOR": "Monitor",
+    "FROM": "From",
+    "TO": "to"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -357,6 +359,12 @@
       "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
       "SELECT-KEY-TYPE": "Please select from the list below a key type you would like to re-key.",
       "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?"
+    },
+    "REGISTER": {
+      "NO-REGISTER-SELECTED": "No register selected",
+      "SELECT-REGISTER": "To display data, select register from the list on the left.",
+      "NO-AVAILABLE-DATA": "There seems to be no available data to show.",
+      "CHANGE-TIME": "Try changing the time."
     }
   },
   "JOB": {
@@ -552,12 +560,12 @@
     "MON-FRI": "Mon-Fri",
     "EVERY": "Every",
     "WEEK-DAY": "Week day (MON-FRI)",
-    "TODAY": "TODAY",
-    "YESTERDAY": "YESTERDAY",
-    "LAST-7-DAYS": "LAST 7 DAYS",
-    "LAST-30-DAYS": "LAST 30 DAYS",
-    "CURRENT-MONTH": "CURRENT MONTH",
-    "LAST-MONTH": "LAST MONTH",
+    "TODAY": "Today",
+    "YESTERDAY": "Yesterday",
+    "LAST-7-DAYS": "Last 7 days",
+    "LAST-30-DAYS": "Last 30 days",
+    "CURRENT-MONTH": "Current month",
+    "LAST-MONTH": "Last month",
     "SET-START-DATE": "set start date",
     "SET-END-DATE": "set end date",
     "START-TIME-REQUIRED": "Start time is required.",
