@@ -9,6 +9,7 @@ import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-
 import { device, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
 import { getTemplatingDefaultValues } from 'src/app/core/repository/consts/templating.const';
+import { AuthenticationTypeEnum } from '../../../app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 
 @Injectable()
 export class TemplatingInterceptor {
@@ -26,7 +27,7 @@ export class TemplatingInterceptor {
         advancedInformation: {
           startWithRelease: true,
           ldnAsSystitle: true,
-          authenticationType: 3
+          authenticationType: AuthenticationTypeEnum.NONE
         }
       },
       hdlcInformation: {

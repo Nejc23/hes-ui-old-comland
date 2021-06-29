@@ -17,6 +17,7 @@ stages:
     - npm ci
     - npm run postinstall
   script:
+    - npx kendo-ui-license activate
     - npm run build-production:${CI_JOB_NAME}
   cache:
     key:
