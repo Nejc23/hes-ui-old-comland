@@ -4,6 +4,7 @@ import { getTestBed } from '@angular/core/testing';
 import { defaultResponseHeader, defaultRequestHeader } from 'pact/helpers/default-header.helper';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MuUpdateRequest } from 'src/app/core/repository/interfaces/meter-units/mu-update-request.interface';
+import { AuthenticationTypeEnum } from '../../../src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -35,7 +36,7 @@ describe('Pact consumer test', () => {
     port: 2102,
     isGateWay: false,
     advancedInformation: {
-      authenticationType: 1,
+      authenticationType: AuthenticationTypeEnum.NONE,
       ldnAsSystitle: true,
       startWithRelease: false
     },

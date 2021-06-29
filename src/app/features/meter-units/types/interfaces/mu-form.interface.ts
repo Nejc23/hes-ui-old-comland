@@ -1,6 +1,9 @@
 import { MuHdlcInformation } from './../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { MuAdvancedInformation } from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import {
+  AuthenticationTypeEnum,
+  MuAdvancedInformation
+} from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 import { MuWrapperInformation } from 'src/app/core/repository/interfaces/meter-units/mu-wrapper-information.interface';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 
@@ -15,7 +18,7 @@ export interface MuForm {
   communicationType: number;
   isGateway: boolean;
   jobIds: string[];
-  authenticationType: Codelist<number>;
+  authenticationType: AuthenticationTypeEnum;
 
   advancedInformation: MuAdvancedInformation;
   wrapperInformation?: MuWrapperInformation;
