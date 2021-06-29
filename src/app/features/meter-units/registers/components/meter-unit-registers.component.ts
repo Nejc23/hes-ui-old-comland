@@ -471,15 +471,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.showData(this.selectedRegister, true);
   }
 
-  get placeholderSearch() {
-    return `Search`;
-  }
-
   insertedSearchValue(searchValue) {
     this.setRegisterGroups(searchValue);
-  }
-
-  getFilterTitle(): string {
-    return `Register`;
   }
 }
