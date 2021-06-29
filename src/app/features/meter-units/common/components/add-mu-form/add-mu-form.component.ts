@@ -542,9 +542,9 @@ export class AddMuFormComponent implements OnInit {
       communicationType: +this.form.get(this.communicationTypeProperty).value,
       isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
-      authenticationType: this.form.get(this.authenticationTypeProperty).value,
+      authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       advancedInformation: {
-        authenticationType: this.form.get(this.authenticationTypeProperty).value,
+        authenticationType: this.form.get(this.authenticationTypeProperty).value.value,
         ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
         startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
       },
@@ -583,7 +583,7 @@ export class AddMuFormComponent implements OnInit {
     let advancedInformation = null;
     if (this.isNewOrProtocolDlms) {
       advancedInformation = {
-        authenticationType: this.form.get(this.authenticationTypeProperty).value,
+        authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
         ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
         startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
       };
