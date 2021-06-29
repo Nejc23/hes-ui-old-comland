@@ -107,7 +107,11 @@
     "READ-METER": "Read Meter",
     "DATA": "Data",
     "ADD-NEW": "Add New",
-    "MORE-OPTIONS": "More options"
+    "MORE-OPTIONS": "More options",
+    "NO-RECORDS-FOUND": "No records found.",
+    "SHOW-CHILD-MBUS": "show child MBus",
+    "SHOW-WITHOUT-TEMPLATE": "show without template",
+    "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -387,7 +391,8 @@
     "METER-UNIT-ADDED": "Meter unit has been added successfully",
     "METER-UNIT-UPDATED": "Meter unit has been updated successfully",
     "ADD-DLMS-METER": "Add new DLMS meter",
-    "EDIT-METER": "Edit {{ protocol }} meter"
+    "EDIT-METER": "Edit {{ protocol }} meter",
+    "METER-UNITS-FOR": "Meter Units for"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
@@ -553,6 +558,7 @@
     "EXCEL-EXPORT": "Export in excel",
     "APPLY-SAVED-STATE": "Apply saved state or save new",
     "TYPE": "Type",
+    "TAG": "Tag",
     "MISSING-TEMPLATE": "Missing template!",
     "READY-FOR-ACTIVATION": "Ready for activation!",
     "HIGH-LEVEL-SECURITY": "High level security on management client is enabled on this device!"
