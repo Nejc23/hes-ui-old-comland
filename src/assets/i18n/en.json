@@ -215,7 +215,13 @@
     "KEY-TYPE": "Key type",
     "START-TIME": "Start time:",
     "END-TIME": "End time:",
-    "SET-TIME": "Set time"
+    "SET-TIME": "Set time",
+    "WRAPPER": "Wrapper",
+    "HDLC": "HDLC",
+    "NONE": "None",
+    "LOW": "Low",
+    "HIGH": "High",
+    "HIGH-GMAC": "High with GMAC"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -369,7 +375,11 @@
       "EVENT-TYPE": "Event type",
       "REFRESH-DATA": "Refresh data",
       "SHOW-HIDE-REGISTERS": "Show/hide registers"
-    }
+    },
+    "METER-UNIT-ADDED": "Meter unit has been added successfully",
+    "METER-UNIT-UPDATED": "Meter unit has been updated successfully",
+    "ADD-DLMS-METER": "Add new DLMS meter",
+    "EDIT-METER": "Edit {{ protocol }} meter"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
