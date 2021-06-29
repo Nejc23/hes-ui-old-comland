@@ -34,7 +34,7 @@
         </button>
 
         <div class="mt-2">
-          <h3 class="mb-0" i18n>{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
+          <h3 class="mb-0">{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
         </div>
         <div class="ml-auto">
           <button type="button" class="btn btn-light pl-2 pr-2 mr-0" (click)="onRefresh()" placement="left" [openDelay]="500" [ngbTooltip]="tipContentRefresh">
@@ -42,10 +42,10 @@
         </div>
       </div>
       <div class="d-flex">
-        <label i18n class="mr-2 my-auto">{{ 'COMMON.FROM' | translate }}</label>
+        <label class="mr-2 my-auto">{{ 'COMMON.FROM' | translate }}</label>
         <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlurOrChange()" (valueChange)="onStartTimeBlurOrChange()">
         </app-datetime-picker>
-        <label i18n class="mr-2 ml-2 my-auto">{{ 'COMMON.TO' | translate }}</label>
+        <label class="mr-2 ml-2 my-auto">{{ 'COMMON.TO' | translate }}</label>
         <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlurOrChange()" (valueChange)="onEndTimeBlurOrChange()">
         </app-datetime-picker>
       </div>
@@ -91,7 +91,7 @@
             </app-registers-chart>
           </div>
           <div class="col-12" *ngIf="isEvent">
-            <h4 i18n class="pt-2">Number of events</h4>
+            <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
             <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
           </div>
         </div>
@@ -103,7 +103,7 @@
             <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
           </div>
           <div class="col-6" *ngIf="isEvent">
-            <h4 i18n>Event type</h4>
+            <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
             <app-registers-pie-chart [eventsById]="eventsById"></app-registers-pie-chart>
           </div>
         </div>
@@ -111,5 +111,5 @@
     </div>
   </div>
 </div>
-<ng-template #hideShowFilters><span i18n>Show/hide registers</span></ng-template>
-<ng-template #tipContentRefresh><span i18n>Refresh data</span></ng-template>
+<ng-template #hideShowFilters><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template>
+<ng-template #tipContentRefresh><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template>

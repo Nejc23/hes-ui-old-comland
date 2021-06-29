@@ -360,7 +360,11 @@
       "NO-REGISTER-SELECTED": "No register selected",
       "SELECT-REGISTER": "To display data, select register from the list on the left.",
       "NO-AVAILABLE-DATA": "There seems to be no available data to show.",
-      "CHANGE-TIME": "Try changing the time."
+      "CHANGE-TIME": "Try changing the time.",
+      "NUMBER-OF-EVENTS": "Number of events",
+      "EVENT-TYPE": "Event type",
+      "REFRESH-DATA": "Refresh data",
+      "SHOW-HIDE-REGISTERS": "Show/hide registers"
     }
   },
   "JOB": {
