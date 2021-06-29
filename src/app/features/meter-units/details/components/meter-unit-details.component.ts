@@ -65,17 +65,13 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   public editMeterUnit() {
-    // this.editMode = true;
-
     const options: NgbModalOptions = {
       size: 'lg'
     };
 
     const modalRef = this.modalService.open(AddMuFormComponent, options);
     const component: AddMuFormComponent = modalRef.componentInstance;
-    if (this.data) {
-      modalRef.componentInstance.setFormEdit(this.data, options);
-    }
+    modalRef.componentInstance.setFormEdit(this.data, options);
 
     modalRef.result
       .then((result) => {

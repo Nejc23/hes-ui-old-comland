@@ -4,6 +4,7 @@ import { pactFinalize, pactSetAngular, pactVerify, setupPactProvider } from 'pac
 import { getTestBed } from '@angular/core/testing';
 import { defaultRequestHeader, defaultResponseHeader } from 'pact/helpers/default-header.helper';
 import { ReferenceType } from '../../../src/app/core/repository/interfaces/meter-units/reference-type.enum';
+import { AuthenticationTypeEnum } from '../../../src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -59,7 +60,7 @@ describe('Pact consumer test', () => {
     advancedInformation: {
       startWithRelease: true,
       ldnAsSystitle: true,
-      authenticationType: 1
+      authenticationType: AuthenticationTypeEnum.NONE
     }
   };
 

@@ -8,6 +8,7 @@ import { RegistersSelectList } from 'src/app/core/repository/interfaces/register
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
+import { AuthenticationTypeEnum } from '../../../src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -40,7 +41,7 @@ describe('Pact consumer test', () => {
         advancedInformation: {
           startWithRelease: true,
           ldnAsSystitle: true,
-          authenticationType: 3
+          authenticationType: AuthenticationTypeEnum.NONE
         }
       },
       hdlcInformation: {

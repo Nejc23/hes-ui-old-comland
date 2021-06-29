@@ -152,7 +152,7 @@ export class MeterUnitsService {
       isGateWay: payload.isGateway,
       referencingType: payload.referencingType,
       advancedInformation: {
-        authenticationType: payload.authenticationType?.id,
+        authenticationType: payload.authenticationType,
         ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
         startWithRelease: payload.advancedInformation?.startWithRelease
       }
@@ -206,7 +206,7 @@ export class MeterUnitsService {
 
     if (payload.advancedInformation) {
       muRequest.advancedInformation = {
-        authenticationType: payload.authenticationType?.id,
+        authenticationType: payload.authenticationType,
         ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
         startWithRelease: payload.advancedInformation?.startWithRelease
       };
