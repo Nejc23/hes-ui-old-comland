@@ -122,7 +122,7 @@ export class PlcReadRegistersComponent implements OnInit {
         suppressMenu: true,
         checkboxSelection: true,
         lockPosition: true,
-        field: this.translate.instant('COMMON.NAME'),
+        field: 'name',
         headerName: this.translate.instant('COMMON.TYPE'),
         cellStyle: (params) => {
           if (params.data.isSelectable !== true) {

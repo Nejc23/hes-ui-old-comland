@@ -13,7 +13,6 @@ import { InputRadioComponent } from './components/input-radio/input-radio.compon
 import { CustomFormErrorsComponent } from './components/custom-form-errors/custom-form-errors.component';
 import { DefaultFormElementComponent } from './components/default-form-element/default-form-element.component';
 import { SelectInputComponent } from './components/select-input/select-input.component';
-import { InputSelectComponent } from './components/input-select/input-select.component';
 import { InputSearcherComponent } from './components/input-searcher/input-searcher.component';
 import { InputTagComponent } from './components/input-tag/input-tag.component';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
@@ -54,7 +53,6 @@ import { TranslateModule } from '@ngx-translate/core';
     DefaultFormElementComponent,
     SelectInputComponent,
     SelectDropdownComponent,
-    InputSelectComponent,
     InputSearcherComponent,
     InputTagComponent,
     InputMultiselectComponent,
@@ -87,7 +85,6 @@ import { TranslateModule } from '@ngx-translate/core';
     DefaultFormElementComponent,
     SelectInputComponent,
     SelectDropdownComponent,
-    InputSelectComponent,
     InputSearcherComponent,
     InputTagComponent,
     InputSwitchComponent,

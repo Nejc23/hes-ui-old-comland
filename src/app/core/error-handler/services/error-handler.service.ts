@@ -17,7 +17,7 @@ export class ErrorHandlerService {
         notify.errorToast(_.get(error, 'error.message', `Not valid request`));
       }
       if (error.status === 401 || error.status === 403) {
-        //  notify.errorToast(this.i18n(`Authentication error`));
+        //  notify.errorToast(this.translate(`Authentication error`));
         //   router.navigate(['login']);
       }
       if (error.status === 404) {

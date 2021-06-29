@@ -37,7 +37,6 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
   }
 
   valueChange(params: any, event: boolean) {
-    debugger;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();

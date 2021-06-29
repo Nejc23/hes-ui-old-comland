@@ -17,6 +17,7 @@
     "ACTIVATE-FW-UPGRADE": "Activate FW upgrade",
     "ACTIVATE-CLEAR-FF": "Activate Clear FF",
     "CLEAR-ALARMS": "Clear alarms",
+    "REFRESH-ALARMS": "Refresh alarms",
     "READ-MONITOR-THRESHOLD-VALUES": "Read monitor threshold values",
     "READ-LIMITER-THRESHOLD-VALUES": "Read limiter threshold values",
     "SYNCHRONIZE-TIME": "Synchronize time",
@@ -195,7 +196,10 @@
     "RELAY": "Relay",
     "MODE": "Mode",
     "SELECT-DATE": "Select date",
-    "REGISTER-GROUP": "Register group"
+    "REGISTER-GROUP": "Register group",
+    "START": "Start",
+    "END": "End",
+    "PASSWORD": "Password"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -208,7 +212,10 @@
     "AUTO-TEMPLATES": "Auto templates",
     "IMPORT-DEVICE-KEYS": "Import device keys",
     "ADMINISTRATION": "Administration",
-    "USERS": "Users"
+    "USERS": "Users",
+    "POWERED-BY": "powered by Metricsx",
+    "ALL-RIGHTS RESERVED": "© 2020. All rights reserved",
+    "PIN-COLLAPSE-MENU": "Pin/collapse menu"
   },
   "BREADCRUMB": {
     "CONCENTRATOR": "Concentrator",
@@ -480,7 +487,13 @@
   },
   "LOGIN": {
     "TITLE": "Login",
-    "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login"
+    "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login",
+    "FORGOT-PASSWORD": "Forgot password?",
+    "RESET-PASSWORD": "Reset your password",
+    "ENTER-EMAIL": "Please enter your email to reset account password.",
+    "RESET": "Reset",
+    "BACK-TO-LOGIN": "Back to login",
+    "ENTER-NEW-PASSWORD": "Please enter new password."
   },
   "LANGUAGE": {
     "EN": "English",
