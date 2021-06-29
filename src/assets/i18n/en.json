@@ -539,7 +539,9 @@
     "ENTER-EMAIL": "Please enter your email to reset account password.",
     "RESET": "Reset",
     "BACK-TO-LOGIN": "Back to login",
-    "ENTER-NEW-PASSWORD": "Please enter new password."
+    "ENTER-NEW-PASSWORD": "Please enter new password.",
+    "ERROR": "Error",
+    "FAILED": "Login failed! Check Identity server!"
   },
   "LANGUAGE": {
     "EN": "English",

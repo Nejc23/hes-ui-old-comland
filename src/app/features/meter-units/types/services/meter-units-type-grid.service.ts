@@ -140,7 +140,7 @@ export class MeterUnitsTypeGridService {
       },
       {
         field: gridSysNameColumnsEnum.serialNumber,
-        headerName: this.translate.instant('GRID.SERIAL_NUMBER'),
+        headerName: this.translate.instant('GRID.SERIAL-NUMBER'),
         //  pinned: true,
         sortable: true,
         filter: false,

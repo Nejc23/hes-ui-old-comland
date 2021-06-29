@@ -9,6 +9,7 @@ import { GridCellNameComponent } from 'src/app/shared/ag-grid/components/grid-ce
 import { GridCellIdNumberComponent } from 'src/app/shared/ag-grid/components/grid-cell-id-number.component';
 import { GridCellIpComponent } from 'src/app/shared/ag-grid/components/grid-cell-ip.component';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,8 @@ export class DataConcentratorUnitsSelectGridService {
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private translate: TranslateService
   ) {}
 
   setGridReadOnlyColumns() {
@@ -38,35 +40,35 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: `Select/deselect all`
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL')
       },
       {
         field: 'name',
-        headerName: `Name`,
+        headerName: this.translate.instant('GRID.NAME'),
         pinned: false,
         sortable: true,
         filter: false,
         sort: 'asc',
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: `Name`
+        headerTooltip: this.translate.instant('GRID.NAME')
       },
       {
         field: 'id',
-        headerName: `ID`,
+        headerName: this.translate.instant('GRID.ID'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: `ID`
+        headerTooltip: this.translate.instant('GRID.ID')
       },
       {
         field: 'ip',
-        headerName: `IP`,
+        headerName: this.translate.instant('GRID.IP'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: `IP`
+        headerTooltip: this.translate.instant('GRID.IP')
       }
     ];
   }
@@ -84,7 +86,7 @@ export class DataConcentratorUnitsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: `Select/deselect all`
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL')
       },
       {
         field: 'name',
@@ -92,30 +94,30 @@ export class DataConcentratorUnitsSelectGridService {
         sortable: true,
         suppressMovable: true,
         sort: 'asc',
-        headerName: `Name`,
-        headerTooltip: `Name`
+        headerName: this.translate.instant('GRID.NAME'),
+        headerTooltip: this.translate.instant('GRID.NAME')
       },
       {
         field: 'id',
-        headerName: `ID`,
+        headerName: this.translate.instant('GRID.ID'),
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: `ID`
+        headerTooltip: this.translate.instant('GRID.ID')
       },
       {
         field: 'ip',
-        headerName: `IP`,
+        headerName: this.translate.instant('GRID.IP'),
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: `IP`
+        headerTooltip: this.translate.instant('GRID.IP')
       }
     ];
   }

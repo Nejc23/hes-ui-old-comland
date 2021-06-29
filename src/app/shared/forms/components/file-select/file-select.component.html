@@ -15,14 +15,14 @@
         <div class="title"><a (click)="onFileSelectClick()"
                               href="javascript:void(0);">{{ 'FORM.CHOOSE-FILE' | translate }}</a><span>{{'FORM.DRAG-HERE' | translate }}</span>
         </div>
-        <div class="subtitle pt-2">{{ dropFileSelectSubtitle }}</div>
+        <div class="subtitle pt-2">{{ dropFileSelectSubtitle | translate }}</div>
       </div>
 
       <!-- <div *ngIf="isUploadInProgress">
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
-        <div class="title"><span i18n>Uploading file:</span> {{ fileName }}</div>
+        <div class="title"><span>Uploading file:</span> {{ fileName }}</div>
         <kendo-progressbar [label]="false" [min]="0" [max]="100" style="width:50%;" [value]="uploadProgressValue"></kendo-progressbar>
       </div> -->
 
