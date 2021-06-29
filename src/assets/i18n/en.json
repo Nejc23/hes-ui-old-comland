@@ -103,7 +103,11 @@
     "LIMITER": "Limiter",
     "MONITOR": "Monitor",
     "FROM": "From",
-    "TO": "to"
+    "TO": "to",
+    "READ-METER": "Read Meter",
+    "DATA": "Data",
+    "ADD-NEW": "Add New",
+    "MORE-OPTIONS": "More options"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -350,6 +354,10 @@
       "ASSIGN-EXISTING-JOBS": "Assign existing jobs ({{selectedRowsCount}} selected)"
     },
     "SECURITY": {
+      "SECURITY": "Security",
+      "ACTIVATE-HLS-TITLE": "Activate HLS",
+      "REKEY": "Rekey",
+      "CHANGE-PASSWORD-TITLE": "Change password",
       "ACTIVATE-HLS": "Activate HLS ({{selectedRowsCount}} selected)",
       "CONFIRM-HLS-ACTIVATION": "Are you sure you would like to perform HLS activation for the management client?",
       "CHANGE-PASSWORD": "Change password ({{selectedRowsCount}} selected)",
