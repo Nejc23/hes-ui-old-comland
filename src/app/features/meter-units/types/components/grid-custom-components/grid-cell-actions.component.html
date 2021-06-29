@@ -30,33 +30,33 @@
     </button>
     <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
       <div appHideIfPermissionUnauthorized [permission]="permissionMuManage">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onDelete()"><span i18n>Delete</span></a>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onDelete()"><span>{{ 'BUTTON.DELETE' | translate }}</span></a>
       </div>
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionManageJobs">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Jobs</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.JOBS' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionManageJobs">
-              <a class="dropdown-item" href="javascript:void(0)" (click)="onScheduleReadJobs()"><span i18n>Create new</span></a>
+              <a class="dropdown-item" href="javascript:void(0)" (click)="onScheduleReadJobs()"><span>{{ 'PLC-METER.CREATE-NEW' | translate }}</span></a>
             </div>
           </div>
         </div>
       </div>
       <div appHideIfPermissionUnauthorized [permission]="permissionAssignTemplates">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onJobsTemplates()"><span i18n>Templates</span></a>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onJobsTemplates()"><span>{{ 'PLC-METER.TEMPLATES' | translate }}</span></a>
       </div>
 
       <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
 
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>FW upgrade</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'PLC-METER.FW-UPGRADE-TITLE' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onUpgrade()"><span i18n>Upload image</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onUpgrade()"><span>{{ 'PLC-METER.UPLOAD-IMAGE' | translate }}</span></a>
             </div>
             <div appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onActivateUpgrade()"><span i18n>Activate image</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onActivateUpgrade()"><span>{{ 'PLC-METER.ACTIVATE-IMAGE' | translate }}</span></a>
             </div>
           </div>
         </div>
@@ -77,19 +77,19 @@
                               permissionRelaysSetMode]"></div>
       <div class="dropdown-item"  appHideIfAllPermissionsUnauthorized [permissions]="[permissionDisconnectorConnect, permissionDisconnectorDisconnect, permissionDisconnectorGetState, permissionDisconnectorSetMode]">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Breaker</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'PLC-METER.BREAKER.BREAKER' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionDisconnectorConnect">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onConnect()"><span i18n>Connect</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onConnect()"><span>{{ 'COMMON.CONNECT' | translate }}</span></a>
             </div>
             <div appHideIfPermissionUnauthorized [permission]="permissionDisconnectorDisconnect">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnect()"><span i18n>Disconnect</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnect()"><span>{{ 'COMMON.DISCONNECT' | translate }}</span></a>
             </div>
             <div appHideIfPermissionUnauthorized [permission]="permissionDisconnectorGetState">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnectorStatus()"><span i18n>State</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnectorStatus()"><span>{{ 'COMMON.STATE' | translate }}</span></a>
             </div>
             <div appHideIfPermissionUnauthorized [permission]="permissionDisconnectorSetMode">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnectorMode()"><span i18n>Mode</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onDisconnectorMode()"><span>{{ 'COMMON.MODE' | translate }}</span></a>
             </div>
           </div>
         </div>
@@ -97,16 +97,16 @@
 
       <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionCiiActivate, permissionCiiDeactivate, permissionCiiState]">
         <div class="dropdown-submenu pull-left disabled">
-          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>CII</span></a>
+          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.CII' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionCiiActivate">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiActivate()"><span i18n>Activate</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiActivate()"><span>{{ 'COMMON.ACTIVATE' | translate }}</span></a>
             </div>
             <div appHideIfPermissionUnauthorized [permission]="permissionCiiDeactivate">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiDeactivate()"><span i18n>Deactivate</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiDeactivate()"><span>{{ 'COMMON.DEACTIVATE' | translate }}</span></a>
             </div>
             <div appHideIfPermissionUnauthorized [permission]="permissionCiiState">
-              <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiState()"><span i18n>State</span></a>
+              <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiState()"><span>{{ 'COMMON.STATE' | translate }}</span></a>
             </div>
           </div>
         </div>
@@ -114,19 +114,19 @@
 
       <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionRelaysConnect, permissionRelaysDisconnect, permissionRelaysState, permissionRelaysSetMode]">
         <div class="dropdown-submenu pull-left disabled">
-          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Relays</span></a>
+          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.RELAYS' | translate }}</span></a>
         <div class="dropdown-menu">
           <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysConnect" (click)="onRelaysConnect()">
-            <a href="javascript:void(0)"><span i18n>Connect</span></a>
+            <a href="javascript:void(0)"><span>{{ 'COMMON.CONNECT' | translate }}</span></a>
           </div>
           <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysDisconnect" (click)="onRelaysDisconnect()">
-            <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
+            <a href="javascript:void(0)"><span>{{ 'COMMON.DISCONNECT' | translate }}</span></a>
           </div>
           <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysState" (click)="onRelaysState()">
-            <a href="javascript:void(0)"><span i18n>State</span></a>
+            <a href="javascript:void(0)"><span>{{ 'COMMON.STATE' | translate }}</span></a>
           </div>
           <div appHideIfPermissionUnauthorized [permission]="permissionRelaysSetMode" class="dropdown-item" (click)="onRelaysSetMode()">
-            <a href="javascript:void(0)" ><span i18n>Mode</span></a>
+            <a href="javascript:void(0)" ><span>{{ 'COMMON.MODE' | translate }}</span></a>
           </div>
         </div>
       </div>
@@ -147,7 +147,7 @@
       [permissionsBelow]="[permissionTouUpload]"></div>
 
       <div appHideIfPermissionUnauthorized [permission]="permissionTouUpload" (click)="onTou()">
-        <a class="dropdown-item" href="javascript:void(0);"><span i18n>TOU Upload</span></a>
+        <a class="dropdown-item" href="javascript:void(0);"><span>{{ 'PLC-METER.TOU-UPLOAD' | translate }}</span></a>
       </div>
 
       <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized
@@ -160,38 +160,38 @@
 
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Limiter</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.LIMITER' | translate }}</span></a>
           <div class="dropdown-menu">
             <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter" (click)="onSetLimiter()">
-              <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
+              <a href="javascript:void(0)"><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a>
             </div>
             <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadLimiterThreshold()">
-              <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
+              <a href="javascript:void(0)"><span>{{ 'PLC-METER.READ-THRESHOLDS' | translate }}</span></a>
             </div>
           </div>
         </div>
       </div>
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Monitor</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.MONITOR' | translate }}</span></a>
           <div class="dropdown-menu">
             <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor" (click)="onSetMonitor()">
-              <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
+              <a href="javascript:void(0)"><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a>
             </div>
             <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadMonitorThreshold()">
-              <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
+              <a href="javascript:void(0)"><span>{{ 'PLC-METER.READ-THRESHOLDS' | translate }}</span></a>
             </div>
           </div>
         </div>
       </div>
       <div appHideIfPermissionUnauthorized [permission]="permissionClearFF">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onClearFF()"><span i18n>Clear FF</span></a>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onClearFF()"><span>{{ 'PLC-METER.CLEAR-FF' | translate }}</span></a>
       </div>
       <div appHideIfPermissionUnauthorized [permission]="permissionSetDisplay">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onSetDisplaySettings()"><span i18n>Set display settings</span></a>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onSetDisplaySettings()"><span>{{ 'PLC-METER.SET-DISPLAY-SETTINGS-TITLE' | translate }}</span></a>
       </div>
       <div appHideIfPermissionUnauthorized [permission]="permissionClearAlarms">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onClearAlarms()"><span i18n>Clear Alarms</span></a>
+        <a class="dropdown-item" href="javascript:void(0);" (click)="onClearAlarms()"><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a>
       </div>
     </div>
   </div>

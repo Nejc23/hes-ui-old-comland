@@ -34,7 +34,7 @@
         </button>
 
         <div class="mt-2">
-          <h3 class="mb-0" i18n>{{selectedRegister ? selectedRegister.name : 'No register selected'}}</h3>
+          <h3 class="mb-0" i18n>{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
         </div>
         <div class="ml-auto">
           <button type="button" class="btn btn-light pl-2 pr-2 mr-0" (click)="onRefresh()" placement="left" [openDelay]="500" [ngbTooltip]="tipContentRefresh">
@@ -42,20 +42,20 @@
         </div>
       </div>
       <div class="d-flex">
-        <label i18n class="mr-2 my-auto">From</label>
+        <label i18n class="mr-2 my-auto">{{ 'COMMON.FROM' | translate }}</label>
         <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlurOrChange()" (valueChange)="onStartTimeBlurOrChange()">
         </app-datetime-picker>
-        <label i18n class="mr-2 ml-2 my-auto">to</label>
+        <label i18n class="mr-2 ml-2 my-auto">{{ 'COMMON.TO' | translate }}</label>
         <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlurOrChange()" (valueChange)="onEndTimeBlurOrChange()">
         </app-datetime-picker>
       </div>
       <div class="btn-group">
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(1)" i18n>Today</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(2)" i18n>Yesterday</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(3)" i18n>Last 7 days</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(4)" i18n>Last 30 days</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(5)" i18n>Current month</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(6)" i18n>Last month</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(1)">{{ 'DAY.TODAY' | translate }}</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(2)">{{ 'DAY.YESTERDAY' | translate }}</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(3)">{{ 'DAY.LAST-7-DAYS' | translate }}</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(4)">{{ 'DAY.LAST-30-DAYS' | translate }}</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(5)">{{ 'DAY.CURRENT-MONTH' | translate }}</button>
+        <button class="btn btn-link btn-sm p-2" (click)="setRange(6)">{{ 'DAY.LAST-MONTH' | translate }}</button>
       </div>
     </div>
 
@@ -65,8 +65,8 @@
           <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
         </div>
         <div class="card-body">
-          <div class="small-title font-weight-bold pb-2" i18n>No register selected</div>
-          <div class="text-secondary" i18n>To display data, select register from the list on the left.</div>
+          <div class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
+          <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
         </div>
       </div>
       <div class="card text-center border-0 mt-5" *ngIf="isRegisterSelected && !isDataFound">
@@ -74,9 +74,9 @@
           <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
         </div>
         <div class="card-body">
-          <div class="small-title pb-2" i18n>No data found</div>
-          <div class="text-secondary" i18n>There seems to be no available data to show.</div>
-          <div class="text-secondary" i18n>Try changing the time.</div>
+          <div class="small-title pb-2">{{ 'COMMON.NO-DATA-FOUND' | translate }}</div>
+          <div class="text-secondary">{{ 'PLC-METER.REGISTER.NO-AVAILABLE-DATA' | translate }}</div>
+          <div class="text-secondary">{{ 'PLC-METER.REGISTER.CHANGE-TIME' | translate }}</div>
         </div>
       </div>
 
