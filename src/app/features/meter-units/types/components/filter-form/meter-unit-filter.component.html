@@ -9,12 +9,12 @@
       <div class="filter-scroll">
         <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
           <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
-            [autocompleteItemsAsObjects]="meterUnitStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [autocompleteItemsAsObjects]="meterUnitStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
           <app-input-tag label="Protocol" [property]="protocolProperty" [form]="form"
-            [autocompleteItemsAsObjects]="protocolTypes$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [autocompleteItemsAsObjects]="protocolTypes$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
@@ -23,36 +23,36 @@
             <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
           </div>
           <app-input-tag label="Vendor" [form]="form" [property]="vendorsProperty" [autocompleteItemsAsObjects]="meterUnitVendors$ | async"
-            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label (selectedValueChanged)="applyFilter()"
+            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" (selectedValueChanged)="applyFilter()"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
           <app-input-tag label="Medium" [property]="mediumProperty" [form]="form"
-            [autocompleteItemsAsObjects]="deviceMediums$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [autocompleteItemsAsObjects]="deviceMediums$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
           <app-input-tag label="Firmware" [allowCustomValues]="true" [property]="firmwareProperty" [form]="form" [autocompleteItemsAsObjects]="firmware$ | async"
-            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
           <app-input-tag label="Disconnector state" [property]="breakerStateProperty" [form]="form" [autocompleteItemsAsObjects]="disconnectorState$ | async"
-            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
           <app-input-tag label="CII state" [property]="ciiStateProperty" [form]="form" [autocompleteItemsAsObjects]="ciiState$ | async"
-            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
           <app-input-tag label="Show" [property]="showOptionFilterProperty" [form]="form"
-            [autocompleteItemsAsObjects]="showOptionFilter$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label
+            [autocompleteItemsAsObjects]="showOptionFilter$" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
             (valueChanged)="applyFilter()">
           </app-input-tag>
 
-          <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="meterUnitTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll" i18n-label>
+          <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="meterUnitTags$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
           </app-input-tag>
 
         </fieldset>
