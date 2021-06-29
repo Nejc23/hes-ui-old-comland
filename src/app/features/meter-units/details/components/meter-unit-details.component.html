@@ -2,8 +2,8 @@
   <div class="col-4 ng-star-inserted">
 
     <div class="form-group">
-      <button class="btn btn-primary" (click)="editMeterUnit()" appHideIfPermissionUnauthorized [permission]="permissionMuManage">
-        <span>{{ 'BUTTON.EDIT' | translate }}</span>
+      <button class="btn btn-primary" [disabled]="!data" (click)="editMeterUnit()" appHideIfPermissionUnauthorized [permission]="permissionMuManage">
+     <span>{{ 'BUTTON.EDIT' | translate }}</span>
       </button>
       <div class="btn-group pr-2" appHideIfPermissionUnauthorized [permission]="permissionMuManage">
         <button class="btn btn-secondary" type="button" (click)="onDelete()"><span>{{ 'BUTTON.DELETE' | translate }}</span></button>

@@ -8,8 +8,8 @@
         <div class="form-row" *ngFor="let form_elem of formTemplate">
           <div class="col-12"><h4><span>{{form_elem.name}}</span></h4></div>
           <div class="col-6">
-            <app-input-numeric label="THRESHOLD" [form]="form" [property]="form_elem.name" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" (valueChange)="onChangeField()" labelRight=""></app-input-numeric>
+            <app-input-numeric [label]="'Threshold'" [form]="form" [property]="form_elem.name" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" (valueChange)="onChangeField()" labelRight="A"></app-input-numeric>
           </div>
         </div>
         <div class="text-danger" *ngIf="showError"><small>

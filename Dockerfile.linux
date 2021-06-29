@@ -1,0 +1,27 @@
+FROM node:lts-alpine3.12 as build-stage
+
+#capture arguments
+ARG CONFIGURATION
+ARG SEMVER
+ARG GITHASH
+
+#angular build
+WORKDIR /app
+COPY package*.json /app/
+
+RUN apk add --no-cache --virtual .build-deps make gcc g++ python3 \
+ && npm install --silent \
+ && apk del .build-deps
+
+RUN npm install -g @angular/cli
+
+COPY . /app
+
+RUN node ./docker-version.js ${SEMVER} ${GITHASH}
+RUN if [ "${CONFIGURATION}" == "" ]; then ng build --prod --output-path=./dist/out ; else ng build --configuration=${CONFIGURATION} --output-path=./dist/out; fi
+
+#Create image with webserver
+FROM nginx:alpine
+COPY --from=build-stage /app/dist/out/ /usr/share/nginx/html
+RUN chmod -R 775 /usr/share/nginx/html
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf

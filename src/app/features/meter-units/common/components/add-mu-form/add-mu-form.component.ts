@@ -4,7 +4,10 @@ import { ToastNotificationService } from './../../../../../core/toast-notificati
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { MeterUnitsService } from './../../../../../core/repository/services/meter-units/meter-units.service';
 import { RadioOption } from './../../../../../shared/forms/interfaces/radio-option.interface';
-import { MuAdvancedInformation } from './../../../../../core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import {
+  AuthenticationTypeEnum,
+  MuAdvancedInformation
+} from './../../../../../core/repository/interfaces/meter-units/mu-advanced-information.interface';
 import { MuWrapperInformation } from './../../../../../core/repository/interfaces/meter-units/mu-wrapper-information.interface';
 import { AutoTemplatesService } from './../../../../../core/repository/services/auto-templates/auto-templates.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -36,33 +39,24 @@ export class AddMuFormComponent implements OnInit {
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
-  connectionTypes: Codelist<number>[] = [{ id: 1, value: `IP` }];
+  connectionTypes: Codelist<number>[] = [{ id: 1, value: $localize`IP` }];
   defaultConnectionType = this.connectionTypes[0];
   shortNameSelected = false;
 
   communicationTypes: RadioOption[] = [
-    { value: '1' as string, label: `Wrapper` },
-    { value: '0' as string, label: `HDLC` }
+    { value: '1' as string, label: $localize`Wrapper` },
+    { value: '0' as string, label: $localize`HDLC` }
   ];
   defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
 
   communicationTypeSelected: RadioOption = null;
 
-  authenticationTypes: Codelist<number>[] = [
-    { id: 0, value: `None` },
-    { id: 1, value: `Low` },
-    { id: 2, value: `High` },
-    { id: 5, value: `High with GMAC` }
+  authenticationTypes: Codelist<string>[] = [
+    { id: AuthenticationTypeEnum.NONE, value: $localize`None` },
+    { id: AuthenticationTypeEnum.LOW, value: $localize`Low` },
+    { id: AuthenticationTypeEnum.HIGH, value: $localize`High` },
+    { id: AuthenticationTypeEnum.HIGH_GMAC, value: $localize`High with GMAC` }
   ];
-
-  authenticationTypesEditMap: { [key: string]: number } = {
-    none: 0,
-    low: 1,
-    high: 2,
-    highgmac: 5
-  };
-
-  private defaultAuthenticationType = this.authenticationTypes[1];
 
   isConnectionTypeIp = this.defaultConnectionType?.id === 1;
   isTemplateSelected = false;
@@ -89,7 +83,6 @@ export class AddMuFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // todo set  shortNameSelected from enum
     this.codelistServiceMu
       .meterUnitVendorCodelist(null)
       .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
@@ -233,8 +226,12 @@ export class AddMuFormComponent implements OnInit {
 
   createForm(editMu: MeterUnitDetails = null): FormGroup {
     const communicationType = this.getCommunicationType(editMu);
-    const authenticationType = this.getAuthenticationType(editMu?.advancedInformation?.authenticationType);
-
+    let authenticationType = this.authenticationTypes.find(
+      (type) => type.id == editMu?.advancedInformation?.authenticationType.toLowerCase()
+    );
+    if (!authenticationType) {
+      authenticationType = this.authenticationTypes[1];
+    }
     return this.formBuilder.group({
       [this.nameProperty]: [editMu?.name, Validators.required],
       [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
@@ -291,21 +288,6 @@ export class AddMuFormComponent implements OnInit {
     return communicationType;
   }
 
-  getAuthenticationType(authenticationType: any): Codelist<number> {
-    if (!authenticationType) {
-      return this.defaultAuthenticationType;
-    }
-
-    let id = -1;
-    if (!isNaN(authenticationType)) {
-      id = +authenticationType;
-    } else {
-      id = this.authenticationTypesEditMap[String(authenticationType).toLowerCase()];
-    }
-
-    return this.authenticationTypes.find((a) => a.id === id);
-  }
-
   onConnectionTypeChanged(value: Codelist<number>) {
     this.isConnectionTypeIp = value && value.id === 1 ? true : false;
     this.setConnectionTypeControls();
@@ -354,20 +336,6 @@ export class AddMuFormComponent implements OnInit {
       this.setDefaultValue(this.publicClientHighProperty, hdlcInformation.publicClientHigh);
       this.setDefaultValue(this.publicServerLowProperty, hdlcInformation.publicServerLow);
       this.setDefaultValue(this.publicServerHighProperty, hdlcInformation.publicServerHigh);
-    }
-
-    const advancedInformation = this.templateDefaultValues?.advancedInformation?.advancedInformation;
-    if (advancedInformation) {
-      if (advancedInformation.authenticationType) {
-        const formField = this.form.get(this.authenticationTypeProperty);
-        const authenticationType = this.authenticationTypes.find((at) => at.id === advancedInformation.authenticationType);
-        if (formField.value === this.defaultAuthenticationType && authenticationType) {
-          formField.setValue(authenticationType);
-        }
-      }
-
-      this.setDefaultValue(this.advancedLdnAsSystitleProperty, advancedInformation.ldnAsSystitle);
-      this.setDefaultValue(this.advancedStartWithReleaseProperty, advancedInformation.startWithRelease);
     }
   }
 
@@ -626,7 +594,7 @@ export class AddMuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       isGateWay: this.form.get(this.isGatewayProperty).value,
-      authenticationType: this.form.get(this.authenticationTypeProperty).value,
+      authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
       advancedInformation,
       wrapperInformation,

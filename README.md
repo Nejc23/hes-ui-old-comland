@@ -1,10 +1,26 @@
-# prerequisites
-node: v10.16.2 +
-npm: v6.10 + 
-angular CLI: v9.0.1
-angular: v9.0.0
+# Prerequisites
+- node: v10.16.2 +
+- npm: v6.10 + 
+- angular CLI: v9.0.1
+- angular: v9.0.0
 
-# Angular_template
+## Prepare development machine
+
+Get the code from the GIT repo.
+
+> You need to install the latest version of Visual Studio including the "Desktop development with C++" workload.
+
+Open powershell as an admin and go to the project root folder.
+
+```bash
+npm install -g npm
+npm install -g typescript
+npm install -g @angular/cli
+npm install -g windows-build-tools
+npm install
+```
+
+NPM install should be successful.
 
 ## Development server
 
@@ -20,12 +36,44 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Docker Build
 
-Run command  `docker build -t <image_name> -f .ops/Dockerfile . ` where <image_name> is name of image you want 
-Curently used image name is eu.gcr.io/round-runner-126807/advance-hes:unstable
+There are few brands which you can use for CONFIGURATION argument:
+- production-ePointHES
+- production-myGrid
+- production-amera
+
+If you do not specify it, the build will be create with `ng build --prod`.
+
+Docker also accepts 2 additional parameters for versioning `SEMVER` and `GITHASH`.
+
+If you build the image for Windows or Linux use `Dockerfile.win` and `Dockerfile.linux` respectively.
+
+Examples for Dockerfile.linux:
+```powershell
+//Build default docker image
+docker build -f Dockerfile.linux -t defaulthes:latest --build-arg SEMVER=1.0 --build-arg GITHASH=f346534 .
+
+//build for epoint
+docker build -f Dockerfile.linux -t epointhes:latest --build-arg CONFIGURATION=production-ePointHES --build-arg SEMVER=1.0 --build-arg GITHASH=f346534 .
+
+//build for mygrid
+docker build -f Dockerfile.linux -t mygrid:latest --build-arg CONFIGURATION=production-myGrid --build-arg SEMVER=1.0 --build-arg GITHASH=f346534 .
+
+//build for amera
+docker build -f Dockerfile.linux -t amera:latest --build-arg CONFIGURATION=production-amera --build-arg SEMVER=1.0 --build-arg GITHASH=f346534 .
+```
 
 ## Running docker image
 
-Run command  `docker run --rm --name <container_name> -p 51000:80 -d <image_name> ` where <image_name> is name of image you want and <container_name> is name of container
+Examples:
+```powershell
+docker container run --rm --name defaulthes -p 4200:80 -d default:latest
+
+docker container run --rm --name epointhes -p 4201:80 -d epointhes:latest
+
+docker container run --rm --name mygrid -p 4202:80 -d mygrid:latest
+
+docker container run --rm --name amera -p 4203:80 -d amera:latest
+```
 
 ## Further help
 

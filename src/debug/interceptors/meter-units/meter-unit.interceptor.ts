@@ -8,6 +8,7 @@ import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-
 import { device, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { ReferenceType } from '../../../app/core/repository/interfaces/meter-units/reference-type.enum';
+import { AuthenticationTypeEnum } from '../../../app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 
 @Injectable()
 export class MeterUnitInterceptor {
@@ -36,7 +37,7 @@ export class MeterUnitInterceptor {
       advancedInformation: {
         startWithRelease: true,
         ldnAsSystitle: true,
-        authenticationType: 1
+        authenticationType: AuthenticationTypeEnum.NONE
       },
       referencingType: ReferenceType.COSEM_SHORT_NAME
     };
@@ -84,7 +85,7 @@ export class MeterUnitInterceptor {
       advancedInformation: {
         startWithRelease: true,
         ldnAsSystitle: true,
-        authenticationType: 1
+        authenticationType: AuthenticationTypeEnum.NONE
       },
       referencingType: ReferenceType.COSEM_LOGICAL_NAME
     };
