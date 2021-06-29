@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DcuForJobStaticTextService {
-  public titleBreadCrumbs = `Overview - Concentrators`;
-
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   get headerTitleDcu() {
     return `Concentrator units for`;
@@ -61,51 +60,51 @@ export class DcuForJobStaticTextService {
       showChildMBus ||
       showWithoutTemplate
     ) {
-      result = result + `Filtered by: `;
+      result = result + this.translate.instant('FILTER.FILTERED-BY') + ' ';
     }
 
     if (status) {
       additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + `status` + additionalString;
+      result = result + this.translate.instant('GRID.STATUS') + additionalString;
     }
 
     if (vendor) {
       additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + `vendor` + additionalString;
+      result = result + this.translate.instant('GRID.VENDOR') + additionalString;
     }
 
     if (tag) {
       additionalString = readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + `tag` + additionalString;
+      result = result + this.translate.instant('GRID.TAG') + additionalString;
     }
 
     if (readStatuses) {
       additionalString = firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + `read status` + additionalString;
+      result = result + this.translate.instant('GRID.READ-STATUS') + additionalString;
     }
 
     if (firmware) {
       additionalString = breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + `firmware` + additionalString;
+      result = result + this.translate.instant('GRID.FIRMWARE').toLowerCase() + additionalString;
     }
 
     if (breakerState) {
       additionalString = showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + `disconnector state` + additionalString;
+      result = result + this.translate.instant('GRID.DISCONNECTOR-STATE').toLowerCase() + additionalString;
     }
 
     if (showChildMBus) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result = result + `show child MBus` + additionalString;
+      result = result + this.translate.instant('COMMON.SHOW-CHILD-MBUS') + additionalString;
     }
 
     if (showWithoutTemplate) {
       additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result = result + `show without template` + additionalString;
+      result = result + this.translate.instant('COMMON.SHOW-WITHOUT-TEMPLATE') + additionalString;
     }
 
     if (showOnlyReadyForActivation) {
-      result = result + `show only ready for activation`;
+      result = result + this.translate.instant('COMMON.SHOW-ONLY-FOR-ACTIVATION');
     }
 
     return result;
