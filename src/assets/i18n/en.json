@@ -212,7 +212,10 @@
     "END": "End",
     "PASSWORD": "Password",
     "PASSWORD-TYPE": "Password type",
-    "KEY-TYPE": "Key type"
+    "KEY-TYPE": "Key type",
+    "START-TIME": "Start time:",
+    "END-TIME": "End time:",
+    "SET-TIME": "Set time"
   },
   "MENU": {
     "DCU": "Data Concentrator Units",
@@ -273,7 +276,8 @@
     "NEXT": "Next",
     "ASSIGN": "Assign",
     "DELETE": "Delete",
-    "EDIT": "Edit"
+    "EDIT": "Edit",
+    "CLEAR-SELECTION": "Clear selection"
   },
   "DCU": {
     "MORE-SAVE-OPTIONS": "More Save options",
