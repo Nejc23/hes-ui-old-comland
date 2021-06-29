@@ -78,6 +78,8 @@
     "EXECUTE-JOB": "Execute job",
     "EDIT-JOB": "Edit job",
     "DELETE-JOB": "Delete job",
+    "STOP-JOB": "Stop job",
+    "CANCEL-JOB": "Cancel job",
     "STOP": "Stop",
     "PROFILE": "Profile",
     "SIGN-OUT": "Sign out",
@@ -87,7 +89,9 @@
     "CANCEL": "Cancel",
     "SEARCH-OBJECTS": "Search Objects",
     "SEARCH-TERM": "Search term",
-    "NO-DATA-FOUND": "No data found"
+    "NO-DATA-FOUND": "No data found",
+    "SHOW-ALL": "Show all",
+    "JOBS": "Jobs"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -119,7 +123,8 @@
       "MIN": "Exceeds min value",
       "NUMBER-ERROR": "Entry is not a valid integer:",
       "EMAIL-ENTRY": "Entry is not a valid email:",
-      "DCU-ERROR": "Error saving DCU!"
+      "DCU-ERROR": "Error saving DCU!",
+      "INVALID-FORM": "invalid form"
     },
     "FILE": "File",
     "FILES": "Files",
@@ -332,6 +337,8 @@
     "SCHEDULER-JOB-STARTED": "Scheduler job started!",
     "SCHEDULER-JOB-ENABLED" : "Scheduler job enabled!",
     "SCHEDULER-JOB-DISABLED" : "Scheduler job disabled!",
+    "JOB-STOPPED": "Job stopped!",
+    "JOB-CANCELED": "Job canceled!",
     "SCHEDULER-JOB-CHANGE-STATUS": "Do you want to change scheduler job status",
     "DISCOVERY-JOB": "Discovery Job",
     "DC-READ-EVENTS-JOB": "DC Read events job",
@@ -364,7 +371,9 @@
       "ADDED": "added",
       "UPDATED": "updated",
       "EXECUTE": "Do you want to execute scheduler job now",
-      "DELETE": "Do you want to delete scheduler job"
+      "DELETE": "Do you want to delete scheduler job",
+      "CANCEL": "Do you want to cancel scheduled job now?",
+      "STOP": "Do you want to stop running job now?"
     },
     "ACTIVE-JOB": {
       "TITLE": "Active jobs",
@@ -374,7 +383,8 @@
       "TYPE": "Type",
       "RUNNING-TIME": "Running Time",
       "STATE": "State",
-      "STATUS": "Status"
+      "STATUS": "Status",
+      "DOWNLOADING-PACKAGES": "Downloading packages..."
     }
   },
   "ALARM": {
@@ -406,6 +416,9 @@
     }
   },
   "ALERT": {
+  },
+  "ERROR": {
+    "PAGE-NOT-FOUND": "404 - page not exists"
   },
   "GRID": {
     "SELECT-DESELECT-ALL": "Select/deselect all",

@@ -5,6 +5,7 @@ import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-scheduler-active-jobs',
@@ -27,7 +28,11 @@ export class SchedulerActiveJobsComponent implements OnInit {
   allActiveJobs: SchedulerJobsList[];
   visibleActiveJobs: SchedulerJobsList[];
 
-  constructor(private activeJobsService: JobsService, private activeJobsGridService: ActiveJobsGridService) {
+  constructor(
+    private activeJobsService: JobsService,
+    private activeJobsGridService: ActiveJobsGridService,
+    private translate: TranslateService
+  ) {
     this.frameworkComponents = activeJobsGridService.setFrameworkComponents();
   }
 
@@ -74,10 +79,10 @@ export class SchedulerActiveJobsComponent implements OnInit {
 
   // set momemnt text (last communication) out of date and time
   setMomentNextRun(time: string): string {
-    return time != null && time.length > 0 ? moment(time).fromNow() : `N/A`;
+    return time != null && time.length > 0 ? moment(time).fromNow() : this.translate.instant('COMMON.NA');
   }
 
   getShowAllText(): string {
-    return `${`Show all`} ${this.allActiveJobs.length} ${`jobs`}`;
+    return this.translate.instant('COMMON.NA') + this.allActiveJobs.length + this.translate.instant('COMMON.JOBS');
   }
 }
