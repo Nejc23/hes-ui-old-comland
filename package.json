@@ -18,7 +18,6 @@
     "pact:publish": "node ./pact/publish-pacts.js",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "node ./version.js",
     "format:check": "prettier --list-different \"src/app/**/*.ts\"",
     "format:write": "prettier --write \"src/app/**/*.ts\" && prettier --write \"src/debug/**/*.ts\" && prettier --write \"pact/**/*.ts\"",
     "tslint-check": "tslint-config-prettier-check ./tslint.json",

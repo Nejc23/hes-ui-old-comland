@@ -1,0 +1,55 @@
+FROM mcr.microsoft.com/powershell:lts-windowsservercore-1809 as build-stage
+
+#capture arguments
+ARG CONFIGURATION
+ARG SEMVER
+ARG GITHASH
+ARG MAX_OLD_SPACE_SIZE=4096
+
+#ENV variables
+ENV NPM_CONFIG_LOGLEVEL info
+ENV NODE_VERSION 15.6.0
+ENV NODE_OPTIONS=--max-old-space-size=${MAX_OLD_SPACE_SIZE}
+
+#Install Nodejs
+SHELL ["pwsh", "-command"]
+RUN Invoke-WebRequest -Uri https://nodejs.org/dist/v$($env:NODE_VERSION)/node-v$($env:NODE_VERSION)-x64.msi -OutFile node.msi -UseBasicParsing
+RUN Start-Process -FilePath msiexec -ArgumentList /q, /i, node.msi -Wait
+RUN Remove-Item -Path node.msi
+RUN npm install --global --production --vs2015 windows-build-tools --loglevel verbose
+RUN npm install -g @angular/cli
+
+#angular build
+WORKDIR /app
+COPY package*.json /app/
+COPY . /app
+
+RUN node ./docker-version.js $($env:SEMVER) $($env:GITHASH)
+RUN npm install
+RUN ("$($env:CONFIGURATION)" -eq '') ? (ng build --prod --output-path=./dist/out) : (ng build --configuration=$($env:CONFIGURATION) --output-path=./dist/out)
+
+#Create image with webserver
+FROM mcr.microsoft.com/powershell:lts-windowsservercore-1809 as base
+
+ENV NGINX_VERSION 1.19.6
+ENV WriteReverseProxyConfFromEnv=true \
+    ReverseProxyListenPort=80 \
+    ReverseProxyServerName=nginx \
+	  ReverseProxyLocationList=@() \
+    EnabledSitesPath=c:\\nginx\\enabled-sites\\html \
+    EnableNginxWebServer=true \
+	  NginxConfFile=c:\\nginx\\nginx-$NGINX_VERSION\\conf\\nginx.conf
+
+SHELL ["pwsh", "-command"]
+RUN Invoke-WebRequest "http://nginx.org/download/nginx-$($env:NGINX_VERSION).zip" -OutFile C:\nginx.zip
+RUN Expand-Archive C:\nginx.zip C:\nginx
+RUN Remove-Item "C:\nginx\nginx-$($env:NGINX_VERSION)\conf\*.conf" -Verbose
+RUN New-Item -type directory "c:\\nginx\\enabled-sites\\html"
+RUN Remove-Item C:\nginx.zip
+
+WORKDIR c:\\nginx\\nginx-$NGINX_VERSION
+COPY --from=build-stage c:/app/dist/out/ c:/nginx/enabled-sites/html
+COPY ./nginxwin.conf c:/nginx/nginx-$NGINX_VERSION/conf/nginx.conf
+CMD ["nginx", "-g", "daemon off;"]
+#ENTRYPOINT ["pwsh", "-command", ".\\nginx.exe"]
+
