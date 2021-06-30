@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-
+import { TranslateService } from '@ngx-translate/core';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import {
   IActionRequestParams,
   IActionRequestSetDisconnectorMode
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 
 @Component({
   selector: 'app-plc-meter-breaker-mode',
@@ -30,7 +30,8 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -43,13 +44,13 @@ export class PlcMeterBreakerModeComponent implements OnInit {
 
   ngOnInit() {
     this.disconnectorModes = [
-      { id: 0, value: `Always connected` },
-      { id: 1, value: `Only manual re-connection allowed` },
-      { id: 2, value: `Remote and manual re-connection allowed` },
-      { id: 3, value: `Only manual re-connection allowed / Manual disconnection not allowed` },
-      { id: 4, value: `Remote and manual re-connection allowed / Manual disconnection not allowed` },
-      { id: 5, value: `Manual and local re-connection allowed` },
-      { id: 6, value: `Manual and local re-connection allowed / Manual disconnection not allowed` }
+      { id: 0, value: this.translate.instant('PLC-METER.BREAKER.ALWAYS-CONNECTED') },
+      { id: 1, value: this.translate.instant('PLC-METER.BREAKER.MANUAL-RECONN-ALLOWED') },
+      { id: 2, value: this.translate.instant('PLC-METER.BREAKER.REMOTE-MANUAL-RECONN-ALLOWED') },
+      { id: 3, value: this.translate.instant('PLC-METER.BREAKER.MANUAL-RECONN-ALLOWED-DISC-NOT') },
+      { id: 4, value: this.translate.instant('PLC-METER.BREAKER.REMOTE-MANUAL-RECONN-ALLOWED-DISC-NOT') },
+      { id: 5, value: this.translate.instant('PLC-METER.BREAKER.MANUAL-LOCAL-RECONN-ALLOWED') },
+      { id: 6, value: this.translate.instant('PLC-METER.BREAKER.MANUAL-LOCAL-RECONN-ALLOWED-DISC-NOT') }
     ];
   }
 
@@ -83,7 +84,7 @@ export class PlcMeterBreakerModeComponent implements OnInit {
     const values = this.fillData();
 
     const request = this.myGridService.setDisconnectorMode(values);
-    const successMessage = `Meter Units set Breaker mode was successfully`;
+    const successMessage = this.translate.instant('PLC-METER.BREAKER.BREAKER-MODE-SUCCESSFULLY');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

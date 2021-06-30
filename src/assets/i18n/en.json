@@ -358,7 +358,15 @@
     "ERROR-SAVING-MU": "Error saving Meter Unit!",
     "BREAKER": {
       "BREAKER": "Breaker",
-      "SET-BREAKER-MODE": "Set Breaker mode ({{selectedRowsCount}} selected)"
+      "SET-BREAKER-MODE": "Set Breaker mode ({{selectedRowsCount}} selected)",
+      "ALWAYS-CONNECTED": "Always connected",
+      "MANUAL-RECONN-ALLOWED": "Only manual re-connection allowed",
+      "REMOTE-MANUAL-RECONN-ALLOWED": "Remote and manual re-connection allowed",
+      "MANUAL-RECONN-ALLOWED-DISC-NOT": "Only manual re-connection allowed / Manual disconnection not allowed",
+      "REMOTE-MANUAL-RECONN-ALLOWED-DISC-NOT": "Remote and manual re-connection allowed / Manual disconnection not allowed",
+      "MANUAL-LOCAL-RECONN-ALLOWED": "Manual and local re-connection allowed",
+      "MANUAL-LOCAL-RECONN-ALLOWED-DISC-NOT": "Manual and local re-connection allowed / Manual disconnection not allowed",
+      "BREAKER-MODE-SUCCESSFULLY": "Meter Units set Breaker mode was successfully"
     },
     "JOBS": {
       "ASSIGN-EXISTING-JOBS": "Assign existing jobs ({{selectedRowsCount}} selected)"
