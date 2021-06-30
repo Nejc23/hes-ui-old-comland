@@ -8,23 +8,23 @@ export class DcuForJobStaticTextService {
   constructor(private translate: TranslateService) {}
 
   get headerTitleDcu() {
-    return `Concentrator units for`;
+    return this.translate.instant('DCU.CONCENTRATOR-UNITS-FOR');
   }
 
   get notAvailableTekst() {
-    return `N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get noRecordsFound() {
-    return `No records found.`;
+    return this.translate.instant('COMMON.NO-RECORDS-FOUND');
   }
 
   get loadingData() {
-    return `Loading data...`;
+    return this.translate.instant('COMMON.LOADING-DATA');
   }
 
   get noFilterAppliedTekst() {
-    return `No filter applied`;
+    return this.translate.instant('COMMON.NO-FILTER-APPLIED');
   }
 
   setfilterHeaderText(

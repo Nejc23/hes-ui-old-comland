@@ -24,6 +24,7 @@ import { MeterUnitsForJobGridService } from '../services/meter-units-for-job-gri
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { GridUtils } from '../../../global/grid.utils';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './meter-units-for-job.component.html'
@@ -88,10 +89,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  // messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = `Server error!`;
-  messageDataRefreshed = `Data refreshed!`;
-  messageActionFailed = `Action failed!`;
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
+  messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
+  messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
 
   public useWildcards = false;
 
@@ -107,7 +107,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private modalService: ModalService,
     private breadcrumbService: BreadcrumbService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private translate: TranslateService
   ) {
     this.paramsSub = route.params.subscribe((params) => {
       this.scheduleId = params.scheduleId;
@@ -162,19 +163,19 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: `Columns`,
-      filters: `Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: `page`,
-      more: `more`,
-      to: `to`,
-      of: `of`,
-      next: `next`,
-      last: `last`,
-      first: `first`,
-      previous: `previous`,
-      loadingOoo: `loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {

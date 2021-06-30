@@ -111,7 +111,10 @@
     "NO-RECORDS-FOUND": "No records found.",
     "SHOW-CHILD-MBUS": "show child MBus",
     "SHOW-WITHOUT-TEMPLATE": "show without template",
-    "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation"
+    "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation",
+    "SELECT-ALL": "Select all",
+    "DATA-REFRESHED": "Data refreshed",
+    "ACTION-FAILED":"Action failed"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -313,7 +316,8 @@
     "STATUS": "status{{additionalString}}",
     "READ-STATUS": "read status{{additionalString}}",
     "TYPE": "type{{additionalString}}",
-    "VENDOR": "vendor{{additionalString}}"
+    "VENDOR": "vendor{{additionalString}}",
+    "CONCENTRATOR-UNITS-FOR": "Concentrator units for"
   },
   "PLC-METER": {
     "RELAY-STATE-TITLE": "Relay State",
@@ -392,7 +396,9 @@
     "METER-UNIT-UPDATED": "Meter unit has been updated successfully",
     "ADD-DLMS-METER": "Add new DLMS meter",
     "EDIT-METER": "Edit {{ protocol }} meter",
-    "METER-UNITS-FOR": "Meter Units for"
+    "METER-UNITS-FOR": "Meter Units for",
+    "SHOW-METER-UNITS": "Show Meter Units without template",
+    "SHOW-READY-FOR-ACTIVATION": "Show only image ready for activation"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
@@ -448,7 +454,8 @@
       "STATE": "State",
       "STATUS": "Status",
       "DOWNLOADING-PACKAGES": "Downloading packages..."
-    }
+    },
+    "REMOVE": "Remove from Job"
   },
   "ALARM": {
     "NO-ALARMS": "No Alarms have been added yet"
