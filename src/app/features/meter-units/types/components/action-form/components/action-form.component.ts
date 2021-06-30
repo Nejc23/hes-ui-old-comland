@@ -6,7 +6,6 @@ import { ActionFormStaticTextService } from '../services/action-form-static-text
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { SaveViewFormMUTComponent } from '../../save-view-form/save-view-form-meter-units-type.component';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
@@ -128,13 +127,6 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     if (this.eventSettingsStoreLoadedSubscription) {
       this.eventSettingsStoreLoadedSubscription.unsubscribe();
     }
-  }
-
-  openSaveLayoutModal($event: any) {
-    const modalRef = this.modalService.open(SaveViewFormMUTComponent);
-    const component: SaveViewFormMUTComponent = modalRef.componentInstance;
-    component.meterUnitsTypeId = this.meterUnitTypeid;
-    modalRef.result.then().catch(() => {});
   }
 
   get columnsProperty() {
