@@ -463,7 +463,9 @@
       "STATUS": "Status",
       "DOWNLOADING-PACKAGES": "Downloading packages..."
     },
-    "REMOVE": "Remove from Job"
+    "REMOVE": "Remove from Job",
+    "CONFIRM-BULK": "Confirm bulk operation",
+    "REMOVE-FOR-JOB": "Remove {{ selectedText }} Concentrator(s) from Job?"
   },
   "ALARM": {
     "NO-ALARMS": "No Alarms have been added yet"
@@ -483,7 +485,8 @@
       "JOB-FAILED": "Failed to remove job from all rules.",
       "SELECT-JOB": "Select a job to add.",
       "JOB-ADDED-TO-ALL": "Job successfully added to all rules",
-      "JOB-FAILED-TO-ALL": "Failed to add job to all rules."
+      "JOB-FAILED-TO-ALL": "Failed to add job to all rules.",
+      "DCU-FOR-JOB": "Selected Concentrators removed successfully."
     },
     "IMPORT-DEVICE-KEYS": {
       "UPLOAD-TEXT": "Selected file must be in .xml or .csv file format.",
