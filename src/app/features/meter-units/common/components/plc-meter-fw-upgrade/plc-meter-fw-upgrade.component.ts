@@ -11,6 +11,7 @@ import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/m
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
 import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',
@@ -19,17 +20,17 @@ import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/
 export class PlcMeterFwUpgradeComponent implements OnInit {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
-  uploadDropSubtitle = `Selected file must be in .img, .bin or .dat file format.`;
+  uploadDropSubtitle = this.translate.instant('COMMON.SELECTED-FILE-FORMAT');
 
   form: FormGroup;
   noConfig = false;
-  configRequiredText = `Required field`;
-  messageServerError = `Server error!`;
+  configRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   actionRequest: IActionRequestParams;
   uploadSaveUrl = `${fwUploadFile}`;
   imgGuid: FileGuid = null;
   allowedExt = [];
-  allowedExtExplainText = `can only upload one file.`;
+  allowedExtExplainText = this.translate.instant('IMPORT-DEVICE-KEYS.UPLOAD-ONE-FILE');
   acceptExtensions = ['.img', '.bin', '.dat'];
   public files: Array<any>;
   activate = false;
@@ -43,7 +44,8 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
     private myGridService: MyGridLinkService,
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
-    private authService: AuthService
+    private authService: AuthService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -95,7 +97,7 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.createFwUpgrade(values);
-    const successMessage = `Meter image upload was successfull`;
+    const successMessage = this.translate.instant('PLC-METER.UPLOAD-METER-IMAGE');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (result && result.requestId.length > 0) {

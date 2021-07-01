@@ -11,6 +11,7 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   // selector: 'app-grid-custom-filter',
@@ -51,7 +52,8 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private route: ActivatedRoute,
-    private codelistHelperService: CodelistHelperService
+    private codelistHelperService: CodelistHelperService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe((params) => {
@@ -255,9 +257,9 @@ export class AllForJobGridCustomFilterComponent implements IToolPanel, OnDestroy
 
   errorValidatorReadStatusComponents() {
     if (this.form.errors != null && this.form.errors.outOfRange) {
-      return `Value must be in range 0-100`;
+      return this.translate.instant('COMMON.0-100-RANGE');
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return `Range is not correct`;
+      return this.translate.instant('COMMON.INCORRECT-RANGE');
     }
   }
 }
