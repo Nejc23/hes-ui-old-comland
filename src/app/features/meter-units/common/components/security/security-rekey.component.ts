@@ -10,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
-import { TemplatesService } from 'src/app/core/repository/services/templates/templates.service';
 
 @Component({
   templateUrl: './security-rekey.component.html'

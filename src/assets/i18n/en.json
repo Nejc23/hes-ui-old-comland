@@ -406,7 +406,13 @@
       "CHANGE-PASSWORD-CONFIRM": "Are you sure you would like to change password for a selected password type ({{passwordType}})?",
       "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
       "SELECT-KEY-TYPE": "Please select from the list below a key type you would like to re-key.",
-      "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?"
+      "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?",
+      "PW_LG ": "PW_LG (Management)",
+      "PW_M2": "PW_M2 (Operator)",
+      "PW_L1-READER": "PW_L1 (Reader)",
+      "PW_L2-INSTALLER": "PW_L2 (Installer)",
+      "PW_CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
+      "METER-UNITS-PASSWORD": "Meter Units password type change was successful"
     },
     "REGISTER": {
       "NO-REGISTER-SELECTED": "No register selected",
@@ -439,7 +445,8 @@
     "SETTING-OF-RELAY-MODE": "Setting of relay mode succeeded!",
     "AT-LEAST-ONE-REGISTER": "`At least one register must be on the Selected registers list",
     "DROP-AVAILABLE-REGISTERS": "Drop available registers here.",
-    "METER-UNITS-DISPLAY-SETTINGS": "Meter Unit(s) Display settings set successfully."
+    "METER-UNITS-DISPLAY-SETTINGS": "Meter Unit(s) Display settings set successfully.",
+    "METER-UNITS-ACTIVATE-HLS": "Meter Units activate hls successful"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
