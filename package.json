@@ -73,7 +73,6 @@
     "@progress/kendo-licensing": "^1.1.4",
     "@progress/kendo-theme-bootstrap": "^4.35.1",
     "@progress/kendo-theme-default": "latest",
-    "@ngx-i18nsupport/tooling": "^8.0.3",
     "@types/jquery": "^3.5.5",
     "@types/lodash": "^4.14.170",
     "angular-cd-timer": "^1.1.0",

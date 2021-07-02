@@ -2,6 +2,7 @@ import { PermissionEnumerator } from './../../../../../core/permissions/enumerat
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-actions',
@@ -11,7 +12,7 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   // called on init
   agInit(params: any): void {
@@ -186,11 +187,11 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'details':
-        return `Open details`;
+        return this.translate.instant('COMMON.OPEN-DETAILS');
       case 'chart':
-        return `Open data`;
+        return this.translate.instant('COMMON.OPEN-DATA');
       case 'operation':
-        return `Select operation`;
+        return this.translate.instant('COMMON.SELECT-OPERATION');
     }
     return '';
   }

@@ -129,7 +129,13 @@
     "ADDING-TEMPLATE": "Adding template to device(s) succeeded!",
     "INCORRECT-RANGE": "Range is not correct",
     "0-100-RANGE": "Value must be in range 0-100",
-    "SELECTED-FILE-FORMAT": "Selected file must be in .img, .bin or .dat file format."
+    "SELECTED-FILE-FORMAT": "Selected file must be in .img, .bin or .dat file format.",
+    "OPEN-DATA": "Open data",
+    "NOT-SET": "Not set",
+    "SHOW-OPTION": "Show option",
+    "UPLOAD-SUCCESSFUL": "Upload successful",
+    "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
+    "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -276,8 +282,8 @@
     "OVERVIEW": "Overview - Meter Units"
   },
   "MODAL": {
-    "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger",
-    "FOR-DEVICES": "for selected devices",
+    "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
+    "FOR-DEVICES": " for selected devices",
     "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
     "SELECTED": "selected",
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
@@ -476,6 +482,15 @@
     "DC-TIME-SYNC-JOB": "DC Time sync job",
     "TOPOLOGY-JOB": "Topology job",
     "READING-JOBS": "Reading Jobs",
+    "READING": "Reading",
+    "TOPOLOGY": "Topology",
+    "NOTIFICATION": "Notification",
+    "READ-EVENTS": "Read events",
+    "DC": "DC",
+    "METER": "Meter",
+    "SYSTEM": "System",
+    "TIME-SYNCHRONIZATION": "Time synchronization",
+    "DISCOVERY": "Discovery",
     "STATUS-JOB": {
       "TOTAL-DEVICES": "Total devices",
       "TOTAL-TIME": "Total time:",
