@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InstantValue } from 'src/app/core/repository/interfaces/meter-units/instant-value.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-popover-instant-values',
@@ -12,7 +13,7 @@ export class PopoverInstantValuesComponent implements OnInit {
   visibleInstantValues: InstantValue[];
   isMoreButtonVisible = false;
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     if (this.inputInstantValues?.length > this.defaultItemCount) {
@@ -30,7 +31,9 @@ export class PopoverInstantValuesComponent implements OnInit {
   }
 
   getShowAllText(): string {
-    return `${`Show all`} ${this.inputInstantValues.length} ${`relays`}`;
+    return (
+      this.translate.instant('COMMON.SHOW-ALL') + this.inputInstantValues.length + this.translate.instant('COMMON.RELAYS').toLowerCase()
+    );
   }
 
   getBadgeClass(selectedValue: string) {

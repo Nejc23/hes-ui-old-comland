@@ -17,6 +17,7 @@ import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
@@ -80,7 +81,8 @@ export class MeterUnitRegistersComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private muService: MeterUnitsService,
     private formUtils: FormsUtilsService,
-    private codeList: CodelistMeterUnitsRepositoryService
+    private codeList: CodelistMeterUnitsRepositoryService,
+    private translate: TranslateService
   ) {}
 
   get registerProperty() {
@@ -208,14 +210,14 @@ export class MeterUnitRegistersComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: `Meters`,
+        label: this.translate.instant('MENU.METERS'),
         params: {},
         url: null
       }
     ];
 
     breadcrumbs.push({
-      label: `Data view`,
+      label: this.translate.instant('MENU.DATA-VIEW"'),
       params: {},
       url: null
     });

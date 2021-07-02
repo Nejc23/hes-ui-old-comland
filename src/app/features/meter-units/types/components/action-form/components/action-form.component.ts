@@ -1,5 +1,5 @@
-import { SettingsStoreEmitterService } from './../../../../../../core/repository/services/settings-store/settings-store-emitter.service';
-import { FiltersInfo } from './../../../../../../shared/forms/interfaces/filters-info.interface';
+import { SettingsStoreEmitterService } from '../../../../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { FiltersInfo } from '../../../../../../shared/forms/interfaces/filters-info.interface';
 import { Component, OnInit, Output, EventEmitter, ViewChild, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionFormStaticTextService } from '../services/action-form-static-text.service';
