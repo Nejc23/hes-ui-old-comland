@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { GridSelectionHeaderComponent } from 'src/app/features/data-concentrator-units/components/grid-custom-components/grid-selection-header.component';
 import { TranslateService } from '@ngx-translate/core';
-import { IntlService } from '@progress/kendo-angular-intl';
 
 @Injectable({
   providedIn: 'root'

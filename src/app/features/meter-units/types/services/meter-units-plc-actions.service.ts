@@ -1,48 +1,47 @@
-import { JobTypeEnumeration } from './../../../jobs/enums/job-type.enum';
-import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
-import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
-import { Router } from '@angular/router';
-import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import {
-  IActionRequestParams,
   IActionRequestDeleteDevice,
+  IActionRequestParams,
   IRegisterTypesEnum
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { capitalize } from 'src/app/shared/forms/functions/string.functions';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
+import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
+import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
 import { PlcMeterLimiterComponent } from '../../common/components/plc-meter-limiter/plc-meter-limiter.component';
 import { PlcMeterMonitorComponent } from '../../common/components/plc-meter-monitor/plc-meter-monitor.component';
-import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
-import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
-import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
 import { PlcMeterRelaysConnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-connect.component';
 import { PlcMeterRelaysDisconnectComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-disconnect.component';
-import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
 import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { toLower } from 'lodash';
-import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
-import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
-import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
-import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
-import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
+import { PlcMeterRelaysStateComponent } from '../../common/components/plc-meter-relays/plc-meter-relays-state.component';
+import { PlcMeterTouConfigComponent } from '../../common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../../common/components/plc-read-meter/plc-read-registers.component';
-import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
-import { DcuFwUpgradeComponent } from '../../../data-concentrator-units/common/components/dcu-fw-upgrade.component';
-import { TranslateService } from '@ngx-translate/core';
+import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
+import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
+import { JobTypeEnumeration } from './../../../jobs/enums/job-type.enum';
+import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
+import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
+import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
+import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
+import { MeterUnitsTypeGridService } from './meter-units-type-grid.service';
 
 @Injectable({
   providedIn: 'root'

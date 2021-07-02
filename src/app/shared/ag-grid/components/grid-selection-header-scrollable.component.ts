@@ -1,8 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
 import { IHeaderAngularComp } from '@ag-grid-community/angular';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import * as _ from 'lodash';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridEventEmitterService } from '../services/grid-event-emitter.service';
 

@@ -1,10 +1,10 @@
-import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { userSettingsConfiguration } from './../../consts/settings-store.const';
-import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { userSettingsBase } from '../../consts/settings-store.const';
+import { userSettingsConfiguration } from './../../consts/settings-store.const';
 
 @Injectable({
   providedIn: 'root'

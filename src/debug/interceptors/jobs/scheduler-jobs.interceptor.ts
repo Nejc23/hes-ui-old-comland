@@ -1,16 +1,14 @@
-import { DataConcentratorUnitsComponent } from './../../../app/features/data-concentrator-units/components/data-concentrator-units.component';
-import { deviceJobs, schedulerActiveJobs, notificationJobs } from './../../../app/core/repository/consts/jobs.const';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of, Scheduler } from 'rxjs';
 import * as _ from 'lodash';
-import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
+import { Observable, of } from 'rxjs';
+import { schedulerJobs, schedulerJobsList } from 'src/app/core/repository/consts/jobs.const';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
-import { schedulerJobsList, schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
-import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
-import { ScheduleDevice } from 'src/app/core/repository/interfaces/jobs/schedule-device.interface';
 import { DeviceJobs } from 'src/app/core/repository/interfaces/jobs/device-jobs.interface';
+import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
+import { deviceJobs, notificationJobs, schedulerActiveJobs } from './../../../app/core/repository/consts/jobs.const';
 
 @Injectable()
 export class SchedulerJobsInterceptor {

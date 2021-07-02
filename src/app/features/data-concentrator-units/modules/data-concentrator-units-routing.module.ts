@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
-import { TranslateService } from '@ngx-translate/core';
 
 const routes: Routes = [
   {

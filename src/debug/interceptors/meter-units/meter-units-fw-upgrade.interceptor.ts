@@ -1,8 +1,7 @@
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { fwUpgrade, meterUnits, fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
-import * as _ from 'lodash';
+import { fwUpgrade, fwUploadFile, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { FileGuid } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
 import { IActionResponseFwUpgradeData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 

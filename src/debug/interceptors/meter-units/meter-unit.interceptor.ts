@@ -1,14 +1,13 @@
-import { getDevice, muCreate, muUpdate } from './../../../app/core/repository/consts/meter-units.const';
-import { ActivatedRoute, Params } from '@angular/router';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import * as _ from 'lodash';
-import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
 import { device, meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { ReferenceType } from '../../../app/core/repository/interfaces/meter-units/reference-type.enum';
+import { MeterUnit } from 'src/app/core/repository/interfaces/meter-units/meter-unit.interface';
 import { AuthenticationTypeEnum } from '../../../app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import { ReferenceType } from '../../../app/core/repository/interfaces/meter-units/reference-type.enum';
+import { getDevice, muCreate, muUpdate } from './../../../app/core/repository/consts/meter-units.const';
 
 @Injectable()
 export class MeterUnitInterceptor {

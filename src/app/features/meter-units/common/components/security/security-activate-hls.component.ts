@@ -1,13 +1,13 @@
-import { IActionRequestEnableHls } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { IActionRequestEnableHls } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './security-activate-hls.component.html'

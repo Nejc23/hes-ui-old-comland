@@ -1,23 +1,22 @@
-import { Component, OnInit, LOCALE_ID, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
-import { VERSION } from 'src/environments/version';
-import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
+import { CookieService } from 'ngx-cookie-service';
+import { User } from 'oidc-client';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { CookieService } from 'ngx-cookie-service';
-import { config } from 'src/environments/config';
-import { UserLoginCredentials } from './models/user-login-form.model';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
-import { environment } from 'src/environments/environment';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { NewPasswordFrom, ResetPasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
 import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
-import { ResetPasswordRequest, NewPasswordFrom } from 'src/app/core/repository/interfaces/auth/authentication.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { User } from 'oidc-client';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
+import { config } from 'src/environments/config';
+import { environment } from 'src/environments/environment';
+import { VERSION } from 'src/environments/version';
+import { UserLoginCredentials } from './models/user-login-form.model';
 
 @Component({
   selector: 'app-user-login',

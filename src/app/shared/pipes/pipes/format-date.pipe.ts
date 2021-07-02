@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform, Inject, LOCALE_ID, Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { Pipe, PipeTransform } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
 @Pipe({

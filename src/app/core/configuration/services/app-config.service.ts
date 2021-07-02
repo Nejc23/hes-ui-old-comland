@@ -1,10 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 import { IAppConfig } from '../interfaces/app-config.interface';
 import { AppConfigStoreService } from './app-config-store.service';
-import { environment } from 'src/environments/environment';
-import { Inject } from '@angular/core';
-import { LOCALE_ID } from '@angular/core';
 
 @Injectable()
 export class AppConfigService {

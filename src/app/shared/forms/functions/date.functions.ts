@@ -2,8 +2,8 @@ import { AbstractControl } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { toInteger } from 'lodash';
 import * as moment from 'moment';
-import { dateServerFormat, dateOnlyServerFormat } from '../consts/date-format';
-import { regexPattern, regexPatternIso } from '../consts/regex.consts';
+import { dateOnlyServerFormat, dateServerFormat } from '../consts/date-format';
+import { regexPattern } from '../consts/regex.consts';
 
 /**
  *

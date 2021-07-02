@@ -1,9 +1,8 @@
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import * as _ from 'lodash';
-import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 import { schedulerJobsListByJobId } from 'src/app/core/repository/consts/jobs.const';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
 
 @Injectable()
 export class AutoTemplatesReadingJobsListInterceptor {

@@ -1,12 +1,11 @@
-import { IActionRequestParams } from './../../../app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
 import * as _ from 'lodash';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { Observable, of } from 'rxjs';
+import { meterUnits } from 'src/app/core/repository/consts/meter-units.const';
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
-import { meterUnits } from 'src/app/core/repository/consts/meter-units.const';
+import { IActionRequestParams } from './../../../app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Injectable()
 export class MeterUnitsListInterceptor {

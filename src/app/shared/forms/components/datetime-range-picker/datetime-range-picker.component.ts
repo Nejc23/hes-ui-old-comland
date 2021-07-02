@@ -1,9 +1,8 @@
-import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, Inject, LOCALE_ID } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import * as moment from 'moment';
 import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
 import { dateDisplayFormat } from '../../consts/date-format';
-
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-datetime-range-picker',
