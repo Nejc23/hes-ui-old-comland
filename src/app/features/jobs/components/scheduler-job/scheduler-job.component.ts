@@ -425,7 +425,6 @@ export class SchedulerJobComponent {
       (result) => {
         if (addNew) {
           this.resetAll();
-          this.ngOnInit();
         } else {
           this.modal.close();
         }
