@@ -10,6 +10,7 @@ import { IActionRequestAddTemplate, IActionRequestParams } from 'src/app/core/re
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { PlcMeterJobsRegistersGridService } from '../../services/plc-meter-jobs-registers-grid.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-jobs-registers',
@@ -19,7 +20,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
   public selectedRowsCount: number;
 
   noRegisters = false;
-  registersRequiredText = `Required field`;
+  registersRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
 
   form: FormGroup;
 
@@ -32,7 +33,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
 
   public modules: Module[] = AllModules;
 
-  requiredText = `One register must be selected`;
+  requiredText = this.translate.instant('COMMON.ONE-REGISTER-SELECTED');
   noRegisterSelected = false;
   selectedRegister: TemplatesList = null;
 
@@ -44,7 +45,8 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private serviceRepository: AutoTemplatesService,
-    private plcMeterJobsRegistersGridService: PlcMeterJobsRegistersGridService
+    private plcMeterJobsRegistersGridService: PlcMeterJobsRegistersGridService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -84,7 +86,7 @@ export class PlcMeterJobsRegistersComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.postMyGridAddDeviceTemplate(values);
-    const successMessage = `Adding template to device(s) succeeded!`;
+    const successMessage = this.translate.instant('COMMON.ADDING-TEMPLATE');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

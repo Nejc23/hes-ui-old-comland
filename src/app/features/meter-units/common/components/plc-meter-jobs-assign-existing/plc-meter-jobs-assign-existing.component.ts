@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-jobs-assign-existing',
@@ -19,14 +20,15 @@ export class PlcMeterJobsAssignExistingComponent {
 
   selectedRowsCount: number;
 
-  selectionRequiredText = `At least one job must be selected`;
+  selectionRequiredText = this.translate.instant('JOB.AT-LEAST-ONE-JOB');
 
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
-    private jobsSelectGridService: JobsSelectGridService
+    private jobsSelectGridService: JobsSelectGridService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -75,7 +77,7 @@ export class PlcMeterJobsAssignExistingComponent {
     }
 
     const request = this.myGridService.postJobsAssignExisting(values);
-    const successMessage = `Existing Jobs assigned to Meter Unit successfully`;
+    const successMessage = this.translate.instant('JOB.EXISTING-JOBS-ASSIGNED');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         console.log(result);

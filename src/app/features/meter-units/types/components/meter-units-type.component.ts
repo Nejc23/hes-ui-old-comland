@@ -36,6 +36,7 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -106,8 +107,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  messageDataRefreshed = `Data refreshed!`;
-  messageActionFailed = `Action failed!`;
+  messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
+  messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
 
   meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
   meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore;
@@ -152,7 +153,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private jobsSelectGridService: JobsSelectGridService,
     private modalService: ModalService,
-    private concentratorService: ConcentratorService
+    private concentratorService: ConcentratorService,
+    private translate: TranslateService
   ) {
     this.filtersInfo = {
       isSet: false,
