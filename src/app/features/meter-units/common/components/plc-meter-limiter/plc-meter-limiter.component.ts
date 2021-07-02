@@ -13,6 +13,7 @@ import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/inte
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-limiter',
@@ -34,7 +35,8 @@ export class PlcMeterLimiterComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private setLimiterService: PlcMeterSetLimiterService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -122,7 +124,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.setLimiter(values);
-    const successMessage = `Meter Units set Limiter was successful`;
+    const successMessage = this.translate.instant('PLC-METER.METER-UNITS-SET-LIMITER');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlcMeterJobsRegistersGridService {
+  constructor(private translate: TranslateService) {}
+
   setGridDefaultColumns() {
     return [
       {
@@ -20,22 +23,22 @@ export class PlcMeterJobsRegistersGridService {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: `Name`,
-        headerTooltip: `Name`
+        headerName: this.translate.instant('GRID.NAME'),
+        headerTooltip: this.translate.instant('GRID.NAME')
       },
       {
         field: 'deviceType',
         suppressMenu: true,
         sortable: true,
-        headerName: `Device type`,
-        headerTooltip: `Device type`
+        headerName: this.translate.instant('GRID.DEVICE-TYPE'),
+        headerTooltip: this.translate.instant('GRID.DEVICE-TYPE')
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: `Description`,
-        headerTooltip: `Description`
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION')
       }
     ];
   }

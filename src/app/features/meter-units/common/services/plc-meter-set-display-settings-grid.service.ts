@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GridSelectionHeaderComponent } from 'src/app/features/data-concentrator-units/components/grid-custom-components/grid-selection-header.component';
+import { TranslateService } from '@ngx-translate/core';
+import { IntlService } from '@progress/kendo-angular-intl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlcMeterSetDisplaySettingsGridService {
+  constructor(private translate: TranslateService) {}
+
   setGridDefaultColumnsLeft() {
     return [
       // {
@@ -23,8 +27,8 @@ export class PlcMeterSetDisplaySettingsGridService {
         field: 'name',
         suppressMenu: true,
         // sortable: true,
-        headerName: `Available reigsters`,
-        headerTooltip: `Available registers`,
+        headerName: this.translate.instant('PLC-METER.AVAILABLE-REGISTERS'),
+        headerTooltip: this.translate.instant('PLC-METER.AVAILABLE-REGISTERS'),
         dndSource: true,
         sortable: true
       }
@@ -56,8 +60,8 @@ export class PlcMeterSetDisplaySettingsGridService {
         field: 'name',
         suppressMenu: true,
         // sortable: true,
-        headerName: `Selected registers *`,
-        headerTooltip: `Selected registers`,
+        headerName: this.translate.instant('PLC-METER.SELECTED-REGISTERS'),
+        headerTooltip: this.translate.instant('PLC-METER.SELECTED-REGISTERS'),
         dndSource: true
       }
       // {
