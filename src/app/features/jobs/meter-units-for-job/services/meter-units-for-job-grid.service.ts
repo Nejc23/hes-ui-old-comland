@@ -3,7 +3,6 @@ import { AllForJobGridSelectionHeaderComponent } from '../components/grid-custom
 import { AllForJobGridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { AllForJobGridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { AllForJobGridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
-import { AllForJobGridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
@@ -52,8 +51,7 @@ export class MeterUnitsForJobGridService {
     return {
       gridCellNameComponent: AllForJobGridCellNameComponent,
       gridCellVendorComponent: AllForJobGridCellVendorComponent,
-      gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent,
-      gridCustomFilterComponent: AllForJobGridCustomFilterComponent
+      gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent
 
       // gridCellMeterIdComponent: GridCellMeterIdComponent,
       // gridCellTagsComponent: GridCellTagsComponent,
@@ -68,40 +66,6 @@ export class MeterUnitsForJobGridService {
       // gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
       // gridCellIconComponent: GridCellIconComponent,
       // gridCellJobStatusComponent: GridCellJobStatusComponent
-    };
-  }
-
-  public setSideBar() {
-    return {
-      toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
-        {
-          id: 'columns',
-          labelDefault: 'Columns',
-          labelKey: 'columns',
-          iconKey: 'columns',
-          toolPanel: 'agColumnsToolPanel',
-          toolPanelParams: {
-            suppressRowGroups: true,
-            suppressValues: true,
-            suppressPivots: true,
-            suppressPivotMode: true,
-            suppressSideButtons: true,
-            suppressColumnFilter: true,
-            suppressColumnExpandAll: true
-          }
-        }
-      ]
     };
   }
 

@@ -60,7 +60,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   private gridColumnApi;
   public icons;
   public frameworkComponents;
-  public sideBar;
   loadGrid = true;
   programmaticallySelectRow = false;
   requestModel: RequestMeterUnitsForJob = {
@@ -158,8 +157,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     // set grid columns
     this.columns = this.meterUnitsForJobGridService.setGridDefaultColumns(false);
-    // set right sidebar on the grid
-    this.sideBar = this.meterUnitsForJobGridService.setSideBar();
 
     this.localeText = {
       // for side panel
