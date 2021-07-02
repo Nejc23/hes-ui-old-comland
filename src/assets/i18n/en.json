@@ -422,7 +422,10 @@
     "METER-UNITS-FOR": "Meter Units for",
     "SHOW-METER-UNITS": "Show Meter Units without template",
     "SHOW-READY-FOR-ACTIVATION": "Show only image ready for activation",
-    "UPLOAD-METER-IMAGE": "Meter image upload was successful`"
+    "UPLOAD-METER-IMAGE": "Meter image upload was successful`",
+    "AVERAGE-VALUE": "Average value",
+    "MAX-VALUE-RECORDED": "Max value recorded at {{timestamp}}",
+    "MIN-VALUE-RECORDED": "Min value recorded at {{timestamp}}"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
