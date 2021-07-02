@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   templateUrl: './security-activate-hls.component.html'
 })
-export class SecurityActivateHlsComponent implements OnInit {
+export class SecurityActivateHlsComponent {
   public selectedRowsCount: number;
 
   actionRequest: IActionRequestParams;
@@ -26,8 +26,6 @@ export class SecurityActivateHlsComponent implements OnInit {
     private formUtils: FormsUtilsService,
     private translate: TranslateService
   ) {}
-
-  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({

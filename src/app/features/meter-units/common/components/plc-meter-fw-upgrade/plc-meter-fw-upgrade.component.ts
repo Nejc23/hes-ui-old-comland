@@ -1,23 +1,23 @@
-import { MeterUnitsTypeGridService } from './../../../types/services/meter-units-type-grid.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { FileGuid } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
-import { fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { HttpHeaders } from '@angular/common/http';
-import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { fwUploadFile } from 'src/app/core/repository/consts/meter-units.const';
+import { FileGuid } from 'src/app/core/repository/interfaces/meter-units/meter-units-fw-upgrade.interface';
+import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
+import { MeterUnitsTypeGridService } from './../../../types/services/meter-units-type-grid.service';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',
   templateUrl: './plc-meter-fw-upgrade.component.html'
 })
-export class PlcMeterFwUpgradeComponent implements OnInit {
+export class PlcMeterFwUpgradeComponent {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
   uploadDropSubtitle = this.translate.instant('COMMON.SELECTED-FILE-FORMAT');
@@ -61,8 +61,6 @@ export class PlcMeterFwUpgradeComponent implements OnInit {
       [this.imageActivateProperty]: [false]
     });
   }
-
-  ngOnInit() {}
 
   fillData(): IActionRequestFwUpgradeData {
     const formData: IActionRequestFwUpgradeData = {

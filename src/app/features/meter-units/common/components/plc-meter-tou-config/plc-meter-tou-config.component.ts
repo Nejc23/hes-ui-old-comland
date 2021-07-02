@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-plc-meter-tou-config',
   templateUrl: './plc-meter-tou-config.component.html'
 })
-export class PlcMeterTouConfigComponent implements OnInit {
+export class PlcMeterTouConfigComponent {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
   form: FormGroup;
@@ -40,8 +40,6 @@ export class PlcMeterTouConfigComponent implements OnInit {
       [this.touConfigProperty]: [null, Validators.required]
     });
   }
-
-  ngOnInit() {}
 
   fillData(): number {
     return parseInt(this.form.get(this.touConfigProperty).value, 10);

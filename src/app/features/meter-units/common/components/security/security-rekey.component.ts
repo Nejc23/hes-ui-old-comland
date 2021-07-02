@@ -1,20 +1,20 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
 import { FormsUtilsService } from './../../../../../core/forms/services/forms-utils.service';
-import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
-import { Codelist } from './../../../../../shared/repository/interfaces/codelists/codelist.interface';
 import {
   IActionRequestParams,
   IActionRequestSecurityRekey
 } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
+import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
+import { Codelist } from './../../../../../shared/repository/interfaces/codelists/codelist.interface';
 
 @Component({
   templateUrl: './security-rekey.component.html'
 })
-export class SecurityRekeyComponent implements OnInit {
+export class SecurityRekeyComponent {
   public selectedRowsCount: number;
 
   actionRequest: IActionRequestParams;
@@ -48,8 +48,6 @@ export class SecurityRekeyComponent implements OnInit {
     this.selectedKeyType = this.keyTypes[0];
     this.form = this.createForm();
   }
-
-  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({

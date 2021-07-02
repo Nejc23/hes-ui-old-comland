@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -20,7 +20,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
  *     // on dismiss (CLOSE)
  *     });
  */
-export class ModalConfirmComponent implements OnInit {
+export class ModalConfirmComponent {
   @Input() modalTitle: string;
   @Input() modalBody: string;
   @Input() btnConfirmText = 'BUTTON.CONFIRM';
@@ -36,8 +36,6 @@ export class ModalConfirmComponent implements OnInit {
   showSecondConfirm = false;
 
   constructor(public activeModal: NgbActiveModal) {}
-
-  ngOnInit() {}
 
   dismiss() {
     this.activeModal.dismiss();
