@@ -457,7 +457,10 @@
     "READ-MONITOR-THRESHOLDS": "Read monitor thresholds",
     "READ-LIMITER-THRESHOLDS": "Read limiter thresholds",
     "BREAKER-MODE": "Breaker Mode",
-    "SET-DISPLAY-SETTINGS": "Set Display Settings"
+    "SET-DISPLAY-SETTINGS": "Set Display Settings",
+    "AVERAGE-VALUE": "Average value",
+    "MAX-VALUE-RECORDED": "Max value recorded at {{timestamp}}",
+    "MIN-VALUE-RECORDED": "Min value recorded at {{timestamp}}"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
