@@ -52,10 +52,10 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
       if (!file.validationErrors) {
         const reader = new FileReader();
 
-        // tslint:disable-next-line: only-arrow-functions
+        // eslint-disable-next-line prefer-arrow/prefer-arrow-functions
         reader.onload = function (ev) {
           const jsonFile = {
-            // tslint:disable-next-line: no-string-literal
+            // eslint-disable-next-line @typescript-eslint/dot-notation
             src: ev.target['result'],
             uid: file.uid
           };

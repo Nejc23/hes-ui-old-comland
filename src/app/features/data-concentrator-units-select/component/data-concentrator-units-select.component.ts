@@ -22,7 +22,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   @Input() type = 'meter';
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
-  // tslint:disable-next-line: no-output-on-prefix
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
 
   form: FormGroup;

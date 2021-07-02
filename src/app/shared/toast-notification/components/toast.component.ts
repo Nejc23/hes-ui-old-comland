@@ -6,7 +6,7 @@ import { ToastNotificationService } from 'src/app/core/toast-notification/servic
 @Component({
   selector: 'app-toast',
   templateUrl: './toast.component.html',
-  // tslint:disable-next-line:no-host-metadata-property
+  // eslint-disable-next-line @angular-eslint/no-host-metadata-property
   host: { '[class.ngb-toasts]': 'true' }
 })
 export class ToastComponent implements OnInit {
