@@ -37,7 +37,7 @@ export class PopoverInstantValuesComponent implements OnInit {
   }
 
   getBadgeClass(selectedValue: string) {
-    var classes = {
+    const classes = {
       '0': 'badge-dark',
       '1': 'badge-success',
       '2': 'badge-info'

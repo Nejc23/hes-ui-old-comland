@@ -377,7 +377,7 @@ export class SchedulerJobComponent {
 
     if (this.showRegisters) {
       const selectedRegisters = this.registers.getSelectedRowNames();
-      let registers: RegistersSelectRequest[] = [];
+      const registers: RegistersSelectRequest[] = [];
       selectedRegisters.forEach((value) => {
         registers.push({
           name: value,

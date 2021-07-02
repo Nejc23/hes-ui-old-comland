@@ -72,8 +72,8 @@ export class PlcReadRegistersComponent implements OnInit {
   ) {
     this.form = this.createForm();
 
-    let startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
-    let endDateFormatted = moment().format(dateDisplayFormat);
+    const startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
+    const endDateFormatted = moment().format(dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
@@ -140,7 +140,7 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   loadData() {
-    let params = { id: this.selectedDeviceIds };
+    const params = { id: this.selectedDeviceIds };
     this.rowData$ = this.registersService.getDeviceTemplateGroups(params);
 
     this.rowData$.subscribe((x) => {
@@ -158,19 +158,19 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onConfirm() {
-    let registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
+    const registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
 
     this.noRegisterSelected = !this.selectedRegister;
     if (this.noRegisterSelected) {
       return;
     }
 
-    let startDate =
+    const startDate =
       moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.startTime.value +
       ':00';
-    let endDate =
+    const endDate =
       moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.endTime.value +

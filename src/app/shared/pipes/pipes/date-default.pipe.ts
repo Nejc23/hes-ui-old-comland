@@ -9,7 +9,7 @@ export class DateDefaultPipe implements PipeTransform {
   constructor(@Inject(LOCALE_ID) public format: string) {}
 
   public transform(value): any {
-    let locale_id = localStorage.getItem('lang');
+    const locale_id = localStorage.getItem('lang');
 
     if (!value) {
       return '';

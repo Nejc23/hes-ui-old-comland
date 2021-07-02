@@ -167,7 +167,7 @@ export class ImportDeviceKeysComponent implements OnInit {
   }
 
   closeAlert(type: string, index: number) {
-    let id = type + index;
+    const id = type + index;
     setInterval(function () {
       $('.' + id)
         .fadeTo(500, 0)

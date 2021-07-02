@@ -9,7 +9,7 @@ export class FormatDatePipe implements PipeTransform {
   constructor() {}
 
   public transform(value): any {
-    let locale_id = localStorage.getItem('lang');
+    const locale_id = localStorage.getItem('lang');
 
     if (!value) {
       return '';

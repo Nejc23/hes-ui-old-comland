@@ -1355,8 +1355,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const readThresholdsPromise = this.concentratorService.getThresholdValuesPost(deviceIds).toPromise();
 
     Promise.all([jobSummeryPromise, readThresholdsPromise]).then((responses) => {
-      let statusJobsData = responses[0];
-      let thresholdData = responses[1];
+      const statusJobsData = responses[0];
+      const thresholdData = responses[1];
 
       this.gridData.data.forEach((gridData) => {
         const item = statusJobsData.find((el) => el.deviceId === gridData.deviceId);
