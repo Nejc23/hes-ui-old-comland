@@ -1,4 +1,4 @@
-<span class="navbar-text page-name">{{ pageName }}</span>
+<span class="navbar-text page-name">{{ pageName | translate }}</span>
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb" *ngIf="showBreadcrumb()">
     <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last"

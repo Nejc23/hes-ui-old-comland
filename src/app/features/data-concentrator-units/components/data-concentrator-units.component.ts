@@ -244,7 +244,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
 
   // set momemnt text (next planned read) out of date and time
   setMomentNextPlannedReadTime(time: string) {
-    return this.staticTextService.nextPlannedReadText + `${moment(time).fromNow()}`;
+    return this.staticTextService.nextPlannedReadText + moment(time).fromNow();
   }
 
   // ag-grid

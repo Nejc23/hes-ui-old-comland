@@ -12,6 +12,7 @@ import { PlcMeterSetDisplaySettingsGridService } from '../../services/plc-meter-
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-set-display-settings',
@@ -41,11 +42,11 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   noRegisterSelected = false;
 
   public modules: Module[] = AllModules;
-  requiredText = `At least one register must be on the Selected registers list`;
+  requiredText = this.translate.instant('PLC-METER.AT-LEAST-ONE-REGISTER');
   columnDefsLeft = [];
   columnDefsRight = [];
 
-  noRowsTemplate = '<span>' + `Drop available registers here.` + '</span>';
+  noRowsTemplate = '<span>' + this.translate.instant('PLC-METER.DROP-AVAILABLE-REGISTERS') + '</span>';
 
   dataLoaded = false;
   actionName = '';
@@ -56,7 +57,8 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private plcMeterSetDisplaySettingsGridService: PlcMeterSetDisplaySettingsGridService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -146,7 +148,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
 
     const values = this.fillData();
     const request = this.myGridService.setDisplaySettings(values);
-    const successMessage = `Meter Unit(s) Display settings set successfuly.`;
+    const successMessage = this.translate.instant('PLC-METER.METER-UNITS-DISPLAY-SETTINGS');
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {

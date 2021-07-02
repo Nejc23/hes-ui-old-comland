@@ -9,6 +9,7 @@ import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/inte
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-relays-state',
@@ -31,7 +32,8 @@ export class PlcMeterRelaysStateComponent implements OnInit {
     private myGridService: MyGridLinkService,
     private setLimiterService: PlcMeterSetLimiterService,
     private toastService: ToastNotificationService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {}
@@ -58,8 +60,8 @@ export class PlcMeterRelaysStateComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.getRelaysState(values);
-    const successMessage = `Action in progress!`;
-    const errorMessage = `Action failed!`;
+    const successMessage = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
+    const errorMessage = this.translate.instant('COMMON.ACTION-FAILED') + '!';
 
     request.subscribe(
       (result) => {

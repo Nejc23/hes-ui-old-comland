@@ -3,9 +3,10 @@ import * as _ from 'lodash';
 // import { Router } from '@angular/router';
 import { ResponseError } from '../models/error-handler.model';
 import { ToastNotificationService } from '../../toast-notification/services/toast-notification.service';
+import { TranslateService } from '@ngx-translate/core';
 @Injectable()
 export class ErrorHandlerService {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, private translate: TranslateService) {}
 
   showToast(error: ResponseError) {
     const notify = this.injector.get<ToastNotificationService>(ToastNotificationService);
@@ -14,17 +15,17 @@ export class ErrorHandlerService {
     if (error) {
       // Handle Http Error (error.status === 403, 404...)
       if (error.status === 400) {
-        notify.errorToast(_.get(error, 'error.message', `Not valid request`));
+        notify.errorToast(_.get(error, 'error.message', this.translate.instant('ERROR.NOT-VALID-REQUEST')));
       }
       if (error.status === 401 || error.status === 403) {
         //  notify.errorToast(this.translate(`Authentication error`));
         //   router.navigate(['login']);
       }
       if (error.status === 404) {
-        notify.errorToast(`Action not exists`);
+        notify.errorToast(this.translate.instant('ERROR.ACTION-NOT-EXISTS'));
       }
       if (error.status === 500) {
-        notify.errorToast(`Unknown error`);
+        notify.errorToast(this.translate.instant('ERROR.UNKNOWN-ERROR'));
       }
     }
   }
