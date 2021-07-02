@@ -1,5 +1,5 @@
-import { FileUploadComponent } from './../../../../shared/forms/components/file-upload/file-upload.component';
-import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
+import { FileUploadComponent } from '../../../../shared/forms/components/file-upload/file-upload.component';
+import { Codelist } from '../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';

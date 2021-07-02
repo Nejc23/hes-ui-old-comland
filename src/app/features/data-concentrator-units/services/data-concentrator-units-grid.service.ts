@@ -35,7 +35,6 @@ export class DataConcentratorUnitsGridService {
   gridName = 'grdDCU-requestIds';
 
   columns = [];
-  paramsDCU = {} as GridRequestParams;
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,

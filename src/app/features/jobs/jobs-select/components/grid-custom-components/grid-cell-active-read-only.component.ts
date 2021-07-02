@@ -1,8 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -13,7 +10,6 @@ export class GridCellActiveReadOnlyComponent implements ICellRendererAngularComp
   @ViewChild('activeSwitch', { static: true }) activeSwitch;
 
   public params: any;
-  messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
   messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
 

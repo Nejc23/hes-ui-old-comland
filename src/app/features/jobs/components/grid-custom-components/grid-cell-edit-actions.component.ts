@@ -1,5 +1,5 @@
-import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
-import { JobTypeEnumeration } from './../../enums/job-type.enum';
+import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
+import { JobTypeEnumeration } from '../../enums/job-type.enum';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';

@@ -1,15 +1,15 @@
-import { JobTypeEnumeration } from './../../../jobs/enums/job-type.enum';
-import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
-import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
+import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
+import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
+import { SecurityActivateHlsComponent } from '../../common/components/security/security-activate-hls.component';
 import { Router } from '@angular/router';
-import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
+import { PlcMeterSetDisplaySettingsComponent } from '../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import {
-  IActionRequestParams,
   IActionRequestDeleteDevice,
+  IActionRequestParams,
   IRegisterTypesEnum
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -41,7 +41,6 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
 import { PlcReadRegistersComponent } from '../../common/components/plc-read-meter/plc-read-registers.component';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
-import { DcuFwUpgradeComponent } from '../../../data-concentrator-units/common/components/dcu-fw-upgrade.component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({

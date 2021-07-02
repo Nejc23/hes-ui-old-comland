@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, Inject, LOCALE_ID } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
 import { dateDisplayFormat } from '../../consts/date-format';

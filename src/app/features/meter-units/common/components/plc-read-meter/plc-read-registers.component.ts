@@ -1,4 +1,4 @@
-import { IActionRequestAddTemplate } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestAddTemplate } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';

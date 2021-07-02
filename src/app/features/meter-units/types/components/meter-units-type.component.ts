@@ -242,66 +242,87 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
   }
+
   get permissionManageJobs() {
     return PermissionEnumerator.Manage_Jobs;
   }
+
   get permissionManageAutoTemplates() {
     return PermissionEnumerator.Manage_Auto_Template_Rules;
   }
+
   get permissionFwUpgrade() {
     return PermissionEnumerator.Meter_FW_Upgrade;
   }
+
   get permissionDisconnectorConnect() {
     return PermissionEnumerator.Disconnector_Connect;
   }
+
   get permissionDisconnectorDisconnect() {
     return PermissionEnumerator.Disconnector_Disconnect;
   }
+
   get permissionDisconnectorGetState() {
     return PermissionEnumerator.Disconnector_Get_State;
   }
+
   get permissionDisconnectorSetMode() {
     return PermissionEnumerator.Disconnector_Set_Mode;
   }
+
   get permissionCiiActivate() {
     return PermissionEnumerator.CII_Activate;
   }
+
   get permissionCiiDeactivate() {
     return PermissionEnumerator.CII_Deactivate;
   }
+
   get permissionCiiState() {
     return PermissionEnumerator.CII_Get_State;
   }
+
   get permissionRelaysConnect() {
     return PermissionEnumerator.Relay_Connect;
   }
+
   get permissionRelaysDisconnect() {
     return PermissionEnumerator.Relay_Disconnect;
   }
+
   get permissionRelaysState() {
     return PermissionEnumerator.Relay_Get_State;
   }
+
   get permissionRelaysSetMode() {
     return PermissionEnumerator.Relay_Set_Mode;
   }
+
   get permissionTouUpload() {
     return PermissionEnumerator.TOU_Upload;
   }
+
   get permissionSetLimiter() {
     return PermissionEnumerator.Set_Limiter;
   }
+
   get permissionSetMonitor() {
     return PermissionEnumerator.Set_Monitor;
   }
+
   get permissionClearFF() {
     return PermissionEnumerator.Clear_FF;
   }
+
   get permissionSetDisplay() {
     return PermissionEnumerator.Set_Display;
   }
+
   get permissionClearAlarms() {
     return PermissionEnumerator.Clear_Alarms;
   }
+
   get permissionAssignTemplates() {
     return PermissionEnumerator.Assign_Templates;
   }
@@ -309,15 +330,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionSecurityActivateHls() {
     return PermissionEnumerator.Activate_HLS;
   }
+
   get permissionSecurityRekey() {
     return PermissionEnumerator.Rekey;
   }
+
   get permissionSecurityChangePassword() {
     return PermissionEnumerator.Change_Password;
   }
+
   get permissionReadMeter() {
     return PermissionEnumerator.Read_Meter;
   }
+
   get permissionSyncTime() {
     return PermissionEnumerator.Sync_Time;
   }
@@ -421,6 +446,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.getMeterUnitsLayoutGridLayoutStore();
   }
+
   // ----------------------- ag-grid sets DATASOURCE end --------------------------
 
   private noSearch() {
@@ -468,6 +494,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
     return false;
   }
+
   onFirstDataRendered(params) {}
 
   // ag-grid change visibillity of columns
@@ -984,6 +1011,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
     this.plcActionsService.onReadRegisters(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
+
   // <-- end Operations action click (bulk or selected row)
 
   // --> for checking long bulk action finished
@@ -1051,6 +1079,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.refreshGrid();
     }
   }
+
   // --> start Security action click (bulk or selected row)
 
   onSecurityActivateHls(selectedGuid: string) {

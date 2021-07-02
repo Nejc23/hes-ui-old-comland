@@ -10,6 +10,7 @@ import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/inte
 import { PlcMeterSetLimiterService } from '../../services/plc-meter-set-limiter.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-relays-connect',
@@ -32,7 +33,8 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private setLimiterService: PlcMeterSetLimiterService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
   }
@@ -89,7 +91,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
   onSet() {
     const values = this.fillData();
     const request = this.myGridService.postRelaysConnectDevice(values);
-    const successMessage = `Action in progress!`;
+    const successMessage = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close(result.requestId);

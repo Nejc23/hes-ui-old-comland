@@ -135,7 +135,11 @@
     "SHOW-OPTION": "Show option",
     "UPLOAD-SUCCESSFUL": "Upload successful",
     "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
-    "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled"
+    "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
+    "RUNNING-JOB": "Running job",
+    "PENDING-JOB": "Pending job",
+    "READ-ON": "Read on",
+    "FOR": "for"
   },
   "FORM": {
     "CURRENT-VIEW": "Do you like the current view?",
@@ -421,7 +425,17 @@
       "PW_L1-READER": "PW_L1 (Reader)",
       "PW_L2-INSTALLER": "PW_L2 (Installer)",
       "PW_CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
-      "METER-UNITS-PASSWORD": "Meter Units password type change was successful"
+      "METER-UNITS-PASSWORD": "Meter Units password type change was successful",
+      "PSK": "PSK",
+      "GAK": "GAK (Management)",
+      "GUEK": "GUEK (Management)",
+      "GBEK": "GBEK (Management)",
+      "GAK-M2": "GAK_M2 (Operator)",
+      "GUEK-M2": "GUEK_M2 (Operator)",
+      "AK-DATA-COLLECTOR": "AK_DATA_COLLECTOR (Reader)",
+      "UEK-DATA-COLLECTOR": "UEK_DATA_COLLECTOR (Reader)",
+      "AK-INSTALLER": "AK_INSTALLER (Installer)",
+      "UEK-INSTALLER": "UEK_INSTALLER (Installer)"
     },
     "REGISTER": {
       "NO-REGISTER-SELECTED": "No register selected",
@@ -466,7 +480,9 @@
     "SET-DISPLAY-SETTINGS": "Set Display Settings",
     "AVERAGE-VALUE": "Average value",
     "MAX-VALUE-RECORDED": "Max value recorded at {{timestamp}}",
-    "MIN-VALUE-RECORDED": "Min value recorded at {{timestamp}}"
+    "MIN-VALUE-RECORDED": "Min value recorded at {{timestamp}}",
+    "SET-MONITOR-SUCCESSFUL": "Set Monitor was successful",
+    "METER-UNITS-RE-KEYING": "Meter Units re-keying was successful"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",

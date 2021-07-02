@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Breadcrumb } from '../interfaces/breadcrumb.interface';
@@ -13,7 +13,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class BreadcrumbComponent implements OnInit {
   public breadcrumbs: Breadcrumb[];
   public pageName: string;
-  a = 'Close';
 
   constructor(
     private activatedRoute: ActivatedRoute,

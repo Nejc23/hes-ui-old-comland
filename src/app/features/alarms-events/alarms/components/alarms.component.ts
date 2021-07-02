@@ -1,6 +1,6 @@
-import { GridUtils } from './../../../global/grid.utils';
-import { AlarmingService } from './../../../../core/repository/services/alarming/alarming.service';
-import { IActionRequestParamsAlarms, IActionSortParams } from './../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { GridUtils } from '../../../global/grid.utils';
+import { AlarmingService } from '../../../../core/repository/services/alarming/alarming.service';
+import { IActionRequestParamsAlarms, IActionSortParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAlarmsList } from 'src/app/core/repository/interfaces/alarming/alarms-list.interface';

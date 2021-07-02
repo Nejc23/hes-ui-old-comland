@@ -12,6 +12,7 @@ import { GridFilterParams, GridSearchParams } from 'src/app/core/repository/inte
 import { PlcMeterSetMonitorService } from '../../services/plc-meter-set-monitor.service';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-monitor',
@@ -35,7 +36,8 @@ export class PlcMeterMonitorComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private setMonitorService: PlcMeterSetMonitorService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -80,7 +82,7 @@ export class PlcMeterMonitorComponent implements OnInit {
     };
 
     const request = this.myGridService.setMonitor(formData);
-    const successMessage = `Set Monitor was successful`;
+    const successMessage = this.translate.instant('PLC-METER.SET-MONITOR-SUCCESSFUL');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         this.modal.close();

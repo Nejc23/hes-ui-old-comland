@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import * as moment from 'moment';
-import { DataConcentratorUnitsStaticTextService } from '../../services/data-concentrator-units-static-text.service';
 
 @Component({
   selector: 'app-grid-cell-icon',
@@ -10,7 +8,8 @@ import { DataConcentratorUnitsStaticTextService } from '../../services/data-conc
 export class GridCellIconComponent implements ICellRendererAngularComp {
   public params: any;
 
-  constructor(private staticextService: DataConcentratorUnitsStaticTextService) {}
+  constructor() {}
+
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -20,10 +19,5 @@ export class GridCellIconComponent implements ICellRendererAngularComp {
   refresh(params: any): boolean {
     this.params = params;
     return true;
-  }
-
-  // set momemnt text (next planned read) out of date and time
-  setMomentNextPlannedReadTime(time: string) {
-    return this.staticextService.nextPlannedReadText + `${moment(time).fromNow()}`;
   }
 }

@@ -6,18 +6,12 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class MeterUnitsTypeStaticTextService {
-  // public titleBreadCrumbs =  `Overview - Meter Units`;
-
   constructor(private translate: TranslateService) {}
 
   get headerTitleMeterUnitsType() {
-    return `Meters`;
+    return this.translate.instant('MENU.METERS');
   }
-  /*
-  get breadcrumbNameDCU() {
-    return   `Overview - Data Concentrator Units`;
-  }
-*/
+
   get notAvailableTekst() {
     return this.translate.instant('COMMON.NA');
   }

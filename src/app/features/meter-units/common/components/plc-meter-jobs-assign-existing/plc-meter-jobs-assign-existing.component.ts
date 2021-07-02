@@ -1,5 +1,5 @@
-import { IActionRequestJobsAssignExisting } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { Component, OnInit } from '@angular/core';
+import { IActionRequestJobsAssignExisting } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
