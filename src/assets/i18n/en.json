@@ -266,7 +266,8 @@
     "USERS": "Users",
     "POWERED-BY": "powered by Metricsx",
     "ALL-RIGHTS RESERVED": "© 2020. All rights reserved",
-    "PIN-COLLAPSE-MENU": "Pin/collapse menu"
+    "PIN-COLLAPSE-MENU": "Pin/collapse menu",
+    "METERS": "Meters"
   },
   "BREADCRUMB": {
     "CONCENTRATOR": "Concentrator",
@@ -357,11 +358,11 @@
     "ASSIGN-TEMPLATE-WARNING": "Assigning template to meter(s) may result in irreversible changes to meter data!",
     "SET-LIMITER": "Set Limiter ({{selectedRowsCount}} selected)",
     "SET-ONE-THRESHOLD": "At least one threshold should be set!",
-    "SET-MONITOR": "Set Monitor ({{selectedRowsCount}} selected)",
-    "RELAY-CONNECT": "Relay Connect ({{selectedRowsCount}} selected)",
-    "RELAY-DISCONNECT": "Relay Disconnect ({{selectedRowsCount}} selected)",
-    "RELAY-MODE": "Relay Mode ({{selectedRowsCount}} selected)",
-    "SET-DISPLAY-SETTINGS": "Set display settings ({{selectedRowsCount}} selected)",
+    "SET-MONITOR-SELECTED": "Set Monitor ({{selectedRowsCount}} selected)",
+    "RELAY-CONNECT-SELECTED": "Relay Connect ({{selectedRowsCount}} selected)",
+    "RELAY-DISCONNECT-SELECTED": "Relay Disconnect ({{selectedRowsCount}} selected)",
+    "RELAY-MODE-SELECTED": "Relay Mode ({{selectedRowsCount}} selected)",
+    "SET-DISPLAY-SETTINGS-SELECTED": "Set display settings ({{selectedRowsCount}} selected)",
     "CHECK-DEVICE-TEMPLATE": "Please, check your device template.",
     "CHANGE-REGISTER": "Changing the register will deselect all settings.",
     "CREATE-NEW": "Create new",
@@ -373,6 +374,7 @@
     "ACTIVATE-IMAGE": "Activate image",
     "TOU-UPLOAD": "TOU Upload",
     "SET-THRESHOLDS": "Set thresholds",
+    "SET-MONITOR": "Set Monitor",
     "READ-THRESHOLDS": "Read thresholds",
     "CLEAR-FF": "Clear FF",
     "SET-DISPLAY-SETTINGS-TITLE": "Set display settings",
@@ -446,7 +448,15 @@
     "AT-LEAST-ONE-REGISTER": "`At least one register must be on the Selected registers list",
     "DROP-AVAILABLE-REGISTERS": "Drop available registers here.",
     "METER-UNITS-DISPLAY-SETTINGS": "Meter Unit(s) Display settings set successfully.",
-    "METER-UNITS-ACTIVATE-HLS": "Meter Units activate hls successful"
+    "METER-UNITS-ACTIVATE-HLS": "Meter Units activate hls successful",
+    "RELAY-CONNECT": "Relay Connect",
+    "RELAY-DISCONNECT": "Relay Disconnect",
+    "RELAY-STATE": "Relay State",
+    "RELAY-MODE": "Relay Mode",
+    "READ-MONITOR-THRESHOLDS": "Read monitor thresholds",
+    "READ-LIMITER-THRESHOLDS": "Read limiter thresholds",
+    "BREAKER-MODE": "Breaker Mode",
+    "SET-DISPLAY-SETTINGS": "Set Display Settings"
   },
   "JOB": {
     "NO-JOBS": "No Jobs have been added yet.",
