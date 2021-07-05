@@ -138,8 +138,6 @@ export class SchedulerJobComponent {
   }
 
   initAddJobsForUser() {
-    const itemsPerRow = 3;
-
     this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
     const jobsLength = this.addJobsForUser.length;
 

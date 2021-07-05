@@ -60,9 +60,6 @@ export class GridSelectionHeaderScrollableComponent implements IHeaderAngularCom
       this.setIntermediate = false;
     }
 
-    const startRow = this.params.api.getFirstDisplayedRow();
-    const endRow = this.params.api.getLastDisplayedRow();
-
     this.params.api.forEachNode((node) => {
       // if (node.rowIndex >= startRow && node.rowIndex <= endRow) {
       node.setSelected(this.form.get('checkBox').value);

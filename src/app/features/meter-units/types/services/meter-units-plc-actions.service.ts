@@ -350,7 +350,6 @@ export class MeterUnitsPlcActionsService {
     response = this.service.deleteDevice(paramsDeleteDevice);
     const operationName = this.translate.instant('COMMON.DELETE-DEVICES');
 
-    const operation = MeterUnitsTypeEnum.delete;
     // todo REFACTOR {{ VALUE }}
     component.modalTitle = `${operationName} (${selectedRowsCount}` + this.translate.instant('COMMON.SELECTED') + ')';
     component.modalBody =

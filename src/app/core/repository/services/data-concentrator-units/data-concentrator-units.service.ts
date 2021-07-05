@@ -93,8 +93,6 @@ export class DataConcentratorUnitsService {
   }
 
   createDcu(payload: DcuForm): Observable<string> {
-    const vendorId: number = payload.manufacturer ? payload.manufacturer.id : -1;
-
     const dcuRequest: DcuInsertRequest = {
       concentratorId: payload.serialNumber,
       concentratorIp: payload.ip,

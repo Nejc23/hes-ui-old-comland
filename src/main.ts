@@ -11,11 +11,6 @@ if (environment.production) {
   enableProdMode();
 }
 
-// use the require method provided by webpack
-declare const require;
-// we use the webpack raw-loader to return the content as a string
-//const translations = require(`raw-loader!./assets/i18n/messages.${selectedLocale}.xlf`).default;
-
 platformBrowserDynamic() //[{ provide: LOCALE_ID, useValue: selectedLocale }]
   .bootstrapModule(
     AppModule /*, {

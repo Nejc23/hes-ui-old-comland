@@ -34,8 +34,6 @@ registerLocaleData(localeDe, 'de', localeDeExtra);
 registerLocaleData(localeFr, 'fr', localeFrExtra);
 registerLocaleData(localeIt, 'it', localeItExtra);
 
-declare const require;
-
 /*export function initializeApp(appConfigService: AppConfigService) {
   return (): Promise<any> => {
     return appConfigService.load();

@@ -1028,7 +1028,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               }
 
               // 5th step for relays state
-              const relaysStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_RelaysState_RequestIds();
               const isRelaysState = _.find(ciiStateRequests, (x) => x === requestId);
               if (isRelaysState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe((resultsRelaysState) => {

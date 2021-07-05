@@ -57,7 +57,7 @@ export class SecurityActivateHlsComponent {
 
   onConfirm() {
     const values = this.fillData();
-    const request = this.gridLinkService.postSecurityEnableHls(values);
+    this.gridLinkService.postSecurityEnableHls(values);
     const successMessage = this.translate.instant('PLC-METER.METER-UNITS-ACTIVATE-HLS');
 
     this.gridLinkService.postSecurityEnableHls(values).subscribe(
