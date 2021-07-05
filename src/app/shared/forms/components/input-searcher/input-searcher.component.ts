@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-input-searcher',
@@ -23,7 +23,7 @@ export class InputSearcherComponent implements OnInit {
   @Input() useWildcards = false;
   @Output() toggleWildcards = new EventEmitter<boolean>();
 
-  constructor(private formUtils: FormsUtilsService) {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit() {
     if (!this.form) {
@@ -54,9 +54,9 @@ export class InputSearcherComponent implements OnInit {
   }
 
   getTooltip() {
-    let tooltip = `Wildcards search is disabled`;
+    let tooltip = this.translate.instant('COMMON.WILDCARDS-SEARCH-DISABLED');
     if (this.useWildcards) {
-      tooltip = `Wildcards search is enabled`;
+      tooltip = this.translate.instant('COMMON.WILDCARDS-SEARCH-ENABLE');
     }
     return tooltip;
   }

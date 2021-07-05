@@ -1,44 +1,39 @@
 import { Injectable } from '@angular/core';
 import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeterUnitsTypeStaticTextService {
-  // public titleBreadCrumbs =  `Overview - Meter Units`;
-
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   get headerTitleMeterUnitsType() {
-    return `Meters`;
+    return this.translate.instant('MENU.METERS');
   }
-  /*
-  get breadcrumbNameDCU() {
-    return   `Overview - Data Concentrator Units`;
-  }
-*/
+
   get notAvailableTekst() {
-    return `N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get notSetText() {
-    return `Not set`;
+    return this.translate.instant('COMMON.NOT-SET');
   }
 
   get noRecordsFound() {
-    return `No records found. You may need to adjust your search or filter parameters.`;
+    return this.translate.instant('COMMON.NO-RECORDS-FOUND');
   }
 
   get loadingData() {
-    return `Loading data...`;
+    return this.translate.instant('COMMON.LOADING-DATA');
   }
 
   get noFilterAppliedTekst() {
-    return `No filters applied`;
+    return this.translate.instant('COMMON.NO-FILTER-APPLIED');
   }
 
   get nextPlannedReadText() {
-    return `Next planned read` + ' ';
+    return this.translate.instant('JOB.NEXT-READ') + ' ';
   }
 
   getFiltersInfo(
@@ -99,56 +94,56 @@ export class MeterUnitsTypeStaticTextService {
       protocol ||
       medium
     ) {
-      result.text += `Filtered by: `;
+      result.text += this.translate.instant('FILTER.FILTERED-BY');
     }
 
     if (status) {
-      result.text += `status` + separator;
+      result.text += this.translate.instant('FORM.STATUS').toLowerCase() + separator;
       result.count++;
     }
 
     if (protocol) {
-      result.text += `protocol` + separator;
+      result.text += this.translate.instant('FORM.PROTOCOL').toLowerCase() + separator;
       result.count++;
     }
 
     if (vendor) {
-      result.text += `vendor` + separator;
+      result.text += this.translate.instant('FORM.VENDOR').toLowerCase() + separator;
       result.count++;
     }
 
     if (medium) {
-      result.text += `medium` + separator;
+      result.text += this.translate.instant('FORM.MEDIUM').toLowerCase() + separator;
       result.count++;
     }
 
     if (tag) {
-      result.text += `tag` + separator;
+      result.text += this.translate.instant('FORM.TAG').toLowerCase() + separator;
       result.count++;
     }
 
     if (readStatuses) {
-      result.text += `read status` + separator;
+      result.text += this.translate.instant('FORM.READ-STATUS').toLowerCase() + separator;
       result.count++;
     }
 
     if (firmware) {
-      result.text += `firmware` + separator;
+      result.text += this.translate.instant('FORM.FIRMWARE').toLowerCase() + separator;
       result.count++;
     }
 
     if (disconnectorState) {
-      result.text += `disconnector state` + separator;
+      result.text += this.translate.instant('FORM.DISCONNECTOR-STATE').toLowerCase() + separator;
       result.count++;
     }
 
     if (ciiState) {
-      result.text += `CII state` + separator;
+      result.text += this.translate.instant('FORM.CII-STATE').toLowerCase() + separator;
       result.count++;
     }
 
     if (showOptionFilter) {
-      result.text += `show option` + separator;
+      result.text += this.translate.instant('COMMON.SHOW-OPTION').toLowerCase() + separator;
       result.count++;
     }
 

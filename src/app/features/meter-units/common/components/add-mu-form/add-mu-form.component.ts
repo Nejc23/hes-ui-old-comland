@@ -1,6 +1,6 @@
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
+import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from '../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { MeterUnitsService } from '../../../../../core/repository/services/meter-units/meter-units.service';
 import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
@@ -48,7 +48,7 @@ export class AddMuFormComponent implements OnInit {
     { value: '1' as string, label: this.translate.instant('FORM.WRAPPER') },
     { value: '0' as string, label: this.translate.instant('FORM.HDLC') }
   ];
-  defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
+  defaultCommunicationType = this.communicationTypes[0];
 
   communicationTypeSelected: RadioOption = null;
 

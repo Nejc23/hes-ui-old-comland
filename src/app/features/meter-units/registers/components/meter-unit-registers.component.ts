@@ -1,8 +1,8 @@
-import { EventsById, EventsByTimestamp } from './../interfaces/events-processing.interface';
-import { RegisterValue } from './../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-import { RegisterGroup, RegisterStatistics } from './../interfaces/data-processing-request.interface';
-import { DataProcessingService } from './../../../../core/repository/services/data-processing/data-processing.service';
-import { AutoTemplateRegister } from './../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
+import { EventsById, EventsByTimestamp } from '../interfaces/events-processing.interface';
+import { RegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import { RegisterGroup, RegisterStatistics } from '../interfaces/data-processing-request.interface';
+import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
+import { AutoTemplateRegister } from '../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -235,7 +235,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     if (this.selectedRegister) {
       let rangeDay = '';
       if (this.selectedRange && this.selectedRange.value !== '6') {
-        rangeDay = `for ${this.selectedRange.label.toLowerCase()}`;
+        rangeDay = this.translate.instant('COMMON.FOR') + ' ' + this.selectedRange.label.toLowerCase();
       }
 
       const startTimeString = this.getLocalDateWithTimeString(this.startTime);
@@ -412,7 +412,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.showStatistics = false;
     if (this.selectedRegister) {
-      this.showStatistics = this.selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
+      this.showStatistics = this.selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
     }
   }
 

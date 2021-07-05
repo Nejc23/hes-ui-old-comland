@@ -1,4 +1,4 @@
-import { IActionRequestSetDisplaySettings } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestSetDisplaySettings } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';

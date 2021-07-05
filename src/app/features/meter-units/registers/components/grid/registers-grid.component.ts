@@ -1,5 +1,5 @@
-import { SidebarToggleService } from './../../../../../shared/base-template/components/services/sidebar.service';
-import { RegistersGridService } from './../../services/grid/registers-grid.service';
+import { SidebarToggleService } from '../../../../../shared/base-template/components/services/sidebar.service';
+import { RegistersGridService } from '../../services/grid/registers-grid.service';
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Module } from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from '@ag-grid-enterprise/all-modules';

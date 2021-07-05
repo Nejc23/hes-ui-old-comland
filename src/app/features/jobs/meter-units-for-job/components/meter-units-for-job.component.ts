@@ -1,4 +1,4 @@
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
+import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';

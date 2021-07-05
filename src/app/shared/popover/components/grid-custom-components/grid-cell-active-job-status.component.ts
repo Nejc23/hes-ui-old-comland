@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { ActiveJobsStaticTextService } from '../../services/active-jobs-static-text.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-active-job-status',
@@ -10,7 +11,7 @@ export class GridCellActiveJobStatusComponent implements ICellRendererAngularCom
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
 
-  constructor(private statictextService: ActiveJobsStaticTextService) {}
+  constructor(private statictextService: ActiveJobsStaticTextService, private translate: TranslateService) {}
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -23,6 +24,6 @@ export class GridCellActiveJobStatusComponent implements ICellRendererAngularCom
   }
 
   setToolTip(value: boolean) {
-    return value ? `Running job` : `Pending job`;
+    return value ? this.translate.instant('COMMON.RUNNING-JOB') : this.translate.instant('COMMON.PENDING-JOB');
   }
 }

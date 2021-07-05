@@ -35,9 +35,9 @@ import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-c
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
 import { DcOperationsService } from '../services/dc-operations.service';
-import { SettingsStoreEmitterService } from './../../../core/repository/services/settings-store/settings-store-emitter.service';
-import { SidebarToggleService } from './../../../shared/base-template/components/services/sidebar.service';
-import { DcuUnitsGridLayoutStore } from './../interfaces/dcu-units-grid-layout.store';
+import { SettingsStoreEmitterService } from '../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { SidebarToggleService } from '../../../shared/base-template/components/services/sidebar.service';
+import { DcuUnitsGridLayoutStore } from '../interfaces/dcu-units-grid-layout.store';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 
 @Component({
@@ -242,11 +242,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     }
   }
 
-  // set momemnt text (next planned read) out of date and time
-  setMomentNextPlannedReadTime(time: string) {
-    return this.staticTextService.nextPlannedReadText + moment(time).fromNow();
-  }
-
   // ag-grid
   // button click refresh grid
   refreshGrid() {
@@ -309,7 +304,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   private noFilters() {
-    if (
+    return (
       this.requestModel.filterModel == null ||
       ((this.requestModel.filterModel.statuses === undefined ||
         this.requestModel.filterModel.statuses.length === 0 ||
@@ -322,10 +317,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
           this.requestModel.filterModel.types.length === 0 ||
           this.requestModel.filterModel.types[0] === 0) &&
         (this.requestModel.filterModel.vendors === undefined || this.requestModel.filterModel.vendors.length === 0))
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
   onFirstDataRendered(params) {}
 
@@ -593,18 +585,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
         this.refreshGrid();
       })
       .catch(() => {});
-  }
-
-  // TODO
-  // upload configuration button click
-  onUploadConfiguration() {
-    //
-  }
-
-  // TODO
-  // upgrade button click
-  onUpgrade() {
-    //
   }
 
   toggleFilter() {

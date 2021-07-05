@@ -51,6 +51,5 @@ export class DataConcentratorUnitsRoutingModule {
         : (x = x);
       x.data.breadcrumb = `${x.data.breadcrumb}`;
     });
-    // routes.forEach(x => (x.data.breadcrumb = i18n(x.data.breadcrumb)));
   }
 }

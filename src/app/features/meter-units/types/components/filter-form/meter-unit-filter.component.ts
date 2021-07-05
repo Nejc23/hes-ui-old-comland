@@ -12,6 +12,7 @@ import { CodelistHelperService } from 'src/app/core/repository/services/codelist
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 import * as _ from 'lodash';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-meter-unit-filter',
@@ -61,7 +62,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private route: ActivatedRoute,
     private codelistHelperService: CodelistHelperService,
-    private settingsStoreEmitterService: SettingsStoreEmitterService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm(null, null);
     this.paramsSub = route.params.subscribe((params) => {
@@ -307,9 +309,9 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
 
   errorValidatorReadStatusComponents() {
     if (this.form.errors != null && this.form.errors.outOfRange) {
-      return `Value must be in range 0-100`;
+      return this.translate.instant('COMMON.0-100-RANGE');
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return `Range is not correct`;
+      return this.translate.instant('COMMON.INCORRECT-RANGE');
     }
   }
 
@@ -318,6 +320,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   }
 
   getFilterTitle(): string {
-    return `Filters`;
+    return this.translate.instant('FILTER.FILTERS');
   }
 }

@@ -1,8 +1,9 @@
-import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import * as moment from 'moment';
 import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
 import { dateDisplayFormat } from '../../consts/date-format';
+
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-datetime-range-picker',
@@ -39,7 +40,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   };
 
   constructor() {
-    const locale_id = localStorage.getItem('lang');
+    let locale_id = localStorage.getItem('lang');
     moment.locale(locale_id);
   }
 
@@ -107,8 +108,8 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   setLabel() {
-    const startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
-    const endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    let startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value

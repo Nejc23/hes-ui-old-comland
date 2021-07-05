@@ -4,6 +4,7 @@ import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type
 import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-threshold',
@@ -13,12 +14,11 @@ export class GridCellThresholdComponent implements ICellRendererAngularComp {
   notAvailableText = this.staticTextService.notAvailableTekst;
   notSetText = this.staticTextService.notSetText;
   public params: any;
-  oldReadingDate = false;
-  readOnText = `Read on`;
+  readOnText = this.translate.instant('COMMON.READ-ON');
   preconfiguredThreshold = environment.thresholdValue;
   thresholdValue = this.notAvailableText;
 
-  constructor(private staticTextService: MeterUnitsTypeStaticTextService) {}
+  constructor(private staticTextService: MeterUnitsTypeStaticTextService, private translate: TranslateService) {}
 
   // called on init
   agInit(params: any): void {
@@ -47,11 +47,9 @@ export class GridCellThresholdComponent implements ICellRendererAngularComp {
   }
 
   checkDate() {
-    if (
+    return (
       this.params.value?.timestamp &&
       moment(this.params.value.timestamp, dateServerFormat) < moment().subtract(this.preconfiguredThreshold, 'day')
-    ) {
-      this.oldReadingDate = true;
-    }
+    );
   }
 }

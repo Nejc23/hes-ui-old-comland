@@ -6,8 +6,6 @@ import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.inter
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  // public titleBreadCrumbs =  `Data Concentrator Units`;
-
   constructor(private translate: TranslateService) {}
 
   get notAvailableTekst() {

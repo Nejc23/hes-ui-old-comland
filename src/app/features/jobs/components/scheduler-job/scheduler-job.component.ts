@@ -49,7 +49,7 @@ export class SchedulerJobComponent {
   form: FormGroup;
 
   noRegisters = false;
-  requiredText = `Required field`;
+  requiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
 
   jobsTimeUnits$: Observable<Codelist<number>[]>;
   jobsTimeUnits: Codelist<number>[];
@@ -75,44 +75,44 @@ export class SchedulerJobComponent {
   addJobs: AddJobParams[] = [
     {
       jobType: JobTypeEnumeration.reading,
-      jobName: `Reading`,
-      deviceType: `METER`,
+      jobName: this.translate.instant('JOB.READING'),
+      deviceType: this.translate.instant('JOB.METER').toUpperCase(),
       icon: 'line_weight',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Meters)
     },
     {
       jobType: JobTypeEnumeration.discovery,
-      jobName: `Discovery`,
-      deviceType: `DC`,
+      jobName: this.translate.instant('JOB.DISCOVERY'),
+      deviceType: this.translate.instant('JOB.DC').toUpperCase(),
       icon: 'search',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.timeSync,
-      jobName: `Time synchronization`,
-      deviceType: `DC`,
+      jobName: this.translate.instant('JOB.TIME-SYNCHRONIZATION'),
+      deviceType: this.translate.instant('JOB.DC').toUpperCase(),
       icon: 'restore',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.readEvents,
-      jobName: `Read events`,
-      deviceType: `DC`,
+      jobName: this.translate.instant('JOB.READ-EVENTS'),
+      deviceType: this.translate.instant('JOB.DC').toUpperCase(),
       icon: 'line_style',
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.topology,
-      jobName: `Topology`,
-      deviceType: `DC`,
+      jobName: this.translate.instant('JOB.TOPOLOGY'),
+      deviceType: this.translate.instant('JOB.DC').toUpperCase(),
       icon: 'share',
       isIconOutlined: true,
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Concentrators)
     },
     {
       jobType: JobTypeEnumeration.alarmNotification,
-      jobName: `Notification`,
-      deviceType: `SYSTEM`,
+      jobName: this.translate.instant('JOB.NOTIFICATION'),
+      deviceType: this.translate.instant('JOB.SYSTEM').toUpperCase(),
       icon: 'notification_important',
       isIconOutlined: true,
       hasUserAccess: this.hasJobsManageAccessWith(PermissionEnumerator.Manage_Alarms)

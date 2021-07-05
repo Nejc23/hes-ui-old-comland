@@ -15,7 +15,7 @@ import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
-import { TemplatingService } from './../../../core/repository/services/templating/templating.service';
+import { TemplatingService } from '../../../core/repository/services/templating/templating.service';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 
 @Injectable({
@@ -48,6 +48,7 @@ export class DcOperationsService {
     };
     modalRef.result.then().catch(() => {});
   }
+
   /*
   onTou(params: RequestFilterParams) {
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
@@ -151,6 +152,7 @@ export class DcOperationsService {
     );
   }
 */
+
   // delete button click ali se rabi ?????????
   onDelete() {
     /*  let selectedText = 'all';

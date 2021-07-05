@@ -1,6 +1,5 @@
 import { Injectable, Injector } from '@angular/core';
 import * as _ from 'lodash';
-// import { Router } from '@angular/router';
 import { ResponseError } from '../models/error-handler.model';
 import { ToastNotificationService } from '../../toast-notification/services/toast-notification.service';
 import { TranslateService } from '@ngx-translate/core';

@@ -524,7 +524,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   }
 
   private noFilters() {
-    if (
+    return (
       this.requestModel.filterModel == null ||
       ((!this.requestModel.filterModel.statuses ||
         this.requestModel.filterModel.statuses.length === 0 ||
@@ -545,10 +545,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showWithoutTemplate &&
         !this.requestModel.filterModel.readyForActivation)
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
   // set form title by selected meter unit type
@@ -574,7 +571,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     const selectedText = `${this.getSelectedCount()}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = `Confirm`;
+    component.btnConfirmText = this.translate.instant('BUTTON.CONFIRM');
     let response: Observable<any> = new Observable();
 
     const request: RequestDcuForJob = {

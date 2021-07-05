@@ -507,7 +507,7 @@ export class AutoTemplateComponent implements OnInit {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = `Delete`;
+    const operation = this.translate.instant('COMMON.DELETE');
     response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
     component.modalTitle = this.translate.instant('COMMON.DELETE');
