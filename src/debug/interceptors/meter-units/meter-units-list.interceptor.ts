@@ -7,6 +7,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
 import { meterUnits } from 'src/app/core/repository/consts/meter-units.const';
+import { DisconnectorStateEnum } from '../../../app/features/meter-units/types/consts/meter-units.consts';
 
 @Injectable()
 export class MeterUnitsListInterceptor {
@@ -119,7 +120,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.CONNECTED,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
         {
@@ -127,7 +128,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '0',
-          interpretedValue: 'Disconnected',
+          interpretedValue: DisconnectorStateEnum.DISCONNECTED,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
         {
@@ -135,7 +136,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
         {
@@ -143,7 +144,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
         {
@@ -151,7 +152,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
         },
         {
@@ -159,7 +160,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
         },
         {
@@ -167,7 +168,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
         },
         {
@@ -175,7 +176,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
         }
       ]
@@ -188,7 +189,7 @@ function setData(): MeterUnitsList[] {
       readStatusColor: 'green',
       vendor: 'Landis+Gy',
       tags: ['tag 31', 'tag 32', 'tag 432', 'tag 8'],
-      disconnectorState: 'ReadyForReConnection',
+      disconnectorState: DisconnectorStateEnum.READY,
       childInfo: 12345,
       firmware: 'FM-223',
       id5: 'ID-12345',
@@ -215,7 +216,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
         {
@@ -223,7 +224,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '0',
-          interpretedValue: 'Disconnected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
         {
@@ -231,7 +232,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
         {
@@ -239,7 +240,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
         {
@@ -247,7 +248,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         }
       ]
@@ -287,7 +288,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
         {
@@ -295,7 +296,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
         },
         {
@@ -303,7 +304,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
         },
         {
@@ -311,7 +312,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '0',
-          interpretedValue: 'Disconnected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
         },
         {
@@ -319,7 +320,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
         },
         {
@@ -327,7 +328,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b066'
         },
         {
@@ -335,7 +336,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b067'
         }
       ]
@@ -375,7 +376,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
         },
         {
@@ -383,7 +384,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b062'
         },
         {
@@ -391,7 +392,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b063'
         },
         {
@@ -399,7 +400,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '0',
-          interpretedValue: 'Disconnected',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b064'
         },
         {
@@ -407,7 +408,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b065'
         },
         {
@@ -415,7 +416,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b066'
         },
         {
@@ -423,7 +424,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForReconnection',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b067'
         }
       ]
@@ -493,7 +494,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '1',
-          interpretedValue: 'Connected',
+          interpretedValue: DisconnectorStateEnum.CONNECTED,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
       ]
@@ -505,7 +506,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-02-17T05:26:37',
       readStatusColor: 'red',
       vendor: 'Iskra',
-      disconnectorState: 'disconnected',
+      disconnectorState: DisconnectorStateEnum.DISCONNECTED,
       childInfo: 3,
       firmware: 'Firm Ware - 1',
       id5: '977862534617',
@@ -533,7 +534,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '0',
-          interpretedValue: 'Disconnected',
+          interpretedValue: DisconnectorStateEnum.DISCONNECTED,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
       ]
@@ -573,7 +574,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadForActivation',
+          interpretedValue: DisconnectorStateEnum.READY,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
       ]
@@ -585,7 +586,7 @@ function setData(): MeterUnitsList[] {
       readStatusTimeStamp: '2020-05-09T12:02:33',
       readStatusColor: 'green',
       vendor: 'Landis+Gy',
-      disconnectorState: 'disconnected',
+      disconnectorState: DisconnectorStateEnum.DISCONNECTED,
       childInfo: 4,
       firmware: 'Firm Ware - 1',
       id5: '645461952652',
@@ -613,7 +614,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '0',
-          interpretedValue: 'Disconnected',
+          interpretedValue: DisconnectorStateEnum.DISCONNECTED,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         },
         {
@@ -621,7 +622,7 @@ function setData(): MeterUnitsList[] {
           registerType: 52,
           timestamp: '2021-02-24T08:46:19.7957895+01:00',
           value: '2',
-          interpretedValue: 'ReadyForActivation',
+          interpretedValue: DisconnectorStateEnum.DISCONNECTED,
           registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
         }
       ]
