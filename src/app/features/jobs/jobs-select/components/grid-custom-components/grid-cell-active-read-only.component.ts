@@ -1,7 +1,5 @@
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { Component, ViewChild } from '@angular/core';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

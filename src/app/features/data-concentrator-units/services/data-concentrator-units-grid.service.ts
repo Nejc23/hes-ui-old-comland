@@ -1,28 +1,28 @@
 import { Injectable } from '@angular/core';
-import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
+import { GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
-import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
-import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
-import { GridCellReadStatusComponent } from '../components/grid-custom-components/grid-cell-read-status.component';
+import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
+import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
+import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
+import { GridCellIpComponent } from '../components/grid-custom-components/grid-cell-ip.component';
+import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
+import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
 import { GridCellMetersComponent } from '../components/grid-custom-components/grid-cell-meters.component';
 import { GridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
-import { GridCellLastCommunicationComponent } from '../components/grid-custom-components/grid-cell-last-communication.component';
+import { GridCellReadStatusComponent } from '../components/grid-custom-components/grid-cell-read-status.component';
+import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
 import { GridCellTagsComponent } from '../components/grid-custom-components/grid-cell-tags.component';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
-import { GridPagination } from '../interfaces/grid-pagination.interface';
-import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
-import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
-import { GridCellIpComponent } from '../components/grid-custom-components/grid-cell-ip.component';
-import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { GridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
-import { GridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
-import * as _ from 'lodash';
-import { GridCellIconComponent } from '../components/grid-custom-components/grid-cell-icon.component';
-import { GridCellJobStatusComponent } from '../components/grid-custom-components/grid-cell-job-status.component';
-import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
-import { TranslateService } from '@ngx-translate/core';
+import { GridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
+import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
+import { GridPagination } from '../interfaces/grid-pagination.interface';
 
 @Injectable({
   providedIn: 'root'
