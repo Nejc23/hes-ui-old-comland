@@ -8,7 +8,7 @@ export class AllForJobStaticTextService {
   constructor(private translate: TranslateService) {}
 
   get headerTitleMeterUnitsAll() {
-    return this.translate.instant('PLC.METER-UNITS-FOR');
+    return this.translate.instant('PLC-METER.METER-UNITS-FOR');
   }
 
   get notAvailableTekst() {
