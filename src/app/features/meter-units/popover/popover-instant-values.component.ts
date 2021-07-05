@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { InstantValue } from 'src/app/core/repository/interfaces/meter-units/instant-value.interface';
+import { DisconnectorStateEnum } from '../types/consts/meter-units.consts';
 
 @Component({
   selector: 'app-popover-instant-values',
@@ -33,13 +34,14 @@ export class PopoverInstantValuesComponent implements OnInit {
     return `${$localize`Show all`} ${this.inputInstantValues.length} ${$localize`relays`}`;
   }
 
-  getBadgeClass(selectedValue: string) {
-    var classes = {
-      '0': 'badge-dark',
-      '1': 'badge-success',
-      '2': 'badge-info'
-    };
-
-    return classes[selectedValue];
+  getClass(type: DisconnectorStateEnum) {
+    switch (type) {
+      case DisconnectorStateEnum.CONNECTED:
+        return 'badge-success';
+      case DisconnectorStateEnum.READY:
+        return 'badge-info';
+      default:
+        return 'badge-dark';
+    }
   }
 }

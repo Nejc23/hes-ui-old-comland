@@ -7,6 +7,7 @@ import { GridResponse } from 'src/app/core/repository/interfaces/helpers/grid-re
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { MeterUnitsList } from 'src/app/core/repository/interfaces/meter-units/meter-units-list.interface';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { DisconnectorStateEnum } from '../../../src/app/features/meter-units/types/consts/meter-units.consts';
 
 describe('Pact consumer test', () => {
   let provider;
@@ -100,7 +101,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '1',
-            interpretedValue: 'Connected',
+            interpretedValue: DisconnectorStateEnum.DISCONNECTED,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           },
           {
@@ -108,7 +109,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '0',
-            interpretedValue: 'Disconnected',
+            interpretedValue: DisconnectorStateEnum.DISCONNECTED,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           }
         ]
@@ -148,7 +149,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '1',
-            interpretedValue: 'Connected',
+            interpretedValue: DisconnectorStateEnum.CONNECTED,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           },
           {
@@ -156,7 +157,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '0',
-            interpretedValue: 'Disconnected',
+            interpretedValue: DisconnectorStateEnum.DISCONNECTED,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b060'
           },
           {
@@ -164,7 +165,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '2',
-            interpretedValue: 'ReadyForReconnection',
+            interpretedValue: DisconnectorStateEnum.READY,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
           },
           {
@@ -172,7 +173,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '2',
-            interpretedValue: 'ReadyForReconnection',
+            interpretedValue: DisconnectorStateEnum.READY,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
           },
           {
@@ -180,7 +181,7 @@ describe('Pact consumer test', () => {
             registerType: 52,
             timestamp: '2021-02-24T08:46:19.7957895+01:00',
             value: '2',
-            interpretedValue: 'ReadyForReconnection',
+            interpretedValue: DisconnectorStateEnum.READY,
             registerId: '435e0506-fb98-4fa6-a140-3f83c212b061'
           }
         ]
