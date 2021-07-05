@@ -49,4 +49,11 @@ export class TopFixedNavComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
+
+  addSelectedClass(lang: string) {
+    if (this.languageService.getLang().id === lang) {
+      return 'active';
+    }
+    return '';
+  }
 }
