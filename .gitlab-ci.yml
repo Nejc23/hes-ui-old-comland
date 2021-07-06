@@ -79,7 +79,10 @@ ESLint:
   stage: lint
   script:
     - npm ci
-    - npm run lint
+    - npx eslint --format gitlab .
+  artifacts:
+    reports:
+      codequality: gl-codequality.json
 
 Unit tests:
   stage: test
