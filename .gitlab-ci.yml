@@ -84,7 +84,7 @@ ESLint:
   before_script:
     - npm ci
   script:
-    - npx eslint --format gitlab .
+    - npm run lint
   artifacts:
     reports:
       codequality: gl-codequality.json
