@@ -667,7 +667,9 @@
     "READY-FOR-ACTIVATION": "Ready for activation!",
     "HIGH-LEVEL-SECURITY": "High level security on management client is enabled on this device!",
     "SELECT-DESELECT-ALL-COLUMNS": "Select/deselect all columns",
-    "DEVICE-TYPE": "Device type"
+    "DEVICE-TYPE": "Device type",
+    "VALUE": "Value",
+    "UNIT": "Unit"
   },
   "LOGIN": {
     "TITLE": "Login",
