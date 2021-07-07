@@ -354,9 +354,9 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.valueWithUnit.value }));
     } else {
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.valueWithUnit.value }));
     }
 
     const groupBy = (array, key) => {
@@ -423,7 +423,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       return null;
     }
 
-    const values = registerValues.filter((f) => f.value).map((r) => r.value);
+    const values = registerValues.filter((f) => f.valueWithUnit?.value).map((r) => Number(r.valueWithUnit.value));
     if (values && values.length > 0) {
       const avg = values.reduce((a, b) => a + b) / values.length;
       const min = Math.min.apply(Math, values);
@@ -431,8 +431,8 @@ export class MeterUnitRegistersComponent implements OnInit {
 
       return {
         averageValue: avg,
-        minValue: registerValues.find((r) => r.value === min),
-        maxValue: registerValues.find((r) => r.value === max)
+        minValue: registerValues.find((r) => Number(r.valueWithUnit.value) === min),
+        maxValue: registerValues.find((r) => Number(r.valueWithUnit.value) === max)
       };
     } else {
       return null;
