@@ -500,12 +500,12 @@
         "TOPOLOGY-JOB": "Job topologie"
     },
     "LANGUAGE": {
-        "CS": "",
-        "DE": "de",
-        "EN": "",
-        "FR": "Ven",
-        "IT": "",
-        "SL": ""
+        "CS": "Čeština",
+        "DE": "Deutsch",
+        "EN": "English",
+        "FR": "Français",
+        "IT": "Italiano",
+        "SL": "Slovenščina"
     },
     "LOGIN": {
         "BACK-TO-LOGIN": "Retour au login",
