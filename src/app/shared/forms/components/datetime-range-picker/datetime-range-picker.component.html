@@ -18,12 +18,11 @@
       </div>
 
       <div class="pl-4">
-
-        <app-input-text [inputType]="'time'" [form]="form" [property]="'startTime'" label="Start-time" (onBlurValue)="checkTimes()"></app-input-text>
+        <app-input-text [inputType]="'time'" [form]="form" [property]="'startTime'" label="Start-time" (inputTextBlurValue)="checkTimes()"></app-input-text>
       </div>
 
       <div class="pl-3">
-        <app-input-text [inputType]="'time'" [form]="form" [property]="'endTime'" label="End-time" (onBlurValue)="checkTimes()"></app-input-text>
+        <app-input-text [inputType]="'time'" [form]="form" [property]="'endTime'" label="End-time" (inputTextBlurValue)="checkTimes()"></app-input-text>
       </div>
     </div>
 
