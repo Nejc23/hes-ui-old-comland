@@ -55,7 +55,7 @@ export const languages: Array<Language> = [
   { id: 'en', acceptLanguage: 'en-US' },
   { id: 'sl', acceptLanguage: 'sl-SI' },
   { id: 'de', acceptLanguage: 'de-DE' },
-  { id: 'cs', acceptLanguage: 'cs-CZ' },
+  { id: 'hr', acceptLanguage: 'hr_HR' },
   { id: 'fr', acceptLanguage: 'fr-FR' },
   { id: 'it', acceptLanguage: 'it-IT' }
 ];
