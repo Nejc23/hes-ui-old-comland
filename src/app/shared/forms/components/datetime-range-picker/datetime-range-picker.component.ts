@@ -4,6 +4,7 @@ import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-mate
 import { dateDisplayFormat } from '../../consts/date-format';
 
 import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-datetime-range-picker',
@@ -23,7 +24,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   today = false;
 
   locale: LocaleConfig = {
-    applyLabel: `Apply`,
+    applyLabel: this.translate.instant('BUTTON.APPLY'),
     customRangeLabel: ' - ',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
@@ -31,15 +32,15 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   };
 
   defaultRanges: any = {
-    [`Today`]: [moment(), moment()],
-    [`Yesterday`]: [moment().subtract(1, 'days'), moment()],
-    [`Last 7 Days`]: [moment().subtract(6, 'days'), moment()],
-    [`Last 30 Days`]: [moment().subtract(29, 'days'), moment()],
-    [`This Month`]: [moment().startOf('month'), moment()],
-    [`Last Month`]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+    [this.translate.instant('DAY.TODAY')]: [moment(), moment()],
+    [this.translate.instant('DAY.YESTERDAY')]: [moment().subtract(1, 'days'), moment()],
+    [this.translate.instant('DAY.LAST-7-DAYS')]: [moment().subtract(6, 'days'), moment()],
+    [this.translate.instant('DAY.LAST-30-DAYS')]: [moment().subtract(29, 'days'), moment()],
+    [this.translate.instant('DAY.CURRENT-MONTH')]: [moment().startOf('month'), moment()],
+    [this.translate.instant('DAY.LAST-MONTH')]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
   };
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     const locale_id = localStorage.getItem('lang');
     moment.locale(locale_id);
   }
@@ -55,8 +56,11 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   updateRange(range) {
-    if (range.label?.toLowerCase() === `Today`.toLowerCase()) this.today = true;
-    if (range.label?.toLowerCase() === `Today`.toLowerCase() || range.label?.toLowerCase() === `This Month`.toLowerCase()) {
+    if (range.label?.toLowerCase() === this.translate.instant('DAY.TODAY').toLowerCase()) this.today = true;
+    if (
+      range.label?.toLowerCase() === this.translate.instant('DAY.TODAY').toLowerCase() ||
+      range.label?.toLowerCase() === this.translate.instant('DAY.CURRENT-MONTH').toLowerCase()
+    ) {
       this.form.controls.endTime.setValue(moment().startOf('hour').format('HH:mm'));
     } else {
       this.form.controls.endTime.setValue('00:00');
