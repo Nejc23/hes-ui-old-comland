@@ -85,7 +85,7 @@ ESLint:
     - npm ci
   script:
     - dir
-    - npx eslint --format gitlab .\src\
+    - npx eslint --format gitlab src
   artifacts:
     reports:
       codequality: gl-codequality.json
