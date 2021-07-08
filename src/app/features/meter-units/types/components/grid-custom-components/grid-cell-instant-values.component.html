@@ -1,46 +1,23 @@
 <div class="d-flex flex-row grid-cell-link-popup" *ngIf="!areValuesEmpty()" >
-  <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isConnectedVisible">
-    <a class="badge {{ getBadgeClass(instantValues.connected) }} px-2"
-      container="body" placement="bottom"
-      [placement]="['right-top']"
-      [ngbPopover]="contentForValue1"
-      [autoClose]="'outside'"
-      popoverClass="instant-values-popover"
-      href="javascript:void(0);"
-    >{{ getValuesCount(instantValues.connected) }}</a>
-  </div>
-  <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isReadyForReconnectionVisible">
-    <a class="badge {{ getBadgeClass(instantValues.readyForConnection) }} px-2"
-      container="body" placement="bottom"
-      [placement]="['right-top']"
-      [ngbPopover]="contentForValue2"
-      [autoClose]="'outside'"
-      popoverClass="instant-values-popover"
-      href="javascript:void(0);"
-    >{{ getValuesCount(instantValues.readyForConnection) }}</a>
-  </div>
-  <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="isDisconnectedVisible">
-    <a class="badge {{ getBadgeClass(instantValues.disconnected) }} px-2"
-      container="body" placement="bottom"
-      [placement]="['right-top']"
-      [ngbPopover]="contentForValue0"
-      [autoClose]="'outside'"
-      popoverClass="instant-values-popover"
-      href="javascript:void(0);"
-    >{{ getValuesCount(instantValues.disconnected) }}</a>
-  </div>
+    <ng-container *ngFor="let state of disconnectorStateEnum">
+      <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="getDataByType(state).length > 0">
+      <a class="badge px-2"
+         [ngClass]="getClass(state)"
+         container="body" placement="bottom"
+         [placement]="['right-top']"
+         [ngbPopover]="contentForValue"
+         [autoClose]="'outside'"
+         popoverClass="instant-values-popover"
+         href="javascript:void(0);">
+        {{ getValuesCount(state) }}
+      </a>
+      </div>
+      <ng-template #contentForValue id="contentForValue">
+        <app-popover-instant-values [inputInstantValues]="getDataByType(state)"></app-popover-instant-values>
+      </ng-template>
+    </ng-container>
 </div>
 
 <span *ngIf="areValuesEmpty()" class="text-muted">{{notAvailableText}}</span>
 
-<ng-template #contentForValue1 id="contentForValue1">
-  <app-popover-instant-values [inputInstantValues]="params.value"></app-popover-instant-values>
-</ng-template>
 
-<ng-template #contentForValue2 id="contentForValue2">
-  <app-popover-instant-values [inputInstantValues]="params.value"></app-popover-instant-values>
-</ng-template>
-
-<ng-template #contentForValue0 id="contentForValue0">
-  <app-popover-instant-values [inputInstantValues]="params.value"></app-popover-instant-values>
-</ng-template>

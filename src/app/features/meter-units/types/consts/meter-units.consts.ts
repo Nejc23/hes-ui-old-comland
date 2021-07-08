@@ -16,3 +16,10 @@ export const InstantValues = {
   readyForConnection: '2',
   disconnected: '0'
 };
+
+export enum DisconnectorStateEnum {
+  CONNECTED = 'Connected',
+  READY = 'ReadyForReConnection',
+  DISCONNECTED = 'Disconnected',
+  UNDEFINED = 'UndefinedState'
+}
