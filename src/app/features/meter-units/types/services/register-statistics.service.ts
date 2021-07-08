@@ -13,7 +13,9 @@ export class RegisterStatisticsService {
       return null;
     }
 
-    const values = registerValues.filter((f) => f.valueWithUnit?.value).map((r) => Number(r.valueWithUnit.value));
+    const values = registerValues
+      .filter((f) => f.valueWithUnit?.value && !isNaN(Number(f.valueWithUnit.value)))
+      .map((r) => Number(r.valueWithUnit.value));
     if (values && values.length > 0) {
       const avg = values.reduce((a, b) => a + b) / values.length;
       const min = Math.min.apply(Math, values);

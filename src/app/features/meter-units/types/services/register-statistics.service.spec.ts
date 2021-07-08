@@ -63,6 +63,14 @@ describe('RegisterStatisticsService', () => {
         value: '2.178'
       },
       timestamp: '2020-10-29T09:36:17+01:00'
+    },
+    {
+      requestId: null,
+      valueWithUnit: {
+        unit: '',
+        value: '2.178test'
+      },
+      timestamp: '2020-10-29T09:36:17+01:00'
     }
   ];
 });
