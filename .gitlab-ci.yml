@@ -84,6 +84,7 @@ ESLint:
   before_script:
     - npm ci
   script:
+    - dir
     - npx eslint --format gitlab .\src\
   artifacts:
     reports:
