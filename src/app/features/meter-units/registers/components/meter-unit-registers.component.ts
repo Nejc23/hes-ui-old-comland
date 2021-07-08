@@ -17,6 +17,7 @@ import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
@@ -79,6 +80,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     private dataProcessingService: DataProcessingService,
     private breadcrumbService: BreadcrumbService,
     private muService: MeterUnitsService,
+    private registerStatisticsService: RegisterStatisticsService,
     private formUtils: FormsUtilsService,
     private codeList: CodelistMeterUnitsRepositoryService
   ) {}
@@ -317,7 +319,7 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
-          this.registerStatisticsData = this.getRegisterStatistics(this.rowData);
+          this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData);
 
           this.setEventData();
           this.setPageSubtitle();
@@ -416,27 +418,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   getLocalDateWithTimeString(dateTime: Date): string {
     return dateTime ? `${formatDate(dateTime, environment.dateTimeFormat)}` : '';
-  }
-
-  getRegisterStatistics(registerValues: RegisterValue[]): RegisterStatistics {
-    if (registerValues == null || registerValues.length === 0) {
-      return null;
-    }
-
-    const values = registerValues.filter((f) => f.valueWithUnit?.value).map((r) => Number(r.valueWithUnit.value));
-    if (values && values.length > 0) {
-      const avg = values.reduce((a, b) => a + b) / values.length;
-      const min = Math.min.apply(Math, values);
-      const max = Math.max.apply(Math, values);
-
-      return {
-        averageValue: avg,
-        minValue: registerValues.find((r) => Number(r.valueWithUnit.value) === min),
-        maxValue: registerValues.find((r) => Number(r.valueWithUnit.value) === max)
-      };
-    } else {
-      return null;
-    }
   }
 
   getRegisterGroupOptions(groupName: string): RadioOption[] {
