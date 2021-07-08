@@ -11,6 +11,7 @@
     <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLang">
       <div *ngFor="let lang of languages$">
         <a class="dropdown-item" href="javascript:void(0);"
+           [ngClass]="addSelectedClass(lang.id)"
            (click)="selectLang(lang.id)"> {{ 'LANGUAGE.' + lang.id.toUpperCase() | translate }}</a>
       </div>
     </div>

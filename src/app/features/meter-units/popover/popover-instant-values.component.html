@@ -4,7 +4,7 @@
       {{instantValue.registerName}}
     </div>
     <div class="col-6 text-truncate">
-      <span class="p-1 {{ getBadgeClass(instantValue.value) }}">{{instantValue.interpretedValue}}</span>
+      <span class="p-1 {{ getClass(instantValue.interpretedValue) }}">{{instantValue.interpretedValue}}</span>
     </div>
   </div>
   <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1" >

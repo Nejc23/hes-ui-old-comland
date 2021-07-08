@@ -3,108 +3,108 @@
         "NO-ALARMS": "No Alarms have been added yet"
     },
     "BREADCRUMB": {
-        "CONCENTRATOR": "Konzentrator",
-        "JOBS": "Tasks",
+        "CONCENTRATOR": "Concentrator",
+        "JOBS": "Jobs",
         "OVERVIEW": "Overview - Meter Units"
     },
     "BUTTON": {
-        "ACTIVATE": "Aktivieren",
-        "ADD": "Hinzufügen",
-        "APPLY": "Anwenden",
-        "ASSIGN": "Zuweisen",
-        "CANCEL": "Annullieren",
+        "ACTIVATE": "Activate",
+        "ADD": "Add",
+        "APPLY": "Apply",
+        "ASSIGN": "Assign",
+        "CANCEL": "Cancel",
         "CLEAR-SELECTION": "Clear selection",
-        "CLOSE": "Schliessen",
-        "CONFIRM": "Bestätigen",
-        "DELETE": "Löschen",
-        "EDIT": "Bearbeiten",
-        "IMPORT": "Importieren",
-        "NEXT": "Nächste",
-        "PREVIOUS": "Vorheriger",
-        "SAVE": "Speichern",
+        "CLOSE": "Close",
+        "CONFIRM": "Confirm",
+        "DELETE": "Delete",
+        "EDIT": "Edit",
+        "IMPORT": "Import",
+        "NEXT": "Next",
+        "PREVIOUS": "Previous",
+        "SAVE": "Save",
         "SAVE-AND-ADD-ANOTHER": "Save and Add another",
         "SAVE-AS-NEW": "Save as new",
-        "UPDATE": "Aktualisieren"
+        "UPDATE": "Update"
     },
     "COMMON": {
         "0-100-RANGE": "Value must be in range 0-100",
         "ACTION-FAILED": "Action failed",
         "ACTION-IN-PROGRESS": "Action in progress!",
-        "ACTIVATE": "Aktivieren",
+        "ACTIVATE": "Activate",
         "ACTIVATE-CLEAR-FF": "Activate Clear FF",
         "ACTIVATE-FW-UPGRADE": "Activate FW upgrade",
-        "ACTIVE": "Aktiv",
-        "ADD": "Hinzufügen",
+        "ACTIVE": "Active",
+        "ADD": "Add",
         "ADD-NEW": "Add New",
         "ADDING-TEMPLATE": "Adding template to device(s) succeeded!",
-        "ADDRESS": "Adresse",
-        "ADVANCED": "Erweitert",
-        "ALL": "Alle",
-        "AUTO-TEMPLATES": "Auto templates",
-        "BASIC": "Aus Basis",
-        "CANCEL": "Annullieren",
+        "ADDRESS": "Address",
+        "ADVANCED": "Advanced",
+        "ALL": "All",
+        "AUTO-TEMPLATES": "Auto Templates",
+        "BASIC": "Basic",
+        "CANCEL": "Cancel",
         "CANCEL-JOB": "Cancel job",
         "CII": "CII",
         "CII-ACTIVATE": "CII Activate",
         "CII-DEACTIVATE": "CII Deactivate",
-        "CLEAR-ALARMS": "Clear Alarms",
-        "COMMUNICATION": "Kommunikation",
-        "CONCENTRATORS": "Konzentratoren",
-        "CONFIGURATION": "Konfiguration",
-        "CONFIRM": "Bestätigen",
+        "CLEAR-ALARMS": "Clear alarms",
+        "COMMUNICATION": "Communication",
+        "CONCENTRATORS": "Concentrators",
+        "CONFIGURATION": "Configuration",
+        "CONFIRM": "Confirm",
         "CONFIRM-DELETE": "Confirm delete",
         "CONFIRM-OPERATION": "Confirm operation",
         "CONFIRM-REMOVE": "Confirm remove",
-        "CONNECT": "Verbinden",
-        "DAILY": "Täglich",
+        "CONNECT": "Connect",
+        "DAILY": "Daily",
         "DATA": "Data",
         "DATA-REFRESHED": "Data refreshed",
-        "DEACTIVATE": "Deaktivieren",
-        "DELETE": "Löschen",
+        "DEACTIVATE": "Deactivate",
+        "DELETE": "Delete",
         "DELETE-DEVICES": "Delete devices",
         "DELETE-JOB": "Delete job",
         "DELETE-RULE": "Delete rule",
         "DELETE-SUCCESS": "Delete successful!",
-        "DISABLE": "Deaktivieren",
-        "DISCONNECT": "Trennen",
+        "DISABLE": "Disable",
+        "DISCONNECT": "Disconnect",
         "DISCONNECTOR-CONNECT": "Disconnector connect",
         "DISCONNECTOR-DISCONNECT": "Disconnector disconnect",
-        "EDIT": "Bearbeiten",
+        "EDIT": "Edit",
         "EDIT-JOB": "Edit job",
         "EDIT-RULE": "Edit rule",
-        "ENABLE": "Aktivieren",
-        "EQUALS": "entspricht",
-        "EVERY": "Jedes",
-        "EXECUTE": "Ausführen",
+        "ENABLE": "Enable",
+        "EQUALS": "Equals",
+        "EVERY": "Every",
+        "EXECUTE": "Execute",
         "EXECUTE-JOB": "Execute job",
         "EXPRESSION-INVALID": "Expression invalid",
         "FAILED": "Failed",
-        "FOR": "für",
-        "FOUND": "found",
-        "FROM": "Von",
+        "FOR": "for",
+        "FOUND": "Found",
+        "FROM": "From",
         "GET-CII-STATE": "Get CII state",
         "GET-DISCONNECTOR-STATUS": "Get disconnector status",
         "GREATER-THAN": "Greater than",
         "HLS-DISABLED": "HLS disabled",
         "HLS-ENABLED": "HLS enabled",
-        "HOURLY": "Stündlich",
+        "HOURLY": "Hourly",
         "IMAGE-READY-FOR-ACTIVATION": "Image ready for activation",
         "IMPORT-SUBTITLE": "Selected file must be in .json file format.",
         "IMPORT-SUCCESSFUL": "Import successful",
         "IN-RANGE": "In Range",
-        "INACTIVE": "Inaktiv",
+        "INACTIVE": "Inactive",
         "INCORRECT-RANGE": "Range is not correct",
         "ITEMS-FOUND": "items found",
         "ITEMS-SELECTED": "items selected",
-        "JOBS": "Tasks",
+        "JOBS": "Jobs",
         "LESS-THAN": "Less than",
-        "LIMITER": "Begrenzer",
+        "LIMITER": "Limiter",
         "LOADING-DATA": "Loading data...",
-        "METERS": "Zähler",
-        "MINUTES": "Minuten",
-        "MODE": "Modus",
+        "METERS": "Meters",
+        "MINUTES": "Minutes",
+        "MODE": "Mode",
         "MONITOR": "Monitor",
-        "MONTHLY": "Monatlich",
+        "MONTHLY": "Monthly",
         "MORE-OPTIONS": "More options",
         "NA": "N/A",
         "NAME": "Name",
@@ -129,13 +129,13 @@
         "READ-REGISTERS-AFTER": "Read registers after",
         "READ-REGISTERS-BEFORE": "Read registers before",
         "REFRESH-ALARMS": "Refresh alarms",
-        "RELAYS": "Relais",
-        "REMOVE": "Entfernen",
+        "RELAYS": "Relays",
+        "REMOVE": "Remove",
         "REQUIRED-FIELD": "Required field",
         "RUNNING-JOB": "Running job",
-        "SAVE": "Speichern",
+        "SAVE": "Save",
         "SAVED-STATES": "Saved states",
-        "SEARCH": "Suche",
+        "SEARCH": "Search",
         "SEARCH-OBJECTS": "Search Objects",
         "SEARCH-TERM": "Search term",
         "SELECT-ALL": "Select all",
@@ -151,18 +151,18 @@
         "SHOW-OPTION": "Show option",
         "SHOW-WITHOUT-TEMPLATE": "show without template",
         "SIGN-OUT": "Sign out",
-        "STATE": "Status",
+        "STATE": "State",
         "STOP": "Stop",
         "STOP-JOB": "Stop job",
         "SUCCEEDED": "Succeeded",
         "SYNCHRONIZE-TIME": "Synchronize time",
-        "TAG": "Tag",
+        "TAG": "tag",
         "TAGS": "Tags",
-        "TO": "zu",
-        "TYPE": "Typ",
+        "TO": "to",
+        "TYPE": "Type",
         "UPLOAD-SUCCESSFUL": "Upload successful",
-        "USERNAME": "Benutzername",
-        "WEEKLY": "Wöchentlich",
+        "USERNAME": "Username",
+        "WEEKLY": "Weekly",
         "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
         "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
         "WITH-TEMPLATE": "With template",
@@ -171,31 +171,31 @@
     "DAY": {
         "CURRENT-MONTH": "Current month",
         "END-TIME-REQUIRED": "End time is required.",
-        "EVERY": "Jedes",
+        "EVERY": "Every",
         "FORM-REQUIRED": "From is required",
-        "FRI": "Fr",
+        "FRI": "Fri",
         "LAST-30-DAYS": "Last 30 days",
         "LAST-7-DAYS": "Last 7 days",
         "LAST-MONTH": "Last month",
-        "MON": "Mo",
-        "MON-FRI": "Mo-Fr",
-        "SAT": "Sa",
+        "MON": "Mon",
+        "MON-FRI": "Mon-Fri",
+        "SAT": "Sat",
         "SET-END-DATE": "set end date",
         "SET-START-DATE": "set start date",
         "START-TIME-REQUIRED": "Start time is required.",
-        "SUN": "So",
-        "THU": "Do",
-        "TODAY": "heute",
-        "TUE": "Di",
-        "WED": "Mi",
+        "SUN": "Sun",
+        "THU": "Thu",
+        "TODAY": "Today",
+        "TUE": "Tue",
+        "WED": "Wed",
         "WEEK-DAY": "Week day (MON-FRI)",
-        "YESTERDAY": "gestern"
+        "YESTERDAY": "Yesterday"
     },
     "DCU": {
         "ADD-FIRST": "Add First",
         "CONCENTRATOR-UNITS-FOR": "Concentrator units for",
-        "CONFIRM-DELETE": "Confirm delete",
-        "CONFIRM-OPERATION": "Confirm operation",
+        "CONFIRM-DELETE": "Delete {{param}} selected Data Concentrator Units?",
+        "CONFIRM-OPERATION": "Are you sure you would like to trigger {{operationName}} for selected devices?",
         "DATA-CONCENTRATOR-UNIT": "Data concentrator unit",
         "DCU-ADDED-SUCCESSFULLY": "Data Concentration Unit was added successfully",
         "DCU-UPDATED-SUCCESSFULLY": "Data Concentration Unit was updated successfully",
@@ -210,29 +210,29 @@
         "NO-DATA-CONCENTRATOR-UNITS": "You have no Data Concentrator Units yet!",
         "OPERATION-MODAL": "{{operationName}} ({{selectedCount}} selected)",
         "READ-STATUS": "read status{{additionalString}}",
-        "STATUS": "Status",
-        "TYPE": "Typ",
-        "VENDOR": "Hersteller"
+        "STATUS": "status{{additionalString}}",
+        "TYPE": "type{{additionalString}}",
+        "VENDOR": "vendor{{additionalString}}"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - page not exists"
     },
     "FILTER": {
         "CLEAR-FILTERS": "Clear Filters",
-        "FILTERED-BY": "Filtered by:",
+        "FILTERED-BY": "Filtered by: ",
         "TEMPLATE-LIST": "Templates list",
-        "TITLE": "Alarm notification"
+        "TITLE": "Filters"
     },
     "FORM": {
         "ACTIVATE-IMMEDIATELY": "Activate immediately",
-        "ACTIVE": "Aktiv",
+        "ACTIVE": "Active",
         "ADD-DCU": "Add Data Concentrator Unit",
         "ALARM-ID": "Alarm ID",
         "AUTHENTICATION-TYPE": "Authentication type",
-        "BASIC": "Aus Basis",
+        "BASIC": "Basic",
         "CHOOSE-FILE": "Choose a file",
         "CHOOSE-NEW-FILE": "Choose a new file",
-        "CII STATE": "CII State",
+        "CII STATE": "CII state",
         "CLIENT": "Client",
         "CLIENT-HIGH": "Client HIGH",
         "CLIENT-LOW": "Client LOW",
@@ -240,21 +240,21 @@
         "CONNECTION-TYPE": "Connection type",
         "CURRENT-VIEW": "Do you like the current view?",
         "DAYS": "Day(s)",
-        "DESCRIPTION": "Beschreibung",
-        "DISCONNECTOR STATE": "Unterbrecher Status",
+        "DESCRIPTION": "Description",
+        "DISCONNECTOR STATE": "Disconnector state",
         "DISCONNECTOR-MODE": "Disconnector mode",
-        "DRAG-ANOTHER": "or drag another file to try again.",
-        "DRAG-HERE": "or drag it here",
-        "DRAG-UPLOAD": "Drag to upload a new one or",
+        "DRAG-ANOTHER": " or drag another file to try again.",
+        "DRAG-HERE": " or drag it here",
+        "DRAG-UPLOAD": "Drag to upload a new one or ",
         "EMAIL": "Email",
-        "END": "Ende",
+        "END": "End",
         "END-AT": "End at",
         "END-TIME": "End time:",
         "ERROR": {
             "ACTION-NOT-EXISTS": "Action not exists",
             "DCU-ERROR": "Error saving DCU!",
             "EMAIL-ENTRY": "Entry is not a valid email:",
-            "EMAIl": "Email",
+            "EMAIl": "Entry is not a valid email",
             "INVALID-FORM": "invalid form",
             "MAX": "Exceeds max value",
             "MAXLENGTH": "Entry exceeds maximum amount of characters",
@@ -274,55 +274,55 @@
         "FILE": "File",
         "FILE-NOT-SUPPORTED": "File is not supported",
         "FILE-TYPE": "File type",
-        "FILES": "Dateien",
+        "FILES": "Files",
         "FILL-LAST-BLOCK": "Fill last block",
         "FIRMWARE": "Firmware",
         "FOR-LAST": "For last",
         "GATEWAY": "Gateway",
         "GULF": "GULF",
         "HDLC": "HDLC",
-        "HIGH": "Hoch",
+        "HIGH": "High",
         "HIGH-GMAC": "High with GMAC",
-        "HOURS": "Stunden",
-        "ID": "ID",
+        "HOURS": "Hour(s)",
+        "ID": "Id (serial number)",
         "IMAGE": "Image",
         "IMAGE-IDENTIFIER": "Image identifier",
         "IMAGE-SIGNATURE": "Image signature",
         "IMAGE-SIZE": "Image size (bytes)",
         "IP": "IP",
-        "JOBS": "Tasks",
+        "JOBS": "Jobs",
         "KEY-TYPE": "Key type",
-        "LOW": "Niedrig",
-        "MAC": "Mac",
+        "LOW": "Low",
+        "MAC": "MAC",
         "MANUFACTURER": "Manufacturer",
         "MEDIUM": "Medium",
-        "MINUTES": "Minuten",
-        "MODE": "Modus",
+        "MINUTES": "Minute(s)",
+        "MODE": "Mode",
         "NAME": "Name",
-        "NONE": "Kein",
-        "PASSWORD": "Passwort",
+        "NONE": "None",
+        "PASSWORD": "Password",
         "PASSWORD-TYPE": "Password type",
         "PHYSICAL-ADDRESS": "Physical address",
         "PORT": "Port",
-        "PROTOCOL": "Protokoll",
+        "PROTOCOL": "Protocol",
         "PUSH-TO-IEC": "Push to IEC",
         "READ-FROM-LAST-VALUE": "Read from last value",
         "REGISTER": "Register",
         "REGISTER-GROUP": "Register group",
-        "RELAY": "Relais",
+        "RELAY": "Relay",
         "SAVE-FILTERS": "Save set filters, column order/size, and use it later.",
         "SELECT-DATE": "Select date",
         "SELECT-HERE": "Select here",
         "SELECTED-FILE": "Selected file",
-        "SERIAL": "Seriennummer",
+        "SERIAL": "Serial",
         "SERIAL-NUMBER": "Serial number",
         "SERVER": "Server",
         "SERVER-HIGH": "Server HIGH",
         "SERVER-LOW": "Server LOW",
         "SET-TIME": "Set time",
-        "SEVERITY": "Schweregrad",
-        "SHOW": "Zeigen",
-        "SOURCE": "Quelle",
+        "SEVERITY": "Severity",
+        "SHOW": "Show",
+        "SOURCE": "Source",
         "START": "Start",
         "START-AT": "Start at",
         "START-TIME": "Start time:",
@@ -330,42 +330,42 @@
         "STATE": "State",
         "STATUS": "Status",
         "TAG": "Tag",
-        "TEMPLATE": "Ausleseprofile",
+        "TEMPLATE": "Template",
         "THRESHOLD": "Threshold",
         "THRESHOLD-EMERGENCY": "Threshold emergency",
         "THRESHOLD-NORMAL": "Threshold normal",
         "TYPE": "Type",
-        "UPLOAD": "Hochladen",
+        "UPLOAD": "Upload",
         "UPLOAD-FILED": "Upload failed",
         "UPLOADED-FILE": "Uploaded file",
         "UPLOADING-FILE": "Uploading file",
         "USE-LDN-AS-SYSTITLE": "Use Logical Device Name (LDN) as Systitle",
-        "USERNAME": "Benutzername",
+        "USERNAME": "Username",
         "VENDOR": "Vendor",
         "WEEK-DAYS": "Week-days",
         "WRAPPER": "Wrapper"
     },
     "GRID": {
-        "ACTIVE": "Aktiv",
+        "ACTIVE": "Active",
         "ADD-NEW-RULE": "Add new rule",
         "APPLY-SAVED-STATE": "Apply saved state or save new",
         "CII-STATE": "CII State",
         "CLEAR-SELECTED": "Clear selected",
-        "COLUMNS": "Spalten",
+        "COLUMNS": "columns",
         "CREATED-BY": "Created by",
         "CURRENT-L1": "Current L1 Monitor",
         "CURRENT-L2": "Current L2 Monitor",
         "CURRENT-L3": "Current L3 Monitor",
         "DESCRIPTION": "Description",
         "DEVICE-TYPE": "Device type",
-        "DEVICES": "Geräte",
+        "DEVICES": "Devices",
         "DISCONNECTOR-STATE": "Disconnector State",
         "EXCEL-EXPORT": "Export in excel",
-        "FILTERS": "Alarm notification",
+        "FILTERS": "filters",
         "FIRMWARE": "Firmware",
-        "FIRST": "Erstes",
+        "FIRST": "first",
         "HIGH-LEVEL-SECURITY": "High level security on management client is enabled on this device!",
-        "ID": "ID",
+        "ID": "Id",
         "ID-CONFIGURATION": "Configuration Id",
         "ID1": "ID1",
         "ID2": "ID2",
@@ -377,7 +377,7 @@
         "JOB-DESCRIPTION": "Description",
         "JOB-STATUS": "Job status",
         "JOB-TYPE": "Job Type",
-        "LAST": "Letztes",
+        "LAST": "last",
         "LAST-COMMUNICATION": "Last communication",
         "LIMITER-1-EMERGENCY": "Limiter 1 Th. emergency",
         "LIMITER-1-NORMAL": "Limiter 1 Th. normal",
@@ -385,28 +385,28 @@
         "LIMITER-2-NORMAL": "Limiter 2 Th. normal",
         "LOADING-WITH-DOTS": "loading...",
         "LOGICAL-DEVICE-NAME": "Logical device name",
-        "MANUFACTURER": "Hersteller",
+        "MANUFACTURER": "Manufacturer",
         "MEDIUM": "Medium",
         "MISSING-TEMPLATE": "Missing template!",
         "MODULE-ID": "Module Id",
-        "MORE": "mehr",
+        "MORE": "more",
         "NAME": "Name",
-        "NEXT": "Nächste",
+        "NEXT": "next",
         "NEXT-RUN": "Next run",
-        "NO-RECORDS-FOUND": "No records found.",
+        "NO-RECORDS-FOUND": "No records found. You may need to adjust your search or filter parameters.",
         "OBIS": "Obis",
-        "OF": "von",
-        "OWNER": "Besitzer",
-        "PAGE": "Seite",
+        "OF": "of",
+        "OWNER": "Owner",
+        "PAGE": "page",
         "PARAM-ID": "Parametrisation Id",
-        "PARENT": "Station",
-        "PREVIOUS": "Vorheriger",
-        "PROTOCOL": "Protokoll",
-        "READ-STATUS": "read status{{additionalString}}",
+        "PARENT": "Parent",
+        "PREVIOUS": "previous",
+        "PROTOCOL": "Protocol",
+        "READ-STATUS": "Read status",
         "READY-FOR-ACTIVATION": "Ready for activation!",
         "REFRESH-GRID": "Refresh grid",
         "REGEX": "Regex",
-        "RELAY": "Relais",
+        "RELAY": "Relay",
         "SEARCH-DATA": "Search data",
         "SELECT-ALL": "Select all",
         "SELECT-DESELECT-ALL": "Select/deselect all",
@@ -416,35 +416,35 @@
         "SEVERITY": "Severity",
         "SHOW-HIDE-COLUMNS": "Show/hide grid columns",
         "SHOW-HIDE-FILTERS": "Show/hide filters",
-        "SOURCE": "Quelle",
+        "SOURCE": "Source",
         "SOURCE-TYPE": "Source type",
         "STATUS": "Status",
         "TAG": "Tag",
         "TAGS": "Tags",
         "TIME-OF-USE-ID": "Time of use Id",
-        "TIMESTAMP": "Zeitstempel",
-        "TO": "zu",
-        "TYPE": "Typ",
+        "TIMESTAMP": "Timestamp",
+        "TO": "to",
+        "TYPE": "Type",
         "UNIT": "Unit",
-        "VALUE": "Wert",
+        "VALUE": "Value",
         "VENDOR": "Vendor"
     },
     "JOB": {
         "ACTIVE-JOB": {
             "DOWNLOADING-PACKAGES": "Downloading packages...",
-            "PENDING": "Ausstehend",
+            "PENDING": "Pending",
             "RUNNING": "Running",
-            "RUNNING-TIME": "Running time:",
-            "STATE": "Status",
+            "RUNNING-TIME": "Running Time",
+            "STATE": "State",
             "STATUS": "Status",
-            "TITLE": "Alarm notification",
+            "TITLE": "Active jobs",
             "TOTAL": "Total jobs",
-            "TYPE": "Typ"
+            "TYPE": "Type"
         },
         "ALARM-NOTIFICATION": {
             "ONE-RULE": "At least one of the rules must be active.",
             "SEND-NOTIFICATIONS-TO": "Send notifications to",
-            "SUBTITLE": "To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.",
+            "SUBTITLE": "Send notification message when alarm events matches one or more criteria bellow.",
             "TEXT": "At least one of the rules below should be active",
             "TITLE": "Alarm notification"
         },
@@ -461,46 +461,46 @@
         "EXISTING-JOBS-ASSIGNED": "Existing Jobs assigned to Meter Unit successfully",
         "JOB-CANCELED": "Job canceled!",
         "JOB-STOPPED": "Job stopped!",
-        "METER": "METER",
+        "METER": "Meter",
         "NEXT-READ": "Next planned read",
         "NO-JOBS": "No Jobs have been added yet.",
         "NOTIFICATION": "Notification",
         "READ-EVENTS": "Read events",
         "READING": "Reading",
         "READING-JOBS": "Reading Jobs",
-        "REMOVE": "Entfernen",
+        "REMOVE": "Remove from Job",
         "REMOVE-FOR-JOB": "Remove {{ selectedText }} Concentrator(s) from Job?",
         "SCHEDULER-JOB": {
-            "ADDED": "hinzugefügt",
-            "CANCEL": "Abbrechen",
+            "ADDED": "added",
+            "CANCEL": "Do you want to cancel scheduled job now?",
             "CREATE-JOB": "Create a new job",
-            "DELETE": "Löschen",
+            "DELETE": "Do you want to delete scheduler job",
             "ERROR-SAVING": "Error saving job",
-            "EXECUTE": "Ausführen",
+            "EXECUTE": "Do you want to execute scheduler job now",
             "JOB-SUCCESSFULLY": "Job was {{ operation }} successfully",
             "MORE-SAVE-OPTIONS": "More Save options",
             "SELECT-JOB": "To continue, select a job type, please.",
-            "STOP": "Stop",
-            "UPDATED": "aktualisiert"
+            "STOP": "Do you want to stop running job now?",
+            "UPDATED": "updated"
         },
         "SCHEDULER-JOB-CHANGE-STATUS": "Do you want to change scheduler job status",
         "SCHEDULER-JOB-DISABLED": "Scheduler job disabled!",
         "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
         "SCHEDULER-JOB-STARTED": "Scheduler job started!",
         "STATUS-JOB": {
-            "ERROR": "There are no templates added in the system yet.",
+            "ERROR": "Error getting status job",
             "PROGRESS": "Progress",
             "RUNNING-TIME": "Running time:",
             "TOTAL-DEVICES": "Total devices",
             "TOTAL-TIME": "Total time:"
         },
-        "SYSTEM": "SYSTEM",
+        "SYSTEM": "System",
         "TIME-SYNCHRONIZATION": "Time synchronization",
         "TOPOLOGY": "Topology",
         "TOPOLOGY-JOB": "Topology job"
     },
     "LANGUAGE": {
-        "HR": "Hrvaščina",
+        "CS": "Čeština",
         "DE": "Deutsch",
         "EN": "English",
         "FR": "Français",
@@ -512,15 +512,15 @@
         "ENTER-EMAIL": "Please enter your email to reset account password.",
         "ENTER-NEW-PASSWORD": "Please enter new password.",
         "ENTER-USERNAME-PASSWORD-TEXT": "Please enter your user name and password to login",
-        "ERROR": "There are no templates added in the system yet.",
-        "FAILED": "Failed",
+        "ERROR": "Error",
+        "FAILED": "Login failed! Check Identity server!",
         "FORGOT-PASSWORD": "Forgot password?",
         "LOGIN-SUCCESSFUL": "Login successful",
         "NEW-PASSWORD-SAVED": "New password successful saved",
-        "RESET": "zurücksetzen",
+        "RESET": "Reset",
         "RESET-PASSWORD": "Reset your password",
         "RESET-PASSWORD-SUCCESSFUL": "Reset password request successful",
-        "TITLE": "Alarm notification"
+        "TITLE": "Login"
     },
     "MENU": {
         "ADMINISTRATION": "Administration",
@@ -532,17 +532,17 @@
         "IMPORT-DEVICE-KEYS": "Import device keys",
         "IMPORT-TEMPLATES": "Import templates",
         "IMPORT-TOU-CONFIGURATION": "Import TOU configuration",
-        "JOBS": "Tasks",
+        "JOBS": "Jobs",
         "METER-UNITS": "Meter Units",
-        "METERS": "Zähler",
+        "METERS": "Meters",
         "PIN-COLLAPSE-MENU": "Pin/collapse menu",
         "POWERED-BY": "powered by Metricsx",
-        "TOOLS": "Werkzeuge",
-        "USERS": "Benutzer"
+        "TOOLS": "Tools",
+        "USERS": "Users"
     },
     "MODAL": {
-        "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger",
-        "FOR-DEVICES": "for selected devices",
+        "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
+        "FOR-DEVICES": " for selected devices",
         "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",
         "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!",
         "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
@@ -552,7 +552,7 @@
     "OPERATION": {
         "DEVICE-DISCOVERY": "Device discovery",
         "FW-UPGRADE": "FW Upgrade",
-        "OPERATIONS": "Befehle",
+        "OPERATIONS": "Operations",
         "SYNC-TIME": "Sync time",
         "SYNCHRONIZE-TIME": "Synchronize time"
     },
@@ -569,7 +569,7 @@
         "AVERAGE-VALUE": "Average value",
         "BREAKER": {
             "ALWAYS-CONNECTED": "Always connected",
-            "BREAKER": "Trennschalter",
+            "BREAKER": "Breaker",
             "BREAKER-MODE-SUCCESSFULLY": "Meter Units set Breaker mode was successfully",
             "MANUAL-LOCAL-RECONN-ALLOWED": "Manual and local re-connection allowed",
             "MANUAL-LOCAL-RECONN-ALLOWED-DISC-NOT": "Manual and local re-connection allowed / Manual disconnection not allowed",
@@ -589,9 +589,9 @@
         "DROP-SUBTITLE": "Selected file must be in .xml file format.",
         "EDIT-METER": "Edit {{ protocol }} meter",
         "ERROR-SAVING-MU": "Error saving Meter Unit!",
-        "FW-UPGRADE": "FW Upgrade",
+        "FW-UPGRADE": "Upload FW upgrade image ({{selectedRowsCount}} selected)",
         "FW-UPGRADE-TITLE": "FW upgrade",
-        "IMPORT-SUCCESSFULLY": "`Import xml file was successfully",
+        "IMPORT-SUCCESSFULLY": "Import xml file was successfully",
         "IMPORT-TOU-TITLE": "Import TOU Configuration",
         "JOB": "Job",
         "JOBS": {
@@ -661,8 +661,8 @@
             "PW_M2": "PW_M2 (Operator)",
             "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?",
             "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
-            "REKEY": "Neue Kodierung",
-            "SECURITY": "Sicherheit",
+            "REKEY": "Rekey",
+            "SECURITY": "Security",
             "SELECT-KEY-TYPE": "Please select from the list below a key type you would like to re-key.",
             "SELECT-PASSWORD-TYPE": "Please select from the list below a password type that you would like to change.",
             "UEK-DATA-COLLECTOR": "UEK_DATA_COLLECTOR (Reader)",
@@ -685,7 +685,7 @@
         "SHOW-READY-FOR-ACTIVATION": "Show only image ready for activation",
         "SUBTITLE": "To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.",
         "TEMPLATE-NOT-SELECTED": "Template is not selected",
-        "TEMPLATES": "Vorlagen",
+        "TEMPLATES": "Templates",
         "TOU-CONFIG-TITLE": "TOU Configuration",
         "TOU-UPLOAD": "TOU Upload",
         "UPLOAD-IMAGE": "Upload image",
@@ -695,7 +695,7 @@
         "AUTO-TEMPLATE": {
             "ALREADY-ADDED": "Already added empty row for new item!",
             "DCU-FOR-JOB": "Selected Concentrators removed successfully.",
-            "DELETE-RULE": "Delete rule",
+            "DELETE-RULE": "Do you want to delete rule",
             "ERROR": "There are no templates added in the system yet.",
             "JOB-ADDED-TO-ALL": "Job successfully added to all rules",
             "JOB-FAILED": "Failed to remove job from all rules.",
@@ -705,216 +705,216 @@
             "RULE-ADDED": "Rule was added successfully",
             "RULE-DELETED": "Rule deleted!",
             "RULE-UPDATED": "Rule was updated successfully",
-            "RULES": "Regeln",
-            "SELECT-JOB": "To continue, select a job type, please.",
+            "RULES": "Rules",
+            "SELECT-JOB": "Select a job to add.",
             "SHOW-HIDE": "Show/hide templates"
         },
         "IMPORT-DEVICE-KEYS": {
             "IMPORT-FAILED": "File {{ value1 }} import failed, error message: {{ value2 }",
-            "IMPORT-SUCCESSFUL": "Import successful",
-            "SUBTITLE": "To import TOU configuration, first enter a configuration name, and then select the configuration file to be imported.",
+            "IMPORT-SUCCESSFUL": "File {{ value1 }}  imported successfully, number of imported meters {{ value2 }}, number of imported keys {{ value3 }}.",
+            "SUBTITLE": "To import key material to Vault, first select the security material file type, then select the file to be imported.",
             "UPLOAD-ONE-FILE": "can only upload one file.",
             "UPLOAD-TEXT": "Selected file must be in .xml or .csv file format."
         }
     },
-    "111835559592071682": "Ungültiges Formular",
+    "111835559592071682": "invalid form",
     "kendo.autocomplete.clearTitle": {
-        "4821453594854847070": "wegnehmen"
+        "4821453594854847070": "clear"
     },
     "kendo.autocomplete.noDataText": {
-        "2690656529626907484": "Keine Daten gefunden"
+        "2690656529626907484": "NO DATA FOUND"
     },
     "kendo.calendar.today": {
-        "826701167553276328": "HEUTE"
+        "826701167553276328": "TODAY"
     },
     "kendo.combobox.clearTitle": {
-        "2025597431468961462": "löschen"
+        "2025597431468961462": "clear"
     },
     "kendo.combobox.noDataText": {
-        "7708502966028483300": "Keine Daten gefunden!"
+        "7708502966028483300": "NO DATA FOUND"
     },
     "kendo.dateinput.decrement": {
-        "6980524091606682769": "Wert verringern"
+        "6980524091606682769": "Decrease value"
     },
     "kendo.dateinput.increment": {
-        "589112377451589685": "Wert erhöhen"
+        "589112377451589685": "Increase value"
     },
     "kendo.datetimepicker.accept": {
-        "3915774704336012538": "Setzen"
+        "3915774704336012538": "Set"
     },
     "kendo.datetimepicker.acceptLabel": {
-        "4770689705864890748": "Setzen"
+        "4770689705864890748": "Set"
     },
     "kendo.datetimepicker.cancel": {
-        "5100781969600382158": "Abbrechen"
+        "5100781969600382158": "Cancel"
     },
     "kendo.datetimepicker.cancelLabel": {
-        "3535986227615756275": "Abbrechen"
+        "3535986227615756275": "Cancel"
     },
     "kendo.datetimepicker.dateTab": {
-        "3360129034450596425": "Datum"
+        "3360129034450596425": "Date"
     },
     "kendo.datetimepicker.dateTabLabel": {
-        "1810540079817643910": "Registerkarte Datum"
+        "1810540079817643910": "Date tab"
     },
     "kendo.datetimepicker.now": {
-        "5497093725885127701": "Jetzt"
+        "5497093725885127701": "NOW"
     },
     "kendo.datetimepicker.nowLabel": {
-        "5046379108717037514": "Jetzt auswählen"
+        "5046379108717037514": "Select now"
     },
     "kendo.datetimepicker.timeTab": {
-        "3807284594201983607": "Zeit"
+        "3807284594201983607": "Time"
     },
     "kendo.datetimepicker.timeTabLabel": {
-        "2577682127494513393": "Zeit"
+        "2577682127494513393": "Time tab"
     },
     "kendo.datetimepicker.today": {
-        "7904626229769721311": "HEUTE"
+        "7904626229769721311": "TODAY"
     },
     "kendo.datetimepicker.toggle": {
-        "3159207801887264026": "PopUp einblenden"
+        "3159207801887264026": "Toggle popup"
     },
     "kendo.dropdownlist.noDataText": {
-        "8289552890585138350": "Keine Daten gefunden"
+        "8289552890585138350": "NO DATA FOUND"
     },
     "kendo.fileselect.dropFilesHere": {
-        "660278350824582724": "Dateien hier ablegen"
+        "660278350824582724": "Drop files here to select"
     },
     "kendo.fileselect.invalidFileExtension": {
-        "4664331691591215211": "Dateityp nicht erlaubt."
+        "4664331691591215211": "File type not allowed."
     },
     "kendo.fileselect.invalidMaxFileSize": {
-        "7793317101233274017": "Dateigröße zu groß."
+        "7793317101233274017": "File size too large."
     },
     "kendo.fileselect.invalidMinFileSize": {
-        "6852116465202092102": "Dateigröße zu klein."
+        "6852116465202092102": "File size too small."
     },
     "kendo.fileselect.remove": {
-        "8968399983135301359": "Entfernen"
+        "8968399983135301359": "Remove"
     },
     "kendo.fileselect.select": {
-        "3297892120691863975": "Dateien auswählen..."
+        "3297892120691863975": "Select files..."
     },
     "kendo.multiselect.noDataText": {
-        "1450213984397806503": "Keine Daten gefunden!"
+        "1450213984397806503": "NO DATA FOUND"
     },
     "kendo.multiviewcalendar.nextButtonTitle": {
-        "3994336778698343633": "Zur nächsten Ansicht gehen"
+        "3994336778698343633": "Navigate to next view"
     },
     "kendo.multiviewcalendar.prevButtonTitle": {
-        "9101635325676663492": "Zur vorherigen Ansicht gehen"
+        "9101635325676663492": "Navigate to previous view"
     },
     "kendo.multiviewcalendar.today": {
-        "3892034896682737327": "Heute"
+        "3892034896682737327": "TODAY"
     },
     "kendo.numerictextbox.decrement": {
-        "3960022057994897997": "Wert verkleinern"
+        "3960022057994897997": "Decrease value"
     },
     "kendo.numerictextbox.increment": {
-        "4467784268438010275": "Wert erhöhen"
+        "4467784268438010275": "Increase value"
     },
     "kendo.switch.off": {
-        "759820891948194060": "AUS"
+        "759820891948194060": "OFF"
     },
     "kendo.switch.on": {
-        "818154782831456441": "EIN"
+        "818154782831456441": "ON"
     },
     "kendo.timeselector.accept": {
-        "5362895271044573681": "Setzen"
+        "5362895271044573681": "Set"
     },
     "kendo.timeselector.acceptLabel": {
-        "3417396278000787211": "Zeit setzen"
+        "3417396278000787211": "Set time"
     },
     "kendo.timeselector.cancel": {
-        "1890188482755567622": "Abbrechen"
+        "1890188482755567622": "Cancel"
     },
     "kendo.timeselector.cancelLabel": {
-        "5738120209397145846": "Änderungen abbrechen"
+        "5738120209397145846": "Cancel changes"
     },
     "kendo.timeselector.now": {
-        "1926162752852226109": "Jetzt"
+        "1926162752852226109": "Now"
     },
     "kendo.timeselector.nowLabel": {
-        "7789175884909488647": "Jetzt auswählen"
+        "7789175884909488647": "Select now"
     },
     "kendo.upload.cancel": {
-        "1628868291685658590": "Annullieren"
+        "1628868291685658590": "Cancel"
     },
     "kendo.upload.clearSelectedFiles": {
-        "3149650400352762187": "löschen"
+        "3149650400352762187": "Clear"
     },
     "kendo.upload.dropFilesHere": {
-        "6841325639465061593": "Dateien zum Hochladen hier ablegen"
+        "6841325639465061593": "Drop files here to upload"
     },
     "kendo.upload.fileStatusFailed": {
-        "372927175642445287": "Datei hochladen fehlgeschlagen."
+        "372927175642445287": "File failed to upload."
     },
     "kendo.upload.fileStatusUploaded": {
-        "6873833183057253097": "Datei erfolgreich hochgeladen."
+        "6873833183057253097": "File successfully uploaded."
     },
     "kendo.upload.filesBatchStatus": {
-        "1052757211842837603": "Dateien"
+        "1052757211842837603": "files"
     },
     "kendo.upload.filesBatchStatusFailed": {
-        "5934737755327152932": "Dateien hochladen fehlgeschlagen."
+        "5934737755327152932": "files failed to upload."
     },
     "kendo.upload.filesBatchStatusUploaded": {
-        "4678582374156884660": "Dateien erfolgreich hochgeladen."
+        "4678582374156884660": "Files successfully uploaded."
     },
     "kendo.upload.headerStatusPaused": {
-        "3443987862990095035": "Pausiert"
+        "3443987862990095035": "Paused"
     },
     "kendo.upload.headerStatusUploaded": {
-        "9210921126598204924": "Erledigt"
+        "9210921126598204924": "Done"
     },
     "kendo.upload.headerStatusUploading": {
-        "6336385612571616916": "Ist am Hochladen..."
+        "6336385612571616916": "Uploading..."
     },
     "kendo.upload.invalidFileExtension": {
-        "2924979995055776233": "Dateityp nicht erlaubt."
+        "2924979995055776233": "File type not allowed."
     },
     "kendo.upload.invalidMaxFileSize": {
-        "6669611501469754964": "Dateigrösse zu gross."
+        "6669611501469754964": "File size too large."
     },
     "kendo.upload.invalidMinFileSize": {
-        "4319370666600195324": "Dateigrösse zu klein."
+        "4319370666600195324": "File size too small."
     },
     "kendo.upload.pause": {
-        "2303075305806756763": "Pausiert"
+        "2303075305806756763": "Pause"
     },
     "kendo.upload.remove": {
-        "8941644637700654622": "Entfernen"
+        "8941644637700654622": "Remove"
     },
     "kendo.upload.resume": {
-        "4056147860620862675": "Zusammenfassen"
+        "4056147860620862675": "Resume"
     },
     "kendo.upload.retry": {
-        "8567960350691997515": "Wiederholen"
+        "8567960350691997515": "Retry"
     },
     "kendo.upload.select": {
-        "2943392613806104166": "Dateien auswählen..."
+        "2943392613806104166": "Select files..."
     },
     "kendo.upload.uploadSelectedFiles": {
-        "4936937427147701307": "Hochladen"
+        "4936937427147701307": "Upload"
     },
-    "ngb.datepicker.next-month": "Nächster Monat",
-    "ngb.datepicker.previous-month": "Vormonat",
-    "ngb.datepicker.select-month": "Monat selektieren",
-    "ngb.datepicker.select-year": "Jahr selektieren",
+    "ngb.datepicker.next-month": "Next month",
+    "ngb.datepicker.previous-month": "Previous month",
+    "ngb.datepicker.select-month": "Select month",
+    "ngb.datepicker.select-year": "Select year",
     "ngb.timepicker.AM": "<x id=\"INTERPOLATION\"/>",
     "ngb.timepicker.HH": "HH",
     "ngb.timepicker.MM": "MM",
     "ngb.timepicker.PM": "<x id=\"INTERPOLATION\"/>",
     "ngb.timepicker.SS": "SS",
-    "ngb.timepicker.decrement-hours": "Stunden-Dekrement",
-    "ngb.timepicker.decrement-minutes": "Minuten-Dekrement",
-    "ngb.timepicker.decrement-seconds": "Sekunden-Dekrement",
-    "ngb.timepicker.hours": "Stunden",
-    "ngb.timepicker.increment-hours": "Stunden-Inkrement",
-    "ngb.timepicker.increment-minutes": "Minuten-Inkrement",
-    "ngb.timepicker.increment-seconds": "Sekunden-Inkrement",
-    "ngb.timepicker.minutes": "Minuten",
-    "ngb.timepicker.seconds": "Sekunden",
-    "ngb.toast.close-aria": "Schliessen"
+    "ngb.timepicker.decrement-hours": "Decrement hours",
+    "ngb.timepicker.decrement-minutes": "Decrement minutes",
+    "ngb.timepicker.decrement-seconds": "Decrement seconds",
+    "ngb.timepicker.hours": "Hours",
+    "ngb.timepicker.increment-hours": "Increment hours",
+    "ngb.timepicker.increment-minutes": "Increment minutes",
+    "ngb.timepicker.increment-seconds": "Increment seconds",
+    "ngb.timepicker.minutes": "Minutes",
+    "ngb.timepicker.seconds": "Seconds",
+    "ngb.toast.close-aria": "Close"
 }

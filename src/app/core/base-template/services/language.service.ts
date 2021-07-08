@@ -13,8 +13,6 @@ export class LanguageService {
 
   selectLang(lang: string) {
     const language = this.findLanguage(lang);
-    console.log('LANGUAGE CHANGED');
-    console.log(language);
     localStorage.setItem('lang', language.id);
     this.translate.use(language.id);
     this.selectedLang = language;

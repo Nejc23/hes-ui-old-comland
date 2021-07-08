@@ -1,4 +1,4 @@
-import { InstantValues } from './../../consts/meter-units.consts';
+import { DisconnectorStateEnum, InstantValues } from '../../consts/meter-units.consts';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { MeterUnitsTypeStaticTextService } from '../../services/meter-units-type-static-text.service';
@@ -15,26 +15,13 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
 
   values: string[] = [];
   filteredData: any;
-
-  isConnectedVisible = false;
-  isDisconnectedVisible = false;
-  isReadyForReconnectionVisible = false;
+  disconnectorStateEnum = Object.values(DisconnectorStateEnum);
 
   constructor(private statictextService: MeterUnitsTypeStaticTextService) {}
-  // called on init
+
   agInit(params: any): void {
     this.params = params;
-
     this.filteredData = this.params.value.filter((value) => value.registerType === 'RELAY_CONTROL_STATE');
-    if (this.filteredData) {
-      const valuesTmp = this.filteredData.map((v) => v.value);
-      this.values = valuesTmp?.filter((v, i) => {
-        return valuesTmp.indexOf(v) === i;
-      });
-      this.isConnectedVisible = this.values?.some((v) => v === InstantValues.connected);
-      this.isReadyForReconnectionVisible = this.values?.some((v) => v === InstantValues.readyForConnection);
-      this.isDisconnectedVisible = this.values?.some((v) => v === InstantValues.disconnected);
-    }
   }
 
   // called when the cell is refreshed
@@ -43,21 +30,26 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
     return true;
   }
 
-  getValuesCount(value: number) {
-    return this.filteredData?.filter((v) => v.value === value)?.length;
+  getValuesCount(type: DisconnectorStateEnum) {
+    return this.filteredData.filter((data) => data.interpretedValue?.toLowerCase() === type.toLowerCase()).length;
   }
 
-  getBadgeClass(selectedValue: string) {
-    const classes = {
-      '0': 'badge-dark',
-      '1': 'badge-success',
-      '2': 'badge-info'
-    };
+  getDataByType(type: string) {
+    return this.filteredData.filter((data) => data.interpretedValue?.toLowerCase() === type.toLowerCase());
+  }
 
-    return classes[selectedValue];
+  getClass(type: DisconnectorStateEnum) {
+    switch (type) {
+      case DisconnectorStateEnum.CONNECTED:
+        return 'badge-success';
+      case DisconnectorStateEnum.READY:
+        return 'badge-info';
+      default:
+        return 'badge-dark';
+    }
   }
 
   areValuesEmpty() {
-    return !this.params.value || this.filteredData.length === 0;
+    return this.filteredData.length === 0;
   }
 }

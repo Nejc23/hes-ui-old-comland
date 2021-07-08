@@ -217,7 +217,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     ];
 
     breadcrumbs.push({
-      label: this.translate.instant('MENU.DATA-VIEW"'),
+      label: this.translate.instant('MENU.DATA-VIEW'),
       params: {},
       url: null
     });

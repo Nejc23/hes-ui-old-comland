@@ -17,6 +17,13 @@ import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { VERSION } from 'src/environments/version';
 import { UserLoginCredentials } from './models/user-login-form.model';
+import { LanguageService } from 'src/app/core/base-template/services/language.service';
+import { environment } from 'src/environments/environment';
+import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
+import { NewPasswordFrom, ResetPasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
+import { User } from 'oidc-client';
+import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-login',
@@ -30,7 +37,6 @@ export class UserLoginComponent implements OnInit {
   nameOf = nameOfFactory<UserLoginCredentials>();
   nameOfReset = nameOfFactory<ResetPasswordRequest>();
   nameOfNewPassword = nameOfFactory<NewPasswordFrom>();
-  // languages$: Codelist<string>[];
 
   public version = '';
   forgotPassword = false;
@@ -50,17 +56,16 @@ export class UserLoginComponent implements OnInit {
     private toast: ToastNotificationService,
     private cookieService: CookieService,
     private route: ActivatedRoute,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private translate: TranslateService
   ) {
     this.locale = localStorage.getItem('lang');
-    // this.languages$ = languages;
     this.form = this.createForm();
     this.formReset = this.createResetForm();
     this.formNewPassword = this.createNewPasswordForm();
   }
 
   ngOnInit() {
-    //  this.language = this.languages$.find(x => x.id === this.locale).value;
     this.route.queryParams.subscribe((params) => {
       this.resetToken = params.resetToken;
       if (this.resetToken !== undefined && this.resetToken.length > 0) {
@@ -104,7 +109,7 @@ export class UserLoginComponent implements OnInit {
 
   reset() {
     const request = this.authRepositoryService.requestPasswordReset(this.formReset.value);
-    const successMessage = `Reset password request successful`;
+    const successMessage = this.translate.instant('LOGIN.RESET-PASSWORD-SUCCESSFUL');
     this.formUtils.saveForm(this.formReset, request, successMessage).subscribe(
       (response) => {
         this.forgotPassword = false;
@@ -119,7 +124,7 @@ export class UserLoginComponent implements OnInit {
     this.isFormSubmitted = true;
 
     const request = this.authRepositoryService.authenticateUserDevelop(this.form.value);
-    const successMessage = `Login successful`;
+    const successMessage = this.translate.instant('LOGIN.LOGIN-SUCCESSFUL');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (token) => {
         this.isFormSubmitted = true;
@@ -136,7 +141,7 @@ export class UserLoginComponent implements OnInit {
     this.isFormSubmitted = true;
 
     const request = this.authRepositoryService.newPassword(this.formNewPassword.value);
-    const successMessage = `New password successful saved`;
+    const successMessage = this.translate.instant('LOGIN.NEW-PASSWORD-SAVED');
     this.formUtils.saveForm(this.formNewPassword, request, successMessage).subscribe(
       (token) => {
         this.isFormSubmitted = true;
@@ -152,7 +157,7 @@ export class UserLoginComponent implements OnInit {
   onError(): () => void {
     return () => {
       this.isFormSubmitted = false;
-      const errorMessage = `Login failed! Check your credentials ...`;
+      const errorMessage = this.translate.instant('LOGIN.FAILED');
       this.toast.errorToast(errorMessage);
     };
   }
