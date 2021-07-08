@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { CookieService } from 'ngx-cookie-service';
 import { User } from 'oidc-client';
@@ -17,13 +18,6 @@ import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { VERSION } from 'src/environments/version';
 import { UserLoginCredentials } from './models/user-login-form.model';
-import { LanguageService } from 'src/app/core/base-template/services/language.service';
-import { environment } from 'src/environments/environment';
-import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
-import { NewPasswordFrom, ResetPasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
-import { User } from 'oidc-client';
-import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-login',
