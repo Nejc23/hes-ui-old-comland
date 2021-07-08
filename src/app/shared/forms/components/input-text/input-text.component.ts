@@ -51,7 +51,7 @@ export class InputTextComponent implements OnInit {
     return this.formUtils.shouldInputShowErrors(this.formControl);
   }
 
-  onBlur() {
+  onBlurValue() {
     this.inputTextBlurValue.emit(true);
   }
 }
