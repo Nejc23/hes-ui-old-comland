@@ -201,6 +201,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const test123 = 1;
     // set grid columns
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
     // set right sidebar on the grid
