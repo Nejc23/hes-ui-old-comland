@@ -1,8 +1,7 @@
-import { Component, OnDestroy } from '@angular/core';
 import { IHeaderAngularComp } from '@ag-grid-community/angular';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import * as _ from 'lodash';
 import { MeterUnitsTypeGridEventEmitterService } from '../../services/meter-units-type-grid-event-emitter.service';
 
 @Component({

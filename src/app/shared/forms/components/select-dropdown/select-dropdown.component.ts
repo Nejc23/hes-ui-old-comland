@@ -1,6 +1,5 @@
-import { HostListener, ViewChild } from '@angular/core';
-import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { ComboBoxComponent } from '@progress/kendo-angular-dropdowns';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';

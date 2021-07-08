@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie-service';
+import { User, UserManager } from 'oidc-client';
 import { from, Observable, of, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { config } from 'src/environments/config';
+import { environment } from 'src/environments/environment';
+import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
+import { PermissionsStoreService } from '../../permissions/services/permissions-store.service';
+import { RoleService } from '../../permissions/services/role.service';
+import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
+import { AppStoreService } from '../../stores/services/app-store.service';
+import { loginRouteUrl } from '../consts/route-url';
 import { AuthenticatedUser } from '../interfaces/authenticated-user.interface';
 import { RefreshTokenRequest } from '../interfaces/refresh-token.interface';
-import { CookieService } from 'ngx-cookie-service';
-import { config } from 'src/environments/config';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { AppStoreService } from '../../stores/services/app-store.service';
-import * as moment from 'moment';
-import { loginRouteUrl } from '../consts/route-url';
-import { PermissionsStoreService } from '../../permissions/services/permissions-store.service';
-import { environment } from 'src/environments/environment';
-import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
-import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { JwtHelperService } from './jwt.helper.service';
-import { RoleService } from '../../permissions/services/role.service';
-import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
 
 @Injectable()
 export class AuthService {

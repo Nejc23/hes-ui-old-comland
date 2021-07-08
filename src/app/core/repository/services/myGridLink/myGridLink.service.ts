@@ -1,74 +1,25 @@
-import { meterUnits, onDemandReadMeter, onDemandRegistersType } from './../../consts/meter-units.const';
-import {
-  IActionRequestAddTemplate,
-  IActionRequestEnableHls,
-  IActionRequestDeleteDevice,
-  IActionRequestRelays,
-  IActionRequestRelaysMode,
-  IActionRequestSetDisplaySettings,
-  IActionResponseAddTemplate,
-  IActionResponseEnableHls,
-  IActionResponseDeleteDevice,
-  IActionResponseRelays,
-  IActionResponseRelaysMode,
-  IActionResponseSetDisplaySettings,
-  IActionRequestSecurityRekey,
-  IActionResponseSecurityRekey,
-  IActionRequestJobsAssignExisting,
-  IActionResponseJobsAssignExisting,
-  IActionRequestSecurityChangePassword,
-  IActionResponseSecurityChangePassword
-} from './../../interfaces/myGridLink/action-prams.interface';
-import {
-  onDemandCiiState,
-  onDemandCiiActivate,
-  onDemandCiiDeactivate,
-  onDemandRelaysState,
-  onDemandRelaysMode,
-  onDemandRelaysDisconnect,
-  onDemandRelaysConnect,
-  linkDeviceTemplate,
-  upgrade,
-  securitySetup,
-  securityEnableHls,
-  securityRekey,
-  jobsAssignExisting,
-  securityChangePassword,
-  onDemandTimeSyc
-} from './../../consts/my-grid-link.const';
-import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
+import { onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
 import {
-  IdentityToken,
-  LastStatus,
-  OnDemandRequestData,
-  RequestSetMonitor,
-  RequestSetLimiter,
-  ResponseSetMonitor,
-  ResponseSetLimiter,
-  RequestFilterParams,
-  ResponseClearFF,
-  RequestCommonRegisterGroup
-} from '../../interfaces/myGridLink/myGridLink.interceptor';
-import {
-  enumMyGridLink,
-  identityToken,
-  lastStatus,
-  onDemandConnect,
-  onDemandDisconnect,
-  triggerSetTimeOfUse,
-  onDemandDisconnectorState,
-  onDemandData,
-  importTemplates,
-  triggerDeviceUpgrade,
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
-  onDemandSetMonitor,
-  onDemandSetLimiter,
-  onDemandSetBreakerMode,
+  enumMyGridLink,
+  getCommonRegisterGroups,
+  identityToken,
+  importTemplates,
+  lastStatus,
   onDemandClearFF,
-  getCommonRegisterGroups
+  onDemandConnect,
+  onDemandData,
+  onDemandDisconnect,
+  onDemandDisconnectorState,
+  onDemandSetBreakerMode,
+  onDemandSetLimiter,
+  onDemandSetMonitor,
+  triggerDeviceUpgrade,
+  triggerSetTimeOfUse
 } from '../../consts/my-grid-link.const';
 import {
   IActionRequestFwUpgradeData,
@@ -80,8 +31,56 @@ import {
   IActionResponseSetDisconnectorMode,
   IActionResponseTOUData
 } from '../../interfaces/myGridLink/action-prams.interface';
-import { onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
+import {
+  IdentityToken,
+  LastStatus,
+  OnDemandRequestData,
+  RequestCommonRegisterGroup,
+  RequestFilterParams,
+  RequestSetLimiter,
+  RequestSetMonitor,
+  ResponseClearFF,
+  ResponseSetLimiter,
+  ResponseSetMonitor
+} from '../../interfaces/myGridLink/myGridLink.interceptor';
 import { SecurityClient } from '../../interfaces/templating/security-client.interface';
+import { meterUnits, onDemandReadMeter, onDemandRegistersType } from './../../consts/meter-units.const';
+import {
+  jobsAssignExisting,
+  linkDeviceTemplate,
+  onDemandCiiActivate,
+  onDemandCiiDeactivate,
+  onDemandCiiState,
+  onDemandRelaysConnect,
+  onDemandRelaysDisconnect,
+  onDemandRelaysMode,
+  onDemandRelaysState,
+  onDemandTimeSyc,
+  securityChangePassword,
+  securityEnableHls,
+  securityRekey,
+  securitySetup
+} from './../../consts/my-grid-link.const';
+import {
+  IActionRequestAddTemplate,
+  IActionRequestDeleteDevice,
+  IActionRequestEnableHls,
+  IActionRequestJobsAssignExisting,
+  IActionRequestRelays,
+  IActionRequestRelaysMode,
+  IActionRequestSecurityChangePassword,
+  IActionRequestSecurityRekey,
+  IActionRequestSetDisplaySettings,
+  IActionResponseAddTemplate,
+  IActionResponseDeleteDevice,
+  IActionResponseEnableHls,
+  IActionResponseJobsAssignExisting,
+  IActionResponseRelays,
+  IActionResponseRelaysMode,
+  IActionResponseSecurityChangePassword,
+  IActionResponseSecurityRekey,
+  IActionResponseSetDisplaySettings
+} from './../../interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'

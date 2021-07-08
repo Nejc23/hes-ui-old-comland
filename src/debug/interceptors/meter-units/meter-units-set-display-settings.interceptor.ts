@@ -1,7 +1,6 @@
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import * as _ from 'lodash';
 import { enumMyGridLink, getCommonRegisterGroups } from 'src/app/core/repository/consts/my-grid-link.const';
 import { ResponseCommonRegisterGroup } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 

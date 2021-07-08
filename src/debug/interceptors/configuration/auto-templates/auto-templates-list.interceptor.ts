@@ -1,7 +1,6 @@
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import * as _ from 'lodash';
 import { templates } from 'src/app/core/repository/consts/auto-templates.const';
 import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
 

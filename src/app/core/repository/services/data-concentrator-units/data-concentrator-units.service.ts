@@ -1,33 +1,33 @@
-import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { capitalize } from 'lodash';
 import { Observable } from 'rxjs';
-import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
-import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
-import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import {
-  dataConcentratorUnits,
-  dcuLayout,
-  bulkDelete,
-  addConcentrator,
-  dcuSync,
-  dcuForJob,
-  updateConcentrator,
-  removeDcuFromJob,
-  dataConcentrator
-} from '../../consts/data-concentrator-units.const';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
-import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
+import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { DcuForm, EditDcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
+import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { v4 as uuidv4 } from 'uuid';
+import {
+  addConcentrator,
+  bulkDelete,
+  dataConcentrator,
+  dataConcentratorUnits,
+  dcuForJob,
+  dcuLayout,
+  dcuSync,
+  removeDcuFromJob,
+  updateConcentrator
+} from '../../consts/data-concentrator-units.const';
 import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
-import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
+import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { DcuInsertRequest } from '../../interfaces/data-concentrator-units/dcu-insert-request.interface';
 import { DcuUpdateRequest } from '../../interfaces/data-concentrator-units/dcu-update-request.interface';
+import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
+import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
+import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
+import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
 import { IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
-import { capitalize } from 'lodash';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -93,8 +93,6 @@ export class DataConcentratorUnitsService {
   }
 
   createDcu(payload: DcuForm): Observable<string> {
-    const vendorId: number = payload.manufacturer ? payload.manufacturer.id : -1;
-
     const dcuRequest: DcuInsertRequest = {
       concentratorId: payload.serialNumber,
       concentratorIp: payload.ip,

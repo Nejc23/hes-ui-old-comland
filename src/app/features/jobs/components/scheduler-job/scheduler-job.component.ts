@@ -1,36 +1,36 @@
-import { PermissionService } from '../../../../core/permissions/services/permission.service';
-import { NotificationFilter, ReadingProperties } from '../../../../core/repository/interfaces/jobs/scheduler-job.interface';
-import { DataConcentratorUnitsSelectComponent } from '../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
-import { JobTypeEnumeration } from './../../enums/job-type.enum';
-import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
-import { CronScheduleComponent } from '../../cron-schedule/components/cron-schedule.component';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
-import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
-import { forkJoin, Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { forkJoin, Observable } from 'rxjs';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
+import { SchedulerJob, SchedulerJobForm } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
-import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
 import { DataConcentratorUnitsSelectGridService } from 'src/app/features/data-concentrator-units-select/services/data-concentrator-units-select-grid.service';
-import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { AddJobParams } from '../../interfaces/add-job-params.interace';
-import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { PlcMeterReadScheduleService } from 'src/app/features/meter-units/common/services/plc-meter-read-scheduler.service';
+import { RegistersSelectComponent } from 'src/app/features/registers-select/component/registers-select.component';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { PermissionService } from '../../../../core/permissions/services/permission.service';
+import { NotificationFilter, ReadingProperties } from '../../../../core/repository/interfaces/jobs/scheduler-job.interface';
 import { RegistersSelectRequest } from '../../../../core/repository/interfaces/registers-select/registers-select-request.interface';
-import { TranslateService } from '@ngx-translate/core';
+import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { DataConcentratorUnitsSelectComponent } from '../../../data-concentrator-units-select/component/data-concentrator-units-select.component';
+import { CronScheduleComponent } from '../../cron-schedule/components/cron-schedule.component';
+import { AddJobParams } from '../../interfaces/add-job-params.interace';
+import { JobTypeEnumeration } from './../../enums/job-type.enum';
+import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
 
 @Component({
   selector: 'app-scheduler-job',
   templateUrl: './scheduler-job.component.html'
 })
-export class SchedulerJobComponent implements OnInit {
+export class SchedulerJobComponent {
   @ViewChild(RegistersSelectComponent) registers;
   @ViewChild(DataConcentratorUnitsSelectComponent) listOfDCUs: DataConcentratorUnitsSelectComponent;
   @ViewChild('cronSchedule') cronScheduler: CronScheduleComponent;
@@ -138,8 +138,6 @@ export class SchedulerJobComponent implements OnInit {
   }
 
   initAddJobsForUser() {
-    const itemsPerRow = 3;
-
     this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
     const jobsLength = this.addJobsForUser.length;
 
@@ -197,8 +195,6 @@ export class SchedulerJobComponent implements OnInit {
         formData && formData.readingProperties && this.showIecPush() ? formData.readingProperties.iecPushEnabled : false
     });
   }
-
-  ngOnInit() {}
 
   setTitle(): string {
     switch (this.jobType) {
@@ -379,7 +375,7 @@ export class SchedulerJobComponent implements OnInit {
 
     if (this.showRegisters) {
       const selectedRegisters = this.registers.getSelectedRowNames();
-      let registers: RegistersSelectRequest[] = [];
+      const registers: RegistersSelectRequest[] = [];
       selectedRegisters.forEach((value) => {
         registers.push({
           name: value,
@@ -427,7 +423,6 @@ export class SchedulerJobComponent implements OnInit {
       (result) => {
         if (addNew) {
           this.resetAll();
-          this.ngOnInit();
         } else {
           this.modal.close();
         }

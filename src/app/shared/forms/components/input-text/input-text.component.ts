@@ -20,7 +20,7 @@ export class InputTextComponent implements OnInit {
   @Input() placeholder = '';
   @Input() iconName = '';
 
-  @Output() onBlurValue: EventEmitter<boolean> = new EventEmitter();
+  @Output() inputTextBlurValue: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -52,6 +52,6 @@ export class InputTextComponent implements OnInit {
   }
 
   onBlur() {
-    this.onBlurValue.emit(true);
+    this.inputTextBlurValue.emit(true);
   }
 }

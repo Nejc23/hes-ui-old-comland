@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from 'lodash';
-import * as moment from 'moment';
 import { Subscription } from 'rxjs';
 import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
@@ -27,17 +26,17 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 // consts
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
+import { SettingsStoreEmitterService } from '../../../core/repository/services/settings-store/settings-store-emitter.service';
+import { SidebarToggleService } from '../../../shared/base-template/components/services/sidebar.service';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 import { GridUtils } from '../../global/grid.utils';
 import { JobsSelectGridService } from '../../jobs/jobs-select/services/jobs-select-grid.service';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
+import { DcuUnitsGridLayoutStore } from '../interfaces/dcu-units-grid-layout.store';
 import { DataConcentratorUnitsGridEventEmitterService } from '../services/data-concentrator-units-grid-event-emitter.service';
 import { DataConcentratorUnitsGridService } from '../services/data-concentrator-units-grid.service';
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
 import { DcOperationsService } from '../services/dc-operations.service';
-import { SettingsStoreEmitterService } from '../../../core/repository/services/settings-store/settings-store-emitter.service';
-import { SidebarToggleService } from '../../../shared/base-template/components/services/sidebar.service';
-import { DcuUnitsGridLayoutStore } from '../interfaces/dcu-units-grid-layout.store';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 
 @Component({

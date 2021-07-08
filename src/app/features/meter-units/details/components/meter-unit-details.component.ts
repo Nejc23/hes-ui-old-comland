@@ -72,7 +72,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     };
 
     const modalRef = this.modalService.open(AddMuFormComponent, options);
-    const component: AddMuFormComponent = modalRef.componentInstance;
     modalRef.componentInstance.setFormEdit(this.data, options);
 
     modalRef.result

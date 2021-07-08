@@ -1,27 +1,27 @@
-import { PermissionService } from 'src/app/core/permissions/services/permission.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { DcuForm } from '../../interfaces/dcu-form.interface';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { Observable } from 'rxjs';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { ActivatedRoute } from '@angular/router';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { ModalService } from '../../../../core/modals/services/modal.service';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
+import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { ModalService } from '../../../../core/modals/services/modal.service';
+import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
+import { DcuForm } from '../../interfaces/dcu-form.interface';
 
 @Component({
   selector: 'app-data-concentrator-detail',
   templateUrl: './data-concentrator-detail.component.html'
 })
-export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
+export class DataConcentratorDetailComponent implements OnInit {
   form: FormGroup;
   editForm: FormGroup;
 
@@ -57,8 +57,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     // get DCU
     this.getData();
   }
-
-  ngOnDestroy() {}
 
   getData() {
     if (this.concentratorId.length > 0) {

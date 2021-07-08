@@ -1,33 +1,33 @@
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
+import { AllModules, GridApi, Module } from '@ag-grid-enterprise/all-modules';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, forkJoin } from 'rxjs';
-import { AllModules, Module, GridApi } from '@ag-grid-enterprise/all-modules';
-import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
-import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
-import { AutoTemplateRuleList, AutoTemplateRule } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
-import { Rule } from 'src/app/core/repository/interfaces/auto-templates/rule.interface';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { forkJoin, Observable } from 'rxjs';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { AutoTemplateRule, AutoTemplateRuleList } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
+import { Rule } from 'src/app/core/repository/interfaces/auto-templates/rule.interface';
+import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
+import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
+import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
+import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
+import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 
 @Component({
   selector: 'app-auto-templates',
   templateUrl: './auto-template.component.html'
 })
-export class AutoTemplateComponent implements OnInit, OnDestroy {
+export class AutoTemplateComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
 
@@ -619,6 +619,4 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   showJobSection(): boolean {
     return this.rowData && this.rowData.filter((d) => d.autoTemplateRuleId !== 'new').length > 0;
   }
-
-  ngOnDestroy() {}
 }

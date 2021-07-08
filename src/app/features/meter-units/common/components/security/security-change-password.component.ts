@@ -1,21 +1,21 @@
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { FormsUtilsService } from '../../../../../core/forms/services/forms-utils.service';
-import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
-import { Codelist } from '../../../../../shared/repository/interfaces/codelists/codelist.interface';
 import {
   IActionRequestParams,
   IActionRequestSecurityChangePassword
 } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
+import { Codelist } from '../../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './security-change-password.component.html'
 })
-export class SecurityChangePasswordComponent implements OnInit {
+export class SecurityChangePasswordComponent {
   public selectedRowsCount: number;
 
   actionRequest: IActionRequestParams;
@@ -45,8 +45,6 @@ export class SecurityChangePasswordComponent implements OnInit {
     this.selectedPasswordType = this.passwordTypes[0];
     this.form = this.createForm();
   }
-
-  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({

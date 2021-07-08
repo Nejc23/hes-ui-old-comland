@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
+import { Component, ViewChild } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

@@ -1,11 +1,11 @@
-import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
 import { Component, Input } from '@angular/core';
-import { environment } from './../../../../../../environments/environment';
-import { IntlService } from '@progress/kendo-angular-intl';
-import { RegisterValue } from 'src/app/core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { LegendItemVisualArgs, LegendLabelsContentArgs, LegendTitle } from '@progress/kendo-angular-charts';
-import { Path, Text, Group, geometry, Element, Rect as RectShape } from '@progress/kendo-drawing';
+import { IntlService } from '@progress/kendo-angular-intl';
+import { geometry, Group, Path, Rect as RectShape, Text } from '@progress/kendo-drawing';
+import { RegisterValue } from 'src/app/core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
 import { EventsById } from '../../interfaces/events-processing.interface';
+import { environment } from './../../../../../../environments/environment';
 const { Point, Rect, Size } = geometry;
 
 @Component({

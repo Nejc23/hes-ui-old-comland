@@ -30,7 +30,7 @@ export class InputMultiselectComponent implements OnInit {
   @Input() isReadOnly = false;
   @Input() inline = false;
 
-  @Output() change = new EventEmitter<any>();
+  @Output() inputMultiselectChange = new EventEmitter<any>();
 
   selectedValuesArray = [];
 
@@ -84,7 +84,7 @@ export class InputMultiselectComponent implements OnInit {
 
     // emit event when click on tekst not in checkbox
     if (clickOnText) {
-      this.change.emit(selected);
+      this.inputMultiselectChange.emit(selected);
     }
   }
 

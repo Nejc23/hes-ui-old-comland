@@ -1,15 +1,12 @@
-import { schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { CodelistPowerline } from 'src/app/shared/repository/interfaces/codelists/codelist-powerline.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { dcuStatuses, dcuTypes, dcuVendors, dcuTags } from 'src/app/core/repository/consts/data-concentrator-units.const';
-import { meterUnitTypes } from 'src/app/core/repository/consts/meter-units.const';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { Observable, of } from 'rxjs';
 import { companies } from 'src/app/core/repository/consts/authentication-endpoint-url.const';
+import { dcuStatuses, dcuTags, dcuTypes, dcuVendors } from 'src/app/core/repository/consts/data-concentrator-units.const';
+import { schedulerJobs } from 'src/app/core/repository/consts/jobs.const';
 import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
-import { enumMyGridLink } from 'src/app/core/repository/consts/my-grid-link.const';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 
 @Injectable()
 export class CodelistInterceptor {

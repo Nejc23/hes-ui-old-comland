@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
-import { VERSION } from 'src/environments/version';
-import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
+import { CookieService } from 'ngx-cookie-service';
+import { User } from 'oidc-client';
 import { AuthenticatedUser } from 'src/app/core/auth/interfaces/authenticated-user.interface';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { CookieService } from 'ngx-cookie-service';
-import { config } from 'src/environments/config';
-import { UserLoginCredentials } from './models/user-login-form.model';
 import { LanguageService } from 'src/app/core/base-template/services/language.service';
-import { environment } from 'src/environments/environment';
-import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { NewPasswordFrom, ResetPasswordRequest } from 'src/app/core/repository/interfaces/auth/authentication.interface';
-import { User } from 'oidc-client';
+import { AuthenticationRepositoryService } from 'src/app/core/repository/services/auth/authentication-repository.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { nameOfFactory } from 'src/app/shared/utils/consts/nameOfFactory.const';
 import { matchPasswordsValidator } from 'src/app/shared/validators/passwords-match-validator';
-import { TranslateService } from '@ngx-translate/core';
+import { config } from 'src/environments/config';
+import { environment } from 'src/environments/environment';
+import { VERSION } from 'src/environments/version';
+import { UserLoginCredentials } from './models/user-login-form.model';
 
 @Component({
   selector: 'app-user-login',

@@ -1,10 +1,10 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
-import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
-import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
-import { CdTimerComponent } from 'angular-cd-timer';
 import { TranslateService } from '@ngx-translate/core';
+import { CdTimerComponent } from 'angular-cd-timer';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
 
 @Component({
   selector: 'app-status-job',

@@ -1,7 +1,7 @@
-import { Injectable, LOCALE_ID, Inject } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import { languages } from 'src/environments/config';
 import { dcOperationFwUpgrade } from '../../repository/consts/data-concentrator-units.const';
 import { fwUploadFile } from '../../repository/consts/meter-units.const';

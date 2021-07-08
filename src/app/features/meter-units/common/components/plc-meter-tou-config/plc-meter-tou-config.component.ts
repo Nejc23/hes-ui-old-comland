@@ -1,19 +1,19 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
+import { IActionRequestParams, IActionRequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
-import { IActionRequestParams, IActionRequestTOUData } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-tou-config',
   templateUrl: './plc-meter-tou-config.component.html'
 })
-export class PlcMeterTouConfigComponent implements OnInit {
+export class PlcMeterTouConfigComponent {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
   form: FormGroup;
@@ -40,8 +40,6 @@ export class PlcMeterTouConfigComponent implements OnInit {
       [this.touConfigProperty]: [null, Validators.required]
     });
   }
-
-  ngOnInit() {}
 
   fillData(): number {
     return parseInt(this.form.get(this.touConfigProperty).value, 10);

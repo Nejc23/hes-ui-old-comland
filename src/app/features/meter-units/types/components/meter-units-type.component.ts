@@ -1056,7 +1056,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               }
 
               // 5th step for relays state
-              const relaysStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_RelaysState_RequestIds();
               const isRelaysState = _.find(ciiStateRequests, (x) => x === requestId);
               if (isRelaysState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe((resultsRelaysState) => {
@@ -1384,8 +1383,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const readThresholdsPromise = this.concentratorService.getThresholdValuesPost(deviceIds).toPromise();
 
     Promise.all([jobSummeryPromise, readThresholdsPromise]).then((responses) => {
-      let statusJobsData = responses[0];
-      let thresholdData = responses[1];
+      const statusJobsData = responses[0];
+      const thresholdData = responses[1];
 
       this.gridData.data.forEach((gridData) => {
         const item = statusJobsData.find((el) => el.deviceId === gridData.deviceId);

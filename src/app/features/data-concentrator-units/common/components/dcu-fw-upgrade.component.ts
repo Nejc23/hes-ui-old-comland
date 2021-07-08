@@ -1,21 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TranslateService } from '@ngx-translate/core';
+import { FileInfo } from '@progress/kendo-angular-upload';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
-import { FileInfo } from '@progress/kendo-angular-upload';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { DataConcentratorUnitsGridService } from '../../services/data-concentrator-units-grid.service';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dcu-fw-upgrade',
   templateUrl: './dcu-fw-upgrade.component.html'
 })
-export class DcuFwUpgradeComponent implements OnInit {
+export class DcuFwUpgradeComponent {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
   form: FormGroup;
@@ -48,8 +48,6 @@ export class DcuFwUpgradeComponent implements OnInit {
       [this.imageGuidProperty]: ['']
     });
   }
-
-  ngOnInit() {}
 
   // fillData(): IActionRequestDcuFwUpgradeData {
   //   const formData: IActionRequestDcuFwUpgradeData = {
