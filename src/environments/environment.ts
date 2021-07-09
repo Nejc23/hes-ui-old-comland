@@ -23,7 +23,6 @@ export const environment = {
   isDebug: true,
   licenseKey:
     'CompanyName=Metricsx d.o.o.,LicensedApplication=myGrid,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=4,AssetReference=AG-014718,ExpiryDate=2_April_2022_[v2]_MTY0ODg1NDAwMDAwMA==b6b19ef125d7b53b06e4ca6a3e6461c2',
-  ignoreLocale: true,
   thresholdValue: 7 // preconfigured threshold value in days,
 };
 

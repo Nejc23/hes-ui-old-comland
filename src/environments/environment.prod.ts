@@ -23,7 +23,6 @@ export const environment = {
   // identitiy settings
   // stsAuthority: 'http://89.212.201.202:8081/',
   // clientId: 'epoint3',
-  ignoreLocale: false,
   thresholdValue: 7
   // clientRoot: 'http://advance-hes.azurewebsites.net/npm run start',
   // clientScope: 'openid profile roles offline_access company',

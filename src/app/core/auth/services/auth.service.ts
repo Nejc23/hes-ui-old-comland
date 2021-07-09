@@ -42,15 +42,9 @@ export class AuthService {
       const settings = {
         authority: appConfig.identityServer.stsAuthority,
         client_id: appConfig.identityServer.clientId,
-        redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html`
-          : `${appConfig.identityServer.clientRoot}${this.locale}/assets/signin-callback.html`,
-        silent_redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}assets/silent-callback.html`
-          : `${appConfig.identityServer.clientRoot}${this.locale}/assets/silent-callback.html`,
-        post_logout_redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}`
-          : `${appConfig.identityServer.clientRoot}${this.locale}`,
+        redirect_uri: `${appConfig.identityServer.clientRoot}assets/signin-callback.html`,
+        silent_redirect_uri: `${appConfig.identityServer.clientRoot}assets/silent-callback.html`,
+        post_logout_redirect_uri: `${appConfig.identityServer.clientRoot}`,
         response_type: 'id_token token',
         scope: appConfig.identityServer.clientScope,
         automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew
