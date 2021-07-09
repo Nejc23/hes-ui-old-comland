@@ -261,34 +261,34 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiDeactivate, params, 1);
   }
 
-  onRelaysConnect(selectedGuid: string) {
+  onRelaysConnect() {
     const actionName = 'Relay Connect';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1, actionName);
   }
 
   // popup
-  onRelaysDisconnect(selectedGuid: string) {
+  onRelaysDisconnect() {
     const actionName = 'Relay Disconnect';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1, actionName);
   }
 
   // popup
-  onRelaysState(selectedGuid: string) {
+  onRelaysState() {
     const actionName = 'Relay State';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysState(params, paramsLegacy, 1, actionName);
   }
 
   // popup
-  onRelaysSetMode(selectedGuid: string) {
+  onRelaysSetMode() {
     const actionName = 'Relay Mode';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1, actionName);
   }
 
