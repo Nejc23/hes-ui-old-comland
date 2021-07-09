@@ -75,7 +75,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     modalRef.result
       .then((result) => {
-        this.getData();
+        this.data = result;
       })
       .catch(() => {});
   }
