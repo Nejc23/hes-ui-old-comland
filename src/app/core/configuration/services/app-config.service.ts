@@ -15,7 +15,7 @@ export class AppConfigService {
 
   loadAppConfig() {
     return this.http
-      .get(environment.ignoreLocale ? `/assets/config/config.json` : `/${this.lang}/assets/config/config.json`)
+      .get(`/assets/config/config.json`)
       .toPromise()
       .then((data) => {
         AppConfigService.settings = data as IAppConfig;
