@@ -19,7 +19,6 @@
     "postinstall": "node ./version.js",
     "format:check": "prettier --list-different \"src/app/**/*.ts\"",
     "format:write": "prettier --write \"src/app/**/*.ts\" && prettier --write \"src/debug/**/*.ts\"",
-    "tslint-check": "tslint-config-prettier-check ./tslint.json",
     "build-production:myGrid": "ng build --configuration=production-myGrid",
     "build-production:amera": "ng build --configuration=production-amera",
     "build-production:ePointHES": "ng build --configuration=production-ePointHES",
@@ -117,6 +116,7 @@
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
     "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-formatter-gitlab": "^2.2.0",
     "husky": "^4.3.6",
     "jasmine-core": "~3.6.0",
@@ -133,7 +133,6 @@
     "prettier": "^2.2.1",
     "protractor": "~7.0.0",
     "ts-node": "~9.1.1",
-    "tslint-config-prettier": "^1.18.0",
     "typescript": "~4.1.5"
   },
   "husky": {
