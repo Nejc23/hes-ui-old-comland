@@ -1,6 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { IAppConfig } from '../interfaces/app-config.interface';
 import { AppConfigStoreService } from './app-config-store.service';
 
