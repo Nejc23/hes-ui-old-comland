@@ -356,9 +356,9 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.valueWithUnit.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.valueWithUnit?.value }));
     } else {
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.valueWithUnit.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.valueWithUnit?.value }));
     }
 
     const groupBy = (array, key) => {
