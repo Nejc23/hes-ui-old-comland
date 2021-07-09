@@ -314,7 +314,18 @@ export class AddMuFormComponent implements OnInit {
     if (this.isTemplateSelected && !this.isEditMu) {
       this.templatingService.getDefaultValues(value.id).subscribe((values) => {
         this.templateDefaultValues = values;
+        if (this.templateDefaultValues.hdlcInformation || this.templateDefaultValues.wrapperInformation) {
+          this.isWrapperSelected = false;
+          this.isHdlcSelected = false;
+          if (this.templateDefaultValues.wrapperInformation) {
+            this.isWrapperSelected = true;
+          }
+          if (this.templateDefaultValues.hdlcInformation) {
+            this.isHdlcSelected = true;
+          }
+        }
         this.setDefaultFormValues();
+        this.setFormControls();
       });
     }
   }
@@ -322,6 +333,8 @@ export class AddMuFormComponent implements OnInit {
   setDefaultFormValues() {
     const wrapperInformation = this.templateDefaultValues?.wrapperInformation?.wrapperInformation;
     if (wrapperInformation && this.isWrapperSelected) {
+      this.form.get(this.communicationTypeProperty).patchValue(this.communicationTypes[0].value);
+
       this.setDefaultValue(this.wrapperClientAddressProperty, wrapperInformation.clientAddress);
       this.setDefaultValue(this.wrapperServerAddressProperty, wrapperInformation.serverAddress);
 
@@ -333,6 +346,7 @@ export class AddMuFormComponent implements OnInit {
 
     const hdlcInformation = this.templateDefaultValues?.hdlcInformation?.hdlcInformation;
     if (hdlcInformation && this.isHdlcSelected) {
+      this.form.get(this.communicationTypeProperty).patchValue(this.communicationTypes[1].value);
       this.setDefaultValue(this.clientLowProperty, hdlcInformation.clientLow);
       this.setDefaultValue(this.clientHighProperty, hdlcInformation.clientHigh);
       this.setDefaultValue(this.serverLowProperty, hdlcInformation.serverLow);
@@ -341,6 +355,15 @@ export class AddMuFormComponent implements OnInit {
       this.setDefaultValue(this.publicClientHighProperty, hdlcInformation.publicClientHigh);
       this.setDefaultValue(this.publicServerLowProperty, hdlcInformation.publicServerLow);
       this.setDefaultValue(this.publicServerHighProperty, hdlcInformation.publicServerHigh);
+    }
+
+    const advancedInformation = this.templateDefaultValues?.advancedInformation?.advancedInformation;
+    if (advancedInformation) {
+      if (advancedInformation.authenticationType) {
+        this.form.get(this.authenticationTypeProperty).setValue(advancedInformation.authenticationType);
+      }
+      this.setDefaultValue(this.advancedLdnAsSystitleProperty, advancedInformation.ldnAsSystitle);
+      this.setDefaultValue(this.advancedStartWithReleaseProperty, advancedInformation.startWithRelease);
     }
   }
 
@@ -466,7 +489,7 @@ export class AddMuFormComponent implements OnInit {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
           this.toast.successToast(successMessage);
-          this.modal.close();
+          this.modal.close(result);
         },
         (errResult) => {
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
