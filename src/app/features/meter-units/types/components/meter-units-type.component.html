@@ -1,8 +1,4 @@
-<app-auto-refresh
-      (timerExpired)="refresh()"
-      [elapseTime]="refreshInterval"
-      [hidden]="true">
-</app-auto-refresh>
+<app-auto-refresh (timerExpired)="refresh()" [elapseTime]="refreshInterval" [hidden]="true"> </app-auto-refresh>
 
 <div class="row">
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter">
@@ -11,336 +7,529 @@
     </div>
   </div>
 
-  <div class="filter-button" [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}">
+  <div class="filter-button" [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }">
+    <!-- row total items, selected filter name -->
+    <div *ngIf="!noData">
+      <div class="mb-2">
+        <div class="grid-actions">
+          <app-action-form
+            [gridColumns]="columns"
+            [isFilterOpened]="!hideFilter"
+            [filtersInfo]="filtersInfo"
+            (searchChange)="searchData($event)"
+            (refresh)="refreshGrid()"
+            (toggleFilter)="toggleFilter()"
+            (toggleWildcards)="toggleWildcards($event)"
+          >
+            <div *ngIf="!selectedAtLeastOneRowOnGrid" class="pr-3">
+              <button
+                class="btn btn-primary mr-1"
+                appHideIfPermissionUnauthorized
+                [permission]="permissionMuManage"
+                i18n
+                href="javascript:void(0)"
+                (click)="onAdd()"
+              >
+                Add
+              </button>
+            </div>
 
-<!-- row total items, selected filter name -->
-<div *ngIf="!noData">
+            <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
+              <button
+                class="btn btn-primary mr-1"
+                appHideIfPermissionUnauthorized
+                [permission]="permissionMuManage"
+                [functionality]="formFunctionality"
+                i18n
+                href="javascript:void(0)"
+                (click)="onDelete()"
+              >
+                Delete
+              </button>
+              <div
+                dropdown
+                class="btn-group"
+                appHideIfAllPermissionsUnauthorized
+                [permissions]="[
+                  permissionManageJobs,
+                  permissionAssignTemplates,
+                  permissionFwUpgrade,
+                  permissionFwUpgrade,
+                  permissionDisconnectorConnect,
+                  permissionDisconnectorDisconnect,
+                  permissionDisconnectorGetState,
+                  permissionDisconnectorSetMode,
+                  permissionCiiActivate,
+                  permissionCiiDeactivate,
+                  permissionCiiState,
+                  permissionRelaysConnect,
+                  permissionRelaysDisconnect,
+                  permissionRelaysState,
+                  permissionRelaysSetMode
+                ]"
+              >
+                <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown">
+                  <span i18n>Operations</span>
+                </button>
+                <div *dropdownMenu (click)="$event.stopPropagation()" class="dropdown-menu" style="min-width: 13rem">
+                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionManageJobs">
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>Jobs</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionManageJobs"
+                          (click)="onScheduleReadJobs()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Create new</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionManageJobs"
+                          (click)="onJobsAssignExisting()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Assign existing</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div appHideIfPermissionUnauthorized [permission]="permissionAssignTemplates">
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display" (click)="onJobsTemplates()"
+                      ><span i18n>Templates</span></a
+                    >
+                  </div>
 
-  <div class="mb-2">
-    <div class="grid-actions">
-      <app-action-form
-        [gridColumns]="columns"
-        [isFilterOpened]="!hideFilter"
-        [filtersInfo]="filtersInfo"
-        (searchChange)="searchData($event)"
-        (refresh)="refreshGrid()"
-        (toggleFilter)="toggleFilter()"
-        (toggleWildcards)="toggleWildcards($event)"
-        >
+                  <div
+                    class="dropdown-divider"
+                    appHideDividerIfPermissionsUnauthorized
+                    [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]"
+                    [permissionsBelow]="[permissionFwUpgrade]"
+                  ></div>
 
-        <div *ngIf="!selectedAtLeastOneRowOnGrid" class="pr-3">
-          <button class="btn btn-primary mr-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" i18n href="javascript:void(0)" (click)="onAdd()">Add</button>
+                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>FW upgrade</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade" (click)="onUpgrade()">
+                          <a href="javascript:void(0)"><span i18n>Upload image</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionFwUpgrade"
+                          (click)="onActivateUpgrade()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Activate image</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="dropdown-divider"
+                    appHideDividerIfPermissionsUnauthorized
+                    [permissionsAbove]="[permissionFwUpgrade]"
+                    [permissionsBelow]="[
+                      permissionDisconnectorConnect,
+                      permissionDisconnectorDisconnect,
+                      permissionDisconnectorGetState,
+                      permissionDisconnectorSetMode,
+                      permissionCiiActivate,
+                      permissionCiiDeactivate,
+                      permissionCiiState,
+                      permissionRelaysConnect,
+                      permissionRelaysDisconnect,
+                      permissionRelaysState,
+                      permissionRelaysSetMode
+                    ]"
+                  ></div>
+                  <div
+                    class="dropdown-item"
+                    appHideIfAllPermissionsUnauthorized
+                    [permissions]="[
+                      permissionDisconnectorConnect,
+                      permissionDisconnectorDisconnect,
+                      permissionDisconnectorGetState,
+                      permissionDisconnectorSetMode
+                    ]"
+                  >
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>Breaker</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionDisconnectorConnect"
+                          (click)="onConnect()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Connect</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionDisconnectorDisconnect"
+                          (click)="onDisconnect()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionDisconnectorGetState"
+                          (click)="onDisconnectorStatus()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>State</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionDisconnectorSetMode"
+                          (click)="onDisconnectorMode()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Mode</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="dropdown-item"
+                    appHideIfAllPermissionsUnauthorized
+                    [permissions]="[permissionCiiActivate, permissionCiiDeactivate, permissionCiiState]"
+                  >
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>CII</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionCiiActivate"
+                          (click)="onCiiActivate()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Activate</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionCiiDeactivate"
+                          (click)="onCiiDeactivate()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Deactivate</span></a>
+                        </div>
+                        <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionCiiState" (click)="onCiiState()">
+                          <a href="javascript:void(0)"><span i18n>State</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="dropdown-item"
+                    appHideIfAllPermissionsUnauthorized
+                    [permissions]="[permissionRelaysConnect, permissionRelaysDisconnect, permissionRelaysState, permissionRelaysSetMode]"
+                  >
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>Relays</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionRelaysConnect"
+                          (click)="onRelaysConnect()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Connect</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionRelaysDisconnect"
+                          (click)="onRelaysDisconnect()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionRelaysState"
+                          (click)="onRelaysState()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>State</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionRelaysSetMode"
+                          (click)="onRelaysSetMode()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Mode</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    class="dropdown-divider"
+                    appHideDividerIfPermissionsUnauthorized
+                    [permissionsAbove]="[
+                      permissionDisconnectorConnect,
+                      permissionDisconnectorDisconnect,
+                      permissionDisconnectorGetState,
+                      permissionDisconnectorSetMode,
+                      permissionCiiActivate,
+                      permissionCiiDeactivate,
+                      permissionCiiState,
+                      permissionRelaysConnect,
+                      permissionRelaysDisconnect,
+                      permissionRelaysState,
+                      permissionRelaysSetMode
+                    ]"
+                    [permissionsBelow]="[permissionTouUpload]"
+                  ></div>
+                  <div appHideIfPermissionUnauthorized [permission]="permissionTouUpload">
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display" (click)="onTou()"
+                      ><span i18n>TOU Upload</span></a
+                    >
+                  </div>
+                  <div
+                    class="dropdown-divider"
+                    appHideDividerIfPermissionsUnauthorized
+                    [permissionsAbove]="[permissionTouUpload]"
+                    [permissionsBelow]="[
+                      permissionSetLimiter,
+                      permissionSetMonitor,
+                      permissionClearFF,
+                      permissionSetDisplay,
+                      permissionClearAlarms
+                    ]"
+                  ></div>
+
+                  <div appHideIfPermissionUnauthorized [permission]="permissionSyncTime">
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display" (click)="onSyncTime()"
+                      ><span i18n>Synchronize time</span></a
+                    >
+                  </div>
+
+                  <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetLimiter]">
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>Limiter</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionSetLimiter"
+                          (click)="onSetLimiter()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionReadMeter"
+                          (click)="onReadLimiterThreshold()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetMonitor]">
+                    <!-- TODO permissions -->
+                    <div class="dropdown-submenu">
+                      <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"
+                        ><span i18n>Monitor</span></a
+                      >
+                      <div class="dropdown-menu">
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionSetMonitor"
+                          (click)="onSetMonitor()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
+                        </div>
+                        <div
+                          class="dropdown-item"
+                          appHideIfPermissionUnauthorized
+                          [permission]="permissionReadMeter"
+                          (click)="onReadMonitorThreshold()"
+                        >
+                          <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div appHideIfPermissionUnauthorized [permission]="permissionClearFF">
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display" (click)="onClearFF()"
+                      ><span i18n>Clear FF</span></a
+                    >
+                  </div>
+                  <div appHideIfPermissionUnauthorized [permission]="permissionSetDisplay">
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display" (click)="onSetDisplaySettings()"
+                      ><span i18n>Set Display Settings</span></a
+                    >
+                  </div>
+                  <div appHideIfPermissionUnauthorized [permission]="permissionClearAlarms">
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display gray-light-line" (click)="onClearAlarms()"
+                      ><span i18n>Clear Alarms</span></a
+                    >
+                  </div>
+
+                  <div>
+                    <a href="javascript:void(0)" class="dropdown-item custom-hover-display item-padding" (click)="onReadMeter()"
+                      ><span i18n>Read Meter</span></a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div
+                dropdown
+                class="btn-group pl-2"
+                appHideIfAllPermissionsUnauthorized
+                [permissions]="[permissionSecurityActivateHls, permissionSecurityRekey, permissionSecurityChangePassword]"
+              >
+                <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="securityDropDown" data-toggle="dropdown">
+                  <span i18n>Security</span>
+                </button>
+                <div *dropdownMenu (click)="$event.stopPropagation()" class="dropdown-menu" style="min-width: 13rem">
+                  <div appHideIfPermissionUnauthorized [permission]="permissionSecurityActivateHls">
+                    <a (click)="onSecurityActivateHls()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
+                      ><span i18n>Activate HLS</span></a
+                    >
+                  </div>
+                  <div
+                    class="dropdown-divider"
+                    appHideDividerIfPermissionsUnauthorized
+                    [permissionsAbove]="[permissionSecurityActivateHls]"
+                    [permissionsBelow]="[permissionSecurityRekey, permissionSecurityChangePassword]"
+                  ></div>
+                  <div appHideIfPermissionUnauthorized [permission]="permissionSecurityRekey">
+                    <a (click)="onSecurityRekey()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
+                      ><span i18n>Rekey</span></a
+                    >
+                  </div>
+                  <div appHideIfPermissionUnauthorized [permission]="permissionSecurityChangePassword">
+                    <a (click)="onSecurityChangePassword()" class="dropdown-item custom-hover-display" href="javascript:void(0)"
+                      ><span i18n>Change password</span></a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <button *ngIf="false" type="button" class="btn btn-primary" [disabled]="true">
+                <i class="far fa-tags"></i>
+                <span i18n>Tags</span>
+              </button>
+              <button *ngIf="false" type="button" class="btn btn-primary" [disabled]="true">
+                <i class="far fa-chart-bar" disabled></i>
+                <span i18n>Data</span>
+              </button>
+            </div>
+          </app-action-form>
         </div>
+      </div>
 
-        <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
-          <button  class="btn btn-primary mr-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" [functionality]="formFunctionality" i18n href="javascript:void(0)" (click)="onDelete()">Delete</button>
-          <div dropdown class="btn-group" appHideIfAllPermissionsUnauthorized [permissions]="[
-            permissionManageJobs,
-            permissionAssignTemplates,
-            permissionFwUpgrade,
-            permissionFwUpgrade,
-            permissionDisconnectorConnect,
-            permissionDisconnectorDisconnect,
-            permissionDisconnectorGetState,
-            permissionDisconnectorSetMode,
-            permissionCiiActivate,
-            permissionCiiDeactivate,
-            permissionCiiState,
-            permissionRelaysConnect,
-            permissionRelaysDisconnect,
-            permissionRelaysState,
-            permissionRelaysSetMode
-          ]">
-            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span i18n>Operations</span></button>
-            <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
-              <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionManageJobs">
-                <div class="dropdown-submenu">
-                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Jobs</span></a>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionManageJobs" (click)="onScheduleReadJobs()">
-                      <a href="javascript:void(0)"><span i18n>Create new</span></a>
-                    </div>
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionManageJobs" (click)="onJobsAssignExisting()">
-                      <a href="javascript:void(0)"><span i18n>Assign existing</span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionAssignTemplates">
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
-                  (click)="onJobsTemplates()"><span i18n>Templates</span></a>
-              </div>
+      <!-- load warning icon -->
+      <img [src]="'assets/images/icons/warning-icon.svg'" class="display-none" />
 
-              <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
-
-              <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
-                <div class="dropdown-submenu">
-                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>FW upgrade</span></a>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade" (click)="onUpgrade()">
-                      <a href="javascript:void(0)"><span i18n>Upload image</span></a>
-                    </div>
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade" (click)="onActivateUpgrade()">
-                    <a href="javascript:void(0)"><span i18n>Activate image</span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized
-                [permissionsAbove]="[permissionFwUpgrade]"
-                [permissionsBelow]="[permissionDisconnectorConnect,
-                                    permissionDisconnectorDisconnect,
-                                    permissionDisconnectorGetState,
-                                    permissionDisconnectorSetMode,
-                                    permissionCiiActivate,
-                                    permissionCiiDeactivate,
-                                    permissionCiiState,
-                                    permissionRelaysConnect,
-                                    permissionRelaysDisconnect,
-                                    permissionRelaysState,
-                                    permissionRelaysSetMode]"></div>
-              <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionDisconnectorConnect, permissionDisconnectorDisconnect, permissionDisconnectorGetState, permissionDisconnectorSetMode]">
-                <div class="dropdown-submenu">
-                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Breaker</span></a>
-                <div class="dropdown-menu">
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionDisconnectorConnect" (click)="onConnect()">
-                    <a href="javascript:void(0)"><span i18n>Connect</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionDisconnectorDisconnect" (click)="onDisconnect()">
-                    <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionDisconnectorGetState" (click)="onDisconnectorStatus()">
-                    <a href="javascript:void(0)"><span i18n>State</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionDisconnectorSetMode" (click)="onDisconnectorMode()">
-                    <a href="javascript:void(0)"><span i18n>Mode</span></a>
-                  </div>
-                </div>
-              </div>
-             </div>
-             <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionCiiActivate, permissionCiiDeactivate, permissionCiiState]">
-             <div class="dropdown-submenu">
-                <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>CII</span></a>
-                <div class="dropdown-menu">
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionCiiActivate" (click)="onCiiActivate()">
-                    <a href="javascript:void(0)"><span i18n>Activate</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionCiiDeactivate" (click)="onCiiDeactivate()">
-                    <a href="javascript:void(0)"><span i18n>Deactivate</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionCiiState" (click)="onCiiState()">
-                    <a  href="javascript:void(0)"><span i18n>State</span></a>
-                  </div>
-                </div>
-              </div>
-              </div>
-              <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionRelaysConnect, permissionRelaysDisconnect, permissionRelaysState, permissionRelaysSetMode]">
-                <div class="dropdown-submenu">
-                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Relays</span></a>
-                <div class="dropdown-menu">
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysConnect" (click)="onRelaysConnect()">
-                    <a href="javascript:void(0)"><span i18n>Connect</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysDisconnect" (click)="onRelaysDisconnect()" >
-                    <a href="javascript:void(0)"><span i18n>Disconnect</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysState" (click)="onRelaysState()">
-                    <a href="javascript:void(0)"><span i18n>State</span></a>
-                  </div>
-                  <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysSetMode" (click)="onRelaysSetMode()">
-                    <a href="javascript:void(0)" ><span i18n>Mode</span></a>
-                  </div>
-                </div>
-              </div>
-             </div>
-             <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized
-              [permissionsAbove]="[permissionDisconnectorConnect,
-                                    permissionDisconnectorDisconnect,
-                                    permissionDisconnectorGetState,
-                                    permissionDisconnectorSetMode,
-                                    permissionCiiActivate,
-                                    permissionCiiDeactivate,
-                                    permissionCiiState,
-                                    permissionRelaysConnect,
-                                    permissionRelaysDisconnect,
-                                    permissionRelaysState,
-                                    permissionRelaysSetMode]"
-              [permissionsBelow]="[permissionTouUpload]"></div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionTouUpload">
-                <a  href="javascript:void(0)" class="dropdown-item custom-hover-display"
-                  (click)="onTou()"><span i18n>TOU Upload</span></a>
-              </div>
-              <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized
-                [permissionsAbove]="[permissionTouUpload]"
-                [permissionsBelow]="[permissionSetLimiter,
-                                    permissionSetMonitor,
-                                    permissionClearFF,
-                                    permissionSetDisplay,
-                                    permissionClearAlarms]"></div>
-
-              <div appHideIfPermissionUnauthorized [permission]="permissionSyncTime">
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
-                   (click)="onSyncTime()"><span i18n>Synchronize time</span></a>
+      <!-- ag-grid -->
+      <div class="content-body-scroll">
+        <div>
+          <ag-grid-angular
+            class="ag-theme-epoint custom-paging"
+            style="width: 100%; height: calc(100% - 25px)"
+            #agGrid
+            [domLayout]="agGridSettings.domLayout"
+            [localeText]="localeText"
+            [modules]="modules"
+            [icons]="icons"
+            [pagination]="agGridSettings.pagination"
+            [multiSortKey]="agGridSettings.multiSortKey"
+            [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+            [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+            [frameworkComponents]="frameworkComponents"
+            [maxBlocksInCache]="1"
+            [gridOptions]="gridOptions"
+            [columnDefs]="columns"
+            [suppressRowClickSelection]="agGridSettings.suppressRowClickSelection"
+            [rowSelection]="agGridSettings.rowSelection"
+            [sideBar]="sideBar"
+            [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+            [overlayLoadingTemplate]="overlayLoadingTemplate"
+            (selectionChanged)="onSelectionChanged()"
+            (gridReady)="onGridReady($event)"
+            (columnVisible)="onColumnVisible($event)"
+            (paginationChanged)="onPaginationChange($event)"
+            (rowSelected)="onRowSelect($event)"
+            (firstDataRendered)="onFirstDataRendered($event)"
+            (gridSizeChanged)="gridSizeChanged()"
+            [paginationPageSize]="selectedPageSize.id"
+            [cacheBlockSize]="selectedPageSize.id"
+            [suppressColumnVirtualisation]="true"
+          >
+          </ag-grid-angular>
+          <div class="ag-paging-panel-selection d-flex">
+            <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
+              <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+                <small class="link text-secondary"
+                  >{{ getSelectedCount() }}
+                  <strong
+                    ><span i18n>items selected</span> &middot;
+                    <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
+                      <span i18n>Select all</span>({{ totalCount }})</a
+                    >
+                    &middot;
+                    <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"> <span i18n>Clear selected</span></a>
+                  </strong></small
+                >
               </div>
 
-              <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetLimiter]">
-                <div class="dropdown-submenu">
-                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Limiter</span></a>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter" (click)="onSetLimiter()">
-                      <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
-                    </div>
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadLimiterThreshold()">
-                      <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
-                    </div>
-                  </div>
-                </div>
+              <div class="mr-3" *ngIf="checkSelectedAll()">
+                <small class="link text-secondary"
+                  ><strong
+                    ><span i18n>All</span> ({{ getTotalCountWithoutExcludedDisplay() }}) <span i18n>items selected</span> &middot;
+                    <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()"> <span i18n>Clear selected</span></a></strong
+                  ></small
+                >
               </div>
-
-              <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSetMonitor]">  <!-- TODO permissions -->
-                <div class="dropdown-submenu">
-                  <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span i18n>Monitor</span></a>
-                  <div class="dropdown-menu">
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor" (click)="onSetMonitor()">
-                      <a href="javascript:void(0)"><span i18n>Set thresholds</span></a>
-                    </div>
-                    <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionReadMeter" (click)="onReadMonitorThreshold()">
-                      <a href="javascript:void(0)"><span i18n>Read thresholds</span></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div appHideIfPermissionUnauthorized [permission]="permissionClearFF">
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
-                  (click)="onClearFF()"><span i18n>Clear FF</span></a>
-              </div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionSetDisplay">
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
-                  (click)="onSetDisplaySettings()"><span i18n>Set Display Settings</span></a>
-              </div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionClearAlarms">
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display gray-line"
-                  (click)="onClearAlarms()"><span i18n>Clear Alarms</span></a>
-              </div>
-
-              <div>
-                <a href="javascript:void(0)" class="dropdown-item custom-hover-display item-padding"
-                   (click)="onReadMeter()"><span i18n>Read Meter</span></a>
-              </div>
-
+            </div>
+            <div class="ml-auto">
+              <app-select-dropdown
+                i18n-label
+                [form]="form"
+                [property]="pageSizeProperty"
+                [selectOptions]="pageSizes"
+                [disabled]="false"
+                (selectedValueChanged)="pageSizeChanged($event)"
+              >
+              </app-select-dropdown>
             </div>
           </div>
-
-          <div dropdown class="btn-group pl-2" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSecurityActivateHls, permissionSecurityRekey, permissionSecurityChangePassword]">
-            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="securityDropDown" data-toggle="dropdown"><span i18n>Security</span></button>
-            <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
-              <div appHideIfPermissionUnauthorized [permission]="permissionSecurityActivateHls">
-                <a (click)="onSecurityActivateHls()" class="dropdown-item custom-hover-display" href="javascript:void(0)"><span i18n>Activate HLS</span></a>
-              </div>
-              <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized
-                [permissionsAbove]="[permissionSecurityActivateHls]"
-                [permissionsBelow]="[permissionSecurityRekey,
-                                    permissionSecurityChangePassword]"></div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionSecurityRekey">
-                <a (click)="onSecurityRekey()" class="dropdown-item custom-hover-display" href="javascript:void(0)"><span i18n>Rekey</span></a>
-              </div>
-              <div appHideIfPermissionUnauthorized [permission]="permissionSecurityChangePassword">
-                <a (click)="onSecurityChangePassword()" class="dropdown-item custom-hover-display" href="javascript:void(0)"><span i18n>Change password</span></a>
-              </div>
-            </div>
-          </div>
-
-          <button *ngIf="false" type="button" class="btn btn-primary" [disabled]="true">
-            <i class="far fa-tags"></i>
-            <span i18n>Tags</span>
-          </button>
-          <button *ngIf="false" type="button" class="btn btn-primary" [disabled]="true">
-            <i class="far fa-chart-bar" disabled></i>
-            <span i18n>Data</span>
-          </button>
         </div>
-      </app-action-form>
-    </div>
-  </div>
-
-  <!-- load warning icon -->
-  <img [src]="'assets/images/icons/warning-icon.svg'" class="display-none" />
-
-  <!-- ag-grid -->
-  <div class="content-body-scroll">
-    <div>
-      <ag-grid-angular
-        class="ag-theme-epoint custom-paging"
-        style="width: 100%; height: calc(100% - 25px);"
-        #agGrid
-
-        [domLayout]=agGridSettings.domLayout
-        [localeText]="localeText"
-
-        [modules]="modules"
-        [icons]="icons"
-        [pagination]=agGridSettings.pagination
-
-        [multiSortKey]=agGridSettings.multiSortKey
-        [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-        [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-        [frameworkComponents]="frameworkComponents"
-        [maxBlocksInCache]="1"
-        [gridOptions]="gridOptions"
-        [columnDefs]="columns"
-
-        [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
-        [rowSelection]=agGridSettings.rowSelection
-        [sideBar]="sideBar"
-
-        [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-        [overlayLoadingTemplate]="overlayLoadingTemplate"
-        (selectionChanged)="onSelectionChanged()"
-        (gridReady)="onGridReady($event)"
-        (columnVisible)="onColumnVisible($event)"
-        (paginationChanged)="onPaginationChange($event)"
-        (rowSelected)="onRowSelect($event)"
-        (firstDataRendered)="onFirstDataRendered($event)"
-        (gridSizeChanged)="gridSizeChanged()"
-        [paginationPageSize]="selectedPageSize.id"
-        [cacheBlockSize]="selectedPageSize.id"
-        [suppressColumnVirtualisation]="true"
-        >
-      </ag-grid-angular>
-      <div class="ag-paging-panel-selection d-flex">
-        <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
-          <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
-            <small class="link text-secondary">{{getSelectedCount()}} <strong><span i18n>items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
-                <span i18n>Select all</span>({{totalCount}})</a> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
-                <span i18n>Clear selected</span></a>
-                  </strong></small>
+        <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height: 80vh">
+          <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
+          <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
+          <div class="p-1">
+            <button type="button" class="btn btn-primary bg-primary">
+              <i class="far fa-plus"> <span i18n> Add New</span></i>
+            </button>
           </div>
-
-          <div class="mr-3" *ngIf="checkSelectedAll()">
-            <small class="link text-secondary"><strong><span i18n>All</span> ({{getTotalCountWithoutExcludedDisplay()}}) <span i18n>items selected</span> &middot;
-              <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
-                <span i18n>Clear selected</span></a></strong></small>
-          </div>
-        </div>
-        <div class="ml-auto">
-          <app-select-dropdown i18n-label [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
-            [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
-          </app-select-dropdown>
         </div>
       </div>
     </div>
-    <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height:80vh;">
-      <div class="p-1"><i class="far fa-empty-set fa-3x text-secondary"></i></div>
-      <div class="p-1"><h2 i18n>You have no Data Concentrator Units yet!</h2></div>
-      <div class="p-1"><button type="button" class="btn btn-primary bg-primary" ><i class="far fa-plus">
-        <span i18n> Add New</span></i>
-      </button></div>
-    </div>
-    </div>
+  </div>
+  <ng-template #tipMoreSave><span i18n>More options</span></ng-template>
+  <ng-template #hidwShowFilters><span i18n>Show/hide filters</span></ng-template>
 </div>
-</div>
-<ng-template #tipMoreSave><span i18n>More options</span></ng-template>
-<ng-template #hidwShowFilters><span i18n>Show/hide filters</span></ng-template>
