@@ -111,6 +111,10 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
     this.params.context.componentParent.onClearAlarms(this.params.data.deviceId);
   }
 
+  onReadMeter() {
+    this.params.context.componentParent.onReadMeter(this.params.data.deviceId);
+  }
+
   // permission rights
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;

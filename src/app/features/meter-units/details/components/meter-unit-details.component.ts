@@ -387,4 +387,9 @@ export class MeterUnitDetailsComponent implements OnInit {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.syncTime, params, 1);
   }
+
+  onReadMeter() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.onReadRegisters(params, 1);
+  }
 }
