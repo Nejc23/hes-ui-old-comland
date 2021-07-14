@@ -13,12 +13,12 @@
     </kendo-chart-value-axis-item>
   </kendo-chart-value-axis>
   <kendo-chart-series>
-    <kendo-chart-series-item margin="0" [markers]="{size: 4}" [highlight]="{markers: { border: { width:0 }}}" padding="0" width="1" type="line" [data]="chartDataItem" field="valueWithUnit.value" *ngFor="let chartDataItem of chartData">
+    <kendo-chart-series-item margin="0" [markers]="{size: 4}" [highlight]="{markers: { border: { width:0 }}}" padding="0" width="1" type="line" [data]="chartDataItem" field="value" *ngFor="let chartDataItem of chartData">
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem"  >
           <div style="text-align:center;">
             <div class="text-black-50 small">{{ dataItem.timestamp | formatDateTime }}</div>
-            <div>{{ dataItem.valueWithUnit.value }} {{ dataItem.valueWithUnit?.unit }}</div>
+            <div>{{ dataItem.value }} {{ dataItem.valueWithUnit?.unit }}</div>
             <div>{{ dataItem.status }}</div>
           </div>
         </ng-template>
