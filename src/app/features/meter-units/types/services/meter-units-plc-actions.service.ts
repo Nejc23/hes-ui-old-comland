@@ -531,6 +531,10 @@ export class MeterUnitsPlcActionsService {
         response = this.service.readThresholdValues(params);
         operationName = $localize`Read limiter threshold values`;
         break;
+      case MeterUnitsTypeEnum.readMeter:
+        response = this.service.readMeterValues(params);
+        operationName = $localize`Read meter`;
+        break;
       case MeterUnitsTypeEnum.syncTime:
         response = this.service.synchronizeTime(params);
         operationName = $localize`Synchronize time`;

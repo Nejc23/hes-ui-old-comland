@@ -9,6 +9,7 @@ import { MuWrapperInformation } from 'src/app/core/repository/interfaces/meter-u
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 
 export interface MuUpdateForm {
+  // dlms
   deviceId: string;
   name: string;
   manufacturer: Codelist<number>;
@@ -27,4 +28,9 @@ export interface MuUpdateForm {
   hdlcInformation?: MuHdlcInformation;
   protocol: number;
   referencingType: ReferenceType;
+}
+
+export interface MuUpdatePlcForm {
+  deviceId: string;
+  name: string;
 }

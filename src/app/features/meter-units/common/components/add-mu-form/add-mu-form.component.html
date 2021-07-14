@@ -17,75 +17,77 @@
                 </div>
               </div>
 
-              <div class="form-row">
-                <div class="col-12">
-                  <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="manufacturerProperty" [selectOptions]="manufacturers"
-                    [disabled]="false">
-                  </app-select-input>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  <app-input-text  *ngIf="isEditMu" i18n-label label="Protocol" [form]="form" [property]="protocolProperty"
-                    [disabled]="true">
-                  </app-input-text>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  <app-select-input *ngIf="!isEditMu" i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
-                    [disabled]="false" (selectedValueChanged)="templateChanged($event)">
-                  </app-select-input>
-                  <app-input-text  *ngIf="isEditMu" i18n-label label="Template" [form]="form" [property]="templateStringProperty"
-                    [disabled]="true">
-                  </app-input-text>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="col-12">
-                  <app-select-input i18n-label label="Connection type" [form]="form" [property]="connectionTypeProperty" [selectOptions]="connectionTypes"
-                    [disabled]="false" (selectedValueChanged)="onConnectionTypeChanged($event)">
-                  </app-select-input>
-                </div>
-              </div>
-
-              <div class="form-row" *ngIf="isConnectionTypeIp">
-                <div class="col-6">
-                  <app-input-text dis [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
-                </div>
-                <div class="col-3">
-                  <app-input-numeric i18n-label [label]="'Port'" [form]="form" [property]="portProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-                    [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
-                </div>
-              </div>
-
-              <div class="form-row" *ngIf="isNewOrProtocolDlms">
-                <div class="col-12">
-                  <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
-                    name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" [hideCheckbox]="true" (selectionChanged)="communicationTypeChanged($event, !isEditMu)" >
-                  </app-input-radio>
-                </div>
-              </div>
-
-              <div class="form-row" *ngIf="isHdlcSelected">
-                <div class="col-12">
-
-                  <div class="d-flex justify-content-between gray-line gray-line-top py-3 mt-4">
-                    <div class="modal-checkbox-label">
-                      <div class="text-normal-bold" i18n>Short names referencing</div>
-                      <div class="tiny-text gray-color-dark pt-1" i18n>Address object by their short addresses instead of logical names when turned on.</div>
-                    </div>
-                    <div>
-                      <kendo-switch class="mt-2" [(ngModel)]="shortNameSelected"
-                                    (valueChange)="onShortNameChanges($event)"></kendo-switch>
-                    </div>
+              <ng-container *ngIf="!plcDevice">
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input i18n-label label="Manufacturer" [form]="form" [property]="manufacturerProperty" [selectOptions]="manufacturers"
+                                      [disabled]="false">
+                    </app-select-input>
                   </div>
-
                 </div>
-              </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-input-text  *ngIf="isEditMu" i18n-label label="Protocol" [form]="form" [property]="protocolProperty"
+                                     [disabled]="true">
+                    </app-input-text>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input *ngIf="!isEditMu" i18n-label label="Template" [form]="form" [property]="templateProperty" [selectOptions]="templates"
+                                      [disabled]="false" (selectedValueChanged)="templateChanged($event)">
+                    </app-select-input>
+                    <app-input-text  *ngIf="isEditMu" i18n-label label="Template" [form]="form" [property]="templateStringProperty"
+                                     [disabled]="true">
+                    </app-input-text>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input i18n-label label="Connection type" [form]="form" [property]="connectionTypeProperty" [selectOptions]="connectionTypes"
+                                      [disabled]="false" (selectedValueChanged)="onConnectionTypeChanged($event)">
+                    </app-select-input>
+                  </div>
+                </div>
+
+                <div class="form-row" *ngIf="isConnectionTypeIp">
+                  <div class="col-6">
+                    <app-input-text dis [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+                  </div>
+                  <div class="col-3">
+                    <app-input-numeric i18n-label [label]="'Port'" [form]="form" [property]="portProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
+                                       [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" [noFlex]="true"></app-input-numeric>
+                  </div>
+                </div>
+
+                <div class="form-row" *ngIf="isNewOrProtocolDlms">
+                  <div class="col-12">
+                    <app-input-radio i18n-label label="Communication type" [form]="form" [property]="communicationTypeProperty"
+                                     name="fileTypeRadio" [options]="communicationTypes" box="true" [hideLabelSmall]="true" [hideCheckbox]="true" (selectionChanged)="communicationTypeChanged($event, !isEditMu)" >
+                    </app-input-radio>
+                  </div>
+                </div>
+
+                <div class="form-row" *ngIf="isHdlcSelected">
+                  <div class="col-12">
+
+                    <div class="d-flex justify-content-between gray-line gray-line-top py-3 mt-4">
+                      <div class="modal-checkbox-label">
+                        <div class="text-normal-bold" i18n>Short names referencing</div>
+                        <div class="tiny-text gray-color-dark pt-1" i18n>Address object by their short addresses instead of logical names when turned on.</div>
+                      </div>
+                      <div>
+                        <kendo-switch class="mt-2" [(ngModel)]="shortNameSelected"
+                                      (valueChange)="onShortNameChanges($event)"></kendo-switch>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+              </ng-container>
 
             </div>
 
