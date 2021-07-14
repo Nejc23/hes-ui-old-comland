@@ -1,4 +1,4 @@
-import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { MuUpdateForm, MuUpdatePlcForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
@@ -41,6 +41,7 @@ export class AddMuFormComponent implements OnInit {
   form: FormGroup;
   editMu: MeterUnitDetails;
   isEditMu = false;
+  plcDevice = false;
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
@@ -238,15 +239,18 @@ export class AddMuFormComponent implements OnInit {
       authenticationType = this.authenticationTypes[1];
     }
     return this.formBuilder.group({
-      [this.nameProperty]: [editMu?.name, Validators.required],
+      [this.nameProperty]: [editMu?.name],
       [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
       [this.templateProperty]: [{ value: null, disabled: this.isEditMu }, Validators.required],
       [this.templateStringProperty]: [{ value: editMu?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
 
-      [this.ipProperty]: [editMu?.ip, [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-      [this.portProperty]: [editMu?.port],
+      [this.ipProperty]: [
+        { value: editMu?.ip, disabled: this.plcDevice },
+        this.plcDevice ? null : [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]
+      ],
+      [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
 
       [this.protocolProperty]: [{ value: editMu?.protocol, disabled: true }],
@@ -481,8 +485,17 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.communicationTypeProperty).disable();
     }
 
-    const muFormData = this.fillUpdateData();
-    const request = this.muService.updateMuForm(muFormData);
+    let muFormData;
+    let request;
+
+    if (this.plcDevice) {
+      muFormData = this.fillUpdatePlcData();
+      request = this.muService.updateMuPlcForm(muFormData);
+    } else {
+      muFormData = this.fillUpdateData();
+      request = this.muService.updateMuForm(muFormData);
+    }
+
     const successMessage = $localize`Meter unit has been updated successfully`;
 
     try {
@@ -633,6 +646,13 @@ export class AddMuFormComponent implements OnInit {
       connectionType: this.form.get(this.connectionTypeProperty).value,
       protocol: this.isNewOrProtocolDlms ? 2 : 0,
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
+    };
+  }
+
+  fillUpdatePlcData(): MuUpdatePlcForm {
+    return {
+      deviceId: this.editMu.deviceId,
+      name: this.form.get(this.nameProperty).value
     };
   }
 

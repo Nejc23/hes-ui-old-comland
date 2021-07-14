@@ -233,3 +233,14 @@ input[type=search].wildcard {
   }
 }
 
+.k-state-disabled {
+  background-color: $gray-200 !important;
+  opacity: 1 !important;
+  .k-disabled {
+    opacity: 1 !important;
+  }
+}
+
+.k-state-disabled, .k-widget[disabled], .k-disabled {
+  opacity: 1 !important;
+}
