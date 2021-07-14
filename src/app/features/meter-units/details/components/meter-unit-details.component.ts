@@ -94,6 +94,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
+      this.setBreadcrumbs();
       if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
         this.isPlcDevice = true;
       }
