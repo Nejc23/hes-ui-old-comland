@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  // apiUrl: '',
+  apiUrl: 'https://192.168.2.181:8083',
   // apiMyGridUrl: '', // not use if URI for all apis (even actions) is the same
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
