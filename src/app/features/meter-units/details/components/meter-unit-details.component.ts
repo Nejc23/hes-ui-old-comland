@@ -28,6 +28,8 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   public data: MeterUnitDetails;
   public form: FormGroup;
+  plcProtocols = ['DC450G3', 'AC750', 'AmeraDC'];
+  isPlcDevice = false;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -71,11 +73,15 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     const modalRef = this.modalService.open(AddMuFormComponent, options);
     const component: AddMuFormComponent = modalRef.componentInstance;
-    modalRef.componentInstance.setFormEdit(this.data, options);
+    component.plcDevice = this.isPlcDevice;
+
+    if (this.data) {
+      modalRef.componentInstance.setFormEdit(this.data, options);
+    }
 
     modalRef.result
       .then((result) => {
-        this.getData();
+        this.data = result;
       })
       .catch(() => {});
   }
@@ -88,7 +94,9 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
-      this.setBreadcrumbs();
+      if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
+        this.isPlcDevice = true;
+      }
     });
   }
 
@@ -137,72 +145,95 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
   }
+
   get permissionManageJobs() {
     return PermissionEnumerator.Manage_Jobs;
   }
+
   get permissionManageAutoTemplates() {
     return PermissionEnumerator.Manage_Auto_Template_Rules;
   }
+
   get permissionFwUpgrade() {
     return PermissionEnumerator.Meter_FW_Upgrade;
   }
+
   get permissionDisconnectorConnect() {
     return PermissionEnumerator.Disconnector_Connect;
   }
+
   get permissionDisconnectorDisconnect() {
     return PermissionEnumerator.Disconnector_Disconnect;
   }
+
   get permissionDisconnectorGetState() {
     return PermissionEnumerator.Disconnector_Get_State;
   }
+
   get permissionDisconnectorSetMode() {
     return PermissionEnumerator.Disconnector_Set_Mode;
   }
+
   get permissionCiiActivate() {
     return PermissionEnumerator.CII_Activate;
   }
+
   get permissionCiiDeactivate() {
     return PermissionEnumerator.CII_Deactivate;
   }
+
   get permissionCiiState() {
     return PermissionEnumerator.CII_Get_State;
   }
+
   get permissionRelaysConnect() {
     return PermissionEnumerator.Relay_Connect;
   }
+
   get permissionRelaysDisconnect() {
     return PermissionEnumerator.Relay_Disconnect;
   }
+
   get permissionRelaysState() {
     return PermissionEnumerator.Relay_Get_State;
   }
+
   get permissionRelaysSetMode() {
     return PermissionEnumerator.Relay_Set_Mode;
   }
+
   get permissionTouUpload() {
     return PermissionEnumerator.TOU_Upload;
   }
+
   get permissionSetLimiter() {
     return PermissionEnumerator.Set_Limiter;
   }
+
   get permissionSetMonitor() {
     return PermissionEnumerator.Set_Monitor;
   }
+
   get permissionClearFF() {
     return PermissionEnumerator.Clear_FF;
   }
+
   get permissionSetDisplay() {
     return PermissionEnumerator.Set_Display;
   }
+
   get permissionClearAlarms() {
     return PermissionEnumerator.Clear_Alarms;
   }
+
   get permissionAssignTemplates() {
     return PermissionEnumerator.Assign_Templates;
   }
+
   get permissionReadMeter() {
     return PermissionEnumerator.Read_Meter;
   }
+
   get permissionSyncTime() {
     return PermissionEnumerator.Sync_Time;
   }
@@ -261,34 +292,34 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.ciiDeactivate, params, 1);
   }
 
-  onRelaysConnect(selectedGuid: string) {
+  onRelaysConnect() {
     const actionName = 'Relay Connect';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1, actionName);
   }
 
   // popup
-  onRelaysDisconnect(selectedGuid: string) {
+  onRelaysDisconnect() {
     const actionName = 'Relay Disconnect';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1, actionName);
   }
 
   // popup
-  onRelaysState(selectedGuid: string) {
+  onRelaysState() {
     const actionName = 'Relay State';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysState(params, paramsLegacy, 1, actionName);
   }
 
   // popup
-  onRelaysSetMode(selectedGuid: string) {
+  onRelaysSetMode() {
     const actionName = 'Relay Mode';
-    const params = this.plcActionsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
-    const paramsLegacy = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1, actionName);
   }
 
@@ -386,5 +417,10 @@ export class MeterUnitDetailsComponent implements OnInit {
   onSyncTime() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.syncTime, params, 1);
+  }
+
+  onReadMeter() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.onReadRegisters(params, 1);
   }
 }

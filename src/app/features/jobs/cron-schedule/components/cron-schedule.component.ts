@@ -249,7 +249,7 @@ export class CronScheduleComponent implements OnInit {
     }
 
     if (cronExpression && cronExpression !== '') {
-      return cronstrue.toString(cronExpression, { locale: this.locale, use24HourTimeFormat: true });
+      return cronstrue.toString(cronExpression, { locale: this.locale, use24HourTimeFormat: true, dayOfWeekStartIndexZero: false });
     }
     return $localize`N/A`;
   }

@@ -192,7 +192,7 @@ export class MeterUnitsPlcActionsService {
   }
 
   onReadMonitorThreshold(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
-    this.bulkOperation(MeterUnitsTypeEnum.readThresholdsMonitor, null, selectedRowsCount);
+    this.bulkOperation(MeterUnitsTypeEnum.readThresholdsMonitor, params, selectedRowsCount);
   }
 
   onSetLimiter(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
@@ -217,7 +217,7 @@ export class MeterUnitsPlcActionsService {
   }
 
   onReadLimiterThreshold(params: RequestFilterParams, selectedRowsCount: number, actionName: string) {
-    this.bulkOperation(MeterUnitsTypeEnum.readThresholdsLimiter, null, selectedRowsCount);
+    this.bulkOperation(MeterUnitsTypeEnum.readThresholdsLimiter, params, selectedRowsCount);
   }
 
   onRelaysConnect(params: IActionRequestParams, paramsLegacy: RequestFilterParams, selectedRowsCount: number, actionName) {
@@ -530,6 +530,10 @@ export class MeterUnitsPlcActionsService {
         params.registerTypes = [IRegisterTypesEnum.limiterNormal, IRegisterTypesEnum.limiterEmergency];
         response = this.service.readThresholdValues(params);
         operationName = $localize`Read limiter threshold values`;
+        break;
+      case MeterUnitsTypeEnum.readMeter:
+        response = this.service.readMeterValues(params);
+        operationName = $localize`Read meter`;
         break;
       case MeterUnitsTypeEnum.syncTime:
         response = this.service.synchronizeTime(params);
