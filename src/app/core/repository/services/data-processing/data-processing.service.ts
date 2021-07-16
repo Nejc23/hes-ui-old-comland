@@ -29,8 +29,8 @@ export class DataProcessingService {
           registerIds: [filter.register.registerDefinitionId]
         }
       ],
-      startTime: filter.startTime.toISOString(),
-      endTime: filter.endTime.toISOString()
+      startTime: filter.startTime,
+      endTime: filter.endTime
     };
 
     if (filter.register.categorization === 'EVENT') {
