@@ -43,7 +43,7 @@
 
     </fieldset>
     <div class="d-flex justify-content-end" *ngIf="!gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-      <button type="button" class="btn btn-link" (click)="clearButtonClicked()"><i class="far fa-times"></i><span i18n>Clear</span></button>
+      <button type="button" class="btn text-secondary" (click)="clearButtonClicked()"><i class="far fa-times"></i><span i18n>Clear</span></button>
       <button type="submit" class="btn btn-primary bg-primary" (click)="applyButtonClicked()"><i class="far fa-check"></i><span i18n>Apply</span></button>
     </div>
     <br/>

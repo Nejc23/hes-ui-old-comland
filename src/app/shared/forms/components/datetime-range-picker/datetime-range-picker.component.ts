@@ -112,8 +112,8 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   setLabel() {
-    let startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
-    let endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    const startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    const endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
