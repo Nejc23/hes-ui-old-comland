@@ -57,7 +57,8 @@ import { GridSettingsSessionStoreService } from './utils/services/grid-settings-
       useClass: ErrorsInterceptor,
       multi: true
     }
-    /*{
+    /*,
+    {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiUrlInterceptor,
       multi: true
