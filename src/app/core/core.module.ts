@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { SidebarCookieStoreService } from './../shared/base-template/components/services/sidbebar-cookie-store.service';
-import { ApiUrlInterceptor } from './api-url/api-url.interceptor';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
 import { AuthService } from './auth/services/auth.service';
 import { AppConfigStoreService } from './configuration/services/app-config-store.service';
