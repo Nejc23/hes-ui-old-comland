@@ -91,7 +91,8 @@ import { LocaleDatePipe } from './utils/pipes/locale-date.pipe';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  console.log('shared module lalalala ', http);
+  return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
 @NgModule({
