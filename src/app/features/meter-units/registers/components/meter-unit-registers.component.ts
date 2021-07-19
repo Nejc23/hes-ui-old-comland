@@ -14,9 +14,12 @@ import { environment } from 'src/environments/environment';
 import { formatDate } from '@progress/kendo-angular-intl';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import * as moment from 'moment';
 import { dateDisplayFormat, dateServerFormat } from '../../../../shared/forms/consts/date-format';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
@@ -78,7 +81,10 @@ export class MeterUnitRegistersComponent implements OnInit {
     private autoTemplateService: AutoTemplatesService,
     private dataProcessingService: DataProcessingService,
     private breadcrumbService: BreadcrumbService,
-    private muService: MeterUnitsService
+    private muService: MeterUnitsService,
+    private registerStatisticsService: RegisterStatisticsService,
+    private formUtils: FormsUtilsService,
+    private codeList: CodelistMeterUnitsRepositoryService
   ) {}
 
   get registerProperty() {
@@ -327,8 +333,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.selectedRegister = register;
     this.startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
     this.endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-    console.log(this.startTime);
-    console.log(this.endTime);
     this.registersFilter = {
       deviceId: this.deviceId,
       register: this.selectedRegister,
@@ -345,7 +349,7 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
-          this.registerStatisticsData = this.getRegisterStatistics(this.rowData);
+          this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData);
 
           this.setEventData();
 
@@ -381,9 +385,9 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.valueWithUnit?.value }));
     } else {
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.valueWithUnit?.value }));
     }
 
     const groupBy = (array, key) => {
@@ -443,27 +447,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   getLocalDateWithTimeString(dateTime: Date): string {
     return dateTime ? `${formatDate(dateTime, environment.dateTimeFormat)}` : '';
-  }
-
-  getRegisterStatistics(registerValues: RegisterValue[]): RegisterStatistics {
-    if (registerValues == null || registerValues.length === 0) {
-      return null;
-    }
-
-    const values = registerValues.filter((f) => f.value).map((r) => r.value);
-    if (values && values.length > 0) {
-      const avg = values.reduce((a, b) => a + b) / values.length;
-      const min = Math.min.apply(Math, values);
-      const max = Math.max.apply(Math, values);
-
-      return {
-        averageValue: avg,
-        minValue: registerValues.find((r) => r.value === min),
-        maxValue: registerValues.find((r) => r.value === max)
-      };
-    } else {
-      return null;
-    }
   }
 
   getRegisterGroupOptions(groupName: string): RadioOption[] {

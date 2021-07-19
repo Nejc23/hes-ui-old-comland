@@ -27,7 +27,7 @@ export class RegistersGridService {
         cellRendererFramework: GridCellDateComponent
       },
       {
-        field: 'value',
+        field: 'valueWithUnit.value',
         suppressMenu: true,
         sortable: true,
         headerName: $localize`Value`,
@@ -62,7 +62,7 @@ export class RegistersGridService {
         cellRendererFramework: GridCellDateComponent
       },
       {
-        field: 'value',
+        field: 'valueWithUnit.value',
         suppressMenu: true,
         sortable: true,
         headerName: $localize`Id`,
