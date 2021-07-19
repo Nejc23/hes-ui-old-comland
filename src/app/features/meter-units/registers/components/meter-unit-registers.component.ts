@@ -5,7 +5,7 @@ import { DataProcessingService } from './../../../../core/repository/services/da
 import { AutoTemplateRegister } from './../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
@@ -16,6 +16,8 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
+import * as moment from 'moment';
+import { dateDisplayFormat, dateServerFormat } from '../../../../shared/forms/consts/date-format';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 
@@ -23,9 +25,9 @@ import { RegisterStatisticsService } from '../../types/services/register-statist
   templateUrl: 'meter-unit-registers.component.html'
 })
 export class MeterUnitRegistersComponent implements OnInit {
-  public selectedRegister: AutoTemplateRegister;
+  @ViewChild('popover') popover;
 
-  public isRangeCustom = false;
+  public selectedRegister: AutoTemplateRegister;
 
   public selectedRange: RadioOption;
   public deviceRegisters: AutoTemplateRegister[];
@@ -33,8 +35,8 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   deviceId: string;
 
-  public startTime: Date;
-  public endTime: Date;
+  public startTime: string;
+  public endTime: string;
 
   public showLineChart: boolean;
   public showTable: boolean;
@@ -92,6 +94,13 @@ export class MeterUnitRegistersComponent implements OnInit {
   get rangeProperty() {
     return 'range';
   }
+  get startDateProperty(): string {
+    return 'startDate';
+  }
+
+  get endDateProperty(): string {
+    return 'endDate';
+  }
 
   get startTimeProperty() {
     return nameOf<RegistersFilter>((o) => o.startTime);
@@ -113,76 +122,24 @@ export class MeterUnitRegistersComponent implements OnInit {
     return 'registerSearch';
   }
 
+  get datePickerText() {
+    return 'labelText';
+  }
+
   changeRegisterOptionId() {
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
     this.isRegisterSelected = true;
-    this.showStatistics = selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
-    this.isEvent = selectedRegister.categorization === 'EVENT' ? true : false;
+    this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
+    this.isEvent = selectedRegister.categorization === 'EVENT';
 
     this.categorization = selectedRegister.categorization;
-
-    this.setPageSubtitle();
 
     this.showData(selectedRegister);
   }
 
-  setRange(selectedRangeId: number) {
-    const date = new Date();
-    this.isRangeCustom = false;
-
-    switch (selectedRangeId) {
-      case 1: {
-        // today
-        this.form.patchValue({
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
-          endTime: date
-        });
-        break;
-      }
-      case 2: {
-        // yesterday
-        this.form.patchValue({
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1),
-          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
-        });
-        break;
-      }
-      case 3: {
-        // Last 7 days
-        this.form.patchValue({
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7),
-          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
-        });
-        break;
-      }
-      case 4: {
-        // Last 30 days
-        this.form.patchValue({
-          startTime: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 30),
-          endTime: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
-        });
-        break;
-      }
-      case 5: {
-        // Current month
-        this.form.patchValue({
-          startTime: new Date(date.getFullYear(), date.getMonth(), 1),
-          endTime: date
-        });
-        break;
-      }
-      case 6: {
-        // Last month
-        this.form.patchValue({
-          startTime: new Date(date.getFullYear(), date.getMonth() - 1, 1),
-          endTime: new Date(date.getFullYear(), date.getMonth(), 1, 0, 0)
-        });
-        break;
-      }
-    }
-
-    this.showData(this.selectedRegister);
+  setDate() {
+    this.showData(this.selectedRegister, true);
   }
 
   clickShowHideFilter() {
@@ -192,19 +149,101 @@ export class MeterUnitRegistersComponent implements OnInit {
   ngOnInit() {
     this.setTitle('');
 
-    this.setPageSubtitle();
     this.router.params.subscribe((params) => {
       this.deviceId = params.deviceId;
       this.setRegisters();
     });
 
     this.form = this.createForm();
-    this.setRange(2); // yesterday
 
+    // yesterday
+    const startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
+    const endDateFormatted = moment().format(dateDisplayFormat);
+
+    this.form.controls.labelText.setValue(
+      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
+    );
     this.muService.getMeterUnit(this.deviceId).subscribe((result) => {
       this.setTitle(result.name);
       this.setBreadcrumbs();
     });
+  }
+
+  setRange(selectedRangeId: number) {
+    debugger;
+    const date = new Date();
+    switch (selectedRangeId) {
+      case 1: {
+        // today
+        this.form.patchValue({
+          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
+          endDate: date.setMinutes(0, 0, 0)
+        });
+        this.form.patchValue({
+          endTime: ('0' + date.getHours()).slice(-2) + ':' + '00'
+        });
+        break;
+      }
+      case 2: {
+        // yesterday
+        this.form.patchValue({
+          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1),
+          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
+        });
+        this.form.patchValue({
+          endTime: '00:00'
+        });
+        break;
+      }
+      case 3: {
+        // Last 7 days
+        this.form.patchValue({
+          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 6),
+          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
+        });
+        this.form.patchValue({
+          endTime: '00:00'
+        });
+        break;
+      }
+      case 4: {
+        // Last 30 days
+        this.form.patchValue({
+          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 29),
+          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
+        });
+        this.form.patchValue({
+          endTime: '00:00'
+        });
+        break;
+      }
+      case 5: {
+        // Current month
+        this.form.patchValue({
+          startDate: new Date(date.getFullYear(), date.getMonth(), 1),
+          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours())
+        });
+        this.form.patchValue({
+          endTime: ('0' + date.getHours()).slice(-2) + ':' + '00'
+        });
+        break;
+      }
+      case 6: {
+        // Last month
+        this.form.patchValue({
+          startDate: new Date(date.getFullYear(), date.getMonth() - 1, 1),
+          endDate: new Date(date.getFullYear(), date.getMonth(), 1, 0, 0)
+        });
+        this.form.patchValue({
+          endTime: '00:00'
+        });
+        break;
+      }
+    }
+    const startDateFormatted = moment(this.form.get('startDate').value).format('DD. MM. YYYY HH:mm');
+    const endDateFormatted = moment(this.form.get('endDate').value).format('DD. MM. YYYY HH:mm');
+    this.form.controls.labelText.setValue(startDateFormatted + ' - ' + endDateFormatted);
+    this.showData(this.selectedRegister, true);
   }
 
   setBreadcrumbs() {
@@ -227,21 +266,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   setTitle(title) {
     this.breadcrumbService.setPageName(title);
-  }
-
-  setPageSubtitle() {
-    this.pageSubtitle = '';
-
-    if (this.selectedRegister) {
-      let rangeDay = '';
-      if (this.selectedRange && this.selectedRange.value !== '6') {
-        rangeDay = `for ${this.selectedRange.label.toLowerCase()}`;
-      }
-
-      const startTimeString = this.getLocalDateWithTimeString(this.startTime);
-      const endTimeString = this.getLocalDateWithTimeString(this.endTime);
-      this.pageSubtitle = `${this.selectedRegister.name} ${rangeDay} (${startTimeString} - ${endTimeString})`;
-    }
   }
 
   setRegisters() {
@@ -276,32 +300,39 @@ export class MeterUnitRegistersComponent implements OnInit {
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.registerProperty]: [null],
-      [this.rangeProperty]: [null, Validators.required],
-      [this.startTimeProperty]: [null, Validators.required],
-      [this.endTimeProperty]: [null, Validators.required],
+      [this.rangeProperty]: [null],
+      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startTimeProperty]: ['00:00'],
+      [this.endTimeProperty]: ['00:00'],
       [this.showLineChartProperty]: [true, null],
       [this.showTableProperty]: [true, null],
-      [this.registerSearchProperty]: [null]
+      [this.registerSearchProperty]: [null],
+      [this.datePickerText]: [null]
     });
   }
 
   showData(register: AutoTemplateRegister, forceRefresh: boolean = false) {
-    const startTime = this.form.get(this.startTimeProperty).value;
-    const endTime = this.form.get(this.endTimeProperty).value;
+    const startDate = moment(this.form.get('startDate').value).toDate();
+    const endDate = moment(this.form.get('endDate').value).toDate();
 
-    if (!register || !startTime || !endTime) {
+    if (!register || !startDate || !endDate) {
       this.isDataFound = false;
       return;
     }
 
-    if (!forceRefresh && register === this.selectedRegister && startTime === this.startTime && endTime === this.endTime) {
+    startDate.setHours(this.form.get(this.startTimeProperty).value.split(':')[0]);
+    startDate.setMinutes(this.form.get(this.startTimeProperty).value.split(':')[1]);
+    endDate.setHours(this.form.get(this.endTimeProperty).value.split(':')[0]);
+    endDate.setMinutes(this.form.get(this.endTimeProperty).value.split(':')[1]);
+
+    if (!forceRefresh && register === this.selectedRegister) {
       return;
     }
 
     this.selectedRegister = register;
-    this.startTime = startTime;
-    this.endTime = endTime;
-
+    this.startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    this.endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
     this.registersFilter = {
       deviceId: this.deviceId,
       register: this.selectedRegister,
@@ -311,7 +342,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.rowData = null;
     this.registerStatisticsData = null;
-
     try {
       this.dataProcessingService.getChartData(this.registersFilter).subscribe((values) => {
         if (!values || values.length === 0) {
@@ -322,7 +352,6 @@ export class MeterUnitRegistersComponent implements OnInit {
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData);
 
           this.setEventData();
-          this.setPageSubtitle();
 
           this.chartCategories = values.map((v) => new Date(v.timestamp));
           this.chartData = [values];
@@ -412,7 +441,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.showStatistics = false;
     if (this.selectedRegister) {
-      this.showStatistics = this.selectedRegister.categorization === 'INSTANTANEOUS_VALUE' ? false : true;
+      this.showStatistics = this.selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
     }
   }
 
@@ -440,14 +469,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     return registerGroupOptions;
   }
 
-  onStartTimeBlurOrChange() {
-    this.showData(this.selectedRegister);
-  }
-
-  onEndTimeBlurOrChange() {
-    this.showData(this.selectedRegister);
-  }
-
   onRefresh() {
     this.showData(this.selectedRegister, true);
   }
@@ -458,6 +479,11 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   insertedSearchValue(searchValue) {
     this.setRegisterGroups(searchValue);
+  }
+
+  closePopover() {
+    this.popover.close();
+    this.setDate();
   }
 
   getFilterTitle(): string {

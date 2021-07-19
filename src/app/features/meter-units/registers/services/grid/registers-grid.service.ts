@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GridCellDateComponent } from '../../components/grid/grid-custom-components/grid-cell-date.component';
+import { GridCellUnitComponent } from '../../components/grid/grid-custom-components/grid-cell-unit.component';
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +21,7 @@ export class RegistersGridService {
         field: 'timestamp',
         suppressMenu: true,
         sortable: true,
+        sort: 'asc',
         headerName: $localize`Timestamp`,
         headerTooltip: $localize`Timestamp`,
         cellRendererFramework: GridCellDateComponent
@@ -36,7 +38,8 @@ export class RegistersGridService {
         suppressMenu: true,
         sortable: true,
         headerName: $localize`Unit`,
-        headerTooltip: $localize`Unit`
+        headerTooltip: $localize`Unit`,
+        cellRendererFramework: GridCellUnitComponent
       },
       {
         field: 'status',

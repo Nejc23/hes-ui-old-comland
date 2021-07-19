@@ -1,24 +1,37 @@
 <div class="row">
-
-
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
     <div class="filter-shadow">
       <div class="form-group">
         <div class="d-flex mb-3 mt-2">
-          <h4 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h4>
+          <h4 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">
+            {{ getFilterTitle() }}
+          </h4>
           <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close" *ngIf="false">
             <i class="far fa-times"></i>
           </button>
         </div>
         <div>
-          <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedSearchValue($event)" [form]="form"
-          [property]="registerSearchProperty" [placeholder]="placeholderSearch"></app-input-searcher>
+          <app-input-searcher
+            [debounceTimeOut]="700"
+            (insertedValue)="insertedSearchValue($event)"
+            [form]="form"
+            [property]="registerSearchProperty"
+            [placeholder]="placeholderSearch"
+          ></app-input-searcher>
         </div>
       </div>
       <div class="form-group filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
-          <app-input-radio i18n-label [label]="g.groupName" [form]="form" [property]="registerProperty"
-            [options]="g.registerOptions" style="white-space:nowrap" (selectionChanged)="changeRegisterOptionId()" [showTooltip]="true">
+          <app-input-radio
+            i18n-label
+            [label]="g.groupName"
+            [form]="form"
+            [property]="registerProperty"
+            [options]="g.registerOptions"
+            style="white-space: nowrap"
+            (selectionChanged)="changeRegisterOptionId()"
+            [showTooltip]="true"
+          >
           </app-input-radio>
         </div>
       </div>
@@ -26,36 +39,60 @@
   </div>
 
   <!-- CHECK RANGES -->
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}" class="pr-0">
+  <div [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }" class="pr-0">
     <div class="mr-3">
-      <div class="d-flex pb-3">
-        <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hideFilter}" (click)="clickShowHideFilter()" [ngbTooltip]="hideShowFilters" *ngIf="false">
+      <div class="d-flex">
+        <button
+          type="button"
+          class="btn btn-light pl-3 pr-3 position-relative mr-3"
+          [ngClass]="{ active: !hideFilter }"
+          (click)="clickShowHideFilter()"
+          [ngbTooltip]="hideShowFilters"
+          *ngIf="false"
+        >
           <i class="far fa-ellipsis-v"></i>
         </button>
 
         <div class="mt-2">
-          <h3 class="mb-0" i18n>{{selectedRegister ? selectedRegister.name : 'No register selected'}}</h3>
+          <h3 class="mb-0" i18n>{{ selectedRegister ? selectedRegister.name : 'No register selected' }}</h3>
         </div>
         <div class="ml-auto">
-          <button type="button" class="btn btn-light pl-2 pr-2 mr-0" (click)="onRefresh()" placement="left" [openDelay]="500" [ngbTooltip]="tipContentRefresh">
-            <i class="far fa-redo"></i></button>
+          <button
+            type="button"
+            class="btn btn-light pl-2 pr-2 mr-0"
+            (click)="onRefresh()"
+            placement="left"
+            [openDelay]="500"
+            [ngbTooltip]="tipContentRefresh"
+          >
+            <i class="far fa-redo"></i>
+          </button>
         </div>
       </div>
-      <div class="d-flex">
-        <label i18n class="mr-2 my-auto">From</label>
-        <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlurOrChange()" (valueChange)="onStartTimeBlurOrChange()">
-        </app-datetime-picker>
-        <label i18n class="mr-2 ml-2 my-auto">to</label>
-        <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlurOrChange()" (valueChange)="onEndTimeBlurOrChange()">
-        </app-datetime-picker>
+      <div class="d-flex date-time-picker-meter-units mt-2">
+        <app-input-text
+          container="body"
+          placement="bottom"
+          class="w-100"
+          [ngbPopover]="popDateTimePicker"
+          [autoClose]="'outside'"
+          #popover="ngbPopover"
+          popoverClass="date-range-picker-popover"
+          [iconName]="'fa-calendar'"
+          [isReadOnly]="true"
+          [form]="form"
+          [property]="'labelText'"
+          label="Select date"
+        >
+        </app-input-text>
       </div>
-      <div class="btn-group">
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(1)" i18n>Today</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(2)" i18n>Yesterday</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(3)" i18n>Last 7 days</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(4)" i18n>Last 30 days</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(5)" i18n>Current month</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(6)" i18n>Last month</button>
+      <div class="btn-group mt-2">
+        <button class="btn btn-link btn-sm p-1" (click)="setRange(1)" i18n>Today</button>
+        <button class="btn btn-link btn-sm p-1" (click)="setRange(2)" i18n>Yesterday</button>
+        <button class="btn btn-link btn-sm p-1" (click)="setRange(3)" i18n>Last 7 days</button>
+        <button class="btn btn-link btn-sm p-1" (click)="setRange(4)" i18n>Last 30 days</button>
+        <button class="btn btn-link btn-sm p-1" (click)="setRange(5)" i18n>This month</button>
+        <button class="btn btn-link btn-sm p-1" (click)="setRange(6)" i18n>Last month</button>
       </div>
     </div>
 
@@ -81,26 +118,27 @@
       </div>
 
       <div *ngIf="isDataFound">
-        <div class="row mb-5">
+        <div class="row mt-4">
           <div class="col-12" *ngIf="!isEvent">
-            <app-registers-chart
-              [categories]="chartCategories"
-              [chartData]="chartData"
-              [unit]="unit"
-            >
-            </app-registers-chart>
+            <app-registers-chart [categories]="chartCategories" [chartData]="chartData" [unit]="unit"> </app-registers-chart>
           </div>
           <div class="col-12" *ngIf="isEvent">
             <h4 i18n class="pt-2">Number of events</h4>
             <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
           </div>
         </div>
-        <div class="row">
-          <div [ngClass]="{'col-12': (!showStatistics || !registerStatisticsData) && !isEvent, 'col-8': showStatistics && registerStatisticsData && !isEvent, 'col-6': isEvent }">
+        <div class="row mt-4">
+          <div
+            [ngClass]="{
+              'col-12': (!showStatistics || !registerStatisticsData) && !isEvent,
+              'col-8': showStatistics && registerStatisticsData && !isEvent,
+              'col-6': isEvent
+            }"
+          >
             <app-registers-grid [rowData]="rowData" [categorization]="categorization"></app-registers-grid>
           </div>
           <div class="col-4" *ngIf="showStatistics && !isEvent && registerStatisticsData">
-            <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
+            <app-registers-statistics [data]="registerStatisticsData"></app-registers-statistics>
           </div>
           <div class="col-6" *ngIf="isEvent">
             <h4 i18n>Event type</h4>
@@ -113,3 +151,7 @@
 </div>
 <ng-template #hideShowFilters><span i18n>Show/hide registers</span></ng-template>
 <ng-template #tipContentRefresh><span i18n>Refresh data</span></ng-template>
+
+<ng-template #popDateTimePicker>
+  <app-datetime-range-picker [form]="form" [initValues]="true" (formClosed)="closePopover()"></app-datetime-range-picker>
+</ng-template>
