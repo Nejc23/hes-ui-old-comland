@@ -230,7 +230,7 @@ $box-shadow: 0 .3rem 0.6rem 0 rgba($black, .1) !default;
 $box-shadow-lg: 0 0.5rem 1rem 0 rgba($black, .125) !default;
 
 $component-active-color: $white !default;
-$component-active-bg: map-get($theme-colors, "primary") !default;
+$component-active-bg: $primary !default;
 
 $caret-width: .3em !default;
 $caret-vertical-align: $caret-width * .85 !default;
@@ -825,7 +825,7 @@ $jumbotron-bg: $gray-200 !default;
 // Cards
 
 $card-spacer-y: .75rem !default;
-$card-spacer-x: $spacer $spacer/2; //1.25rem !default;
+$card-spacer-x:                     $spacer !default;// $card-spacer-x: $spacer $spacer/2; //1.25rem !default;
 $card-border-width: $border-width !default;
 $card-border-radius: $border-radius !default;
 $card-border-color: rgba($black, .125) !default;
@@ -835,6 +835,8 @@ $card-cap-color: null !default;
 $card-height: null !default;
 $card-color: null !default;
 $card-bg: $white !default;
+$card-cap-padding-y:                $card-spacer-y * .5 !default;
+$card-cap-padding-x:                $card-spacer-x !default;
 
 $card-img-overlay-padding: 1.25rem !default;
 
@@ -936,7 +938,7 @@ $badge-pill-border-radius: 10rem !default;
 // Modals
 
 // Padding applied to the modal body
-$modal-inner-padding: 0 1.714rem !default;
+$modal-inner-padding: 1.714rem !default;
 
 // Margin between elements in footer, must be lower than or equal to 2 * $modal-inner-padding
 $modal-footer-margin-between: .5rem !default;
@@ -1230,3 +1232,19 @@ $spacing: (
 );
 
 $checkbox-icon-size: 0.715rem;
+
+// Offcanvas
+
+// scss-docs-start offcanvas-variables
+$offcanvas-padding-y:               $modal-inner-padding !default;
+$offcanvas-padding-x:               $modal-inner-padding !default;
+$offcanvas-horizontal-width:        400px !default;
+$offcanvas-vertical-height:         30vh !default;
+$offcanvas-transition-duration:     .3s !default;
+$offcanvas-border-color:            $modal-content-border-color !default;
+$offcanvas-border-width:            $modal-content-border-width !default;
+$offcanvas-title-line-height:       $modal-title-line-height !default;
+$offcanvas-bg-color:                $modal-content-bg !default;
+$offcanvas-color:                   $modal-content-color !default;
+$offcanvas-box-shadow:              $modal-content-box-shadow-xs !default;
+

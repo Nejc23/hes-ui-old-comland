@@ -5,27 +5,26 @@
 
 @import "styles/font-awsome/css/all.min.css";
 @import "styles/material";
-
+//
 @import 'brand';
 
 /* import Bootstrap files */
 @import "styles/../../node_modules/bootstrap/scss/functions";
-@import "styles/variables";
-
 @import "styles/../../node_modules/bootstrap/scss/mixins";
-
-@import "styles/bootstrap";
+@import "styles/variables";
+//
 @import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
-
-@import "styles/global";
+//
 @import "styles/navs";
-
+//
 @import "styles/kendoUI";
 @import "styles/ag-grid";
-
+//
 @import "styles/custom-style";
-
-
+@import "styles/global";
+//
+//
+@import 'bootstrap';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

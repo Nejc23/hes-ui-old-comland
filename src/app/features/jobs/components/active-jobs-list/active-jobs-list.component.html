@@ -59,7 +59,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr [ngClass]="i%2 == 0 ? 'gray-background':''" *ngFor="let job of activeJobs.jobs; let i = index;">
+        <tr  [ngClass]="i%2 == 0 ? 'gray-background':''" *ngFor="let job of activeJobs.jobs; let i = index;">
           <td>{{ job.jobName }}</td>
           <td>{{ job.lastUpdated | date:'medium' }}</td>
           <td>

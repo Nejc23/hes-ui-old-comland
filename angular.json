@@ -28,18 +28,17 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery/dist/jquery.js"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles/brand/default"
+                "src/styles/brand/default",
+                "./node_modules/bootstrap/scss"
               ]
             },
             "allowedCommonJsDependencies": [
