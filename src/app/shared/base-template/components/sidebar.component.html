@@ -16,7 +16,7 @@
 </ul>-->
 <!--/div>-->
 <li *ngFor="let item of items; let first = first" class="nav-item" [ngClass]="{'dropdown': item.hasChildren}">
-  <a class="nav-link d-flex" href="javascript:void(0);" [routerLink]="item.routeLink"
+  <a class="nav-link px-4 d-flex" href="javascript:void(0);" [routerLink]="item.routeLink"
      *ngIf="!item.hasChildren && hasAccess(item)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
@@ -24,13 +24,13 @@
     <span class="title">{{ item.title | translate }}</span>
   </a>
 
-  <a class="nav-link dropdown-toggle-menu d-flex" href="javascript:void(0);" (click)="toggleDropdown(item)"
+  <a class="nav-link px-4 dropdown-toggle-menu d-flex" href="javascript:void(0);" (click)="toggleDropdown(item)"
      *ngIf="item.hasChildren && hasActiveChildLinks(item, null)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
        class="ml-1 mt-0 mr-3 icon md-20">{{ item.icon }}</i>
     <span class="title">{{ item.title | translate }}</span>
-    <span class="arrow ml-auto">
+    <span class="arrow ms-auto">
       <i class="far fa-angle-right"></i>
     </span>
   </a>

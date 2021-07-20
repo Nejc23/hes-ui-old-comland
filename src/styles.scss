@@ -23,13 +23,24 @@
 @import "styles/custom-style";
 @import "styles/global";
 //
-//
-@import 'bootstrap';
+// TODO CHECK IF SOMETHING IS NOT USED
+@import 'styles/bootstrap';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// TEMP DIRTY HACK
+// TEMP DIRTY HACKS BS4->BS5 migration
 .form-group {
   margin-bottom: 1rem;
+}
+
+.k-multiselect .k-multiselect-wrap, .k-dropdowntree .k-multiselect-wrap {
+  border-width: 0;
+}
+
+// tailwind border issue
+*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: hidden;
 }
