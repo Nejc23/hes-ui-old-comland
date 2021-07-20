@@ -9,7 +9,7 @@
   <div class="grid-actions">
     <app-action-form (searchChange)=searchData($event)
       (refresh)="refreshGrid()"
-       class="ml-auto justify-content-end"
+       class="ms-auto justify-content-end"
        [useWildcards]="useWildcards"
        (toggleWildcards)="toggleWildcards($event)">
       <div class="dropdown mr-3" *ngIf="hasUserAddPermissions()">
@@ -53,7 +53,7 @@
       >
     </ag-grid-angular>
     <div class="ag-paging-panel-selection d-flex">
-      <div class="ml-auto">
+      <div class="ms-auto">
         <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
           [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
         </app-select-dropdown>

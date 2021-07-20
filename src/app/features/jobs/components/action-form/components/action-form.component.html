@@ -3,7 +3,7 @@
   <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh">
     <i class="fas fa-sync-alt"></i></button>
   <ng-content></ng-content>
-  <div class="ml-auto">
+  <div class="ms-auto">
     <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
       [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"
       [showUseWildcard]="true" [useWildcards]="useWildcards" (toggleWildcards)="doToggleWildcards($event)">

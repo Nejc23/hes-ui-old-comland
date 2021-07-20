@@ -23,7 +23,7 @@
 
     <ng-content></ng-content>
 
-    <div class="ml-auto">
+    <div class="ms-auto">
       <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedValue($event)" [form]="form"
         [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"
         [showUseWildcard]="true" [useWildcards]="useWildcards" (toggleWildcards)="doToggleWildcards($event)"

@@ -1,10 +1,10 @@
 <div *ngIf="params.data && params.data.meters" class="d-flex" container="body" [openDelay]="1000" placement="bottom" [ngbTooltip]="setToolTip(params.data)">
   <a href="javascript:void(0);" (click)="openMuGrid()"><span class="text-truncate flex-shrink-0">{{params.data.meters}}</span></a>
-  <small *ngIf="params.data && params.data.metersUp && params.data.metersPercent" class="ml-auto text-success text-truncate flex-shrink-2">
+  <small *ngIf="params.data && params.data.metersUp && params.data.metersPercent" class="ms-auto text-success text-truncate flex-shrink-2">
     <i class="far fa-arrow-up mr-1"></i>
     <span>{{params.data.metersPercent}} %</span>
   </small>
-  <small *ngIf="params.data && !params.data.metersUp && params.data.metersPercent" class="ml-auto text-danger text-truncate flex-shrink-2">
+  <small *ngIf="params.data && !params.data.metersUp && params.data.metersPercent" class="ms-auto text-danger text-truncate flex-shrink-2">
     <i class="far fa-arrow-down mr-1"></i>
     <span>{{params.data.metersPercent}} %</span>
   </small>

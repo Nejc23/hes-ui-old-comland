@@ -1,7 +1,7 @@
 // Tailwind currently disabled - datatable border issue
-//@import 'tailwindcss/base';
-//@import 'tailwindcss/components';
-//@import 'tailwindcss/utilities';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @import "styles/font-awsome/css/all.min.css";
 @import "styles/material";
@@ -34,8 +34,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-bottom: 1rem;
 }
 
+//.border-left {
+//  border-left: 1px solid #ced2d9 !important;
+//}
+
 .k-multiselect .k-multiselect-wrap, .k-dropdowntree .k-multiselect-wrap {
   border-width: 0;
+}
+
+.k-combobox .k-dropdown-wrap {
+  border-style: none;
+}
+
+.k-numerictextbox .k-numeric-wrap {
+  border-style: none;
 }
 
 // tailwind border issue
@@ -44,3 +56,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-width: 0;
   border-style: hidden;
 }
+
