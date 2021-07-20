@@ -29,7 +29,7 @@ import { capitalize } from 'lodash';
 import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
-import { MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
+import { MuUpdatePlcRequest, MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -236,11 +236,26 @@ export class MeterUnitsService {
     return this.updateMu(payload.deviceId, muRequest);
   }
 
+  updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
+    const muRequest: MuUpdatePlcRequest = {
+      name: payload.name
+    };
+    return this.updateMuPlc(payload.deviceId, muRequest);
+  }
+
   updateMu(deviceId: string, payload: MuUpdateRequest): Observable<string> {
     return this.repository.makeRequest(this.updateMuRequest(deviceId, payload));
   }
 
   updateMuRequest(deviceId: string, payload: MuUpdateRequest): HttpRequest<any> {
+    return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
+  }
+
+  updateMuPlc(deviceId: string, payload: MuUpdatePlcRequest): Observable<string> {
+    return this.repository.makeRequest(this.updateMuPlcRequest(deviceId, payload));
+  }
+
+  updateMuPlcRequest(deviceId: string, payload: MuUpdatePlcRequest): HttpRequest<any> {
     return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
   }
 

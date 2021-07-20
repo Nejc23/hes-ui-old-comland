@@ -63,7 +63,7 @@
           <td>{{ job.jobName }}</td>
           <td>{{ job.lastUpdated | date:'medium' }}</td>
           <td>
-            <img src="../../../assets/images/icons/{{job.state?.toLowerCase()}}-icon.svg" class="mr-3" />
+            <img src="assets/images/icons/{{job.state?.toLowerCase()}}-icon.svg" class="mr-3" />
           </td>
           <td>
             {{ job.status}}
@@ -75,6 +75,6 @@
   </div>
 
   <div modal-footer>
-    <button type="button" class="btn btn-link" (click)="onDismiss()">{{ 'BUTTON.CLOSE' | translate }}</button>
+    <button type="button" class="btn text-secondary" (click)="onDismiss()">{{ 'BUTTON.CLOSE' | translate }}</button>
   </div>
 </app-modal-template>

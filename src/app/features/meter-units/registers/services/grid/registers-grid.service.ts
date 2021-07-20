@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GridCellDateComponent } from '../../components/grid/grid-custom-components/grid-cell-date.component';
 import { TranslateService } from '@ngx-translate/core';
+import { GridCellUnitComponent } from '../../components/grid/grid-custom-components/grid-cell-unit.component';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +27,7 @@ export class RegistersGridService {
         cellRendererFramework: GridCellDateComponent
       },
       {
-        field: 'value',
+        field: 'valueWithUnit.value',
         suppressMenu: true,
         sortable: true,
         headerName: this.translate.instant('GRID.VALUE'),
@@ -37,7 +38,8 @@ export class RegistersGridService {
         suppressMenu: true,
         sortable: true,
         headerName: this.translate.instant('GRID.UNIT'),
-        headerTooltip: this.translate.instant('GRID.UNIT')
+        headerTooltip: this.translate.instant('GRID.UNIT'),
+        cellRendererFramework: GridCellUnitComponent
       },
       {
         field: 'status',
@@ -60,7 +62,7 @@ export class RegistersGridService {
         cellRendererFramework: GridCellDateComponent
       },
       {
-        field: 'value',
+        field: 'valueWithUnit.value',
         suppressMenu: true,
         sortable: true,
         headerName: this.translate.instant('GRID.ID'),

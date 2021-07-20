@@ -8,6 +8,7 @@ import { ReferenceType } from '../../../../core/repository/interfaces/meter-unit
 import { MuHdlcInformation } from './../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 
 export interface MuUpdateForm {
+  // dlms
   deviceId: string;
   name: string;
   manufacturer: Codelist<number>;
@@ -26,4 +27,9 @@ export interface MuUpdateForm {
   hdlcInformation?: MuHdlcInformation;
   protocol: number;
   referencingType: ReferenceType;
+}
+
+export interface MuUpdatePlcForm {
+  deviceId: string;
+  name: string;
 }

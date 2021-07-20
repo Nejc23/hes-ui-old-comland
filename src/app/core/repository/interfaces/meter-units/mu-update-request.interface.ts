@@ -19,3 +19,8 @@ export interface MuUpdateRequest {
   protocol: number;
   referencingType: ReferenceType;
 }
+
+export interface MuUpdatePlcRequest {
+  deviceId?: string;
+  name: string;
+}

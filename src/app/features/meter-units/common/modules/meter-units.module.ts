@@ -24,21 +24,22 @@ import { GridCellParentComponent } from '../../types/components/grid-custom-comp
 import { GridCellReadStatusComponent } from '../../types/components/grid-custom-components/grid-cell-read-status.component';
 import { GridCellStatusComponent } from '../../types/components/grid-custom-components/grid-cell-status.component';
 import { GridCellTagsComponent } from '../../types/components/grid-custom-components/grid-cell-tags.component';
-import { GridCellThresholdComponent } from '../../types/components/grid-custom-components/grid-cell-threshold.component';
-import { GridCellTimeOfUseIdComponent } from '../../types/components/grid-custom-components/grid-cell-time-of-use-id.component';
 import { GridCellVendorComponent } from '../../types/components/grid-custom-components/grid-cell-vendor.component';
-import { GridSelectionHeaderComponent } from '../../types/components/grid-custom-components/grid-selection-header.component';
+import { GridCellTimeOfUseIdComponent } from '../../types/components/grid-custom-components/grid-cell-time-of-use-id.component';
+import { GridCellThresholdComponent } from '../../types/components/grid-custom-components/grid-cell-threshold.component';
+import { GridCellUnitComponent } from '../../registers/components/grid/grid-custom-components/grid-cell-unit.component';
 import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
-import { PipesModule } from './../../../../shared/pipes/pipes.module';
-import { RegistersPieChartComponent } from './../../registers/components/chart/registers-pie-chart.component';
-import { GridCellDateComponent } from './../../registers/components/grid/grid-custom-components/grid-cell-date.component';
-import { RegistersGridComponent } from './../../registers/components/grid/registers-grid.component';
-import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
-import { GridCellInstantValuesComponent } from './../../types/components/grid-custom-components/grid-cell-instant-values.component';
-import { GridCellMediumComponent } from './../../types/components/grid-custom-components/grid-cell-medium.component';
-import { GridCellProtocolComponent } from './../../types/components/grid-custom-components/grid-cell-protocol.component';
-import { AddMuFormComponent } from './../components/add-mu-form/add-mu-form.component';
+import { GridSelectionHeaderComponent } from '../../types/components/grid-custom-components/grid-selection-header.component';
+import { MeterUnitRegistersComponent } from '../../registers/components/meter-unit-registers.component';
+import { RegistersPieChartComponent } from '../../registers/components/chart/registers-pie-chart.component';
+import { RegistersGridComponent } from '../../registers/components/grid/registers-grid.component';
+import { GridCellDateComponent } from '../../registers/components/grid/grid-custom-components/grid-cell-date.component';
+import { GridCellProtocolComponent } from '../../types/components/grid-custom-components/grid-cell-protocol.component';
+import { GridCellMediumComponent } from '../../types/components/grid-custom-components/grid-cell-medium.component';
+import { AddMuFormComponent } from '../components/add-mu-form/add-mu-form.component';
+import { GridCellInstantValuesComponent } from '../../types/components/grid-custom-components/grid-cell-instant-values.component';
 import { MeterUnitsRoutingModule } from './meter-units-routing.module';
+import { PipesModule } from '../../../../shared/pipes/pipes.module';
 
 @NgModule({
   entryComponents: [],
@@ -78,7 +79,8 @@ import { MeterUnitsRoutingModule } from './meter-units-routing.module';
     GridCellMediumComponent,
     AddMuFormComponent,
     GridCellInstantValuesComponent,
-    GridCellThresholdComponent
+    GridCellThresholdComponent,
+    GridCellUnitComponent
   ],
   imports: [
     SharedModule,
@@ -108,7 +110,8 @@ import { MeterUnitsRoutingModule } from './meter-units-routing.module';
       GridCellProtocolComponent,
       GridCellThresholdComponent,
       GridCellMediumComponent,
-      GridCellInstantValuesComponent
+      GridCellInstantValuesComponent,
+      GridCellUnitComponent
     ])
   ]
 })

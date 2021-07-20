@@ -5,8 +5,8 @@ import { RegisterValue } from 'src/app/core/repository/interfaces/data-processin
 export interface RegistersFilter {
   deviceId: string;
   register: AutoTemplateRegister;
-  startTime: Date;
-  endTime: Date;
+  startTime: string;
+  endTime: string;
 }
 
 export interface RegisterStatistics {

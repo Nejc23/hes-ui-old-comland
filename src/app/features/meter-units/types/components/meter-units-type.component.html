@@ -64,6 +64,14 @@
                       <a href="javascript:void(0)"><span>{{ 'PLC-METER.ASSIGN-EXISTING' | translate }}</span></a>
                     </div>
                   </div>
+
+                  <div
+                    class="dropdown-divider"
+                    appHideDividerIfPermissionsUnauthorized
+                    [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]"
+                    [permissionsBelow]="[permissionFwUpgrade]"
+                  ></div>
+
                 </div>
               </div>
               <div appHideIfPermissionUnauthorized [permission]="permissionAssignTemplates">
