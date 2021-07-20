@@ -1,34 +1,64 @@
-<div class="d-flex row-actions justify-content-end" >
+<div class="d-flex row-actions justify-content-end">
   <div class="btn-group-sm">
     <button
-        type="button" class="btn btn-primary m-0" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('details')" (click)="showItem()">
-          <i class="far fa-eye" container="body" placement="bottom"></i></button>
+      type="button"
+      class="btn btn-primary m-0"
+      [openDelay]="500"
+      triggers="hover"
+      [ngbTooltip]="setToolTip('details')"
+      (click)="showItem()"
+    >
+      <i class="far fa-eye" container="body" placement="bottom"></i>
+    </button>
     <button
-        type="button" class="btn btn-primary m-0" [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('chart')" (click)="showRegisters()"><i class="far fa-chart-bar"
-        container="body" placement="bottom"></i></button>
+      type="button"
+      class="btn btn-primary m-0"
+      [openDelay]="500"
+      triggers="hover"
+      [ngbTooltip]="setToolTip('chart')"
+      (click)="showRegisters()"
+    >
+      <i class="far fa-chart-bar" container="body" placement="bottom"></i>
+    </button>
   </div>
-  <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[
-    permissionMuManage,
-    permissionManageJobs,
-    permissionAssignTemplates,
-    permissionFwUpgrade,
-    permissionFwUpgrade,
-    permissionDisconnectorConnect,
-    permissionDisconnectorDisconnect,
-    permissionDisconnectorGetState,
-    permissionDisconnectorSetMode,
-    permissionCiiActivate,
-    permissionCiiDeactivate,
-    permissionCiiState,
-    permissionRelaysConnect,
-    permissionRelaysDisconnect,
-    permissionRelaysState,
-    permissionRelaysSetMode
-  ]">
-    <button dropdownToggle class="btn btn-primary btn-sm" type="button"  [openDelay]="500" triggers="hover" [ngbTooltip]="setToolTip('operation')" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div
+    dropdown
+    class="dropdown-ag-grid btn-group-sm"
+    appHideIfAllPermissionsUnauthorized
+    [permissions]="[
+      permissionMuManage,
+      permissionManageJobs,
+      permissionAssignTemplates,
+      permissionFwUpgrade,
+      permissionFwUpgrade,
+      permissionDisconnectorConnect,
+      permissionDisconnectorDisconnect,
+      permissionDisconnectorGetState,
+      permissionDisconnectorSetMode,
+      permissionCiiActivate,
+      permissionCiiDeactivate,
+      permissionCiiState,
+      permissionRelaysConnect,
+      permissionRelaysDisconnect,
+      permissionRelaysState,
+      permissionRelaysSetMode
+    ]"
+  >
+    <button
+      dropdownToggle
+      class="btn btn-primary btn-sm"
+      type="button"
+      [openDelay]="500"
+      triggers="hover"
+      [ngbTooltip]="setToolTip('operation')"
+      id="dropdownMenuButton"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
       <i class="far fa-ellipsis-h"></i>
     </button>
-    <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+    <div *dropdownMenu (click)="$event.stopPropagation()" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
       <div appHideIfPermissionUnauthorized [permission]="permissionMuManage">
         <a class="dropdown-item" href="javascript:void(0);" (click)="onDelete()"><span>{{ 'BUTTON.DELETE' | translate }}</span></a>
       </div>
@@ -46,7 +76,12 @@
         <a class="dropdown-item" href="javascript:void(0);" (click)="onJobsTemplates()"><span>{{ 'PLC-METER.TEMPLATES' | translate }}</span></a>
       </div>
 
-      <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]" [permissionsBelow]="[permissionFwUpgrade]"></div>
+      <div
+        class="dropdown-divider"
+        appHideDividerIfPermissionsUnauthorized
+        [permissionsAbove]="[permissionManageJobs, permissionAssignTemplates]"
+        [permissionsBelow]="[permissionFwUpgrade]"
+      ></div>
 
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
         <div class="dropdown-submenu pull-left">
@@ -62,20 +97,34 @@
         </div>
       </div>
 
-      <div class="dropdown-divider" appHideDividerIfPermissionsUnauthorized
+      <div
+        class="dropdown-divider"
+        appHideDividerIfPermissionsUnauthorized
         [permissionsAbove]="[permissionFwUpgrade]"
-        [permissionsBelow]="[permissionDisconnectorConnect,
-                              permissionDisconnectorDisconnect,
-                              permissionDisconnectorGetState,
-                              permissionDisconnectorSetMode,
-                              permissionCiiActivate,
-                              permissionCiiDeactivate,
-                              permissionCiiState,
-                              permissionRelaysConnect,
-                              permissionRelaysDisconnect,
-                              permissionRelaysState,
-                              permissionRelaysSetMode]"></div>
-      <div class="dropdown-item"  appHideIfAllPermissionsUnauthorized [permissions]="[permissionDisconnectorConnect, permissionDisconnectorDisconnect, permissionDisconnectorGetState, permissionDisconnectorSetMode]">
+        [permissionsBelow]="[
+          permissionDisconnectorConnect,
+          permissionDisconnectorDisconnect,
+          permissionDisconnectorGetState,
+          permissionDisconnectorSetMode,
+          permissionCiiActivate,
+          permissionCiiDeactivate,
+          permissionCiiState,
+          permissionRelaysConnect,
+          permissionRelaysDisconnect,
+          permissionRelaysState,
+          permissionRelaysSetMode
+        ]"
+      ></div>
+      <div
+        class="dropdown-item"
+        appHideIfAllPermissionsUnauthorized
+        [permissions]="[
+          permissionDisconnectorConnect,
+          permissionDisconnectorDisconnect,
+          permissionDisconnectorGetState,
+          permissionDisconnectorSetMode
+        ]"
+      >
         <div class="dropdown-submenu pull-left">
           <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'PLC-METER.BREAKER.BREAKER' | translate }}</span></a>
           <div class="dropdown-menu">
@@ -95,7 +144,11 @@
         </div>
       </div>
 
-      <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionCiiActivate, permissionCiiDeactivate, permissionCiiState]">
+      <div
+        class="dropdown-item"
+        appHideIfAllPermissionsUnauthorized
+        [permissions]="[permissionCiiActivate, permissionCiiDeactivate, permissionCiiState]"
+      >
         <div class="dropdown-submenu pull-left disabled">
           <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.CII' | translate }}</span></a>
           <div class="dropdown-menu">
@@ -112,7 +165,11 @@
         </div>
       </div>
 
-      <div class="dropdown-item" appHideIfAllPermissionsUnauthorized [permissions]="[permissionRelaysConnect, permissionRelaysDisconnect, permissionRelaysState, permissionRelaysSetMode]">
+      <div
+        class="dropdown-item"
+        appHideIfAllPermissionsUnauthorized
+        [permissions]="[permissionRelaysConnect, permissionRelaysDisconnect, permissionRelaysState, permissionRelaysSetMode]"
+      >
         <div class="dropdown-submenu pull-left disabled">
           <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.RELAYS' | translate }}</span></a>
         <div class="dropdown-menu">
@@ -191,7 +248,10 @@
         <a class="dropdown-item" href="javascript:void(0);" (click)="onSetDisplaySettings()"><span>{{ 'PLC-METER.SET-DISPLAY-SETTINGS-TITLE' | translate }}</span></a>
       </div>
       <div appHideIfPermissionUnauthorized [permission]="permissionClearAlarms">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onClearAlarms()"><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a>
+        <a class="dropdown-item gray-light-line" href="javascript:void(0);" (click)="onClearAlarms()"><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a>
+      </div>
+      <div appHideIfPermissionUnauthorized [permission]="permissionReadMeter">
+        <a class="dropdown-item item-padding" href="javascript:void(0);" (click)="onReadMeter()"><span i18n>{{ 'COMMON.READ-METER' | translate }}</span></a>
       </div>
     </div>
   </div>

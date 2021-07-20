@@ -1,4 +1,4 @@
-import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { MuUpdateForm, MuUpdatePlcForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 import { MuHdlcInformation } from '../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
@@ -37,6 +37,7 @@ export class AddMuFormComponent implements OnInit {
   form: FormGroup;
   editMu: MeterUnitDetails;
   isEditMu = false;
+  plcDevice = false;
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
@@ -235,15 +236,18 @@ export class AddMuFormComponent implements OnInit {
       authenticationType = this.authenticationTypes[1];
     }
     return this.formBuilder.group({
-      [this.nameProperty]: [editMu?.name, Validators.required],
+      [this.nameProperty]: [editMu?.name],
       [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
       [this.templateProperty]: [{ value: null, disabled: this.isEditMu }, Validators.required],
       [this.templateStringProperty]: [{ value: editMu?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
 
-      [this.ipProperty]: [editMu?.ip, [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
-      [this.portProperty]: [editMu?.port],
+      [this.ipProperty]: [
+        { value: editMu?.ip, disabled: this.plcDevice },
+        this.plcDevice ? null : [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]
+      ],
+      [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
 
       [this.protocolProperty]: [{ value: editMu?.protocol, disabled: true }],
@@ -311,7 +315,18 @@ export class AddMuFormComponent implements OnInit {
     if (this.isTemplateSelected && !this.isEditMu) {
       this.templatingService.getDefaultValues(value.id).subscribe((values) => {
         this.templateDefaultValues = values;
+        if (this.templateDefaultValues.hdlcInformation || this.templateDefaultValues.wrapperInformation) {
+          this.isWrapperSelected = false;
+          this.isHdlcSelected = false;
+          if (this.templateDefaultValues.wrapperInformation) {
+            this.isWrapperSelected = true;
+          }
+          if (this.templateDefaultValues.hdlcInformation) {
+            this.isHdlcSelected = true;
+          }
+        }
         this.setDefaultFormValues();
+        this.setFormControls();
       });
     }
   }
@@ -319,6 +334,8 @@ export class AddMuFormComponent implements OnInit {
   setDefaultFormValues() {
     const wrapperInformation = this.templateDefaultValues?.wrapperInformation?.wrapperInformation;
     if (wrapperInformation && this.isWrapperSelected) {
+      this.form.get(this.communicationTypeProperty).patchValue(this.communicationTypes[0].value);
+
       this.setDefaultValue(this.wrapperClientAddressProperty, wrapperInformation.clientAddress);
       this.setDefaultValue(this.wrapperServerAddressProperty, wrapperInformation.serverAddress);
 
@@ -330,6 +347,7 @@ export class AddMuFormComponent implements OnInit {
 
     const hdlcInformation = this.templateDefaultValues?.hdlcInformation?.hdlcInformation;
     if (hdlcInformation && this.isHdlcSelected) {
+      this.form.get(this.communicationTypeProperty).patchValue(this.communicationTypes[1].value);
       this.setDefaultValue(this.clientLowProperty, hdlcInformation.clientLow);
       this.setDefaultValue(this.clientHighProperty, hdlcInformation.clientHigh);
       this.setDefaultValue(this.serverLowProperty, hdlcInformation.serverLow);
@@ -338,6 +356,15 @@ export class AddMuFormComponent implements OnInit {
       this.setDefaultValue(this.publicClientHighProperty, hdlcInformation.publicClientHigh);
       this.setDefaultValue(this.publicServerLowProperty, hdlcInformation.publicServerLow);
       this.setDefaultValue(this.publicServerHighProperty, hdlcInformation.publicServerHigh);
+    }
+
+    const advancedInformation = this.templateDefaultValues?.advancedInformation?.advancedInformation;
+    if (advancedInformation) {
+      if (advancedInformation.authenticationType) {
+        this.form.get(this.authenticationTypeProperty).setValue(advancedInformation.authenticationType);
+      }
+      this.setDefaultValue(this.advancedLdnAsSystitleProperty, advancedInformation.ldnAsSystitle);
+      this.setDefaultValue(this.advancedStartWithReleaseProperty, advancedInformation.startWithRelease);
     }
   }
 
@@ -455,15 +482,24 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.communicationTypeProperty).disable();
     }
 
-    const muFormData = this.fillUpdateData();
-    const request = this.muService.updateMuForm(muFormData);
+    let muFormData;
+    let request;
+
+    if (this.plcDevice) {
+      muFormData = this.fillUpdatePlcData();
+      request = this.muService.updateMuPlcForm(muFormData);
+    } else {
+      muFormData = this.fillUpdateData();
+      request = this.muService.updateMuForm(muFormData);
+    }
+
     const successMessage = this.translate.instant('PLC-METER.METER-UNIT-UPDATED');
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
         (result) => {
           this.toast.successToast(successMessage);
-          this.modal.close();
+          this.modal.close(result);
         },
         (errResult) => {
           if (errResult?.error?.length > 0 || Array.isArray(errResult.error)) {
@@ -607,6 +643,13 @@ export class AddMuFormComponent implements OnInit {
       connectionType: this.form.get(this.connectionTypeProperty).value,
       protocol: this.isNewOrProtocolDlms ? 2 : 0,
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
+    };
+  }
+
+  fillUpdatePlcData(): MuUpdatePlcForm {
+    return {
+      deviceId: this.editMu.deviceId,
+      name: this.form.get(this.nameProperty).value
     };
   }
 

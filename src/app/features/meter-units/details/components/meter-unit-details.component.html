@@ -198,8 +198,13 @@
               (click)="onSetDisplaySettings()"><span>{{ 'PLC-METER.SET-DISPLAY-SETTINGS-TITLE' | translate }}</span></a>
           </div>
           <div appHideIfPermissionUnauthorized [permission]="permissionClearAlarms">
-            <a href="javascript:void(0)" class="dropdown-item custom-hover-display"
+            <a href="javascript:void(0)" class="dropdown-item custom-hover-display gray-light-line"
               (click)="onClearAlarms()"><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a>
+          </div>
+          <div [permission]="permissionReadMeter" appHideIfPermissionUnauthorized>
+            <a (click)="onReadMeter()" class="dropdown-item custom-hover-display item-padding"
+               href="javascript:void(0)">
+              <span>{{ 'COMMON.READ-METER' | translate }}</span></a>
           </div>
         </div>
       </div>
@@ -241,13 +246,13 @@
             <div><span>{{ data.manufacturer }}</span></div>
           </div>
         </div>
-        <div class="form-row mb-4">
+        <div class="form-row mb-4" *ngIf="!isPlcDevice">
           <div class="col">
             <div><label>{{ 'FORM.IP' | translate }}</label></div>
             <div><span>{{data.ip}}</span></div>
           </div>
         </div>
-        <div class="form-row mb-4">
+        <div class="form-row mb-4" *ngIf="!isPlcDevice">
           <div class="col">
             <div><label>{{ 'FORM.PORT' | translate }}</label></div>
             <div><span>{{data.port}}</span></div>

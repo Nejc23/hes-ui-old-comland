@@ -1,57 +1,58 @@
-.form-control.ng-invalid.ng-dirty  {
+.form-control.ng-invalid.ng-dirty {
   border: 1px solid $danger;
 }
 
-
-input[type=radio]:checked + label {
+input[type='radio']:checked + label {
   border-color: $secondary;
   color: $secondary;
   border-width: 3px;
 }
 
-input[type=radio] {
+input[type='radio'] {
   margin-top: 2px;
-  min-width:15px;
+  min-width: 15px;
 }
 
-input.form-control[type=checkbox] {
+input.form-control[type='checkbox'] {
   margin-top: 2px;
-  min-width:15px;
+  min-width: 15px;
 }
 
-.content-body-scroll
-{
-  height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important;// 100vh
-  overflow-y:auto;
-  overflow-x:hidden;
+.content-body-scroll {
+  height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important; // 100vh
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.content-body-scroll-templates
-{
-  height: calc(100vh - #{$topbar-base-height} - 9.3rem) !important;// 100vh
-  overflow-y:auto;
-  overflow-x:hidden;
+.content-body-scroll-templates {
+  height: calc(100vh - #{$topbar-base-height} - 9.3rem) !important; // 100vh
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.list-for-job-body-scroll
-{
-  height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important;// 100vh
-  overflow-y:auto;
-  overflow-x:hidden;
+.list-for-job-body-scroll {
+  height: calc(100vh - #{$topbar-base-height} - 5.3rem) !important; // 100vh
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
-.jobs-body-scroll
-{
-  height: calc(100vh - #{$topbar-base-height} - 9rem) !important;// 100vh
-  overflow-y:auto;
-  overflow-x:hidden;
+.jobs-body-scroll {
+  height: calc(100vh - #{$topbar-base-height} - 9rem) !important; // 100vh
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .mu-registers-body-scroll {
-  height:calc(100vh - #{$topbar-base-height} - 10.85rem);
-  margin-right:1rem;
-  overflow-y:auto;
-  overflow-x:hidden;
+  height: calc(100vh - #{$topbar-base-height} - 10.85rem);
+  margin-right: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: 4rem;
+
+  .spinner-border {
+    height: 58px;
+    width: 58px;
+  }
 }
 
 .cursor-pointer {
@@ -59,9 +60,9 @@ input.form-control[type=checkbox] {
 }
 
 .col-box-check {
-  margin-left:5px;
-  margin-right:5px;
-  cursor:pointer;
+  margin-left: 5px;
+  margin-right: 5px;
+  cursor: pointer;
 }
 
 label {
@@ -72,11 +73,11 @@ label {
 }
 
 .k-numerictextbox.ng-dirty.ng-invalid {
-  border:none;
+  border: none;
 }
 
 .k-combobox.k-header.ng-dirty.ng-invalid {
-  border:none;
+  border: none;
 }
 
 .form-check-selected {
@@ -106,7 +107,7 @@ label {
 
   .k-dateinput-wrap {
     border-radius: 0;
-    box-shadow:none;
+    box-shadow: none;
     border: none;
 
     &.k-state-focused {
@@ -116,21 +117,21 @@ label {
 
   .edge-content {
     text-align: center;
-    padding-top:6px;
+    padding-top: 6px;
 
     &.left {
-      border-right:none;
+      border-right: none;
     }
 
     &.right {
-      border-left:none;
+      border-left: none;
     }
   }
 
   .separator {
-    width:5px;
+    width: 5px;
     vertical-align: center;
-    padding-top:6px
+    padding-top: 6px;
   }
 
   .left-date {
@@ -163,24 +164,23 @@ label {
     .range-separator {
       width: 40px;
       text-align: center;
-      margin-top:20px;
-      padding-top:10px;
+      margin-top: 20px;
+      padding-top: 10px;
     }
   }
 }
 
 .add-job-grid {
-  padding-top:20px;
-  padding-left:80px;
-  padding-right:80px;
+  padding-top: 20px;
+  padding-left: 80px;
+  padding-right: 80px;
 
   .card-container {
     :hover {
       background-color: #f9f9fb;
     }
 
-    .card
-    {
+    .card {
       cursor: pointer;
       border: none;
 
@@ -208,7 +208,6 @@ label {
 }
 
 .datetime-range-picker {
-
   .date-range-picker {
     //width: 699px;
     //height: 438px;
@@ -241,8 +240,9 @@ label {
       color: white;
     }
 
-    .md-drppicker td.active, .md-drppicker td.active:hover {
-      background-color: #225FA9; // lightBlue
+    .md-drppicker td.active,
+    .md-drppicker td.active:hover {
+      background-color: #225fa9; // lightBlue
       color: white;
     }
 
@@ -251,12 +251,12 @@ label {
     }
 
     th.prev.available {
-      background-color: #F4F6F9;
+      background-color: #f4f6f9;
       border-radius: 4px;
     }
 
     th.available.next {
-      background-color: #F4F6F9;
+      background-color: #f4f6f9;
       border-radius: 4px;
     }
 
@@ -272,17 +272,17 @@ label {
 
     tr.week-days {
       font-size: 10px;
-      color: #A9ABAF;
+      color: #a9abaf;
       height: 55px;
     }
 
     .md-drppicker .ranges ul li button.active {
-      background-color: #F4F6F9;
+      background-color: #f4f6f9;
       color: black;
     }
 
     .md-drppicker .ranges ul li button {
-      color: #6F7072;
+      color: #6f7072;
     }
 
     .md-drppicker .ranges ul li button {
@@ -299,10 +299,15 @@ label {
   }
 
   .padding-top-32 {
-   padding-top: 32px;
+    padding-top: 32px;
   }
 
   button.btn-link {
     padding-left: 0;
   }
+}
+
+.date-time-picker-meter-units {
+  width: 305px;
+  height: 55px;
 }

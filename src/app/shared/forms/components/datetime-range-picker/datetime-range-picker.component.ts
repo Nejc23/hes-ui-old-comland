@@ -17,6 +17,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   @Input() withRanges = true;
   @Input() withTime = true;
   @Input() form: FormGroup;
+
   @Input() initValues = false;
 
   @Output() formClosed: EventEmitter<boolean> = new EventEmitter();
@@ -31,6 +32,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     firstDay: moment.localeData().firstDayOfWeek()
   };
 
+  // TODO translate
   defaultRanges: any = {
     [this.translate.instant('DAY.TODAY')]: [moment(), moment()],
     [this.translate.instant('DAY.YESTERDAY')]: [moment().subtract(1, 'days'), moment()],

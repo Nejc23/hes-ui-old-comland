@@ -1,17 +1,15 @@
 <ag-grid-angular
     class="ag-theme-epoint no-selection"
-    style="width: 100%; height: calc(100% - 25px);"
+    style="width: 100%; height: calc(100% - 25px - 6rem);"
     #agGrid
     [columnDefs]="columnDefs"
     [rowData]="rowData"
-    (gridReady)="onGridReady($event)"
-    (firstDataRendered)="onFirstDataRendered($event)"
+    [debounceVerticalScrollbar]="true"
     suppressRowClickSelection="true"
+    (firstDataRendered)="onFirstDataRendered($event)"
     [modules]="modules"
-    [pagination]="true"
     [paginationPageSize]="gridPageSize"
     [domLayout]="agGridSettings.domLayout"
-    suppressSizeToFit=agGridSettings.suppressSizeToFit
     [localeText]="localeText"
     [suppressMovableColumns]="true"
 >

@@ -1,6 +1,4 @@
 <div class="row">
-
-
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
     <div class="filter-shadow">
       <div class="form-group">
@@ -26,10 +24,17 @@
   </div>
 
   <!-- CHECK RANGES -->
-  <div [ngClass]="{'col-10': !hideFilter, 'col-12': hideFilter}" class="pr-0">
+  <div [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }" class="pr-0">
     <div class="mr-3">
-      <div class="d-flex pb-3">
-        <button type="button" class="btn btn-light pl-3 pr-3 position-relative mr-3" [ngClass]="{'active': !hideFilter}" (click)="clickShowHideFilter()" [ngbTooltip]="hideShowFilters" *ngIf="false">
+      <div class="d-flex">
+        <button
+          type="button"
+          class="btn btn-light pl-3 pr-3 position-relative mr-3"
+          [ngClass]="{ active: !hideFilter }"
+          (click)="clickShowHideFilter()"
+          [ngbTooltip]="hideShowFilters"
+          *ngIf="false"
+        >
           <i class="far fa-ellipsis-v"></i>
         </button>
 
@@ -37,17 +42,34 @@
           <h3 class="mb-0">{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
         </div>
         <div class="ml-auto">
-          <button type="button" class="btn btn-light pl-2 pr-2 mr-0" (click)="onRefresh()" placement="left" [openDelay]="500" [ngbTooltip]="tipContentRefresh">
-            <i class="far fa-redo"></i></button>
+          <button
+            type="button"
+            class="btn btn-light pl-2 pr-2 mr-0"
+            (click)="onRefresh()"
+            placement="left"
+            [openDelay]="500"
+            [ngbTooltip]="tipContentRefresh"
+          >
+            <i class="far fa-redo"></i>
+          </button>
         </div>
       </div>
-      <div class="d-flex">
-        <label class="mr-2 my-auto">{{ 'COMMON.FROM' | translate }}</label>
-        <app-datetime-picker [form]="form" [property]="startTimeProperty" [isInline]="true" (blur)="onStartTimeBlurOrChange()" (valueChange)="onStartTimeBlurOrChange()">
-        </app-datetime-picker>
-        <label class="mr-2 ml-2 my-auto">{{ 'COMMON.TO' | translate }}</label>
-        <app-datetime-picker [form]="form" [property]="endTimeProperty" [isInline]="true" (blur)="onEndTimeBlurOrChange()" (valueChange)="onEndTimeBlurOrChange()">
-        </app-datetime-picker>
+      <div class="d-flex date-time-picker-meter-units mt-2">
+        <app-input-text
+          container="body"
+          placement="bottom"
+          class="w-100"
+          [ngbPopover]="popDateTimePicker"
+          [autoClose]="'outside'"
+          #popover="ngbPopover"
+          popoverClass="date-range-picker-popover"
+          [iconName]="'fa-calendar'"
+          [isReadOnly]="true"
+          [form]="form"
+          [property]="'labelText'"
+          label="Select-date"
+        >
+        </app-input-text>
       </div>
       <div class="btn-group">
         <button class="btn btn-link btn-sm p-2" (click)="setRange(1)">{{ 'DAY.TODAY' | translate }}</button>
@@ -81,26 +103,27 @@
       </div>
 
       <div *ngIf="isDataFound">
-        <div class="row mb-5">
+        <div class="row mt-4">
           <div class="col-12" *ngIf="!isEvent">
-            <app-registers-chart
-              [categories]="chartCategories"
-              [chartData]="chartData"
-              [unit]="unit"
-            >
-            </app-registers-chart>
+            <app-registers-chart [categories]="chartCategories" [chartData]="chartData" [unit]="unit"> </app-registers-chart>
           </div>
           <div class="col-12" *ngIf="isEvent">
             <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
             <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
           </div>
         </div>
-        <div class="row">
-          <div [ngClass]="{'col-12': (!showStatistics || !registerStatisticsData) && !isEvent, 'col-8': showStatistics && registerStatisticsData && !isEvent, 'col-6': isEvent }">
+        <div class="row mt-4">
+          <div
+            [ngClass]="{
+              'col-12': (!showStatistics || !registerStatisticsData) && !isEvent,
+              'col-8': showStatistics && registerStatisticsData && !isEvent,
+              'col-6': isEvent
+            }"
+          >
             <app-registers-grid [rowData]="rowData" [categorization]="categorization"></app-registers-grid>
           </div>
           <div class="col-4" *ngIf="showStatistics && !isEvent && registerStatisticsData">
-            <app-registers-statistics [data]='registerStatisticsData' ></app-registers-statistics>
+            <app-registers-statistics [data]="registerStatisticsData"></app-registers-statistics>
           </div>
           <div class="col-6" *ngIf="isEvent">
             <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
@@ -113,3 +136,7 @@
 </div>
 <ng-template #hideShowFilters><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template>
 <ng-template #tipContentRefresh><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template>
+
+<ng-template #popDateTimePicker>
+  <app-datetime-range-picker [form]="form" [initValues]="true" (formClosed)="closePopover()"></app-datetime-range-picker>
+</ng-template>

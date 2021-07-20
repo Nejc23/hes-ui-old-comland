@@ -7,7 +7,7 @@
             <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
               data-toggle="dropdown"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
             <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
-              <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn btn-link"
+              <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn text-secondary"
                 (click)="onRemoveFromJob()"><i class="far fa-calendar"></i>
                 <span>{{ 'JOB.REMOVE' | translate }}</span>
               </button>
