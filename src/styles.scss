@@ -5,50 +5,27 @@
 
 @import "styles/font-awsome/css/all.min.css";
 @import "styles/material";
-//
+
 @import 'brand';
 
 /* import Bootstrap files */
 @import "styles/../../node_modules/bootstrap/scss/functions";
-@import "styles/../../node_modules/bootstrap/scss/mixins";
 @import "styles/variables";
-//
+@import "styles/../../node_modules/bootstrap/scss/mixins";
+// TODO CHECK COMPONENTS IF SOMETHING IS NOT USED
+@import 'styles/bootstrap';
+
 @import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
-//
+@import "styles/global";
 @import "styles/navs";
-//
 @import "styles/kendoUI";
 @import "styles/ag-grid";
-//
 @import "styles/custom-style";
-@import "styles/global";
-//
-// TODO CHECK IF SOMETHING IS NOT USED
-@import 'styles/bootstrap';
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-// TEMP DIRTY HACKS BS4->BS5 migration
-.form-group {
-  margin-bottom: 1rem;
-}
-
-//.border-left {
-//  border-left: 1px solid #ced2d9 !important;
-//}
-
-.k-multiselect .k-multiselect-wrap, .k-dropdowntree .k-multiselect-wrap {
-  border-width: 0;
-}
-
-.k-combobox .k-dropdown-wrap {
-  border-style: none;
-}
-
-.k-numerictextbox .k-numeric-wrap {
-  border-style: none;
-}
 
 // tailwind border issue
 *, ::before, ::after {
@@ -57,3 +34,33 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-style: hidden;
 }
 
+// bs hacks
+
+.form-inline .form-control {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row>.col, .form-row>[class*=col-] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.modal-header {
+  padding: 0 1.714rem;
+}
+
+.modal-body {
+  padding: 0 1.714rem;
+}
+//.border-left {
+//  border-left: 1px solid #ced2d9 !important;
+//}

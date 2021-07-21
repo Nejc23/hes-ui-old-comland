@@ -52,7 +52,7 @@
       triggers="hover"
       [ngbTooltip]="setToolTip('operation')"
       id="dropdownMenuButton"
-      data-toggle="dropdown"
+      data-bs-toggle="dropdown"
       aria-haspopup="true"
       aria-expanded="false"
     >
@@ -63,8 +63,8 @@
         <a class="dropdown-item" href="javascript:void(0);" (click)="onDelete()"><span>{{ 'BUTTON.DELETE' | translate }}</span></a>
       </div>
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionManageJobs">
-        <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.JOBS' | translate }}</span></a>
+        <div class="dropdown-submenu pull-start">
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'COMMON.JOBS' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionManageJobs">
               <a class="dropdown-item" href="javascript:void(0)" (click)="onScheduleReadJobs()"><span>{{ 'PLC-METER.CREATE-NEW' | translate }}</span></a>
@@ -84,8 +84,8 @@
       ></div>
 
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
-        <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'PLC-METER.FW-UPGRADE-TITLE' | translate }}</span></a>
+        <div class="dropdown-submenu pull-start">
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'PLC-METER.FW-UPGRADE-TITLE' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
               <a class="dropdown-item" href="javascript:void(0);" (click)="onUpgrade()"><span>{{ 'PLC-METER.UPLOAD-IMAGE' | translate }}</span></a>
@@ -126,7 +126,7 @@
         ]"
       >
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'PLC-METER.BREAKER.BREAKER' | translate }}</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'PLC-METER.BREAKER.BREAKER' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionDisconnectorConnect">
               <a class="dropdown-item" href="javascript:void(0);" (click)="onConnect()"><span>{{ 'COMMON.CONNECT' | translate }}</span></a>
@@ -150,7 +150,7 @@
         [permissions]="[permissionCiiActivate, permissionCiiDeactivate, permissionCiiState]"
       >
         <div class="dropdown-submenu pull-left disabled">
-          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.CII' | translate }}</span></a>
+          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'COMMON.CII' | translate }}</span></a>
           <div class="dropdown-menu">
             <div appHideIfPermissionUnauthorized [permission]="permissionCiiActivate">
               <a class="dropdown-item" href="javascript:void(0);" (click)="onCiiActivate()"><span>{{ 'COMMON.ACTIVATE' | translate }}</span></a>
@@ -171,7 +171,7 @@
         [permissions]="[permissionRelaysConnect, permissionRelaysDisconnect, permissionRelaysState, permissionRelaysSetMode]"
       >
         <div class="dropdown-submenu pull-left disabled">
-          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.RELAYS' | translate }}</span></a>
+          <a dropdownToggle class="dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'COMMON.RELAYS' | translate }}</span></a>
         <div class="dropdown-menu">
           <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionRelaysConnect" (click)="onRelaysConnect()">
             <a href="javascript:void(0)"><span>{{ 'COMMON.CONNECT' | translate }}</span></a>
@@ -217,7 +217,7 @@
 
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.LIMITER' | translate }}</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'COMMON.LIMITER' | translate }}</span></a>
           <div class="dropdown-menu">
             <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetLimiter" (click)="onSetLimiter()">
               <a href="javascript:void(0)"><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a>
@@ -230,7 +230,7 @@
       </div>
       <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor">
         <div class="dropdown-submenu pull-left">
-          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-toggle="dropdown"><span>{{ 'COMMON.MONITOR' | translate }}</span></a>
+          <a dropdownToggle class="dropdown-toggle disabled" href="javascript:void(0)" data-bs-toggle="dropdown"><span>{{ 'COMMON.MONITOR' | translate }}</span></a>
           <div class="dropdown-menu">
             <div class="dropdown-item" appHideIfPermissionUnauthorized [permission]="permissionSetMonitor" (click)="onSetMonitor()">
               <a href="javascript:void(0)"><span>{{ 'PLC-METER.SET-THRESHOLDS' | translate }}</span></a>

@@ -1,4 +1,4 @@
-<div class="form-group" [formGroup]="form">
+<div class="mb-3" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
     <ng-container *ngIf="label !== ' '; else blank">
       {{ 'FORM.' + label.toUpperCase() | translate }}

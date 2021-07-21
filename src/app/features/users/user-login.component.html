@@ -17,10 +17,10 @@
           <app-input-text (keyup.enter)="login()" [form]="form" [property]="passwordProperty" label="Password"
             [inputType]="'password'">
           </app-input-text>
-        <div class="form-group">
+        <div class="mb-3">
           <button type="submit" (click)="login()" class="btn btn-primary btn-block"> {{ 'LOGIN.TITLE' | translate }}</button>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
           <a href="javascript:void(0);" (click)="setForgotPassword()">{{ 'LOGIN.FORGOT-PASSWORD' | translate }}</a>
         </div>
       </form>
@@ -29,15 +29,15 @@
       <form [formGroup]="formReset" *ngIf="forgotPassword && !resetPassword" class="px-4">
         <h2 class="text-uppercase">{{'LOGIN.RESET-PASSWORD' | translate }}</h2>
         <p>{{'LOGIN.ENTER-EMAIL' | translate }}</p>
-        <div class="form-group">
+        <div class="mb-3">
           <app-input-text (keyup.enter)="reset()" [form]="formReset" [property]="emailProperty" label="Email"
             [inputType]="'text'">
           </app-input-text>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
           <button type="submit" (click)="reset()" class="btn btn-primary btn-block">{{ 'LOGIN.RESET' | translate }}</button>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
           <a href="javascript:void(0);" (click)="setLogin()">{{ 'LOGIN.BACK-TO-LOGIN' | translate }}</a>
         </div>
       </form>
@@ -46,20 +46,20 @@
       <form [formGroup]="formNewPassword" *ngIf="resetPassword" class="px-4">
         <h2 class="text-uppercase">{{'LOGIN.RESET-PASSWORD' | translate }}</h2>
         <p>{{ 'LOGIN.ENTER-NEW-PASSWORD' | translate }}</p>
-        <div class="form-group">
+        <div class="mb-3">
           <app-input-text [form]="formNewPassword" [property]="newPasswordProperty" label="New password"
             [inputType]="'text'">
           </app-input-text>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
           <app-input-text [form]="formNewPassword" [property]="newConfirmPasswordProperty" label="Confirm password"
             [inputType]="'text'">
           </app-input-text>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
           <button type="submit" (click)="newPassword()" class="btn btn-primary btn-block">{{ 'LOGIN.RESET' | translate }}</button>
         </div>
-        <div class="form-group">
+        <div class="mb-3">
           <a href="javascript:void(0);" (click)="setLogin()">{{ 'LOGIN.BACK-TO-LOGIN' | translate }}</a>
         </div>
       </form>

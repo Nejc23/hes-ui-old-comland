@@ -5,7 +5,7 @@
   </button>
 
   <div class="btn-group ml-2" dropdown>
-    <button dropdownToggle type="button" class="btn btn-light pl-2 pr-2" (click)="$event.stopPropagation();" [ngbTooltip]="tipContentColumns" data-toggle="dropdown"><i class="fas fa-columns"></i>
+    <button dropdownToggle type="button" class="btn btn-light pl-2 pr-2" (click)="$event.stopPropagation();" [ngbTooltip]="tipContentColumns" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
     </button>
     <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu">
       <div class="dropdown-item custom-color-grid-columns">

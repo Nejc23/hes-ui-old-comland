@@ -1,11 +1,11 @@
-<div class="form-group" *ngIf="!edit">
+<div class="mb-3" *ngIf="!edit">
   <button class="btn btn-primary mr-2" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
     <span>{{ 'COMMON.EDIT' | translate }}</span>
   </button>
   <app-dc-operations [showOperations]="true" [requestModel]="null"
     [guid]="concentratorId" [selectedItemsCount]="1"></app-dc-operations>
 </div>
-<div class="form-group" *ngIf="edit">
+<div class="mb-3" *ngIf="edit">
     <button type="button" class="btn btn-light" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
     <button class="btn btn-primary" (click)="saveDcu()">{{ 'BUTTON.SAVE' | translate }}</button>
   </div>
@@ -13,7 +13,7 @@
 <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
   <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
 </div>
-<div class="form-group" *ngIf="!edit">
+<div class="mb-3" *ngIf="!edit">
   <div class="form-row mb-4">
     <div class="col-4">
       <div><label>{{ 'COMMON.NAME' | translate }}</label></div>

@@ -1,4 +1,4 @@
-<div #container class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+<div #container class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
   <label [attr.for]="property" *ngIf="label">
     {{ 'FORM.' + label.toUpperCase()  | translate }}
     <span *ngIf="required"> *</span>
