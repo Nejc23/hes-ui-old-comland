@@ -64,3 +64,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 //.border-left {
 //  border-left: 1px solid #ced2d9 !important;
 //}
+
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
+  color: #2f2f39;
+  background-color: #cbd0df;
+  border-color: #c3c8da;
+}
