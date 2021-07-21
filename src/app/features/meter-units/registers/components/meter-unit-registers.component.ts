@@ -164,13 +164,12 @@ export class MeterUnitRegistersComponent implements OnInit {
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
     );
     this.muService.getMeterUnit(this.deviceId).subscribe((result) => {
-      this.setTitle(result.name);
+      this.setTitle(result.name ? result.name : result.serialNumber);
       this.setBreadcrumbs();
     });
   }
 
   setRange(selectedRangeId: number) {
-    debugger;
     const date = new Date();
     switch (selectedRangeId) {
       case 1: {

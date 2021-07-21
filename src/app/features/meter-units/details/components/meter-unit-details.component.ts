@@ -41,9 +41,7 @@ export class MeterUnitDetailsComponent implements OnInit {
     private codeList: CodelistMeterUnitsRepositoryService,
     private router: Router,
     private modalService: ModalService
-  ) {
-    breadcrumbService.setPageName($localize`Meter unit`);
-  }
+  ) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
@@ -81,7 +79,9 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     modalRef.result
       .then((result) => {
-        this.data = result;
+        if (result) {
+          this.data = result;
+        }
       })
       .catch(() => {});
   }
@@ -94,6 +94,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
+      this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
       this.setBreadcrumbs();
       if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
         this.isPlcDevice = true;
