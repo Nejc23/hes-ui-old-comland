@@ -488,6 +488,7 @@
         "SCHEDULER-JOB-DISABLED": "Le scheduler job est désactivé !",
         "SCHEDULER-JOB-ENABLED": "Le scheduler job est activé !",
         "SCHEDULER-JOB-STARTED": "Le scheduler job a démarré !",
+        "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
         "STATUS-JOB": {
             "ERROR": "Error getting status job",
             "PROGRESS": "",

@@ -488,6 +488,7 @@
         "SCHEDULER-JOB-DISABLED": "Scheduler job non permesso !",
         "SCHEDULER-JOB-ENABLED": "Scheduler job permesso !",
         "SCHEDULER-JOB-STARTED": "Il Scheduler job è iniziato !",
+        "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
         "STATUS-JOB": {
             "ERROR": "Non ci sono ancora dei modelli aggiunti nel sistema",
             "PROGRESS": "",
