@@ -16,7 +16,7 @@
 </ul>-->
 <!--/div>-->
 <li *ngFor="let item of items; let first = first" class="nav-item" [ngClass]="{'dropdown': item.hasChildren}">
-  <a class="nav-link px-4 d-flex" href="javascript:void(0);" [routerLink]="item.routeLink"
+  <a class="nav-link d-flex" href="javascript:void(0);" [routerLink]="item.routeLink"
      *ngIf="!item.hasChildren && hasAccess(item)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"

@@ -20,7 +20,7 @@
       [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
       (mouseleave)="mouseLeavesNav()">
 
-      <div class="brand d-flex align-items-center justify-content-between mb-4 px-4">
+      <div class="brand d-flex align-items-center mb-4">
         <div class="ml-3" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
           <img class="brand-logo" [src]="getMenuMainLogoUrl()">
         </div>

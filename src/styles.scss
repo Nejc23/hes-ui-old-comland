@@ -26,7 +26,6 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-
 // tailwind border issue
 *, ::before, ::after {
   box-sizing: border-box;
@@ -35,7 +34,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 // bs hacks
-
 .form-inline .form-control {
   display: inline-block;
   width: auto;
@@ -53,7 +51,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-right: 5px;
   padding-left: 5px;
 }
+// bs4 hacks
 
+// bs override
 .modal-header {
   padding: 0 1.714rem;
 }
@@ -61,12 +61,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .modal-body {
   padding: 0 1.714rem;
 }
-//.border-left {
-//  border-left: 1px solid #ced2d9 !important;
-//}
 
+// bs override
 .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
-  color: #2f2f39;
+  color: $gray-900;
   background-color: #cbd0df;
   border-color: #c3c8da;
+}
+
+.dropdown-item.active, .dropdown-item:active {
+   background-color: transparent;
+   color: $primary;
+ }
+// bs override
+
+// small screen issue fix
+.grid-actions {
+  .btn-light {
+    max-height: 33.5px;
+  }
 }

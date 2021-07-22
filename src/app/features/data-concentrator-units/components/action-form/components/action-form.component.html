@@ -1,11 +1,11 @@
 <div class="d-flex">
-    <button type="button" class="btn btn-light pl-2 pr-2 position-relative" [ngClass]="{'active': isFilterOpened}" (click)="doToggleFilter()" [ngbTooltip]="hideShowFilter">
+    <button type="button" class="btn btn-light ps-2 pe-2 position-relative" [ngClass]="{'active': isFilterOpened}" (click)="doToggleFilter()" [ngbTooltip]="hideShowFilter">
       <i class="fas fa-filter"></i>
       <span class="badge badge-primary" *ngIf="filtersInfo.isSet">{{filtersInfo.count}}</span>
     </button>
 
     <div class="btn-group ml-2" dropdown>
-      <button dropdownToggle type="button" class="btn btn-light pl-2 pr-2" (click)="$event.stopPropagation();" [ngbTooltip]="tipContentColumns" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
+      <button dropdownToggle type="button" class="btn btn-light ps-2 pe-2" (click)="$event.stopPropagation();" [ngbTooltip]="tipContentColumns" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
       </button>
       <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu">
         <div dropdownItem class="dropdown-item custom-color-grid-columns">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-light pl-2 pr-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
+    <button type="button" class="btn btn-light ps-2 pe-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="fas fa-sync-alt"></i></button>
 
     <ng-content></ng-content>
