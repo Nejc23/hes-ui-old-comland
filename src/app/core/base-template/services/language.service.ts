@@ -12,11 +12,13 @@ export class LanguageService {
   constructor(private translate: TranslateService, public intlService: IntlService) {}
 
   selectLang(lang: string) {
-    const language = this.findLanguage(lang);
-    localStorage.setItem('lang', language.id);
-    this.translate.use(language.id);
-    this.selectedLang = language;
-    (this.intlService as CldrIntlService).localeId = language.id;
+    if (lang !== this.selectedLang?.id) {
+      const language = this.findLanguage(lang);
+      localStorage.setItem('lang', language.id);
+      this.translate.use(language.id);
+      this.selectedLang = language;
+      (this.intlService as CldrIntlService).localeId = language.id;
+    }
   }
 
   getLang(): Language {

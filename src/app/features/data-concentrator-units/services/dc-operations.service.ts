@@ -22,9 +22,6 @@ import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid
   providedIn: 'root'
 })
 export class DcOperationsService {
-  messageActionInProgress = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
-  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
-
   constructor(
     private modalService: ModalService,
     private toast: ToastNotificationService,
@@ -227,14 +224,13 @@ export class DcOperationsService {
         // selectedText = `${`for`} ${selectedText}`;
         break;
     }
-
     component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
     component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
 
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
+        this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
             /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
@@ -245,7 +241,7 @@ export class DcOperationsService {
             }*/
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -264,7 +260,7 @@ export class DcOperationsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
