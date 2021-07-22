@@ -89,7 +89,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  // messageActionInProgress = this.i18n(`Action in progress!`);
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
   messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';

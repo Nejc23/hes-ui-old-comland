@@ -47,10 +47,6 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
-  messageActionInProgress = this.translate.instant('COMMON.ACTION-IN-PROGRESS');
-  messageActionDeleteSuccess = this.translate.instant('DELETE-SUCCESS');
-  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
-
   constructor(
     private modalService: ModalService,
     private toast: ToastNotificationService,
@@ -94,7 +90,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -128,7 +124,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data !== 'cancel') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
           const options: NgbModalOptions = {
             size: 'md'
           };
@@ -153,7 +149,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (cancel or requestId as parameter)
         if (data !== 'cancel') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
           const options: NgbModalOptions = {
             size: 'md'
           };
@@ -183,7 +179,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -208,7 +204,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -235,7 +231,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -258,7 +254,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -282,7 +278,7 @@ export class MeterUnitsPlcActionsService {
         // on close (CONFIRM)
         if (data === 'save') {
           this.meterUnitsTypeGridService.saveMyGridLink_RelaysState_RequestId(data.requestId);
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -305,7 +301,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -324,7 +320,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -360,7 +356,7 @@ export class MeterUnitsPlcActionsService {
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
-            this.toast.successToast(this.messageActionDeleteSuccess);
+            this.toast.successToast(this.translate.instant('DELETE-SUCCESS'));
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
             } else {
@@ -368,7 +364,7 @@ export class MeterUnitsPlcActionsService {
             }
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -443,7 +439,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data !== '') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -562,7 +558,7 @@ export class MeterUnitsPlcActionsService {
           params[component.checkboxField] = data; // field must be defined inIActionRequestParams
         }
         // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
+        this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
             console.log(value.requestId);
@@ -581,7 +577,7 @@ export class MeterUnitsPlcActionsService {
             modalRef.componentInstance.deviceCount = value.deviceIds.length;
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -601,7 +597,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -620,7 +616,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -639,7 +635,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -843,7 +839,7 @@ export class MeterUnitsPlcActionsService {
         // on close (CONFIRM)
         if (data === 'save') {
           // TODO open date time picker modal
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
