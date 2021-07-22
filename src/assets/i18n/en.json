@@ -427,7 +427,8 @@
     "TYPE": "Type",
     "UNIT": "Unit",
     "VALUE": "Value",
-    "VENDOR": "Vendor"
+    "VENDOR": "Vendor",
+    "REGISTER": "Register"
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -654,11 +655,11 @@
       "METER-INOPERABLE-WARNING": "This action may result in damages, rendering meter inoperable!",
       "METER-UNITS-PASSWORD": "Meter Units password type change was successful",
       "PSK": "PSK",
-      "PW_CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
-      "PW_L1-READER": "PW_L1 (Reader)",
-      "PW_L2-INSTALLER": "PW_L2 (Installer)",
-      "PW_LG ": "PW_LG (Management)",
-      "PW_M2": "PW_M2 (Operator)",
+      "PW-CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
+      "PW-L1-READER": "PW_L1 (Reader)",
+      "PW-L2-INSTALLER": "PW_L2 (Installer)",
+      "PW-LG": "PW_LG (Management)",
+      "PW-M2": "PW_M2 (Operator)",
       "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?",
       "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
       "REKEY": "Rekey",

@@ -36,11 +36,11 @@ export class SecurityChangePasswordComponent {
     private translate: TranslateService
   ) {
     this.passwordTypes = [
-      { id: 'PW_LG', value: this.translate.instant('PLC-METER.SECURITY.PW_LG') },
-      { id: 'PW_M2', value: this.translate.instant('PLC-METER.SECURITY.PW_M2') },
-      { id: 'PW_L1', value: this.translate.instant('PLC-METER.SECURITY.PW_L1-READER') },
-      { id: 'PW_L2', value: this.translate.instant('PLC-METER.SECURITY.PW_L2-INSTALLER') },
-      { id: 'PW_CALIBRATION', value: this.translate.instant('PLC-METER.SECURITY.PW_CALIBRATION-VERIFICATION') }
+      { id: 'PW_LG', value: this.translate.instant('PLC-METER.SECURITY.PW-LG') },
+      { id: 'PW_M2', value: this.translate.instant('PLC-METER.SECURITY.PW-M2') },
+      { id: 'PW_L1', value: this.translate.instant('PLC-METER.SECURITY.PW-L1-READER') },
+      { id: 'PW_L2', value: this.translate.instant('PLC-METER.SECURITY.PW-L2-INSTALLER') },
+      { id: 'PW_CALIBRATION', value: this.translate.instant('PLC-METER.SECURITY.PW-CALIBRATION-VERIFICATION') }
     ];
     this.selectedPasswordType = this.passwordTypes[0];
     this.form = this.createForm();

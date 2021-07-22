@@ -427,7 +427,8 @@
         "TYPE": "Typ",
         "UNIT": "Unit",
         "VALUE": "Wert",
-        "VENDOR": "Vendor"
+        "VENDOR": "Vendor",
+        "REGISTER": "Register"
     },
     "JOB": {
         "ACTIVE-JOB": {
