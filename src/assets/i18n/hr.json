@@ -427,7 +427,8 @@
         "TYPE": "Type",
         "UNIT": "Unit",
         "VALUE": "Value",
-        "VENDOR": "Vendor"
+        "VENDOR": "Vendor",
+        "REGISTER": "Register"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -487,6 +488,7 @@
         "SCHEDULER-JOB-DISABLED": "Scheduler job disabled!",
         "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
         "SCHEDULER-JOB-STARTED": "Scheduler job started!",
+        "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
         "STATUS-JOB": {
             "ERROR": "Error getting status job",
             "PROGRESS": "Progress",

@@ -22,9 +22,6 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
-  messageDeleteStarted = `Scheduler job deleted!`;
-  messageStarted = `Scheduled job started!`;
-  messageServerError = `Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -63,10 +60,10 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
-            this.toast.successToast(this.messageStarted);
+            this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-STARTED'));
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -270,10 +267,10 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
           (value) => {
             const gridApi = this.params.api as GridApi;
             gridApi.purgeServerSideCache([]);
-            this.toast.successToast(this.messageDeleteStarted);
+            this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-DELETED'));
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },

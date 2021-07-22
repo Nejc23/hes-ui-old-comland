@@ -487,6 +487,7 @@
         "SCHEDULER-JOB-DISABLED": "Opravilo onemogočeno!",
         "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
         "SCHEDULER-JOB-STARTED": "Opravilo zagnano!",
+        "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
         "STATUS-JOB": {
             "ERROR": "Error getting status job",
             "PROGRESS": "",

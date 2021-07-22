@@ -122,7 +122,9 @@ export class ActionFormComponent implements OnInit, OnDestroy {
     }
 
     this.staticTextService.removePopupBackdropIfClickOnMenu();
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
 
     if (this.eventSettingsStoreLoadedSubscription) {
       this.eventSettingsStoreLoadedSubscription.unsubscribe();

@@ -427,7 +427,8 @@
         "TYPE": "Typ",
         "UNIT": "Unit",
         "VALUE": "Wert",
-        "VENDOR": "Vendor"
+        "VENDOR": "Vendor",
+        "REGISTER": "Register"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -487,6 +488,7 @@
         "SCHEDULER-JOB-DISABLED": "Scheduler job disabled!",
         "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
         "SCHEDULER-JOB-STARTED": "Scheduler job started!",
+        "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
         "STATUS-JOB": {
             "ERROR": "There are no templates added in the system yet.",
             "PROGRESS": "Progress",

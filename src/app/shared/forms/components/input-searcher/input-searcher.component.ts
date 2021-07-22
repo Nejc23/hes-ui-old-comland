@@ -56,7 +56,7 @@ export class InputSearcherComponent implements OnInit {
   getTooltip() {
     let tooltip = this.translate.instant('COMMON.WILDCARDS-SEARCH-DISABLED');
     if (this.useWildcards) {
-      tooltip = this.translate.instant('COMMON.WILDCARDS-SEARCH-ENABLE');
+      tooltip = this.translate.instant('COMMON.WILDCARDS-SEARCH-ENABLED');
     }
     return tooltip;
   }
