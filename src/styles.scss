@@ -33,7 +33,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-style: hidden;
 }
 
-// bs hacks
+// bs5 hacks
 .form-inline .form-control {
   display: inline-block;
   width: auto;
@@ -51,7 +51,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding-right: 5px;
   padding-left: 5px;
 }
-// bs4 hacks
+
+.input-group-prepend {
+  display: flex;
+  margin-right: -1px;
+}
+// bs5 hacks
 
 // bs override
 .modal-header {
@@ -73,6 +78,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
    background-color: transparent;
    color: $primary;
  }
+
+// check
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.pl-0 {
+  margin-right: 0.5rem !important;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+.pr-3 {
+  padding-right: 0.75rem;
+}
 // bs override
 
 // small screen issue fix
@@ -81,3 +102,4 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     max-height: 33.5px;
   }
 }
+
