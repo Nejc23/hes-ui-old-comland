@@ -4,7 +4,7 @@
       <span class="badge badge-primary" *ngIf="filtersInfo.isSet">{{filtersInfo.count}}</span>
     </button>
 
-    <div class="btn-group ml-2" dropdown>
+    <div class="btn-group ms-2" dropdown>
       <button dropdownToggle type="button" class="btn btn-light ps-2 pe-2" (click)="$event.stopPropagation();" [ngbTooltip]="tipContentColumns" data-bs-toggle="dropdown"><i class="fas fa-columns"></i>
       </button>
       <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu">
@@ -18,7 +18,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-light ps-2 pe-2 mr-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
+    <button type="button" class="btn btn-light ps-2 pe-2 me-3" (click)="onRefresh()" [ngbTooltip]="tipContentRefresh"><i
       class="fas fa-sync-alt"></i></button>
 
     <ng-content></ng-content>

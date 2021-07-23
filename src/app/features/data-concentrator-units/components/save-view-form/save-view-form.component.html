@@ -24,7 +24,7 @@
           <a id="saved-filters-{{i}}" class="flex-shrink-1"
              (click)="selectSavedLayoutClicked(i)">{{layoutItem.name}}</a>
           <div class="flex-shrink-0 ms-auto" *ngIf="isButtonVisible(i)">
-            <button type="button" class="btn btn-sm btn-link mr-1 ml-2" (click)="selectSavedLayoutClicked(i)"
+            <button type="button" class="btn btn-sm btn-link me-1 ms-2" (click)="selectSavedLayoutClicked(i)"
                     ngbTooltip="{{'BUTTON.APPLY' | translate }}"><i class="far fa-check"></i></button>
             <button type="button" class="btn btn-sm btn-link" (click)="deleteSavedLayoutClicked(i)"
                     ngbTooltip="{{'BUTTON.DELETE' | translate }}"><i class="far fa-trash text-danger"></i></button>

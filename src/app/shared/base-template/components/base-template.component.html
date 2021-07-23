@@ -21,16 +21,16 @@
       (mouseleave)="mouseLeavesNav()">
 
       <div class="brand d-flex align-items-center mb-4">
-        <div class="ml-3" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
+        <div class="ms-3" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
           <img class="brand-logo" [src]="getMenuMainLogoUrl()">
         </div>
 
 
         <div @navItemsTrigger *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
-            class="ml-3 brand-name">
+            class="ms-3 brand-name">
             <img [src]="getSmallLogoUrl()">
         </div>
-        <div @navItemsTrigger class="ml-auto mr-3"  *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+        <div @navItemsTrigger class="ml-auto me-3"  *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
           <a class="sidebar-light p-0" [ngClass]="{'text-black-50': app.layout.isMenuCollapsed }" href="javascript:void(0);"
             (click)="doToggleMenu()" [ngbTooltip]="tipContentMenu">
             <i class="far fa-bars m-0"></i>

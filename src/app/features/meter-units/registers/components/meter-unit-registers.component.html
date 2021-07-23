@@ -23,12 +23,12 @@
   </div>
 
   <!-- CHECK RANGES -->
-  <div [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }" class="pr-0">
-    <div class="mr-3">
+  <div [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }" class="pe-0">
+    <div class="me-3">
       <div class="d-flex">
         <button
           type="button"
-          class="btn btn-light pl-3 pr-3 position-relative mr-3"
+          class="btn btn-light pl-3 pe-3 position-relative me-3"
           [ngClass]="{ active: !hideFilter }"
           (click)="clickShowHideFilter()"
           [ngbTooltip]="hideShowFilters"
@@ -43,7 +43,7 @@
         <div class="ms-auto">
           <button
             type="button"
-            class="btn btn-light ps-2 pe-2 mr-0"
+            class="btn btn-light ps-2 pe-2 me-0"
             (click)="onRefresh()"
             placement="left"
             [openDelay]="500"

@@ -28,12 +28,12 @@
         (toggleWildcards)="toggleWildcards($event)"
         >
 
-        <div *ngIf="!selectedAtLeastOneRowOnGrid" class="pr-3">
-          <button class="btn btn-primary mr-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" href="javascript:void(0)" (click)="onAdd()">{{ 'BUTTON.ADD' | translate }}</button>
+        <div *ngIf="!selectedAtLeastOneRowOnGrid" class="pe-3">
+          <button class="btn btn-primary me-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" href="javascript:void(0)" (click)="onAdd()">{{ 'BUTTON.ADD' | translate }}</button>
         </div>
 
-        <div *ngIf="selectedAtLeastOneRowOnGrid" class="pr-3">
-          <button  class="btn btn-primary mr-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" [functionality]="formFunctionality" href="javascript:void(0)" (click)="onDelete()">{{ 'BUTTON.DELETE' | translate }}</button>
+        <div *ngIf="selectedAtLeastOneRowOnGrid" class="pe-3">
+          <button  class="btn btn-primary me-1" appHideIfPermissionUnauthorized [permission]="permissionMuManage" [functionality]="formFunctionality" href="javascript:void(0)" (click)="onDelete()">{{ 'BUTTON.DELETE' | translate }}</button>
           <div dropdown class="btn-group" appHideIfAllPermissionsUnauthorized [permissions]="[
             permissionManageJobs,
             permissionAssignTemplates,
@@ -316,8 +316,8 @@
         >
       </ag-grid-angular>
       <div class="ag-paging-panel-selection d-flex">
-        <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
-          <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+        <div class="p-2 ms-1" *ngIf="getSelectedCount() > 0">
+          <div class="me-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
             <small class="link text-secondary">{{getSelectedCount()}} <strong><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
                 <span>{{ 'GRID.SELECT-ALL' | translate }}</span>({{totalCount}})</a> &middot;
@@ -326,7 +326,7 @@
                   </strong></small>
           </div>
 
-          <div class="mr-3" *ngIf="checkSelectedAll()">
+          <div class="me-3" *ngIf="checkSelectedAll()">
             <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span> ({{getTotalCountWithoutExcludedDisplay()}}) <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
                 <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a></strong></small>

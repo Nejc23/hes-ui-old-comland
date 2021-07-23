@@ -20,15 +20,15 @@
      *ngIf="!item.hasChildren && hasAccess(item)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
-       class="ml-1 mt-0 mr-3 icon md-20">{{ item.icon }}</i>
+       class="ms-1 mt-0 me-3 icon md-20">{{ item.icon }}</i>
     <span class="title">{{ item.title | translate }}</span>
   </a>
 
-  <a class="nav-link px-4 dropdown-toggle-menu d-flex" href="javascript:void(0);" (click)="toggleDropdown(item)"
+  <a class="nav-link dropdown-toggle-menu d-flex" href="javascript:void(0);" (click)="toggleDropdown(item)"
      *ngIf="item.hasChildren && hasActiveChildLinks(item, null)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
-       class="ml-1 mt-0 mr-3 icon md-20">{{ item.icon }}</i>
+       class="ms-1 mt-0 me-3 icon md-20">{{ item.icon }}</i>
     <span class="title">{{ item.title | translate }}</span>
     <span class="arrow ms-auto">
       <i class="far fa-angle-right"></i>

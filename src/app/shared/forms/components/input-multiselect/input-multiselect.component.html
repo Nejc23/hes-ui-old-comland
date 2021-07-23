@@ -11,7 +11,7 @@
                 (change)="selectedValue(option, isOptionChecked(option), false)" [checked]="isOptionChecked(option)"
                 value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox />
 
-            <div class="mr-3 ps-2 control-label text-truncate cursor-pointer"
+            <div class="me-3 ps-2 control-label text-truncate cursor-pointer"
                 (click)="selectedValue(option, isOptionChecked(option), true)">{{option.value}}</div>
         </div>
     </div>

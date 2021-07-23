@@ -29,12 +29,12 @@
             (toggleFilter)="toggleFilter()"
             (toggleWildcards)="toggleWildcards($event)"
             >
-            <div *ngIf="getSelectedCount() === 0" class="mr-3">
+            <div *ngIf="getSelectedCount() === 0" class="me-3">
               <button appHideIfPermissionUnauthorized  [permission]="permissionAdd" class="btn btn-primary" (click)="addDcu()">
                 <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
-            <div class="pr-3">
+            <div class="pe-3">
               <app-dc-operations
                 [showOperations]="getSelectedCount() === 0 ? false : true"
                 [requestModel]="requestModel" [guid]="null"
@@ -82,8 +82,8 @@
           </ag-grid-angular>
 
           <div class="ag-paging-panel-selection d-flex">
-            <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
-              <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+            <div class="p-2 ms-1" *ngIf="getSelectedCount() > 0">
+              <div class="me-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
                 <small class="link text-secondary">{{getSelectedCount()}}
                   <strong><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span>&middot;
                     <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
@@ -94,7 +94,7 @@
                   </strong></small>
               </div>
 
-              <div class="mr-3" *ngIf="checkSelectedAll()">
+              <div class="me-3" *ngIf="checkSelectedAll()">
                 <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span> ({{getTotalCountWithoutExcluded()}}) <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
                   <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
                     <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a></strong></small>
