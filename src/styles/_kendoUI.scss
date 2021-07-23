@@ -6,7 +6,7 @@
 // kendo UI
 .ag-cell {
   .k-switch {
-    transform: scale(0.75);
+    transform: scale(0.85);
   }
 
   span.k-switch-container {
@@ -14,10 +14,10 @@
   }
 }
 
-//.k-switch-on .k-switch-container {
-//  border-color: $primary; // TODO CHECK
-//  background-color: $secondary;
-//}
+.k-switch-on .k-switch-container {
+  border-color: $primary !important;
+  background-color: $primary !important;
+}
 
 // kendo UI overrides
 .k-multiselect .k-multiselect-wrap, .k-dropdowntree .k-multiselect-wrap .k-combobox .k-dropdown-wrap {
@@ -42,4 +42,12 @@
 
 .k-datetimepicker .k-picker-wrap {
   border-style: hidden;
+}
+
+.k-dateinput-wrap {
+  min-width: 130px;
+}
+
+span[class^='k-'] {
+  border-style: hidden !important;
 }
