@@ -14,7 +14,32 @@
   }
 }
 
-.k-switch-on .k-switch-container {
-  border-color: #981D78; // TODO CHECK
-  background-color: $secondary;
+//.k-switch-on .k-switch-container {
+//  border-color: $primary; // TODO CHECK
+//  background-color: $secondary;
+//}
+
+// kendo UI overrides
+.k-multiselect .k-multiselect-wrap, .k-dropdowntree .k-multiselect-wrap .k-combobox .k-dropdown-wrap {
+  border-style: hidden;
+}
+
+.k-dateinput .k-dateinput-wrap {
+  border-style: hidden;
+}
+
+.k-combobox .k-dropdown-wrap {
+  border-style: hidden;
+}
+.k-numerictextbox .k-numeric-wrap {
+  border-style: hidden;
+}
+
+.k-checkbox {
+  width: 1.145rem;
+  height: 1.145rem;
+}
+
+.k-datetimepicker .k-picker-wrap {
+  border-style: hidden;
 }
