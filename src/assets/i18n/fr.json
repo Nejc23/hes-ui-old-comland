@@ -600,7 +600,7 @@
             "ASSIGN-EXISTING-JOBS": ""
         },
         "MANAGEMENT-ASSOCIATION": "Association de Management",
-        "MANUAL-AND-LOCAL-RE-CONNECTION ": "La re-connexion manuelle et locale est autorisée",
+        "MANUAL-AND-LOCAL-RE-CONNECTION": "La re-connexion manuelle et locale est autorisée",
         "MANUAL-AND-LOCAL-RE-CONNECTION-MANUAL-DISCONNECTION": "La re-connexion manuelle et locale est permise / la disconnexion manuelle n'est pas autorisée",
         "MAX-VALUE-RECORDED": "",
         "METER-UNIT-ADDED": "L'unité compteur a été ajoutée avec succès",
