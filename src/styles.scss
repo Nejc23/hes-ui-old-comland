@@ -13,9 +13,9 @@
 @import "styles/variables";
 @import "styles/../../node_modules/bootstrap/scss/mixins";
 // TODO CHECK COMPONENTS IF SOMETHING IS NOT USED
-@import 'styles/bootstrap';
+@import "~@progress/kendo-theme-bootstrap/dist/all.scss";
+@import "~bootstrap/scss/bootstrap";
 
-@import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
 @import "styles/global";
 @import "styles/navs";
 @import "styles/kendoUI";
