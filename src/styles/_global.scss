@@ -1,3 +1,4 @@
+@use 'sass:math';
 // Global component styles
 html {
   position: relative;
@@ -22,7 +23,7 @@ body {
 }
 
 #content {
-  margin-top: calc(#{$topbar-base-height} + #{$spacer/2});
+  margin-top: calc(#{$topbar-base-height} + #{math.div($spacer,2)});
 }
 
 /****************************************/
