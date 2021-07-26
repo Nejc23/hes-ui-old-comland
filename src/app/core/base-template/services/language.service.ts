@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { Language, languages } from 'src/environments/config';
 import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
-import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +9,7 @@ import { Router } from '@angular/router';
 export class LanguageService {
   public selectedLang: Language;
 
-  constructor(private translate: TranslateService, public intlService: IntlService, private router: Router) {}
+  constructor(private translate: TranslateService, public intlService: IntlService) {}
 
   selectLang(lang: string) {
     if (lang !== this.selectedLang?.id) {
