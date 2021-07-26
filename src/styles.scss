@@ -74,6 +74,15 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-color: #c3c8da;
 }
 
+.badge-success {
+  background-color: $success;
+}
+.badge-info {
+  background-color: $info;
+}
+.badge-dark {
+  background-color: $dark;
+}
 //.dropdown-item.active, .dropdown-item:active {
 //   background-color: transparent;
 //   color: $primary;
