@@ -27,14 +27,14 @@
         <div class="range-picker-popup">
           <div class="form-row">
             <div class="range-50">
-              <app-datetime-picker #datePickerStart [form]="form" [property]="startProperty" label="Start" (valueChange)="dateChanged()">
+              <app-datetime-picker #datePickerStart [form]="form" [property]="startProperty" label="Start" (datePickerValueChange)="dateChanged()">
               </app-datetime-picker>
             </div>
             <div class="range-separator">
               <i class="fas fa-minus"></i>
             </div>
             <div class="range-50">
-              <app-datetime-picker #datePickerEnd [form]="form" [property]="endProperty" label="End" (valueChange)="dateChanged()">
+              <app-datetime-picker #datePickerEnd [form]="form" [property]="endProperty" label="End" (datePickerValueChange)="dateChanged()">
               </app-datetime-picker>
             </div>
           </div>
