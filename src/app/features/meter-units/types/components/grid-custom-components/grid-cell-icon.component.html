@@ -23,11 +23,11 @@
   <app-scheduler-active-jobs [deviceId]="params.data.deviceId"></app-scheduler-active-jobs>
 </ng-template>
 <ng-template #tipContentMissingTemplate id="tipContentMissingTemplate">
-  <span i18n>Missing template!</span>
+  <span>{{ 'GRID.MISSING-TEMPLATE' | translate }}</span>
 </ng-template>
 <ng-template #tipContentReadyForActivation id="tipContentReadyForActivation">
-  <span i18n>Ready for activation!</span>
+  <span>{{ 'GRID.READY-FOR-ACTIVATION' | translate }}</span>
 </ng-template>
 <ng-template #tipContentHlsEnabled id="tipContentHlsEnabled">
-  <span i18n>High level security on management client is enabled on this device!</span>
+  <span>{{ 'GRID.HIGH-LEVEL-SECURITY' | translate }}</span>
 </ng-template>

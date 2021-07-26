@@ -13,12 +13,12 @@
 <div class="form-row mb-2">
   <div class="col-12">
     <label class="text-truncate" container="body" placement="bottom" [openDelay]="500"
-    [ngbTooltip]="subtitle">{{ subtitle }}</label>
+    [ngbTooltip]="subtitle">{{ subtitle | translate }}</label>
   </div>
 </div>
 <div class="form-row">
   <div class="col-4">
-    <app-select-input i18n-label label="File type" [form]="form" [property]="fileTypeProperty" [selectOptions]="fileTypes"
+    <app-select-input label="file-type" [form]="form" [property]="fileTypeProperty" [selectOptions]="fileTypes"
       [disabled]="false" (selectedValueChanged)="fileTypeChanged($event)">
     </app-select-input>
   </div>
@@ -37,8 +37,8 @@
           [isDropZoneCustom]="true"
           (successEvent)="successUploaded($event)"
           (uploadEvent)="uploadEvent($event)"
-          [dropUploadSubtitle]="uploadDropSubtitle"
-          i18n-label></app-file-upload>
+          [dropUploadSubtitle]="uploadDropSubtitle">
+      </app-file-upload>
   </div>
 </div>
 <ngb-alert class="alert alert-danger form-row dismissible" [ngClass]="closeAlert('danger',i)" role="alert" *ngFor="let item of allErrorTexts; let i = index ">{{item}}</ngb-alert>

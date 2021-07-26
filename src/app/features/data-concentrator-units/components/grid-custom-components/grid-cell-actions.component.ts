@@ -1,10 +1,8 @@
-import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DcOperationsService } from '../../services/dc-operations.service';
-import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 
 @Component({
   selector: 'app-grid-cell-actions',
@@ -29,17 +27,6 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
 
   toDetails() {
     this.router.navigate(['dataConcentratorUnits/' + this.params.data.concentratorId]);
-  }
-
-  // set tooltip text
-  setToolTip(type: string) {
-    switch (type) {
-      case 'details':
-        return $localize`Open details`;
-      case 'operation':
-        return $localize`Select operation`;
-    }
-    return '';
   }
 
   onSynchronizeTime() {

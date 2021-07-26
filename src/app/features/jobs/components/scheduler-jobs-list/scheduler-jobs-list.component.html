@@ -14,7 +14,7 @@
        (toggleWildcards)="toggleWildcards($event)">
       <div class="dropdown mr-3" *ngIf="hasUserAddPermissions()">
         <button class="btn btn-primary" (click)="addJob()"> <!--btn-round-->
-          <span i18n>Add</span>
+          <span>{{'COMMON.ADD' | translate }}</span>
         </button>
       </div>
     </app-action-form>
@@ -54,7 +54,7 @@
     </ag-grid-angular>
     <div class="ag-paging-panel-selection d-flex">
       <div class="ml-auto">
-        <app-select-dropdown i18n-label [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
+        <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
           [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
         </app-select-dropdown>
       </div>

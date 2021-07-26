@@ -30,16 +30,7 @@ module.exports = function (config) {
     angularCli: {
       environment: 'dev'
     },
-    pact: [{
-      port: 1234,
-      consumer: "ui-studio",
-      provider: "api-studio",
-      dir: "pact/output",
-      log: "pact/output/server.log",
-    }],
-    reporters: config.angularCli && config.angularCli.codeCoverage
-      ? ['progress', 'coverage-istanbul']
-      : ['progress', 'kjhtml'],
+    reporters: config.angularCli && config.angularCli.codeCoverage ? ['progress', 'coverage-istanbul'] : ['progress', 'kjhtml'],
     proxies: {
       '/api': 'http://localhost:1234/api'
     },
@@ -47,6 +38,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['ChromeHeadless'],
-    singleRun: true,
+    singleRun: true
   });
 };

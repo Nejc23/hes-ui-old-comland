@@ -1,8 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { Component, ViewChild } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-active-read-only',
@@ -12,11 +10,11 @@ export class GridCellActiveReadOnlyComponent implements ICellRendererAngularComp
   @ViewChild('activeSwitch', { static: true }) activeSwitch;
 
   public params: any;
-  messageEnabled = $localize`Scheduler job enabled!`;
-  messageDisabled = $localize`Scheduler job disabled!`;
-  messageServerError = $localize`Server error!`;
+  messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
 
-  constructor(private modalService: ModalService, private toast: ToastNotificationService, private service: JobsService) {}
+  constructor(private translate: TranslateService) {}
+
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -30,6 +28,6 @@ export class GridCellActiveReadOnlyComponent implements ICellRendererAngularComp
 
   // set tooltip text
   setToolTip(value: boolean) {
-    return value ? $localize`Active` : $localize`Inactive`;
+    return value ? this.translate.instant('COMMON.ACTIVE') : this.translate.instant('COMMON.INACTIVE');
   }
 }

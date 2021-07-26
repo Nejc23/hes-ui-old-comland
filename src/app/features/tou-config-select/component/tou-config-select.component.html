@@ -1,9 +1,10 @@
-<label><span i18n>Configuration</span><sup> *</sup></label>
-<ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 240px; overflow:auto;" #agGrid [rowData]="rowData"
-  [columnDefs]="columnDefs"
-  [modules]="modules"
-  (gridReady)="onGridReady($event)"
-  (rowSelected)="selectionChanged($event)"
-  (firstDataRendered)="onFirstDataRendered($event)"
-  rowSelection="single">
+<label><span>{{ 'COMMON.CONFIGURATION' | translate }}</span><sup> *</sup></label>
+<ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 240px; overflow:auto;" #agGrid
+                 [rowData]="rowData"
+                 [columnDefs]="columnDefs"
+                 [modules]="modules"
+                 (gridReady)="onGridReady($event)"
+                 (rowSelected)="selectionChanged($event)"
+                 (firstDataRendered)="onFirstDataRendered($event)"
+                 rowSelection="single">
 </ag-grid-angular>

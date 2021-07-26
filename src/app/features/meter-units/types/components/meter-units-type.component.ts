@@ -36,6 +36,7 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-meter-units-type',
@@ -106,8 +107,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  messageDataRefreshed = $localize`Data refreshed!`;
-  messageActionFailed = $localize`Action failed!`;
+  messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
+  messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
 
   meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
   meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore;
@@ -152,7 +153,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     private settingsStoreEmitterService: SettingsStoreEmitterService,
     private jobsSelectGridService: JobsSelectGridService,
     private modalService: ModalService,
-    private concentratorService: ConcentratorService
+    private concentratorService: ConcentratorService,
+    private translate: TranslateService
   ) {
     this.filtersInfo = {
       isSet: false,
@@ -240,66 +242,87 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
   }
+
   get permissionManageJobs() {
     return PermissionEnumerator.Manage_Jobs;
   }
+
   get permissionManageAutoTemplates() {
     return PermissionEnumerator.Manage_Auto_Template_Rules;
   }
+
   get permissionFwUpgrade() {
     return PermissionEnumerator.Meter_FW_Upgrade;
   }
+
   get permissionDisconnectorConnect() {
     return PermissionEnumerator.Disconnector_Connect;
   }
+
   get permissionDisconnectorDisconnect() {
     return PermissionEnumerator.Disconnector_Disconnect;
   }
+
   get permissionDisconnectorGetState() {
     return PermissionEnumerator.Disconnector_Get_State;
   }
+
   get permissionDisconnectorSetMode() {
     return PermissionEnumerator.Disconnector_Set_Mode;
   }
+
   get permissionCiiActivate() {
     return PermissionEnumerator.CII_Activate;
   }
+
   get permissionCiiDeactivate() {
     return PermissionEnumerator.CII_Deactivate;
   }
+
   get permissionCiiState() {
     return PermissionEnumerator.CII_Get_State;
   }
+
   get permissionRelaysConnect() {
     return PermissionEnumerator.Relay_Connect;
   }
+
   get permissionRelaysDisconnect() {
     return PermissionEnumerator.Relay_Disconnect;
   }
+
   get permissionRelaysState() {
     return PermissionEnumerator.Relay_Get_State;
   }
+
   get permissionRelaysSetMode() {
     return PermissionEnumerator.Relay_Set_Mode;
   }
+
   get permissionTouUpload() {
     return PermissionEnumerator.TOU_Upload;
   }
+
   get permissionSetLimiter() {
     return PermissionEnumerator.Set_Limiter;
   }
+
   get permissionSetMonitor() {
     return PermissionEnumerator.Set_Monitor;
   }
+
   get permissionClearFF() {
     return PermissionEnumerator.Clear_FF;
   }
+
   get permissionSetDisplay() {
     return PermissionEnumerator.Set_Display;
   }
+
   get permissionClearAlarms() {
     return PermissionEnumerator.Clear_Alarms;
   }
+
   get permissionAssignTemplates() {
     return PermissionEnumerator.Assign_Templates;
   }
@@ -307,15 +330,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   get permissionSecurityActivateHls() {
     return PermissionEnumerator.Activate_HLS;
   }
+
   get permissionSecurityRekey() {
     return PermissionEnumerator.Rekey;
   }
+
   get permissionSecurityChangePassword() {
     return PermissionEnumerator.Change_Password;
   }
+
   get permissionReadMeter() {
     return PermissionEnumerator.Read_Meter;
   }
+
   get permissionSyncTime() {
     return PermissionEnumerator.Sync_Time;
   }
@@ -340,19 +367,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: $localize`Columns`,
-      filters: $localize`Filters`,
+      columns: `Columns`,
+      filters: `Filters`,
 
       // for filter panel
-      page: $localize`page`,
-      more: $localize`more`,
-      to: $localize`to`,
-      of: $localize`of`,
-      next: $localize`next`,
-      last: $localize`last`,
-      first: $localize`first`,
-      previous: $localize`previous`,
-      loadingOoo: $localize`loading...`
+      page: `page`,
+      more: `more`,
+      to: `to`,
+      of: `of`,
+      next: `next`,
+      last: `last`,
+      first: `first`,
+      previous: `previous`,
+      loadingOoo: `loading...`
     };
 
     this.deleteAllRequests();
@@ -419,6 +446,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.getMeterUnitsLayoutGridLayoutStore();
   }
+
   // ----------------------- ag-grid sets DATASOURCE end --------------------------
 
   private noSearch() {
@@ -466,6 +494,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
     return false;
   }
+
   onFirstDataRendered(params) {}
 
   // ag-grid change visibillity of columns
@@ -817,7 +846,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onTou(selectedGuid: string) {
-    const actionName = $localize`TOU Upload`;
+    const actionName = `TOU Upload`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -829,7 +858,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onUpgrade(selectedGuid: string) {
-    const actionName = $localize`Upload image`;
+    const actionName = `Upload image`;
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -842,14 +871,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetMonitor(selectedGuid: string) {
-    const actionName = $localize`Set monitor`;
+    const actionName = `Set monitor`;
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetLimiter(selectedGuid: string) {
-    const actionName = $localize`Set Limiter`;
+    const actionName = `Set Limiter`;
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
@@ -885,7 +914,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysConnect(selectedGuid: string) {
-    const actionName = $localize`Relays Connect`;
+    const actionName = `Relays Connect`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -898,7 +927,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
-    const actionName = $localize`Relays Disconnect`;
+    const actionName = `Relays Disconnect`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -911,7 +940,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysState(selectedGuid: string) {
-    const actionName = $localize`Relay State`;
+    const actionName = `Relay State`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -924,7 +953,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
-    const actionName = $localize`Relay Mode`;
+    const actionName = `Relay Mode`;
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -937,7 +966,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onDisconnectorMode(selectedGuid: string) {
-    const actionName = $localize`Breaker Mode`;
+    const actionName = `Breaker Mode`;
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -950,7 +979,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetDisplaySettings(selectedGuid: string) {
-    const actionName = $localize`Set Display Settings`;
+    const actionName = `Set Display Settings`;
     const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -982,6 +1011,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
     this.plcActionsService.onReadRegisters(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
+
   // <-- end Operations action click (bulk or selected row)
 
   // --> for checking long bulk action finished
@@ -1026,7 +1056,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
               }
 
               // 5th step for relays state
-              const relaysStateRequests = this.meterUnitsTypeGridService.getAllMyGridLink_RelaysState_RequestIds();
               const isRelaysState = _.find(ciiStateRequests, (x) => x === requestId);
               if (isRelaysState) {
                 this.service.getOnDemandDataProcessing(requestId).subscribe((resultsRelaysState) => {
@@ -1049,6 +1078,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       this.refreshGrid();
     }
   }
+
   // --> start Security action click (bulk or selected row)
 
   onSecurityActivateHls(selectedGuid: string) {
@@ -1101,7 +1131,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${$localize`of`} ${this.totalCount}`;
+        return `${selectedCount} ${`of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;
@@ -1353,8 +1383,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     const readThresholdsPromise = this.concentratorService.getThresholdValuesPost(deviceIds).toPromise();
 
     Promise.all([jobSummeryPromise, readThresholdsPromise]).then((responses) => {
-      let statusJobsData = responses[0];
-      let thresholdData = responses[1];
+      const statusJobsData = responses[0];
+      const thresholdData = responses[1];
 
       this.gridData.data.forEach((gridData) => {
         const item = statusJobsData.find((el) => el.deviceId === gridData.deviceId);

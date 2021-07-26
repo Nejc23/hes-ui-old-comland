@@ -1,9 +1,15 @@
 <div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
 
   <label [attr.for]="property" *ngIf="label">
-    {{label}}
-    <span *ngIf="required"> *</span>
+    <ng-container *ngIf="label !== ' '; else blank">
+      {{ 'FORM.' + label.toUpperCase() | translate }}
+    </ng-container>
+    <ng-template #blank>
+      {{ '&nbsp;' }}
+    </ng-template>
+    <span *ngIf="required && label !== ' '"> *</span>
   </label>
+
 
   <div [ngClass]="{'d-flex': !noFlex}">
     <kendo-numerictextbox
@@ -19,7 +25,7 @@
       [spinners]="showSpinners"
       (valueChange)="onChange($event)"
     ></kendo-numerictextbox>
-    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2" i18n>{{labelRight}}</span>
+    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2">{{ labelRight | translate }}</span>
   </div>
 
   <!--Loop through errors-->

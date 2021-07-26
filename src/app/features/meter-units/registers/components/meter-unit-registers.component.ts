@@ -1,25 +1,25 @@
-import { EventsById, EventsByTimestamp } from './../interfaces/events-processing.interface';
-import { RegisterValue } from './../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-import { RegisterGroup, RegisterStatistics } from './../interfaces/data-processing-request.interface';
-import { DataProcessingService } from './../../../../core/repository/services/data-processing/data-processing.service';
-import { AutoTemplateRegister } from './../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
-import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
-import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { formatDate } from '@progress/kendo-angular-intl';
+import * as moment from 'moment';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { RegistersFilter } from '../interfaces/data-processing-request.interface';
 import { environment } from 'src/environments/environment';
-import { formatDate } from '@progress/kendo-angular-intl';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
-import * as moment from 'moment';
-import { dateDisplayFormat, dateServerFormat } from '../../../../shared/forms/consts/date-format';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { AutoTemplateRegister } from '../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
+import { RegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
+import { dateDisplayFormat } from '../../../../shared/forms/consts/date-format';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
+import { RegisterGroup, RegistersFilter, RegisterStatistics } from '../interfaces/data-processing-request.interface';
+import { EventsById, EventsByTimestamp } from '../interfaces/events-processing.interface';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
@@ -84,7 +84,8 @@ export class MeterUnitRegistersComponent implements OnInit {
     private muService: MeterUnitsService,
     private registerStatisticsService: RegisterStatisticsService,
     private formUtils: FormsUtilsService,
-    private codeList: CodelistMeterUnitsRepositoryService
+    private codeList: CodelistMeterUnitsRepositoryService,
+    private translate: TranslateService
   ) {}
 
   get registerProperty() {
@@ -248,14 +249,14 @@ export class MeterUnitRegistersComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: $localize`Meters`,
+        label: this.translate.instant('MENU.METERS'),
         params: {},
         url: null
       }
     ];
 
     breadcrumbs.push({
-      label: $localize`Data view`,
+      label: this.translate.instant('MENU.DATA-VIEW'),
       params: {},
       url: null
     });
@@ -472,10 +473,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.showData(this.selectedRegister, true);
   }
 
-  get placeholderSearch() {
-    return $localize`Search`;
-  }
-
   insertedSearchValue(searchValue) {
     this.setRegisterGroups(searchValue);
   }
@@ -483,9 +480,5 @@ export class MeterUnitRegistersComponent implements OnInit {
   closePopover() {
     this.popover.close();
     this.setDate();
-  }
-
-  getFilterTitle(): string {
-    return $localize`Register`;
   }
 }

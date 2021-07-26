@@ -1,7 +1,7 @@
 <div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
   <div>
     <label [attr.for]="property" *ngIf="label">
-      {{label}}
+      {{ translate ? ('FORM.' + label.toUpperCase() | translate) : label }}
       <sup *ngIf="required"> *</sup>
     </label>
   </div>
@@ -9,14 +9,16 @@
   <div [ngClass]="{'form-row gray-border m-0 rounded': inline || box}">
     <div
       [ngClass]="{'form-check': inline, 'd-flex flex-nowrap': inline, 'col p-1 m-1 align-div-center rounded col-box-check': box, 'form-check-selected': box && isSelected(option)}"
-       *ngFor="let option of options" (click)="doSelectionChange(option)">
-      <div class="d-flex" [ngbTooltip]="getTooltip(option)" placement="bottom" [openDelay]="500" triggers="hover">
-        <input type="radio" [ngClass]="hideCheckbox ? 'display-none': 'mr-2'" id="{{option.uid}}" [name]="property" [formControlName]="property"
-          value="{{option.value}}" [attr.name]="property" kendoRadioButton>
+      *ngFor="let option of options" (click)="doSelectionChange(option)">
+      <div class="d-flex" [ngbTooltip]="getTooltip(option) | translate" placement="bottom" [openDelay]="500" triggers="hover">
+        <input type="radio" [ngClass]="hideCheckbox ? 'display-none': 'mr-2'" id="{{option.uid}}" [name]="property"
+               [formControlName]="property"
+               value="{{option.value}}" [attr.name]="property" kendoRadioButton>
         <label for="{{option.uid}}" class="control-label d-block text-truncate">
-          {{option.label}} </label>
+          {{ option.label | translate }} </label>
       </div>
-      <label for="{{option.uid}}" class="control-label text-muted" *ngIf="box && !hideLabelSmall"><small>{{option.labelSmall}}</small></label>
+      <label for="{{option.uid}}" class="control-label text-muted"
+             *ngIf="box && !hideLabelSmall"><small>{{option.labelSmall | translate }}</small></label>
     </div>
   </div>
 

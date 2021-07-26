@@ -1,32 +1,33 @@
+import { HttpHeaders } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { AppConfigService } from 'src/app/core/configuration/services/app-config.service';
+import { importDeviceKeys } from 'src/app/core/repository/consts/crypto-lite.const';
+import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-check-response.interface';
+import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
+import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { MeterUnitsTypeGridService } from 'src/app/features/meter-units/types/services/meter-units-type-grid.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { gridRefreshInterval } from 'src/environments/config';
+import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';
 import { FileUploadComponent } from './../../../../shared/forms/components/file-upload/file-upload.component';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { ImportDeviceKeysStaticTextService } from '../../services/import-device-keys-static-text.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { HttpHeaders } from '@angular/common/http';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { gridRefreshInterval } from 'src/environments/config';
-import { MeterUnitsTypeGridService } from 'src/app/features/meter-units/types/services/meter-units-type-grid.service';
-import { importDeviceKeys } from 'src/app/core/repository/consts/crypto-lite.const';
-import { CryptoImportResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-response.interface';
-import { CryptoImportCheckResponse } from 'src/app/core/repository/interfaces/crypto-lite/crypto-import-check-response.interface';
-import { CryptoLiteService } from 'src/app/core/repository/services/crypto-lite/crypto-lite.service';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { AppConfigService } from 'src/app/core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-plc-meter-import-device-keys',
   templateUrl: './import-device-keys.component.html'
 })
-export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
+export class ImportDeviceKeysComponent implements OnInit {
   @ViewChild('fileUpload') fileUpload: FileUploadComponent;
 
-  uploadDropSubtitle = $localize`Selected file must be in .xml or .csv file format.`;
+  uploadDropSubtitle = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.UPLOAD-TEXT');
   headerTitle = this.staticextService.headerTitleImportDeviceKeys;
 
-  subtitle = $localize`To import key material to Vault, first select the security material file type, then select the file to be imported.`;
+  subtitle = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.SUBTITLE');
 
   form: FormGroup;
 
@@ -61,9 +62,10 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     private toast: ToastNotificationService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private cryptoLiteService: CryptoLiteService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private translate: TranslateService
   ) {
-    this.allowedExtExplainText = $localize`can only upload one file.`;
+    this.allowedExtExplainText = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.UPLOAD-ONE-FILE');
     this.form = this.createForm();
   }
 
@@ -87,8 +89,6 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
     this.createForm();
     this.breadcrumbService.setPageName(this.headerTitle);
   }
-
-  ngOnDestroy(): void {}
 
   successUploaded(event) {
     this.importResult = JSON.parse(event.response.body);
@@ -134,12 +134,23 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
           results.push(o);
           if (o.status === 'SUCCESS') {
             this.allResultTexts.push(
-              $localize`File ${o.fileName} imported successfully, number of imported meters ${o.meterCount}, number of imported keys ${o.keyCount}.`
+              this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-SUCCESSFUL', {
+                value1: o.fileName,
+                value2: o.meterCount,
+                value3: o.keyCount
+              })
             );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
           if (o.errorMsg) {
-            this.allErrorTexts.push($localize`File ${o.fileName} import failed, error message: ${o.errorMsg}`);
+            this.allErrorTexts.push(
+              this.allErrorTexts.push(
+                this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.IMPORT-FAILED', {
+                  value1: o.fileName,
+                  value2: o.errorMsg
+                })
+              )
+            );
             this.meterUnitsTypeGridService.removeCryptoImportId(o.uuid);
           }
         });
@@ -156,7 +167,7 @@ export class ImportDeviceKeysComponent implements OnInit, OnDestroy {
   }
 
   closeAlert(type: string, index: number) {
-    let id = type + index;
+    const id = type + index;
     setInterval(function () {
       $('.' + id)
         .fadeTo(500, 0)

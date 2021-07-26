@@ -1,8 +1,8 @@
-import { Component, OnInit, Input, ViewChild, HostListener, Output, EventEmitter, OnChanges } from '@angular/core';
-import { FormGroup, AbstractControl, FormControl } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
   selector: 'app-input-tag',
@@ -20,6 +20,7 @@ export class InputTagComponent implements OnInit, OnChanges {
   @Input() disabled = false;
   @Input() allowCustomValues = false;
   @Output() valueChanged: EventEmitter<any> = new EventEmitter<any>();
+  @Input() translationKey = '';
 
   controlId: string;
   nextId = 0; // for adding more new values we need to store max id

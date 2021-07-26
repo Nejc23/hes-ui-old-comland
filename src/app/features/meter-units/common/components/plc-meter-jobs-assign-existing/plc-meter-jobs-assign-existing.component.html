@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Assign existing jobs ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.JOBS.ASSIGN-EXISTING-JOBS' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
@@ -20,11 +20,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn text-secondary" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onAssignExisting()">
-          <span i18n>Assign</span></button>
+          <span>{{ 'BUTTON.ASSIGN' | translate }}</span></button>
       </div>
     </div>
   </div>

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { GridCellDateComponent } from '../../components/grid/grid-custom-components/grid-cell-date.component';
+import { TranslateService } from '@ngx-translate/core';
 import { GridCellUnitComponent } from '../../components/grid/grid-custom-components/grid-cell-unit.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistersGridService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   setGridColumnsForCategorization(categorization: string) {
     if (categorization === 'EVENT') {
@@ -21,32 +22,31 @@ export class RegistersGridService {
         field: 'timestamp',
         suppressMenu: true,
         sortable: true,
-        sort: 'asc',
-        headerName: $localize`Timestamp`,
-        headerTooltip: $localize`Timestamp`,
+        headerName: this.translate.instant('GRID.TIMESTAMP'),
+        headerTooltip: this.translate.instant('GRID.TIMESTAMP'),
         cellRendererFramework: GridCellDateComponent
       },
       {
         field: 'valueWithUnit.value',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Value`,
-        headerTooltip: $localize`Value`
+        headerName: this.translate.instant('GRID.VALUE'),
+        headerTooltip: this.translate.instant('GRID.VALUE')
       },
       {
         field: 'valueWithUnit.unit',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Unit`,
-        headerTooltip: $localize`Unit`,
+        headerName: this.translate.instant('GRID.UNIT'),
+        headerTooltip: this.translate.instant('GRID.UNIT'),
         cellRendererFramework: GridCellUnitComponent
       },
       {
         field: 'status',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Status`,
-        headerTooltip: $localize`Status`
+        headerName: this.translate.instant('GRID.STATUS'),
+        headerTooltip: this.translate.instant('GRID.STATUS')
       }
     ];
   }
@@ -57,23 +57,23 @@ export class RegistersGridService {
         field: 'timestamp',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Timestamp`,
-        headerTooltip: $localize`Timestamp`,
+        headerName: this.translate.instant('GRID.TIMESTAMP'),
+        headerTooltip: this.translate.instant('GRID.TIMESTAMP'),
         cellRendererFramework: GridCellDateComponent
       },
       {
         field: 'valueWithUnit.value',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Id`,
-        headerTooltip: $localize`Id`
+        headerName: this.translate.instant('GRID.ID'),
+        headerTooltip: this.translate.instant('GRID.ID')
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION')
       }
     ];
   }

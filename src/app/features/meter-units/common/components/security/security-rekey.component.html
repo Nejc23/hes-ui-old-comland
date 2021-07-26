@@ -1,32 +1,32 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Re-key meter ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.SECURITY.RE-KEY-METER' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row" *ngIf="!showSecondConfirm">
           <div class="col-12">
-            <span i18n>Please select from the list below a key type you would like to re-key.</span>
+            <span>{{ 'PLC-METER.SECURITY.SELECT-KEY-TYPE' | translate }}</span>
           </div>
           <div class="col-12 pt-2">
-            <app-select-input label="Key type" [form]="form" [property]="keyTypeProperty"
-              [selectOptions]="keyTypes" i18n-label (selectedValueChanged)="keyTypeChanged($event)">
+            <app-select-input label="KEY-TYPE" [form]="form" [property]="keyTypeProperty"
+              [selectOptions]="keyTypes" (selectedValueChanged)="keyTypeChanged($event)">
             </app-select-input>
           </div>
 
           <div class="col-12 pt-2">
             <div class="alert alert-danger" role="alert">
               <i class="fas fa-exclamation-triangle mr-2"></i>
-              <span i18n>This action may result in damages, rendering meter inoperable!</span>
+              <span>{{ 'PLC-METER.SECURITY.METER-INOPERABLE-WARNING' | translate }}</span>
             </div>
           </div>
         </div>
         <div class="form-row pt-2 text-center" *ngIf="showSecondConfirm">
           <div class="col-12">
             <div class="card-body">
-              <div class="small-title pb-1" i18n>Are you sure you would like to perform re-keying of a selected key type ({{ selectedKeyType.value }})?</div>
-              <div class="text-secondary" i18n>This action may result in damages, rendering meter inoperable!</div>
+              <div class="small-title pb-1" [innerHTML]="'PLC-METER.SECURITY.RE-KEY-CONFIRM' | translate:{selectedKeyType: selectedKeyType.value}"></div>
+              <div class="text-secondary">{{ 'PLC-METER.SECURITY.METER-INOPERABLE-WARNING' | translate }}</div>
             </div>
           </div>
         </div>
@@ -36,11 +36,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn text-secondary" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onConfirm()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

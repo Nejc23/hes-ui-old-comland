@@ -1,11 +1,8 @@
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-
-import { Observable, Subject, BehaviorSubject, from } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { enumMyGridLink } from '../../repository/consts/my-grid-link.const';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { User } from 'oidc-client';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {

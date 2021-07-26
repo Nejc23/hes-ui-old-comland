@@ -1,5 +1,5 @@
-import { PermissionEnumerator } from './../../../../core/permissions/enumerators/permission-enumerator.model';
-import { JobTypeEnumeration } from './../../enums/job-type.enum';
+import { PermissionEnumerator } from '../../../../core/permissions/enumerators/permission-enumerator.model';
+import { JobTypeEnumeration } from '../../enums/job-type.enum';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
@@ -14,6 +14,7 @@ import { SchedulerJobsEventEmitterService } from '../../services/scheduler-jobs-
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-edit-actions',
@@ -21,9 +22,6 @@ import { PermissionService } from 'src/app/core/permissions/services/permission.
 })
 export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   public params: any;
-  messageDeleteStarted = $localize`Scheduler job deleted!`;
-  messageStarted = $localize`Scheduled job started!`;
-  messageServerError = $localize`Server error!`;
 
   constructor(
     private modalService: ModalService,
@@ -32,7 +30,8 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     private eventService: SchedulerJobsEventEmitterService,
     private codelistService: CodelistRepositoryService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    private translate: TranslateService
   ) {}
 
   // called on init
@@ -50,21 +49,21 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize`Execute`;
+    const operation = this.translate.instant('COMMON.EXECUTE');
     response = this.service.executeSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm operation`;
-    component.modalBody = $localize`Do you want to execute scheduler job now`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-OPERATION');
+    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.EXECUTE');
 
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
-            this.toast.successToast(this.messageStarted);
+            this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-STARTED'));
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -255,11 +254,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize`Delete`;
+    const operation = this.translate.instant('COMMON.DELETE');
     response = this.service.deleteSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm delete`;
-    component.modalBody = $localize`Do you want to delete scheduler job?`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-DELETE');
+    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.DELETE');
 
     modalRef.result.then(
       (data) => {
@@ -268,10 +267,10 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
           (value) => {
             const gridApi = this.params.api as GridApi;
             gridApi.purgeServerSideCache([]);
-            this.toast.successToast(this.messageDeleteStarted);
+            this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-DELETED'));
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -285,11 +284,11 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
   setToolTip(type: string) {
     switch (type) {
       case 'run':
-        return $localize`Execute job`;
+        return this.translate.instant('COMMON.EXECUTE-JOB');
       case 'edit':
-        return $localize`Edit job`;
+        return this.translate.instant('COMMON.EDIT-JOB');
       case 'delete':
-        return $localize`Delete job`;
+        return this.translate.instant('COMMON.DELETE-JOB');
     }
     return '';
   }

@@ -1,12 +1,12 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Assign to template ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.ASSIGN-TEMPLATE' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
       <div class="alert alert-warning" role="alert">
         <i class="fas fa-exclamation-triangle mr-2"></i>
-        <span i18n>Assigning template to meter(s) may result in irreversible changes to meter data!</span>
+        <span>{{ 'PLC-METER.ASSIGN-TEMPLATE-WARNING' | translate }}</span>
       </div>
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row">
@@ -35,11 +35,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn text-secondary" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onConfirm()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

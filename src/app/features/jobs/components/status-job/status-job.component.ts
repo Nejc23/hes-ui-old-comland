@@ -1,9 +1,10 @@
-import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
-import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
-import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { TranslateService } from '@ngx-translate/core';
 import { CdTimerComponent } from 'angular-cd-timer';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { StatusJobProgress } from '../../interfaces/status-job-progress.interface';
 
 @Component({
   selector: 'app-status-job',
@@ -28,7 +29,12 @@ export class StatusJobComponent implements OnInit, OnDestroy {
     progress: 10
   };
 
-  constructor(private modal: NgbActiveModal, private concentratorService: ConcentratorService, private toast: ToastNotificationService) {}
+  constructor(
+    private modal: NgbActiveModal,
+    private concentratorService: ConcentratorService,
+    private toast: ToastNotificationService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     if (this.requestId) {
@@ -60,8 +66,10 @@ export class StatusJobComponent implements OnInit, OnDestroy {
       (error) => {
         console.log('error: ' + error);
         const resultErrMessage = error.error ? error.error : null;
-        const errMessage = $localize`Error getting status job ` + ` ` + resultErrMessage;
+        const errMessage = this.translate.instant('JOB.STATUS-JOB.ERROR') + ' ' + resultErrMessage;
         this.toast.errorToast(errMessage);
+        this.loading = false;
+        this.clearInt();
       }
     );
   }

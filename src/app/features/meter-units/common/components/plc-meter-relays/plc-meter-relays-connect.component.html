@@ -1,13 +1,13 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Relay Connect ({{selectedRowsCount}} selected)</div>
-
+  <div modal-header [innerHTML]="'PLC-METER.RELAY-CONNECT-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  
   <div modal-body>
     <ng-container>
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row">
           <div class="col-12">
-            <app-select-input label="Relay" [form]="form" [property]="relayProperty" [selectOptions]="relays$" i18n-label>
+            <app-select-input label="RELAY" [form]="form" [property]="relayProperty" [selectOptions]="relays$">
             </app-select-input>
           </div>
         </div>
@@ -17,11 +17,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn text-secondary" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onSet()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

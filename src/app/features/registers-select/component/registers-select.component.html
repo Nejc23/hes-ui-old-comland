@@ -1,11 +1,11 @@
-<label><span i18n>Register</span><sup> *</sup></label>
+<label><span>{{ 'GRID.REGISTER' | translate }}</span><sup> *</sup></label>
 
 <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
   <div>
-    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}} <span
-          i18n>items selected</span></strong></small>
+    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{gridApi.getSelectedRows().length}}
+      <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span></strong></small>
     <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
-    <small class="text-secondary">{{totalCount}} <span i18n>items found</span></small>
+    <small class="text-secondary">{{totalCount}} <span>{{ 'COMMON.ITEMS-FOUND' | translate }}</span></small>
 
   </div>
   <app-input-searcher [debounceTimeOut]="300" (insertedValue)="insertedValue($event)" [form]="form"

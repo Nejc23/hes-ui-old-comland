@@ -1,15 +1,17 @@
-import { Injectable, LOCALE_ID, Inject } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
+import { Observable } from 'rxjs';
 import { languages } from 'src/environments/config';
 import { dcOperationFwUpgrade } from '../../repository/consts/data-concentrator-units.const';
 import { fwUploadFile } from '../../repository/consts/meter-units.const';
 
 @Injectable()
 export class HeaderInjectorInterceptor implements HttpInterceptor {
-  constructor(@Inject(LOCALE_ID) public locale: string) {}
+  locale = '';
+  constructor() {}
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    this.locale = localStorage.getItem('lang') || 'en';
     let newRequest = request.clone({
       headers: request.headers.set('Content-Type', 'application/json').set('Accept-Language', this.localeToHeaderLocale())
     });

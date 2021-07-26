@@ -1,9 +1,7 @@
-import { BreadcrumbService } from './../../../shared/breadcrumbs/services/breadcrumb.service';
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as moment from 'moment';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
+import { BreadcrumbService } from '../../../shared/breadcrumbs/services/breadcrumb.service';
+import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+
 @Component({
   selector: 'app-alarms-eventss',
   templateUrl: './alarms-events.component.html'
@@ -11,13 +9,9 @@ import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-
 export class AlarmsEventsComponent implements OnInit {
   show = false;
 
-  getTabTitleAlarms = $localize`Alarms`;
-
-  constructor(private breadcrumbService: BreadcrumbService) {}
+  constructor(private breadcrumbService: BreadcrumbService, private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.breadcrumbService.setPageName($localize`Alarms & Events`);
+    this.breadcrumbService.setPageName(this.translate.instant('MENU.ALARMS-EVENTS'));
   }
-
-  public onTabSelect(e) {}
 }

@@ -16,6 +16,7 @@ import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.int
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { AddMuFormComponent } from '../../common/components/add-mu-form/add-mu-form.component';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html'
@@ -40,7 +41,8 @@ export class MeterUnitDetailsComponent implements OnInit {
     private plcActionsService: MeterUnitsPlcActionsService,
     private codeList: CodelistMeterUnitsRepositoryService,
     private router: Router,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -243,14 +245,14 @@ export class MeterUnitDetailsComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: $localize`Meters`,
+        label: this.translate.instant('MENU.METERS'),
         params: {},
         url: null
       }
     ];
 
     breadcrumbs.push({
-      label: $localize`Meter Unit`,
+      label: this.translate.instant('MENU.METER-UNITS'),
       params: {},
       url: null
     });
@@ -295,7 +297,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   onRelaysConnect() {
-    const actionName = 'Relay Connect';
+    const actionName = this.translate.instant('PLC-METER.RELAY-CONNECT');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysConnect(params, paramsLegacy, 1, actionName);
@@ -303,7 +305,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onRelaysDisconnect() {
-    const actionName = 'Relay Disconnect';
+    const actionName = this.translate.instant('PLC-METER.RELAY-DISCONNECT');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysDisconnect(params, paramsLegacy, 1, actionName);
@@ -311,7 +313,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onRelaysState() {
-    const actionName = 'Relay State';
+    const actionName = this.translate.instant('PLC-METER.RELAY-STATE');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysState(params, paramsLegacy, 1, actionName);
@@ -319,7 +321,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onRelaysSetMode() {
-    const actionName = 'Relay Mode';
+    const actionName = this.translate.instant('PLC-METER.RELAY-MODE');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     const paramsLegacy = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onRelaysSetMode(params, paramsLegacy, 1, actionName);
@@ -356,7 +358,7 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onTou() {
-    const actionName = 'TOU Upload';
+    const actionName = this.translate.instant('PLC-METER.TOU-UPLOAD');
     // const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onTou(params, 1, actionName);
@@ -364,46 +366,46 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onUpgrade() {
-    const actionName = 'Upload image';
+    const actionName = this.translate.instant('PLC-METER.UPLOAD-IMAGE');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onUpgrade(params, 1, actionName);
   }
 
   // popup
   onSetMonitor() {
-    const actionName = 'Set monitor';
+    const actionName = this.translate.instant('PLC-METER.SET-MONITOR');
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onSetMonitor(params, 1, actionName);
   }
 
   onReadMonitorThreshold() {
-    const actionName = 'Read monitor thresholds';
+    const actionName = this.translate.instant('PLC-METER.READ-MONITOR-THRESHOLDS');
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onReadMonitorThreshold(params, 1, actionName);
   }
 
   // popup
   onSetLimiter() {
-    const actionName = 'Set Limiter';
+    const actionName = this.translate.instant('PLC-METER.SET-LIMITER');
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onSetLimiter(params, 1, actionName);
   }
 
   onReadLimiterThreshold() {
-    const actionName = 'Read limiter thresholds';
+    const actionName = this.translate.instant('PLC-METER.READ-LIMITER-THRESHOLDS');
     const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     this.plcActionsService.onReadLimiterThreshold(params, 1, actionName);
   }
 
   // popup
   onDisconnectorMode() {
-    const actionName = 'Breaker Mode';
+    const actionName = this.translate.instant('PLC-METER.BREAKER-MODE');
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onDisconnectorMode(params, 1, actionName);
   }
 
   onSetDisplaySettings() {
-    const actionName = 'Set Display Settings';
+    const actionName = this.translate.instant('PLC-METER.SET-DISPLAY-SETTINGS');
 
     const paramsOld = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);

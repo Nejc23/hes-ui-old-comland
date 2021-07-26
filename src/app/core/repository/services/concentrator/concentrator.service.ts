@@ -50,7 +50,7 @@ export class ConcentratorService {
       IRegisterTypesEnum.monitorPhase2,
       IRegisterTypesEnum.monitorPhase3
     ];
-    let body = {
+    const body = {
       deviceIds: deviceIds,
       registerTypes: registerTypes
     };

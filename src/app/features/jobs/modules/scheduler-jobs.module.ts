@@ -18,7 +18,6 @@ import { GridCellEditActionsComponent } from '../components/grid-custom-componen
 import { AllForJobGridCellNameComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-name.component';
 import { AllForJobGridCellIdNumberComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-id-number.component';
 import { AllForJobGridCellVendorComponent } from '../meter-units-for-job/components/grid-custom-components/grid-cell-vendor.component';
-import { AllForJobGridCustomFilterComponent } from '../meter-units-for-job/components/grid-custom-components/grid-custom-filter.component';
 import { AllForJobGridSelectionHeaderComponent } from '../meter-units-for-job/components/grid-custom-components/grid-selection-header.component';
 import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components/grid-custom-components/grid-selection-header.component';
 
@@ -34,7 +33,6 @@ import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components
     AllForJobGridCellNameComponent,
     AllForJobGridCellVendorComponent,
     AllForJobGridCellIdNumberComponent,
-    AllForJobGridCustomFilterComponent,
     AllForJobComponent,
     AllForJobGridSelectionHeaderComponent,
     DcuForJobComponent,
@@ -57,7 +55,6 @@ import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components
       AllForJobGridCellNameComponent,
       AllForJobGridCellVendorComponent,
       AllForJobGridCellIdNumberComponent,
-      AllForJobGridCustomFilterComponent,
       DcuForJobGridCellIdNumberComponent,
       DcuForJobGridCellNameComponent,
       DcuForJobGridCellVendorComponent,

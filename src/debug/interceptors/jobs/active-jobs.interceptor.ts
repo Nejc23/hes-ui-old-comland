@@ -1,9 +1,7 @@
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import * as _ from 'lodash';
 import { activeJobs } from 'src/app/core/repository/consts/data-concentrator-units.const';
-import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { ActiveJobsList } from 'src/app/core/repository/interfaces/jobs/active-jobs-list.interface';
 
 @Injectable()

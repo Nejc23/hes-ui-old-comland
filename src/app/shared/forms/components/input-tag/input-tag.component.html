@@ -1,6 +1,10 @@
 <div #container class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
   <label [attr.for]="property" *ngIf="label">
-    {{label}}
+    {{ 'FORM.' + label.toUpperCase()  | translate }}
+    <span *ngIf="required"> *</span>
+  </label>
+  <label [attr.for]="property" *ngIf="translationKey">
+    {{ translationKey.toUpperCase()  | translate }}
     <span *ngIf="required"> *</span>
   </label>
   <kendo-multiselect

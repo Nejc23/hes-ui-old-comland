@@ -1,4 +1,4 @@
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
+import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
@@ -24,6 +24,7 @@ import { MeterUnitsForJobGridService } from '../services/meter-units-for-job-gri
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { GridUtils } from '../../../global/grid.utils';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './meter-units-for-job.component.html'
@@ -59,7 +60,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   private gridColumnApi;
   public icons;
   public frameworkComponents;
-  public sideBar;
   loadGrid = true;
   programmaticallySelectRow = false;
   requestModel: RequestMeterUnitsForJob = {
@@ -88,10 +88,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  // messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = $localize`Server error!`;
-  messageDataRefreshed = $localize`Data refreshed!`;
-  messageActionFailed = $localize`Action failed!`;
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
+  messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
+  messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
 
   public useWildcards = false;
 
@@ -107,7 +106,8 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private modalService: ModalService,
     private breadcrumbService: BreadcrumbService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private translate: TranslateService
   ) {
     this.paramsSub = route.params.subscribe((params) => {
       this.scheduleId = params.scheduleId;
@@ -157,24 +157,22 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     // set grid columns
     this.columns = this.meterUnitsForJobGridService.setGridDefaultColumns(false);
-    // set right sidebar on the grid
-    this.sideBar = this.meterUnitsForJobGridService.setSideBar();
 
     this.localeText = {
       // for side panel
-      columns: $localize`Columns`,
-      filters: $localize`Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: $localize`page`,
-      more: $localize`more`,
-      to: $localize`to`,
-      of: $localize`of`,
-      next: $localize`next`,
-      last: $localize`last`,
-      first: $localize`first`,
-      previous: $localize`previous`,
-      loadingOoo: $localize`loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
@@ -578,7 +576,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const selectedText = `${this.getSelectedCount()}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = `Confirm`;
     let response: Observable<any> = new Observable();
 
     const request: RequestMeterUnitsForJob = {
@@ -604,9 +602,9 @@ export class AllForJobComponent implements OnInit, OnDestroy {
 
     response = this.meterUnitsTypeService.removeMeterUnitsFromJob(request);
 
-    component.btnConfirmText = $localize`Remove`;
-    component.modalTitle = $localize`Confirm bulk operation`;
-    component.modalBody = $localize`Remove ${selectedText} Meter Unit(s) from Job?`;
+    component.btnConfirmText = `Remove`;
+    component.modalTitle = `Confirm bulk operation`;
+    component.modalBody = `Remove ${selectedText} Meter Unit(s) from Job?`;
 
     modalRef.result.then(
       (data) => {
@@ -615,7 +613,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         response.subscribe(
           (value) => {
             // this.allForJobGridService.saveMyGridLinkRequestId(value.requestId);
-            this.toast.successToast($localize`Selected Meter Units removed successfully`);
+            this.toast.successToast(`Selected Meter Units removed successfully`);
             this.refresh();
           },
           (e) => {
@@ -670,7 +668,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${$localize`of`} ${this.totalCount}`;
+        return `${selectedCount} ${`of`} ${this.totalCount}`;
       }
     } else {
       return `${selectedCount}`;

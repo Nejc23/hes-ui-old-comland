@@ -1,20 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TranslateService } from '@ngx-translate/core';
+import { FileInfo } from '@progress/kendo-angular-upload';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
-import { FileInfo } from '@progress/kendo-angular-upload';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
 import { DataConcentratorUnitsGridService } from '../../services/data-concentrator-units-grid.service';
 
 @Component({
   selector: 'app-dcu-fw-upgrade',
   templateUrl: './dcu-fw-upgrade.component.html'
 })
-export class DcuFwUpgradeComponent implements OnInit {
+export class DcuFwUpgradeComponent {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
 
   form: FormGroup;
@@ -26,8 +27,7 @@ export class DcuFwUpgradeComponent implements OnInit {
   activate = false;
 
   public selectedRowsCount: number;
-
-  uploadDropSubtitle = $localize`Selected file must be in .bin file format.`;
+  uploadDropSubtitle = this.translate.instant('DCU.FILE-BIN-FORMAT');
 
   constructor(
     private formBuilder: FormBuilder,
@@ -36,6 +36,7 @@ export class DcuFwUpgradeComponent implements OnInit {
     private dcuOperatrionService: DataConcentratorUnitsOperationsService,
     private toast: ToastNotificationService,
     private dcuGridService: DataConcentratorUnitsGridService,
+    private translate: TranslateService,
     private authService: AuthService
   ) {
     this.form = this.createForm();
@@ -47,8 +48,6 @@ export class DcuFwUpgradeComponent implements OnInit {
       [this.imageGuidProperty]: ['']
     });
   }
-
-  ngOnInit() {}
 
   // fillData(): IActionRequestDcuFwUpgradeData {
   //   const formData: IActionRequestDcuFwUpgradeData = {
@@ -83,7 +82,7 @@ export class DcuFwUpgradeComponent implements OnInit {
     }
 
     const request = this.dcuOperatrionService.postDcFwUpgrade(formData);
-    const successMessage = $localize`FW Upgrade in progress`;
+    const successMessage = this.translate.instant('DCU.FW-UPGRADE-PROGRESS');
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {
         if (result && result.length > 0) {

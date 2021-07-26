@@ -25,6 +25,6 @@ export class GridCellNextRunComponent implements ICellRendererAngularComp {
   }
 
   setNextReadText(time: string) {
-    return $localize`${time ? moment(time).fromNow() : ''}`;
+    return `${time ? moment(time).fromNow() : ''}`;
   }
 }

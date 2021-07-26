@@ -1,31 +1,30 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AllForJobStaticTextService {
-  public titleBreadCrumbs = $localize`Overview - Meter Units`;
-
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   get headerTitleMeterUnitsAll() {
-    return $localize`Meter Units for`;
+    return this.translate.instant('PLC-METER.METER-UNITS-FOR');
   }
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get noRecordsFound() {
-    return $localize`No records found.`;
+    return this.translate.instant('COMMON.NO-RECORDS-FOUND');
   }
 
   get loadingData() {
-    return $localize`Loading data...`;
+    return this.translate.instant('COMMON.LOADING-DATA');
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
+    return this.translate.instant('COMMON.NO-FILTER-APPLIED');
   }
 
   setfilterHeaderText(
@@ -61,51 +60,51 @@ export class AllForJobStaticTextService {
       showChildMBus ||
       showWithoutTemplate
     ) {
-      result = result + $localize`Filtered by: `;
+      result = result + this.translate.instant('FILTER.FILTERED-BY') + ' ';
     }
 
     if (status) {
       additionalString = vendor || tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`status` + additionalString;
+      result = result + this.translate.instant('GRID.STATUS') + additionalString;
     }
 
     if (vendor) {
       additionalString = tag || readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`vendor` + additionalString;
+      result = result + this.translate.instant('GRID.VENDOR') + additionalString;
     }
 
     if (tag) {
       additionalString = readStatuses || firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`tag` + additionalString;
+      result = result + this.translate.instant('GRID.TAG') + additionalString;
     }
 
     if (readStatuses) {
       additionalString = firmware || breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`read status` + additionalString;
+      result = result + this.translate.instant('GRID.READ-STATUS') + additionalString;
     }
 
     if (firmware) {
       additionalString = breakerState || showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`firmware` + additionalString;
+      result = result + this.translate.instant('GRID.FIRMWARE').toLowerCase() + additionalString;
     }
 
     if (breakerState) {
       additionalString = showChildMBus || showWithoutTemplate ? ', ' : '';
-      result = result + $localize`disconnector state` + additionalString;
+      result = result + this.translate.instant('GRID.DISCONNECTOR-STATE').toLowerCase() + additionalString;
     }
 
     if (showChildMBus) {
       additionalString = showWithoutTemplate ? ', ' : '';
-      result = result + $localize`show child MBus` + additionalString;
+      result = result + this.translate.instant('COMMON.SHOW-CHILD-MBUS') + additionalString;
     }
 
     if (showWithoutTemplate) {
       additionalString = showOnlyReadyForActivation ? ', ' : '';
-      result = result + $localize`show without template` + additionalString;
+      result = result + this.translate.instant('COMMON.SHOW-WITHOUT-TEMPLATE') + additionalString;
     }
 
     if (showOnlyReadyForActivation) {
-      result = result + $localize`show only ready for activation`;
+      result = result + this.translate.instant('COMMON.SHOW-ONLY-FOR-ACTIVATION');
     }
 
     return result;

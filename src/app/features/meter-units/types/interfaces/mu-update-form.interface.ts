@@ -1,12 +1,11 @@
-import { MuForm } from './mu-form.interface';
-import { MuHdlcInformation } from './../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import {
   AuthenticationTypeEnum,
   MuAdvancedInformation
 } from 'src/app/core/repository/interfaces/meter-units/mu-advanced-information.interface';
 import { MuWrapperInformation } from 'src/app/core/repository/interfaces/meter-units/mu-wrapper-information.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
+import { MuHdlcInformation } from './../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 
 export interface MuUpdateForm {
   // dlms

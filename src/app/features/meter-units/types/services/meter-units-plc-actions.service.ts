@@ -1,15 +1,15 @@
-import { JobTypeEnumeration } from './../../../jobs/enums/job-type.enum';
-import { SecurityRekeyComponent } from './../../common/components/security/security-rekey.component';
-import { SecurityActivateHlsComponent } from './../../common/components/security/security-activate-hls.component';
+import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
+import { SecurityRekeyComponent } from '../../common/components/security/security-rekey.component';
+import { SecurityActivateHlsComponent } from '../../common/components/security/security-activate-hls.component';
 import { Router } from '@angular/router';
-import { PlcMeterSetDisplaySettingsComponent } from './../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
+import { PlcMeterSetDisplaySettingsComponent } from '../../common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import {
-  IActionRequestParams,
   IActionRequestDeleteDevice,
+  IActionRequestParams,
   IRegisterTypesEnum
 } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -41,16 +41,12 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
 import { PlcReadRegistersComponent } from '../../common/components/plc-read-meter/plc-read-registers.component';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
-import { DcuFwUpgradeComponent } from '../../../data-concentrator-units/common/components/dcu-fw-upgrade.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MeterUnitsPlcActionsService {
-  messageActionInProgress = $localize`Action in progress!`;
-  messageActionDeleteSuccess = $localize`Delete successful!`;
-  messageServerError = $localize`Server error!`;
-
   constructor(
     private modalService: ModalService,
     private toast: ToastNotificationService,
@@ -59,7 +55,8 @@ export class MeterUnitsPlcActionsService {
     private codelistService: CodelistRepositoryService,
     private router: Router,
     private eventService: MeterUnitsTypeGridEventEmitterService,
-    private jobsSelectGridService: JobsSelectGridService
+    private jobsSelectGridService: JobsSelectGridService,
+    private translate: TranslateService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
@@ -93,7 +90,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -127,7 +124,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data !== 'cancel') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
           const options: NgbModalOptions = {
             size: 'md'
           };
@@ -152,7 +149,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (cancel or requestId as parameter)
         if (data !== 'cancel') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
           const options: NgbModalOptions = {
             size: 'md'
           };
@@ -182,7 +179,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -207,7 +204,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -234,7 +231,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -257,7 +254,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -281,7 +278,7 @@ export class MeterUnitsPlcActionsService {
         // on close (CONFIRM)
         if (data === 'save') {
           this.meterUnitsTypeGridService.saveMyGridLink_RelaysState_RequestId(data.requestId);
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -304,7 +301,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -323,7 +320,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -336,7 +333,7 @@ export class MeterUnitsPlcActionsService {
   onDelete(params: IActionRequestParams, selectedRowsCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = this.translate.instant('COMMON.CONFIRM');
     let response: Observable<any> = new Observable();
 
     const paramsDeleteDevice = params as IActionRequestDeleteDevice;
@@ -347,18 +344,19 @@ export class MeterUnitsPlcActionsService {
     paramsDeleteDevice.excludeIds = null;
 
     response = this.service.deleteDevice(paramsDeleteDevice);
-    const operationName = $localize`Delete devices`;
+    const operationName = this.translate.instant('COMMON.DELETE-DEVICES');
 
-    const operation = MeterUnitsTypeEnum.delete;
-    component.modalTitle = $localize`${operationName} (${selectedRowsCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    // todo REFACTOR {{ VALUE }}
+    component.modalTitle = `${operationName} (${selectedRowsCount}` + this.translate.instant('COMMON.SELECTED') + ')';
+    component.modalBody =
+      this.translate.instant('MODAL.ARE-YOU-SURE-TEXT') + `${toLower(operationName)}` + this.translate.instant('MODAL.FOR-DEVICES') + '?'; // `${operationName} ${selectedText} ` +  `selected meter unit(s)?`;
 
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
-            this.toast.successToast(this.messageActionDeleteSuccess);
+            this.toast.successToast(this.translate.instant('DELETE-SUCCESS'));
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
             } else {
@@ -366,7 +364,7 @@ export class MeterUnitsPlcActionsService {
             }
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -441,7 +439,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data !== '') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -458,7 +456,7 @@ export class MeterUnitsPlcActionsService {
   bulkOperation(operation: MeterUnitsTypeEnum, params: any, selectedCount: number, navigateToGrid = false) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = this.translate.instant('COMMON.CONFIRM');
 
     let response: Observable<any> = new Observable();
 
@@ -466,33 +464,33 @@ export class MeterUnitsPlcActionsService {
     switch (operation) {
       case MeterUnitsTypeEnum.breakerStatus:
         response = this.service.getDisconnectorState(params);
-        operationName = $localize`Get disconnector status`;
+        operationName = this.translate.instant('COMMON.GET-DISCONNECTOR-STATUS');
         break;
       case MeterUnitsTypeEnum.connect:
         response = this.service.postMyGridConnectDevice(params);
-        operationName = $localize`Disconnector connect `;
-        component.checkboxLabel = $localize`Read registers before ` + operationName?.toLowerCase();
+        operationName = this.translate.instant('COMMON.DISCONNECTOR-CONNECT');
+        component.checkboxLabel = this.translate.instant('COMMON.READ-REGISTERS-BEFORE') + ' ' + operationName?.toLowerCase();
         component.checkboxField = 'initiateReading';
         component.checkboxValue = true; // TODO from BE
         break;
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
-        operationName = $localize`Disconnector disconnect`;
-        component.checkboxLabel = $localize`Read registers after ` + operationName?.toLowerCase();
+        operationName = this.translate.instant('COMMON.DISCONNECTOR-DISCONNECT');
+        component.checkboxLabel = this.translate.instant('COMMON.READ-REGISTERS-AFTER') + ' ' + +operationName?.toLowerCase();
         component.checkboxField = 'initiateReading';
         component.checkboxValue = true; // TODO from BE
         break;
       case MeterUnitsTypeEnum.ciiState:
         response = this.service.getCiiState(params);
-        operationName = $localize`Get CII state`;
+        operationName = this.translate.instant('COMMON.GET-CII-STATE');
         break;
       case MeterUnitsTypeEnum.ciiActivate:
         response = this.service.postMyGridCiiActivateDevice(params);
-        operationName = $localize`CII Activate`;
+        operationName = this.translate.instant('COMMON.CII-ACTIVATE');
         break;
       case MeterUnitsTypeEnum.ciiDeactivate:
         response = this.service.postMyGridCiiDeactivateDevice(params);
-        operationName = $localize`CII Deactivate`;
+        operationName = this.translate.instant('COMMON.CII-DEACTIVATE');
         break;
       /*case MeterUnitsTypeEnum.touConfig:
         const paramsConf: RequestTOUData = {
@@ -504,32 +502,30 @@ export class MeterUnitsPlcActionsService {
         }; // TODO: timeOfUseId read form store?
 
         response = this.service.postMyGridTOUDevice(paramsConf);
-        operationName = $localize`Configure TOU`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+        operationName =  `Configure TOU`;
+        selectedText = `${ `for`} ${selectedText}`;
         break;*/
       case MeterUnitsTypeEnum.activateUpgrade:
         response = this.service.activateDeviceUpgrade(params);
-        operationName = $localize`Activate FW upgrade`;
+        operationName = this.translate.instant('COMMON.ACTIVATE-FW-UPGRADE');
         break;
       case MeterUnitsTypeEnum.clearFF:
         response = this.service.clearFF(params);
-        operationName = $localize`Activate Clear FF`;
+        operationName = this.translate.instant('COMMON.ACTIVATE-CLEAR-FF');
         break;
       case MeterUnitsTypeEnum.clearAlarms:
         response = this.service.clearAlarms(params);
-        operationName = $localize`Clear alarms`;
+        operationName = this.translate.instant('COMMON.CLEAR-ALARMS');
         break;
-
-      // TODO register types
       case MeterUnitsTypeEnum.readThresholdsMonitor:
         params.registerTypes = [IRegisterTypesEnum.monitorPhase1, IRegisterTypesEnum.monitorPhase2, IRegisterTypesEnum.monitorPhase3];
         response = this.service.readThresholdValues(params);
-        operationName = $localize`Read monitor threshold values`;
+        operationName = this.translate.instant('COMMON.READ-MONITOR-THRESHOLD-VALUES');
         break;
       case MeterUnitsTypeEnum.readThresholdsLimiter:
         params.registerTypes = [IRegisterTypesEnum.limiterNormal, IRegisterTypesEnum.limiterEmergency];
         response = this.service.readThresholdValues(params);
-        operationName = $localize`Read limiter threshold values`;
+        operationName = this.translate.instant('COMMON.READ-LIMITER-THRESHOLD-VALUES');
         break;
       case MeterUnitsTypeEnum.readMeter:
         response = this.service.readMeterValues(params);
@@ -537,18 +533,23 @@ export class MeterUnitsPlcActionsService {
         break;
       case MeterUnitsTypeEnum.syncTime:
         response = this.service.synchronizeTime(params);
-        operationName = $localize`Synchronize time`;
-        component.checkboxLabel = $localize`Unconditional time synchronization `;
+        operationName = this.translate.instant('COMMON.SYNCHRONIZE-TIME');
+        component.checkboxLabel = this.translate.instant('MODAL.UNCONDITIONAL-TIME-SYNCHRONIZATION');
         component.checkboxField = 'unconditionalSync';
         component.checkboxValue = false;
         component.secondConfirmEnabled = true;
-        component.confirmMessage = $localize`Are you sure you would like to trigger unconditional time synchronization?`;
+        component.confirmMessage =
+          this.translate.instant('MODAL.ARE-YOU-SURE-TEXT') +
+          ' ' +
+          this.translate.instant('MODAL.UNCONDITIONAL-TIME-SYNCHRONIZATION').toLowerCase();
         break;
     }
     // component.btnConfirmText = operationName;
 
-    component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    // TODO refactor
+    component.modalTitle = `${operationName} (${selectedCount}` + ' ' + this.translate.instant('MODAL.SELECTED') + ')';
+    component.modalBody =
+      this.translate.instant('MODAL.ARE-YOU-SURE-TEXT') + `${toLower(operationName)}` + this.translate.instant('MODAL.FOR-DEVICES') + '?';
 
     modalRef.result.then(
       (data) => {
@@ -557,7 +558,7 @@ export class MeterUnitsPlcActionsService {
           params[component.checkboxField] = data; // field must be defined inIActionRequestParams
         }
         // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
+        this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
             console.log(value.requestId);
@@ -576,7 +577,7 @@ export class MeterUnitsPlcActionsService {
             modalRef.componentInstance.deviceCount = value.deviceIds.length;
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -596,7 +597,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -615,7 +616,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -634,7 +635,7 @@ export class MeterUnitsPlcActionsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {
@@ -838,7 +839,7 @@ export class MeterUnitsPlcActionsService {
         // on close (CONFIRM)
         if (data === 'save') {
           // TODO open date time picker modal
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {

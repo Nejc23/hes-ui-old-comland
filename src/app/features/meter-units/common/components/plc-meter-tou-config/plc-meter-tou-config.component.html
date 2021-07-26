@@ -1,6 +1,8 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>TOU Configuration ({{selectedRowsCount}} selected)</div>
+  <div modal-header>{{'PLC-METER.TOU-CONFIG-TITLE' | translate }}
+    ({{selectedRowsCount}} {{ 'COMMON.SELECTED' | translate }})
+  </div>
 
   <div modal-body>
     <ng-container>
@@ -13,11 +15,11 @@
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn text-secondary" (click)="cancel()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="save()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

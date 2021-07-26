@@ -1,19 +1,20 @@
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodelistHelperService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   public operationsList() {
     const result: Codelist<string>[] = [
-      { id: 'Equals', value: $localize`Equals` },
-      { id: 'Not Equals', value: $localize`Not Equals` },
-      { id: 'Less than', value: $localize`Less than` },
-      { id: 'Greater than', value: $localize`Greater than` },
-      { id: 'In Range', value: $localize`In Range` }
+      { id: 'Equals', value: this.translate.instant('COMMON.EQUALS') },
+      { id: 'Not Equals', value: this.translate.instant('COMMON.NOT-EQUALS') },
+      { id: 'Less than', value: this.translate.instant('COMMON.LESS-THAN') },
+      { id: 'Greater than', value: this.translate.instant('COMMON.GREATER-THAN') },
+      { id: 'In Range', value: this.translate.instant('COMMON.IN-RANGE') }
     ];
 
     return result;
@@ -21,11 +22,11 @@ export class CodelistHelperService {
 
   public showOptionFilterList() {
     const showOptions: Codelist<number>[] = [
-      { id: 1, value: $localize`With template` },
-      { id: 2, value: $localize`Without template` },
-      { id: 3, value: $localize`Image ready for activation` },
-      { id: 4, value: $localize`HLS enabled` },
-      { id: 5, value: $localize`HLS disabled` }
+      { id: 1, value: this.translate.instant('COMMON.TEMPLATE') },
+      { id: 2, value: this.translate.instant('COMMON.WITHOUT-TEMPLATE') },
+      { id: 3, value: this.translate.instant('COMMON.IMAGE-READY-FOR-ACTIVATION') },
+      { id: 4, value: this.translate.instant('COMMON.HLS-ENABLED') },
+      { id: 5, value: this.translate.instant('COMMON.HLS-DISABLED') }
     ];
 
     return showOptions;

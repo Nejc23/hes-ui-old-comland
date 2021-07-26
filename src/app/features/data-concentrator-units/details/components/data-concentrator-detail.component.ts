@@ -1,26 +1,27 @@
-import { PermissionService } from 'src/app/core/permissions/services/permission.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { DcuForm } from '../../interfaces/dcu-form.interface';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { Observable } from 'rxjs';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { ActivatedRoute } from '@angular/router';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { ModalService } from '../../../../core/modals/services/modal.service';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { PermissionService } from 'src/app/core/permissions/services/permission.service';
+import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
+import { DcuForm } from '../../interfaces/dcu-form.interface';
 
 @Component({
   selector: 'app-data-concentrator-detail',
   templateUrl: './data-concentrator-detail.component.html'
 })
-export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
+export class DataConcentratorDetailComponent implements OnInit {
   form: FormGroup;
   editForm: FormGroup;
 
@@ -42,11 +43,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize`Data concentrator unit`);
+    this.breadcrumbService.setPageName(this.translate.instant('DCU.DATA-CONCENTRATOR-UNIT'));
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -55,8 +57,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     // get DCU
     this.getData();
   }
-
-  ngOnDestroy() {}
 
   getData() {
     if (this.concentratorId.length > 0) {
@@ -211,7 +211,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   saveDcu() {
     const dcuFormData = this.fillData();
     const request = this.dataConcentratorUnitsService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = $localize`Data Concentration Unit was updated successfully`;
+    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
 
     try {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(

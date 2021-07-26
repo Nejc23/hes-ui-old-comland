@@ -50,19 +50,4 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     const gridApi = this.params.api as GridApi;
     this.params.context.componentParent.cancelForm(gridApi);
   }
-
-  // set tooltip text
-  setToolTip(type: string) {
-    switch (type) {
-      case 'edit':
-        return $localize`Edit rule`;
-      case 'delete':
-        return $localize`Delete rule`;
-      case 'save':
-        return $localize`Save`;
-      case 'cancel':
-        return $localize`Cancel`;
-    }
-    return '';
-  }
 }

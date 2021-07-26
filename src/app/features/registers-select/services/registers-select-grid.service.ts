@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class RegistersSelectGridService {
   columns = [];
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   setGridReadOnlyColumns() {
     return [
@@ -20,15 +21,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`,
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL'),
         headerCheckboxSelection: false
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`Name`
+        headerName: this.translate.instant('GRID.NAME'),
+        headerTooltip: this.translate.instant('GRID.NAME')
+      },
+      {
+        field: 'type',
+        suppressMenu: true,
+        sortable: true,
+        headerName: this.translate.instant('GRID.TYPE'),
+        headerTooltip: this.translate.instant('GRID.TYPE')
+      },
+      {
+        field: 'description',
+        suppressMenu: true,
+        sortable: true,
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION')
       }
     ];
   }
@@ -44,15 +59,29 @@ export class RegistersSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`,
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL'),
         headerCheckboxSelection: true
       },
       {
         field: 'name',
         suppressMenu: true,
         sortable: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`Name`
+        headerName: this.translate.instant('GRID.NAME'),
+        headerTooltip: this.translate.instant('GRID.NAME')
+      },
+      {
+        field: 'type',
+        suppressMenu: true,
+        sortable: true,
+        headerName: this.translate.instant('GRID.TYPE'),
+        headerTooltip: this.translate.instant('GRID.TYPE')
+      },
+      {
+        field: 'description',
+        suppressMenu: true,
+        sortable: true,
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION')
       }
     ];
   }
