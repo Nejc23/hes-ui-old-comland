@@ -1,32 +1,33 @@
 <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
   <div>
-    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{getSelectedRowsCount()}} <span
-          i18n>items selected</span></strong></small>
+    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{getSelectedRowsCount()}}
+      <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span></strong></small>
     <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
-    <small class="text-secondary">{{totalCount}} <span i18n>items found</span></small>
+    <small class="text-secondary">{{totalCount}} <span>{{ 'COMMON.ITEMS-FOUND' | translate }}</span></small>
 
   </div>
   <app-input-searcher [debounceTimeOut]="300" (insertedValue)="searchChange($event)" [form]="form"
-    [property]="searchProperty" [placeholder]="staticTextService.placeholderSearch"> </app-input-searcher>
+                      [property]="searchProperty"
+                      [placeholder]="staticTextService.placeholderSearch"></app-input-searcher>
 </div>
 
 <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 100%;" [ngStyle]="{'height': height}" #agGrid
-  [rowData]="rowData"
-  [columnDefs]="columnDefs"
-  [modules]="modules"
-  (gridReady)="onGridReady($event)"
-  (rowSelected)="onRowSelect($event)"
-  (firstDataRendered)="onFirstDataRendered($event)"
-  [frameworkComponents]="frameworkComponents"
-  suppressSizeToFit=false
-  pagination="false"
-  [gridOptions]="gridOptions"
-  suppressRowClickSelection="true"
-  [rowSelection]=agGridSettings.rowSelection
-  (selectionChanged)="selectionChanged($event)"
-  [icons]="icons"
-  [maxBlocksInCache]="1"
-  [cacheBlockSize]="100"
-  [maxBlocksInCache]="1"
-  [cacheOverflowSize]="0">
+                 [rowData]="rowData"
+                 [columnDefs]="columnDefs"
+                 [modules]="modules"
+                 (gridReady)="onGridReady($event)"
+                 (rowSelected)="onRowSelect($event)"
+                 (firstDataRendered)="onFirstDataRendered($event)"
+                 [frameworkComponents]="frameworkComponents"
+                 suppressSizeToFit="false"
+                 pagination="false"
+                 [gridOptions]="gridOptions"
+                 suppressRowClickSelection="true"
+                 [rowSelection]=agGridSettings.rowSelection
+                 (selectionChanged)="selectionChanged($event)"
+                 [icons]="icons"
+                 [maxBlocksInCache]="1"
+                 [cacheBlockSize]="100"
+                 [maxBlocksInCache]="1"
+                 [cacheOverflowSize]="0">
 </ag-grid-angular>

@@ -1,9 +1,10 @@
-import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit, Inject, LOCALE_ID } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
 import { dateDisplayFormat } from '../../consts/date-format';
 
 import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-datetime-range-picker',
@@ -24,7 +25,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   today = false;
 
   locale: LocaleConfig = {
-    applyLabel: $localize`Apply`,
+    applyLabel: this.translate.instant('BUTTON.APPLY'),
     customRangeLabel: ' - ',
     daysOfWeek: moment.weekdaysMin(),
     monthNames: moment.monthsShort(),
@@ -33,15 +34,16 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
 
   // TODO translate
   defaultRanges: any = {
-    [$localize`Today`]: [moment(), moment()],
-    [$localize`Yesterday`]: [moment().subtract(1, 'days'), moment()],
-    [$localize`Last 7 Days`]: [moment().subtract(6, 'days'), moment()],
-    [$localize`Last 30 Days`]: [moment().subtract(29, 'days'), moment()],
-    [$localize`This Month`]: [moment().startOf('month'), moment()],
-    [$localize`Last Month`]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
+    [this.translate.instant('DAY.TODAY')]: [moment(), moment()],
+    [this.translate.instant('DAY.YESTERDAY')]: [moment().subtract(1, 'days'), moment()],
+    [this.translate.instant('DAY.LAST-7-DAYS')]: [moment().subtract(6, 'days'), moment()],
+    [this.translate.instant('DAY.LAST-30-DAYS')]: [moment().subtract(29, 'days'), moment()],
+    [this.translate.instant('DAY.CURRENT-MONTH')]: [moment().startOf('month'), moment()],
+    [this.translate.instant('DAY.LAST-MONTH')]: [moment().subtract(1, 'month').startOf('month'), moment().startOf('month')]
   };
 
-  constructor(@Inject(LOCALE_ID) public locale_id: string) {
+  constructor(private translate: TranslateService) {
+    const locale_id = localStorage.getItem('lang');
     moment.locale(locale_id);
   }
 
@@ -56,10 +58,10 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   updateRange(range) {
-    if (range.label?.toLowerCase() === $localize`Today`.toLowerCase()) this.today = true;
+    if (range.label?.toLowerCase() === this.translate.instant('DAY.TODAY').toLowerCase()) this.today = true;
     if (
-      range.label?.toLowerCase() === $localize`Today`.toLowerCase() ||
-      range.label?.toLowerCase() === $localize`This Month`.toLowerCase()
+      range.label?.toLowerCase() === this.translate.instant('DAY.TODAY').toLowerCase() ||
+      range.label?.toLowerCase() === this.translate.instant('DAY.CURRENT-MONTH').toLowerCase()
     ) {
       this.form.controls.endTime.setValue(moment().startOf('hour').format('HH:mm'));
     } else {

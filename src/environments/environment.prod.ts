@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
+  apiUrl: 'https://192.168.2.181:8083',
   // apiUrl: 'http://91.230.238.178/[api-url]',
   //  apiMyGridUrl: 'https://89.212.201.202:54322', // not use if URI for all apis (even actions) is the same
   cookiePath: '/',
@@ -23,7 +24,6 @@ export const environment = {
   // identitiy settings
   // stsAuthority: 'http://89.212.201.202:8081/',
   // clientId: 'epoint3',
-  ignoreLocale: false,
   thresholdValue: 7
   // clientRoot: 'http://advance-hes.azurewebsites.net/npm run start',
   // clientScope: 'openid profile roles offline_access company',

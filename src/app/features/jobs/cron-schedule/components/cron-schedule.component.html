@@ -1,11 +1,11 @@
 <kendo-tabstrip (tabSelect)="onTabSelect($event)" [keepTabContent]="false" class="cron">
-  <kendo-tabstrip-tab [title]="tabStripTitleMinutes" [selected]="selectedFrequency === freq.Minutes">
+  <kendo-tabstrip-tab [title]="'COMMON.MINUTES' | translate" [selected]="selectedFrequency === freq.Minutes">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
-          <label i18n class="label-left">Every</label>
+          <label class="label-left">{{ 'COMMON.EVERY' | translate }}</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="minutesMinutesProperty" [selectOptions]="everyMinutes"
+            <app-select-input label="Minutes" [form]="form" [property]="minutesMinutesProperty" [selectOptions]="everyMinutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -14,19 +14,19 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleHourly" [selected]="selectedFrequency === freq.Hourly">
+  <kendo-tabstrip-tab [title]="'COMMON.HOURLY' | translate" [selected]="selectedFrequency === freq.Hourly">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
-          <label i18n class="label-left">Every</label>
+          <label class="label-left">{{ 'COMMON.EVERY' | translate }}</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="hourlyHoursProperty" [selectOptions]="everyHours"
+            <app-select-input label="Hours" [form]="form" [property]="hourlyHoursProperty" [selectOptions]="everyHours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">:</label>
+          <label class="label-left">:</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="hourlyMinutesProperty" [selectOptions]="minutes"
+            <app-select-input label="Minutes" [form]="form" [property]="hourlyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -35,25 +35,25 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleDaily" [selected]="selectedFrequency === freq.Daily">
+  <kendo-tabstrip-tab [title]="'COMMON.DAILY' | translate" [selected]="selectedFrequency === freq.Daily">
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
           <app-input-radio class="label-left" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionEvery"></app-input-radio>
           <div class="col-2">
-            <app-select-input i18n-label label="Day(s)" [form]="form" [property]="dailyEveryDaysProperty" [selectOptions]="everyDays"
+            <app-select-input label="Days" [form]="form" [property]="dailyEveryDaysProperty" [selectOptions]="everyDays"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">@</label>
+          <label class="label-left">@</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="dailyEveryHoursProperty" [selectOptions]="hours"
+            <app-select-input label="Hours" [form]="form" [property]="dailyEveryHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">:</label>
+          <label class="label-left">:</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="dailyEveryMinutesProperty" [selectOptions]="minutes"
+            <app-select-input label="Minutes" [form]="form" [property]="dailyEveryMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -61,13 +61,13 @@
         <div class="d-flex">
           <app-input-radio class="label-left" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionWeekday"></app-input-radio>
           <div class="col-2">
-            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="dailyWeekdayHoursProperty" [selectOptions]="hours"
+            <app-select-input label="Hours" [form]="form" [property]="dailyWeekdayHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">:</label>
+          <label class="label-left">:</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="dailyWeekdayMinutesProperty" [selectOptions]="minutes"
+            <app-select-input label="Minutes" [form]="form" [property]="dailyWeekdayMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -76,22 +76,22 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleWeekly" [selected]="selectedFrequency === freq.Weekly">
+  <kendo-tabstrip-tab [title]="'COMMON.WEEKLY' | translate" [selected]="selectedFrequency === freq.Weekly">
     <ng-template kendoTabContent>
       <div>
-        <app-input-multiselect i18n-label label="Week days" [form]="form"
+        <app-input-multiselect label="Week-days" [form]="form"
           [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
         </app-input-multiselect>
         <div class="d-flex">
-          <label i18n class="label-left">@</label>
+          <label class="label-left">@</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="weeklyHoursProperty" [selectOptions]="hours"
+            <app-select-input label="Hours" [form]="form" [property]="weeklyHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">:</label>
+          <label class="label-left">:</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="weeklyMinutesProperty" [selectOptions]="minutes"
+            <app-select-input label="Minutes" [form]="form" [property]="weeklyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -100,10 +100,10 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleMonthly" [selected]="selectedFrequency === freq.Monthly">
+  <kendo-tabstrip-tab [title]="'COMMON.MONTHLY' | translate" [selected]="selectedFrequency === freq.Monthly">
     <ng-template kendoTabContent>
       <div>
-        <label><span i18n>Days in month</span><sup> *</sup></label>
+        <label><span>{{ 'JOB.CRON-SCHEDULE.DAYS-IN-MONTH' | translate }}</span><sup> *</sup></label>
         <div class="d-flex flex-wrap">
           <button class="btn btn-days" [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'"
             *ngFor="let item of [].constructor(31); let i = index" (click)="onDayInMonthClick(i+1)">
@@ -111,18 +111,18 @@
           </button>
         </div>
         <div class="help-block" *ngIf="!isNoMonthDaysValid()">
-          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{registersRequiredText}}</small>
+          <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{ 'COMMON.REQUIRED-FIELD' | translate }}</small>
         </div>
         <div class="d-flex mt-3">
-          <label i18n class="label-left">@</label>
+          <label class="label-left">@</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Hour(s)" [form]="form" [property]="monthlyHoursProperty" [selectOptions]="hours"
+            <app-select-input label="Hours" [form]="form" [property]="monthlyHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label i18n class="label-left">:</label>
+          <label class="label-left">:</label>
           <div class="col-2">
-            <app-select-input i18n-label label="Minute(s)" [form]="form" [property]="monthlyMinutesProperty" [selectOptions]="minutes"
+            <app-select-input label="Minutes" [form]="form" [property]="monthlyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
             </app-select-input>
           </div>
@@ -131,14 +131,14 @@
       </div>
     </ng-template>
   </kendo-tabstrip-tab>
-  <kendo-tabstrip-tab [title]="tabStripTitleAdvanced" [selected]="selectedFrequency === freq.Advanced">
+  <kendo-tabstrip-tab [title]="'COMMON.ADVANCED' | translate" [selected]="selectedFrequency === freq.Advanced">
     <ng-template kendoTabContent>
       <div>
         <div class="col-3">
-          <app-input-text i18n-label label="Expression" [form]="form" [property]="advancedCronProperty">
+          <app-input-text label="Expression" [form]="form" [property]="advancedCronProperty">
           </app-input-text>
           <div class="help-block" *ngIf="!isAdvancedCronValid()">
-            <i class="far fa-info-circle text-danger"></i><small class="text-danger" i18n>Expression is invalid.</small>
+            <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{ 'COMMON.EXPRESSION-INVALID' | translate }}</small>
           </div>
         </div>
         <span class="text-bottom-right">{{getCronDescription(freq.Advanced)}}</span>

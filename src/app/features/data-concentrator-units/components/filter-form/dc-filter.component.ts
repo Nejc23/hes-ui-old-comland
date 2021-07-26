@@ -11,6 +11,7 @@ import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/gri
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
 import * as _ from 'lodash';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-dc-filter',
@@ -53,7 +54,8 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     private gridFilterSessionStoreService: GridLayoutSessionStoreService,
     public gridSettingsSessionStoreService: GridSettingsSessionStoreService,
     private codelistHelperService: CodelistHelperService,
-    private settingsStoreEmitterService: SettingsStoreEmitterService
+    private settingsStoreEmitterService: SettingsStoreEmitterService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm(null, null);
     this.applyFilter = _.debounce(this.applyFilter, 1000);
@@ -215,18 +217,14 @@ export class DcFilterComponent implements OnInit, OnDestroy {
 
   errorValidatorReadStatusComponents() {
     if (this.form.errors != null && this.form.errors.outOfRange) {
-      return $localize`Value must be in range 0-100`;
+      return this.translate.instant('FORM.ERROR.RANGE-VALUE');
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
-      return $localize`Range is not correct`;
+      return this.translate.instant('FORM.ERROR.RANGE-INCORRECT');
     }
   }
 
   doToggleFilter() {
     this.toggleFilter.emit();
-  }
-
-  getFilterTitle(): string {
-    return $localize`Filters`;
   }
 
   ngOnDestroy() {

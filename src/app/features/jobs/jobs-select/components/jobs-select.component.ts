@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
 import { Observable } from 'rxjs';
 import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import * as _ from 'lodash';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
@@ -19,7 +19,7 @@ export class JobsSelectComponent implements OnInit {
   // @Input() type = 'meter';
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
-  // tslint:disable-next-line: no-output-on-prefix
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
   @Input() height = '378px';
 

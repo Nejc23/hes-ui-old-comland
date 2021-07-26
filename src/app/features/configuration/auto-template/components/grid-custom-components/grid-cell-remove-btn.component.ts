@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-remove-btn',
@@ -11,7 +12,7 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   // called on init
   agInit(params: any): void {
@@ -31,6 +32,6 @@ export class GridCellRemoveBtnComponent implements ICellRendererAngularComp {
 
   // set tooltip text
   setToolTip() {
-    return $localize`Remove job`;
+    return this.translate.instant('JOB.REMOVE');
   }
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: $localize`Jobs`,
+      breadcrumb: 'MENU.JOBS',
       permission: PermissionEnumerator.View_Jobs
     },
     children: [
@@ -23,14 +23,14 @@ const routes: Routes = [
       {
         path: 'meter-units/:scheduleId',
         data: {
-          breadcrumb: $localize`Meter Units`
+          breadcrumb: 'MENU.METER-UNITS'
         },
         component: AllForJobComponent
       },
       {
         path: 'concentrators/:scheduleId',
         data: {
-          breadcrumb: $localize`Concentrator Units`
+          breadcrumb: 'BREADCRUMB.DCU'
         },
         component: DcuForJobComponent
       }
@@ -45,7 +45,7 @@ const routes: Routes = [
 export class SchedulerJobsRoutingModule {
   constructor() {
     routes.forEach((x) => {
-      x.data.breadcrumb = $localize`${x.data.breadcrumb}`;
+      x.data.breadcrumb = `${x.data.breadcrumb}`;
     });
   }
 }

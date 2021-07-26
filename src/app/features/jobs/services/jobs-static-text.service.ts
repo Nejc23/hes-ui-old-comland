@@ -1,56 +1,45 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class JobsStaticTextService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   get jobsTitle() {
-    return $localize`Jobs`;
+    return this.translate.instant('FORM.JOBS');
   }
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get noRecordsFound() {
-    return $localize`No records found. You may need to adjust your search or filter parameters.`;
+    return this.translate.instant('COMMON.NO-RECORDS-SEARCH');
   }
 
   get noData() {
-    return $localize`No Jobs have been added yet.`;
+    return this.translate.instant('JOB.NO-JOBS');
   }
 
   get loadingData() {
-    return $localize`Loading data...`;
+    return this.translate.instant('COMMON.LOADING-DATA');
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
-  }
-
-  get nextPlannedReadText() {
-    return $localize`Next planned read` + ' ';
+    return this.translate.instant('COMMON.NO-FILTER-APPLIED');
   }
 
   get placeholderSearch() {
-    return $localize`Search`;
+    return this.translate.instant('COMMON.SEARCH');
   }
 
   get messageSchedulerJobStarted() {
-    return $localize`Scheduler job started!`;
-  }
-
-  get messageJobStopped() {
-    return $localize`Job stoped!`;
-  }
-
-  get messageJobCanceled() {
-    return $localize`Job canceled!`;
+    return this.translate.instant('JOB.SCHEDULER-JOB-STARTED');
   }
 
   get messageServerError() {
-    return $localize`Server error!`;
+    return this.translate.instant('COMMON.SERVER-ERROR');
   }
 }

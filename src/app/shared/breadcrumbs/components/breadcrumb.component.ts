@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationEnd, Params } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import * as _ from 'lodash';
 import { Breadcrumb } from '../interfaces/breadcrumb.interface';
 import { BreadcrumbService } from '../services/breadcrumb.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-breadcrumb',
@@ -12,9 +13,13 @@ import { BreadcrumbService } from '../services/breadcrumb.service';
 export class BreadcrumbComponent implements OnInit {
   public breadcrumbs: Breadcrumb[];
   public pageName: string;
-  a = 'Close';
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private service: BreadcrumbService) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private service: BreadcrumbService,
+    private translate: TranslateService
+  ) {
     this.breadcrumbs = [];
   }
 
@@ -74,7 +79,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   /*getBreadcrumbLabel(breadcrumb: Breadcrumb) {
-    return  '' // $localize `{{label}}`, { label: breadcrumb.label };
+    return  '' //   `{{label}}`, { label: breadcrumb.label };
   }*/
 
   showBreadcrumb(): boolean {

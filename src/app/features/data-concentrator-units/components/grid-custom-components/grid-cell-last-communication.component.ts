@@ -26,6 +26,6 @@ export class GridCellLastCommunicationComponent implements ICellRendererAngularC
 
   // set momemnt text (last communication) out of date and time
   setMomentLastCommunicationTime(time: string) {
-    return $localize`${moment(time).fromNow()}`;
+    return `${moment(time).fromNow()}`;
   }
 }

@@ -1,14 +1,34 @@
-import { Injectable, Inject, LOCALE_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { Language, languages } from 'src/environments/config';
+import { CldrIntlService, IntlService } from '@progress/kendo-angular-intl';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LanguageService {
-  constructor(@Inject(LOCALE_ID) private locale: string) {}
+  public selectedLang: Language;
 
-  selectLang(id: string) {
-    if (this.locale !== id) {
-      window.location.href = window.location.href.replace('/' + this.locale + '/', '/' + id + '/');
+  constructor(private translate: TranslateService, public intlService: IntlService) {}
+
+  selectLang(lang: string) {
+    if (lang !== this.selectedLang?.id) {
+      const language = this.findLanguage(lang);
+      localStorage.setItem('lang', language.id);
+      this.translate.use(language.id);
+      this.selectedLang = language;
+      (this.intlService as CldrIntlService).localeId = language.id;
     }
+  }
+
+  getLang(): Language {
+    return this.selectedLang;
+  }
+
+  findLanguage(lang: string) {
+    if (!languages.find((lng) => lng.id == lang)) {
+      return languages.find((lng) => lng.id == 'en');
+    }
+    return languages.find((lng) => lng.id == lang);
   }
 }

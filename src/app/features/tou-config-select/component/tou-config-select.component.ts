@@ -1,13 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AllModules, Module } from '@ag-grid-enterprise/all-modules';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Observable } from 'rxjs';
 import { TimeOfUseConfigList } from 'src/app/core/repository/interfaces/time-of-use/time-of-use-config-list.interface';
 import { TimeOfUseService } from 'src/app/core/repository/services/time-of-use/time-of-use.service';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
+import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
 import { TouConfigSelectGridService } from '../services/tou-config-select-grid.service';
 
 @Component({

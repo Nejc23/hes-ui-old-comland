@@ -3,7 +3,6 @@ import { AllForJobGridSelectionHeaderComponent } from '../components/grid-custom
 import { AllForJobGridCellNameComponent } from '../components/grid-custom-components/grid-cell-name.component';
 import { AllForJobGridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { AllForJobGridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
-import { AllForJobGridCustomFilterComponent } from '../components/grid-custom-components/grid-custom-filter.component';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
@@ -13,6 +12,7 @@ import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +30,8 @@ export class MeterUnitsForJobGridService {
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private translate: TranslateService
   ) {}
 
   public set meterUnitsAllId(id: number) {
@@ -50,8 +51,7 @@ export class MeterUnitsForJobGridService {
     return {
       gridCellNameComponent: AllForJobGridCellNameComponent,
       gridCellVendorComponent: AllForJobGridCellVendorComponent,
-      gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent,
-      gridCustomFilterComponent: AllForJobGridCustomFilterComponent
+      gridCellIdNumberComponent: AllForJobGridCellIdNumberComponent
 
       // gridCellMeterIdComponent: GridCellMeterIdComponent,
       // gridCellTagsComponent: GridCellTagsComponent,
@@ -66,40 +66,6 @@ export class MeterUnitsForJobGridService {
       // gridCellInfoOfChildComponent: GridCellInfoOfChildComponent,
       // gridCellIconComponent: GridCellIconComponent,
       // gridCellJobStatusComponent: GridCellJobStatusComponent
-    };
-  }
-
-  public setSideBar() {
-    return {
-      toolPanels: [
-        {
-          id: 'filters',
-          labelDefault: 'Filters',
-          labelKey: 'filters',
-          iconKey: 'filter',
-          toolPanel: 'gridCustomFilterComponent',
-          toolPanelParams: {
-            suppressExpandAll: true,
-            suppressFilterSearch: true
-          }
-        },
-        {
-          id: 'columns',
-          labelDefault: 'Columns',
-          labelKey: 'columns',
-          iconKey: 'columns',
-          toolPanel: 'agColumnsToolPanel',
-          toolPanelParams: {
-            suppressRowGroups: true,
-            suppressValues: true,
-            suppressPivots: true,
-            suppressPivotMode: true,
-            suppressSideButtons: true,
-            suppressColumnFilter: true,
-            suppressColumnExpandAll: true
-          }
-        }
-      ]
     };
   }
 
@@ -119,55 +85,55 @@ export class MeterUnitsForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL')
       },
       {
         field: gridSysNameColumnsEnum.name,
-        headerName: $localize`Name`,
+        headerName: `Name`,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: this.translate.instant('GRID.NAME')
       },
       {
         field: gridSysNameColumnsEnum.serialNumber,
-        headerName: $localize`Serial number`,
+        headerName: this.translate.instant('GRID.SERIAL-NUMBER'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`Serial number`
+        headerTooltip: this.translate.instant('GRID.SERIAL-NUMBER')
       },
       {
         field: gridSysNameColumnsEnum.logicalDeviceName,
-        headerName: $localize`Logical device name`,
+        headerName: this.translate.instant('GRID.LOGICAL-DEVICE-NAME'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Logical device name`,
+        headerTooltip: this.translate.instant('GRID.LOGICAL-DEVICE-NAME'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
         field: gridSysNameColumnsEnum.vendor,
-        headerName: $localize`Vendor`,
+        headerName: this.translate.instant('GRID.VENDOR'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Vendor`
+        headerTooltip: this.translate.instant('GRID.VENDOR')
       },
       {
         field: gridSysNameColumnsEnum.parent,
-        headerName: $localize`Parent`,
+        headerName: this.translate.instant('GRID.PARENT'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gidCellParentComponent',
-        headerTooltip: $localize`Parent`,
+        headerTooltip: this.translate.instant('GRID.PARENT'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false

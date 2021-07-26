@@ -2,6 +2,7 @@ image: node:latest
 
 stages:
   - install
+  - lint
   - test
   - build
   - deploy
@@ -73,6 +74,20 @@ Dependencies:
   only:
     changes:
       - package.json
+
+ESLint:
+  stage: lint
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "release" || $CI_COMMIT_BRANCH == "master" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+      when: always
+    - when: never
+  before_script:
+    - npm ci
+  script:
+    - npx eslint --format gitlab src
+  artifacts:
+    reports:
+      codequality: gl-codequality.json
 
 Unit tests:
   stage: test

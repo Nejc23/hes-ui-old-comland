@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center" *ngIf="params.value">
   <div [ngClass]="{'mr-1 flex-shrink-1 text-truncate': !isValueSet(), 'text-muted': isValueSet()}" container="body" placement="bottom" [openDelay]="500"
   [ngbTooltip]="readOnText + ' ' + (params.value.timestamp.toString() | formatDateTime)">{{ thresholdValue }}
-    <span i18n class="flex-shrink-1 text-truncate red-warning-text small ml-2" *ngIf="oldReadingDate">{{ preconfiguredThreshold }}+ d</span>
+    <span class="flex-shrink-1 text-truncate red-warning-text small ml-2" *ngIf="checkDate()">{{ preconfiguredThreshold }}+ d</span>
   </div>
 </div>
 <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>

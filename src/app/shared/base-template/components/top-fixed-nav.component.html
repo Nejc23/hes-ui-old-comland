@@ -9,16 +9,19 @@
       <i class="fal fa-language px-2"></i>
     </a>
     <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLang">
-      <div *ngFor="let obj of languages$">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="selectLang(obj.id)">{{obj.value}}</a>
+      <div *ngFor="let lang of languages$">
+        <a class="dropdown-item" href="javascript:void(0);"
+           [ngClass]="addSelectedClass(lang.id)"
+           (click)="selectLang(lang.id)"> {{ 'LANGUAGE.' + lang.id.toUpperCase() | translate }}</a>
       </div>
     </div>
   </li>
 
   <li dropdown class="nav-item dropdown">
-    <a dropdownToggle class="nav-link user rounded-circle text-center" id="dropdownUser" href="javascript:void(0);" data-flip="true"
-      data-toggle="dropdown">
-      <small><strong>{{initials}}</strong></small>
+    <a dropdownToggle class="nav-link user rounded-circle text-center" id="dropdownUser" href="javascript:void(0);"
+       data-flip="true"
+       data-toggle="dropdown">
+      <small><strong>{{ initials }}</strong></small>
     </a>
     <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownUser">
       <div class="profile-dialog m-2">
@@ -27,11 +30,12 @@
             <div class="rounded-circle text-center">{{initials}}</div>
           </div>
           <div class="col-8">
-            <h5  class="text-truncate mt-1" placement="left" [openDelay]="500" [ngbTooltip]="company" class="mt-1">{{company}}</h5>
+            <h5 class="text-truncate mt-1" placement="left" [openDelay]="500" [ngbTooltip]="company"
+                class="mt-1">{{ company }}</h5>
             <h2 class="text-truncate" placement="left" [openDelay]="500" [ngbTooltip]="userName">{{userName}}</h2>
             <h5 class="text-truncate" placement="left" [openDelay]="500" [ngbTooltip]="email">{{email}}</h5>
-            <h5 class="logout mt-3"><a href="#" (click)="profile()"><span i18n>Profile</span></a></h5>
-            <h5 class="logout mt-3"><a href="#" (click)="logout()"><span i18n>Sign out</span></a></h5>
+            <h5 class="logout mt-3"><a href="#" (click)="profile()"><span>{{ 'COMMON.PROFILE' | translate }}</span></a></h5>
+            <h5 class="logout mt-3"><a href="#" (click)="logout()"><span>{{ 'COMMON.SIGN-OUT' | translate }}</span></a></h5>
           </div>
         </div>
 

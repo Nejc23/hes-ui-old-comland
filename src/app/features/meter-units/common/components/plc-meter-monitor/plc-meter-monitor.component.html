@@ -1,6 +1,6 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Set Monitor ({{selectedRowsCount}} selected)</div>
+  <div modal-header [innerHTML]="'PLC-METER.SET-MONITOR-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"></div>
 
   <div modal-body>
     <ng-container>
@@ -9,22 +9,22 @@
           <div class="col-12"><h4><span>{{form_elem.name}}</span></h4></div>
           <div class="col-6">
             <app-input-numeric [label]="'Threshold'" [form]="form" [property]="form_elem.name" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" (valueChange)="onChangeField()" i18n-label labelRight="A"></app-input-numeric>
+              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" (valueChange)="onChangeField()" labelRight="A"></app-input-numeric>
           </div>
         </div>
         <div class="text-danger" *ngIf="showError"><small>
-          <span i18n>At least one threshold should be set!</span></small></div>
+          <span>{{ 'PLC-METER.SET-ONE-THRESHOLD' | translate }}</span></small></div>
       </form>
     </ng-container>
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
       <button type="button" class="btn text-secondary" (click)="onDismiss()">
-        <span i18n>Cancel</span>
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
         <button type="submit" class="btn btn-primary" (click)="onSet()">
-          <span i18n>Confirm</span></button>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
   </div>

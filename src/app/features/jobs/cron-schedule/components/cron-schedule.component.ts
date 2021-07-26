@@ -1,12 +1,14 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Codelist } from './../../../../shared/repository/interfaces/codelists/codelist.interface';
-import { Component, Inject, Input, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interface';
 import * as _ from 'lodash';
 import cronstrue from 'cronstrue/i18n';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import cron from 'cron-validate';
+import { TranslateService } from '@ngx-translate/core';
+import { LanguageService } from '../../../../core/base-template/services/language.service';
 
 @Component({
   templateUrl: './cron-schedule.component.html',
@@ -15,24 +17,15 @@ import cron from 'cron-validate';
 export class CronScheduleComponent implements OnInit {
   @Input() cronExpression: string;
 
-  registersRequiredText = $localize`Required field`;
-  cronInvalidError = $localize`Cron expression is invalid.`;
-  tabStripTitleMinutes = $localize`Minutes`;
-  tabStripTitleHourly = $localize`Hourly`;
-  tabStripTitleDaily = $localize`Daily`;
-  tabStripTitleWeekly = $localize`Weekly`;
-  tabStripTitleMonthly = $localize`Monthly`;
-  tabStripTitleAdvanced = $localize`Advanced`;
-
   weekDays: Codelist<number>[] = [
-    { id: 8, value: $localize`Mon-Fri` },
-    { id: 2, value: $localize`Mon` },
-    { id: 3, value: $localize`Tue` },
-    { id: 4, value: $localize`Wed` },
-    { id: 5, value: $localize`Thu` },
-    { id: 6, value: $localize`Fri` },
-    { id: 7, value: $localize`Sat` },
-    { id: 1, value: $localize`Sun` }
+    { id: 8, value: this.translate.instant('DAY.MON-FRI') },
+    { id: 2, value: this.translate.instant('DAY.MON') },
+    { id: 3, value: this.translate.instant('DAY.TUE') },
+    { id: 4, value: this.translate.instant('DAY.WED') },
+    { id: 5, value: this.translate.instant('DAY.THU') },
+    { id: 6, value: this.translate.instant('DAY.FRI') },
+    { id: 7, value: this.translate.instant('DAY.SAT') },
+    { id: 1, value: this.translate.instant('DAY.SUN') }
   ];
 
   everyMinutes: Codelist<number>[];
@@ -48,13 +41,20 @@ export class CronScheduleComponent implements OnInit {
 
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: $localize`Every` }];
-
-  dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: $localize`Week day (MON-FRI)` }];
+  dailyOptionEvery: RadioOption[] = [{ value: '1' as string, label: this.translate.instant('DAY.EVERY') }];
+  dailyOptionWeekday: RadioOption[] = [{ value: '2' as string, label: this.translate.instant('DAY.WEEK-DAY') }];
 
   formValues: FormValues;
+  locale = 'en';
 
-  constructor(private formBuilder: FormBuilder, @Inject(LOCALE_ID) public locale: string, private formUtils: FormsUtilsService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private formUtils: FormsUtilsService,
+    private translate: TranslateService,
+    private languageService: LanguageService
+  ) {
+    this.locale = this.languageService.selectedLang.id;
+  }
 
   ngOnInit() {
     this.everyMinutes = [];
@@ -245,13 +245,13 @@ export class CronScheduleComponent implements OnInit {
   getCronDescription(freq: Frequency) {
     const cronExpression = this.generateCronExpression(freq);
     if (freq === Frequency.Advanced && !this.isAdvancedCronValid) {
-      return $localize`N/A`;
+      return this.translate.instant('COMMON.NA');
     }
 
     if (cronExpression && cronExpression !== '') {
       return cronstrue.toString(cronExpression, { locale: this.locale, use24HourTimeFormat: true, dayOfWeekStartIndexZero: false });
     }
-    return $localize`N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   generateCronExpression(freq: Frequency = this.selectedFrequency): string {
@@ -336,7 +336,7 @@ export class CronScheduleComponent implements OnInit {
   }
 
   onDayInMonthClick(dayinMonth: number) {
-    const result = _.findIndex(this.formValues.monthlyMonthDays, (x) => x === dayinMonth) > -1 ? true : false;
+    const result = _.findIndex(this.formValues.monthlyMonthDays, (x) => x === dayinMonth) > -1;
     if (!result) {
       this.formValues.monthlyMonthDays.push(dayinMonth);
     } else {

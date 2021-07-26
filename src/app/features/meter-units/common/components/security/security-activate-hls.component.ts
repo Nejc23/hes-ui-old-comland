@@ -1,17 +1,18 @@
-import { IActionRequestEnableHls } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { IActionRequestEnableHls } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
 
 @Component({
   templateUrl: './security-activate-hls.component.html'
 })
-export class SecurityActivateHlsComponent implements OnInit {
+export class SecurityActivateHlsComponent {
   public selectedRowsCount: number;
 
   actionRequest: IActionRequestParams;
@@ -22,10 +23,9 @@ export class SecurityActivateHlsComponent implements OnInit {
     private gridLinkService: MyGridLinkService,
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
-    private formUtils: FormsUtilsService
+    private formUtils: FormsUtilsService,
+    private translate: TranslateService
   ) {}
-
-  ngOnInit() {}
 
   createForm(): FormGroup {
     return this.formBuilder.group({
@@ -57,15 +57,15 @@ export class SecurityActivateHlsComponent implements OnInit {
 
   onConfirm() {
     const values = this.fillData();
-    const request = this.gridLinkService.postSecurityEnableHls(values);
-    const successMessage = $localize`Meter Units activate hls successfull`;
+    this.gridLinkService.postSecurityEnableHls(values);
+    const successMessage = this.translate.instant('PLC-METER.METER-UNITS-ACTIVATE-HLS');
 
     this.gridLinkService.postSecurityEnableHls(values).subscribe(
       (sucess) => {
         this.toast.successToast(successMessage);
       },
       (error) => {
-        console.log($localize`Error on postSecurityEnableHls`, error);
+        console.log(`Error on postSecurityEnableHls`, error);
       }
     );
   }

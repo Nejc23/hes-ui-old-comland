@@ -6,83 +6,63 @@
     </div>
 
     <div class="col-md-6 col-lg-4 align-self-center p-5">
-    <!--<nav class="navbar navbar-expand navbar-light sticky-top topbar bg-white mb-4 justify-content-between">
-        <div class="navbar-collapse" id="navbarContent">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
-              <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown3" role="button">
-                {{language}}
-              </a>
-              <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
-                <div *ngFor="let obj of languages$">
-                  <a ngbDropdownItem href="javascript:void(0);" (click)="selectLang(obj.id)">{{obj.value}}</a>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    -->
-
       <!-- LOGIN FORM -->
       <form [formGroup]="form" *ngIf="!forgotPassword && !resetPassword" class="px-4">
-        <h2 class="text-uppercase" i18n>Login</h2>
+        <h2 class="text-uppercase">{{ 'LOGIN.TITLE' | translate }}</h2>
 
-        <p i18n>Please enter your user name and password to login.</p>
-          <app-input-text (keyup.enter)="login()" [form]="form" [property]="usernameProperty" i18n-label label="Username"
+        <p>{{ 'LOGIN.ENTER-USERNAME-PASSWORD-TEXT' | translate }}</p>
+          <app-input-text (keyup.enter)="login()" [form]="form" [property]="usernameProperty" label="Username"
             [inputType]="'text'">
           </app-input-text>
-          <app-input-text (keyup.enter)="login()" [form]="form" [property]="passwordProperty" i18n-label label="Password"
+          <app-input-text (keyup.enter)="login()" [form]="form" [property]="passwordProperty" label="Password"
             [inputType]="'password'">
           </app-input-text>
         <div class="form-group">
-          <button type="submit" (click)="login()" class="btn btn-primary btn-block" i18n>Login</button>
+          <button type="submit" (click)="login()" class="btn btn-primary btn-block"> {{ 'LOGIN.TITLE' | translate }}</button>
         </div>
         <div class="form-group">
-          <a href="javascript:void(0);" (click)="setForgotPassword()" i18n>Forgot password?</a>
+          <a href="javascript:void(0);" (click)="setForgotPassword()">{{ 'LOGIN.FORGOT-PASSWORD' | translate }}</a>
         </div>
       </form>
 
       <!-- FORGOT PASSWORD FORM -->
       <form [formGroup]="formReset" *ngIf="forgotPassword && !resetPassword" class="px-4">
-        <h2 class="text-uppercase" i18n>Reset your password</h2>
-        <p i18n>Please enter your email to reset account password.</p>
+        <h2 class="text-uppercase">{{'LOGIN.RESET-PASSWORD' | translate }}</h2>
+        <p>{{'LOGIN.ENTER-EMAIL' | translate }}</p>
         <div class="form-group">
-          <app-input-text (keyup.enter)="reset()" [form]="formReset" [property]="emailProperty" i18n-label label="Email"
+          <app-input-text (keyup.enter)="reset()" [form]="formReset" [property]="emailProperty" label="Email"
             [inputType]="'text'">
           </app-input-text>
         </div>
         <div class="form-group">
-          <button type="submit" (click)="reset()" class="btn btn-primary btn-block" i18n>Reset</button>
+          <button type="submit" (click)="reset()" class="btn btn-primary btn-block">{{ 'LOGIN.RESET' | translate }}</button>
         </div>
         <div class="form-group">
-          <a href="javascript:void(0);" (click)="setLogin()" i18n>Back to login</a>
+          <a href="javascript:void(0);" (click)="setLogin()">{{ 'LOGIN.BACK-TO-LOGIN' | translate }}</a>
         </div>
       </form>
 
        <!-- RESET PASSWORD FORM -->
       <form [formGroup]="formNewPassword" *ngIf="resetPassword" class="px-4">
-        <h2 class="text-uppercase" i18n>Reset your password</h2>
-        <p i18n>Please enter new password.</p>
+        <h2 class="text-uppercase">{{'LOGIN.RESET-PASSWORD' | translate }}</h2>
+        <p>{{ 'LOGIN.ENTER-NEW-PASSWORD' | translate }}</p>
         <div class="form-group">
-          <app-input-text [form]="formNewPassword" [property]="newPasswordProperty" i18n-label label="New password"
+          <app-input-text [form]="formNewPassword" [property]="newPasswordProperty" label="New password"
             [inputType]="'text'">
           </app-input-text>
         </div>
         <div class="form-group">
-          <app-input-text [form]="formNewPassword" [property]="newConfirmPasswordProperty" i18n-label label="Confirm password"
+          <app-input-text [form]="formNewPassword" [property]="newConfirmPasswordProperty" label="Confirm password"
             [inputType]="'text'">
           </app-input-text>
         </div>
         <div class="form-group">
-          <button type="submit" (click)="newPassword()" class="btn btn-primary btn-block" i18n>Reset</button>
+          <button type="submit" (click)="newPassword()" class="btn btn-primary btn-block">{{ 'LOGIN.RESET' | translate }}</button>
         </div>
         <div class="form-group">
-          <a href="javascript:void(0);" (click)="setLogin()" i18n>Back to login</a>
+          <a href="javascript:void(0);" (click)="setLogin()">{{ 'LOGIN.BACK-TO-LOGIN' | translate }}</a>
         </div>
       </form>
-
-
 
     </div>
   </div>

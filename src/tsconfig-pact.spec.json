@@ -12,8 +12,6 @@
     "polyfills.ts"
   ],
   "include": [
-    "../pact/**/*.ts",
-    "../pact/**/*.pact-spec.ts",
     "**/*.d.ts"
   ]
 }

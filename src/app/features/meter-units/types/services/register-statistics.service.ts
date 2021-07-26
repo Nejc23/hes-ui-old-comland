@@ -18,8 +18,8 @@ export class RegisterStatisticsService {
       .map((r) => Number(r.valueWithUnit.value));
     if (values && values.length > 0) {
       const avg = values.reduce((a, b) => a + b) / values.length;
-      const min = Math.min.apply(Math, values);
-      const max = Math.max.apply(Math, values);
+      const min = Math.min(...values);
+      const max = Math.max(...values);
 
       return {
         averageValue: avg,

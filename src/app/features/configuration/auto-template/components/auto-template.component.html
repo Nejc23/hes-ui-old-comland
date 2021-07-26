@@ -3,8 +3,8 @@
 <div class="col-2 filter-shadow-container" *ngIf="!hide">
   <div class="filter-shadow" >
     <div class="d-flex mb-3 mt-2">
-      <h4 i18n class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="getFilterTitle()">{{getFilterTitle()}}</h4>
-      <button i18n type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close">
+      <h4 class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="'FILTER.TEMPLATE-LIST' | translate ">{{ 'FILTER.TEMPLATE-LIST' | translate }}</h4>
+      <button type="button" class="close ml-auto" (click)="clickShowHideFilter()">
         <i class="far fa-times"></i>
       </button>
     </div>
@@ -27,9 +27,9 @@
 
   <div *ngIf="activeElement">
     <div class="d-flex align-items-center mb-3 mt-0">
-        <h4 class="mr-3 mb-0" i18n>Rules</h4>
+        <h4 class="mr-3 mb-0"> {{'TOOLS.AUTO-TEMPLATE.RULES' | translate }}</h4>
         <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement?.templateId?.length == 0">
-          <span i18n>Add</span>
+          <span>{{ 'BUTTON.ADD' | translate}} </span>
         </button>
     </div>
 
@@ -58,12 +58,12 @@
       <div *ngIf="showJobSection()">
         <div class="d-flex align-items-center mb-3 mt-5">
           <div class="form-group mr-3">
-            <h4 class="mb-0" i18n>Jobs</h4>
+            <h4 class="mb-0">{{ 'FORM.JOBS' | translate }}</h4>
           </div>
-          <app-select-input i18n-label [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
+          <app-select-input [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
           <div class="form-group">
             <button class="btn btn-primary ml-2" (click)="addJob()" [disabled]="activeElement?.templateId?.length == 0">
-              <span i18n>Add</span>
+              <span>{{ 'BUTTON.ADD' | translate }}</span>
             </button>
           </div>
         </div>
@@ -94,9 +94,9 @@
       <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
     </div>
     <div class="card-body">
-      <div class="small-title pb-2" i18n>There are no templates added in the system yet.</div>
+      <div class="small-title pb-2">{{' TOOLS.AUTO-TEMPLATE.ERROR' | translate }}</div>
     </div>
   </div>
   </div>
 </div>
-<ng-template #hidwShowTemplates><span i18n>Show/hide templates</span></ng-template>
+<ng-template #hidwShowTemplates><span>{{ 'TOOLS.AUTO-TEMPLATE.SHOW-HIDE' | translate }}</span></ng-template>

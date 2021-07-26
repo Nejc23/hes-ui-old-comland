@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GridSelectionHeaderComponent } from 'src/app/features/data-concentrator-units/components/grid-custom-components/grid-selection-header.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlcMeterSetDisplaySettingsGridService {
+  constructor(private translate: TranslateService) {}
+
   setGridDefaultColumnsLeft() {
     return [
       // {
@@ -17,14 +19,14 @@ export class PlcMeterSetDisplaySettingsGridService {
       //   suppressMovable: true,
       //   lockPosition: true,
       //   colId: 'displayRegisterDefinitionId',
-      //   headerTooltip: $localize`Select/deselect all`
+      //   headerTooltip:  `Select/deselect all`
       // },
       {
         field: 'name',
         suppressMenu: true,
         // sortable: true,
-        headerName: $localize`Available reigsters`,
-        headerTooltip: $localize`Available registers`,
+        headerName: this.translate.instant('PLC-METER.AVAILABLE-REGISTERS'),
+        headerTooltip: this.translate.instant('PLC-METER.AVAILABLE-REGISTERS'),
         dndSource: true,
         sortable: true
       }
@@ -32,8 +34,8 @@ export class PlcMeterSetDisplaySettingsGridService {
       //   field: 'obisCode',
       //   suppressMenu: true,
       //   sortable: true,
-      //   headerName: $localize`Obis code`,
-      //   headerTooltip: $localize`Obis code`
+      //   headerName:  `Obis code`,
+      //   headerTooltip:  `Obis code`
       // }
     ];
   }
@@ -50,22 +52,22 @@ export class PlcMeterSetDisplaySettingsGridService {
       //   suppressMovable: true,
       //   lockPosition: true,
       //   colId: 'displayRegisterDefinitionId',
-      //   headerTooltip: $localize`Select/deselect all`
+      //   headerTooltip:  `Select/deselect all`
       // },
       {
         field: 'name',
         suppressMenu: true,
         // sortable: true,
-        headerName: $localize`Selected registers *`,
-        headerTooltip: $localize`Selected registers`,
+        headerName: this.translate.instant('PLC-METER.SELECTED-REGISTERS'),
+        headerTooltip: this.translate.instant('PLC-METER.SELECTED-REGISTERS'),
         dndSource: true
       }
       // {
       //   field: 'obisCode',
       //   suppressMenu: true,
       //   sortable: true,
-      //   headerName: $localize`Obis code`,
-      //   headerTooltip: $localize`Obis code`
+      //   headerName:  `Obis code`,
+      //   headerTooltip:  `Obis code`
       // }
     ];
   }

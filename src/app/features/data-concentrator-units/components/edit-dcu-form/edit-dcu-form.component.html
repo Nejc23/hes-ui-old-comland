@@ -1,27 +1,27 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header i18n>Edit Data Concentrator Unit</div>
-
+  <div modal-header>{{ 'DCU.EDIT-DCU' | translate }}</div>
+  
   <div modal-body>
     <ng-container>
 
 
       <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong><span i18n>Error saving DCU!</span></strong> <br /> {{saveError}}
+        <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
       </div>
 
-      <app-input-text [form]="form" [property]="nameProperty" i18n-label label="Name"></app-input-text>
+      <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
 
       <div class="form-row">
         <div class="col-12">
-          <app-input-text [form]="form" [property]="idNumberProperty" i18n-label label="Id (serial number)">
+          <app-input-text [form]="form" [property]="idNumberProperty" label="ID">
           </app-input-text>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-6">
-          <app-select-input i18n-label label="Vendor" [form]="form" [property]="vendorProperty"
+          <app-select-input label="VENDOR" [form]="form" [property]="vendorProperty"
                             [disabled]="true">
           </app-select-input>
         </div>
@@ -29,7 +29,7 @@
 
       <div class="form-row">
         <div class="col-6">
-          <app-select-input i18n-label label="Type" [form]="form" [property]="typeProperty" [disabled]="true">
+          <app-select-input label="TYPE" [form]="form" [property]="typeProperty" [disabled]="true">
           </app-select-input>
         </div>
       </div>
@@ -37,26 +37,26 @@
       <div *ngIf="credentialsVisible">
         <div class="form-row">
           <div class="col-6">
-            <app-input-text [form]="form" [property]="userNameProperty" i18n-label label="Username"></app-input-text>
+            <app-input-text [form]="form" [property]="userNameProperty" label="USERNAME"></app-input-text>
           </div>
         </div>
       </div>
 
       <div class="form-row">
         <div class="col-6">
-          <app-input-text [form]="form" [property]="ipProperty" i18n-label label="IP"></app-input-text>
+          <app-input-text [form]="form" [property]="ipProperty" label="IP"></app-input-text>
         </div>
         <div class="form-row">
           <div class="col-6">
-            <app-input-text [form]="form" [property]="portProperty" i18n-label label="Port"></app-input-text>
+            <app-input-text [form]="form" [property]="portProperty" label="PORT"></app-input-text>
           </div>
         </div>
       </div>
 
-      <div i18n type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false"
+      <div type="button" data-toggle="collapse" data-target="#collapse" aria-expanded="false"
            class="gray-color-dark text-normal pt-2"
            aria-controls="collapse" (click)="toggle()">
-        Advanced
+           {{ 'COMMON.ADVANCED' | translate }}
         <i *ngIf="!opened" class="far fa-angle-down mr-2"></i>
         <i *ngIf="opened"  class="far fa-angle-up mr-2"></i>
       </div>
@@ -64,7 +64,7 @@
       <div class="collapse mt-3" id="collapse" [ngClass]="opened ? 'show' : ''">
         <div class="form-row">
           <div class="col-6">
-            <app-input-text [form]="form" [property]="externalIdProperty" i18n-label label="External Id">
+            <app-input-text [form]="form" [property]="externalIdProperty" label="EXTERNAL-ID">
             </app-input-text>
           </div>
         </div>
@@ -74,9 +74,9 @@
 
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="cancel()" i18n>Cancel</button>
+      <button type="button" class="btn text-secondary" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
       <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="saveDcu()" i18n>Save</button>
+        <button type="submit" class="btn btn-primary" (click)="saveDcu()">{{ 'BUTTON.SAVE' | translate }}</button>
       </div>
     </div>
   </div>

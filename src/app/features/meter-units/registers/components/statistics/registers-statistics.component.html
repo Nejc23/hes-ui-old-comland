@@ -1,14 +1,14 @@
 <div class="card bg-light shadow mb-3 border-0" *ngIf="this.data?.averageValue">
-  <div class="text-black-50 pt-2 pl-2 small" i18n>Average value</div>
+  <div class="text-black-50 pt-2 pl-2 small">{{ 'PLC-METER.AVERAGE-VALUE' | translate }}</div>
   <div class="display-3 p-2 text-center">{{this.data.averageValue | number: '1.0-0'}}</div>
 </div>
 
 <div class="card bg-light shadow mb-3 border-0" *ngIf="this.data?.maxValue">
-  <div class="text-black-50 pt-2 pl-2 small" i18n>Max value recorded at {{this.data.maxValue.timestamp | formatDateTime}}</div>
+  <div class="text-black-50 pt-2 pl-2 small" [innerHTML]="'PLC-METER.MAX-VALUE-RECORDED' | translate:{timestamp: this.data.maxValue.timestamp | formatDateTime}"></div>
   <div class="display-3 p-2 text-center">{{this.data.maxValue.valueWithUnit.value | number: '1.0-0'}}</div>
 </div>
 
 <div class="card bg-light shadow mb-3 border-0" *ngIf="this.data?.maxValue">
-  <div class="text-black-50 pt-2 pl-2 small" i18n>Min value recorded at {{this.data.minValue.timestamp | formatDateTime}}</div>
+  <div class="text-black-50 pt-2 pl-2 small" [innerHTML]="'PLC-METER.MIN-VALUE-RECORDED' | translate:{timestamp: this.data.minValue.timestamp | formatDateTime}"></div>
   <div class="display-3 p-2 text-center">{{this.data.minValue.valueWithUnit.value | number: '1.0-0'}}</div>
 </div>

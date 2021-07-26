@@ -1,12 +1,12 @@
 <div class="form-row">
   <div class="col-12">
     <label class="text-truncate" container="body" placement="bottom" [openDelay]="500"
-    [ngbTooltip]="subtitle">{{ subtitle }}</label>
+    ngbTooltip="{{ 'PLC-METER.SUBTITLE' | translate }}">{{ 'PLC-METER.SUBTITLE' | translate }}</label>
   </div>
 </div>
 <div class="form-row">
   <div class="col-12">
-    <app-input-text [form]="form" [property]="nameProperty" label="Name" i18n-label></app-input-text>
+    <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
   </div>
 </div>
 <div class="form-row">
@@ -17,7 +17,6 @@
           [acceptExtensions]="acceptExtensions"
           (selectEvent)="selected($event)"
           (removeEvent)="removed($event)"
-          i18n-label
           [dropFileSelectSubtitle]="uploadDropSubtitle">
         </app-file-select>
   </div>
@@ -31,6 +30,6 @@
 <div class="d-flex justify-content-start">
   <div class="btn-group dropdown">
     <button type="submit" class="btn btn-primary" (click)="save()" [disabled]="!data">
-      <span i18n>Import</span></button>
+      <span>{{ 'BUTTON.IMPORT' | translate }}</span></button>
   </div>
 </div>

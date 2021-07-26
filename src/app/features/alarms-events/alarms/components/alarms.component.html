@@ -43,7 +43,7 @@
     </ag-grid-angular>
     <div class="ag-paging-panel-selection d-flex">
       <div class="ml-auto">
-        <app-select-dropdown i18n-label [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
+        <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
           [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
         </app-select-dropdown>
       </div>
@@ -51,4 +51,4 @@
   </div>
 </div>
 
-<ng-template #tipContentRefresh><span i18n>Refresh alarms</span></ng-template>
+<ng-template #tipContentRefresh><span>{{'ALARMS.REFRESH-ALARMS' | translate }}</span></ng-template>

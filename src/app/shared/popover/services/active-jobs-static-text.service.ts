@@ -1,24 +1,25 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ActiveJobsStaticTextService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   get notAvailableTekst() {
-    return $localize`N/A`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get messageJobStopped() {
-    return $localize`Job stoped!`;
+    return this.translate.instant('JOB.JOB-STOPPED');
   }
 
   get messageJobCanceled() {
-    return $localize`Job canceled!`;
+    return this.translate.instant('JOB.JOB-CANCELED');
   }
 
   get messageServerError() {
-    return $localize`Server error!`;
+    return this.translate.instant('COMMON.SERVER-ERROR');
   }
 }

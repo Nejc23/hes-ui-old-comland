@@ -1,33 +1,33 @@
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
+import { AllModules, GridApi, Module } from '@ag-grid-enterprise/all-modules';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, forkJoin } from 'rxjs';
-import { AllModules, Module, GridApi } from '@ag-grid-enterprise/all-modules';
-import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
-import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
-import { AutoTemplateRuleList, AutoTemplateRule } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
-import { Rule } from 'src/app/core/repository/interfaces/auto-templates/rule.interface';
+import { TranslateService } from '@ngx-translate/core';
+import { forkJoin, Observable } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { AutoTemplatesStaticTextService } from '../services/auto-template-static-text.service';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { AutoTemplateRule, AutoTemplateRuleList } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
+import { Rule } from 'src/app/core/repository/interfaces/auto-templates/rule.interface';
+import { TemplatesList } from 'src/app/core/repository/interfaces/auto-templates/templates-list.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
 import { SchedulerJobsList } from 'src/app/core/repository/interfaces/jobs/scheduler-jobs-list.interface';
+import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { CodelistExt } from 'src/app/shared/repository/interfaces/codelists/codelist-ext.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { AutoTemplatesGridService } from '../services/auto-template-grid.service';
+import { AutoTemplateList } from './../../../../core/repository/interfaces/auto-templates/auto-templates-list.interface';
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 
 @Component({
   selector: 'app-auto-templates',
   templateUrl: './auto-template.component.html'
 })
-export class AutoTemplateComponent implements OnInit, OnDestroy {
+export class AutoTemplateComponent implements OnInit {
   private gridApi;
   private gridColumnApi;
 
@@ -51,7 +51,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   public gridOptions;
   public getRowHeight;
 
-  public headerTitle = this.staticTextService.title;
+  public headerTitle = this.translate.instant('AUTO-TEMPLATES');
   public form: FormGroup;
 
   private expadedTemplates: string[] = [];
@@ -79,7 +79,6 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    public staticTextService: AutoTemplatesStaticTextService,
     private service: AutoTemplatesGridService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
@@ -90,7 +89,8 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private route: ActivatedRoute,
     private breadcrumbService: BreadcrumbService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
 
@@ -393,7 +393,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
       if (!alreadyNewRow) {
         const rule = this.rowData.find((x) => x.autoTemplateRuleId === 'new');
         if (rule != null) {
-          this.toast.infoToast($localize`Aready added empty row for new item!`);
+          this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.ALREADY-ADDED"'));
           alreadyNewRow = true;
         }
       }
@@ -431,11 +431,11 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     if (this.form != null && this.form.get('ruleId').value.localeCompare('new') === 0) {
       const values = this.fillDataNewRule();
       request = this.serviceRepository.createAutoTemplateRule(values);
-      successMessage = $localize`Rule was added successfully`;
+      successMessage = this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-ADDED');
     } else {
       const values = this.fillDataEditRule();
       request = this.serviceRepository.updateAutoTemplateRule(values);
-      successMessage = $localize`Rule was updated successfully`;
+      successMessage = this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-UPDATED');
     }
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
@@ -507,55 +507,38 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = $localize`Delete`;
+    const operation = this.translate.instant('COMMON.DELETE');
     response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm delete`;
-    component.modalBody = $localize`Do you want to delete rule?`;
+    component.modalTitle = this.translate.instant('COMMON.DELETE');
+    component.modalBody = this.translate.instant('TOOLS.AUTO-TEMPLATE.DELETE-RULE');
 
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        response.subscribe(
-          (value) => {
-            this.getData();
+    modalRef.result.then((data) => {
+      // on close (CONFIRM)
+      response.subscribe(
+        (value) => {
+          this.getData();
 
-            // refresh grid
-            this.gridApiJobs.setRowData(this.rowDataJobs);
+          // refresh grid
+          this.gridApiJobs.setRowData(this.rowDataJobs);
 
-            this.toast.successToast($localize`Rule deleted!`);
-          },
-          (e) => {
-            this.toast.errorToast($localize`Server error!`);
-          }
-        );
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
-    );
-
-    /*
-    messageStarted = $localize `Scheduler job deleted!`);
-    messageServerError = $localize `Server error!`);
-
-    const request = this.serviceRepository.deleteAutoTemplateRule(id);
-    this.formUtils.deleteForm(request, $localize `Selected item deleted')).subscribe(
-      (response: any) => {
-        this.getData();
-      },
-      () => {}
-    );*/
+          this.toast.successToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.RULE-DELETED'));
+        },
+        (e) => {
+          this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+        }
+      );
+    });
   }
 
   removeForm(jobId: string) {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    const operation = $localize`Remove`;
+    const operation = this.translate.instant('COMMON.REMOVE');
     // response = this.serviceRepository.deleteAutoTemplateRule(id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm remove`;
-    component.modalBody = $localize`Do you want to remove job from all rules?`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-REMOVE');
+    component.modalBody = this.translate.instant('TOOLS.AUTO-TEMPLATE.REMOVE-FROM_RULES');
 
     modalRef.result.then(
       (data) => {
@@ -581,10 +564,10 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     joinedObservables.subscribe(
       () => {
         this.getData();
-        this.toast.infoToast($localize`Job successfully removed from all rules.`);
+        this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-REMOVED'));
       },
       (err) => {
-        this.toast.errorToast($localize`Failed to remove job from all rules.`);
+        this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED'));
       }
     );
   }
@@ -598,7 +581,7 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const selectedJob: Codelist<string> = this.form.get('selectedJob').value;
 
     if (!selectedJob || !selectedJob.id) {
-      this.toast.errorToast($localize`Select a job to add.`);
+      this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.SELECT-JOB'));
     }
 
     this.addJobIdToAllRules(selectedJob.id);
@@ -619,12 +602,12 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
     const joinedObservables = forkJoin(batch);
     joinedObservables.subscribe(
       () => {
-        this.toast.infoToast($localize`Job successfully added to all rules.`);
+        this.toast.infoToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-ADDED-TO-ALL'));
 
         this.getData();
       },
       (err) => {
-        this.toast.errorToast($localize`Failed to add job to all rules.`);
+        this.toast.errorToast(this.translate.instant('TOOLS.AUTO-TEMPLATE.JOB-FAILED-TO-ALL'));
       }
     );
   }
@@ -635,11 +618,5 @@ export class AutoTemplateComponent implements OnInit, OnDestroy {
 
   showJobSection(): boolean {
     return this.rowData && this.rowData.filter((d) => d.autoTemplateRuleId !== 'new').length > 0;
-  }
-
-  ngOnDestroy() {}
-
-  getFilterTitle(): string {
-    return $localize`Templates list`;
   }
 }

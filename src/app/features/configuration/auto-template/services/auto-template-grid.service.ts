@@ -5,12 +5,13 @@ import { GridCellAddBtnComponent } from '../components/grid-custom-components/gr
 import { GridRequiredCellEditorComponent } from '../components/grid-custom-components/grid-required-cell-editor.component';
 import { GridCellRemoveBtnComponent } from '../components/grid-custom-components/grid-cell-remove-btn.component';
 import { GridCellNextRunNoEventComponent } from '../components/grid-custom-components/grid-cell-next-run-no-event.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AutoTemplatesGridService {
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   /**
    * Set grid settings master
@@ -38,22 +39,18 @@ export class AutoTemplatesGridService {
       { field: 'autoTemplateRuleId', hide: true },
       {
         field: 'propertyName',
-        headerName: $localize`Obis`,
+        headerName: this.translate.instant('GRID.OBIS'),
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyName' },
         valueSetter: (params) => {
-          if (params.oldValue !== params.newValue) {
-            return true;
-          } else {
-            return false;
-          }
+          return params.oldValue !== params.newValue;
         }
       },
       {
         field: 'propertyValue',
         cellEditor: 'gridRequiredCellEditorComponent',
         cellEditorParams: { formName: 'propertyValue' },
-        headerName: $localize`Regex`,
+        headerName: this.translate.instant('GRID.REGEX'),
         valueSetter: (params) => {
           return params.oldValue !== params.newValue;
         }
@@ -85,24 +82,24 @@ export class AutoTemplatesGridService {
     return [
       {
         field: 'type',
-        headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`
+        headerName: this.translate.instant('GRID.JOB-TYPE'),
+        headerTooltip: this.translate.instant('GRID.JOB-TYPE')
       },
       {
         field: 'description',
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: this.translate.instant('GRID.JOB-DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.JOB-DESCRIPTION')
       },
       {
         field: 'nextRun',
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: $localize`Next run`,
-        headerTooltip: $localize`Next run`
+        headerName: this.translate.instant('GRID.NEXT-RUN'),
+        headerTooltip: this.translate.instant('GRID.NEXT-RUN')
       },
       {
         field: 'owner',
-        headerName: $localize`Owner`,
-        headerTooltip: $localize`Owner`
+        headerName: this.translate.instant('GRID.OWNER'),
+        headerTooltip: this.translate.instant('GRID.OWNER')
       },
       {
         field: 'id',

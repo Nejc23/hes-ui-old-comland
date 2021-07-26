@@ -1,13 +1,13 @@
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
-import { DataConcentratorUnitsService } from './../../../../core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
+import { DataConcentratorUnitsService } from '../../../../core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -26,6 +26,7 @@ import { DcuForJobStaticTextService } from '../services/dcu-for-job-static-text.
 import { DcuForJobGridEventEmitterService } from '../services/dcu-for-job-grid-event-emitter.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   // selector: 'app-meter-units-all-for-job',
@@ -88,10 +89,9 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   dataResult2 = '';
   public localeText;
 
-  // messageActionInProgress = this.i18n(`Action in progress!`);
-  messageServerError = $localize`Server error!`;
-  messageDataRefreshed = $localize`Data refreshed!`;
-  messageActionFailed = $localize`Action failed!`;
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
+  messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
+  messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
 
   public useWildcards = false;
 
@@ -110,7 +110,8 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     private modalService: ModalService,
     private jobsService: JobsService,
     private breadcrumbService: BreadcrumbService,
-    private sidebarToggleService: SidebarToggleService
+    private sidebarToggleService: SidebarToggleService,
+    private translate: TranslateService
   ) {
     this.paramsSub = route.params.subscribe((params) => {
       this.scheduleId = params.scheduleId;
@@ -150,6 +151,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   get formFunctionality() {
     return FunctionalityEnumerator.MU;
   }
+
   // actions - rights
   get actionMURemoveFromJob() {
     return ActionEnumerator.MURemoveFromJob;
@@ -167,19 +169,19 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: $localize`Columns`,
-      filters: $localize`Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: $localize`page`,
-      more: $localize`more`,
-      to: $localize`to`,
-      of: $localize`of`,
-      next: $localize`next`,
-      last: $localize`last`,
-      first: $localize`first`,
-      previous: $localize`previous`,
-      loadingOoo: $localize`loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
@@ -336,6 +338,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     };
     this.gridApi.setServerSideDatasource(datasource);
   }
+
   // ----------------------- ag-grid set DATASOURCE end --------------------------
 
   // ag-grid change visibillity of columns
@@ -520,7 +523,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   }
 
   private noFilters() {
-    if (
+    return (
       this.requestModel.filterModel == null ||
       ((!this.requestModel.filterModel.statuses ||
         this.requestModel.filterModel.statuses.length === 0 ||
@@ -534,20 +537,14 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         (!this.requestModel.filterModel.vendors ||
           this.requestModel.filterModel.vendors.length === 0 ||
           this.requestModel.filterModel.vendors[0].id === 0) &&
-        (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
+        !this.requestModel.filterModel.readStatus &&
         (!this.requestModel.filterModel.firmware ||
           this.requestModel.filterModel.firmware.length === 0 ||
           this.requestModel.filterModel.firmware[0].id === 0) &&
-        // (!this.requestModel.filterModel.breakerState ||
-        //   this.requestModel.filterModel.breakerState.length === 0 ||
-        //   this.requestModel.filterModel.breakerState[0].id === 0) &&
         !this.requestModel.filterModel.showChildInfoMBus &&
         !this.requestModel.filterModel.showWithoutTemplate &&
         !this.requestModel.filterModel.readyForActivation)
-    ) {
-      return true;
-    }
-    return false;
+    );
   }
 
   // set form title by selected meter unit type
@@ -573,7 +570,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     const selectedText = `${this.getSelectedCount()}`;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = this.translate.instant('BUTTON.CONFIRM');
     let response: Observable<any> = new Observable();
 
     const request: RequestDcuForJob = {
@@ -599,15 +596,16 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
 
     response = this.dataConcentratorUnitsService.removeConcentratorsFromJob(request);
 
-    component.btnConfirmText = $localize`Remove`;
-    component.modalTitle = $localize`Confirm bulk operation`;
-    component.modalBody = $localize`Remove ${selectedText} Concentrator(s) from Job?`;
+    component.btnConfirmText = this.translate.instant('COMMON.REMOVE');
+    component.modalTitle = this.translate.instant('JOB.CONFIRM-BULK');
+    component.modalBody = this.translate.instant('JOB.CONFIRM-BULK', { selectedText: selectedText }); //
+    // `Remove ${selectedText} Concentrator(s) from Job?`;
 
     modalRef.result.then(
       (data) => {
         response.subscribe(
           (value) => {
-            this.toast.successToast($localize`Selected Concentrators removed successfully.`);
+            this.toast.successToast(this.translate.instant('JOB.DCU-FOR-JOB'));
             this.refresh();
           },
           (e) => {
@@ -662,7 +660,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${$localize`of`} ${this.totalCount}`;
+        return selectedCount + this.translate.instant('GRID.OF') + this.totalCount;
       }
     } else {
       return `${selectedCount}`;

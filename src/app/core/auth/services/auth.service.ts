@@ -1,21 +1,21 @@
-import { Inject, Injectable, LOCALE_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import * as moment from 'moment';
+import { CookieService } from 'ngx-cookie-service';
+import { User, UserManager } from 'oidc-client';
 import { from, Observable, of, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { config } from 'src/environments/config';
+import { environment } from 'src/environments/environment';
+import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
+import { PermissionsStoreService } from '../../permissions/services/permissions-store.service';
+import { RoleService } from '../../permissions/services/role.service';
+import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
+import { AppStoreService } from '../../stores/services/app-store.service';
+import { loginRouteUrl } from '../consts/route-url';
 import { AuthenticatedUser } from '../interfaces/authenticated-user.interface';
 import { RefreshTokenRequest } from '../interfaces/refresh-token.interface';
-import { CookieService } from 'ngx-cookie-service';
-import { config } from 'src/environments/config';
-import { map } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { AppStoreService } from '../../stores/services/app-store.service';
-import * as moment from 'moment';
-import { loginRouteUrl } from '../consts/route-url';
-import { PermissionsStoreService } from '../../permissions/services/permissions-store.service';
-import { environment } from 'src/environments/environment';
-import { AuthenticationRepositoryService } from '../../repository/services/auth/authentication-repository.service';
-import { User, UserManager, UserManagerSettings } from 'oidc-client';
 import { JwtHelperService } from './jwt.helper.service';
-import { RoleService } from '../../permissions/services/role.service';
-import { AppConfigStoreService } from '../../configuration/services/app-config-store.service';
 
 @Injectable()
 export class AuthService {
@@ -25,6 +25,7 @@ export class AuthService {
   public user: User | null;
 
   tokenName = 'myGrid.Link_Token';
+  locale = '';
 
   constructor(
     private usersRepositoryService: AuthenticationRepositoryService,
@@ -34,22 +35,16 @@ export class AuthService {
     private permissionsStoreService: PermissionsStoreService,
     private jwtHelper: JwtHelperService,
     private roleService: RoleService,
-    private configStoreService: AppConfigStoreService,
-    @Inject(LOCALE_ID) public locale: string
+    private configStoreService: AppConfigStoreService
   ) {
     this.configStoreService.configObservable.subscribe((appConfig) => {
+      this.locale = localStorage.getItem('lang') || 'en';
       const settings = {
         authority: appConfig.identityServer.stsAuthority,
         client_id: appConfig.identityServer.clientId,
-        redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}assets/signin-callback.html`
-          : `${appConfig.identityServer.clientRoot}${locale}/assets/signin-callback.html`,
-        silent_redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}assets/silent-callback.html`
-          : `${appConfig.identityServer.clientRoot}${locale}/assets/silent-callback.html`,
-        post_logout_redirect_uri: environment.ignoreLocale
-          ? `${appConfig.identityServer.clientRoot}`
-          : `${appConfig.identityServer.clientRoot}${locale}`,
+        redirect_uri: `${appConfig.identityServer.clientRoot}assets/signin-callback.html`,
+        silent_redirect_uri: `${appConfig.identityServer.clientRoot}assets/silent-callback.html`,
+        post_logout_redirect_uri: `${appConfig.identityServer.clientRoot}`,
         response_type: 'id_token token',
         scope: appConfig.identityServer.clientScope,
         automaticSilentRenew: appConfig.identityServer.clientAutoSilentRenew
@@ -145,6 +140,7 @@ export class AuthService {
     if (isDevelop === this.user.id_token) {
       localStorage.setItem('is_develop', this.user.id_token);
     }
+    localStorage.setItem('lang', this.locale);
     this.setUserRights(authenticatedUser);
   }
 

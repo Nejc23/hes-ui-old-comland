@@ -110,7 +110,7 @@ export class BaseTemplateComponent implements OnInit {
       if (list && list.length > 0) {
         list.forEach((element) => {
           const newElement = {
-            title: $localize`${element.value}`,
+            title: `${element.value}`,
             routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
             hasChildren: false,
             children: []

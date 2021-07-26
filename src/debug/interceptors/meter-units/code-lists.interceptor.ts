@@ -1,23 +1,22 @@
-import {
-  meterUnitsDeviceMedium,
-  meterUnitsAlarmSourceType,
-  meterUnitsAlarmSeverityType
-} from './../../../app/core/repository/consts/meter-units.const';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
+import {
+  meterUnitCiiStates,
+  meterUnitDisconnectorStates,
+  meterUnitFirmwares,
+  meterUnitsProtocolType,
+  meterUnitStatuses,
+  meterUnitTags,
+  meterUnitTypes,
+  meterUnitVendors
+} from 'src/app/core/repository/consts/meter-units.const';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import {
-  meterUnitTypes,
-  meterUnits,
-  meterUnitStatuses,
-  meterUnitVendors,
-  meterUnitTags,
-  meterUnitFirmwares,
-  meterUnitDisconnectorStates,
-  meterUnitCiiStates,
-  meterUnitsProtocolType
-} from 'src/app/core/repository/consts/meter-units.const';
+  meterUnitsAlarmSeverityType,
+  meterUnitsAlarmSourceType,
+  meterUnitsDeviceMedium
+} from './../../../app/core/repository/consts/meter-units.const';
 
 @Injectable()
 export class MeterUnitCodelistInterceptor {

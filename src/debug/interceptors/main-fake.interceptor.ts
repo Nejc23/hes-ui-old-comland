@@ -1,43 +1,42 @@
-import { RegistersInterceptor } from './registers/registers.interceptor';
-import { AlarmingInterceptor } from './alarming/alarming.interceptor';
-import { AutoTemplateRegister } from './../../app/core/repository/interfaces/auto-templates/auto-template-register.interface';
-import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
-import { MeterUnitInterceptor } from './meter-units/meter-unit.interceptor';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { delay, materialize, dematerialize, mergeMap } from 'rxjs/operators';
-import { CodelistInterceptor } from './codelist.interceptor';
+import { delay, dematerialize, materialize, mergeMap } from 'rxjs/operators';
+import { AlarmingInterceptor } from './alarming/alarming.interceptor';
 import { AuthenticateInterceptor } from './authentication/authenticate.interceptor';
-import { UserRequestResetPasswordInterceptor } from './authentication/user-request-reset-password.interceptor';
 import { UserChangePasswordInterceptor } from './authentication/user-change-password.interceptor';
 import { UserNewPasswordInterceptor } from './authentication/user-new-password.interceptor';
-import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
-import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
-import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
-import { MeterUnitsListInterceptor } from './meter-units/meter-units-list.interceptor';
-import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-type-grid-layout.interceptor';
-import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.interceptor';
-import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
-import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-scheduler.interceptor';
-import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
-import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
-import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
-import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
+import { UserRequestResetPasswordInterceptor } from './authentication/user-request-reset-password.interceptor';
+import { CodelistInterceptor } from './codelist.interceptor';
+import { DataProcessingInterceptor } from './common/data-processing/data-processing.interceptor';
+import { AutoTemplatesRegistersInterceptor } from './configuration/auto-templates/auto-templates-get-registers.interceptor';
 import { AutoTemplatesListInterceptor } from './configuration/auto-templates/auto-templates-list.interceptor';
+import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-templates/auto-templates-reading-jobs-list.interceptor';
 import { AutoTemplatesRulesListInterceptor } from './configuration/auto-templates/auto-templates-rules-list.interceptor';
 import { AutoTemplatesRulesInterceptor } from './configuration/auto-templates/auto-templates-rules.interceptor';
+import { DataConcentratorUnitInterceptor } from './data-concentrator-units/data-concentrator-unit.interceptor';
+import { DataConcentratorUnitsListInterceptor } from './data-concentrator-units/data-concentrator-units-list.interceptor';
+import { DcuGridLayoutInterceptor } from './data-concentrator-units/dcu-grid-layout.interceptor';
+import { ActiveJobsInterceptor } from './jobs/active-jobs.interceptor';
+import { JobsCodelistInterceptor } from './jobs/jobs-codelist.interceptor';
+import { SchedulerJobsInterceptor } from './jobs/scheduler-jobs.interceptor';
+import { MeterUnitCodelistInterceptor } from './meter-units/code-lists.interceptor';
+import { MeterUnitInterceptor } from './meter-units/meter-unit.interceptor';
 import { MeterUnitsActivateUpgradeInterceptor } from './meter-units/meter-units-activate-upgrade.interceptor';
 import { MeterUnitsForJobInterceptor } from './meter-units/meter-units-for-job.interceptor';
-import { AutoTemplatesReadingJobsListInterceptor } from './configuration/auto-templates/auto-templates-reading-jobs-list.interceptor';
-import { AutoTemplatesRegistersInterceptor } from './configuration/auto-templates/auto-templates-get-registers.interceptor';
-import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
-import { MeterUnitsSetDisplaySettingsInterceptor } from './meter-units/meter-units-set-display-settings.interceptor';
-import { MeterUnitsTypeSecurityInterceptor } from './meter-units/meter-units-security.interceptor';
-import { TemplatingInterceptor } from './templating/templating.interceptor';
-import { TemplatesInterceptor } from './templates/templates.interceptor';
+import { MeterUnitsFwUpgradeInterceptor } from './meter-units/meter-units-fw-upgrade.interceptor';
+import { MeterUnitsListInterceptor } from './meter-units/meter-units-list.interceptor';
 import { MeterUnitsPlcActionsInterceptor } from './meter-units/meter-units-plc-actions.interceptor';
-import { SchedulerJobsInterceptor } from './jobs/scheduler-jobs.interceptor';
+import { MeterUnitsSchedulerInterceptor } from './meter-units/meter-units-scheduler.interceptor';
+import { MeterUnitsTypeSecurityInterceptor } from './meter-units/meter-units-security.interceptor';
+import { MeterUnitsSetDisplaySettingsInterceptor } from './meter-units/meter-units-set-display-settings.interceptor';
+import { MeterUnitsSetMonitorInterceptor } from './meter-units/meter-units-set-monitor.interceptor';
+import { MeterUnitsTypeGridLayoutInterceptor } from './meter-units/meter-units-type-grid-layout.interceptor';
+import { RegistersSelectInterceptor } from './registers-select/registers-select.interceptor';
+import { RegistersInterceptor } from './registers/registers.interceptor';
+import { TemplatesInterceptor } from './templates/templates.interceptor';
+import { TemplatingInterceptor } from './templating/templating.interceptor';
+import { TimeOfUseInterceptor } from './time-of-use/time-of-use.interceptor';
 
 @Injectable()
 export class FakeBackendInterceptor implements HttpInterceptor {
@@ -394,7 +393,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
   }
 }
 
-export let fakeBackendProvider = {
+export const fakeBackendProvider = {
   // use fake backend in place of Http service for backend-less development
   provide: HTTP_INTERCEPTORS,
   useClass: FakeBackendInterceptor,

@@ -1,40 +1,23 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { FiltersInfo } from '../../../shared/forms/interfaces/filters-info.interface';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataConcentratorUnitsStaticTextService {
-  // public titleBreadCrumbs = $localize`Data Concentrator Units`;
-
-  constructor() {}
-
-  get headerTitleDCU() {
-    return $localize`Concentrators`;
-  }
-
-  get jobsTitle() {
-    return $localize`Jobs`;
-  }
+  constructor(private translate: TranslateService) {}
 
   get notAvailableTekst() {
-    return $localize`N/A`;
-  }
-
-  get noRecordsFound() {
-    return $localize`No records found. You may need to adjust your search or filter parameters.`;
-  }
-
-  get loadingData() {
-    return $localize`Loading data...`;
+    return this.translate.instant('COMMON.NA');
   }
 
   get noFilterAppliedTekst() {
-    return $localize`No filter applied`;
+    return this.translate.instant('COMMON.NO-FILTER-APPLIED');
   }
 
   get nextPlannedReadText() {
-    return $localize`Next planned read` + ' ';
+    return this.translate.instant('JOB.NEXT-READ') + ' ';
   }
 
   getFiltersInfo(filterName: string, status: boolean, readStatuses: boolean, type: boolean, vendor: boolean, tag: boolean): FiltersInfo {
@@ -54,35 +37,35 @@ export class DataConcentratorUnitsStaticTextService {
     }
 
     if ((filterName !== '' && filterName !== undefined) || status || readStatuses || type || vendor || tag) {
-      result.text += $localize`Filtered by: `;
+      result.text += this.translate.instant('FILTER.FILTERED-BY');
     }
 
     if (status) {
       additionalString = readStatuses || type || vendor || tag ? ', ' : '';
-      result.text += $localize`status` + additionalString;
+      result.text += this.translate.instant('DCU.STATUS', { additionalString: additionalString });
       result.count++;
     }
 
     if (readStatuses) {
       additionalString = type || vendor || tag ? ', ' : '';
-      result.text += $localize`read status` + additionalString;
+      result.text += this.translate.instant('DCU.READ-STATUS', { additionalString: additionalString });
       result.count++;
     }
 
     if (type) {
       additionalString = vendor || tag ? ', ' : '';
-      result.text += $localize`type` + additionalString;
+      result.text += this.translate.instant('DCU.TYPE', { additionalString: additionalString });
       result.count++;
     }
 
     if (vendor) {
       additionalString = tag ? ', ' : '';
-      result.text += $localize`vendor` + additionalString;
+      result.text += this.translate.instant('DCU.VENDOR', { additionalString: additionalString });
       result.count++;
     }
 
     if (tag) {
-      result.text += $localize`tag`;
+      result.text += this.translate.instant('COMMON.TAG');
       result.count++;
     }
 

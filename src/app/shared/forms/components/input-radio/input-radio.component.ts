@@ -12,6 +12,7 @@ export class InputRadioComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() options: RadioOption[];
   @Input() inline = false;
+  @Input() translate = true;
   @Input() label: string;
   @Input() box = false;
   @Input() showTooltip = false;

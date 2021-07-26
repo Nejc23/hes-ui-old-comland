@@ -31,7 +31,7 @@
             >
             <div *ngIf="getSelectedCount() === 0" class="mr-3">
               <button appHideIfPermissionUnauthorized  [permission]="permissionAdd" class="btn btn-primary" (click)="addDcu()">
-                <span i18n>Add</span>
+                <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
             <div class="pr-3">
@@ -85,23 +85,23 @@
             <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
               <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
                 <small class="link text-secondary">{{getSelectedCount()}}
-                  <strong><span i18n>items selected</span> &middot;
+                  <strong><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span>&middot;
                     <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
-                    <span i18n>Select all</span>
+                    <span>{{ 'GRID.SELECT-ALL' | translate }}</span>
                         ({{totalCount}})</a> &middot;
                     <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
-                      <span i18n>Clear selected</span></a>
+                      <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a>
                   </strong></small>
               </div>
 
               <div class="mr-3" *ngIf="checkSelectedAll()">
-                <small class="link text-secondary"><strong><span i18n>All</span> ({{getTotalCountWithoutExcluded()}}) <span i18n>items selected</span> &middot;
+                <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span> ({{getTotalCountWithoutExcluded()}}) <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
                   <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
-                    <span i18n>Clear selected</span></a></strong></small>
+                    <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a></strong></small>
               </div>
             </div>
             <div class="ml-auto">
-              <app-select-dropdown i18n-label [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
+              <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
                 [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
               </app-select-dropdown>
             </div>
@@ -109,13 +109,13 @@
         </div>
         <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height: 30vh;">
           <i class="far fa-empty-set fa-5x text-secondary mb-4"></i>
-          <h3 class="mb-3" i18n>You have no Data Concentrator Units yet!</h3>
+          <h3 class="mb-3">{{ 'DCU.NO-DATA-CONCENTRATOR-UNITS' | translate }}</h3>
           <button type="button" class="btn btn-lg btn-primary" (click)="addDcu()"><i class="far fa-plus"></i>
-            <span i18n>Add First</span></button>
+            <span>{{ 'DCU.ADD-FIRST' | translate }}</span></button>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #hideShowFilter><span i18n>Show/hide filters</span></ng-template>
+<ng-template #hideShowFilter><span>{{ 'GRID.SHOW-HIDE-FILTERS' | translate }}</span></ng-template>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
 import { ICellEditorAngularComp } from '@ag-grid-community/angular';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-grid-required-cell-editor',

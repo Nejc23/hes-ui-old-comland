@@ -4,16 +4,6 @@
   "newProjectRoot": "projects",
   "projects": {
     "myGrid": {
-      "i18n": {
-        "locales": {
-          "en": "src/assets/i18n/messages.en.xlf",
-          "sl": "src/assets/i18n/messages.sl.xlf",
-          "cs": "src/assets/i18n/messages.cs.xlf",
-          "de": "src/assets/i18n/messages.de.xlf",
-          "fr": "src/assets/i18n/messages.fr.xlf",
-          "it": "src/assets/i18n/messages.it.xlf"
-        }
-      },
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -27,7 +17,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "localize": false,
             "aot": true,
             "outputPath": "dist/myGrid",
             "index": "src/index.html",
@@ -73,9 +62,6 @@
                   "type": "anyComponentStyle",
                   "maximumWarning": "6kb"
                 }
-              ],
-              "localize": [
-                "en"
               ]
             },
             "develop-amera": {
@@ -103,10 +89,7 @@
                 "includePaths": [
                   "src/styles/brand/amera"
                 ]
-              },
-              "localize": [
-                "en"
-              ]
+              }
             },
             "develop-ePointHES": {
               "budgets": [
@@ -133,37 +116,11 @@
                 "includePaths": [
                   "src/styles/brand/ePointHES"
                 ]
-              },
-              "localize": [
-                "en"
-              ]
-            },
-            "develop-sl": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "localize": [
-                "sl"
-              ]
-            },
-            "develop-de": {
-              "budgets": [
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "6kb"
-                }
-              ],
-              "localize": [
-                "de"
-              ]
+              }
             },
             "production": {
               "outputPath": "dist/hes",
               "deleteOutputPath": true,
-              "localize": false,
               "assets": [
                 "src/assets",
                 {
@@ -198,14 +155,6 @@
               ]
             },
             "production-myGrid": {
-              "localize": [
-                "en",
-                "sl",
-                "cs",
-                "de",
-                "fr",
-                "it"
-              ],
               "outputPath": "dist/myGrid",
               "deleteOutputPath": true,
               "assets": [
@@ -243,14 +192,6 @@
               ]
             },
             "production-amera": {
-              "localize": [
-                "en",
-                "sl",
-                "cs",
-                "de",
-                "fr",
-                "it"
-              ],
               "outputPath": "dist/amera",
               "deleteOutputPath": true,
               "assets": [
@@ -297,14 +238,6 @@
               ]
             },
             "production-ePointHES": {
-              "localize": [
-                "en",
-                "sl",
-                "cs",
-                "de",
-                "fr",
-                "it"
-              ],
               "outputPath": "dist/ePointHES",
               "deleteOutputPath": true,
               "assets": [
@@ -367,27 +300,12 @@
             "production-ePointHES": {
               "browserTarget": "myGrid:build:production-ePointHES"
             },
-            "develop-sl": {
-              "browserTarget": "myGrid:build:develop-sl"
-            },
-            "develop-de": {
-              "browserTarget": "myGrid:build:develop-de"
-            },
             "develop-amera": {
               "browserTarget": "myGrid:build:develop-amera"
             },
             "develop-ePointHES": {
               "browserTarget": "myGrid:build:develop-ePointHES"
-            },
-            "sl": {
-              "browserTarget": "myGrid:build:sl"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "myGrid:build"
           }
         },
         "test": {
@@ -413,103 +331,15 @@
                 "src/styles/brand/default"
               ]
             }
-          },
-          "configurations": {
-            "pact": {
-              "main": "src/test-pact.ts",
-              "karmaConfig": "src/karma-pact.conf.js",
-              "tsConfig": "src/tsconfig-pact.spec.json"
-            }
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
             ]
-          }
-        },
-        "xliffmerge": {
-          "builder": "@ngx-i18nsupport/tooling:xliffmerge",
-          "options": {},
-          "configurations": {
-            "slovenian": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "sl",
-                "languages": [
-                  "sl"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "english": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "en",
-                "languages": [
-                  "en"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "czech": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "cs",
-                "languages": [
-                  "cs"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "deutch": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "de",
-                "languages": [
-                  "de"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "french": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "fr",
-                "languages": [
-                  "fr"
-                ],
-                "useSourceAsTarget": true
-              }
-            },
-            "italian": {
-              "xliffmergeOptions": {
-                "i18nFormat": "xlf",
-                "srcDir": "src/assets/i18n",
-                "genDir": "src/assets/i18n",
-                "defaultLanguage": "it",
-                "languages": [
-                  "it"
-                ],
-                "useSourceAsTarget": true
-              }
-            }
           }
         }
       }
@@ -532,11 +362,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "e2e//**/*.ts",
+              "e2e//**/*.html"
             ]
           }
         }
@@ -548,5 +378,8 @@
     "@schematics/angular:component": {
       "style": "scss"
     }
+  },
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

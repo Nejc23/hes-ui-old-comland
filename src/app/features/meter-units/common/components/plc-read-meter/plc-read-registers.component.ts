@@ -1,4 +1,4 @@
-import { IActionRequestAddTemplate } from './../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { IActionRequestAddTemplate } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -19,6 +19,7 @@ import {
   SchedulableRegisters,
   SchedulableRegistersType
 } from '../../../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-read-registers',
@@ -30,8 +31,8 @@ export class PlcReadRegistersComponent implements OnInit {
   public selectedRowsCount: number;
   public selectedDeviceIds = [];
   noRegisters = false;
-  registersRequiredText = $localize`Required field`;
-  actionName = $localize`Read Meter Objects`;
+  registersRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
+  actionName = this.translate.instant('COMMON.READ-METER-OBJECTS');
   form: FormGroup;
 
   rowData$: Observable<SchedulableRegisters>;
@@ -45,9 +46,9 @@ export class PlcReadRegistersComponent implements OnInit {
 
   public modules: Module[] = AllModules;
 
-  requiredText = $localize`Date and at least one register must be selected`;
-  templateErrorText = $localize`One of the meters selected does not have template assigned!`;
-  foundText = $localize`found`;
+  requiredText = this.translate.instant('MODAL.SELECT-DATE-AND-REGISTERS');
+  templateErrorText = this.translate.instant('MODAL.METER-TEMPLATE-ERROR');
+  foundText = this.translate.instant('COMMON.FOUND').toLowerCase();
 
   noRegisterSelected = false;
   // TODO when backend
@@ -66,12 +67,13 @@ export class PlcReadRegistersComponent implements OnInit {
     private modal: NgbActiveModal,
     private myGridService: MyGridLinkService,
     private registersService: RegistersSelectService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
 
-    let startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
-    let endDateFormatted = moment().format(dateDisplayFormat);
+    const startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
+    const endDateFormatted = moment().format(dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
@@ -121,7 +123,7 @@ export class PlcReadRegistersComponent implements OnInit {
         checkboxSelection: true,
         lockPosition: true,
         field: 'name',
-        headerName: $localize`Type`,
+        headerName: this.translate.instant('COMMON.TYPE'),
         cellStyle: (params) => {
           if (params.data.isSelectable !== true) {
             return { 'padding-left': '34px' };
@@ -138,7 +140,7 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   loadData() {
-    let params = { id: this.selectedDeviceIds };
+    const params = { id: this.selectedDeviceIds };
     this.rowData$ = this.registersService.getDeviceTemplateGroups(params);
 
     this.rowData$.subscribe((x) => {
@@ -156,19 +158,19 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onConfirm() {
-    let registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
+    const registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
 
     this.noRegisterSelected = !this.selectedRegister;
     if (this.noRegisterSelected) {
       return;
     }
 
-    let startDate =
+    const startDate =
       moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.startTime.value +
       ':00';
-    let endDate =
+    const endDate =
       moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.endTime.value +
@@ -176,7 +178,7 @@ export class PlcReadRegistersComponent implements OnInit {
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);
-    const successMessage = $localize`Read Meter Objects succeeded!`;
+    const successMessage = this.translate.instant('MODAL.READ-METER-OBJECTS-SUCCEEDED');
 
     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
       (result) => {

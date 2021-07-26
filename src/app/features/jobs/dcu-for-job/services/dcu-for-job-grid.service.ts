@@ -1,4 +1,4 @@
-import { DcuForJobGridCellTypeComponent } from './../components/grid-custom-components/grid-cell-type.component';
+import { DcuForJobGridCellTypeComponent } from '../components/grid-custom-components/grid-cell-type.component';
 import { Injectable } from '@angular/core';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
@@ -12,6 +12,7 @@ import { DcuForJobGridCellNameComponent } from '../components/grid-custom-compon
 import { DcuForJobGridCellVendorComponent } from '../components/grid-custom-components/grid-cell-vendor.component';
 import { DcuForJobGridCellIdNumberComponent } from '../components/grid-custom-components/grid-cell-id-number.component';
 import { DcuForJobGridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +30,8 @@ export class DcuForJobGridService {
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private translate: TranslateService
   ) {}
 
   public set dcuForJobId(id: number) {
@@ -84,43 +86,43 @@ export class DcuForJobGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'id',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL')
       },
       {
         field: 'name',
-        headerName: $localize`Name`,
+        headerName: this.translate.instant('GRID.NAME'),
         pinned: true,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellNameComponent',
-        headerTooltip: $localize`Name`
+        headerTooltip: this.translate.instant('GRID.NAME')
       },
       {
         field: 'id',
-        headerName: $localize`ID`,
+        headerName: this.translate.instant('GRID.ID'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIdNumberComponent',
-        headerTooltip: $localize`ID`
+        headerTooltip: this.translate.instant('GRID.ID')
       },
       {
         field: 'type',
-        headerName: $localize`Type`,
+        headerName: this.translate.instant('GRID.TYPE'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellTypeComponent',
-        headerTooltip: $localize`Type`
+        headerTooltip: this.translate.instant('GRID.TYPE')
       },
       {
         field: 'vendor',
-        headerName: $localize`Vendor`,
+        headerName: this.translate.instant('GRID.VENDOR'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellVendorComponent',
-        headerTooltip: $localize`Vendor`
+        headerTooltip: this.translate.instant('GRID.VENDOR')
       }
     ];
   }

@@ -1,29 +1,27 @@
-import { PermissionService } from './permissions/services/permission.service';
-import { SidebarCookieStoreService } from './../shared/base-template/components/services/sidbebar-cookie-store.service';
-import { NgModule, Optional, SkipSelf, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { EnsureModuleLoadedOnceGuard } from './ensureModuleLoadedOnceGuard';
+import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from './auth/services/auth.service';
-import { AppStoreService } from './stores/services/app-store.service';
+import { RouterModule } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { SidebarCookieStoreService } from './../shared/base-template/components/services/sidbebar-cookie-store.service';
 import { TokenInterceptor } from './auth/interceptors/token.interceptor';
-import { HeaderInjectorInterceptor } from './header-injector/interceptors/header-injector.interceptor';
+import { AuthService } from './auth/services/auth.service';
+import { AppConfigStoreService } from './configuration/services/app-config-store.service';
+import { EnsureModuleLoadedOnceGuard } from './ensureModuleLoadedOnceGuard';
 import { ErrorsInterceptor } from './error-handler/interceptors/error-handler.interceptor';
-import { ApiUrlInterceptor } from './api-url/api-url.interceptor';
+import { ErrorHandlerService } from './error-handler/services/error-handler.service';
 import { AuthGuard } from './guards/auth.guard';
 import { PermissionGuard } from './guards/permissions.guard';
-import { CookieService } from 'ngx-cookie-service';
-import { PermissionsService } from './permissions/services/permissions.service';
+import { HeaderInjectorInterceptor } from './header-injector/interceptors/header-injector.interceptor';
+import { PermissionService } from './permissions/services/permission.service';
 import { PermissionsStoreService } from './permissions/services/permissions-store.service';
-import { ErrorHandlerService } from './error-handler/services/error-handler.service';
-import { fakeBackendProvider } from 'src/debug/interceptors/main-fake.interceptor';
+import { PermissionsService } from './permissions/services/permissions.service';
+import { RoleService } from './permissions/services/role.service';
+import { AppStoreService } from './stores/services/app-store.service';
+import { GridLayoutSessionStoreService } from './utils/services/grid-layout-session-store.service';
 import { GridSettingsCookieStoreService } from './utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
-import { GridLayoutSessionStoreService } from './utils/services/grid-layout-session-store.service';
-import { RoleService } from './permissions/services/role.service';
-import { AppConfigStoreService } from './configuration/services/app-config-store.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
@@ -58,12 +56,13 @@ import { AppConfigStoreService } from './configuration/services/app-config-store
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorsInterceptor,
       multi: true
-    },
+    }
+    /*,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ApiUrlInterceptor,
       multi: true
-    }
+    }*/
     // fakeBaceknd
     // ,fakeBackendProvider
   ]

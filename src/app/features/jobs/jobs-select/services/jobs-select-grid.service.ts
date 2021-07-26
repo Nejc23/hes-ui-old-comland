@@ -11,6 +11,7 @@ import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid
 import { GridSelectionHeaderScrollableComponent } from 'src/app/shared/ag-grid/components/grid-selection-header-scrollable.component';
 import { GridCellActiveReadOnlyComponent } from '../components/grid-custom-components/grid-cell-active-read-only.component';
 import { GridCellNextRunNoEventComponent } from 'src/app/features/configuration/auto-template/components/grid-custom-components/grid-cell-next-run-no-event.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,8 @@ export class JobsSelectGridService {
 
   constructor(
     private gridSettingsCookieStoreService: GridSettingsCookieStoreService,
-    private gridSettingsSessionStoreService: GridSettingsSessionStoreService
+    private gridSettingsSessionStoreService: GridSettingsSessionStoreService,
+    private translate: TranslateService
   ) {}
 
   setGridDefaultColumns() {
@@ -40,15 +42,15 @@ export class JobsSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'concentratorId',
-        headerTooltip: $localize`Select/deselect all`
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL')
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`,
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION'),
         resizable: false
       },
       {
@@ -56,8 +58,8 @@ export class JobsSelectGridService {
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Job Type`,
-        headerTooltip: $localize`Job Type`,
+        headerName: this.translate.instant('GRID.JOB-TYPE'),
+        headerTooltip: this.translate.instant('GRID.JOB-TYPE'),
         resizable: false
       },
       {
@@ -66,8 +68,8 @@ export class JobsSelectGridService {
         sortable: false,
         suppressMovable: true,
         cellRenderer: 'gridCellNextRunComponent',
-        headerName: $localize`Next run`,
-        headerTooltip: $localize`Next run`,
+        headerName: this.translate.instant('GRID.NEXT-RUN'),
+        headerTooltip: this.translate.instant('GRID.NEXT-RUN'),
         resizable: false
       },
       {
@@ -78,8 +80,8 @@ export class JobsSelectGridService {
         suppressMovable: true,
         field: 'active',
         cellRenderer: 'gridCellActiveReadOnlyComponent',
-        headerName: $localize`Active`,
-        headerTooltip: $localize`Active`,
+        headerName: this.translate.instant('GRID.ACTIVE'),
+        headerTooltip: this.translate.instant('GRID.ACTIVE'),
         resizable: false
       }
     ];

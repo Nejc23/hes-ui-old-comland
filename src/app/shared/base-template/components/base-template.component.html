@@ -6,10 +6,6 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
-    <!-- Fixed sidebar -->
-    <!-- deprecated -->
-    <!--<app-side-fixed-nav></app-side-fixed-nav>-->
-    <!-- Fixed top -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top justify-content-between"
       [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
       <div>
@@ -66,8 +62,8 @@
       <div @navItemsTrigger class="mt-auto sidebar-version text-center"
         *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
         <small>{{version}}</small><br />
-        <small>{{getAppTitle()}} powered by Metricsx</small><br />
-        <small>© 2020. All rights reserved</small>
+        <small>{{getAppTitle()}} {{ 'MENU.POWERED-BY' | translate }}</small><br />
+        <small>{{ 'MENU.ALL-RIGHTS RESERVED' | translate }}</small>
       </div>
     </div>
 
@@ -93,4 +89,4 @@
   <!-- End of Page Wrapper -->
 </body>
 
-<ng-template #tipContentMenu><span i18n>Pin/collapse menu</span></ng-template>
+<ng-template #tipContentMenu><span>{{ 'MENU.PIN-COLLAPSE-MENU' | translate }}</span></ng-template>

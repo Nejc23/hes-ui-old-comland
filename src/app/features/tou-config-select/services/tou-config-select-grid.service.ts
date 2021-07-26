@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -6,7 +7,7 @@ import { Injectable } from '@angular/core';
 export class TouConfigSelectGridService {
   columns = [];
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   setGridDefaultColumns() {
     return [
@@ -19,7 +20,7 @@ export class TouConfigSelectGridService {
         suppressMovable: true,
         lockPosition: true,
         colId: 'timeOfUseId',
-        headerTooltip: $localize`Select/deselect`,
+        headerTooltip: this.translate.instant('GRID.SELECT-DESELECT-ALL'),
         headerCheckboxSelection: false
       },
       {
@@ -29,16 +30,16 @@ export class TouConfigSelectGridService {
         sortable: true,
         suppressMovable: true,
         lockPosition: true,
-        headerName: $localize`Name`,
-        headerTooltip: $localize`'Name`
+        headerName: this.translate.instant('GRID.NAME'),
+        headerTooltip: this.translate.instant('GRID.NAME')
       },
       {
         field: 'description',
         suppressMenu: true,
         sortable: true,
         suppressMovable: true,
-        headerName: $localize`Description`,
-        headerTooltip: $localize`Description`
+        headerName: this.translate.instant('GRID.DESCRIPTION'),
+        headerTooltip: this.translate.instant('GRID.DESCRIPTION')
       }
     ];
   }

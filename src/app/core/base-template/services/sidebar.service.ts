@@ -3,6 +3,7 @@ import { SidebarItem } from 'src/app/shared/base-template/interfaces/sidebar-ite
 import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configuration.enum';
 import { PermissionEnumerator } from '../../permissions/enumerators/permission-enumerator.model';
 import { AppConfigService } from '../../configuration/services/app-config.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -11,10 +12,10 @@ export class SidebarService {
   private sidebarItems: Array<SidebarItem> = [];
   public headerTitle = '';
 
-  constructor() {
+  constructor(private translate: TranslateService) {
     this.sidebarItems = [
       {
-        title: $localize`Data Concentrator Units`,
+        title: this.translate.instant('MENU.DCU'),
         routeLink: '/dataConcentratorUnits',
         hasChildren: false,
         icon: 'gps_fixed',
@@ -22,7 +23,7 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Concentrators
       },
       {
-        title: $localize`Meter Units`,
+        title: this.translate.instant('MENU.METER-UNITS'),
         routeLink: '/meterUnits',
         hasChildren: false,
         icon: 'gps_not_fixed',
@@ -30,7 +31,7 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Meters
       },
       {
-        title: $localize`Jobs`,
+        title: this.translate.instant('MENU.JOBS'),
         routeLink: '/schedulerJobs',
         hasChildren: false,
         icon: 'format_list_bulleted',
@@ -38,7 +39,7 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Jobs
       },
       {
-        title: $localize`Alarms & Events`,
+        title: this.translate.instant('MENU.ALARMS-EVENTS'),
         routeLink: '/alarmsEvents',
         hasChildren: false,
         icon: 'notifications',
@@ -47,35 +48,35 @@ export class SidebarService {
         permission: PermissionEnumerator.View_Alarms
       },
       {
-        title: $localize`Tools`,
+        title: this.translate.instant('MENU.TOOLS'),
         routeLink: '/configuration',
         icon: 'build',
         isIconOutlined: true,
         hasChildren: true,
         children: [
           {
-            title: $localize`Import templates`,
+            title: this.translate.instant('MENU.IMPORT-TEMPLATES'),
             routeLink: `/${ConfigurationRoute.configuration}/importTemplates`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Import_Templates
           },
           {
-            title: $localize`Import TOU configuration`,
+            title: this.translate.instant('MENU.IMPORT-TOU-CONFIGURATION'),
             routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Import_TOU_Configuration
           },
           {
-            title: $localize`Auto templates`,
+            title: this.translate.instant('MENU.AUTO-TEMPLATES'),
             routeLink: `/${ConfigurationRoute.configuration}/autoTemplates`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Manage_Auto_Template_Rules
           },
           {
-            title: $localize`Import device keys`,
+            title: this.translate.instant('MENU.IMPORT-DEVICE-KEYS'),
             routeLink: `/${ConfigurationRoute.configuration}/importDeviceKeys`,
             hasChildren: false,
             children: [],
@@ -84,14 +85,14 @@ export class SidebarService {
         ]
       },
       {
-        title: $localize`Administration`,
+        title: this.translate.instant('MENU.ADMINISTRATION'),
         routeLink: 'administration',
         icon: 'verified_user',
         isIconOutlined: true,
         hasChildren: true,
         children: [
           {
-            title: $localize`Users`,
+            title: this.translate.instant('MENU.USERS'),
             routeLink: AppConfigService.settings.identityServer.stsAuthorityWeb,
             openInNewTab: true,
             isRouteAbsolute: true,

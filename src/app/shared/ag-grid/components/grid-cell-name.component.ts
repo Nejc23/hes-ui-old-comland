@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-name',
@@ -7,8 +8,8 @@ import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 })
 export class GridCellNameComponent implements ICellRendererAngularComp {
   public params: any;
-  public notAvailableText = $localize`N/A`;
-  constructor() {}
+  public notAvailableText = this.translate.instant('COMMON.NA');
+  constructor(private translate: TranslateService) {}
 
   // called on init
   agInit(params: any): void {

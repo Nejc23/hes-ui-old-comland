@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { RemoveEvent, SelectEvent } from '@progress/kendo-angular-upload';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-plc-meter-templates-import',
@@ -13,9 +14,11 @@ import { RemoveEvent, SelectEvent } from '@progress/kendo-angular-upload';
 export class PlcMeterTemplatesImportComponent implements OnInit {
   form: FormGroup;
   noConfig = false;
-  configRequiredText = $localize`Required field`;
-  messageServerError = $localize`Server error!`;
-  successMessage = $localize`Import successful!`;
+  configRequiredText = this.translate.instant('COMMON.REQUIRED');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
+  successMessage = this.translate.instant('COMMON.IMPORT-SUCCESSFUL');
+  uploadDropSubtitle = this.translate.instant('COMMON.IMPORT-SUBTITLE');
+
   deviceIdsParam = [];
   public files: Array<any>;
   allowedExt = ['json'];
@@ -23,13 +26,12 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   jsonString = '';
   fileValid = false;
 
-  uploadDropSubtitle = $localize`Selected file must be in .json file format.`;
-
   constructor(
     private formBuilder: FormBuilder,
     private gridLinkService: MyGridLinkService,
     private toast: ToastNotificationService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private translate: TranslateService
   ) {
     this.resetForm();
   }
@@ -41,7 +43,7 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.breadcrumbService.setPageName($localize`Import templates`);
+    this.breadcrumbService.setPageName(this.translate.instant('MENU.IMPORT-TEMPLATES'));
   }
 
   public selected(e: SelectEvent): void {
@@ -50,10 +52,9 @@ export class PlcMeterTemplatesImportComponent implements OnInit {
       if (!file.validationErrors) {
         const reader = new FileReader();
 
-        // tslint:disable-next-line: only-arrow-functions
         reader.onload = function (ev) {
           const jsonFile = {
-            // tslint:disable-next-line: no-string-literal
+            // eslint-disable-next-line @typescript-eslint/dot-notation
             src: ev.target['result'],
             uid: file.uid
           };

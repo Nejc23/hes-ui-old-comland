@@ -1,9 +1,10 @@
-import { Component, OnInit, HostListener, ElementRef, ViewChild, Renderer2, Input, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { formatDate } from '@progress/kendo-angular-intl';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-date-range-picker',
@@ -23,14 +24,15 @@ export class DateRangePickerComponent implements OnInit {
   popupWidth: string;
   errors: string[];
 
-  startDatePlaceholder = $localize`set start date`;
-  endDatePlaceholder = $localize`set end date`;
+  startDatePlaceholder = this.translate.instant('DAY.SET-START-DATE');
+  endDatePlaceholder = this.translate.instant('DAY.SET-END-DATE');
 
   controlId: string;
 
   @ViewChild('anchorTextbox') anchorTextbox: any;
 
   popup: ElementRef;
+
   @ViewChild('popup', { read: ElementRef }) set setPopup(content: ElementRef) {
     if (content) {
       // initially setter gets called with undefined
@@ -39,6 +41,7 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   datePickerStart: ElementRef;
+
   @ViewChild('datePickerStart', { read: ElementRef }) set setDatePickerStart(content: ElementRef) {
     if (content) {
       // initially setter gets called with undefined
@@ -47,6 +50,7 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   datePickerEnd: ElementRef;
+
   @ViewChild('datePickerEnd', { read: ElementRef }) set setDatePickerEnd(content: ElementRef) {
     if (content) {
       // initially setter gets called with undefined
@@ -54,7 +58,12 @@ export class DateRangePickerComponent implements OnInit {
     }
   }
 
-  constructor(private formBuilder: FormBuilder, private formUtils: FormsUtilsService, private renderer: Renderer2) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private formUtils: FormsUtilsService,
+    private renderer: Renderer2,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit(): void {
     if (!this.form) {
@@ -210,17 +219,17 @@ export class DateRangePickerComponent implements OnInit {
     this.errors = [];
 
     if (this.formUtils.shouldInputShowErrors(this.form.get(this.startProperty))) {
-      this.errors.push($localize`Start time is required.`);
+      this.errors.push(this.translate.instant('DAY.START-TIME-REQUIRED'));
     }
 
     if (this.formUtils.shouldInputShowErrors(this.form.get(this.endProperty))) {
-      this.errors.push($localize`End time is required.`);
+      this.errors.push(this.translate.instant('DAY.END-TIME-REQUIRED'));
     }
 
     return this.errors.length > 0;
   }
 
   getErrors(): string[] {
-    return ['From is required'];
+    return [this.translate.instant('DAY.FORM-REQUIRED')];
   }
 }

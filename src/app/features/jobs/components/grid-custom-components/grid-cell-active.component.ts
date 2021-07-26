@@ -5,6 +5,7 @@ import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-co
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-grid-cell-active',
@@ -14,11 +15,16 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
   @ViewChild('activeSwitch', { static: true }) activeSwitch;
 
   public params: any;
-  messageEnabled = $localize`Scheduler job enabled!`;
-  messageDisabled = $localize`Scheduler job disabled!`;
-  messageServerError = $localize`Server error!`;
+  messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
+  messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
 
-  constructor(private modalService: ModalService, private toast: ToastNotificationService, private service: JobsService) {}
+  constructor(
+    private modalService: ModalService,
+    private toast: ToastNotificationService,
+    private service: JobsService,
+    private translate: TranslateService
+  ) {}
   // called on init
   agInit(params: any): void {
     this.params = params;
@@ -34,11 +40,11 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
     let response: Observable<any> = new Observable();
-    const operation = event ? $localize`Enable` : $localize`Disable`;
+    const operation = event ? this.translate.instant('COMMON.ENABLE') : this.translate.instant('COMMON.DISABLE');
     response = event ? this.service.enableSchedulerJob(params.node.data.id) : this.service.disableSchedulerJob(params.node.data.id);
     component.btnConfirmText = operation;
-    component.modalTitle = $localize`Confirm operation`;
-    component.modalBody = $localize`Do you want to change scheduler job status`;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-OPERATION');
+    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB-CHANGE-STATUS');
 
     modalRef.result.then(
       (data) => {
@@ -59,8 +65,7 @@ export class GridCellActiveComponent implements ICellRendererAngularComp {
     );
   }
 
-  // set tooltip text
   setToolTip(value: boolean) {
-    return value ? $localize`Active` : $localize`Inactive`;
+    return value ? this.translate.instant('COMMON.ACTIVE') : this.translate.instant('COMMON.INACTIVE');
   }
 }

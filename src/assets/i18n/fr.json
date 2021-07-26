@@ -1,0 +1,922 @@
+{
+    "ALARM": {
+        "NO-ALARMS": ""
+    },
+    "BREADCRUMB": {
+        "CONCENTRATOR": "Concentrateur",
+        "JOBS": "jobs",
+        "OVERVIEW": "Aperçu - Unités de compteurs"
+    },
+    "BUTTON": {
+        "ACTIVATE": "Activation",
+        "ADD": "Ajouter",
+        "APPLY": "Appliquer",
+        "ASSIGN": "Assigner",
+        "CANCEL": "Annuler",
+        "CLEAR-SELECTION": "Clear selection",
+        "CLOSE": "Close",
+        "CONFIRM": "Confirmer",
+        "DELETE": "annuler",
+        "EDIT": "Modifier",
+        "IMPORT": "Importation",
+        "NEXT": "prochain",
+        "PREVIOUS": "Précédent",
+        "SAVE": "Mettre en mémoire",
+        "SAVE-AND-ADD-ANOTHER": "Mettre en mémoire et ajouter un autre",
+        "SAVE-AS-NEW": "Sauvegarder comme nouveau",
+        "UPDATE": "Mise à jour"
+    },
+    "COMMON": {
+        "0-100-RANGE": "La valeur doit être entre 0-100",
+        "ACTION-FAILED": "",
+        "ACTION-IN-PROGRESS": "Action en cours !",
+        "ACTIVATE": "Activation",
+        "ACTIVATE-CLEAR-FF": "Activer supprimer FF",
+        "ACTIVATE-FW-UPGRADE": "Activation de la mise à jour du FW",
+        "ACTIVE": "Actif",
+        "ADD": "Ajouter",
+        "ADD-NEW": "",
+        "ADDING-TEMPLATE": "L'ajout de modèle aux appareils a réussi",
+        "ADDRESS": "Adresse",
+        "ADVANCED": "Avancé",
+        "ALL": "Tout",
+        "AUTO-TEMPLATES": "Auto templates",
+        "BASIC": "de base",
+        "CANCEL": "Annuler",
+        "CANCEL-JOB": "Annuler le job",
+        "CII": "CII",
+        "CII-ACTIVATE": "Activation du CII",
+        "CII-DEACTIVATE": "Désactivation du CII",
+        "CLEAR-ALARMS": "Enlever les alarmes",
+        "COMMUNICATION": "Communication",
+        "CONCENTRATORS": "Concentrateurs",
+        "CONFIGURATION": "Configuration",
+        "CONFIRM": "Confirmer",
+        "CONFIRM-DELETE": "Confirmer l'annulation",
+        "CONFIRM-OPERATION": "Confirmer l'opération",
+        "CONFIRM-REMOVE": "Confirmer la suppression",
+        "CONNECT": "Connecter",
+        "DAILY": "journalier",
+        "DATA": "données",
+        "DATA-REFRESHED": "",
+        "DEACTIVATE": "Désactivation",
+        "DELETE": "annuler",
+        "DELETE-DEVICES": "Annuler appareils",
+        "DELETE-JOB": "annuler le job",
+        "DELETE-RULE": "Annuler la règle",
+        "DELETE-SUCCESS": "A été annulé avec succès !",
+        "DISABLE": "Désactiver",
+        "DISCONNECT": "Déconnecter",
+        "DISCONNECTOR-CONNECT": "",
+        "DISCONNECTOR-DISCONNECT": "Se déconnecter du déconnecteur",
+        "EDIT": "Modifier",
+        "EDIT-JOB": "modifier le job",
+        "EDIT-RULE": "Modifier la règle",
+        "ENABLE": "Activer",
+        "EQUALS": "est égal à",
+        "EVERY": "Chaque",
+        "EXECUTE": "Exécuter",
+        "EXECUTE-JOB": "Exécuter le job",
+        "EXPRESSION-INVALID": "",
+        "FAILED": "",
+        "FOR": "pour",
+        "FOUND": "found",
+        "FROM": "de",
+        "GET-CII-STATE": "Avoir l'état du CII",
+        "GET-DISCONNECTOR-STATUS": "Obtenir le statut du disconnecteur",
+        "GREATER-THAN": "plus grand que",
+        "HLS-DISABLED": "HLS non permis",
+        "HLS-ENABLED": "HLS permis",
+        "HOURLY": "Toutes les heures",
+        "IMAGE-READY-FOR-ACTIVATION": "Image prête à l'activation",
+        "IMPORT-SUBTITLE": "Le fichier séléctionné doit être dans le format .json file.",
+        "IMPORT-SUCCESSFUL": "",
+        "IN-RANGE": "dans la gamme",
+        "INACTIVE": "Inactif",
+        "INCORRECT-RANGE": "La gamme n'est pas correcte",
+        "ITEMS-FOUND": "items trouvés",
+        "ITEMS-SELECTED": "items sélectionnés",
+        "JOBS": "jobs",
+        "LESS-THAN": "moins que",
+        "LIMITER": "Limiteur",
+        "LOADING-DATA": "Téléchargement de données...",
+        "METERS": "Compteurs",
+        "MINUTES": "Minutes",
+        "MODE": "Mode",
+        "MONITOR": "Écran",
+        "MONTHLY": "mensuel",
+        "MORE-OPTIONS": "Plus d'options",
+        "NA": "N/A",
+        "NAME": "Nom",
+        "NO-DATA-FOUND": "Pas trouvé de données",
+        "NO-FILTER-APPLIED": "Pas de filtre utilisé",
+        "NO-RECORDS-DATE-RANGE": "Aucun enregistrement trouvé. Vous devez peut-être ajuster votre plage des dates",
+        "NO-RECORDS-FOUND": "Pas trouvé de documents",
+        "NO-RECORDS-SEARCH": "Pas trouvé de document. Vous devez peut-être adapter la recherche ou les paramètres de filtrage.",
+        "NOT-EQUALS": "Ne correspond pas",
+        "NOT-SET": "Not set",
+        "ONE-REGISTER-SELECTED": "Un registre doit être sélectionné",
+        "OPEN-DATA": "Ouverture des données",
+        "OPEN-DETAILS": "Ouverture des détails",
+        "PENDING-JOB": "job en suspens",
+        "PORT": "Port",
+        "PROFILE": "Profile",
+        "READ-LIMITER-THRESHOLD-VALUES": "Read limiter threshold values",
+        "READ-METER": "Read Meter",
+        "READ-METER-OBJECTS": "Read Meter Objects",
+        "READ-MONITOR-THRESHOLD-VALUES": "Read monitor threshold values",
+        "READ-ON": "Read on",
+        "READ-REGISTERS-AFTER": "Read registers after",
+        "READ-REGISTERS-BEFORE": "Read registers before",
+        "REFRESH-ALARMS": "actualiser les alarmes",
+        "RELAYS": "Relais",
+        "REMOVE": "Supprimer",
+        "REQUIRED-FIELD": "Champ requis",
+        "RUNNING-JOB": "Job en cours",
+        "SAVE": "Mettre en mémoire",
+        "SAVED-STATES": "États sauvegardés",
+        "SEARCH": "Chercher",
+        "SEARCH-OBJECTS": "Search Objects",
+        "SEARCH-TERM": "",
+        "SELECT-ALL": "Tout sélectionner",
+        "SELECT-ITEM": "",
+        "SELECT-OPERATION": "Sélectionner l'opération",
+        "SELECTED": "",
+        "SELECTED-FILE-FORMAT": "Le fichier sélectionné doit être dans le format .img, .bin ou .dat.",
+        "SELECTED-ITEMS-DELETED": "Les items sélectionnés ont été annulés",
+        "SERVER-ERROR": "Erreur de serveur !",
+        "SHOW-ALL": "Montrer tout",
+        "SHOW-CHILD-MBUS": "affiche le petit MBus",
+        "SHOW-ONLY-FOR-ACTIVATION": "affiche seulement prêt pour l'activation",
+        "SHOW-OPTION": "montrer l'option",
+        "SHOW-WITHOUT-TEMPLATE": "affiche sans les modèles",
+        "SIGN-OUT": "Se déconnecter",
+        "STATE": "Indiquer",
+        "STOP": "Stop",
+        "STOP-JOB": "Stop job",
+        "SUCCEEDED": "",
+        "SYNCHRONIZE-TIME": "synchroniser date et heure",
+        "TAG": "Tag",
+        "TAGS": "Tags",
+        "TO": "à",
+        "TYPE": "type",
+        "UPLOAD-SUCCESSFUL": "Téléchargement réussi",
+        "USERNAME": "Nom de l'utilisateur",
+        "WEEKLY": "hebdomadaire",
+        "WILDCARDS-SEARCH-DISABLED": "La recherche de Wildcards est désactivée",
+        "WILDCARDS-SEARCH-ENABLED": "La recherche de Wildcards est activée",
+        "WITH-TEMPLATE": "Avec template",
+        "WITHOUT-TEMPLATE": "Sans template"
+    },
+    "DAY": {
+        "CURRENT-MONTH": "mois courant",
+        "END-TIME-REQUIRED": "L'heure de la fin est demandée.",
+        "EVERY": "Chaque",
+        "FORM-REQUIRED": "",
+        "FRI": "Ven",
+        "LAST-30-DAYS": "derniers 30 jours",
+        "LAST-7-DAYS": "derniers 7 jours",
+        "LAST-MONTH": "Last Month",
+        "MON": "Lun",
+        "MON-FRI": "Lun-Ven",
+        "SAT": "Sam",
+        "SET-END-DATE": "Mettre la date de fin",
+        "SET-START-DATE": "Mettre la date de démarrage",
+        "START-TIME-REQUIRED": "L'heure du démarrage est demandée.",
+        "SUN": "Dim",
+        "THU": "Jeu",
+        "TODAY": "AUJOURD'HUI",
+        "TUE": "Mar",
+        "WED": "Mer",
+        "WEEK-DAY": "Jour de la semaine (LUN-VEN)",
+        "YESTERDAY": "hier"
+    },
+    "DCU": {
+        "ADD-FIRST": "Ajouter en premier",
+        "CONCENTRATOR-UNITS-FOR": "Unités de concentrateurs pour",
+        "CONFIRM-DELETE": "",
+        "CONFIRM-OPERATION": "",
+        "DATA-CONCENTRATOR-UNIT": "Unité de concentrateur de données",
+        "DCU-ADDED-SUCCESSFULLY": "L'unité de concentrateur de données a été ajoutée avec succès",
+        "DCU-UPDATED-SUCCESSFULLY": "L'unité de concentrateur de données a été mise à jour avec succès",
+        "EDIT-DCU": "Edit Data Concentrator Unit",
+        "ERROR-SCHEDULER": "",
+        "FILE-BIN-FORMAT": "Le fichier sélectionné doit être dans le format .bin file.",
+        "FW-UPGRADE-FAILED": "La mise à jour du FW n'a pas réussi",
+        "FW-UPGRADE-PROGRESS": "La mise à jour du FW est en cours",
+        "FW-UPGRADE-SUCCESSFUL": "La mise à jour du FW a réussi !",
+        "FW-UPLOAD-UPGRADE": "",
+        "MORE-SAVE-OPTIONS": "Plus d'options de mise en mémoire",
+        "NO-DATA-CONCENTRATOR-UNITS": "Vous n'avez pas encore de concentrateur de données !",
+        "OPERATION-MODAL": "",
+        "READ-STATUS": "",
+        "STATUS": "statut",
+        "TYPE": "type",
+        "VENDOR": "fabricant"
+    },
+    "ERROR": {
+        "PAGE-NOT-FOUND": "404 - la page n'existe pas"
+    },
+    "FILTER": {
+        "CLEAR-FILTERS": "Supprimer les filtres",
+        "FILTERED-BY": "filtré par:",
+        "TEMPLATE-LIST": "Liste des modèles",
+        "TITLE": "Filtres"
+    },
+    "FORM": {
+        "ACTIVATE-IMMEDIATELY": "Activer immédiateent",
+        "ACTIVE": "Actif",
+        "ADD-DCU": "Ajouter l'unité de concentrateur de données",
+        "ALARM-ID": "Alarme ID",
+        "AUTHENTICATION-TYPE": "Type d'authentification",
+        "BASIC": "de base",
+        "CHOOSE-FILE": "Choisir un fichier",
+        "CHOOSE-NEW-FILE": "Choisir un nouveau fichier",
+        "CII STATE": "état du CII",
+        "CLIENT": "",
+        "CLIENT-HIGH": "",
+        "CLIENT-LOW": "",
+        "COMMUNICATION-TYPE": "Type de communication",
+        "CONNECTION-TYPE": "Type de connexion",
+        "CURRENT-VIEW": "Est-ce que la vue actuelle vous plaît ?",
+        "DAYS": "Jour(s)",
+        "DESCRIPTION": "Description",
+        "DISCONNECTOR STATE": "état du déconnecteur",
+        "DISCONNECTOR-MODE": "Mode déconnecteur",
+        "DRAG-ANOTHER": "ou faites glisser un autre fichier pour essayer à nouveau.",
+        "DRAG-HERE": "",
+        "DRAG-UPLOAD": "",
+        "EMAIL": "courriel",
+        "END": "Fin",
+        "END-AT": "Fin à",
+        "END-TIME": "End time:",
+        "ERROR": {
+            "ACTION-NOT-EXISTS": "L'action n'existe pas",
+            "DCU-ERROR": "Erreur lors de la sauvegarde du DCU !",
+            "EMAIL-ENTRY": "La saisie n'est pas un courriel valide",
+            "EMAIl": "courriel",
+            "INVALID-FORM": "formulaire pas valable",
+            "MAX": "Dépasse la valeur maximale",
+            "MAXLENGTH": "L'information entrée dépasse le nombre maximum de caractères",
+            "MIN": "Dépasse la valeur minimale",
+            "MINLENGTH": "L'information entrée ne correspond pas au nombre minimum de caractères requis",
+            "NOT-MATCH": "Le mot de passe ne correspond pas",
+            "NOT-VALID-REQUEST": "Requête non valable",
+            "NUMBER-ERROR": "La saisie n'est pas un nombre entier valide",
+            "PATTERN": "Format erroné",
+            "RANGE-INCORRECT": "La gamme n'est pas correcte",
+            "RANGE-VALUE": "La valeur doit être entre 0-100",
+            "REQUIRED": "Champ requis",
+            "UNKNOWN-ERROR": "erreur inconnue"
+        },
+        "EXPRESSION": "Expression",
+        "EXTERNAL-ID": "External Id",
+        "FILE": "",
+        "FILE-NOT-SUPPORTED": "",
+        "FILE-TYPE": "Type de document",
+        "FILES": "fichiers",
+        "FILL-LAST-BLOCK": "Remplir le dernier bloc",
+        "FIRMWARE": "Firmware",
+        "FOR-LAST": "En dernier",
+        "GATEWAY": "Gateway",
+        "GULF": "GULF",
+        "HDLC": "HDLC",
+        "HIGH": "Haut",
+        "HIGH-GMAC": "Haut avec GMAC",
+        "HOURS": "Heures",
+        "ID": "Id",
+        "IMAGE": "Image",
+        "IMAGE-IDENTIFIER": "",
+        "IMAGE-SIGNATURE": "Image signature",
+        "IMAGE-SIZE": "",
+        "IP": "IP",
+        "JOBS": "jobs",
+        "KEY-TYPE": "Type de clé",
+        "LOW": "Bas",
+        "MAC": "MAC",
+        "MANUFACTURER": "Fabricant",
+        "MEDIUM": "Medium",
+        "MINUTES": "Minutes",
+        "MODE": "Mode",
+        "NAME": "Nom",
+        "NONE": "Aucun",
+        "PASSWORD": "Mot de passe",
+        "PASSWORD-TYPE": "Type de mot de passe",
+        "PHYSICAL-ADDRESS": "",
+        "PORT": "Port",
+        "PROTOCOL": "Protocole",
+        "PUSH-TO-IEC": "Push to IEC",
+        "READ-FROM-LAST-VALUE": "Lecture à partir de la dernière valeur",
+        "REGISTER": "Registre",
+        "REGISTER-GROUP": "Groupe de registres",
+        "RELAY": "Relais",
+        "SAVE-FILTERS": "Sauvegarder les jeux de filtres, l'ordre et la grandeur des colonnes et les utiliser ultérieurement.",
+        "SELECT-DATE": "Select date",
+        "SELECT-HERE": "Sélectionner ici",
+        "SELECTED-FILE": "",
+        "SERIAL": "Série",
+        "SERIAL-NUMBER": "Numéro d'appareil",
+        "SERVER": "",
+        "SERVER-HIGH": "",
+        "SERVER-LOW": "",
+        "SET-TIME": "Mettre la date et l'heure",
+        "SEVERITY": "Sévérité",
+        "SHOW": "montrer",
+        "SOURCE": "Source",
+        "START": "Démarrage",
+        "START-AT": "Début à",
+        "START-TIME": "Start time:",
+        "START-WITH-RELEASE": "Démarrage du release",
+        "STATE": "Indiquer",
+        "STATUS": "statut",
+        "TAG": "Tag",
+        "TEMPLATE": "Modèle",
+        "THRESHOLD": "",
+        "THRESHOLD-EMERGENCY": "",
+        "THRESHOLD-NORMAL": "",
+        "TYPE": "type",
+        "UPLOAD": "Téléchargement",
+        "UPLOAD-FILED": "",
+        "UPLOADED-FILE": "",
+        "UPLOADING-FILE": "",
+        "USE-LDN-AS-SYSTITLE": "Utiliser le nom de l'appareil logique (LDN) comme Systitle",
+        "USERNAME": "Nom de l'utilisateur",
+        "VENDOR": "fabricant",
+        "WEEK-DAYS": "",
+        "WRAPPER": "Wrapper"
+    },
+    "GRID": {
+        "ACTIVE": "Actif",
+        "ADD-NEW-RULE": "Ajouter une nouvelle règle",
+        "APPLY-SAVED-STATE": "Appliquer l'état mis en mémoire ou mettre en mémoire un nouveau",
+        "CII-STATE": "état du CII",
+        "CLEAR-SELECTED": "Effacer la sélection",
+        "COLUMNS": "Colonnes",
+        "CREATED-BY": "Créé par",
+        "CURRENT-L1": "Current L1 Monitor",
+        "CURRENT-L2": "Current L2 Monitor",
+        "CURRENT-L3": "Current L3 Monitor",
+        "DESCRIPTION": "Description",
+        "DEVICE-TYPE": "Type d'appareil",
+        "DEVICES": "Appareils",
+        "DISCONNECTOR-STATE": "état du déconnecteur",
+        "EXCEL-EXPORT": "Export dans l'excel",
+        "FILTERS": "Filtres",
+        "FIRMWARE": "Firmware",
+        "FIRST": "premier",
+        "HIGH-LEVEL-SECURITY": "La sécurité de haut niveau sur le client de gestion est activée sur cet appareil !",
+        "ID": "Id",
+        "ID-CONFIGURATION": "Configuration Id",
+        "ID1": "ID1",
+        "ID2": "ID2",
+        "ID3": "ID3",
+        "ID4": "ID4",
+        "ID5": "ID5",
+        "ID6": "ID6",
+        "IP": "IP",
+        "JOB-DESCRIPTION": "Description",
+        "JOB-STATUS": "Statut du job",
+        "JOB-TYPE": "Type de job",
+        "LAST": "dernier",
+        "LAST-COMMUNICATION": "Dernière communication",
+        "LIMITER-1-EMERGENCY": "Limiter 1 Th. emergency",
+        "LIMITER-1-NORMAL": "Limiter 1 Th. normal",
+        "LIMITER-2-EMERGENCY": "Limiter 2 Th. emergency",
+        "LIMITER-2-NORMAL": "Limiter 2 Th. normal",
+        "LOADING-WITH-DOTS": "Téléchargement...",
+        "LOGICAL-DEVICE-NAME": "Nom du dispositif logique",
+        "MANUFACTURER": "Fabricant",
+        "MEDIUM": "Medium",
+        "MISSING-TEMPLATE": "Le modèle manque !",
+        "MODULE-ID": "Module Id",
+        "MORE": "plus",
+        "NAME": "Nom",
+        "NEXT": "prochain",
+        "NEXT-RUN": "Prochaine exécution",
+        "NO-RECORDS-FOUND": "Pas trouvé de document. Vous devez peut-être adapter la recherche ou les paramètres de filtrage.",
+        "OBIS": "Obis",
+        "OF": "de",
+        "OWNER": "Propriétaire",
+        "PAGE": "page",
+        "PARAM-ID": "Paramétrisation Id",
+        "PARENT": "Parent",
+        "PREVIOUS": "Précédent",
+        "PROTOCOL": "Protocole",
+        "READ-STATUS": "lire le statut",
+        "READY-FOR-ACTIVATION": "Prêt à l'activation !",
+        "REFRESH-GRID": "Actualiser le grid",
+        "REGEX": "Regex",
+        "RELAY": "Relais",
+        "SEARCH-DATA": "chercher les données",
+        "SELECT-ALL": "Tout sélectionner",
+        "SELECT-DESELECT-ALL": "Tout sélectionner / désélectionner",
+        "SELECT-DESELECT-ALL-COLUMNS": "Sélectionner / Déselectionner toutes les colonnes",
+        "SELECTED-OF-ALL": "",
+        "SERIAL-NUMBER": "Numéro d'appareil",
+        "SEVERITY": "Sévérité",
+        "SHOW-HIDE-COLUMNS": "Afficher / cacher les colonnes des grilles",
+        "SHOW-HIDE-FILTERS": "Afficher / cacher les filtres",
+        "SOURCE": "Source",
+        "SOURCE-TYPE": "Type de source",
+        "STATUS": "statut",
+        "TAG": "Tag",
+        "TAGS": "Tags",
+        "TIME-OF-USE-ID": "Time of use Id",
+        "TIMESTAMP": "Horodatage",
+        "TO": "à",
+        "TYPE": "type",
+        "UNIT": "",
+        "VALUE": "Valeur",
+        "VENDOR": "fabricant",
+        "REGISTER": "Register"
+    },
+    "JOB": {
+        "ACTIVE-JOB": {
+            "DOWNLOADING-PACKAGES": "Téléchargement de packages",
+            "PENDING": "en suspens",
+            "RUNNING": "",
+            "RUNNING-TIME": "",
+            "STATE": "Indiquer",
+            "STATUS": "statut",
+            "TITLE": "",
+            "TOTAL": "",
+            "TYPE": "type"
+        },
+        "ALARM-NOTIFICATION": {
+            "ONE-RULE": "",
+            "SEND-NOTIFICATIONS-TO": "",
+            "SUBTITLE": "Envoyer un message de notification lorsque les événements d'alarme correspondent à un ou plusieurs critères ci-dessous.",
+            "TEXT": "Au moins une des règles suivantes doit être active",
+            "TITLE": "Notification d'alarme"
+        },
+        "AT-LEAST-ONE-JOB": "Au moins un job doit être sélecté",
+        "CONFIRM-BULK": "Confirmer l'opération de masse",
+        "CRON-SCHEDULE": {
+            "DAYS-IN-MONTH": "Jours du mois"
+        },
+        "DC": "DC",
+        "DC-READ-EVENTS-JOB": "Job lecture des événements DC",
+        "DC-TIME-SYNC-JOB": "DC Time sync job",
+        "DISCOVERY": "Discovery",
+        "DISCOVERY-JOB": "Discovery job",
+        "EXISTING-JOBS-ASSIGNED": "Les jobs existants ont été assignés à l'unité de compteur avec succès",
+        "JOB-CANCELED": "Le job a été annulé !",
+        "JOB-STOPPED": "",
+        "METER": "METER",
+        "NEXT-READ": "Prochaine lecture planifiée",
+        "NO-JOBS": "Aucun Job n'a encore été ajouté.",
+        "NOTIFICATION": "Notification",
+        "READ-EVENTS": "Read events",
+        "READING": "Reading",
+        "READING-JOBS": "Jobs de lecture",
+        "REMOVE": "Supprimer",
+        "REMOVE-FOR-JOB": "",
+        "SCHEDULER-JOB": {
+            "ADDED": "ajouté",
+            "CANCEL": "Annuler",
+            "CREATE-JOB": "Create a new job",
+            "DELETE": "annuler",
+            "ERROR-SAVING": "",
+            "EXECUTE": "Exécuter",
+            "JOB-SUCCESSFULLY": "",
+            "MORE-SAVE-OPTIONS": "Plus d'options de mise en mémoire",
+            "SELECT-JOB": "To continue, select a job type, please.",
+            "STOP": "Stop",
+            "UPDATED": "actualisé"
+        },
+        "SCHEDULER-JOB-CHANGE-STATUS": "Voulez-vous changer le statut du scheduler job ?",
+        "SCHEDULER-JOB-DISABLED": "Le scheduler job est désactivé !",
+        "SCHEDULER-JOB-ENABLED": "Le scheduler job est activé !",
+        "SCHEDULER-JOB-STARTED": "Le scheduler job a démarré !",
+        "SCHEDULER-JOB-DELETED": "Scheduler job deleted!",
+        "STATUS-JOB": {
+            "ERROR": "Error getting status job",
+            "PROGRESS": "",
+            "RUNNING-TIME": "",
+            "TOTAL-DEVICES": "",
+            "TOTAL-TIME": ""
+        },
+        "SYSTEM": "SYSTEM",
+        "TIME-SYNCHRONIZATION": "Time synchronization",
+        "TOPOLOGY": "Topology",
+        "TOPOLOGY-JOB": "Job topologie"
+    },
+    "LANGUAGE": {
+        "HR": "Hrvaščina",
+        "DE": "Deutsch",
+        "EN": "English",
+        "FR": "Français",
+        "IT": "Italiano",
+        "SL": "Slovenščina"
+    },
+    "LOGIN": {
+        "BACK-TO-LOGIN": "Retour au login",
+        "ENTER-EMAIL": "Prière d'indiquer votre adresse courriel afin de réinitialiser le mot de passe de votre compte.",
+        "ENTER-NEW-PASSWORD": "Prière d'indiquer votre nouveau mot de passe",
+        "ENTER-USERNAME-PASSWORD-TEXT": "",
+        "ERROR": "",
+        "FAILED": "Le Login n'a pas fonctionné ! vérifier le serveur identité !",
+        "FORGOT-PASSWORD": "Mot de passe oublié ?",
+        "LOGIN-SUCCESSFUL": "Login réussi",
+        "NEW-PASSWORD-SAVED": "Sauvegarde du mot de passe réussie",
+        "RESET": "Réinitialiser",
+        "RESET-PASSWORD": "réinitialiser votre mot de passe",
+        "RESET-PASSWORD-SUCCESSFUL": "Requête d'actualisation du mot de passe réussie",
+        "TITLE": "Login"
+    },
+    "MENU": {
+        "ADMINISTRATION": "Administration",
+        "ALARMS-EVENTS": "Alarmes & Événements",
+        "ALL-RIGHTS RESERVED": "",
+        "AUTO-TEMPLATES": "Auto templates",
+        "DATA-VIEW": "Vue des données",
+        "DCU": "Unités de concentrateurs de données",
+        "IMPORT-DEVICE-KEYS": "Importation des clés de l'appareil",
+        "IMPORT-TEMPLATES": "Importation des modèles",
+        "IMPORT-TOU-CONFIGURATION": "Importation de la configuration TOU",
+        "JOBS": "jobs",
+        "METER-UNITS": "Unités de compteurs",
+        "METERS": "Compteurs",
+        "PIN-COLLAPSE-MENU": "menu pin/collapse",
+        "POWERED-BY": "",
+        "TOOLS": "Outils",
+        "USERS": "Utilisateurs"
+    },
+    "MODAL": {
+        "ARE-YOU-SURE-TEXT": "",
+        "FOR-DEVICES": "",
+        "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",
+        "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!",
+        "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
+        "SELECTED": "",
+        "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization"
+    },
+    "OPERATION": {
+        "DEVICE-DISCOVERY": "Device discovery",
+        "FW-UPGRADE": "Mise à jour du FW",
+        "OPERATIONS": "Opérations",
+        "SYNC-TIME": "Synchroniser date et heure",
+        "SYNCHRONIZE-TIME": "synchroniser date et heure"
+    },
+    "PLC-METER": {
+        "ACTIVATE-IMAGE": "Activation de l'image",
+        "ADD-DLMS-METER": "Ajouter un nouveau compteur DLMS",
+        "ADDRESS-BY-SHORT-ADDRESSES": "",
+        "ALWAYS-CONNECTED": "Toujours connecté",
+        "ASSIGN-EXISTING": "Assigner ceux existants",
+        "ASSIGN-TEMPLATE": "",
+        "ASSIGN-TEMPLATE-WARNING": "L'attribution de modèle au(x) compteur(s) peut entraîner des changements irréversibles aux données du compteur !",
+        "AT-LEAST-ONE-REGISTER": "",
+        "AVAILABLE-REGISTERS": "Registres disponibles",
+        "AVERAGE-VALUE": "Valeur moyenne",
+        "BREAKER": {
+            "ALWAYS-CONNECTED": "Toujours connecté",
+            "BREAKER": "Breaker",
+            "BREAKER-MODE-SUCCESSFULLY": "Les unités de comptage ont mis le mode \"Breaker\" avec succès",
+            "MANUAL-LOCAL-RECONN-ALLOWED": "La re-connexion manuelle et locale est autorisée",
+            "MANUAL-LOCAL-RECONN-ALLOWED-DISC-NOT": "La re-connexion manuelle et locale est permise / la disconnexion manuelle n'est pas autorisée",
+            "MANUAL-RECONN-ALLOWED": "Seulement la re-connexion manuelle est autorisée",
+            "MANUAL-RECONN-ALLOWED-DISC-NOT": "Seulement la re-connexion manuelle est autorisée / la déconnexion manuelle n'est pas permise.",
+            "REMOTE-MANUAL-RECONN-ALLOWED": "La re-connexion à distance et celle manuelle est autorisée",
+            "REMOTE-MANUAL-RECONN-ALLOWED-DISC-NOT": "La re-connexion à distance et manuelle est autorisée / la disconnexion manuelle n'est pas permise",
+            "SET-BREAKER-MODE": ""
+        },
+        "BREAKER-MODE": "Breaker Mode",
+        "CHANGE-REGISTER": "Le changement de registre va déselectionner tous les paramètres.",
+        "CHECK-DEVICE-TEMPLATE": "s.v.p. vérifier le modèle de votre appareil.",
+        "CLEAR-ALARMS": "Enlever les alarmes",
+        "CLEAR-FF": "Enlever le FF",
+        "CREATE-NEW": "Créer un nouveau",
+        "DROP-AVAILABLE-REGISTERS": "Déposer les registres disponibles ici.",
+        "DROP-SUBTITLE": "Le fichier sélectionné doit être dans le format .xml file.",
+        "EDIT-METER": "",
+        "ERROR-SAVING-MU": "Erreur de sauvegarde de l'unité de compteur !",
+        "FW-UPGRADE": "",
+        "FW-UPGRADE-TITLE": "Mise à jour du FW",
+        "IMPORT-SUCCESSFULLY": "",
+        "IMPORT-TOU-TITLE": "Importation de la configuration TOU",
+        "JOB": "Job",
+        "JOBS": {
+            "ASSIGN-EXISTING-JOBS": ""
+        },
+        "MANAGEMENT-ASSOCIATION": "Association de Management",
+        "MANUAL-AND-LOCAL-RE-CONNECTION": "La re-connexion manuelle et locale est autorisée",
+        "MANUAL-AND-LOCAL-RE-CONNECTION-MANUAL-DISCONNECTION": "La re-connexion manuelle et locale est permise / la disconnexion manuelle n'est pas autorisée",
+        "MAX-VALUE-RECORDED": "",
+        "METER-UNIT-ADDED": "L'unité compteur a été ajoutée avec succès",
+        "METER-UNIT-UPDATED": "l'unité de comptage a été mise à jour avec succès",
+        "METER-UNITS-ACTIVATE-HLS": "",
+        "METER-UNITS-DISPLAY-SETTINGS": "",
+        "METER-UNITS-FOR": "Unités de compteurs pour",
+        "METER-UNITS-RE-KEYING": "Le recodage des unités de compteur a réussi",
+        "METER-UNITS-SET-LIMITER": "La mise du limitateur dans les unités de compteur a réussi",
+        "MIN-VALUE-RECORDED": "",
+        "ONLY-MANUAL-RE-CONNECTION": "Seulement la re-connexion manuelle est autorisée",
+        "ONLY-MANUAL-RE-CONNECTION-ALLOWED": "Seulement la re-connexion manuelle est autorisée / la déconnexion manuelle n'est pas permise.",
+        "PUBLIC-ASSOCIATION": "Association publique",
+        "READ-LIMITER-THRESHOLDS": "",
+        "READ-MONITOR-THRESHOLDS": "",
+        "READ-THRESHOLDS": "Read thresholds",
+        "REGISTER": {
+            "CHANGE-TIME": "Essayer de changer la date et l'heure",
+            "EVENT-TYPE": "Type d'événement",
+            "NO-AVAILABLE-DATA": "Il n'y a pas de données disponibles à afficher",
+            "NO-REGISTER-SELECTED": "Pas de registre sélectionné",
+            "NUMBER-OF-EVENTS": "Nombre d'événements",
+            "REFRESH-DATA": "Actualiser les données",
+            "SELECT-REGISTER": "Pour afficher les données, sélectionner le registre de la liste à gauche",
+            "SHOW-HIDE-REGISTERS": "Afficher / cacher les registres"
+        },
+        "RELAY-CONNECT": "",
+        "RELAY-CONNECT-SELECTED": "",
+        "RELAY-DISCONNECT": "",
+        "RELAY-DISCONNECT-SELECTED": "",
+        "RELAY-MODE": "Relay Mode",
+        "RELAY-MODE-SELECTED": "",
+        "RELAY-STATE": "Relay State",
+        "RELAY-STATE-BODY": "Êtes-vous sûr de vouloir lire l'état des registres de relais pour les compteurs sélectionnés ?",
+        "RELAY-STATE-SECONDARY-TEXT": "L'état de tous les registres de relais définis sur le modèle sera lu !",
+        "RELAY-STATE-TITLE": "Relay State",
+        "REMOTE-AND-MANUAL-RE-CONNECTION": "La re-connexion à distance et celle manuelle est autorisée",
+        "REMOTE-AND-MANUAL-RE-CONNECTION-MANUAL DISCONNECTION": "La re-connexion à distance et manuelle est autorisée / la disconnexion manuelle n'est pas permise",
+        "SECURITY": {
+            "ACTIVATE-HLS": "",
+            "ACTIVATE-HLS-TITLE": "Activer le HLS",
+            "AK-DATA-COLLECTOR": "",
+            "AK-INSTALLER": "",
+            "CHANGE-PASSWORD": "",
+            "CHANGE-PASSWORD-CONFIRM": "",
+            "CHANGE-PASSWORD-TITLE": "Changer le mot de passe",
+            "CONFIRM-HLS-ACTIVATION": "Êtes-vous sûr de vouloir effectuer une activation HLS pour le client de gestion ?",
+            "GAK": "",
+            "GAK-M2": "",
+            "GBEK": "",
+            "GUEK": "",
+            "GUEK-M2": "",
+            "METER-INOPERABLE-WARNING": "Cette action peut entraîner des dommages et rendre le compteur inopérant !",
+            "METER-UNITS-PASSWORD": "Le changement du type de mot de passe des unités de compteur a réussi",
+            "PSK": "",
+            "PW_CALIBRATION-VERIFICATION": "",
+            "PW_L1-READER": "",
+            "PW_L2-INSTALLER": "",
+            "PW_LG ": "",
+            "PW_M2": "",
+            "RE-KEY-CONFIRM": "",
+            "RE-KEY-METER": "",
+            "REKEY": "Recodage",
+            "SECURITY": "Sécurié",
+            "SELECT-KEY-TYPE": "Prière de sélectionner à partir de la liste ci-dessous un type de clé que vous aimeriez recoder.",
+            "SELECT-PASSWORD-TYPE": "Veuillez sélectionner dans la liste ci-dessous le type de mot de passe que vous souhaitez modifier.",
+            "UEK-DATA-COLLECTOR": "",
+            "UEK-INSTALLER": ""
+        },
+        "SELECT-TEMPLATE": "pour afficher le formulaire, sélectionner le modèle To display the form, select the template",
+        "SELECTED-REGISTERS": "Registres choisis *",
+        "SET-DISPLAY-SETTINGS": "Mettre les paramètres d'affichage",
+        "SET-DISPLAY-SETTINGS-SELECTED": "",
+        "SET-DISPLAY-SETTINGS-TITLE": "Mettre les paramètres d'affichage",
+        "SET-LIMITER": "",
+        "SET-MONITOR": "Set monitor",
+        "SET-MONITOR-SELECTED": "",
+        "SET-MONITOR-SUCCESSFUL": "Réglage du moniteur effectué avec succès",
+        "SET-ONE-THRESHOLD": "At least one threshold should be set!",
+        "SET-THRESHOLDS": "Set thresholds",
+        "SETTING-OF-RELAY-MODE": "Mise en place du mode relais réussie !",
+        "SHORT-NAMES-REFERENCING": "",
+        "SHOW-METER-UNITS": "Affiche les unités de compteurs sans les modèles",
+        "SHOW-READY-FOR-ACTIVATION": "Affiche seulement l'image prêt pour l'activation",
+        "SUBTITLE": "Pour importer la configuration TOU, il faut d'abord insérer un nom de configuration, et après sélectionner le fichier configuration qui doit être importé.",
+        "TEMPLATE-NOT-SELECTED": "Le modèle n'a pas été sélectionné",
+        "TEMPLATES": "Modèles",
+        "TOU-CONFIG-TITLE": "",
+        "TOU-UPLOAD": "Téléchargement du TOU",
+        "UPLOAD-IMAGE": "Télécharger l'image",
+        "UPLOAD-METER-IMAGE": ""
+    },
+    "TOOLS": {
+        "AUTO-TEMPLATE": {
+            "ALREADY-ADDED": "",
+            "DCU-FOR-JOB": "Les concentrateurs sélectionnés ont été supprimés avec succès.",
+            "DELETE-RULE": "",
+            "ERROR": "Il n'y a pas encore de modèles ajoutés dans le système.",
+            "JOB-ADDED-TO-ALL": "",
+            "JOB-FAILED": "La suppression du job dans toutes les règles a échoué.",
+            "JOB-FAILED-TO-ALL": "Ajouter le job à toutes les règles, n'a pas fonctionné.",
+            "JOB-REMOVED": "Le job a été supprimé avec succès dans toutes les règles.",
+            "REMOVE-FROM_RULES": "Voulez-vous supprimer le job dans toutes les règles ?",
+            "RULE-ADDED": "La règle a été ajoutée avec succès",
+            "RULE-DELETED": "La règle a été annulée !",
+            "RULE-UPDATED": "La règle a été actualisée avec succès",
+            "RULES": "Règles",
+            "SELECT-JOB": "Sélectionner un job à ajouter.",
+            "SHOW-HIDE": "Montrer / cacher les modèles"
+        },
+        "IMPORT-DEVICE-KEYS": {
+            "IMPORT-FAILED": "",
+            "IMPORT-SUCCESSFUL": "",
+            "SUBTITLE": "Pour importer du matériel clé dans Vault, sélectionner d'abord le type de fichier de matériel de sécurité, puis le fichier à importer.",
+            "UPLOAD-ONE-FILE": "peut télécharger un seul document.",
+            "UPLOAD-TEXT": "Le fichier sélectionné doit être dans le format .xml ou .csv."
+        }
+    },
+    "111835559592071682": "formulaire pas valable",
+    "kendo.autocomplete.clearTitle": {
+        "4821453594854847070": "enlever"
+    },
+    "kendo.autocomplete.noDataText": {
+        "2690656529626907484": "Pas trouvé de données"
+    },
+    "kendo.calendar.today": {
+        "826701167553276328": "AUJOURD'HUI"
+    },
+    "kendo.combobox.clearTitle": {
+        "2025597431468961462": "Enlever"
+    },
+    "kendo.combobox.noDataText": {
+        "7708502966028483300": "PAS TROUVÉ DE DONNÉES"
+    },
+    "kendo.dateinput.decrement": {
+        "6980524091606682769": "Diminution de la valeur"
+    },
+    "kendo.dateinput.increment": {
+        "589112377451589685": "Augmentation de la valeur"
+    },
+    "kendo.datetimepicker.accept": {
+        "3915774704336012538": "Régler"
+    },
+    "kendo.datetimepicker.acceptLabel": {
+        "4770689705864890748": "Régler"
+    },
+    "kendo.datetimepicker.cancel": {
+        "5100781969600382158": "annuler"
+    },
+    "kendo.datetimepicker.cancelLabel": {
+        "3535986227615756275": "annuler"
+    },
+    "kendo.datetimepicker.dateTab": {
+        "3360129034450596425": "Date"
+    },
+    "kendo.datetimepicker.dateTabLabel": {
+        "1810540079817643910": "Date tab"
+    },
+    "kendo.datetimepicker.now": {
+        "5497093725885127701": "MAINTENANT"
+    },
+    "kendo.datetimepicker.nowLabel": {
+        "5046379108717037514": "Sélectionner maintenant"
+    },
+    "kendo.datetimepicker.timeTab": {
+        "3807284594201983607": "Time"
+    },
+    "kendo.datetimepicker.timeTabLabel": {
+        "2577682127494513393": "Time tab"
+    },
+    "kendo.datetimepicker.today": {
+        "7904626229769721311": "AUJOURD'HUI"
+    },
+    "kendo.datetimepicker.toggle": {
+        "3159207801887264026": "Toggle popup"
+    },
+    "kendo.dropdownlist.noDataText": {
+        "8289552890585138350": "Pas trouvé de données"
+    },
+    "kendo.fileselect.dropFilesHere": {
+        "660278350824582724": "Mettre ici les documents à sélectionner"
+    },
+    "kendo.fileselect.invalidFileExtension": {
+        "4664331691591215211": "Ce type de document n'est pas autorisé."
+    },
+    "kendo.fileselect.invalidMaxFileSize": {
+        "7793317101233274017": "La taille du document est trop grande."
+    },
+    "kendo.fileselect.invalidMinFileSize": {
+        "6852116465202092102": "La taille du document est trop petite."
+    },
+    "kendo.fileselect.remove": {
+        "8968399983135301359": "Supprimer"
+    },
+    "kendo.fileselect.select": {
+        "3297892120691863975": "Sélectionner les fichiers..."
+    },
+    "kendo.multiselect.noDataText": {
+        "1450213984397806503": "PAS TROUVÉ DE DONNÉES"
+    },
+    "kendo.multiviewcalendar.nextButtonTitle": {
+        "3994336778698343633": "Aller à la vue suivante"
+    },
+    "kendo.multiviewcalendar.prevButtonTitle": {
+        "9101635325676663492": "aller à la vue précédente"
+    },
+    "kendo.multiviewcalendar.today": {
+        "3892034896682737327": "Ce jour"
+    },
+    "kendo.numerictextbox.decrement": {
+        "3960022057994897997": "Diminution de la valeur"
+    },
+    "kendo.numerictextbox.increment": {
+        "4467784268438010275": "Augmentation de la valeur"
+    },
+    "kendo.switch.off": {
+        "759820891948194060": "OFF"
+    },
+    "kendo.switch.on": {
+        "818154782831456441": "ON"
+    },
+    "kendo.timeselector.accept": {
+        "5362895271044573681": "Régler"
+    },
+    "kendo.timeselector.acceptLabel": {
+        "3417396278000787211": "Mettre la date et l'heure"
+    },
+    "kendo.timeselector.cancel": {
+        "1890188482755567622": "Annuler"
+    },
+    "kendo.timeselector.cancelLabel": {
+        "5738120209397145846": "Annuler les changements"
+    },
+    "kendo.timeselector.now": {
+        "1926162752852226109": "Maintenant"
+    },
+    "kendo.timeselector.nowLabel": {
+        "7789175884909488647": "Sélectionner maintenant"
+    },
+    "kendo.upload.cancel": {
+        "1628868291685658590": "Annuler"
+    },
+    "kendo.upload.clearSelectedFiles": {
+        "3149650400352762187": "Enlever"
+    },
+    "kendo.upload.dropFilesHere": {
+        "6841325639465061593": "Mettre ici les documents à télécharger"
+    },
+    "kendo.upload.fileStatusFailed": {
+        "372927175642445287": "Le téléchargement du fichier n'a pas fonctionné."
+    },
+    "kendo.upload.fileStatusUploaded": {
+        "6873833183057253097": "Le fichier a été téléchargé avec succès."
+    },
+    "kendo.upload.filesBatchStatus": {
+        "1052757211842837603": "fichiers"
+    },
+    "kendo.upload.filesBatchStatusFailed": {
+        "5934737755327152932": "Le téléchargement des fichiers n'a pas fonctionné."
+    },
+    "kendo.upload.filesBatchStatusUploaded": {
+        "4678582374156884660": "Fichiers téléchargés avec succès"
+    },
+    "kendo.upload.headerStatusPaused": {
+        "3443987862990095035": "en pause"
+    },
+    "kendo.upload.headerStatusUploaded": {
+        "9210921126598204924": "fait"
+    },
+    "kendo.upload.headerStatusUploading": {
+        "6336385612571616916": "Est en train de télécharger"
+    },
+    "kendo.upload.invalidFileExtension": {
+        "2924979995055776233": "Ce type de fichier n'est pas autorisé."
+    },
+    "kendo.upload.invalidMaxFileSize": {
+        "6669611501469754964": "La taille du fichier est trop grande"
+    },
+    "kendo.upload.invalidMinFileSize": {
+        "4319370666600195324": "La taille du fichier est trop petite"
+    },
+    "kendo.upload.pause": {
+        "2303075305806756763": "Pause"
+    },
+    "kendo.upload.remove": {
+        "8941644637700654622": "Supprimer"
+    },
+    "kendo.upload.resume": {
+        "4056147860620862675": "résumer"
+    },
+    "kendo.upload.retry": {
+        "8567960350691997515": "ré-essayer"
+    },
+    "kendo.upload.select": {
+        "2943392613806104166": "Sélectionner les fichiers..."
+    },
+    "kendo.upload.uploadSelectedFiles": {
+        "4936937427147701307": "Téléchargement"
+    },
+    "ngb.datepicker.next-month": "mois prochain",
+    "ngb.datepicker.previous-month": "mois dernier",
+    "ngb.datepicker.select-month": "choisir le mois",
+    "ngb.datepicker.select-year": "choisir l'année",
+    "ngb.timepicker.AM": "<x id=\"INTERPOLATION\"/>",
+    "ngb.timepicker.HH": "HH",
+    "ngb.timepicker.MM": "MM",
+    "ngb.timepicker.PM": "<x id=\"INTERPOLATION\"/>",
+    "ngb.timepicker.SS": "SS",
+    "ngb.timepicker.decrement-hours": "Heures en moins",
+    "ngb.timepicker.decrement-minutes": "Minutes en moins",
+    "ngb.timepicker.decrement-seconds": "Secondes en moins",
+    "ngb.timepicker.hours": "Heures",
+    "ngb.timepicker.increment-hours": "Heures en plus",
+    "ngb.timepicker.increment-minutes": "Minutes en plus",
+    "ngb.timepicker.increment-seconds": "Secondes en plus",
+    "ngb.timepicker.minutes": "Minutes",
+    "ngb.timepicker.seconds": "Secondes",
+    "ngb.toast.close-aria": "Fermer"
+}

@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, of } from 'rxjs';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
@@ -76,7 +74,7 @@ export class SaveViewFormComponent implements OnInit {
 
   save(asNew: boolean) {
     this.sessionLayout.id = asNew ? -1 : this.sessionLayout.id;
-    this.sessionLayout.name = this.form.get(this.namePropety).value;
+    this.sessionLayout.name = this.form.get(this.nameProperty).value;
     this.sessionLayout.gridLayout = this.cookieSettings;
     if (this.sessionLayout.id && this.sessionLayout.id > 0) {
       this.dcuService.saveDcuLayout(this.sessionLayout.id, this.sessionLayout);
@@ -93,7 +91,7 @@ export class SaveViewFormComponent implements OnInit {
     this.modal.close();
   }
 
-  get namePropety() {
+  get nameProperty() {
     return 'name';
   }
 
@@ -111,7 +109,7 @@ export class SaveViewFormComponent implements OnInit {
     if (this.sessionLayout) {
       this.sessionLayout.gridLayout = this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
     }
-    this.form.get(this.namePropety).setValue(this.sessionLayout.name);
+    this.form.get(this.nameProperty).setValue(this.sessionLayout.name);
     this.eventService.layoutChange(this.sessionLayout);
     this.modal.close();
   }

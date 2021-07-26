@@ -1,18 +1,17 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
-import { Observable } from 'rxjs';
-import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
+import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import * as _ from 'lodash';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
+import { Observable } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
-import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
-import { DataConcentratorUnitsSelectGridService } from '../services/data-concentrator-units-select-grid.service';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
-import { DataConcentratorUnitsSelectRequest } from 'src/app/core/repository/interfaces/data-concentrator-units-select/data-concentrator-units-select-request.interface';
+import { RegistersSelectList } from 'src/app/core/repository/interfaces/registers-select/registers-select-list.interface';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { JobsService } from 'src/app/core/repository/services/jobs/jobs.service';
+import { configAgGrid, enumSearchFilterOperators } from 'src/environments/config';
+import { ActionFormStaticTextService } from '../../data-concentrator-units/components/action-form/services/action-form-static-text.service';
+import { DataConcentratorUnitsSelectGridService } from '../services/data-concentrator-units-select-grid.service';
 
 @Component({
   selector: 'app-data-concentrator-units-select',
@@ -22,7 +21,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   @Input() type = 'meter';
   @Input() selectedJobId: string;
   @Input() deviceFiltersAndSearch: GridBulkActionRequestParams;
-  // tslint:disable-next-line: no-output-on-prefix
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
   @Output() onSelectionChanged = new EventEmitter<boolean>();
 
   form: FormGroup;

@@ -1,15 +1,15 @@
 import { MuUpdateForm, MuUpdatePlcForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { ToastNotificationService } from './../../../../../core/toast-notification/services/toast-notification.service';
-import { MuHdlcInformation } from './../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
-import { MeterUnitsService } from './../../../../../core/repository/services/meter-units/meter-units.service';
-import { RadioOption } from './../../../../../shared/forms/interfaces/radio-option.interface';
+import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
+import { MuHdlcInformation } from '../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
+import { MeterUnitsService } from '../../../../../core/repository/services/meter-units/meter-units.service';
+import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
 import {
   AuthenticationTypeEnum,
   MuAdvancedInformation
-} from './../../../../../core/repository/interfaces/meter-units/mu-advanced-information.interface';
-import { MuWrapperInformation } from './../../../../../core/repository/interfaces/meter-units/mu-wrapper-information.interface';
-import { AutoTemplatesService } from './../../../../../core/repository/services/auto-templates/auto-templates.service';
+} from '../../../../../core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import { MuWrapperInformation } from '../../../../../core/repository/interfaces/meter-units/mu-wrapper-information.interface';
+import { AutoTemplatesService } from '../../../../../core/repository/services/auto-templates/auto-templates.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -25,6 +25,7 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { map } from 'rxjs/operators';
 import { ReferenceType } from '../../../../../core/repository/interfaces/meter-units/reference-type.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: './add-mu-form.component.html'
@@ -33,11 +34,6 @@ export class AddMuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
-  tabTitleBasic = $localize`Basic`;
-  tabTitleJobs = $localize`Jobs`;
-  tabTitleCommunication = $localize`Communication`;
-  tabTitleAdvanced = $localize`Advanced`;
-
   form: FormGroup;
   editMu: MeterUnitDetails;
   isEditMu = false;
@@ -45,23 +41,23 @@ export class AddMuFormComponent implements OnInit {
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
-  connectionTypes: Codelist<number>[] = [{ id: 1, value: $localize`IP` }];
+  connectionTypes: Codelist<number>[] = [{ id: 1, value: this.translate.instant('FORM.IP') }];
   defaultConnectionType = this.connectionTypes[0];
   shortNameSelected = false;
 
   communicationTypes: RadioOption[] = [
-    { value: '1' as string, label: $localize`Wrapper` },
-    { value: '0' as string, label: $localize`HDLC` }
+    { value: '1' as string, label: this.translate.instant('FORM.WRAPPER') },
+    { value: '0' as string, label: this.translate.instant('FORM.HDLC') }
   ];
-  defaultCommunicationType = this.communicationTypes[0]; // '1'; // this.communicationTypes[0].value;
+  defaultCommunicationType = this.communicationTypes[0];
 
   communicationTypeSelected: RadioOption = null;
 
   authenticationTypes: Codelist<string>[] = [
-    { id: AuthenticationTypeEnum.NONE, value: $localize`None` },
-    { id: AuthenticationTypeEnum.LOW, value: $localize`Low` },
-    { id: AuthenticationTypeEnum.HIGH, value: $localize`High` },
-    { id: AuthenticationTypeEnum.HIGH_GMAC, value: $localize`High with GMAC` }
+    { id: AuthenticationTypeEnum.NONE, value: this.translate.instant('FORM.NONE') },
+    { id: AuthenticationTypeEnum.LOW, value: this.translate.instant('FORM.LOW') },
+    { id: AuthenticationTypeEnum.HIGH, value: this.translate.instant('FORM.HIGH') },
+    { id: AuthenticationTypeEnum.HIGH_GMAC, value: this.translate.instant('FORM.HIGH-GMAC') }
   ];
 
   isConnectionTypeIp = this.defaultConnectionType?.id === 1;
@@ -82,7 +78,8 @@ export class AddMuFormComponent implements OnInit {
     private muService: MeterUnitsService,
     private jobsSelectGridService: JobsSelectGridService,
     private toast: ToastNotificationService,
-    private codelistServiceMu: CodelistMeterUnitsRepositoryService
+    private codelistServiceMu: CodelistMeterUnitsRepositoryService,
+    private translate: TranslateService
   ) {
     this.form = this.createForm();
     this.communicationTypeChanged(this.defaultCommunicationType);
@@ -455,7 +452,7 @@ export class AddMuFormComponent implements OnInit {
   add() {
     const muFormData = this.fillData();
     const request = this.muService.createMuForm(muFormData);
-    const successMessage = $localize`Meter unit has been added successfully`;
+    const successMessage = this.translate.instant('PLC-METER.METER-UNIT-ADDED');
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
@@ -496,7 +493,7 @@ export class AddMuFormComponent implements OnInit {
       request = this.muService.updateMuForm(muFormData);
     }
 
-    const successMessage = $localize`Meter unit has been updated successfully`;
+    const successMessage = this.translate.instant('PLC-METER.METER-UNIT-UPDATED');
 
     try {
       this.formUtils.saveForm(this.form, request, '').subscribe(
@@ -667,9 +664,9 @@ export class AddMuFormComponent implements OnInit {
 
   getTitle(): string {
     if (this.editMu) {
-      return $localize`Edit ${this.editMu.protocol} meter`;
+      return this.translate.instant('PLC-METER.EDIT-METER', { protocol: this.editMu.protocol });
     }
-    return $localize`Add new DLMS meter`;
+    return this.translate.instant('PLC-METER.ADD-DLMS-METER');
   }
 
   gatewayChanged(value: any) {

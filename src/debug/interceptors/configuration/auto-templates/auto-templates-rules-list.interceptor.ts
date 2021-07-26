@@ -1,7 +1,6 @@
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import * as _ from 'lodash';
 import { autoTemplateRules } from 'src/app/core/repository/consts/auto-templates.const';
 import { AutoTemplateRuleList } from 'src/app/core/repository/interfaces/auto-templates/auto-template-rule.interface';
 

@@ -1,39 +1,34 @@
-import { device } from 'src/app/core/repository/consts/meter-units.const';
-import { TemplatingService } from './../../../core/repository/services/templating/templating.service';
 import { Injectable } from '@angular/core';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { capitalize, toLower } from 'lodash';
 import { Observable } from 'rxjs';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/data-concentrator-units/dc-operation-simple.interface';
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { DcOperationTypeEnum } from '../enums/operation-type.enum';
-import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
-import { capitalize, toLower, values } from 'lodash';
 import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
-import {
-  IActionRequestGetCommonRegisterGroups,
-  IActionRequestParams
-} from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
+import { DcOperationTypeEnum } from '../enums/operation-type.enum';
+import { TemplatingService } from '../../../core/repository/services/templating/templating.service';
+import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DcOperationsService {
-  messageActionInProgress = $localize`Action in progress!`;
-  messageServerError = $localize`Server error!`;
-
   constructor(
     private modalService: ModalService,
     private toast: ToastNotificationService,
     private service: DataConcentratorUnitsOperationsService,
     private dcGridService: DataConcentratorUnitsGridService,
-    private templatingService: TemplatingService
+    private templatingService: TemplatingService,
+    private translate: TranslateService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams) {
@@ -50,6 +45,7 @@ export class DcOperationsService {
     };
     modalRef.result.then().catch(() => {});
   }
+
   /*
   onTou(params: RequestFilterParams) {
     const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
@@ -153,6 +149,7 @@ export class DcOperationsService {
     );
   }
 */
+
   // delete button click ali se rabi ?????????
   onDelete() {
     /*  let selectedText = 'all';
@@ -208,33 +205,32 @@ export class DcOperationsService {
 
   // actions without popup
   bulkOperation(operation: DcOperationTypeEnum, params: any, selectedCount: number) {
-    let selectedText = ''; // `${selectedCount} rows `;
+    // let selectedText = ''; // `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = $localize`Confirm`;
+    component.btnConfirmText = this.translate.instant('BUTTON.CONFIRM');
     let response: Observable<any> = new Observable();
 
     let operationName = '';
     switch (operation) {
       case DcOperationTypeEnum.syncTime:
         response = this.service.postDcSynchronizeTime(params);
-        operationName = $localize`Sync time`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+        operationName = this.translate.instant('OPERATION.SYNC-TIME');
+        // selectedText = `${`for`} ${selectedText}`;
         break;
       case DcOperationTypeEnum.deviceDiscovery:
         response = this.service.postDcDeviceDiscovery(params);
-        operationName = $localize`Device discovery`;
-        selectedText = `${$localize`for`} ${selectedText}`;
+        operationName = this.translate.instant('OPERATION.DEVICE-DISCOVERY');
+        // selectedText = `${`for`} ${selectedText}`;
         break;
     }
-
-    component.modalTitle = $localize`${operationName} (${selectedCount} selected)`;
-    component.modalBody = `Are you sure you would like to trigger ${toLower(operationName)} for selected devices?`; // `${operationName} ${selectedText} ` + $localize`selected meter unit(s)?`;
+    component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
+    component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
 
     modalRef.result.then(
       (data) => {
         // on close (CONFIRM)
-        this.toast.successToast(this.messageActionInProgress);
+        this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
             /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
@@ -245,7 +241,7 @@ export class DcOperationsService {
             }*/
           },
           (e) => {
-            this.toast.errorToast(this.messageServerError);
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
           }
         );
       },
@@ -264,7 +260,7 @@ export class DcOperationsService {
       (data) => {
         // on close (CONFIRM)
         if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
+          this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         }
       },
       (reason) => {

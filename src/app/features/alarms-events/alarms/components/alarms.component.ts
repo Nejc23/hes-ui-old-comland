@@ -1,16 +1,16 @@
-import { GridUtils } from './../../../global/grid.utils';
-import { AlarmingService } from './../../../../core/repository/services/alarming/alarming.service';
-import { IActionRequestParamsAlarms, IActionSortParams } from './../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { GridUtils } from '../../../global/grid.utils';
+import { AlarmingService } from '../../../../core/repository/services/alarming/alarming.service';
+import { IActionRequestParamsAlarms, IActionSortParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IAlarmsList } from 'src/app/core/repository/interfaces/alarming/alarms-list.interface';
 import { AlarmsListGridService } from '../services/alarms-list-grid.service';
-import { AllModules, Module, GridOptions } from '@ag-grid-enterprise/all-modules';
+import { AllModules, GridOptions, Module } from '@ag-grid-enterprise/all-modules';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { AlarmsStaticTextService } from '../services/alarms-static-text.service';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { capitalize } from 'lodash';
 import { filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -65,8 +65,8 @@ export class AlarmsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private alarmsListGridService: AlarmsListGridService,
     private alarmingService: AlarmingService,
-    public staticTextService: AlarmsStaticTextService,
-    private authService: AuthService
+    private translate: TranslateService,
+    private staticTextService: AlarmsStaticTextService
   ) {
     this.form = this.createForm();
 
@@ -79,19 +79,19 @@ export class AlarmsComponent implements OnInit {
 
     this.localeText = {
       // for side panel
-      columns: $localize`Columns`,
-      filters: $localize`Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: $localize`page`,
-      more: $localize`more`,
-      to: $localize`to`,
-      of: $localize`of`,
-      next: $localize`next`,
-      last: $localize`last`,
-      first: $localize`first`,
-      previous: $localize`previous`,
-      loadingOoo: $localize`loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
   }
 
