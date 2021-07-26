@@ -12,7 +12,7 @@
           <app-input-checkbox-grid [form]="form" [property]="selectAllProperty" (change)="showHideAll()" label="Select/deselect all columns"></app-input-checkbox-grid>
         </div>
         <div class="dropdown-divider"></div>
-        <app-input-multiselect  [form]="form" [property]="columnsProperty" (change)="showHideFromArrayOfCheckBoxes()" name="multSelectTypes"
+        <app-input-multiselect  [form]="form" [property]="columnsProperty" (inputMultiselectChange)="showHideFromArrayOfCheckBoxes()" name="multSelectTypes"
           [isReadOnly]="false" [options]="columns$" [inline]="false" class="dropdown-item custom-color-grid-columns">
         </app-input-multiselect>
       </div>
