@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://192.168.2.181:8083',
+  apiUrl: 'https://localhost:8888/',
   // apiUrl: 'http://91.230.238.178/[api-url]',
   //  apiMyGridUrl: 'https://89.212.201.202:54322', // not use if URI for all apis (even actions) is the same
   cookiePath: '/',
