@@ -23,14 +23,9 @@
         }
 
         &.user {
-          background-color: $navbar-dark-color;
+          background-color: rgba($primary, .15);
           width: calc((#{$nav-link-padding-y} * 2) + (#{$font-size-base} * 1.5));
-          color: rgba($body-color, .7);
-
-          &:hover {
-            background-color: $navbar-dark-hover-color;
-            color: $body-color;
-          }
+          color: $primary;
         }
       }
     }
@@ -55,36 +50,6 @@
 
     .logout a span {
       color: $info;
-    }
-  }
-}
-
-.navbar.navbar-dark {
-  background: $navbar-dark-bg;
-
-  .page-name {
-    color: $navbar-dark-brand-color;
-  }
-
-  .breadcrumb {
-    .breadcrumb-item {
-      color: $navbar-dark-color;
-
-      &.active {
-        color: $navbar-dark-color;
-      }
-
-      a {
-        color: $navbar-dark-color;
-
-        //@include hover-focus {
-        //  color: $navbar-dark-hover-color;
-        //}
-
-        &.disabled {
-          color: $navbar-dark-disabled-color;
-        }
-      }
     }
   }
 }

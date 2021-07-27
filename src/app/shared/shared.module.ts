@@ -63,7 +63,6 @@ import { SidebarComponent } from './base-template/components/sidebar.component';
 import { TopFixedNavComponent } from './base-template/components/top-fixed-nav.component';
 import { SidebarDropdownDirective } from './base-template/directives/sidebar-dropdown.directive';
 import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
-import { CardComponent } from './card/components/card.component';
 import { NumberOnlyDirective } from './directives/number-only.directive';
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
 import { DisableIfAuthorizedReadonlyDirective } from './directives/permissions/disable-if-authorized-readonly.directive';
@@ -108,7 +107,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomFormsModule,
     HeaderTitleComponent,
     ToastComponent,
-    CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
     NgbModule,
@@ -217,7 +215,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     ToastComponent,
-    CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
     WidgetSettingsFormDirective,

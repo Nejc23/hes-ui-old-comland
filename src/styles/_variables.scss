@@ -59,15 +59,16 @@ $colors: map-merge(("blue": $blue,
     "gray-dark": $gray-800),
   $colors);
 
-$primary: #981D78 !default;
-$secondary:  #053876!default;
-$success: #37A350 !default;
-$info: #47A8BD !default;
-$warning: #E9BD4A !default;
-$danger: #E43458 !default;
+$primary: #981D78 !default; // darkPurple
+$secondary:  #053876!default; // darkBlue
+$success: #37A350 !default; // ok green
+$info: #47A8BD !default; // blue
+$warning: #E9BD4A !default; // meh yellow
+$danger: #E43458 !default;  // bad red
 $light: $gray-300 !default;
 $dark: $gray-800 !default;
 
+$lightGray: #CED2D9;
 $lightestGray: #F4F6F9;
 $mediumGray: #A9ABAF;
 $darkGray: #6F7072;
@@ -1065,9 +1066,7 @@ $breadcrumb-item-padding: .5rem !default;
 $breadcrumb-margin-bottom: 0rem !default;
 
 $breadcrumb-bg: transparent !default;
-$breadcrumb-divider-color: white;//$gray-600 !default;
-$breadcrumb-active-color: white;//$gray-600 !default;
-$breadcrumb-divider: quote("•") !default;
+$breadcrumb-divider: quote(">") !default;
 
 $breadcrumb-border-radius: $border-radius !default;
 
@@ -1165,7 +1164,7 @@ $print-body-min-width: map-get($grid-breakpoints, "lg") !default;
 // Custom spacing Variables
 
 // Change below variable if the height of the navbar changes
-$topbar-base-height: 4.1rem;
+$topbar-base-height: 5.714rem;
 // Change below variable to change the width of the sidenav
 $sidebar-base-width: 20rem;
 // Change below variable to change the width of the sidenav when collapsed
