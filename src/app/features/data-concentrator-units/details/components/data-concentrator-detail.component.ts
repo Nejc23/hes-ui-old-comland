@@ -242,4 +242,8 @@ export class DataConcentratorDetailComponent implements OnInit {
   get permissionEdit() {
     return PermissionEnumerator.Manage_Concentrators;
   }
+
+  public onTabSelect(e) {
+    console.log(e);
+  }
 }

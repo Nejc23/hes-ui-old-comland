@@ -7,18 +7,15 @@ module.exports = {
   prefix: 'tw-',
   darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {}
-  },
-  variants: {
     extend: {
       colors: {
         darkGray: '#6F7072',
         darkPurple: '#981D78',
         darkBlue: '#053876',
         mediumGray: '#A9ABAF',
-        okGreen: '#37A350',
-        mehYellow: '#E9BD4A',
-        badRed: '#E43458',
+        green: '#37A350', // ok green
+        yellow: '#E9BD4A', // meh yellow
+        red: '#E43458', // bad red
         lightGray: '#CED2D9',
         lightestGray: '#F4F6F9',
         black: '#121212', // dark in figma

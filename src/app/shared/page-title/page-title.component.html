@@ -1,0 +1,16 @@
+<div class="tw-inline-flex tw-items-center">
+  <div class="tw-text-black tw-text-xl" *ngIf="title">
+    {{ title }}
+  </div>
+  <div class="tw-text-mediumGray tw-text-xl tw-ml-2" *ngIf="subtitle">
+    {{ subtitle }}
+  </div>
+  <div *ngIf="status" class="tw-inline-flex tw-ml-4 tw-text-green tw-bg-green tw-bg-opacity-20 rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-items-center tw-capitalize"> <!-- create classes by enum -->
+    {{ status.toLowerCase() }}
+  </div>
+</div>
+
+<!--<div class="tw-inline-flex"> &lt;!&ndash; foreach tags &ndash;&gt;-->
+<!--  <app-input-tag></app-input-tag>-->
+<!--  <app-input-tag></app-input-tag>-->
+<!--</div>-->

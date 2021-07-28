@@ -166,7 +166,8 @@
     "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
     "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
     "WITH-TEMPLATE": "With template",
-    "WITHOUT-TEMPLATE": "Without template"
+    "WITHOUT-TEMPLATE": "Without template",
+    "OVERVIEW": "Overview"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",

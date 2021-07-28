@@ -87,6 +87,10 @@ import { GridCellLinkComponent } from './popover/components/grid-custom-componen
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
 import { ToastComponent } from './toast-notification/components/toast.component';
 import { LocaleDatePipe } from './utils/pipes/locale-date.pipe';
+import { CardItemComponent } from './card-item/card-item.component';
+import { PageTitleComponent } from './page-title/page-title.component';
+import { PageLayoutComponent } from './page-layout/page-layout.component';
+import { TagElementComponent } from './tag-element/tag-element.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -158,7 +162,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlarmNotificationRulesComponent,
     PlcReadRegistersComponent,
     StatusJobComponent,
-    ActiveJobsListComponent
+    ActiveJobsListComponent,
+    PageTitleComponent
   ],
   imports: [
     CommonModule,
@@ -265,7 +270,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
-    AddJobComponent
+    AddJobComponent,
+    CardItemComponent,
+    PageTitleComponent,
+    PageLayoutComponent,
+    TagElementComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
