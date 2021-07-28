@@ -6,14 +6,36 @@
 >
 </app-page-title>
 
-<kendo-tabstrip [keepTabContent]="true" class="tw-py-8">
+<div class="tw-py-5">
+  <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-6">
+    <app-card-item>
 
-  <kendo-tabstrip-tab title="{{ 'COMMON.OVERVIEW' | translate }}">
-    <ng-template kendoTabContent>
-      <div> NEKI </div>
-    </ng-template>
-  </kendo-tabstrip-tab>
-</kendo-tabstrip>
+    </app-card-item>
+    <app-card-item>
+
+    </app-card-item>
+    <app-card-item>
+
+    </app-card-item>
+    <app-card-item>
+
+    </app-card-item>
+    <app-card-item>
+
+    </app-card-item>
+    <app-card-item>
+
+    </app-card-item>
+  </div>
+</div>
+<!--<kendo-tabstrip [keepTabContent]="true" class="tw-py-8">-->
+
+<!--  <kendo-tabstrip-tab title="{{ 'COMMON.OVERVIEW' | translate }}">-->
+<!--    <ng-template kendoTabContent>-->
+<!--      <div> Tabs </div>-->
+<!--    </ng-template>-->
+<!--  </kendo-tabstrip-tab>-->
+<!--</kendo-tabstrip>-->
 
 <!--<div class="mb-3" *ngIf="!edit">-->
 <!--  <button class="btn btn-primary me-2" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">-->

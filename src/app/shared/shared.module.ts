@@ -163,7 +163,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
-    PageTitleComponent
+    PageTitleComponent,
+    CardItemComponent
   ],
   imports: [
     CommonModule,
