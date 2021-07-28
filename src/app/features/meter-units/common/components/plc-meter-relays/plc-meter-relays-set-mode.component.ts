@@ -25,7 +25,7 @@ export class PlcMeterRelaysSetModeComponent implements OnInit {
 
   relays$: Codelist<string>[];
   modes: Codelist<number>[];
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.RELAY-MODE');
 
   public selectedRowsCount: number;
 

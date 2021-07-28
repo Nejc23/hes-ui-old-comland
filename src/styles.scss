@@ -13,8 +13,8 @@
 @import "styles/variables";
 @import "styles/../../node_modules/bootstrap/scss/mixins";
 // TODO CHECK COMPONENTS IF SOMETHING IS NOT USED
-@import "~@progress/kendo-theme-bootstrap/dist/all.scss";
-@import "~bootstrap/scss/bootstrap";
+@import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
+@import 'styles/bootstrap';
 
 @import "styles/global";
 @import "styles/navs";
@@ -76,13 +76,29 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .badge-success {
   background-color: $success;
+  color: white;
 }
+
 .badge-info {
   background-color: $info;
+  color: white;
 }
+
 .badge-dark {
   background-color: $dark;
+  color: #fff !important;
 }
+
+.badge-secondary {
+  color: #fff !important;
+  background-color: $secondary;
+}
+
+.badge-primary {
+  color: #fff !important;
+  background-color: $primary;
+}
+
 //.dropdown-item.active, .dropdown-item:active {
 //   background-color: transparent;
 //   color: $primary;

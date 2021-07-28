@@ -21,7 +21,7 @@ export class PlcMeterBreakerModeComponent implements OnInit {
   disconnectorModes: Codelist<number>[];
   actionRequest: IActionRequestParams;
   errMsg = '';
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.BREAKER.SET-BREAKER-MODE');
 
   selectedRowsCount: number;
 

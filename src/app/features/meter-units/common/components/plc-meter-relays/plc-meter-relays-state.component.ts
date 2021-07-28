@@ -21,7 +21,7 @@ export class PlcMeterRelaysStateComponent {
 
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.RELAY-STATE-TITLE');
 
   public selectedRowsCount: number;
 

@@ -49,7 +49,7 @@ export class PlcMeterSetDisplaySettingsComponent implements OnInit {
   noRowsTemplate = '<span>' + this.translate.instant('PLC-METER.DROP-AVAILABLE-REGISTERS') + '</span>';
 
   dataLoaded = false;
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.SET-DISPLAY-SETTINGS');
 
   constructor(
     private formBuilder: FormBuilder,
