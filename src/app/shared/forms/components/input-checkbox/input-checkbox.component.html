@@ -1,6 +1,6 @@
 <div class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
   <div class="checkbox">
-    <input type="checkbox" class="form-control" [formControlName]="property" [id]="property" [name]="property">
+    <input type="checkbox" class="form-check-input" [formControlName]="property" [id]="property" [name]="property">
     <label [attr.for]="property">
       {{label}}
     </label>

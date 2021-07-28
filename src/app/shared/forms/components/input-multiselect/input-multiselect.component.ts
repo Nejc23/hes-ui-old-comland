@@ -82,10 +82,7 @@ export class InputMultiselectComponent implements OnInit {
     this.form.get(this.property).setValue(Array.from(new Set(this.selectedValuesArray)).sort());
     this.form.get(this.property).markAsDirty(); // form has changed
 
-    // emit event when click on tekst not in checkbox
-    if (clickOnText) {
-      this.inputMultiselectChange.emit(selected);
-    }
+    this.inputMultiselectChange.emit(selected);
   }
 
   fetchCodelist() {
