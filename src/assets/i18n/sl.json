@@ -427,7 +427,8 @@
         "TYPE": "Tip",
         "UNIT": "",
         "VALUE": "Value",
-        "VENDOR": "proizvajalec"
+        "VENDOR": "proizvajalec",
+        "REGISTER": "Register"
     },
     "JOB": {
         "ACTIVE-JOB": {
