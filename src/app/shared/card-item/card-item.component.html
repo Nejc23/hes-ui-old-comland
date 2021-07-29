@@ -6,5 +6,14 @@
     <div>Edit</div>
   </div>
   <div class="tw-h-80 tw-border tw-border-red-800 tw-border-solid tw-border-t-0">
-
+    <div *ngIf="form">
+      <div *ngFor="let formData of controls">
+       label: {{ formData.name }}
+       value:
+        <ng-container *ngIf="formData.control.value?.id; else notObject">
+          {{ formData.control.value.value }}
+        </ng-container>
+        <ng-template #notObject>  {{ formData.control.value}} </ng-template>
+      </div>
+    </div>
   </div>

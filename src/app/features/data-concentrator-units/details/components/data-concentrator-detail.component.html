@@ -1,4 +1,4 @@
-<app-page-title
+<app-page-title class="tw-flex tw-sticky tw-top-0 tw-z-20 "
   *ngIf="data"
   [status]="data.statusValue"
   [subtitle]="data.typeValue"
@@ -6,36 +6,25 @@
 >
 </app-page-title>
 
-<div class="tw-py-5">
-  <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-6">
-    <app-card-item>
+<kendo-tabstrip [keepTabContent]="true" class="tw-py-8">
 
-    </app-card-item>
-    <app-card-item>
+  <kendo-tabstrip-tab title="{{ 'COMMON.OVERVIEW' | translate }}" class="tw-flex tw-sticky tw-top-0 tw-z-20 ">
+    <ng-template kendoTabContent>
 
-    </app-card-item>
-    <app-card-item>
+      <div class="tw-py-5">
+        <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-6">
+          <app-card-item [form]="form">
 
-    </app-card-item>
-    <app-card-item>
+          </app-card-item>
+        </div>
+      </div>
 
-    </app-card-item>
-    <app-card-item>
+    </ng-template>
+  </kendo-tabstrip-tab>
+</kendo-tabstrip>
 
-    </app-card-item>
-    <app-card-item>
 
-    </app-card-item>
-  </div>
-</div>
-<!--<kendo-tabstrip [keepTabContent]="true" class="tw-py-8">-->
 
-<!--  <kendo-tabstrip-tab title="{{ 'COMMON.OVERVIEW' | translate }}">-->
-<!--    <ng-template kendoTabContent>-->
-<!--      <div> Tabs </div>-->
-<!--    </ng-template>-->
-<!--  </kendo-tabstrip-tab>-->
-<!--</kendo-tabstrip>-->
 
 <!--<div class="mb-3" *ngIf="!edit">-->
 <!--  <button class="btn btn-primary me-2" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">-->
