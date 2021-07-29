@@ -1,8 +1,9 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 
-export interface IFormData {
+export interface FormData {
   name: string;
+  required: boolean;
   control: AbstractControl;
 }
 
@@ -12,27 +13,57 @@ export interface IFormData {
   styleUrls: ['./card-item.component.scss']
 })
 export class CardItemComponent implements OnInit, OnChanges {
+  @Input() title = '';
+  @Input() buttonLabel = '';
   @Input() withEdit = false;
   @Input() form: FormGroup;
-  controls: Array<IFormData> = [];
+  @Input() paginationLimit;
+
+  @Output() buttonClickEvent = new EventEmitter<boolean>();
+  initLimit = 0;
+
+  controls: Array<FormData> = [];
+  private PAGINATION_INCREMENT = 4;
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    debugger;
+    this.initLimit = this.paginationLimit;
+  }
 
   ngOnChanges() {
     if (this.form) {
-      debugger;
       Object.keys(this.form.controls).forEach((control: string) => {
         debugger;
         const typedControl: AbstractControl = this.form.controls[control];
+        debugger;
+        const validator = typedControl.validator && typedControl.validator({} as AbstractControl);
         this.controls.push({
           name: control,
+          required: validator && validator.required,
           control: typedControl
         });
-        console.log(typedControl);
         // should log the form controls value and be typed correctly
       });
     }
+  }
+
+  isRequired(formData: FormData) {
+    if (formData.required) {
+      return 'tw-bg-[#FAFBFC]'; // todo add to config
+    } else return '';
+  }
+
+  showMoreItems() {
+    this.paginationLimit += this.PAGINATION_INCREMENT;
+  }
+
+  showLessItems() {
+    this.paginationLimit = this.initLimit;
+  }
+
+  onButtonClicked() {
+    this.buttonClickEvent.emit(true);
   }
 }

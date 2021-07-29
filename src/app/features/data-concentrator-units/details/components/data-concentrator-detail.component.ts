@@ -246,4 +246,9 @@ export class DataConcentratorDetailComponent implements OnInit {
   public onTabSelect(e) {
     console.log(e);
   }
+
+  editButtonClicked() {
+    debugger;
+    this.editDcu();
+  }
 }

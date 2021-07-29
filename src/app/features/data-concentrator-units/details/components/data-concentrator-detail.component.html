@@ -1,19 +1,19 @@
-<app-page-title class="tw-flex tw-sticky tw-top-0 tw-z-20 "
-  *ngIf="data"
-  [status]="data.statusValue"
-  [subtitle]="data.typeValue"
-  [title]="data.name"
+<app-page-title *ngIf="data"
+                [status]="data.statusValue"
+                [subtitle]="data.typeValue"
+                [title]="data.name"
+                class="tw-flex tw-sticky tw-top-0 tw-z-20 "
 >
 </app-page-title>
 
 <kendo-tabstrip [keepTabContent]="true" class="tw-py-8">
 
-  <kendo-tabstrip-tab title="{{ 'COMMON.OVERVIEW' | translate }}" class="tw-flex tw-sticky tw-top-0 tw-z-20 ">
+  <kendo-tabstrip-tab class="tw-flex tw-sticky tw-top-0 tw-z-20 " title="{{ 'COMMON.OVERVIEW' | translate }}">
     <ng-template kendoTabContent>
 
       <div class="tw-py-5">
         <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-6">
-          <app-card-item [form]="form">
+          <app-card-item (buttonClickEvent)="editButtonClicked()" [form]="form" [paginationLimit]="7" [title]="'COMMON.OVERVIEW'" [buttonLabel]="'BUTTON.EDIT'">
 
           </app-card-item>
         </div>
@@ -22,8 +22,6 @@
     </ng-template>
   </kendo-tabstrip-tab>
 </kendo-tabstrip>
-
-
 
 
 <!--<div class="mb-3" *ngIf="!edit">-->

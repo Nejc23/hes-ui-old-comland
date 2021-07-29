@@ -344,7 +344,11 @@
     "USERNAME": "Username",
     "VENDOR": "Vendor",
     "WEEK-DAYS": "Week-days",
-    "WRAPPER": "Wrapper"
+    "WRAPPER": "Wrapper",
+    "SERIALNUMBER": "Serial number",
+    "ADDRESS": "Address",
+    "TAGS": "Tags",
+    "EXTERNALID": "External Id"
   },
   "GRID": {
     "ACTIVE": "Active",

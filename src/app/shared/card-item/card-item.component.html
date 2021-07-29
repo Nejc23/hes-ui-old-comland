@@ -1,19 +1,30 @@
-  <div
-    class="tw-inline-flex tw-bg-lightestGray tw-rounded-t-md tw-w-full tw-h-20 tw-p-5 tw-items-center tw-justify-between tw-border tw-border-red-800 tw-border-solid">
-    <div class="tw-text-xl">
-      Details
-    </div>
-    <div>Edit</div>
+<div
+  class="tw-inline-flex tw-bg-lightestGray tw-rounded-t-md tw-w-full tw-h-20 tw-p-5 tw-items-center tw-justify-between tw-border tw-border-red-800 tw-border-solid">
+  <div class="tw-text-xl">
+    {{ title | translate }}
   </div>
-  <div class="tw-h-80 tw-border tw-border-red-800 tw-border-solid tw-border-t-0">
-    <div *ngIf="form">
-      <div *ngFor="let formData of controls">
-       label: {{ formData.name }}
-       value:
+  <div *ngIf="buttonLabel" (click)="onButtonClicked()">{{ buttonLabel | translate }}</div>
+</div>
+<div class="tw-border tw-border-red-800 tw-border-solid tw-border-t-0">
+  <ng-container *ngIf="form">
+    <div *ngFor="let formData of controls | slice: 0: paginationLimit ?  paginationLimit: controls.length"
+         [ngClass]="isRequired(formData)"
+         class="tw-inline-flex tw-justify-between tw-px-6 tw-w-full tw-h-12 tw-items-center tw-border-b tw-border-solid tw-border-lightGray">
+      <div class="tw-text-darkGray">
+        {{ 'FORM.' + formData.name.toUpperCase() | translate }}
+      </div>
+      <div class="tw-text-black">
         <ng-container *ngIf="formData.control.value?.id; else notObject">
           {{ formData.control.value.value }}
         </ng-container>
         <ng-template #notObject>  {{ formData.control.value}} </ng-template>
       </div>
     </div>
-  </div>
+    <button *ngIf="paginationLimit < controls.length" (click)="showMoreItems()" class="tw-w-full tw-text-primary tw-p-5">
+      {{ 'COMMON.SHOW-MORE' | translate }}
+    </button>
+    <button *ngIf="paginationLimit >= controls.length" (click)="showLessItems()" class="tw-w-full tw-text-primary tw-p-5">
+      {{ 'COMMON.SHOW-LESS' | translate }}
+    </button>
+  </ng-container>
+</div>
