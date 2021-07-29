@@ -248,7 +248,6 @@ export class DataConcentratorDetailComponent implements OnInit {
   }
 
   editButtonClicked() {
-    debugger;
     this.editDcu();
   }
 }

@@ -22,7 +22,7 @@ export class CodelistHelperService {
 
   public showOptionFilterList() {
     const showOptions: Codelist<number>[] = [
-      { id: 1, value: this.translate.instant('COMMON.TEMPLATE') },
+      { id: 1, value: this.translate.instant('COMMON.WITH-TEMPLATE') },
       { id: 2, value: this.translate.instant('COMMON.WITHOUT-TEMPLATE') },
       { id: 3, value: this.translate.instant('COMMON.IMAGE-READY-FOR-ACTIVATION') },
       { id: 4, value: this.translate.instant('COMMON.HLS-ENABLED') },

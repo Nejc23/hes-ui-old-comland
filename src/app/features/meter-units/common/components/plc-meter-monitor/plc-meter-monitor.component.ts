@@ -23,7 +23,7 @@ export class PlcMeterMonitorComponent implements OnInit {
   filterParam?: GridFilterParams;
   searchParam?: GridSearchParams[];
   excludeIdsParam?: string[];
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.SET-MONITOR');
 
   form: FormGroup;
   formTemplate: ResponseCommonRegisterGroup[];

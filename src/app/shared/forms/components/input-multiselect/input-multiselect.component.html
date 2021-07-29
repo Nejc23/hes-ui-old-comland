@@ -7,7 +7,7 @@
         [ngClass]="{'multiselect-disabled': isReadOnly, 'd-flex flex-nowrap justify-content-start': inline}"
         [id]="name">
         <div *ngFor="let option of options; let i = index;" class="d-flex" style="min-width: 0;" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="option.value">
-            <input class="form-control" type="checkbox" id="input-checkbox-{{i}}"
+            <input class="form-check-input" type="checkbox" id="input-checkbox-{{i}}"
                 (change)="selectedValue(option, isOptionChecked(option), false)" [checked]="isOptionChecked(option)"
                 value="isOptionChecked(option)" [readonly]="isReadOnly" kendoCheckBox />
 

@@ -28,16 +28,13 @@ export class CardItemComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
-    debugger;
     this.initLimit = this.paginationLimit;
   }
 
   ngOnChanges() {
     if (this.form) {
       Object.keys(this.form.controls).forEach((control: string) => {
-        debugger;
         const typedControl: AbstractControl = this.form.controls[control];
-        debugger;
         const validator = typedControl.validator && typedControl.validator({} as AbstractControl);
         this.controls.push({
           name: control,

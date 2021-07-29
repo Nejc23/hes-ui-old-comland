@@ -27,7 +27,7 @@ export class PlcMeterLimiterComponent implements OnInit {
   excludeIdsParam?: string[];
   registers$: Codelist<string>[];
   public selectedRowsCount: number;
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.SET-LIMITER');
 
   constructor(
     private formBuilder: FormBuilder,

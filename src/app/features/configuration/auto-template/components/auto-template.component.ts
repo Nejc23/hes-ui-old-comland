@@ -51,7 +51,7 @@ export class AutoTemplateComponent implements OnInit {
   public gridOptions;
   public getRowHeight;
 
-  public headerTitle = this.translate.instant('AUTO-TEMPLATES');
+  public headerTitle = this.translate.instant('MENU.AUTO-TEMPLATES');
   public form: FormGroup;
 
   private expadedTemplates: string[] = [];
