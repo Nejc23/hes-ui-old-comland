@@ -166,7 +166,10 @@
         "WILDCARDS-SEARCH-DISABLED": "La recherche de Wildcards est désactivée",
         "WILDCARDS-SEARCH-ENABLED": "La recherche de Wildcards est activée",
         "WITH-TEMPLATE": "Avec template",
-        "WITHOUT-TEMPLATE": "Sans template"
+        "WITHOUT-TEMPLATE": "Sans template",
+        "OVERVIEW": "Overview",
+        "SHOW-MORE": "Show more",
+        "SHOW-LESS": "Show less"
     },
     "DAY": {
         "CURRENT-MONTH": "mois courant",
@@ -343,7 +346,11 @@
         "USERNAME": "Nom de l'utilisateur",
         "VENDOR": "fabricant",
         "WEEK-DAYS": "",
-        "WRAPPER": "Wrapper"
+        "WRAPPER": "Wrapper",
+        "SERIALNUMBER": "Serial number",
+        "ADDRESS": "Address",
+        "TAGS": "Tags",
+        "EXTERNALID": "External Id"
     },
     "GRID": {
         "ACTIVE": "Actif",

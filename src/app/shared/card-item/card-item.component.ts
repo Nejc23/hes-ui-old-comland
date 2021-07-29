@@ -15,10 +15,11 @@ export interface FormData {
 export class CardItemComponent implements OnInit, OnChanges {
   @Input() title = '';
   @Input() buttonLabel = '';
+  @Input() buttonIconName = '';
+
   @Input() withEdit = false;
   @Input() form: FormGroup;
   @Input() paginationLimit;
-
   @Output() buttonClickEvent = new EventEmitter<boolean>();
   initLimit = 0;
 

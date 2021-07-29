@@ -1,9 +1,12 @@
 <div
-  class="tw-inline-flex tw-bg-lightestGray tw-rounded-t-md tw-w-full tw-h-20 tw-p-5 tw-items-center tw-justify-between tw-border tw-border-red-800 tw-border-solid">
+  class="tw-inline-flex tw-bg-lightestGray tw-rounded-t-md tw-w-full tw-h-20 tw-p-5 tw-items-center tw-justify-between tw-border tw-border-solid">
   <div class="tw-text-xl">
     {{ title | translate }}
   </div>
-  <div *ngIf="buttonLabel" (click)="onButtonClicked()">{{ buttonLabel | translate }}</div>
+  <button *ngIf="buttonLabel" (click)="onButtonClicked()" class="tw-inline-flex tw-border-lightGray tw-rounded tw-border tw-border-solid tw-items-center tw-px-2 tw-py-1">
+    <img *ngIf="buttonIconName" class="tw-pr-2" [src]="'assets/images/icons/' + buttonIconName + '.svg'"/>
+    <span class="tw-text-darkGray">{{ buttonLabel | translate }}</span>
+  </button>
 </div>
 <div class="tw-border tw-border-red-800 tw-border-solid tw-border-t-0">
   <ng-container *ngIf="form">
@@ -20,10 +23,10 @@
         <ng-template #notObject>  {{ formData.control.value}} </ng-template>
       </div>
     </div>
-    <button *ngIf="paginationLimit < controls.length" (click)="showMoreItems()" class="tw-w-full tw-text-primary tw-p-5">
+    <button *ngIf="paginationLimit < controls.length" (click)="showMoreItems()" class="tw-w-full tw-text-darkPurple tw-p-5 tw-rounded-b-md">
       {{ 'COMMON.SHOW-MORE' | translate }}
     </button>
-    <button *ngIf="paginationLimit >= controls.length" (click)="showLessItems()" class="tw-w-full tw-text-primary tw-p-5">
+    <button *ngIf="paginationLimit >= controls.length" (click)="showLessItems()" class="tw-w-full tw-text-darkPurple tw-p-5 tw-rounded-t-md">
       {{ 'COMMON.SHOW-LESS' | translate }}
     </button>
   </ng-container>

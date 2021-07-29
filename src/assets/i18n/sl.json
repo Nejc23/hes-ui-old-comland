@@ -166,7 +166,10 @@
         "WILDCARDS-SEARCH-DISABLED": "Iskanje z nadomestnimi znaki ni omogočeno",
         "WILDCARDS-SEARCH-ENABLED": "Iskanje z nadomestnimi znaki je omogočeno",
         "WITH-TEMPLATE": "S konfiguracijo",
-        "WITHOUT-TEMPLATE": "Brez konfiguracije"
+        "WITHOUT-TEMPLATE": "Brez konfiguracije",
+        "OVERVIEW": "Overview",
+        "SHOW-MORE": "Show more",
+        "SHOW-LESS": "Show less"
     },
     "DAY": {
         "CURRENT-MONTH": "Trenutni mesec",
@@ -343,7 +346,11 @@
         "USERNAME": "Uporabniško ime",
         "VENDOR": "proizvajalec",
         "WEEK-DAYS": "",
-        "WRAPPER": "Wrapper"
+        "WRAPPER": "Wrapper",
+        "SERIALNUMBER": "Serial number",
+        "ADDRESS": "Address",
+        "TAGS": "Tags",
+        "EXTERNALID": "External Id"
     },
     "GRID": {
         "ACTIVE": "Active",
