@@ -27,7 +27,7 @@ import { GridCellVendorComponent } from '../../types/components/grid-custom-comp
 import { GridCellTimeOfUseIdComponent } from '../../types/components/grid-custom-components/grid-cell-time-of-use-id.component';
 import { GridCellThresholdComponent } from '../../types/components/grid-custom-components/grid-cell-threshold.component';
 import { GridCellUnitComponent } from '../../registers/components/grid/grid-custom-components/grid-cell-unit.component';
-import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
+import { MeterUnitsListComponent } from '../../types/components/meter-units-list.component';
 import { GridSelectionHeaderComponent } from '../../types/components/grid-custom-components/grid-selection-header.component';
 import { MeterUnitRegistersComponent } from '../../registers/components/meter-unit-registers.component';
 import { RegistersPieChartComponent } from '../../registers/components/chart/registers-pie-chart.component';
@@ -43,7 +43,7 @@ import { PipesModule } from '../../../../shared/pipes/pipes.module';
 @NgModule({
   entryComponents: [],
   declarations: [
-    MeterUnitsTypeComponent,
+    MeterUnitsListComponent,
     // AllForJobComponent,
     ActionFormComponent,
     GridSelectionHeaderComponent,

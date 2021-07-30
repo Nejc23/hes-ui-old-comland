@@ -39,10 +39,10 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-meter-units-type',
-  templateUrl: './meter-units-type.component.html'
+  selector: 'app-meter-units',
+  templateUrl: './meter-units-list.component.html'
 })
-export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
+export class MeterUnitsListComponent implements OnInit, OnDestroy {
   id = 0;
   private paramsSub: Subscription;
   private subscription: Subscription;

@@ -41,9 +41,9 @@ import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 
 @Component({
   selector: 'app-data-concentrator-units',
-  templateUrl: './data-concentrator-units.component.html'
+  templateUrl: './data-concentrator-units-list.component.html'
 })
-export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
+export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   sessionNameForGridState = 'grdStateDCU';
   sessionNameForGridFilter = 'grdLayoutDCU';
 

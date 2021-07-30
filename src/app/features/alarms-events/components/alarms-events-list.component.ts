@@ -4,9 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-alarms-eventss',
-  templateUrl: './alarms-events.component.html'
+  templateUrl: './alarms-events-list.component.html'
 })
-export class AlarmsEventsComponent implements OnInit {
+export class AlarmsEventsListComponent implements OnInit {
   show = false;
 
   constructor(private breadcrumbService: BreadcrumbService, private translate: TranslateService) {}

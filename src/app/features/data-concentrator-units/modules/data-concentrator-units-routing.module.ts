@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
+import { DataConcentratorUnitsListComponent } from '../components/data-concentrator-units-list.component';
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 
 const routes: Routes = [
@@ -18,7 +18,7 @@ const routes: Routes = [
           breadcrumb: null,
           permission: PermissionEnumerator.View_Concentrators
         },
-        component: DataConcentratorUnitsComponent
+        component: DataConcentratorUnitsListComponent
       },
       {
         path: ':id',

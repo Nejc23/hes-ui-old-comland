@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DataConcentratorUnitsRoutingModule } from './data-concentrator-units-routing.module';
-import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
+import { DataConcentratorUnitsListComponent } from '../components/data-concentrator-units-list.component';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
 import { AgGridModule } from '@ag-grid-community/angular';
@@ -26,7 +26,7 @@ import { DcOperationsComponent } from '../components/operations/dc-operations.co
 @NgModule({
   entryComponents: [],
   declarations: [
-    DataConcentratorUnitsComponent,
+    DataConcentratorUnitsListComponent,
     DataConcentratorDetailComponent,
     ActionFormComponent,
     GridSelectionHeaderComponent,
