@@ -48,7 +48,6 @@ export class DataConcentratorDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.breadcrumbService.setPageName(this.translate.instant('DCU.DATA-CONCENTRATOR-UNIT'));
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -62,6 +61,7 @@ export class DataConcentratorDetailComponent implements OnInit {
     if (this.concentratorId.length > 0) {
       this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
         this.data = response;
+        this.breadcrumbService.setPageName(this.data.name);
         this.form = this.createForm();
         this.editForm = this.createEditForm();
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);

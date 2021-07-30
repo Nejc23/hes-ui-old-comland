@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
-import { MeterUnitsOverviewComponent } from '../../overview/components/meter-units-overview.component';
 import { RegistersChartComponent } from '../../registers/components/chart/registers-chart.component';
 import { RegistersColumnChartComponent } from '../../registers/components/chart/registers-column-chart.component';
 import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
@@ -44,7 +43,6 @@ import { PipesModule } from '../../../../shared/pipes/pipes.module';
 @NgModule({
   entryComponents: [],
   declarations: [
-    MeterUnitsOverviewComponent,
     MeterUnitsTypeComponent,
     // AllForJobComponent,
     ActionFormComponent,

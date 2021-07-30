@@ -23,7 +23,7 @@ const routes: Routes = [
       {
         path: ':id',
         data: {
-          breadcrumb: 'BREADCRUMB.CONCENTRATOR',
+          breadcrumb: '',
           permission: PermissionEnumerator.View_Concentrators
         },
         component: DataConcentratorDetailComponent

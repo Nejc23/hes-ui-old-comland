@@ -2,7 +2,6 @@ import { PermissionEnumerator } from './../../../../core/permissions/enumerators
 import { MeterUnitRegistersComponent } from './../../registers/components/meter-unit-registers.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MeterUnitsOverviewComponent } from '../../overview/components/meter-units-overview.component';
 import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
 import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
 
@@ -20,21 +19,6 @@ const routes: Routes = [
           breadcrumb: null
         },
         component: MeterUnitsTypeComponent
-      },
-      {
-        path: 'overview',
-        data: {
-          breadcrumb: 'BREADCRUMB.OVERVIEW'
-        },
-        children: [
-          {
-            path: '',
-            data: {
-              breadcrumb: null
-            },
-            component: MeterUnitsOverviewComponent
-          }
-        ]
       },
       {
         path: 'registers/:deviceId',

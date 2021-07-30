@@ -43,6 +43,7 @@ export class BreadcrumbComponent implements OnInit {
   }
 
   private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Array<Breadcrumb> = []): Array<Breadcrumb> {
+    debugger;
     // If no routeConfig is avalailable we are on the root path
     const label = _.get(route, 'routeConfig.data.breadcrumb', null);
     const path = route.routeConfig ? route.routeConfig.path : '';

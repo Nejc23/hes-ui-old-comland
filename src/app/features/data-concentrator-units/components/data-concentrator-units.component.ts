@@ -225,7 +225,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       selectAll: this.translate.instant('GRID.SELECT-ALL')
     };
 
-    this.bredcrumbService.setPageName(this.headerTitle);
+    this.bredcrumbService.setPageName('');
   }
 
   ngOnDestroy(): void {

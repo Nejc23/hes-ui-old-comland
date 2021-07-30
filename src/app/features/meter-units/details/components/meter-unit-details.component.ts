@@ -245,18 +245,11 @@ export class MeterUnitDetailsComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: this.translate.instant('MENU.METERS'),
+        label: this.translate.instant('MENU.METER-UNITS'),
         params: {},
         url: null
       }
     ];
-
-    breadcrumbs.push({
-      label: this.translate.instant('MENU.METER-UNITS'),
-      params: {},
-      url: null
-    });
-
     this.breadcrumbService.setBreadcrumbs(breadcrumbs);
   }
 

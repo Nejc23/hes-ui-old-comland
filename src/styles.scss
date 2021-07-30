@@ -134,3 +134,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
     max-height: 33.5px;
   }
 }
+
+// todo into component
+ul.k-reset.k-tabstrip-items {
+  position: fixed;
+  top: 105px;
+  border-bottom-width: 1px;
+}
