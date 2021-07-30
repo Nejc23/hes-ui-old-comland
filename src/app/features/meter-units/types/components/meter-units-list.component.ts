@@ -162,7 +162,8 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       text: staticTextService.noFilterAppliedTekst
     };
 
-    this.setTitle(-1);
+    this.breadcrumbService.setPageName('');
+
     // this.paramsSub = route.params.subscribe((params) => {
     // this.id = params.id;
     meterUnitsTypeGridService.meterUnitsTypeId = null;
@@ -355,8 +356,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     } else {
       this.headerTitle = this.staticTextService.headerTitleMeterUnitsType;
     }
-
-    this.breadcrumbService.setPageName(this.headerTitle);
   }
 
   ngOnInit() {

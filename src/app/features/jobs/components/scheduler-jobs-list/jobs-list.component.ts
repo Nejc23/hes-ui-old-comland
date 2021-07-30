@@ -199,7 +199,7 @@ export class JobsListComponent implements OnInit, OnDestroy {
       loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
-    this.breadcrumbService.setPageName(this.headerTitle);
+    this.breadcrumbService.setPageName('');
   }
 
   ngOnDestroy() {

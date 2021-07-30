@@ -97,7 +97,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.data = response;
       this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
-      this.setBreadcrumbs();
       if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
         this.isPlcDevice = true;
       }
@@ -240,17 +239,6 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   get permissionSyncTime() {
     return PermissionEnumerator.Sync_Time;
-  }
-
-  setBreadcrumbs() {
-    const breadcrumbs: Breadcrumb[] = [
-      {
-        label: this.translate.instant('MENU.METER-UNITS'),
-        params: {},
-        url: null
-      }
-    ];
-    this.breadcrumbService.setBreadcrumbs(breadcrumbs);
   }
 
   // --> Operations action click
