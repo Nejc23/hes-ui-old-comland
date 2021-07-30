@@ -1,3 +1,13 @@
+  <div class="sticky">
+<app-page-title *ngIf="data"
+                [status]="data.statusValue"
+                [subtitle]="data.typeValue"
+                [title]="data.name"
+>
+</app-page-title>
+  </div>
+
+
 
 <div *ngIf="data">
   <kendo-tabstrip [keepTabContent]="true" class="tw-py-8">

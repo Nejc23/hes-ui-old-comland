@@ -19,7 +19,8 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
 
 @Component({
   selector: 'app-data-concentrator-detail',
-  templateUrl: './data-concentrator-detail.component.html'
+  templateUrl: './data-concentrator-detail.component.html',
+  styleUrls: ['./data-concentrator-detail.component.scss']
 })
 export class DataConcentratorDetailComponent implements OnInit {
   form: FormGroup;
