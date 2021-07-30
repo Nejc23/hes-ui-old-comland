@@ -5,7 +5,8 @@
       <a [routerLink]="[breadcrumb.url]" role="button" *ngIf="breadcrumb.url">
         <span>{{ breadcrumb.label | translate }}</span>
       </a>
+      <span *ngIf="!breadcrumb.url">{{ breadcrumb.label | translate }}</span>
     </li>
-    <li class="breadcrumb-item">{{ pageName | translate }}</li>
+    <li class="breadcrumb-item" *ngIf="pageName">{{ pageName | translate }}</li>
   </ol>
 </nav>

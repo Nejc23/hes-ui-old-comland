@@ -9,9 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AlarmsEventsListComponent implements OnInit {
   show = false;
 
-  constructor(private breadcrumbService: BreadcrumbService, private translate: TranslateService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.breadcrumbService.setPageName(this.translate.instant('MENU.ALARMS-EVENTS'));
-  }
+  ngOnInit(): void {}
 }

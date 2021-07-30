@@ -6,6 +6,15 @@
   <!-- Page Wrapper -->
   <div id="wrapper">
 
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between py-10 px-5" *ngIf="!detailsPage"
+      [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
+      <div>
+        <app-breadcrumb></app-breadcrumb>
+      </div>
+      <app-top-fixed-nav></app-top-fixed-nav>
+    </nav>
+
+
     <!-- Sidebar -->
     <div class="sidebar sidebar-light shadow d-flex flex-column"
       [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
