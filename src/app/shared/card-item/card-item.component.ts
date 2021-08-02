@@ -3,7 +3,6 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 
 export interface FormData {
   name: string;
-  required: boolean;
   control: AbstractControl;
 }
 
@@ -36,21 +35,13 @@ export class CardItemComponent implements OnInit, OnChanges {
     if (this.form) {
       Object.keys(this.form.controls).forEach((control: string) => {
         const typedControl: AbstractControl = this.form.controls[control];
-        const validator = typedControl.validator && typedControl.validator({} as AbstractControl);
         this.controls.push({
           name: control,
-          required: validator && validator.required,
           control: typedControl
         });
         // should log the form controls value and be typed correctly
       });
     }
-  }
-
-  isRequired(formData: FormData) {
-    if (formData.required) {
-      return 'tw-bg-[#FAFBFC]'; // todo add to config
-    } else return '';
   }
 
   showMoreItems() {

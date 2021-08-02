@@ -18,6 +18,7 @@ module.exports = {
         red: '#E43458', // bad red
         lightGray: '#CED2D9',
         lightestGray: '#F4F6F9',
+        backgroundGray: '#FAFBFC', // details card background color
         black: '#121212', // dark in figma
         lightBlue: '#47A8BD',
         gray: {
@@ -53,6 +54,10 @@ module.exports = {
           800: '#0B236F',
           900: '#041549'
         }
+      },
+      container: {
+        center: true,
+        padding: '2.5rem' // 40px
       }
     }
   },
