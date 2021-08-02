@@ -1,8 +1,9 @@
-<div class="sticky">
+<div class="sticky tw-h-52">
   <app-page-title *ngIf="data"
                   [status]="data.statusValue"
                   [subtitle]="data.typeValue"
                   [title]="data.name"
+                  class="tw-h-52"
   >
   </app-page-title>
 </div>
@@ -16,31 +17,6 @@
 
         <div class="tw-py-5">
           <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 tw-gap-6">
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
-
-            </app-card-item>
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
-
-            </app-card-item>
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
-
-            </app-card-item>
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
-
-            </app-card-item>
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
-
-            </app-card-item>
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">

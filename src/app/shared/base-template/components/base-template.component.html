@@ -1,89 +1,90 @@
-<body id="page-top" [ngClass]="{'sidebar-toggled': app.layout.isMenuCollapsed}">
-  <app-action-preventer>
-  </app-action-preventer>
+<body [ngClass]="{'sidebar-toggled': app.layout.isMenuCollapsed}" id="page-top">
+<app-action-preventer>
+</app-action-preventer>
 
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
+<!-- Page Wrapper -->
+<div id="wrapper">
 
-    <nav class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between py-10 px-5" *ngIf="!detailsPage"
-      [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
-      <div>
-        <app-breadcrumb></app-breadcrumb>
-      </div>
-      <app-top-fixed-nav></app-top-fixed-nav>
-    </nav>
-
-
-    <!-- Sidebar -->
-    <div class="sidebar sidebar-light shadow d-flex flex-column"
-      [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}" (mouseover)="mouseOverNav()"
-      (mouseleave)="mouseLeavesNav()">
-
-      <div class="brand d-flex align-items-center mb-4">
-        <div class="ms-3" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
-          <img class="brand-logo" [src]="getMenuMainLogoUrl()">
-        </div>
-
-
-        <div @navItemsTrigger *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav"
-            class="ms-3 brand-name">
-            <img [src]="getSmallLogoUrl()">
-        </div>
-        <div @navItemsTrigger class="ml-auto me-3"  *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
-          <a class="sidebar-light p-0" [ngClass]="{'text-black-50': app.layout.isMenuCollapsed }" href="javascript:void(0);"
-            (click)="doToggleMenu()" [ngbTooltip]="tipContentMenu">
-            <i class="far fa-bars m-0"></i>
-          </a>
-        </div>
-
-      </div>
-      <!-- Sidebar Toggler (Sidebar) -->
-<!--
-      <div @navItemsTrigger class="mb-2 px-3 py-2" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
-        <i class="far fa-building mr-2"></i>
-        <strong>{{organisation}}</strong>
-      </div> -->
-
-      <ul class="navbar-nav collapsed" *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav">
-        <ng-container *ngFor="let item of sidebarItems; let first = first">
-          <li *ngIf="hasAccess(item)"
-              class="nav-item lh-1 px-2" routerLinkActive="active"
-              [ngClass]="{'active': isRouteActive(item.routeLink)}">
-            <a class="nav-link pl-0 pr-0 text-center"><i class="md-20" [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }">{{item.icon}}</i></a>
-          </li>
-        </ng-container>
-      </ul>
-
-      <ul @navItemsTrigger class="navbar-nav" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
-        <app-sidebar [items]="sidebarItems"></app-sidebar>
-      </ul>
-
-      <div @navItemsTrigger class="mt-auto sidebar-version text-center"
-        *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
-        <small>{{version}}</small><br />
-        <small>{{getAppTitle()}} {{ 'MENU.POWERED-BY' | translate }}</small><br />
-        <small>{{ 'MENU.ALL-RIGHTS RESERVED' | translate }}</small>
-      </div>
+  <nav *ngIf="!detailsPage" [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}"
+       class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between py-10 px-5">
+    <div>
+      <app-breadcrumb></app-breadcrumb>
     </div>
+    <app-top-fixed-nav></app-top-fixed-nav>
+  </nav>
 
-    <div id="content-wrapper" [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}">
-      <!-- Main Content -->
-      <div id="content" class="tw-px-10">
+  <!-- Sidebar -->
+  <div (mouseleave)="mouseLeavesNav()"
+       (mouseover)="mouseOverNav()" [ngClass]="{'toggled': app.layout.isMenuCollapsed && !isMouseOverNav}"
+       class="sidebar sidebar-light shadow d-flex flex-column">
 
-        <!-- Begin Page Content -->
-          <!-- Page -->
-          <router-outlet></router-outlet>
-        <!-- /.container-fluid -->
-
+    <div class="brand d-flex align-items-center mb-4">
+      <div *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav" class="ms-3">
+        <img [src]="getMenuMainLogoUrl()" class="brand-logo">
       </div>
-      <!-- End of Main Content -->
+
+
+      <div *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" @navItemsTrigger
+           class="ms-3 brand-name">
+        <img [src]="getSmallLogoUrl()">
+      </div>
+      <div *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" @navItemsTrigger class="ml-auto me-3">
+        <a (click)="doToggleMenu()" [ngClass]="{'text-black-50': app.layout.isMenuCollapsed }"
+           [ngbTooltip]="tipContentMenu"
+           class="sidebar-light p-0" href="javascript:void(0);">
+          <i class="far fa-bars m-0"></i>
+        </a>
+      </div>
 
     </div>
-    <!-- End of Content Wrapper -->
+    <!-- Sidebar Toggler (Sidebar) -->
+    <!--
+          <div @navItemsTrigger class="mb-2 px-3 py-2" *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav">
+            <i class="far fa-building mr-2"></i>
+            <strong>{{organisation}}</strong>
+          </div> -->
+
+    <ul *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav" class="navbar-nav collapsed">
+      <ng-container *ngFor="let item of sidebarItems; let first = first">
+        <li *ngIf="hasAccess(item)"
+            [ngClass]="{'active': isRouteActive(item.routeLink)}" class="nav-item lh-1 px-2"
+            routerLinkActive="active">
+          <a class="nav-link pl-0 pr-0 text-center"><i [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
+                                                       class="md-20">{{item.icon}}</i></a>
+        </li>
+      </ng-container>
+    </ul>
+
+    <ul *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" @navItemsTrigger class="navbar-nav">
+      <app-sidebar [items]="sidebarItems"></app-sidebar>
+    </ul>
+
+    <div *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" @navItemsTrigger
+         class="mt-auto sidebar-version text-center">
+      <small>{{version}}</small><br />
+      <small>{{getAppTitle()}} {{ 'MENU.POWERED-BY' | translate }}</small><br />
+      <small>{{ 'MENU.ALL-RIGHTS RESERVED' | translate }}</small>
+    </div>
+  </div>
+
+  <div [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}" id="content-wrapper">
+    <!-- Main Content -->
+    <div class="tw-px-10" id="content">
+
+      <!-- Begin Page Content -->
+      <!-- Page -->
+      <router-outlet></router-outlet>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
 
   </div>
-  <!-- End of Page Wrapper -->
+  <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
 </body>
 
 <ng-template #tipContentMenu><span>{{ 'MENU.PIN-COLLAPSE-MENU' | translate }}</span></ng-template>

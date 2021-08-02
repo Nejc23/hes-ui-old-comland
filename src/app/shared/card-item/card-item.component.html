@@ -3,12 +3,13 @@
   <div class="tw-text-xl">
     {{ title | translate }}
   </div>
-  <button *ngIf="buttonLabel" (click)="onButtonClicked()" class="tw-inline-flex tw-border-lightGray tw-rounded tw-border tw-border-solid tw-items-center tw-px-2 tw-py-1">
-    <img *ngIf="buttonIconName" class="tw-pr-2" [src]="'assets/images/icons/' + buttonIconName + '.svg'"/>
-    <span class="tw-text-darkGray">{{ buttonLabel | translate }}</span>
+  <button (click)="onButtonClicked()" *ngIf="buttonLabel"
+          class="tw-inline-flex tw-border-lightGray tw-rounded tw-border tw-border-solid tw-items-center tw-px-2 tw-py-1">
+    <img *ngIf="buttonIconName" [src]="'assets/images/icons/' + buttonIconName + '.svg'" class="tw-pr-2" />
+    <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
   </button>
 </div>
-<div class="tw-border tw-border-red-800 tw-border-solid tw-border-t-0">
+<div class="tw-border tw-border-red-800 tw-border-solid tw-border-t-0 tw-border-b-0">
   <ng-container *ngIf="form">
     <div *ngFor="let formData of controls | slice: 0: paginationLimit ?  paginationLimit: controls.length"
          [ngClass]="isRequired(formData)"
@@ -23,11 +24,17 @@
         <ng-template #notObject>  {{ formData.control.value}} </ng-template>
       </div>
     </div>
-    <button *ngIf="paginationLimit < controls.length" (click)="showMoreItems()" class="tw-w-full tw-text-darkPurple tw-p-5 tw-rounded-b-md">
-      {{ 'COMMON.SHOW-MORE' | translate }}
-    </button>
-    <button *ngIf="paginationLimit >= controls.length" (click)="showLessItems()" class="tw-w-full tw-text-darkPurple tw-p-5 tw-rounded-t-md">
-      {{ 'COMMON.SHOW-LESS' | translate }}
-    </button>
   </ng-container>
 </div>
+<ng-container *ngIf="form">
+  <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
+       class="tw-w-full tw-text-darkPurple tw-p-5 tw-border tw-border-solid tw-rounded-b-md tw-border-lightGray tw-border-t-0 text-center">
+    {{ 'COMMON.SHOW-MORE' | translate }}
+    <i class="fas fa-chevron-down"></i>
+  </div>
+  <div (click)="showLessItems()" *ngIf="paginationLimit >= controls.length"
+       class="tw-w-full tw-text-darkPurple tw-p-5 tw-border tw-border-solid tw-rounded-b-md tw-border-lightGray tw-border-t-0 text-center">
+    {{ 'COMMON.SHOW-LESS' | translate }}
+    <i class="fas fa-chevron-up"></i>
+  </div>
+</ng-container>

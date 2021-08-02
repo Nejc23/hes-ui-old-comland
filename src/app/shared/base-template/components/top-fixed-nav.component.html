@@ -4,38 +4,40 @@
       <i class="far fa-border-all"></i>
     </a>
   </li> -->
-  <li dropdown class="nav-item dropdown">
-    <a dropdownToggle class="nav-link" id="dropdownMenuLang" href="javascript:void(0);" data-bs-toggle="dropdown">
-      <img src="assets/images/icons/languages.svg" class="me-4 pt-1" />
+  <li class="nav-item dropdown" dropdown>
+    <a class="nav-link" data-bs-toggle="dropdown" dropdownToggle href="javascript:void(0);" id="dropdownMenuLang">
+      <img class="me-4 pt-1" src="assets/images/icons/languages.svg" />
     </a>
-    <div *dropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuLang">
+    <div *dropdownMenu aria-labelledby="dropdownMenuLang" class="dropdown-menu dropdown-menu-right">
       <div *ngFor="let lang of languages$">
-        <a class="dropdown-item" href="javascript:void(0);"
-           [ngClass]="addSelectedClass(lang.id)"
-           (click)="selectLang(lang.id)"> {{ 'LANGUAGE.' + lang.id.toUpperCase() | translate }}</a>
+        <a (click)="selectLang(lang.id)" [ngClass]="addSelectedClass(lang.id)"
+           class="dropdown-item"
+           href="javascript:void(0);"> {{ 'LANGUAGE.' + lang.id.toUpperCase() | translate }}</a>
       </div>
     </div>
   </li>
 
-  <li dropdown class="nav-item dropdown">
-    <a dropdownToggle class="nav-link user rounded-circle text-center" id="dropdownUser" href="javascript:void(0);"
-       data-flip="true"
-       data-bs-toggle="dropdown">
+  <li class="nav-item dropdown" dropdown>
+    <a class="nav-link user rounded-circle text-center" data-bs-toggle="dropdown" data-flip="true" dropdownToggle
+       href="javascript:void(0);"
+       id="dropdownUser">
       <small><strong>{{ initials }}</strong></small>
     </a>
-    <ul *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu" aria-labelledby="dropdownUser">
+    <ul *dropdownMenu aria-labelledby="dropdownUser" class="dropdown-menu dropdown-menu-right" role="menu">
       <div class="profile-dialog m-2">
         <div class="row">
           <div class="col-4 d-flex p-0 my-auto align-items-center justify-content-center">
             <div class="rounded-circle text-center">{{initials}}</div>
           </div>
           <div class="col-8">
-            <h5 class="text-truncate mt-1" placement="left" [openDelay]="500" [ngbTooltip]="company"
-                class="mt-1">{{ company }}</h5>
-            <h2 class="text-truncate" placement="left" [openDelay]="500" [ngbTooltip]="userName">{{userName}}</h2>
-            <h5 class="text-truncate" placement="left" [openDelay]="500" [ngbTooltip]="email">{{email}}</h5>
-            <h5 class="logout mt-3"><a href="#" (click)="profile()"><span>{{ 'COMMON.PROFILE' | translate }}</span></a></h5>
-            <h5 class="logout mt-3"><a href="#" (click)="logout()"><span>{{ 'COMMON.SIGN-OUT' | translate }}</span></a></h5>
+            <h5 [ngbTooltip]="company" [openDelay]="500" class="text-truncate mt-1" class="mt-1"
+                placement="left">{{ company }}</h5>
+            <h2 [ngbTooltip]="userName" [openDelay]="500" class="text-truncate" placement="left">{{userName}}</h2>
+            <h5 [ngbTooltip]="email" [openDelay]="500" class="text-truncate" placement="left">{{email}}</h5>
+            <h5 class="logout mt-3"><a (click)="profile()" href="#"><span>{{ 'COMMON.PROFILE' | translate }}</span></a>
+            </h5>
+            <h5 class="logout mt-3"><a (click)="logout()" href="#"><span>{{ 'COMMON.SIGN-OUT' | translate }}</span></a>
+            </h5>
           </div>
         </div>
 

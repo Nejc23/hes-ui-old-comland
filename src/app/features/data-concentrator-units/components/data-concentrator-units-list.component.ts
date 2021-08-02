@@ -252,10 +252,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
       const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
+      return selectedRows && selectedRows.length > 0;
     }
     return false;
   }

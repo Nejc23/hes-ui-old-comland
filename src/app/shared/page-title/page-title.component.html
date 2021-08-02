@@ -1,11 +1,13 @@
-<div class="tw-inline-flex tw-items-center">
-  <div class="tw-text-black tw-text-xl" *ngIf="title">
+<div class="tw-inline-flex tw-items-center tw-h-full">
+  <div *ngIf="title" class="tw-text-black tw-text-xl">
     {{ title }}
   </div>
-  <div class="tw-text-mediumGray tw-text-xl tw-ml-2" *ngIf="subtitle">
+  <div *ngIf="subtitle" class="tw-text-mediumGray tw-text-xl tw-ml-2">
     {{ subtitle }}
   </div>
-  <div *ngIf="status" class="tw-inline-flex tw-ml-4 tw-text-green tw-bg-green tw-bg-opacity-20 rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-items-center tw-capitalize"> <!-- create classes by enum -->
+  <div *ngIf="status"
+       class="tw-inline-flex tw-ml-4 tw-text-green tw-bg-green tw-bg-opacity-20 rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-items-center tw-capitalize">
+    <!-- create classes by enum -->
     {{ status.toLowerCase() }}
   </div>
 </div>
