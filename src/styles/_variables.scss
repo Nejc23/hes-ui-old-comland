@@ -722,7 +722,7 @@ $nav-divider-margin-y: math.div($spacer, 2) !default;
 // Navbar
 
 $navbar-padding-y: math.div($spacer, 4) !default;
-$navbar-padding-x: $spacer !default;
+$navbar-padding-x: 2.5rem !default; // 40px
 
 $navbar-nav-link-padding-x: .5rem !default;
 
