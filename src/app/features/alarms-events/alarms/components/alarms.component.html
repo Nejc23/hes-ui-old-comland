@@ -1,54 +1,55 @@
 <div class="form-row mb-2 ps-2">
-  <button type="button" class="btn btn-light ps-2 pe-2 me-2" (click)="dateRangeChanged()" [ngbTooltip]="tipContentRefresh"><i class="fas fa-sync-alt"></i></button>
+  <button (click)="dateRangeChanged()" [ngbTooltip]="tipContentRefresh" class="btn btn-light ps-2 pe-2 me-2"
+          type="button"><i class="fas fa-sync-alt"></i></button>
   <div class="col-5">
     <app-date-range-picker
-      [startProperty]="startTimeProperty"
+      (valueChange)="dateRangeChanged()"
       [endProperty]="endTimeProperty"
       [form]="form"
-      (valueChange)="dateRangeChanged()">
+      [startProperty]="startTimeProperty">
     </app-date-range-picker>
   </div>
 </div>
 
 <div class="content-body-scroll">
   <div>
-    <ag-grid-angular class="ag-theme-epoint custom-paging"
-      style="width: 100%; height: calc(100% - 25px);"
-      #agGrid
+    <ag-grid-angular #agGrid
+                     (firstDataRendered)="onFirstDataRendered($event)"
+                     (gridReady)="onGridReady($event)"
 
-      [rowData]="rowData"
-      [columnDefs]="columnDefs"
-      domLayout="autoHeight"
-      [frameworkComponents]="frameworkComponents"
-      [modules]="modules"
-      (gridReady)="onGridReady($event)"
-      suppressRowClickSelection="true"
-      [pagination]="true"
-      [paginationPageSize]="selectedPageSize.id"
-      [cacheBlockSize]="selectedPageSize.id"
-      suppressSizeToFit="true"
-      [cacheOverflowSize]="2"
-      [maxConcurrentDatasourceRequests]="2"
-      [maxBlocksInCache]="1"
-      [gridOptions]="gridOptions"
-      [localeText]="localeText"
+                     (gridSizeChanged)="gridSizeChanged()"
+                     (paginationChanged)="onPaginationChange($event)"
+                     [cacheBlockSize]="selectedPageSize.id"
+                     [cacheOverflowSize]="2"
+                     [columnDefs]="columnDefs"
+                     [frameworkComponents]="frameworkComponents"
+                     [gridOptions]="gridOptions"
+                     [localeText]="localeText"
+                     [maxBlocksInCache]="1"
+                     [maxConcurrentDatasourceRequests]="2"
+                     [modules]="modules"
+                     [overlayLoadingTemplate]="overlayLoadingTemplate"
+                     [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+                     [paginationPageSize]="selectedPageSize.id"
+                     [pagination]="true"
+                     [rowData]="rowData"
 
-      [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-      [overlayLoadingTemplate]="overlayLoadingTemplate"
-      (paginationChanged)="onPaginationChange($event)"
-      (firstDataRendered)="onFirstDataRendered($event)"
-      [suppressColumnVirtualisation]="true"
-      (gridSizeChanged)="gridSizeChanged()"
-      >
+                     [suppressColumnVirtualisation]="true"
+                     class="ag-theme-epoint custom-paging"
+                     domLayout="autoHeight"
+                     style="width: 100%; height: calc(100% - 25px);"
+                     suppressRowClickSelection="true"
+                     suppressSizeToFit="true"
+    >
     </ag-grid-angular>
     <div class="ag-paging-panel-selection d-flex">
       <div class="ms-auto">
-        <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
-          [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
+        <app-select-dropdown (selectedValueChanged)="pageSizeChanged($event)" [disabled]="false" [form]="form"
+                             [property]="pageSizeProperty" [selectOptions]="pageSizes">
         </app-select-dropdown>
       </div>
     </div>
   </div>
 </div>
 
-<ng-template #tipContentRefresh><span>{{'ALARMS.REFRESH-ALARMS' | translate }}</span></ng-template>
+<ng-template #tipContentRefresh><span>{{'COMMON.REFRESH-ALARMS' | translate }}</span></ng-template>
