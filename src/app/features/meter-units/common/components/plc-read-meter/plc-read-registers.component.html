@@ -6,7 +6,7 @@
     <ng-container>
       <div class="container">
         <div class="row">
-          <div class="col-4 pl-0">
+          <div class="col-4 ps-0">
             <label labelFor="search" class="ng-star-inserted">{{ 'COMMON.SEARCH-OBJECTS' | translate }}</label>
             <app-input-searcher label="Search registers" [debounceTimeOut]="300" (insertedValue)="insertedValue($event)"
                                 [form]="form"
@@ -61,7 +61,7 @@
               </div>
 
               <div class="help-block" *ngIf="noRegisterSelected">
-                <i class="far fa-info-circle text-danger pr-2"></i><small class="text-danger">{{ requiredText }}</small>
+                <i class="far fa-info-circle text-danger pe-2"></i><small class="text-danger">{{ requiredText }}</small>
               </div>
             </div>
           </div>

@@ -25,7 +25,7 @@ export class PlcMeterRelaysConnectComponent implements OnInit {
   relays$: Codelist<string>[];
 
   public selectedRowsCount;
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.RELAY-CONNECT');
 
   constructor(
     private formBuilder: FormBuilder,

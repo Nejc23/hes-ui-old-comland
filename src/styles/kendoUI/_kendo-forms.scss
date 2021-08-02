@@ -60,17 +60,17 @@ input[type=search].wildcard {
   flex:none;
 
   &.k-switch-on {
-    .k-switch-handle {
-      left: calc(100% - 2em);
-    }
-
     .k-switch-container {
       background-color: $secondary;
     }
   }
 
-  &.k-switch-off .k-switch-container {
-    background-color: $gray-300;
+  &.k-switch-off {
+    .k-switch-container {
+      background-color: $mediumGray;
+    } .k-switch-handle {
+        background-color: white;
+    }
   }
 }
 
@@ -144,7 +144,7 @@ input[type=search].wildcard {
       margin:0;
     }
   }
-  .form-group {
+  .mb-3 { // dirty hack check
     margin-bottom: 0;
   }
 

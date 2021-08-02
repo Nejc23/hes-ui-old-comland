@@ -24,7 +24,7 @@ export class PlcMeterRelaysDisconnectComponent implements OnInit {
   searchParam?: GridSearchParams[];
 
   relays$: Codelist<string>[];
-  actionName = '';
+  actionName = this.translate.instant('PLC-METER.RELAY-DISCONNECT-SELECTED');
 
   public selectedRowsCount: number;
 

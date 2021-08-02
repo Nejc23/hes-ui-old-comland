@@ -1,11 +1,10 @@
 <div class="row">
   <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
     <div class="filter-shadow">
-      <div class="form-group">
+      <div class="mb-3">
         <div class="d-flex mb-3 mt-2">
           <h4 class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" ngbTooltip="{{ 'FORM.REGISTER' | translate }}">{{ 'FORM.REGISTER' | translate }}</h4>
-          <button type="button" class="close ml-auto" (click)="clickShowHideFilter()" aria-label="Close" *ngIf="false">
-            <i class="far fa-times"></i>
+          <button type="button" class="btn-close ms-auto" (click)="clickShowHideFilter()" aria-label="Close" *ngIf="false">
           </button>
         </div>
         <div>
@@ -13,7 +12,7 @@
           [property]="registerSearchProperty" placeholder="{{ 'COMMON.SEARCH' | translate }}"></app-input-searcher>
         </div>
       </div>
-      <div class="form-group filter-scroll-registers">
+      <div class="mb-3 filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
           <app-input-radio [label]="g.groupName" [form]="form" [property]="registerProperty" [translate]="false"
             [options]="g.registerOptions" style="white-space:nowrap" (selectionChanged)="changeRegisterOptionId()" [showTooltip]="true">
@@ -24,12 +23,12 @@
   </div>
 
   <!-- CHECK RANGES -->
-  <div [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }" class="pr-0">
-    <div class="mr-3">
+  <div [ngClass]="{ 'col-10': !hideFilter, 'col-12': hideFilter }" class="pe-0">
+    <div class="me-3">
       <div class="d-flex">
         <button
           type="button"
-          class="btn btn-light pl-3 pr-3 position-relative mr-3"
+          class="btn btn-light pl-3 pe-3 position-relative me-3"
           [ngClass]="{ active: !hideFilter }"
           (click)="clickShowHideFilter()"
           [ngbTooltip]="hideShowFilters"
@@ -41,10 +40,10 @@
         <div class="mt-2">
           <h3 class="mb-0">{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
         </div>
-        <div class="ml-auto">
+        <div class="ms-auto">
           <button
             type="button"
-            class="btn btn-light pl-2 pr-2 mr-0"
+            class="btn btn-light ps-2 pe-2 me-0"
             (click)="onRefresh()"
             placement="left"
             [openDelay]="500"

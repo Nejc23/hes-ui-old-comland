@@ -20,7 +20,7 @@
      *ngIf="!item.hasChildren && hasAccess(item)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
-       class="ml-1 mt-0 mr-3 icon md-20">{{ item.icon }}</i>
+       class="ms-1 mt-0 me-3 icon md-20">{{ item.icon }}</i>
     <span class="title">{{ item.title | translate }}</span>
   </a>
 
@@ -28,9 +28,9 @@
      *ngIf="item.hasChildren && hasActiveChildLinks(item, null)" routerLinkActive="active">
     <i *ngIf="item.icon"
        [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
-       class="ml-1 mt-0 mr-3 icon md-20">{{ item.icon }}</i>
+       class="ms-1 mt-0 me-3 icon md-20">{{ item.icon }}</i>
     <span class="title">{{ item.title | translate }}</span>
-    <span class="arrow ml-auto">
+    <span class="arrow ms-auto">
       <i class="far fa-angle-right"></i>
     </span>
   </a>

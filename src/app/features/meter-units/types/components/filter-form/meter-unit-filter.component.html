@@ -2,8 +2,7 @@
     <form [formGroup]="form">
       <div class="d-flex mb-2">
         <h3 class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" ngbTooltip="{{ 'FILTER.TITLE' | translate }}">{{ 'FILTER.TITLE' | translate }}</h3>
-        <button type="button" class="close ml-auto" (click)="doToggleFilter()" aria-label="Close">
-          <i class="far fa-times"></i>
+        <button type="button" class="btn-close ms-auto" (click)="doToggleFilter()" aria-label="Close">
         </button>
       </div>
       <div class="filter-scroll">
@@ -57,7 +56,7 @@
 
         </fieldset>
 
-        <div class="form-group link mt-2">
+        <div class="mb-3 link mt-2">
           <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
             <span>{{ 'FILTER.CLEAR-FILTERS' | translate }}</span></a>
           </strong>

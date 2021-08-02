@@ -27,7 +27,6 @@ export class PlcMeterLimiterComponent implements OnInit {
   excludeIdsParam?: string[];
   registers$: Codelist<string>[];
   public selectedRowsCount: number;
-  actionName = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -133,7 +132,9 @@ export class PlcMeterLimiterComponent implements OnInit {
         };
         const modalRef = this.modalService.open(StatusJobComponent, options);
         modalRef.componentInstance.requestId = result.requestId;
-        modalRef.componentInstance.jobName = this.actionName;
+        modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SET-LIMITER', {
+          selectedRowsCount: result.deviceIds.length
+        });
         modalRef.componentInstance.deviceCount = result.deviceIds.length;
       },
       () => {} // error

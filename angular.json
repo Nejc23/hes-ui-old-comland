@@ -28,18 +28,17 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              {
-                "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
-              },
               "src/styles.scss"
             ],
             "scripts": [
+              "./node_modules/@popperjs/core/dist/umd/popper.min.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.min.js",
               "node_modules/jquery/dist/jquery.js"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [
-                "src/styles/brand/default"
+                "src/styles/brand/default",
+                "./node_modules/bootstrap/scss"
               ]
             },
             "allowedCommonJsDependencies": [
@@ -53,7 +52,13 @@
               "@progress/kendo-angular-intl/locales/en-GB/all",
               "cronstrue/i18n",
               "cron-validate"
-            ]
+            ],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "develop": {
@@ -283,7 +288,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

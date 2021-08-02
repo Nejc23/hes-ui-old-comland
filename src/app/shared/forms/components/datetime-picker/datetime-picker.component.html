@@ -1,4 +1,4 @@
-<div [ngClass]="{'form-group': !isInline}" [formGroup]="form">
+<div [ngClass]="{'mb-3': !isInline}" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
     {{ 'FORM.' + label.toUpperCase() | translate }}
     <sup *ngIf="required"> *</sup>

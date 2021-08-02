@@ -1,3 +1,4 @@
+@use 'sass:math';
 // Global component styles
 html {
   position: relative;
@@ -22,7 +23,7 @@ body {
 }
 
 #content {
-  margin-top: calc(#{$topbar-base-height} + #{$spacer/2});
+  margin-top: calc(#{$topbar-base-height} + #{math.div($spacer,2)});
 }
 
 /****************************************/
@@ -93,8 +94,8 @@ label {
 }
 
 .grid-actions {
-  .form-group {
-    margin-bottom: 0rem;
+  .mb-3 {
+    margin-bottom: 0 !important; // dirty hack
   }
 }
 
@@ -169,7 +170,7 @@ label {
 }
 
 .modal-header {
-  button.close {
+  button.btn-close {
     height: 72px;
     .far {
       font-weight: 100;

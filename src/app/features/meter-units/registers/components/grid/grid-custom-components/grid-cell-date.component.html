@@ -1,5 +1,5 @@
 <div class="d-flex" *ngIf="params.value">
-  <div class="mr-1 flex-shrink-1 text-truncate" container="body" placement="bottom" [openDelay]="500"
+  <div class="er-1 flex-shrink-1 text-truncate" container="body" placement="bottom" [openDelay]="500"
   ngbTooltip="{{params.value | formatDateTime}}">{{ params.value | formatDateTime }}</div>
 </div>
 <span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>

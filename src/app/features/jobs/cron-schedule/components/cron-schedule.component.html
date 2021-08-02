@@ -3,7 +3,7 @@
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
-          <label class="label-left">{{ 'COMMON.EVERY' | translate }}</label>
+          <label class="label-left pr-2">{{ 'COMMON.EVERY' | translate }}</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="minutesMinutesProperty" [selectOptions]="everyMinutes"
               [disabled]="false">
@@ -18,13 +18,13 @@
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
-          <label class="label-left">{{ 'COMMON.EVERY' | translate }}</label>
+          <label class="label-left pr-2">{{ 'COMMON.EVERY' | translate }}</label>
           <div class="col-2">
             <app-select-input label="Hours" [form]="form" [property]="hourlyHoursProperty" [selectOptions]="everyHours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label class="label-left">:</label>
+          <label class="label-left pr-2">:</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="hourlyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
@@ -39,19 +39,19 @@
     <ng-template kendoTabContent>
       <div>
         <div class="d-flex">
-          <app-input-radio class="label-left" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionEvery"></app-input-radio>
+          <app-input-radio class="label-left pr-2" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionEvery"></app-input-radio>
           <div class="col-2">
             <app-select-input label="Days" [form]="form" [property]="dailyEveryDaysProperty" [selectOptions]="everyDays"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label class="label-left">@</label>
+          <label class="label-left pr-2">@</label>
           <div class="col-2">
             <app-select-input label="Hours" [form]="form" [property]="dailyEveryHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label class="label-left">:</label>
+          <label class="label-left pr-2">:</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="dailyEveryMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
@@ -59,13 +59,13 @@
           </div>
         </div>
         <div class="d-flex">
-          <app-input-radio class="label-left" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionWeekday"></app-input-radio>
+          <app-input-radio class="label-left pr-2" [form]="form" [property]="dailyFrequencyProperty" [options]="dailyOptionWeekday"></app-input-radio>
           <div class="col-2">
             <app-select-input label="Hours" [form]="form" [property]="dailyWeekdayHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label class="label-left">:</label>
+          <label class="label-left pr-2">:</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="dailyWeekdayMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
@@ -83,13 +83,13 @@
           [property]="weekDaysProperty" name="weekDaysMultiselect" [options]="weekDays" [inline]="true">
         </app-input-multiselect>
         <div class="d-flex">
-          <label class="label-left">@</label>
+          <label class="label-left pr-2">@</label>
           <div class="col-2">
             <app-select-input label="Hours" [form]="form" [property]="weeklyHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label class="label-left">:</label>
+          <label class="label-left pr-2">:</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="weeklyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">
@@ -114,13 +114,13 @@
           <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{ 'COMMON.REQUIRED-FIELD' | translate }}</small>
         </div>
         <div class="d-flex mt-3">
-          <label class="label-left">@</label>
+          <label class="label-left pr-2">@</label>
           <div class="col-2">
             <app-select-input label="Hours" [form]="form" [property]="monthlyHoursProperty" [selectOptions]="hours"
               [disabled]="false">
             </app-select-input>
           </div>
-          <label class="label-left">:</label>
+          <label class="label-left pr-2">:</label>
           <div class="col-2">
             <app-select-input label="Minutes" [form]="form" [property]="monthlyMinutesProperty" [selectOptions]="minutes"
               [disabled]="false">

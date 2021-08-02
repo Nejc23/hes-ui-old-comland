@@ -1,11 +1,11 @@
 <div class="modal-header modal-md" *ngIf="modalTitle">
   <div class="modal-warning" *ngIf="warningIcon">
-    <img [src]="'assets/images/icons/warning-icon.svg'" class="mr-3" />
+    <img [src]="'assets/images/icons/warning-icon.svg'" class="me-3" />
   </div>
   <h3 class="modal-title">{{ modalTitle | translate }}</h3>
 
-  <button type="button" class="close" aria-label="Close" (click)="dismiss()">
-    <span aria-hidden="true">&times;</span>
+  <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()">
+    <span aria-hidden="true"></span>
   </button>
 </div>
 

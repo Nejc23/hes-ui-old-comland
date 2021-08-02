@@ -44,8 +44,8 @@
                        (gridSizeChanged)="gridSizeChanged()">
       </ag-grid-angular>
       <div class="ag-paging-panel-selection">
-        <div class="p-2 ml-1" *ngIf="getSelectedCount() > 0">
-          <div class="mr-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+        <div class="p-2 ms-1" *ngIf="getSelectedCount() > 0">
+          <div class="me-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
             <small class="link text-secondary">{{getSelectedCount()}}
               <strong><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
                 <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
@@ -56,7 +56,7 @@
             </small>
           </div>
 
-          <div class="mr-3" *ngIf="checkSelectedAll()">
+          <div class="me-3" *ngIf="checkSelectedAll()">
             <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span>
               ({{getTotalCountWithoutExcludedDisplay()}}) <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
               <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">

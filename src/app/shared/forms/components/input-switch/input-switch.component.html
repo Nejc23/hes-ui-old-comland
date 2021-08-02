@@ -1,10 +1,10 @@
-<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+<div class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
 
   <div *ngIf="label" class="d-flex">
     <kendo-switch formControlName="switch" [name]="property" [id]="controlId" [formControlName]="property"
                   (valueChange)="onValueChanged($event)" container="body" placement="bottom" [openDelay]="500"
                   [ngbTooltip]="label"></kendo-switch>
-    <div class="text-truncate pl-2 pt-1" style="cursor:pointer;" (click)="labelClick()" container="body"
+    <div class="text-truncate ps-2 pt-1" style="cursor:pointer;" (click)="labelClick()" container="body"
          placement="bottom" [openDelay]="500" [ngbTooltip]="label">
       {{ 'FORM.' + label.toUpperCase() | translate }}
     </div>

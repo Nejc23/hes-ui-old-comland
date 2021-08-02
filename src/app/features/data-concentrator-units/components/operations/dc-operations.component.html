@@ -1,6 +1,6 @@
 
     <div *ngIf="showOperations" dropdown class="btn-group" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]">
-      <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-toggle="dropdown"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
+      <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-bs-toggle="dropdown"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
       <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
         <div>
           <a class="dropdown-item custom-hover-display" href="javascript:void(0)"

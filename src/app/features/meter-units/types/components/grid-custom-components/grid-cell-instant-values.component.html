@@ -1,15 +1,14 @@
 <div class="d-flex flex-row grid-cell-link-popup" *ngIf="!areValuesEmpty()" >
     <ng-container *ngFor="let state of disconnectorStateEnum">
-      <div class="mr-1 flex-shrink-1 text-truncate" *ngIf="getDataByType(state).length > 0">
-      <a class="badge px-2"
-         [ngClass]="getClass(state)"
+      <div class="me-1 flex-shrink-1 text-truncate" *ngIf="getDataByType(state).length > 0">
+      <a
          container="body" placement="bottom"
          [placement]="['right-top']"
          [ngbPopover]="contentForValue"
          [autoClose]="'outside'"
          popoverClass="instant-values-popover"
          href="javascript:void(0);">
-        {{ getValuesCount(state) }}
+        <span class="badge px-2" [ngClass]="getClass(state)">{{ getValuesCount(state) }}</span>
       </a>
       </div>
       <ng-template #contentForValue id="contentForValue">

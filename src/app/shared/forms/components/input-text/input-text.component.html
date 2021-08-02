@@ -1,4 +1,4 @@
-<div class="form-group" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+<div class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
 
   <label [attr.for]="property" *ngIf="label">
     {{ 'FORM.' + label.toUpperCase() | translate }}
@@ -12,7 +12,7 @@
     <input [name]="property" [placeholder]="placeholder" [type]="inputType" class="form-control"
            (blur)="onBlur()"
            [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
-    <span *ngIf="labelRight" class="align-self-end ml-3 mb-2">{{ 'FORM.' + labelRight.toUpperCase() | translate }}</span>
+    <span *ngIf="labelRight" class="align-self-end ms-3 mb-2">{{ 'FORM.' + labelRight.toUpperCase() | translate }}</span>
   </div>
 
   <!--Loop through errors-->

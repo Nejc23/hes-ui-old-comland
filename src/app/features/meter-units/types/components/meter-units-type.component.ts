@@ -367,19 +367,19 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.localeText = {
       // for side panel
-      columns: `Columns`,
-      filters: `Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: `page`,
-      more: `more`,
-      to: `to`,
-      of: `of`,
-      next: `next`,
-      last: `last`,
-      first: `first`,
-      previous: `previous`,
-      loadingOoo: `loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
     this.deleteAllRequests();
@@ -846,7 +846,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onTou(selectedGuid: string) {
-    const actionName = `TOU Upload`;
+    const actionName = this.translate.instant('PLC-METER.TOU-UPLOAD');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -858,7 +858,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onUpgrade(selectedGuid: string) {
-    const actionName = `Upload image`;
+    const actionName = this.translate.instant('PLC-METER.UPLOAD-IMAGE');
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -871,14 +871,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetMonitor(selectedGuid: string) {
-    const actionName = `Set monitor`;
+    const actionName = this.translate.instant('PLC-METER.SET-MONITOR');
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
   onSetLimiter(selectedGuid: string) {
-    const actionName = `Set Limiter`;
+    const actionName = this.translate.instant('PLC-METER.SET-LIMITER');
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
@@ -914,7 +914,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysConnect(selectedGuid: string) {
-    const actionName = `Relays Connect`;
+    const actionName = this.translate.instant('PLC-METER.RELAY-CONNECT');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -927,7 +927,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysDisconnect(selectedGuid: string) {
-    const actionName = `Relays Disconnect`;
+    const actionName = this.translate.instant('PLC-METER.RELAY-DISCONNECT');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -940,7 +940,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysState(selectedGuid: string) {
-    const actionName = `Relay State`;
+    const actionName = this.translate.instant('PLC-METER.RELAY-STATE');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -953,7 +953,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onRelaysSetMode(selectedGuid: string) {
-    const actionName = `Relay Mode`;
+    const actionName = this.translate.instant('PLC-METER.RELAY-MODE');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -966,7 +966,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onDisconnectorMode(selectedGuid: string) {
-    const actionName = `Breaker Mode`;
+    const actionName = this.translate.instant('PLC-METER.BREAKER-MODE');
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -979,7 +979,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
   // popup
   onSetDisplaySettings(selectedGuid: string) {
-    const actionName = `Set Display Settings`;
+    const actionName = this.translate.instant('PLC-METER.SET-DISPLAY-SETTINGS');
     const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -1131,7 +1131,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       if (selectedCount === this.totalCount) {
         return `${this.totalCount}`;
       } else {
-        return `${selectedCount} ${`of`} ${this.totalCount}`;
+        return selectedCount + this.translate.instant('GRID.OF') + this.totalCount;
       }
     } else {
       return `${selectedCount}`;

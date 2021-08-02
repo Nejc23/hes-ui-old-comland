@@ -3,7 +3,7 @@
   <div class="range-picker-container">
         <div class="d-flex range-field" [ngClass]="{'focused': focused }" #anchorTextbox>
           <div class="edge-content left">
-            <i class="pl-2 far fa-calendar"></i>
+            <i class="ps-2 far fa-calendar"></i>
           </div>
           <kendo-dateinput [formControlName]="startProperty" [placeholder]="startDatePlaceholder" [format]="format" class="left-date" (valueChange)="dateChanged()" (focus)="onDateFocus()" (blur)="onDateBlur()">
           </kendo-dateinput>
@@ -13,7 +13,7 @@
           <kendo-dateinput [placeholder]="endDatePlaceholder" [formControlName]="endProperty" [format]="format" class="right-date" (valueChange)="dateChanged()" (focus)="onDateFocus()" (blur)="onDateBlur()">
           </kendo-dateinput>
           <div class="edge-content right">
-            <a (click)="togglePopup()"><i class="pr-2 far fa-angle-down" style="cursor:pointer;"></i></a>
+            <a (click)="togglePopup()"><i class="pe-2 far fa-angle-down" style="cursor:pointer;"></i></a>
           </div>
         </div>
         <div class="help-block" *ngIf="showErrors()">
@@ -23,18 +23,18 @@
         </div>
 
     <kendo-popup [ngStyle]="{width: popupWidth}" #popup [anchor]="anchorTextbox" *ngIf="show">
-      <div (onFocus)="show = true" (onBlur)="show = false" class="w-100 pl-2 pr-2">
+      <div (onFocus)="show = true" (onBlur)="show = false" class="w-100 ps-2 pe-2">
         <div class="range-picker-popup">
           <div class="form-row">
             <div class="range-50">
-              <app-datetime-picker #datePickerStart [form]="form" [property]="startProperty" label="Start" (valueChange)="dateChanged()">
+              <app-datetime-picker #datePickerStart [form]="form" [property]="startProperty" label="Start" (datePickerValueChange)="dateChanged()">
               </app-datetime-picker>
             </div>
             <div class="range-separator">
               <i class="fas fa-minus"></i>
             </div>
             <div class="range-50">
-              <app-datetime-picker #datePickerEnd [form]="form" [property]="endProperty" label="End" (valueChange)="dateChanged()">
+              <app-datetime-picker #datePickerEnd [form]="form" [property]="endProperty" label="End" (datePickerValueChange)="dateChanged()">
               </app-datetime-picker>
             </div>
           </div>

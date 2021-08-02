@@ -1,4 +1,4 @@
-<div class="form-group position-relative" [formGroup]="form">
+<div class="mb-3 position-relative" [formGroup]="form">
   <input #searcher id="search" kendoTextBox
   [name]="property" [placeholder]="placeholder" type="search" class="form-control" [ngClass]="{'wildcard': showUseWildcard}" [formControlName]="property" [readonly]="isReadOnly">
   <a *ngIf="showUseWildcard" href="javascript:void(0)" (click)="toggleUseWildcards()">

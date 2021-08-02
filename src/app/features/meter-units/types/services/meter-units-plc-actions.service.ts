@@ -356,7 +356,7 @@ export class MeterUnitsPlcActionsService {
         // on close (CONFIRM)
         response.subscribe(
           (value) => {
-            this.toast.successToast(this.translate.instant('DELETE-SUCCESS'));
+            this.toast.successToast(this.translate.instant('COMMON.DELETE-SUCCESS'));
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
             } else {
@@ -476,7 +476,7 @@ export class MeterUnitsPlcActionsService {
       case MeterUnitsTypeEnum.disconnect:
         response = this.service.postMyGridDisconnectDevice(params);
         operationName = this.translate.instant('COMMON.DISCONNECTOR-DISCONNECT');
-        component.checkboxLabel = this.translate.instant('COMMON.READ-REGISTERS-AFTER') + ' ' + +operationName?.toLowerCase();
+        component.checkboxLabel = this.translate.instant('COMMON.READ-REGISTERS-AFTER') + ' ' + operationName?.toLowerCase();
         component.checkboxField = 'initiateReading';
         component.checkboxValue = true; // TODO from BE
         break;

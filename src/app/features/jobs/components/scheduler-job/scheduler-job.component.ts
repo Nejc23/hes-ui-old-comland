@@ -150,7 +150,7 @@ export class SchedulerJobComponent {
         if (!this.addJobsForUser[i].cssClasses) {
           this.addJobsForUser[i].cssClasses = '';
         }
-        this.addJobsForUser[i].cssClasses += ' border-left';
+        this.addJobsForUser[i].cssClasses += ' border-start';
       }
     }
   }

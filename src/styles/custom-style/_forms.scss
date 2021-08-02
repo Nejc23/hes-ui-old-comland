@@ -1,5 +1,5 @@
 .form-control.ng-invalid.ng-dirty {
-  border: 1px solid $danger;
+  border: 1px solid $danger !important;
 }
 
 input[type='radio']:checked + label {
@@ -134,7 +134,7 @@ label {
     padding-top: 6px;
   }
 
-  .left-date {
+  .start-date {
     width: 127px;
     .k-dateinput-wrap {
       width: 127px;

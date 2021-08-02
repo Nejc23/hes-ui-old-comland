@@ -1,5 +1,5 @@
 <div *ngIf="params.value" class="d-flex">
-  <div *ngIf="params.value.toLowerCase().trim() !== 'none'" [openDelay]="500" class="mr-1 flex-shrink-1 text-truncate"
+  <div *ngIf="params.value.toLowerCase().trim() !== 'none'" [openDelay]="500" class="me-1 flex-shrink-1 text-truncate"
        container="body" ngbTooltip="{{params.value }}"
        placement="bottom">{{ params.value }}</div>
 

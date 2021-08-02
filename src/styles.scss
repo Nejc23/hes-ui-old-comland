@@ -1,7 +1,7 @@
 // Tailwind currently disabled - datatable border issue
-//@import 'tailwindcss/base';
-//@import 'tailwindcss/components';
-//@import 'tailwindcss/utilities';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @import "styles/font-awsome/css/all.min.css";
 @import "styles/material";
@@ -11,21 +11,125 @@
 /* import Bootstrap files */
 @import "styles/../../node_modules/bootstrap/scss/functions";
 @import "styles/variables";
-
 @import "styles/../../node_modules/bootstrap/scss/mixins";
-
-@import "styles/bootstrap";
+// TODO CHECK COMPONENTS IF SOMETHING IS NOT USED
 @import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
+@import 'styles/bootstrap';
 
 @import "styles/global";
 @import "styles/navs";
-
 @import "styles/kendoUI";
 @import "styles/ag-grid";
-
 @import "styles/custom-style";
-
 
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// tailwind border issue
+*, ::before, ::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: hidden;
+}
+
+// bs5 hacks
+.form-inline .form-control {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+}
+
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row>.col, .form-row>[class*=col-] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.input-group-prepend {
+  display: flex;
+  margin-right: -1px;
+}
+// bs5 hacks
+
+// bs override
+.modal-header {
+  padding: 0 1.714rem;
+}
+
+.modal-body {
+  padding: 0 1.714rem;
+}
+
+// bs override
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
+  color: $gray-900;
+  background-color: #cbd0df;
+  border-color: #c3c8da;
+}
+
+.badge-success {
+  background-color: $success;
+  color: white;
+}
+
+.badge-info {
+  background-color: $info;
+  color: white;
+}
+
+.badge-dark {
+  background-color: $dark;
+  color: #fff !important;
+}
+
+.badge-secondary {
+  color: #fff !important;
+  background-color: $secondary;
+}
+
+.badge-primary {
+  color: #fff !important;
+  background-color: $primary;
+}
+
+//.dropdown-item.active, .dropdown-item:active {
+//   background-color: transparent;
+//   color: $primary;
+// }
+
+// check
+.mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.pl-0 {
+  margin-right: 0.5rem !important;
+}
+
+.pl-3 {
+  padding-left: 0.75rem;
+}
+.pr-3 {
+  padding-right: 0.75rem;
+}
+// temp BS fix
+.col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-auto, .col-lg, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-auto, .col-md, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md-auto, .col-sm, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-auto {
+  padding-right: 1rem;
+  padding-left: 1rem;
+}
+
+// bs override
+
+// small screen issue fix
+.grid-actions {
+  .btn-light {
+    max-height: 33.5px;
+  }
+}

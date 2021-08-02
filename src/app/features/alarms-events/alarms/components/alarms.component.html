@@ -1,5 +1,5 @@
-<div class="form-row mb-2 pl-2">
-  <button type="button" class="btn btn-light pl-2 pr-2 mr-2" (click)="dateRangeChanged()" [ngbTooltip]="tipContentRefresh"><i class="fas fa-sync-alt"></i></button>
+<div class="form-row mb-2 ps-2">
+  <button type="button" class="btn btn-light ps-2 pe-2 me-2" (click)="dateRangeChanged()" [ngbTooltip]="tipContentRefresh"><i class="fas fa-sync-alt"></i></button>
   <div class="col-5">
     <app-date-range-picker
       [startProperty]="startTimeProperty"
@@ -42,7 +42,7 @@
       >
     </ag-grid-angular>
     <div class="ag-paging-panel-selection d-flex">
-      <div class="ml-auto">
+      <div class="ms-auto">
         <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
           [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
         </app-select-dropdown>
