@@ -3,7 +3,7 @@
 html {
   position: relative;
   min-height: 100%;
-  font-size: 14px;
+  font-size: 16px; // 16px == 1rem
 }
 
 body {
@@ -164,6 +164,7 @@ label {
   & table th {
     padding: 0 10px 5px !important;
   }
+
   thead {
     position: static;
   }
@@ -172,6 +173,7 @@ label {
 .modal-header {
   button.btn-close {
     height: 72px;
+
     .far {
       font-weight: 100;
     }
