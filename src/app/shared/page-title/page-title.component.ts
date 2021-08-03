@@ -12,9 +12,7 @@ export class PageTitleComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.status = 'ACTIVE';
-  }
+  ngOnInit(): void {}
 
   addBgColor() {
     switch (this.status) {
