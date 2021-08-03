@@ -1,9 +1,10 @@
-<div class="sticky">
+<div *ngIf="data && tabstrip?.tablist" [style.width.px]="addWidth()" class="sticky">
   <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
-    <app-page-title *ngIf="data"
-                    [status]="data.statusValue"
-                    [subtitle]="data.typeValue"
-                    [title]="data.name"
+    <app-page-title
+      [status]="data.statusValue"
+      [subtitle]="data.typeValue"
+      [title]="data.name"
+      class="tw-h-52"
     >
     </app-page-title>
 
@@ -12,14 +13,14 @@
   </div>
 </div>
 
-<div *ngIf="data">
-  <kendo-tabstrip [keepTabContent]="true" class="tw-py-8">
+<div *ngIf="data" class="tw-py-10">
+  <kendo-tabstrip [keepTabContent]="true" class="tw-pt-5">
 
     <kendo-tabstrip-tab [selected]="true"
                         title="{{ 'COMMON.OVERVIEW' | translate }}">
       <ng-template kendoTabContent>
 
-        <div class="tw-py-5">
+        <div class="tw-py-10">
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"

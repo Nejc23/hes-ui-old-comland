@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class PageTitleComponent implements OnInit {
   @Input() title = '';
   @Input() subtitle = '';
-  @Input() status: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE'; // todo emum
+  @Input() status: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE'; // todo check -> enum
 
   constructor() {}
 

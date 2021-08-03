@@ -1,11 +1,12 @@
-::ng-deep ul.k-reset.k-tabstrip-items {
+::ng-deep ul.k-reset.k-tabstrip-items { // sticky tabs
   position: sticky;
-  top: 136px;
+  top: 10.875rem;
 }
 
 .sticky {
   @apply tw-fixed;
   @apply tw-top-0;
   @apply tw-bg-white;
-  @apply tw-w-full;
+  @apply tw-h-44;
+  @apply tw-z-40;
 }

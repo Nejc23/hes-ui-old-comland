@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -16,6 +16,7 @@ import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
+import { TabStripComponent } from '@progress/kendo-angular-layout';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -23,6 +24,8 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
 export class DataConcentratorDetailComponent implements OnInit {
+  @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
+
   form: FormGroup;
   editForm: FormGroup;
 
@@ -47,6 +50,66 @@ export class DataConcentratorDetailComponent implements OnInit {
     private modalService: ModalService,
     private translate: TranslateService
   ) {}
+
+  get nameProperty() {
+    return nameOf<DcuForm>((o) => o.name);
+  }
+
+  get serialNumberProperty() {
+    return nameOf<DcuForm>((o) => o.serialNumber);
+  }
+
+  get ipProperty() {
+    return nameOf<DcuForm>((o) => o.ip);
+  }
+
+  get portProperty() {
+    return nameOf<DcuForm>((o) => o.port);
+  }
+
+  get userNameProperty() {
+    return nameOf<DcuForm>((o) => o.userName);
+  }
+
+  get typeProperty() {
+    return nameOf<DcuForm>((o) => o.type);
+  }
+
+  get vendorProperty() {
+    return nameOf<DcuForm>((o) => o.manufacturer);
+  }
+
+  get statusProperty() {
+    return nameOf<DcuForm>((o) => o.status);
+  }
+
+  get addressProperty() {
+    return nameOf<DcuForm>((o) => o.address);
+  }
+
+  get tagsProperty() {
+    return nameOf<DcuForm>((o) => o.tags);
+  }
+
+  get macProperty() {
+    return nameOf<DcuForm>((o) => o.mac);
+  }
+
+  get latitudeProperty() {
+    return nameOf<DcuForm>((o) => o.latitude);
+  }
+
+  get longitudeProperty() {
+    return nameOf<DcuForm>((o) => o.longitude);
+  }
+
+  get externalIdProperty() {
+    return nameOf<DcuForm>((o) => o.externalId);
+  }
+
+  get permissionEdit() {
+    return PermissionEnumerator.Manage_Concentrators;
+  }
 
   ngOnInit() {
     this.concentratorId = this.route.snapshot.paramMap.get('id');
@@ -109,62 +172,6 @@ export class DataConcentratorDetailComponent implements OnInit {
       [this.macProperty]: [this.data ? this.data.mac : null],
       [this.userNameProperty]: [this.data ? this.data.username : null]
     });
-  }
-
-  get nameProperty() {
-    return nameOf<DcuForm>((o) => o.name);
-  }
-
-  get serialNumberProperty() {
-    return nameOf<DcuForm>((o) => o.serialNumber);
-  }
-
-  get ipProperty() {
-    return nameOf<DcuForm>((o) => o.ip);
-  }
-
-  get portProperty() {
-    return nameOf<DcuForm>((o) => o.port);
-  }
-
-  get userNameProperty() {
-    return nameOf<DcuForm>((o) => o.userName);
-  }
-
-  get typeProperty() {
-    return nameOf<DcuForm>((o) => o.type);
-  }
-
-  get vendorProperty() {
-    return nameOf<DcuForm>((o) => o.manufacturer);
-  }
-
-  get statusProperty() {
-    return nameOf<DcuForm>((o) => o.status);
-  }
-
-  get addressProperty() {
-    return nameOf<DcuForm>((o) => o.address);
-  }
-
-  get tagsProperty() {
-    return nameOf<DcuForm>((o) => o.tags);
-  }
-
-  get macProperty() {
-    return nameOf<DcuForm>((o) => o.mac);
-  }
-
-  get latitudeProperty() {
-    return nameOf<DcuForm>((o) => o.latitude);
-  }
-
-  get longitudeProperty() {
-    return nameOf<DcuForm>((o) => o.longitude);
-  }
-
-  get externalIdProperty() {
-    return nameOf<DcuForm>((o) => o.externalId);
   }
 
   fillData(): DcuForm {
@@ -240,15 +247,18 @@ export class DataConcentratorDetailComponent implements OnInit {
     }
   }
 
-  get permissionEdit() {
-    return PermissionEnumerator.Manage_Concentrators;
-  }
-
   public onTabSelect(e) {
     console.log(e);
   }
 
   editButtonClicked() {
     this.editDcu();
+  }
+
+  addWidth() {
+    if (this.tabstrip?.tablist?.nativeElement?.offsetWidth) {
+      return this.tabstrip?.tablist?.nativeElement?.offsetWidth;
+    }
+    return window.innerWidth;
   }
 }
