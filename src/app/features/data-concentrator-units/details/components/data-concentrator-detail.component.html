@@ -1,11 +1,15 @@
-<div class="sticky tw-h-52">
-  <app-page-title *ngIf="data"
-                  [status]="data.statusValue"
-                  [subtitle]="data.typeValue"
-                  [title]="data.name"
-                  class="tw-h-52"
-  >
-  </app-page-title>
+<div class="sticky">
+  <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
+    <app-page-title *ngIf="data"
+                    [status]="data.statusValue"
+                    [subtitle]="data.typeValue"
+                    [title]="data.name"
+    >
+    </app-page-title>
+
+    <app-dc-operations [guid]="concentratorId" [requestModel]="null"
+                       [selectedItemsCount]="1" [showOperations]="true"></app-dc-operations>
+  </div>
 </div>
 
 <div *ngIf="data">

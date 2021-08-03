@@ -11,6 +11,13 @@
 /* import Bootstrap files */
 @import "styles/../../node_modules/bootstrap/scss/functions";
 @import "styles/variables";
+
+// tailwind theme variables
+:root {
+  --color-primary: #{$primary};;
+  --color-secondary: #{$secondary};;
+}
+
 @import "styles/../../node_modules/bootstrap/scss/mixins";
 // TODO CHECK COMPONENTS IF SOMETHING IS NOT USED
 @import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";

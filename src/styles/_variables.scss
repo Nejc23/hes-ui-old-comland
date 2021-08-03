@@ -1162,7 +1162,7 @@ $print-body-min-width: map-get($grid-breakpoints, "lg") !default;
 // Custom spacing Variables
 
 // Change below variable if the height of the navbar changes
-$topbar-base-height: 5.714rem;
+$topbar-base-height: 5rem; // 80px
 // Change below variable to change the width of the sidenav
 $sidebar-base-width: 20rem;
 // Change below variable to change the width of the sidenav when collapsed
