@@ -1,4 +1,4 @@
-<div *ngIf="data && tabstrip?.tablist" [style.width.px]="addWidth()" class="sticky">
+<div *ngIf="data" [style.width.px]="addWidth()" class="sticky">
   <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
     <app-page-title
       [status]="data.statusValue"
@@ -21,7 +21,7 @@
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
-          <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
+          <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">

@@ -1,6 +1,6 @@
 export interface DataConcentratorUnit {
   concentratorId: string;
-  statusValue: string;
+  statusValue: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE';
   statusId: number;
   name: string;
   typeValue: string;

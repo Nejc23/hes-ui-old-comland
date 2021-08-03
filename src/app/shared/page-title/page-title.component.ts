@@ -12,5 +12,18 @@ export class PageTitleComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.status = 'ACTIVE';
+  }
+
+  addBgColor() {
+    switch (this.status) {
+      case 'INACTIVE':
+        return 'tw-bg-red';
+      case 'ACTIVE':
+        return 'tw-bg-green';
+      default:
+        return 'tw-bg-black';
+    }
+  }
 }

@@ -259,6 +259,5 @@ export class DataConcentratorDetailComponent implements OnInit {
     if (this.tabstrip?.tablist?.nativeElement?.offsetWidth) {
       return this.tabstrip?.tablist?.nativeElement?.offsetWidth;
     }
-    return window.innerWidth;
   }
 }
