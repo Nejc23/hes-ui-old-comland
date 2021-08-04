@@ -1,12 +1,13 @@
 <nav aria-label="breadcrumb">
-  <ol class="breadcrumb" *ngIf="showBreadcrumb()">
-    <li class="breadcrumb-item" *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last"
-        [ngClass]="{'active': (last || breadcrumb.url === null)}">
-      <a [routerLink]="[breadcrumb.url]" role="button" *ngIf="breadcrumb.url">
-        <span>{{ breadcrumb.label | translate }}</span>
-      </a>
-      <span *ngIf="!breadcrumb.url">{{ breadcrumb.label | translate }}</span>
-    </li>
-    <li class="breadcrumb-item" *ngIf="pageName">{{ pageName | translate }}</li>
-  </ol>
+  <div *ngIf="showBreadcrumb()" class="tw-inline-flex">
+    <div *ngFor="let breadcrumb of breadcrumbs; let first = first; let last = last"
+         [ngClass]="{'active': (last || breadcrumb.url === null)}"
+         class="breadcrumb-item tw-text-mediumGray">
+      <div *ngIf="breadcrumb.url" [routerLink]="[breadcrumb.url]" role="button">
+        <span class="tw-text-mediumGray">{{ breadcrumb.label | translate }}</span>
+      </div>
+      <div *ngIf="!breadcrumb.url" class="breadcrumb-item tw-text-mediumGray">{{ breadcrumb.label | translate }}</div>
+    </div>
+    <div *ngIf="pageName" class="breadcrumb-item tw-text-mediumGray">{{ pageName | translate }}</div>
+  </div>
 </nav>
