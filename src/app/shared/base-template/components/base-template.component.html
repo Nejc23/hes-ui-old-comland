@@ -7,7 +7,7 @@
 <div id="wrapper">
 
   <nav *ngIf="!detailsPage" [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}"
-       class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between py-10 px-10">
+       class="navbar navbar-expand-lg navbar-dark fixed-top justify-content-between">
     <div>
       <app-breadcrumb></app-breadcrumb>
     </div>
@@ -48,7 +48,7 @@
     <ul *ngIf="app.layout.isMenuCollapsed && !isMouseOverNav" class="navbar-nav collapsed">
       <ng-container *ngFor="let item of sidebarItems; let first = first">
         <li *ngIf="hasAccess(item)"
-            [ngClass]="{'active': isRouteActive(item.routeLink)}" class="nav-item lh-1 px-2"
+            [ngClass]="{'active': isRouteActive(item.routeLink)}" class="nav-item lh-1 tw-px-2"
             routerLinkActive="active">
           <a class="nav-link pl-0 pr-0 text-center"><i
             [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
@@ -71,7 +71,7 @@
 
   <div [ngClass]="{'menu-collapsed': app.layout.isMenuCollapsed}" id="content-wrapper">
     <!-- Main Content -->
-    <div class="tw-px-10" id="content">
+    <div class="tw-mx-10" id="content">
 
       <!-- Begin Page Content -->
       <!-- Page -->
