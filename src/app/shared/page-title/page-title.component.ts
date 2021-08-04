@@ -14,14 +14,14 @@ export class PageTitleComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  addBgColor() {
+  addClass() {
     switch (this.status) {
       case 'INACTIVE':
-        return 'tw-bg-red';
+        return 'inactive';
       case 'ACTIVE':
-        return 'tw-bg-green';
+        return 'active';
       default:
-        return 'tw-bg-black';
+        return 'undefined';
     }
   }
 }

@@ -1,0 +1,17 @@
+.active {
+  @apply tw-text-green;
+  @apply tw-bg-green;
+  @apply tw-bg-opacity-20;
+}
+
+.inactive {
+  @apply tw-text-red;
+  @apply tw-bg-red;
+  @apply tw-bg-opacity-20;
+}
+
+.undefined {
+  @apply tw-bg-black;
+  @apply tw-text-black;
+  @apply tw-bg-opacity-20;
+}
