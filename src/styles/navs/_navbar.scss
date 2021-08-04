@@ -5,6 +5,10 @@
   transition: margin-left .3s;
   width: auto;
 
+  .breadcrumb-item {
+    min-width: 80px;
+  }
+
   &.menu-collapsed {
     margin-left: $sidebar-collapsed-width !important;
   }
@@ -32,20 +36,20 @@
   }
 
   .profile-dialog {
-    min-width:320px;
+    min-width: 320px;
 
     .row {
-      margin:0;
+      margin: 0;
     }
 
     .rounded-circle {
       background-color: $primary;
       width: calc((13px * 2) + (26px * 1.5));
       color: white;
-      font-size:26px;
-      padding-top:13px;
-      padding-bottom:13px;
-      margin:0;
+      font-size: 26px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      margin: 0;
     }
 
     .logout a span {

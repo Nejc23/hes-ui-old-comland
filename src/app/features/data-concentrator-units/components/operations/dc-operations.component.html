@@ -1,9 +1,10 @@
-<div *ngIf="showOperations" [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]" appHideIfAllPermissionsUnauthorized class="btn-group"
+<div *ngIf="showOperations" [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]"
+     appHideIfAllPermissionsUnauthorized class="btn-group"
      dropdown>
   <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="operationsDropDown"
           type="button"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
-  <div (click)="$event.stopPropagation();" *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
-    <div>
+  <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
+    <div class="tw-pr-5">
       <a (click)="onSynchronizeTime()" [permission]="permissionSynchronizeTime"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>

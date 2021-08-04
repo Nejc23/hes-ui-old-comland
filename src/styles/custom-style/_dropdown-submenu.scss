@@ -1,82 +1,89 @@
 .dropdown-submenu {
-    position: relative;
+  position: relative;
 
-    a.disabled {
-      pointer-events: none;
-      cursor: default;
-    }
+  a.disabled {
+    pointer-events: none;
+    cursor: default;
   }
-  .dropdown-submenu a {
+}
+
+.dropdown-submenu a {
+  color: $dropdown-link-color;
+}
+
+.dropdown-submenu:hover a {
+  color: $primary;
+}
+
+.dropdown-submenu > .dropdown-menu {
+  top: 0;
+  left: -85%; // bs5 hack
+  padding-right: 50px;
+  margin-top: -6px;
+  margin-left: -10px;
+  // -webkit-border-radius: 0 6px 6px 6px;
+  // -moz-border-radius: 0 6px 6px;
+  // border-radius: 0 6px 6px 6px;
+  & a {
     color: $dropdown-link-color;
   }
-  .dropdown-submenu:hover a {
+
+  &:hover > a {
     color: $primary;
   }
 
-  .dropdown-submenu>.dropdown-menu {
-    top: 0;
-    left: 100%;
-    margin-top: -6px;
-    margin-left: -1px;
-   // -webkit-border-radius: 0 6px 6px 6px;
-   // -moz-border-radius: 0 6px 6px;
-   // border-radius: 0 6px 6px 6px;
-    & a  {
+  .dropdown-item {
+    & a {
       color: $dropdown-link-color;
     }
-    &:hover> a {
+
+    &:hover > a {
       color: $primary;
     }
+  }
+}
 
-    .dropdown-item {
-      & a  {
-      color: $dropdown-link-color;
-      }
-      &:hover> a {
-        color: $primary;
-      }
-    }
-  }
-  
-  .dropdown-submenu:hover>.dropdown-menu {
-    display: block;
-  }
-   
-  .dropdown-submenu
-  .dropdown-toggle { &::after {
-      width: 1rem;
-      text-align: center;
+.dropdown-submenu:hover > .dropdown-menu {
+  display: block;
+}
+
+.dropdown-submenu
+.dropdown-toggle {
+  &::after {
+    width: 1rem;
+    text-align: center;
     // float: right;
-      position: absolute;
-      vertical-align: 0;
-      right: 1rem;
-      border: 0;
-      font-weight: 400;
-      font-family: "Font Awesome 5 Pro";
-      content: '\f105';
-    }
-    &.show {
-      z-index: 9999; // go over the title bar
-    }
+    position: absolute;
+    vertical-align: 0;
+    right: 1rem;
+    border: 0;
+    font-weight: 400;
+    font-family: "Font Awesome 5 Pro";
+    content: '\f105';
   }
- 
-  .dropdown-submenu:hover>::after {
-    border-left-color: #fff;
-    color: $primary;
+
+  &.show {
+    z-index: 9999; // go over the title bar
   }
-  
-  .dropdown-submenu.pull-left {
-    float: none;
-  }
-  
-  .dropdown-submenu.pull-left>.dropdown-menu {
-    left: -100%;
-    margin-left: 10px;
+}
+
+.dropdown-submenu:hover > ::after {
+  border-left-color: #fff;
+  color: $primary;
+}
+
+.dropdown-submenu.pull-left {
+  float: none;
+}
+
+.dropdown-submenu.pull-left > .dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
   //  -webkit-border-radius: 6px 0 6px 6px;
   //  -moz-border-radius: 6px 0 6px 6px;
   //  border-radius: 6px 0 6px 6px;
-    position: absolute;
-    overflow:visible;
-    color: $dropdown-link-color;
-  }
+  position: absolute;
+  overflow: visible;
+  color: $dropdown-link-color;
+}
 

@@ -15,8 +15,8 @@
             triggers="hover" type="button">
       <i class="far fa-ellipsis-h"></i>
     </button>
-    <div (click)="$event.stopPropagation();" *dropdownMenu aria-labelledby="dropdownMenuButton"
-         class="dropdown-menu dropdown-menu-end">
+    <div (click)="$event.stopPropagation();" aria-labelledby="dropdownMenuButton"
+         class="dropdown-menu">
       <div [permission]="permissionSynchronizeTime" appHideIfPermissionUnauthorized>
         <a (click)="onSynchronizeTime()" class="dropdown-item"
            href="javascript:void(0);"><span>{{'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>
