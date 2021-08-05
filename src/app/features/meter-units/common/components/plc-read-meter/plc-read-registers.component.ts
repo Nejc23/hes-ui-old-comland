@@ -12,7 +12,7 @@ import { DateTimeRange } from '../../../../../shared/forms/interfaces/date-time-
 import * as _ from 'lodash';
 import { RegistersSelectService } from '../../../../../core/repository/services/registers-select/registers-select.service';
 import * as moment from 'moment';
-import { dateDisplayFormat, dateOnlyServerFormat } from '../../../../../shared/forms/consts/date-format';
+import { dateOnlyServerFormat } from '../../../../../shared/forms/consts/date-format';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
 import {
@@ -20,6 +20,7 @@ import {
   SchedulableRegistersType
 } from '../../../../../core/repository/interfaces/registers-select/schedulable-registers-type.interface';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../../../environments/environment';
 
 @Component({
   selector: 'app-plc-read-registers',
@@ -72,8 +73,8 @@ export class PlcReadRegistersComponent implements OnInit {
   ) {
     this.form = this.createForm();
 
-    const startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
-    const endDateFormatted = moment().format(dateDisplayFormat);
+    const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
+    const endDateFormatted = moment().format(environment.dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
@@ -166,12 +167,12 @@ export class PlcReadRegistersComponent implements OnInit {
     }
 
     const startDate =
-      moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
+      moment(this.form.controls.startDate.value, environment.dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.startTime.value +
       ':00';
     const endDate =
-      moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateOnlyServerFormat) +
+      moment(this.form.controls.endDate.value, environment.dateDisplayFormat).format(dateOnlyServerFormat) +
       ' ' +
       this.form.controls.endTime.value +
       ':00';
