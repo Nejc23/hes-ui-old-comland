@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as moment from 'moment';
+import { environment } from '../../../../environments/environment';
 
 @Pipe({
   name: 'formatDateTime'
@@ -11,6 +12,6 @@ export class FormatDateTimePipe implements PipeTransform {
     if (!value) {
       return '';
     }
-    return moment(value).format('L') + ' ' + moment(value).format('LT');
+    return moment(value).format(environment.dateDisplayFormat) + ' ' + moment(value).format(environment.timeFormatLong);
   }
 }
