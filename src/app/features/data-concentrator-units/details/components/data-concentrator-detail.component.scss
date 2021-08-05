@@ -1,5 +1,5 @@
-.dcu-tabs ::ng-deep ul.k-reset.k-tabstrip-items.ng-tns-c313-2.ng-star-inserted {
-  position: sticky;
+.dcu-tabs ::ng-deep ul.k-reset.k-tabstrip-items {
+  position: sticky !important;
   top: 10.875rem;
   @apply tw-bg-white;
 }
