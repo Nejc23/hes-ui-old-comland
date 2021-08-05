@@ -24,7 +24,7 @@ export interface EventRegisterDefinition {
   requestId?: string;
   registerId: string;
   registerStatus: string;
-  eventRegisterValues: RegisterValue[];
+  eventRegisterValues: EventRegisterValue[];
 }
 
 export interface ProfileDefinition {
@@ -55,3 +55,7 @@ export interface ValueWithUnit {
   value: string;
   unit: string;
 }
+
+export type EventRegisterValue = RegisterValue & {
+  value?: number;
+};
