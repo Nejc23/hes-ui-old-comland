@@ -12,7 +12,6 @@ import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { AddMuFormComponent } from '../../common/components/add-mu-form/add-mu-form.component';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -22,15 +21,13 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'meter-unit-details.component.html'
 })
 export class MeterUnitDetailsComponent implements OnInit {
-  private deviceId;
   public saveError;
-
-  private requestModel;
-
   public data: MeterUnitDetails;
   public form: FormGroup;
   plcProtocols = ['DC450G3', 'AC750', 'AmeraDC'];
   isPlcDevice = false;
+  private deviceId;
+  private requestModel;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -45,66 +42,9 @@ export class MeterUnitDetailsComponent implements OnInit {
     private translate: TranslateService
   ) {}
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      this.deviceId = params.deviceId;
-      this.requestModel = {
-        deviceIds: [this.deviceId],
-        filter: null,
-        search: null,
-        excludeIds: null,
-        InitiateReading: false // TODO get data from BE
-      };
-    });
-
-    // get MeterUnit
-    this.getData();
-  }
-
   // form - rights
   get formFunctionality() {
     return FunctionalityEnumerator.MU;
-  }
-
-  public editMeterUnit() {
-    const options: NgbModalOptions = {
-      size: 'lg'
-    };
-
-    const modalRef = this.modalService.open(AddMuFormComponent, options);
-    const component: AddMuFormComponent = modalRef.componentInstance;
-    component.plcDevice = this.isPlcDevice;
-
-    if (this.data) {
-      modalRef.componentInstance.setFormEdit(this.data, options);
-    }
-
-    modalRef.result
-      .then((result) => {
-        if (result) {
-          this.data = result;
-        }
-      })
-      .catch(() => {});
-  }
-
-  getData() {
-    if (!this.deviceId || this.deviceId.length === 0) {
-      // this.form = this.createForm();
-      return;
-    }
-
-    this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
-      this.data = response;
-      this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
-      if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
-        this.isPlcDevice = true;
-      }
-    });
-  }
-
-  fillData(): MeterUnitDetailsForm {
-    return null;
   }
 
   get nameProperty() {
@@ -143,8 +83,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     return nameOf<MeterUnitDetailsForm>((o) => o.address);
   }
 
-  // permission rights
-
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
   }
@@ -160,6 +98,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionFwUpgrade() {
     return PermissionEnumerator.Meter_FW_Upgrade;
   }
+
+  // permission rights
 
   get permissionDisconnectorConnect() {
     return PermissionEnumerator.Disconnector_Connect;
@@ -239,6 +179,63 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   get permissionSyncTime() {
     return PermissionEnumerator.Sync_Time;
+  }
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      this.deviceId = params.deviceId;
+      this.requestModel = {
+        deviceIds: [this.deviceId],
+        filter: null,
+        search: null,
+        excludeIds: null,
+        InitiateReading: false // TODO get data from BE
+      };
+    });
+
+    // get MeterUnit
+    this.getData();
+  }
+
+  public editMeterUnit() {
+    const options: NgbModalOptions = {
+      size: 'lg'
+    };
+
+    const modalRef = this.modalService.open(AddMuFormComponent, options);
+    const component: AddMuFormComponent = modalRef.componentInstance;
+    component.plcDevice = this.isPlcDevice;
+
+    if (this.data) {
+      modalRef.componentInstance.setFormEdit(this.data, options);
+    }
+
+    modalRef.result
+      .then((result) => {
+        if (result) {
+          this.data = result;
+        }
+      })
+      .catch(() => {});
+  }
+
+  getData() {
+    if (!this.deviceId || this.deviceId.length === 0) {
+      // this.form = this.createForm();
+      return;
+    }
+
+    this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
+      this.data = response;
+      this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
+      if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
+        this.isPlcDevice = true;
+      }
+    });
+  }
+
+  fillData(): MeterUnitDetailsForm {
+    return null;
   }
 
   // --> Operations action click

@@ -1,15 +1,11 @@
-import { BreadcrumbService } from '../../../shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-alarms-eventss',
+  selector: 'app-alarms-events',
   templateUrl: './alarms-events-list.component.html'
 })
-export class AlarmsEventsListComponent implements OnInit {
+export class AlarmsEventsListComponent {
   show = false;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
