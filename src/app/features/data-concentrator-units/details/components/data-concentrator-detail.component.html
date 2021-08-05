@@ -21,12 +21,16 @@
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
+          <app-card-item [chartData]="[1, 2, 3, 5]" [gaugeValues]="[99.9, 96, 55, 44]" [title]="'Reading statistics'">
+
+          </app-card-item>
           <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
 
             </app-card-item>
+
           </div>
         </div>
 
