@@ -1,21 +1,21 @@
-<div class="card-item">
+<div class="app-card-item">
   <div
-    class="tw-inline-flex tw-bg-lightestGray tw-rounded-t-md tw-w-full tw-h-20 tw-p-5 tw-items-center tw-justify-between tw-border tw-border-solid">
+    class="app-card-header">
     <div class="tw-text-xl">
       {{ title | translate }}
     </div>
     <button (click)="onButtonClicked()" *ngIf="buttonLabel"
-            class="tw-inline-flex tw-border-lightGray tw-rounded tw-border tw-border-solid tw-items-center tw-px-2 tw-py-1">
+            class="app-card-button">
       <img *ngIf="buttonIconName" [src]="'assets/images/icons/' + buttonIconName + '.svg'" class="tw-pr-2" />
       <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
     </button>
   </div>
-  <div class="tw-border tw-border-red-800 tw-border-solid tw-border-t-0 tw-border-b-0">
+  <div class="app-card-body">
     <ng-container *ngIf="form">
       <div
         *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
         [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : ''"
-        class="tw-inline-flex tw-justify-between tw-px-6 tw-w-full tw-h-12 tw-items-center tw-border-b tw-border-solid tw-border-lightGray">
+        class="app-card-row">
         <div class="tw-text-darkGray">
           {{ 'FORM.' + formData.name.toUpperCase() | translate }}
         </div>
@@ -30,12 +30,12 @@
   </div>
   <ng-container *ngIf="form">
     <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
-         class="tw-w-full tw-text-primary tw-p-5 tw-border tw-border-solid tw-rounded-b-md tw-border-lightGray tw-border-t-0 text-center tw-cursor-pointer">
+         class="app-card-show-more-button">
       {{ 'COMMON.SHOW-MORE' | translate }}
       <i class="fas fa-chevron-down"></i>
     </div>
     <div (click)="showLessItems()" *ngIf="paginationLimit >= controls.length"
-         class="tw-w-full tw-text-primary tw-p-5 tw-border tw-border-solid tw-rounded-b-md tw-border-lightGray tw-border-t-0 text-center tw-cursor-pointer">
+         class="app-card-show-more-button">
       {{ 'COMMON.SHOW-LESS' | translate }}
       <i class="fas fa-chevron-up"></i>
     </div>

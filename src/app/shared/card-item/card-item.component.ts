@@ -33,6 +33,7 @@ export class CardItemComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.form) {
+      this.controls = [];
       Object.keys(this.form.controls).forEach((control: string) => {
         const typedControl: AbstractControl = this.form.controls[control];
         this.controls.push({
