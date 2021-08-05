@@ -91,6 +91,7 @@ import { CardItemComponent } from './card-item/card-item.component';
 import { PageTitleComponent } from './page-title/page-title.component';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
 import { TagElementComponent } from './tag-element/tag-element.component';
+import { CircularGaugeModule } from '@progress/kendo-angular-gauges';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -199,7 +200,8 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       extend: true,
       defaultLanguage: 'en'
-    })
+    }),
+    CircularGaugeModule
   ],
   declarations: [
     BaseTemplateComponent,

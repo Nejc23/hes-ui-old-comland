@@ -9,6 +9,7 @@
   @apply tw-justify-between;
   @apply tw-border;
   @apply tw-border-solid;
+  @apply tw-border-lightGray;
 }
 
 .app-card-button {
@@ -23,6 +24,7 @@
 }
 
 .app-card-body {
+  @apply tw-border-lightGray;
   @apply tw-border;
   @apply tw-border-solid;
   @apply tw-border-t-0;

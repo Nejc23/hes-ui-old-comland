@@ -70,6 +70,7 @@
     "@progress/kendo-angular-upload": "^7.1.1",
     "@progress/kendo-data-query": "^1.5.5",
     "@progress/kendo-drawing": "^1.10.1",
+    "@progress/kendo-angular-gauges": "^4.1.0",
     "@progress/kendo-licensing": "^1.2.0",
     "@progress/kendo-theme-bootstrap": "^4.40.1",
     "@progress/kendo-theme-default": "latest",
