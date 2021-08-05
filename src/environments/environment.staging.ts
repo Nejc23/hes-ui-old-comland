@@ -6,6 +6,7 @@ export const environment = {
   cookiePath: '/',
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',
+  dateDisplayFormat: 'DD. MM. YYYY',
   dateFormat: 'dd.MM.yyyy',
   fistDay: 1, // 1 == first day is monday
   timeFormat: 'HH:mm',

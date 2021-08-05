@@ -4,6 +4,7 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Module } from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid } from 'src/environments/config';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   templateUrl: 'registers-grid.component.html',
@@ -25,24 +26,28 @@ export class RegistersGridComponent implements OnInit, OnChanges {
 
   @Input() categorization: string;
 
-  constructor(private registersGridService: RegistersGridService, private sidebarToggleService: SidebarToggleService) {}
+  constructor(
+    private registersGridService: RegistersGridService,
+    private sidebarToggleService: SidebarToggleService,
+    private translate: TranslateService
+  ) {}
 
   ngOnInit() {
     this.localeText = {
       // for side panel
-      columns: `Columns`,
-      filters: `Filters`,
+      columns: this.translate.instant('GRID.COLUMNS'),
+      filters: this.translate.instant('GRID.FILTERS'),
 
       // for filter panel
-      page: `page`,
-      more: `more`,
-      to: `to`,
-      of: `of`,
-      next: `next`,
-      last: `last`,
-      first: `first`,
-      previous: `previous`,
-      loadingOoo: `loading...`
+      page: this.translate.instant('GRID.PAGE'),
+      more: this.translate.instant('GRID.MORE'),
+      to: this.translate.instant('GRID.TO'),
+      of: this.translate.instant('GRID.OF'),
+      next: this.translate.instant('GRID.NEXT'),
+      last: this.translate.instant('GRID.LAST'),
+      first: this.translate.instant('GRID.FIRST'),
+      previous: this.translate.instant('GRID.PREVIOUS'),
+      loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
     this.sidebarToggleService.eventEmitterToggleMenu.subscribe(() => {
