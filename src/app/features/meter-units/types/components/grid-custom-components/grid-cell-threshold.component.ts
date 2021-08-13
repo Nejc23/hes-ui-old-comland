@@ -30,7 +30,7 @@ export class GridCellThresholdComponent implements ICellRendererAngularComp {
     if (this.params?.value?.value !== undefined) {
       if (!this.params.value.value.toLocaleLowerCase().includes('not')) {
         if (!isNaN(Number(this.params.value.value))) {
-          var numberValue = Number(this.params.value.value);
+          const numberValue = Number(this.params.value.value);
           this.thresholdValue = numberValue.toString() + ' ' + this.params.value.unit;
         } else {
           this.thresholdValue = this.params.value.value + ' ' + this.params.value.unit;

@@ -10,9 +10,7 @@ import { Language, languages } from 'src/environments/config';
 export class LanguageService {
   public selectedLang: Language;
 
-  constructor(private translate: TranslateService, public intlService: IntlService, private router: Router) {
-    this.translate.onLangChange.subscribe((x) => this.refreshComponents());
-  }
+  constructor(private translate: TranslateService, public intlService: IntlService, private router: Router) {}
 
   selectLang(lang: string) {
     if (lang !== this.selectedLang?.id) {
@@ -33,12 +31,5 @@ export class LanguageService {
       return languages.find((lng) => lng.id == 'en');
     }
     return languages.find((lng) => lng.id == lang);
-  }
-
-  private refreshComponents(): void {
-    const prev = this.router.url;
-    this.router.navigate(['/language-switch']).then((data) => {
-      this.router.navigate([prev]);
-    });
   }
 }
