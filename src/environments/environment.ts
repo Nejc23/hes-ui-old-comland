@@ -14,6 +14,7 @@ export const environment = {
   fistDay: 1, // 1 == first day is monday
   timeFormat: 'HH:mm',
   timeFormatLong: 'HH:mm:ss',
+  decimalsFormat: 4,
   kendoChartCategoryDateFormats: {
     minutes: 't',
     hours: 't', // h:mm tt for en-US
