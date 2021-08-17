@@ -92,6 +92,7 @@ import { PageTitleComponent } from './page-title/page-title.component';
 import { PageLayoutComponent } from './page-layout/page-layout.component';
 import { TagElementComponent } from './tag-element/tag-element.component';
 import { CircularGaugeModule } from '@progress/kendo-angular-gauges';
+import { MiniCardItemComponent } from './mini-card-item/mini-card-item.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -165,7 +166,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     StatusJobComponent,
     ActiveJobsListComponent,
     PageTitleComponent,
-    CardItemComponent
+    CardItemComponent,
+    MiniCardItemComponent
   ],
   imports: [
     CommonModule,
@@ -277,7 +279,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CardItemComponent,
     PageTitleComponent,
     PageLayoutComponent,
-    TagElementComponent
+    TagElementComponent,
+    MiniCardItemComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

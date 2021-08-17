@@ -19,11 +19,9 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() withEdit = false;
   @Input() form: FormGroup;
   @Input() paginationLimit;
-  @Input() gaugeValues = [];
-  @Input() chartData = [];
   @Output() buttonClickEvent = new EventEmitter<boolean>();
+
   initLimit = 0;
-  colors = [];
   controls: Array<FormData> = [];
   private PAGINATION_INCREMENT = 4;
 
@@ -31,17 +29,6 @@ export class CardItemComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.initLimit = this.paginationLimit;
-    this.colors = [
-      {
-        to: 66,
-        color: '#E43458'
-      },
-      {
-        from: 66,
-        to: 100,
-        color: '#37A350'
-      }
-    ];
   }
 
   ngOnChanges() {

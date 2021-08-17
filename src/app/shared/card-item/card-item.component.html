@@ -27,27 +27,8 @@
         </div>
       </div>
     </ng-container>
-
-    <div *ngIf="gaugeValues.length > 0 || chartData"
-         class="tw-inline-flex tw-h-44 tw-items-center tw-justify-between tw-w-full rounded-bottom-border">
-      <ng-container *ngFor="let value of gaugeValues">
-        <kendo-circulargauge [colors]="colors" [scale]="{ max: 100 }" [value]="value" class="tw-h-20 tw-w-20">
-          <ng-template kendoCircularGaugeCenterTemplate let-value="value">
-            {{ value }}%
-          </ng-template>
-        </kendo-circulargauge>
-      </ng-container>
-
-      <div class="tw-h-40 card-item-graph">
-        <kendo-chart>
-          <kendo-chart-series>
-            <kendo-chart-series-item [data]="chartData" type="column">
-            </kendo-chart-series-item>
-          </kendo-chart-series>
-        </kendo-chart>
-      </div>
-    </div>
   </div>
+
   <ng-container *ngIf="form">
     <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
          class="app-card-show-more-button">

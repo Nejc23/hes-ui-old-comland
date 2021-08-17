@@ -62,7 +62,3 @@
   @apply tw-rounded-b-md;
   @apply tw-border-lightGray;
 }
-
-.card-item-graph ::ng-deep .k-chart, .k-stockchart {
-  height: initial !important;
-}
