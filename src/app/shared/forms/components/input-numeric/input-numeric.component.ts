@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-input-numeric',
@@ -16,8 +17,8 @@ export class InputNumericComponent implements OnInit {
   @Input() labelRight: string;
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)
   @Input() showSpinners = false;
-  @Input() decimals = 2;
-  @Input() format = '#.## \\%';
+  @Input() decimals = environment.decimalsFormat;
+  @Input() format = '#.' + '#'.repeat(environment.decimalsFormat);
   @Input() min = 0;
   @Input() max = 100;
   @Input() step = 0;
@@ -27,6 +28,14 @@ export class InputNumericComponent implements OnInit {
   @Output() valueChange: EventEmitter<number> = new EventEmitter();
 
   constructor(private formUtils: FormsUtilsService) {}
+
+  get formControl(): AbstractControl {
+    return this.form.get(this.property);
+  }
+
+  get required(): boolean {
+    return this.formUtils.hasFormControlRequiredField(this.formControl);
+  }
 
   ngOnInit() {
     if (!this.form) {
@@ -41,14 +50,6 @@ export class InputNumericComponent implements OnInit {
     if (!this.showSpinners) {
       this.showSpinners = false;
     }
-  }
-
-  get formControl(): AbstractControl {
-    return this.form.get(this.property);
-  }
-
-  get required(): boolean {
-    return this.formUtils.hasFormControlRequiredField(this.formControl);
   }
 
   showErrors(): boolean {
