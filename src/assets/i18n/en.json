@@ -169,7 +169,8 @@
     "WITHOUT-TEMPLATE": "Without template",
     "OVERVIEW": "Overview",
     "SHOW-MORE": "Show more",
-    "SHOW-LESS": "Show less"
+    "SHOW-LESS": "Show less",
+    "METER-STATUS": "Meter status"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",

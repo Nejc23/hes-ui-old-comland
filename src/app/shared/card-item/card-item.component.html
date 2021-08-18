@@ -28,23 +28,30 @@
       </div>
     </ng-container>
 
-    <!--    <ng-container *ngIf="meterUnitData">-->
+    <div *ngIf="meterUnitData.length > 0">
 
-    <!--      <div *ngFor="let data of meterUnitData">-->
-    <!--        {{ data.name }}-->
-    <!--      </div>-->
+      <div class="tw-inline-flex tw-w-full">
 
-    <!--      <ngx-charts-pie-chart-->
-    <!--        [customColors]="meterStatusGraphColors"-->
-    <!--        [doughnut]="true"-->
-    <!--        [labels]="false"-->
-    <!--        [legend]="false"-->
-    <!--        [results]="meterUnitData"-->
-    <!--        [view]="unitGraphSize"-->
-    <!--        class="unit-pie-chart"-->
-    <!--      >-->
-    <!--      </ngx-charts-pie-chart>-->
-    <!--    </ng-container>-->
+        <div class="tw-w-1/2">
+          <div *ngFor="let data of meterUnitData">
+            {{ data.name }}
+          </div>
+        </div>
+
+        <div class="tw-w-1/2">
+          <ngx-charts-pie-chart
+            [customColors]="meterStatusGraphColors"
+            [doughnut]="true"
+            [labels]="false"
+            [legend]="false"
+            [results]="meterUnitData"
+          >
+          </ngx-charts-pie-chart>
+        </div>
+      </div>
+
+
+    </div>
   </div>
 
   <ng-container *ngIf="form && showMoreButton">

@@ -37,15 +37,15 @@ export class CardItemComponent implements OnInit, OnChanges {
   meterStatusGraphColors = [
     {
       name: 'Installed',
-      value: '#2ECC71'
+      value: '#50B16733'
     },
     {
       name: 'Installing',
-      value: '#FFB800'
+      value: '#E9BD4A33'
     },
     {
       name: 'Awaiting',
-      value: '#8B6DFF'
+      value: '#981D7833'
     },
     {
       name: 'Lost',
