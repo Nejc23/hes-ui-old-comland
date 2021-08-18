@@ -1,26 +1,32 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.SET-LIMITER' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  <div [innerHTML]="'PLC-METER.SET-LIMITER' | translate:{selectedRowsCount: selectedRowsCount}" modal-header></div>
 
   <div modal-body>
     <ng-container>
-      <form class="form-horizontal" [formGroup]="form">
+      <form [formGroup]="form" class="form-horizontal">
         <div class="form-row">
           <div class="col-12">
-            <app-select-input label="REGISTER" [form]="form" [property]="registerProperty" [selectOptions]="registers$">
+            <app-select-input [form]="form" [property]="registerProperty" [selectOptions]="registers$" label="REGISTER">
             </app-select-input>
           </div>
         </div>
         <div class="form-row">
           <div class="col-12">
-            <app-input-numeric [label]="'Threshold-normal'" [form]="form" [property]="tresholdNormalProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="4294967295"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" labelRight="W"></app-input-numeric>
+            <app-input-numeric [allowShowError]="true" [form]="form" [isReadOnly]="false"
+                               [label]="'Threshold-normal'"
+                               [max]="null" [min]="0"
+                               [property]="tresholdNormalProperty" [showSpinners]="false" [step]="0"
+                               labelRight="W"></app-input-numeric>
           </div>
         </div>
         <div class="form-row">
           <div class="col-12">
-            <app-input-numeric [label]="'Threshold-emergency'" [form]="form" [property]="tresholdEmergencyProperty" [showSpinners]="false" [decimals]="0" [min]="0" [max]="4294967295"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" labelRight="W"></app-input-numeric>
+            <app-input-numeric [allowShowError]="true" [form]="form" [isReadOnly]="false"
+                               [label]="'Threshold-emergency'"
+                               [max]="null" [min]="0"
+                               [property]="tresholdEmergencyProperty" [showSpinners]="false" [step]="0"
+                               labelRight="W"></app-input-numeric>
           </div>
         </div>
         <!--<div class="form-row">
@@ -35,18 +41,18 @@
               [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" i18n-label labelRight=""></app-input-numeric>
           </div>
         </div>-->
-        <div class="text-danger" *ngIf="form.errors && form.errors['atLeastOneRequired'] == true"><small>
+        <div *ngIf="form.errors && form.errors['atLeastOneRequired'] == true" class="text-danger"><small>
           <span>{{ 'PLC-METER.SET-ONE-THRESHOLD' | translate }}</span></small></div>
       </form>
     </ng-container>
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onSet()">
+        <button (click)="onSet()" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
