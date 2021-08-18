@@ -37,27 +37,35 @@ export class CardItemComponent implements OnInit, OnChanges {
   meterStatusGraphColors = [
     {
       name: 'Installed',
-      value: '#50B16733'
+      value: '#50B167'
     },
     {
       name: 'Installing',
-      value: '#E9BD4A33'
+      value: '#E9BD4A'
     },
     {
       name: 'Awaiting',
-      value: '#981D7833'
-    },
-    {
-      name: 'Lost',
-      value: '#2CD8C5'
-    },
-    {
-      name: 'Other',
-      value: '#E85AFF'
+      value: '#981D78'
     },
     {
       name: 'Blacklist',
-      value: '#000000'
+      value: '#C748A6'
+    },
+    {
+      name: 'Deinstalled',
+      value: '#E180C8'
+    },
+    {
+      name: 'Disappeared',
+      value: '#053876'
+    },
+    {
+      name: 'Lost',
+      value: '#1C5BA8'
+    },
+    {
+      name: 'Other',
+      value: '#5992D7'
     }
   ];
   private PAGINATION_INCREMENT = 4;
@@ -98,5 +106,12 @@ export class CardItemComponent implements OnInit, OnChanges {
 
   onButtonClicked() {
     this.buttonClickEvent.emit(true);
+  }
+
+  addBgColor(name: string) {
+    let exist = this.meterStatusGraphColors.find((color) => color.name.toLowerCase() === name.toLowerCase());
+    if (exist) {
+      return exist.value;
+    }
   }
 }

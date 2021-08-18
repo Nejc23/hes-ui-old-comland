@@ -32,9 +32,12 @@
 
       <div class="tw-inline-flex tw-w-full">
 
-        <div class="tw-w-1/2">
-          <div *ngFor="let data of meterUnitData">
-            {{ data.name }}
+        <div class="tw-w-1/2 tw-my-6">
+          <div *ngFor="let data of meterUnitData"
+               [ngClass]="'bg-' + data.name.toLowerCase() + ' opacity'" class="meter-status-item">
+            <div [ngClass]="'bg-' + data.name.toLowerCase()" class="dot"></div>
+            <div [style.color]="addBgColor(data.name)">{{ data.name }}</div>
+            <div class="tw-text-black tw-font-bold">{{ data.value }}</div>
           </div>
         </div>
 
@@ -42,8 +45,8 @@
           <ngx-charts-pie-chart
             [customColors]="meterStatusGraphColors"
             [doughnut]="true"
+            [explodeSlices]="true"
             [labels]="false"
-            [legend]="false"
             [results]="meterUnitData"
           >
           </ngx-charts-pie-chart>
@@ -66,4 +69,6 @@
       <i class="fas fa-chevron-up"></i>
     </div>
   </ng-container>
+
+  <div *ngIf="!showMoreButton" class="bottom-border"></div>
 </div>

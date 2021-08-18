@@ -133,7 +133,7 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
 
-        // mock
+        // mock todo object
         this.meterStatusData = [
           {
             name: 'Installed',

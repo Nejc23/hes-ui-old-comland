@@ -23,6 +23,14 @@ module.exports = {
         backgroundGray: '#FAFBFC', // details card background color
         black: '#121212', // dark in figma
         lightBlue: '#47A8BD',
+        installed: '#50B167',
+        installing: '#E9BD4A',
+        deinstalled: '#E180C8',
+        awaiting: '#981D78',
+        blacklist: '#C748A6',
+        disappeared: '#053876',
+        lost: '#1C5BA8',
+        other: '#5992D7',
         gray: {
           100: '#F4F4F6',
           200: '#CFD1D8',
