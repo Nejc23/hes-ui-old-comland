@@ -6,6 +6,11 @@ export interface FormData {
   control: AbstractControl;
 }
 
+export enum CardItemType {
+  FORM = 'form',
+  CHART = 'pie-chart'
+}
+
 @Component({
   selector: 'app-card-item',
   templateUrl: './card-item.component.html',
@@ -18,17 +23,52 @@ export class CardItemComponent implements OnInit, OnChanges {
 
   @Input() withEdit = false;
   @Input() form: FormGroup;
+  @Input() showMoreButton = false;
   @Input() paginationLimit;
   @Output() buttonClickEvent = new EventEmitter<boolean>();
+  @Input() type: CardItemType;
+  @Input() meterUnitData = [];
 
+  cardTypeItemEnum = CardItemType;
   initLimit = 0;
   controls: Array<FormData> = [];
+  unitGraphSize = [208, 208];
+
+  meterStatusGraphColors = [
+    {
+      name: 'Installed',
+      value: '#2ECC71'
+    },
+    {
+      name: 'Installing',
+      value: '#FFB800'
+    },
+    {
+      name: 'Awaiting',
+      value: '#8B6DFF'
+    },
+    {
+      name: 'Lost',
+      value: '#2CD8C5'
+    },
+    {
+      name: 'Other',
+      value: '#E85AFF'
+    },
+    {
+      name: 'Blacklist',
+      value: '#000000'
+    }
+  ];
   private PAGINATION_INCREMENT = 4;
 
   constructor() {}
 
   ngOnInit(): void {
-    this.initLimit = this.paginationLimit;
+    if (this.showMoreButton) {
+      this.initLimit = this.paginationLimit;
+    }
+    // MOCK DATA
   }
 
   ngOnChanges() {
@@ -42,6 +82,9 @@ export class CardItemComponent implements OnInit, OnChanges {
         });
         // should log the form controls value and be typed correctly
       });
+      if (!this.showMoreButton) {
+        this.initLimit = this.controls.length;
+      }
     }
   }
 

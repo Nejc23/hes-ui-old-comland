@@ -74,6 +74,7 @@
     "@progress/kendo-licensing": "^1.2.0",
     "@progress/kendo-theme-bootstrap": "^4.40.1",
     "@progress/kendo-theme-default": "latest",
+    "@swimlane/ngx-charts": "^18.0.1",
     "@types/jquery": "^3.5.6",
     "@types/lodash": "^4.14.171",
     "angular-cd-timer": "^1.1.0",

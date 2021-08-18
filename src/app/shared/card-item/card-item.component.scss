@@ -43,6 +43,10 @@
   @apply tw-border-lightGray;
 }
 
+//.app-card-body :last-of-type {
+//  @apply tw-rounded-b;
+//}
+
 .app-card-show-more-button {
   @apply tw-w-full;
   @apply tw-text-primary;

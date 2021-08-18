@@ -39,6 +39,8 @@ export class DataConcentratorDetailComponent implements OnInit {
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
 
+  meterStatusData = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -130,6 +132,42 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.editForm = this.createEditForm();
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
+
+        // mock
+        this.meterStatusData = [
+          {
+            name: 'Installed',
+            value: 7
+          },
+          {
+            name: 'Installing',
+            value: 5
+          },
+          {
+            name: 'Awaiting',
+            value: 2
+          },
+          {
+            name: 'Lost',
+            value: 1
+          },
+          {
+            name: 'Other',
+            value: 6
+          },
+          {
+            name: 'Blacklist',
+            value: 3
+          },
+          {
+            name: 'Disappeared',
+            value: 5
+          },
+          {
+            name: 'Deinstalled',
+            value: 8
+          }
+        ];
       });
     } else {
       this.form = this.createForm();

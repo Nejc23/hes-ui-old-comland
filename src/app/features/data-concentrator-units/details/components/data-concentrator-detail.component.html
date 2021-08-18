@@ -21,13 +21,32 @@
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
+
+          <!--          <div class="tw-inline-flex tw-w-full">-->
+          <!--            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'" [type]="'chart'">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="'gauge'">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="96.9" [label]="'24h'" [type]="'gauge'">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="65" [label]="'48h'" [type]="'gauge'">-->
+          <!--            </app-mini-card-item>-->
+          <!--          </div>-->
+
           <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
 
             </app-card-item>
+
+            <!--            <app-card-item [meterUnitData]="meterStatusData">-->
+            <!--            </app-card-item>-->
 
           </div>
         </div>

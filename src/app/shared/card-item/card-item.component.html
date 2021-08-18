@@ -27,9 +27,27 @@
         </div>
       </div>
     </ng-container>
+
+    <!--    <ng-container *ngIf="meterUnitData">-->
+
+    <!--      <div *ngFor="let data of meterUnitData">-->
+    <!--        {{ data.name }}-->
+    <!--      </div>-->
+
+    <!--      <ngx-charts-pie-chart-->
+    <!--        [customColors]="meterStatusGraphColors"-->
+    <!--        [doughnut]="true"-->
+    <!--        [labels]="false"-->
+    <!--        [legend]="false"-->
+    <!--        [results]="meterUnitData"-->
+    <!--        [view]="unitGraphSize"-->
+    <!--        class="unit-pie-chart"-->
+    <!--      >-->
+    <!--      </ngx-charts-pie-chart>-->
+    <!--    </ng-container>-->
   </div>
 
-  <ng-container *ngIf="form">
+  <ng-container *ngIf="form && showMoreButton">
     <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
          class="app-card-show-more-button">
       {{ 'COMMON.SHOW-MORE' | translate }}
