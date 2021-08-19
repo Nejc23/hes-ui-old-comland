@@ -1,5 +1,5 @@
 <div *ngIf="data" [style.width.px]="addWidth()" class="sticky">
-  <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
     <app-page-title
       [status]="data.statusValue"
       [subtitle]="data.typeValue"
@@ -14,7 +14,7 @@
 </div>
 
 <div *ngIf="data" class="tw-py-10 dcu-tabs">
-  <kendo-tabstrip [keepTabContent]="true" class="tw-pt-5">
+  <kendo-tabstrip [keepTabContent]="true" class="tw-pt-10">
 
     <kendo-tabstrip-tab [selected]="true"
                         title="{{ 'COMMON.OVERVIEW' | translate }}">
@@ -48,11 +48,35 @@
             <app-card-item [meterUnitData]="meterStatusData" [title]="'COMMON.METER-STATUS'">
             </app-card-item>
 
+            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
+
+            </app-card-item>
+
+            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
+
+            </app-card-item>
+
           </div>
         </div>
 
       </ng-template>
     </kendo-tabstrip-tab>
+
+
+    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">
+      <ng-template kendoTabContent>
+        <div class="tw-py-10">
+          METERS
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+
   </kendo-tabstrip>
 </div>
 

@@ -1,8 +1,16 @@
 .dcu-tabs ::ng-deep ul.k-reset.k-tabstrip-items {
-  position: sticky !important;
+  position: fixed;
+  width: 100%;
+  z-index: 54;
   top: 10.875rem;
   @apply tw-bg-white;
+  margin-left: -2.5rem; // kendoUI tabs full screen line hack
 }
+
+.dcu-tabs ::ng-deep li#k-tabstrip-tab-0 {
+  margin-left: 2.5rem;
+}
+
 
 .sticky {
   @apply tw-fixed;
