@@ -43,10 +43,6 @@
   @apply tw-border-lightGray;
 }
 
-//.app-card-body :last-of-type {
-//  @apply tw-rounded-b;
-//}
-
 .app-card-show-more-button {
   @apply tw-w-full;
   @apply tw-h-14;
@@ -69,17 +65,15 @@
 }
 
 .meter-status-item {
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
+  @apply tw-inline-flex;
+  @apply tw-justify-between;
+  @apply tw-items-center;
+  @apply tw-px-4;
   border-radius: 100px;
   width: 184px;
   height: 44px;
   margin-left: 30px;
-  @apply tw-px-4;
   margin-bottom: 5px;
-  mix-blend-mode: multiply;
-
 }
 
 .dot {
@@ -93,8 +87,8 @@
   @apply tw-border;
   @apply tw-border-solid;
   @apply tw-rounded-b-md;
+  @apply tw-border-t-0;
   height: 0.375rem;
-  border-top: 0;
 }
 
 .bg-installed {
