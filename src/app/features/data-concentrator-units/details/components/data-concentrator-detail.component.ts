@@ -37,6 +37,7 @@ export class DataConcentratorDetailComponent implements OnInit {
   dcuVendors$: Observable<Codelist<number>[]>;
 
   meterStatusData = [];
+  tags = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -131,6 +132,24 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
 
+        // todo colors
+        this.tags = [
+          'first',
+          'second',
+          'fifth',
+          'very long taaag',
+          '123',
+          'first',
+          'second',
+          'fifth',
+          'very long taaag',
+          '123',
+          'first',
+          'second',
+          'fifth',
+          'very long taaag',
+          '123'
+        ];
         // mock todo object
         this.meterStatusData = [
           {

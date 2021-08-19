@@ -76,12 +76,6 @@
   margin-bottom: 5px;
 }
 
-.dot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-}
-
 .bottom-border {
   @apply tw-border-lightGray;
   @apply tw-border;
@@ -91,6 +85,29 @@
   height: 0.375rem;
 }
 
+.dot {
+  height: 10px;
+  width: 10px;
+  border-radius: 50%;
+}
+
+.tag-item {
+  padding: 3px 8px;
+  line-height: 1rem;
+  background-color: #E9BD4A;
+  color: white;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  border-radius: 2px;
+  height: 20px;
+}
+
+.tag-items {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+// classes added because of tailwind JIT
 .bg-installed {
   @apply tw-bg-installed;
 }
@@ -113,30 +130,18 @@
 
 .bg-disappeared {
   @apply tw-bg-disappeared;
-  &.opacity {
-    @apply tw-bg-opacity-20;
-  }
 }
 
 .bg-lost {
   @apply tw-bg-lost;
-  &.opacity {
-    @apply tw-bg-opacity-20;
-  }
 }
 
 .bg-deinstalled {
   @apply tw-bg-deinstalled;
-  &.opacity {
-    @apply tw-bg-opacity-20;
-  }
 }
 
 .bg-other {
   @apply tw-bg-other;
-  &.opacity {
-    @apply tw-bg-opacity-20;
-  }
 }
 
 .opacity {

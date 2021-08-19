@@ -170,7 +170,8 @@
     "OVERVIEW": "Overview",
     "SHOW-MORE": "Show more",
     "SHOW-LESS": "Show less",
-    "METER-STATUS": "Meter status"
+    "METER-STATUS": "Meter status",
+    "APPLIED-TAGS": "Applied tags"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",

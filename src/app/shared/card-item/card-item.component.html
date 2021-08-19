@@ -11,6 +11,11 @@
     </button>
   </div>
   <div class="app-card-body">
+
+    <!-- Place for generic content -->
+    <ng-content></ng-content>
+    <!-- Place for generic content -->
+
     <ng-container *ngIf="form">
       <div
         *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
@@ -55,6 +60,21 @@
 
 
     </div>
+
+    <div *ngIf="tags.length > 0" class="tw-inline-flex tw-w-full tw-px-6 tw-py-4">
+
+      <div class="tw-text-darkGray tw-w-1/3">
+        {{ 'COMMON.APPLIED-TAGS' | translate }}:
+      </div>
+
+      <div class="tag-items tw-w-2/3">
+        <div *ngFor="let tag of tags" class="tag-item">
+          {{ tag }}
+        </div>
+      </div>
+
+    </div>
+
   </div>
 
   <ng-container *ngIf="form && showMoreButton">

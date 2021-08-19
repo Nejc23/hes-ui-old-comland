@@ -27,9 +27,11 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() paginationLimit;
   @Output() buttonClickEvent = new EventEmitter<boolean>();
   @Input() type: CardItemType;
+  // TODO MODEL
   @Input() meterUnitData = [];
+  @Input() tags = [];
 
-  cardTypeItemEnum = CardItemType;
+  // cardTypeItemEnum = CardItemType;
   initLimit = 0;
   controls: Array<FormData> = [];
   unitGraphSize = [208, 208];

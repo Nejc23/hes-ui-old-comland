@@ -48,6 +48,9 @@
             <app-card-item [meterUnitData]="meterStatusData" [title]="'COMMON.METER-STATUS'">
             </app-card-item>
 
+            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
+            </app-card-item>
+
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7"
