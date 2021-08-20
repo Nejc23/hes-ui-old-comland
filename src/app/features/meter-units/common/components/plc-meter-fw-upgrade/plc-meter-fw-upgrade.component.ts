@@ -11,7 +11,9 @@ import { IActionRequestFwUpgradeData, IActionRequestParams } from 'src/app/core/
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
+import { environment } from 'src/environments/environment';
 import { MeterUnitsTypeGridService } from './../../../types/services/meter-units-type-grid.service';
+import { AppConfigService } from '../../../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-plc-meter-fw-upgrade',
@@ -24,10 +26,11 @@ export class PlcMeterFwUpgradeComponent {
 
   form: FormGroup;
   noConfig = false;
+  apiUrl = environment.apiUrl;
   configRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   actionRequest: IActionRequestParams;
-  uploadSaveUrl = `${fwUploadFile}`;
+  uploadSaveUrl = this.apiUrl + '/' + fwUploadFile;
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = this.translate.instant('IMPORT-DEVICE-KEYS.UPLOAD-ONE-FILE');
@@ -47,7 +50,39 @@ export class PlcMeterFwUpgradeComponent {
     private authService: AuthService,
     private translate: TranslateService
   ) {
+    if (AppConfigService.settings?.apiServer?.url !== '') {
+      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + '/' + fwUploadFile;
+    }
     this.form = this.createForm();
+  }
+
+  // properties - START
+  get imageGuidProperty() {
+    return 'imageGuid';
+  }
+
+  get imageProperty() {
+    return 'files';
+  }
+
+  get imageIdenifyerProperty() {
+    return 'imageIdentifyer';
+  }
+
+  get imageSizeProperty() {
+    return 'imageSize';
+  }
+
+  get imageSignatureProperty() {
+    return 'imageSignature';
+  }
+
+  get imageFillLastBlockProperty() {
+    return 'imageFillLastBlock';
+  }
+
+  get imageActivateProperty() {
+    return 'imageActivateImmediately';
   }
 
   createForm(): FormGroup {
@@ -146,33 +181,6 @@ export class PlcMeterFwUpgradeComponent {
     return this.form.valid;
   }
 
-  // properties - START
-  get imageGuidProperty() {
-    return 'imageGuid';
-  }
-  get imageProperty() {
-    return 'files';
-  }
-
-  get imageIdenifyerProperty() {
-    return 'imageIdentifyer';
-  }
-
-  get imageSizeProperty() {
-    return 'imageSize';
-  }
-
-  get imageSignatureProperty() {
-    return 'imageSignature';
-  }
-
-  get imageFillLastBlockProperty() {
-    return 'imageFillLastBlock';
-  }
-
-  get imageActivateProperty() {
-    return 'imageActivateImmediately';
-  }
   // properties - END
 
   onDismiss() {
