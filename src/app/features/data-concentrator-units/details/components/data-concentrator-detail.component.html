@@ -65,6 +65,33 @@
 
             </app-card-item>
 
+            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
+              <!-- component? -->
+              <div class=" tw-px-6 tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
+                <table class="tw-min-w-max tw-w-full tw-table-auto">
+                  <thead>
+                  <tr class="table-header">
+                    <th class="tiny-text gray-color" scope="col"></th>
+                    <th class="tiny-text gray-color" scope="col">Timestamp</th>
+                    <th class="tiny-text gray-color" scope="col">ID</th>
+                    <th class="tiny-text gray-color" scope="col">Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr *ngFor="let alarm of alarms let i = index;" [ngClass]="i%2 == 0 ? 'gray-background':''"
+                      class="table-row">
+                    <td class="tw-w-11"><img [src]="'assets/images/icons/notification-icon-red.svg'" class="tw-mx-3" />
+                    </td>
+                    <td>{{ alarm.timestamp }}</td>
+                    <td>{{ alarm.id }}</td>
+                    <td class="description-text">{{ alarm.description }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </app-card-item>
+
           </div>
         </div>
 

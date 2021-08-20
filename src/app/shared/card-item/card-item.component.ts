@@ -24,6 +24,8 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() withEdit = false;
   @Input() form: FormGroup;
   @Input() showMoreButton = false;
+  @Input() buttonWithLink = false;
+  @Input() buttonLinkUrl = '';
   @Input() paginationLimit;
   @Output() buttonClickEvent = new EventEmitter<boolean>();
   @Input() type: CardItemType;

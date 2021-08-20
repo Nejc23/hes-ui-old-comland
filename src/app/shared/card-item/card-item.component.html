@@ -90,5 +90,13 @@
     </div>
   </ng-container>
 
-  <div *ngIf="!showMoreButton" class="bottom-border"></div>
+  <ng-container *ngIf="buttonLinkUrl !== '' && buttonWithLink">
+    <div [routerLink]="'/' + buttonLinkUrl"
+         class="app-card-show-more-button">
+      See all
+      <i class="fas fa-chevron-right"></i>
+    </div>
+  </ng-container>
+
+  <div *ngIf="!showMoreButton && !buttonWithLink" class="bottom-border"></div>
 </div>

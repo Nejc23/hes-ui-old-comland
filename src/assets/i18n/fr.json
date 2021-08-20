@@ -217,7 +217,8 @@
     "READ-STATUS": "",
     "STATUS": "statut",
     "TYPE": "type",
-    "VENDOR": "fabricant"
+    "VENDOR": "fabricant",
+    "LAST-NOTIFICATIONS": "Last notifications"
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - la page n'existe pas"

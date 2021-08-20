@@ -38,6 +38,7 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   meterStatusData = [];
   tags = [];
+  alarms = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -132,6 +133,39 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
 
+        //MOCK DATA
+        this.alarms = [
+          {
+            timestamp: '28.12.1986',
+            id: 99999,
+            description: 'JAVA_APP',
+            type: 'ALERT'
+          },
+          {
+            timestamp: '02.06.2021 00:05:02',
+            id: 333,
+            description: 'JAVA_APP________AAAAAAAAAAAAAAAA',
+            type: 'ALERT'
+          },
+          {
+            timestamp: '28.12.1986',
+            id: 333,
+            description: 'JAVA_APP',
+            type: 'NOTIFICATION'
+          },
+          {
+            timestamp: '28.12.1986',
+            id: 333,
+            description: 'JAVA_APP',
+            type: 'NOTIFICATION'
+          },
+          {
+            timestamp: '28.12.1986',
+            id: 333,
+            description: 'JAVA_APP',
+            type: 'NOTIFICATION'
+          }
+        ];
         // todo colors
         this.tags = [
           'first',

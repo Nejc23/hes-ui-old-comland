@@ -217,7 +217,8 @@
     "READ-STATUS": "stato della lettura",
     "STATUS": "Stato",
     "TYPE": "Tipo",
-    "VENDOR": "Fabbricante"
+    "VENDOR": "Fabbricante",
+    "LAST-NOTIFICATIONS": "Last notifications"
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - la pagina non esiste"

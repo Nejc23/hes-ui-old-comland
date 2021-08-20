@@ -19,3 +19,17 @@
   @apply tw-h-44;
   @apply tw-z-40;
 }
+
+.table-header {
+  @apply tw-h-11;
+}
+
+.table-row {
+  @apply tw-h-10;
+}
+
+.description-text {
+  @apply tw-truncate;
+  max-width: 175px;
+  width: 175px;
+}

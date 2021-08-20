@@ -217,7 +217,8 @@
     "READ-STATUS": "",
     "STATUS": "Status",
     "TYPE": "Tip",
-    "VENDOR": "proizvajalec"
+    "VENDOR": "proizvajalec",
+    "LAST-NOTIFICATIONS": "Last notifications"
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
