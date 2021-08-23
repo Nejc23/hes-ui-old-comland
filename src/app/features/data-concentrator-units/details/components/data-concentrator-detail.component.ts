@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -16,7 +16,6 @@ import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
-import { TabStripComponent } from '@progress/kendo-angular-layout';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -24,8 +23,6 @@ import { TabStripComponent } from '@progress/kendo-angular-layout';
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
 export class DataConcentratorDetailComponent implements OnInit {
-  @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
-
   form: FormGroup;
   editForm: FormGroup;
 
@@ -39,6 +36,10 @@ export class DataConcentratorDetailComponent implements OnInit {
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
 
+  meterStatusData = [];
+  tags = [];
+  alarms = [];
+
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -48,7 +49,8 @@ export class DataConcentratorDetailComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
     private modalService: ModalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private elRef: ElementRef
   ) {}
 
   get nameProperty() {
@@ -130,6 +132,93 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.editForm = this.createEditForm();
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
+
+        //MOCK DATA
+        this.alarms = [
+          {
+            timestamp: '28.12.1986',
+            id: 99999,
+            description: 'JAVA_APP',
+            type: 'ALERT'
+          },
+          {
+            timestamp: '02.06.2021 00:05:02',
+            id: 333,
+            description: 'JAVA_APP________AAAAAAAAAAAAAAAA',
+            type: 'ALERT'
+          },
+          {
+            timestamp: '28.12.1986',
+            id: 333,
+            description: 'JAVA_APP',
+            type: 'NOTIFICATION'
+          },
+          {
+            timestamp: '28.12.1986',
+            id: 333,
+            description: 'JAVA_APP',
+            type: 'NOTIFICATION'
+          },
+          {
+            timestamp: '28.12.1986',
+            id: 333,
+            description: 'JAVA_APP',
+            type: 'NOTIFICATION'
+          }
+        ];
+        // todo colors
+        this.tags = [
+          'first',
+          'second',
+          'fifth',
+          'very long taaag',
+          '123',
+          'first',
+          'second',
+          'fifth',
+          'very long taaag',
+          '123',
+          'first',
+          'second',
+          'fifth',
+          'very long taaag',
+          '123'
+        ];
+        // mock todo object
+        this.meterStatusData = [
+          {
+            name: 'Installed',
+            value: 7
+          },
+          {
+            name: 'Installing',
+            value: 5
+          },
+          {
+            name: 'Awaiting',
+            value: 2
+          },
+          {
+            name: 'Lost',
+            value: 1
+          },
+          {
+            name: 'Other',
+            value: 6
+          },
+          {
+            name: 'Blacklist',
+            value: 3
+          },
+          {
+            name: 'Disappeared',
+            value: 5
+          },
+          {
+            name: 'Deinstalled',
+            value: 8
+          }
+        ];
       });
     } else {
       this.form = this.createForm();
@@ -256,8 +345,6 @@ export class DataConcentratorDetailComponent implements OnInit {
   }
 
   addWidth() {
-    if (this.tabstrip?.tablist?.nativeElement?.offsetWidth) {
-      return this.tabstrip?.tablist?.nativeElement?.offsetWidth;
-    }
+    return this.elRef.nativeElement.parentElement.offsetWidth;
   }
 }

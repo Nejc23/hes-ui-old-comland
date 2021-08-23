@@ -81,6 +81,10 @@ body {
   padding: 0 1.714rem;
 }
 
+.table > :not(caption) > * > * {
+  box-shadow: none;
+}
+
 // bs override
 .btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show > .btn-light.dropdown-toggle {
   color: $gray-900;
@@ -150,3 +154,7 @@ body {
   }
 }
 
+.align-center {
+  display: flex;
+  align-items: center;
+}

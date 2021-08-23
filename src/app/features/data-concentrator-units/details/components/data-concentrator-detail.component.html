@@ -1,37 +1,112 @@
 <div *ngIf="data" [style.width.px]="addWidth()" class="sticky">
-  <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
     <app-page-title
       [status]="data.statusValue"
       [subtitle]="data.typeValue"
       [title]="data.name"
-      class="tw-h-52"
+      class="tw-h-36 tw-mt-10"
     >
     </app-page-title>
 
-    <app-dc-operations [guid]="concentratorId" [requestModel]="null"
-                       [selectedItemsCount]="1" [showOperations]="true"></app-dc-operations>
+    <app-dc-operations [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
+                       [showOperations]="true" class="tw-mt-10"></app-dc-operations>
   </div>
 </div>
 
 <div *ngIf="data" class="tw-py-10 dcu-tabs">
-  <kendo-tabstrip [keepTabContent]="true" class="tw-pt-5">
+  <kendo-tabstrip [keepTabContent]="true" class="tw-pt-10">
 
     <kendo-tabstrip-tab [selected]="true"
                         title="{{ 'COMMON.OVERVIEW' | translate }}">
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
+
+          <!--          <div class="tw-inline-flex tw-w-full">-->
+          <!--            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'" [type]="'chart'">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="'gauge'">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="96.9" [label]="'24h'" [type]="'gauge'">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="65" [label]="'48h'" [type]="'gauge'">-->
+          <!--            </app-mini-card-item>-->
+          <!--          </div>-->
+
           <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
+
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7" [title]="'COMMON.OVERVIEW'">
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
 
             </app-card-item>
+
+            <app-card-item [meterUnitData]="meterStatusData" [title]="'COMMON.METER-STATUS'">
+            </app-card-item>
+
+            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
+            </app-card-item>
+
+            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
+
+            </app-card-item>
+
+            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
+
+            </app-card-item>
+
+            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
+              <!-- component? -->
+              <div class=" tw-px-6 tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
+                <table class="tw-min-w-max tw-w-full tw-table-auto">
+                  <thead>
+                  <tr class="table-header">
+                    <th class="tiny-text gray-color" scope="col"></th>
+                    <th class="tiny-text gray-color" scope="col">Timestamp</th>
+                    <th class="tiny-text gray-color" scope="col">ID</th>
+                    <th class="tiny-text gray-color" scope="col">Description</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  <tr *ngFor="let alarm of alarms let i = index;" [ngClass]="i%2 == 0 ? 'gray-background':''"
+                      class="table-row">
+                    <td class="tw-w-11"><img [src]="'assets/images/icons/notification-icon-red.svg'" class="tw-mx-3" />
+                    </td>
+                    <td>{{ alarm.timestamp }}</td>
+                    <td>{{ alarm.id }}</td>
+                    <td class="description-text">{{ alarm.description }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </app-card-item>
+
           </div>
         </div>
 
       </ng-template>
     </kendo-tabstrip-tab>
+
+
+    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">
+      <ng-template kendoTabContent>
+        <div class="tw-py-10">
+          METERS
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+
   </kendo-tabstrip>
 </div>
 
