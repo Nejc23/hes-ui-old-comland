@@ -3,7 +3,7 @@
   @apply tw-bg-lightestGray;
   @apply tw-rounded-t-md;
   @apply tw-w-full;
-  @apply tw-h-20;
+  @apply tw-h-16;
   @apply tw-p-5;
   @apply tw-items-center;
   @apply tw-justify-between;
@@ -14,10 +14,7 @@
 
 .app-card-button {
   @apply tw-inline-flex;
-  @apply tw-border-lightGray;
   @apply tw-rounded;
-  @apply tw-border;
-  @apply tw-border-solid;
   @apply tw-items-center;
   @apply tw-px-2;
   @apply tw-py-1;
