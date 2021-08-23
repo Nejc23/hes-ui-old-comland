@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from '../../../environments/brand/default/brand';
+import { environment } from '../../../environments/environment';
 
 export interface FormData {
   name: string;
@@ -37,7 +38,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   map: any;
   marker: any;
   options: any;
-  accessToken = 'pk.eyJ1IjoibWJ1bG92ZWMiLCJhIjoiY2tzb2tqenNsMG54YTJwbzZ3M3JmcW1xOCJ9.Yvtz-kegMWE4_uQuXjDxQA';
+  accessToken = environment.mapBoxToken;
 
   meterStatusGraphColors = [
     {
