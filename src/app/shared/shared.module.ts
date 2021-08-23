@@ -168,8 +168,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ActiveJobsListComponent,
     PageTitleComponent,
     CardItemComponent,
-    MiniCardItemComponent,
-    NgxChartsModule
+    MiniCardItemComponent
   ],
   imports: [
     CommonModule,
