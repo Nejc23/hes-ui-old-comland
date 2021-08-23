@@ -150,8 +150,8 @@
   @apply tw-bg-opacity-20;
 }
 
-.leafet-map {
+.map-container {
   height: 312px;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  z-index: 10;
+  @apply tw-rounded-b-md;
 }

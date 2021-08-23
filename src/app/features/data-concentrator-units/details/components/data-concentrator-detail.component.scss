@@ -5,6 +5,7 @@
   top: 10.875rem;
   @apply tw-bg-white;
   margin-left: -2.5rem; // kendoUI tabs full screen line hack
+  @apply tw-shadow;
 }
 
 .dcu-tabs ::ng-deep li#k-tabstrip-tab-0 {
