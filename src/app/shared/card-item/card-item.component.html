@@ -74,7 +74,23 @@
       </div>
 
     </div>
+  </div>
 
+  <div *ngIf="latLang.length > 0" class="app-card-body map">
+    <div class="app-card-row">
+      <div class="tw-text-darkGray">
+        {{ 'FORM.ADDRESS' | translate }}
+      </div>
+      <div class="tw-text-black">
+        {{ latLang[0]}}° N, {{latLang[1]}}° E
+      </div>
+    </div>
+
+    <div
+      [leafletOptions]="options"
+      class="leafet-map"
+      leaflet>
+    </div>
   </div>
 
   <ng-container *ngIf="form && showMoreButton">
@@ -98,5 +114,5 @@
     </div>
   </ng-container>
 
-  <div *ngIf="!showMoreButton && !buttonWithLink" class="bottom-border"></div>
+  <div *ngIf="!showMoreButton && !buttonWithLink && latLang.length === 0" class="bottom-border"></div>
 </div>

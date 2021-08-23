@@ -51,6 +51,10 @@
             <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
             </app-card-item>
 
+            <app-card-item [latLang]="[46.2434, 14.4192]"
+                           [title]="'Address'">
+            </app-card-item>
+
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7"
@@ -89,13 +93,6 @@
                   </tr>
                   </tbody>
                 </table>
-              </div>
-            </app-card-item>
-
-            <app-card-item title="Address">
-              <div [leafletOptions]="options"
-                   class="leafet-map"
-                   leaflet>
               </div>
             </app-card-item>
           </div>

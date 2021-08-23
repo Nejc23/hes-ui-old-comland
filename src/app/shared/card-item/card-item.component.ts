@@ -1,14 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { icon, latLng, marker, tileLayer } from 'leaflet';
+import { brand } from '../../../environments/brand/default/brand';
 
 export interface FormData {
   name: string;
   control: AbstractControl;
-}
-
-export enum CardItemType {
-  FORM = 'form',
-  CHART = 'pie-chart'
 }
 
 @Component({
@@ -28,15 +25,18 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() buttonLinkUrl = '';
   @Input() paginationLimit;
   @Output() buttonClickEvent = new EventEmitter<boolean>();
-  @Input() type: CardItemType;
   // TODO MODEL
   @Input() meterUnitData = [];
   @Input() tags = [];
-
+  @Input() latLang = [];
   // cardTypeItemEnum = CardItemType;
   initLimit = 0;
   controls: Array<FormData> = [];
   unitGraphSize = [208, 208];
+
+  map: any;
+  marker: any;
+  options: any;
 
   meterStatusGraphColors = [
     {
@@ -77,6 +77,21 @@ export class CardItemComponent implements OnInit, OnChanges {
   constructor() {}
 
   ngOnInit(): void {
+    if (this.latLang.length > 0) {
+      this.marker = marker([this.latLang[0], this.latLang[1]], {
+        icon: icon({
+          iconSize: [64, 64],
+          iconAnchor: [13, 41],
+          iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
+        })
+      });
+
+      this.options = {
+        layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.marker],
+        zoom: 13,
+        center: latLng(this.latLang[0], this.latLang[1])
+      };
+    }
     if (this.showMoreButton) {
       this.initLimit = this.paginationLimit;
     }
@@ -92,7 +107,6 @@ export class CardItemComponent implements OnInit, OnChanges {
           name: control,
           control: typedControl
         });
-        // should log the form controls value and be typed correctly
       });
       if (!this.showMoreButton) {
         this.initLimit = this.controls.length;

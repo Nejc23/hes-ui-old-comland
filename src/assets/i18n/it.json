@@ -353,7 +353,8 @@
     "SERIALNUMBER": "Serial number",
     "ADDRESS": "Address",
     "TAGS": "Tags",
-    "EXTERNALID": "External Id"
+    "EXTERNALID": "External Id",
+    "COORDINATES": "Coordinates"
   },
   "GRID": {
     "ACTIVE": "Attivo",

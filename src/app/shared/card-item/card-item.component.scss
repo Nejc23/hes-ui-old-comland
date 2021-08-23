@@ -29,6 +29,11 @@
   @apply tw-border-solid;
   @apply tw-border-t-0;
   @apply tw-border-b-0;
+
+  &.map {
+    @apply tw-border-b;
+    @apply tw-rounded-b-md;
+  }
 }
 
 .app-card-row {
@@ -146,4 +151,10 @@
 
 .opacity {
   @apply tw-bg-opacity-20;
+}
+
+.leafet-map {
+  height: 312px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
