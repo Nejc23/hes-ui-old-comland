@@ -3,5 +3,6 @@ export const brand = {
   navFixedLogoUrl: 'assets/images/logo/main.png',
   navFixedMenuMainUrl: 'assets/images/logo/main-sm.png',
   appBrowserTitle: 'myGrid',
-  appTitle: 'myGrid'
+  appTitle: 'myGrid',
+  brand: 'mygrid'
 };

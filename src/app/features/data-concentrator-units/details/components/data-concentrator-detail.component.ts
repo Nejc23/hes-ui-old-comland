@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -16,15 +16,15 @@ import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
-import * as L from 'leaflet';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
+import { brand } from 'src/environments/brand/default/brand';
 
 @Component({
   selector: 'app-data-concentrator-detail',
   templateUrl: './data-concentrator-detail.component.html',
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
-export class DataConcentratorDetailComponent implements OnInit, AfterViewInit {
+export class DataConcentratorDetailComponent implements OnInit {
   form: FormGroup;
   editForm: FormGroup;
 
@@ -48,7 +48,7 @@ export class DataConcentratorDetailComponent implements OnInit, AfterViewInit {
     icon: icon({
       iconSize: [64, 64],
       iconAnchor: [13, 41],
-      iconUrl: 'assets/images/icons/marker.svg'
+      iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
     })
   });
 
@@ -129,25 +129,6 @@ export class DataConcentratorDetailComponent implements OnInit, AfterViewInit {
 
   get permissionEdit() {
     return PermissionEnumerator.Manage_Concentrators;
-  }
-
-  ngAfterViewInit() {
-    if (this.map) {
-      this.map.off();
-      this.map.remove();
-    }
-
-    var originalTile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 });
-
-    this.map = L.map('map', {
-      //choose the default view coordinates
-      center: [33.89268303132417, 35.50405740737915],
-      //choose the zooming level
-      zoom: 17,
-      //to remove the attribution
-      attributionControl: false
-      //to add predefined layers
-    });
   }
 
   ngOnInit() {
