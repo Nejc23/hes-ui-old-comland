@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -16,13 +16,15 @@ import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
+import * as L from 'leaflet';
+import { icon, latLng, marker, tileLayer } from 'leaflet';
 
 @Component({
   selector: 'app-data-concentrator-detail',
   templateUrl: './data-concentrator-detail.component.html',
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
-export class DataConcentratorDetailComponent implements OnInit {
+export class DataConcentratorDetailComponent implements OnInit, AfterViewInit {
   form: FormGroup;
   editForm: FormGroup;
 
@@ -39,6 +41,16 @@ export class DataConcentratorDetailComponent implements OnInit {
   meterStatusData = [];
   tags = [];
   alarms = [];
+  map: any;
+  options: any;
+
+  layer = marker([46.2434, 14.4192], {
+    icon: icon({
+      iconSize: [64, 64],
+      iconAnchor: [13, 41],
+      iconUrl: 'assets/images/icons/marker.svg'
+    })
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,7 +63,13 @@ export class DataConcentratorDetailComponent implements OnInit {
     private modalService: ModalService,
     private translate: TranslateService,
     private elRef: ElementRef
-  ) {}
+  ) {
+    this.options = {
+      layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
+      zoom: 13,
+      center: latLng(46.2434, 14.4192)
+    };
+  }
 
   get nameProperty() {
     return nameOf<DcuForm>((o) => o.name);
@@ -111,6 +129,25 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   get permissionEdit() {
     return PermissionEnumerator.Manage_Concentrators;
+  }
+
+  ngAfterViewInit() {
+    if (this.map) {
+      this.map.off();
+      this.map.remove();
+    }
+
+    var originalTile = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 });
+
+    this.map = L.map('map', {
+      //choose the default view coordinates
+      center: [33.89268303132417, 35.50405740737915],
+      //choose the zooming level
+      zoom: 17,
+      //to remove the attribution
+      attributionControl: false
+      //to add predefined layers
+    });
   }
 
   ngOnInit() {
