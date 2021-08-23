@@ -565,7 +565,7 @@
     "ALWAYS-CONNECTED": "Always connected",
     "ASSIGN-EXISTING": "Assign existing",
     "ASSIGN-TEMPLATE": "Assign to template ({{selectedRowsCount}} selected)",
-    "ASSIGN-TEMPLATE-WARNING": "Assigning template to meter(s) may result in irreversible changes to meter data!",
+    "ASSIGN-TEMPLATE-WARNING": "Assigning template to meter(s) may result in irreversible changes to meter data! It will take a while before the change takes an effect.",
     "AT-LEAST-ONE-REGISTER": "`At least one register must be on the Selected registers list",
     "AVAILABLE-REGISTERS": "Available registers",
     "AVERAGE-VALUE": "Average value",

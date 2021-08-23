@@ -4,15 +4,15 @@
 
   <div modal-body>
     <ng-container>
-      <div class="alert alert-warning" role="alert">
-        <i class="fas fa-exclamation-triangle me-2"></i>
-        <span>{{ 'PLC-METER.ASSIGN-TEMPLATE-WARNING' | translate }}</span>
+      <div class="alert alert-warning d-flex" role="alert">
+        <div class="align-self-center"><i class="fas fa-exclamation-triangle me-2"></i></div>
+        <div class="px-3">{{ 'PLC-METER.ASSIGN-TEMPLATE-WARNING' | translate }}</div>
       </div>
       <form class="form-horizontal" [formGroup]="form">
         <div class="form-row">
           <div class="col-12">
             <div>
-              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 430px; overflow:auto;" #agGrid
+              <ag-grid-angular class="ag-theme-epoint scrollable w-100" style="height: 430px; overflow:auto;" #agGrid
                 [rowData]="rowData"
                 [columnDefs]="columnDefs"
                 [modules]="modules"
