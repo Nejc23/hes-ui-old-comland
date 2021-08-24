@@ -171,7 +171,8 @@
     "SHOW-MORE": "Show more",
     "SHOW-LESS": "Show less",
     "METER-STATUS": "Meter status",
-    "APPLIED-TAGS": "Applied tags"
+    "APPLIED-TAGS": "Applied tags",
+    "ALL-METERS": "all meters"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",

@@ -36,7 +36,7 @@
             </app-mini-card-item>
           </div>
 
-          <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
+          <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
@@ -45,7 +45,7 @@
 
             </app-card-item>
 
-            <app-card-item [meterUnitData]="meterStatusData" [title]="'COMMON.METER-STATUS'">
+            <app-card-item [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
             </app-card-item>
 
             <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
@@ -71,7 +71,7 @@
 
             <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
               <!-- component? -->
-              <div class=" tw-px-6 tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
+              <div class="tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
                 <table class="tw-min-w-max tw-w-full tw-table-auto">
                   <thead>
                   <tr class="table-header">

@@ -30,6 +30,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() meterUnitData = [];
   @Input() tags = [];
   @Input() latLang = [];
+  @Input() meterUnitTotal = 0;
   // cardTypeItemEnum = CardItemType;
   initLimit = 0;
   controls: Array<FormData> = [];
@@ -74,6 +75,7 @@ export class CardItemComponent implements OnInit, OnChanges {
       value: '#5992D7'
     }
   ];
+
   private PAGINATION_INCREMENT = 4;
 
   constructor() {}
@@ -108,7 +110,6 @@ export class CardItemComponent implements OnInit, OnChanges {
     if (this.showMoreButton) {
       this.initLimit = this.paginationLimit;
     }
-    // MOCK DATA
   }
 
   ngOnChanges() {
@@ -144,5 +145,9 @@ export class CardItemComponent implements OnInit, OnChanges {
     if (exist) {
       return exist.value;
     }
+  }
+
+  public labelContent(e: any): string {
+    return e.category;
   }
 }
