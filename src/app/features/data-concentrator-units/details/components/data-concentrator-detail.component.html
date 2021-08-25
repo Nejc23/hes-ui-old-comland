@@ -22,21 +22,21 @@
 
         <div class="tw-py-10">
 
-          <!--          <div class="tw-inline-flex tw-w-full">-->
-          <!--            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'" [type]="'chart'">-->
-          <!--            </app-mini-card-item>-->
+          <div class="tw-inline-flex tw-w-full">
+            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'" [type]="'chart'">
+            </app-mini-card-item>
 
-          <!--            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="'gauge'">-->
-          <!--            </app-mini-card-item>-->
+            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="'gauge'">
+            </app-mini-card-item>
 
-          <!--            <app-mini-card-item [gaugeValue]="96.9" [label]="'24h'" [type]="'gauge'">-->
-          <!--            </app-mini-card-item>-->
+            <app-mini-card-item [gaugeValue]="96.9" [label]="'24h'" [type]="'gauge'">
+            </app-mini-card-item>
 
-          <!--            <app-mini-card-item [gaugeValue]="65" [label]="'48h'" [type]="'gauge'">-->
-          <!--            </app-mini-card-item>-->
-          <!--          </div>-->
+            <app-mini-card-item [gaugeValue]="65" [label]="'48h'" [type]="'gauge'">
+            </app-mini-card-item>
+          </div>
 
-          <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 2xl:tw-grid-cols-3 tw-gap-6">
+          <div class="tw-grid tw-grid-cols-1 lg:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
@@ -45,10 +45,14 @@
 
             </app-card-item>
 
-            <app-card-item [meterUnitData]="meterStatusData" [title]="'COMMON.METER-STATUS'">
+            <app-card-item [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
             </app-card-item>
 
             <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
+            </app-card-item>
+
+            <app-card-item [latLang]="[46.2434, 14.4192]"
+                           [title]="'Address'">
             </app-card-item>
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
@@ -67,7 +71,7 @@
 
             <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
               <!-- component? -->
-              <div class=" tw-px-6 tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
+              <div class="tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
                 <table class="tw-min-w-max tw-w-full tw-table-auto">
                   <thead>
                   <tr class="table-header">
@@ -91,7 +95,6 @@
                 </table>
               </div>
             </app-card-item>
-
           </div>
         </div>
 

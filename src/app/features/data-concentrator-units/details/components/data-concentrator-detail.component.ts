@@ -16,6 +16,8 @@ import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
+import { icon, latLng, marker, tileLayer } from 'leaflet';
+import { brand } from 'src/environments/brand/default/brand';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -39,6 +41,16 @@ export class DataConcentratorDetailComponent implements OnInit {
   meterStatusData = [];
   tags = [];
   alarms = [];
+  map: any;
+  options: any;
+
+  layer = marker([46.2434, 14.4192], {
+    icon: icon({
+      iconSize: [64, 64],
+      iconAnchor: [13, 41],
+      iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
+    })
+  });
 
   constructor(
     private formBuilder: FormBuilder,
@@ -51,7 +63,13 @@ export class DataConcentratorDetailComponent implements OnInit {
     private modalService: ModalService,
     private translate: TranslateService,
     private elRef: ElementRef
-  ) {}
+  ) {
+    this.options = {
+      layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
+      zoom: 13,
+      center: latLng(46.2434, 14.4192)
+    };
+  }
 
   get nameProperty() {
     return nameOf<DcuForm>((o) => o.name);

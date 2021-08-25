@@ -1,14 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { icon, latLng, marker, tileLayer } from 'leaflet';
+import { brand } from '../../../environments/brand/default/brand';
+import { environment } from '../../../environments/environment';
 
 export interface FormData {
   name: string;
   control: AbstractControl;
-}
-
-export enum CardItemType {
-  FORM = 'form',
-  CHART = 'pie-chart'
 }
 
 @Component({
@@ -28,15 +26,20 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() buttonLinkUrl = '';
   @Input() paginationLimit;
   @Output() buttonClickEvent = new EventEmitter<boolean>();
-  @Input() type: CardItemType;
   // TODO MODEL
   @Input() meterUnitData = [];
   @Input() tags = [];
-
+  @Input() latLang = [];
+  @Input() meterUnitTotal = 0;
   // cardTypeItemEnum = CardItemType;
   initLimit = 0;
   controls: Array<FormData> = [];
   unitGraphSize = [208, 208];
+
+  map: any;
+  marker: any;
+  options: any;
+  accessToken = environment.mapBoxToken;
 
   meterStatusGraphColors = [
     {
@@ -72,15 +75,41 @@ export class CardItemComponent implements OnInit, OnChanges {
       value: '#5992D7'
     }
   ];
+
   private PAGINATION_INCREMENT = 4;
 
   constructor() {}
 
   ngOnInit(): void {
+    if (this.latLang.length > 0) {
+      this.marker = marker([this.latLang[0], this.latLang[1]], {
+        icon: icon({
+          iconSize: [64, 64],
+          iconAnchor: [13, 41],
+          iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
+        })
+      });
+
+      this.options = {
+        layers: [
+          tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            attribution:
+              'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: this.accessToken
+          }),
+          this.marker
+        ],
+        zoom: 13,
+        center: latLng(this.latLang[0], this.latLang[1])
+      };
+    }
     if (this.showMoreButton) {
       this.initLimit = this.paginationLimit;
     }
-    // MOCK DATA
   }
 
   ngOnChanges() {
@@ -92,7 +121,6 @@ export class CardItemComponent implements OnInit, OnChanges {
           name: control,
           control: typedControl
         });
-        // should log the form controls value and be typed correctly
       });
       if (!this.showMoreButton) {
         this.initLimit = this.controls.length;
@@ -117,5 +145,9 @@ export class CardItemComponent implements OnInit, OnChanges {
     if (exist) {
       return exist.value;
     }
+  }
+
+  public labelContent(e: any): string {
+    return e.category;
   }
 }
