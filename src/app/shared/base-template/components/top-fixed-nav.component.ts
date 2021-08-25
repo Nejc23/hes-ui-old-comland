@@ -40,6 +40,7 @@ export class TopFixedNavComponent implements OnInit {
 
   selectLang(id: string) {
     this.languageService.selectLang(id);
+    window.location.reload();
   }
 
   profile() {

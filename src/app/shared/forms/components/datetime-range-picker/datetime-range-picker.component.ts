@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
-import { dateDisplayFormat } from '../../consts/date-format';
 
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-datetime-range-picker',
@@ -32,7 +32,6 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     firstDay: moment.localeData().firstDayOfWeek()
   };
 
-  // TODO translate
   defaultRanges: any = {
     [this.translate.instant('DAY.TODAY')]: [moment(), moment()],
     [this.translate.instant('DAY.YESTERDAY')]: [moment().subtract(1, 'days'), moment()],
@@ -114,8 +113,10 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   setLabel() {
-    const startDateFormatted = moment(this.form.controls.startDate.value, dateDisplayFormat).format(dateDisplayFormat);
-    const endDateFormatted = moment(this.form.controls.endDate.value, dateDisplayFormat).format(dateDisplayFormat);
+    const startDateFormatted = moment(this.form.controls.startDate.value, environment.dateDisplayFormat).format(
+      environment.dateDisplayFormat
+    );
+    const endDateFormatted = moment(this.form.controls.endDate.value, environment.dateDisplayFormat).format(environment.dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value

@@ -1,20 +1,20 @@
 <kendo-chart class="kendo-chart-column pe-3">
   <kendo-chart-category-axis baseUnit="days">
     <kendo-chart-category-axis-item maxDivisions="20">
-      <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats">
+      <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats" culture="en-US">
       </kendo-chart-category-axis-item-labels>
       <kendo-chart-value-axis-item>
         <kendo-chart-value-axis-item-labels>
-          </kendo-chart-value-axis-item-labels>
+        </kendo-chart-value-axis-item-labels>
       </kendo-chart-value-axis-item>
     </kendo-chart-category-axis-item>
-</kendo-chart-category-axis>
+  </kendo-chart-category-axis>
   <kendo-chart-series>
-    <kendo-chart-series-item type="column" [data]="eventsByTimestamp" field="count" categoryField="timestamp">
+    <kendo-chart-series-item [data]="eventsByTimestamp" categoryField="timestamp" field="count" type="column">
       <kendo-chart-series-item-tooltip background="#ffffff">
-        <ng-template let-dataItem="dataItem"  >
+        <ng-template let-dataItem="dataItem">
           <div style="text-align:center;">
-            <div class="text-black-50 small">{{ dataItem.timestamp | formatDateTime }}</div>
+            <div class="text-black-50 small">{{ dataItem.timestamp | formatDate }}</div>
             <div>{{ dataItem.count }}</div>
           </div>
         </ng-template>

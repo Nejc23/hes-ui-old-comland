@@ -14,9 +14,11 @@ import { RadioOption } from 'src/app/shared/forms/interfaces/radio-option.interf
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { environment } from 'src/environments/environment';
 import { AutoTemplateRegister } from '../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
-import { RegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import {
+  EventRegisterValue,
+  RegisterValue
+} from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
-import { dateDisplayFormat } from '../../../../shared/forms/consts/date-format';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 import { RegisterGroup, RegistersFilter, RegisterStatistics } from '../interfaces/data-processing-request.interface';
 import { EventsById, EventsByTimestamp } from '../interfaces/events-processing.interface';
@@ -158,8 +160,8 @@ export class MeterUnitRegistersComponent implements OnInit {
     this.form = this.createForm();
 
     // yesterday
-    const startDateFormatted = moment().subtract(1, 'days').format(dateDisplayFormat);
-    const endDateFormatted = moment().format(dateDisplayFormat);
+    const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
+    const endDateFormatted = moment().format(environment.dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
@@ -385,9 +387,9 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.valueWithUnit?.value }));
+      outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
     } else {
-      outData = this.rowData.map((d) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.valueWithUnit?.value }));
+      outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
     }
 
     const groupBy = (array, key) => {

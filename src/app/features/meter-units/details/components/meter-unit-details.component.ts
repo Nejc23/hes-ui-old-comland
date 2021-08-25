@@ -99,8 +99,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     return PermissionEnumerator.Meter_FW_Upgrade;
   }
 
-  // permission rights
-
   get permissionDisconnectorConnect() {
     return PermissionEnumerator.Disconnector_Connect;
   }
@@ -116,6 +114,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionDisconnectorSetMode() {
     return PermissionEnumerator.Disconnector_Set_Mode;
   }
+
+  // permission rights
 
   get permissionCiiActivate() {
     return PermissionEnumerator.CII_Activate;

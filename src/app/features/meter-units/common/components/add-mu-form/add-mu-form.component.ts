@@ -230,7 +230,7 @@ export class AddMuFormComponent implements OnInit {
   createForm(editMu: MeterUnitDetails = null): FormGroup {
     const communicationType = this.getCommunicationType(editMu);
     let authenticationType = this.authenticationTypes.find(
-      (type) => type.id == editMu?.advancedInformation?.authenticationType.toLowerCase()
+      (type) => type.id == editMu?.advancedInformation?.authenticationType?.toLowerCase()
     );
     if (!authenticationType) {
       authenticationType = this.authenticationTypes[1];

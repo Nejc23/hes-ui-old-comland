@@ -1,29 +1,33 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.SET-MONITOR-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  <div [innerHTML]="'PLC-METER.SET-MONITOR-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"
+       modal-header></div>
 
   <div modal-body>
     <ng-container>
-      <form class="form-horizontal" *ngIf="form" [formGroup]="form">
-        <div class="form-row" *ngFor="let form_elem of formTemplate">
+      <form *ngIf="form" [formGroup]="form" class="form-horizontal">
+        <div *ngFor="let form_elem of formTemplate" class="form-row">
           <div class="col-12"><h4><span>{{form_elem.name}}</span></h4></div>
           <div class="col-6">
-            <app-input-numeric [label]="'Threshold'" [form]="form" [property]="form_elem.name" [showSpinners]="false" [decimals]="0" [min]="0" [max]="65535"
-              [format]="'#'" [step]="1" [isReadOnly]="false" [allowShowError]="true" (valueChange)="onChangeField()" labelRight="A"></app-input-numeric>
+            <app-input-numeric (valueChange)="onChangeField()" [allowShowError]="true"
+                               [form]="form"
+                               [isReadOnly]="false" [label]="'Threshold'"
+                               [max]="null" [min]="0" [property]="form_elem.name" [showSpinners]="false"
+                               [step]="0" labelRight="A"></app-input-numeric>
           </div>
         </div>
-        <div class="text-danger" *ngIf="showError"><small>
+        <div *ngIf="showError" class="text-danger"><small>
           <span>{{ 'PLC-METER.SET-ONE-THRESHOLD' | translate }}</span></small></div>
       </form>
     </ng-container>
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onSet()">
+        <button (click)="onSet()" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

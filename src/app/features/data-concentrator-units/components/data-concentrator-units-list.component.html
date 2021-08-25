@@ -1,13 +1,13 @@
 <app-auto-refresh
-      (timerExpired)="refresh()"
-      [elapseTime]="refreshInterval"
-      [hidden]="true">
+  (timerExpired)="refresh()"
+  [elapseTime]="refreshInterval"
+  [hidden]="true">
 </app-auto-refresh>
 
 <div class="row">
 
-  <div class="col-2 filter-shadow-container" *ngIf="!hideFilter">
-    <div class="filter-shadow"  >
+  <div *ngIf="!hideFilter" class="col-2 filter-shadow-container">
+    <div class="filter-shadow">
       <app-dc-filter (filterChange)="filterChanged()" (toggleFilter)="toggleFilter()"></app-dc-filter>
     </div>
   </div>
@@ -19,29 +19,30 @@
       <div class="mb-2">
         <div class="grid-actions">
           <app-action-form
-            [gridColumns]="columns"
-            [filtersInfo]="filtersInfo"
-            [isFilterOpened]="!hideFilter"
-            [selectedCount]="getSelectedCount()"
-            (searchChange)=searchData($event)
-            (refresh)="refreshGrid()"
             (addDcu)="addDcu()"
+            (refresh)="refreshGrid()"
+            (searchChange)=searchData($event)
             (toggleFilter)="toggleFilter()"
             (toggleWildcards)="toggleWildcards($event)"
-            >
+            [filtersInfo]="filtersInfo"
+            [gridColumns]="columns"
+            [isFilterOpened]="!hideFilter"
+            [selectedCount]="getSelectedCount()"
+          >
             <div *ngIf="getSelectedCount() === 0" class="me-3">
-              <button appHideIfPermissionUnauthorized  [permission]="permissionAdd" class="btn btn-primary" (click)="addDcu()">
+              <button (click)="addDcu()" [permission]="permissionAdd" appHideIfPermissionUnauthorized
+                      class="btn btn-primary">
                 <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
             <div class="pe-3">
               <app-dc-operations
-                [showOperations]="getSelectedCount() === 0 ? false : true"
-                [requestModel]="requestModel" [guid]="null"
-                [selectedItemsCount]="getSelectedCount()"
                 [allVisibleColumns]="getAllDisplayedColumnsNames()"
+                [guid]="null" [requestModel]="requestModel"
+                [selectedItemsCount]="getSelectedCount()"
+                [showOperations]="getSelectedCount() === 0 ? false : true"
               ></app-dc-operations>
-               <!-- other buttons as Tags,...etc -->
+              <!-- other buttons as Tags,...etc -->
             </div>
           </app-action-form>
         </div>
@@ -49,60 +50,62 @@
       <div class="content-body-scroll">
         <div>
           <!-- ag-grid -->
-          <ag-grid-angular class="ag-theme-epoint custom-paging" style="width: 100%; height: calc(100% - 25px);" #agGrid
-            [domLayout]=agGridSettings.domLayout
-            [modules]="modules"
-            [icons]="icons"
-            [pagination]=agGridSettings.pagination
-            [multiSortKey]=agGridSettings.multiSortKey
-            [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-            [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-            [frameworkComponents]="frameworkComponents"
-            [maxBlocksInCache]="1"
-            [gridOptions]="gridOptions"
-            [columnDefs]="columns"
-            [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
-            [rowSelection]=agGridSettings.rowSelection
-            [sideBar]="sideBar"
-            [overlayNoRowsTemplate]="overlayNoRowsTemplate"
-            [overlayLoadingTemplate]="overlayLoadingTemplate"
-            (selectionChanged)="onSelectionChanged()"
-            (gridReady)="onGridReady($event)"
-            (columnVisible)="onColumnVisible($event)"
-            (paginationChanged)="onPaginationChange($event)"
-            (rowSelected)="onRowSelect($event)"
-            (firstDataRendered)="onFirstDataRendered($event)"
-            [localeText]="localeText"
-            (gridSizeChanged)="gridSizeChanged()"
-            [paginationPageSize]="this.selectedPageSize.id"
-            [rowModelType]="'serverSide'"
-            [cacheBlockSize]="this.selectedPageSize.id"
-            [suppressColumnVirtualisation]="true"
-            >
+          <ag-grid-angular #agGrid (columnVisible)="onColumnVisible($event)"
+                           (firstDataRendered)="onFirstDataRendered($event)"
+                           (gridReady)="onGridReady($event)"
+                           (gridSizeChanged)="gridSizeChanged()"
+                           (paginationChanged)="onPaginationChange($event)"
+                           (rowSelected)="onRowSelect($event)"
+                           (selectionChanged)="onSelectionChanged()"
+                           [cacheBlockSize]="this.selectedPageSize.id"
+                           [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+                           [columnDefs]="columns"
+                           [domLayout]=agGridSettings.domLayout
+                           [frameworkComponents]="frameworkComponents"
+                           [gridOptions]="gridOptions"
+                           [icons]="icons"
+                           [localeText]="localeText"
+                           [maxBlocksInCache]="1"
+                           [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+                           [modules]="modules"
+                           [multiSortKey]=agGridSettings.multiSortKey
+                           [overlayLoadingTemplate]="overlayLoadingTemplate"
+                           [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+                           [paginationPageSize]="this.selectedPageSize.id"
+                           [pagination]=agGridSettings.pagination
+                           [rowModelType]="'serverSide'"
+                           [rowSelection]=agGridSettings.rowSelection
+                           [sideBar]="sideBar"
+                           [suppressColumnVirtualisation]="true"
+                           [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+                           class="ag-theme-epoint custom-paging"
+                           style="width: 100%; height: calc(100% - 25px);"
+          >
           </ag-grid-angular>
 
           <div class="ag-paging-panel-selection d-flex">
-            <div class="p-2 ms-1" *ngIf="getSelectedCount() > 0">
-              <div class="me-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
+            <div *ngIf="getSelectedCount() > 0" class="p-2 ms-1">
+              <div *ngIf="!checkSelectedAll() && getSelectedCount() > 0" class="me-3">
                 <small class="link text-secondary">{{getSelectedCount()}}
                   <strong><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span>&middot;
-                    <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
-                    <span>{{ 'GRID.SELECT-ALL' | translate }}</span>
-                        ({{totalCount}})</a> &middot;
-                    <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+                    <a (click)="selectAll()" class="text-primary" href="javascript:void(0);">
+                      <span>{{ 'GRID.SELECT-ALL' | translate }}</span>
+                      ({{totalCount}})</a> &middot;
+                    <a (click)="deselectAll()" class="text-primary" href="javascript:void(0);">
                       <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a>
                   </strong></small>
               </div>
 
-              <div class="me-3" *ngIf="checkSelectedAll()">
-                <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span> ({{getTotalCountWithoutExcluded()}}) <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
-                  <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
+              <div *ngIf="checkSelectedAll()" class="me-3">
+                <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span>
+                  ({{getTotalCountWithoutExcluded()}}) <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
+                  <a (click)="deselectAll()" class="text-primary" href="javascript:void(0);">
                     <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a></strong></small>
               </div>
             </div>
             <div class="ms-auto">
-              <app-select-dropdown [form]="form" [property]="pageSizeProperty" [selectOptions]="pageSizes"
-                [disabled]="false" (selectedValueChanged)="pageSizeChanged($event)">
+              <app-select-dropdown (selectedValueChanged)="pageSizeChanged($event)" [disabled]="false" [form]="form"
+                                   [property]="pageSizeProperty" [selectOptions]="pageSizes">
               </app-select-dropdown>
             </div>
           </div>
@@ -110,7 +113,7 @@
         <div *ngIf="noData" class="d-flex flex-column justify-content-center align-items-center" style="height: 30vh;">
           <i class="far fa-empty-set fa-5x text-secondary mb-4"></i>
           <h3 class="mb-3">{{ 'DCU.NO-DATA-CONCENTRATOR-UNITS' | translate }}</h3>
-          <button type="button" class="btn btn-lg btn-primary" (click)="addDcu()"><i class="far fa-plus"></i>
+          <button (click)="addDcu()" class="btn btn-lg btn-primary" type="button"><i class="far fa-plus"></i>
             <span>{{ 'DCU.ADD-FIRST' | translate }}</span></button>
         </div>
       </div>
