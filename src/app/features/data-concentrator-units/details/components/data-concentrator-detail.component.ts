@@ -18,6 +18,8 @@ import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-fo
 import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
+import { RowClassArgs } from '@progress/kendo-angular-grid';
+import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -43,6 +45,9 @@ export class DataConcentratorDetailComponent implements OnInit {
   alarms = [];
   map: any;
   options: any;
+  miniCardItemTypeEnum = MiniCardItemType;
+
+  gridData: any = [];
 
   layer = marker([46.2434, 14.4192], {
     icon: icon({
@@ -152,6 +157,7 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.setCredentialsControls(this.credentialsVisible);
 
         //MOCK DATA
+        // notifications
         this.alarms = [
           {
             timestamp: '28.12.1986',
@@ -201,6 +207,56 @@ export class DataConcentratorDetailComponent implements OnInit {
           'fifth',
           'very long taaag',
           '123'
+        ];
+
+        this.gridData = [
+          {
+            id: 'aa84e457-dbab-44d9-84b8-0d9323e3ac24',
+            type: 'Reading',
+            active: true,
+            description: 'InstantValues',
+            nextRun: '2021-08-25T14:01:00+00:00',
+            owner: 'Admin User',
+            jobType: 2,
+            deviceCount: 15
+          },
+          {
+            id: '69c2a9ff-ecd2-4e21-aec0-32554e4466d2',
+            type: 'Reading',
+            active: false,
+            description: 'MeterEvents',
+            owner: 'Admin User',
+            jobType: 2,
+            deviceCount: 14
+          },
+          {
+            id: '5af63031-8f1d-49e4-b1c9-517642d5e474',
+            type: 'AlarmNotification',
+            active: true,
+            description: 'adsadasd',
+            nextRun: '2021-08-25T14:01:00+00:00',
+            owner: 'Admin User',
+            jobType: 6,
+            deviceCount: 0
+          },
+          {
+            id: 'b47b50ed-e96d-4c70-91f8-838762a8c4f3',
+            type: 'AlarmNotification',
+            active: false,
+            description: 'Notifications',
+            owner: 'Admin User',
+            jobType: 6,
+            deviceCount: 0
+          },
+          {
+            id: 'd03a5810-0463-4235-9c11-c1e9372aac29',
+            type: 'Reading',
+            active: false,
+            description: 'reading event',
+            owner: 'Admin User',
+            jobType: 2,
+            deviceCount: 1
+          }
         ];
         // mock todo object
         this.meterStatusData = [
@@ -364,5 +420,17 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   addWidth() {
     return this.elRef.nativeElement.parentElement.offsetWidth;
+  }
+
+  onRowActionClick(id: string) {
+    debugger;
+  }
+
+  public rowClass(context: RowClassArgs) {
+    const isEven = context.index % 2 == 0;
+    return {
+      'gray-background': isEven,
+      'white-background': !isEven
+    };
   }
 }

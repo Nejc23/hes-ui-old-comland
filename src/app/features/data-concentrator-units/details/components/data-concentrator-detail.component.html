@@ -22,17 +22,22 @@
 
         <div class="tw-py-10">
 
-          <div class="tw-inline-flex tw-w-full">
-            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'" [type]="'chart'">
+          <div class="tw-inline-flex tw-w-full tw-grid-cols-5 tw-gap-6 tw-py-5">
+
+            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'"
+                                [type]="miniCardItemTypeEnum.CHART">
             </app-mini-card-item>
 
-            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="'gauge'">
+            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">
             </app-mini-card-item>
 
-            <app-mini-card-item [gaugeValue]="96.9" [label]="'24h'" [type]="'gauge'">
+            <app-mini-card-item [gaugeValue]="96.9" [label]="'24h'" [type]="miniCardItemTypeEnum.GAUGE">
             </app-mini-card-item>
 
-            <app-mini-card-item [gaugeValue]="65" [label]="'48h'" [type]="'gauge'">
+            <app-mini-card-item [gaugeValue]="65" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
+            </app-mini-card-item>
+
+            <app-mini-card-item [gaugeValue]="40" [label]="'72h'" [type]="miniCardItemTypeEnum.GAUGE">
             </app-mini-card-item>
           </div>
 
@@ -53,20 +58,6 @@
 
             <app-card-item [latLang]="[46.2434, 14.4192]"
                            [title]="'Address'">
-            </app-card-item>
-
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7"
-                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
-
-            </app-card-item>
-
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
-                           [paginationLimit]="7"
-                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
-
             </app-card-item>
 
             <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
@@ -95,6 +86,43 @@
                 </table>
               </div>
             </app-card-item>
+
+            <!--            <app-card-item title="Scheduled jobs TODO 1translate">-->
+            <!--              <div>-->
+            <!--                <kendo-grid [data]="gridData" [rowClass]="rowClass" [width]="420" class="kendo-grid">-->
+            <!--                  <kendo-grid-column [title]="'FORM.ACTIVE' | translate" field="active">-->
+            <!--                    <ng-template kendoGridCellTemplate let-dataItem>-->
+            <!--                      <kendo-switch [checked]="dataItem.active"></kendo-switch>-->
+            <!--                    </ng-template>-->
+            <!--                  </kendo-grid-column>-->
+            <!--                  <kendo-grid-column [title]="'FORM.NAME' | translate" field="type">-->
+            <!--                  </kendo-grid-column>-->
+            <!--                  <kendo-grid-column [title]="'FORM.NEXT-START' | translate" field="nextRun">-->
+            <!--                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">-->
+            <!--                      {{ dataItem.nextRun | formatDateTime }}-->
+            <!--                      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;-->
+            <!--                      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;-->
+            <!--                      <div (click)="onRowActionClick(dataItem.id)" class="grid-row-button">-->
+            <!--                        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />-->
+            <!--                        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />-->
+            <!--                      </div>-->
+            <!--                    </ng-template>-->
+            <!--                  </kendo-grid-column>-->
+
+
+            <!--                  &lt;!&ndash;                  <kendo-grid-column>&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                      <div class="grid-row-button">&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                      </div>&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                    </ng-template>&ndash;&gt;-->
+            <!--                  &lt;!&ndash;                  </kendo-grid-column>&ndash;&gt;-->
+            <!--                </kendo-grid>-->
+            <!--              </div>-->
+            <!--            </app-card-item>-->
           </div>
         </div>
 
