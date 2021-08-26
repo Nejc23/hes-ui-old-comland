@@ -87,42 +87,44 @@
               </div>
             </app-card-item>
 
-            <!--            <app-card-item title="Scheduled jobs TODO 1translate">-->
-            <!--              <div>-->
-            <!--                <kendo-grid [data]="gridData" [rowClass]="rowClass" [width]="420" class="kendo-grid">-->
-            <!--                  <kendo-grid-column [title]="'FORM.ACTIVE' | translate" field="active">-->
-            <!--                    <ng-template kendoGridCellTemplate let-dataItem>-->
-            <!--                      <kendo-switch [checked]="dataItem.active"></kendo-switch>-->
-            <!--                    </ng-template>-->
-            <!--                  </kendo-grid-column>-->
-            <!--                  <kendo-grid-column [title]="'FORM.NAME' | translate" field="type">-->
-            <!--                  </kendo-grid-column>-->
-            <!--                  <kendo-grid-column [title]="'FORM.NEXT-START' | translate" field="nextRun">-->
-            <!--                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">-->
-            <!--                      {{ dataItem.nextRun | formatDateTime }}-->
-            <!--                      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;-->
-            <!--                      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;-->
-            <!--                      <div (click)="onRowActionClick(dataItem.id)" class="grid-row-button">-->
-            <!--                        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />-->
-            <!--                        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />-->
-            <!--                      </div>-->
-            <!--                    </ng-template>-->
-            <!--                  </kendo-grid-column>-->
+            <app-card-item title="Scheduled jobs TODO">
+              <div>
+                <kendo-grid [data]="gridData" [rowClass]="rowClass" class="kendo-grid">
+                  <kendo-grid-column [title]="'FORM.ACTIVE' | translate" [width]="80" field="active">
+                    <ng-template kendoGridCellTemplate let-dataItem>
+                      <kendo-switch [checked]="dataItem.active"></kendo-switch>
+                    </ng-template>
+                  </kendo-grid-column>
+                  <kendo-grid-column [title]="'FORM.NAME' | translate" field="type">
+                  </kendo-grid-column>
+                  <kendo-grid-column [title]="'FORM.NEXT-START' | translate" field="nextRun">
+                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                      <label class="description-text">
+                        {{ dataItem.nextRun | formatDateTime }}
+                      </label>
+                      <!--                      Row: {{ rowIndex }} /-->
+                      <!--                      <strong>{{ dataItem.id }}</strong>-->
+                      <div (click)="onRowActionClick(dataItem.id)" class="grid-row-button">
+                        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />
+                        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />
+                      </div>
+                    </ng-template>
+                  </kendo-grid-column>
 
 
-            <!--                  &lt;!&ndash;                  <kendo-grid-column>&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                      <div class="grid-row-button">&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                      </div>&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                    </ng-template>&ndash;&gt;-->
-            <!--                  &lt;!&ndash;                  </kendo-grid-column>&ndash;&gt;-->
-            <!--                </kendo-grid>-->
-            <!--              </div>-->
-            <!--            </app-card-item>-->
+                  <!--                  <kendo-grid-column>-->
+                  <!--                    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">-->
+                  <!--                      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;-->
+                  <!--                      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;-->
+                  <!--                      <div class="grid-row-button">-->
+                  <!--                        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />-->
+                  <!--                        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />-->
+                  <!--                      </div>-->
+                  <!--                    </ng-template>-->
+                  <!--                  </kendo-grid-column>-->
+                </kendo-grid>
+              </div>
+            </app-card-item>
           </div>
         </div>
 

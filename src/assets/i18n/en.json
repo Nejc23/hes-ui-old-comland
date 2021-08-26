@@ -355,7 +355,8 @@
     "ADDRESS": "Address",
     "TAGS": "Tags",
     "EXTERNALID": "External Id",
-    "COORDINATES": "Coordinates"
+    "COORDINATES": "Coordinates",
+    "NEXT-START": "Next start"
   },
   "GRID": {
     "ACTIVE": "Active",

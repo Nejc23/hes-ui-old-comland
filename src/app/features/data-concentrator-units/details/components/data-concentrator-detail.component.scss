@@ -67,14 +67,14 @@
   background-color: white;
   @apply tw-text-mediumGray;
   @apply tw-text-xs;
-  height: 44px !important;
-  margin-left: 16px;
+  padding-left: 16px;
 }
 
-::ng-deep .k-grid td {
-  height: 32px !important;
-}
 
 ::ng-deep .k-grid .k-alt {
   background-color: transparent;
+}
+
+::ng-deep .k-grid .k-switch {
+  transform: scale(0.65);
 }
