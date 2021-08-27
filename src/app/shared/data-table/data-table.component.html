@@ -1,0 +1,42 @@
+<kendo-grid [data]="gridData" [rowClass]="rowClass" class="kendo-grid">
+
+  <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
+                     [class]="column.class"
+                     [field]="column.field"
+                     [title]="column.translationKey | translate"
+                     [width]="column.width ? column.width : null">
+
+    <ng-container *ngIf="column.type == columnType.SWITCH">
+      <ng-template kendoGridCellTemplate let-dataItem>
+        <kendo-switch [checked]="dataItem[column.field]"></kendo-switch>
+      </ng-template>
+    </ng-container>
+  </kendo-grid-column>
+</kendo-grid>
+
+
+<!--<kendo-grid [data]="gridData" [rowClass]="rowClass" class="kendo-grid">-->
+<!--  <kendo-grid-column [title]="'FORM.ACTIVE' | translate" [width]="80" field="active">-->
+<!--    <ng-template kendoGridCellTemplate let-dataItem>-->
+<!--      <kendo-switch [checked]="dataItem.active"></kendo-switch>-->
+<!--    </ng-template>-->
+<!--  </kendo-grid-column>-->
+<!--  <kendo-grid-column [title]="'FORM.NAME' | translate" field="type">-->
+<!--  </kendo-grid-column>-->
+<!--  <kendo-grid-column [title]="'FORM.NEXT-START' | translate" field="nextRun">-->
+<!--    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">-->
+<!--      <label class="grid-label">-->
+<!--        {{ dataItem.nextRun | formatDateTime }}-->
+<!--        <ng-container *ngIf="!dataItem.nextRun">-->
+<!--          Not defined-->
+<!--        </ng-container>-->
+<!--      </label>-->
+<!--      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;-->
+<!--      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;-->
+<!--      <div class="grid-row-button"> &lt;!&ndash;(click)="onRowActionClick(dataItem.id)" &ndash;&gt;-->
+<!--        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />-->
+<!--        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />-->
+<!--      </div>-->
+<!--    </ng-template>-->
+<!--  </kendo-grid-column>-->
+<!--</kendo-grid>-->

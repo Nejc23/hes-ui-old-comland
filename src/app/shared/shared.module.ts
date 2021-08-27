@@ -96,6 +96,7 @@ import { MiniCardItemComponent } from './mini-card-item/mini-card-item.component
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { GridModule } from '@progress/kendo-angular-grid';
+import { DataTableComponent } from './data-table/data-table.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -173,7 +174,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     MiniCardItemComponent,
     NgxChartsModule,
     LeafletModule,
-    GridModule
+    GridModule,
+    DataTableComponent
   ],
   imports: [
     CommonModule,
@@ -289,7 +291,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageTitleComponent,
     PageLayoutComponent,
     TagElementComponent,
-    MiniCardItemComponent
+    MiniCardItemComponent,
+    DataTableComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

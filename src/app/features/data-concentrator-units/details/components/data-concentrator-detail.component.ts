@@ -18,8 +18,8 @@ import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-fo
 import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
-import { RowClassArgs } from '@progress/kendo-angular-grid';
 import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
+import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -56,6 +56,28 @@ export class DataConcentratorDetailComponent implements OnInit {
       iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
     })
   });
+
+  scheduledJobsColumnsConfiguration: Array<GridColumn> = [
+    {
+      field: 'active',
+      translationKey: 'FORM.TYPE',
+      type: GridColumnType.SWITCH,
+      width: 70,
+      class: 'no-padding'
+    },
+    {
+      field: 'description',
+      translationKey: 'FORM.NAME'
+    },
+    {
+      field: 'type',
+      translationKey: 'FORM.TYPE'
+    },
+    {
+      field: 'nextRun',
+      translationKey: 'FORM.NEXT-START'
+    }
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -420,17 +442,5 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   addWidth() {
     return this.elRef.nativeElement.parentElement.offsetWidth;
-  }
-
-  onRowActionClick(id: string) {
-    debugger;
-  }
-
-  public rowClass(context: RowClassArgs) {
-    const isEven = context.index % 2 == 0;
-    return {
-      'gray-background': isEven,
-      'white-background': !isEven
-    };
   }
 }

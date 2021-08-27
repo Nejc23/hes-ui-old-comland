@@ -1,0 +1,68 @@
+//::ng-deep .k-grid td, .k-grid .k-grid-content, .k-grid .k-grid-header-locked, .k-grid .k-grid-content-locked {
+//  border-color: transparent !important;
+//}
+
+::ng-deep .k-grid table tr:hover {
+  &:hover {
+    .grid-row-button {
+      visibility: visible;
+    }
+  }
+}
+
+::ng-deep .k-grid td {
+  border-width: 0;
+  height: 44px;
+  padding: 0 0 0 16px;
+
+  &.no-padding {
+    padding: 0 !important;
+  }
+}
+
+::ng-deep .k-grid {
+  border-width: 0;
+}
+
+::ng-deep .k-grid th {
+  border-width: 0;
+  background-color: white;
+  @apply tw-text-mediumGray;
+  @apply tw-text-xs;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 16px;
+}
+
+
+::ng-deep .k-grid .k-alt {
+  background-color: transparent;
+}
+
+::ng-deep .k-grid .k-switch {
+  transform: scale(0.65);
+}
+
+::ng-deep .k-grid {
+  label.grid-label {
+    min-width: 62%;
+    display: inline-block;
+    font-size: 14px !important;
+    color: black;
+    font-weight: 400;
+  }
+}
+
+.grid-row-button {
+  @apply tw-inline-flex;
+  @apply tw-w-16;
+  @apply tw-justify-between;
+  @apply tw-py-2;
+  @apply tw-px-2;
+  @apply tw-rounded;
+  @apply tw-border-lightGray;
+  @apply tw-border-solid;
+  @apply tw-bg-white;
+  visibility: hidden;
+}
+
