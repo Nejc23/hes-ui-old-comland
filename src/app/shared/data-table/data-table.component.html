@@ -6,45 +6,44 @@
                      [title]="column.translationKey | translate"
                      [width]="column.width ? column.width : null">
 
-    <ng-container *ngIf="column.type === columnType.SWITCH">
-      <ng-template kendoGridCellTemplate let-dataItem>
-        <kendo-switch [checked]="dataItem[column.field]"></kendo-switch>
-      </ng-template>
-    </ng-container>
+    <ng-template kendoGridCellTemplate let-dataItem>
 
-    <ng-container *ngIf="column.type == columnType.DATE">
-      <ng-template kendoGridCellTemplate let-dataItem>
+      <!--- no type defined is string -->
+      <ng-container *ngIf="!column.type">
+        {{ dataItem[column.field] }}
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.SWITCH">
+        <kendo-switch [checked]="dataItem[column.field]"></kendo-switch>
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.DATE">
         <div>
           {{ dataItem[column.field] | date }}
           <ng-container *ngIf="!dataItem[column.field]">
             Not defined
           </ng-container>
         </div>
-      </ng-template>
-    </ng-container>
+      </ng-container>
 
-    <ng-container *ngIf="column.type == columnType.DATE_TIME">
-      <ng-template kendoGridCellTemplate let-dataItem>
+      <ng-container *ngIf="column.type === columnType.DATE_TIME">
         <div>
           {{ dataItem[column.field] | formatDateTime }}
           <ng-container *ngIf="!dataItem[column.field]">
             Not defined
           </ng-container>
         </div>
-      </ng-template>
-    </ng-container>
+      </ng-container>
 
-  </kendo-grid-column>
-
-  <kendo-grid-column *ngIf="rowActions.length > 0" class="no-padding">
-    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-      <div class="grid-row-button"> <!--(click)="onRowActionClick(dataItem.id)" -->
-        <img *ngFor="let action of rowActions" [src]="'assets/images/icons/' + action.iconName + '.svg'"
-             class="tw-h-4 tw-px-1" />
-      </div>
+      <ng-container *ngIf="rowActions.length > 0 && i +1   === gridColumns.length" class="no-padding">
+        <div class="grid-row-button"> <!--(click)="onRowActionClick(dataItem.id)" -->
+          <img *ngFor="let action of rowActions" [src]="'assets/images/icons/' + action.iconName + '.svg'"
+               class="tw-h-4 tw-px-1" />
+        </div>
+      </ng-container>
     </ng-template>
-  </kendo-grid-column>
 
+  </kendo-grid-column>
 </kendo-grid>
 
 

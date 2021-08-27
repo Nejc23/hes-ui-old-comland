@@ -63,5 +63,10 @@
   @apply tw-border-solid;
   @apply tw-bg-white;
   visibility: hidden;
+
+  position: relative;
+  right: -50%;
+  bottom: 10px;
+  //left: 62%;
 }
 

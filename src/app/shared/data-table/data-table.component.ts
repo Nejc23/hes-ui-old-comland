@@ -15,13 +15,12 @@ export interface GridColumn {
 }
 
 export enum GridColumnType {
-  TEXT,
-  SWITCH,
-  RADIO,
-  ENUM,
-  DATE,
-  ICON,
-  DATE_TIME
+  SWITCH = 'switch',
+  RADIO = 'radio-button',
+  ENUM = 'enum',
+  DATE = 'date',
+  ICON = 'icon',
+  DATE_TIME = 'date-time'
 }
 
 export interface GridRowAction {
