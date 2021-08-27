@@ -19,7 +19,7 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
 import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
-import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
+import { GridColumn, GridColumnType, GridRowAction } from '../../../../shared/data-table/data-table.component';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -57,6 +57,14 @@ export class DataConcentratorDetailComponent implements OnInit {
     })
   });
 
+  rowActionsConfiguration: Array<GridRowAction> = [
+    {
+      iconName: 'settings-icon'
+    },
+    {
+      iconName: 'play-icon'
+    }
+  ];
   scheduledJobsColumnsConfiguration: Array<GridColumn> = [
     {
       field: 'active',
@@ -75,7 +83,8 @@ export class DataConcentratorDetailComponent implements OnInit {
     },
     {
       field: 'nextRun',
-      translationKey: 'FORM.NEXT-START'
+      translationKey: 'FORM.NEXT-START',
+      type: GridColumnType.DATE_TIME
     }
   ];
 

@@ -20,11 +20,12 @@ export enum GridColumnType {
   RADIO,
   ENUM,
   DATE,
-  ICON
+  ICON,
+  DATE_TIME
 }
 
 export interface GridRowAction {
-  iconUrl: string;
+  iconName: string;
   link?: string;
 }
 

@@ -188,6 +188,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule,
     CustomFormsModule,
     BreadcrumbsModule,
+    PipesModule,
     AgGridModule.withComponents([
       GridCellActiveJobStatusComponent,
       GridCellLinkComponent,
