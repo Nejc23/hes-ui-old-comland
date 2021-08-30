@@ -501,7 +501,7 @@ export class DataConcentratorDetailComponent implements OnInit {
   }
 
   loadGridData() {
-    // TODO
+    // TODO (request, pagination ...)
     let requestParam: IActionRequestParams = {
       pageSize: 20,
       pageNumber: 1,

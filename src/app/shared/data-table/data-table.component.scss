@@ -57,6 +57,10 @@
   }
 }
 
+::ng-deep .k-grid-pager {
+  background-color: white;
+}
+
 .grid-row-button {
   @apply tw-inline-flex;
   @apply tw-justify-between;
@@ -80,4 +84,8 @@
   width: 73px;
   background: rgba(55, 163, 80, 0.1);
   border-radius: 2px;
+}
+
+.fixed-height {
+  height: 628px; // to rem
 }

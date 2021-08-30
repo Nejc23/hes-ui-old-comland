@@ -54,7 +54,8 @@ export class DataTableComponent implements OnInit {
   @Input() scrollable: ScrollMode = 'none';
   @Input() loading = false;
 
-  @Input() pageSize = 10;
+  @Input() tableClass;
+  @Input() pageSize = 12;
   @Input() skip = 0;
   @Input() pageable = false;
   @Input() stickyHeader = false;

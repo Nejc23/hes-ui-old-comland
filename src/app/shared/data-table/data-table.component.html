@@ -1,6 +1,7 @@
 <kendo-grid (pageChange)="pageChange($event)"
             [data]="gridView"
             [loading]="loading"
+            [ngClass]="tableClass ? tableClass : ''"
             [pageSize]="pageSize"
             [pageable]="pageable"
             [rowClass]="rowClass"
