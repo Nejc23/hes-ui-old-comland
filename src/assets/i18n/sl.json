@@ -24,7 +24,8 @@
     "SAVE": "Save",
     "SAVE-AND-ADD-ANOTHER": "Shrani in dodaj drugo",
     "SAVE-AS-NEW": "Shrani kot novo",
-    "UPDATE": "Posodobi"
+    "UPDATE": "Posodobi",
+    "GO-TO-JOBS": "Go to jobs"
   },
   "COMMON": {
     "0-100-RANGE": "Value must be in range 0-100",
@@ -146,6 +147,7 @@
     "SELECTED-ITEMS-DELETED": "Selected items deleted",
     "SERVER-ERROR": "Napaka strežnika!",
     "SHOW-ALL": "Show all",
+    "SEE-ALL": "See all",
     "SHOW-CHILD-MBUS": "show child MBus",
     "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation",
     "SHOW-OPTION": "prikaži možnost",
@@ -510,7 +512,8 @@
     "SYSTEM": "SYSTEM",
     "TIME-SYNCHRONIZATION": "Time synchronization",
     "TOPOLOGY": "Topology",
-    "TOPOLOGY-JOB": "Topologija"
+    "TOPOLOGY-JOB": "Topologija",
+    "SCHEDULER-JOBS": "Scheduler jobs"
   },
   "LANGUAGE": {
     "HR": "Hrvaščina",

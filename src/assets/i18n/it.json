@@ -24,7 +24,8 @@
     "SAVE": "Mettere in memoria",
     "SAVE-AND-ADD-ANOTHER": "Salvaguardare e aggiungere un'altro",
     "SAVE-AS-NEW": "Salvaguardare come nuovo",
-    "UPDATE": "Aggiornamento"
+    "UPDATE": "Aggiornamento",
+    "GO-TO-JOBS": "Go to jobs"
   },
   "COMMON": {
     "0-100-RANGE": "Valore deve essere tra 0-100",
@@ -146,6 +147,7 @@
     "SELECTED-ITEMS-DELETED": "Gli oggetti selezionati sono cancellati",
     "SERVER-ERROR": "Errore del Server !",
     "SHOW-ALL": "Mostrare tutto",
+    "SEE-ALL": "See all",
     "SHOW-CHILD-MBUS": "Mostrare il piccolo MBus",
     "SHOW-ONLY-FOR-ACTIVATION": "Mostrare solamente pronto per attivazione",
     "SHOW-OPTION": "mostrare l'opzione",
@@ -510,7 +512,8 @@
     "SYSTEM": "SYSTEM",
     "TIME-SYNCHRONIZATION": "Time synchronization",
     "TOPOLOGY": "Topology",
-    "TOPOLOGY-JOB": "Job topologia"
+    "TOPOLOGY-JOB": "Job topologia",
+    "SCHEDULER-JOBS": "Scheduler jobs"
   },
   "LANGUAGE": {
     "HR": "Hrvaščina",

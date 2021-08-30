@@ -60,8 +60,8 @@
                            [title]="'Address'">
             </app-card-item>
 
+            <!-- TODO replace with component -->
             <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
-              <!-- component? -->
               <div class="tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">
                 <table class="tw-min-w-max tw-w-full tw-table-auto">
                   <thead>
@@ -87,7 +87,10 @@
               </div>
             </app-card-item>
 
-            <app-card-item title="Scheduled jobs TODO">
+            <app-card-item [buttonIconName]="'list-icon'" [buttonLabel]="'BUTTON.GO-TO-JOBS'"
+                           [buttonLinkUrl]="'schedulerJobs'"
+                           [buttonWithLink]="true"
+                           title="JOB.SCHEDULER-JOBS">
               <app-data-table [gridColumns]="scheduledJobsColumnsConfiguration" [gridData]="gridData"
                               [rowActions]="rowActionsConfiguration"></app-data-table>
             </app-card-item>
@@ -101,7 +104,7 @@
     <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">
       <ng-template kendoTabContent>
         <div class="tw-py-10">
-          METERS
+          {{ 'COMMON.METERS' | translate }}
         </div>
       </ng-template>
     </kendo-tabstrip-tab>

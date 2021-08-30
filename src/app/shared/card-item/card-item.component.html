@@ -5,7 +5,7 @@
       {{ title | translate }}
     </div>
     <button (click)="onButtonClicked()" *ngIf="buttonLabel"
-            class="app-card-button">
+            [routerLink]="'/' + buttonLinkUrl" class="app-card-button">
       <img *ngIf="buttonIconName" [src]="'assets/images/icons/' + buttonIconName + '.svg'" class="tw-pr-2" />
       <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
     </button>
@@ -136,7 +136,7 @@
   <ng-container *ngIf="buttonLinkUrl !== '' && buttonWithLink">
     <div [routerLink]="'/' + buttonLinkUrl"
          class="app-card-show-more-button">
-      See all
+      {{ 'COMMON.SEE-ALL' | translate }}
       <i class="fas fa-chevron-right"></i>
     </div>
   </ng-container>
