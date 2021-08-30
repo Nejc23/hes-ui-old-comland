@@ -106,6 +106,13 @@
         <div class="tw-py-10">
           {{ 'COMMON.METERS' | translate }}
         </div>
+
+        <app-data-table *ngIf="meters.length > 0" [gridColumns]="metersColumnsConfiguration" [gridData]="meters" [pageSize]="12"
+                        [pageable]="true"
+                        [skip]="0" [stickyHeader]="true">
+
+        </app-data-table>
+
       </ng-template>
     </kendo-tabstrip-tab>
 

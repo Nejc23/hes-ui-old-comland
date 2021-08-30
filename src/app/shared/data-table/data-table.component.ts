@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { RowClassArgs } from '@progress/kendo-angular-grid';
+import { GridDataResult, PageChangeEvent, PageSizeItem, RowClassArgs } from '@progress/kendo-angular-grid';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
 
 export interface GridColumn {
@@ -10,7 +10,7 @@ export interface GridColumn {
   padding?: number;
   class?: string;
   icon?: string;
-  enum?: ColoredValue;
+  coloredValues?: ColoredValue[];
   progressBar?: ColoredValue;
   tags?: string[];
 }
@@ -19,6 +19,7 @@ export enum GridColumnType {
   SWITCH = 'switch',
   RADIO = 'radio-button',
   ENUM = 'enum',
+  COLORED_ENUM = 'colored-enum',
   DATE = 'date',
   ICON = 'icon',
   DATE_TIME = 'date-time'
@@ -31,8 +32,8 @@ export interface GridRowAction {
 }
 
 export interface ColoredValue {
-  value: any;
-  colors: string[];
+  enumValue: string;
+  color: string;
 }
 
 @Component({
@@ -41,12 +42,13 @@ export interface ColoredValue {
   styleUrls: ['./data-table.component.scss']
 })
 export class DataTableComponent implements OnInit {
+  public gridView: GridDataResult;
   @Input() gridData: any;
   @Input() simpleGrid = true;
   // todo objects
   @Input() gridColumns: Array<GridColumn> = [];
   @Input() rowActions: Array<GridRowAction> = [];
-
+  columnType = GridColumnType;
   // Grid properties
   @Input() gridProperties = [];
   @Input() scrollable: ScrollMode = 'none';
@@ -55,14 +57,31 @@ export class DataTableComponent implements OnInit {
   @Input() pageSize = 10;
   @Input() skip = 0;
   @Input() pageable = false;
-  columnType = GridColumnType;
+  @Input() stickyHeader = false;
+  @Input() tableHeight = 0;
+  pageSizes: PageSizeItem[] = [
+    {
+      text: '5',
+      value: 5
+    },
+    {
+      text: '20',
+      value: 20
+    },
+    {
+      text: 'All',
+      value: 'all'
+    }
+  ];
 
   @Output() switchClickedEvent = new EventEmitter<any>();
   @Output() rowActionClickedEvent = new EventEmitter<any>();
 
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.loadItems();
+  }
 
   rowClass(context: RowClassArgs) {
     const isEven = context.index % 2 == 0;
@@ -78,5 +97,28 @@ export class DataTableComponent implements OnInit {
 
   onRowActionClick(actionName: string, id: string) {
     this.rowActionClickedEvent.emit({ actionName: actionName, id: id });
+  }
+
+  pageChange({ skip, take }: PageChangeEvent): void {
+    this.skip = skip;
+    this.pageSize = take;
+    this.loadItems();
+  }
+
+  colorExist(enumValue: string, coloredValues: ColoredValue[]) {
+    if (enumValue && coloredValues.length > 0) {
+      let exist = coloredValues.find((item) => item.enumValue.toLowerCase() === enumValue.toLowerCase());
+      if (exist) {
+        return exist.color;
+      }
+      return '';
+    }
+  }
+
+  private loadItems(): void {
+    this.gridView = {
+      data: this.gridData.slice(this.skip, this.skip + this.pageSize),
+      total: this.gridData.length
+    };
   }
 }

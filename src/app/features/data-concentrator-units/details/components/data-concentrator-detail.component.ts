@@ -20,6 +20,9 @@ import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
 import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
 import { GridColumn, GridColumnType, GridRowAction } from '../../../../shared/data-table/data-table.component';
+import { MeterUnitsService } from '../../../../core/repository/services/meter-units/meter-units.service';
+import { IActionRequestParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
+import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-units/meter-units-list.interface';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -48,6 +51,46 @@ export class DataConcentratorDetailComponent implements OnInit {
   miniCardItemTypeEnum = MiniCardItemType;
 
   gridData: any = [];
+  meters: Array<MeterUnitsList> = [];
+
+  metersColumnsConfiguration: Array<GridColumn> = [
+    {
+      translationKey: 'Serial',
+      field: 'serialNumber',
+      class: 'bold-text'
+    },
+    {
+      translationKey: 'Name',
+      field: 'logicalDeviceName'
+    },
+    {
+      translationKey: 'Systitle',
+      field: 'systitle'
+    },
+    {
+      translationKey: 'Referencing type',
+      field: 'referencingType'
+    },
+    {
+      translationKey: 'Disconnector state',
+      field: 'disconnectorState'
+    },
+    {
+      translationKey: 'Installation Status',
+      field: 'status',
+      type: GridColumnType.COLORED_ENUM,
+      coloredValues: [
+        {
+          enumValue: 'Installed',
+          color: 'green'
+        },
+        {
+          enumValue: 'ReadyForReConnection',
+          color: 'yellow'
+        }
+      ]
+    }
+  ];
 
   layer = marker([46.2434, 14.4192], {
     icon: icon({
@@ -100,7 +143,8 @@ export class DataConcentratorDetailComponent implements OnInit {
     private permissionService: PermissionService,
     private modalService: ModalService,
     private translate: TranslateService,
-    private elRef: ElementRef
+    private elRef: ElementRef,
+    private meterUnitsTypeService: MeterUnitsService
   ) {
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
@@ -190,6 +234,7 @@ export class DataConcentratorDetailComponent implements OnInit {
         this.setCredentialsControls(this.credentialsVisible);
 
         //MOCK DATA
+        this.loadGridData();
         // notifications
         this.alarms = [
           {
@@ -454,4 +499,27 @@ export class DataConcentratorDetailComponent implements OnInit {
   addWidth() {
     return this.elRef.nativeElement.parentElement.offsetWidth;
   }
+
+  loadGridData() {
+    // TODO
+    let requestParam: IActionRequestParams = {
+      pageSize: 20,
+      pageNumber: 1,
+      textSearch: {
+        value: 'DC450G3_3.11',
+        propNames: [],
+        useWildcards: true
+      },
+      sort: []
+    };
+    // MOCKED DATA
+    this.meterUnitsTypeService.getGridMeterUnits(requestParam).subscribe((res) => {
+      this.meters = res.data;
+    });
+  }
+
+  // public getSessionSettingsPageIndex() {
+  //   const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
+  //   return settings.pageIndex;
+  // }
 }

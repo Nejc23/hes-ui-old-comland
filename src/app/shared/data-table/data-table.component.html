@@ -1,9 +1,12 @@
-<kendo-grid [data]="gridData" [loading]="loading" [pageSize]="pageSize"
+<kendo-grid (pageChange)="pageChange($event)"
+            [data]="gridView"
+            [loading]="loading"
+            [pageSize]="pageSize"
             [pageable]="pageable"
             [rowClass]="rowClass"
             [scrollable]="scrollable"
             [skip]="skip"
-            class="kendo-grid">
+            class="kendo-grid"> <!-- style="height: 60vh" -->
 
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
                      [class]="column.class"
@@ -39,6 +42,12 @@
             Not defined
           </ng-container>
         </div>
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.COLORED_ENUM">
+        <label [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
+          {{ dataItem[column.field] }}
+        </label>
       </ng-container>
 
       <ng-container *ngIf="rowActions.length > 0 && i +1   === gridColumns.length" class="no-padding">

@@ -18,6 +18,10 @@
   &.no-padding {
     padding: 0 !important;
   }
+
+  &.bold-text {
+    font-weight: bold;
+  }
 }
 
 ::ng-deep .k-grid {
@@ -70,3 +74,10 @@
   //left: 62%;
 }
 
+.green {
+  color: #37A350;
+  padding: 3px 8px;
+  width: 73px;
+  background: rgba(55, 163, 80, 0.1);
+  border-radius: 2px;
+}

@@ -108,47 +108,6 @@
   flex-wrap: wrap;
 }
 
-// classes added because of tailwind JIT
-.bg-installed {
-  @apply tw-bg-installed;
-}
-
-.bg-installing {
-  @apply tw-bg-installing;
-}
-
-.bg-awaiting {
-  @apply tw-bg-awaiting;
-}
-
-.bg-blacklist {
-  @apply tw-bg-blacklist;
-}
-
-.bg-blacklist {
-  @apply tw-bg-blacklist;
-}
-
-.bg-disappeared {
-  @apply tw-bg-disappeared;
-}
-
-.bg-lost {
-  @apply tw-bg-lost;
-}
-
-.bg-deinstalled {
-  @apply tw-bg-deinstalled;
-}
-
-.bg-other {
-  @apply tw-bg-other;
-}
-
-.opacity {
-  @apply tw-bg-opacity-20;
-}
-
 .map-container {
   height: 312px;
   z-index: 10;
