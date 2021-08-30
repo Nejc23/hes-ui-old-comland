@@ -1,4 +1,9 @@
-<kendo-grid [data]="gridData" [rowClass]="rowClass" class="kendo-grid">
+<kendo-grid [data]="gridData" [loading]="loading" [pageSize]="pageSize"
+            [pageable]="pageable"
+            [rowClass]="rowClass"
+            [scrollable]="scrollable"
+            [skip]="skip"
+            class="kendo-grid">
 
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
                      [class]="column.class"
@@ -6,7 +11,7 @@
                      [title]="column.translationKey | translate"
                      [width]="column.width ? column.width : null">
 
-    <ng-template kendoGridCellTemplate let-dataItem>
+    <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
 
       <!--- no type defined is string -->
       <ng-container *ngIf="!column.type">
@@ -14,7 +19,8 @@
       </ng-container>
 
       <ng-container *ngIf="column.type === columnType.SWITCH">
-        <kendo-switch [checked]="dataItem[column.field]"></kendo-switch>
+        <kendo-switch (valueChange)="switchValueChanged(dataItem.id, $event)"
+                      [checked]="dataItem[column.field]"></kendo-switch>
       </ng-container>
 
       <ng-container *ngIf="column.type === columnType.DATE">
@@ -36,9 +42,10 @@
       </ng-container>
 
       <ng-container *ngIf="rowActions.length > 0 && i +1   === gridColumns.length" class="no-padding">
-        <div class="grid-row-button"> <!--(click)="onRowActionClick(dataItem.id)" -->
-          <img *ngFor="let action of rowActions" [src]="'assets/images/icons/' + action.iconName + '.svg'"
-               class="tw-h-4 tw-px-1" />
+        <div class="grid-row-button">
+          <img (click)="onRowActionClick(action.actionName, dataItem.id)"
+               *ngFor="let action of rowActions"
+               [src]="'assets/images/icons/' + action.iconName + '.svg'" class="tw-h-4 tw-px-2" />
         </div>
       </ng-container>
     </ng-template>

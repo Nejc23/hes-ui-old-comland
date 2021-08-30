@@ -59,9 +59,11 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   rowActionsConfiguration: Array<GridRowAction> = [
     {
+      actionName: 'settings',
       iconName: 'settings-icon'
     },
     {
+      actionName: 'runJob',
       iconName: 'play-icon'
     }
   ];

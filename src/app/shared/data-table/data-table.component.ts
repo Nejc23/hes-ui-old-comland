@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { RowClassArgs } from '@progress/kendo-angular-grid';
+import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
 
 export interface GridColumn {
   translationKey: string;
@@ -24,6 +25,7 @@ export enum GridColumnType {
 }
 
 export interface GridRowAction {
+  actionName: string;
   iconName: string;
   link?: string;
 }
@@ -43,10 +45,20 @@ export class DataTableComponent implements OnInit {
   @Input() simpleGrid = true;
   // todo objects
   @Input() gridColumns: Array<GridColumn> = [];
-  @Input() gridProperties = [];
   @Input() rowActions: Array<GridRowAction> = [];
 
+  // Grid properties
+  @Input() gridProperties = [];
+  @Input() scrollable: ScrollMode = 'none';
+  @Input() loading = false;
+
+  @Input() pageSize = 10;
+  @Input() skip = 0;
+  @Input() pageable = false;
   columnType = GridColumnType;
+
+  @Output() switchClickedEvent = new EventEmitter<any>();
+  @Output() rowActionClickedEvent = new EventEmitter<any>();
 
   constructor() {}
 
@@ -58,5 +70,13 @@ export class DataTableComponent implements OnInit {
       'gray-background': isEven,
       'white-background': !isEven
     };
+  }
+
+  switchValueChanged(id: string, event: Event) {
+    this.switchClickedEvent.emit({ id: id, value: event });
+  }
+
+  onRowActionClick(actionName: string, id: string) {
+    this.rowActionClickedEvent.emit({ actionName: actionName, id: id });
   }
 }
