@@ -5,7 +5,7 @@
       {{ title | translate }}
     </div>
     <button (click)="onButtonClicked()" *ngIf="buttonLabel"
-            [routerLink]="'/' + buttonLinkUrl" class="app-card-button">
+            class="app-card-button">
       <img *ngIf="buttonIconName" [src]="'assets/images/icons/' + buttonIconName + '.svg'" class="tw-pr-2" />
       <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
     </button>
