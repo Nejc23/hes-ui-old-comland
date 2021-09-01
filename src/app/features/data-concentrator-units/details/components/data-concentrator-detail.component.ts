@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
@@ -14,14 +15,17 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
+import { DeleteDcuFormComponent } from '../../components/delete-dcu-form/delete-dcu-form.component';
 import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
+import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
+import { DcOperationsService } from '../../services/dc-operations.service';
 
 @Component({
   selector: 'app-data-concentrator-detail',
   templateUrl: './data-concentrator-detail.component.html'
 })
-export class DataConcentratorDetailComponent implements OnInit {
+export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   form: FormGroup;
   editForm: FormGroup;
 
@@ -30,6 +34,8 @@ export class DataConcentratorDetailComponent implements OnInit {
   public credentialsVisible = false;
   concentratorId = '';
   data: DataConcentratorUnit;
+
+  private dcuConcentratorDeleted: Subscription;
 
   dcuStatuses$: Observable<Codelist<number>[]>;
   dcuTypes$: Observable<Codelist<number>[]>;
@@ -43,8 +49,11 @@ export class DataConcentratorDetailComponent implements OnInit {
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
+    private dcOperationsService: DcOperationsService,
+    private eventService: DataConcentratorUnitsGridEventEmitterService,
     private modalService: ModalService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -56,6 +65,16 @@ export class DataConcentratorDetailComponent implements OnInit {
 
     // get DCU
     this.getData();
+
+    this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
+      this.router.navigate([dataConcentratorUnits]);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.dcuConcentratorDeleted) {
+      this.dcuConcentratorDeleted.unsubscribe();
+    }
   }
 
   getData() {
@@ -237,6 +256,14 @@ export class DataConcentratorDetailComponent implements OnInit {
     } else {
       this.form.get(this.userNameProperty).disable();
     }
+  }
+
+  onDelete() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.concentratorId, null, 1, null);
+
+    const modalRef = this.modalService.open(DeleteDcuFormComponent);
+    const component: DeleteDcuFormComponent = modalRef.componentInstance;
+    component.applyRequestParams(params, 1);
   }
 
   get permissionEdit() {

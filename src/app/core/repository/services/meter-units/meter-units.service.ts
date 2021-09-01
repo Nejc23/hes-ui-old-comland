@@ -1,5 +1,5 @@
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
-import { getDevice, muCreate, muUpdate } from './../../consts/meter-units.const';
+import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
 import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
@@ -52,7 +52,7 @@ export class MeterUnitsService {
   }
 
   getGridMeterUnitsRequest(param: IActionRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', meterUnits, param);
+    return new HttpRequest('POST', getMeters, param);
   }
 
   getMeterUnit(id: string): Observable<MeterUnitDetails> {
