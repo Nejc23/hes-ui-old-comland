@@ -1,0 +1,22 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+    <div modal-header>{{ operationName }} ({{ countOfElements }} {{ 'COMMON.SELECTED' | translate }})</div>
+  
+    <div modal-body>
+      <ng-container>
+        {{ 'MODAL.ARE-YOU-SURE-TEXT-FOR-DEVICES' | translate:{operationName: operationName} }}
+      </ng-container>
+    </div>
+    <div modal-footer>
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn text-secondary" (click)="onDismiss()">
+          <span>{{ 'BUTTON.CANCEL' | translate }}</span>
+        </button>
+        <div class="btn-group dropdown">
+          <button type="submit" class="btn btn-primary" (click)="onSet()">
+            <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
+        </div>
+      </div>
+    </div>
+  </app-modal-template>
+  
