@@ -54,6 +54,24 @@ export class DataConcentratorDetailComponent implements OnInit {
   meters: Array<MeterUnitsList> = [];
   eventsMock: any = [];
 
+  meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
+  showMeterStatusWidget = false;
+
+  notificationsColumnsConfiguration: Array<GridColumn> = [
+    {
+      translationKey: 'Timestamp',
+      field: 'timestamp'
+    },
+    {
+      translationKey: 'ID',
+      field: 'id'
+    },
+    {
+      translationKey: 'Description',
+      field: 'description'
+    }
+  ];
+
   metersColumnsConfiguration: Array<GridColumn> = [
     {
       translationKey: 'Serial',
@@ -228,6 +246,9 @@ export class DataConcentratorDetailComponent implements OnInit {
     if (this.concentratorId.length > 0) {
       this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
         this.data = response;
+        if (this.meterStatusSupportedTypes.find((val) => val.toLowerCase() === this.data.typeValue?.toLowerCase())) {
+          this.showMeterStatusWidget = true;
+        }
         this.breadcrumbService.setPageName(this.data.name);
         this.form = this.createForm();
         this.editForm = this.createEditForm();

@@ -48,15 +48,18 @@ export class DataTableComponent implements OnInit {
   public gridView: GridDataResult;
   gridViewFilter: any;
   @Input() gridData: any;
-  @Input() simpleGrid = true;
-  // todo objects
+  @Input() simpleGrid = true; // todo check if needed
+
   @Input() gridColumns: Array<GridColumn> = [];
   @Input() rowActions: Array<GridRowAction> = [];
+
   columnType = GridColumnType;
   // Grid properties
   @Input() gridProperties = [];
   @Input() scrollable: ScrollMode = 'none';
   @Input() loading = false;
+  @Input() withSearch = false;
+  @Input() excelExport = false;
 
   @Input() tableClass;
   @Input() pageSize = 12;

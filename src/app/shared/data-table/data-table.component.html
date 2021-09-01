@@ -1,3 +1,4 @@
+<!-- reference GRID component -->
 <kendo-grid (pageChange)="pageChange($event)"
             [data]="gridView"
             [loading]="loading"
@@ -9,16 +10,16 @@
             [skip]="skip"
             class="kendo-grid">
 
-  <ng-template kendoGridToolbarTemplate>
+  <ng-template *ngIf="withSearch || excelExport" kendoGridToolbarTemplate>
 
-    <input
-      (input)="onFilter($event.target.value)"
-      kendoTextBox
-      placeholder="Search in all columns..."
+    <input (input)="onFilter($event.target.value)"
+           *ngIf="withSearch"
+           kendoTextBox
+           placeholder="Search in all columns..."
     />
 
-    <button icon="fa fa-file-export" kendoGridExcelCommand type="button">
-      Export
+    <button *ngIf="excelExport" icon="fa fa-file-export" kendoGridExcelCommand type="button">
+      {{ 'GRID.EXCEL-EXPORT' | translate }}
     </button>
   </ng-template>
 
@@ -29,6 +30,12 @@
                      [width]="column.width ? column.width : null">
 
     <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
+
+      <!--- no data -->
+      <ng-container
+        *ngIf="!dataItem[column.field] && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
+        {{ 'COMMON.NOT-DEFINED' | translate }}
+      </ng-container>
 
       <!--- no type defined is string -->
       <ng-container *ngIf="!column.type">
@@ -43,18 +50,12 @@
       <ng-container *ngIf="column.type === columnType.DATE">
         <div>
           {{ dataItem[column.field] | date }}
-          <ng-container *ngIf="!dataItem[column.field]">
-            Not defined
-          </ng-container>
         </div>
       </ng-container>
 
       <ng-container *ngIf="column.type === columnType.DATE_TIME">
         <div>
           {{ dataItem[column.field] | formatDateTime }}
-          <ng-container *ngIf="!dataItem[column.field]">
-            Not defined
-          </ng-container>
         </div>
       </ng-container>
 
@@ -77,33 +78,8 @@
 
   <kendo-grid-excel
     [fetchData]="allData"
-    fileName="Events.xlsx"
+    fileName="Export-data.xlsx"
   ></kendo-grid-excel>
 </kendo-grid>
 
 
-<!--<kendo-grid [data]="gridData" [rowClass]="rowClass" class="kendo-grid">-->
-<!--  <kendo-grid-column [title]="'FORM.ACTIVE' | translate" [width]="80" field="active">-->
-<!--    <ng-template kendoGridCellTemplate let-dataItem>-->
-<!--      <kendo-switch [checked]="dataItem.active"></kendo-switch>-->
-<!--    </ng-template>-->
-<!--  </kendo-grid-column>-->
-<!--  <kendo-grid-column [title]="'FORM.NAME' | translate" field="type">-->
-<!--  </kendo-grid-column>-->
-<!--  <kendo-grid-column [title]="'FORM.NEXT-START' | translate" field="nextRun">-->
-<!--    <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">-->
-<!--      <label class="grid-label">-->
-<!--        {{ dataItem.nextRun | formatDateTime }}-->
-<!--        <ng-container *ngIf="!dataItem.nextRun">-->
-<!--          Not defined-->
-<!--        </ng-container>-->
-<!--      </label>-->
-<!--      &lt;!&ndash;                      Row: {{ rowIndex }} /&ndash;&gt;-->
-<!--      &lt;!&ndash;                      <strong>{{ dataItem.id }}</strong>&ndash;&gt;-->
-<!--      <div class="grid-row-button"> &lt;!&ndash;(click)="onRowActionClick(dataItem.id)" &ndash;&gt;-->
-<!--        <img [src]="'assets/images/icons/settings-icon.svg'" class="h-4" />-->
-<!--        <img [src]="'assets/images/icons/play-icon.svg'" class="h-4" />-->
-<!--      </div>-->
-<!--    </ng-template>-->
-<!--  </kendo-grid-column>-->
-<!--</kendo-grid>-->

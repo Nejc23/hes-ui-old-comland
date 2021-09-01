@@ -1,3 +1,5 @@
+<!-- Reference mini card item component for CHART and GAUGE -->
+
 <div class="mini-card-item align-center tw-justify-center">
   <div *ngIf="type === miniCardItemTypeEnum.CHART" class="mini-card-item-chart">
     <kendo-chart>
@@ -23,3 +25,9 @@
   </div>
 </div>
 
+<!-- Usage example: -->
+<!--<app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'"-->
+<!--                    [type]="miniCardItemTypeEnum.CHART">-->
+<!--</app-mini-card-item>-->
+<!--<app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">-->
+<!--</app-mini-card-item>-->
