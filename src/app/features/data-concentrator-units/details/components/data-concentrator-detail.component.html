@@ -111,7 +111,26 @@
                         [pageSize]="12"
                         [pageable]="true"
                         [skip]="0"
-                        [stickyHeader]="true" [tableClass]="'fixed-height'">
+                        [tableClass]="'fixed-height'">
+
+        </app-data-table>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+
+    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">
+      <ng-template kendoTabContent>
+        <div class="tw-py-10">
+          {{ 'COMMON.EVENTS' | translate }}
+        </div>
+
+        <app-data-table [gridData]="eventsMock"
+                        [pageSize]="36"
+                        [pageable]="true"
+                        [scrollable]="'virtual'"
+                        [skip]="0"
+                        [tableClass]="'fixed-height'">
 
         </app-data-table>
 

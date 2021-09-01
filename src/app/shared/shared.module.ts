@@ -95,7 +95,7 @@ import { CircularGaugeModule } from '@progress/kendo-angular-gauges';
 import { MiniCardItemComponent } from './mini-card-item/mini-card-item.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { GridModule } from '@progress/kendo-angular-grid';
+import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import { DataTableComponent } from './data-table/data-table.component';
 
 // required for AOT compilation
@@ -215,7 +215,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     CircularGaugeModule,
     NgxChartsModule,
     LeafletModule,
-    GridModule
+    GridModule,
+    ExcelModule
   ],
   declarations: [
     BaseTemplateComponent,

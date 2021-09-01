@@ -7,7 +7,20 @@
             [rowClass]="rowClass"
             [scrollable]="scrollable"
             [skip]="skip"
-            class="kendo-grid"> <!-- style="height: 60vh" -->
+            class="kendo-grid">
+
+  <ng-template kendoGridToolbarTemplate>
+
+    <input
+      (input)="onFilter($event.target.value)"
+      kendoTextBox
+      placeholder="Search in all columns..."
+    />
+
+    <button icon="fa fa-file-export" kendoGridExcelCommand type="button">
+      Export
+    </button>
+  </ng-template>
 
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
                      [class]="column.class"
@@ -61,6 +74,11 @@
     </ng-template>
 
   </kendo-grid-column>
+
+  <kendo-grid-excel
+    [fetchData]="allData"
+    fileName="Events.xlsx"
+  ></kendo-grid-excel>
 </kendo-grid>
 
 

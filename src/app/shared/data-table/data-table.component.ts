@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { GridDataResult, PageChangeEvent, PageSizeItem, RowClassArgs } from '@progress/kendo-angular-grid';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
+import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import { process } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor } from '@progress/kendo-data-query/dist/npm/filtering/filter-descriptor.interface';
 
 export interface GridColumn {
   translationKey: string;
@@ -43,6 +46,7 @@ export interface ColoredValue {
 })
 export class DataTableComponent implements OnInit {
   public gridView: GridDataResult;
+  gridViewFilter: any;
   @Input() gridData: any;
   @Input() simpleGrid = true;
   // todo objects
@@ -81,7 +85,8 @@ export class DataTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.loadItems();
+    this.loadItems(this.gridData);
+    this.allData = this.allData.bind(this);
   }
 
   rowClass(context: RowClassArgs) {
@@ -103,7 +108,7 @@ export class DataTableComponent implements OnInit {
   pageChange({ skip, take }: PageChangeEvent): void {
     this.skip = skip;
     this.pageSize = take;
-    this.loadItems();
+    this.loadItems(this.gridData);
   }
 
   colorExist(enumValue: string, coloredValues: ColoredValue[]) {
@@ -116,9 +121,42 @@ export class DataTableComponent implements OnInit {
     }
   }
 
-  private loadItems(): void {
+  public allData(): ExcelExportData {
+    return {
+      data: process(this.gridData, {
+        sort: [{ field: 'id', dir: 'asc' }]
+      }).data
+    };
+  }
+
+  public onFilter(inputValue: string): void {
+    let filterTemp: CompositeFilterDescriptor = {
+      logic: 'or',
+      filters: []
+    };
+    // Search all only for string fields
+    // columns need to be defined for Search
+    const columns = this.gridColumns.filter((column) => column.type !== (GridColumnType.SWITCH || GridColumnType.RADIO));
+
+    columns.forEach((column) => {
+      filterTemp.filters.push({
+        field: column.field,
+        operator: 'contains',
+        value: inputValue,
+        ignoreCase: true
+      });
+    });
+
+    this.gridViewFilter = process(this.gridData, {
+      filter: filterTemp
+    }).data;
+
+    this.loadItems(this.gridViewFilter);
+  }
+
+  private loadItems(data: any): void {
     this.gridView = {
-      data: this.gridData.slice(this.skip, this.skip + this.pageSize),
+      data: data.slice(this.skip, this.skip + this.pageSize),
       total: this.gridData.length
     };
   }

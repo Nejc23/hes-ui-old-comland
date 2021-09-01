@@ -52,6 +52,7 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   gridData: any = [];
   meters: Array<MeterUnitsList> = [];
+  eventsMock: any = [];
 
   metersColumnsConfiguration: Array<GridColumn> = [
     {
@@ -235,6 +236,7 @@ export class DataConcentratorDetailComponent implements OnInit {
 
         //MOCK DATA
         this.loadGridData();
+        this.loadEventsData();
         // notifications
         this.alarms = [
           {
@@ -502,7 +504,7 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   loadGridData() {
     // TODO (request, pagination ...)
-    let requestParam: IActionRequestParams = {
+    const requestParam: IActionRequestParams = {
       pageSize: 20,
       pageNumber: 1,
       textSearch: {
@@ -516,6 +518,67 @@ export class DataConcentratorDetailComponent implements OnInit {
     this.meterUnitsTypeService.getGridMeterUnits(requestParam).subscribe((res) => {
       this.meters = res.data;
     });
+  }
+
+  loadEventsData() {
+    this.eventsMock = [
+      {
+        value: 251,
+        timestamp: '2021-08-02T10:00:24+02:00'
+      },
+      {
+        value: 214,
+        timestamp: '2021-08-02T10:00:41+02:00'
+      },
+      {
+        value: 251,
+        timestamp: '2021-08-09T13:35:16+02:00'
+      },
+      {
+        value: 214,
+        timestamp: '2021-08-09T13:36:02+02:00'
+      },
+      {
+        value: 11,
+        timestamp: '2021-08-11T09:42:42+02:00'
+      },
+      {
+        value: 11,
+        timestamp: '2021-08-11T10:22:05+02:00'
+      },
+      {
+        value: 11,
+        timestamp: '2021-08-11T10:24:08+02:00'
+      },
+      {
+        value: 11,
+        timestamp: '2021-08-11T11:31:05+02:00'
+      },
+      {
+        value: 1,
+        timestamp: '2021-08-11T12:50:44+02:00'
+      },
+      {
+        value: 2,
+        timestamp: '2021-08-11T12:54:37+02:00'
+      },
+      {
+        value: 227,
+        timestamp: '2021-08-11T12:54:42+02:00'
+      },
+      {
+        value: 11,
+        timestamp: '2021-08-11T13:54:40+02:00'
+      },
+      {
+        value: 251,
+        timestamp: '2021-08-19T13:13:17+02:00'
+      },
+      {
+        value: 214,
+        timestamp: '2021-08-19T13:13:30+02:00'
+      }
+    ];
   }
 
   // public getSessionSettingsPageIndex() {
