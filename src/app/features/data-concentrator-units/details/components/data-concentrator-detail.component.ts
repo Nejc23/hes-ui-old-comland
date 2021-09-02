@@ -232,6 +232,10 @@ export class DataConcentratorDetailComponent implements OnInit {
     return PermissionEnumerator.Manage_Concentrators;
   }
 
+  get plcStatus() {
+    return nameOf<DcuForm>((o) => o.plcStatus);
+  }
+
   ngOnInit() {
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
@@ -250,6 +254,9 @@ export class DataConcentratorDetailComponent implements OnInit {
           this.showMeterStatusWidget = true;
         }
         this.breadcrumbService.setPageName(this.data.name);
+        //MOCK DATA
+        //this.data.plcStatus = ConcentratorStatus.UNKNOWN;
+
         this.form = this.createForm();
         this.editForm = this.createEditForm();
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
@@ -417,7 +424,8 @@ export class DataConcentratorDetailComponent implements OnInit {
         [this.addressProperty]: [this.data ? this.data.address : null],
         [this.tagsProperty]: [this.data ? this.data.tags : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
-        [this.macProperty]: [this.data ? this.data.mac : null]
+        [this.macProperty]: [this.data ? this.data.mac : null],
+        [this.plcStatus]: [this.data ? this.data.plcStatus : null]
       },
       { updateOn: 'blur' }
     );
@@ -474,7 +482,7 @@ export class DataConcentratorDetailComponent implements OnInit {
     component.credentialsVisible = this.credentialsVisible;
 
     modalRef.result
-      .then((data) => {
+      .then(() => {
         this.getData();
       })
       .catch(() => {});

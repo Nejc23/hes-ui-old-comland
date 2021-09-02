@@ -359,7 +359,8 @@
     "TAGS": "Tags",
     "EXTERNALID": "External Id",
     "COORDINATES": "Coordinates",
-    "NEXT-START": "Next start"
+    "NEXT-START": "Next start",
+    "PLCSTATUS": "PLC status"
   },
   "GRID": {
     "ACTIVE": "Active",

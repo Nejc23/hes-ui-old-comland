@@ -26,6 +26,7 @@
   @apply tw-border-solid;
   @apply tw-border-t-0;
   @apply tw-border-b-0;
+  min-height: 208px;
 
   &.map {
     @apply tw-border-b;
@@ -114,3 +115,11 @@
   @apply tw-rounded-b-md;
 }
 
+.colored-element {
+  @apply tw-rounded;
+  @apply tw-h-5;
+  @apply tw-items-center;
+  @apply tw-justify-center;
+  @apply tw-capitalize;
+  @apply tw-px-2;
+}

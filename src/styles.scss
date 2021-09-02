@@ -200,3 +200,21 @@ body {
 .opacity {
   @apply tw-bg-opacity-20;
 }
+
+.active-status {
+  @apply tw-text-green;
+  @apply tw-bg-green;
+  @apply tw-bg-opacity-20;
+}
+
+.inactive-status {
+  @apply tw-text-red;
+  @apply tw-bg-red;
+  @apply tw-bg-opacity-20;
+}
+
+.undefined-status {
+  @apply tw-bg-black;
+  @apply tw-text-black;
+  @apply tw-bg-opacity-20;
+}

@@ -18,4 +18,13 @@ export interface DataConcentratorUnit {
   password: string;
   latitude?: number;
   longitude?: number;
+  plcStatus?: ConcentratorStatus;
+}
+
+export enum ConcentratorStatus {
+  UNKNOWN = 'unknown',
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  MOUNTED = 'mounted',
+  DELETED = 'deleted'
 }

@@ -12,14 +12,14 @@ export class PageTitleComponent {
 
   constructor() {}
 
-  addClass() {
+  addStatusClass() {
     switch (this.status) {
       case 'INACTIVE':
-        return 'inactive';
+        return 'inactive-status';
       case 'ACTIVE':
-        return 'active';
+        return 'active-status';
       default:
-        return 'undefined';
+        return 'undefined-status';
     }
   }
 }

@@ -19,13 +19,14 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() buttonLabel = '';
   @Input() buttonIconName = '';
 
-  @Input() withEdit = false;
+  @Input() loading = false;
   @Input() form: FormGroup;
   @Input() showMoreButton = false;
   @Input() buttonWithLink = false;
   @Input() buttonLinkUrl = '';
   @Input() paginationLimit;
   @Output() buttonClickEvent = new EventEmitter<boolean>();
+
   // TODO MODEL
   @Input() meterUnitData = [];
   @Input() tags = [];
@@ -149,5 +150,21 @@ export class CardItemComponent implements OnInit, OnChanges {
 
   public labelContent(e: any): string {
     return e.category;
+  }
+
+  addStatusClass(field: string, value: any) {
+    if ((field === 'plcStatus' || field === 'status') && value) {
+      // could be object
+      let statusValues = value.value ? value.value : value;
+      // plcStatus or statusValue?
+      switch (statusValues.toLocaleString().toUpperCase()) {
+        case 'INACTIVE':
+          return 'inactive-status colored-element';
+        case 'ACTIVE':
+          return 'active-status colored-element';
+        default:
+          return 'undefined-status colored-element';
+      }
+    }
   }
 }

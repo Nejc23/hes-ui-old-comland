@@ -41,7 +41,7 @@
 
             </app-card-item>
 
-            <app-card-item *ngIf="showMeterStatusWidget"
+            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"
                            [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
             </app-card-item>
 

@@ -12,136 +12,151 @@
       <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
     </button>
   </div>
-  <div class="app-card-body">
+  <div [ngClass]="loading ? 'tw-animate-pulse' : ''" class="app-card-body">
 
+    <div *ngIf="loading" class="tw-inline-flex tw-justify-center tw-items-center tw-w-full tw-h-52">
+      <div
+        class="tw-w-16 tw-h-16 tw-border-4 tw-border-lightGray tw-border-dashed tw-rounded-full tw-animate-spin">
+      </div>
+    </div>
     <!-- Place for generic content -->
     <ng-content></ng-content>
     <!-- Place for generic content -->
 
-    <ng-container *ngIf="form">
-      <div
-        *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
-        [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : ''"
-        class="app-card-row">
-        <div class="tw-text-darkGray">
-          {{ 'FORM.' + formData.name.toUpperCase() | translate }}
+    <ng-container *ngIf="!loading">
+
+      <div *ngIf="form">
+        <div
+          *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
+          [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : ''"
+          class="app-card-row">
+          <div class="tw-text-darkGray">
+            {{ 'FORM.' + formData.name.toUpperCase() | translate }}
+          </div>
+          <div *ngIf="formData.control.value || formData.control.value?.value"
+               class="tw-text-black">
+            <ng-container *ngIf="formData.control.value?.id; else notObject">
+              {{ formData.control.value.value }}
+            </ng-container>
+            <ng-template #notObject>  {{ formData.control.value}} </ng-template>
+          </div>
         </div>
-        <div class="tw-text-black">
-          <ng-container *ngIf="formData.control.value?.id; else notObject">
-            {{ formData.control.value.value }}
-          </ng-container>
-          <ng-template #notObject>  {{ formData.control.value}} </ng-template>
+      </div>
+
+      <div *ngIf="meterUnitData.length > 0">
+
+        <div class="tw-inline-flex tw-w-full">
+
+          <div class="tw-w-1/2 tw-my-6">
+            <div class="tw-flex tw-flex-col tw-items-center">
+              <div *ngFor="let data of meterUnitData"
+                   [ngClass]="'bg-' + data.name.toLowerCase() + ' opacity'" class="meter-status-item">
+                <div [ngClass]="'bg-' + data.name.toLowerCase()" class="dot"></div>
+                <div [style.color]="addBgColor(data.name)">{{ data.name }}</div>
+                <div class="tw-text-black tw-font-bold">{{ data.value }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tw-w-1/2 tw-flex tw-flex-col tw-items-center">
+            <div *ngIf="meterUnitTotal" class="tw-w-full tw-h-1/3 tw-pt-24 tw-text-center">
+              <div class="tw-text-black tw-text-center tw-text-3xl tw-font-medium">{{ meterUnitTotal }}</div>
+              <div class="tw-text-xs tw-text-mediumGray tw-font-medium">{{ 'COMMON.ALL-METERS' | translate }}</div>
+            </div>
+            <ngx-charts-pie-chart
+              [customColors]="meterStatusGraphColors"
+              [doughnut]="true"
+              [explodeSlices]="true"
+              [labels]="false"
+              [results]="meterUnitData"
+              [view]="[208,208]"
+              class="pie-chart"
+            >
+            </ngx-charts-pie-chart>
+
+            <!--          <kendo-chart-->
+            <!--            [seriesColors]="['#50B167', '#E9BD4A', '#981D78', '#C748A6', '#E180C8', '#053876', '#1C5BA8', '#5992D7']">-->
+            <!--            <ng-template kendoChartDonutCenterTemplate>-->
+            <!--              <h3>1001 total devices</h3>-->
+            <!--            </ng-template>-->
+            <!--            <kendo-chart-series>-->
+            <!--              <kendo-chart-series-item-->
+            <!--                [data]="meterUnitData"-->
+            <!--                [holeSize]="90"-->
+            <!--                [padding]="30"-->
+            <!--                [type]="'donut'"-->
+            <!--                categoryField="name"-->
+            <!--                field="value"-->
+            <!--              >-->
+            <!--              </kendo-chart-series-item>-->
+            <!--            </kendo-chart-series>-->
+            <!--            <kendo-chart-legend [visible]="true"></kendo-chart-legend>-->
+            <!--          </kendo-chart>-->
+          </div>
         </div>
+
+
+      </div>
+
+      <div *ngIf="latLang.length > 0" class="app-card-body map">
+        <div class="app-card-row">
+          <div class="tw-text-darkGray">
+            {{ 'FORM.COORDINATES' | translate }}:
+          </div>
+          <div class="tw-text-black">
+            {{ latLang[0]}}° N, {{latLang[1]}}° E
+          </div>
+        </div>
+
+        <div
+          [leafletOptions]="options"
+          class="map-container"
+          leaflet>
+        </div>
+      </div>
+
+      <div *ngIf="tags.length > 0" class="tw-inline-flex tw-w-full tw-px-6 tw-py-4">
+
+        <div class="tw-text-darkGray tw-w-1/3">
+          {{ 'COMMON.APPLIED-TAGS' | translate }}:
+        </div>
+
+        <div class="tag-items tw-w-2/3">
+          <div *ngFor="let tag of tags" class="tag-item">
+            {{ tag }}
+          </div>
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+
+  <ng-container>
+    <ng-container *ngIf="form && showMoreButton">
+      <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SHOW-MORE' | translate }}
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div (click)="showLessItems()" *ngIf="paginationLimit >= controls.length"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SHOW-LESS' | translate }}
+        <i class="fas fa-chevron-up"></i>
       </div>
     </ng-container>
 
-    <div *ngIf="meterUnitData.length > 0">
-
-      <div class="tw-inline-flex tw-w-full">
-
-        <div class="tw-w-1/2 tw-my-6">
-          <div class="tw-flex tw-flex-col tw-items-center">
-            <div *ngFor="let data of meterUnitData"
-                 [ngClass]="'bg-' + data.name.toLowerCase() + ' opacity'" class="meter-status-item">
-              <div [ngClass]="'bg-' + data.name.toLowerCase()" class="dot"></div>
-              <div [style.color]="addBgColor(data.name)">{{ data.name }}</div>
-              <div class="tw-text-black tw-font-bold">{{ data.value }}</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="tw-w-1/2 tw-flex tw-flex-col tw-items-center">
-          <div *ngIf="meterUnitTotal" class="tw-w-full tw-h-1/3 tw-pt-24 tw-text-center">
-            <div class="tw-text-black tw-text-center tw-text-3xl tw-font-medium">{{ meterUnitTotal }}</div>
-            <div class="tw-text-xs tw-text-mediumGray tw-font-medium">{{ 'COMMON.ALL-METERS' | translate }}</div>
-          </div>
-          <ngx-charts-pie-chart
-            [customColors]="meterStatusGraphColors"
-            [doughnut]="true"
-            [explodeSlices]="true"
-            [labels]="false"
-            [results]="meterUnitData"
-            [view]="[208,208]"
-            class="pie-chart"
-          >
-          </ngx-charts-pie-chart>
-
-          <!--          <kendo-chart-->
-          <!--            [seriesColors]="['#50B167', '#E9BD4A', '#981D78', '#C748A6', '#E180C8', '#053876', '#1C5BA8', '#5992D7']">-->
-          <!--            <ng-template kendoChartDonutCenterTemplate>-->
-          <!--              <h3>1001 total devices</h3>-->
-          <!--            </ng-template>-->
-          <!--            <kendo-chart-series>-->
-          <!--              <kendo-chart-series-item-->
-          <!--                [data]="meterUnitData"-->
-          <!--                [holeSize]="90"-->
-          <!--                [padding]="30"-->
-          <!--                [type]="'donut'"-->
-          <!--                categoryField="name"-->
-          <!--                field="value"-->
-          <!--              >-->
-          <!--              </kendo-chart-series-item>-->
-          <!--            </kendo-chart-series>-->
-          <!--            <kendo-chart-legend [visible]="true"></kendo-chart-legend>-->
-          <!--          </kendo-chart>-->
-        </div>
+    <ng-container *ngIf="buttonLinkUrl !== '' && buttonWithLink">
+      <div [routerLink]="'/' + buttonLinkUrl"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SEE-ALL' | translate }}
+        <i class="fas fa-chevron-right"></i>
       </div>
-
-
-    </div>
-
-    <div *ngIf="tags.length > 0" class="tw-inline-flex tw-w-full tw-px-6 tw-py-4">
-
-      <div class="tw-text-darkGray tw-w-1/3">
-        {{ 'COMMON.APPLIED-TAGS' | translate }}:
-      </div>
-
-      <div class="tag-items tw-w-2/3">
-        <div *ngFor="let tag of tags" class="tag-item">
-          {{ tag }}
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <div *ngIf="latLang.length > 0" class="app-card-body map">
-    <div class="app-card-row">
-      <div class="tw-text-darkGray">
-        {{ 'FORM.COORDINATES' | translate }}:
-      </div>
-      <div class="tw-text-black">
-        {{ latLang[0]}}° N, {{latLang[1]}}° E
-      </div>
-    </div>
-
-    <div
-      [leafletOptions]="options"
-      class="map-container"
-      leaflet>
-    </div>
-  </div>
-
-  <ng-container *ngIf="form && showMoreButton">
-    <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
-         class="app-card-show-more-button">
-      {{ 'COMMON.SHOW-MORE' | translate }}
-      <i class="fas fa-chevron-down"></i>
-    </div>
-    <div (click)="showLessItems()" *ngIf="paginationLimit >= controls.length"
-         class="app-card-show-more-button">
-      {{ 'COMMON.SHOW-LESS' | translate }}
-      <i class="fas fa-chevron-up"></i>
-    </div>
+    </ng-container>
   </ng-container>
 
-  <ng-container *ngIf="buttonLinkUrl !== '' && buttonWithLink">
-    <div [routerLink]="'/' + buttonLinkUrl"
-         class="app-card-show-more-button">
-      {{ 'COMMON.SEE-ALL' | translate }}
-      <i class="fas fa-chevron-right"></i>
-    </div>
-  </ng-container>
 
   <div *ngIf="!showMoreButton && !buttonWithLink && latLang.length === 0" class="bottom-border"></div>
 </div>
