@@ -6,7 +6,7 @@
   width: 440px;
   bottom: 0;
   height: 100vh;
-  z-index: 10000;
+  z-index: 1050;
   visibility: hidden;
   overflow: hidden;
 }
@@ -42,3 +42,6 @@
   @apply tw-items-center;
 }
 
+.content {
+  height: 80vh;
+}

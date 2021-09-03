@@ -10,13 +10,13 @@ export class SlideOutComponentComponent implements OnInit {
   @Input() contentClass = '';
   @Input() title = '';
 
-  @Output() closeButtonClicked = new EventEmitter<boolean>();
+  @Output() closeButtonClickedEvent = new EventEmitter<boolean>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
   close() {
-    this.closeButtonClicked.emit(true);
+    this.closeButtonClickedEvent.emit(true);
   }
 }

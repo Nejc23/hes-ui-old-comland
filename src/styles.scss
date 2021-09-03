@@ -219,7 +219,6 @@ body {
   @apply tw-bg-opacity-20;
 }
 
-.tw-z-index-max {
-  z-index: 10000;
+.toast-body {
+  z-index: 2020 !important;
 }
-

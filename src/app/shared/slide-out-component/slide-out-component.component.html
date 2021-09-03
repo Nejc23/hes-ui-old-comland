@@ -3,7 +3,7 @@
     <div class="header">
       <div class="small-title-bold"> {{ title | translate }}</div>
       <div>
-        <img class="p-2" src="assets/images/icons/close-icon.svg" />
+        <img (click)="close()" class="p-2" src="assets/images/icons/close-icon.svg" />
       </div>
     </div>
     <div [ngClass]="contentClass" class="content">

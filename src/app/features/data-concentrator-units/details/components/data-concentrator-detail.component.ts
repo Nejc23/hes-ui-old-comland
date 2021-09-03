@@ -615,6 +615,11 @@ export class DataConcentratorDetailComponent implements OnInit {
     ];
   }
 
+  refreshData() {
+    debugger;
+    this.getData();
+  }
+
   // public getSessionSettingsPageIndex() {
   //   const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
   //   return settings.pageIndex;

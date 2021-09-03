@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
@@ -8,8 +8,6 @@ import { Observable } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { TabStripComponent } from '@progress/kendo-angular-layout';
-import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -19,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class EditDcuFormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() concentratorId = '';
-  @Input() isModal = true;
+  @Output() savedDataEvent = new EventEmitter<boolean>();
 
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
@@ -28,10 +26,6 @@ export class EditDcuFormComponent implements OnInit {
   saveError: string;
 
   @Input() credentialsVisible = false;
-
-  @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
-  @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
-
   opened = false;
 
   constructor(
@@ -39,7 +33,6 @@ export class EditDcuFormComponent implements OnInit {
     private dcuService: DataConcentratorUnitsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    // private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private translate: TranslateService
   ) {}
@@ -119,36 +112,27 @@ export class EditDcuFormComponent implements OnInit {
     return formData;
   }
 
-  // saveDcu() {
-  //   const dcuFormData = this.fillData();
-  //   const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
-  //   const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
-  //
-  //   try {
-  //     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-  //       (result) => {
-  //         if (result) {
-  //           this.modal.close();
-  //         }
-  //       },
-  //       (errResult) => {
-  //         console.log('Error saving form: ', errResult);
-  //         this.saveError = errResult && errResult.error ? errResult.error[0] : null;
-  //       }
-  //     );
-  //   } catch (error) {
-  //     console.log('Edit-DCU Form Error:', error);
-  //   }
-  // }
-  //
-  // cancel() {
-  //   this.eventService.layoutChange(null);
-  //   this.modal.close();
-  // }
-  //
-  // onDismiss() {
-  //   this.modal.dismiss();
-  // }
+  saveDcu() {
+    const dcuFormData = this.fillData();
+    const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
+    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
+
+    try {
+      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+        (result) => {
+          if (result) {
+            this.savedDataEvent.emit(true);
+          }
+        },
+        (errResult) => {
+          console.log('Error saving form: ', errResult);
+          this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+        }
+      );
+    } catch (error) {
+      console.log('Edit-DCU Form Error:', error);
+    }
+  }
 
   toggle() {
     this.opened = !this.opened;

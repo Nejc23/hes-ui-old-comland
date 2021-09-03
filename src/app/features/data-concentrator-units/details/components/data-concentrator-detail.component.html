@@ -33,10 +33,10 @@
           <!--          </div>-->
 
 
-          <app-slide-out-component (closeButtonClicked)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
+          <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
                                    [visible]="openEdit">
-            <app-edit-dcu-form [form]="editForm" [isModal]="false"
-                               concentratorId="6f46ec68-73e0-423c-a9a6-05753baeafba">
+            <app-edit-dcu-form (savedDataEvent)="refreshData()" [concentratorId]="data.concentratorId"
+                               [form]="editForm">
 
             </app-edit-dcu-form>
           </app-slide-out-component>
