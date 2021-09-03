@@ -222,3 +222,9 @@ body {
 .toast-body {
   z-index: 2020 !important;
 }
+
+.buttons-bottom-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+}

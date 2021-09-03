@@ -1,4 +1,4 @@
-<div class="tw-m-10 tw-h-full">
+<div class="tw-m-8 tw-h-full">
 
   <div *ngIf="saveError" class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
@@ -65,12 +65,13 @@
     </div>
   </div>
 
-  <div class="d-flex justify-content-end">
-    <div class="btn-group dropdown" dropdown>
-      <button (click)="saveDcu()" class="btn btn-primary" type="submit">{{ 'BUTTON.SAVE' | translate }}</button>
+  <div class="buttons-bottom-container">
+    <div class="d-flex justify-content-end">
+      <div class="btn-group dropdown" dropdown>
+        <button (click)="saveDcu()" class="btn btn-primary" type="submit">{{ 'BUTTON.SAVE' | translate }}</button>
+      </div>
     </div>
   </div>
-
 </div>
 
 
