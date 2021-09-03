@@ -1,84 +1,139 @@
-<app-modal-template (dismiss)="onDismiss()">
+<!--<app-modal-template (dismiss)="onDismiss()" *ngIf="isModal">-->
 
-  <div modal-header>{{ 'DCU.EDIT-DCU' | translate }}</div>
-  
-  <div modal-body>
-    <ng-container>
+<!--  <div modal-header>{{ 'DCU.EDIT-DCU' | translate }}</div>-->
+
+<!--  <div modal-body>-->
+<!--    <ng-container>-->
 
 
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
-      </div>
+<!--      <div *ngIf="saveError" class="alert alert-danger alert-dismissible fade show" role="alert">-->
+<!--        <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}-->
+<!--      </div>-->
 
-      <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
+<!--      <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>-->
 
-      <div class="form-row">
-        <div class="col-12">
-          <app-input-text [form]="form" [property]="idNumberProperty" label="ID">
-          </app-input-text>
-        </div>
-      </div>
+<!--      <div class="form-row">-->
+<!--        <div class="col-12">-->
+<!--          <app-input-text [form]="form" [property]="idNumberProperty" label="ID">-->
+<!--          </app-input-text>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="form-row">
-        <div class="col-6">
-          <app-select-input label="VENDOR" [form]="form" [property]="vendorProperty"
-                            [disabled]="true">
-          </app-select-input>
-        </div>
-      </div>
+<!--      <div class="form-row">-->
+<!--        <div class="col-6">-->
+<!--          <app-select-input [disabled]="true" [form]="form" [property]="vendorProperty"-->
+<!--                            label="VENDOR">-->
+<!--          </app-select-input>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="form-row">
-        <div class="col-6">
-          <app-select-input label="TYPE" [form]="form" [property]="typeProperty" [disabled]="true">
-          </app-select-input>
-        </div>
-      </div>
+<!--      <div class="form-row">-->
+<!--        <div class="col-6">-->
+<!--          <app-select-input [disabled]="true" [form]="form" [property]="typeProperty" label="TYPE">-->
+<!--          </app-select-input>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div *ngIf="credentialsVisible">
-        <div class="form-row">
-          <div class="col-6">
-            <app-input-text [form]="form" [property]="userNameProperty" label="USERNAME"></app-input-text>
-          </div>
-        </div>
-      </div>
+<!--      <div *ngIf="credentialsVisible">-->
+<!--        <div class="form-row">-->
+<!--          <div class="col-6">-->
+<!--            <app-input-text [form]="form" [property]="userNameProperty" label="USERNAME"></app-input-text>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="form-row">
-        <div class="col-6">
-          <app-input-text [form]="form" [property]="ipProperty" label="IP"></app-input-text>
-        </div>
-        <div class="form-row">
-          <div class="col-6">
-            <app-input-text [form]="form" [property]="portProperty" label="PORT"></app-input-text>
-          </div>
-        </div>
-      </div>
+<!--      <div class="form-row">-->
+<!--        <div class="col-6">-->
+<!--          <app-input-text [form]="form" [property]="ipProperty" label="IP"></app-input-text>-->
+<!--        </div>-->
+<!--        <div class="form-row">-->
+<!--          <div class="col-6">-->
+<!--            <app-input-text [form]="form" [property]="portProperty" label="PORT"></app-input-text>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div type="button" data-bs-toggle="collapse" data-target="#collapse" aria-expanded="false"
-           class="gray-color-dark text-normal pt-2"
-           aria-controls="collapse" (click)="toggle()">
-           {{ 'COMMON.ADVANCED' | translate }}
-        <i *ngIf="!opened" class="far fa-angle-down me-2"></i>
-        <i *ngIf="opened"  class="far fa-angle-up me-2"></i>
-      </div>
+<!--      <div (click)="toggle()" aria-controls="collapse" aria-expanded="false" class="gray-color-dark text-normal pt-2"-->
+<!--           data-bs-toggle="collapse"-->
+<!--           data-target="#collapse" type="button">-->
+<!--        {{ 'COMMON.ADVANCED' | translate }}-->
+<!--        <i *ngIf="!opened" class="far fa-angle-down me-2"></i>-->
+<!--        <i *ngIf="opened" class="far fa-angle-up me-2"></i>-->
+<!--      </div>-->
 
-      <div class="collapse mt-3" id="collapse" [ngClass]="opened ? 'show' : ''">
-        <div class="form-row">
-          <div class="col-6">
-            <app-input-text [form]="form" [property]="externalIdProperty" label="EXTERNAL-ID">
-            </app-input-text>
-          </div>
-        </div>
-      </div>
-    </ng-container>
+<!--      <div [ngClass]="opened ? 'show' : ''" class="collapse mt-3" id="collapse">-->
+<!--        <div class="form-row">-->
+<!--          <div class="col-6">-->
+<!--            <app-input-text [form]="form" [property]="externalIdProperty" label="EXTERNAL-ID">-->
+<!--            </app-input-text>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </ng-container>-->
+<!--  </div>-->
+
+<!--  <div modal-footer>-->
+<!--    <div class="d-flex justify-content-end">-->
+<!--      <button (click)="cancel()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>-->
+<!--      <div class="btn-group dropdown" dropdown>-->
+<!--        <button (click)="saveDcu()" class="btn btn-primary" type="submit">{{ 'BUTTON.SAVE' | translate }}</button>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</app-modal-template>-->
+
+
+<div *ngIf="!isModal" class="tw-m-10">
+
+  <div *ngIf="saveError">
+    <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
   </div>
 
-  <div modal-footer>
-    <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
-      <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="saveDcu()">{{ 'BUTTON.SAVE' | translate }}</button>
+  <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
+
+  <div class="form-row">
+    <div class="col-12">
+      <app-input-text [form]="form" [property]="idNumberProperty" label="ID">
+      </app-input-text>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-6">
+      <app-select-input [disabled]="true" [form]="form" [property]="vendorProperty"
+                        label="VENDOR">
+      </app-select-input>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-6">
+      <app-select-input [disabled]="true" [form]="form" [property]="typeProperty" label="TYPE">
+      </app-select-input>
+    </div>
+  </div>
+
+  <div *ngIf="credentialsVisible">
+    <div class="form-row">
+      <div class="col-6">
+        <app-input-text [form]="form" [property]="userNameProperty" label="USERNAME"></app-input-text>
       </div>
     </div>
   </div>
-</app-modal-template>
+
+  <div class="form-row">
+    <div class="col-6">
+      <app-input-text [form]="form" [property]="ipProperty" label="IP"></app-input-text>
+    </div>
+    <div class="form-row">
+      <div class="col-6">
+        <app-input-text [form]="form" [property]="portProperty" label="PORT"></app-input-text>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
 

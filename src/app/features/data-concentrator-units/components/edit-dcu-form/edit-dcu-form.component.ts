@@ -1,7 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
@@ -20,6 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class EditDcuFormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() concentratorId = '';
+  @Input() isModal = true;
 
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
@@ -39,64 +39,10 @@ export class EditDcuFormComponent implements OnInit {
     private dcuService: DataConcentratorUnitsService,
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private modal: NgbActiveModal,
+    // private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private translate: TranslateService
   ) {}
-
-  ngOnInit() {
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
-
-    this.dcuVendors$.subscribe((values) => {
-      this.dcuVendors = values;
-    });
-
-    this.dcuTags$ = this.codelistService.dcuTagCodelist();
-  }
-
-  fillData(): EditDcuForm {
-    const formData: EditDcuForm = {
-      id: this.concentratorId,
-      externalId: this.form.get(this.externalIdProperty).value,
-      name: this.form.get(this.nameProperty).value,
-      serialNumber: this.form.get(this.idNumberProperty).value,
-      ip: this.form.get(this.ipProperty).value,
-      port: this.form.get(this.portProperty).value,
-      manufacturer: this.form.get(this.vendorProperty).value
-    };
-    if (this.credentialsVisible) {
-      formData.userName = this.form.get(this.userNameProperty).value;
-    }
-    return formData;
-  }
-
-  saveDcu() {
-    const dcuFormData = this.fillData();
-    const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
-
-    try {
-      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-        (result) => {
-          if (result) {
-            this.modal.close();
-          }
-        },
-        (errResult) => {
-          console.log('Error saving form: ', errResult);
-          this.saveError = errResult && errResult.error ? errResult.error[0] : null;
-        }
-      );
-    } catch (error) {
-      console.log('Edit-DCU Form Error:', error);
-    }
-  }
-
-  cancel() {
-    this.eventService.layoutChange(null);
-    this.modal.close();
-  }
 
   get nameProperty() {
     return nameOf<DcuForm>((o) => o.name);
@@ -146,9 +92,63 @@ export class EditDcuFormComponent implements OnInit {
     return nameOf<DcuForm>((o) => o.port);
   }
 
-  onDismiss() {
-    this.modal.dismiss();
+  ngOnInit() {
+    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
+    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
+
+    this.dcuVendors$.subscribe((values) => {
+      this.dcuVendors = values;
+    });
+
+    this.dcuTags$ = this.codelistService.dcuTagCodelist();
   }
+
+  fillData(): EditDcuForm {
+    const formData: EditDcuForm = {
+      id: this.concentratorId,
+      externalId: this.form.get(this.externalIdProperty).value,
+      name: this.form.get(this.nameProperty).value,
+      serialNumber: this.form.get(this.idNumberProperty).value,
+      ip: this.form.get(this.ipProperty).value,
+      port: this.form.get(this.portProperty).value,
+      manufacturer: this.form.get(this.vendorProperty).value
+    };
+    if (this.credentialsVisible) {
+      formData.userName = this.form.get(this.userNameProperty).value;
+    }
+    return formData;
+  }
+
+  // saveDcu() {
+  //   const dcuFormData = this.fillData();
+  //   const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
+  //   const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
+  //
+  //   try {
+  //     this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+  //       (result) => {
+  //         if (result) {
+  //           this.modal.close();
+  //         }
+  //       },
+  //       (errResult) => {
+  //         console.log('Error saving form: ', errResult);
+  //         this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+  //       }
+  //     );
+  //   } catch (error) {
+  //     console.log('Edit-DCU Form Error:', error);
+  //   }
+  // }
+  //
+  // cancel() {
+  //   this.eventService.layoutChange(null);
+  //   this.modal.close();
+  // }
+  //
+  // onDismiss() {
+  //   this.modal.dismiss();
+  // }
 
   toggle() {
     this.opened = !this.opened;

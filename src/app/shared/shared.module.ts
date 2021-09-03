@@ -97,6 +97,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import { DataTableComponent } from './data-table/data-table.component';
+import { SlideOutComponentComponent } from './slide-out-component/slide-out-component.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -175,7 +176,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxChartsModule,
     LeafletModule,
     GridModule,
-    DataTableComponent
+    DataTableComponent,
+    SlideOutComponentComponent
   ],
   imports: [
     CommonModule,
@@ -294,7 +296,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PageLayoutComponent,
     TagElementComponent,
     MiniCardItemComponent,
-    DataTableComponent
+    DataTableComponent,
+    SlideOutComponentComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

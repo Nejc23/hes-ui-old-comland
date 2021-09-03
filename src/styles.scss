@@ -218,3 +218,8 @@ body {
   @apply tw-text-black;
   @apply tw-bg-opacity-20;
 }
+
+.tw-z-index-max {
+  z-index: 10000;
+}
+

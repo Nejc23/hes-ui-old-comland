@@ -11,7 +11,7 @@
     </app-page-title>
 
     <app-dc-operations [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
-                       [showOperations]="true" class="tw-mt-10"></app-dc-operations>
+                       [showOperations]="true" class="tw-mt-10 tw-pr-5"></app-dc-operations>
   </div>
 </div>
 
@@ -32,18 +32,27 @@
 
           <!--          </div>-->
 
+
+          <app-slide-out-component (closeButtonClicked)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
+                                   [visible]="openEdit">
+            <app-edit-dcu-form [form]="editForm" [isModal]="false"
+                               concentratorId="6f46ec68-73e0-423c-a9a6-05753baeafba">
+
+            </app-edit-dcu-form>
+          </app-slide-out-component>
+
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7"
-                           [showMoreButton]="true" [title]="'COMMON.OVERVIEW'">
+                           [showMoreButton]="true" [title]="'COMMON.EDIT-DETAILS'">
 
             </app-card-item>
 
-            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"
-                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
-            </app-card-item>
+            <!--            <app-card-item *ngIf="showMeterStatusWidget"-->
+            <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
+            <!--            </app-card-item>-->
 
             <!--            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">-->
             <!--            </app-card-item>-->

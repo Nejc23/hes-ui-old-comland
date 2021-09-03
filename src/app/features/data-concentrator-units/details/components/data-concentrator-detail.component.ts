@@ -56,6 +56,7 @@ export class DataConcentratorDetailComponent implements OnInit {
 
   meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
   showMeterStatusWidget = false;
+  openEdit = false;
 
   notificationsColumnsConfiguration: Array<GridColumn> = [
     {
@@ -524,7 +525,11 @@ export class DataConcentratorDetailComponent implements OnInit {
   }
 
   editButtonClicked() {
-    this.editDcu();
+    this.openEdit = true;
+  }
+
+  closeSlideOut() {
+    this.openEdit = false;
   }
 
   addWidth() {
