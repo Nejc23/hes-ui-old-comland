@@ -24,13 +24,28 @@
 
         <div class="tw-py-10">
 
-          <!--          <div class="tw-inline-flex tw-w-full tw-grid-cols-5 tw-gap-6 tw-py-5">-->
+          <div class="tw-inline-flex tw-w-full tw-grid-cols-6 tw-gap-6 tw-py-5">
 
-          <!--            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'"-->
-          <!--                                [type]="miniCardItemTypeEnum.CHART">-->
-          <!--            </app-mini-card-item>-->
+            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'"
+                                [type]="miniCardItemTypeEnum.CHART">
+            </app-mini-card-item>
 
-          <!--          </div>-->
+            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">
+            </app-mini-card-item>
+
+            <app-mini-card-item [gaugeValue]="66.6" [label]="'24h'" [type]="miniCardItemTypeEnum.GAUGE">
+            </app-mini-card-item>
+
+            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
+            </app-mini-card-item>
+
+            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
+            </app-mini-card-item>
+
+            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
+            </app-mini-card-item>
+
+          </div>
 
 
           <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
@@ -50,58 +65,35 @@
 
             </app-card-item>
 
-            <!--            <app-card-item *ngIf="showMeterStatusWidget"-->
-            <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
-            <!--            </app-card-item>-->
+            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"
+                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
+            </app-card-item>
 
-            <!--            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">-->
-            <!--            </app-card-item>-->
+            <app-card-item *ngIf="showMeterStatusWidget"
+                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
+            </app-card-item>
 
-            <!--            <app-card-item [latLang]="[46.2434, 14.4192]"-->
-            <!--                           [title]="'Address'">-->
-            <!--            </app-card-item>-->
+            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
+            </app-card-item>
+
+            <app-card-item [latLang]="[46.2434, 14.4192]"
+                           [title]="'Address'">
+            </app-card-item>
 
             <!-- todo columnType.ICON -->
-            <!--            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">-->
-            <!--              <app-data-table [gridColumns]="notificationsColumnsConfiguration"-->
-            <!--                              [gridData]="alarms"-->
-            <!--              ></app-data-table>-->
-            <!--            </app-card-item>-->
+            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
+              <app-data-table [gridColumns]="notificationsColumnsConfiguration"
+                              [gridData]="alarms"
+              ></app-data-table>
+            </app-card-item>
 
-            <!-- TODO replace with component -->
-            <!--            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">-->
-            <!--              <div class="tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">-->
-            <!--                <table class="tw-min-w-max tw-w-full tw-table-auto">-->
-            <!--                  <thead>-->
-            <!--                  <tr class="table-header">-->
-            <!--                    <th class="tiny-text gray-color" scope="col"></th>-->
-            <!--                    <th class="tiny-text gray-color" scope="col">Timestamp</th>-->
-            <!--                    <th class="tiny-text gray-color" scope="col">ID</th>-->
-            <!--                    <th class="tiny-text gray-color" scope="col">Description</th>-->
-            <!--                  </tr>-->
-            <!--                  </thead>-->
-            <!--                  <tbody>-->
-
-            <!--                  <tr *ngFor="let alarm of alarms let i = index;" [ngClass]="i%2 == 0 ? 'gray-background':''"-->
-            <!--                      class="table-row">-->
-            <!--                    <td class="tw-w-11"><img [src]="'assets/images/icons/notification-icon-red.svg'" class="tw-mx-3" />-->
-            <!--                    </td>-->
-            <!--                    <td>{{ alarm.timestamp }}</td>-->
-            <!--                    <td>{{ alarm.id }}</td>-->
-            <!--                    <td class="description-text">{{ alarm.description }}</td>-->
-            <!--                  </tr>-->
-            <!--                  </tbody>-->
-            <!--                </table>-->
-            <!--              </div>-->
-            <!--            </app-card-item>-->
-
-            <!--            <app-card-item [buttonIconName]="'list-icon'" [buttonLabel]="'BUTTON.GO-TO-JOBS'"-->
-            <!--                           [buttonLinkUrl]="'schedulerJobs'"-->
-            <!--                           [buttonWithLink]="true"-->
-            <!--                           title="JOB.SCHEDULER-JOBS">-->
-            <!--              <app-data-table [gridColumns]="scheduledJobsColumnsConfiguration" [gridData]="gridData"-->
-            <!--                              [rowActions]="rowActionsConfiguration"></app-data-table>-->
-            <!--            </app-card-item>-->
+            <app-card-item [buttonIconName]="'list-icon'" [buttonLabel]="'BUTTON.GO-TO-JOBS'"
+                           [buttonLinkUrl]="'schedulerJobs'"
+                           [buttonWithLink]="true"
+                           title="JOB.SCHEDULER-JOBS">
+              <app-data-table [gridColumns]="scheduledJobsColumnsConfiguration" [gridData]="gridData"
+                              [rowActions]="rowActionsConfiguration"></app-data-table>
+            </app-card-item>
 
           </div>
         </div>
@@ -110,43 +102,73 @@
     </kendo-tabstrip-tab>
 
 
-    <!--    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">-->
-    <!--      <ng-template kendoTabContent>-->
-    <!--        <div class="tw-py-10">-->
-    <!--          {{ 'COMMON.METERS' | translate }}-->
-    <!--        </div>-->
+    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">
+      <ng-template kendoTabContent>
 
-    <!--        <app-data-table *ngIf="meters.length > 0" [gridColumns]="metersColumnsConfiguration" [gridData]="meters"-->
-    <!--                        [pageSize]="12"-->
-    <!--                        [pageable]="true"-->
-    <!--                        [skip]="0"-->
-    <!--                        [tableClass]="'fixed-height'">-->
+        <div class="tw-py-10">
+          <app-data-table *ngIf="meters.length > 0" [gridColumns]="metersColumnsConfiguration" [gridData]="meters"
+                          [pageSize]="13"
+                          [pageable]="true"
+                          [skip]="0"
+                          [tableClass]="'fixed-height'"
+                          [withSearch]="true"
+          >
 
-    <!--        </app-data-table>-->
+          </app-data-table>
+        </div>
 
-    <!--      </ng-template>-->
-    <!--    </kendo-tabstrip-tab>-->
+      </ng-template>
+    </kendo-tabstrip-tab>
 
 
-    <!--    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">-->
-    <!--      <ng-template kendoTabContent>-->
-    <!--        <div class="tw-py-10">-->
+    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">
+      <ng-template kendoTabContent>
+        <div class="tw-py-10">
 
-    <!--        </div>-->
+        </div>
 
-    <!--        <app-data-table [excelExport]="false"-->
-    <!--                        [gridData]="eventsMock"-->
-    <!--                        [pageSize]="36"-->
-    <!--                        [pageable]="true"-->
-    <!--                        [scrollable]="'virtual'"-->
-    <!--                        [skip]="0"-->
-    <!--                        [tableClass]="'fixed-height'"-->
-    <!--                        [withSearch]="false">-->
+        <app-data-table [excelExport]="false"
+                        [gridColumns]="notificationsColumnsConfiguration"
+                        [gridData]="eventsMock"
+                        [pageSize]="36"
+                        [pageable]="true"
+                        [scrollable]="'virtual'"
+                        [skip]="0"
+                        [tableClass]="'fixed-height'"
+        >
 
-    <!--        </app-data-table>-->
+        </app-data-table>
 
-    <!--      </ng-template>-->
-    <!--    </kendo-tabstrip-tab>-->
+      </ng-template>
+    </kendo-tabstrip-tab>
 
   </kendo-tabstrip>
 </div>
+
+
+<!-- TODO replace with component -->
+<!--            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">-->
+<!--              <div class="tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">-->
+<!--                <table class="tw-min-w-max tw-w-full tw-table-auto">-->
+<!--                  <thead>-->
+<!--                  <tr class="table-header">-->
+<!--                    <th class="tiny-text gray-color" scope="col"></th>-->
+<!--                    <th class="tiny-text gray-color" scope="col">Timestamp</th>-->
+<!--                    <th class="tiny-text gray-color" scope="col">ID</th>-->
+<!--                    <th class="tiny-text gray-color" scope="col">Description</th>-->
+<!--                  </tr>-->
+<!--                  </thead>-->
+<!--                  <tbody>-->
+
+<!--                  <tr *ngFor="let alarm of alarms let i = index;" [ngClass]="i%2 == 0 ? 'gray-background':''"-->
+<!--                      class="table-row">-->
+<!--                    <td class="tw-w-11"><img [src]="'assets/images/icons/notification-icon-red.svg'" class="tw-mx-3" />-->
+<!--                    </td>-->
+<!--                    <td>{{ alarm.timestamp }}</td>-->
+<!--                    <td>{{ alarm.id }}</td>-->
+<!--                    <td class="description-text">{{ alarm.description }}</td>-->
+<!--                  </tr>-->
+<!--                  </tbody>-->
+<!--                </table>-->
+<!--              </div>-->
+<!--            </app-card-item>-->

@@ -62,6 +62,14 @@
   background-color: white;
 }
 
+::ng-deep .k-toolbar {
+  background-color: white;
+}
+
+::ng-deep input.k-textbox {
+  @apply tw-rounded;
+}
+
 .grid-row-button {
   @apply tw-inline-flex;
   @apply tw-justify-between;
@@ -88,5 +96,5 @@
 }
 
 .fixed-height {
-  height: 628px; // to rem
+  height: 635px; // to rem
 }

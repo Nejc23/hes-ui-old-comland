@@ -57,6 +57,7 @@ export class DataConcentratorDetailComponent implements OnInit {
   meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
   showMeterStatusWidget = false;
   openEdit = false;
+  metersGridPageNumber = 1;
 
   notificationsColumnsConfiguration: Array<GridColumn> = [
     {
@@ -65,7 +66,7 @@ export class DataConcentratorDetailComponent implements OnInit {
     },
     {
       translationKey: 'ID',
-      field: 'id'
+      field: 'value'
     },
     {
       translationKey: 'Description',
@@ -414,7 +415,7 @@ export class DataConcentratorDetailComponent implements OnInit {
         [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
         [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
         [this.externalIdProperty]: [this.data ? this.data.externalId : null],
-        [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
+        // [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
         [this.typeProperty]: [
           this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
           [Validators.required]
@@ -537,10 +538,9 @@ export class DataConcentratorDetailComponent implements OnInit {
   }
 
   loadGridData() {
-    // TODO (request, pagination ...)
     const requestParam: IActionRequestParams = {
-      pageSize: 20,
-      pageNumber: 1,
+      pageSize: 12, // TODO (request, pagination ...)
+      pageNumber: this.metersGridPageNumber,
       textSearch: {
         value: 'DC450G3_3.11',
         propNames: [],
@@ -616,7 +616,6 @@ export class DataConcentratorDetailComponent implements OnInit {
   }
 
   refreshData() {
-    debugger;
     this.getData();
   }
 

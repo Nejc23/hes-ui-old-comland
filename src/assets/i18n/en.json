@@ -175,9 +175,10 @@
     "METER-STATUS": "Meter status",
     "APPLIED-TAGS": "Applied tags",
     "ALL-METERS": "all meters",
-    "NOT-DEFINED": "Not defined",
+    "NOT-DEFINED": "N/A",
     "DETAILS": "Details",
-    "EDIT-DETAILS": "Edit details"
+    "EDIT-DETAILS": "Edit details",
+    "EVENTS": "Events"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",

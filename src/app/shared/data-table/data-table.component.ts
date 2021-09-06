@@ -67,6 +67,8 @@ export class DataTableComponent implements OnInit {
   @Input() pageable = false;
   @Input() stickyHeader = false;
   @Input() tableHeight = 0;
+  @Input() totalRecords;
+
   pageSizes: PageSizeItem[] = [
     {
       text: '5',
@@ -88,6 +90,10 @@ export class DataTableComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
+    if (this.withSearch && this.gridColumns.length === 0) {
+      debugger;
+      console.log('Grid columns should be defined for search!!');
+    }
     this.loadItems(this.gridData);
     this.allData = this.allData.bind(this);
   }
@@ -109,6 +115,7 @@ export class DataTableComponent implements OnInit {
   }
 
   pageChange({ skip, take }: PageChangeEvent): void {
+    debugger;
     this.skip = skip;
     this.pageSize = take;
     this.loadItems(this.gridData);
@@ -133,6 +140,7 @@ export class DataTableComponent implements OnInit {
   }
 
   public onFilter(inputValue: string): void {
+    this.gridViewFilter = this.gridData;
     let filterTemp: CompositeFilterDescriptor = {
       logic: 'or',
       filters: []
@@ -153,14 +161,14 @@ export class DataTableComponent implements OnInit {
     this.gridViewFilter = process(this.gridData, {
       filter: filterTemp
     }).data;
-
+    // todo load more data from BE
     this.loadItems(this.gridViewFilter);
   }
 
   private loadItems(data: any): void {
     this.gridView = {
       data: data.slice(this.skip, this.skip + this.pageSize),
-      total: this.gridData.length
+      total: this.totalRecords ? this.totalRecords : this.gridData.length
     };
   }
 }

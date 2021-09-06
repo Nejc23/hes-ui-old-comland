@@ -15,8 +15,8 @@
   transition: transform .5s ease;
   border-radius: 4px;
   background-color: white;
-  height: 93vh;
-  margin: 32px;
+  height: 98vh;
+  margin: 1rem;
   box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
 }
 
@@ -36,7 +36,7 @@
 
 .header {
   width: 100%;
-  padding: 1.5rem 2rem;
+  padding: 1.5rem 1.7rem 1.5rem 2rem;
   @apply tw-justify-between;
   @apply tw-inline-flex;
   @apply tw-items-center;

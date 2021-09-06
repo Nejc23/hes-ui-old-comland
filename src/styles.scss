@@ -228,3 +228,10 @@ body {
   bottom: 2rem;
   right: 2rem;
 }
+
+.transparent-gray-line {
+  @apply tw-border-b;
+  @apply tw-border-solid;
+  @apply tw-border-lightGray;
+  @apply tw-border-opacity-60;
+}
