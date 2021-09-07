@@ -12,15 +12,18 @@
       <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
     </button>
   </div>
-  <div [ngClass]="loading ? 'tw-animate-pulse' : ''" class="app-card-body">
+  <div class="app-card-body">
 
-    <div *ngIf="loading" class="tw-inline-flex tw-justify-center tw-items-center tw-w-full tw-h-52">
+    <div *ngIf="loading" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-60">
       <div
-        class="tw-w-16 tw-h-16 tw-border-4 tw-border-lightGray tw-border-dashed tw-rounded-full tw-animate-spin">
+        class="loader tw-ease-linear tw-rounded-full tw-border-solid tw-border-4 tw-border-t-4 tw-border-lightGray tw-h-24 tw-w-24 tw-animate-pulse">
+      </div>
+      <div class="tw-font-bold tw-text-black tw-text-xl tw-animate-pulse tw-mt-5">
+        {{'COMMON.LOADING-DATA' | translate }}
       </div>
     </div>
     <!-- Place for generic content -->
-    <ng-content></ng-content>
+    <ng-content class="{{contentClass}}"></ng-content>
     <!-- Place for generic content -->
 
     <ng-container *ngIf="!loading">
@@ -73,25 +76,6 @@
               class="pie-chart"
             >
             </ngx-charts-pie-chart>
-
-            <!--          <kendo-chart-->
-            <!--            [seriesColors]="['#50B167', '#E9BD4A', '#981D78', '#C748A6', '#E180C8', '#053876', '#1C5BA8', '#5992D7']">-->
-            <!--            <ng-template kendoChartDonutCenterTemplate>-->
-            <!--              <h3>1001 total devices</h3>-->
-            <!--            </ng-template>-->
-            <!--            <kendo-chart-series>-->
-            <!--              <kendo-chart-series-item-->
-            <!--                [data]="meterUnitData"-->
-            <!--                [holeSize]="90"-->
-            <!--                [padding]="30"-->
-            <!--                [type]="'donut'"-->
-            <!--                categoryField="name"-->
-            <!--                field="value"-->
-            <!--              >-->
-            <!--              </kendo-chart-series-item>-->
-            <!--            </kendo-chart-series>-->
-            <!--            <kendo-chart-legend [visible]="true"></kendo-chart-legend>-->
-            <!--          </kendo-chart>-->
           </div>
         </div>
 

@@ -1,5 +1,7 @@
 .mini-card-item-chart ::ng-deep .k-chart, .k-stockchart {
   height: 110px;
+  //height: 300px;
+  //min-width: 400px;
 }
 
 .mini-card-item-chart ::ng-deep .k-arcgauge-label {
@@ -7,9 +9,9 @@
 }
 
 .mini-card-item {
-  @apply tw-w-52;
+  // @apply tw-w-52;
   @apply tw-h-40;
-  @apply tw-border-lightestGray;
+  @apply tw-border-lightGray;
   @apply tw-border;
   @apply tw-border-solid;
   @apply tw-rounded;

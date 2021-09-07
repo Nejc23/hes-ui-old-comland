@@ -2,10 +2,26 @@
 
 <div class="mini-card-item align-center tw-justify-center">
   <div *ngIf="type === miniCardItemTypeEnum.CHART" class="mini-card-item-chart">
+
     <kendo-chart>
       <kendo-chart-series>
-        <kendo-chart-series-item [data]="chartData" type="column">
+
+        <kendo-chart-series-item [color]="addColorToChart" [data]="chartData" type="column">
         </kendo-chart-series-item>
+
+        <!--        <kendo-chart-series-item *ngFor="let chartDataItem of chartData"-->
+        <!--                                 [color]="'#00000'"-->
+        <!--                                 [data]="chartDataItem"-->
+        <!--                                 type="column"-->
+        <!--                                 width="1">-->
+        <!--        </kendo-chart-series-item>-->
+
+        <!--        <kendo-chart-series-item *ngFor="let chartDataItem of chartData" [color]="addColorToChart(chartDataItem)"-->
+        <!--                                 [data]="chartData"-->
+        <!--                                 type="column"-->
+        <!--        >-->
+        <!--        </kendo-chart-series-item>-->
+
       </kendo-chart-series>
     </kendo-chart>
     <div class="mini-card-item-label">{{ label }}</div>

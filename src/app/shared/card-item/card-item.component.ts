@@ -25,6 +25,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() buttonWithLink = false;
   @Input() buttonLinkUrl = '';
   @Input() paginationLimit;
+  @Input() contentClass = '';
   @Output() buttonClickEvent = new EventEmitter<boolean>();
 
   // TODO MODEL
@@ -166,5 +167,9 @@ export class CardItemComponent implements OnInit, OnChanges {
           return 'undefined-status colored-element';
       }
     }
+  }
+
+  addColorToChart(value) {
+    debugger;
   }
 }

@@ -19,11 +19,16 @@ export class MiniCardItemComponent implements OnInit {
 
   colors = [
     {
-      to: 66,
+      to: 84,
       color: '#E43458'
     },
     {
-      from: 66,
+      from: 85,
+      to: 94,
+      color: '#E9BD4A'
+    },
+    {
+      from: 95,
       to: 100,
       color: '#37A350'
     }
@@ -32,4 +37,14 @@ export class MiniCardItemComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
+
+  addColorToChart(value: any) {
+    if (value.dataItem > 95) {
+      return '#37A350';
+    } else if (value.dataItem < 95 && value.dataItem > 84) {
+      return '#E9BD4A';
+    } else {
+      return '#E43458';
+    }
+  }
 }

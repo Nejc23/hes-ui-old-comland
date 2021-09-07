@@ -1,12 +1,12 @@
 <!-- reference Details page component -->
-
+<!-- tw--m-5 -> negative margin align hack -->
 <div *ngIf="data" [style.width.px]="addWidth()" class="sticky">
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
     <app-page-title
       [status]="data.statusValue"
       [subtitle]="data.typeValue"
       [title]="data.name"
-      class="tw-h-36 tw-mt-10"
+      class="tw-h-36 tw-mt-10 tw--m-5"
     >
     </app-page-title>
 
@@ -24,11 +24,7 @@
 
         <div class="tw-py-10">
 
-          <div class="tw-inline-flex tw-w-full tw-grid-cols-6 tw-gap-6 tw-py-5">
-
-            <app-mini-card-item [chartData]="[1, 2, 3, 5]" [label]="'Overall sla data'"
-                                [type]="miniCardItemTypeEnum.CHART">
-            </app-mini-card-item>
+          <div class="tw-grid tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-6 tw-gap-6 tw-py-5">
 
             <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">
             </app-mini-card-item>
@@ -42,7 +38,10 @@
             <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
             </app-mini-card-item>
 
-            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
+            <app-mini-card-item [chartData]="[91, 92, 83, 95, 21, 15, 99, 100, 65, 84, 73, 39, 76]"
+                                [label]="'Overall sla data'"
+                                [type]="miniCardItemTypeEnum.CHART"
+                                class="tw-col-span-2">
             </app-mini-card-item>
 
           </div>
@@ -57,6 +56,7 @@
           </app-slide-out-component>
 
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
+
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
