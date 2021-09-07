@@ -39,6 +39,12 @@ export interface ColoredValue {
   color: string;
 }
 
+export interface GridFilter {
+  label?: string;
+  field: string;
+  values: any[];
+}
+
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -52,6 +58,8 @@ export class DataTableComponent implements OnInit {
 
   @Input() gridColumns: Array<GridColumn> = [];
   @Input() rowActions: Array<GridRowAction> = [];
+
+  @Input() filters: Array<GridFilter>; // dropdown filters
 
   columnType = GridColumnType;
   // Grid properties
@@ -156,6 +164,32 @@ export class DataTableComponent implements OnInit {
         value: inputValue,
         ignoreCase: true
       });
+    });
+
+    this.gridViewFilter = process(this.gridData, {
+      filter: filterTemp
+    }).data;
+    // todo load more data from BE
+    this.loadItems(this.gridViewFilter);
+  }
+
+  dropdownValueChanged(value) {
+    debugger;
+    // todo load more data from BE
+    this.gridViewFilter = this.gridData;
+
+    let filterTemp: CompositeFilterDescriptor = {
+      logic: 'and',
+      filters: []
+    };
+    // Search all only for string fields
+    // columns need to be defined for Search
+
+    filterTemp.filters.push({
+      field: 'status',
+      operator: 'eq',
+      value: value,
+      ignoreCase: true
     });
 
     this.gridViewFilter = process(this.gridData, {

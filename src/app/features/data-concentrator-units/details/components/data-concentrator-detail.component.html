@@ -108,7 +108,9 @@
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
-          <app-data-table *ngIf="meters.length > 0" [gridColumns]="metersColumnsConfiguration" [gridData]="meters"
+
+          <app-data-table *ngIf="meters.length > 0" [filters]="metersFiltersConfiguration" [gridColumns]="metersColumnsConfiguration"
+                          [gridData]="meters"
                           [pageSize]="13"
                           [pageable]="true"
                           [skip]="0"

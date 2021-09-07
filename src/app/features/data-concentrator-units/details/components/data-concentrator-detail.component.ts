@@ -19,7 +19,7 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
 import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
-import { GridColumn, GridColumnType, GridRowAction } from '../../../../shared/data-table/data-table.component';
+import { GridColumn, GridColumnType, GridFilter, GridRowAction } from '../../../../shared/data-table/data-table.component';
 import { MeterUnitsService } from '../../../../core/repository/services/meter-units/meter-units.service';
 import { IActionRequestParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-units/meter-units-list.interface';
@@ -110,6 +110,14 @@ export class DataConcentratorDetailComponent implements OnInit {
           color: 'yellow'
         }
       ]
+    }
+  ];
+
+  metersFiltersConfiguration: Array<GridFilter> = [
+    {
+      // label: 'Status',
+      field: 'status',
+      values: ['INSTALLED', 'LOST'] // mock
     }
   ];
 
