@@ -3,6 +3,8 @@ import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permi
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
 import { DcOperationsService } from '../../services/dc-operations.service';
+import { DeleteDcuFormComponent } from '../delete-dcu-form/delete-dcu-form.component';
+import { ModalService } from '../../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-dc-operations',
@@ -15,7 +17,19 @@ export class DcOperationsComponent {
   @Input() selectedItemsCount: number;
   @Input() allVisibleColumns: string[];
 
-  constructor(private dcOperationsService: DcOperationsService) {}
+  constructor(private dcOperationsService: DcOperationsService, private modalService: ModalService) {}
+
+  get permissionSynchronizeTime() {
+    return PermissionEnumerator.Sync_Time;
+  }
+
+  get permissionFwUpgrade() {
+    return PermissionEnumerator.Concentrator_FW_Upgrade;
+  }
+
+  get permissionDeviceDiscovery() {
+    return PermissionEnumerator.Manage_Concentrators;
+  }
 
   onSynchronizeTime() {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
@@ -32,15 +46,11 @@ export class DcOperationsComponent {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, this.selectedItemsCount);
   }
 
-  get permissionSynchronizeTime() {
-    return PermissionEnumerator.Sync_Time;
-  }
+  onDelete() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
 
-  get permissionFwUpgrade() {
-    return PermissionEnumerator.Concentrator_FW_Upgrade;
-  }
-
-  get permissionDeviceDiscovery() {
-    return PermissionEnumerator.Manage_Concentrators;
+    const modalRef = this.modalService.open(DeleteDcuFormComponent);
+    const component: DeleteDcuFormComponent = modalRef.componentInstance;
+    component.applyRequestParams(params, 1);
   }
 }

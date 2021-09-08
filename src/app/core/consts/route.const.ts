@@ -1,0 +1,1 @@
+export const dataConcentratorUnits = '/dataConcentratorUnits';

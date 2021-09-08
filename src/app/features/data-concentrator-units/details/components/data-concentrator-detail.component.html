@@ -12,12 +12,14 @@
 
     <app-dc-operations [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
                        [showOperations]="true" class="tw-mt-10 tw-pr-5"></app-dc-operations>
+
   </div>
 </div>
 
 <div *ngIf="data" class="tw-py-10 dcu-tabs">
 
   <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10">
+
 
     <!-- [keepTabContent]="false" set to false due to kendo gauges rerender issue -->
     <kendo-tabstrip-tab [selected]="true"
@@ -109,7 +111,8 @@
 
         <div class="tw-py-10">
 
-          <app-data-table *ngIf="meters.length > 0" [filters]="metersFiltersConfiguration" [gridColumns]="metersColumnsConfiguration"
+          <app-data-table *ngIf="meters.length > 0" [filters]="metersFiltersConfiguration"
+                          [gridColumns]="metersColumnsConfiguration"
                           [gridData]="meters"
                           [pageSize]="13"
                           [pageable]="true"

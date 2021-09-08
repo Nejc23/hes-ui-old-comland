@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
@@ -23,13 +24,15 @@ import { GridColumn, GridColumnType, GridFilter, GridRowAction } from '../../../
 import { MeterUnitsService } from '../../../../core/repository/services/meter-units/meter-units.service';
 import { IActionRequestParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-units/meter-units-list.interface';
+import { DcOperationsService } from '../../services/dc-operations.service';
+import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 
 @Component({
   selector: 'app-data-concentrator-detail',
   templateUrl: './data-concentrator-detail.component.html',
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
-export class DataConcentratorDetailComponent implements OnInit {
+export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   form: FormGroup;
   editForm: FormGroup;
 
@@ -38,27 +41,22 @@ export class DataConcentratorDetailComponent implements OnInit {
   public credentialsVisible = false;
   concentratorId = '';
   data: DataConcentratorUnit;
-
   dcuStatuses$: Observable<Codelist<number>[]>;
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
-
   meterStatusData = [];
   tags = [];
   alarms = [];
   map: any;
   options: any;
   miniCardItemTypeEnum = MiniCardItemType;
-
   gridData: any = [];
   meters: Array<MeterUnitsList> = [];
   eventsMock: any = [];
-
   meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
   showMeterStatusWidget = false;
   openEdit = false;
   metersGridPageNumber = 1;
-
   notificationsColumnsConfiguration: Array<GridColumn> = [
     {
       translationKey: 'Timestamp',
@@ -73,7 +71,6 @@ export class DataConcentratorDetailComponent implements OnInit {
       field: 'description'
     }
   ];
-
   metersColumnsConfiguration: Array<GridColumn> = [
     {
       translationKey: 'Serial',
@@ -112,7 +109,6 @@ export class DataConcentratorDetailComponent implements OnInit {
       ]
     }
   ];
-
   metersFiltersConfiguration: Array<GridFilter> = [
     {
       // label: 'Status',
@@ -120,7 +116,6 @@ export class DataConcentratorDetailComponent implements OnInit {
       values: ['INSTALLED', 'LOST'] // mock
     }
   ];
-
   layer = marker([46.2434, 14.4192], {
     icon: icon({
       iconSize: [64, 64],
@@ -128,7 +123,6 @@ export class DataConcentratorDetailComponent implements OnInit {
       iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
     })
   });
-
   rowActionsConfiguration: Array<GridRowAction> = [
     {
       actionName: 'settings',
@@ -161,6 +155,7 @@ export class DataConcentratorDetailComponent implements OnInit {
       type: GridColumnType.DATE_TIME
     }
   ];
+  private dcuConcentratorDeleted: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -170,10 +165,13 @@ export class DataConcentratorDetailComponent implements OnInit {
     private dataConcentratorUnitsService: DataConcentratorUnitsService,
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
+    private dcOperationsService: DcOperationsService,
+    private eventService: DataConcentratorUnitsGridEventEmitterService,
     private modalService: ModalService,
     private translate: TranslateService,
     private elRef: ElementRef,
-    private meterUnitsTypeService: MeterUnitsService
+    private meterUnitsTypeService: MeterUnitsService,
+    private router: Router
   ) {
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
@@ -254,6 +252,16 @@ export class DataConcentratorDetailComponent implements OnInit {
 
     // get DCU
     this.getData();
+
+    this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
+      this.router.navigate([dataConcentratorUnits]);
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.dcuConcentratorDeleted) {
+      this.dcuConcentratorDeleted.unsubscribe();
+    }
   }
 
   getData() {
@@ -492,7 +500,7 @@ export class DataConcentratorDetailComponent implements OnInit {
     component.credentialsVisible = this.credentialsVisible;
 
     modalRef.result
-      .then(() => {
+      .then((data) => {
         this.getData();
       })
       .catch(() => {});
@@ -626,9 +634,4 @@ export class DataConcentratorDetailComponent implements OnInit {
   refreshData() {
     this.getData();
   }
-
-  // public getSessionSettingsPageIndex() {
-  //   const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-  //   return settings.pageIndex;
-  // }
 }

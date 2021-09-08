@@ -15,5 +15,10 @@
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
     </div>
+
+    <a (click)="onDelete()" [permission]="permissionDeviceDiscovery"
+       appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+       href="javascript:void(0)"><span>{{ 'COMMON.DELETE' | translate }}</span></a>
+
   </div>
 </div>
