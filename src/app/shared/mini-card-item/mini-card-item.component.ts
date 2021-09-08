@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 export enum MiniCardItemType {
   CHART = 'chart',
@@ -10,7 +10,7 @@ export enum MiniCardItemType {
   templateUrl: './mini-card-item.component.html',
   styleUrls: ['./mini-card-item.component.scss']
 })
-export class MiniCardItemComponent implements OnInit {
+export class MiniCardItemComponent {
   @Input() gaugeValue: number;
   @Input() chartData = [];
   @Input() type: MiniCardItemType;
@@ -35,8 +35,6 @@ export class MiniCardItemComponent implements OnInit {
   ];
 
   constructor() {}
-
-  ngOnInit(): void {}
 
   addColorToChart(value: any) {
     if (value.dataItem > 95) {

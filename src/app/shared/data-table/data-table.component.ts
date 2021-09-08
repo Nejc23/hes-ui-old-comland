@@ -147,9 +147,10 @@ export class DataTableComponent implements OnInit {
     };
   }
 
+  // todo refactor
   public onFilter(inputValue: string): void {
     this.gridViewFilter = this.gridData;
-    let filterTemp: CompositeFilterDescriptor = {
+    const filterTemp: CompositeFilterDescriptor = {
       logic: 'or',
       filters: []
     };

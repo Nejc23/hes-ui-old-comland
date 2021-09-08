@@ -143,7 +143,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   }
 
   addBgColor(name: string) {
-    let exist = this.meterStatusGraphColors.find((color) => color.name.toLowerCase() === name.toLowerCase());
+    const exist = this.meterStatusGraphColors.find((color) => color.name.toLowerCase() === name.toLowerCase());
     if (exist) {
       return exist.value;
     }
@@ -156,7 +156,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   addStatusClass(field: string, value: any) {
     if ((field === 'plcStatus' || field === 'status') && value) {
       // could be object
-      let statusValues = value.value ? value.value : value;
+      const statusValues = value.value ? value.value : value;
       // plcStatus or statusValue?
       switch (statusValues.toLocaleString().toUpperCase()) {
         case 'INACTIVE':
