@@ -8,7 +8,6 @@ export interface MuUpdateRequest {
   manufacturer: number;
   ip: string;
   port: number;
-  isGateWay: boolean;
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
   advancedInformation?: MuAdvancedInformation;

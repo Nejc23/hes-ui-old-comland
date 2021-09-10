@@ -109,7 +109,7 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', addConcentrator, payload as any);
   }
 
-  updateDcu(id: string, payload: EditDcuForm): Observable<string> {
+  updateDcu(id: string, payload: EditDcuForm): Observable<DcuUpdateRequest[]> {
     const dcuRequest: DcuUpdateRequest = {
       ip: payload.ip,
       serialNumber: payload.serialNumber,

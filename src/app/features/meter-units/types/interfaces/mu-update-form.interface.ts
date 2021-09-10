@@ -14,7 +14,6 @@ export interface MuUpdateForm {
   manufacturer: Codelist<number>;
   ip: string;
   port: number;
-  isGateWay: boolean;
   communicationType: number;
 
   template: Codelist<number>;
