@@ -9,6 +9,7 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { PermissionService } from 'src/app/core/permissions/services/permission.service';
 import { DataConcentratorUnit } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-unit.interface';
+import { DcuUpdateRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-update-request.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
@@ -89,6 +90,19 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     } else {
       this.form = this.createForm();
     }
+  }
+
+  updateData(updatedValues: DcuUpdateRequest) {
+    this.data.ip = updatedValues.ip;
+    this.data.name = updatedValues.name;
+    this.data.serialNumber = updatedValues.serialNumber;
+    this.data.externalId = updatedValues.externalId;
+    this.data.username = updatedValues.userName;
+    this.data.address = updatedValues.address;
+    this.data.port = updatedValues.port;
+
+    this.form = this.createForm();
+    this.editForm = this.createEditForm();
   }
 
   createForm(): FormGroup {
@@ -222,7 +236,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
     modalRef.result
       .then((data) => {
-        this.getData();
+        this.updateData(data);
       })
       .catch(() => {});
   }

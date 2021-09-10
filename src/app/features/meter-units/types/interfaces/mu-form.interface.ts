@@ -16,7 +16,6 @@ export interface MuForm {
   ip: string;
   port: number;
   communicationType: number;
-  isGateway: boolean;
   jobIds: string[];
   authenticationType: AuthenticationTypeEnum;
 

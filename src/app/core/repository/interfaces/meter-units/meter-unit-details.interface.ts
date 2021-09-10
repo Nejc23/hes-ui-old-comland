@@ -12,7 +12,6 @@ export interface MeterUnitDetails {
   manufacturer: string;
   ip: string;
   port: number;
-  isGateWay: boolean;
   deviceStatus: string;
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
