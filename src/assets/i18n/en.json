@@ -101,6 +101,8 @@
     "LESS-THAN": "Less than",
     "LIMITER": "Limiter",
     "LOADING-DATA": "Loading data...",
+    "LOADING-DATA-PLEASE-WAIT": "Loading data, please wait...",
+    "MAY-TAKE-A-MOMENT": "This may take a moment",
     "METERS": "Meters",
     "MINUTES": "Minutes",
     "MODE": "Mode",

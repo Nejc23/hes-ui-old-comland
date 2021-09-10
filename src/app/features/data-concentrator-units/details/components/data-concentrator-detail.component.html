@@ -43,7 +43,7 @@
             </app-mini-card-item>
 
             <app-mini-card-item [chartData]="[91, 92, 83, 95, 21, 15, 99, 100, 65, 84, 73, 39, 76]"
-                                [label]="'Overall sla data'"
+                                [label]="'Overall SLA data'"
                                 [type]="miniCardItemTypeEnum.CHART"
                                 class="tw-col-span-2">
             </app-mini-card-item>
@@ -71,6 +71,10 @@
 
             <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"
                            [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
+            </app-card-item>
+
+            <app-card-item [loadingFailed]="true"
+            >
             </app-card-item>
 
             <app-card-item *ngIf="showMeterStatusWidget"

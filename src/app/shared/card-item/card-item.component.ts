@@ -20,6 +20,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() buttonIconName = '';
 
   @Input() loading = false;
+  @Input() loadingFailed = false;
   @Input() form: FormGroup;
   @Input() showMoreButton = false;
   @Input() buttonWithLink = false;
