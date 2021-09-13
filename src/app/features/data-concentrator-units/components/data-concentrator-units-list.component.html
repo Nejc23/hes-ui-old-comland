@@ -35,8 +35,9 @@
                 <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
-            <div *ngIf="getSelectedCount() > 0" class="me-3">
-              <button class="btn btn-primary" (click)="onDelete()">
+            <div *ngIf="getSelectedCount() > 0" [permission]="permissionAdd" appHideIfPermissionUnauthorized
+                 class="me-3">
+              <button (click)="onDelete()" class="btn btn-primary">
                 <span>{{ 'COMMON.DELETE' | translate }}</span>
               </button>
             </div>
