@@ -28,29 +28,6 @@
 
         <div class="tw-py-10">
 
-          <div class="tw-grid tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-6 tw-gap-6 tw-py-5">
-
-            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">
-            </app-mini-card-item>
-
-            <app-mini-card-item [gaugeValue]="66.6" [label]="'24h'" [type]="miniCardItemTypeEnum.GAUGE">
-            </app-mini-card-item>
-
-            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
-            </app-mini-card-item>
-
-            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">
-            </app-mini-card-item>
-
-            <app-mini-card-item [chartData]="[91, 92, 83, 95, 21, 15, 99, 100, 65, 84, 73, 39, 76]"
-                                [label]="'Overall SLA data'"
-                                [type]="miniCardItemTypeEnum.CHART"
-                                class="tw-col-span-2">
-            </app-mini-card-item>
-
-          </div>
-
-
           <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
                                    [visible]="openEdit">
             <app-edit-dcu-form (savedDataEvent)="refreshData()" [concentratorId]="data.concentratorId"
@@ -58,6 +35,29 @@
 
             </app-edit-dcu-form>
           </app-slide-out-component>
+
+          <!--          <div class="tw-grid tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-6 tw-gap-6 tw-py-5">-->
+
+          <!--            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="66.6" [label]="'24h'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [chartData]="[91, 92, 83, 95, 21, 15, 99, 100, 65, 84, 73, 39, 76]"-->
+          <!--                                [label]="'Overall SLA data'"-->
+          <!--                                [type]="miniCardItemTypeEnum.CHART"-->
+          <!--                                class="tw-col-span-2">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--          </div>-->
+
 
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
 
@@ -69,39 +69,39 @@
 
             </app-card-item>
 
-            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"
-                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
-            </app-card-item>
+            <!--            <app-card-item [loadingFailed]="true"-->
+            <!--            >-->
+            <!--            </app-card-item>-->
 
-            <app-card-item [loadingFailed]="true"
-            >
-            </app-card-item>
+            <!--            <app-card-item *ngIf="showMeterStatusWidget"-->
+            <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
+            <!--            </app-card-item>-->
 
-            <app-card-item *ngIf="showMeterStatusWidget"
-                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">
-            </app-card-item>
+            <!--            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">-->
+            <!--            </app-card-item>-->
 
-            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">
-            </app-card-item>
-
-            <app-card-item [latLang]="[46.2434, 14.4192]"
-                           [title]="'Address'">
-            </app-card-item>
+            <!--            <app-card-item [latLang]="[46.2434, 14.4192]"-->
+            <!--                           [title]="'Address'">-->
+            <!--            </app-card-item>-->
 
             <!-- todo columnType.ICON -->
-            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
-              <app-data-table [gridColumns]="eventsColumnsConfiguration"
-                              [gridData]="alarms"
-              ></app-data-table>
-            </app-card-item>
+            <!--            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">-->
+            <!--              <app-data-table [gridColumns]="eventsColumnsConfiguration"-->
+            <!--                              [gridData]="alarms"-->
+            <!--              ></app-data-table>-->
+            <!--            </app-card-item>-->
 
-            <app-card-item [buttonIconName]="'list-icon'" [buttonLabel]="'BUTTON.GO-TO-JOBS'"
-                           [buttonLinkUrl]="'schedulerJobs'"
-                           [buttonWithLink]="true"
-                           title="JOB.SCHEDULER-JOBS">
-              <app-data-table [gridColumns]="scheduledJobsColumnsConfiguration" [gridData]="gridData"
-                              [rowActions]="rowActionsConfiguration"></app-data-table>
-            </app-card-item>
+            <!--            <app-card-item [buttonIconName]="'list-icon'" [buttonLabel]="'BUTTON.GO-TO-JOBS'"-->
+            <!--                           [buttonLinkUrl]="'schedulerJobs'"-->
+            <!--                           [buttonWithLink]="true"-->
+            <!--                           title="JOB.SCHEDULER-JOBS">-->
+            <!--              <app-data-table [gridColumns]="scheduledJobsColumnsConfiguration" [gridData]="gridData"-->
+            <!--                              [rowActions]="rowActionsConfiguration"></app-data-table>-->
+            <!--            </app-card-item>-->
+
+            <!--            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"-->
+            <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
+            <!--            </app-card-item>-->
 
           </div>
         </div>
@@ -110,70 +110,70 @@
     </kendo-tabstrip-tab>
 
 
-    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">
-      <ng-template kendoTabContent>
+    <!--    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">-->
+    <!--      <ng-template kendoTabContent>-->
 
-        <div class="tw-py-10">
+    <!--        <div class="tw-py-10">-->
 
-          <app-data-table *ngIf="meters.length > 0" [filters]="metersFiltersConfiguration"
-                          [gridColumns]="metersColumnsConfiguration"
-                          [gridData]="meters"
-                          [pageSize]="13"
-                          [pageable]="true"
-                          [skip]="0"
-                          [tableClass]="'fixed-height'"
-                          [withSearch]="true"
-          >
+    <!--          <app-data-table *ngIf="meters.length > 0" [filters]="metersFiltersConfiguration"-->
+    <!--                          [gridColumns]="metersColumnsConfiguration"-->
+    <!--                          [gridData]="meters"-->
+    <!--                          [pageSize]="13"-->
+    <!--                          [pageable]="true"-->
+    <!--                          [skip]="0"-->
+    <!--                          [tableClass]="'fixed-height'"-->
+    <!--                          [withSearch]="true"-->
+    <!--          >-->
 
-          </app-data-table>
-        </div>
+    <!--          </app-data-table>-->
+    <!--        </div>-->
 
-      </ng-template>
-    </kendo-tabstrip-tab>
+    <!--      </ng-template>-->
+    <!--    </kendo-tabstrip-tab>-->
 
 
-    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">
-      <ng-template kendoTabContent>
+    <!--    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">-->
+    <!--      <ng-template kendoTabContent>-->
 
-        <div *ngIf="eventsForm" class="tw-py-10">
-          <!--                  <div class="d-flex date-time-picker-meter-units mt-2">-->
-          <!--                    <app-input-text-->
-          <!--                      #popover="ngbPopover"-->
-          <!--                      [autoClose]="'outside'"-->
-          <!--                      [form]="eventsForm"-->
-          <!--                      [iconName]="'fa-calendar'"-->
-          <!--                      [isReadOnly]="true"-->
-          <!--                      [ngbPopover]="popDateTimePicker"-->
-          <!--                      [property]="'labelText'"-->
-          <!--                      class="w-100"-->
-          <!--                      container="body"-->
-          <!--                      label="Select-date"-->
-          <!--                      placement="bottom"-->
-          <!--                      popoverClass="date-range-picker-popover"-->
-          <!--                    >-->
-          <!--                    </app-input-text>-->
-          <!--                  </div>-->
+    <!--        <div *ngIf="eventsForm" class="tw-py-10">-->
+    <!--          <div class="d-flex date-time-picker-meter-units mt-2">-->
+    <!--            <app-input-text-->
+    <!--              #popover="ngbPopover"-->
+    <!--              [autoClose]="'outside'"-->
+    <!--              [form]="eventsForm"-->
+    <!--              [iconName]="'fa-calendar'"-->
+    <!--              [isReadOnly]="true"-->
+    <!--              [ngbPopover]="popDateTimePicker"-->
+    <!--              [property]="'labelText'"-->
+    <!--              class="w-100"-->
+    <!--              container="body"-->
+    <!--              label="Select-date"-->
+    <!--              placement="bottom"-->
+    <!--              popoverClass="date-range-picker-popover"-->
+    <!--            >-->
+    <!--            </app-input-text>-->
+    <!--          </div>-->
 
-        </div>
+    <!--        </div>-->
 
-        <app-data-table
-          [excelExport]="true"
-          [filters]="eventsFiltersConfiguration"
-          [gridColumns]="eventsColumnsConfiguration"
-          [gridData]="events"
-          [loading]="eventsLoading"
-          [pageSize]="36"
-          [pageable]="true"
-          [scrollable]="'virtual'"
-          [skip]="0"
-          [tableClass]="'fixed-height'"
-          [withSearch]="true"
-        >
+    <!--        <app-data-table-->
+    <!--          [excelExport]="true"-->
+    <!--          [filters]="eventsFiltersConfiguration"-->
+    <!--          [gridColumns]="eventsColumnsConfiguration"-->
+    <!--          [gridData]="events"-->
+    <!--          [loading]="eventsLoading"-->
+    <!--          [pageSize]="36"-->
+    <!--          [pageable]="true"-->
+    <!--          [scrollable]="'virtual'"-->
+    <!--          [skip]="0"-->
+    <!--          [tableClass]="'fixed-height'"-->
+    <!--          [withSearch]="true"-->
+    <!--        >-->
 
-        </app-data-table>
+    <!--        </app-data-table>-->
 
-      </ng-template>
-    </kendo-tabstrip-tab>
+    <!--      </ng-template>-->
+    <!--    </kendo-tabstrip-tab>-->
 
   </kendo-tabstrip>
 </div>
