@@ -171,8 +171,8 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuWrapperInformation>((o) => o.physicalAddress);
   }
 
-  get isGatewayProperty() {
-    return nameOf<MuForm>((o) => o.isGateway);
+  get wrapperIsGatewayProperty() {
+    return nameOf<MuWrapperInformation>((o) => o.isGateWay);
   }
 
   get advancedStartWithReleaseProperty() {
@@ -235,6 +235,7 @@ export class AddMuFormComponent implements OnInit {
     if (!authenticationType) {
       authenticationType = this.authenticationTypes[1];
     }
+
     return this.formBuilder.group({
       [this.nameProperty]: [editMu?.name],
       [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
@@ -257,7 +258,7 @@ export class AddMuFormComponent implements OnInit {
       [this.wrapperServerAddressProperty]: [editMu?.wrapperInformation?.serverAddress, Validators.required],
       [this.wrapperPublicClientAddressProperty]: [editMu?.wrapperInformation?.publicClientAddress, Validators.required],
       [this.wrapperPublicServerAddressProperty]: [editMu?.wrapperInformation?.publicServerAddress, Validators.required],
-      [this.isGatewayProperty]: [false],
+      [this.wrapperIsGatewayProperty]: [editMu?.wrapperInformation?.isGateWay],
       [this.wrapperPhysicalAddressProperty]: [editMu?.wrapperInformation?.physicalAddress, Validators.required],
 
       // hdlc
@@ -404,7 +405,7 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.wrapperServerAddressProperty).enable();
       this.form.get(this.wrapperPublicClientAddressProperty).enable();
       this.form.get(this.wrapperPublicServerAddressProperty).enable();
-      this.form.get(this.isGatewayProperty).enable();
+      this.form.get(this.wrapperIsGatewayProperty).enable();
 
       if (this.isGatewayEnabled) {
         this.form.get(this.wrapperPhysicalAddressProperty).enable();
@@ -416,7 +417,7 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.wrapperServerAddressProperty).disable();
       this.form.get(this.wrapperPublicClientAddressProperty).disable();
       this.form.get(this.wrapperPublicServerAddressProperty).disable();
-      this.form.get(this.isGatewayProperty).disable();
+      this.form.get(this.wrapperIsGatewayProperty).disable();
       this.form.get(this.wrapperPhysicalAddressProperty).disable();
     }
   }
@@ -549,7 +550,8 @@ export class AddMuFormComponent implements OnInit {
         serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
         publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
         publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
-        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
+        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value,
+        isGateWay: this.form.get(this.wrapperIsGatewayProperty).value
       };
     }
 
@@ -576,7 +578,6 @@ export class AddMuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       communicationType: +this.form.get(this.communicationTypeProperty).value,
-      isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
       authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       advancedInformation: {
@@ -598,7 +599,8 @@ export class AddMuFormComponent implements OnInit {
         serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
         publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
         publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
-        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
+        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value,
+        isGateWay: this.form.get(this.wrapperIsGatewayProperty).value
       };
     }
 
@@ -631,7 +633,6 @@ export class AddMuFormComponent implements OnInit {
       manufacturer: this.form.get(this.manufacturerProperty).value,
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
-      isGateWay: this.form.get(this.isGatewayProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
       advancedInformation,
@@ -660,6 +661,7 @@ export class AddMuFormComponent implements OnInit {
       this.shortNameSelected = true;
     }
     this.form = this.createForm(muDetails);
+    this.isGatewayEnabled = muDetails.wrapperInformation?.isGateWay;
   }
 
   getTitle(): string {

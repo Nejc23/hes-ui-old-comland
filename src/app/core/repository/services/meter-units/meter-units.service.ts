@@ -149,7 +149,6 @@ export class MeterUnitsService {
       jobIds: payload.jobIds,
       ip: payload.ip,
       port: payload.port,
-      isGateWay: payload.isGateway,
       referencingType: payload.referencingType,
       advancedInformation: {
         authenticationType: payload.authenticationType,
@@ -164,7 +163,8 @@ export class MeterUnitsService {
         serverAddress: payload.wrapperInformation.serverAddress,
         publicClientAddress: payload.wrapperInformation.publicClientAddress,
         publicServerAddress: payload.wrapperInformation.publicServerAddress,
-        physicalAddress: payload.wrapperInformation.physicalAddress
+        physicalAddress: payload.wrapperInformation.physicalAddress,
+        isGateWay: payload.wrapperInformation.isGateWay
       };
     }
     if (payload.hdlcInformation) {
@@ -196,7 +196,6 @@ export class MeterUnitsService {
       manufacturer: payload.manufacturer?.id,
       ip: payload.ip,
       port: payload.port,
-      isGateWay: payload.isGateWay,
       serialNumber: payload.serialNumber,
       templateId: payload.template.id,
       interfaceType: payload.communicationType,
@@ -218,7 +217,8 @@ export class MeterUnitsService {
         serverAddress: payload.wrapperInformation.serverAddress,
         publicClientAddress: payload.wrapperInformation.publicClientAddress,
         publicServerAddress: payload.wrapperInformation.publicServerAddress,
-        physicalAddress: payload.wrapperInformation.physicalAddress
+        physicalAddress: payload.wrapperInformation.physicalAddress,
+        isGateWay: payload.wrapperInformation.isGateWay
       };
     }
     if (payload.hdlcInformation) {

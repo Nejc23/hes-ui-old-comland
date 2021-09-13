@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
@@ -31,7 +31,6 @@ export class EditDcuFormComponent implements OnInit {
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
-    private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private translate: TranslateService

@@ -245,8 +245,7 @@
               <div *ngIf="isWrapperSelected">
                 <div class="form-row pt-3">
                   <div class="col-6">
-                    <app-input-switch (valueChanged)="gatewayChanged($event)" [form]="form"
-                                      [property]="isGatewayProperty"
+                    <app-input-switch (valueChanged)="gatewayChanged($event)" [form]="form" [property]="wrapperIsGatewayProperty"
                                       label="GATEWAY">
                     </app-input-switch>
                   </div>
