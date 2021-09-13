@@ -1,14 +1,15 @@
 <!-- reference GRID component -->
-<kendo-grid (pageChange)="pageChange($event)"
-            [data]="gridView"
-            [loading]="loading"
-            [ngClass]="tableClass ? tableClass : ''"
-            [pageSize]="pageSize"
-            [pageable]="pageable"
-            [rowClass]="rowClass"
-            [scrollable]="scrollable"
-            [skip]="skip"
-            class="kendo-grid">
+<kendo-grid
+  (pageChange)="pageChange($event)"
+  [data]="gridView"
+  [loading]="loading"
+  [ngClass]="tableClass ? tableClass : ''"
+  [pageSize]="pageSize"
+  [pageable]="pageable"
+  [rowClass]="rowClass"
+  [scrollable]="scrollable"
+  [skip]="skip"
+  class="kendo-grid">
 
   <ng-template *ngIf="withSearch || excelExport" kendoGridToolbarTemplate>
 
@@ -22,8 +23,9 @@
     <div *ngIf="filters.length > 0">
       <ng-container *ngFor="let filter of filters">
         <div> {{ filter.label | translate }}</div>
-        <kendo-dropdownlist (selectionChange)="dropdownValueChanged($event)"
+        <kendo-dropdownlist (selectionChange)="dropdownValueChanged($event, filter.field)"
                             [data]="filter.values"
+                            [defaultItem]="'All'"
         >
         </kendo-dropdownlist>
       </ng-container>
@@ -94,7 +96,7 @@
 
   <kendo-grid-excel
     [fetchData]="allData"
-    fileName="Export-data.xlsx"
+    fileName="Exported-data.xlsx"
   ></kendo-grid-excel>
 </kendo-grid>
 

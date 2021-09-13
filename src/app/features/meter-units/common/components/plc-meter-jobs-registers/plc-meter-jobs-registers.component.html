@@ -1,29 +1,29 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.ASSIGN-TEMPLATE' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  <div [innerHTML]="'PLC-METER.ASSIGN-TEMPLATE' | translate:{selectedRowsCount: selectedRowsCount}" modal-header></div>
 
   <div modal-body>
     <ng-container>
       <div class="alert alert-warning d-flex" role="alert">
         <div class="align-self-center"><i class="fas fa-exclamation-triangle me-2"></i></div>
-        <div class="px-3">{{ 'PLC-METER.ASSIGN-TEMPLATE-WARNING' | translate }}</div>
+        <div class="tw-px-3">{{ 'PLC-METER.ASSIGN-TEMPLATE-WARNING' | translate }}</div>
       </div>
-      <form class="form-horizontal" [formGroup]="form">
+      <form [formGroup]="form" class="form-horizontal">
         <div class="form-row">
           <div class="col-12">
             <div>
-              <ag-grid-angular class="ag-theme-epoint scrollable w-100" style="height: 430px; overflow:auto;" #agGrid
-                [rowData]="rowData"
-                [columnDefs]="columnDefs"
-                [modules]="modules"
-                (gridReady)="onGridReady($event)"
-                (selectionChanged)="selectionChanged()"
-                (firstDataRendered)="onFirstDataRendered($event)"
-                suppressRowClickSelection="true"
-                [pagination]="false"
-                [rowSelection]="'single'"
+              <ag-grid-angular #agGrid (firstDataRendered)="onFirstDataRendered($event)" (gridReady)="onGridReady($event)"
+                               (selectionChanged)="selectionChanged()"
+                               [columnDefs]="columnDefs"
+                               [modules]="modules"
+                               [pagination]="false"
+                               [rowData]="rowData"
+                               [rowSelection]="'single'"
+                               class="ag-theme-epoint scrollable w-100"
+                               style="height: 430px; overflow:auto;"
+                               suppressRowClickSelection="true"
               ></ag-grid-angular>
-              <div class="help-block" *ngIf="noRegisterSelected">
+              <div *ngIf="noRegisterSelected" class="help-block">
                 <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
               </div>
             </div>
@@ -34,11 +34,11 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
+        <button (click)="onConfirm()" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

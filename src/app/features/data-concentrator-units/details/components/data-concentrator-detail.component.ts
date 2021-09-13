@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
@@ -26,6 +26,10 @@ import { IActionRequestParams } from '../../../../core/repository/interfaces/myG
 import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-units/meter-units-list.interface';
 import { DcOperationsService } from '../../services/dc-operations.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
+import * as moment from 'moment';
+import { environment } from '../../../../../environments/environment';
+import { RegistersFilter } from '../../../meter-units/registers/interfaces/data-processing-request.interface';
+import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -33,8 +37,11 @@ import { DataConcentratorUnitsGridEventEmitterService } from '../../services/dat
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
 export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
+  @ViewChild('popover') popover;
+
   form: FormGroup;
   editForm: FormGroup;
+  eventsForm: FormGroup;
 
   saveError: string;
   edit = false;
@@ -52,15 +59,19 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   miniCardItemTypeEnum = MiniCardItemType;
   gridData: any = [];
   meters: Array<MeterUnitsList> = [];
-  eventsMock: any = [];
+  events: any = [];
   meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
   showMeterStatusWidget = false;
   openEdit = false;
   metersGridPageNumber = 1;
-  notificationsColumnsConfiguration: Array<GridColumn> = [
+  eventIds = [];
+  eventsLoading = false;
+
+  eventsColumnsConfiguration: Array<GridColumn> = [
     {
       translationKey: 'Timestamp',
-      field: 'timestamp'
+      field: 'timestamp',
+      type: GridColumnType.DATE_TIME
     },
     {
       translationKey: 'ID',
@@ -155,6 +166,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       type: GridColumnType.DATE_TIME
     }
   ];
+
+  eventsFiltersConfiguration: Array<GridFilter> = [];
   private dcuConcentratorDeleted: Subscription;
 
   constructor(
@@ -171,7 +184,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private translate: TranslateService,
     private elRef: ElementRef,
     private meterUnitsTypeService: MeterUnitsService,
-    private router: Router
+    private router: Router,
+    private dataProcessingService: DataProcessingService
   ) {
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
@@ -244,6 +258,26 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>((o) => o.plcStatus);
   }
 
+  get startDateProperty(): string {
+    return 'startDate';
+  }
+
+  get endDateProperty(): string {
+    return 'endDate';
+  }
+
+  get startTimeProperty() {
+    return nameOf<RegistersFilter>((o) => o.startTime);
+  }
+
+  get endTimeProperty() {
+    return nameOf<RegistersFilter>((o) => o.endTime);
+  }
+
+  get registerProperty() {
+    return 'register';
+  }
+
   ngOnInit() {
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
@@ -277,6 +311,23 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
         this.form = this.createForm();
         this.editForm = this.createEditForm();
+        this.eventsForm = this.createEventsForm();
+
+        // yesterday
+        const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
+        const endDateFormatted = moment().format(environment.dateDisplayFormat);
+
+        // REFACTOR
+        this.eventsForm.controls.labelText.setValue(
+          startDateFormatted +
+            ' ' +
+            this.eventsForm.controls.startTime.value +
+            ' - ' +
+            endDateFormatted +
+            ' ' +
+            this.eventsForm.controls.endTime.value
+        );
+
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
 
@@ -553,6 +604,10 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return this.elRef.nativeElement.parentElement.offsetWidth;
   }
 
+  // setDate() {
+  //   this.showData(this.selectedRegister, true);
+  // }
+
   loadGridData() {
     const requestParam: IActionRequestParams = {
       pageSize: 12, // TODO (request, pagination ...)
@@ -571,7 +626,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   loadEventsData() {
-    this.eventsMock = [
+    this.events = [
       {
         value: 251,
         timestamp: '2021-08-02T10:00:24+02:00'
@@ -629,9 +684,72 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         timestamp: '2021-08-19T13:13:30+02:00'
       }
     ];
+    // debugger;
+    //this.loadRegistersData();
   }
 
   refreshData() {
     this.getData();
+  }
+
+  createEventsForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.registerProperty]: [null],
+
+      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startTimeProperty]: ['00:00'],
+      [this.endTimeProperty]: ['00:00'],
+      labelText: [null]
+    });
+  }
+
+  closePopover() {
+    this.popover.close();
+    this.loadRegistersData();
+  }
+
+  loadRegistersData() {
+    const startDate = moment(this.eventsForm.get('startDate').value).toDate();
+    const endDate = moment(this.eventsForm.get('endDate').value).toDate();
+
+    startDate.setHours(this.eventsForm.get(this.startTimeProperty).value.split(':')[0]);
+    startDate.setMinutes(this.eventsForm.get(this.startTimeProperty).value.split(':')[1]);
+    endDate.setHours(this.eventsForm.get(this.endTimeProperty).value.split(':')[0]);
+    endDate.setMinutes(this.eventsForm.get(this.endTimeProperty).value.split(':')[1]);
+
+    let startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    let endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+
+    // mock
+    let registersFilter: RegistersFilter = {
+      deviceId: '146ba703-681a-4528-a6c5-29c35d9b77a3',
+      register: {
+        registerGroupId: '8a159f8c-17ae-484a-93f9-acd195fa45c5',
+        registerDefinitionId: '149e8e38-2827-4c25-be9d-c838efe1893b',
+        categorization: 'EVENT'
+      },
+      startTime: startTime, // '2021-09-01T00:00:00.000+02:00'
+      endTime: endTime // 2021-09-10T15:00:00.000+02:00
+    };
+
+    this.eventsLoading = true;
+    this.dataProcessingService.getChartData(registersFilter).subscribe((values) => {
+      this.events = values;
+
+      if (this.events) {
+        // set filter
+        this.eventIds = [...new Set(this.events.map((event) => event.value))];
+        this.eventsFiltersConfiguration = [
+          {
+            // label: 'Status',
+            field: 'value',
+            values: this.eventIds // mock
+          }
+        ];
+      }
+      this.eventsLoading = false;
+      this.events.skip = 0;
+    });
   }
 }

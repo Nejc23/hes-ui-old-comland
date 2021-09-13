@@ -90,7 +90,7 @@
 
             <!-- todo columnType.ICON -->
             <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">
-              <app-data-table [gridColumns]="notificationsColumnsConfiguration"
+              <app-data-table [gridColumns]="eventsColumnsConfiguration"
                               [gridData]="alarms"
               ></app-data-table>
             </app-card-item>
@@ -134,18 +134,40 @@
 
     <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">
       <ng-template kendoTabContent>
-        <div class="tw-py-10">
+
+        <div *ngIf="eventsForm" class="tw-py-10">
+          <!--                  <div class="d-flex date-time-picker-meter-units mt-2">-->
+          <!--                    <app-input-text-->
+          <!--                      #popover="ngbPopover"-->
+          <!--                      [autoClose]="'outside'"-->
+          <!--                      [form]="eventsForm"-->
+          <!--                      [iconName]="'fa-calendar'"-->
+          <!--                      [isReadOnly]="true"-->
+          <!--                      [ngbPopover]="popDateTimePicker"-->
+          <!--                      [property]="'labelText'"-->
+          <!--                      class="w-100"-->
+          <!--                      container="body"-->
+          <!--                      label="Select-date"-->
+          <!--                      placement="bottom"-->
+          <!--                      popoverClass="date-range-picker-popover"-->
+          <!--                    >-->
+          <!--                    </app-input-text>-->
+          <!--                  </div>-->
 
         </div>
 
-        <app-data-table [excelExport]="false"
-                        [gridColumns]="notificationsColumnsConfiguration"
-                        [gridData]="eventsMock"
-                        [pageSize]="36"
-                        [pageable]="true"
-                        [scrollable]="'virtual'"
-                        [skip]="0"
-                        [tableClass]="'fixed-height'"
+        <app-data-table
+          [excelExport]="true"
+          [filters]="eventsFiltersConfiguration"
+          [gridColumns]="eventsColumnsConfiguration"
+          [gridData]="events"
+          [loading]="eventsLoading"
+          [pageSize]="36"
+          [pageable]="true"
+          [scrollable]="'virtual'"
+          [skip]="0"
+          [tableClass]="'fixed-height'"
+          [withSearch]="true"
         >
 
         </app-data-table>
@@ -156,30 +178,7 @@
   </kendo-tabstrip>
 </div>
 
-
-<!-- TODO replace with component -->
-<!--            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">-->
-<!--              <div class="tw-pb-6 tw-border-b tw-border-solid tw-border-lightGray">-->
-<!--                <table class="tw-min-w-max tw-w-full tw-table-auto">-->
-<!--                  <thead>-->
-<!--                  <tr class="table-header">-->
-<!--                    <th class="tiny-text gray-color" scope="col"></th>-->
-<!--                    <th class="tiny-text gray-color" scope="col">Timestamp</th>-->
-<!--                    <th class="tiny-text gray-color" scope="col">ID</th>-->
-<!--                    <th class="tiny-text gray-color" scope="col">Description</th>-->
-<!--                  </tr>-->
-<!--                  </thead>-->
-<!--                  <tbody>-->
-
-<!--                  <tr *ngFor="let alarm of alarms let i = index;" [ngClass]="i%2 == 0 ? 'gray-background':''"-->
-<!--                      class="table-row">-->
-<!--                    <td class="tw-w-11"><img [src]="'assets/images/icons/notification-icon-red.svg'" class="tw-mx-3" />-->
-<!--                    </td>-->
-<!--                    <td>{{ alarm.timestamp }}</td>-->
-<!--                    <td>{{ alarm.id }}</td>-->
-<!--                    <td class="description-text">{{ alarm.description }}</td>-->
-<!--                  </tr>-->
-<!--                  </tbody>-->
-<!--                </table>-->
-<!--              </div>-->
-<!--            </app-card-item>-->
+<ng-template #popDateTimePicker>
+  <app-datetime-range-picker (formClosed)="closePopover()" [form]="eventsForm"
+                             [initValues]="true"></app-datetime-range-picker>
+</ng-template>

@@ -7,26 +7,27 @@
       <div class="container">
         <div class="row">
           <div class="col-4 ps-0">
-            <label labelFor="search" class="ng-star-inserted">{{ 'COMMON.SEARCH-OBJECTS' | translate }}</label>
-            <app-input-searcher label="Search registers" [debounceTimeOut]="300" (insertedValue)="insertedValue($event)"
-                                [form]="form"
-                                [property]="searchProperty" placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}"></app-input-searcher>
+            <label class="ng-star-inserted" labelFor="search">{{ 'COMMON.SEARCH-OBJECTS' | translate }}</label>
+            <app-input-searcher (insertedValue)="insertedValue($event)" [debounceTimeOut]="300" [form]="form"
+                                [property]="searchProperty"
+                                label="Search registers"
+                                placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}"></app-input-searcher>
           </div>
           <div class="col-8">
             <div>
               <div class="d-flex align-items-center">
-                <app-input-text container="body"
-                                placement="bottom"
-                                class="w-100"
-                                [ngbPopover]="popDateTimePicker"
+                <app-input-text #popover="ngbPopover"
                                 [autoClose]="'outside'"
-                                #popover="ngbPopover"
-                                popoverClass="date-range-picker-popover"
+                                [form]="form"
                                 [iconName]="'fa-calendar'"
                                 [isReadOnly]="true"
-                                [form]="form"
+                                [ngbPopover]="popDateTimePicker"
                                 [property]="'labelText'"
-                                label="SELECT-DATE">
+                                class="w-100"
+                                container="body"
+                                label="SELECT-DATE"
+                                placement="bottom"
+                                popoverClass="date-range-picker-popover">
                 </app-input-text>
               </div>
             </div>
@@ -34,33 +35,33 @@
         </div>
       </div>
 
-      <form class="form-horizontal" [formGroup]="form">
+      <form [formGroup]="form" class="form-horizontal">
         <div class="form-row">
           <div class="col-12 pt-3">
-            <div class="text-normal-bold mt-2 mb-3 pl-1">
+            <div class="text-normal-bold tw-mt-2 tw-mb-3 tw-pl-1">
               {{ totalCount }} {{ foundText }}
             </div>
             <div>
-              <ag-grid-angular class="ag-theme-epoint scrollable" style="width: 98%; height: 430px; overflow:auto;"
-                               #agGrid
-                               [rowData]="rowData"
-                               [columnDefs]="columnDefs"
-                               [modules]="modules"
+              <ag-grid-angular #agGrid (firstDataRendered)="onFirstDataRendered($event)"
                                (gridReady)="onGridReady($event)"
                                (selectionChanged)="selectionChanged()"
-                               (firstDataRendered)="onFirstDataRendered($event)"
-                               suppressRowClickSelection="true"
-                               rowSelection="multiple"
-                               [pagination]="true"
-                               [paginationPageSize]="10"
+                               [columnDefs]="columnDefs"
                                [isRowSelectable]="isRowSelectable"
+                               [modules]="modules"
+                               [paginationPageSize]="10"
+                               [pagination]="true"
+                               [rowData]="rowData"
+                               class="ag-theme-epoint scrollable"
+                               rowSelection="multiple"
+                               style="width: 98%; height: 430px; overflow:auto;"
+                               suppressRowClickSelection="true"
               ></ag-grid-angular>
 
-              <div class="alert alert-danger mt-3" role="alert"  *ngIf="templateError">
+              <div *ngIf="templateError" class="alert alert-danger mt-3" role="alert">
                 <span class="text-danger">{{ templateErrorText }}</span>
               </div>
 
-              <div class="help-block" *ngIf="noRegisterSelected">
+              <div *ngIf="noRegisterSelected" class="help-block">
                 <i class="far fa-info-circle text-danger pe-2"></i><small class="text-danger">{{ requiredText }}</small>
               </div>
             </div>
@@ -72,11 +73,11 @@
 
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
+        <button (click)="onConfirm()" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
@@ -84,5 +85,6 @@
 </app-modal-template>
 
 <ng-template #popDateTimePicker>
-  <app-datetime-range-picker [form]="form" [initValues]="true" (formClosed)="closePopover()"></app-datetime-range-picker>
+  <app-datetime-range-picker (formClosed)="closePopover()" [form]="form"
+                             [initValues]="true"></app-datetime-range-picker>
 </ng-template>

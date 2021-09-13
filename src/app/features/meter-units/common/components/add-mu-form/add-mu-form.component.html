@@ -327,7 +327,7 @@
     <div class="card-body pt-0">
       <div class="small-title pb-2">{{ 'PLC-METER.TEMPLATE-NOT-SELECTED' | translate }}</div>
       <div class="text-secondary">{{ 'PLC-METER.SELECT-TEMPLATE' | translate }}</div>
-      <div class="mt-3 mb-5 tw-mx-5 tw-px-5">
+      <div class="tw-mt-3 tw-mb-5 tw-mx-5 tw-px-5">
         <app-select-input (selectedValueChanged)="templateChanged($event)" [disabled]="false" [form]="form"
                           [property]="templateProperty" [selectOptions]="templates">
         </app-select-input>

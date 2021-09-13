@@ -50,7 +50,7 @@
         <li *ngIf="hasAccess(item)"
             [ngClass]="{'active': isRouteActive(item.routeLink)}" class="nav-item lh-1 tw-px-2"
             routerLinkActive="active">
-          <a class="nav-link pl-0 pr-0 text-center"><i
+          <a class="nav-link tw-pl-0 tw-pr-0 text-center"><i
             [ngClass]="{'material-icons': !item.isIconOutlined, 'material-icons-outlined': item.isIconOutlined }"
             class="md-20">{{item.icon}}</i></a>
         </li>

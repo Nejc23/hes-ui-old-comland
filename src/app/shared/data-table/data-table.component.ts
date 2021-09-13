@@ -174,30 +174,32 @@ export class DataTableComponent implements OnInit {
     this.loadItems(this.gridViewFilter);
   }
 
-  dropdownValueChanged(value) {
+  dropdownValueChanged(value, field) {
     debugger;
     // todo load more data from BE
     this.gridViewFilter = this.gridData;
 
-    let filterTemp: CompositeFilterDescriptor = {
-      logic: 'and',
-      filters: []
-    };
-    // Search all only for string fields
-    // columns need to be defined for Search
+    if (value !== 'All') {
+      let filterTemp: CompositeFilterDescriptor = {
+        logic: 'and',
+        filters: []
+      };
+      // Search all only for string fields
+      // columns need to be defined for Search
 
-    filterTemp.filters.push({
-      field: 'status',
-      operator: 'eq',
-      value: value,
-      ignoreCase: true
-    });
+      filterTemp.filters.push({
+        field: field,
+        operator: 'eq',
+        value: value.toString(),
+        ignoreCase: true
+      });
 
-    this.gridViewFilter = process(this.gridData, {
-      filter: filterTemp
-    }).data;
-    // todo load more data from BE
-    this.loadItems(this.gridViewFilter);
+      this.gridViewFilter = process(this.gridData, {
+        filter: filterTemp
+      }).data;
+      // todo load more data from BE
+      this.loadItems(this.gridViewFilter);
+    }
   }
 
   private loadItems(data: any): void {
