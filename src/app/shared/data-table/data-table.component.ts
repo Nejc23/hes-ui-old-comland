@@ -99,7 +99,6 @@ export class DataTableComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.withSearch && this.gridColumns.length === 0) {
-      debugger;
       console.log('Grid columns should be defined for search!!');
     }
     this.loadItems(this.gridData);
@@ -123,7 +122,6 @@ export class DataTableComponent implements OnInit {
   }
 
   pageChange({ skip, take }: PageChangeEvent): void {
-    debugger;
     this.skip = skip;
     this.pageSize = take;
     this.loadItems(this.gridData);
@@ -175,7 +173,6 @@ export class DataTableComponent implements OnInit {
   }
 
   dropdownValueChanged(value, field) {
-    debugger;
     // todo load more data from BE
     this.gridViewFilter = this.gridData;
 
