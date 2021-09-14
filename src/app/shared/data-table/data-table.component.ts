@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { GridDataResult, PageChangeEvent, PageSizeItem, RowClassArgs } from '@progress/kendo-angular-grid';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
@@ -50,7 +50,7 @@ export interface GridFilter {
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, OnChanges {
   public gridView: GridDataResult;
   gridViewFilter: any;
   @Input() gridData: any;
@@ -101,7 +101,7 @@ export class DataTableComponent implements OnInit {
     if (this.withSearch && this.gridColumns.length === 0) {
       console.log('Grid columns should be defined for search!!');
     }
-    this.loadItems(this.gridData);
+    this.initGrid();
     this.allData = this.allData.bind(this);
   }
 
@@ -111,6 +111,10 @@ export class DataTableComponent implements OnInit {
       'gray-background': isEven,
       'white-background': !isEven
     };
+  }
+
+  ngOnChanges(): void {
+    this.initGrid();
   }
 
   switchValueChanged(id: string, event: Event) {
@@ -199,10 +203,23 @@ export class DataTableComponent implements OnInit {
     }
   }
 
+  initGrid() {
+    if (this.gridData) {
+      this.loadItems(this.gridData);
+    } else {
+      this.gridView = {
+        data: [],
+        total: 0
+      };
+    }
+  }
+
   private loadItems(data: any): void {
-    this.gridView = {
-      data: data.slice(this.skip, this.skip + this.pageSize),
-      total: this.totalRecords ? this.totalRecords : this.gridData.length
-    };
+    if (data) {
+      this.gridView = {
+        data: data.slice(this.skip, this.skip + this.pageSize),
+        total: this.totalRecords ? this.totalRecords : this.gridData.length
+      };
+    }
   }
 }
