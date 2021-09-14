@@ -42,7 +42,26 @@ export class BreadcrumbComponent implements OnInit {
     });
   }
 
+  replaceParamsInUrl(url: string, params: Params): string {
+    return _.reduce(
+      params,
+      (result, value, key) => {
+        return _.replace(result, ':' + key, value);
+      },
+      url
+    );
+  }
+
+  showBreadcrumb(): boolean {
+    return this.breadcrumbs && this.breadcrumbs.length > 0 && this.breadcrumbs[0].label !== this.pageName;
+  }
+
+  /*getBreadcrumbLabel(breadcrumb: Breadcrumb) {
+    return  '' //   `{{label}}`, { label: breadcrumb.label };
+  }*/
+
   private buildBreadCrumb(route: ActivatedRoute, url: string = '', breadcrumbs: Array<Breadcrumb> = []): Array<Breadcrumb> {
+    debugger;
     // If no routeConfig is avalailable we are on the root path
     const label = _.get(route, 'routeConfig.data.breadcrumb', null);
     const path = route.routeConfig ? route.routeConfig.path : '';
@@ -66,23 +85,5 @@ export class BreadcrumbComponent implements OnInit {
     }
 
     return newBreadcrumbs;
-  }
-
-  replaceParamsInUrl(url: string, params: Params): string {
-    return _.reduce(
-      params,
-      (result, value, key) => {
-        return _.replace(result, ':' + key, value);
-      },
-      url
-    );
-  }
-
-  /*getBreadcrumbLabel(breadcrumb: Breadcrumb) {
-    return  '' //   `{{label}}`, { label: breadcrumb.label };
-  }*/
-
-  showBreadcrumb(): boolean {
-    return this.breadcrumbs && this.breadcrumbs.length > 0 && this.breadcrumbs[0].label !== this.pageName;
   }
 }

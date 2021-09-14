@@ -70,7 +70,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   public icons;
   public frameworkComponents;
   public sideBar;
-  headerTitle = this.translate.instant('COMMON.CONCENTRATORS');
   requestModel: GridRequestParams = {
     requestId: null,
     startRow: 0,
@@ -231,6 +230,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
       selectAll: this.translate.instant('GRID.SELECT-ALL')
     };
+
+    this.bredcrumbService.setPageName('');
 
     this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
       this.deselectAll();
