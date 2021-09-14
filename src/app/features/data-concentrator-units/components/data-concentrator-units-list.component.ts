@@ -53,12 +53,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   columns = [];
   totalCount = 0;
   filtersInfo: FiltersInfo;
-  private layoutChangeSubscription: Subscription;
-  private dcuAddedSubscription: Subscription;
-  private dcuConcentratorDeleted: Subscription;
-  private subscription: Subscription;
   public localeText;
-
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
   overlayNoRowsTemplate = this.translate.instant('GRID.NO-RECORDS-FOUND');
@@ -66,7 +61,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   noData = false;
   public hideFilter = true;
   public filterCount = 0;
-
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
   public modules: Module[] = AllModules;
@@ -77,7 +71,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   public frameworkComponents;
   public sideBar;
   headerTitle = this.translate.instant('COMMON.CONCENTRATORS');
-
   requestModel: GridRequestParams = {
     requestId: null,
     startRow: 0,
@@ -96,26 +89,25 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       showOptionFilter: []
     }
   };
-
   pageSizes: Codelist<number>[] = [
     { id: 20, value: '20' },
     { id: 50, value: '50' },
     { id: 100, value: '100' }
   ];
-
   selectedPageSize: Codelist<number> = this.pageSizes[0];
-
   form: FormGroup;
   datasource: any;
   isGridLoaded = false;
   areSettingsLoaded = false;
-
   messageDataFwUpgraded = this.translate.instant('DCU.FW-UPGRADE-SUCCESSFUL');
   messageActionFailed = this.translate.instant('DCU.FW-UPGRADE-FAILED');
-
   taskStatusOK = 'TASK_SUCCESS';
   taskStatusFailure = 'TASK_FAILURE';
   refreshInterval = gridRefreshInterval;
+  private layoutChangeSubscription: Subscription;
+  private dcuAddedSubscription: Subscription;
+  private dcuConcentratorDeleted: Subscription;
+  private subscription: Subscription;
 
   constructor(
     private dataConcentratorUnitsGridService: DataConcentratorUnitsGridService,
@@ -200,6 +192,21 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     return PermissionEnumerator.Manage_Concentrators;
   }
 
+  // checking if at least one row on the grid is selected
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.gridApi) {
+      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
+      return selectedRows && selectedRows.length > 0;
+    }
+    return false;
+  }
+
+  get pageSizeProperty() {
+    return 'pageSize';
+  }
+
+  // ag-grid
+
   ngOnInit() {
     // set grid columns
     this.columns = this.dataConcentratorUnitsGridService.setGridDefaultColumns(false);
@@ -225,13 +232,13 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       selectAll: this.translate.instant('GRID.SELECT-ALL')
     };
 
-    this.bredcrumbService.setPageName(this.headerTitle);
-
     this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
       this.deselectAll();
       this.refreshGrid();
     });
   }
+
+  // ag-grid
 
   ngOnDestroy(): void {
     if (this.layoutChangeSubscription) {
@@ -249,22 +256,12 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // ag-grid
+
   // button click refresh grid
   refreshGrid() {
     this.gridApi.purgeServerSideCache([]);
   }
 
-  // ag-grid
-  // checking if at least one row on the grid is selected
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-      return selectedRows && selectedRows.length > 0;
-    }
-    return false;
-  }
-
-  // ag-grid
   // search string changed call get data
   searchData($event: string) {
     if (this.isGridLoaded && this.areSettingsLoaded) {
@@ -284,6 +281,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
+  // ----------------------- ag-grid set DATASOURCE end --------------------------
+
   // ----------------------- ag-grid set DATASOURCE ------------------------------
   onGridReady(params) {
     this.gridApi = params.api;
@@ -297,31 +296,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
     this.getDcuUnitsGridLayoutStore();
   }
-  // ----------------------- ag-grid set DATASOURCE end --------------------------
 
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private noFilters() {
-    return (
-      this.requestModel.filterModel == null ||
-      ((this.requestModel.filterModel.statuses === undefined ||
-        this.requestModel.filterModel.statuses.length === 0 ||
-        this.requestModel.filterModel.statuses[0].id === 0) &&
-        (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
-        (this.requestModel.filterModel.tags === undefined ||
-          this.requestModel.filterModel.tags.length === 0 ||
-          this.requestModel.filterModel.tags[0].id === 0) &&
-        (this.requestModel.filterModel.types === undefined ||
-          this.requestModel.filterModel.types.length === 0 ||
-          this.requestModel.filterModel.types[0] === 0) &&
-        (this.requestModel.filterModel.vendors === undefined || this.requestModel.filterModel.vendors.length === 0))
-    );
-  }
   onFirstDataRendered(params) {}
 
   // ag-grid change visibillity of columns
@@ -476,14 +451,14 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     });
   }
 
-  // form actions
-
   // click on the link "select all"
   selectAll() {
     this.dataConcentratorUnitsGridService.setSessionSettingsClearExcludedRows();
     this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(true);
     this.eventService.selectDeselectAll(this.gridApi.paginationGetCurrentPage());
   }
+
+  // form actions
 
   // click on the link "deselect all"
   deselectAll() {
@@ -494,11 +469,12 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.eventService.selectDeselectAll(-1); // -1 = deselect all
   }
 
-  // TODO
   // tsg button click
   onTag() {
     //
   }
+
+  // TODO
 
   onDelete(selectedGuid: string) {
     const params = this.dcOperationsService.getOperationRequestParam(
@@ -551,7 +527,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  // functions for operations called from grid
   // ******************************************************************************** */
   onSynchronizeTime(selectedGuid: string) {
     this.requestModel.filterModel = this.setFilter();
@@ -567,6 +542,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     );
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, 1);
   }
+
+  // functions for operations called from grid
 
   onFwUpgrade(selectedGuid: string) {
     this.requestModel.filterModel = this.setFilter();
@@ -598,12 +575,12 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, 1);
   }
 
-  // *******************************************************************************
-
   filterChanged() {
     this.reloadGrid();
     this.deselectAll();
   }
+
+  // *******************************************************************************
 
   gridSizeChanged() {
     this.resizeColumns();
@@ -753,10 +730,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  get pageSizeProperty() {
-    return 'pageSize';
-  }
-
   createForm(pageSize: Codelist<number>): FormGroup {
     return this.fb.group({
       [this.pageSizeProperty]: pageSize
@@ -818,5 +791,29 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       );
       this.refreshGrid();
     }
+  }
+
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private noFilters() {
+    return (
+      this.requestModel.filterModel == null ||
+      ((this.requestModel.filterModel.statuses === undefined ||
+        this.requestModel.filterModel.statuses.length === 0 ||
+        this.requestModel.filterModel.statuses[0].id === 0) &&
+        (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
+        (this.requestModel.filterModel.tags === undefined ||
+          this.requestModel.filterModel.tags.length === 0 ||
+          this.requestModel.filterModel.tags[0].id === 0) &&
+        (this.requestModel.filterModel.types === undefined ||
+          this.requestModel.filterModel.types.length === 0 ||
+          this.requestModel.filterModel.types[0] === 0) &&
+        (this.requestModel.filterModel.vendors === undefined || this.requestModel.filterModel.vendors.length === 0))
+    );
   }
 }
