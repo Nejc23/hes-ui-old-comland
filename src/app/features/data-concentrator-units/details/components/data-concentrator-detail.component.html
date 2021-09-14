@@ -31,8 +31,8 @@
           <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
                                    [visible]="openEdit">
             <app-edit-dcu-form (savedDataEvent)="refreshData()" [concentratorId]="data.concentratorId"
+                               [credentialsVisible]="credentialsVisible"
                                [form]="editForm">
-
             </app-edit-dcu-form>
           </app-slide-out-component>
 
