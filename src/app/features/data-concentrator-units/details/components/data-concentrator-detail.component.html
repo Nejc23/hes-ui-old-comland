@@ -2,7 +2,8 @@
   <button class="btn btn-primary" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
     <span>{{ 'COMMON.EDIT' | translate }}</span>
   </button>
-  <button class="btn btn-primary me-2" [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized (click)="onDelete()">
+  <button (click)="onDelete()" [permission]="permissionEdit" appHideIfPermissionUnauthorized
+          class="btn btn-primary me-2">
     <span>{{ 'COMMON.DELETE' | translate }}</span>
   </button>
   <app-dc-operations [showOperations]="true" [requestModel]="null"
