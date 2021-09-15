@@ -133,7 +133,7 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   colorExist(enumValue: string, coloredValues: ColoredValue[]) {
     if (enumValue && coloredValues.length > 0) {
-      let exist = coloredValues.find((item) => item.enumValue.toLowerCase() === enumValue.toLowerCase());
+      const exist = coloredValues.find((item) => item.enumValue.toLowerCase() === enumValue.toLowerCase());
       if (exist) {
         return exist.color;
       }
@@ -181,7 +181,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.gridViewFilter = this.gridData;
 
     if (value !== 'All') {
-      let filterTemp: CompositeFilterDescriptor = {
+      const filterTemp: CompositeFilterDescriptor = {
         logic: 'and',
         filters: []
       };

@@ -732,11 +732,11 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     endDate.setHours(this.eventsForm.get(this.endTimeProperty).value.split(':')[0]);
     endDate.setMinutes(this.eventsForm.get(this.endTimeProperty).value.split(':')[1]);
 
-    let startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-    let endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    const startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    const endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
     // mock
-    let registersFilter: RegistersFilter = {
+    const registersFilter: RegistersFilter = {
       deviceId: '146ba703-681a-4528-a6c5-29c35d9b77a3',
       register: {
         registerGroupId: '8a159f8c-17ae-484a-93f9-acd195fa45c5',
