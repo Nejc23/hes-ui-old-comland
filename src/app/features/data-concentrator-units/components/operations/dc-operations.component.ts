@@ -32,18 +32,6 @@ export class DcOperationsComponent {
     return PermissionEnumerator.Manage_Concentrators;
   }
 
-  get permissionSynchronizeTime() {
-    return PermissionEnumerator.Sync_Time;
-  }
-
-  get permissionFwUpgrade() {
-    return PermissionEnumerator.Concentrator_FW_Upgrade;
-  }
-
-  get permissionDeviceDiscovery() {
-    return PermissionEnumerator.Manage_Concentrators;
-  }
-
   onSynchronizeTime() {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);

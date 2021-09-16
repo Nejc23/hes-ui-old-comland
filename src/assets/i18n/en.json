@@ -227,7 +227,7 @@
     "STATUS": "status{{additionalString}}",
     "TYPE": "type{{additionalString}}",
     "VENDOR": "vendor{{additionalString}}",
-    "LAST-NOTIFICATIONS": "Last notifications"
+    "LAST-NOTIFICATIONS": "Last notifications",
     "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again."
   },
   "ERROR": {
