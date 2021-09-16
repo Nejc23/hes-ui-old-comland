@@ -16,8 +16,21 @@ export class DcOperationsComponent {
   @Input() requestModel: GridRequestParams;
   @Input() selectedItemsCount: number;
   @Input() allVisibleColumns: string[];
+  @Input() type = '';
 
   constructor(private dcOperationsService: DcOperationsService, private modalService: ModalService) {}
+
+  get permissionSynchronizeTime() {
+    return PermissionEnumerator.Sync_Time;
+  }
+
+  get permissionFwUpgrade() {
+    return PermissionEnumerator.Concentrator_FW_Upgrade;
+  }
+
+  get permissionDeviceDiscovery() {
+    return PermissionEnumerator.Manage_Concentrators;
+  }
 
   get permissionSynchronizeTime() {
     return PermissionEnumerator.Sync_Time;
@@ -38,6 +51,9 @@ export class DcOperationsComponent {
 
   onFwUpgrade() {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    if (this.type) {
+      params.types = [this.type];
+    }
     this.dcOperationsService.fwUpgrade(params, this.selectedItemsCount);
   }
 

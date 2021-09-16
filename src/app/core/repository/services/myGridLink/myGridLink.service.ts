@@ -18,6 +18,7 @@ import {
   onDemandSetBreakerMode,
   onDemandSetLimiter,
   onDemandSetMonitor,
+  triggerConcUpgrade,
   triggerDeviceUpgrade,
   triggerSetTimeOfUse
 } from '../../consts/my-grid-link.const';
@@ -203,6 +204,15 @@ export class MyGridLinkService {
 
   createFwUpgradeRequest(payload: IActionRequestFwUpgradeData): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgrade}`, payload);
+  }
+
+  // trigger upload conc FW upgrade
+  createConcFwUpgrade(payload: IActionRequestFwUpgradeData): Observable<IActionResponseFwUpgradeData> {
+    return this.repository.makeRequest(this.createConcFwUpgradeRequest(payload));
+  }
+
+  createConcFwUpgradeRequest(payload: IActionRequestFwUpgradeData): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerConcUpgrade}`, payload);
   }
 
   // trigger activate FW upgrade

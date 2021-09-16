@@ -215,7 +215,7 @@
     "DCU-UPDATED-SUCCESSFULLY": "Data Concentration Unit was updated successfully",
     "EDIT-DCU": "Edit Data Concentrator Unit",
     "ERROR-SCHEDULER": "Error adding scheduler. {{errorMessage}}",
-    "FILE-BIN-FORMAT": "Selected file must be in .bin file format.",
+    "FILE-BIN-FORMAT": "Selected file must be in {{supportedType}} file format.",
     "FW-UPGRADE-FAILED": "FW Upgrade failed!",
     "FW-UPGRADE-PROGRESS": "FW Upgrade in progress",
     "FW-UPGRADE-SUCCESSFUL": "FW Upgrade successful!",
@@ -228,6 +228,7 @@
     "TYPE": "type{{additionalString}}",
     "VENDOR": "vendor{{additionalString}}",
     "LAST-NOTIFICATIONS": "Last notifications"
+    "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again."
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"

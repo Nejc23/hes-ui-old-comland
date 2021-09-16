@@ -169,8 +169,4 @@ export class CardItemComponent implements OnInit, OnChanges {
       }
     }
   }
-
-  addColorToChart(value) {
-    debugger;
-  }
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { FileRestrictions, UploadProgressEvent } from '@progress/kendo-angular-upload';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -42,6 +42,14 @@ export class FileSelectComponent implements OnInit {
 
   constructor(private formUtils: FormsUtilsService) {}
 
+  get formControl(): AbstractControl {
+    return this.form.get(this.property);
+  }
+
+  get required(): boolean {
+    return this.formUtils.hasFormControlRequiredField(this.formControl);
+  }
+
   ngOnInit() {
     this.restrictions = {
       allowedExtensions: this.allowedExtensions
@@ -55,14 +63,6 @@ export class FileSelectComponent implements OnInit {
     }
 
     this.controlId = _.uniqueId('fileSelect');
-  }
-
-  get formControl(): AbstractControl {
-    return this.form.get(this.property);
-  }
-
-  get required(): boolean {
-    return this.formUtils.hasFormControlRequiredField(this.formControl);
   }
 
   showErrors(): boolean {

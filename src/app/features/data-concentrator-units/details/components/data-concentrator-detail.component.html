@@ -10,8 +10,9 @@
     >
     </app-page-title>
 
-    <app-dc-operations [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
-                       [showOperations]="true" class="tw-mt-10 tw-pr-5"></app-dc-operations>
+    <app-dc-operations *ngIf="data" [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
+                       [showOperations]="true"
+                       [type]="data.typeValue" class="tw-mt-10 tw-pr-5"></app-dc-operations>
 
   </div>
 </div>

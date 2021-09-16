@@ -13,6 +13,7 @@ export interface IActionRequestParams {
   to?: string;
   groups?: any[]; // TODO enum
   unconditionalSync?: string;
+  types?: string[];
 }
 
 export interface IActionSearchParam {
@@ -56,6 +57,7 @@ export interface IActionResponseSetDisconnectorMode extends IActionResponseParam
 export interface IActionRequestTOUData extends IActionRequestParams {
   timeOfUseId: string;
 }
+
 // for TOU response
 export interface IActionResponseTOUData extends IActionResponseParams {
   timeOfUseId: string;
@@ -64,11 +66,11 @@ export interface IActionResponseTOUData extends IActionResponseParams {
 // for FW upgrade request
 export interface IActionRequestFwUpgradeData extends IActionRequestParams {
   fileId: string;
-  imageIdent: string;
-  imageSize: number;
-  signature: string;
-  overrideFillLastBlock: boolean;
-  activate: boolean;
+  imageIdent?: string;
+  imageSize?: number;
+  signature?: string;
+  overrideFillLastBlock?: boolean;
+  activate?: boolean;
 }
 
 export interface IActionRequestDeleteDevice extends IActionRequestParams {

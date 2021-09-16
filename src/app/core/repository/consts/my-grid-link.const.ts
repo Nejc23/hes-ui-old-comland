@@ -18,6 +18,7 @@ export const triggerSetTimeOfUse = '/trigger-set-time-of-use';
 export const onDemandData = '/data';
 export const importTemplates = '/import-templates';
 export const triggerDeviceUpgrade = '/trigger-device-upgrade';
+export const triggerConcUpgrade = '/trigger-concentrator-upgrade';
 export const activateTriggerDeviceUpgrade = `${triggerDeviceUpgrade}/activate`;
 export const getCommonRegisterGroups = `/get-common-register-groups`;
 export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';

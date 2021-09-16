@@ -359,6 +359,7 @@ export class DcOperationsService {
         const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
         if (selectedRows && selectedRows.length > 0) {
           requestParam.concentratorIds = [];
+          requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
           selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
         }
       }
