@@ -3,5 +3,6 @@ export const brand = {
   navFixedLogoUrl: 'assets/images/logo/ePointHes.png',
   navFixedMenuMainUrl: 'assets/images/logo/ePointHes-sm.png',
   appBrowserTitle: 'e-Point HES',
-  appTitle: 'HES'
+  appTitle: 'HES',
+  brand: 'hes'
 };

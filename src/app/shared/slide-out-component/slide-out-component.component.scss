@@ -1,0 +1,47 @@
+.slide-out-component {
+  //overflow-y: scroll;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 440px;
+  bottom: 0;
+  height: 100vh;
+  z-index: 1050;
+  visibility: hidden;
+  overflow: hidden;
+}
+
+.slide-in-content {
+  transition: transform .5s ease;
+  border-radius: 4px;
+  background-color: white;
+  height: 98vh;
+  margin: 1rem;
+  box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
+}
+
+.slide-in.from-right .slide-in-content {
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+}
+
+.slide-in.show .slide-in-content {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
+
+.show {
+  visibility: visible;
+}
+
+.header {
+  width: 100%;
+  padding: 1.5rem 1.7rem 1.5rem 2rem;
+  @apply tw-justify-between;
+  @apply tw-inline-flex;
+  @apply tw-items-center;
+}
+
+.content {
+  height: 80vh;
+}

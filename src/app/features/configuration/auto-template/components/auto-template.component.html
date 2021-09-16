@@ -1,101 +1,107 @@
 <div class="row">
 
-<div class="col-2 filter-shadow-container" *ngIf="!hide">
-  <div class="filter-shadow" >
-    <div class="d-flex mb-3 mt-2">
-      <h4 class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="'FILTER.TEMPLATE-LIST' | translate ">{{ 'FILTER.TEMPLATE-LIST' | translate }}</h4>
-      <button type="button" class="btn-close ms-auto" (click)="clickShowHideFilter()">
-      </button>
-    </div>
+  <div *ngIf="!hide" class="col-2 filter-shadow-container">
+    <div class="filter-shadow">
+      <div class="d-flex mb-3 mt-2">
+        <h4 [ngbTooltip]="'FILTER.TEMPLATE-LIST' | translate " [openDelay]="500" class="mb-0 text-truncate" container="body"
+            placement="bottom">{{ 'FILTER.TEMPLATE-LIST' | translate }}</h4>
+        <button (click)="clickShowHideFilter()" class="btn-close ms-auto" type="button">
+        </button>
+      </div>
 
-    <div class="filter-scroll-templates">
-      <a href="javascript:void(0);" (click)="onSelect(temp)" class="list-group-item list-group-item-action border-0 text-truncate"
-      [ngClass]="setTemplateListActivityClass(temp)" container="body" placement="bottom"  [openDelay]="500" [ngbTooltip]="temp.name"
-      *ngFor="let temp of templates let first = first">{{temp.name}}</a>
+      <div class="filter-scroll-templates">
+        <a (click)="onSelect(temp)" *ngFor="let temp of templates let first = first"
+           [ngClass]="setTemplateListActivityClass(temp)"
+           [ngbTooltip]="temp.name" [openDelay]="500" class="list-group-item list-group-item-action border-0 text-truncate" container="body"
+           href="javascript:void(0);"
+           placement="bottom">{{temp.name}}</a>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="filter-button" [ngClass]="{'col-10': !hide, 'col-12': hide}">
-  <div class="d-flex align-items-center mb-3 mt-0">
-    <button type="button" class="btn btn-light pl-3 pe-3 position-relative me-3" [ngClass]="{'active': !hide}" (click)="clickShowHideFilter()" [ngbTooltip]="hidwShowTemplates">
-      <i class="far fa-ellipsis-v"></i>
-    </button>
-    <h3 class="me-3 mb-0">{{activeElement?.name}}</h3>
-  </div>
-
-  <div *ngIf="activeElement">
+  <div [ngClass]="{'col-10': !hide, 'col-12': hide}" class="filter-button">
     <div class="d-flex align-items-center mb-3 mt-0">
+      <button (click)="clickShowHideFilter()" [ngClass]="{'active': !hide}" [ngbTooltip]="hidwShowTemplates"
+              class="btn btn-light tw-pl-3 pe-3 position-relative me-3" type="button">
+        <i class="far fa-ellipsis-v"></i>
+      </button>
+      <h3 class="me-3 mb-0">{{activeElement?.name}}</h3>
+    </div>
+
+    <div *ngIf="activeElement">
+      <div class="d-flex align-items-center mb-3 mt-0">
         <h4 class="me-3 mb-0"> {{'TOOLS.AUTO-TEMPLATE.RULES' | translate }}</h4>
-        <button class="btn btn-primary" (click)="addNewRuleItem()" [disabled]="activeElement?.templateId?.length == 0">
+        <button (click)="addNewRuleItem()" [disabled]="activeElement?.templateId?.length == 0" class="btn btn-primary">
           <span>{{ 'BUTTON.ADD' | translate}} </span>
         </button>
-    </div>
-
-    <div class="content-body-scroll-templates">
-      <div>
-        <ag-grid-angular
-          class="ag-theme-epoint"
-          style="width: 100%; height: calc(98% - 25px);"
-          #agGrid
-          domLayout="autoHeight"
-          id="myGrid"
-          [modules]="modules"
-          [columnDefs]="columnDefs"
-          [defaultColDef]="defaultColDef"
-          [rowData]="rowData"
-          (firstDataRendered)="onFirstDataRendered($event)"
-          (gridReady)="onGridReady($event)"
-          [frameworkComponents]="frameworkComponents"
-          [context]="context"
-          [gridOptions]="cellRendererParams"
-          [getRowHeight]="getRowHeight"
-          (rowEditingStopped)='rowEditingStopped($event)'
-        ></ag-grid-angular>
       </div>
 
-      <div *ngIf="showJobSection()">
-        <div class="d-flex align-items-center mb-3 mt-5">
-          <div class="mb-3 me-3">
-            <h4 class="mb-0">{{ 'FORM.JOBS' | translate }}</h4>
-          </div>
-          <app-select-input [form]="form" [property]="'selectedJob'" [selectOptions]="jobList" class="align-self-center mb-0" style="width:350px"></app-select-input>
-          <div class="mb-3">
-            <button class="btn btn-primary ms-2" (click)="addJob()" [disabled]="activeElement?.templateId?.length == 0">
-              <span>{{ 'BUTTON.ADD' | translate }}</span>
-            </button>
-          </div>
-        </div>
-
+      <div class="content-body-scroll-templates">
         <div>
           <ag-grid-angular
-                class="ag-theme-epoint"
-                style="width: 100%; height: calc(98% - 25px);"
-                #agGrid
-                domLayout="autoHeight"
-                id="myGridJobs"
-                [modules]="modules"
-                [columnDefs]="columnDefsJobs"
-                [defaultColDef]="defaultColDefJobs"
-                [rowData]="rowDataJobs"
-                (firstDataRendered)="onFirstDataRenderedJobs($event)"
-                (gridReady)="onGridReadyJobs($event)"
-                [frameworkComponents]="frameworkComponentsJobs"
-                [context]="context"
-                [gridOptions]="cellRendererParamsJobs"
-              ></ag-grid-angular>
+            #agGrid
+            (firstDataRendered)="onFirstDataRendered($event)"
+            (gridReady)="onGridReady($event)"
+            (rowEditingStopped)="rowEditingStopped($event)"
+            [columnDefs]="columnDefs"
+            [context]="context"
+            [defaultColDef]="defaultColDef"
+            [frameworkComponents]="frameworkComponents"
+            [getRowHeight]="getRowHeight"
+            [gridOptions]="cellRendererParams"
+            [modules]="modules"
+            [rowData]="rowData"
+            class="ag-theme-epoint"
+            domLayout="autoHeight"
+            id="myGrid"
+            style="width: 100%; height: calc(98% - 25px);"
+          ></ag-grid-angular>
+        </div>
+
+        <div *ngIf="showJobSection()">
+          <div class="d-flex align-items-center mb-3 mt-5">
+            <div class="mb-3 me-3">
+              <h4 class="mb-0">{{ 'FORM.JOBS' | translate }}</h4>
+            </div>
+            <app-select-input [form]="form" [property]="'selectedJob'" [selectOptions]="jobList"
+                              class="align-self-center mb-0" style="width:350px"></app-select-input>
+            <div class="mb-3">
+              <button (click)="addJob()" [disabled]="activeElement?.templateId?.length == 0"
+                      class="btn btn-primary ms-2">
+                <span>{{ 'BUTTON.ADD' | translate }}</span>
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <ag-grid-angular
+              #agGrid
+              (firstDataRendered)="onFirstDataRenderedJobs($event)"
+              (gridReady)="onGridReadyJobs($event)"
+              [columnDefs]="columnDefsJobs"
+              [context]="context"
+              [defaultColDef]="defaultColDefJobs"
+              [frameworkComponents]="frameworkComponentsJobs"
+              [gridOptions]="cellRendererParamsJobs"
+              [modules]="modules"
+              [rowData]="rowDataJobs"
+              class="ag-theme-epoint"
+              domLayout="autoHeight"
+              id="myGridJobs"
+              style="width: 100%; height: calc(98% - 25px);"
+            ></ag-grid-angular>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="card text-center border-0 mt-5" *ngIf="!activeElement">
-    <div class="card-header border-0 bg-transparent">
-      <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+    <div *ngIf="!activeElement" class="card text-center border-0 mt-5">
+      <div class="card-header border-0 bg-transparent">
+        <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
+      </div>
+      <div class="card-body">
+        <div class="small-title pb-2">{{' TOOLS.AUTO-TEMPLATE.ERROR' | translate }}</div>
+      </div>
     </div>
-    <div class="card-body">
-      <div class="small-title pb-2">{{' TOOLS.AUTO-TEMPLATE.ERROR' | translate }}</div>
-    </div>
-  </div>
   </div>
 </div>
 <ng-template #hidwShowTemplates><span>{{ 'TOOLS.AUTO-TEMPLATE.SHOW-HIDE' | translate }}</span></ng-template>

@@ -1,34 +1,38 @@
 <div class="datetime-range-picker">
   <ngx-daterangepicker-material
     #datePicker
+    (datesUpdated)="datesUpdated($event)"
+    (rangeClicked)="updateRange($event)"
+    [alwaysShowCalendars]="true"
     [autoApply]="true"
     [linkedCalendars]="true"
-    [ranges]="defaultRanges"
     [locale]="locale"
-    [alwaysShowCalendars]="true"
-    (rangeClicked)="updateRange($event)"
-    (datesUpdated)="datesUpdated($event)"
+    [ranges]="defaultRanges"
     class="date-range-picker">
   </ngx-daterangepicker-material>
 
   <div class="padding-left">
-    <div class="set-time d-flex align-items-center" *ngIf="withTime">
+    <div *ngIf="withTime" class="set-time d-flex align-items-center">
       <div class="text-normal-bold">
         {{ 'FORM.SET-TIME' | translate }}
       </div>
 
-      <div class="pl-4">
-        <app-input-text [inputType]="'time'" [form]="form" [property]="'startTime'" label="Start-time" (inputTextBlurValue)="checkTimes()"></app-input-text>
+      <div class="tw-pl-4">
+        <app-input-text (inputTextBlurValue)="checkTimes()" [form]="form" [inputType]="'time'" [property]="'startTime'"
+                        label="Start-time"></app-input-text>
       </div>
 
-      <div class="pl-3">
-        <app-input-text [inputType]="'time'" [form]="form" [property]="'endTime'" label="End-time" (inputTextBlurValue)="checkTimes()"></app-input-text>
+      <div class="tw-pl-3">
+        <app-input-text (inputTextBlurValue)="checkTimes()" [form]="form" [inputType]="'time'" [property]="'endTime'"
+                        label="End-time"></app-input-text>
       </div>
     </div>
 
     <div class="buttons-container d-flex justify-content-between align-items-center padding-top-32">
-      <button type="button" class="btn text-secondary" (click)="clear()">{{ 'BUTTON.CLEAR-SELECTION' | translate }}</button>
-      <button type="submit" class="btn btn-primary" [disabled]="!form.valid" (click)="close()">{{ 'BUTTON.APPLY' | translate }}</button>
+      <button (click)="clear()" class="btn text-secondary"
+              type="button">{{ 'BUTTON.CLEAR-SELECTION' | translate }}</button>
+      <button (click)="close()" [disabled]="!form.valid" class="btn btn-primary"
+              type="submit">{{ 'BUTTON.APPLY' | translate }}</button>
     </div>
   </div>
 </div>

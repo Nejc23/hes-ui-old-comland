@@ -40,9 +40,9 @@ import { DeleteDcuFormComponent } from './delete-dcu-form/delete-dcu-form.compon
 
 @Component({
   selector: 'app-data-concentrator-units',
-  templateUrl: './data-concentrator-units.component.html'
+  templateUrl: './data-concentrator-units-list.component.html'
 })
-export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
+export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   sessionNameForGridState = 'grdStateDCU';
   sessionNameForGridFilter = 'grdLayoutDCU';
 
@@ -70,7 +70,6 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   public icons;
   public frameworkComponents;
   public sideBar;
-  headerTitle = this.translate.instant('COMMON.CONCENTRATORS');
   requestModel: GridRequestParams = {
     requestId: null,
     startRow: 0,
@@ -196,10 +195,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   get selectedAtLeastOneRowOnGrid() {
     if (this.gridApi) {
       const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
+      return selectedRows && selectedRows.length > 0;
     }
     return false;
   }
@@ -235,7 +231,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
       selectAll: this.translate.instant('GRID.SELECT-ALL')
     };
 
-    this.bredcrumbService.setPageName(this.headerTitle);
+    this.bredcrumbService.setPageName('');
 
     this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
       this.deselectAll();

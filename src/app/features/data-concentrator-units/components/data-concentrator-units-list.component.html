@@ -35,8 +35,9 @@
                 <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
-            <div *ngIf="getSelectedCount() > 0" class="me-3">
-              <button class="btn btn-primary" [permission]="permissionAdd" appHideIfPermissionUnauthorized (click)="onDelete()">
+            <div *ngIf="getSelectedCount() > 0" [permission]="permissionAdd" appHideIfPermissionUnauthorized
+                 class="me-3">
+              <button (click)="onDelete()" class="btn btn-primary">
                 <span>{{ 'COMMON.DELETE' | translate }}</span>
               </button>
             </div>
@@ -55,7 +56,8 @@
       <div class="content-body-scroll">
         <div>
           <!-- ag-grid -->
-          <ag-grid-angular #agGrid (columnVisible)="onColumnVisible($event)" (firstDataRendered)="onFirstDataRendered($event)"
+          <ag-grid-angular #agGrid (columnVisible)="onColumnVisible($event)"
+                           (firstDataRendered)="onFirstDataRendered($event)"
                            (gridReady)="onGridReady($event)"
                            (gridSizeChanged)="gridSizeChanged()"
                            (paginationChanged)="onPaginationChange($event)"
@@ -83,7 +85,7 @@
                            [suppressColumnVirtualisation]="true"
                            [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
                            class="ag-theme-epoint custom-paging"
-                           style="width: 98%; height: calc(100% - 25px);"
+                           style="width: 100%; height: calc(100% - 25px);"
           >
           </ag-grid-angular>
 

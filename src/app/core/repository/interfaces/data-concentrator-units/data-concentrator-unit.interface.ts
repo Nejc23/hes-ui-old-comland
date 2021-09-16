@@ -1,6 +1,6 @@
 export interface DataConcentratorUnit {
   concentratorId: string;
-  statusValue: string;
+  statusValue: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE';
   statusId: number;
   name: string;
   typeValue: string;
@@ -18,4 +18,13 @@ export interface DataConcentratorUnit {
   password: string;
   latitude?: number;
   longitude?: number;
+  plcStatus?: ConcentratorStatus;
+}
+
+export enum ConcentratorStatus {
+  UNKNOWN = 'unknown',
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  MOUNTED = 'mounted',
+  DELETED = 'deleted'
 }

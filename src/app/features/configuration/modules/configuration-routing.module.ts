@@ -16,7 +16,7 @@ const routes: Routes = [
       {
         path: 'importTemplates',
         data: {
-          breadcrumb: 'MENU.IMPORT-TEMPLATES',
+          breadcrumb: '',
           permission: PermissionEnumerator.Import_Templates
         },
         component: PlcMeterTemplatesImportComponent
@@ -24,7 +24,7 @@ const routes: Routes = [
       {
         path: 'importTouConfiguration',
         data: {
-          breadcrumb: 'MENU.IMPORT-TOU-CONFIGURATION',
+          breadcrumb: '',
           permission: PermissionEnumerator.Import_TOU_Configuration
         },
         component: PlcMeterTouConfigImportComponent
@@ -32,7 +32,7 @@ const routes: Routes = [
       {
         path: 'autoTemplates',
         data: {
-          breadcrumb: 'MENU.AUTO-TEMPLATES',
+          breadcrumb: '',
           permission: PermissionEnumerator.Manage_Auto_Template_Rules
         },
         component: AutoTemplateComponent
@@ -40,7 +40,7 @@ const routes: Routes = [
       {
         path: 'importDeviceKeys',
         data: {
-          breadcrumb: 'MENU.IMPORT-DEVICE-KEYS',
+          breadcrumb: '',
           permission: PermissionEnumerator.Import_Device_Keys
         },
         component: ImportDeviceKeysComponent

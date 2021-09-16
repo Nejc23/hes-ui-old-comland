@@ -251,9 +251,9 @@ export class MeterUnitRegistersComponent implements OnInit {
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: this.translate.instant('MENU.METERS'),
+        label: this.translate.instant('MENU.METER-UNITS'),
         params: {},
-        url: null
+        url: '/meterUnits'
       }
     ];
 

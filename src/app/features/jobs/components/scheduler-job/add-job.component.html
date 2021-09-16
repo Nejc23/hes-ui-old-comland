@@ -1,9 +1,9 @@
-<div class="card pt-4 pb-4" (click)="doAddJob()">
-  <i class="icon"
-  [ngClass]="{'material-icons': !jobParams.isIconOutlined, 'material-icons-outlined': jobParams.isIconOutlined }">
+<div (click)="doAddJob()" class="card pt-4 pb-4">
+  <i [ngClass]="{'material-icons': !jobParams.isIconOutlined, 'material-icons-outlined': jobParams.isIconOutlined }"
+     class="icon">
     {{jobParams.icon}}
   </i>
-  <div class="name text-truncate px-2">{{jobParams.jobName}}</div>
+  <div class="name text-truncate tw-px-2">{{jobParams.jobName}}</div>
   <div class="mt-2">
     <span class="badge badge-primary">{{jobParams.deviceType}}</span>
   </div>

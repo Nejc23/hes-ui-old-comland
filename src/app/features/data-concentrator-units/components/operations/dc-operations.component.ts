@@ -3,6 +3,8 @@ import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permi
 import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
 import { DcOperationsService } from '../../services/dc-operations.service';
+import { DeleteDcuFormComponent } from '../delete-dcu-form/delete-dcu-form.component';
+import { ModalService } from '../../../../core/modals/services/modal.service';
 
 @Component({
   selector: 'app-dc-operations',
@@ -16,7 +18,7 @@ export class DcOperationsComponent {
   @Input() allVisibleColumns: string[];
   @Input() type = '';
 
-  constructor(private dcOperationsService: DcOperationsService) {}
+  constructor(private dcOperationsService: DcOperationsService, private modalService: ModalService) {}
 
   get permissionSynchronizeTime() {
     return PermissionEnumerator.Sync_Time;
@@ -46,5 +48,13 @@ export class DcOperationsComponent {
   onDeviceDiscovery() {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, this.selectedItemsCount);
+  }
+
+  onDelete() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
+
+    const modalRef = this.modalService.open(DeleteDcuFormComponent);
+    const component: DeleteDcuFormComponent = modalRef.componentInstance;
+    component.applyRequestParams(params, 1);
   }
 }

@@ -26,7 +26,8 @@ export const environment = {
   // identitiy settings
   // stsAuthority: 'http://89.212.201.202:8081/',
   // clientId: 'epoint3',
-  thresholdValue: 7
+  thresholdValue: 7,
+  mapBoxToken: 'pk.eyJ1IjoibWJ1bG92ZWMiLCJhIjoiY2tzb2tqenNsMG54YTJwbzZ3M3JmcW1xOCJ9.Yvtz-kegMWE4_uQuXjDxQA'
   // clientRoot: 'http://advance-hes.azurewebsites.net/npm run start',
   // clientScope: 'openid profile roles offline_access company',
   // clientAutoSilentRenew: true

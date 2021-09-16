@@ -37,7 +37,8 @@
 
                 <div class="form-row">
                   <div class="col-12">
-                    <app-select-input (selectedValueChanged)="templateChanged($event)" *ngIf="!isEditMu" [disabled]="false" [form]="form"
+                    <app-select-input (selectedValueChanged)="templateChanged($event)" *ngIf="!isEditMu"
+                                      [disabled]="false" [form]="form"
                                       [property]="templateProperty"
                                       [selectOptions]="templates" label="TEMPLATE">
                     </app-select-input>
@@ -49,7 +50,8 @@
 
                 <div class="form-row">
                   <div class="col-12">
-                    <app-select-input (selectedValueChanged)="onConnectionTypeChanged($event)" [disabled]="false" [form]="form"
+                    <app-select-input (selectedValueChanged)="onConnectionTypeChanged($event)" [disabled]="false"
+                                      [form]="form"
                                       [property]="connectionTypeProperty"
                                       [selectOptions]="connectionTypes" label="CONNECTION-TYPE">
                     </app-select-input>
@@ -70,8 +72,10 @@
 
                 <div *ngIf="isNewOrProtocolDlms" class="form-row">
                   <div class="col-12">
-                    <app-input-radio (selectionChanged)="communicationTypeChanged($event, !isEditMu)" [form]="form" [hideCheckbox]="true"
-                                     [hideLabelSmall]="true" [options]="communicationTypes" [property]="communicationTypeProperty"
+                    <app-input-radio (selectionChanged)="communicationTypeChanged($event, !isEditMu)" [form]="form"
+                                     [hideCheckbox]="true"
+                                     [hideLabelSmall]="true" [options]="communicationTypes"
+                                     [property]="communicationTypeProperty"
                                      box="true" label="COMMUNICATION-TYPE"
                                      name="fileTypeRadio">
                     </app-input-radio>
@@ -81,7 +85,7 @@
                 <div *ngIf="isHdlcSelected" class="form-row">
                   <div class="col-12">
 
-                    <div class="d-flex justify-content-between gray-line gray-line-top py-3 mt-4">
+                    <div class="d-flex justify-content-between gray-line gray-line-top tw-py-3 mt-4">
                       <div class="modal-checkbox-label">
                         <div class="text-normal-bold">{{ 'PLC-METER.SHORT-NAMES-REFERENCING' | translate }}</div>
                         <div
@@ -129,18 +133,20 @@
               <div>
                 <label class="label-primary">{{ 'PLC-METER.MANAGEMENT-ASSOCIATION' | translate }}</label>
               </div>
-              <div class="border px-2 py-2">
+              <div class="border tw-px-2 tw-py-2">
                 <div *ngIf="isWrapperSelected" class="form-row">
                   <div class="col-6">
                     <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                        [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                       [noFlex]="true" [property]="wrapperClientAddressProperty" [showSpinners]="false" [step]="1"
+                                       [noFlex]="true" [property]="wrapperClientAddressProperty" [showSpinners]="false"
+                                       [step]="1"
                                        label="CLIENT"></app-input-numeric>
                   </div>
                   <div class="col-6">
                     <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                        [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                       [noFlex]="true" [property]="wrapperServerAddressProperty" [showSpinners]="false" [step]="1"
+                                       [noFlex]="true" [property]="wrapperServerAddressProperty" [showSpinners]="false"
+                                       [step]="1"
                                        label="SERVER"></app-input-numeric>
                   </div>
                 </div>
@@ -149,13 +155,15 @@
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="clientLowProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="clientLowProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="CLIENT-LOW"></app-input-numeric>
                     </div>
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="serverLowProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="serverLowProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="SERVER-LOW"></app-input-numeric>
                     </div>
                   </div>
@@ -163,13 +171,15 @@
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="clientHighProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="clientHighProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="CLIENT-HIGH"></app-input-numeric>
                     </div>
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="serverHighProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="serverHighProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="SERVER-HIGH"></app-input-numeric>
                     </div>
                   </div>
@@ -178,19 +188,21 @@
               <div class="pt-3">
                 <label class="label-primary">{{ 'PLC-METER.PUBLIC-ASSOCIATION' | translate }}</label>
               </div>
-              <div class="border px-2 py-2">
+              <div class="border tw-px-2 tw-py-2">
                 <div *ngIf="isWrapperSelected">
                   <div class="form-row">
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="wrapperPublicClientAddressProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="wrapperPublicClientAddressProperty"
+                                         [showSpinners]="false" [step]="1"
                                          label="CLIENT"></app-input-numeric>
                     </div>
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="wrapperPublicServerAddressProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="wrapperPublicServerAddressProperty"
+                                         [showSpinners]="false" [step]="1"
                                          label="SERVER"></app-input-numeric>
                     </div>
                   </div>
@@ -200,13 +212,15 @@
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="publicClientLowProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="publicClientLowProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="CLIENT-LOW"></app-input-numeric>
                     </div>
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="publicServerLowProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="publicServerLowProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="SERVER-LOW"></app-input-numeric>
                     </div>
                   </div>
@@ -214,13 +228,15 @@
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="publicClientHighProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="publicClientHighProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="CLIENT-HIGH"></app-input-numeric>
                     </div>
                     <div class="col-6">
                       <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                          [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                         [noFlex]="true" [property]="publicServerHighProperty" [showSpinners]="false" [step]="1"
+                                         [noFlex]="true" [property]="publicServerHighProperty" [showSpinners]="false"
+                                         [step]="1"
                                          label="SERVER-HIGH"></app-input-numeric>
                     </div>
                   </div>
@@ -234,10 +250,11 @@
                     </app-input-switch>
                   </div>
                 </div>
-                <div *ngIf="isGatewayEnabled" class="border px-2">
+                <div *ngIf="isGatewayEnabled" class="border tw-px-2">
                   <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
                                      [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
-                                     [noFlex]="true" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false" [step]="1"
+                                     [noFlex]="true" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false"
+                                     [step]="1"
                                      label="PHYSICAL-ADDRESS"></app-input-numeric>
                 </div>
               </div>
@@ -309,7 +326,7 @@
     <div class="card-body pt-0">
       <div class="small-title pb-2">{{ 'PLC-METER.TEMPLATE-NOT-SELECTED' | translate }}</div>
       <div class="text-secondary">{{ 'PLC-METER.SELECT-TEMPLATE' | translate }}</div>
-      <div class="mt-3 mb-5 mx-5 px-5">
+      <div class="tw-mt-3 tw-mb-5 tw-mx-5 tw-px-5">
         <app-select-input (selectedValueChanged)="templateChanged($event)" [disabled]="false" [form]="form"
                           [property]="templateProperty" [selectOptions]="templates">
         </app-select-input>

@@ -39,40 +39,32 @@ import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-meter-units-type',
-  templateUrl: './meter-units-type.component.html'
+  selector: 'app-meter-units',
+  templateUrl: './meter-units-list.component.html'
 })
-export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
+export class MeterUnitsListComponent implements OnInit, OnDestroy {
   id = 0;
-  private paramsSub: Subscription;
-  private subscription: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT';
   headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
   refreshInterval = gridRefreshInterval;
-
   // grid variables
   columns = [];
   totalCount = 0;
   filtersInfo: FiltersInfo;
-  private layoutChangeSubscription: Subscription;
-
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
   overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
-
   meterTypes$: Codelist<number>[] = [];
   public hideFilter = true;
-
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
   public gridApi;
-  private gridColumnApi;
   public icons;
   public frameworkComponents;
   public sideBar;
@@ -100,35 +92,31 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       showOptionFilter: [{ id: 0, value: '' }]
     }
   };
-
   requestId = '';
   dataResult = '';
   dataStatusResponse = '';
   dataResult2 = '';
   public localeText;
-
   messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
   messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
-
   meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
   meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore;
-
   pageSizes: Codelist<number>[] = [
     { id: 20, value: '20' },
     { id: 50, value: '50' },
     { id: 100, value: '100' }
   ];
-
   selectedPageSize: Codelist<number> = this.pageSizes[0];
-
   form: FormGroup;
   datasource: any;
   isGridLoaded = false;
   areSettingsLoaded = false;
-
   isSearchByParent = false;
-
   gridData: any;
+  private paramsSub: Subscription;
+  private subscription: Subscription;
+  private layoutChangeSubscription: Subscription;
+  private gridColumnApi;
 
   constructor(
     public fb: FormBuilder,
@@ -162,7 +150,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       text: staticTextService.noFilterAppliedTekst
     };
 
-    this.setTitle(-1);
+    this.breadcrumbService.setPageName('');
+
     // this.paramsSub = route.params.subscribe((params) => {
     // this.id = params.id;
     meterUnitsTypeGridService.meterUnitsTypeId = null;
@@ -347,16 +336,17 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     return PermissionEnumerator.Sync_Time;
   }
 
-  // set form title by selected meter unit type
-  private setTitle(id: number) {
-    const selectedType = this.meterTypes$.find((x) => x.id === id);
-    if (selectedType !== undefined && selectedType != null) {
-      this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsType;
-    } else {
-      this.headerTitle = this.staticTextService.headerTitleMeterUnitsType;
+  // checking if at least one row on the grid is selected
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.gridApi) {
+      const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
+      return selectedRows && selectedRows.length > 0;
     }
+    return false;
+  }
 
-    this.breadcrumbService.setPageName(this.headerTitle);
+  get pageSizeProperty() {
+    return 'pageSize';
   }
 
   ngOnInit() {
@@ -385,6 +375,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.deleteAllRequests();
   }
 
+  // ag-grid
+
   ngOnDestroy() {
     if (this.paramsSub) {
       this.paramsSub.unsubscribe();
@@ -400,25 +392,14 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   // ag-grid
+
   // button click refresh grid
   refreshGrid() {
     this.gridApi.purgeServerSideCache([]);
   }
 
   // ag-grid
-  // checking if at least one row on the grid is selected
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  }
 
-  // ag-grid
   // search string changed call get data
   searchData($event: string) {
     if (this.isGridLoaded && this.areSettingsLoaded) {
@@ -448,52 +429,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
   }
 
   // ----------------------- ag-grid sets DATASOURCE end --------------------------
-
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private noFilters() {
-    if (
-      this.requestModel.filterModel == null ||
-      ((!this.requestModel.filterModel.statuses ||
-        this.requestModel.filterModel.statuses.length === 0 ||
-        this.requestModel.filterModel.statuses[0].id === 0) &&
-        (!this.requestModel.filterModel.tags ||
-          this.requestModel.filterModel.tags.length === 0 ||
-          this.requestModel.filterModel.tags[0].id === 0) &&
-        (!this.requestModel.filterModel.types ||
-          this.requestModel.filterModel.types.length === 0 ||
-          this.requestModel.filterModel.types[0] === 0) &&
-        (!this.requestModel.filterModel.vendors ||
-          this.requestModel.filterModel.vendors.length === 0 ||
-          this.requestModel.filterModel.vendors[0].id === 0) &&
-        !this.requestModel.filterModel.readStatus &&
-        (!this.requestModel.filterModel.firmware ||
-          this.requestModel.filterModel.firmware.length === 0 ||
-          this.requestModel.filterModel.firmware[0].id === 0) &&
-        (!this.requestModel.filterModel.disconnectorState ||
-          this.requestModel.filterModel.disconnectorState.length === 0 ||
-          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
-        (!this.requestModel.filterModel.ciiState ||
-          this.requestModel.filterModel.ciiState.length === 0 ||
-          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
-        (!this.requestModel.filterModel.showOptionFilter ||
-          this.requestModel.filterModel.showOptionFilter.length === 0 ||
-          this.requestModel.filterModel.showOptionFilter[0].id === 0) &&
-        (!this.requestModel.filterModel.protocol || this.requestModel.filterModel.protocol.length === 0) &&
-        (!this.requestModel.filterModel.medium || this.requestModel.filterModel.medium.length === 0)) /*
-        !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showWithoutTemplate &&
-        !this.requestModel.filterModel.readyForActivation)*/
-    ) {
-      return true;
-    }
-    return false;
-  }
 
   onFirstDataRendered(params) {}
 
@@ -653,8 +588,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.programmaticallySelectRow = false;
   }
 
-  // form actions
-
   // click on the link "select all"
   selectAll() {
     this.meterUnitsTypeGridService.setSessionSettingsClearExcludedRows();
@@ -671,6 +604,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.eventService.selectDeselectAll(false);
     this.eventService.setIsSelectedAll(false);
   }
+
+  // form actions
 
   // tsg button click
   onTag() {
@@ -797,7 +732,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     );
   }
 
-  // delete button click
   // TODO missing BE api !!
   onDelete(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(
@@ -822,6 +756,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       })
       .catch(() => {});
   }
+
+  // delete button click
 
   // popup
   onScheduleReadJobs(selectedGuid: string) {
@@ -1012,8 +948,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.onReadRegisters(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
-  // <-- end Operations action click (bulk or selected row)
-
   // --> for checking long bulk action finished
   deleteAllRequests() {
     const requestIds = this.meterUnitsTypeGridService.getAllMyGridLinkRequestIds();
@@ -1079,7 +1013,7 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  // --> start Security action click (bulk or selected row)
+  // <-- end Operations action click (bulk or selected row)
 
   onSecurityActivateHls(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(
@@ -1103,6 +1037,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     this.plcActionsService.onSecurityRekey(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
+  // --> start Security action click (bulk or selected row)
+
   onSecurityChangePassword(selectedGuid: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -1113,8 +1049,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
 
     this.plcActionsService.onSecurityChangePassword(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
-
-  // <-- end  Security action click (bulk or selected row)
 
   getSelectedCount(): number {
     if (this.checkSelectedAll()) {
@@ -1137,6 +1071,8 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       return `${selectedCount}`;
     }
   }
+
+  // <-- end  Security action click (bulk or selected row)
 
   showRegisters(deviceId: string) {
     this.router.navigate(['/meterUnits/registers', deviceId]);
@@ -1208,11 +1144,11 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
           .getGridMeterUnitsForm(that.requestModel, that.meterUnitsTypeGridService.getSessionSettingsPageIndex(), displayedColumnsNames)
           .subscribe((data) => {
             that.gridData = data;
-            const deviceIds = data.data.map((data) => data.deviceId);
+            const deviceIds = data.data.map((gridData) => gridData.deviceId);
 
             that.gridApi.hideOverlay();
 
-            if (data === undefined || data == null || data.totalCount === 0) {
+            if (data.totalCount === 0) {
               that.totalCount = 0;
               // that.noData = true;
               that.gridApi.showNoRowsOverlay();
@@ -1331,10 +1267,6 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
     }
   }
 
-  get pageSizeProperty() {
-    return 'pageSize';
-  }
-
   createForm(pageSize: Codelist<number>): FormGroup {
     return this.fb.group({
       [this.pageSizeProperty]: pageSize
@@ -1411,5 +1343,61 @@ export class MeterUnitsTypeComponent implements OnInit, OnDestroy {
       params,
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
+  }
+
+  // set form title by selected meter unit type
+  private setTitle(id: number) {
+    const selectedType = this.meterTypes$.find((x) => x.id === id);
+    if (selectedType !== undefined && selectedType != null) {
+      this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsType;
+    } else {
+      this.headerTitle = this.staticTextService.headerTitleMeterUnitsType;
+    }
+  }
+
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private noFilters() {
+    if (
+      this.requestModel.filterModel == null ||
+      ((!this.requestModel.filterModel.statuses ||
+        this.requestModel.filterModel.statuses.length === 0 ||
+        this.requestModel.filterModel.statuses[0].id === 0) &&
+        (!this.requestModel.filterModel.tags ||
+          this.requestModel.filterModel.tags.length === 0 ||
+          this.requestModel.filterModel.tags[0].id === 0) &&
+        (!this.requestModel.filterModel.types ||
+          this.requestModel.filterModel.types.length === 0 ||
+          this.requestModel.filterModel.types[0] === 0) &&
+        (!this.requestModel.filterModel.vendors ||
+          this.requestModel.filterModel.vendors.length === 0 ||
+          this.requestModel.filterModel.vendors[0].id === 0) &&
+        !this.requestModel.filterModel.readStatus &&
+        (!this.requestModel.filterModel.firmware ||
+          this.requestModel.filterModel.firmware.length === 0 ||
+          this.requestModel.filterModel.firmware[0].id === 0) &&
+        (!this.requestModel.filterModel.disconnectorState ||
+          this.requestModel.filterModel.disconnectorState.length === 0 ||
+          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
+        (!this.requestModel.filterModel.ciiState ||
+          this.requestModel.filterModel.ciiState.length === 0 ||
+          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
+        (!this.requestModel.filterModel.showOptionFilter ||
+          this.requestModel.filterModel.showOptionFilter.length === 0 ||
+          this.requestModel.filterModel.showOptionFilter[0].id === 0) &&
+        (!this.requestModel.filterModel.protocol || this.requestModel.filterModel.protocol.length === 0) &&
+        (!this.requestModel.filterModel.medium || this.requestModel.filterModel.medium.length === 0)) /*
+        !this.requestModel.filterModel.showChildInfoMBus &&
+        !this.requestModel.filterModel.showWithoutTemplate &&
+        !this.requestModel.filterModel.readyForActivation)*/
+    ) {
+      return true;
+    }
+    return false;
   }
 }
