@@ -14,23 +14,9 @@ export class DcOperationsComponent {
   @Input() requestModel: GridRequestParams;
   @Input() selectedItemsCount: number;
   @Input() allVisibleColumns: string[];
+  @Input() type = '';
 
   constructor(private dcOperationsService: DcOperationsService) {}
-
-  onSynchronizeTime() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
-    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);
-  }
-
-  onFwUpgrade() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
-    this.dcOperationsService.fwUpgrade(params, this.selectedItemsCount);
-  }
-
-  onDeviceDiscovery() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
-    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, this.selectedItemsCount);
-  }
 
   get permissionSynchronizeTime() {
     return PermissionEnumerator.Sync_Time;
@@ -42,5 +28,23 @@ export class DcOperationsComponent {
 
   get permissionDeviceDiscovery() {
     return PermissionEnumerator.Manage_Concentrators;
+  }
+
+  onSynchronizeTime() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.syncTime, params, this.selectedItemsCount);
+  }
+
+  onFwUpgrade() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    if (this.type) {
+      params.types = [this.type];
+    }
+    this.dcOperationsService.fwUpgrade(params, this.selectedItemsCount);
+  }
+
+  onDeviceDiscovery() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.deviceDiscovery, params, this.selectedItemsCount);
   }
 }

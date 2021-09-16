@@ -1,92 +1,92 @@
-<div class="mb-3" *ngIf="!edit">
-  <button class="btn btn-primary" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
+<div *ngIf="!edit" class="mb-3">
+  <button (click)="editDcu()" [permission]="permissionEdit" appHideIfPermissionUnauthorized class="btn btn-primary">
     <span>{{ 'COMMON.EDIT' | translate }}</span>
   </button>
   <button (click)="onDelete()" [permission]="permissionEdit" appHideIfPermissionUnauthorized
           class="btn btn-primary me-2">
     <span>{{ 'COMMON.DELETE' | translate }}</span>
   </button>
-  <app-dc-operations [showOperations]="true" [requestModel]="null"
-    [guid]="concentratorId" [selectedItemsCount]="1"></app-dc-operations>
+  <app-dc-operations *ngIf="data" [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
+                     [showOperations]="true" [type]="data.typeValue"></app-dc-operations>
 </div>
-<div class="mb-3" *ngIf="edit">
-    <button type="button" class="btn btn-light" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
-    <button class="btn btn-primary" (click)="saveDcu()">{{ 'BUTTON.SAVE' | translate }}</button>
-  </div>
+<div *ngIf="edit" class="mb-3">
+  <button (click)="cancel()" class="btn btn-light" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
+  <button (click)="saveDcu()" class="btn btn-primary">{{ 'BUTTON.SAVE' | translate }}</button>
+</div>
 <div *ngIf="data">
-<div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-  <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
-</div>
-<div class="mb-3" *ngIf="!edit">
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'COMMON.NAME' | translate }}</label></div>
-      <div><span>{{form.get(nameProperty).value}}</span></div>
-    </div>
+  <div *ngIf="saveError" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
   </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.SERIAL-NUMBER' | translate }}</label></div>
-      <div><span>{{form.get(serialNumberProperty).value}}</span></div>
+  <div *ngIf="!edit" class="mb-3">
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'COMMON.NAME' | translate }}</label></div>
+        <div><span>{{form.get(nameProperty).value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.EXTERNAL-ID' | translate }}</label></div>
-      <div><span>{{form.get(externalIdProperty).value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'FORM.SERIAL-NUMBER' | translate }}</label></div>
+        <div><span>{{form.get(serialNumberProperty).value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.MAC' | translate }}</label></div>
-      <div><span>{{form.get(macProperty).value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'FORM.EXTERNAL-ID' | translate }}</label></div>
+        <div><span>{{form.get(externalIdProperty).value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.STATE' | translate }}</label></div>
-      <div><span>{{form.get(statusProperty).value?.value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'FORM.MAC' | translate }}</label></div>
+        <div><span>{{form.get(macProperty).value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.TYPE' | translate }}</label></div>
-      <div><span>{{form.get(typeProperty).value?.value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'FORM.STATE' | translate }}</label></div>
+        <div><span>{{form.get(statusProperty).value?.value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.MANUFACTURER' | translate }}</label></div>
-      <div><span>{{form.get(vendorProperty).value?.value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'FORM.TYPE' | translate }}</label></div>
+        <div><span>{{form.get(typeProperty).value?.value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-3">
-      <div><label>{{ 'FORM.IP' | translate }}</label></div>
-      <div><span>{{form.get(ipProperty).value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'FORM.MANUFACTURER' | translate }}</label></div>
+        <div><span>{{form.get(vendorProperty).value?.value}}</span></div>
+      </div>
     </div>
-    <div class="col-1">
+    <div class="form-row mb-4">
+      <div class="col-3">
+        <div><label>{{ 'FORM.IP' | translate }}</label></div>
+        <div><span>{{form.get(ipProperty).value}}</span></div>
+      </div>
+      <div class="col-1">
         <div><label>{{ 'COMMON.PORT' | translate }}</label></div>
         <div><span>{{form.get(portProperty).value}}</span></div>
       </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'COMMON.ADDRESS' | translate }}</label></div>
-      <div><span>{{form.get(addressProperty).value}}</span></div>
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'COMMON.TAGS' | translate }}</label></div>
-      <div><span>{{form.get(tagsProperty).value}}</span></div>
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'COMMON.ADDRESS' | translate }}</label></div>
+        <div><span>{{form.get(addressProperty).value}}</span></div>
+      </div>
     </div>
-  </div>
-  <div class="form-row mb-4" *ngIf="credentialsVisible">
-    <div class="col-4">
+    <div class="form-row mb-4">
+      <div class="col-4">
+        <div><label>{{ 'COMMON.TAGS' | translate }}</label></div>
+        <div><span>{{form.get(tagsProperty).value}}</span></div>
+      </div>
+    </div>
+    <div *ngIf="credentialsVisible" class="form-row mb-4">
+      <div class="col-4">
         <div><label>{{ 'COMMON.USERNAME' | translate }}</label></div>
         <div><span>{{form.get(userNameProperty).value}}</span></div>
       </div>
+    </div>
   </div>
-</div>
 </div>
