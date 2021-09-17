@@ -19,6 +19,7 @@ export interface DcuForm {
   mac?: string;
   latitude?: number;
   longitude?: number;
+  plcStatus?: string;
 }
 
 export interface EditDcuForm {

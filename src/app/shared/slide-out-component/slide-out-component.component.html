@@ -1,0 +1,14 @@
+<div [ngClass]="visible ? 'show' : ''" class="slide-out-component slide-in from-right">
+  <div class="slide-in-content">
+    <div class="header">
+      <div class="small-title-bold"> {{ title | translate }}</div>
+      <div>
+        <img (click)="close()" class="p-2" src="assets/images/icons/close-icon.svg" />
+      </div>
+    </div>
+    <div class="transparent-gray-line"></div>
+    <div [ngClass]="contentClass" class="content">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,176 @@
+<!-- reference Card item component -->
+
+<div class="app-card-item">
+  <div
+    class="app-card-header">
+    <div class="tw-text-xl">
+      {{ title | translate }}
+    </div>
+    <button (click)="onButtonClicked()" *ngIf="buttonLabel"
+            class="app-card-button">
+      <img *ngIf="buttonIconName" [src]="'assets/images/icons/' + buttonIconName + '.svg'" class="tw-pr-2" />
+      <span class="tw-text-darkGray tw-font-medium">{{ buttonLabel | translate }}</span>
+    </button>
+  </div>
+  <div class="app-card-body">
+
+    <div *ngIf="loading" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-80 tw-py-10">
+      <div
+        class="loader tw-ease-linear tw-rounded-full tw-border-solid tw-border-2 tw-border-t-4 tw-border-lightGray tw-h-12 tw-w-12 tw-animate-pulse">
+      </div>
+      <div class="tw-font-bold tw-text-black tw-text-xl tw-animate-pulse tw-mt-6">
+        {{'COMMON.LOADING-DATA-PLEASE-WAIT' | translate }}
+      </div>
+      <div class="tw-text-darkGray tw-mt-4">
+        {{'COMMON.MAY-TAKE-A-MOMENT' | translate }}
+      </div>
+    </div>
+
+    <div *ngIf="loadingFailed" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-p-10">
+      <div
+        class="tw-rounded-full tw-h-52 tw-w-52 tw-bg-red tw-bg-opacity-10">
+        <div
+          class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20 tw-bg-red relative-position">
+          <img [src]="'assets/images/icons/alert-icon.svg'" />
+        </div>
+      </div>
+      <div class="tw-font-bold tw-text-black tw-text-xl tw-mt-6">
+        Unable to load the data
+      </div>
+      <div class="tw-text-darkGray tw-mt-4">
+        This can happen if the device or the underlying system is not available.
+      </div>
+    </div>
+    <!-- Place for generic content -->
+    <ng-content class="{{contentClass}}"></ng-content>
+    <!-- Place for generic content -->
+
+    <ng-container *ngIf="!loading">
+
+      <div *ngIf="form">
+        <div
+          *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
+          [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : ''"
+          class="app-card-row">
+          <div class="tw-text-darkGray">
+            {{ 'FORM.' + formData.name.toUpperCase() | translate }}
+          </div>
+          <div *ngIf="formData.control.value || formData.control.value?.value"
+               class="tw-text-black">
+            <ng-container *ngIf="formData.control.value?.id; else notObject">
+              {{ formData.control.value.value }}
+            </ng-container>
+            <ng-template #notObject>  {{ formData.control.value}} </ng-template>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="meterUnitData.length > 0">
+
+        <div class="tw-inline-flex tw-w-full">
+
+          <div class="tw-w-1/2 tw-my-6">
+            <div class="tw-flex tw-flex-col tw-items-center">
+              <div *ngFor="let data of meterUnitData"
+                   [ngClass]="'bg-' + data.name.toLowerCase() + ' opacity'" class="meter-status-item">
+                <div [ngClass]="'bg-' + data.name.toLowerCase()" class="dot"></div>
+                <div [style.color]="addBgColor(data.name)">{{ data.name }}</div>
+                <div class="tw-text-black tw-font-bold">{{ data.value }}</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tw-w-1/2 tw-flex tw-flex-col tw-items-center">
+            <div *ngIf="meterUnitTotal" class="tw-w-full tw-h-1/3 tw-pt-24 tw-text-center">
+              <div class="tw-text-black tw-text-center tw-text-3xl tw-font-medium">{{ meterUnitTotal }}</div>
+              <div class="tw-text-xs tw-text-mediumGray tw-font-medium">{{ 'COMMON.ALL-METERS' | translate }}</div>
+            </div>
+            <ngx-charts-pie-chart
+              [customColors]="meterStatusGraphColors"
+              [doughnut]="true"
+              [explodeSlices]="true"
+              [labels]="false"
+              [results]="meterUnitData"
+              [view]="[208,208]"
+              class="pie-chart"
+            >
+            </ngx-charts-pie-chart>
+          </div>
+        </div>
+
+
+      </div>
+
+      <div *ngIf="latLang.length > 0" class="app-card-body map">
+        <div class="app-card-row">
+          <div class="tw-text-darkGray">
+            {{ 'FORM.COORDINATES' | translate }}:
+          </div>
+          <div class="tw-text-black">
+            {{ latLang[0]}}° N, {{latLang[1]}}° E
+          </div>
+        </div>
+
+        <div
+          [leafletOptions]="options"
+          class="map-container"
+          leaflet>
+        </div>
+      </div>
+
+      <div *ngIf="tags.length > 0" class="tw-inline-flex tw-w-full tw-px-6 tw-py-4">
+
+        <div class="tw-text-darkGray tw-w-1/3">
+          {{ 'COMMON.APPLIED-TAGS' | translate }}:
+        </div>
+
+        <div class="tag-items tw-w-2/3">
+          <div *ngFor="let tag of tags" class="tag-item">
+            {{ tag }}
+          </div>
+        </div>
+
+      </div>
+
+    </ng-container>
+
+  </div>
+
+
+  <ng-container>
+    <ng-container *ngIf="form && showMoreButton">
+      <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SHOW-MORE' | translate }}
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div (click)="showLessItems()" *ngIf="paginationLimit >= controls.length"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SHOW-LESS' | translate }}
+        <i class="fas fa-chevron-up"></i>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="buttonLinkUrl !== '' && buttonWithLink">
+      <div [routerLink]="'/' + buttonLinkUrl"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SEE-ALL' | translate }}
+        <i class="fas fa-chevron-right"></i>
+      </div>
+    </ng-container>
+  </ng-container>
+
+
+  <div *ngIf="!showMoreButton && !buttonWithLink && latLang.length === 0" class="bottom-border"></div>
+</div>
+
+<!-- Usage example: -->
+<!--<app-card-item [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
+<!--</app-card-item>-->
+
+<!--<app-card-item [tags]="tags" [title]="'COMMON.TAGS'">-->
+<!--</app-card-item>-->
+
+<!--<app-card-item [latLang]="[46.2434, 14.4192]"-->
+<!--               [title]="'Address'">-->
+<!--</app-card-item>-->

@@ -1,20 +1,20 @@
-<div class="d-flex flex-row grid-cell-link-popup" *ngIf="!areValuesEmpty()" >
-    <ng-container *ngFor="let state of disconnectorStateEnum">
-      <div class="me-1 flex-shrink-1 text-truncate" *ngIf="getDataByType(state).length > 0">
+<div *ngIf="!areValuesEmpty()" class="d-flex flex-row grid-cell-link-popup">
+  <ng-container *ngFor="let state of disconnectorStateEnum">
+    <div *ngIf="getDataByType(state).length > 0" class="me-1 flex-shrink-1 text-truncate">
       <a
-         container="body" placement="bottom"
-         [placement]="['right-top']"
-         [ngbPopover]="contentForValue"
-         [autoClose]="'outside'"
-         popoverClass="instant-values-popover"
-         href="javascript:void(0);">
-        <span class="badge px-2" [ngClass]="getClass(state)">{{ getValuesCount(state) }}</span>
+        [autoClose]="'outside'" [ngbPopover]="contentForValue"
+        [placement]="['right-top']"
+        container="body"
+        href="javascript:void(0);"
+        placement="bottom"
+        popoverClass="instant-values-popover">
+        <span [ngClass]="getClass(state)" class="badge tw-px-2">{{ getValuesCount(state) }}</span>
       </a>
-      </div>
-      <ng-template #contentForValue id="contentForValue">
-        <app-popover-instant-values [inputInstantValues]="getDataByType(state)"></app-popover-instant-values>
-      </ng-template>
-    </ng-container>
+    </div>
+    <ng-template #contentForValue id="contentForValue">
+      <app-popover-instant-values [inputInstantValues]="getDataByType(state)"></app-popover-instant-values>
+    </ng-template>
+  </ng-container>
 </div>
 
 <span *ngIf="areValuesEmpty()" class="text-muted">{{notAvailableText}}</span>

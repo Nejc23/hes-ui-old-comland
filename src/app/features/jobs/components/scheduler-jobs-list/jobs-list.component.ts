@@ -27,10 +27,10 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-scheduler-jobs-list',
-  templateUrl: './scheduler-jobs-list.component.html'
+  selector: 'app-jobs-list',
+  templateUrl: './jobs-list.component.html'
 })
-export class SchedulerJobsListComponent implements OnInit, OnDestroy {
+export class JobsListComponent implements OnInit, OnDestroy {
   selectedId = 1;
   totalCount = 0;
   searchTextEmpty = true;
@@ -142,7 +142,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
     return [];
   }
 
-  loadData(instance: SchedulerJobsListComponent, paramsRow: any) {
+  loadData(instance: JobsListComponent, paramsRow: any) {
     const displayedColumnsNames = instance.getAllDisplayedColumnsNames();
 
     instance.schedulerJobsService
@@ -199,7 +199,7 @@ export class SchedulerJobsListComponent implements OnInit, OnDestroy {
       loadingOoo: this.translate.instant('GRID.LOADING-WITH-DOTS')
     };
 
-    this.breadcrumbService.setPageName(this.headerTitle);
+    this.breadcrumbService.setPageName('');
   }
 
   ngOnDestroy() {

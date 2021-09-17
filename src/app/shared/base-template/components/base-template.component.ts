@@ -42,6 +42,7 @@ export class BaseTemplateComponent implements OnInit {
   pageTitle = '';
 
   sidebarMenuStateCookieKey = 'sidebarMenuState';
+  detailsPage = false;
 
   constructor(
     private sidebarService: SidebarService,

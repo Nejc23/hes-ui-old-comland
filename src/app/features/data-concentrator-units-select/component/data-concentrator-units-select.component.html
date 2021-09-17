@@ -2,36 +2,36 @@
 
 <div class="d-flex justify-content-between align-items-center p-2 grid-actions">
   <div>
-    <small class="text-primary" *ngIf="selectedAtLeastOneRowOnGrid"><strong>{{getSelectedRowsCount()}}
+    <small *ngIf="selectedAtLeastOneRowOnGrid" class="text-primary"><strong>{{getSelectedRowsCount()}}
       <span>{{'COMMON.ITEMS-SELECTED' | translate }}</span></strong></small>
-    <span class="text-secondary mx-1" *ngIf="selectedAtLeastOneRowOnGrid">&middot;</span>
+    <span *ngIf="selectedAtLeastOneRowOnGrid" class="text-secondary tw-mx-1">&middot;</span>
     <small class="text-secondary">{{totalCount}} <span>{{'COMMON.ITEMS-FOUND' | translate }}</span></small>
   </div>
-  <app-input-searcher [debounceTimeOut]="300" (insertedValue)="searchChange($event)" [form]="form"
-                      [property]="searchProperty"
-                      [placeholder]="staticTextService.placeholderSearch"></app-input-searcher>
+  <app-input-searcher (insertedValue)="searchChange($event)" [debounceTimeOut]="300" [form]="form"
+                      [placeholder]="staticTextService.placeholderSearch"
+                      [property]="searchProperty"></app-input-searcher>
 </div>
 
-<ag-grid-angular class="ag-theme-epoint" style="width: 98%; height: 450px;" #agGrid
-                 [rowData]="rowData"
-                 [columnDefs]="columnDefs"
-                 [modules]="modules"
+<ag-grid-angular #agGrid (columnVisible)="onColumnVisible($event)" (firstDataRendered)="onFirstDataRendered($event)"
                  (gridReady)="onGridReady($event)"
+                 (paginationChanged)="onPaginationChange($event)"
                  (rowSelected)="onRowSelect($event)"
-                 (firstDataRendered)="onFirstDataRendered($event)"
+                 (selectionChanged)="selectionChanged()"
+                 [cacheBlockSize]="pageSize"
+                 [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
+                 [columnDefs]="columnDefs"
                  [domLayout]=agGridSettings.domLayout
                  [frameworkComponents]="frameworkComponents"
-                 suppressSizeToFit="agGridSettings.suppressSizeToFit"
-                 [pagination]=agGridSettings.pagination [paginationPageSize]="pageSize"
-                 [multiSortKey]=agGridSettings.multiSortKey [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
-                 [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-                 [cacheBlockSize]="pageSize"
-                 [maxBlocksInCache]="1" [gridOptions]="gridOptions"
-                 [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+                 [gridOptions]="gridOptions" [icons]="icons"
+                 [maxBlocksInCache]="1" [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
+                 [modules]="modules"
+                 [multiSortKey]=agGridSettings.multiSortKey
+                 [paginationPageSize]="pageSize" [pagination]=agGridSettings.pagination
+                 [rowData]="rowData"
                  [rowSelection]=agGridSettings.rowSelection
-                 (selectionChanged)="selectionChanged()"
-                 (columnVisible)="onColumnVisible($event)"
-                 (paginationChanged)="onPaginationChange($event)"
-                 [icons]="icons"
+                 [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection
+                 class="ag-theme-epoint"
+                 style="width: 98%; height: 450px;"
+                 suppressSizeToFit="agGridSettings.suppressSizeToFit"
 >
 </ag-grid-angular>

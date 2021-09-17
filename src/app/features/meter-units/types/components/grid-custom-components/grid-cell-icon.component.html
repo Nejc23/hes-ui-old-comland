@@ -1,21 +1,24 @@
 <div class="d-flex flex-row">
-  <div class="" *ngIf="params.data && params.data.isHLS">
-    <i class="fas fa-lock text-secondary px-1" container="body" placement="bottom" [ngbTooltip]="tipContentHlsEnabled"></i>
+  <div *ngIf="params.data && params.data.isHLS" class="">
+    <i [ngbTooltip]="tipContentHlsEnabled" class="fas fa-lock text-secondary tw-px-1" container="body"
+       placement="bottom"></i>
   </div>
-  <div class="" *ngIf="params.data && params.data.hasActiveJobs">
-    <i class="fas fa-clock text-secondary px-1" container="body"
-      [placement]="['right-top']"
-      [ngbPopover]="tipContentNextRead"
-      [autoClose]="'outside'"
-      popoverClass="scheduler-active-job-popover">
+  <div *ngIf="params.data && params.data.hasActiveJobs" class="">
+    <i [autoClose]="'outside'" [ngbPopover]="tipContentNextRead"
+       [placement]="['right-top']"
+       class="fas fa-clock text-secondary tw-px-1"
+       container="body"
+       popoverClass="scheduler-active-job-popover">
     </i>
   </div>
-  <div class="" *ngIf="params.data && !params.data.templateId">
-    <i class="fas fa-exclamation-triangle fa-fw text-secondary px-1" container="body" placement="bottom" [ngbTooltip]="tipContentMissingTemplate"></i>
+  <div *ngIf="params.data && !params.data.templateId" class="">
+    <i [ngbTooltip]="tipContentMissingTemplate" class="fas fa-exclamation-triangle fa-fw text-secondary tw-px-1" container="body"
+       placement="bottom"></i>
   </div>
-  <div class="" *ngIf="params.data && params.data.readyForActivation">
+  <div *ngIf="params.data && params.data.readyForActivation" class="">
     <!--<i class="fas fa-share-square text-secondary px-1" container="body" placement="bottom" [ngbTooltip]="tipContentReadyForActivation"></i>-->
-    <i class="fas fa-hourglass-end text-danger px-1" container="body" placement="bottom" [ngbTooltip]="tipContentReadyForActivation"></i>
+    <i [ngbTooltip]="tipContentReadyForActivation" class="fas fa-hourglass-end text-danger tw-px-1" container="body"
+       placement="bottom"></i>
   </div>
 </div>
 

@@ -1,27 +1,27 @@
-<div #container class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
-  <label [attr.for]="property" *ngIf="label">
+<div #container [formGroup]="form" [ngClass]="{'has-error': showErrors()}" class="mb-3">
+  <label *ngIf="label" [attr.for]="property">
     {{ 'FORM.' + label.toUpperCase()  | translate }}
     <span *ngIf="required"> *</span>
   </label>
-  <label [attr.for]="property" *ngIf="translationKey">
+  <label *ngIf="translationKey" [attr.for]="property">
     {{ translationKey.toUpperCase()  | translate }}
     <span *ngIf="required"> *</span>
   </label>
   <kendo-multiselect
-    [disabled]="disabled"
-    class="form-control"
-    [name]="property"
+    (removeTag)="removeTag($event)"
+    (valueChange)="doValueChange($event)"
     [allowCustom]="allowCustomValues"
     [data]="autocompleteItemsAsObjectsWithFake"
+    [disabled]="disabled"
     [formControlName]="property"
+    [name]="property"
     [textField]="'value'"
     [valueField]="'fakeId'"
     [valueNormalizer]="valueNormalizer"
-    (valueChange)="doValueChange($event)"
-    (removeTag)="removeTag($event)"
     [valuePrimitive]="false"
+    class="form-control p-0"
   ></kendo-multiselect>
-  <div class="help-block" *ngIf="showErrors()" class="error">
+  <div *ngIf="showErrors()" class="help-block" class="error">
     <app-form-error [error]="formControl!.errors"></app-form-error>
   </div>
 </div>

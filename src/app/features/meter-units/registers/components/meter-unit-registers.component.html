@@ -1,21 +1,25 @@
 <div class="row">
-  <div class="col-2 filter-shadow-container" *ngIf="!hideFilter" [formGroup]="form">
+  <div *ngIf="!hideFilter" [formGroup]="form" class="col-2 filter-shadow-container">
     <div class="filter-shadow">
       <div class="mb-3">
         <div class="d-flex mb-3 mt-2">
-          <h4 class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" ngbTooltip="{{ 'FORM.REGISTER' | translate }}">{{ 'FORM.REGISTER' | translate }}</h4>
-          <button type="button" class="btn-close ms-auto" (click)="clickShowHideFilter()" aria-label="Close" *ngIf="false">
+          <h4 [openDelay]="500" class="mb-0 text-truncate" container="body" ngbTooltip="{{ 'FORM.REGISTER' | translate }}"
+              placement="bottom">{{ 'FORM.REGISTER' | translate }}</h4>
+          <button (click)="clickShowHideFilter()" *ngIf="false" aria-label="Close" class="btn-close ms-auto"
+                  type="button">
           </button>
         </div>
         <div>
-          <app-input-searcher [debounceTimeOut]="700" (insertedValue)="insertedSearchValue($event)" [form]="form"
-          [property]="registerSearchProperty" placeholder="{{ 'COMMON.SEARCH' | translate }}"></app-input-searcher>
+          <app-input-searcher (insertedValue)="insertedSearchValue($event)" [debounceTimeOut]="700" [form]="form"
+                              [property]="registerSearchProperty"
+                              placeholder="{{ 'COMMON.SEARCH' | translate }}"></app-input-searcher>
         </div>
       </div>
       <div class="mb-3 filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
-          <app-input-radio [label]="g.groupName" [form]="form" [property]="registerProperty" [translate]="false"
-            [options]="g.registerOptions" style="white-space:nowrap" (selectionChanged)="changeRegisterOptionId()" [showTooltip]="true">
+          <app-input-radio (selectionChanged)="changeRegisterOptionId()" [form]="form" [label]="g.groupName" [options]="g.registerOptions"
+                           [property]="registerProperty" [showTooltip]="true"
+                           [translate]="false" style="white-space:nowrap">
           </app-input-radio>
         </div>
       </div>
@@ -27,27 +31,28 @@
     <div class="me-3">
       <div class="d-flex">
         <button
-          type="button"
-          class="btn btn-light pl-3 pe-3 position-relative me-3"
-          [ngClass]="{ active: !hideFilter }"
           (click)="clickShowHideFilter()"
-          [ngbTooltip]="hideShowFilters"
           *ngIf="false"
+          [ngClass]="{ active: !hideFilter }"
+          [ngbTooltip]="hideShowFilters"
+          class="btn btn-light tw-pl-3 pe-3 position-relative me-3"
+          type="button"
         >
           <i class="far fa-ellipsis-v"></i>
         </button>
 
         <div class="mt-2">
-          <h3 class="mb-0">{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
+          <h3
+            class="mb-0">{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
         </div>
         <div class="ms-auto">
           <button
-            type="button"
-            class="btn btn-light ps-2 pe-2 me-0"
             (click)="onRefresh()"
-            placement="left"
-            [openDelay]="500"
             [ngbTooltip]="tipContentRefresh"
+            [openDelay]="500"
+            class="btn btn-light ps-2 pe-2 me-0"
+            placement="left"
+            type="button"
           >
             <i class="far fa-redo"></i>
           </button>
@@ -55,42 +60,43 @@
       </div>
       <div class="d-flex date-time-picker-meter-units mt-2">
         <app-input-text
-          container="body"
-          placement="bottom"
-          class="w-100"
-          [ngbPopover]="popDateTimePicker"
-          [autoClose]="'outside'"
           #popover="ngbPopover"
-          popoverClass="date-range-picker-popover"
+          [autoClose]="'outside'"
+          [form]="form"
           [iconName]="'fa-calendar'"
           [isReadOnly]="true"
-          [form]="form"
+          [ngbPopover]="popDateTimePicker"
           [property]="'labelText'"
+          class="w-100"
+          container="body"
           label="Select-date"
+          placement="bottom"
+          popoverClass="date-range-picker-popover"
         >
         </app-input-text>
       </div>
       <div class="btn-group">
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(1)">{{ 'DAY.TODAY' | translate }}</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(2)">{{ 'DAY.YESTERDAY' | translate }}</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(3)">{{ 'DAY.LAST-7-DAYS' | translate }}</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(4)">{{ 'DAY.LAST-30-DAYS' | translate }}</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(5)">{{ 'DAY.CURRENT-MONTH' | translate }}</button>
-        <button class="btn btn-link btn-sm p-2" (click)="setRange(6)">{{ 'DAY.LAST-MONTH' | translate }}</button>
+        <button (click)="setRange(1)" class="btn btn-link btn-sm p-2">{{ 'DAY.TODAY' | translate }}</button>
+        <button (click)="setRange(2)" class="btn btn-link btn-sm p-2">{{ 'DAY.YESTERDAY' | translate }}</button>
+        <button (click)="setRange(3)" class="btn btn-link btn-sm p-2">{{ 'DAY.LAST-7-DAYS' | translate }}</button>
+        <button (click)="setRange(4)" class="btn btn-link btn-sm p-2">{{ 'DAY.LAST-30-DAYS' | translate }}</button>
+        <button (click)="setRange(5)" class="btn btn-link btn-sm p-2">{{ 'DAY.CURRENT-MONTH' | translate }}</button>
+        <button (click)="setRange(6)" class="btn btn-link btn-sm p-2">{{ 'DAY.LAST-MONTH' | translate }}</button>
       </div>
     </div>
 
     <div class="mu-registers-body-scroll">
-      <div class="card text-center border-0 mt-5" *ngIf="!isRegisterSelected">
+      <div *ngIf="!isRegisterSelected" class="card text-center border-0 mt-5">
         <div class="card-header border-0 bg-transparent">
           <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
         </div>
         <div class="card-body">
-          <div class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
+          <div
+            class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
           <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
         </div>
       </div>
-      <div class="card text-center border-0 mt-5" *ngIf="isRegisterSelected && !isDataFound">
+      <div *ngIf="isRegisterSelected && !isDataFound" class="card text-center border-0 mt-5">
         <div class="card-header border-0 bg-transparent">
           <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
         </div>
@@ -103,10 +109,11 @@
 
       <div *ngIf="isDataFound">
         <div class="row mt-4">
-          <div class="col-12" *ngIf="!isEvent">
-            <app-registers-chart [categories]="chartCategories" [chartData]="chartData" [unit]="unit"> </app-registers-chart>
+          <div *ngIf="!isEvent" class="col-12">
+            <app-registers-chart [categories]="chartCategories" [chartData]="chartData"
+                                 [unit]="unit"></app-registers-chart>
           </div>
-          <div class="col-12" *ngIf="isEvent">
+          <div *ngIf="isEvent" class="col-12">
             <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
             <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
           </div>
@@ -119,12 +126,12 @@
               'col-6': isEvent
             }"
           >
-            <app-registers-grid [rowData]="rowData" [categorization]="categorization"></app-registers-grid>
+            <app-registers-grid [categorization]="categorization" [rowData]="rowData"></app-registers-grid>
           </div>
-          <div class="col-4" *ngIf="showStatistics && !isEvent && registerStatisticsData">
+          <div *ngIf="showStatistics && !isEvent && registerStatisticsData" class="col-4">
             <app-registers-statistics [data]="registerStatisticsData"></app-registers-statistics>
           </div>
-          <div class="col-6" *ngIf="isEvent">
+          <div *ngIf="isEvent" class="col-6">
             <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
             <app-registers-pie-chart [eventsById]="eventsById"></app-registers-pie-chart>
           </div>
@@ -137,5 +144,6 @@
 <ng-template #tipContentRefresh><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template>
 
 <ng-template #popDateTimePicker>
-  <app-datetime-range-picker [form]="form" [initValues]="true" (formClosed)="closePopover()"></app-datetime-range-picker>
+  <app-datetime-range-picker (formClosed)="closePopover()" [form]="form"
+                             [initValues]="true"></app-datetime-range-picker>
 </ng-template>

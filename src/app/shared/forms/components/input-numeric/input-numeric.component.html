@@ -1,6 +1,6 @@
-<div class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
+<div [formGroup]="form" [ngClass]="{'has-error': showErrors()}" class="mb-3">
 
-  <label [attr.for]="property" *ngIf="label">
+  <label *ngIf="label" [attr.for]="property">
     <ng-container *ngIf="label !== ' '; else blank">
       {{ 'FORM.' + label.toUpperCase() | translate }}
     </ng-container>
@@ -13,23 +13,23 @@
 
   <div [ngClass]="{'d-flex': !noFlex}">
     <kendo-numerictextbox
-      [name]="property"
-      class="form-control"
-      [formControlName]="property"
+      (valueChange)="onChange($event)"
       [decimals]="decimals"
+      [formControlName]="property"
       [format]="format"
-      [min]="min"
       [max]="max"
-      [step]="step"
+      [min]="min"
+      [name]="property"
       [readonly]="isReadOnly"
       [spinners]="showSpinners"
-      (valueChange)="onChange($event)"
+      [step]="step"
+      class="form-control p-0"
     ></kendo-numerictextbox>
-    <span *ngIf="labelRight" class="align-self-end ms-3 mb-2">{{ labelRight | translate }}</span>
+    <span *ngIf="labelRight" class="align-self-end ms-3 tw-mb-2">{{ labelRight | translate }}</span>
   </div>
 
   <!--Loop through errors-->
-  <div class="help-block" *ngIf="showErrors() && allowShowError" class="error">
+  <div *ngIf="showErrors() && allowShowError" class="help-block" class="error">
     <app-form-error [error]="formControl!.errors"></app-form-error>
   </div>
 

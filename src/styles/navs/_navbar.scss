@@ -1,9 +1,14 @@
 .navbar {
   height: $topbar-base-height;
-
+  background-color: $white;
   margin-left: $sidebar-base-width;
   transition: margin-left .3s;
   width: auto;
+
+  .breadcrumb-item {
+    width: auto;
+    display: flex;
+  }
 
   &.menu-collapsed {
     margin-left: $sidebar-collapsed-width !important;
@@ -23,68 +28,33 @@
         }
 
         &.user {
-          background-color: $navbar-dark-color;
+          background-color: rgba($primary, .15);
           width: calc((#{$nav-link-padding-y} * 2) + (#{$font-size-base} * 1.5));
-          color: rgba($body-color, .7);
-
-          &:hover {
-            background-color: $navbar-dark-hover-color;
-            color: $body-color;
-          }
+          color: $primary;
         }
       }
     }
   }
 
   .profile-dialog {
-    min-width:320px;
+    min-width: 320px;
 
     .row {
-      margin:0;
+      margin: 0;
     }
 
     .rounded-circle {
       background-color: $primary;
       width: calc((13px * 2) + (26px * 1.5));
       color: white;
-      font-size:26px;
-      padding-top:13px;
-      padding-bottom:13px;
-      margin:0;
+      font-size: 26px;
+      padding-top: 13px;
+      padding-bottom: 13px;
+      margin: 0;
     }
 
     .logout a span {
       color: $info;
-    }
-  }
-}
-
-.navbar.navbar-dark {
-  background: $navbar-dark-bg;
-
-  .page-name {
-    color: $navbar-dark-brand-color;
-  }
-
-  .breadcrumb {
-    .breadcrumb-item {
-      color: $navbar-dark-color;
-
-      &.active {
-        color: $navbar-dark-color;
-      }
-
-      a {
-        color: $navbar-dark-color;
-
-        //@include hover-focus {
-        //  color: $navbar-dark-hover-color;
-        //}
-
-        &.disabled {
-          color: $navbar-dark-disabled-color;
-        }
-      }
     }
   }
 }

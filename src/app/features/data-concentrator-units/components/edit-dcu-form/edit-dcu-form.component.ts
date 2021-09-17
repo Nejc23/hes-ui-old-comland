@@ -1,17 +1,14 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { TabStripComponent } from '@progress/kendo-angular-layout';
-import { Observable } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
-import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
-import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
+import { Observable } from 'rxjs';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
+import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-dcu-form',
@@ -20,6 +17,7 @@ import { DataConcentratorUnitsGridEventEmitterService } from '../../services/dat
 export class EditDcuFormComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() concentratorId = '';
+  @Output() savedDataEvent = new EventEmitter<boolean>();
 
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
@@ -28,74 +26,15 @@ export class EditDcuFormComponent implements OnInit {
   saveError: string;
 
   @Input() credentialsVisible = false;
-
-  @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
-  @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
-
   opened = false;
 
   constructor(
     private codelistService: CodelistRepositoryService,
     private dcuService: DataConcentratorUnitsService,
     private formUtils: FormsUtilsService,
-    private modal: NgbActiveModal,
     private eventService: DataConcentratorUnitsGridEventEmitterService,
     private translate: TranslateService
   ) {}
-
-  ngOnInit() {
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
-
-    this.dcuVendors$.subscribe((values) => {
-      this.dcuVendors = values;
-    });
-
-    this.dcuTags$ = this.codelistService.dcuTagCodelist();
-  }
-
-  fillData(): EditDcuForm {
-    const formData: EditDcuForm = {
-      id: this.concentratorId,
-      externalId: this.form.get(this.externalIdProperty).value,
-      name: this.form.get(this.nameProperty).value,
-      serialNumber: this.form.get(this.idNumberProperty).value,
-      ip: this.form.get(this.ipProperty).value,
-      port: this.form.get(this.portProperty).value,
-      manufacturer: this.form.get(this.vendorProperty).value
-    };
-    if (this.credentialsVisible) {
-      formData.userName = this.form.get(this.userNameProperty).value;
-    }
-    return formData;
-  }
-
-  saveDcu() {
-    const dcuFormData = this.fillData();
-    const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
-    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
-
-    try {
-      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
-        (result) => {
-          if (result) {
-            this.modal.close(result[0]);
-          }
-        },
-        (errResult) => {
-          console.log('Error saving form: ', errResult);
-          this.saveError = errResult && errResult.error ? errResult.error[0] : null;
-        }
-      );
-    } catch (error) {
-      console.log('Edit-DCU Form Error:', error);
-    }
-  }
-
-  cancel() {
-    this.eventService.layoutChange(null);
-    this.modal.close();
-  }
 
   get nameProperty() {
     return nameOf<DcuForm>((o) => o.name);
@@ -145,8 +84,53 @@ export class EditDcuFormComponent implements OnInit {
     return nameOf<DcuForm>((o) => o.port);
   }
 
-  onDismiss() {
-    this.modal.dismiss();
+  ngOnInit() {
+    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
+    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
+
+    this.dcuVendors$.subscribe((values) => {
+      this.dcuVendors = values;
+    });
+
+    this.dcuTags$ = this.codelistService.dcuTagCodelist();
+  }
+
+  fillData(): EditDcuForm {
+    const formData: EditDcuForm = {
+      id: this.concentratorId,
+      externalId: this.form.get(this.externalIdProperty).value,
+      name: this.form.get(this.nameProperty).value,
+      serialNumber: this.form.get(this.idNumberProperty).value,
+      ip: this.form.get(this.ipProperty).value,
+      port: this.form.get(this.portProperty).value,
+      manufacturer: this.form.get(this.vendorProperty).value
+    };
+    if (this.credentialsVisible) {
+      formData.userName = this.form.get(this.userNameProperty).value;
+    }
+    return formData;
+  }
+
+  saveDcu() {
+    const dcuFormData = this.fillData();
+    const request = this.dcuService.updateDcu(this.concentratorId, dcuFormData);
+    const successMessage = this.translate.instant('DCU.DCU-UPDATED-SUCCESSFULLY');
+
+    try {
+      this.formUtils.saveForm(this.form, request, successMessage).subscribe(
+        (result) => {
+          if (result) {
+            this.savedDataEvent.emit(true);
+          }
+        },
+        (errResult) => {
+          console.log('Error saving form: ', errResult);
+          this.saveError = errResult && errResult.error ? errResult.error[0] : null;
+        }
+      );
+    } catch (error) {
+      console.log('Edit-DCU Form Error:', error);
+    }
   }
 
   toggle() {

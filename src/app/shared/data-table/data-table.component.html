@@ -1,0 +1,103 @@
+<!-- reference GRID component -->
+<kendo-grid
+  (pageChange)="pageChange($event)"
+  [data]="gridView"
+  [loading]="loading"
+  [ngClass]="tableClass ? tableClass : ''"
+  [pageSize]="pageSize"
+  [pageable]="pageable"
+  [rowClass]="rowClass"
+  [scrollable]="scrollable"
+  [skip]="skip"
+  class="kendo-grid">
+
+  <ng-template *ngIf="withSearch || excelExport" kendoGridToolbarTemplate>
+
+    <input (input)="onFilter($event.target.value)"
+           *ngIf="withSearch"
+           kendoTextBox
+           placeholder="Search in all columns..."
+    />
+
+
+    <div *ngIf="filters.length > 0">
+      <ng-container *ngFor="let filter of filters">
+        <div> {{ filter.label | translate }}</div>
+        <kendo-dropdownlist (selectionChange)="dropdownValueChanged($event, filter.field)"
+                            [data]="filter.values"
+                            [defaultItem]="'All'"
+        >
+        </kendo-dropdownlist>
+      </ng-container>
+    </div>
+
+    <button *ngIf="excelExport" icon="fa fa-file-export" kendoGridExcelCommand type="button">
+      {{ 'GRID.EXCEL-EXPORT' | translate }}
+    </button>
+
+    <div>
+      <img [src]="'assets/images/icons/refresh-icon.svg'" class="tw-h-4 tw-w-4 tw-p-2" />
+    </div>
+
+  </ng-template>
+
+  <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
+                     [class]="column.class"
+                     [field]="column.field"
+                     [title]="column.translationKey | translate"
+                     [width]="column.width ? column.width : null">
+
+    <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
+
+      <!--- no data -->
+      <ng-container
+        *ngIf="!dataItem[column.field] && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
+        {{ 'COMMON.NOT-DEFINED' | translate }}
+      </ng-container>
+
+      <!--- no type defined is string -->
+      <ng-container *ngIf="!column.type">
+        {{ dataItem[column.field] }}
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.SWITCH">
+        <kendo-switch (valueChange)="switchValueChanged(dataItem.id, $event)"
+                      [checked]="dataItem[column.field]"></kendo-switch>
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.DATE">
+        <div>
+          {{ dataItem[column.field] | date }}
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.DATE_TIME">
+        <div>
+          {{ dataItem[column.field] | formatDateTime }}
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="column.type === columnType.COLORED_ENUM">
+        <label [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
+          {{ dataItem[column.field] }}
+        </label>
+      </ng-container>
+
+      <ng-container *ngIf="rowActions.length > 0 && i +1   === gridColumns.length" class="no-padding">
+        <div class="grid-row-button">
+          <img (click)="onRowActionClick(action.actionName, dataItem.id)"
+               *ngFor="let action of rowActions"
+               [src]="'assets/images/icons/' + action.iconName + '.svg'" class="tw-h-4 tw-px-2" />
+        </div>
+      </ng-container>
+    </ng-template>
+
+  </kendo-grid-column>
+
+  <kendo-grid-excel
+    [fetchData]="allData"
+    fileName="Exported-data.xlsx"
+  ></kendo-grid-excel>
+</kendo-grid>
+
+

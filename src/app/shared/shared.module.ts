@@ -64,7 +64,6 @@ import { SidebarComponent } from './base-template/components/sidebar.component';
 import { TopFixedNavComponent } from './base-template/components/top-fixed-nav.component';
 import { SidebarDropdownDirective } from './base-template/directives/sidebar-dropdown.directive';
 import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
-import { CardComponent } from './card/components/card.component';
 import { NumberOnlyDirective } from './directives/number-only.directive';
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
 import { DisableIfAuthorizedReadonlyDirective } from './directives/permissions/disable-if-authorized-readonly.directive';
@@ -89,6 +88,17 @@ import { GridCellLinkComponent } from './popover/components/grid-custom-componen
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
 import { ToastComponent } from './toast-notification/components/toast.component';
 import { LocaleDatePipe } from './utils/pipes/locale-date.pipe';
+import { CardItemComponent } from './card-item/card-item.component';
+import { PageTitleComponent } from './page-title/page-title.component';
+import { PageLayoutComponent } from './page-layout/page-layout.component';
+import { TagElementComponent } from './tag-element/tag-element.component';
+import { CircularGaugeModule } from '@progress/kendo-angular-gauges';
+import { MiniCardItemComponent } from './mini-card-item/mini-card-item.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
+import { DataTableComponent } from './data-table/data-table.component';
+import { SlideOutComponentComponent } from './slide-out-component/slide-out-component.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -109,7 +119,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomFormsModule,
     HeaderTitleComponent,
     ToastComponent,
-    CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
     NgbModule,
@@ -162,7 +171,15 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlarmNotificationRulesComponent,
     PlcReadRegistersComponent,
     StatusJobComponent,
-    ActiveJobsListComponent
+    ActiveJobsListComponent,
+    PageTitleComponent,
+    CardItemComponent,
+    MiniCardItemComponent,
+    NgxChartsModule,
+    LeafletModule,
+    GridModule,
+    DataTableComponent,
+    SlideOutComponentComponent
   ],
   imports: [
     CommonModule,
@@ -175,6 +192,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule,
     CustomFormsModule,
     BreadcrumbsModule,
+    PipesModule,
     AgGridModule.withComponents([
       GridCellActiveJobStatusComponent,
       GridCellLinkComponent,
@@ -197,7 +215,12 @@ export function HttpLoaderFactory(http: HttpClient) {
       },
       extend: true,
       defaultLanguage: 'en'
-    })
+    }),
+    CircularGaugeModule,
+    NgxChartsModule,
+    LeafletModule,
+    GridModule,
+    ExcelModule
   ],
   declarations: [
     BaseTemplateComponent,
@@ -220,7 +243,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     ToastComponent,
-    CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
     WidgetSettingsFormDirective,
@@ -271,7 +293,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
-    AddJobComponent
+    AddJobComponent,
+    CardItemComponent,
+    PageTitleComponent,
+    PageLayoutComponent,
+    TagElementComponent,
+    MiniCardItemComponent,
+    DataTableComponent,
+    SlideOutComponentComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
