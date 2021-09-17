@@ -14,6 +14,7 @@ import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-t
 })
 export class SecurityActivateHlsComponent {
   public selectedRowsCount: number;
+  disabled = false;
 
   actionRequest: IActionRequestParams;
 
@@ -27,14 +28,14 @@ export class SecurityActivateHlsComponent {
     private translate: TranslateService
   ) {}
 
+  get securityClientProperty() {
+    return 'securityClient';
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.securityClientProperty]: [null, [Validators.required]]
     });
-  }
-
-  get securityClientProperty() {
-    return 'securityClient';
   }
 
   onDismiss() {
@@ -56,6 +57,7 @@ export class SecurityActivateHlsComponent {
   }
 
   onConfirm() {
+    this.disabled = true;
     const values = this.fillData();
     this.gridLinkService.postSecurityEnableHls(values);
     const successMessage = this.translate.instant('PLC-METER.METER-UNITS-ACTIVATE-HLS');
@@ -63,6 +65,8 @@ export class SecurityActivateHlsComponent {
     this.gridLinkService.postSecurityEnableHls(values).subscribe(
       (sucess) => {
         this.toast.successToast(successMessage);
+        this.onDismiss();
+        this.disabled = false;
       },
       (error) => {
         console.log(`Error on postSecurityEnableHls`, error);

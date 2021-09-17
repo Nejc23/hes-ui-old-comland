@@ -1,6 +1,7 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.SECURITY.ACTIVATE-HLS' | translate:{selectedRowsCount: selectedRowsCount}"></div>
+  <div [innerHTML]="'PLC-METER.SECURITY.ACTIVATE-HLS' | translate:{selectedRowsCount: selectedRowsCount}"
+       modal-header></div>
 
   <div modal-body>
     <ng-container>
@@ -16,11 +17,11 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onConfirm()">
+        <button (click)="onConfirm()" [disabled]="disabled" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
