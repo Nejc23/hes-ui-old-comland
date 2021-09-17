@@ -334,14 +334,8 @@ export class SchedulerJobComponent {
       readingProperties: {
         usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
         iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
-        intervalRange:
-          this.showForLast() && this.form.get(this.intervalRangeProperty).value
-            ? parseInt(this.form.get(this.intervalRangeProperty).value, 10)
-            : 0,
-        timeUnit:
-          this.showForLast() && this.form.get(this.timeUnitProperty).value
-            ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id
-            : 0
+        intervalRange: this.form.get(this.intervalRangeProperty).value ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
+        timeUnit: this.form.get(this.timeUnitProperty).value ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
       }
     };
     return formData;
