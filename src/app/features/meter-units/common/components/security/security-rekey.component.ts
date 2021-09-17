@@ -11,6 +11,8 @@ import {
 import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 import { Codelist } from '../../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
 
 @Component({
   templateUrl: './security-rekey.component.html'
@@ -33,7 +35,8 @@ export class SecurityRekeyComponent {
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
     private formUtils: FormsUtilsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modalService: ModalService
   ) {
     this.keyTypes = [
       { id: 'PSK', value: this.translate.instant('PLC-METER.SECURITY.PSK') },
@@ -51,14 +54,14 @@ export class SecurityRekeyComponent {
     this.form = this.createForm();
   }
 
+  get keyTypeProperty() {
+    return 'keyType';
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.keyTypeProperty]: [this.selectedKeyType, [Validators.required]]
     });
-  }
-
-  get keyTypeProperty() {
-    return 'keyType';
   }
 
   onDismiss() {
@@ -97,6 +100,12 @@ export class SecurityRekeyComponent {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         (result) => {
           this.modal.close();
+
+          const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
+          modalRef.componentInstance.requestId = result.requestId;
+          modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SECURITY.RE-KEY-METER', {
+            selectedRowsCount: this.selectedRowsCount
+          });
         },
         () => {} // error
       );
