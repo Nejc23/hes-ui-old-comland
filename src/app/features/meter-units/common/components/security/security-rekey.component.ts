@@ -40,9 +40,7 @@ export class SecurityRekeyComponent {
   ) {
     this.keyTypes = [
       { id: 'PSK', value: this.translate.instant('PLC-METER.SECURITY.PSK') },
-      { id: 'GAK', value: this.translate.instant('PLC-METER.SECURITY.GAK') },
       { id: 'GUEK', value: this.translate.instant('PLC-METER.SECURITY.GUEK') },
-      { id: 'GBEK', value: this.translate.instant('PLC-METER.SECURITY.GBEK') },
       { id: 'GAK_M2', value: this.translate.instant('PLC-METER.SECURITY.GAK-M2') },
       { id: 'GUEK_M2', value: this.translate.instant('PLC-METER.SECURITY.GUEK-M2') },
       { id: 'AK_DATA_COLLECTOR', value: this.translate.instant('PLC-METER.SECURITY.AK-DATA-COLLECTOR') },
