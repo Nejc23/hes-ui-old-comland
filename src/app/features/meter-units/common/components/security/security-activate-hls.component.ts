@@ -72,6 +72,7 @@ export class SecurityActivateHlsComponent {
         this.disabled = false;
         const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
         modalRef.componentInstance.requestId = success.requestId;
+        modalRef.componentInstance.deviceCount = this.selectedRowsCount;
         modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SECURITY.ACTIVATE-HLS', {
           selectedRowsCount: this.selectedRowsCount
         });

@@ -103,6 +103,7 @@ export class SecurityRekeyComponent {
 
           const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
           modalRef.componentInstance.requestId = result.requestId;
+          modalRef.componentInstance.deviceCount = this.selectedRowsCount;
           modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SECURITY.RE-KEY-METER', {
             selectedRowsCount: this.selectedRowsCount
           });
