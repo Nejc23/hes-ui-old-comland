@@ -1,3 +1,5 @@
+import { enumMyGridLink } from './my-grid-link.const';
+
 export const basePathConcentratorInventory = '/api/concentrator-inventory';
 export const basePath = '/api/concentrator-inventory-ui';
 export const dataConcentratorUnits = `${basePath}/concentrators`;
@@ -38,3 +40,6 @@ export const dcLastStatus = '/last-status';
 export const getActiveJobs = `${basePathDcOperations}/device-jobs`;
 // Job summary
 export const jobStateSummary = `${basePathDcOperations}/job-state/summary`;
+
+// Rekey HMAC
+export const dcRekeyHmac = `${enumMyGridLink.managment}/security/concentrator/change-hmac`;

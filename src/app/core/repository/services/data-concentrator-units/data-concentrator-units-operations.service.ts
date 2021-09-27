@@ -1,4 +1,4 @@
-import { basePathDcOperations, dcLastStatus, dcOperationDeviceDiscovery } from './../../consts/data-concentrator-units.const';
+import { basePathDcOperations, dcLastStatus, dcOperationDeviceDiscovery, dcRekeyHmac } from './../../consts/data-concentrator-units.const';
 import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -45,5 +45,13 @@ export class DataConcentratorUnitsOperationsService {
 
   postDcDeviceDiscoveryRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${dcOperationDeviceDiscovery}`, params);
+  }
+
+  postRekeyHmac(params: IActionRequestParams): Observable<ResponseData> {
+    return this.repository.makeRequest(this.postRekeyHmacRequest(params));
+  }
+
+  postRekeyHmacRequest(params: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${dcRekeyHmac}`, params);
   }
 }

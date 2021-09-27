@@ -1,7 +1,9 @@
 <!-- reference Details page component -->
 <!-- tw--m-5 -> negative margin align hack -->
 <div *ngIf="data" [style.width.px]="addWidth()" class="sticky">
+
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+
     <app-page-title
       [status]="data.statusValue"
       [subtitle]="data.typeValue"
@@ -10,9 +12,21 @@
     >
     </app-page-title>
 
-    <app-dc-operations *ngIf="data" [guid]="concentratorId" [requestModel]="null" [selectedItemsCount]="1"
-                       [showOperations]="true"
-                       [type]="data.typeValue" class="tw-mt-10 tw-pr-5"></app-dc-operations>
+    <div class="tw-mt-10 tw-pr-5">
+      <app-dc-operations *ngIf="data" [guid]="concentratorId"
+                         [operationType]="componentType.OPERATION"
+                         [requestModel]="null"
+                         [selectedItemsCount]="1"
+                         [showOperations]="true"
+                         [type]="data.typeValue" class="tw-mr-2"></app-dc-operations>
+
+      <app-dc-operations *ngIf="data" [guid]="concentratorId"
+                         [operationType]="componentType.SECURITY"
+                         [requestModel]="null"
+                         [selectedItemsCount]="1"
+                         [showSecurities]="data.typeValue !== 'AC750'"
+                         [type]="data.typeValue"></app-dc-operations>
+    </div>
 
   </div>
 </div>

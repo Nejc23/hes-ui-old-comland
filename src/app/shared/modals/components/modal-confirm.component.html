@@ -20,7 +20,12 @@
   </div>
 
   <ng-container *ngIf="!showSecondConfirm">
+
     {{ modalBody | translate }}
+
+    <div *ngIf="alertText" class="alert alert-danger mt-3" role="alert">
+      <span class="text-danger">{{ alertText | translate }}</span>
+    </div>
 
     <div *ngIf="checkboxLabel" class="d-flex justify-content-between gray-line gray-line-top tw-py-3 mt-4">
       <div class="modal-checkbox-label text-normal">
@@ -35,6 +40,7 @@
 </div>
 
 <div class="modal-footer">
-  <button (click)="dismiss()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
+  <button (click)="dismiss()" *ngIf="!withoutCancelButton" class="btn text-secondary"
+          type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
   <button (click)="confirm()" class="btn btn-primary" type="button">{{ btnConfirmText | translate }}</button>
 </div>

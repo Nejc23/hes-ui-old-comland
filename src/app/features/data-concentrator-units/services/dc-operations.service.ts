@@ -204,7 +204,7 @@ export class DcOperationsService {
   }
 
   // actions without popup
-  bulkOperation(operation: DcOperationTypeEnum, params: any, selectedCount: number) {
+  bulkOperation(operation: DcOperationTypeEnum, params: any, selectedCount: number, alertText?: string) {
     // let selectedText = ''; // `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
@@ -223,9 +223,15 @@ export class DcOperationsService {
         operationName = this.translate.instant('OPERATION.DEVICE-DISCOVERY');
         // selectedText = `${`for`} ${selectedText}`;
         break;
+      case DcOperationTypeEnum.reKeyHmac:
+        response = this.service.postRekeyHmac(params);
+        operationName = this.translate.instant('OPERATION.RE-KEY-HMAC');
+        // selectedText = `${`for`} ${selectedText}`;
+        break;
     }
     component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
     component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
+    component.alertText = alertText;
 
     modalRef.result.then(
       (data) => {
