@@ -5,6 +5,13 @@ import { DcOperationTypeEnum } from '../../enums/operation-type.enum';
 import { DcOperationsService } from '../../services/dc-operations.service';
 import { DeleteDcuFormComponent } from '../delete-dcu-form/delete-dcu-form.component';
 import { ModalService } from '../../../../core/modals/services/modal.service';
+import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
+import { TranslateService } from '@ngx-translate/core';
+
+export enum OperationType {
+  OPERATION = 'OPERATION',
+  SECURITY = 'SECURITY'
+}
 
 @Component({
   selector: 'app-dc-operations',
@@ -12,13 +19,16 @@ import { ModalService } from '../../../../core/modals/services/modal.service';
 })
 export class DcOperationsComponent {
   @Input() showOperations = false;
+  @Input() showSecurities = false;
   @Input() guid: string;
   @Input() requestModel: GridRequestParams;
   @Input() selectedItemsCount: number;
   @Input() allVisibleColumns: string[];
   @Input() type = '';
+  @Input() operationType: OperationType;
+  componentType = OperationType;
 
-  constructor(private dcOperationsService: DcOperationsService, private modalService: ModalService) {}
+  constructor(private dcOperationsService: DcOperationsService, private modalService: ModalService, private translate: TranslateService) {}
 
   get permissionSynchronizeTime() {
     return PermissionEnumerator.Sync_Time;
@@ -29,6 +39,10 @@ export class DcOperationsComponent {
   }
 
   get permissionDeviceDiscovery() {
+    return PermissionEnumerator.Manage_Concentrators;
+  }
+
+  get permissionReKeyHmac() {
     return PermissionEnumerator.Manage_Concentrators;
   }
 
@@ -56,5 +70,27 @@ export class DcOperationsComponent {
     const modalRef = this.modalService.open(DeleteDcuFormComponent);
     const component: DeleteDcuFormComponent = modalRef.componentInstance;
     component.applyRequestParams(params, 1);
+  }
+
+  onReKeyHmac() {
+    const reKeyNotSupportedText = 'DCU.RE-KEY-NOT-SUPPORTED';
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    if (this.type) {
+      params.types = [this.type];
+    }
+    if (params.types.length === 1 && params.types[0].toUpperCase() === 'AC750') {
+      const modalRef = this.modalService.open(ModalConfirmComponent);
+      const component: ModalConfirmComponent = modalRef.componentInstance;
+      component.withoutCancelButton = true;
+      component.modalTitle = 'OPERATION.RE-KEY-HMAC';
+      component.modalBody = reKeyNotSupportedText;
+      component.btnConfirmText = this.translate.instant('BUTTON.CLOSE');
+    } else {
+      let alertText = '';
+      if (params.types.find((type) => type === 'AC750')) {
+        alertText = reKeyNotSupportedText;
+      }
+      this.dcOperationsService.bulkOperation(DcOperationTypeEnum.reKeyHmac, params, this.selectedItemsCount, alertText);
+    }
   }
 }

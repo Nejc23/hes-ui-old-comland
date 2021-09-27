@@ -32,6 +32,8 @@ export class ModalConfirmComponent {
 
   @Input() secondConfirmEnabled = false;
   @Input() confirmMessage = '';
+  @Input() withoutCancelButton = false;
+  @Input() alertText = '';
 
   showSecondConfirm = false;
 

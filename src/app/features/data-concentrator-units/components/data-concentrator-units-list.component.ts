@@ -37,6 +37,7 @@ import { DataConcentratorUnitsStaticTextService } from '../services/data-concent
 import { DcOperationsService } from '../services/dc-operations.service';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from './delete-dcu-form/delete-dcu-form.component';
+import { OperationType } from './operations/dc-operations.component';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -103,6 +104,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   taskStatusOK = 'TASK_SUCCESS';
   taskStatusFailure = 'TASK_FAILURE';
   refreshInterval = gridRefreshInterval;
+  componentType = OperationType;
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
   private dcuConcentratorDeleted: Subscription;

@@ -44,9 +44,21 @@
             <div class="pe-3">
               <app-dc-operations
                 [allVisibleColumns]="getAllDisplayedColumnsNames()"
-                [guid]="null" [requestModel]="requestModel"
+                [guid]="null"
+                [operationType]="componentType.OPERATION"
+                [requestModel]="requestModel"
                 [selectedItemsCount]="getSelectedCount()"
-                [showOperations]="getSelectedCount() === 0 ? false : true"
+                [showOperations]="getSelectedCount()!==0"
+                class="tw-mr-2"
+              ></app-dc-operations>
+
+              <app-dc-operations
+                [allVisibleColumns]="getAllDisplayedColumnsNames()"
+                [guid]="null"
+                [operationType]="componentType.SECURITY"
+                [requestModel]="requestModel"
+                [selectedItemsCount]="getSelectedCount()"
+                [showSecurities]="getSelectedCount()!==0"
               ></app-dc-operations>
               <!-- other buttons as Tags,...etc -->
             </div>

@@ -31,6 +31,7 @@ import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 import { RegistersFilter } from '../../../meter-units/registers/interfaces/data-processing-request.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
+import { OperationType } from '../../components/operations/dc-operations.component';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -167,6 +168,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       type: GridColumnType.DATE_TIME
     }
   ];
+
+  componentType = OperationType;
 
   eventsFiltersConfiguration: Array<GridFilter> = [];
   private dcuConcentratorDeleted: Subscription;
@@ -709,7 +712,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   createEventsForm(): FormGroup {
     return this.formBuilder.group({
       [this.registerProperty]: [null],
-
       [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
       [this.endDateProperty]: [moment(), Validators.required],
       [this.startTimeProperty]: ['00:00'],

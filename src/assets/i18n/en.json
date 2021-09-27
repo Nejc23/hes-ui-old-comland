@@ -228,7 +228,8 @@
     "TYPE": "type{{additionalString}}",
     "VENDOR": "vendor{{additionalString}}",
     "LAST-NOTIFICATIONS": "Last notifications",
-    "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again."
+    "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again.",
+    "RE-KEY-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!"
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
@@ -581,7 +582,9 @@
     "FW-UPGRADE": "FW Upgrade",
     "OPERATIONS": "Operations",
     "SYNC-TIME": "Sync time",
-    "SYNCHRONIZE-TIME": "Synchronize time"
+    "SYNCHRONIZE-TIME": "Synchronize time",
+    "SECURITY": "Security",
+    "RE-KEY-HMAC": "Re-key HMAC"
   },
   "PLC-METER": {
     "ACTIVATE-IMAGE": "Activate image",
