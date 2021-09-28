@@ -17,12 +17,13 @@ import {
   deleteConcentrators,
   getConcentrators,
   removeDcuFromJob,
+  validateHostname,
   updateConcentrator
 } from '../../consts/data-concentrator-units.const';
 import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { DcuInsertRequest } from '../../interfaces/data-concentrator-units/dcu-insert-request.interface';
-import { DcuUpdateRequest } from '../../interfaces/data-concentrator-units/dcu-update-request.interface';
+import { DcuUpdateRequest, ValidateHostnameRequest } from '../../interfaces/data-concentrator-units/dcu-update-request.interface';
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
@@ -94,7 +95,7 @@ export class DataConcentratorUnitsService {
   createDcu(payload: DcuForm): Observable<string> {
     const dcuRequest: DcuInsertRequest = {
       concentratorId: payload.serialNumber,
-      concentratorIp: payload.ip,
+      hostname: payload.hostname,
       type: payload.type ? payload.type.id : -1,
       vendor: payload.manufacturer ? payload.manufacturer.id : -1,
       name: payload.name,
@@ -111,7 +112,7 @@ export class DataConcentratorUnitsService {
 
   updateDcu(id: string, payload: EditDcuForm): Observable<DcuUpdateRequest[]> {
     const dcuRequest: DcuUpdateRequest = {
-      ip: payload.ip,
+      hostname: payload.hostname,
       serialNumber: payload.serialNumber,
       // type: payload.type ? payload.type.id : -1,
       // vendor: payload.manufacturer ? payload.manufacturer.id : -1,
@@ -119,9 +120,8 @@ export class DataConcentratorUnitsService {
       externalId: payload.externalId,
       userName: payload.userName,
       // password: payload.password,
-      address: payload.address,
+      address: payload.address
       // mac: payload.mac,
-      port: payload.port
       // status: payload.status ? payload.status.id : -1
       // latitude: payload.latitude,
       // longitude: payload.longitude,
@@ -138,6 +138,7 @@ export class DataConcentratorUnitsService {
   dcuSync(): Observable<any> {
     return this.repository.makeRequest(this.dcuSyncRequest());
   }
+
   dcuSyncRequest(): HttpRequest<any> {
     return new HttpRequest('GET', dcuSync);
   }
@@ -148,6 +149,14 @@ export class DataConcentratorUnitsService {
 
   getDataConcentratorUnitRequest(id: string): HttpRequest<any> {
     return new HttpRequest('GET', `${dataConcentrator}/${id}`);
+  }
+
+  validateHostname(request: ValidateHostnameRequest): Observable<boolean> {
+    return this.repository.makeRequest(this.validateHostnameRequest(request));
+  }
+
+  validateHostnameRequest(request: ValidateHostnameRequest): HttpRequest<any> {
+    return new HttpRequest('POST', validateHostname, request);
   }
 
   getConcentratorsForJob(param: RequestDcuForJob): Observable<ResponseDcuForJob> {

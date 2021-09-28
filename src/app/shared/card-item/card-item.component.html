@@ -60,7 +60,11 @@
             <ng-container *ngIf="formData.control.value?.id; else notObject">
               {{ formData.control.value.value }}
             </ng-container>
-            <ng-template #notObject>  {{ formData.control.value}} </ng-template>
+            <ng-template #notObject>  {{ formData.control.value }}</ng-template>
+          </div>
+          <div *ngIf="!formData.control.value"
+               class="tw-text-darkGray">
+            {{ 'COMMON.NOT-DEFINED' | translate }}
           </div>
         </div>
       </div>

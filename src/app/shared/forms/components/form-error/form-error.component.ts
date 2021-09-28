@@ -18,6 +18,7 @@ export class FormErrorComponent {
       minlength: this.translate.instant('FORM.ERROR.MINLENGTH'),
       pattern: this.translate.instant('FORM.ERROR.PATTERN'),
       notMatchPassword: this.translate.instant('FORM.ERROR.NOT-MATCH'),
+      invalidHostname: this.translate.instant('FORM.ERROR.INVALID-HOSTNAME'),
       max: this.translate.instant('FORM.ERROR.MAX'),
       min: this.translate.instant('FORM.ERROR.MIN'),
       maxError: this.translate.instant('FORM.ERROR.MAX'),

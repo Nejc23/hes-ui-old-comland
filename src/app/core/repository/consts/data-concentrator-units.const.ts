@@ -15,7 +15,7 @@ export const schedulerJobs = '/api/scheduler-jobs';
 export const activeJobs = '/api/active-jobs';
 export const stopJob = 'stop-job';
 export const cancelJob = 'cancel-job';
-export const dataConcentrator = `${basePath}/concentrator`;
+export const dataConcentrator = `${basePathConcentratorInventory}/concentrator`;
 
 // codelist DCU
 export const dcuStatuses = `${basePath}/concentrator-status-codes`;
@@ -43,3 +43,6 @@ export const jobStateSummary = `${basePathDcOperations}/job-state/summary`;
 
 // Rekey HMAC
 export const dcRekeyHmac = `${enumMyGridLink.managment}/security/concentrator/change-hmac`;
+
+// Validations
+export const validateHostname = `${basePathConcentratorInventory}/validations/hostname`;

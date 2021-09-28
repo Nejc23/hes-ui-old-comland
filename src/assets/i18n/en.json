@@ -278,6 +278,7 @@
       "MIN": "Exceeds min value",
       "MINLENGTH": "Entry does not meet minimum required amount of characters",
       "NOT-MATCH": "Password not match",
+      "INVALID-HOSTNAME": "Hostname is invalid",
       "NOT-VALID-REQUEST": "Not valid request",
       "NUMBER-ERROR": "Entry is not a valid integer:",
       "PATTERN": "Wrong format",
@@ -367,7 +368,10 @@
     "EXTERNALID": "External Id",
     "COORDINATES": "Coordinates",
     "NEXT-START": "Next start",
-    "PLCSTATUS": "PLC status"
+    "PLCSTATUS": "PLC status",
+    "HOSTNAME": "Hostname",
+    "TIMEZONENAME": "Timezone",
+    "FIRSTINSTALLDATE": "Installed"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -452,7 +456,8 @@
     "UNIT": "Unit",
     "VALUE": "Value",
     "VENDOR": "Vendor",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "HOSTNAME": "Hostname"
   },
   "JOB": {
     "ACTIVE-JOB": {
