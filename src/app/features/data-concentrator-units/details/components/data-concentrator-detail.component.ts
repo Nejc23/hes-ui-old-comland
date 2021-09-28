@@ -206,12 +206,16 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return nameOf<DcuForm>((o) => o.serialNumber);
   }
 
-  get ipProperty() {
-    return nameOf<DcuForm>((o) => o.ip);
+  get hostname() {
+    return nameOf<DcuForm>((o) => o.hostname);
   }
 
-  get portProperty() {
-    return nameOf<DcuForm>((o) => o.port);
+  get timezone() {
+    return nameOf<DcuForm>((o) => o.timeZoneName);
+  }
+
+  get installedDate() {
+    return nameOf<DcuForm>((o) => o.firstInstallDate);
   }
 
   get userNameProperty() {
@@ -310,6 +314,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
           this.showMeterStatusWidget = true;
         }
         this.breadcrumbService.setPageName(this.data.name);
+        if (this.data.firstInstallDate) {
+          this.data.firstInstallDate =
+            moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
+            ' ' +
+            moment(this.data.firstInstallDate).format(environment.timeFormatLong);
+        }
         //MOCK DATA
         //this.data.plcStatus = ConcentratorStatus.UNKNOWN;
 
@@ -481,13 +491,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   updateData(updatedValues: DcuUpdateRequest) {
-    this.data.ip = updatedValues.ip;
+    this.data.hostname = updatedValues.hostname;
     this.data.name = updatedValues.name;
     this.data.serialNumber = updatedValues.serialNumber;
     this.data.externalId = updatedValues.externalId;
     this.data.username = updatedValues.userName;
     this.data.address = updatedValues.address;
-    this.data.port = updatedValues.port;
 
     this.form = this.createForm();
     this.editForm = this.createEditForm();
@@ -497,21 +506,21 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return this.formBuilder.group(
       {
         [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-        [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
-        [this.externalIdProperty]: [this.data ? this.data.externalId : null],
-        // [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
+        [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required], // [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
         [this.typeProperty]: [
           this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
           [Validators.required]
         ],
         [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
-        [this.ipProperty]: [this.data ? this.data.ip : null],
-        [this.portProperty]: [this.data ? this.data.port : null],
-        [this.addressProperty]: [this.data ? this.data.address : null],
-        [this.tagsProperty]: [this.data ? this.data.tags : null],
+        [this.hostname]: [this.data ? this.data.hostname : null],
+        [this.installedDate]: [this.data ? this.data.firstInstallDate : null],
         [this.userNameProperty]: [this.data ? this.data.username : null],
+        [this.externalIdProperty]: [this.data ? this.data.externalId : null],
         [this.macProperty]: [this.data ? this.data.mac : null],
-        [this.plcStatus]: [this.data ? this.data.plcStatus : null]
+        [this.timezone]: [this.data ? this.data.timeZoneName : null],
+        [this.addressProperty]: [this.data ? this.data.address : null],
+        [this.plcStatus]: [this.data ? this.data.plcStatus : null],
+        [this.tagsProperty]: [this.data ? this.data.tags : null]
       },
       { updateOn: 'blur' }
     );
@@ -524,10 +533,9 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       [this.externalIdProperty]: [this.data ? this.data.externalId : null],
       [this.typeProperty]: [this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null],
       [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
-      [this.ipProperty]: [this.data ? this.data.ip : null],
-      [this.portProperty]: [this.data ? this.data.port : null],
       [this.addressProperty]: [this.data ? this.data.address : null],
       [this.macProperty]: [this.data ? this.data.mac : null],
+      [this.hostname]: [this.data ? this.data.hostname : null],
       [this.userNameProperty]: [this.data ? this.data.username : null]
     });
   }
@@ -538,8 +546,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       name: this.form.get(this.nameProperty).value,
       serialNumber: this.form.get(this.serialNumberProperty).value,
       externalId: this.form.get(this.externalIdProperty).value,
-      ip: this.form.get(this.ipProperty).value,
-      port: this.form.get(this.portProperty).value,
+      hostname: this.form.get(this.hostname).value,
       tags: this.form.get(this.tagsProperty).value,
       type: this.form.get(this.typeProperty).value,
       manufacturer: this.form.get(this.vendorProperty).value,
@@ -707,6 +714,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
   refreshData() {
     this.getData();
+    this.openEdit = false;
   }
 
   createEventsForm(): FormGroup {

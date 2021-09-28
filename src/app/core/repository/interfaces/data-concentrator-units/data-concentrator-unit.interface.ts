@@ -1,5 +1,6 @@
 export interface DataConcentratorUnit {
   concentratorId: string;
+  hostname: string;
   statusValue: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE';
   statusId: number;
   name: string;
@@ -9,16 +10,16 @@ export interface DataConcentratorUnit {
   manufacturerId?: number;
   serialNumber: string;
   externalId?: string;
-  ip: string;
   tags: string;
   address: string;
-  port: string;
   mac: string;
   username: string;
   password: string;
   latitude?: number;
   longitude?: number;
   plcStatus?: ConcentratorStatus;
+  firstInstallDate?: string;
+  timeZoneName?: string;
 }
 
 export enum ConcentratorStatus {

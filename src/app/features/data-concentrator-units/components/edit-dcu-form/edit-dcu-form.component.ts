@@ -9,6 +9,7 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ValidateHostnameRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-update-request.interface';
 
 @Component({
   selector: 'app-edit-dcu-form',
@@ -48,8 +49,8 @@ export class EditDcuFormComponent implements OnInit {
     return nameOf<DcuForm>((o) => o.externalId);
   }
 
-  get ipProperty() {
-    return nameOf<DcuForm>((o) => o.ip);
+  get hostname() {
+    return nameOf<DcuForm>((o) => o.hostname);
   }
 
   get userNameProperty() {
@@ -80,10 +81,6 @@ export class EditDcuFormComponent implements OnInit {
     return nameOf<DcuForm>((o) => o.tags);
   }
 
-  get portProperty() {
-    return nameOf<DcuForm>((o) => o.port);
-  }
-
   ngOnInit() {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
@@ -101,8 +98,7 @@ export class EditDcuFormComponent implements OnInit {
       externalId: this.form.get(this.externalIdProperty).value,
       name: this.form.get(this.nameProperty).value,
       serialNumber: this.form.get(this.idNumberProperty).value,
-      ip: this.form.get(this.ipProperty).value,
-      port: this.form.get(this.portProperty).value,
+      hostname: this.form.get(this.hostname).value,
       manufacturer: this.form.get(this.vendorProperty).value
     };
     if (this.credentialsVisible) {
@@ -135,5 +131,16 @@ export class EditDcuFormComponent implements OnInit {
 
   toggle() {
     this.opened = !this.opened;
+  }
+
+  validateHostname() {
+    const request: ValidateHostnameRequest = {
+      hostname: this.form.get(this.hostname).value
+    };
+    this.dcuService.validateHostname(request).subscribe((isValid) => {
+      if (!isValid) {
+        this.form.get(this.hostname).setErrors({ invalidHostname: true });
+      }
+    });
   }
 }
