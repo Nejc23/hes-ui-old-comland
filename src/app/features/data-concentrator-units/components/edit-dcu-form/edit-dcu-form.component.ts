@@ -137,10 +137,13 @@ export class EditDcuFormComponent implements OnInit {
     const request: ValidateHostnameRequest = {
       hostname: this.form.get(this.hostname).value
     };
-    this.dcuService.validateHostname(request).subscribe((isValid) => {
-      if (!isValid) {
-        this.form.get(this.hostname).setErrors({ invalidHostname: true });
-      }
-    });
+
+    if (request.hostname) {
+      this.dcuService.validateHostname(request).subscribe((isValid) => {
+        if (!isValid) {
+          this.form.get(this.hostname).setErrors({ invalidHostname: true });
+        }
+      });
+    }
   }
 }

@@ -24,7 +24,7 @@ export interface MuUpdateForm {
   advancedInformation: MuAdvancedInformation;
   wrapperInformation?: MuWrapperInformation;
   hdlcInformation?: MuHdlcInformation;
-  protocol: number;
+  driver: number;
   referencingType: ReferenceType;
 }
 

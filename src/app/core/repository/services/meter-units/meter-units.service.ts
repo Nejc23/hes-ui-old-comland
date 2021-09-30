@@ -144,7 +144,7 @@ export class MeterUnitsService {
       manufacturer: payload.manufacturer?.id,
       templateId: payload.template?.id,
       interfaceType: payload.communicationType,
-      protocol: 2, // DLMS
+      driver: 2, // DLMS
       medium: 1, // ELECTRICITY
       jobIds: payload.jobIds,
       ip: payload.ip,
@@ -199,7 +199,7 @@ export class MeterUnitsService {
       serialNumber: payload.serialNumber,
       templateId: payload.template.id,
       interfaceType: payload.communicationType,
-      protocol: payload.protocol,
+      driver: payload.driver,
       referencingType: payload.referencingType
     };
 
@@ -342,7 +342,7 @@ export class MeterUnitsService {
       if (param.filterModel.protocol && param.filterModel.protocol.length > 0) {
         param.filterModel.protocol.map((row) =>
           requestParam.filter.push({
-            propName: capitalize(gridSysNameColumnsEnum.protocol),
+            propName: capitalize(gridSysNameColumnsEnum.protocolType),
             propValue: row.id.toString(),
             filterOperation: filterOperationEnum.equal
           })
