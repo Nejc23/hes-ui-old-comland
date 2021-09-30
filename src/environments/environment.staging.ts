@@ -18,7 +18,6 @@ export const environment = {
     days: 'dd.MM',
     years: 'yyyy'
   },
-  kendoChartCulture: 'de-DE',
   kendoPieChartLastSliceColor: '#9FB740',
   isDebug: false,
   licenseKey:
