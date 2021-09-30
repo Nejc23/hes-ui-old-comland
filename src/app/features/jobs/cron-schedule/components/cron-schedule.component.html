@@ -4,7 +4,7 @@
       <div>
         <div class="d-flex">
           <label class="label-left tw-pr-2">{{ 'COMMON.EVERY' | translate }}</label>
-          <div class="col-2">
+          <div class="col-3">
             <app-select-input [disabled]="false" [form]="form" [property]="minutesMinutesProperty"
                               [selectOptions]="everyMinutes"
                               label="Minutes">
@@ -20,14 +20,16 @@
       <div>
         <div class="d-flex">
           <label class="label-left tw-pr-2">{{ 'COMMON.EVERY' | translate }}</label>
-          <div class="col-2">
-            <app-select-input [disabled]="false" [form]="form" [property]="hourlyHoursProperty" [selectOptions]="everyHours"
+          <div class="col-3">
+            <app-select-input [disabled]="false" [form]="form" [property]="hourlyHoursProperty"
+                              [selectOptions]="everyHours"
                               label="Hours">
             </app-select-input>
           </div>
           <label class="label-left tw-pr-2">:</label>
-          <div class="col-2">
-            <app-select-input [disabled]="false" [form]="form" [property]="hourlyMinutesProperty" [selectOptions]="minutes"
+          <div class="col-3">
+            <app-select-input [disabled]="false" [form]="form" [property]="hourlyMinutesProperty"
+                              [selectOptions]="minutes"
                               label="Minutes">
             </app-select-input>
           </div>
@@ -42,19 +44,21 @@
         <div class="d-flex">
           <app-input-radio [form]="form" [options]="dailyOptionEvery" [property]="dailyFrequencyProperty"
                            class="label-left tw-pr-2"></app-input-radio>
-          <div class="col-2">
-            <app-select-input [disabled]="false" [form]="form" [property]="dailyEveryDaysProperty" [selectOptions]="everyDays"
+          <div class="col-3">
+            <app-select-input [disabled]="false" [form]="form" [property]="dailyEveryDaysProperty"
+                              [selectOptions]="everyDays"
                               label="Days">
             </app-select-input>
           </div>
           <label class="label-left tw-pr-2">@</label>
-          <div class="col-2">
-            <app-select-input [disabled]="false" [form]="form" [property]="dailyEveryHoursProperty" [selectOptions]="hours"
+          <div class="col-3">
+            <app-select-input [disabled]="false" [form]="form" [property]="dailyEveryHoursProperty"
+                              [selectOptions]="hours"
                               label="Hours">
             </app-select-input>
           </div>
           <label class="label-left tw-pr-2">:</label>
-          <div class="col-2">
+          <div class="col-3">
             <app-select-input [disabled]="false" [form]="form" [property]="dailyEveryMinutesProperty"
                               [selectOptions]="minutes"
                               label="Minutes">
@@ -64,13 +68,14 @@
         <div class="d-flex">
           <app-input-radio [form]="form" [options]="dailyOptionWeekday" [property]="dailyFrequencyProperty"
                            class="label-left tw-pr-2"></app-input-radio>
-          <div class="col-2">
-            <app-select-input [disabled]="false" [form]="form" [property]="dailyWeekdayHoursProperty" [selectOptions]="hours"
+          <div class="col-3">
+            <app-select-input [disabled]="false" [form]="form" [property]="dailyWeekdayHoursProperty"
+                              [selectOptions]="hours"
                               label="Hours">
             </app-select-input>
           </div>
           <label class="label-left tw-pr-2">:</label>
-          <div class="col-2">
+          <div class="col-3">
             <app-select-input [disabled]="false" [form]="form" [property]="dailyWeekdayMinutesProperty"
                               [selectOptions]="minutes"
                               label="Minutes">
@@ -90,14 +95,15 @@
         </app-input-multiselect>
         <div class="d-flex">
           <label class="label-left tw-pr-2">@</label>
-          <div class="col-2">
+          <div class="col-3">
             <app-select-input [disabled]="false" [form]="form" [property]="weeklyHoursProperty" [selectOptions]="hours"
                               label="Hours">
             </app-select-input>
           </div>
           <label class="label-left tw-pr-2">:</label>
-          <div class="col-2">
-            <app-select-input [disabled]="false" [form]="form" [property]="weeklyMinutesProperty" [selectOptions]="minutes"
+          <div class="col-3">
+            <app-select-input [disabled]="false" [form]="form" [property]="weeklyMinutesProperty"
+                              [selectOptions]="minutes"
                               label="Minutes">
             </app-select-input>
           </div>
@@ -112,7 +118,8 @@
         <label><span>{{ 'JOB.CRON-SCHEDULE.DAYS-IN-MONTH' | translate }}</span><sup> *</sup></label>
         <div class="d-flex flex-wrap">
           <button (click)="onDayInMonthClick(i+1)" *ngFor="let item of [].constructor(31); let i = index"
-                  [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'" class="btn btn-days">
+                  [ngClass]="isDayInMonthSelected(i+1) ? 'btn-secondary' : 'btn-outline-secondary'"
+                  class="btn btn-days">
             <span>{{i + 1}}</span>
           </button>
         </div>
@@ -122,13 +129,13 @@
         </div>
         <div class="d-flex mt-3">
           <label class="label-left tw-pr-2">@</label>
-          <div class="col-2">
+          <div class="col-3">
             <app-select-input [disabled]="false" [form]="form" [property]="monthlyHoursProperty" [selectOptions]="hours"
                               label="Hours">
             </app-select-input>
           </div>
           <label class="label-left tw-pr-2">:</label>
-          <div class="col-2">
+          <div class="col-3">
             <app-select-input [disabled]="false" [form]="form" [property]="monthlyMinutesProperty"
                               [selectOptions]="minutes"
                               label="Minutes">

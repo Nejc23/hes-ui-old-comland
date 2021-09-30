@@ -8,6 +8,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        82: '22rem' // 352px
+      },
       screens: {
         '3xl': '1750px'
       },

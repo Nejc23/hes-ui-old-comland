@@ -490,7 +490,7 @@
       "CREATE-JOB": "Create a new job",
       "DELETE": "Do you want to delete scheduler job",
       "ERROR-SAVING": "Error saving job",
-      "EXECUTE": "Do you want to execute scheduler job now",
+      "EXECUTE": "Do you want to execute scheduler job now?",
       "JOB-SUCCESSFULLY": "Job was {{ operation }} successfully",
       "MORE-SAVE-OPTIONS": "More Save options",
       "SELECT-JOB": "To continue, select a job type, please.",

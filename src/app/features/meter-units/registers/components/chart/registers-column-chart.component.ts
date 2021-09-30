@@ -1,7 +1,5 @@
-import { IntlService } from '@progress/kendo-angular-intl';
 import { EventsByTimestamp } from './../../interfaces/events-processing.interface';
 import { Component, Input } from '@angular/core';
-import { DataProcessingService } from 'src/app/core/repository/services/data-processing/data-processing.service';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -10,9 +8,15 @@ import { environment } from 'src/environments/environment';
 })
 export class RegistersColumnChartComponent {
   @Input() eventsByTimestamp: EventsByTimestamp[] = [];
-  public dateFormats;
 
-  constructor(private dataProcessingService: DataProcessingService, private intl: IntlService) {
+  public dateFormats;
+  public culture = 'de-DE';
+
+  constructor() {
     this.dateFormats = environment.kendoChartCategoryDateFormats;
+    this.culture = environment.kendoChartCulture;
   }
+
+  // colorSelected(value: any) {
+  // }
 }

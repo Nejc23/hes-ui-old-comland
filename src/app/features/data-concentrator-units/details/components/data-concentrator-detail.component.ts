@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, Subscription } from 'rxjs';
+import { forkJoin, Observable, Subscription } from 'rxjs';
 import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
@@ -31,6 +31,16 @@ import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 import { RegistersFilter } from '../../../meter-units/registers/interfaces/data-processing-request.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
+import { EventsByTimestamp } from '../../../meter-units/registers/interfaces/events-processing.interface';
+import { EventRegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import { PageChangeEvent } from '@progress/kendo-angular-grid';
+import { JobsService } from '../../../../core/repository/services/jobs/jobs.service';
+import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
+import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
+import { JobTypeEnumeration } from '../../../jobs/enums/job-type.enum';
+import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/scheduler-job.component';
+import { CodelistMeterUnitsRepositoryService } from '../../../../core/repository/services/codelists/codelist-meter-units-repository.service';
+import { SchedulerJobsEventEmitterService } from '../../../jobs/services/scheduler-jobs-event-emitter.service';
 import { OperationType } from '../../components/operations/dc-operations.component';
 
 @Component({
@@ -59,21 +69,31 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   map: any;
   options: any;
   miniCardItemTypeEnum = MiniCardItemType;
-  gridData: any = [];
+  activeJobs: any = [];
+  jobsLoading = false;
   meters: Array<MeterUnitsList> = [];
-  events: any = [];
+  metersTotal = 0;
+  events: EventRegisterValue[] = [];
+  eventsTotal = 0;
   meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
   showMeterStatusWidget = false;
   openEdit = false;
   metersGridPageNumber = 1;
+  metersPageSize = 20;
   eventIds = [];
   eventsLoading = false;
+  eventsByTimestamp: EventsByTimestamp[];
+  chartVisible = true;
+
+  messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
+  messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
+  messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
 
   eventsColumnsConfiguration: Array<GridColumn> = [
     {
       translationKey: 'Timestamp',
-      field: 'timestamp',
-      type: GridColumnType.DATE_TIME
+      field: 'timestamp'
+      // type: GridColumnType.DATE_TIME
     },
     {
       translationKey: 'ID',
@@ -136,7 +156,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       iconUrl: 'assets/images/icons/marker-' + brand.brand.toLowerCase() + '.svg'
     })
   });
-  rowActionsConfiguration: Array<GridRowAction> = [
+  activeJobsRowActionsConfiguration: Array<GridRowAction> = [
     {
       actionName: 'settings',
       iconName: 'settings-icon'
@@ -146,14 +166,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       iconName: 'play-icon'
     }
   ];
-  scheduledJobsColumnsConfiguration: Array<GridColumn> = [
-    {
-      field: 'active',
-      translationKey: 'FORM.TYPE',
-      type: GridColumnType.SWITCH,
-      width: 70,
-      class: 'no-padding'
-    },
+  activeJobsColumnsConfiguration: Array<GridColumn> = [
     {
       field: 'description',
       translationKey: 'FORM.NAME'
@@ -183,13 +196,17 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
     private dcOperationsService: DcOperationsService,
-    private eventService: DataConcentratorUnitsGridEventEmitterService,
+    private dcuEventsService: DataConcentratorUnitsGridEventEmitterService,
     private modalService: ModalService,
     private translate: TranslateService,
     private elRef: ElementRef,
     private meterUnitsTypeService: MeterUnitsService,
     private router: Router,
-    private dataProcessingService: DataProcessingService
+    private dataProcessingService: DataProcessingService,
+    private activeJobsService: JobsService,
+    private toast: ToastNotificationService,
+    private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
+    private schedulerJobsEventService: SchedulerJobsEventEmitterService
   ) {
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
@@ -295,7 +312,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     // get DCU
     this.getData();
 
-    this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
+    this.dcuConcentratorDeleted = this.dcuEventsService.eventEmitterConcentratorDeleted.subscribe((x) => {
       this.router.navigate([dataConcentratorUnits]);
     });
   }
@@ -346,8 +363,9 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.setCredentialsControls(this.credentialsVisible);
 
         //MOCK DATA
-        this.loadGridData();
-        this.loadEventsData();
+        this.loadGridData(this.metersGridPageNumber);
+        this.loadRegistersData();
+        this.getActiveJobs();
         // notifications
         this.alarms = [
           {
@@ -400,55 +418,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
           '123'
         ];
 
-        this.gridData = [
-          {
-            id: 'aa84e457-dbab-44d9-84b8-0d9323e3ac24',
-            type: 'Reading',
-            active: true,
-            description: 'InstantValues',
-            nextRun: '2021-08-25T14:01:00+00:00',
-            owner: 'Admin User',
-            jobType: 2,
-            deviceCount: 15
-          },
-          {
-            id: '69c2a9ff-ecd2-4e21-aec0-32554e4466d2',
-            type: 'Reading',
-            active: false,
-            description: 'MeterEvents',
-            owner: 'Admin User',
-            jobType: 2,
-            deviceCount: 14
-          },
-          {
-            id: '5af63031-8f1d-49e4-b1c9-517642d5e474',
-            type: 'AlarmNotification',
-            active: true,
-            description: 'adsadasd',
-            nextRun: '2021-08-25T14:01:00+00:00',
-            owner: 'Admin User',
-            jobType: 6,
-            deviceCount: 0
-          },
-          {
-            id: 'b47b50ed-e96d-4c70-91f8-838762a8c4f3',
-            type: 'AlarmNotification',
-            active: false,
-            description: 'Notifications',
-            owner: 'Admin User',
-            jobType: 6,
-            deviceCount: 0
-          },
-          {
-            id: 'd03a5810-0463-4235-9c11-c1e9372aac29',
-            type: 'Reading',
-            active: false,
-            description: 'reading event',
-            owner: 'Admin User',
-            jobType: 2,
-            deviceCount: 1
-          }
-        ];
         // mock todo object
         this.meterStatusData = [
           {
@@ -632,84 +601,60 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   //   this.showData(this.selectedRegister, true);
   // }
 
-  loadGridData() {
+  loadGridData(pageNumber: number) {
+    this.eventsLoading = true;
     const requestParam: IActionRequestParams = {
-      pageSize: 12, // TODO (request, pagination ...)
-      pageNumber: this.metersGridPageNumber,
+      pageSize: this.metersPageSize,
+      pageNumber: pageNumber,
       textSearch: {
-        value: 'DC450G3_3.11',
-        propNames: [],
+        value: this.data.name, // mock get all filters
+        propNames: [
+          // why needed on BE?
+          'deviceId',
+          'nextRead',
+          'status',
+          'protocol',
+          'name',
+          'serialNumber',
+          'logicalDeviceName',
+          'moduleId',
+          'parent',
+          'parametrisationId',
+          'timeOfUseId',
+          'vendor',
+          'medium',
+          'firmware',
+          'disconnectorState',
+          'instantValues',
+          'ciiState',
+          'readStatusTimeStamp',
+          'jobStatus',
+          'limiter1normal',
+          'limiter1emergency',
+          'limiter2normal',
+          'limiter2emergency',
+          'currentl1',
+          'currentl2',
+          'currentl3',
+          'id'
+        ],
         useWildcards: true
       },
-      sort: []
+      sort: [
+        {
+          propName: 'Name',
+          index: 0,
+          sortOrder: 'Descending'
+        }
+      ]
     };
     // MOCKED DATA
     this.meterUnitsTypeService.getGridMeterUnits(requestParam).subscribe((res) => {
-      this.meters = res.data;
+      this.meters.push(...res.data);
+      console.log(this.meters);
+      this.meters = [...this.meters]; // KendoUi change detection for grid rerender
+      this.metersTotal = res.totalCount;
     });
-  }
-
-  loadEventsData() {
-    this.events = [
-      {
-        value: 251,
-        timestamp: '2021-08-02T10:00:24+02:00'
-      },
-      {
-        value: 214,
-        timestamp: '2021-08-02T10:00:41+02:00'
-      },
-      {
-        value: 251,
-        timestamp: '2021-08-09T13:35:16+02:00'
-      },
-      {
-        value: 214,
-        timestamp: '2021-08-09T13:36:02+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T09:42:42+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T10:22:05+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T10:24:08+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T11:31:05+02:00'
-      },
-      {
-        value: 1,
-        timestamp: '2021-08-11T12:50:44+02:00'
-      },
-      {
-        value: 2,
-        timestamp: '2021-08-11T12:54:37+02:00'
-      },
-      {
-        value: 227,
-        timestamp: '2021-08-11T12:54:42+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T13:54:40+02:00'
-      },
-      {
-        value: 251,
-        timestamp: '2021-08-19T13:13:17+02:00'
-      },
-      {
-        value: 214,
-        timestamp: '2021-08-19T13:13:30+02:00'
-      }
-    ];
-    // debugger;
-    //this.loadRegistersData();
   }
 
   refreshData() {
@@ -733,7 +678,10 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     this.loadRegistersData();
   }
 
+  // MOCK DATA FROM DC
   loadRegistersData() {
+    this.events = [];
+    this.eventsTotal = 0;
     const startDate = moment(this.eventsForm.get('startDate').value).toDate();
     const endDate = moment(this.eventsForm.get('endDate').value).toDate();
 
@@ -771,9 +719,341 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
             values: this.eventIds // mock
           }
         ];
+        this.setEventData();
+        // format timestamp for Search ALL columns on grid
+        this.events.map(
+          (event) =>
+            (event.timestamp =
+              moment(event.timestamp).format(environment.dateDisplayFormat) +
+              ' ' +
+              moment(event.timestamp).format(environment.timeFormatLong))
+        );
       }
       this.eventsLoading = false;
-      this.events.skip = 0;
+    });
+  }
+
+  // todo refactor create service (currently just c/p)
+  setEventData() {
+    this.eventsByTimestamp = [];
+    let eventsById = [];
+    // is it ordered?
+    const startTime = new Date(this.events[0].timestamp);
+    const endTime = new Date(this.events[this.events.length - 1].timestamp);
+
+    const daysDiff = this.getDiffDays(startTime, endTime);
+
+    const currentTime = new Date(this.events[0].timestamp);
+    currentTime.setMinutes(0, 0, 0);
+
+    // let inteval = 1000 * 60 * 60 * 60; // hours
+    let outData = [];
+    if (daysDiff <= 1) {
+      // hourly interval
+      outData = this.events.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+    } else {
+      outData = this.events.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+    }
+
+    const groupBy = (array, key) => {
+      // Return the end result
+      return array.reduce((result, currentValue) => {
+        if (!result[currentValue[key]]) {
+          result[currentValue[key]] = 0;
+        }
+        result[currentValue[key]]++;
+
+        // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+        return result;
+      }, {}); // empty object is the initial value for result object
+    };
+
+    this.eventsByTimestamp = Object.entries(groupBy(outData, 'timestamp')).map((e) => ({
+      timestamp: new Date(Number(e[0])),
+      count: Number(e[1])
+    }));
+    const dataLength = this.events.length;
+    const eventsByIdGroup = groupBy(outData, 'value');
+
+    eventsById = Object.entries(eventsByIdGroup).map((e) => ({
+      category: Number(e[0]),
+      count: Number(e[1]),
+      value: Number(e[1]) / dataLength
+    }));
+
+    const eventsLength = eventsById.length;
+
+    if (eventsLength % 6 === 1) {
+      eventsById[eventsLength - 1].color = environment.kendoPieChartLastSliceColor; // last color fix to avoid the same color for the first and the last pie slice
+    }
+  }
+
+  getDiffDays(startTime: Date, endTime: Date): number {
+    const diff = endTime.valueOf() - startTime.valueOf();
+    return diff / (1000 * 3600 * 24);
+  }
+
+  loadMoreItems(event: PageChangeEvent) {
+    this.loadGridData(this.metersGridPageNumber + 1);
+  }
+
+  hideChart() {
+    this.chartVisible = !this.chartVisible;
+  }
+
+  getActiveJobs() {
+    this.jobsLoading = true;
+    this.activeJobsService.getSchedulerActiveJobsList(this.concentratorId).subscribe((res) => {
+      this.jobsLoading = false;
+      this.activeJobs = res;
+    });
+  }
+
+  goToJobs() {
+    this.router.navigate(['/schedulerJobs']);
+  }
+
+  rowActionsClicked(event: any) {
+    if (event.actionName === 'runJob') {
+      this.runJob(event.id);
+    } else {
+      this.editJob(event.rowData);
+    }
+  }
+
+  // TODO CLEANUP move to service
+  runJob(id: any) {
+    const modalRef = this.modalService.open(ModalConfirmComponent);
+    const component: ModalConfirmComponent = modalRef.componentInstance;
+    let response: Observable<any> = new Observable();
+    const operation = this.translate.instant('COMMON.EXECUTE');
+    response = this.activeJobsService.executeSchedulerJob(id);
+
+    component.btnConfirmText = operation;
+    component.modalTitle = this.translate.instant('COMMON.CONFIRM-OPERATION');
+    component.modalBody = this.translate.instant('JOB.SCHEDULER-JOB.EXECUTE');
+
+    modalRef.result.then(
+      (data) => {
+        // on close (CONFIRM)
+        response.subscribe(
+          (value) => {
+            this.toast.successToast(this.translate.instant('JOB.SCHEDULER-JOB-STARTED'));
+            // this.getActiveJobs();
+          },
+          (e) => {
+            this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
+          }
+        );
+      },
+      (reason) => {
+        // on dismiss (CLOSE)
+      }
+    );
+  }
+
+  editJob(data: any) {
+    const params = {
+      data: data
+    };
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+
+    if (params.data.jobType === JobTypeEnumeration.discovery) {
+      this.editDiscoveryJob(params, options);
+    } else if (params.data.jobType === JobTypeEnumeration.timeSync) {
+      // dc time sync
+      this.editDcTimeSyncJob(params, options);
+    } else if (params.data.jobType === JobTypeEnumeration.readEvents) {
+      // dc read events job
+      this.editDcReadEventsJob(params, options);
+    } else if (params.data.jobType === JobTypeEnumeration.topology) {
+      this.editTopologyJob(params, options);
+    } else if (params.data.jobType === JobTypeEnumeration.alarmNotification) {
+      this.editAlarmNotificationJob(params, options);
+    } else {
+      this.editReadingJob(params, options);
+    }
+  }
+
+  hasUserAccess(params: any): boolean {
+    if (!this.permissionService.hasAccess(PermissionEnumerator.Manage_Jobs)) {
+      return false;
+    }
+
+    const jobType = params.data.jobType;
+    if (jobType === JobTypeEnumeration.reading) {
+      return this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters);
+    } else if (jobType === JobTypeEnumeration.alarmNotification) {
+      return this.permissionService.hasAccess(PermissionEnumerator.Manage_Alarms);
+    } else {
+      return this.permissionService.hasAccess(PermissionEnumerator.Manage_Concentrators);
+    }
+  }
+
+  private editReadingJob(data: any, options: NgbModalOptions) {
+    const params = {
+      data: data
+    };
+
+    const selectedJobId = params.data.id;
+
+    const timeUnits$ = this.codelistService.timeUnitCodeslist();
+    const job$ = this.activeJobsService.getJob(selectedJobId);
+
+    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job, JobTypeEnumeration.reading);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.getActiveJobs();
+          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  // private editDiscoveryJob(params: any, options: NgbModalOptions) {
+  //   const selectedJobId = params.data.id;
+
+  //   this.service.getJob(selectedJobId).subscribe((job) => {
+  //     const modalRef = this.modalService.open(SchedulerJobComponent, options);
+  //     const component: SchedulerJobComponent = modalRef.componentInstance;
+  //     component.title = "Discovery Job";
+  //     component.jobType = jobType.discovery;
+  //     component.setFormEdit(null, selectedJobId, job);
+
+  //     modalRef.result.then(
+  //       (data) => {
+  //         // on close (CONFIRM)
+  //         this.eventService.eventEmitterRefresh.emit(true);
+  //       },
+  //       (reason) => {
+  //         // on dismiss (CLOSE)
+  //       }
+  //     );
+  //   });
+  // }
+
+  private editDiscoveryJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    this.activeJobsService.getJob(selectedJobId).subscribe((job) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.discovery);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
+          this.getActiveJobs();
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editTopologyJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    this.activeJobsService.getJob(selectedJobId).subscribe((job) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.topology);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
+          this.getActiveJobs();
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editDcTimeSyncJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    this.activeJobsService.getJob(selectedJobId).subscribe((job) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.timeSync);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
+          this.getActiveJobs();
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editDcReadEventsJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    const timeUnits$ = this.codelistService.timeUnitCodeslist();
+    const job$ = this.activeJobsService.getJob(selectedJobId);
+
+    forkJoin({ timeUnits: timeUnits$, job: job$ }).subscribe((responseList) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(responseList.timeUnits, selectedJobId, responseList.job, JobTypeEnumeration.readEvents);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
+          this.getActiveJobs();
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editAlarmNotificationJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    forkJoin({
+      protocols: this.codelistMeterUnitsRepositoryService.meterUnitProtocolTypeCodelist(),
+      manufacturers: this.codelistMeterUnitsRepositoryService.meterUnitVendorCodelist(0),
+      severities: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSeverityTypeCodelist(),
+      sources: this.codelistMeterUnitsRepositoryService.meterUnitAlarmSourceTypeCodelist()
+    }).subscribe(({ protocols, manufacturers, severities, sources }) => {
+      this.activeJobsService.getNotificationJob(selectedJobId).subscribe((job) => {
+        const modalRef = this.modalService.open(SchedulerJobComponent, options);
+        const component: SchedulerJobComponent = modalRef.componentInstance;
+        component.setFormNotificationJobEdit(protocols, manufacturers, severities, sources, selectedJobId, job);
+
+        modalRef.result.then(
+          (data) => {
+            // on close (CONFIRM)
+            this.schedulerJobsEventService.eventEmitterRefresh.emit(true);
+            this.getActiveJobs();
+          },
+          (reason) => {
+            // on dismiss (CLOSE)
+          }
+        );
+      });
     });
   }
 }
