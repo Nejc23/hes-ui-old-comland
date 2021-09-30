@@ -115,7 +115,7 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.protocol,
+        field: gridSysNameColumnsEnum.protocolType,
         headerName: this.translate.instant('GRID.PROTOCOL'),
         pinned: false,
         sortable: true,

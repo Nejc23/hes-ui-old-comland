@@ -220,7 +220,7 @@ export class AddMuFormComponent implements OnInit {
   }
 
   get protocolProperty() {
-    return nameOf<MeterUnitDetails>((o) => o.protocol);
+    return nameOf<MeterUnitDetails>((o) => o.driver);
   }
 
   get referenceTypeProperty() {
@@ -251,7 +251,7 @@ export class AddMuFormComponent implements OnInit {
       [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
 
-      [this.protocolProperty]: [{ value: editMu?.protocol, disabled: true }],
+      [this.protocolProperty]: [{ value: editMu?.driver, disabled: true }],
 
       // wrapper
       [this.wrapperClientAddressProperty]: [editMu?.wrapperInformation?.clientAddress, Validators.required],
@@ -285,7 +285,7 @@ export class AddMuFormComponent implements OnInit {
 
     // edit
     let communicationType = this.defaultCommunicationType;
-    if (muDetails.protocol?.toLowerCase() !== 'dlms') {
+    if (muDetails.driver?.toLowerCase() !== 'dlms') {
       communicationType = null;
     } else if (muDetails.hdlcInformation) {
       communicationType = this.communicationTypes[1];
@@ -642,7 +642,7 @@ export class AddMuFormComponent implements OnInit {
       serialNumber: this.editMu.serialNumber,
       template: this.form.get(this.templateProperty).value,
       connectionType: this.form.get(this.connectionTypeProperty).value,
-      protocol: this.isNewOrProtocolDlms ? 2 : 0,
+      driver: this.isNewOrProtocolDlms ? 2 : 0,
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
     };
   }
@@ -666,7 +666,8 @@ export class AddMuFormComponent implements OnInit {
 
   getTitle(): string {
     if (this.editMu) {
-      return this.translate.instant('PLC-METER.EDIT-METER', { protocol: this.editMu.protocol });
+      const protocolName = this.translate.instant('PROTOCOL.' + this.editMu.protocolType);
+      return this.translate.instant('PLC-METER.EDIT-METER', { protocol: protocolName });
     }
     return this.translate.instant('PLC-METER.ADD-DLMS-METER');
   }
@@ -691,7 +692,7 @@ export class AddMuFormComponent implements OnInit {
   }
 
   get isNewOrProtocolDlms() {
-    return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
+    return !this.isEditMu || this.editMu.driver?.toLowerCase() === 'dlms';
   }
 
   onShortNameChanges(event: Event) {

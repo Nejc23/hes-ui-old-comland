@@ -9,7 +9,7 @@ export interface MuCreateRequest {
   templateId?: string;
   interfaceType: number;
   manufacturer: number;
-  protocol?: number;
+  driver?: number;
   medium?: number;
   jobIds?: string[];
   ip: string;

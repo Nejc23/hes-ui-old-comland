@@ -2,6 +2,11 @@
   "ALARM": {
     "NO-ALARMS": "No Alarms have been added yet"
   },
+  "PROTOCOL": {
+    "g3PLC": "G3-PLC",
+    "dlms": "DLMS",
+    "unknown": "Unknown"
+  },
   "BREADCRUMB": {
     "CONCENTRATOR": "Concentrator",
     "JOBS": "Jobs",

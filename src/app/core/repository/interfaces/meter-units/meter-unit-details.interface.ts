@@ -8,7 +8,8 @@ export interface MeterUnitDetails {
   serialNumber: string;
   name: string;
   templateName: string;
-  protocol: string;
+  driver: string;
+  protocolType: string;
   manufacturer: string;
   ip: string;
   port: number;
