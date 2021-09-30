@@ -1,4 +1,4 @@
-image: node:latest
+image: $CI_REGISTRY/enerdat/tooling/node:latest
 
 stages:
   - install
