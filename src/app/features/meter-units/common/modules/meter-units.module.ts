@@ -80,7 +80,6 @@ import { PipesModule } from '../../../../shared/pipes/pipes.module';
     GridCellThresholdComponent,
     GridCellUnitComponent
   ],
-  exports: [RegistersColumnChartComponent],
   imports: [
     SharedModule,
     MeterUnitsRoutingModule,

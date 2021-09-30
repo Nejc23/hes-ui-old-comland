@@ -66,9 +66,9 @@
   background-color: white;
 }
 
-//::ng-deep input.k-textbox {
-//  @apply tw-rounded-sm;
-//}
+::ng-deep input.k-textbox {
+  @apply tw-rounded;
+}
 
 .grid-row-button {
   @apply tw-inline-flex;
@@ -79,12 +79,12 @@
   @apply tw-border-lightGray;
   @apply tw-border-solid;
   @apply tw-bg-white;
-  @apply tw-shadow;
   visibility: hidden;
+
   position: relative;
-  bottom: 40px;
-  width: 6rem;
-  left: calc(100% - 6.4rem);
+  right: -52%;
+  bottom: 10px;
+  //left: 62%;
 }
 
 .green {
@@ -96,53 +96,5 @@
 }
 
 .fixed-height {
-  min-height: 635px; // to rem
-}
-
-::ng-deep .k-button, .k-button-secondary {
-  background-color: white;
-  border: 1px solid #A9ABAF;
-  border-radius: 2px;
-}
-
-::ng-deep .k-dropdown .k-dropdown-wrap {
-  background-color: white;
-  border: 1px solid #A9ABAF; // mediumGray
-  border-radius: 2px;
-}
-
-::ng-deep .k-button:hover, .k-button.k-state-hover, .k-button-secondary:hover, .k-button-secondary.k-state-hover {
-  background-color: transparent;
-}
-
-::ng-deep .k-toolbar {
-  padding-top: 20px;
-  border-bottom: 0 !important;
-}
-
-.gray-border {
-  @apply tw-rounded-sm;
-  @apply tw-border-mediumGray;
-  @apply tw-border-solid;
-  @apply tw-border;
-}
-
-// kendo toolbar hack
-//.with-chart ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
-//  position: relative;
-//  top: -23.8rem;
-//  margin-left: 22.5rem;
-//}
-
-.max-height-450 {
-  max-height: 450px;
-}
-
-.grid-cell-text {
-  height: 44px;
-  line-height: 44px;
-  width: 96%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  height: 635px; // to rem
 }

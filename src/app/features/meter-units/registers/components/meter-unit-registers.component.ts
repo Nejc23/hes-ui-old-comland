@@ -97,7 +97,6 @@ export class MeterUnitRegistersComponent implements OnInit {
   get rangeProperty() {
     return 'range';
   }
-
   get startDateProperty(): string {
     return 'startDate';
   }

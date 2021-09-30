@@ -22,7 +22,6 @@ import { DcFilterComponent } from '../components/filter-form/dc-filter.component
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 import { DcOperationsComponent } from '../components/operations/dc-operations.component';
-import { MeterUnitsModule } from '../../meter-units/common/modules/meter-units.module';
 
 @NgModule({
   entryComponents: [],
@@ -66,8 +65,7 @@ import { MeterUnitsModule } from '../../meter-units/common/modules/meter-units.m
       GridCellIconComponent,
       GridCellJobStatusComponent,
       GridCellActionsComponent
-    ]),
-    MeterUnitsModule
+    ])
   ],
   exports: []
 })
