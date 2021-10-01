@@ -261,25 +261,21 @@ body {
 }
 
 .show-more-rounded-button {
+  @apply tw-text-sm;
+  @apply tw-text-darkGray;
   display: inline-flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 9px 16px;
-
+  z-index: 10;
   position: relative;
   min-width: 122px;
   height: 34px;
-  /* Monochrome/White */
   background: #FFFFFF;
-  /* Monochrome/Light grey */
   border: 1px solid #CED2D9;
   border-radius: 300px;
   top: 18px;
-  z-index: 100;
-
-  @apply tw-text-sm;
-  @apply tw-text-darkGray;
 }
 
 .k-state-selected {

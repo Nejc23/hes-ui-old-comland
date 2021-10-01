@@ -95,7 +95,6 @@ export class DataTableComponent implements OnInit, OnChanges {
       value: 'all'
     }
   ];
-
   @Output() switchClickedEvent = new EventEmitter<any>();
   @Output() rowActionClickedEvent = new EventEmitter<any>();
   @Output() selectedRowDataEvent = new EventEmitter<any>();
@@ -132,8 +131,8 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.switchClickedEvent.emit({ id: id, value: event });
   }
 
-  onRowActionClick(actionName: string, id: string) {
-    this.rowActionClickedEvent.emit({ actionName: actionName, id: id });
+  onRowActionClick(actionName: string, id: string, rowData?: any) {
+    this.rowActionClickedEvent.emit({ actionName: actionName, id: id, rowData: rowData });
   }
 
   public pageChange(event: PageChangeEvent): void {

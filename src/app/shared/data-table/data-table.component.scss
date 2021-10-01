@@ -70,10 +70,12 @@
   @apply tw-border-lightGray;
   @apply tw-border-solid;
   @apply tw-bg-white;
+  @apply tw-shadow;
   visibility: hidden;
   position: relative;
-  right: -52%;
-  bottom: 10px;
+  bottom: 40px;
+  width: 6rem;
+  left: calc(100% - 6.4rem);
   //left: 62%;
 }
 
@@ -135,4 +137,17 @@
   position: relative;
   bottom: 8.7rem;
   margin-left: 22.5rem;
+}
+
+.grid-cell-text {
+  height: 44px;
+  line-height: 44px;
+  width: 96%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.max-height-385 {
+  max-height: 385px;
 }

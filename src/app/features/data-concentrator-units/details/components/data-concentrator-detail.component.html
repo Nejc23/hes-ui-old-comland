@@ -100,13 +100,17 @@
             <!--              ></app-data-table>-->
             <!--            </app-card-item>-->
 
-            <!--            <app-card-item [buttonIconName]="'list-icon'" [buttonLabel]="'BUTTON.GO-TO-JOBS'"-->
-            <!--                           [buttonLinkUrl]="'schedulerJobs'"-->
-            <!--                           [buttonWithLink]="true"-->
-            <!--                           title="JOB.SCHEDULER-JOBS">-->
-            <!--              <app-data-table [gridColumns]="scheduledJobsColumnsConfiguration" [gridData]="gridData"-->
-            <!--                              [rowActions]="rowActionsConfiguration"></app-data-table>-->
-            <!--            </app-card-item>-->
+            <app-card-item (buttonClickEvent)="goToJobs()" *ngIf="activeJobs.length > 0"
+                           [buttonIconName]="'list-icon'"
+                           [buttonLabel]="'BUTTON.GO-TO-JOBS'"
+                           [title]="'JOB.ACTIVE-JOBS'">
+
+              <app-data-table (rowActionClickedEvent)="rowActionsClicked($event)"
+                              [gridColumns]="activeJobsColumnsConfiguration"
+                              [gridData]="activeJobs"
+                              [rowActions]="activeJobsRowActionsConfiguration"
+                              [tableClass]="'max-height-385'"></app-data-table>
+            </app-card-item>
 
             <!--            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"-->
             <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
@@ -124,6 +128,7 @@
         <div class="tw-py-10">
           <app-data-table (pageChangedEvent)="loadMoreItems($event)"
                           [excelExport]="true"
+                          [excelFileName]="data.name + '_meters'"
                           [fetchData]="true"
                           [gridColumns]="metersColumnsConfiguration"
                           [gridData]="meters"
