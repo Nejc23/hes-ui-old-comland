@@ -7,14 +7,11 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { MuHdlcInformation } from './../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 
-export interface MuUpdateForm {
+export interface MuUpdateForm extends MuUpdatePlcForm {
   // dlms
-  deviceId: string;
-  name: string;
   manufacturer: Codelist<number>;
   ip: string;
   port: number;
-  isGateWay: boolean;
   communicationType: number;
 
   template: Codelist<number>;
@@ -32,4 +29,5 @@ export interface MuUpdateForm {
 export interface MuUpdatePlcForm {
   deviceId: string;
   name: string;
+  externalId?: string;
 }

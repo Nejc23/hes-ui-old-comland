@@ -2,7 +2,7 @@ import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
+import { deleteMeters, onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
 import {
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
   enumMyGridLink,
@@ -44,7 +44,7 @@ import {
   ResponseSetMonitor
 } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import { SecurityClient } from '../../interfaces/templating/security-client.interface';
-import { meterUnits, onDemandReadMeter, onDemandRegistersType } from './../../consts/meter-units.const';
+import { onDemandReadMeter, onDemandRegistersType } from './../../consts/meter-units.const';
 import {
   jobsAssignExisting,
   linkDeviceTemplate,
@@ -334,7 +334,7 @@ export class MyGridLinkService {
   }
 
   deleteDeviceRequest(param: IActionRequestDeleteDevice): HttpRequest<any> {
-    return new HttpRequest('PATCH', `${meterUnits}`, param);
+    return new HttpRequest('POST', `${deleteMeters}`, param);
   }
 
   postSecurityRekey(param: IActionRequestSecurityRekey): Observable<IActionResponseSecurityRekey> {

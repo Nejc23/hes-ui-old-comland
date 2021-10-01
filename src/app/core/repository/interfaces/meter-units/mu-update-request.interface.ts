@@ -8,7 +8,6 @@ export interface MuUpdateRequest {
   manufacturer: number;
   ip: string;
   port: number;
-  isGateWay: boolean;
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
   advancedInformation?: MuAdvancedInformation;
@@ -18,9 +17,11 @@ export interface MuUpdateRequest {
   interfaceType: number;
   protocol: number;
   referencingType: ReferenceType;
+  externalId?: string;
 }
 
 export interface MuUpdatePlcRequest {
   deviceId?: string;
   name: string;
+  externalId?: string;
 }

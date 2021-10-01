@@ -1,5 +1,5 @@
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
-import { getDevice, muCreate, muUpdate } from './../../consts/meter-units.const';
+import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
 import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
@@ -13,13 +13,13 @@ import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
 import {
+  device,
   meterUnits,
-  meterUnitsLayout,
   meterUnitsBreakerState,
-  touConfigImport,
   meterUnitsForJob,
+  meterUnitsLayout,
   removeMeterUnitsFromJob,
-  device
+  touConfigImport
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
@@ -52,7 +52,7 @@ export class MeterUnitsService {
   }
 
   getGridMeterUnitsRequest(param: IActionRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', meterUnits, param);
+    return new HttpRequest('POST', getMeters, param);
   }
 
   getMeterUnit(id: string): Observable<MeterUnitDetails> {
@@ -149,13 +149,13 @@ export class MeterUnitsService {
       jobIds: payload.jobIds,
       ip: payload.ip,
       port: payload.port,
-      isGateWay: payload.isGateway,
       referencingType: payload.referencingType,
       advancedInformation: {
         authenticationType: payload.authenticationType,
         ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
         startWithRelease: payload.advancedInformation?.startWithRelease
-      }
+      },
+      externalId: payload.externalId
     };
 
     if (payload.wrapperInformation) {
@@ -164,7 +164,8 @@ export class MeterUnitsService {
         serverAddress: payload.wrapperInformation.serverAddress,
         publicClientAddress: payload.wrapperInformation.publicClientAddress,
         publicServerAddress: payload.wrapperInformation.publicServerAddress,
-        physicalAddress: payload.wrapperInformation.physicalAddress
+        physicalAddress: payload.wrapperInformation.physicalAddress,
+        isGateWay: payload.wrapperInformation.isGateWay
       };
     }
     if (payload.hdlcInformation) {
@@ -196,12 +197,12 @@ export class MeterUnitsService {
       manufacturer: payload.manufacturer?.id,
       ip: payload.ip,
       port: payload.port,
-      isGateWay: payload.isGateWay,
       serialNumber: payload.serialNumber,
       templateId: payload.template.id,
       interfaceType: payload.communicationType,
       protocol: payload.protocol,
-      referencingType: payload.referencingType
+      referencingType: payload.referencingType,
+      externalId: payload.externalId
     };
 
     if (payload.advancedInformation) {
@@ -218,7 +219,8 @@ export class MeterUnitsService {
         serverAddress: payload.wrapperInformation.serverAddress,
         publicClientAddress: payload.wrapperInformation.publicClientAddress,
         publicServerAddress: payload.wrapperInformation.publicServerAddress,
-        physicalAddress: payload.wrapperInformation.physicalAddress
+        physicalAddress: payload.wrapperInformation.physicalAddress,
+        isGateWay: payload.wrapperInformation.isGateWay
       };
     }
     if (payload.hdlcInformation) {
@@ -238,7 +240,8 @@ export class MeterUnitsService {
 
   updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
     const muRequest: MuUpdatePlcRequest = {
-      name: payload.name
+      name: payload.name,
+      externalId: payload.externalId
     };
     return this.updateMuPlc(payload.deviceId, muRequest);
   }

@@ -1,6 +1,10 @@
 <div class="mb-3" *ngIf="!edit">
-  <button class="btn btn-primary me-2" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
+  <button class="btn btn-primary" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
     <span>{{ 'COMMON.EDIT' | translate }}</span>
+  </button>
+  <button (click)="onDelete()" [permission]="permissionEdit" appHideIfPermissionUnauthorized
+          class="btn btn-primary me-2">
+    <span>{{ 'COMMON.DELETE' | translate }}</span>
   </button>
   <app-dc-operations [showOperations]="true" [requestModel]="null"
     [guid]="concentratorId" [selectedItemsCount]="1"></app-dc-operations>

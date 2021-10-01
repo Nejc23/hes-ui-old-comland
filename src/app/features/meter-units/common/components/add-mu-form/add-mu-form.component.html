@@ -95,7 +95,26 @@
 
                   </div>
                 </div>
+
               </ng-container>
+
+              <div (click)="toggle()" aria-controls="collapse" aria-expanded="false"
+                   class="gray-color-dark text-normal pt-2"
+                   data-bs-toggle="collapse"
+                   data-target="#collapse" type="button">
+                {{ 'COMMON.ADVANCED' | translate }}
+                <i *ngIf="!opened" class="far fa-angle-down me-2"></i>
+                <i *ngIf="opened" class="far fa-angle-up me-2"></i>
+              </div>
+
+              <div [ngClass]="opened ? 'show' : ''" class="collapse mt-3" id="collapse">
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-input-text [form]="form" [property]="externalIdProperty" label="EXTERNAL-ID">
+                    </app-input-text>
+                  </div>
+                </div>
+              </div>
             </div>
 
           </ng-template>
@@ -229,7 +248,8 @@
               <div *ngIf="isWrapperSelected">
                 <div class="form-row pt-3">
                   <div class="col-6">
-                    <app-input-switch (valueChanged)="gatewayChanged($event)" [form]="form" [property]="isGatewayProperty"
+                    <app-input-switch (valueChanged)="gatewayChanged($event)" [form]="form"
+                                      [property]="wrapperIsGatewayProperty"
                                       label="GATEWAY">
                     </app-input-switch>
                   </div>

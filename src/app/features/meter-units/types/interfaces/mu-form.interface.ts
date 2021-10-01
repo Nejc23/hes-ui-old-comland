@@ -16,7 +16,6 @@ export interface MuForm {
   ip: string;
   port: number;
   communicationType: number;
-  isGateway: boolean;
   jobIds: string[];
   authenticationType: AuthenticationTypeEnum;
 
@@ -24,4 +23,5 @@ export interface MuForm {
   wrapperInformation?: MuWrapperInformation;
   hdlcInformation?: MuHdlcInformation;
   referencingType: ReferenceType;
+  externalId?: string;
 }

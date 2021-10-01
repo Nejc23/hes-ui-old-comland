@@ -9,11 +9,13 @@ export class DataConcentratorUnitsGridEventEmitterService {
   public eventEmitterSelectDeselectAll: EventEmitter<number>;
   public eventEmitterLayoutChange: EventEmitter<DcuLayout>;
   public eventEmitterDcuAdded: EventEmitter<DataConcentratorUnitsList>;
+  public eventEmitterConcentratorDeleted: EventEmitter<boolean>;
 
   constructor() {
     this.eventEmitterSelectDeselectAll = new EventEmitter<number>();
     this.eventEmitterLayoutChange = new EventEmitter<DcuLayout>();
     this.eventEmitterDcuAdded = new EventEmitter<DataConcentratorUnitsList>();
+    this.eventEmitterConcentratorDeleted = new EventEmitter<boolean>();
   }
 
   // for check-box in header
@@ -28,5 +30,9 @@ export class DataConcentratorUnitsGridEventEmitterService {
 
   public addNewDcuToList(value: DataConcentratorUnitsList) {
     this.eventEmitterDcuAdded.emit(value);
+  }
+
+  public concentratorDeleted(result: boolean) {
+    this.eventEmitterConcentratorDeleted.emit(result);
   }
 }

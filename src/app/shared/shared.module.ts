@@ -17,6 +17,7 @@ import { environment } from '../../environments/environment';
 import { DataConcentratorUnitsSelectComponent } from '../features/data-concentrator-units-select/component/data-concentrator-units-select.component';
 import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/common/components/dcu-fw-upgrade.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
+import { DeleteDcuFormComponent } from '../features/data-concentrator-units/components/delete-dcu-form/delete-dcu-form.component';
 import { EditDcuFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
@@ -115,6 +116,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     BsDropdownModule,
     SaveViewFormComponent,
     AddDcuFormComponent,
+    DeleteDcuFormComponent,
     EditDcuFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
@@ -207,6 +209,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HeaderTitleComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
+    DeleteDcuFormComponent,
     EditDcuFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
@@ -274,6 +277,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ModalConfirmComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
+    DeleteDcuFormComponent,
     EditDcuFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
