@@ -22,7 +22,6 @@ export class MeterUnitInterceptor {
       manufacturer: 'Vendor 1',
       ip: '192.168.94.145',
       port: 1001,
-      isGateWay: null,
       deviceStatus: 'active',
       hdlcInformation: null,
       wrapperInformation: {
@@ -30,6 +29,7 @@ export class MeterUnitInterceptor {
         publicServerAddress: null,
         clientAddress: 1,
         serverAddress: 1,
+        isGateWay: null,
         physicalAddress: null
       },
       advancedInformation: {
@@ -70,7 +70,6 @@ export class MeterUnitInterceptor {
       manufacturer: 'Vendor 1',
       ip: '192.168.94.145',
       port: 1001,
-      isGateWay: null,
       deviceStatus: 'active',
       hdlcInformation: null,
       wrapperInformation: {
@@ -78,7 +77,8 @@ export class MeterUnitInterceptor {
         publicServerAddress: null,
         clientAddress: 1,
         serverAddress: 1,
-        physicalAddress: null
+        physicalAddress: null,
+        isGateWay: null
       },
       advancedInformation: {
         startWithRelease: true,

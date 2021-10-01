@@ -68,6 +68,7 @@ export class AddMuFormComponent implements OnInit {
   isGatewayEnabled = false;
 
   templateDefaultValues: GetDefaultInformationResponse;
+  opened = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -83,36 +84,6 @@ export class AddMuFormComponent implements OnInit {
   ) {
     this.form = this.createForm();
     this.communicationTypeChanged(this.defaultCommunicationType);
-  }
-
-  ngOnInit() {
-    this.codelistServiceMu
-      .meterUnitVendorCodelist(null)
-      .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
-      .subscribe((manufacturers) => {
-        this.manufacturers = manufacturers;
-
-        if (this.isEditMu) {
-          const manufacturer = this.manufacturers.find((t) => this.editMu.manufacturer.toLowerCase() === t.value.toLowerCase());
-          this.form.get(this.manufacturerProperty).setValue(manufacturer);
-        }
-      });
-
-    this.autoTemplateService.getTemplates().subscribe((temps) => {
-      this.templates = temps
-        .map((t) => {
-          return { id: t.templateId, value: t.name };
-        })
-        .sort((a, b) => {
-          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
-        });
-
-      if (this.isEditMu) {
-        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
-        this.form.get(this.templateProperty).setValue(template);
-        this.isTemplateSelected = template && template.id ? true : false;
-      }
-    });
   }
 
   get nameProperty() {
@@ -171,8 +142,8 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuWrapperInformation>((o) => o.physicalAddress);
   }
 
-  get isGatewayProperty() {
-    return nameOf<MuForm>((o) => o.isGateway);
+  get wrapperIsGatewayProperty() {
+    return nameOf<MuWrapperInformation>((o) => o.isGateWay);
   }
 
   get advancedStartWithReleaseProperty() {
@@ -227,6 +198,44 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.referencingType);
   }
 
+  get externalIdProperty() {
+    return nameOf<MuForm>((o) => o.externalId);
+  }
+
+  get isNewOrProtocolDlms() {
+    return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
+  }
+
+  ngOnInit() {
+    this.codelistServiceMu
+      .meterUnitVendorCodelist(null)
+      .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
+      .subscribe((manufacturers) => {
+        this.manufacturers = manufacturers;
+
+        if (this.isEditMu) {
+          const manufacturer = this.manufacturers.find((t) => this.editMu.manufacturer.toLowerCase() === t.value.toLowerCase());
+          this.form.get(this.manufacturerProperty).setValue(manufacturer);
+        }
+      });
+
+    this.autoTemplateService.getTemplates().subscribe((temps) => {
+      this.templates = temps
+        .map((t) => {
+          return { id: t.templateId, value: t.name };
+        })
+        .sort((a, b) => {
+          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+        });
+
+      if (this.isEditMu) {
+        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
+        this.form.get(this.templateProperty).setValue(template);
+        this.isTemplateSelected = template && template.id ? true : false;
+      }
+    });
+  }
+
   createForm(editMu: MeterUnitDetails = null): FormGroup {
     const communicationType = this.getCommunicationType(editMu);
     let authenticationType = this.authenticationTypes.find(
@@ -235,6 +244,7 @@ export class AddMuFormComponent implements OnInit {
     if (!authenticationType) {
       authenticationType = this.authenticationTypes[1];
     }
+
     return this.formBuilder.group({
       [this.nameProperty]: [editMu?.name],
       [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
@@ -257,7 +267,7 @@ export class AddMuFormComponent implements OnInit {
       [this.wrapperServerAddressProperty]: [editMu?.wrapperInformation?.serverAddress, Validators.required],
       [this.wrapperPublicClientAddressProperty]: [editMu?.wrapperInformation?.publicClientAddress, Validators.required],
       [this.wrapperPublicServerAddressProperty]: [editMu?.wrapperInformation?.publicServerAddress, Validators.required],
-      [this.isGatewayProperty]: [false],
+      [this.wrapperIsGatewayProperty]: [editMu?.wrapperInformation?.isGateWay],
       [this.wrapperPhysicalAddressProperty]: [editMu?.wrapperInformation?.physicalAddress, Validators.required],
 
       // hdlc
@@ -273,7 +283,8 @@ export class AddMuFormComponent implements OnInit {
       // advanced
       [this.advancedStartWithReleaseProperty]: [editMu?.advancedInformation?.startWithRelease],
       [this.advancedLdnAsSystitleProperty]: [editMu?.advancedInformation?.ldnAsSystitle],
-      [this.authenticationTypeProperty]: [authenticationType, Validators.required]
+      [this.authenticationTypeProperty]: [authenticationType, Validators.required],
+      [this.externalIdProperty]: [editMu?.externalId]
     });
   }
 
@@ -404,7 +415,7 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.wrapperServerAddressProperty).enable();
       this.form.get(this.wrapperPublicClientAddressProperty).enable();
       this.form.get(this.wrapperPublicServerAddressProperty).enable();
-      this.form.get(this.isGatewayProperty).enable();
+      this.form.get(this.wrapperIsGatewayProperty).enable();
 
       if (this.isGatewayEnabled) {
         this.form.get(this.wrapperPhysicalAddressProperty).enable();
@@ -416,7 +427,7 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.wrapperServerAddressProperty).disable();
       this.form.get(this.wrapperPublicClientAddressProperty).disable();
       this.form.get(this.wrapperPublicServerAddressProperty).disable();
-      this.form.get(this.isGatewayProperty).disable();
+      this.form.get(this.wrapperIsGatewayProperty).disable();
       this.form.get(this.wrapperPhysicalAddressProperty).disable();
     }
   }
@@ -549,7 +560,8 @@ export class AddMuFormComponent implements OnInit {
         serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
         publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
         publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
-        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
+        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value,
+        isGateWay: this.form.get(this.wrapperIsGatewayProperty).value
       };
     }
 
@@ -576,7 +588,6 @@ export class AddMuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       communicationType: +this.form.get(this.communicationTypeProperty).value,
-      isGateway: this.form.get(this.isGatewayProperty).value,
       jobIds: selectedJobs, // session selected jobs
       authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       advancedInformation: {
@@ -586,7 +597,8 @@ export class AddMuFormComponent implements OnInit {
       },
       wrapperInformation,
       hdlcInformation,
-      referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
+      referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME,
+      externalId: this.form.get(this.externalIdProperty).value
     };
   }
 
@@ -598,7 +610,8 @@ export class AddMuFormComponent implements OnInit {
         serverAddress: this.form.get(this.wrapperServerAddressProperty).value,
         publicClientAddress: this.form.get(this.wrapperPublicClientAddressProperty).value,
         publicServerAddress: this.form.get(this.wrapperPublicServerAddressProperty).value,
-        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value
+        physicalAddress: this.form.get(this.wrapperPhysicalAddressProperty).value,
+        isGateWay: this.form.get(this.wrapperIsGatewayProperty).value
       };
     }
 
@@ -631,7 +644,6 @@ export class AddMuFormComponent implements OnInit {
       manufacturer: this.form.get(this.manufacturerProperty).value,
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
-      isGateWay: this.form.get(this.isGatewayProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
       advancedInformation,
@@ -642,14 +654,16 @@ export class AddMuFormComponent implements OnInit {
       template: this.form.get(this.templateProperty).value,
       connectionType: this.form.get(this.connectionTypeProperty).value,
       protocol: this.isNewOrProtocolDlms ? 2 : 0,
-      referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME
+      referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME,
+      externalId: this.form.get(this.externalIdProperty).value
     };
   }
 
   fillUpdatePlcData(): MuUpdatePlcForm {
     return {
       deviceId: this.editMu.deviceId,
-      name: this.form.get(this.nameProperty).value
+      name: this.form.get(this.nameProperty).value,
+      externalId: this.form.get(this.externalIdProperty).value
     };
   }
 
@@ -660,6 +674,7 @@ export class AddMuFormComponent implements OnInit {
       this.shortNameSelected = true;
     }
     this.form = this.createForm(muDetails);
+    this.isGatewayEnabled = muDetails.wrapperInformation?.isGateWay;
   }
 
   getTitle(): string {
@@ -688,11 +703,11 @@ export class AddMuFormComponent implements OnInit {
     this.modal.dismiss();
   }
 
-  get isNewOrProtocolDlms() {
-    return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
-  }
-
   onShortNameChanges(event: Event) {
     this.shortNameSelected = !!event;
+  }
+
+  toggle() {
+    this.opened = !this.opened;
   }
 }

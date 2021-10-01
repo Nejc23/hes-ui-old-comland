@@ -4,4 +4,5 @@ export interface MuWrapperInformation {
   publicClientAddress: number;
   publicServerAddress: number;
   physicalAddress: number;
+  isGateWay: boolean;
 }

@@ -10,12 +10,12 @@ import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-unit
 import { v4 as uuidv4 } from 'uuid';
 import {
   addConcentrator,
-  bulkDelete,
   dataConcentrator,
-  dataConcentratorUnits,
   dcuForJob,
   dcuLayout,
   dcuSync,
+  deleteConcentrators,
+  getConcentrators,
   removeDcuFromJob,
   updateConcentrator
 } from '../../consts/data-concentrator-units.const';
@@ -23,11 +23,10 @@ import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/d
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { DcuInsertRequest } from '../../interfaces/data-concentrator-units/dcu-insert-request.interface';
 import { DcuUpdateRequest } from '../../interfaces/data-concentrator-units/dcu-update-request.interface';
-import { GridBulkActionRequestParams } from '../../interfaces/helpers/grid-bulk-action-request-params.interface';
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
-import { IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
+import { IActionRequestDeleteDevice, IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -49,7 +48,7 @@ export class DataConcentratorUnitsService {
   }
 
   getGridDcuRequest(param: IActionRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', dataConcentratorUnits, param);
+    return new HttpRequest('POST', getConcentrators, param);
   }
 
   getDcuLayout(): Observable<DcuLayout[]> {
@@ -84,12 +83,12 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', dcuLayout, payload as any);
   }
 
-  deleteDcu(object: GridBulkActionRequestParams): Observable<any> {
-    return this.repository.makeRequest(this.deleteDcuRequest(object));
+  deleteDcu(requestParam: IActionRequestDeleteDevice): Observable<any> {
+    return this.repository.makeRequest(this.deleteDcuRequest(requestParam));
   }
 
-  deleteDcuRequest(object: GridBulkActionRequestParams): HttpRequest<any> {
-    return new HttpRequest('POST', `${bulkDelete}`, object);
+  deleteDcuRequest(param: IActionRequestDeleteDevice): HttpRequest<any> {
+    return new HttpRequest('POST', `${deleteConcentrators}`, param);
   }
 
   createDcu(payload: DcuForm): Observable<string> {
@@ -100,7 +99,8 @@ export class DataConcentratorUnitsService {
       vendor: payload.manufacturer ? payload.manufacturer.id : -1,
       name: payload.name,
       userName: payload.userName,
-      password: payload.password
+      password: payload.password,
+      externalId: payload.externalId
     };
 
     return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
@@ -110,7 +110,7 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', addConcentrator, payload as any);
   }
 
-  updateDcu(id: string, payload: EditDcuForm): Observable<string> {
+  updateDcu(id: string, payload: EditDcuForm): Observable<DcuUpdateRequest[]> {
     const dcuRequest: DcuUpdateRequest = {
       ip: payload.ip,
       serialNumber: payload.serialNumber,

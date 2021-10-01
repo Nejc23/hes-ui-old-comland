@@ -35,6 +35,11 @@
                 <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
+            <div *ngIf="getSelectedCount() > 0" class="me-3">
+              <button class="btn btn-primary" [permission]="permissionAdd" appHideIfPermissionUnauthorized (click)="onDelete()">
+                <span>{{ 'COMMON.DELETE' | translate }}</span>
+              </button>
+            </div>
             <div class="pe-3">
               <app-dc-operations
                 [allVisibleColumns]="getAllDisplayedColumnsNames()"

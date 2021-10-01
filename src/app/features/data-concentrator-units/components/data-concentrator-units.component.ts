@@ -12,7 +12,6 @@ import { ModalService } from 'src/app/core/modals/services/modal.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
 import { DataConcentratorUnitsList } from 'src/app/core/repository/interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
-import { GridBulkActionRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-bulk-action-request-params.interface';
 import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
@@ -22,7 +21,6 @@ import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 // consts
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
@@ -38,6 +36,7 @@ import { DataConcentratorUnitsGridService } from '../services/data-concentrator-
 import { DataConcentratorUnitsStaticTextService } from '../services/data-concentrator-units-static-text.service';
 import { DcOperationsService } from '../services/dc-operations.service';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
+import { DeleteDcuFormComponent } from './delete-dcu-form/delete-dcu-form.component';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -56,6 +55,7 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
   filtersInfo: FiltersInfo;
   private layoutChangeSubscription: Subscription;
   private dcuAddedSubscription: Subscription;
+  private dcuConcentratorDeleted: Subscription;
   private subscription: Subscription;
   public localeText;
 
@@ -226,6 +226,11 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     };
 
     this.bredcrumbService.setPageName(this.headerTitle);
+
+    this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
+      this.deselectAll();
+      this.refreshGrid();
+    });
   }
 
   ngOnDestroy(): void {
@@ -235,7 +240,9 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     if (this.dcuAddedSubscription) {
       this.dcuAddedSubscription.unsubscribe();
     }
-
+    if (this.dcuConcentratorDeleted) {
+      this.dcuConcentratorDeleted.unsubscribe();
+    }
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
@@ -496,63 +503,17 @@ export class DataConcentratorUnitsComponent implements OnInit, OnDestroy {
     //
   }
 
-  // delete button click
-  onDelete() {
-    let selectedText = 'all';
-    const object: GridBulkActionRequestParams = {
-      id: [],
-      filter: {
-        statuses: [],
-        readStatus: {
-          operation: { id: '', value: '' },
-          value1: 0,
-          value2: 0
-        },
-        types: [],
-        tags: [],
-        showOptionFilter: null
-      }
-    };
-    if (!this.dataConcentratorUnitsGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.dataConcentratorUnitsGridService.getSessionSettingsSelectedRows();
-      selectedRows.forEach((element) => {
-        object.id.push(element.id);
-      });
-      object.filter = null;
-      selectedText = selectedRows ? selectedRows.length.toString() : '0';
-    } else {
-      object.filter = this.requestModel.filterModel;
-      object.id = null;
-    }
-
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.btnConfirmText = this.translate.instant('COMMON.DELETE');
-    component.modalBody = this.translate.instant('DCU.CONFIRM-DELETE', { param: selectedText });
-
-    modalRef.result.then(
-      (data) => {
-        // on close (CONFIRM)
-        const request = this.dataConcentratorUnitsService.deleteDcu(object);
-        this.formUtils.deleteForm(request, this.translate.instant('COMMON.SELECTED-ITEMS-DELETED')).subscribe(
-          (response: any) => {
-            this.dataConcentratorUnitsGridService.setSessionSettingsSelectedRows([]);
-            this.dataConcentratorUnitsGridService.setSessionSettingsExcludedRows([]);
-            this.dataConcentratorUnitsGridService.setSessionSettingsSelectedAll(false);
-            this.eventService.selectDeselectAll(-1);
-            this.gridApi.forEachNode((node) => {
-              node.setSelected(false);
-            });
-
-            this.gridApi.onFilterChanged();
-          },
-          () => {}
-        );
-      },
-      (reason) => {
-        // on dismiss (CLOSE)
-      }
+  onDelete(selectedGuid: string) {
+    const params = this.dcOperationsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
     );
+
+    const modalRef = this.modalService.open(DeleteDcuFormComponent);
+    const component: DeleteDcuFormComponent = modalRef.componentInstance;
+    component.applyRequestParams(params, this.getSelectedCount());
   }
 
   getTotalCountWithoutExcluded(): string {

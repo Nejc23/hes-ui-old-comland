@@ -543,6 +543,7 @@
     "USERS": "Users"
   },
   "MODAL": {
+    "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
     "FOR-DEVICES": " for selected devices",
     "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",

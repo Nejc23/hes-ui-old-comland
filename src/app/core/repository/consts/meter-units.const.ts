@@ -10,6 +10,8 @@ export const meterUnitCiiStates = `${basePath}/meter-unit-cii-states`;
 
 // meter units by type
 export const meterUnits = `${basePath}/meters`;
+export const getMeters = `${meterUnits}/get`;
+export const deleteMeters = `${meterUnits}/delete`;
 export const meterUnitsBreakerState = `${basePath}/meter-units-breaker-state`;
 export const meterUnitsLayout = `layouts`;
 export const meterUnitsScheduler = `/api/meter-units-scheduler`;
