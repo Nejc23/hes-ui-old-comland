@@ -13,13 +13,13 @@ import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
 import {
+  device,
   meterUnits,
-  meterUnitsLayout,
   meterUnitsBreakerState,
-  touConfigImport,
   meterUnitsForJob,
+  meterUnitsLayout,
   removeMeterUnitsFromJob,
-  device
+  touConfigImport
 } from '../../consts/meter-units.const';
 import { v4 as uuidv4 } from 'uuid';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
@@ -154,7 +154,8 @@ export class MeterUnitsService {
         authenticationType: payload.authenticationType,
         ldnAsSystitle: payload.advancedInformation?.ldnAsSystitle,
         startWithRelease: payload.advancedInformation?.startWithRelease
-      }
+      },
+      externalId: payload.externalId
     };
 
     if (payload.wrapperInformation) {
@@ -200,7 +201,8 @@ export class MeterUnitsService {
       templateId: payload.template.id,
       interfaceType: payload.communicationType,
       driver: payload.driver,
-      referencingType: payload.referencingType
+      referencingType: payload.referencingType,
+      externalId: payload.externalId
     };
 
     if (payload.advancedInformation) {
@@ -238,7 +240,8 @@ export class MeterUnitsService {
 
   updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
     const muRequest: MuUpdatePlcRequest = {
-      name: payload.name
+      name: payload.name,
+      externalId: payload.externalId
     };
     return this.updateMuPlc(payload.deviceId, muRequest);
   }

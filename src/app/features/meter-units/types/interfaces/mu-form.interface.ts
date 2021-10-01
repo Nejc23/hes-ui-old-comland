@@ -23,4 +23,5 @@ export interface MuForm {
   wrapperInformation?: MuWrapperInformation;
   hdlcInformation?: MuHdlcInformation;
   referencingType: ReferenceType;
+  externalId?: string;
 }

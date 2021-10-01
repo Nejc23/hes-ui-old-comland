@@ -18,4 +18,5 @@ export interface MuCreateRequest {
   wrapperInformation?: MuWrapperInformation;
   advancedInformation: MuAdvancedInformation;
   referencingType: ReferenceType;
+  externalId?: string;
 }
