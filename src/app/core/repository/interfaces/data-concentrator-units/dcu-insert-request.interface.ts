@@ -10,4 +10,5 @@ export interface DcuInsertRequest {
   mac?: string;
   status?: number;
   port?: string;
+  externalId: string;
 }

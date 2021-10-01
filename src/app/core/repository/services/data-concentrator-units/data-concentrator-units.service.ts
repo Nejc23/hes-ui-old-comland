@@ -17,8 +17,8 @@ import {
   deleteConcentrators,
   getConcentrators,
   removeDcuFromJob,
-  validateHostname,
-  updateConcentrator
+  updateConcentrator,
+  validateHostname
 } from '../../consts/data-concentrator-units.const';
 import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
@@ -100,7 +100,8 @@ export class DataConcentratorUnitsService {
       vendor: payload.manufacturer ? payload.manufacturer.id : -1,
       name: payload.name,
       userName: payload.userName,
-      password: payload.password
+      password: payload.password,
+      externalId: payload.externalId
     };
 
     return this.repository.makeRequest(this.createDcuRequest(dcuRequest));
