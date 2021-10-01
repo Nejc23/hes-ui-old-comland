@@ -99,6 +99,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import { DataTableComponent } from './data-table/data-table.component';
 import { SlideOutComponentComponent } from './slide-out-component/slide-out-component.component';
+import { NoDataComponent } from './no-data/no-data.component';
 import { SecurityRekeyConcentratorComponent } from '../features/data-concentrator-units/components/security/security-rekey-concentrator.component';
 
 // required for AOT compilation
@@ -180,7 +181,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     LeafletModule,
     GridModule,
     DataTableComponent,
-    SlideOutComponentComponent
+    SlideOutComponentComponent,
+    NoDataComponent
   ],
   imports: [
     CommonModule,
@@ -302,6 +304,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MiniCardItemComponent,
     DataTableComponent,
     SlideOutComponentComponent,
+    NoDataComponent,
     SecurityRekeyConcentratorComponent
   ],
   entryComponents: [

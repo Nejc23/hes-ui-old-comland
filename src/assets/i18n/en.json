@@ -185,7 +185,9 @@
     "NOT-DEFINED": "N/A",
     "DETAILS": "Details",
     "EDIT-DETAILS": "Edit details",
-    "EVENTS": "Events"
+    "EVENTS": "Events",
+    "SHOW-DETAILS": "Show details",
+    "HIDE-DETAILS": "Hide details"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -277,6 +279,7 @@
     "END": "End",
     "END-AT": "End at",
     "END-TIME": "End time:",
+    "TIME": "Time",
     "ERROR": {
       "ACTION-NOT-EXISTS": "Action not exists",
       "DCU-ERROR": "Error saving DCU!",
@@ -666,7 +669,7 @@
       "EVENT-TYPE": "Event type",
       "NO-AVAILABLE-DATA": "There seems to be no available data to show.",
       "NO-REGISTER-SELECTED": "No register selected",
-      "NUMBER-OF-EVENTS": "Number of events",
+      "NUMBER-OF-EVENTS": "No. of events per period",
       "REFRESH-DATA": "Refresh data",
       "SELECT-REGISTER": "To display data, select register from the list on the left.",
       "SHOW-HIDE-REGISTERS": "Show/hide registers"

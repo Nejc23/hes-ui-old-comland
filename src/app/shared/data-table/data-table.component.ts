@@ -1,9 +1,11 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { GridDataResult, PageChangeEvent, PageSizeItem, RowClassArgs } from '@progress/kendo-angular-grid';
+import { GridDataResult, PageChangeEvent, PageSizeItem, RowArgs, RowClassArgs } from '@progress/kendo-angular-grid';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import { process } from '@progress/kendo-data-query';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query/dist/npm/filtering/filter-descriptor.interface';
+import * as moment from 'moment';
+import { environment } from '../../../environments/environment';
 
 export interface GridColumn {
   translationKey: string;
@@ -24,7 +26,6 @@ export enum GridColumnType {
   ENUM = 'enum',
   COLORED_ENUM = 'colored-enum',
   DATE = 'date',
-  ICON = 'icon',
   DATE_TIME = 'date-time'
 }
 
@@ -53,30 +54,33 @@ export interface GridFilter {
 export class DataTableComponent implements OnInit, OnChanges {
   public gridView: GridDataResult;
   gridViewFilter: any;
-  @Input() gridData: any;
-  @Input() simpleGrid = true; // todo check if needed
-
+  @Input() gridData: any; //   this.data = [...this.data]; // for KendoUI change detection
   @Input() gridColumns: Array<GridColumn> = [];
   @Input() rowActions: Array<GridRowAction> = [];
-
-  @Input() filters: Array<GridFilter>; // dropdown filters
 
   columnType = GridColumnType;
   // Grid properties
   @Input() gridProperties = [];
-  @Input() scrollable: ScrollMode = 'none';
+  @Input() scrollable: ScrollMode = 'none'; // virtual scroll requires fixed height
   @Input() loading = false;
+  // buttons over the data table
   @Input() withSearch = false;
   @Input() excelExport = false;
+  @Input() refresh = false;
+  @Input() filters: Array<GridFilter>; // dropdown filters
 
   @Input() tableClass;
   @Input() pageSize = 12;
   @Input() skip = 0;
   @Input() pageable = false;
   @Input() stickyHeader = false;
-  @Input() tableHeight = 0;
-  @Input() totalRecords;
+  @Input() tableHeight = 450;
+  @Input() total;
+  @Input() rowHeight: number; // required for virtual scroll
+  @Input() fetchData = false; // fetch data from API on next page
+  @Input() excelFileName = '';
 
+  pageNumber = 1;
   pageSizes: PageSizeItem[] = [
     {
       text: '5',
@@ -94,6 +98,8 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   @Output() switchClickedEvent = new EventEmitter<any>();
   @Output() rowActionClickedEvent = new EventEmitter<any>();
+  @Output() selectedRowDataEvent = new EventEmitter<any>();
+  @Output() pageChangedEvent = new EventEmitter<PageChangeEvent>();
 
   constructor() {}
 
@@ -105,6 +111,10 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.allData = this.allData.bind(this);
   }
 
+  mySelectionKey(context: RowArgs): string {
+    return context.dataItem;
+  }
+
   rowClass(context: RowClassArgs) {
     const isEven = context.index % 2 == 0;
     return {
@@ -114,6 +124,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+    // data changed
     this.initGrid();
   }
 
@@ -125,10 +136,17 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.rowActionClickedEvent.emit({ actionName: actionName, id: id });
   }
 
-  pageChange({ skip, take }: PageChangeEvent): void {
-    this.skip = skip;
-    this.pageSize = take;
-    this.loadItems(this.gridData);
+  public pageChange(event: PageChangeEvent): void {
+    // fetch data from API
+    if (this.fetchData && this.pageNumber * this.pageSize < this.total) {
+      this.pageNumber++;
+      this.loading = true;
+      this.pageChangedEvent.emit(event);
+    } else {
+      // client side data
+      this.skip = event.skip;
+      this.loadItems(this.gridData, this.total ? this.total : this.gridData.length);
+    }
   }
 
   colorExist(enumValue: string, coloredValues: ColoredValue[]) {
@@ -144,22 +162,21 @@ export class DataTableComponent implements OnInit, OnChanges {
   public allData(): ExcelExportData {
     return {
       data: process(this.gridData, {
-        sort: [{ field: 'id', dir: 'asc' }]
+        sort: [{ field: 'id', dir: 'asc' }] // currently we export ALL data
       }).data
     };
   }
 
-  // todo refactor
   public onFilter(inputValue: string): void {
+    this.skip = 0;
     this.gridViewFilter = this.gridData;
     const filterTemp: CompositeFilterDescriptor = {
       logic: 'or',
       filters: []
     };
     // Search all only for string fields
-    // columns need to be defined for Search
+    // columns need to be defined for Search all
     const columns = this.gridColumns.filter((column) => column.type !== (GridColumnType.SWITCH || GridColumnType.RADIO));
-
     columns.forEach((column) => {
       filterTemp.filters.push({
         field: column.field,
@@ -172,12 +189,11 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.gridViewFilter = process(this.gridData, {
       filter: filterTemp
     }).data;
-    // todo load more data from BE
-    this.loadItems(this.gridViewFilter);
+
+    this.loadItems(this.gridViewFilter, this.gridViewFilter.length);
   }
 
   dropdownValueChanged(value, field) {
-    // todo load more data from BE
     this.gridViewFilter = this.gridData;
 
     if (value !== 'All') {
@@ -185,40 +201,46 @@ export class DataTableComponent implements OnInit, OnChanges {
         logic: 'and',
         filters: []
       };
-      // Search all only for string fields
-      // columns need to be defined for Search
-
       filterTemp.filters.push({
         field: field,
         operator: 'eq',
-        value: value.toString(),
+        value: value,
         ignoreCase: true
       });
-
       this.gridViewFilter = process(this.gridData, {
         filter: filterTemp
       }).data;
-      // todo load more data from BE
-      this.loadItems(this.gridViewFilter);
     }
+
+    this.loadItems(this.gridViewFilter, this.gridViewFilter.length);
   }
 
   initGrid() {
     if (this.gridData) {
-      this.loadItems(this.gridData);
+      this.loadItems(this.gridData, this.total ? this.total : this.gridData.length);
     } else {
+      // no data
       this.gridView = {
         data: [],
         total: 0
       };
     }
+    this.loading = false;
   }
 
-  private loadItems(data: any): void {
+  selectedCell(event: any) {
+    this.selectedRowDataEvent.emit(event.dataItem);
+  }
+
+  getCurrentDateTime() {
+    return moment().format(environment.dateDisplayFormat) + ' ' + moment().format(environment.timeFormatLong);
+  }
+
+  private loadItems(data: any, count: number): void {
     if (data) {
       this.gridView = {
         data: data.slice(this.skip, this.skip + this.pageSize),
-        total: this.totalRecords ? this.totalRecords : this.gridData.length
+        total: count
       };
     }
   }

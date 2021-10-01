@@ -18,4 +18,5 @@ export interface MeterUnitDetails {
   wrapperInformation?: MuWrapperInformation;
   advancedInformation: MuAdvancedInformation;
   referencingType: ReferenceType;
+  externalId?: string;
 }

@@ -17,9 +17,11 @@ export interface MuUpdateRequest {
   interfaceType: number;
   driver: number;
   referencingType: ReferenceType;
+  externalId?: string;
 }
 
 export interface MuUpdatePlcRequest {
   deviceId?: string;
   name: string;
+  externalId?: string;
 }

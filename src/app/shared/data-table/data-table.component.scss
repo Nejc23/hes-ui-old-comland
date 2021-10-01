@@ -1,7 +1,3 @@
-//::ng-deep .k-grid td, .k-grid .k-grid-content, .k-grid .k-grid-header-locked, .k-grid .k-grid-content-locked {
-//  border-color: transparent !important;
-//}
-
 ::ng-deep .k-grid table tr:hover {
   &:hover {
     .grid-row-button {
@@ -39,7 +35,6 @@
   padding: 0 16px;
 }
 
-
 ::ng-deep .k-grid .k-alt {
   background-color: transparent;
 }
@@ -66,10 +61,6 @@
   background-color: white;
 }
 
-::ng-deep input.k-textbox {
-  @apply tw-rounded;
-}
-
 .grid-row-button {
   @apply tw-inline-flex;
   @apply tw-justify-between;
@@ -80,7 +71,6 @@
   @apply tw-border-solid;
   @apply tw-bg-white;
   visibility: hidden;
-
   position: relative;
   right: -52%;
   bottom: 10px;
@@ -96,5 +86,53 @@
 }
 
 .fixed-height {
-  height: 635px; // to rem
+  min-height: 39.6875rem;
+}
+
+::ng-deep .k-button, .k-button-secondary {
+  @apply tw-rounded;
+  @apply tw-border-mediumGray;
+  @apply tw-border-solid;
+  border-radius: 2px;
+  background-color: white;
+}
+
+::ng-deep .k-dropdown .k-dropdown-wrap {
+  @apply tw-rounded;
+  @apply tw-border-mediumGray;
+  @apply tw-border-solid;
+  border-radius: 2px;
+  background-color: white;
+}
+
+::ng-deep .k-button:hover, .k-button.k-state-hover, .k-button-secondary:hover, .k-button-secondary.k-state-hover {
+  background-color: transparent;
+}
+
+::ng-deep span.k-icon {
+  color: #CED2D9;
+}
+
+::ng-deep .k-toolbar {
+  border-bottom: 0 !important;
+}
+
+.gray-border {
+  @apply tw-rounded-sm;
+  @apply tw-border-mediumGray;
+  @apply tw-border-solid;
+  @apply tw-border;
+}
+
+//kendo toolbar position over the chart hack
+.with-chart.visible ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
+  position: relative;
+  bottom: 25rem;
+  margin-left: 22.5rem;
+}
+
+.with-chart.hidden ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
+  position: relative;
+  bottom: 8.7rem;
+  margin-left: 22.5rem;
 }
