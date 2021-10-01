@@ -34,7 +34,7 @@ export class ModalConfirmComponent {
   @Input() confirmMessage = '';
   @Input() withoutCancelButton = false;
   @Input() alertText = '';
-
+  @Input() dangerText = ''; // alert with exclamation icon
   showSecondConfirm = false;
 
   constructor(public activeModal: NgbActiveModal) {}
@@ -44,7 +44,7 @@ export class ModalConfirmComponent {
   }
 
   confirm() {
-    if (this.secondConfirmEnabled && this.checkboxValue == true) {
+    if (this.secondConfirmEnabled) {
       this.showSecondConfirm = true;
       this.secondConfirmEnabled = false;
     } else {

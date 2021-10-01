@@ -145,7 +145,8 @@ export interface IActionResponseDeleteDevice extends IActionResponseParams {
 export interface IActionRequestSecurityRekey extends IActionRequestParams {
   includedIds?: string[];
   excludedIds?: string[];
-  keyType: string;
+  keyType?: string;
+  keyTypes?: string[];
 }
 
 export interface IActionResponseSecurityRekey extends IActionResponseParams {

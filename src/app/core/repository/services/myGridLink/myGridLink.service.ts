@@ -18,6 +18,7 @@ import {
   onDemandSetBreakerMode,
   onDemandSetLimiter,
   onDemandSetMonitor,
+  securityConcentratorRekey,
   triggerConcUpgrade,
   triggerDeviceUpgrade,
   triggerSetTimeOfUse
@@ -102,6 +103,7 @@ export class MyGridLinkService {
   getMyGridLastStatus(requestId: string): Observable<LastStatus[]> {
     return this.repository.makeRequest(this.getMyGridLastStatusRequest(requestId));
   }
+
   // api/concentrator-management
   getMyGridLastStatusRequest(requestId: string): HttpRequest<LastStatus[]> {
     return new HttpRequest('GET', `${enumMyGridLink.managment}/${requestId}${lastStatus}`);
@@ -394,5 +396,13 @@ export class MyGridLinkService {
 
   synchronizeRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandTimeSyc}`, params);
+  }
+
+  postSecurityConcentratorRekey(param: IActionRequestSecurityRekey): Observable<IActionResponseSecurityRekey> {
+    return this.repository.makeRequest(this.postSecurityConcentratorRekeyRequest(param));
+  }
+
+  postSecurityConcentratorRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
+    return new HttpRequest('POST', `${securityConcentratorRekey}`, param);
   }
 }

@@ -99,6 +99,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
 import { DataTableComponent } from './data-table/data-table.component';
 import { SlideOutComponentComponent } from './slide-out-component/slide-out-component.component';
+import { SecurityRekeyConcentratorComponent } from '../features/data-concentrator-units/components/security/security-rekey-concentrator.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -300,7 +301,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     TagElementComponent,
     MiniCardItemComponent,
     DataTableComponent,
-    SlideOutComponentComponent
+    SlideOutComponentComponent,
+    SecurityRekeyConcentratorComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -333,7 +335,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
     AlarmNotificationRulesComponent,
-    PlcReadRegistersComponent
+    PlcReadRegistersComponent,
+    SecurityRekeyConcentratorComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

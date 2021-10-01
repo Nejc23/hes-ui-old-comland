@@ -1,13 +1,15 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header>{{ 'PLC-METER.RELAY-STATE-TITLE' | translate }} ({{selectedRowsCount}} {{ 'COMMON.SELECTED' | translate }})</div>
+  <div modal-header>{{ 'PLC-METER.RELAY-STATE-TITLE' | translate }}
+    ({{selectedRowsCount}} {{ 'COMMON.SELECTED' | translate }})
+  </div>
 
   <div modal-body>
     <ng-container>
       <div class="form-row pt-2">
         <div class="col-12">
           <div class="card-body">
-            <div class="small-title pb-1">{{ 'PLC-METER.RELAY-STATE-BODY' | translate }}</div>
+            <div class="small-title tw-pb-2">{{ 'PLC-METER.RELAY-STATE-BODY' | translate }}</div>
             <div class="text-secondary">{{ 'PLC-METER.RELAY-STATE-SECONDARY-TEXT' | translate }}</div>
           </div>
         </div>
@@ -16,11 +18,11 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onSet()">
+        <button (click)="onSet()" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>
