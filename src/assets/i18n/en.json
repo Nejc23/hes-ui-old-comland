@@ -519,14 +519,14 @@
       "CREATE-JOB": "Create a new job",
       "DELETE": "Do you want to delete scheduler job",
       "ERROR-SAVING": "Error saving job",
-      "EXECUTE": "Do you want to execute scheduler job now",
+      "EXECUTE": "Do you want to execute scheduler job now?",
       "JOB-SUCCESSFULLY": "Job was {{ operation }} successfully",
       "MORE-SAVE-OPTIONS": "More Save options",
       "SELECT-JOB": "To continue, select a job type, please.",
       "STOP": "Do you want to stop running job now?",
       "UPDATED": "updated"
     },
-    "SCHEDULER-JOB-CHANGE-STATUS": "Do you want to change scheduler job status",
+    "SCHEDULER-JOB-CHANGE-STATUS": "Do you want to change scheduler job status?",
     "SCHEDULER-JOB-DISABLED": "Scheduler job disabled!",
     "SCHEDULER-JOB-ENABLED": "Scheduler job enabled!",
     "SCHEDULER-JOB-STARTED": "Scheduler job started!",
@@ -542,7 +542,7 @@
     "TIME-SYNCHRONIZATION": "Time synchronization",
     "TOPOLOGY": "Topology",
     "TOPOLOGY-JOB": "Topology job",
-    "SCHEDULER-JOBS": "Scheduler jobs"
+    "ACTIVE-JOBS": "Active jobs"
   },
   "LANGUAGE": {
     "HR": "Hrvaščina",

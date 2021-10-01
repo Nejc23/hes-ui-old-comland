@@ -55,46 +55,48 @@
 
     <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
       <!--- no data -->
-      <ng-container
-        *ngIf="!dataItem[column.field] && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
-        {{ 'COMMON.NOT-DEFINED' | translate }}
-      </ng-container>
+      <div [ngClass]="rowActions.length > 0 ? 'grid-cell-text' : ''">
+        <ng-container
+          *ngIf="!dataItem[column.field] && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
+          {{ 'COMMON.NOT-DEFINED' | translate }}
+        </ng-container>
 
-      <!--- no type defined is string -->
-      <ng-container *ngIf="!column.type">
-        {{ dataItem[column.field] }}
-      </ng-container>
-
-      <ng-container *ngIf="column.type === columnType.SWITCH">
-        <kendo-switch (valueChange)="switchValueChanged(dataItem.id, $event)"
-                      [checked]="dataItem[column.field]"></kendo-switch>
-      </ng-container>
-
-      <ng-container *ngIf="column.type === columnType.DATE">
-        <div>
-          {{ dataItem[column.field] | date }}
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="column.type === columnType.DATE_TIME">
-        <div>
-          {{ dataItem[column.field] | formatDateTime }}
-        </div>
-      </ng-container>
-
-      <ng-container *ngIf="column.type === columnType.COLORED_ENUM">
-        <label [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
+        <!--- no type defined is string -->
+        <ng-container *ngIf="!column.type">
           {{ dataItem[column.field] }}
-        </label>
-      </ng-container>
+        </ng-container>
 
-      <ng-container *ngIf="rowActions && rowActions.length > 0 && i +1  === gridColumns.length" class="no-padding">
-        <div class="grid-row-button">
-          <img (click)="onRowActionClick(action.actionName, dataItem.id)"
-               *ngFor="let action of rowActions"
-               [src]="'assets/images/icons/' + action.iconName + '.svg'" class="tw-h-4 tw-px-2" />
-        </div>
-      </ng-container>
+        <ng-container *ngIf="column.type === columnType.SWITCH">
+          <kendo-switch [checked]="dataItem[column.field]"
+                        [readonly]="true"></kendo-switch>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.DATE">
+          <div>
+            {{ dataItem[column.field] | date }}
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.DATE_TIME">
+          <div>
+            {{ dataItem[column.field] | formatDateTime }}
+          </div>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.COLORED_ENUM">
+          <label [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
+            {{ dataItem[column.field] }}
+          </label>
+        </ng-container>
+
+        <ng-container *ngIf="rowActions && rowActions.length > 0 && i +1  === gridColumns.length" class="no-padding">
+          <div class="grid-row-button">
+            <img (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
+                 *ngFor="let action of rowActions"
+                 [src]="'assets/images/icons/' + action.iconName + '.svg'" class="tw-h-4 tw-px-2" />
+          </div>
+        </ng-container>
+      </div>
     </ng-template>
 
   </kendo-grid-column>
