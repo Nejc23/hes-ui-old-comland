@@ -4,9 +4,10 @@ import { RegisterValue } from 'src/app/core/repository/interfaces/data-processin
 
 export interface RegistersFilter {
   deviceId: string;
-  register: AutoTemplateRegister;
+  register?: AutoTemplateRegister; // mandatory for meters
   startTime: string;
   endTime: string;
+  eventType?: string; // Alarm for alarms
 }
 
 export interface RegisterStatistics {

@@ -8,6 +8,9 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
+      spacing: {
+        82: '22rem' // 352px
+      },
       screens: {
         '3xl': '1750px'
       },
@@ -17,7 +20,7 @@ module.exports = {
         darkGray: '#6F7072',
         darkPurple: '#981D78',
         darkBlue: '#053876',
-        mediumGray: '#A9ABAF',
+        mediumGray: '#A9ABAF', // border color in figma
         green: '#37A350', // ok green
         yellow: '#E9BD4A', // meh yellow
         red: '#E43458', // bad red

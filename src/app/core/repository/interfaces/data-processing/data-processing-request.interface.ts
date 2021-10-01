@@ -4,6 +4,7 @@ export interface DataProcessingRequest {
   endTime: string;
   profiles?: DataProcessingProfile[];
   registerIds?: string[];
+  eventType?: string;
 }
 
 export interface DataProcessingProfile {
