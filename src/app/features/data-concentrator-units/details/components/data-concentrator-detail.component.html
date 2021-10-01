@@ -39,7 +39,6 @@
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
-
           <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
                                    [visible]="openEdit">
             <app-edit-dcu-form (savedDataEvent)="refreshData()"
@@ -71,15 +70,12 @@
 
           <!--          </div>-->
 
-
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
-
 
             <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
                            [buttonLabel]="'BUTTON.EDIT'" [form]="form"
                            [paginationLimit]="7"
                            [showMoreButton]="true" [title]="'COMMON.DETAILS'">
-
             </app-card-item>
 
             <!--            <app-card-item [loadingFailed]="true"-->
@@ -118,75 +114,115 @@
 
           </div>
         </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+
+    <kendo-tabstrip-tab *ngIf="meters.length > 0" title="{{ 'COMMON.METERS' | translate }}">
+      <ng-template kendoTabContent>
+
+        <div class="tw-py-10">
+          <app-data-table (pageChangedEvent)="loadMoreItems($event)"
+                          [excelExport]="true"
+                          [fetchData]="true"
+                          [gridColumns]="metersColumnsConfiguration"
+                          [gridData]="meters"
+                          [pageSize]="20"
+                          [pageable]="true"
+                          [rowHeight]="44"
+                          [scrollable]="'virtual'"
+                          [skip]="0"
+                          [tableHeight]="622"
+                          [total]="metersTotal"
+                          [withSearch]="true"
+          >
+          </app-data-table>
+        </div>
 
       </ng-template>
     </kendo-tabstrip-tab>
 
 
-    <!--    <kendo-tabstrip-tab title="{{ 'COMMON.METERS' | translate }}">-->
-    <!--      <ng-template kendoTabContent>-->
+    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">
+      <ng-template kendoTabContent>
 
-    <!--        <div class="tw-py-10">-->
+        <div *ngIf="eventsForm" class="tw-py-10">
+          <div class="tw-flex tw-mt-2 tw-w-82 tw-h-14">
+            <app-input-text
+              #popover="ngbPopover"
+              [autoClose]="'outside'"
+              [form]="eventsForm"
+              [iconName]="'fa-calendar'"
+              [isReadOnly]="true"
+              [ngbPopover]="popDateTimePicker"
+              [property]="'labelText'"
+              class="tw-w-full"
+              container="body"
+              label="Select-date"
+              placement="bottom"
+              popoverClass="date-range-picker-popover"
+            >
+            </app-input-text>
 
-    <!--          <app-data-table *ngIf="meters.length > 0" [filters]="metersFiltersConfiguration"-->
-    <!--                          [gridColumns]="metersColumnsConfiguration"-->
-    <!--                          [gridData]="meters"-->
-    <!--                          [pageSize]="13"-->
-    <!--                          [pageable]="true"-->
-    <!--                          [skip]="0"-->
-    <!--                          [tableClass]="'fixed-height'"-->
-    <!--                          [withSearch]="true"-->
-    <!--          >-->
+            <div (click)="loadRegistersData()" class="tw-pl-2 button-padding-top">
+              <div
+                class="refresh-button">
+                <img [ngClass]="eventsLoading ? 'tw-animate-spin' : ''"
+                     src="assets/images/icons/refresh-icon.svg" />
+              </div>
+            </div>
+          </div>
 
-    <!--          </app-data-table>-->
-    <!--        </div>-->
+          <div *ngIf="events?.length > 0" class="tw-pt-10">
+            <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
+              <h4 *ngIf="chartVisible"
+                  class="tw-text-darkGray tw-text-base">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
+            </div>
 
-    <!--      </ng-template>-->
-    <!--    </kendo-tabstrip-tab>-->
+            <app-registers-column-chart *ngIf="chartVisible" [eventsByTimestamp]="eventsByTimestamp"
+                                        [title]="'FORM.TIME' | translate"></app-registers-column-chart>
 
+            <div class="transparent-gray-line tw-flex tw-justify-center">
+              <button (click)="hideChart()" class="show-more-rounded-button">
+                <ng-container *ngIf="!chartVisible">
+                  <img [src]="'assets/images/icons/up-icon.svg'" class="tw-pr-2" />
+                  {{ 'COMMON.SHOW-DETAILS' | translate}}
+                </ng-container>
+                <ng-container *ngIf="chartVisible">
+                  <img [src]="'assets/images/icons/down-icon.svg'" class="tw-pr-2" />
+                  {{ 'COMMON.HIDE-DETAILS' | translate}}
+                </ng-container>
+              </button>
+            </div>
+          </div>
 
-    <!--    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">-->
-    <!--      <ng-template kendoTabContent>-->
+          <app-data-table
+            *ngIf="events?.length > 0"
+            [excelExport]="true"
+            [excelFileName]="data.name + '_events'"
+            [filters]="eventsFiltersConfiguration"
+            [gridColumns]="eventsColumnsConfiguration"
+            [gridData]="events"
+            [loading]="eventsLoading"
+            [pageSize]="36"
+            [pageable]="true"
+            [refresh]="false"
+            [rowHeight]="44"
+            [scrollable]="'virtual'"
+            [skip]="0"
+            [tableClass]="chartVisible ? 'fixed-height with-chart visible' : 'fixed-height with-chart hidden'"
+            [total]="events.length"
+            [withSearch]="true"
+          >
 
-    <!--        <div *ngIf="eventsForm" class="tw-py-10">-->
-    <!--          <div class="d-flex date-time-picker-meter-units mt-2">-->
-    <!--            <app-input-text-->
-    <!--              #popover="ngbPopover"-->
-    <!--              [autoClose]="'outside'"-->
-    <!--              [form]="eventsForm"-->
-    <!--              [iconName]="'fa-calendar'"-->
-    <!--              [isReadOnly]="true"-->
-    <!--              [ngbPopover]="popDateTimePicker"-->
-    <!--              [property]="'labelText'"-->
-    <!--              class="w-100"-->
-    <!--              container="body"-->
-    <!--              label="Select-date"-->
-    <!--              placement="bottom"-->
-    <!--              popoverClass="date-range-picker-popover"-->
-    <!--            >-->
-    <!--            </app-input-text>-->
-    <!--          </div>-->
+          </app-data-table>
+        </div>
 
-    <!--        </div>-->
+        <app-no-data *ngIf="!events || eventsLoading" [loading]="eventsLoading">
+        </app-no-data>
 
-    <!--        <app-data-table-->
-    <!--          [excelExport]="true"-->
-    <!--          [filters]="eventsFiltersConfiguration"-->
-    <!--          [gridColumns]="eventsColumnsConfiguration"-->
-    <!--          [gridData]="events"-->
-    <!--          [loading]="eventsLoading"-->
-    <!--          [pageSize]="36"-->
-    <!--          [pageable]="true"-->
-    <!--          [scrollable]="'virtual'"-->
-    <!--          [skip]="0"-->
-    <!--          [tableClass]="'fixed-height'"-->
-    <!--          [withSearch]="true"-->
-    <!--        >-->
-
-    <!--        </app-data-table>-->
-
-    <!--      </ng-template>-->
-    <!--    </kendo-tabstrip-tab>-->
+      </ng-template>
+    </kendo-tabstrip-tab>
 
   </kendo-tabstrip>
 </div>

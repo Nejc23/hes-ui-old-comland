@@ -31,6 +31,9 @@ import * as moment from 'moment';
 import { environment } from '../../../../../environments/environment';
 import { RegistersFilter } from '../../../meter-units/registers/interfaces/data-processing-request.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
+import { EventsByTimestamp } from '../../../meter-units/registers/interfaces/events-processing.interface';
+import { EventRegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
+import { PageChangeEvent } from '@progress/kendo-angular-grid';
 import { OperationType } from '../../components/operations/dc-operations.component';
 
 @Component({
@@ -61,19 +64,23 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   miniCardItemTypeEnum = MiniCardItemType;
   gridData: any = [];
   meters: Array<MeterUnitsList> = [];
-  events: any = [];
+  metersTotal = 0;
+  events: EventRegisterValue[] = [];
+  eventsTotal = 0;
   meterStatusSupportedTypes = ['DC450G3', 'AmeraDC'];
   showMeterStatusWidget = false;
   openEdit = false;
   metersGridPageNumber = 1;
+  metersPageSize = 20;
   eventIds = [];
   eventsLoading = false;
+  eventsByTimestamp: EventsByTimestamp[];
+  chartVisible = true;
 
   eventsColumnsConfiguration: Array<GridColumn> = [
     {
       translationKey: 'Timestamp',
-      field: 'timestamp',
-      type: GridColumnType.DATE_TIME
+      field: 'timestamp'
     },
     {
       translationKey: 'ID',
@@ -86,25 +93,16 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   ];
   metersColumnsConfiguration: Array<GridColumn> = [
     {
-      translationKey: 'Serial',
-      field: 'serialNumber',
-      class: 'bold-text'
-    },
-    {
       translationKey: 'Name',
       field: 'logicalDeviceName'
     },
     {
+      translationKey: 'Serial',
+      field: 'serialNumber'
+    },
+    {
       translationKey: 'Systitle',
       field: 'systitle'
-    },
-    {
-      translationKey: 'Referencing type',
-      field: 'referencingType'
-    },
-    {
-      translationKey: 'Disconnector state',
-      field: 'disconnectorState'
     },
     {
       translationKey: 'Installation Status',
@@ -122,13 +120,14 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       ]
     }
   ];
-  metersFiltersConfiguration: Array<GridFilter> = [
-    {
-      // label: 'Status',
-      field: 'status',
-      values: ['INSTALLED', 'LOST'] // mock
-    }
-  ];
+  // metersFiltersConfiguration: Array<GridFilter> = [
+  //   {
+  //     // label: 'Status',
+  //     field: 'status',
+  //     values: ['INSTALLED', 'LOST'] // mock
+  //   }
+  // ];
+  // location mock
   layer = marker([46.2434, 14.4192], {
     icon: icon({
       iconSize: [64, 64],
@@ -194,7 +193,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
       zoom: 13,
-      center: latLng(46.2434, 14.4192)
+      center: latLng(46.2434, 14.4192) //location mock
     };
   }
 
@@ -315,23 +314,20 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         }
         this.breadcrumbService.setPageName(this.data.name);
         if (this.data.firstInstallDate) {
+          // format date
           this.data.firstInstallDate =
             moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
             ' ' +
             moment(this.data.firstInstallDate).format(environment.timeFormatLong);
         }
-        //MOCK DATA
-        //this.data.plcStatus = ConcentratorStatus.UNKNOWN;
-
         this.form = this.createForm();
         this.editForm = this.createEditForm();
         this.eventsForm = this.createEventsForm();
 
-        // yesterday
+        // yesterday date as default date
         const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
         const endDateFormatted = moment().format(environment.dateDisplayFormat);
 
-        // REFACTOR
         this.eventsForm.controls.labelText.setValue(
           startDateFormatted +
             ' ' +
@@ -345,9 +341,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
 
-        //MOCK DATA
-        this.loadGridData();
-        this.loadEventsData();
+        this.loadGridData(this.metersGridPageNumber);
+        this.loadRegistersData();
         // notifications
         this.alarms = [
           {
@@ -632,84 +627,31 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   //   this.showData(this.selectedRegister, true);
   // }
 
-  loadGridData() {
+  loadGridData(pageNumber: number) {
+    this.eventsLoading = true;
     const requestParam: IActionRequestParams = {
-      pageSize: 12, // TODO (request, pagination ...)
-      pageNumber: this.metersGridPageNumber,
+      pageSize: this.metersPageSize,
+      pageNumber: pageNumber,
       textSearch: {
-        value: 'DC450G3_3.11',
-        propNames: [],
+        value: this.data.name, // mock get all filters
+        propNames: ['deviceId', 'status', 'name', 'serialNumber', 'logicalDeviceName', 'moduleId', 'parent', 'vendor', 'medium', 'id'],
         useWildcards: true
       },
-      sort: []
+      sort: [
+        {
+          propName: 'Name',
+          index: 0,
+          sortOrder: 'Descending'
+        }
+      ]
     };
-    // MOCKED DATA
     this.meterUnitsTypeService.getGridMeterUnits(requestParam).subscribe((res) => {
-      this.meters = res.data;
+      // loading data from backend
+      this.meters.push(...res.data);
+      // KendoUI change detection for grid rerender
+      this.meters = [...this.meters];
+      this.metersTotal = res.totalCount;
     });
-  }
-
-  loadEventsData() {
-    this.events = [
-      {
-        value: 251,
-        timestamp: '2021-08-02T10:00:24+02:00'
-      },
-      {
-        value: 214,
-        timestamp: '2021-08-02T10:00:41+02:00'
-      },
-      {
-        value: 251,
-        timestamp: '2021-08-09T13:35:16+02:00'
-      },
-      {
-        value: 214,
-        timestamp: '2021-08-09T13:36:02+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T09:42:42+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T10:22:05+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T10:24:08+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T11:31:05+02:00'
-      },
-      {
-        value: 1,
-        timestamp: '2021-08-11T12:50:44+02:00'
-      },
-      {
-        value: 2,
-        timestamp: '2021-08-11T12:54:37+02:00'
-      },
-      {
-        value: 227,
-        timestamp: '2021-08-11T12:54:42+02:00'
-      },
-      {
-        value: 11,
-        timestamp: '2021-08-11T13:54:40+02:00'
-      },
-      {
-        value: 251,
-        timestamp: '2021-08-19T13:13:17+02:00'
-      },
-      {
-        value: 214,
-        timestamp: '2021-08-19T13:13:30+02:00'
-      }
-    ];
-    // debugger;
-    //this.loadRegistersData();
   }
 
   refreshData() {
@@ -734,6 +676,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   loadRegistersData() {
+    this.events = [];
+    this.eventsTotal = 0;
     const startDate = moment(this.eventsForm.get('startDate').value).toDate();
     const endDate = moment(this.eventsForm.get('endDate').value).toDate();
 
@@ -745,20 +689,17 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     const startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
     const endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
-    // mock
     const registersFilter: RegistersFilter = {
-      deviceId: '146ba703-681a-4528-a6c5-29c35d9b77a3',
+      deviceId: this.concentratorId,
+      startTime: startTime,
+      endTime: endTime,
       register: {
-        registerGroupId: '8a159f8c-17ae-484a-93f9-acd195fa45c5',
-        registerDefinitionId: '149e8e38-2827-4c25-be9d-c838efe1893b',
         categorization: 'EVENT'
-      },
-      startTime: startTime, // '2021-09-01T00:00:00.000+02:00'
-      endTime: endTime // 2021-09-10T15:00:00.000+02:00
+      }
     };
 
     this.eventsLoading = true;
-    this.dataProcessingService.getChartData(registersFilter).subscribe((values) => {
+    this.dataProcessingService.getChartData(registersFilter, true).subscribe((values) => {
       this.events = values;
 
       if (this.events) {
@@ -766,14 +707,88 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.eventIds = [...new Set(this.events.map((event) => event.value))];
         this.eventsFiltersConfiguration = [
           {
-            // label: 'Status',
             field: 'value',
-            values: this.eventIds // mock
+            values: this.eventIds
           }
         ];
+        this.setEventData();
+        // format timestamp for Search ALL columns on grid
+        this.events.map(
+          (event) =>
+            (event.timestamp =
+              moment(event.timestamp).format(environment.dateDisplayFormat) +
+              ' ' +
+              moment(event.timestamp).format(environment.timeFormatLong))
+        );
       }
       this.eventsLoading = false;
-      this.events.skip = 0;
     });
+  }
+
+  setEventData() {
+    this.eventsByTimestamp = [];
+    let eventsById = [];
+    // is it ordered?
+    const startTime = new Date(this.events[0].timestamp);
+    const endTime = new Date(this.events[this.events.length - 1].timestamp);
+
+    const daysDiff = this.getDiffDays(startTime, endTime);
+
+    const currentTime = new Date(this.events[0].timestamp);
+    currentTime.setMinutes(0, 0, 0);
+
+    // let inteval = 1000 * 60 * 60 * 60; // hours
+    let outData = [];
+    if (daysDiff <= 1) {
+      // hourly interval
+      outData = this.events.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+    } else {
+      outData = this.events.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+    }
+
+    const groupBy = (array, key) => {
+      // Return the end result
+      return array.reduce((result, currentValue) => {
+        if (!result[currentValue[key]]) {
+          result[currentValue[key]] = 0;
+        }
+        result[currentValue[key]]++;
+
+        // Return the current iteration `result` value, this will be taken as next iteration `result` value and accumulate
+        return result;
+      }, {}); // empty object is the initial value for result object
+    };
+
+    this.eventsByTimestamp = Object.entries(groupBy(outData, 'timestamp')).map((e) => ({
+      timestamp: new Date(Number(e[0])),
+      count: Number(e[1])
+    }));
+    const dataLength = this.events.length;
+    const eventsByIdGroup = groupBy(outData, 'value');
+
+    eventsById = Object.entries(eventsByIdGroup).map((e) => ({
+      category: Number(e[0]),
+      count: Number(e[1]),
+      value: Number(e[1]) / dataLength
+    }));
+
+    const eventsLength = eventsById.length;
+
+    if (eventsLength % 6 === 1) {
+      eventsById[eventsLength - 1].color = environment.kendoPieChartLastSliceColor; // last color fix to avoid the same color for the first and the last pie slice
+    }
+  }
+
+  getDiffDays(startTime: Date, endTime: Date): number {
+    const diff = endTime.valueOf() - startTime.valueOf();
+    return diff / (1000 * 3600 * 24);
+  }
+
+  loadMoreItems(event: PageChangeEvent) {
+    this.loadGridData(this.metersGridPageNumber + 1);
+  }
+
+  hideChart() {
+    this.chartVisible = !this.chartVisible;
   }
 }

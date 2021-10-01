@@ -1,5 +1,5 @@
 import { DataProcessingRequest } from './../../interfaces/data-processing/data-processing-request.interface';
-import { getProfiles, getEvents, getInstantaneousValues } from './../../consts/data-processing.const';
+import { getEvents, getInstantaneousValues, getProfiles } from './../../consts/data-processing.const';
 import { HttpRequest } from '@angular/common/http';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Injectable } from '@angular/core';
@@ -19,9 +19,9 @@ import { RegistersFilter } from 'src/app/features/meter-units/registers/interfac
 export class DataProcessingService {
   constructor(private repository: RepositoryService) {}
 
-  getChartData(filter: RegistersFilter): Observable<RegisterValue[]> {
+  getChartData(filter: RegistersFilter, dcEvents?: boolean): Observable<RegisterValue[]> {
     // TODO enum for categorization
-    const request: DataProcessingRequest = {
+    let request: DataProcessingRequest = {
       deviceIds: [filter.deviceId],
       profiles: [
         {
@@ -32,6 +32,14 @@ export class DataProcessingService {
       startTime: filter.startTime,
       endTime: filter.endTime
     };
+    if (dcEvents) {
+      request = {
+        deviceIds: [filter.deviceId],
+        startTime: filter.startTime,
+        endTime: filter.endTime,
+        eventType: filter.eventType
+      };
+    }
 
     if (filter.register.categorization === 'EVENT') {
       return this.getEvents(request).pipe(
