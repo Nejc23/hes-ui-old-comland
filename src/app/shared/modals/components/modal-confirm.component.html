@@ -14,7 +14,7 @@
   <div *ngIf="showSecondConfirm" class="form-row pt-2 text-center">
     <div class="col-12">
       <div class="card-body">
-        <div class="small-title pb-1">{{ confirmMessage | translate }}</div>
+        <div class="small-title tw-pb-2">{{ confirmMessage | translate }}</div>
       </div>
     </div>
   </div>
@@ -23,7 +23,11 @@
 
     {{ modalBody | translate }}
 
-    <div *ngIf="alertText" class="alert alert-danger mt-3" role="alert">
+    <div *ngIf="alertText || dangerText" class="alert alert-danger mt-3 tw-text-sm" role="alert">
+      <div *ngIf="dangerText" class="tw-pb-2">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        <span>{{ dangerText | translate }}</span>
+      </div>
       <span class="text-danger">{{ alertText | translate }}</span>
     </div>
 

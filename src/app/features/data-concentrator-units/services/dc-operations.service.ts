@@ -204,7 +204,14 @@ export class DcOperationsService {
   }
 
   // actions without popup
-  bulkOperation(operation: DcOperationTypeEnum, params: any, selectedCount: number, alertText?: string) {
+  bulkOperation(
+    operation: DcOperationTypeEnum,
+    params: any,
+    selectedCount: number,
+    alertText?: string,
+    secondConfirmEnabled?: boolean,
+    dangerMessage?: string
+  ) {
     // let selectedText = ''; // `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
@@ -232,6 +239,10 @@ export class DcOperationsService {
     component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
     component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
     component.alertText = alertText;
+    component.dangerText = dangerMessage;
+
+    component.secondConfirmEnabled = secondConfirmEnabled;
+    component.confirmMessage = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) });
 
     modalRef.result.then(
       (data) => {

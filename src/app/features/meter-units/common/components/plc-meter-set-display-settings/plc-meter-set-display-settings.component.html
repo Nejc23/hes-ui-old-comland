@@ -1,10 +1,11 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header [innerHTML]="'PLC-METER.SET-DISPLAY-SETTINGS-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"></div>
-  
+  <div [innerHTML]="'PLC-METER.SET-DISPLAY-SETTINGS-SELECTED' | translate:{selectedRowsCount: selectedRowsCount}"
+       modal-header></div>
+
   <div modal-body>
     <ng-container>
-      <form class="form-horizontal" [formGroup]="form">
+      <form [formGroup]="form" class="form-horizontal">
 
         <div class="alert alert-warning" role="alert">
           <i class="fas fa-exclamation-triangle me-2"></i>
@@ -14,7 +15,9 @@
         <div *ngIf="!dataLoaded || (groupList$?.length > 0)">
           <div class="form-row">
             <div class="col-12">
-              <app-select-input [disabled]="false" label="REGISTER-GROUP" [form]="form" [property]="groupListProperty" [selectOptions]="groupList$" (selectedValueChanged)="selectedValueChanged($event)" >
+              <app-select-input (selectedValueChanged)="selectedValueChanged($event)" [disabled]="false" [form]="form"
+                                [property]="groupListProperty"
+                                [selectOptions]="groupList$" label="REGISTER-GROUP">
               </app-select-input>
             </div>
           </div>
@@ -22,32 +25,35 @@
           <div class="form-row mt-1">
             <div class="col-6">
               <div (dragover)="gridDragOver($event)" (drop)="gridDrop($event,'left')">
-                <ag-grid-angular class="ag-theme-epoint scrollable draggable" style="width: 98%; height: 350px; overflow:auto;" #agGrid
-                  [rowData]="registerListLeft"
-                  [columnDefs]="columnDefsLeft"
-                  [modules]="modules"
-                  (gridReady)="onLeftGridReady($event)"
-                  (firstDataRendered)="onFirstDataRendered($event)"
-                  suppressRowClickSelection="true"
-                  [pagination]="false"
-                  [suppressMoveWhenRowDragging]="true"
+                <ag-grid-angular #agGrid
+                                 (firstDataRendered)="onFirstDataRendered($event)" (gridReady)="onLeftGridReady($event)"
+                                 [columnDefs]="columnDefsLeft"
+                                 [modules]="modules"
+                                 [pagination]="false"
+                                 [rowData]="registerListLeft"
+                                 [suppressMoveWhenRowDragging]="true"
+                                 class="ag-theme-epoint scrollable draggable"
+                                 style="width: 98%; height: 350px; overflow:auto;"
+                                 suppressRowClickSelection="true"
                 ></ag-grid-angular>
-                <div class="help-block" *ngIf="noRegisterSelected && selectedGroup">
+                <div *ngIf="noRegisterSelected && selectedGroup" class="help-block">
                   <i class="far fa-info-circle text-danger"></i><small class="text-danger">{{requiredText}}</small>
                 </div>
               </div>
             </div>
             <div class="col-6">
               <div (dragover)="gridDragOver($event)" (drop)="gridDrop($event,'right')">
-                <ag-grid-angular class="ag-theme-epoint scrollable draggable" style="width: 98%; height: 350px; overflow:auto;" #agGrid2
-                  [rowData]="registerListRight"
-                  [columnDefs]="columnDefsRight"
-                  [modules]="modules"
-                  (gridReady)="onRightGridReady($event)"
-                  (firstDataRendered)="onFirstDataRendered($event)"
-                  suppressRowClickSelection="true"
-                  [pagination]="false"
-                  [overlayNoRowsTemplate]="noRowsTemplate"
+                <ag-grid-angular #agGrid2
+                                 (firstDataRendered)="onFirstDataRendered($event)"
+                                 (gridReady)="onRightGridReady($event)"
+                                 [columnDefs]="columnDefsRight"
+                                 [modules]="modules"
+                                 [overlayNoRowsTemplate]="noRowsTemplate"
+                                 [pagination]="false"
+                                 [rowData]="registerListRight"
+                                 class="ag-theme-epoint scrollable draggable"
+                                 style="width: 98%; height: 350px; overflow:auto;"
+                                 suppressRowClickSelection="true"
                 ></ag-grid-angular>
               </div>
             </div>
@@ -58,7 +64,7 @@
             <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
           </div>
           <div class="card-body">
-            <div class="small-title pb-1">{{ 'COMMON.NO-DATA-FOUND' | translate }}</div>
+            <div class="small-title tw-pb-2">{{ 'COMMON.NO-DATA-FOUND' | translate }}</div>
             <div class="text-secondary">{{ 'PLC-METER.CHECK-DEVICE-TEMPLATE' | translate }}</div>
           </div>
         </div>
@@ -67,11 +73,13 @@
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="onDismiss()">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="onConfirm()" [disabled]="!dataLoaded || !groupList$ || groupList$.length === 0">
+        <button (click)="onConfirm()" [disabled]="!dataLoaded || !groupList$ || groupList$.length === 0"
+                class="btn btn-primary"
+                type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

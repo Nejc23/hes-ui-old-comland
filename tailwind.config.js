@@ -11,7 +11,7 @@ module.exports = {
       screens: {
         '3xl': '1750px'
       },
-      colors: {
+      colors: { // figma colors
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
         darkGray: '#6F7072',

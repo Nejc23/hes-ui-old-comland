@@ -259,3 +259,7 @@ body {
     transform: rotate(360deg);
   }
 }
+
+.k-state-selected {
+  background-color: rgb($primary, 0.65) !important;
+}
