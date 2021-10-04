@@ -7,7 +7,7 @@
     <app-page-title
       [status]="data.statusValue"
       [subtitle]="data.typeValue"
-      [title]="data.name"
+      [title]="data.name ? data.name : data.serialNumber"
       class="tw-h-36 tw-mt-10 tw--m-5"
     >
     </app-page-title>
@@ -179,28 +179,29 @@
           </div>
 
           <div *ngIf="events?.length > 0" class="tw-pt-10">
-            <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full">
+            <div class="tw-inline-flex tw-justify-center tw-items-center tw-w-full">
               <h4 *ngIf="chartVisible"
-                  class="tw-text-darkGray tw-text-base">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
+                  class="tw-text-mediumGray tw-text-sm tw-font-normal">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
             </div>
 
-            <app-registers-column-chart *ngIf="chartVisible" [eventsByTimestamp]="eventsByTimestamp"
-                                        [title]="'FORM.TIME' | translate"></app-registers-column-chart>
+            <app-registers-column-chart *ngIf="chartVisible"
+                                        [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
 
             <div class="transparent-gray-line tw-flex tw-justify-center">
               <button (click)="hideChart()" class="show-more-rounded-button">
                 <ng-container *ngIf="!chartVisible">
-                  <img [src]="'assets/images/icons/up-icon.svg'" class="tw-pr-2" />
-                  {{ 'COMMON.SHOW-DETAILS' | translate}}
+                  <img [src]="'assets/images/icons/up-icon.svg'" class="tw-pr-2 tw-text-darkGray" />
+                  {{ 'COMMON.SHOW-CHART' | translate}}
                 </ng-container>
                 <ng-container *ngIf="chartVisible">
                   <img [src]="'assets/images/icons/down-icon.svg'" class="tw-pr-2" />
-                  {{ 'COMMON.HIDE-DETAILS' | translate}}
+                  {{ 'COMMON.HIDE-CHART' | translate}}
                 </ng-container>
               </button>
             </div>
           </div>
 
+          <!-- table height (rows number * 44) + 48px + 51px-->
           <app-data-table
             *ngIf="events?.length > 0"
             [excelExport]="true"
@@ -215,7 +216,8 @@
             [rowHeight]="44"
             [scrollable]="'virtual'"
             [skip]="0"
-            [tableClass]="chartVisible ? 'fixed-height with-chart visible' : 'fixed-height with-chart hidden'"
+            [tableClass]="chartVisible ? 'with-chart visible min-height' : 'with-chart hidden min-height'"
+            [tableHeight]="chartVisible ? 322 : 563"
             [total]="events.length"
             [withSearch]="true"
           >
@@ -223,7 +225,8 @@
           </app-data-table>
         </div>
 
-        <app-no-data *ngIf="!events || eventsLoading" [loading]="eventsLoading">
+        <app-no-data *ngIf="!events || eventsLoading" [loading]="eventsLoading"
+                     [secondaryMessage]="'PLC-METER.REGISTER.CHANGE-TIME'">
         </app-no-data>
 
       </ng-template>

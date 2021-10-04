@@ -76,7 +76,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() stickyHeader = false;
   @Input() tableHeight = 450;
   @Input() total;
-  @Input() rowHeight: number; // required for virtual scroll
+  @Input() rowHeight: 44; // required for virtual scroll
   @Input() fetchData = false; // fetch data from API on next page
   @Input() excelFileName = '';
 

@@ -8,8 +8,10 @@ import { Component, Input } from '@angular/core';
 export class NoDataComponent {
   @Input() loading = false;
 
-  @Input() errorMsg = 'COMMON.NO-DATA-FOUND';
-  @Input() text = '';
+  @Input() message = 'COMMON.NO-DATA-FOUND';
+  @Input() secondaryMessage = '';
+
+  @Input() alert = false; // red alert
 
   constructor() {}
 }

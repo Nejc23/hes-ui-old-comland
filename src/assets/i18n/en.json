@@ -187,7 +187,9 @@
     "EDIT-DETAILS": "Edit details",
     "EVENTS": "Events",
     "SHOW-DETAILS": "Show details",
-    "HIDE-DETAILS": "Hide details"
+    "HIDE-DETAILS": "Hide details",
+    "SHOW-CHART": "Show chart",
+    "HIDE-CHART": "Hide chart"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -665,7 +667,7 @@
     "READ-MONITOR-THRESHOLDS": "Read monitor thresholds",
     "READ-THRESHOLDS": "Read thresholds",
     "REGISTER": {
-      "CHANGE-TIME": "Try changing the time.",
+      "CHANGE-TIME": "Try changing the time period.",
       "EVENT-TYPE": "Event type",
       "NO-AVAILABLE-DATA": "There seems to be no available data to show.",
       "NO-REGISTER-SELECTED": "No register selected",

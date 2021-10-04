@@ -71,6 +71,7 @@
   @apply tw-border-solid;
   @apply tw-bg-white;
   @apply tw-shadow;
+  @apply tw-cursor-pointer;
   visibility: hidden;
   position: relative;
   bottom: 40px;
@@ -89,6 +90,10 @@
 
 .fixed-height {
   min-height: 39.6875rem;
+}
+
+.min-height {
+  min-height: 30vh;
 }
 
 ::ng-deep .k-button, .k-button-secondary {
@@ -129,7 +134,7 @@
 //kendo toolbar position over the chart hack
 .with-chart.visible ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
   position: relative;
-  bottom: 25rem;
+  bottom: 24.8rem;
   margin-left: 22.5rem;
 }
 

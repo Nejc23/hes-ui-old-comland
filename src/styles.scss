@@ -272,12 +272,14 @@ body {
   position: relative;
   min-width: 122px;
   height: 34px;
-  background: #FFFFFF;
-  border: 1px solid #CED2D9;
+  background: white;
+  border: 1px solid $lightGray;
   border-radius: 300px;
+  color: $darkGray;
   top: 18px;
 }
 
 .k-state-selected {
   background-color: rgb($primary, 0.65) !important;
 }
+
