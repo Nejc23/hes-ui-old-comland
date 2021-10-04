@@ -24,8 +24,7 @@
     "SAVE": "Save",
     "SAVE-AND-ADD-ANOTHER": "Save and Add another",
     "SAVE-AS-NEW": "Save as new",
-    "UPDATE": "Update",
-    "GO-TO-JOBS": "Go to jobs"
+    "UPDATE": "Update"
   },
   "COMMON": {
     "0-100-RANGE": "Value must be in range 0-100",
@@ -147,7 +146,6 @@
     "SELECTED-ITEMS-DELETED": "Selected items deleted",
     "SERVER-ERROR": "Server error!",
     "SHOW-ALL": "Show all",
-    "SEE-ALL": "See all",
     "SHOW-CHILD-MBUS": "show child MBus",
     "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation",
     "SHOW-OPTION": "Show option",
@@ -168,12 +166,7 @@
     "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
     "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
     "WITH-TEMPLATE": "With template",
-    "WITHOUT-TEMPLATE": "Without template",
-    "OVERVIEW": "Overview",
-    "SHOW-MORE": "Show more",
-    "SHOW-LESS": "Show less",
-    "METER-STATUS": "Meter status",
-    "APPLIED-TAGS": "Applied tags"
+    "WITHOUT-TEMPLATE": "Without template"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -219,8 +212,7 @@
     "READ-STATUS": "read status{{additionalString}}",
     "STATUS": "status{{additionalString}}",
     "TYPE": "type{{additionalString}}",
-    "VENDOR": "vendor{{additionalString}}",
-    "LAST-NOTIFICATIONS": "Last notifications"
+    "VENDOR": "vendor{{additionalString}}"
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
@@ -351,12 +343,7 @@
     "USERNAME": "Username",
     "VENDOR": "Vendor",
     "WEEK-DAYS": "Week-days",
-    "WRAPPER": "Wrapper",
-    "SERIALNUMBER": "Serial number",
-    "ADDRESS": "Address",
-    "TAGS": "Tags",
-    "EXTERNALID": "External Id",
-    "COORDINATES": "Coordinates"
+    "WRAPPER": "Wrapper"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -512,11 +499,10 @@
     "SYSTEM": "System",
     "TIME-SYNCHRONIZATION": "Time synchronization",
     "TOPOLOGY": "Topology",
-    "TOPOLOGY-JOB": "Topology job",
-    "SCHEDULER-JOBS": "Scheduler jobs"
+    "TOPOLOGY-JOB": "Topology job"
   },
   "LANGUAGE": {
-    "CS": "Čeština",
+    "HR": "",
     "DE": "Deutsch",
     "EN": "English",
     "FR": "Français",
@@ -670,11 +656,11 @@
       "METER-INOPERABLE-WARNING": "This action may result in damages, rendering meter inoperable!",
       "METER-UNITS-PASSWORD": "Meter Units password type change was successful",
       "PSK": "PSK",
-      "PW_CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
-      "PW_L1-READER": "PW_L1 (Reader)",
-      "PW_L2-INSTALLER": "PW_L2 (Installer)",
-      "PW_LG ": "PW_LG (Management)",
-      "PW_M2": "PW_M2 (Operator)",
+      "PW-CALIBRATION-VERIFICATION": "",
+      "PW-L1-READER": "",
+      "PW-L2-INSTALLER": "",
+      "PW-LG": "",
+      "PW-M2": "",
       "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?",
       "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
       "REKEY": "Rekey",

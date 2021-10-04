@@ -25,7 +25,7 @@
     "SAVE-AND-ADD-ANOTHER": "Shrani in dodaj drugo",
     "SAVE-AS-NEW": "Shrani kot novo",
     "UPDATE": "Posodobi",
-    "GO-TO-JOBS": "Go to jobs"
+    "GO-TO-JOBS": ""
   },
   "COMMON": {
     "0-100-RANGE": "Value must be in range 0-100",
@@ -147,7 +147,6 @@
     "SELECTED-ITEMS-DELETED": "Selected items deleted",
     "SERVER-ERROR": "Napaka strežnika!",
     "SHOW-ALL": "Show all",
-    "SEE-ALL": "See all",
     "SHOW-CHILD-MBUS": "show child MBus",
     "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation",
     "SHOW-OPTION": "prikaži možnost",
@@ -169,11 +168,23 @@
     "WILDCARDS-SEARCH-ENABLED": "Iskanje z nadomestnimi znaki je omogočeno",
     "WITH-TEMPLATE": "S konfiguracijo",
     "WITHOUT-TEMPLATE": "Brez konfiguracije",
-    "OVERVIEW": "Overview",
-    "SHOW-MORE": "Show more",
-    "SHOW-LESS": "Show less",
-    "METER-STATUS": "Meter status",
-    "APPLIED-TAGS": "Applied tags"
+    "LOADING-DATA-PLEASE-WAIT": "",
+    "MAY-TAKE-A-MOMENT": "",
+    "SEE-ALL": "",
+    "OVERVIEW": "",
+    "SHOW-MORE": "",
+    "SHOW-LESS": "",
+    "METER-STATUS": "",
+    "APPLIED-TAGS": "",
+    "ALL-METERS": "",
+    "NOT-DEFINED": "",
+    "DETAILS": "",
+    "EDIT-DETAILS": "",
+    "EVENTS": "",
+    "SHOW-DETAILS": "",
+    "HIDE-DETAILS": "",
+    "SHOW-CHART": "",
+    "HIDE-CHART": ""
   },
   "DAY": {
     "CURRENT-MONTH": "Trenutni mesec",
@@ -220,7 +231,14 @@
     "STATUS": "Status",
     "TYPE": "Tip",
     "VENDOR": "proizvajalec",
-    "LAST-NOTIFICATIONS": "Last notifications"
+    "LAST-NOTIFICATIONS": "",
+    "MULTIPLE-TYPES": "",
+    "RE-KEY-NOT-SUPPORTED": "",
+    "RE-KEY-CONCENTRATOR": "",
+    "CONCENTRATOR-INOPERABLE-WARNING": "",
+    "RE-KEY-CONFIRM": "",
+    "SECURITY-GAK": "",
+    "SECURITY-GBEK": ""
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
@@ -275,7 +293,8 @@
       "RANGE-INCORRECT": "Range is not correct",
       "RANGE-VALUE": "Value must be in range 0-100",
       "REQUIRED": "Required field",
-      "UNKNOWN-ERROR": "Unknown error"
+      "UNKNOWN-ERROR": "Unknown error",
+      "INVALID-HOSTNAME": ""
     },
     "EXPRESSION": "Expression",
     "EXTERNAL-ID": "External Id",
@@ -352,11 +371,17 @@
     "VENDOR": "proizvajalec",
     "WEEK-DAYS": "",
     "WRAPPER": "Wrapper",
-    "SERIALNUMBER": "Serial number",
-    "ADDRESS": "Address",
-    "TAGS": "Tags",
-    "EXTERNALID": "External Id",
-    "COORDINATES": "Coordinates"
+    "TIME": "",
+    "SERIALNUMBER": "",
+    "ADDRESS": "",
+    "TAGS": "",
+    "EXTERNALID": "",
+    "COORDINATES": "",
+    "NEXT-START": "",
+    "PLCSTATUS": "",
+    "HOSTNAME": "",
+    "TIMEZONENAME": "",
+    "FIRSTINSTALLDATE": ""
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -441,7 +466,8 @@
     "UNIT": "",
     "VALUE": "Value",
     "VENDOR": "proizvajalec",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "HOSTNAME": ""
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -513,7 +539,7 @@
     "TIME-SYNCHRONIZATION": "Time synchronization",
     "TOPOLOGY": "Topology",
     "TOPOLOGY-JOB": "Topologija",
-    "SCHEDULER-JOBS": "Scheduler jobs"
+    "ACTIVE-JOBS": ""
   },
   "LANGUAGE": {
     "HR": "Hrvaščina",
@@ -563,14 +589,18 @@
     "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!",
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "SELECTED": "",
-    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization"
+    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
+    "ARE-YOU-SURE-TEXT-FOR-DEVICES": ""
   },
   "OPERATION": {
     "DEVICE-DISCOVERY": "Device discovery",
     "FW-UPGRADE": "FW Upgrade",
     "OPERATIONS": "Operations",
     "SYNC-TIME": "Sinhroniziraj čas",
-    "SYNCHRONIZE-TIME": "Sinhroniziraj čas"
+    "SYNCHRONIZE-TIME": "Sinhroniziraj čas",
+    "SECURITY": "",
+    "RE-KEY-HMAC": "",
+    "RE-KEY-CONCENTRATOR": ""
   },
   "PLC-METER": {
     "ACTIVATE-IMAGE": "Activate image",
@@ -670,11 +700,11 @@
       "METER-INOPERABLE-WARNING": "This action may result in damages, rendering meter inoperable!",
       "METER-UNITS-PASSWORD": "Meter Units password type change was successful",
       "PSK": "",
-      "PW_CALIBRATION-VERIFICATION": "",
-      "PW_L1-READER": "",
-      "PW_L2-INSTALLER": "",
-      "PW_LG ": "",
-      "PW_M2": "",
+      "PW-CALIBRATION-VERIFICATION": "",
+      "PW-L1-READER": "",
+      "PW-L2-INSTALLER": "",
+      "PW-LG": "",
+      "PW-M2": "",
       "RE-KEY-CONFIRM": "",
       "RE-KEY-METER": "",
       "REKEY": "Rekey",
@@ -932,5 +962,10 @@
   "ngb.timepicker.increment-seconds": "Increment seconds",
   "ngb.timepicker.minutes": "Minutes",
   "ngb.timepicker.seconds": "Seconds",
-  "ngb.toast.close-aria": "Zapri"
+  "ngb.toast.close-aria": "Zapri",
+  "PROTOCOL": {
+    "g3PLC": "",
+    "dlms": "",
+    "unknown": ""
+  }
 }
