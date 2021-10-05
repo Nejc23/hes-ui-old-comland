@@ -1,6 +1,7 @@
 export interface IAppConfig {
   apiServer: {
     url: string;
+    translationsDebug: boolean;
   };
   identityServer: {
     stsAuthority: string;

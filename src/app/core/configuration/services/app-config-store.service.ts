@@ -10,7 +10,7 @@ export class AppConfigStoreService extends Store<IAppConfig> {
 
   constructor() {
     super({
-      apiServer: { url: null },
+      apiServer: { url: null, translationsDebug: false },
       identityServer: {
         stsAuthority: null,
         stsAuthorityWeb: null,

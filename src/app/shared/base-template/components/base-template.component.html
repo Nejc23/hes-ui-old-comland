@@ -63,9 +63,16 @@
 
     <div *ngIf="!app.layout.isMenuCollapsed || isMouseOverNav" @navItemsTrigger
          class="mt-auto sidebar-version text-center">
-      <small>{{version}}</small><br />
-      <small>{{getAppTitle()}} {{ 'MENU.POWERED-BY' | translate }}</small><br />
-      <small>{{ 'MENU.ALL-RIGHTS RESERVED' | translate }}</small>
+      <div>
+        <small>{{version}}</small><br />
+        <small>{{getAppTitle()}} {{ 'MENU.POWERED-BY' | translate }}</small><br />
+        <small>{{ 'MENU.ALL-RIGHTS RESERVED' | translate }}</small>
+      </div>
+      <div *ngIf="translationsDebugMode" class="tw-py-4">
+        <button (click)="translateDebugService.toggleDebug()" class="btn btn-primary" type="button">
+          Toggle translation keys
+        </button>
+      </div>
     </div>
   </div>
 
