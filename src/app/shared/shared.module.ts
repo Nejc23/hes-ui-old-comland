@@ -8,7 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateParser } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CdTimerModule } from 'angular-cd-timer';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -101,6 +101,7 @@ import { DataTableComponent } from './data-table/data-table.component';
 import { SlideOutComponentComponent } from './slide-out-component/slide-out-component.component';
 import { NoDataComponent } from './no-data/no-data.component';
 import { SecurityRekeyConcentratorComponent } from '../features/data-concentrator-units/components/security/security-rekey-concentrator.component';
+import { NgxTranslateDebugParser } from 'ngx-translate-debug';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -216,6 +217,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
+      parser: { provide: TranslateParser, useClass: NgxTranslateDebugParser },
       extend: true,
       defaultLanguage: 'en'
     }),
