@@ -8,7 +8,6 @@ import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { FormGroup } from '@angular/forms';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { MeterTypeRoute } from '../enums/meter-type.enum';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { brand } from 'src/environments/brand/default/brand';
@@ -107,27 +106,6 @@ export class BaseTemplateComponent implements OnInit {
     //     this.fillMeterUnits();
     // fill submenu for configuration
     //   this.fillConfiguration();
-  }
-
-  fillMeterUnits() {
-    const sidebarItems = this.sidebarService.getSidebarItems();
-    this.codeList.meterUnitTypeCodelist().subscribe((list) => {
-      if (list && list.length > 0) {
-        list.forEach((element) => {
-          const newElement = {
-            title: `${element.value}`,
-            routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
-            hasChildren: false,
-            children: []
-          };
-          sidebarItems[1].children.push(newElement);
-          sidebarItems[1].hasChildren = true;
-        });
-
-        this.sidebarItems = [...this.sidebarItems]; // just to udpate items in child component
-        this.sidebarMeterUnitsItems = sidebarItems;
-      }
-    });
   }
 
   /* fillConfiguration() {

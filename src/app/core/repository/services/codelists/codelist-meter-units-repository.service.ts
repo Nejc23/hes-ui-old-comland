@@ -10,13 +10,12 @@ import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import {
-  meterUnitTypes,
+  meterUnitCiiStates,
+  meterUnitDisconnectorStates,
   meterUnitFirmwares,
   meterUnitStatuses,
   meterUnitTags,
-  meterUnitVendors,
-  meterUnitDisconnectorStates,
-  meterUnitCiiStates
+  meterUnitVendors
 } from '../../consts/meter-units.const';
 
 @Injectable({
@@ -24,19 +23,13 @@ import {
 })
 export class CodelistMeterUnitsRepositoryService {
   id = 0;
-  constructor(private repository: RepositoryService) {}
 
-  // get all available meter unit types
-  meterUnitTypeCodelist(): Observable<Codelist<number>[]> {
-    return this.repository.makeRequest(this.meterUnitTypeCodelistRequest());
-  }
-  meterUnitTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
-    return new HttpRequest('GET', meterUnitTypes);
-  }
+  constructor(private repository: RepositoryService) {}
 
   meterUnitStatusCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitStatusCodelistRequest(meterUnitTypeId));
   }
+
   meterUnitStatusCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitStatuses}/${this.id}`);
   }
@@ -44,6 +37,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitTagCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitTagCodelistRequest(meterUnitTypeId));
   }
+
   meterUnitTagCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitTags}/${this.id}`);
   }
@@ -51,6 +45,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitFirmwareCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitFirmwareCodelistRequest(meterUnitTypeId));
   }
+
   meterUnitFirmwareCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitFirmwares}/${this.id}`);
   }
@@ -58,6 +53,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitDisconnectorStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitDisconnectorStateCodelistRequest(meterUnitTypeId));
   }
+
   meterUnitDisconnectorStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitDisconnectorStates}/${this.id}`);
   }
@@ -65,6 +61,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitCiiStateCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitCiiStateCodelistRequest(meterUnitTypeId));
   }
+
   meterUnitCiiStateCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitCiiStates}/${this.id}`);
   }
@@ -72,6 +69,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitVendorCodelist(meterUnitTypeId: number): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitVendorCodelistRequest(meterUnitTypeId));
   }
+
   meterUnitVendorCodelistRequest(id: number): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitVendors}/${this.id}`);
   }
@@ -79,6 +77,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitDeviceMediumCodelist(): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitDeviceMediumCodelistRequest());
   }
+
   meterUnitDeviceMediumCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitsDeviceMedium}`);
   }
@@ -86,6 +85,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitProtocolTypeCodelist(): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitProtocolTypeCodelistRequest());
   }
+
   meterUnitProtocolTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitsProtocolType}`);
   }
@@ -93,6 +93,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitAlarmSeverityTypeCodelist(): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitAlarmSeverityTypeCodelistRequest());
   }
+
   meterUnitAlarmSeverityTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitsAlarmSeverityType}`);
   }
@@ -100,6 +101,7 @@ export class CodelistMeterUnitsRepositoryService {
   meterUnitAlarmSourceTypeCodelist(): Observable<Codelist<number>[]> {
     return this.repository.makeRequest(this.meterUnitAlarmSourceTypeCodelistRequest());
   }
+
   meterUnitAlarmSourceTypeCodelistRequest(): HttpRequest<Codelist<number>[]> {
     return new HttpRequest('GET', `${meterUnitsAlarmSourceType}`);
   }

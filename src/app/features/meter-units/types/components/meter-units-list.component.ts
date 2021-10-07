@@ -45,7 +45,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class MeterUnitsListComponent implements OnInit, OnDestroy {
   id = 0;
   sessionNameForGridFilter = 'grdLayoutMUT';
-  headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
   refreshInterval = gridRefreshInterval;
@@ -58,7 +57,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
-  meterTypes$: Codelist<number>[] = [];
   public hideFilter = true;
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
@@ -94,8 +92,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   };
   requestId = '';
   dataResult = '';
-  dataStatusResponse = '';
-  dataResult2 = '';
   public localeText;
   messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
   messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
@@ -167,17 +163,6 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
         this.gridColumnApi.setColumnState(dataFromCookie);
       }
     }
-
-    // set title by selected meter unit type
-    if (this.meterTypes$.length === 0) {
-      this.codelistMeterUnitsService.meterUnitTypeCodelist().subscribe((data) => {
-        this.meterTypes$ = data;
-        this.setTitle(this.id);
-      });
-    } else {
-      this.setTitle(this.id);
-    }
-    // });
 
     this.frameworkComponents = meterUnitsTypeGridService.setFrameworkComponents();
     this.gridOptions = this.meterUnitsTypeGridService.setGridOptions(this);
@@ -1343,61 +1328,5 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       params,
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );
-  }
-
-  // set form title by selected meter unit type
-  private setTitle(id: number) {
-    const selectedType = this.meterTypes$.find((x) => x.id === id);
-    if (selectedType !== undefined && selectedType != null) {
-      this.headerTitle = selectedType.value + ' ' + this.staticTextService.headerTitleMeterUnitsType;
-    } else {
-      this.headerTitle = this.staticTextService.headerTitleMeterUnitsType;
-    }
-  }
-
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private noFilters() {
-    if (
-      this.requestModel.filterModel == null ||
-      ((!this.requestModel.filterModel.statuses ||
-        this.requestModel.filterModel.statuses.length === 0 ||
-        this.requestModel.filterModel.statuses[0].id === 0) &&
-        (!this.requestModel.filterModel.tags ||
-          this.requestModel.filterModel.tags.length === 0 ||
-          this.requestModel.filterModel.tags[0].id === 0) &&
-        (!this.requestModel.filterModel.types ||
-          this.requestModel.filterModel.types.length === 0 ||
-          this.requestModel.filterModel.types[0] === 0) &&
-        (!this.requestModel.filterModel.vendors ||
-          this.requestModel.filterModel.vendors.length === 0 ||
-          this.requestModel.filterModel.vendors[0].id === 0) &&
-        !this.requestModel.filterModel.readStatus &&
-        (!this.requestModel.filterModel.firmware ||
-          this.requestModel.filterModel.firmware.length === 0 ||
-          this.requestModel.filterModel.firmware[0].id === 0) &&
-        (!this.requestModel.filterModel.disconnectorState ||
-          this.requestModel.filterModel.disconnectorState.length === 0 ||
-          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
-        (!this.requestModel.filterModel.ciiState ||
-          this.requestModel.filterModel.ciiState.length === 0 ||
-          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
-        (!this.requestModel.filterModel.showOptionFilter ||
-          this.requestModel.filterModel.showOptionFilter.length === 0 ||
-          this.requestModel.filterModel.showOptionFilter[0].id === 0) &&
-        (!this.requestModel.filterModel.protocol || this.requestModel.filterModel.protocol.length === 0) &&
-        (!this.requestModel.filterModel.medium || this.requestModel.filterModel.medium.length === 0)) /*
-        !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showWithoutTemplate &&
-        !this.requestModel.filterModel.readyForActivation)*/
-    ) {
-      return true;
-    }
-    return false;
   }
 }
