@@ -75,6 +75,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   public eventsByTimestamp: EventsByTimestamp[];
   public eventsById: EventsById[];
+  hours = false;
   unit = '';
 
   constructor(
@@ -388,8 +389,10 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
+      this.hours = true;
       outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
     } else {
+      this.hours = false;
       outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
     }
 

@@ -16,7 +16,14 @@
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem">
           <div style="text-align:center;">
-            <div class="text-black-50 small">{{ dataItem.timestamp | formatDate }}</div>
+            <div class="text-black-50 small">
+              <ng-container *ngIf="hours">
+                {{ dataItem.timestamp | formatDate }}
+              </ng-container>
+              <ng-container *ngIf="!hours">
+                {{ dataItem.timestamp }}
+              </ng-container>
+            </div>
             <div>{{ dataItem.count }}</div>
           </div>
         </ng-template>
