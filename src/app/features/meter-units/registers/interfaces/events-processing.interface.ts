@@ -1,5 +1,5 @@
 export interface EventsByTimestamp {
-  timestamp: Date;
+  timestamp: Date | any;
   count: number;
 }
 

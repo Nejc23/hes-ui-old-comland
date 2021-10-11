@@ -83,6 +83,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   eventIds = [];
   eventsLoading = false;
   eventsByTimestamp: EventsByTimestamp[];
+  hours = false;
+
   chartVisible = true;
 
   messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
@@ -702,8 +704,10 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
+      this.hours = true;
       outData = this.events.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
     } else {
+      this.hours = false;
       outData = this.events.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
     }
 

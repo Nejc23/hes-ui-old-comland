@@ -3,7 +3,8 @@
     <div class="filter-shadow">
       <div class="mb-3">
         <div class="d-flex mb-3 mt-2">
-          <h4 [openDelay]="500" class="mb-0 text-truncate" container="body" ngbTooltip="{{ 'FORM.REGISTER' | translate }}"
+          <h4 [openDelay]="500" class="mb-0 text-truncate" container="body"
+              ngbTooltip="{{ 'FORM.REGISTER' | translate }}"
               placement="bottom">{{ 'FORM.REGISTER' | translate }}</h4>
           <button (click)="clickShowHideFilter()" *ngIf="false" aria-label="Close" class="btn-close ms-auto"
                   type="button">
@@ -17,7 +18,8 @@
       </div>
       <div class="mb-3 filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
-          <app-input-radio (selectionChanged)="changeRegisterOptionId()" [form]="form" [label]="g.groupName" [options]="g.registerOptions"
+          <app-input-radio (selectionChanged)="changeRegisterOptionId()" [form]="form" [label]="g.groupName"
+                           [options]="g.registerOptions"
                            [property]="registerProperty" [showTooltip]="true"
                            [translate]="false" style="white-space:nowrap">
           </app-input-radio>
@@ -115,7 +117,8 @@
           </div>
           <div *ngIf="isEvent" class="col-12">
             <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
-            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
+            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"
+                                        [hours]="hours"></app-registers-column-chart>
           </div>
         </div>
         <div class="row mt-4">

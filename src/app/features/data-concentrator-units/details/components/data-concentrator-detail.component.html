@@ -185,7 +185,8 @@
             </div>
 
             <app-registers-column-chart *ngIf="chartVisible"
-                                        [eventsByTimestamp]="eventsByTimestamp"></app-registers-column-chart>
+                                        [eventsByTimestamp]="eventsByTimestamp"
+                                        [hours]="hours"></app-registers-column-chart>
 
             <div class="transparent-gray-line tw-flex tw-justify-center">
               <button (click)="hideChart()" class="show-more-rounded-button">
