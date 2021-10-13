@@ -98,10 +98,9 @@ Pact broker infrastructure is stored in resources folder. Access url  https://ad
 
 `npm run pact` - runs pact tests.
 
-## Translation commands
+## Translation
 
-`npm run build-and-extract-i18n` - creates/updates translation file. Location of translation files is `src/assets/i18n`.
-Translation files can be updated in PoEdit editor.
+Location of translations files is `src/assets/i18n`. Translation files can be updated in PoEdit editor.
 
 ## Production build
 
