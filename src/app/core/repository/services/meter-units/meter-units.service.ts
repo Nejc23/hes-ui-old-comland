@@ -1,17 +1,13 @@
-import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
-import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
-import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
-import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
-import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
-import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
-import { Injectable } from '@angular/core';
 import { HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { capitalize } from 'lodash';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
-import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
-import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
+import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
+import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { v4 as uuidv4 } from 'uuid';
 import {
   device,
   meterUnits,
@@ -19,17 +15,23 @@ import {
   meterUnitsForJob,
   meterUnitsLayout,
   removeMeterUnitsFromJob,
-  touConfigImport
+  touConfigImport,
+  validateIpAddress
 } from '../../consts/meter-units.const';
-import { v4 as uuidv4 } from 'uuid';
-import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
-import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
+import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
+import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
-import { capitalize } from 'lodash';
-import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
+import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
+import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
+import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
+import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 import { MuUpdatePlcRequest, MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
+import { ValidateIpAddressRequest } from '../../interfaces/meter-units/validate-ip-address-request';
+import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
+import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
+import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
+import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
+import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -260,6 +262,18 @@ export class MeterUnitsService {
 
   updateMuPlcRequest(deviceId: string, payload: MuUpdatePlcRequest): HttpRequest<any> {
     return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
+  }
+
+  validateIpAddress(ipAddress: string, deviceId: string): Observable<string> {
+    const request: ValidateIpAddressRequest = {
+      ipAddress: ipAddress,
+      deviceId: deviceId
+    };
+    return this.repository.makeRequest(this.validateIpAddressRequest(request));
+  }
+
+  validateIpAddressRequest(request: ValidateIpAddressRequest): HttpRequest<any> {
+    return new HttpRequest('POST', validateIpAddress, request);
   }
 
   getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {

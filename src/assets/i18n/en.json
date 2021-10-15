@@ -282,6 +282,9 @@
     "END-AT": "End at",
     "END-TIME": "End time:",
     "TIME": "Time",
+    "WARNING": {
+      "DUPLICATED": "The IP address you have entered is already in use by another meter!"
+    },
     "ERROR": {
       "ACTION-NOT-EXISTS": "Action not exists",
       "DCU-ERROR": "Error saving DCU!",
@@ -294,6 +297,7 @@
       "MINLENGTH": "Entry does not meet minimum required amount of characters",
       "NOT-MATCH": "Password not match",
       "INVALID-HOSTNAME": "Hostname is invalid",
+      "INVALID-IPADDRESS": "IP is invalid",
       "NOT-VALID-REQUEST": "Not valid request",
       "NUMBER-ERROR": "Entry is not a valid integer:",
       "PATTERN": "Wrong format",

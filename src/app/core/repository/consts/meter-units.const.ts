@@ -51,3 +51,6 @@ export const onDemandRegistersType = '/on-demand/registers/type';
 // on-demand/read-meter
 export const onDemandReadMeter = `/on-demand/read-meter`;
 export const templateGroups = `${basePath}/template-groups`;
+
+// Validations
+export const validateIpAddress = `${basePathMuConcentratorInventory}/validations/ipaddress`;

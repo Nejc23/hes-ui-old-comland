@@ -22,6 +22,8 @@ export class InputTextComponent implements OnInit {
 
   @Output() inputTextBlurValue: EventEmitter<boolean> = new EventEmitter();
 
+  warnings = [];
+
   constructor(private formUtils: FormsUtilsService) {}
 
   ngOnInit() {
@@ -49,6 +51,18 @@ export class InputTextComponent implements OnInit {
 
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
+  }
+
+  showWarning(): boolean {
+    return this.warnings.length > 0;
+  }
+
+  pushWarning(warning: string): void {
+    this.warnings.push(warning);
+  }
+
+  clearWarning(): void {
+    this.warnings = [];
   }
 
   onBlur() {

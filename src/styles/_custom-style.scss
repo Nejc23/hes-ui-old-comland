@@ -190,3 +190,17 @@
 .text-danger {
   @apply tw-text-red;
 }
+
+.text-danger {
+  @apply tw-text-red;
+}
+
+.text-yellow-border {
+  @apply tw-border-solid;
+  @apply tw-border-yellow;
+}
+
+.text-yellow-border:focus 
+{
+  @apply tw-border-yellow;
+}

@@ -9,8 +9,8 @@
     <div class="input-group-prepend" *ngIf="iconName !== ''">
       <span class="input-group-text"><i class="fas {{iconName}}"></i></span>
     </div>
-    <input [name]="property" [placeholder]="placeholder" [type]="inputType" class="form-control"
-           (blur)="onBlur()"
+    <input [name]="property" [placeholder]="placeholder" [type]="inputType"
+           (blur)="onBlur()" [ngClass]="{'form-control': true, 'text-yellow-border': showWarning()}"
            [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
     <span *ngIf="labelRight" class="align-self-end ms-3 mb-2">{{ 'FORM.' + labelRight.toUpperCase() | translate }}</span>
   </div>
@@ -20,4 +20,7 @@
     <app-form-error [error]="formControl!.errors "></app-form-error>
   </div>
 
+  <div class="help-block" *ngIf="showWarning()" class="error">
+    <app-form-warning [warning]="warnings"></app-form-warning>
+  </div>
 </div>
