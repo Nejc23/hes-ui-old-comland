@@ -26,6 +26,8 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { map } from 'rxjs/operators';
 import { ReferenceType } from '../../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { InputTextComponent } from 'src/app/shared/forms/components/input-text/input-text.component';
+import { ValidateIpAddressStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
 
 @Component({
   templateUrl: './add-mu-form.component.html'
@@ -33,6 +35,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class AddMuFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
+
+  @ViewChild('ipField') public ipFieldComponent: InputTextComponent;
 
   form: FormGroup;
   editMu: MeterUnitDetails;
@@ -710,5 +714,24 @@ export class AddMuFormComponent implements OnInit {
 
   toggle() {
     this.opened = !this.opened;
+  }
+
+  validateIpAddress() {
+    this.muService.validateIpAddress(this.form.get(this.ipProperty).value, this.editMu?.deviceId).subscribe((data) => {
+      const status = ValidateIpAddressStatus[data.toUpperCase()];
+      if (status === ValidateIpAddressStatus.DUPLICATED) {
+        this.ipFieldComponent.pushWarning(ValidateIpAddressStatus[status]);
+        if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
+          delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
+          this.form.get(this.ipProperty).updateValueAndValidity();
+        }
+      } else if (status === ValidateIpAddressStatus.INVALID) {
+        this.form.get(this.ipProperty).setErrors({ invalidIpAddress: true });
+        this.form.get(this.ipProperty).markAsDirty();
+        this.ipFieldComponent.clearWarning();
+      } else {
+        this.ipFieldComponent.clearWarning();
+      }
+    });
   }
 }

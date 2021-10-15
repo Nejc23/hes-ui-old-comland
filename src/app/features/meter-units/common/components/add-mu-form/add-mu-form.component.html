@@ -60,7 +60,7 @@
 
                 <div *ngIf="isConnectionTypeIp" class="form-row">
                   <div class="col-6">
-                    <app-input-text [form]="form" [property]="ipProperty" dis label="IP"></app-input-text>
+                    <app-input-text [form]="form" [property]="ipProperty" #ipField label="IP" (inputTextBlurValue)="validateIpAddress()"></app-input-text>
                   </div>
                   <div class="col-3">
                     <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"

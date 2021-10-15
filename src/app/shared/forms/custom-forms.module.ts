@@ -37,6 +37,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormWarningComponent } from './components/form-warning/form-warning.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -92,7 +93,8 @@ import { TranslateModule } from '@ngx-translate/core';
     DateTimePickerComponent,
     FileUploadComponent,
     FileSelectComponent,
-    DateTimeRangePickerComponent
+    DateTimeRangePickerComponent,
+    FormWarningComponent
   ],
   imports: [
     CommonModule,
