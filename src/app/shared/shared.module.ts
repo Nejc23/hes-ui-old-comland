@@ -18,7 +18,7 @@ import { DataConcentratorUnitsSelectComponent } from '../features/data-concentra
 import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/common/components/dcu-fw-upgrade.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from '../features/data-concentrator-units/components/delete-dcu-form/delete-dcu-form.component';
-import { EditDcuFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component';
+import { EditDataConcentratorFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component';
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
@@ -102,6 +102,8 @@ import { SlideOutComponentComponent } from './slide-out-component/slide-out-comp
 import { NoDataComponent } from './no-data/no-data.component';
 import { SecurityRekeyConcentratorComponent } from '../features/data-concentrator-units/components/security/security-rekey-concentrator.component';
 import { NgxTranslateDebugParser } from 'ngx-translate-debug';
+import { ShowMoreComponent } from './show-more/show-more.component';
+import { LabelWithSwitchComponent } from './label-with-switch/label-with-switch.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -129,7 +131,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
-    EditDcuFormComponent,
+    EditDataConcentratorFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -183,7 +185,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     GridModule,
     DataTableComponent,
     SlideOutComponentComponent,
-    NoDataComponent
+    NoDataComponent,
+    ShowMoreComponent,
+    LabelWithSwitchComponent
   ],
   imports: [
     CommonModule,
@@ -238,7 +242,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
-    EditDcuFormComponent,
+    EditDataConcentratorFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -307,14 +311,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataTableComponent,
     SlideOutComponentComponent,
     NoDataComponent,
-    SecurityRekeyConcentratorComponent
+    SecurityRekeyConcentratorComponent,
+    ShowMoreComponent,
+    LabelWithSwitchComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
-    EditDcuFormComponent,
+    EditDataConcentratorFormComponent,
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,

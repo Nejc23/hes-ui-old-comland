@@ -1,4 +1,4 @@
-<div class="tw-m-8 tw-h-full">
+<div class="tw-m-8">
 
   <div *ngIf="saveError" class="alert alert-danger alert-dismissible fade show" role="alert">
     <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
@@ -23,16 +23,9 @@
 
   <div class="form-row">
     <div class="col-12">
-      <app-input-text [form]="form" [property]="hostname" label="HOSTNAME" (inputTextBlurValue)="validateHostname()"></app-input-text>
+      <app-input-text (inputTextBlurValue)="validateHostname()" [form]="form" [property]="hostname"
+                      label="HOSTNAME"></app-input-text>
     </div>
-  </div>
-
-  <div (click)="toggle()" aria-controls="collapse" aria-expanded="false" class="gray-color-dark text-normal pt-2"
-       data-bs-toggle="collapse"
-       data-target="#collapse" type="button">
-    {{ 'COMMON.ADVANCED' | translate }}
-    <i *ngIf="!opened" class="far fa-angle-down me-2"></i>
-    <i *ngIf="opened" class="far fa-angle-up me-2"></i>
   </div>
 
   <div [ngClass]="opened ? 'show' : ''" class="collapse mt-3" id="collapse">
@@ -44,13 +37,7 @@
     </div>
   </div>
 
-  <div class="buttons-bottom-container">
-    <div class="d-flex justify-content-end">
-      <div class="btn-group dropdown" dropdown>
-        <button (click)="saveDcu()" class="btn btn-primary" type="submit">{{ 'BUTTON.SAVE' | translate }}</button>
-      </div>
-    </div>
-  </div>
+  <app-show-more (click)="toggle()" [opened]="opened"></app-show-more>
 </div>
 
 

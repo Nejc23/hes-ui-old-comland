@@ -1,5 +1,5 @@
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { AddMuFormComponent } from './../../common/components/add-mu-form/add-mu-form.component';
+import { AddMeterUnitFormComponent } from '../../common/components/add-mu-form/add-meter-unit-form.component';
 import { GridUtils } from 'src/app/features/global/grid.utils';
 import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
@@ -734,7 +734,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     const options: NgbModalOptions = {
       size: 'lg'
     };
-    const modalRef = this.modalService.open(AddMuFormComponent, options);
+    const modalRef = this.modalService.open(AddMeterUnitFormComponent, options);
     modalRef.result
       .then((result) => {
         this.refreshGrid();

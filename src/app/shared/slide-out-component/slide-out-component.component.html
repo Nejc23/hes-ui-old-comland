@@ -1,4 +1,7 @@
+<!-- reference slide out component -->
+
 <div [ngClass]="visible ? 'show' : ''" class="slide-out-component slide-in from-right">
+
   <div class="slide-in-content">
     <div class="header">
       <div class="small-title-bold"> {{ title | translate }}</div>
@@ -6,9 +9,22 @@
         <img (click)="close()" class="p-2" src="assets/images/icons/close-icon.svg" />
       </div>
     </div>
-    <div class="transparent-gray-line"></div>
-    <div [ngClass]="contentClass" class="content">
+
+    <div *ngIf="showHeaderBorder" class="transparent-gray-line"></div>
+
+    <div [ngClass]="contentClass" class="content tw-h-4/6 lg:tw-h-4/5">
       <ng-content></ng-content>
     </div>
+
+    <div class="buttons">
+      <button
+        (click)="close()"
+        class="btn btn-link"
+        type="submit">{{ secondaryButtonText | translate }}</button>
+      <button (click)="confirm()"
+              class="btn btn-primary"
+              type="submit">{{ primaryButtonText | translate }}</button>
+    </div>
   </div>
+
 </div>

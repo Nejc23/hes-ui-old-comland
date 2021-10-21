@@ -29,22 +29,11 @@
 
                 <div class="form-row">
                   <div class="col-12">
-                    <app-input-text *ngIf="isEditMu" [disabled]="true" [form]="form" [property]="protocolProperty"
-                                    label="PROTOCOL">
-                    </app-input-text>
-                  </div>
-                </div>
-
-                <div class="form-row">
-                  <div class="col-12">
-                    <app-select-input (selectedValueChanged)="templateChanged($event)" *ngIf="!isEditMu"
+                    <app-select-input (selectedValueChanged)="templateChanged($event)"
                                       [disabled]="false" [form]="form"
                                       [property]="templateProperty"
                                       [selectOptions]="templates" label="TEMPLATE">
                     </app-select-input>
-                    <app-input-text *ngIf="isEditMu" [disabled]="true" [form]="form" [property]="templateStringProperty"
-                                    label="TEMPLATE">
-                    </app-input-text>
                   </div>
                 </div>
 
@@ -70,9 +59,9 @@
                   </div>
                 </div>
 
-                <div *ngIf="isNewOrProtocolDlms" class="form-row">
+                <div class="form-row">
                   <div class="col-12">
-                    <app-input-radio (selectionChanged)="communicationTypeChanged($event, !isEditMu)" [form]="form"
+                    <app-input-radio (selectionChanged)="communicationTypeChanged($event)" [form]="form"
                                      [hideCheckbox]="true"
                                      [hideLabelSmall]="true" [options]="communicationTypes"
                                      [property]="communicationTypeProperty"
@@ -99,17 +88,7 @@
 
                   </div>
                 </div>
-
               </ng-container>
-
-              <div (click)="toggle()" aria-controls="collapse" aria-expanded="false"
-                   class="gray-color-dark text-normal pt-2"
-                   data-bs-toggle="collapse"
-                   data-target="#collapse" type="button">
-                {{ 'COMMON.ADVANCED' | translate }}
-                <i *ngIf="!opened" class="far fa-angle-down me-2"></i>
-                <i *ngIf="opened" class="far fa-angle-up me-2"></i>
-              </div>
 
               <div [ngClass]="opened ? 'show' : ''" class="collapse mt-3" id="collapse">
                 <div class="form-row">
@@ -119,11 +98,14 @@
                   </div>
                 </div>
               </div>
+
+              <app-show-more (click)="toggle()" [opened]="opened"></app-show-more>
+
             </div>
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab *ngIf="!isEditMu" title="{{ 'FORM.JOBS' | translate }}">
+        <kendo-tabstrip-tab title="{{ 'FORM.JOBS' | translate }}">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
@@ -137,7 +119,7 @@
 
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab *ngIf="isNewOrProtocolDlms" title="{{ 'COMMON.COMMUNICATION' | translate }}">
+        <kendo-tabstrip-tab title="{{ 'COMMON.COMMUNICATION' | translate }}">
           <ng-template kendoTabContent>
             <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
@@ -281,7 +263,7 @@
             </div>
           </ng-template>
         </kendo-tabstrip-tab>
-        <kendo-tabstrip-tab *ngIf="isNewOrProtocolDlms" title="{{ 'COMMON.ADVANCED' | translate }}">
+        <kendo-tabstrip-tab title="{{ 'COMMON.ADVANCED' | translate }}">
           <ng-template kendoTabContent>
             <ng-template [ngTemplateOutlet]="noTemplateSelected"></ng-template>
             <div *ngIf="isTemplateSelected">
@@ -323,10 +305,8 @@
     <div class="d-flex justify-content-end">
       <button (click)="cancel()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
       <div class="btn-group dropdown" dropdown>
-        <button (click)="add()" *ngIf="!isEditMu" class="btn btn-primary"
+        <button (click)="add()" class="btn btn-primary"
                 type="submit">{{ 'BUTTON.ADD' | translate }}</button>
-        <button (click)="update()" *ngIf="isEditMu" class="btn btn-primary"
-                type="submit">{{ 'BUTTON.UPDATE' | translate }}</button>
         <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
           aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
         </button> -->

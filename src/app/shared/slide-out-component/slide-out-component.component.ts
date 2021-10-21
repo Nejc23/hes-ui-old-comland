@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-slide-out-component',
@@ -9,12 +10,21 @@ export class SlideOutComponentComponent {
   @Input() visible = true;
   @Input() contentClass = '';
   @Input() title = '';
+  @Input() showHeaderBorder = true;
+
+  @Input() primaryButtonText = this.translate.instant('BUTTON.SAVE');
+  @Input() secondaryButtonText = this.translate.instant('BUTTON.CANCEL');
 
   @Output() closeButtonClickedEvent = new EventEmitter<boolean>();
+  @Output() confirmButtonClickedEvent = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(private translate: TranslateService) {}
 
   close() {
     this.closeButtonClickedEvent.emit(true);
+  }
+
+  confirm() {
+    this.confirmButtonClickedEvent.emit(true);
   }
 }

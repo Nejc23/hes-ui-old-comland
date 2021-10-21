@@ -15,7 +15,7 @@
   transition: transform .5s ease;
   border-radius: 4px;
   background-color: white;
-  height: 98vh;
+  height: 97vh;
   margin: 1rem;
   box-shadow: rgb(0 0 0 / 24%) 0px 1px 8px;
 }
@@ -43,5 +43,29 @@
 }
 
 .content {
-  height: 80vh;
+  overflow-y: auto;
+}
+
+::-webkit-scrollbar {
+  width: 0.25em;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  @apply tw-bg-lightGray;
+  //outline: 1px solid #4c0e3c;
+}
+
+.buttons {
+  @apply tw-inline-flex;
+  @apply tw-justify-between;
+  @apply tw-w-full;
+  @apply tw-pl-4;
+  @apply tw-pr-6;
+  @apply tw-fixed;
+  @apply tw-mb-8;
+  bottom: 0;
 }

@@ -116,9 +116,9 @@
     "MORE-OPTIONS": "More options",
     "NA": "N/A",
     "NAME": "Name",
-    "NO-DATA-FOUND": "No data found",
+    "NO-DATA-FOUND": "No data found.",
     "NO-FILTER-APPLIED": "No filter applied",
-    "NO-RECORDS-DATE-RANGE": "No records found. You may need to adjust your date range.",
+    "NO-RECORDS-DATE-RANGE": "Try different or less specific keywords & reset your filters.",
     "NO-RECORDS-FOUND": "No records found.",
     "NO-RECORDS-SEARCH": "No records found. You may need to adjust your search or filter parameters.",
     "NOT-EQUALS": "Not Equals",
@@ -189,7 +189,11 @@
     "SHOW-DETAILS": "Show details",
     "HIDE-DETAILS": "Hide details",
     "SHOW-CHART": "Show chart",
-    "HIDE-CHART": "Hide chart"
+    "HIDE-CHART": "Hide chart",
+    "COMMUNICATION-MODULE": "Communication module",
+    "AUTHENTICATION": "Authentication",
+    "COMMUNICATION-DETAILS": "Communication module details",
+    "BASIC-DETAILS": "Details"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -364,6 +368,7 @@
     "START-AT": "Start at",
     "START-TIME": "Start time:",
     "START-WITH-RELEASE": "Start with release",
+    "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
     "STATE": "State",
     "STATUS": "Status",
     "TAG": "Tag",
@@ -376,6 +381,7 @@
     "UPLOAD-FILED": "Upload failed",
     "UPLOADED-FILE": "Uploaded file",
     "UPLOADING-FILE": "Uploading file",
+    "USE-LDN": "Use Logical Device Name",
     "USE-LDN-AS-SYSTITLE": "Use Logical Device Name (LDN) as Systitle",
     "USERNAME": "Username",
     "VENDOR": "Vendor",
@@ -390,7 +396,11 @@
     "PLCSTATUS": "PLC status",
     "HOSTNAME": "Hostname",
     "TIMEZONENAME": "Timezone",
-    "FIRSTINSTALLDATE": "Installed"
+    "FIRSTINSTALLDATE": "Installed",
+    "TEMPLATENAME": "Template name",
+    "PROTOCOLTYPE": "Protocol",
+    "REFERENCINGTYPE": "Short names referencing",
+    "COMMUNICATIONTYPE": "Communication type"
   },
   "GRID": {
     "ACTIVE": "Active",

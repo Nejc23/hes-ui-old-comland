@@ -30,9 +30,9 @@ import { InputTextComponent } from 'src/app/shared/forms/components/input-text/i
 import { ValidateIpAddressStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
 
 @Component({
-  templateUrl: './add-mu-form.component.html'
+  templateUrl: './add-meter-unit-form.component.html'
 })
-export class AddMuFormComponent implements OnInit {
+export class AddMeterUnitFormComponent implements OnInit {
   @ViewChild(JobsSelectComponent) jobsSelect: JobsSelectComponent;
   @ViewChild(TabStripComponent) public tabstrip: TabStripComponent;
 
@@ -40,7 +40,6 @@ export class AddMuFormComponent implements OnInit {
 
   form: FormGroup;
   editMu: MeterUnitDetails;
-  isEditMu = false;
   plcDevice = false;
 
   manufacturers: Codelist<number>[];
@@ -206,21 +205,12 @@ export class AddMuFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.externalId);
   }
 
-  get isNewOrProtocolDlms() {
-    return !this.isEditMu || this.editMu.driver?.toLowerCase() === 'dlms';
-  }
-
   ngOnInit() {
     this.codelistServiceMu
       .meterUnitVendorCodelist(null)
       .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
       .subscribe((manufacturers) => {
         this.manufacturers = manufacturers;
-
-        if (this.isEditMu) {
-          const manufacturer = this.manufacturers.find((t) => this.editMu.manufacturer.toLowerCase() === t.value.toLowerCase());
-          this.form.get(this.manufacturerProperty).setValue(manufacturer);
-        }
       });
 
     this.autoTemplateService.getTemplates().subscribe((temps) => {
@@ -231,12 +221,6 @@ export class AddMuFormComponent implements OnInit {
         .sort((a, b) => {
           return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
         });
-
-      if (this.isEditMu) {
-        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
-        this.form.get(this.templateProperty).setValue(template);
-        this.isTemplateSelected = template && template.id ? true : false;
-      }
     });
   }
 
@@ -251,9 +235,9 @@ export class AddMuFormComponent implements OnInit {
 
     return this.formBuilder.group({
       [this.nameProperty]: [editMu?.name],
-      [this.serialNumberProperty]: [{ value: editMu?.serialNumber, disabled: this.isEditMu }, Validators.required],
+      [this.serialNumberProperty]: [editMu?.serialNumber, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
-      [this.templateProperty]: [{ value: null, disabled: this.isEditMu }, Validators.required],
+      [this.templateProperty]: [null, Validators.required],
       [this.templateStringProperty]: [{ value: editMu?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
 
@@ -261,7 +245,7 @@ export class AddMuFormComponent implements OnInit {
         { value: editMu?.ip, disabled: this.plcDevice },
         this.plcDevice ? null : [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]
       ],
-      [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }],
+      [this.portProperty]: [{ value: editMu?.port, disabled: this.plcDevice }, Validators.required],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
 
       [this.protocolProperty]: [{ value: editMu?.driver, disabled: true }],
@@ -327,7 +311,7 @@ export class AddMuFormComponent implements OnInit {
   templateChanged(value: Codelist<string>) {
     this.isTemplateSelected = value && value.id ? true : false;
 
-    if (this.isTemplateSelected && !this.isEditMu) {
+    if (this.isTemplateSelected) {
       this.templatingService.getDefaultValues(value.id).subscribe((values) => {
         this.templateDefaultValues = values;
         if (this.templateDefaultValues.hdlcInformation || this.templateDefaultValues.wrapperInformation) {
@@ -492,10 +476,8 @@ export class AddMuFormComponent implements OnInit {
   update() {
     this.setFormControls();
 
-    if (!this.isNewOrProtocolDlms) {
-      this.disableAdvancedControls();
-      this.form.get(this.communicationTypeProperty).disable();
-    }
+    this.disableAdvancedControls();
+    this.form.get(this.communicationTypeProperty).disable();
 
     let muFormData;
     let request;
@@ -542,15 +524,12 @@ export class AddMuFormComponent implements OnInit {
       this.form.get(this.templateProperty).invalid ||
       this.form.get(this.connectionTypeProperty).invalid ||
       this.form.get(this.ipProperty).invalid ||
-      this.form.get(this.communicationTypeProperty).invalid
+      this.form.get(this.communicationTypeProperty).invalid ||
+      this.form.get(this.portProperty).invalid
     ) {
       this.tabstrip.selectTab(0); // Basic
     } else {
-      if (this.isEditMu) {
-        this.tabstrip.selectTab(1); // Communication (jobs tab is not visible)
-      } else {
-        this.tabstrip.selectTab(2); // Communication
-      }
+      this.tabstrip.selectTab(2); // Communication
     }
   }
 
@@ -634,13 +613,11 @@ export class AddMuFormComponent implements OnInit {
     }
 
     let advancedInformation = null;
-    if (this.isNewOrProtocolDlms) {
-      advancedInformation = {
-        authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
-        ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
-        startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
-      };
-    }
+    advancedInformation = {
+      authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
+      ldnAsSystitle: this.form.get(this.advancedLdnAsSystitleProperty).value ?? false,
+      startWithRelease: this.form.get(this.advancedStartWithReleaseProperty).value ?? false
+    };
 
     return {
       deviceId: this.editMu.deviceId,
@@ -649,7 +626,7 @@ export class AddMuFormComponent implements OnInit {
       ip: this.form.get(this.ipProperty).value,
       port: this.form.get(this.portProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
-      communicationType: this.isNewOrProtocolDlms ? +this.form.get(this.communicationTypeProperty).value : null,
+      communicationType: +this.form.get(this.communicationTypeProperty).value,
       advancedInformation,
       wrapperInformation,
       hdlcInformation,
@@ -657,7 +634,7 @@ export class AddMuFormComponent implements OnInit {
       serialNumber: this.editMu.serialNumber,
       template: this.form.get(this.templateProperty).value,
       connectionType: this.form.get(this.connectionTypeProperty).value,
-      driver: this.isNewOrProtocolDlms ? 2 : 0,
+      driver: 2,
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME,
       externalId: this.form.get(this.externalIdProperty).value
     };
@@ -669,16 +646,6 @@ export class AddMuFormComponent implements OnInit {
       name: this.form.get(this.nameProperty).value,
       externalId: this.form.get(this.externalIdProperty).value
     };
-  }
-
-  setFormEdit(muDetails: MeterUnitDetails) {
-    this.editMu = muDetails;
-    this.isEditMu = true;
-    if (muDetails.referencingType?.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase()) {
-      this.shortNameSelected = true;
-    }
-    this.form = this.createForm(muDetails);
-    this.isGatewayEnabled = muDetails.wrapperInformation?.isGateWay;
   }
 
   getTitle(): string {

@@ -16,7 +16,7 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
-import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
+import { EditDataConcentratorFormComponent } from '../../components/edit-dcu-form/edit-data-concentrator-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
@@ -86,6 +86,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   hours = false;
 
   chartVisible = true;
+  saveData = false;
 
   messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
   messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
@@ -317,6 +318,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   getData() {
+    this.saveData = false;
     if (this.concentratorId.length > 0) {
       this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
         this.data = response;
@@ -526,8 +528,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     const options: NgbModalOptions = {
       size: 'lg'
     };
-    const modalRef = this.modalService.open(EditDcuFormComponent, options);
-    const component: EditDcuFormComponent = modalRef.componentInstance;
+    const modalRef = this.modalService.open(EditDataConcentratorFormComponent, options);
+    const component: EditDataConcentratorFormComponent = modalRef.componentInstance;
     component.concentratorId = this.concentratorId;
     component.form = this.editForm;
     component.credentialsVisible = this.credentialsVisible;
@@ -846,6 +848,14 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     } else {
       return this.permissionService.hasAccess(PermissionEnumerator.Manage_Concentrators);
     }
+  }
+
+  update() {
+    this.saveData = true;
+  }
+
+  isEditVisible(): boolean {
+    return this.permissionService.hasAccess(PermissionEnumerator.Manage_Concentrators);
   }
 
   private editReadingJob(data: any, options: NgbModalOptions) {

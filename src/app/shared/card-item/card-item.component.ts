@@ -79,8 +79,6 @@ export class CardItemComponent implements OnInit, OnChanges {
     }
   ];
 
-  private PAGINATION_INCREMENT = 4;
-
   constructor() {}
 
   ngOnInit(): void {
@@ -132,7 +130,7 @@ export class CardItemComponent implements OnInit, OnChanges {
   }
 
   showMoreItems() {
-    this.paginationLimit += this.PAGINATION_INCREMENT;
+    this.paginationLimit = this.controls.length;
   }
 
   showLessItems() {
@@ -167,6 +165,12 @@ export class CardItemComponent implements OnInit, OnChanges {
         default:
           return 'undefined-status colored-element';
       }
+    }
+  }
+
+  addColoredTagBackground(formField: string) {
+    if (formField && formField === 'communicationType') {
+      return 'primary-transparent-bg colored-tag';
     }
   }
 }

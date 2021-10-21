@@ -15,8 +15,8 @@
   <div class="app-card-body">
 
     <ng-container *ngIf="loading || loadingFailed">
-      <app-no-data [errorMsg]="'Unable to load data'" [loading]="loadingFailed"
-                   [text]="'This can happen if the device or the underlying system is not available.'"></app-no-data>
+      <app-no-data [loading]="loadingFailed" [message]="'Unable to load data'"
+                   [secondaryMessage]="'This can happen if the device or the underlying system is not available.'"></app-no-data>
       <app-no-data [loading]="loading"></app-no-data>
     </ng-container>
 
@@ -30,21 +30,32 @@
         <div
           *ngFor="let formData of controls  | slice: 0: paginationLimit ?  paginationLimit: controls.length; let i = index"
           [ngClass]="i >= initLimit ? 'tw-bg-backgroundGray' : ''"
-          class="app-card-row">
+          class="app-card-row last:tw-border-b-0 tw-border-b">
           <div class="tw-text-darkGray">
-            {{ 'FORM.' + formData.name.toUpperCase() | translate }}
+            {{ 'FORM.' + formData.name.toUpperCase() | translate }}:
           </div>
-          <div *ngIf="formData.control.value || formData.control.value?.value"
-               class="tw-text-black">
-            <ng-container *ngIf="formData.control.value?.id; else notObject">
-              {{ formData.control.value.value }}
-            </ng-container>
-            <ng-template #notObject>  {{ formData.control.value }}</ng-template>
-          </div>
-          <div *ngIf="!formData.control.value"
-               class="tw-text-darkGray">
-            {{ 'COMMON.NOT-DEFINED' | translate }}
-          </div>
+          <ng-container *ngIf="formData.name !== 'referencingType'">
+            <div *ngIf="formData.control.value || formData.control.value?.value"
+                 [ngClass]="addColoredTagBackground(formData.name)" class="tw-text-black">
+              <ng-container *ngIf="formData.control.value?.id; else notObject">
+                {{ formData.control.value.value }}
+              </ng-container>
+              <ng-template #notObject>  {{ formData.control.value }}
+              </ng-template>
+            </div>
+            <div *ngIf="!formData.control.value"
+                 class="tw-text-darkGray">
+              {{ 'COMMON.NOT-DEFINED' | translate }}
+            </div>
+          </ng-container>
+
+          <!-- custom fields -->
+          <ng-container>
+            <div *ngIf="formData.name === 'referencingType'">
+              <kendo-switch [checked]="formData.control.value" [readonly]="true"
+                            class="small-switch"></kendo-switch>
+            </div>
+          </ng-container>
         </div>
       </div>
 
@@ -145,6 +156,7 @@
 
 
   <div *ngIf="!showMoreButton && !buttonWithLink && latLang.length === 0" class="bottom-border"></div>
+  <!--  <div *ngIf="!paginationLimit" class="bottom-border"></div>-->
 </div>
 
 <!-- Usage example: -->
