@@ -35,10 +35,11 @@ import { RegistersGridComponent } from '../../registers/components/grid/register
 import { GridCellDateComponent } from '../../registers/components/grid/grid-custom-components/grid-cell-date.component';
 import { GridCellProtocolComponent } from '../../types/components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from '../../types/components/grid-custom-components/grid-cell-medium.component';
-import { AddMuFormComponent } from '../components/add-mu-form/add-mu-form.component';
+import { AddMeterUnitFormComponent } from '../components/add-mu-form/add-meter-unit-form.component';
 import { GridCellInstantValuesComponent } from '../../types/components/grid-custom-components/grid-cell-instant-values.component';
 import { MeterUnitsRoutingModule } from './meter-units-routing.module';
 import { PipesModule } from '../../../../shared/pipes/pipes.module';
+import { EditMeterUnitFormComponent } from '../components/edit-mu-form/edit-meter-unit-form.component';
 
 @NgModule({
   entryComponents: [],
@@ -75,10 +76,11 @@ import { PipesModule } from '../../../../shared/pipes/pipes.module';
     MeterUnitDetailsComponent,
     GridCellProtocolComponent,
     GridCellMediumComponent,
-    AddMuFormComponent,
+    AddMeterUnitFormComponent,
     GridCellInstantValuesComponent,
     GridCellThresholdComponent,
-    GridCellUnitComponent
+    GridCellUnitComponent,
+    EditMeterUnitFormComponent
   ],
   exports: [RegistersColumnChartComponent],
   imports: [

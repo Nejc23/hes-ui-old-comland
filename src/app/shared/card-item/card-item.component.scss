@@ -41,7 +41,6 @@
   @apply tw-w-full;
   @apply tw-h-12;
   @apply tw-items-center;
-  @apply tw-border-b;
   @apply tw-border-solid;
   @apply tw-border-lightGray;
 }
@@ -55,7 +54,7 @@
   @apply tw-border-solid;
   @apply tw-rounded-b-md;
   @apply tw-border-lightGray;
-  @apply tw-border-t-0;
+  @apply tw-border-t;
   @apply tw-text-center;
   @apply tw-cursor-pointer;
 }
@@ -115,11 +114,6 @@
   @apply tw-rounded-b-md;
 }
 
-.colored-element {
-  @apply tw-rounded;
-  @apply tw-h-5;
-  @apply tw-items-center;
-  @apply tw-justify-center;
-  @apply tw-capitalize;
-  @apply tw-px-2;
+.small-switch {
+  transform: scale(0.75);
 }

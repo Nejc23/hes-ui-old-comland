@@ -283,3 +283,37 @@ body {
   background-color: rgb($primary, 0.65) !important;
 }
 
+.sticky-header {
+  @apply tw-fixed;
+  @apply tw-top-0;
+  @apply tw-bg-white;
+  @apply tw-h-44;
+  @apply tw-z-40;
+  @apply tw-px-5;
+  // sticky transparent issue fix
+}
+
+// kendo TABS 
+.edit-meter {
+  .k-tabstrip-items {
+    #k-tabstrip-tab-0 {
+      margin-left: 2.5rem;
+    }
+  }
+}
+
+
+.primary-transparent-bg {
+  color: $primary;
+  background-color: rgba($primary, 0.2);
+}
+
+.colored-tag {
+  @apply tw-rounded;
+  @apply tw-h-5;
+  @apply tw-items-center;
+  @apply tw-justify-center;
+  @apply tw-capitalize;
+  @apply tw-px-2;
+  @apply tw-font-medium;
+}

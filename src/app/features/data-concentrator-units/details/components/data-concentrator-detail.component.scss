@@ -5,22 +5,11 @@
   top: 10.875rem;
   @apply tw-bg-white;
   margin-left: -2.5rem; // kendoUI tabs full screen line hack
-  @apply tw-shadow;
+  box-shadow: 0 4px 5px -5px #6F7072;
 }
 
 .dcu-tabs ::ng-deep li#k-tabstrip-tab-0 {
   margin-left: 2.5rem;
-}
-
-
-.sticky {
-  @apply tw-fixed;
-  @apply tw-top-0;
-  @apply tw-bg-white;
-  @apply tw-h-44;
-  @apply tw-z-40;
-  @apply tw-px-5;
-  // sticky transparent issue fix
 }
 
 .table-header {
@@ -58,13 +47,10 @@
   height: 35px;
 }
 
-//::ng-deep button.k-button.k-grid-excel.k-button-icontext {
-//  position: fixed;
-//  top: 260px;
-//  right: 53px;
-//}
-
 .button-padding-top {
   padding-top: 21px;
 }
 
+//.dcu-tabs ::ng-deep .k-tabstrip {
+//  height: 85vh;
+//}

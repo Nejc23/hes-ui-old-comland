@@ -1,6 +1,6 @@
 <!-- reference Details page component -->
 <!-- tw--m-5 -> negative margin align hack -->
-<div *ngIf="data" [style.width.px]="addWidth()" class="sticky">
+<div *ngIf="data" [style.width.px]="addWidth()" class="sticky-header">
 
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
@@ -39,13 +39,17 @@
       <ng-template kendoTabContent>
 
         <div class="tw-py-10">
-          <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()" [title]="'COMMON.EDIT-DETAILS'"
+          <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()"
+                                   (confirmButtonClickedEvent)="update()"
+                                   [title]="'COMMON.EDIT-DETAILS'"
                                    [visible]="openEdit">
-            <app-edit-dcu-form (savedDataEvent)="refreshData()"
-                               [concentratorId]="data.concentratorId"
-                               [credentialsVisible]="credentialsVisible"
-                               [form]="editForm">
-            </app-edit-dcu-form>
+            <app-edit-data-concentrator-form (savedDataEvent)="refreshData()"
+                                             [concentratorId]="data.concentratorId"
+                                             [credentialsVisible]="credentialsVisible"
+                                             [form]="editForm"
+                                             [saveData]="saveData">
+            </app-edit-data-concentrator-form>
+
           </app-slide-out-component>
 
           <!--          <div class="tw-grid tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-6 tw-gap-6 tw-py-5">-->
@@ -72,8 +76,11 @@
 
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
 
-            <app-card-item (buttonClickEvent)="editButtonClicked()" [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="'BUTTON.EDIT'" [form]="form"
+
+            <app-card-item (buttonClickEvent)="editButtonClicked()"
+                           [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="isEditVisible() ? 'BUTTON.EDIT' : ''"
+                           [form]="form"
                            [paginationLimit]="7"
                            [showMoreButton]="true" [title]="'COMMON.DETAILS'">
             </app-card-item>
@@ -227,7 +234,8 @@
         </div>
 
         <app-no-data *ngIf="!events || eventsLoading" [loading]="eventsLoading"
-                     [secondaryMessage]="'PLC-METER.REGISTER.CHANGE-TIME'">
+                     [secondaryMessage]="'COMMON.NO-RECORDS-DATE-RANGE'"
+                     class="tw-inline-flex tw-items-center tw-justify-center tw-h-1/2 tw-w-full">
         </app-no-data>
 
       </ng-template>
@@ -237,6 +245,9 @@
 </div>
 
 <ng-template #popDateTimePicker>
-  <app-datetime-range-picker (formClosed)="closePopover()" [form]="eventsForm"
-                             [initValues]="true"></app-datetime-range-picker>
+  <app-datetime-range-picker (formClosed)="closePopover()"
+                             [form]="eventsForm"
+                             [initValues]="true">
+
+  </app-datetime-range-picker>
 </ng-template>

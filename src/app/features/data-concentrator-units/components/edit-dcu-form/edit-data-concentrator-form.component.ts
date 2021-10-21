@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
@@ -12,13 +12,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { ValidateHostnameRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-update-request.interface';
 
 @Component({
-  selector: 'app-edit-dcu-form',
-  templateUrl: './edit-dcu-form.component.html'
+  selector: 'app-edit-data-concentrator-form',
+  templateUrl: './edit-data-concentrator-form.component.html'
 })
-export class EditDcuFormComponent implements OnInit {
+export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
   @Input() form: FormGroup;
   @Input() concentratorId = '';
   @Output() savedDataEvent = new EventEmitter<boolean>();
+  @Input() saveData = false;
 
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
@@ -90,6 +91,13 @@ export class EditDcuFormComponent implements OnInit {
     });
 
     this.dcuTags$ = this.codelistService.dcuTagCodelist();
+  }
+
+  ngOnChanges() {
+    if (this.saveData) {
+      this.saveDcu();
+      this.saveData = false;
+    }
   }
 
   fillData(): EditDcuForm {
