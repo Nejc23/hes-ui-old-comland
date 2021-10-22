@@ -20,6 +20,7 @@ export class FormErrorComponent {
       notMatchPassword: this.translate.instant('FORM.ERROR.NOT-MATCH'),
       invalidHostname: this.translate.instant('FORM.ERROR.INVALID-HOSTNAME'),
       invalidIpAddress: this.translate.instant('FORM.ERROR.INVALID-IPADDRESS'),
+      invalidDuplicatedIpAddress: this.translate.instant('FORM.ERROR.DUPLICATED-IPADDRESS'),
       max: this.translate.instant('FORM.ERROR.MAX'),
       min: this.translate.instant('FORM.ERROR.MIN'),
       maxError: this.translate.instant('FORM.ERROR.MAX'),

@@ -264,10 +264,11 @@ export class MeterUnitsService {
     return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
   }
 
-  validateIpAddress(ipAddress: string, deviceId: string): Observable<string> {
+  validateIpAddress(ipAddress: string, deviceId: string, interfaceType: number): Observable<string> {
     const request: ValidateIpAddressRequest = {
       ipAddress: ipAddress,
-      deviceId: deviceId
+      deviceId: deviceId,
+      interfaceType: interfaceType
     };
     return this.repository.makeRequest(this.validateIpAddressRequest(request));
   }

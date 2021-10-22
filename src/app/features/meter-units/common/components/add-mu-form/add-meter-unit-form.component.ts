@@ -378,6 +378,11 @@ export class AddMeterUnitFormComponent implements OnInit {
     }
   }
 
+  communicationTypeChangedEvent(value: RadioOption, getDefaultValues: boolean = true) {
+    this.communicationTypeChanged(value, getDefaultValues);
+    this.validateIpAddressAndSetNotice(value.value);
+  }
+
   communicationTypeChanged(value: RadioOption, getDefaultValues: boolean = true) {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = value ? +value?.value === 1 : false;
@@ -684,21 +689,50 @@ export class AddMeterUnitFormComponent implements OnInit {
   }
 
   validateIpAddress() {
-    this.muService.validateIpAddress(this.form.get(this.ipProperty).value, this.editMu?.deviceId).subscribe((data) => {
-      const status = ValidateIpAddressStatus[data.toUpperCase()];
-      if (status === ValidateIpAddressStatus.DUPLICATED) {
-        this.ipFieldComponent.pushWarning(ValidateIpAddressStatus[status]);
-        if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
-          delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
-          this.form.get(this.ipProperty).updateValueAndValidity();
+    this.validateIpAddressAndSetNotice(this.form.get(this.communicationTypeProperty).value);
+  }
+
+  validateIpAddressAndSetNotice(communicationType: string) {
+    this.muService
+      .validateIpAddress(this.form.get(this.ipProperty).value, this.editMu?.deviceId, parseInt(communicationType, 10))
+      .subscribe((data) => {
+        const status = ValidateIpAddressStatus[data.toUpperCase()];
+        switch (status) {
+          case ValidateIpAddressStatus.INVALID: {
+            this.form.get(this.ipProperty).setErrors({ invalidIpAddress: true });
+            this.form.get(this.ipProperty).markAsDirty();
+            this.ipFieldComponent.clearWarning();
+            break;
+          }
+          case ValidateIpAddressStatus.VALID_DUPLICATED: {
+            this.ipFieldComponent.pushWarning(ValidateIpAddressStatus[status]);
+            this.clearIpAddressError();
+            break;
+          }
+          case ValidateIpAddressStatus.INVALID_DUPLICATED: {
+            this.form.get(this.ipProperty).setErrors({ invalidDuplicatedIpAddress: true });
+            this.form.get(this.ipProperty).markAsDirty();
+            this.ipFieldComponent.clearWarning();
+            break;
+          }
+          default: {
+            this.ipFieldComponent.clearWarning();
+            this.clearIpAddressError();
+            break;
+          }
         }
-      } else if (status === ValidateIpAddressStatus.INVALID) {
-        this.form.get(this.ipProperty).setErrors({ invalidIpAddress: true });
-        this.form.get(this.ipProperty).markAsDirty();
-        this.ipFieldComponent.clearWarning();
-      } else {
-        this.ipFieldComponent.clearWarning();
-      }
-    });
+      });
+  }
+
+  clearIpAddressError() {
+    if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
+      delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
+      this.form.get(this.ipProperty).updateValueAndValidity();
+    }
+
+    if (this.form.get(this.ipProperty).hasError('invalidDuplicatedIpAddress')) {
+      delete this.form.get(this.ipProperty).errors['invalidDuplicatedIpAddress'];
+      this.form.get(this.ipProperty).updateValueAndValidity();
+    }
   }
 }
