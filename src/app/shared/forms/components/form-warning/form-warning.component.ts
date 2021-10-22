@@ -12,7 +12,7 @@ export class FormWarningComponent {
 
   constructor(private translate: TranslateService) {
     this.translations = {
-      DUPLICATED: this.translate.instant('FORM.WARNING.DUPLICATED')
+      VALID_DUPLICATED: this.translate.instant('FORM.WARNING.DUPLICATED')
     };
   }
 

@@ -24,6 +24,8 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { map } from 'rxjs/operators';
 import { ReferenceType } from '../../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { TranslateService } from '@ngx-translate/core';
+import { ValidateIpAddressStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
+import { InputTextComponent } from 'src/app/shared/forms/components/input-text/input-text.component';
 
 @Component({
   selector: 'app-edit-meter-unit-form',
@@ -38,6 +40,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   @Output() savedDataEvent = new EventEmitter<boolean>();
   @Input() saveData = false;
   @Input() basicDetails = false;
+  @ViewChild('ipField') public ipFieldComponent: InputTextComponent;
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
@@ -371,6 +374,11 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     }
   }
 
+  communicationTypeChangedEvent(value: RadioOption, getDefaultValues: boolean = true) {
+    this.communicationTypeChanged(value, getDefaultValues);
+    this.validateIpAddressAndSetNotice(value.value);
+  }
+
   communicationTypeChanged(value: RadioOption, getDefaultValues: boolean = true) {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = value ? +value?.value === 1 : false;
@@ -641,5 +649,53 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
 
   toggle() {
     this.opened = !this.opened;
+  }
+
+  validateIpAddress() {
+    this.validateIpAddressAndSetNotice(this.form.get(this.communicationTypeProperty).value);
+  }
+
+  validateIpAddressAndSetNotice(communicationType: string) {
+    this.muService
+      .validateIpAddress(this.form.get(this.ipProperty).value, this.data?.deviceId, parseInt(communicationType, 10))
+      .subscribe((validationData) => {
+        const status = ValidateIpAddressStatus[validationData.toUpperCase()];
+        switch (status) {
+          case ValidateIpAddressStatus.INVALID: {
+            this.form.get(this.ipProperty).setErrors({ invalidIpAddress: true });
+            this.form.get(this.ipProperty).markAsDirty();
+            this.ipFieldComponent.clearWarning();
+            break;
+          }
+          case ValidateIpAddressStatus.VALID_DUPLICATED: {
+            this.ipFieldComponent.pushWarning(ValidateIpAddressStatus[status]);
+            this.clearIpAddressError();
+            break;
+          }
+          case ValidateIpAddressStatus.INVALID_DUPLICATED: {
+            this.form.get(this.ipProperty).setErrors({ invalidDuplicatedIpAddress: true });
+            this.form.get(this.ipProperty).markAsDirty();
+            this.ipFieldComponent.clearWarning();
+            break;
+          }
+          default: {
+            this.ipFieldComponent.clearWarning();
+            this.clearIpAddressError();
+            break;
+          }
+        }
+      });
+  }
+
+  clearIpAddressError() {
+    if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
+      delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
+      this.form.get(this.ipProperty).updateValueAndValidity();
+    }
+
+    if (this.form.get(this.ipProperty).hasError('invalidDuplicatedIpAddress')) {
+      delete this.form.get(this.ipProperty).errors['invalidDuplicatedIpAddress'];
+      this.form.get(this.ipProperty).updateValueAndValidity();
+    }
   }
 }

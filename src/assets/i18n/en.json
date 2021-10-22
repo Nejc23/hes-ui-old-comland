@@ -302,6 +302,7 @@
       "NOT-MATCH": "Password not match",
       "INVALID-HOSTNAME": "Hostname is invalid",
       "INVALID-IPADDRESS": "IP is invalid",
+      "DUPLICATED-IPADDRESS": "IP is duplicated",
       "NOT-VALID-REQUEST": "Not valid request",
       "NUMBER-ERROR": "Entry is not a valid integer:",
       "PATTERN": "Wrong format",
