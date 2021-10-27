@@ -33,23 +33,6 @@
   font-weight: bold;
 }
 
-.refresh-button {
-  @apply tw-flex;
-  @apply tw-p-1;
-  @apply tw-w-8;
-  @apply tw-rounded-sm;
-  @apply tw-border-mediumGray;
-  @apply tw-border;
-  @apply tw-border-solid;
-  @apply tw-h-full;
-  @apply tw-items-center;
-  @apply tw-justify-center;
-  height: 35px;
-}
-
-.button-padding-top {
-  padding-top: 21px;
-}
 
 //.dcu-tabs ::ng-deep .k-tabstrip {
 //  height: 85vh;

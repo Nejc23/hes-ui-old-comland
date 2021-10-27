@@ -134,14 +134,14 @@
 //kendo toolbar position over the chart hack
 .with-chart.visible ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
   position: relative;
-  bottom: 24.8rem;
-  margin-left: 22.5rem;
+  bottom: 27.3rem;
+  margin-left: 28.5rem;
 }
 
 .with-chart.hidden ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
   position: relative;
-  bottom: 8.7rem;
-  margin-left: 22.5rem;
+  bottom: 11.2rem;
+  margin-left: 28.5rem;
 }
 
 .grid-cell-text {

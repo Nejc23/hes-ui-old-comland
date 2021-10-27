@@ -159,36 +159,21 @@
       <ng-template kendoTabContent>
 
         <div *ngIf="eventsForm" class="tw-py-10">
-          <div class="tw-flex tw-mt-2 tw-w-82 tw-h-14">
-            <app-input-text
-              #popover="ngbPopover"
-              [autoClose]="'outside'"
-              [form]="eventsForm"
-              [iconName]="'fa-calendar'"
-              [isReadOnly]="true"
-              [ngbPopover]="popDateTimePicker"
-              [property]="'labelText'"
-              class="tw-w-full"
-              container="body"
-              label="Select-date"
-              placement="bottom"
-              popoverClass="date-range-picker-popover"
-            >
-            </app-input-text>
 
-            <div (click)="loadRegistersData()" class="tw-pl-2 button-padding-top">
-              <div
-                class="refresh-button">
-                <img [ngClass]="eventsLoading ? 'tw-animate-spin' : ''"
-                     src="assets/images/icons/refresh-icon.svg" />
-              </div>
-            </div>
+          <div class="tw-flex tw-mt-2 tw-h-14">
+            <app-date-range-picker
+              (valueChange)="loadRegistersData()"
+              [endProperty]="endDateProperty"
+              [form]="eventsForm"
+              [startProperty]="startDateProperty">
+            </app-date-range-picker>
           </div>
 
-          <div *ngIf="events?.length > 0" class="tw-pt-10">
+          <div *ngIf="events?.length > 0" class="tw-pt-10 tw-mt-10">
             <div class="tw-inline-flex tw-justify-center tw-items-center tw-w-full">
               <h4 *ngIf="chartVisible"
-                  class="tw-text-mediumGray tw-text-sm tw-font-normal">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
+                  class="tw-text-mediumGray tw-text-sm tw-font-normal">{{ 'COMMON.NUMBER-OF-EVENTS-FOR-RANGE' | translate }}  {{ 'COMMON.FROM' | translate | lowercase }} {{ selectedStartDate | formatDate }}
+                {{ 'COMMON.TO' | translate | lowercase }} {{ selectedEndDate | formatDate }}  </h4>
             </div>
 
             <app-registers-column-chart *ngIf="chartVisible"
@@ -243,11 +228,3 @@
 
   </kendo-tabstrip>
 </div>
-
-<ng-template #popDateTimePicker>
-  <app-datetime-range-picker (formClosed)="closePopover()"
-                             [form]="eventsForm"
-                             [initValues]="true">
-
-  </app-datetime-range-picker>
-</ng-template>

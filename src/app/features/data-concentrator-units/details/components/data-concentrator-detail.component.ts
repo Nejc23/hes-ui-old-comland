@@ -42,6 +42,7 @@ import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/sc
 import { CodelistMeterUnitsRepositoryService } from '../../../../core/repository/services/codelists/codelist-meter-units-repository.service';
 import { SchedulerJobsEventEmitterService } from '../../../jobs/services/scheduler-jobs-event-emitter.service';
 import { OperationType } from '../../components/operations/dc-operations.component';
+import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -87,6 +88,9 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
 
   chartVisible = true;
   saveData = false;
+
+  selectedStartDate;
+  selectedEndDate;
 
   messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
   messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
@@ -298,6 +302,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.eventsForm = this.createEventsForm();
     this.concentratorId = this.route.snapshot.paramMap.get('id');
     this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -336,20 +341,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.form = this.createForm();
         this.editForm = this.createEditForm();
         this.eventsForm = this.createEventsForm();
-
-        // yesterday date as default date
-        const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
-        const endDateFormatted = moment().format(environment.dateDisplayFormat);
-
-        this.eventsForm.controls.labelText.setValue(
-          startDateFormatted +
-            ' ' +
-            this.eventsForm.controls.startTime.value +
-            ' - ' +
-            endDateFormatted +
-            ' ' +
-            this.eventsForm.controls.endTime.value
-        );
 
         this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
         this.setCredentialsControls(this.credentialsVisible);
@@ -630,29 +621,18 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
       [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
       [this.endDateProperty]: [moment(), Validators.required],
       [this.startTimeProperty]: ['00:00'],
-      [this.endTimeProperty]: ['00:00'],
-      labelText: [null]
+      [this.endTimeProperty]: ['00:00']
     });
-  }
-
-  closePopover() {
-    this.popover.close();
-    this.loadRegistersData();
   }
 
   loadRegistersData() {
     this.events = [];
     this.eventsTotal = 0;
-    const startDate = moment(this.eventsForm.get('startDate').value).toDate();
-    const endDate = moment(this.eventsForm.get('endDate').value).toDate();
+    this.selectedStartDate = moment(this.eventsForm.get('startDate').value);
+    this.selectedEndDate = moment(this.eventsForm.get('endDate').value);
 
-    startDate.setHours(this.eventsForm.get(this.startTimeProperty).value.split(':')[0]);
-    startDate.setMinutes(this.eventsForm.get(this.startTimeProperty).value.split(':')[1]);
-    endDate.setHours(this.eventsForm.get(this.endTimeProperty).value.split(':')[0]);
-    endDate.setMinutes(this.eventsForm.get(this.endTimeProperty).value.split(':')[1]);
-
-    const startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-    const endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    const startTime = moment(this.selectedStartDate).format(dateServerFormat);
+    const endTime = moment(this.selectedEndDate).format(dateServerFormat);
 
     const registersFilter: RegistersFilter = {
       deviceId: this.concentratorId,

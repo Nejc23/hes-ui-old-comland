@@ -1,10 +1,9 @@
-import { Component, Input, Output, EventEmitter, ViewChild, AfterViewInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DaterangepickerComponent, LocaleConfig } from 'ngx-daterangepicker-material';
 
 import * as moment from 'moment';
 import { TranslateService } from '@ngx-translate/core';
-import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-datetime-range-picker',
@@ -16,11 +15,16 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   selected: any = [];
   @Input() withRanges = true;
   @Input() withTime = true;
-  @Input() form: FormGroup;
-
+  @Input() form: FormGroup; // startDate - endDate
+  @Input() singleCalendar = false;
   @Input() initValues = false;
 
-  @Output() formClosed: EventEmitter<boolean> = new EventEmitter();
+  initDateFrom;
+  initDateTo;
+
+  selectedRange = 2; // yesterday
+  isRange = false;
+  @Output() formClosed: EventEmitter<number> = new EventEmitter(); // selected range
 
   today = false;
 
@@ -47,79 +51,105 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    if (this.initValues) {
-      this.datePicker.setStartDate(this.form.controls.startDate.value);
-      this.datePicker.setEndDate(this.form.controls.endDate.value);
-      this.form.controls.startTime.setValue(this.form.controls.startTime.value);
-      this.form.controls.endTime.setValue(this.form.controls.endTime.value);
+    if (this.initValues && this.form.controls.startDate.valid && this.form.controls.endDate.valid) {
+      this.datePicker.setStartDate((this.initDateFrom = this.form.controls.startDate.value));
+      this.datePicker.setEndDate((this.initDateTo = this.form.controls.endDate.value));
+      this.form.controls.startTime.setValue(
+        moment()
+          .set('hour', this.form.controls.startDate.value.getHours())
+          .set('minute', this.form.controls.startDate.value.getMinutes())
+          .format('HH:mm')
+      );
+      this.form.controls.endTime.setValue(
+        moment()
+          .set('hour', this.form.controls.endDate.value.getHours())
+          .set('minute', this.form.controls.endDate.value.getMinutes())
+          .format('HH:mm')
+      );
       this.datePicker.updateView();
     }
   }
 
   updateRange(range) {
-    if (range.label?.toLowerCase() === this.translate.instant('DAY.TODAY').toLowerCase()) this.today = true;
-    if (
-      range.label?.toLowerCase() === this.translate.instant('DAY.TODAY').toLowerCase() ||
-      range.label?.toLowerCase() === this.translate.instant('DAY.CURRENT-MONTH').toLowerCase()
-    ) {
-      this.form.controls.endTime.setValue(moment().startOf('hour').format('HH:mm'));
-    } else {
-      this.form.controls.endTime.setValue('00:00');
+    this.isRange = true;
+    this.form.controls.endTime.setValue('00:00');
+    this.form.controls.startTime.setValue('00:00');
+    switch (range.label.toLowerCase()) {
+      case this.translate.instant('DAY.TODAY').toLowerCase():
+        this.today = true;
+        this.form.controls.endTime.setValue(moment().add(1, 'hour').set('minute', 0).format('HH:mm'));
+        this.selectedRange = 1;
+        break;
+      case this.translate.instant('DAY.YESTERDAY').toLowerCase():
+        this.selectedRange = 2;
+        break;
+      case this.translate.instant('DAY.LAST-7-DAYS').toLowerCase():
+        this.selectedRange = 3;
+        break;
+      case this.translate.instant('DAY.LAST-30-DAYS').toLowerCase():
+        this.selectedRange = 4;
+        break;
+      case this.translate.instant('DAY.CURRENT-MONTH').toLowerCase():
+        this.form.controls.endTime.setValue(moment().add(1, 'hour').set('minute', 0).format('HH:mm'));
+        this.selectedRange = 5;
+        break;
+      case this.translate.instant('DAY.LAST-MONTH').toLowerCase():
+        this.selectedRange = 6;
+        break;
     }
-    if (this.today) {
-      this.checkTimes();
-    }
+    this.setTime();
   }
 
   datesUpdated(range) {
+    if (!this.isRange) {
+      this.selectedRange = 7;
+    }
     this.selected = range;
     this.setValues();
+    this.isRange = false;
   }
 
   close() {
-    this.formClosed.emit(true);
+    this.formClosed.emit(this.selectedRange);
   }
 
   setValues() {
-    this.form.controls.startDate.setValue(this.selected.startDate);
-    this.form.controls.endDate.setValue(this.selected.endDate);
-    this.setLabel();
+    this.form.controls.startDate.setValue(this.selected.startDate.toDate()); // toDate() due to kendoUi input
+    this.form.controls.endDate.setValue(this.selected.endDate.toDate());
+    this.setTime();
     this.datePicker.updateView();
   }
 
   clear() {
     this.setDefaultDate();
-    this.setValues();
   }
 
   setDefaultDate() {
-    this.datePicker.setStartDate(moment().subtract(1, 'days'));
-    this.datePicker.setEndDate(moment());
-    this.form.controls.startTime.setValue('00:00');
-    this.form.controls.endTime.setValue('00:00');
+    this.datePicker.setStartDate(this.initDateFrom);
+    this.datePicker.setEndDate(this.initDateTo);
     this.selected = {
-      startDate: moment().subtract(1, 'days'),
-      endDate: (this.selected.endDate = moment())
+      startDate: this.initDateFrom,
+      endDate: this.initDateTo
     };
     this.datePicker.updateView();
   }
 
-  checkTimes() {
-    this.setLabel();
+  setTime() {
     if (this.today && moment(this.form.controls.startTime.value, 'HH.mm') > moment(this.form.controls.endTime.value, 'HH.mm')) {
       this.form.controls.startTime.setValue(moment(this.form.controls.endTime.value, 'HH.mm').subtract(1, 'hour').format('HH:mm'));
-      this.setLabel();
     }
-  }
-
-  setLabel() {
-    const startDateFormatted = moment(this.form.controls.startDate.value, environment.dateDisplayFormat).format(
-      environment.dateDisplayFormat
+    this.form.controls.startDate.setValue(
+      moment(this.form.controls.startDate.value)
+        .set('hour', this.form.controls.startTime.value.split(':')[0])
+        .set('minute', this.form.controls.startTime.value.split(':')[1])
+        .toDate()
     );
-    const endDateFormatted = moment(this.form.controls.endDate.value, environment.dateDisplayFormat).format(environment.dateDisplayFormat);
-
-    this.form.controls.labelText.setValue(
-      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
+    this.form.controls.endDate.setValue(
+      moment(this.form.controls.endDate.value)
+        .set('hour', this.form.controls.endTime.value.split(':')[0])
+        .set('minute', this.form.controls.endTime.value.split(':')[1])
+        .toDate()
     );
+    console.log(this.form.controls.startDate.value + ' - ' + this.form.controls.endDate.value);
   }
 }

@@ -5,6 +5,7 @@ import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-date-range-picker',
@@ -12,26 +13,43 @@ import { TranslateService } from '@ngx-translate/core';
   styles: []
 })
 export class DateRangePickerComponent implements OnInit {
+  @ViewChild('popover') popover;
+
   @Input() startProperty: string;
   @Input() endProperty: string;
   @Input() form: FormGroup;
+  @Input() withButtons = true;
+  @Input() withRefreshButton = true;
 
   @Output() valueChange = new EventEmitter<void>();
 
   show = false;
   focused = false;
 
-  popupWidth: string;
   errors: string[];
 
   startDatePlaceholder = this.translate.instant('DAY.SET-START-DATE');
   endDatePlaceholder = this.translate.instant('DAY.SET-END-DATE');
 
   controlId: string;
+  selectedRange = 2;
+  loading = false;
 
   @ViewChild('anchorTextbox') anchorTextbox: any;
 
   popup: ElementRef;
+  datePickerStart: ElementRef;
+  datePickerEnd: ElementRef;
+
+  startTime: Date = null;
+  endTime: Date = null;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private formUtils: FormsUtilsService,
+    private renderer: Renderer2,
+    private translate: TranslateService
+  ) {}
 
   @ViewChild('popup', { read: ElementRef }) set setPopup(content: ElementRef) {
     if (content) {
@@ -40,16 +58,12 @@ export class DateRangePickerComponent implements OnInit {
     }
   }
 
-  datePickerStart: ElementRef;
-
   @ViewChild('datePickerStart', { read: ElementRef }) set setDatePickerStart(content: ElementRef) {
     if (content) {
       // initially setter gets called with undefined
       this.datePickerStart = content;
     }
   }
-
-  datePickerEnd: ElementRef;
 
   @ViewChild('datePickerEnd', { read: ElementRef }) set setDatePickerEnd(content: ElementRef) {
     if (content) {
@@ -58,12 +72,9 @@ export class DateRangePickerComponent implements OnInit {
     }
   }
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private formUtils: FormsUtilsService,
-    private renderer: Renderer2,
-    private translate: TranslateService
-  ) {}
+  get format() {
+    return environment.dateTimeFormat;
+  }
 
   ngOnInit(): void {
     if (!this.form) {
@@ -78,13 +89,132 @@ export class DateRangePickerComponent implements OnInit {
 
     this.controlId = _.uniqueId('dateRangePicker');
 
-    this.setRange(1); // today is default
+    this.setRange(2); // yesterday is default
   }
 
   @HostListener('document:click', ['$event'])
   public documentClick(event: any): void {
     if (!this.contains(event.target)) {
       this.show = false;
+    }
+  }
+
+  setRange(selectedRangeId: number) {
+    this.selectedRange = selectedRangeId;
+
+    switch (selectedRangeId) {
+      case 1: {
+        // today
+        this.startTime = moment().set('minute', 0).set('hour', 0).toDate();
+        this.endTime = moment().add(1, 'hour').set('minute', 0).toDate();
+        break;
+      }
+      case 2: {
+        // yesterday
+        this.startTime = moment().subtract(1, 'days').set('minute', 0).set('hour', 0).toDate();
+        this.endTime = moment().set('minute', 0).set('hour', 0).toDate();
+        break;
+      }
+      case 3: {
+        // Last 7 days
+        this.startTime = moment().subtract(6, 'days').set('minute', 0).set('hour', 0).toDate();
+        this.endTime = moment().set('minute', 0).set('hour', 0).toDate();
+        break;
+      }
+      case 4: {
+        // Last 30 days
+        this.startTime = moment().subtract(29, 'days').set('minute', 0).set('hour', 0).toDate();
+        this.endTime = moment().set('minute', 0).set('hour', 0).toDate();
+        break;
+      }
+      case 5: {
+        // Current month
+        this.startTime = moment().startOf('month').set('minute', 0).set('hour', 0).toDate();
+        this.endTime = moment().add(1, 'hour').set('minute', 0).toDate();
+        break;
+      }
+      case 6: {
+        // Last month
+        this.startTime = moment().subtract(1, 'month').startOf('month').toDate();
+        this.endTime = moment().startOf('month').set('minute', 0).set('hour', 0).toDate();
+        break;
+      }
+    }
+
+    this.form.get(this.startProperty).patchValue(this.startTime);
+    this.form.get(this.endProperty).patchValue(this.endTime);
+
+    this.setDateRangeField();
+    this.show = false;
+    this.focused = false;
+    this.valueChange.emit();
+  }
+
+  setDateRangeField() {
+    const startTime = this.form.get(this.startProperty).value;
+    const endTime = this.form.get(this.endProperty).value;
+
+    const dateRange = `${formatDate(startTime, environment.dateTimeFormat)} - ${formatDate(endTime, environment.dateTimeFormat)}`;
+    this.form.patchValue({ dateRange });
+  }
+
+  dateChanged() {
+    if (this.form.get(this.startProperty).hasError('invalidStartDate')) {
+      // clear invalid start
+      delete this.form.get(this.startProperty).errors['invalidStartDate'];
+      this.form.get(this.startProperty).updateValueAndValidity();
+    }
+    const startTimeField = this.form.get(this.startProperty);
+    const endTimeField = this.form.get(this.endProperty);
+
+    if (startTimeField.value < endTimeField.value && startTimeField.valid && endTimeField.valid) {
+      this.selectedRange = 7; // not defined
+      startTimeField.patchValue(startTimeField.value);
+      endTimeField.patchValue(endTimeField.value);
+      this.valueChange.emit();
+    } else {
+      // set invalid start
+      this.form.get(this.startProperty).setErrors({ invalidStartDate: true });
+      this.form.get(this.startProperty).markAsDirty();
+      this.showErrors();
+    }
+  }
+
+  onDateFocus() {
+    this.focused = true;
+  }
+
+  onDateBlur() {
+    this.focused = false;
+  }
+
+  showErrors(): boolean {
+    this.errors = [];
+
+    if (this.formUtils.shouldInputShowErrors(this.form.get(this.startProperty))) {
+      this.errors.push(this.translate.instant('DAY.START-TIME-REQUIRED'));
+    }
+
+    if (this.formUtils.shouldInputShowErrors(this.form.get(this.endProperty))) {
+      this.errors.push(this.translate.instant('DAY.END-TIME-REQUIRED'));
+    }
+
+    return this.errors.length > 0;
+  }
+
+  getErrors(): string[] {
+    return [this.translate.instant('DAY.FORM-REQUIRED')];
+  }
+
+  closePopover(event: number) {
+    this.selectedRange = event;
+    this.popover.close();
+    this.valueChange.emit();
+  }
+
+  refreshButtonClickedEvent() {
+    if (this.form.valid) {
+      this.valueChange.emit();
     }
   }
 
@@ -114,122 +244,5 @@ export class DateRangePickerComponent implements OnInit {
       return false;
     }
     return datePicker[0]?.contains(target);
-  }
-
-  togglePopup() {
-    this.show = !this.show;
-    // contentWidth exact as anchor
-    if (this.show) {
-      this.focused = true;
-      const anchorWidth = this.anchorTextbox?.nativeElement?.clientWidth;
-      if (anchorWidth) {
-        this.popupWidth = anchorWidth + 2 + 'px'; // 2px is for border
-      }
-    } else {
-      this.focused = false;
-    }
-  }
-
-  setRange(selectedRangeId: number) {
-    const date = new Date();
-
-    let startTime: Date = null;
-    let endTime: Date = null;
-
-    switch (selectedRangeId) {
-      case 1: {
-        // today
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-        break;
-      }
-      case 2: {
-        // yesterday
-        (startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1)),
-          (endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0));
-        break;
-      }
-      case 3: {
-        // Last 7 days
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 7);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
-        break;
-      }
-      case 4: {
-        // Last 30 days
-        startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 30);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0);
-        break;
-      }
-      case 5: {
-        // Current month
-        startTime = new Date(date.getFullYear(), date.getMonth(), 1);
-        endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
-        break;
-      }
-      case 6: {
-        // Last month
-        startTime = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-        endTime = new Date(date.getFullYear(), date.getMonth(), 1, 0, 0);
-        break;
-      }
-    }
-
-    this.form.get(this.startProperty).patchValue(startTime);
-    this.form.get(this.endProperty).patchValue(endTime);
-
-    this.setDateRangeField();
-    this.show = false;
-    this.focused = false;
-    this.valueChange.emit();
-    // this.showData(this.selectedRegister);
-  }
-
-  setDateRangeField() {
-    const startTime = this.form.get(this.startProperty).value;
-    const endTime = this.form.get(this.endProperty).value;
-
-    const dateRange = `${formatDate(startTime, environment.dateTimeFormat)} - ${formatDate(endTime, environment.dateTimeFormat)}`;
-    this.form.patchValue({ dateRange });
-  }
-
-  dateChanged() {
-    const startTimeField = this.form.get(this.startProperty);
-    const endTimeField = this.form.get(this.endProperty);
-
-    startTimeField.patchValue(startTimeField.value);
-    endTimeField.patchValue(endTimeField.value);
-
-    this.valueChange.emit();
-  }
-
-  get format() {
-    return environment.dateTimeFormat;
-  }
-
-  onDateFocus() {
-    this.focused = true;
-  }
-
-  onDateBlur() {
-    this.focused = false;
-  }
-
-  showErrors(): boolean {
-    this.errors = [];
-
-    if (this.formUtils.shouldInputShowErrors(this.form.get(this.startProperty))) {
-      this.errors.push(this.translate.instant('DAY.START-TIME-REQUIRED'));
-    }
-
-    if (this.formUtils.shouldInputShowErrors(this.form.get(this.endProperty))) {
-      this.errors.push(this.translate.instant('DAY.END-TIME-REQUIRED'));
-    }
-
-    return this.errors.length > 0;
-  }
-
-  getErrors(): string[] {
-    return [this.translate.instant('DAY.FORM-REQUIRED')];
   }
 }
