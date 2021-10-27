@@ -23,6 +23,7 @@ import { DataConcentratorDetailComponent } from '../details/components/data-conc
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 import { DcOperationsComponent } from '../components/operations/dc-operations.component';
 import { MeterUnitsModule } from '../../meter-units/common/modules/meter-units.module';
+import { AlarmsEventsModule } from '../../alarms-events/modules/alarms-events.module';
 
 @NgModule({
   entryComponents: [],
@@ -67,7 +68,8 @@ import { MeterUnitsModule } from '../../meter-units/common/modules/meter-units.m
       GridCellJobStatusComponent,
       GridCellActionsComponent
     ]),
-    MeterUnitsModule
+    MeterUnitsModule,
+    AlarmsEventsModule
   ],
   exports: []
 })

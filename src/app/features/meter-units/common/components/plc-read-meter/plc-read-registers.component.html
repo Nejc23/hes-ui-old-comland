@@ -4,35 +4,24 @@
 
   <div modal-body>
     <ng-container>
-      <div class="container">
-        <div class="row">
-          <div class="col-4 ps-0">
-            <label class="ng-star-inserted" labelFor="search">{{ 'COMMON.SEARCH-OBJECTS' | translate }}</label>
-            <app-input-searcher (insertedValue)="insertedValue($event)" [debounceTimeOut]="300" [form]="form"
-                                [property]="searchProperty"
-                                label="Search registers"
-                                placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}"></app-input-searcher>
-          </div>
-          <div class="col-8">
-            <div>
-              <div class="d-flex align-items-center">
-                <app-input-text #popover="ngbPopover"
-                                [autoClose]="'outside'"
-                                [form]="form"
-                                [iconName]="'fa-calendar'"
-                                [isReadOnly]="true"
-                                [ngbPopover]="popDateTimePicker"
-                                [property]="'labelText'"
-                                class="w-100"
-                                container="body"
-                                label="SELECT-DATE"
-                                placement="bottom"
-                                popoverClass="date-range-picker-popover">
-                </app-input-text>
-              </div>
-            </div>
-          </div>
+
+      <div class="tw-inline-flex">
+        <div class="tw-mr-6">
+          <label class="ng-star-inserted" labelFor="search">{{ 'COMMON.SEARCH-OBJECTS' | translate }}</label>
+          <app-input-searcher (insertedValue)="insertedValue($event)" [debounceTimeOut]="300" [form]="form"
+                              [property]="searchProperty"
+                              label="Search registers"
+                              placeholder="{{ 'COMMON.SEARCH-TERM' | translate }}"></app-input-searcher>
         </div>
+        <app-date-range-picker
+          (valueChange)="loadData()"
+          [endProperty]="endDateProperty"
+          [form]="form"
+          [startProperty]="startDateProperty"
+          [withButtons]="false"
+          [withRefreshButton]="false"
+          class="small-date-picker">
+        </app-date-range-picker>
       </div>
 
       <form [formGroup]="form" class="form-horizontal">

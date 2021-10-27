@@ -60,31 +60,12 @@
           </button>
         </div>
       </div>
-      <div class="d-flex date-time-picker-meter-units mt-2">
-        <app-input-text
-          #popover="ngbPopover"
-          [autoClose]="'outside'"
-          [form]="form"
-          [iconName]="'fa-calendar'"
-          [isReadOnly]="true"
-          [ngbPopover]="popDateTimePicker"
-          [property]="'labelText'"
-          class="w-100"
-          container="body"
-          label="Select-date"
-          placement="bottom"
-          popoverClass="date-range-picker-popover"
-        >
-        </app-input-text>
-      </div>
-      <div class="btn-group">
-        <button (click)="setRange(1)" class="btn btn-link btn-sm p-2">{{ 'DAY.TODAY' | translate }}</button>
-        <button (click)="setRange(2)" class="btn btn-link btn-sm p-2">{{ 'DAY.YESTERDAY' | translate }}</button>
-        <button (click)="setRange(3)" class="btn btn-link btn-sm p-2">{{ 'DAY.LAST-7-DAYS' | translate }}</button>
-        <button (click)="setRange(4)" class="btn btn-link btn-sm p-2">{{ 'DAY.LAST-30-DAYS' | translate }}</button>
-        <button (click)="setRange(5)" class="btn btn-link btn-sm p-2">{{ 'DAY.CURRENT-MONTH' | translate }}</button>
-        <button (click)="setRange(6)" class="btn btn-link btn-sm p-2">{{ 'DAY.LAST-MONTH' | translate }}</button>
-      </div>
+      <app-date-range-picker
+        (valueChange)="onRefresh()"
+        [endProperty]="endDateProperty"
+        [form]="form"
+        [startProperty]="startDateProperty">
+      </app-date-range-picker>
     </div>
 
     <div class="mu-registers-body-scroll">
@@ -145,8 +126,3 @@
 </div>
 <ng-template #hideShowFilters><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template>
 <ng-template #tipContentRefresh><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template>
-
-<ng-template #popDateTimePicker>
-  <app-datetime-range-picker (formClosed)="closePopover()" [form]="form"
-                             [initValues]="true"></app-datetime-range-picker>
-</ng-template>

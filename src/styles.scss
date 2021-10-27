@@ -283,6 +283,62 @@ body {
   background-color: rgb($primary, 0.65) !important;
 }
 
+.mini-button {
+  padding: 2px 10px;
+  cursor: pointer;
+  font-size: 0.563rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  @apply tw-rounded;
+  @apply tw-text-darkGray;
+
+  &.selected {
+    @apply tw-bg-primary;
+    color: #fff;
+  }
+}
+
+.refresh-button {
+  @apply tw-flex;
+  @apply tw-p-1;
+  @apply tw-w-8;
+  @apply tw-rounded-sm;
+  @apply tw-border-mediumGray;
+  @apply tw-border;
+  @apply tw-border-solid;
+  @apply tw-h-full;
+  @apply tw-items-center;
+  @apply tw-justify-center;
+  height: 35px;
+
+  &.border-left {
+    @apply tw-border-0;
+    @apply tw-border-l;
+    @apply tw-rounded-none;
+    height: 34px;
+  }
+}
+
+.divider {
+  height: 1px;
+  @apply tw-bg-darkGray;
+  @apply tw-bg-opacity-80;
+  @apply tw-rounded-sm;
+  width: 10px;
+}
+
+.date-range-picker-container {
+  .k-input {
+    text-align: center;
+  }
+
+  .small-date-picker {
+    .k-dateinput {
+      width: 10em;
+    }
+  }
+}
+
 .sticky-header {
   @apply tw-fixed;
   @apply tw-top-0;

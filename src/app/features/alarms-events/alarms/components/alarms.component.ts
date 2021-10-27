@@ -11,6 +11,7 @@ import { AlarmsStaticTextService } from '../services/alarms-static-text.service'
 import { capitalize } from 'lodash';
 import { filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 import { TranslateService } from '@ngx-translate/core';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-alarms-events-alarms',
@@ -74,6 +75,22 @@ export class AlarmsComponent implements OnInit {
     this.gridOptions = this.alarmsListGridService.setGridOptions();
   }
 
+  get startTimeProperty(): string {
+    return 'startDate';
+  }
+
+  get endTimeProperty(): string {
+    return 'endDate';
+  }
+
+  get searchProperty(): string {
+    return 'search';
+  }
+
+  get pageSizeProperty() {
+    return 'pageSize';
+  }
+
   ngOnInit() {
     this.columnDefs = this.alarmsListGridService.setGridDefaultColumns();
 
@@ -97,22 +114,12 @@ export class AlarmsComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      [this.startTimeProperty]: [null, Validators.required],
-      [this.endTimeProperty]: [null, Validators.required],
-      [this.pageSizeProperty]: this.pageSizes[0]
+      [this.startTimeProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endTimeProperty]: [moment(), Validators.required],
+      [this.pageSizeProperty]: this.pageSizes[0],
+      startTime: ['00:00'],
+      endTime: ['00:00']
     });
-  }
-
-  get startTimeProperty(): string {
-    return 'startTime';
-  }
-
-  get endTimeProperty(): string {
-    return 'endTime';
-  }
-
-  get searchProperty(): string {
-    return 'search';
   }
 
   onPaginationChange(params) {
@@ -242,10 +249,6 @@ export class AlarmsComponent implements OnInit {
   onFirstDataRendered(params) {
     // params.api.sizeColumnsToFit();
     // params.api.showLoadingOverlay();
-  }
-
-  get pageSizeProperty() {
-    return 'pageSize';
   }
 
   dateRangeChanged() {

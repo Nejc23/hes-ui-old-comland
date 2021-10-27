@@ -1,8 +1,8 @@
 import { ChartsModule } from '@progress/kendo-angular-charts';
-import { NgModule, ModuleWithProviders, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, ModuleWithProviders, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InputTextComponent } from './components/input-text/input-text.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormErrorComponent } from './components/form-error/form-error.component';
 import { InputCheckboxComponent } from './components/input-checkbox/input-checkbox.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -17,7 +17,7 @@ import { InputSearcherComponent } from './components/input-searcher/input-search
 import { InputTagComponent } from './components/input-tag/input-tag.component';
 import { InputMultiselectComponent } from './components/input-multiselect/input-multiselect.component';
 import { DropDownsModule } from '@progress/kendo-angular-dropdowns';
-import { InputsModule } from '@progress/kendo-angular-inputs';
+import { InputsModule, TextBoxModule } from '@progress/kendo-angular-inputs';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
 import { InputCheckboxGridComponent } from './components/input-checkbox/input-checkbox-grid.component';
 import { InputSwitchComponent } from './components/input-switch/input-switch.component';
@@ -29,7 +29,6 @@ import { UploadsModule } from '@progress/kendo-angular-upload';
 import { FileSelectComponent } from './components/file-select/file-select.component';
 import { SelectDropdownComponent } from './components/select-dropdown/select-dropdown.component';
 import { ProgressBarModule } from '@progress/kendo-angular-progressbar';
-import { TextBoxModule } from '@progress/kendo-angular-inputs';
 import { PopupModule } from '@progress/kendo-angular-popup';
 import { TabStripModule } from '@progress/kendo-angular-layout';
 import { DateTimeRangePickerComponent } from './components/datetime-range-picker/datetime-range-picker.component';
@@ -37,6 +36,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 import { TranslateModule } from '@ngx-translate/core';
+import { DateRangePickerComponent } from './components/date-range-picker/date-range-picker.component';
 import { FormWarningComponent } from './components/form-warning/form-warning.component';
 
 @NgModule({
@@ -70,7 +70,8 @@ import { FormWarningComponent } from './components/form-warning/form-warning.com
     ChartsModule,
     TextBoxModule,
     PopupModule,
-    DateTimeRangePickerComponent
+    DateTimeRangePickerComponent,
+    DateRangePickerComponent
   ],
   declarations: [
     InputTextComponent,
@@ -94,6 +95,7 @@ import { FormWarningComponent } from './components/form-warning/form-warning.com
     FileUploadComponent,
     FileSelectComponent,
     DateTimeRangePickerComponent,
+    DateRangePickerComponent,
     FormWarningComponent
   ],
   imports: [
