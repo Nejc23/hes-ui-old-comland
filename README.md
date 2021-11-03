@@ -115,3 +115,4 @@ Location of translations files is `src/assets/i18n`. Translation files can be up
 `npm run build-production:myGrid:jscr`
 `npm run build-production:amera:jscr`
 `npm run build-production:ePointHES:jscr`
+
