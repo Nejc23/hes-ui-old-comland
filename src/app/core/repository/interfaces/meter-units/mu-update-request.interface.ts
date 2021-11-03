@@ -24,4 +24,5 @@ export interface MuUpdatePlcRequest {
   deviceId?: string;
   name: string;
   externalId?: string;
+  templateId?: number;
 }

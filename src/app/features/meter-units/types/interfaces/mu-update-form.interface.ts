@@ -30,4 +30,5 @@ export interface MuUpdatePlcForm {
   deviceId: string;
   name: string;
   externalId?: string;
+  templateId?: string;
 }

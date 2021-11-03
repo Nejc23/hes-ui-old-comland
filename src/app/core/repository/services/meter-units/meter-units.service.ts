@@ -200,7 +200,7 @@ export class MeterUnitsService {
       ip: payload.ip,
       port: payload.port,
       serialNumber: payload.serialNumber,
-      templateId: payload.template.id,
+      templateId: payload.template?.id ? payload.template?.id : null,
       interfaceType: payload.communicationType,
       driver: payload.driver,
       referencingType: payload.referencingType,
@@ -243,7 +243,8 @@ export class MeterUnitsService {
   updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
     const muRequest: MuUpdatePlcRequest = {
       name: payload.name,
-      externalId: payload.externalId
+      externalId: payload.externalId,
+      templateId: payload.templateId
     };
     return this.updateMuPlc(payload.deviceId, muRequest);
   }
