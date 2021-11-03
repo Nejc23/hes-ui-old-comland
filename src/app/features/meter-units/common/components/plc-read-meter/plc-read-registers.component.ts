@@ -159,7 +159,6 @@ export class PlcReadRegistersComponent implements OnInit {
   }
 
   onConfirm() {
-    debugger;
     const registerTypes = this.gridApi.getSelectedRows().map((row) => row.name);
 
     this.noRegisterSelected = !this.selectedRegister;
