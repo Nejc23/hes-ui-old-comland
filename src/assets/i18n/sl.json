@@ -184,7 +184,12 @@
     "SHOW-DETAILS": "",
     "HIDE-DETAILS": "",
     "SHOW-CHART": "",
-    "HIDE-CHART": ""
+    "HIDE-CHART": "",
+    "NUMBER-OF-EVENTS-FOR-RANGE": "",
+    "COMMUNICATION-MODULE": "",
+    "AUTHENTICATION": "",
+    "COMMUNICATION-DETAILS": "",
+    "BASIC-DETAILS": ""
   },
   "DAY": {
     "CURRENT-MONTH": "Trenutni mesec",
@@ -294,7 +299,9 @@
       "RANGE-VALUE": "Value must be in range 0-100",
       "REQUIRED": "Required field",
       "UNKNOWN-ERROR": "Unknown error",
-      "INVALID-HOSTNAME": ""
+      "INVALID-HOSTNAME": "",
+      "INVALID-IPADDRESS": "",
+      "DUPLICATED-IPADDRESS": ""
     },
     "EXPRESSION": "Expression",
     "EXTERNAL-ID": "External Id",
@@ -381,7 +388,16 @@
     "PLCSTATUS": "",
     "HOSTNAME": "",
     "TIMEZONENAME": "",
-    "FIRSTINSTALLDATE": ""
+    "FIRSTINSTALLDATE": "",
+    "WARNING": {
+      "DUPLICATED": ""
+    },
+    "RELEASE-REQUEST": "",
+    "USE-LDN": "",
+    "TEMPLATENAME": "",
+    "PROTOCOLTYPE": "",
+    "REFERENCINGTYPE": "",
+    "COMMUNICATIONTYPE": ""
   },
   "GRID": {
     "ACTIVE": "Active",

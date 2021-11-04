@@ -25,7 +25,7 @@
     "SAVE-AND-ADD-ANOTHER": "Salvaguardare e aggiungere un'altro",
     "SAVE-AS-NEW": "Salvaguardare come nuovo",
     "UPDATE": "Aggiornamento",
-    "GO-TO-JOBS": "Go to jobs"
+    "GO-TO-JOBS": ""
   },
   "COMMON": {
     "0-100-RANGE": "Valore deve essere tra 0-100",
@@ -147,7 +147,6 @@
     "SELECTED-ITEMS-DELETED": "Gli oggetti selezionati sono cancellati",
     "SERVER-ERROR": "Errore del Server !",
     "SHOW-ALL": "Mostrare tutto",
-    "SEE-ALL": "See all",
     "SHOW-CHILD-MBUS": "Mostrare il piccolo MBus",
     "SHOW-ONLY-FOR-ACTIVATION": "Mostrare solamente pronto per l'attivazione",
     "SHOW-OPTION": "mostrare l'opzione",
@@ -169,11 +168,28 @@
     "WILDCARDS-SEARCH-ENABLED": "La ricerca Wildcards è attivata",
     "WITH-TEMPLATE": "con template",
     "WITHOUT-TEMPLATE": "senza template",
-    "OVERVIEW": "Overview",
-    "SHOW-MORE": "Show more",
-    "SHOW-LESS": "Show less",
-    "METER-STATUS": "Meter status",
-    "APPLIED-TAGS": "Applied tags"
+    "LOADING-DATA-PLEASE-WAIT": "",
+    "MAY-TAKE-A-MOMENT": "",
+    "SEE-ALL": "",
+    "OVERVIEW": "",
+    "SHOW-MORE": "",
+    "SHOW-LESS": "",
+    "METER-STATUS": "",
+    "APPLIED-TAGS": "",
+    "ALL-METERS": "",
+    "NOT-DEFINED": "",
+    "DETAILS": "",
+    "EDIT-DETAILS": "",
+    "EVENTS": "",
+    "SHOW-DETAILS": "",
+    "HIDE-DETAILS": "",
+    "SHOW-CHART": "",
+    "HIDE-CHART": "",
+    "NUMBER-OF-EVENTS-FOR-RANGE": "",
+    "COMMUNICATION-MODULE": "",
+    "AUTHENTICATION": "",
+    "COMMUNICATION-DETAILS": "",
+    "BASIC-DETAILS": ""
   },
   "DAY": {
     "CURRENT-MONTH": "Corrente mese",
@@ -283,7 +299,9 @@
       "RANGE-VALUE": "Il valore deve essere tra 0-100",
       "REQUIRED": "Campo obbligatorio",
       "UNKNOWN-ERROR": "Errore non conosciuto",
-      "INVALID-HOSTNAME": ""
+      "INVALID-HOSTNAME": "",
+      "INVALID-IPADDRESS": "",
+      "DUPLICATED-IPADDRESS": ""
     },
     "EXPRESSION": "Espressione",
     "EXTERNAL-ID": "Id esterno",
@@ -360,11 +378,26 @@
     "VENDOR": "Fabbricante",
     "WEEK-DAYS": "Giorni della settimana",
     "WRAPPER": "Wrapper",
-    "SERIALNUMBER": "Serial number",
-    "ADDRESS": "Address",
-    "TAGS": "Tags",
-    "EXTERNALID": "External Id",
-    "COORDINATES": "Coordinates"
+    "TIME": "",
+    "SERIALNUMBER": "",
+    "ADDRESS": "",
+    "TAGS": "",
+    "EXTERNALID": "",
+    "COORDINATES": "",
+    "NEXT-START": "",
+    "PLCSTATUS": "",
+    "HOSTNAME": "",
+    "TIMEZONENAME": "",
+    "FIRSTINSTALLDATE": "",
+    "WARNING": {
+      "DUPLICATED": ""
+    },
+    "RELEASE-REQUEST": "",
+    "USE-LDN": "",
+    "TEMPLATENAME": "",
+    "PROTOCOLTYPE": "",
+    "REFERENCINGTYPE": "",
+    "COMMUNICATIONTYPE": ""
   },
   "GRID": {
     "ACTIVE": "Attivo",

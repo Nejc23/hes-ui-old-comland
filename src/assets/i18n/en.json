@@ -2,11 +2,6 @@
   "ALARM": {
     "NO-ALARMS": "No Alarms have been added yet"
   },
-  "PROTOCOL": {
-    "g3PLC": "G3-PLC",
-    "dlms": "DLMS",
-    "unknown": "Unknown"
-  },
   "BREADCRUMB": {
     "CONCENTRATOR": "Concentrator",
     "JOBS": "Jobs",
@@ -106,8 +101,6 @@
     "LESS-THAN": "Less than",
     "LIMITER": "Limiter",
     "LOADING-DATA": "Loading data...",
-    "LOADING-DATA-PLEASE-WAIT": "Loading data, please wait...",
-    "MAY-TAKE-A-MOMENT": "This may take a moment",
     "METERS": "Meters",
     "MINUTES": "Minutes",
     "MODE": "Mode",
@@ -154,7 +147,6 @@
     "SELECTED-ITEMS-DELETED": "Selected items deleted",
     "SERVER-ERROR": "Server error!",
     "SHOW-ALL": "Show all",
-    "SEE-ALL": "See all",
     "SHOW-CHILD-MBUS": "show child MBus",
     "SHOW-ONLY-FOR-ACTIVATION": "show only ready for activation",
     "SHOW-OPTION": "Show option",
@@ -176,6 +168,9 @@
     "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
     "WITH-TEMPLATE": "With template",
     "WITHOUT-TEMPLATE": "Without template",
+    "LOADING-DATA-PLEASE-WAIT": "Loading data, please wait...",
+    "MAY-TAKE-A-MOMENT": "This may take a moment",
+    "SEE-ALL": "See all",
     "OVERVIEW": "Overview",
     "SHOW-MORE": "Show more",
     "SHOW-LESS": "Show less",
@@ -286,10 +281,6 @@
     "END": "End",
     "END-AT": "End at",
     "END-TIME": "End time:",
-    "TIME": "Time",
-    "WARNING": {
-      "DUPLICATED": "The IP address you have entered is already in use by another meter!"
-    },
     "ERROR": {
       "ACTION-NOT-EXISTS": "Action not exists",
       "DCU-ERROR": "Error saving DCU!",
@@ -301,16 +292,16 @@
       "MIN": "Exceeds min value",
       "MINLENGTH": "Entry does not meet minimum required amount of characters",
       "NOT-MATCH": "Password not match",
-      "INVALID-HOSTNAME": "Hostname is invalid",
-      "INVALID-IPADDRESS": "IP is invalid",
-      "DUPLICATED-IPADDRESS": "IP is duplicated",
       "NOT-VALID-REQUEST": "Not valid request",
       "NUMBER-ERROR": "Entry is not a valid integer:",
       "PATTERN": "Wrong format",
       "RANGE-INCORRECT": "Range is not correct",
       "RANGE-VALUE": "Value must be in range 0-100",
       "REQUIRED": "Required field",
-      "UNKNOWN-ERROR": "Unknown error"
+      "UNKNOWN-ERROR": "Unknown error",
+      "INVALID-HOSTNAME": "Hostname is invalid",
+      "INVALID-IPADDRESS": "IP is invalid",
+      "DUPLICATED-IPADDRESS": "IP is duplicated"
     },
     "EXPRESSION": "Expression",
     "EXTERNAL-ID": "External Id",
@@ -370,7 +361,6 @@
     "START-AT": "Start at",
     "START-TIME": "Start time:",
     "START-WITH-RELEASE": "Start with release",
-    "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
     "STATE": "State",
     "STATUS": "Status",
     "TAG": "Tag",
@@ -383,12 +373,12 @@
     "UPLOAD-FILED": "Upload failed",
     "UPLOADED-FILE": "Uploaded file",
     "UPLOADING-FILE": "Uploading file",
-    "USE-LDN": "Use Logical Device Name",
     "USE-LDN-AS-SYSTITLE": "Use Logical Device Name (LDN) as Systitle",
     "USERNAME": "Username",
     "VENDOR": "Vendor",
     "WEEK-DAYS": "Week-days",
     "WRAPPER": "Wrapper",
+    "TIME": "Time",
     "SERIALNUMBER": "Serial number",
     "ADDRESS": "Address",
     "TAGS": "Tags",
@@ -399,6 +389,11 @@
     "HOSTNAME": "Hostname",
     "TIMEZONENAME": "Timezone",
     "FIRSTINSTALLDATE": "Installed",
+    "WARNING": {
+      "DUPLICATED": "The IP address you have entered is already in use by another meter!"
+    },
+    "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
+    "USE-LDN": "Use Logical Device Name",
     "TEMPLATENAME": "Template name",
     "PROTOCOLTYPE": "Protocol",
     "REFERENCINGTYPE": "Short names referencing",
@@ -604,14 +599,14 @@
     "USERS": "Users"
   },
   "MODAL": {
-    "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
     "FOR-DEVICES": " for selected devices",
     "METER-TEMPLATE-ERROR": "One of the meters selected does not have template assigned!",
     "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!",
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "SELECTED": "selected",
-    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization"
+    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
+    "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices"
   },
   "OPERATION": {
     "DEVICE-DISCOVERY": "Device discovery",
@@ -983,5 +978,10 @@
   "ngb.timepicker.increment-seconds": "Increment seconds",
   "ngb.timepicker.minutes": "Minutes",
   "ngb.timepicker.seconds": "Seconds",
-  "ngb.toast.close-aria": "Close"
+  "ngb.toast.close-aria": "Close",
+  "PROTOCOL": {
+    "g3PLC": "G3-PLC",
+    "dlms": "DLMS",
+    "unknown": "Unknown"
+  }
 }

@@ -24,7 +24,8 @@
     "SAVE": "Save",
     "SAVE-AND-ADD-ANOTHER": "Save and Add another",
     "SAVE-AS-NEW": "Save as new",
-    "UPDATE": "Update"
+    "UPDATE": "Update",
+    "GO-TO-JOBS": ""
   },
   "COMMON": {
     "0-100-RANGE": "Value must be in range 0-100",
@@ -166,7 +167,29 @@
     "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
     "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
     "WITH-TEMPLATE": "With template",
-    "WITHOUT-TEMPLATE": "Without template"
+    "WITHOUT-TEMPLATE": "Without template",
+    "LOADING-DATA-PLEASE-WAIT": "",
+    "MAY-TAKE-A-MOMENT": "",
+    "SEE-ALL": "",
+    "OVERVIEW": "",
+    "SHOW-MORE": "",
+    "SHOW-LESS": "",
+    "METER-STATUS": "",
+    "APPLIED-TAGS": "",
+    "ALL-METERS": "",
+    "NOT-DEFINED": "",
+    "DETAILS": "",
+    "EDIT-DETAILS": "",
+    "EVENTS": "",
+    "SHOW-DETAILS": "",
+    "HIDE-DETAILS": "",
+    "SHOW-CHART": "",
+    "HIDE-CHART": "",
+    "NUMBER-OF-EVENTS-FOR-RANGE": "",
+    "COMMUNICATION-MODULE": "",
+    "AUTHENTICATION": "",
+    "COMMUNICATION-DETAILS": "",
+    "BASIC-DETAILS": ""
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -212,7 +235,15 @@
     "READ-STATUS": "read status{{additionalString}}",
     "STATUS": "status{{additionalString}}",
     "TYPE": "type{{additionalString}}",
-    "VENDOR": "vendor{{additionalString}}"
+    "VENDOR": "vendor{{additionalString}}",
+    "LAST-NOTIFICATIONS": "",
+    "MULTIPLE-TYPES": "",
+    "RE-KEY-NOT-SUPPORTED": "",
+    "RE-KEY-CONCENTRATOR": "",
+    "CONCENTRATOR-INOPERABLE-WARNING": "",
+    "RE-KEY-CONFIRM": "",
+    "SECURITY-GAK": "",
+    "SECURITY-GBEK": ""
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
@@ -267,7 +298,10 @@
       "RANGE-INCORRECT": "Range is not correct",
       "RANGE-VALUE": "Value must be in range 0-100",
       "REQUIRED": "Required field",
-      "UNKNOWN-ERROR": "Unknown error"
+      "UNKNOWN-ERROR": "Unknown error",
+      "INVALID-HOSTNAME": "",
+      "INVALID-IPADDRESS": "",
+      "DUPLICATED-IPADDRESS": ""
     },
     "EXPRESSION": "Expression",
     "EXTERNAL-ID": "External Id",
@@ -343,7 +377,27 @@
     "USERNAME": "Username",
     "VENDOR": "Vendor",
     "WEEK-DAYS": "Week-days",
-    "WRAPPER": "Wrapper"
+    "WRAPPER": "Wrapper",
+    "TIME": "",
+    "SERIALNUMBER": "",
+    "ADDRESS": "",
+    "TAGS": "",
+    "EXTERNALID": "",
+    "COORDINATES": "",
+    "NEXT-START": "",
+    "PLCSTATUS": "",
+    "HOSTNAME": "",
+    "TIMEZONENAME": "",
+    "FIRSTINSTALLDATE": "",
+    "WARNING": {
+      "DUPLICATED": ""
+    },
+    "RELEASE-REQUEST": "",
+    "USE-LDN": "",
+    "TEMPLATENAME": "",
+    "PROTOCOLTYPE": "",
+    "REFERENCINGTYPE": "",
+    "COMMUNICATIONTYPE": ""
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -428,7 +482,8 @@
     "UNIT": "Unit",
     "VALUE": "Value",
     "VENDOR": "Vendor",
-    "REGISTER": "Register"
+    "REGISTER": "Register",
+    "HOSTNAME": ""
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -499,7 +554,8 @@
     "SYSTEM": "System",
     "TIME-SYNCHRONIZATION": "Time synchronization",
     "TOPOLOGY": "Topology",
-    "TOPOLOGY-JOB": "Topology job"
+    "TOPOLOGY-JOB": "Topology job",
+    "ACTIVE-JOBS": ""
   },
   "LANGUAGE": {
     "HR": "",
@@ -549,14 +605,18 @@
     "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!",
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "SELECTED": "selected",
-    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization"
+    "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
+    "ARE-YOU-SURE-TEXT-FOR-DEVICES": ""
   },
   "OPERATION": {
     "DEVICE-DISCOVERY": "Device discovery",
     "FW-UPGRADE": "FW Upgrade",
     "OPERATIONS": "Operations",
     "SYNC-TIME": "Sync time",
-    "SYNCHRONIZE-TIME": "Synchronize time"
+    "SYNCHRONIZE-TIME": "Synchronize time",
+    "SECURITY": "",
+    "RE-KEY-HMAC": "",
+    "RE-KEY-CONCENTRATOR": ""
   },
   "PLC-METER": {
     "ACTIVATE-IMAGE": "Activate image",
@@ -918,5 +978,10 @@
   "ngb.timepicker.increment-seconds": "Increment seconds",
   "ngb.timepicker.minutes": "Minutes",
   "ngb.timepicker.seconds": "Seconds",
-  "ngb.toast.close-aria": "Close"
+  "ngb.toast.close-aria": "Close",
+  "PROTOCOL": {
+    "g3PLC": "",
+    "dlms": "",
+    "unknown": ""
+  }
 }
