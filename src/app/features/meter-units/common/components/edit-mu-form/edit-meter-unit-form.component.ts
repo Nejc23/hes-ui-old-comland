@@ -217,24 +217,17 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
         this.form.get(this.manufacturerProperty).setValue(manufacturer);
       });
 
-    this.autoTemplateService.getTemplates().subscribe((temps) => {
-      this.templates = temps
-        .map((t) => {
-          return { id: t.templateId, value: t.name };
-        })
-        .sort((a, b) => {
-          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
-        });
-
-      const template = this.templates.find((t) => this.data.templateName.toLowerCase() === t.value.toLowerCase());
-      this.form.get(this.templateProperty).setValue(template);
-      this.isTemplateSelected = template && template.id ? true : false;
-    });
+    this.checkTemplate();
   }
 
   ngOnChanges() {
     if (this.saveData) {
       this.update();
+    }
+    if (this.data && this.form) {
+      // update template name
+      this.form.get(this.templateStringProperty).setValue(this.data.templateName);
+      this.checkTemplate();
     }
   }
 
@@ -251,7 +244,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       [this.nameProperty]: [this.data?.name],
       [this.serialNumberProperty]: [{ value: this.data?.serialNumber, disabled: true }, Validators.required],
       [this.manufacturerProperty]: [null, Validators.required],
-      [this.templateProperty]: [{ value: null, disabled: true }, Validators.required],
+      [this.templateProperty]: [{ value: null, disabled: !!this.data.templateName }],
       [this.templateStringProperty]: [{ value: this.data?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
 
@@ -290,6 +283,23 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     });
   }
 
+  checkTemplate() {
+    this.autoTemplateService.getTemplates().subscribe((temps) => {
+      this.templates = temps
+        .map((t) => {
+          return { id: t.templateId, value: t.name };
+        })
+        .sort((a, b) => {
+          return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
+        });
+
+      const template = this.templates.find((t) => this.data?.templateName?.toLowerCase() === t.value.toLowerCase());
+
+      this.form.get(this.templateProperty).setValue(template);
+      this.isTemplateSelected = !!(template && template.id);
+    });
+  }
+
   getCommunicationType(muDetails: MeterUnitDetails): RadioOption {
     if (!muDetails) {
       return this.defaultCommunicationType;
@@ -323,7 +333,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   }
 
   templateChanged(value: Codelist<string>) {
-    this.isTemplateSelected = value && value.id ? true : false;
+    this.isTemplateSelected = !!(value && value.id);
   }
 
   setDefaultFormValues() {
@@ -455,7 +465,9 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       this.disableAdvancedControls();
       this.form.get(this.communicationTypeProperty).disable();
     }
-    this.selectTabWithErrors();
+    if (this.isDlms) {
+      this.selectTabWithErrors();
+    }
 
     let muFormData;
     let request;
@@ -625,7 +637,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     return {
       deviceId: this.data.deviceId,
       name: this.form.get(this.nameProperty).value,
-      externalId: this.form.get(this.externalIdProperty).value
+      externalId: this.form.get(this.externalIdProperty).value,
+      templateId: this.form.get(this.templateProperty).value?.id ? this.form.get(this.templateProperty).value.id : ''
     };
   }
 

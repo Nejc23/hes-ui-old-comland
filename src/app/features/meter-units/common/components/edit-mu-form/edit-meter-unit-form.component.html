@@ -1,12 +1,31 @@
 <div class="edit-mu-tabs">
   <ng-container *ngIf="basicDetails">
     <div class="tw-px-8 tw-pt-6">
+
       <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
 
       <div class="form-row">
         <div class="col-12">
           <app-input-text [form]="form" [property]="serialNumberProperty" label="SERIAL">
           </app-input-text>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-12">
+
+          <div *ngIf="!data.templateName">
+            <app-select-input [disabled]="false"
+                              [form]="form"
+                              [property]="templateProperty" [selectOptions]="templates"
+                              label="TEMPLATE">>
+            </app-select-input>
+          </div>
+
+          <app-input-text *ngIf="data.templateName" [form]="form" [property]="templateStringProperty"
+                          label="TEMPLATE">
+          </app-input-text>
+
         </div>
       </div>
 
@@ -20,13 +39,6 @@
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="col-12">
-            <app-input-text [disabled]="true" [form]="form" [property]="templateStringProperty"
-                            label="TEMPLATE">
-            </app-input-text>
-          </div>
-        </div>
 
       </ng-container>
 
@@ -74,7 +86,9 @@
 
             <div *ngIf="isConnectionTypeIp" class="form-row">
               <div class="col-6">
-                <app-input-text [form]="form" [property]="ipProperty" #ipField dis label="IP" (inputTextBlurValue)="validateIpAddress()"></app-input-text>
+                <app-input-text #ipField (inputTextBlurValue)="validateIpAddress()" [form]="form"
+                                [property]="ipProperty" dis
+                                label="IP"></app-input-text>
               </div>
               <div class="col-3">
                 <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"
@@ -122,6 +136,8 @@
         <ng-template kendoTabContent>
 
           <div class="tw-px-8 tw-pt-6">
+
+            <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
 
             <div *ngIf="isTemplateSelected && communicationTypeSelected" class="pt-3">
               <div>
