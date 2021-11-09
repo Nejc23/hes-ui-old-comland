@@ -5,9 +5,11 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { deleteMeters, onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
 import {
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
+  activeImports,
   enumMyGridLink,
   getCommonRegisterGroups,
   identityToken,
+  importDevices,
   importTemplates,
   lastStatus,
   onDemandClearFF,
@@ -414,5 +416,21 @@ export class MyGridLinkService {
 
   postUpdateMeterStateRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${basePathConcentratorInventory}${updateMeterState}`, params);
+  }
+
+  postImportDevices(params: string): Observable<any> {
+    return this.repository.makeRequest(this.postImportDevicesRequest(params));
+  }
+
+  postImportDevicesRequest(params: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.inventory}${importDevices}`, params);
+  }
+
+  getActiveImports(): Observable<any> {
+    return this.repository.makeRequest(this.getActiveImportsRequest());
+  }
+
+  getActiveImportsRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${enumMyGridLink.managment}${activeImports}`);
   }
 }

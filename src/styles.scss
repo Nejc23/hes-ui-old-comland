@@ -373,3 +373,8 @@ body {
   @apply tw-px-2;
   @apply tw-font-medium;
 }
+
+.modal-body {
+  max-height: 75vh;
+  overflow-y: auto;
+}

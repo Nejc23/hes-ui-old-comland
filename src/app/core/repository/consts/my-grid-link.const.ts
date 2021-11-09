@@ -3,7 +3,8 @@ export enum enumMyGridLink {
   managment = '/api/concentrator-management',
   dataProcessing = '/api/on-demand-data-processing',
   templating = '/api/templating',
-  scheduler = '/api/scheduler'
+  scheduler = '/api/scheduler',
+  inventory = '/api/concentrator-inventory'
 }
 
 export const identityToken = '/token';
@@ -47,5 +48,9 @@ export const jobsAssignExisting = `${enumMyGridLink.scheduler}/jobs-meters`;
 
 // synchronize time
 export const onDemandTimeSyc = '/on-demand/trigger-clock-sync';
+
+// Import devices
+export const importDevices = '/devices/import';
+export const activeImports = '/tasks/device-import';
 
 export const updateMeterState = '/update-meters-state';

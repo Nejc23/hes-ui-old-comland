@@ -190,6 +190,9 @@
     "AUTHENTICATION": "Authentication",
     "COMMUNICATION-DETAILS": "Communication module details",
     "BASIC-DETAILS": "Details",
+    "IN-PROGRESS": "In progress",
+    "ACTIVE-IMPORTS": "Currently active imports",
+    "NUMBER-OF-DEVICES": "{{noOfDevices}} meters will be imported or updated",
     "ENABLE-METER": "Enable meter",
     "DISABLE-METER": "Disable meter"
   },
@@ -599,7 +602,8 @@
     "PIN-COLLAPSE-MENU": "Pin/collapse menu",
     "POWERED-BY": "powered by Metricsx",
     "TOOLS": "Tools",
-    "USERS": "Users"
+    "USERS": "Users",
+    "IMPORT-DEVICES": "Import devices"
   },
   "MODAL": {
     "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
@@ -609,7 +613,8 @@
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "SELECTED": "selected",
     "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
-    "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices"
+    "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
+    "IMPORT-FAILED": "Import failed"
   },
   "OPERATION": {
     "DEVICE-DISCOVERY": "Device discovery",

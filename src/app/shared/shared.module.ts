@@ -104,6 +104,7 @@ import { SecurityRekeyConcentratorComponent } from '../features/data-concentrato
 import { NgxTranslateDebugParser } from 'ngx-translate-debug';
 import { ShowMoreComponent } from './show-more/show-more.component';
 import { LabelWithSwitchComponent } from './label-with-switch/label-with-switch.component';
+import { ImportDevicesComponent } from '../features/meter-units/common/components/import-devices/import-devices.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -187,7 +188,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SlideOutComponentComponent,
     NoDataComponent,
     ShowMoreComponent,
-    LabelWithSwitchComponent
+    LabelWithSwitchComponent,
+    ImportDevicesComponent
   ],
   imports: [
     CommonModule,
@@ -313,7 +315,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NoDataComponent,
     SecurityRekeyConcentratorComponent,
     ShowMoreComponent,
-    LabelWithSwitchComponent
+    LabelWithSwitchComponent,
+    ImportDevicesComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -347,7 +350,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     SecurityChangePasswordComponent,
     AlarmNotificationRulesComponent,
     PlcReadRegistersComponent,
-    SecurityRekeyConcentratorComponent
+    SecurityRekeyConcentratorComponent,
+    ImportDevicesComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

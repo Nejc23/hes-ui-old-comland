@@ -9,8 +9,8 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root'
 })
 export class SidebarService {
-  private sidebarItems: Array<SidebarItem> = [];
   public headerTitle = '';
+  private sidebarItems: Array<SidebarItem> = [];
 
   constructor(private translate: TranslateService) {
     this.sidebarItems = [
@@ -74,6 +74,13 @@ export class SidebarService {
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Manage_Auto_Template_Rules
+          },
+          {
+            title: this.translate.instant('MENU.IMPORT-DEVICES'),
+            routeLink: `/${ConfigurationRoute.configuration}/importDevices`,
+            hasChildren: false,
+            children: [],
+            permission: PermissionEnumerator.Device_Import
           },
           {
             title: this.translate.instant('MENU.IMPORT-DEVICE-KEYS'),
