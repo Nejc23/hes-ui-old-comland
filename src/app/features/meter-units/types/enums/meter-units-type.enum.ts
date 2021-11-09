@@ -17,5 +17,7 @@ export enum MeterUnitsTypeEnum {
   readThresholdsLimiter = 'readThresholdsLimiter',
   readThresholdsMonitor = 'readThresholdsMonitor',
   syncTime = 'syncTime',
-  readMeter = 'readMeter'
+  readMeter = 'readMeter',
+  enableMeter = 'enableMeter',
+  disableMeter = 'disableMeter'
 }

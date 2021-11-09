@@ -15,6 +15,7 @@ export interface MuForm {
   connectionType: Codelist<number>;
   ip: string;
   port: number;
+  deviceState?: Codelist<number>;
   communicationType: number;
   jobIds: string[];
   authenticationType: AuthenticationTypeEnum;

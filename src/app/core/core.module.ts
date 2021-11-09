@@ -23,6 +23,7 @@ import { GridLayoutSessionStoreService } from './utils/services/grid-layout-sess
 import { GridSettingsCookieStoreService } from './utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
 import { SharedModule } from '../shared/shared.module';
+import { EventManagerService } from './services/event-manager.service';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule, SharedModule],
@@ -43,6 +44,7 @@ import { SharedModule } from '../shared/shared.module';
     GridSettingsSessionStoreService,
     SidebarCookieStoreService,
     GridLayoutSessionStoreService,
+    EventManagerService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,

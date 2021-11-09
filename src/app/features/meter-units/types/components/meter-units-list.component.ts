@@ -74,7 +74,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     sortModel: [],
     searchModel: [],
     filterModel: {
-      statuses: [{ id: 0, value: '' }],
+      states: [{ id: 0, value: '' }],
       tags: [{ id: 0, value: '' }],
       // vendors: [{ id: 0, value: '' }],
       readStatus: {
@@ -169,7 +169,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: MeterUnitsLayout) => {
         if (event !== null) {
-          this.requestModel.filterModel.statuses = event.statusesFilter;
+          this.requestModel.filterModel.states = event.statesFilter;
           this.requestModel.filterModel.vendors = event.vendorsFilter;
           this.requestModel.filterModel.tags = event.tagsFilter;
           this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
@@ -195,7 +195,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       }
     });
 
-    this.eventService.eventEmitterDevicesDeleted.subscribe({
+    this.eventService.eventEmitterRefreshDevices.subscribe({
       next: () => {
         this.deselectAll();
         if (this.gridApi) {
@@ -461,7 +461,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
 
-      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.states = filterDCU.statesFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
         operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
@@ -489,7 +489,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     this.filtersInfo = this.staticTextService.getFiltersInfo(
       filterInfo.name,
-      filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
+      filterInfo.statesFilter && filterInfo.statesFilter.length > 0,
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0 ? true : false,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
@@ -1325,6 +1325,36 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.syncTime,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onEnableMeter(selectedGuid: string) {
+    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.enableMeter,
+      params,
+      selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
+    );
+  }
+
+  onDisableMeter(selectedGuid: string) {
+    // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getSearchColumnNames()
+    );
+    this.plcActionsService.bulkOperation(
+      MeterUnitsTypeEnum.disableMeter,
       params,
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount()
     );

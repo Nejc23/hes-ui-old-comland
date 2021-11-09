@@ -1,5 +1,7 @@
 export enum DcOperationTypeEnum {
   syncTime = 'syncTime',
   deviceDiscovery = 'deviceDiscovery',
-  reKeyHmac = 'rekeyHMAC'
+  reKeyHmac = 'rekeyHMAC',
+  enable = 'enable',
+  disable = 'disable'
 }

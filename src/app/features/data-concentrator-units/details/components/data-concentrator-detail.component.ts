@@ -42,6 +42,8 @@ import { SchedulerJobComponent } from '../../../jobs/components/scheduler-job/sc
 import { CodelistMeterUnitsRepositoryService } from '../../../../core/repository/services/codelists/codelist-meter-units-repository.service';
 import { SchedulerJobsEventEmitterService } from '../../../jobs/services/scheduler-jobs-event-emitter.service';
 import { OperationType } from '../../components/operations/dc-operations.component';
+import { DeviceState } from '../../../../core/repository/interfaces/meter-units/meter-unit-details.interface';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 
 @Component({
@@ -95,6 +97,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   messageEnabled = this.translate.instant('JOB.SCHEDULER-JOB-ENABLED');
   messageDisabled = this.translate.instant('JOB.SCHEDULER-JOB-DISABLED');
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
+
+  DeviceStateEnum = DeviceState;
 
   eventsColumnsConfiguration: Array<GridColumn> = [
     {
@@ -204,8 +208,12 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private activeJobsService: JobsService,
     private toast: ToastNotificationService,
     private codelistMeterUnitsRepositoryService: CodelistMeterUnitsRepositoryService,
-    private schedulerJobsEventService: SchedulerJobsEventEmitterService
+    private schedulerJobsEventService: SchedulerJobsEventEmitterService,
+    private eventsService: EventManagerService
   ) {
+    this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
+      this.getData();
+    });
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
       zoom: 13,

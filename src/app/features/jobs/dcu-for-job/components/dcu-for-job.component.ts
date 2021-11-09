@@ -36,31 +36,25 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   meterTypes$: Codelist<number>[] = [];
 
   scheduleId = '';
-  private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT';
-  // headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
+  // headerTitle = '';
   refreshInterval = gridRefreshInterval;
-
   // grid variables
   columns = [];
   totalCount = 0;
   filters = '';
-  private layoutChangeSubscription: Subscription;
-
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
   overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
-
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
   public gridApi;
-  private gridColumnApi;
   public icons;
   public frameworkComponents;
   loadGrid = true;
@@ -73,7 +67,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     sortModel: [],
     searchModel: [],
     filterModel: {
-      statuses: null,
+      states: null,
       tags: null,
       firmware: null,
       readStatus: null,
@@ -82,18 +76,18 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       showOptionFilter: null
     }
   };
-
   requestId = '';
   dataResult = '';
   dataStatusResponse = '';
   dataResult2 = '';
   public localeText;
-
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
   messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
-
   public useWildcards = false;
+  private paramsSub: Subscription;
+  private layoutChangeSubscription: Subscription;
+  private gridColumnApi;
 
   constructor(
     private route: ActivatedRoute,
@@ -157,6 +151,18 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     return ActionEnumerator.MURemoveFromJob;
   }
 
+  // checking if at least one row on the grid is selected
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.gridApi) {
+      const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  }
+
   ngOnInit() {
     this.setTitle('');
 
@@ -208,7 +214,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     ) as MeterUnitsLayout;
     return (
       (filterInfo.name !== '' && filterInfo.name !== undefined) ||
-      (filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0) ||
+      (filterInfo.statesFilter && filterInfo.statesFilter.length > 0) ||
       (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
       (filterInfo.vendorsFilter &&
         filterInfo.vendorsFilter.length > 0 &&
@@ -227,12 +233,15 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     return this.dcuForJobGridService.getSessionSettingsSelectedAll();
   }
 
+  // ag-grid
+
   clearFilter() {
     this.gridFilterSessionStoreService.clearGridLayout();
     this.refreshGrid();
   }
 
   // ag-grid
+
   // button click refresh grid
   refreshGrid() {
     if (this.gridApi) {
@@ -241,6 +250,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
   }
 
   // ag-grid
+
   // search string changed call get data
   searchData($event: string) {
     if ($event !== this.dcuForJobGridService.getSessionSettingsSearchedText()) {
@@ -254,19 +264,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       this.dcuForJobGridService.setSessionSettingsSelectedRows([]);
       this.gridApi.onFilterChanged();
     }
-  }
-
-  // ag-grid
-  // checking if at least one row on the grid is selected
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.dcuForJobGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
   }
 
   // click on the link "select all"
@@ -356,7 +353,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
         )
       ) {
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+        this.requestModel.filterModel.states = filterDCU.statesFilter;
         this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
         if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
@@ -427,7 +424,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     ) {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.states = filterDCU.statesFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
@@ -451,7 +448,7 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     this.filters = this.staticTextService.setfilterHeaderText(
       filterInfo.name,
-      filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
+      filterInfo.statesFilter && filterInfo.statesFilter.length > 0,
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0 ? true : false,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
@@ -513,38 +510,6 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
     });
 
     this.programmaticallySelectRow = false;
-  }
-
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private noFilters() {
-    return (
-      this.requestModel.filterModel == null ||
-      ((!this.requestModel.filterModel.statuses ||
-        this.requestModel.filterModel.statuses.length === 0 ||
-        this.requestModel.filterModel.statuses[0].id === 0) &&
-        (!this.requestModel.filterModel.tags ||
-          this.requestModel.filterModel.tags.length === 0 ||
-          this.requestModel.filterModel.tags[0].id === 0) &&
-        (!this.requestModel.filterModel.types ||
-          this.requestModel.filterModel.types.length === 0 ||
-          this.requestModel.filterModel.types[0] === 0) &&
-        (!this.requestModel.filterModel.vendors ||
-          this.requestModel.filterModel.vendors.length === 0 ||
-          this.requestModel.filterModel.vendors[0].id === 0) &&
-        !this.requestModel.filterModel.readStatus &&
-        (!this.requestModel.filterModel.firmware ||
-          this.requestModel.filterModel.firmware.length === 0 ||
-          this.requestModel.filterModel.firmware[0].id === 0) &&
-        !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showWithoutTemplate &&
-        !this.requestModel.filterModel.readyForActivation)
-    );
   }
 
   // set form title by selected meter unit type
@@ -675,5 +640,37 @@ export class DcuForJobComponent implements OnInit, OnDestroy {
       this.dcuForJobGridService.setSessionSettingsPageIndex(0);
       this.gridApi.onFilterChanged();
     }
+  }
+
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private noFilters() {
+    return (
+      this.requestModel.filterModel == null ||
+      ((!this.requestModel.filterModel.states ||
+        this.requestModel.filterModel.states.length === 0 ||
+        this.requestModel.filterModel.states[0].id === 0) &&
+        (!this.requestModel.filterModel.tags ||
+          this.requestModel.filterModel.tags.length === 0 ||
+          this.requestModel.filterModel.tags[0].id === 0) &&
+        (!this.requestModel.filterModel.types ||
+          this.requestModel.filterModel.types.length === 0 ||
+          this.requestModel.filterModel.types[0] === 0) &&
+        (!this.requestModel.filterModel.vendors ||
+          this.requestModel.filterModel.vendors.length === 0 ||
+          this.requestModel.filterModel.vendors[0].id === 0) &&
+        !this.requestModel.filterModel.readStatus &&
+        (!this.requestModel.filterModel.firmware ||
+          this.requestModel.filterModel.firmware.length === 0 ||
+          this.requestModel.filterModel.firmware[0].id === 0) &&
+        !this.requestModel.filterModel.showChildInfoMBus &&
+        !this.requestModel.filterModel.showWithoutTemplate &&
+        !this.requestModel.filterModel.readyForActivation)
+    );
   }
 }

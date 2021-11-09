@@ -1,4 +1,5 @@
-<div class="d-flex row-actions justify-content-end">
+<div
+  class="d-flex row-actions justify-content-end">
   <div class="btn-group-sm">
     <button
       (click)="toDetails()" [openDelay]="500" class="btn btn-primary m-0"
@@ -6,7 +7,8 @@
       type="button"><i class="far fa-eye"
     ></i></button>
   </div>
-  <div [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]"
+  <div *ngIf="params.data.state.toLowerCase() !== DeviceStateEnum.INSTALLING.toLocaleString().toLowerCase()"
+       [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]"
        appHideIfAllPermissionsUnauthorized class="dropdown-ag-grid btn-group-sm"
        dropdown>
     <button [openDelay]="500" aria-expanded="false" aria-haspopup="true" class="btn btn-primary btn-sm"
@@ -26,8 +28,16 @@
            href="javascript:void(0);"><span>{{'OPERATION.FW-UPGRADE' | translate }}</span></a>
       </div>
       <div [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized>
-        <a (click)="onDeviceDiscovery()" class="dropdown-item"
+        <a (click)="onDeviceDiscovery()" class="dropdown-item gray-light-line"
            href="javascript:void(0);"><span>{{'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
+      </div>
+      <div [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized>
+        <a (click)="onEnableDC()" class="dropdown-item custom-hover-display"
+           href="javascript:void(0)"><span>{{ 'OPERATION.ENABLE-DC' | translate }}</span></a>
+      </div>
+      <div [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized>
+        <a (click)="onDisableDC()" class="dropdown-item custom-hover-display"
+           href="javascript:void(0)"><span>{{ 'OPERATION.DISABLE-DC' | translate }}</span></a>
       </div>
     </div>
   </div>

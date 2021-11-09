@@ -18,7 +18,7 @@ export interface GridRequestParams {
 }
 
 export interface GridFilterParams {
-  statuses: Codelist<number>[];
+  states: Codelist<number>[];
   types?: number[];
   tags: Codelist<number>[];
   vendors?: Codelist<number>[];

@@ -1,6 +1,6 @@
 import { SettingsStoreEmitterService } from './../../../../core/repository/services/settings-store/settings-store-emitter.service';
-import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Observable, of, Subscription } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
@@ -61,6 +61,38 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     this.applyFilter = _.debounce(this.applyFilter, 1000);
   }
 
+  get statesProperty() {
+    return 'states';
+  }
+
+  get tagsProperty() {
+    return 'tags';
+  }
+
+  get typesProperty() {
+    return 'types';
+  }
+
+  get filtersProperty() {
+    return 'filters';
+  }
+
+  get vendorsProperty() {
+    return 'vendors';
+  }
+
+  get operationProperty() {
+    return 'operation';
+  }
+
+  get value1Property() {
+    return 'value1';
+  }
+
+  get value2Property() {
+    return 'value2';
+  }
+
   // called on init
   ngOnInit(): void {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
@@ -98,7 +130,7 @@ export class DcFilterComponent implements OnInit, OnDestroy {
         const currentFilter: DcuLayout = {
           id: -1,
           name: '',
-          statusesFilter: this.sessionFilter.statusesFilter,
+          statesFilter: this.sessionFilter.statesFilter,
           readStatusFilter: this.sessionFilter.readStatusFilter,
           typesFilter: this.sessionFilter.typesFilter,
           tagsFilter: this.sessionFilter.tagsFilter,
@@ -116,7 +148,7 @@ export class DcFilterComponent implements OnInit, OnDestroy {
   createForm(filters: DcuLayout[], selected: DcuLayout): FormGroup {
     return this.fb.group(
       {
-        ['statuses']: [filters && selected ? selected.statusesFilter : []],
+        ['states']: [filters && selected ? selected.statesFilter : []],
         ['tags']: [filters && selected ? selected.tagsFilter : []],
         ['types']: [filters && selected ? selected.typesFilter : []],
         ['filters']: [filters ? filters : []],
@@ -131,38 +163,6 @@ export class DcFilterComponent implements OnInit, OnDestroy {
       },
       { validators: [rangeFilterValidator] }
     );
-  }
-
-  get statusesProperty() {
-    return 'statuses';
-  }
-
-  get tagsProperty() {
-    return 'tags';
-  }
-
-  get typesProperty() {
-    return 'types';
-  }
-
-  get filtersProperty() {
-    return 'filters';
-  }
-
-  get vendorsProperty() {
-    return 'vendors';
-  }
-
-  get operationProperty() {
-    return 'operation';
-  }
-
-  get value1Property() {
-    return 'value1';
-  }
-
-  get value2Property() {
-    return 'value2';
   }
 
   refresh() {}
@@ -186,7 +186,7 @@ export class DcFilterComponent implements OnInit, OnDestroy {
     const currentFilter: DcuLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
-      statusesFilter: this.form.get(this.statusesProperty).value,
+      statesFilter: this.form.get(this.statesProperty).value,
       readStatusFilter: {
         operation: { id: '', value: '' },
         value1: 0,

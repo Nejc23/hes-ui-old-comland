@@ -1,7 +1,9 @@
+import { DeviceState } from '../meter-units/meter-unit-details.interface';
+
 export interface DataConcentratorUnit {
   concentratorId: string;
   hostname: string;
-  statusValue: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE';
+  stateValue: DeviceState;
   statusId: number;
   name: string;
   typeValue: string;

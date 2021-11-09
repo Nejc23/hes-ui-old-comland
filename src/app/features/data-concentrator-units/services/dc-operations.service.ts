@@ -17,6 +17,7 @@ import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.compo
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { TemplatingService } from '../../../core/repository/services/templating/templating.service';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
+import { EventManagerService } from '../../../core/services/event-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class DcOperationsService {
     private service: DataConcentratorUnitsOperationsService,
     private dcGridService: DataConcentratorUnitsGridService,
     private templatingService: TemplatingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventManager: EventManagerService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams) {
@@ -156,7 +158,7 @@ export class DcOperationsService {
     const object: GridBulkActionRequestParams = {
       id: [],
       filter: {
-        statuses: [],
+        states: [],
         types: [],
         vendor: { id: 0, value: '' },
         tags: []
@@ -235,6 +237,18 @@ export class DcOperationsService {
         operationName = this.translate.instant('OPERATION.RE-KEY-HMAC');
         // selectedText = `${`for`} ${selectedText}`;
         break;
+      case DcOperationTypeEnum.enable:
+        params.enabled = true;
+        response = this.service.postEnableDC(params);
+        operationName = this.translate.instant('OPERATION.ENABLE-DC');
+        // selectedText = `${`for`} ${selectedText}`;
+        break;
+      case DcOperationTypeEnum.disable:
+        params.enabled = false;
+        response = this.service.postEnableDC(params);
+        operationName = this.translate.instant('OPERATION.DISABLE-DC');
+        // selectedText = `${`for`} ${selectedText}`;
+        break;
     }
     component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
     component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
@@ -250,6 +264,9 @@ export class DcOperationsService {
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
+            if (operation === DcOperationTypeEnum.enable || DcOperationTypeEnum.disable) {
+              this.eventManager.emitCustom('RefreshConcentratorEvent', true);
+            }
             /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
@@ -323,10 +340,10 @@ export class DcOperationsService {
         // create filter object
         if (requestModel.filterModel) {
           requestParam.filter = [];
-          if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
-            requestModel.filterModel.statuses.map((row) =>
+          if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
+            requestModel.filterModel.states.map((row) =>
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.status),
+                propName: capitalize(gridSysNameColumnsEnum.state),
                 propValue: row.id.toString(),
                 filterOperation: filterOperationEnum.equal
               })

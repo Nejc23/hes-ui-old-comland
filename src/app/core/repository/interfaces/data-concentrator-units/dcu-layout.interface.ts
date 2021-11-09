@@ -5,7 +5,7 @@ export interface DcuLayout {
   id: number;
   name: string;
   vendorsFilter: Codelist<number>[];
-  statusesFilter: Codelist<number>[];
+  statesFilter: Codelist<number>[];
   readStatusFilter: ReadStatus;
   typesFilter: Codelist<number>[];
   tagsFilter: Codelist<number>[];

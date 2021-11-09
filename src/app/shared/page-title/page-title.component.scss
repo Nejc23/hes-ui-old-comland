@@ -1,0 +1,17 @@
+.operational-state {
+  @apply tw-text-installed;
+  @apply tw-bg-installed;
+  @apply tw-bg-opacity-20;
+}
+
+.disabled-state {
+  @apply tw-text-disappeared;
+  @apply tw-bg-disappeared;
+  @apply tw-bg-opacity-20;
+}
+
+.installing-state {
+  @apply tw-text-installing;
+  @apply tw-bg-installing;
+  @apply tw-bg-opacity-20;
+}

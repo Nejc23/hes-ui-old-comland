@@ -11,13 +11,12 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
-import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
+import { DeviceState, MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { AddMeterUnitFormComponent } from '../../common/components/add-mu-form/add-meter-unit-form.component';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
+import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -34,6 +33,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   openEdit = false;
   saveData = false;
   basicDetails = false;
+  DeviceStateEnum = DeviceState;
 
   private deviceId;
   private requestModel;
@@ -50,8 +50,15 @@ export class MeterUnitDetailsComponent implements OnInit {
     private modalService: ModalService,
     private translate: TranslateService,
     private elRef: ElementRef,
-    private permissionService: PermissionService
-  ) {}
+    private permissionService: PermissionService,
+    private eventService: MeterUnitsTypeGridEventEmitterService
+  ) {
+    this.eventService.eventEmitterRefreshDevices.subscribe({
+      next: () => {
+        this.getData();
+      }
+    });
+  }
 
   // form - rights
   get formFunctionality() {
@@ -208,28 +215,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     this.getData();
   }
 
-  public editMeterUnit() {
-    const options: NgbModalOptions = {
-      size: 'lg'
-    };
-
-    const modalRef = this.modalService.open(AddMeterUnitFormComponent, options);
-    const component: AddMeterUnitFormComponent = modalRef.componentInstance;
-    component.plcDevice = this.isPlcDevice;
-
-    if (this.data) {
-      modalRef.componentInstance.setFormEdit(this.data, options);
-    }
-
-    modalRef.result
-      .then((result) => {
-        if (result) {
-          this.getData();
-        }
-      })
-      .catch(() => {});
-  }
-
   getData() {
     this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
       this.saveData = false;
@@ -248,6 +233,7 @@ export class MeterUnitDetailsComponent implements OnInit {
       name: this.data.name,
       serialNumber: this.data.serialNumber,
       templateName: this.data.templateName,
+      //  deviceState: this.data.deviceState,
       //   protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
       manufacturer: this.data.manufacturer,
       //   ip: this.data.ip,
@@ -441,6 +427,16 @@ export class MeterUnitDetailsComponent implements OnInit {
   onReadMeter() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onReadRegisters(params, 1);
+  }
+
+  onEnable() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.enableMeter, params, 1);
+  }
+
+  onDisable() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.disableMeter, params, 1);
   }
 
   addWidth() {

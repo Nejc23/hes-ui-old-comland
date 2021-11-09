@@ -1,12 +1,12 @@
 import { SidebarToggleService } from '../../../../shared/base-template/components/services/sidebar.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridOptions, Module } from '@ag-grid-community/core';
 import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import * as _ from 'lodash';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
@@ -33,31 +33,25 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   meterTypes$: Codelist<number>[] = [];
 
   scheduleId = '';
-  private paramsSub: Subscription;
   sessionNameForGridFilter = 'grdLayoutMUT';
-  // headerTitle = '';
   // taskStatusOK = 'TASK_PREREQ_FAILURE'; // TODO: ONLY FOR DEBUG !!!
   taskStatusOK = 'TASK_SUCCESS';
+  // headerTitle = '';
   refreshInterval = gridRefreshInterval;
-
   // grid variables
   columns = [];
   totalCount = 0;
   filters = '';
-  private layoutChangeSubscription: Subscription;
-
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
   overlayNoRowsTemplate = this.staticTextService.noRecordsFound;
   overlayLoadingTemplate = this.staticTextService.loadingData;
   noData = false;
-
   // ---------------------- ag-grid ------------------
   agGridSettings = configAgGrid;
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
   public gridApi;
-  private gridColumnApi;
   public icons;
   public frameworkComponents;
   loadGrid = true;
@@ -70,7 +64,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     sortModel: [],
     searchModel: [],
     filterModel: {
-      statuses: null,
+      states: null,
       tags: null,
       firmware: null,
       // vendors: null,
@@ -81,18 +75,18 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       showOptionFilter: null
     }
   };
-
   requestId = '';
   dataResult = '';
   dataStatusResponse = '';
   dataResult2 = '';
   public localeText;
-
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   messageDataRefreshed = this.translate.instant('COMMON.DATA-REFRESHED') + '!';
   messageActionFailed = this.translate.instant('COMMON.ACTION-FAILED') + '!';
-
   public useWildcards = false;
+  private paramsSub: Subscription;
+  private layoutChangeSubscription: Subscription;
+  private gridColumnApi;
 
   constructor(
     private route: ActivatedRoute,
@@ -143,9 +137,22 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   get formFunctionality() {
     return FunctionalityEnumerator.MU;
   }
+
   // actions - rights
   get actionMURemoveFromJob() {
     return ActionEnumerator.MURemoveFromJob;
+  }
+
+  // checking if at least one row on the grid is selected
+  get selectedAtLeastOneRowOnGrid() {
+    if (this.gridApi) {
+      const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
+        return true;
+      }
+      return false;
+    }
+    return false;
   }
 
   ngOnInit() {
@@ -198,7 +205,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     ) as MeterUnitsLayout;
     return (
       (filterInfo.name !== '' && filterInfo.name !== undefined) ||
-      (filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0) ||
+      (filterInfo.statesFilter && filterInfo.statesFilter.length > 0) ||
       (filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0) ||
       (filterInfo.vendorsFilter &&
         filterInfo.vendorsFilter.length > 0 &&
@@ -217,12 +224,15 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     return this.meterUnitsForJobGridService.getSessionSettingsSelectedAll();
   }
 
+  // ag-grid
+
   clearFilter() {
     this.gridFilterSessionStoreService.clearGridLayout();
     this.refreshGrid();
   }
 
   // ag-grid
+
   // button click refresh grid
   refreshGrid() {
     if (this.gridApi) {
@@ -231,6 +241,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
   }
 
   // ag-grid
+
   // search string changed call get data
   searchData($event: string) {
     if ($event !== this.meterUnitsForJobGridService.getSessionSettingsSearchedText()) {
@@ -244,19 +255,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       this.meterUnitsForJobGridService.setSessionSettingsSelectedRows([]);
       this.gridApi.onFilterChanged();
     }
-  }
-
-  // ag-grid
-  // checking if at least one row on the grid is selected
-  get selectedAtLeastOneRowOnGrid() {
-    if (this.gridApi) {
-      const selectedRows = this.meterUnitsForJobGridService.getSessionSettingsSelectedRows();
-      if (selectedRows && selectedRows.length > 0) {
-        return true;
-      }
-      return false;
-    }
-    return false;
   }
 
   // click on the link "select all"
@@ -329,6 +327,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     };
     this.gridApi.setServerSideDatasource(datasource);
   }
+
   // ----------------------- ag-grid set DATASOURCE end --------------------------
 
   // ag-grid change visibillity of columns
@@ -346,7 +345,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
         )
       ) {
         const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-        this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+        this.requestModel.filterModel.states = filterDCU.statesFilter;
         this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
         this.requestModel.filterModel.tags = filterDCU.tagsFilter;
         if (filterDCU.readStatusFilter !== undefined && filterDCU.readStatusFilter != null) {
@@ -425,7 +424,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     ) {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.states = filterDCU.statesFilter;
       this.requestModel.filterModel.vendors = filterDCU.vendorsFilter;
       this.requestModel.filterModel.tags = filterDCU.tagsFilter;
       this.requestModel.filterModel.readStatus = {
@@ -449,7 +448,7 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     const filterInfo = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     this.filters = this.staticTextService.setfilterHeaderText(
       filterInfo.name,
-      filterInfo.statusesFilter && filterInfo.statusesFilter.length > 0,
+      filterInfo.statesFilter && filterInfo.statesFilter.length > 0,
       filterInfo.vendorsFilter && filterInfo.vendorsFilter.length > 0 ? true : false,
       filterInfo.tagsFilter && filterInfo.tagsFilter.length > 0,
       filterInfo.readStatusFilter && filterInfo.readStatusFilter.operation && filterInfo.readStatusFilter.operation.id.length > 0
@@ -507,44 +506,6 @@ export class AllForJobComponent implements OnInit, OnDestroy {
     });
 
     this.programmaticallySelectRow = false;
-  }
-
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
-  private noFilters() {
-    if (
-      this.requestModel.filterModel == null ||
-      ((!this.requestModel.filterModel.statuses ||
-        this.requestModel.filterModel.statuses.length === 0 ||
-        this.requestModel.filterModel.statuses[0].id === 0) &&
-        (!this.requestModel.filterModel.tags ||
-          this.requestModel.filterModel.tags.length === 0 ||
-          this.requestModel.filterModel.tags[0].id === 0) &&
-        (!this.requestModel.filterModel.types ||
-          this.requestModel.filterModel.types.length === 0 ||
-          this.requestModel.filterModel.types[0] === 0) &&
-        (!this.requestModel.filterModel.vendors ||
-          this.requestModel.filterModel.vendors.length === 0 ||
-          this.requestModel.filterModel.vendors[0].id === 0) &&
-        (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
-        (!this.requestModel.filterModel.firmware ||
-          this.requestModel.filterModel.firmware.length === 0 ||
-          this.requestModel.filterModel.firmware[0].id === 0) &&
-        (!this.requestModel.filterModel.disconnectorState ||
-          this.requestModel.filterModel.disconnectorState.length === 0 ||
-          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
-        !this.requestModel.filterModel.showChildInfoMBus &&
-        !this.requestModel.filterModel.showWithoutTemplate &&
-        !this.requestModel.filterModel.readyForActivation)
-    ) {
-      return true;
-    }
-    return false;
   }
 
   // set form title by selected meter unit type
@@ -683,5 +644,43 @@ export class AllForJobComponent implements OnInit, OnDestroy {
       this.meterUnitsForJobGridService.setSessionSettingsPageIndex(0);
       this.gridApi.onFilterChanged();
     }
+  }
+
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
+  }
+
+  private noFilters() {
+    if (
+      this.requestModel.filterModel == null ||
+      ((!this.requestModel.filterModel.states ||
+        this.requestModel.filterModel.states.length === 0 ||
+        this.requestModel.filterModel.states[0].id === 0) &&
+        (!this.requestModel.filterModel.tags ||
+          this.requestModel.filterModel.tags.length === 0 ||
+          this.requestModel.filterModel.tags[0].id === 0) &&
+        (!this.requestModel.filterModel.types ||
+          this.requestModel.filterModel.types.length === 0 ||
+          this.requestModel.filterModel.types[0] === 0) &&
+        (!this.requestModel.filterModel.vendors ||
+          this.requestModel.filterModel.vendors.length === 0 ||
+          this.requestModel.filterModel.vendors[0].id === 0) &&
+        (!this.requestModel.filterModel.readStatus || this.requestModel.filterModel.readStatus === null) &&
+        (!this.requestModel.filterModel.firmware ||
+          this.requestModel.filterModel.firmware.length === 0 ||
+          this.requestModel.filterModel.firmware[0].id === 0) &&
+        (!this.requestModel.filterModel.disconnectorState ||
+          this.requestModel.filterModel.disconnectorState.length === 0 ||
+          this.requestModel.filterModel.disconnectorState[0].id === 0) &&
+        !this.requestModel.filterModel.showChildInfoMBus &&
+        !this.requestModel.filterModel.showWithoutTemplate &&
+        !this.requestModel.filterModel.readyForActivation)
+    ) {
+      return true;
+    }
+    return false;
   }
 }

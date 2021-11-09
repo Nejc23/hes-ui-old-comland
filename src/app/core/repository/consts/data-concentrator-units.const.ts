@@ -35,6 +35,7 @@ export const dcOperationSynchronizeTime = `${basePathDcOperations}/trigger-set-c
 export const dcOperationFwUpgrade = `${basePathDcOperations}/upgrade`;
 export const dcOperationDeviceDiscovery = `${basePathDcOperations}/trigger-device-discovery`;
 export const dcLastStatus = '/last-status';
+export const dcOperationUpdateConcentrator = `${basePathConcentratorInventory}/update-concentrators-state`;
 
 // Active Jobs
 export const getActiveJobs = `${basePathDcOperations}/device-jobs`;

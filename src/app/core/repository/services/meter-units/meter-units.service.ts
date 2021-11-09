@@ -303,10 +303,10 @@ export class MeterUnitsService {
     // create filter object
     if (param.filterModel) {
       requestParam.filter = [];
-      if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
-        param.filterModel.statuses.map((row) =>
+      if (param.filterModel.states && param.filterModel.states.length > 0) {
+        param.filterModel.states.map((row) =>
           requestParam.filter.push({
-            propName: capitalize(gridSysNameColumnsEnum.status),
+            propName: capitalize(gridSysNameColumnsEnum.state),
             propValue: row.id.toString(),
             filterOperation: filterOperationEnum.equal
           })

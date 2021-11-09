@@ -5,7 +5,7 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
-      [status]="data.statusValue"
+      [state]="data.stateValue"
       [subtitle]="data.typeValue"
       [title]="data.name ? data.name : data.serialNumber"
       class="tw-h-36 tw-mt-10 tw--m-5"
@@ -13,12 +13,14 @@
     </app-page-title>
 
     <div class="tw-mt-10 tw-pr-5">
-      <app-dc-operations *ngIf="data" [guid]="concentratorId"
-                         [operationType]="componentType.OPERATION"
-                         [requestModel]="null"
-                         [selectedItemsCount]="1"
-                         [showOperations]="true"
-                         [type]="data.typeValue" class="tw-mr-2"></app-dc-operations>
+      <app-dc-operations
+        *ngIf="data && data.stateValue?.toLowerCase() !== DeviceStateEnum.INSTALLING.toString().toLowerCase()"
+        [guid]="concentratorId"
+        [operationType]="componentType.OPERATION"
+        [requestModel]="null"
+        [selectedItemsCount]="1"
+        [showOperations]="true"
+        [type]="data.typeValue" class="tw-mr-2"></app-dc-operations>
 
       <app-dc-operations *ngIf="data" [guid]="concentratorId"
                          [operationType]="componentType.SECURITY"

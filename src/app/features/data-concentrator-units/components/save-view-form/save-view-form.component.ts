@@ -34,6 +34,10 @@ export class SaveViewFormComponent implements OnInit {
     this.form = this.createForm(null, null);
   }
 
+  get nameProperty() {
+    return 'name';
+  }
+
   ngOnInit() {
     this.dcuLayouts$ = this.dcuService.getDcuLayout();
     this.dcuLayouts$.subscribe((x) => {
@@ -48,7 +52,7 @@ export class SaveViewFormComponent implements OnInit {
           const currentLayout: DcuLayout = {
             id: -1,
             name: '',
-            statusesFilter: this.sessionLayout.statusesFilter,
+            statesFilter: this.sessionLayout.statesFilter,
             typesFilter: this.sessionLayout.typesFilter,
             tagsFilter: this.sessionLayout.tagsFilter,
             vendorsFilter: this.sessionLayout.vendorsFilter,
@@ -89,10 +93,6 @@ export class SaveViewFormComponent implements OnInit {
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridLayout, this.sessionLayout);
     this.eventService.layoutChange(this.sessionLayout);
     this.modal.close();
-  }
-
-  get nameProperty() {
-    return 'name';
   }
 
   showButtons(filterIdx: number) {

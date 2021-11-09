@@ -5,7 +5,7 @@
   <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="securityDropDown"
           type="button"><span>{{ 'OPERATION.SECURITY' | translate }}</span></button>
   <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
-    <div class="tw-pr-5">
+    <div>
       <a (click)="onReKeyHmac()" [permission]="permissionManageConcentrators"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'OPERATION.RE-KEY-HMAC' | translate }}</span></a>
@@ -23,7 +23,7 @@
   <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="operationsDropDown"
           type="button"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
   <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
-    <div class="tw-pr-5">
+    <div>
       <a (click)="onSynchronizeTime()" [permission]="permissionSynchronizeTime"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>
@@ -31,8 +31,14 @@
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'OPERATION.FW-UPGRADE' | translate }}</span></a>
       <a (click)="onDeviceDiscovery()" [permission]="permissionDeviceDiscovery"
-         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display gray-light-line"
          href="javascript:void(0)"><span>{{ 'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
+      <a (click)="onEnableDC()" [permission]="permissionDeviceDiscovery"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.ENABLE-DC' | translate }}</span></a>
+      <a (click)="onDisableDC()" [permission]="permissionDeviceDiscovery"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.DISABLE-DC' | translate }}</span></a>
       <a (click)="onDelete()" *ngIf="type" [permission]="permissionDeviceDiscovery"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'COMMON.DELETE' | translate }}</span></a>

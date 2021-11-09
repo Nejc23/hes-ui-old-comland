@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { ICellRendererAngularComp } from '@ag-grid-community/angular';
 import { GridApi } from '@ag-grid-community/core';
 import { TranslateService } from '@ngx-translate/core';
+import { DeviceState } from '../../../../../core/repository/interfaces/meter-units/meter-unit-details.interface';
 
 @Component({
   selector: 'app-grid-cell-actions',
@@ -11,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class GridCellActionsComponent implements ICellRendererAngularComp {
   public params: any;
   public gridApi: GridApi;
+  DeviceStateEnum = DeviceState;
 
   constructor(private translate: TranslateService) {}
 
@@ -226,6 +228,14 @@ export class GridCellActionsComponent implements ICellRendererAngularComp {
 
   onJobsAssignExisting() {
     this.params.context.componentParent.onJobsAssignExisting(this.params.data.deviceId);
+  }
+
+  onEnableMeter() {
+    this.params.context.componentParent.onEnableMeter(this.params.data.deviceId);
+  }
+
+  onDisableMeter() {
+    this.params.context.componentParent.onDisableMeter(this.params.data.deviceId);
   }
 
   // set tooltip text
