@@ -40,6 +40,7 @@ import { GridCellInstantValuesComponent } from '../../types/components/grid-cust
 import { MeterUnitsRoutingModule } from './meter-units-routing.module';
 import { PipesModule } from '../../../../shared/pipes/pipes.module';
 import { EditMeterUnitFormComponent } from '../components/edit-mu-form/edit-meter-unit-form.component';
+import { ErrorMessageModalComponent } from '../components/import-devices/error-messages-modal/error-message-modal.component';
 
 @NgModule({
   entryComponents: [],
@@ -80,7 +81,8 @@ import { EditMeterUnitFormComponent } from '../components/edit-mu-form/edit-mete
     GridCellInstantValuesComponent,
     GridCellThresholdComponent,
     GridCellUnitComponent,
-    EditMeterUnitFormComponent
+    EditMeterUnitFormComponent,
+    ErrorMessageModalComponent
   ],
   exports: [RegistersColumnChartComponent],
   imports: [
