@@ -3,7 +3,7 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
-      [status]="data.deviceStatus"
+      [state]="data.deviceState"
       [subtitle]="'PROTOCOL.' + data.protocolType"
       [title]="data.name ? data.name : data.serialNumber"
       class="tw-h-36 tw-mt-10 tw--m-5"
@@ -12,7 +12,7 @@
 
     <div *ngIf="data" class="tw-mt-10 tw-pr-5">
 
-      <div>
+      <div *ngIf="data.deviceState.toLowerCase() !== DeviceStateEnum.INSTALLING.toString().toLowerCase()">
         <div [permissions]="[
         permissionMuManage,
         permissionManageJobs,
@@ -268,6 +268,19 @@
                  href="javascript:void(0)">
                 <span>{{ 'COMMON.DELETE' | translate }}</span></a>
             </div>
+
+            <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
+              <a (click)="onEnable()" class="dropdown-item custom-hover-display item-padding"
+                 href="javascript:void(0)">
+                <span>{{ 'COMMON.ENABLE-METER' | translate }}</span></a>
+            </div>
+
+            <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
+              <a (click)="onDisable()" class="dropdown-item custom-hover-display item-padding"
+                 href="javascript:void(0)">
+                <span>{{ 'COMMON.DISABLE-METER' | translate }}</span></a>
+            </div>
+
           </div>
         </div>
       </div>

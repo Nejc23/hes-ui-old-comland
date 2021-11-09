@@ -14,6 +14,7 @@ export interface IActionRequestParams {
   groups?: any[]; // TODO enum
   unconditionalSync?: string;
   types?: string[];
+  enabled?: boolean;
 }
 
 export interface IActionSearchParam {

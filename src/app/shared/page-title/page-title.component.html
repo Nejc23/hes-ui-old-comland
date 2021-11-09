@@ -5,11 +5,11 @@
   <div *ngIf="subtitle" class="tw-text-mediumGray tw-text-xl tw-ml-2">
     {{ subtitle | translate }}
   </div>
-  <div *ngIf="status"
-       [ngClass]="addStatusClass()"
+  <div *ngIf="state"
+       [ngClass]="addStateClass()"
        class="tw-inline-flex tw-ml-4 tw-bg-opacity-20 tw-rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-items-center tw-capitalize tw-font-bold">
     <!-- create classes by enum -->
-    {{ status.toLowerCase() | translate }}
+    {{ state.toLowerCase() | translate }}
   </div>
 </div>
 

@@ -38,6 +38,7 @@ import { DcOperationsService } from '../services/dc-operations.service';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from './delete-dcu-form/delete-dcu-form.component';
 import { OperationType } from './operations/dc-operations.component';
+import { EventManagerService } from '../../../core/services/event-manager.service';
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -78,7 +79,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     sortModel: [],
     searchModel: [],
     filterModel: {
-      statuses: [{ id: 0, value: '' }],
+      states: [{ id: 0, value: '' }],
       readStatus: {
         operation: { id: '', value: '' },
         value1: 0,
@@ -131,8 +132,12 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     private dcuOperationsService: DataConcentratorUnitsOperationsService,
     private toast: ToastNotificationService,
     private jobsSelectGridService: JobsSelectGridService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventsService: EventManagerService
   ) {
+    this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
+      this.refreshGrid();
+    });
     this.filtersInfo = {
       isSet: false,
       count: 0,
@@ -144,7 +149,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.layoutChangeSubscription = this.eventService.eventEmitterLayoutChange.subscribe({
       next: (event: DcuLayout) => {
         if (event !== null) {
-          this.requestModel.filterModel.statuses = event.statusesFilter;
+          this.requestModel.filterModel.states = event.statesFilter;
           this.requestModel.filterModel.readStatus.operation = event.readStatusFilter.operation;
           this.requestModel.filterModel.readStatus.value1 = event.readStatusFilter.value1;
           this.requestModel.filterModel.readStatus.value2 = event.readStatusFilter.value2;
@@ -344,7 +349,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     ) {
       this.setFilterInfo();
       const filterDCU = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
-      this.requestModel.filterModel.statuses = filterDCU.statusesFilter;
+      this.requestModel.filterModel.states = filterDCU.statesFilter;
       this.requestModel.filterModel.readStatus = {
         operation: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.operation : { id: '', value: '' },
         value1: filterDCU.readStatusFilter ? filterDCU.readStatusFilter.value1 : 0,
@@ -366,7 +371,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
     this.filtersInfo = this.staticTextService.getFiltersInfo(
       filter.name,
-      filter.statusesFilter && filter.statusesFilter.length > 0,
+      filter.statesFilter && filter.statesFilter.length > 0,
       filter.readStatusFilter && filter.readStatusFilter.operation && filter.readStatusFilter.operation.id.length > 0 ? true : false,
       filter.typesFilter && filter.typesFilter.length > 0,
       filter.vendorsFilter && filter.vendorsFilter.length > 0 ? true : false,
@@ -378,7 +383,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     const tmpFilter: DcuLayout = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as DcuLayout;
     return (
       (tmpFilter.name !== '' && tmpFilter.name !== undefined) ||
-      (tmpFilter.statusesFilter && tmpFilter.statusesFilter.length > 0) ||
+      (tmpFilter.statesFilter && tmpFilter.statesFilter.length > 0) ||
       (tmpFilter.readStatusFilter && tmpFilter.readStatusFilter.operation && tmpFilter.readStatusFilter.operation.id.length > 0) ||
       (tmpFilter.typesFilter && tmpFilter.typesFilter.length > 0) ||
       (tmpFilter.vendorsFilter &&
@@ -796,6 +801,36 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
+  onEnableDC(selectedGuid: string) {
+    this.requestModel.filterModel = this.setFilter();
+    this.requestModel.searchModel = this.setSearch();
+
+    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
+    const params = this.dcOperationsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.enable, params, 1);
+  }
+
+  onDisableDC(selectedGuid: string) {
+    this.requestModel.filterModel = this.setFilter();
+    this.requestModel.searchModel = this.setSearch();
+
+    // const params = this.dcOperationsService.getOperationRequestParam(selectedGuid, this.requestModel, 1);
+    // const params = this.dcOperationsService.getOperationRequestParamOld(selectedGuid, this.requestModel);
+    const params = this.dcOperationsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.getSelectedCount(),
+      this.getAllDisplayedColumnsNames()
+    );
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.disable, params, 1);
+  }
+
   private noSearch() {
     if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
       return true;
@@ -806,9 +841,9 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   private noFilters() {
     return (
       this.requestModel.filterModel == null ||
-      ((this.requestModel.filterModel.statuses === undefined ||
-        this.requestModel.filterModel.statuses.length === 0 ||
-        this.requestModel.filterModel.statuses[0].id === 0) &&
+      ((this.requestModel.filterModel.states === undefined ||
+        this.requestModel.filterModel.states.length === 0 ||
+        this.requestModel.filterModel.states[0].id === 0) &&
         (this.requestModel.filterModel.readStatus === undefined || this.requestModel.filterModel.readStatus === null) &&
         (this.requestModel.filterModel.tags === undefined ||
           this.requestModel.filterModel.tags.length === 0 ||

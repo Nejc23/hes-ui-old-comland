@@ -31,20 +31,16 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
   public gridApi;
-  private gridColumnApi;
   public icons;
   public frameworkComponents;
   public sideBar;
-
   totalCount = 0;
   columnDefs = [];
   rowData$: Observable<RegistersSelectList[]>;
   rowData: RegistersSelectList[];
   allRowData: RegistersSelectList[];
   selectedAll = false;
-
   public pageSize = 10;
-
   requestModel: GridRequestParams = {
     requestId: null,
     startRow: 0,
@@ -57,7 +53,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     ],
     searchModel: [],
     filterModel: {
-      statuses: [{ id: 0, value: '' }],
+      states: [{ id: 0, value: '' }],
       readStatus: {
         operation: { id: '', value: '' },
         value1: 0,
@@ -68,6 +64,7 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
       showOptionFilter: null
     }
   };
+  private gridColumnApi;
 
   constructor(
     private repositoryService: DataConcentratorUnitsService,
@@ -81,6 +78,27 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     this.frameworkComponents = dataConcentratorUnitsSelectGridService.setFrameworkComponents();
     this.dataConcentratorUnitsSelectGridService.setSessionSettingsPageIndex(0);
     // this.dataConcentratorUnitsSelectGridService.setSessionSettingsSelectedRowsById([]);
+  }
+
+  get selectedAtLeastOneRowOnGrid() {
+    // if (this.gridApi) {
+    //   const selectedRows = this.gridApi.getSelectedRows();
+    //   if (selectedRows && selectedRows.length > 0) {
+    //     return true;
+    //   }
+    //   return false;
+    // }
+    // return false;
+    const selectedAll = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll();
+    if (selectedAll) {
+      return true;
+    }
+    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
+    return selectedRows.length > 0;
+  }
+
+  get searchProperty() {
+    return 'content';
   }
 
   createForm(): FormGroup {
@@ -210,6 +228,8 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     this.dataConcentratorUnitsSelectGridService.onColumnVisibility(params);
   }
 
+  // ----------------------- ag-grid set DATASOURCE end --------------------------
+
   // click on check-box in the grid
   selectionChanged() {
     if (this.gridApi) {
@@ -232,15 +252,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     this.onSelectionChanged.emit(this.getSelectedRowIds().length > 0 ? true : false);
   }
 
-  // ----------------------- ag-grid set DATASOURCE end --------------------------
-
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
-  }
-
   setSearch() {
     const search = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSearchedText();
 
@@ -249,8 +260,9 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     }
     return [];
   }
+
   setFilter() {
-    this.requestModel.filterModel.statuses = [];
+    this.requestModel.filterModel.states = [];
     this.requestModel.filterModel.readStatus = null;
     this.requestModel.filterModel.vendors = null;
     this.requestModel.filterModel.types = null;
@@ -277,23 +289,6 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     return this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows().length;
   }
 
-  get selectedAtLeastOneRowOnGrid() {
-    // if (this.gridApi) {
-    //   const selectedRows = this.gridApi.getSelectedRows();
-    //   if (selectedRows && selectedRows.length > 0) {
-    //     return true;
-    //   }
-    //   return false;
-    // }
-    // return false;
-    const selectedAll = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedAll();
-    if (selectedAll) {
-      return true;
-    }
-    const selectedRows = this.dataConcentratorUnitsSelectGridService.getSessionSettingsSelectedRows();
-    return selectedRows.length > 0;
-  }
-
   deselectAllRows() {
     this.gridApi.deselectAll();
     this.selectedAll = false;
@@ -316,7 +311,10 @@ export class DataConcentratorUnitsSelectComponent implements OnInit {
     }
   }
 
-  get searchProperty() {
-    return 'content';
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
   }
 }

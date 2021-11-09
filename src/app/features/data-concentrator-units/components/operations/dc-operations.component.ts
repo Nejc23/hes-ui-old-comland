@@ -134,4 +134,14 @@ export class DcOperationsComponent {
   checkIfAC750(types: string[]) {
     return types.find((type) => type === 'AC750');
   }
+
+  onEnableDC() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.enable, params, this.selectedItemsCount);
+  }
+
+  onDisableDC() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, this.requestModel, 1, this.allVisibleColumns);
+    this.dcOperationsService.bulkOperation(DcOperationTypeEnum.disable, params, this.selectedItemsCount);
+  }
 }

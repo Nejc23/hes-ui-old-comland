@@ -6,7 +6,7 @@ import { AllForJobGridCellIdNumberComponent } from '../components/grid-custom-co
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
 import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-settings-session-store.enum';
 import * as _ from 'lodash';
-import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridFilterParams, GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridPagination } from '../interfaces/grid-pagination.interface';
@@ -266,7 +266,7 @@ export class MeterUnitsForJobGridService {
 
   public checkIfFilterModelAndCookieAreSame(sessionFilter: MeterUnitsLayout, requestModel: GridFilterParams) {
     if (
-      JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.statesFilter) === JSON.stringify(requestModel.states) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
@@ -302,16 +302,6 @@ export class MeterUnitsForJobGridService {
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
-  };
-
-  private onSortChanged = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
-  };
-
   // page index
   public getSessionSettingsPageIndex() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -329,6 +319,14 @@ export class MeterUnitsForJobGridService {
     );
   }
 
+  public getCookieData() {
+    return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
+  }
+
+  public getCookieDataSortModel() {
+    return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
+  }
+
   // saveMyGridLinkRequestId(requestId: string) {
   //   this.gridSettingsSessionStoreService.saveMyGridLinkRequestId(this.gridName, requestId);
   // }
@@ -340,13 +338,6 @@ export class MeterUnitsForJobGridService {
   // getAllMyGridLinkRequestIds(): string[] {
   //   return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
   // }
-
-  public getCookieData() {
-    return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
-  }
-  public getCookieDataSortModel() {
-    return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
-  }
 
   // grid settings
   public setGridOptions() {
@@ -376,6 +367,16 @@ export class MeterUnitsForJobGridService {
   getAllMyGridLink_BreakerState_RequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridNameBreakerState);
   }
+
+  private onColumnMoved = (params) => {
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
+  };
+
+  private onSortChanged = (params) => {
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
 }
 
 // extra functions for grid

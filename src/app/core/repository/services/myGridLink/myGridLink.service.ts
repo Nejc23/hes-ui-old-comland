@@ -21,7 +21,8 @@ import {
   securityConcentratorRekey,
   triggerConcUpgrade,
   triggerDeviceUpgrade,
-  triggerSetTimeOfUse
+  triggerSetTimeOfUse,
+  updateMeterState
 } from '../../consts/my-grid-link.const';
 import {
   IActionRequestFwUpgradeData,
@@ -83,6 +84,7 @@ import {
   IActionResponseSecurityRekey,
   IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
+import { basePathConcentratorInventory } from '../../consts/data-concentrator-units.const';
 
 @Injectable({
   providedIn: 'root'
@@ -404,5 +406,13 @@ export class MyGridLinkService {
 
   postSecurityConcentratorRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
     return new HttpRequest('POST', `${securityConcentratorRekey}`, param);
+  }
+
+  postUpdateMeterState(params: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.postUpdateMeterStateRequest(params));
+  }
+
+  postUpdateMeterStateRequest(params: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${basePathConcentratorInventory}${updateMeterState}`, params);
   }
 }

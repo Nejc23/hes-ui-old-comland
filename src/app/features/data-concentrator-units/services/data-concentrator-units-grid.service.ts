@@ -80,13 +80,13 @@ export class DataConcentratorUnitsGridService {
         resizable: false
       },
       {
-        field: 'status',
-        headerName: this.translate.instant('GRID.STATUS'),
+        field: 'state',
+        headerName: this.translate.instant('GRID.STATE'),
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: this.translate.instant('GRID.STATUS'),
+        headerTooltip: this.translate.instant('GRID.STATE'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
@@ -314,7 +314,7 @@ export class DataConcentratorUnitsGridService {
 
   public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
     if (
-      JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.statesFilter) === JSON.stringify(requestModel.states) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&

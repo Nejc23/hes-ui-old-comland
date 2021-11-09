@@ -5,7 +5,7 @@ export interface MeterUnitsLayout {
   id: number;
   name: string;
   vendorsFilter: Codelist<number>[];
-  statusesFilter: Codelist<number>[];
+  statesFilter: Codelist<number>[];
   readStatusFilter: ReadStatus;
   tagsFilter: Codelist<number>[];
   firmwareFilter: Codelist<number>[];

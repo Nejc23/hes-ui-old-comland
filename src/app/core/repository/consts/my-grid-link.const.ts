@@ -47,3 +47,5 @@ export const jobsAssignExisting = `${enumMyGridLink.scheduler}/jobs-meters`;
 
 // synchronize time
 export const onDemandTimeSyc = '/on-demand/trigger-clock-sync';
+
+export const updateMeterState = '/update-meters-state';

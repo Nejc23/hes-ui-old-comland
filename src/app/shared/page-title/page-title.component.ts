@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { DeviceState } from '../../core/repository/interfaces/meter-units/meter-unit-details.interface';
 
 @Component({
   selector: 'app-page-title',
@@ -8,18 +9,20 @@ import { Component, Input } from '@angular/core';
 export class PageTitleComponent {
   @Input() title = '';
   @Input() subtitle = '';
-  @Input() status: 'INACTIVE' | 'UNKNOWN' | 'MOUNTED' | 'ACTIVE';
+  @Input() state: DeviceState;
 
   constructor() {}
 
-  addStatusClass() {
-    switch (this.status) {
-      case 'INACTIVE':
-        return 'inactive-status';
-      case 'ACTIVE':
-        return 'active-status';
+  addStateClass() {
+    switch (this.state.toLowerCase()) {
+      case DeviceState.DISABLED.toLowerCase(): // blue
+        return 'disabled-state';
+      case DeviceState.OPERATIONAL.toLowerCase(): // green
+        return 'operational-state';
+      case DeviceState.INSTALLING.toLowerCase(): // yellow
+        return 'installing-state';
       default:
-        return 'undefined-status';
+        return 'inactive-status'; // black for not defined status
     }
   }
 }

@@ -194,7 +194,9 @@
     "COMMUNICATION-MODULE": "Communication module",
     "AUTHENTICATION": "Authentication",
     "COMMUNICATION-DETAILS": "Communication module details",
-    "BASIC-DETAILS": "Details"
+    "BASIC-DETAILS": "Details",
+    "ENABLE-METER": "Enable meter",
+    "DISABLE-METER": "Disable meter"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -488,7 +490,8 @@
     "VALUE": "Value",
     "VENDOR": "Vendor",
     "REGISTER": "Register",
-    "HOSTNAME": "Hostname"
+    "HOSTNAME": "Hostname",
+    "STATE": "State"
   },
   "JOB": {
     "ACTIVE-JOB": {
@@ -621,7 +624,9 @@
     "SYNCHRONIZE-TIME": "Synchronize time",
     "SECURITY": "Security",
     "RE-KEY-HMAC": "Re-key HMAC",
-    "RE-KEY-CONCENTRATOR": "Re-key concentrator"
+    "RE-KEY-CONCENTRATOR": "Re-key concentrator",
+    "ENABLE-DC": "Enable concentrator",
+    "DISABLE-DC": "Disable concentrator"
   },
   "PLC-METER": {
     "ACTIVATE-IMAGE": "Activate image",

@@ -360,7 +360,7 @@ export class MeterUnitsPlcActionsService {
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
             } else {
-              this.eventService.devicesDeleted();
+              this.eventService.refreshData();
             }
           },
           (e) => {
@@ -377,7 +377,7 @@ export class MeterUnitsPlcActionsService {
     const object: GridBulkActionRequestParams = {
       id: [],
       filter: {
-        statuses: [],
+        states: [],
         types: [],
         vendor: { id: 0, value: '' },
         tags: []
@@ -531,6 +531,16 @@ export class MeterUnitsPlcActionsService {
         response = this.service.readMeterValues(params);
         operationName = $localize`Read meter`;
         break;
+      case MeterUnitsTypeEnum.enableMeter:
+        params.enabled = true;
+        response = this.service.postUpdateMeterState(params);
+        operationName = this.translate.instant('COMMON.ENABLE-METER');
+        break;
+      case MeterUnitsTypeEnum.disableMeter:
+        params.enabled = false;
+        response = this.service.postUpdateMeterState(params);
+        operationName = this.translate.instant('COMMON.DISABLE-METER');
+        break;
       case MeterUnitsTypeEnum.syncTime:
         response = this.service.synchronizeTime(params);
         operationName = this.translate.instant('COMMON.SYNCHRONIZE-TIME');
@@ -561,8 +571,13 @@ export class MeterUnitsPlcActionsService {
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
-            console.log(value.requestId);
-            this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            if (operation === MeterUnitsTypeEnum.disableMeter || MeterUnitsTypeEnum.enableMeter) {
+              // refresh data
+              this.eventService.refreshData();
+            }
+            if (value) {
+              this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
+            }
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
             } else if (operation === MeterUnitsTypeEnum.ciiState) {
@@ -571,10 +586,12 @@ export class MeterUnitsPlcActionsService {
             const options: NgbModalOptions = {
               size: 'md'
             };
-            const modalRef = this.modalService.open(StatusJobComponent, options);
-            modalRef.componentInstance.requestId = value.requestId;
-            modalRef.componentInstance.jobName = operationName;
-            modalRef.componentInstance.deviceCount = value.deviceIds.length;
+            if (value) {
+              const modalRef = this.modalService.open(StatusJobComponent, options);
+              modalRef.componentInstance.requestId = value.requestId;
+              modalRef.componentInstance.jobName = operationName;
+              modalRef.componentInstance.deviceCount = value.deviceIds.length;
+            }
           },
           (e) => {
             this.toast.errorToast(this.translate.instant('COMMON.SERVER-ERROR'));
@@ -714,10 +731,10 @@ export class MeterUnitsPlcActionsService {
         // create filter object
         if (requestModel.filterModel) {
           requestParam.filter = [];
-          if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
-            requestModel.filterModel.statuses.map((row) =>
+          if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
+            requestModel.filterModel.states.map((row) =>
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.status),
+                propName: capitalize(gridSysNameColumnsEnum.state),
                 propValue: row.id.toString(),
                 filterOperation: filterOperationEnum.equal
               })
