@@ -306,7 +306,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   get permissionSecurityRekey() {
-    return PermissionEnumerator.Rekey;
+    return PermissionEnumerator.Rekey_Meter;
   }
 
   get permissionSecurityChangePassword() {
