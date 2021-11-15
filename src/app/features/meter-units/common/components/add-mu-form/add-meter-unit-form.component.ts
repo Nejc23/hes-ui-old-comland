@@ -387,9 +387,6 @@ export class AddMeterUnitFormComponent implements OnInit {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = value ? +value?.value === 1 : false;
     this.isHdlcSelected = value ? +value?.value === 0 : false;
-    if (!this.isHdlcSelected) {
-      this.shortNameSelected = false;
-    }
     this.setFormControls();
 
     if (getDefaultValues) {

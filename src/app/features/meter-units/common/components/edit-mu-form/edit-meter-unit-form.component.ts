@@ -393,9 +393,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     this.communicationTypeSelected = value;
     this.isWrapperSelected = value ? +value?.value === 1 : false;
     this.isHdlcSelected = value ? +value?.value === 0 : false;
-    if (!this.isHdlcSelected) {
-      this.shortNameSelected = false;
-    }
     if (this.form) {
       this.setFormControls();
     }
