@@ -42,7 +42,7 @@ export class DcOperationsComponent {
   }
 
   get permissionDeviceDiscovery() {
-    return PermissionEnumerator.Manage_Concentrators;
+    return PermissionEnumerator.Meter_Discovery;
   }
 
   get permissionManageConcentrators() {
@@ -50,7 +50,7 @@ export class DcOperationsComponent {
   }
 
   get permissionReKey() {
-    return PermissionEnumerator.Rekey;
+    return PermissionEnumerator.Rekey_Concentrator;
   }
 
   onSynchronizeTime() {
