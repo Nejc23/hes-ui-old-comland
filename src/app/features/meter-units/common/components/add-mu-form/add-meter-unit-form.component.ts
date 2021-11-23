@@ -646,6 +646,7 @@ export class AddMeterUnitFormComponent implements OnInit {
     return {
       deviceId: this.editMu.deviceId,
       name: this.form.get(this.nameProperty).value,
+      serialNumber: this.editMu.serialNumber,
       externalId: this.form.get(this.externalIdProperty).value
     };
   }

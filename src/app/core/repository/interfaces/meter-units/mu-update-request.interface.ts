@@ -23,6 +23,7 @@ export interface MuUpdateRequest {
 export interface MuUpdatePlcRequest {
   deviceId?: string;
   name: string;
+  serialNumber: string;
   externalId?: string;
   templateId?: number;
 }
