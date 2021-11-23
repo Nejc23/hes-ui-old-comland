@@ -16,7 +16,6 @@ export interface MuUpdateForm extends MuUpdatePlcForm {
 
   template: Codelist<number>;
   connectionType: Codelist<number>;
-  serialNumber: string;
 
   authenticationType: AuthenticationTypeEnum;
   advancedInformation: MuAdvancedInformation;
@@ -29,6 +28,7 @@ export interface MuUpdateForm extends MuUpdatePlcForm {
 export interface MuUpdatePlcForm {
   deviceId: string;
   name: string;
+  serialNumber: string;
   externalId?: string;
   templateId?: string;
 }

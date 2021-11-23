@@ -457,7 +457,6 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   update() {
     this.saveData = false;
     this.setFormControls();
-
     if (!this.isDlms) {
       this.disableAdvancedControls();
       this.form.get(this.communicationTypeProperty).disable();
@@ -635,6 +634,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       deviceId: this.data.deviceId,
       name: this.form.get(this.nameProperty).value,
       externalId: this.form.get(this.externalIdProperty).value,
+      serialNumber: this.data.serialNumber,
       templateId: this.form.get(this.templateProperty).value?.id ? this.form.get(this.templateProperty).value.id : ''
     };
   }

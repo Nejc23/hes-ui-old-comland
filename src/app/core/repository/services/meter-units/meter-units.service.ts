@@ -243,6 +243,7 @@ export class MeterUnitsService {
   updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
     const muRequest: MuUpdatePlcRequest = {
       name: payload.name,
+      serialNumber: payload.serialNumber,
       externalId: payload.externalId,
       templateId: payload.templateId
     };
