@@ -169,23 +169,44 @@ TEST04 - myGrid:
 QA - Amera:
   <<: *deploy_amera
   environment:
-    name: qa
+    name: qa/SISRVDEVLOP04
   tags:
     - QAServer
 
 QA - HES:
   <<: *deploy_ePointHES
   environment:
-    name: qa
+    name: qa/SISRVDEVLOP04
   tags:
     - QAServer
 
 QA - myGrid:
   <<: *deploy_myGrid
   environment:
-    name: qa
+    name: qa/SISRVDEVLOP04
   tags:
     - QAServer
+
+DEVELOP03 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: qa/SISRVDEVELOP03
+  tags:
+    - SISRVDEVELOP03
+
+DEVELOP03 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: qa/SISRVDEVELOP03
+  tags:
+    - SISRVDEVELOP03
+
+DEVELOP03 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: qa/SISRVDEVELOP03
+  tags:
+    - SISRVDEVELOP03
 
 INNOGY01 - Amera:
   <<: *deploy_amera
