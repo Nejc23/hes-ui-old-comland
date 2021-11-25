@@ -166,6 +166,27 @@ TEST04 - myGrid:
   tags:
     - Sisrvtest04Deploy
 
+TEST05 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: test05
+  tags:
+    - sisrvtest05
+
+TEST05 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: test05
+  tags:
+    - sisrvtest05
+
+TEST05 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: test05
+  tags:
+    - sisrvtest05
+
 QA - Amera:
   <<: *deploy_amera
   environment:
