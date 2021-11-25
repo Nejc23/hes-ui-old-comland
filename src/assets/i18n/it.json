@@ -189,7 +189,12 @@
         "COMMUNICATION-MODULE": "",
         "AUTHENTICATION": "",
         "COMMUNICATION-DETAILS": "",
-        "BASIC-DETAILS": ""
+        "BASIC-DETAILS": "",
+        "IN-PROGRESS": "",
+        "ACTIVE-IMPORTS": "",
+        "NUMBER-OF-DEVICES": "",
+        "ENABLE-METER": "",
+        "DISABLE-METER": ""
     },
     "DAY": {
         "CURRENT-MONTH": "Corrente mese",
@@ -483,7 +488,8 @@
         "VALUE": "Valore",
         "VENDOR": "Fabbricante",
         "REGISTER": "Registro",
-        "HOSTNAME": ""
+        "HOSTNAME": "",
+        "STATE": ""
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -596,7 +602,8 @@
         "PIN-COLLAPSE-MENU": "Menu Pin/Collapse",
         "POWERED-BY": "alimentato da Metricsx",
         "TOOLS": "tools",
-        "USERS": "Utenti"
+        "USERS": "Utenti",
+        "IMPORT-DEVICES": ""
     },
     "MODAL": {
         "ARE-YOU-SURE-TEXT": "Siete sicuri di voler attivare",
@@ -606,7 +613,8 @@
         "SELECT-DATE-AND-REGISTERS": "La data e almeno un registro devono essere selezionati.",
         "SELECTED": "selezionato",
         "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Sincronizzazione incondizionata del tempo ",
-        "ARE-YOU-SURE-TEXT-FOR-DEVICES": ""
+        "ARE-YOU-SURE-TEXT-FOR-DEVICES": "",
+        "IMPORT-FAILED": ""
     },
     "OPERATION": {
         "DEVICE-DISCOVERY": "Scoperta del dispositivo",
@@ -616,7 +624,9 @@
         "SYNCHRONIZE-TIME": "sincronizzare data e ora",
         "SECURITY": "",
         "RE-KEY-HMAC": "",
-        "RE-KEY-CONCENTRATOR": ""
+        "RE-KEY-CONCENTRATOR": "",
+        "ENABLE-DC": "",
+        "DISABLE-DC": ""
     },
     "PLC-METER": {
         "ACTIVATE-IMAGE": "Attivare l'immagine",
@@ -982,6 +992,7 @@
     "PROTOCOL": {
         "g3PLC": "",
         "dlms": "",
-        "unknown": ""
+        "unknown": "",
+        "mM_BUS": ""
     }
 }
