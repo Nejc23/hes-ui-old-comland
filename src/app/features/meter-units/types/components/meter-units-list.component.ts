@@ -196,8 +196,11 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     });
 
     this.eventService.eventEmitterRefreshDevices.subscribe({
-      next: () => {
-        this.deselectAll();
+      next: (deselectDevices) => {
+        if (deselectDevices) {
+          this.deselectAll();
+        }
+
         if (this.gridApi) {
           this.gridApi.purgeServerSideCache([]);
         }

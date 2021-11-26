@@ -573,7 +573,7 @@ export class MeterUnitsPlcActionsService {
           (value) => {
             if (operation === MeterUnitsTypeEnum.disableMeter || MeterUnitsTypeEnum.enableMeter) {
               // refresh data
-              this.eventService.refreshData();
+              this.eventService.refreshData(false);
             }
             if (value) {
               this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
