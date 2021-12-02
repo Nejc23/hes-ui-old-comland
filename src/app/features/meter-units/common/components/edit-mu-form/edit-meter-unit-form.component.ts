@@ -1,31 +1,30 @@
-import { MuUpdateForm, MuUpdatePlcForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
+import { TabStripComponent } from '@progress/kendo-angular-layout';
+import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
-import { MuHdlcInformation } from '../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
-import { MeterUnitsService } from '../../../../../core/repository/services/meter-units/meter-units.service';
-import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
+import { ValidateIpAddressStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
+import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { MuUpdateForm, MuUpdatePlcForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { InputTextComponent } from 'src/app/shared/forms/components/input-text/input-text.component';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import {
   AuthenticationTypeEnum,
   MuAdvancedInformation
 } from '../../../../../core/repository/interfaces/meter-units/mu-advanced-information.interface';
+import { MuHdlcInformation } from '../../../../../core/repository/interfaces/meter-units/mu-hdlc-information.interface';
 import { MuWrapperInformation } from '../../../../../core/repository/interfaces/meter-units/mu-wrapper-information.interface';
-import { AutoTemplatesService } from '../../../../../core/repository/services/auto-templates/auto-templates.service';
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { TabStripComponent } from '@progress/kendo-angular-layout';
-import { MuForm } from '../../../types/interfaces/mu-form.interface';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
-import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
-import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { map } from 'rxjs/operators';
 import { ReferenceType } from '../../../../../core/repository/interfaces/meter-units/reference-type.enum';
-import { TranslateService } from '@ngx-translate/core';
-import { ValidateIpAddressStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
-import { InputTextComponent } from 'src/app/shared/forms/components/input-text/input-text.component';
+import { AutoTemplatesService } from '../../../../../core/repository/services/auto-templates/auto-templates.service';
+import { MeterUnitsService } from '../../../../../core/repository/services/meter-units/meter-units.service';
+import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
+import { RadioOption } from '../../../../../shared/forms/interfaces/radio-option.interface';
+import { MuForm } from '../../../types/interfaces/mu-form.interface';
 
 @Component({
   selector: 'app-edit-meter-unit-form',
@@ -207,15 +206,11 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.form = this.setFormEdit();
-    //  this.communicationTypeChanged(this.defaultCommunicationType);
-    this.codelistServiceMu
-      .meterUnitVendorCodelist(null)
-      .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
-      .subscribe((manufacturers) => {
-        this.manufacturers = manufacturers;
-        const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
-        this.form.get(this.manufacturerProperty).setValue(manufacturer);
-      });
+    this.codelistServiceMu.meterUnitVendorCodelist(null).subscribe((manufacturers) => {
+      this.manufacturers = this.isDlms ? manufacturers.filter((item) => item.value.toLowerCase() !== 'unknown') : manufacturers;
+      const manufacturer = this.manufacturers.find((t) => this.data.manufacturer.toLowerCase() === t.value.toLowerCase());
+      this.form.get(this.manufacturerProperty).setValue(manufacturer);
+    });
 
     this.checkTemplate();
   }

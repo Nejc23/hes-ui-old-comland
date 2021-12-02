@@ -8,6 +8,7 @@ export interface MeterUnitsList {
   readStatusColor: string;
   vendor: string;
   parent: string;
+  parentId: string;
   moduleId: string;
   meterId: string;
   firmware: string;
