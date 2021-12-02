@@ -28,7 +28,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   public detailsForm: FormGroup;
   communicationForm: FormGroup;
 
-  plcProtocols = ['DC450G3', 'AC750', 'AmeraDC'];
+  plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent'];
   isPlcDevice = false;
   openEdit = false;
   saveData = false;
@@ -220,7 +220,7 @@ export class MeterUnitDetailsComponent implements OnInit {
       this.saveData = false;
       this.data = response;
       this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
-      if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
+      if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
         this.isPlcDevice = true;
       }
       this.createForm();
