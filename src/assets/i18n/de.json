@@ -25,7 +25,7 @@
         "SAVE-AND-ADD-ANOTHER": "Speichern und ein Neues hinzufügen",
         "SAVE-AS-NEW": "Als neu speichern",
         "UPDATE": "Aktualisieren",
-        "GO-TO-JOBS": ""
+        "GO-TO-JOBS": "Go to jobs"
     },
     "COMMON": {
         "0-100-RANGE": "Der Wert muss im Bereich von 0-100 liegen",
@@ -168,33 +168,33 @@
         "WILDCARDS-SEARCH-ENABLED": "Wildcards-Suche ist aktiviert",
         "WITH-TEMPLATE": "Mit Vorlage",
         "WITHOUT-TEMPLATE": "Ohne Vorlage",
-        "LOADING-DATA-PLEASE-WAIT": "",
-        "MAY-TAKE-A-MOMENT": "",
-        "SEE-ALL": "",
-        "OVERVIEW": "",
-        "SHOW-MORE": "",
-        "SHOW-LESS": "",
-        "METER-STATUS": "",
-        "APPLIED-TAGS": "",
-        "ALL-METERS": "",
-        "NOT-DEFINED": "",
-        "DETAILS": "",
-        "EDIT-DETAILS": "",
-        "EVENTS": "",
-        "SHOW-DETAILS": "",
-        "HIDE-DETAILS": "",
-        "SHOW-CHART": "",
-        "HIDE-CHART": "",
-        "NUMBER-OF-EVENTS-FOR-RANGE": "",
-        "COMMUNICATION-MODULE": "",
-        "AUTHENTICATION": "",
-        "COMMUNICATION-DETAILS": "",
-        "BASIC-DETAILS": "",
-        "IN-PROGRESS": "",
-        "ACTIVE-IMPORTS": "",
-        "NUMBER-OF-DEVICES": "",
-        "ENABLE-METER": "",
-        "DISABLE-METER": ""
+        "LOADING-DATA-PLEASE-WAIT": "Loading data, please wait...",
+        "MAY-TAKE-A-MOMENT": "This may take a moment",
+        "SEE-ALL": "See all",
+        "OVERVIEW": "Overview",
+        "SHOW-MORE": "Show more",
+        "SHOW-LESS": "Show less",
+        "METER-STATUS": "Meter status",
+        "APPLIED-TAGS": "Applied tags",
+        "ALL-METERS": "all meters",
+        "NOT-DEFINED": "N/A",
+        "DETAILS": "Details",
+        "EDIT-DETAILS": "Edit details",
+        "EVENTS": "Events",
+        "SHOW-DETAILS": "Show details",
+        "HIDE-DETAILS": "Hide details",
+        "SHOW-CHART": "Show chart",
+        "HIDE-CHART": "Hide chart",
+        "NUMBER-OF-EVENTS-FOR-RANGE": "No. of events for selected range",
+        "COMMUNICATION-MODULE": "Communication module",
+        "AUTHENTICATION": "Authentication",
+        "COMMUNICATION-DETAILS": "Communication module details",
+        "BASIC-DETAILS": "Details",
+        "IN-PROGRESS": "In progress",
+        "ACTIVE-IMPORTS": "Currently active imports",
+        "NUMBER-OF-DEVICES": "{{noOfDevices}} meters will be imported or updated",
+        "ENABLE-METER": "Enable meter",
+        "DISABLE-METER": "Disable meter"
     },
     "DAY": {
         "CURRENT-MONTH": "Aktueller Monat",
@@ -241,14 +241,14 @@
         "STATUS": "Status",
         "TYPE": "Typ",
         "VENDOR": "Verkäufer",
-        "LAST-NOTIFICATIONS": "",
-        "MULTIPLE-TYPES": "",
-        "RE-KEY-NOT-SUPPORTED": "",
-        "RE-KEY-CONCENTRATOR": "",
-        "CONCENTRATOR-INOPERABLE-WARNING": "",
-        "RE-KEY-CONFIRM": "",
-        "SECURITY-GAK": "",
-        "SECURITY-GBEK": ""
+        "LAST-NOTIFICATIONS": "Last notifications",
+        "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again.",
+        "RE-KEY-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!",
+        "RE-KEY-CONCENTRATOR": "Re-key concentrator",
+        "CONCENTRATOR-INOPERABLE-WARNING": "This action may result in damages, rendering concentrator inoperable!",
+        "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of concentrator?",
+        "SECURITY-GAK": "Global Authentication Key (applies to meters installed on selected DC’s only)",
+        "SECURITY-GBEK": "Global Broadcast Encryption Key (applies to meters installed on selected DC’s only)"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - Seite existiert nicht"
@@ -304,9 +304,9 @@
             "RANGE-VALUE": "Der Wert muss im Bereich von 0-100 sein",
             "REQUIRED": "erforderliches Feld",
             "UNKNOWN-ERROR": "Unbekannter Fehler",
-            "INVALID-HOSTNAME": "",
-            "INVALID-IPADDRESS": "",
-            "DUPLICATED-IPADDRESS": ""
+            "INVALID-HOSTNAME": "Hostname is invalid",
+            "INVALID-IPADDRESS": "IP is invalid",
+            "DUPLICATED-IPADDRESS": "IP is duplicated"
         },
         "EXPRESSION": "Ausdruck",
         "EXTERNAL-ID": "Externe Id",
@@ -383,26 +383,26 @@
         "VENDOR": "Hersteller ",
         "WEEK-DAYS": "Wochentage",
         "WRAPPER": "Wrapper",
-        "TIME": "",
-        "SERIALNUMBER": "",
-        "ADDRESS": "",
-        "TAGS": "",
-        "EXTERNALID": "",
-        "COORDINATES": "",
-        "NEXT-START": "",
-        "PLCSTATUS": "",
-        "HOSTNAME": "",
-        "TIMEZONENAME": "",
-        "FIRSTINSTALLDATE": "",
+        "TIME": "Time",
+        "SERIALNUMBER": "Serial number",
+        "ADDRESS": "Address",
+        "TAGS": "Tags",
+        "EXTERNALID": "External Id",
+        "COORDINATES": "Coordinates",
+        "NEXT-START": "Next start",
+        "PLCSTATUS": "PLC status",
+        "HOSTNAME": "Hostname",
+        "TIMEZONENAME": "Timezone",
+        "FIRSTINSTALLDATE": "Installed",
         "WARNING": {
-            "DUPLICATED": ""
+            "DUPLICATED": "The IP address you have entered is already in use by another meter!"
         },
-        "RELEASE-REQUEST": "",
-        "USE-LDN": "",
-        "TEMPLATENAME": "",
-        "PROTOCOLTYPE": "",
-        "REFERENCINGTYPE": "",
-        "COMMUNICATIONTYPE": ""
+        "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
+        "USE-LDN": "Use Logical Device Name",
+        "TEMPLATENAME": "Template name",
+        "PROTOCOLTYPE": "Protocol",
+        "REFERENCINGTYPE": "Short names referencing",
+        "COMMUNICATIONTYPE": "Communication type"
     },
     "GRID": {
         "ACTIVE": "Aktiv",
@@ -488,8 +488,8 @@
         "VALUE": "Wert",
         "VENDOR": "Hersteller",
         "REGISTER": "Register",
-        "HOSTNAME": "",
-        "STATE": ""
+        "HOSTNAME": "Hostname",
+        "STATE": "State"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -561,7 +561,7 @@
         "TIME-SYNCHRONIZATION": "Zeit-Synchronisation",
         "TOPOLOGY": "Topologie",
         "TOPOLOGY-JOB": "Topologie Job",
-        "ACTIVE-JOBS": ""
+        "ACTIVE-JOBS": "Active jobs"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -603,7 +603,7 @@
         "POWERED-BY": "betrieben von Metricsx",
         "TOOLS": "Werkzeuge",
         "USERS": "Benutzer",
-        "IMPORT-DEVICES": ""
+        "IMPORT-DEVICES": "Import devices"
     },
     "MODAL": {
         "ARE-YOU-SURE-TEXT": "Sind Sie sicher, dass Sie den Vorgang auslösen möchten?",
@@ -613,8 +613,8 @@
         "SELECT-DATE-AND-REGISTERS": "Das Datum und mindestens ein Register müssen selektiert werden.",
         "SELECTED": "selektiert",
         "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Nicht bedingte Zeit-Synchronisation",
-        "ARE-YOU-SURE-TEXT-FOR-DEVICES": "",
-        "IMPORT-FAILED": ""
+        "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
+        "IMPORT-FAILED": "Import failed"
     },
     "OPERATION": {
         "DEVICE-DISCOVERY": "Entdeckungs-Gerät",
@@ -622,11 +622,11 @@
         "OPERATIONS": "Vorgänge",
         "SYNC-TIME": "Zeit-Sync",
         "SYNCHRONIZE-TIME": "Synchronisierte Zeit",
-        "SECURITY": "",
-        "RE-KEY-HMAC": "",
-        "RE-KEY-CONCENTRATOR": "",
-        "ENABLE-DC": "",
-        "DISABLE-DC": ""
+        "SECURITY": "Security",
+        "RE-KEY-HMAC": "Re-key HMAC",
+        "RE-KEY-CONCENTRATOR": "Re-key concentrator",
+        "ENABLE-DC": "Enable concentrator",
+        "DISABLE-DC": "Disable concentrator"
     },
     "PLC-METER": {
         "ACTIVATE-IMAGE": "Bild aktivieren",
@@ -990,9 +990,9 @@
     "ngb.timepicker.seconds": "Sekunden",
     "ngb.toast.close-aria": "Schliessen",
     "PROTOCOL": {
-        "g3PLC": "",
-        "dlms": "",
-        "unknown": "",
-        "mM_BUS": ""
+        "g3PLC": "G3-PLC",
+        "dlms": "DLMS",
+        "unknown": "Unknown",
+        "mM_BUS": "MM-BUS"
     }
 }
