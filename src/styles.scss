@@ -293,6 +293,9 @@ body {
   top: 18px;
 }
 
+.k-state-selected {
+  background-color: rgb($primary, 0.65) !important;
+}
 
 .mini-button {
   padding: 2px 10px;
@@ -410,4 +413,10 @@ body {
 .k-button {
   @apply tw-border-mediumGray;
   @apply tw-text-darkGray;
+}
+
+.full-dropdown {
+  .k-dropdown, .k-dropdowntree {
+    width: 100%;
+  }
 }

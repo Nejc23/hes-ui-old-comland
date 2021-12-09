@@ -18,6 +18,7 @@ export class SelectDropdownComponent implements OnInit, OnDestroy {
   @Input() selectOptions: Codelist<number | string>[] = [];
   @Input() disabled = false;
   @Input() clearButton = true;
+  @Input() withDescription = false;
 
   @Output() selectedValueChanged: EventEmitter<any> = new EventEmitter<any>();
 

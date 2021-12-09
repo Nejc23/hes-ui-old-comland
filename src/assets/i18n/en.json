@@ -250,11 +250,15 @@
     "LAST-NOTIFICATIONS": "Last notifications",
     "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again.",
     "RE-KEY-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!",
+    "RE-KEY-INSTALLING-STATE-NOT-SUPPORTED": "Only HMAC key is allowed for concentrators in Installing state!",
+    "INSTALLING-STATE-NOT-SUPPORTED": "This action is not allowed for concentrators in Installing state!",
     "RE-KEY-CONCENTRATOR": "Re-key concentrator",
     "CONCENTRATOR-INOPERABLE-WARNING": "This action may result in damages, rendering concentrator inoperable!",
     "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of concentrator?",
-    "SECURITY-GAK": "Global Authentication Key (applies to meters installed on selected DC’s only)",
-    "SECURITY-GBEK": "Global Broadcast Encryption Key (applies to meters installed on selected DC’s only)"
+    "SECURITY-GAK": "Global authentication key (applies to all meters installed on the selected DCs)",
+    "SECURITY-GBEK": "Global broadcast encryption key (applies to all meters installed on the selected DCs)",
+    "SECURITY-GAK-GBEK": "Global authentication and broadcast keys (applies to all meters installed on the selected DCs)",
+    "SECURITY-HMAC": "API key used to authenticated DC and the HES"
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
@@ -651,7 +655,6 @@
     "SYNC-TIME": "Sync time",
     "SYNCHRONIZE-TIME": "Synchronize time",
     "SECURITY": "Security",
-    "RE-KEY-HMAC": "Re-key HMAC",
     "RE-KEY-CONCENTRATOR": "Re-key concentrator",
     "ENABLE-DC": "Enable concentrator",
     "DISABLE-DC": "Disable concentrator"

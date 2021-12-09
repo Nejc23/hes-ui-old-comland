@@ -11,26 +11,18 @@
         </div>
         <div class="col-12 pt-2">
           <label class="tw-text-darkGray tw-text-xs tw-pb-1">{{'FORM.KEY-TYPE' | translate}}:*</label>
-          <kendo-multiselect
-            [(ngModel)]="selectedValues"
-            [data]="keyTypesArray"
-            class="form-control p-0"
-            textField="id"
-            valueField="value"
-          >
-            <ng-template kendoMultiSelectItemTemplate let-dataItem>
-              <div class="tw-p-0">
-                <div class="tw-text-black">{{ dataItem.id }}</div>
-                <div class="tw-text-darkGray tw-text-xs">{{ dataItem.value }}</div>
-              </div>
-            </ng-template>
-          </kendo-multiselect>
+          <div>
+            <app-select-input [disabled]="false" [form]="form" [withDescription]="true" [clearButton]= "false"
+                                 [property]="'keyType'" [selectOptions]="keyTypesArray" class="full-dropdown">
+            </app-select-input>
+          </div>
         </div>
         <div class="col-12 pt-2">
           <div class="alert alert-danger" role="alert">
             <i class="fas fa-exclamation-triangle"></i>
             <span>{{ 'DCU.CONCENTRATOR-INOPERABLE-WARNING' | translate }}</span>
             <div *ngIf="alertText" class="text-danger tw-pt-3">{{ alertText | translate }}</div>
+            <div *ngIf="alertHmacText" class="text-danger tw-pt-3">{{ alertHmacText | translate }}</div>
           </div>
         </div>
       </div>
@@ -51,7 +43,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button (click)="onConfirm()" [disabled]="selectedValues?.length < 1" class="btn btn-primary" type="submit">
+        <button (click)="onConfirm()" class="btn btn-primary" type="submit"  [disabled]=!this.form.valid>
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

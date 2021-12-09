@@ -35,6 +35,7 @@ export class DcuFwUpgradeComponent implements OnInit {
   differentTypes = false;
 
   public selectedRowsCount: number;
+  public alertText: string;
   uploadDropSubtitle = '';
 
   apiUrl = environment.apiUrl;
@@ -80,6 +81,8 @@ export class DcuFwUpgradeComponent implements OnInit {
     if (this.actionRequest.types.length > 1) {
       // Disable upload if multiple types
       this.differentTypes = true;
+      // Clear alertText in case of multiple types
+      this.alertText = '';
     } else {
       if (this.ac750) {
         this.allowedExt = ['bin'];
