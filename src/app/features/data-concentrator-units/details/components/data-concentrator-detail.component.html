@@ -14,20 +14,28 @@
 
     <div class="tw-mt-10 tw-pr-5">
       <app-dc-operations
-        *ngIf="data && data.stateValue?.toLowerCase() !== DeviceStateEnum.INSTALLING.toString().toLowerCase()"
+        *ngIf="data"
         [guid]="concentratorId"
         [operationType]="componentType.OPERATION"
         [requestModel]="null"
         [selectedItemsCount]="1"
         [showOperations]="true"
-        [type]="data.typeValue" class="tw-mr-2"></app-dc-operations>
+        [type]="data.typeValue"
+        [state]="data.stateValue"
+        class="tw-mr-2">
+      </app-dc-operations>
 
-      <app-dc-operations *ngIf="data" [guid]="concentratorId"
-                         [operationType]="componentType.SECURITY"
-                         [requestModel]="null"
-                         [selectedItemsCount]="1"
-                         [showSecurities]="data.typeValue !== 'AC750'"
-                         [type]="data.typeValue"></app-dc-operations>
+
+      <app-dc-operations
+      	*ngIf="data" [guid]="concentratorId"
+        [operationType]="componentType.SECURITY"
+        [requestModel]="null"
+        [selectedItemsCount]="1"
+        [showSecurities]="data.typeValue !== 'AC750'"
+        [type]="data.typeValue"
+        [state]="data.stateValue">
+
+      </app-dc-operations>
     </div>
 
   </div>

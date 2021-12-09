@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
@@ -17,21 +17,24 @@ import { StatusJobComponent } from '../../../jobs/components/status-job/status-j
 @Component({
   templateUrl: './security-rekey-concentrator.component.html'
 })
-export class SecurityRekeyConcentratorComponent {
+export class SecurityRekeyConcentratorComponent implements OnInit {
   public selectedRowsCount: number;
   public alertText: string;
+  public alertHmacText: string;
+  public isHmacOnly = false;
   actionRequest: IActionRequestParams;
 
   form: FormGroup;
   keyTypes: Codelist<string>[];
-  selectedValues: Array<any>;
 
   showSecondConfirm = false;
   public value: any = [];
 
   keyTypesArray: Array<any> = [
-    { id: 'GAK', value: this.translate.instant('DCU.SECURITY-GAK') },
-    { id: 'GBEK', value: this.translate.instant('DCU.SECURITY-GBEK') }
+    { id: 'Authentication', value: this.translate.instant('DCU.SECURITY-GAK'), apiId: 'GAK' },
+    { id: 'Broadcast', value: this.translate.instant('DCU.SECURITY-GBEK'), apiId: 'GBEK' },
+    { id: 'Authentication and Broadcast', value: this.translate.instant('DCU.SECURITY-GAK-GBEK'), apiId: 'GAK_GBEK' },
+    { id: 'HMAC', value: this.translate.instant('DCU.SECURITY-HMAC'), apiId: 'HMAC' }
   ];
 
   constructor(
@@ -43,10 +46,16 @@ export class SecurityRekeyConcentratorComponent {
     private formUtils: FormsUtilsService,
     private translate: TranslateService,
     private modalService: ModalService
-  ) {
-    this.form = this.formBuilder.group({});
-  }
+  ) {}
+  ngOnInit() {
+    if (this.isHmacOnly) {
+      this.keyTypesArray = [{ id: 'HMAC', value: this.translate.instant('DCU.SECURITY-HMAC'), apiId: 'HMAC' }];
+    }
 
+    this.form = this.formBuilder.group({
+      keyType: [this.keyTypesArray[0], Validators.required]
+    });
+  }
   onDismiss() {
     this.modal.dismiss();
     console.log(this.actionRequest);
@@ -60,7 +69,7 @@ export class SecurityRekeyConcentratorComponent {
       textSearch: this.actionRequest.textSearch,
       filter: this.actionRequest.filter,
       concentratorIds: this.actionRequest.concentratorIds,
-      keyTypes: [...this.selectedValues.map((value) => value.id)]
+      keyType: this.form.get('keyType').value.apiId
     };
 
     return formData;
@@ -68,9 +77,7 @@ export class SecurityRekeyConcentratorComponent {
 
   onConfirm() {
     if (!this.showSecondConfirm) {
-      if (this.selectedValues) {
-        this.showSecondConfirm = true;
-      }
+      this.showSecondConfirm = true;
     } else {
       const values = this.fillData();
       const request = this.gridLinkService.postSecurityConcentratorRekey(values);

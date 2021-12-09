@@ -48,163 +48,6 @@ export class DcOperationsService {
     modalRef.result.then().catch(() => {});
   }
 
-  /*
-  onTou(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onUpgrade(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onSetMonitor(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterMonitorComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onSetLimiter(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onBreakerMode(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterBreakerModeComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-*/
-
-  // delete button click ali se rabi ?????????
-  onDelete() {
-    /*  let selectedText = 'all';
-    const object: GridBulkActionRequestParams = {
-      id: [],
-      filter: {
-        states: [],
-        types: [],
-        vendor: { id: 0, value: '' },
-        tags: []
-      }
-    };
-    if (!this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      selectedRows.forEach(element => {
-        object.id.push(element.id);
-      });
-      object.filter = null;
-      selectedText = selectedRows ? selectedRows.length : 0;
-    } else {
-      object.filter = this.requestModel.filterModel;
-      object.id = null;
-    }
-
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.confirmDelete = true;
-    component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        const request = this.meterUnitsTypeService.deleteDcu(object);
-        this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
-          (response: any) => {
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-            this.eventService.selectDeselectAll(-1);
-            this.gridApi.forEachNode(node => {
-              node.setSelected(false);
-            });
-
-            this.gridApi.onFilterChanged();
-          },
-          () => {}
-        );
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );*/
-  }
-
   // actions without popup
   bulkOperation(
     operation: DcOperationTypeEnum,
@@ -285,10 +128,11 @@ export class DcOperationsService {
     );
   }
 
-  fwUpgrade(params: any, selectedRowsCount: number) {
+  fwUpgrade(params: any, selectedRowsCount: number, alertText?: string) {
     const modalRef = this.modalService.open(DcuFwUpgradeComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.alertText = alertText;
 
     modalRef.result.then(
       (data) => {
@@ -394,6 +238,7 @@ export class DcOperationsService {
         if (selectedRows && selectedRows.length > 0) {
           requestParam.concentratorIds = [];
           requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
+          requestParam.states = [...new Set(selectedRows.map((row) => row.state))];
           selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
         }
       }
