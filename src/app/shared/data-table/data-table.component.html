@@ -1,70 +1,116 @@
 <!-- reference GRID component -->
 <kendo-grid
-  (cellClick)="selectedCell($event)"
+  (cellClick)="cellClick($event)"
   (pageChange)="pageChange($event)"
+  (selectedKeysChange)="selectedCellChange($event)"
+  (sortChange)="sortChange($event)"
   [data]="gridView"
   [height]="tableHeight"
+  [kendoGridSelectBy]="kendoGridSelectBy"
   [loading]="loading"
   [ngClass]="tableClass ? tableClass : ''"
   [pageSize]="pageSize"
   [pageable]="pageable"
   [reorderable]="false"
+  [resizable]="true"
   [rowClass]="rowClass"
   [rowHeight]="rowHeight"
   [scrollable]="scrollable"
+  [selectedKeys]="selectedKeys"
+  [sort]="sort"
+  [sortable]="sortable ? {
+    allowUnsort: true,
+    mode:'single'
+  } : null"
   class="kendo-grid">
 
   <ng-template *ngIf="withSearch || excelExport"
                class="kendo-toolbar"
                kendoGridToolbarTemplate>
 
-    <div class="tw-inline-flex tw-w-full ">
+    <div class="tw-inline-flex tw-w-full">
 
-      <input (input)="onFilter($event.target.value)"
-             *ngIf="withSearch"
-             class="gray-border"
-             kendoTextBox
-             placeholder="Search in all columns..."
-      /> <!-- Search all only works on strings -->
+      <div *ngIf="withSearch">
+        <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{'COMMON.SEARCH' | translate }}:</div>
 
-      <div *ngIf="filters && filters.length > 0"
-           class="tw-ml-4 gray-border ">
-        <ng-container *ngFor="let filter of filters">
-          <div> {{ filter.label | translate }}</div>
-          <kendo-dropdownlist (selectionChange)="dropdownValueChanged($event, filter.field)"
-                              [data]="filter.values"
-                              [defaultItem]="'COMMON.ALL' | translate"
-          >
-          </kendo-dropdownlist>
-        </ng-container>
+        <div class="tw-inline-flex gray-border tw-w-56 search-input">
+          <img [src]="'assets/images/icons/grain-icon.svg'" class="tw-mx-4" />
+          <input (input)="onFilter($event.target.value)"
+                 kendoTextBox
+                 placeholder="{{'COMMON.SEARCH-TERM' | translate }}"
+          /> <!-- Search all only works on strings -->
+        </div>
       </div>
 
-      <div *ngIf="excelExport" class="tw-flex tw-justify-end tw-w-full">
-        <button icon="fa fa-file-export tw-bg-white tw-text-darkGray" kendoGridExcelCommand type="button">
-          {{ 'GRID.EXCEL-EXPORT' | translate }}
-        </button>
+      <div *ngIf="filters && filters.length > 0" class=" tw-place-self-end tw-flex margin-bottom-5">
+
+        <div *ngFor="let filter of filters" class="tw-ml-4">
+
+          <div *ngIf="filter.label"
+               class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1"> {{ filter.label | translate }}:
+          </div>
+
+          <div class="gray-border">
+            <kendo-dropdownlist (selectionChange)="dropdownValueChanged($event, filter.field)"
+                                [data]="filter.values"
+                                [defaultItem]="'COMMON.ALL' | translate"
+            >
+            </kendo-dropdownlist>
+          </div>
+        </div>
+      </div>
+
+      <div class="tw-flex tw-justify-end tw-w-full tw-place-self-end tw-mb-3 margin-bottom-5">
+        <div *ngIf="excelExport" class="tw-ml-4">
+          <button icon="fa fa-file-export tw-bg-white tw-text-darkGray" kendoGridExcelCommand type="button">
+            {{ 'GRID.EXCEL-EXPORT' | translate }}
+          </button>
+        </div>
+
+        <ng-container *ngIf="showGridBulkActions">
+          <div *ngFor="let action of gridBulkActions" class="tw-ml-4">
+            <button (click)="onBulkActionClick(action.actionName)" class="btn text-secondary btn-outline "
+                    type="button">
+              <i class="{{ action.iconClass }}"></i>
+              {{ 'BUTTON.' + action.actionName.toUpperCase() | translate }}
+            </button>
+          </div>
+        </ng-container>
       </div>
     </div>
 
   </ng-template>
 
+  <kendo-grid-checkbox-column *ngIf="checkboxColumn"
+                              [columnMenu]=checkboxColumn.columnMenu
+                              [resizable]=checkboxColumn.resizable
+                              [showSelectAll]=checkboxColumn.showSelectAll
+                              [width]=checkboxColumn.width>
+  </kendo-grid-checkbox-column>
+
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
                      [class]="column.class"
                      [field]="column.field"
                      [title]="column.translationKey | translate"
-                     [width]="column.width ? column.width : null">
+                     [width]="column.width ? column.width : 44"
+                     field="{{column.field}}">
 
     <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
       <!--- no data -->
       <div [ngClass]="rowActions.length > 0 ? 'grid-cell-text' : ''">
         <ng-container
-          *ngIf="!dataItem[column.field] && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
+          *ngIf="!dataItem[column.field] && dataItem[column.field] !== 0 && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
           {{ 'COMMON.NOT-DEFINED' | translate }}
         </ng-container>
 
         <!--- no type defined is string -->
         <ng-container *ngIf="!column.type">
-          {{ dataItem[column.field] }}
+          <div class="tw-inline-flex">
+            <ng-container *ngIf="dataItem[column.field] && column.icon">
+              <img [src]="'assets/images/icons/user-icon.svg'" class="tw-pr-2" />
+            </ng-container>
+            {{ dataItem[column.field] }}
+          </div>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SWITCH">
@@ -72,9 +118,9 @@
                         [readonly]="true"></kendo-switch>
         </ng-container>
 
-        <ng-container *ngIf="column.type === columnType.DATE">
+        <ng-container *ngIf="column.type === columnType.DATE_ONLY">
           <div>
-            {{ dataItem[column.field] | date }}
+            {{ dataItem[column.field] | formatDateOnly }}
           </div>
         </ng-container>
 
@@ -84,17 +130,31 @@
           </div>
         </ng-container>
 
+        <ng-container *ngIf="column.type === columnType.DATE">
+          <div>
+            {{ dataItem[column.field] | formatDate }}
+          </div>
+        </ng-container>
+
         <ng-container *ngIf="column.type === columnType.COLORED_ENUM">
           <label [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
             {{ dataItem[column.field] }}
           </label>
         </ng-container>
 
+        <ng-container *ngIf="column.type === columnType.CODE_LIST">
+          <div>
+            {{ dataItem[column.field].id }}
+            <label class="tw-text-lightGray">({{ dataItem[column.field].value }})</label>
+          </div>
+        </ng-container>
+
         <ng-container *ngIf="rowActions && rowActions.length > 0 && i +1  === gridColumns.length" class="no-padding">
-          <div class="grid-row-button">
+          <div class="grid-row-button rows-{{ rowActions.length }}">
             <img (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
                  *ngFor="let action of rowActions"
-                 [src]="'assets/images/icons/' + action.iconName + '.svg'" class="tw-h-4 tw-px-2" />
+                 [src]="'assets/images/icons/' + action.iconName + '.svg'"
+                 class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded" />
           </div>
         </ng-container>
       </div>
@@ -102,10 +162,14 @@
 
   </kendo-grid-column>
 
-  <kendo-grid-excel
-    [fetchData]="allData"
-    [fileName]="excelFileName + '_' + getCurrentDateTime() + '.xlsx'"
+  <kendo-grid-excel *ngIf="excelExport"
+                    [fetchData]="allData"
+                    [fileName]="excelFileName + '_' + getCurrentDateTime() + '.xlsx'"
   ></kendo-grid-excel>
+
+  <ng-template kendoGridNoRecordsTemplate>
+    {{ noDataText | translate }}
+  </ng-template>
 </kendo-grid>
 
 

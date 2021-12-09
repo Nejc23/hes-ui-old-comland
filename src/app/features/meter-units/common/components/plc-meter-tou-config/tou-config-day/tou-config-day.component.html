@@ -1,0 +1,15 @@
+<div class="tw-p-10 tw-pr-0">
+  <app-add-time-unit [title]="'TOU-CONFIG.DAY-TABLES'"
+                     [type]="timeUnitEnum"
+                     [units]="days.units">
+  </app-add-time-unit>
+</div>
+
+<div class="buttons-bottom-container">
+  <button (click)="previousStep()"
+          class="btn btn-primary tw-ml-5">< {{ 'TOU-CONFIG.BASIC' | translate }}
+  </button>
+  <button (click)="nextStep()" [disabled]="!isValid() || invalidForm"
+          class="btn btn-primary">{{ 'TOU-CONFIG.WEEK-TABLES' | translate }} >
+  </button>
+</div>

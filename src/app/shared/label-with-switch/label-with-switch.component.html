@@ -1,4 +1,5 @@
-<div [ngClass]="topBorder ? 'gray-line-top' : ''" class="tw-flex tw-justify-between tw-items-center gray-line tw-py-3">
+<div [ngClass]="{ topBorder :'gray-line-top', bottomBorder: 'gray-line'}"
+     class="tw-flex tw-justify-between tw-items-center tw-py-3">
   <div>
     <div class="text-normal-bold">{{ message | translate }}</div>
     <div *ngIf="secondaryMessage"

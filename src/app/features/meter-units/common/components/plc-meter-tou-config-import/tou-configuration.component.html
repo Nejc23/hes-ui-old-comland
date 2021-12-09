@@ -1,0 +1,63 @@
+<div [style.width.px]="addWidth()" class="sticky-header bottom-line">
+
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center tw-h-36">
+    <app-page-title
+      (backButtonClickedEvent)="goBack()"
+      [backButton]="!isList()"
+      [title]="isList() ? 'TOU-CONFIG.TOU-CONFIGURATIONS' : getTitle() ? getTitle() : 'MENU.TOU-CONFIGURATION'"
+      class="tw-mt-10 tw--m-5"
+    >
+    </app-page-title>
+
+    <div class="tw-mt-14 tw-pr-5">
+
+      <ng-container *ngIf="isList()">
+        <button (click)="openImportModal()"
+                class="btn text-secondary btn-outline tw-mr-3" type="button">
+          <i class="far fa-arrow-to-top"></i>
+          {{ 'BUTTON.IMPORT' | translate }}
+        </button>
+
+        <button (click)="openWizard()"
+                class="btn btn-primary" type="button">
+          {{ 'BUTTON.ADD' | translate }}
+        </button>
+
+      </ng-container>
+
+      <ng-container *ngIf="!isList()">
+        <button (click)="navigateToList()" class="btn text-secondary btn-outline tw-mr-4"
+                type="button"> {{'BUTTON.DISCARD' | translate }}
+        </button>
+
+        <button (click)="saveTouConfig()"
+                *ngIf="isSummary()"
+                [disabled]="!isValid()"
+                class="btn btn-primary" type="button">
+          {{'BUTTON.SAVE' | translate }}
+        </button>
+
+      </ng-container>
+
+    </div>
+
+  </div>
+</div>
+
+<div *ngIf="!isList()" class="tou-layout">
+
+  <div class="tou-menu">
+    <div class="tw-mt-8">
+      <app-tou-config-menu></app-tou-config-menu>
+    </div>
+  </div>
+
+  <div class="tou-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</div>
+
+<div *ngIf="isList()">
+  <router-outlet></router-outlet>
+</div>

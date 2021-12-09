@@ -4,7 +4,7 @@
   </div>
   <h3 class="modal-title">{{ modalTitle | translate }}</h3>
 
-  <button (click)="dismiss()" aria-label="Close" class="btn-close" type="button">
+  <button *ngIf="!hideCloseButton" (click)="dismiss()" aria-label="Close" class="btn-close" type="button">
     <span aria-hidden="true"></span>
   </button>
 </div>
@@ -45,6 +45,7 @@
 
 <div class="modal-footer">
   <button (click)="dismiss()" *ngIf="!withoutCancelButton" class="btn text-secondary"
-          type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
+          type="button"> {{ btnCancelText | translate }}
+  </button>
   <button (click)="confirm()" class="btn btn-primary" type="button">{{ btnConfirmText | translate }}</button>
 </div>

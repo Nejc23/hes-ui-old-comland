@@ -1,0 +1,22 @@
+<div>
+  <button *ngFor="let item of menuItems | async"
+          [disabled]="!item.enabled"
+          [ngClass]="{ selected: isSelected(item.url), disabled: !item.enabled }"
+          [routerLink]="item.url"
+          class="menu-item tw-inline-flex tw-items-center">
+    <div class="tw-inline-flex tw-w-full tw-items-center">
+      <img *ngIf="item.completed" [src]="'assets/images/icons/green-check-icon.svg'" class="tw-h-3 tw-ml-3" />
+      <div *ngIf="!item.completed && item.item !== 'summary'" class="dot  tw-h-3 tw-ml-3">
+      </div>
+      <div [ngClass]="item.item === 'summary' ? 'tw-ml-10' : '' "
+           class="tw-text-mediumGray tw-text-xs tw-ml-4 tw-w-24 tw-text-left">
+        {{ item.label | translate }}
+      </div>
+      <div *ngIf="getCount(item) > 0"
+           class="menu-item-count">
+        <label class="tw-text-xs">{{getCount(item)}}</label>
+      </div>
+    </div>
+  </button>
+
+</div>

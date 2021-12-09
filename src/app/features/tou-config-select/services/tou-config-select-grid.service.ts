@@ -24,7 +24,7 @@ export class TouConfigSelectGridService {
         headerCheckboxSelection: false
       },
       {
-        field: 'timeOfUseName',
+        field: 'externalId',
         width: 160,
         suppressMenu: true,
         sortable: true,

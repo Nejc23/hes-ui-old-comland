@@ -1,4 +1,8 @@
 <div class="tw-inline-flex tw-items-center tw-h-full">
+  <button (click)="backButtonClicked()" *ngIf="backButton" class="small-back-button text-secondary btn-outline tw-mr-4"
+          type="button">
+    <img [src]="'assets/images/icons/arrow-left-icon.svg'" />
+  </button>
   <div *ngIf="title" class="tw-text-black tw-text-xl">
     {{ title | translate }}
   </div>

@@ -24,6 +24,7 @@ import { GridSettingsCookieStoreService } from './utils/services/grid-settings-c
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
 import { SharedModule } from '../shared/shared.module';
 import { EventManagerService } from './services/event-manager.service';
+import { CanDeactivateGuard } from '../shared/guards/can-deactivate.guard';
 
 @NgModule({
   imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule, SharedModule],
@@ -45,6 +46,7 @@ import { EventManagerService } from './services/event-manager.service';
     SidebarCookieStoreService,
     GridLayoutSessionStoreService,
     EventManagerService,
+    CanDeactivateGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,

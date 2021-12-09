@@ -3,9 +3,17 @@ import { AutoTemplateComponent } from '../auto-template/components/auto-template
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { ImportDeviceKeysComponent } from '../components/import-device-keys/import-device-keys.component';
-import { PlcMeterTouConfigImportComponent } from '../../meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { TouConfigurationComponent } from '../../meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
 import { PlcMeterTemplatesImportComponent } from '../../meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
 import { ImportDevicesComponent } from '../../meter-units/common/components/import-devices/import-devices.component';
+import { TouConfigBasicComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-basic/tou-config-basic.component';
+import { TouConfigDayComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-day/tou-config-day.component';
+import { TouConfigWeekComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-week/tou-config-week.component';
+import { TouConfigSeasonComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-season/tou-config-season.component';
+import { TouConfigSpecialDaysComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-special-days/tou-config-special-days.component';
+import { TouConfigSummaryComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-summary/tou-config-summary.component';
+import { TouConfigListComponent } from '../../meter-units/common/components/plc-meter-tou-config/tou-config-list/tou-config-list.component';
+import { CanDeactivateGuard } from '../../../shared/guards/can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -36,7 +44,65 @@ const routes: Routes = [
           breadcrumb: '',
           permission: PermissionEnumerator.Import_TOU_Configuration
         },
-        component: PlcMeterTouConfigImportComponent
+        component: TouConfigurationComponent,
+        children: [
+          {
+            path: 'list',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigListComponent
+          }
+        ]
+      },
+      {
+        path: 'importTouConfiguration/wizard',
+        component: TouConfigurationComponent,
+        children: [
+          {
+            path: 'basic',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigBasicComponent,
+            canDeactivate: [CanDeactivateGuard]
+          },
+          {
+            path: 'day',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigDayComponent
+          },
+          {
+            path: 'week',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigWeekComponent
+          },
+          {
+            path: 'season',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigSeasonComponent
+          },
+          {
+            path: 'special',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigSpecialDaysComponent
+          },
+          {
+            path: 'summary',
+            data: {
+              breadcrumb: ''
+            },
+            component: TouConfigSummaryComponent
+          }
+        ]
       },
       {
         path: 'autoTemplates',

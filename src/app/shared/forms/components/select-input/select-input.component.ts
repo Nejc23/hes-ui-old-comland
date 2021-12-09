@@ -20,6 +20,8 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() disabled = false;
   @Input() clearButton = true;
   @Input() itemDisabled;
+  @Input() withDescription = false;
+  @Input() withIdInDropdown = false;
 
   @Output() selectedValueChanged: EventEmitter<any> = new EventEmitter<any>();
 

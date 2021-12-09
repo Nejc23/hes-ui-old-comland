@@ -64,8 +64,10 @@
 .grid-row-button {
   @apply tw-inline-flex;
   @apply tw-justify-between;
-  @apply tw-py-2;
+  @apply tw-items-center;
+  @apply tw-py-1;
   @apply tw-px-2;
+  @apply tw-h-9;
   @apply tw-rounded;
   @apply tw-border-lightGray;
   @apply tw-border-solid;
@@ -75,9 +77,18 @@
   visibility: hidden;
   position: relative;
   bottom: 40px;
-  width: 6rem;
+  width: 6rem; // default 3 rows
   left: calc(100% - 6.4rem);
-  //left: 62%;
+
+  &.rows-1 {
+    width: 2.5rem;
+    left: calc(100% - 3.4rem);
+  }
+
+  &.rows-2 {
+    width: 5rem;
+    left: calc(100% - 3.4rem);
+  }
 }
 
 .green {
@@ -134,13 +145,13 @@
 //kendo toolbar position over the chart hack
 .with-chart.visible ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
   position: relative;
-  bottom: 27.3rem;
+  bottom: 28.6rem;
   margin-left: 28.5rem;
 }
 
 .with-chart.hidden ::ng-deep kendo-grid-toolbar.k-toolbar.k-grid-toolbar {
   position: relative;
-  bottom: 11.2rem;
+  bottom: 12.4rem;
   margin-left: 28.5rem;
 }
 
@@ -148,11 +159,27 @@
   height: 44px;
   line-height: 44px;
   width: 96%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  //white-space: nowrap;
+  //overflow: hidden;
+  //text-overflow: ellipsis;
 }
 
 .max-height-385 {
   max-height: 385px;
+}
+
+::ng-deep tr.k-grid-norecords {
+  @apply tw-bg-lightestGray;
+}
+
+.search-input {
+  ::ng-deep .k-textbox {
+    border-color: transparent !important;
+    height: 33px;
+    border-left: 1px solid #A9ABAF !important;
+  }
+}
+
+.margin-bottom-5 {
+  margin-bottom: 5px;
 }

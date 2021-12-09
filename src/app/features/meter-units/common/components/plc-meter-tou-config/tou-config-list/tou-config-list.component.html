@@ -1,0 +1,31 @@
+<div class="tw-mt-40">
+
+  <div class="tou-config-list-table">
+    <app-data-table
+      (bulkActionClickedEvent)="bulkActionClicked($event)"
+      (rowActionClickedEvent)="rowActionsClicked($event)"
+      (selectedRowDataEvent)="selectionChanged($event)"
+      [checkboxColumn]="checkboxColumn"
+      [fetchData]="false"
+      [filters]="touListFiltersConfiguration"
+      [gridBulkActions]="touListTableBulkActionConfiguration"
+      [gridColumns]="touListColumnsConfiguration"
+      [gridData]="touConfigListData"
+      [kendoGridSelectByColumn]="'id'"
+      [pageSize]="20"
+      [pageable]="true"
+      [rowActions]="touListRowActionConfiguration"
+      [rowHeight]="44"
+      [scrollable]="'virtual'"
+      [selectedKeys]="selectedKeys"
+      [showGridBulkActions]="showGridBulkActions"
+      [skip]="0"
+      [sortable]="true"
+      [tableHeight]="710"
+      [total]="touConfigListData.length"
+      [withSearch]="true"
+    >
+    </app-data-table>
+
+  </div>
+</div>

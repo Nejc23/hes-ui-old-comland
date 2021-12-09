@@ -75,6 +75,8 @@ body {
 // bs override
 .modal-header {
   padding: 0 1.714rem;
+  justify-content: left;
+  height: 72px;
 }
 
 .modal-body {
@@ -219,6 +221,12 @@ body {
   @apply tw-bg-opacity-20;
 }
 
+.draft-status {
+  @apply tw-text-gray2;
+  @apply tw-bg-gray2;
+  @apply tw-bg-opacity-20;
+}
+
 .toast-body {
   z-index: 2020 !important;
 }
@@ -227,6 +235,12 @@ body {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+
+  //&.full-width {
+  //  position: sticky;
+  //  justify-content: space-between;
+  //  display: flex;
+  //}
 }
 
 .transparent-gray-line {
@@ -279,9 +293,6 @@ body {
   top: 18px;
 }
 
-.k-state-selected {
-  background-color: rgb($primary, 0.65) !important;
-}
 
 .mini-button {
   padding: 2px 10px;
@@ -362,7 +373,12 @@ body {
 .primary-transparent-bg {
   color: $primary;
   background-color: rgba($primary, 0.2);
+
+  &.ultra-transparent {
+    background-color: rgba($primary, 0.05);
+  }
 }
+
 
 .colored-tag {
   @apply tw-rounded;
@@ -377,4 +393,21 @@ body {
 .modal-body {
   max-height: 75vh;
   overflow-y: auto;
+}
+
+.relative-position {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin: -40px 0px 0px -40px;
+}
+
+.btn-outline {
+  color: $darkGray !important;
+  border: 1px solid $mediumGray !important;
+}
+
+.k-button {
+  @apply tw-border-mediumGray;
+  @apply tw-text-darkGray;
 }

@@ -1,26 +1,32 @@
-<div class="mb-3" [formGroup]="form" [ngClass]="{'has-error': showErrors()}">
-
-  <label [attr.for]="property" *ngIf="label">
+<div [formGroup]="form" [ngClass]="{ 'has-error': showErrors() }" class="mb-3">
+  <label *ngIf="label" [attr.for]="property">
     {{ 'FORM.' + label.toUpperCase() | translate }}
     <span *ngIf="required && label !== ' '"> *</span>
   </label>
 
   <div class="d-flex">
-    <div class="input-group-prepend" *ngIf="iconName !== ''">
-      <span class="input-group-text"><i class="fas {{iconName}}"></i></span>
+    <div *ngIf="iconName !== ''" class="input-group-prepend">
+      <span class="input-group-text"><i class="fas {{ iconName }}"></i></span>
     </div>
-    <input [name]="property" [placeholder]="placeholder" [type]="inputType"
-           (blur)="onBlur()" [ngClass]="{'form-control': true, 'text-yellow-border': showWarning()}"
-           [formControlName]="property" [attr.numberOnly]="numberOnly ? '' : ''" [readonly]="isReadOnly">
+    <input
+      (blur)="onBlur()"
+      [attr.numberOnly]="numberOnly ? '' : ''"
+      [formControlName]="property"
+      [name]="property"
+      [ngClass]="{ 'form-control': true, 'text-yellow-border': showWarning() }"
+      [pattern]="regex"
+      [placeholder]="placeholder"
+      [readonly]="isReadOnly"
+      [type]="inputType"
+    />
     <span *ngIf="labelRight" class="align-self-end ms-3 mb-2">{{ 'FORM.' + labelRight.toUpperCase() | translate }}</span>
   </div>
-
   <!--Loop through errors-->
-  <div class="help-block" *ngIf="showErrors()" class="error">
-    <app-form-error [error]="formControl!.errors "></app-form-error>
+  <div *ngIf="showErrors()" class="help-block" class="error">
+    <app-form-error [overrideErrorPatternMessage]="overrideErrorPatternMessage" [error]="formControl!.errors"></app-form-error>
   </div>
 
-  <div class="help-block" *ngIf="showWarning()" class="error">
+  <div *ngIf="showWarning()" class="help-block" class="error">
     <app-form-warning [warning]="warnings"></app-form-warning>
   </div>
 </div>

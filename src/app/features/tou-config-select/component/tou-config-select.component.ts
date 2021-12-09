@@ -62,7 +62,7 @@ export class TouConfigSelectComponent implements OnInit {
     const selectedRows = this.gridApi.getSelectedRows();
     const rows = _.map(
       selectedRows,
-      nameOf<TimeOfUseConfigList>((o) => o.timeOfUseId)
+      nameOf<TimeOfUseConfigList>((o) => o.id)
     );
     if (rows.length > 0) {
       return rows[0];

@@ -29,6 +29,8 @@ import { CoreModule } from './core/core.module';
 import { UserModule } from './features/users/modules/user.module';
 import { SharedModule } from './shared/shared.module';
 import { NgxTranslateDebugParser } from 'ngx-translate-debug';
+import { ApiModule as TimeOfUseApiModule } from './api/time-of-use/api.module';
+import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
@@ -71,6 +73,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserModule,
     CoreModule.forRoot(),
     SharedModule,
+    TimeOfUseApiModule.forRoot({ rootUrl: environment.apiUrl }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateModule,
@@ -87,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       defaultLanguage: 'en'
     })
   ],
+  exports: [],
 
   bootstrap: [AppComponent]
 })

@@ -116,3 +116,13 @@ Location of translations files is `src/assets/i18n`. Translation files can be up
 `npm run build-production:amera:jscr`
 `npm run build-production:ePointHES:jscr`
 
+## Open API generator
+
+To generate model interfaces and web service clients from Swagger documentation use ng-openapi-gen. To install it start the command:
+`npm install -g ng-openapi-gen`
+Then download swagger documentation (json file) and start command to generate api, for example:
+`ng-openapi-gen --input <path-to-documentation-file-swagger.json> --output src/app/api/<your-service-name>`
+For each service put api into `<your-service-name>` subfolder.
+Do not overwrite BaseService class because of special condition and logic for getter of root url.
+
+

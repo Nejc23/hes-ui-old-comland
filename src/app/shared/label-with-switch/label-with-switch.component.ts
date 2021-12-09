@@ -13,6 +13,7 @@ export class LabelWithSwitchComponent {
   @Input() controlId = '';
   @Input() form: FormGroup;
   @Input() topBorder = true;
+  @Input() bottomBorder = true;
 
   @Output() switchChangedEvent: EventEmitter<boolean> = new EventEmitter();
 

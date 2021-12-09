@@ -1,0 +1,16 @@
+<div class="tw-p-10 tw-pr-0">
+  <app-add-time-unit [days]="daysCodeList"
+                     [title]="'TOU-CONFIG.WEEK-TABLES'"
+                     [type]="timeUnitEnum"
+                     [units]="weeks.units">
+  </app-add-time-unit>
+</div>
+
+<div class="buttons-bottom-container">
+  <button (click)="previousStep()"
+          class="btn btn-primary tw-ml-5">< {{ 'TOU-CONFIG.DAY-TABLES' | translate }}
+  </button>
+  <button (click)="nextStep()" [disabled]="!isValid() || invalidForm"
+          class="btn btn-primary">{{ 'TOU-CONFIG.SEASON-TABLES' | translate }} >
+  </button>
+</div>

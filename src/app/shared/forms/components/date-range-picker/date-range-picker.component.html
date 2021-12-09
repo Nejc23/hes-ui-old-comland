@@ -4,31 +4,34 @@
   </div>
 
   <div
-    class="tw-inline-flex tw-border tw-border-solid tw-border-mediumGray tw-rounded-sm tw-items-center tw-justify-center tw-full">
+    class="tw-inline-flex tw-border tw-border-solid tw-border-lightGray tw-rounded-sm tw-items-center tw-justify-center tw-full">
     <div #popover="ngbPopover"
          [autoClose]="'outside'"
-         [ngbPopover]="popDateTimePicker" class="tw-flex tw-justify-center tw-w-10 tw-h-full"
+         [ngbPopover]="popDateTimePicker" [placement]="popoverPlacement"
+         class="tw-flex tw-justify-center tw-w-10 tw-h-full"
          container="body"
-         placement="bottom-left"
          popoverClass="date-range-picker-popover">
       <img [src]="'assets/images/icons/calendar-icon.svg'" class="tw-h-4 tw-w-4 tw-m-2" />
     </div>
 
-    <div class="tw-border-l tw-border-solid tw-border-mediumGray">
+    <div class="tw-border-l tw-border-solid tw-border-lightGray">
       <form [formGroup]="form">
-        <div #anchorTextbox [ngClass]="{'focused': focused }" class="tw-inline-flex  tw-items-center">
+        <div #anchorTextbox [ngClass]="{'focused': focused }" class="tw-inline-flex tw-items-center">
           <kendo-dateinput (blur)="onDateBlur()" (focus)="onDateFocus()" (valueChange)="dateChanged()"
                            [formControlName]="startProperty"
-                           [format]="format" [placeholder]="startDatePlaceholder"
+                           [format]="format"
+                           [min]="minDate" [placeholder]="startDatePlaceholder"
                            class="left-date tw-text-center">
           </kendo-dateinput>
-          <div class="divider">
-          </div>
-          <kendo-dateinput (blur)="onDateBlur()" (focus)="onDateFocus()" (valueChange)="dateChanged()"
-                           [formControlName]="endProperty"
-                           [format]="format" [placeholder]="endDatePlaceholder"
-                           class="right-date tw-text-center">
-          </kendo-dateinput>
+          <ng-container *ngIf="!singleCalendar">
+            <div class="divider">
+            </div>
+            <kendo-dateinput (blur)="onDateBlur()" (focus)="onDateFocus()" (valueChange)="dateChanged()"
+                             [formControlName]="endProperty"
+                             [format]="format" [placeholder]="endDatePlaceholder"
+                             class="right-date tw-text-center">
+            </kendo-dateinput>
+          </ng-container>
         </div>
       </form>
     </div>
@@ -36,7 +39,7 @@
       <div
         (click)="refreshButtonClickedEvent()" class="refresh-button border-left">
         <img [ngClass]="loading ? 'tw-animate-spin' : ''"
-             src="../../../../../assets/images/icons/refresh-icon.svg" />
+             src="assets/images/icons/refresh-icon.svg" />
       </div>
     </div>
   </div>
@@ -67,6 +70,9 @@
   <ng-template #popDateTimePicker>
     <app-datetime-range-picker (formClosed)="closePopover($event)"
                                [form]="form"
-                               [initValues]="true"></app-datetime-range-picker>
+                               [initValues]="true"
+                               [minDate]="minDateMomentJs"
+                               [singleCalendar]="singleCalendar"
+                               [withTime]="withTime"></app-datetime-range-picker>
   </ng-template>
 </div>

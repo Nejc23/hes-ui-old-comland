@@ -661,7 +661,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.eventsFiltersConfiguration = [
           {
             field: 'value',
-            values: this.eventIds
+            values: this.eventIds,
+            label: 'FORM.ID'
           }
         ];
         this.setEventData();

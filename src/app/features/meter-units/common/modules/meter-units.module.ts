@@ -41,6 +41,7 @@ import { MeterUnitsRoutingModule } from './meter-units-routing.module';
 import { PipesModule } from '../../../../shared/pipes/pipes.module';
 import { EditMeterUnitFormComponent } from '../components/edit-mu-form/edit-meter-unit-form.component';
 import { ErrorMessageModalComponent } from '../components/import-devices/error-messages-modal/error-message-modal.component';
+import { TouConfigurationImportComponent } from '../components/plc-meter-tou-config-import/tou-configuration-import.component';
 
 @NgModule({
   entryComponents: [],
@@ -82,7 +83,8 @@ import { ErrorMessageModalComponent } from '../components/import-devices/error-m
     GridCellThresholdComponent,
     GridCellUnitComponent,
     EditMeterUnitFormComponent,
-    ErrorMessageModalComponent
+    ErrorMessageModalComponent,
+    TouConfigurationImportComponent
   ],
   exports: [RegistersColumnChartComponent],
   imports: [
