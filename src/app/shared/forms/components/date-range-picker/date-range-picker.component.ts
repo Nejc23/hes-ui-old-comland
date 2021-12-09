@@ -1,11 +1,11 @@
-import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { formatDate } from '@progress/kendo-angular-intl';
-import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
+import { Placement } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-date-range-picker',
@@ -20,6 +20,16 @@ export class DateRangePickerComponent implements OnInit {
   @Input() form: FormGroup;
   @Input() withButtons = true;
   @Input() withRefreshButton = true;
+  @Input() singleCalendar = false;
+  @Input() dateOnly = false;
+  @Input() withTime = true;
+  @Input() popoverPlacement: Placement = 'bottom-left';
+  @Input() minDate: Date;
+  @Input() setDefaultDate = true; // default date is yesterday
+  @Input() withoutYear = false;
+  minDateMomentJs;
+
+  format = environment.dateTimeFormat;
 
   @Output() valueChange = new EventEmitter<void>();
 
@@ -31,7 +41,6 @@ export class DateRangePickerComponent implements OnInit {
   startDatePlaceholder = this.translate.instant('DAY.SET-START-DATE');
   endDatePlaceholder = this.translate.instant('DAY.SET-END-DATE');
 
-  controlId: string;
   selectedRange = 2;
   loading = false;
 
@@ -39,7 +48,6 @@ export class DateRangePickerComponent implements OnInit {
 
   popup: ElementRef;
   datePickerStart: ElementRef;
-  datePickerEnd: ElementRef;
 
   startTime: Date = null;
   endTime: Date = null;
@@ -51,31 +59,6 @@ export class DateRangePickerComponent implements OnInit {
     private translate: TranslateService
   ) {}
 
-  @ViewChild('popup', { read: ElementRef }) set setPopup(content: ElementRef) {
-    if (content) {
-      // initially setter gets called with undefined
-      this.popup = content;
-    }
-  }
-
-  @ViewChild('datePickerStart', { read: ElementRef }) set setDatePickerStart(content: ElementRef) {
-    if (content) {
-      // initially setter gets called with undefined
-      this.datePickerStart = content;
-    }
-  }
-
-  @ViewChild('datePickerEnd', { read: ElementRef }) set setDatePickerEnd(content: ElementRef) {
-    if (content) {
-      // initially setter gets called with undefined
-      this.datePickerEnd = content;
-    }
-  }
-
-  get format() {
-    return environment.dateTimeFormat;
-  }
-
   ngOnInit(): void {
     if (!this.form) {
       throw Error('DateRangePicker - form input missing.');
@@ -83,19 +66,20 @@ export class DateRangePickerComponent implements OnInit {
     if (!this.startProperty) {
       throw Error('DateRangePicker - startProperty input missing.');
     }
-    if (!this.endProperty) {
+    if (!this.endProperty && !this.singleCalendar) {
       throw Error('DateRangePicker - endProperty input missing.');
     }
-
-    this.controlId = _.uniqueId('dateRangePicker');
-
-    this.setRange(2); // yesterday is default
-  }
-
-  @HostListener('document:click', ['$event'])
-  public documentClick(event: any): void {
-    if (!this.contains(event.target)) {
-      this.show = false;
+    if (!this.withTime) {
+      this.format = environment.dateFormat;
+    }
+    if (this.withoutYear) {
+      this.format = environment.kendoChartCategoryDateFormats.days;
+    }
+    if (this.setDefaultDate) {
+      this.setRange(2); // yesterday is default behaviour
+    }
+    if (this.minDate) {
+      this.minDateMomentJs = moment(this.minDate);
     }
   }
 
@@ -142,9 +126,13 @@ export class DateRangePickerComponent implements OnInit {
     }
 
     this.form.get(this.startProperty).patchValue(this.startTime);
-    this.form.get(this.endProperty).patchValue(this.endTime);
+    if (!this.singleCalendar) {
+      this.form.get(this.endProperty).patchValue(this.endTime);
+    }
 
-    this.setDateRangeField();
+    if (!this.singleCalendar) {
+      this.setDateRangeField();
+    }
     this.show = false;
     this.focused = false;
     this.valueChange.emit();
@@ -159,24 +147,29 @@ export class DateRangePickerComponent implements OnInit {
   }
 
   dateChanged() {
-    if (this.form.get(this.startProperty).hasError('invalidStartDate')) {
+    if (this.form.get(this.startProperty)?.hasError('invalidStartDate')) {
       // clear invalid start
       delete this.form.get(this.startProperty).errors['invalidStartDate'];
       this.form.get(this.startProperty).updateValueAndValidity();
     }
     const startTimeField = this.form.get(this.startProperty);
-    const endTimeField = this.form.get(this.endProperty);
 
-    if (startTimeField.value < endTimeField.value && startTimeField.valid && endTimeField.valid) {
-      this.selectedRange = 7; // not defined
-      startTimeField.patchValue(startTimeField.value);
-      endTimeField.patchValue(endTimeField.value);
-      this.valueChange.emit();
+    if (!this.singleCalendar) {
+      const endTimeField = this.form.get(this.endProperty);
+
+      if (startTimeField.value < endTimeField.value && startTimeField.valid && endTimeField.valid) {
+        this.selectedRange = 7; // not defined
+        startTimeField.patchValue(startTimeField.value);
+        endTimeField.patchValue(endTimeField.value);
+        this.valueChange.emit();
+      } else {
+        // set invalid start
+        this.form.get(this.startProperty).setErrors({ invalidStartDate: true });
+        this.form.get(this.startProperty).markAsDirty();
+        this.showErrors();
+      }
     } else {
-      // set invalid start
-      this.form.get(this.startProperty).setErrors({ invalidStartDate: true });
-      this.form.get(this.startProperty).markAsDirty();
-      this.showErrors();
+      this.valueChange.emit();
     }
   }
 
@@ -195,8 +188,10 @@ export class DateRangePickerComponent implements OnInit {
       this.errors.push(this.translate.instant('DAY.START-TIME-REQUIRED'));
     }
 
-    if (this.formUtils.shouldInputShowErrors(this.form.get(this.endProperty))) {
-      this.errors.push(this.translate.instant('DAY.END-TIME-REQUIRED'));
+    if (!this.singleCalendar) {
+      if (this.formUtils.shouldInputShowErrors(this.form.get(this.endProperty))) {
+        this.errors.push(this.translate.instant('DAY.END-TIME-REQUIRED'));
+      }
     }
 
     return this.errors.length > 0;
@@ -216,33 +211,5 @@ export class DateRangePickerComponent implements OnInit {
     if (this.form.valid) {
       this.valueChange.emit();
     }
-  }
-
-  private contains(target: any): boolean {
-    if (!this.show) {
-      return false;
-    }
-
-    const result = !!(
-      this.anchorTextbox?.nativeElement?.contains(target) ||
-      this.popup?.nativeElement?.contains(target) ||
-      this.datePickerStart?.nativeElement?.contains(target) ||
-      this.datePickerEnd?.nativeElement?.contains(target)
-    );
-
-    if (result) {
-      return result;
-    }
-
-    if (target?.classList?.contains && target.classList.contains('k-time-accept')) {
-      return true;
-    }
-
-    // const datePicker = this.renderer.selectRootElement('.k-datetime-container', true); // second parameter is for preserving content
-    const datePicker = document.getElementsByClassName('k-datetime-container');
-    if (datePicker.length === 0) {
-      return false;
-    }
-    return datePicker[0]?.contains(target);
   }
 }

@@ -18,6 +18,7 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   @Input() form: FormGroup; // startDate - endDate
   @Input() singleCalendar = false;
   @Input() initValues = false;
+  @Input() minDate;
 
   initDateFrom;
   initDateTo;
@@ -54,18 +55,26 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     if (this.initValues && this.form.controls.startDate.valid && this.form.controls.endDate.valid) {
       this.datePicker.setStartDate((this.initDateFrom = this.form.controls.startDate.value));
       this.datePicker.setEndDate((this.initDateTo = this.form.controls.endDate.value));
-      this.form.controls.startTime.setValue(
-        moment()
-          .set('hour', this.form.controls.startDate.value.getHours())
-          .set('minute', this.form.controls.startDate.value.getMinutes())
-          .format('HH:mm')
-      );
-      this.form.controls.endTime.setValue(
-        moment()
-          .set('hour', this.form.controls.endDate.value.getHours())
-          .set('minute', this.form.controls.endDate.value.getMinutes())
-          .format('HH:mm')
-      );
+
+      if (this.withTime) {
+        this.form.controls.startTime.setValue(
+          moment()
+            .set('hour', this.form.controls.startDate.value.getHours())
+            .set('minute', this.form.controls.startDate.value.getMinutes())
+            .format('HH:mm')
+        );
+        this.form.controls.endTime.setValue(
+          moment()
+            .set('hour', this.form.controls.endDate.value.getHours())
+            .set('minute', this.form.controls.endDate.value.getMinutes())
+            .format('HH:mm')
+        );
+      }
+      this.datePicker.updateView();
+    }
+    if (this.form.controls?.startDate?.errors?.minError) {
+      this.form.controls.startDate.setValue(this.minDate.toDate());
+      this.form.controls.endDate.setValue(this.minDate.toDate());
       this.datePicker.updateView();
     }
   }
@@ -107,6 +116,9 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
     this.selected = range;
     this.setValues();
     this.isRange = false;
+    if (this.singleCalendar) {
+      this.formClosed.emit(this.selectedRange);
+    }
   }
 
   close() {
@@ -116,7 +128,9 @@ export class DateTimeRangePickerComponent implements AfterViewInit {
   setValues() {
     this.form.controls.startDate.setValue(this.selected.startDate.toDate()); // toDate() due to kendoUi input
     this.form.controls.endDate.setValue(this.selected.endDate.toDate());
-    this.setTime();
+    if (this.withTime) {
+      this.setTime();
+    }
     this.datePicker.updateView();
   }
 

@@ -33,7 +33,7 @@ import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/c
 import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
-import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { TouConfigurationComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../features/meter-units/common/components/plc-read-meter/plc-read-registers.component';
 import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
@@ -105,6 +105,16 @@ import { NgxTranslateDebugParser } from 'ngx-translate-debug';
 import { ShowMoreComponent } from './show-more/show-more.component';
 import { LabelWithSwitchComponent } from './label-with-switch/label-with-switch.component';
 import { ImportDevicesComponent } from '../features/meter-units/common/components/import-devices/import-devices.component';
+import { TouConfigMenuComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-menu/tou-config-menu.component';
+import { TouConfigDayComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-day/tou-config-day.component';
+import { TouConfigWeekComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-week/tou-config-week.component';
+import { TouConfigSeasonComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-season/tou-config-season.component';
+import { TouConfigSpecialDaysComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-special-days/tou-config-special-days.component';
+import { TouConfigSummaryComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-summary/tou-config-summary.component';
+import { TouConfigBasicComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-basic/tou-config-basic.component';
+import { TouConfigListComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-list/tou-config-list.component';
+import { AddTimeUnitComponent } from '../features/meter-units/common/components/plc-meter-tou-config/add-time-unit/add-time-unit.component';
+import { LabelModule } from '@progress/kendo-angular-label';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -153,7 +163,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AutoRefreshComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
-    PlcMeterTouConfigImportComponent,
+    TouConfigurationComponent,
     PlcMeterTemplatesImportComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
@@ -189,6 +199,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     NoDataComponent,
     ShowMoreComponent,
     LabelWithSwitchComponent,
+    ImportDevicesComponent,
+    TouConfigMenuComponent,
+    TouConfigBasicComponent,
+    TouConfigDayComponent,
+    TouConfigWeekComponent,
+    TouConfigSeasonComponent,
+    TouConfigSpecialDaysComponent,
+    TouConfigSummaryComponent,
+    TouConfigListComponent,
+    AddTimeUnitComponent,
     ImportDevicesComponent
   ],
   imports: [
@@ -231,7 +251,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     NgxChartsModule,
     LeafletModule,
     GridModule,
-    ExcelModule
+    ExcelModule,
+    LabelModule
   ],
   declarations: [
     BaseTemplateComponent,
@@ -272,7 +293,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     GridCellLinkComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
-    PlcMeterTouConfigImportComponent,
+    TouConfigurationComponent,
     PlcMeterTemplatesImportComponent,
     GridSelectionHeaderComponent,
     GridSelectionHeaderScrollableComponent,
@@ -316,6 +337,16 @@ export function HttpLoaderFactory(http: HttpClient) {
     SecurityRekeyConcentratorComponent,
     ShowMoreComponent,
     LabelWithSwitchComponent,
+    ImportDevicesComponent,
+    TouConfigMenuComponent,
+    TouConfigBasicComponent,
+    TouConfigDayComponent,
+    TouConfigWeekComponent,
+    TouConfigSeasonComponent,
+    TouConfigSpecialDaysComponent,
+    TouConfigSummaryComponent,
+    TouConfigListComponent,
+    AddTimeUnitComponent,
     ImportDevicesComponent
   ],
   entryComponents: [
@@ -332,7 +363,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
-    PlcMeterTouConfigImportComponent,
+    TouConfigurationComponent,
     PlcMeterTemplatesImportComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,

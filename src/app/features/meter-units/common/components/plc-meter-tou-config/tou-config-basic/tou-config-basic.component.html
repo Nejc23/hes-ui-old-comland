@@ -1,0 +1,46 @@
+<div class="tw-m-10">
+  <div class="tw-text-black tw-text-2xl tw-font-medium tw-mb-10">
+    {{ 'TOU-CONFIG.BASIC' | translate }}
+  </div>
+
+  <app-input-text
+    [form]="form"
+    [property]="'id'"
+    [regex]="'[a-zA-Z0-9 ]{1,8}'"
+    [overrideErrorPatternMessage]="'TOU-CONFIG.TOU-ID-ERROR-PATTERN'"
+    label="tou-id"
+  >
+  </app-input-text>
+
+  <app-input-text [form]="form" [property]="'description'" label="description"> </app-input-text>
+
+  <div class="gray-line">
+    <app-label-with-switch
+      [form]="datePickerForm"
+      [message]="'TOU-CONFIG.ACTIVATION-DATE'"
+      [property]="'activationEnabled'"
+      [secondaryMessage]="'TOU-CONFIG.ACTIVATION-DATE-SECONDARY-MESSAGE'"
+      [topBorder]="false"
+    ></app-label-with-switch>
+
+    <div *ngIf="isActivationDateEnabled()" class="tw-mt-4 tw-mb-8">
+      <app-date-range-picker
+        [form]="datePickerForm"
+        [minDate]="tomorrow"
+        [popoverPlacement]="'bottom-left'"
+        [setDefaultDate]="false"
+        [singleCalendar]="true"
+        [startProperty]="'startDate'"
+        [withButtons]="false"
+        [withRefreshButton]="false"
+        [withTime]="false"
+        class="small-date-picker"
+      >
+      </app-date-range-picker>
+    </div>
+  </div>
+</div>
+
+<div class="buttons-bottom-container">
+  <button (click)="nextStep()" [disabled]="!isValid()" class="btn btn-primary">{{ 'TOU-CONFIG.DAY-TABLES' | translate }} ></button>
+</div>

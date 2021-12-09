@@ -5,8 +5,8 @@
 }
 
 .disabled-state {
-  @apply tw-text-disappeared;
-  @apply tw-bg-disappeared;
+  @apply tw-text-darkGray;
+  @apply tw-bg-darkGray;
   @apply tw-bg-opacity-20;
 }
 
@@ -14,4 +14,13 @@
   @apply tw-text-installing;
   @apply tw-bg-installing;
   @apply tw-bg-opacity-20;
+}
+
+.small-back-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
 }

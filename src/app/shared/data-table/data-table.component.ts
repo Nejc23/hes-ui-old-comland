@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { GridDataResult, PageChangeEvent, PageSizeItem, RowArgs, RowClassArgs } from '@progress/kendo-angular-grid';
+import { CellClickEvent, GridDataResult, PageChangeEvent, PageSizeItem, RowArgs, RowClassArgs } from '@progress/kendo-angular-grid';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
-import { process } from '@progress/kendo-data-query';
+import { orderBy, process, SortDescriptor } from '@progress/kendo-data-query';
 import { CompositeFilterDescriptor } from '@progress/kendo-data-query/dist/npm/filtering/filter-descriptor.interface';
 import * as moment from 'moment';
 import { environment } from '../../../environments/environment';
@@ -26,7 +26,9 @@ export enum GridColumnType {
   ENUM = 'enum',
   COLORED_ENUM = 'colored-enum',
   DATE = 'date',
-  DATE_TIME = 'date-time'
+  DATE_TIME = 'date-time',
+  DATE_ONLY = 'date-only',
+  CODE_LIST = 'code-list' // dropdowns
 }
 
 export interface GridRowAction {
@@ -46,6 +48,18 @@ export interface GridFilter {
   values: any[];
 }
 
+export interface CheckboxColumn {
+  columnMenu: boolean;
+  resizable: boolean;
+  showSelectAll: boolean;
+  width: number;
+}
+
+export interface GridBulkAction {
+  actionName: string;
+  iconClass: string;
+}
+
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
@@ -57,6 +71,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() gridData: any; //   this.data = [...this.data]; // for KendoUI change detection
   @Input() gridColumns: Array<GridColumn> = [];
   @Input() rowActions: Array<GridRowAction> = [];
+  @Input() gridBulkActions: Array<GridBulkAction> = [];
 
   columnType = GridColumnType;
   // Grid properties
@@ -79,6 +94,20 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() rowHeight: 44; // required for virtual scroll
   @Input() fetchData = false; // fetch data from API on next page
   @Input() excelFileName = '';
+  @Input() noDataText = 'COMMON.NO-RECORDS-FOUND';
+  @Input() sortable = false;
+  @Input() checkboxColumn: CheckboxColumn;
+  @Input() kendoGridSelectByColumn: string = 'id'; // represents the unique grid data property/key for row selection
+  @Input() selectedKeys = [];
+  @Input() showGridBulkActions = false;
+
+  @Input()
+  sort: SortDescriptor[] = [
+    {
+      field: 'id',
+      dir: 'desc'
+    }
+  ];
 
   pageNumber = 1;
   pageSizes: PageSizeItem[] = [
@@ -97,8 +126,10 @@ export class DataTableComponent implements OnInit, OnChanges {
   ];
   @Output() switchClickedEvent = new EventEmitter<any>();
   @Output() rowActionClickedEvent = new EventEmitter<any>();
+  @Output() selectedCellEvent = new EventEmitter<CellClickEvent>();
   @Output() selectedRowDataEvent = new EventEmitter<any>();
   @Output() pageChangedEvent = new EventEmitter<PageChangeEvent>();
+  @Output() bulkActionClickedEvent = new EventEmitter<any>();
 
   constructor() {}
 
@@ -134,6 +165,14 @@ export class DataTableComponent implements OnInit, OnChanges {
   onRowActionClick(actionName: string, id: string, rowData?: any) {
     this.rowActionClickedEvent.emit({ actionName: actionName, id: id, rowData: rowData });
   }
+
+  onBulkActionClick(actionName: string) {
+    this.bulkActionClickedEvent.emit({ actionName: actionName, selectedKeys: this.selectedKeys });
+  }
+
+  kendoGridSelectBy = (context: RowArgs) => {
+    return context.dataItem[this.kendoGridSelectByColumn];
+  };
 
   public pageChange(event: PageChangeEvent): void {
     // fetch data from API
@@ -227,18 +266,27 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.loading = false;
   }
 
-  selectedCell(event: any) {
-    this.selectedRowDataEvent.emit(event.dataItem);
+  cellClick(event: CellClickEvent) {
+    this.selectedCellEvent.emit(event);
+  }
+
+  selectedCellChange(event: any) {
+    this.selectedRowDataEvent.emit(event);
   }
 
   getCurrentDateTime() {
     return moment().format(environment.dateDisplayFormat) + ' ' + moment().format(environment.timeFormatLong);
   }
 
-  private loadItems(data: any, count: number): void {
+  public sortChange(sort: SortDescriptor[]): void {
+    this.sort = sort;
+    this.loadItems(this.gridData, this.total ? this.total : this.gridData.length, this.sort);
+  }
+
+  private loadItems(data: any, count: number, sort?: any): void {
     if (data) {
       this.gridView = {
-        data: data.slice(this.skip, this.skip + this.pageSize),
+        data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
         total: count
       };
     }

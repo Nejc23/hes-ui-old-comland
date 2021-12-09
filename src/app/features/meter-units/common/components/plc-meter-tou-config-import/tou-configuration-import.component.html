@@ -1,0 +1,24 @@
+<app-modal-template (dismiss)="onDismiss()">
+    <div modal-header>{{ getTitle() }}</div>
+    <div modal-body>
+        <div class="form-row">
+            <div class="col-12">
+                <app-input-text [form]="form" [property]="nameProperty" label="{{ 'COMMON.NAME' | translate }}">
+                </app-input-text>
+            </div>
+            <div class="col-12 expand-dropzone">
+                <app-file-select [form]="form" [property]="fileProperty" [multiple]="false"
+                    [allowedExtensions]="allowedExt" [acceptExtensions]="acceptExtensions"
+                    (selectEvent)="selected($event)" (removeEvent)="removed($event)" [dropFileSelectSubtitle]="uploadDropSubtitle">
+                </app-file-select>
+            </div>
+        </div>
+    </div>
+    <div modal-footer>
+        <div class="d-flex justify-content-end">
+            <button (click)="onDismiss()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' |
+                translate}}</button>
+            <button (click)="import()" class="btn btn-primary" type="submit">{{ 'BUTTON.IMPORT' | translate }}</button>
+        </div>
+    </div>
+</app-modal-template>

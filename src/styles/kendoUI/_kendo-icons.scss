@@ -50,4 +50,24 @@
   &.k-i-checkmark::before {
     content: "\f00c"
   }
+
+  &.k-i-sort-asc-sm::before {
+    content: "\f0de";
+  }
+
+  &.k-i-sort-desc-sm::before {
+    content: "\f0dd";
+  }
+}
+
+.k-i-sort-desc-sm {
+  color: #A9ABAF !important;
+  padding-left: 6px;
+  padding-bottom: 23px;
+}
+
+.k-i-sort-asc-sm {
+  color: #A9ABAF !important;
+  padding-left: 6px;
+  padding-top: 3px;
 }

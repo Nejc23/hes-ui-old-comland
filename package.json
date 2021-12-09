@@ -25,7 +25,8 @@
     "build-production:myGrid:jscr": "ng build --configuration=production-myGrid && jscrambler",
     "build-production:amera:jscr": "ng build --configuration=production-amera && jscrambler",
     "build-production:ePointHES:jscr": "ng build --configuration=production-ePointHES && jscrambler",
-    "build:prod": "cross-env NODE_ENV=production ng build --configuration production"
+    "build:prod": "cross-env NODE_ENV=production ng build --configuration production",
+    "ng-openapi-gen": "ng-openapi-gen"
   },
   "private": true,
   "dependencies": {

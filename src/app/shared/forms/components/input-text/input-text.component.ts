@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 
 @Component({
@@ -19,12 +19,22 @@ export class InputTextComponent implements OnInit {
   @Input() isReadOnly = false; // input text is only readyonly (disabled for editing)
   @Input() placeholder = '';
   @Input() iconName = '';
+  @Input() regex = '';
+  @Input() overrideErrorPatternMessage: string = null;
 
   @Output() inputTextBlurValue: EventEmitter<boolean> = new EventEmitter();
 
   warnings = [];
 
   constructor(private formUtils: FormsUtilsService) {}
+
+  get formControl(): AbstractControl {
+    return this.form.get(this.property);
+  }
+
+  get required(): boolean {
+    return this.formUtils.hasFormControlRequiredField(this.formControl);
+  }
 
   ngOnInit() {
     if (!this.form) {
@@ -39,14 +49,6 @@ export class InputTextComponent implements OnInit {
     if (!this.isReadOnly) {
       this.isReadOnly = false;
     }
-  }
-
-  get formControl(): AbstractControl {
-    return this.form.get(this.property);
-  }
-
-  get required(): boolean {
-    return this.formUtils.hasFormControlRequiredField(this.formControl);
   }
 
   showErrors(): boolean {

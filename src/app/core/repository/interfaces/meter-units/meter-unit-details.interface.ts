@@ -25,5 +25,6 @@ export interface MeterUnitDetails {
 export enum DeviceState {
   OPERATIONAL = 'operational',
   INSTALLING = 'installing',
-  DISABLED = 'disabled'
+  DISABLED = 'disabled',
+  DRAFT = 'draft' // for TOU
 }

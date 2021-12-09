@@ -1,4 +1,5 @@
 <div [ngClass]="singleCalendar ? 'tw-pr-8' : ''" class="datetime-range-picker">
+
   <ngx-daterangepicker-material
     #datePicker
     (datesUpdated)="datesUpdated($event)"
@@ -7,6 +8,7 @@
     [autoApply]="true"
     [linkedCalendars]="!singleCalendar"
     [locale]="locale"
+    [minDate]="minDate"
     [ranges]="!singleCalendar ? defaultRanges : null"
     [singleDatePicker]="singleCalendar"
     class="date-range-picker">
@@ -29,7 +31,8 @@
       </div>
     </div>
 
-    <div class="buttons-container d-flex justify-content-between align-items-center padding-top-32">
+    <div *ngIf="!singleCalendar"
+         class="buttons-container d-flex justify-content-between align-items-center padding-top-32">
       <button (click)="clear()" class="btn text-secondary"
               type="button">{{ 'BUTTON.CLEAR-SELECTION' | translate }}</button>
       <button (click)="close()" [disabled]="!form.valid" class="btn btn-primary"

@@ -62,8 +62,8 @@ export class SidebarService {
             permission: PermissionEnumerator.Import_Templates
           },
           {
-            title: this.translate.instant('MENU.IMPORT-TOU-CONFIGURATION'),
-            routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration`,
+            title: this.translate.instant('MENU.TOU-CONFIGURATION'),
+            routeLink: `/${ConfigurationRoute.configuration}/importTouConfiguration/list`,
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Import_TOU_Configuration

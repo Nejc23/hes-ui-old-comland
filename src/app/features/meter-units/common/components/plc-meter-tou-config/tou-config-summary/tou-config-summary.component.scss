@@ -1,0 +1,46 @@
+.card-item {
+  @apply tw-border-lightGray;
+  @apply tw-border-solid;
+  @apply tw-border;
+  @apply tw-rounded;
+  @apply tw-h-20;
+  @apply tw-w-52;
+  @apply tw-py-3;
+  @apply tw-px-5;
+  @apply tw-mr-4;
+  @apply tw-mb-4;
+}
+
+.card-item-number {
+  @apply tw-text-black;
+  @apply tw-font-bold;
+}
+
+.card-item-text {
+  @apply tw-mt-2;
+  @apply tw-text-mediumGray;
+  @apply tw-text-xs;
+}
+
+.success-text {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  background: #D7EDDC;
+  color: #1D8334;
+  @apply tw-rounded;
+  @apply tw-text-sm;
+  @apply tw-font-medium;
+}
+
+.error-text {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  @apply tw-text-red;
+  @apply tw-bg-red;
+  @apply tw-bg-opacity-20;
+  @apply tw-rounded;
+  @apply tw-text-sm;
+  @apply tw-font-medium;
+}

@@ -19,11 +19,22 @@
                   [disabled]="disabled"
                   [formControlName]="property"
                   [name]="property"
-                  [textField]="'value'"
+                  [textField]="withDescription ? 'id' : 'value'"
                   [valueField]="'id'"
                   class="form-control p-0"
                   isRequired="false"
   >
+
+    <ng-template *ngIf="withIdInDropdown" kendoAutoCompleteItemTemplate let-dataItem>
+      <span class="template tw-mr-1">{{ dataItem.value }}</span> ({{ dataItem.id }})
+    </ng-template>
+
+    <ng-template *ngIf="withDescription" kendoMultiSelectItemTemplate let-dataItem>
+      <div class="tw-p-0">
+        <div class="tw-text-black">{{ dataItem.id }}</div>
+        <div class="tw-text-darkGray tw-text-xs">{{ dataItem.value }}</div>
+      </div>
+    </ng-template>
   </kendo-combobox>
   <!--Loop through errors-->
   <div *ngIf="showErrors()" class="help-block">
