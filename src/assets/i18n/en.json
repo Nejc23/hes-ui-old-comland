@@ -761,7 +761,12 @@
         "TOU-CONFIG-TITLE": "TOU Configuration",
         "TOU-UPLOAD": "TOU Upload",
         "UPLOAD-IMAGE": "Upload image",
-        "UPLOAD-METER-IMAGE": "Meter image upload was successful`"
+        "UPLOAD-METER-IMAGE": "Meter image upload was successful`",
+        "IMPORT": {
+            "EXCEL-TEMPLATE": "Import meters template",
+            "DESCRIPTION": "Import device feature enables adding and updating devices via Excel (XSLT) file. Use provided Excel template as the starting point.",
+            "DOWNLOAD": "Download"
+        }
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {

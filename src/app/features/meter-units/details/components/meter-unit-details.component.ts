@@ -28,7 +28,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   public detailsForm: FormGroup;
   communicationForm: FormGroup;
 
-  plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent'];
+  plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];
   isPlcDevice = false;
   openEdit = false;
   saveData = false;

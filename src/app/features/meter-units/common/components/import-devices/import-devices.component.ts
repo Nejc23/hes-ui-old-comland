@@ -1,5 +1,5 @@
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
@@ -49,6 +49,7 @@ export class ImportDevicesComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private translate: TranslateService,
     private authService: AuthService,
+    private elRef: ElementRef,
     private modalService: ModalService
   ) {
     this.resetForm();
@@ -79,8 +80,16 @@ export class ImportDevicesComponent implements OnInit {
     this.form = this.createForm();
   }
 
+  downloadTemplate() {
+    window.location.assign('assets/files/meter-import.xlsx');
+  }
+
   isFileValid(event: boolean) {
     this.fileValid = event;
+  }
+
+  addWidth() {
+    return this.elRef.nativeElement.parentElement.offsetWidth;
   }
 
   successUploaded(event) {

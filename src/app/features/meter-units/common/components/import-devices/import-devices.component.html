@@ -1,4 +1,15 @@
-<div class="form-row">
+<div [style.width.px]="addWidth()" class="sticky-header transparent-gray-line">
+
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title
+      [title]="'MENU.IMPORT-DEVICES' | translate"
+      class="tw-h-36 tw-mt-10 tw--m-5"
+    >
+    </app-page-title>
+  </div>
+</div>
+
+<div class="form-row tw-pt-24">
   <div class="col-12 expand-dropzone">
 
     <app-file-upload (successEvent)="successUploaded($event)"
@@ -17,6 +28,21 @@
                      [uploadSaveUrl]="uploadSaveUrl"
                      label="IMAGE"></app-file-upload>
   </div>
+</div>
+
+<div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full tw-h-full">
+  <div class="tw-font-bold tw-tex-sm tw-text-black">
+    {{ 'PLC-METER.IMPORT.EXCEL-TEMPLATE' | translate }}
+  </div>
+  <div class="tw-tex-sm">
+    <button class="btn btn-primary" (click)="downloadTemplate()">
+      <span>{{ 'PLC-METER.IMPORT.DOWNLOAD' | translate }}</span>
+    </button>
+  </div>
+</div>
+
+<div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full tw-h-full">
+  {{ 'PLC-METER.IMPORT.DESCRIPTION' | translate }}
 </div>
 
 <div *ngIf="activeImports.length > 0" class="tw-my-10">
