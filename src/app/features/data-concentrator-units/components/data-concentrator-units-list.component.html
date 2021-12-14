@@ -35,14 +35,9 @@
                 <span>{{ 'COMMON.ADD' | translate }}</span>
               </button>
             </div>
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/data-concentrator-units.component.html
-            <div *ngIf="getSelectedCount() > 0" class="me-3">
-              <button class="btn btn-primary" [permission]="permissionAdd" appHideIfPermissionUnauthorized (click)="onDelete()">
-=======
             <div *ngIf="getSelectedCount() > 0" [permission]="permissionAdd" appHideIfPermissionUnauthorized
                  class="me-3">
               <button (click)="onDelete()" class="btn btn-primary">
->>>>>>> develop:src/app/features/data-concentrator-units/components/data-concentrator-units-list.component.html
                 <span>{{ 'COMMON.DELETE' | translate }}</span>
               </button>
             </div>

@@ -205,27 +205,12 @@ export class AddMeterUnitFormComponent implements OnInit {
     return nameOf<MuForm>((o) => o.externalId);
   }
 
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-  get isNewOrProtocolDlms() {
-    return !this.isEditMu || this.editMu.protocol?.toLowerCase() === 'dlms';
-  }
-
-=======
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
   ngOnInit() {
     this.codelistServiceMu
       .meterUnitVendorCodelist(null)
       .pipe(map((items) => items.filter((item) => item.value.toLowerCase() !== 'unknown')))
       .subscribe((manufacturers) => {
         this.manufacturers = manufacturers;
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-
-        if (this.isEditMu) {
-          const manufacturer = this.manufacturers.find((t) => this.editMu.manufacturer.toLowerCase() === t.value.toLowerCase());
-          this.form.get(this.manufacturerProperty).setValue(manufacturer);
-        }
-=======
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
       });
 
     this.autoTemplateService.getTemplates().subscribe((temps) => {
@@ -236,15 +221,6 @@ export class AddMeterUnitFormComponent implements OnInit {
         .sort((a, b) => {
           return a.value < b.value ? -1 : a.value > b.value ? 1 : 0;
         });
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-
-      if (this.isEditMu) {
-        const template = this.templates.find((t) => this.editMu.templateName.toLowerCase() === t.value.toLowerCase());
-        this.form.get(this.templateProperty).setValue(template);
-        this.isTemplateSelected = template && template.id ? true : false;
-      }
-=======
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
     });
   }
 
@@ -660,11 +636,7 @@ export class AddMeterUnitFormComponent implements OnInit {
       serialNumber: this.editMu.serialNumber,
       template: this.form.get(this.templateProperty).value,
       connectionType: this.form.get(this.connectionTypeProperty).value,
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-      protocol: this.isNewOrProtocolDlms ? 2 : 0,
-=======
       driver: 2,
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
       referencingType: this.shortNameSelected ? ReferenceType.COSEM_SHORT_NAME : ReferenceType.COSEM_LOGICAL_NAME,
       externalId: this.form.get(this.externalIdProperty).value
     };
@@ -674,27 +646,11 @@ export class AddMeterUnitFormComponent implements OnInit {
     return {
       deviceId: this.editMu.deviceId,
       name: this.form.get(this.nameProperty).value,
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-=======
       serialNumber: this.editMu.serialNumber,
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
       externalId: this.form.get(this.externalIdProperty).value
     };
   }
 
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-  setFormEdit(muDetails: MeterUnitDetails) {
-    this.editMu = muDetails;
-    this.isEditMu = true;
-    if (muDetails.referencingType?.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase()) {
-      this.shortNameSelected = true;
-    }
-    this.form = this.createForm(muDetails);
-    this.isGatewayEnabled = muDetails.wrapperInformation?.isGateWay;
-  }
-
-=======
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
   getTitle(): string {
     if (this.editMu) {
       const protocolName = this.translate.instant('PROTOCOL.' + this.editMu.protocolType);
@@ -729,8 +685,6 @@ export class AddMeterUnitFormComponent implements OnInit {
   toggle() {
     this.opened = !this.opened;
   }
-<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.ts
-=======
 
   validateIpAddress() {
     this.validateIpAddressAndSetNotice(this.form.get(this.communicationTypeProperty).value);
@@ -779,5 +733,4 @@ export class AddMeterUnitFormComponent implements OnInit {
       this.form.get(this.ipProperty).updateValueAndValidity();
     }
   }
->>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.ts
 }

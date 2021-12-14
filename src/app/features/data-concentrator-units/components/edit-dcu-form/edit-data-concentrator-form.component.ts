@@ -1,31 +1,15 @@
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component.ts
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { TabStripComponent } from '@progress/kendo-angular-layout';
-=======
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
->>>>>>> develop:src/app/features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component.ts
 import { Observable } from 'rxjs';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component.ts
-import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
-import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
-import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
-=======
 import { TranslateService } from '@ngx-translate/core';
 import { ValidateHostnameRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-update-request.interface';
->>>>>>> develop:src/app/features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component.ts
 
 @Component({
   selector: 'app-edit-data-concentrator-form',
@@ -140,11 +124,7 @@ export class EditDataConcentratorFormComponent implements OnInit, OnChanges {
       this.formUtils.saveForm(this.form, request, successMessage).subscribe(
         (result) => {
           if (result) {
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component.ts
-            this.modal.close(result[0]);
-=======
             this.savedDataEvent.emit(true);
->>>>>>> develop:src/app/features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component.ts
           }
         },
         (errResult) => {

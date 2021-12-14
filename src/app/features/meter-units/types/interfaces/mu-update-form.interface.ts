@@ -28,11 +28,7 @@ export interface MuUpdateForm extends MuUpdatePlcForm {
 export interface MuUpdatePlcForm {
   deviceId: string;
   name: string;
-<<<<<<< HEAD
-  externalId?: string;
-=======
   serialNumber: string;
   externalId?: string;
   templateId?: string;
->>>>>>> develop
 }

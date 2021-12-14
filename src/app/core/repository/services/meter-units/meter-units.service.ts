@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
-import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
-import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
-import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
-import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
-import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
-import { Injectable } from '@angular/core';
-=======
->>>>>>> develop
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { capitalize } from 'lodash';
@@ -25,12 +15,8 @@ import {
   meterUnitsForJob,
   meterUnitsLayout,
   removeMeterUnitsFromJob,
-<<<<<<< HEAD
-  touConfigImport
-=======
   touConfigImport,
   validateIpAddress
->>>>>>> develop
 } from '../../consts/meter-units.const';
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
@@ -216,11 +202,7 @@ export class MeterUnitsService {
       serialNumber: payload.serialNumber,
       templateId: payload.template?.id ? payload.template?.id : null,
       interfaceType: payload.communicationType,
-<<<<<<< HEAD
-      protocol: payload.protocol,
-=======
       driver: payload.driver,
->>>>>>> develop
       referencingType: payload.referencingType,
       externalId: payload.externalId
     };
@@ -261,13 +243,9 @@ export class MeterUnitsService {
   updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
     const muRequest: MuUpdatePlcRequest = {
       name: payload.name,
-<<<<<<< HEAD
-      externalId: payload.externalId
-=======
       serialNumber: payload.serialNumber,
       externalId: payload.externalId,
       templateId: payload.templateId
->>>>>>> develop
     };
     return this.updateMuPlc(payload.deviceId, muRequest);
   }

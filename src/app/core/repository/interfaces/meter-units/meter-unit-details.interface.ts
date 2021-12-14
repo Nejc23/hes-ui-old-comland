@@ -13,19 +13,13 @@ export interface MeterUnitDetails {
   manufacturer: string;
   ip: string;
   port: number;
-<<<<<<< HEAD
-  deviceStatus: string;
-=======
   deviceState: DeviceState;
   stateId: number;
->>>>>>> develop
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;
   advancedInformation: MuAdvancedInformation;
   referencingType: ReferenceType;
   externalId?: string;
-<<<<<<< HEAD
-=======
 }
 
 export enum DeviceState {
@@ -33,5 +27,4 @@ export enum DeviceState {
   INSTALLING = 'installing',
   DISABLED = 'disabled',
   DRAFT = 'draft' // for TOU
->>>>>>> develop
 }

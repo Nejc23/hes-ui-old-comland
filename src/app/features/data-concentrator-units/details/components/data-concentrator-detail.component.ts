@@ -1,17 +1,9 @@
-<<<<<<< HEAD
-import { Component, OnDestroy, OnInit } from '@angular/core';
-=======
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
->>>>>>> develop
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-<<<<<<< HEAD
-import { Observable, Subscription } from 'rxjs';
-=======
 import { forkJoin, Observable, Subscription } from 'rxjs';
->>>>>>> develop
 import { dataConcentratorUnits } from 'src/app/core/consts/route.const';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
@@ -24,13 +16,6 @@ import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrum
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { ModalService } from '../../../../core/modals/services/modal.service';
-<<<<<<< HEAD
-import { DeleteDcuFormComponent } from '../../components/delete-dcu-form/delete-dcu-form.component';
-import { EditDcuFormComponent } from '../../components/edit-dcu-form/edit-dcu-form.component';
-import { DcuForm } from '../../interfaces/dcu-form.interface';
-import { DataConcentratorUnitsGridEventEmitterService } from '../../services/data-concentrator-units-grid-event-emitter.service';
-import { DcOperationsService } from '../../services/dc-operations.service';
-=======
 import { EditDataConcentratorFormComponent } from '../../components/edit-dcu-form/edit-data-concentrator-form.component';
 import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
@@ -60,7 +45,6 @@ import { OperationType } from '../../components/operations/dc-operations.compone
 import { DeviceState } from '../../../../core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
->>>>>>> develop
 
 @Component({
   selector: 'app-data-concentrator-detail',
@@ -68,11 +52,8 @@ import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
   styleUrls: ['./data-concentrator-detail.component.scss']
 })
 export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
-<<<<<<< HEAD
-=======
   @ViewChild('popover') popover;
 
->>>>>>> develop
   form: FormGroup;
   editForm: FormGroup;
   eventsForm: FormGroup;
@@ -82,12 +63,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   public credentialsVisible = false;
   concentratorId = '';
   data: DataConcentratorUnit;
-<<<<<<< HEAD
-
-  private dcuConcentratorDeleted: Subscription;
-
-=======
->>>>>>> develop
   dcuStatuses$: Observable<Codelist<number>[]>;
   dcuTypes$: Observable<Codelist<number>[]>;
   dcuVendors$: Observable<Codelist<number>[]>;
@@ -223,97 +198,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     private breadcrumbService: BreadcrumbService,
     private permissionService: PermissionService,
     private dcOperationsService: DcOperationsService,
-<<<<<<< HEAD
-    private eventService: DataConcentratorUnitsGridEventEmitterService,
-    private modalService: ModalService,
-    private translate: TranslateService,
-    private router: Router
-  ) {}
-
-  ngOnInit() {
-    this.breadcrumbService.setPageName(this.translate.instant('DCU.DATA-CONCENTRATOR-UNIT'));
-    this.concentratorId = this.route.snapshot.paramMap.get('id');
-    this.dcuStatuses$ = this.codelistService.dcuStatusCodelist();
-    this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
-    this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
-
-    // get DCU
-    this.getData();
-
-    this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
-      this.router.navigate([dataConcentratorUnits]);
-    });
-  }
-
-  ngOnDestroy(): void {
-    if (this.dcuConcentratorDeleted) {
-      this.dcuConcentratorDeleted.unsubscribe();
-    }
-  }
-
-  getData() {
-    if (this.concentratorId.length > 0) {
-      this.dataConcentratorUnitsService.getDataConcentratorUnit(this.concentratorId).subscribe((response: DataConcentratorUnit) => {
-        this.data = response;
-        this.form = this.createForm();
-        this.editForm = this.createEditForm();
-        this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
-        this.setCredentialsControls(this.credentialsVisible);
-      });
-    } else {
-      this.form = this.createForm();
-    }
-  }
-
-  updateData(updatedValues: DcuUpdateRequest) {
-    this.data.ip = updatedValues.ip;
-    this.data.name = updatedValues.name;
-    this.data.serialNumber = updatedValues.serialNumber;
-    this.data.externalId = updatedValues.externalId;
-    this.data.username = updatedValues.userName;
-    this.data.address = updatedValues.address;
-    this.data.port = updatedValues.port;
-
-    this.form = this.createForm();
-    this.editForm = this.createEditForm();
-  }
-
-  createForm(): FormGroup {
-    return this.formBuilder.group(
-      {
-        [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-        [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
-        [this.externalIdProperty]: [this.data ? this.data.externalId : null],
-        [this.statusProperty]: [this.data ? { id: this.data.statusId, value: this.data.statusValue } : null, [Validators.required]],
-        [this.typeProperty]: [
-          this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null,
-          [Validators.required]
-        ],
-        [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
-        [this.ipProperty]: [this.data ? this.data.ip : null],
-        [this.portProperty]: [this.data ? this.data.port : null],
-        [this.addressProperty]: [this.data ? this.data.address : null],
-        [this.tagsProperty]: [this.data ? this.data.tags : null],
-        [this.userNameProperty]: [this.data ? this.data.username : null],
-        [this.macProperty]: [this.data ? this.data.mac : null]
-      },
-      { updateOn: 'blur' }
-    );
-  }
-
-  createEditForm(): FormGroup {
-    return this.formBuilder.group({
-      [this.nameProperty]: [this.data ? this.data.name : null, Validators.required],
-      [this.serialNumberProperty]: [this.data ? this.data.serialNumber : null, Validators.required],
-      [this.externalIdProperty]: [this.data ? this.data.externalId : null],
-      [this.typeProperty]: [this.data && this.data.typeId > 0 ? { id: this.data.typeId, value: this.data.typeValue } : null],
-      [this.vendorProperty]: [this.data ? { id: this.data.manufacturerId, value: this.data.manufacturerValue } : null],
-      [this.ipProperty]: [this.data ? this.data.ip : null],
-      [this.portProperty]: [this.data ? this.data.port : null],
-      [this.addressProperty]: [this.data ? this.data.address : null],
-      [this.macProperty]: [this.data ? this.data.mac : null],
-      [this.userNameProperty]: [this.data ? this.data.username : null]
-=======
     private dcuEventsService: DataConcentratorUnitsGridEventEmitterService,
     private modalService: ModalService,
     private translate: TranslateService,
@@ -329,7 +213,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   ) {
     this.eventsService.getCustom('RefreshConcentratorEvent').subscribe((res) => {
       this.getData();
->>>>>>> develop
     });
     this.options = {
       layers: [tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18 }), this.layer],
@@ -688,18 +571,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     }
   }
 
-<<<<<<< HEAD
-  onDelete() {
-    const params = this.dcOperationsService.getOperationRequestParam(this.concentratorId, null, 1, null);
-
-    const modalRef = this.modalService.open(DeleteDcuFormComponent);
-    const component: DeleteDcuFormComponent = modalRef.componentInstance;
-    component.applyRequestParams(params, 1);
-  }
-
-  get permissionEdit() {
-    return PermissionEnumerator.Manage_Concentrators;
-=======
   public onTabSelect(e) {
     console.log(e);
   }
@@ -1117,6 +988,5 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         );
       });
     });
->>>>>>> develop
   }
 }

@@ -18,11 +18,7 @@ import { DataConcentratorUnitsSelectComponent } from '../features/data-concentra
 import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/common/components/dcu-fw-upgrade.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from '../features/data-concentrator-units/components/delete-dcu-form/delete-dcu-form.component';
-<<<<<<< HEAD
-import { EditDcuFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component';
-=======
 import { EditDataConcentratorFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component';
->>>>>>> develop
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
@@ -146,11 +142,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
-<<<<<<< HEAD
-    EditDcuFormComponent,
-=======
     EditDataConcentratorFormComponent,
->>>>>>> develop
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -273,11 +265,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
-<<<<<<< HEAD
-    EditDcuFormComponent,
-=======
     EditDataConcentratorFormComponent,
->>>>>>> develop
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -366,11 +354,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
-<<<<<<< HEAD
-    EditDcuFormComponent,
-=======
     EditDataConcentratorFormComponent,
->>>>>>> develop
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,

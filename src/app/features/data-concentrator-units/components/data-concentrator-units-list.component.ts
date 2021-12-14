@@ -37,11 +37,8 @@ import { DataConcentratorUnitsStaticTextService } from '../services/data-concent
 import { DcOperationsService } from '../services/dc-operations.service';
 import { AddDcuFormComponent } from './add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from './delete-dcu-form/delete-dcu-form.component';
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts
-=======
 import { OperationType } from './operations/dc-operations.component';
 import { EventManagerService } from '../../../core/services/event-manager.service';
->>>>>>> develop:src/app/features/data-concentrator-units/components/data-concentrator-units-list.component.ts
 
 @Component({
   selector: 'app-data-concentrator-units',
@@ -58,13 +55,6 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   columns = [];
   totalCount = 0;
   filtersInfo: FiltersInfo;
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts
-  private layoutChangeSubscription: Subscription;
-  private dcuAddedSubscription: Subscription;
-  private dcuConcentratorDeleted: Subscription;
-  private subscription: Subscription;
-=======
->>>>>>> develop:src/app/features/data-concentrator-units/components/data-concentrator-units-list.component.ts
   public localeText;
   // N/A
   notAvailableText = this.staticTextService.notAvailableTekst;
@@ -248,11 +238,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
       selectAll: this.translate.instant('GRID.SELECT-ALL')
     };
 
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts
-    this.bredcrumbService.setPageName(this.headerTitle);
-=======
     this.bredcrumbService.setPageName('');
->>>>>>> develop:src/app/features/data-concentrator-units/components/data-concentrator-units-list.component.ts
 
     this.dcuConcentratorDeleted = this.eventService.eventEmitterConcentratorDeleted.subscribe((x) => {
       this.deselectAll();
@@ -496,11 +482,8 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     //
   }
 
-<<<<<<< HEAD:src/app/features/data-concentrator-units/components/data-concentrator-units.component.ts
-=======
   // TODO
 
->>>>>>> develop:src/app/features/data-concentrator-units/components/data-concentrator-units-list.component.ts
   onDelete(selectedGuid: string) {
     const params = this.dcOperationsService.getOperationRequestParam(
       selectedGuid,

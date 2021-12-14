@@ -23,11 +23,7 @@ import {
 import { DataConcentratorUnit } from '../../interfaces/data-concentrator-units/data-concentrator-unit.interface';
 import { DataConcentratorUnitsList } from '../../interfaces/data-concentrator-units/data-concentrator-units-list.interface';
 import { DcuInsertRequest } from '../../interfaces/data-concentrator-units/dcu-insert-request.interface';
-<<<<<<< HEAD
-import { DcuUpdateRequest } from '../../interfaces/data-concentrator-units/dcu-update-request.interface';
-=======
 import { DcuUpdateRequest, ValidateHostnameRequest } from '../../interfaces/data-concentrator-units/dcu-update-request.interface';
->>>>>>> develop
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
