@@ -5,7 +5,7 @@ import { DataConcentratorUnitsGridEventEmitterService } from '../../services/dat
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { DcuForm, EditDcuForm } from '../../interfaces/dcu-form.interface';
 import { Observable } from 'rxjs';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { DataConcentratorUnitsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units.service';
 import { TranslateService } from '@ngx-translate/core';

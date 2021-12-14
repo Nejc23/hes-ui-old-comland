@@ -646,7 +646,6 @@
     "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
     "SELECTED": "selected",
     "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
-    "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
     "IMPORT-FAILED": "Import failed"
   },
   "OPERATION": {
