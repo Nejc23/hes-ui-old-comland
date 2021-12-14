@@ -1,0 +1,23 @@
+.dropdown-submenu > .dropdown-menu {
+  left: auto;
+  right: 130px;
+}
+
+.meters-tab {
+  ::ng-deep .k-tabstrip-items {
+    position: fixed;
+    width: 100%;
+    z-index: 30;
+    top: 10.875rem;
+    @apply tw-bg-white;
+    margin-left: -2.5rem; // kendoUI tabs full screen line hack
+    box-shadow: 0 4px 5px -5px #6F7072;
+  }
+}
+
+.meters-tab {
+  ::ng-deep li#k-tabstrip-tab-0 {
+    margin-left: 2.5rem;
+  }
+}
+

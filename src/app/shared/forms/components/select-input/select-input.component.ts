@@ -19,6 +19,9 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() selectOptions: Codelist<number | string>[] = [];
   @Input() disabled = false;
   @Input() clearButton = true;
+  @Input() itemDisabled;
+  @Input() withDescription = false;
+  @Input() withIdInDropdown = false;
 
   @Output() selectedValueChanged: EventEmitter<any> = new EventEmitter<any>();
 
@@ -27,6 +30,18 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   selection: Codelist<number | string> = { id: null, value: this.translate.instant('COMMON.SELECT-ITEM') };
 
   constructor(private formUtils: FormsUtilsService, private translate: TranslateService) {}
+
+  get formControlValue(): number | string {
+    return this.form.get(this.property).value;
+  }
+
+  get required(): boolean {
+    return this.formUtils.hasFormControlRequiredField(this.form.get(this.property));
+  }
+
+  get formControl(): AbstractControl {
+    return this.form.get(this.property);
+  }
 
   ngOnInit() {
     if (!this.form) {
@@ -53,24 +68,12 @@ export class SelectInputComponent implements OnInit, OnDestroy {
 
   public selectionChange(value: any): void {}
 
-  get formControlValue(): number | string {
-    return this.form.get(this.property).value;
-  }
-
   getEmptySelectedValue() {
     return !this.formControlValue ? 'selected' : null;
   }
 
-  get required(): boolean {
-    return this.formUtils.hasFormControlRequiredField(this.form.get(this.property));
-  }
-
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.form.get(this.property));
-  }
-
-  get formControl(): AbstractControl {
-    return this.form.get(this.property);
   }
 
   click() {

@@ -25,7 +25,8 @@ export enum PermissionEnumerator {
   Clear_Alarms = 'Clear_Alarms',
   Assign_Templates = 'Assign_Templates',
   Activate_HLS = 'Activate_HLS',
-  Rekey = 'Rekey',
+  Rekey_Meter = 'Rekey_Meter',
+  Rekey_Concentrator = 'Rekey_Concentrator',
   Change_Password = 'Change_Password',
   View_Jobs = 'View_Jobs',
   Manage_Jobs = 'Manage_Jobs',
@@ -37,5 +38,7 @@ export enum PermissionEnumerator {
   Manage_Access_Permissions = 'Manage_Access_Permissions',
   View_Alarms = 'View_Alarms',
   Manage_Alarms = 'Manage_Alarms',
-  Read_Meter = 'Read_Meter'
+  Read_Meter = 'Read_Meter',
+  Meter_Discovery = 'Meter_Discovery',
+  Device_Import = 'Device_Import'
 }

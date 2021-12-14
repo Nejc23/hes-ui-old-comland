@@ -6,86 +6,90 @@
     <ng-container>
 
       <kendo-tabstrip (tabSelect)="onTabSelect($event);" [keepTabContent]="true">
-        <kendo-tabstrip-tab title="{{ 'FORM.BASIC' | translate }}" [selected]="true">
+        <kendo-tabstrip-tab [selected]="true" title="{{ 'FORM.BASIC' | translate }}">
           <ng-template kendoTabContent>
 
 
-      <div class="alert alert-danger alert-dismissible fade show" role="alert" *ngIf="saveError">
-        <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br/> {{saveError}}
-      </div>
-
-      <app-input-text [form]="form" [property]="nameProperty" label="name"></app-input-text>
-
-      <div class="form-row">
-        <div class="col-6">
-          <app-input-text [form]="form" [property]="idNumberProperty" label="id">
-          </app-input-text>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col-6">
-          <app-input-text [form]="form" [property]="externalIdProperty" label="external-Id">
-          </app-input-text>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="col-6">
-          <app-input-text [form]="form" [property]="ipProperty" label="ip"></app-input-text>
-        </div>
-      </div>
-
-      <app-select-input label="Vendor" [form]="form" [property]="vendorProperty" [selectOptions]="dcuVendors"
-        [disabled]="false" (selectedValueChanged)="onVendorChanged($event)">
-      </app-select-input>
-
-      <div class="form-row">
-        <div class="col-4">
-          <app-select-input label="Type" [form]="form" [property]="typeProperty" [selectOptions]="dcuTypes$ | async"
-            [disabled]="false" (selectedValueChanged)="onTypeChanged($event)">
-          </app-select-input>
-        </div>
-      </div>
-
-      <div *ngIf="credentialsVisible">
-        <div class="form-row">
-          <div class="col-6">
-            <app-input-text [form]="form" [property]="userNameProperty" label="username"></app-input-text>
-          </div>
-        </div>
-      </div>
-
-      <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
-        [disabled]="false" [allowCustomValues]="true">
-      </app-input-tag>
-
-      </ng-template>
-    </kendo-tabstrip-tab>
-    <kendo-tabstrip-tab title="{{ 'FORM.JOBS' | translate }}">
-      <ng-template kendoTabContent>
-        <div class="form-row">
-          <div class="col-12 p-0">
-            <div>
-              <app-jobs-select [jobTypes]="[1,3,4,5]"></app-jobs-select>
+            <div *ngIf="saveError" class="alert alert-danger alert-dismissible fade show" role="alert">
+              <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
             </div>
-          </div>
-        </div>
-      </ng-template>
-    </kendo-tabstrip-tab>
-  </kendo-tabstrip>
+
+            <app-input-text [form]="form" [property]="nameProperty" label="name"></app-input-text>
+
+            <div class="form-row">
+              <div class="col-6">
+                <app-input-text [form]="form" [property]="idNumberProperty" label="id">
+                </app-input-text>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-6">
+                <app-input-text [form]="form" [property]="externalIdProperty" label="external-Id">
+                </app-input-text>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="col-6">
+                <app-input-text [form]="form" [property]="hostname" label="hostname" (inputTextBlurValue)="validateHostname()"></app-input-text>
+              </div>
+            </div>
+
+            <app-select-input (selectedValueChanged)="onVendorChanged($event)" [disabled]="false" [form]="form"
+                              [property]="vendorProperty"
+                              [selectOptions]="dcuVendors" label="Vendor">
+            </app-select-input>
+
+            <div class="form-row">
+              <div class="col-4">
+                <app-select-input (selectedValueChanged)="onTypeChanged($event)" [disabled]="false" [form]="form"
+                                  [property]="typeProperty"
+                                  [selectOptions]="dcuTypes$ | async" label="Type">
+                </app-select-input>
+              </div>
+            </div>
+
+            <div *ngIf="credentialsVisible">
+              <div class="form-row">
+                <div class="col-6">
+                  <app-input-text [form]="form" [property]="userNameProperty" label="username"></app-input-text>
+                </div>
+              </div>
+            </div>
+
+            <app-input-tag [allowCustomValues]="true" [autocompleteItemsAsObjects]="dcuTags$ | async" [disabled]="false"
+                           [form]="form"
+                           [property]="tagsProperty" label="Tag">
+            </app-input-tag>
+
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab title="{{ 'FORM.JOBS' | translate }}">
+          <ng-template kendoTabContent>
+            <div class="form-row">
+              <div class="col-12 p-0">
+                <div>
+                  <app-jobs-select [jobTypes]="[1,3,4,5]"></app-jobs-select>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+      </kendo-tabstrip>
     </ng-container>
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="cancel()">{{ 'BUTTON.CANCEL' | translate }}</button>
-      <div dropdown class="btn-group dropdown">
-        <button type="submit" class="btn btn-primary" (click)="save(false)">{{ 'BUTTON.SAVE' | translate }}</button>
-        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+      <button (click)="cancel()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
+      <div class="btn-group dropdown" dropdown>
+        <button (click)="save(false)" class="btn btn-primary" type="submit">{{ 'BUTTON.SAVE' | translate }}</button>
+        <button [ngbTooltip]="tipMoreSave" aria-expanded="false" aria-haspopup="true"
+                class="btn btn-primary dropdown-toggle dropdown-toggle-split"
+                data-bs-toggle="dropdown" dropdownToggle type="button">
         </button>
         <div *dropdownMenu class="dropdown-menu dropdown-menu-end">
-          <a class="dropdown-item" (click)="save(true)">{{ 'BUTTON.SAVE-AND-ADD-ANOTHER' | translate }}</a>
+          <a (click)="save(true)" class="dropdown-item">{{ 'BUTTON.SAVE-AND-ADD-ANOTHER' | translate }}</a>
         </div>
       </div>
     </div>

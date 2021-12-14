@@ -1,0 +1,20 @@
+<div [ngClass]="{ topBorder :'gray-line-top', bottomBorder: 'gray-line'}"
+     class="tw-flex tw-justify-between tw-items-center tw-py-3">
+  <div>
+    <div class="text-normal-bold">{{ message | translate }}</div>
+    <div *ngIf="secondaryMessage"
+         class="tiny-text gray-color-dark tw-mt-1">{{ secondaryMessage | translate }}</div>
+  </div>
+
+  <div>
+    <form [formGroup]="form">
+      <kendo-switch
+        (valueChange)="switchChanged($event)"
+        [formControlName]="property"
+        [id]="controlId"
+      >
+      </kendo-switch>
+
+    </form>
+  </div>
+</div>

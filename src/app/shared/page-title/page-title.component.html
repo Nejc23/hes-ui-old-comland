@@ -1,0 +1,23 @@
+<div class="tw-inline-flex tw-items-center tw-h-full">
+  <button (click)="backButtonClicked()" *ngIf="backButton" class="small-back-button text-secondary btn-outline tw-mr-4"
+          type="button">
+    <img [src]="'assets/images/icons/arrow-left-icon.svg'" />
+  </button>
+  <div *ngIf="title" class="tw-text-black tw-text-xl">
+    {{ title | translate }}
+  </div>
+  <div *ngIf="subtitle" class="tw-text-mediumGray tw-text-xl tw-ml-2">
+    {{ subtitle | translate }}
+  </div>
+  <div *ngIf="state"
+       [ngClass]="addStateClass()"
+       class="tw-inline-flex tw-ml-4 tw-bg-opacity-20 tw-rounded tw-h-8 tw-w-24 tw-items-center tw-justify-center tw-items-center tw-capitalize tw-font-bold">
+    <!-- create classes by enum -->
+    {{ state.toLowerCase() | translate }}
+  </div>
+</div>
+
+<!--<div class="tw-inline-flex"> &lt;!&ndash; foreach tags &ndash;&gt;-->
+<!--  <app-input-tag></app-input-tag>-->
+<!--  <app-input-tag></app-input-tag>-->
+<!--</div>-->

@@ -24,7 +24,9 @@ export class ModalConfirmComponent {
   @Input() modalTitle: string;
   @Input() modalBody: string;
   @Input() btnConfirmText = 'BUTTON.CONFIRM';
+  @Input() btnCancelText = 'BUTTON.CANCEL';
   @Input() warningIcon = true;
+  @Input() hideCloseButton = false;
 
   @Input() checkboxField = '';
   @Input() checkboxLabel = '';
@@ -32,7 +34,9 @@ export class ModalConfirmComponent {
 
   @Input() secondConfirmEnabled = false;
   @Input() confirmMessage = '';
-
+  @Input() withoutCancelButton = false;
+  @Input() alertText = '';
+  @Input() dangerText = ''; // alert with exclamation icon
   showSecondConfirm = false;
 
   constructor(public activeModal: NgbActiveModal) {}
@@ -42,9 +46,10 @@ export class ModalConfirmComponent {
   }
 
   confirm() {
-    if (this.secondConfirmEnabled && this.checkboxValue == true) {
+    if (this.secondConfirmEnabled) {
       this.showSecondConfirm = true;
       this.secondConfirmEnabled = false;
+      this.activeModal.close(true);
     } else {
       this.activeModal.close(this.checkboxValue);
     }

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="mb-3" *ngIf="!edit">
   <button class="btn btn-primary" (click)="editDcu()" appHideIfPermissionUnauthorized [permission]="permissionEdit">
     <span>{{ 'COMMON.EDIT' | translate }}</span>
@@ -46,47 +47,245 @@
     <div class="col-4">
       <div><label>{{ 'FORM.STATE' | translate }}</label></div>
       <div><span>{{form.get(statusProperty).value?.value}}</span></div>
+=======
+<!-- reference Details page component -->
+<!-- tw--m-5 -> negative margin align hack -->
+<div *ngIf="data" [style.width.px]="addWidth()" class="sticky-header">
+
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+
+    <app-page-title
+      [state]="data.stateValue"
+      [subtitle]="data.typeValue"
+      [title]="data.name ? data.name : data.serialNumber"
+      class="tw-h-36 tw-mt-10 tw--m-5"
+    >
+    </app-page-title>
+
+    <div class="tw-mt-10 tw-pr-5">
+      <app-dc-operations
+        *ngIf="data"
+        [guid]="concentratorId"
+        [operationType]="componentType.OPERATION"
+        [requestModel]="null"
+        [selectedItemsCount]="1"
+        [showOperations]="true"
+        [type]="data.typeValue"
+        [state]="data.stateValue"
+        class="tw-mr-2">
+      </app-dc-operations>
+
+
+      <app-dc-operations
+      	*ngIf="data" [guid]="concentratorId"
+        [operationType]="componentType.SECURITY"
+        [requestModel]="null"
+        [selectedItemsCount]="1"
+        [showSecurities]="data.typeValue !== 'AC750'"
+        [type]="data.typeValue"
+        [state]="data.stateValue">
+
+      </app-dc-operations>
+>>>>>>> develop
     </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.TYPE' | translate }}</label></div>
-      <div><span>{{form.get(typeProperty).value?.value}}</span></div>
-    </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'FORM.MANUFACTURER' | translate }}</label></div>
-      <div><span>{{form.get(vendorProperty).value?.value}}</span></div>
-    </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-3">
-      <div><label>{{ 'FORM.IP' | translate }}</label></div>
-      <div><span>{{form.get(ipProperty).value}}</span></div>
-    </div>
-    <div class="col-1">
-        <div><label>{{ 'COMMON.PORT' | translate }}</label></div>
-        <div><span>{{form.get(portProperty).value}}</span></div>
-      </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'COMMON.ADDRESS' | translate }}</label></div>
-      <div><span>{{form.get(addressProperty).value}}</span></div>
-    </div>
-  </div>
-  <div class="form-row mb-4">
-    <div class="col-4">
-      <div><label>{{ 'COMMON.TAGS' | translate }}</label></div>
-      <div><span>{{form.get(tagsProperty).value}}</span></div>
-    </div>
-  </div>
-  <div class="form-row mb-4" *ngIf="credentialsVisible">
-    <div class="col-4">
-        <div><label>{{ 'COMMON.USERNAME' | translate }}</label></div>
-        <div><span>{{form.get(userNameProperty).value}}</span></div>
-      </div>
+
   </div>
 </div>
+
+<div *ngIf="data" class="tw-py-10 dcu-tabs">
+  <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10">
+    <!-- [keepTabContent]="false" set to false due to kendo gauges rerender issue -->
+    <kendo-tabstrip-tab [selected]="true"
+                        title="{{ 'COMMON.OVERVIEW' | translate }}">
+      <ng-template kendoTabContent>
+
+        <div class="tw-py-10">
+          <app-slide-out-component (closeButtonClickedEvent)="closeSlideOut()"
+                                   (confirmButtonClickedEvent)="update()"
+                                   [title]="'COMMON.EDIT-DETAILS'"
+                                   [visible]="openEdit">
+            <app-edit-data-concentrator-form (savedDataEvent)="refreshData()"
+                                             [concentratorId]="data.concentratorId"
+                                             [credentialsVisible]="credentialsVisible"
+                                             [form]="editForm"
+                                             [saveData]="saveData">
+            </app-edit-data-concentrator-form>
+
+          </app-slide-out-component>
+
+          <!--          <div class="tw-grid tw-grid-cols-2 xl:tw-grid-cols-3 2xl:tw-grid-cols-6 tw-gap-6 tw-py-5">-->
+
+          <!--            <app-mini-card-item [gaugeValue]="99.9" [label]="'Current'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="66.6" [label]="'24h'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [gaugeValue]="44" [label]="'48h'" [type]="miniCardItemTypeEnum.GAUGE">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--            <app-mini-card-item [chartData]="[91, 92, 83, 95, 21, 15, 99, 100, 65, 84, 73, 39, 76]"-->
+          <!--                                [label]="'Overall SLA data'"-->
+          <!--                                [type]="miniCardItemTypeEnum.CHART"-->
+          <!--                                class="tw-col-span-2">-->
+          <!--            </app-mini-card-item>-->
+
+          <!--          </div>-->
+
+          <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
+
+
+            <app-card-item (buttonClickEvent)="editButtonClicked()"
+                           [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="isEditVisible() ? 'BUTTON.EDIT' : ''"
+                           [form]="form"
+                           [paginationLimit]="7"
+                           [showMoreButton]="true" [title]="'COMMON.DETAILS'">
+            </app-card-item>
+
+            <!--            <app-card-item [loadingFailed]="true"-->
+            <!--            >-->
+            <!--            </app-card-item>-->
+
+            <!--            <app-card-item *ngIf="showMeterStatusWidget"-->
+            <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
+            <!--            </app-card-item>-->
+
+            <!--            <app-card-item [tags]="tags" [title]="'COMMON.TAGS'">-->
+            <!--            </app-card-item>-->
+
+            <!--            <app-card-item [latLang]="[46.2434, 14.4192]"-->
+            <!--                           [title]="'Address'">-->
+            <!--            </app-card-item>-->
+
+            <!-- todo columnType.ICON -->
+            <!--            <app-card-item [buttonLinkUrl]="'alarmsEvents'" [buttonWithLink]="true" [title]="'DCU.LAST-NOTIFICATIONS'">-->
+            <!--              <app-data-table [gridColumns]="eventsColumnsConfiguration"-->
+            <!--                              [gridData]="alarms"-->
+            <!--              ></app-data-table>-->
+            <!--            </app-card-item>-->
+
+            <app-card-item (buttonClickEvent)="goToJobs()"
+                           [buttonIconName]="'list-icon'"
+                           [buttonLabel]="'BUTTON.GO-TO-JOBS'"
+                           [title]="'JOB.ACTIVE-JOBS'">
+
+              <app-data-table (rowActionClickedEvent)="rowActionsClicked($event)"
+                              [gridColumns]="activeJobsColumnsConfiguration"
+                              [gridData]="activeJobs"
+                              [rowActions]="activeJobsRowActionsConfiguration"
+                              [tableClass]="'max-height-385'"></app-data-table>
+            </app-card-item>
+
+            <!--            <app-card-item *ngIf="showMeterStatusWidget" [loading]="true"-->
+            <!--                           [meterUnitData]="meterStatusData" [meterUnitTotal]="121212" [title]="'COMMON.METER-STATUS'">-->
+            <!--            </app-card-item>-->
+
+          </div>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+
+    <kendo-tabstrip-tab *ngIf="meters.length > 0" title="{{ 'COMMON.METERS' | translate }}">
+      <ng-template kendoTabContent>
+
+        <div class="tw-py-10">
+          <app-data-table (pageChangedEvent)="loadMoreItems($event)"
+                          [excelExport]="true"
+                          [excelFileName]="data.name + '_meters'"
+                          [fetchData]="true"
+                          [gridColumns]="metersColumnsConfiguration"
+                          [gridData]="meters"
+                          [pageSize]="20"
+                          [pageable]="true"
+                          [rowHeight]="44"
+                          [scrollable]="'virtual'"
+                          [skip]="0"
+                          [tableHeight]="622"
+                          [total]="metersTotal"
+                          [withSearch]="true"
+          >
+          </app-data-table>
+        </div>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+
+    <kendo-tabstrip-tab title="{{ 'COMMON.EVENTS' | translate }}">
+      <ng-template kendoTabContent>
+
+        <div *ngIf="eventsForm" class="tw-py-10">
+
+          <div class="tw-flex tw-mt-2 tw-h-14">
+            <app-date-range-picker
+              (valueChange)="loadRegistersData()"
+              [endProperty]="endDateProperty"
+              [form]="eventsForm"
+              [startProperty]="startDateProperty">
+            </app-date-range-picker>
+          </div>
+
+          <div *ngIf="events?.length > 0" class="tw-pt-10 tw-mt-10">
+            <div class="tw-inline-flex tw-justify-center tw-items-center tw-w-full">
+              <h4 *ngIf="chartVisible"
+                  class="tw-text-mediumGray tw-text-sm tw-font-normal">{{ 'COMMON.NUMBER-OF-EVENTS-FOR-RANGE' | translate }}  {{ 'COMMON.FROM' | translate | lowercase }} {{ selectedStartDate | formatDate }}
+                {{ 'COMMON.TO' | translate | lowercase }} {{ selectedEndDate | formatDate }}  </h4>
+            </div>
+
+            <app-registers-column-chart *ngIf="chartVisible"
+                                        [eventsByTimestamp]="eventsByTimestamp"
+                                        [hours]="hours"></app-registers-column-chart>
+
+            <div class="transparent-gray-line tw-flex tw-justify-center">
+              <button (click)="hideChart()" class="show-more-rounded-button">
+                <ng-container *ngIf="!chartVisible">
+                  <img [src]="'assets/images/icons/up-icon.svg'" class="tw-pr-2 tw-text-darkGray" />
+                  {{ 'COMMON.SHOW-CHART' | translate}}
+                </ng-container>
+                <ng-container *ngIf="chartVisible">
+                  <img [src]="'assets/images/icons/down-icon.svg'" class="tw-pr-2" />
+                  {{ 'COMMON.HIDE-CHART' | translate}}
+                </ng-container>
+              </button>
+            </div>
+          </div>
+
+          <!-- table height (rows number * 44) + 48px + 51px-->
+          <app-data-table
+            *ngIf="events?.length > 0"
+            [excelExport]="true"
+            [excelFileName]="data.name + '_events'"
+            [filters]="eventsFiltersConfiguration"
+            [gridColumns]="eventsColumnsConfiguration"
+            [gridData]="events"
+            [loading]="eventsLoading"
+            [pageSize]="36"
+            [pageable]="true"
+            [refresh]="false"
+            [rowHeight]="44"
+            [scrollable]="'virtual'"
+            [skip]="0"
+            [tableClass]="chartVisible ? 'with-chart visible min-height' : 'with-chart hidden min-height'"
+            [tableHeight]="chartVisible ? 322 : 563"
+            [total]="events.length"
+            [withSearch]="true"
+          >
+
+          </app-data-table>
+        </div>
+
+        <app-no-data *ngIf="!events || eventsLoading" [loading]="eventsLoading"
+                     [secondaryMessage]="'COMMON.NO-RECORDS-DATE-RANGE'"
+                     class="tw-inline-flex tw-items-center tw-justify-center tw-h-1/2 tw-w-full">
+        </app-no-data>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+  </kendo-tabstrip>
 </div>

@@ -22,6 +22,7 @@ import { DataProcessingService } from '../../../../core/repository/services/data
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 import { RegisterGroup, RegistersFilter, RegisterStatistics } from '../interfaces/data-processing-request.interface';
 import { EventsById, EventsByTimestamp } from '../interfaces/events-processing.interface';
+import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 
 @Component({
   templateUrl: 'meter-unit-registers.component.html'
@@ -75,6 +76,7 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   public eventsByTimestamp: EventsByTimestamp[];
   public eventsById: EventsById[];
+  hours = false;
   unit = '';
 
   constructor(
@@ -97,6 +99,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   get rangeProperty() {
     return 'range';
   }
+
   get startDateProperty(): string {
     return 'startDate';
   }
@@ -123,10 +126,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   get registerSearchProperty() {
     return 'registerSearch';
-  }
-
-  get datePickerText() {
-    return 'labelText';
   }
 
   changeRegisterOptionId() {
@@ -159,101 +158,18 @@ export class MeterUnitRegistersComponent implements OnInit {
 
     this.form = this.createForm();
 
-    // yesterday
-    const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
-    const endDateFormatted = moment().format(environment.dateDisplayFormat);
-
-    this.form.controls.labelText.setValue(
-      startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
-    );
     this.muService.getMeterUnit(this.deviceId).subscribe((result) => {
       this.setTitle(result.name ? result.name : result.serialNumber);
       this.setBreadcrumbs();
     });
   }
 
-  setRange(selectedRangeId: number) {
-    const date = new Date();
-    switch (selectedRangeId) {
-      case 1: {
-        // today
-        this.form.patchValue({
-          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
-          endDate: date.setMinutes(0, 0, 0)
-        });
-        this.form.patchValue({
-          endTime: ('0' + date.getHours()).slice(-2) + ':' + '00'
-        });
-        break;
-      }
-      case 2: {
-        // yesterday
-        this.form.patchValue({
-          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1),
-          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
-        });
-        this.form.patchValue({
-          endTime: '00:00'
-        });
-        break;
-      }
-      case 3: {
-        // Last 7 days
-        this.form.patchValue({
-          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 6),
-          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate())
-        });
-        this.form.patchValue({
-          endTime: '00:00'
-        });
-        break;
-      }
-      case 4: {
-        // Last 30 days
-        this.form.patchValue({
-          startDate: new Date(date.getFullYear(), date.getMonth(), date.getDate() - 29),
-          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0)
-        });
-        this.form.patchValue({
-          endTime: '00:00'
-        });
-        break;
-      }
-      case 5: {
-        // Current month
-        this.form.patchValue({
-          startDate: new Date(date.getFullYear(), date.getMonth(), 1),
-          endDate: new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours())
-        });
-        this.form.patchValue({
-          endTime: ('0' + date.getHours()).slice(-2) + ':' + '00'
-        });
-        break;
-      }
-      case 6: {
-        // Last month
-        this.form.patchValue({
-          startDate: new Date(date.getFullYear(), date.getMonth() - 1, 1),
-          endDate: new Date(date.getFullYear(), date.getMonth(), 1, 0, 0)
-        });
-        this.form.patchValue({
-          endTime: '00:00'
-        });
-        break;
-      }
-    }
-    const startDateFormatted = moment(this.form.get('startDate').value).format('DD. MM. YYYY HH:mm');
-    const endDateFormatted = moment(this.form.get('endDate').value).format('DD. MM. YYYY HH:mm');
-    this.form.controls.labelText.setValue(startDateFormatted + ' - ' + endDateFormatted);
-    this.showData(this.selectedRegister, true);
-  }
-
   setBreadcrumbs() {
     const breadcrumbs: Breadcrumb[] = [
       {
-        label: this.translate.instant('MENU.METERS'),
+        label: this.translate.instant('MENU.METER-UNITS'),
         params: {},
-        url: null
+        url: '/meterUnits'
       }
     ];
 
@@ -309,8 +225,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       [this.endTimeProperty]: ['00:00'],
       [this.showLineChartProperty]: [true, null],
       [this.showTableProperty]: [true, null],
-      [this.registerSearchProperty]: [null],
-      [this.datePickerText]: [null]
+      [this.registerSearchProperty]: [null]
     });
   }
 
@@ -323,18 +238,14 @@ export class MeterUnitRegistersComponent implements OnInit {
       return;
     }
 
-    startDate.setHours(this.form.get(this.startTimeProperty).value.split(':')[0]);
-    startDate.setMinutes(this.form.get(this.startTimeProperty).value.split(':')[1]);
-    endDate.setHours(this.form.get(this.endTimeProperty).value.split(':')[0]);
-    endDate.setMinutes(this.form.get(this.endTimeProperty).value.split(':')[1]);
-
     if (!forceRefresh && register === this.selectedRegister) {
       return;
     }
 
     this.selectedRegister = register;
-    this.startTime = moment(startDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-    this.endTime = moment(endDate).format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+    this.startTime = moment(startDate).format(dateServerFormat);
+    this.endTime = moment(endDate).format(dateServerFormat);
+
     this.registersFilter = {
       deviceId: this.deviceId,
       register: this.selectedRegister,
@@ -387,8 +298,10 @@ export class MeterUnitRegistersComponent implements OnInit {
     let outData = [];
     if (daysDiff <= 1) {
       // hourly interval
+      this.hours = true;
       outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
     } else {
+      this.hours = false;
       outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
     }
 

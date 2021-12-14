@@ -1,22 +1,43 @@
-<div class="d-flex row-actions justify-content-end" >
+<div
+  class="d-flex row-actions justify-content-end">
   <div class="btn-group-sm">
     <button
-        type="button" class="btn btn-primary m-0" (click)="toDetails()" [openDelay]="500" triggers="hover" ngbTooltip="{{'COMMON.OPEN-DETAILS' | translate }}"><i class="far fa-eye"
-        ></i></button>
+      (click)="toDetails()" [openDelay]="500" class="btn btn-primary m-0"
+      ngbTooltip="{{'COMMON.OPEN-DETAILS' | translate }}"
+      type="button"><i class="far fa-eye"
+    ></i></button>
   </div>
-  <div dropdown class="dropdown-ag-grid btn-group-sm" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]">
-    <button dropdownToggle class="btn btn-primary btn-sm" type="button"  [openDelay]="500" triggers="hover" ngbTooltip="{{'COMMON.SELECT-OPERATION' | translate }}" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+  <div *ngIf="params.data.state.toLowerCase() !== DeviceStateEnum.INSTALLING.toLocaleString().toLowerCase()"
+       [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]"
+       appHideIfAllPermissionsUnauthorized class="dropdown-ag-grid btn-group-sm"
+       dropdown>
+    <button [openDelay]="500" aria-expanded="false" aria-haspopup="true" class="btn btn-primary btn-sm"
+            data-bs-toggle="dropdown"
+            dropdownToggle id="dropdownMenuButton" ngbTooltip="{{'COMMON.SELECT-OPERATION' | translate }}"
+            triggers="hover" type="button">
       <i class="far fa-ellipsis-h"></i>
     </button>
-    <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
-      <div appHideIfPermissionUnauthorized [permission]="permissionSynchronizeTime">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onSynchronizeTime()"><span>{{'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>
+    <div (click)="$event.stopPropagation();" aria-labelledby="dropdownMenuButton"
+         class="dropdown-menu">
+      <div [permission]="permissionSynchronizeTime" appHideIfPermissionUnauthorized>
+        <a (click)="onSynchronizeTime()" class="dropdown-item"
+           href="javascript:void(0);"><span>{{'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>
       </div>
-      <div appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onFwUpgrade()"><span>{{'OPERATION.FW-UPGRADE' | translate }}</span></a>
+      <div [permission]="permissionFwUpgrade" appHideIfPermissionUnauthorized>
+        <a (click)="onFwUpgrade()" class="dropdown-item"
+           href="javascript:void(0);"><span>{{'OPERATION.FW-UPGRADE' | translate }}</span></a>
       </div>
-      <div appHideIfPermissionUnauthorized [permission]="permissionDeviceDiscovery">
-        <a class="dropdown-item" href="javascript:void(0);" (click)="onDeviceDiscovery()"><span>{{'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
+      <div [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized>
+        <a (click)="onDeviceDiscovery()" class="dropdown-item gray-light-line"
+           href="javascript:void(0);"><span>{{'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
+      </div>
+      <div [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized>
+        <a (click)="onEnableDC()" class="dropdown-item custom-hover-display"
+           href="javascript:void(0)"><span>{{ 'OPERATION.ENABLE-DC' | translate }}</span></a>
+      </div>
+      <div [permission]="permissionDeviceDiscovery" appHideIfPermissionUnauthorized>
+        <a (click)="onDisableDC()" class="dropdown-item custom-hover-display"
+           href="javascript:void(0)"><span>{{ 'OPERATION.DISABLE-DC' | translate }}</span></a>
       </div>
     </div>
   </div>

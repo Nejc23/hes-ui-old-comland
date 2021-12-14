@@ -1,6 +1,8 @@
 // codelist
+import { enumMyGridLink, importDevices } from './my-grid-link.const';
+
 export const basePath = '/api/device-inventory-ui';
-export const meterUnitStatuses = `${basePath}/meter-unit-status-codes`;
+export const meterUnitStatuses = `${basePath}/meter-unit-state-codes`;
 export const meterUnitTags = `/api/codelists/meter-unit-tags`;
 export const meterUnitTypes = `${basePath}/meter-unit-types`;
 export const meterUnitVendors = `${basePath}/meter-unit-vendor-codes`;
@@ -51,3 +53,8 @@ export const onDemandRegistersType = '/on-demand/registers/type';
 // on-demand/read-meter
 export const onDemandReadMeter = `/on-demand/read-meter`;
 export const templateGroups = `${basePath}/template-groups`;
+
+// Validations
+export const validateIpAddress = `${basePathMuConcentratorInventory}/validations/ipaddress`;
+
+export const uploadDevices = `${enumMyGridLink.inventory}${importDevices}`;

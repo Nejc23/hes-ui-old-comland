@@ -11,6 +11,8 @@ import {
 import { ToastNotificationService } from '../../../../../core/toast-notification/services/toast-notification.service';
 import { Codelist } from '../../../../../shared/repository/interfaces/codelists/codelist.interface';
 import { MeterUnitsTypeGridService } from '../../../types/services/meter-units-type-grid.service';
+import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
+import { ModalService } from '../../../../../core/modals/services/modal.service';
 
 @Component({
   templateUrl: './security-change-password.component.html'
@@ -33,7 +35,8 @@ export class SecurityChangePasswordComponent {
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private toast: ToastNotificationService,
     private formUtils: FormsUtilsService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private modalService: ModalService
   ) {
     this.passwordTypes = [
       { id: 'PW_LG', value: this.translate.instant('PLC-METER.SECURITY.PW-LG') },
@@ -46,14 +49,14 @@ export class SecurityChangePasswordComponent {
     this.form = this.createForm();
   }
 
+  get passwordTypeProperty() {
+    return 'passwordType';
+  }
+
   createForm(): FormGroup {
     return this.formBuilder.group({
       [this.passwordTypeProperty]: [this.selectedPasswordType, [Validators.required]]
     });
-  }
-
-  get passwordTypeProperty() {
-    return 'passwordType';
   }
 
   onDismiss() {
@@ -91,6 +94,13 @@ export class SecurityChangePasswordComponent {
       const successMessage = this.translate.instant('PLC-METER.SECURITY.METER-UNITS-PASSWORD');
       this.formUtils.saveForm(this.form, request, successMessage).subscribe((result) => {
         this.modal.close();
+
+        const modalRef = this.modalService.open(StatusJobComponent, { size: 'md' });
+        modalRef.componentInstance.requestId = result.requestId;
+        modalRef.componentInstance.deviceCount = this.selectedRowsCount;
+        modalRef.componentInstance.jobName = this.translate.instant('PLC-METER.SECURITY.CHANGE-PASSWORD', {
+          selectedRowsCount: this.selectedRowsCount
+        });
       });
     }
   }

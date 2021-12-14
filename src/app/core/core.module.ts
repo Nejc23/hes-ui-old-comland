@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -22,9 +22,12 @@ import { AppStoreService } from './stores/services/app-store.service';
 import { GridLayoutSessionStoreService } from './utils/services/grid-layout-session-store.service';
 import { GridSettingsCookieStoreService } from './utils/services/grid-settings-cookie-store.service';
 import { GridSettingsSessionStoreService } from './utils/services/grid-settings-session-store.service';
+import { SharedModule } from '../shared/shared.module';
+import { EventManagerService } from './services/event-manager.service';
+import { CanDeactivateGuard } from '../shared/guards/can-deactivate.guard';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule, SharedModule],
   exports: [RouterModule, HttpClientModule, FormsModule, ReactiveFormsModule],
   providers: [
     AuthService,
@@ -42,6 +45,8 @@ import { GridSettingsSessionStoreService } from './utils/services/grid-settings-
     GridSettingsSessionStoreService,
     SidebarCookieStoreService,
     GridLayoutSessionStoreService,
+    EventManagerService,
+    CanDeactivateGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HeaderInjectorInterceptor,

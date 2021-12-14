@@ -1,14 +1,44 @@
-
-    <div *ngIf="showOperations" dropdown class="btn-group" appHideIfAllPermissionsUnauthorized [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]">
-      <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-bs-toggle="dropdown"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
-      <div *dropdownMenu (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 13rem">
-        <div>
-          <a class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            (click)="onSynchronizeTime()" appHideIfPermissionUnauthorized [permission]="permissionSynchronizeTime"><span>{{ 'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>
-          <a class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            (click)="onFwUpgrade()" appHideIfPermissionUnauthorized [permission]="permissionFwUpgrade"><span>{{ 'OPERATION.FW-UPGRADE' | translate }}</span></a>
-          <a class="dropdown-item custom-hover-display" href="javascript:void(0)"
-            (click)="onDeviceDiscovery()" appHideIfPermissionUnauthorized [permission]="permissionDeviceDiscovery"><span>{{ 'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
-        </div>
-      </div>
+<div *ngIf="showSecurities && operationType === componentType.SECURITY"
+     [permissions]="[permissionManageConcentrators && permissionReKey]"
+     appHideIfAllPermissionsUnauthorized class="btn-group"
+     dropdown>
+  <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="securityDropDown"
+          type="button"><span>{{ 'OPERATION.SECURITY' | translate }}</span></button>
+  <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
+    <div>
+      <a (click)="onReKeyConcentrator()" [permission]="permissionManageConcentrators && permissionReKey"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.RE-KEY-CONCENTRATOR' | translate }}</span></a>
     </div>
+  </div>
+</div>
+
+<div *ngIf="showOperations && operationType === componentType.OPERATION"
+     [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]"
+     appHideIfAllPermissionsUnauthorized class="btn-group"
+     dropdown>
+  <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="operationsDropDown"
+          type="button"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
+  <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
+    <div>
+      <a (click)="onSynchronizeTime()" [permission]="permissionSynchronizeTime"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.SYNCHRONIZE-TIME' | translate }}</span></a>
+      <a (click)="onFwUpgrade()" [permission]="permissionFwUpgrade"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.FW-UPGRADE' | translate }}</span></a>
+      <a (click)="onDeviceDiscovery()" [permission]="permissionDeviceDiscovery"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display gray-light-line"
+         href="javascript:void(0)"><span>{{ 'OPERATION.DEVICE-DISCOVERY' | translate }}</span></a>
+      <a (click)="onEnableDC()" [permission]="permissionDeviceDiscovery"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.ENABLE-DC' | translate }}</span></a>
+      <a (click)="onDisableDC()" [permission]="permissionDeviceDiscovery"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.DISABLE-DC' | translate }}</span></a>
+      <a (click)="onDelete()" *ngIf="type" [permission]="permissionDeviceDiscovery"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'COMMON.DELETE' | translate }}</span></a>
+    </div>
+  </div>
+</div>

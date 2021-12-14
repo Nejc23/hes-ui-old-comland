@@ -1,6 +1,6 @@
 export interface DcuInsertRequest {
   concentratorId: string;
-  concentratorIp: string;
+  hostname: string;
   type: number;
   vendor: number;
   name: string;

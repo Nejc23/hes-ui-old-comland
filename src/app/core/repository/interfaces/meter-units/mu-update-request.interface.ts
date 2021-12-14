@@ -15,7 +15,7 @@ export interface MuUpdateRequest {
   serialNumber: string;
   templateId: number;
   interfaceType: number;
-  protocol: number;
+  driver: number;
   referencingType: ReferenceType;
   externalId?: string;
 }
@@ -23,5 +23,11 @@ export interface MuUpdateRequest {
 export interface MuUpdatePlcRequest {
   deviceId?: string;
   name: string;
+<<<<<<< HEAD
   externalId?: string;
+=======
+  serialNumber: string;
+  externalId?: string;
+  templateId?: number;
+>>>>>>> develop
 }

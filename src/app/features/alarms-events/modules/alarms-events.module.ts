@@ -4,9 +4,8 @@ import { GridCellManufacturerComponent } from './../alarms/components/grid/grid-
 import { SharedModule } from './../../../shared/shared.module';
 import { AlarmsEventsRoutingModule } from './../common/modules/alarms-events-routing.module';
 import { NgModule } from '@angular/core';
-import { AlarmsEventsComponent } from '../components/alarms-events.component';
+import { AlarmsEventsListComponent } from '../components/alarms-events-list.component';
 import { AlarmsComponent } from '../alarms/components/alarms.component';
-import { DateRangePickerComponent } from '../alarms/components/date-range-picker.component';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { GridCellTimestampComponent } from '../alarms/components/grid/grid-cell-timestamp.component';
 import { GridCellSourceTypeComponent } from '../alarms/components/grid/grid-cell-source-type.component';
@@ -15,9 +14,8 @@ import { GridCellAlarmProtocolComponent } from '../alarms/components/grid/grid-c
 @NgModule({
   entryComponents: [],
   declarations: [
-    AlarmsEventsComponent,
+    AlarmsEventsListComponent,
     AlarmsComponent,
-    DateRangePickerComponent,
     GridCellTimestampComponent,
     GridCellManufacturerComponent,
     GridCellAlarmProtocolComponent,

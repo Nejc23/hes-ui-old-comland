@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class GridCellParentComponent implements ICellRendererAngularComp {
   notAvailableText = this.statictextService.notAvailableTekst; // N/A
   public params: any;
+  private protocols = ['multiUtilityParent'];
 
   constructor(private statictextService: MeterUnitsTypeStaticTextService, private router: Router) {}
   // called on init
@@ -24,6 +25,10 @@ export class GridCellParentComponent implements ICellRendererAngularComp {
   }
 
   openDcuDetails() {
-    this.router.navigate([`/dataConcentratorUnits/${this.params.data.concentratorId}`]);
+    if (this.protocols.find((val) => val.toLowerCase() === this.params?.data?.driver?.toLowerCase())) {
+      this.router.navigate([`/meterUnits/details/${this.params.data.parentId}`]);
+    } else {
+      this.router.navigate([`/dataConcentratorUnits/${this.params.data.concentratorId}`]);
+    }
   }
 }

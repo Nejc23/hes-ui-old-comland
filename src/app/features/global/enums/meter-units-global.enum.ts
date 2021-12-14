@@ -1,6 +1,6 @@
 export const gridSysNameColumnsEnum = {
   deviceId: 'deviceId',
-  status: 'status',
+  state: 'state',
   type: 'type',
   vendor: 'vendor',
   nextRead: 'nextRead',
@@ -27,7 +27,7 @@ export const gridSysNameColumnsEnum = {
   readyForActivation: 'readyForActivation',
   serialNumber: 'serialNumber',
   medium: 'medium',
-  protocol: 'protocol',
+  protocolType: 'protocolType',
   instantValues: 'instantValues',
   isHls: 'isHLS',
   limiter1Normal: 'limiter1Normal',

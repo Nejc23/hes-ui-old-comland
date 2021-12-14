@@ -16,6 +16,8 @@ import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/service
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { JobsSelectComponent } from 'src/app/features/jobs/jobs-select/components/jobs-select.component';
 import { TranslateService } from '@ngx-translate/core';
+import { ValidateHostnameRequest } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-update-request.interface';
+
 @Component({
   selector: 'app-add-dcu-form',
   templateUrl: './add-dcu-form.component.html'
@@ -51,6 +53,46 @@ export class AddDcuFormComponent implements OnInit {
     this.form = this.createForm();
   }
 
+  get nameProperty() {
+    return nameOf<DcuForm>((o) => o.name);
+  }
+
+  get idNumberProperty() {
+    return nameOf<DcuForm>((o) => o.serialNumber);
+  }
+
+  get externalIdProperty() {
+    return nameOf<DcuForm>((o) => o.externalId);
+  }
+
+  get hostname() {
+    return nameOf<DcuForm>((o) => o.hostname);
+  }
+
+  get userNameProperty() {
+    return nameOf<DcuForm>((o) => o.userName);
+  }
+
+  get passwordProperty() {
+    return nameOf<DcuForm>((o) => o.password);
+  }
+
+  get confirmPasswordProperty() {
+    return nameOf<DcuForm>((o) => o.confirmPassword);
+  }
+
+  get typeProperty() {
+    return nameOf<DcuForm>((o) => o.type);
+  }
+
+  get vendorProperty() {
+    return nameOf<DcuForm>((o) => o.manufacturer);
+  }
+
+  get tagsProperty() {
+    return nameOf<DcuForm>((o) => o.tags);
+  }
+
   ngOnInit() {
     this.dcuTypes$ = this.codelistService.dcuTypeCodelist();
     this.dcuVendors$ = this.codelistService.dcuVendorCodelist();
@@ -67,7 +109,7 @@ export class AddDcuFormComponent implements OnInit {
     return this.formBuilder.group({
       [this.nameProperty]: ['', Validators.required],
       [this.idNumberProperty]: ['', Validators.required],
-      [this.ipProperty]: ['', [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]],
+      [this.hostname]: ['', Validators.required],
       [this.typeProperty]: [null, Validators.required],
       [this.userNameProperty]: [null, Validators.required],
       [this.vendorProperty]: [null, Validators.required],
@@ -81,7 +123,7 @@ export class AddDcuFormComponent implements OnInit {
       id: null,
       name: this.form.get(this.nameProperty).value,
       serialNumber: this.form.get(this.idNumberProperty).value,
-      ip: this.form.get(this.ipProperty).value,
+      hostname: this.form.get(this.hostname).value,
       tags: this.form.get(this.tagsProperty).value,
       type: this.form.get(this.typeProperty).value,
       manufacturer: this.form.get(this.vendorProperty).value,
@@ -104,7 +146,7 @@ export class AddDcuFormComponent implements OnInit {
       type: formData.type.value,
       vendor: formData.manufacturer.value,
       id: formData.serialNumber,
-      ip: formData.ip,
+      hostname: formData.hostname,
       jobStatus: '',
       lastCommunication: '',
       meters: 0,
@@ -187,46 +229,6 @@ export class AddDcuFormComponent implements OnInit {
     this.modal.close();
   }
 
-  get nameProperty() {
-    return nameOf<DcuForm>((o) => o.name);
-  }
-
-  get idNumberProperty() {
-    return nameOf<DcuForm>((o) => o.serialNumber);
-  }
-
-  get externalIdProperty() {
-    return nameOf<DcuForm>((o) => o.externalId);
-  }
-
-  get ipProperty() {
-    return nameOf<DcuForm>((o) => o.ip);
-  }
-
-  get userNameProperty() {
-    return nameOf<DcuForm>((o) => o.userName);
-  }
-
-  get passwordProperty() {
-    return nameOf<DcuForm>((o) => o.password);
-  }
-
-  get confirmPasswordProperty() {
-    return nameOf<DcuForm>((o) => o.confirmPassword);
-  }
-
-  get typeProperty() {
-    return nameOf<DcuForm>((o) => o.type);
-  }
-
-  get vendorProperty() {
-    return nameOf<DcuForm>((o) => o.manufacturer);
-  }
-
-  get tagsProperty() {
-    return nameOf<DcuForm>((o) => o.tags);
-  }
-
   onDismiss() {
     this.modal.dismiss();
   }
@@ -259,5 +261,16 @@ export class AddDcuFormComponent implements OnInit {
 
   public onTabSelect(e) {
     this.jobsSelect.sizeColumnsToFit();
+  }
+
+  validateHostname() {
+    const request: ValidateHostnameRequest = {
+      hostname: this.form.get(this.hostname).value
+    };
+    this.dcuService.validateHostname(request).subscribe((isValid) => {
+      if (!isValid) {
+        this.form.get(this.hostname).setErrors({ invalidHostname: true });
+      }
+    });
   }
 }

@@ -1,4 +1,4 @@
-image: node:latest
+image: $CI_REGISTRY/enerdat/tooling/node:latest
 
 stages:
   - install
@@ -166,26 +166,68 @@ TEST04 - myGrid:
   tags:
     - Sisrvtest04Deploy
 
+TEST05 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: test05
+  tags:
+    - sisrvtest05
+
+TEST05 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: test05
+  tags:
+    - sisrvtest05
+
+TEST05 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: test05
+  tags:
+    - sisrvtest05
+
 QA - Amera:
   <<: *deploy_amera
   environment:
-    name: qa
+    name: qa/SISRVDEVLOP04
   tags:
     - QAServer
 
 QA - HES:
   <<: *deploy_ePointHES
   environment:
-    name: qa
+    name: qa/SISRVDEVLOP04
   tags:
     - QAServer
 
 QA - myGrid:
   <<: *deploy_myGrid
   environment:
-    name: qa
+    name: qa/SISRVDEVLOP04
   tags:
     - QAServer
+
+DEVELOP03 - Amera:
+  <<: *deploy_amera
+  environment:
+    name: qa/SISRVDEVELOP03
+  tags:
+    - SISRVDEVELOP03
+
+DEVELOP03 - HES:
+  <<: *deploy_ePointHES
+  environment:
+    name: qa/SISRVDEVELOP03
+  tags:
+    - SISRVDEVELOP03
+
+DEVELOP03 - myGrid:
+  <<: *deploy_myGrid
+  environment:
+    name: qa/SISRVDEVELOP03
+  tags:
+    - SISRVDEVELOP03
 
 INNOGY01 - Amera:
   <<: *deploy_amera

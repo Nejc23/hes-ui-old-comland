@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { SidebarItem } from '../interfaces/sidebar-item.interface';
 import { VERSION } from 'src/environments/version';
 import * as moment from 'moment';
@@ -7,8 +7,7 @@ import { config } from 'src/environments/config';
 import { environment } from 'src/environments/environment';
 import { SidebarService } from 'src/app/core/base-template/services/sidebar.service';
 import { FormGroup } from '@angular/forms';
-import { transition, trigger, style, animate } from '@angular/animations';
-import { MeterTypeRoute } from '../enums/meter-type.enum';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { AuthService } from 'src/app/core/auth/services/auth.service';
 import { brand } from 'src/environments/brand/default/brand';
@@ -17,6 +16,8 @@ import { SidebarToggleService } from './services/sidebar.service';
 import { SidebarCookieStoreService } from './services/sidbebar-cookie-store.service';
 import { SidebarAnimationState } from '../consts/sidebar-animation.const';
 import { PermissionService } from '../../../core/permissions/services/permission.service';
+import { NgxTranslateDebugService } from 'ngx-translate-debug';
+import { AppConfigService } from '../../../core/configuration/services/app-config.service';
 
 @Component({
   selector: 'app-base-template',
@@ -42,6 +43,8 @@ export class BaseTemplateComponent implements OnInit {
   pageTitle = '';
 
   sidebarMenuStateCookieKey = 'sidebarMenuState';
+  detailsPage = false;
+  translationsDebugMode = false;
 
   constructor(
     private sidebarService: SidebarService,
@@ -53,7 +56,8 @@ export class BaseTemplateComponent implements OnInit {
     private sidebarToggleService: SidebarToggleService,
     private route: Router,
     private sidebarCookieService: SidebarCookieStoreService,
-    private permissionService: PermissionService
+    private permissionService: PermissionService,
+    public translateDebugService: NgxTranslateDebugService
   ) {
     this.app = {
       layout: {
@@ -104,27 +108,6 @@ export class BaseTemplateComponent implements OnInit {
     //   this.fillConfiguration();
   }
 
-  fillMeterUnits() {
-    const sidebarItems = this.sidebarService.getSidebarItems();
-    this.codeList.meterUnitTypeCodelist().subscribe((list) => {
-      if (list && list.length > 0) {
-        list.forEach((element) => {
-          const newElement = {
-            title: `${element.value}`,
-            routeLink: `/${MeterTypeRoute.meterUnits}/${element.id}`,
-            hasChildren: false,
-            children: []
-          };
-          sidebarItems[1].children.push(newElement);
-          sidebarItems[1].hasChildren = true;
-        });
-
-        this.sidebarItems = [...this.sidebarItems]; // just to udpate items in child component
-        this.sidebarMeterUnitsItems = sidebarItems;
-      }
-    });
-  }
-
   /* fillConfiguration() {
     this.sidebarConfigurationItems = this.sidebarService.getSidebarConfigurationItems();
   }*/
@@ -133,7 +116,7 @@ export class BaseTemplateComponent implements OnInit {
     // this.fillMeterUnits();
     // this.languages$ = languages;
     this.version = VERSION.version + ' - ' + VERSION.hash;
-
+    this.translationsDebugMode = AppConfigService.settings?.apiServer?.translationsDebug;
     // if (this.auth.user.profile != null && this.auth.user.profile.company_name.length > 0) {
     //   this.organisation = this.auth.user.profile.company_name;
     // }
@@ -190,6 +173,7 @@ export class BaseTemplateComponent implements OnInit {
 
     this.sidebarCookieService.setSidebarLayout(this.sidebarMenuStateCookieKey, sidebarState);
   }
+
   /*  get companyIdProperty() {
     return 'companyId';
   }*/

@@ -14,7 +14,7 @@ import localeSl from '@angular/common/locales/global/sl';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateParser } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import '@progress/kendo-angular-intl/locales/cs/all';
 import '@progress/kendo-angular-intl/locales/de/all';
@@ -28,6 +28,10 @@ import { AppConfigService } from './core/configuration/services/app-config.servi
 import { CoreModule } from './core/core.module';
 import { UserModule } from './features/users/modules/user.module';
 import { SharedModule } from './shared/shared.module';
+import { NgxTranslateDebugParser } from 'ngx-translate-debug';
+import { ApiModule as TimeOfUseApiModule } from './api/time-of-use/api.module';
+import { environment } from 'src/environments/environment';
+
 registerLocaleData(localeSl, 'sl', localeSlExtra);
 registerLocaleData(localeCz, 'cs', localeCzExtra);
 registerLocaleData(localeDe, 'de', localeDeExtra);
@@ -69,12 +73,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     UserModule,
     CoreModule.forRoot(),
     SharedModule,
+    TimeOfUseApiModule.forRoot({ rootUrl: environment.apiUrl }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateModule,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
+      parser: { provide: TranslateParser, useClass: NgxTranslateDebugParser },
       // TODO
       // missingTranslationHandler: {
       //   provide: MissingTranslationHandler,
@@ -84,6 +90,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       defaultLanguage: 'en'
     })
   ],
+  exports: [],
 
   bootstrap: [AppComponent]
 })

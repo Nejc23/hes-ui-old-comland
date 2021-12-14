@@ -8,7 +8,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateLoader, TranslateModule, TranslateParser } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CdTimerModule } from 'angular-cd-timer';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -18,7 +18,11 @@ import { DataConcentratorUnitsSelectComponent } from '../features/data-concentra
 import { DcuFwUpgradeComponent } from '../features/data-concentrator-units/common/components/dcu-fw-upgrade.component';
 import { AddDcuFormComponent } from '../features/data-concentrator-units/components/add-dcu-form/add-dcu-form.component';
 import { DeleteDcuFormComponent } from '../features/data-concentrator-units/components/delete-dcu-form/delete-dcu-form.component';
+<<<<<<< HEAD
 import { EditDcuFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-dcu-form.component';
+=======
+import { EditDataConcentratorFormComponent } from '../features/data-concentrator-units/components/edit-dcu-form/edit-data-concentrator-form.component';
+>>>>>>> develop
 import { SaveViewFormComponent } from '../features/data-concentrator-units/components/save-view-form/save-view-form.component';
 import { ActiveJobsListComponent } from '../features/jobs/components/active-jobs-list/active-jobs-list.component';
 import { AlarmNotificationRulesComponent } from '../features/jobs/components/scheduler-job/alarm-notification-rules.component';
@@ -33,7 +37,7 @@ import { PlcMeterRelaysConnectComponent } from '../features/meter-units/common/c
 import { PlcMeterRelaysSetModeComponent } from '../features/meter-units/common/components/plc-meter-relays/plc-meter-relays-set-mode.component';
 import { PlcMeterSetDisplaySettingsComponent } from '../features/meter-units/common/components/plc-meter-set-display-settings/plc-meter-set-display-settings.component';
 import { PlcMeterTemplatesImportComponent } from '../features/meter-units/common/components/plc-meter-templates-import/plc-meter-templates-import.component';
-import { PlcMeterTouConfigImportComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/plc-meter-tou-config-import.component';
+import { TouConfigurationComponent } from '../features/meter-units/common/components/plc-meter-tou-config-import/tou-configuration.component';
 import { PlcMeterTouConfigComponent } from '../features/meter-units/common/components/plc-meter-tou-config/plc-meter-tou-config.component';
 import { PlcReadRegistersComponent } from '../features/meter-units/common/components/plc-read-meter/plc-read-registers.component';
 import { PopoverInstantValuesComponent } from '../features/meter-units/popover/popover-instant-values.component';
@@ -64,7 +68,6 @@ import { SidebarComponent } from './base-template/components/sidebar.component';
 import { TopFixedNavComponent } from './base-template/components/top-fixed-nav.component';
 import { SidebarDropdownDirective } from './base-template/directives/sidebar-dropdown.directive';
 import { BreadcrumbsModule } from './breadcrumbs/breadcrumbs.module';
-import { CardComponent } from './card/components/card.component';
 import { NumberOnlyDirective } from './directives/number-only.directive';
 import { DisableIfActionUnauthorizedDirective } from './directives/permissions/disable-if-action-unauthorized.directive';
 import { DisableIfAuthorizedReadonlyDirective } from './directives/permissions/disable-if-authorized-readonly.directive';
@@ -89,6 +92,33 @@ import { GridCellLinkComponent } from './popover/components/grid-custom-componen
 import { SchedulerActiveJobsComponent } from './popover/components/scheduler-active-jobs/scheduler-active-jobs.component';
 import { ToastComponent } from './toast-notification/components/toast.component';
 import { LocaleDatePipe } from './utils/pipes/locale-date.pipe';
+import { CardItemComponent } from './card-item/card-item.component';
+import { PageTitleComponent } from './page-title/page-title.component';
+import { PageLayoutComponent } from './page-layout/page-layout.component';
+import { TagElementComponent } from './tag-element/tag-element.component';
+import { CircularGaugeModule } from '@progress/kendo-angular-gauges';
+import { MiniCardItemComponent } from './mini-card-item/mini-card-item.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { ExcelModule, GridModule } from '@progress/kendo-angular-grid';
+import { DataTableComponent } from './data-table/data-table.component';
+import { SlideOutComponentComponent } from './slide-out-component/slide-out-component.component';
+import { NoDataComponent } from './no-data/no-data.component';
+import { SecurityRekeyConcentratorComponent } from '../features/data-concentrator-units/components/security/security-rekey-concentrator.component';
+import { NgxTranslateDebugParser } from 'ngx-translate-debug';
+import { ShowMoreComponent } from './show-more/show-more.component';
+import { LabelWithSwitchComponent } from './label-with-switch/label-with-switch.component';
+import { ImportDevicesComponent } from '../features/meter-units/common/components/import-devices/import-devices.component';
+import { TouConfigMenuComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-menu/tou-config-menu.component';
+import { TouConfigDayComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-day/tou-config-day.component';
+import { TouConfigWeekComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-week/tou-config-week.component';
+import { TouConfigSeasonComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-season/tou-config-season.component';
+import { TouConfigSpecialDaysComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-special-days/tou-config-special-days.component';
+import { TouConfigSummaryComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-summary/tou-config-summary.component';
+import { TouConfigBasicComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-basic/tou-config-basic.component';
+import { TouConfigListComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-list/tou-config-list.component';
+import { AddTimeUnitComponent } from '../features/meter-units/common/components/plc-meter-tou-config/add-time-unit/add-time-unit.component';
+import { LabelModule } from '@progress/kendo-angular-label';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -109,7 +139,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     CustomFormsModule,
     HeaderTitleComponent,
     ToastComponent,
-    CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
     NgbModule,
@@ -117,7 +146,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
+<<<<<<< HEAD
     EditDcuFormComponent,
+=======
+    EditDataConcentratorFormComponent,
+>>>>>>> develop
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -138,7 +171,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AutoRefreshComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
-    PlcMeterTouConfigImportComponent,
+    TouConfigurationComponent,
     PlcMeterTemplatesImportComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
@@ -162,7 +195,29 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlarmNotificationRulesComponent,
     PlcReadRegistersComponent,
     StatusJobComponent,
-    ActiveJobsListComponent
+    ActiveJobsListComponent,
+    PageTitleComponent,
+    CardItemComponent,
+    MiniCardItemComponent,
+    NgxChartsModule,
+    LeafletModule,
+    GridModule,
+    DataTableComponent,
+    SlideOutComponentComponent,
+    NoDataComponent,
+    ShowMoreComponent,
+    LabelWithSwitchComponent,
+    ImportDevicesComponent,
+    TouConfigMenuComponent,
+    TouConfigBasicComponent,
+    TouConfigDayComponent,
+    TouConfigWeekComponent,
+    TouConfigSeasonComponent,
+    TouConfigSpecialDaysComponent,
+    TouConfigSummaryComponent,
+    TouConfigListComponent,
+    AddTimeUnitComponent,
+    ImportDevicesComponent
   ],
   imports: [
     CommonModule,
@@ -175,6 +230,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule,
     CustomFormsModule,
     BreadcrumbsModule,
+    PipesModule,
     AgGridModule.withComponents([
       GridCellActiveJobStatusComponent,
       GridCellLinkComponent,
@@ -195,9 +251,16 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       },
+      parser: { provide: TranslateParser, useClass: NgxTranslateDebugParser },
       extend: true,
       defaultLanguage: 'en'
-    })
+    }),
+    CircularGaugeModule,
+    NgxChartsModule,
+    LeafletModule,
+    GridModule,
+    ExcelModule,
+    LabelModule
   ],
   declarations: [
     BaseTemplateComponent,
@@ -210,7 +273,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
+<<<<<<< HEAD
     EditDcuFormComponent,
+=======
+    EditDataConcentratorFormComponent,
+>>>>>>> develop
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -220,7 +287,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
     ToastComponent,
-    CardComponent,
     ModalTemplateComponent,
     ModalConfirmComponent,
     WidgetSettingsFormDirective,
@@ -239,7 +305,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     GridCellLinkComponent,
     ActiveJobComponent,
     SchedulerActiveJobsComponent,
-    PlcMeterTouConfigImportComponent,
+    TouConfigurationComponent,
     PlcMeterTemplatesImportComponent,
     GridSelectionHeaderComponent,
     GridSelectionHeaderScrollableComponent,
@@ -271,14 +337,40 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
-    AddJobComponent
+    AddJobComponent,
+    CardItemComponent,
+    PageTitleComponent,
+    PageLayoutComponent,
+    TagElementComponent,
+    MiniCardItemComponent,
+    DataTableComponent,
+    SlideOutComponentComponent,
+    NoDataComponent,
+    SecurityRekeyConcentratorComponent,
+    ShowMoreComponent,
+    LabelWithSwitchComponent,
+    ImportDevicesComponent,
+    TouConfigMenuComponent,
+    TouConfigBasicComponent,
+    TouConfigDayComponent,
+    TouConfigWeekComponent,
+    TouConfigSeasonComponent,
+    TouConfigSpecialDaysComponent,
+    TouConfigSummaryComponent,
+    TouConfigListComponent,
+    AddTimeUnitComponent,
+    ImportDevicesComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
     SaveViewFormComponent,
     AddDcuFormComponent,
     DeleteDcuFormComponent,
+<<<<<<< HEAD
     EditDcuFormComponent,
+=======
+    EditDataConcentratorFormComponent,
+>>>>>>> develop
     SchedulerJobComponent,
     PlcMeterTouConfigComponent,
     PlcMeterFwUpgradeComponent,
@@ -287,7 +379,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     RegistersSelectComponent,
     DataConcentratorUnitsSelectComponent,
     TouConfigSelectComponent,
-    PlcMeterTouConfigImportComponent,
+    TouConfigurationComponent,
     PlcMeterTemplatesImportComponent,
     PlcMeterBreakerModeComponent,
     PlcMeterRelaysConnectComponent,
@@ -304,7 +396,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
     AlarmNotificationRulesComponent,
-    PlcReadRegistersComponent
+    PlcReadRegistersComponent,
+    SecurityRekeyConcentratorComponent,
+    ImportDevicesComponent
   ],
   providers: [AgGridSharedFunctionsService]
 })

@@ -1,6 +1,9 @@
+import { DeviceState } from '../meter-units/meter-unit-details.interface';
+
 export interface DataConcentratorUnit {
   concentratorId: string;
-  statusValue: string;
+  hostname: string;
+  stateValue: DeviceState;
   statusId: number;
   name: string;
   typeValue: string;
@@ -9,13 +12,22 @@ export interface DataConcentratorUnit {
   manufacturerId?: number;
   serialNumber: string;
   externalId?: string;
-  ip: string;
   tags: string;
   address: string;
-  port: string;
   mac: string;
   username: string;
   password: string;
   latitude?: number;
   longitude?: number;
+  plcStatus?: ConcentratorStatus;
+  firstInstallDate?: string;
+  timeZoneName?: string;
+}
+
+export enum ConcentratorStatus {
+  UNKNOWN = 'unknown',
+  ACTIVE = 'active',
+  INACTIVE = 'inactive',
+  MOUNTED = 'mounted',
+  DELETED = 'deleted'
 }

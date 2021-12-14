@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MeterUnitDetailsComponent } from '../../details/components/meter-unit-details.component';
-import { MeterUnitsOverviewComponent } from '../../overview/components/meter-units-overview.component';
 import { RegistersChartComponent } from '../../registers/components/chart/registers-chart.component';
 import { RegistersColumnChartComponent } from '../../registers/components/chart/registers-column-chart.component';
 import { RegistersStatisticsComponent } from '../../registers/components/statistics/registers-statistics.component';
@@ -28,7 +27,7 @@ import { GridCellVendorComponent } from '../../types/components/grid-custom-comp
 import { GridCellTimeOfUseIdComponent } from '../../types/components/grid-custom-components/grid-cell-time-of-use-id.component';
 import { GridCellThresholdComponent } from '../../types/components/grid-custom-components/grid-cell-threshold.component';
 import { GridCellUnitComponent } from '../../registers/components/grid/grid-custom-components/grid-cell-unit.component';
-import { MeterUnitsTypeComponent } from '../../types/components/meter-units-type.component';
+import { MeterUnitsListComponent } from '../../types/components/meter-units-list.component';
 import { GridSelectionHeaderComponent } from '../../types/components/grid-custom-components/grid-selection-header.component';
 import { MeterUnitRegistersComponent } from '../../registers/components/meter-unit-registers.component';
 import { RegistersPieChartComponent } from '../../registers/components/chart/registers-pie-chart.component';
@@ -36,16 +35,18 @@ import { RegistersGridComponent } from '../../registers/components/grid/register
 import { GridCellDateComponent } from '../../registers/components/grid/grid-custom-components/grid-cell-date.component';
 import { GridCellProtocolComponent } from '../../types/components/grid-custom-components/grid-cell-protocol.component';
 import { GridCellMediumComponent } from '../../types/components/grid-custom-components/grid-cell-medium.component';
-import { AddMuFormComponent } from '../components/add-mu-form/add-mu-form.component';
+import { AddMeterUnitFormComponent } from '../components/add-mu-form/add-meter-unit-form.component';
 import { GridCellInstantValuesComponent } from '../../types/components/grid-custom-components/grid-cell-instant-values.component';
 import { MeterUnitsRoutingModule } from './meter-units-routing.module';
 import { PipesModule } from '../../../../shared/pipes/pipes.module';
+import { EditMeterUnitFormComponent } from '../components/edit-mu-form/edit-meter-unit-form.component';
+import { ErrorMessageModalComponent } from '../components/import-devices/error-messages-modal/error-message-modal.component';
+import { TouConfigurationImportComponent } from '../components/plc-meter-tou-config-import/tou-configuration-import.component';
 
 @NgModule({
   entryComponents: [],
   declarations: [
-    MeterUnitsOverviewComponent,
-    MeterUnitsTypeComponent,
+    MeterUnitsListComponent,
     // AllForJobComponent,
     ActionFormComponent,
     GridSelectionHeaderComponent,
@@ -77,11 +78,15 @@ import { PipesModule } from '../../../../shared/pipes/pipes.module';
     MeterUnitDetailsComponent,
     GridCellProtocolComponent,
     GridCellMediumComponent,
-    AddMuFormComponent,
+    AddMeterUnitFormComponent,
     GridCellInstantValuesComponent,
     GridCellThresholdComponent,
-    GridCellUnitComponent
+    GridCellUnitComponent,
+    EditMeterUnitFormComponent,
+    ErrorMessageModalComponent,
+    TouConfigurationImportComponent
   ],
+  exports: [RegistersColumnChartComponent],
   imports: [
     SharedModule,
     MeterUnitsRoutingModule,

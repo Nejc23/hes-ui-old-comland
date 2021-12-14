@@ -5,14 +5,20 @@
   </label>
   <kendo-dropdownlist [name]="property"
     [disabled]="disabled"
-    class="form-control"
     isRequired="false"
     [formControlName]="property"
     [data]="selectOptions"
-    [textField]="'value'"
+    [textField]="withDescription ? 'id' : 'value'"
     [valueField]="'id'"
     [clearButton]="clearButton"
   >
+    <ng-template *ngIf="withDescription" kendoMultiSelectItemTemplate let-dataItem>
+      <div class="tw-p-0">
+        <div class="tw-text-black">{{ dataItem.id }}</div>
+        <div class="tw-text-darkGray tw-text-xs">{{ dataItem.value }}</div>
+      </div>
+    </ng-template>
+
   </kendo-dropdownlist>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">

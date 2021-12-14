@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
 import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
 import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
@@ -5,13 +6,18 @@ import { filterSortOrderEnum } from './../../../../features/global/enums/filter-
 import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
 import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
 import { Injectable } from '@angular/core';
+=======
+>>>>>>> develop
 import { HttpRequest } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { capitalize } from 'lodash';
 import { Observable } from 'rxjs';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
-import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
-import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
-import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
-import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
+import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
+import { MuUpdateForm } from 'src/app/features/meter-units/types/interfaces/mu-update-form.interface';
+import { v4 as uuidv4 } from 'uuid';
 import {
   device,
   meterUnits,
@@ -19,17 +25,27 @@ import {
   meterUnitsForJob,
   meterUnitsLayout,
   removeMeterUnitsFromJob,
+<<<<<<< HEAD
   touConfigImport
+=======
+  touConfigImport,
+  validateIpAddress
+>>>>>>> develop
 } from '../../consts/meter-units.const';
-import { v4 as uuidv4 } from 'uuid';
-import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
-import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
+import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
+import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { MeterUnitDetails } from '../../interfaces/meter-units/meter-unit-details.interface';
-import { capitalize } from 'lodash';
-import { filterOperationEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
-import { MuForm } from 'src/app/features/meter-units/types/interfaces/mu-form.interface';
+import { RequestMeterUnitsForJob, ResponseMeterUnitsForJob } from '../../interfaces/meter-units/meter-units-for-job.interface';
+import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layout.interface';
+import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
+import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 import { MuUpdatePlcRequest, MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
+import { ValidateIpAddressRequest } from '../../interfaces/meter-units/validate-ip-address-request';
+import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
+import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
+import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
+import { MuCreateRequest } from './../../interfaces/meter-units/mu-create.interface';
+import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -144,7 +160,7 @@ export class MeterUnitsService {
       manufacturer: payload.manufacturer?.id,
       templateId: payload.template?.id,
       interfaceType: payload.communicationType,
-      protocol: 2, // DLMS
+      driver: 2, // DLMS
       medium: 1, // ELECTRICITY
       jobIds: payload.jobIds,
       ip: payload.ip,
@@ -198,9 +214,13 @@ export class MeterUnitsService {
       ip: payload.ip,
       port: payload.port,
       serialNumber: payload.serialNumber,
-      templateId: payload.template.id,
+      templateId: payload.template?.id ? payload.template?.id : null,
       interfaceType: payload.communicationType,
+<<<<<<< HEAD
       protocol: payload.protocol,
+=======
+      driver: payload.driver,
+>>>>>>> develop
       referencingType: payload.referencingType,
       externalId: payload.externalId
     };
@@ -241,7 +261,13 @@ export class MeterUnitsService {
   updateMuPlcForm(payload: MuUpdatePlcRequest): Observable<string> {
     const muRequest: MuUpdatePlcRequest = {
       name: payload.name,
+<<<<<<< HEAD
       externalId: payload.externalId
+=======
+      serialNumber: payload.serialNumber,
+      externalId: payload.externalId,
+      templateId: payload.templateId
+>>>>>>> develop
     };
     return this.updateMuPlc(payload.deviceId, muRequest);
   }
@@ -260,6 +286,19 @@ export class MeterUnitsService {
 
   updateMuPlcRequest(deviceId: string, payload: MuUpdatePlcRequest): HttpRequest<any> {
     return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
+  }
+
+  validateIpAddress(ipAddress: string, deviceId: string, interfaceType: number): Observable<string> {
+    const request: ValidateIpAddressRequest = {
+      ipAddress: ipAddress,
+      deviceId: deviceId,
+      interfaceType: interfaceType
+    };
+    return this.repository.makeRequest(this.validateIpAddressRequest(request));
+  }
+
+  validateIpAddressRequest(request: ValidateIpAddressRequest): HttpRequest<any> {
+    return new HttpRequest('POST', validateIpAddress, request);
   }
 
   getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {
@@ -287,10 +326,10 @@ export class MeterUnitsService {
     // create filter object
     if (param.filterModel) {
       requestParam.filter = [];
-      if (param.filterModel.statuses && param.filterModel.statuses.length > 0) {
-        param.filterModel.statuses.map((row) =>
+      if (param.filterModel.states && param.filterModel.states.length > 0) {
+        param.filterModel.states.map((row) =>
           requestParam.filter.push({
-            propName: capitalize(gridSysNameColumnsEnum.status),
+            propName: capitalize(gridSysNameColumnsEnum.state),
             propValue: row.id.toString(),
             filterOperation: filterOperationEnum.equal
           })
@@ -345,7 +384,7 @@ export class MeterUnitsService {
       if (param.filterModel.protocol && param.filterModel.protocol.length > 0) {
         param.filterModel.protocol.map((row) =>
           requestParam.filter.push({
-            propName: capitalize(gridSysNameColumnsEnum.protocol),
+            propName: capitalize(gridSysNameColumnsEnum.protocolType),
             propValue: row.id.toString(),
             filterOperation: filterOperationEnum.equal
           })

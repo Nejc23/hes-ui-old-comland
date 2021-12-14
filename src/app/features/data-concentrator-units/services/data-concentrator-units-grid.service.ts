@@ -80,13 +80,13 @@ export class DataConcentratorUnitsGridService {
         resizable: false
       },
       {
-        field: 'status',
-        headerName: this.translate.instant('GRID.STATUS'),
+        field: 'state',
+        headerName: this.translate.instant('GRID.STATE'),
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: this.translate.instant('GRID.STATUS'),
+        headerTooltip: this.translate.instant('GRID.STATE'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
@@ -116,13 +116,13 @@ export class DataConcentratorUnitsGridService {
         resizable: false
       },
       {
-        field: 'ip',
-        headerName: this.translate.instant('GRID.IP'),
+        field: 'hostname',
+        headerName: this.translate.instant('GRID.HOSTNAME'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: this.translate.instant('GRID.IP'),
+        headerTooltip: this.translate.instant('GRID.HOSTNAME'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
@@ -304,31 +304,17 @@ export class DataConcentratorUnitsGridService {
     //  this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
-  };
-
-  private onSortChanged = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
-  };
-
-  private onColumnVisible = (params) => {
-    // send to subscribers the visibility of columns
-    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
-  };
-
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
   }
+
   public getCookieDataSortModel() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }
 
   public checkIfFilterModelAndCookieAreSame(sessionFilter: DcuLayout, requestModel: GridFilterParams) {
     if (
-      JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.statesFilter) === JSON.stringify(requestModel.states) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.typesFilter) === JSON.stringify(requestModel.types) &&
@@ -358,8 +344,6 @@ export class DataConcentratorUnitsGridService {
     return result;
   }
 
-  // get stored grid settings from session configuration
-  // ---------------------------------------------------------
   // is selected all
   public getSessionSettingsSelectedAll() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -382,6 +366,9 @@ export class DataConcentratorUnitsGridService {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.selectedRows;
   }
+
+  // get stored grid settings from session configuration
+  // ---------------------------------------------------------
 
   // set selected rows
   public setSessionSettingsSelectedRows(selectedRow: any) {
@@ -510,6 +497,21 @@ export class DataConcentratorUnitsGridService {
   getAllDcOperationRequestIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllMyGridLinkRequestIds(this.gridName);
   }
+
+  private onColumnMoved = (params) => {
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
+  };
+
+  private onSortChanged = (params) => {
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
+
+  private onColumnVisible = (params) => {
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
+  };
 }
 
 // extra functions for grid

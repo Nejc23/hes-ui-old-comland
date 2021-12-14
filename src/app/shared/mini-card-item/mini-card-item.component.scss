@@ -1,0 +1,40 @@
+.mini-card-item-chart ::ng-deep .k-chart, .k-stockchart {
+  height: 135px;
+  //height: 300px;
+  //min-width: 400px;
+}
+
+
+.mini-card-item-chart ::ng-deep .k-arcgauge-label {
+  @apply tw-font-bold;
+}
+
+.mini-card-item {
+  // @apply tw-w-52;
+  @apply tw-h-40;
+  @apply tw-border-lightGray;
+  @apply tw-border;
+  @apply tw-border-solid;
+  @apply tw-rounded;
+}
+
+.mini-card-item-label {
+  @apply tw-text-darkGray;
+  @apply tw-font-medium;
+  @apply tw-text-xs;
+  @apply tw-items-center;
+  @apply tw-text-center;
+  // @apply tw-h-11;
+  @apply tw-flex;
+  @apply tw-justify-center;
+}
+
+.gauge-number {
+  @apply tw-text-xl;
+  @apply tw-font-bold;
+}
+
+.gauge-percentage {
+  @apply tw-text-xs;
+  @apply tw-pt-2;
+}

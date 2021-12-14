@@ -12,7 +12,7 @@ import { DateTimeRange } from '../../../../../shared/forms/interfaces/date-time-
 import * as _ from 'lodash';
 import { RegistersSelectService } from '../../../../../core/repository/services/registers-select/registers-select.service';
 import * as moment from 'moment';
-import { dateOnlyServerFormat } from '../../../../../shared/forms/consts/date-format';
+import { dateServerFormat } from '../../../../../shared/forms/consts/date-format';
 import { StatusJobComponent } from '../../../../jobs/components/status-job/status-job.component';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
 import {
@@ -81,17 +81,6 @@ export class PlcReadRegistersComponent implements OnInit {
     );
   }
 
-  createForm(): FormGroup {
-    return this.formBuilder.group({
-      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
-      [this.endDateProperty]: [moment(), Validators.required],
-      [this.startTimeProperty]: ['00:00'],
-      [this.endTimeProperty]: ['00:00'],
-      [this.searchProperty]: [''],
-      [this.labelTextProperty]: ['', Validators.required]
-    });
-  }
-
   get startTimeProperty(): string {
     return 'startTime';
   }
@@ -114,6 +103,17 @@ export class PlcReadRegistersComponent implements OnInit {
 
   get endDateProperty(): string {
     return 'endDate';
+  }
+
+  createForm(): FormGroup {
+    return this.formBuilder.group({
+      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
+      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startTimeProperty]: ['00:00'],
+      [this.endTimeProperty]: ['00:00'],
+      [this.searchProperty]: [''],
+      [this.labelTextProperty]: ['', Validators.required]
+    });
   }
 
   ngOnInit() {
@@ -166,16 +166,8 @@ export class PlcReadRegistersComponent implements OnInit {
       return;
     }
 
-    const startDate =
-      moment(this.form.controls.startDate.value, environment.dateDisplayFormat).format(dateOnlyServerFormat) +
-      ' ' +
-      this.form.controls.startTime.value +
-      ':00';
-    const endDate =
-      moment(this.form.controls.endDate.value, environment.dateDisplayFormat).format(dateOnlyServerFormat) +
-      ' ' +
-      this.form.controls.endTime.value +
-      ':00';
+    const startDate = moment(this.form.controls.startDate.value, environment.dateDisplayFormat).format(dateServerFormat);
+    const endDate = moment(this.form.controls.endDate.value, environment.dateDisplayFormat).format(dateServerFormat);
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);

@@ -10,7 +10,7 @@ $white: #fff !default;
 $gray-100: #F8F8FA !default;
 $gray-200: #F2F3F7 !default;
 $gray-300: #EAECF2 !default;
-$gray-400: #CED2D9 !default; // inputs border color
+$gray-400: #CED2D9 !default; // inputs border color $lightGray
 $gray-500: #ADB2BD !default;
 $gray-600: #6C717D !default;
 $gray-700: #494E57 !default;
@@ -21,15 +21,15 @@ $black: #000 !default;
 $grays: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $grays: map-merge(("100": $gray-100,
-    "200": $gray-200,
-    "300": $gray-300,
-    "400": $gray-400,
-    "500": $gray-500,
-    "600": $gray-600,
-    "700": $gray-700,
-    "800": $gray-800,
-    "900": $gray-900),
-  $grays);
+        "200": $gray-200,
+        "300": $gray-300,
+        "400": $gray-400,
+        "500": $gray-500,
+        "600": $gray-600,
+        "700": $gray-700,
+        "800": $gray-800,
+        "900": $gray-900),
+        $grays);
 
 $blue: #007bff !default;
 $indigo: #6610f2 !default;
@@ -45,29 +45,30 @@ $cyan: #17a2b8 !default;
 $colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $colors: map-merge(("blue": $blue,
-    "indigo": $indigo,
-    "purple": $purple,
-    "pink": $pink,
-    "red": $red,
-    "orange": $orange,
-    "yellow": $yellow,
-    "green": $green,
-    "teal": $teal,
-    "cyan": $cyan,
-    "white": $white,
-    "gray": $gray-600,
-    "gray-dark": $gray-800),
-  $colors);
+        "indigo": $indigo,
+        "purple": $purple,
+        "pink": $pink,
+        "red": $red,
+        "orange": $orange,
+        "yellow": $yellow,
+        "green": $green,
+        "teal": $teal,
+        "cyan": $cyan,
+        "white": $white,
+        "gray": $gray-600,
+        "gray-dark": $gray-800),
+        $colors);
 
-$primary: #981D78 !default;
-$secondary:  #053876!default;
-$success: #37A350 !default;
-$info: #47A8BD !default;
-$warning: #E9BD4A !default;
-$danger: #E43458 !default;
+$primary: #981D78 !default; // darkPurple
+$secondary: #053876 !default; // darkBlue
+$success: #37A350 !default; // ok green
+$info: #47A8BD !default; // blue
+$warning: #E9BD4A !default; // meh yellow
+$danger: #E43458 !default; // bad red
 $light: $gray-300 !default;
 $dark: $gray-800 !default;
 
+$lightGray: #CED2D9;
 $lightestGray: #F4F6F9;
 $mediumGray: #A9ABAF;
 $darkGray: #6F7072;
@@ -75,14 +76,14 @@ $darkGray: #6F7072;
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $theme-colors: map-merge(("primary": $primary,
-    "secondary": $secondary,
-    "success": $success,
-    "info": $info,
-    "warning": $warning,
-    "danger": $danger,
-    "light": $light,
-    "dark": $dark),
-  $theme-colors);
+        "secondary": $secondary,
+        "success": $success,
+        "info": $info,
+        "warning": $warning,
+        "danger": $danger,
+        "light": $light,
+        "dark": $dark),
+        $theme-colors);
 
 // Set a specific jump point for requesting color jumps
 $theme-color-interval: 8% !default;
@@ -96,8 +97,8 @@ $yiq-text-light: $white !default;
 
 // Characters which are escaped by the escape-svg function
 $escaped-characters: (("<", "%3c"),
-  (">", "%3e"),
-  ("#", "%23"),
+        (">", "%3e"),
+        ("#", "%23"),
 ) !default;
 
 
@@ -130,22 +131,22 @@ $spacer: 1rem !default;
 $spacers: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $spacers: map-merge((0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
-    3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 3)),
-  $spacers);
+        1: ($spacer * .25),
+        2: ($spacer * .5),
+        3: $spacer,
+        4: ($spacer * 1.5),
+        5: ($spacer * 3)),
+        $spacers);
 
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $sizes: map-merge((25: 25%,
-    50: 50%,
-    75: 75%,
-    100: 100%,
-    auto: auto),
-  $sizes);
+        50: 50%,
+        75: 75%,
+        100: 100%,
+        auto: auto),
+        $sizes);
 
 
 // Body
@@ -180,10 +181,10 @@ $paragraph-margin-bottom: 1rem !default;
 // adapting to different screen sizes, for use in media queries.
 
 $grid-breakpoints: (xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px) !default;
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px) !default;
 
 @include _assert-ascending($grid-breakpoints, "$grid-breakpoints");
 @include _assert-starts-at-zero($grid-breakpoints, "$grid-breakpoints");
@@ -194,9 +195,9 @@ $grid-breakpoints: (xs: 0,
 // Define the maximum width of `.container` for different screen sizes.
 
 $container-max-widths: (sm: 540px,
-  md: 720px,
-  lg: 960px,
-  xl: 1140px) !default;
+        md: 720px,
+        lg: 960px,
+        xl: 1140px) !default;
 
 @include _assert-ascending($container-max-widths, "$container-max-widths");
 
@@ -218,7 +219,7 @@ $line-height-lg: 1.5 !default;
 $line-height-sm: 1.5 !default;
 
 $border-width: 1px !default;
-$border-color: $gray-400 !default;
+$border-color: $gray-400 !default; // $mediumGray in figma
 
 $border-radius: .145rem !default;
 $border-radius-lg: .3rem !default;
@@ -244,11 +245,11 @@ $transition-collapse: height .35s ease !default;
 $embed-responsive-aspect-ratios: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $embed-responsive-aspect-ratios: join(((21 9),
-    (16 9),
-    (4 3),
-    (1 1),
-  ),
-  $embed-responsive-aspect-ratios);
+        (16 9),
+        (4 3),
+        (1 1),
+),
+        $embed-responsive-aspect-ratios);
 
 // Typography
 //
@@ -277,7 +278,7 @@ monospace !default;
 $font-family-base: $font-family-sans-serif !default;
 // stylelint-enable value-keyword-case
 
-$font-size-base: 1rem !default; // Assumes the html font-size is 14px ; check html in _global.scss
+$font-size-base: 0.875rem !default; // Assumes the html font-size is 16px ; check html in _global.scss
 $font-size-lg: $font-size-base * 1.15 !default;
 $font-size-sm: $font-size-base * .875 !default;
 
@@ -389,7 +390,7 @@ $btn-close-width: 0.857rem;
 $btn-close-height: $btn-close-width;
 $btn-close-color: $darkGray;
 $input-btn-padding-y: .375rem !default;
-$input-btn-padding-x:  1.25rem !default;
+$input-btn-padding-x: 1.25rem !default;
 $input-btn-font-family: null !default;
 $input-btn-font-size: $font-size-base !default;
 $input-btn-line-height: $line-height-base !default;
@@ -491,7 +492,7 @@ $input-border-radius-lg: $border-radius-lg !default;
 $input-border-radius-sm: $border-radius-sm !default;
 
 $input-focus-bg: $input-bg !default;
-$input-focus-border-color: $secondary !default;//lighten($component-active-bg, 25%) !default;
+$input-focus-border-color: $secondary !default; //lighten($component-active-bg, 25%) !default;
 $input-focus-color: $input-color !default;
 $input-focus-width: $input-btn-focus-width !default;
 $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
@@ -576,7 +577,7 @@ $custom-radio-indicator-border-radius: 50% !default;
 $custom-radio-indicator-icon-checked: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'><circle r='3' fill='#{$custom-control-indicator-checked-color}'/></svg>") !default;
 
 $custom-switch-width: $custom-control-indicator-size * 1.75 !default;
-$custom-switch-indicator-border-radius: math.div($custom-control-indicator-size,2) !default;
+$custom-switch-indicator-border-radius: math.div($custom-control-indicator-size, 2) !default;
 $custom-switch-indicator-size: subtract($custom-control-indicator-size, $custom-control-indicator-border-width * 4) !default;
 
 $custom-select-padding-y: $input-padding-y !default;
@@ -676,11 +677,11 @@ $form-feedback-icon-invalid: url("data:image/svg+xml,<svg xmlns='http://www.w3.o
 $form-validation-states: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
 $form-validation-states: map-merge(("valid": ("color": $form-feedback-valid-color,
-      "icon": $form-feedback-icon-valid),
-    "invalid": ("color": $form-feedback-invalid-color,
-      "icon": $form-feedback-icon-invalid),
-  ),
-  $form-validation-states);
+        "icon": $form-feedback-icon-valid),
+        "invalid": ("color": $form-feedback-invalid-color,
+                "icon": $form-feedback-icon-invalid),
+),
+        $form-validation-states);
 
 // Z-index master list
 //
@@ -721,7 +722,7 @@ $nav-divider-margin-y: math.div($spacer, 2) !default;
 // Navbar
 
 $navbar-padding-y: math.div($spacer, 4) !default;
-$navbar-padding-x: $spacer !default;
+$navbar-padding-x: 2.5rem !default; // 40px
 
 $navbar-nav-link-padding-x: .5rem !default;
 
@@ -767,7 +768,7 @@ $dropdown-color: $body-color !default;
 $dropdown-bg: $white !default;
 $dropdown-border-color: rgba($black, .15) !default;
 $dropdown-border-radius: $border-radius !default;
-$dropdown-border-width: 0;//$border-width !default;
+$dropdown-border-width: 0; //$border-width !default;
 $dropdown-inner-border-radius: subtract($dropdown-border-radius, $dropdown-border-width) !default;
 $dropdown-divider-bg: $gray-200 !default;
 $dropdown-divider-margin-y: $nav-divider-margin-y !default;
@@ -829,7 +830,7 @@ $jumbotron-bg: $gray-200 !default;
 // Cards
 
 $card-spacer-y: .75rem !default;
-$card-spacer-x:  $spacer !default;
+$card-spacer-x: $spacer !default;
 $card-border-width: $border-width !default;
 $card-border-radius: $border-radius !default;
 $card-border-color: rgba($black, .125) !default;
@@ -839,8 +840,8 @@ $card-cap-color: null !default;
 $card-height: null !default;
 $card-color: null !default;
 $card-bg: $white !default;
-$card-cap-padding-y:                $card-spacer-y * .5 !default;
-$card-cap-padding-x:                $card-spacer-x !default;
+$card-cap-padding-y: $card-spacer-y * .5 !default;
+$card-cap-padding-x: $card-spacer-x !default;
 
 $card-img-overlay-padding: 1.25rem !default;
 
@@ -1065,10 +1066,8 @@ $breadcrumb-item-padding: .5rem !default;
 $breadcrumb-margin-bottom: 0rem !default;
 
 $breadcrumb-bg: transparent !default;
-$breadcrumb-divider-color: white;//$gray-600 !default;
-$breadcrumb-active-color: white;//$gray-600 !default;
-$breadcrumb-divider: quote("•") !default;
-
+$breadcrumb-divider: quote(">") !default;
+$breadcrumb-divider-color: $mediumGray;
 $breadcrumb-border-radius: $border-radius !default;
 
 
@@ -1159,15 +1158,14 @@ $print-page-size: a3 !default;
 $print-body-min-width: map-get($grid-breakpoints, "lg") !default;
 
 
-
-
 //***************************************************************************************
 // Custom spacing Variables
 
 // Change below variable if the height of the navbar changes
-$topbar-base-height: 4.1rem;
+$topbar-base-height: 5rem; // 80px in figma
 // Change below variable to change the width of the sidenav
-$sidebar-base-width: 20rem;
+$sidebar-base-width: 20rem; //  15.375rem == 246px in figma
+
 // Change below variable to change the width of the sidenav when collapsed
 $sidebar-collapsed-width: 4rem;
 
@@ -1191,7 +1189,7 @@ $checkbox-indeterminate-bg: $secondary;
 $checkbox-indeterminate-border: $secondary;
 
 // Kendo Charts
-$orange:#E58634;
+$orange: #E58634;
 
 $series-a: $secondary;
 $series-b: $warning;
@@ -1201,38 +1199,38 @@ $series-e: $info;
 $series-f: $danger;
 
 $spacing: (
-    0: 0,
-    1: .145rem,
-    2: .5rem,
-    3: .75rem,
-    4: 1.145rem,
-    5: 1.25rem,
-    6: 1.5rem,
-    7: 1.75rem,
-    8: 2rem,
-    9: 2.25rem,
-    10: 2.5rem,
-    11: 2.75rem,
-    12: 3rem,
-    13: 3.25rem,
-    14: 3.5rem,
-    15: 3.75rem,
-    16: 4rem,
-    17: 4.25rem,
-    18: 4.5rem,
-    19: 4.75rem,
-    20: 5rem,
-    21: 5.25rem,
-    22: 5.5rem,
-    23: 5.75rem,
-    24: 6rem,
-    xs: .25rem,
-    sm: 5rem,
-    md: .75rem,
-    lg: 1rem,
-    xl: 1.5rem,
-    thin: .125rem,
-    hair: .0625rem
+        0: 0,
+        1: .145rem,
+        2: .5rem,
+        3: .75rem,
+        4: 1.145rem,
+        5: 1.25rem,
+        6: 1.5rem,
+        7: 1.75rem,
+        8: 2rem,
+        9: 2.25rem,
+        10: 2.5rem,
+        11: 2.75rem,
+        12: 3rem,
+        13: 3.25rem,
+        14: 3.5rem,
+        15: 3.75rem,
+        16: 4rem,
+        17: 4.25rem,
+        18: 4.5rem,
+        19: 4.75rem,
+        20: 5rem,
+        21: 5.25rem,
+        22: 5.5rem,
+        23: 5.75rem,
+        24: 6rem,
+        xs: .25rem,
+        sm: 5rem,
+        md: .75rem,
+        lg: 1rem,
+        xl: 1.5rem,
+        thin: .125rem,
+        hair: .0625rem
 );
 
 $checkbox-icon-size: 0.715rem;
@@ -1240,16 +1238,16 @@ $checkbox-icon-size: 0.715rem;
 // Offcanvas
 
 // scss-docs-start offcanvas-variables
-$offcanvas-padding-y:               $modal-inner-padding !default;
-$offcanvas-padding-x:               $modal-inner-padding !default;
-$offcanvas-horizontal-width:        400px !default;
-$offcanvas-vertical-height:         30vh !default;
-$offcanvas-transition-duration:     .3s !default;
-$offcanvas-border-color:            $modal-content-border-color !default;
-$offcanvas-border-width:            $modal-content-border-width !default;
-$offcanvas-title-line-height:       $modal-title-line-height !default;
-$offcanvas-bg-color:                $modal-content-bg !default;
-$offcanvas-color:                   $modal-content-color !default;
-$offcanvas-box-shadow:              $modal-content-box-shadow-xs !default;
+$offcanvas-padding-y: $modal-inner-padding !default;
+$offcanvas-padding-x: $modal-inner-padding !default;
+$offcanvas-horizontal-width: 400px !default;
+$offcanvas-vertical-height: 30vh !default;
+$offcanvas-transition-duration: .3s !default;
+$offcanvas-border-color: $modal-content-border-color !default;
+$offcanvas-border-width: $modal-content-border-width !default;
+$offcanvas-title-line-height: $modal-title-line-height !default;
+$offcanvas-bg-color: $modal-content-bg !default;
+$offcanvas-color: $modal-content-color !default;
+$offcanvas-box-shadow: $modal-content-box-shadow-xs !default;
 
 $form-check-input-checked-bg-color: $secondary;

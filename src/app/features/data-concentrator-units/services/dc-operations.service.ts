@@ -17,6 +17,7 @@ import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.compo
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { TemplatingService } from '../../../core/repository/services/templating/templating.service';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
+import { EventManagerService } from '../../../core/services/event-manager.service';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +29,8 @@ export class DcOperationsService {
     private service: DataConcentratorUnitsOperationsService,
     private dcGridService: DataConcentratorUnitsGridService,
     private templatingService: TemplatingService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private eventManager: EventManagerService
   ) {}
 
   onScheduleReadJobs(params: RequestFilterParams) {
@@ -46,165 +48,15 @@ export class DcOperationsService {
     modalRef.result.then().catch(() => {});
   }
 
-  /*
-  onTou(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterTouConfigComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onUpgrade(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterFwUpgradeComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onSetMonitor(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterMonitorComponent);
-
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onSetLimiter(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterLimiterComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-
-  onBreakerMode(params: RequestFilterParams) {
-    const modalRef = this.modalService.open(PlcMeterBreakerModeComponent);
-    modalRef.componentInstance.deviceIdsParam = params.deviceIds;
-    modalRef.componentInstance.filterParam = params.filter;
-    modalRef.componentInstance.searchParam = params.search;
-    modalRef.componentInstance.excludeIdsParam = params.excludeIds;
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        if (data === 'save') {
-          this.toast.successToast(this.messageActionInProgress);
-        }
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );
-  }
-*/
-
-  // delete button click ali se rabi ?????????
-  onDelete() {
-    /*  let selectedText = 'all';
-    const object: GridBulkActionRequestParams = {
-      id: [],
-      filter: {
-        statuses: [],
-        types: [],
-        vendor: { id: 0, value: '' },
-        tags: []
-      }
-    };
-    if (!this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-      const selectedRows = this.gridApi.getSelectedRows();
-      selectedRows.forEach(element => {
-        object.id.push(element.id);
-      });
-      object.filter = null;
-      selectedText = selectedRows ? selectedRows.length : 0;
-    } else {
-      object.filter = this.requestModel.filterModel;
-      object.id = null;
-    }
-
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
-    component.confirmDelete = true;
-    component.modalBody = this.i18n(`Delete ${selectedText} selected Data Concentrator Units?`);
-
-    modalRef.result.then(
-      data => {
-        // on close (CONFIRM)
-        const request = this.meterUnitsTypeService.deleteDcu(object);
-        this.formUtils.deleteForm(request, this.i18n('Selected items deleted')).subscribe(
-          (response: any) => {
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
-            this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
-            this.eventService.selectDeselectAll(-1);
-            this.gridApi.forEachNode(node => {
-              node.setSelected(false);
-            });
-
-            this.gridApi.onFilterChanged();
-          },
-          () => {}
-        );
-      },
-      reason => {
-        // on dismiss (CLOSE)
-      }
-    );*/
-  }
-
   // actions without popup
-  bulkOperation(operation: DcOperationTypeEnum, params: any, selectedCount: number) {
+  bulkOperation(
+    operation: DcOperationTypeEnum,
+    params: any,
+    selectedCount: number,
+    alertText?: string,
+    secondConfirmEnabled?: boolean,
+    dangerMessage?: string
+  ) {
     // let selectedText = ''; // `${selectedCount} rows `;
     const modalRef = this.modalService.open(ModalConfirmComponent);
     const component: ModalConfirmComponent = modalRef.componentInstance;
@@ -223,9 +75,31 @@ export class DcOperationsService {
         operationName = this.translate.instant('OPERATION.DEVICE-DISCOVERY');
         // selectedText = `${`for`} ${selectedText}`;
         break;
+      case DcOperationTypeEnum.reKeyHmac:
+        response = this.service.postRekeyHmac(params);
+        operationName = this.translate.instant('OPERATION.RE-KEY-HMAC');
+        // selectedText = `${`for`} ${selectedText}`;
+        break;
+      case DcOperationTypeEnum.enable:
+        params.enabled = true;
+        response = this.service.postEnableDC(params);
+        operationName = this.translate.instant('OPERATION.ENABLE-DC');
+        // selectedText = `${`for`} ${selectedText}`;
+        break;
+      case DcOperationTypeEnum.disable:
+        params.enabled = false;
+        response = this.service.postEnableDC(params);
+        operationName = this.translate.instant('OPERATION.DISABLE-DC');
+        // selectedText = `${`for`} ${selectedText}`;
+        break;
     }
     component.modalTitle = this.translate.instant('DCU.OPERATION-MODAL', { operationName: operationName, selectedCount: selectedCount });
     component.modalBody = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) }); // `${operationName} ${selectedText} ` +  `selected meter unit(s)? -> do we need it?`
+    component.alertText = alertText;
+    component.dangerText = dangerMessage;
+
+    component.secondConfirmEnabled = secondConfirmEnabled;
+    component.confirmMessage = this.translate.instant('DCU.CONFIRM-OPERATION', { operationName: toLower(operationName) });
 
     modalRef.result.then(
       (data) => {
@@ -233,6 +107,9 @@ export class DcOperationsService {
         this.toast.successToast(this.translate.instant('COMMON.ACTION-IN-PROGRESS'));
         response.subscribe(
           (value) => {
+            if (operation === DcOperationTypeEnum.enable || DcOperationTypeEnum.disable) {
+              this.eventManager.emitCustom('RefreshConcentratorEvent', true);
+            }
             /*this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
             if (operation === MeterUnitsTypeEnum.breakerStatus) {
               this.meterUnitsTypeGridService.saveMyGridLink_BreakerState_RequestId(value.requestId);
@@ -251,10 +128,11 @@ export class DcOperationsService {
     );
   }
 
-  fwUpgrade(params: any, selectedRowsCount: number) {
+  fwUpgrade(params: any, selectedRowsCount: number, alertText?: string) {
     const modalRef = this.modalService.open(DcuFwUpgradeComponent);
     modalRef.componentInstance.actionRequest = params;
     modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+    modalRef.componentInstance.alertText = alertText;
 
     modalRef.result.then(
       (data) => {
@@ -306,10 +184,10 @@ export class DcOperationsService {
         // create filter object
         if (requestModel.filterModel) {
           requestParam.filter = [];
-          if (requestModel.filterModel.statuses && requestModel.filterModel.statuses.length > 0) {
-            requestModel.filterModel.statuses.map((row) =>
+          if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
+            requestModel.filterModel.states.map((row) =>
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.status),
+                propName: capitalize(gridSysNameColumnsEnum.state),
                 propValue: row.id.toString(),
                 filterOperation: filterOperationEnum.equal
               })
@@ -359,6 +237,8 @@ export class DcOperationsService {
         const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
         if (selectedRows && selectedRows.length > 0) {
           requestParam.concentratorIds = [];
+          requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
+          requestParam.states = [...new Set(selectedRows.map((row) => row.state))];
           selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
         }
       }

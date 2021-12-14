@@ -1,0 +1,78 @@
+<div [style.width.px]="addWidth()" class="sticky-header transparent-gray-line">
+
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title
+      [title]="'MENU.IMPORT-DEVICES' | translate"
+      class="tw-h-36 tw-mt-10 tw--m-5"
+    >
+    </app-page-title>
+  </div>
+</div>
+
+<div class="form-row tw-pt-24">
+  <div class="col-12 expand-dropzone">
+
+    <app-file-upload (successEvent)="successUploaded($event)"
+                     (uploadEvent)="uploadEvent($event)"
+                     [acceptExtensions]="acceptExtensions"
+                     [allowedExtensions]="allowedExt"
+                     [dropUploadSubtitle]="uploadDropSubtitle"
+                     [form]="form"
+                     [isDropZoneCustom]="true"
+                     [multiple]="false"
+                     [property]="fileProperty"
+                     [responseType]="'text'"
+                     [saveField]="'file'"
+                     [textExplanation]="'.xlsx'"
+                     [uploadRemoveUrl]=""
+                     [uploadSaveUrl]="uploadSaveUrl"
+                     label="IMAGE"></app-file-upload>
+  </div>
+</div>
+
+<div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full tw-h-full">
+  <div class="tw-font-bold tw-tex-sm tw-text-black">
+    {{ 'PLC-METER.IMPORT.EXCEL-TEMPLATE' | translate }}
+  </div>
+  <div class="tw-tex-sm">
+    <button class="btn btn-primary" (click)="downloadTemplate()">
+      <span>{{ 'PLC-METER.IMPORT.DOWNLOAD' | translate }}</span>
+    </button>
+  </div>
+</div>
+
+<div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full tw-h-full">
+  {{ 'PLC-METER.IMPORT.DESCRIPTION' | translate }}
+</div>
+
+<div *ngIf="activeImports.length > 0" class="tw-my-10">
+
+  <div class="tw-font-bold tw-tex-sm tw-text-black">
+    {{ 'COMMON.ACTIVE-IMPORTS' | translate }}
+  </div>
+
+  <div *ngFor="let imports of activeImports" class="tw-h-16 tw-w-full gray-line">
+
+    <div class="tw-inline-flex tw-justify-between tw-items-center tw-w-full tw-h-full">
+
+      <div class="tw-inline-flex tw-ml-6">
+        <img [src]="'assets/images/icons/file-icon.svg'" />
+        <div class="tw-ml-6">
+          <div class="tw-text-sm tw-text-black tw-font-medium">
+            {{ imports.fileName }}
+          </div>
+          <div class="tw-mt-1 tw-text-darkGray tw-text-xs tw-font-normal">
+            {{ 'COMMON.NUMBER-OF-DEVICES' | translate: { noOfDevices: imports.nrOfDevices } }}
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="tw-inline-flex tw-bg-opacity-20 tw-rounded tw-h-5 tw-w-24 tw-items-center tw-font-medium tw-justify-center tw-capitalize tw-text-xs tw-bg-lightBlue tw-text-lightBlue tw-mr-6">
+        {{ 'COMMON.IN-PROGRESS' | translate | uppercase }}
+      </div>
+
+    </div>
+  </div>
+
+</div>

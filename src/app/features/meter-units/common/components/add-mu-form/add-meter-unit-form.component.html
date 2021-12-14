@@ -1,0 +1,353 @@
+<app-modal-template (dismiss)="onDismiss()">
+  <div modal-header>{{ getTitle() }}</div>
+
+  <div modal-body>
+    <ng-container>
+
+      <kendo-tabstrip (tabSelect)="onTabSelect($event);" [keepTabContent]="false" style="min-height:650px;">
+        <kendo-tabstrip-tab [selected]="true" title="{{ 'COMMON.BASIC' | translate }}">
+          <ng-template kendoTabContent>
+            <div>
+              <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
+
+              <div class="form-row">
+                <div class="col-12">
+                  <app-input-text [form]="form" [property]="serialNumberProperty" label="SERIAL">
+                  </app-input-text>
+                </div>
+              </div>
+
+              <ng-container *ngIf="!plcDevice">
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input [disabled]="false" [form]="form" [property]="manufacturerProperty"
+                                      [selectOptions]="manufacturers"
+                                      label="MANUFACTURER">
+                    </app-select-input>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input (selectedValueChanged)="templateChanged($event)"
+                                      [disabled]="false" [form]="form"
+                                      [property]="templateProperty"
+                                      [selectOptions]="templates" label="TEMPLATE">
+                    </app-select-input>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-select-input (selectedValueChanged)="onConnectionTypeChanged($event)" [disabled]="false"
+                                      [form]="form"
+                                      [property]="connectionTypeProperty"
+                                      [selectOptions]="connectionTypes" label="CONNECTION-TYPE">
+                    </app-select-input>
+                  </div>
+                </div>
+
+                <div *ngIf="isConnectionTypeIp" class="form-row">
+                  <div class="col-6">
+                    <app-input-text [form]="form" [property]="ipProperty" #ipField label="IP" (inputTextBlurValue)="validateIpAddress()"></app-input-text>
+                  </div>
+                  <div class="col-3">
+                    <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"
+                                       [isReadOnly]="false" [max]="65535" [min]="0"
+                                       [noFlex]="true" [property]="portProperty" [showSpinners]="false" [step]="1"
+                                       label="PORT"></app-input-numeric>
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-input-radio (selectionChanged)="communicationTypeChangedEvent($event)" [form]="form"
+                                     [hideCheckbox]="true"
+                                     [hideLabelSmall]="true" [options]="communicationTypes"
+                                     [property]="communicationTypeProperty"
+                                     box="true" label="COMMUNICATION-TYPE"
+                                     name="fileTypeRadio">
+                    </app-input-radio>
+                  </div>
+                </div>
+
+                <div *ngIf="isHdlcSelected" class="form-row">
+                  <div class="col-12">
+
+                    <div class="d-flex justify-content-between gray-line gray-line-top tw-py-3 mt-4">
+                      <div class="modal-checkbox-label">
+                        <div class="text-normal-bold">{{ 'PLC-METER.SHORT-NAMES-REFERENCING' | translate }}</div>
+                        <div
+                          class="tiny-text gray-color-dark pt-1">{{ 'PLC-METER.ADDRESS-BY-SHORT-ADDRESSES' | translate }}</div>
+                      </div>
+                      <div>
+                        <kendo-switch (valueChange)="onShortNameChanges($event)" [(ngModel)]="shortNameSelected"
+                                      class="mt-2"></kendo-switch>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </ng-container>
+
+<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.html
+              <div (click)="toggle()" aria-controls="collapse" aria-expanded="false"
+                   class="gray-color-dark text-normal pt-2"
+                   data-bs-toggle="collapse"
+                   data-target="#collapse" type="button">
+                {{ 'COMMON.ADVANCED' | translate }}
+                <i *ngIf="!opened" class="far fa-angle-down me-2"></i>
+                <i *ngIf="opened" class="far fa-angle-up me-2"></i>
+              </div>
+
+=======
+>>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.html
+              <div [ngClass]="opened ? 'show' : ''" class="collapse mt-3" id="collapse">
+                <div class="form-row">
+                  <div class="col-12">
+                    <app-input-text [form]="form" [property]="externalIdProperty" label="EXTERNAL-ID">
+                    </app-input-text>
+                  </div>
+                </div>
+              </div>
+<<<<<<< HEAD:src/app/features/meter-units/common/components/add-mu-form/add-mu-form.component.html
+=======
+
+              <app-show-more (click)="toggle()" [opened]="opened"></app-show-more>
+
+>>>>>>> develop:src/app/features/meter-units/common/components/add-mu-form/add-meter-unit-form.component.html
+            </div>
+
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab title="{{ 'FORM.JOBS' | translate }}">
+          <ng-template kendoTabContent>
+            <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
+
+            <div *ngIf="isTemplateSelected" class="form-row">
+              <div class="col-12 p-0">
+                <div>
+                  <app-jobs-select [height]="'530px'" [jobTypes]="[2]"></app-jobs-select>
+                </div>
+              </div>
+            </div>
+
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab title="{{ 'COMMON.COMMUNICATION' | translate }}">
+          <ng-template kendoTabContent>
+            <ng-template *ngTemplateOutlet="noTemplateSelected"></ng-template>
+
+            <div *ngIf="isTemplateSelected && communicationTypeSelected" class="pt-3">
+              <!--<div class="form-row" *ngIf="isHdlcSelected">
+                <div class="col-6">
+                  <app-input-switch [form]="form" [property]="isShortNameProperty" i18n-label label="Shortname">
+                  </app-input-switch>
+                </div>
+              </div>-->
+
+              <div>
+                <label class="label-primary">{{ 'PLC-METER.MANAGEMENT-ASSOCIATION' | translate }}</label>
+              </div>
+              <div class="border tw-px-2 tw-py-2">
+                <div *ngIf="isWrapperSelected" class="form-row">
+                  <div class="col-6">
+                    <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                       [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                       [noFlex]="true" [property]="wrapperClientAddressProperty" [showSpinners]="false"
+                                       [step]="1"
+                                       label="CLIENT"></app-input-numeric>
+                  </div>
+                  <div class="col-6">
+                    <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                       [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                       [noFlex]="true" [property]="wrapperServerAddressProperty" [showSpinners]="false"
+                                       [step]="1"
+                                       label="SERVER"></app-input-numeric>
+                  </div>
+                </div>
+                <div *ngIf="isHdlcSelected">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="clientLowProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="CLIENT-LOW"></app-input-numeric>
+                    </div>
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="serverLowProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="SERVER-LOW"></app-input-numeric>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="clientHighProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="CLIENT-HIGH"></app-input-numeric>
+                    </div>
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="serverHighProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="SERVER-HIGH"></app-input-numeric>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="pt-3">
+                <label class="label-primary">{{ 'PLC-METER.PUBLIC-ASSOCIATION' | translate }}</label>
+              </div>
+              <div class="border tw-px-2 tw-py-2">
+                <div *ngIf="isWrapperSelected">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="wrapperPublicClientAddressProperty"
+                                         [showSpinners]="false" [step]="1"
+                                         label="CLIENT"></app-input-numeric>
+                    </div>
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="wrapperPublicServerAddressProperty"
+                                         [showSpinners]="false" [step]="1"
+                                         label="SERVER"></app-input-numeric>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="isHdlcSelected">
+                  <div class="form-row">
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="publicClientLowProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="CLIENT-LOW"></app-input-numeric>
+                    </div>
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="publicServerLowProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="SERVER-LOW"></app-input-numeric>
+                    </div>
+                  </div>
+                  <div class="form-row">
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="publicClientHighProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="CLIENT-HIGH"></app-input-numeric>
+                    </div>
+                    <div class="col-6">
+                      <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                         [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                         [noFlex]="true" [property]="publicServerHighProperty" [showSpinners]="false"
+                                         [step]="1"
+                                         label="SERVER-HIGH"></app-input-numeric>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isWrapperSelected">
+                <div class="form-row pt-3">
+                  <div class="col-6">
+                    <app-input-switch (valueChanged)="gatewayChanged($event)" [form]="form"
+                                      [property]="wrapperIsGatewayProperty"
+                                      label="GATEWAY">
+                    </app-input-switch>
+                  </div>
+                </div>
+                <div *ngIf="isGatewayEnabled" class="border tw-px-2">
+                  <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form"
+                                     [format]="'#'" [isReadOnly]="false" [max]="65535" [min]="0"
+                                     [noFlex]="true" [property]="wrapperPhysicalAddressProperty" [showSpinners]="false"
+                                     [step]="1"
+                                     label="PHYSICAL-ADDRESS"></app-input-numeric>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <kendo-tabstrip-tab title="{{ 'COMMON.ADVANCED' | translate }}">
+          <ng-template kendoTabContent>
+            <ng-template [ngTemplateOutlet]="noTemplateSelected"></ng-template>
+            <div *ngIf="isTemplateSelected">
+              <div class="form-row pt-2">
+                <div class="col-6">
+                  <app-input-switch [form]="form" [property]="advancedStartWithReleaseProperty"
+                                    label="START-WITH-RELEASE">
+                  </app-input-switch>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-8">
+                  <app-input-switch [form]="form" [property]="advancedLdnAsSystitleProperty"
+                                    label="USE-LDN-AS-SYSTITLE">
+                  </app-input-switch>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-6">
+                  <app-select-input [disabled]="false" [form]="form" [property]="authenticationTypeProperty"
+                                    [selectOptions]="authenticationTypes"
+                                    label="AUTHENTICATION-TYPE">
+                  </app-select-input>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </kendo-tabstrip-tab>
+        <!-- <kendo-tabstrip-tab [title]="tabTitleCustomProperties">
+          <ng-template kendoTabContent>
+            Custom properties
+          </ng-template>
+        </kendo-tabstrip-tab> -->
+      </kendo-tabstrip>
+    </ng-container>
+  </div>
+
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button (click)="cancel()" class="btn text-secondary" type="button">{{ 'BUTTON.CANCEL' | translate }}</button>
+      <div class="btn-group dropdown" dropdown>
+        <button (click)="add()" class="btn btn-primary"
+                type="submit">{{ 'BUTTON.ADD' | translate }}</button>
+        <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" [ngbTooltip]="tipMoreSave">
+        </button> -->
+        <!-- <div *dropdownMenu class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" (click)="save(true)" i18n>Save and Add another</a>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</app-modal-template>
+
+<ng-template #noTemplateSelected>
+  <div *ngIf="!isTemplateSelected" class="card text-center border-0 mt-5">
+    <div class="card-header border-0 bg-transparent">
+      <i class="far fa-exclamation-triangle display-2 text-light font-weight-bold"></i>
+    </div>
+    <div class="card-body pt-0">
+      <div class="small-title pb-2">{{ 'PLC-METER.TEMPLATE-NOT-SELECTED' | translate }}</div>
+      <div class="text-secondary">{{ 'PLC-METER.SELECT-TEMPLATE' | translate }}</div>
+      <div class="tw-mt-3 tw-mb-5 tw-mx-5 tw-px-5">
+        <app-select-input (selectedValueChanged)="templateChanged($event)" [disabled]="false" [form]="form"
+                          [property]="templateProperty" [selectOptions]="templates">
+        </app-select-input>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

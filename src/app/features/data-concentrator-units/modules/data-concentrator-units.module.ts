@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DataConcentratorUnitsRoutingModule } from './data-concentrator-units-routing.module';
-import { DataConcentratorUnitsComponent } from '../components/data-concentrator-units.component';
+import { DataConcentratorUnitsListComponent } from '../components/data-concentrator-units-list.component';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
 import { AgGridModule } from '@ag-grid-community/angular';
@@ -22,11 +22,13 @@ import { DcFilterComponent } from '../components/filter-form/dc-filter.component
 import { DataConcentratorDetailComponent } from '../details/components/data-concentrator-detail.component';
 import { GridCellActionsComponent } from '../components/grid-custom-components/grid-cell-actions.component';
 import { DcOperationsComponent } from '../components/operations/dc-operations.component';
+import { MeterUnitsModule } from '../../meter-units/common/modules/meter-units.module';
+import { AlarmsEventsModule } from '../../alarms-events/modules/alarms-events.module';
 
 @NgModule({
   entryComponents: [],
   declarations: [
-    DataConcentratorUnitsComponent,
+    DataConcentratorUnitsListComponent,
     DataConcentratorDetailComponent,
     ActionFormComponent,
     GridSelectionHeaderComponent,
@@ -65,7 +67,9 @@ import { DcOperationsComponent } from '../components/operations/dc-operations.co
       GridCellIconComponent,
       GridCellJobStatusComponent,
       GridCellActionsComponent
-    ])
+    ]),
+    MeterUnitsModule,
+    AlarmsEventsModule
   ],
   exports: []
 })

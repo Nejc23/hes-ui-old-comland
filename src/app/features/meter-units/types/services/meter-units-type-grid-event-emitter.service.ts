@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
 
@@ -8,14 +8,14 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 export class MeterUnitsTypeGridEventEmitterService {
   public eventEmitterSelectDeselectAll: EventEmitter<boolean>;
   public eventEmitterLayoutChange: EventEmitter<MeterUnitsLayout>;
-  public eventEmitterDevicesDeleted: EventEmitter<void>;
+  public eventEmitterRefreshDevices: EventEmitter<boolean>;
 
   private isSelectedAll = new BehaviorSubject(false);
 
   constructor() {
     this.eventEmitterSelectDeselectAll = new EventEmitter<boolean>();
     this.eventEmitterLayoutChange = new EventEmitter<MeterUnitsLayout>();
-    this.eventEmitterDevicesDeleted = new EventEmitter<void>();
+    this.eventEmitterRefreshDevices = new EventEmitter<boolean>();
     this.isSelectedAll = new BehaviorSubject<boolean>(false);
   }
 
@@ -29,8 +29,8 @@ export class MeterUnitsTypeGridEventEmitterService {
     this.eventEmitterLayoutChange.emit(value);
   }
 
-  public devicesDeleted() {
-    this.eventEmitterDevicesDeleted.emit();
+  public refreshData(deselectDevices: boolean = true) {
+    this.eventEmitterRefreshDevices.emit(deselectDevices);
   }
 
   public getIsSelectedAll(): Observable<boolean> {

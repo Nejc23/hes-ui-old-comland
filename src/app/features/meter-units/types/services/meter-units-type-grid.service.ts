@@ -1,7 +1,7 @@
 import { GridCellNameComponent } from 'src/app/shared/ag-grid/components/grid-cell-name.component';
 import { GridCellDetailLinkComponent } from '../components/grid-custom-components/grid-cell-detail-link.component';
 import { Injectable } from '@angular/core';
-import { GridRequestParams, GridFilterParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { GridFilterParams, GridRequestParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridSelectionHeaderComponent } from '../components/grid-custom-components/grid-selection-header.component';
 import { GridCellStatusComponent } from '../components/grid-custom-components/grid-cell-status.component';
@@ -103,19 +103,19 @@ export class MeterUnitsTypeGridService {
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.status,
-        headerName: this.translate.instant('GRID.STATUS'),
+        field: gridSysNameColumnsEnum.state,
+        headerName: this.translate.instant('GRID.STATE'),
         //   pinned: true,
         sortable: false,
         filter: false,
         cellRenderer: 'gridCellStatusComponent',
-        headerTooltip: this.translate.instant('GRID.STATUS'),
+        headerTooltip: this.translate.instant('GRID.STATE'),
         suppressMenu: true,
         suppressMovable: true,
         resizable: false
       },
       {
-        field: gridSysNameColumnsEnum.protocol,
+        field: gridSysNameColumnsEnum.protocolType,
         headerName: this.translate.instant('GRID.PROTOCOL'),
         pinned: false,
         sortable: true,
@@ -562,6 +562,7 @@ export class MeterUnitsTypeGridService {
       onColumnVisible: this.onColumnVisible
     };
   }
+
   /*
   public setSideBar() {
     return {
@@ -591,31 +592,17 @@ export class MeterUnitsTypeGridService {
     // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
   }
 
-  private onColumnMoved = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
-  };
-
-  private onSortChanged = (params) => {
-    // TODO change to different store
-    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
-  };
-
-  private onColumnVisible = (params) => {
-    // send to subscribers the visibility of columns
-    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
-  };
-
   public getCookieData() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSettings);
   }
+
   public getCookieDataSortModel() {
     return this.gridSettingsCookieStoreService.getGridColumnsSettings(this.cookieNameForGridSort);
   }
 
   public checkIfFilterModelAndCookieAreSame(sessionFilter: MeterUnitsLayout, requestModel: GridFilterParams) {
     if (
-      JSON.stringify(sessionFilter.statusesFilter) === JSON.stringify(requestModel.statuses) &&
+      JSON.stringify(sessionFilter.statesFilter) === JSON.stringify(requestModel.states) &&
       JSON.stringify(sessionFilter.tagsFilter) === JSON.stringify(requestModel.tags) &&
       JSON.stringify(sessionFilter.vendorsFilter) === JSON.stringify(requestModel.vendors) &&
       JSON.stringify(sessionFilter.readStatusFilter) === JSON.stringify(requestModel.readStatus) &&
@@ -650,8 +637,6 @@ export class MeterUnitsTypeGridService {
     return result;
   }
 
-  // get stored grid settings from session configuration
-  // ---------------------------------------------------------
   // is selected all
   public getSessionSettingsSelectedAll() {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
@@ -674,6 +659,9 @@ export class MeterUnitsTypeGridService {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
     return settings.selectedRows;
   }
+
+  // get stored grid settings from session configuration
+  // ---------------------------------------------------------
 
   // set selected rows
   public setSessionSettingsSelectedRows(selectedRow: any) {
@@ -849,6 +837,21 @@ export class MeterUnitsTypeGridService {
   getAllCryptoImportIds(): string[] {
     return this.gridSettingsSessionStoreService.getAllCryptoImportIds();
   }
+
+  private onColumnMoved = (params) => {
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSettings(this.cookieNameForGridSettings, params.columnApi.getColumnState());
+  };
+
+  private onSortChanged = (params) => {
+    // TODO change to different store
+    // this.gridSettingsCookieStoreService.setGridColumnsSortOrder(this.cookieNameForGridSort, params.api.getSortModel());
+  };
+
+  private onColumnVisible = (params) => {
+    // send to subscribers the visibility of columns
+    this.gridColumnShowHideService.sendColumnVisibilityChanged(params.columnApi);
+  };
 }
 
 // extra functions for grid

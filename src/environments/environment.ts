@@ -10,6 +10,7 @@ export const environment = {
   // dateTimeFormat: 'MM/DD/YYYY hh:mm A'  // MomentJS formatting
   dateTimeFormat: 'dd.MM.yyyy HH:mm',
   dateDisplayFormat: 'DD. MM. YYYY',
+  dateOnlyFormat: 'DD. MM',
   dateFormat: 'dd.MM.yyyy',
   fistDay: 1, // 1 == first day is monday
   timeFormat: 'HH:mm',
@@ -21,11 +22,13 @@ export const environment = {
     days: 'dd.MM',
     years: 'yyyy'
   },
+  kendoChartCulture: 'de-DE',
   kendoPieChartLastSliceColor: '#9FB740',
   isDebug: true,
   licenseKey:
     'CompanyName=Metricsx d.o.o.,LicensedApplication=myGrid,LicenseType=SingleApplication,LicensedConcurrentDeveloperCount=1,LicensedProductionInstancesCount=4,AssetReference=AG-014718,ExpiryDate=2_April_2022_[v2]_MTY0ODg1NDAwMDAwMA==b6b19ef125d7b53b06e4ca6a3e6461c2',
-  thresholdValue: 7 // preconfigured threshold value in days,
+  thresholdValue: 7, // preconfigured threshold value in days,
+  mapBoxToken: 'pk.eyJ1IjoibWJ1bG92ZWMiLCJhIjoiY2tzb2tqenNsMG54YTJwbzZ3M3JmcW1xOCJ9.Yvtz-kegMWE4_uQuXjDxQA'
 };
 
 /*

@@ -3,7 +3,8 @@ export enum enumMyGridLink {
   managment = '/api/concentrator-management',
   dataProcessing = '/api/on-demand-data-processing',
   templating = '/api/templating',
-  scheduler = '/api/scheduler'
+  scheduler = '/api/scheduler',
+  inventory = '/api/concentrator-inventory'
 }
 
 export const identityToken = '/token';
@@ -18,6 +19,7 @@ export const triggerSetTimeOfUse = '/trigger-set-time-of-use';
 export const onDemandData = '/data';
 export const importTemplates = '/import-templates';
 export const triggerDeviceUpgrade = '/trigger-device-upgrade';
+export const triggerConcUpgrade = '/trigger-concentrator-upgrade';
 export const activateTriggerDeviceUpgrade = `${triggerDeviceUpgrade}/activate`;
 export const getCommonRegisterGroups = `/get-common-register-groups`;
 export const onDemandSetMonitor = '/on-demand/trigger-set-device-monitor';
@@ -39,9 +41,16 @@ export const securitySetup = `${enumMyGridLink.templating}/security-setup`;
 export const securityEnableHls = `${enumMyGridLink.managment}/security/enable/hls`;
 export const securityRekey = `${enumMyGridLink.managment}/security/meter/rekey`;
 export const securityChangePassword = `${enumMyGridLink.managment}/security/meter/change-password`;
+export const securityConcentratorRekey = `${enumMyGridLink.managment}/security/concentrators/rekey`;
 
 // jobs
 export const jobsAssignExisting = `${enumMyGridLink.scheduler}/jobs-meters`;
 
 // synchronize time
 export const onDemandTimeSyc = '/on-demand/trigger-clock-sync';
+
+// Import devices
+export const importDevices = '/devices/import';
+export const activeImports = '/tasks/device-import';
+
+export const updateMeterState = '/update-meters-state';

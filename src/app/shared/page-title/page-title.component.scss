@@ -1,0 +1,26 @@
+.operational-state {
+  @apply tw-text-installed;
+  @apply tw-bg-installed;
+  @apply tw-bg-opacity-20;
+}
+
+.disabled-state {
+  @apply tw-text-darkGray;
+  @apply tw-bg-darkGray;
+  @apply tw-bg-opacity-20;
+}
+
+.installing-state {
+  @apply tw-text-installing;
+  @apply tw-bg-installing;
+  @apply tw-bg-opacity-20;
+}
+
+.small-back-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+}

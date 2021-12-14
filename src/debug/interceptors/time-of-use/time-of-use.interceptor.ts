@@ -11,59 +11,43 @@ export class TimeOfUseInterceptor {
   static interceptTouConfigList(request: HttpRequest<any>): Observable<HttpEvent<any>> {
     const body: TimeOfUseConfigList[] = [
       {
-        timeOfUseId: '1',
-        activationDate: '2020-03-01T00:00:00+01:00',
-        timeOfUseTag: 's2w2d2',
-        timeOfUseName: 'NameYourTimeOfUseFile',
+        id: '1',
+        externalId: 's2w2d2',
         description: 'ON-PEAK'
       },
       {
-        timeOfUseId: '2',
-        activationDate: '2020-03-01T00:00:00+01:00',
-        timeOfUseTag: 's2w2d2',
-        timeOfUseName: 'NameYourTimeOfUseFile2',
+        id: '2',
+        externalId: 's2w2d2',
         description: 'OFF-PEAK'
       },
       {
-        timeOfUseId: '3',
-        activationDate: '2020-03-03T00:00:00+01:00',
-        timeOfUseTag: 's3w3d2',
-        timeOfUseName: 'NameYourTimeOfUseFile3',
+        id: '3',
+        externalId: 's3w3d2',
         description: 'PARTIAL-PEAK'
       },
       {
-        timeOfUseId: '4',
-        activationDate: '2020-03-31T00:00:00+01:00',
-        timeOfUseTag: 's3w3d3',
-        timeOfUseName: 'NameYourTimeOfUseFile6',
+        id: '4',
+        externalId: 's3w3d3',
         description: 'PARTIAL-PEAK'
       },
       {
-        timeOfUseId: '5',
-        activationDate: '2020-03-31T00:00:00+01:00',
-        timeOfUseTag: 's3w3d3',
-        timeOfUseName: 'NameYourTimeOfUseFile7',
+        id: '5',
+        externalId: 's3w3d3',
         description: 'PARTIAL-PEAK'
       },
       {
-        timeOfUseId: '6',
-        activationDate: '2020-03-31T00:00:00+01:00',
-        timeOfUseTag: 's3w3d3',
-        timeOfUseName: 'NameYourTimeOfUseFile8',
+        id: '6',
+        externalId: 's3w3d3',
         description: 'PARTIAL-PEAK'
       },
       {
-        timeOfUseId: '7',
-        activationDate: '2020-03-31T00:00:00+01:00',
-        timeOfUseTag: 's3w3d3',
-        timeOfUseName: 'NameYourTimeOfUseFile9',
+        id: '7',
+        externalId: 's3w3d3',
         description: 'PARTIAL-PEAK'
       },
       {
-        timeOfUseId: '8',
-        activationDate: '2020-03-31T00:00:00+01:00',
-        timeOfUseTag: 's3w3d3',
-        timeOfUseName: 'NameYourTimeOfUseFile10',
+        id: '8',
+        externalId: 's3w3d3',
         description: 'PARTIAL-PEAK'
       }
     ];

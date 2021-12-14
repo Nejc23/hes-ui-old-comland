@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { HttpEvent, HttpResponse, HttpRequest } from '@angular/common/http';
-import { meterUnitsScheduler, deleteJob } from 'src/app/core/repository/consts/meter-units.const';
+import { HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
+import { deleteJob, meterUnitsScheduler } from 'src/app/core/repository/consts/meter-units.const';
 import { SchedulerJob } from 'src/app/core/repository/interfaces/jobs/scheduler-job.interface';
 import { enableJob, executeJob } from 'src/app/core/repository/consts/jobs.const';
 
@@ -29,7 +29,7 @@ export class MeterUnitsSchedulerInterceptor {
       devices: {
         id: ['9b837e2d-957d-49e2-8d1d-a2e4b8440b77', 'ebeacc9d-744c-4a88-bb9c-625216ab99b9', '22cfeaae-463a-4055-8632-a6818ba77d81'],
         filter: {
-          statuses: [
+          states: [
             {
               id: 0,
               value: ''

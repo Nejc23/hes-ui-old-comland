@@ -11,6 +11,13 @@
 /* import Bootstrap files */
 @import "styles/../../node_modules/bootstrap/scss/functions";
 @import "styles/variables";
+
+// tailwind theme variables
+:root {
+  --color-primary: #{$primary};;
+  --color-secondary: #{$secondary};;
+}
+
 @import "styles/../../node_modules/bootstrap/scss/mixins";
 // TODO CHECK COMPONENTS IF SOMETHING IS NOT USED
 @import "styles/../../node_modules/@progress/kendo-theme-bootstrap/dist/all.scss";
@@ -23,8 +30,14 @@
 @import "styles/custom-style";
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
 
 // tailwind border issue
 *, ::before, ::after {
@@ -47,7 +60,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-left: -5px;
 }
 
-.form-row>.col, .form-row>[class*=col-] {
+.form-row > .col, .form-row > [class*=col-] {
   padding-right: 5px;
   padding-left: 5px;
 }
@@ -56,19 +69,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   display: flex;
   margin-right: -1px;
 }
+
 // bs5 hacks
 
 // bs override
 .modal-header {
   padding: 0 1.714rem;
+  justify-content: left;
+  height: 72px;
 }
 
 .modal-body {
   padding: 0 1.714rem;
 }
 
+.table > :not(caption) > * > * {
+  box-shadow: none;
+}
+
 // bs override
-.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show>.btn-light.dropdown-toggle {
+.btn-light:not(:disabled):not(.disabled).active, .btn-light:not(:disabled):not(.disabled):active, .show > .btn-light.dropdown-toggle {
   color: $gray-900;
   background-color: #cbd0df;
   border-color: #c3c8da;
@@ -116,9 +136,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .pl-3 {
   padding-left: 0.75rem;
 }
+
 .pr-3 {
   padding-right: 0.75rem;
 }
+
 // temp BS fix
 .col, .col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col-auto, .col-lg, .col-lg-1, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-auto, .col-md, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md-auto, .col-sm, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-auto, .col-xl, .col-xl-1, .col-xl-2, .col-xl-3, .col-xl-4, .col-xl-5, .col-xl-6, .col-xl-7, .col-xl-8, .col-xl-9, .col-xl-10, .col-xl-11, .col-xl-12, .col-xl-auto {
   padding-right: 1rem;
@@ -131,5 +153,270 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .grid-actions {
   .btn-light {
     max-height: 33.5px;
+  }
+}
+
+.align-center {
+  display: flex;
+  align-items: center;
+}
+
+
+// classes added because of tailwind JIT
+.bg-installed {
+  @apply tw-bg-installed;
+}
+
+.bg-installing {
+  @apply tw-bg-installing;
+}
+
+.bg-awaiting {
+  @apply tw-bg-awaiting;
+}
+
+.bg-blacklist {
+  @apply tw-bg-blacklist;
+}
+
+.bg-blacklist {
+  @apply tw-bg-blacklist;
+}
+
+.bg-disappeared {
+  @apply tw-bg-disappeared;
+}
+
+.bg-lost {
+  @apply tw-bg-lost;
+}
+
+.bg-deinstalled {
+  @apply tw-bg-deinstalled;
+}
+
+.bg-other {
+  @apply tw-bg-other;
+}
+
+.opacity {
+  @apply tw-bg-opacity-20;
+}
+
+.active-status {
+  @apply tw-text-green;
+  @apply tw-bg-green;
+  @apply tw-bg-opacity-20;
+}
+
+.inactive-status {
+  @apply tw-text-red;
+  @apply tw-bg-red;
+  @apply tw-bg-opacity-20;
+}
+
+.undefined-status {
+  @apply tw-bg-black;
+  @apply tw-text-black;
+  @apply tw-bg-opacity-20;
+}
+
+.draft-status {
+  @apply tw-text-gray2;
+  @apply tw-bg-gray2;
+  @apply tw-bg-opacity-20;
+}
+
+.toast-body {
+  z-index: 2020 !important;
+}
+
+.buttons-bottom-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+
+  //&.full-width {
+  //  position: sticky;
+  //  justify-content: space-between;
+  //  display: flex;
+  //}
+}
+
+.transparent-gray-line {
+  @apply tw-border-b;
+  @apply tw-border-solid;
+  @apply tw-border-lightGray;
+  @apply tw-border-opacity-60;
+}
+
+.loader {
+  border-top-color: $primary;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.show-more-rounded-button {
+  @apply tw-text-sm;
+  @apply tw-text-darkGray;
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 9px 16px;
+  z-index: 10;
+  position: relative;
+  min-width: 122px;
+  height: 34px;
+  background: white;
+  border: 1px solid $lightGray;
+  border-radius: 300px;
+  color: $darkGray;
+  top: 18px;
+}
+
+.k-state-selected {
+  background-color: rgb($primary, 0.65) !important;
+}
+
+.mini-button {
+  padding: 2px 10px;
+  cursor: pointer;
+  font-size: 0.563rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  @apply tw-rounded;
+  @apply tw-text-darkGray;
+
+  &.selected {
+    @apply tw-bg-primary;
+    color: #fff;
+  }
+}
+
+.refresh-button {
+  @apply tw-flex;
+  @apply tw-p-1;
+  @apply tw-w-8;
+  @apply tw-rounded-sm;
+  @apply tw-border-mediumGray;
+  @apply tw-border;
+  @apply tw-border-solid;
+  @apply tw-h-full;
+  @apply tw-items-center;
+  @apply tw-justify-center;
+  height: 35px;
+
+  &.border-left {
+    @apply tw-border-0;
+    @apply tw-border-l;
+    @apply tw-rounded-none;
+    height: 34px;
+  }
+}
+
+.divider {
+  height: 1px;
+  @apply tw-bg-darkGray;
+  @apply tw-bg-opacity-80;
+  @apply tw-rounded-sm;
+  width: 10px;
+}
+
+.date-range-picker-container {
+  .k-input {
+    text-align: center;
+  }
+
+  .small-date-picker {
+    .k-dateinput {
+      width: 10em;
+    }
+  }
+}
+
+.sticky-header {
+  @apply tw-fixed;
+  @apply tw-top-0;
+  @apply tw-bg-white;
+  @apply tw-h-44;
+  @apply tw-z-40;
+  @apply tw-px-5;
+  // sticky transparent issue fix
+}
+
+// kendo TABS 
+.edit-meter {
+  .k-tabstrip-items {
+    #k-tabstrip-tab-0 {
+      margin-left: 2.5rem;
+    }
+  }
+}
+
+
+.primary-transparent-bg {
+  color: $primary;
+  background-color: rgba($primary, 0.2);
+
+  &.ultra-transparent {
+    background-color: rgba($primary, 0.05);
+  }
+}
+
+
+.colored-tag {
+  @apply tw-rounded;
+  @apply tw-h-5;
+  @apply tw-items-center;
+  @apply tw-justify-center;
+  @apply tw-capitalize;
+  @apply tw-px-2;
+  @apply tw-font-medium;
+}
+
+.modal-body {
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.relative-position {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  margin: -40px 0px 0px -40px;
+}
+
+.btn-outline {
+  color: $darkGray !important;
+  border: 1px solid $mediumGray !important;
+}
+
+.k-button {
+  @apply tw-border-mediumGray;
+  @apply tw-text-darkGray;
+}
+
+.full-dropdown {
+  .k-dropdown, .k-dropdowntree {
+    width: 100%;
   }
 }

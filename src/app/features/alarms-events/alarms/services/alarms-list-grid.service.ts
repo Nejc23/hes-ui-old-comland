@@ -72,16 +72,6 @@ export class AlarmsListGridService {
         resizable: false
       },
       {
-        field: 'protocol',
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        cellRenderer: 'gridCellProtocolComponent',
-        headerName: this.translate.instant('GRID.PROTOCOL'),
-        headerTooltip: this.translate.instant('GRID.PROTOCOL'),
-        resizable: false
-      },
-      {
         field: 'manufacturer',
         suppressMenu: true,
         sortable: true,

@@ -1,0 +1,78 @@
+<div class="date-range-picker-container">
+  <div class="tw-font-medium tw-text-xs tw-text-darkGray tw-pb-1">
+    {{ 'FORM.SELECT-DATE' | translate }}:
+  </div>
+
+  <div
+    class="tw-inline-flex tw-border tw-border-solid tw-border-lightGray tw-rounded-sm tw-items-center tw-justify-center tw-full">
+    <div #popover="ngbPopover"
+         [autoClose]="'outside'"
+         [ngbPopover]="popDateTimePicker" [placement]="popoverPlacement"
+         class="tw-flex tw-justify-center tw-w-10 tw-h-full"
+         container="body"
+         popoverClass="date-range-picker-popover">
+      <img [src]="'assets/images/icons/calendar-icon.svg'" class="tw-h-4 tw-w-4 tw-m-2" />
+    </div>
+
+    <div class="tw-border-l tw-border-solid tw-border-lightGray">
+      <form [formGroup]="form">
+        <div #anchorTextbox [ngClass]="{'focused': focused }" class="tw-inline-flex tw-items-center">
+          <kendo-dateinput (blur)="onDateBlur()" (focus)="onDateFocus()" (valueChange)="dateChanged()"
+                           [formControlName]="startProperty"
+                           [format]="format"
+                           [min]="minDate" [placeholder]="startDatePlaceholder"
+                           class="left-date tw-text-center">
+          </kendo-dateinput>
+          <ng-container *ngIf="!singleCalendar">
+            <div class="divider">
+            </div>
+            <kendo-dateinput (blur)="onDateBlur()" (focus)="onDateFocus()" (valueChange)="dateChanged()"
+                             [formControlName]="endProperty"
+                             [format]="format" [placeholder]="endDatePlaceholder"
+                             class="right-date tw-text-center">
+            </kendo-dateinput>
+          </ng-container>
+        </div>
+      </form>
+    </div>
+    <div *ngIf="withRefreshButton" class="tw-pl-2">
+      <div
+        (click)="refreshButtonClickedEvent()" class="refresh-button border-left">
+        <img [ngClass]="loading ? 'tw-animate-spin' : ''"
+             src="assets/images/icons/refresh-icon.svg" />
+      </div>
+    </div>
+  </div>
+
+  <div class="tw-pt-1">
+    <div *ngIf="withButtons" class="btn-group">
+      <button (click)="setRange(1)" [ngClass]="{'selected' : selectedRange === 1}"
+              class="mini-button">{{ 'DAY.TODAY' | translate | uppercase }}</button>
+      <button (click)="setRange(2)" [ngClass]="{'selected' : selectedRange === 2}"
+              class="mini-button">{{ 'DAY.YESTERDAY' | translate | uppercase }}</button>
+      <button (click)="setRange(3)" [ngClass]="{'selected' : selectedRange === 3}"
+              class="mini-button">{{ 'DAY.LAST-7-DAYS' | translate | uppercase }}</button>
+      <button (click)="setRange(4)" [ngClass]="{'selected' : selectedRange === 4}"
+              class="mini-button">{{ 'DAY.LAST-30-DAYS' | translate | uppercase }}</button>
+      <button (click)="setRange(5)" [ngClass]="{'selected' : selectedRange === 5}"
+              class="mini-button">{{ 'DAY.CURRENT-MONTH' | translate | uppercase }}</button>
+      <button (click)="setRange(6)" [ngClass]="{'selected' : selectedRange === 6}"
+              class="mini-button">{{ 'DAY.LAST-MONTH' | translate | uppercase }}</button>
+    </div>
+
+    <div *ngIf="showErrors()" class="help-block tw-pt-1">
+      <div *ngFor="let error of errors" class="tw-mt-1">
+        <i class="far fa-info-circle text-danger"></i><small class="text-danger tw-pl-1">{{error}}</small>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #popDateTimePicker>
+    <app-datetime-range-picker (formClosed)="closePopover($event)"
+                               [form]="form"
+                               [initValues]="true"
+                               [minDate]="minDateMomentJs"
+                               [singleCalendar]="singleCalendar"
+                               [withTime]="withTime"></app-datetime-range-picker>
+  </ng-template>
+</div>

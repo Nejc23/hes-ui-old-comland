@@ -50,6 +50,6 @@ export class GridCellInstantValuesComponent implements ICellRendererAngularComp 
   }
 
   areValuesEmpty() {
-    return this.filteredData.length === 0;
+    return this.filteredData?.length === 0;
   }
 }

@@ -9,7 +9,7 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BreadcrumbsModule } from 'src/app/shared/breadcrumbs/breadcrumbs.module';
 import { AgGridModule } from '@ag-grid-community/angular';
-import { SchedulerJobsListComponent } from '../components/scheduler-jobs-list/scheduler-jobs-list.component';
+import { JobsListComponent } from '../components/scheduler-jobs-list/jobs-list.component';
 import { SchedulerJobsRoutingModule } from './scheduler-jobs-routing.module';
 import { GridCellActiveComponent } from '../components/grid-custom-components/grid-cell-active.component';
 import { ActionFormComponent } from '../components/action-form/components/action-form.component';
@@ -24,7 +24,7 @@ import { DcuForJobGridSelectionHeaderComponent } from '../dcu-for-job/components
 @NgModule({
   entryComponents: [],
   declarations: [
-    SchedulerJobsListComponent,
+    JobsListComponent,
     GridCellActiveComponent,
     GridCellNextRunComponent,
     GridCellEditActionsComponent,

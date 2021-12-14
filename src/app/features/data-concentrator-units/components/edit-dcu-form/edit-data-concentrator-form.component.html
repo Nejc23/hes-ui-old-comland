@@ -1,0 +1,46 @@
+<div class="tw-m-8">
+
+  <div *ngIf="saveError" class="alert alert-danger alert-dismissible fade show" role="alert">
+    <strong><span>{{ 'FORM.ERROR.DCU-ERROR' | translate }}</span></strong> <br /> {{saveError}}
+  </div>
+
+  <app-input-text [form]="form" [property]="nameProperty" label="NAME"></app-input-text>
+
+  <div class="form-row">
+    <div class="col-12">
+      <app-input-text [form]="form" [property]="idNumberProperty" label="ID">
+      </app-input-text>
+    </div>
+  </div>
+
+  <div *ngIf="credentialsVisible">
+    <div class="form-row">
+      <div class="col-12">
+        <app-input-text [form]="form" [property]="userNameProperty" label="USERNAME"></app-input-text>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12">
+      <app-input-text (inputTextBlurValue)="validateHostname()" [form]="form" [property]="hostname"
+                      label="HOSTNAME"></app-input-text>
+    </div>
+  </div>
+
+  <div [ngClass]="opened ? 'show' : ''" class="collapse mt-3" id="collapse">
+    <div class="form-row">
+      <div class="col-12">
+        <app-input-text [form]="form" [property]="externalIdProperty" label="EXTERNAL-ID">
+        </app-input-text>
+      </div>
+    </div>
+  </div>
+
+  <app-show-more (click)="toggle()" [opened]="opened"></app-show-more>
+</div>
+
+
+
+
+

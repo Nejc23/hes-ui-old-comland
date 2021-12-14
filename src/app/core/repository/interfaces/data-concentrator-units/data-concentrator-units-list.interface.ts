@@ -1,5 +1,6 @@
 export interface DataConcentratorUnitsList {
   concentratorId: string;
+  hostname: string;
   externalId?: string;
   status: string;
   name: string;
@@ -11,7 +12,6 @@ export interface DataConcentratorUnitsList {
   type: string;
   vendor: string;
   id: string;
-  ip: string;
   lastCommunication: string;
   tags: string[];
   jobStatus: string;

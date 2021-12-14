@@ -1,35 +1,61 @@
 <app-modal-template (dismiss)="onDismiss()">
 
-  <div modal-header>{{ 'DCU.FW-UPLOAD-UPGRADE' | translate }} ({{selectedRowsCount}} {{'COMMON.SELECTED' | translate }})</div>
+  <div modal-header>{{ 'DCU.FW-UPLOAD-UPGRADE' | translate }} ({{selectedRowsCount}} {{'COMMON.SELECTED' | translate }})
+  </div>
 
   <div modal-body>
-    <ng-container>
+    <ng-container *ngIf="!differentTypes">
       <div class="form-row">
         <div class="col-12 expand-dropzone modal-dropzone">
-          <app-file-select label="Image" [form]="form" [property]="imageProperty"
-            [multiple]="false"
-            [allowedExtensions]="allowedExt"
-            [acceptExtensions]="acceptExtensions"
-            (selectEvent)="selected($event)"
-            [dropFileSelectSubtitle]="uploadDropSubtitle">
-          ></app-file-select>
+          <app-file-upload (successEvent)="successUploaded($event)" (uploadEvent)="uploadEvent($event)"
+                           [acceptExtensions]="acceptExtensions"
+                           [allowedExtensions]="allowedExt"
+                           [dropUploadSubtitle]="uploadDropSubtitle"
+                           [form]="form"
+                           [isDropZoneCustom]="true"
+                           [multiple]="false"
+                           [property]="imageProperty"
+                           [responseType]="'text'"
+                           [saveField]="'imageFile'"
+                           [textExplanation]="allowedExtExplainText"
+                           [uploadRemoveUrl]=""
+                           [uploadSaveUrl]="uploadSaveUrl"
+                           label="IMAGE"></app-file-upload>
         </div>
       </div>
     </ng-container>
+
+    <ng-container *ngIf="differentTypes">
+      <div class="small-title py-2"> {{ 'DCU.MULTIPLE-TYPES' | translate }}
+      </div>
+    </ng-container>
+
+    <div *ngIf="alertText" class="alert alert-danger mt-3 tw-text-sm" role="alert">
+      <span class="text-danger">{{ alertText | translate }}</span>
+    </div>
+
   </div>
   <div modal-footer>
     <div class="d-flex justify-content-end">
-      <button type="button" class="btn text-secondary" (click)="cancel()">
-        <span>{{'BUTTON.CANCEL' | translate }}</span>
-      </button>
-      <div class="btn-group dropdown" *ngIf="!activate">
-        <button type="submit" class="btn btn-primary" (click)="upgrade()">
-          <span>{{'BUTTON.CONFIRM' | translate }}</span></button>
-      </div>
-      <div class="btn-group dropdown" *ngIf="activate">
-        <button type="submit" class="btn btn-primary" (click)="activateMU()">
-          <span>{{'BUTTON.ACTIVATE' | translate }}</span></button>
-      </div>
+      <ng-container *ngIf="!differentTypes">
+        <button (click)="cancel()" class="btn text-secondary" type="button">
+          <span>{{'BUTTON.CANCEL' | translate }}</span>
+        </button>
+        <div *ngIf="activate" class="btn-group dropdown">
+          <button (click)="activateMU()" class="btn btn-primary" type="submit">
+            <span>{{'BUTTON.ACTIVATE' | translate }}</span></button>
+        </div>
+        <div class="btn-group dropdown">
+          <button (click)="upgrade()" [disabled]="!imgGuid" class="btn btn-primary" type="submit">
+            <span>{{'BUTTON.CONFIRM' | translate }}</span></button>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="differentTypes">
+        <button (click)="cancel()" class="btn btn-primary" type="button">
+          <span>{{'BUTTON.CLOSE' | translate }}</span>
+        </button>
+      </ng-container>
     </div>
   </div>
 </app-modal-template>

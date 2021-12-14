@@ -1,0 +1,31 @@
+.menu-item {
+  height: 36px;
+  width: 164px;
+  border-radius: 4px;
+
+  &.selected {
+    background-color: #F4F6F9;
+  }
+
+  &.disabled {
+    @apply tw-cursor-not-allowed;
+  }
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: #BC1839;
+  border: 2px solid #FCEBEE;
+}
+
+.menu-item-count {
+  @apply tw-mx-3;
+  @apply tw-text-darkGray;
+  @apply tw-px-1;
+  background-color: #E2E2E3;
+  width: 18px;
+  border-radius: 2px;
+  margin-right: 10px;
+}

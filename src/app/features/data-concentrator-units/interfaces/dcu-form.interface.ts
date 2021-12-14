@@ -2,10 +2,10 @@ import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelis
 
 export interface DcuForm {
   id: string;
+  hostname?: string;
   name: string;
   serialNumber: string;
   externalId?: string;
-  ip: string;
   type: Codelist<number>;
   userName?: string;
   password?: string;
@@ -14,11 +14,13 @@ export interface DcuForm {
   tags: Codelist<number>[];
   discoveryJob?: Codelist<string>;
   status?: Codelist<number>;
-  port?: string;
   address?: string;
   mac?: string;
   latitude?: number;
   longitude?: number;
+  plcStatus?: string;
+  timeZoneName?: string;
+  firstInstallDate?: string;
 }
 
 export interface EditDcuForm {
@@ -26,8 +28,7 @@ export interface EditDcuForm {
   name: string;
   serialNumber: string;
   externalId?: string;
-  ip: string;
-  port?: string;
+  hostname?: string;
   address?: string;
   mac?: string;
   manufacturer?: Codelist<number>;

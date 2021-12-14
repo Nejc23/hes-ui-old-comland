@@ -1,0 +1,30 @@
+<div *ngIf="loading" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-h-80 tw-py-10">
+  <div
+    class="loader tw-ease-linear tw-rounded-full tw-border-solid tw-border-2 tw-border-t-4 tw-border-lightGray tw-h-12 tw-w-12 tw-animate-pulse">
+  </div>
+  <div class="tw-font-bold tw-text-black tw-text-xl tw-animate-pulse tw-mt-6">
+    {{'COMMON.LOADING-DATA-PLEASE-WAIT' | translate }}
+  </div>
+  <div class="tw-text-darkGray tw-mt-4">
+    {{'COMMON.MAY-TAKE-A-MOMENT' | translate }}
+  </div>
+</div>
+
+<div *ngIf="!loading" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-p-10">
+  <div
+    [ngClass]="alert ? 'tw-bg-red' : 'tw-bg-lightGray'"
+    class="tw-rounded-full tw-h-52 tw-w-52 tw-bg-opacity-10">
+    <div
+      [ngClass]="alert ? 'tw-bg-red' : 'tw-bg-lightGray'"
+      class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20 relative-position">
+      <img *ngIf="alert" [src]="'assets/images/icons/alert-icon.svg'" class="tw-h-7" />
+      <img *ngIf="!alert" [src]="'assets/images/icons/search-icon.svg'" class="tw-h-7" />
+    </div>
+  </div>
+  <div class="tw-font-bold tw-text-black tw-text-xl tw-mt-6">
+    {{ message | translate }}
+  </div>
+  <div *ngIf="secondaryMessage" class="tw-text-darkGray tw-mt-4">
+    {{ secondaryMessage | translate }}
+  </div>
+</div>

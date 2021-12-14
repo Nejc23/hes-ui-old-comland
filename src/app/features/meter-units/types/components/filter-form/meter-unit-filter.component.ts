@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { Observable, Subscription, of } from 'rxjs';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { Observable, of, Subscription } from 'rxjs';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
 import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
 import { GridSettingsSessionStoreService } from 'src/app/core/utils/services/grid-settings-session-store.service';
@@ -80,106 +80,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.applyFilter = _.debounce(this.applyFilter, 1000);
   }
 
-  // called on init
-  ngOnInit(): void {
-    this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
-    this.mutFilters$.subscribe((x) => {
-      this.data = x;
-      this.fillformFromSession(this.data);
-    });
-    this.meterUnitVendors$ = this.codelistService.meterUnitVendorCodelist(this.id);
-    this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
-    this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
-    this.disconnectorState$ = this.codelistService.meterUnitDisconnectorStateCodelist(this.id); // TODO uncomment when implemented
-    this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
-    this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
-
-    this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist();
-    this.protocolTypes$ = this.codelistService.meterUnitProtocolTypeCodelist();
-
-    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
-      this.doFillData();
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.paramsSub) {
-      this.paramsSub.unsubscribe();
-    }
-
-    if (this.eventSettingsStoreLoadedSubscription) {
-      this.eventSettingsStoreLoadedSubscription.unsubscribe();
-    }
-  }
-
-  doFillData() {
-    // change filter outside of grid ???
-    this.fillformFromSession(this.data);
-  }
-
-  fillformFromSession(x: MeterUnitsLayout[]) {
-    this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
-
-    if (this.sessionFilter) {
-      if (this.sessionFilter.id) {
-        this.form = this.createForm(x, this.sessionFilter);
-      } else {
-        const currentFilter: MeterUnitsLayout = {
-          id: -1,
-          name: '',
-          statusesFilter: this.sessionFilter.statusesFilter,
-          readStatusFilter: this.sessionFilter.readStatusFilter,
-          tagsFilter: this.sessionFilter.tagsFilter,
-          vendorsFilter: this.sessionFilter.vendorsFilter,
-          firmwareFilter: this.sessionFilter.firmwareFilter,
-          breakerStateFilter: this.sessionFilter.breakerStateFilter,
-          ciiStateFilter: this.sessionFilter.ciiStateFilter,
-          showOptionFilter: this.sessionFilter.showOptionFilter,
-          showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
-          showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
-          showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
-          gridLayout: '',
-          mediumFilter: this.sessionFilter.mediumFilter,
-          protocolFilter: this.sessionFilter.protocolFilter
-        };
-        x.push(currentFilter);
-        this.form = this.createForm(x, currentFilter);
-      }
-    } else {
-      this.form = this.createForm(null, null);
-    }
-  }
-
-  createForm(filters: MeterUnitsLayout[], selected: MeterUnitsLayout): FormGroup {
-    return this.fb.group(
-      {
-        ['statuses']: [filters && selected ? selected.statusesFilter : []],
-        ['tags']: [filters && selected ? selected.tagsFilter : []],
-        ['filters']: [filters ? filters : []],
-        ['vendors']: [filters && selected ? selected.vendorsFilter : null],
-        ['firmware']: [filters && selected ? selected.firmwareFilter : []],
-        ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
-        ['ciiState']: [filters && selected ? selected.ciiStateFilter : []],
-        ['operation']: [
-          filters && selected.readStatusFilter && selected.readStatusFilter.operation
-            ? selected.readStatusFilter.operation
-            : { id: '', value: '' }
-        ],
-        ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
-        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
-        /*['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
-        ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
-        ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
-        ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []],
-        [this.mediumProperty]: [filters && selected ? selected.mediumFilter : []],
-        [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []]
-      },
-      { validators: [rangeFilterValidator] }
-    );
-  }
-
-  get statusesProperty() {
-    return 'statuses';
+  get statesProperty() {
+    return 'states';
   }
 
   get tagsProperty() {
@@ -217,6 +119,51 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   get ciiStateProperty() {
     return 'ciiState';
   }
+
+  get showOptionFilterProperty() {
+    return 'showOptionFilter';
+  }
+
+  get protocolProperty() {
+    return 'protocol';
+  }
+
+  get mediumProperty() {
+    return 'medium';
+  }
+
+  // called on init
+  ngOnInit(): void {
+    this.mutFilters$ = of([]); // this.mutService.getMeterUnitsLayout(this.id); // TODO uncomment when implemented
+    this.mutFilters$.subscribe((x) => {
+      this.data = x;
+      this.fillformFromSession(this.data);
+    });
+    this.meterUnitVendors$ = this.codelistService.meterUnitVendorCodelist(this.id);
+    this.meterUnitStatuses$ = this.codelistService.meterUnitStatusCodelist(this.id);
+    this.meterUnitTags$ = of([]); // this.codelistService.meterUnitTagCodelist(this.id); // TODO uncomment when implemented
+    this.disconnectorState$ = this.codelistService.meterUnitDisconnectorStateCodelist(this.id); // TODO uncomment when implemented
+    this.ciiState$ = this.codelistService.meterUnitCiiStateCodelist(this.id);
+    this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
+
+    this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist();
+    this.protocolTypes$ = this.codelistService.meterUnitProtocolTypeCodelist();
+
+    this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
+      this.doFillData();
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.paramsSub) {
+      this.paramsSub.unsubscribe();
+    }
+
+    if (this.eventSettingsStoreLoadedSubscription) {
+      this.eventSettingsStoreLoadedSubscription.unsubscribe();
+    }
+  }
+
   /*
   get showMeterUnitsWithoutTemplateProperty() {
     return 'showMeterUnitsWithoutTemplate';
@@ -230,16 +177,70 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     return 'showOnlyImageReadyForActivation';
   }*/
 
-  get showOptionFilterProperty() {
-    return 'showOptionFilter';
+  doFillData() {
+    // change filter outside of grid ???
+    this.fillformFromSession(this.data);
   }
 
-  get protocolProperty() {
-    return 'protocol';
+  fillformFromSession(x: MeterUnitsLayout[]) {
+    this.sessionFilter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
+
+    if (this.sessionFilter) {
+      if (this.sessionFilter.id) {
+        this.form = this.createForm(x, this.sessionFilter);
+      } else {
+        const currentFilter: MeterUnitsLayout = {
+          id: -1,
+          name: '',
+          statesFilter: this.sessionFilter.statesFilter,
+          readStatusFilter: this.sessionFilter.readStatusFilter,
+          tagsFilter: this.sessionFilter.tagsFilter,
+          vendorsFilter: this.sessionFilter.vendorsFilter,
+          firmwareFilter: this.sessionFilter.firmwareFilter,
+          breakerStateFilter: this.sessionFilter.breakerStateFilter,
+          ciiStateFilter: this.sessionFilter.ciiStateFilter,
+          showOptionFilter: this.sessionFilter.showOptionFilter,
+          showOnlyMeterUnitsWithMBusInfoFilter: this.sessionFilter.showOnlyMeterUnitsWithMBusInfoFilter,
+          showMeterUnitsWithoutTemplateFilter: this.sessionFilter.showMeterUnitsWithoutTemplateFilter,
+          showOnlyImageReadyForActivationFilter: this.sessionFilter.showOnlyImageReadyForActivationFilter,
+          gridLayout: '',
+          mediumFilter: this.sessionFilter.mediumFilter,
+          protocolFilter: this.sessionFilter.protocolFilter
+        };
+        x.push(currentFilter);
+        this.form = this.createForm(x, currentFilter);
+      }
+    } else {
+      this.form = this.createForm(null, null);
+    }
   }
 
-  get mediumProperty() {
-    return 'medium';
+  createForm(filters: MeterUnitsLayout[], selected: MeterUnitsLayout): FormGroup {
+    return this.fb.group(
+      {
+        ['states']: [filters && selected ? selected.statesFilter : []],
+        ['tags']: [filters && selected ? selected.tagsFilter : []],
+        ['filters']: [filters ? filters : []],
+        ['vendors']: [filters && selected ? selected.vendorsFilter : null],
+        ['firmware']: [filters && selected ? selected.firmwareFilter : []],
+        ['breakerState']: [filters && selected ? selected.breakerStateFilter : []],
+        ['ciiState']: [filters && selected ? selected.ciiStateFilter : []],
+        ['operation']: [
+          filters && selected.readStatusFilter && selected.readStatusFilter.operation
+            ? selected.readStatusFilter.operation
+            : { id: '', value: '' }
+        ],
+        ['value1']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value1 : 0],
+        ['value2']: [filters && selected.readStatusFilter ? selected.readStatusFilter.value2 : 0],
+        /*['showOnlyMeterUnitsWithMBusInfo']: [filters && selected ? selected.showOnlyMeterUnitsWithMBusInfoFilter : false],
+        ['showMeterUnitsWithoutTemplate']: [filters && selected ? selected.showMeterUnitsWithoutTemplateFilter : false],
+        ['showOnlyImageReadyForActivation']: [filters && selected ? selected.showOnlyImageReadyForActivationFilter : false],*/
+        ['showOptionFilter']: [filters && selected ? selected.showOptionFilter : []],
+        [this.mediumProperty]: [filters && selected ? selected.mediumFilter : []],
+        [this.protocolProperty]: [filters && selected ? selected.protocolFilter : []]
+      },
+      { validators: [rangeFilterValidator] }
+    );
   }
 
   refresh() {}
@@ -261,7 +262,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     const currentFilter: MeterUnitsLayout = {
       id: this.sessionFilter.id ? this.sessionFilter.id : 0,
       name: this.sessionFilter.name ? this.sessionFilter.name : '',
-      statusesFilter: this.form.get(this.statusesProperty).value,
+      statesFilter: this.form.get(this.statesProperty).value,
       readStatusFilter: {
         operation: { id: '', value: '' },
         value1: 0,

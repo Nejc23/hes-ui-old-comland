@@ -32,21 +32,18 @@ export class JobsSelectComponent implements OnInit {
   public modules: Module[] = AllModules;
   public gridOptions: Partial<GridOptions>;
   public gridApi;
-  private gridColumnApi;
   public icons;
   public frameworkComponents;
   public sideBar;
-
   totalCount = 0;
   columnDefs = [];
   rowData$: Observable<RegistersSelectList[]>;
   rowData: RegistersSelectList[];
   allRowData: RegistersSelectList[];
   selectedAll = false;
-
   public pageSize = 10;
-
   requestModel: GridRequestParams;
+  private gridColumnApi;
 
   constructor(
     private jobsSelectGridService: JobsSelectGridService,
@@ -57,6 +54,15 @@ export class JobsSelectComponent implements OnInit {
     this.gridOptions = this.jobsSelectGridService.setGridOptions();
     this.frameworkComponents = jobsSelectGridService.setFrameworkComponents();
     // this.jobsSelectGridService.clearSessionSettingsSelectedRows();
+  }
+
+  get selectedAtLeastOneRowOnGrid() {
+    const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
+    return selectedRows.length > 0;
+  }
+
+  get searchProperty() {
+    return 'content';
   }
 
   createForm(): FormGroup {
@@ -106,7 +112,7 @@ export class JobsSelectComponent implements OnInit {
       ],
       searchModel: [],
       filterModel: {
-        statuses: [{ id: 0, value: '' }],
+        states: [{ id: 0, value: '' }],
         readStatus: {
           operation: { id: '', value: '' },
           value1: 0,
@@ -171,6 +177,8 @@ export class JobsSelectComponent implements OnInit {
     this.jobsSelectGridService.onColumnVisibility(params);
   }
 
+  // ----------------------- ag-grid set DATASOURCE end --------------------------
+
   // click on check-box in the grid
   selectionChanged($event: any) {
     this.selectedAll = this.getSelectedRowIds().length === this.totalCount;
@@ -188,15 +196,6 @@ export class JobsSelectComponent implements OnInit {
     } else {
       this.jobsSelectGridService.setSessionSettingsRemoveSelectedRow(params.node.data.id);
     }
-  }
-
-  // ----------------------- ag-grid set DATASOURCE end --------------------------
-
-  private noSearch() {
-    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
-      return true;
-    }
-    return false;
   }
 
   setSearch() {
@@ -221,11 +220,6 @@ export class JobsSelectComponent implements OnInit {
     return this.jobsSelectGridService.getSessionSettingsSelectedRows().length;
   }
 
-  get selectedAtLeastOneRowOnGrid() {
-    const selectedRows = this.jobsSelectGridService.getSessionSettingsSelectedRows();
-    return selectedRows.length > 0;
-  }
-
   searchChange($event: string = '') {
     if ($event !== this.jobsSelectGridService.getSessionSettingsSearchedText()) {
       // this.jobsSelectGridService.clearSessionSettingsSelectedRows();
@@ -237,15 +231,18 @@ export class JobsSelectComponent implements OnInit {
     }
   }
 
-  get searchProperty() {
-    return 'content';
-  }
-
   sizeColumnsToFit() {
     if (this.gridApi) {
       setTimeout(() => {
         this.gridApi.sizeColumnsToFit();
       }, 10);
     }
+  }
+
+  private noSearch() {
+    if (this.requestModel.searchModel == null || this.requestModel.searchModel.length === 0) {
+      return true;
+    }
+    return false;
   }
 }

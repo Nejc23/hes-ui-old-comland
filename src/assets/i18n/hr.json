@@ -24,7 +24,8 @@
         "SAVE": "Save",
         "SAVE-AND-ADD-ANOTHER": "Save and Add another",
         "SAVE-AS-NEW": "Save as new",
-        "UPDATE": "Update"
+        "UPDATE": "Update",
+        "GO-TO-JOBS": "Go to jobs"
     },
     "COMMON": {
         "0-100-RANGE": "Value must be in range 0-100",
@@ -166,7 +167,34 @@
         "WILDCARDS-SEARCH-DISABLED": "Wildcards search is disabled",
         "WILDCARDS-SEARCH-ENABLED": "Wildcards search is enabled",
         "WITH-TEMPLATE": "With template",
-        "WITHOUT-TEMPLATE": "Without template"
+        "WITHOUT-TEMPLATE": "Without template",
+        "LOADING-DATA-PLEASE-WAIT": "Loading data, please wait...",
+        "MAY-TAKE-A-MOMENT": "This may take a moment",
+        "SEE-ALL": "See all",
+        "OVERVIEW": "Overview",
+        "SHOW-MORE": "Show more",
+        "SHOW-LESS": "Show less",
+        "METER-STATUS": "Meter status",
+        "APPLIED-TAGS": "Applied tags",
+        "ALL-METERS": "all meters",
+        "NOT-DEFINED": "N/A",
+        "DETAILS": "Details",
+        "EDIT-DETAILS": "Edit details",
+        "EVENTS": "Events",
+        "SHOW-DETAILS": "Show details",
+        "HIDE-DETAILS": "Hide details",
+        "SHOW-CHART": "Show chart",
+        "HIDE-CHART": "Hide chart",
+        "NUMBER-OF-EVENTS-FOR-RANGE": "No. of events for selected range",
+        "COMMUNICATION-MODULE": "Communication module",
+        "AUTHENTICATION": "Authentication",
+        "COMMUNICATION-DETAILS": "Communication module details",
+        "BASIC-DETAILS": "Details",
+        "IN-PROGRESS": "In progress",
+        "ACTIVE-IMPORTS": "Currently active imports",
+        "NUMBER-OF-DEVICES": "{{noOfDevices}} meters will be imported or updated",
+        "ENABLE-METER": "Enable meter",
+        "DISABLE-METER": "Disable meter"
     },
     "DAY": {
         "CURRENT-MONTH": "Current month",
@@ -212,7 +240,15 @@
         "READ-STATUS": "read status{{additionalString}}",
         "STATUS": "status{{additionalString}}",
         "TYPE": "type{{additionalString}}",
-        "VENDOR": "vendor{{additionalString}}"
+        "VENDOR": "vendor{{additionalString}}",
+        "LAST-NOTIFICATIONS": "Last notifications",
+        "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again.",
+        "RE-KEY-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!",
+        "RE-KEY-CONCENTRATOR": "Re-key concentrator",
+        "CONCENTRATOR-INOPERABLE-WARNING": "This action may result in damages, rendering concentrator inoperable!",
+        "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of concentrator?",
+        "SECURITY-GAK": "Global Authentication Key (applies to meters installed on selected DC’s only)",
+        "SECURITY-GBEK": "Global Broadcast Encryption Key (applies to meters installed on selected DC’s only)"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - page not exists"
@@ -267,7 +303,10 @@
             "RANGE-INCORRECT": "Range is not correct",
             "RANGE-VALUE": "Value must be in range 0-100",
             "REQUIRED": "Required field",
-            "UNKNOWN-ERROR": "Unknown error"
+            "UNKNOWN-ERROR": "Unknown error",
+            "INVALID-HOSTNAME": "Hostname is invalid",
+            "INVALID-IPADDRESS": "IP is invalid",
+            "DUPLICATED-IPADDRESS": "IP is duplicated"
         },
         "EXPRESSION": "Expression",
         "EXTERNAL-ID": "External Id",
@@ -343,7 +382,27 @@
         "USERNAME": "Username",
         "VENDOR": "Vendor",
         "WEEK-DAYS": "Week-days",
-        "WRAPPER": "Wrapper"
+        "WRAPPER": "Wrapper",
+        "TIME": "Time",
+        "SERIALNUMBER": "Serial number",
+        "ADDRESS": "Address",
+        "TAGS": "Tags",
+        "EXTERNALID": "External Id",
+        "COORDINATES": "Coordinates",
+        "NEXT-START": "Next start",
+        "PLCSTATUS": "PLC status",
+        "HOSTNAME": "Hostname",
+        "TIMEZONENAME": "Timezone",
+        "FIRSTINSTALLDATE": "Installed",
+        "WARNING": {
+            "DUPLICATED": "The IP address you have entered is already in use by another meter!"
+        },
+        "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
+        "USE-LDN": "Use Logical Device Name",
+        "TEMPLATENAME": "Template name",
+        "PROTOCOLTYPE": "Protocol",
+        "REFERENCINGTYPE": "Short names referencing",
+        "COMMUNICATIONTYPE": "Communication type"
     },
     "GRID": {
         "ACTIVE": "Active",
@@ -428,7 +487,9 @@
         "UNIT": "Unit",
         "VALUE": "Value",
         "VENDOR": "Vendor",
-        "REGISTER": "Register"
+        "REGISTER": "Register",
+        "HOSTNAME": "Hostname",
+        "STATE": "State"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -499,10 +560,11 @@
         "SYSTEM": "System",
         "TIME-SYNCHRONIZATION": "Time synchronization",
         "TOPOLOGY": "Topology",
-        "TOPOLOGY-JOB": "Topology job"
+        "TOPOLOGY-JOB": "Topology job",
+        "ACTIVE-JOBS": "Active jobs"
     },
     "LANGUAGE": {
-        "CS": "Čeština",
+        "HR": "Hrvaščina",
         "DE": "Deutsch",
         "EN": "English",
         "FR": "Français",
@@ -540,7 +602,8 @@
         "PIN-COLLAPSE-MENU": "Pin/collapse menu",
         "POWERED-BY": "powered by Metricsx",
         "TOOLS": "Tools",
-        "USERS": "Users"
+        "USERS": "Users",
+        "IMPORT-DEVICES": "Import devices"
     },
     "MODAL": {
         "ARE-YOU-SURE-TEXT": "Are you sure you would like to trigger ",
@@ -549,14 +612,21 @@
         "READ-METER-OBJECTS-SUCCEEDED": "Read Meter Objects succeeded!",
         "SELECT-DATE-AND-REGISTERS": "Date and at least one register must be selected",
         "SELECTED": "selected",
-        "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization"
+        "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Unconditional time synchronization",
+        "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
+        "IMPORT-FAILED": "Import failed"
     },
     "OPERATION": {
         "DEVICE-DISCOVERY": "Device discovery",
         "FW-UPGRADE": "FW Upgrade",
         "OPERATIONS": "Operations",
         "SYNC-TIME": "Sync time",
-        "SYNCHRONIZE-TIME": "Synchronize time"
+        "SYNCHRONIZE-TIME": "Synchronize time",
+        "SECURITY": "Security",
+        "RE-KEY-HMAC": "Re-key HMAC",
+        "RE-KEY-CONCENTRATOR": "Re-key concentrator",
+        "ENABLE-DC": "Enable concentrator",
+        "DISABLE-DC": "Disable concentrator"
     },
     "PLC-METER": {
         "ACTIVATE-IMAGE": "Activate image",
@@ -656,11 +726,11 @@
             "METER-INOPERABLE-WARNING": "This action may result in damages, rendering meter inoperable!",
             "METER-UNITS-PASSWORD": "Meter Units password type change was successful",
             "PSK": "PSK",
-            "PW_CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
-            "PW_L1-READER": "PW_L1 (Reader)",
-            "PW_L2-INSTALLER": "PW_L2 (Installer)",
-            "PW_LG ": "PW_LG (Management)",
-            "PW_M2": "PW_M2 (Operator)",
+            "PW-CALIBRATION-VERIFICATION": "PW_CALIBRATION (Verification)",
+            "PW-L1-READER": "PW_L1 (Reader)",
+            "PW-L2-INSTALLER": "PW_L2 (Installer)",
+            "PW-LG": "PW_LG (Management)",
+            "PW-M2": "PW_M2 (Operator)",
             "RE-KEY-CONFIRM": "Are you sure you would like to perform re-keying of a selected key type ({{selectedKeyType}})?",
             "RE-KEY-METER": "Re-key meter ({{selectedRowsCount}} selected)",
             "REKEY": "Rekey",
@@ -918,5 +988,11 @@
     "ngb.timepicker.increment-seconds": "Increment seconds",
     "ngb.timepicker.minutes": "Minutes",
     "ngb.timepicker.seconds": "Seconds",
-    "ngb.toast.close-aria": "Close"
+    "ngb.toast.close-aria": "Close",
+    "PROTOCOL": {
+        "g3PLC": "G3-PLC",
+        "dlms": "DLMS",
+        "unknown": "Unknown",
+        "mM_BUS": "MM-BUS"
+    }
 }

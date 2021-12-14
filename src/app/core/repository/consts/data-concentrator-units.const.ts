@@ -1,3 +1,5 @@
+import { enumMyGridLink } from './my-grid-link.const';
+
 export const basePathConcentratorInventory = '/api/concentrator-inventory';
 export const basePath = '/api/concentrator-inventory-ui';
 export const dataConcentratorUnits = `${basePath}/concentrators`;
@@ -8,12 +10,12 @@ export const updateConcentrator = `${basePathConcentratorInventory}/concentrator
 export const dcuSync = `${basePath}/sync`;
 export const dcuLayout = '/api/dcu-layout';
 export const bulkDelete = '/api/dcu-bulk-delete';
-export const touConfigurations = '/api/time-of-use/get-time-of-use';
+export const touConfigurations = '/api/time-of-use/configurations';
 export const schedulerJobs = '/api/scheduler-jobs';
 export const activeJobs = '/api/active-jobs';
 export const stopJob = 'stop-job';
 export const cancelJob = 'cancel-job';
-export const dataConcentrator = `${basePath}/concentrator`;
+export const dataConcentrator = `${basePathConcentratorInventory}/concentrator`;
 
 // codelist DCU
 export const dcuStatuses = `${basePath}/concentrator-status-codes`;
@@ -33,8 +35,15 @@ export const dcOperationSynchronizeTime = `${basePathDcOperations}/trigger-set-c
 export const dcOperationFwUpgrade = `${basePathDcOperations}/upgrade`;
 export const dcOperationDeviceDiscovery = `${basePathDcOperations}/trigger-device-discovery`;
 export const dcLastStatus = '/last-status';
+export const dcOperationUpdateConcentrator = `${basePathConcentratorInventory}/update-concentrators-state`;
 
 // Active Jobs
 export const getActiveJobs = `${basePathDcOperations}/device-jobs`;
 // Job summary
 export const jobStateSummary = `${basePathDcOperations}/job-state/summary`;
+
+// Rekey HMAC
+export const dcRekeyHmac = `${enumMyGridLink.managment}/security/concentrator/change-hmac`;
+
+// Validations
+export const validateHostname = `${basePathConcentratorInventory}/validations/hostname`;

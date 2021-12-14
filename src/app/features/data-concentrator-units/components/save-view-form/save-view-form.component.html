@@ -10,24 +10,24 @@
       <app-input-text [form]="form" [property]="nameProperty"></app-input-text>
 
       <div class="d-flex justify-content-end">
-        <button type="button" class="btn btn-primary" (click)="save(true)">
+        <button (click)="save(true)" class="btn btn-primary" type="button">
           <span *ngIf="sessionLayout && sessionLayout.id > 0">{{'BUTTON.SAVE-AS-NEW' | translate}}</span>
           <span *ngIf="!sessionLayout || sessionLayout.id < 1">{{'BUTTON.SAVE' | translate}}</span>
         </button>
-        <button type="button" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary"
-                (click)="save(false)"><i class="far fa-sync"></i><span>{{'BUTTON.UPDATE' | translate}}</span></button>
+        <button (click)="save(false)" *ngIf="sessionLayout && sessionLayout.id > 0" class="btn btn-primary"
+                type="button"><i class="far fa-sync"></i><span>{{'BUTTON.UPDATE' | translate}}</span></button>
       </div>
       <h4 class="mt-5">{{ 'FORM.SAVED-STATES' | translate}}</h4>
-      <div class="py-1 border-bottom" *ngFor="let layoutItem of (dcuLayouts$ | async ); let i = index"
-           (mouseover)="showButtons(i)">
+      <div (mouseover)="showButtons(i)" *ngFor="let layoutItem of (dcuLayouts$ | async ); let i = index"
+           class="tw-py-1 border-bottom">
         <div class="d-flex align-items-center div-height-sm">
-          <a id="saved-filters-{{i}}" class="flex-shrink-1"
-             (click)="selectSavedLayoutClicked(i)">{{layoutItem.name}}</a>
-          <div class="flex-shrink-0 ms-auto" *ngIf="isButtonVisible(i)">
-            <button type="button" class="btn btn-sm btn-link me-1 ms-2" (click)="selectSavedLayoutClicked(i)"
-                    ngbTooltip="{{'BUTTON.APPLY' | translate }}"><i class="far fa-check"></i></button>
-            <button type="button" class="btn btn-sm btn-link" (click)="deleteSavedLayoutClicked(i)"
-                    ngbTooltip="{{'BUTTON.DELETE' | translate }}"><i class="far fa-trash text-danger"></i></button>
+          <a (click)="selectSavedLayoutClicked(i)" class="flex-shrink-1"
+             id="saved-filters-{{i}}">{{layoutItem.name}}</a>
+          <div *ngIf="isButtonVisible(i)" class="flex-shrink-0 ms-auto">
+            <button (click)="selectSavedLayoutClicked(i)" class="btn btn-sm btn-link me-1 ms-2" ngbTooltip="{{'BUTTON.APPLY' | translate }}"
+                    type="button"><i class="far fa-check"></i></button>
+            <button (click)="deleteSavedLayoutClicked(i)" class="btn btn-sm btn-link" ngbTooltip="{{'BUTTON.DELETE' | translate }}"
+                    type="button"><i class="far fa-trash text-danger"></i></button>
           </div>
         </div>
       </div>

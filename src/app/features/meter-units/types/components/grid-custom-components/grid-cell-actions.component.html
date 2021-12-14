@@ -12,6 +12,7 @@
     </button>
     <button
       (click)="showRegisters()"
+      *ngIf="params.data.state.toLowerCase() !== DeviceStateEnum.INSTALLING.toLocaleString().toLowerCase()"
       [ngbTooltip]="setToolTip('chart')"
       [openDelay]="500"
       class="btn btn-primary m-0"
@@ -22,6 +23,7 @@
     </button>
   </div>
   <div
+    *ngIf="params.data.state.toLowerCase() !== DeviceStateEnum.INSTALLING.toLocaleString().toLowerCase()"
     [permissions]="[
       permissionMuManage,
       permissionManageJobs,
@@ -285,6 +287,14 @@
       <div [permission]="permissionClearAlarms" appHideIfPermissionUnauthorized>
         <a (click)="onClearAlarms()" class="dropdown-item gray-light-line"
            href="javascript:void(0);"><span>{{ 'PLC-METER.CLEAR-ALARMS' | translate }}</span></a>
+      </div>
+      <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
+        <a (click)="onEnableMeter()" class="dropdown-item item-padding" href="javascript:void(0);"><span
+          i18n>{{ 'COMMON.ENABLE-METER' | translate }}</span></a>
+      </div>
+      <div [permission]="permissionMuManage" appHideIfPermissionUnauthorized>
+        <a (click)="onDisableMeter()" class="dropdown-item item-padding" href="javascript:void(0);"><span
+          i18n>{{ 'COMMON.DISABLE-METER' | translate }}</span></a>
       </div>
       <div [permission]="permissionReadMeter" appHideIfPermissionUnauthorized>
         <a (click)="onReadMeter()" class="dropdown-item item-padding" href="javascript:void(0);"><span

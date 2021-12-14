@@ -1,15 +1,19 @@
 <div class="pt-1 h-100">
   <form [formGroup]="form">
     <div class="d-flex mb-2">
-      <h3 class="mb-0 text-truncate" container="body" placement="bottom" [openDelay]="500" [ngbTooltip]="'FILTER.TITLE' | translate">{{ 'FILTER.TITLE' | translate}}</h3>
-      <button type="button" class="btn-close ms-auto" (click)="doToggleFilter()">
+      <h3 [ngbTooltip]="'FILTER.TITLE' | translate" [openDelay]="500" class="mb-0 text-truncate" container="body"
+          placement="bottom">{{ 'FILTER.TITLE' | translate}}</h3>
+      <button (click)="doToggleFilter()" class="btn-close ms-auto" type="button">
       </button>
     </div>
     <div class="filter-scroll">
-      <fieldset [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
-        <app-input-tag label="Status" [property]="statusesProperty" [form]="form"
-          [autocompleteItemsAsObjects]="dcuStatuses$ | async" [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-          (valueChanged)="applyFilter()">
+      <fieldset
+        [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll">
+        <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="dcuStatuses$ | async"
+                       [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
+                       [form]="form"
+                       [property]="statesProperty"
+                       label="State">
         </app-input-tag>
 
         <!--<div class="form-row">
@@ -26,29 +30,36 @@
             [format]="'#.## \\%'" [step]="1" [isReadOnly]="false" [allowShowError]="false"></app-input-numeric>
           </div>
         </div>-->
-        <div class="form-row text-danger" *ngIf="!form.valid">
+        <div *ngIf="!form.valid" class="form-row text-danger">
           <div class="col-6"></div>
-          <div class="col-6"><i class="far fa-info-circle"></i><span class="small">{{errorValidatorReadStatusComponents()}}</span></div>
+          <div class="col-6"><i class="far fa-info-circle"></i><span
+            class="small">{{errorValidatorReadStatusComponents()}}</span></div>
         </div>
 
-        <app-input-tag label="Type" [form]="form" [property]="typesProperty" [autocompleteItemsAsObjects]="dcuTypes$ | async"
-         [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-          (valueChanged)="applyFilter()">
+        <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="dcuTypes$ | async"
+                       [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
+                       [form]="form"
+                       [property]="typesProperty"
+                       label="Type">
         </app-input-tag>
 
-        <app-input-tag label="Vendor" [form]="form" [property]="vendorsProperty" [autocompleteItemsAsObjects]="dcuVendors$ | async"
-          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-          (valueChanged)="applyFilter()">
+        <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="dcuVendors$ | async"
+                       [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
+                       [form]="form"
+                       [property]="vendorsProperty"
+                       label="Vendor">
         </app-input-tag>
 
-        <app-input-tag label="Tag" [property]="tagsProperty" [form]="form" [autocompleteItemsAsObjects]="dcuTags$ | async"
-          [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
-          (valueChanged)="applyFilter()">
+        <app-input-tag (valueChanged)="applyFilter()" [autocompleteItemsAsObjects]="dcuTags$ | async"
+                       [disabled]="gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState).isSelectedAll"
+                       [form]="form"
+                       [property]="tagsProperty"
+                       label="Tag">
         </app-input-tag>
 
       </fieldset>
       <div class="mb-3 link mt-2">
-        <strong><a class="text-primary" href="javascript:void(0);" (click)="clearButtonClicked()">
+        <strong><a (click)="clearButtonClicked()" class="text-primary" href="javascript:void(0);">
           <span>{{ 'FILTER.CLEAR-FILTERS' | translate}}</span></a>
         </strong>
       </div>

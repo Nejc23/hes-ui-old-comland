@@ -137,6 +137,47 @@ export class SchedulerJobComponent {
     this.initAddJobsForUser();
   }
 
+  // properties - START
+  get startAtProperty() {
+    return nameOf<SchedulerJobForm>((o) => o.startAt);
+  }
+
+  get endAtProperty() {
+    return nameOf<SchedulerJobForm>((o) => o.endAt);
+  }
+
+  get registersProperty() {
+    return nameOf<SchedulerJobForm>((o) => o.registers);
+  }
+
+  get devicesProperty() {
+    return nameOf<SchedulerJobForm>((o) => o.devices);
+  }
+
+  get descriptionProperty() {
+    return nameOf<SchedulerJobForm>((o) => o.description);
+  }
+
+  get usePointerProperty() {
+    return nameOf<ReadingProperties>((o) => o.usePointer);
+  }
+
+  get intervalRangeProperty() {
+    return nameOf<ReadingProperties>((o) => o.intervalRange);
+  }
+
+  get timeUnitProperty() {
+    return nameOf<ReadingProperties>((o) => o.timeUnit);
+  }
+
+  get activeProperty() {
+    return nameOf<SchedulerJobForm>((o) => o.active);
+  }
+
+  get iecPushEnabledProperty() {
+    return nameOf<ReadingProperties>((o) => o.iecPushEnabled);
+  }
+
   initAddJobsForUser() {
     this.addJobsForUser = this.addJobs.filter((j) => j.hasUserAccess);
     const jobsLength = this.addJobsForUser.length;
@@ -218,6 +259,10 @@ export class SchedulerJobComponent {
       }
     }
   }
+
+  // showUsePointer() {
+  //   return this.form.get(this.usePointerProperty).value === true;
+  // }
 
   setFormEdit(jobsTimeUnits: Codelist<number>[], selectedJobId: string, job: SchedulerJob, jobType: JobTypeEnumeration) {
     this.step = 1;
@@ -334,14 +379,8 @@ export class SchedulerJobComponent {
       readingProperties: {
         usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
         iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
-        intervalRange:
-          this.showForLast() && this.form.get(this.intervalRangeProperty).value
-            ? parseInt(this.form.get(this.intervalRangeProperty).value, 10)
-            : 0,
-        timeUnit:
-          this.showForLast() && this.form.get(this.timeUnitProperty).value
-            ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id
-            : 0
+        intervalRange: this.form.get(this.intervalRangeProperty).value ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
+        timeUnit: this.form.get(this.timeUnitProperty).value ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
       }
     };
     return formData;
@@ -355,16 +394,12 @@ export class SchedulerJobComponent {
   }
 
   showForLast() {
-    return this.jobType === JobTypeEnumeration.reading;
+    return this.jobType === JobTypeEnumeration.reading || this.jobType === JobTypeEnumeration.readEvents;
   }
 
   showPointer() {
     return this.jobType === JobTypeEnumeration.reading || this.jobType === JobTypeEnumeration.readEvents;
   }
-
-  // showUsePointer() {
-  //   return this.form.get(this.usePointerProperty).value === true;
-  // }
 
   showIecPush() {
     return this.jobType === JobTypeEnumeration.reading;
@@ -440,47 +475,6 @@ export class SchedulerJobComponent {
 
   registerSelectionChanged(hasValues: boolean) {
     this.noRegisters = !hasValues;
-  }
-
-  // properties - START
-  get startAtProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.startAt);
-  }
-
-  get endAtProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.endAt);
-  }
-
-  get registersProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.registers);
-  }
-
-  get devicesProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.devices);
-  }
-
-  get descriptionProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.description);
-  }
-
-  get usePointerProperty() {
-    return nameOf<ReadingProperties>((o) => o.usePointer);
-  }
-
-  get intervalRangeProperty() {
-    return nameOf<ReadingProperties>((o) => o.intervalRange);
-  }
-
-  get timeUnitProperty() {
-    return nameOf<ReadingProperties>((o) => o.timeUnit);
-  }
-
-  get activeProperty() {
-    return nameOf<SchedulerJobForm>((o) => o.active);
-  }
-
-  get iecPushEnabledProperty() {
-    return nameOf<ReadingProperties>((o) => o.iecPushEnabled);
   }
 
   // properties - END

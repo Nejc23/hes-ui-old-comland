@@ -1,5 +1,5 @@
 export interface DcuUpdateRequest {
-  ip: string;
+  hostname: string;
   // type: number;
   // vendor: number;
   name: string;
@@ -10,8 +10,11 @@ export interface DcuUpdateRequest {
   address?: string;
   // mac?: string;
   // status?: number;
-  port?: string;
   // latitude?: number;
   // longitude?: number;
   // tags?: string[];
+}
+
+export interface ValidateHostnameRequest {
+  hostname: string;
 }

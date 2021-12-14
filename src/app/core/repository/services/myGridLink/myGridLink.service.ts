@@ -5,9 +5,11 @@ import { RepositoryService } from 'src/app/core/repository/services/repository.s
 import { deleteMeters, onDemandClearAlarms, triggerSetDisplaySettings } from '../../consts/meter-units.const';
 import {
   activateTriggerDeviceUpgrade as triggerDeviceUpgradeActivate,
+  activeImports,
   enumMyGridLink,
   getCommonRegisterGroups,
   identityToken,
+  importDevices,
   importTemplates,
   lastStatus,
   onDemandClearFF,
@@ -18,8 +20,11 @@ import {
   onDemandSetBreakerMode,
   onDemandSetLimiter,
   onDemandSetMonitor,
+  securityConcentratorRekey,
+  triggerConcUpgrade,
   triggerDeviceUpgrade,
-  triggerSetTimeOfUse
+  triggerSetTimeOfUse,
+  updateMeterState
 } from '../../consts/my-grid-link.const';
 import {
   IActionRequestFwUpgradeData,
@@ -81,6 +86,7 @@ import {
   IActionResponseSecurityRekey,
   IActionResponseSetDisplaySettings
 } from './../../interfaces/myGridLink/action-prams.interface';
+import { basePathConcentratorInventory } from '../../consts/data-concentrator-units.const';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +107,7 @@ export class MyGridLinkService {
   getMyGridLastStatus(requestId: string): Observable<LastStatus[]> {
     return this.repository.makeRequest(this.getMyGridLastStatusRequest(requestId));
   }
+
   // api/concentrator-management
   getMyGridLastStatusRequest(requestId: string): HttpRequest<LastStatus[]> {
     return new HttpRequest('GET', `${enumMyGridLink.managment}/${requestId}${lastStatus}`);
@@ -203,6 +210,15 @@ export class MyGridLinkService {
 
   createFwUpgradeRequest(payload: IActionRequestFwUpgradeData): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerDeviceUpgrade}`, payload);
+  }
+
+  // trigger upload conc FW upgrade
+  createConcFwUpgrade(payload: IActionRequestFwUpgradeData): Observable<IActionResponseFwUpgradeData> {
+    return this.repository.makeRequest(this.createConcFwUpgradeRequest(payload));
+  }
+
+  createConcFwUpgradeRequest(payload: IActionRequestFwUpgradeData): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.managment}${triggerConcUpgrade}`, payload);
   }
 
   // trigger activate FW upgrade
@@ -384,5 +400,37 @@ export class MyGridLinkService {
 
   synchronizeRequest(params: IActionRequestParams): HttpRequest<any> {
     return new HttpRequest('POST', `${enumMyGridLink.managment}${onDemandTimeSyc}`, params);
+  }
+
+  postSecurityConcentratorRekey(param: IActionRequestSecurityRekey): Observable<IActionResponseSecurityRekey> {
+    return this.repository.makeRequest(this.postSecurityConcentratorRekeyRequest(param));
+  }
+
+  postSecurityConcentratorRekeyRequest(param: IActionRequestSecurityRekey): HttpRequest<any> {
+    return new HttpRequest('POST', `${securityConcentratorRekey}`, param);
+  }
+
+  postUpdateMeterState(params: IActionRequestParams): Observable<IActionResponseParams> {
+    return this.repository.makeRequest(this.postUpdateMeterStateRequest(params));
+  }
+
+  postUpdateMeterStateRequest(params: IActionRequestParams): HttpRequest<any> {
+    return new HttpRequest('POST', `${basePathConcentratorInventory}${updateMeterState}`, params);
+  }
+
+  postImportDevices(params: string): Observable<any> {
+    return this.repository.makeRequest(this.postImportDevicesRequest(params));
+  }
+
+  postImportDevicesRequest(params: string): HttpRequest<any> {
+    return new HttpRequest('POST', `${enumMyGridLink.inventory}${importDevices}`, params);
+  }
+
+  getActiveImports(): Observable<any> {
+    return this.repository.makeRequest(this.getActiveImportsRequest());
+  }
+
+  getActiveImportsRequest(): HttpRequest<any> {
+    return new HttpRequest('GET', `${enumMyGridLink.managment}${activeImports}`);
   }
 }

@@ -3,7 +3,7 @@ import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/ser
 import { MeterUnitDetailsForm } from '../interfaces/meter-unit-form.interface';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FunctionalityEnumerator } from 'src/app/core/permissions/enumerators/functionality-enumerator.model';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,26 +11,32 @@ import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.servi
 import { nameOf } from 'src/app/shared/utils/helpers/name-of-factory.helper';
 import { MeterUnitsTypeEnum } from '../../types/enums/meter-units-type.enum';
 import { MeterUnitsPlcActionsService } from '../../types/services/meter-units-plc-actions.service';
-import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { Breadcrumb } from 'src/app/shared/breadcrumbs/interfaces/breadcrumb.interface';
+import { DeviceState, MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { AddMuFormComponent } from '../../common/components/add-mu-form/add-mu-form.component';
-import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
+import { PermissionService } from '../../../../core/permissions/services/permission.service';
+import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
 
 @Component({
-  templateUrl: 'meter-unit-details.component.html'
+  templateUrl: 'meter-unit-details.component.html',
+  styleUrls: ['./meter-unit-details.component.scss']
 })
 export class MeterUnitDetailsComponent implements OnInit {
-  private deviceId;
   public saveError;
-
-  private requestModel;
-
   public data: MeterUnitDetails;
-  public form: FormGroup;
-  plcProtocols = ['DC450G3', 'AC750', 'AmeraDC'];
+  public detailsForm: FormGroup;
+  communicationForm: FormGroup;
+
+  plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];
   isPlcDevice = false;
+  openEdit = false;
+  saveData = false;
+  basicDetails = false;
+  DeviceStateEnum = DeviceState;
+
+  private deviceId;
+  private requestModel;
 
   constructor(
     private breadcrumbService: BreadcrumbService,
@@ -42,70 +48,21 @@ export class MeterUnitDetailsComponent implements OnInit {
     private codeList: CodelistMeterUnitsRepositoryService,
     private router: Router,
     private modalService: ModalService,
-    private translate: TranslateService
-  ) {}
-
-  ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      this.deviceId = params.deviceId;
-      this.requestModel = {
-        deviceIds: [this.deviceId],
-        filter: null,
-        search: null,
-        excludeIds: null,
-        InitiateReading: false // TODO get data from BE
-      };
+    private translate: TranslateService,
+    private elRef: ElementRef,
+    private permissionService: PermissionService,
+    private eventService: MeterUnitsTypeGridEventEmitterService
+  ) {
+    this.eventService.eventEmitterRefreshDevices.subscribe({
+      next: () => {
+        this.getData();
+      }
     });
-
-    // get MeterUnit
-    this.getData();
   }
 
   // form - rights
   get formFunctionality() {
     return FunctionalityEnumerator.MU;
-  }
-
-  public editMeterUnit() {
-    const options: NgbModalOptions = {
-      size: 'lg'
-    };
-
-    const modalRef = this.modalService.open(AddMuFormComponent, options);
-    const component: AddMuFormComponent = modalRef.componentInstance;
-    component.plcDevice = this.isPlcDevice;
-
-    if (this.data) {
-      modalRef.componentInstance.setFormEdit(this.data, options);
-    }
-
-    modalRef.result
-      .then((result) => {
-        if (result) {
-          this.getData();
-        }
-      })
-      .catch(() => {});
-  }
-
-  getData() {
-    if (!this.deviceId || this.deviceId.length === 0) {
-      // this.form = this.createForm();
-      return;
-    }
-
-    this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
-      this.data = response;
-      this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
-      this.setBreadcrumbs();
-      if (this.plcProtocols.find((val) => val.toLowerCase() === this.data.protocol?.toLowerCase())) {
-        this.isPlcDevice = true;
-      }
-    });
-  }
-
-  fillData(): MeterUnitDetailsForm {
-    return null;
   }
 
   get nameProperty() {
@@ -144,8 +101,6 @@ export class MeterUnitDetailsComponent implements OnInit {
     return nameOf<MeterUnitDetailsForm>((o) => o.address);
   }
 
-  // permission rights
-
   get permissionMuManage() {
     return PermissionEnumerator.Manage_Meters;
   }
@@ -177,6 +132,8 @@ export class MeterUnitDetailsComponent implements OnInit {
   get permissionDisconnectorSetMode() {
     return PermissionEnumerator.Disconnector_Set_Mode;
   }
+
+  // permission rights
 
   get permissionCiiActivate() {
     return PermissionEnumerator.CII_Activate;
@@ -242,22 +199,66 @@ export class MeterUnitDetailsComponent implements OnInit {
     return PermissionEnumerator.Sync_Time;
   }
 
-  setBreadcrumbs() {
-    const breadcrumbs: Breadcrumb[] = [
-      {
-        label: this.translate.instant('MENU.METERS'),
-        params: {},
-        url: null
-      }
-    ];
-
-    breadcrumbs.push({
-      label: this.translate.instant('MENU.METER-UNITS'),
-      params: {},
-      url: null
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      this.deviceId = params.deviceId;
+      this.requestModel = {
+        deviceIds: [this.deviceId],
+        filter: null,
+        search: null,
+        excludeIds: null,
+        InitiateReading: false // TODO get data from BE
+      };
     });
 
-    this.breadcrumbService.setBreadcrumbs(breadcrumbs);
+    // get MeterUnit
+    this.getData();
+  }
+
+  getData() {
+    this.meterUnitsService.getMeterUnitFromConcentrator(this.deviceId).subscribe((response: MeterUnitDetails) => {
+      this.saveData = false;
+      this.data = response;
+      this.breadcrumbService.setPageName(this.data.name ? this.data.name : this.data.serialNumber);
+      if (this.plcAndMbusProtocols.find((val) => val.toLowerCase() === this.data.driver?.toLowerCase())) {
+        this.isPlcDevice = true;
+      }
+      this.createForm();
+      this.closeSlideOut();
+    });
+  }
+
+  createForm() {
+    this.detailsForm = this.formBuilder.group({
+      name: this.data.name,
+      serialNumber: this.data.serialNumber,
+      templateName: this.data.templateName,
+      //  deviceState: this.data.deviceState,
+      //   protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
+      manufacturer: this.data.manufacturer,
+      //   ip: this.data.ip,
+      //   port: this.data.port,
+      externalId: this.data.externalId
+    });
+
+    if (this.isPlcDevice) {
+      this.communicationForm = this.formBuilder.group({
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType)
+      });
+    } else {
+      this.communicationForm = this.formBuilder.group({
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
+        ip: this.data.ip,
+        port: this.data.port,
+        referencingType: this.data.referencingType.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase(),
+        communicationType: this.data.hdlcInformation ? 'HDLC' : 'WRAPPER'
+      });
+    }
+  }
+
+  editButtonClicked(basicDetails?: boolean) {
+    this.basicDetails = basicDetails;
+    this.openEdit = true;
   }
 
   // --> Operations action click
@@ -426,5 +427,39 @@ export class MeterUnitDetailsComponent implements OnInit {
   onReadMeter() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
     this.plcActionsService.onReadRegisters(params, 1);
+  }
+
+  onEnable() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.enableMeter, params, 1);
+  }
+
+  onDisable() {
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1);
+    this.plcActionsService.bulkOperation(MeterUnitsTypeEnum.disableMeter, params, 1);
+  }
+
+  addWidth() {
+    return this.elRef.nativeElement.parentElement.offsetWidth;
+  }
+
+  closeSlideOut() {
+    //  this.saveData = false;
+    this.openEdit = false;
+  }
+
+  update() {
+    this.saveData = true;
+  }
+
+  isEditVisible() {
+    return this.permissionService.hasAccess(PermissionEnumerator.Manage_Meters);
+  }
+
+  saveDataEvent(event: boolean) {
+    this.saveData = false;
+    if (event) {
+      this.getData();
+    }
   }
 }

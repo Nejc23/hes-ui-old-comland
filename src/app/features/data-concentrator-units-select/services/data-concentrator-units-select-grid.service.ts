@@ -62,13 +62,13 @@ export class DataConcentratorUnitsSelectGridService {
         headerTooltip: this.translate.instant('GRID.ID')
       },
       {
-        field: 'ip',
-        headerName: this.translate.instant('GRID.IP'),
+        field: 'hostname',
+        headerName: this.translate.instant('GRID.HOSTNAME'),
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: this.translate.instant('GRID.IP')
+        headerTooltip: this.translate.instant('GRID.HOSTNAME')
       }
     ];
   }
@@ -109,15 +109,15 @@ export class DataConcentratorUnitsSelectGridService {
         headerTooltip: this.translate.instant('GRID.ID')
       },
       {
-        field: 'ip',
-        headerName: this.translate.instant('GRID.IP'),
+        field: 'hostname',
+        headerName: this.translate.instant('GRID.HOSTNAME'),
         suppressMenu: true,
         suppressMovable: true,
         pinned: false,
         sortable: true,
         filter: false,
         cellRenderer: 'gridCellIpComponent',
-        headerTooltip: this.translate.instant('GRID.IP')
+        headerTooltip: this.translate.instant('GRID.HOSTNAME')
       }
     ];
   }
