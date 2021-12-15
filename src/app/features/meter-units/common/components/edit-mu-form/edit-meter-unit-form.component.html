@@ -68,7 +68,7 @@
       </div>
     </div>
 
-    <kendo-tabstrip *ngIf="isDlms" [keepTabContent]="false" class="edit-meter">
+    <kendo-tabstrip *ngIf="isDlms" (tabSelect)="onTabSelect($event);" [keepTabContent]="false" class="edit-meter">
       <kendo-tabstrip-tab [selected]="true" title="{{ 'COMMON.BASIC' | translate }}">
         <ng-template kendoTabContent>
 
@@ -91,8 +91,8 @@
                                 label="IP"></app-input-text>
               </div>
               <div class="col-3">
-                <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"
-                                   [isReadOnly]="false" [max]="65535" [min]="0"
+                <app-input-numeric [allowShowError]="isIpAddressValid()" [decimals]="0" [form]="form" [format]="'#'"
+                                   [isReadOnly]="false" [max]="65535" [min]="0" (inputTextBlurValue)="validateIpAddress()"
                                    [noFlex]="true" [property]="portProperty" [showSpinners]="false" [step]="1"
                                    label="PORT"></app-input-numeric>
               </div>

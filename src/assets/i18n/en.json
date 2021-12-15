@@ -316,7 +316,7 @@
       "UNKNOWN-ERROR": "Unknown error",
       "INVALID-HOSTNAME": "Hostname is invalid",
       "INVALID-IPADDRESS": "IP is invalid",
-      "DUPLICATED-IPADDRESS": "IP is duplicated",
+      "DUPLICATED-IPADDRESS": "Combination of IP and port is duplicated",
       "ID-EXIST": "Id exist"
     },
     "EXPRESSION": "Expression",

@@ -662,7 +662,12 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
 
   validateIpAddressAndSetNotice(communicationType: string) {
     this.muService
-      .validateIpAddress(this.form.get(this.ipProperty).value, this.data?.deviceId, parseInt(communicationType, 10))
+      .validateIpAddress(
+        this.form.get(this.ipProperty).value,
+        this.form.get(this.portProperty).value,
+        this.data?.deviceId,
+        parseInt(communicationType, 10)
+      )
       .subscribe((validationData) => {
         const status = ValidateIpAddressStatus[validationData.toUpperCase()];
         switch (status) {
@@ -680,6 +685,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
           case ValidateIpAddressStatus.INVALID_DUPLICATED: {
             this.form.get(this.ipProperty).setErrors({ invalidDuplicatedIpAddress: true });
             this.form.get(this.ipProperty).markAsDirty();
+            this.form.get(this.portProperty).setErrors({ incorrect: true });
+            this.form.get(this.portProperty).markAsDirty();
             this.ipFieldComponent.clearWarning();
             break;
           }
@@ -692,6 +699,16 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       });
   }
 
+  isIpAddressValid() {
+    return this.form.get(this.ipProperty).valid;
+  }
+
+  onTabSelect(e) {
+    if (e && e.index === 0) {
+      this.validateIpAddress();
+    }
+  }
+
   clearIpAddressError() {
     if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
       delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
@@ -701,6 +718,11 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     if (this.form.get(this.ipProperty).hasError('invalidDuplicatedIpAddress')) {
       delete this.form.get(this.ipProperty).errors['invalidDuplicatedIpAddress'];
       this.form.get(this.ipProperty).updateValueAndValidity();
+    }
+
+    if (this.form.get(this.portProperty).hasError('incorrect')) {
+      delete this.form.get(this.portProperty).errors['incorrect'];
+      this.form.get(this.portProperty).updateValueAndValidity();
     }
   }
 }

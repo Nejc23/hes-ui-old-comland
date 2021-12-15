@@ -1,6 +1,7 @@
 export interface ValidateIpAddressRequest {
   deviceId: string;
   ipAddress: string;
+  port: number;
   interfaceType: number;
 }
 
