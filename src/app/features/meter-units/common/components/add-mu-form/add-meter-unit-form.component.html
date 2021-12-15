@@ -52,8 +52,8 @@
                     <app-input-text [form]="form" [property]="ipProperty" #ipField label="IP" (inputTextBlurValue)="validateIpAddress()"></app-input-text>
                   </div>
                   <div class="col-3">
-                    <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"
-                                       [isReadOnly]="false" [max]="65535" [min]="0"
+                    <app-input-numeric [allowShowError]="isIpAddressValid()" [decimals]="0" [form]="form" [format]="'#'"
+                                       [isReadOnly]="false" [max]="65535" [min]="0" (inputTextBlurValue)="validateIpAddress()"
                                        [noFlex]="true" [property]="portProperty" [showSpinners]="false" [step]="1"
                                        label="PORT"></app-input-numeric>
                   </div>

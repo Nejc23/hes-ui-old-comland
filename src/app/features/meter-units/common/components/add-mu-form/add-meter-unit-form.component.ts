@@ -669,6 +669,9 @@ export class AddMeterUnitFormComponent implements OnInit {
   }
 
   onTabSelect(e) {
+    if (e && e.index === 0) {
+      this.validateIpAddress();
+    }
     if (this.jobsSelect) {
       this.jobsSelect.sizeColumnsToFit();
     }
@@ -692,7 +695,12 @@ export class AddMeterUnitFormComponent implements OnInit {
 
   validateIpAddressAndSetNotice(communicationType: string) {
     this.muService
-      .validateIpAddress(this.form.get(this.ipProperty).value, this.editMu?.deviceId, parseInt(communicationType, 10))
+      .validateIpAddress(
+        this.form.get(this.ipProperty).value,
+        this.form.get(this.portProperty).value,
+        this.editMu?.deviceId,
+        parseInt(communicationType, 10)
+      )
       .subscribe((data) => {
         const status = ValidateIpAddressStatus[data.toUpperCase()];
         switch (status) {
@@ -710,6 +718,8 @@ export class AddMeterUnitFormComponent implements OnInit {
           case ValidateIpAddressStatus.INVALID_DUPLICATED: {
             this.form.get(this.ipProperty).setErrors({ invalidDuplicatedIpAddress: true });
             this.form.get(this.ipProperty).markAsDirty();
+            this.form.get(this.portProperty).setErrors({ incorrect: true });
+            this.form.get(this.portProperty).markAsDirty();
             this.ipFieldComponent.clearWarning();
             break;
           }
@@ -722,6 +732,10 @@ export class AddMeterUnitFormComponent implements OnInit {
       });
   }
 
+  isIpAddressValid() {
+    return this.form.get(this.ipProperty).valid;
+  }
+
   clearIpAddressError() {
     if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
       delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
@@ -731,6 +745,11 @@ export class AddMeterUnitFormComponent implements OnInit {
     if (this.form.get(this.ipProperty).hasError('invalidDuplicatedIpAddress')) {
       delete this.form.get(this.ipProperty).errors['invalidDuplicatedIpAddress'];
       this.form.get(this.ipProperty).updateValueAndValidity();
+    }
+
+    if (this.form.get(this.portProperty).hasError('incorrect')) {
+      delete this.form.get(this.portProperty).errors['incorrect'];
+      this.form.get(this.portProperty).updateValueAndValidity();
     }
   }
 }
