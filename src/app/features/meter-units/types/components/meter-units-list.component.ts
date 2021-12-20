@@ -1,42 +1,42 @@
-import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
-import { AddMeterUnitFormComponent } from '../../common/components/add-mu-form/add-meter-unit-form.component';
-import { GridUtils } from 'src/app/features/global/grid.utils';
-import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
-import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { GridOptions, Module } from '@ag-grid-community/core';
+import { AllModules } from '@ag-grid-enterprise/all-modules';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
-import { MeterUnitsTypeStaticTextService } from '../services/meter-units-type-static-text.service';
-import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
-import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { MeterUnitsTypeGridEventEmitterService } from '../services/meter-units-type-grid-event-emitter.service';
-import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
-import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
-import { GridOptions, Module } from '@ag-grid-community/core';
-import { AllModules } from '@ag-grid-enterprise/all-modules';
-import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
-import { Subscription } from 'rxjs';
-import * as _ from 'lodash';
-import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
-import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
-import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
-import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
-import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
-import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
-import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
-import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
-import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
-import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
-import { ModalService } from 'src/app/core/modals/services/modal.service';
-import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import * as _ from 'lodash';
+import { Subscription } from 'rxjs';
+import { GridColumnShowHideService } from 'src/app/core/ag-grid-helpers/services/grid-column-show-hide.service';
+import { AuthService } from 'src/app/core/auth/services/auth.service';
+import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { PermissionEnumerator } from 'src/app/core/permissions/enumerators/permission-enumerator.model';
+import { GridRequestParams, GridSortParams } from 'src/app/core/repository/interfaces/helpers/grid-request-params.interface';
+import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units/meter-units-layout.interface';
+import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
+import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
+import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
+import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
+import { SettingsStoreService } from 'src/app/core/repository/services/settings-store/settings-store.service';
+import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { GridLayoutSessionStoreService } from 'src/app/core/utils/services/grid-layout-session-store.service';
+import { GridSettingsCookieStoreService } from 'src/app/core/utils/services/grid-settings-cookie-store.service';
+import { GridUtils } from 'src/app/features/global/grid.utils';
+import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
+import { AgGridSharedFunctionsService } from 'src/app/shared/ag-grid/services/ag-grid-shared-functions.service';
+import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
+import { FiltersInfo } from 'src/app/shared/forms/interfaces/filters-info.interface';
+import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
+import { configAgGrid, enumSearchFilterOperators, gridRefreshInterval } from 'src/environments/config';
+import { ConcentratorService } from '../../../../core/repository/services/concentrator/concentrator.service';
+import { AddMeterUnitFormComponent } from '../../common/components/add-mu-form/add-meter-unit-form.component';
+import { MeterUnitsTypeEnum } from '../enums/meter-units-type.enum';
+import { MeterUnitsTypeGridLayoutStore } from '../interfaces/meter-units-type-grid-layout.store';
+import { MeterUnitsPlcActionsService } from '../services/meter-units-plc-actions.service';
+import { MeterUnitsTypeGridEventEmitterService } from '../services/meter-units-type-grid-event-emitter.service';
+import { MeterUnitsTypeGridService } from '../services/meter-units-type-grid.service';
+import { MeterUnitsTypeStaticTextService } from '../services/meter-units-type-static-text.service';
+import { SidebarToggleService } from './../../../../shared/base-template/components/services/sidebar.service';
 
 @Component({
   selector: 'app-meter-units',
@@ -601,7 +601,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // --> Operations action click (bulk or selected row)
-  onDisconnectorStatus(selectedGuid: string) {
+  onDisconnectorStatus(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -616,7 +616,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onActivateUpgrade(selectedGuid: string) {
+  onActivateUpgrade(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -631,7 +631,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onConnect(selectedGuid: string) {
+  onConnect(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -646,7 +646,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDisconnect(selectedGuid: string) {
+  onDisconnect(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -661,7 +661,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCiiState(selectedGuid: string) {
+  onCiiState(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -676,7 +676,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCiiActivate(selectedGuid: string) {
+  onCiiActivate(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -691,7 +691,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onCiiDeactivate(selectedGuid: string) {
+  onCiiDeactivate(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -706,7 +706,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onClearFF(selectedGuid: string) {
+  onClearFF(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -721,7 +721,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // TODO missing BE api !!
-  onDelete(selectedGuid: string) {
+  onDelete(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -748,17 +748,17 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   // delete button click
 
   // popup
-  onScheduleReadJobs(selectedGuid: string) {
+  onScheduleReadJobs(selectedGuid?: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onScheduleReadJobs(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
-  onJobsAssignExisting(selectedGuid: string) {
+  onJobsAssignExisting(selectedGuid?: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onJobsAssignExisting(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
-  onJobsTemplates(selectedGuid: string) {
+  onJobsTemplates(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -769,7 +769,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onTou(selectedGuid: string) {
+  onTou(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.TOU-UPLOAD');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -781,7 +781,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onUpgrade(selectedGuid: string) {
+  onUpgrade(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.UPLOAD-IMAGE');
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
@@ -794,21 +794,21 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onSetMonitor(selectedGuid: string) {
+  onSetMonitor(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.SET-MONITOR');
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetMonitor(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
-  onSetLimiter(selectedGuid: string) {
+  onSetLimiter(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.SET-LIMITER');
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.onSetLimiter(params, selectedGuid?.length > 0 ? 1 : this.getSelectedCount(), actionName);
   }
 
   // popup
-  onReadLimiterThreshold(selectedGuid: string) {
+  onReadLimiterThreshold(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -822,7 +822,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onReadMonitorThreshold(selectedGuid: string) {
+  onReadMonitorThreshold(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -837,7 +837,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onRelaysConnect(selectedGuid: string) {
+  onRelaysConnect(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.RELAY-CONNECT');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -850,7 +850,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onRelaysDisconnect(selectedGuid: string) {
+  onRelaysDisconnect(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.RELAY-DISCONNECT');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -863,7 +863,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onRelaysState(selectedGuid: string) {
+  onRelaysState(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.RELAY-STATE');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -876,7 +876,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onRelaysSetMode(selectedGuid: string) {
+  onRelaysSetMode(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.RELAY-MODE');
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -889,7 +889,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onDisconnectorMode(selectedGuid: string) {
+  onDisconnectorMode(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.BREAKER-MODE');
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
@@ -902,7 +902,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onSetDisplaySettings(selectedGuid: string) {
+  onSetDisplaySettings(selectedGuid?: string) {
     const actionName = this.translate.instant('PLC-METER.SET-DISPLAY-SETTINGS');
     const paramsOld = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
@@ -916,7 +916,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // on clear alarms
-  onClearAlarms(selectedGuid: string) {
+  onClearAlarms(selectedGuid?: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.clearAlarms,
@@ -1003,7 +1003,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
 
   // <-- end Operations action click (bulk or selected row)
 
-  onSecurityActivateHls(selectedGuid: string) {
+  onSecurityActivateHls(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -1014,7 +1014,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     this.plcActionsService.onSecurityActivateHls(params, selectedGuid && selectedGuid?.length > 0 ? 1 : this.getSelectedCount());
   }
 
-  onSecurityRekey(selectedGuid: string) {
+  onSecurityRekey(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -1027,7 +1027,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
 
   // --> start Security action click (bulk or selected row)
 
-  onSecurityChangePassword(selectedGuid: string) {
+  onSecurityChangePassword(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -1324,7 +1324,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // popup
-  onSyncTime(selectedGuid: string) {
+  onSyncTime(selectedGuid?: string) {
     const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     this.plcActionsService.bulkOperation(
       MeterUnitsTypeEnum.syncTime,
@@ -1333,7 +1333,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onEnableMeter(selectedGuid: string) {
+  onEnableMeter(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
@@ -1348,7 +1348,7 @@ export class MeterUnitsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDisableMeter(selectedGuid: string) {
+  onDisableMeter(selectedGuid?: string) {
     // const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,

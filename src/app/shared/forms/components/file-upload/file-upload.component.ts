@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, AbstractControl } from '@angular/forms';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
 import { FileRestrictions, UploadProgressEvent } from '@progress/kendo-angular-upload';
 import * as _ from 'lodash';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
@@ -19,7 +19,7 @@ export class FileUploadComponent implements OnInit {
   @Input() multiple = true;
   @Input() autoUpload = true;
   @Input() allowedExtensions: string[] = [];
-  @Input() responseType = 'json';
+  @Input() responseType: 'arraybuffer' | 'blob' | 'json' | 'text' = 'json';
   @Input() acceptExtensions: string[] = [];
   @Input() saveField = 'files';
   @Input() isDropZoneCustom = false;
@@ -63,6 +63,10 @@ export class FileUploadComponent implements OnInit {
     }
 
     this.controlId = _.uniqueId('fileUpload');
+  }
+
+  get accept(): string {
+    return this.acceptExtensions.join(', ');
   }
 
   get formControl(): AbstractControl {

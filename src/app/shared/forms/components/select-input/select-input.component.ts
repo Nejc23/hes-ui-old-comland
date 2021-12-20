@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { ComboBoxComponent } from '@progress/kendo-angular-dropdowns';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
+import { UnitCodeListItemClient } from 'src/app/models/tou-configuration/UnitCodeListItemClient';
 import { Codelist } from 'src/app/shared/repository/interfaces/codelists/codelist.interface';
-import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-select-input',
@@ -16,12 +17,14 @@ export class SelectInputComponent implements OnInit, OnDestroy {
   @Input() form: FormGroup;
   @Input() property: string;
   @Input() label;
-  @Input() selectOptions: Codelist<number | string>[] = [];
+  @Input() selectOptions: Codelist<number | string>[] | UnitCodeListItemClient<number | string> = [];
   @Input() disabled = false;
   @Input() clearButton = true;
   @Input() itemDisabled;
   @Input() withDescription = false;
   @Input() withIdInDropdown = false;
+  @Input() textField = 'value';
+  @Input() valueField = 'id';
 
   @Output() selectedValueChanged: EventEmitter<any> = new EventEmitter<any>();
 

@@ -2,7 +2,7 @@
 
   <label *ngIf="label" [attr.for]="property">
     <ng-container *ngIf="label !== ' '; else blank">
-      {{ 'FORM.' + label.toUpperCase() | translate }}
+      {{ 'FORM.' + label.toUpperCase() | translate }}:
     </ng-container>
     <ng-template #blank>
       {{ '&nbsp;' }}

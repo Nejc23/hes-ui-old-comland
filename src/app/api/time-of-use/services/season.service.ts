@@ -46,7 +46,7 @@ export class SeasonService extends BaseService {
      * Season id
      */
     seasonId: string;
-  }): Observable<StrictHttpResponse<string>> {
+  }): Observable<StrictHttpResponse<boolean>> {
     const rb = new RequestBuilder(this.rootUrl, SeasonService.ConfigurationsConfigurationIdCanDeleteSeasonsSeasonIdGetPath, 'get');
     if (params) {
       rb.path('configurationId', params.configurationId, {});
@@ -63,7 +63,7 @@ export class SeasonService extends BaseService {
       .pipe(
         filter((r: any) => r instanceof HttpResponse),
         map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<string>;
+          return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
         })
       );
   }
@@ -88,9 +88,9 @@ export class SeasonService extends BaseService {
      * Season id
      */
     seasonId: string;
-  }): Observable<string> {
+  }): Observable<boolean> {
     return this.configurationsConfigurationIdCanDeleteSeasonsSeasonIdGet$Plain$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
     );
   }
 
@@ -114,7 +114,7 @@ export class SeasonService extends BaseService {
      * Season id
      */
     seasonId: string;
-  }): Observable<StrictHttpResponse<string>> {
+  }): Observable<StrictHttpResponse<boolean>> {
     const rb = new RequestBuilder(this.rootUrl, SeasonService.ConfigurationsConfigurationIdCanDeleteSeasonsSeasonIdGetPath, 'get');
     if (params) {
       rb.path('configurationId', params.configurationId, {});
@@ -131,7 +131,7 @@ export class SeasonService extends BaseService {
       .pipe(
         filter((r: any) => r instanceof HttpResponse),
         map((r: HttpResponse<any>) => {
-          return r as StrictHttpResponse<string>;
+          return (r as HttpResponse<any>).clone({ body: String((r as HttpResponse<any>).body) === 'true' }) as StrictHttpResponse<boolean>;
         })
       );
   }
@@ -156,9 +156,9 @@ export class SeasonService extends BaseService {
      * Season id
      */
     seasonId: string;
-  }): Observable<string> {
+  }): Observable<boolean> {
     return this.configurationsConfigurationIdCanDeleteSeasonsSeasonIdGet$Json$Response(params).pipe(
-      map((r: StrictHttpResponse<string>) => r.body as string)
+      map((r: StrictHttpResponse<boolean>) => r.body as boolean)
     );
   }
 

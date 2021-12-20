@@ -3,128 +3,155 @@
 </div>
 
 <div class="tw-mt-8">
-  <div class="tw-inline-flex tw-w-full">
+  <div class="tw-inline-flex tw-flex-wrap">
     <div *ngFor="let unit of units" class="tw-mr-2">
-      <button (click)="selectUnit(unit)" [ngClass]="isSelectedButton(unit)"
-              class="rounded-button"> {{unit.id}}
-        <ng-container *ngIf="unit.description ">
-          - {{ unit.description }}
-        </ng-container>
+      <button (click)="changeSelectedUnitOrAddNew(unit)" [ngClass]="isSelectedButton(unit)" class="rounded-button">
+        {{ unit.externalId }}
+        <ng-container *ngIf="unit.description"> - {{ unit.description }} </ng-container>
       </button>
     </div>
-    <button (click)="addNew()" class="tw-mr-2 rounded-button-outlined primary-transparent-bg ultra-transparent">+
-      {{ 'BUTTON.ADD-' + type.toUpperCase() | translate }} </button>
+    <button (click)="changeSelectedUnitOrAddNew()" class="tw-mr-2 rounded-button-outlined primary-transparent-bg ultra-transparent">
+      + {{ 'BUTTON.ADD-' + type.toUpperCase() | translate }}
+    </button>
   </div>
 </div>
 
-
 <div *ngIf="units?.length === 0" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-p-10">
-
-  <div
-    class="tw-rounded-full tw-h-28 tw-w-28">
-    <div
-      class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20 relative-position tw-bg-lightestGray">
+  <div class="tw-rounded-full tw-h-28 tw-w-28">
+    <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20 relative-position tw-bg-lightestGray">
       <img [src]="'assets/images/icons/calendar-icon.svg'" class="tw-h-7" />
     </div>
   </div>
   <div class="tw-font-bold tw-text-black tw-text-xl tw-mt-6">
-    {{ 'TOU-CONFIG.START-TOU-CONFIG-TITLE-' + type.toUpperCase() | translate}}
+    {{ 'TOU-CONFIG.START-TOU-CONFIG-TITLE-' + type.toUpperCase() | translate }}
   </div>
   <div class="tw-text-darkGray tw-mt-4">
-    {{ 'TOU-CONFIG.START-TOU-CONFIG-TEXT-' + type.toUpperCase() | translate}}
+    {{ 'TOU-CONFIG.START-TOU-CONFIG-TEXT-' + type.toUpperCase() | translate }}
   </div>
-  <button (click)="addNew()" class="btn btn text-secondary btn-outline tw-mt-8 tw-border tw-border-primary">
+  <button (click)="changeSelectedUnitOrAddNew()" class="btn btn text-secondary btn-outline tw-mt-8 tw-border tw-border-primary">
     {{ 'BUTTON.ADD-' + type.toUpperCase() | translate }}
   </button>
 </div>
 
 <div *ngIf="units?.length > 0">
-
   <div class="tw-mt-8">
     <div class="tw-inline-flex tw-w-full">
       <div class="tw-w-28">
-        <app-input-numeric (valueChange)="onIdChanged()"
-                           [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"
-                           [isReadOnly]="false" [label]="type.toLowerCase() + '-id'" [max]="255"
-                           [min]="0" [noFlex]="true" [property]="'id'" [showSpinners]="false"
-                           [step]="1"></app-input-numeric>
-
-
+        <app-input-numeric
+          (valueChange)="onIdChanged()"
+          [allowShowError]="true"
+          [decimals]="0"
+          [form]="form"
+          [format]="'#'"
+          [isReadOnly]="false"
+          [label]="type.toLowerCase() + '-externalId'"
+          [max]="255"
+          [min]="0"
+          [noFlex]="true"
+          [property]="'externalId'"
+          [showSpinners]="false"
+          [step]="1"
+        ></app-input-numeric>
       </div>
-      <div class="tw-ml-4 tw-w-2/3">
-        <app-input-text (inputTextBlurValue)="saveUnit()" [form]="form" [property]="'description'" label="description">
-        </app-input-text>
+      <div class="tw-ml-4 tw-w-4/6">
+        <app-input-text (inputTextBlurValue)="saveUnit()" [form]="form" [property]="'description'" label="description"> </app-input-text>
       </div>
       <div class="tw-inline-flex">
-        <button (click)="removeUnit()"
-                class="btn btn-link text-primary tw-ml-4">{{'BUTTON.DELETE' | translate}}
+        <button
+          (click)="saveOrUpdateUnit()"
+          *ngIf="isEditMode()"
+          [disabled]="isSaveOrUpdateDisabled()"
+          title="{{ saveOrUpdateUnitTitle() | translate }}"
+          class="btn btn-link text-primary tw-inline-flex tw-items-center tw-w-28 save-update-btn"
+        >
+          <i class="far fa-save"></i>
+          {{ (selectedUnit.id ? 'BUTTON.UPDATE' : 'BUTTON.SAVE') | translate }}
+        </button>
+        <button (click)="removeUnit()" class="btn btn-link text-primary tw-inline-flex tw-items-center tw-w-28">
+          <i class="far fa-trash-alt tw-pr-2"></i>{{ 'BUTTON.DELETE' | translate }}
         </button>
       </div>
     </div>
   </div>
 
   <div *ngIf="type === selectedTypeEnum.DAY">
-
     <div class="tw-inline-flex tw-w-full tw-mt-4 tw-mb-4">
-      <div
-        class="tw-inline-flex tw-bg-lightestGray tw-py-4 tw-px-6 tw-border tw-border-solid tw-border-lightGray tw-rounded-sm">
-        <app-input-text [form]="form" [inputType]="'time'" [property]="'startTime'" class="tw-mr-4"
-                        label="Start-time"></app-input-text>
+      <div class="tw-inline-flex tw-bg-lightestGray tw-py-4 tw-px-6 tw-border tw-border-solid tw-border-lightGray tw-rounded-sm">
+        <app-input-text
+          [form]="dayActionsForm"
+          [inputType]="'time'"
+          [property]="'startTime'"
+          class="tw-mr-4"
+          label="Start-time"
+        ></app-input-text>
 
-        <app-input-numeric [allowShowError]="true" [decimals]="0" [form]="form" [format]="'#'"
-                           [isReadOnly]="false" [max]="255" [min]="0"
-                           [noFlex]="true" [property]="'scriptId'" [showSpinners]="false" [step]="1"
-                           label="script-id"></app-input-numeric>
+        <app-input-numeric
+          [allowShowError]="true"
+          [decimals]="0"
+          [form]="dayActionsForm"
+          [format]="'#'"
+          [isReadOnly]="false"
+          [max]="255"
+          [min]="0"
+          [noFlex]="true"
+          [property]="'scriptId'"
+          [showSpinners]="false"
+          [step]="1"
+          label="script-id"
+        ></app-input-numeric>
 
-        <button (click)="addTimeToDay()" [disabled]="!form.valid"
-                class="btn btn-primary tw-ml-4 tw-mt-5 tw-mb-4">{{ 'BUTTON.ADD' | translate }}
+        <button (click)="addDayActions()" [disabled]="!dayActionsForm.valid" class="btn btn-primary tw-ml-4 tw-mt-5 tw-mb-4">
+          {{ 'BUTTON.ADD' | translate }}
         </button>
       </div>
     </div>
 
     <div *ngIf="selectedUnit">
-      <div *ngIf="selectedUnit.unit?.length === 0"
-           class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-p-10">
-
-        <div
-          class="tw-rounded-full tw-h-28 tw-w-28">
+      <div *ngIf="selectedUnit.units?.length === 0" class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-p-10">
+        <div class="tw-rounded-full tw-h-28 tw-w-28">
           <div
-            class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20 relative-position tw-bg-lightestGray">
+            class="
+              tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20
+              relative-position
+              tw-bg-lightestGray
+            "
+          >
             <img [src]="'assets/images/icons/time-icon.svg'" class="tw-h-7" />
           </div>
         </div>
         <div class="tw-font-bold tw-text-black tw-text-xl tw-mt-6">
-          {{ 'TOU-CONFIG.ADD-DAY-TABLES' | translate}}
+          {{ 'TOU-CONFIG.ADD-DAY-TABLES' | translate }}
         </div>
         <div class="tw-text-darkGray tw-mt-4">
-          {{ 'TOU-CONFIG.ADD-DAY-TABLES-AT-LEAST-ONE' | translate}}
+          {{ 'TOU-CONFIG.ADD-DAY-TABLES-AT-LEAST-ONE' | translate }}
         </div>
       </div>
 
-      <div *ngIf="selectedUnit.unit?.length > 0" class="data-table-container days">
-        <app-data-table (rowActionClickedEvent)="rowActionsClicked($event)"
-                        [fetchData]="false"
-                        [gridColumns]="dayActionsConfiguration"
-                        [gridData]="selectedUnit.unit"
-                        [noDataText]="'TOU-CONFIG.NO-ACTIONS'"
-                        [pageSize]="20"
-                        [pageable]="true"
-                        [rowActions]="dayActionsRowActionsConfiguration"
-                        [rowHeight]="44"
-                        [scrollable]="'virtual'"
-                        [skip]="0"
-                        [sort]="dayTableDefaultSort"
-                        [sortable]="true"
-                        [tableHeight]="314"
-                        [total]="selectedUnit.unit.length"
-                        [kendoGridSelectByColumn]="'startTime'">
+      <div *ngIf="selectedUnit.units?.length > 0" class="data-table-container days">
+        <app-data-table
+          (rowActionClickedEvent)="rowActionsClicked($event)"
+          [fetchData]="false"
+          [gridColumns]="dayActionsConfiguration"
+          [gridData]="selectedUnit.units"
+          [kendoGridSelectByColumn]="'startTime'"
+          [noDataText]="'TOU-CONFIG.NO-ACTIONS'"
+          [pageSize]="20"
+          [pageable]="true"
+          [rowActions]="dayActionsRowActionsConfiguration"
+          [rowHeight]="44"
+          [scrollable]="'virtual'"
+          [skip]="0"
+          [sort]="dayTableDefaultSort"
+          [sortable]="true"
+          [tableHeight]="270"
+          [total]="selectedUnit.units?.length"
+        >
         </app-data-table>
       </div>
     </div>
   </div>
 
   <div *ngIf="type === selectedTypeEnum.WEEK" class="tw-flex tw-w-full tw-justify-between">
-
     <div *ngIf="weekForm" class="tw-inline-flex tw-flex-wrap">
       <div *ngFor="let w of wf" class="tw-mr-4 tw-w-40">
         <app-select-input
@@ -134,15 +161,16 @@
           [label]="'DAY-' + w.toUpperCase()"
           [property]="w"
           [selectOptions]="days"
-          [withIdInDropdown]="true">
+          [textField]="'textField'"
+          [valueField]="isEditMode() ? 'id' : 'externalId'"
+          [withIdInDropdown]="true"
+        >
         </app-select-input>
       </div>
     </div>
-
   </div>
 
   <div *ngIf="type === selectedTypeEnum.SEASON" class="tw-inline-flex">
-
     <app-date-range-picker
       (valueChange)="saveUnit()"
       [form]="seasonForm"
@@ -154,22 +182,25 @@
       [withRefreshButton]="false"
       [withTime]="false"
       [withoutYear]="true"
-      class="small-date-picker">
+      [labelText]="'FORM.SELECT-DATE-DAY-MONTH-ONLY'"
+      class="small-date-picker"
+    >
     </app-date-range-picker>
 
     <div class="tw-ml-4 tw-w-40">
-      <app-select-input (selectedValueChanged)="saveUnit()"
-                        [disabled]="false"
-                        [form]="seasonForm"
-                        [label]="'WEEK-ID'"
-                        [property]="'week'"
-                        [selectOptions]="weeks"
-                        [withIdInDropdown]="true">
+      <app-select-input
+        (selectedValueChanged)="saveUnit()"
+        [disabled]="false"
+        [form]="seasonForm"
+        [label]="'WEEK-EXTERNALID'"
+        [property]="'week'"
+        [selectOptions]="weeks"
+        [textField]="'textField'"
+        [valueField]="isEditMode() ? 'id' : 'externalId'"
+        [withIdInDropdown]="true"
+      >
       </app-select-input>
     </div>
-    <div>
-    </div>
-
+    <div></div>
   </div>
-
 </div>

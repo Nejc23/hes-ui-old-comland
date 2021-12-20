@@ -1,14 +1,26 @@
 <div *ngIf="!noData">
   <div class="mb-2">
     <div class="mb-2 grid-actions">
-      <app-action-form (searchChange)=searchData($event) (refresh)="refreshGrid()" class="" (toggleWildcards)="toggleWildcards($event)" [useWildcards]="useWildcards">
+      <app-action-form
+        (searchChange)="searchData($event)"
+        (refresh)="refreshGrid()"
+        class=""
+        (toggleWildcards)="toggleWildcards($event)"
+        [useWildcards]="useWildcards"
+      >
         <div *ngIf="selectedAtLeastOneRowOnGrid">
           <div dropdown class="btn-group">
-            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown"
-              data-bs-toggle="dropdown"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
+            <button dropdownToggle class="btn btn-primary dropdown-toggle" type="button" id="operationsDropDown" data-bs-toggle="dropdown">
+              <span>{{ 'OPERATION.OPERATIONS' | translate }}</span>
+            </button>
             <div *dropdownMenu class="dropdown-menu" style="min-width: 13rem">
-              <button [appHideIfAuthorizedReadonly]="formFunctionality" type="button" class="btn text-secondary"
-                (click)="onRemoveFromJob()"><i class="far fa-calendar"></i>
+              <button
+                [appHideIfAuthorizedReadonly]="formFunctionality"
+                type="button"
+                class="btn text-secondary"
+                (click)="onRemoveFromJob()"
+              >
+                <i class="far fa-calendar"></i>
                 <span>{{ 'JOB.REMOVE' | translate }}</span>
               </button>
             </div>
@@ -20,35 +32,63 @@
   <!-- ag-grid -->
   <div class="list-for-job-body-scroll">
     <div>
-      <ag-grid-angular class="ag-theme-epoint" style="width: 100%; height: calc(100% - 25px);" #agGrid
-        [domLayout]=agGridSettings.domLayout suppressSizeToFit=agGridSettings.suppressSizeToFit
-        [localeText]="localeText" [modules]="modules" [icons]="icons" [pagination]=agGridSettings.pagination
-        [paginationPageSize]=agGridSettings.paginationPageSize [multiSortKey]=agGridSettings.multiSortKey
+      <ag-grid-angular
+        class="ag-theme-epoint"
+        style="width: 100%; height: calc(100% - 25px)"
+        #agGrid
+        [domLayout]="agGridSettings.domLayout"
+        suppressSizeToFit="agGridSettings.suppressSizeToFit"
+        [localeText]="localeText"
+        [modules]="modules"
+        [icons]="icons"
+        [pagination]="agGridSettings.pagination"
+        [paginationPageSize]="agGridSettings.paginationPageSize"
+        [multiSortKey]="agGridSettings.multiSortKey"
         [cacheOverflowSize]="agGridSettings.cacheOverflowSize"
         [maxConcurrentDatasourceRequests]="agGridSettings.maxConcurrentDatasourceRequests"
-        [frameworkComponents]="frameworkComponents" [cacheBlockSize]=agGridSettings.paginationPageSize
-        [maxBlocksInCache]="1" [gridOptions]="gridOptions" [columnDefs]="columns"
-        [suppressRowClickSelection]=agGridSettings.suppressRowClickSelection [rowSelection]=agGridSettings.rowSelection
-        [overlayNoRowsTemplate]="overlayNoRowsTemplate" [overlayLoadingTemplate]="overlayLoadingTemplate"
-        (selectionChanged)="onSelectionChanged()" (gridReady)="onGridReady($event)"
-        (columnVisible)="onColumnVisible($event)" (toolPanelVisibleChanged)="toolPanelChanged($event)"
-        (paginationChanged)="onPaginationChange($event)" (rowSelected)="onRowSelect($event)"
-        (firstDataRendered)="onFirstDataRendered($event)">
+        [frameworkComponents]="frameworkComponents"
+        [cacheBlockSize]="agGridSettings.paginationPageSize"
+        [maxBlocksInCache]="1"
+        [gridOptions]="gridOptions"
+        [columnDefs]="columns"
+        [suppressRowClickSelection]="agGridSettings.suppressRowClickSelection"
+        [rowSelection]="agGridSettings.rowSelection"
+        [overlayNoRowsTemplate]="overlayNoRowsTemplate"
+        [overlayLoadingTemplate]="overlayLoadingTemplate"
+        (selectionChanged)="onSelectionChanged()"
+        (gridReady)="onGridReady($event)"
+        (columnVisible)="onColumnVisible($event)"
+        (toolPanelVisibleChanged)="toolPanelChanged($event)"
+        (paginationChanged)="onPaginationChange($event)"
+        (rowSelected)="onRowSelect($event)"
+        (firstDataRendered)="onFirstDataRendered($event)"
+      >
       </ag-grid-angular>
       <div class="ag-paging-panel-selection">
         <div class="p-2 ms-1" *ngIf="getSelectedCount() > 0">
           <div class="me-3" *ngIf="!checkSelectedAll() && getSelectedCount() > 0">
-            <small class="link text-secondary">{{getSelectedCount()}} <strong><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
+            <small class="link text-secondary"
+              >{{ getSelectedCount() }}
+              <strong
+                ><span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span> &middot;
                 <a class="text-primary" href="javascript:void(0);" (click)="selectAll()">
                   <span>{{ 'GRID.SELECT-ALL' | translate }}</span>
-                  ({{totalCount}})</a></strong></small>
+                  ({{ totalCount }})</a
+                ></strong
+              ></small
+            >
           </div>
           <div class="me-3" *ngIf="checkSelectedAll()">
-            <small class="link text-secondary"><strong><span>{{ 'COMMON.ALL' | translate }}</span> ({{getTotalCountWithoutExcludedDisplay()}})
-              <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span>
+            <small class="link text-secondary"
+              ><strong
+                ><span>{{ 'COMMON.ALL' | translate }}</span> ({{ getTotalCountWithoutExcludedDisplay() }})
+                <span>{{ 'COMMON.ITEMS-SELECTED' | translate }}</span>
                 &middot;
                 <a class="text-primary" href="javascript:void(0);" (click)="deselectAll()">
-                  <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a></strong></small>
+                  <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span></a
+                ></strong
+              ></small
+            >
           </div>
         </div>
       </div>
@@ -56,4 +96,6 @@
   </div>
 </div>
 
-<ng-template #tipMoreSave><span>{{ 'COMMON.MORE-OPTIONS' | translate }}</span></ng-template>
+<ng-template #tipMoreSave
+  ><span>{{ 'COMMON.MORE-OPTIONS' | translate }}</span></ng-template
+>

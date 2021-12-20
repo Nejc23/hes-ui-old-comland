@@ -293,9 +293,6 @@ body {
   top: 18px;
 }
 
-.k-state-selected {
-  background-color: rgb($primary, 0.65) !important;
-}
 
 .mini-button {
   padding: 2px 10px;
@@ -418,5 +415,34 @@ body {
 .full-dropdown {
   .k-dropdown, .k-dropdowntree {
     width: 100%;
+  }
+}
+
+.tou-units-layout {
+  @apply tw-flex;
+  @apply tw-flex-col;
+  @apply tw-h-full;
+}
+
+.tou-units-content {
+  @apply tw-pl-10;
+  @apply tw-pt-10;
+  @apply tw-h-full;
+}
+
+.tou-units-buttons-container {
+  @apply tw-self-end;
+  @apply tw-w-full;
+}
+
+.tou-units-buttons {
+  @apply tw-inline-flex;
+  @apply tw-justify-between;
+  @apply tw-w-full;
+  @apply tw-mb-10;
+  @apply tw-pl-10;
+
+  &.right {
+    @apply tw-justify-end;
   }
 }

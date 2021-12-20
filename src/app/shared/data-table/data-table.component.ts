@@ -216,12 +216,31 @@ export class DataTableComponent implements OnInit, OnChanges {
     // columns need to be defined for Search all
     const columns = this.gridColumns.filter((column) => column.type !== (GridColumnType.SWITCH || GridColumnType.RADIO));
     columns.forEach((column) => {
-      filterTemp.filters.push({
-        field: column.field,
-        operator: 'contains',
-        value: inputValue,
-        ignoreCase: true
-      });
+      if (column.type === GridColumnType.DATE_TIME) {
+        inputValue = inputValue.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+        this.gridData.forEach((row) => {
+          row['formatted-date'] =
+            moment(row[column.field]).format(environment.dateDisplayFormat) +
+            ' ' +
+            moment(row[column.field]).format(environment.timeFormatLong);
+          row['formatted-date'] = row['formatted-date'].replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+        });
+
+        filterTemp.filters.push({
+          field: 'formatted-date',
+          operator: 'contains',
+          value: inputValue,
+          ignoreCase: true
+        });
+      }
+      if (column.type !== GridColumnType.DATE_TIME) {
+        filterTemp.filters.push({
+          field: column.field,
+          operator: 'contains',
+          value: inputValue,
+          ignoreCase: true
+        });
+      }
     });
 
     this.gridViewFilter = process(this.gridData, {

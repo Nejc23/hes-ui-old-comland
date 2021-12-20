@@ -208,8 +208,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSpecialDaysComponent,
     TouConfigSummaryComponent,
     TouConfigListComponent,
-    AddTimeUnitComponent,
-    ImportDevicesComponent
+    AddTimeUnitComponent
   ],
   imports: [
     CommonModule,
@@ -346,8 +345,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSpecialDaysComponent,
     TouConfigSummaryComponent,
     TouConfigListComponent,
-    AddTimeUnitComponent,
-    ImportDevicesComponent
+    AddTimeUnitComponent
   ],
   entryComponents: [
     ModalConfirmComponent,

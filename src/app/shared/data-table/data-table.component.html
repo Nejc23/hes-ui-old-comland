@@ -35,7 +35,7 @@
 
         <div class="tw-inline-flex gray-border tw-w-56 search-input">
           <img [src]="'assets/images/icons/grain-icon.svg'" class="tw-mx-4" />
-          <input (input)="onFilter($event.target.value)"
+          <input (input)="onFilter($any($event.target).value)"
                  kendoTextBox
                  placeholder="{{'COMMON.SEARCH-TERM' | translate }}"
           /> <!-- Search all only works on strings -->
@@ -105,7 +105,7 @@
 
         <!--- no type defined is string -->
         <ng-container *ngIf="!column.type">
-          <div class="tw-inline-flex">
+          <div [class]="column.class?? 'tw-inline-flex'">
             <ng-container *ngIf="dataItem[column.field] && column.icon">
               <img [src]="'assets/images/icons/user-icon.svg'" class="tw-pr-2" />
             </ng-container>

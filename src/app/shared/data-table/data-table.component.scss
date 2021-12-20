@@ -183,3 +183,13 @@
 .margin-bottom-5 {
   margin-bottom: 5px;
 }
+
+::ng-deep .k-grid tr.k-state-selected > td {
+  background-color: transparent !important;
+}
+
+::ng-deep th.k-header.ng-star-inserted {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}

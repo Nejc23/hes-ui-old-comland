@@ -3,25 +3,39 @@
     <div class="filter-shadow">
       <div class="mb-3">
         <div class="d-flex mb-3 mt-2">
-          <h4 [openDelay]="500" class="mb-0 text-truncate" container="body"
-              ngbTooltip="{{ 'FORM.REGISTER' | translate }}"
-              placement="bottom">{{ 'FORM.REGISTER' | translate }}</h4>
-          <button (click)="clickShowHideFilter()" *ngIf="false" aria-label="Close" class="btn-close ms-auto"
-                  type="button">
-          </button>
+          <h4
+            [openDelay]="500"
+            class="mb-0 text-truncate"
+            container="body"
+            ngbTooltip="{{ 'FORM.REGISTER' | translate }}"
+            placement="bottom"
+          >
+            {{ 'FORM.REGISTER' | translate }}
+          </h4>
+          <button (click)="clickShowHideFilter()" *ngIf="false" aria-label="Close" class="btn-close ms-auto" type="button"></button>
         </div>
         <div>
-          <app-input-searcher (insertedValue)="insertedSearchValue($event)" [debounceTimeOut]="700" [form]="form"
-                              [property]="registerSearchProperty"
-                              placeholder="{{ 'COMMON.SEARCH' | translate }}"></app-input-searcher>
+          <app-input-searcher
+            (insertedValue)="insertedSearchValue($event)"
+            [debounceTimeOut]="700"
+            [form]="form"
+            [property]="registerSearchProperty"
+            placeholder="{{ 'COMMON.SEARCH' | translate }}"
+          ></app-input-searcher>
         </div>
       </div>
       <div class="mb-3 filter-scroll-registers">
         <div *ngFor="let g of registerGroups">
-          <app-input-radio (selectionChanged)="changeRegisterOptionId()" [form]="form" [label]="g.groupName"
-                           [options]="g.registerOptions"
-                           [property]="registerProperty" [showTooltip]="true"
-                           [translate]="false" style="white-space:nowrap">
+          <app-input-radio
+            (selectionChanged)="changeRegisterOptionId()"
+            [form]="form"
+            [label]="g.groupName"
+            [options]="g.registerOptions"
+            [property]="registerProperty"
+            [showTooltip]="true"
+            [translateLabel]="false"
+            style="white-space: nowrap"
+          >
           </app-input-radio>
         </div>
       </div>
@@ -44,8 +58,7 @@
         </button>
 
         <div class="mt-2">
-          <h3
-            class="mb-0">{{selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate)}}</h3>
+          <h3 class="mb-0">{{ selectedRegister ? selectedRegister.name : ('PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate) }}</h3>
         </div>
         <div class="ms-auto">
           <button
@@ -60,11 +73,7 @@
           </button>
         </div>
       </div>
-      <app-date-range-picker
-        (valueChange)="onRefresh()"
-        [endProperty]="endDateProperty"
-        [form]="form"
-        [startProperty]="startDateProperty">
+      <app-date-range-picker (valueChange)="onRefresh()" [endProperty]="endDateProperty" [form]="form" [startProperty]="startDateProperty">
       </app-date-range-picker>
     </div>
 
@@ -74,8 +83,7 @@
           <i class="far fa-empty-set display-2 text-light font-weight-bold"></i>
         </div>
         <div class="card-body">
-          <div
-            class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
+          <div class="small-title font-weight-bold pb-2">{{ 'PLC-METER.REGISTER.NO-REGISTER-SELECTED' | translate }}</div>
           <div class="text-secondary">{{ 'PLC-METER.REGISTER.SELECT-REGISTER' | translate }}</div>
         </div>
       </div>
@@ -93,13 +101,11 @@
       <div *ngIf="isDataFound">
         <div class="row mt-4">
           <div *ngIf="!isEvent" class="col-12">
-            <app-registers-chart [categories]="chartCategories" [chartData]="chartData"
-                                 [unit]="unit"></app-registers-chart>
+            <app-registers-chart [categories]="chartCategories" [chartData]="chartData" [unit]="unit"></app-registers-chart>
           </div>
           <div *ngIf="isEvent" class="col-12">
             <h4 class="pt-2">{{ 'PLC-METER.REGISTER.NUMBER-OF-EVENTS' | translate }}</h4>
-            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp"
-                                        [hours]="hours"></app-registers-column-chart>
+            <app-registers-column-chart [eventsByTimestamp]="eventsByTimestamp" [hours]="hours"></app-registers-column-chart>
           </div>
         </div>
         <div class="row mt-4">
@@ -124,5 +130,9 @@
     </div>
   </div>
 </div>
-<ng-template #hideShowFilters><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template>
-<ng-template #tipContentRefresh><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template>
+<ng-template #hideShowFilters
+  ><span>{{ 'PLC-METER.REGISTER.SHOW-HIDE-REGISTERS' | translate }}</span></ng-template
+>
+<ng-template #tipContentRefresh
+  ><span>{{ 'PLC-METER.REGISTER.REFRESH-DATA' | translate }}</span></ng-template
+>

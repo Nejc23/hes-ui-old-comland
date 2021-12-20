@@ -2,16 +2,25 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+import { SortDescriptor } from '@progress/kendo-data-query';
 import { forkJoin, Observable } from 'rxjs';
 import { ConfigurationBasicDto } from 'src/app/api/time-of-use/models';
 import { ModalService } from 'src/app/core/modals/services/modal.service';
+import { TouWizardMode } from 'src/app/enums/tou-configuration/TouWizardModeEnum';
+import { TouConfigurationHelper } from 'src/app/features/helpers/tou-configuration.helper';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { environment } from '../../../../../../../environments/environment';
 import { EventManagerService } from '../../../../../../core/services/event-manager.service';
 import { ToastNotificationService } from '../../../../../../core/toast-notification/services/toast-notification.service';
-import { CheckboxColumn, GridBulkAction, GridColumn, GridRowAction } from '../../../../../../shared/data-table/data-table.component';
+import {
+  CheckboxColumn,
+  GridBulkAction,
+  GridColumn,
+  GridColumnType,
+  GridFilter,
+  GridRowAction
+} from '../../../../../../shared/data-table/data-table.component';
 import { TouConfigService } from '../../../services/tou-config.service';
+import { TouConfigErrorHandler } from '../tou-config-error-handler/tou-config-error-handler';
 
 @Component({
   selector: 'app-tou-config-list',
@@ -23,7 +32,7 @@ export class TouConfigListComponent implements OnInit {
   touListColumnsConfiguration: Array<GridColumn> = [
     {
       field: 'externalId',
-      translationKey: 'FORM.TOU-ID'
+      translationKey: 'FORM.TOU-EXTERNAL-ID'
     },
     {
       field: 'description',
@@ -31,6 +40,7 @@ export class TouConfigListComponent implements OnInit {
     },
     {
       field: 'modified',
+      type: GridColumnType.DATE_TIME,
       translationKey: 'FORM.LAST-UPDATED'
     },
     {
@@ -40,17 +50,22 @@ export class TouConfigListComponent implements OnInit {
     }
   ];
 
+  touConfigurationListDefaultSort: SortDescriptor[] = [
+    {
+      field: 'modified',
+      dir: 'desc'
+    }
+  ];
+
   touListRowActionConfiguration: Array<GridRowAction> = [
     {
       actionName: 'duplicate',
       iconName: 'duplicate-icon'
     },
-    //   todo edit
-    // ,
-    // {
-    //   actionName: 'edit',
-    //   iconName: 'edit-icon'
-    // }
+    {
+      actionName: 'edit',
+      iconName: 'edit-icon'
+    },
     {
       actionName: 'delete',
       iconName: 'delete-icon'
@@ -65,11 +80,6 @@ export class TouConfigListComponent implements OnInit {
   };
 
   touListTableBulkActionConfiguration: Array<GridBulkAction> = [
-    // TODO: HES-533 - uncomment export bulk action
-    // {
-    //     actionName: 'export',
-    //     iconClass: 'far fa-arrow-from-top'
-    // },
     {
       actionName: 'delete',
       iconClass: 'far fa-trash-alt'
@@ -78,7 +88,7 @@ export class TouConfigListComponent implements OnInit {
   showGridBulkActions: boolean;
 
   createdByData = [];
-  touListFiltersConfiguration;
+  touListFiltersConfiguration: GridFilter[] = [];
   selectedKeys: string[] = [];
 
   constructor(
@@ -87,7 +97,9 @@ export class TouConfigListComponent implements OnInit {
     private modalService: ModalService,
     private translate: TranslateService,
     private router: Router,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private touConfigHelper: TouConfigurationHelper,
+    private touConfigErrorHelper: TouConfigErrorHandler
   ) {}
 
   ngOnInit(): void {
@@ -110,19 +122,9 @@ export class TouConfigListComponent implements OnInit {
             label: 'FORM.CREATED-BY'
           }
         ];
-
-        // format date
-        this.touConfigListData.map(
-          (item) =>
-            (item.modified =
-              moment(item.modified).format(environment.dateDisplayFormat) + ' ' + moment(item.modified).format(environment.timeFormatLong))
-        );
       },
       (err: HttpErrorResponse) => {
-        const errors = err.error as Array<string>;
-        errors.forEach((errMsg) => {
-          this.toast.errorToast(this.translate.instant(`TOU-CONFIG.API.${errMsg}`));
-        });
+        this.touConfigErrorHelper.showErrorsAsToasts(err);
       }
     );
   }
@@ -131,23 +133,23 @@ export class TouConfigListComponent implements OnInit {
     if (event.actionName === 'delete') {
       const modalRef = this.modalService.open(ModalConfirmComponent);
       const component: ModalConfirmComponent = modalRef.componentInstance;
-      component.modalTitle = this.translate.instant('TOU-CONFIG.DELETE-ITEM');
-      component.modalBody = this.translate.instant('TOU-CONFIG.DELETE-ITEM-CONFIRMATION', { configurationName: event.rowData.description });
+      component.modalTitle = this.translate.instant('TOU-CONFIG.DELETE-ITEM-TITLE-CONFIGURATION');
+      component.modalBody = this.translate.instant('TOU-CONFIG.DELETE-ITEM-CONFIGURATION-CONFIRMATION', {
+        configurationName: event.rowData.description
+      });
       component.warningIcon = false;
 
       modalRef.result.then(
         () => {
           // on close (CONFIRM)
           this.touService.deleteConfiguration(event.id).subscribe(
-            (res) => {
-              this.toast.successToast(this.translate.instant('TOU-CONFIG.DELETE-ITEM-SUCCESS'));
+            () => {
+              this.toast.successToast(this.translate.instant('TOU-CONFIG.DELETE-ITEM-SUCCESS-CONFIGURATION'));
               this.getData();
+              this.selectedKeys = this.selectedKeys.filter((x) => x !== event.id);
             },
             (err: HttpErrorResponse) => {
-              const errors = err.error as Array<string>;
-              errors.forEach((errMsg) => {
-                this.toast.errorToast(this.translate.instant(`TOU-CONFIG.API.${errMsg}`));
-              });
+              this.touConfigErrorHelper.showErrorsAsToasts(err);
             }
           );
         },
@@ -157,7 +159,7 @@ export class TouConfigListComponent implements OnInit {
       );
     }
     if (event.actionName === 'edit') {
-      // todo edit
+      this.getConfigurationAndOpenWizard(event.id, TouWizardMode.EDIT);
     }
     if (event.actionName === 'duplicate') {
       const modalRef = this.modalService.open(ModalConfirmComponent);
@@ -171,26 +173,27 @@ export class TouConfigListComponent implements OnInit {
       modalRef.result.then(
         () => {
           // on close (CONFIRM)
-
-          this.touService.getConfiguration(event.id).subscribe(
-            (res) => {
-              const touConfiguration = this.touService.castConfigurationDetailDtoToTouConfigurationClient(res);
-              this.touService.touConfigurationClient = touConfiguration;
-              this.router.navigate(['/configuration/importTouConfiguration/wizard/basic']);
-            },
-            (err: HttpErrorResponse) => {
-              const errors = err.error as Array<string>;
-              errors.forEach((errMsg) => {
-                this.toast.errorToast(this.translate.instant(`TOU-CONFIG.API.${errMsg}`));
-              });
-            }
-          );
+          this.getConfigurationAndOpenWizard(event.id, TouWizardMode.CREATE);
         },
         () => {
           // on dismiss (CLOSE)
         }
       );
     }
+  }
+
+  getConfigurationAndOpenWizard(configurationId: string, touWizardMode: TouWizardMode) {
+    this.touService.getConfiguration(configurationId).subscribe(
+      (res) => {
+        const touConfiguration = this.touConfigHelper.castConfigurationDetailDtoToTouConfigurationClient(res);
+        this.touService.touWizardMode = touWizardMode;
+        this.touService.touConfigurationClient = touConfiguration;
+        this.router.navigate(['/configuration/importTouConfiguration/wizard/basic']);
+      },
+      (err: HttpErrorResponse) => {
+        this.touConfigErrorHelper.showErrorsAsToasts(err);
+      }
+    );
   }
 
   selectionChanged(selectedRows: string[]) {
@@ -202,12 +205,9 @@ export class TouConfigListComponent implements OnInit {
     const component: ModalConfirmComponent = modalRef.componentInstance;
     component.warningIcon = false;
 
-    if (event.actionName === 'export') {
-      // TODO: HES-533
-      modalRef.close();
-    } else if (event.actionName === 'delete') {
-      component.modalTitle = this.translate.instant('TOU-CONFIG.DELETE-ITEMS');
-      component.modalBody = this.translate.instant('TOU-CONFIG.DELETE-ITEMS-CONFIRMATION');
+    if (event.actionName === 'delete') {
+      component.modalTitle = this.translate.instant('TOU-CONFIG.DELETE-ITEMS-TITLE-CONFIGURATION');
+      component.modalBody = this.translate.instant('TOU-CONFIG.DELETE-ITEMS-CONFIGURATION-CONFIRMATION');
 
       modalRef.result.then(() => {
         const batch: Observable<any>[] = [];
@@ -218,11 +218,10 @@ export class TouConfigListComponent implements OnInit {
         joinedObservables
           .subscribe(
             () => {
-              this.toast.successToast(this.translate.instant('TOU-CONFIG.DELETE-ITEMS-SUCCESS'));
+              this.toast.successToast(this.translate.instant('TOU-CONFIG.DELETE-ITEMS-SUCCESS-CONFIGURATION'));
             },
             (err: HttpErrorResponse) => {
-              const errMsg = err.error as string;
-              this.toast.errorToast(this.translate.instant(`TOU-CONFIG.API.${errMsg}`));
+              this.touConfigErrorHelper.showErrorsAsToasts(err);
             }
           )
           .add(() => {

@@ -484,7 +484,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   // TODO
 
-  onDelete(selectedGuid: string) {
+  onDelete(selectedGuid?: string) {
     const params = this.dcOperationsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
@@ -536,7 +536,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   }
 
   // ******************************************************************************** */
-  onSynchronizeTime(selectedGuid: string) {
+  onSynchronizeTime(selectedGuid?: string) {
     this.requestModel.filterModel = this.setFilter();
     this.requestModel.searchModel = this.setSearch();
 
@@ -553,7 +553,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   // functions for operations called from grid
 
-  onFwUpgrade(selectedGuid: string) {
+  onFwUpgrade(selectedGuid?: string) {
     this.requestModel.filterModel = this.setFilter();
     this.requestModel.searchModel = this.setSearch();
 
@@ -568,7 +568,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.dcOperationsService.fwUpgrade(params, 1);
   }
 
-  onDeviceDiscovery(selectedGuid: string) {
+  onDeviceDiscovery(selectedGuid?: string) {
     this.requestModel.filterModel = this.setFilter();
     this.requestModel.searchModel = this.setSearch();
 
@@ -801,7 +801,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onEnableDC(selectedGuid: string) {
+  onEnableDC(selectedGuid?: string) {
     this.requestModel.filterModel = this.setFilter();
     this.requestModel.searchModel = this.setSearch();
 
@@ -816,7 +816,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.dcOperationsService.bulkOperation(DcOperationTypeEnum.enable, params, 1);
   }
 
-  onDisableDC(selectedGuid: string) {
+  onDisableDC(selectedGuid?: string) {
     this.requestModel.filterModel = this.setFilter();
     this.requestModel.searchModel = this.setSearch();
 
