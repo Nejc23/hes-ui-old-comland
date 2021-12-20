@@ -43,9 +43,9 @@
   </ng-container>
 </div>
 
-<div class="modal-footer">
-  <button (click)="dismiss()" *ngIf="!withoutCancelButton" class="btn text-secondary"
-          type="button"> {{ btnCancelText | translate }}
+<div class="modal-footer justify-content-between">
+  <button (click)="dismiss()" *ngIf="!withoutCancelButton" class="btn text-secondary mr-auto" type="button"> {{
+    btnCancelText | translate }}
   </button>
   <button (click)="confirm()" class="btn btn-primary" type="button">{{ btnConfirmText | translate }}</button>
 </div>

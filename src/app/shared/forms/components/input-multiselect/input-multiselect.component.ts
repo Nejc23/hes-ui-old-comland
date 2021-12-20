@@ -15,7 +15,7 @@ import { CodelistRepositoryService } from 'src/app/core/repository/services/code
 export class InputMultiselectComponent implements OnInit {
   // required
   @Input() form: FormGroup;
-  @Input() property: [];
+  @Input() property: string;
   @Input() name: string;
 
   // optional
@@ -23,7 +23,7 @@ export class InputMultiselectComponent implements OnInit {
   @Input() codelist: string;
   @Input() config: SelectConfig = new DefaultSelectConfig();
   @Input() queryParams: HttpParams | undefined = undefined;
-  @Input() options: Codelist<number>[] = [];
+  @Input() options: Codelist<number | string>[] = [];
   @Input() enabled = true;
   @Input() defaultValueString = '';
   @Input() addNullValue = false;
@@ -58,7 +58,7 @@ export class InputMultiselectComponent implements OnInit {
     return this.formUtils.shouldInputShowErrors(this.formControl);
   }
 
-  selectedValue(selected: Codelist<number>, checked: boolean, clickOnText: boolean): void {
+  selectedValue(selected: Codelist<number | string>, checked: boolean, clickOnText: boolean): void {
     if (this.isReadOnly) {
       return;
     }
@@ -87,7 +87,7 @@ export class InputMultiselectComponent implements OnInit {
 
   fetchCodelist() {
     /*  const request = this.endpoints.codelists(this.codelist);
-    this.endpoints.makeRequest<Array<Codelist<number>>>(request)
+    this.endpoints.makeRequest<Array<Codelist<number|string>>>(request)
       .subscribe((response) => {
         this.options = response;
         if (this.config.preselectFirst) {
@@ -104,7 +104,7 @@ export class InputMultiselectComponent implements OnInit {
     this.form.get(this.property).setValue(firstValue);
   }
 
-  isOptionChecked(option: Codelist<number>) {
+  isOptionChecked(option: Codelist<number | string>) {
     let isChecked = false;
     if (this.formControl.value) {
       for (const checkedId of this.formControl.value) {

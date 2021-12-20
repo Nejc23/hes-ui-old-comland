@@ -1,109 +1,118 @@
-<div class="tw-p-10">
+<div class="tou-units-layout">
+  <div class="tou-units-content">
+    <div class="tw-text-black tw-text-2xl tw-font-medium tw-mb-10">
+      {{ 'Summary' | translate }}
+    </div>
 
+    <div>
+      <div *ngIf="isValid()" class="success-text tw-mb-6 tw-h-10">
+        {{ 'TOU-CONFIG.CONFIG-VALID' | translate }}
+      </div>
 
-  <div class="tw-text-black tw-text-2xl tw-font-medium tw-mb-10">
-    {{ 'Summary' | translate }}
+      <div *ngIf="!isValid()" class="error-text tw-mb-6 tw-h-10">
+        {{ 'TOU-CONFIG.CONFIG-ERROR' | translate }}
+      </div>
+
+      <div
+        class="
+          tw-inline-flex
+          tw-justify-between
+          tw-items-center
+          tw-text-sm
+          tw-border-b
+          tw-border-t
+          tw-border-solid
+          tw-border-lightGray
+          tw-h-12
+          tw-w-full
+        "
+      >
+        <div class="tw-text-darkGray">
+          {{ 'FORM.TOU-EXTERNAL-ID' | translate }}
+        </div>
+        <div class="tw-text-black">
+          {{ touConfiguration.basic.externalId }}
+        </div>
+      </div>
+
+      <div
+        class="
+          tw-inline-flex tw-justify-between tw-items-center tw-text-sm tw-border-b tw-border-solid tw-border-lightGray tw-h-12 tw-w-full
+        "
+      >
+        <div class="tw-text-darkGray">
+          {{ 'FORM.DESCRIPTION' | translate }}
+        </div>
+        <div class="tw-text-black">
+          {{ touConfiguration.basic.description }}
+        </div>
+      </div>
+
+      <div
+        class="
+          tw-inline-flex tw-justify-between tw-items-center tw-text-sm tw-border-b tw-border-solid tw-border-lightGray tw-h-12 tw-w-full
+        "
+      >
+        <div class="tw-text-darkGray">
+          {{ 'TOU-CONFIG.ACTIVATION-DATE' | translate }}
+        </div>
+        <div class="tw-text-black">
+          <ng-container *ngIf="touConfiguration.basic.activationEnabled; else noData">
+            {{ touConfiguration.basic.startDate | formatDate }}
+          </ng-container>
+          <ng-template #noData>
+            {{ 'COMMON.NA' | translate }}
+          </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="tw-text-black tw-text-base tw-font-bold tw-mt-12 tw-mb-8">{{ 'TOU-CONFIG.DETAILS' | translate }}</div>
+
+      <div class="tw-inline-flex tw-flex-wrap">
+        <div class="card-item">
+          <div class="card-item-number">
+            {{ touConfiguration.days.units.length }}
+          </div>
+          <div class="card-item-text">
+            {{ 'TOU-CONFIG.DAY-TABLES' | translate }}
+          </div>
+        </div>
+
+        <div class="card-item">
+          <div class="card-item-number">
+            {{ touConfiguration.weeks.units.length }}
+          </div>
+          <div class="card-item-text">
+            {{ 'TOU-CONFIG.WEEK-TABLES' | translate }}
+          </div>
+        </div>
+
+        <div class="card-item">
+          <div class="card-item-number">
+            {{ touConfiguration.seasons.units.length }}
+          </div>
+          <div class="card-item-text">
+            {{ 'TOU-CONFIG.SEASON-TABLES' | translate }}
+          </div>
+        </div>
+
+        <div class="card-item">
+          <div class="card-item-number">
+            {{ touConfiguration.specialDays.length }}
+          </div>
+          <div class="card-item-text">
+            {{ 'TOU-CONFIG.SPECIAL-DAYS' | translate }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <div *ngIf="isValid()" class="success-text tw-mb-6 tw-h-10">
-      {{ 'TOU-CONFIG.CONFIG-VALID' | translate }}
+  <div class="tou-units-buttons-container">
+    <div class="tou-units-buttons">
+      <button (click)="previousStep()" class="btn btn-primary">< {{ 'TOU-CONFIG.SPECIAL-DAYS' | translate }}</button>
     </div>
-
-    <div *ngIf="!isValid()" class="error-text tw-mb-6 tw-h-10">
-      {{ 'TOU-CONFIG.CONFIG-ERROR' | translate }}
-    </div>
-
-    <div
-      class="tw-inline-flex tw-justify-between tw-items-center tw-text-sm tw-border-b tw-border-t tw-border-solid tw-border-lightGray tw-h-12 tw-w-full">
-      <div class="tw-text-darkGray">
-        {{ 'FORM.TOU-ID' | translate }}
-      </div>
-      <div class="tw-text-black">
-        {{ touConfiguration.basic.id }}
-      </div>
-    </div>
-
-    <div
-      class="tw-inline-flex tw-justify-between tw-items-center tw-text-sm tw-border-b tw-border-solid tw-border-lightGray tw-h-12 tw-w-full">
-      <div class="tw-text-darkGray">
-        {{ 'FORM.DESCRIPTION' | translate }}
-      </div>
-      <div class="tw-text-black">
-        {{ touConfiguration.basic.description }}
-      </div>
-    </div>
-
-    <div
-      class="tw-inline-flex tw-justify-between tw-items-center tw-text-sm tw-border-b tw-border-solid tw-border-lightGray tw-h-12 tw-w-full">
-      <div class="tw-text-darkGray">
-        {{ 'TOU-CONFIG.ACTIVATION-DATE' | translate }}
-      </div>
-      <div class="tw-text-black">
-        <ng-container *ngIf="touConfiguration.basic.activationEnabled else noData">
-          {{ touConfiguration.basic.startDate | formatDate }}
-        </ng-container>
-        <ng-template #noData>
-          {{ 'COMMON.NA' | translate }}
-        </ng-template>
-      </div>
-    </div>
-
   </div>
-
-
-  <div>
-    <div class="tw-text-black tw-text-base tw-font-bold tw-mt-12 tw-mb-8">{{ 'TOU-CONFIG.DETAILS' | translate }}</div>
-
-    <div class="tw-inline-flex tw-flex-wrap">
-
-      <div class="card-item">
-        <div class="card-item-number">
-          {{ touConfiguration.days.units.length }}
-        </div>
-        <div class="card-item-text">
-          {{ 'TOU-CONFIG.DAY-TABLES' | translate }}
-        </div>
-      </div>
-
-
-      <div class="card-item">
-        <div class="card-item-number">
-          {{ touConfiguration.weeks.units.length }}
-        </div>
-        <div class="card-item-text">
-          {{ 'TOU-CONFIG.WEEK-TABLES' | translate }}
-        </div>
-      </div>
-
-
-      <div class="card-item">
-        <div class="card-item-number">
-          {{ touConfiguration.seasons.units.length }}
-        </div>
-        <div class="card-item-text">
-          {{ 'TOU-CONFIG.SEASON-TABLES' | translate }}
-        </div>
-      </div>
-
-      <div class="card-item">
-        <div class="card-item-number">
-          {{ touConfiguration.specialDays.length }}
-        </div>
-        <div class="card-item-text">
-          {{ 'TOU-CONFIG.SPECIAL-DAYS' | translate }}
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-<div class="buttons-bottom-container">
-  <button (click)="previousStep()"
-          class="btn btn-primary tw-ml-5">< {{ 'TOU-CONFIG.SPECIAL-DAYS' | translate }}
-  </button>
 </div>

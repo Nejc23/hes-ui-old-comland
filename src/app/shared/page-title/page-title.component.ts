@@ -19,8 +19,10 @@ export class PageTitleComponent {
   addStateClass() {
     switch (this.state.toLowerCase()) {
       case DeviceState.DISABLED.toLowerCase(): // gray
+      case DeviceState.DRAFT.toLowerCase():
         return 'disabled-state';
       case DeviceState.OPERATIONAL.toLowerCase(): // green
+      case DeviceState.EDIT.toLowerCase():
         return 'operational-state';
       case DeviceState.INSTALLING.toLowerCase(): // yellow
         return 'installing-state';

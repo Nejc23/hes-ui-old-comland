@@ -1,18 +1,29 @@
 <div class="mb-3 file-upload" [formGroup]="form">
   <label [attr.for]="property" *ngIf="label">
-    {{ 'FORM.' + label.toUpperCase() | translate}}
+    {{ 'FORM.' + label.toUpperCase() | translate }}
     <sup *ngIf="required"> *</sup>
   </label>
 
-  <div *ngIf="isDropZoneCustom" class="dropzone-custom" #customDropzone  [kendoUploadDropZone]="'customZone'"
-    [ngClass]="{'hover-mouse-down': isDropZoneHover}" (dragenter)="onDropZoneEnter($event)"
-    (dragleave)="onDropZoneLeave($event)" (dragend)="onDropZoneEnd($event)" (drop)="onDropZoneEnd($event)">
-    <div class="text-center" style="width:100%">
+  <div
+    *ngIf="isDropZoneCustom"
+    class="dropzone-custom"
+    #customDropzone
+    [kendoUploadDropZone]="'customZone'"
+    [ngClass]="{ 'hover-mouse-down': isDropZoneHover }"
+    (dragenter)="onDropZoneEnter($event)"
+    (dragleave)="onDropZoneLeave($event)"
+    (dragend)="onDropZoneEnd($event)"
+    (drop)="onDropZoneEnd($event)"
+  >
+    <div class="text-center" style="width: 100%">
       <div *ngIf="!isUploadOk && !isUploadFailed && !isUploadInProgress">
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
-        <div class="title"><a (click)="onFileSelectClick()" href="javascript:void(0);">{{'FORM.CHOOSE-FILE' | translate }} </a><span> {{'FORM.DRAG-HERE' | translate }}</span></div>
+        <div class="title">
+          <a (click)="onFileSelectClick()" href="javascript:void(0);">{{ 'FORM.CHOOSE-FILE' | translate }} </a
+          ><span> {{ 'FORM.DRAG-HERE' | translate }}</span>
+        </div>
         <div class="subtitle pt-2">{{ dropUploadSubtitle | translate }}</div>
       </div>
 
@@ -20,32 +31,46 @@
         <div class="pb-1">
           <i class="fas fa-cloud-upload-alt"></i>
         </div>
-        <div class="title"><span>{{'FORM.UPLOADING-FILE' | translate }}:</span> {{ fileName }}</div>
-        <kendo-progressbar [label]="false" [min]="0" [max]="100" style="width:50%;" [value]="uploadProgressValue"></kendo-progressbar>
+        <div class="title">
+          <span>{{ 'FORM.UPLOADING-FILE' | translate }}:</span> {{ fileName }}
+        </div>
+        <kendo-progressbar [label]="false" [min]="0" [max]="100" style="width: 50%" [value]="uploadProgressValue"></kendo-progressbar>
       </div>
 
       <div *ngIf="isUploadOk">
         <div class="pb-1">
           <i class="fas fa-file"></i>
         </div>
-        <div class="title"><span>{{'FORM.UPLOADED-FILE' | translate }}:</span><span> {{ fileName}}</span></div>
-        <div class="subtitle pt-2"><span>{{'FORM.DRAG-UPLOAD' | translate }} </span><a href="javascript:void(0)" (click)="onFileSelectClick()">{{'FORM.CHOOSE-NEW-FILE' | translate }}</a></div>
+        <div class="title">
+          <span>{{ 'FORM.UPLOADED-FILE' | translate }}:</span><span> {{ fileName }}</span>
+        </div>
+        <div class="subtitle pt-2">
+          <span>{{ 'FORM.DRAG-UPLOAD' | translate }} </span
+          ><a href="javascript:void(0)" (click)="onFileSelectClick()">{{ 'FORM.CHOOSE-NEW-FILE' | translate }}</a>
+        </div>
       </div>
 
       <div *ngIf="isUploadFailed">
         <div class="pb-2">
-          <span class="fa-stack" >
+          <span class="fa-stack">
             <i class="fas fa-cloud-upload-alt fa-stack-1x"></i>
             <i class="fas fa-exclamation-triangle fa-stack-1x"></i>
           </span>
         </div>
-        <div class="title"><span>{{'FORM.UPLOAD-FILED' | translate }}:</span><span> {{ fileName }}</span></div>
-        <div class="subtitle pt-2"><a href="javascript:void(0)" (click)="onFileSelectClick()">{{'FORM.SELECT-HERE' | translate }}</a><span> {{'FORM.DRAG-ANOTHER' | translate }}</span></div>
+        <div class="title">
+          <span>{{ 'FORM.UPLOAD-FILED' | translate }}:</span><span> {{ fileName }}</span>
+        </div>
+        <div class="subtitle pt-2">
+          <a href="javascript:void(0)" (click)="onFileSelectClick()">{{ 'FORM.SELECT-HERE' | translate }}</a
+          ><span> {{ 'FORM.DRAG-ANOTHER' | translate }}</span>
+        </div>
       </div>
     </div>
   </div>
 
-  <kendo-upload #upload required
+  <kendo-upload
+    #upload
+    required
     zoneId="customZone"
     [formControlName]="property"
     [saveUrl]="uploadSaveUrl"
@@ -57,15 +82,16 @@
     (success)="onSuccess($event)"
     (error)="errorEventHandler($event)"
     (upload)="uploadEventHandler($event)"
-    [accept]="acceptExtensions"
-    [id]="controlId" [name]="controlId"
+    [accept]="accept"
+    [id]="controlId"
+    [name]="controlId"
     [saveField]="saveField"
     (uploadProgress)="uploadProgress($event)"
     (select)="fileSelected($event)"
-    >
+  >
   </kendo-upload>
   <!--Loop through errors-->
   <div class="help-block" *ngIf="showErrors()">
-    <app-form-error [error]="formControl!.errors "></app-form-error>
+    <app-form-error [error]="formControl!.errors"></app-form-error>
   </div>
 </div>
