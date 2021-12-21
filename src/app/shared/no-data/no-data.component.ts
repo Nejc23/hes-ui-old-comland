@@ -10,6 +10,7 @@ export class NoDataComponent {
 
   @Input() message = 'COMMON.NO-DATA-FOUND';
   @Input() secondaryMessage = '';
+  @Input() iconName = '';
 
   @Input() alert = false; // red alert
 

@@ -94,8 +94,21 @@
 .green {
   color: #37A350;
   padding: 3px 8px;
-  width: 73px;
   background: rgba(55, 163, 80, 0.1);
+  border-radius: 2px;
+}
+
+.red {
+  color: #BC1839;
+  padding: 3px 8px;
+  background: rgba(252, 235, 238, 1);
+  border-radius: 2px;
+}
+
+.blue {
+  color: #47A8BD;
+  padding: 3px 8px;
+  background: rgba(71, 168, 189, 0.1);
   border-radius: 2px;
 }
 
@@ -153,6 +166,10 @@
   position: relative;
   bottom: 12.4rem;
   margin-left: 28.5rem;
+}
+
+.bold-text {
+  font-weight: bold;
 }
 
 .grid-cell-text {

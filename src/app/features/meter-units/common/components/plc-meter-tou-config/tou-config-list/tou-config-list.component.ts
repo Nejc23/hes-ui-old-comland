@@ -32,7 +32,8 @@ export class TouConfigListComponent implements OnInit {
   touListColumnsConfiguration: Array<GridColumn> = [
     {
       field: 'externalId',
-      translationKey: 'FORM.TOU-EXTERNAL-ID'
+      translationKey: 'FORM.TOU-EXTERNAL-ID',
+      type: GridColumnType.BOLD_TEXT
     },
     {
       field: 'description',

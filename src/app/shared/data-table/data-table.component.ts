@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild } from '@angular/core';
 import { CellClickEvent, GridDataResult, PageChangeEvent, PageSizeItem, RowArgs, RowClassArgs } from '@progress/kendo-angular-grid';
 import { ScrollMode } from '@progress/kendo-angular-grid/dist/es2015/scrolling/scrollmode';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
@@ -25,6 +25,7 @@ export enum GridColumnType {
   RADIO = 'radio-button',
   ENUM = 'enum',
   COLORED_ENUM = 'colored-enum',
+  BOLD_TEXT = 'bolded-text',
   DATE = 'date',
   DATE_TIME = 'date-time',
   DATE_ONLY = 'date-only',
@@ -67,7 +68,8 @@ export interface GridBulkAction {
 })
 export class DataTableComponent implements OnInit, OnChanges {
   public gridView: GridDataResult;
-  gridViewFilter: any;
+  gridViewFilteredData: any; // search of filter applied
+
   @Input() gridData: any; //   this.data = [...this.data]; // for KendoUI change detection
   @Input() gridColumns: Array<GridColumn> = [];
   @Input() rowActions: Array<GridRowAction> = [];
@@ -101,6 +103,17 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() kendoGridSelectByColumn: string = 'id'; // represents the unique grid data property/key for row selection
   @Input() selectedKeys = [];
   @Input() showGridBulkActions = false;
+  @Input() showClearFiltersButton = false;
+  // dropdown filters and search
+
+  filtersForm;
+  appliedFilters = [];
+  existingFilter: any;
+  searchTerm = '';
+  filteredData = [];
+
+  @ViewChild('searchInput', { static: false })
+  searchInput: ElementRef;
 
   @Input()
   sort: SortDescriptor[] = [
@@ -206,19 +219,33 @@ export class DataTableComponent implements OnInit, OnChanges {
     };
   }
 
-  public onFilter(inputValue: string): void {
-    this.skip = 0;
-    this.gridViewFilter = this.gridData;
-    const filterTemp: CompositeFilterDescriptor = {
+  public onSearch(inputValue: string): void {
+    this.searchTerm = inputValue;
+
+    if (this.searchTerm !== '') {
+      this.skip = 0;
+      this.applySearch(this.searchTerm);
+    } else {
+      // remove filters
+      // this.filteredData = this.gridData;
+      this.applyFilter('', '');
+    }
+  }
+
+  applySearch(searchValue: string) {
+    // or for search
+    const filter: CompositeFilterDescriptor = {
       logic: 'or',
       filters: []
     };
     // Search all only for string fields
     // columns need to be defined for Search all
     const columns = this.gridColumns.filter((column) => column.type !== (GridColumnType.SWITCH || GridColumnType.RADIO));
+
     columns.forEach((column) => {
+      // date time formatting, search by date fix
       if (column.type === GridColumnType.DATE_TIME) {
-        inputValue = inputValue.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
+        searchValue = searchValue.replace(/[^\w\s]/gi, '').replace(/\s/g, '');
         this.gridData.forEach((row) => {
           row['formatted-date'] =
             moment(row[column.field]).format(environment.dateDisplayFormat) +
@@ -226,51 +253,96 @@ export class DataTableComponent implements OnInit, OnChanges {
             moment(row[column.field]).format(environment.timeFormatLong);
           row['formatted-date'] = row['formatted-date'].replace(/[^\w\s]/gi, '').replace(/\s/g, '');
         });
-
-        filterTemp.filters.push({
+        // formatted date for search only
+        filter.filters.push({
           field: 'formatted-date',
           operator: 'contains',
-          value: inputValue,
+          value: searchValue,
           ignoreCase: true
         });
-      }
-      if (column.type !== GridColumnType.DATE_TIME) {
-        filterTemp.filters.push({
+      } else {
+        // add other columns
+        filter.filters.push({
           field: column.field,
           operator: 'contains',
-          value: inputValue,
+          value: searchValue,
           ignoreCase: true
         });
       }
     });
 
-    this.gridViewFilter = process(this.gridData, {
-      filter: filterTemp
+    // Kendo UI filter data
+    this.gridViewFilteredData = process(this.gridViewFilteredData, {
+      filter: filter
     }).data;
 
-    this.loadItems(this.gridViewFilter, this.gridViewFilter.length);
+    // save filtered data
+    this.filteredData = this.gridViewFilteredData;
+    // load grid
+    this.loadItems(this.gridViewFilteredData, this.gridViewFilteredData.length);
   }
 
-  dropdownValueChanged(value, field) {
-    this.gridViewFilter = this.gridData;
+  dropdownFilterValueChanged(value, field) {
+    this.skip = 0;
+    // this.gridViewFilter = this.gridData; // all data
+    this.existingFilter = null;
+    // check if filter already exist exist
+    if (this.appliedFilters && this.appliedFilters.find((filter) => filter.field === field)) {
+      // apply new value
+      this.existingFilter = this.appliedFilters.find((filter) => filter.field === field);
+      this.existingFilter.value = value;
+    }
 
     if (value !== 'All') {
-      const filterTemp: CompositeFilterDescriptor = {
-        logic: 'and',
-        filters: []
-      };
-      filterTemp.filters.push({
+      this.applyFilter(field, value);
+    } else {
+      if (this.existingFilter && this.appliedFilters) {
+        if (this.appliedFilters?.length > 0) {
+          this.appliedFilters = this.appliedFilters.filter((filter) => filter.field !== field);
+          this.applyFilter(field, value);
+        }
+      } else {
+        this.appliedFilters = [];
+      }
+      if (this.searchTerm !== '') {
+        this.applySearch(this.searchTerm);
+      }
+    }
+
+    this.filteredData = this.gridViewFilteredData;
+    this.loadItems(this.gridViewFilteredData, this.gridViewFilteredData.length);
+  }
+
+  applyFilter(field: string, value: any) {
+    debugger;
+    this.gridViewFilteredData = this.gridData; // check
+    if (this.searchTerm !== '') {
+      this.applySearch(this.searchTerm);
+    }
+
+    if (field === '' && this.appliedFilters.length === 0) {
+      this.gridViewFilteredData = this.gridData;
+    }
+
+    const filterTemp: CompositeFilterDescriptor = {
+      logic: 'and',
+      filters: []
+    };
+    if (!this.existingFilter && field !== '') {
+      this.appliedFilters.push({
         field: field,
         operator: 'eq',
         value: value,
         ignoreCase: true
       });
-      this.gridViewFilter = process(this.gridData, {
-        filter: filterTemp
-      }).data;
     }
 
-    this.loadItems(this.gridViewFilter, this.gridViewFilter.length);
+    filterTemp.filters = this.appliedFilters;
+    this.gridViewFilteredData = process(this.gridViewFilteredData, {
+      filter: filterTemp
+    }).data;
+
+    this.loadItems(this.gridViewFilteredData, this.gridViewFilteredData.length);
   }
 
   initGrid() {
@@ -299,8 +371,23 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   public sortChange(sort: SortDescriptor[]): void {
+    let data = this.gridData;
+    if (this.filtersApplied()) {
+      data = this.filteredData;
+    }
     this.sort = sort;
-    this.loadItems(this.gridData, this.total ? this.total : this.gridData.length, this.sort);
+    this.loadItems(data, this.total ? this.total : data.length, this.sort);
+  }
+
+  clearAllFilters() {
+    this.searchTerm = '';
+    this.appliedFilters = [];
+    this.searchInput.nativeElement.value = '';
+    this.applyFilter('', '');
+  }
+
+  filtersApplied() {
+    return this.searchTerm !== '' || this.appliedFilters.length > 0;
   }
 
   private loadItems(data: any, count: number, sort?: any): void {
@@ -309,6 +396,8 @@ export class DataTableComponent implements OnInit, OnChanges {
         data: orderBy(data.slice(this.skip, this.skip + this.pageSize), this.sort),
         total: count
       };
+    } else {
+      this.initGrid();
     }
   }
 }

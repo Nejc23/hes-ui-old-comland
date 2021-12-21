@@ -35,7 +35,7 @@
 
         <div class="tw-inline-flex gray-border tw-w-56 search-input">
           <img [src]="'assets/images/icons/grain-icon.svg'" class="tw-mx-4" />
-          <input (input)="onFilter($any($event.target).value)"
+          <input (input)="onSearch($any($event.target).value)"
                  kendoTextBox
                  placeholder="{{'COMMON.SEARCH-TERM' | translate }}"
           /> <!-- Search all only works on strings -->
@@ -44,19 +44,27 @@
 
       <div *ngIf="filters && filters.length > 0" class=" tw-place-self-end tw-flex margin-bottom-5">
 
-        <div *ngFor="let filter of filters" class="tw-ml-4">
+        <div *ngFor="let filter of filters let i = index; " class="tw-ml-4">
 
           <div *ngIf="filter.label"
                class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1"> {{ filter.label | translate }}:
           </div>
 
           <div class="gray-border">
-            <kendo-dropdownlist (selectionChange)="dropdownValueChanged($event, filter.field)"
-                                [data]="filter.values"
-                                [defaultItem]="'COMMON.ALL' | translate"
+            <kendo-dropdownlist
+              #kendoDropdown
+              (selectionChange)="dropdownFilterValueChanged($event, filter.field)"
+              [data]="filter.values"
+              [defaultItem]="'COMMON.ALL' | translate"
+              [id]="filter.field"
             >
             </kendo-dropdownlist>
           </div>
+        </div>
+
+        <div (click)="clearAllFilters()" *ngIf="showClearFiltersButton"
+             class="tw-text-darkGray tw-ml-6 tw-w-28 tw-cursor-pointer tw-place-self-center tw-mt-5">
+          {{ 'COMMON.CLEAR-ALL-FILTERS' | translate }}
         </div>
       </div>
 
@@ -97,7 +105,7 @@
 
     <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
       <!--- no data -->
-      <div [ngClass]="rowActions.length > 0 ? 'grid-cell-text' : ''">
+      <div class="grid-cell-text">
         <ng-container
           *ngIf="!dataItem[column.field] && dataItem[column.field] !== 0 && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
           {{ 'COMMON.NOT-DEFINED' | translate }}
@@ -107,9 +115,11 @@
         <ng-container *ngIf="!column.type">
           <div [class]="column.class?? 'tw-inline-flex'">
             <ng-container *ngIf="dataItem[column.field] && column.icon">
-              <img [src]="'assets/images/icons/user-icon.svg'" class="tw-pr-2" />
+              <img [src]="'assets/images/icons/' + column.icon + '.svg'" class="tw-pr-2" />
             </ng-container>
-            {{ dataItem[column.field] }}
+            <div class="icon-text">
+              {{ dataItem[column.field] }}
+            </div>
           </div>
         </ng-container>
 
@@ -137,9 +147,15 @@
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.COLORED_ENUM">
-          <label [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
+          <span [ngClass]="colorExist(dataItem[column.field], column.coloredValues)">
             {{ dataItem[column.field] }}
-          </label>
+          </span>
+        </ng-container>
+
+        <ng-container *ngIf="column.type === columnType.BOLD_TEXT">
+          <div class="bold-text">
+            {{ dataItem[column.field] }}
+          </div>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.CODE_LIST">
