@@ -51,6 +51,15 @@ export interface RegisterValue {
   description?: string;
 }
 
+export interface GridRegisterValue {
+  requestId?: string;
+  value?: number;
+  unit?: string;
+  status?: number;
+  timestamp?: string;
+  description?: string;
+}
+
 export interface ValueWithUnit {
   value: string;
   unit: string;

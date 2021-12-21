@@ -85,7 +85,8 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() filters: Array<GridFilter>; // dropdown filters
 
   @Input() tableClass;
-  @Input() pageSize = 12;
+  //find better solution for solving problem with virtual scroll + sort
+  @Input() pageSize = 99999999;
   @Input() skip = 0;
   @Input() pageable = false;
   @Input() stickyHeader = false;
