@@ -31,6 +31,8 @@
     "GO-TO-JOBS": "Go to jobs",
     "DISCARD": "Discard",
     "EXPORT": "Export",
+    "REJECT": "Reject",
+    "GRANT": "Grant",
     "CONTINUE-WITH-EDITING": "Continue with editing"
   },
   "COMMON": {
@@ -209,7 +211,8 @@
       "DRAFT": "draft",
       "EDIT": "edit"
     },
-    "OPERATION-FAILED": "Operation failed. Please refresh the page and try again."
+    "OPERATION-FAILED": "Operation failed. Please refresh the page and try again.",
+    "CLEAR-ALL-FILTERS": "Clear all Filters"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -438,7 +441,12 @@
     "DAY-FR": "Friday",
     "DAY-SA": "Saturday",
     "DAY-SU": "Sunday",
-    "REPEAT-ANNUALLY": "Repeat annually"
+    "REPEAT-ANNUALLY": "Repeat annually",
+    "SUBJECT": "Subject",
+    "REQUEST-ID": "ID",
+    "CREATED-AT": "Created at",
+    "LAST-UPDATED": "Last updated",
+    "REJECTED-GRANTED": "Rejected/granted by"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -645,7 +653,8 @@
     "TOOLS": "Tools",
     "USERS": "Users",
     "IMPORT-DEVICES": "Import devices",
-    "TOU-CONFIGURATION": "TOU configurations"
+    "TOU-CONFIGURATION": "TOU configuration",
+    "VAULT-ACCESS": "Vault access"
   },
   "MODAL": {
     "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Are you sure you would like to trigger {{operationName}} for selected devices",
@@ -1158,6 +1167,36 @@
       "TOU_SPECIAL_DAYS_DAY_CREATE_NEW_FAILURE": "Special day has not been created.",
       "TOU_SPECIAL_DAYS_DELETE_FAILURE_UNKNOWN_CONFIGURATION": "Configuration of special week is not valid.",
       "TOU_SPECIAL_DAYS_DELETE_FAILURE_UNKNOWN_SPECIAL_DAY": "Special day not exists."
+    }
+  },
+  "VAULT-ACCESS": {
+    "CLIENT-CERTS-ERROR": "Operation failed. Please refresh the page and try again.",
+    "TITLE": "Vault access",
+    "PENDING-REQUEST": "Pending request",
+    "GRANTED-REJECTED": "Granted & rejected",
+    "GRANT-ITEMS": "Grant access",
+    "GRANT-ITEM-CONFIRMATION": "Are you sure you would like to grant access to the vault?",
+    "GRANT-ITEMS-CONFIRMATION": "Are you sure you would like to grant access to the vault for these requests?",
+    "GRANT-BUTTON": "Grant",
+    "GRANT-ITEM-SUCCESS": "Access was successfully granted",
+    "GRANT-ITEMS-SUCCESS": "Accesses were successfully granted",
+    "GRANT-ERROR": "Operation failed. Please refresh the page and try again.",
+    "REJECT-ITEMS": "Reject access",
+    "REJECT-ITEM-CONFIRMATION": "Are you sure you would like to reject access to the vault?",
+    "REJECT-ITEMS-CONFIRMATION": "Are you sure you would like to reject access to the vault for these requests?",
+    "REJECT-BUTTON": "Reject",
+    "REJECT-ITEM-SUCCESS": "Access was successfully rejected",
+    "REJECT-ITEMS-SUCCESS": "Accesses were successfully rejected",
+    "REJECT-ERROR": "Operation failed. Please refresh the page and try again.",
+    "NO-GRANTED-REQUESTS": "No granted or rejected request",
+    "NO-PENDING-REQUESTS": "No pending requests",
+    "API": {
+      "UNCONFIRMED": "PENDING",
+      "CONFIRMED": "GRANTED",
+      "AUTO_CONFIRMED": "AUTO GRANTED",
+      "REJECTED": "REJECTED",
+      "ISSUED": "ISSUED",
+      "AUTO_ISSUED": "AUTO ISSUED"
     }
   }
 }

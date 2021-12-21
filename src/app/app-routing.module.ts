@@ -47,6 +47,10 @@ const appRoutes: Routes = [
       {
         path: 'configuration',
         loadChildren: () => import('src/app/features/configuration/modules/configuration.module').then((m) => m.ConfigurationModule)
+      },
+      {
+        path: 'administration',
+        loadChildren: () => import('src/app/features/administration/modules/administration.module').then((m) => m.AdministrationModule)
       }
     ]
   },

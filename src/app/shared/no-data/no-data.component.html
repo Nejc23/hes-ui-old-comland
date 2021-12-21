@@ -17,8 +17,14 @@
     <div
       [ngClass]="alert ? 'tw-bg-red' : 'tw-bg-lightGray'"
       class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20 relative-position">
-      <img *ngIf="alert" [src]="'assets/images/icons/alert-icon.svg'" class="tw-h-7" />
-      <img *ngIf="!alert" [src]="'assets/images/icons/search-icon.svg'" class="tw-h-7" />
+
+      <ng-container *ngIf="iconName === ''">
+        <img *ngIf="alert" [src]="'assets/images/icons/alert-icon.svg'" class="tw-h-7" />
+        <img *ngIf="!alert" [src]="'assets/images/icons/search-icon.svg'" class="tw-h-7" />
+      </ng-container>
+
+      <img *ngIf="iconName !== ''" [src]="'assets/images/icons/'+ iconName + '-icon.svg'" class="tw-h-7" />
+
     </div>
   </div>
   <div class="tw-font-bold tw-text-black tw-text-xl tw-mt-6">
