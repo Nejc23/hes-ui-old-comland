@@ -112,16 +112,29 @@
           <div
             [ngClass]="{
               'col-12': (!showStatistics || !registerStatisticsData) && !isEvent,
-              'col-8': showStatistics && registerStatisticsData && !isEvent,
-              'col-6': isEvent
+              'col-8': (showStatistics && registerStatisticsData && !isEvent) || isEvent
             }"
           >
-            <app-registers-grid [categorization]="categorization" [rowData]="rowData"></app-registers-grid>
+          <div *ngIf="gridData.length > 0">
+            <app-data-table [fetchData]="false"
+                            [gridColumns]="isEvent ? eventDataColumns : registerDataColumns"
+                            [gridData]="gridData"
+                            [noDataText]="'NO-DATA-FOUND'"
+                            [pageable]="true"
+                            [rowHeight]="44"
+                            [scrollable]="'virtual'"
+                            [skip]="0"
+                            [sort]="registerDataDefaultSort"
+                            [sortable]="true"
+                            [tableHeight]="446"
+                            [total]="gridData.length">
+              </app-data-table>
           </div>
+        </div>
           <div *ngIf="showStatistics && !isEvent && registerStatisticsData" class="col-4">
             <app-registers-statistics [data]="registerStatisticsData"></app-registers-statistics>
           </div>
-          <div *ngIf="isEvent" class="col-6">
+          <div *ngIf="isEvent" class="col-4">
             <h4>{{ 'PLC-METER.REGISTER.EVENT-TYPE' | translate }}</h4>
             <app-registers-pie-chart [eventsById]="eventsById"></app-registers-pie-chart>
           </div>
