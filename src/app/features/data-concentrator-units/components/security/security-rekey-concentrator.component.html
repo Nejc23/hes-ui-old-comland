@@ -12,8 +12,9 @@
         <div class="col-12 pt-2">
           <label class="tw-text-darkGray tw-text-xs tw-pb-1">{{'FORM.KEY-TYPE' | translate}}:*</label>
           <div>
-            <app-select-input [disabled]="false" [form]="form" [withDescription]="true" [clearButton]= "false"
-                                 [property]="'keyType'" [selectOptions]="keyTypesArray" class="full-dropdown">
+            <app-select-input [clearButton]="false" [disabled]="false" [form]="form" [property]="'keyType'"
+                              [selectOptions]="keyTypesArray" [textField]="'id'"
+                              [valueField]="'apiId'" [withDescription]="true" class="full-dropdown">
             </app-select-input>
           </div>
         </div>
@@ -43,7 +44,7 @@
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button (click)="onConfirm()" class="btn btn-primary" type="submit"  [disabled]=!this.form.valid>
+        <button (click)="onConfirm()" [disabled]=!this.form.valid class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
       </div>
     </div>

@@ -446,3 +446,8 @@ body {
     @apply tw-justify-end;
   }
 }
+
+.k-state-selected {
+  color: black !important;
+  background-color: $lightGray !important;
+}
