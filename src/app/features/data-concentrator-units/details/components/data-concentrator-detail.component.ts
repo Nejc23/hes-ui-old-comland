@@ -350,7 +350,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.editForm = this.createEditForm();
         this.eventsForm = this.createEventsForm();
 
-        this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
+        // Credentials are visible just for AC750
+        this.credentialsVisible = this.data && this.data.typeId === 2;
         this.setCredentialsControls(this.credentialsVisible);
 
         this.loadGridData(this.metersGridPageNumber);
