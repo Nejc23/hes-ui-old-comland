@@ -240,7 +240,8 @@ export class AddDcuFormComponent implements OnInit {
   public onTypeChanged(value) {
     this.form.get(this.typeProperty).setValue(value);
     if (value && value.id) {
-      this.credentialsVisible = value.id === 2 || value.id === 3;
+      // Credentials are visible just for AC750
+      this.credentialsVisible = value.id === 2;
     }
 
     this.setCredentialsControls(this.credentialsVisible);
