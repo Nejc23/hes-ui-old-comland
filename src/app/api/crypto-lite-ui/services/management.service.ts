@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
 import { CryptoClientCertificateDto } from '../models/crypto-client-certificate-dto';
+import { CryptoCredentialDto } from '../models/crypto-credential-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -315,5 +316,108 @@ export class ManagementService extends BaseService {
    */
   managementClientCertificateRequestIdRejectPost(params: { id: string }): Observable<void> {
     return this.managementClientCertificateRequestIdRejectPost$Response(params).pipe(map((r: StrictHttpResponse<void>) => r.body as void));
+  }
+
+  /**
+   * Path part for operation managementDownloadDataconcentratorClientCertificatePost
+   */
+  static readonly ManagementDownloadDataconcentratorClientCertificatePostPath = '/management/download-dataconcentrator-client-certificate';
+
+  /**
+   * Download DataConcentrator client certificate.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `managementDownloadDataconcentratorClientCertificatePost$Plain()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  managementDownloadDataconcentratorClientCertificatePost$Plain$Response(params?: {
+    body?: CryptoCredentialDto;
+  }): Observable<StrictHttpResponse<Blob>> {
+    const rb = new RequestBuilder(this.rootUrl, ManagementService.ManagementDownloadDataconcentratorClientCertificatePostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'text/plain'
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Blob>;
+        })
+      );
+  }
+
+  /**
+   * Download DataConcentrator client certificate.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `managementDownloadDataconcentratorClientCertificatePost$Plain$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  managementDownloadDataconcentratorClientCertificatePost$Plain(params?: { body?: CryptoCredentialDto }): Observable<Blob> {
+    return this.managementDownloadDataconcentratorClientCertificatePost$Plain$Response(params).pipe(
+      map((r: StrictHttpResponse<Blob>) => r.body as Blob)
+    );
+  }
+
+  /**
+   * Download DataConcentrator client certificate.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `managementDownloadDataconcentratorClientCertificatePost$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  managementDownloadDataconcentratorClientCertificatePost$Json$Response(params?: {
+    body?: CryptoCredentialDto;
+  }): Observable<StrictHttpResponse<Blob>> {
+    const rb = new RequestBuilder(this.rootUrl, ManagementService.ManagementDownloadDataconcentratorClientCertificatePostPath, 'post');
+    if (params) {
+      rb.body(params.body, 'application/*+json');
+    }
+
+    return this.http
+      .request(
+        rb.build({
+          responseType: 'blob',
+          accept: 'text/json'
+        })
+      )
+      .pipe(
+        filter((r: any) => r instanceof HttpResponse),
+        map((r: HttpResponse<any>) => {
+          return r as StrictHttpResponse<Blob>;
+        })
+      );
+  }
+
+  /**
+   * Download DataConcentrator client certificate.
+   *
+   *
+   *
+   * This method provides access to only to the response body.
+   * To access the full response (for headers, for example), `managementDownloadDataconcentratorClientCertificatePost$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  managementDownloadDataconcentratorClientCertificatePost$Json(params?: { body?: CryptoCredentialDto }): Observable<Blob> {
+    return this.managementDownloadDataconcentratorClientCertificatePost$Json$Response(params).pipe(
+      map((r: StrictHttpResponse<Blob>) => r.body as Blob)
+    );
   }
 }

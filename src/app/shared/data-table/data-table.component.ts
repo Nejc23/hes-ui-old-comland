@@ -107,10 +107,10 @@ export class DataTableComponent implements OnInit, OnChanges {
   // dropdown filters and search
 
   filtersForm;
-  appliedFilters = [];
-  existingFilter: any;
   searchTerm = '';
   filteredData = [];
+  appliedFilters = [];
+  existingFilter: any;
 
   @ViewChild('searchInput', { static: false })
   searchInput: ElementRef;
