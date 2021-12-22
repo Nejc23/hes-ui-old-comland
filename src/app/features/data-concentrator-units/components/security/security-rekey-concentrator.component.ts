@@ -58,7 +58,6 @@ export class SecurityRekeyConcentratorComponent implements OnInit {
   }
   onDismiss() {
     this.modal.dismiss();
-    console.log(this.actionRequest);
   }
 
   fillData(): IActionRequestSecurityRekey {

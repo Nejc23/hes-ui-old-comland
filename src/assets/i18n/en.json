@@ -262,6 +262,7 @@
     "LAST-NOTIFICATIONS": "Last notifications",
     "MULTIPLE-TYPES": "Multiple concentrator types are selected. Please refine your selection and try again.",
     "RE-KEY-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!",
+    "DOWNLOAD-CLIENT-CERT-NOT-SUPPORTED": "This action is currently not supported for AC750 concentrators!",
     "RE-KEY-INSTALLING-STATE-NOT-SUPPORTED": "Only HMAC key is allowed for concentrators in Installing state!",
     "INSTALLING-STATE-NOT-SUPPORTED": "This action is not allowed for concentrators in Installing state!",
     "RE-KEY-CONCENTRATOR": "Re-key concentrator",
@@ -270,7 +271,11 @@
     "SECURITY-GAK": "Global authentication key (applies to all meters installed on the selected DCs)",
     "SECURITY-GBEK": "Global broadcast encryption key (applies to all meters installed on the selected DCs)",
     "SECURITY-GAK-GBEK": "Global authentication and broadcast keys (applies to all meters installed on the selected DCs)",
-    "SECURITY-HMAC": "API key used to authenticated DC and the HES"
+    "SECURITY-HMAC": "API key used to authenticated DC and the HES",
+    "DOWNLOAD-CLIENT-CERT": "Download client certificate",
+    "PROTECT-YOUR-CERT": "Protect your certificate",
+    "ENTER-CLIENT-PASSWORD": "Enter the password for certificate",
+    "CLIENT-CERTS-ERROR": "Operation failed. Please refresh the page and try again."
   },
   "ERROR": {
     "PAGE-NOT-FOUND": "404 - page not exists"
@@ -679,7 +684,8 @@
     "RE-KEY-HMAC": "Re-key HMAC",
     "RE-KEY-CONCENTRATOR": "Re-key concentrator",
     "ENABLE-DC": "Enable concentrator",
-    "DISABLE-DC": "Disable concentrator"
+    "DISABLE-DC": "Disable concentrator",
+    "DOWNLOAD-CLIENT-CERT": "Download client certificate"
   },
   "PLC-METER": {
     "ACTIVATE-IMAGE": "Activate image",

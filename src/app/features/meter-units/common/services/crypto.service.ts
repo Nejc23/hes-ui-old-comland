@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { CryptoClientCertificateDto } from '../../../../api/crypto-lite-ui/models/crypto-client-certificate-dto';
 import { ManagementService } from '../../../../api/crypto-lite-ui/services/management.service';
 import { StrictHttpResponse } from '../../../../api/crypto-lite-ui/strict-http-response';
+import { CryptoCredentialDto } from '../../../../api/crypto-lite-ui/models/crypto-credential-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,9 @@ export class CryptoService {
 
   rejectClientCertificate(params: { id: string }): Observable<StrictHttpResponse<void>> {
     return this.managementService.managementClientCertificateRequestIdRejectPost$Response(params);
+  }
+
+  downloadDataConcentratorClientCert(params?: { body?: CryptoCredentialDto }): Observable<StrictHttpResponse<Blob>> {
+    return this.managementService.managementDownloadDataconcentratorClientCertificatePost$Json$Response(params);
   }
 }

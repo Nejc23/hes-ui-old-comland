@@ -158,6 +158,12 @@
           </div>
         </ng-container>
 
+        <ng-container *ngIf="column.type === columnType.BOLD_TEXT">
+          <div class="bold-text">
+            {{ dataItem[column.field] }}
+          </div>
+        </ng-container>
+        
         <ng-container *ngIf="column.type === columnType.CODE_LIST">
           <div>
             {{ dataItem[column.field].id }}

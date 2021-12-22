@@ -447,7 +447,9 @@ body {
   }
 }
 
-.k-state-selected {
-  color: black !important;
-  background-color: $lightGray !important;
+kendo-popup {
+  .k-state-selected {
+    color: black !important;
+    background-color: $lightGray !important;
+  }
 }

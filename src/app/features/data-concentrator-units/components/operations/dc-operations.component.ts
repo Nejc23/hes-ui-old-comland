@@ -8,6 +8,7 @@ import { ModalService } from '../../../../core/modals/services/modal.service';
 import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
 import { TranslateService } from '@ngx-translate/core';
 import { SecurityRekeyConcentratorComponent } from '../security/security-rekey-concentrator.component';
+import { DownloadDataConcentratorClientCertComponent } from '../download/download-dc-client-cert.component';
 
 export enum OperationType {
   OPERATION = 'OPERATION',
@@ -30,6 +31,7 @@ export class DcOperationsComponent {
   @Input() operationType: OperationType;
   componentType = OperationType;
   reKeyNotSupportedText = 'DCU.RE-KEY-NOT-SUPPORTED';
+  downloadClientCertNotSupportedText = 'DCU.DOWNLOAD-CLIENT-CERT-NOT-SUPPORTED';
   reKeyInstallingStateNotSupportedText = 'DCU.RE-KEY-INSTALLING-STATE-NOT-SUPPORTED';
   installingStateNotSupportedText = 'DCU.INSTALLING-STATE-NOT-SUPPORTED';
   reKeyDangerMessage = 'DCU.CONCENTRATOR-INOPERABLE-WARNING';
@@ -138,6 +140,24 @@ export class DcOperationsComponent {
     component.applyRequestParams(params, 1);
   }
 
+  downloadClientCert() {
+    const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
+
+    if (this.type) {
+      params.types = [this.type];
+    }
+
+    if (!this.checkIfNotSupportedDownload(params.types)) {
+      let alertText = '';
+      if (this.checkIfAC750(params.types)) {
+        alertText = this.reKeyNotSupportedText;
+      }
+
+      const modalRef = this.modalService.open(DownloadDataConcentratorClientCertComponent);
+      modalRef.componentInstance.alertText = alertText;
+    }
+  }
+
   onReKeyConcentrator() {
     const params = this.dcOperationsService.getOperationRequestParam(this.guid, null, 1, null);
 
@@ -178,8 +198,21 @@ export class DcOperationsComponent {
       const modalRef = this.modalService.open(ModalConfirmComponent);
       const component: ModalConfirmComponent = modalRef.componentInstance;
       component.withoutCancelButton = true;
-      component.modalTitle = 'OPERATION.RE-KEY-HMAC';
+      component.modalTitle = 'DCU.RE-KEY-CONCENTRATOR';
       component.modalBody = this.reKeyNotSupportedText;
+      component.btnConfirmText = this.translate.instant('BUTTON.CLOSE');
+      return true;
+    }
+    return false;
+  }
+
+  checkIfNotSupportedDownload(types: string[]) {
+    if (types.length === 1 && types[0].toUpperCase() === 'AC750') {
+      const modalRef = this.modalService.open(ModalConfirmComponent);
+      const component: ModalConfirmComponent = modalRef.componentInstance;
+      component.withoutCancelButton = true;
+      component.modalTitle = 'DCU.PROTECT-YOUR-CERT';
+      component.modalBody = this.downloadClientCertNotSupportedText;
       component.btnConfirmText = this.translate.instant('BUTTON.CLOSE');
       return true;
     }
