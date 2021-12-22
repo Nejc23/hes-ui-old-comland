@@ -113,7 +113,8 @@
 
         <!--- no type defined is string -->
         <ng-container *ngIf="!column.type">
-          <div [class]="column.class?? 'tw-inline-flex'">
+          <div [class]="column.class?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
+               data-toggle="tooltip">
             <ng-container *ngIf="dataItem[column.field] && column.icon">
               <img [src]="'assets/images/icons/' + column.icon + '.svg'" class="tw-pr-2" />
             </ng-container>
@@ -129,19 +130,22 @@
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.DATE_ONLY">
-          <div>
+          <div [title]="dataItem[column.field]  | formatDateOnly" data-placement="top"
+               data-toggle="tooltip">
             {{ dataItem[column.field] | formatDateOnly }}
           </div>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.DATE_TIME">
-          <div>
+          <div [title]="dataItem[column.field]  | formatDateTime" data-placement="top"
+               data-toggle="tooltip">
             {{ dataItem[column.field] | formatDateTime }}
           </div>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.DATE">
-          <div>
+          <div [title]="dataItem[column.field]  | formatDate" data-placement="top"
+               data-toggle="tooltip">
             {{ dataItem[column.field] | formatDate }}
           </div>
         </ng-container>
@@ -153,7 +157,8 @@
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.BOLD_TEXT">
-          <div class="bold-text">
+          <div [title]="dataItem[column.field]" class="bold-text" data-placement="top"
+               data-toggle="tooltip">
             {{ dataItem[column.field] }}
           </div>
         </ng-container>
@@ -163,9 +168,10 @@
             {{ dataItem[column.field] }}
           </div>
         </ng-container>
-        
+
         <ng-container *ngIf="column.type === columnType.CODE_LIST">
-          <div>
+          <div [title]="dataItem[column.field].value" data-placement="top"
+               data-toggle="tooltip">
             {{ dataItem[column.field].id }}
             <label class="tw-text-lightGray">({{ dataItem[column.field].value }})</label>
           </div>

@@ -33,7 +33,7 @@
   font-weight: bold;
 }
 
+::ng-deep .grid-row-button.rows-2 {
+  left: calc(100% - 5.4rem) !important;
+}
 
-//.dcu-tabs ::ng-deep .k-tabstrip {
-//  height: 85vh;
-//}
