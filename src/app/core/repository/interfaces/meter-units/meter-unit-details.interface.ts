@@ -11,7 +11,7 @@ export interface MeterUnitDetails {
   driver: string;
   protocolType: string;
   manufacturer: string;
-  ip: string;
+  hostname: string;
   port: number;
   deviceState: DeviceState;
   stateId: number;

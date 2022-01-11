@@ -332,8 +332,7 @@
       "REQUIRED": "Required field",
       "UNKNOWN-ERROR": "Unknown error",
       "INVALID-HOSTNAME": "Hostname is invalid",
-      "INVALID-IPADDRESS": "IP is invalid",
-      "DUPLICATED-IPADDRESS": "Combination of IP and port is duplicated",
+      "DUPLICATED-HOSTNAME": "Combination of hostname and port is duplicated",
       "ID-EXIST": "Id exist"
     },
     "EXPRESSION": "Expression",
@@ -424,7 +423,7 @@
     "TIMEZONENAME": "Timezone",
     "FIRSTINSTALLDATE": "Installed",
     "WARNING": {
-      "DUPLICATED": "The IP address you have entered is already in use by another meter!"
+      "DUPLICATED": "The hostname you have entered is already in use by another meter!"
     },
     "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
     "USE-LDN": "Use Logical Device Name",

@@ -12,7 +12,7 @@ export interface MuCreateRequest {
   driver?: number;
   medium?: number;
   jobIds?: string[];
-  ip: string;
+  hostname: string;
   port: number;
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;

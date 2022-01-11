@@ -248,7 +248,7 @@ export class MeterUnitDetailsComponent implements OnInit {
     } else {
       this.communicationForm = this.formBuilder.group({
         protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
-        ip: this.data.ip,
+        hostname: this.data.hostname,
         port: this.data.port,
         referencingType: this.data.referencingType.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase(),
         communicationType: this.data.hdlcInformation ? 'HDLC' : 'WRAPPER'
