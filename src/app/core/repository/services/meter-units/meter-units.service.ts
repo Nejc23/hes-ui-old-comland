@@ -16,7 +16,7 @@ import {
   meterUnitsLayout,
   removeMeterUnitsFromJob,
   touConfigImport,
-  validateIpAddress
+  validateHostname
 } from '../../consts/meter-units.const';
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
@@ -26,7 +26,7 @@ import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layou
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 import { MuUpdatePlcRequest, MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
-import { ValidateIpAddressRequest } from '../../interfaces/meter-units/validate-ip-address-request';
+import { ValidateMeterHostnameRequest } from '../../interfaces/meter-units/validate-ip-address-request';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
@@ -149,7 +149,7 @@ export class MeterUnitsService {
       driver: 2, // DLMS
       medium: 1, // ELECTRICITY
       jobIds: payload.jobIds,
-      ip: payload.ip,
+      hostname: payload.hostname,
       port: payload.port,
       referencingType: payload.referencingType,
       advancedInformation: {
@@ -197,7 +197,7 @@ export class MeterUnitsService {
     const muRequest: MuUpdateRequest = {
       name: payload.name,
       manufacturer: payload.manufacturer?.id,
-      ip: payload.ip,
+      hostname: payload.hostname,
       port: payload.port,
       serialNumber: payload.serialNumber,
       templateId: payload.template?.id ? payload.template?.id : null,
@@ -266,18 +266,18 @@ export class MeterUnitsService {
     return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
   }
 
-  validateIpAddress(ipAddress: string, port: number, deviceId: string, interfaceType: number): Observable<string> {
-    const request: ValidateIpAddressRequest = {
-      ipAddress: ipAddress,
+  validateHostname(hostname: string, port: number, deviceId: string, interfaceType: number): Observable<string> {
+    const request: ValidateMeterHostnameRequest = {
+      hostname: hostname,
       port: port,
       deviceId: deviceId,
       interfaceType: interfaceType
     };
-    return this.repository.makeRequest(this.validateIpAddressRequest(request));
+    return this.repository.makeRequest(this.validateHostnameRequest(request));
   }
 
-  validateIpAddressRequest(request: ValidateIpAddressRequest): HttpRequest<any> {
-    return new HttpRequest('POST', validateIpAddress, request);
+  validateHostnameRequest(request: ValidateMeterHostnameRequest): HttpRequest<any> {
+    return new HttpRequest('POST', validateHostname, request);
   }
 
   getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {

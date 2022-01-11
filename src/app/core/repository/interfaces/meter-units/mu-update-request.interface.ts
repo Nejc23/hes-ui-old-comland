@@ -6,7 +6,7 @@ import { ReferenceType } from './reference-type.enum';
 export interface MuUpdateRequest {
   name: string;
   manufacturer: number;
-  ip: string;
+  hostname: string;
   port: number;
   hdlcInformation?: MuHdlcInformation;
   wrapperInformation?: MuWrapperInformation;

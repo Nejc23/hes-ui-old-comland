@@ -1,11 +1,11 @@
-export interface ValidateIpAddressRequest {
+export interface ValidateMeterHostnameRequest {
   deviceId: string;
-  ipAddress: string;
+  hostname: string;
   port: number;
   interfaceType: number;
 }
 
-export enum ValidateIpAddressStatus {
+export enum ValidateHostnameStatus {
   VALID,
   INVALID,
   VALID_DUPLICATED,

@@ -46,4 +46,4 @@ export const jobStateSummary = `${basePathDcOperations}/job-state/summary`;
 export const dcRekeyHmac = `${enumMyGridLink.managment}/security/concentrator/change-hmac`;
 
 // Validations
-export const validateHostname = `${basePathConcentratorInventory}/validations/hostname`;
+export const validateHostname = `${dataConcentrator}/validations/hostname`;

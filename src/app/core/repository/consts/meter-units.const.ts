@@ -55,6 +55,6 @@ export const onDemandReadMeter = `/on-demand/read-meter`;
 export const templateGroups = `${basePath}/template-groups`;
 
 // Validations
-export const validateIpAddress = `${basePathMuConcentratorInventory}/validations/ipaddress`;
+export const validateHostname = `${getDevice}/validations/hostname`;
 
 export const uploadDevices = `${enumMyGridLink.inventory}${importDevices}`;

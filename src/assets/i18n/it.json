@@ -305,8 +305,7 @@
             "REQUIRED": "Campo obbligatorio",
             "UNKNOWN-ERROR": "Errore non conosciuto",
             "INVALID-HOSTNAME": "Hostname is invalid",
-            "INVALID-IPADDRESS": "IP is invalid",
-            "DUPLICATED-IPADDRESS": "IP is duplicated"
+            "DUPLICATED-HOSTNAME": "Combination of hostname and port is duplicated"
         },
         "EXPRESSION": "Espressione",
         "EXTERNAL-ID": "Id esterno",
@@ -395,7 +394,7 @@
         "TIMEZONENAME": "Timezone",
         "FIRSTINSTALLDATE": "Installed",
         "WARNING": {
-            "DUPLICATED": "The IP address you have entered is already in use by another meter!"
+            "DUPLICATED": "The hostname you have entered is already in use by another meter!"
         },
         "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
         "USE-LDN": "Use Logical Device Name",

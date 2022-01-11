@@ -80,16 +80,16 @@
             <div *ngIf="isConnectionTypeIp" class="form-row">
               <div class="col-6">
                 <app-input-text
-                  #ipField
-                  (inputTextBlurValue)="validateIpAddress()"
+                  #hostnameField
+                  (inputTextBlurValue)="validateHostname()"
                   [form]="form"
-                  [property]="ipProperty"
+                  [property]="hostnameProperty"
                   dis
-                  label="IP"
+                  label="HOSTNAME"
                 ></app-input-text>
               </div>
               <div class="col-3">
-                <app-input-numeric (inputTextBlurValue)="validateIpAddress()" [allowShowError]="isIpAddressValid()" [decimals]="0" [form]="form"
+                <app-input-numeric (inputTextBlurValue)="validateHostname()" [allowShowError]="isHostnameValid()" [decimals]="0" [form]="form"
                                    [format]="'#'" [isReadOnly]="false" [max]="65535"
                                    [min]="0"
                                    [noFlex]="true" [property]="portProperty" [showSpinners]="false" [step]="1"

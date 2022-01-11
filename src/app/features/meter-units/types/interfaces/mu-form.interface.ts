@@ -13,7 +13,7 @@ export interface MuForm {
   manufacturer: Codelist<number>;
   template: Codelist<string>;
   connectionType: Codelist<number>;
-  ip: string;
+  hostname: string;
   port: number;
   deviceState?: Codelist<number>;
   communicationType: number;

@@ -10,7 +10,7 @@ import { MuHdlcInformation } from './../../../../core/repository/interfaces/mete
 export interface MuUpdateForm extends MuUpdatePlcForm {
   // dlms
   manufacturer: Codelist<number>;
-  ip: string;
+  hostname: string;
   port: number;
   communicationType: number;
 
