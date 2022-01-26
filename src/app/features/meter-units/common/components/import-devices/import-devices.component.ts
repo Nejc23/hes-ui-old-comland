@@ -36,7 +36,7 @@ export class ImportDevicesComponent implements OnInit {
   uploadDropSubtitle = this.translate.instant('DCU.FILE-BIN-FORMAT', { supportedType: this.acceptExtensions });
 
   apiUrl = environment.apiUrl;
-  uploadSaveUrl = this.apiUrl + '/' + uploadDevices;
+  uploadSaveUrl = this.apiUrl + uploadDevices;
   activeImports: Array<ActiveImport> = [];
 
   uploadStatus = 'failure' || 'success';
@@ -67,7 +67,7 @@ export class ImportDevicesComponent implements OnInit {
 
   ngOnInit() {
     if (AppConfigService.settings?.apiServer?.url !== '') {
-      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + '/' + uploadDevices;
+      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + uploadDevices;
     }
     this.breadcrumbService.setPageName(this.translate.instant('MENU.IMPORT-DEVICES'));
     this.gridLinkService.getActiveImports().subscribe((res) => {

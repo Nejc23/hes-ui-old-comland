@@ -39,7 +39,7 @@ export class DcuFwUpgradeComponent implements OnInit {
   uploadDropSubtitle = '';
 
   apiUrl = environment.apiUrl;
-  uploadSaveUrl = this.apiUrl + '/' + fwUploadFile;
+  uploadSaveUrl = this.apiUrl + fwUploadFile;
   imgGuid: FileGuid = null;
   allowedExtExplainText = this.translate.instant('TOOLS.IMPORT-DEVICE-KEYS.UPLOAD-ONE-FILE');
 
@@ -73,7 +73,7 @@ export class DcuFwUpgradeComponent implements OnInit {
 
   ngOnInit() {
     if (AppConfigService.settings?.apiServer?.url !== '') {
-      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + '/' + fwUploadFile;
+      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + fwUploadFile;
     }
     if (this.actionRequest.types[0].toUpperCase() === 'AC750') {
       this.ac750 = true;
