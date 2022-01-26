@@ -17,8 +17,8 @@ import { environment } from 'src/environments/environment';
 import { AutoTemplateRegister } from '../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
 import {
   EventRegisterValue,
-  RegisterValue,
-  GridRegisterValue
+  GridRegisterValue,
+  RegisterValue
 } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
@@ -336,7 +336,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       this.gridData.push({
         requestId: register.requestId,
         unit: register.valueWithUnit?.unit,
-        value: register.valueWithUnit?.value != null ? parseInt(register.valueWithUnit.value) : null,
+        value: register.valueWithUnit?.value,
         status: register.status,
         timestamp: register.timestamp,
         description: register.description

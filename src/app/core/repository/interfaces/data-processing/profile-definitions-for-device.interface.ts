@@ -53,7 +53,7 @@ export interface RegisterValue {
 
 export interface GridRegisterValue {
   requestId?: string;
-  value?: number;
+  value?: string;
   unit?: string;
   status?: number;
   timestamp?: string;
@@ -66,5 +66,5 @@ export interface ValueWithUnit {
 }
 
 export type EventRegisterValue = RegisterValue & {
-  value?: number;
+  value?: string;
 };
