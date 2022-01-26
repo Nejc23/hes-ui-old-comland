@@ -314,7 +314,6 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   applyFilter(field: string, value: any) {
-    debugger;
     this.gridViewFilteredData = this.gridData; // check
     if (this.searchTerm !== '') {
       this.applySearch(this.searchTerm);
