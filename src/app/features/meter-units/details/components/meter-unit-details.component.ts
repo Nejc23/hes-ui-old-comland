@@ -26,6 +26,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   public saveError;
   public data: MeterUnitDetails;
   public detailsForm: FormGroup;
+  public routerLinkUrl = '/meterUnits';
   communicationForm: FormGroup;
 
   plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];

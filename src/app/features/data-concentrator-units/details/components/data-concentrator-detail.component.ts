@@ -61,6 +61,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   saveError: string;
   edit = false;
   public credentialsVisible = false;
+  public routerLinkUrl = '/dataConcentratorUnits';
   concentratorId = '';
   data: DataConcentratorUnit;
   dcuStatuses$: Observable<Codelist<number>[]>;
