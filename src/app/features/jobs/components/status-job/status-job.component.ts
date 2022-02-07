@@ -41,10 +41,12 @@ export class StatusJobComponent implements OnInit, OnDestroy {
       this.getProgress();
 
       this.interval = setInterval(() => {
-        if (this.statusJobProgress.progress < 100) {
-          this.getProgress();
-        } else {
-          this.clearInt();
+        if (this.statusJobProgress.deviceCount <= this.deviceCount) {
+          if (this.statusJobProgress.progress < 100) {
+            this.getProgress();
+          } else {
+            this.clearInt();
+          }
         }
       }, this.intervalSeconds * 1000);
     }
@@ -81,7 +83,9 @@ export class StatusJobComponent implements OnInit, OnDestroy {
   withError() {
     if (this.statusJobProgress?.failCount > 0) {
       return 'red';
-    } else return 'progress-bar-striped progress-bar-animated';
+    } else {
+      return 'progress-bar-striped progress-bar-animated';
+    }
   }
 
   clearInt() {

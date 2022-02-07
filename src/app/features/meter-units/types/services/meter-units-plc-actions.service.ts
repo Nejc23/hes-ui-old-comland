@@ -16,10 +16,7 @@ import { GridRequestParams } from 'src/app/core/repository/interfaces/helpers/gr
 import { RequestFilterParams } from 'src/app/core/repository/interfaces/myGridLink/myGridLink.interceptor';
 import { MyGridLinkService } from 'src/app/core/repository/services/myGridLink/myGridLink.service';
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
-import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
-import { capitalize } from 'src/app/shared/forms/functions/string.functions';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
 import { PlcMeterBreakerModeComponent } from '../../common/components/plc-meter-breaker-state/plc-meter-breaker-mode.component';
 import { PlcMeterFwUpgradeComponent } from '../../common/components/plc-meter-fw-upgrade/plc-meter-fw-upgrade.component';
@@ -35,13 +32,16 @@ import { PlcMeterRelaysSetModeComponent } from '../../common/components/plc-mete
 import { CodelistRepositoryService } from 'src/app/core/repository/services/codelists/codelist-repository.service';
 import { toLower } from 'lodash';
 import { PlcMeterJobsRegistersComponent } from '../../common/components/plc-meter-jobs-registers/plc-meter-jobs-registers.component';
-import { MeterUnitsTypeGridEventEmitterService } from './meter-units-type-grid-event-emitter.service';
 import { PlcMeterJobsAssignExistingComponent } from '../../common/components/plc-meter-jobs-assign-existing/plc-meter-jobs-assign-existing.component';
 import { JobsSelectGridService } from 'src/app/features/jobs/jobs-select/services/jobs-select-grid.service';
 import { SecurityChangePasswordComponent } from '../../common/components/security/security-change-password.component';
 import { PlcReadRegistersComponent } from '../../common/components/plc-read-meter/plc-read-registers.component';
 import { StatusJobComponent } from '../../../jobs/components/status-job/status-job.component';
 import { TranslateService } from '@ngx-translate/core';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
+import { capitalize } from 'src/app/shared/forms/functions/string.functions';
+import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
+import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +54,7 @@ export class MeterUnitsPlcActionsService {
     private meterUnitsTypeGridService: MeterUnitsTypeGridService,
     private codelistService: CodelistRepositoryService,
     private router: Router,
-    private eventService: MeterUnitsTypeGridEventEmitterService,
+    private eventService: EventManagerService,
     private jobsSelectGridService: JobsSelectGridService,
     private translate: TranslateService
   ) {}
@@ -360,7 +360,7 @@ export class MeterUnitsPlcActionsService {
             if (navigateToGrid) {
               this.router.navigate(['/meterUnits']);
             } else {
-              this.eventService.refreshData();
+              this.eventService.emitCustom('RefreshMeterUnitsListEvent', { refresh: true, deselectRows: true });
             }
           },
           (e) => {
@@ -573,7 +573,7 @@ export class MeterUnitsPlcActionsService {
           (value) => {
             if (operation === MeterUnitsTypeEnum.disableMeter || MeterUnitsTypeEnum.enableMeter) {
               // refresh data
-              this.eventService.refreshData(false);
+              this.eventService.emitCustom('RefreshMeterUnitsListEvent', { refresh: true, deselectRows: false });
             }
             if (value) {
               this.meterUnitsTypeGridService.saveMyGridLinkRequestId(value.requestId);
@@ -673,21 +673,7 @@ export class MeterUnitsPlcActionsService {
     if (guid && guid.length > 0) {
       requestParam.deviceIds.push(guid);
     } else {
-      if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-        const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
-
-        requestParam.filter = requestModel.filterModel;
-        requestParam.search = requestModel.searchModel;
-        requestParam.excludeIds = [];
-
-        excludedRows.map((row) => requestParam.excludeIds.push(row.deviceId));
-      } else {
-        const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
-
-        if (selectedRows && selectedRows.length > 0) {
-          selectedRows.map((row) => requestParam.deviceIds.push(row.deviceId));
-        }
-      }
+      requestParam.deviceIds = requestModel.deviceIds;
     }
     return requestParam;
   }
@@ -709,109 +695,113 @@ export class MeterUnitsPlcActionsService {
       sort: [],
       initiateReading: false // TODO get data from BE
     };
-
-    // select from row
+    // details page
     if (guid && guid.length > 0) {
       requestParam.deviceIds = [];
       requestParam.deviceIds.push(guid);
     } else {
-      if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
-        const excludedRows = this.meterUnitsTypeGridService.getSessionSettingsExcludedRows();
+      // select from grid
+      requestParam.deviceIds = requestModel.deviceIds;
+    }
 
-        requestParam.pageSize = allItems;
-        requestParam.pageNumber = 1;
+    // select all enabled on grid, dont send ids
+    if (this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()) {
+      requestParam.excludeIds = requestModel.excludeIds;
+      requestParam.deviceIds = [];
+      requestParam.pageSize = allItems;
+      requestParam.pageNumber = 1;
 
-        requestParam.textSearch.value = '';
-        if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
-          requestParam.textSearch.value = requestModel.searchModel[0].value;
-          requestParam.textSearch.propNames = visibleColumnsNames;
-          requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
+      requestParam.textSearch.value = '';
+
+      if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
+        requestParam.textSearch.value = requestModel.searchModel[0].value;
+        requestParam.textSearch.propNames = visibleColumnsNames;
+        requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
+      }
+
+      // create filter object
+      if (requestModel.filterModel) {
+        requestParam.filter = [];
+        if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
+          requestModel.filterModel.states.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.state),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            })
+          );
+        }
+        if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
+          requestModel.filterModel.vendors.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.vendor),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            })
+          );
+        }
+        if (requestModel.filterModel.firmware && requestModel.filterModel.firmware.length > 0) {
+          requestModel.filterModel.firmware.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.firmware),
+              propValue: row.value,
+              filterOperation: filterOperationEnum.contains
+            })
+          );
+        }
+        if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState.length > 0) {
+          requestModel.filterModel.disconnectorState.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            })
+          );
+        }
+        if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState.length > 0) {
+          requestModel.filterModel.ciiState.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.ciiState),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.equal
+            })
+          );
+        }
+        if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
+          requestModel.filterModel.tags.map((row) =>
+            requestParam.filter.push({
+              propName: capitalize(gridSysNameColumnsEnum.tags),
+              propValue: row.id.toString(),
+              filterOperation: filterOperationEnum.contains
+            })
+          );
         }
 
-        // create filter object
-        if (requestModel.filterModel) {
-          requestParam.filter = [];
-          if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
-            requestModel.filterModel.states.map((row) =>
+        // show operations filter
+        if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter.length > 0) {
+          requestModel.filterModel.showOptionFilter.map((row) => {
+            if (row.id === 1) {
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.state),
-                propValue: row.id.toString(),
+                propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+                propValue: 'true',
                 filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
-            requestModel.filterModel.vendors.map((row) =>
+              });
+            }
+            if (row.id === 2) {
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.vendor),
-                propValue: row.id.toString(),
+                propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
+                propValue: 'false',
                 filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.filterModel.firmware && requestModel.filterModel.firmware.length > 0) {
-            requestModel.filterModel.firmware.map((row) =>
+              });
+            }
+            if (row.id === 3) {
               requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.firmware),
-                propValue: row.value,
-                filterOperation: filterOperationEnum.contains
-              })
-            );
-          }
-          if (requestModel.filterModel.disconnectorState && requestModel.filterModel.disconnectorState.length > 0) {
-            requestModel.filterModel.disconnectorState.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.disconnectorState),
-                propValue: row.id.toString(),
+                propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
+                propValue: 'true',
                 filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.filterModel.ciiState && requestModel.filterModel.ciiState.length > 0) {
-            requestModel.filterModel.ciiState.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.ciiState),
-                propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.equal
-              })
-            );
-          }
-          if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
-            requestModel.filterModel.tags.map((row) =>
-              requestParam.filter.push({
-                propName: capitalize(gridSysNameColumnsEnum.tags),
-                propValue: row.id.toString(),
-                filterOperation: filterOperationEnum.contains
-              })
-            );
-          }
-
-          // show operations filter
-          if (requestModel.filterModel.showOptionFilter && requestModel.filterModel.showOptionFilter.length > 0) {
-            requestModel.filterModel.showOptionFilter.map((row) => {
-              if (row.id === 1) {
-                requestParam.filter.push({
-                  propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
-                  propValue: 'true',
-                  filterOperation: filterOperationEnum.equal
-                });
-              }
-              if (row.id === 2) {
-                requestParam.filter.push({
-                  propName: capitalize(gridSysNameColumnsEnum.hasTemplate),
-                  propValue: 'false',
-                  filterOperation: filterOperationEnum.equal
-                });
-              }
-              if (row.id === 3) {
-                requestParam.filter.push({
-                  propName: capitalize(gridSysNameColumnsEnum.readyForActivation),
-                  propValue: 'true',
-                  filterOperation: filterOperationEnum.equal
-                });
-              }
-            });
-          }
+              });
+            }
+          });
         }
 
         if (requestModel.sortModel && requestModel.sortModel.length > 0) {
@@ -822,16 +812,6 @@ export class MeterUnitsPlcActionsService {
               sortOrder: row.sort === 'asc' ? filterSortOrderEnum.asc : filterSortOrderEnum.desc
             })
           );
-        }
-
-        requestParam.excludeIds = [];
-        excludedRows.map((row) => requestParam.excludeIds.push(row.deviceId));
-      } else {
-        const selectedRows = this.meterUnitsTypeGridService.getSessionSettingsSelectedRows();
-
-        if (selectedRows && selectedRows.length > 0) {
-          requestParam.deviceIds = [];
-          selectedRows.map((row) => requestParam.deviceIds.push(row.deviceId));
         }
       }
     }

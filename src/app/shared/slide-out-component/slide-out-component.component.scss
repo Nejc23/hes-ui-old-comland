@@ -68,4 +68,8 @@
   @apply tw-fixed;
   @apply tw-mb-8;
   bottom: 0;
+
+  &.align-end {
+    @apply tw-justify-end;
+  }
 }

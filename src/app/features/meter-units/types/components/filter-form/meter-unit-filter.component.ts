@@ -10,7 +10,6 @@ import { MeterUnitsLayout } from 'src/app/core/repository/interfaces/meter-units
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { CodelistHelperService } from 'src/app/core/repository/services/codelists/codelist-helper.repository.service';
 import { rangeFilterValidator } from 'src/app/shared/validators/range-filter-validator';
-import * as _ from 'lodash';
 import { SettingsStoreEmitterService } from 'src/app/core/repository/services/settings-store/settings-store-emitter.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -22,6 +21,8 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   @Output() filterChange = new EventEmitter();
   sessionNameForGridFilter = 'grdLayoutMUT';
   sessionNameForGridState = 'grdStateMUT';
+
+  @Output() outputFormEvent = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -37,14 +38,11 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
   showOptionFilter$ = this.codelistHelperService.showOptionFilterList();
 
   deviceMediums$: Observable<Codelist<number>[]>;
-  protocolTypes$: Observable<Codelist<number>[]>;
+  protocolTypes: Codelist<number>[];
 
   currentStatuses: Codelist<number>[];
   currentTypes: Codelist<number>[];
-  currentVendorId: number;
   currentTags: Codelist<number>[];
-  selectedRow = -1;
-  dontSelectFilter = false;
 
   sessionFilter: MeterUnitsLayout;
   paramsSub: Subscription;
@@ -77,7 +75,7 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       // this.sessionNameForGridFilter = this.sessionNameForGridFilter.includes('grdLayoutMUT') ?  this.sessionNameForGridFilter : 'grdLayoutMUT';
     });
 
-    this.applyFilter = _.debounce(this.applyFilter, 1000);
+    // this.applyFilter = _.debounce(this.applyFilter, 1000);
   }
 
   get statesProperty() {
@@ -147,7 +145,10 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     this.firmware$ = this.codelistService.meterUnitFirmwareCodelist(this.id);
 
     this.deviceMediums$ = this.codelistService.meterUnitDeviceMediumCodelist();
-    this.protocolTypes$ = this.codelistService.meterUnitProtocolTypeCodelist();
+    this.codelistService.meterUnitProtocolTypeCodelist().subscribe((res) => {
+      this.protocolTypes = res;
+      this.protocolTypes.map((protocol) => (protocol.value = this.translate.instant('PROTOCOL.' + protocol.value)));
+    });
 
     this.eventSettingsStoreLoadedSubscription = this.settingsStoreEmitterService.eventEmitterSettingsLoaded.subscribe(() => {
       this.doFillData();
@@ -286,21 +287,23 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
       vendorsFilter: this.form.get(this.vendorsProperty).value,
       showOptionFilter: this.form.get(this.showOptionFilterProperty).value,
       showOnlyMeterUnitsWithMBusInfoFilter: null, // this.form.get(this.showOnlyMeterUnitsWithMBusInfoProperty).value,
-      showMeterUnitsWithoutTemplateFilter:
-        this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 1).length > 0
+      showMeterUnitsWithoutTemplateFilter: this.form.get(this.showOptionFilterProperty).value
+        ? this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 1).length > 0
           ? false
           : this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 2).length > 0
           ? true
-          : null,
+          : null
+        : false,
       // this.form.get(this.showMeterUnitsWithoutTemplateProperty).value,
-      showOnlyImageReadyForActivationFilter:
-        this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 3).length > 0 ? true : false,
+      showOnlyImageReadyForActivationFilter: this.form.get(this.showOptionFilterProperty).value
+        ? this.form.get(this.showOptionFilterProperty).value.filter((x) => x.id === 3).length > 0
+        : false,
       // this.form.get(this.showOnlyImageReadyForActivationProperty).value,
       gridLayout: '',
       mediumFilter: this.form.get(this.mediumProperty).value,
       protocolFilter: this.form.get(this.protocolProperty).value
     };
-
+    this.outputFormEvent.emit(currentFilter);
     this.gridFilterSessionStoreService.setGridLayout(this.sessionNameForGridFilter, currentFilter);
 
     // close tool-panel
@@ -314,10 +317,6 @@ export class MeterUnitFilterComponent implements OnInit, OnDestroy {
     } else if (this.form.errors != null && this.form.errors.incorrectValueRange) {
       return this.translate.instant('COMMON.INCORRECT-RANGE');
     }
-  }
-
-  doToggleFilter() {
-    this.toggleFilter.emit();
   }
 
   getFilterTitle(): string {

@@ -10,5 +10,4 @@ export interface MeterUnitsTypeGridLayoutStore {
   visibleColumns: string[];
   pageSize: Codelist<number>;
   searchWildcards: boolean;
-  hideFilter: boolean;
 }

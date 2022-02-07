@@ -28,7 +28,6 @@
                           (rowActionClickedEvent)="rowActionsClicked($event)"
                           (selectedRowDataEvent)="selectionChanged($event)"
                           *ngIf="clientCertificatesPendingDataList.length > 0"
-                          [checkboxColumn]="checkboxColumn"
                           [fetchData]="false"
                           [gridBulkActions]="clientCertificatesListPendingBulkActionConfiguration"
                           [gridColumns]="clientCertificatesListPendingColumnsConfiguration"
@@ -44,6 +43,7 @@
                           [sortable]="true"
                           [tableHeight]="622"
                           [total]="clientCertificatesPendingDataList.length"
+                          [withRowSelection]="true"
                           [withSearch]="true"
                           class="vault-data-table"
           >

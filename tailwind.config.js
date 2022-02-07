@@ -13,7 +13,7 @@ module.exports = {
       colors: {
         // figma colors
         primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
+        secondary: 'var(--color-secondary) !important',
         darkGray: '#6F7072',
         darkPurple: '#981D78',
         darkBlue: '#053876',

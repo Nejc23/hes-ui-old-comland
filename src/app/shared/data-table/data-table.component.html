@@ -1,8 +1,13 @@
-<!-- reference GRID component -->
+<!-- kendoUI reference GRID component used for all kendoUI grids on all pages
+supporting virtual scrolling, pagination, client side data and fetching remote data from API -->
+
 <kendo-grid
   (cellClick)="cellClick($event)"
+  (columnVisibilityChange)="columnVisibilityChanged($event)"
+  (excelExport)="exportData($event)"
   (pageChange)="pageChange($event)"
   (selectedKeysChange)="selectedCellChange($event)"
+  (selectionChange)="selectionChanged($event)"
   (sortChange)="sortChange($event)"
   [data]="gridView"
   [height]="tableHeight"
@@ -12,10 +17,10 @@
   [pageSize]="pageSize"
   [pageable]="pageable"
   [reorderable]="false"
-  [resizable]="true"
   [rowClass]="rowClass"
   [rowHeight]="rowHeight"
   [scrollable]="scrollable"
+  [selectable]="{ checkboxOnly: true }"
   [selectedKeys]="selectedKeys"
   [sort]="sort"
   [sortable]="sortable ? {
@@ -33,16 +38,36 @@
       <div *ngIf="withSearch">
         <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{'COMMON.SEARCH' | translate }}:</div>
 
-        <div class="tw-inline-flex gray-border tw-w-56 search-input">
-          <img [src]="'assets/images/icons/grain-icon.svg'" class="tw-mx-4" />
-          <input (input)="onSearch($any($event.target).value)"
+        <div [formGroup]="searchForm" class="tw-inline-flex gray-border tw-w-56 search-input">
+
+          <div (click)="searchIconClicked()"
+               [title]="getWildCardToolTipText()"
+               class="tw-flex tw-justify-center" data-placement="top"
+               data-toggle="tooltip">
+            <img [src]="wildCardsImageUrl" class="tw-mx-4 tw-h-4 tw-w-4 tw-flex tw-self-center" />
+          </div>
+          <!-- Client side search on all columns only works on strings and date time -->
+          <input #searchInput
+                 [formControlName]="'search'"
                  kendoTextBox
                  placeholder="{{'COMMON.SEARCH-TERM' | translate }}"
-          /> <!-- Search all only works on strings -->
+          />
         </div>
       </div>
 
-      <div *ngIf="filters && filters.length > 0" class=" tw-place-self-end tw-flex margin-bottom-5">
+      <div class="tw-place-self-end tw-flex tw-ml-4">
+        <button (click)="onFilterIconClick()" *ngIf="withFiltersIcon"
+                [ngbTooltip]="hideShowFilter"
+                class="icon-filter-button border-gray"
+                container="body">
+          <img
+            class="tw-ml-4" src="assets/images/icons/filter-icon.svg" />
+          <span [ngClass]="filtersCount > 0 ? 'tw-visible' : 'tw-invisible'"
+                class="badge badge-primary corner-badge">{{filtersCount}}</span>
+        </button>
+      </div>
+
+      <div *ngIf="filters && filters.length > 0" class=" tw-place-self-end tw-flex">
 
         <div *ngFor="let filter of filters let i = index; " class="tw-ml-4">
 
@@ -52,11 +77,11 @@
 
           <div class="gray-border">
             <kendo-dropdownlist
-              #kendoDropdown
+              #kendoDropdownFilter
               (selectionChange)="dropdownFilterValueChanged($event, filter.field)"
               [data]="filter.values"
-              [defaultItem]="'COMMON.ALL' | translate"
-              [id]="filter.field"
+              [defaultItem]="defaultFilterItem | translate"
+              [id]="filter"
             >
             </kendo-dropdownlist>
           </div>
@@ -68,10 +93,9 @@
         </div>
       </div>
 
-      <div class="tw-flex tw-justify-end tw-w-full tw-place-self-end tw-mb-3 margin-bottom-5">
+      <div class="tw-flex tw-justify-end tw-w-full tw-place-self-end">
         <div *ngIf="excelExport" class="tw-ml-4">
           <button icon="fa fa-file-export tw-bg-white tw-text-darkGray" kendoGridExcelCommand type="button">
-            {{ 'GRID.EXCEL-EXPORT' | translate }}
           </button>
         </div>
 
@@ -84,43 +108,77 @@
             </button>
           </div>
         </ng-container>
+
+        <!-- TODO auto sync false -->
+        <kendo-grid-column-chooser
+          *ngIf="showColumnChooser"
+          [allowHideAll]="false"
+          [autoSync]="true"
+          class="small-button column-chooser tw-ml-2"></kendo-grid-column-chooser>
+
+        <div *ngIf="withRefreshButton" class="tw-pl-2">
+          <div
+            (click)="refreshButtonClickedEvent()" class="refresh-button border-gray">
+            <img [ngClass]="loading ? 'tw-animate-spin' : ''"
+                 src="assets/images/icons/refresh-icon.svg" />
+          </div>
+        </div>
+
       </div>
+
     </div>
 
   </ng-template>
 
-  <kendo-grid-checkbox-column *ngIf="checkboxColumn"
+  <!-- todo sticky design -->
+  <kendo-grid-checkbox-column *ngIf="withRowSelection"
                               [columnMenu]=checkboxColumn.columnMenu
                               [resizable]=checkboxColumn.resizable
                               [showSelectAll]=checkboxColumn.showSelectAll
-                              [width]=checkboxColumn.width>
+                              [sticky]="true"
+                              [width]=checkboxColumn.width
+                              class="checkboxes">
   </kendo-grid-checkbox-column>
 
+  <!--sticky last column for row actions in scrollable mode in case of grid has horizontal scroll and last column is not visible  -->
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
-                     [class]="column.class"
+                     [autoSize]="true"
+                     [class]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1 ? 'transparent-background' : column.class"
                      [field]="column.field"
+                     [hidden]="column.hidden"
+                     [locked]="column.locked"
+                     [sortable]="!column.sortingDisabled"
+                     [sticky]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1"
                      [title]="column.translationKey | translate"
-                     [width]="column.width ? column.width : 44"
+                     [width]="column.width ? column.width : 200"
                      field="{{column.field}}">
 
     <ng-template class="kendo-grid-cell" kendoGridCellTemplate let-dataItem>
-      <!--- no data -->
-      <div class="grid-cell-text">
+      <div
+        [ngClass]="{ 'grid-cell-text': rowActions.length > 0 && gridColumns.length !== i + 1 && column.type !== columnType.ICONS }">
         <ng-container
-          *ngIf="!dataItem[column.field] && dataItem[column.field] !== 0 && column.type !== columnType.SWITCH && column.type !== columnType.RADIO">
-          {{ 'COMMON.NOT-DEFINED' | translate }}
+          *ngIf="(!dataItem[column.field] && dataItem[column.field] !== 0 && column.type !== columnType.SWITCH && column.type !== columnType.RADIO && column.type !== columnType.ICONS)">
+          <div class="tw-text-mediumGray">
+            <span
+              *ngIf="!(rowActions.length > 0 && gridColumns.length === i + 1)">{{ 'COMMON.NOT-DEFINED' | translate }}</span>
+            <span *ngIf="rowActions.length > 0 && gridColumns.length !== i + 1"></span>
+            <!-- do not show NA for last row with rowActions -->
+          </div>
         </ng-container>
 
         <!--- no type defined is string -->
-        <ng-container *ngIf="!column.type">
+        <ng-container *ngIf="!column.type && dataItem[column.field]">
           <div [class]="column.class?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
-            <ng-container *ngIf="dataItem[column.field] && column.icon">
+            <ng-container *ngIf="column.icon; else noIcon">
               <img [src]="'assets/images/icons/' + column.icon + '.svg'" class="tw-pr-2" />
+              <div class="icon-text tw-self-center">
+                {{ dataItem[column.field] }}
+              </div>
             </ng-container>
-            <div class="icon-text">
+            <ng-template #noIcon>
               {{ dataItem[column.field] }}
-            </div>
+            </ng-template>
           </div>
         </ng-container>
 
@@ -157,15 +215,18 @@
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.BOLD_TEXT">
-          <div [title]="dataItem[column.field]" class="bold-text" data-placement="top"
-               data-toggle="tooltip">
+          <span [title]="dataItem[column.field]" class="bold-text" data-placement="top"
+                data-toggle="tooltip">
             {{ dataItem[column.field] }}
-          </div>
+          </span>
         </ng-container>
 
-        <ng-container *ngIf="column.type === columnType.BOLD_TEXT">
-          <div class="bold-text">
-            {{ dataItem[column.field] }}
+        <!-- hyperlink with event emitter -->
+        <ng-container *ngIf="column.type === columnType.LINK">
+          <div [title]="dataItem[column.field]" data-placement="top"
+               data-toggle="tooltip">
+            <a (click)="linkClicked(column.field, dataItem[this.kendoGridSelectByColumn], dataItem)"
+               class="tw-text-secondary tw-cursor-pointer">{{ dataItem[column.field] }}</a>
           </div>
         </ng-container>
 
@@ -177,27 +238,209 @@
           </div>
         </ng-container>
 
-        <ng-container *ngIf="rowActions && rowActions.length > 0 && i +1  === gridColumns.length" class="no-padding">
-          <div class="grid-row-button rows-{{ rowActions.length }}">
-            <img (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
-                 *ngFor="let action of rowActions"
-                 [src]="'assets/images/icons/' + action.iconName + '.svg'"
-                 class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded" />
+        <!-- copied from old grid - Job status with active jobs modal window -->
+        <ng-container *ngIf="column.type === columnType.JOB_STATUS">
+          <div [title]="dataItem[column.field]" data-placement="top"
+               data-toggle="tooltip">
+            <div (click)="openJobStatusModal(dataItem.deviceId)" *ngIf="dataItem[column.field]" role="button">
+              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.running"
+                 class="fad fa-circle-notch text-success"></i>
+              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.success"
+                 class="far fa-check-circle text-success"></i>
+              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.failed"
+                 class="fas fa-exclamation-circle text-danger"></i>
+              <i *ngIf="dataItem[column.field].toLowerCase() == jobStatus.pending"
+                 class="far fa-pause-circle text-warning"></i>
+              <span [ngClass]="{
+                        'text-success':dataItem[column.field].toLowerCase() == jobStatus.running || dataItem[column.field].toLowerCase() == jobStatus.success,
+                        'text-danger': dataItem[column.field].toLowerCase() == jobStatus.failed,
+                        'text-warning': dataItem[column.field].toLowerCase() == jobStatus.pending}"
+                    class="text-truncate flex-shrink-1">{{dataItem[column.field]}}
+              </span>
+            </div>
           </div>
         </ng-container>
+
+        <!-- multiple icons on grid with popover -->
+        <ng-container *ngIf="column.type === columnType.ICONS">
+          <div class="tw-inline-flex tw-justify-center tw-items-center">
+            <ng-container *ngFor="let iconData of column.iconsData">
+
+              <ng-container *ngIf="dataItem[iconData.field] === true || dataItem[iconData.field] === undefined">
+                <!-- true or data/templateId -->
+                <img
+                  *ngIf="iconData.field !== 'hasActiveJobs'"
+                  [src]="'assets/images/icons/' + iconData.iconName + '.svg'"
+                  [title]="iconData.popoverText | translate" class="tw-mr-2 tw-w-4 tw-h-4" data-placement="top"
+                  data-toggle="tooltip" />
+
+                <!-- active jobs special case popover with active-jobs -->
+                <div *ngIf="iconData.field === 'hasActiveJobs'"
+                     [ngbPopover]="tipContentNextRead"
+                     [placement]="['right-top']" [title]="iconData.popoverText | translate"
+                     container="body"
+                     data-placement="top"
+                     popoverClass="scheduler-active-job-popover">
+                  <img [src]="'assets/images/icons/' + iconData.iconName + '.svg'" class="tw-w-4 tw-h-4" />
+
+                  <ng-template #tipContentNextRead id="tipContentNextRead">
+                    <app-scheduler-active-jobs [deviceId]="dataItem.deviceId"></app-scheduler-active-jobs>
+                  </ng-template>
+                </div>
+
+              </ng-container>
+            </ng-container>
+          </div>
+        </ng-container>
+
+        <!-- objects with value/unit/timestamp data -->
+        <ng-container *ngIf="column.type === columnType.UNIT_WITH_VALUE">
+          <div *ngIf="dataItem[column.field] && dataItem[column.field].value"
+               [title]="readOnText + ' ' + (dataItem[column.field].timestamp.toString() | formatDateTime)"
+               data-placement="top"
+               data-toggle="tooltip">
+            <ng-container
+              *ngIf="!dataItem[column.field].value.toLocaleLowerCase().includes('not')">{{ dataItem[column.field].value + ' ' + dataItem[column.field].unit }}</ng-container>
+            <ng-container
+              *ngIf="dataItem[column.field].value.toLocaleLowerCase().includes('not')"> {{'COMMON.NOT-SET' | translate }}
+            </ng-container>
+            <span *ngIf="checkThresholdDate(dataItem[column.field].timestamp)"
+                  class="flex-shrink-1 text-truncate red-warning-text small ms-2">{{ preconfiguredThreshold }}+ d</span>
+          </div>
+        </ng-container>
+
+        <!-- DisconnectorState -->
+        <ng-container *ngIf="column.type === columnType.INSTANT_VALUES">
+
+          <ng-container *ngFor="let state of disconnectorStateEnum">
+            <div *ngIf="getDataByType(state, dataItem[column.field]).length > 0"
+                 class="tw-inline-flex tw-px-1">
+              <div
+                [autoClose]="'outside'"
+                [ngbPopover]="contentForValue"
+                [placement]="['left']"
+                container="body"
+                popoverClass="instant-values-popover">
+                <span [ngClass]="getClass(state)"
+                      class="badge tw-px-2 tw-cursor-pointer">{{ getValuesCount(state, dataItem[column.field]) }}</span>
+              </div>
+            </div>
+
+            <ng-template #contentForValue id="contentForValue">
+              <app-popover-instant-values
+                [inputInstantValues]="getDataByType(state, dataItem[column.field])"></app-popover-instant-values>
+            </ng-template>
+
+          </ng-container>
+
+          <span *ngIf="dataItem[column.field].length === 0" class="text-muted">N/A</span>
+
+        </ng-container>
+
       </div>
+
+      <!-- row actions with separated column -->
+      <ng-container *ngIf="rowActions && rowActions.length > 0 && i +1  === gridColumns.length" class="no-padding">
+        <div class="grid-row-button rows-{{ rowActions.length }} tw-inline-flex">
+          <img (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
+               *ngFor="let action of rowActions"
+               [src]="'assets/images/icons/' + action.iconName + '.svg'"
+               class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded" />
+        </div>
+      </ng-container>
     </ng-template>
 
   </kendo-grid-column>
 
   <kendo-grid-excel *ngIf="excelExport"
                     [fetchData]="allData"
-                    [fileName]="excelFileName + '_' + getCurrentDateTime() + '.xlsx'"
-  ></kendo-grid-excel>
+                    [fileName]="this.excelFileName"
+  >
+    <ng-container *ngFor="let column of gridColumns">
+      <kendo-excelexport-column *ngIf="column.field !== 'icons'"
+                                [field]="column.field"
+                                [title]="column.translationKey | translate">
+      </kendo-excelexport-column>
+    </ng-container>
+
+  </kendo-grid-excel>
 
   <ng-template kendoGridNoRecordsTemplate>
-    {{ noDataText | translate }}
+    <div class="tw-text-left tw-pl-40">{{ noDataText | translate }}</div>
+  </ng-template>
+
+  <!-- pagination only possible with scrollable mode -->
+  <ng-template *ngIf="pageable" kendoPagerTemplate let-currentPage="currentPage" let-totalPages="totalPages">
+    <div class="tw-flex tw-w-full tw-justify-between tw-items-center">
+
+      <div class="tw-inline-flex tw-items-center">
+        <div class="tw-text-darkGray tw-text-sm">
+          {{ 'GRID.ROWS-PER-PAGE' | translate }}:
+        </div>
+
+        <!-- page sizer 20/50/100 -->
+        <kendo-pager-page-sizes [pageSizes]="pageSizes" class="tw-h-8"
+        ></kendo-pager-page-sizes>
+
+        <div *ngIf="(selectAllEnabled && totalCount - excludedIdsFromSelection?.length > 0) || selectedKeys.length > 0"
+             class="text-secondary tw-font-medium tw-ml-5">
+
+          <ng-container *ngIf="!selectAllEnabled">
+            {{ selectedKeys?.length }} {{ 'GRID.OF' | translate }} {{ totalCount }}
+          </ng-container>
+
+          <ng-container *ngIf="selectAllEnabled">
+            {{ totalCount - excludedIdsFromSelection?.length }} of {{ totalCount }}
+          </ng-container>
+          {{ 'COMMON.ITEMS-SELECTED' | translate }}
+        </div>
+
+
+        <div (click)="selectAll()" class="text-primary tw-font-medium tw-ml-5">
+          <span class="tw-mr-1">{{ 'GRID.SELECT-ALL' | translate }}</span>
+        </div>
+
+        <div (click)="deselectAll()"
+             *ngIf="(selectAllEnabled && totalCount - excludedIdsFromSelection?.length > 0)  || selectedKeys.length > 0"
+             [ngClass]="'text-primary'"
+             class="tw-font-medium tw-ml-6">
+          <span>{{ 'GRID.CLEAR-SELECTED' | translate }}</span>
+        </div>
+
+      </div>
+
+      <div class="tw-inline-flex tw-justify-center tw-items-center">
+
+        <button (click)="navigateToFirstPage()" [disabled]="loading" class="small-button tw-mr-2"
+                type="button">
+          <img [src]="'assets/images/icons/double-arrow-left-icon.svg'" />
+        </button>
+
+        <button (click)="navigateToPreviousPage()" [disabled]="loading" class="small-button "
+                type="button">
+          <img [src]="'assets/images/icons/arrow-left-icon.svg'" />
+        </button>
+
+        <div class="tw-mx-6 tw-text-darkGray">
+          {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }} of {{ totalPages }}
+        </div>
+
+        <button (click)="navigateToNextPage()" [disabled]="loading" class="small-button "
+                type="button">
+          <img [src]="'assets/images/icons/arrow-right-icon.svg'" />
+        </button>
+
+        <button (click)="navigateToLastPage()" [disabled]="loading" class="small-button tw-ml-2"
+                type="button">
+          <img [src]="'assets/images/icons/double-arrow-right-icon.svg'" />
+        </button>
+
+      </div>
+    </div>
+
   </ng-template>
 </kendo-grid>
 
 
+<ng-template #hideShowFilter><span>{{ 'GRID.SHOW-HIDE-FILTERS' | translate }}</span><span><br /></span>
+</ng-template>

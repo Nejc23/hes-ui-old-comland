@@ -58,6 +58,11 @@
   &.k-i-sort-desc-sm::before {
     content: "\f0dd";
   }
+
+  &.k-i-columns::before {
+    content: "\f0db";
+    color: #6F7072 !important;
+  }
 }
 
 .k-i-sort-desc-sm {
@@ -71,3 +76,6 @@
   padding-left: 6px;
   padding-top: 3px;
 }
+
+
+

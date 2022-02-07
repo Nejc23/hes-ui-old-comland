@@ -37,17 +37,17 @@ export class MeterUnitRegistersComponent implements OnInit {
     {
       field: 'timestamp',
       translationKey: 'GRID.TIMESTAMP',
-      type: GridColumnType.DATE_TIME,
-      width: 20
+      type: GridColumnType.DATE_TIME
     },
     {
       field: 'value',
       translationKey: 'GRID.ID',
-      width: 10
+      width: 100
     },
     {
       field: 'description',
-      translationKey: 'GRID.DESCRIPTION'
+      translationKey: 'GRID.DESCRIPTION',
+      width: 350
     }
   ];
 

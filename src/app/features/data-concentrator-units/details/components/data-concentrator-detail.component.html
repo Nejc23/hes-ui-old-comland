@@ -20,20 +20,20 @@
         [requestModel]="null"
         [selectedItemsCount]="1"
         [showOperations]="true"
-        [type]="data.typeValue"
         [state]="data.stateValue"
+        [type]="data.typeValue"
         class="tw-mr-2">
       </app-dc-operations>
 
 
       <app-dc-operations
-      	*ngIf="data" [guid]="concentratorId"
+        *ngIf="data" [guid]="concentratorId"
         [operationType]="componentType.SECURITY"
         [requestModel]="null"
         [selectedItemsCount]="1"
         [showSecurities]="data.typeValue !== 'AC750'"
-        [type]="data.typeValue"
-        [state]="data.stateValue">
+        [state]="data.stateValue"
+        [type]="data.typeValue">
 
       </app-dc-operations>
     </div>
@@ -214,7 +214,7 @@
             [gridData]="events"
             [loading]="eventsLoading"
             [pageSize]="36"
-            [pageable]="true"
+            [pageable]="false"
             [refresh]="false"
             [rowHeight]="44"
             [scrollable]="'virtual'"
