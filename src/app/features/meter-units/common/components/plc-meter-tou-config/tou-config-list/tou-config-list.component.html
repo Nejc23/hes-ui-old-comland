@@ -5,7 +5,6 @@
       (bulkActionClickedEvent)="bulkActionClicked($event)"
       (rowActionClickedEvent)="rowActionsClicked($event)"
       (selectedRowDataEvent)="selectionChanged($event)"
-      [checkboxColumn]="checkboxColumn"
       [fetchData]="false"
       [filters]="touListFiltersConfiguration"
       [gridBulkActions]="touListTableBulkActionConfiguration"
@@ -20,11 +19,12 @@
       [selectedKeys]="selectedKeys"
       [showGridBulkActions]="showGridBulkActions"
       [skip]="0"
+      [sort]="touConfigurationListDefaultSort"
       [sortable]="true"
       [tableHeight]="710"
       [total]="touConfigListData.length"
+      [withRowSelection]="true"
       [withSearch]="true"
-      [sort]="touConfigurationListDefaultSort"
     >
     </app-data-table>
 

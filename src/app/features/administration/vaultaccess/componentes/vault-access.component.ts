@@ -3,13 +3,7 @@ import { BreadcrumbService } from '../../../../shared/breadcrumbs/services/bread
 import { TranslateService } from '@ngx-translate/core';
 import { CryptoClientCertificateDto } from '../../../../api/crypto-lite-ui/models/crypto-client-certificate-dto';
 import { CryptoService } from '../../../meter-units/common/services/crypto.service';
-import {
-  CheckboxColumn,
-  GridBulkAction,
-  GridColumn,
-  GridColumnType,
-  GridRowAction
-} from '../../../../shared/data-table/data-table.component';
+import { GridBulkAction, GridColumn, GridColumnType, GridRowAction } from '../../../../shared/data-table/data-table.component';
 import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
 import { ModalService } from '../../../../core/modals/services/modal.service';
 import { forkJoin, Observable } from 'rxjs';
@@ -32,7 +26,7 @@ export class VaultAccessComponent implements OnInit {
     {
       field: 'status',
       translationKey: 'FORM.STATUS',
-      width: 15,
+      width: 100,
       type: GridColumnType.COLORED_ENUM,
       coloredValues: [
         {
@@ -60,22 +54,25 @@ export class VaultAccessComponent implements OnInit {
     {
       field: 'subject',
       type: GridColumnType.BOLD_TEXT,
-      translationKey: 'FORM.SUBJECT'
+      translationKey: 'FORM.SUBJECT',
+      width: 250
     },
     {
       field: 'requestId',
-      translationKey: 'FORM.REQUEST-ID'
+      translationKey: 'FORM.REQUEST-ID',
+      width: 250
     },
     {
       field: 'updatedAt',
       translationKey: 'FORM.LAST-UPDATED',
       type: GridColumnType.DATE_TIME,
-      width: 20
+      width: 150
     },
     {
       field: 'username',
       translationKey: 'FORM.REJECTED-GRANTED',
-      icon: 'user-icon'
+      icon: 'user-icon',
+      width: 150
     }
   ];
 
@@ -84,7 +81,7 @@ export class VaultAccessComponent implements OnInit {
       field: 'status',
       translationKey: 'FORM.STATUS',
       type: GridColumnType.COLORED_ENUM,
-      width: 20,
+      width: 100,
       coloredValues: [
         {
           enumValue: this.translate.instant(`VAULT-ACCESS.API.UNCONFIRMED`),
@@ -95,25 +92,21 @@ export class VaultAccessComponent implements OnInit {
     {
       field: 'subject',
       type: GridColumnType.BOLD_TEXT,
-      translationKey: 'FORM.SUBJECT'
+      translationKey: 'FORM.SUBJECT',
+      width: 150
     },
     {
       field: 'requestId',
-      translationKey: 'FORM.REQUEST-ID'
+      translationKey: 'FORM.REQUEST-ID',
+      width: 300
     },
     {
       field: 'createdAt',
       type: GridColumnType.DATE_TIME,
-      translationKey: 'FORM.CREATED-AT'
+      translationKey: 'FORM.CREATED-AT',
+      width: 150
     }
   ];
-
-  checkboxColumn: CheckboxColumn = {
-    columnMenu: false,
-    resizable: false,
-    showSelectAll: true,
-    width: 10
-  };
 
   clientCertificatesListPendingBulkActionConfiguration: Array<GridBulkAction> = [
     {

@@ -1,5 +1,0 @@
-<div class="d-flex" *ngIf="params.value">
-  <a class="me-1 flex-shrink-1 text-truncate" container="body" placement="bottom" [openDelay]="500"
-  [ngbTooltip]="params.value" href="javascript:void(0);" (click)="showItem()">{{params.value}}</a>
-</div>
-<span *ngIf="!params.value" class="text-muted">{{notAvailableText}}</span>

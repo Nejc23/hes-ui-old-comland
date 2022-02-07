@@ -17,6 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
 import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
+import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -51,8 +52,10 @@ export class MeterUnitDetailsComponent implements OnInit {
     private translate: TranslateService,
     private elRef: ElementRef,
     private permissionService: PermissionService,
-    private eventService: MeterUnitsTypeGridEventEmitterService
+    private eventService: MeterUnitsTypeGridEventEmitterService,
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService
   ) {
+    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
     this.eventService.eventEmitterRefreshDevices.subscribe({
       next: () => {
         this.getData();
@@ -243,11 +246,11 @@ export class MeterUnitDetailsComponent implements OnInit {
 
     if (this.isPlcDevice) {
       this.communicationForm = this.formBuilder.group({
-        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType)
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase())
       });
     } else {
       this.communicationForm = this.formBuilder.group({
-        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase()),
         hostname: this.data.hostname,
         port: this.data.port,
         referencingType: this.data.referencingType.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase(),

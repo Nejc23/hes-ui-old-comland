@@ -37,14 +37,18 @@ import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams
   providedIn: 'root'
 })
 export class MeterUnitsService {
+  return;
+  requestParam;
+
   constructor(private repository: RepositoryService) {}
 
   getGridMeterUnitsForm(
     param: GridRequestParams,
     pageIndex: number,
+    pageSize: number,
     visibleColumnNames: string[]
   ): Observable<GridResponse<MeterUnitsList>> {
-    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames);
+    const actionRequestParams = this.getActionRequestParams(param, pageIndex, pageSize, visibleColumnNames);
     return this.repository.makeRequest(this.getGridMeterUnitsRequest(actionRequestParams));
   }
 
@@ -280,11 +284,10 @@ export class MeterUnitsService {
     return new HttpRequest('POST', validateHostname, request);
   }
 
-  getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {
-    const pageSize = param.endRow - param.startRow;
+  getActionRequestParams(param: GridRequestParams, pageIndex: number, pageSize: number, visibleColumnNames: string[]) {
     const requestParam: IActionRequestParams = {
       pageSize,
-      pageNumber: pageIndex + 1,
+      pageNumber: pageIndex,
       textSearch: {
         value: '',
         propNames: [],
@@ -293,8 +296,8 @@ export class MeterUnitsService {
       sort: []
     };
 
-    requestParam.pageSize = param.endRow - param.startRow;
-    requestParam.pageNumber = pageIndex + 1;
+    requestParam.pageSize = pageSize;
+    requestParam.pageNumber = pageIndex;
 
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;

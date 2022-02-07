@@ -14,6 +14,7 @@ export class SlideOutComponentComponent {
 
   @Input() primaryButtonText = this.translate.instant('BUTTON.SAVE');
   @Input() secondaryButtonText = this.translate.instant('BUTTON.CANCEL');
+  @Input() hideCloseButton = false;
 
   @Output() closeButtonClickedEvent = new EventEmitter<boolean>();
   @Output() confirmButtonClickedEvent = new EventEmitter<boolean>();

@@ -4,7 +4,7 @@
 
     <app-page-title
       [state]="data.deviceState"
-      [subtitle]="'PROTOCOL.' + data.protocolType"
+      [subtitle]="'PROTOCOL.' + data.protocolType?.toUpperCase()"
       [title]="data.name ? data.name : data.serialNumber"
       class="tw-h-36 tw-mt-10 tw--m-5"
     >
