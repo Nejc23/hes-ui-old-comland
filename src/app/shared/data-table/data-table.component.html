@@ -357,7 +357,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                     [fileName]="this.excelFileName"
   >
     <ng-container *ngFor="let column of gridColumns">
-      <kendo-excelexport-column *ngIf="column.field !== 'icons'"
+      <kendo-excelexport-column *ngIf="!(column.field === 'icons' || column.field === 'rowActions')"
                                 [field]="column.field"
                                 [title]="column.translationKey | translate">
       </kendo-excelexport-column>
