@@ -167,7 +167,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <!--- no type defined is string -->
-        <ng-container *ngIf="!column.type && dataItem[column.field]">
+        <ng-container *ngIf="!column.type && dataItem[column.field] || dataItem[column.field] === 0">
           <div [class]="column.class?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
             <ng-container *ngIf="column.icon; else noIcon">
