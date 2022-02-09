@@ -437,6 +437,9 @@ export class MeterUnitsListComponent implements OnInit {
         this.gridData = data;
         this.gridData.data.map((data) => (data.protocolType = this.translate.instant('PROTOCOL.' + data.protocolType?.toUpperCase())));
         this.totalCount = data.totalCount;
+        if (this.totalCount === 0) {
+          this.pageNumber = 0;
+        }
 
         if (refreshGrid) {
           this.gridData.data = [...this.gridData.data]; //  KendoUI change detection for grid rerender

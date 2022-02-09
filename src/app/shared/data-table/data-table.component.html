@@ -421,8 +421,10 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           <img [src]="'assets/images/icons/arrow-left-icon.svg'" />
         </button>
 
-        <div class="tw-mx-6 tw-text-darkGray">
-          {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }} of {{ totalPages }}
+        <div class="tw-mx-6 tw-text-darkGray tw-inline-flex">
+          {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }} of
+          <div
+            class="tw-font-bold tw-ml-1 tw-text-black">{{ totalPages }}</div>
         </div>
 
         <button (click)="navigateToNextPage()" [disabled]="loading" class="small-button "
