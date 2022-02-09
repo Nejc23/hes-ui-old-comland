@@ -24,8 +24,9 @@ import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { DropDownListComponent } from '@progress/kendo-angular-dropdowns';
 import { brand } from '../../../environments/brand/default/brand';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { FormData } from '../card-item/card-item.component';
 import { SelectionEvent } from '@progress/kendo-angular-grid/dist/es2015/selection/types';
 
 export interface GridColumn {
@@ -44,6 +45,7 @@ export interface GridColumn {
   sortingDisabled?: boolean;
   linkUrl?: string;
   locked?: boolean;
+  formField?: string;
 }
 
 export interface IconData {
@@ -171,7 +173,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() withRowSelection = false;
   @Input() kendoGridSelectByColumn: string = 'id'; // represents the unique grid data property/key for row selection
   @Input() selectedKeys = [];
-  @Input() excludedIdsFromSelection = [];
+  @Input() excludedIdsFromSelection;
   @Input() showGridBulkActions = false;
   @Input() showClearFiltersButton = false;
   @Input() pageNumber = 1;
@@ -183,8 +185,11 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() filtersCount = 0;
   @Input() searchText = '';
   @Input() wildCardsEnabled = false;
+  @Input() inlineEdit = false;
+  @Input() withAddButton = false;
   @Input() totalCount;
-
+  @Input() editFieldById = ''; // id needs to be defined for inline edit
+  @Input() noDataTextAlignLeft = false;
   searchForm: FormGroup;
   wildCardsImageUrl = 'assets/images/icons/grain-icon.svg';
   // search
@@ -196,7 +201,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   readOnText = this.translate.instant('COMMON.READ-ON');
   preconfiguredThreshold = environment.thresholdValue;
   disconnectorStateEnum = Object.values(DisconnectorStateEnum);
-
+  editableRowId;
   @ViewChild('searchInput', { static: false })
   searchInput: ElementRef;
   @ViewChildren('kendoDropdownFilter') kendoFilters: QueryList<DropDownListComponent>;
@@ -215,6 +220,13 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   pageSizes: number[] = [20, 50, 100];
 
+  // inline edit
+  @Input() form: FormGroup;
+  controls: Array<FormData> = [];
+  @Input() cancelEditor = false;
+  inlineAddOrEdit = false;
+  inlineAdd = false;
+
   @Output() switchClickedEvent = new EventEmitter<any>();
   @Output() rowActionClickedEvent = new EventEmitter<any>();
   @Output() selectedCellEvent = new EventEmitter<CellClickEvent>();
@@ -230,6 +242,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Output() searchIconClickEvent = new EventEmitter<boolean>();
   @Output() wildCardsEnabledEvent = new EventEmitter<boolean>();
   @Output() filterIconClickEvent = new EventEmitter<boolean>();
+  @Output() inlineSaveButtonClickEvent = new EventEmitter<any>();
 
   @Output() selectAllClickEvent = new EventEmitter<boolean>();
   @Output() deSelectAllClickEvent = new EventEmitter<boolean>();
@@ -242,6 +255,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     width: 50
   };
 
+  editedRowIndex;
   @Input() selectAllEnabled = false;
 
   constructor(private modalService: ModalService, private translate: TranslateService, private fb: FormBuilder) {}
@@ -250,6 +264,10 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.searchForm = this.fb.group({
       ['search']: this.searchText
     });
+
+    if (this.form) {
+      this.getFormControls();
+    }
 
     if (this.wildCardsEnabled) {
       this.wildCardsImageUrl = 'assets/images/icons/grain-icon-' + brand.brand.toLowerCase() + '.svg';
@@ -306,6 +324,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     // data changed
     this.initGrid();
+
     if (this.selectAllEnabled) {
       // select ALL on next page
       // exclude ids
@@ -315,6 +334,12 @@ export class DataTableComponent implements OnInit, OnChanges {
         this.selectedKeys = this.selectedKeys.filter((id) => !this.excludedIdsFromSelection.includes(id)); //
       }
       console.log(this.selectedKeys);
+    }
+
+    if (this.cancelEditor === true) {
+      this.grid.closeRow(-1);
+      this.inlineAdd = false;
+      this.inlineAddOrEdit = false;
     }
   }
 
@@ -535,7 +560,19 @@ export class DataTableComponent implements OnInit, OnChanges {
   }
 
   cellClick(event: CellClickEvent) {
+    if (this.inlineEdit && !this.inlineAdd && event.column.field !== 'rowActions') {
+      this.inlineAddOrEdit = true;
+      this.closeEditor(-1); // close add new row
+      this.editableRowId = event.dataItem[this.editFieldById]; // editable row Id by editFieldById
+      event.sender.editCell(event.rowIndex, event.columnIndex, (this.form = this.fillDataForm(event.dataItem)));
+    }
     this.selectedCellEvent.emit(event);
+  }
+
+  cellClose(event: any) {
+    this.inlineAdd = false;
+    this.inlineAddOrEdit = false;
+    this.editableRowId = null;
   }
 
   selectedCellChange(event: any) {
@@ -584,6 +621,8 @@ export class DataTableComponent implements OnInit, OnChanges {
     this.pageNumber = 1;
     this.pageChangedEvent.emit({ pageNumber: this.pageNumber });
   }
+
+  // grid navigation for pagination with API calls
 
   navigateToLastPage() {
     this.pageNumber = Math.ceil(this.total / this.pageSize);
@@ -643,6 +682,13 @@ export class DataTableComponent implements OnInit, OnChanges {
     return tooltip;
   }
 
+  public cancelHandler({ sender, rowIndex }) {
+    sender.closeRow(rowIndex);
+    this.inlineAddOrEdit = false;
+    this.inlineAdd = false;
+    this.editedRowIndex = undefined;
+  }
+
   onFilterIconClick() {
     this.filterIconClickEvent.emit(true);
   }
@@ -682,6 +728,56 @@ export class DataTableComponent implements OnInit, OnChanges {
     return data.filter((data) => data.interpretedValue?.toLowerCase() === type.toLowerCase()).length;
   }
 
+  public addHandler({ sender }): void {
+    this.inlineAddOrEdit = true;
+    this.inlineAdd = true;
+    this.closeEditor(sender);
+    this.controls.forEach((value) => {
+      this.form.get(value.name).patchValue('');
+    });
+    this.editedRowIndex = this.gridData.length;
+    sender.addRow(this.form);
+  }
+
+  getFormControls() {
+    if (this.form.controls) {
+      this.controls = [];
+      Object.keys(this.form.controls).forEach((control) => {
+        const typedControl: AbstractControl = this.form.controls[control];
+        this.controls.push({
+          name: control,
+          control: typedControl
+        });
+      });
+    }
+  }
+
+  public fillDataForm(dataItem: any) {
+    this.controls.forEach((value) => {
+      this.form.get(value.name).patchValue(dataItem[value.name]);
+    });
+    return this.form;
+  }
+
+  inlineSaveButtonClick(event: any) {
+    if (this.form.valid) {
+      this.inlineAddOrEdit = false;
+      this.inlineAdd = false;
+      this.inlineSaveButtonClickEvent.emit(event);
+    }
+  }
+
+  public editHandler(event: any) {
+    this.controls.forEach((value) => {
+      event.dataItem[value.name] = this.form.get(value.name).value;
+    });
+    if (this.form.valid) {
+      this.grid.closeRow(this.editedRowIndex);
+      this.inlineAddOrEdit = false;
+      this.inlineSaveButtonClickEvent.emit(event);
+    }
+  }
+
   selectAll() {
     this.selectAllEnabled = true;
     this.excludedIdsFromSelection = [];
@@ -698,6 +794,21 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   exportData(event: ExcelExportEvent) {
     this.excelFileName = this.excelFileName + '_' + this.getCurrentDateTime() + '.xlsx';
+  }
+
+  checkFormErrors(): boolean {
+    let error = false;
+    this.controls.forEach((control) => {
+      if (control.control.errors) {
+        error = true;
+      }
+    });
+    return error;
+  }
+
+  private closeEditor(rowIndex = this.editedRowIndex) {
+    this.grid.closeRow(rowIndex);
+    this.editedRowIndex = undefined;
   }
 
   // load grid items:

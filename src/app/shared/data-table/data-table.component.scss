@@ -340,6 +340,25 @@
   @apply tw-justify-center;
 }
 
+::ng-deep td.k-command-cell img {
+  padding: 8px;
+}
+
+::ng-deep td.k-command-cell {
+  text-align: right;
+  width: 90px;
+}
+
+::ng-deep .k-grid-edit-row td {
+  padding: 0 0 0 16px !important;
+  text-overflow: clip;
+}
+
+::ng-deep td.k-command-cell.ng-star-inserted {
+  padding: 0 16px 0 0 !important;
+}
+
+
 .column-chooser {
   height: 35px; // 35px due to search input
 }
@@ -370,4 +389,31 @@
 
 ::ng-deep .k-grid-header .k-header:first-child {
   background-color: white !important;
+}
+
+.inline-icon {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  margin: 2px;
+  border: none !important;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #F4F6F9;
+  }
+}
+
+.inline-add-new-icons {
+  width: 58px;
+  margin-left: 20px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.inline-edit-icon {
+  margin-left: 50px;
+  width: 30px;
+  background-color: white;
+  border-radius: 2px;
 }

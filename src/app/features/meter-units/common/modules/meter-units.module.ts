@@ -22,6 +22,7 @@ import { ErrorMessageModalComponent } from '../components/import-devices/error-m
 import { TouConfigurationImportComponent } from '../components/plc-meter-tou-config-import/tou-configuration-import.component';
 import { GridCellProtocolComponent } from '../../types/components/grid-custom-components/grid-cell-protocol.component';
 import { ActionButtonsComponent } from '../../types/components/action-buttons/action-buttons.component';
+import { ExtraDetailsComponent } from '../../details/components/extra-details/extra-details.component';
 
 @NgModule({
   entryComponents: [],
@@ -44,7 +45,8 @@ import { ActionButtonsComponent } from '../../types/components/action-buttons/ac
     ErrorMessageModalComponent,
     TouConfigurationImportComponent,
     GridCellProtocolComponent,
-    ActionButtonsComponent
+    ActionButtonsComponent,
+    ExtraDetailsComponent
   ],
   exports: [RegistersColumnChartComponent],
   imports: [

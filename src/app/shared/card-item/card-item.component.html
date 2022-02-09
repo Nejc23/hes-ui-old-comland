@@ -14,10 +14,15 @@
   </div>
   <div class="app-card-body">
 
-    <ng-container *ngIf="loading || loadingFailed">
+    <ng-content></ng-content>
+
+    <ng-container *ngIf="loading">
+      <app-no-data [loading]="loading"></app-no-data>
+    </ng-container>
+
+    <ng-container *ngIf="loadingFailed">
       <app-no-data [loading]="loadingFailed" [message]="'Unable to load data'"
                    [secondaryMessage]="'This can happen if the device or the underlying system is not available.'"></app-no-data>
-      <app-no-data [loading]="loading"></app-no-data>
     </ng-container>
 
     <!-- Place for generic content -->
@@ -59,6 +64,27 @@
         </div>
       </div>
 
+      <div *ngIf="keyValueData">
+        <div
+          *ngFor="let item of keyValueData | slice: 0: paginationLimit ?  paginationLimit: keyValueData.length; let i = index"
+          [ngClass]="i >= initLimit && showMoreButton ? 'tw-bg-backgroundGray' : ''"
+          class="app-card-row last:tw-border-b-0 tw-border-b">
+          <div class="tw-text-darkGray">
+            {{ item[keyValueFields[0]] }}:
+          </div>
+
+          <div *ngIf="item[keyValueFields[1]]"
+               class="tw-text-black">
+            {{ item[keyValueFields[1]] }}
+          </div>
+
+          <div *ngIf="!item[keyValueFields[1]]"
+               class="tw-text-darkGray">
+            {{ 'COMMON.NOT-DEFINED' | translate }}
+          </div>
+        </div>
+
+      </div>
       <div *ngIf="meterUnitData.length > 0">
 
         <div class="tw-inline-flex tw-w-full">
@@ -132,6 +158,7 @@
 
 
   <ng-container>
+
     <ng-container *ngIf="form && showMoreButton">
       <div (click)="showMoreItems()" *ngIf="paginationLimit < controls.length"
            class="app-card-show-more-button">
@@ -145,6 +172,19 @@
       </div>
     </ng-container>
 
+    <ng-container *ngIf="keyValueData.length > 0 && showMoreButton">
+      <div (click)="showMoreItems()" *ngIf="paginationLimit < keyValueData.length"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SHOW-MORE' | translate }}
+        <i class="fas fa-chevron-down"></i>
+      </div>
+      <div (click)="showLessItems()" *ngIf="paginationLimit >= keyValueData.length"
+           class="app-card-show-more-button">
+        {{ 'COMMON.SHOW-LESS' | translate }}
+        <i class="fas fa-chevron-up"></i>
+      </div>
+    </ng-container>
+
     <ng-container *ngIf="buttonLinkUrl !== '' && buttonWithLink">
       <div [routerLink]="'/' + buttonLinkUrl"
            class="app-card-show-more-button">
@@ -152,6 +192,7 @@
         <i class="fas fa-chevron-right"></i>
       </div>
     </ng-container>
+
   </ng-container>
 
 
