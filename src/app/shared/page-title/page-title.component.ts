@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { DeviceState } from '../../core/repository/interfaces/meter-units/meter-unit-details.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-title',
@@ -11,10 +12,11 @@ export class PageTitleComponent {
   @Input() subtitle = '';
   @Input() state: DeviceState;
   @Input() backButton = false;
+  @Input() routerUrl = '';
 
   @Output() backButtonClickedEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   addStateClass() {
     switch (this.state.toLowerCase()) {
@@ -34,6 +36,9 @@ export class PageTitleComponent {
   }
 
   backButtonClicked() {
+    if (this.routerUrl !== '') {
+      this.router.navigate([this.routerUrl]);
+    }
     this.backButtonClickedEvent.emit(true);
   }
 }

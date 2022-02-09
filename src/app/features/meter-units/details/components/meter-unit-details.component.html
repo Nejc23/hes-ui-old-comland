@@ -3,6 +3,8 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
+      [routerUrl]="routerLinkUrl"
+      [backButton]="true"
       [state]="data.deviceState"
       [subtitle]="'PROTOCOL.' + data.protocolType?.toUpperCase()"
       [title]="data.name ? data.name : data.serialNumber"
