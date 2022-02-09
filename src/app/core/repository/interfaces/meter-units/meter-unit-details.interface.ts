@@ -20,6 +20,7 @@ export interface MeterUnitDetails {
   advancedInformation: MuAdvancedInformation;
   referencingType: ReferenceType;
   externalId?: string;
+  firstInstallDate: Date;
 }
 
 export enum DeviceState {

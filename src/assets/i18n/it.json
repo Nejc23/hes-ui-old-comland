@@ -421,6 +421,7 @@
         "HOSTNAME": "Nome dell'Host",
         "TIMEZONENAME": "Fuso orario",
         "FIRSTINSTALLDATE": "Installato",
+        "FIRSTINSTALLEDDATE": "Installato",
         "WARNING": {
             "DUPLICATED": "L'indirizzo IP che avete inserito è già utilizzato da un altro contatore!"
         },

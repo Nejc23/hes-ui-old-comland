@@ -17,6 +17,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
 import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
+import { environment } from '../../../../../environments/environment';
+import * as moment from 'moment';
 import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
 
 @Component({
@@ -71,6 +73,10 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   get nameProperty() {
     return nameOf<MeterUnitDetailsForm>((o) => o.name);
+  }
+
+  get firstInstalledDateProperty() {
+    return nameOf<MeterUnitDetailsForm>((o) => o.firstInstalledDate);
   }
 
   get idProperty() {
@@ -235,6 +241,10 @@ export class MeterUnitDetailsComponent implements OnInit {
   createForm() {
     this.detailsForm = this.formBuilder.group({
       name: this.data.name,
+      firstInstalledDate:
+        moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
+        ' ' +
+        moment(this.data.firstInstallDate).format(environment.timeFormat),
       serialNumber: this.data.serialNumber,
       templateName: this.data.templateName,
       //  deviceState: this.data.deviceState,

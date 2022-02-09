@@ -1,6 +1,7 @@
 export interface MeterUnitDetailsForm {
   deviceId: string;
   name: string;
+  firstInstalledDate: Date;
   // status: Codelist<number>;
   // type: Codelist<number>;
   // vendor: Codelist<number>;
