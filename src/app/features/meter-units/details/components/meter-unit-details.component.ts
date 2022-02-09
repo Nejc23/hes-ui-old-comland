@@ -272,12 +272,9 @@ export class MeterUnitDetailsComponent implements OnInit {
         moment(this.data.firstInstallDate).format(environment.timeFormat),
       serialNumber: this.data.serialNumber,
       templateName: this.data.templateName,
-      //  deviceState: this.data.deviceState,
-      //   protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
       manufacturer: this.data.manufacturer,
-      //   ip: this.data.ip,
-      //   port: this.data.port,
-      externalId: this.data.externalId
+      externalId: this.data.externalId,
+      deviceId: this.data.deviceId
     });
 
     if (this.isPlcDevice) {

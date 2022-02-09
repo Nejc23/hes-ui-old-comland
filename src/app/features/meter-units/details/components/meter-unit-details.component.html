@@ -3,8 +3,8 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
-      [routerUrl]="routerLinkUrl"
       [backButton]="true"
+      [routerUrl]="routerLinkUrl"
       [state]="data.deviceState"
       [subtitle]="'PROTOCOL.' + data.protocolType?.toUpperCase()"
       [title]="data.name ? data.name : data.serialNumber"
@@ -331,16 +331,9 @@
                            [buttonIconName]="'edit-icon'"
                            [buttonLabel]="isEditVisible() ? 'BUTTON.EDIT' : ''"
                            [form]="detailsForm"
-                           [showMoreButton]="false"
+                           [paginationLimit]="5"
+                           [showMoreButton]="true"
                            [title]="'COMMON.DETAILS'">
-            </app-card-item>
-
-            <app-card-item (buttonClickEvent)="editButtonClicked(false)"
-                           [buttonIconName]="'edit-icon'"
-                           [buttonLabel]="isEditVisible() ? 'BUTTON.EDIT' : ''"
-                           [form]="communicationForm"
-                           [showMoreButton]="false"
-                           [title]="'COMMON.COMMUNICATION-MODULE'">
             </app-card-item>
 
             <app-card-item (buttonClickEvent)="editCustomProperties()"
@@ -377,6 +370,48 @@
               </div>
 
             </app-card-item>
+
+            <app-card-item (buttonClickEvent)="editButtonClicked(false)"
+                           [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="isEditVisible() ? 'BUTTON.EDIT' : ''"
+                           [form]="communicationForm"
+                           [showMoreButton]="false"
+                           [title]="'COMMON.COMMUNICATION-MODULE'">
+            </app-card-item>
+
+            <app-card-item [title]="'PLC-METER.TRANSFORMER-RATIO'">
+
+              <div class="app-transformer-card-row tw-border-lightGray tw-border-b tw-border-solid">
+                <div class="tw-text-darkGray tw-text-sm">
+                  {{ 'PLC-METER.CURRENT-RATIO' | translate }}:
+                </div>
+                <div>
+                  <div class="tw-text-black tw-text-sm tw-flex tw-flex tw-justify-end">
+                    1
+                  </div>
+                  <div class="transformer-gray-text tw-text-xs tw-inline-flex tw-m-1">
+                    <img [src]="'assets/images/icons/calendar-icon-small.svg'"
+                         class="tw-pr-2" />  {{ 'COMMON.VALID-FROM' | translate }}: 1.1.2000 00:00
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-transformer-card-row">
+                <div class="tw-text-darkGray tw-text-sm">
+                  {{ 'PLC-METER.VOLTAGE-RATIO' | translate }}:
+                </div>
+                <div>
+                  <div class="tw-text-black tw-text-sm tw-flex tw-flex tw-justify-end">
+                    1
+                  </div>
+                  <div class="transformer-gray-text tw-text-xs tw-inline-flex tw-m-1">
+                    <img [src]="'assets/images/icons/calendar-icon-small.svg'"
+                         class="tw-pr-2" />  {{ 'COMMON.VALID-FROM' | translate }}: 1.1.2000 00:00
+                  </div>
+                </div>
+              </div>
+            </app-card-item>
+
 
           </div>
 

@@ -222,7 +222,8 @@
     "EXTRA-DETAILS-REMOVED": "Extra details was removed successfully",
     "EXTRA-DETAILS-UPDATED": "Extra details was updated successfully",
     "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
-    "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details"
+    "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
+    "VALID-FROM": "Valid from"
   },
   "DAY": {
     "CURRENT-MONTH": "Current month",
@@ -463,7 +464,8 @@
     "CREATED-AT": "Created at",
     "REJECTED-GRANTED": "Rejected/granted by",
     "PROPERTY": "Property",
-    "VALUE": "Value"
+    "VALUE": "Value",
+    "DEVICEID": "Guid"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -839,7 +841,10 @@
       "EXCEL-TEMPLATE": "Import meters template",
       "DESCRIPTION": "Import device feature enables adding and updating devices via Excel (XSLT) file. Use provided Excel template as the starting point.",
       "DOWNLOAD": "Download"
-    }
+    },
+    "TRANSFORMER-RATIO": "Transformer ratio",
+    "CURRENT-RATIO": "Current ratio",
+    "VOLTAGE-RATIO": "Voltage ratio"
   },
   "TOOLS": {
     "AUTO-TEMPLATE": {
