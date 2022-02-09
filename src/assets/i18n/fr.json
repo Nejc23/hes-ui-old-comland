@@ -421,6 +421,7 @@
         "HOSTNAME": "Nom d'hôte",
         "TIMEZONENAME": "Zone horaire",
         "FIRSTINSTALLDATE": "Installé",
+        "FIRSTINSTALLEDDATE": "Installé",
         "WARNING": {
             "DUPLICATED": "L'adresse IP que vous avez saisie est déjà utilisée par un autre compteur !"
         },

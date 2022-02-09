@@ -421,6 +421,7 @@
         "HOSTNAME": "Hostname",
         "TIMEZONENAME": "Timezone",
         "FIRSTINSTALLDATE": "Installed",
+        "FIRSTINSTALLEDDATE": "Installed",
         "WARNING": {
             "DUPLICATED": "The IP address you have entered is already in use by another meter!"
         },

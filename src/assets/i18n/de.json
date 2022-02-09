@@ -420,7 +420,8 @@
         "PLCSTATUS": "PLC Status",
         "HOSTNAME": "Host-Name",
         "TIMEZONENAME": "Zeit-Zone",
-        "FIRSTINSTALLDATE": "Installation",
+        "FIRSTINSTALLDATE": "Installed",
+        "FIRSTINSTALLEDDATE": "Installed",
         "WARNING": {
             "DUPLICATED": "Die IP-Adresse, die Sie eingegeben haben, wird schon von einem anderen Zähler benützt !"
         },
