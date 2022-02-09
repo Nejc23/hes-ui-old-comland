@@ -31,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
 import { NgxTranslateDebugParser } from 'ngx-translate-debug';
 import { ApiModule as TimeOfUseApiModule } from './api/time-of-use/api.module';
 import { ApiModule as CryptoLiteUIApiModule } from './api/crypto-lite-ui/api.module';
+import { ApiModule as ConcentratorInventory } from './api/concentrator-inventory/api.module';
 import { environment } from 'src/environments/environment';
 
 registerLocaleData(localeSl, 'sl', localeSlExtra);
@@ -76,6 +77,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SharedModule,
     TimeOfUseApiModule.forRoot({ rootUrl: environment.apiUrl }),
     CryptoLiteUIApiModule.forRoot({ rootUrl: environment.apiUrl }),
+    ConcentratorInventory.forRoot({ rootUrl: environment.apiUrl }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateModule,

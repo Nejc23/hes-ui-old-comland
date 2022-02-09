@@ -17,9 +17,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
 import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
+import { DeviceMetaDataDto } from '../../../../api/concentrator-inventory/models/device-meta-data-dto';
 import { environment } from '../../../../../environments/environment';
 import * as moment from 'moment';
 import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
+import { MeterPropertyService } from '../../../../api/concentrator-inventory/services/meter-property.service';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
+import { process } from '@progress/kendo-data-query';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -38,8 +42,11 @@ export class MeterUnitDetailsComponent implements OnInit {
   saveData = false;
   basicDetails = false;
   DeviceStateEnum = DeviceState;
+  extraDetailsVisible = false;
+  loadingMetadata = false;
 
-  private deviceId;
+  deviceId;
+  deviceMetadata: Array<DeviceMetaDataDto> = [];
   private requestModel;
 
   constructor(
@@ -56,13 +63,18 @@ export class MeterUnitDetailsComponent implements OnInit {
     private elRef: ElementRef,
     private permissionService: PermissionService,
     private eventService: MeterUnitsTypeGridEventEmitterService,
-    private meterUnitsTypeGridService: MeterUnitsTypeGridService
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
+    private meterPropertyService: MeterPropertyService,
+    private eventsService: EventManagerService
   ) {
     this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
     this.eventService.eventEmitterRefreshDevices.subscribe({
       next: () => {
         this.getData();
       }
+    });
+    this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
+      this.getMetadata();
     });
   }
 
@@ -234,7 +246,20 @@ export class MeterUnitDetailsComponent implements OnInit {
         this.isPlcDevice = true;
       }
       this.createForm();
+      this.getMetadata();
       this.closeSlideOut();
+    });
+  }
+
+  getMetadata() {
+    this.loadingMetadata = true;
+    this.meterPropertyService.meterDeviceIdMetadataGet({ deviceId: this.deviceId }).subscribe((res) => {
+      this.deviceMetadata = res;
+      // sort data same as grid
+      this.deviceMetadata = process(this.deviceMetadata, {
+        sort: [{ field: 'property', dir: 'asc' }]
+      }).data;
+      this.loadingMetadata = false;
     });
   }
 
@@ -273,6 +298,14 @@ export class MeterUnitDetailsComponent implements OnInit {
   editButtonClicked(basicDetails?: boolean) {
     this.basicDetails = basicDetails;
     this.openEdit = true;
+  }
+
+  editCustomProperties() {
+    this.extraDetailsVisible = true;
+  }
+
+  closeExtraDetails() {
+    this.extraDetailsVisible = false;
   }
 
   // --> Operations action click

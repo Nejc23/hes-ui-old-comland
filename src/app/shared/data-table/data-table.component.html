@@ -2,10 +2,15 @@
 supporting virtual scrolling, pagination, client side data and fetching remote data from API -->
 
 <kendo-grid
+  (add)="withAddButton ? addHandler($event) : null"
+  (cancel)="cancelHandler($event)"
   (cellClick)="cellClick($event)"
+  (cellClose)="cellClose($event)"
   (columnVisibilityChange)="columnVisibilityChanged($event)"
+  (edit)="editHandler($event)"
   (excelExport)="exportData($event)"
   (pageChange)="pageChange($event)"
+  (save)="inlineSaveButtonClick($event)"
   (selectedKeysChange)="selectedCellChange($event)"
   (selectionChange)="selectionChanged($event)"
   (sortChange)="sortChange($event)"
@@ -29,11 +34,26 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   } : null"
   class="kendo-grid">
 
-  <ng-template *ngIf="withSearch || excelExport"
+  <ng-template *ngIf="withSearch || excelExport || withAddButton"
                class="kendo-toolbar"
                kendoGridToolbarTemplate>
 
     <div class="tw-inline-flex tw-w-full">
+
+      <div *ngIf="withAddButton" class="tw-inline-flex tw-w-full tw-justify-between">
+
+        <div class="tw-w-3/4 tw-inline-flex tw-place-self-end">
+          <div *ngIf="checkFormErrors() && this.form.touched && this.inlineAddOrEdit">
+            <ng-container *ngFor="let control of controls">
+              <app-form-error [error]="control.control.errors"></app-form-error>
+            </ng-container>
+          </div>
+        </div>
+
+        <button class="btn btn text-secondary btn-outline tw-mt-8 tw-border tw-border-primary" kendoGridAddCommand>
+          + {{ 'BUTTON.ADD-NEW' | translate }}
+        </button>
+      </div>
 
       <div *ngIf="withSearch">
         <div class="tw-text-darkGray tw-text-xs tw-font-medium tw-mb-1">{{'COMMON.SEARCH' | translate }}:</div>
@@ -55,8 +75,8 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
       </div>
 
-      <div class="tw-place-self-end tw-flex tw-ml-4">
-        <button (click)="onFilterIconClick()" *ngIf="withFiltersIcon"
+      <div *ngIf="withFiltersIcon" class="tw-place-self-end tw-flex tw-ml-4">
+        <button (click)="onFilterIconClick()"
                 [ngbTooltip]="hideShowFilter"
                 class="icon-filter-button border-gray"
                 container="body">
@@ -93,7 +113,8 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
       </div>
 
-      <div class="tw-flex tw-justify-end tw-w-full tw-place-self-end">
+      <div *ngIf="excelExport || showGridBulkActions" class="tw-flex tw-justify-end tw-w-full tw-place-self-end">
+
         <div *ngIf="excelExport" class="tw-ml-4">
           <button icon="fa fa-file-export tw-bg-white tw-text-darkGray" kendoGridExcelCommand type="button">
           </button>
@@ -145,7 +166,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                      [autoSize]="true"
                      [class]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1 ? 'transparent-background' : column.class"
                      [field]="column.field"
-                     [hidden]="column.hidden"
+                     [hidden]="column.field === 'rowActions' && inlineAddOrEdit ? true : column.hidden"
                      [locked]="column.locked"
                      [sortable]="!column.sortingDisabled"
                      [sticky]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1"
@@ -350,7 +371,23 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
       </ng-container>
     </ng-template>
 
+
   </kendo-grid-column>
+
+  <kendo-grid-command-column *ngIf="inlineAddOrEdit">
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <div class="inline-add-new-icons">
+        <img [src]="'assets/images/icons/inline-close-icon.svg'" class="inline-icon" kendoGridCancelCommand />
+        <img [src]="'assets/images/icons/inline-check-icon.svg'" class="inline-icon" kendoGridSaveCommand />
+      </div>
+
+      <ng-container *ngIf="dataItem[editFieldById] === editableRowId">
+        <div class="inline-edit-icon">
+          <img [src]="'assets/images/icons/inline-check-icon.svg'" class="inline-icon" kendoGridEditCommand />
+        </div>
+      </ng-container>
+    </ng-template>
+  </kendo-grid-command-column>
 
   <kendo-grid-excel *ngIf="excelExport"
                     [fetchData]="allData"
@@ -366,7 +403,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   </kendo-grid-excel>
 
   <ng-template kendoGridNoRecordsTemplate>
-    <div class="tw-text-left tw-pl-40">{{ noDataText | translate }}</div>
+    <div [ngClass]="noDataTextAlignLeft ? 'tw-text-left tw-pl-36' : ''">{{ noDataText | translate }}</div>
   </ng-template>
 
   <!-- pagination only possible with scrollable mode -->
@@ -441,6 +478,11 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
     </div>
 
   </ng-template>
+
+  <div class="tw-invisible">
+    <img [src]="'assets/images/icons/close-icon.svg'" />
+    <img [src]="'assets/images/icons/inline-check-icon.svg'" />
+  </div>
 </kendo-grid>
 
 
