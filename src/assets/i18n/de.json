@@ -3,7 +3,7 @@
         "NO-ALARMS": "Es wurden noch keine Alarme hinzugefügt"
     },
     "BREADCRUMB": {
-        "CONCENTRATOR": "Konzentrator",
+        "CONCENTRATOR": "Datenkonzentrator",
         "JOBS": "Jobs",
         "OVERVIEW": "Übersicht - Zähler"
     },
@@ -33,7 +33,8 @@
         "EXPORT": "Export",
         "CONTINUE-WITH-EDITING": "Weiter mit der Bearbeitung",
         "REJECT": "Ablehnen",
-        "GRANT": "gewähren"
+        "GRANT": "gewähren",
+        "ADD-NEW": "Add new"
     },
     "COMMON": {
         "0-100-RANGE": "Der Wert muss im Bereich von 0-100 liegen",
@@ -58,7 +59,7 @@
         "CII-DEACTIVATE": "CII deaktivieren",
         "CLEAR-ALARMS": "Alarme löschen",
         "COMMUNICATION": "Kommunikation",
-        "CONCENTRATORS": "Konzentratoren",
+        "CONCENTRATORS": "Datenkonzentratoren",
         "CONFIGURATION": "Konfiguration",
         "CONFIRM": "Bestätigen",
         "CONFIRM-DELETE": "Löschen bestätigen",
@@ -89,7 +90,7 @@
         "EXPRESSION-INVALID": "Cron-Syntax ungültig",
         "FAILED": "gescheitert",
         "FOR": "für",
-        "FOUND": "gefunden",
+        "FOUND": "Objekte gefunden",
         "FROM": "Von",
         "GET-CII-STATE": "CII Zustand abfragen",
         "GET-DISCONNECTOR-STATUS": "Breaker-Status abfragen",
@@ -115,7 +116,7 @@
         "MONITOR": "Monitor",
         "MONTHLY": "Monatlich",
         "MORE-OPTIONS": "Mehr Optionen",
-        "NA": "N/A",
+        "NA": "N/V",
         "NAME": "Name",
         "NO-DATA-FOUND": "Keine Daten gefunden",
         "NO-FILTER-APPLIED": "Aktuell kein Filter angewendet",
@@ -167,7 +168,7 @@
         "SYNCHRONIZE-TIME": "Zeit synchronisieren",
         "TAG": "Tag",
         "TAGS": "Tags",
-        "TO": "zu",
+        "TO": "bis",
         "TYPE": "Typ",
         "UPLOAD-SUCCESSFUL": "Hochladen erfolgreich",
         "USERNAME": "Benutzername",
@@ -185,7 +186,7 @@
         "METER-STATUS": "Zähler-Status",
         "APPLIED-TAGS": "Verwendete Tags",
         "ALL-METERS": "alle Zähler",
-        "NOT-DEFINED": "N/A",
+        "NOT-DEFINED": "N/V",
         "DETAILS": "Details",
         "EDIT-DETAILS": "Details ändern",
         "EVENTS": "Ereignisse",
@@ -200,7 +201,7 @@
         "BASIC-DETAILS": "Details",
         "IN-PROGRESS": "in Bearbeitung",
         "ACTIVE-IMPORTS": "Momentane aktive Importe",
-        "NUMBER-OF-DEVICES": "(Anzahl von Apparaten) Zähler, die importiert oder aktualisiert werden",
+        "NUMBER-OF-DEVICES": "{{noOfDevices}} Geräte werden importiert oder aktualisiert",
         "ENABLE-METER": "Zähler aktivieren",
         "DISABLE-METER": "Zähler deaktivieren",
         "IMPORT-SUBTITLE-XML": "Die ausgewählte Datei muss in XML-Format sein",
@@ -212,7 +213,17 @@
             "EDIT": "ändern"
         },
         "OPERATION-FAILED": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
-        "CLEAR-ALL-FILTERS": "Alle Filtern löschen"
+        "CLEAR-ALL-FILTERS": "Alle Filtern löschen",
+        "EXTRA-DETAILS": "Extra details",
+        "EDIT-EXTRA-DETAILS": "Edit extra details",
+        "NO-EXTRA-DETAILS": "No extra details are specified for this device",
+        "ADD-EXTRA-DETAILS": "Add extra details",
+        "EXTRA-DETAILS-ADDED": "Extra details was added successfully",
+        "EXTRA-DETAILS-REMOVED": "Extra details was removed successfully",
+        "EXTRA-DETAILS-UPDATED": "Extra details was updated successfully",
+        "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
+        "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
+        "VALID-FROM": "Valid from"
     },
     "DAY": {
         "CURRENT-MONTH": "Aktueller Monat",
@@ -239,7 +250,7 @@
     },
     "DCU": {
         "ADD-FIRST": "Zuerst hinzufügen",
-        "CONCENTRATOR-UNITS-FOR": "Konzentratoren für",
+        "CONCENTRATOR-UNITS-FOR": "Datenkonzentratoren für",
         "CONFIRM-DELETE": "ausgewählte Datenkonzentrator-Einheiten löschen?",
         "CONFIRM-OPERATION": "Sind Sie sicher, dass Sie {{operationName}} für ausgewählte Geräte auslösen möchten?",
         "DATA-CONCENTRATOR-UNIT": "Datenkonzentratoren",
@@ -260,22 +271,23 @@
         "TYPE": "Typ",
         "VENDOR": "Verkäufer",
         "LAST-NOTIFICATIONS": "Letzte Benachrichtigungen",
-        "MULTIPLE-TYPES": "Es wurden mehrere Konzentratortypen ausgewählt. Bitte verfeinern Sie Ihre Auswahl und versuchen Sie es erneut.",
-        "RE-KEY-NOT-SUPPORTED": "Diese Aktion ist im Moment nicht für AC750 Konzentratoren unterstützt",
-        "RE-KEY-CONCENTRATOR": "Re-Key Konzentrator",
-        "CONCENTRATOR-INOPERABLE-WARNING": "Diese Aktion kann zu Schäden führen und den Konzentrator unbrauchbar machen!",
-        "RE-KEY-CONFIRM": "Sind Sie sicher, dass Sie das Re-Keying des Konzentrators machen wollen?",
+        "MULTIPLE-TYPES": "Es wurden mehrere Datenkonzentrator-Typen ausgewählt. Bitte verfeinern Sie Ihre Auswahl und versuchen Sie es erneut.",
+        "RE-KEY-NOT-SUPPORTED": "Diese Aktion ist im Moment nicht für AC750 Datenkonzentratoren unterstützt",
+        "RE-KEY-CONCENTRATOR": "Re-Key Datenkonzentrator",
+        "CONCENTRATOR-INOPERABLE-WARNING": "Diese Aktion kann zu Schäden führen und den Datenkonzentrator unbrauchbar machen!",
+        "RE-KEY-CONFIRM": "Sind Sie sicher, dass Sie das Re-Keying des Datenkonzentrators machen wollen?",
         "SECURITY-GAK": "Global Authentifizierungs-Schlüssel (",
         "SECURITY-GBEK": "Global Broadcast Encryption Schlüssel (gilt nur für die auf den selektierten DC's installierte Zähler)",
-        "RE-KEY-INSTALLING-STATE-NOT-SUPPORTED": "Nur der HMAC Schlüssel ist für Konzentratoren erlaubt, die sich im Installieren-Status befinden",
-        "INSTALLING-STATE-NOT-SUPPORTED": "Diese Aktion ist not erlaubt für Konzentratoren im Installieren-Zustand",
+        "RE-KEY-INSTALLING-STATE-NOT-SUPPORTED": "Nur der HMAC Schlüssel ist für Datenkonzentratoren erlaubt, die sich im Installieren-Status befinden",
+        "INSTALLING-STATE-NOT-SUPPORTED": "Diese Aktion ist nicht erlaubt für Datenkonzentratoren im Installieren-Zustand",
         "SECURITY-GAK-GBEK": "Globale Authentifizierung und Broadcast Schlüsseln (",
         "SECURITY-HMAC": "API Schlüssel wird für authentifizierte DC und das HES benützt",
-        "DOWNLOAD-CLIENT-CERT-NOT-SUPPORTED": "Diese Aktion wird derzeit für AC750-Konzentratoren nicht unterstützt!",
+        "DOWNLOAD-CLIENT-CERT-NOT-SUPPORTED": "Diese Aktion wird derzeit für AC750-Datenkonzentratoren nicht unterstützt!",
         "DOWNLOAD-CLIENT-CERT": "Kundenzertifikat herunterladen",
         "PROTECT-YOUR-CERT": "Ihr Zertifikat schützen",
         "ENTER-CLIENT-PASSWORD": "Geben Sie das Passwort für das Zertifikat ein",
-        "CLIENT-CERTS-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut."
+        "CLIENT-CERTS-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
+        "CONCENTRATORS-OVERVIEW": ""
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - Seite existiert nicht"
@@ -333,7 +345,8 @@
             "UNKNOWN-ERROR": "Unbekannter Fehler",
             "INVALID-HOSTNAME": "Host-Name ist ungültig",
             "ID-EXIST": "Die ID existiert",
-            "DUPLICATED-HOSTNAME": "Die Kombination aus Hostname und Port ist doppelt vorhanden"
+            "DUPLICATED-HOSTNAME": "Die Kombination aus Hostname und Port ist doppelt vorhanden",
+            "INVALID-FIELDS": "Input does not meet minimum required amount of characters"
         },
         "EXPRESSION": "Cron-Syntax",
         "EXTERNAL-ID": "Externe Id",
@@ -377,7 +390,7 @@
         "REGISTER-GROUP": "Register-Gruppe",
         "RELAY": "Relais",
         "SAVE-FILTERS": "Speichern Sie die eingestellten Filter und die Reihenfolge/Größe der Spalten, um sie später zu verwenden.",
-        "SELECT-DATE": "Datum selektieren",
+        "SELECT-DATE": "Datum wählen",
         "SELECT-HERE": "Hier selektieren",
         "SELECTED-FILE": "Selektierte Datei",
         "SERIAL": "Seriell",
@@ -411,7 +424,7 @@
         "WEEK-DAYS": "Wochentage",
         "WRAPPER": "Wrapper",
         "TIME": "Zeit",
-        "SERIALNUMBER": "Apparate-Nummer",
+        "SERIALNUMBER": "Seriennummer",
         "ADDRESS": "Adresse",
         "TAGS": "Tags",
         "EXTERNALID": "Externe ID",
@@ -420,8 +433,7 @@
         "PLCSTATUS": "PLC Status",
         "HOSTNAME": "Host-Name",
         "TIMEZONENAME": "Zeit-Zone",
-        "FIRSTINSTALLDATE": "Installed",
-        "FIRSTINSTALLEDDATE": "Installed",
+        "FIRSTINSTALLDATE": "Installation",
         "WARNING": {
             "DUPLICATED": "Die IP-Adresse, die Sie eingegeben haben, wird schon von einem anderen Zähler benützt !"
         },
@@ -450,7 +462,11 @@
         "SUBJECT": "Subjekt",
         "REQUEST-ID": "ID",
         "CREATED-AT": "erstellt am",
-        "REJECTED-GRANTED": "abgelehnt / gewährt von"
+        "REJECTED-GRANTED": "abgelehnt / gewährt von",
+        "FIRSTINSTALLEDDATE": "Installed",
+        "PROPERTY": "Property",
+        "VALUE": "Value",
+        "DEVICEID": "Guid"
     },
     "GRID": {
         "ACTIVE": "Aktiv",
@@ -495,7 +511,7 @@
         "MANUFACTURER": "Hersteller",
         "MEDIUM": "Medium",
         "MISSING-TEMPLATE": "Fehlende Vorlage!",
-        "MODULE-ID": "Id-Module",
+        "MODULE-ID": "Modulnummer",
         "MORE": "mehr",
         "NAME": "Name",
         "NEXT": "Nächste",
@@ -530,7 +546,7 @@
         "TAGS": "Tags",
         "TIME-OF-USE-ID": "TOU ID",
         "TIMESTAMP": "Zeitstempel",
-        "TO": "zu",
+        "TO": "bis",
         "TYPE": "Typ",
         "UNIT": "Einheit",
         "VALUE": "Wert",
@@ -543,7 +559,9 @@
         "DATE": "Datum",
         "YEAR": "Jahr",
         "EVERY-YEAR": "Jedes Jahr",
-        "DAY-EXTERNALID": "Tag ID"
+        "DAY-EXTERNALID": "Tag ID",
+        "ROWS-PER-PAGE": "Rows per page",
+        "ACTIVE-JOBS": "Active jobs"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -585,7 +603,7 @@
         "READING": "Lesen",
         "READING-JOBS": "Auslese Job",
         "REMOVE": "vom Job entfernen",
-        "REMOVE-FOR-JOB": "Konzentrator(en) vom Job {{ selectedText }} entfernen?",
+        "REMOVE-FOR-JOB": "Datenkonzentrator(en) vom Job {{ selectedText }} entfernen?",
         "SCHEDULER-JOB": {
             "ADDED": "hinzugefügt",
             "CANCEL": "Möchten Sie einen geplanten Job jetzt abbrechen?",
@@ -656,7 +674,7 @@
         "POWERED-BY": "betrieben von Metricsx",
         "TOOLS": "Werkzeuge",
         "USERS": "Benutzer",
-        "IMPORT-DEVICES": "Apparate importieren",
+        "IMPORT-DEVICES": "Geräte importieren",
         "TOU-CONFIGURATION": "TOU Konfiguration",
         "VAULT-ACCESS": "KMS Zugang"
     },
@@ -668,7 +686,7 @@
         "SELECT-DATE-AND-REGISTERS": "Das Datum und mindestens ein Register müssen selektiert werden.",
         "SELECTED": "selektiert",
         "UNCONDITIONAL-TIME-SYNCHRONIZATION": "Nicht bedingte Zeit-Synchronisation",
-        "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Sind Sie sicher, dass Sie (Operations-Name) für die selektierten Apparate auslösen wollen ?",
+        "ARE-YOU-SURE-TEXT-FOR-DEVICES": "Sind Sie sicher, dass Sie {{operationName}} für die gewählten Geräte auslösen möchten?",
         "IMPORT-FAILED": "Import nicht erfolgreich",
         "UNSAVED-CHANGES": "ungespeicherte Änderungen",
         "UNSAVED-CHANGES-TEXT": "Sind Sie sicher, dass Sie fortfahren möchten? Alle nicht gespeicherten Änderungen bei diesem Schritt gehen verloren."
@@ -680,9 +698,9 @@
         "SYNC-TIME": "Zeit-Sync",
         "SYNCHRONIZE-TIME": "Synchronisierte Zeit",
         "SECURITY": "Sicherheit",
-        "RE-KEY-CONCENTRATOR": "Re-Key Konzentrator",
-        "ENABLE-DC": "Konzentrator aktivieren",
-        "DISABLE-DC": "Konzentrator deaktivieren",
+        "RE-KEY-CONCENTRATOR": "Re-Key Datenkonzentrator",
+        "ENABLE-DC": "Datenkonzentrator aktivieren",
+        "DISABLE-DC": "Datenkonzentrator deaktivieren",
         "RE-KEY-HMAC": "Re-Key HMAC",
         "DOWNLOAD-CLIENT-CERT": "Kundenzertifikat herunterladen"
     },
@@ -824,12 +842,16 @@
             "EXCEL-TEMPLATE": "Zähler-Vorlage importieren",
             "DESCRIPTION": "Die Funktion zum Importieren von Geräten ermöglicht das Hinzufügen und Aktualisieren von Geräten über eine Excel-Datei (XSLT). Verwenden Sie die mitgelieferte Excel-Vorlage als Ausgangspunkt.",
             "DOWNLOAD": "Herunterladen"
-        }
+        },
+        "TRANSFORMER-RATIO": "Transformer ratio",
+        "CURRENT-RATIO": "Current ratio",
+        "VOLTAGE-RATIO": "Voltage ratio",
+        "METERS-OVERVIEW": ""
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
             "ALREADY-ADDED": "Leere Zeile für neues Item bereits hinzugefügt!",
-            "DCU-FOR-JOB": "Ausgewählte Konzentratoren erfolgreich entfernt.",
+            "DCU-FOR-JOB": "Ausgewählte Datenkonzentratoren erfolgreich entfernt.",
             "DELETE-RULE": "Möchten Sie die Regel löschen?",
             "ERROR": "Es sind noch keine Vorlagen im System hinzugefügt worden.",
             "JOB-ADDED-TO-ALL": "Job erfolgreich zu allen Regeln hinzugefügt",
@@ -1056,7 +1078,11 @@
         "g3PLC": "G3-PLC",
         "dlms": "DLMS",
         "unknown": "Unbekannt",
-        "mM_BUS": "M-Bus"
+        "mM_BUS": "M-Bus",
+        "G3PLC": "G3-PLC",
+        "DLMS": "DLMS",
+        "UNKNOWN": "Unknown",
+        "MM_BUS": "MM-BUS"
     },
     "TOU-CONFIG": {
         "TOU-ID-ERROR-PATTERN": "Die TOU ID muss nur alphanumerische Zeichen beinhalten und muss eine Länge zwiscen 1 und 8 haben. ",
@@ -1203,5 +1229,9 @@
             "ISSUED": "ausgegeben",
             "AUTO_ISSUED": "autom. ausgegeben \n"
         }
+    },
+    "EXTRA-DETAILS-MODAL": {
+        "TITLE": "Delete extra property",
+        "TEXT": "Are you sure you would like to delete extra property from device"
     }
 }

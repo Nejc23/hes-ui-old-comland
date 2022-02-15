@@ -33,7 +33,8 @@
         "EXPORT": "Esporto",
         "CONTINUE-WITH-EDITING": "Continuare con le modifiche",
         "REJECT": "Respingere",
-        "GRANT": "Concedere"
+        "GRANT": "Concedere",
+        "ADD-NEW": "Add new"
     },
     "COMMON": {
         "0-100-RANGE": "Valore deve essere tra 0-100",
@@ -212,7 +213,17 @@
             "EDIT": "Edit"
         },
         "OPERATION-FAILED": "Operazione non riuscita. Si prega di aggiornare la pagina e riprovare",
-        "CLEAR-ALL-FILTERS": "Cancellare tutti i filtri\n"
+        "CLEAR-ALL-FILTERS": "Cancellare tutti i filtri\n",
+        "EXTRA-DETAILS": "Extra details",
+        "EDIT-EXTRA-DETAILS": "Edit extra details",
+        "NO-EXTRA-DETAILS": "No extra details are specified for this device",
+        "ADD-EXTRA-DETAILS": "Add extra details",
+        "EXTRA-DETAILS-ADDED": "Extra details was added successfully",
+        "EXTRA-DETAILS-REMOVED": "Extra details was removed successfully",
+        "EXTRA-DETAILS-UPDATED": "Extra details was updated successfully",
+        "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
+        "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
+        "VALID-FROM": "Valid from"
     },
     "DAY": {
         "CURRENT-MONTH": "Corrente mese",
@@ -275,7 +286,8 @@
         "DOWNLOAD-CLIENT-CERT": "Scaricare il certificato del cliente",
         "PROTECT-YOUR-CERT": "Proteggere il vostro certificato",
         "ENTER-CLIENT-PASSWORD": "Mettere la password per il certificato",
-        "CLIENT-CERTS-ERROR": "Operazione non riuscita. Si prega di aggiornare la pagina e riprovare.\n"
+        "CLIENT-CERTS-ERROR": "Operazione non riuscita. Si prega di aggiornare la pagina e riprovare.\n",
+        "CONCENTRATORS-OVERVIEW": ""
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - la pagina non esiste"
@@ -333,7 +345,8 @@
             "UNKNOWN-ERROR": "Errore non conosciuto",
             "INVALID-HOSTNAME": "Il nome Host non è valido",
             "ID-EXIST": "L'ID esiste",
-            "DUPLICATED-HOSTNAME": "La combinazione del hostname e del port è duplicata"
+            "DUPLICATED-HOSTNAME": "La combinazione del hostname e del port è duplicata",
+            "INVALID-FIELDS": "Input does not meet minimum required amount of characters"
         },
         "EXPRESSION": "Espressione",
         "EXTERNAL-ID": "Id esterno",
@@ -450,7 +463,11 @@
         "SUBJECT": "Soggetto",
         "REQUEST-ID": "ID",
         "CREATED-AT": "Creato a",
-        "REJECTED-GRANTED": "Respinto / concesso da"
+        "REJECTED-GRANTED": "Respinto / concesso da",
+        "FIRSTINSTALLEDDATE": "Installed",
+        "PROPERTY": "Property",
+        "VALUE": "Value",
+        "DEVICEID": "Guid"
     },
     "GRID": {
         "ACTIVE": "Attivo",
@@ -543,7 +560,9 @@
         "DATE": "Data",
         "YEAR": "Anno",
         "EVERY-YEAR": "Ogni anno",
-        "DAY-EXTERNALID": "Giorno ID"
+        "DAY-EXTERNALID": "Giorno ID",
+        "ROWS-PER-PAGE": "Rows per page",
+        "ACTIVE-JOBS": "Active jobs"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -824,7 +843,11 @@
             "EXCEL-TEMPLATE": "Importazione del template del contatore",
             "DESCRIPTION": "La funzione Import device permette di aggiungere e aggiornare i dispositivi tramite file Excel (XSLT). Usa il modello Excel fornito come punto di partenza.",
             "DOWNLOAD": "Caricare"
-        }
+        },
+        "TRANSFORMER-RATIO": "Transformer ratio",
+        "CURRENT-RATIO": "Current ratio",
+        "VOLTAGE-RATIO": "Voltage ratio",
+        "METERS-OVERVIEW": ""
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1056,7 +1079,11 @@
         "g3PLC": "G3-PLC",
         "dlms": "DLMS",
         "unknown": "Sconosciuto",
-        "mM_BUS": "mM-Bus"
+        "mM_BUS": "mM-Bus",
+        "G3PLC": "G3-PLC",
+        "DLMS": "DLMS",
+        "UNKNOWN": "Unknown",
+        "MM_BUS": "MM-BUS"
     },
     "TOU-CONFIG": {
         "TOU-ID-ERROR-PATTERN": "L'ID del TOU deve includere solamente caratteri alfanumerici e deve avere una lunghezza tra 1 e 8.",
@@ -1203,5 +1230,9 @@
             "ISSUED": "emesso",
             "AUTO_ISSUED": "Auto emesso"
         }
+    },
+    "EXTRA-DETAILS-MODAL": {
+        "TITLE": "Delete extra property",
+        "TEXT": "Are you sure you would like to delete extra property from device"
     }
 }
