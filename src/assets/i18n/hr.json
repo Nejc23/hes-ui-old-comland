@@ -33,7 +33,8 @@
         "EXPORT": "Export",
         "CONTINUE-WITH-EDITING": "Continue with editing",
         "REJECT": "Reject",
-        "GRANT": "Grant"
+        "GRANT": "Grant",
+        "ADD-NEW": "Add new"
     },
     "COMMON": {
         "0-100-RANGE": "Value must be in range 0-100",
@@ -212,7 +213,17 @@
             "EDIT": "edit"
         },
         "OPERATION-FAILED": "Operation failed. Please refresh the page and try again.",
-        "CLEAR-ALL-FILTERS": "Clear all Filters"
+        "CLEAR-ALL-FILTERS": "Clear all Filters",
+        "EXTRA-DETAILS": "Extra details",
+        "EDIT-EXTRA-DETAILS": "Edit extra details",
+        "NO-EXTRA-DETAILS": "No extra details are specified for this device",
+        "ADD-EXTRA-DETAILS": "Add extra details",
+        "EXTRA-DETAILS-ADDED": "Extra details was added successfully",
+        "EXTRA-DETAILS-REMOVED": "Extra details was removed successfully",
+        "EXTRA-DETAILS-UPDATED": "Extra details was updated successfully",
+        "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
+        "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
+        "VALID-FROM": "Valid from"
     },
     "DAY": {
         "CURRENT-MONTH": "Current month",
@@ -333,7 +344,8 @@
             "UNKNOWN-ERROR": "Unknown error",
             "INVALID-HOSTNAME": "Hostname is invalid",
             "ID-EXIST": "Id exist",
-            "DUPLICATED-HOSTNAME": "Combination of hostname and port is duplicated"
+            "DUPLICATED-HOSTNAME": "Combination of hostname and port is duplicated",
+            "INVALID-FIELDS": "Input does not meet minimum required amount of characters"
         },
         "EXPRESSION": "Expression",
         "EXTERNAL-ID": "External Id",
@@ -421,13 +433,12 @@
         "HOSTNAME": "Hostname",
         "TIMEZONENAME": "Timezone",
         "FIRSTINSTALLDATE": "Installed",
-        "FIRSTINSTALLEDDATE": "Installed",
         "WARNING": {
             "DUPLICATED": "The IP address you have entered is already in use by another meter!"
         },
         "RELEASE-REQUEST": "Release request (RLRQ) is sent before any other requests are  made towards the meter",
         "USE-LDN": "Use Logical Device Name",
-        "TEMPLATENAME": "Template name",
+        "TEMPLATENAME": "Configuration name",
         "PROTOCOLTYPE": "Protocol",
         "REFERENCINGTYPE": "Short names referencing",
         "COMMUNICATIONTYPE": "Communication type",
@@ -450,7 +461,11 @@
         "SUBJECT": "Subject",
         "REQUEST-ID": "ID",
         "CREATED-AT": "Created at",
-        "REJECTED-GRANTED": "Rejected/granted by"
+        "REJECTED-GRANTED": "Rejected/granted by",
+        "FIRSTINSTALLEDDATE": "Installed",
+        "PROPERTY": "Property",
+        "VALUE": "Value",
+        "DEVICEID": "Guid"
     },
     "GRID": {
         "ACTIVE": "Active",
@@ -543,7 +558,9 @@
         "DATE": "Date",
         "YEAR": "Year",
         "EVERY-YEAR": "Every year",
-        "DAY-EXTERNALID": "Day ID"
+        "DAY-EXTERNALID": "Day ID",
+        "ROWS-PER-PAGE": "Rows per page",
+        "ACTIVE-JOBS": "Active jobs"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -824,7 +841,10 @@
             "EXCEL-TEMPLATE": "Import meters template",
             "DESCRIPTION": "Import device feature enables adding and updating devices via Excel (XSLT) file. Use provided Excel template as the starting point.",
             "DOWNLOAD": "Download"
-        }
+        },
+        "TRANSFORMER-RATIO": "Transformer ratio",
+        "CURRENT-RATIO": "Current ratio",
+        "VOLTAGE-RATIO": "Voltage ratio"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1056,7 +1076,11 @@
         "g3PLC": "G3-PLC",
         "dlms": "DLMS",
         "unknown": "Unknown",
-        "mM_BUS": "MM-BUS"
+        "mM_BUS": "MM-BUS",
+        "G3PLC": "G3-PLC",
+        "DLMS": "DLMS",
+        "UNKNOWN": "Unknown",
+        "MM_BUS": "MM-BUS"
     },
     "TOU-CONFIG": {
         "TOU-ID-ERROR-PATTERN": "TOU ID must include only alphanumeric characters and must be between 1 and 8 in length.",
@@ -1203,5 +1227,9 @@
             "ISSUED": "ISSUED",
             "AUTO_ISSUED": "AUTO ISSUED"
         }
+    },
+    "EXTRA-DETAILS-MODAL": {
+        "TITLE": "Delete extra property",
+        "TEXT": "Are you sure you would like to delete extra property from device"
     }
 }
