@@ -286,8 +286,7 @@
         "DOWNLOAD-CLIENT-CERT": "Kundenzertifikat herunterladen",
         "PROTECT-YOUR-CERT": "Ihr Zertifikat schützen",
         "ENTER-CLIENT-PASSWORD": "Geben Sie das Passwort für das Zertifikat ein",
-        "CLIENT-CERTS-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
-        "CONCENTRATORS-OVERVIEW": ""
+        "CLIENT-CERTS-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut."
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - Seite existiert nicht"
@@ -845,8 +844,7 @@
         },
         "TRANSFORMER-RATIO": "Transformer ratio",
         "CURRENT-RATIO": "Current ratio",
-        "VOLTAGE-RATIO": "Voltage ratio",
-        "METERS-OVERVIEW": ""
+        "VOLTAGE-RATIO": "Voltage ratio"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
