@@ -1,6 +1,7 @@
 {
   "apiServer": {
     "url": "https://192.168.2.181:8083",
+    "fileStorageUrl": "https://192.168.2.181:8083",
     "translationsDebug": false
   },
   "identityServer": {
