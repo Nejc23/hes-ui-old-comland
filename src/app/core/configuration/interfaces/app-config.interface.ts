@@ -1,6 +1,7 @@
 export interface IAppConfig {
   apiServer: {
     url: string;
+    fileStorageUrl?: string;
     translationsDebug: boolean;
   };
   identityServer: {

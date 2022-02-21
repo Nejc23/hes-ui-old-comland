@@ -75,6 +75,9 @@ export class DcuFwUpgradeComponent implements OnInit {
     if (AppConfigService.settings?.apiServer?.url !== '') {
       this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + fwUploadFile;
     }
+    if (AppConfigService.settings?.apiServer?.fileStorageUrl !== '') {
+      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.fileStorageUrl + fwUploadFile;
+    }
     if (this.actionRequest.types[0].toUpperCase() === 'AC750') {
       this.ac750 = true;
     }
