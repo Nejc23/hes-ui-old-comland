@@ -300,12 +300,23 @@ export class ActionButtonsComponent {
 
   // popup
   onScheduleReadJobs(selectedGuid?: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+
     this.plcActionsService.onScheduleReadJobs(params, selectedGuid?.length > 0 ? 1 : this.selectedCount);
   }
 
   onJobsAssignExisting(selectedGuid?: string) {
-    const params = this.plcActionsService.getRequestFilterParam(selectedGuid, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
     this.plcActionsService.onJobsAssignExisting(params, selectedGuid?.length > 0 ? 1 : this.selectedCount);
   }
 

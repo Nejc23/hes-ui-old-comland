@@ -25,6 +25,7 @@ import { CronScheduleComponent } from '../../cron-schedule/components/cron-sched
 import { AddJobParams } from '../../interfaces/add-job-params.interace';
 import { JobTypeEnumeration } from './../../enums/job-type.enum';
 import { AlarmNotificationRulesComponent } from './alarm-notification-rules.component';
+import { IActionRequestParams } from '../../../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-scheduler-job',
@@ -65,6 +66,8 @@ export class SchedulerJobComponent {
 
   jobType: JobTypeEnumeration = JobTypeEnumeration.reading;
   public title = '';
+
+  actionFilters: IActionRequestParams = null;
 
   // alarm notifications
   filter: NotificationFilter;
@@ -332,7 +335,7 @@ export class SchedulerJobComponent {
     this.selectedJobId = selectedJobId;
 
     this.form = this.createForm(job);
-    this.filter = job?.filter;
+    //this.filter = job?.filter;
     this.addresses = job?.addresses;
 
     this.form.get(this.registersProperty).clearValidators();
@@ -366,23 +369,52 @@ export class SchedulerJobComponent {
       }
     }
 
-    const formData: SchedulerJobForm = {
-      registers: this.form.get(this.registersProperty).value,
-      description: this.form.get(this.descriptionProperty).value,
-      devices: this.deviceFiltersAndSearch,
-      active: this.form.get(this.activeProperty).value,
-      jobType: this.jobType,
-      cronExpression: this.cronExpression,
-      startAtDate: this.form.get(this.startAtProperty).value,
-      endAtDate: this.form.get(this.endAtProperty).value,
+    let formData: SchedulerJobForm = null;
+    if (this.actionFilters != null) {
+      formData = this.actionFilters as SchedulerJobForm;
 
-      readingProperties: {
+      (formData.registers = this.form.get(this.registersProperty).value),
+        (formData.description = this.form.get(this.descriptionProperty).value),
+        (formData.devices = this.deviceFiltersAndSearch),
+        (formData.active = this.form.get(this.activeProperty).value),
+        (formData.jobType = this.jobType),
+        (formData.cronExpression = this.cronExpression),
+        (formData.startAtDate = this.form.get(this.startAtProperty).value),
+        (formData.endAtDate = this.form.get(this.endAtProperty).value),
+        (formData.tryFillDevices = true);
+      formData.readingProperties = {
         usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
         iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
         intervalRange: this.form.get(this.intervalRangeProperty).value ? parseInt(this.form.get(this.intervalRangeProperty).value, 10) : 0,
         timeUnit: this.form.get(this.timeUnitProperty).value ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
-      }
-    };
+      };
+    } else {
+      formData = {
+        registers: this.form.get(this.registersProperty).value,
+        description: this.form.get(this.descriptionProperty).value,
+        devices: this.deviceFiltersAndSearch,
+        active: this.form.get(this.activeProperty).value,
+        jobType: this.jobType,
+        cronExpression: this.cronExpression,
+        startAtDate: this.form.get(this.startAtProperty).value,
+        endAtDate: this.form.get(this.endAtProperty).value,
+
+        //TODO: what are the correct values for these?
+        pageSize: 0,
+        pageNumber: 0,
+        sort: [],
+        textSearch: null,
+
+        readingProperties: {
+          usePointer: this.showPointer ? this.form.get(this.usePointerProperty).value : false,
+          iecPushEnabled: this.showIecPush() ? this.form.get(this.iecPushEnabledProperty).value : false,
+          intervalRange: this.form.get(this.intervalRangeProperty).value
+            ? parseInt(this.form.get(this.intervalRangeProperty).value, 10)
+            : 0,
+          timeUnit: this.form.get(this.timeUnitProperty).value ? (this.form.get(this.timeUnitProperty).value as Codelist<number>).id : 0
+        }
+      };
+    }
     return formData;
   }
 
@@ -403,6 +435,10 @@ export class SchedulerJobComponent {
 
   showIecPush() {
     return this.jobType === JobTypeEnumeration.reading;
+  }
+
+  prepareNewJobForDevicesRequest(params: IActionRequestParams) {
+    this.actionFilters = params;
   }
 
   save(addNew: boolean) {
@@ -432,7 +468,7 @@ export class SchedulerJobComponent {
         return;
       }
 
-      values.filter = this.notificationRules.getFilter();
+      //values.filter = this.notificationRules.getFilter();
       values.addresses = this.notificationRules.getAddresses();
       values.jobType = JobTypeEnumeration.alarmNotification;
     }

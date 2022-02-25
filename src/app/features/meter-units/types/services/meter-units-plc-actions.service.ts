@@ -59,7 +59,7 @@ export class MeterUnitsPlcActionsService {
     private translate: TranslateService
   ) {}
 
-  onScheduleReadJobs(params: RequestFilterParams, selectedRowsCount: number) {
+  onScheduleReadJobs(params: IActionRequestParams, selectedRowsCount: number) {
     const options: NgbModalOptions = {
       size: 'xl'
     };
@@ -69,17 +69,12 @@ export class MeterUnitsPlcActionsService {
       const component: SchedulerJobComponent = modalRef.componentInstance;
       modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
       component.setFormAddNew(JobTypeEnumeration.reading, units);
-      component.deviceFiltersAndSearch = {
-        id: params.deviceIds,
-        search: params.search,
-        filter: params.filter,
-        excludeIds: params.excludeIds
-      };
+      component.prepareNewJobForDevicesRequest(params);
       modalRef.result.then().catch(() => {});
     });
   }
 
-  onJobsAssignExisting(params: RequestFilterParams, selectedRowsCount: number) {
+  onJobsAssignExisting(params: IActionRequestParams, selectedRowsCount: number) {
     this.jobsSelectGridService.clearSessionSettingsSelectedRows();
 
     const modalRef = this.modalService.open(PlcMeterJobsAssignExistingComponent);
@@ -668,7 +663,6 @@ export class MeterUnitsPlcActionsService {
       search: null,
       excludeIds: null
     };
-
     // select from row
     if (guid && guid.length > 0) {
       requestParam.deviceIds.push(guid);
