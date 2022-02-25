@@ -4,11 +4,11 @@
     "translationsDebug": false
   },
   "identityServer": {
-    "stsAuthority": "https://is.enerdat.com:5443/sso",
-    "stsAuthorityWeb": "https://is.enerdat.com:5443/reg",
+    "stsAuthority": "https://is.enerdat.com:5444/sso",
+    "stsAuthorityWeb": "https://is.enerdat.com:5444/reg",
     "clientId": "mygridWeb",
     "clientRoot": "https://localhost:4200/",
-    "clientScope": "openid profile roles company segment",
+    "clientScope": "openid profile roles company segment mygridWebApi",
     "clientAutoSilentRenew": true
   }
 }
