@@ -2,7 +2,7 @@
   "name": "myGrid",
   "version": "3.8.1",
   "scripts": {
-    "ng": "ng",    
+    "ng": "ng",
     "start": "node --max_old_space_size=8192 --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --ssl --ssl-key ./resources/ssl/localhost/localhost.key --ssl-cert ./resources/ssl/localhost/localhost.pem ",
     "start-nossl": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve",
     "start-sl": "node --max-http-header-size=100000 ./node_modules/@angular/cli/bin/ng serve --ssl --ssl-key ./resources/ssl/localhost/localhost.key --ssl-cert ./resources/ssl/localhost/localhost.pem --configuration=develop-sl",
@@ -86,6 +86,7 @@
     "@types/lodash": "^4.14.171",
     "angular-cd-timer": "^1.1.0",
     "bootstrap": "^5.0.2",
+    "classlist": "^2.0.0",
     "core-js": "^3.15.2",
     "cron-validate": "^1.4.2",
     "cronstrue": "^1.114.0",

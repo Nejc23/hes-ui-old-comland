@@ -170,8 +170,8 @@ export interface IActionResponseJobsAssignExisting extends IActionResponseParams
 }
 
 export interface IActionRequestParamsAlarms extends IActionRequestParams {
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
 }
 
 export interface IActionRequestSecurityChangePassword extends IActionRequestParams {

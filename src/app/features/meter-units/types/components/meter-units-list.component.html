@@ -7,28 +7,26 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
-      [title]="'Meters overview'"
+      [title]="'PLC-METER.METERS-OVERVIEW'"
       class="tw-h-28 tw-mt-10 tw--m-5"
     >
     </app-page-title>
 
     <div class="tw-mt-10 tw-pr-5 tw-pt-10">
       <div
-        *ngIf="selectedRowsIds.length === 0 &&!selectAllEnabled"
-        class="pe-3">
+        *ngIf="selectedRowsIds.length === 0 &&!selectAllEnabled || this.selectAllEnabled && selectedRowsIds?.length == 0 && getSelectedCount() === 0">
         <button
           (click)="onAdd()"
           [permission]="permissionMuManage"
           appHideIfPermissionUnauthorized
-          class="btn btn-primary me-1"
+          class="btn btn-primary"
           href="javascript:void(0)"
         >
           {{ 'BUTTON.ADD' | translate }}
         </button>
       </div>
       <div
-        *ngIf="selectedRowsIds?.length > 0 || (selectAllEnabled && selectedRowsIds?.length === 0 && getSelectedCount() !== 0) "
-        class="pe-3">
+        *ngIf="selectedRowsIds?.length > 0 || (selectAllEnabled && selectedRowsIds?.length === 0 && getSelectedCount() !== 0)">
         <app-action-buttons [requestModel]="requestModel"
                             [searchColumnNames]="getSearchColumnNames()"
                             [selectedCount]="getSelectedCount()">

@@ -9,6 +9,7 @@ import { ModalConfirmComponent } from '../../../../shared/modals/components/moda
 import { TranslateService } from '@ngx-translate/core';
 import { SecurityRekeyConcentratorComponent } from '../security/security-rekey-concentrator.component';
 import { DownloadDataConcentratorClientCertComponent } from '../download/download-dc-client-cert.component';
+import { DataConcentratorUnitsGridService } from '../../services/data-concentrator-units-grid.service';
 
 export enum OperationType {
   OPERATION = 'OPERATION',
@@ -36,7 +37,12 @@ export class DcOperationsComponent {
   installingStateNotSupportedText = 'DCU.INSTALLING-STATE-NOT-SUPPORTED';
   reKeyDangerMessage = 'DCU.CONCENTRATOR-INOPERABLE-WARNING';
 
-  constructor(private dcOperationsService: DcOperationsService, private modalService: ModalService, private translate: TranslateService) {}
+  constructor(
+    private dcOperationsService: DcOperationsService,
+    private modalService: ModalService,
+    private translate: TranslateService,
+    private dcGridService: DataConcentratorUnitsGridService
+  ) {}
 
   get permissionSynchronizeTime() {
     return PermissionEnumerator.Sync_Time;
@@ -168,7 +174,7 @@ export class DcOperationsComponent {
     if (this.state) {
       params.states = [this.state];
     }
-    if (!this.checkIfNotSupported(params.types)) {
+    if (!this.dcGridService.getSessionSettingsSelectedAll() && !this.checkIfNotSupported(params.types)) {
       const modalRef = this.modalService.open(SecurityRekeyConcentratorComponent);
       let alertText = '';
       if (this.checkIfAC750(params.types)) {
@@ -224,7 +230,8 @@ export class DcOperationsComponent {
   }
 
   checkIfNotSupportedInstalling(states: string[], operationName: string, selectedCount: number, notSupportedText: string) {
-    if (states.length === 1 && states[0].toUpperCase() === 'INSTALLING') {
+    // for select all we do not have rows data (DC state)
+    if (!this.dcGridService.getSessionSettingsSelectedAll() && states.length === 1 && states[0].toUpperCase() === 'INSTALLING') {
       const modalRef = this.modalService.open(ModalConfirmComponent);
       const component: ModalConfirmComponent = modalRef.componentInstance;
       component.withoutCancelButton = true;
@@ -237,7 +244,10 @@ export class DcOperationsComponent {
   }
 
   checkIfStateInstalling(states: string[]) {
-    return states.find((state) => state === 'INSTALLING');
+    if (!this.dcGridService.getSessionSettingsSelectedAll()) {
+      return states.find((state) => state === 'INSTALLING');
+    }
+    return false;
   }
 
   onEnableDC() {

@@ -119,7 +119,6 @@ export class ExtraDetailsComponent implements OnInit {
   }
 
   updateMetadata(event: any) {
-    debugger;
     const body: DeviceMetaDataDto = {
       deviceId: this.deviceId,
       property: event.dataItem.property,

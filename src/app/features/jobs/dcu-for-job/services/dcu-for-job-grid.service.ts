@@ -201,21 +201,7 @@ export class DcuForJobGridService {
   // set excluded rows
   public setSessionSettingsExcludedRows(excludedRow: any) {
     const settings = this.gridSettingsSessionStoreService.getGridSettings(this.sessionNameForGridState);
-    if (!settings.excludedRows) {
-      settings.excludedRows = [];
-    }
-
-    if (excludedRow.selected !== undefined && excludedRow.selected) {
-      if (_.find(settings.excludedRows, (x) => x.concentratorId === excludedRow.data.concentratorId)) {
-        settings.excludedRows = settings.excludedRows.filter((obj) => obj.concentratorId !== excludedRow.data.concentratorId);
-      }
-    } else if (excludedRow.selected !== undefined && !excludedRow.selected) {
-      if (!_.find(settings.excludedRows, (x) => x.concentratorId === excludedRow.data.concentratorId)) {
-        settings.excludedRows.push(excludedRow.data);
-      }
-    } else if (excludedRow.length === 0) {
-      settings.excludedRows = [];
-    }
+    settings.excludedRows = excludedRow;
 
     this.gridSettingsSessionStoreService.setGridSettings(
       this.sessionNameForGridState,

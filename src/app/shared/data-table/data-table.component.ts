@@ -261,6 +261,9 @@ export class DataTableComponent implements OnInit, OnChanges {
   constructor(private modalService: ModalService, private translate: TranslateService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
+    if (this.totalCount === 0) {
+      this.pageNumber = 0;
+    }
     this.searchForm = this.fb.group({
       ['search']: this.searchText
     });
@@ -324,7 +327,6 @@ export class DataTableComponent implements OnInit, OnChanges {
   ngOnChanges(): void {
     // data changed
     this.initGrid();
-
     if (this.selectAllEnabled) {
       // select ALL on next page
       // exclude ids

@@ -155,10 +155,15 @@ export class AlarmsComponent implements OnInit {
         const startRow = that.alarmsListGridService.getCurrentRowIndex(that.selectedPageSize.id).startRow;
         const endRow = that.alarmsListGridService.getCurrentRowIndex(that.selectedPageSize.id).endRow;
 
+        const startDate = new Date(that.form.get(that.startTimeProperty).value);
+        startDate.setMinutes(0, 0, 0);
+        const endDate = new Date(that.form.get(that.endTimeProperty).value);
+        endDate.setMinutes(0, 0, 0);
+
         that.requestModel.pageSize = endRow - startRow;
         that.requestModel.pageNumber = that.alarmsListGridService.getSessionSettingsPageIndex() + 1;
-        that.requestModel.startTime = that.form.get(that.startTimeProperty).value;
-        that.requestModel.endTime = that.form.get(that.endTimeProperty).value;
+        that.requestModel.startTime = startDate;
+        that.requestModel.endTime = endDate;
 
         that.requestModel.sort = that.getSort(paramsRow.request.sortModel);
 
