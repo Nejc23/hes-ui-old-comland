@@ -1,7 +1,8 @@
 import { GridBulkActionRequestParams } from '../helpers/grid-bulk-action-request-params.interface';
 import { RegistersSelectRequest } from '../registers-select/registers-select-request.interface';
+import { IActionRequestParams } from '../../../../../../src/app/core/repository/interfaces/myGridLink/action-prams.interface';
 
-export interface SchedulerJob {
+export interface SchedulerJob extends IActionRequestParams {
   description: string;
 
   startAt?: string;
@@ -16,7 +17,8 @@ export interface SchedulerJob {
   schedules?: Schedule[];
 
   addresses?: string[];
-  filter?: NotificationFilter;
+  tryFillDevices?: boolean;
+  //filter?: NotificationFilter;
 }
 
 export interface NotificationFilter {

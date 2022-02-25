@@ -5,4 +5,5 @@ export interface GridBulkActionRequestParams {
   search?: GridSearchParams[];
   filter?: GridFilterParams;
   excludeIds?: string[];
+  tryFillDevices?: boolean;
 }

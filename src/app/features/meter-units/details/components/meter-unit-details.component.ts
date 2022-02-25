@@ -385,13 +385,13 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   // popup
   onScheduleReadJobs() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam('', this.requestModel, 0, []);
     this.plcActionsService.onScheduleReadJobs(params, 1);
   }
 
   // popup
   onJobsAssignExisting() {
-    const params = this.plcActionsService.getRequestFilterParam(this.deviceId, this.requestModel);
+    const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1, []);
     this.plcActionsService.onJobsAssignExisting(params, 1);
   }
 
