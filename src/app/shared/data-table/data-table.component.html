@@ -62,7 +62,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
           <div (click)="searchIconClicked()"
                [title]="getWildCardToolTipText()"
-               class="tw-flex tw-justify-center" data-placement="top"
+               class="tw-flex tw-justify-center tw-cursor-pointer" data-placement="top"
                data-toggle="tooltip">
             <img [src]="wildCardsImageUrl" class="tw-mx-4 tw-h-4 tw-w-4 tw-flex tw-self-center" />
           </div>
@@ -115,8 +115,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
       <div *ngIf="excelExport || showGridBulkActions" class="tw-flex tw-justify-end tw-w-full tw-place-self-end">
 
-        <div *ngIf="excelExport" class="tw-ml-4">
-          <button icon="fa fa-file-export tw-bg-white tw-text-darkGray" kendoGridExcelCommand type="button">
+        <div *ngIf="excelExport" [title]="'GRID.EXCEL-EXPORT' | translate"
+             class="tw-ml-4"
+             data-placement="top"
+             data-toggle="tooltip">
+          <button
+            icon="fa fa-file-export tw-bg-white tw-text-darkGray"
+            kendoGridExcelCommand
+            type="button">
           </button>
         </div>
 
@@ -137,9 +143,15 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           [autoSync]="true"
           class="small-button column-chooser tw-ml-2"></kendo-grid-column-chooser>
 
-        <div *ngIf="withRefreshButton" class="tw-pl-2">
+        <div *ngIf="withRefreshButton"
+             [title]="'GRID.REFRESH-GRID' | translate"
+             class="tw-pl-2 tw-cursor-pointer"
+             data-placement="top"
+             data-toggle="tooltip">
           <div
-            (click)="refreshButtonClickedEvent()" class="refresh-button border-gray">
+            (click)="refreshButtonClickedEvent()"
+            class="refresh-button border-gray"
+          >
             <img [ngClass]="loading ? 'tw-animate-spin' : ''"
                  src="assets/images/icons/refresh-icon.svg" />
           </div>
@@ -295,7 +307,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                   [title]="iconData.popoverText | translate" class="tw-mr-2 tw-w-4 tw-h-4" data-placement="top"
                   data-toggle="tooltip" />
 
-                <!-- active jobs special case popover with active-jobs -->
+                <!-- active jobs special case popover with active-jobs on meters and DC grid -->
                 <div *ngIf="iconData.field === 'hasActiveJobs'"
                      [ngbPopover]="tipContentNextRead"
                      [placement]="['right-top']" [title]="iconData.popoverText | translate"
@@ -305,7 +317,8 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                   <img [src]="'assets/images/icons/' + iconData.iconName + '.svg'" class="tw-w-4 tw-h-4" />
 
                   <ng-template #tipContentNextRead id="tipContentNextRead">
-                    <app-scheduler-active-jobs [deviceId]="dataItem.deviceId"></app-scheduler-active-jobs>
+                    <app-scheduler-active-jobs
+                      [deviceId]="dataItem.deviceId ?? dataItem.concentratorId"></app-scheduler-active-jobs>
                   </ng-template>
                 </div>
 
@@ -365,8 +378,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         <div class="grid-row-button rows-{{ rowActions.length }} tw-inline-flex">
           <img (click)="onRowActionClick(action.actionName, dataItem.id, dataItem)"
                *ngFor="let action of rowActions"
+               [ngbTooltip]="'GRID.ACTION-' + action.actionName.toUpperCase() | translate " [openDelay]="500"
                [src]="'assets/images/icons/' + action.iconName + '.svg'"
-               class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded" />
+               class="tw-h-6 tw-p-1 hover:tw-bg-lightestGray hover:tw-rounded"
+               container="body"
+               placement="top"
+               triggers="hover" />
         </div>
       </ng-container>
     </ng-template>
@@ -377,13 +394,24 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   <kendo-grid-command-column *ngIf="inlineAddOrEdit">
     <ng-template kendoGridCellTemplate let-dataItem>
       <div class="inline-add-new-icons">
-        <img [src]="'assets/images/icons/inline-close-icon.svg'" class="inline-icon" kendoGridCancelCommand />
-        <img [src]="'assets/images/icons/inline-check-icon.svg'" class="inline-icon" kendoGridSaveCommand />
+        <img [src]="'assets/images/icons/inline-close-icon.svg'"
+             [title]="'GRID.ACTION-CANCEL' | translate"
+             class="inline-icon"
+             data-placement="top" data-toggle="tooltip"
+             kendoGridCancelCommand />
+        <img [src]="'assets/images/icons/inline-check-icon.svg'"
+             [title]="'GRID.ACTION-SAVE' | translate"
+             class="inline-icon"
+             data-placement="top"
+             data-toggle="tooltip" kendoGridSaveCommand />
       </div>
 
       <ng-container *ngIf="dataItem[editFieldById] === editableRowId">
         <div class="inline-edit-icon">
-          <img [src]="'assets/images/icons/inline-check-icon.svg'" class="inline-icon" kendoGridEditCommand />
+          <img [src]="'assets/images/icons/inline-check-icon.svg'"
+               [title]="'GRID.ACTION-SAVE' | translate"
+               class="inline-icon"
+               data-placement="top" kendoGridEditCommand />
         </div>
       </ng-container>
     </ng-template>
@@ -458,10 +486,15 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
           <img [src]="'assets/images/icons/arrow-left-icon.svg'" />
         </button>
 
-        <div class="tw-mx-6 tw-text-darkGray tw-inline-flex">
-          {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }} of
+        <div class="tw-mx-6 tw-text-darkGray tw-inline-flex tw-text-sm">
+          <div>
+            {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }}
+          </div>
+          <div class="tw-mx-1">
+            {{ 'GRID.OF' | translate }}
+          </div>
           <div
-            class="tw-font-bold tw-ml-1 tw-text-black">{{ totalPages }}</div>
+            class="tw-font-bold tw-text-black tw-text-sm">{{ totalPages }}</div>
         </div>
 
         <button (click)="navigateToNextPage()" [disabled]="loading" class="small-button "

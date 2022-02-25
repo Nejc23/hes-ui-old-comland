@@ -2,9 +2,10 @@
      [permissions]="[permissionManageConcentrators && permissionReKey]"
      appHideIfAllPermissionsUnauthorized class="btn-group"
      dropdown>
-  <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="securityDropDown"
-          type="button"><span>{{ 'OPERATION.SECURITY' | translate }}</span></button>
-  <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
+  <button aria-expanded="false" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+    <span>{{ 'OPERATION.SECURITY' | translate }}</span>
+  </button>
+  <div class="dropdown-menu" style="min-width: 10rem">
     <div>
       <a (click)="onReKeyConcentrator()" [permission]="permissionManageConcentrators && permissionReKey"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
@@ -20,9 +21,10 @@
      [permissions]="[permissionSynchronizeTime, permissionFwUpgrade, permissionDeviceDiscovery]"
      appHideIfAllPermissionsUnauthorized class="btn-group"
      dropdown>
-  <button class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" dropdownToggle id="operationsDropDown"
-          type="button"><span>{{ 'OPERATION.OPERATIONS' | translate }}</span></button>
-  <div (click)="$event.stopPropagation();" class="dropdown-menu" style="min-width: 10rem">
+  <button aria-expanded="false" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">
+    <span>{{ 'OPERATION.OPERATIONS' | translate }}</span>
+  </button>
+  <div class="dropdown-menu" style="min-width: 10rem">
     <div>
       <a (click)="onSynchronizeTime()" [permission]="permissionSynchronizeTime"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"

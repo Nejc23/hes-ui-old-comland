@@ -24,7 +24,6 @@ import { MeterUnitsTypeStaticTextService } from '../services/meter-units-type-st
 import {
   ColumnVisibilityChangedEvent,
   GridColumn,
-  GridColumnType,
   GridRowAction,
   LinkClickedEvent,
   PageChangedEvent
@@ -33,7 +32,6 @@ import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-uni
 import { GridResponse } from '../../../../core/repository/interfaces/helpers/grid-response.interface';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { AddMeterUnitFormComponent } from '../../common/components/add-mu-form/add-meter-unit-form.component';
-import { gridSysNameColumnsEnum } from '../../../global/enums/meter-units-global.enum';
 import { EventManagerService } from '../../../../core/services/event-manager.service';
 import { MeterUnitsLayout } from '../../../../core/repository/interfaces/meter-units/meter-units-layout.interface';
 import { FiltersInfo } from '../../../../shared/forms/interfaces/filters-info.interface';
@@ -55,247 +53,6 @@ export class MeterUnitsListComponent implements OnInit {
   filtersOpened = false;
   appliedFiltersFromUser = false;
   selectAllEnabled = false;
-  metersColumns: Array<GridColumn> = [
-    {
-      field: 'icons',
-      translationKey: '',
-      width: 95,
-      sortingDisabled: true,
-      class: 'no-padding',
-      type: GridColumnType.ICONS,
-      iconsData: [
-        {
-          field: gridSysNameColumnsEnum.templateId,
-          iconName: 'warning-red-icon',
-          popoverText: 'GRID.MISSING-TEMPLATE'
-        },
-        {
-          field: gridSysNameColumnsEnum.readyForActivation,
-          iconName: 'hourglass-icon',
-          popoverText: 'GRID.READY-FOR-ACTIVATION'
-        },
-        {
-          field: gridSysNameColumnsEnum.isHls,
-          iconName: 'lock-icon',
-          popoverText: 'GRID.HIGH-LEVEL-SECURITY'
-        },
-        {
-          field: gridSysNameColumnsEnum.hasActiveJobs,
-          iconName: 'clock-icon',
-          popoverText: 'GRID.ACTIVE-JOBS'
-        }
-      ]
-    },
-    {
-      field: gridSysNameColumnsEnum.jobStatus,
-      translationKey: 'GRID.JOB-STATUS',
-      width: 100,
-      type: GridColumnType.JOB_STATUS
-    },
-    {
-      field: gridSysNameColumnsEnum.state,
-      translationKey: 'GRID.STATE',
-      width: 120,
-      type: GridColumnType.BOLD_TEXT
-    },
-    {
-      field: gridSysNameColumnsEnum.protocolType,
-      translationKey: 'GRID.PROTOCOL',
-      width: 80
-    },
-    {
-      field: gridSysNameColumnsEnum.name,
-      translationKey: 'GRID.NAME',
-      width: 200,
-      type: GridColumnType.LINK
-    },
-    {
-      field: gridSysNameColumnsEnum.serialNumber,
-      translationKey: 'GRID.SERIAL-NUMBER',
-      width: 200
-    },
-    {
-      field: gridSysNameColumnsEnum.logicalDeviceName,
-      translationKey: 'GRID.LOGICAL-DEVICE-NAME',
-      width: 200
-    },
-    {
-      field: gridSysNameColumnsEnum.moduleId,
-      translationKey: 'GRID.MODULE-ID',
-      width: 150
-    },
-    {
-      field: gridSysNameColumnsEnum.parent,
-      translationKey: 'GRID.PARENT',
-      width: 200,
-      type: GridColumnType.LINK
-    },
-    {
-      field: gridSysNameColumnsEnum.parametrisationId,
-      translationKey: 'GRID.PARAM-ID',
-      width: 150
-    },
-    {
-      field: gridSysNameColumnsEnum.timeOfUseId,
-      translationKey: 'GRID.TIME-OF-USE-ID',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.vendor,
-      translationKey: 'GRID.VENDOR',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.medium,
-      translationKey: 'GRID.MEDIUM',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.firmware,
-      translationKey: 'GRID.FIRMWARE',
-      width: 140
-    },
-    {
-      field: gridSysNameColumnsEnum.id1,
-      translationKey: 'GRID.ID1',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.id2,
-      translationKey: 'GRID.ID2',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.id3,
-      translationKey: 'GRID.ID3',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.id4,
-      translationKey: 'GRID.ID4',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.id5,
-      translationKey: 'GRID.ID5',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.id6,
-      translationKey: 'GRID.ID6',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.configurationId,
-      translationKey: 'GRID.ID-CONFIGURATION',
-      width: 200
-    },
-    {
-      field: gridSysNameColumnsEnum.disconnectorState,
-      translationKey: 'GRID.DISCONNECTOR-STATE',
-      width: 200,
-      type: GridColumnType.COLORED_ENUM,
-      coloredValues: [
-        {
-          enumValue: 'connected',
-          color: 'green'
-        },
-        {
-          enumValue: 'readyforreconnection',
-          color: 'blue'
-        },
-        {
-          enumValue: 'disconnected',
-          color: 'red'
-        }
-      ]
-    },
-    {
-      field: gridSysNameColumnsEnum.instantValues,
-      translationKey: 'GRID.RELAY',
-      width: 100,
-      type: GridColumnType.INSTANT_VALUES
-    },
-    {
-      field: gridSysNameColumnsEnum.ciiState,
-      translationKey: 'GRID.CII-STATE',
-      width: 100,
-      type: GridColumnType.COLORED_ENUM,
-      coloredValues: [
-        {
-          enumValue: 'on',
-          color: 'green'
-        },
-        {
-          enumValue: 'off',
-          color: 'red'
-        }
-      ]
-    },
-    // {
-    //   field: gridSysNameColumnsEnum.tags,
-    //   translationKey: 'GRID.TAGS',
-    //   width: 100
-    // },
-    {
-      field: gridSysNameColumnsEnum.readStatusTimeStamp,
-      translationKey: 'GRID.READ-STATUS',
-      width: 120
-    },
-    {
-      field: gridSysNameColumnsEnum.limiter1Normal.toLowerCase(),
-      translationKey: 'GRID.LIMITER-1-NORMAL',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    },
-    {
-      field: gridSysNameColumnsEnum.limiter1Emergency.toLowerCase(),
-      translationKey: 'GRID.LIMITER-1-EMERGENCY',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    },
-    {
-      field: gridSysNameColumnsEnum.limiter2Normal.toLowerCase(),
-      translationKey: 'GRID.LIMITER-2-NORMAL',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    },
-    {
-      field: gridSysNameColumnsEnum.limiter2Emergency.toLowerCase(),
-      translationKey: 'GRID.LIMITER-2-EMERGENCY',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    },
-    {
-      field: gridSysNameColumnsEnum.currentL1.toLowerCase(),
-      translationKey: 'GRID.CURRENT-L1',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    },
-    {
-      field: gridSysNameColumnsEnum.currentL2.toLowerCase(),
-      translationKey: 'GRID.CURRENT-L2',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    },
-    {
-      field: gridSysNameColumnsEnum.currentL3.toLowerCase(),
-      translationKey: 'GRID.CURRENT-L3',
-      width: 180,
-      type: GridColumnType.UNIT_WITH_VALUE
-    }
-  ];
-
-  metersRowActionConfiguration: Array<GridRowAction> = [
-    {
-      actionName: 'details',
-      iconName: 'eye-icon'
-    },
-    {
-      actionName: 'registers',
-      iconName: 'chart-icon'
-    }
-  ];
   searchText = '';
   searchFromQueryParams = '';
   // filters
@@ -304,12 +61,14 @@ export class MeterUnitsListComponent implements OnInit {
   statesCodeList = [];
   protocolsCodeList = [];
   appliedFilters;
+  metersColumns: Array<GridColumn> = [];
+  metersRowActionConfiguration: Array<GridRowAction> = [];
   //
 
   wildCardsSearch = false;
   refreshInterval = gridRefreshInterval;
-  // save to BE
   requestModel: GridRequestParams = {
+    excludeIds: [],
     requestId: null,
     startRow: 0,
     endRow: 0,
@@ -329,10 +88,7 @@ export class MeterUnitsListComponent implements OnInit {
   };
 
   id = 0;
-
   meterUnitsTypeGridLayoutStoreKey = 'mu-type-grid-layout';
-
-  // save to be
   meterUnitsTypeGridLayoutStore: MeterUnitsTypeGridLayoutStore = {
     currentPageIndex: 1,
     sortModel: [
@@ -343,7 +99,7 @@ export class MeterUnitsListComponent implements OnInit {
     ],
     pageSize: { id: this.pageSize, value: this.pageSize.toString() },
     searchText: this.searchText,
-    visibleColumns: this.metersColumns.map((column) => column.field),
+    visibleColumns: [],
     searchWildcards: this.wildCardsSearch
   };
 
@@ -395,8 +151,13 @@ export class MeterUnitsListComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.metersColumns = this.meterUnitsTypeGridService.metersColumns;
+    this.metersRowActionConfiguration = this.meterUnitsTypeGridService.metersRowActionConfiguration;
+    this.meterUnitsTypeGridLayoutStore.visibleColumns = this.metersColumns.map((column) => column.field);
     // all visible by default
     this.selectedRowsIds = JSON.parse(localStorage.getItem('selectedRowsIds')) ?? [];
+    this.selectAllEnabled = JSON.parse(localStorage.getItem('selectAllEnabled')) ?? false;
+
     this.metersColumns.map((columns) => (columns.hidden = false));
     // currently we save to session storage since we clear localStorage in authService in saveTokenAndSetUserRights2
     // get layout and load data
@@ -424,7 +185,9 @@ export class MeterUnitsListComponent implements OnInit {
   // get Data from API
   getMetersListData(refreshGrid: boolean = false) {
     this.loading = true;
-
+    if (this.pageNumber === 0) {
+      this.pageNumber++;
+    }
     this.meterUnitsTypeService
       .getGridMeterUnitsForm(
         this.requestModel,
@@ -486,39 +249,6 @@ export class MeterUnitsListComponent implements OnInit {
     }
   }
 
-  // filterChanged(event: FilterChangedEvent) {
-  //   this.pageNumber = 1;
-  //   if (event.field === 'state') {
-  //     const selectedCodeList = this.statesCodeList.find((item) => item.value === event.value);
-  //     if (selectedCodeList) {
-  //       this.requestModel.filterModel = { states: [selectedCodeList] };
-  //     } else {
-  //       this.requestModel.filterModel = { states: [] };
-  //     }
-  //     this.getMetersListData(true);
-  //   }
-  //
-  //   if (event.field === 'protocol') {
-  //     const selectedProtocol = this.protocolsCodeList.find((item) => item.value === event.value);
-  //     if (selectedProtocol) {
-  //       this.requestModel.filterModel = { protocol: [selectedProtocol] };
-  //     } else {
-  //       this.requestModel.filterModel = { protocol: [] };
-  //     }
-  //     this.getMetersListData(true);
-  //   }
-  // }
-
-  // clearFiltersAndSearch(event: boolean) {
-  //   if (event) {
-  //     this.requestModel.filterModel = { states: [] };
-  //     this.requestModel.filterModel = { protocol: [] };
-  //     this.requestModel.searchModel = [{ colId: 'all', type: enumSearchFilterOperators.like, value: '', useWildcards: false }];
-  //     // TODO this.saveUserSettings();
-  //   }
-  //   this.getMetersListData(true);
-  // }
-
   columnVisibilityChanged(event: ColumnVisibilityChangedEvent) {
     this.metersColumns.find((column) => column.field === event.field).hidden = event.hidden;
     this.saveUserSettings();
@@ -546,11 +276,13 @@ export class MeterUnitsListComponent implements OnInit {
   searchData($event: string) {
     this.searchText = $event;
     this.meterUnitsTypeGridService.setSessionSettingsSearchedText($event);
-
+    this.selectAllEnabled = false;
+    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(this.selectAllEnabled);
     this.meterUnitsTypeGridService.setSessionSettingsPageIndex(0);
     this.meterUnitsTypeGridService.setSessionSettingsSelectedRows([]);
     this.meterUnitsTypeGridService.setSessionSettingsExcludedRows([]);
-
+    this.selectedRowsIds = [];
+    this.requestModel.excludeIds = [];
     this.requestModel.searchModel = [
       {
         colId: 'all',
@@ -769,11 +501,11 @@ export class MeterUnitsListComponent implements OnInit {
     if (event) {
       this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(true);
       this.selectAllEnabled = true;
-      localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
-      localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
       this.requestModel.deviceIds = [];
       this.requestModel.excludeIds = [];
-      //this.selectedRowsIds = this.gridData.
+      localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
+      localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
+      localStorage.setItem('excludedIds', JSON.stringify(this.requestModel.excludeIds));
     }
   }
 
@@ -784,8 +516,6 @@ export class MeterUnitsListComponent implements OnInit {
       this.selectedRowsIds = [];
       localStorage.setItem('selectedRowsIds', JSON.stringify(this.selectedRowsIds));
       localStorage.setItem('selectAllEnabled', JSON.stringify(this.selectAllEnabled));
-      // this.requestModel.deviceIds = null;
-      // this.requestModel.excludeIds = [];
     }
   }
 

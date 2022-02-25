@@ -633,8 +633,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   createEventsForm(): FormGroup {
     return this.formBuilder.group({
       [this.registerProperty]: [null],
-      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
-      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startDateProperty]: [moment().subtract(1, 'days').set('minute', 0).set('hours', 0).set('second', 0), Validators.required],
+      [this.endDateProperty]: [moment().set('minute', 0).set('hours', 0).set('second', 0), Validators.required],
       [this.startTimeProperty]: ['00:00'],
       [this.endTimeProperty]: ['00:00']
     });
@@ -645,7 +645,6 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     this.eventsTotal = 0;
     this.selectedStartDate = moment(this.eventsForm.get('startDate').value);
     this.selectedEndDate = moment(this.eventsForm.get('endDate').value);
-
     const startTime = moment(this.selectedStartDate).format(dateServerFormat);
     const endTime = moment(this.selectedEndDate).format(dateServerFormat);
 

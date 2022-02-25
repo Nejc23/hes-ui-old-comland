@@ -1,12 +1,9 @@
 import { HttpRequest } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { capitalize } from 'lodash';
 import { Observable } from 'rxjs';
 import { DcuLayout } from 'src/app/core/repository/interfaces/data-concentrator-units/dcu-layout.interface';
 import { RepositoryService } from 'src/app/core/repository/services/repository.service';
 import { DcuForm, EditDcuForm } from 'src/app/features/data-concentrator-units/interfaces/dcu-form.interface';
-import { filterOperationEnum, filterSortOrderEnum } from 'src/app/features/global/enums/filter-operation-global.enum';
-import { gridSysNameColumnsEnum } from 'src/app/features/global/enums/meter-units-global.enum';
 import { v4 as uuidv4 } from 'uuid';
 import {
   addConcentrator,
@@ -28,6 +25,9 @@ import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
 import { RequestDcuForJob, ResponseDcuForJob } from '../../interfaces/jobs/dcu/dcu-for-job.interface';
 import { IActionRequestDeleteDevice, IActionRequestParams } from '../../interfaces/myGridLink/action-prams.interface';
+import { capitalize } from 'lodash';
+import { gridSysNameColumnsEnum } from '../../../../features/global/enums/dcu-global.enum';
+import { filterOperationEnum, filterSortOrderEnum } from '../../../../features/global/enums/filter-operation-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -38,9 +38,10 @@ export class DataConcentratorUnitsService {
   getGridDcuForm(
     param: GridRequestParams,
     pageIndex: number,
-    visibleColumnNames: string[]
+    visibleColumnNames: string[],
+    pageSize?: number
   ): Observable<GridResponse<DataConcentratorUnitsList>> {
-    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames);
+    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames, pageSize);
     return this.repository.makeRequest(this.getGridDcuRequest(actionRequestParams));
   }
 
@@ -178,11 +179,10 @@ export class DataConcentratorUnitsService {
     return new HttpRequest('POST', removeDcuFromJob, payload as any);
   }
 
-  getActionRequestParams(param: GridRequestParams, pageIndex: number, allVisibleColumns: string[]): IActionRequestParams {
-    const pageSize = param.endRow - param.startRow;
+  getActionRequestParams(param: GridRequestParams, pageNumber: number, allVisibleColumns: string[], pageSize?): IActionRequestParams {
     const requestParam: IActionRequestParams = {
-      pageSize,
-      pageNumber: pageIndex + 1,
+      pageSize: pageSize ?? param.endRow - param.startRow,
+      pageNumber: pageNumber,
       textSearch: {
         value: '',
         propNames: [],
@@ -190,16 +190,14 @@ export class DataConcentratorUnitsService {
       },
       sort: []
     };
+    requestParam.filter = [];
 
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;
       requestParam.textSearch.propNames = allVisibleColumns;
       requestParam.textSearch.useWildcards = param.searchModel[0].useWildcards;
     }
-
-    // create filter object
     if (param.filterModel) {
-      requestParam.filter = [];
       if (param.filterModel.states && param.filterModel.states.length > 0) {
         param.filterModel.states.map((row) =>
           requestParam.filter.push({

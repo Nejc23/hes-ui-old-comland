@@ -11,13 +11,13 @@ import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/
 import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { SchedulerJobComponent } from 'src/app/features/jobs/components/scheduler-job/scheduler-job.component';
 import { ModalConfirmComponent } from 'src/app/shared/modals/components/modal-confirm.component';
-import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
-import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 import { DcuFwUpgradeComponent } from '../common/components/dcu-fw-upgrade.component';
 import { DcOperationTypeEnum } from '../enums/operation-type.enum';
 import { TemplatingService } from '../../../core/repository/services/templating/templating.service';
 import { DataConcentratorUnitsGridService } from './data-concentrator-units-grid.service';
 import { EventManagerService } from '../../../core/services/event-manager.service';
+import { gridSysNameColumnsEnum } from '../../global/enums/dcu-global.enum';
+import { filterOperationEnum, filterSortOrderEnum } from '../../global/enums/filter-operation-global.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -163,28 +163,30 @@ export class DcOperationsService {
       },
       sort: []
     };
-
+    requestParam.filter = [];
     // select from row
     if (guid && guid.length > 0) {
       requestParam.concentratorIds = [];
       requestParam.concentratorIds.push(guid);
-    } else {
-      if (this.dcGridService.getSessionSettingsSelectedAll()) {
-        const excludedRows = this.dcGridService.getSessionSettingsExcludedRows();
-
-        requestParam.pageSize = allItems;
-        requestParam.pageNumber = 1;
-
-        if (requestModel.searchModel && requestModel.searchModel.length > 0 && requestModel.searchModel[0].value.length > 0) {
+    } else if (requestModel) {
+      requestParam.concentratorIds = requestModel.deviceIds;
+      requestParam.excludeIds = requestModel.excludeIds;
+    }
+    if (this.dcGridService.getSessionSettingsSelectedAll()) {
+      requestParam.excludeIds = this.dcGridService.getSessionSettingsExcludedRows().map((rowData) => rowData.concentratorId);
+      requestParam.concentratorIds = [];
+      requestParam.pageSize = allItems;
+      requestParam.pageNumber = 1;
+      // create filter object
+      if (requestModel) {
+        if (requestModel.searchModel[0]?.value?.length > 0) {
           requestParam.textSearch.value = requestModel.searchModel[0].value;
           requestParam.textSearch.propNames = allVisibleColumns;
           requestParam.textSearch.useWildcards = requestModel.searchModel[0].useWildcards;
         }
-
-        // create filter object
         if (requestModel.filterModel) {
           requestParam.filter = [];
-          if (requestModel.filterModel.states && requestModel.filterModel.states.length > 0) {
+          if (requestModel.filterModel?.states && requestModel.filterModel?.states?.length > 0) {
             requestModel.filterModel.states.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.state),
@@ -193,7 +195,7 @@ export class DcOperationsService {
               })
             );
           }
-          if (requestModel.filterModel.types && requestModel.filterModel.types.length > 0) {
+          if (requestModel.filterModel?.types?.length > 0) {
             requestModel.filterModel.types.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.type),
@@ -202,7 +204,7 @@ export class DcOperationsService {
               })
             );
           }
-          if (requestModel.filterModel.tags && requestModel.filterModel.tags.length > 0) {
+          if (requestModel.filterModel?.tags?.length > 0) {
             requestModel.filterModel.tags.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.tags),
@@ -211,7 +213,7 @@ export class DcOperationsService {
               })
             );
           }
-          if (requestModel.filterModel.vendors && requestModel.filterModel.vendors.length > 0) {
+          if (requestModel.filterModel?.vendors?.length > 0) {
             requestModel.filterModel.vendors.map((row) =>
               requestParam.filter.push({
                 propName: capitalize(gridSysNameColumnsEnum.vendor),
@@ -220,8 +222,7 @@ export class DcOperationsService {
               })
             );
           }
-
-          if (requestModel.sortModel && requestModel.sortModel.length > 0) {
+          if (requestModel.sortModel?.length > 0) {
             requestModel.sortModel.map((row) =>
               requestParam.sort.push({
                 propName: capitalize(row.colId),
@@ -231,19 +232,17 @@ export class DcOperationsService {
             );
           }
         }
+      }
+    } else {
+      const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
+      if (selectedRows && selectedRows.length > 0) {
         requestParam.excludeIds = [];
-        excludedRows.map((row) => requestParam.excludeIds.push(row.concentratorId));
-      } else {
-        const selectedRows = this.dcGridService.getSessionSettingsSelectedRows();
-        if (selectedRows && selectedRows.length > 0) {
-          requestParam.concentratorIds = [];
-          requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
-          requestParam.states = [...new Set(selectedRows.map((row) => row.state))];
-          selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
-        }
+        requestParam.types = [...new Set(selectedRows.map((row) => row.type))];
+        requestParam.states = [...new Set(selectedRows.map((row) => row.state))];
+        requestParam.concentratorIds = [];
+        selectedRows.map((row) => requestParam.concentratorIds.push(row.concentratorId));
       }
     }
-
     return requestParam;
   }
 }

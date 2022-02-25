@@ -73,8 +73,19 @@ export class PlcReadRegistersComponent implements OnInit {
   ) {
     this.form = this.createForm();
 
-    const startDateFormatted = moment().subtract(1, 'days').format(environment.dateDisplayFormat);
-    const endDateFormatted = moment().format(environment.dateDisplayFormat);
+    const startDateFormatted = moment()
+      .subtract(1, 'days')
+      .set('hours', 0)
+      .set('minutes', 0)
+      .set('seconds', 0)
+      .set('milliseconds', 0)
+      .format(environment.dateDisplayFormat);
+    const endDateFormatted = moment()
+      .set('hours', 0)
+      .set('minutes', 0)
+      .set('seconds', 0)
+      .set('milliseconds', 0)
+      .format(environment.dateDisplayFormat);
 
     this.form.controls.labelText.setValue(
       startDateFormatted + ' ' + this.form.controls.startTime.value + ' - ' + endDateFormatted + ' ' + this.form.controls.endTime.value
@@ -107,8 +118,11 @@ export class PlcReadRegistersComponent implements OnInit {
 
   createForm(): FormGroup {
     return this.formBuilder.group({
-      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
-      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startDateProperty]: [
+        moment().subtract(1, 'days').set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0),
+        Validators.required
+      ],
+      [this.endDateProperty]: [moment().set('hours', 0).set('minutes', 0).set('second', 0).set('milliseconds', 0), Validators.required],
       [this.startTimeProperty]: ['00:00'],
       [this.endTimeProperty]: ['00:00'],
       [this.searchProperty]: [''],
@@ -165,9 +179,14 @@ export class PlcReadRegistersComponent implements OnInit {
     if (this.noRegisterSelected) {
       return;
     }
-
-    const startDate = moment(this.form.controls.startDate.value, environment.dateDisplayFormat).format(dateServerFormat);
-    const endDate = moment(this.form.controls.endDate.value, environment.dateDisplayFormat).format(dateServerFormat);
+    const startDate = moment(this.form.controls.startDate.value, environment.dateDisplayFormat)
+      .set('seconds', 0)
+      .set('milliseconds', 0)
+      .format(dateServerFormat);
+    const endDate = moment(this.form.controls.endDate.value, environment.dateDisplayFormat)
+      .set('seconds', 0)
+      .set('milliseconds', 0)
+      .format(dateServerFormat);
 
     const values = this.fillData(registerTypes, startDate, endDate);
     const request = this.myGridService.readMeterValues(values);

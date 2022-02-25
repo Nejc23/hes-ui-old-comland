@@ -268,8 +268,11 @@ export class MeterUnitRegistersComponent implements OnInit {
     return this.formBuilder.group({
       [this.registerProperty]: [null],
       [this.rangeProperty]: [null],
-      [this.startDateProperty]: [moment().subtract(1, 'days'), Validators.required],
-      [this.endDateProperty]: [moment(), Validators.required],
+      [this.startDateProperty]: [
+        moment().subtract(1, 'days').set('hours', 0).set('minutes', 0).set('milliseconds', 0),
+        Validators.required
+      ],
+      [this.endDateProperty]: [moment().set('hours', 0).set('minutes', 0).set('milliseconds', 0), Validators.required],
       [this.startTimeProperty]: ['00:00'],
       [this.endTimeProperty]: ['00:00'],
       [this.showLineChartProperty]: [true, null],
@@ -279,9 +282,8 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   showData(register: AutoTemplateRegister, forceRefresh: boolean = false) {
-    const startDate = moment(this.form.get('startDate').value).toDate();
-    const endDate = moment(this.form.get('endDate').value).toDate();
-
+    const startDate = moment(this.form.get('startDate').value).toDate().setHours(0, 0, 0, 0);
+    const endDate = moment(this.form.get('endDate').value).toDate().setHours(0, 0, 0, 0);
     if (!register || !startDate || !endDate) {
       this.isDataFound = false;
       return;
@@ -378,7 +380,7 @@ export class MeterUnitRegistersComponent implements OnInit {
       this.hours = true;
       outData = this.rowData.map((d: EventRegisterValue) => ({
         //timestamp: d.timestamp,
-        timestamp: new Date(d.timestamp).setMinutes(0, 0, 0),
+        timestamp: new Date(d.timestamp).setHours(0, 0, 0),
         value: d.value,
         description: d.description
       }));
