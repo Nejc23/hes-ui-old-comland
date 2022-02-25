@@ -286,7 +286,8 @@
         "DOWNLOAD-CLIENT-CERT": "Scaricare il certificato del cliente",
         "PROTECT-YOUR-CERT": "Proteggere il vostro certificato",
         "ENTER-CLIENT-PASSWORD": "Mettere la password per il certificato",
-        "CLIENT-CERTS-ERROR": "Operazione non riuscita. Si prega di aggiornare la pagina e riprovare.\n"
+        "CLIENT-CERTS-ERROR": "Operazione non riuscita. Si prega di aggiornare la pagina e riprovare.\n",
+        "CONCENTRATORS-OVERVIEW": "Data Concentrators overview"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - la pagina non esiste"
@@ -560,7 +561,18 @@
         "EVERY-YEAR": "Ogni anno",
         "DAY-EXTERNALID": "Giorno ID",
         "ROWS-PER-PAGE": "Rows per page",
-        "ACTIVE-JOBS": "Active jobs"
+        "ACTIVE-JOBS": "Active jobs",
+        "ACTION-DETAILS": "Open details",
+        "ACTION-REGISTERS": "Show registers",
+        "ACTION-DUPLICATE": "Duplicate",
+        "ACTION-EDIT": "Edit",
+        "ACTION-DELETE": "Delete",
+        "ACTION-REJECT": "Reject",
+        "ACTION-GRANT": "Grant",
+        "ACTION-SETTINGS": "Settings",
+        "ACTION-RUNJOB": "Run job",
+        "ACTION-SAVE": "Save",
+        "ACTION-CANCEL": "Cancel"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -844,7 +856,8 @@
         },
         "TRANSFORMER-RATIO": "Transformer ratio",
         "CURRENT-RATIO": "Current ratio",
-        "VOLTAGE-RATIO": "Voltage ratio"
+        "VOLTAGE-RATIO": "Voltage ratio",
+        "METERS-OVERVIEW": "Meters overview"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
