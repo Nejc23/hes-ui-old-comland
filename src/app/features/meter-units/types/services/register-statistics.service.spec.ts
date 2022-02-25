@@ -16,12 +16,12 @@ describe('RegisterStatisticsService', () => {
   });
 
   it('should return null', () => {
-    const registerStatistics = service.getRegisterStatistics([]);
+    const registerStatistics = service.getRegisterStatistics([], false);
     expect(registerStatistics).toBeNull();
   });
 
   it('should create and compute RegisterStatistics', () => {
-    const registerStatistics = service.getRegisterStatistics(registerData);
+    const registerStatistics = service.getRegisterStatistics(registerData, false);
     expect(registerStatistics).toBeTruthy();
     expect(registerStatistics.averageValue).toBe(104.94725);
     expect(registerStatistics.maxValue).toBeTruthy();
