@@ -4,13 +4,19 @@
 </div>
 
 <div *ngIf="this.data?.maxValue" class="card bg-light shadow mb-3 border-0">
-  <div [innerHTML]="'PLC-METER.MAX-VALUE-RECORDED' | translate:{timestamp: this.data.maxValue.timestamp | formatDateTime}"
-       class="text-black-50 pt-2 ps-2 small"></div>
-  <div class="display-3 p-2 text-center">{{this.data.maxValue.valueWithUnit.value }}</div>
+  <div
+    [innerHTML]="'PLC-METER.MAX-VALUE-RECORDED' | translate:{timestamp: this.data.maxValue.timestamp | formatDateTime}"
+    class="text-black-50 pt-2 ps-2 small"></div>
+  <div *ngIf="!showNormalizedValues" class="display-3 p-2 text-center">{{this.data.maxValue.valueWithUnit.value }}</div>
+  <div *ngIf="showNormalizedValues"
+       class="display-3 p-2 text-center">{{this.data.maxValue.normValueWithUnit.value }}</div>
 </div>
 
 <div *ngIf="this.data?.maxValue" class="card bg-light shadow mb-3 border-0">
-  <div [innerHTML]="'PLC-METER.MIN-VALUE-RECORDED' | translate:{timestamp: this.data.minValue.timestamp | formatDateTime}"
-       class="text-black-50 pt-2 ps-2 small"></div>
-  <div class="display-3 p-2 text-center">{{this.data.minValue.valueWithUnit.value }}</div>
+  <div
+    [innerHTML]="'PLC-METER.MIN-VALUE-RECORDED' | translate:{timestamp: this.data.minValue.timestamp | formatDateTime}"
+    class="text-black-50 pt-2 ps-2 small"></div>
+  <div *ngIf="!showNormalizedValues" class="display-3 p-2 text-center">{{this.data.minValue.valueWithUnit.value }}</div>
+  <div *ngIf="showNormalizedValues"
+       class="display-3 p-2 text-center">{{this.data.minValue.normValueWithUnit.value }}</div>
 </div>

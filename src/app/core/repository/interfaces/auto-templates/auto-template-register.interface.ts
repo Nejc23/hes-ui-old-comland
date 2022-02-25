@@ -5,4 +5,5 @@ export interface AutoTemplateRegister {
   registerGroupId?: string;
   type?: string;
   categorization?: string;
+  normalizationMode?: string; // (DoNotNormalize = 0 or Normalize = 1)
 }

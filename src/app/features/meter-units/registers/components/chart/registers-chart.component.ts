@@ -13,6 +13,7 @@ export class RegistersChartComponent {
   @Input() public categories: Date[];
   @Input() public chartData: any[][];
   @Input() public unit = '';
+  @Input() showNormalizedData = false;
 
   public dateFormats;
 

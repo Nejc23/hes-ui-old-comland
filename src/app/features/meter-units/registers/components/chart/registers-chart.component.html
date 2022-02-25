@@ -2,31 +2,35 @@
   <kendo-chart-title></kendo-chart-title>
   <kendo-chart-category-axis baseUnit="hours">
     <kendo-chart-category-axis-item [categories]="categories" [maxDivisions]="20">
-      <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats" culture="en-US"> </kendo-chart-category-axis-item-labels>
+      <kendo-chart-category-axis-item-labels [dateFormats]="dateFormats"
+                                             culture="en-US"></kendo-chart-category-axis-item-labels>
     </kendo-chart-category-axis-item>
   </kendo-chart-category-axis>
   <kendo-chart-value-axis>
     <kendo-chart-value-axis-item>
-      <kendo-chart-value-axis-item-labels [content]="labelContent"> </kendo-chart-value-axis-item-labels>
+      <kendo-chart-value-axis-item-labels [content]="labelContent"></kendo-chart-value-axis-item-labels>
     </kendo-chart-value-axis-item>
   </kendo-chart-value-axis>
   <kendo-chart-series>
     <kendo-chart-series-item
       *ngFor="let chartDataItem of chartData"
       [data]="chartDataItem"
+      [field]="showNormalizedData ? 'normValueWithUnit.value' : 'valueWithUnit.value'"
       [highlight]="{ markers: { border: { width: 0 } } }"
-      [markers]="{ size: 4 }"
-      field="valueWithUnit.value"
       [margin]="0"
+      [markers]="{ size: 4 }"
       [padding]="0"
-      type="line"
       [width]="1"
+      type="line"
     >
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem">
           <div style="text-align: center">
             <div class="text-black-50 small">{{ dataItem.timestamp | formatDateTime }}</div>
-            <div>{{ dataItem.valueWithUnit?.value }} {{ dataItem.valueWithUnit?.unit }}</div>
+            <div
+              *ngIf="!showNormalizedData">{{ dataItem.valueWithUnit?.value }} {{ dataItem.valueWithUnit?.unit }}</div>
+            <div
+              *ngIf="showNormalizedData">{{ dataItem.normValueWithUnit?.value }} {{ dataItem.normValueWithUnit?.unit }}</div>
             <div>{{ dataItem.status }}</div>
           </div>
         </ng-template>
