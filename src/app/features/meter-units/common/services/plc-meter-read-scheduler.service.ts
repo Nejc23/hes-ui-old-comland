@@ -17,7 +17,7 @@ export class PlcMeterReadScheduleService {
       registers: values.registers,
 
       readingProperties: values.readingProperties,
-
+      deviceIds: values.deviceIds,
       active: values.active,
       jobType: values.jobType,
 
