@@ -181,9 +181,9 @@ export class MeterUnitRegistersComponent implements OnInit {
   changeRegisterOptionId() {
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
+    this.normalizedValues = false;
     this.isRegisterSelected = true;
-    this.normalizedValues = selectedRegister.normalizationMode === 'normalize';
-    if (this.normalizedValues) {
+    if (selectedRegister.normalizationMode === 'normalize') {
       this.showNormalizedValues = true;
     }
     this.showStatistics = selectedRegister.categorization !== 'INSTANTANEOUS_VALUE';
