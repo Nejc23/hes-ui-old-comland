@@ -18,18 +18,18 @@ export interface GridRequestParams {
 }
 
 export interface GridFilterParams {
-  states: Codelist<number>[];
+  states?: Codelist<number>[];
   types?: number[];
-  tags: Codelist<number>[];
+  tags?: Codelist<number>[];
   vendors?: Codelist<number>[];
-  readStatus: ReadStatus;
+  readStatus?: ReadStatus;
   firmware?: Codelist<number>[];
   disconnectorState?: Codelist<number>[];
   ciiState?: Codelist<number>[];
   showChildInfoMBus?: boolean;
   showWithoutTemplate?: boolean;
   readyForActivation?: boolean;
-  showOptionFilter: Codelist<number>[];
+  showOptionFilter?: Codelist<number>[];
   protocol?: Codelist<number>[];
   medium?: Codelist<number>[];
 }

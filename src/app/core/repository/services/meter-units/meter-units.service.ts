@@ -16,7 +16,7 @@ import {
   meterUnitsLayout,
   removeMeterUnitsFromJob,
   touConfigImport,
-  validateIpAddress
+  validateHostname
 } from '../../consts/meter-units.const';
 import { GridRequestParams } from '../../interfaces/helpers/grid-request-params.interface';
 import { GridResponse } from '../../interfaces/helpers/grid-response.interface';
@@ -26,7 +26,7 @@ import { MeterUnitsLayout } from '../../interfaces/meter-units/meter-units-layou
 import { MeterUnitsList } from '../../interfaces/meter-units/meter-units-list.interface';
 import { MeterUnitsTouConfigImport } from '../../interfaces/meter-units/meter-units-tou-config-import.interface';
 import { MuUpdatePlcRequest, MuUpdateRequest } from '../../interfaces/meter-units/mu-update-request.interface';
-import { ValidateIpAddressRequest } from '../../interfaces/meter-units/validate-ip-address-request';
+import { ValidateMeterHostnameRequest } from '../../interfaces/meter-units/validate-ip-address-request';
 import { OnDemandRequestData } from '../../interfaces/myGridLink/myGridLink.interceptor';
 import { filterSortOrderEnum } from './../../../../features/global/enums/filter-operation-global.enum';
 import { getDevice, getMeters, muCreate, muUpdate } from './../../consts/meter-units.const';
@@ -37,14 +37,18 @@ import { IActionRequestParams } from './../../interfaces/myGridLink/action-prams
   providedIn: 'root'
 })
 export class MeterUnitsService {
+  return;
+  requestParam;
+
   constructor(private repository: RepositoryService) {}
 
   getGridMeterUnitsForm(
     param: GridRequestParams,
     pageIndex: number,
+    pageSize: number,
     visibleColumnNames: string[]
   ): Observable<GridResponse<MeterUnitsList>> {
-    const actionRequestParams = this.getActionRequestParams(param, pageIndex, visibleColumnNames);
+    const actionRequestParams = this.getActionRequestParams(param, pageIndex, pageSize, visibleColumnNames);
     return this.repository.makeRequest(this.getGridMeterUnitsRequest(actionRequestParams));
   }
 
@@ -149,7 +153,7 @@ export class MeterUnitsService {
       driver: 2, // DLMS
       medium: 1, // ELECTRICITY
       jobIds: payload.jobIds,
-      ip: payload.ip,
+      hostname: payload.hostname,
       port: payload.port,
       referencingType: payload.referencingType,
       advancedInformation: {
@@ -197,7 +201,7 @@ export class MeterUnitsService {
     const muRequest: MuUpdateRequest = {
       name: payload.name,
       manufacturer: payload.manufacturer?.id,
-      ip: payload.ip,
+      hostname: payload.hostname,
       port: payload.port,
       serialNumber: payload.serialNumber,
       templateId: payload.template?.id ? payload.template?.id : null,
@@ -266,24 +270,24 @@ export class MeterUnitsService {
     return new HttpRequest('PUT', `${muUpdate}/${deviceId}`, payload as any);
   }
 
-  validateIpAddress(ipAddress: string, deviceId: string, interfaceType: number): Observable<string> {
-    const request: ValidateIpAddressRequest = {
-      ipAddress: ipAddress,
+  validateHostname(hostname: string, port: number, deviceId: string, interfaceType: number): Observable<string> {
+    const request: ValidateMeterHostnameRequest = {
+      hostname: hostname,
+      port: port,
       deviceId: deviceId,
       interfaceType: interfaceType
     };
-    return this.repository.makeRequest(this.validateIpAddressRequest(request));
+    return this.repository.makeRequest(this.validateHostnameRequest(request));
   }
 
-  validateIpAddressRequest(request: ValidateIpAddressRequest): HttpRequest<any> {
-    return new HttpRequest('POST', validateIpAddress, request);
+  validateHostnameRequest(request: ValidateMeterHostnameRequest): HttpRequest<any> {
+    return new HttpRequest('POST', validateHostname, request);
   }
 
-  getActionRequestParams(param: GridRequestParams, pageIndex: number, visibleColumnNames: string[]): IActionRequestParams {
-    const pageSize = param.endRow - param.startRow;
+  getActionRequestParams(param: GridRequestParams, pageIndex: number, pageSize: number, visibleColumnNames: string[]) {
     const requestParam: IActionRequestParams = {
       pageSize,
-      pageNumber: pageIndex + 1,
+      pageNumber: pageIndex,
       textSearch: {
         value: '',
         propNames: [],
@@ -292,8 +296,8 @@ export class MeterUnitsService {
       sort: []
     };
 
-    requestParam.pageSize = param.endRow - param.startRow;
-    requestParam.pageNumber = pageIndex + 1;
+    requestParam.pageSize = pageSize;
+    requestParam.pageNumber = pageIndex;
 
     if (param.searchModel && param.searchModel.length > 0 && param.searchModel[0].value.length > 0) {
       requestParam.textSearch.value = param.searchModel[0].value;

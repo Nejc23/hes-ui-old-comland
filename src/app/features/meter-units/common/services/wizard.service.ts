@@ -25,7 +25,7 @@ export class TouWizardService {
     {
       item: 'basic',
       stepIndex: 1,
-      label: 'TOU-CONFIG.BASIC',
+      label: 'TOU-CONFIG.BASICS',
       enabled: true,
       completed: false,
       url: '/configuration/importTouConfiguration/wizard/basic'
@@ -94,6 +94,17 @@ export class TouWizardService {
         currentItem.completed = step.completed;
       }
     });
+
+    this.eventsService.getCustom('EnableAllWizardSteps').subscribe(() => {
+      this.menuItems.map((x) => {
+        // All steps are clickable in the Wizard step list
+        x.enabled = true;
+        // All steps but the last two get the green check mark
+        if (x.stepIndex < 5) {
+          x.completed = true;
+        }
+      });
+    });
   }
 
   setCurrentStep(step: StepModel): void {
@@ -111,7 +122,7 @@ export class TouWizardService {
   moveToNextStep(): void {
     const index = this.currentStepEvent.value.stepIndex;
     const currentItem = this.menuItems.find((data) => data.stepIndex === index);
-    currentItem.completed = true; // set to completed
+    currentItem.completed = currentItem.stepIndex < 5;
 
     if (index < this.stepsEvent.value.length) {
       this.currentStepEvent.next(this.stepsEvent.value[index]);

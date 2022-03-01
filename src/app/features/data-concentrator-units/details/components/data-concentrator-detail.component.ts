@@ -21,7 +21,13 @@ import { DcuForm } from '../../interfaces/dcu-form.interface';
 import { icon, latLng, marker, tileLayer } from 'leaflet';
 import { brand } from 'src/environments/brand/default/brand';
 import { MiniCardItemType } from '../../../../shared/mini-card-item/mini-card-item.component';
-import { GridColumn, GridColumnType, GridFilter, GridRowAction } from '../../../../shared/data-table/data-table.component';
+import {
+  GridColumn,
+  GridColumnType,
+  GridFilter,
+  GridRowAction,
+  PageChangedEvent
+} from '../../../../shared/data-table/data-table.component';
 import { MeterUnitsService } from '../../../../core/repository/services/meter-units/meter-units.service';
 import { IActionRequestParams } from '../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 import { MeterUnitsList } from '../../../../core/repository/interfaces/meter-units/meter-units-list.interface';
@@ -33,7 +39,6 @@ import { RegistersFilter } from '../../../meter-units/registers/interfaces/data-
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { EventsByTimestamp } from '../../../meter-units/registers/interfaces/events-processing.interface';
 import { EventRegisterValue } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
-import { PageChangeEvent } from '@progress/kendo-angular-grid';
 import { JobsService } from '../../../../core/repository/services/jobs/jobs.service';
 import { ModalConfirmComponent } from '../../../../shared/modals/components/modal-confirm.component';
 import { ToastNotificationService } from '../../../../core/toast-notification/services/toast-notification.service';
@@ -61,6 +66,7 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
   saveError: string;
   edit = false;
   public credentialsVisible = false;
+  public routerLinkUrl = '/dataConcentratorUnits';
   concentratorId = '';
   data: DataConcentratorUnit;
   dcuStatuses$: Observable<Codelist<number>[]>;
@@ -350,7 +356,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
         this.editForm = this.createEditForm();
         this.eventsForm = this.createEventsForm();
 
-        this.credentialsVisible = this.data && (this.data.typeId === 2 || this.data.typeId === 3);
+        // Credentials are visible just for AC750
+        this.credentialsVisible = this.data && this.data.typeId === 2;
         this.setCredentialsControls(this.credentialsVisible);
 
         this.loadGridData(this.metersGridPageNumber);
@@ -740,7 +747,8 @@ export class DataConcentratorDetailComponent implements OnInit, OnDestroy {
     return diff / (1000 * 3600 * 24);
   }
 
-  loadMoreItems(event: PageChangeEvent) {
+  loadMoreItems(event: PageChangedEvent) {
+    // load more data for virtual scrolling, always increase page on data load
     this.loadGridData(this.metersGridPageNumber + 1);
   }
 

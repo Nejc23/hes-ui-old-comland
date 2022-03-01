@@ -31,4 +31,5 @@ export interface MeterUnitsList {
   ciiState: string;
   serialNumber: string;
   instantValues?: InstantValue[];
+  protocolType: string;
 }

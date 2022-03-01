@@ -115,6 +115,7 @@ import { TouConfigBasicComponent } from '../features/meter-units/common/componen
 import { TouConfigListComponent } from '../features/meter-units/common/components/plc-meter-tou-config/tou-config-list/tou-config-list.component';
 import { AddTimeUnitComponent } from '../features/meter-units/common/components/plc-meter-tou-config/add-time-unit/add-time-unit.component';
 import { LabelModule } from '@progress/kendo-angular-label';
+import { DownloadDataConcentratorClientCertComponent } from '../features/data-concentrator-units/components/download/download-dc-client-cert.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -208,8 +209,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSpecialDaysComponent,
     TouConfigSummaryComponent,
     TouConfigListComponent,
-    AddTimeUnitComponent,
-    ImportDevicesComponent
+    AddTimeUnitComponent
   ],
   imports: [
     CommonModule,
@@ -335,6 +335,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SlideOutComponentComponent,
     NoDataComponent,
     SecurityRekeyConcentratorComponent,
+    DownloadDataConcentratorClientCertComponent,
     ShowMoreComponent,
     LabelWithSwitchComponent,
     ImportDevicesComponent,
@@ -346,8 +347,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TouConfigSpecialDaysComponent,
     TouConfigSummaryComponent,
     TouConfigListComponent,
-    AddTimeUnitComponent,
-    ImportDevicesComponent
+    AddTimeUnitComponent
   ],
   entryComponents: [
     ModalConfirmComponent,
@@ -382,6 +382,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlarmNotificationRulesComponent,
     PlcReadRegistersComponent,
     SecurityRekeyConcentratorComponent,
+    DownloadDataConcentratorClientCertComponent,
     ImportDevicesComponent
   ],
   providers: [AgGridSharedFunctionsService]

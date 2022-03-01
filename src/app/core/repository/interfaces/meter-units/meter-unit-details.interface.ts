@@ -11,7 +11,7 @@ export interface MeterUnitDetails {
   driver: string;
   protocolType: string;
   manufacturer: string;
-  ip: string;
+  hostname: string;
   port: number;
   deviceState: DeviceState;
   stateId: number;
@@ -20,11 +20,13 @@ export interface MeterUnitDetails {
   advancedInformation: MuAdvancedInformation;
   referencingType: ReferenceType;
   externalId?: string;
+  firstInstallDate: Date;
 }
 
 export enum DeviceState {
   OPERATIONAL = 'operational',
   INSTALLING = 'installing',
   DISABLED = 'disabled',
-  DRAFT = 'draft' // for TOU
+  DRAFT = 'draft', // for TOU
+  EDIT = 'edit' // for TOU
 }

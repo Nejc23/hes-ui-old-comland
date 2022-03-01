@@ -1,0 +1,38 @@
+<app-modal-template (dismiss)="onDismiss()">
+
+  <div class="modal-warning">
+    <img [src]="'assets/images/icons/warning-icon.svg'" class="me-3" />
+  </div>
+  <div [innerHTML]="'DCU.PROTECT-YOUR-CERT' | translate" modal-header></div>
+  <div modal-body>
+    <ng-container>
+      <div class="form-row">
+        <div class="col-12">
+          <span>{{ 'DCU.ENTER-CLIENT-PASSWORD' | translate }}</span>
+        </div>
+        <div  class="col-12 pt-2">
+          <app-input-text [form]="form" [property]="'password'" [inputType]="'password'" label="password"></app-input-text>
+        </div>
+        <div *ngIf="alertText" class="col-12 pt-2">
+          <div class="alert alert-danger" role="alert">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span class="text-danger tw-pt-3">{{ alertText | translate }}</span>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div modal-footer>
+    <div class="d-flex justify-content-end">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
+      </button>
+      <div class="btn-group dropdown">
+        <button (click)="onConfirm()" class="btn btn-primary" type="submit"  [disabled]=!this.form.valid>
+          <span>{{ 'BUTTON.CONFIRM' | translate }}</span></button>
+      </div>
+    </div>
+  </div>
+
+</app-modal-template>

@@ -2,7 +2,7 @@
 
   <label *ngIf="label" [attr.for]="property">
     <ng-container *ngIf="label !== ' '; else blank">
-      {{ 'FORM.' + label.toUpperCase() | translate }}
+      {{ 'FORM.' + label.toUpperCase() | translate }}:
     </ng-container>
     <ng-template #blank>
       {{ '&nbsp;' }}
@@ -14,6 +14,7 @@
   <div [ngClass]="{'d-flex': !noFlex}">
     <kendo-numerictextbox
       (valueChange)="onChange($event)"
+      (blur)="onBlur()"
       [decimals]="decimals"
       [formControlName]="property"
       [format]="format"

@@ -1,17 +1,24 @@
-<div class="tw-p-10 tw-pr-0">
-  <app-add-time-unit [title]="'Season tables'"
-                     [type]="timeUnitEnum"
-                     [units]="season.units"
-                     [weeks]="weeksCodeList">
-  </app-add-time-unit>
-</div>
+<div class="tou-units-layout">
+
+  <div class="tou-units-content">
+    <app-add-time-unit [title]="'Season tables'"
+                       [type]="timeUnitEnum"
+                       [units]="seasons.units"
+                       [weeks]="weeksCodeList"
+                       (hasUnsavedChanges)="unsavedChangesEvent($event)">
+    </app-add-time-unit>
+  </div>
 
 
-<div class="buttons-bottom-container">
-  <button (click)="previousStep()"
-          class="btn btn-primary tw-ml-5">< {{ 'TOU-CONFIG.WEEK-TABLES' | translate }}
-  </button>
-  <button (click)="nextStep()" [disabled]="!isValid() || invalidForm"
-          class="btn btn-primary">{{ 'TOU-CONFIG.SPECIAL-DAYS' | translate }} >
-  </button>
+  <div class="tou-units-buttons-container">
+
+    <div class="tou-units-buttons">
+      <button (click)="previousStep()"
+              class="btn btn-primary">< {{ 'TOU-CONFIG.WEEK-TABLES' | translate }}
+      </button>
+      <button (click)="nextStep()" [disabled]="!isValid() || invalidForm"
+              class="btn btn-primary">{{ 'TOU-CONFIG.SPECIAL-DAYS' | translate }} >
+      </button>
+    </div>
+  </div>
 </div>

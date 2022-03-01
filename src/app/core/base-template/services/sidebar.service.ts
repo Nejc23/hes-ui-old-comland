@@ -4,6 +4,7 @@ import { ConfigurationRoute } from 'src/app/shared/base-template/enums/configura
 import { PermissionEnumerator } from '../../permissions/enumerators/permission-enumerator.model';
 import { AppConfigService } from '../../configuration/services/app-config.service';
 import { TranslateService } from '@ngx-translate/core';
+import { AdministrationRoute } from '../../../shared/base-template/enums/administration.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -106,6 +107,13 @@ export class SidebarService {
             hasChildren: false,
             children: [],
             permission: PermissionEnumerator.Manage_Access_Permissions
+          },
+          {
+            title: this.translate.instant('MENU.VAULT-ACCESS'),
+            routeLink: `/${AdministrationRoute.administration}/vaultAccess`,
+            hasChildren: false,
+            children: [],
+            permission: PermissionEnumerator.Vault_Access_Grants
           }
         ]
       }

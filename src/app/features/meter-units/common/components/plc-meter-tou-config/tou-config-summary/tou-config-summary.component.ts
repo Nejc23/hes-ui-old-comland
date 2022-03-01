@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { TouWizardService } from '../../../services/wizard.service';
-import { TouConfigService, TouConfigurationClient } from '../../../services/tou-config.service';
 import { Router } from '@angular/router';
+import { TouConfigurationClient } from 'src/app/models/tou-configuration/TouConfigurationClient';
+import { TouConfigService } from '../../../services/tou-config.service';
 
 @Component({
   selector: 'app-tou-config-summary',
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class TouConfigSummaryComponent implements OnInit {
   touConfiguration: TouConfigurationClient;
 
-  constructor(private wizardService: TouWizardService, private touConfig: TouConfigService, private router: Router) {}
+  constructor(private touConfig: TouConfigService, private router: Router) {}
 
   ngOnInit(): void {
     this.touConfiguration = this.touConfig.getTouConfig();

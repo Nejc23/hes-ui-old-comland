@@ -4,43 +4,41 @@
     <app-page-title
       (backButtonClickedEvent)="goBack()"
       [backButton]="!isList()"
+      [state]="isList() ? null : isCreateMode() ? DeviceStateEnum.DRAFT : DeviceStateEnum.EDIT"
       [title]="isList() ? 'TOU-CONFIG.TOU-CONFIGURATIONS' : getTitle() ? getTitle() : 'MENU.TOU-CONFIGURATION'"
       class="tw-mt-10 tw--m-5"
     >
     </app-page-title>
 
     <div class="tw-mt-14 tw-pr-5">
-
       <ng-container *ngIf="isList()">
-        <button (click)="openImportModal()"
-                class="btn text-secondary btn-outline tw-mr-3" type="button">
+        <button (click)="openImportModal()" class="btn text-secondary btn-outline tw-mr-3" type="button">
           <i class="far fa-arrow-to-top"></i>
           {{ 'BUTTON.IMPORT' | translate }}
         </button>
 
-        <button (click)="openWizard()"
-                class="btn btn-primary" type="button">
+        <button (click)="openWizard()" class="btn btn-primary" type="button">
           {{ 'BUTTON.ADD' | translate }}
         </button>
 
       </ng-container>
 
       <ng-container *ngIf="!isList()">
-        <button (click)="navigateToList()" class="btn text-secondary btn-outline tw-mr-4"
-                type="button"> {{'BUTTON.DISCARD' | translate }}
+        <button (click)="navigateToList()" class="btn text-secondary btn-outline" type="button">
+          {{ (isCreateMode() ? 'BUTTON.DISCARD' : 'BUTTON.CLOSE') | translate }}
         </button>
 
-        <button (click)="saveTouConfig()"
-                *ngIf="isSummary()"
-                [disabled]="!isValid()"
-                class="btn btn-primary" type="button">
-          {{'BUTTON.SAVE' | translate }}
+        <button
+          (click)="saveTouConfig()"
+          *ngIf="isSummary() && isCreateMode()"
+          [disabled]="!isValid()"
+          class="btn btn-primary"
+          type="button"
+        >
+          {{ 'BUTTON.SAVE' | translate }}
         </button>
-
       </ng-container>
-
     </div>
-
   </div>
 </div>
 

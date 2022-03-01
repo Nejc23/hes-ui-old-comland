@@ -28,7 +28,9 @@ export class CardItemComponent implements OnInit, OnChanges {
   @Input() paginationLimit;
   @Input() contentClass = '';
   @Output() buttonClickEvent = new EventEmitter<boolean>();
-
+  @Input() keyValueData = []; // data from response
+  @Input() keyValueFields = []; // select fields for label: and value
+  @Input() showMoreOpened = false;
   // TODO MODEL
   @Input() meterUnitData = [];
   @Input() tags = [];
@@ -108,9 +110,6 @@ export class CardItemComponent implements OnInit, OnChanges {
         center: latLng(this.latLang[0], this.latLang[1])
       };
     }
-    if (this.showMoreButton) {
-      this.initLimit = this.paginationLimit;
-    }
   }
 
   ngOnChanges() {
@@ -125,15 +124,30 @@ export class CardItemComponent implements OnInit, OnChanges {
       });
       if (!this.showMoreButton) {
         this.initLimit = this.controls.length;
+      } else {
+        this.initLimit = this.paginationLimit;
+      }
+    }
+    if (this.showMoreButton && this.keyValueFields.length > 0) {
+      if (!this.showMoreOpened) {
+        this.initLimit = this.paginationLimit;
+      } else {
+        this.paginationLimit = this.keyValueData.length;
       }
     }
   }
 
   showMoreItems() {
-    this.paginationLimit = this.controls.length;
+    this.showMoreOpened = true;
+    if (this.keyValueData.length > 0) {
+      this.paginationLimit = this.keyValueData.length;
+    } else {
+      this.paginationLimit = this.controls.length;
+    }
   }
 
   showLessItems() {
+    this.showMoreOpened = false;
     this.paginationLimit = this.initLimit;
   }
 

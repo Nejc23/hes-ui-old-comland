@@ -6,17 +6,17 @@
   padding: 9px 16px;
   height: 34px;
   border-radius: 32px;
-  color: #6F7072;
-  border: 1px solid #A9ABAF;
+  margin-bottom: 8px;
+  color: #6f7072;
+  border: 1px solid #a9abaf;
 
-  // todo primary, variables ..
-  &.violet {
+  &.selected {
     @apply tw-bg-primary;
     @apply tw-border-primary;
     @apply tw-border;
     @apply tw-border-solid;
     border-radius: 32px;
-    color: #FFFFFF;
+    color: #ffffff;
   }
 }
 
@@ -28,15 +28,13 @@
   padding: 9px 16px;
   height: 34px;
 
-
   @apply tw-border-primary;
   @apply tw-border;
   @apply tw-border-solid;
   @apply tw-text-primary;
   border-radius: 32px;
-  // color: #981D78;
 }
 
-.days ::ng-deep .grid-row-button {
-  bottom: -3px !important; // todo check
+.save-update-btn {
+  @apply tw-pointer-events-auto;
 }

@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { TabStripComponent } from '@progress/kendo-angular-layout';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { MeterUnitDetails } from 'src/app/core/repository/interfaces/meter-units/meter-unit-details.interface';
-import { ValidateIpAddressStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
+import { ValidateHostnameStatus } from 'src/app/core/repository/interfaces/meter-units/validate-ip-address-request';
 import { GetDefaultInformationResponse } from 'src/app/core/repository/interfaces/templating/get-default-information.request.interface';
 import { CodelistMeterUnitsRepositoryService } from 'src/app/core/repository/services/codelists/codelist-meter-units-repository.service';
 import { TemplatingService } from 'src/app/core/repository/services/templating/templating.service';
@@ -39,7 +39,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
   @Output() savedDataEvent = new EventEmitter<boolean>();
   @Input() saveData = false;
   @Input() basicDetails = false;
-  @ViewChild('ipField') public ipFieldComponent: InputTextComponent;
+  @ViewChild('hostnameField') public hostnameComponent: InputTextComponent;
 
   manufacturers: Codelist<number>[];
   templates: Codelist<string>[];
@@ -108,8 +108,8 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     return nameOf<MuForm>((o) => o.connectionType);
   }
 
-  get ipProperty() {
-    return nameOf<MuForm>((o) => o.ip);
+  get hostnameProperty() {
+    return nameOf<MuForm>((o) => o.hostname);
   }
 
   get portProperty() {
@@ -243,10 +243,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       [this.templateStringProperty]: [{ value: this.data?.templateName, disabled: true }],
       [this.connectionTypeProperty]: [this.defaultConnectionType, Validators.required],
 
-      [this.ipProperty]: [
-        { value: this.data?.ip, disabled: this.plcDevice },
-        this.plcDevice ? null : [Validators.required, Validators.pattern(/(\d{1,3}\.){3}\d{1,3}/)]
-      ],
+      [this.hostnameProperty]: [{ value: this.data?.hostname, disabled: this.plcDevice }, this.plcDevice ? null : [Validators.required]],
       [this.portProperty]: [{ value: this.data?.port, disabled: this.plcDevice }, Validators.required],
       [this.communicationTypeProperty]: [communicationType?.value, Validators.required],
 
@@ -319,10 +316,10 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
 
   setConnectionTypeControls() {
     if (this.isConnectionTypeIp) {
-      this.form.get(this.ipProperty).enable();
+      this.form.get(this.hostnameProperty).enable();
       this.form.get(this.portProperty).enable();
     } else {
-      this.form.get(this.ipProperty).disable();
+      this.form.get(this.hostnameProperty).disable();
       this.form.get(this.portProperty).disable();
     }
   }
@@ -381,7 +378,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
 
   communicationTypeChangedEvent(value: RadioOption, getDefaultValues: boolean = true) {
     this.communicationTypeChanged(value, getDefaultValues);
-    this.validateIpAddressAndSetNotice(value.value);
+    this.validateHostnameAndSetNotice(value.value);
   }
 
   communicationTypeChanged(value: RadioOption, getDefaultValues: boolean = true) {
@@ -504,7 +501,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       this.form.get(this.manufacturerProperty).invalid ||
       this.form.get(this.templateProperty).invalid ||
       this.form.get(this.connectionTypeProperty).invalid ||
-      this.form.get(this.ipProperty).invalid ||
+      this.form.get(this.hostnameProperty).invalid ||
       this.form.get(this.communicationTypeProperty).invalid ||
       this.form.get(this.portProperty).invalid
     ) {
@@ -550,7 +547,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       manufacturer: this.form.get(this.manufacturerProperty).value,
       template: this.form.get(this.templateProperty).value,
       connectionType: this.form.get(this.connectionTypeProperty).value,
-      ip: this.form.get(this.ipProperty).value,
+      hostname: this.form.get(this.hostnameProperty).value,
       port: this.form.get(this.portProperty).value,
       communicationType: +this.form.get(this.communicationTypeProperty).value,
       jobIds: selectedJobs, // session selected jobs
@@ -607,7 +604,7 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
       deviceId: this.data.deviceId,
       name: this.form.get(this.nameProperty).value,
       manufacturer: this.form.get(this.manufacturerProperty).value,
-      ip: this.form.get(this.ipProperty).value,
+      hostname: this.form.get(this.hostnameProperty).value,
       port: this.form.get(this.portProperty).value,
       authenticationType: this.form.get(this.authenticationTypeProperty).value.id,
       communicationType: this.isDlms ? +this.form.get(this.communicationTypeProperty).value : null,
@@ -656,51 +653,73 @@ export class EditMeterUnitFormComponent implements OnInit, OnChanges {
     this.opened = !this.opened;
   }
 
-  validateIpAddress() {
-    this.validateIpAddressAndSetNotice(this.form.get(this.communicationTypeProperty).value);
+  validateHostname() {
+    this.validateHostnameAndSetNotice(this.form.get(this.communicationTypeProperty).value);
   }
 
-  validateIpAddressAndSetNotice(communicationType: string) {
+  validateHostnameAndSetNotice(communicationType: string) {
     this.muService
-      .validateIpAddress(this.form.get(this.ipProperty).value, this.data?.deviceId, parseInt(communicationType, 10))
+      .validateHostname(
+        this.form.get(this.hostnameProperty).value,
+        this.form.get(this.portProperty).value,
+        this.data?.deviceId,
+        parseInt(communicationType, 10)
+      )
       .subscribe((validationData) => {
-        const status = ValidateIpAddressStatus[validationData.toUpperCase()];
+        const status = ValidateHostnameStatus[validationData.toUpperCase()];
         switch (status) {
-          case ValidateIpAddressStatus.INVALID: {
-            this.form.get(this.ipProperty).setErrors({ invalidIpAddress: true });
-            this.form.get(this.ipProperty).markAsDirty();
-            this.ipFieldComponent.clearWarning();
+          case ValidateHostnameStatus.INVALID: {
+            this.form.get(this.hostnameProperty).setErrors({ invalidHostname: true });
+            this.form.get(this.hostnameProperty).markAsDirty();
+            this.hostnameComponent.clearWarning();
             break;
           }
-          case ValidateIpAddressStatus.VALID_DUPLICATED: {
-            this.ipFieldComponent.pushWarning(ValidateIpAddressStatus[status]);
-            this.clearIpAddressError();
+          case ValidateHostnameStatus.VALID_DUPLICATED: {
+            this.hostnameComponent.pushWarning(ValidateHostnameStatus[status]);
+            this.clearHostnameError();
             break;
           }
-          case ValidateIpAddressStatus.INVALID_DUPLICATED: {
-            this.form.get(this.ipProperty).setErrors({ invalidDuplicatedIpAddress: true });
-            this.form.get(this.ipProperty).markAsDirty();
-            this.ipFieldComponent.clearWarning();
+          case ValidateHostnameStatus.INVALID_DUPLICATED: {
+            this.form.get(this.hostnameProperty).setErrors({ invalidDuplicatedHostname: true });
+            this.form.get(this.hostnameProperty).markAsDirty();
+            this.form.get(this.portProperty).setErrors({ incorrect: true });
+            this.form.get(this.portProperty).markAsDirty();
+            this.hostnameComponent.clearWarning();
             break;
           }
           default: {
-            this.ipFieldComponent.clearWarning();
-            this.clearIpAddressError();
+            this.hostnameComponent.clearWarning();
+            this.clearHostnameError();
             break;
           }
         }
       });
   }
 
-  clearIpAddressError() {
-    if (this.form.get(this.ipProperty).hasError('invalidIpAddress')) {
-      delete this.form.get(this.ipProperty).errors['invalidIpAddress'];
-      this.form.get(this.ipProperty).updateValueAndValidity();
+  isHostnameValid() {
+    return this.form.get(this.hostnameProperty).valid;
+  }
+
+  onTabSelect(e) {
+    if (e && e.index === 0) {
+      this.validateHostname();
+    }
+  }
+
+  clearHostnameError() {
+    if (this.form.get(this.hostnameProperty).hasError('invalidHostname')) {
+      delete this.form.get(this.hostnameProperty).errors['invalidHostname'];
+      this.form.get(this.hostnameProperty).updateValueAndValidity();
     }
 
-    if (this.form.get(this.ipProperty).hasError('invalidDuplicatedIpAddress')) {
-      delete this.form.get(this.ipProperty).errors['invalidDuplicatedIpAddress'];
-      this.form.get(this.ipProperty).updateValueAndValidity();
+    if (this.form.get(this.hostnameProperty).hasError('invalidDuplicatedHostname')) {
+      delete this.form.get(this.hostnameProperty).errors['invalidDuplicatedHostname'];
+      this.form.get(this.hostnameProperty).updateValueAndValidity();
+    }
+
+    if (this.form.get(this.portProperty).hasError('incorrect')) {
+      delete this.form.get(this.portProperty).errors['incorrect'];
+      this.form.get(this.portProperty).updateValueAndValidity();
     }
   }
 }

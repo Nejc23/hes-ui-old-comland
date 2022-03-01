@@ -1,18 +1,20 @@
-<div class="form">
+<div class="form tw-py-2">
   <div *ngIf="isContentLoaded">
-    <div class="form-row" *ngFor="let activeJob of visibleActiveJobs" >
-      <div class="col-8 text-truncate" placement="bottom" openDelay="500" [ngbTooltip]="activeJob.description" container="body" #divDescription>
+    <div *ngFor="let activeJob of visibleActiveJobs" class="form-row">
+      <div #divDescription [ngbTooltip]="activeJob.description" [openDelay]="500" class="col-8 text-truncate"
+           container="body" placement="bottom">
         {{activeJob.description}}
       </div>
-      <div class="col-4 text-truncate" placement="bottom" openDelay="500" [ngbTooltip]="setMomentNextRun(activeJob.nextRun)" container="body">
+      <div [ngbTooltip]="setMomentNextRun(activeJob.nextRun)" [openDelay]="500" class="col-4 text-truncate"
+           container="body" placement="bottom">
         {{setMomentNextRun(activeJob.nextRun)}}
       </div>
     </div>
-    <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1" >
-      <a href="javascript:void(0);" (click)="showMore()">{{ getShowAllText() }}</a>
+    <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1">
+      <a (click)="showMore()" href="javascript:void(0);">{{ getShowAllText() }}</a>
     </div>
   </div>
-  <div class="text-center pt-2 pb-2" *ngIf="!isContentLoaded" >
-    <span class="ag-theme-epoint">Loading...</span>
+  <div *ngIf="!isContentLoaded" class="text-center pt-2 pb-2">
+    <span class="ag-theme-epoint">{{ 'COMMON.LOADING-DATA' | translate }}</span>
   </div>
 </div>

@@ -26,6 +26,7 @@ export class InputNumericComponent implements OnInit {
   @Input() noFlex = false;
 
   @Output() valueChange: EventEmitter<number> = new EventEmitter();
+  @Output() inputTextBlurValue: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private formUtils: FormsUtilsService) {}
 
@@ -58,5 +59,9 @@ export class InputNumericComponent implements OnInit {
 
   public onChange(value: number) {
     this.valueChange.emit(value);
+  }
+
+  onBlur() {
+    this.inputTextBlurValue.emit(true);
   }
 }

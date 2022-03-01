@@ -49,7 +49,7 @@ export const configAgGridDefCol = {
   floatingFilterComponentParams: { suppressFilterButton: true, suppressFiltersToolPanel: true, suppressColumnsToolPanel: true }
 };
 
-export const gridRefreshInterval = 30;
+export const gridRefreshInterval = 60;
 
 export const languages: Array<Language> = [
   { id: 'en', acceptLanguage: 'en-US' },

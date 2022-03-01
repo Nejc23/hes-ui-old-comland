@@ -97,26 +97,31 @@ body {
 .badge-success {
   background-color: $success;
   color: white;
+  border-radius: 2px;
 }
 
 .badge-info {
   background-color: $info;
   color: white;
+  border-radius: 2px;
 }
 
 .badge-dark {
   background-color: $dark;
   color: #fff !important;
+  border-radius: 2px;
 }
 
 .badge-secondary {
   color: #fff !important;
   background-color: $secondary;
+  border-radius: 2px;
 }
 
 .badge-primary {
   color: #fff !important;
   background-color: $primary;
+  border-radius: 2px;
 }
 
 //.dropdown-item.active, .dropdown-item:active {
@@ -293,9 +298,6 @@ body {
   top: 18px;
 }
 
-.k-state-selected {
-  background-color: rgb($primary, 0.65) !important;
-}
 
 .mini-button {
   padding: 2px 10px;
@@ -323,7 +325,6 @@ body {
   @apply tw-h-full;
   @apply tw-items-center;
   @apply tw-justify-center;
-  height: 35px;
 
   &.border-left {
     @apply tw-border-0;
@@ -418,5 +419,58 @@ body {
 .full-dropdown {
   .k-dropdown, .k-dropdowntree {
     width: 100%;
+  }
+}
+
+.tou-units-layout {
+  @apply tw-flex;
+  @apply tw-flex-col;
+  @apply tw-h-full;
+}
+
+.tou-units-content {
+  @apply tw-pl-10;
+  @apply tw-pt-10;
+  @apply tw-h-full;
+}
+
+.tou-units-buttons-container {
+  @apply tw-self-end;
+  @apply tw-w-full;
+}
+
+.tou-units-buttons {
+  @apply tw-inline-flex;
+  @apply tw-justify-between;
+  @apply tw-w-full;
+  @apply tw-mb-10;
+  @apply tw-pl-10;
+
+  &.right {
+    @apply tw-justify-end;
+  }
+}
+
+kendo-popup {
+  .k-state-selected {
+    color: black !important;
+    background-color: $lightGray !important;
+  }
+}
+
+.small-button {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 2px;
+  border: 1px solid $mediumGray;
+}
+
+.action-buttons {
+  .dropdown-submenu > .dropdown-menu {
+    left: auto;
+    right: 130px;
   }
 }

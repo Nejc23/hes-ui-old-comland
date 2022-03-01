@@ -30,7 +30,7 @@ export class PlcMeterFwUpgradeComponent {
   configRequiredText = this.translate.instant('COMMON.REQUIRED-FIELD');
   messageServerError = this.translate.instant('COMMON.SERVER-ERROR');
   actionRequest: IActionRequestParams;
-  uploadSaveUrl = this.apiUrl + '/' + fwUploadFile;
+  uploadSaveUrl = this.apiUrl + fwUploadFile;
   imgGuid: FileGuid = null;
   allowedExt = [];
   allowedExtExplainText = this.translate.instant('IMPORT-DEVICE-KEYS.UPLOAD-ONE-FILE');
@@ -51,7 +51,10 @@ export class PlcMeterFwUpgradeComponent {
     private translate: TranslateService
   ) {
     if (AppConfigService.settings?.apiServer?.url !== '') {
-      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + '/' + fwUploadFile;
+      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.url + fwUploadFile;
+    }
+    if (AppConfigService.settings?.apiServer?.fileStorageUrl !== '') {
+      this.uploadSaveUrl = AppConfigService.settings?.apiServer?.fileStorageUrl + fwUploadFile;
     }
     this.form = this.createForm();
   }

@@ -1,24 +1,21 @@
 <kendo-chart class="kendo-chart-column pe-3">
   <kendo-chart-category-axis baseUnit="days">
-    <kendo-chart-category-axis-item [title]="{ text: title }" maxDivisions="20">
-      <kendo-chart-category-axis-item-labels [culture]="culture" [dateFormats]="dateFormats">
-      </kendo-chart-category-axis-item-labels>
+    <kendo-chart-category-axis-item [maxDivisions]="20" [title]="{ text: title }">
+      <kendo-chart-category-axis-item-labels [culture]="culture"
+                                             [dateFormats]="dateFormats"></kendo-chart-category-axis-item-labels>
       <kendo-chart-value-axis-item>
-        <kendo-chart-value-axis-item-labels>
-        </kendo-chart-value-axis-item-labels>
+        <kendo-chart-value-axis-item-labels></kendo-chart-value-axis-item-labels>
       </kendo-chart-value-axis-item>
     </kendo-chart-category-axis-item>
   </kendo-chart-category-axis>
   <kendo-chart-series>
-    <kendo-chart-series-item [data]="formattedEvents" categoryField="timestamp"
-                             field="count"
-                             type="column">
+    <kendo-chart-series-item [data]="formattedEvents" categoryField="timestamp" field="count" type="column">
       <kendo-chart-series-item-tooltip background="#ffffff">
         <ng-template let-dataItem="dataItem">
-          <div style="text-align:center;">
+          <div style="text-align: center">
             <div class="text-black-50 small">
               <ng-container *ngIf="hours">
-                {{ dataItem.timestamp | formatDate }}
+                {{ dataItem.timestamp | formatDateTime }}
               </ng-container>
               <ng-container *ngIf="!hours">
                 {{ dataItem.timestamp }}

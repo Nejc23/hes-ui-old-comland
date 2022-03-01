@@ -1,0 +1,22 @@
+<div class="tw-m-8 tw-mt-0">
+
+  <div>
+    <app-data-table (inlineSaveButtonClickEvent)="saveInlineData($event)"
+                    (rowActionClickedEvent)="rowActionsClicked($event)"
+                    [cancelEditor]="cancelEditing || !slideOutOpen"
+                    [editFieldById]="'deviceMetaDataId'"
+                    [form]="form"
+                    [gridColumns]="extraDetailsColumnsConfiguration"
+                    [gridData]="extraDetailsData"
+                    [inlineEdit]="true"
+                    [pageSize]="20"
+                    [rowActions]="extraDetailsRowActions"
+                    [scrollable]="'virtual'"
+                    [skip]="0"
+                    [sort]="sort"
+                    [tableHeight]="616"
+                    [withAddButton]="true">
+    </app-data-table>
+  </div>
+
+</div>

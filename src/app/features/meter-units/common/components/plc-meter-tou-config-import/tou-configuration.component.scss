@@ -22,3 +22,6 @@
   border-right: 1px solid #CED2D9;
 }
 
+::ng-deep .input-error-text {
+  position: absolute;
+}

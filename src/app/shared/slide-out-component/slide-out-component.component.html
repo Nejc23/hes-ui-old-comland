@@ -16,11 +16,12 @@
       <ng-content></ng-content>
     </div>
 
-    <div class="buttons">
-      <button
-        (click)="close()"
-        class="btn btn-link"
-        type="submit">{{ secondaryButtonText | translate }}</button>
+    <div [ngClass]="hideCloseButton ? 'align-end' : ''"
+         class="buttons">
+      <button (click)="close()"
+              *ngIf="!hideCloseButton"
+              class="btn btn-link"
+              type="submit">{{ secondaryButtonText | translate }}</button>
       <button (click)="confirm()"
               class="btn btn-primary"
               type="submit">{{ primaryButtonText | translate }}</button>

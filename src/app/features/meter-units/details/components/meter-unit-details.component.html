@@ -3,8 +3,10 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
+      [backButton]="true"
+      [routerUrl]="routerLinkUrl"
       [state]="data.deviceState"
-      [subtitle]="'PROTOCOL.' + data.protocolType"
+      [subtitle]="'PROTOCOL.' + data.protocolType?.toUpperCase()"
       [title]="data.name ? data.name : data.serialNumber"
       class="tw-h-36 tw-mt-10 tw--m-5"
     >
@@ -304,6 +306,18 @@
     </app-edit-meter-unit-form>
   </app-slide-out-component>
 
+  <app-slide-out-component (closeButtonClickedEvent)="closeExtraDetails()"
+                           (confirmButtonClickedEvent)="closeExtraDetails()"
+                           [hideCloseButton]="true"
+                           [primaryButtonText]="'BUTTON.CLOSE'"
+                           [title]="deviceMetadata?.length > 0 ? 'COMMON.EDIT-EXTRA-DETAILS' : 'COMMON.ADD-EXTRA-DETAILS'"
+                           [visible]="extraDetailsVisible">
+
+    <div>
+      <app-extra-details [deviceId]="deviceId" [slideOutOpen]="extraDetailsVisible"></app-extra-details>
+    </div>
+  </app-slide-out-component>
+
 
   <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10 meters-tab">
     <kendo-tabstrip-tab [selected]="true"
@@ -312,12 +326,49 @@
 
         <div class="tw-py-10">
           <div class="tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 3xl:tw-grid-cols-3 tw-gap-6">
+
             <app-card-item (buttonClickEvent)="editButtonClicked(true)"
                            [buttonIconName]="'edit-icon'"
                            [buttonLabel]="isEditVisible() ? 'BUTTON.EDIT' : ''"
                            [form]="detailsForm"
-                           [showMoreButton]="false"
+                           [paginationLimit]="5"
+                           [showMoreButton]="true"
                            [title]="'COMMON.DETAILS'">
+            </app-card-item>
+
+            <app-card-item (buttonClickEvent)="editCustomProperties()"
+                           [buttonIconName]="'edit-icon'"
+                           [buttonLabel]="deviceMetadata?.length > 0 ? 'BUTTON.EDIT' : null"
+                           [keyValueData]="deviceMetadata"
+                           [keyValueFields]="['property', 'value']"
+                           [loading]="loadingMetadata"
+                           [paginationLimit]="7"
+                           [showMoreButton]="deviceMetadata?.length > 7"
+                           [title]="'COMMON.EXTRA-DETAILS'">
+              <div>
+                <div *ngIf="deviceMetadata?.length === 0 && !loadingMetadata"
+                     class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-w-full tw-p-10">
+                  <div class="tw-rounded-full tw-h-28 tw-w-28">
+                    <div
+                      class="
+              tw-flex tw-flex-col tw-justify-center tw-items-center tw-rounded-full tw-h-20 tw-w-20
+              relative-position
+              tw-bg-lightestGray
+            "
+                    >
+                      <img [src]="'assets/images/icons/no-details.svg'" class="tw-h-7" />
+                    </div>
+                  </div>
+                  <div class="tw-font-bold tw-text-black tw-text-xl tw-mt-6">
+                    {{ 'COMMON.NO-EXTRA-DETAILS' | translate }}
+                  </div>
+                  <button (click)="editCustomProperties()"
+                          class="btn btn text-secondary btn-outline tw-mt-8 tw-border tw-border-primary">
+                    + {{ 'BUTTON.ADD-NEW' | translate }}
+                  </button>
+                </div>
+              </div>
+
             </app-card-item>
 
             <app-card-item (buttonClickEvent)="editButtonClicked(false)"
@@ -327,6 +378,41 @@
                            [showMoreButton]="false"
                            [title]="'COMMON.COMMUNICATION-MODULE'">
             </app-card-item>
+
+            <app-card-item [title]="'PLC-METER.TRANSFORMER-RATIO'">
+
+              <div class="app-transformer-card-row tw-border-lightGray tw-border-b tw-border-solid">
+                <div class="tw-text-darkGray tw-text-sm">
+                  {{ 'PLC-METER.CURRENT-RATIO' | translate }}:
+                </div>
+                <div>
+                  <div class="tw-text-black tw-text-sm tw-flex tw-flex tw-justify-end">
+                    1
+                  </div>
+                  <div class="transformer-gray-text tw-text-xs tw-inline-flex tw-m-1">
+                    <img [src]="'assets/images/icons/calendar-icon-small.svg'"
+                         class="tw-pr-2" />  {{ 'COMMON.VALID-FROM' | translate }}: 1.1.2000 00:00
+                  </div>
+                </div>
+              </div>
+
+              <div class="app-transformer-card-row">
+                <div class="tw-text-darkGray tw-text-sm">
+                  {{ 'PLC-METER.VOLTAGE-RATIO' | translate }}:
+                </div>
+                <div>
+                  <div class="tw-text-black tw-text-sm tw-flex tw-flex tw-justify-end">
+                    1
+                  </div>
+                  <div class="transformer-gray-text tw-text-xs tw-inline-flex tw-m-1">
+                    <img [src]="'assets/images/icons/calendar-icon-small.svg'"
+                         class="tw-pr-2" />  {{ 'COMMON.VALID-FROM' | translate }}: 1.1.2000 00:00
+                  </div>
+                </div>
+              </div>
+            </app-card-item>
+
+
           </div>
 
         </div>

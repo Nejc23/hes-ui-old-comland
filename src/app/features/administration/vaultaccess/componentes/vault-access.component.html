@@ -1,0 +1,89 @@
+<div [style.width.px]="addWidth()" class="sticky-header bottom-line">
+
+  <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
+    <app-page-title
+      [title]="'VAULT-ACCESS.TITLE'"
+      class="tw-h-36 tw-mt-10 tw--m-5"
+    >
+    </app-page-title>
+  </div>
+</div>
+
+<div class="tw-py-10 vault-access-tabs">
+
+  <kendo-tabstrip [keepTabContent]="false" class="tw-pt-10">
+    <kendo-tabstrip-tab [selected]="true" title="{{ 'VAULT-ACCESS.PENDING-REQUEST' | translate }}">
+
+      <ng-template kendoTabContent>
+        <div class="tw-py-10">
+
+          <app-no-data *ngIf="clientCertificatesPendingDataList.length === 0 "
+                       [iconName]="'verified'"
+                       [loading]="clientCertificatesPendingLoading"
+                       [message]="'VAULT-ACCESS.NO-PENDING-REQUESTS'"
+                       class="tw-inline-flex tw-items-center tw-justify-center tw-h-1/2 tw-w-full tw-mt-32">
+          </app-no-data>
+
+          <app-data-table (bulkActionClickedEvent)="bulkActionClicked($event)"
+                          (rowActionClickedEvent)="rowActionsClicked($event)"
+                          (selectedRowDataEvent)="selectionChanged($event)"
+                          *ngIf="clientCertificatesPendingDataList.length > 0"
+                          [fetchData]="false"
+                          [gridBulkActions]="clientCertificatesListPendingBulkActionConfiguration"
+                          [gridColumns]="clientCertificatesListPendingColumnsConfiguration"
+                          [gridData]="clientCertificatesPendingDataList"
+                          [kendoGridSelectByColumn]="'requestId'"
+                          [pageable]="true"
+                          [rowActions]="clientCertificatesListPendingRowActionConfiguration"
+                          [rowHeight]="44"
+                          [scrollable]="'virtual'"
+                          [selectedKeys]="selectedKeys"
+                          [showGridBulkActions]="showGridBulkActions"
+                          [skip]="0"
+                          [sortable]="true"
+                          [tableHeight]="622"
+                          [total]="clientCertificatesPendingDataList.length"
+                          [withRowSelection]="true"
+                          [withSearch]="true"
+                          class="vault-data-table"
+          >
+          </app-data-table>
+        </div>
+      </ng-template>
+    </kendo-tabstrip-tab>
+
+    <kendo-tabstrip-tab title="{{ 'VAULT-ACCESS.GRANTED-REJECTED' | translate }}">
+      <ng-template kendoTabContent>
+
+        <div class="tw-py-10">
+
+          <app-data-table *ngIf="clientCertificatesDataList.length > 0"
+                          [fetchData]="false"
+                          [filters]="clientCertificatesFiltersConfiguration"
+                          [gridColumns]="clientCertificatesListColumnsConfiguration"
+                          [gridData]="clientCertificatesDataList"
+                          [kendoGridSelectByColumn]="'requestId'"
+                          [pageable]="true"
+                          [rowHeight]="44"
+                          [scrollable]="'virtual'"
+                          [skip]="0"
+                          [sortable]="true"
+                          [tableHeight]="622"
+                          [total]="clientCertificatesDataList.length"
+                          [withSearch]="true"
+          >
+          </app-data-table>
+
+          <app-no-data *ngIf="clientCertificatesDataList.length === 0 " [iconName]="'verified'"
+                       [loading]="clientCertificatesLoading"
+                       [message]="'VAULT-ACCESS.NO-GRANTED-REQUESTS'"
+                       class="tw-inline-flex tw-items-center tw-justify-center tw-h-1/2 tw-w-full tw-mt-32">
+          </app-no-data>
+
+        </div>
+
+      </ng-template>
+    </kendo-tabstrip-tab>
+  </kendo-tabstrip>
+</div>
+

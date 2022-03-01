@@ -9,6 +9,9 @@
       <a (click)="onReKeyConcentrator()" [permission]="permissionManageConcentrators && permissionReKey"
          appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
          href="javascript:void(0)"><span>{{ 'OPERATION.RE-KEY-CONCENTRATOR' | translate }}</span></a>
+      <a (click)="downloadClientCert()" [permission]="permissionManageConcentrators && permissionReKey"
+         appHideIfPermissionUnauthorized class="dropdown-item custom-hover-display"
+         href="javascript:void(0)"><span>{{ 'OPERATION.DOWNLOAD-CLIENT-CERT' | translate }}</span></a>
     </div>
   </div>
 </div>

@@ -72,21 +72,24 @@ const routes: Routes = [
             data: {
               breadcrumb: ''
             },
-            component: TouConfigDayComponent
+            component: TouConfigDayComponent,
+            canDeactivate: [CanDeactivateGuard]
           },
           {
             path: 'week',
             data: {
               breadcrumb: ''
             },
-            component: TouConfigWeekComponent
+            component: TouConfigWeekComponent,
+            canDeactivate: [CanDeactivateGuard]
           },
           {
             path: 'season',
             data: {
               breadcrumb: ''
             },
-            component: TouConfigSeasonComponent
+            component: TouConfigSeasonComponent,
+            canDeactivate: [CanDeactivateGuard]
           },
           {
             path: 'special',

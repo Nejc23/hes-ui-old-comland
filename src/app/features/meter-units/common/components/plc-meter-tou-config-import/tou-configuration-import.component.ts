@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,8 +6,8 @@ import { FileInfo } from '@progress/kendo-angular-upload';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { MeterUnitsTouConfigImport } from 'src/app/core/repository/interfaces/meter-units/meter-units-tou-config-import.interface';
 import { MeterUnitsService } from 'src/app/core/repository/services/meter-units/meter-units.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
 import { EventManagerService } from '../../../../../core/services/event-manager.service';
+import { TouConfigErrorHandler } from '../plc-meter-tou-config/tou-config-error-handler/tou-config-error-handler';
 
 @Component({
   templateUrl: './tou-configuration-import.component.html'
@@ -24,11 +23,11 @@ export class TouConfigurationImportComponent {
   constructor(
     private formBuilder: FormBuilder,
     private formUtils: FormsUtilsService,
-    private toast: ToastNotificationService,
     public modal: NgbActiveModal,
     private translate: TranslateService,
     private meterService: MeterUnitsService,
-    private eventsService: EventManagerService
+    private eventsService: EventManagerService,
+    private touConfigErrorHelper: TouConfigErrorHandler
   ) {
     this.resetForm();
   }
@@ -72,11 +71,7 @@ export class TouConfigurationImportComponent {
         this.eventsService.emitCustom('RefreshTouConfigList', true);
       },
       (x) => {
-        if (x instanceof HttpErrorResponse && x.error) {
-          this.toast.errorToast(x.error);
-        } else if (x.statusText) {
-          this.toast.errorToast(x.statusText);
-        }
+        this.touConfigErrorHelper.showErrorsAsToasts(x);
       }
     );
   }

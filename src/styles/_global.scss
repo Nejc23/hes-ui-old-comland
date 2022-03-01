@@ -110,7 +110,7 @@ label {
 }
 
 .modal-footer {
-  padding: 1.714rem; // 24px
+  padding: 1.714rem 1.14rem 1.714rem 0.5rem; // 1.714rem = 24px
 }
 
 .modal-checkbox-label {
@@ -154,6 +154,10 @@ label {
 
 .gray-background {
   background-color: $lightestGray;
+}
+
+.gray-grid-background {
+  background-color: $transparentLightGray;
 }
 
 .white-background {

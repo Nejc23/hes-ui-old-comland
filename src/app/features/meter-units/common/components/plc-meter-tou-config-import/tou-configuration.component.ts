@@ -2,8 +2,10 @@ import { Component, ElementRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { TouWizardMode } from 'src/app/enums/tou-configuration/TouWizardModeEnum';
 import { BreadcrumbService } from 'src/app/shared/breadcrumbs/services/breadcrumb.service';
 import { ModalService } from '../../../../../core/modals/services/modal.service';
+import { DeviceState } from '../../../../../core/repository/interfaces/meter-units/meter-unit-details.interface';
 import { ModalConfirmComponent } from '../../../../../shared/modals/components/modal-confirm.component';
 import { TouConfigService } from '../../services/tou-config.service';
 import { TouConfigurationImportComponent } from './tou-configuration-import.component';
@@ -14,6 +16,7 @@ import { TouConfigurationImportComponent } from './tou-configuration-import.comp
   styleUrls: ['./tou-configuration.component.scss']
 })
 export class TouConfigurationComponent implements OnInit {
+  DeviceStateEnum = DeviceState;
   wizard = false;
 
   constructor(
@@ -84,24 +87,32 @@ export class TouConfigurationComponent implements OnInit {
   }
 
   getTitle() {
-    return this.touService.getTouConfig()?.basic?.id;
+    return this.touService.getTouConfig()?.basic?.externalId;
+  }
+
+  isCreateMode() {
+    return this.touService.touWizardMode == TouWizardMode.CREATE;
   }
 
   navigateToList() {
-    const modalRef = this.modalService.open(ModalConfirmComponent);
-    const component: ModalConfirmComponent = modalRef.componentInstance;
+    // If users clicks Discard button in Create mode, notify that unsaved changes will be lost
+    if (this.isCreateMode()) {
+      const modalRef = this.modalService.open(ModalConfirmComponent);
+      const component: ModalConfirmComponent = modalRef.componentInstance;
 
-    component.modalTitle = this.translate.instant('TOU-CONFIG.CLOSE-WIZARD');
-    component.modalBody = this.translate.instant('TOU-CONFIG.CLOSE-WIZARD-TEXT', {
-      configurationName:
-        this.touService.touConfigurationClient.basic.description.length > 0
-          ? `\"${this.touService.touConfigurationClient.basic.description}\" `
-          : ''
-    });
+      component.modalTitle = this.translate.instant('TOU-CONFIG.CLOSE-WIZARD');
+      component.modalBody = this.translate.instant('TOU-CONFIG.CLOSE-WIZARD-TEXT');
+      component.btnConfirmText = this.translate.instant('BUTTON.CLOSE');
+      component.btnCancelText = this.translate.instant('BUTTON.CONTINUE-WITH-EDITING');
 
-    modalRef.result.then(() => {
-      this.createNewAndNavigate('list');
-    });
+      modalRef.result.then(() => {
+        this.createNewAndNavigate('list');
+      });
+    }
+    // User clicks Close buttton in Edit mode, navigate back to the TOU list
+    else {
+      this.router.navigate(['/configuration/importTouConfiguration/list']);
+    }
   }
 
   saveTouConfig() {
@@ -113,7 +124,7 @@ export class TouConfigurationComponent implements OnInit {
   }
 
   createNewAndNavigate(path: string) {
-    sessionStorage.removeItem('touConfig');
+    this.touService.removeTOUConfigurationFromSession();
     this.touService.createNewTouConfigurationClient();
     this.router.navigate(['/configuration/importTouConfiguration/' + path]);
   }

@@ -27,7 +27,7 @@
 
 ::ng-deep .k-grid th {
   border-width: 0;
-  background-color: white;
+  // background-color: white;
   @apply tw-text-mediumGray;
   @apply tw-text-xs;
   height: 48px;
@@ -35,8 +35,13 @@
   padding: 0 16px;
 }
 
+
+::ng-deep .k-grid thead tr {
+  background-color: white;
+}
+
 ::ng-deep .k-grid .k-alt {
-  background-color: transparent;
+  background-color: white;
 }
 
 ::ng-deep .k-grid .k-switch {
@@ -75,27 +80,40 @@
   @apply tw-shadow;
   @apply tw-cursor-pointer;
   visibility: hidden;
-  position: relative;
-  bottom: 40px;
+  position: sticky;
+  bottom: 4px; //5px
   width: 6rem; // default 3 rows
   left: calc(100% - 6.4rem);
 
   &.rows-1 {
     width: 2.5rem;
-    left: calc(100% - 3.4rem);
+    left: calc(100% - 3.8rem);
   }
 
   &.rows-2 {
     width: 5rem;
-    left: calc(100% - 3.4rem);
+    left: calc(100% - 5.8rem);
   }
 }
 
 .green {
   color: #37A350;
   padding: 3px 8px;
-  width: 73px;
   background: rgba(55, 163, 80, 0.1);
+  border-radius: 2px;
+}
+
+.red {
+  color: #BC1839;
+  padding: 3px 8px;
+  background: rgba(252, 235, 238, 1);
+  border-radius: 2px;
+}
+
+.blue {
+  color: #47A8BD;
+  padding: 3px 8px;
+  background: rgba(71, 168, 189, 0.1);
   border-radius: 2px;
 }
 
@@ -107,7 +125,7 @@
   min-height: 30vh;
 }
 
-::ng-deep .k-button, .k-button-secondary {
+.kendo-grid ::ng-deep .k-button, .k-button-secondary {
   @apply tw-rounded;
   @apply tw-border-mediumGray;
   @apply tw-border-solid;
@@ -155,10 +173,15 @@
   margin-left: 28.5rem;
 }
 
+.bold-text {
+  font-weight: bold;
+}
+
 .grid-cell-text {
   height: 44px;
   line-height: 44px;
   width: 96%;
+
   //white-space: nowrap;
   //overflow: hidden;
   //text-overflow: ellipsis;
@@ -182,4 +205,215 @@
 
 .margin-bottom-5 {
   margin-bottom: 5px;
+}
+
+.kendo-grid {
+
+}
+
+::ng-deep .k-grid tr.k-state-selected > td {
+  background-color: rgb(244, 246, 249, 0.1) !important;
+
+  &.checkboxes {
+    background-color: white !important;
+  }
+}
+
+::ng-deep .k-grid tr:nth-child(odd).k-state-selected > td {
+  &.checkboxes {
+    background-color: #f9fbfc !important;
+  }
+}
+
+::ng-deep th.k-header.ng-star-inserted {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+// scrollbars
+.kendo-grid {
+  ::ng-deep ::-webkit-scrollbar {
+    width: 0.45rem;
+    height: 16px;
+  }
+
+  ::ng-deep ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+  }
+
+  ::ng-deep ::-webkit-scrollbar-thumb {
+    background: #A9ABAF;
+    border-radius: 4px;
+    width: 0.25em;
+    //outline: 1px solid #4c0e3c;
+  }
+}
+
+// kendoUi grid with paging
+::ng-deep kendo-pager-page-sizes {
+  .k-dropdown {
+    border: 1px solid #A9ABAF;
+    border-radius: 2px;
+    // height: 32px;
+  }
+
+  kendo-label {
+    display: none;
+  }
+}
+
+::ng-deep .k-grid-pager {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+::ng-deep .k-pager-sizes {
+  margin: 0;
+  padding-left: 16px;
+  height: 32px;
+
+  kendo-dropdownlist {
+    height: 32px;
+    border-radius: 2px;
+  }
+
+  .k-dropdown-wrap {
+    height: 30px;
+  }
+}
+
+::ng-deep .k-grid .k-grid-pager:focus {
+  box-shadow: none;
+}
+
+::ng-deep kendo-grid-column-chooser button {
+  border: 1px solid #A9ABAF !important;
+  border-radius: 2px;
+}
+
+// sticky for row actions
+::ng-deep kendo-grid .k-grid-content-sticky {
+  border-right-width: 0 !important;
+  line-height: 0px;
+
+  &.transparent-background {
+    background-color: transparent !important;
+  }
+}
+
+::ng-deep .k-grid-header .k-grid-header-sticky {
+  background-color: transparent !important;
+  border-right-color: transparent !important;
+  border-left-color: transparent !important;
+}
+
+::ng-deep .k-popup {
+  box-shadow: 0 4px 5px -5px #6F7072;
+}
+
+::ng-deep .k-column-chooser-title {
+  width: 220px;
+}
+
+::ng-deep .k-grid-header {
+  background-color: white;
+  border-color: white;
+}
+
+.corner-badge {
+  position: relative;
+  bottom: 15px;
+  border-radius: 13px;
+}
+
+.icon-filter-button {
+  @apply tw-flex;
+  @apply tw-p-1;
+  height: 35px;
+  width: 35px;
+  @apply tw-rounded-sm;
+  @apply tw-border-mediumGray;
+  @apply tw-border;
+  @apply tw-border-solid;
+  @apply tw-items-center;
+  @apply tw-justify-center;
+}
+
+::ng-deep td.k-command-cell img {
+  padding: 8px;
+}
+
+::ng-deep td.k-command-cell {
+  text-align: right;
+  width: 90px;
+}
+
+::ng-deep .k-grid-edit-row td {
+  padding: 0 0 0 16px !important;
+  text-overflow: clip;
+}
+
+::ng-deep td.k-command-cell.ng-star-inserted {
+  padding: 0 16px 0 0 !important;
+}
+
+
+.column-chooser {
+  height: 35px; // 35px due to search input
+}
+
+::ng-deep .k-grid tr:nth-child(even) {
+  td.k-grid-content-sticky.checkboxes {
+    background: white;
+  }
+}
+
+::ng-deep .k-grid tr:nth-child(odd) {
+  td.k-grid-content-sticky.checkboxes {
+    background: #f9fbfc !important;
+  }
+}
+
+::ng-deep .k-alt:hover {
+  background-color: #f9fbfc !important;
+}
+
+::ng-deep kendo-grid tr:hover .k-grid-content-sticky.checkboxes {
+  background-color: #f9fbfc !important;
+}
+
+::ng-deep .k-grid tbody tr:hover {
+  background-color: #f9fbfc !important;
+}
+
+::ng-deep .k-grid-header .k-header:first-child {
+  background-color: white !important;
+}
+
+.inline-icon {
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  margin: 2px;
+  border: none !important;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #F4F6F9;
+  }
+}
+
+.inline-add-new-icons {
+  width: 58px;
+  margin-left: 20px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+.inline-edit-icon {
+  margin-left: 50px;
+  width: 30px;
+  background-color: white;
+  border-radius: 2px;
 }

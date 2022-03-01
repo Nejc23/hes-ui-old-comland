@@ -65,6 +65,10 @@ export class FileSelectComponent implements OnInit {
     this.controlId = _.uniqueId('fileSelect');
   }
 
+  get accept(): string {
+    return this.acceptExtensions.join(', ');
+  }
+
   showErrors(): boolean {
     return this.formUtils.shouldInputShowErrors(this.formControl);
   }

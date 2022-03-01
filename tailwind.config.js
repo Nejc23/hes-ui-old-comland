@@ -1,9 +1,5 @@
 module.exports = {
-  mode: 'jit',
-  purge: {
-    enabled: process.env.WEBPACK_DEV_SERVER === 'true' && process.argv.join(' ').indexOf('build') !== -1, // TODO CHECK PURGE IN PROD MODE
-    content: ['./src/**/**/*.{html,ts}', './src/**/**/**/*.{html,ts}', './src/**/**/**/**/*.{html,ts}']
-  },
+  content: ['./src/app/**/*.{html,ts}'], // Configure the paths to all of your content file
   prefix: 'tw-',
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -17,7 +13,7 @@ module.exports = {
       colors: {
         // figma colors
         primary: 'var(--color-primary)',
-        secondary: 'var(--color-secondary)',
+        secondary: 'var(--color-secondary) !important',
         darkGray: '#6F7072',
         darkPurple: '#981D78',
         darkBlue: '#053876',

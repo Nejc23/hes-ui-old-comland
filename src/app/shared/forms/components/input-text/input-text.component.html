@@ -1,6 +1,6 @@
 <div [formGroup]="form" [ngClass]="{ 'has-error': showErrors() }" class="mb-3">
   <label *ngIf="label" [attr.for]="property">
-    {{ 'FORM.' + label.toUpperCase() | translate }}
+    {{ 'FORM.' + label.toUpperCase() | translate }}:
     <span *ngIf="required && label !== ' '"> *</span>
   </label>
 

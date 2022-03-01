@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { formatDate } from '@progress/kendo-angular-intl';
+import { SortDescriptor } from '@progress/kendo-data-query';
 import * as moment from 'moment';
 import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
 import { AutoTemplatesService } from 'src/app/core/repository/services/auto-templates/auto-templates.service';
@@ -16,12 +17,14 @@ import { environment } from 'src/environments/environment';
 import { AutoTemplateRegister } from '../../../../core/repository/interfaces/auto-templates/auto-template-register.interface';
 import {
   EventRegisterValue,
+  GridRegisterValue,
   RegisterValue
 } from '../../../../core/repository/interfaces/data-processing/profile-definitions-for-device.interface';
 import { DataProcessingService } from '../../../../core/repository/services/data-processing/data-processing.service';
 import { RegisterStatisticsService } from '../../types/services/register-statistics.service';
 import { RegisterGroup, RegistersFilter, RegisterStatistics } from '../interfaces/data-processing-request.interface';
 import { EventsById, EventsByTimestamp } from '../interfaces/events-processing.interface';
+import { GridColumn, GridColumnType } from '../../../../shared/data-table/data-table.component';
 import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 
 @Component({
@@ -29,6 +32,51 @@ import { dateServerFormat } from '../../../../shared/forms/consts/date-format';
 })
 export class MeterUnitRegistersComponent implements OnInit {
   @ViewChild('popover') popover;
+
+  eventDataColumns: Array<GridColumn> = [
+    {
+      field: 'timestamp',
+      translationKey: 'GRID.TIMESTAMP',
+      type: GridColumnType.DATE_TIME
+    },
+    {
+      field: 'value',
+      translationKey: 'GRID.ID',
+      width: 100
+    },
+    {
+      field: 'description',
+      translationKey: 'GRID.DESCRIPTION',
+      width: 350
+    }
+  ];
+
+  registerDataColumns: Array<GridColumn> = [
+    {
+      field: 'timestamp',
+      translationKey: 'GRID.TIMESTAMP',
+      type: GridColumnType.DATE_TIME
+    },
+    {
+      field: 'value',
+      translationKey: 'GRID.VALUE'
+    },
+    {
+      field: 'unit',
+      translationKey: 'GRID.UNIT'
+    },
+    {
+      field: 'status',
+      translationKey: 'GRID.STATUS'
+    }
+  ];
+
+  registerDataDefaultSort: SortDescriptor[] = [
+    {
+      field: 'timestamp',
+      dir: 'asc'
+    }
+  ];
 
   public selectedRegister: AutoTemplateRegister;
 
@@ -49,6 +97,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   public registersFilter: RegistersFilter;
 
   public rowData: RegisterValue[] = [];
+  public gridData: GridRegisterValue[] = [];
 
   public pageSubtitle;
 
@@ -263,8 +312,11 @@ export class MeterUnitRegistersComponent implements OnInit {
           this.isDataFound = true;
           this.rowData = values;
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData);
-
-          this.setEventData();
+          if (this.isEvent) {
+            this.setEventData();
+          } else {
+            this.toGridData(this.rowData);
+          }
 
           this.chartCategories = values.map((v) => new Date(v.timestamp));
           this.chartData = [values];
@@ -278,12 +330,37 @@ export class MeterUnitRegistersComponent implements OnInit {
     }
   }
 
+  toGridData(registerValues: RegisterValue[]) {
+    this.gridData = [];
+    registerValues.forEach((register) => {
+      this.gridData.push({
+        requestId: register.requestId,
+        unit: register.valueWithUnit?.unit,
+        value: register.valueWithUnit?.value,
+        status: register.status,
+        timestamp: register.timestamp,
+        description: register.description
+      });
+    });
+  }
+
+  eventToGridData(registerValues: EventRegisterValue[]) {
+    this.gridData = [];
+    registerValues.forEach((register) => {
+      this.gridData.push({
+        requestId: register.requestId,
+        value: register.value,
+        timestamp: register.timestamp,
+        description: register.description
+      });
+    });
+  }
+
   setEventData() {
     this.eventsByTimestamp = [];
     this.eventsById = [];
-    if (!this.isEvent) {
-      return;
-    }
+
+    this.eventToGridData(this.rowData);
 
     // is it ordered?
     const startTime = new Date(this.rowData[0].timestamp);
@@ -299,10 +376,20 @@ export class MeterUnitRegistersComponent implements OnInit {
     if (daysDiff <= 1) {
       // hourly interval
       this.hours = true;
-      outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setMinutes(0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d: EventRegisterValue) => ({
+        //timestamp: d.timestamp,
+        timestamp: new Date(d.timestamp).setMinutes(0, 0, 0),
+        value: d.value,
+        description: d.description
+      }));
     } else {
       this.hours = false;
-      outData = this.rowData.map((d: EventRegisterValue) => ({ timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0), value: d.value }));
+      outData = this.rowData.map((d: EventRegisterValue) => ({
+        //timestamp: d.timestamp,
+        timestamp: new Date(d.timestamp).setHours(0, 0, 0, 0),
+        value: d.value,
+        description: d.description
+      }));
     }
 
     const groupBy = (array, key) => {

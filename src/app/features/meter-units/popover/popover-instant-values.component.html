@@ -1,13 +1,23 @@
-<div class="form">
-  <div class="form-row pb-1 pt-1" *ngFor="let instantValue of visibleInstantValues">
-    <div class="col-6 text-truncate" placement="bottom" openDelay="500" [ngbTooltip]="instantValue.registerName" container="body" #divDescription>
-      {{instantValue.registerName}}
-    </div>
-    <div class="col-6 text-truncate">
-      <span class="p-1 {{ getClass(instantValue.interpretedValue) }}">{{instantValue.interpretedValue}}</span>
+<div class="form tw-py-2 tw-w-20">
+  <div *ngFor="let instantValue of visibleInstantValues" class="form-row pb-1 pt-1">
+    <div class="tw-inline-flex">
+      <div
+        #divDescription
+        [ngbTooltip]="instantValue.registerName"
+        [openDelay]="500"
+        class="text-truncate"
+        container="body"
+        placement="bottom"
+      >
+        {{ instantValue.registerName }}
+      </div>
+      <div class="text-truncate">
+        <span
+          class="p-1 tw-ml-2 {{ getClass(instantValue.interpretedValue) }}">{{ instantValue.interpretedValue }}</span>
+      </div>
     </div>
   </div>
-  <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1" >
-    <a href="javascript:void(0);" (click)="showMore()">{{ getShowAllText() }}</a>
+  <div *ngIf="isMoreButtonVisible" class="pt-1 pb-1">
+    <a (click)="showMore()" href="javascript:void(0);">{{ getShowAllText() }}</a>
   </div>
 </div>

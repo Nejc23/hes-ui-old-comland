@@ -17,6 +17,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { ReferenceType } from '../../../../core/repository/interfaces/meter-units/reference-type.enum';
 import { PermissionService } from '../../../../core/permissions/services/permission.service';
 import { MeterUnitsTypeGridEventEmitterService } from '../../types/services/meter-units-type-grid-event-emitter.service';
+import { DeviceMetaDataDto } from '../../../../api/concentrator-inventory/models/device-meta-data-dto';
+import { environment } from '../../../../../environments/environment';
+import * as moment from 'moment';
+import { MeterUnitsTypeGridService } from '../../types/services/meter-units-type-grid.service';
+import { MeterPropertyService } from '../../../../api/concentrator-inventory/services/meter-property.service';
+import { EventManagerService } from '../../../../core/services/event-manager.service';
+import { process } from '@progress/kendo-data-query';
 
 @Component({
   templateUrl: 'meter-unit-details.component.html',
@@ -26,6 +33,7 @@ export class MeterUnitDetailsComponent implements OnInit {
   public saveError;
   public data: MeterUnitDetails;
   public detailsForm: FormGroup;
+  public routerLinkUrl = '/meterUnits';
   communicationForm: FormGroup;
 
   plcAndMbusProtocols = ['DC450G3', 'AC750', 'AmeraDC', 'multiUtilityParent', 'Unknown'];
@@ -34,8 +42,11 @@ export class MeterUnitDetailsComponent implements OnInit {
   saveData = false;
   basicDetails = false;
   DeviceStateEnum = DeviceState;
+  extraDetailsVisible = false;
+  loadingMetadata = false;
 
-  private deviceId;
+  deviceId;
+  deviceMetadata: Array<DeviceMetaDataDto> = [];
   private requestModel;
 
   constructor(
@@ -51,12 +62,19 @@ export class MeterUnitDetailsComponent implements OnInit {
     private translate: TranslateService,
     private elRef: ElementRef,
     private permissionService: PermissionService,
-    private eventService: MeterUnitsTypeGridEventEmitterService
+    private eventService: MeterUnitsTypeGridEventEmitterService,
+    private meterUnitsTypeGridService: MeterUnitsTypeGridService,
+    private meterPropertyService: MeterPropertyService,
+    private eventsService: EventManagerService
   ) {
+    this.meterUnitsTypeGridService.setSessionSettingsSelectedAll(false);
     this.eventService.eventEmitterRefreshDevices.subscribe({
       next: () => {
         this.getData();
       }
+    });
+    this.eventsService.getCustom('RefreshMetadataEvent').subscribe(() => {
+      this.getMetadata();
     });
   }
 
@@ -67,6 +85,10 @@ export class MeterUnitDetailsComponent implements OnInit {
 
   get nameProperty() {
     return nameOf<MeterUnitDetailsForm>((o) => o.name);
+  }
+
+  get firstInstalledDateProperty() {
+    return nameOf<MeterUnitDetailsForm>((o) => o.firstInstalledDate);
   }
 
   get idProperty() {
@@ -224,31 +246,45 @@ export class MeterUnitDetailsComponent implements OnInit {
         this.isPlcDevice = true;
       }
       this.createForm();
+      this.getMetadata();
       this.closeSlideOut();
+    });
+  }
+
+  getMetadata() {
+    this.loadingMetadata = true;
+    this.meterPropertyService.meterDeviceIdMetadataGet({ deviceId: this.deviceId }).subscribe((res) => {
+      this.deviceMetadata = res;
+      // sort data same as grid
+      this.deviceMetadata = process(this.deviceMetadata, {
+        sort: [{ field: 'property', dir: 'asc' }]
+      }).data;
+      this.loadingMetadata = false;
     });
   }
 
   createForm() {
     this.detailsForm = this.formBuilder.group({
       name: this.data.name,
+      firstInstalledDate:
+        moment(this.data.firstInstallDate).format(environment.dateDisplayFormat) +
+        ' ' +
+        moment(this.data.firstInstallDate).format(environment.timeFormat),
       serialNumber: this.data.serialNumber,
       templateName: this.data.templateName,
-      //  deviceState: this.data.deviceState,
-      //   protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
       manufacturer: this.data.manufacturer,
-      //   ip: this.data.ip,
-      //   port: this.data.port,
-      externalId: this.data.externalId
+      externalId: this.data.externalId,
+      deviceId: this.data.deviceId
     });
 
     if (this.isPlcDevice) {
       this.communicationForm = this.formBuilder.group({
-        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType)
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase())
       });
     } else {
       this.communicationForm = this.formBuilder.group({
-        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType),
-        ip: this.data.ip,
+        protocolType: this.translate.instant('PROTOCOL.' + this.data.protocolType?.toUpperCase()),
+        hostname: this.data.hostname,
         port: this.data.port,
         referencingType: this.data.referencingType.toLowerCase() === ReferenceType.COSEM_SHORT_NAME.toLowerCase(),
         communicationType: this.data.hdlcInformation ? 'HDLC' : 'WRAPPER'
@@ -259,6 +295,14 @@ export class MeterUnitDetailsComponent implements OnInit {
   editButtonClicked(basicDetails?: boolean) {
     this.basicDetails = basicDetails;
     this.openEdit = true;
+  }
+
+  editCustomProperties() {
+    this.extraDetailsVisible = true;
+  }
+
+  closeExtraDetails() {
+    this.extraDetailsVisible = false;
   }
 
   // --> Operations action click
