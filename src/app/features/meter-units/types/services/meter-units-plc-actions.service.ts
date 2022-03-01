@@ -74,6 +74,21 @@ export class MeterUnitsPlcActionsService {
     });
   }
 
+  onScheduleMeterTimeSyncJobs(params: IActionRequestParams, selectedRowsCount: number) {
+    const options: NgbModalOptions = {
+      size: 'xl'
+    };
+
+    this.codelistService.timeUnitCodeslist().subscribe((units) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      modalRef.componentInstance.selectedRowsCount = selectedRowsCount;
+      component.setFormAddNew(JobTypeEnumeration.meterTimeSync, units);
+      component.prepareNewJobForDevicesRequest(params);
+      modalRef.result.then().catch(() => {});
+    });
+  }
+
   onJobsAssignExisting(params: IActionRequestParams, selectedRowsCount: number) {
     this.jobsSelectGridService.clearSessionSettingsSelectedRows();
 

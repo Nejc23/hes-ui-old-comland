@@ -83,6 +83,9 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
     } else if (params.data.jobType === JobTypeEnumeration.timeSync) {
       // dc time sync
       this.editDcTimeSyncJob(params, options);
+    } else if (params.data.jobType === JobTypeEnumeration.meterTimeSync) {
+      // dc time sync
+      this.editMeterTimeSyncJob(params, options);
     } else if (params.data.jobType === JobTypeEnumeration.readEvents) {
       // dc read events job
       this.editDcReadEventsJob(params, options);
@@ -187,6 +190,26 @@ export class GridCellEditActionsComponent implements ICellRendererAngularComp {
       const modalRef = this.modalService.open(SchedulerJobComponent, options);
       const component: SchedulerJobComponent = modalRef.componentInstance;
       component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.timeSync);
+
+      modalRef.result.then(
+        (data) => {
+          // on close (CONFIRM)
+          this.eventService.eventEmitterRefresh.emit(true);
+        },
+        (reason) => {
+          // on dismiss (CLOSE)
+        }
+      );
+    });
+  }
+
+  private editMeterTimeSyncJob(params: any, options: NgbModalOptions) {
+    const selectedJobId = params.data.id;
+
+    this.service.getJob(selectedJobId).subscribe((job) => {
+      const modalRef = this.modalService.open(SchedulerJobComponent, options);
+      const component: SchedulerJobComponent = modalRef.componentInstance;
+      component.setFormEdit(null, selectedJobId, job, JobTypeEnumeration.meterTimeSync);
 
       modalRef.result.then(
         (data) => {
