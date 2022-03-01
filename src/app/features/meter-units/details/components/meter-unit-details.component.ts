@@ -390,6 +390,12 @@ export class MeterUnitDetailsComponent implements OnInit {
   }
 
   // popup
+  onScheduleMeterTimeSyncJobs() {
+    const params = this.plcActionsService.getOperationRequestParam('', this.requestModel, 0, []);
+    this.plcActionsService.onScheduleMeterTimeSyncJobs(params, 1);
+  }
+
+  // popup
   onJobsAssignExisting() {
     const params = this.plcActionsService.getOperationRequestParam(this.deviceId, this.requestModel, 1, []);
     this.plcActionsService.onJobsAssignExisting(params, 1);

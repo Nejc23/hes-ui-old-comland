@@ -52,9 +52,19 @@
                 class="dropdown-item"
               >
                 <a href="javascript:void(0)"
-                ><span>{{ 'PLC-METER.CREATE-NEW' | translate }}</span></a
+                ><span>{{ 'PLC-METER.CREATE-NEW-READING' | translate }}</span></a
                 >
               </div>
+               <div
+	              (click)="onScheduleMeterTimeSyncJobs()"
+	              [permission]="permissionManageJobs"
+	              appHideIfPermissionUnauthorized
+	              class="dropdown-item"
+	            >
+	              <a href="javascript:void(0)"
+	              ><span>{{ 'PLC-METER.CREATE-NEW-TIME-SYNC' | translate }}</span></a
+              >
+            </div>
               <div
                 (click)="onJobsAssignExisting()"
                 [permission]="permissionManageJobs"

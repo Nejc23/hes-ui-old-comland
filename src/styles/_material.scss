@@ -1,8 +1,12 @@
 @import 'material-icons/iconfont/material-icons.scss';
 
-.material-icons, material-icons-outlined {
+.material-icons, .material-icons-outlined {
   &.md-20 {
     font-size:20px;
+  }
+  &.large {
+    font-size:32px;
+    @apply tw-text-primary;
   }
 }
 

@@ -7,19 +7,17 @@
     <ng-container>
     <div id="step0" *ngIf="step === 0">
       <div class="form-row">
-        <div class="col-12">
+        <div class="col-12 tw-mb-4 tw-text-mediumGray">
           <span>{{ 'JOB.SCHEDULER-JOB.SELECT-JOB' | translate }}</span>
         </div>
       </div>
       <div class="row">
-        <div class="col-12 add-job-grid">
-          <div class="row">
-            <div class="col-4 h-100 p-0 card-container {{addJobForUser.cssClasses}}" *ngFor="let addJobForUser of addJobsForUser">
-              <app-add-job
-                [jobParams]="addJobForUser"
-                (addJob)="addJob($event)"
-              ></app-add-job>
-            </div>
+        <div class="tw-flex tw-flex-col tw-container tw-mt-10 tw-w-full tw-items-center tw-justify-center" *ngFor="let addJobForUser of addJobsForUser">
+          <div class="tw-flex tw-flex-col tw-w-full">
+          <app-add-job
+            [jobParams]="addJobForUser"
+            (addJob)="addJob($event)"
+          ></app-add-job>
           </div>
         </div>
       </div>
@@ -99,6 +97,13 @@
         [severities]="severities"
         [sources]="sources">
       </app-alarm-notification-rules>
+    </div>
+
+    <div id="step2" *ngIf="step === 2 && showMeterTimeSync">
+      <app-meter-time-sync
+        [form] = "formMeterTimeSync"
+        >
+      </app-meter-time-sync>
     </div>
 
     </ng-container>

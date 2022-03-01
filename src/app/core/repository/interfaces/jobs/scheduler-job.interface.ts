@@ -41,6 +41,9 @@ export interface ReadingProperties {
   iecPushEnabled: boolean;
   intervalRange: number;
   timeUnit: number;
+  unConditionalSync?: boolean;
+  syncWindowMaxInMs?: number;
+  syncWindowMinInMs?: number;
 }
 
 export interface Schedule {

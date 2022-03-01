@@ -116,6 +116,7 @@ import { TouConfigListComponent } from '../features/meter-units/common/component
 import { AddTimeUnitComponent } from '../features/meter-units/common/components/plc-meter-tou-config/add-time-unit/add-time-unit.component';
 import { LabelModule } from '@progress/kendo-angular-label';
 import { DownloadDataConcentratorClientCertComponent } from '../features/data-concentrator-units/components/download/download-dc-client-cert.component';
+import { MeterTimeSyncComponent } from '../features/jobs/components/scheduler-job/meter-time-sync.component';
 
 // required for AOT compilation
 export function HttpLoaderFactory(http: HttpClient) {
@@ -186,6 +187,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent,
+    MeterTimeSyncComponent,
     PlcReadRegistersComponent,
     StatusJobComponent,
     ActiveJobsListComponent,
@@ -321,6 +323,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     HideIfPermissionUnauthorizedDirective,
     HideDividerIfPermissionsUnauthorizedDirective,
     AlarmNotificationRulesComponent,
+    MeterTimeSyncComponent,
     AddJobComponent,
     PlcReadRegistersComponent,
     StatusJobComponent,
@@ -380,6 +383,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     PlcMeterJobsAssignExistingComponent,
     SecurityChangePasswordComponent,
     AlarmNotificationRulesComponent,
+    MeterTimeSyncComponent,
     PlcReadRegistersComponent,
     SecurityRekeyConcentratorComponent,
     DownloadDataConcentratorClientCertComponent,

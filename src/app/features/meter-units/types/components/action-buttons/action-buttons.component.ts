@@ -310,6 +310,18 @@ export class ActionButtonsComponent {
     this.plcActionsService.onScheduleReadJobs(params, selectedGuid?.length > 0 ? 1 : this.selectedCount);
   }
 
+  // popup
+  onScheduleMeterTimeSyncJobs(selectedGuid?: string) {
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+
+    this.plcActionsService.onScheduleMeterTimeSyncJobs(params, selectedGuid?.length > 0 ? 1 : this.selectedCount);
+  }
+
   onJobsAssignExisting(selectedGuid?: string) {
     const params = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
