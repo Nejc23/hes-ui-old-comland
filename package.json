@@ -57,7 +57,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "@popperjs/core": "^2.9.2",
-    "@progress/kendo-angular-buttons": "^6.2.1",
+    "@progress/kendo-angular-buttons": "^7.0.2",
     "@progress/kendo-angular-charts": "^5.2.1",
     "@progress/kendo-angular-common": "^2.0.1",
     "@progress/kendo-angular-dateinputs": "^5.2.2",
