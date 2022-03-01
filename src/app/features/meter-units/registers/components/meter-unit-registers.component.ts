@@ -128,7 +128,6 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   normalizedValues = false; //  DoNotNormalize = 0 or Normalize = 1
   showNormalizedValues = false;
-  normalizedValuesNotExist = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -183,7 +182,7 @@ export class MeterUnitRegistersComponent implements OnInit {
     const registerValue = this.form.get(this.registerProperty).value;
     const selectedRegister = this.deviceRegisters.find((r) => r.registerDefinitionId === registerValue);
     this.isRegisterSelected = true;
-    this.normalizedValues = selectedRegister.normalizationMode === 'normalize'; // DoNotNormalize = 0 or Normalize = 1
+    this.normalizedValues = true; // selectedRegister.normalizationMode === 'normalize'; // DoNotNormalize = 0 or Normalize = 1
     if (this.normalizedValues) {
       this.showNormalizedValues = true;
     }
@@ -319,10 +318,6 @@ export class MeterUnitRegistersComponent implements OnInit {
         } else {
           this.isDataFound = true;
           this.rowData = values;
-          if (this.showNormalizedValues && this.rowData.length > 0 && this.rowData[0].normValueWithUnit === undefined) {
-            this.showNormalizedValues = false;
-            this.normalizedValuesNotExist = true;
-          }
           this.registerStatisticsData = this.registerStatisticsService.getRegisterStatistics(this.rowData, this.showNormalizedValues);
           if (this.isEvent) {
             this.setEventData();
@@ -347,16 +342,18 @@ export class MeterUnitRegistersComponent implements OnInit {
 
   toGridData(registerValues: RegisterValue[]) {
     this.gridData = [];
-    registerValues.forEach((register) => {
-      this.gridData.push({
-        requestId: register.requestId,
-        unit: this.showNormalizedValues ? register.normValueWithUnit?.unit : register.valueWithUnit?.unit,
-        value: this.showNormalizedValues ? register.normValueWithUnit?.value : register.valueWithUnit?.value,
-        status: register.status,
-        timestamp: register.timestamp,
-        description: register.description
+    if (registerValues?.length > 0) {
+      registerValues.forEach((register) => {
+        this.gridData.push({
+          requestId: register.requestId,
+          unit: this.showNormalizedValues ? register.normValueWithUnit?.unit : register.valueWithUnit?.unit,
+          value: this.showNormalizedValues ? register.normValueWithUnit?.value : register.valueWithUnit?.value,
+          status: register.status,
+          timestamp: register.timestamp,
+          description: register.description
+        });
       });
-    });
+    }
   }
 
   eventToGridData(registerValues: EventRegisterValue[]) {
@@ -500,7 +497,7 @@ export class MeterUnitRegistersComponent implements OnInit {
   }
 
   onValueChanged(event: boolean) {
-    this.showNormalizedValues = event;
+    this.showNormalizedValues = !event;
     this.toGridData(this.rowData);
     this.showData(this.selectedRegister, true);
   }
@@ -509,9 +506,6 @@ export class MeterUnitRegistersComponent implements OnInit {
     if (this.showNormalizedValues) {
       return this.translate.instant('PLC-METER.NORMALIZED-DATA');
     }
-    if (this.normalizedValuesNotExist) {
-      return this.translate.instant('PLC-METER.NORMALIZED-DATA-NOT-EXIST');
-    }
-    return this.translate.instant('PLC-METER.ROW-DATA');
+    return this.translate.instant('PLC-METER.RAW-DATA');
   }
 }

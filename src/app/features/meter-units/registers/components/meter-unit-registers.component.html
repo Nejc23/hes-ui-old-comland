@@ -79,12 +79,13 @@
         <app-date-range-picker (valueChange)="onRefresh()" [endProperty]="endDateProperty" [form]="form"
                                [startProperty]="startDateProperty" class="tw-w-1/2">
         </app-date-range-picker>
-        <div class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+        <div *ngIf="normalizedValues && isDataFound" class="tw-w-1/2 tw-flex tw-self-center tw-justify-end">
+          <div class="tw-text-mediumGray tw-flex tw-self-center tw-pr-3 tw-pt-0.5">
+            {{ 'PLC-METER.SHOW-RAW' | translate}}
+          </div>
           <div>
             <kendo-switch (valueChange)="onValueChanged($event)"
-                          *ngIf="normalizedValues && isDataFound"
-                          [checked]="showNormalizedValues"
-                          [disabled]="normalizedValuesNotExist"
+                          [checked]="!showNormalizedValues"
                           [title]="getPopoverText()"
                           class="small-switch"
                           data-placement="top"
