@@ -428,8 +428,10 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
     this.settingsStoreService.getCurrentUserSettings(this.dcuUnitsGridLayoutStoreKey).subscribe(
       (settings) => {
         this.dcuUnitsGridLayoutStore = settings as DcuUnitsGridLayoutStore;
-        this.addSettingsToSession(settings);
-        this.setFilter();
+        if (settings) {
+          this.addSettingsToSession(settings);
+          this.setFilter();
+        }
         this.areSettingsLoaded = true;
         this.getData();
       },
