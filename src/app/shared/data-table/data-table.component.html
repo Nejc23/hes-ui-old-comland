@@ -101,7 +101,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
               (selectionChange)="dropdownFilterValueChanged($event, filter.field)"
               [data]="filter.values"
               [defaultItem]="defaultFilterItem | translate"
-              [id]="filter"
+              [id]="filter.field"
             >
             </kendo-dropdownlist>
           </div>
