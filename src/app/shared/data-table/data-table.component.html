@@ -21,7 +21,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
   [ngClass]="tableClass ? tableClass : ''"
   [pageSize]="pageSize"
   [pageable]="pageable"
-  [reorderable]="false"
+  [resizable]="true"
   [rowClass]="rowClass"
   [rowHeight]="rowHeight"
   [scrollable]="scrollable"
@@ -169,17 +169,18 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                               [resizable]=checkboxColumn.resizable
                               [showSelectAll]=checkboxColumn.showSelectAll
                               [sticky]="true"
-                              [width]=checkboxColumn.width
+                              [width]="60"
                               class="checkboxes">
   </kendo-grid-checkbox-column>
 
   <!--sticky last column for row actions in scrollable mode in case of grid has horizontal scroll and last column is not visible  -->
   <kendo-grid-column *ngFor="let column of gridColumns; let i = index"
-                     [autoSize]="true"
                      [class]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1 ? 'transparent-background' : column.class"
                      [field]="column.field"
                      [hidden]="column.field === 'rowActions' && inlineAddOrEdit ? true : column.hidden"
                      [locked]="column.locked"
+                     [minResizableWidth]="80"
+                     [resizable]="true"
                      [sortable]="!column.sortingDisabled"
                      [sticky]="this.scrollable === 'scrollable' && rowActions.length > 0 && gridColumns.length === i + 1"
                      [title]="column.translationKey | translate"
