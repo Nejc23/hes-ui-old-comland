@@ -612,7 +612,7 @@
         "METER": "Meter",
         "NEXT-READ": "Next planned read",
         "NO-JOBS": "No Jobs have been added yet.",
-        "NOTIFICATION": "Notification",
+        "NOTIFICATION": "Notifications",
         "READ-EVENTS": "Read events",
         "READING": "Reading",
         "READING-JOBS": "Reading Jobs",
@@ -651,7 +651,7 @@
         "ACTIVE-JOBS": "Active jobs",
 		"METER-TIME-SYNC": {
 			"CONDITIONAL-SYNC" : "Conditional synchronization",
-			"CONDITIONAL-SYNC-INFO": "Time will be synchronized if the clock on the meter is outside of upper and lower borders",
+			"CONDITIONAL-SYNC-INFO": "Time will be synchronized only if the clock on the meter is outside of upper and lower borders",
 			"CONDITIONAL-SYNC-ALERT": "Clock will be synchronized unconditionally every time job will be executed!"
 		}
     },
