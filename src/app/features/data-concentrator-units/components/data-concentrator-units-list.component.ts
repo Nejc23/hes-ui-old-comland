@@ -169,7 +169,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.bredcrumbService.setPageName('');
     this.selectedRowsIds = JSON.parse(localStorage.getItem('concentratorsSelectedRowsIds')) ?? [];
-    this.selectAllEnabled = JSON.parse(localStorage.getItem('concentratorsSelectAllEnabled')) ?? [];
+    this.selectAllEnabled = JSON.parse(localStorage.getItem('concentratorsSelectAllEnabled')) ?? false;
     this.requestModel.excludeIds = JSON.parse(localStorage.getItem('concentratorsExcludedIds')) ?? [];
 
     this.concentratorsColumns
