@@ -267,6 +267,7 @@ export class DataConcentratorUnitsListComponent implements OnInit, OnDestroy {
 
   // set filter in request model
   setFilter() {
+    this.pageNumber = 1;
     if (
       !this.dataConcentratorUnitsGridService.checkIfFilterModelAndCookieAreSame(
         this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter),

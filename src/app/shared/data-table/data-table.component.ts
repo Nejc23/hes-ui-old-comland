@@ -261,9 +261,6 @@ export class DataTableComponent implements OnInit, OnChanges {
   constructor(private modalService: ModalService, private translate: TranslateService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
-    if (this.totalCount === 0) {
-      this.pageNumber = 0;
-    }
     this.searchForm = this.fb.group({
       ['search']: this.searchText
     });
@@ -334,6 +331,9 @@ export class DataTableComponent implements OnInit, OnChanges {
       console.log(this.selectedKeys);
       if (this.excludedIdsFromSelection) {
         this.selectedKeys = this.selectedKeys.filter((id) => !this.excludedIdsFromSelection.includes(id)); //
+      }
+      if (this.totalCount === 0) {
+        this.pageNumber = 0;
       }
       console.log(this.selectedKeys);
     }

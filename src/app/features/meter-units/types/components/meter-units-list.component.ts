@@ -441,6 +441,7 @@ export class MeterUnitsListComponent implements OnInit {
   }
 
   applyFilters(saveUserSettings = true) {
+    this.pageNumber = 1;
     const filter = this.gridFilterSessionStoreService.getGridLayout(this.sessionNameForGridFilter) as MeterUnitsLayout;
     console.log(filter);
     this.requestModel.filterModel.states = filter.statesFilter ?? [];
