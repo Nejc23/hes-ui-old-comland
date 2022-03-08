@@ -9,6 +9,7 @@ import { GridSettingsSessionStoreTypeEnum } from 'src/app/core/utils/enums/grid-
 import { configAgGrid, configAgGridDefCol } from 'src/environments/config';
 import { GridCellEditActionsComponent } from '../components/grid-custom-components/grid-cell-edit-actions.component';
 import { TranslateService } from '@ngx-translate/core';
+import { GridColumn, GridColumnType, GridRowAction } from '../../../shared/data-table/data-table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +17,58 @@ import { TranslateService } from '@ngx-translate/core';
 export class SchedulerJobsListGridService {
   sessionNameForGridState = 'grdJobs-scheduled';
 
-  columns = [];
+  columns: Array<GridColumn> = [
+    {
+      field: 'active',
+      translationKey: 'GRID.ACTIVE',
+      width: 65,
+      type: GridColumnType.SWITCH,
+      class: 'no-padding'
+    },
+    {
+      field: 'description',
+      translationKey: 'GRID.DESCRIPTION',
+      width: 200
+    },
+    {
+      field: 'type',
+      translationKey: 'GRID.TYPE',
+      width: 140
+    },
+    {
+      field: 'nextRun',
+      translationKey: 'GRID.NEXT-RUN',
+      width: 100,
+      type: GridColumnType.DATE_TIME
+    },
+    {
+      field: 'owner',
+      translationKey: 'GRID.CREATED-BY',
+      width: 80
+    },
+    {
+      field: 'deviceCount',
+      translationKey: 'GRID.DEVICES',
+      width: 80,
+      type: GridColumnType.LINK,
+      class: 'green-badge'
+    }
+  ];
   paramsJobs = {} as GridRequestParams;
+  rowActions: Array<GridRowAction> = [
+    {
+      actionName: 'runJob',
+      iconName: 'play-icon'
+    },
+    {
+      actionName: 'editJob',
+      iconName: 'edit'
+    },
+    {
+      actionName: 'deleteJob',
+      iconName: 'delete'
+    }
+  ];
 
   constructor(private gridSettingsSessionStoreService: GridSettingsSessionStoreService, private translate: TranslateService) {}
 
@@ -31,90 +82,6 @@ export class SchedulerJobsListGridService {
       gridCellEditActionsComponent: GridCellEditActionsComponent,
       gridCellDeviceCountComponent: GridCellDeviceCountComponent
     };
-  }
-
-  /**
-   * Grid columns settings
-   */
-  setGridDefaultColumns() {
-    return [
-      {
-        width: 100,
-        minWidth: 100,
-        maxWidth: 100,
-        suppressMenu: true,
-        suppressMovable: true,
-        field: 'active',
-        cellRenderer: 'gridCellActiveComponent',
-        headerName: this.translate.instant('GRID.ACTIVE'),
-        headerTooltip: this.translate.instant('GRID.ACTIVE'),
-        resizable: false
-      },
-      {
-        field: 'description',
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        headerName: this.translate.instant('GRID.DESCRIPTION'),
-        headerTooltip: this.translate.instant('GRID.DESCRIPTION'),
-        resizable: false
-      },
-      {
-        field: 'type',
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        headerName: this.translate.instant('GRID.JOB-TYPE'),
-        headerTooltip: this.translate.instant('GRID.JOB-TYPE'),
-        resizable: false
-      },
-      {
-        field: 'nextRun',
-        suppressMenu: true,
-        sortable: false,
-        suppressMovable: true,
-        cellRenderer: 'gridCellNextRunComponent',
-        headerName: this.translate.instant('GRID.NEXT-RUN'),
-        headerTooltip: this.translate.instant('GRID.NEXT-RUN'),
-        resizable: false
-      },
-      {
-        field: 'owner',
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        headerName: this.translate.instant('GRID.CREATED-BY'),
-        headerTooltip: this.translate.instant('GRID.CREATED-BY'),
-        resizable: false
-      },
-      {
-        field: 'deviceCount',
-        suppressMenu: true,
-        sortable: true,
-        suppressMovable: true,
-        cellRenderer: 'gridCellDeviceCountComponent',
-        headerName: this.translate.instant('GRID.DEVICES'),
-        headerTooltip: this.translate.instant('GRID.DEVICES'),
-        resizable: false
-      },
-      {
-        field: 'id',
-        width: 150,
-        minWidth: 150,
-        maxWidth: 150,
-        suppressMenu: true,
-        editable: false,
-        suppressMovable: true,
-        lockPinned: true,
-        sortable: false,
-        filter: false,
-        cellRenderer: 'gridCellEditActionsComponent',
-        headerName: '',
-        cellClass: 'actions-button-cell',
-        resizable: false,
-        pinned: 'right'
-      }
-    ];
   }
 
   /**

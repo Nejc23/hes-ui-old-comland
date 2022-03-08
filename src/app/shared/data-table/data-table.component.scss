@@ -97,10 +97,14 @@
 }
 
 .green {
-  color: #37A350;
+  color: #37A350 !important;
   padding: 3px 8px;
   background: rgba(55, 163, 80, 0.1);
   border-radius: 2px;
+
+  a {
+    color: #37A350 !important;
+  }
 }
 
 .red {
@@ -434,5 +438,17 @@
 
   &::before {
     opacity: 0;
+  }
+}
+
+.green-badge {
+  a {
+    color: #37A350 !important;
+    padding: 3px 8px 3px 8px;
+    background: rgba(55, 163, 80, 0.2);
+    border-radius: 2px;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: text !important; // until we add back link
   }
 }

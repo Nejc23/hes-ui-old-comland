@@ -201,7 +201,8 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <!--- no type defined is string -->
-        <ng-container *ngIf="!column.type && dataItem[column.field] || dataItem[column.field] === 0">
+        <ng-container
+          *ngIf="!column.type && dataItem[column.field] || dataItem[column.field] === 0 && column.type !== columnType.LINK">
           <div [class]="column.class?? 'tw-inline-flex'" [title]="dataItem[column.field]" data-placement="top"
                data-toggle="tooltip">
             <ng-container *ngIf="column.icon; else noIcon">
@@ -217,8 +218,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.SWITCH">
-          <kendo-switch [checked]="dataItem[column.field]"
-                        [readonly]="true"></kendo-switch>
+          <div (click)="switchClicked(dataItem, dataItem[column.field])" class="tw-flex">
+            <div class="tw-cursor-pointer">
+              <kendo-switch [checked]="dataItem[column.field]"
+                            [readonly]="true"
+                            class="tw-ml-2 tw-cursor-pointer"></kendo-switch>
+              <!-- set to readonly that switch value doesnt change and added click event to div (click event not working in switch is readonly) -->
+            </div>
+          </div>
         </ng-container>
 
         <ng-container *ngIf="column.type === columnType.DATE_ONLY">
@@ -257,10 +264,12 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
 
         <!-- hyperlink with event emitter -->
         <ng-container *ngIf="column.type === columnType.LINK">
-          <div [title]="dataItem[column.field]" data-placement="top"
+          <div [ngClass]="column.class"
+               [title]="dataItem[column.field]"
+               data-placement="top"
                data-toggle="tooltip">
             <a (click)="linkClicked(column.field, dataItem[this.kendoGridSelectByColumn], dataItem)"
-               class="tw-text-secondary tw-cursor-pointer">{{ dataItem[column.field] }}</a>
+               class="tw-text-secondary tw-cursor-pointer tw-mx-1">{{ dataItem[column.field] }}</a>
           </div>
         </ng-container>
 
@@ -423,9 +432,10 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
                     [fileName]="this.excelFileName"
   >
     <ng-container *ngFor="let column of gridColumns">
-      <kendo-excelexport-column *ngIf="!(column.field === 'icons' || column.field === 'rowActions')"
-                                [field]="column.field"
-                                [title]="column.translationKey | translate">
+      <kendo-excelexport-column
+        *ngIf="!(column.field === 'icons' || column.field === 'rowActions' || column.field === 'active') && column.type !== columnType.DATE_TIME"
+        [field]="column.field"
+        [title]="column.translationKey | translate">
       </kendo-excelexport-column>
     </ng-container>
 
@@ -462,7 +472,7 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </div>
 
 
-        <div (click)="selectAll()" class="text-primary tw-font-medium tw-ml-5">
+        <div (click)="selectAll()" *ngIf="withRowSelection" class="text-primary tw-font-medium tw-ml-5">
           <span class="tw-mr-1">{{ 'GRID.SELECT-ALL' | translate }}</span>
         </div>
 
@@ -488,14 +498,14 @@ supporting virtual scrolling, pagination, client side data and fetching remote d
         </button>
 
         <div class="tw-mx-6 tw-text-darkGray tw-inline-flex tw-text-sm">
-          <div>
-            {{ 'GRID.PAGE' | translate | titlecase }} {{ pageNumber }}
+          <div class="tw-mx-1">
+            {{ 'GRID.PAGE' | translate | titlecase }}
           </div>
+          {{ pageNumber }}
           <div class="tw-mx-1">
             {{ 'GRID.OF' | translate }}
           </div>
-          <div
-            class="tw-font-bold tw-text-black tw-text-sm">{{ totalPages }}</div>
+          <div>{{ totalPages }}</div>
         </div>
 
         <button (click)="navigateToNextPage()" [disabled]="loading" class="small-button "
