@@ -164,7 +164,7 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() pageable = false;
   @Input() stickyHeader = false;
   @Input() tableHeight = 450;
-  @Input() total;
+  @Input() totalCount; // total items count (totalCount from backend)
   @Input() rowHeight: 44; // required for virtual scroll
   @Input() fetchData = false; // fetch data from API on next page
   @Input() excelFileName = '';
@@ -187,7 +187,6 @@ export class DataTableComponent implements OnInit, OnChanges {
   @Input() wildCardsEnabled = false;
   @Input() inlineEdit = false;
   @Input() withAddButton = false;
-  @Input() totalCount;
   @Input() editFieldById = ''; // id needs to be defined for inline edit
   @Input() noDataTextAlignLeft = false;
   searchForm: FormGroup;
@@ -345,7 +344,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     }
   }
 
-  switchValueChanged(id: string, event: Event) {
+  switchValueChanged(id: string, event: boolean) {
     this.switchClickedEvent.emit({ id: id, value: event });
   }
 
@@ -371,7 +370,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     if (this.fetchData) {
       this.skip = event.skip;
       // load next page
-      if (this.pageNumber * this.pageSize < this.total) {
+      if (this.pageNumber * this.pageSize < this.totalCount) {
         if (this.scrollable === 'virtual') {
           this.pageNumber++;
         } else {
@@ -389,7 +388,7 @@ export class DataTableComponent implements OnInit, OnChanges {
     } else {
       // client side data
       this.skip = event.skip;
-      this.loadItems(this.gridData, this.total ? this.total : this.gridData.length);
+      this.loadItems(this.gridData, this.totalCount ? this.totalCount : this.gridData.length);
     }
   }
 
@@ -547,7 +546,7 @@ export class DataTableComponent implements OnInit, OnChanges {
 
   initGrid() {
     if (this.gridData) {
-      this.loadItems(this.gridData, this.total ? this.total : this.gridData.length);
+      this.loadItems(this.gridData, this.totalCount ? this.totalCount : this.gridData.length);
     } else {
       // no data
       this.gridView = {
@@ -597,7 +596,7 @@ export class DataTableComponent implements OnInit, OnChanges {
       data = this.filteredData;
     }
     this.sort = sort;
-    this.loadItems(data, this.total ? this.total : data.length, this.sort);
+    this.loadItems(data, this.totalCount ? this.totalCount : data.length, this.sort);
   }
 
   // clear all filters Text
@@ -627,12 +626,12 @@ export class DataTableComponent implements OnInit, OnChanges {
   // grid navigation for pagination with API calls
 
   navigateToLastPage() {
-    this.pageNumber = Math.ceil(this.total / this.pageSize);
+    this.pageNumber = Math.ceil(this.totalCount / this.pageSize);
     this.pageChangedEvent.emit({ pageNumber: this.pageNumber });
   }
 
   navigateToNextPage() {
-    if (this.pageNumber < this.total / this.pageSize) {
+    if (this.pageNumber < this.totalCount / this.pageSize) {
       this.pageNumber++;
       this.pageChangedEvent.emit({ pageNumber: this.pageNumber });
     }
@@ -806,6 +805,10 @@ export class DataTableComponent implements OnInit, OnChanges {
       }
     });
     return error;
+  }
+
+  switchClicked(rowData: any, value: boolean) {
+    this.switchValueChanged(rowData[this.kendoGridSelectByColumn], value);
   }
 
   private closeEditor(rowIndex = this.editedRowIndex) {

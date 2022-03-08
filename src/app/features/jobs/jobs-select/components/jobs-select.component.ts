@@ -143,9 +143,7 @@ export class JobsSelectComponent implements OnInit {
         that.requestModel.searchModel = that.setSearch();
 
         const currentPageIndex = that.jobsSelectGridService.getSessionSettingsPageIndex();
-        const allDisplayedColumns = that.getAllDisplayedColumnsNames();
-
-        that.jobsService.getSchedulerJobsListForm(that.requestModel, currentPageIndex, allDisplayedColumns).subscribe((data) => {
+        that.jobsService.getSchedulerJobsListForm(that.requestModel, currentPageIndex).subscribe((data) => {
           that.gridApi.hideOverlay();
           that.totalCount = data.totalCount;
           if ((data === undefined || data == null || data.totalCount === 0) && that.noSearch()) {

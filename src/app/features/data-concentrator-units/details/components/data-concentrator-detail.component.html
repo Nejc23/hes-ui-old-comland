@@ -5,8 +5,8 @@
   <div [style.width.px]="addWidth()" class="tw-inline-flex tw-justify-between tw-items-center">
 
     <app-page-title
-      [routerUrl]="routerLinkUrl"
       [backButton]="true"
+      [routerUrl]="routerLinkUrl"
       [state]="data.stateValue"
       [subtitle]="data.typeValue"
       [title]="data.name ? data.name : data.serialNumber"
@@ -157,7 +157,7 @@
                           [scrollable]="'virtual'"
                           [skip]="0"
                           [tableHeight]="622"
-                          [total]="metersTotal"
+                          [totalCount]="metersTotal"
                           [withSearch]="true"
           >
           </app-data-table>
@@ -223,7 +223,7 @@
             [skip]="0"
             [tableClass]="chartVisible ? 'with-chart visible min-height' : 'with-chart hidden min-height'"
             [tableHeight]="chartVisible ? 322 : 563"
-            [total]="events.length"
+            [totalCount]="events.length"
             [withSearch]="true"
           >
 
