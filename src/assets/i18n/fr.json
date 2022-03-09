@@ -5,7 +5,8 @@
     "BREADCRUMB": {
         "CONCENTRATOR": "Concentrateur",
         "JOBS": "jobs",
-        "OVERVIEW": "Aperçu - Unités de compteurs"
+        "OVERVIEW": "Aperçu - Unités de compteurs",
+        "DCU": "Concentrateurs"
     },
     "BUTTON": {
         "ACTIVATE": "Activation",
@@ -34,7 +35,7 @@
         "CONTINUE-WITH-EDITING": "continuer avec les modifications",
         "REJECT": "Rejeter",
         "GRANT": "Accorder",
-        "ADD-NEW": "Add new"
+        "ADD-NEW": "Nouvel ajout "
     },
     "COMMON": {
         "0-100-RANGE": "La valeur doit être entre 0-100",
@@ -214,16 +215,16 @@
         },
         "OPERATION-FAILED": "L'opération a échoué. Veuillez actualiser la page et réessayer",
         "CLEAR-ALL-FILTERS": "supprimer tous les filtres",
-        "EXTRA-DETAILS": "Extra details",
-        "EDIT-EXTRA-DETAILS": "Edit extra details",
-        "NO-EXTRA-DETAILS": "No extra details are specified for this device",
-        "ADD-EXTRA-DETAILS": "Add extra details",
-        "EXTRA-DETAILS-ADDED": "Extra details was added successfully",
-        "EXTRA-DETAILS-REMOVED": "Extra details was removed successfully",
-        "EXTRA-DETAILS-UPDATED": "Extra details was updated successfully",
-        "EXTRA-DETAILS-ADDED-FAILED": "There was an error saving extra details",
-        "EXTRA-DETAILS-UPDATE-FAILED": "There was an error updating extra details",
-        "VALID-FROM": "Valid from"
+        "EXTRA-DETAILS": "Détails en plus",
+        "EDIT-EXTRA-DETAILS": "Modifier les détails en plus",
+        "NO-EXTRA-DETAILS": "Aucun détail supplémentaire n'est spécifié pour ce dispositif",
+        "ADD-EXTRA-DETAILS": "Ajouter les détails en plus",
+        "EXTRA-DETAILS-ADDED": "Les détails supplémentaires ont été ajoutés avec succès",
+        "EXTRA-DETAILS-REMOVED": "Les détails supplémentaires ont été enlevés avec succès",
+        "EXTRA-DETAILS-UPDATED": "Les détails supplémentaires ont été mis à jour avec succès",
+        "EXTRA-DETAILS-ADDED-FAILED": "Une erreur est survenue pendant la mise en mémoire des détails en plus",
+        "EXTRA-DETAILS-UPDATE-FAILED": "Une erreur est survenue pendant la mse à jour des détails en plus",
+        "VALID-FROM": "Valable dès le "
     },
     "DAY": {
         "CURRENT-MONTH": "mois courant",
@@ -287,7 +288,7 @@
         "PROTECT-YOUR-CERT": "Protéger votre certificat",
         "ENTER-CLIENT-PASSWORD": "Mettre le mot de passe pour le certificat",
         "CLIENT-CERTS-ERROR": "L'opération a échoué.",
-        "CONCENTRATORS-OVERVIEW": "Data Concentrators overview"
+        "CONCENTRATORS-OVERVIEW": "Aperçu des concentrateurs de données"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - la page n'existe pas"
@@ -346,7 +347,7 @@
             "INVALID-HOSTNAME": "Le nom d'hôte n'est pas valable",
             "ID-EXIST": "No. ID existe",
             "DUPLICATED-HOSTNAME": "La combination du hostname et du port est en double",
-            "INVALID-FIELDS": "Input does not meet minimum required amount of characters"
+            "INVALID-FIELDS": "La saisie ne correspond pas au nombre minimum de caractères requis"
         },
         "EXPRESSION": "Expression",
         "EXTERNAL-ID": "Id externe",
@@ -463,10 +464,12 @@
         "REQUEST-ID": "ID",
         "CREATED-AT": "créé à",
         "REJECTED-GRANTED": "Rejeté / accordé par",
-        "FIRSTINSTALLEDDATE": "Installed",
-        "PROPERTY": "Property",
-        "VALUE": "Value",
-        "DEVICEID": "Guid"
+        "FIRSTINSTALLEDDATE": "Installé",
+        "PROPERTY": "Propriété",
+        "VALUE": "Valeur",
+        "DEVICEID": "Guide",
+        "SYNC-WINDOW-MIN": "Limite inférieure (ms)",
+        "SYNC-WINDOW-MAX": "Limite supérieure (ms)"
     },
     "GRID": {
         "ACTIVE": "Actif",
@@ -560,19 +563,20 @@
         "YEAR": "Année",
         "EVERY-YEAR": "Chaque année",
         "DAY-EXTERNALID": "Jour ID",
-        "ROWS-PER-PAGE": "Rows per page",
-        "ACTIVE-JOBS": "Active jobs",
-        "ACTION-DETAILS": "Open details",
-        "ACTION-REGISTERS": "Show registers",
-        "ACTION-DUPLICATE": "Duplicate",
-        "ACTION-EDIT": "Edit",
-        "ACTION-DELETE": "Delete",
-        "ACTION-REJECT": "Reject",
-        "ACTION-GRANT": "Grant",
-        "ACTION-SETTINGS": "Settings",
-        "ACTION-RUNJOB": "Run job",
-        "ACTION-SAVE": "Save",
-        "ACTION-CANCEL": "Cancel"
+        "ROWS-PER-PAGE": "Lignes par page",
+        "ACTIVE-JOBS": "Jobs actifs",
+        "ACTION-DETAILS": "Détails en suspens",
+        "ACTION-REGISTERS": "Afficher les registres",
+        "ACTION-DUPLICATE": "Dupliquer",
+        "ACTION-EDIT": "Modifier",
+        "ACTION-DELETE": "Annuler",
+        "ACTION-REJECT": "Rejeter",
+        "ACTION-GRANT": "Accorder",
+        "ACTION-SETTINGS": "Réglages",
+        "ACTION-RUNJOB": "Exécuter Jobs",
+        "ACTION-SAVE": "Sauver",
+        "ACTION-CANCEL": "Effacer",
+        "ACTION-EXECUTE": "Exécuter le Job"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -644,7 +648,15 @@
         "TIME-SYNCHRONIZATION": "Synchronisation du temps",
         "TOPOLOGY": "Topologie",
         "TOPOLOGY-JOB": "Topologie du Job",
-        "ACTIVE-JOBS": "Jobs actifs"
+        "ACTIVE-JOBS": "Jobs actifs",
+        "METER-TIME-SYNC-JOB": "Synchronisation du temps (P2P)",
+        "METER-TIME-SYNCHRONIZATION": "Synchronisation du temps (P2P)",
+        "METER-TIME-SYNC": {
+            "CONDITIONAL-SYNC": "Synchronisation conditionnelle",
+            "CONDITIONAL-SYNC-INFO": "L'heure sera synchronisée si l'horloge du compteur est en dehors des limites supérieure et inférieure.",
+            "CONDITIONAL-SYNC-ALERT": "L'horloge sera synchronisée sans condition chaque fois que le travail sera exécuté !"
+        },
+        "JOBS-OVERVIEW": "Aperçu des Jobs"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -743,7 +755,6 @@
         "CHECK-DEVICE-TEMPLATE": "s.v.p. vérifier le modèle de votre appareil.",
         "CLEAR-ALARMS": "Enlever les alarmes",
         "CLEAR-FF": "Enlever le FF",
-        "CREATE-NEW": "Créer un nouveau",
         "DROP-AVAILABLE-REGISTERS": "Déposer les registres disponibles ici.",
         "DROP-SUBTITLE": "Le fichier sélectionné doit être dans le format .xml.",
         "EDIT-METER": "Modifier le compteur",
@@ -854,10 +865,15 @@
             "DESCRIPTION": "La fonction d'importation d'appareils permet d'ajouter et de mettre à jour des appareils via un fichier Excel (XSLT). Utiliser le modèle Excel fourni comme point de départ.",
             "DOWNLOAD": "Télécharger"
         },
-        "TRANSFORMER-RATIO": "Transformer ratio",
-        "CURRENT-RATIO": "Current ratio",
-        "VOLTAGE-RATIO": "Voltage ratio",
-        "METERS-OVERVIEW": "Meters overview"
+        "TRANSFORMER-RATIO": "Rapport du transformateur",
+        "CURRENT-RATIO": "Rapport de courant",
+        "VOLTAGE-RATIO": "Rapport de tension",
+        "METERS-OVERVIEW": "Aperçu des compteurs",
+        "SHOW-RAW": "Afficher données brutes",
+        "NORMALIZED-DATA": "Données normalisées",
+        "RAW-DATA": "Données brutes",
+        "CREATE-NEW-READING": "Créer un nouveau relevé",
+        "CREATE-NEW-TIME-SYNC": "Créer nouvelle synchronisation du temps"
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1092,8 +1108,8 @@
         "mM_BUS": "mM-Bus",
         "G3PLC": "G3-PLC",
         "DLMS": "DLMS",
-        "UNKNOWN": "Unknown",
-        "MM_BUS": "MM-BUS"
+        "UNKNOWN": "Inconnu",
+        "MM_BUS": "mM-Bus"
     },
     "TOU-CONFIG": {
         "TOU-ID-ERROR-PATTERN": "Le numéro ID doit inclure seulement des caractères alphanumériques et il doit avoir une longueur entre 1 et 8.",
@@ -1242,7 +1258,7 @@
         }
     },
     "EXTRA-DETAILS-MODAL": {
-        "TITLE": "Delete extra property",
-        "TEXT": "Are you sure you would like to delete extra property from device"
+        "TITLE": "Annuler la propriété supplémentaire",
+        "TEXT": "Êtes-vous sûr de vouloir annuler la propriété supplémentaire dans le dispositif ?"
     }
 }
