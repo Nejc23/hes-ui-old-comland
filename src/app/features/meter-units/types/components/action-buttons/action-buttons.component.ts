@@ -586,4 +586,14 @@ export class ActionButtonsComponent {
       selectedGuid && selectedGuid?.length > 0 ? 1 : this.selectedCount
     );
   }
+
+  onExportData(selectedGuid?: string) {
+    debugger;
+    const params = this.plcActionsService.getOperationRequestParam(
+      selectedGuid,
+      this.requestModel,
+      this.selectedCount,
+      this.searchColumnNames
+    );
+  }
 }
