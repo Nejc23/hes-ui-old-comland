@@ -69,6 +69,7 @@ export class MeterUnitsListComponent implements OnInit {
   refreshInterval = gridRefreshInterval;
   requestModel: GridRequestParams = {
     excludeIds: [],
+    deviceIds: [],
     requestId: null,
     startRow: 0,
     endRow: 0,
