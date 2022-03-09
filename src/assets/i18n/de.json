@@ -5,7 +5,8 @@
     "BREADCRUMB": {
         "CONCENTRATOR": "Datenkonzentrator",
         "JOBS": "Jobs",
-        "OVERVIEW": "Übersicht - Zähler"
+        "OVERVIEW": "Übersicht - Zähler",
+        "DCU": "Konzentratoren"
     },
     "BUTTON": {
         "ACTIVATE": "Aktivieren",
@@ -13,7 +14,7 @@
         "APPLY": "Anwenden",
         "ASSIGN": "Zuweisen",
         "CANCEL": "Abbrechen",
-        "CLEAR-SELECTION": "Selektion löschen",
+        "CLEAR-SELECTION": "Auswahl löschen",
         "CLOSE": "Schliessen",
         "CONFIRM": "Bestätigen",
         "DELETE": "Löschen",
@@ -104,7 +105,7 @@
         "IN-RANGE": "Im Bereich",
         "INACTIVE": "Inaktiv",
         "INCORRECT-RANGE": "Der Bereich ist nicht korrekt",
-        "ITEMS-FOUND": "Items gefunden",
+        "ITEMS-FOUND": "Einträge gefunden",
         "ITEMS-SELECTED": "Ausgewählte Objekte",
         "JOBS": "Jobs",
         "LESS-THAN": "Weniger als",
@@ -149,7 +150,7 @@
         "SEARCH-OBJECTS": "Objekte suchen",
         "SEARCH-TERM": "Suchbegriff",
         "SELECT-ALL": "Select all",
-        "SELECT-ITEM": "Alle selektieren...",
+        "SELECT-ITEM": "Alle auswählen...",
         "SELECT-OPERATION": "Befehl wählen",
         "SELECTED": "ausgewählt",
         "SELECTED-FILE-FORMAT": "Die ausgewählte Datei muss in .img, .bin oder .dat Datei-Format sein.",
@@ -206,7 +207,7 @@
         "DISABLE-METER": "Zähler deaktivieren",
         "IMPORT-SUBTITLE-XML": "Die ausgewählte Datei muss in XML-Format sein",
         "DEVICE-STATE": {
-            "OPERATIONAL": "betriebsbereit",
+            "OPERATIONAL": "In Betrieb",
             "INSTALLING": "ist am Installieren",
             "DISABLED": "deaktiviert",
             "DRAFT": "Entwurf",
@@ -287,7 +288,7 @@
         "PROTECT-YOUR-CERT": "Ihr Zertifikat schützen",
         "ENTER-CLIENT-PASSWORD": "Geben Sie das Passwort für das Zertifikat ein",
         "CLIENT-CERTS-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
-        "CONCENTRATORS-OVERVIEW": "Data Concentrators overview"
+        "CONCENTRATORS-OVERVIEW": "Datenkonzentratoren Übersicht"
     },
     "ERROR": {
         "PAGE-NOT-FOUND": "404 - Seite existiert nicht"
@@ -343,13 +344,13 @@
             "RANGE-VALUE": "Der Wert muss im Bereich von 0-100 sein",
             "REQUIRED": "erforderliches Feld",
             "UNKNOWN-ERROR": "Unbekannter Fehler",
-            "INVALID-HOSTNAME": "Host-Name ist ungültig",
+            "INVALID-HOSTNAME": "Hostname ist ungültig",
             "ID-EXIST": "Die ID existiert",
             "DUPLICATED-HOSTNAME": "Die Kombination aus Hostname und Port ist doppelt vorhanden",
             "INVALID-FIELDS": "Die Eingabe erfüllt nicht die Anforderungen (Anzahl Zeichen)"
         },
         "EXPRESSION": "Cron-Syntax",
-        "EXTERNAL-ID": "Externe Id",
+        "EXTERNAL-ID": "Externe ID",
         "FILE": "Datei",
         "FILE-NOT-SUPPORTED": "Datei wird nicht unterstützt",
         "FILE-TYPE": "Datei-Typ",
@@ -391,7 +392,7 @@
         "RELAY": "Relais",
         "SAVE-FILTERS": "Speichern Sie die eingestellten Filter und die Reihenfolge/Größe der Spalten, um sie später zu verwenden.",
         "SELECT-DATE": "Datum wählen",
-        "SELECT-HERE": "Hier selektieren",
+        "SELECT-HERE": "Hier auswählen",
         "SELECTED-FILE": "Ausgewählte Datei",
         "SERIAL": "Seriell",
         "SERIAL-NUMBER": "Seriennummer",
@@ -431,7 +432,7 @@
         "COORDINATES": "Koordinaten",
         "NEXT-START": "Nächster Start",
         "PLCSTATUS": "PLC Status",
-        "HOSTNAME": "Host-Name",
+        "HOSTNAME": "Hostname",
         "TIMEZONENAME": "Zeit-Zone",
         "FIRSTINSTALLDATE": "Installation",
         "WARNING": {
@@ -441,7 +442,7 @@
         "USE-LDN": "Verwende den Logical Device Name",
         "TEMPLATENAME": "Vorlage-Name",
         "PROTOCOLTYPE": "Protokoll",
-        "REFERENCINGTYPE": "Beziehen sich an Kurze Namen ",
+        "REFERENCINGTYPE": "Shortname als Referenz",
         "COMMUNICATIONTYPE": "Kommunikationstype",
         "LAST-UPDATED": "Zuletzt aktualisiert",
         "CREATED-BY": "Bearbeitet von",
@@ -466,14 +467,16 @@
         "FIRSTINSTALLEDDATE": "Installiert",
         "PROPERTY": "Eigenschaft",
         "VALUE": "Wert",
-        "DEVICEID": "GUID"
+        "DEVICEID": "GUID",
+        "SYNC-WINDOW-MIN": "Untere Grenze (ms)",
+        "SYNC-WINDOW-MAX": "Obere Grenze (ms)"
     },
     "GRID": {
         "ACTIVE": "Aktiv",
         "ADD-NEW-RULE": "Neue Regel hinzufügen",
         "APPLY-SAVED-STATE": "Gespeicherten Zustand übernehmen oder neu speichern\n",
         "CII-STATE": "CII-Zustand",
-        "CLEAR-SELECTED": "Selektion löschen",
+        "CLEAR-SELECTED": "Auswahl löschen",
         "COLUMNS": "Spalten",
         "CREATED-BY": "Bearbeitet von",
         "CURRENT-L1": "Laufendes L1 Monitor",
@@ -531,9 +534,9 @@
         "REGEX": "Regex",
         "RELAY": "Relais",
         "SEARCH-DATA": "Daten suchen",
-        "SELECT-ALL": "Alle selektieren",
-        "SELECT-DESELECT-ALL": "Selektieren/Auswahl aufheben",
-        "SELECT-DESELECT-ALL-COLUMNS": "Alle Spalten selektieren / Auswahl aufheben",
+        "SELECT-ALL": "Alle auswählen",
+        "SELECT-DESELECT-ALL": "Auswählen/Auswahl aufheben",
+        "SELECT-DESELECT-ALL-COLUMNS": "Alle Spalten auswählen / Auswahl aufheben",
         "SELECTED-OF-ALL": "{{selected}} von {{all}}",
         "SERIAL-NUMBER": "Seriennummer",
         "SEVERITY": "Schweregrad",
@@ -552,7 +555,7 @@
         "VALUE": "Wert",
         "VENDOR": "Hersteller",
         "REGISTER": "Register",
-        "HOSTNAME": "Host-Name",
+        "HOSTNAME": "Hostname",
         "STATE": "Status",
         "START-TIME": "Uhrzeit",
         "SCRIPT-ACTION-ID": "Skript Nr.",
@@ -562,17 +565,18 @@
         "DAY-EXTERNALID": "Tag ID",
         "ROWS-PER-PAGE": "Ergebnisse pro Seite",
         "ACTIVE-JOBS": "Aktive Jobs",
-        "ACTION-DETAILS": "Open details",
-        "ACTION-REGISTERS": "Show registers",
-        "ACTION-DUPLICATE": "Duplicate",
-        "ACTION-EDIT": "Edit",
-        "ACTION-DELETE": "Delete",
-        "ACTION-REJECT": "Reject",
-        "ACTION-GRANT": "Grant",
-        "ACTION-SETTINGS": "Settings",
-        "ACTION-RUNJOB": "Run job",
-        "ACTION-SAVE": "Save",
-        "ACTION-CANCEL": "Cancel"
+        "ACTION-DETAILS": "Eigenschaften anzeigen",
+        "ACTION-REGISTERS": "Register anzeigen",
+        "ACTION-DUPLICATE": "Kopieren",
+        "ACTION-EDIT": "Bearbeiten",
+        "ACTION-DELETE": "Löschen",
+        "ACTION-REJECT": "Ablehnen",
+        "ACTION-GRANT": "Gewähren",
+        "ACTION-SETTINGS": "Einstellungen",
+        "ACTION-RUNJOB": "Job ausführen",
+        "ACTION-SAVE": "Speichern",
+        "ACTION-CANCEL": "Abbrechen",
+        "ACTION-EXECUTE": "Job ausführen"
     },
     "JOB": {
         "ACTIVE-JOB": {
@@ -644,7 +648,15 @@
         "TIME-SYNCHRONIZATION": "Zeit-Synchronisation",
         "TOPOLOGY": "Topologie",
         "TOPOLOGY-JOB": "DC Topologie Job",
-        "ACTIVE-JOBS": "Aktive Jobs"
+        "ACTIVE-JOBS": "Aktive Jobs",
+        "METER-TIME-SYNC-JOB": "Zeitsynchronisation (P2P)",
+        "METER-TIME-SYNCHRONIZATION": "Zeitsynchronisation (P2P)",
+        "METER-TIME-SYNC": {
+            "CONDITIONAL-SYNC": "Bedingte Synchronisation",
+            "CONDITIONAL-SYNC-INFO": "Die Zeit wird synchronisiert, wenn die Uhr auf dem Zähler außerhalb der oberen und unteren Grenzen liegt",
+            "CONDITIONAL-SYNC-ALERT": "Die Uhr wird bei jeder Auftragsausführung bedingungslos synchronisiert!"
+        },
+        "JOBS-OVERVIEW": "Jobs-Übersicht"
     },
     "LANGUAGE": {
         "HR": "Hrvaščina",
@@ -655,7 +667,7 @@
         "SL": "Slovenščina"
     },
     "LOGIN": {
-        "BACK-TO-LOGIN": "Zurück zum Log in",
+        "BACK-TO-LOGIN": "Zurück zum Login",
         "ENTER-EMAIL": "Bitte geben Sie Ihre E-Mail-Adresse ein, um Ihr Konto-Passwort zurückzusetzen.\n",
         "ENTER-NEW-PASSWORD": "Bitte ein neues Passwort eingeben.",
         "ENTER-USERNAME-PASSWORD-TEXT": "Bitte geben Sie Ihren Benutzernamen und Ihr Passwort ein, um sich anzumelden.",
@@ -664,7 +676,7 @@
         "FORGOT-PASSWORD": "Passwort vergessen?",
         "LOGIN-SUCCESSFUL": "Login erfolgreich",
         "NEW-PASSWORD-SAVED": "Neues Passwort erfolgreich gespeichert",
-        "RESET": "zurücksetzen",
+        "RESET": "Zurücksetzen",
         "RESET-PASSWORD": "Ihr Passwort zurücksetzen",
         "RESET-PASSWORD-SUCCESSFUL": "Anfrage Passwort zurücksetzen erfolgreich\n",
         "TITLE": "Login"
@@ -687,7 +699,7 @@
         "USERS": "Benutzer",
         "IMPORT-DEVICES": "Geräte importieren",
         "TOU-CONFIGURATION": "TOU Konfiguration",
-        "VAULT-ACCESS": "KMS Zugang"
+        "VAULT-ACCESS": "KMS Zugriffe"
     },
     "MODAL": {
         "ARE-YOU-SURE-TEXT": "Sind Sie sicher, dass Sie den Vorgang auslösen möchten?",
@@ -743,7 +755,6 @@
         "CHECK-DEVICE-TEMPLATE": "Bitte überprüfen Sie Ihre Geräte-Vorlage.",
         "CLEAR-ALARMS": "Alarme löschen",
         "CLEAR-FF": "FF löschen",
-        "CREATE-NEW": "Neuen Job erstellen",
         "DROP-AVAILABLE-REGISTERS": "Verfügbare Register hier ablegen",
         "DROP-SUBTITLE": "Die ausgewählte Datei muss in .xml Datei-Format sein.",
         "EDIT-METER": "{{ protocol }} Zähler bearbeiten",
@@ -857,7 +868,12 @@
         "TRANSFORMER-RATIO": "Wandlerfaktoren",
         "CURRENT-RATIO": "Stromwandlerübersetzung",
         "VOLTAGE-RATIO": "Spannungswandlerübersetzung",
-        "METERS-OVERVIEW": "Meters overview"
+        "METERS-OVERVIEW": "Zähler Übersicht",
+        "SHOW-RAW": "Rohdaten anzeigen",
+        "NORMALIZED-DATA": "Berechnete Daten",
+        "RAW-DATA": "Rohdaten",
+        "CREATE-NEW-READING": "Neue Ablesung erstellen",
+        "CREATE-NEW-TIME-SYNC": "Neue Zeitsynchronisation erstellen "
     },
     "TOOLS": {
         "AUTO-TEMPLATE": {
@@ -1068,8 +1084,8 @@
     },
     "ngb.datepicker.next-month": "Nächster Monat",
     "ngb.datepicker.previous-month": "Vormonat",
-    "ngb.datepicker.select-month": "Monat selektieren",
-    "ngb.datepicker.select-year": "Jahr selektieren",
+    "ngb.datepicker.select-month": "Monat auswählen",
+    "ngb.datepicker.select-year": "Jahr auswählen",
     "ngb.timepicker.AM": "<x id=\"INTERPOLATION\"/>",
     "ngb.timepicker.HH": "HH",
     "ngb.timepicker.MM": "MM",
@@ -1213,19 +1229,19 @@
     },
     "VAULT-ACCESS": {
         "CLIENT-CERTS-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
-        "TITLE": "Tresor Zugang",
-        "PENDING-REQUEST": "ausstehende Anfrage",
-        "GRANTED-REJECTED": "gewährt und abgelehnt",
+        "TITLE": "KMS Zugriffe",
+        "PENDING-REQUEST": "Ausstehende Anfragen",
+        "GRANTED-REJECTED": "Gewährt und abgelehnt",
         "GRANT-ITEMS": "Zugriff gewähren",
-        "GRANT-ITEM-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugang zum Tresor gewähren möchten?",
-        "GRANT-ITEMS-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff auf den Tresor für diese Anfragen gewähren möchten?",
+        "GRANT-ITEM-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff zum KMS gewähren möchten?",
+        "GRANT-ITEMS-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff auf das KMS für diese Anfragen gewähren möchten?",
         "GRANT-BUTTON": "gewähren",
         "GRANT-ITEM-SUCCESS": "Der Zugriff wurde erfolgreicht gewährt",
         "GRANT-ITEMS-SUCCESS": "Zugänge wurden erfolgreich gewährt",
         "GRANT-ERROR": "Vorgang fehlgeschlagen. Bitte aktualisieren Sie die Seite und versuchen Sie es erneut.",
         "REJECT-ITEMS": "Zugang verweigern",
-        "REJECT-ITEM-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff auf den Tresor ablehnen möchten?",
-        "REJECT-ITEMS-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff auf den Tresor für diese Anfragen ablehnen möchten?",
+        "REJECT-ITEM-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff auf das KMS ablehnen möchten?",
+        "REJECT-ITEMS-CONFIRMATION": "Sind Sie sicher, dass Sie den Zugriff auf das KMS für diese Anfragen ablehnen möchten?",
         "REJECT-BUTTON": "Ablehnen",
         "REJECT-ITEM-SUCCESS": "Der Zugang wurde erfolgreich abgelehnt",
         "REJECT-ITEMS-SUCCESS": "Zugänge wurden erfolgreich abgelehnt",
