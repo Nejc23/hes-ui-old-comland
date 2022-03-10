@@ -470,7 +470,8 @@
     "DEVICEID": "Guid",
     "SYNC-WINDOW-MIN": "Lower limit (ms)",
     "SYNC-WINDOW-MAX": "Upper limit (ms)",
-    "EXPORT-TYPE": "Export type"
+    "EXPORT-TYPE": "Export type",
+    "LOCATION": "Location"
   },
   "GRID": {
     "ACTIVE": "Active",
@@ -1266,6 +1267,7 @@
     "TITLE": "Export data",
     "RANGE": "Range",
     "LOCATION": "Location",
-    "UPLOAD-TO": "Upload to SFTP"
+    "UPLOAD-TO": "Upload to SFTP",
+    "UPLOAD-TEXT": "If enabled files will be uploaded to the SFTP as specified in the configuration"
   }
 }

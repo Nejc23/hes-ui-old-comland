@@ -24,6 +24,7 @@ import { ConcentratorService } from '../../../../../core/repository/services/con
 import { TranslateService } from '@ngx-translate/core';
 import { GridRequestParams } from '../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
 import { ExportDataComponent } from '../../../common/components/export-data/export-data.component';
+import { IActionRequestParams } from '../../../../../core/repository/interfaces/myGridLink/action-prams.interface';
 
 @Component({
   selector: 'app-action-buttons',
@@ -589,15 +590,15 @@ export class ActionButtonsComponent {
   }
 
   onExportData(selectedGuid?: string) {
-    debugger;
-    const params = this.plcActionsService.getOperationRequestParam(
+    const params: IActionRequestParams = this.plcActionsService.getOperationRequestParam(
       selectedGuid,
       this.requestModel,
       this.selectedCount,
       this.searchColumnNames
     );
-
-    const modalRef = this.modalService.open(ExportDataComponent, { size: 'lg' });
+    // this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()
+    const modalRef = this.modalService.open(ExportDataComponent, { size: 'md' });
+    modalRef.componentInstance.params = params;
 
     modalRef.result
       .then(() => {

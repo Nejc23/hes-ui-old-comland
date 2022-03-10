@@ -6,31 +6,50 @@
 
   <div modal-body>
 
-    <app-select-input
-      [disabled]="false"
-      [form]="form"
-      [property]="'exportType'"
-      [selectOptions]="exportTypes"
-      label="Export-type"
-    >
-    </app-select-input>
+    <!--    <app-select-input [clearButton]="false" [disabled]="false" [form]="form" [property]="'keyType'"-->
+    <!--                      [selectOptions]="keyTypesArray" [textField]="'id'"-->
+    <!--                      [valueField]="'apiId'" [withDescription]="true" class="full-dropdown">-->
+    <!--    </app-select-input>-->
 
-    <app-date-range-picker
-      (valueChange)="dateChanged()"
-      [alignCenter]="false"
-      [endProperty]="'endDate'"
-      [form]="form"
-      [startProperty]="'startDate'"
-      [withButtons]="false"
-      [withRefreshButton]="false">
-    </app-date-range-picker>
+    <div class="tw-pt-3">
+      <app-select-input
+        [clearButton]="false"
+        [disabled]="false"
+        [form]="form"
+        [property]="'exportType'"
+        [selectOptions]="exportTypes"
+        [textField]="'id'"
+        [valueField]="'apiId'"
+        [withDescription]="true"
+        class="full-dropdown"
+        label="Export-type"
+      >
+      </app-select-input>
+    </div>
 
-    <app-input-text [form]="form" [property]="'location'" label="For-last">
-    </app-input-text>
+    <div class="tw-pt-5">
+      <app-date-range-picker
+        (valueChange)="dateChanged()"
+        [alignCenter]="false"
+        [endProperty]="'endDate'"
+        [form]="form"
+        [startProperty]="'startDate'"
+        [withButtons]="false"
+        [withRefreshButton]="false"
+      >
+      </app-date-range-picker>
+    </div>
 
-    <app-label-with-switch [form]="form" [property]="'upload'" message="JOB.METER-TIME-SYNC.CONDITIONAL-SYNC"
-                           secondaryMessage="JOB.METER-TIME-SYNC.CONDITIONAL-SYNC-INFO">
-    </app-label-with-switch>
+    <div class="tw-pt-5">
+      <app-label-with-switch [form]="form" [property]="'upload'" message="EXPORT-DATA.UPLOAD-TO"
+                             secondaryMessage="EXPORT-DATA.UPLOAD-TEXT">
+      </app-label-with-switch>
+    </div>
+
+    <div *ngIf="form.controls.upload.value !== true" class="tw-pt-6">
+      <app-input-text [form]="form" [property]="'location'" label="Location" placeholder="/">
+      </app-input-text>
+    </div>
 
   </div>
 
