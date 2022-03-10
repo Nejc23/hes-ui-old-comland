@@ -23,6 +23,7 @@ import { ModalService } from '../../../../../core/modals/services/modal.service'
 import { ConcentratorService } from '../../../../../core/repository/services/concentrator/concentrator.service';
 import { TranslateService } from '@ngx-translate/core';
 import { GridRequestParams } from '../../../../../core/repository/interfaces/helpers/grid-request-params.interface';
+import { ExportDataComponent } from '../../../common/components/export-data/export-data.component';
 
 @Component({
   selector: 'app-action-buttons',
@@ -595,5 +596,14 @@ export class ActionButtonsComponent {
       this.selectedCount,
       this.searchColumnNames
     );
+
+    const modalRef = this.modalService.open(ExportDataComponent, { size: 'lg' });
+
+    modalRef.result
+      .then(() => {
+        // todo
+        console.log('success');
+      })
+      .catch(() => {});
   }
 }

@@ -1,13 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from 'src/app/core/auth/services/auth.service';
-import { FormsUtilsService } from 'src/app/core/forms/services/forms-utils.service';
-import { IActionRequestParams } from 'src/app/core/repository/interfaces/myGridLink/action-prams.interface';
-import { DataConcentratorUnitsOperationsService } from 'src/app/core/repository/services/data-concentrator-units/data-concentrator-units-operations.service';
-import { ToastNotificationService } from 'src/app/core/toast-notification/services/toast-notification.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/component/tou-config-select.component';
+import { Codelist } from '../../../../../shared/repository/interfaces/codelists/codelist.interface';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-export-data',
@@ -16,44 +11,29 @@ import { TouConfigSelectComponent } from 'src/app/features/tou-config-select/com
 })
 export class ExportDataComponent implements OnInit {
   @ViewChild(TouConfigSelectComponent, { static: true }) touConfigSelect;
-
   form: FormGroup;
-  noConfig = false;
-  actionRequest: IActionRequestParams;
-  allowedExt = [];
-  acceptExtensions = [];
-  public file: File;
-  activate = false;
-  differentTypes = false;
+  // todo get from BE
+  exportTypes: Codelist<number>[] = [
+    { id: 1, value: 'CCB Billing 1' },
+    { id: 2, value: 'CCB Billing  2' },
+    { id: 3, value: 'CCB Billing  3' }
+  ]; //this.translate.instant('')
 
-  public selectedRowsCount: number;
-  public alertText: string;
-  uploadDropSubtitle = '';
-
-  ac750 = false;
-  // AC750  = .bin
-  // DC450G3 and AmeraDC .zip
-
-  constructor(
-    private formBuilder: FormBuilder,
-    private formUtils: FormsUtilsService,
-    private modal: NgbActiveModal,
-    private dcuOperatrionService: DataConcentratorUnitsOperationsService,
-    private toast: ToastNotificationService,
-    private translate: TranslateService,
-    private authService: AuthService
-  ) {
-    // this.form = this.createForm();
+  constructor(private formBuilder: FormBuilder) {
+    this.form = this.createForm();
   }
 
-  // properties - START
-  get imageGuidProperty() {
-    return 'imageGuid';
-  }
-
-  get imageProperty() {
-    return 'file';
+  createForm() {
+    return this.formBuilder.group({
+      exportType: this.exportTypes[0],
+      location: '',
+      upload: false,
+      startDate: [moment().subtract(1, 'month').set('minute', 0).set('hours', 0).set('second', 0), Validators.required],
+      endDate: [moment().set('minute', 0).set('hours', 0).set('second', 0), Validators.required]
+    });
   }
 
   ngOnInit() {}
+
+  dateChanged() {}
 }

@@ -1,12 +1,51 @@
 <app-modal-template>
 
-  <div modal-header>{{ 'DCU.FW-UPLOAD-UPGRADE' | translate }} ({{selectedRowsCount}} {{'COMMON.SELECTED' | translate }})
+  <div modal-header>
+    {{ 'EXPORT-DATA.TITLE' | translate }}
   </div>
 
   <div modal-body>
 
+    <app-select-input
+      [disabled]="false"
+      [form]="form"
+      [property]="'exportType'"
+      [selectOptions]="exportTypes"
+      label="Export-type"
+    >
+    </app-select-input>
+
+    <app-date-range-picker
+      (valueChange)="dateChanged()"
+      [alignCenter]="false"
+      [endProperty]="'endDate'"
+      [form]="form"
+      [startProperty]="'startDate'"
+      [withButtons]="false"
+      [withRefreshButton]="false">
+    </app-date-range-picker>
+
+    <app-input-text [form]="form" [property]="'location'" label="For-last">
+    </app-input-text>
+
+    <app-label-with-switch [form]="form" [property]="'upload'" message="JOB.METER-TIME-SYNC.CONDITIONAL-SYNC"
+                           secondaryMessage="JOB.METER-TIME-SYNC.CONDITIONAL-SYNC-INFO">
+    </app-label-with-switch>
+
   </div>
+
   <div modal-footer>
+
+    <div class="d-flex justify-content-between">
+      <button class="btn text-secondary" type="button">
+        <span>{{ 'BUTTON.CANCEL' | translate }}</span>
+      </button>
+      <div class="btn-group dropdown">
+        <button class="btn btn-primary" type="submit">
+          <span>{{ 'BUTTON.EXPORT' | translate }}</span></button>
+      </div>
+    </div>
+
   </div>
 
 </app-modal-template>
