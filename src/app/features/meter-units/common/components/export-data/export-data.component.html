@@ -1,15 +1,10 @@
-<app-modal-template>
+<app-modal-template (dismiss)="onDismiss()">
 
   <div modal-header>
     {{ 'EXPORT-DATA.TITLE' | translate }}
   </div>
 
   <div modal-body>
-
-    <!--    <app-select-input [clearButton]="false" [disabled]="false" [form]="form" [property]="'keyType'"-->
-    <!--                      [selectOptions]="keyTypesArray" [textField]="'id'"-->
-    <!--                      [valueField]="'apiId'" [withDescription]="true" class="full-dropdown">-->
-    <!--    </app-select-input>-->
 
     <div class="tw-pt-3">
       <app-select-input
@@ -33,11 +28,16 @@
         [alignCenter]="false"
         [endProperty]="'endDate'"
         [form]="form"
+        [fullWidth]="true"
         [startProperty]="'startDate'"
         [withButtons]="false"
         [withRefreshButton]="false"
       >
       </app-date-range-picker>
+    </div>
+
+    <div *ngIf="invalidRange" class="alert alert-danger mt-3 tw-text-sm" role="alert">
+      <span class="text-danger">{{ 'EXPORT-DATA.INVALID-RANGE' | translate }}</span>
     </div>
 
     <div class="tw-pt-5">
@@ -55,12 +55,12 @@
 
   <div modal-footer>
 
-    <div class="d-flex justify-content-between">
-      <button class="btn text-secondary" type="button">
+    <div class="tw-flex tw-w-full tw-justify-content-between">
+      <button (click)="onDismiss()" class="btn text-secondary" type="button">
         <span>{{ 'BUTTON.CANCEL' | translate }}</span>
       </button>
       <div class="btn-group dropdown">
-        <button class="btn btn-primary" type="submit">
+        <button (click)="onConfirm()" [disabled]="!form.valid" class="btn btn-primary" type="submit">
           <span>{{ 'BUTTON.EXPORT' | translate }}</span></button>
       </div>
     </div>

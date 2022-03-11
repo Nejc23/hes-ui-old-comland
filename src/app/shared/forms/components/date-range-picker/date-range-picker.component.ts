@@ -29,6 +29,7 @@ export class DateRangePickerComponent implements OnInit {
   @Input() withoutYear = false;
   @Input() labelText = 'FORM.SELECT-DATE';
   @Input() alignCenter = true;
+  @Input() fullWidth = false;
 
   minDateMomentJs;
 

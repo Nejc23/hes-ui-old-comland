@@ -596,7 +596,6 @@ export class ActionButtonsComponent {
       this.selectedCount,
       this.searchColumnNames
     );
-    // this.meterUnitsTypeGridService.getSessionSettingsSelectedAll()
     const modalRef = this.modalService.open(ExportDataComponent, { size: 'md' });
     modalRef.componentInstance.params = params;
 

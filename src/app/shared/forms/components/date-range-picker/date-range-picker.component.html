@@ -4,8 +4,8 @@
   </div>
 
   <div
-    [ngClass]="{'tw-justify-center': alignCenter}"
-    class="tw-inline-flex tw-border tw-border-solid tw-border-lightGray tw-rounded-sm tw-items-center tw-w-full">
+    [ngClass]="{'tw-justify-center': alignCenter, 'tw-w-full': fullWidth}"
+    class="tw-inline-flex tw-border tw-border-solid tw-border-lightGray tw-rounded-sm tw-items-center">
     <div #popover="ngbPopover"
          [autoClose]="'outside'"
          [ngbPopover]="popDateTimePicker" [placement]="popoverPlacement"
